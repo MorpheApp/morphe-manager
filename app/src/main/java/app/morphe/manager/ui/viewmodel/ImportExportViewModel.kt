@@ -257,9 +257,6 @@ class ImportExportViewModel(
             }
 
             app.toast(app.getString(R.string.settings_system_import_source_data_success))
-
-            // Call completion callback after successful import
-            onComplete()
         }
     }
 

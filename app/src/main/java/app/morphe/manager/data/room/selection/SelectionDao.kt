@@ -7,6 +7,7 @@ import androidx.room.MapColumn
 import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 @Dao
 abstract class SelectionDao {
@@ -28,6 +29,7 @@ abstract class SelectionDao {
      * Get selected patches for a specific package and bundle
      * Returns List - convert to Set in repository if needed
      */
+    @Transaction
     @Query(
         "SELECT sp.patch_name FROM patch_selections ps" +
                 " INNER JOIN selected_patches sp ON ps.uid = sp.selection" +
@@ -52,21 +54,23 @@ abstract class SelectionDao {
      * Get summary of selections per package and bundle
      * Returns: Map<PackageName, Map<BundleUid, PatchCount>>
      */
+    @Transaction
     @Query(
         "SELECT ps.package_name, ps.patch_bundle, COUNT(sp.patch_name) as patch_count " +
                 "FROM patch_selections ps " +
-                "LEFT JOIN selected_patches sp ON ps.uid = sp.selection " +
+                "INNER JOIN selected_patches sp ON ps.uid = sp.selection " +
                 "GROUP BY ps.package_name, ps.patch_bundle " +
                 "HAVING patch_count > 0"
     )
-    abstract suspend fun getSelectionsSummaryRaw(): List<SelectionSummaryItem>
+    abstract fun getSelectionsSummaryRawFlow(): Flow<List<SelectionSummaryItem>>
 
-    suspend fun getSelectionsSummary(): Map<String, Map<Int, Int>> {
-        val raw = getSelectionsSummaryRaw()
-        return raw.groupBy { it.packageName }
-            .mapValues { (_, items) ->
-                items.associate { it.patchBundle to it.patchCount }
-            }
+    fun getSelectionsSummaryFlow(): Flow<Map<String, Map<Int, Int>>> {
+        return getSelectionsSummaryRawFlow().map { raw ->
+            raw.groupBy { it.packageName }
+                .mapValues { (_, items) ->
+                    items.associate { it.patchBundle to it.patchCount }
+                }
+        }
     }
 
     /**
@@ -85,6 +89,7 @@ abstract class SelectionDao {
     /**
      * Export selection for a specific package and bundle
      */
+    @Transaction
     @Query(
         "SELECT sp.patch_name FROM patch_selections ps" +
                 " INNER JOIN selected_patches sp ON ps.uid = sp.selection" +
@@ -104,15 +109,19 @@ abstract class SelectionDao {
     @Query("SELECT DISTINCT package_name FROM patch_selections WHERE patch_bundle = :bundleUid")
     abstract fun getPackagesWithSelectionForBundle(bundleUid: Int): Flow<List<String>>
 
+    @Transaction
     @Query("DELETE FROM patch_selections WHERE patch_bundle = :uid")
     abstract suspend fun resetForPatchBundle(uid: Int)
 
+    @Transaction
     @Query("DELETE FROM patch_selections WHERE package_name = :packageName")
     abstract suspend fun resetForPackage(packageName: String)
 
+    @Transaction
     @Query("DELETE FROM patch_selections WHERE package_name = :packageName AND patch_bundle = :bundleUid")
     abstract suspend fun resetForPackageAndBundle(packageName: String, bundleUid: Int)
 
+    @Transaction
     @Query("DELETE FROM patch_selections")
     abstract suspend fun reset()
 

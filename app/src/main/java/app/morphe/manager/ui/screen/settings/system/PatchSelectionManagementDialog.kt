@@ -68,37 +68,31 @@ fun PatchSelectionManagementDialog(
     }
 
     // State for selections and package name mapping
-    var selections by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
-    var packageNameMapping by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
-    var refreshTrigger by remember { mutableIntStateOf(0) }
-
-    // Load data from repository and build package mapping
-    LaunchedEffect(refreshTrigger) {
-        withContext(Dispatchers.IO) {
-            // Get raw selections from database (uses original package names)
-            val rawSelections = selectionRepository.getSelectionsSummary()
-
-            // Build mapping: original -> patched (or original if not patched)
+    val rawSelections by selectionRepository.getSelectionsSummaryFlow().collectAsStateWithLifecycle(emptyMap())
+    // Build package name mapping (original -> patched)
+    val packageNameMapping by produceState<Map<String, String>>(
+        initialValue = emptyMap(),
+        key1 = rawSelections
+    ) {
+        value = withContext(Dispatchers.IO) {
             val installedApps = appDataResolver.getInstalledApps()
-            val mapping = rawSelections.keys.associateWith { originalPackageName ->
+
+            rawSelections.keys.associateWith { originalPackageName ->
                 val patchedApp = installedApps.find {
                     it.originalPackageName == originalPackageName
                 }
                 patchedApp?.currentPackageName ?: originalPackageName
             }
-
-            packageNameMapping = mapping
-
-            // Transform selections to use display names (patched names)
-            selections = rawSelections.mapKeys { (originalName, _) ->
-                mapping[originalName] ?: originalName
-            }
         }
     }
 
-    // Refresh function
-    val onRefresh: () -> Unit = {
-        refreshTrigger++
+    // Transform selections to display names
+    val selections by remember(rawSelections, packageNameMapping) {
+        derivedStateOf {
+            rawSelections.mapKeys { (originalName, _) ->
+                packageNameMapping[originalName] ?: originalName
+            }
+        }
     }
 
     // Show all selections from database
@@ -117,8 +111,7 @@ fun PatchSelectionManagementDialog(
         onShowResetAllConfirmation = { showResetAllConfirmation = true },
         onSetResetTarget = { resetTarget = it },
         onShowPatchDetails = { showPatchDetailsTarget = it },
-        appDataResolver = appDataResolver,
-        onRefresh = onRefresh
+        appDataResolver = appDataResolver
     )
 
     // Reset all confirmation dialog
@@ -129,9 +122,7 @@ fun PatchSelectionManagementDialog(
                     selectionRepository.reset()
                     optionsRepository.reset()
                 }
-                onRefresh()
                 showResetAllConfirmation = false
-                onDismiss()
             }
         }
         val dismissAction: () -> Unit = { showResetAllConfirmation = false }
@@ -165,7 +156,6 @@ fun PatchSelectionManagementDialog(
                             selectionRepository.resetSelectionForPackage(originalPackageName)
                             optionsRepository.resetOptionsForPackage(originalPackageName)
                         }
-                        onRefresh()
                         resetTarget = null
                     }
                 }
@@ -197,7 +187,6 @@ fun PatchSelectionManagementDialog(
                             selectionRepository.resetSelectionForPackageAndBundle(originalPackageName, target.bundleUid)
                             optionsRepository.resetOptionsForPackageAndBundle(originalPackageName, target.bundleUid)
                         }
-                        onRefresh()
                         resetTarget = null
                     }
                 }
@@ -247,8 +236,7 @@ private fun PatchSelectionManagementDialogContent(
     onShowResetAllConfirmation: () -> Unit,
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit,
-    appDataResolver: AppDataResolver,
-    onRefresh: () -> Unit
+    appDataResolver: AppDataResolver
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -277,19 +265,7 @@ private fun PatchSelectionManagementDialogContent(
         compactPadding = true
     ) {
         if (selections.isEmpty()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 32.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                InfoBadge(
-                    text = stringResource(R.string.settings_system_patch_selection_no_saved),
-                    style = InfoBadgeStyle.Default,
-                    isExpanded = true,
-                    isCentered = true
-                )
-            }
+            EmptyState(message = stringResource(R.string.settings_system_no_patches_or_options))
         } else {
             SelectionList(
                 selections = selections,
@@ -297,8 +273,7 @@ private fun PatchSelectionManagementDialogContent(
                 bundleNames = bundleNames,
                 appDataResolver = appDataResolver,
                 onSetResetTarget = onSetResetTarget,
-                onShowPatchDetails = onShowPatchDetails,
-                onRefresh = onRefresh
+                onShowPatchDetails = onShowPatchDetails
             )
         }
     }
@@ -314,8 +289,7 @@ private fun SelectionList(
     bundleNames: Map<Int, String>,
     appDataResolver: AppDataResolver,
     onSetResetTarget: (ResetTarget) -> Unit,
-    onShowPatchDetails: (PatchDetailsTarget) -> Unit,
-    onRefresh: () -> Unit
+    onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -345,7 +319,6 @@ private fun SelectionList(
 
         // List of packages with selections
         LazyColumn(
-            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(
@@ -366,8 +339,7 @@ private fun SelectionList(
                     appDataResolver = appDataResolver,
                     onResetPackage = resetPackageAction,
                     onResetPackageBundle = resetBundleAction,
-                    onShowPatchDetails = onShowPatchDetails,
-                    onRefresh = onRefresh
+                    onShowPatchDetails = onShowPatchDetails
                 )
             }
         }
@@ -385,8 +357,7 @@ private fun PackageSelectionItem(
     appDataResolver: AppDataResolver,
     onResetPackage: () -> Unit,
     onResetPackageBundle: (Int) -> Unit,
-    onShowPatchDetails: (PatchDetailsTarget) -> Unit,
-    onRefresh: () -> Unit
+    onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(packageName) }
@@ -479,8 +450,7 @@ private fun PackageSelectionItem(
                             bundleName = bundleName,
                             patchCount = patchCount,
                             onReset = resetAction,
-                            onShowDetails = { onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid)) },
-                            onRefresh = onRefresh
+                            onShowDetails = { onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid)) }
                         )
                     }
 
@@ -509,8 +479,7 @@ private fun BundleSelectionItem(
     bundleName: String?,
     patchCount: Int,
     onReset: () -> Unit,
-    onShowDetails: () -> Unit,
-    onRefresh: () -> Unit
+    onShowDetails: () -> Unit
 ) {
     val importExportViewModel: ImportExportViewModel = koinInject()
 
@@ -535,11 +504,7 @@ private fun BundleSelectionItem(
         uri?.let {
             importExportViewModel.importPackageBundleData(
                 targetBundleUid = bundleUid,
-                source = it,
-                onComplete = {
-                    // Refresh data after successful import
-                    onRefresh()
-                }
+                source = it
             )
         }
     }

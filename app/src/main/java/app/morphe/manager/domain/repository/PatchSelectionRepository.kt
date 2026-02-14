@@ -3,6 +3,7 @@ package app.morphe.manager.domain.repository
 import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.AppDatabase.Companion.generateUid
 import app.morphe.manager.data.room.selection.PatchSelection
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -88,8 +89,8 @@ class PatchSelectionRepository(db: AppDatabase) {
      * Get data about saved selections per bundle+package
      * Returns: Map<PackageName, Map<BundleUid, PatchCount>>
      */
-    suspend fun getSelectionsSummary(): Map<String, Map<Int, Int>> {
-        return dao.getSelectionsSummary()
+    fun getSelectionsSummaryFlow(): Flow<Map<String, Map<Int, Int>>> {
+        return dao.getSelectionsSummaryFlow()
     }
 
     /**

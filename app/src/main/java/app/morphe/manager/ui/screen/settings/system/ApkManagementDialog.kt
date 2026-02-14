@@ -308,7 +308,6 @@ private fun ApkManagementDialogContent(
                 EmptyState(message = emptyMessage)
             } else {
                 LazyColumn(
-                    modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     items(
@@ -417,7 +416,7 @@ private fun DeleteConfirmationDialog(
 }
 
 @Composable
-private fun EmptyState(message: String) {
+fun EmptyState(message: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
