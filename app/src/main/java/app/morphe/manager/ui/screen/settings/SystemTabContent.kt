@@ -19,16 +19,14 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
-import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
+import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
+import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.toast
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
 /**
@@ -91,7 +89,7 @@ fun SystemTabContent(
     // Patch selection management dialog
     if (showPatchSelectionDialog) {
         PatchSelectionManagementDialog(
-            onDismissRequest = { showPatchSelectionDialog = false }
+            onDismiss = { showPatchSelectionDialog = false }
         )
     }
 
@@ -297,30 +295,21 @@ fun SystemTabContent(
 
                 MorpheSettingsDivider()
 
-                // Patch Selections management with grouped count
+                // Patch Selections management
                 val selectionRepository: PatchSelectionRepository = koinInject()
                 val optionsRepository: PatchOptionsRepository = koinInject()
+
                 val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
                     .collectAsStateWithLifecycle(emptySet())
                 val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
                     .collectAsStateWithLifecycle(emptySet())
 
-                // Calculate grouped count
-                var groupedSelectionsCount by remember { mutableIntStateOf(0) }
+                // Filter to show only patched packages
+                var patchedPackagesCount by remember { mutableIntStateOf(0) }
 
                 LaunchedEffect(packagesWithSelection, packagesWithOptions) {
                     val allPackages = packagesWithSelection + packagesWithOptions
-                    if (allPackages.isEmpty()) {
-                        groupedSelectionsCount = 0
-                    } else {
-                        withContext(Dispatchers.IO) {
-                            val packageGroups = groupPackagesByOriginal(
-                                allPackages,
-                                installedAppRepository
-                            )
-                            groupedSelectionsCount = packageGroups.size
-                        }
-                    }
+                    patchedPackagesCount = allPackages.size
                 }
 
                 RichSettingsItem(
@@ -335,9 +324,9 @@ fun SystemTabContent(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (groupedSelectionsCount > 0) {
+                            if (patchedPackagesCount > 0) {
                                 InfoBadge(
-                                    text = groupedSelectionsCount.toString(),
+                                    text = patchedPackagesCount.toString(),
                                     style = InfoBadgeStyle.Default,
                                     isCompact = true
                                 )

@@ -16,7 +16,7 @@
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="home_updating_sources">Updating sources…</string>
-    <string name="home_update_progress">%1$d/%2$d sources processed</string>
+    <string name="home_update_progress_format">%1$s processed</string>
     <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
@@ -88,6 +88,8 @@ Compatible versions:"</string>
     <string name="home_apk_availability_no">No, help me find it</string>
     <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
+    <string name="home_app_info_repatch_no_bundle_info">Cannot determine which bundle was used for this app</string>
+    <string name="home_app_info_repatch_bundle_not_available">The bundle used for this app is no longer available</string>
 
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>
@@ -115,7 +117,7 @@ Compatible versions:"</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
-    <string name="expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d of %2$s selected</string>
     <string name="expert_mode_search">Search patches</string>
     <string name="expert_mode_proceed">Proceed to Patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
@@ -210,7 +212,7 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
-    <string name="patcher_patches_progress">%1$d / %2$d patches</string>
+    <string name="patcher_patches_progress_format">%1$d / %2$s</string>
     <string name="patcher_percentage" translatable="false">%1$d%%</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
@@ -552,12 +554,25 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
     <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation</string>
-    <string name="settings_system_patch_selections_description_short">Saved for future patching</string>
-    <string name="settings_system_patch_selections_empty">No saved patch selections</string>
-    <string name="settings_system_patch_selections_has_options">Has options</string>
-    <string name="settings_system_patch_selections_patches_options">Patches options</string>
-    <string name="settings_system_patch_selection_delete_title">Delete patch selection</string>
-    <string name="settings_system_patch_selection_deleted">Patch selection deleted</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Reset all selections?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Reset package selections?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Reset source selection?</string>
+    <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s across %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Source #%d</string>
+    <string name="settings_system_patch_selection_will_delete">This will delete:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and sources</string>
+    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for %1$s in source #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Failed to export source data</string>
+    <string name="settings_system_export_source_data_success">Source data exported successfully</string>
+    <string name="settings_system_import_source_data_fail">Failed to import source data</string>
+    <string name="settings_system_import_source_data_success">Source data imported successfully</string>
+    <string name="settings_system_patch_details_title">Patch details</string>
+    <string name="settings_system_selected_patches_title">Selected patches (%d)</string>
+    <string name="settings_system_patch_options_title">Patch options (%d)</string>
+    <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
@@ -575,6 +590,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="reset">Reset</string>
+    <string name="reset_all">Reset All</string>
     <string name="confirm">Confirm</string>
     <string name="warning">Warning</string>
     <string name="error_">Error</string>
@@ -596,6 +612,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="selected">Selected</string>
     <string name="not_selected">Not selected</string>
     <string name="rename">Rename</string>
+    <string name="import_">Import</string>
     <string name="export">Export</string>
     <string name="download">Download</string>
     <string name="less">Less</string>

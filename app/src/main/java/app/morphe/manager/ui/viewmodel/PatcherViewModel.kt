@@ -427,10 +427,6 @@ class PatcherViewModel(
             selectionPayload
         )
 
-        if (finalPackageName != packageName) {
-            patchSelectionRepository.updateSelection(finalPackageName, sanitizedSelection)
-            patchOptionsRepository.saveOptions(finalPackageName, sanitizedOptions)
-        }
         patchSelectionRepository.updateSelection(packageName, sanitizedSelection)
         patchOptionsRepository.saveOptions(packageName, sanitizedOptions)
         appliedSelection = sanitizedSelection

@@ -371,11 +371,12 @@ fun CardHeader(
  */
 @Composable
 fun ExpandableSection(
-    icon: ImageVector,
+    icon: ImageVector? = null,
     title: String,
     description: String,
     expanded: Boolean,
     onExpandChange: (Boolean) -> Unit,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
@@ -393,7 +394,11 @@ fun ExpandableSection(
                     .fillMaxWidth()
                     .clickable { onExpandChange(!expanded) }
                     .padding(MorpheDefaults.ContentPadding),
-                leadingContent = { MorpheIcon(icon = icon) },
+                leadingContent = {
+                    if (icon != null) {
+                        MorpheIcon(icon = icon)
+                    }
+                },
                 title = title,
                 description = description,
                 trailingContent = {
@@ -480,11 +485,61 @@ fun DeletionWarningBox(
             Text(
                 text = warningText,
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium,
+                fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.error
             )
 
             content()
+        }
+    }
+}
+
+/**
+ * Info box component to display grouped information in a visually distinct container
+ */
+@Composable
+fun InfoBox(
+    title: String,
+    modifier: Modifier = Modifier,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+    titleColor: Color = MaterialTheme.colorScheme.onSurface,
+    icon: ImageVector? = null,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        color = containerColor
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Main content column
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = titleColor
+                )
+
+                content()
+            }
+
+            // Trailing icon
+            icon?.let {
+                Icon(
+                    imageVector = it,
+                    contentDescription = null,
+                    modifier = Modifier.size(32.dp),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     }
 }

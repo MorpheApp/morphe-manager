@@ -616,7 +616,11 @@ private fun InfoSection(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
+                            text = pluralStringResource(
+                                R.plurals.patch_count,
+                                totalPatches,
+                                totalPatches
+                            ),
                             style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Medium,
                         )

@@ -12,6 +12,8 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.PatchOptionsRepository
+import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.util.tag
 import app.morphe.manager.util.toast
 import app.morphe.manager.util.uiSafe
@@ -43,11 +45,29 @@ data class ManagerSettingsExportFile(
     val settings: PreferencesManager.SettingsSnapshot
 )
 
+/**
+ * Export file format for patch selections and options
+ * This format stores selections (which patches are enabled) and their options (patch configuration)
+ */
+@Serializable
+data class PatchBundleDataExportFile(
+    val version: Int = 1,
+    val bundleUid: Int,
+    val bundleName: String? = null,
+    val exportDate: String,
+    // Map<PackageName, List<PatchName>>
+    val selections: Map<String, List<String>>,
+    // Map<PackageName, Map<PatchName, Map<OptionKey, OptionValue>>>
+    val options: Map<String, Map<String, Map<String, String>>>?
+)
+
 @OptIn(ExperimentalSerializationApi::class)
 class ImportExportViewModel(
     private val app: Application,
     private val keystoreManager: KeystoreManager,
-    private val preferencesManager: PreferencesManager
+    private val preferencesManager: PreferencesManager,
+    private val patchSelectionRepository: PatchSelectionRepository,
+    private val patchOptionsRepository: PatchOptionsRepository
 ) : ViewModel() {
     private val contentResolver = app.contentResolver
 
@@ -136,6 +156,100 @@ class ImportExportViewModel(
         }
     }
 
+    /**
+     * Export patch selections and options for a specific package+bundle combination
+     */
+    fun exportPackageBundleData(
+        packageName: String,
+        bundleUid: Int,
+        bundleName: String?,
+        target: Uri
+    ) = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_source_data_fail, "Failed to export source data") {
+            val (selections, optionsData) = withContext(Dispatchers.IO) {
+                val patchList = patchSelectionRepository.exportForPackageAndBundle(
+                    packageName,
+                    bundleUid
+                )
+
+                val rawOptions = patchOptionsRepository.exportOptionsForBundle(
+                    packageName = packageName,
+                    bundleUid = bundleUid
+                )
+
+                val optionsData = if (rawOptions.isNotEmpty()) {
+                    mapOf(packageName to rawOptions)
+                } else {
+                    emptyMap()
+                }
+
+                mapOf(packageName to patchList) to optionsData
+            }
+
+            val exportFile = PatchBundleDataExportFile(
+                bundleUid = bundleUid,
+                bundleName = bundleName,
+                exportDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now()),
+                selections = selections,
+                options = optionsData
+            )
+
+            withContext(Dispatchers.IO) {
+                contentResolver.openOutputStream(target, "wt")!!.use { output ->
+                    json.encodeToStream(exportFile, output)
+                }
+            }
+
+            app.toast(app.getString(R.string.settings_system_export_source_data_success))
+        }
+    }
+
+    /**
+     * Import patch selections and options for a specific package into a target bundle
+     */
+    fun importPackageBundleData(
+        targetBundleUid: Int,
+        source: Uri,
+    ) = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_import_source_data_fail, "Failed to import source data") {
+            val exportFile = withContext(Dispatchers.IO) {
+                contentResolver.openInputStream(source)!!.use {
+                    json.decodeFromStream<PatchBundleDataExportFile>(it)
+                }
+            }
+
+            withContext(Dispatchers.IO) {
+                exportFile.selections.forEach { (packageName, patchList) ->
+                    patchSelectionRepository.importForPackageAndBundle(
+                        packageName = packageName,
+                        bundleUid = targetBundleUid,
+                        patches = patchList
+                    )
+                }
+
+                exportFile.options?.forEach { (packageName, packageOptions) ->
+                    patchOptionsRepository.importOptionsForBundle(
+                        packageName = packageName,
+                        bundleUid = targetBundleUid,
+                        options = packageOptions
+                    )
+                }
+            }
+
+            app.toast(app.getString(R.string.settings_system_import_source_data_success))
+        }
+    }
+
+    /**
+     * Get filename for package+bundle data export
+     */
+    fun getPackageBundleDataExportFileName(packageName: String, bundleUid: Int, bundleName: String?): String {
+        val time = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now())
+        val bundle = bundleName?.replace(" ", "_")?.take(20) ?: "bundle_$bundleUid"
+        val pkg = packageName.substringAfterLast('.').take(15)
+        return "morphe_${bundle}_${pkg}_$time.json"
+    }
+
     val debugLogFileName: String
         get() {
             val time = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm").format(LocalDateTime.now())
@@ -168,8 +282,9 @@ class ImportExportViewModel(
 
         if (exitCode == 0)
             app.toast(app.getString(R.string.settings_system_export_debug_logs_export_success))
-        else
-            app.toast(app.getString(R.string.settings_system_export_debug_logs_export_read_failed, exitCode))
+        else {
+            app.toast(app.getString(R.string.settings_system_export_debug_logs_export_read_failed).format(exitCode))
+        }
     }
 
     override fun onCleared() {
@@ -181,7 +296,7 @@ class ImportExportViewModel(
         // Reusable Json instances to avoid redundant creation
         private val json = Json {
             ignoreUnknownKeys = true
-            prettyPrint = false
+            prettyPrint = true // Make exports human-readable
         }
 
         val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")

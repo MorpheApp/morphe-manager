@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
@@ -562,10 +563,15 @@ private fun BundleUpdateSnackbarContent(
                                         }
                                         // Show source processing progress
                                         progress.total > 0 -> {
-                                            stringResource(
-                                                R.string.home_update_progress,
-                                                progress.completed,
+                                            val processedSources = pluralStringResource(
+                                                R.plurals.source_count,
+                                                progress.total,
                                                 progress.total
+                                            )
+
+                                            stringResource(
+                                                R.string.home_update_progress_format,
+                                                processedSources
                                             )
                                         }
                                         // Loading state

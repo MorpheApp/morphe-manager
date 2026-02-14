@@ -752,30 +752,19 @@ class HomeViewModel(
             if (usingMountInstall) this.filterGmsCore() else this
 
         if (expertModeEnabled) {
-            // Expert Mode: Load saved selections and options
+            // Expert Mode: Load saved selections and options only for current bundles
+            val currentBundleUids = allBundles.map { it.uid }.toSet()
+
+            // Load selections
             val savedSelections = withContext(Dispatchers.IO) {
-                // Try to load from original package name first
-                var selections = patchSelectionRepository.getSelection(selectedApp.packageName)
-
-                // If no selections found, try patched package name
-                if (selections.isEmpty()) {
-                    // Get all installed apps to find patched package name
-                    val installedApps = installedAppRepository.getAll().first()
-                    val patchedPackage = installedApps
-                        .find { it.originalPackageName == selectedApp.packageName }
-                        ?.currentPackageName
-
-                    if (patchedPackage != null && patchedPackage != selectedApp.packageName) {
-                        selections = patchSelectionRepository.getSelection(patchedPackage)
-                    }
-                }
-
-                selections
+                patchSelectionRepository.getAllSelectionsForPackage(selectedApp.packageName)
+                    .filterKeys { it in currentBundleUids }
             }
 
-            // Load saved options
+            // Load options
             val savedOptions = withContext(Dispatchers.IO) {
-                optionsRepository.getOptions(selectedApp.packageName, bundlesMap)
+                optionsRepository.getAllOptionsForPackage(selectedApp.packageName, bundlesMap)
+                    .filterKeys { it in currentBundleUids }
             }
 
             // Use saved selections or create new ones
@@ -809,7 +798,7 @@ class HomeViewModel(
 
                 validatedPatches
             } else {
-                // No saved selections - use default
+                // No saved selections - use default for all current bundles
                 allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
             }.applyGmsCoreFilter()
 
@@ -881,6 +870,15 @@ class HomeViewModel(
 
                 proceedWithPatching(selectedApp, patches, emptyMap())
             }
+        }
+    }
+
+    /**
+     * Save options to repository
+     */
+    fun saveOptions(packageName: String, options: Options) {
+        viewModelScope.launch(Dispatchers.IO) {
+            optionsRepository.saveOptions(packageName , options)
         }
     }
 
@@ -1066,15 +1064,6 @@ class HomeViewModel(
         }
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
-    }
-
-    /**
-     * Save options to repository
-     */
-    fun saveOptions(packageName: String, options: Options) {
-        viewModelScope.launch(Dispatchers.IO) {
-            optionsRepository.saveOptions(packageName, options)
-        }
     }
 
     /**

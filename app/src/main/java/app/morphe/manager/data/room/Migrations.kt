@@ -101,3 +101,30 @@ val MIGRATION_9_10 = object : Migration(9, 10) {
         db.execSQL("ALTER TABLE installed_app ADD COLUMN patched_at INTEGER")
     }
 }
+
+val MIGRATION_10_11 = object : Migration(10, 11) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // Clean up duplicate/legacy data where package_name is a patched name
+        // Keep only records where package_name matches original_package_name in installed_app
+
+        // For patch_selections table
+        db.execSQL("""
+            DELETE FROM patch_selections 
+            WHERE package_name IN (
+                SELECT ia.current_package_name
+                FROM installed_app ia 
+                WHERE ia.current_package_name != ia.original_package_name
+            )
+        """)
+
+        // For option_groups table
+        db.execSQL("""
+            DELETE FROM option_groups 
+            WHERE package_name IN (
+                SELECT ia.current_package_name
+                FROM installed_app ia 
+                WHERE ia.current_package_name != ia.original_package_name
+            )
+        """)
+    }
+}

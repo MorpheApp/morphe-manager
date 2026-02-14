@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -137,8 +138,18 @@ fun ExpertModeDialog(
             // Fixed header section
             Column(modifier = Modifier.fillMaxWidth()) {
                 // Subtitle with count
+                val totalPatchesText = pluralStringResource(
+                    R.plurals.patch_count,
+                    totalPatchesCount,
+                    totalPatchesCount
+                )
+
                 Text(
-                    text = stringResource(R.string.expert_mode_subtitle_extended, totalSelectedCount, totalPatchesCount),
+                    text = stringResource(
+                        R.string.expert_mode_subtitle_extended_format,
+                        totalSelectedCount,
+                        totalPatchesText
+                    ),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current,
                     textAlign = TextAlign.Center,
