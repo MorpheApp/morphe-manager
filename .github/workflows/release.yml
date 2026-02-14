@@ -72,6 +72,21 @@ jobs:
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 
+      - name: Commit app-release.json
+        if: steps.release.outputs.NEW_TAG != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add app/app-release.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Update app-release.json for ${{ steps.release.outputs.NEW_TAG }} [skip ci]"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
+
       - name: Attest
         if: steps.release.outputs.NEW_TAG != ''
         uses: actions/attest-build-provenance@v2
