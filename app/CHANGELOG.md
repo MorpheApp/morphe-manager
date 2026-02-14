@@ -1,3 +1,10 @@
+# app [1.7.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.5...v1.7.0-dev.6) (2026-02-14)
+
+
+### Features
+
+* New patch selections dialog ([#197](https://github.com/MorpheApp/morphe-manager/issues/197)) ([9f363ff](https://github.com/MorpheApp/morphe-manager/commit/9f363ff85aad65a8c6bcbb4d8ea20b2c2ba34374))
+
 # app [1.7.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.4...v1.7.0-dev.5) (2026-02-13)
 
 
