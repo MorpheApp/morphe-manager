@@ -13,7 +13,7 @@
     <string name="home_update_error">Atualização falhou</string>
     <string name="home_update_error_subtitle">Verifique sua conexão com a internet e tente novamente</string>
     <string name="home_updating_sources">Atualizando fontes…</string>
-    <string name="home_update_progress">%1$d/%2$d fontes processadas</string>
+    <string name="home_update_progress_format">%1$s processado</string>
     <string name="home_update_success">Atualização das fontes concluída</string>
     <string name="home_update_success_subtitle">Suas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">Carregando fontes, por favor aguarde…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Alimentado por cafeína e bons patches</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fontes de emenda</string>
-    <string name="sources_management_subtitle">%d fontes instaladas</string>
     <string name="sources_management_open_in_browser">Abrir links no navegador</string>
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
     <string name="sources_management_date_added">Adicionado</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Excluir a fonte \"%s\"? Isso não pode ser desfeito.</string>
     <string name="sources_dialog_remote">Remoto</string>
     <string name="sources_dialog_remote_url">URL da fonte</string>
-    <string name="sources_dialog_remote_url_formats">"Exemplos:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• exemplo.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Exemplos:</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Selecione o arquivo da fonte de patch</string>
     <string name="sources_dialog_local_file_description">Selecione um arquivo .mpp de fonte de patch a partir do armazenamento</string>
@@ -78,6 +74,10 @@ Versões compatíveis:"</string>
     <string name="home_apk_availability_unpatched_label">Não atualizado</string>
     <string name="home_apk_availability_yes">Sim, eu tenho</string>
     <string name="home_apk_availability_no">Não, ajude-me a encontrá-lo</string>
+    <string name="home_apk_use_saved_with_version">Usar APK salvo (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Não há APK salvo. O patch exigirá a seleção do arquivo APK novamente</string>
+    <string name="home_app_info_repatch_no_bundle_info">Não é possível determinar qual bundle foi usado para este aplicativo</string>
+    <string name="home_app_info_repatch_bundle_not_available">O bundle usado para este aplicativo não está mais disponível</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Baixar o APK original</string>
     <string name="home_download_instructions_steps_title">Instruções:</string>
@@ -102,7 +102,6 @@ Versões compatíveis:"</string>
     <string name="home_no_patches_for_app">Não há patches disponíveis para este aplicativo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo avançado</string>
-    <string name="expert_mode_subtitle_extended">%1$d de %2$d patches selecionados</string>
     <string name="expert_mode_search">Pesquisar patches</string>
     <string name="expert_mode_proceed">Iniciar patch</string>
     <string name="expert_mode_disable_all">Desativar todos</string>
@@ -160,12 +159,10 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="home_app_info_delete_item_patched_apk">Arquivo APK emendado</string>
     <string name="home_app_info_delete_item_original_apk">Arquivo APK original</string>
     <string name="home_app_info_delete_preservation_note">Sua seleção de emenda e opções serão preservadas para futuras emendas</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Removidos %d patches desatualizados da seleção salva</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Sem nome</string>
     <string name="home_app_info_patches_replace_fail">Falha ao importar patches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK original não encontrado. Não é possível repatchar este aplicativo.</string>
-    <string name="home_app_info_repatch_requires_original">Repatch requer o arquivo APK original</string>
     <string name="home_app_info_original_package_name">Nome do pacote original</string>
     <string name="home_app_info_applied_patches">Patches aplicados</string>
     <string name="home_app_info_patch_source_used">Fonte do patch usada</string>
@@ -180,11 +177,17 @@ Você tem certeza de que deseja continuar?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo raiz requer que o APK original esteja instalado em seu dispositivo antes do patch.</string>
     <string name="root_gmscore_excluded">O patch de suporte GmsCore está excluído no modo root</string>
+    <string name="root_pre_patch_installer_title">Escolher método de instalação</string>
+    <string name="root_pre_patch_installer_description">Seu dispositivo tem acesso root. Escolha como deseja instalar o aplicativo corrigido.</string>
+    <string name="root_pre_patch_installer_mount_title">Montagem Root</string>
+    <string name="root_pre_patch_installer_mount_description">Montar APK corrigido sobre o aplicativo de estoque. Nenhum GmsCore necessário</string>
+    <string name="root_pre_patch_installer_standard_title">Instalação Padrão</string>
+    <string name="root_pre_patch_installer_standard_description">Instale como um aplicativo separado com suporte a GmsCore. Escolha o instalador (Instalador do sistema, Shizuku, etc.) após a correção</string>
+    <string name="root_pre_patch_installer_hint">O método de instalação determina quais correções são incluídas e não pode ser alterado após a correção</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erro copiado para a área de transferência</string>
     <string name="patcher_error_log">Log de erros</string>
     <string name="patcher_error_technical">Detalhes técnicos</string>
-    <string name="patcher_patches_progress">%1$d / %2$d remendos</string>
     <string name="patcher_long_step_warning">Esta etapa pode levar um tempo. Por favor, aguarde…</string>
     <string name="patcher_installing_subtitle">Quase pronto para arrasar! 🎸</string>
     <string name="patcher_success_title">Tudo pronto! 🎉</string>
@@ -279,9 +282,10 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Claro</string>
     <string name="settings_appearance_dark">Escuro</string>
-    <string name="settings_appearance_black">Preto</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Cor de destaque</string>
+    <string name="settings_appearance_pure_black">Preto Puro</string>
+    <string name="settings_appearance_pure_black_description">Use fundos pretos verdadeiros para displays OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Idioma da aplicação</string>
     <string name="settings_appearance_app_language_current">Língua atual</string>
@@ -490,12 +494,6 @@ As dimensões das imagens devem ser as seguintes:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Seleções de emenda</string>
     <string name="settings_system_patch_selections_description">Gerencie as seleções de emenda e opções salvas. Essas persistem após a desinstalação do aplicativo</string>
-    <string name="settings_system_patch_selections_description_short">Salvo para emenda futura</string>
-    <string name="settings_system_patch_selections_empty">Não há seleções de emenda salvas</string>
-    <string name="settings_system_patch_selections_has_options">Tem opções</string>
-    <string name="settings_system_patch_selections_patches_options">Opções de emenda</string>
-    <string name="settings_system_patch_selection_delete_title">Deletar seleção de emenda</string>
-    <string name="settings_system_patch_selection_deleted">Seleção de emenda deletada</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
@@ -531,6 +529,7 @@ O Morphe é open-source em sua essência, prosperando com feedback e contribuiç
     <string name="selected">Selecionado</string>
     <string name="not_selected">Não selecionado</string>
     <string name="rename">Renomear</string>
+    <string name="import_">Importar</string>
     <string name="export">Exportar</string>
     <string name="download">Baixar</string>
     <string name="less">Menos</string>

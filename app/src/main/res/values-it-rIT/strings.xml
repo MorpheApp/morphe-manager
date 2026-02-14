@@ -13,7 +13,7 @@
     <string name="home_update_error">Aggiornamento non riuscito</string>
     <string name="home_update_error_subtitle">Verifica la tua connessione internet e riprova</string>
     <string name="home_updating_sources">Aggiornamento delle fonti in corso…</string>
-    <string name="home_update_progress">%1$d/%2$d fonti elaborate</string>
+    <string name="home_update_progress_format">%1$s elaborato</string>
     <string name="home_update_success">Aggiornamento delle fonti completato</string>
     <string name="home_update_success_subtitle">Le tue fonti sono aggiornate</string>
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Alimentato da caffeina e buone patch</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonti delle patch</string>
-    <string name="sources_management_subtitle">%d fonti installate</string>
     <string name="sources_management_open_in_browser">Apri nel browser</string>
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
     <string name="sources_management_date_added">Aggiunto</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Elimina la sorgente \"%s\"? Questa operazione non può essere annullata</string>
     <string name="sources_dialog_remote">A distanza</string>
     <string name="sources_dialog_remote_url">URL della fonte</string>
-    <string name="sources_dialog_remote_url_formats">"Esempi:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Esempi:</string>
     <string name="sources_dialog_local">Locale</string>
     <string name="sources_dialog_local_file">Seleziona il file come fonte delle patch</string>
     <string name="sources_dialog_local_file_description">Seleziona un file .mpp come fonte delle patch dalla memoria di archiviazione</string>
@@ -71,13 +67,17 @@
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Hai l\'APK originale non patchato?</string>
     <string name="home_apk_availability_dialog_simple">Per patchare %1$s, è necessario un APK non patchato con la versione:</string>
-    <string name="home_apk_availability_dialog_expert">"Hai un APK non patchato %1$s?
+    <string name="home_apk_availability_dialog_expert">"Hai un APK non patchato di %1$s?
 
 Versioni compatibili:"</string>
     <string name="home_apk_availability_recommended_label">Raccomandato</string>
     <string name="home_apk_availability_unpatched_label">Non patchato</string>
     <string name="home_apk_availability_yes">Sì, ce l\'ho</string>
     <string name="home_apk_availability_no">No, aiutami a trovarlo</string>
+    <string name="home_apk_use_saved_with_version">Usa APK salvato (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patch richiederà la selezione del file APK</string>
+    <string name="home_app_info_repatch_no_bundle_info">Impossibile determinare quale bundle è stato utilizzato per questa app</string>
+    <string name="home_app_info_repatch_bundle_not_available">Il bundle utilizzato per questa app non è più disponibile</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Scarica l\'APK originale</string>
     <string name="home_download_instructions_steps_title">Istruzioni:</string>
@@ -102,7 +102,6 @@ Versioni compatibili:"</string>
     <string name="home_no_patches_for_app">Nessuna patch disponibile per questa app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modalità esperto</string>
-    <string name="expert_mode_subtitle_extended">%1$d di %2$d patch selezionate</string>
     <string name="expert_mode_search">Cerca patch</string>
     <string name="expert_mode_proceed">Procedi con il patching</string>
     <string name="expert_mode_disable_all">Disabilita tutte</string>
@@ -160,12 +159,10 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_app_info_delete_item_patched_apk">File APK patchato</string>
     <string name="home_app_info_delete_item_original_apk">File APK originale</string>
     <string name="home_app_info_delete_preservation_note">La tua selezione delle patch e delle opzioni verranno conservate per i patching futuri</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Rimosse %d patch obsolete dalla selezione salvata</string>
     <string name="home_app_info_patches_name_default">Patch</string>
     <string name="home_app_info_patches_name_fallback">Senza nome</string>
     <string name="home_app_info_patches_replace_fail">Impossibile importare le patch: %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK originale non trovato. Non è possibile ripatchare questa app</string>
-    <string name="home_app_info_repatch_requires_original">Il ripatch richiede il file APK originale</string>
     <string name="home_app_info_original_package_name">Nome pacchetto originale</string>
     <string name="home_app_info_applied_patches">Patch applicate</string>
     <string name="home_app_info_patch_source_used">Fonte delle patch utilizzata</string>
@@ -180,11 +177,17 @@ Sei sicuro di voler procedere?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">La modalità di root richiede che l\'APK originale sia installato sul tuo dispositivo prima del patching</string>
     <string name="root_gmscore_excluded">Il supporto per GmsCore è escluso in modalità di root</string>
+    <string name="root_pre_patch_installer_title">Scegli il metodo di installazione</string>
+    <string name="root_pre_patch_installer_description">Il tuo dispositivo ha accesso root. Scegli come vuoi installare l\'app corretta.</string>
+    <string name="root_pre_patch_installer_mount_title">Montaggio root</string>
+    <string name="root_pre_patch_installer_mount_description">Monta l\'APK corretto sull\'app di sistema. Non è necessario GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">Installazione standard</string>
+    <string name="root_pre_patch_installer_standard_description">Installa come app separata con supporto GmsCore. Scegli l\'installatore (installatore di sistema, Shizuku, ecc.) dopo la correzione</string>
+    <string name="root_pre_patch_installer_hint">Il metodo di installazione determina quali correzioni sono incluse e non può essere modificato dopo la correzione</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Errore copiato negli appunti</string>
     <string name="patcher_error_log">Log dell\'errore</string>
     <string name="patcher_error_technical">Dettagli tecnici</string>
-    <string name="patcher_patches_progress">%1$d / %2$d patch</string>
     <string name="patcher_long_step_warning">Questo passaggio potrebbe richiedere un po\'  di tempo. Si prega di attendere…</string>
     <string name="patcher_installing_subtitle">Quasi pronti a partire! 🎸</string>
     <string name="patcher_success_title">Fatto! 🎉</string>
@@ -279,9 +282,10 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_appearance_system">Di sistema</string>
     <string name="settings_appearance_light">Chiaro</string>
     <string name="settings_appearance_dark">Scuro</string>
-    <string name="settings_appearance_black">Nero</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Tonalità in risalto</string>
+    <string name="settings_appearance_pure_black">Nero assoluto</string>
+    <string name="settings_appearance_pure_black_description">Usa degli sfondi con neri assoluti per i display OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Lingua dell\'app</string>
     <string name="settings_appearance_app_language_current">Lingua attuale</string>
@@ -289,7 +293,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_appearance_translations_info_text">Per tradurre nuove lingue o migliorare le traduzioni esistenti, visita %s</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icona dell\'app</string>
-    <string name="settings_appearance_app_icon_default">Predefinito</string>
+    <string name="settings_appearance_app_icon_default">Predefinita</string>
     <string name="settings_appearance_app_icon_light_2">Cielo</string>
     <string name="settings_appearance_app_icon_light_3">Tramonto</string>
     <string name="settings_appearance_app_icon_dark_1">Oceano</string>
@@ -396,31 +400,31 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_internal_description">Usa l\'installatore dei pacchetti di Android</string>
     <string name="installer_auto_saved_name">Installatore mount con privilegi di root</string>
     <string name="installer_auto_saved_description">Monta l\'APK corretto sull\'app installata (richiede i permessi di root)</string>
-    <string name="installer_shizuku_description">Installa in silenzio utilizzando Shizuku o Sui</string>
+    <string name="installer_shizuku_description">Installa silenziosamente utilizzando Shizuku o Sui</string>
     <string name="installer_option_none">Nessun fallback</string>
     <string name="installer_none_description">Non è configurato alcun installatore di fallback</string>
-    <string name="installer_status_requires_root">Richiede accesso root</string>
+    <string name="installer_status_requires_root">Richiede l\'accesso di root</string>
     <string name="installer_status_not_supported">Non supportato per questa azione</string>
     <string name="installer_status_shizuku_not_installed">Installa Shizuku o Sui per utilizzare questa opzione</string>
     <string name="installer_status_shizuku_not_running">Avvia Shizuku o Sui e riprova</string>
     <string name="installer_status_shizuku_permission">Concedi a Shizuku il permesso a Morphe dall\'app Shizuku</string>
-    <string name="installer_mount_warning_install">Il tuo installatore principale è impostato sull\'installatore montato root. Questa app salvata non è stata installata utilizzando il montaggio</string>
+    <string name="installer_mount_warning_install">Il tuo installatore principale è impostato sull\'installatore montato di root. Questa app salvata non è stata installata utilizzando il montaggio</string>
     <string name="mount_version_mismatch_message">La versione dell\'app di sistema (%2$s) non corrisponde alla versione dell\'app patchata (%1$s). Monta la versione di sistema corrispondente, quindi riprova</string>
     <string name="installer_status_shizuku_unsupported">La versione di Shizuku installata non è supportata</string>
     <string name="installer_action_open_shizuku">Apri Shizuku</string>
-    <string name="installer_hint_generic">L\'installazione è fallita. Riprova o passa a un diverso installatore</string>
+    <string name="installer_hint_generic">L\'installazione è fallita. Riprova o passa a un installer diverso.</string>
     <string name="installer_hint_blocked">L\'installazione è stata bloccata da Android. Controlla Play Protect o le impostazioni di sicurezza</string>
-    <string name="installer_hint_conflict">Un\'altra app con questo nome del pacchetto è già installata. Disinstalla prima di continuare</string>
+    <string name="installer_hint_conflict">Un\'altra app con questo nome del pacchetto è già installata. Disinstallala prima di continuare</string>
     <string name="installer_hint_incompatible">L\'APK non è compatibile con questo dispositivo o versione di Android</string>
-    <string name="installer_hint_invalid">L\'APK è non valido o corrotto</string>
+    <string name="installer_hint_invalid">L\'APK non è valido o è corrotto</string>
     <string name="installer_hint_storage">Non c\'è spazio di archiviazione sufficiente per l\'installazione</string>
-    <string name="installer_hint_timeout">L\'installazione è scaduta. Riprova</string>
+    <string name="installer_hint_timeout">L\'installazione ha superato il tempo massimo. Riprova.</string>
     <string name="installer_hint_aborted">L\'installazione è stata annullata</string>
     <string name="installer_external_launched">Apertura di %1$s in corso…</string>
     <string name="installer_external_timeout">%1$s non ha confermato l\'installazione. Controlla l\'altra app e riprova</string>
     <string name="installer_external_success">%1$s ha segnalato un\'installazione riuscita</string>
     <string name="installer_unavailable_title">%s non disponibile</string>
-    <string name="installer_unavailable_message">Il tuo installer preferito (%s) non è attualmente disponibile. Puoi risolvere il problema e riprovare o utilizzare l\'installer standard</string>
+    <string name="installer_unavailable_message">Il tuo installer preferito (%s) non è attualmente disponibile. Puoi risolvere il problema e riprovare, o utilizzare l\'installer standard</string>
     <string name="installer_unavailable_shizuku_hint">Assicurati che Shizuku sia in esecuzione e che il permesso sia concesso a questa app</string>
     <string name="installer_use_standard">Usa standard</string>
     <string name="settings_prompt_installer_on_install">Richiedi l\'installatore all\'installazione</string>
@@ -435,40 +439,40 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_memory_limit_subtitle">Memoria disponibile per il patching</string>
     <string name="settings_system_memory_limit_warning">Un limite di memoria basso potrebbe causare errori durante il patching delle app più grandi</string>
     <string name="settings_system_process_runtime_enabled_description">%d MB limite</string>
-    <string name="settings_system_process_runtime_disabled_description">Fare clic per configurare</string>
+    <string name="settings_system_process_runtime_disabled_description">Clicca per configurare</string>
     <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_export">Importazione e esportazione</string>
+    <string name="settings_system_import_export">Importazione &amp; esportazione</string>
     <string name="settings_system_import_keystore">Importa il keystore</string>
     <string name="settings_system_import_keystore_description">Importa un keystore personalizzato</string>
     <string name="settings_system_import_keystore_dialog_title">Inserisci le credenziali del keystore</string>
-    <string name="settings_system_import_keystore_dialog_description">È necessario inserire le credenziali del keystore per importarlo</string>
-    <string name="settings_system_import_keystore_dialog_alias_field">Username (Alias)</string>
+    <string name="settings_system_import_keystore_dialog_description">Sarà necessario inserire le credenziali del keystore per importarlo</string>
+    <string name="settings_system_import_keystore_dialog_alias_field">Nome utente (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
     <string name="settings_system_import_keystore_dialog_button">Importa</string>
-    <string name="settings_system_import_keystore_wrong_credentials">Credenziali keystore errate</string>
+    <string name="settings_system_import_keystore_wrong_credentials">Credenziali del keystore errate</string>
     <string name="settings_system_import_keystore_success">Keystore importato</string>
-    <string name="settings_system_import_keystore_failed">Importazione keystore non riuscita</string>
+    <string name="settings_system_import_keystore_failed">Importazione del keystore non riuscita</string>
     <string name="settings_system_export_keystore">Esporta il keystore</string>
     <string name="settings_system_export_keystore_description">Esporta il keystore attuale</string>
     <string name="settings_system_export_keystore_unavailable">Nessun keystore disponibile per l\'esportazione</string>
     <string name="settings_system_export_keystore_success">Keystore esportato</string>
-    <string name="settings_system_show_password_field">Mostra password</string>
-    <string name="settings_system_hide_password_field">Nascondi password</string>
+    <string name="settings_system_show_password_field">Mostra la password</string>
+    <string name="settings_system_hide_password_field">Nascondi la password</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
     <string name="settings_system_import_manager_settings">Importa le impostazioni del manager</string>
     <string name="settings_system_import_manager_settings_description">Ripristina le impostazioni del manager da un file JSON</string>
     <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni del manager: %s</string>
     <string name="settings_system_import_manager_settings_success">Impostazioni del manager importate </string>
-    <string name="settings_system_export_manager_settings">Esporta impostazioni del manager</string>
+    <string name="settings_system_export_manager_settings">Esporta le impostazioni del manager</string>
     <string name="settings_system_export_manager_settings_description">Salva impostazioni del manager in un file JSON</string>
     <string name="settings_system_export_manager_settings_fail">Impossibile esportare le impostazioni del manager: %s</string>
     <string name="settings_system_export_manager_settings_success">Impostazioni del manager esportate</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Esporta i logs di debug</string>
-    <string name="settings_system_export_debug_logs_description">Esporta i log di sistema per la risoluzione dei problemi </string>
+    <string name="settings_system_export_debug_logs_description">Esporta i logs di sistema per la risoluzione dei problemi </string>
     <string name="settings_system_export_debug_logs_export_read_failed">Lettura dei logs non riuscita (codice di uscita %d)</string>
-    <string name="settings_system_export_debug_logs_export_failed">Esportazione dei log non riuscita</string>
+    <string name="settings_system_export_debug_logs_export_failed">Esportazione dei logs non riuscita</string>
     <string name="settings_system_export_debug_logs_export_success">Logs esportati</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Gestione archiviazione</string>
@@ -488,19 +492,13 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_original_apks_delete_title">Eliminare APK originale?</string>
     <string name="settings_system_original_apks_delete_confirm">Eliminare l\'APK originale per %s? Non potrai ripatchare senza fornire un nuovo APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
-    <string name="settings_system_patch_selections_title">Selezioni di patch</string>
-    <string name="settings_system_patch_selections_description">Gestisci le selezioni di patch salvate e le opzioni. Queste persistono dopo la disinstallazione dell\'app</string>
-    <string name="settings_system_patch_selections_description_short">Salvato per il patching futuro</string>
-    <string name="settings_system_patch_selections_empty">Nessuna selezione di patch salvata</string>
-    <string name="settings_system_patch_selections_has_options">Ha opzioni</string>
-    <string name="settings_system_patch_selections_patches_options">Patches opzioni</string>
-    <string name="settings_system_patch_selection_delete_title">Elimina selezione di patch</string>
-    <string name="settings_system_patch_selection_deleted">Selezione di patch eliminata</string>
+    <string name="settings_system_patch_selections_title">Selezioni delle patch</string>
+    <string name="settings_system_patch_selections_description">Gestisci le selezioni delle patch salvate e le opzioni. Queste persistono dopo la disinstallazione dell\'app</string>
     <!-- Settings - System Tab - About Section -->
-    <string name="settings_system_about">A proposito</string>
+    <string name="settings_system_about">A proposito di</string>
     <string name="settings_system_share_website">Condividi il sito</string>
     <string name="settings_system_share_website_description">Condividi il sito ufficiale di Morphe</string>
-    <string name="settings_system_manager_description">"Morphe è un progetto sperimentale open-source incentrato sulla creazione di un patching moderno e semplificato di app Android popolari
+    <string name="settings_system_manager_description">"Morphe è un progetto sperimentale open-source incentrato sulla creazione di un patching moderno e semplificato delle apps Android popolari
 
 Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi della community per guidare l'innovazione futura"</string>
     <!-- Shared strings -->
@@ -531,6 +529,7 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="selected">Selezionato</string>
     <string name="not_selected">Non selezionata</string>
     <string name="rename">Rinomina</string>
+    <string name="import_">Importa</string>
     <string name="export">Esporta</string>
     <string name="download">Scarica</string>
     <string name="less">Meno</string>
@@ -542,14 +541,14 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="continue_">Continua</string>
     <string name="version">Versione</string>
     <string name="patch">Patch</string>
-    <string name="repatch">Ripristina patch</string>
+    <string name="repatch">Repatcha</string>
     <string name="open">Apri</string>
     <string name="mount">Monta</string>
     <string name="mounted">Montato</string>
     <string name="unmounted">Smontato</string>
     <string name="remount">Rimonta</string>
     <string name="install">Installa</string>
-    <string name="installed">Installata</string>
+    <string name="installed">Installato</string>
     <string name="reinstall">Reinstalla</string>
     <string name="uninstall">Disinstalla</string>
     <string name="uninstalled">Disinstallato</string>
@@ -560,28 +559,28 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="mounting_ellipsis">Montaggio in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>
     <string name="importing_ellipsis">Riprova</string>
-    <string name="changelog">Visualizza registri modifiche</string>
+    <string name="changelog">Visualizza i registri delle modifiche</string>
     <string name="changelog_description">Scopri le ultime modifiche in questo aggiornamento</string>
-    <string name="changelog_loading">Caricamento registro modifiche</string>
-    <string name="changelog_download_fail">Download registro modifiche non riuscito: %s</string>
+    <string name="changelog_loading">Caricamento del registro delle modifiche</string>
+    <string name="changelog_download_fail">Download del registro delle modifiche non riuscito: %s</string>
     <string name="changelog_retry">Riprova</string>
-    <string name="changelog_empty">Nessun changelog disponibile</string>
+    <string name="changelog_empty">Nessun registro delle modifiche disponibile</string>
     <string name="no_network_toast">Non c\'è connessione internet disponibile</string>
     <string name="update_available">È disponibile un aggiornamento</string>
     <string name="ready_to_install_update">Aggiornamento pronto per l\'installazione</string>
     <string name="update_completed">Aggiornamento installato</string>
     <string name="install_update_manager_failed">Impossibile installare l\'aggiornamento</string>
     <string name="installing_manager_update">Installazione aggiornamento in corso…</string>
-    <string name="downloading_manager_update">Download aggiornamento in corso…</string>
-    <string name="download_manager_failed">Download aggiornamento non riuscito: %s</string>
-    <string name="failed_to_check_updates">Impossibile verificare aggiornamenti: %s</string>
+    <string name="downloading_manager_update">Download dell\'aggiornamento in corso…</string>
+    <string name="download_manager_failed">Download dell\'aggiornamento non riuscito: %s</string>
+    <string name="failed_to_check_updates">Impossibile verificare la presenza degli aggiornamenti: %s</string>
     <string name="failed_to_download_update">Impossibile scaricare l\'aggiornamento: %s</string>
-    <string name="resume_download">Riprendi download</string>
-    <string name="download_confirmation_metered">"Al momento sei connesso a una rete con tariffa dati limitata e potrebbero essere applicati costi aggiuntivi dal tuo operatore.
+    <string name="resume_download">Riprendi il download</string>
+    <string name="download_confirmation_metered">"Al momento sei connesso a una rete a consumo e potrebbero essere applicati costi aggiuntivi dal tuo operatore.
 
 Vuoi comunque continuare?"</string>
-    <string name="download_update_confirmation">Scarica aggiornamento?</string>
-    <string name="just_now">Appena ora</string>
+    <string name="download_update_confirmation">Scaricare l\'aggiornamento?</string>
+    <string name="just_now">Giusto ora</string>
     <string name="minutes_ago">%sm fa</string>
     <string name="hours_ago">%sh fa</string>
     <string name="days_ago">%sd fa</string>

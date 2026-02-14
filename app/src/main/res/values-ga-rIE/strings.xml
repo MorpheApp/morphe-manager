@@ -13,7 +13,7 @@
     <string name="home_update_error">Theip ar nuashonrú</string>
     <string name="home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
     <string name="home_updating_sources">Ag nuashonrú na foinsí…</string>
-    <string name="home_update_progress">%1$d/%2$d foinsí próiseáilte</string>
+    <string name="home_update_progress_format">Tá %1$s déanta</string>
     <string name="home_update_success">Foinsí nuashonraithe críochnaithe</string>
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Cumhachtaithe ag caiféin agus paistí maithe</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
-    <string name="sources_management_subtitle">%d foinsí instálaithe</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_management_date_added">Cuireadh leis</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Scrios foinse \"%s\"? Ní féidir é seo a chealú.</string>
     <string name="sources_dialog_remote">Cianda</string>
     <string name="sources_dialog_remote_url">URL Foinse</string>
-    <string name="sources_dialog_remote_url_formats">"Samplaí:
-• github.com/athrú/réad
-• raw.githubusercontent.com/athrú/réad/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Samplaí:</string>
     <string name="sources_dialog_local">Áitiúil</string>
     <string name="sources_dialog_local_file">Roghnaigh comhad foinse paiste</string>
     <string name="sources_dialog_local_file_description">Roghnaigh comhad foinse paiste .mpp ón stóras</string>
@@ -78,6 +74,8 @@ Leaganacha comhoiriúnacha:"</string>
     <string name="home_apk_availability_unpatched_label">Díphaisteáilte</string>
     <string name="home_apk_availability_yes">Sea, tá sé agam</string>
     <string name="home_apk_availability_no">Ní hea, cuidigh liom é a aimsiú</string>
+    <string name="home_app_info_repatch_no_bundle_info">Ní féidir a fhianaiseadh cén phacáiste a úsáidtear do chugainn</string>
+    <string name="home_app_info_repatch_bundle_not_available">Tá an phacáiste a úsáidtear do chugainn ní ba mhó</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Íoslódáil an APK bunaidh</string>
     <string name="home_download_instructions_steps_title">Treoracha:</string>
@@ -102,7 +100,6 @@ Leaganacha comhoiriúnacha:"</string>
     <string name="home_no_patches_for_app">Níl aon phaistí ar fáil don aip seo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mód saineolaithe</string>
-    <string name="expert_mode_subtitle_extended">%1$d de %2$d paiste roghnaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
     <string name="expert_mode_proceed">Lean ar aghaidh go dtí an Paisteáil</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
@@ -160,12 +157,10 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="home_app_info_delete_item_patched_apk">Comhad APK ghearrtha</string>
     <string name="home_app_info_delete_item_original_apk">Comhad APK bunaidh</string>
     <string name="home_app_info_delete_preservation_note">Coinneofar do rogha paiste agus roghanna le haghaidh paistí amach anseo</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Tugadh amach %d seachadán atá bréagach ó roghhnú faoi seach</string>
     <string name="home_app_info_patches_name_default">Paistí</string>
     <string name="home_app_info_patches_name_fallback">Gan ainm</string>
     <string name="home_app_info_patches_replace_fail">Theip ar phaistí a iompórtáil: %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK bunaidh gan teacht air. Ní féidir an aip seo a athphaisteáil</string>
-    <string name="home_app_info_repatch_requires_original">Éilíonn an Repatch an comhad APK bunaidh</string>
     <string name="home_app_info_original_package_name">Ainm an phacáiste bhunaidh</string>
     <string name="home_app_info_applied_patches">Paistí curtha i bhfeidhm</string>
     <string name="home_app_info_patch_source_used">Foinse paiste a úsáideadh</string>
@@ -180,11 +175,16 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Éilíonn mód fréimhe go mbeidh an APK bunaidh suiteáilte ar do ghléas sula ndéantar paisteáil</string>
     <string name="root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
+    <string name="root_pre_patch_installer_description">Tá aistriúchán ar an gcuide seo. Tairgf an modh tairgfí seo an t-airgead atá déanta agat.</string>
+    <string name="root_pre_patch_installer_mount_title">Tairgf</string>
+    <string name="root_pre_patch_installer_mount_description">Tairgf an t-airgead atá déanta agat.</string>
+    <string name="root_pre_patch_installer_standard_title">Tairgf an t-airgead atá déanta agat.</string>
+    <string name="root_pre_patch_installer_standard_description">Tairgf an t-airgead atá déanta agat.</string>
+    <string name="root_pre_patch_installer_hint">Tairgf an t-airgead atá déanta agat.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="patcher_error_log">Log earráide</string>
     <string name="patcher_error_technical">Sonraí teicniúla</string>
-    <string name="patcher_patches_progress">%1$d / %2$d paistí</string>
     <string name="patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
     <string name="patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
     <string name="patcher_success_title">Gach rud déanta! 🎉</string>
@@ -279,9 +279,10 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Leicht</string>
     <string name="settings_appearance_dark">Dáark</string>
-    <string name="settings_appearance_black">Bunaidh</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Gnáth</string>
+    <string name="settings_appearance_pure_black">Dubh</string>
+    <string name="settings_appearance_pure_black_description">Tairgf an t-airgead atá déanta agat.</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Teanga aip</string>
     <string name="settings_appearance_app_language_current">Teanga reatha</string>
@@ -488,12 +489,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Roghanna paiste</string>
     <string name="settings_system_patch_selections_description">Bainistigh roghanna agus roghanna paiste sábháilte. Leanann siad seo ar aghaidh tar éis díshuiteáil an aip</string>
-    <string name="settings_system_patch_selections_description_short">Sábháilte le haghaidh paisteála sa todhchaí</string>
-    <string name="settings_system_patch_selections_empty">Gan aon roghanna paiste sábháilte</string>
-    <string name="settings_system_patch_selections_has_options">Tá roghanna ann</string>
-    <string name="settings_system_patch_selections_patches_options">Roghanna paistí</string>
-    <string name="settings_system_patch_selection_delete_title">Scrios rogha paiste</string>
-    <string name="settings_system_patch_selection_deleted">Scriosadh an rogha paiste</string>
+    <string name="settings_system_patch_selection_no_saved">Gan aon roghanna paiste sábháilte</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Maidir</string>
     <string name="settings_system_share_website">Comhroinn suíomh Gréasáin</string>
@@ -529,6 +525,7 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="selected">Roghnaithe</string>
     <string name="not_selected">Níor roghnaíodh</string>
     <string name="rename">Athraigh</string>
+    <string name="import_">Iompórtáil</string>
     <string name="export">Easpórtáil</string>
     <string name="download">Íoslódáil</string>
     <string name="less">Níos lú</string>

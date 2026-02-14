@@ -13,7 +13,7 @@
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
     <string name="home_updating_sources">সোর্স আপডেটিং…</string>
-    <string name="home_update_progress">%1$d/%2$d সোর্স প্রক্রিয়াধীন</string>
+    <string name="home_update_progress_format">%1$s প্রক্রিয়াকরণ সম্পন্ন হয়েছে</string>
     <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ</string>
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেটে আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, দয়া করে অপেক্ষা করুন…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">ক্যাফেইন ও ভালো প্যাচ দিয়ে চালিত</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">প্যাচ উৎস</string>
-    <string name="sources_management_subtitle">%d সোর্স ইনস্টল করা হয়েছে</string>
     <string name="sources_management_open_in_browser">লিংক ব্রাউজারে খুলুন</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
     <string name="sources_management_date_added">যোগ করা হয়েছে</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">ডিলিট করুন উৎস \"%s\"? এটি বাতিল করা যাবে না</string>
     <string name="sources_dialog_remote">মূল</string>
     <string name="sources_dialog_remote_url">সোর্স URL</string>
-    <string name="sources_dialog_remote_url_formats">"উদাহরণ:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">উদাহরণ:</string>
     <string name="sources_dialog_local">স্থানিক</string>
     <string name="sources_dialog_local_file">প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
     <string name="sources_dialog_local_file_description">স্টোর থেকে .mpp প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
@@ -78,6 +74,10 @@
     <string name="home_apk_availability_unpatched_label">অনুশিষ্টিত</string>
     <string name="home_apk_availability_yes">হ্যাঁ, আমার আছে</string>
     <string name="home_apk_availability_no">না, আমাকে এটি খুঁজে পেতে সাহায্য করুন</string>
+    <string name="home_apk_use_saved_with_version">বর্তমান সংরক্ষিত APK (v%s) ব্যবহার করুন</string>
+    <string name="home_app_info_no_saved_apk">কোন সংরক্ষিত APK নেই। প্যাচিংয়ের জন্য আবার APK ফাইল নির্বাচন করতে হবে</string>
+    <string name="home_app_info_repatch_no_bundle_info">এই অ্যাপের জন্য কোন বান্ডল ব্যবহার করা হয়েছে তা নির্ণয় করা যায়নি</string>
+    <string name="home_app_info_repatch_bundle_not_available">এই অ্যাপের জন্য ব্যবহৃত বান্ডল আর उपलब्ध নেই</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">মূল APK ডাউনলোড করুন</string>
     <string name="home_download_instructions_steps_title">নির্দেশাবলী:</string>
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">এই অ্যাপের জন্য কোনো প্যাচ উপলব্ধ নেই</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">এক্সপার্ট মোড</string>
-    <string name="expert_mode_subtitle_extended">%1$d of %2$d প্যাচ নির্বাচিত</string>
     <string name="expert_mode_search">প্যাচ খুঁজুন</string>
     <string name="expert_mode_proceed">প্যাচিংয়ের জন্য প্রেরণ করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
@@ -160,12 +159,10 @@
     <string name="home_app_info_delete_item_patched_apk">প্যাচড APK ফাইল</string>
     <string name="home_app_info_delete_item_original_apk">অরিজিনাল APK ফাইল</string>
     <string name="home_app_info_delete_preservation_note">আপনার প্যাচ নির্বাচন ও অপশনগুলি ভবিষ্যতের প্যাচিংয়ের জন্য সংরক্ষিত থাকবে</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">অনুসরণ করা হয়েছে %d মৌলিক প্যাচগুলি বর্জন করা হয়েছে</string>
     <string name="home_app_info_patches_name_default">প্যাচগুলি</string>
     <string name="home_app_info_patches_name_fallback">নামহীন</string>
     <string name="home_app_info_patches_replace_fail">প্যাচগুলি আমদানি করতে ব্যর্থ হয়েছে: %s</string>
     <string name="home_app_info_repatch_no_original_apk">আরিজিনাল এপিকে খুঁজে পাওয়া যায়নি. এই অ্যাপের রিপ্যাচ করতে পারবো না</string>
-    <string name="home_app_info_repatch_requires_original">পুনরপ্যাচের জন্য মূল এপিআক ফাইল প্রয়োজন</string>
     <string name="home_app_info_original_package_name">মূল প্যাকেজ নাম</string>
     <string name="home_app_info_applied_patches">আমদান প্যাচগুলি</string>
     <string name="home_app_info_patch_source_used">প্যাচের উৎস ব্যবহৃত হয়েছে</string>
@@ -180,11 +177,17 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">রুট মোডে আরিজিনাল এপিকে ডিভাইসে ইনস্টল করা থাকতে হবে প্যাচিংয়ের আগে</string>
     <string name="root_gmscore_excluded">রুট মোডে GmsCore সমর্থন প্যাচ বাদ দেওয়া হয়েছে</string>
+    <string name="root_pre_patch_installer_title">স্থাপন পদ্ধতি নির্বাচন করুন</string>
+    <string name="root_pre_patch_installer_description">আপনার ডিভাইসটি রুট অ্যাক্সেস পেয়েছে। প্যাচড অ্যাপ ইনস্টল করার জন্য কিভাবে চান তা নির্বাচন করুন</string>
+    <string name="root_pre_patch_installer_mount_title">রুট মাউন্ট</string>
+    <string name="root_pre_patch_installer_mount_description">স্টক অ্যাপের উপর প্যাচড এপিকে মাউন্ট করুন। গমসকোর প্রয়োজন নেই</string>
+    <string name="root_pre_patch_installer_standard_title">স্ট্যান্ডার্ড ইনস্টল</string>
+    <string name="root_pre_patch_installer_standard_description">গমসকোর সমর্থন সহ প্যাচিংয়ের পরে ইনস্টলার নির্বাচন করে (সিস্টেম ইনস্টলার, শিজুকু, ইত্যাদা) আলাদা অ্যাপ হিসাবে ইনস্টল করুন</string>
+    <string name="root_pre_patch_installer_hint">ইনস্টলেশন মেথডটি প্যাচিংয়ের পরে পরিবর্তন করা যাবে না, প্যাচগুলি অন্তর্ভুক্ত করে</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
-    <string name="patcher_patches_progress">%2$d টির মধ্যে %1$d টি প্যাচ</string>
     <string name="patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="patcher_installing_subtitle">প্রায় রক-এর জন্য প্রস্তুত! 🎸</string>
     <string name="patcher_success_title">সব হয়ে গেছে! 🎉</string>
@@ -279,9 +282,10 @@
     <string name="settings_appearance_system">লাইট</string>
     <string name="settings_appearance_light">কালো</string>
     <string name="settings_appearance_dark">কালো</string>
-    <string name="settings_appearance_black">ম্যাটেরিয়াল ইউ</string>
     <string name="settings_appearance_dynamic">এক্সেন্ট কালার</string>
     <string name="settings_appearance_accent_color">অ্যাকসেন্ট রঙ</string>
+    <string name="settings_appearance_pure_black">পুরো কালো</string>
+    <string name="settings_appearance_pure_black_description">ওএলইডি ডিসপ্লে জন্য সত্য কালো পটভূমি ব্যবহার করুন</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">অ্যাপ্লিকেশনের ভাষা</string>
     <string name="settings_appearance_app_language_current">বর্তমান ভাষা</string>
@@ -469,12 +473,6 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">প্যাচ নির্বাচন</string>
     <string name="settings_system_patch_selections_description">সংরক্ষিত প্যাচ নির্বাচন ও অপশন পরিচালনা করুন। এগুলি অ্যাপ আনইনস্টলেশন পরেেও টিকিয়ে রাখা হয়</string>
-    <string name="settings_system_patch_selections_description_short">ভবিষ্যতের প্যাচিংয়ের জন্য সংরক্ষিত</string>
-    <string name="settings_system_patch_selections_empty">কোন সংরক্ষিত প্যাচ নির্বাচন নেই</string>
-    <string name="settings_system_patch_selections_has_options">অপশন আছে</string>
-    <string name="settings_system_patch_selections_patches_options">প্যাচ অপশন</string>
-    <string name="settings_system_patch_selection_delete_title">প্যাচ নির্বাচন মুছে ফেলুন</string>
-    <string name="settings_system_patch_selection_deleted">প্যাচ নির্বাচন মুছে ফেলা হয়েছে</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>
     <string name="settings_system_share_website">ওয়েবসাইট শেয়ার করুন</string>
@@ -510,6 +508,7 @@
     <string name="selected">নির্বাচিত</string>
     <string name="not_selected">নির্বাচিত নয়</string>
     <string name="rename">রেনেম করুন</string>
+    <string name="import_">আমদানি করুন</string>
     <string name="export">রপ্তানি করুন</string>
     <string name="download">ডাউনলোড</string>
     <string name="less">কম</string>

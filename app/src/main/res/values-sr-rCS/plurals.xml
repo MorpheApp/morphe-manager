@@ -15,11 +15,6 @@
         <item quantity="few">%d APK datoteke</item>
         <item quantity="other">%d APK datoteka</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d sačuvana selekcija</item>
-        <item quantity="few">%d sačuvane selekcije</item>
-        <item quantity="other">%d sačuvanih selekcija</item>
-    </plurals>
     <plurals name="sources_dialog_disabled_toast">
         <item quantity="one">Onemogućeno %d izvora</item>
         <item quantity="few">Onemogućeno %d izvora</item>
@@ -29,5 +24,15 @@
         <item quantity="one">Omogućeno %d izvora</item>
         <item quantity="few">Omogućeno %d izvora</item>
         <item quantity="other">Omogućeno %d izvora</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Uklonio sam %1$d zastarelu ispravku iz spremljenog odabira</item>
+        <item quantity="few">Uklonio sam %1$d zastarele ispravke iz spremljenog odabira</item>
+        <item quantity="other">Uklonio sam %1$d zastarelih ispravki iz spremljenog odabira</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d izvor postavljen</item>
+        <item quantity="few">%1$d izvora postavljeno</item>
+        <item quantity="other">%1$d izvora postavljeno</item>
     </plurals>
 </resources>

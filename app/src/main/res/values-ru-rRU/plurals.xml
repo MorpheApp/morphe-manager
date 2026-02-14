@@ -18,12 +18,6 @@
         <item quantity="many">%d APK файлов</item>
         <item quantity="other">%d APK файлов</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d сохраненный выбор</item>
-        <item quantity="few">%d сохраненные выбраны</item>
-        <item quantity="many">%d сохраненных выборов</item>
-        <item quantity="other">%d сохраненных выборов</item>
-    </plurals>
     <plurals name="sources_dialog_disabled_toast">
         <item quantity="one">Отключено %d источник</item>
         <item quantity="few">Отключено %d источников</item>
@@ -35,5 +29,17 @@
         <item quantity="few">Включено %d источников</item>
         <item quantity="many">Включено %d источников</item>
         <item quantity="other">Включено %d источников</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Удалено %1$d устаревший патч из сохраненного выбора</item>
+        <item quantity="few">Удалено %1$d устаревших патчей из сохраненного выбора</item>
+        <item quantity="many">Удалено %1$d устаревшие патчи из сохраненного выбора</item>
+        <item quantity="other">Удалено %1$d устаревшие патчи из сохраненного выбора</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d источник установлен</item>
+        <item quantity="few">%1$d источника установлено</item>
+        <item quantity="many">%1$d источников установлено</item>
+        <item quantity="other">%1$d источников установлено</item>
     </plurals>
 </resources>

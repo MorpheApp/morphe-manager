@@ -11,9 +11,9 @@
     <string name="home_update_available">Manager 有可用的更新</string>
     <string name="home_update_available_subtitle">準備安裝新版本</string>
     <string name="home_update_error">更新失敗</string>
-    <string name="home_update_error_subtitle">檢查你的網際網路連線，並再試一次</string>
+    <string name="home_update_error_subtitle">請檢查網際網路連線，然後再試一次</string>
     <string name="home_updating_sources">正在更新來源…</string>
-    <string name="home_update_progress">已處理 %1$d/%2$d 個來源</string>
+    <string name="home_update_progress_format">%1$s 處理完畢</string>
     <string name="home_update_success">更新來源完成</string>
     <string name="home_update_success_subtitle">已更新你的來源</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">由咖啡因和良好的修補驅動</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">修補來源</string>
-    <string name="sources_management_subtitle">已安裝 %d 個來源</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟連結</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
     <string name="sources_management_date_added">已新增</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">要刪除來源「%s」嗎？這項操作無法復原</string>
     <string name="sources_dialog_remote">遠端</string>
     <string name="sources_dialog_remote_url">修補來源網址</string>
-    <string name="sources_dialog_remote_url_formats">"範例：
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">範例：</string>
     <string name="sources_dialog_local">本機</string>
     <string name="sources_dialog_local_file">選擇修補來源檔案</string>
     <string name="sources_dialog_local_file_description">從儲存中選擇 .mpp 修補來源檔案</string>
@@ -69,20 +65,24 @@
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載修補來源：%s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">您是否持有未經修補的原始 APK？</string>
+    <string name="home_apk_availability_dialog_title">你有未經修補的原始 APK 嗎？</string>
     <string name="home_apk_availability_dialog_simple">如要修補 %1$s，你需要未修補的 APK，版本為：</string>
     <string name="home_apk_availability_dialog_expert">"你有未修補的 %1$s APK 嗎？
 
 相容版本："</string>
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
-    <string name="home_apk_availability_yes">已持有</string>
-    <string name="home_apk_availability_no">未持有，請幫忙尋找</string>
+    <string name="home_apk_availability_yes">是的，我有</string>
+    <string name="home_apk_availability_no">沒有，幫我找一下</string>
+    <string name="home_apk_use_saved_with_version">使用已儲存的 APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補將需要再次選擇 APK 檔案</string>
+    <string name="home_app_info_repatch_no_bundle_info">無法確定哪個捆綁包用於此應用程序</string>
+    <string name="home_app_info_repatch_bundle_not_available">用於此應用程序的捆綁包已不可用</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下載原始 APK</string>
     <string name="home_download_instructions_steps_title">步驟如下：</string>
     <string name="home_download_instructions_step1">按下下方的「%1$s」按鈕</string>
-    <string name="home_download_instructions_step2_part1">向下捲動網頁，按下</string>
+    <string name="home_download_instructions_step2_part1">向下捲動網頁並按下</string>
     <string name="home_download_instructions_download_button_toast">在網站上按下下載，而不是在這裡 😊</string>
     <string name="home_download_instructions_step3">等待下載完成後，&lt;b&gt;先不要安裝&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">等待下載完成後，&lt;b&gt;安裝&lt;/b&gt; APK</string>
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">這個應用程式沒有可用的修補</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
-    <string name="expert_mode_subtitle_extended">已選擇 %1$d/%2$d 個修補</string>
     <string name="expert_mode_search">搜尋修補</string>
     <string name="expert_mode_proceed">進行修補</string>
     <string name="expert_mode_disable_all">停用全部</string>
@@ -160,12 +159,10 @@
     <string name="home_app_info_delete_item_patched_apk">修補後的 APK 檔案</string>
     <string name="home_app_info_delete_item_original_apk">原始 APK 檔案</string>
     <string name="home_app_info_delete_preservation_note">你的修補選擇和選項將保留以供未來修補使用</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">已移除儲存選擇中的 %d 個過舊修補</string>
     <string name="home_app_info_patches_name_default">修補</string>
     <string name="home_app_info_patches_name_fallback">未命名</string>
     <string name="home_app_info_patches_replace_fail">無法匯入修補：%s</string>
     <string name="home_app_info_repatch_no_original_apk">找不到原始 APK。無法重新修補這個應用程式</string>
-    <string name="home_app_info_repatch_requires_original">重新修補需要原始 APK 檔案</string>
     <string name="home_app_info_original_package_name">原始套件名稱</string>
     <string name="home_app_info_applied_patches">已套用修補</string>
     <string name="home_app_info_patch_source_used">使用的修補來源</string>
@@ -179,12 +176,18 @@
     <string name="home_app_info_app_deleted_description">這個應用程式已在 Manager 外移除。重新修補以復原功能</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">根模式需要在修補之前將原始 APK 安裝在您的裝置上</string>
-    <string name="root_gmscore_excluded">GmsCore 支援性修補在 Root 模式中已排除</string>
+    <string name="root_gmscore_excluded">GmsCore 支援性修補在 root 模式中已排除</string>
+    <string name="root_pre_patch_installer_title">選擇安裝方式</string>
+    <string name="root_pre_patch_installer_description">你的裝置擁有 root 權限。請選擇你想要如何安裝修補後的應用程式</string>
+    <string name="root_pre_patch_installer_mount_title">Root 掛載</string>
+    <string name="root_pre_patch_installer_mount_description">將修補後的 APK 掛載至原始應用程式之上。不需要 GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">標準安裝</string>
+    <string name="root_pre_patch_installer_standard_description">作為獨立應用程式安裝並支援 GmsCore。修補完成後請選擇安裝方式（系統安裝程式、Shizuku 等）</string>
+    <string name="root_pre_patch_installer_hint">安裝方式決定了將包含哪些修補，且在修補開始後即無法變更</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">已將錯誤複製到剪貼簿</string>
     <string name="patcher_error_log">錯誤記錄檔</string>
     <string name="patcher_error_technical">技術細節</string>
-    <string name="patcher_patches_progress">%1$d／%2$d 項修補</string>
     <string name="patcher_long_step_warning">這項步驟可能需要一些時間。請稍候…</string>
     <string name="patcher_installing_subtitle">即將就緒，稍安勿躁！🎸</string>
     <string name="patcher_success_title">全部完成！🎉</string>
@@ -250,11 +253,11 @@
     <string name="patcher_process_exit_message">修補程式程序結束，傳回代碼 %1$d</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
-    <string name="install_timeout_message">安裝未完成，請檢查系統安裝對話方塊，然後再試一次</string>
+    <string name="install_timeout_message">安裝未完成。請檢查系統安裝對話方塊，然後再試一次</string>
     <string name="save_apk_success">APK 已儲存</string>
     <string name="saved_app_export_failed">無法匯出已修補的應用程式</string>
     <string name="saved_app_removed_toast">已移除儲存的修補應用程式</string>
-    <string name="saved_app_copy_removed_toast">已移除儲存的副本</string>
+    <string name="saved_app_copy_removed_toast">已移除儲存的複本</string>
     <string name="saved_app_launch_unavailable">在開啟應用程式之前安裝應用程式</string>
     <string name="package_name">套件名稱</string>
     <string name="failed_to_mount">無法安裝：%s</string>
@@ -279,9 +282,10 @@
     <string name="settings_appearance_system">系統</string>
     <string name="settings_appearance_light">淺色</string>
     <string name="settings_appearance_dark">深色</string>
-    <string name="settings_appearance_black">黑色</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">強調色</string>
+    <string name="settings_appearance_pure_black">純黑色</string>
+    <string name="settings_appearance_pure_black_description">為 OLED 螢幕使用純黑背景</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">應用程式語言</string>
     <string name="settings_appearance_app_language_current">目前語言</string>
@@ -304,7 +308,7 @@
     <string name="settings_advanced_updates_use_prereleases_description">及早使用最新的修補與 Manager 功能</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">進階設定</string>
-    <string name="settings_advanced_expert_mode">進階模式</string>
+    <string name="settings_advanced_expert_mode">專家模式</string>
     <string name="settings_advanced_expert_mode_description">啟用進階功能和自訂設定選項</string>
     <string name="settings_advanced_strip_unused_libs">刪除未使用的原生函式庫</string>
     <string name="settings_advanced_strip_unused_libs_description">刪除不支援的 CPU 架構原生函式庫修補的應用程式</string>
@@ -323,7 +327,7 @@
     <string name="settings_advanced_patch_options_youtube_description">主題、品牌、標頭和 Shorts 選項</string>
     <string name="settings_advanced_patch_options_youtube_music_description">主題和品牌選項</string>
     <string name="settings_advanced_patch_options_restart_message">變更修補選項需要重新修補應用程式才能生效</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">在進階模式下，修補選項將在修補過程中可用</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">在專家模式下，修補選項將在修補過程中可用</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">應用程式主題色彩</string>
     <string name="settings_advanced_patch_options_theme_colors_description">變更背景色彩</string>
@@ -407,7 +411,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">安裝的 Shizuku 版本不受支援</string>
     <string name="installer_action_open_shizuku">開啟 Shizuku</string>
     <string name="installer_hint_generic">安裝失敗。重試或切換到不同的安裝程式</string>
-    <string name="installer_hint_blocked">Android 阻止了安裝。檢查 Play Protect 或安全設定</string>
+    <string name="installer_hint_blocked">Android 已禁止安裝。請檢查 Play 安全防護或安全設定</string>
     <string name="installer_hint_conflict">已安裝具有相同套件名稱的其他應用程式。請先將其解除安裝後再繼續</string>
     <string name="installer_hint_incompatible">APK 與這部裝置或 Android 版本不相容</string>
     <string name="installer_hint_invalid">APK 無效或損毀</string>
@@ -419,10 +423,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_success">%1$s 報告成功安裝</string>
     <string name="installer_unavailable_title">%s 未能使用</string>
     <string name="installer_unavailable_message">您的首選安裝程式 (%s) 目前不可用。您可以修復問題並重試，或改用標準安裝程式</string>
-    <string name="installer_unavailable_shizuku_hint">確保 Shizuku 正在執行並授予此應用程式權限</string>
+    <string name="installer_unavailable_shizuku_hint">確保 Shizuku 正在執行並授予這個應用程式權限</string>
     <string name="installer_use_standard">使用標準</string>
     <string name="settings_prompt_installer_on_install">安裝時提示安裝程式</string>
-    <string name="settings_prompt_installer_on_install_description">每次安裝修補應用程式時顯示安裝程式選擇對話框</string>
+    <string name="settings_prompt_installer_on_install_description">每次安裝修補應用程式時顯示安裝程式選擇對話方塊</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">效能</string>
     <string name="settings_system_process_runtime">執行時間</string>
@@ -438,12 +442,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_export">匯入與匯出</string>
     <string name="settings_system_import_keystore">匯入金鑰庫</string>
     <string name="settings_system_import_keystore_description">匯入自訂金鑰庫</string>
-    <string name="settings_system_import_keystore_dialog_title">輸入金鑰庫認證資訊</string>
+    <string name="settings_system_import_keystore_dialog_title">輸入金鑰庫憑證資訊</string>
     <string name="settings_system_import_keystore_dialog_description">你需要輸入金鑰庫的憑證才能匯入它</string>
     <string name="settings_system_import_keystore_dialog_alias_field">使用者名稱（別名）</string>
     <string name="settings_system_import_keystore_dialog_password_field">密碼</string>
     <string name="settings_system_import_keystore_dialog_button">匯入</string>
-    <string name="settings_system_import_keystore_wrong_credentials">金鑰庫認證資訊錯誤</string>
+    <string name="settings_system_import_keystore_wrong_credentials">金鑰庫憑證資訊錯誤</string>
     <string name="settings_system_import_keystore_success">已匯入金鑰庫</string>
     <string name="settings_system_import_keystore_failed">無法匯入金鑰庫</string>
     <string name="settings_system_export_keystore">匯出金鑰庫</string>
@@ -454,13 +458,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">隱藏密碼</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
     <string name="settings_system_import_manager_settings">匯入管理員設定</string>
-    <string name="settings_system_import_manager_settings_description">從 JSON 檔案復原管理員設定</string>
-    <string name="settings_system_import_manager_settings_fail">無法匯入管理員設定：%s</string>
+    <string name="settings_system_import_manager_settings_description">從 JSON 檔案還原 Manger 設定</string>
+    <string name="settings_system_import_manager_settings_fail">無法匯入 Manger 設定：%s</string>
     <string name="settings_system_import_manager_settings_success">已匯入管理員設定</string>
     <string name="settings_system_export_manager_settings">匯出管理員設定</string>
-    <string name="settings_system_export_manager_settings_description">儲存管理員設定到 JSON 檔案</string>
-    <string name="settings_system_export_manager_settings_fail">無法匯出管理員設定：%s</string>
-    <string name="settings_system_export_manager_settings_success">已匯出管理員設定</string>
+    <string name="settings_system_export_manager_settings_description">將 Manger 設定儲存到 JSON 檔案</string>
+    <string name="settings_system_export_manager_settings_fail">無法匯出 Manger 設定：%s</string>
+    <string name="settings_system_export_manager_settings_success">已匯出 Manger 設定</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">偵錯</string>
     <string name="settings_system_export_debug_logs">匯出偵錯記錄</string>
@@ -488,12 +492,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">修補選擇</string>
     <string name="settings_system_patch_selections_description">管理已儲存的修補選擇和選項。這些在應用程式移除後仍然存在</string>
-    <string name="settings_system_patch_selections_description_short">保留供未來修補使用</string>
-    <string name="settings_system_patch_selections_empty">沒有已儲存的修補選擇</string>
-    <string name="settings_system_patch_selections_has_options">有選項</string>
-    <string name="settings_system_patch_selections_patches_options">修補選擇</string>
-    <string name="settings_system_patch_selection_delete_title">刪除修補選擇</string>
-    <string name="settings_system_patch_selection_deleted">已刪除修補選擇</string>
+    <string name="settings_system_patch_selection_no_saved">沒有已儲存的修補選擇</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">關於</string>
     <string name="settings_system_share_website">分享網站</string>
@@ -522,49 +521,50 @@ Morphe 以開源為核心，仰賴社群的意見與貢獻來驅動未來的創�
     <string name="not_installed">未安裝</string>
     <string name="view">檢視</string>
     <string name="search">搜尋</string>
-    <string name="search_no_results">沒有找到結果</string>
+    <string name="search_no_results">找不到結果</string>
     <string name="any_version">任何</string>
     <string name="enabled">已啟用</string>
-    <string name="disabled">停用</string>
+    <string name="disabled">已停用</string>
     <string name="selected">已選取</string>
     <string name="not_selected">未選取</string>
     <string name="rename">重新命名</string>
+    <string name="import_">匯入</string>
     <string name="export">匯出</string>
     <string name="download">下載</string>
     <string name="less">較少</string>
     <string name="expand">展開</string>
     <string name="expanded">已展開</string>
-    <string name="collapse">折疊</string>
-    <string name="collapsed">已折疊</string>
+    <string name="collapse">收合</string>
+    <string name="collapsed">已收合</string>
     <string name="available">可用</string>
     <string name="continue_">繼續</string>
     <string name="version">版本</string>
-    <string name="patch">修補程式</string>
+    <string name="patch">修補</string>
     <string name="repatch">重新修補</string>
     <string name="open">開啟</string>
     <string name="mount">掛載</string>
     <string name="mounted">已掛載</string>
     <string name="unmounted">已解除掛載</string>
-    <string name="remount">重新掛接</string>
+    <string name="remount">重新掛載</string>
     <string name="install">安裝</string>
     <string name="installed">已安裝</string>
     <string name="reinstall">重新安裝</string>
     <string name="uninstall">解除安裝</string>
-    <string name="uninstalled">已移除</string>
+    <string name="uninstalled">已解除安裝</string>
     <string name="save">儲存</string>
     <string name="saved">已儲存</string>
     <string name="update">更新</string>
-    <string name="installing_ellipsis">正在安裝…</string>
-    <string name="mounting_ellipsis">正在掛載…</string>
+    <string name="installing_ellipsis">安裝中…</string>
+    <string name="mounting_ellipsis">掛載中…</string>
     <string name="unmounting_ellipsis">正在解除掛載…</string>
-    <string name="importing_ellipsis">正在匯入…</string>
+    <string name="importing_ellipsis">匯入…</string>
     <string name="changelog">查看變更紀錄</string>
     <string name="changelog_description">查看本次更新的最新變更</string>
     <string name="changelog_loading">正在載入變更紀錄</string>
     <string name="changelog_download_fail">無法下載變更紀錄：%s</string>
     <string name="changelog_retry">重試</string>
     <string name="changelog_empty">沒有可用的變更紀錄</string>
-    <string name="no_network_toast">無法連線到網路</string>
+    <string name="no_network_toast">沒有可用的網際網路連線</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
     <string name="update_completed">更新已安裝</string>
@@ -583,5 +583,5 @@ Morphe 以開源為核心，仰賴社群的意見與貢獻來驅動未來的創�
     <string name="minutes_ago">%s 分鐘前</string>
     <string name="hours_ago">%s 小時前</string>
     <string name="days_ago">%s 天前</string>
-    <string name="invalid_date">無效日期</string>
+    <string name="invalid_date">日期無效</string>
 </resources>

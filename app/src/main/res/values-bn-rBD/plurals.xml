@@ -12,10 +12,6 @@
         <item quantity="one">%d এপিকি ফাইল</item>
         <item quantity="other">%d এপিকি ফাইলসমূহ</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d নির্বাচন সংরক্ষিত</item>
-        <item quantity="other">%d নির্বাচন সংরক্ষিত</item>
-    </plurals>
     <plurals name="sources_dialog_disabled_toast">
         <item quantity="one">ডিসাবল্ড %d উৎস</item>
         <item quantity="other">ডিসাবল্ড %d উৎসসমূহ</item>
@@ -23,5 +19,13 @@
     <plurals name="sources_dialog_enabled_toast">
         <item quantity="one">এনাবল্ড %d উৎস</item>
         <item quantity="other">এনাবল্ড %d উৎসসমূহ</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">অপসারণ করা হয়েছে %1$d বিলুপ্ত প্যাচ থেকে সংরক্ষিত নির্বাচন থেকে</item>
+        <item quantity="other">অপসারণ করা হয়েছে %1$d বিলুপ্ত প্যাচ থেকে সংরক্ষিত নির্বাচন থেকে</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d উৎস ইনস্টল করা হয়েছে</item>
+        <item quantity="other">%1$d উৎস ইনস্টল করা হয়েছে</item>
     </plurals>
 </resources>

@@ -12,10 +12,6 @@
         <item quantity="one">%d एपीके फाइल</item>
         <item quantity="other">%d एपीके फाइलें</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d सेलेक्शन सहेजा गया</item>
-        <item quantity="other">%d सेलेक्शन सहेजे गए</item>
-    </plurals>
     <plurals name="sources_dialog_disabled_toast">
         <item quantity="one">%d स्रोत अक्षम किया गया</item>
         <item quantity="other">%d स्रोत अक्षम किए गए</item>
@@ -23,5 +19,13 @@
     <plurals name="sources_dialog_enabled_toast">
         <item quantity="one">%d स्रोत सक्षम किया गया</item>
         <item quantity="other">%d स्रोत सक्षम किए गए</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Removed %1$d पुरानी पट्टी से बचे हुए चयन को हटा दिया गया</item>
+        <item quantity="other">Removed %1$d पुरानी पट्टियों को बचे हुए चयन से हटा दिया गया</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d स्रोत स्थापित किए गए</item>
+        <item quantity="other">%1$d स्रोत स्थापित किए गए</item>
     </plurals>
 </resources>

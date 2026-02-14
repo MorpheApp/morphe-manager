@@ -13,7 +13,7 @@
     <string name="home_update_error">Помилка оновлення</string>
     <string name="home_update_error_subtitle">Перевірте підключення до Інтернету та спробуйте знову</string>
     <string name="home_updating_sources">Оновлення джерел…</string>
-    <string name="home_update_progress">Оброблено джерел %1$d/%2$d</string>
+    <string name="home_update_progress_format">%1$s оброблено</string>
     <string name="home_update_success">Оновлення джерел завершено</string>
     <string name="home_update_success_subtitle">Ваші джерела актуальні</string>
     <string name="home_sources_are_loading">Джерела завантажуються, будь ласка, зачекайте…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">На каві та хороших оновленнях</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Джерела патчів</string>
-    <string name="sources_management_subtitle">%d джерел встановлено</string>
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_management_date_added">Додано</string>
@@ -56,15 +55,12 @@
     <string name="sources_dialog_delete_confirm_message">Видалити джерело \"%s\"? Цю дію неможливо скасувати</string>
     <string name="sources_dialog_remote">Віддалене</string>
     <string name="sources_dialog_remote_url">URL джерела</string>
-    <string name="sources_dialog_remote_url_formats">"Приклади:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Приклади:</string>
     <string name="sources_dialog_local">Локальне</string>
     <string name="sources_dialog_local_file">Виберіть файл джерела патчів</string>
     <string name="sources_dialog_local_file_description">Виберіть файл джерела патчів .mpp зі сховища</string>
     <string name="sources_dialog_local_change_file">Змінити файл</string>
-    <string name="sources_dialog_preinstalled">Попередньо встановлено</string>
+    <string name="sources_dialog_preinstalled">Вбудоване</string>
     <string name="sources_update_success">Оновлення успішне</string>
     <string name="sources_update_unavailable">Оновлення недоступне</string>
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
@@ -78,6 +74,10 @@
     <string name="home_apk_availability_unpatched_label">Непатчена</string>
     <string name="home_apk_availability_yes">Так, у мене є</string>
     <string name="home_apk_availability_no">Ні, допоможіть мені його знайти</string>
+    <string name="home_apk_use_saved_with_version">Збережений APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Немає збереженого APK файлу. Для патчінгу потрібно буде знову вибрати APK файл</string>
+    <string name="home_app_info_repatch_no_bundle_info">Неможливо визначити який пакет був використаний для цього додатку</string>
+    <string name="home_app_info_repatch_bundle_not_available">Пакет використаний для цього додатку більше не доступний</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Завантажити оригінальний APK файл</string>
     <string name="home_download_instructions_steps_title">Інструкції:</string>
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Для цього застосунку немає патчів</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експертний режим</string>
-    <string name="expert_mode_subtitle_extended">Вибрано патчів: %1$d з %2$d</string>
     <string name="expert_mode_search">Пошук патчів</string>
     <string name="expert_mode_proceed">Перейти до патчінгу</string>
     <string name="expert_mode_disable_all">Вимкнути всі</string>
@@ -160,12 +159,10 @@
     <string name="home_app_info_delete_item_patched_apk">Патчений APK файл</string>
     <string name="home_app_info_delete_item_original_apk">Оригінальний APK файл</string>
     <string name="home_app_info_delete_preservation_note">Вибрані вами патчі та параметри будуть збережені для майбутнього патчінгу</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Видалено %d застарілих патчів зі збереженого вибору</string>
     <string name="home_app_info_patches_name_default">Патчі</string>
     <string name="home_app_info_patches_name_fallback">Без назви</string>
     <string name="home_app_info_patches_replace_fail">Не вдалося імпортувати патчі: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Оригінальний APK файл не знайдено. Неможливо перепатчити цей застосунок</string>
-    <string name="home_app_info_repatch_requires_original">Для перепатчінгу потрібен оригінальний APK файл</string>
     <string name="home_app_info_original_package_name">Оригінальна назва пакета</string>
     <string name="home_app_info_applied_patches">Застосовані патчі</string>
     <string name="home_app_info_patch_source_used">Використано джерело патчів</string>
@@ -180,11 +177,17 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Режим root вимагає, щоб оригінальний APK файл був встановлений на вашому пристрої перед патчінгом</string>
     <string name="root_gmscore_excluded">Патч підтримки GmsCore виключено у режимі root</string>
+    <string name="root_pre_patch_installer_title">Виберіть спосіб встановлення</string>
+    <string name="root_pre_patch_installer_description">Ваш пристрій має root-доступ. Виберіть, як ви хочете встановити патчений застосунок</string>
+    <string name="root_pre_patch_installer_mount_title">Root монтування</string>
+    <string name="root_pre_patch_installer_mount_description">Монтувати патчений APK файл поверх стандартного застосунку. GmsCore не потрібен</string>
+    <string name="root_pre_patch_installer_standard_title">Стандартне встановлення</string>
+    <string name="root_pre_patch_installer_standard_description">Встановити як окремий застосунок з підтримкою GmsCore. Виберіть інсталятор (Системний інсталятор, Shizuku тощо) після патчінгу</string>
+    <string name="root_pre_patch_installer_hint">Спосіб встановлення визначає, які патчі включено та які не можна змінити після патчінгу</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Помилку скопійовано у буфер обміну</string>
     <string name="patcher_error_log">Журнал помилок</string>
     <string name="patcher_error_technical">Технічні деталі</string>
-    <string name="patcher_patches_progress">%1$d / %2$d патчів</string>
     <string name="patcher_long_step_warning">Цей крок може тривати деякий час. Будь ласка, зачекайте…</string>
     <string name="patcher_installing_subtitle">Майже готово до драйву! 🎸</string>
     <string name="patcher_success_title">Все готово! 🎉</string>
@@ -279,9 +282,10 @@
     <string name="settings_appearance_system">Системна</string>
     <string name="settings_appearance_light">Світла</string>
     <string name="settings_appearance_dark">Темна</string>
-    <string name="settings_appearance_black">Чорна</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Акцентний колір</string>
+    <string name="settings_appearance_pure_black">Повністю чорний</string>
+    <string name="settings_appearance_pure_black_description">Використовуйте справжні чорні фони для OLED дисплеїв</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Мова застосунку</string>
     <string name="settings_appearance_app_language_current">Поточна мова</string>
@@ -424,7 +428,7 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Переконайтеся, що Shizuku запущено, і менеджеру Морфе надано дозвіл</string>
     <string name="installer_use_standard">Використати стандартний</string>
     <string name="settings_prompt_installer_on_install">Вибір інсталятора при встановленні</string>
-    <string name="settings_prompt_installer_on_install_description">Показувати діалогове вікно вибору інсталятора під час встановлення патченого застосунку</string>
+    <string name="settings_prompt_installer_on_install_description">Показувати діалогове вікно вибору інсталятора щоразу, коли ви встановлюєте патчений застосунок</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Продуктивність</string>
     <string name="settings_system_process_runtime">Процес патчінгу</string>
@@ -490,19 +494,14 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Вибрані патчі</string>
     <string name="settings_system_patch_selections_description">Керування збереженими вибраними патчами та параметрами. Вони залишаються після видалення застосунку</string>
-    <string name="settings_system_patch_selections_description_short">Збережено для майбутнього патчінгу</string>
-    <string name="settings_system_patch_selections_empty">Немає збережених вибраних патчів</string>
-    <string name="settings_system_patch_selections_has_options">Має опції</string>
-    <string name="settings_system_patch_selections_patches_options">Опції патчів</string>
-    <string name="settings_system_patch_selection_delete_title">Видалити вибір патчів</string>
-    <string name="settings_system_patch_selection_deleted">Вибір патчів видалено</string>
+    <string name="settings_system_patch_selection_no_saved">Немає збережених вибраних патчів</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Про нас</string>
     <string name="settings_system_share_website">Поділитися вебсайтом</string>
     <string name="settings_system_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
-    <string name="settings_system_manager_description">"Morphe це експериментальний проєкт з відкритим кодом, орієнтований на сучасний та оптимізований патчінг популярних Android-застосунків.
+    <string name="settings_system_manager_description">"Morphe це експериментальний проєкт з відкритим кодом, орієнтований на сучасний та оптимізований патчінг популярних Android застосунків
 
-З відкритим кодом у своїй основі, Morphe процвітає завдяки відгукам та внескам спільноти, які стимулюють майбутні інновації."</string>
+З відкритим кодом у своїй основі, Morphe процвітає завдяки відгукам та внескам спільноти, які стимулюють майбутні інновації"</string>
     <!-- Shared strings -->
     <string name="patches">Патчі</string>
     <string name="home">Головна</string>
@@ -531,6 +530,7 @@ morphe_header_custom_dark.png
     <string name="selected">Вибрано</string>
     <string name="not_selected">Не вибрано</string>
     <string name="rename">Перейменувати</string>
+    <string name="import_">Імпорт</string>
     <string name="export">Експорт</string>
     <string name="download">Завантажити</string>
     <string name="less">Менше</string>

@@ -77,7 +77,6 @@
     <string name="root_gmscore_excluded">GmsCore સપોર્ટ પેચ રૂટ મોડમાં બાકાત છે</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ભૂલ ક્લિપબોર્ડ પર કૉપિ કરવામાં આવેલ છે</string>
-    <string name="patcher_patches_progress">%1$d / %2$d પેચીસ</string>
     <string name="patcher_long_step_warning">આ પગલામાં થોડો સમય લાગી શકે છે. કૃપા કરીને રાહ જુઓ...</string>
     <string name="patcher_installing_subtitle">લગભગ નાચવા માટે તૈયાર! 🎸</string>
     <string name="patcher_success_title">બધું થઈ ગયું! 🎉</string>

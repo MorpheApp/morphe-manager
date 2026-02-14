@@ -12,10 +12,6 @@
         <item quantity="one">%d file APK</item>
         <item quantity="other">%d file APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d selezione salvata</item>
-        <item quantity="other">%d selezioni salvate</item>
-    </plurals>
     <plurals name="sources_dialog_disabled_toast">
         <item quantity="one">Disabilitato %d fonte</item>
         <item quantity="other">Disabilitate %d fonti</item>
@@ -23,5 +19,13 @@
     <plurals name="sources_dialog_enabled_toast">
         <item quantity="one">Abilitato %d fonte</item>
         <item quantity="other">Abilitate %d fonti</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Rimosso %1$d patch obsoleto dalla selezione salvata</item>
+        <item quantity="other">Rimosse %1$d patch obsolete dalla selezione salvata</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d fonte installata</item>
+        <item quantity="other">%1$d fonti installate</item>
     </plurals>
 </resources>

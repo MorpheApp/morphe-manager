@@ -13,7 +13,7 @@
     <string name="home_update_error">Päivitys epäonnistui</string>
     <string name="home_update_error_subtitle">Tarkista internet-yhteytesi ja yritä uudelleen</string>
     <string name="home_updating_sources">Päivitetään lähteitä…</string>
-    <string name="home_update_progress">%1$d/%2$d lähdettä käsitelty</string>
+    <string name="home_update_progress_format">%1$s onnistuttiin</string>
     <string name="home_update_success">Lähteiden päivitys valmis</string>
     <string name="home_update_success_subtitle">Lähteetsinä päivitety</string>
     <string name="home_sources_are_loading">Lähteet ladassa, odota…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Voimanamme kofeiini ja hyvät päivitykset</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tukemisen lähteet</string>
-    <string name="sources_management_subtitle">%d lähdettä asennettu</string>
     <string name="sources_management_open_in_browser">Avaa linkit selaimessa</string>
     <string name="sources_management_failed_to_open_url">Ei toimi linkin avaamis</string>
     <string name="sources_management_date_added">Lisätty</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Poista lähde \"%s\"? Tätä ei voi peruuttaa.</string>
     <string name="sources_dialog_remote">Etämain</string>
     <string name="sources_dialog_remote_url">Lähde-URL</string>
-    <string name="sources_dialog_remote_url_formats">"Esimerkkejä:
-• github.com/omistaja/projekti
-• raw.githubusercontent.com/omistaja/projekti/main/patches-bundle.json
-• esimerkki.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Esimerkkejä:</string>
     <string name="sources_dialog_local">Kotima</string>
     <string name="sources_dialog_local_file">Valitse patch- lähde-tiedosto</string>
     <string name="sources_dialog_local_file_description">Valitse .mpp patch- lähde-tiedosto tallennokse</string>
@@ -78,6 +74,10 @@ Sovittuvien versioiden:"</string>
     <string name="home_apk_availability_unpatched_label">Ei korjattuja</string>
     <string name="home_apk_availability_yes">Kyllä, minulla on se</string>
     <string name="home_apk_availability_no">Ei, auta minua löytämään se</string>
+    <string name="home_apk_use_saved_with_version">Käytä tallennettua APK:tä (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Ei tallennettua APK:tä. Patching vaatii APK-tiedoston uudelleenvalinnan</string>
+    <string name="home_app_info_repatch_no_bundle_info">Ei voida määrittää, kumpi paketti on käytetty tässä sovelluksessa</string>
+    <string name="home_app_info_repatch_bundle_not_available">Käytetyllä paketilla ei ole enää saatavilla</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Lataa alkuperäinen APK</string>
     <string name="home_download_instructions_steps_title">Ohjeet:</string>
@@ -102,7 +102,6 @@ Sovittuvien versioiden:"</string>
     <string name="home_no_patches_for_app">Ei patcheja saatavilla tälle sovellukselle</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Asiantuntijan tila</string>
-    <string name="expert_mode_subtitle_extended">%1$d/%2$d patchea valittu</string>
     <string name="expert_mode_search">Etsi patcheja</string>
     <string name="expert_mode_proceed">Jatka patchaamista</string>
     <string name="expert_mode_disable_all">Poista kaikki</string>
@@ -160,12 +159,10 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="home_app_info_delete_item_patched_apk">Korjattu APK-tiedosto</string>
     <string name="home_app_info_delete_item_original_apk">Alkuperäinen APK-tiedosto</string>
     <string name="home_app_info_delete_preservation_note">Sovelluksesi korjausvalinnat ja asetukset säilytetään tulevaisuuden korjaukseen</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Poistettiin tallennetusta valinnosta %d vanhentuneita korjauspäivityksiä</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Ei-nimeltä</string>
     <string name="home_app_info_patches_replace_fail">Ei saatu tuoda patches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Alkuperäistä APK-tiedostoa ei löytynyt. Ei voida korjastaa tätä sovellusta.</string>
-    <string name="home_app_info_repatch_requires_original">Repatch vaatii alkuperäisen APK-tiedoston</string>
     <string name="home_app_info_original_package_name">Alkuperäinen paketin nimi</string>
     <string name="home_app_info_applied_patches">Käytetyit patches</string>
     <string name="home_app_info_patch_source_used">Käytettyä patch-koodia</string>
@@ -180,11 +177,17 @@ Oletko varma, että haluat jatkaa?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Juurtimemoodi vaatii alkuperäisen APK-tiedoston asennuksen laitteellesi ennen korjausta.</string>
     <string name="root_gmscore_excluded">GmsCore-tukikorjaus on poissuljettu juuritilassa</string>
+    <string name="root_pre_patch_installer_title">Valitse asennusmenetelmä</string>
+    <string name="root_pre_patch_installer_description">Laitteellesi on juuriasetus. Valitse, miten haluat asentaa korjattua sovellusta.</string>
+    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_description">Asenna korjattu APK varustettuna sovelluksena. Ei tarvita GmsCoreä.</string>
+    <string name="root_pre_patch_installer_standard_title">Perusasennus</string>
+    <string name="root_pre_patch_installer_standard_description">Asenna erillisenä sovelluksena GmsCore-tukiin. Valitse asennin (järjestelmän asennin, Shizuku, jne.) korjauksen jälkeen.</string>
+    <string name="root_pre_patch_installer_hint">Asennusmenetelmä määrää, minkälaisten korjaukset sisällytään ja sitä ei voi muuttaa korjauksen jälkeen.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Virhe kopioitu leikepöydälle</string>
     <string name="patcher_error_log">Virhekirjoitus</string>
     <string name="patcher_error_technical">Teknisiä tietoja</string>
-    <string name="patcher_patches_progress">%1$d / %2$d korjausta</string>
     <string name="patcher_long_step_warning">Tämä vaihe voi kestää jonkin aikaa. Odota…</string>
     <string name="patcher_installing_subtitle">Melkein valmista! 🎸</string>
     <string name="patcher_success_title">Valmis! 🎉</string>
@@ -279,9 +282,10 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_appearance_system">Järjestelmä</string>
     <string name="settings_appearance_light">Valko</string>
     <string name="settings_appearance_dark">Musta</string>
-    <string name="settings_appearance_black">Mustavalko</string>
     <string name="settings_appearance_dynamic">Materiaalinen sinetinäyttö</string>
     <string name="settings_appearance_accent_color">Kulmaväri</string>
+    <string name="settings_appearance_pure_black">Puroa musta</string>
+    <string name="settings_appearance_pure_black_description">Käytä todellisia mustia taustoja OLED-näytöissä.</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Sovelluksen kieli</string>
     <string name="settings_appearance_app_language_current">Nykyinen kieli</string>
@@ -490,12 +494,6 @@ Kuvien mitat on oltava seuraavasti:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Korjausvalinnat</string>
     <string name="settings_system_patch_selections_description">Hallinnoi tallennettuja korjausvalintoja ja asetuksia. Nämä säilytetään sovelluksen poistamisen jälkeen</string>
-    <string name="settings_system_patch_selections_description_short">Tallennettu tulevaisuuden korjaukseen</string>
-    <string name="settings_system_patch_selections_empty">Ei tallennettuja korjausvalintoja</string>
-    <string name="settings_system_patch_selections_has_options">Sisältää asetuksia</string>
-    <string name="settings_system_patch_selections_patches_options">Korjausasetukset</string>
-    <string name="settings_system_patch_selection_delete_title">Poista korjausvalinta</string>
-    <string name="settings_system_patch_selection_deleted">Korjausvalinta poistettu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_share_website">Jaa verkkosivuston</string>
@@ -531,6 +529,7 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="selected">Valittu</string>
     <string name="not_selected">Ei valittu</string>
     <string name="rename">Nimeä uudelleen</string>
+    <string name="import_">Tuo</string>
     <string name="export">Vie</string>
     <string name="download">Lataa</string>
     <string name="less">Vähemmän</string>

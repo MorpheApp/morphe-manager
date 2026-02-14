@@ -13,7 +13,7 @@
     <string name="home_update_error">Η ενημέρωση απέτυχε</string>
     <string name="home_update_error_subtitle">Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά</string>
     <string name="home_updating_sources">Ενημέρωση πηγών…</string>
-    <string name="home_update_progress">%1$d/%2$d πηγές επεξεργάστηκαν</string>
+    <string name="home_update_progress_format">%1$s επεξεργάστηκε</string>
     <string name="home_update_success">Επανέκδοση πηγών ολοκληρώθηκε</string>
     <string name="home_update_success_subtitle">Οι πηγές σου είναι σε ημερομηνία</string>
     <string name="home_sources_are_loading">Οι πηγές φορτώνονται, παρακαλώ περιμένετε…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Τροφοδοτούμενοι από καφεΐνη και καλές επιδιορθώσεις</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Πηγές διαχείρισης</string>
-    <string name="sources_management_subtitle">%d πηγές εγκαταστάθηκαν</string>
     <string name="sources_management_open_in_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="sources_management_failed_to_open_url">Αποτυχία ανοίγματος URL</string>
     <string name="sources_management_date_added">Προσθήκη</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Διαγραφή πηγής «%s»? Αυτό δεν μπορεί να ανακτηθεί.</string>
     <string name="sources_dialog_remote">Διάternet</string>
     <string name="sources_dialog_remote_url">Διεύθυνση πηγής</string>
-    <string name="sources_dialog_remote_url_formats">"Παράδειγματα:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Παραδείγματα:</string>
     <string name="sources_dialog_local">Τοπικό</string>
     <string name="sources_dialog_local_file">Επιλογή αρχείου πηγής</string>
     <string name="sources_dialog_local_file_description">Επιλογή αρχείου .mpp για πηγή από την αποθήκευση</string>
@@ -78,6 +74,10 @@
     <string name="home_apk_availability_unpatched_label">Ανεπανόρθωτο</string>
     <string name="home_apk_availability_yes">Ναι, το έχω</string>
     <string name="home_apk_availability_no">Όχι, βοήθησέ με να το βρω</string>
+    <string name="home_apk_use_saved_with_version">Χρήση αποθηκευμένου APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Δεν υπάρχει αποθηκευμένο APK. Η επαναφορά θα απαιτήσει την επιλογή του αρχείου APK ξανά</string>
+    <string name="home_app_info_repatch_no_bundle_info">Δεν είναι δυνατός ο προσδιορισμός του πακέτου που χρησιμοποιήθηκε για αυτή την εφαρμογή</string>
+    <string name="home_app_info_repatch_bundle_not_available">Το πακέτο που χρησιμοποιήθηκε για αυτή την εφαρμογή δεν είναι πλέον διαθέσιμο</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Κατεβάστε την αρχική APK</string>
     <string name="home_download_instructions_steps_title">Οδηγίες:</string>
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Δεν υπάρχουν επεξεργασίες διαθέσιμες για αυτήν την εφαρμογή</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Επιτυχημένος τρόπος</string>
-    <string name="expert_mode_subtitle_extended">%1$d από %2$d επεξεργασίες επιλέχθηκαν</string>
     <string name="expert_mode_search">Αναζήτηση επεξεργασιών</string>
     <string name="expert_mode_proceed">Προχωράτε στην Επεξεργασία</string>
     <string name="expert_mode_disable_all">Απενεργοποιήστε όλα</string>
@@ -160,12 +159,10 @@
     <string name="home_app_info_delete_item_patched_apk">Επεξεργασμένο APK αρχείο</string>
     <string name="home_app_info_delete_item_original_apk">Αρχικό APK αρχείο</string>
     <string name="home_app_info_delete_preservation_note">Η επιλογή επεξεργασίας και οι επιλογές σου θα διατηρηθούν για μελλοντική επεξεργασία</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Εκκλείστηκαν %d παλιές αναθεματικές από την επιλεγμένη επιλογή</string>
     <string name="home_app_info_patches_name_default">Τροποποιήσεις</string>
     <string name="home_app_info_patches_name_fallback">Ανώνυμο</string>
     <string name="home_app_info_patches_replace_fail">Αποτυχία εισαγωγής τροποποιήσεων: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Δεν βρέθηκε το αρχικό APK. Δεν είναι δυνατή η επαναπαρασκευή αυτής της εφαρμογής.</string>
-    <string name="home_app_info_repatch_requires_original">Η επαναπροσθηση απαιτείται το αρχικό APK αρχείο</string>
     <string name="home_app_info_original_package_name">Όνομα πακέτου</string>
     <string name="home_app_info_applied_patches">%d τροποποιήσεις εφαρμογής</string>
     <string name="home_app_info_patch_source_used">Χρησιμοποιήθηκε πηγή αναθεώρησης</string>
@@ -180,11 +177,17 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Η λειτουργία ριζάς απαιτεί το αρχικό APK να είναι εγκατεστημένο στο διαχείριση του ριζάς.</string>
     <string name="root_gmscore_excluded">Η ενημέρωση GmsCore έχει εξαιρεθεί στη λειτουργία root</string>
+    <string name="root_pre_patch_installer_title">Επιλογή μεθόδου εγκατάστασης</string>
+    <string name="root_pre_patch_installer_description">Το συσκευή σας έχει πρόσβαση ριζικό. Επιλέξτε τον τρόπο εγκατάστασης της επαυξημένης εφαρμογής</string>
+    <string name="root_pre_patch_installer_mount_title">Μοντάζ Ριζικό</string>
+    <string name="root_pre_patch_installer_mount_description">Μοντάζ επαυξημένου APK πάνω από την εφαρμογή προεπιλογής. Δεν χρειάζεται GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">Επιλογή Εγκατάστασης</string>
+    <string name="root_pre_patch_installer_standard_description">Εγκατάσταση ως ξεχωριστή εφαρμογή με υποστήριξη GmsCore. Επιλέξτε εγκαταστάτη (Σύστημα εγκαταστάτη, Shizuku, κ.λπ.) μετά την επαυξημένη</string>
+    <string name="root_pre_patch_installer_hint">Η μέθοδος εγκατάστασης καθορίζει ποιες επαυξημένες είναι συμπεριλημμένες και δεν μπορεί να αλλάξει μετά την επαυξημένη</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="patcher_error_log">Καταγραφή σφαλμάτων</string>
     <string name="patcher_error_technical">Τεχνικές λεπτομέρειες</string>
-    <string name="patcher_patches_progress">%1$d / %2$d ενημερώσεις</string>
     <string name="patcher_long_step_warning">Αυτό το βήμα μπορεί να διαρκέσει λίγο. Παρακαλώ περιμένετε…</string>
     <string name="patcher_installing_subtitle">Σχεδόν έτοιμο για δράση! 🎸</string>
     <string name="patcher_success_title">Ολοκληρώθηκε! 🎉</string>
@@ -279,9 +282,10 @@
     <string name="settings_appearance_system">Συστήμενο</string>
     <string name="settings_appearance_light">Φως</string>
     <string name="settings_appearance_dark">Σκοτεινό</string>
-    <string name="settings_appearance_black">Μαύρο</string>
     <string name="settings_appearance_dynamic">Μαθηματικό You</string>
     <string name="settings_appearance_accent_color">Χρώμα προτίμησης</string>
+    <string name="settings_appearance_pure_black">Μαύρο Καθαρό</string>
+    <string name="settings_appearance_pure_black_description">Χρησιμοποιήστε μαύρα αληθινά φόντα για οθόνες OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Γλώσσα εφαρμογής</string>
     <string name="settings_appearance_app_language_current">Επιλεγμένη γλώσσα</string>
@@ -490,12 +494,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Διαχείριση αποθηκευμένων επιλογών επεξεργασιών</string>
     <string name="settings_system_patch_selections_description">Διαχείριση αποθηκευμένων επιλογών επεξεργασιών και επιλογών. Αυτές διατηρούνται μετά την απενεργοποίηση της εφαρμογής</string>
-    <string name="settings_system_patch_selections_description_short">Αποθηκευμένο για μελλοντική επεξεργασία</string>
-    <string name="settings_system_patch_selections_empty">Δεν υπάρχουν αποθηκευμένες επιλογές επεξεργασιών</string>
-    <string name="settings_system_patch_selections_has_options">Επιλέγει επιλογές επεξεργασιών</string>
-    <string name="settings_system_patch_selections_patches_options">Επιλογές επεξεργασιών</string>
-    <string name="settings_system_patch_selection_delete_title">Διαγραφή επιλογής επεξεργασιών</string>
-    <string name="settings_system_patch_selection_deleted">Η επιλογή επεξεργασιών διαγράφηκε</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Σχετικά με</string>
     <string name="settings_system_share_website">Κοινοποίηση ιστότοπου</string>
@@ -529,6 +527,7 @@ morphe_header_custom_dark.png
     <string name="selected">Επιλεγμένη</string>
     <string name="not_selected">Δεν επιλεγμένη</string>
     <string name="rename">Μετονομασία</string>
+    <string name="import_">Εισαγωγή</string>
     <string name="export">Εξαγωγή</string>
     <string name="download">Λήψη</string>
     <string name="less">Λιγότερα</string>

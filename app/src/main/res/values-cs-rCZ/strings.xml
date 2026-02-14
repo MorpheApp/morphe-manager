@@ -13,7 +13,7 @@
     <string name="home_update_error">Aktualizace selhala</string>
     <string name="home_update_error_subtitle">Zkontrolujte připojení k internetu a zkuste to znovu</string>
     <string name="home_updating_sources">Probíhá aktualizace zdrojů…</string>
-    <string name="home_update_progress">%1$d/%2$d zdrojů zpracováno</string>
+    <string name="home_update_progress_format">%1$s zpracováno</string>
     <string name="home_update_success">Aktualizace zdrojů dokončena</string>
     <string name="home_update_success_subtitle">Vaše zdroje jsou aktuální</string>
     <string name="home_sources_are_loading">Zdroje se načítají, počkejte prosím…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Poháněno kávou a dobrými záplatami</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
-    <string name="sources_management_subtitle">%d zdrojů nainstalováno</string>
     <string name="sources_management_open_in_browser">Otevřít v prohlížeči</string>
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
     <string name="sources_management_date_added">Přidáno</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Smazat zdroj \"%s\"? Tato akce je nevratná</string>
     <string name="sources_dialog_remote">Vzdálený</string>
     <string name="sources_dialog_remote_url">URL zdroje</string>
-    <string name="sources_dialog_remote_url_formats">"Příklady:
-• github.com/vlastník/repo
-• raw.githubusercontent.com/vlastník/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Příklady:</string>
     <string name="sources_dialog_local">Lokální</string>
     <string name="sources_dialog_local_file">Vybrat soubor zdroje záplat</string>
     <string name="sources_dialog_local_file_description">Vyberte .mpp soubor zdroje záplat z úložiště</string>
@@ -78,6 +74,10 @@ Kompatibilní verze:"</string>
     <string name="home_apk_availability_unpatched_label">Neupravený</string>
     <string name="home_apk_availability_yes">Ano, mám ji</string>
     <string name="home_apk_availability_no">Ne, pomozte mi ji najít</string>
+    <string name="home_apk_use_saved_with_version">Použít uložené APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Není uloženo žádné APK. Pro patchování bude třeba vybrat soubor APK znovu.</string>
+    <string name="home_app_info_repatch_no_bundle_info">Nelze určit, který balíček byl použit pro tuto aplikaci</string>
+    <string name="home_app_info_repatch_bundle_not_available">Balíček použitý pro tuto aplikaci již není k dispozici</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Stáhnout původní APK</string>
     <string name="home_download_instructions_steps_title">Postup:</string>
@@ -102,7 +102,6 @@ Kompatibilní verze:"</string>
     <string name="home_no_patches_for_app">Pro tuto aplikaci nejsou k dispozici žádné záplaty</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertní režim</string>
-    <string name="expert_mode_subtitle_extended">%1$d z %2$d záplat vybráno</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
@@ -160,12 +159,10 @@ Opravdu chcete pokračovat?"</string>
     <string name="home_app_info_delete_item_patched_apk">Záplatovaný soubor APK</string>
     <string name="home_app_info_delete_item_original_apk">Originální soubor APK</string>
     <string name="home_app_info_delete_preservation_note">Vaše výběry záplaty a nastavení budou uchovány pro budoucí záplaty.</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Odstraněno %d zastaralých oprav z uložené výběru</string>
     <string name="home_app_info_patches_name_default">Záplaty</string>
     <string name="home_app_info_patches_name_fallback">Bez názvu</string>
     <string name="home_app_info_patches_replace_fail">Selhalo importování záplat: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Originální soubor APK nebyl nalezen. Nelze opětovně záplatovat tuto aplikaci</string>
-    <string name="home_app_info_repatch_requires_original">Opětovné záplatování vyžaduje originální APK soubor</string>
     <string name="home_app_info_original_package_name">Původní název balíčku</string>
     <string name="home_app_info_applied_patches">Použité balíčky záplat</string>
     <string name="home_app_info_patch_source_used">Zdroje záplat</string>
@@ -180,11 +177,17 @@ Opravdu chcete pokračovat?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim root vyžaduje, aby před záplatováním byl na vašem zařízení nainstalován původní APK</string>
     <string name="root_gmscore_excluded">Záplata s podporou GmsCore je v root režimu vyloučena</string>
+    <string name="root_pre_patch_installer_title">Vyberte způsob instalace</string>
+    <string name="root_pre_patch_installer_description">Vaše zařízení má přístup root. Vyberte, jak chcete nainstalovat opatřenou aplikaci.</string>
+    <string name="root_pre_patch_installer_mount_title">Mount root</string>
+    <string name="root_pre_patch_installer_mount_description">Mount opatřený APK nad standardní aplikací. Nebožský GmsCore není potřeba</string>
+    <string name="root_pre_patch_installer_standard_title">Standardní instalace</string>
+    <string name="root_pre_patch_installer_standard_description">Instalujte jako oddělenou aplikaci s podporou GmsCore. Vyberte instalační program (Systémový instalační program, Shizuku atd.) po opatření</string>
+    <string name="root_pre_patch_installer_hint">Metoda instalace určuje, které opatření jsou zahrnuty a nelze je změnit po opatření</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="patcher_error_log">Protokol chyb</string>
     <string name="patcher_error_technical">Technické detaily</string>
-    <string name="patcher_patches_progress">%1$d / %2$d záplat</string>
     <string name="patcher_long_step_warning">Tento krok může chvíli trvat. Počkejte prosím…</string>
     <string name="patcher_installing_subtitle">Skoro hotovo! Připrav se na pořádnou jízdu! 🏎️</string>
     <string name="patcher_success_title">Vše hotovo! 🎉</string>
@@ -279,9 +282,10 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_appearance_system">Systém</string>
     <string name="settings_appearance_light">Světlé</string>
     <string name="settings_appearance_dark">Temné</string>
-    <string name="settings_appearance_black">Černé</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Barva akcentu</string>
+    <string name="settings_appearance_pure_black">Čistá černá</string>
+    <string name="settings_appearance_pure_black_description">Používejte pravé černé pozadí pro displeje OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Jazyk aplikace</string>
     <string name="settings_appearance_app_language_current">Aktuální jazyk</string>
@@ -490,12 +494,6 @@ Rozměry obrázků musí být následující:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Výběry záplaty</string>
     <string name="settings_system_patch_selections_description">Spravujte uložené výběry záplaty a nastavení. Tyto se udržují po odinstalaci aplikace.</string>
-    <string name="settings_system_patch_selections_description_short">Uložené pro budoucí záplaty</string>
-    <string name="settings_system_patch_selections_empty">Žádné uložené výběry záplaty</string>
-    <string name="settings_system_patch_selections_has_options">Má nastavení</string>
-    <string name="settings_system_patch_selections_patches_options">Nastavení záplaty</string>
-    <string name="settings_system_patch_selection_delete_title">Smazat výběr záplaty</string>
-    <string name="settings_system_patch_selection_deleted">Výběr záplaty smazán</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaci</string>
     <string name="settings_system_share_website">Sdílet webovou stránku</string>
@@ -531,6 +529,7 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="selected">Vybráno</string>
     <string name="not_selected">Nevybráno</string>
     <string name="rename">Přejmenovat</string>
+    <string name="import_">Importovat</string>
     <string name="export">Exportovat</string>
     <string name="download">Stáhnout</string>
     <string name="less">Méně</string>

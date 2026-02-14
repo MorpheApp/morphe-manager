@@ -13,7 +13,7 @@
     <string name="home_update_error">Güncelleme başarısız</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
     <string name="home_updating_sources">Kaynaklar güncelleniyor…</string>
-    <string name="home_update_progress">%1$d/%2$d kaynak işlendi</string>
+    <string name="home_update_progress_format">%1$s işlenmiştir</string>
     <string name="home_update_success">Kaynak güncellemesi tamamlandı</string>
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Kafein ve iyi yamalarla güçlendirilmiştir</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yama kaynakları</string>
-    <string name="sources_management_subtitle">%d kaynak yüklendi</string>
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_management_date_added">Eklendi</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Kaynak \"%s\"\'yi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</string>
     <string name="sources_dialog_remote">Uzak</string>
     <string name="sources_dialog_remote_url">Kaynak URL</string>
-    <string name="sources_dialog_remote_url_formats">"Örnekler:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Örnekler:</string>
     <string name="sources_dialog_local"> Yerel</string>
     <string name="sources_dialog_local_file">Yama kaynağı dosyası seçin</string>
     <string name="sources_dialog_local_file_description">Depolama alanından bir .mpp yama kaynağı dosyası seçin</string>
@@ -78,6 +74,10 @@
     <string name="home_apk_availability_unpatched_label">Yakınmıyan</string>
     <string name="home_apk_availability_yes">Evet, bende var</string>
     <string name="home_apk_availability_no">Hayır, bulmama yardım et</string>
+    <string name="home_apk_use_saved_with_version">Kayıtlı APK (v%s) kullanın</string>
+    <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Tespit için tekrar APK dosyası seçin</string>
+    <string name="home_app_info_repatch_no_bundle_info">Bu uygulama için hangi paket kullanıldığı belirlenemiyor</string>
+    <string name="home_app_info_repatch_bundle_not_available">Bu uygulama için kullanılan paket artık kullanılmıyor</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>
@@ -102,7 +102,7 @@
     <string name="home_no_patches_for_app">Bu uygulamaya ait yama mevcut değil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Uzman modu</string>
-    <string name="expert_mode_subtitle_extended">%1$d / %2$d yama seçildi</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d / %2$d seçildi</string>
     <string name="expert_mode_search">Yamaları ara</string>
     <string name="expert_mode_proceed">Yamalamaya Başla</string>
     <string name="expert_mode_disable_all">Hepsini devre dışı bırak</string>
@@ -160,12 +160,10 @@ Devam etmek istiyor musunuz?"</string>
     <string name="home_app_info_delete_item_patched_apk">Yama edilmiş APK dosyası</string>
     <string name="home_app_info_delete_item_original_apk">Orijinal APK dosyası</string>
     <string name="home_app_info_delete_preservation_note">Yama seçiminiz ve seçenekler gelecekteki yama için korunacak</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Silinen %d seçenekten %d eskiye uygun işlem kaldırıldı</string>
     <string name="home_app_info_patches_name_default">Yamalar</string>
     <string name="home_app_info_patches_name_fallback">Adlandırılmamış</string>
     <string name="home_app_info_patches_replace_fail">Yamalar içe aktarılamadı: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Orijinal APK bulunamadı. Bu uygulama tekrar yamalanamıyor</string>
-    <string name="home_app_info_repatch_requires_original">Yamalamak için orijinal APK dosyası gerekli</string>
     <string name="home_app_info_original_package_name">Orijinal paket adı</string>
     <string name="home_app_info_applied_patches">Uygulanan yamalar</string>
     <string name="home_app_info_patch_source_used">Kullanılan yama kaynağı</string>
@@ -180,13 +178,19 @@ Devam etmek istiyor musunuz?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'in cihazınızda yüklü olmasını gerektirir</string>
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
+    <string name="root_pre_patch_installer_title">Yükleme yöntemini seçin</string>
+    <string name="root_pre_patch_installer_description">Cihazın kök erişimi vardır. Uygulamayı yedeklemek istediğiniz yolu seçin</string>
+    <string name="root_pre_patch_installer_mount_title">Kök Dağıtım</string>
+    <string name="root_pre_patch_installer_mount_description">Uygulamayı yedekli APK ile stok uygulaması üzerine monte edin. GmsCore gerektirmez</string>
+    <string name="root_pre_patch_installer_standard_title">Standart Kurulum</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore desteği olan ayrı bir uygulama olarak kurun. Yedekleme sonra kurucuyu seçin (Sistem kurucusu, Shizuku vb.)</string>
+    <string name="root_pre_patch_installer_hint">Kurulum yöntemi, hangi yedekler dahil edildiğini ve yedekleme sonrasında değiştirilememesi gerektiğini belirler</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="patcher_error_log">Hata günlüğü</string>
     <string name="patcher_error_technical">Teknik ayrıntılar</string>
-    <string name="patcher_patches_progress">%1$d / %2$d yama</string>
     <string name="patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
-    <string name="patcher_installing_subtitle">Rock\'a hazır olmak üzere! 🎸</string>
+    <string name="patcher_installing_subtitle">Neredeyse hazırız! 🎸</string>
     <string name="patcher_success_title">Hepsi Bitti! 🎉</string>
     <string name="patcher_success_subtitle">Uygulamanız yamalandı ve yüklendi!</string>
     <string name="patcher_complete_title">Yamalama Tamamlandı! ✨</string>
@@ -279,9 +283,10 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Açık</string>
     <string name="settings_appearance_dark">Koyu</string>
-    <string name="settings_appearance_black">Siyah</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Vurgu rengi</string>
+    <string name="settings_appearance_pure_black">Saf Siyah</string>
+    <string name="settings_appearance_pure_black_description">OLED ekranlar için gerçek siyah arka plan kullan</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Uygulama dili</string>
     <string name="settings_appearance_app_language_current">Mevcut dil</string>
@@ -295,7 +300,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_appearance_app_icon_dark_1">Okyanus</string>
     <string name="settings_appearance_app_icon_dark_2">Boşluk</string>
     <string name="settings_appearance_app_icon_dark_3">Çivit</string>
-    <string name="settings_appearance_app_icon_change_dialog_title">App simgesini değiştirmek istediğinizden emin misiniz?</string>
+    <string name="settings_appearance_app_icon_change_dialog_title">Uygulama simgesi değiştirilsin mi?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">%1$s simgesine değiştirmek ve yeniden başlatmak istediğinizden emin misiniz?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simgeyi değiştir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
@@ -489,13 +494,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_original_apks_delete_confirm">%s için orijinal APK\'i silmek istiyor musunuz? Yeniden yama yapmak için yeni bir APK sağlanması gerekir</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
-    <string name="settings_system_patch_selections_description">Kayıtlı yama seçeneklerini yönetin. Bunlar uygulama kaldırılmasından sonra da kalır</string>
-    <string name="settings_system_patch_selections_description_short">Gelecekteki yama için saklı</string>
-    <string name="settings_system_patch_selections_empty">Kayıtlı yama seçenekleri yok</string>
-    <string name="settings_system_patch_selections_has_options">Seçenekler var</string>
-    <string name="settings_system_patch_selections_patches_options">Yama seçenekleri</string>
-    <string name="settings_system_patch_selection_delete_title">Yama seçimini sil</string>
-    <string name="settings_system_patch_selection_deleted">Yama seçimi silindi</string>
+    <string name="settings_system_patch_selections_description">Kayıtlı yama seçeneklerini yönetin. Bunlar uygulamanın kaldırılmasından sonra da kalır</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Tüm seçimler sıfırlansın mı?</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_share_website">Web sitesini paylaş</string>
@@ -531,6 +531,7 @@ Kullanıcı geri bildirimleri ve katkılarla gelecekteki yenilikler için çalı
     <string name="selected">Seçildi</string>
     <string name="not_selected">Seçilmedi</string>
     <string name="rename">Yeniden adlandır</string>
+    <string name="import_">İçe aktar</string>
     <string name="export">Dışa aktar</string>
     <string name="download">İndir</string>
     <string name="less">Daha Az</string>

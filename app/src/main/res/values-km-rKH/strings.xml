@@ -26,7 +26,6 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">ប្រភពបំណះ</string>
-    <string name="sources_management_subtitle">%d ប្រភពដែលបានដំឡើង</string>
     <string name="sources_management_open_in_browser">បើកក្នុងកម្មវិធីច្បោល</string>
     <string name="sources_management_failed_to_open_url">បរាជ័យក្នុងការបើក URL</string>
     <string name="sources_management_date_added">បានបន្ថែម</string>
@@ -91,4 +90,5 @@
     <string name="enabled">បានបើក</string>
     <string name="disabled">បានផ្ដាច់</string>
     <string name="rename">ប្ដូរឈ្មោះ</string>
+    <string name="import_">នាំចូល</string>
 </resources>
