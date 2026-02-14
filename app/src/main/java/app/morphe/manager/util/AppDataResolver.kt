@@ -51,6 +51,14 @@ class AppDataResolver(
     private val packageManager: PackageManager = context.packageManager
 
     /**
+     * Get all installed apps from repository
+     * Helper method for internal use
+     */
+    suspend fun getInstalledApps() = withContext(Dispatchers.IO) {
+        installedAppRepository.getAll().first()
+    }
+
+    /**
      * Get the original package name for a given package name.
      * If the package is patched (currentPackageName != originalPackageName), returns the original.
      * Otherwise, returns the same package name.
@@ -85,31 +93,6 @@ class AppDataResolver(
 
         // Return only packages that are patched
         return packageNames.filter { it in patchedPackages }.toSet()
-    }
-
-    /**
-     * Filter selections to show only patched packages
-     * Original (non-patched) packages are excluded from the results
-     *
-     * This is used for patch selection management where only patched packages
-     * are relevant for repatching operations
-     *
-     * @param selections Map<PackageName, Map<BundleUid, PatchCount>>
-     * @return Map<PackageName, Map<BundleUid, PatchCount>> with only patched packages
-     */
-    suspend fun filterPatchedPackagesOnly(
-        selections: Map<String, Map<Int, Int>>
-    ): Map<String, Map<Int, Int>> {
-        val allApps = installedAppRepository.getAll().first()
-
-        // Build set of patched package names (currentPackageName != originalPackageName)
-        val patchedPackages = allApps
-            .filter { it.currentPackageName != it.originalPackageName }
-            .map { it.currentPackageName }
-            .toSet()
-
-        // Filter selections to include only patched packages
-        return selections.filterKeys { packageName -> packageName in patchedPackages }
     }
 
     /**
