@@ -447,5 +447,3 @@ private fun DeleteConfirmationDialog(
         )
     }
 }
-
-

@@ -293,48 +293,50 @@ fun SystemTabContent(
                     }
                 )
 
-                MorpheSettingsDivider()
+                // Patch Selections management (Expert mode only)
+                if (useExpertMode) {
+                    MorpheSettingsDivider()
 
-                // Patch Selections management
-                val selectionRepository: PatchSelectionRepository = koinInject()
-                val optionsRepository: PatchOptionsRepository = koinInject()
+                    val selectionRepository: PatchSelectionRepository = koinInject()
+                    val optionsRepository: PatchOptionsRepository = koinInject()
 
-                val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
-                    .collectAsStateWithLifecycle(emptySet())
-                val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
-                    .collectAsStateWithLifecycle(emptySet())
+                    val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
+                        .collectAsStateWithLifecycle(emptySet())
+                    val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
+                        .collectAsStateWithLifecycle(emptySet())
 
-                // Filter to show only patched packages
-                var patchedPackagesCount by remember { mutableIntStateOf(0) }
+                    // Filter to show only patched packages
+                    var patchedPackagesCount by remember { mutableIntStateOf(0) }
 
-                LaunchedEffect(packagesWithSelection, packagesWithOptions) {
-                    val allPackages = packagesWithSelection + packagesWithOptions
-                    patchedPackagesCount = allPackages.size
-                }
-
-                RichSettingsItem(
-                    onClick = { showPatchSelectionDialog = true },
-                    title = stringResource(R.string.settings_system_patch_selections_title),
-                    subtitle = stringResource(R.string.settings_system_patch_selections_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Tune)
-                    },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            if (patchedPackagesCount > 0) {
-                                InfoBadge(
-                                    text = patchedPackagesCount.toString(),
-                                    style = InfoBadgeStyle.Default,
-                                    isCompact = true
-                                )
-                            }
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                        }
+                    LaunchedEffect(packagesWithSelection, packagesWithOptions) {
+                        val allPackages = packagesWithSelection + packagesWithOptions
+                        patchedPackagesCount = allPackages.size
                     }
-                )
+
+                    RichSettingsItem(
+                        onClick = { showPatchSelectionDialog = true },
+                        title = stringResource(R.string.settings_system_patch_selections_title),
+                        subtitle = stringResource(R.string.settings_system_patch_selections_description),
+                        leadingContent = {
+                            MorpheIcon(icon = Icons.Outlined.Tune)
+                        },
+                        trailingContent = {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                if (patchedPackagesCount > 0) {
+                                    InfoBadge(
+                                        text = patchedPackagesCount.toString(),
+                                        style = InfoBadgeStyle.Default,
+                                        isCompact = true
+                                    )
+                                }
+                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                            }
+                        }
+                    )
+                }
             }
         }
 
