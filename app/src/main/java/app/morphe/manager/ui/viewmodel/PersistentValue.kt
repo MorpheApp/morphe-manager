@@ -1,5 +1,6 @@
 package app.morphe.manager.ui.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 
@@ -14,16 +15,6 @@ class PersistentValue<T: Any>(
     val key: String,
     val defaultValue: T
 ) {
-
-    constructor(
-        context: Context,
-        key: String,
-        defaultValue: T
-    ) : this(key, defaultValue) {
-        getPrefs(context) // Initialize preferences if needed
-        contextWasProvidedBeforeUsing = true
-    }
-
     private companion object {
         private var prefs: SharedPreferences? = null
 
@@ -96,6 +87,7 @@ class PersistentValue<T: Any>(
         return value
     }
 
+    @SuppressLint("UseKtx")
     fun save(value: T) {
         checkContextWasProvided(contextWasProvidedBeforeUsing)
         this.value = value
