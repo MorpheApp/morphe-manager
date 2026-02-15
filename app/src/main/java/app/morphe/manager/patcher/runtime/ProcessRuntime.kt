@@ -35,7 +35,7 @@ import kotlin.math.max
 // Max memory value. Slightly higher values may work for some devices
 // but patching YT is the same time with both 1200 and 1600 memory.
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1536
-const val PROCESS_RUNTIME_MEMORY_DEFAULT = 512
+const val PROCESS_RUNTIME_MEMORY_DEFAULT = 640
 const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 256
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 384
 const val PROCESS_RUNTIME_MEMORY_STEP = 128
