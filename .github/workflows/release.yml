@@ -75,13 +75,11 @@ jobs:
       - name: Update app-release.json
         if: steps.release.outputs.NEW_TAG != ''
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase
           mv app/app-release-new.json app/app-release.json
           git add app/app-release.json
           git rm --cached -f app/app-release-new.json
-          git commit -m "chore: Update app-release.json"
+          git commit --author="semantic-release-bot <semantic-release-bot@martynus.net>" -m "chore: Update app-release.json"
           git push
 
       - name: Attest
