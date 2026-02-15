@@ -966,7 +966,7 @@ class HomeViewModel(
                     val location = connection.getHeaderField("Location")
 
                     if (location.isNullOrBlank()) {
-                        Log.d(tag, "Location tag is blank: ${connection.responseMessage}")
+                        Log.i(tag, "Location tag is blank: ${connection.responseMessage}")
                         getApiOfflineWebSearchUrl()
                     } else {
                         val resolved =
@@ -987,11 +987,8 @@ class HomeViewModel(
                 Log.w(tag, "Timeout while resolving search redirect: $ex")
                 url
             } catch (ex: SSLException) {
-                // Simple https connections to can fail with TLS SSL errors for users on weirdo
-                // home routers. If SSL exception occurs then use the redirect url as-is and the
-                // users external browser will figure it out correctly.
                 Log.w(tag, "SSL exception while resolving search redirect: $ex")
-                url
+                getApiOfflineWebSearchUrl()
             } catch (ex: Exception) {
                 Log.w(tag, "Exception while resolving search redirect: $ex")
                 getApiOfflineWebSearchUrl()
