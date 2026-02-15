@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Visibility
@@ -16,8 +17,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -136,4 +139,124 @@ fun MorpheDialogTextField(
             unfocusedPlaceholderColor = textColor.copy(alpha = 0.4f)
         )
     )
+}
+
+/**
+ * Styled OutlinedTextField with dropdown menu support for dialogs
+ * Combines text input, folder picker, clear button, and dropdown selection
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MorpheDialogDropdownTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    dropdownItems: Map<String, String>, // Display name -> Value
+    label: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    showClearButton: Boolean = false,
+    onFolderPickerClick: (() -> Unit)? = null,
+    enabled: Boolean = true,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    @SuppressLint("ModifierParameter")
+    modifier: Modifier = Modifier
+) {
+    var dropdownExpanded by remember { mutableStateOf(false) }
+    val textColor = LocalDialogTextColor.current
+
+    // Find display value for dropdown
+    val displayValue = dropdownItems.entries.find { it.value == value }?.key ?: value
+
+    ExposedDropdownMenuBox(
+        expanded = dropdownExpanded,
+        onExpandedChange = { dropdownExpanded = it }
+    ) {
+        OutlinedTextField(
+            value = displayValue,
+            onValueChange = onValueChange,
+            label = label,
+            placeholder = placeholder,
+            leadingIcon = leadingIcon,
+            trailingIcon = {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Folder picker button
+                    if (onFolderPickerClick != null) {
+                        IconButton(onClick = onFolderPickerClick) {
+                            Icon(
+                                imageVector = Icons.Outlined.FolderOpen,
+                                contentDescription = stringResource(R.string.patch_option_pick_folder),
+                                tint = textColor.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
+
+                    // Clear button
+                    if (showClearButton && value.isNotBlank()) {
+                        IconButton(onClick = { onValueChange("") }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Clear,
+                                contentDescription = stringResource(R.string.clear),
+                                tint = textColor.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
+
+                    // Dropdown arrow
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded)
+                }
+            },
+            enabled = enabled,
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
+            modifier = modifier
+                .fillMaxWidth()
+                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = textColor,
+                unfocusedTextColor = textColor,
+                disabledTextColor = textColor.copy(alpha = 0.6f),
+                focusedBorderColor = textColor.copy(alpha = 0.5f),
+                unfocusedBorderColor = textColor.copy(alpha = 0.2f),
+                disabledBorderColor = textColor.copy(alpha = 0.1f),
+                cursorColor = textColor,
+                focusedLeadingIconColor = textColor.copy(alpha = 0.7f),
+                unfocusedLeadingIconColor = textColor.copy(alpha = 0.5f),
+                focusedTrailingIconColor = textColor.copy(alpha = 0.7f),
+                unfocusedTrailingIconColor = textColor.copy(alpha = 0.5f),
+                focusedLabelColor = textColor.copy(alpha = 0.7f),
+                unfocusedLabelColor = textColor.copy(alpha = 0.5f),
+                focusedPlaceholderColor = textColor.copy(alpha = 0.4f),
+                unfocusedPlaceholderColor = textColor.copy(alpha = 0.4f)
+            )
+        )
+
+        ExposedDropdownMenu(
+            expanded = dropdownExpanded,
+            onDismissRequest = { dropdownExpanded = false }
+        ) {
+            dropdownItems.forEach { (displayName, itemValue) ->
+                DropdownMenuItem(
+                    text = { Text(displayName) },
+                    onClick = {
+                        onValueChange(itemValue)
+                        dropdownExpanded = false
+                    },
+                    leadingIcon = if (itemValue == value) {
+                        {
+                            Icon(
+                                imageVector = Icons.Default.Check,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    } else null
+                )
+            }
+        }
+    }
 }

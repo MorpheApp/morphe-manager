@@ -609,7 +609,41 @@ private fun PatchOptionsDialog(
                         )
                     }
 
-                    // Path/folder option
+                    // Path/folder option with presets (combined dropdown + path input)
+                    typeName.contains("String") && !typeName.contains("Array") &&
+                            option.presets?.isNotEmpty() == true &&
+                            (option.description.contains("folder", ignoreCase = true) ||
+                                    option.description.contains("mipmap", ignoreCase = true) ||
+                                    option.description.contains("drawable", ignoreCase = true)) -> {
+                        PathWithPresetsOption(
+                            title = option.title,
+                            description = option.description,
+                            value = value?.toString() ?: "",
+                            presets = option.presets,
+                            onValueChange = { onValueChange(key, it) }
+                        )
+                    }
+
+                    // String dropdown with presets (pure dropdown)
+                    typeName.contains("String") && !typeName.contains("Array") &&
+                            option.presets?.isNotEmpty() == true -> {
+                        val choices = option.presets.keys.toList()
+                        val displayValue = option.presets.entries.find { it.value == value }?.key
+                            ?: value?.toString() ?: ""
+
+                        DropdownOptionItem(
+                            title = option.title,
+                            description = option.description,
+                            value = displayValue,
+                            choices = choices,
+                            onValueChange = { selectedKey ->
+                                val selectedValue = option.presets[selectedKey]
+                                onValueChange(key, selectedValue)
+                            }
+                        )
+                    }
+
+                    // Path/folder option without presets
                     typeName.contains("String") && !typeName.contains("Array") &&
                             option.key != "customName" &&
                             (option.key.contains("icon", ignoreCase = true) ||
@@ -861,14 +895,14 @@ private fun PathInputOption(
     var showHeaderCreator by remember { mutableStateOf(false) }
 
     // Detect if this is icon-related or header-related field
-    val isIconField = title.contains("icon", ignoreCase = true) ||
-            description.contains("icon", ignoreCase = true) ||
-            description.contains("mipmap", ignoreCase = true)
-
+    // Check header first, then icon (header takes priority)
     val isHeaderField = title.contains("header", ignoreCase = true) ||
-            description.contains("header", ignoreCase = true) ||
-            (description.contains("drawable", ignoreCase = true) &&
-                    !description.contains("icon", ignoreCase = true))
+            description.contains("header", ignoreCase = true)
+
+    val isIconField = !isHeaderField && (
+            title.contains("icon", ignoreCase = true) ||
+                    description.contains("mipmap", ignoreCase = true)
+            )
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -930,6 +964,130 @@ private fun PathInputOption(
                         maxHeight = 280.dp
                     )
                 }
+            )
+        }
+    }
+
+    // Icon creator dialog
+    if (showIconCreator) {
+        AdaptiveIconCreatorDialog(
+            onDismiss = { showIconCreator = false },
+            onIconCreated = { path ->
+                onValueChange(path)
+                showIconCreator = false
+            }
+        )
+    }
+
+    // Header creator dialog
+    if (showHeaderCreator) {
+        HeaderCreatorDialog(
+            onDismiss = { showHeaderCreator = false },
+            onHeaderCreated = { path ->
+                onValueChange(path)
+                showHeaderCreator = false
+            }
+        )
+    }
+}
+
+/**
+ * Combined path input with dropdown presets
+ * Used for options that have predefined values but also allow custom folder paths
+ */
+@Composable
+private fun PathWithPresetsOption(
+    title: String,
+    description: String,
+    value: String,
+    presets: Map<String, *>,
+    onValueChange: (String) -> Unit
+) {
+    var showIconCreator by remember { mutableStateOf(false) }
+    var showHeaderCreator by remember { mutableStateOf(false) }
+
+    // Detect if this is icon-related or header-related field
+    // Check header first, then icon (header takes priority)
+    val isHeaderField = title.contains("header", ignoreCase = true) ||
+            description.contains("header", ignoreCase = true)
+
+    val isIconField = !isHeaderField && (
+            title.contains("icon", ignoreCase = true) ||
+                    description.contains("mipmap", ignoreCase = true)
+            )
+
+    // Convert presets to Map<String, String> for dropdown
+    val dropdownItems = presets.mapValues { it.value.toString() }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+//        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+//            Text(
+//                text = title,
+//                style = MaterialTheme.typography.bodyMedium,
+//                fontWeight = FontWeight.Medium,
+//                color = LocalDialogTextColor.current
+//            )
+//            if (description.isNotBlank()) {
+//                Text(
+//                    text = description,
+//                    style = MaterialTheme.typography.bodySmall,
+//                    color = LocalDialogSecondaryTextColor.current
+//                )
+//            }
+//        }
+
+        // Folder picker
+        val folderPicker = rememberFolderPickerWithPermission { uri ->
+            onValueChange(uri.toFilePath())
+        }
+
+        // Dropdown TextField with folder picker and clear button
+        MorpheDialogDropdownTextField(
+            value = value,
+            onValueChange = onValueChange,
+            dropdownItems = dropdownItems,
+            placeholder = {
+                Text("/storage/emulated/0/folder")
+            },
+            showClearButton = true,
+            onFolderPickerClick = { folderPicker() }
+        )
+
+        // Create Icon button
+        if (isIconField) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.adaptive_icon_create),
+                onClick = { showIconCreator = true },
+                icon = Icons.Outlined.AutoAwesome,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // Create Header button
+        if (isHeaderField) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.header_creator_create),
+                onClick = { showHeaderCreator = true },
+                icon = Icons.Outlined.Image,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // Instructions (collapsed by default)
+        if (description.isNotBlank()) {
+            ExpandableSurface(
+                title = stringResource(R.string.patch_option_instructions),
+                content = {
+                    ScrollableInstruction(
+                        description = description,
+                        maxHeight = 200.dp
+                    )
+                },
+                icon = Icons.Outlined.Info,
+                initialExpanded = false
             )
         }
     }
@@ -1035,7 +1193,6 @@ private fun BooleanOptionItem(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DropdownOptionItem(
     title: String,
@@ -1044,7 +1201,8 @@ private fun DropdownOptionItem(
     choices: List<String>,
     onValueChange: (String) -> Unit
 ) {
-    var expanded by remember { mutableStateOf(false) }
+    // Create map for dropdown: display name -> value
+    val dropdownItems = choices.associateWith { it }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -1066,34 +1224,11 @@ private fun DropdownOptionItem(
             }
         }
 
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = it }
-        ) {
-            MorpheDialogTextField(
-                value = value,
-                onValueChange = {},
-                enabled = false,
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                }
-            )
-
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                choices.forEach { choice ->
-                    DropdownMenuItem(
-                        text = { Text(choice) },
-                        onClick = {
-                            onValueChange(choice)
-                            expanded = false
-                        }
-                    )
-                }
-            }
-        }
+        MorpheDialogDropdownTextField(
+            value = value,
+            onValueChange = onValueChange,
+            dropdownItems = dropdownItems
+        )
     }
 }
 
