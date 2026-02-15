@@ -10,10 +10,10 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Mise à jour du gestionnaire disponible</string>
     <string name="home_update_available_subtitle">Nouvelle version prête à installer</string>
-    <string name="home_update_error">Mise à jour échouée</string>
+    <string name="home_update_error">Échec de la mise à jour</string>
     <string name="home_update_error_subtitle">Vérifiez votre connexion Internet et réessayez</string>
     <string name="home_updating_sources">Mise à jour des sources…</string>
-    <string name="home_update_progress">%1$d/%2$d sources traitées</string>
+    <string name="home_update_progress_format">%1$s traité</string>
     <string name="home_update_success">Mise à jour des sources complète</string>
     <string name="home_update_success_subtitle">Vos sources sont à jour</string>
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
@@ -29,7 +29,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Voulez-vous regarder des pubs ? Moi non plus</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Faisons fonctionner vos applications.</string>
+    <string name="home_greeting_6">Faisons en sorte que vos applis fonctionnent parfaitement</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Prévisions du jour : 100% de chance de patchage</string>
     <!-- From mediocrity to amazing -->
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Alimenté par la caféine et les bons patchs</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sources de patch</string>
-    <string name="sources_management_subtitle">%d source(s) installée(s)</string>
     <string name="sources_management_open_in_browser">Ouvrir dans le navigateur</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_management_date_added">Ajouté</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Supprimer la source \"%s\" ? Cela ne peut pas être annulé</string>
     <string name="sources_dialog_remote">À distance</string>
     <string name="sources_dialog_remote_url">URL de la source</string>
-    <string name="sources_dialog_remote_url_formats">"Exemples :
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• exemple.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Exemples :</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Sélectionner un fichier de source de patch</string>
     <string name="sources_dialog_local_file_description">Sélectionnez un fichier de source de patch .mpp depuis le stockage</string>
@@ -78,6 +74,8 @@ Versions compatibles :"</string>
     <string name="home_apk_availability_unpatched_label">Non patchée</string>
     <string name="home_apk_availability_yes">Oui, je l\'ai</string>
     <string name="home_apk_availability_no">Non, aidez-moi à le trouver</string>
+    <string name="home_apk_use_saved_with_version">Utiliser l’APK enregistrée (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Aucune APK enregistrée. Le patchage nécessitera de sélectionner à nouveau le fichier APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Télécharger l\'APK d\'origine</string>
     <string name="home_download_instructions_steps_title">Instructions :</string>
@@ -102,17 +100,17 @@ Versions compatibles :"</string>
     <string name="home_no_patches_for_app">Aucuns patchs disponibles pour cette application</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode Expert</string>
-    <string name="expert_mode_subtitle_extended">%1$d sur %2$d patchs sélectionnés</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s sur %2$s sélectionnés</string>
     <string name="expert_mode_search">Rechercher des patchs</string>
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
     <string name="expert_mode_no_patches">Aucuns patchs disponibles</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Plusieurs sources de patch sélectionnées</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou un comportement inattendu.
+    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
 
-Êtes-vous sûr de vouloir continuer ?"</string>
+Voulez-vous vraiment continuer ?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Version non supportée</string>
     <string name="home_dialog_unsupported_version_dialog_description">Cette version de l’APK n’est pas recommandée. Continuer peut rendre l’application dysfonctionnelle</string>
@@ -160,12 +158,10 @@ Versions compatibles :"</string>
     <string name="home_app_info_delete_item_patched_apk">Fichier APK patché</string>
     <string name="home_app_info_delete_item_original_apk">Fichier APK original</string>
     <string name="home_app_info_delete_preservation_note">Votre sélection de patch et vos options seront conservées pour les futurs patchage</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">%d patchs obsolètes supprimés de la sélection enregistrée</string>
     <string name="home_app_info_patches_name_default">Patchs</string>
     <string name="home_app_info_patches_name_fallback">Sans nom</string>
     <string name="home_app_info_patches_replace_fail">Échec de l\'importation des patchs : %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK original introuvable. Impossible de repatcher cette application</string>
-    <string name="home_app_info_repatch_requires_original">Le repatchage nécessite le fichier APK original</string>
     <string name="home_app_info_original_package_name">Nom de package d\'original</string>
     <string name="home_app_info_applied_patches">Patchs appliqués</string>
     <string name="home_app_info_patch_source_used">Source de patch utilisée</string>
@@ -180,11 +176,17 @@ Versions compatibles :"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Le mode Root nécessite que l\'APK d\'origine soit installé sur votre appareil avant le patchage</string>
     <string name="root_gmscore_excluded">Le patch de support GmsCore est exclu en mode root</string>
+    <string name="root_pre_patch_installer_title">Choisir la méthode d\'installation</string>
+    <string name="root_pre_patch_installer_description">Votre appareil dispose d\'un accès root. Choisissez comment vous souhaitez installer l\'application patchée</string>
+    <string name="root_pre_patch_installer_mount_title">Montage root</string>
+    <string name="root_pre_patch_installer_mount_description">Monter l’APK patchée par-dessus l’application d’origine. Pas de GmsCore requis</string>
+    <string name="root_pre_patch_installer_standard_title">Installation standard</string>
+    <string name="root_pre_patch_installer_standard_description">Installer en tant qu\'application séparée avec le support GmsCore. Choisissez l\'installateur (Installateur système, Shizuku, etc.) après le patchage</string>
+    <string name="root_pre_patch_installer_hint">La méthode d\'installation détermine quels patchs sont inclus et ne peut pas être modifiée après le patchage</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="patcher_error_log">Journal des erreurs</string>
     <string name="patcher_error_technical">Détails techniques</string>
-    <string name="patcher_patches_progress">%1$d / %2$d patchs</string>
     <string name="patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
     <string name="patcher_installing_subtitle">Bientôt prêt à mettre le feu  ! 🎸</string>
     <string name="patcher_success_title">Tout est prêt ! 🎉</string>
@@ -216,9 +218,9 @@ Versions compatibles :"</string>
     <string name="patcher_stop_confirm_description">Voulez-vous vraiment arrêter le processus de patchage ?</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">Transformation de votre application en quelque chose d\'extraordinaire… 🏆</string>
-    <string name="patcher_message_2">Apprendre de nouvelles astuces aux anciennes applications… 🎩</string>
-    <string name="patcher_message_3">Donner un coup de fouet numérique à votre application… 🔧</string>
-    <string name="patcher_message_4">La magie numérique s\'élabore… ☕</string>
+    <string name="patcher_message_2">Apprenez de nouveaux tours aux vieilles applications… 🎩</string>
+    <string name="patcher_message_3">Offrez un petit réglage numérique à votre application… 🔧</string>
+    <string name="patcher_message_4">Magie numérique en cours de préparation… ☕</string>
     <string name="patcher_message_5">Pause café recommandée… ☕</string>
     <string name="patcher_message_6">Regardez dehors, il fait beau… 🌤️</string>
     <string name="patcher_message_7">Ajustement des 1 et des 0… 🤖</string>
@@ -226,19 +228,19 @@ Versions compatibles :"</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Correction des bugs dans l\'application non patchée… 🪲</string>
     <string name="patcher_message_10">Les bons patchs valent l\'attente… ⏳</string>
-    <string name="patcher_message_11">Polissage des pixels jusqu\'à ce qu\'ils brillent… 💎</string>
+    <string name="patcher_message_11">Polissage de pixels pour un éclat total… 💎</string>
     <string name="patcher_message_12">Veuillez rester confortablement installé jusqu’à ce que le capitaine désactive l’indicateur \"Patchage en cours\"… 💺✈️</string>
-    <string name="patcher_message_13">Préparation de votre application patchée, bien chaude et fraîche… 🍳</string>
+    <string name="patcher_message_13">Votre app patchée arrive, toute chaude et toute fraîche… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Négocier poliment avec le bytecode… 🤝</string>
+    <string name="patcher_message_14">En pleine négociation courtoise avec le bytecode… 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="patcher_message_15">Tous les systèmes sont nominaux… trajectoire de patchage stable… 🚀</string>
-    <string name="patcher_message_16">Tirer le maximum de puissance, comme le jus d\'un citron numérique... 🍋</string>
-    <string name="patcher_message_17">Encourager l\'application à accepter sa nouvelle version améliorée... 🌱</string>
+    <string name="patcher_message_16">Pressage d\'un maximum de puissance, comme le jus d\'un citron numérique... 🍋</string>
+    <string name="patcher_message_17">Encouragez l\'application à accepter sa nouvelle version améliorée... 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="patcher_message_18">Changer la superposition de l\'application de non patchée à patchée… 📦⚛️</string>
+    <string name="patcher_message_18">Changement de la superposition de l\'application de non patchée à patchée… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Votre application a de la fièvre et la seule prescription est plus de patchs… 🩺🔔</string>
+    <string name="patcher_message_19">Votre app a de la fièvre, et la seule prescription, c’est plus de patchs… 🩺🔔</string>
     <string name="patcher_message_20">Suppression des absurdités. Veuillez patienter... 🗑️</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Application des patchs</string>
@@ -247,7 +249,7 @@ Versions compatibles :"</string>
     <string name="patched_app_save_failed_toast">Échec de l\'enregistrement de l\'application patchée</string>
     <string name="download_apk">Télécharger le fichier APK</string>
     <string name="plugin_activity_dialog_body">Une interaction de l\'utilisateur est nécessaire pour pouvoir poursuivre avec ce plugin</string>
-    <string name="patcher_process_exit_message">Le processus du patcheur s’est terminé avec le code %1$d</string>
+    <string name="patcher_process_exit_message">Le processus du patcheur s’est terminé avec le code %1$s</string>
     <string name="install_app_success">Installé avec succès</string>
     <string name="install_app_fail">Impossible d\'installer l\'application : %s</string>
     <string name="install_timeout_message">L\'installation n\'est pas terminée. Vérifiez la boîte de dialogue de l\'installateur système et réessayez</string>
@@ -279,9 +281,10 @@ Versions compatibles :"</string>
     <string name="settings_appearance_system">Système</string>
     <string name="settings_appearance_light">Clair</string>
     <string name="settings_appearance_dark">Sombre</string>
-    <string name="settings_appearance_black">Noir</string>
     <string name="settings_appearance_dynamic">Matérial You</string>
     <string name="settings_appearance_accent_color">Couleur d\'accentuation</string>
+    <string name="settings_appearance_pure_black">Noir Pur</string>
+    <string name="settings_appearance_pure_black_description">Utilise des fonds d\'écran noir pur pour les écrans OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Langue de l\'application</string>
     <string name="settings_appearance_app_language_current">Langue actuelle</string>
@@ -305,12 +308,14 @@ Versions compatibles :"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Paramètres Expert</string>
     <string name="settings_advanced_expert_mode">Mode Expert</string>
-    <string name="settings_advanced_expert_mode_description">Activer les fonctionnalités avancées et les options de personnalisation</string>
+    <string name="settings_advanced_expert_mode_description">Activer les paramètres de patchage Morphe complexes et les options de personnalisation</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Passer en mode Expert ?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Le mode Expert offre plus de contrôle sur la manière dont les patchs sont appliqués, mais une mauvaise configuration des paramètres en mode expert peut rendre l’application inutilisable</string>
     <string name="settings_advanced_strip_unused_libs">Supprimer les bibliothèques natives inutilisées</string>
     <string name="settings_advanced_strip_unused_libs_description">Supprimer les bibliothèques natives pour les architectures CPU non prises en charge des applications patchées</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Jeton d\'accès personnel GitHub</string>
-    <string name="settings_advanced_github_pat_description">Nécessaire pour les pull request de bundles</string>
+    <string name="settings_advanced_github_pat_description">Requis pour les pull request de sources</string>
     <string name="settings_advanced_github_pat_configured">Jeton configuré</string>
     <string name="settings_advanced_github_pat_how_to_get">Comment obtenir un jeton</string>
     <string name="settings_advanced_github_pat_dialog_title">Définir un jeton d’accès personnel GitHub</string>
@@ -434,7 +439,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_process_runtime_enable">Activer le temps d’exécution du processus</string>
     <string name="settings_system_memory_limit_subtitle">Mémoire disponible pour le patchage</string>
     <string name="settings_system_memory_limit_warning">Une limite de mémoire faible peut entraîner des échecs lors du patchage des applications plus volumineuses</string>
-    <string name="settings_system_process_runtime_enabled_description">Limite de %d Mo</string>
+    <string name="settings_system_process_runtime_enabled_description">Limite de %s Mo</string>
     <string name="settings_system_process_runtime_disabled_description">Cliquez pour configurer</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importer &amp; exporter</string>
@@ -467,7 +472,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_debug">Débogage</string>
     <string name="settings_system_export_debug_logs">Exporter les journaux de débogage</string>
     <string name="settings_system_export_debug_logs_description">Exporter les journaux système pour le dépannage</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Échec de la lecture des journaux (code de sortie %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Échec de la lecture des journaux (code de sortie %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Échec de l\'exportation des journaux </string>
     <string name="settings_system_export_debug_logs_export_success">Journaux exportés</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Sélections de patch</string>
     <string name="settings_system_patch_selections_description">Gérer les sélections et options de patch enregistrées. Celles-ci persistent après la désinstallation de l’application</string>
-    <string name="settings_system_patch_selections_description_short">Enregistré pour un futur patchage</string>
-    <string name="settings_system_patch_selections_empty">Pas de sélections de patch enregistrées</string>
-    <string name="settings_system_patch_selections_has_options">Possède des options</string>
-    <string name="settings_system_patch_selections_patches_options">Options de patchs</string>
-    <string name="settings_system_patch_selection_delete_title">Supprimer la sélection de patch</string>
-    <string name="settings_system_patch_selection_deleted">Sélection de patch supprimée</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Réinitialiser toutes les sélections ?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections de package ?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de source ?</string>
+    <string name="settings_system_patch_selection_no_saved">Pas de sélections de patch enregistrées</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s entre %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dans %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Source #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Cela supprimera :</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour tous les packages et sources</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour %s entre toutes les sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera les sélections de patch enregistrées pour %1$s dans la source #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Échec de l\'exportation des données de source</string>
+    <string name="settings_system_export_source_data_success">Données de source exportées avec succès</string>
+    <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>
+    <string name="settings_system_import_source_data_success">Données de source importées avec succès</string>
+    <string name="settings_system_patch_details_title">Détails du patch</string>
+    <string name="settings_system_selected_patches_title">Patchs sélectionnés (%s)</string>
+    <string name="settings_system_patch_options_title">Options de patch (%s)</string>
+    <string name="settings_system_no_patches_or_options">Pas de patch ni options enregistrés</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">À propos</string>
     <string name="settings_system_share_website">Partager le site web</string>
@@ -510,6 +528,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="reset">Réinitialiser</string>
+    <string name="reset_all">Tout réinitialiser</string>
     <string name="confirm">Confirmer</string>
     <string name="warning">Avertissement</string>
     <string name="error_">Erreur</string>
@@ -531,6 +550,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="selected">Sélectionné</string>
     <string name="not_selected">Non sélectionné</string>
     <string name="rename">Renommer</string>
+    <string name="import_">Importer</string>
     <string name="export">Exporter</string>
     <string name="download">Télécharger</string>
     <string name="less">Moins</string>

@@ -1,7 +1,7 @@
 -dontobfuscate
 
--keep class app.revanced.manager.patcher.runtime.process.* { *; }
--keep class app.revanced.manager.plugin.** { *; }
+-keep class app.morphe.manager.patcher.runtime.process.* { *; }
+-keep class app.morphe.manager.plugin.** { *; }
 -keep class app.morphe.patcher.** { *; }
 -keep class com.android.tools.smali.** { *; }
 -keep class kotlin.** { *; }

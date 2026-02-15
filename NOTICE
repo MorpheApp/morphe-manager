@@ -1,11 +1,14 @@
 Morphe NOTICE
+
+https://morphe.software
+
 =============
 
 This file contains Section 7 notices of the GNU General Public License v3
-as they apply to Morphe code. These notices apply to all code authored by
+as they apply to Morphe code. These notices apply to all code authored for
 Morphe, including any modifications of code that may have originated
 outside this repository, and do not change the terms of the GPLv3 license.
-For the full license text, see LICENSE file or:
+For the full license text, see the LICENSE file or:
 https://www.gnu.org/licenses/gpl-3.0.html
 
 7b. Attribution Requirement
@@ -14,7 +17,7 @@ https://www.gnu.org/licenses/gpl-3.0.html
 Any application or derivative work that uses Morphe code must include
 an easily accessible, user-facing message with the exact wording:
 
-    "This app uses code from Morphe. To learn more, visit https://morphe.software"
+    This app uses code from Morphe. To learn more, visit https://morphe.software
 
 The message must be presented in a way that allows the end user to easily
 visit the URL (e.g., clickable link, UI button, or equivalent).

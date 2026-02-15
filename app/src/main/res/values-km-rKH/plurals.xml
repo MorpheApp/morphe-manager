@@ -6,4 +6,7 @@
     <plurals name="patches_executed">
         <item quantity="other">ប្រតិបត្តិបំណះ %d</item>
     </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="other">%1$d ប្រភពដែលបានដំឡើង</item>
+    </plurals>
 </resources>

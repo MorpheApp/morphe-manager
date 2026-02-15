@@ -13,7 +13,7 @@
     <string name="home_update_error">Update fehlgeschlagen</string>
     <string name="home_update_error_subtitle">Überprüfe deine Internetverbindung und versuche es erneut</string>
     <string name="home_updating_sources">Update-Sources…</string>
-    <string name="home_update_progress">%1$d/%2$d Quellen verarbeitet</string>
+    <string name="home_update_progress_format">%1$s verarbeitet</string>
     <string name="home_update_success">Update-Sources abgeschlossen</string>
     <string name="home_update_success_subtitle">Deine Quellen sind auf dem neuesten Stand</string>
     <string name="home_sources_are_loading"> Quellen werden geladen, bitte warten…</string>
@@ -33,14 +33,13 @@
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Heutige Vorhersage: 100%ige Chance auf Behebung</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Sind Sie bereit, die Unterwältigung in eine großartige Veränderung zu verwandeln? </string>
+    <string name="home_greeting_8">Bereit, aus enttäuschend einfach großartig zu machen?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="home_greeting_9">Apps von sich selbst retten, seit heute</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Angetrieben von Koffein und guten Patches</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch-Quellen</string>
-    <string name="sources_management_subtitle">%d Quellen installiert</string>
     <string name="sources_management_open_in_browser">Im Browser öffnen</string>
     <string name="sources_management_failed_to_open_url">Fehler beim Öffnen der URL</string>
     <string name="sources_management_date_added">Hinzugefügt am</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Löschen Sie die Quelle \"%s\"? Dies kann nicht rückgängig gemacht werden</string>
     <string name="sources_dialog_remote">Remote</string>
     <string name="sources_dialog_remote_url">URL der Quelle</string>
-    <string name="sources_dialog_remote_url_formats">"Beispiele:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Beispiele:</string>
     <string name="sources_dialog_local">Lokal</string>
     <string name="sources_dialog_local_file">Wählen Sie die Patch-Bündel-Datei aus</string>
     <string name="sources_dialog_local_file_description">Wählen Sie eine .mpp-Patch-Source-Datei aus dem Speicher aus</string>
@@ -78,6 +74,8 @@ Kompatible Versionen:"</string>
     <string name="home_apk_availability_unpatched_label">Unbehandelt</string>
     <string name="home_apk_availability_yes">Ja, ich habe es </string>
     <string name="home_apk_availability_no">Nein, hilf mir, es zu finden </string>
+    <string name="home_apk_use_saved_with_version">Verwenden Sie das gespeicherte APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Kein gespeichertes APK. Das Patching erfordert die erneute Auswahl der APK-Datei</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laden Sie die ursprüngliche APK herunter </string>
     <string name="home_download_instructions_steps_title">Anleitung:</string>
@@ -102,15 +100,15 @@ Kompatible Versionen:"</string>
     <string name="home_no_patches_for_app">Keine Patches verfügbar für diese App</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-Modus</string>
-    <string name="expert_mode_subtitle_extended">%1$d von %2$d Patches ausgewählt</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s von %2$s ausgewählt</string>
     <string name="expert_mode_search">Suche nach Patches</string>
     <string name="expert_mode_proceed">Weiter zum Patchen</string>
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
     <string name="expert_mode_enable_all">Aktiviere alle</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
     <string name="expert_mode_no_patches">Keine Patches verfügbar</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Mehrere Patchquellen ausgewählt</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Sie haben Patches von mehreren Quellen ausgewählt. Dies kann Kompatibilitätsprobleme oder unerwartetes Verhalten verursachen.
+    <string name="expert_mode_multiple_sources_warning_title">Mehrere Patchquellen ausgewählt</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Sie haben Patches aus mehreren Quellen ausgewählt. Dies kann Kompatibilitätsprobleme oder unerwartetes Verhalten verursachen.
 
 Möchten Sie trotzdem fortfahren?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="home_app_info_delete_item_patched_apk">Geänderte APK-Datei</string>
     <string name="home_app_info_delete_item_original_apk">Ursprüngliche APK-Datei</string>
     <string name="home_app_info_delete_preservation_note">Deine Patchauswahl und Optionen werden für zukünftiges Patchen erhalten.</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Entfernt %d veraltete Patches aus der gespeicherten Auswahl</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unbenannt</string>
     <string name="home_app_info_patches_replace_fail">Fehler beim Importieren der Patches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Original-APK nicht gefunden. Kann diese App nicht erneut patchen</string>
-    <string name="home_app_info_repatch_requires_original">Um die App erneut zu patchen, wird das ursprüngliche APK-Datei benötigt.</string>
     <string name="home_app_info_original_package_name">Originaler Paketname</string>
     <string name="home_app_info_applied_patches">Angewandte Patches</string>
     <string name="home_app_info_patch_source_used">Verwendete Patch-Bündel</string>
@@ -180,11 +176,17 @@ Möchten Sie trotzdem fortfahren?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-Modus erfordert, dass die ursprüngliche APK-Datei auf deinem Gerät installiert ist, bevor du mit dem Patchen beginnst</string>
     <string name="root_gmscore_excluded">GmsCore-Unterstützungspatch ist im Root-Modus ausgeschlossen</string>
+    <string name="root_pre_patch_installer_title">Installationsmethode auswählen</string>
+    <string name="root_pre_patch_installer_description">Ihr Gerät hat Root-Zugriff. Wählen Sie, wie Sie die gepatchte App installieren möchten</string>
+    <string name="root_pre_patch_installer_mount_title">Root-Mount</string>
+    <string name="root_pre_patch_installer_mount_description">Patchte APK über die Standard-App mounten. Kein GmsCore erforderlich</string>
+    <string name="root_pre_patch_installer_standard_title">Standard-Installation</string>
+    <string name="root_pre_patch_installer_standard_description">Installieren Sie als separate App mit GmsCore-Unterstützung. Wählen Sie den Installer (Systeminstaller, Shizuku, etc.) nach dem Patching</string>
+    <string name="root_pre_patch_installer_hint">Die Installationsmethode bestimmt, welche Patches enthalten sind und nach dem Patching nicht verändert werden kann</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fehler in die Zwischenablage kopiert</string>
     <string name="patcher_error_log">Fehlerprotokoll</string>
     <string name="patcher_error_technical">Technische Details</string>
-    <string name="patcher_patches_progress">%1$d von %2$d Patches</string>
     <string name="patcher_long_step_warning">Dieser Schritt kann eine Weile dauern. Bitte warten…</string>
     <string name="patcher_installing_subtitle">Fast fertig zum Rocken! 🎸</string>
     <string name="patcher_success_title">Alles erledigt! 🎉</string>
@@ -247,7 +249,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="patched_app_save_failed_toast">Fehler beim Speichern der App</string>
     <string name="download_apk">APK-Datei herunterladen</string>
     <string name="plugin_activity_dialog_body">Benutzerinteraktion ist erforderlich, um diesen Plugin fortzusetzen</string>
-    <string name="patcher_process_exit_message">Patcher-Prozess endete mit Code %1$d</string>
+    <string name="patcher_process_exit_message">Der Patcher-Prozess ist mit dem Code %1$s beendet worden</string>
     <string name="install_app_success">Erfolgreich installiert</string>
     <string name="install_app_fail">App konnte nicht installiert werden: %s</string>
     <string name="install_timeout_message">Die Installation wurde nicht abgeschlossen. Überprüfe den Systeminstallationsdialog und versuche es erneut</string>
@@ -279,9 +281,10 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Hell</string>
     <string name="settings_appearance_dark">Dunkel</string>
-    <string name="settings_appearance_black">Schwarz</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Akzentfarbe</string>
+    <string name="settings_appearance_pure_black">Reines Schwarz</string>
+    <string name="settings_appearance_pure_black_description">Verwenden Sie echte schwarze Hintergründe für OLED-Displays</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App-Sprache</string>
     <string name="settings_appearance_app_language_current">Aktuelle Sprache</string>
@@ -305,12 +308,14 @@ Möchten Sie trotzdem fortfahren?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Erweiterte Einstellungen</string>
     <string name="settings_advanced_expert_mode">Erweiterter Modus</string>
-    <string name="settings_advanced_expert_mode_description">Aktiviert erweiterte Funktionen und Anpassungsoptionen</string>
+    <string name="settings_advanced_expert_mode_description">Aktiviere komplexe Morphe-Patch-Einstellungen und individuelle Anpassungsoptionen.</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Expert-Modus aktivieren?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert-Modus gewährt mehr Kontrolle darüber, wie Patches angewendet werden, kann aber bei falscher Konfiguration zu einer nicht funktionsfähigen App führen.</string>
     <string name="settings_advanced_strip_unused_libs">Entferne nicht verwendete native Bibliotheken</string>
     <string name="settings_advanced_strip_unused_libs_description">Lösche native Bibliotheken für nicht unterstützte CPU-Architekturen aus gepatchten Apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub-PAT</string>
-    <string name="settings_advanced_github_pat_description">Erforderlich für Pull-Request-Bündel</string>
+    <string name="settings_advanced_github_pat_description">Erforderlich für Pull-Request-Quellen</string>
     <string name="settings_advanced_github_pat_configured">Token konfiguriert</string>
     <string name="settings_advanced_github_pat_how_to_get">Wie bekomme ich ein Token?</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Personal Access Token festlegen</string>
@@ -434,7 +439,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_process_runtime_enable">Ein niedriges Speicherlimit kann bei großen Apps zu Fehlern führen</string>
     <string name="settings_system_memory_limit_subtitle">%d MB-Grenze</string>
     <string name="settings_system_memory_limit_warning">Klicken Sie hier, um die Konfiguration zu bearbeiten</string>
-    <string name="settings_system_process_runtime_enabled_description">Importieren Sie einen benutzerdefinierten Keystore</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB Begrenzung</string>
     <string name="settings_system_process_runtime_disabled_description">Keystore-Import</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importieren Sie Manager-Einstellungen aus einer JSON-Datei</string>
@@ -467,7 +472,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Debug-Protokolle exportieren</string>
     <string name="settings_system_export_debug_logs_description">Exportieren Sie Systemprotokolle zur Fehlerbehebung</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Fehler beim Lesen der Protokolle (Rückgabecode %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Fehler beim Lesen der Protokolle (Rückgabecode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Fehler beim Exportieren der Protokolle</string>
     <string name="settings_system_export_debug_logs_export_success">Protokolle exportiert</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Die Bildgrößen müssen wie folgt sein:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patchauswahlen</string>
     <string name="settings_system_patch_selections_description">Verwalten Sie gespeicherte Patchauswahlen und Optionen. Diese bestehen nach der Deinstallation der App fort.</string>
-    <string name="settings_system_patch_selections_description_short">Für zukünftiges Patchen gespeichert</string>
-    <string name="settings_system_patch_selections_empty">Keine gespeicherten Patchauswahlen</string>
-    <string name="settings_system_patch_selections_has_options">Hat Optionen</string>
-    <string name="settings_system_patch_selections_patches_options">Patchoptionen</string>
-    <string name="settings_system_patch_selection_delete_title">Patchauswahl löschen</string>
-    <string name="settings_system_patch_selection_deleted">Patchauswahl gelöscht</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Alle Auswahlen zurücksetzen?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Paketauswahlen zurücksetzen?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Quellenauswahl zurücksetzen?</string>
+    <string name="settings_system_patch_selection_no_saved">Keine gespeicherten Patch-Auswahlen</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s über %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Quelle #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Dies wird löschen:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Dies löscht dauerhaft alle gespeicherten Patch-Auswahlen für alle Pakete und Quellen</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dies löscht dauerhaft alle gespeicherten Patch-Auswahlen für %s über alle Quellen</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dies löscht permanent die gespeicherten Patchauswahlen für %1$s in Quelle #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Quelldatenexport fehlgeschlagen</string>
+    <string name="settings_system_export_source_data_success">Quelldaten erfolgreich exportiert</string>
+    <string name="settings_system_import_source_data_fail">Quelldatenimport fehlgeschlagen</string>
+    <string name="settings_system_import_source_data_success">Quelldaten erfolgreich importiert</string>
+    <string name="settings_system_patch_details_title">Patch-Details</string>
+    <string name="settings_system_selected_patches_title">Ausgewählte Patches (%s)</string>
+    <string name="settings_system_patch_options_title">Patch-Optionen (%s)</string>
+    <string name="settings_system_no_patches_or_options">Keine Patches oder Optionen gespeichert</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Über</string>
     <string name="settings_system_share_website">Website teilen</string>
@@ -510,6 +528,7 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="reset">Zurücksetzen</string>
+    <string name="reset_all">Alles zurücksetzen</string>
     <string name="confirm">Bestätigen</string>
     <string name="warning">Warnung</string>
     <string name="error_">Fehler</string>
@@ -531,6 +550,7 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="selected">Ausgewählt</string>
     <string name="not_selected">Nicht ausgewählt</string>
     <string name="rename">Umbenennen</string>
+    <string name="import_">Importieren</string>
     <string name="export">Exportieren</string>
     <string name="download">Herunterladen</string>
     <string name="less">Weniger</string>

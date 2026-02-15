@@ -7,6 +7,27 @@
         <item quantity="many">%d paistí</item>
         <item quantity="other">%d paiste</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d roghanna paiste</item>
+        <item quantity="two">%d roghanna paiste</item>
+        <item quantity="few">%d roghanna paiste</item>
+        <item quantity="many">%d roghanna paiste</item>
+        <item quantity="other">%d roghanna paiste</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d foinse</item>
+        <item quantity="two">%d foinsí</item>
+        <item quantity="few">%d foinsí</item>
+        <item quantity="many">%d foinsí</item>
+        <item quantity="other">%d foinsí</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d phacáiste</item>
+        <item quantity="two">%d phacáistí</item>
+        <item quantity="few">%d phacáistí</item>
+        <item quantity="many">%d phacáistí</item>
+        <item quantity="other">%d phacáistí</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Cuir %d paiste i gcrích</item>
         <item quantity="two">Cuir %d paistí i gcrích</item>
@@ -21,25 +42,25 @@
         <item quantity="many">%d comhad APK</item>
         <item quantity="other">%d comhad APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d rogha sábháilte</item>
-        <item quantity="two">%d rogha sábháilte</item>
-        <item quantity="few">%d rogha sábháilte</item>
-        <item quantity="many">%d rogha sábháilte</item>
-        <item quantity="other">%d rogha sábháilte</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Toghadh %1$d seachadán seachuiríochta as roghanna táirgthe</item>
+        <item quantity="two">Toghadh %1$d seachadán seachuiríochta as roghanna táirgthe</item>
+        <item quantity="few">Toghadh %1$d seachadán seachuiríochta as roghanna táirgthe</item>
+        <item quantity="many">Toghadh %1$d seachadán seachuiríochta as roghanna táirgthe</item>
+        <item quantity="other">Toghadh %1$d seachadán seachuiríochta as roghanna táirgthe</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Tá %d pacáiste díchumasaithe</item>
-        <item quantity="two">Tá %d pacáiste(í) díchumasaithe</item>
-        <item quantity="few">Tá %d pacáiste(í) díchumasaithe</item>
-        <item quantity="many">Tá %d pacáiste(í) díchumasaithe</item>
-        <item quantity="other">Tá %d pacáiste(í) díchumasaithe</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d foinsí instálaithe</item>
+        <item quantity="two">%1$d foinsí instálaithe</item>
+        <item quantity="few">%1$d foinsí instálaithe</item>
+        <item quantity="many">%1$d foinsí instálaithe</item>
+        <item quantity="other">%1$d foinsí instálaithe</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="two">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="few">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="many">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="other">Tá %d pacáiste(í) ag obair</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d paistí roghnaithe</item>
+        <item quantity="two">%d paistí roghnaithe</item>
+        <item quantity="few">%d paistí roghnaithe</item>
+        <item quantity="many">%d paistí roghnaithe</item>
+        <item quantity="other">%d paistí roghnaithe</item>
     </plurals>
 </resources>

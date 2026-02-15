@@ -13,7 +13,7 @@
     <string name="home_update_error">更新失败</string>
     <string name="home_update_error_subtitle">请检查您的互联网连接并重试</string>
     <string name="home_updating_sources">正在更新源…</string>
-    <string name="home_update_progress">%1$d/%2$d 个源已处理</string>
+    <string name="home_update_progress_format">已处理 %1$s / </string>
     <string name="home_update_success">源更新完成</string>
     <string name="home_update_success_subtitle">您的源已是最新的</string>
     <string name="home_sources_are_loading">源正在加载，请稍等…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">靠咖啡因和好的补丁供电</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">补丁源</string>
-    <string name="sources_management_subtitle">已安装%d个源</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
     <string name="sources_management_failed_to_open_url">执行 %s 失败</string>
     <string name="sources_management_date_added">已添加</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">删除源“%s”吗？此操作无法撤销</string>
     <string name="sources_dialog_remote">远程</string>
     <string name="sources_dialog_remote_url">源 URL</string>
-    <string name="sources_dialog_remote_url_formats">"示例：
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">示例：</string>
     <string name="sources_dialog_local">本地</string>
     <string name="sources_dialog_local_file">选择补丁源文件</string>
     <string name="sources_dialog_local_file_description">从存储中选择 .mpp 补丁源文件</string>
@@ -78,6 +74,8 @@
     <string name="home_apk_availability_unpatched_label">未修补</string>
     <string name="home_apk_availability_yes">是的，我有</string>
     <string name="home_apk_availability_no">没有，帮我找一下</string>
+    <string name="home_apk_use_saved_with_version">使用保存的APK（v%s）</string>
+    <string name="home_app_info_no_saved_apk">没有保存的APK。修补需要重新选择APK文件</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下载原始 APK</string>
     <string name="home_download_instructions_steps_title">说明：</string>
@@ -102,15 +100,15 @@
     <string name="home_no_patches_for_app">此应用无补丁记录</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">高级模式</string>
-    <string name="expert_mode_subtitle_extended">已选择%d/%2$d个补丁</string>
+    <string name="expert_mode_subtitle_extended_format">已选择 %1$s 个应用</string>
     <string name="expert_mode_search">搜索补丁</string>
     <string name="expert_mode_proceed">开始修补</string>
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_no_patches">无可用更新</string>
-    <string name="expert_mode_multiple_bundles_warning_title">已选择多个补丁源</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意料之外的行为。
+    <string name="expert_mode_multiple_sources_warning_title">已选择多个补丁源</string>
+    <string name="expert_mode_multiple_sources_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意想不到的行为。
 
 您确定要继续吗？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@
     <string name="home_app_info_delete_item_patched_apk">修补后的 APK 文件</string>
     <string name="home_app_info_delete_item_original_apk">原始 APK 文件</string>
     <string name="home_app_info_delete_preservation_note">您的修补选择和选项将保留以进行将来修补</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">已删除保存选择中的%d个过时补丁</string>
     <string name="home_app_info_patches_name_default">补丁</string>
     <string name="home_app_info_patches_name_fallback">未命名</string>
     <string name="home_app_info_patches_replace_fail">导入补丁失败：%s</string>
     <string name="home_app_info_repatch_no_original_apk">找不到原始 APK。无法修补此应用</string>
-    <string name="home_app_info_repatch_requires_original">重新修补需要原始 APK 文件</string>
     <string name="home_app_info_original_package_name">原始包名</string>
     <string name="home_app_info_applied_patches">已应用的补丁</string>
     <string name="home_app_info_patch_source_used">使用的补丁源</string>
@@ -180,11 +176,17 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">根模式需要在修补前将原始 APK 安装在设备上</string>
     <string name="root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
+    <string name="root_pre_patch_installer_title">选择安装方法</string>
+    <string name="root_pre_patch_installer_description">您的设备具有根访问权限。选择如何安装修补后的应用程序</string>
+    <string name="root_pre_patch_installer_mount_title">根挂载</string>
+    <string name="root_pre_patch_installer_mount_description">将修补后的APK挂载在原始应用程序上。不需要GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">标准安装</string>
+    <string name="root_pre_patch_installer_standard_description">作为单独应用程序安装，支持GmsCore。在修补后选择安装程序（系统安装程序，Shizuku等）</string>
+    <string name="root_pre_patch_installer_hint">安装方法确定哪些修补程序包含，修补后无法更改</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
     <string name="patcher_error_technical">技术细节</string>
-    <string name="patcher_patches_progress">%1$d / %2$d 个补丁</string>
     <string name="patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
     <string name="patcher_installing_subtitle">准备摇滚！ 🎸</string>
     <string name="patcher_success_title">全部完成！ 🎉</string>
@@ -247,7 +249,7 @@
     <string name="patched_app_save_failed_toast">保存修补后的应用失败</string>
     <string name="download_apk">下载 APK 文件</string>
     <string name="plugin_activity_dialog_body">需要用户交互才能继续使用此插件</string>
-    <string name="patcher_process_exit_message">修补程序进程退出，代码为 %1$d</string>
+    <string name="patcher_process_exit_message">修补程序进程退出，代码为 %1$s。</string>
     <string name="install_app_success">安装成功</string>
     <string name="install_app_fail">应用安装失败：%s</string>
     <string name="install_timeout_message">安装未完成。请检查系统安装程序对话框并重试</string>
@@ -279,9 +281,10 @@
     <string name="settings_appearance_system">系统</string>
     <string name="settings_appearance_light">浅色</string>
     <string name="settings_appearance_dark">深色</string>
-    <string name="settings_appearance_black">黑色</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">强调色</string>
+    <string name="settings_appearance_pure_black">纯黑</string>
+    <string name="settings_appearance_pure_black_description">为OLED显示器使用真正的黑色背景</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">应用语言</string>
     <string name="settings_appearance_app_language_current">当前语言</string>
@@ -305,12 +308,14 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高级设置</string>
     <string name="settings_advanced_expert_mode">高级模式</string>
-    <string name="settings_advanced_expert_mode_description">启用高级功能和自定义选项</string>
+    <string name="settings_advanced_expert_mode_description">启用复杂的 Morphe 补丁设置和自定义选项</string>
+    <string name="settings_advanced_expert_mode_dialog_title">启用专家模式？</string>
+    <string name="settings_advanced_expert_mode_dialog_message">专家模式提供了更多控制如何应用补丁的选项，但如果错误配置专家模式设置，可能会导致应用程序无法使用</string>
     <string name="settings_advanced_strip_unused_libs">移除未使用的原生库</string>
     <string name="settings_advanced_strip_unused_libs_description">从修补的应用中删除不支持 CPU 架构的原生库</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">用于合并请求捆绑包</string>
+    <string name="settings_advanced_github_pat_description">用于拉取请求源所需</string>
     <string name="settings_advanced_github_pat_configured">已配置令牌</string>
     <string name="settings_advanced_github_pat_how_to_get">如何获取令牌</string>
     <string name="settings_advanced_github_pat_dialog_title">设置 GitHub 个人访问令牌</string>
@@ -434,7 +439,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">启用运行时长</string>
     <string name="settings_system_memory_limit_subtitle">可用于修补的内存</string>
     <string name="settings_system_memory_limit_warning">较低的内存限制可能会导致修补较大应用时失败</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB 限制</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB限制</string>
     <string name="settings_system_process_runtime_disabled_description">点击配置</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">导入 &amp; 导出</string>
@@ -467,7 +472,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">调试</string>
     <string name="settings_system_export_debug_logs">导出调试日志</string>
     <string name="settings_system_export_debug_logs_description">导出系统日志以进行故障排除</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">读取日志失败 (退出代码 %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">读取日志失败 (退出代码 %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">导出日志失败</string>
     <string name="settings_system_export_debug_logs_export_success">日志已导出</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">修补选择</string>
     <string name="settings_system_patch_selections_description">管理保存的修补选择和选项。这些在应用卸载后仍然存在</string>
-    <string name="settings_system_patch_selections_description_short">保存以进行将来修补</string>
-    <string name="settings_system_patch_selections_empty">没有保存的修补选择</string>
-    <string name="settings_system_patch_selections_has_options">有选项</string>
-    <string name="settings_system_patch_selections_patches_options">修补选项</string>
-    <string name="settings_system_patch_selection_delete_title">删除修补选择</string>
-    <string name="settings_system_patch_selection_deleted">修补选择已删除</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">重置补丁选择?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">重置补丁选择?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">重置补丁选择?</string>
+    <string name="settings_system_patch_selection_no_saved">重置补丁选择</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s 到 %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s 到 %2$s</string>
+    <string name="settings_system_patch_selection_source_format">源 #%s</string>
+    <string name="settings_system_patch_selection_will_delete">这将删除：</string>
+    <string name="settings_system_patch_selection_reset_all_warning">这将永久删除所有保存的补丁选择，适用于所有包和源</string>
+    <string name="settings_system_patch_selection_reset_package_warning">这将永久删除 %s 的所有保存补丁选择，跨越所有源</string>
+    <string name="settings_system_patch_selection_reset_source_warning">这将永久删除已保存的补丁选择，包括 %1$s 在源 #%2$s 中</string>
+    <string name="settings_system_export_source_data_fail">导出源数据失败</string>
+    <string name="settings_system_export_source_data_success">源数据导出成功</string>
+    <string name="settings_system_import_source_data_fail">导入源数据失败</string>
+    <string name="settings_system_import_source_data_success">源数据导入成功</string>
+    <string name="settings_system_patch_details_title">补丁详情</string>
+    <string name="settings_system_selected_patches_title">已选择的补丁 (%s)</string>
+    <string name="settings_system_patch_options_title">补丁选项 (%s)</string>
+    <string name="settings_system_no_patches_or_options">没有保存的补丁或选项</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">关于</string>
     <string name="settings_system_share_website">分享网站</string>
@@ -508,6 +526,7 @@ morphe_header_custom_dark.png
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="reset">重置</string>
+    <string name="reset_all">重置所有</string>
     <string name="confirm">确认</string>
     <string name="warning">警告</string>
     <string name="error_">错误</string>
@@ -529,6 +548,7 @@ morphe_header_custom_dark.png
     <string name="selected">已选择</string>
     <string name="not_selected">未选择</string>
     <string name="rename">重命名</string>
+    <string name="import_">导入</string>
     <string name="export">导出</string>
     <string name="download">下载</string>
     <string name="less">更少</string>

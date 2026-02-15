@@ -14,7 +14,7 @@
     <string name="home_update_error">อัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
     <string name="home_updating_sources">กำลังอัพเดทข้อมูล…</string>
-    <string name="home_update_progress">%1$d/%2$d แหล่งข้อมูลที่ถูกดำเนินการแล้ว</string>
+    <string name="home_update_progress_format">%1$s ถูกประมวลผลแล้ว</string>
     <string name="home_update_success">การอัพเดทแหล่งข้อมูลเสร็จสมบูรณ์แล้ว</string>
     <string name="home_update_success_subtitle">แหล่งข้อมูลของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งข้อมูล กรุณารอสักครู่…</string>
@@ -30,7 +30,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">อยากดูโฆษณาไหม? ผมไม่เอาล่ะหนึ่ง</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">มาทำให้แอปพลิเคชันของคุณมีพฤติกรรมที่ดีขึ้นกันเถอะ</string>
+    <string name="home_greeting_6">มาปรับตัวแอปของคุณให้มีพฤติกรรมดีขึ้นเถอะ</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">พยากรณ์วันนี้: การแพตซ์แอปพลิเคชันสำเร็จ 100%</string>
     <!-- From mediocrity to amazing -->
@@ -41,7 +41,6 @@
     <string name="home_greeting_10">สนับสนุนโดยกาแฟหนึ่งแก้วกับแพตซ์ที่มีคุณภาพ</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งข้อมูล</string>
-    <string name="sources_management_subtitle">%d แหล่งข้อมูลถูกติดตั้งแล้ว</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_date_added">เพิ่มเข้ามาแล้ว</string>
@@ -50,16 +49,14 @@
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
     <string name="sources_dialog_duplicate_name_error">แหล่งข้อมูลที่มีชื่อนี้อยู่แล้ว</string>
+    <string name="sources_dialog_missing_error">ไม่สามารถอัปเดตแหล่งที่มาแล้ว</string>
     <string name="sources_dialog_view_any_version">เวอร์ชันใด ๆ</string>
     <string name="sources_dialog_view_any_package">แพ็คเกจใด ๆ</string>
     <string name="sources_dialog_add_source">เพิ่มแหล่งข้อมูล</string>
     <string name="sources_dialog_delete_confirm_message">ลบแหล่งข้อมูล “%s” ? นี้ ขั้นตอนนี้ไม่สามารถยกเลิกได้</string>
     <string name="sources_dialog_remote">รีโมต</string>
     <string name="sources_dialog_remote_url">URL แหล่งข้อมูล</string>
-    <string name="sources_dialog_remote_url_formats">"ตัวอย่าง:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">ตัวอย่าง:</string>
     <string name="sources_dialog_local">อุปกรณ์</string>
     <string name="sources_dialog_local_file">เลือกไฟล์แหล่งข้อมูล</string>
     <string name="sources_dialog_local_file_description">เลือกไฟล์ .mpp จากแหล่งข้อมูลอยู่บนที่เก็บข้อมูลภายใน</string>
@@ -76,8 +73,10 @@
 เวอร์ชันที่เข้ากัน:"</string>
     <string name="home_apk_availability_recommended_label">แนะนำ</string>
     <string name="home_apk_availability_unpatched_label">ไม่ได้แพตซ์</string>
-    <string name="home_apk_availability_yes">ใช่ ฉันมีมัน</string>
+    <string name="home_apk_availability_yes">ใช่ ฉันมีแล้ว</string>
     <string name="home_apk_availability_no">ไม่ ช่วยฉันหา</string>
+    <string name="home_apk_use_saved_with_version">ใช้ APK ที่ถูกบันทึก (เวอร์ชัน %s)</string>
+    <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก. การปรับปรุงจะต้องเลือกไฟล์ APK อีกครั้ง</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ดาวน์โหลด APK ดังเดิม</string>
     <string name="home_download_instructions_steps_title">คำแนะนำ:</string>
@@ -102,15 +101,15 @@
     <string name="home_no_patches_for_app">ไม่มีแพตซ์ที่รองรับกับแอปพลิเคชันนี้</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">โหมดผู้เชี่ยวชาญ</string>
-    <string name="expert_mode_subtitle_extended">%1$d จาก %2$d แพตซ์ที่ถูกเลือกแล้ว</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s จาก %2$s ที่ถูกเลือกแล้ว</string>
     <string name="expert_mode_search">ค้นหาแพตซ์</string>
     <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
     <string name="expert_mode_no_patches">ไม่มีแพตซ์ให้ใช้งาน</string>
-    <string name="expert_mode_multiple_bundles_warning_title">เลือกแหล่งที่มาแปลงหลายรายการ</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
+    <string name="expert_mode_multiple_sources_warning_title">หลายแหล่งปรับปรุงถูกเลือก</string>
+    <string name="expert_mode_multiple_sources_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
 
 คุณแน่ใจที่จะดำเนินต่อไปหรือไม่?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +159,10 @@
     <string name="home_app_info_delete_item_patched_apk">ไฟล์ APK ที่แก้ไขแล้ว</string>
     <string name="home_app_info_delete_item_original_apk">ไฟล์ APK รุ่นต้นฉบับ</string>
     <string name="home_app_info_delete_preservation_note">แพตซ์ที่คุณเลือกไว้และการตั้งค่าของคุณจะถูกเก็บไว้สำหรับการแก้ไขในอนาคต</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">ลบ %d ปัญหาเก่าไปจากการเลือกที่ถูกบันทึก</string>
     <string name="home_app_info_patches_name_default">แพตช์</string>
     <string name="home_app_info_patches_name_fallback">ไม่มีชื่อ</string>
     <string name="home_app_info_patches_replace_fail">ไม่สามารถนำเข้าแพตช์: %s</string>
     <string name="home_app_info_repatch_no_original_apk">ไม่พบ APK รุ่นต้นฉบับ. ไม่สามารถปรับแก้แอปนี้ได้อีก</string>
-    <string name="home_app_info_repatch_requires_original">นำพัท์แอปต้องมีไฟล์ APK แบบต้น</string>
     <string name="home_app_info_original_package_name">ชื่อแพ็กเกจดังเดิม</string>
     <string name="home_app_info_applied_patches">แพตช์ที่ถูกนำพัท์</string>
     <string name="home_app_info_patch_source_used">ใช้ซอร์สปัทช์</string>
@@ -180,15 +177,21 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">โหมดรากรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนปรับแก้</string>
     <string name="root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
+    <string name="root_pre_patch_installer_title">เลือกวิธีการติดตั้ง</string>
+    <string name="root_pre_patch_installer_description">อุปกรณ์ของคุณมีสิทธิ์รูท. เลือกวิธีที่คุณต้องการติดตั้งแอปพลิเคชันที่แก้ไขแล้ว</string>
+    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_description">ติดตั้ง APK แก้ไขเหนือแอปพลิเคชันสต็อก. ไม่จำเป็นต้องมี GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">ติดตั้งแบบมาตรฐาน</string>
+    <string name="root_pre_patch_installer_standard_description">ติดตั้งเป็นแอปพลิเคชันแยกต่างหากกับการสนับสนุน GmsCore. เลือกตัวติดตั้ง (ตัวติดตั้งระบบ, Shizuku, ฯลฯ) หลังจากแก้ไข</string>
+    <string name="root_pre_patch_installer_hint">วิธีการติดตั้งกำหนดว่าประเภทไหนของการแก้ไขจะรวมอยู่และไม่สามารถเปลี่ยนได้หลังจากแก้ไขแล้ว</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
     <string name="patcher_error_technical">รายละเอียดทางเทคนิค</string>
-    <string name="patcher_patches_progress">%1$d / %2$d แพตช์</string>
     <string name="patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
     <string name="patcher_installing_subtitle">ใกล้พร้อมแล้ว! 🎸</string>
     <string name="patcher_success_title">เสร็จสิ้นแล้ว! 🎉</string>
-    <string name="patcher_success_subtitle">แอปของคุณถูกแพตช์และติดตั้งแล้ว!</string>
+    <string name="patcher_success_subtitle">แอปของคุณได้รับการแพตช์และถูกติดตั้งแล้ว!</string>
     <string name="patcher_complete_title">การแพตช์เสร็จสมบูรณ์แล้ว! ✨</string>
     <string name="patcher_failed_title">อุ๊ย! เกิดข้อผิดพลาดบางอย่างขึ้น</string>
     <string name="patcher_failed_subtitle">ตรวจสอบรายละเอียดข้อผิดพลาดด้านล่าง</string>
@@ -221,12 +224,12 @@
     <string name="patcher_message_4">กำลังร่ายเวทมนตร์ดิจิทัล… ☕</string>
     <string name="patcher_message_5">แนะนำให้พักดื่มกาแฟ… ☕</string>
     <string name="patcher_message_6">มองออกไปข้างนอกสิ อากาศดีนะ… 🌤️</string>
-    <string name="patcher_message_7">กำลังปรับ 1 และ 0… 🤖</string>
+    <string name="patcher_message_7">กำลังปรับบิต 1 และ 0… 🤖</string>
     <string name="patcher_message_8">กำลังคลายปมสปาเก็ตตี้ดิจิทัล… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">กำลังแก้ไขปัญหาในแอปที่ไม่ถูกปรับแต่ง… 🪲</string>
-    <string name="patcher_message_10">แพตช์ดีๆ คุ้มค่ากับที่รอคอย… ⏳</string>
-    <string name="patcher_message_11">กำลังขัดเกลาพิกเซลให้เปล่งประกาย… 💎</string>
+    <string name="patcher_message_10">แพตช์ดีๆ กับคุ้มค่ากับที่รอคอย… ⏳</string>
+    <string name="patcher_message_11">กำลังขัดเกลาเม็ดพิกเซลให้เปล่งประกาย… 💎</string>
     <string name="patcher_message_12">โปรดนั่งรอจนกว่าลูกเรือจะปิดป้ายบอกว่า \'กำลังแก้ไข\' 💺✈️</string>
     <string name="patcher_message_13">กำลังปรุงแอปที่แพตช์แล้วของคุณ สดๆ ร้อนๆ … 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
@@ -247,7 +250,7 @@
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แก้ไขได้</string>
     <string name="download_apk">ดาวน์โหลดไฟล์ APK</string>
     <string name="plugin_activity_dialog_body">ต้องมีการติดต่อผู้ใช้เพื่อดำเนินการต่อไปนี้</string>
-    <string name="patcher_process_exit_message">กระบวนการปรับแก้สิ้นสุดลงด้วยรหัส %1$d</string>
+    <string name="patcher_process_exit_message">กระบวนการแพทช์ออกไปแล้วด้วยรหัส %1$s</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
     <string name="install_timeout_message">การติดตั้งไม่สำเร็จ. ตรวจสอบการติดตั้งของตัวติดตั้งระบบและลองอีกครั้ง</string>
@@ -279,9 +282,10 @@
     <string name="settings_appearance_system">เบา</string>
     <string name="settings_appearance_light">ดำม</string>
     <string name="settings_appearance_dark">ดำม</string>
-    <string name="settings_appearance_black">ดำม You</string>
     <string name="settings_appearance_dynamic">สีเส้น</string>
     <string name="settings_appearance_accent_color">สีโฆษณา</string>
+    <string name="settings_appearance_pure_black">ดำสีบริสุทธิ์</string>
+    <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำจริงสำหรับหน้าจอ OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">ภาษาของแอป</string>
     <string name="settings_appearance_app_language_current">ภาษาที่ใช้อยู่</string>
@@ -305,12 +309,14 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าแบบผู้เชี่ยวช์</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
-    <string name="settings_advanced_expert_mode_description">เปิดใช้งานคุณสมบัติขั้นสูงกับตัวเลือกการปรับแต่ง</string>
+    <string name="settings_advanced_expert_mode_description">เปิดใช้งานการปรับแต่งตัวเลือกและการตั้งค่าความละเอียดสูงสำหรับการปรับปรุง Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมการนำเข้าแปลงมากขึ้น แต่การตั้งค่าค่าไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปพลิเคชันไม่สามารถใช้งานได้</string>
     <string name="settings_advanced_strip_unused_libs">ลบเนทิฟไลบรารีที่ไม่ได้ใช้</string>
     <string name="settings_advanced_strip_unused_libs_description">ลบเนทิฟไลบรารีที่ไม่รองรับสถาปัตยกรรมของ CPU บนอุปกรณ์ของคุณ จากแอปที่ถูกแพตซ์</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">โทเคน GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแพ็คเกจคำขอเปลี่ยน (pull request bundles)</string>
+    <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแหล่งขอร้องข้อมูล</string>
     <string name="settings_advanced_github_pat_configured">โทเค็นถูกกำหนดค่าแล้ว</string>
     <string name="settings_advanced_github_pat_how_to_get">วิธีการรับโทเคน</string>
     <string name="settings_advanced_github_pat_dialog_title">ตั้งค่าโทเคนการเข้าถึงส่วนบุคคลของ GitHub</string>
@@ -435,7 +441,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">เปิดใช้การทำงานของโปรเซส</string>
     <string name="settings_system_memory_limit_subtitle">ขนาดความจำที่ใช้สำหรับการแพตซ์</string>
     <string name="settings_system_memory_limit_warning">ขนาดความจำต่ำหรืออาจทำให้การนำพัท์ล้ม</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB ขนาดความจำ</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB จำกัด</string>
     <string name="settings_system_process_runtime_disabled_description">คลิกเพื่อตั้งค่า</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">นำเข้า &amp; ส่งออก</string>
@@ -468,7 +474,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">ส่งออกไฟล์การพัฒยายสำหรับการแก้ไข</string>
     <string name="settings_system_export_debug_logs">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>
     <string name="settings_system_export_debug_logs_description">ส่งออกไฟล์การพัฒยายเสร็จ</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">การจัดการเก็บเก็บ</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">ล้มเหลวในการอ่านบันทึก (รหัสออก %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ส่งออกบันทึกไม่สำเร็จ</string>
     <string name="settings_system_export_debug_logs_export_success">ขนาดทั้งหมด: %s</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -492,12 +498,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">การเลือกการแก้ไข</string>
     <string name="settings_system_patch_selections_description">จัดการการเลือกการแก้ไขและตัวเลือกที่บันทึกไว้ การเลือกนี้จะคงอยู่หลังจากการลบแอป</string>
-    <string name="settings_system_patch_selections_description_short">บันทึกไว้สำหรับการแก้ไขในอนาคต</string>
-    <string name="settings_system_patch_selections_empty">ไม่มีการเลือกการแก้ไขที่บันทึกไว้</string>
-    <string name="settings_system_patch_selections_has_options">มีตัวเลือก</string>
-    <string name="settings_system_patch_selections_patches_options">ตัวเลือกการแก้ไข</string>
-    <string name="settings_system_patch_selection_delete_title">ลบการเลือกการแก้ไข</string>
-    <string name="settings_system_patch_selection_deleted">การเลือกการแก้ไขถูกลบแล้ว</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">รีเซ็ตการเลือกทั้งหมด?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">รีเซ็ตการเลือกแพ็กเกจ?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">รีเซ็ตการเลือกแหล่งที่มา?</string>
+    <string name="settings_system_patch_selection_no_saved">ไม่มีการบันทึกการเลือกแพตช์</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s ถึง %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ถึง %2$s</string>
+    <string name="settings_system_patch_selection_source_format">แหล่งที่มา #%s</string>
+    <string name="settings_system_patch_selection_will_delete">สิ่งนี้จะลบ:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับทุกแพ็กเกจและแหล่งที่มา</string>
+    <string name="settings_system_patch_selection_reset_package_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับ %s ทั่วไปในแหล่งที่มา</string>
+    <string name="settings_system_patch_selection_reset_source_warning">การกระทำนี้จะลบการบันทึกการเลือกแพตช์ที่ถูกบันทึกไว้สำหรับ %1$s ในแหล่งที่มา #%2$s อย่างถาวร</string>
+    <string name="settings_system_export_source_data_fail">ล้มเหลวในการส่งออกข้อมูลแหล่งที่มา</string>
+    <string name="settings_system_export_source_data_success">ส่งออกข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
+    <string name="settings_system_import_source_data_fail">ล้มเหลวในการนำเข้าข้อมูลแหล่งที่มา</string>
+    <string name="settings_system_import_source_data_success">นำเข้าข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
+    <string name="settings_system_patch_details_title">รายละเอียดแพตช์</string>
+    <string name="settings_system_selected_patches_title">แพตซ์ที่เลือก (%s)</string>
+    <string name="settings_system_patch_options_title">ตัวเลือกแพตช์ (%s)</string>
+    <string name="settings_system_no_patches_or_options">ไม่มีการบันทึกแพตช์หรือตัวเลือก</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
@@ -510,6 +529,7 @@ morphe_header_custom_dark.png
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
     <string name="reset">รีเซ็ต</string>
+    <string name="reset_all">รีเซ็ตทั้งหมด</string>
     <string name="confirm">ยืนยัน</string>
     <string name="warning">คำเตือน</string>
     <string name="error_">ขยาย</string>
@@ -531,6 +551,7 @@ morphe_header_custom_dark.png
     <string name="selected">รีมอน</string>
     <string name="not_selected">ติดตั้ง</string>
     <string name="rename">เปลี่ยนชื่อ</string>
+    <string name="import_">นำเข้า</string>
     <string name="export">ส่งออก</string>
     <string name="download">ดาวน์โหลด</string>
     <string name="less">น้อยลง</string>

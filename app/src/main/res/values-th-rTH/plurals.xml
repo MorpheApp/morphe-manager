@@ -3,19 +3,28 @@
     <plurals name="patch_count">
         <item quantity="other">%d แพตช์</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d ตัวเลือก</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d แหล่งข้อมูล</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d แพ็คเกจ</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">ดำเนินการ %d แพตช์</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="other">%d ไฟล์ APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="other">%d การเลือกที่ถูกบันทึก</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="other">ถอด %1$d แพ็คเกจที่เก่าไปแล้วจากการเลือกที่บันทึกไว้</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">ปิดการใช้งาน %d แหล่งข้อมูล</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="other">%1$d แหล่งที่มาได้รับการติดตั้งแล้ว</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">เปิดการใช้งาน %d แหล่งข้อมูล</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="other">%d แพตซ์ที่ถูกเลือกแล้ว</item>
     </plurals>
 </resources>

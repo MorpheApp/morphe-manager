@@ -13,7 +13,7 @@
     <string name="home_update_error">Aktualizacja nie powiodła się</string>
     <string name="home_update_error_subtitle">Sprawdź swoje połączenie internetowe i spróbuj ponownie</string>
     <string name="home_updating_sources">Aktualizowanie źródeł…</string>
-    <string name="home_update_progress">Przetworzono %1$d z %2$d źródeł</string>
+    <string name="home_update_progress_format">%1$s przetworzonych</string>
     <string name="home_update_success">Aktualizacja źródeł zakończona</string>
     <string name="home_update_success_subtitle">Twoje źródła są aktualne</string>
     <string name="home_sources_are_loading">Wczytywanie źródeł, proszę czekać…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Napędzani kawą i dobrymi modyfikacjami</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Źródła modyfikacji</string>
-    <string name="sources_management_subtitle">%d zainstalowanych źródeł</string>
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="sources_management_date_added">Dodano</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Usunąć źródło \"%s\"? Tej operacji nie da się cofnąć</string>
     <string name="sources_dialog_remote">Zdalne</string>
     <string name="sources_dialog_remote_url">Adres URL źródła</string>
-    <string name="sources_dialog_remote_url_formats">"Przykłady:
-• github.com/twórca/nazwa
-• raw.githubusercontent.com/twórca/nazwa/main/patches-bundle.json
-• przykład.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Przykłady:</string>
     <string name="sources_dialog_local">Lokalne</string>
     <string name="sources_dialog_local_file">Wybierz plik źródłowy modyfikacji</string>
     <string name="sources_dialog_local_file_description">Wybierz plik źródłowy .mpp z pamięci urządzenia</string>
@@ -78,6 +74,8 @@ Kompatybilne wersje:"</string>
     <string name="home_apk_availability_unpatched_label">Niezmodyfikowana</string>
     <string name="home_apk_availability_yes">Tak, mam</string>
     <string name="home_apk_availability_no">Nie, pomóż mi ją znaleźć</string>
+    <string name="home_apk_use_saved_with_version">Użyj zapisanego pliku APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
     <string name="home_download_instructions_steps_title">Instrukcje:</string>
@@ -102,15 +100,15 @@ Kompatybilne wersje:"</string>
     <string name="home_no_patches_for_app">Brak dostępnych modyfikacji dla tej aplikacji</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Tryb ekspercki</string>
-    <string name="expert_mode_subtitle_extended">Wybrano %1$d z %2$d modyfikacji</string>
+    <string name="expert_mode_subtitle_extended_format">Wybrano %1$s z %2$s modyfikacji</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
     <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
     <string name="expert_mode_no_results">Brak znalezionych modyfikacji</string>
     <string name="expert_mode_no_patches">Brak dostępnych modyfikacji</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Wybrano wiele źródeł modyfikacji</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Wybrano modyfikacje z wielu różnych źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane zachowanie.
+    <string name="expert_mode_multiple_sources_warning_title">Wybrano wiele źródeł modyfikacji</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Wybrano modyfikacje z wielu źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane działanie aplikacji.
 
 Czy na pewno chcesz kontynuować?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="home_app_info_delete_item_patched_apk">Zmodyfikowany plik APK</string>
     <string name="home_app_info_delete_item_original_apk">Oryginalny plik APK</string>
     <string name="home_app_info_delete_preservation_note">Wybrane modyfikacje i opcje zostaną zachowane do przyszłego modyfikowania</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Usunięto %d przestarzałych modyfikacji z zapisanych wyborów</string>
     <string name="home_app_info_patches_name_default">Modyfikacje</string>
     <string name="home_app_info_patches_name_fallback">Nienazwana</string>
     <string name="home_app_info_patches_replace_fail">Nie udało się zaimportować modyfikacji: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Nie znaleziono oryginalnego pliku APK. Nie można ponownie zmodyfikować tej aplikacji</string>
-    <string name="home_app_info_repatch_requires_original">Ponowna modyfikacja wymaga oryginalnego pliku APK</string>
     <string name="home_app_info_original_package_name">Oryginalna nazwa pakietu</string>
     <string name="home_app_info_applied_patches">Zastosowane modyfikacje</string>
     <string name="home_app_info_patch_source_used">Użyte źródło modyfikacji</string>
@@ -180,11 +176,17 @@ Czy na pewno chcesz kontynuować?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem</string>
     <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
+    <string name="root_pre_patch_installer_title">Wybierz metodę instalacji</string>
+    <string name="root_pre_patch_installer_description">Wykryto uprawnienia root. Wybierz sposób instalacji zmodyfikowanej aplikacji</string>
+    <string name="root_pre_patch_installer_mount_title">Mountowanie Root</string>
+    <string name="root_pre_patch_installer_mount_description">Zmountuj zmodyfikowany plik APK nad oryginalną aplikacją. GmsCore nie jest wymagany</string>
+    <string name="root_pre_patch_installer_standard_title">Standardowa instalacja</string>
+    <string name="root_pre_patch_installer_standard_description">Zainstaluj jako oddzielną aplikację ze wsparciem GmsCore. Wybierz instalator (Systemowy, Shizuku itp.) po zakończeniu modyfikacji</string>
+    <string name="root_pre_patch_installer_hint">Metoda instalacji określa zakres dostępnych modyfikacji i nie może zostać zmieniona po rozpoczęciu procesu</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Skopiowano błąd do schowka</string>
     <string name="patcher_error_log">Dziennik błędów</string>
     <string name="patcher_error_technical">Szczegóły techniczne</string>
-    <string name="patcher_patches_progress">%1$d z %2$d modyfikacji</string>
     <string name="patcher_long_step_warning">Ten krok może potrwać chwilę. Proszę czekać…</string>
     <string name="patcher_installing_subtitle">Prawie gotowe do działania!</string>
     <string name="patcher_success_title">Wszystko gotowe! 🎉</string>
@@ -247,7 +249,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
     <string name="download_apk">Pobierz plik APK</string>
     <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
-    <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %1$d</string>
+    <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %1$s</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>
     <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
     <string name="install_timeout_message">Instalacja nie została zakończona. Sprawdź okno instalatora systemowego i spróbuj ponownie</string>
@@ -279,9 +281,10 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_appearance_system">Systemowy</string>
     <string name="settings_appearance_light">Jasny</string>
     <string name="settings_appearance_dark">Ciemny</string>
-    <string name="settings_appearance_black">Czarny</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Kolor akcentu</string>
+    <string name="settings_appearance_pure_black">Głęboka czerń</string>
+    <string name="settings_appearance_pure_black_description">Użyj głębokiej czerni tła dla wyświetlaczy OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Język aplikacji</string>
     <string name="settings_appearance_app_language_current">Obecny język</string>
@@ -305,12 +308,14 @@ Czy na pewno chcesz kontynuować?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
-    <string name="settings_advanced_expert_mode_description">Włącz zaawansowane funkcje i opcje personalizacji</string>
+    <string name="settings_advanced_expert_mode_description">Włącz zaawansowane ustawienia modyfikacji oraz opcje personalizacji Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
     <string name="settings_advanced_strip_unused_libs">Usuń nieużywane biblioteki systemowe</string>
     <string name="settings_advanced_strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token GitHub</string>
-    <string name="settings_advanced_github_pat_description">Wymagany dla zestawów modyfikacji z Pull Requestów</string>
+    <string name="settings_advanced_github_pat_description">Wymagane dla źródeł z Pull Requestów</string>
     <string name="settings_advanced_github_pat_configured">Token skonfigurowany</string>
     <string name="settings_advanced_github_pat_how_to_get">Jak uzyskać token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ustaw token GitHub</string>
@@ -434,14 +439,14 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_process_runtime_enable">Włącz środowisko procesu</string>
     <string name="settings_system_memory_limit_subtitle">Pamięć dostępna dla procesu modyfikowania</string>
     <string name="settings_system_memory_limit_warning">Niski limit pamięci może powodować błędy podczas modyfikowania większych aplikacji</string>
-    <string name="settings_system_process_runtime_enabled_description">Limit: %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Stuknij, aby skonfigurować</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import i eksport</string>
     <string name="settings_system_import_keystore">Importuj magazyn kluczy</string>
     <string name="settings_system_import_keystore_description">Importuj własny magazyn kluczy</string>
     <string name="settings_system_import_keystore_dialog_title">Wprowadź dane uwierzytelniające magazynu kluczy</string>
-    <string name="settings_system_import_keystore_dialog_description">Musisz wpisać dane uwierzytelniające magazynu kluczy, by go zaimportować</string>
+    <string name="settings_system_import_keystore_dialog_description">Musisz wpisać dane uwierzytelniające magazynu kluczy, aby go zaimportować</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nazwa użytkownika (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Hasło</string>
     <string name="settings_system_import_keystore_dialog_button">Zaimportuj</string>
@@ -467,7 +472,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_debug">Debugowanie</string>
     <string name="settings_system_export_debug_logs">Wyeksportuj logi do debugowania</string>
     <string name="settings_system_export_debug_logs_description">Eksportuj logi systemowe do debugowania</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
     <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
     <string name="settings_system_patch_selections_description">Zarządzaj zapisanymi wyborami i opcjami modyfikacji. Pozostają one zachowane po odinstalowaniu aplikacji</string>
-    <string name="settings_system_patch_selections_description_short">Zachowane do przyszłego modyfikowania</string>
-    <string name="settings_system_patch_selections_empty">Brak zapisanych wyborów modyfikacji</string>
-    <string name="settings_system_patch_selections_has_options">Posiada opcje</string>
-    <string name="settings_system_patch_selections_patches_options">Opcje modyfikacji</string>
-    <string name="settings_system_patch_selection_delete_title">Usuń wybór modyfikacji</string>
-    <string name="settings_system_patch_selection_deleted">Usunięto wybór modyfikacji</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Zresetować wszystkie wybory?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Zresetować wybory pakietu?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Zresetować wybór źródła?</string>
+    <string name="settings_system_patch_selection_no_saved">Brak zapisanych wyborów modyfikacji</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s przez %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s w %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Adres źródła #%s</string>
+    <string name="settings_system_patch_selection_will_delete">To usunie:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wszystkich pakietów i źródeł</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla pakietu %s we wszystkich źródłach</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Spowoduje to trwałe usunięcie zapisanych wyborów modyfikacji dla %1$s w źródle #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Nie udało się wyeksportować danych źródła</string>
+    <string name="settings_system_export_source_data_success">Dane źródła wyeksportowane pomyślnie</string>
+    <string name="settings_system_import_source_data_fail">Nie udało się zaimportować danych źródła</string>
+    <string name="settings_system_import_source_data_success">Dane źródła zaimportowane pomyślnie</string>
+    <string name="settings_system_patch_details_title">Szczegóły modyfikacji</string>
+    <string name="settings_system_selected_patches_title">Wybrane modyfikacje (%s)</string>
+    <string name="settings_system_patch_options_title">Ustawienia modyfikacji (%s)</string>
+    <string name="settings_system_no_patches_or_options">Brak zapisanych modyfikacji lub opcji</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikacji</string>
     <string name="settings_system_share_website">Udostępnij stronę</string>
@@ -510,6 +528,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="reset">Zresetuj</string>
+    <string name="reset_all">Zresetuj wszystko</string>
     <string name="confirm">Potwierdź</string>
     <string name="warning">Ostrzeżenie</string>
     <string name="error_">Błąd</string>
@@ -531,6 +550,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="selected">Wybrane</string>
     <string name="not_selected">Nie wybrano</string>
     <string name="rename">Zmień nazwę</string>
+    <string name="import_">Zaimportuj</string>
     <string name="export">Eksportuj</string>
     <string name="download">Pobierz</string>
     <string name="less">Mniej</string>
