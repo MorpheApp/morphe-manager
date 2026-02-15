@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.material.icons.outlined.Storage
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,7 +34,9 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
 
@@ -50,7 +51,7 @@ enum class ApkManagementType {
 /**
  * Data class representing an APK item for display
  */
-private data class ApkItemData(
+data class ApkItemData(
     val packageName: String,
     val displayName: String,
     val version: String,
@@ -78,7 +79,7 @@ private data class ApkItemDataWithApp(
 /**
  * Universal dialog for managing APK files (patched or original)
  */
-@SuppressLint("LocalContextGetResourceValueCall")
+@SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
 fun ApkManagementDialog(
     type: ApkManagementType,
@@ -113,31 +114,39 @@ private fun PatchedApksContent(
 
     val allInstalledApps by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
-    // Convert to ApkItemData using AppDataResolver
-    var apkItems by remember { mutableStateOf<List<ApkItemDataWithApp>>(emptyList()) }
+    // Track loading state
+    var isLoading by remember { mutableStateOf(true) }
 
-    LaunchedEffect(allInstalledApps) {
-        apkItems = allInstalledApps.mapNotNull { app ->
-            // Check if saved APK file exists
-            val savedFile = listOf(
-                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-            ).distinct().firstOrNull { it.exists() } ?: return@mapNotNull null
+    // Pre-resolve all app data in a single effect
+    val apkItems by produceState<List<ApkItemDataWithApp>>(
+        initialValue = emptyList(),
+        key1 = allInstalledApps
+    ) {
+        isLoading = true
+        value = withContext(Dispatchers.IO) {
+            allInstalledApps.mapNotNull { app ->
+                // Check if saved APK file exists
+                val savedFile = listOf(
+                    filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+                    filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+                ).distinct().firstOrNull { it.exists() } ?: return@mapNotNull null
 
-            // Use AppDataResolver to get data from: patched APK → installed app → original APK → constants
-            val resolvedData = appDataResolver.resolveAppData(
-                app.currentPackageName,
-                preferredSource = AppDataSource.PATCHED_APK
-            )
+                // Use AppDataResolver to get data
+                val resolvedData = appDataResolver.resolveAppData(
+                    app.currentPackageName,
+                    preferredSource = AppDataSource.PATCHED_APK
+                )
 
-            ApkItemDataWithApp(
-                packageName = app.currentPackageName,
-                displayName = resolvedData.displayName,
-                version = app.version,
-                fileSize = savedFile.length(),
-                installedApp = app
-            )
+                ApkItemDataWithApp(
+                    packageName = app.currentPackageName,
+                    displayName = resolvedData.displayName,
+                    version = app.version,
+                    fileSize = savedFile.length(),
+                    installedApp = app
+                )
+            }
         }
+        isLoading = false
     }
 
     val totalSize = remember(apkItems) {
@@ -151,7 +160,8 @@ private fun PatchedApksContent(
         icon = Icons.Outlined.Apps,
         count = apkItems.size,
         totalSize = totalSize,
-        isEmpty = apkItems.isEmpty(),
+        isLoading = isLoading,
+        isEmpty = apkItems.isEmpty() && !isLoading,
         emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
         onDismissRequest = onDismissRequest,
         items = apkItems.map { it.toApkItemData() },
@@ -201,24 +211,32 @@ private fun OriginalApksContent(
 
     val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
-    // Convert to ApkItemData using AppDataResolver
-    var apkItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
+    // Track loading state
+    var isLoading by remember { mutableStateOf(true) }
 
-    LaunchedEffect(originalApks) {
-        apkItems = originalApks.map { apk ->
-            // Use AppDataResolver to get data from: original APK → installed app → constants
-            val resolvedData = appDataResolver.resolveAppData(
-                apk.packageName,
-                preferredSource = AppDataSource.ORIGINAL_APK
-            )
+    // Pre-resolve all app data in a single effect
+    val apkItems by produceState<List<ApkItemData>>(
+        initialValue = emptyList(),
+        key1 = originalApks
+    ) {
+        isLoading = true
+        value = withContext(Dispatchers.IO) {
+            originalApks.map { apk ->
+                // Use AppDataResolver to get data
+                val resolvedData = appDataResolver.resolveAppData(
+                    apk.packageName,
+                    preferredSource = AppDataSource.ORIGINAL_APK
+                )
 
-            ApkItemData(
-                packageName = apk.packageName,
-                displayName = resolvedData.displayName,
-                version = apk.version,
-                fileSize = apk.fileSize
-            )
+                ApkItemData(
+                    packageName = apk.packageName,
+                    displayName = resolvedData.displayName,
+                    version = apk.version,
+                    fileSize = apk.fileSize
+                )
+            }
         }
+        isLoading = false
     }
 
     val totalSize = remember(apkItems) {
@@ -232,7 +250,8 @@ private fun OriginalApksContent(
         icon = Icons.Outlined.Storage,
         count = apkItems.size,
         totalSize = totalSize,
-        isEmpty = apkItems.isEmpty(),
+        isLoading = isLoading,
+        isEmpty = apkItems.isEmpty() && !isLoading,
         emptyMessage = stringResource(R.string.settings_system_original_apks_empty),
         onDismissRequest = onDismissRequest,
         items = apkItems,
@@ -266,6 +285,7 @@ private fun ApkManagementDialogContent(
     icon: ImageVector,
     count: Int,
     totalSize: Long,
+    isLoading: Boolean,
     isEmpty: Boolean,
     emptyMessage: String,
     onDismissRequest: () -> Unit,
@@ -307,8 +327,17 @@ private fun ApkManagementDialogContent(
                 )
             }
 
-            // List of APKs
-            if (isEmpty) {
+            // List of APKs or loading state
+            if (isLoading) {
+                // Show shimmer while loading
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(3) { // Show 3 shimmer placeholders
+                        ShimmerApkItem()
+                    }
+                }
+            } else if (isEmpty) {
                 EmptyState(message = emptyMessage)
             } else {
                 LazyColumn(
@@ -419,26 +448,4 @@ private fun DeleteConfirmationDialog(
     }
 }
 
-@Composable
-fun EmptyState(message: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.FolderOff,
-            contentDescription = null,
-            modifier = Modifier.size(64.dp),
-            tint = LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f)
-        )
-        Text(
-            text = message,
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current,
-            textAlign = TextAlign.Center
-        )
-    }
-}
+

@@ -217,3 +217,53 @@ fun ShimmerChangelogHeader() {
         }
     }
 }
+
+/**
+ * Shimmer loading placeholder for APK item
+ */
+@Composable
+fun ShimmerApkItem() {
+    SectionCard {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // App Icon shimmer
+            ShimmerBox(
+                modifier = Modifier.size(48.dp),
+                shape = RoundedCornerShape(12.dp)
+            )
+
+            // App Info shimmer
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                // App name
+                ShimmerText(
+                    widthFraction = 0.6f,
+                    height = 18.dp
+                )
+                // Package name
+                ShimmerText(
+                    widthFraction = 0.8f,
+                    height = 14.dp
+                )
+                // Version + size
+                ShimmerText(
+                    widthFraction = 0.4f,
+                    height = 14.dp
+                )
+            }
+
+            // Delete button shimmer
+            ShimmerBox(
+                modifier = Modifier.size(40.dp),
+                shape = RoundedCornerShape(20.dp)
+            )
+        }
+    }
+}

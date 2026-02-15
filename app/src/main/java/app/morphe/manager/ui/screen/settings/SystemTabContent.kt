@@ -243,7 +243,7 @@ fun SystemTabContent(
                     title = stringResource(R.string.settings_system_original_apks_title),
                     subtitle = stringResource(R.string.settings_system_original_apks_description),
                     leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.FolderOpen)
+                        MorpheIcon(icon = Icons.Outlined.Storage)
                     },
                     trailingContent = {
                         Row(
