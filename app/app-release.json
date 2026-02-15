@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-15T12:18:48.878Z",
-  "description": "# app [1.7.0-dev.15](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.14...v1.7.0-dev.15) (2026-02-15)\n\n\n### Features\n\n* Show Expert mode confirmation dialog ([db64938](https://github.com/MorpheApp/morphe-manager/commit/db64938470193e0c5a3b615ab09694f028a39236))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.15/morphe-manager-1.7.0-dev.15.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.15/morphe-manager-1.7.0-dev.15.apk.asc",
-  "version": "1.7.0-dev.15"
+  "created_at": "2026-02-15T13:22:46.147Z",
+  "description": "# app [1.7.0-dev.16](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.15...v1.7.0-dev.16) (2026-02-15)\n\n\n### Bug Fixes\n\n* Resolve incorrect string formatters for some translations ([13d0b8c](https://github.com/MorpheApp/morphe-manager/commit/13d0b8ce8fefe8ee1d6cfda3c6a57ba1e8aa4376))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.16/morphe-manager-1.7.0-dev.16.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.16/morphe-manager-1.7.0-dev.16.apk.asc",
+  "version": "1.7.0-dev.16"
 }
