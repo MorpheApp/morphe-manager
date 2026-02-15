@@ -4,6 +4,18 @@
         <item quantity="one">%d patch</item>
         <item quantity="other">%d patches</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d optie</item>
+        <item quantity="other">%d opties</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d bron</item>
+        <item quantity="other">%d bronnen</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d pakket</item>
+        <item quantity="other">%d pakketten</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Voer %d patch uit</item>
         <item quantity="other">Voer %d patches uit</item>
@@ -27,5 +39,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%1$d bronnen geïnstalleerd</item>
         <item quantity="other">%1$d bronnen geïnstalleerd</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d patch geselecteerd</item>
+        <item quantity="other">%d patches geselecteerd</item>
     </plurals>
 </resources>

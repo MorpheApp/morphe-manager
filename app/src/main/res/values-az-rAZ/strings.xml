@@ -13,6 +13,7 @@
     <string name="home_update_error">Yenilənmə uğursuz oldu</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
     <string name="home_updating_sources">Mənbələr yenilənir…</string>
+    <string name="home_update_progress_format">%1$s emal olundu</string>
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
@@ -99,14 +100,15 @@ Uyuşan versiyalar:"</string>
     <string name="home_no_patches_for_app">Bu tətbiq üçün yamaqlar əlçatan deyil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mütəxəssis rejimi</string>
+    <string name="expert_mode_subtitle_extended_format">%2$s - dan %1$d ədəd seçildi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
     <string name="expert_mode_proceed">Yamaqlamağa davam edin</string>
     <string name="expert_mode_disable_all">Hamısını qapat</string>
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
     <string name="expert_mode_no_patches">Yamaqlar əlçatan deyil</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Çoxlu yamaq mənbəyi seçilib</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Çoxlu yamaq mənbəyindən yamaqlar seçmisiniz. Bu, uyuşma problemlərinə və ya gözlənilməz fəaliyyətə səbəb ola bilər.
+    <string name="expert_mode_multiple_sources_warning_title">Çoxlu yamaq mənbəyi seçilib</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Çoxlu yamaq mənbəyindən yamaqlar seçmisiniz. Bu, uyuşma problemlərinə və ya gözlənilməz fəaliyyətə səbəb ola bilər.
 
 Davam etmək istədiyinizə əminsiniz?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -311,7 +313,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Yamalanan tətbiqlərdən dəstəklənməyən CPU quruluşları üçün yerli kitabxanaları silin</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Pull request paketləri üçün tələb olunur</string>
+    <string name="settings_advanced_github_pat_description">Pull request mənbələri üçün tələb olunur</string>
     <string name="settings_advanced_github_pat_configured">Token quruldu</string>
     <string name="settings_advanced_github_pat_how_to_get">Token necə alınır</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Şəxsi Giriş Token-ini Yerləşdir</string>
@@ -487,7 +489,25 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yamaq seçimləri</string>
     <string name="settings_system_patch_selections_description">Saxlanılan yamaq seçimlərini və üstünlükləri idarə edin. Bunlar tətbiq silindikdən sonra da qalır</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Bütün seçimlər sıfırlansın?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Paket seçimləri sıfırlansın?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Mənbə seçimi sıfırlansın?</string>
     <string name="settings_system_patch_selection_no_saved">Saxlanılan yamaq seçimləri yoxdur</string>
+    <string name="settings_system_patch_selection_total_summary_format">%2$s arası %1$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s-də %1$s</string>
+    <string name="settings_system_patch_selection_source_format">Mənbə #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Bu siləcək:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Bu, bütün paketlər və mənbələr üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Bu, bütün mənbələr arası %s üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Bu, #%2$d mənbəsində %1$s üçün saxlanılan yamaq seçimlərini daimi siləcək</string>
+    <string name="settings_system_export_source_data_fail">Mənbə məlumatını ixrac etmək olmadı</string>
+    <string name="settings_system_export_source_data_success">Mənbə məlumatı uğurla ixrac olundu</string>
+    <string name="settings_system_import_source_data_fail">Mənbə məlumatını idxal etmək olmadı</string>
+    <string name="settings_system_import_source_data_success">Mənbə məlumatı uğurla idxal olundu</string>
+    <string name="settings_system_patch_details_title">Yamaq təfərrüatları</string>
+    <string name="settings_system_selected_patches_title">Seçilən yamaqlar (%d)</string>
+    <string name="settings_system_patch_options_title">Yamaq seçimləri (%d)</string>
+    <string name="settings_system_no_patches_or_options">Yamaqlar və ya seçimlər saxlanılmayıb</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Haqqında</string>
     <string name="settings_system_share_website">Veb saytı paylaş</string>
@@ -502,6 +522,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="yes">Bəli</string>
     <string name="no">Xeyr</string>
     <string name="reset">Qaytar</string>
+    <string name="reset_all">Hamısını Sıfırla</string>
     <string name="confirm">Təsdiqlə</string>
     <string name="warning">Xəbərdarlıq</string>
     <string name="error_">Xəta</string>
@@ -570,13 +591,13 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="failed_to_check_updates">Yeniləmələri yoxlamaq uğursuzdu: %s</string>
     <string name="failed_to_download_update">Yeniləməni yükləmək olmadı: %s</string>
     <string name="resume_download">Yükləməni davam etdir</string>
-    <string name="download_confirmation_metered">"Siz hazırda məhdudlaşdırılmış trafíkdəsiniz və xidmət təminatçınızdan məlumat haqları tətbiq oluna bilər.
+    <string name="download_confirmation_metered">"Hazırda ölçülən əlaqədəsiniz və xidmət təminatçınızdan məlumat ödənişləri tətbiq oluna bilər.
 
 Hələ də davam etmək istəyirsiniz?"</string>
-    <string name="download_update_confirmation">Yeniləməni endirmək?</string>
-    <string name="just_now">Bir an əvvəl</string>
-    <string name="minutes_ago">%s dəqiqə əvvəl</string>
+    <string name="download_update_confirmation">Yeniləmə yüklənilsin?</string>
+    <string name="just_now">İndicə</string>
+    <string name="minutes_ago">%s dəq əvvəl</string>
     <string name="hours_ago">%s saat əvvəl</string>
-    <string name="days_ago">%sd əvvəl</string>
+    <string name="days_ago">%s gün əvvəl</string>
     <string name="invalid_date">Yanlış tarix</string>
 </resources>

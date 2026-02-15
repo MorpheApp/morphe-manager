@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">沒有，幫我找一下</string>
     <string name="home_apk_use_saved_with_version">使用已儲存的 APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補將需要再次選擇 APK 檔案</string>
-    <string name="home_app_info_repatch_no_bundle_info">無法確定哪個捆綁包用於此應用程序</string>
-    <string name="home_app_info_repatch_bundle_not_available">用於此應用程序的捆綁包已不可用</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下載原始 APK</string>
     <string name="home_download_instructions_steps_title">步驟如下：</string>
@@ -102,14 +100,15 @@
     <string name="home_no_patches_for_app">這個應用程式沒有可用的修補</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
+    <string name="expert_mode_subtitle_extended_format">已選擇 %1$d/%2$d 個修補</string>
     <string name="expert_mode_search">搜尋修補</string>
     <string name="expert_mode_proceed">進行修補</string>
     <string name="expert_mode_disable_all">停用全部</string>
     <string name="expert_mode_enable_all">啟用全部</string>
     <string name="expert_mode_no_results">找不到修補</string>
     <string name="expert_mode_no_patches">沒有可用的修補</string>
-    <string name="expert_mode_multiple_bundles_warning_title">已選擇多個修補來源</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"你已選擇來自多個修補來源的修補。這可能會導致相容性問題或未預期的行為。
+    <string name="expert_mode_multiple_sources_warning_title">已選擇多個修補來源</string>
+    <string name="expert_mode_multiple_sources_warning_message">"你已選擇來自多個修補來源的修補。這可能會導致相容性問題或未預期的行為。
 
 確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -492,7 +491,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">修補選擇</string>
     <string name="settings_system_patch_selections_description">管理已儲存的修補選擇和選項。這些在應用程式移除後仍然存在</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">確定要重設所有選項？</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">確定要重設套件選項？</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">確定要重設來源選項？</string>
     <string name="settings_system_patch_selection_no_saved">沒有已儲存的修補選擇</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s 至 %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s 至 %2$s</string>
+    <string name="settings_system_patch_selection_source_format">來源 #%d</string>
+    <string name="settings_system_patch_selection_will_delete">這將刪除：</string>
+    <string name="settings_system_patch_selection_reset_all_warning">這將永久刪除所有儲存的修補選項，包括所有套件和來源</string>
+    <string name="settings_system_patch_selection_reset_package_warning">這將永久刪除 %s 的所有修補選項，跨越所有來源</string>
+    <string name="settings_system_patch_selection_reset_source_warning">這將永久刪除來源 #%2$d 中的 %1$s 修補選項</string>
+    <string name="settings_system_export_source_data_fail">無法匯出來源資料</string>
+    <string name="settings_system_export_source_data_success">來源資料匯出成功</string>
+    <string name="settings_system_import_source_data_fail">無法匯入來源資料</string>
+    <string name="settings_system_import_source_data_success">來源資料匯入成功</string>
+    <string name="settings_system_patch_details_title">修補細節</string>
+    <string name="settings_system_selected_patches_title">已選修補 (%d)</string>
+    <string name="settings_system_patch_options_title">修補選項 (%d)</string>
+    <string name="settings_system_no_patches_or_options">沒有儲存的修補或選項</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">關於</string>
     <string name="settings_system_share_website">分享網站</string>
@@ -507,6 +524,7 @@ Morphe 以開源為核心，仰賴社群的意見與貢獻來驅動未來的創�
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="reset">重設</string>
+    <string name="reset_all">重設所有</string>
     <string name="confirm">確定</string>
     <string name="warning">警告</string>
     <string name="error_">錯誤</string>

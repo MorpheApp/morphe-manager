@@ -3,6 +3,15 @@
     <plurals name="patch_count">
         <item quantity="other">%d 个补丁</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d 个选项</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d 个源</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d 个包</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">执行 %d 个补丁</item>
     </plurals>

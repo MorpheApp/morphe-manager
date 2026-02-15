@@ -76,8 +76,6 @@ Versões compatíveis:"</string>
     <string name="home_apk_availability_no">Não, ajude-me a encontrá-lo</string>
     <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Não há APK salvo. O patch exigirá a seleção do arquivo APK novamente</string>
-    <string name="home_app_info_repatch_no_bundle_info">Não é possível determinar qual bundle foi usado para este aplicativo</string>
-    <string name="home_app_info_repatch_bundle_not_available">O bundle usado para este aplicativo não está mais disponível</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Baixar o APK original</string>
     <string name="home_download_instructions_steps_title">Instruções:</string>
@@ -102,16 +100,17 @@ Versões compatíveis:"</string>
     <string name="home_no_patches_for_app">Não há atualizações disponíveis para este aplicativo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo expert</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d de %2$d selecionados</string>
     <string name="expert_mode_search">Procurar patches</string>
     <string name="expert_mode_proceed">Prosseguir para patching</string>
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_no_patches">Não há atualizações disponíveis</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Várias fontes de patch selecionadas</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Você selecionou patches de várias fontes de patch. Isso pode causar problemas de compatibilidade ou comportamento inesperado.
+    <string name="expert_mode_multiple_sources_warning_title">Várias fontes de patch selecionadas</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Você selecionou patches de várias fontes de patch. Isso pode causar problemas de compatibilidade ou comportamento inesperado.
 
-Você tem certeza de que deseja continuar?"</string>
+Tem certeza de que deseja continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versão não suportada</string>
     <string name="home_dialog_unsupported_version_dialog_description">Este APK não é uma versão recomendada do aplicativo. Prosseguir pode resultar em um aplicativo não funcional</string>
@@ -314,7 +313,7 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Excluir bibliotecas nativas para arquiteturas de CPU não suportadas a partir de aplicativos patcheados</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token de Acesso Pessoal da GitHub (PAT)</string>
-    <string name="settings_advanced_github_pat_description">Exigido para pacotes de solicitação de pull</string>
+    <string name="settings_advanced_github_pat_description">Exigido para fontes de solicitação pull</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Como obter um token</string>
     <string name="settings_advanced_github_pat_dialog_title">Definir Token de Acesso Pessoal do GitHub</string>
@@ -494,6 +493,25 @@ As dimensões das imagens devem ser as seguintes:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Seleções de emenda</string>
     <string name="settings_system_patch_selections_description">Gerencie as seleções de emenda e opções salvas. Estas persistirão após a desinstalação do aplicativo</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Resetar todas as seleções?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Resetar seleções de pacote?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Resetar seleção de origem?</string>
+    <string name="settings_system_patch_selection_no_saved">Não há seleções de patch salvas</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s em %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s em %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Origem #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Isso vai excluir:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Isso vai excluir permanentemente todas as seleções de patch salvas para todos os pacotes e origens</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Isso vai excluir permanentemente todas as seleções de patch salvas para %s em todas as origens</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Isso vai excluir as seleções de patch salvas para %1$s na origem #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Falha ao exportar dados da origem</string>
+    <string name="settings_system_export_source_data_success">Dados da origem exportados com sucesso</string>
+    <string name="settings_system_import_source_data_fail">Falha ao importar dados da origem</string>
+    <string name="settings_system_import_source_data_success">Dados da origem importados com sucesso</string>
+    <string name="settings_system_patch_details_title">Detalhes do patch</string>
+    <string name="settings_system_selected_patches_title">Seleções de patch (%d)</string>
+    <string name="settings_system_patch_options_title">Opções de patch (%d)</string>
+    <string name="settings_system_no_patches_or_options">Não há patches ou opções salvas</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
@@ -508,6 +526,7 @@ Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovaç�
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="reset">Resetar</string>
+    <string name="reset_all">Redefinir tudo</string>
     <string name="confirm">Confirmar</string>
     <string name="warning">Atenção</string>
     <string name="error_">Erro</string>

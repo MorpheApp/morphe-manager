@@ -4,6 +4,18 @@
         <item quantity="one">%d yamaq</item>
         <item quantity="other">%d yamaq</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d yamaq seçimi</item>
+        <item quantity="other">%d yamaq seçimi</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d mənbə</item>
+        <item quantity="other">%d mənbə</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paket</item>
+        <item quantity="other">%d paket</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">%d yamaq icra edildi</item>
         <item quantity="other">%d yamaq icra edildi</item>
@@ -27,5 +39,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%1$d mənbə quraşdırılıb</item>
         <item quantity="other">%1$d mənbə quraşdırılıb</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d yamaq seçildi</item>
+        <item quantity="other">%d yamaq seçildi</item>
     </plurals>
 </resources>

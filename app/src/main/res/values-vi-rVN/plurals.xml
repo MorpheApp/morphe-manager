@@ -3,6 +3,15 @@
     <plurals name="patch_count">
         <item quantity="other">%d bản vá</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d tùy chỉnh bản vá</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d nguồn</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d gói</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">Thực thi %d bản vá</item>
     </plurals>

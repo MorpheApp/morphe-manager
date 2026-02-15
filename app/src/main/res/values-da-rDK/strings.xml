@@ -76,8 +76,6 @@ Kompatible versioner:"</string>
     <string name="home_apk_availability_no">Nej, hjælp mig med at finde den</string>
     <string name="home_apk_use_saved_with_version">Brug gemt APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning vil kræve at vælge APK-filen igen</string>
-    <string name="home_app_info_repatch_no_bundle_info">Kan ikke bestemme hvilket bundle der blev brugt for denne app</string>
-    <string name="home_app_info_repatch_bundle_not_available">Det bundle der blev brugt for denne app er ikke længere tilgængelig</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download den originale APK</string>
     <string name="home_download_instructions_steps_title">Instruktioner:</string>
@@ -102,14 +100,15 @@ Kompatible versioner:"</string>
     <string name="home_no_patches_for_app">Ingen patches tilgængelige for dette app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d af %2$s valgt</string>
     <string name="expert_mode_search">Søg patches</string>
     <string name="expert_mode_proceed">Fortsæt til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_no_patches">Ingen patches tilgængelige</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Valgt flere patch-kilder</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
+    <string name="expert_mode_multiple_sources_warning_title">Flere patch-kilder valgt</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
 
 Er du sikker på, at du vil fortsætte?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Slett ikke brukte native biblioteker for uaktuelle CPU-arkitekturer fra patcherte apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Kræves for pull request-bundler</string>
+    <string name="settings_advanced_github_pat_description">Nødvendigt for pull request-kilder</string>
     <string name="settings_advanced_github_pat_configured">Token konfigureret</string>
     <string name="settings_advanced_github_pat_how_to_get">Hvordan man får en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Angiv GitHub-personal adgangstoken</string>
@@ -494,6 +493,25 @@ Bildeformateringen må være som følger:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch-valg</string>
     <string name="settings_system_patch_selections_description">Håndter de gemte patch-valg og indstillinger. Disse bevares efter app-udinstallation</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Nulstil alle valg?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Nulstil pakkevalg?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Nulstil kildevalg?</string>
+    <string name="settings_system_patch_selection_no_saved">Ingen gemte patch-valg</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s over %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Kilde #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Dette vil slette:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle gemte patch-valg for alle pakker og kilder</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle gemte patch-valg for %s over alle kilder</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette patch-valg for %1$s i kilde #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Kunne ikke eksportere kilde-data</string>
+    <string name="settings_system_export_source_data_success">Kilde-data eksporteret med succes</string>
+    <string name="settings_system_import_source_data_fail">Kunne ikke importere kilde-data</string>
+    <string name="settings_system_import_source_data_success">Kilde-data importeret med succes</string>
+    <string name="settings_system_patch_details_title">Patch-oplysninger</string>
+    <string name="settings_system_selected_patches_title">Valgte patches (%d)</string>
+    <string name="settings_system_patch_options_title">Patch-valg (%d)</string>
+    <string name="settings_system_no_patches_or_options">Ingen patches eller valg gemt</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Del app fra hjemmesiden</string>
@@ -508,6 +526,7 @@ Bildeformateringen må være som følger:
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="reset">Nulstil</string>
+    <string name="reset_all">Nulstil Alt</string>
     <string name="confirm">Bekræft</string>
     <string name="warning">Advarsel</string>
     <string name="error_">Feil</string>

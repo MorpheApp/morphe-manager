@@ -70,14 +70,12 @@
     <string name="home_apk_availability_dialog_expert">"Hai un APK non patchato di %1$s?
 
 Versioni compatibili:"</string>
-    <string name="home_apk_availability_recommended_label">Raccomandato</string>
+    <string name="home_apk_availability_recommended_label">Consigliata</string>
     <string name="home_apk_availability_unpatched_label">Non patchato</string>
     <string name="home_apk_availability_yes">Sì, ce l\'ho</string>
     <string name="home_apk_availability_no">No, aiutami a trovarlo</string>
-    <string name="home_apk_use_saved_with_version">Usa APK salvato (v%s)</string>
-    <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patch richiederà la selezione del file APK</string>
-    <string name="home_app_info_repatch_no_bundle_info">Impossibile determinare quale bundle è stato utilizzato per questa app</string>
-    <string name="home_app_info_repatch_bundle_not_available">Il bundle utilizzato per questa app non è più disponibile</string>
+    <string name="home_apk_use_saved_with_version">Usa l\'APK salvato (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patching richiederà la selezione del file APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Scarica l\'APK originale</string>
     <string name="home_download_instructions_steps_title">Istruzioni:</string>
@@ -102,14 +100,15 @@ Versioni compatibili:"</string>
     <string name="home_no_patches_for_app">Nessuna patch disponibile per questa app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modalità esperto</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d su %2$s selezionati</string>
     <string name="expert_mode_search">Cerca patch</string>
     <string name="expert_mode_proceed">Procedi con il patching</string>
     <string name="expert_mode_disable_all">Disabilita tutte</string>
     <string name="expert_mode_enable_all">Abilita tutte</string>
     <string name="expert_mode_no_results">Nessuna patch trovata</string>
     <string name="expert_mode_no_patches">Nessuna patch disponibile</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Multiple fonti delle patch selezionate</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Hai selezionato patch da multiple fonti di patch. Ciò potrebbe causare problemi di compatibilità o comportamenti imprevisti.
+    <string name="expert_mode_multiple_sources_warning_title">Molteplici fonti delle patch selezionate</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Hai selezionato delle patch da molteplici fonti delle patch. Ciò potrebbe causare problemi di compatibilità o comportamenti imprevisti.
 
 Sei sicuro di voler procedere?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -178,12 +177,12 @@ Sei sicuro di voler procedere?"</string>
     <string name="root_install_apk_required">La modalità di root richiede che l\'APK originale sia installato sul tuo dispositivo prima del patching</string>
     <string name="root_gmscore_excluded">Il supporto per GmsCore è escluso in modalità di root</string>
     <string name="root_pre_patch_installer_title">Scegli il metodo di installazione</string>
-    <string name="root_pre_patch_installer_description">Il tuo dispositivo ha accesso root. Scegli come vuoi installare l\'app corretta.</string>
-    <string name="root_pre_patch_installer_mount_title">Montaggio root</string>
-    <string name="root_pre_patch_installer_mount_description">Monta l\'APK corretto sull\'app di sistema. Non è necessario GmsCore</string>
+    <string name="root_pre_patch_installer_description">Il tuo dispositivo ha l\'accesso di root. Scegli come vuoi installare l\'app corretta.</string>
+    <string name="root_pre_patch_installer_mount_title">Montaggio tramite root</string>
+    <string name="root_pre_patch_installer_mount_description">Sovrascrivi l\'APK patchato sull\'app di sistema. Non è necessario GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Installazione standard</string>
-    <string name="root_pre_patch_installer_standard_description">Installa come app separata con supporto GmsCore. Scegli l\'installatore (installatore di sistema, Shizuku, ecc.) dopo la correzione</string>
-    <string name="root_pre_patch_installer_hint">Il metodo di installazione determina quali correzioni sono incluse e non può essere modificato dopo la correzione</string>
+    <string name="root_pre_patch_installer_standard_description">Installa come app separata con supporto GmsCore. Scegli l\'installatore (installatore di sistema, Shizuku, ecc.) dopo il patching</string>
+    <string name="root_pre_patch_installer_hint">Il metodo di installazione determina quali patch sono incluse e non può essere modificato dopo il patching</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Errore copiato negli appunti</string>
     <string name="patcher_error_log">Log dell\'errore</string>
@@ -314,7 +313,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Elimina i file delle librerie native dalle app patchate per le architetture CPU non supportate</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token di accesso personale di GitHub</string>
-    <string name="settings_advanced_github_pat_description">Richiesto per i bundle delle richieste di pull</string>
+    <string name="settings_advanced_github_pat_description">Richiesto per le fonti della richiesta di pull</string>
     <string name="settings_advanced_github_pat_configured">Token configurato</string>
     <string name="settings_advanced_github_pat_how_to_get">Come ottenere un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Imposta il token di accesso personale di GitHub</string>
@@ -494,6 +493,25 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Selezioni delle patch</string>
     <string name="settings_system_patch_selections_description">Gestisci le selezioni delle patch salvate e le opzioni. Queste persistono dopo la disinstallazione dell\'app</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Ripristina tutte le selezioni?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Ripristina le selezioni del pacchetto?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Ripristina la selezione della fonte?</string>
+    <string name="settings_system_patch_selection_no_saved">Nessuna selezione delle patch salvata</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s su %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Fonte #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Questo eliminerà:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Questo eliminerà permanentemente tutte le selezioni delle patch salvate per tutti i pacchetti e le fonti</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Questo eliminerà permanentemente tutte le selezioni delle patch salvate per %s su tutte le fonti</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Questo eliminerà le selezioni delle patch salvate per %1$s nella fonte #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Impossibile esportare i dati della fonte</string>
+    <string name="settings_system_export_source_data_success">I dati della fonte sono stati esportati con successo</string>
+    <string name="settings_system_import_source_data_fail">Impossibile importare i dati della fonte</string>
+    <string name="settings_system_import_source_data_success">I dati della fonte sono stati importati con successo</string>
+    <string name="settings_system_patch_details_title">Dettagli della patch</string>
+    <string name="settings_system_selected_patches_title">Patch selezionate (%d)</string>
+    <string name="settings_system_patch_options_title">Opzioni della patch (%d)</string>
+    <string name="settings_system_no_patches_or_options">Nessuna patch o opzione salvata</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">A proposito di</string>
     <string name="settings_system_share_website">Condividi il sito</string>
@@ -508,6 +526,7 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="yes">Sì</string>
     <string name="no">No</string>
     <string name="reset">Reimposta</string>
+    <string name="reset_all">Ripristina Tutto</string>
     <string name="confirm">Conferma</string>
     <string name="warning">Attenzione</string>
     <string name="error_">Errore</string>

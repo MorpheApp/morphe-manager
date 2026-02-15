@@ -13,6 +13,7 @@
     <string name="home_update_error">Ažuriranje nije uspelo</string>
     <string name="home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>
+    <string name="home_update_progress_format">%1$s obrađeno</string>
     <string name="home_update_success">Ažuriranje izvora završeno</string>
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo sačekajte…</string>
@@ -99,16 +100,15 @@ Kompatibilne verzije:"</string>
     <string name="home_no_patches_for_app">Nema patchova za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Režim eksperta</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d od %2$d izabrano</string>
     <string name="expert_mode_search">Pretraži patchove</string>
     <string name="expert_mode_proceed">Nastavi patchiranje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patchova</string>
     <string name="expert_mode_no_patches">Nema dostupnih patchova</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Odabrano je patch-ova iz više izvora. Ovo može uzrokovati probleme sa kompatibilnošću ili neočekivano ponašanje.
-
-Da li ste sigurni da želite nastaviti?</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Odabrali ste patch-eve iz više izvora. Ovo može uzrokovati probleme sa kompatibilnoštom ili neočekivano ponašanje.
+    <string name="expert_mode_multiple_sources_warning_title">Izabrali ste patch-ove izvišnje izvora</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Izabrali ste patch-ove izvišnje izvora. Ovo može uzrokovati kompatibilnost problema ili neočekivano ponašanje.
 
 Da li ste sigurni da želite nastaviti?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -313,7 +313,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Brisanje neiskoristane native biblioteka može usporedati patchiranje ali možda neće funkcionisati na stariji uređenicima</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Potrebno za pakete zahtjeva za povlačenje</string>
+    <string name="settings_advanced_github_pat_description">Potrebno za izvore zahtjeva za povlačenje</string>
     <string name="settings_advanced_github_pat_configured">Token je konfigurisan</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako dobiti token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavi GitHub Personal Access Token</string>
@@ -455,6 +455,25 @@ Da li ste sigurni da želite nastaviti?"</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
     <string name="settings_system_patch_selections_description">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Poništiti sve odabire?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Poništiti odabire paketa?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Poništiti odabir izvora?</string>
+    <string name="settings_system_patch_selection_no_saved">Nema sačuvanih odabira patch-a</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s po %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s u %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Izvorište #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Ovo će da obriše:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ovo će permanentno obrisati sve sačuvane odabire patch-a za sve pakete i izvore</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ovo će permanentno obrisati sve sačuvane odabire patch-a za %s po svim izvorištima</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ovo će permanentno obrisati sačuvane odabire patch-a za %1$s u izvorištu #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Neuspešno izvoz podataka izvorišta</string>
+    <string name="settings_system_export_source_data_success">Podaci izvorišta uspešno izvozeni</string>
+    <string name="settings_system_import_source_data_fail">Neuspešno uvođenje podataka izvorišta</string>
+    <string name="settings_system_import_source_data_success">Podaci izvorišta uspešno uvezeni</string>
+    <string name="settings_system_patch_details_title">Detalji patch-a</string>
+    <string name="settings_system_selected_patches_title">Odabrani patch-ovi (%d)</string>
+    <string name="settings_system_patch_options_title">Opcije patch-a (%d)</string>
+    <string name="settings_system_no_patches_or_options">Nema sačuvanih patch-ova ili opcija</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O programu</string>
     <string name="settings_system_share_website">Dijeli veb-sajt</string>
@@ -469,6 +488,7 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="yes">Da</string>
     <string name="no">Ne</string>
     <string name="reset">Poništi</string>
+    <string name="reset_all">Poništi sve</string>
     <string name="confirm">Potvrdi</string>
     <string name="warning">Upozorenje</string>
     <string name="error_">Greška</string>

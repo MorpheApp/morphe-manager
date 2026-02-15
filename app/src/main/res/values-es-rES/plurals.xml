@@ -4,6 +4,18 @@
         <item quantity="one">%d parche</item>
         <item quantity="other">%d parches</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d opción de parche</item>
+        <item quantity="other">%d opciones de parche</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d fuente</item>
+        <item quantity="other">%d fuentes</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paquete</item>
+        <item quantity="other">%d paquetes</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Ejecutar %d parche</item>
         <item quantity="other">Ejecutar %d parches</item>
@@ -27,5 +39,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%1$d fuente instalada</item>
         <item quantity="other">%1$d fuentes instaladas</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d parche seleccionado</item>
+        <item quantity="other">%d parches seleccionados</item>
     </plurals>
 </resources>

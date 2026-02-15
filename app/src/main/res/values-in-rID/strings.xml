@@ -33,7 +33,7 @@
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Prediksi cuaca hari ini: 100% kemungkinan menambal</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Siap mengubah yang biasa-biasa menjadi luar biasa?</string>
+    <string name="home_greeting_8">Siap mengubah yang biasa saja menjadi luar biasa?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="home_greeting_9">Menyelamatkan aplikasi dari diri mereka sendiri sejak hari ini</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
@@ -76,8 +76,6 @@ Versi yang cocok:"</string>
     <string name="home_apk_availability_no">Tidak, bantu saya menemukannya</string>
     <string name="home_apk_use_saved_with_version">Gunakan APK yang disimpan (v%s)</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
-    <string name="home_app_info_repatch_no_bundle_info">Tidak dapat menentukan paket mana yang digunakan untuk aplikasi ini</string>
-    <string name="home_app_info_repatch_bundle_not_available">Paket yang digunakan untuk aplikasi ini tidak tersedia lagi</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Unduh APK asli</string>
     <string name="home_download_instructions_steps_title">Petunjuk:</string>
@@ -102,14 +100,15 @@ Versi yang cocok:"</string>
     <string name="home_no_patches_for_app">Tidak ada tambalan tersedia untuk aplikasi ini</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode ahli</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d dari %2$s dipilih</string>
     <string name="expert_mode_search">Cari tambalan</string>
     <string name="expert_mode_proceed">Lanjutkan ke Menambal</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_no_patches">Tidak ada tambalan tersedia</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Berbagai sumber tambalan telah dipilih</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Anda telah memilih tambalan dari berbagai sumber. Hal ini dapat menyebabkan masalah kompatibilitas atau masalah yang tidak terduga.
+    <string name="expert_mode_multiple_sources_warning_title">Berbagai sumber tambalan telah dipilih</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tambalan dari berbagai sumber. Hal ini dapat menyebabkan masalah kompatibilitas atau masalah yang tidak terduga.
 
 Apakah Anda yakin ingin melanjutkan?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Hapus pustaka bawaan untuk arsitektur CPU yang tidak didukung dari aplikasi yang ditambal</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT GitHub</string>
-    <string name="settings_advanced_github_pat_description">Diperlukan untuk permintaan penarikan paket</string>
+    <string name="settings_advanced_github_pat_description">Dibutuhkan untuk permintaan tarik sumber</string>
     <string name="settings_advanced_github_pat_configured">Token dikonfigurasi</string>
     <string name="settings_advanced_github_pat_how_to_get">Cara mendapatkan token</string>
     <string name="settings_advanced_github_pat_dialog_title">Atur Token Akses Personal GitHub</string>
@@ -427,7 +426,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="installer_unavailable_message">Pemasang yang Anda pilih (%s) saat ini tidak tersedia. Anda dapat memperbaiki masalah ini dan mencobanya lagi, atau menggunakan pemasang standar untuk menggantikannya</string>
     <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin diberikan ke aplikasi ini</string>
     <string name="installer_use_standard">Gunakan standar</string>
-    <string name="settings_prompt_installer_on_install">Minta pemasang saat memasang</string>
+    <string name="settings_prompt_installer_on_install">Minta pemasang saat memasang aplikasi</string>
     <string name="settings_prompt_installer_on_install_description">Tampilkan dialog pemilihan pemasang setiap kali Anda memasang aplikasi yang ditambal</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performa</string>
@@ -494,7 +493,25 @@ Ukuran gambar harus sebagai berikut:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pilihan tambalan</string>
     <string name="settings_system_patch_selections_description">Kelola pemilihan tambalan dan pilihan yang disimpan. Hal ini tetap tersedia setelah mencopot pemasangan aplikasi</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Atur ulang semua pemilihan?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Atur ulang pemilihan paket?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Atur ulang pemilihan sumber?</string>
     <string name="settings_system_patch_selection_no_saved">Tidak ada pemilihan tambalan yang disimpan</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s diantara %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dalam %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Sumber #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Ini akan menghapus:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk semua paket dan sumber</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk %s diantara seluruh sumber</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ini akan menghapus pemilihan tambalan yang disimpan untuk %1$s dalam sumber #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Gagal mengekspor data sumber</string>
+    <string name="settings_system_export_source_data_success">Data sumber berhasil diekspor</string>
+    <string name="settings_system_import_source_data_fail">Gagal mengimpor data sumber</string>
+    <string name="settings_system_import_source_data_success">Data sumber berhasil diimpor</string>
+    <string name="settings_system_patch_details_title">Rincian tambalan</string>
+    <string name="settings_system_selected_patches_title">Tambalan terpilih (%d)</string>
+    <string name="settings_system_patch_options_title">Pilihan tambalan (%d)</string>
+    <string name="settings_system_no_patches_or_options">Tidak ada tambalan atau pilihan yang disimpan</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>
@@ -509,6 +526,7 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="reset">Setel ulang</string>
+    <string name="reset_all">Atur ulang Semua</string>
     <string name="confirm">Konfirmasi</string>
     <string name="warning">Peringatan</string>
     <string name="error_">Kesalahan</string>

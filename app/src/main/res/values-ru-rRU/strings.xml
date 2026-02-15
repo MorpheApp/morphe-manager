@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">Нет, помогите мне найти</string>
     <string name="home_apk_use_saved_with_version">Использовать сохраненный APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Нет сохраненного APK. Для патча нужно будет снова выбрать APK файл</string>
-    <string name="home_app_info_repatch_no_bundle_info">Невозможно определить, какой пакет использовался для этого приложения</string>
-    <string name="home_app_info_repatch_bundle_not_available">Пакет, используемый для этого приложения, больше не доступен</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Загрузить оригинальный APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
@@ -102,14 +100,15 @@
     <string name="home_no_patches_for_app">Нет доступных патчей для этого приложения</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим эксперта</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d из %2$d выбрано</string>
     <string name="expert_mode_search">Поиск патчей</string>
     <string name="expert_mode_proceed">Перейти к патчингу</string>
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
     <string name="expert_mode_no_patches">Нет доступных патчей</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Выбрано несколько источников патчей</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
+    <string name="expert_mode_multiple_sources_warning_title">Выбрано несколько источников патчей</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
 
 Вы действительно хотите продолжить?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@
     <string name="settings_advanced_strip_unused_libs_description">Удалить нативные библиотеки для неподдерживаемых архитектур CPU из пропатченных приложений</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT (Личный токен доступа)</string>
-    <string name="settings_advanced_github_pat_description">Требуется для pull request пакетов</string>
+    <string name="settings_advanced_github_pat_description">Требуется для pull request источников</string>
     <string name="settings_advanced_github_pat_configured">Токен настроен</string>
     <string name="settings_advanced_github_pat_how_to_get">Как получить токен</string>
     <string name="settings_advanced_github_pat_dialog_title">Установить Персональный Токен Доступа GitHub</string>
@@ -494,7 +493,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Выбор патчей</string>
     <string name="settings_system_patch_selections_description">Управление сохраненными выбранными патчами и параметрами. Они остаются после удаления программы</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Сбросить все выбранные исправления?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Сбросить все выбранные исправления для пакета?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Удалить выбранное исправление?</string>
     <string name="settings_system_patch_selection_no_saved">Нет сохраненных выбранных патчей</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$d по %2$d</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$d в %2$d</string>
+    <string name="settings_system_patch_selection_source_format">Источник #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Будет удалено:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Это навсегда удалит все сохраненные выбранные исправления для всех пакетов и источников</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Это навсегда удалит все сохраненные выбранные исправления для %s по всем источникам</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выбранные исправления для %1$d в источнике #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Не удалось экспортировать данные источника</string>
+    <string name="settings_system_export_source_data_success">Данные источника экспортированы успешно</string>
+    <string name="settings_system_import_source_data_fail">Не удалось импортировать данные источника</string>
+    <string name="settings_system_import_source_data_success">Данные источника импортированы успешно</string>
+    <string name="settings_system_patch_details_title">Детали исправления</string>
+    <string name="settings_system_selected_patches_title">Выбранные исправления (%d)</string>
+    <string name="settings_system_patch_options_title">Опции исправления (%d)</string>
+    <string name="settings_system_no_patches_or_options">Нет сохраненных исправлений или опций</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
@@ -509,6 +526,7 @@ morphe_header_custom_dark.png
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="reset">Сбросить</string>
+    <string name="reset_all">Сбросить все</string>
     <string name="confirm">Подтвердить</string>
     <string name="warning">Предупреждение</string>
     <string name="error_">Ошибка</string>

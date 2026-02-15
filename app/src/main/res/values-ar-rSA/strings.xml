@@ -13,7 +13,7 @@
     <string name="home_update_error">فشل التحديث</string>
     <string name="home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
-    <string name="home_update_progress_format">%1$s من %2$s تمت معالجتها</string>
+    <string name="home_update_progress_format">%1$s تمت معالجتها</string>
     <string name="home_update_success">اكتمل تحديث المصادر</string>
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">لا، ساعدني في العثور عليه</string>
     <string name="home_apk_use_saved_with_version">استخدام ملف APK المحفوظ (v%s)</string>
     <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
-    <string name="home_app_info_repatch_no_bundle_info">لا يمكن تحديد البند المستخدم لهذا التطبيق</string>
-    <string name="home_app_info_repatch_bundle_not_available">البند المستخدم لهذا التطبيق غير متوفر الآن</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">تنزيل ملف APK الأصلي</string>
     <string name="home_download_instructions_steps_title">التعليمات:</string>
@@ -102,14 +100,15 @@
     <string name="home_no_patches_for_app">لا يوجد تعديلات متاحة لهذا التطبيق</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">وضع الخبير</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d من %2$s محدد</string>
     <string name="expert_mode_search">البحث عن التعديلات</string>
     <string name="expert_mode_proceed">المضي قدمًا إلى التعديل</string>
     <string name="expert_mode_disable_all">تعطيل الكل</string>
     <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
     <string name="expert_mode_no_patches">لا يوجد تعديلات متاحة</string>
-    <string name="expert_mode_multiple_bundles_warning_title">تم تحديد مصادر تعديل متعددة</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
+    <string name="expert_mode_multiple_sources_warning_title">تم تحديد مصادر تعديل متعددة</string>
+    <string name="expert_mode_multiple_sources_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
 
 هل أنت متأكد من رغبتك في المتابعة؟"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@
     <string name="settings_advanced_strip_unused_libs_description">حذف المكتبات الأصلية لبنى المعالجات غير المدعومة من التطبيقات المعدلة</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">رمز GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">مطلوب لحزم طلبات السحب</string>
+    <string name="settings_advanced_github_pat_description">مطلوب لمصادر طلب السحب</string>
     <string name="settings_advanced_github_pat_configured">تم تكوين الرمز</string>
     <string name="settings_advanced_github_pat_how_to_get">كيفية الحصول على رمز وصول</string>
     <string name="settings_advanced_github_pat_dialog_title">تعيين رمز وصول شخصي لـ GitHub</string>
@@ -494,7 +493,25 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">خيارات التعديل</string>
     <string name="settings_system_patch_selections_description">إدارة خيارات وتعديلات البرامج المحفوظة. تبقى هذه الخيارات محفوظة حتى بعد إلغاء تثبيت التطبيق.</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">إعادة تعيين كل التحديدات؟</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">إعادة تعيين تحديدات الحزمة؟</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">إعادة تعيين تحديد المصدر؟</string>
     <string name="settings_system_patch_selection_no_saved">لا يوجد تحديدات تعديل محفوظة</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s عبر %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s في %2$s</string>
+    <string name="settings_system_patch_selection_source_format">مصدر #%d</string>
+    <string name="settings_system_patch_selection_will_delete">هذا سيحذف:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">هذا سيحذف كل تحديدات التعديلات محفوظة بشكل دائم لجميع الحزم والمصادر</string>
+    <string name="settings_system_patch_selection_reset_package_warning">هذا سيحذف كل تحديدات التعديلات المحفوظة بشكل دائم لـ %s عبر جميع المصادر</string>
+    <string name="settings_system_patch_selection_reset_source_warning">هذا سيحذف تحديدات التعديلات المحفوظة لـ %1$s في مصدر #%2$d</string>
+    <string name="settings_system_export_source_data_fail">فشل تصدير بيانات المصدر</string>
+    <string name="settings_system_export_source_data_success">تم تصدير بيانات المصدر بنجاح</string>
+    <string name="settings_system_import_source_data_fail">فشل استيراد بيانات المصدر</string>
+    <string name="settings_system_import_source_data_success">تم استيراد بيانات المصدر بنجاح</string>
+    <string name="settings_system_patch_details_title">تفاصيل التعديل</string>
+    <string name="settings_system_selected_patches_title">التعديلات المحددة (%d)</string>
+    <string name="settings_system_patch_options_title">خيارات المعدل (%d)</string>
+    <string name="settings_system_no_patches_or_options">لا يوجد معدلات أو خيارات محفوظة</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">لمحة</string>
     <string name="settings_system_share_website">مشاركة الموقع الإلكتروني</string>
@@ -509,6 +526,7 @@
     <string name="yes">نعم</string>
     <string name="no">لا</string>
     <string name="reset">إعادة التعيين</string>
+    <string name="reset_all">إعادة تعيين الكل</string>
     <string name="confirm">تأكيد</string>
     <string name="warning">تحذير</string>
     <string name="error_">خطأ</string>

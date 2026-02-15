@@ -13,6 +13,7 @@
     <string name="home_update_error">Ažuriranje nije uspjelo</string>
     <string name="home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>
+    <string name="home_update_progress_format">%1$s obrašeno</string>
     <string name="home_update_success">Ažuriranje izvora dovršeno</string>
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo pričekajte…</string>
@@ -99,14 +100,15 @@ Kompatibilne verzije:"</string>
     <string name="home_no_patches_for_app">Nema dostupnih patcheva za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Napredni način</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d od %2$d odabrano</string>
     <string name="expert_mode_search">Pretraživanje patcheva</string>
     <string name="expert_mode_proceed">Nastavite na patchanje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patcheva</string>
     <string name="expert_mode_no_patches">Nema dostupnih patcheva</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Odabrano više izvora patcheva</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Odabrali ste patcheve iz više izvora. To može uzrokovati probleme s kompatibilnošću ili neočekivano ponašanje.
+    <string name="expert_mode_multiple_sources_warning_title">Odabrano više izvora patcheva</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Odabrali ste patcheve iz više izvora. To može uzrokovati probleme s kompatibilnošću ili neočekivano ponašanje.
 
 Jeste li sigurni da želite nastaviti?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -311,7 +313,7 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Izbrišite izvorne biblioteke za nepodržane arhitekture procesora iz patchanih aplikacija</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Obavezno za pakete pull zahtjeva</string>
+    <string name="settings_advanced_github_pat_description">Potrebno za izvlačenje zahtjeva</string>
     <string name="settings_advanced_github_pat_configured">Token je konfiguriran</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako dobiti token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavite GitHub osobni pristupni token</string>
@@ -491,7 +493,25 @@ Dimenzije slike moraju biti sljedeće:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Odabir patcheva</string>
     <string name="settings_system_patch_selections_description">Upravljajte spremljenim odabirima i opcijama patcha. One ostaju i nakon deinstalacije aplikacije.</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Izbriši sve odabire?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Izbriši odabir paketa?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Izbriši odabir izvora?</string>
     <string name="settings_system_patch_selection_no_saved">Nema spremljenih odabira patcha</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s preko %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s u %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Izvor #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Ovo će izbrisati:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za sve pakete i izvor</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za %s preko svih izvora</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ovo će trajno izbrisati spremljene odabire patcha za %1$s u izvoru #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Neuspjeh pri izvozu podataka izvora</string>
+    <string name="settings_system_export_source_data_success">Podaci izvora uspješno izvozeni</string>
+    <string name="settings_system_import_source_data_fail">Neuspjeh pri uvozu podataka izvora</string>
+    <string name="settings_system_import_source_data_success">Podaci izvora uspješno uvezeni</string>
+    <string name="settings_system_patch_details_title">Detalji patcha</string>
+    <string name="settings_system_selected_patches_title">Odabrani patchovi (%d)</string>
+    <string name="settings_system_patch_options_title">Opcije patchova (%d)</string>
+    <string name="settings_system_no_patches_or_options">Nema spremljenih patchova ili opcija</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaciji</string>
     <string name="settings_system_share_website">Dijeli web stranicu</string>
@@ -506,6 +526,7 @@ U svojoj srži, Morphe napreduje na povratnim informacijama i doprinosima zajedn
     <string name="yes">Da</string>
     <string name="no">Ne</string>
     <string name="reset">Poništi</string>
+    <string name="reset_all">Poništi sve</string>
     <string name="confirm">Potvrdi</string>
     <string name="warning">Upozorenje</string>
     <string name="error_">Pogreška</string>

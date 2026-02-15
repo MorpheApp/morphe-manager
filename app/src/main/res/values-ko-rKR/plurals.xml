@@ -3,6 +3,15 @@
     <plurals name="patch_count">
         <item quantity="other">%d 개의 패치</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d 개의 패치 옵션</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d 개의 소스</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d 개의 패키지</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">%d개의 패치 실행</item>
     </plurals>

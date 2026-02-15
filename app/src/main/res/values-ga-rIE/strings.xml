@@ -74,8 +74,6 @@ Leaganacha comhoiriúnacha:"</string>
     <string name="home_apk_availability_unpatched_label">Díphaisteáilte</string>
     <string name="home_apk_availability_yes">Sea, tá sé agam</string>
     <string name="home_apk_availability_no">Ní hea, cuidigh liom é a aimsiú</string>
-    <string name="home_app_info_repatch_no_bundle_info">Ní féidir a fhianaiseadh cén phacáiste a úsáidtear do chugainn</string>
-    <string name="home_app_info_repatch_bundle_not_available">Tá an phacáiste a úsáidtear do chugainn ní ba mhó</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Íoslódáil an APK bunaidh</string>
     <string name="home_download_instructions_steps_title">Treoracha:</string>
@@ -100,14 +98,15 @@ Leaganacha comhoiriúnacha:"</string>
     <string name="home_no_patches_for_app">Níl aon phaistí ar fáil don aip seo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mód saineolaithe</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d de %2$d roghnaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
     <string name="expert_mode_proceed">Lean ar aghaidh go dtí an Paisteáil</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
     <string name="expert_mode_no_patches">Níl aon phaistí ar fáil</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Ilfhoinsí paiste roghnaithe</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Tá paistí roghnaithe agat ó fhoinsí éagsúla paistí. D’fhéadfadh fadhbanna comhoiriúnachta nó iompar gan choinne a bheith mar thoradh air seo.
+    <string name="expert_mode_multiple_sources_warning_title">Ilfhoinsí paiste roghnaithe</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Tá paistí roghnaithe agat ó fhoinsí éagsúla paistí. D’fhéadfadh fadhbanna comhoiriúnachta nó iompar gan choinne a bheith mar thoradh air seo.
 
 An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -311,7 +310,7 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Scrios leabharlanna dúchasacha le haghaidh ailtireachtaí LAP neamhthacaithe ó aipeanna paisteáilte</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT GitHub</string>
-    <string name="settings_advanced_github_pat_description">Riachtanach le haghaidh pacáistí iarratais tarraingthe</string>
+    <string name="settings_advanced_github_pat_description">Tairbheach riachtanach le haghaidh pacáistí iarratais tarraingthe</string>
     <string name="settings_advanced_github_pat_configured">Cumraithe an chomhartha</string>
     <string name="settings_advanced_github_pat_how_to_get">Conas comhartha a fháil</string>
     <string name="settings_advanced_github_pat_dialog_title">Socraigh Comhartha Rochtana Pearsanta GitHub</string>
@@ -489,7 +488,25 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Roghanna paiste</string>
     <string name="settings_system_patch_selections_description">Bainistigh roghanna agus roghanna paiste sábháilte. Leanann siad seo ar aghaidh tar éis díshuiteáil an aip</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Tá cinnte go gcuirfidh tú an rogha seo in iomaith?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Tá cinnte go gcuirfidh tú an rogha seo in iomaith?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Tá cinnte go gcuirfidh tú an rogha seo in iomaith?</string>
     <string name="settings_system_patch_selection_no_saved">Gan aon roghanna paiste sábháilte</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s go %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s go %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Foinse #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Sé sin atá ag teip:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Tá sé seo ag teip: tá an rogha seo seo athshocrútha ag an gclár seo seo</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Tá sé seo ag teip: tá an rogha seo seo athshocrútha ag an gclár seo seo</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Tá sé seo ag teip: tá an rogha seo seo athshocrútha ag an gclár seo seo</string>
+    <string name="settings_system_export_source_data_fail">Theip ar aip paisteáilte a easpórtáil</string>
+    <string name="settings_system_export_source_data_success">Rug an t-aip paisteáilte a easpórtáil</string>
+    <string name="settings_system_import_source_data_fail">Theip ar aip paisteáilte a iompórtáil</string>
+    <string name="settings_system_import_source_data_success">Rug an t-aip paisteáilte a iompórtáil</string>
+    <string name="settings_system_patch_details_title">Sonraí paiste</string>
+    <string name="settings_system_selected_patches_title">Roghnaigh paiste</string>
+    <string name="settings_system_patch_options_title">Roghanna paiste</string>
+    <string name="settings_system_no_patches_or_options">Níor tástáthaigh paiste ná roghanna</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Maidir</string>
     <string name="settings_system_share_website">Comhroinn suíomh Gréasáin</string>
@@ -504,6 +521,7 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="yes">Tá</string>
     <string name="no">Níl</string>
     <string name="reset">Athshocraigh</string>
+    <string name="reset_all">Athshocrú Gach</string>
     <string name="confirm">Deimhnigh</string>
     <string name="warning">Rabhadh</string>
     <string name="error_">Earráid</string>

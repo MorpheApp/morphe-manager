@@ -76,8 +76,6 @@ Versiuni compatibile:"</string>
     <string name="home_apk_availability_no">Nu, ajută-mă să o găsesc</string>
     <string name="home_apk_use_saved_with_version">Folosește APK salvat (v%s)</string>
     <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patching va necesita selectarea din nou a fișierului APK</string>
-    <string name="home_app_info_repatch_no_bundle_info">Nu se poate stabili care pachet a fost folosit pentru această aplicație</string>
-    <string name="home_app_info_repatch_bundle_not_available">Pachetul folosit pentru această aplicație nu este disponibil</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descărcați APK-ul original</string>
     <string name="home_download_instructions_steps_title">Instrucțiuni:</string>
@@ -102,14 +100,15 @@ Versiuni compatibile:"</string>
     <string name="home_no_patches_for_app">Nu există patch-uri disponibile pentru această aplicație</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d din %2$s selectate</string>
     <string name="expert_mode_search">Caută patch-uri</string>
     <string name="expert_mode_proceed">Procedează la patchare</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_no_patches">Nu există patch-uri disponibile</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Sursă de modificare multiplă selectată</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Ați selectat modificări din surse multiple. Acest lucru poate duce la probleme de compatibilitate sau comportament neașteptat.
+    <string name="expert_mode_multiple_sources_warning_title">Sursă de modificare multiplă selectată</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Ați selectat modificări din surse de modificare multiple. Acest lucru poate cauza probleme de compatibilitate sau comportament neașteptat.
 
 Sunteți sigur că doriți să continuați?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Șterge librări native pentru arhitecturi CPU nesupuse de pe aplicații patachate</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token GitHub</string>
-    <string name="settings_advanced_github_pat_description">Necesar pentru pachete de cereri de tractare</string>
+    <string name="settings_advanced_github_pat_description">Nevoie pentru surse de cerere de preluare</string>
     <string name="settings_advanced_github_pat_configured">Token configurat</string>
     <string name="settings_advanced_github_pat_how_to_get">Cum obţiţi un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Setare GitHub Personal Access Token</string>
@@ -494,6 +493,25 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Gestiune selectii de modificări</string>
     <string name="settings_system_patch_selections_description">Gestiune selectii de modificări și opțiuni. Acestea persistă după dezinstalarea aplicației</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Resetați toate selectiile?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Resetați selectiile pachetului?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Resetați selectia sursei?</string>
+    <string name="settings_system_patch_selection_no_saved">Nicio selectie salvată</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s peste %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s în %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Sursă #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Acesta va șterge:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru toate pachetele și sursele</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru %s peste toate sursele</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Acesta va șterge selectiile de pachet salvate pentru %1$s în sursă #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Eșec la exportarea datelor sursei</string>
+    <string name="settings_system_export_source_data_success">Datele sursei exportate cu succes</string>
+    <string name="settings_system_import_source_data_fail">Eșec la importarea datelor sursei</string>
+    <string name="settings_system_import_source_data_success">Datele sursei importate cu succes</string>
+    <string name="settings_system_patch_details_title">Detalii pachet</string>
+    <string name="settings_system_selected_patches_title">Pachete selectate (%d)</string>
+    <string name="settings_system_patch_options_title">Opțiuni pachet (%d)</string>
+    <string name="settings_system_no_patches_or_options">Nicio pachet sau opțiune salvată</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_share_website">Partajează website</string>
@@ -508,6 +526,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="yes">Da</string>
     <string name="no">Nu</string>
     <string name="reset">Resetare</string>
+    <string name="reset_all">Resetați tot</string>
     <string name="confirm">Confirmă</string>
     <string name="warning">Atenție</string>
     <string name="error_">Eroare</string>
