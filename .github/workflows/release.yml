@@ -72,6 +72,19 @@ jobs:
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 
+      - name: Update app-release.json
+        if: steps.release.outputs.NEW_TAG != ''
+        run: |
+          VERSION=${{ steps.release.outputs.NEW_TAG }}
+          VERSION=${VERSION#v}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase
+          mv app/app-release-${VERSION}.json app/app-release.json
+          git add app/app-release.json
+          git commit -m "chore: update app-release.json"
+          git push
+
       - name: Attest
         if: steps.release.outputs.NEW_TAG != ''
         uses: actions/attest-build-provenance@v2
