@@ -1,3 +1,10 @@
+# app [1.7.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.13...v1.7.0-dev.14) (2026-02-15)
+
+
+### Bug Fixes
+
+* Increase default process memory ([557ff78](https://github.com/MorpheApp/morphe-manager/commit/557ff784d8ac223de35ed52ddf20dc9aa62125d5))
+
 # app [1.7.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.12...v1.7.0-dev.13) (2026-02-15)
 
 
