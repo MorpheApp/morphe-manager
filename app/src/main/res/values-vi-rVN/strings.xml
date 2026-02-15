@@ -13,7 +13,7 @@
     <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
-    <string name="home_update_progress_format">Đã xử lý %1$s/</string>
+    <string name="home_update_progress_format">Đã xử lý %1$s</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
     <string name="home_update_success_subtitle">Đã cập nhật nguồn mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
@@ -76,8 +76,6 @@ Danh sách phiên bản tương thích:"</string>
     <string name="home_apk_availability_no">Chưa, hãy giúp tôi tìm nó</string>
     <string name="home_apk_use_saved_with_version">Dùng APK đã lưu (v%s)</string>
     <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
-    <string name="home_app_info_repatch_no_bundle_info">Không thể xác định gói nào được sử dụng cho ứng dụng này</string>
-    <string name="home_app_info_repatch_bundle_not_available">Gói được sử dụng cho ứng dụng này không còn khả dụng</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Tải APK gốc</string>
     <string name="home_download_instructions_steps_title">Hướng dẫn:</string>
@@ -102,14 +100,15 @@ Danh sách phiên bản tương thích:"</string>
     <string name="home_no_patches_for_app">Không có bản vá nào cho ứng dụng này</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
+    <string name="expert_mode_subtitle_extended_format">Đã chọn %1$d/%2$s</string>
     <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_no_patches">Không có bản vá nào</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Đã chọn nhiều nguồn bản</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó có thể khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
+    <string name="expert_mode_multiple_sources_warning_title">Đã chọn nhiều nguồn vá</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
 
 Bạn có chắc muốn tiếp tục không?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Xóa thư viện gốc cho kiến trúc CPU không được hỗ trợ từ ứng dụng đã vá</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Mã PAT GitHub</string>
-    <string name="settings_advanced_github_pat_description">Bắt buộc đối với các gói pull request</string>
+    <string name="settings_advanced_github_pat_description">Bắt buộc đối với các nguồn pull request</string>
     <string name="settings_advanced_github_pat_configured">Đã cấu hình token</string>
     <string name="settings_advanced_github_pat_how_to_get">Cách lấy token</string>
     <string name="settings_advanced_github_pat_dialog_title">Thiết lập Personal Access Token của GitHub</string>
@@ -494,7 +493,25 @@ Kích thước hình ảnh yêu cầu:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bản vá đã chọn</string>
     <string name="settings_system_patch_selections_description">Quản lý bản vá đã chọn và các tùy chỉnh. Chúng vẫn được lưu lại ngay cả khi bạn gỡ cài đặt ứng dụng</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Đặt lại toàn bộ bản vá đã chọn?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Đặt lại gói đã chọn?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Đặt lại nguồn đã chọn?</string>
     <string name="settings_system_patch_selection_no_saved">Không có bản vá đã chọn được lưu</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s đến %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s trong %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Nguồn #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Thao tác sẽ xóa:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Toàn bộ bản vá đã lưu cho %s (trong mọi nguồn) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho %1$s (trong nguồn #%2$d) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_export_source_data_fail">Không thể xuất dữ liệu nguồn</string>
+    <string name="settings_system_export_source_data_success">Đã xuất dữ liệu nguồn thành công</string>
+    <string name="settings_system_import_source_data_fail">Không thể nhập dữ liệu nguồn</string>
+    <string name="settings_system_import_source_data_success">Đã nhập dữ liệu nguồn thành công</string>
+    <string name="settings_system_patch_details_title">Chi tiết bản vá</string>
+    <string name="settings_system_selected_patches_title">Các bản vá đã chọn (%d)</string>
+    <string name="settings_system_patch_options_title">Tùy chỉnh bản vá (%d)</string>
+    <string name="settings_system_no_patches_or_options">Không có bản vá hoặc tùy chỉnh được lưu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
@@ -509,6 +526,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="yes">Có</string>
     <string name="no">Không</string>
     <string name="reset">Đặt lại</string>
+    <string name="reset_all">Đặt lại tất cả</string>
     <string name="confirm">OK</string>
     <string name="warning">Cảnh báo</string>
     <string name="error_">Lỗi</string>

@@ -76,8 +76,6 @@ Kompatibilis verziók:"</string>
     <string name="home_apk_availability_no">Nem, segíts megtalálni</string>
     <string name="home_apk_use_saved_with_version">Használjon mentett APK-t (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választani az APK fájlt.</string>
-    <string name="home_app_info_repatch_no_bundle_info">Nem lehet meghatározni, hogy melyik csomagot használtak ehhez az alkalmazáshoz</string>
-    <string name="home_app_info_repatch_bundle_not_available">A ehhez az alkalmazáshoz használt csomag már nem áll rendelkezésre</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Az eredeti APK fájl letöltése</string>
     <string name="home_download_instructions_steps_title">Útmutató:</string>
@@ -102,14 +100,15 @@ Kompatibilis verziók:"</string>
     <string name="home_no_patches_for_app">Nincsenek elérhető módosítások ehhez az alkalmazáshoz</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Szakértői mód</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d/%2$d kiválasztva</string>
     <string name="expert_mode_search">Patchek keresése</string>
     <string name="expert_mode_proceed">Folytatás a módosításhoz</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_no_patches">Nincsenek elérhető módosítások</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Több patchforrás kiválasztva</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
+    <string name="expert_mode_multiple_sources_warning_title">Több patchforrás kiválasztva</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
 
 Biztosan folytatja?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Biztosan folytatja?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a módosított alkalmazásokból</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Pull kérések csomagjának létrehozásához szükséges</string>
+    <string name="settings_advanced_github_pat_description">Pull kérészékőrésre kellenö</string>
     <string name="settings_advanced_github_pat_configured">Token beállítva</string>
     <string name="settings_advanced_github_pat_how_to_get">Hogyan kaptok egy token-t</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Personal Access Token beállítása</string>
@@ -494,7 +493,25 @@ A képek méreteinek a következőknek kell lennie:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Módosítás kiválasztások</string>
     <string name="settings_system_patch_selections_description">Kezelje a mentett módosítás kiválasztásokat és beállításokat. Ezek fennmaradnak az alkalmazás eltávolítása után is</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Minden kiválasztást visszaállítasz?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Csomag kiválasztásait visszaállítasz?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Forrás kiválasztását visszaállítasz?</string>
     <string name="settings_system_patch_selection_no_saved">Nincsen mentett módosításkiválasztás</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s – %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s – %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Forrás #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Ez törölni fogja:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ez véglegesen törli az összes mentett módosítás kiválasztását minden csomágnak és forrásnak</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ez véglegesen törli a %s módosítások kiválasztását minden forrásban</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ez véglegesen törli a %1$s módosítások kiválasztását a #%2$d forrásban</string>
+    <string name="settings_system_export_source_data_fail">Nem sikerült a forrás adatok exportálása</string>
+    <string name="settings_system_export_source_data_success">Forrás adatok sikeresen exportálva</string>
+    <string name="settings_system_import_source_data_fail">Nem sikerült a forrás adatok importálása</string>
+    <string name="settings_system_import_source_data_success">Forrás adatok sikeresen importálva</string>
+    <string name="settings_system_patch_details_title">Módosítás részletek</string>
+    <string name="settings_system_selected_patches_title">Kiválasztott módosítások (%d)</string>
+    <string name="settings_system_patch_options_title">Módosítás beállításai (%d)</string>
+    <string name="settings_system_no_patches_or_options">Nincsenek mentett módosítások vagy beállítások</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Névjegy</string>
     <string name="settings_system_share_website">Webhely megosztása</string>
@@ -509,6 +526,7 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
     <string name="reset">Visszaállítás</string>
+    <string name="reset_all">Visszaállítás</string>
     <string name="confirm">Megerősítés</string>
     <string name="warning">Figyelmeztetés</string>
     <string name="error_">Hiba</string>

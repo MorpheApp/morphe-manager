@@ -105,8 +105,8 @@ Kompatibla versioner:"</string>
     <string name="expert_mode_enable_all">Aktivera alla</string>
     <string name="expert_mode_no_results">Inga korrigeringar hittades</string>
     <string name="expert_mode_no_patches">Inga korrigeringar är tillgängliga</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Flera korrigeringskällor har valts</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
+    <string name="expert_mode_multiple_sources_warning_title">Flera korrigeringskällor har valts</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Version som inte stöds</string>
     <string name="home_dialog_unsupported_version_dialog_description">Den här APK-filen är inte en rekommenderad appversion. Om du fortsätter kan det leda till att appen inte fungerar</string>
@@ -309,7 +309,6 @@ Kompatibla versioner:"</string>
     <string name="settings_advanced_strip_unused_libs_description">Ta bort inbyggda bibliotek för CPU-arkitekturer som inte stöds från korrigerade appar.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub-PAT</string>
-    <string name="settings_advanced_github_pat_description">Krävs för pull request-paket</string>
     <string name="settings_advanced_github_pat_configured">Token konfigurerad</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>

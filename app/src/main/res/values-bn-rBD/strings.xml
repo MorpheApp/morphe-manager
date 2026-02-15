@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">না, আমাকে এটি খুঁজে পেতে সাহায্য করুন</string>
     <string name="home_apk_use_saved_with_version">বর্তমান সংরক্ষিত APK (v%s) ব্যবহার করুন</string>
     <string name="home_app_info_no_saved_apk">কোন সংরক্ষিত APK নেই। প্যাচিংয়ের জন্য আবার APK ফাইল নির্বাচন করতে হবে</string>
-    <string name="home_app_info_repatch_no_bundle_info">এই অ্যাপের জন্য কোন বান্ডল ব্যবহার করা হয়েছে তা নির্ণয় করা যায়নি</string>
-    <string name="home_app_info_repatch_bundle_not_available">এই অ্যাপের জন্য ব্যবহৃত বান্ডল আর उपलब्ध নেই</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">মূল APK ডাউনলোড করুন</string>
     <string name="home_download_instructions_steps_title">নির্দেশাবলী:</string>
@@ -102,16 +100,17 @@
     <string name="home_no_patches_for_app">এই অ্যাপের জন্য কোনো প্যাচ উপলব্ধ নেই</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">এক্সপার্ট মোড</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d টি %2$s নির্বাচন করা হয়েছে</string>
     <string name="expert_mode_search">প্যাচ খুঁজুন</string>
     <string name="expert_mode_proceed">প্যাচিংয়ের জন্য প্রেরণ করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_no_patches">কোনো প্যাচ উপলব্ধ নেই</string>
-    <string name="expert_mode_multiple_bundles_warning_title">বহু প্যাচ উৎস নির্বাচন করা হয়েছে</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"আপনি বিভিন্ন প্যাচ উৎস থেকে প্যাচ নির্বাচন করেছেন। এটি সামঞ্জस्यতা সমস্যা বা অপ্রত্যাশিত আচরণের কারণ হতে পারে।
+    <string name="expert_mode_multiple_sources_warning_title">বহু প্যাচ উৎস নির্বাচিত</string>
+    <string name="expert_mode_multiple_sources_warning_message">"আপনি একাধিক প্যাচ উৎস থেকে প্যাচ নির্বাচন করেছেন। এটি সামঞ্জस्यতা সমস্যা বা অপ্রত্যাশিত আচরণের কারণ হতে পারে।
 
-আপনি কি এগিয়ে যেতে চান?"</string>
+আপনি এগিয়ে যেতে চান কি?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">এই এপিকটি একটি সুপারিশিত অ্যাপ সংস্করণ নয়। এগো চললে একটি অকার্যকার অ্যাপ হয়তে পারে।</string>
     <string name="home_dialog_unsupported_version_dialog_description">এই APK রেকমেন্ডেড অ্যাপ ভার্সনের নয়। চলুন এতে ফলাফল হবার সম্ভাবনা আছে</string>
@@ -314,7 +313,7 @@
     <string name="settings_advanced_strip_unused_libs_description">অনুসুশিত নয় এমন সিপ-আর্কিত লাইব্রেরিসগুলি প্যাচড অ্যাপ থেকে মুছে ফেলুন</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">গিটহাব PAT</string>
-    <string name="settings_advanced_github_pat_description">পুল রিকুয়েস্ট বান্ডলের জন্য প্রয়োজনীয়</string>
+    <string name="settings_advanced_github_pat_description">পুল অনুরোধ উৎসের জন্য প্রয়োজনীয়</string>
     <string name="settings_advanced_github_pat_configured">টোকেন কনফিগার করা হয়েছে</string>
     <string name="settings_advanced_github_pat_how_to_get">কিভাবে একটি টোকেন পেতে পারেন</string>
     <string name="settings_advanced_github_pat_dialog_title">গিটহাব ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন</string>
@@ -473,6 +472,25 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">প্যাচ নির্বাচন</string>
     <string name="settings_system_patch_selections_description">সংরক্ষিত প্যাচ নির্বাচন ও অপশন পরিচালনা করুন। এগুলি অ্যাপ আনইনস্টলেশন পরেেও টিকিয়ে রাখা হয়</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">সবগুলো নির্বাচন পুনরায় সেট করব?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">প্যাকেজ নির্বাচন পুনরায় সেট করব?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">উৎস নির্বাচন পুনরায় সেট করব?</string>
+    <string name="settings_system_patch_selection_no_saved">কোনো সংরক্ষিত প্যাচ নির্বাচন নেই</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s থেকে %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s থেকে %2$s</string>
+    <string name="settings_system_patch_selection_source_format">উৎস #%d</string>
+    <string name="settings_system_patch_selection_will_delete">এটি মুছে ফেলবে:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">সব প্যাকেজ এবং উৎসের জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
+    <string name="settings_system_patch_selection_reset_package_warning">%s এর জন্য সব উৎসের জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
+    <string name="settings_system_patch_selection_reset_source_warning">উৎস #%2$d-এ %1$s-এ সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
+    <string name="settings_system_export_source_data_fail">উৎস ডাটা রপ্তানি করতে ব্যর্থ হয়েছে</string>
+    <string name="settings_system_export_source_data_success">উৎস ডাটা সফলভাবে রপ্তানি করা হয়েছে</string>
+    <string name="settings_system_import_source_data_fail">উৎস ডাটা আমদানি করতে ব্যর্থ হয়েছে</string>
+    <string name="settings_system_import_source_data_success">উৎস ডাটা সফলভাবে আমদানি করা হয়েছে</string>
+    <string name="settings_system_patch_details_title">প্যাচ বিবরণ</string>
+    <string name="settings_system_selected_patches_title">নির্বাচিত প্যাচ (%d)</string>
+    <string name="settings_system_patch_options_title">প্যাচ বিকল্প (%d)</string>
+    <string name="settings_system_no_patches_or_options">কোনো সংরক্ষিত প্যাচ বা বিকল্প নেই</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>
     <string name="settings_system_share_website">ওয়েবসাইট শেয়ার করুন</string>
@@ -487,6 +505,7 @@
     <string name="yes">হ্যাঁ</string>
     <string name="no">না</string>
     <string name="reset">আবার সেট করুন</string>
+    <string name="reset_all">সব রিসেট করুন</string>
     <string name="confirm">নিশ্চিত করুন</string>
     <string name="warning">সতর্কবার্তা</string>
     <string name="error_">ত্রুটি</string>

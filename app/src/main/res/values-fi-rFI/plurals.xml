@@ -4,6 +4,18 @@
         <item quantity="one">%d korjaustiedosto</item>
         <item quantity="other">%d korjaustiedostoa</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d paikka-vaihtoehto</item>
+        <item quantity="other">%d paikka-vaihtoehtoa</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d lähde</item>
+        <item quantity="other">%d lähdettä</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paketti</item>
+        <item quantity="other">%d pakettia</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Suorita %d korjaustiedosto</item>
         <item quantity="other">Suorita %d korjaustiedostoa</item>
@@ -27,5 +39,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%1$d lähde asennettu</item>
         <item quantity="other">%1$d lähdettä asennettu</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d paikka valittu</item>
+        <item quantity="other">%d paikkaa valittu</item>
     </plurals>
 </resources>

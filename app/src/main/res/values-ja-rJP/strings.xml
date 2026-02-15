@@ -13,7 +13,7 @@
     <string name="home_update_error">更新できませんでした</string>
     <string name="home_update_error_subtitle">インターネット接続を確認して、再度お試しください</string>
     <string name="home_updating_sources">ソースを更新中…</string>
-    <string name="home_update_progress_format">%1$s 件中 %1$s 件処理済み</string>
+    <string name="home_update_progress_format">%1$s 件処理済み</string>
     <string name="home_update_success">ソースの更新が完了しました</string>
     <string name="home_update_success_subtitle">ソースは最新の状態です</string>
     <string name="home_sources_are_loading">ソースを読み込んでいます。しばらくお待ちください…</string>
@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">いいえ、探すのを手伝ってください</string>
     <string name="home_apk_use_saved_with_version">保存済み APK (v%s) を使用します</string>
     <string name="home_app_info_no_saved_apk">保存済み APK がありません。パッチを適用するには、APK ファイルをもう一度選択してください</string>
-    <string name="home_app_info_repatch_no_bundle_info">このアプリのバンドルを特定できませんでした</string>
-    <string name="home_app_info_repatch_bundle_not_available">このアプリのバンドルは利用できません</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">オリジナルの APK をダウンロード</string>
     <string name="home_download_instructions_steps_title">操作手順:</string>
@@ -102,14 +100,15 @@
     <string name="home_no_patches_for_app">このアプリに利用できるパッチはありません</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">エキスパートモード</string>
+    <string name="expert_mode_subtitle_extended_format">%2$s 件中 %1$d 件選択中</string>
     <string name="expert_mode_search">パッチを検索する</string>
     <string name="expert_mode_proceed">パッチ処理に進む</string>
     <string name="expert_mode_disable_all">全て無効化する</string>
     <string name="expert_mode_enable_all">全て有効化する</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_no_patches">利用可能なパッチはありません</string>
-    <string name="expert_mode_multiple_bundles_warning_title">複数のパッチソースが選択されました</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"複数のパッチソースからパッチを選択しました。これは互換性の問題や予期しない動作を引き起こす可能性があります。
+    <string name="expert_mode_multiple_sources_warning_title">複数のパッチソースが選択されました</string>
+    <string name="expert_mode_multiple_sources_warning_message">"複数のパッチソースからパッチを選択しました。これは互換性の問題や予期しない動作を引き起こす可能性があります。
 
 続行しますか？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@
     <string name="settings_advanced_strip_unused_libs_description">パッチ適用済みアプリから、非対応の CPU アーキテクチャ向けネイティブ ライブラリを削除します</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">プルリクエストバンドルに必要</string>
+    <string name="settings_advanced_github_pat_description">プルリクエスト ソースに必要</string>
     <string name="settings_advanced_github_pat_configured">PAT が設定されました</string>
     <string name="settings_advanced_github_pat_how_to_get">PAT を取得する方法</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub の Personal Access Token を設定する</string>
@@ -495,7 +494,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">パッチ セレクション</string>
     <string name="settings_system_patch_selections_description">保存されたパッチ セレクションとオプションを管理します。これらはアプリのアンインストール後も保持されます</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">すべての選択をリセットしますか？</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">パッケージ選択をリセットしますか？</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">ソース選択をリセットしますか？</string>
     <string name="settings_system_patch_selection_no_saved">保存済みパッチ セレクションなし</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s ～ %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ～ %2$s</string>
+    <string name="settings_system_patch_selection_source_format">ソース #%d</string>
+    <string name="settings_system_patch_selection_will_delete">以下を削除します:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">すべてのパッケージとソースの保存済みパッチ セレクションを完全に削除します</string>
+    <string name="settings_system_patch_selection_reset_package_warning">%s のすべてのソースの保存済みパッチ セレクションを完全に削除します</string>
+    <string name="settings_system_patch_selection_reset_source_warning">%1$s のソース #%2$d の保存済みパッチ セレクションを削除します</string>
+    <string name="settings_system_export_source_data_fail">ソースデータのエクスポートに失敗しました</string>
+    <string name="settings_system_export_source_data_success">ソースデータのエクスポートに成功しました</string>
+    <string name="settings_system_import_source_data_fail">ソースデータのインポートに失敗しました</string>
+    <string name="settings_system_import_source_data_success">ソースデータのインポートに成功しました</string>
+    <string name="settings_system_patch_details_title">パッチの詳細</string>
+    <string name="settings_system_selected_patches_title">選択されたパッチ (%d)</string>
+    <string name="settings_system_patch_options_title">パッチ オプション (%d)</string>
+    <string name="settings_system_no_patches_or_options">保存されたパッチやオプションなし</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
@@ -510,6 +527,7 @@ Morphe は、コミュニティのフィードバックと貢献によって発�
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
     <string name="reset">リセット</string>
+    <string name="reset_all">すべてリセット</string>
     <string name="confirm">確認</string>
     <string name="warning">警告</string>
     <string name="error_">エラー</string>

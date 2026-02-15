@@ -76,8 +76,6 @@ Versions compatibles :"</string>
     <string name="home_apk_availability_no">Non, aidez-moi à le trouver</string>
     <string name="home_apk_use_saved_with_version">Utiliser l’APK enregistrée (v%s)</string>
     <string name="home_app_info_no_saved_apk">Aucune APK enregistrée. Le patchage nécessitera de sélectionner à nouveau le fichier APK</string>
-    <string name="home_app_info_repatch_no_bundle_info">Impossible de déterminer quel bundle a été utilisé pour cette application</string>
-    <string name="home_app_info_repatch_bundle_not_available">Le bundle utilisé pour cette application n\'est plus disponible</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Télécharger l\'APK d\'origine</string>
     <string name="home_download_instructions_steps_title">Instructions :</string>
@@ -102,16 +100,17 @@ Versions compatibles :"</string>
     <string name="home_no_patches_for_app">Aucuns patchs disponibles pour cette application</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode Expert</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d sur %2$s sélectionnés</string>
     <string name="expert_mode_search">Rechercher des patchs</string>
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
     <string name="expert_mode_no_patches">Aucuns patchs disponibles</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Plusieurs sources de patch sélectionnées</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou un comportement inattendu.
+    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
 
-Êtes-vous sûr de vouloir continuer ?"</string>
+Voulez-vous vraiment continuer ?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Version non supportée</string>
     <string name="home_dialog_unsupported_version_dialog_description">Cette version de l’APK n’est pas recommandée. Continuer peut rendre l’application dysfonctionnelle</string>
@@ -314,7 +313,7 @@ Versions compatibles :"</string>
     <string name="settings_advanced_strip_unused_libs_description">Supprimer les bibliothèques natives pour les architectures CPU non prises en charge des applications patchées</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Jeton d\'accès personnel GitHub</string>
-    <string name="settings_advanced_github_pat_description">Nécessaire pour les pull request de bundles</string>
+    <string name="settings_advanced_github_pat_description">Requis pour les pull request de sources</string>
     <string name="settings_advanced_github_pat_configured">Jeton configuré</string>
     <string name="settings_advanced_github_pat_how_to_get">Comment obtenir un jeton</string>
     <string name="settings_advanced_github_pat_dialog_title">Définir un jeton d’accès personnel GitHub</string>
@@ -494,7 +493,25 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Sélections de patch</string>
     <string name="settings_system_patch_selections_description">Gérer les sélections et options de patch enregistrées. Celles-ci persistent après la désinstallation de l’application</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Réinitialiser toutes les sélections ?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections de package ?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de source ?</string>
     <string name="settings_system_patch_selection_no_saved">Pas de sélections de patch enregistrées</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s entre %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dans %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Source #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Cela supprimera :</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour tous les packages et sources</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour %s entre toutes les sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera les sélections de patch enregistrées pour %1$s dans la source #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Échec de l\'exportation des données de source</string>
+    <string name="settings_system_export_source_data_success">Données de source exportées avec succès</string>
+    <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>
+    <string name="settings_system_import_source_data_success">Données de source importées avec succès</string>
+    <string name="settings_system_patch_details_title">Détails du patch</string>
+    <string name="settings_system_selected_patches_title">Patchs sélectionnés (%d)</string>
+    <string name="settings_system_patch_options_title">Options de patch (%d)</string>
+    <string name="settings_system_no_patches_or_options">Pas de patch ni options enregistrés</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">À propos</string>
     <string name="settings_system_share_website">Partager le site web</string>
@@ -509,6 +526,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="reset">Réinitialiser</string>
+    <string name="reset_all">Tout réinitialiser</string>
     <string name="confirm">Confirmer</string>
     <string name="warning">Avertissement</string>
     <string name="error_">Erreur</string>
