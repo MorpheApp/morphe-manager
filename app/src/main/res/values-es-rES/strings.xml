@@ -76,8 +76,6 @@ Versiones compatibles:"</string>
     <string name="home_apk_availability_no">No, ayúdame a encontrarla</string>
     <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
-    <string name="home_app_info_repatch_no_bundle_info">No se puede determinar qué paquete se utilizó para esta aplicación</string>
-    <string name="home_app_info_repatch_bundle_not_available">El paquete utilizado para esta aplicación ya no está disponible</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">APKDescarga el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>
@@ -102,14 +100,15 @@ Versiones compatibles:"</string>
     <string name="home_no_patches_for_app">No hay parches disponibles para esta aplicación</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo experto</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d de %2$s seleccionados</string>
     <string name="expert_mode_search">Buscar parches</string>
     <string name="expert_mode_proceed">Proceder al parcheado</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_enable_all">Activar todo</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
     <string name="expert_mode_no_patches">No hay parches disponibles</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Varias fuentes de parches seleccionadas</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
+    <string name="expert_mode_multiple_sources_warning_title">Se han seleccionado varias fuentes de parches</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
 
 ¿Realmente quieres continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Versiones compatibles:"</string>
     <string name="settings_advanced_strip_unused_libs_description">Eliminar bibliotecas nativas para arquitecturas de CPU no compatibles de las aplicaciones parcheadas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token de acceso personal de GitHub</string>
-    <string name="settings_advanced_github_pat_description">Requerido para los paquetes de solicitudes de extracción</string>
+    <string name="settings_advanced_github_pat_description">Requerido para fuentes de solicitud de extracción</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Cómo obtener un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Establecer token de acceso personal de GitHub</string>
@@ -494,7 +493,25 @@ Las dimensiones de la imagen deben ser las siguientes:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Opciones de parche</string>
     <string name="settings_system_patch_selections_description">Administrar las selecciones y opciones de parches guardadas. Estas persisten después de la desinstalación de la aplicación</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">¿Restablecer todas las selecciones?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">¿Restablecer las selecciones de paquetes?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">¿Restablecer las selecciones de fuentes?</string>
     <string name="settings_system_patch_selection_no_saved">No hay selecciones de parches guardadas</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s a través de %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s en %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Fuente #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Esto eliminará:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para todos los paquetes y fuentes.</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para %s en todas las fuentes.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente las selecciones de parches guardadas para %1$s en la fuente #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Error al exportar datos de fuente</string>
+    <string name="settings_system_export_source_data_success">Datos de fuente exportados correctamente</string>
+    <string name="settings_system_import_source_data_fail">Error al importar datos de fuente</string>
+    <string name="settings_system_import_source_data_success">Datos de fuente importados correctamente</string>
+    <string name="settings_system_patch_details_title">Detalles del parche</string>
+    <string name="settings_system_selected_patches_title">Parches seleccionados (%d)</string>
+    <string name="settings_system_patch_options_title">Opciones de parche (%d)</string>
+    <string name="settings_system_no_patches_or_options">No hay parches ni opciones guardadas</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Acerca de Morphe</string>
     <string name="settings_system_share_website">Compartir sitio web</string>
@@ -509,6 +526,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="reset">Restablecer</string>
+    <string name="reset_all">Restablecer todo</string>
     <string name="confirm">Confirmar</string>
     <string name="warning">Advertencia</string>
     <string name="error_">Error</string>

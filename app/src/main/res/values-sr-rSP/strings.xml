@@ -76,8 +76,6 @@ Kompatibilne verzije:"</string>
     <string name="home_apk_availability_no">Не, помозите ми да га нађем</string>
     <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema saćuvanog APK-a. Patching zahtijeva ponovno odabir APK datoteke</string>
-    <string name="home_app_info_repatch_no_bundle_info">Не могу утврдити који пакет је коришћен за ову апликацију</string>
-    <string name="home_app_info_repatch_bundle_not_available">Пакет коришћен за ову апликацију више није доступан</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Преузмите оригинални APK</string>
     <string name="home_download_instructions_steps_title">Упутства:</string>
@@ -102,14 +100,15 @@ Kompatibilne verzije:"</string>
     <string name="home_no_patches_for_app">Нema печева доступно за ову апликацију</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експерт мод</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d од %2$s изабрано</string>
     <string name="expert_mode_search">Претражи печеве</string>
     <string name="expert_mode_proceed">Настави са печевима</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_no_patches">Нema печева доступно</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Више извора пакета изабрано</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Изабрали сте пакете са више извора пакета. То може да изазове проблеме са компатибилношћу или неочекивано понашање.
+    <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Одабрали сте патчеве из више извора. Може да дође до проблема са компатибилношћу или неочекиваног понашања.
 
 Да ли сте сигурни да желите да наставите?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Kompatibilne verzije:"</string>
     <string name="settings_advanced_strip_unused_libs_description">Брисање ненужних оригиналних библиотека може повећати патчирање, али може бити недовољно за старије уређаје</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Неопходно за пакете траженица</string>
+    <string name="settings_advanced_github_pat_description">Неопходно за изворе из GitHub pull request</string>
     <string name="settings_advanced_github_pat_configured">Токен конфигурисан</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako da dobijete token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavite GitHub Personal Access Token</string>
@@ -494,6 +493,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Патч селекције</string>
     <string name="settings_system_patch_selections_description">Управљајте сачуваним патч селекцијама и опцијама. Ове селекције се чувају након деинсталације апликације</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Да ли сте сигурни да желите да обришете све изборе?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Да ли сте сигурни да желите да обришете избор пакета?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Да ли сте сигурни да желите да обришете избор извора?</string>
+    <string name="settings_system_patch_selection_no_saved">Нema сачуваних избора пакета</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s преко %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s у %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Извор #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Ово ће обрисати:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ово ће трајно обрисати све сачуване изборе пакета за све пакете и изворе</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ово ће трајно обрисати све сачуване изборе пакета за %s преко свих извора</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ово ће трајно обрисати сачуване изборе пакета за %1$s у извору #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Неуспешан извоз података извора</string>
+    <string name="settings_system_export_source_data_success">Подаци извора успешно извезени</string>
+    <string name="settings_system_import_source_data_fail">Неуспешан увоз података извора</string>
+    <string name="settings_system_import_source_data_success">Подаци извора успешно увезени</string>
+    <string name="settings_system_patch_details_title">Детаљи пакета</string>
+    <string name="settings_system_selected_patches_title">Изабрани пакети (%d)</string>
+    <string name="settings_system_patch_options_title">Опције пакета (%d)</string>
+    <string name="settings_system_no_patches_or_options">Нema сачуваних пакета или опција</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">О програму</string>
     <string name="settings_system_share_website">Дели веб-сајт</string>
@@ -508,6 +526,7 @@ morphe_header_custom_dark.png
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="reset">Ресетуј</string>
+    <string name="reset_all">Ресетуј све</string>
     <string name="confirm">Potvrdite</string>
     <string name="warning">Упозорење</string>
     <string name="error_">Грешка</string>

@@ -13,7 +13,7 @@
     <string name="home_update_error">Aktualizacja nie powiodła się</string>
     <string name="home_update_error_subtitle">Sprawdź swoje połączenie internetowe i spróbuj ponownie</string>
     <string name="home_updating_sources">Aktualizowanie źródeł…</string>
-    <string name="home_update_progress_format">%1$s przetworzone</string>
+    <string name="home_update_progress_format">%1$s przetworzonych</string>
     <string name="home_update_success">Aktualizacja źródeł zakończona</string>
     <string name="home_update_success_subtitle">Twoje źródła są aktualne</string>
     <string name="home_sources_are_loading">Wczytywanie źródeł, proszę czekać…</string>
@@ -76,8 +76,6 @@ Kompatybilne wersje:"</string>
     <string name="home_apk_availability_no">Nie, pomóż mi ją znaleźć</string>
     <string name="home_apk_use_saved_with_version">Użyj zapisanego pliku APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
-    <string name="home_app_info_repatch_no_bundle_info">Nie można określić, który pakiet został użyty dla tej aplikacji</string>
-    <string name="home_app_info_repatch_bundle_not_available">Pakiet użyty dla tej aplikacji już nie jest dostępny</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
     <string name="home_download_instructions_steps_title">Instrukcje:</string>
@@ -102,14 +100,15 @@ Kompatybilne wersje:"</string>
     <string name="home_no_patches_for_app">Brak dostępnych modyfikacji dla tej aplikacji</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Tryb ekspercki</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d z %2$s wybranych</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
     <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
     <string name="expert_mode_no_results">Brak znalezionych modyfikacji</string>
     <string name="expert_mode_no_patches">Brak dostępnych modyfikacji</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Wybrano wiele źródeł modyfikacji</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Wybrano modyfikacje z wielu różnych źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane zachowanie.
+    <string name="expert_mode_multiple_sources_warning_title">Wybrano wiele źródeł modyfikacji</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Wybrano modyfikacje z wielu źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane działanie aplikacji.
 
 Czy na pewno chcesz kontynuować?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token GitHub</string>
-    <string name="settings_advanced_github_pat_description">Wymagany dla zestawów modyfikacji z Pull Requestów</string>
+    <string name="settings_advanced_github_pat_description">Wymagane dla źródeł z Pull Requestów</string>
     <string name="settings_advanced_github_pat_configured">Token skonfigurowany</string>
     <string name="settings_advanced_github_pat_how_to_get">Jak uzyskać token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ustaw token GitHub</string>
@@ -494,7 +493,25 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
     <string name="settings_system_patch_selections_description">Zarządzaj zapisanymi wyborami i opcjami modyfikacji. Pozostają one zachowane po odinstalowaniu aplikacji</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Zresetować wszystkie wybory?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Zresetować wybory pakietu?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Zresetować wybór źródła?</string>
     <string name="settings_system_patch_selection_no_saved">Brak zapisanych wyborów modyfikacji</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s przez %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s w %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Źródło #%d</string>
+    <string name="settings_system_patch_selection_will_delete">To usunie:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wszystkich pakietów i źródeł</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla pakietu %s we wszystkich źródłach</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Spowoduje to trwałe usunięcie zapisanych wyborów modyfikacji dla %1$s w źródle #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Nie udało się wyeksportować danych źródła</string>
+    <string name="settings_system_export_source_data_success">Dane źródła wyeksportowane pomyślnie</string>
+    <string name="settings_system_import_source_data_fail">Nie udało się zaimportować danych źródła</string>
+    <string name="settings_system_import_source_data_success">Dane źródła zaimportowane pomyślnie</string>
+    <string name="settings_system_patch_details_title">Szczegóły modyfikacji</string>
+    <string name="settings_system_selected_patches_title">Wybrane modyfikacje (%d)</string>
+    <string name="settings_system_patch_options_title">Opcje modyfikacji (%d)</string>
+    <string name="settings_system_no_patches_or_options">Brak zapisanych modyfikacji lub opcji</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikacji</string>
     <string name="settings_system_share_website">Udostępnij stronę</string>
@@ -509,6 +526,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="reset">Zresetuj</string>
+    <string name="reset_all">Zresetuj wszystko</string>
     <string name="confirm">Potwierdź</string>
     <string name="warning">Ostrzeżenie</string>
     <string name="error_">Błąd</string>

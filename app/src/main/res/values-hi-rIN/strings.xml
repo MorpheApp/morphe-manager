@@ -13,6 +13,7 @@
     <string name="home_update_error">उपडेट विफल हुआ</string>
     <string name="home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
     <string name="home_updating_sources">स्रोतों को अपडेट कर रहा हूँ…</string>
+    <string name="home_update_progress_format">%1$s प्रोसेस्ड किया गया</string>
     <string name="home_update_success">स्रोत अपडेट पूर्ण हुआ</string>
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
@@ -99,16 +100,17 @@
     <string name="home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">एक्सपर्ट मोड</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d में से %2$s चुने गए</string>
     <string name="expert_mode_search">पैच खोजें</string>
     <string name="expert_mode_proceed">पैचिंग के लिए आगे जाएं</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
     <string name="expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
-    <string name="expert_mode_multiple_bundles_warning_title">बहुत स्रोतों से पट्च चुने गए हैं</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"आपने विभिन्न पट्च स्रोतों से पट्च चुने हैं। यह संयोजन समस्याएं या अप्रत्याशित व्यवहार का कारण हो सकता है।
+    <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
+    <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।
 
-क्या आप निश्चित हैं कि आप आगे बढ़ना चाहते हैं?"</string>
+क्या आप वास्तव में आगे बढ़ना चाहते हैं?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">यह एपीएम अनुशासित संस्करण नहीं है। आगे बढ़ने से अनुशासित एप्प्लिकेशन संस्करण हो सकता है।</string>
     <string name="home_dialog_unsupported_version_dialog_description">यह APK अनुशंसित एप्लिकेशन संस्करण नहीं है। जारी रखना परिणामस्वरूप एक कार्यक्षम एप्लिकेशन नहीं हो सकता है।</string>
@@ -302,7 +304,7 @@
     <string name="settings_advanced_strip_unused_libs_description">पुराने डिवाइस आर्किटेक्चर के लिए अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">प्रकर्षण के लिए आवश्यक</string>
+    <string name="settings_advanced_github_pat_description">प्रकाशन अनुरोध स्रोतों के लिए आवश्यक</string>
     <string name="settings_advanced_github_pat_configured">टोकन विन्यासित</string>
     <string name="settings_advanced_github_pat_how_to_get">GitHub पर्सनल एक्सेस टोकन कैसे प्राप्त करें</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub पर्सनल एक्सेस टोकन सेट करें</string>
@@ -481,6 +483,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">पथच चयन</string>
     <string name="settings_system_patch_selections_description">सहेजे गए पथच चयन और विकल्प प्रबंधित करें। ये एप्लिकेशन अनइंस्टॉलेशन के बाद भी persis करें।</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">सभी चयन रीसेट करें?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">पैकेज चयन रीसेट करें?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">स्रोत चयन रीसेट करें?</string>
+    <string name="settings_system_patch_selection_no_saved">कोई सहेजा गया पटच चयन नहीं</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s Across %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
+    <string name="settings_system_patch_selection_source_format">स्रोत #%d</string>
+    <string name="settings_system_patch_selection_will_delete">यह हटाएगा:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">यह सभी पैकेजों और स्रोतों के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
+    <string name="settings_system_patch_selection_reset_package_warning">%s के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
+    <string name="settings_system_patch_selection_reset_source_warning">स्रोत #%2$d में %1$s के लिए सहेजे गए पटच चयन को स्थायी रूप से हटाएगा</string>
+    <string name="settings_system_export_source_data_fail">स्रोत डेटा निर्यात करने में विफल</string>
+    <string name="settings_system_export_source_data_success">स्रोत डेटा सफलतापूर्वक निर्यात किया गया</string>
+    <string name="settings_system_import_source_data_fail">स्रोत डेटा आयात करने में विफल</string>
+    <string name="settings_system_import_source_data_success">स्रोत डेटा सफलतापूर्वक आयात किया गया</string>
+    <string name="settings_system_patch_details_title">पटच विवरण</string>
+    <string name="settings_system_selected_patches_title">चुने गए पटच (%d)</string>
+    <string name="settings_system_patch_options_title">पटच विकल्प (%d)</string>
+    <string name="settings_system_no_patches_or_options">कोई पटच या विकल्प सहेजे गए नहीं</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">मorphe के बारे में</string>
     <string name="settings_system_share_website">वेबसाइट शेयर करें</string>
@@ -495,6 +516,7 @@ morphe_header_custom_dark.png
     <string name="yes">हां</string>
     <string name="no">नहीं</string>
     <string name="reset">रीसेट करें</string>
+    <string name="reset_all">सभी रीसेट करें</string>
     <string name="confirm">पुष्टि करें</string>
     <string name="warning">चेतावनी</string>
     <string name="error_">त्रुटि</string>
@@ -516,6 +538,7 @@ morphe_header_custom_dark.png
     <string name="selected">चयनित</string>
     <string name="not_selected">चयनित नहीं</string>
     <string name="rename">रename</string>
+    <string name="import_">आयात करें</string>
     <string name="export">निर्यात करें</string>
     <string name="download">डाउनलोड करें</string>
     <string name="less">Less</string>

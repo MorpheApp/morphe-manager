@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">Hayır, bulmama yardım et</string>
     <string name="home_apk_use_saved_with_version">Kayıtlı APK (v%s) kullanın</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Tespit için tekrar APK dosyası seçin</string>
-    <string name="home_app_info_repatch_no_bundle_info">Bu uygulama için hangi paket kullanıldığı belirlenemiyor</string>
-    <string name="home_app_info_repatch_bundle_not_available">Bu uygulama için kullanılan paket artık kullanılmıyor</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>
@@ -109,8 +107,8 @@
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_no_results">Yama bulunamadı</string>
     <string name="expert_mode_no_patches">Yama mevcut değil</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Çoklu düzeltme kaynağı seçildi</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Çoklu düzeltme kaynağından seçtiğiniz düzeltmeler uyumsuzluk sorunları veya beklenmeyen davranışlara neden olabilir.
+    <string name="expert_mode_multiple_sources_warning_title">Çoklu düzeltme kaynağı seçildi</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Çoklu düzeltme kaynağından seçtiğiniz düzeltmeler uyumsuzluk sorunları veya beklenmeyen davranışlara neden olabilir.
 
 Devam etmek istiyor musunuz?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -315,7 +313,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_advanced_strip_unused_libs_description">APK\'i yamalarken desteklenmeyen CPU mimarileri için kullanılan yerel kütüphaneleri silin</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Çekme isteği paketleri için gereklidir</string>
+    <string name="settings_advanced_github_pat_description">Çekme isteği kaynağı için gereklidir</string>
     <string name="settings_advanced_github_pat_configured">Anahtar yapılandırıldı</string>
     <string name="settings_advanced_github_pat_how_to_get">Anahtar nasıl alınır</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Kişisel Erişim Anahtarı ayarla</string>
@@ -489,13 +487,31 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_original_apks_title">Orijinal APK\'ler</string>
     <string name="settings_system_original_apks_description">Orijinal APK dosyaları yenileme için saklanır. Her uygulama için en son sürüm tek bir kopyada tutulur</string>
     <string name="settings_system_original_apks_empty">Hiç orijinal APK saklanmadı</string>
-    <string name="settings_system_original_apks_deleted">%s için orijinal APK başarıyla silindi</string>
+    <string name="settings_system_original_apks_deleted">Orijinal APK başarıyla silindi</string>
     <string name="settings_system_original_apks_delete_title">Orijinal APK silinsin mi?</string>
     <string name="settings_system_original_apks_delete_confirm">%s için orijinal APK\'i silmek istiyor musunuz? Yeniden yama yapmak için yeni bir APK sağlanması gerekir</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
     <string name="settings_system_patch_selections_description">Kayıtlı yama seçeneklerini yönetin. Bunlar uygulamanın kaldırılmasından sonra da kalır</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Tüm seçimler sıfırlansın mı?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Paket seçimleri sıfırlansın mı?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Kaynak seçimi sıfırlansın mı?</string>
+    <string name="settings_system_patch_selection_no_saved">Kaydedilmiş yama seçimi yok</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s üzerinden %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s içinde %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Kaynak #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Bu işlem şunları silecektir:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Bu işlem, tüm paketler ve kaynaklar için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir.</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Bu işlem,  %s için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Bu işlem, %1$s için kaydedilmiş #%2$d adet yama seçimini kalıcı olarak silecektir.</string>
+    <string name="settings_system_export_source_data_fail">Kaynak verilerin dışa aktarılması başarısız oldu</string>
+    <string name="settings_system_export_source_data_success">Kaynak veriler başarıyla dışa aktarıldı</string>
+    <string name="settings_system_import_source_data_fail">Kaynak verileri içe aktarma başarısız oldu</string>
+    <string name="settings_system_import_source_data_success">Kaynak verileri başarıyla içe aktarıldı</string>
+    <string name="settings_system_patch_details_title">Yama Detayları</string>
+    <string name="settings_system_selected_patches_title">Seçilen Yamalar (%d)</string>
+    <string name="settings_system_patch_options_title">Yama Seçenekleri (%d)</string>
+    <string name="settings_system_no_patches_or_options">Kaydedilen Yama veya Seçenek Yok</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_share_website">Web sitesini paylaş</string>
@@ -510,6 +526,7 @@ Kullanıcı geri bildirimleri ve katkılarla gelecekteki yenilikler için çalı
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="reset">Sıfırla</string>
+    <string name="reset_all">Tümü Sıfırla</string>
     <string name="confirm">Onayla</string>
     <string name="warning">Uyarı</string>
     <string name="error_">Hata</string>

@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">没有，帮我找一下</string>
     <string name="home_apk_use_saved_with_version">使用保存的APK（v%s）</string>
     <string name="home_app_info_no_saved_apk">没有保存的APK。修补需要重新选择APK文件</string>
-    <string name="home_app_info_repatch_no_bundle_info">无法确定哪个包用于此应用</string>
-    <string name="home_app_info_repatch_bundle_not_available">用于此应用的包已不再可用</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下载原始 APK</string>
     <string name="home_download_instructions_steps_title">说明：</string>
@@ -102,14 +100,15 @@
     <string name="home_no_patches_for_app">此应用无补丁记录</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">高级模式</string>
+    <string name="expert_mode_subtitle_extended_format">已处理 %1$d / %2$s</string>
     <string name="expert_mode_search">搜索补丁</string>
     <string name="expert_mode_proceed">开始修补</string>
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_no_patches">无可用更新</string>
-    <string name="expert_mode_multiple_bundles_warning_title">已选择多个补丁源</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意料之外的行为。
+    <string name="expert_mode_multiple_sources_warning_title">已选择多个补丁源</string>
+    <string name="expert_mode_multiple_sources_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意想不到的行为。
 
 您确定要继续吗？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@
     <string name="settings_advanced_strip_unused_libs_description">从修补的应用中删除不支持 CPU 架构的原生库</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">用于合并请求捆绑包</string>
+    <string name="settings_advanced_github_pat_description">用于拉取请求源所需</string>
     <string name="settings_advanced_github_pat_configured">已配置令牌</string>
     <string name="settings_advanced_github_pat_how_to_get">如何获取令牌</string>
     <string name="settings_advanced_github_pat_dialog_title">设置 GitHub 个人访问令牌</string>
@@ -494,6 +493,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">修补选择</string>
     <string name="settings_system_patch_selections_description">管理保存的修补选择和选项。这些在应用卸载后仍然存在</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">重置补丁选择?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">重置补丁选择?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">重置补丁选择?</string>
+    <string name="settings_system_patch_selection_no_saved">重置补丁选择</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s 到 %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s 到 %2$s</string>
+    <string name="settings_system_patch_selection_source_format">源 #%d</string>
+    <string name="settings_system_patch_selection_will_delete">这将删除：</string>
+    <string name="settings_system_patch_selection_reset_all_warning">这将永久删除所有保存的补丁选择，适用于所有包和源</string>
+    <string name="settings_system_patch_selection_reset_package_warning">这将永久删除 %s 的所有保存补丁选择，跨越所有源</string>
+    <string name="settings_system_patch_selection_reset_source_warning">这将永久删除源 #%2$d 中的 %1$s 的保存补丁选择</string>
+    <string name="settings_system_export_source_data_fail">导出源数据失败</string>
+    <string name="settings_system_export_source_data_success">源数据导出成功</string>
+    <string name="settings_system_import_source_data_fail">导入源数据失败</string>
+    <string name="settings_system_import_source_data_success">源数据导入成功</string>
+    <string name="settings_system_patch_details_title">补丁详情</string>
+    <string name="settings_system_selected_patches_title">已选择 %d 中的所有补丁)</string>
+    <string name="settings_system_patch_options_title">补丁选项 (%d)</string>
+    <string name="settings_system_no_patches_or_options">没有保存的补丁或选项</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">关于</string>
     <string name="settings_system_share_website">分享网站</string>
@@ -506,6 +524,7 @@ morphe_header_custom_dark.png
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="reset">重置</string>
+    <string name="reset_all">重置所有</string>
     <string name="confirm">确认</string>
     <string name="warning">警告</string>
     <string name="error_">错误</string>

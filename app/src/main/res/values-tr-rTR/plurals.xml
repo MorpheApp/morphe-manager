@@ -4,6 +4,18 @@
         <item quantity="one">%d yama</item>
         <item quantity="other">%d yama</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d yama seçeneği</item>
+        <item quantity="other">%d yama seçenekleri</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d kaynak</item>
+        <item quantity="other">%d kaynaklar</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paket</item>
+        <item quantity="other">%d paketler</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">%d yama yürütüldü</item>
         <item quantity="other">%d yama yürütüldü</item>

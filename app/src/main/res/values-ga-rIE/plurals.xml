@@ -7,6 +7,27 @@
         <item quantity="many">%d paistí</item>
         <item quantity="other">%d paiste</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d roghanna paiste</item>
+        <item quantity="two">%d roghanna paiste</item>
+        <item quantity="few">%d roghanna paiste</item>
+        <item quantity="many">%d roghanna paiste</item>
+        <item quantity="other">%d roghanna paiste</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d foinse</item>
+        <item quantity="two">%d foinsí</item>
+        <item quantity="few">%d foinsí</item>
+        <item quantity="many">%d foinsí</item>
+        <item quantity="other">%d foinsí</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d phacáiste</item>
+        <item quantity="two">%d phacáistí</item>
+        <item quantity="few">%d phacáistí</item>
+        <item quantity="many">%d phacáistí</item>
+        <item quantity="other">%d phacáistí</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Cuir %d paiste i gcrích</item>
         <item quantity="two">Cuir %d paistí i gcrích</item>
@@ -48,5 +69,12 @@
         <item quantity="few">%1$d foinsí instálaithe</item>
         <item quantity="many">%1$d foinsí instálaithe</item>
         <item quantity="other">%1$d foinsí instálaithe</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d paistí roghnaithe</item>
+        <item quantity="two">%d paistí roghnaithe</item>
+        <item quantity="few">%d paistí roghnaithe</item>
+        <item quantity="many">%d paistí roghnaithe</item>
+        <item quantity="other">%d paistí roghnaithe</item>
     </plurals>
 </resources>

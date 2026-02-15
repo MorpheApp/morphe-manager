@@ -13,7 +13,7 @@
     <string name="home_update_error">업데이트 실패</string>
     <string name="home_update_error_subtitle">인터넷 연결 상태를 확인하고 다시 시도하세요</string>
     <string name="home_updating_sources">소스를 업데이트하는 중…</string>
-    <string name="home_update_progress_format">%1$s / 처리됨</string>
+    <string name="home_update_progress_format">%1$s 처리됨</string>
     <string name="home_update_success">소스 업데이트 완료</string>
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
@@ -74,10 +74,8 @@
     <string name="home_apk_availability_unpatched_label">패치되지 않음</string>
     <string name="home_apk_availability_yes">네, 가지고 있습니다</string>
     <string name="home_apk_availability_no">아니요, 찾는 데 도움을 주세요</string>
-    <string name="home_apk_use_saved_with_version">저장된 APK를 사용합니다\n(v%s)</string>
+    <string name="home_apk_use_saved_with_version">저장된 APK 사용 (v%s)</string>
     <string name="home_app_info_no_saved_apk">저장된 APK가 없습니다. 패치하려면 APK 파일을 다시 선택하세요</string>
-    <string name="home_app_info_repatch_no_bundle_info">이 앱을 위한 번들을 확인할 수 없습니다.</string>
-    <string name="home_app_info_repatch_bundle_not_available">이 앱을 위한 번들은 더 이상 사용할 수 없습니다.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">원본 APK 다운로드</string>
     <string name="home_download_instructions_steps_title">설명서:</string>
@@ -102,14 +100,15 @@
     <string name="home_no_patches_for_app">이 앱에 사용 가능한 패치가 없습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
+    <string name="expert_mode_subtitle_extended_format">%2$s 개 중 %1$d 개 선택됨</string>
     <string name="expert_mode_search">패치 검색하기</string>
     <string name="expert_mode_proceed">패치 진행하기</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없음</string>
     <string name="expert_mode_no_patches">사용 가능한 패치 없음</string>
-    <string name="expert_mode_multiple_bundles_warning_title">여러 패치 소스가 선택됨</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
+    <string name="expert_mode_multiple_sources_warning_title">여러 패치 소스가 선택됨</string>
+    <string name="expert_mode_multiple_sources_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
 
 그래도 계속하시겠습니까?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@
     <string name="settings_advanced_strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub 개인 액세스 토큰</string>
-    <string name="settings_advanced_github_pat_description">풀 리퀘스트 번들에 필요합니다</string>
+    <string name="settings_advanced_github_pat_description">풀 리퀘스트 소스에 필요합니다</string>
     <string name="settings_advanced_github_pat_configured">토큰 구성됨</string>
     <string name="settings_advanced_github_pat_how_to_get">토큰 얻는 방법</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub 개인 액세스 토큰 설정</string>
@@ -495,7 +494,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
     <string name="settings_system_patch_selections_description">저장된 패치 선택 목록 및 옵션을 관리합니다. 앱을 제거한 후에도 유지됩니다</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">모든 선택 목록을 초기화?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">패키지 선택 목록을 초기화?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">스소 선택 목록을 초기화?</string>
     <string name="settings_system_patch_selection_no_saved">저장된 패치 선택 목록이 없습니다</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s 에서 %2$s 까지</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s 내에 %1$s</string>
+    <string name="settings_system_patch_selection_source_format">소스 #%d</string>
+    <string name="settings_system_patch_selection_will_delete">다음 항목을 삭제합니다:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">모든 패키지 및 소스에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
+    <string name="settings_system_patch_selection_reset_package_warning">모든 소스에서 \'%s\'에 대한 저장된 패치 선택 목록을 영구적으로 삭제힙니다</string>
+    <string name="settings_system_patch_selection_reset_source_warning">소스 #%2$d에서 \'%1$s\'에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
+    <string name="settings_system_export_source_data_fail">소스 데이터를 내보낼 수 없습니다</string>
+    <string name="settings_system_export_source_data_success">소스 데이터를 성공적으로 내보냈습니다</string>
+    <string name="settings_system_import_source_data_fail">소스 데이터를 가저올 수 없습니다</string>
+    <string name="settings_system_import_source_data_success">소스 데이터를 성공적으로 가져왔습니다</string>
+    <string name="settings_system_patch_details_title">패치 세부 정보</string>
+    <string name="settings_system_selected_patches_title">선택된 패치 (%d)</string>
+    <string name="settings_system_patch_options_title">패치 옵션 (%d)</string>
+    <string name="settings_system_no_patches_or_options">저장된 패치 또는 옵션이 없습니다</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">정보</string>
     <string name="settings_system_share_website">웹사이트 공유</string>
@@ -510,6 +527,7 @@ morphe_header_custom_dark.png
     <string name="yes">예</string>
     <string name="no">아니요</string>
     <string name="reset">초기화</string>
+    <string name="reset_all">모두 초기화</string>
     <string name="confirm">확인하기</string>
     <string name="warning">경고</string>
     <string name="error_">오류</string>

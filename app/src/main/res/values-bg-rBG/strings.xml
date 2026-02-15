@@ -76,8 +76,6 @@
     <string name="home_apk_availability_no">Не, помогни ми да намеря</string>
     <string name="home_apk_use_saved_with_version">Използвайте запазеното APK (в%с)</string>
     <string name="home_app_info_no_saved_apk">Няма запазено APK. Пatching ще изисква отново да изберете APK файл.</string>
-    <string name="home_app_info_repatch_no_bundle_info">Не може да се определи коя пакет е използван за това приложение</string>
-    <string name="home_app_info_repatch_bundle_not_available">Пакетът използван за това приложение вече не е наличен</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Изтеглете оригинален APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
@@ -102,14 +100,15 @@
     <string name="home_no_patches_for_app">Няма достъпни пачове за това приложение</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим на експерт</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d от %2$s избрани</string>
     <string name="expert_mode_search">Търсене на пачове</string>
     <string name="expert_mode_proceed">Продължаване към пачове</string>
     <string name="expert_mode_disable_all">Изключи всички</string>
     <string name="expert_mode_enable_all">Включи всички</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
     <string name="expert_mode_no_patches">Няма достъпни пачове</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Избрани са патчове от различни източници</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Избрахте патчове от различни източници. Това може да доведе до проблеми с съвместимост или непредвидимо поведение.
+    <string name="expert_mode_multiple_sources_warning_title">Избрани са патове от различни източници</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Избрахте патове от различни източници. Това може да доведе до съвместимост проблеми или непредвидимо поведение.
 
 Сигурни ли сте, че искате да продължите?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@
     <string name="settings_advanced_strip_unused_libs_description">Изтриване на библиотеки за неподдържани CPU архитектури от замести</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Токен за достъп до GitHub</string>
-    <string name="settings_advanced_github_pat_description">Необходим за пакети с изтегляния</string>
+    <string name="settings_advanced_github_pat_description">Треба за източници на заявка за изтегляне</string>
     <string name="settings_advanced_github_pat_configured">Конфигуриран токен</string>
     <string name="settings_advanced_github_pat_how_to_get">Как да получите токен</string>
     <string name="settings_advanced_github_pat_dialog_title">Задайте GitHub Personal Access Token</string>
@@ -494,6 +493,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Избрани поправки</string>
     <string name="settings_system_patch_selections_description">Управление на запазените избори за поправка и опции. Тези данни се запазват след деинсталиране на приложението</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Изтриване на всички избрани? </string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Изтриване на избраните пакети? </string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Изтриване на избрания източник? </string>
+    <string name="settings_system_patch_selection_no_saved">Няма запазени избрани пакети</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s по %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s в %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Източник #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Това ще изтрие:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Това ще изтрие всички запазени избрани пакети за всички пакети и източници завинаги</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Това ще изтрие всички запазени избрани пакети за %s по всички източници завинаги</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Това ще изтрие запазените избрани пакети за %1$s в източник #%2$d завинаги</string>
+    <string name="settings_system_export_source_data_fail">Неуспешно експортиране на данни за източника</string>
+    <string name="settings_system_export_source_data_success">Данните за източника са експортирани успешно</string>
+    <string name="settings_system_import_source_data_fail">Неуспешно импортиране на данни за източника</string>
+    <string name="settings_system_import_source_data_success">Данните за източника са импортирани успешно</string>
+    <string name="settings_system_patch_details_title">Детайли за пакета</string>
+    <string name="settings_system_selected_patches_title">Избрани пакети (%d)</string>
+    <string name="settings_system_patch_options_title">Опции за пакета (%d)</string>
+    <string name="settings_system_no_patches_or_options">Няма запазени пакети или опции</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Относно</string>
     <string name="settings_system_share_website">Споделяне на уебсайт</string>
@@ -508,6 +526,7 @@ morphe_header_custom_dark.png
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="reset">Нулирай</string>
+    <string name="reset_all">Възстановяване на всичко</string>
     <string name="confirm">Потвърдете</string>
     <string name="warning">Предупреждение</string>
     <string name="error_">Грешка</string>

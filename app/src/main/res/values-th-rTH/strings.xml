@@ -14,6 +14,7 @@
     <string name="home_update_error">อัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
     <string name="home_updating_sources">กำลังอัพเดทข้อมูล…</string>
+    <string name="home_update_progress_format">%1$s ถูกประมวลผลแล้ว</string>
     <string name="home_update_success">การอัพเดทแหล่งข้อมูลเสร็จสมบูรณ์แล้ว</string>
     <string name="home_update_success_subtitle">แหล่งข้อมูลของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งข้อมูล กรุณารอสักครู่…</string>
@@ -100,14 +101,15 @@
     <string name="home_no_patches_for_app">ไม่มีแพตซ์ที่รองรับกับแอปพลิเคชันนี้</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">โหมดผู้เชี่ยวชาญ</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d จาก %2$s ที่ถูกเลือกแล้ว</string>
     <string name="expert_mode_search">ค้นหาแพตซ์</string>
     <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
     <string name="expert_mode_no_patches">ไม่มีแพตซ์ให้ใช้งาน</string>
-    <string name="expert_mode_multiple_bundles_warning_title">เลือกแหล่งที่มาแปลงหลายรายการ</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
+    <string name="expert_mode_multiple_sources_warning_title">หลายแหล่งปรับปรุงถูกเลือก</string>
+    <string name="expert_mode_multiple_sources_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
 
 คุณแน่ใจที่จะดำเนินต่อไปหรือไม่?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -312,7 +314,7 @@
     <string name="settings_advanced_strip_unused_libs_description">ลบเนทิฟไลบรารีที่ไม่รองรับสถาปัตยกรรมของ CPU บนอุปกรณ์ของคุณ จากแอปที่ถูกแพตซ์</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">โทเคน GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแพ็คเกจคำขอเปลี่ยน (pull request bundles)</string>
+    <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแหล่งขอร้องข้อมูล</string>
     <string name="settings_advanced_github_pat_configured">โทเค็นถูกกำหนดค่าแล้ว</string>
     <string name="settings_advanced_github_pat_how_to_get">วิธีการรับโทเคน</string>
     <string name="settings_advanced_github_pat_dialog_title">ตั้งค่าโทเคนการเข้าถึงส่วนบุคคลของ GitHub</string>
@@ -494,6 +496,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">การเลือกการแก้ไข</string>
     <string name="settings_system_patch_selections_description">จัดการการเลือกการแก้ไขและตัวเลือกที่บันทึกไว้ การเลือกนี้จะคงอยู่หลังจากการลบแอป</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">รีเซ็ตการเลือกทั้งหมด?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">รีเซ็ตการเลือกแพ็กเกจ?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">รีเซ็ตการเลือกแหล่งที่มา?</string>
+    <string name="settings_system_patch_selection_no_saved">ไม่มีการบันทึกการเลือกแพตช์</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s ถึง %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ถึง %2$s</string>
+    <string name="settings_system_patch_selection_source_format">แหล่งที่มา #%d</string>
+    <string name="settings_system_patch_selection_will_delete">สิ่งนี้จะลบ:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับทุกแพ็กเกจและแหล่งที่มา</string>
+    <string name="settings_system_patch_selection_reset_package_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับ %s ทั่วไปในแหล่งที่มา</string>
+    <string name="settings_system_patch_selection_reset_source_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์สำหรับ %1$s ในแหล่งที่มา #%2$d</string>
+    <string name="settings_system_export_source_data_fail">ล้มเหลวในการส่งออกข้อมูลแหล่งที่มา</string>
+    <string name="settings_system_export_source_data_success">ส่งออกข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
+    <string name="settings_system_import_source_data_fail">ล้มเหลวในการนำเข้าข้อมูลแหล่งที่มา</string>
+    <string name="settings_system_import_source_data_success">นำเข้าข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
+    <string name="settings_system_patch_details_title">รายละเอียดแพตช์</string>
+    <string name="settings_system_selected_patches_title">แพตช์ที่เลือก (%d)</string>
+    <string name="settings_system_patch_options_title">ตัวเลือกแพตช์ (%d)</string>
+    <string name="settings_system_no_patches_or_options">ไม่มีการบันทึกแพตช์หรือตัวเลือก</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
@@ -506,6 +527,7 @@ morphe_header_custom_dark.png
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
     <string name="reset">รีเซ็ต</string>
+    <string name="reset_all">รีเซ็ตทั้งหมด</string>
     <string name="confirm">ยืนยัน</string>
     <string name="warning">คำเตือน</string>
     <string name="error_">ขยาย</string>

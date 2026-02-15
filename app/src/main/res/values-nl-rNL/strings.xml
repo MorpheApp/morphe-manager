@@ -76,8 +76,6 @@ Compatibele versies:"</string>
     <string name="home_apk_availability_no">Nee, help me die te vinden</string>
     <string name="home_apk_use_saved_with_version">Gebruik opgeslagen APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Geen opgeslagen APK. Patching zal het selecteren van het APK-bestand opnieuw vereisen</string>
-    <string name="home_app_info_repatch_no_bundle_info">Kan niet bepalen welk bundle voor deze app is gebruikt</string>
-    <string name="home_app_info_repatch_bundle_not_available">Het bundle dat voor deze app is gebruikt, is niet meer beschikbaar</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download de originele APK</string>
     <string name="home_download_instructions_steps_title">Instructies:</string>
@@ -102,16 +100,17 @@ Compatibele versies:"</string>
     <string name="home_no_patches_for_app">Geen patches beschikbaar voor deze app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d van %2$s geselecteerd</string>
     <string name="expert_mode_search">Zoek patches</string>
     <string name="expert_mode_proceed">Doorgaan met patchen</string>
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
     <string name="expert_mode_enable_all">Alles inschakelen</string>
     <string name="expert_mode_no_results">Geen patches gevonden</string>
     <string name="expert_mode_no_patches">Geen patches beschikbaar</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Meerdere patch-bronnen geselecteerd</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"U heeft patches geselecteerd uit meerdere patch-bronnen. Dit kan compatibiliteitsproblemen of onverwachte gedragingen veroorzaken.
+    <string name="expert_mode_multiple_sources_warning_title">Meerdere patch-bronnen geselecteerd</string>
+    <string name="expert_mode_multiple_sources_warning_message">"U heeft patches geselecteerd van meerdere patch-bronnen. Dit kan compatibiliteitsproblemen of onverwachte gedrag veroorzaken.
 
-Wilt u toch doorgaan?"</string>
+Weet u zeker dat u doorgaat?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Niet-ondersteunde versie</string>
     <string name="home_dialog_unsupported_version_dialog_description">Dit APK is geen aanbevolen app-versie. Doorgaan kan leiden tot een niet-functionerende app</string>
@@ -314,7 +313,7 @@ Wilt u toch doorgaan?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Verwijder native library\'s voor niet-ondersteunde CPU-architecturen uit gepatchte apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Nodig voor pull request bundles</string>
+    <string name="settings_advanced_github_pat_description">Vereist voor pull request-bronnen</string>
     <string name="settings_advanced_github_pat_configured">Token geconfigureerd</string>
     <string name="settings_advanced_github_pat_how_to_get">Hoe krijg je een token</string>
     <string name="settings_advanced_github_pat_dialog_title">Stel GitHub Personal Access Token in</string>
@@ -494,6 +493,25 @@ De afbeelddimensionen moeten als volgt zijn:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Geselecteerde patches</string>
     <string name="settings_system_patch_selections_description">Beheer opgeslagen patch-keuzes en opties. Deze behouden na app-verwijdering</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Alle selecties resetten?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Pakketselecties resetten?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Bronselectie resetten?</string>
+    <string name="settings_system_patch_selection_no_saved">Geen opgeslagen patchselecties</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s tot %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s tot %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Bron #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Dit zal verwijderen:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Dit zal permanent alle opgeslagen patchselecties voor alle pakketten en bronnen verwijderen</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dit zal permanent alle opgeslagen patchselecties voor %s over alle bronnen verwijderen</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dit zal opgeslagen patchselecties voor %1$s in bron #%2$d permanent verwijderen</string>
+    <string name="settings_system_export_source_data_fail">Kan brongegevens niet exporteren</string>
+    <string name="settings_system_export_source_data_success">Brongegevens succesvol geëxporteerd</string>
+    <string name="settings_system_import_source_data_fail">Kan brongegevens niet importeren</string>
+    <string name="settings_system_import_source_data_success">Brongegevens succesvol geïmporteerd</string>
+    <string name="settings_system_patch_details_title">Patchdetails</string>
+    <string name="settings_system_selected_patches_title">Geselecteerde patches (%d)</string>
+    <string name="settings_system_patch_options_title">Patchopties (%d)</string>
+    <string name="settings_system_no_patches_or_options">Geen patches of opties opgeslagen</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Over</string>
     <string name="settings_system_share_website">Website delen</string>
@@ -508,6 +526,7 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="reset">Terugzetten</string>
+    <string name="reset_all">Alles resetten</string>
     <string name="confirm">Bevestigen</string>
     <string name="warning">Waarschuwing</string>
     <string name="error_">Fout</string>

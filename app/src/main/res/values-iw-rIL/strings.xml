@@ -77,8 +77,6 @@
     <string name="home_apk_availability_no">לא, עזור לי למצוא את זה</string>
     <string name="home_apk_use_saved_with_version">השתמש באפאק שמור (גרסה %s)</string>
     <string name="home_app_info_no_saved_apk">אין אפאק שמור. תיקון ידרש לבחור את קובץ האפאק שוב</string>
-    <string name="home_app_info_repatch_no_bundle_info">לא ניתן להכיר את חבילת האפליקציה שנעשתה שימוש בה</string>
-    <string name="home_app_info_repatch_bundle_not_available">חבילת האפליקציה שנעשתה שימוש בה לא זמינה יותר</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">הורד את ה-APK המקורי</string>
     <string name="home_download_instructions_steps_title">הוראות:</string>
@@ -103,16 +101,17 @@
     <string name="home_no_patches_for_app">אין תיקונים זמינים עבור אפליקציה זו</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">מצב מומחה</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d מתוך %2$s נבחר</string>
     <string name="expert_mode_search">חפש תיקונים</string>
     <string name="expert_mode_proceed">המשך לתיקון</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_enable_all">הפעל את כולם</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
     <string name="expert_mode_no_patches">אין תיקונים זמינים</string>
-    <string name="expert_mode_multiple_bundles_warning_title">נבחרו מקורות טיקים מרובים</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"נבחרתם טיקים ממקורות טיקים מרובים. זה עשוי לגרום לסוגי תאימות או התנהגות בלתי צפויה.
+    <string name="expert_mode_multiple_sources_warning_title">נבחרו מקורות ציורים מרובים</string>
+    <string name="expert_mode_multiple_sources_warning_message">"בחרת בקבצי ציורים ממקורות מרובים. זה עשוי לגרום למחלוקות תאימות או התנהגות בלתי צפויה.
 
-האם אתם בטוחים שברצונכם להמשיך?"</string>
+האם אתה בטוח שברצונך להמשיך?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">גרסה לא מומלצת</string>
     <string name="home_dialog_unsupported_version_dialog_description">APK זה אינו גרסה מומלצת של האפליקציה. להמשיך ייתכן שיביא לפגיעה בתפקוד של האפליקציה</string>
@@ -315,7 +314,7 @@
     <string name="settings_advanced_strip_unused_libs_description">הסרת קבצים נטוים תאפשר מהיר יותר את הפיצ\'ח, אך ייתכן שלא תעבוד על מכשירים ישנים</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">נדרש עבור חבילות בקשות משיכה</string>
+    <string name="settings_advanced_github_pat_description">נדרש עבור מקורות בקשה רכש</string>
     <string name="settings_advanced_github_pat_configured">טוקן תצוגה</string>
     <string name="settings_advanced_github_pat_how_to_get">כיצד לקבל טוקן</string>
     <string name="settings_advanced_github_pat_dialog_title">הגדר טוקן גישה אישי של GitHub</string>
@@ -457,6 +456,25 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">ניהול בחירות תיקון</string>
     <string name="settings_system_patch_selections_description">ניהול בחירות תיקון וצורה שמורות. אלה נשארות לאחר הסרת האפליקציה</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">להחזיר את כל הבחירות?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">להחזיר את בחירת החבילה?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">להחזיר את בחירת מקור?</string>
+    <string name="settings_system_patch_selection_no_saved">אין בחירות שמורות</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s על %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ב-%2$s</string>
+    <string name="settings_system_patch_selection_source_format">מקור #%d</string>
+    <string name="settings_system_patch_selection_will_delete">זוהי תהליך מחיקה:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">זוהי תהליך מחיקה קבועה של כל הבחירות שמורות עבור כל החבילות ומקורות</string>
+    <string name="settings_system_patch_selection_reset_package_warning">זוהי תהליך מחיקה קבועה של כל הבחירות שמורות עבור %s על כל המקורות</string>
+    <string name="settings_system_patch_selection_reset_source_warning">זוהי תהליך מחיקה קבועה של בחירות שמורות עבור %1$s במקור #%2$d</string>
+    <string name="settings_system_export_source_data_fail">שגיאה בייצוא נתוני מקור</string>
+    <string name="settings_system_export_source_data_success">נתוני מקור יוצאו בהצלחה</string>
+    <string name="settings_system_import_source_data_fail">שגיאה בייבוא נתוני מקור</string>
+    <string name="settings_system_import_source_data_success">נתוני מקור יובאו בהצלחה</string>
+    <string name="settings_system_patch_details_title">פרטי תיקון</string>
+    <string name="settings_system_selected_patches_title">תיקונים נבחרים (%d)</string>
+    <string name="settings_system_patch_options_title">אפשרויות תיקון (%d)</string>
+    <string name="settings_system_no_patches_or_options">אין תיקונים או אפשרויות שמורות</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">אודות</string>
     <string name="settings_system_share_website">שתף אתר</string>
@@ -469,6 +487,7 @@
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="reset">איפוס</string>
+    <string name="reset_all">אפס הכל</string>
     <string name="confirm">אשר</string>
     <string name="warning">אזהרה</string>
     <string name="error_">שגגה</string>

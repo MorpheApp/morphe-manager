@@ -76,8 +76,6 @@ Kompatible Versionen:"</string>
     <string name="home_apk_availability_no">Nein, hilf mir, es zu finden </string>
     <string name="home_apk_use_saved_with_version">Verwenden Sie das gespeicherte APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Kein gespeichertes APK. Das Patching erfordert die erneute Auswahl der APK-Datei</string>
-    <string name="home_app_info_repatch_no_bundle_info">Kann nicht feststellen, welches Bundle für diese App verwendet wurde</string>
-    <string name="home_app_info_repatch_bundle_not_available">Das für diese App verwendete Bundle ist nicht mehr verfügbar</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laden Sie die ursprüngliche APK herunter </string>
     <string name="home_download_instructions_steps_title">Anleitung:</string>
@@ -102,14 +100,15 @@ Kompatible Versionen:"</string>
     <string name="home_no_patches_for_app">Keine Patches verfügbar für diese App</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-Modus</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d von %2$s ausgewählt</string>
     <string name="expert_mode_search">Suche nach Patches</string>
     <string name="expert_mode_proceed">Weiter zum Patchen</string>
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
     <string name="expert_mode_enable_all">Aktiviere alle</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
     <string name="expert_mode_no_patches">Keine Patches verfügbar</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Mehrere Patchquellen ausgewählt</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Sie haben Patches von mehreren Quellen ausgewählt. Dies kann Kompatibilitätsprobleme oder unerwartetes Verhalten verursachen.
+    <string name="expert_mode_multiple_sources_warning_title">Mehrere Patchquellen ausgewählt</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Sie haben Patches aus mehreren Quellen ausgewählt. Dies kann Kompatibilitätsprobleme oder unerwartetes Verhalten verursachen.
 
 Möchten Sie trotzdem fortfahren?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -314,7 +313,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="settings_advanced_strip_unused_libs_description">Lösche native Bibliotheken für nicht unterstützte CPU-Architekturen aus gepatchten Apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub-PAT</string>
-    <string name="settings_advanced_github_pat_description">Erforderlich für Pull-Request-Bündel</string>
+    <string name="settings_advanced_github_pat_description">Erforderlich für Pull-Request-Quellen</string>
     <string name="settings_advanced_github_pat_configured">Token konfiguriert</string>
     <string name="settings_advanced_github_pat_how_to_get">Wie bekomme ich ein Token?</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Personal Access Token festlegen</string>
@@ -494,6 +493,25 @@ Die Bildgrößen müssen wie folgt sein:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patchauswahlen</string>
     <string name="settings_system_patch_selections_description">Verwalten Sie gespeicherte Patchauswahlen und Optionen. Diese bestehen nach der Deinstallation der App fort.</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Alle Auswahlen zurücksetzen?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Paketauswahlen zurücksetzen?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Quellenauswahl zurücksetzen?</string>
+    <string name="settings_system_patch_selection_no_saved">Keine gespeicherten Patch-Auswahlen</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s über %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Quelle #%d</string>
+    <string name="settings_system_patch_selection_will_delete">Dies wird löschen:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Dies löscht dauerhaft alle gespeicherten Patch-Auswahlen für alle Pakete und Quellen</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dies löscht dauerhaft alle gespeicherten Patch-Auswahlen für %s über alle Quellen</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dies löscht dauerhaft gespeicherte Patch-Auswahlen für %1$s in Quelle #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Quelldatenexport fehlgeschlagen</string>
+    <string name="settings_system_export_source_data_success">Quelldaten erfolgreich exportiert</string>
+    <string name="settings_system_import_source_data_fail">Quelldatenimport fehlgeschlagen</string>
+    <string name="settings_system_import_source_data_success">Quelldaten erfolgreich importiert</string>
+    <string name="settings_system_patch_details_title">Patch-Details</string>
+    <string name="settings_system_selected_patches_title">Ausgewählte Patches (%d)</string>
+    <string name="settings_system_patch_options_title">Patch-Optionen (%d)</string>
+    <string name="settings_system_no_patches_or_options">Keine Patches oder Optionen gespeichert</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Über</string>
     <string name="settings_system_share_website">Website teilen</string>
@@ -508,6 +526,7 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="reset">Zurücksetzen</string>
+    <string name="reset_all">Alles zurücksetzen</string>
     <string name="confirm">Bestätigen</string>
     <string name="warning">Warnung</string>
     <string name="error_">Fehler</string>
