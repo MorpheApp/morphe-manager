@@ -1,3 +1,10 @@
+# app [1.7.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.11...v1.7.0-dev.12) (2026-02-15)
+
+
+### Bug Fixes
+
+* Better handle opening APKMirror links on weirdo home routers ([627f075](https://github.com/MorpheApp/morphe-manager/commit/627f07571646ea5bda5b60f7198b9f77ed4be27b))
+
 # app [1.7.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.10...v1.7.0-dev.11) (2026-02-15)
 
 
