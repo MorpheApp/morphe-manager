@@ -1,3 +1,10 @@
+# app [1.7.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.12...v1.7.0-dev.13) (2026-02-15)
+
+
+### Bug Fixes
+
+* Resolve Morphe showing new release is available but cannot download ([c567195](https://github.com/MorpheApp/morphe-manager/commit/c567195dbae13ca1a9931edb1d472c77ecca9942))
+
 # app [1.7.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.11...v1.7.0-dev.12) (2026-02-15)
 
 
