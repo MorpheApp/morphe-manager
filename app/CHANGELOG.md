@@ -1,3 +1,10 @@
+# app [1.7.0-dev.15](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.14...v1.7.0-dev.15) (2026-02-15)
+
+
+### Features
+
+* Show Expert mode confirmation dialog ([db64938](https://github.com/MorpheApp/morphe-manager/commit/db64938470193e0c5a3b615ab09694f028a39236))
+
 # app [1.7.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.13...v1.7.0-dev.14) (2026-02-15)
 
 
