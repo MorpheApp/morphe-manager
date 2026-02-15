@@ -1,9 +1,6 @@
 package app.morphe.manager.ui.screen.shared
 
 import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.R
 import app.morphe.manager.util.parseLocaleCode
 import java.util.Locale
@@ -134,19 +131,5 @@ object LanguageRepository {
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(displayLocale) else it.toString() }
 
         return "$baseName ($country)"
-    }
-}
-
-@Composable
-fun rememberSelectedLanguageLabel(code: String): String {
-    val context = LocalContext.current
-    val languages = remember(context) {
-        LanguageRepository.getSupportedLanguages(context)
-    }
-
-    return remember(code, languages) {
-        languages.firstOrNull { it.code == code }
-            ?.displayName
-            ?: code
     }
 }

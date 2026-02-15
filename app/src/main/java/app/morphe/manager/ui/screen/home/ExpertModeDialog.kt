@@ -561,7 +561,7 @@ private fun PatchOptionsDialog(
         },
         footer = {
             MorpheDialogButton(
-                text = stringResource(android.R.string.ok),
+                text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -627,17 +627,12 @@ private fun PatchOptionsDialog(
                     // String dropdown with presets (pure dropdown)
                     typeName.contains("String") && !typeName.contains("Array") &&
                             option.presets?.isNotEmpty() == true -> {
-                        val choices = option.presets.keys.toList()
-                        val displayValue = option.presets.entries.find { it.value == value }?.key
-                            ?: value?.toString() ?: ""
-
                         DropdownOptionItem(
                             title = option.title,
                             description = option.description,
-                            value = displayValue,
-                            choices = choices,
-                            onValueChange = { selectedKey ->
-                                val selectedValue = option.presets[selectedKey]
+                            value = value?.toString() ?: "",
+                            presets = option.presets,
+                            onValueChange = { selectedValue ->
                                 onValueChange(key, selectedValue)
                             }
                         )
@@ -710,14 +705,12 @@ private fun PatchOptionsDialog(
 
                     // Dropdown lists
                     typeName.contains("Array") -> {
-                        val choices = option.presets?.keys?.toList() ?: emptyList()
                         DropdownOptionItem(
                             title = option.title,
                             description = option.description,
                             value = value?.toString() ?: "",
-                            choices = choices,
-                            onValueChange = { selectedKey ->
-                                val selectedValue = option.presets?.get(selectedKey)
+                            presets = option.presets ?: emptyMap(),
+                            onValueChange = { selectedValue ->
                                 onValueChange(key, selectedValue)
                             }
                         )
@@ -1198,11 +1191,11 @@ private fun DropdownOptionItem(
     title: String,
     description: String,
     value: String,
-    choices: List<String>,
-    onValueChange: (String) -> Unit
+    presets: Map<String, Any?>,
+    onValueChange: (Any?) -> Unit
 ) {
-    // Create map for dropdown: display name -> value
-    val dropdownItems = choices.associateWith { it }
+    // Convert presets to String map for dropdown: display name -> value as string
+    val dropdownItems = presets.mapValues { it.value?.toString() ?: "" }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -1226,7 +1219,12 @@ private fun DropdownOptionItem(
 
         MorpheDialogDropdownTextField(
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = { newValue ->
+                // Try to find the actual value from presets by matching the string representation
+                val actualValue = presets.entries.find { it.value?.toString() == newValue }?.value
+                    ?: newValue
+                onValueChange(actualValue)
+            },
             dropdownItems = dropdownItems
         )
     }
