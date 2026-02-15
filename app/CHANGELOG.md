@@ -1,3 +1,10 @@
+# app [1.7.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.9...v1.7.0-dev.10) (2026-02-15)
+
+
+### Bug Fixes
+
+* Update app-release.json after semantic release finishes ([77db06d](https://github.com/MorpheApp/morphe-manager/commit/77db06d0169eb7cece281d6223b2e472113d1631))
+
 # app [1.7.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.8...v1.7.0-dev.9) (2026-02-14)
 
 
