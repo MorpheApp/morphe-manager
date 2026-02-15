@@ -17,7 +17,7 @@
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="home_updating_sources">Updating sources…</string>
     <string name="home_update_progress_format">%1$s processed</string>
-    <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
+    <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
@@ -115,7 +115,7 @@ Compatible versions:"</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d of %2$s selected</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s of %2$s selected</string>
     <string name="expert_mode_search">Search patches</string>
     <string name="expert_mode_proceed">Proceed to Patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
@@ -210,8 +210,8 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
-    <string name="patcher_patches_progress_format" translatable="false">%1$d / %2$s</string>
-    <string name="patcher_percentage" translatable="false">%1$d%%</string>
+    <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
+    <string name="patcher_percentage" translatable="false">%1$s%%</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">All Done! 🎉</string>
@@ -278,7 +278,7 @@ Are you sure you want to proceed?"</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="download_apk">Download APK file</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
-    <string name="patcher_process_exit_message">Patcher process exited with code %1$d</string>
+    <string name="patcher_process_exit_message">Patcher process exited with code %1$s</string>
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
@@ -490,7 +490,7 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Enable process runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memory available for patching</string>
     <string name="settings_system_memory_limit_warning">A low memory limit may cause failures when patching larger apps</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB limit</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Click to configure</string>
 
     <!-- Settings - System Tab - Import and export keystore -->
@@ -526,7 +526,7 @@ Details: %2$s"</string>
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Export debug logs</string>
     <string name="settings_system_export_debug_logs_description">Export system logs for troubleshooting</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Failed to export logs</string>
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
 
@@ -560,18 +560,18 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s across %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Source #%d</string>
+    <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">This will delete:</string>
     <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and sources</string>
     <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all sources</string>
-    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for %1$s in source #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for %1$s in source #%2$s</string>
     <string name="settings_system_export_source_data_fail">Failed to export source data</string>
     <string name="settings_system_export_source_data_success">Source data exported successfully</string>
     <string name="settings_system_import_source_data_fail">Failed to import source data</string>
     <string name="settings_system_import_source_data_success">Source data imported successfully</string>
     <string name="settings_system_patch_details_title">Patch details</string>
-    <string name="settings_system_selected_patches_title">Selected patches (%d)</string>
-    <string name="settings_system_patch_options_title">Patch options (%d)</string>
+    <string name="settings_system_selected_patches_title">Selected patches (%s)</string>
+    <string name="settings_system_patch_options_title">Patch options (%s)</string>
     <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
     <!-- Settings - System Tab - About Section -->
@@ -657,7 +657,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="install_update_manager_failed">Failed to install update</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
-    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
+    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
     <string name="download_manager_failed">Failed to download update: %s</string>
     <string name="failed_to_check_updates">Failed to check for updates: %s</string>
     <string name="failed_to_download_update">Failed to download update: %s</string>
