@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">이 앱에 사용 가능한 패치가 없습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s 개 중 %1$d 개 선택됨</string>
+    <string name="expert_mode_subtitle_extended_format">%2$s 중 %1$s 개 선택됨</string>
     <string name="expert_mode_search">패치 검색하기</string>
     <string name="expert_mode_proceed">패치 진행하기</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">패치된 앱을 저장할 수 없습니다</string>
     <string name="download_apk">APK 파일을 다운로드하는 중</string>
     <string name="plugin_activity_dialog_body">이 플러그인을 사용하려면 사용자 상호작용이 필요합니다</string>
-    <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$d\'로 종료하였습니다</string>
+    <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$s\'로 종료하였습니다</string>
     <string name="install_app_success">성공적으로 설치됨</string>
     <string name="install_app_fail">앱 설치 실패: %s</string>
     <string name="install_timeout_message">설치가 완료되지 않았습니다. 시스템 설치 프로그램 다이얼로그를 확인하고 다시 시도하세요</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
-    <string name="settings_advanced_expert_mode_description">고급 기능과 커스텀 옵션을 활성화합니다</string>
+    <string name="settings_advanced_expert_mode_description">고급 Morphe 패치 설정과 커스텀 옵션을 활성화합니다</string>
+    <string name="settings_advanced_expert_mode_dialog_title">전문가 모드를 활성화?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">전문가 모드에서는 패치를 적용하는 방식을 더 세밀하게 조절할 수 있지만, 설정을 잘못 건드리면 앱이 정상적으로 작동하지 않을 수 있습니다</string>
     <string name="settings_advanced_strip_unused_libs">사용되지 않는 라이브러리 제거</string>
     <string name="settings_advanced_strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -438,7 +440,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">프로세스 런타임 활성화</string>
     <string name="settings_system_memory_limit_subtitle">패치에 사용 가능한 메모리</string>
     <string name="settings_system_memory_limit_warning">메모리 제한이 낮으면 대용랑 앱을 패치할 경우에 오류가 발생할 수 있습니다</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB 제한</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB 제한</string>
     <string name="settings_system_process_runtime_disabled_description">설정하려면 탭하세요</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">가져오기 &amp; 내보내기</string>
@@ -471,7 +473,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">디버그</string>
     <string name="settings_system_export_debug_logs">디버그 로그 내보내기</string>
     <string name="settings_system_export_debug_logs_description">문제 해결을 위한 시스템 로그를 내보냅니다</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">로그를 읽을 수 없습니다 (종료 코드 %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">로그를 읽을 수 없습니다 (종료 코드 %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">로그를 내보낼 수 없습니다</string>
     <string name="settings_system_export_debug_logs_export_success">로그를 내보냈습니다</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -498,20 +500,20 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_reset_package_confirm_title">패키지 선택 목록을 초기화?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">스소 선택 목록을 초기화?</string>
     <string name="settings_system_patch_selection_no_saved">저장된 패치 선택 목록이 없습니다</string>
-    <string name="settings_system_patch_selection_total_summary_format">%1$s 에서 %2$s 까지</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s 내에 %1$s</string>
-    <string name="settings_system_patch_selection_source_format">소스 #%d</string>
+    <string name="settings_system_patch_selection_total_summary_format">%2$s의 %1$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s의 %1$s</string>
+    <string name="settings_system_patch_selection_source_format">소스 #%s</string>
     <string name="settings_system_patch_selection_will_delete">다음 항목을 삭제합니다:</string>
     <string name="settings_system_patch_selection_reset_all_warning">모든 패키지 및 소스에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_patch_selection_reset_package_warning">모든 소스에서 \'%s\'에 대한 저장된 패치 선택 목록을 영구적으로 삭제힙니다</string>
-    <string name="settings_system_patch_selection_reset_source_warning">소스 #%2$d에서 \'%1$s\'에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
+    <string name="settings_system_patch_selection_reset_source_warning">소스 #%2$s에서 \'%1$s\'에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_export_source_data_fail">소스 데이터를 내보낼 수 없습니다</string>
     <string name="settings_system_export_source_data_success">소스 데이터를 성공적으로 내보냈습니다</string>
     <string name="settings_system_import_source_data_fail">소스 데이터를 가저올 수 없습니다</string>
     <string name="settings_system_import_source_data_success">소스 데이터를 성공적으로 가져왔습니다</string>
     <string name="settings_system_patch_details_title">패치 세부 정보</string>
-    <string name="settings_system_selected_patches_title">선택된 패치 (%d)</string>
-    <string name="settings_system_patch_options_title">패치 옵션 (%d)</string>
+    <string name="settings_system_selected_patches_title">선택된 패치 (%s)</string>
+    <string name="settings_system_patch_options_title">패치 옵션 (%s)</string>
     <string name="settings_system_no_patches_or_options">저장된 패치 또는 옵션이 없습니다</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">정보</string>

@@ -100,7 +100,7 @@ Kompatibilní verze:"</string>
     <string name="home_no_patches_for_app">Pro tuto aplikaci nejsou k dispozici žádné záplaty</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertní režim</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d z %2$d vybráno</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s z %2$s vybráno</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
@@ -249,7 +249,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="patched_app_save_failed_toast">Chyba při ukládání zastaralé aplikace</string>
     <string name="download_apk">Stáhnout soubor APK</string>
     <string name="plugin_activity_dialog_body">Provedení je vyžadováno pro pokračování v tomto rozšíření</string>
-    <string name="patcher_process_exit_message">Proces přepínaču skončil s kódem %1$d</string>
+    <string name="patcher_process_exit_message">Proces patcher skončil s kódem %1$s</string>
     <string name="install_app_success">Úspěšně nainstalováno</string>
     <string name="install_app_fail">Selhání instalace aplikace: %s</string>
     <string name="install_timeout_message">Instalace nebyla dokončena. Zkontrolujte dialog systémového instalátoru a zkuste to znovu</string>
@@ -308,7 +308,9 @@ Opravdu chcete pokračovat?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
-    <string name="settings_advanced_expert_mode_description">Povoluje pokročilé funkce a možnosti personalizace.</string>
+    <string name="settings_advanced_expert_mode_description">Povolit pokročilé nastavení a možnosti personalizace pro Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Povolit Expert mód?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert mód poskytuje více kontroly nad aplikací patchů, ale špatná konfigurace nastavení v expert módu může vést k nefunkční aplikaci</string>
     <string name="settings_advanced_strip_unused_libs">Odstranit nepoužívané nativní knihovny</string>
     <string name="settings_advanced_strip_unused_libs_description">Smazat nativní knihovny pro nepodporované architektury CPU z patčovaných aplikací</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_process_runtime_enable">Povolit běhové prostředí procesů</string>
     <string name="settings_system_memory_limit_subtitle">Paměť k dispozici pro záplatování</string>
     <string name="settings_system_memory_limit_warning">Nízký limit paměti může způsobit selhání při záplatování větších aplikací</string>
-    <string name="settings_system_process_runtime_enabled_description">Limit %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Klikněte pro konfiguraci</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import &amp; export</string>
@@ -470,7 +472,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_debug">Ladění</string>
     <string name="settings_system_export_debug_logs">Exportovat ladicí protokoly</string>
     <string name="settings_system_export_debug_logs_description">Exportovat systémové protokoly pro ladění</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Selhalo čtení protokolů (kód ukončení %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Selhání čtení protokolu (kód ukončení %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nepodařilo se exportovat protokoly</string>
     <string name="settings_system_export_debug_logs_export_success">Protokoly exportovány</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_patch_selection_no_saved">Žádné uložené výběry záplaty</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s z %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s v %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Zdroj #%d</string>
+    <string name="settings_system_patch_selection_source_format">Zdroj #%s</string>
     <string name="settings_system_patch_selection_will_delete">Toto smaže:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toto trvale smaže všechny uložené výběry záplaty pro všechny balíčky a zdroje</string>
     <string name="settings_system_patch_selection_reset_package_warning">Toto trvale smaže všechny uložené výběry záplaty pro %s po celém zdroji</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Toto trvale smaže uložené výběry záplaty pro %1$s v zdroji #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Toto trvale smaže uložené výběry záplat pro %1$s v zdroji #%2$s</string>
     <string name="settings_system_export_source_data_fail">Nepodařilo se exportovat data zdroje</string>
     <string name="settings_system_export_source_data_success">Data zdroje exportována úspěšně</string>
     <string name="settings_system_import_source_data_fail">Nepodařilo se importovat data zdroje</string>
     <string name="settings_system_import_source_data_success">Data zdroje importována úspěšně</string>
     <string name="settings_system_patch_details_title">Detaily záplaty</string>
-    <string name="settings_system_selected_patches_title">Vybrané záplaty (%d)</string>
-    <string name="settings_system_patch_options_title">Nastavení záplaty (%d)</string>
+    <string name="settings_system_selected_patches_title">Vybrané záplaty (%s)</string>
+    <string name="settings_system_patch_options_title">Nastavení záplaty (%s)</string>
     <string name="settings_system_no_patches_or_options">Žádné uložené záplaty nebo nastavení</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaci</string>

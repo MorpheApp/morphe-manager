@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">এই অ্যাপের জন্য কোনো প্যাচ উপলব্ধ নেই</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">এক্সপার্ট মোড</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d টি %2$s নির্বাচন করা হয়েছে</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s টি %2$s নির্বাচিত</string>
     <string name="expert_mode_search">প্যাচ খুঁজুন</string>
     <string name="expert_mode_proceed">প্যাচিংয়ের জন্য প্রেরণ করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">প্যাচ করা অ্যাপ সংরক্ষণ করতে ব্যর্থ</string>
     <string name="download_apk">APK ফাইল ডাউনলোড করুন</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইন চালিয়ে যেতে জন্য ব্যবহারকারীর ইন্টারেকশন প্রয়োজন</string>
-    <string name="patcher_process_exit_message">প্যাচার প্রসেস কোড %1$d এর সাথে বের হয়েছে</string>
+    <string name="patcher_process_exit_message">প্যাচার প্রক্রিয়া কোড %1$s এর সাথে বের হয়েছে</string>
     <string name="install_app_success">সাফল্য়ের সাথে ইনস্টল করা হয়েছে</string>
     <string name="install_app_fail">অ্যাপ ইনস্টল করতে ব্যর্থ: %s</string>
     <string name="install_timeout_message">ইনস্টলেশন শেষ হয়নি. সিস্টেম ইনস্টলার ডায়ালগকে চেক করুন এবং আবার চেষ্টা করুন</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">বিশেষ্ট সেটিংস</string>
     <string name="settings_advanced_expert_mode">বিশেষ্ট মোড</string>
-    <string name="settings_advanced_expert_mode_description">বিশেষ্ট বৈশিষ্ট ও কাস্টমাইজেশন বিকল্পগুলি সক্রিয় করুন</string>
+    <string name="settings_advanced_expert_mode_description">কমপ্লেক্স মর্ফে প্যাচিং সেটিংস ও কাস্টমাইজেশন অপশনসকে সক্ষম করুন এবং নিয়ন্ত্রণ করুন</string>
+    <string name="settings_advanced_expert_mode_dialog_title">এক্সপার্ট মোড সক্ষম করবেন?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">এক্সপার্ট মোড অ্যাপ্লিকেশনগুলিতে প্যাচগুলি কীভাবে প্রয়োগ করা হবে তার উপর বেশি নিয়ন্ত্রণ প্রদান করে, কিন্তু এক্সপার্ট মোডে সেটিংস মিসকনফিগার করলে অ্যাপ্লিকেশনটি কাজ না করবে এমন অবস্থা হতে পারে</string>
     <string name="settings_advanced_strip_unused_libs">ব্যন্ত-নেটিভ লাইব্রেরিস মুছে ফেলুন</string>
     <string name="settings_advanced_strip_unused_libs_description">অনুসুশিত নয় এমন সিপ-আর্কিত লাইব্রেরিসগুলি প্যাচড অ্যাপ থেকে মুছে ফেলুন</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -414,7 +416,7 @@
     <string name="settings_system_process_runtime_enable">প্রক্রিয় রান্টাইম সক্রিয় করুন</string>
     <string name="settings_system_memory_limit_subtitle">মেমরি সীমিত</string>
     <string name="settings_system_memory_limit_warning">পুরাতন মেমরি সীমিত উচ্চ মেমরি সীমিতগুলি পুরাতন ডিভাইসের জন্য অকার্যকার হতে পারে</string>
-    <string name="settings_system_process_runtime_enabled_description">%d  এমবি সীমিত</string>
+    <string name="settings_system_process_runtime_enabled_description">%s এমবি সীমা</string>
     <string name="settings_system_process_runtime_disabled_description">ক্লিক করুন</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">আমদানি এবং রপ্তানি</string>
@@ -449,7 +451,7 @@
     <string name="settings_system_debug">ডিবাগ</string>
     <string name="settings_system_export_debug_logs">ডিবাগ লগগুলি রফতানি করুন</string>
     <string name="settings_system_export_debug_logs_description">ডিবাগ লগ রপ্তানি করুন</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">ডিবাগ লগ রপ্তানি ব্যর্থ হয়েছে</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">লগ পড়তে ব্যর্থ হয়েছে (ব্যবহার করা কোড %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">স্টোর ম্যানেজমেন্ট</string>
     <string name="settings_system_export_debug_logs_export_success">APK(গুলি) সংখ্যা</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -478,18 +480,18 @@
     <string name="settings_system_patch_selection_no_saved">কোনো সংরক্ষিত প্যাচ নির্বাচন নেই</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s থেকে %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s থেকে %2$s</string>
-    <string name="settings_system_patch_selection_source_format">উৎস #%d</string>
+    <string name="settings_system_patch_selection_source_format">সূত্র #%s</string>
     <string name="settings_system_patch_selection_will_delete">এটি মুছে ফেলবে:</string>
     <string name="settings_system_patch_selection_reset_all_warning">সব প্যাকেজ এবং উৎসের জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
     <string name="settings_system_patch_selection_reset_package_warning">%s এর জন্য সব উৎসের জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
-    <string name="settings_system_patch_selection_reset_source_warning">উৎস #%2$d-এ %1$s-এ সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
+    <string name="settings_system_patch_selection_reset_source_warning">%1$s এর জন্য সংরক্ষিত প্যাচ নির্বাচনকে স্থায়ীভাবে মুছে ফেলবে, সূত্র #%2$s-এ।</string>
     <string name="settings_system_export_source_data_fail">উৎস ডাটা রপ্তানি করতে ব্যর্থ হয়েছে</string>
     <string name="settings_system_export_source_data_success">উৎস ডাটা সফলভাবে রপ্তানি করা হয়েছে</string>
     <string name="settings_system_import_source_data_fail">উৎস ডাটা আমদানি করতে ব্যর্থ হয়েছে</string>
     <string name="settings_system_import_source_data_success">উৎস ডাটা সফলভাবে আমদানি করা হয়েছে</string>
     <string name="settings_system_patch_details_title">প্যাচ বিবরণ</string>
-    <string name="settings_system_selected_patches_title">নির্বাচিত প্যাচ (%d)</string>
-    <string name="settings_system_patch_options_title">প্যাচ বিকল্প (%d)</string>
+    <string name="settings_system_selected_patches_title">নির্বাচিত প্যাচ (%s)</string>
+    <string name="settings_system_patch_options_title">প্যাচ বিকল্প (%s)</string>
     <string name="settings_system_no_patches_or_options">কোনো সংরক্ষিত প্যাচ বা বিকল্প নেই</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>

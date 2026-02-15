@@ -24,14 +24,6 @@
         <item quantity="one">%d APK dosyası</item>
         <item quantity="other">%d APK dosyası</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">%d kaynaktan devre dışı bırakıldı</item>
-        <item quantity="other">%d kaynaktan devre dışı bırakıldı</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">%d kaynaktan etkinleştirildi</item>
-        <item quantity="other">%d kaynaktan etkinleştirildi</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Kayıtlı seçenekten %1$d eskimiş düzeltiyi kaldırıldı</item>
         <item quantity="other">Kayıtlı seçenekten %1$d eskimiş düzeltiyi kaldırıldı</item>

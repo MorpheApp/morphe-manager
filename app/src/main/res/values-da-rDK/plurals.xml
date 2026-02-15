@@ -24,14 +24,6 @@
         <item quantity="one">%d APK-fil</item>
         <item quantity="other">%d APK-filer</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Deaktiveret %d kilde</item>
-        <item quantity="other">Deaktiveret %d kilder</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Aktiveret %d kilde</item>
-        <item quantity="other">Aktiveret %d kilder</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Fjernet %1$d udated patch fra gemte valg</item>
         <item quantity="other">Fjernet %1$d udated patches fra gemte valg</item>

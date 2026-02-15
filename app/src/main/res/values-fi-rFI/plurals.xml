@@ -24,14 +24,6 @@
         <item quantity="one">%d tiedosto</item>
         <item quantity="other">%d tiedostoa</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Poistettu %d lähde</item>
-        <item quantity="other">Poistettu %d lähdettä</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Käytössä %d lähde</item>
-        <item quantity="other">Käytössä %d lähdettä</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Poistettiin tallennetusta valinnosta %1$d vanhentunut pätkä</item>
         <item quantity="other">Poistettiin tallennetusta valinnosta %1$d vanhentunutta pätkää</item>

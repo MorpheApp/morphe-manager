@@ -100,7 +100,7 @@ Danh sách phiên bản tương thích:"</string>
     <string name="home_no_patches_for_app">Không có bản vá nào cho ứng dụng này</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
-    <string name="expert_mode_subtitle_extended_format">Đã chọn %1$d/%2$s</string>
+    <string name="expert_mode_subtitle_extended_format">Đã chọn %1$s/%2$s</string>
     <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
@@ -249,7 +249,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patched_app_save_failed_toast">Không thể lưu ứng dụng đã vá</string>
     <string name="download_apk">Tải tệp APK</string>
     <string name="plugin_activity_dialog_body">Bạn vẫn cần tự thao tác để tải ứng dụng</string>
-    <string name="patcher_process_exit_message">Tiến trình vá đã dừng với mã lỗi %1$d</string>
+    <string name="patcher_process_exit_message">Tiến trình vá đã dừng với mã lỗi %1$s</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
     <string name="install_app_fail">Không thể cài đặt ứng dụng: %s</string>
     <string name="install_timeout_message">Cài đặt không thành công. Hãy kiểm tra hộp thoại cài đặt của hệ thống và thử lại</string>
@@ -308,7 +308,9 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Chuyên gia</string>
     <string name="settings_advanced_expert_mode">Chế độ chuyên gia</string>
-    <string name="settings_advanced_expert_mode_description">Bật tính năng nâng cao và tùy chỉnh</string>
+    <string name="settings_advanced_expert_mode_description">Cho phép cấu hình phức tạp và tùy chỉnh các tùy chọn Morphe patching và customization options</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Bạn có muốn bật chế độ chuyên gia?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Chế độ chuyên gia cho phép bạn có thêm quyền kiểm soát cách các patches được áp dụng, nhưng nếu cấu hình sai các thiết lập trong chế độ chuyên gia có thể dẫn đến ứng dụng không hoạt động</string>
     <string name="settings_advanced_strip_unused_libs">Xóa thư viện gốc không cần</string>
     <string name="settings_advanced_strip_unused_libs_description">Xóa thư viện gốc cho kiến trúc CPU không được hỗ trợ từ ứng dụng đã vá</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_process_runtime_enable">Bật tiến trình riêng</string>
     <string name="settings_system_memory_limit_subtitle">Bộ nhớ cho quá trình vá</string>
     <string name="settings_system_memory_limit_warning">Nếu bộ nhớ quá thấp có thể khiến bạn gặp lỗi trong quá trình vá ứng dụng lớn</string>
-    <string name="settings_system_process_runtime_enabled_description">Giới hạn %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Giới hạn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Bấm để cấu hình</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Xuất &amp; Nhập</string>
@@ -470,7 +472,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_debug">Gỡ lỗi</string>
     <string name="settings_system_export_debug_logs">Nhật ký gỡ lỗi</string>
     <string name="settings_system_export_debug_logs_description">Xuất nhật ký hệ thống để khắc phục lỗi</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Không thể xuất nhật ký</string>
     <string name="settings_system_export_debug_logs_export_success">Đã xuất nhật ký</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_patch_selection_no_saved">Không có bản vá đã chọn được lưu</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s đến %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s trong %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Nguồn #%d</string>
+    <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">Thao tác sẽ xóa:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
     <string name="settings_system_patch_selection_reset_package_warning">Toàn bộ bản vá đã lưu cho %s (trong mọi nguồn) sẽ bị xóa vĩnh viễn</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho %1$s (trong nguồn #%2$d) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho %1$s (trong nguồn #%2$s) sẽ bị xóa vĩnh viễn</string>
     <string name="settings_system_export_source_data_fail">Không thể xuất dữ liệu nguồn</string>
     <string name="settings_system_export_source_data_success">Đã xuất dữ liệu nguồn thành công</string>
     <string name="settings_system_import_source_data_fail">Không thể nhập dữ liệu nguồn</string>
     <string name="settings_system_import_source_data_success">Đã nhập dữ liệu nguồn thành công</string>
     <string name="settings_system_patch_details_title">Chi tiết bản vá</string>
-    <string name="settings_system_selected_patches_title">Các bản vá đã chọn (%d)</string>
-    <string name="settings_system_patch_options_title">Tùy chỉnh bản vá (%d)</string>
+    <string name="settings_system_selected_patches_title">Đã chọn tất cả bản vá trong %s</string>
+    <string name="settings_system_patch_options_title">Tùy chỉnh</string>
     <string name="settings_system_no_patches_or_options">Không có bản vá hoặc tùy chỉnh được lưu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>

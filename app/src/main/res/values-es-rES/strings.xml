@@ -100,7 +100,7 @@ Versiones compatibles:"</string>
     <string name="home_no_patches_for_app">No hay parches disponibles para esta aplicación</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo experto</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d de %2$s seleccionados</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s de %2$s seleccionados</string>
     <string name="expert_mode_search">Buscar parches</string>
     <string name="expert_mode_proceed">Proceder al parcheado</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
@@ -249,7 +249,7 @@ Versiones compatibles:"</string>
     <string name="patched_app_save_failed_toast">Error al guardar la app parcheada</string>
     <string name="download_apk">Descargar archivo APK</string>
     <string name="plugin_activity_dialog_body">Se requiere interacción del usuario para continuar con este complemento.</string>
-    <string name="patcher_process_exit_message">El proceso de parcheador finalizó con el código %1$d.</string>
+    <string name="patcher_process_exit_message">El proceso del parcheador terminó con el código %1$s</string>
     <string name="install_app_success">Instalado correctamente</string>
     <string name="install_app_fail">Error al instalar la aplicación: %s</string>
     <string name="install_timeout_message">La instalación no se completó. Revisa el diálogo del instalador del sistema y vuelve a intentarlo.</string>
@@ -308,7 +308,9 @@ Versiones compatibles:"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ajustes avanzados</string>
     <string name="settings_advanced_expert_mode">Modo experto</string>
-    <string name="settings_advanced_expert_mode_description">Activa características avanzadas y opciones de personalización</string>
+    <string name="settings_advanced_expert_mode_description">Activa ajustes complejos de parcheo de Morphe y opciones de personalización</string>
+    <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo experto?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">El modo experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente los ajustes en modo experto puede resultar en una aplicación no funcional</string>
     <string name="settings_advanced_strip_unused_libs">Eliminar bibliotecas nativas no utilizadas</string>
     <string name="settings_advanced_strip_unused_libs_description">Eliminar bibliotecas nativas para arquitecturas de CPU no compatibles de las aplicaciones parcheadas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_process_runtime_enable">Activar tiempo de ejecución del proceso</string>
     <string name="settings_system_memory_limit_subtitle">Memoria disponible para parches</string>
     <string name="settings_system_memory_limit_warning">Un límite de memoria bajo puede causar errores al parchear aplicaciones más grandes</string>
-    <string name="settings_system_process_runtime_enabled_description">Límite de %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Límite de %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pulsa para configurar</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importar y exportar</string>
@@ -470,7 +472,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_debug">Depurar</string>
     <string name="settings_system_export_debug_logs">Exportar registros de depuración</string>
     <string name="settings_system_export_debug_logs_description">Exportar registros del sistema para solucionar problemas</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">No se pudieron leer los registros (código de salida %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Error al leer los registros (código de salida %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Error al exportar registros</string>
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_patch_selection_no_saved">No hay selecciones de parches guardadas</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s a través de %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s en %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Fuente #%d</string>
+    <string name="settings_system_patch_selection_source_format">Fuente #%s</string>
     <string name="settings_system_patch_selection_will_delete">Esto eliminará:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para todos los paquetes y fuentes.</string>
     <string name="settings_system_patch_selection_reset_package_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para %s en todas las fuentes.</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente las selecciones de parches guardadas para %1$s en la fuente #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente las selecciones de parches guardadas para %1$s en la fuente #%2$s</string>
     <string name="settings_system_export_source_data_fail">Error al exportar datos de fuente</string>
     <string name="settings_system_export_source_data_success">Datos de fuente exportados correctamente</string>
     <string name="settings_system_import_source_data_fail">Error al importar datos de fuente</string>
     <string name="settings_system_import_source_data_success">Datos de fuente importados correctamente</string>
     <string name="settings_system_patch_details_title">Detalles del parche</string>
-    <string name="settings_system_selected_patches_title">Parches seleccionados (%d)</string>
-    <string name="settings_system_patch_options_title">Opciones de parche (%d)</string>
+    <string name="settings_system_selected_patches_title">Paquetes seleccionados (%s)</string>
+    <string name="settings_system_patch_options_title">Opciones de parche (%s)</string>
     <string name="settings_system_no_patches_or_options">No hay parches ni opciones guardadas</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Acerca de Morphe</string>

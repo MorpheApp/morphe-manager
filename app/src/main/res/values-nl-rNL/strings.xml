@@ -100,7 +100,7 @@ Compatibele versies:"</string>
     <string name="home_no_patches_for_app">Geen patches beschikbaar voor deze app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d van %2$s geselecteerd</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s van %2$s geselecteerd</string>
     <string name="expert_mode_search">Zoek patches</string>
     <string name="expert_mode_proceed">Doorgaan met patchen</string>
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
@@ -249,7 +249,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="patched_app_save_failed_toast">Kon gepatchte app niet opslaan</string>
     <string name="download_apk">APK-bestand downloaden</string>
     <string name="plugin_activity_dialog_body">Gebruikersinteractie is vereist om te kunnen doorgaan met deze plugin</string>
-    <string name="patcher_process_exit_message">Patcher-process is afgelopen met code %1$d</string>
+    <string name="patcher_process_exit_message">Patcher-process is afgelopen met code %1$s</string>
     <string name="install_app_success">Succesvol geïnstalleerd</string>
     <string name="install_app_fail">Kon app niet installeren: %s</string>
     <string name="install_timeout_message">Installatie is niet afgelopen. Controleer het systeeminstallatievenster en probeer het opnieuw</string>
@@ -308,7 +308,9 @@ Weet u zeker dat u doorgaat?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinstellingen</string>
     <string name="settings_advanced_expert_mode">Expertmodus</string>
-    <string name="settings_advanced_expert_mode_description">Schakel advanced features en aanpassingsopties in</string>
+    <string name="settings_advanced_expert_mode_description">Inschakelen complexe Morphe-patchinstellingen en aanpassingsopties</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Expertmodus inschakelen?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expertmodus biedt meer beheer over hoe patches worden toegepast, maar verkeerde instellingen in de expertmodus kunnen leiden tot een niet-werkende app</string>
     <string name="settings_advanced_strip_unused_libs">Ongebruikte native libraries verwijderen</string>
     <string name="settings_advanced_strip_unused_libs_description">Verwijder native library\'s voor niet-ondersteunde CPU-architecturen uit gepatchte apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_process_runtime_enable">Schakel processruntime in</string>
     <string name="settings_system_memory_limit_subtitle">Geheugen beschikbaar voor patching</string>
     <string name="settings_system_memory_limit_warning">Laag geheugenlimiet kan mislukken bij patching van grotere apps</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB limiet</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB limiet</string>
     <string name="settings_system_process_runtime_disabled_description">Klik om te configureren</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importeren en exporteren</string>
@@ -470,7 +472,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Foutopsporingslogboeken exporteren</string>
     <string name="settings_system_export_debug_logs_description">Exporteer systeemlogboeken voor het oplossen van problemen</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Kan logboeken niet lezen (uitgangscode %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Kon logs niet lezen (uitslagcode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Mislukt om logboeken te exporteren</string>
     <string name="settings_system_export_debug_logs_export_success">Logboeken geëxporteerd</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_patch_selection_no_saved">Geen opgeslagen patchselecties</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s tot %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s tot %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Bron #%d</string>
+    <string name="settings_system_patch_selection_source_format">Bron #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dit zal verwijderen:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dit zal permanent alle opgeslagen patchselecties voor alle pakketten en bronnen verwijderen</string>
     <string name="settings_system_patch_selection_reset_package_warning">Dit zal permanent alle opgeslagen patchselecties voor %s over alle bronnen verwijderen</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Dit zal opgeslagen patchselecties voor %1$s in bron #%2$d permanent verwijderen</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dit zal de opgeslagen patchselecties voor %1$s in bron #%2$s permanent verwijderen</string>
     <string name="settings_system_export_source_data_fail">Kan brongegevens niet exporteren</string>
     <string name="settings_system_export_source_data_success">Brongegevens succesvol geëxporteerd</string>
     <string name="settings_system_import_source_data_fail">Kan brongegevens niet importeren</string>
     <string name="settings_system_import_source_data_success">Brongegevens succesvol geïmporteerd</string>
     <string name="settings_system_patch_details_title">Patchdetails</string>
-    <string name="settings_system_selected_patches_title">Geselecteerde patches (%d)</string>
-    <string name="settings_system_patch_options_title">Patchopties (%d)</string>
+    <string name="settings_system_selected_patches_title">Geselecteerde patches (%s)</string>
+    <string name="settings_system_patch_options_title">Patchopties (%s)</string>
     <string name="settings_system_no_patches_or_options">Geen patches of opties opgeslagen</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Over</string>

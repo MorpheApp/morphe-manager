@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">這個應用程式沒有可用的修補</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
-    <string name="expert_mode_subtitle_extended_format">已選擇 %1$d/%2$d 個修補</string>
+    <string name="expert_mode_subtitle_extended_format">已選擇 %1$s/%2$s 個修補</string>
     <string name="expert_mode_search">搜尋修補</string>
     <string name="expert_mode_proceed">進行修補</string>
     <string name="expert_mode_disable_all">停用全部</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">無法儲存修補後的應用程式</string>
     <string name="download_apk">下載 APK 檔案</string>
     <string name="plugin_activity_dialog_body">需要使用者互動以繼續使用此插件</string>
-    <string name="patcher_process_exit_message">修補程式程序結束，傳回代碼 %1$d</string>
+    <string name="patcher_process_exit_message">修補程式程序結束，傳回代碼 %1$s</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
     <string name="install_timeout_message">安裝未完成。請檢查系統安裝對話方塊，然後再試一次</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">進階設定</string>
     <string name="settings_advanced_expert_mode">專家模式</string>
-    <string name="settings_advanced_expert_mode_description">啟用進階功能和自訂設定選項</string>
+    <string name="settings_advanced_expert_mode_description">啟用複雜 Morphe 修補設定和自訂選項</string>
+    <string name="settings_advanced_expert_mode_dialog_title">切換至專業模式？</string>
+    <string name="settings_advanced_expert_mode_dialog_message">專業模式提供更多控制修補方式，但錯誤設定可能導致非功能應用程序</string>
     <string name="settings_advanced_strip_unused_libs">刪除未使用的原生函式庫</string>
     <string name="settings_advanced_strip_unused_libs_description">刪除不支援的 CPU 架構原生函式庫修補的應用程式</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -435,7 +437,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">啟用執行時間</string>
     <string name="settings_system_memory_limit_subtitle">可用於修補的記憶體</string>
     <string name="settings_system_memory_limit_warning">低記憶體限制可能會導致修補較大型應用程式時失敗</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB 限制</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB 限制</string>
     <string name="settings_system_process_runtime_disabled_description">點選以設定</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">匯入與匯出</string>
@@ -468,7 +470,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">偵錯</string>
     <string name="settings_system_export_debug_logs">匯出偵錯記錄</string>
     <string name="settings_system_export_debug_logs_description">匯出系統記錄以進行疑難排解</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">無法讀取記錄（結束碼 %d）</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">無法讀取記錄（結束碼 %s）</string>
     <string name="settings_system_export_debug_logs_export_failed">無法匯出記錄</string>
     <string name="settings_system_export_debug_logs_export_success">已匯出記錄</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -497,18 +499,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">沒有已儲存的修補選擇</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s 至 %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s 至 %2$s</string>
-    <string name="settings_system_patch_selection_source_format">來源 #%d</string>
+    <string name="settings_system_patch_selection_source_format">修補來源格式</string>
     <string name="settings_system_patch_selection_will_delete">這將刪除：</string>
     <string name="settings_system_patch_selection_reset_all_warning">這將永久刪除所有儲存的修補選項，包括所有套件和來源</string>
     <string name="settings_system_patch_selection_reset_package_warning">這將永久刪除 %s 的所有修補選項，跨越所有來源</string>
-    <string name="settings_system_patch_selection_reset_source_warning">這將永久刪除來源 #%2$d 中的 %1$s 修補選項</string>
+    <string name="settings_system_patch_selection_reset_source_warning">這將永久刪除已儲存的修補選擇，%1$s在修補來源#%2$s中</string>
     <string name="settings_system_export_source_data_fail">無法匯出來源資料</string>
     <string name="settings_system_export_source_data_success">來源資料匯出成功</string>
     <string name="settings_system_import_source_data_fail">無法匯入來源資料</string>
     <string name="settings_system_import_source_data_success">來源資料匯入成功</string>
     <string name="settings_system_patch_details_title">修補細節</string>
-    <string name="settings_system_selected_patches_title">已選修補 (%d)</string>
-    <string name="settings_system_patch_options_title">修補選項 (%d)</string>
+    <string name="settings_system_selected_patches_title">已選取修補 (%s)</string>
+    <string name="settings_system_patch_options_title">修補選項 (%s)</string>
     <string name="settings_system_no_patches_or_options">沒有儲存的修補或選項</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">關於</string>

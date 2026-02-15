@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">Для цього застосунку немає патчів</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експертний режим</string>
-    <string name="expert_mode_subtitle_extended_format">Вибрано %1$d з %2$s</string>
+    <string name="expert_mode_subtitle_extended_format">Вибрано %1$s з %2$s</string>
     <string name="expert_mode_search">Пошук патчів</string>
     <string name="expert_mode_proceed">Перейти до патчінгу</string>
     <string name="expert_mode_disable_all">Вимкнути всі</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений застосунок</string>
     <string name="download_apk">Завантажити APK файл</string>
     <string name="plugin_activity_dialog_body">Для продовження потрібна взаємодія користувача з цим плагіном</string>
-    <string name="patcher_process_exit_message">Процес патчера завершився з кодом %1$d</string>
+    <string name="patcher_process_exit_message">Процес патчера завершився з кодом %1$s</string>
     <string name="install_app_success">Встановлено успішно</string>
     <string name="install_app_fail">Неможливо встановити застосунок: %s</string>
     <string name="install_timeout_message">Встановлення не завершено. Перевірте діалог системного інсталятора та спробуйте ще раз</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Експертні налаштування</string>
     <string name="settings_advanced_expert_mode">Режим експерта</string>
-    <string name="settings_advanced_expert_mode_description">Вмикає розширені функції та можливості налаштування</string>
+    <string name="settings_advanced_expert_mode_description">Увімкнути комплексні налаштування патчів Morphe та параметри налаштування</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Увімкнути режим експерта?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності програми.</string>
     <string name="settings_advanced_strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Видаляє нативні бібліотеки для непідтримуваних архітектур процесора з патчених застосунків</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Увімкнути процес патчінгу</string>
     <string name="settings_system_memory_limit_subtitle">Доступна пам\'ять для патчінгу</string>
     <string name="settings_system_memory_limit_warning">Низький ліміт пам’яті може спричинити збій при патчінгу великих застосунків</string>
-    <string name="settings_system_process_runtime_enabled_description">%d МБ ліміт</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB ліміт</string>
     <string name="settings_system_process_runtime_disabled_description">Натисніть для налаштування</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Імпорт та eкспорт</string>
@@ -470,7 +472,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">Налагодження</string>
     <string name="settings_system_export_debug_logs">Експортувати журнали налагодження</string>
     <string name="settings_system_export_debug_logs_description">Експортує системні журнали для налагоджування</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Не вдалося прочитати журнали (код виходу %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Не вдалося прочитати журнали (код виходу %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Не вдалося експортувати журнали</string>
     <string name="settings_system_export_debug_logs_export_success">Журнали експортовано</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">Немає збережених вибраних патчів</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s поміж %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s у %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Джерело #%d</string>
+    <string name="settings_system_patch_selection_source_format">Джерело #%s</string>
     <string name="settings_system_patch_selection_will_delete">Це видалить:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Це назавжди видалить усі збережені вибрані патчі для всіх пакетів та джерел</string>
     <string name="settings_system_patch_selection_reset_package_warning">Це назавжди видалить усі збережені вибрані патчі для %s з усіх джерел</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Це назавжди видалить збережені вибрані патчі для %1$s у джерелі #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Це назавжди видалить збережені вибрані патчі для %1$s у джерелі #%2$s</string>
     <string name="settings_system_export_source_data_fail">Не вдалося експортувати дані джерела</string>
     <string name="settings_system_export_source_data_success">Дані джерела експортовано успішно</string>
     <string name="settings_system_import_source_data_fail">Не вдалося імпортувати дані джерела</string>
     <string name="settings_system_import_source_data_success">Дані джерела імпортовано успішно</string>
     <string name="settings_system_patch_details_title">Деталі патчу</string>
-    <string name="settings_system_selected_patches_title">Вибрані патчі (%d)</string>
-    <string name="settings_system_patch_options_title">Параметри патчів (%d)</string>
+    <string name="settings_system_selected_patches_title">Вибрані патчі (%s)</string>
+    <string name="settings_system_patch_options_title">Параметри патчів (%s)</string>
     <string name="settings_system_no_patches_or_options">Не збережено жодних патчів або параметрів</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Про нас</string>

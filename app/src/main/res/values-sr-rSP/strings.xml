@@ -100,7 +100,7 @@ Kompatibilne verzije:"</string>
     <string name="home_no_patches_for_app">Нema печева доступно за ову апликацију</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експерт мод</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d од %2$s изабрано</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s од %2$s изабрано</string>
     <string name="expert_mode_search">Претражи печеве</string>
     <string name="expert_mode_proceed">Настави са печевима</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
@@ -249,7 +249,7 @@ Kompatibilne verzije:"</string>
     <string name="patched_app_save_failed_toast">Није успело чување крпељом потписане апликације</string>
     <string name="download_apk">Преузми APK фајл</string>
     <string name="plugin_activity_dialog_body">Неопходна је корисничка интеракција да бисте наставили са овом додатком.</string>
-    <string name="patcher_process_exit_message">Процес патчера завршен је са кодом %1$d.</string>
+    <string name="patcher_process_exit_message">Процес пачера изашао са кодом %1$s</string>
     <string name="install_app_success">Успешно инсталирано</string>
     <string name="install_app_fail">Није успело инсталирање апликације: %s</string>
     <string name="install_timeout_message">Инсталација није завршена. Проверите дијалог система за инсталацију и покушајте поново.</string>
@@ -308,7 +308,9 @@ Kompatibilne verzije:"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Навише подешавања</string>
     <string name="settings_advanced_expert_mode">Нави моћ</string>
-    <string name="settings_advanced_expert_mode_description">Омогућање напредних функција и опција за персонализацију</string>
+    <string name="settings_advanced_expert_mode_description">Omogući kompleksno podešavanje Morphe i personalizacija opcija</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Omogući režim eksperta?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta omogućava veću kontrolu nad primenom patchova, ali pogrešno podešavanje postavki u režimu eksperta može da rezultuje nefunkcionalnom aplikacijom</string>
     <string name="settings_advanced_strip_unused_libs">Уклонити ненужне оригиналне библиотеке</string>
     <string name="settings_advanced_strip_unused_libs_description">Брисање ненужних оригиналних библиотека може повећати патчирање, али може бити недовољно за старије уређаје</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Омогући меморије</string>
     <string name="settings_system_memory_limit_subtitle">Кликните да конфигуришете</string>
     <string name="settings_system_memory_limit_warning">Mala ograniÄena memorija može uzrokovati greške pri nadogradnji veÄih aplikacija</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB меморије</string>
+    <string name="settings_system_process_runtime_enabled_description">%s МБ лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Упозорење: ниско ограничење меморије може довести до греша при патчирању веће апликације</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Увоз и извоз</string>
@@ -470,7 +472,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">Дебаг</string>
     <string name="settings_system_export_debug_logs">Извези евиденције отклањања грешака</string>
     <string name="settings_system_export_debug_logs_description">Извоз системских евиденција за откладавање</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Неуспешно читање евиденција (код грешка %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Неуспех у читању дневника (код изласка %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Неуспешан извоз евиденција</string>
     <string name="settings_system_export_debug_logs_export_success">Евиденције успешно извезене</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">Нema сачуваних избора пакета</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s преко %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s у %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Извор #%d</string>
+    <string name="settings_system_patch_selection_source_format">Извор #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ово ће обрисати:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ово ће трајно обрисати све сачуване изборе пакета за све пакете и изворе</string>
     <string name="settings_system_patch_selection_reset_package_warning">Ово ће трајно обрисати све сачуване изборе пакета за %s преко свих извора</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ово ће трајно обрисати сачуване изборе пакета за %1$s у извору #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ово трајно обрише сачуване изборе пакета за %1$s у извору #%2$s</string>
     <string name="settings_system_export_source_data_fail">Неуспешан извоз података извора</string>
     <string name="settings_system_export_source_data_success">Подаци извора успешно извезени</string>
     <string name="settings_system_import_source_data_fail">Неуспешан увоз података извора</string>
     <string name="settings_system_import_source_data_success">Подаци извора успешно увезени</string>
     <string name="settings_system_patch_details_title">Детаљи пакета</string>
-    <string name="settings_system_selected_patches_title">Изабрани пакети (%d)</string>
-    <string name="settings_system_patch_options_title">Опције пакета (%d)</string>
+    <string name="settings_system_selected_patches_title">Изабрани пакети (%s)</string>
+    <string name="settings_system_patch_options_title">Опције пакета (%s)</string>
     <string name="settings_system_no_patches_or_options">Нema сачуваних пакета или опција</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">О програму</string>

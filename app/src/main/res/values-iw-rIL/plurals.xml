@@ -36,18 +36,6 @@
         <item quantity="many">%d קובצי APK</item>
         <item quantity="other">%d קובצי APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one"> išмור %d מקור</item>
-        <item quantity="two"> išמורים %d מקורות</item>
-        <item quantity="many"> išמורים %d מקורות</item>
-        <item quantity="other"> išמורים %d מקורות</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">הפעיל %d מקור</item>
-        <item quantity="two">הפעיל %d מקורות</item>
-        <item quantity="many">הפעיל %d מקורות</item>
-        <item quantity="other">הפעיל %d מקורות</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">הסר %1$d תיקון מיושן מהסלקציה המוגמרת</item>
         <item quantity="two">הסר %1$d תיקונים מיושנים מהסלקציה המוגמרת</item>

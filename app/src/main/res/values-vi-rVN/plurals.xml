@@ -18,12 +18,6 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">%d tệp APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">Đã vô hiệu hóa %d nguồn</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">Đã kích hoạt %d nguồn</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">Đã loại bỏ %1$d bản vá lỗi thời khỏi danh sách bản vá đã lưu</item>
     </plurals>

@@ -42,20 +42,6 @@
         <item quantity="many">%d comhad APK</item>
         <item quantity="other">%d comhad APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Tá %d pacáiste díchumasaithe</item>
-        <item quantity="two">Tá %d pacáiste(í) díchumasaithe</item>
-        <item quantity="few">Tá %d pacáiste(í) díchumasaithe</item>
-        <item quantity="many">Tá %d pacáiste(í) díchumasaithe</item>
-        <item quantity="other">Tá %d pacáiste(í) díchumasaithe</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="two">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="few">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="many">Tá %d pacáiste(í) ag obair</item>
-        <item quantity="other">Tá %d pacáiste(í) ag obair</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Toghadh %1$d seachadán seachuiríochta as roghanna táirgthe</item>
         <item quantity="two">Toghadh %1$d seachadán seachuiríochta as roghanna táirgthe</item>

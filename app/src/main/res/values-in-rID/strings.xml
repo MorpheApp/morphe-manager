@@ -100,7 +100,7 @@ Versi yang cocok:"</string>
     <string name="home_no_patches_for_app">Tidak ada tambalan tersedia untuk aplikasi ini</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode ahli</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d dari %2$s dipilih</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s dipilih dari %2$s</string>
     <string name="expert_mode_search">Cari tambalan</string>
     <string name="expert_mode_proceed">Lanjutkan ke Menambal</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
@@ -249,7 +249,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="patched_app_save_failed_toast">Gagal menyimpan aplikasi yang ditambal</string>
     <string name="download_apk">Unduh berkas APK</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk melanjutkan plugin ini</string>
-    <string name="patcher_process_exit_message">Proses pencopotan berakhir dengan kode %1$d</string>
+    <string name="patcher_process_exit_message">Proses Penambal dihentikan dengan kode %1$s</string>
     <string name="install_app_success">Berhasil dipasang</string>
     <string name="install_app_fail">Gagal memasang aplikasi: %s</string>
     <string name="install_timeout_message">Pemasangan tidak selesai. Periksa dialog pembatalan dan coba lagi</string>
@@ -308,7 +308,9 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Pengaturan ahli</string>
     <string name="settings_advanced_expert_mode">Mode ahli</string>
-    <string name="settings_advanced_expert_mode_description">Mengaktifkan fitur-fitur tingkat lanjut dan pilihan kustomisasi</string>
+    <string name="settings_advanced_expert_mode_description">Aktifkan pengaturan penambalan Morphe yang kompleks dan pilihan kustomisasi</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Aktifkan mode Ahli?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Mode ahli memberikan kontrol yang lebih banyak terhadap bagaimana penambalan diterapkan, tetapi pengaturan yang salah dalam mode ahli dapat menyebabkan aplikasi tidak berfungsi</string>
     <string name="settings_advanced_strip_unused_libs">Hapus pustaka bawaan yang tidak digunakan</string>
     <string name="settings_advanced_strip_unused_libs_description">Hapus pustaka bawaan untuk arsitektur CPU yang tidak didukung dari aplikasi yang ditambal</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_process_runtime_enable">Aktifkan proses runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk penambalan</string>
     <string name="settings_system_memory_limit_warning">Batas memori yang rendah mungkin menyebabkan kegagalan saat menambal aplikasi yang lebih besar</string>
-    <string name="settings_system_process_runtime_enabled_description">Batas %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Batas %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Klik untuk mengonfigurasinya</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Impor &amp; ekspor</string>
@@ -470,7 +472,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Ekspor catatan debug</string>
     <string name="settings_system_export_debug_logs_description">Ekspor catatan sistem untuk mengatasi masalah</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Gagal membaca catatan (kode keluar %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Gagal membaca catatan (kode keluaran %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Gagal mengekspor catatan</string>
     <string name="settings_system_export_debug_logs_export_success">Catatan diekspor</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_patch_selection_no_saved">Tidak ada pemilihan tambalan yang disimpan</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s diantara %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dalam %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Sumber #%d</string>
+    <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ini akan menghapus:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk semua paket dan sumber</string>
     <string name="settings_system_patch_selection_reset_package_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk %s diantara seluruh sumber</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ini akan menghapus pemilihan tambalan yang disimpan untuk %1$s dalam sumber #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ini akan menghapus pemilihan tambalan yang disimpan untuk %1$s dalam sumber #%2$s</string>
     <string name="settings_system_export_source_data_fail">Gagal mengekspor data sumber</string>
     <string name="settings_system_export_source_data_success">Data sumber berhasil diekspor</string>
     <string name="settings_system_import_source_data_fail">Gagal mengimpor data sumber</string>
     <string name="settings_system_import_source_data_success">Data sumber berhasil diimpor</string>
     <string name="settings_system_patch_details_title">Rincian tambalan</string>
-    <string name="settings_system_selected_patches_title">Tambalan terpilih (%d)</string>
-    <string name="settings_system_patch_options_title">Pilihan tambalan (%d)</string>
+    <string name="settings_system_selected_patches_title">Tambalan terpilih (%s)</string>
+    <string name="settings_system_patch_options_title">Pilihan tambalan (%s)</string>
     <string name="settings_system_no_patches_or_options">Tidak ada tambalan atau pilihan yang disimpan</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tentang</string>

@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">Няма достъпни пачове за това приложение</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим на експерт</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d от %2$s избрани</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s от %2$s обработени</string>
     <string name="expert_mode_search">Търсене на пачове</string>
     <string name="expert_mode_proceed">Продължаване към пачове</string>
     <string name="expert_mode_disable_all">Изключи всички</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">Import</string>
     <string name="download_apk">Изтегли APK файл</string>
     <string name="plugin_activity_dialog_body">Потребителски интеракция е нужна, за да продължите с този плагин.</string>
-    <string name="patcher_process_exit_message">Процесът на патчването излязъл с код %1$d</string>
+    <string name="patcher_process_exit_message">Процесът на патчването излязъл с код %1$s</string>
     <string name="install_app_success">Инсталирано успешно</string>
     <string name="install_app_fail">Неуспешно инсталиране на приложението: %s</string>
     <string name="install_timeout_message">Инсталирането не е завършило. Проверете диалога на системния инсталатор и опитайте отново.</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки за експерти</string>
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
-    <string name="settings_advanced_expert_mode_description">Разрешаване на допълнителни функции и опции за настройка</string>
+    <string name="settings_advanced_expert_mode_description">Включете сложни настройки за патчове и опции за personnalization на Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Включете експерт режим?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Експертният режим дава повече контрол над прилагането на патчове, но грешно конфигуриране на настройките в експертния режим може да доведе до неработеща приложение</string>
     <string name="settings_advanced_strip_unused_libs">Изтриване на непотребимите библиотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Изтриване на библиотеки за неподдържани CPU архитектури от замести</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Включване на изпълнение на различни процеси</string>
     <string name="settings_system_memory_limit_subtitle">Памет, достъпен за заместителния процес</string>
     <string name="settings_system_memory_limit_warning">Нисък памет може да доведе до неуспехи при заместителния на по-големи приложения</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB ограничение</string>
     <string name="settings_system_process_runtime_disabled_description">Натиснете за конфигуриране</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Импорт и износ</string>
@@ -470,7 +471,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">Отлад</string>
     <string name="settings_system_export_debug_logs">Експортиране на логове за отстраняване на грешки</string>
     <string name="settings_system_export_debug_logs_description">Износ на системни логове за отстраняване на грешки</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Неуспешно четене на логове (код за изход %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Неуспешно четене на логове (код за изход %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Неуспешно експортиране на логове</string>
     <string name="settings_system_export_debug_logs_export_success">Логовете са експортирани</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +500,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">Няма запазени избрани пакети</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s по %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s в %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Източник #%d</string>
+    <string name="settings_system_patch_selection_source_format">Източник #%s</string>
     <string name="settings_system_patch_selection_will_delete">Това ще изтрие:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Това ще изтрие всички запазени избрани пакети за всички пакети и източници завинаги</string>
     <string name="settings_system_patch_selection_reset_package_warning">Това ще изтрие всички запазени избрани пакети за %s по всички източници завинаги</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Това ще изтрие запазените избрани пакети за %1$s в източник #%2$d завинаги</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Това ще изтрие постоянните запаметени избрани заплашки за %1$s в източник #%2$s</string>
     <string name="settings_system_export_source_data_fail">Неуспешно експортиране на данни за източника</string>
     <string name="settings_system_export_source_data_success">Данните за източника са експортирани успешно</string>
     <string name="settings_system_import_source_data_fail">Неуспешно импортиране на данни за източника</string>
     <string name="settings_system_import_source_data_success">Данните за източника са импортирани успешно</string>
     <string name="settings_system_patch_details_title">Детайли за пакета</string>
-    <string name="settings_system_selected_patches_title">Избрани пакети (%d)</string>
-    <string name="settings_system_patch_options_title">Опции за пакета (%d)</string>
+    <string name="settings_system_selected_patches_title">Избрани заплашки (%s)</string>
+    <string name="settings_system_patch_options_title">Опции на заплашки (%s)</string>
     <string name="settings_system_no_patches_or_options">Няма запазени пакети или опции</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Относно</string>

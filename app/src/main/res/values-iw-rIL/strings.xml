@@ -101,7 +101,7 @@
     <string name="home_no_patches_for_app">אין תיקונים זמינים עבור אפליקציה זו</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">מצב מומחה</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d מתוך %2$s נבחר</string>
+    <string name="expert_mode_subtitle_extended_format">%1$ס של %2$ס נבחרו</string>
     <string name="expert_mode_search">חפש תיקונים</string>
     <string name="expert_mode_proceed">המשך לתיקון</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
@@ -250,7 +250,7 @@
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
     <string name="download_apk">הורד קובץ APK</string>
     <string name="plugin_activity_dialog_body">נדרש אינטראקציה של המשתמש כדי להמשיך עם תוסף זה</string>
-    <string name="patcher_process_exit_message">הליך השחזור הסתיים עם קוד %1$d</string>
+    <string name="patcher_process_exit_message">הליך הפצת הריפארי הסתיים עם קוד %1$ס</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
     <string name="install_timeout_message">ההתקנה לא הסתיימה. בדוק את דיאלוג ההתקנה של המערכת ונסה שוב</string>
@@ -309,7 +309,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">הגדרות מומחג\'שיות</string>
     <string name="settings_advanced_expert_mode">מצב מומחג\'שיות</string>
-    <string name="settings_advanced_expert_mode_description">הפעיל את הגדרות המומחג\'שיות</string>
+    <string name="settings_advanced_expert_mode_description">אפשר הגדרות תיקון מורפמה מורכבות וoptions אישוריות מותאמות אישית</string>
+    <string name="settings_advanced_expert_mode_dialog_title">אפשר את режим מומחה?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">mode מומחה מספק יותר שליטה על איך התיקונים מופעלים, אך תצורתה של הגדרות ב-mode מומחה יכולה לגרום לאפליקציה שאינה פונקציונלית</string>
     <string name="settings_advanced_strip_unused_libs">הסר את קבצים נטוים</string>
     <string name="settings_advanced_strip_unused_libs_description">הסרת קבצים נטוים תאפשר מהיר יותר את הפיצ\'ח, אך ייתכן שלא תעבוד על מכשירים ישנים</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -400,7 +402,7 @@
     <string name="settings_system_process_runtime_enable">מוצא איבוד... </string>
     <string name="settings_system_memory_limit_subtitle">מוצא איבוד... </string>
     <string name="settings_system_memory_limit_warning">מוצא איבוד... </string>
-    <string name="settings_system_process_runtime_enabled_description">מוצא איבוד... </string>
+    <string name="settings_system_process_runtime_enabled_description">%s מגביל MB</string>
     <string name="settings_system_process_runtime_disabled_description">מוצא איבוד... </string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">ייבוא/ייצא הגדרות</string>
@@ -433,7 +435,7 @@
     <string name="settings_system_debug">debug</string>
     <string name="settings_system_export_debug_logs">ייצוא יומני איתור באגים</string>
     <string name="settings_system_export_debug_logs_description">ייצא את תיקוני המערכת לשימוש בטעיה</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">שגגה לקרוא את התיקונים (קוד %d) </string>
+    <string name="settings_system_export_debug_logs_export_read_failed">שגיאה בקריאת לוגים (קוד יציאה %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">נכשל לייצא יומנים</string>
     <string name="settings_system_export_debug_logs_export_success">התיקונים יוצאו</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -462,18 +464,18 @@
     <string name="settings_system_patch_selection_no_saved">אין בחירות שמורות</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s על %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ב-%2$s</string>
-    <string name="settings_system_patch_selection_source_format">מקור #%d</string>
+    <string name="settings_system_patch_selection_source_format">מקור #%s</string>
     <string name="settings_system_patch_selection_will_delete">זוהי תהליך מחיקה:</string>
     <string name="settings_system_patch_selection_reset_all_warning">זוהי תהליך מחיקה קבועה של כל הבחירות שמורות עבור כל החבילות ומקורות</string>
     <string name="settings_system_patch_selection_reset_package_warning">זוהי תהליך מחיקה קבועה של כל הבחירות שמורות עבור %s על כל המקורות</string>
-    <string name="settings_system_patch_selection_reset_source_warning">זוהי תהליך מחיקה קבועה של בחירות שמורות עבור %1$s במקור #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">זוהי פעולה של מחיקת סלקציות פצ\' של %1$s במקור #%2$s</string>
     <string name="settings_system_export_source_data_fail">שגיאה בייצוא נתוני מקור</string>
     <string name="settings_system_export_source_data_success">נתוני מקור יוצאו בהצלחה</string>
     <string name="settings_system_import_source_data_fail">שגיאה בייבוא נתוני מקור</string>
     <string name="settings_system_import_source_data_success">נתוני מקור יובאו בהצלחה</string>
     <string name="settings_system_patch_details_title">פרטי תיקון</string>
-    <string name="settings_system_selected_patches_title">תיקונים נבחרים (%d)</string>
-    <string name="settings_system_patch_options_title">אפשרויות תיקון (%d)</string>
+    <string name="settings_system_selected_patches_title">פצ\'ים נבחרים (%s)</string>
+    <string name="settings_system_patch_options_title">אפשרויות פצ\' (%s)</string>
     <string name="settings_system_no_patches_or_options">אין תיקונים או אפשרויות שמורות</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">אודות</string>

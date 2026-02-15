@@ -30,16 +30,6 @@
         <item quantity="few">%d fișiere APK</item>
         <item quantity="other">%d fișiere APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one"> Dezactivat %d sursă</item>
-        <item quantity="few"> Dezactivat %d surse</item>
-        <item quantity="other"> Dezactivat %d surse</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Activat %d sursă</item>
-        <item quantity="few">Activat %d surse</item>
-        <item quantity="other">Activat %d surse</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Eliminat %1$d patch obosit din selecție salvată</item>
         <item quantity="few">Eliminat %1$d patch-uri obosi din selecție salvată</item>

@@ -100,7 +100,7 @@ Uyuşan versiyalar:"</string>
     <string name="home_no_patches_for_app">Bu tətbiq üçün yamaqlar əlçatan deyil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mütəxəssis rejimi</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s - dan %1$d ədəd seçildi</string>
+    <string name="expert_mode_subtitle_extended_format">%2$s - dan %1$s ədəd seçildi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
     <string name="expert_mode_proceed">Yamaqlamağa davam edin</string>
     <string name="expert_mode_disable_all">Hamısını qapat</string>
@@ -249,7 +249,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patched_app_save_failed_toast">Yamaqlanan tətbiqi saxlamaq olmadı</string>
     <string name="download_apk">APK faylını yüklə</string>
     <string name="plugin_activity_dialog_body">Bu qoşmayla davam etmək üçün istifadəçi reaksiyası tələb olunur</string>
-    <string name="patcher_process_exit_message">Yamaqlayıcı emalı %1$d şifrəsi ilə tamamlandı</string>
+    <string name="patcher_process_exit_message">Yamaqlayıcı emalı %1$s şifrəsi ilə tamamlandı</string>
     <string name="install_app_success">Uğurla quraşdırıldı</string>
     <string name="install_app_fail">Tətbiqi quraşdırmaq olmadı: %s</string>
     <string name="install_timeout_message">Quraşdırma bitmədi. Sistem quraşdırıcısı dialoqunu yoxla və təkrar sına</string>
@@ -308,7 +308,9 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Mütəxəssis tənzimləmələri</string>
     <string name="settings_advanced_expert_mode">Mütəxəssis rejimi</string>
-    <string name="settings_advanced_expert_mode_description">Qabaqcıl xüsusiyyətləri və fərdiləşdirmə seçimlərini aktivləşdir</string>
+    <string name="settings_advanced_expert_mode_description">Qəliz Morphe yamaqlanma tənzimləmələrin və fərdiləşdirmə seçimlərin aktivləşdir</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Mütəxəssis rejimi aktivləşdirilsin?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Mütəxəssis rejimi yamaqların necə tətbiq olunduğuna daha çox nəzarət verir, lakin mütəxəssis rejimindəki tənzimləmələri səhv qurma tətbiqi funksional pozuntuya sala bilər</string>
     <string name="settings_advanced_strip_unused_libs">İşlədilməyən yerli kitabxanaları təmizlə</string>
     <string name="settings_advanced_strip_unused_libs_description">Yamalanan tətbiqlərdən dəstəklənməyən CPU quruluşları üçün yerli kitabxanaları silin</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -433,7 +435,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Emal işlənilmə müddətini aktivləşdir</string>
     <string name="settings_system_memory_limit_subtitle">Yamaqlanma üçün əlçatan yaddaş</string>
     <string name="settings_system_memory_limit_warning">Daha həcmli tətbiqlər yamaqlananda aşağı yaddaş həddi, uğursuzluqlara səbəb ola bilər</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB hədd</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB hədd</string>
     <string name="settings_system_process_runtime_disabled_description">Qurmaq üçün kliklə</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">İdxal &amp; ixrac</string>
@@ -466,7 +468,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_debug">Yaxşılaşdırma</string>
     <string name="settings_system_export_debug_logs">Sazlanma jurnalların köçür</string>
     <string name="settings_system_export_debug_logs_description">Problemlərin düzəldilməsi üçün sistem jurnalların ixrac et</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Jurnalları oxumaq olmadı (çıxış şifrəsi %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Jurnalları oxumaq olmadı (çıxış şifrəsi %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Jurnalları ixrac etmək olmadı</string>
     <string name="settings_system_export_debug_logs_export_success">Jurnallar ixrac olundu</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -495,18 +497,18 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">Saxlanılan yamaq seçimləri yoxdur</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s arası %1$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%2$s-də %1$s</string>
-    <string name="settings_system_patch_selection_source_format">Mənbə #%d</string>
+    <string name="settings_system_patch_selection_source_format">Mənbə #%s</string>
     <string name="settings_system_patch_selection_will_delete">Bu siləcək:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu, bütün paketlər və mənbələr üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
     <string name="settings_system_patch_selection_reset_package_warning">Bu, bütün mənbələr arası %s üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Bu, #%2$d mənbəsində %1$s üçün saxlanılan yamaq seçimlərini daimi siləcək</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Bu, #%2$s mənbəsində %1$s üçün saxlanılan yamaq seçimlərini daimi siləcək</string>
     <string name="settings_system_export_source_data_fail">Mənbə məlumatını ixrac etmək olmadı</string>
     <string name="settings_system_export_source_data_success">Mənbə məlumatı uğurla ixrac olundu</string>
     <string name="settings_system_import_source_data_fail">Mənbə məlumatını idxal etmək olmadı</string>
     <string name="settings_system_import_source_data_success">Mənbə məlumatı uğurla idxal olundu</string>
     <string name="settings_system_patch_details_title">Yamaq təfərrüatları</string>
-    <string name="settings_system_selected_patches_title">Seçilən yamaqlar (%d)</string>
-    <string name="settings_system_patch_options_title">Yamaq seçimləri (%d)</string>
+    <string name="settings_system_selected_patches_title">Seçilən yamaqlar (%s)</string>
+    <string name="settings_system_patch_options_title">Yamaq seçimləri (%s)</string>
     <string name="settings_system_no_patches_or_options">Yamaqlar və ya seçimlər saxlanılmayıb</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Haqqında</string>

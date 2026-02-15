@@ -18,12 +18,6 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">%d 個 APK 檔案</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">已停用 %d 個來源</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">已啟用 %d 個來源</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">已移除儲存選擇中的 %1$d 個過舊修補</item>
     </plurals>

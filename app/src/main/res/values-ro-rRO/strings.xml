@@ -100,7 +100,7 @@ Versiuni compatibile:"</string>
     <string name="home_no_patches_for_app">Nu există patch-uri disponibile pentru această aplicație</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d din %2$s selectate</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s din %2$s selectat</string>
     <string name="expert_mode_search">Caută patch-uri</string>
     <string name="expert_mode_proceed">Procedează la patchare</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
@@ -249,7 +249,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
     <string name="download_apk">Descarcă fișierul APK</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
-    <string name="patcher_process_exit_message">Procesul de pata a ieșit cu codul %1$d</string>
+    <string name="patcher_process_exit_message">Procesul de patch a ieșit cu codul %1$s</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
     <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul instalatorului sistemului și reîncercați</string>
@@ -308,7 +308,9 @@ Sunteți sigur că doriți să continuați?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
-    <string name="settings_advanced_expert_mode_description">Activează funcții avansate și opțiuni de personalizare</string>
+    <string name="settings_advanced_expert_mode_description">Activează setările complexe de pateâturi Morphe si opârii de personalizare</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Vrei sâ activezi modul expert?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Modul expert oferâ mai mult control asupra modului cum pateâturile sunt aplicaâ, dar o configurare greşită a setârilor poate duce la o aplicaâ nefuncțională</string>
     <string name="settings_advanced_strip_unused_libs">Elimina librări native nefolosite</string>
     <string name="settings_advanced_strip_unused_libs_description">Șterge librări native pentru arhitecturi CPU nesupuse de pe aplicații patachate</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_process_runtime_enable">Activează rulare proces</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
     <string name="settings_system_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când patachizați aplicații mai mari</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB limit</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB limită</string>
     <string name="settings_system_process_runtime_disabled_description">Clic pentru a configura</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importă și exportă</string>
@@ -470,7 +472,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_debug">Debbug</string>
     <string name="settings_system_export_debug_logs">Exportare jurnale de depanare</string>
     <string name="settings_system_export_debug_logs_description">Exportă jurnale sistem pentru rezolvarea problemelor</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Nu s-a putut citi jurnalele (cod de ieșire %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Eșuare la citirea journal-ului (cod de ieșire %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Eșec la exportarea jurnalelor</string>
     <string name="settings_system_export_debug_logs_export_success">Jurnale exportate</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_patch_selection_no_saved">Nicio selectie salvată</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s peste %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s în %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Sursă #%d</string>
+    <string name="settings_system_patch_selection_source_format">Sursă #%s</string>
     <string name="settings_system_patch_selection_will_delete">Acesta va șterge:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru toate pachetele și sursele</string>
     <string name="settings_system_patch_selection_reset_package_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru %s peste toate sursele</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Acesta va șterge selectiile de pachet salvate pentru %1$s în sursă #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Acțiunea va șterge definitiv selecțiile de patch-uri salvate pentru %1$s în sursă #%2$s</string>
     <string name="settings_system_export_source_data_fail">Eșec la exportarea datelor sursei</string>
     <string name="settings_system_export_source_data_success">Datele sursei exportate cu succes</string>
     <string name="settings_system_import_source_data_fail">Eșec la importarea datelor sursei</string>
     <string name="settings_system_import_source_data_success">Datele sursei importate cu succes</string>
     <string name="settings_system_patch_details_title">Detalii pachet</string>
-    <string name="settings_system_selected_patches_title">Pachete selectate (%d)</string>
-    <string name="settings_system_patch_options_title">Opțiuni pachet (%d)</string>
+    <string name="settings_system_selected_patches_title">Patch-uri selectate (%s)</string>
+    <string name="settings_system_patch_options_title">Opțiuni patch-uri (%s)</string>
     <string name="settings_system_no_patches_or_options">Nicio pachet sau opțiune salvată</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Despre</string>

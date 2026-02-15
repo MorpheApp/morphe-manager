@@ -30,16 +30,6 @@
         <item quantity="few">%d APK datoteke</item>
         <item quantity="other">%d APK datoteka</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Onemogućeno %d izvora</item>
-        <item quantity="few">Onemogućeno %d izvora</item>
-        <item quantity="other">Onemogućeno %d izvora</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Omogućeno %d izvora</item>
-        <item quantity="few">Omogućeno %d izvora</item>
-        <item quantity="other">Omogućeno %d izvora</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Uklonio sam %1$d zastarelu ispravku iz spremljenog odabira</item>
         <item quantity="few">Uklonio sam %1$d zastarele ispravke iz spremljenog odabira</item>

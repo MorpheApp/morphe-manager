@@ -24,14 +24,6 @@
         <item quantity="one">%d APK-Datei</item>
         <item quantity="other">%d APK-Dateien</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Deaktiviert %d Quelle</item>
-        <item quantity="other">Deaktiviert %d Quellen</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Aktiviert %d Quelle</item>
-        <item quantity="other">Aktiviert %d Quellen</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Entfernt %1$d veralteten Patch aus der gespeicherten Auswahl</item>
         <item quantity="other">Entfernt %1$d veraltete Patches aus der gespeicherten Auswahl</item>

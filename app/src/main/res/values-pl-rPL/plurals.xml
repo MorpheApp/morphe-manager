@@ -36,18 +36,6 @@
         <item quantity="many">%d plików APK</item>
         <item quantity="other">%d plików APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Wyłączono %d źródło</item>
-        <item quantity="few">Wyłączono %d źródła</item>
-        <item quantity="many">Wyłączono %d źródeł</item>
-        <item quantity="other">Wyłączono %d źródeł</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Włączono %d źródło</item>
-        <item quantity="few">Włączono %d źródła</item>
-        <item quantity="many">Włączono %d źródeł</item>
-        <item quantity="other">Włączono %d źródeł</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Usunięto %1$d przestarzałą modyfikację z zapisanych wyborów</item>
         <item quantity="few">Usunięto %1$d przestarzałe modyfikacje z zapisanych wyborów</item>

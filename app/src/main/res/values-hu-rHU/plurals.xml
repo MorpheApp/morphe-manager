@@ -24,14 +24,6 @@
         <item quantity="one">%d APK fájl</item>
         <item quantity="other">%d APK fájl</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">%d forrás letiltva</item>
-        <item quantity="other">%d forrás letiltva</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">%d forrás engedélyezve</item>
-        <item quantity="other">%d forrás engedélyezve</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Töröltem %1$d elavult javítást a mentett kiválasztásból</item>
         <item quantity="other">Töröltem %1$d elavult javításokat a mentett kiválasztásból</item>

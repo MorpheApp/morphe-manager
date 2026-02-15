@@ -30,16 +30,6 @@
         <item quantity="few">%d АПК датотеке</item>
         <item quantity="other">%d АПК датотека</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Онемогућено %d извор</item>
-        <item quantity="few">Онемогућено %d извора</item>
-        <item quantity="other">Онемогућено %d извора</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Омогућено %d извор</item>
-        <item quantity="few">Омогућено %d извора</item>
-        <item quantity="other">Омогућено %d извора</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Уклоњено је %1$d застарело исправка са чувања одабраних</item>
         <item quantity="few">Уклоњено је %1$d застарелих исправке са чувања одабраних</item>

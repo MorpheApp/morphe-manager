@@ -36,18 +36,6 @@
         <item quantity="many">%d APK файлов</item>
         <item quantity="other">%d APK файлов</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Отключено %d источник</item>
-        <item quantity="few">Отключено %d источников</item>
-        <item quantity="many">Отключено %d источников</item>
-        <item quantity="other">Отключено %d источников</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Включено %d источник</item>
-        <item quantity="few">Включено %d источников</item>
-        <item quantity="many">Включено %d источников</item>
-        <item quantity="other">Включено %d источников</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Удалено %1$d устаревший патч из сохраненного выбора</item>
         <item quantity="few">Удалено %1$d устаревших патчей из сохраненного выбора</item>

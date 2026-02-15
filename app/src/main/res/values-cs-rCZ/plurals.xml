@@ -36,18 +36,6 @@
         <item quantity="many">%d souborů APK</item>
         <item quantity="other">%d souborů APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Zakázáno %d zdroj</item>
-        <item quantity="few">Zakázáno %d zdrojů</item>
-        <item quantity="many">Zakázáno %d zdrojů</item>
-        <item quantity="other">Zakázáno %d zdrojů</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Povoleno %d zdroj</item>
-        <item quantity="few">Povoleno %d zdrojů</item>
-        <item quantity="many">Povoleno %d zdrojů</item>
-        <item quantity="other">Povoleno %d zdrojů</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Odstranil jsem %1$d zastaralou opravu ze uložené výběru</item>
         <item quantity="few">Odstranil jsem %1$d zastaralé opravy ze uložené výběru</item>

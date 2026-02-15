@@ -24,14 +24,6 @@
         <item quantity="one">%d APK-bestand</item>
         <item quantity="other">%d APK-bestanden</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Uitgeschakeld %d bron</item>
-        <item quantity="other">Uitgeschakeld %d bronnen</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Ingeschakeld %d bron</item>
-        <item quantity="other">Ingeschakeld %d bronnen</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Verwijderd %1$d verouderde patch uit de geselecteerde opslag</item>
         <item quantity="other">Verwijderd %1$d verouderde patches uit de geselecteerde opslag</item>

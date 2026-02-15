@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">Нет доступных патчей для этого приложения</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим эксперта</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d из %2$d выбрано</string>
+    <string name="expert_mode_subtitle_extended_format">Выбрано %1$s из %2$s</string>
     <string name="expert_mode_search">Поиск патчей</string>
     <string name="expert_mode_proceed">Перейти к патчингу</string>
     <string name="expert_mode_disable_all">Отключить все</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">Не удалось сохранить исправленное приложение</string>
     <string name="download_apk">Скачать APK-файл</string>
     <string name="plugin_activity_dialog_body">Требуется взаимодействие пользователя для продолжения работы с этим плагином</string>
-    <string name="patcher_process_exit_message">Процесс Patcher завершился с кодом %1$d</string>
+    <string name="patcher_process_exit_message">Процесс патчера завершился с кодом %1$s</string>
     <string name="install_app_success">Успешно установлено</string>
     <string name="install_app_fail">Не удалось установить приложение: %s</string>
     <string name="install_timeout_message">Установка не завершилась. Проверьте диалог системного установщика и повторите попытку</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки эксперта</string>
     <string name="settings_advanced_expert_mode">Режим эксперта</string>
-    <string name="settings_advanced_expert_mode_description">Включает продвинутые функции и параметры настройки</string>
+    <string name="settings_advanced_expert_mode_description">Включить комплексные настройки патчей Morphe и параметры настройки</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Включить режим эксперта?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Экспертный режим предоставляет больше контроля над применением патчей, но неправильная настройка параметров в экспертном режиме может привести к нетрудоспособности программы.</string>
     <string name="settings_advanced_strip_unused_libs">Удалить неиспользуемые нативные библиотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Удалить нативные библиотеки для неподдерживаемых архитектур CPU из пропатченных приложений</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Включить время выполнения процесса</string>
     <string name="settings_system_memory_limit_subtitle">Доступная память для патчинга</string>
     <string name="settings_system_memory_limit_warning">Низкий лимит памяти может вызвать сбой при патчинге больших приложений</string>
-    <string name="settings_system_process_runtime_enabled_description">Ограничение %d МБ</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Нажмите, чтобы настроить</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Импорт &amp; экспорт</string>
@@ -470,7 +472,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">Отладка</string>
     <string name="settings_system_export_debug_logs">Экспортировать журналы отладки</string>
     <string name="settings_system_export_debug_logs_description">Экспортировать журналы отладки для устранения неполадок</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Не удалось прочитать журналы (код выхода %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Не удалось прочитать журналы (код выхода %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Не удалось экспортировать журналы</string>
     <string name="settings_system_export_debug_logs_export_success">Журналы экспортированы</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">Нет сохраненных выбранных патчей</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$d по %2$d</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$d в %2$d</string>
-    <string name="settings_system_patch_selection_source_format">Источник #%d</string>
+    <string name="settings_system_patch_selection_source_format">Источник #%s</string>
     <string name="settings_system_patch_selection_will_delete">Будет удалено:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Это навсегда удалит все сохраненные выбранные исправления для всех пакетов и источников</string>
     <string name="settings_system_patch_selection_reset_package_warning">Это навсегда удалит все сохраненные выбранные исправления для %s по всем источникам</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выбранные исправления для %1$d в источнике #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выборки патчей для %1$s в источнике #%2$s</string>
     <string name="settings_system_export_source_data_fail">Не удалось экспортировать данные источника</string>
     <string name="settings_system_export_source_data_success">Данные источника экспортированы успешно</string>
     <string name="settings_system_import_source_data_fail">Не удалось импортировать данные источника</string>
     <string name="settings_system_import_source_data_success">Данные источника импортированы успешно</string>
     <string name="settings_system_patch_details_title">Детали исправления</string>
-    <string name="settings_system_selected_patches_title">Выбранные исправления (%d)</string>
-    <string name="settings_system_patch_options_title">Опции исправления (%d)</string>
+    <string name="settings_system_selected_patches_title">Выбранные патчи (%s)</string>
+    <string name="settings_system_patch_options_title">Опции патчей (%s)</string>
     <string name="settings_system_no_patches_or_options">Нет сохраненных исправлений или опций</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Об интеграции</string>

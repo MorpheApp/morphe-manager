@@ -100,7 +100,7 @@ Versions compatibles :"</string>
     <string name="home_no_patches_for_app">Aucuns patchs disponibles pour cette application</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode Expert</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d sur %2$s sélectionnés</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s sur %2$s sélectionnés</string>
     <string name="expert_mode_search">Rechercher des patchs</string>
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
@@ -249,7 +249,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patched_app_save_failed_toast">Échec de l\'enregistrement de l\'application patchée</string>
     <string name="download_apk">Télécharger le fichier APK</string>
     <string name="plugin_activity_dialog_body">Une interaction de l\'utilisateur est nécessaire pour pouvoir poursuivre avec ce plugin</string>
-    <string name="patcher_process_exit_message">Le processus du patcheur s’est terminé avec le code %1$d</string>
+    <string name="patcher_process_exit_message">Le processus du patcheur s’est terminé avec le code %1$s</string>
     <string name="install_app_success">Installé avec succès</string>
     <string name="install_app_fail">Impossible d\'installer l\'application : %s</string>
     <string name="install_timeout_message">L\'installation n\'est pas terminée. Vérifiez la boîte de dialogue de l\'installateur système et réessayez</string>
@@ -308,7 +308,9 @@ Voulez-vous vraiment continuer ?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Paramètres Expert</string>
     <string name="settings_advanced_expert_mode">Mode Expert</string>
-    <string name="settings_advanced_expert_mode_description">Activer les fonctionnalités avancées et les options de personnalisation</string>
+    <string name="settings_advanced_expert_mode_description">Activer les paramètres de patchage Morphe complexes et les options de personnalisation</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Passer en mode Expert ?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Le mode Expert offre plus de contrôle sur la manière dont les patchs sont appliqués, mais une mauvaise configuration des paramètres en mode expert peut rendre l’application inutilisable</string>
     <string name="settings_advanced_strip_unused_libs">Supprimer les bibliothèques natives inutilisées</string>
     <string name="settings_advanced_strip_unused_libs_description">Supprimer les bibliothèques natives pour les architectures CPU non prises en charge des applications patchées</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_process_runtime_enable">Activer le temps d’exécution du processus</string>
     <string name="settings_system_memory_limit_subtitle">Mémoire disponible pour le patchage</string>
     <string name="settings_system_memory_limit_warning">Une limite de mémoire faible peut entraîner des échecs lors du patchage des applications plus volumineuses</string>
-    <string name="settings_system_process_runtime_enabled_description">Limite de %d Mo</string>
+    <string name="settings_system_process_runtime_enabled_description">Limite de %s Mo</string>
     <string name="settings_system_process_runtime_disabled_description">Cliquez pour configurer</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importer &amp; exporter</string>
@@ -470,7 +472,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_debug">Débogage</string>
     <string name="settings_system_export_debug_logs">Exporter les journaux de débogage</string>
     <string name="settings_system_export_debug_logs_description">Exporter les journaux système pour le dépannage</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Échec de la lecture des journaux (code de sortie %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Échec de la lecture des journaux (code de sortie %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Échec de l\'exportation des journaux </string>
     <string name="settings_system_export_debug_logs_export_success">Journaux exportés</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_patch_selection_no_saved">Pas de sélections de patch enregistrées</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s entre %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dans %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Source #%d</string>
+    <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">Cela supprimera :</string>
     <string name="settings_system_patch_selection_reset_all_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour tous les packages et sources</string>
     <string name="settings_system_patch_selection_reset_package_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour %s entre toutes les sources</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera les sélections de patch enregistrées pour %1$s dans la source #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera les sélections de patch enregistrées pour %1$s dans la source #%2$s</string>
     <string name="settings_system_export_source_data_fail">Échec de l\'exportation des données de source</string>
     <string name="settings_system_export_source_data_success">Données de source exportées avec succès</string>
     <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>
     <string name="settings_system_import_source_data_success">Données de source importées avec succès</string>
     <string name="settings_system_patch_details_title">Détails du patch</string>
-    <string name="settings_system_selected_patches_title">Patchs sélectionnés (%d)</string>
-    <string name="settings_system_patch_options_title">Options de patch (%d)</string>
+    <string name="settings_system_selected_patches_title">Patchs sélectionnés (%s)</string>
+    <string name="settings_system_patch_options_title">Options de patch (%s)</string>
     <string name="settings_system_no_patches_or_options">Pas de patch ni options enregistrés</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">À propos</string>

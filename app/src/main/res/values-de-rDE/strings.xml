@@ -100,7 +100,7 @@ Kompatible Versionen:"</string>
     <string name="home_no_patches_for_app">Keine Patches verfügbar für diese App</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-Modus</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d von %2$s ausgewählt</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s von %2$s ausgewählt</string>
     <string name="expert_mode_search">Suche nach Patches</string>
     <string name="expert_mode_proceed">Weiter zum Patchen</string>
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
@@ -249,7 +249,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="patched_app_save_failed_toast">Fehler beim Speichern der App</string>
     <string name="download_apk">APK-Datei herunterladen</string>
     <string name="plugin_activity_dialog_body">Benutzerinteraktion ist erforderlich, um diesen Plugin fortzusetzen</string>
-    <string name="patcher_process_exit_message">Patcher-Prozess endete mit Code %1$d</string>
+    <string name="patcher_process_exit_message">Der Patcher-Prozess ist mit dem Code %1$s beendet worden</string>
     <string name="install_app_success">Erfolgreich installiert</string>
     <string name="install_app_fail">App konnte nicht installiert werden: %s</string>
     <string name="install_timeout_message">Die Installation wurde nicht abgeschlossen. Überprüfe den Systeminstallationsdialog und versuche es erneut</string>
@@ -308,7 +308,9 @@ Möchten Sie trotzdem fortfahren?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Erweiterte Einstellungen</string>
     <string name="settings_advanced_expert_mode">Erweiterter Modus</string>
-    <string name="settings_advanced_expert_mode_description">Aktiviert erweiterte Funktionen und Anpassungsoptionen</string>
+    <string name="settings_advanced_expert_mode_description">Aktiviere komplexe Morphe-Patch-Einstellungen und individuelle Anpassungsoptionen.</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Expert-Modus aktivieren?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert-Modus gewährt mehr Kontrolle darüber, wie Patches angewendet werden, kann aber bei falscher Konfiguration zu einer nicht funktionsfähigen App führen.</string>
     <string name="settings_advanced_strip_unused_libs">Entferne nicht verwendete native Bibliotheken</string>
     <string name="settings_advanced_strip_unused_libs_description">Lösche native Bibliotheken für nicht unterstützte CPU-Architekturen aus gepatchten Apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_process_runtime_enable">Ein niedriges Speicherlimit kann bei großen Apps zu Fehlern führen</string>
     <string name="settings_system_memory_limit_subtitle">%d MB-Grenze</string>
     <string name="settings_system_memory_limit_warning">Klicken Sie hier, um die Konfiguration zu bearbeiten</string>
-    <string name="settings_system_process_runtime_enabled_description">Importieren Sie einen benutzerdefinierten Keystore</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB Begrenzung</string>
     <string name="settings_system_process_runtime_disabled_description">Keystore-Import</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importieren Sie Manager-Einstellungen aus einer JSON-Datei</string>
@@ -470,7 +472,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Debug-Protokolle exportieren</string>
     <string name="settings_system_export_debug_logs_description">Exportieren Sie Systemprotokolle zur Fehlerbehebung</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Fehler beim Lesen der Protokolle (Rückgabecode %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Fehler beim Lesen der Protokolle (Rückgabecode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Fehler beim Exportieren der Protokolle</string>
     <string name="settings_system_export_debug_logs_export_success">Protokolle exportiert</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_patch_selection_no_saved">Keine gespeicherten Patch-Auswahlen</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s über %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Quelle #%d</string>
+    <string name="settings_system_patch_selection_source_format">Quelle #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dies wird löschen:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dies löscht dauerhaft alle gespeicherten Patch-Auswahlen für alle Pakete und Quellen</string>
     <string name="settings_system_patch_selection_reset_package_warning">Dies löscht dauerhaft alle gespeicherten Patch-Auswahlen für %s über alle Quellen</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Dies löscht dauerhaft gespeicherte Patch-Auswahlen für %1$s in Quelle #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dies löscht permanent die gespeicherten Patchauswahlen für %1$s in Quelle #%2$s</string>
     <string name="settings_system_export_source_data_fail">Quelldatenexport fehlgeschlagen</string>
     <string name="settings_system_export_source_data_success">Quelldaten erfolgreich exportiert</string>
     <string name="settings_system_import_source_data_fail">Quelldatenimport fehlgeschlagen</string>
     <string name="settings_system_import_source_data_success">Quelldaten erfolgreich importiert</string>
     <string name="settings_system_patch_details_title">Patch-Details</string>
-    <string name="settings_system_selected_patches_title">Ausgewählte Patches (%d)</string>
-    <string name="settings_system_patch_options_title">Patch-Optionen (%d)</string>
+    <string name="settings_system_selected_patches_title">Ausgewählte Patches (%s)</string>
+    <string name="settings_system_patch_options_title">Patch-Optionen (%s)</string>
     <string name="settings_system_no_patches_or_options">Keine Patches oder Optionen gespeichert</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Über</string>

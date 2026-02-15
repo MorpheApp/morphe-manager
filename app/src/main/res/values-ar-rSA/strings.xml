@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">لا يوجد تعديلات متاحة لهذا التطبيق</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">وضع الخبير</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d من %2$s محدد</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s من %2$s محدد</string>
     <string name="expert_mode_search">البحث عن التعديلات</string>
     <string name="expert_mode_proceed">المضي قدمًا إلى التعديل</string>
     <string name="expert_mode_disable_all">تعطيل الكل</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
     <string name="download_apk">تنزيل ملف APK</string>
     <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي</string>
-    <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$d</string>
+    <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$s</string>
     <string name="install_app_success">تم التثبيت بنجاح</string>
     <string name="install_app_fail">فشل تثبيت التطبيق: %s</string>
     <string name="install_timeout_message">لم يكتمل التثبيت. تحقق من مربع حوار أداة التثبيت في النظام وحاول مرة أخرى</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
     <string name="settings_advanced_expert_mode">وضع الخبير</string>
-    <string name="settings_advanced_expert_mode_description">تمكين الميزات المتقدمة وتخصيص الخيارات</string>
+    <string name="settings_advanced_expert_mode_description">تمكين الإعدادات المتقدمة للتمكين والتخصيص</string>
+    <string name="settings_advanced_expert_mode_dialog_title">هل تريد التبديل إلى الوضع الخبير؟</string>
+    <string name="settings_advanced_expert_mode_dialog_message">الوضع الخبير يوفر المزيد من التحكم في تطبيق التثبيتات، ولكن الإعداد الخاطئ للوضع الخبير يمكن أن يوقف التطبيق عن العمل</string>
     <string name="settings_advanced_strip_unused_libs">إزالة المكتبات الأصلية غير المستخدمة</string>
     <string name="settings_advanced_strip_unused_libs_description">حذف المكتبات الأصلية لبنى المعالجات غير المدعومة من التطبيقات المعدلة</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@
     <string name="settings_system_process_runtime_enable">تمكين وقت تشغيل العملية</string>
     <string name="settings_system_memory_limit_subtitle">الذاكرة المتاحة للتعديل</string>
     <string name="settings_system_memory_limit_warning">الحد الأدنى للذاكرة قد يتسبب في فشل عند تعديل التطبيقات الأكبر حجمًا</string>
-    <string name="settings_system_process_runtime_enabled_description">حد %d ميغابايت</string>
+    <string name="settings_system_process_runtime_enabled_description">حد %s ميغابايت</string>
     <string name="settings_system_process_runtime_disabled_description">انقر هنا للتهيئة</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">استيراد &amp; تصدير</string>
@@ -470,7 +472,7 @@
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">تصدير سجلات تصحيح الأخطاء</string>
     <string name="settings_system_export_debug_logs_description">تصدير سجلات النظام للتشخيص</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">فشل في قراءة السجلات (رمز الخروج %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">فشل في قراءة السجلات (رمز الخروج %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">فشل تصدير السجلات</string>
     <string name="settings_system_export_debug_logs_export_success">تم تصدير السجلات</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@
     <string name="settings_system_patch_selection_no_saved">لا يوجد تحديدات تعديل محفوظة</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s عبر %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s في %2$s</string>
-    <string name="settings_system_patch_selection_source_format">مصدر #%d</string>
+    <string name="settings_system_patch_selection_source_format">مصدر #%s</string>
     <string name="settings_system_patch_selection_will_delete">هذا سيحذف:</string>
     <string name="settings_system_patch_selection_reset_all_warning">هذا سيحذف كل تحديدات التعديلات محفوظة بشكل دائم لجميع الحزم والمصادر</string>
     <string name="settings_system_patch_selection_reset_package_warning">هذا سيحذف كل تحديدات التعديلات المحفوظة بشكل دائم لـ %s عبر جميع المصادر</string>
-    <string name="settings_system_patch_selection_reset_source_warning">هذا سيحذف تحديدات التعديلات المحفوظة لـ %1$s في مصدر #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">هذا سيحذف تحديدات التعديلات المحفوظة لـ %1$s في مصدر #%2$s</string>
     <string name="settings_system_export_source_data_fail">فشل تصدير بيانات المصدر</string>
     <string name="settings_system_export_source_data_success">تم تصدير بيانات المصدر بنجاح</string>
     <string name="settings_system_import_source_data_fail">فشل استيراد بيانات المصدر</string>
     <string name="settings_system_import_source_data_success">تم استيراد بيانات المصدر بنجاح</string>
     <string name="settings_system_patch_details_title">تفاصيل التعديل</string>
-    <string name="settings_system_selected_patches_title">التعديلات المحددة (%d)</string>
-    <string name="settings_system_patch_options_title">خيارات المعدل (%d)</string>
+    <string name="settings_system_selected_patches_title">التعديلات المحددة (%s)</string>
+    <string name="settings_system_patch_options_title">خيارات التعديل (%s)</string>
     <string name="settings_system_no_patches_or_options">لا يوجد معدلات أو خيارات محفوظة</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">لمحة</string>

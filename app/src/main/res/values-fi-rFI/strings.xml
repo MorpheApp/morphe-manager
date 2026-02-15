@@ -100,7 +100,7 @@ Sovittuvien versioiden:"</string>
     <string name="home_no_patches_for_app">Ei patcheja saatavilla tälle sovellukselle</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Asiantuntijan tila</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d valittua %2$d:sta</string>
+    <string name="expert_mode_subtitle_extended_format">%1$sista %2$sta valittua</string>
     <string name="expert_mode_search">Etsi patcheja</string>
     <string name="expert_mode_proceed">Jatka patchaamista</string>
     <string name="expert_mode_disable_all">Poista kaikki</string>
@@ -249,7 +249,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
     <string name="download_apk">Lataa APK-tiedosto</string>
     <string name="plugin_activity_dialog_body">Tätä liitännöä varten tarvitaan käyttäjän interaktiivisuutta.</string>
-    <string name="patcher_process_exit_message">Korjaaja-prosessi keskeytyi koodilla %1$d.</string>
+    <string name="patcher_process_exit_message">Patcher-prosessi poistui koodilla %1$s</string>
     <string name="install_app_success">Asennettu onnistuneesti</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
     <string name="install_timeout_message">Asennus ei päätytty. Tarkista järjestelmän asennusdialogi ja yritä uudelleen.</string>
@@ -308,7 +308,9 @@ Oletko varma, että haluat jatkaa?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert asetukset</string>
     <string name="settings_advanced_expert_mode">Expert-tila</string>
-    <string name="settings_advanced_expert_mode_description">Expert-tila sallitsee etäasetuksia ja muokkaustustimia</string>
+    <string name="settings_advanced_expert_mode_description">Ota käyttöön Morphe-päivityksen asetukset ja mukautusvaihtoehdot</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Ota Expert-moodi käyttöön?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert-moodi antaa enemmän valtaa päivitysten sovittamisesta, mutta väärin asetettu expert-moodi voi johtaa sovelluksen toimimattomuuteen</string>
     <string name="settings_advanced_strip_unused_libs">Poistaa käyttämättä alkuperäisiä kirjastot</string>
     <string name="settings_advanced_strip_unused_libs_description">Poistaa käyttämättä alkuperäisiä kirjastot ei ole soveltuva vanhoilla laitteilla</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_process_runtime_enable">Muokka prosessin muistinkäytön</string>
     <string name="settings_system_memory_limit_subtitle">Muokka prosessin muistinkäytön onnistui</string>
     <string name="settings_system_memory_limit_warning">Muokka prosessin muistinkäytön</string>
-    <string name="settings_system_process_runtime_enabled_description">Tuo / Vienti asetukset</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB:n rajoitus</string>
     <string name="settings_system_process_runtime_disabled_description">Tuo / Vienti asetukset</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Tuo / Vienti asetuset</string>
@@ -470,7 +472,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_debug">Tuo debug-lokit</string>
     <string name="settings_system_export_debug_logs">Vie virheenkorjauslokit</string>
     <string name="settings_system_export_debug_logs_description">Ei saatu lukea debug-lokit: %s</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Lokit tuotu onnistui</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Epäonnistui lukemassa logeja (poistumiskoodi %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Lokien vienti epäonnistui</string>
     <string name="settings_system_export_debug_logs_export_success">%d APK(t)</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_patch_selection_no_saved">Ei tallennettuja patsas-valintoja</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s kerrallaan %2$s:stä</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s %2$s:sta</string>
-    <string name="settings_system_patch_selection_source_format">Lähde #%d</string>
+    <string name="settings_system_patch_selection_source_format">Lähde #%s</string>
     <string name="settings_system_patch_selection_will_delete">Tämä poistaa:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Tämä pysyvästi poistaa kaikki tallennetut patsas-valinnat kaikille paketteille ja lähteille</string>
     <string name="settings_system_patch_selection_reset_package_warning">Tämä pysyvästi poistaa kaikki tallennetut patsas-valinnat %s:sta kaikista lähteistä</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Tämä poistaa tallennetut patsas-valinnat %1$s:sta lähteestä #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Tämä poistaa tallennetut patch-valinnat %1$s lähteestä #%2$s pysyvästi</string>
     <string name="settings_system_export_source_data_fail">Lähteen tiedot vienti epäonnistui</string>
     <string name="settings_system_export_source_data_success">Lähteen tiedot tuotu onnistuneesti</string>
     <string name="settings_system_import_source_data_fail">Lähteen tiedot tuonti epäonnistui</string>
     <string name="settings_system_import_source_data_success">Lähteen tiedot tuotu onnistuneesti</string>
     <string name="settings_system_patch_details_title">Patsas tiedot</string>
-    <string name="settings_system_selected_patches_title">Valitut patsas (%d)</string>
-    <string name="settings_system_patch_options_title">Patsas vaihtoehdot (%d)</string>
+    <string name="settings_system_selected_patches_title">Valitut patchit (%s)</string>
+    <string name="settings_system_patch_options_title">Patch-vaihtoehdot (%s)</string>
     <string name="settings_system_no_patches_or_options">Ei tallennettuja patsas- tai vaihtoehtoja</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>

@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">此应用无补丁记录</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">高级模式</string>
-    <string name="expert_mode_subtitle_extended_format">已处理 %1$d / %2$s</string>
+    <string name="expert_mode_subtitle_extended_format">已选择 %1$s 个应用</string>
     <string name="expert_mode_search">搜索补丁</string>
     <string name="expert_mode_proceed">开始修补</string>
     <string name="expert_mode_disable_all">禁用所有</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">保存修补后的应用失败</string>
     <string name="download_apk">下载 APK 文件</string>
     <string name="plugin_activity_dialog_body">需要用户交互才能继续使用此插件</string>
-    <string name="patcher_process_exit_message">修补程序进程退出，代码为 %1$d</string>
+    <string name="patcher_process_exit_message">修补程序进程退出，代码为 %1$s。</string>
     <string name="install_app_success">安装成功</string>
     <string name="install_app_fail">应用安装失败：%s</string>
     <string name="install_timeout_message">安装未完成。请检查系统安装程序对话框并重试</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高级设置</string>
     <string name="settings_advanced_expert_mode">高级模式</string>
-    <string name="settings_advanced_expert_mode_description">启用高级功能和自定义选项</string>
+    <string name="settings_advanced_expert_mode_description">启用复杂的 Morphe 补丁设置和自定义选项</string>
+    <string name="settings_advanced_expert_mode_dialog_title">启用专家模式？</string>
+    <string name="settings_advanced_expert_mode_dialog_message">专家模式提供了更多控制如何应用补丁的选项，但如果错误配置专家模式设置，可能会导致应用程序无法使用</string>
     <string name="settings_advanced_strip_unused_libs">移除未使用的原生库</string>
     <string name="settings_advanced_strip_unused_libs_description">从修补的应用中删除不支持 CPU 架构的原生库</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">启用运行时长</string>
     <string name="settings_system_memory_limit_subtitle">可用于修补的内存</string>
     <string name="settings_system_memory_limit_warning">较低的内存限制可能会导致修补较大应用时失败</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB 限制</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB限制</string>
     <string name="settings_system_process_runtime_disabled_description">点击配置</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">导入 &amp; 导出</string>
@@ -470,7 +472,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">调试</string>
     <string name="settings_system_export_debug_logs">导出调试日志</string>
     <string name="settings_system_export_debug_logs_description">导出系统日志以进行故障排除</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">读取日志失败 (退出代码 %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">读取日志失败 (退出代码 %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">导出日志失败</string>
     <string name="settings_system_export_debug_logs_export_success">日志已导出</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">重置补丁选择</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s 到 %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s 到 %2$s</string>
-    <string name="settings_system_patch_selection_source_format">源 #%d</string>
+    <string name="settings_system_patch_selection_source_format">源 #%s</string>
     <string name="settings_system_patch_selection_will_delete">这将删除：</string>
     <string name="settings_system_patch_selection_reset_all_warning">这将永久删除所有保存的补丁选择，适用于所有包和源</string>
     <string name="settings_system_patch_selection_reset_package_warning">这将永久删除 %s 的所有保存补丁选择，跨越所有源</string>
-    <string name="settings_system_patch_selection_reset_source_warning">这将永久删除源 #%2$d 中的 %1$s 的保存补丁选择</string>
+    <string name="settings_system_patch_selection_reset_source_warning">这将永久删除已保存的补丁选择，包括 %1$s 在源 #%2$s 中</string>
     <string name="settings_system_export_source_data_fail">导出源数据失败</string>
     <string name="settings_system_export_source_data_success">源数据导出成功</string>
     <string name="settings_system_import_source_data_fail">导入源数据失败</string>
     <string name="settings_system_import_source_data_success">源数据导入成功</string>
     <string name="settings_system_patch_details_title">补丁详情</string>
-    <string name="settings_system_selected_patches_title">已选择 %d 中的所有补丁)</string>
-    <string name="settings_system_patch_options_title">补丁选项 (%d)</string>
+    <string name="settings_system_selected_patches_title">已选择的补丁 (%s)</string>
+    <string name="settings_system_patch_options_title">补丁选项 (%s)</string>
     <string name="settings_system_no_patches_or_options">没有保存的补丁或选项</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">关于</string>

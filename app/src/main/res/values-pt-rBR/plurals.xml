@@ -24,14 +24,6 @@
         <item quantity="one">%d arquivo APK</item>
         <item quantity="other">%d arquivos APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Desativado %d fonte</item>
-        <item quantity="other">Desativadas %d fontes</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Ativado %d fonte</item>
-        <item quantity="other">Ativadas %d fontes</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Removido %1$d patch desatualizado da seleção salva</item>
         <item quantity="other">Removidos %1$d patches desatualizados da seleção salva</item>

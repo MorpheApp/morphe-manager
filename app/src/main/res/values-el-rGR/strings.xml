@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">Δεν υπάρχουν επεξεργασίες διαθέσιμες για αυτήν την εφαρμογή</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Επιτυχημένος τρόπος</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d από %2$s επιλεγμένα</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s επιλεγμένη από %2$s επιλεγμένες</string>
     <string name="expert_mode_search">Αναζήτηση επεξεργασιών</string>
     <string name="expert_mode_proceed">Προχωράτε στην Επεξεργασία</string>
     <string name="expert_mode_disable_all">Απενεργοποιήστε όλα</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">Αποτυχία αποθήκευσης της εφαρμογής με επιδιόρθωση</string>
     <string name="download_apk">Λήψη αρχείου APK</string>
     <string name="plugin_activity_dialog_body">Απαιτείται αλληλεπίδραση χρήστη για να συνεχίσετε με αυτό το πρόσθετο.</string>
-    <string name="patcher_process_exit_message">Η διαδικασία επαναπαρασκευής έξοδος με κωδικό %1$d.</string>
+    <string name="patcher_process_exit_message">Η διαδικασία του Patcher έξοδος με κωδικό %1$s</string>
     <string name="install_app_success">Επιτυχής εγκατάσταση</string>
     <string name="install_app_fail">Αδυναμία εγκατάστασης εφαρμογής: %s</string>
     <string name="install_timeout_message">Δεν ολοκληρώθηκε η εγκατάσταση. Ελέγξτε το διάλογο εγκατάστασης του συστήματος και προσπαθήστε ξανά.</string>
@@ -308,7 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Επιλεγμένες ρυθμίσεις</string>
     <string name="settings_advanced_expert_mode">Επιλεγμένη λειτουργία</string>
-    <string name="settings_advanced_expert_mode_description">Επιλέγει τις προχωρημένες λειτουργίες και επιλογές προσαρμοσής</string>
+    <string name="settings_advanced_expert_mode_description">Ενεργοποιήστε τις επιλογές του Morphe και τις επιπλέον ρυθμίσεις για προσαρμογή και προσαρμοσμένες επιλογές</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Ενεργοποιήστε τη λειτουργία Ειδικού;</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Η λειτουργία Ειδικού δίνει περισσότερο έλεγχο για την εφαρμογή των αναθεωρήσεων, αλλά η λάθος ρύθμιση των ρυθμίσεων στη λειτουργία Ειδικού μπορεί να προκαλέσει μια μη λειτουργική εφαρμογή</string>
     <string name="settings_advanced_strip_unused_libs">Εκκαθάρισε μη χρησιμοποιούμενα ιδιότητες του συστήματος</string>
     <string name="settings_advanced_strip_unused_libs_description">Διαγραφή ιδιότητες για μη υποστηριζόμενους επεξεργαστικούς αρχιτεκτον</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Ενεργοποίηση επεξεργασίας σε ξεχασμένο διαδικασία</string>
     <string name="settings_system_memory_limit_subtitle">Διαθέσιμη μνήμη για επεξεργασία</string>
     <string name="settings_system_memory_limit_warning">Μικρή ορίση μνήμης μπορεί να προκαλέσει αποτυχία κατά την επαναπροσθήση μεγαλύτερων εφαρμογών</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB ορίου</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB όριο</string>
     <string name="settings_system_process_runtime_disabled_description">Κλικ για διαμορφισμό</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Εισαγωγή &amp; Εξαγωγή</string>
@@ -470,7 +472,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">Δebug</string>
     <string name="settings_system_export_debug_logs">Εξαγωγή αρχείων καταγραφής εντοπισμού σφαλμάτων</string>
     <string name="settings_system_export_debug_logs_description">Εξαγωγή αρχείων καταγραφής για ανάλυση σφαλμάτων</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Αποτυχία ανάγνωσης αρχείων καταγραφής (αποκλεισμός %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Αποτυχία ανάγνωσης αρχείων καταγραφής (κωδικός έξοδος %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Αποτυχία εξαγωγής αρχείων καταγραφής</string>
     <string name="settings_system_export_debug_logs_export_success">Αρχεία καταγραφής εξαγωγή</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">Δεν υπάρχουν αποθηκευμένες επιλογές τροποποιήσεων</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s σε %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s σε %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Πηγή #%d</string>
+    <string name="settings_system_patch_selection_source_format">Πηγή #%s</string>
     <string name="settings_system_patch_selection_will_delete">Αυτό θα διαγράψει:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Αυτό θα διαγράψει οριστικά όλες τις αποθηκευμένες επιλογές τροποποιήσεων για όλα τα πακέτα και τις πηγές</string>
     <string name="settings_system_patch_selection_reset_package_warning">Αυτό θα διαγράψει οριστικά όλες τις αποθηκευμένες επιλογές τροποποιήσεων για %s σε όλες τις πηγές</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Αυτό θα διαγράψει οριστικά τις αποθηκευμένες επιλογές τροποποιήσεων για %1$s στη πηγή #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Αυτή η ενέργεια θα διαγράψει οριστικά τις επιλεγμένες επιλογές για %1$s στην πηγή #%2$s</string>
     <string name="settings_system_export_source_data_fail">Αποτυχία εξαγωγής δεδομένων πηγής</string>
     <string name="settings_system_export_source_data_success">Δεδομένα πηγής εξάχθηκαν με επιτυχία</string>
     <string name="settings_system_import_source_data_fail">Αποτυχία εισαγωγής δεδομένων πηγής</string>
     <string name="settings_system_import_source_data_success">Δεδομένα πηγής εισήχθησαν με επιτυχία</string>
     <string name="settings_system_patch_details_title">Λεπτομέρειες τροποποιήσεων</string>
-    <string name="settings_system_selected_patches_title">Επιλεγμένες τροποποιήσεις (%d)</string>
-    <string name="settings_system_patch_options_title">Επιλογές τροποποιήσεων (%d)</string>
+    <string name="settings_system_selected_patches_title">Επιλεγμένες τροποποιήσεις (%s)</string>
+    <string name="settings_system_patch_options_title">Επιλογές τροποποιήσεων (%s)</string>
     <string name="settings_system_no_patches_or_options">Δεν υπάρχουν αποθηκευμένες τροποποιήσεις ή επιλογές</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Σχετικά με</string>

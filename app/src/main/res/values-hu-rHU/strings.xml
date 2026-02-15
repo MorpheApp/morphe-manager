@@ -100,7 +100,7 @@ Kompatibilis verziók:"</string>
     <string name="home_no_patches_for_app">Nincsenek elérhető módosítások ehhez az alkalmazáshoz</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Szakértői mód</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d/%2$d kiválasztva</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s/%2$s módosítás kiválasztva</string>
     <string name="expert_mode_search">Patchek keresése</string>
     <string name="expert_mode_proceed">Folytatás a módosításhoz</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
@@ -249,7 +249,7 @@ Biztosan folytatja?"</string>
     <string name="patched_app_save_failed_toast">A módosított alkalmazás mentése sikertelen</string>
     <string name="download_apk">APK fájl letöltése</string>
     <string name="plugin_activity_dialog_body">A bővítmény használatához felhasználói beavatkozásra van szükség</string>
-    <string name="patcher_process_exit_message">A módosítási folyamat %1$d kóddal kilépett</string>
+    <string name="patcher_process_exit_message">A módosítási folyamat %1$s kóddal kilépett</string>
     <string name="install_app_success">Sikeresen telepítve</string>
     <string name="install_app_fail">Nem sikerült telepíteni az alkalmazást: %s</string>
     <string name="install_timeout_message">A telepítés nem fejeződött be. Ellenőrizze a rendszertelepítő párbeszédpaneljét, majd próbálkozzon újra</string>
@@ -308,7 +308,9 @@ Biztosan folytatja?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
     <string name="settings_advanced_expert_mode">Szakértői mód</string>
-    <string name="settings_advanced_expert_mode_description">Engedélyezi a haladó funkciókat és a módosítási lehetőségeket</string>
+    <string name="settings_advanced_expert_mode_description">Engedélyezi a komplex Morphe pátcszerelés beállításait és a testreszabási lehetőségeket</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Átváltás a szakértői módra?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">A szakértői mód több kontrollt ad a pátcszerelés módosítására, de helytelen beállítások a szakértői módban nem funkcionáló alkalmazást eredményezhetnek</string>
     <string name="settings_advanced_strip_unused_libs">Távolítsa el a nem használt natív könyvtárakat</string>
     <string name="settings_advanced_strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a módosított alkalmazásokból</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_process_runtime_enable">Folyamatfutási környezet engedélyezése</string>
     <string name="settings_system_memory_limit_subtitle">A módosításhoz rendelkezésre álló memória</string>
     <string name="settings_system_memory_limit_warning">Alacsony memóriakorlát esetén a nagyobb alkalmazások módosításakor hiba léphet fel</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB korlát</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB korlát</string>
     <string name="settings_system_process_runtime_disabled_description">Kattintson a konfigurálásához</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importálás és exportálás</string>
@@ -470,7 +472,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_debug">Hibakeresés</string>
     <string name="settings_system_export_debug_logs">Hibakeresési naplók exportálása</string>
     <string name="settings_system_export_debug_logs_description">Naplók exportálása a hibajavításhoz</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Nem sikerült a naplók olvasása (kilépési kód: %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Nem sikerült a naplók olvasása (kilépési kód: %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nem sikerült exportálni a naplókat</string>
     <string name="settings_system_export_debug_logs_export_success">Naplók exportálva</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_patch_selection_no_saved">Nincsen mentett módosításkiválasztás</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s – %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s – %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Forrás #%d</string>
+    <string name="settings_system_patch_selection_source_format">Forrás #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ez törölni fogja:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ez véglegesen törli az összes mentett módosítás kiválasztását minden csomágnak és forrásnak</string>
     <string name="settings_system_patch_selection_reset_package_warning">Ez véglegesen törli a %s módosítások kiválasztását minden forrásban</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ez véglegesen törli a %1$s módosítások kiválasztását a #%2$d forrásban</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ez véglegesen törli a mentett patch kiválasztásokat %1$s forrásból #%2$s</string>
     <string name="settings_system_export_source_data_fail">Nem sikerült a forrás adatok exportálása</string>
     <string name="settings_system_export_source_data_success">Forrás adatok sikeresen exportálva</string>
     <string name="settings_system_import_source_data_fail">Nem sikerült a forrás adatok importálása</string>
     <string name="settings_system_import_source_data_success">Forrás adatok sikeresen importálva</string>
     <string name="settings_system_patch_details_title">Módosítás részletek</string>
-    <string name="settings_system_selected_patches_title">Kiválasztott módosítások (%d)</string>
-    <string name="settings_system_patch_options_title">Módosítás beállításai (%d)</string>
+    <string name="settings_system_selected_patches_title">Kiválasztott patch-ek (%s)</string>
+    <string name="settings_system_patch_options_title">Patch beállításai (%s)</string>
     <string name="settings_system_no_patches_or_options">Nincsenek mentett módosítások vagy beállítások</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Névjegy</string>

@@ -30,16 +30,6 @@
         <item quantity="few">%d aplikacija</item>
         <item quantity="other">%d aplikacija</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">%d izvor onemogućen </item>
-        <item quantity="few">%d izvora onemogućeno</item>
-        <item quantity="other">%d izvora onemogućeno </item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">%d izvor omogućen </item>
-        <item quantity="few">Omogućen %d izvor</item>
-        <item quantity="other">%d izvora omogućeno </item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Uklonjen je %1$d zastario patch iz spremljenog odabira</item>
         <item quantity="few">Uklonjeno %1$d zastarjelih patcheva iz spremljenog odabira</item>

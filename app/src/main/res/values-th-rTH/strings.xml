@@ -101,7 +101,7 @@
     <string name="home_no_patches_for_app">ไม่มีแพตซ์ที่รองรับกับแอปพลิเคชันนี้</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">โหมดผู้เชี่ยวชาญ</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d จาก %2$s ที่ถูกเลือกแล้ว</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s จาก %2$s ที่ถูกเลือกแล้ว</string>
     <string name="expert_mode_search">ค้นหาแพตซ์</string>
     <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
@@ -250,7 +250,7 @@
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แก้ไขได้</string>
     <string name="download_apk">ดาวน์โหลดไฟล์ APK</string>
     <string name="plugin_activity_dialog_body">ต้องมีการติดต่อผู้ใช้เพื่อดำเนินการต่อไปนี้</string>
-    <string name="patcher_process_exit_message">กระบวนการปรับแก้สิ้นสุดลงด้วยรหัส %1$d</string>
+    <string name="patcher_process_exit_message">กระบวนการแพทช์ออกไปแล้วด้วยรหัส %1$s</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
     <string name="install_timeout_message">การติดตั้งไม่สำเร็จ. ตรวจสอบการติดตั้งของตัวติดตั้งระบบและลองอีกครั้ง</string>
@@ -309,7 +309,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าแบบผู้เชี่ยวช์</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
-    <string name="settings_advanced_expert_mode_description">เปิดใช้งานคุณสมบัติขั้นสูงกับตัวเลือกการปรับแต่ง</string>
+    <string name="settings_advanced_expert_mode_description">เปิดใช้งานการปรับแต่งตัวเลือกและการตั้งค่าความละเอียดสูงสำหรับการปรับปรุง Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมการนำเข้าแปลงมากขึ้น แต่การตั้งค่าค่าไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปพลิเคชันไม่สามารถใช้งานได้</string>
     <string name="settings_advanced_strip_unused_libs">ลบเนทิฟไลบรารีที่ไม่ได้ใช้</string>
     <string name="settings_advanced_strip_unused_libs_description">ลบเนทิฟไลบรารีที่ไม่รองรับสถาปัตยกรรมของ CPU บนอุปกรณ์ของคุณ จากแอปที่ถูกแพตซ์</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -439,7 +441,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">เปิดใช้การทำงานของโปรเซส</string>
     <string name="settings_system_memory_limit_subtitle">ขนาดความจำที่ใช้สำหรับการแพตซ์</string>
     <string name="settings_system_memory_limit_warning">ขนาดความจำต่ำหรืออาจทำให้การนำพัท์ล้ม</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB ขนาดความจำ</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB จำกัด</string>
     <string name="settings_system_process_runtime_disabled_description">คลิกเพื่อตั้งค่า</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">นำเข้า &amp; ส่งออก</string>
@@ -472,7 +474,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">ส่งออกไฟล์การพัฒยายสำหรับการแก้ไข</string>
     <string name="settings_system_export_debug_logs">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>
     <string name="settings_system_export_debug_logs_description">ส่งออกไฟล์การพัฒยายเสร็จ</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">การจัดการเก็บเก็บ</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">ล้มเหลวในการอ่านบันทึก (รหัสออก %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ส่งออกบันทึกไม่สำเร็จ</string>
     <string name="settings_system_export_debug_logs_export_success">ขนาดทั้งหมด: %s</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -502,18 +504,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">ไม่มีการบันทึกการเลือกแพตช์</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s ถึง %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ถึง %2$s</string>
-    <string name="settings_system_patch_selection_source_format">แหล่งที่มา #%d</string>
+    <string name="settings_system_patch_selection_source_format">แหล่งที่มา #%s</string>
     <string name="settings_system_patch_selection_will_delete">สิ่งนี้จะลบ:</string>
     <string name="settings_system_patch_selection_reset_all_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับทุกแพ็กเกจและแหล่งที่มา</string>
     <string name="settings_system_patch_selection_reset_package_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับ %s ทั่วไปในแหล่งที่มา</string>
-    <string name="settings_system_patch_selection_reset_source_warning">สิ่งนี้จะลบการบันทึกการเลือกแพตช์สำหรับ %1$s ในแหล่งที่มา #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">การกระทำนี้จะลบการบันทึกการเลือกแพตช์ที่ถูกบันทึกไว้สำหรับ %1$s ในแหล่งที่มา #%2$s อย่างถาวร</string>
     <string name="settings_system_export_source_data_fail">ล้มเหลวในการส่งออกข้อมูลแหล่งที่มา</string>
     <string name="settings_system_export_source_data_success">ส่งออกข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
     <string name="settings_system_import_source_data_fail">ล้มเหลวในการนำเข้าข้อมูลแหล่งที่มา</string>
     <string name="settings_system_import_source_data_success">นำเข้าข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
     <string name="settings_system_patch_details_title">รายละเอียดแพตช์</string>
-    <string name="settings_system_selected_patches_title">แพตช์ที่เลือก (%d)</string>
-    <string name="settings_system_patch_options_title">ตัวเลือกแพตช์ (%d)</string>
+    <string name="settings_system_selected_patches_title">แพตซ์ที่เลือก (%s)</string>
+    <string name="settings_system_patch_options_title">ตัวเลือกแพตช์ (%s)</string>
     <string name="settings_system_no_patches_or_options">ไม่มีการบันทึกแพตช์หรือตัวเลือก</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>

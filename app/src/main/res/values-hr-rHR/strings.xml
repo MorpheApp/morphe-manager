@@ -100,7 +100,7 @@ Kompatibilne verzije:"</string>
     <string name="home_no_patches_for_app">Nema dostupnih patcheva za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Napredni način</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d od %2$d odabrano</string>
+    <string name="expert_mode_subtitle_extended_format">Odabrano je %1$s od %2$s patcheva</string>
     <string name="expert_mode_search">Pretraživanje patcheva</string>
     <string name="expert_mode_proceed">Nastavite na patchanje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
@@ -249,7 +249,7 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="patched_app_save_failed_toast">Spremanje patchane aplikacije nije uspjelo</string>
     <string name="download_apk">Preuzmite aplikaciju</string>
     <string name="plugin_activity_dialog_body">Za nastavak rada s ovim dodatkom potrebna je interakcija korisnika</string>
-    <string name="patcher_process_exit_message">Proces patchera završio se kodom %1$d</string>
+    <string name="patcher_process_exit_message">Proces patchera završio se kodom %1$s</string>
     <string name="install_app_success">Uspješno instalirano</string>
     <string name="install_app_fail">Nije moguće instalirati aplikaciju: %s</string>
     <string name="install_timeout_message">Instalacija nije završena. Provjerite dijalog instalacijskog programa sustava i pokušajte ponovno.</string>
@@ -308,7 +308,9 @@ Jeste li sigurni da želite nastaviti?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Stručne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
-    <string name="settings_advanced_expert_mode_description">Omogući napredne značajke i opcije za prilagodbu</string>
+    <string name="settings_advanced_expert_mode_description">Omogući napredne postavke i opcije za prilagodbu za složeno Morphe ispravljanje i prilagodbe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Napredni način?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Napredni način omogućuje više kontrole nad primjenom ispravljava, ali pogrešno konfiguriranje postavki u naprednom načinu može rezultirati nefunkcionalnom aplikacijom</string>
     <string name="settings_advanced_strip_unused_libs">Uklonite nekorištene izvorne biblioteke</string>
     <string name="settings_advanced_strip_unused_libs_description">Izbrišite izvorne biblioteke za nepodržane arhitekture procesora iz patchanih aplikacija</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_process_runtime_enable">Omogući izvođenje procesa</string>
     <string name="settings_system_memory_limit_subtitle">Memorija dostupna za patchanje </string>
     <string name="settings_system_memory_limit_warning">Nisko ograničenje memorije može uzrokovati greške prilikom patchanja većih aplikacija</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB ograničenje</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB ograničenje</string>
     <string name="settings_system_process_runtime_disabled_description">Dodirnite za konfiguraciju</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Izvoz &amp; uvoz</string>
@@ -470,7 +472,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_debug">Otklanjanje grešaka</string>
     <string name="settings_system_export_debug_logs">Izvoz zapisnika o otklanjanju pogrešaka</string>
     <string name="settings_system_export_debug_logs_description">Izvoz sistemskih zapisnika za rješavanje problema</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Nije uspjelo čitanje zapisnika (izlazni kod %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Nije uspjelo čitanje zapisnika (izlazni kod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Izvoz zapisnika nije uspio</string>
     <string name="settings_system_export_debug_logs_export_success">Izvezeni zapisnici</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_patch_selection_no_saved">Nema spremljenih odabira patcha</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s preko %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s u %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Izvor #%d</string>
+    <string name="settings_system_patch_selection_source_format">Izvor #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ovo će izbrisati:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za sve pakete i izvor</string>
     <string name="settings_system_patch_selection_reset_package_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za %s preko svih izvora</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ovo će trajno izbrisati spremljene odabire patcha za %1$s u izvoru #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ovo će trajno obrisati spremljene odabire patcha za %1$s u izvoru #%2$s</string>
     <string name="settings_system_export_source_data_fail">Neuspjeh pri izvozu podataka izvora</string>
     <string name="settings_system_export_source_data_success">Podaci izvora uspješno izvozeni</string>
     <string name="settings_system_import_source_data_fail">Neuspjeh pri uvozu podataka izvora</string>
     <string name="settings_system_import_source_data_success">Podaci izvora uspješno uvezeni</string>
     <string name="settings_system_patch_details_title">Detalji patcha</string>
-    <string name="settings_system_selected_patches_title">Odabrani patchovi (%d)</string>
-    <string name="settings_system_patch_options_title">Opcije patchova (%d)</string>
+    <string name="settings_system_selected_patches_title">Odabrani patchovi (%s)</string>
+    <string name="settings_system_patch_options_title">Opcije patchanja (%s)</string>
     <string name="settings_system_no_patches_or_options">Nema spremljenih patchova ili opcija</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaciji</string>

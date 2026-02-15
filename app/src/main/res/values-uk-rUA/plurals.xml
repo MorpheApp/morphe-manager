@@ -36,18 +36,6 @@
         <item quantity="many">%d APK файлів</item>
         <item quantity="other">%d APK файлів</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Вимкнено %d джерело</item>
-        <item quantity="few">Вимкнено %d джерела</item>
-        <item quantity="many">Вимкнено %d джерел</item>
-        <item quantity="other">Вимкнено %d джерел</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Увімкнено %d джерело</item>
-        <item quantity="few">Увімкнено %d джерела</item>
-        <item quantity="many">Увімкнено %d джерел</item>
-        <item quantity="other">Увімкнено %d джерел</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Видалено %1$d застарілий патч зі збереженого вибору</item>
         <item quantity="few">Видалено %1$d застарілих патчів зі збереженого вибору</item>

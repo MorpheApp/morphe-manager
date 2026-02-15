@@ -100,7 +100,7 @@ Kompatible versioner:"</string>
     <string name="home_no_patches_for_app">Ingen patches tilgængelige for dette app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d af %2$s valgt</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s af %2$s valgt</string>
     <string name="expert_mode_search">Søg patches</string>
     <string name="expert_mode_proceed">Fortsæt til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
@@ -249,7 +249,7 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patch-app</string>
     <string name="download_apk">Download APK-fil</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
-    <string name="patcher_process_exit_message">Patcher-processen afsluttede med koden %1$d</string>
+    <string name="patcher_process_exit_message">Patcher-processen afgik med koden %1$s</string>
     <string name="install_app_success">Installeret succesfuldt</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
     <string name="install_timeout_message">Installationen blev ikke fuldført. Tjek systeminstalleringsdialog og prøv igen</string>
@@ -308,7 +308,9 @@ Er du sikker på, at du vil fortsætte?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Avansert innstillinger</string>
     <string name="settings_advanced_expert_mode">Avansert modus</string>
-    <string name="settings_advanced_expert_mode_description">Aktiver advanced funksjoner og tilpassingsmuligheter</string>
+    <string name="settings_advanced_expert_mode_description">Aktiver complex Morphe patch-indstillinger og tilpasningsmuligheder</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Aktiver Expert mode?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert mode giver mere kontrol over hvordan patches bliver anvendt, men en forkert konfiguration af indstillinger i expert mode kan resultere i et ikke-funktionelt program</string>
     <string name="settings_advanced_strip_unused_libs">Fjern ikke brukte native biblioteker</string>
     <string name="settings_advanced_strip_unused_libs_description">Slett ikke brukte native biblioteker for uaktuelle CPU-arkitekturer fra patcherte apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -437,7 +439,7 @@ Bildeformateringen må være som følger:
     <string name="settings_system_process_runtime_enable">Aktiver prosesskjøring</string>
     <string name="settings_system_memory_limit_subtitle">Minne tilgjengelig for patching</string>
     <string name="settings_system_memory_limit_warning">%d MB grense</string>
-    <string name="settings_system_process_runtime_enabled_description">Klikk for å konfigurere</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB grænse</string>
     <string name="settings_system_process_runtime_disabled_description">Importer keystore</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importér &amp; eksportér</string>
@@ -470,7 +472,7 @@ Bildeformateringen må være som følger:
     <string name="settings_system_debug">Behandle lagrede patchede app-filer</string>
     <string name="settings_system_export_debug_logs">Eksportér fejlsøgningslogfiler</string>
     <string name="settings_system_export_debug_logs_description">Slett patchede APK? </string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Er du sikker på at du vil slette den lagrede patchede APK for %s? </string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Kunne ikke læse log (udgangskode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logfiler</string>
     <string name="settings_system_export_debug_logs_export_success">Slett original APK? </string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -499,18 +501,18 @@ Bildeformateringen må være som følger:
     <string name="settings_system_patch_selection_no_saved">Ingen gemte patch-valg</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s over %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Kilde #%d</string>
+    <string name="settings_system_patch_selection_source_format">Kilde #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dette vil slette:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle gemte patch-valg for alle pakker og kilder</string>
     <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle gemte patch-valg for %s over alle kilder</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette patch-valg for %1$s i kilde #%2$d</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette gemte patch-valg for %1$s i kilde #%2$s</string>
     <string name="settings_system_export_source_data_fail">Kunne ikke eksportere kilde-data</string>
     <string name="settings_system_export_source_data_success">Kilde-data eksporteret med succes</string>
     <string name="settings_system_import_source_data_fail">Kunne ikke importere kilde-data</string>
     <string name="settings_system_import_source_data_success">Kilde-data importeret med succes</string>
     <string name="settings_system_patch_details_title">Patch-oplysninger</string>
-    <string name="settings_system_selected_patches_title">Valgte patches (%d)</string>
-    <string name="settings_system_patch_options_title">Patch-valg (%d)</string>
+    <string name="settings_system_selected_patches_title">Valgte patches (%s)</string>
+    <string name="settings_system_patch_options_title">Patch-valg (%s)</string>
     <string name="settings_system_no_patches_or_options">Ingen patches eller valg gemt</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>

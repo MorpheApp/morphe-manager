@@ -18,12 +18,6 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">%d 개의 APK 파일</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">%d 개의 소스가 비활성화됨</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">%d 개의 소스가 활성화됨</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">저장된 선택 목록에서 %1$d 개의 오래된 패치를 제거하였습니다</item>
     </plurals>

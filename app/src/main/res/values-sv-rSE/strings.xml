@@ -245,7 +245,7 @@ Kompatibla versioner:"</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den korrigerade appen</string>
     <string name="download_apk">Ladda ned APK-fil</string>
     <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med det här plugin-programmet</string>
-    <string name="patcher_process_exit_message">Korrigeringsprocessen avslutades med koden %1$d</string>
+    <string name="patcher_process_exit_message">Korrigeringsprocessen avslutades med koden %1$s</string>
     <string name="install_app_success">Installationen lyckades</string>
     <string name="install_app_fail">Det gick inte att installera appen: %s</string>
     <string name="install_timeout_message">Installationen slutfördes inte. Kontrollera systemets installationsdialogruta och försök igen</string>
@@ -304,7 +304,6 @@ Kompatibla versioner:"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
-    <string name="settings_advanced_expert_mode_description">Aktivera avancerade funktioner och anpassningsalternativ</string>
     <string name="settings_advanced_strip_unused_libs">Ta bort oanvända inbyggda bibliotek</string>
     <string name="settings_advanced_strip_unused_libs_description">Ta bort inbyggda bibliotek för CPU-arkitekturer som inte stöds från korrigerade appar.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -432,7 +431,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_process_runtime_enable">Aktivera processexekvering</string>
     <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för appkorrigeringen</string>
     <string name="settings_system_memory_limit_warning">En låg minnesgräns kan leda till fel när du korrigerar större appar</string>
-    <string name="settings_system_process_runtime_enabled_description">Gräns på %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Gräns på %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Tryck för att konfigurera</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importera och exportera</string>
@@ -465,7 +464,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_debug">Felsökning</string>
     <string name="settings_system_export_debug_logs">Exportera felsökningsloggar</string>
     <string name="settings_system_export_debug_logs_description">Exportera systemloggar för felsökning</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Det gick inte att exportera loggar</string>
     <string name="settings_system_export_debug_logs_export_success">Loggar exporterade</string>
     <!-- Settings - System Tab - Storage Management Section -->

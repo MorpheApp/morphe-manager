@@ -24,14 +24,6 @@
         <item quantity="one">%d fichier APK</item>
         <item quantity="other">%d fichiers APK</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">%d source désactivée</item>
-        <item quantity="other">%d sources désactivées</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">%d source activée</item>
-        <item quantity="other">%d sources activées</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">​%1$d patch obsolète a été supprimé de la sélection enregistrée</item>
         <item quantity="other">​%1$d patchs obsolètes ont été supprimés de la sélection enregistrée</item>

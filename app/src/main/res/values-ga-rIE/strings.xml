@@ -98,7 +98,7 @@ Leaganacha comhoiriúnacha:"</string>
     <string name="home_no_patches_for_app">Níl aon phaistí ar fáil don aip seo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mód saineolaithe</string>
-    <string name="expert_mode_subtitle_extended_format">%1$d de %2$d roghnaithe</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s de %2$s paiste roghnaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
     <string name="expert_mode_proceed">Lean ar aghaidh go dtí an Paisteáil</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
@@ -246,7 +246,7 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="patched_app_save_failed_toast">Theip ar aip chomhfhiosach a shábháil</string>
     <string name="download_apk">Íoslódáil comhad APK</string>
     <string name="plugin_activity_dialog_body">Tá idirghníomhaíocht úsáideora ag teastáil chun dul ar aghaidh leis an mbreiseán seo</string>
-    <string name="patcher_process_exit_message">Cuireadh deireadh leis an bpróiseas paisteála le cód %1$d</string>
+    <string name="patcher_process_exit_message">Cuireadh deireadh leis an bpróiseas paisteála le cód %1$s</string>
     <string name="install_app_success">Suiteáilte go rathúil</string>
     <string name="install_app_fail">Theip ar aip a shuiteáil: %s</string>
     <string name="install_timeout_message">Níor chríochnaigh an suiteáil. Seiceáil fuinneog d\'fheiste agus bain triail eile as</string>
@@ -305,7 +305,9 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Socruithe saineolaithe</string>
     <string name="settings_advanced_expert_mode">Mód saineolaithe</string>
-    <string name="settings_advanced_expert_mode_description">Cumasaigh gnéithe ardleibhéil agus roghanna saincheaptha</string>
+    <string name="settings_advanced_expert_mode_description">Cumasaigh seirbhísí comhlachtaí agus roghanna saincheaptha</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Cumasaigh mód saineolaithe?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Mód saineolaithe tugann breis córais ar seirbhísí comhlachtaí, ach téagasc na seomraí i gcóras saineolaithe seo mar gheall ar seirbhísí comhlachtaí nach mbeidh in oibriú</string>
     <string name="settings_advanced_strip_unused_libs">Bain leabharlanna dúchasacha neamhúsáidte</string>
     <string name="settings_advanced_strip_unused_libs_description">Scrios leabharlanna dúchasacha le haghaidh ailtireachtaí LAP neamhthacaithe ó aipeanna paisteáilte</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -432,7 +434,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_process_runtime_enable">Cumasaigh am rith an phróisis</string>
     <string name="settings_system_memory_limit_subtitle">Cuimhne ar fáil le haghaidh paisteála</string>
     <string name="settings_system_memory_limit_warning">Delete patched APK? Are you sure you want to delete the saved patched APK for %s? You won\'t be able to repatch without providing a new APK.</string>
-    <string name="settings_system_process_runtime_enabled_description">Patched APK deleted successfully</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB teorainn</string>
     <string name="settings_system_process_runtime_disabled_description">Original APKs</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Iompórtáil &amp; easpórtáil</string>
@@ -465,7 +467,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_debug">Manager settings imported</string>
     <string name="settings_system_export_debug_logs">Easpórtáil logaí dífhabhtaithe</string>
     <string name="settings_system_export_debug_logs_description">Save manager settings to a JSON file</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Failed to export manager settings: %s</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Níor tháinig le fios an logaí (cód scaoilte %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Theip ar logaí a easpórtáil</string>
     <string name="settings_system_export_debug_logs_export_success">Debug</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -494,18 +496,18 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_patch_selection_no_saved">Gan aon roghanna paiste sábháilte</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s go %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s go %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Foinse #%d</string>
+    <string name="settings_system_patch_selection_source_format">Foinse #%s</string>
     <string name="settings_system_patch_selection_will_delete">Sé sin atá ag teip:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Tá sé seo ag teip: tá an rogha seo seo athshocrútha ag an gclár seo seo</string>
     <string name="settings_system_patch_selection_reset_package_warning">Tá sé seo ag teip: tá an rogha seo seo athshocrútha ag an gclár seo seo</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Tá sé seo ag teip: tá an rogha seo seo athshocrútha ag an gclár seo seo</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Tugann sé le déanamh an deachtú seo ar roghanna paiste seoite atá seachnaichte do %1$s in Foinse #%2$s</string>
     <string name="settings_system_export_source_data_fail">Theip ar aip paisteáilte a easpórtáil</string>
     <string name="settings_system_export_source_data_success">Rug an t-aip paisteáilte a easpórtáil</string>
     <string name="settings_system_import_source_data_fail">Theip ar aip paisteáilte a iompórtáil</string>
     <string name="settings_system_import_source_data_success">Rug an t-aip paisteáilte a iompórtáil</string>
     <string name="settings_system_patch_details_title">Sonraí paiste</string>
-    <string name="settings_system_selected_patches_title">Roghnaigh paiste</string>
-    <string name="settings_system_patch_options_title">Roghanna paiste</string>
+    <string name="settings_system_selected_patches_title">Roghnaíochtaí paiste (%s)</string>
+    <string name="settings_system_patch_options_title">Roghanna paiste (%s)</string>
     <string name="settings_system_no_patches_or_options">Níor tástáthaigh paiste ná roghanna</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Maidir</string>

@@ -24,14 +24,6 @@
         <item quantity="one">%d APK faylı</item>
         <item quantity="other">%d APK faylı</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">%d mənbə qapalıdı</item>
-        <item quantity="other">%d mənbə qapalıdı</item>
-    </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">%d mənbə işləkdi</item>
-        <item quantity="other">%d mənbə işləkdi</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Saxlanılan seçimdən %1$d köhnəlmiş yamaq silindi</item>
         <item quantity="other">Saxlanılan seçimdən %1$d köhnəlmiş yamaq silindi</item>
