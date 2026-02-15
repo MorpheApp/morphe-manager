@@ -50,6 +50,7 @@ import java.net.SocketTimeoutException
 import java.net.URL
 import java.net.URLEncoder.encode
 import java.util.zip.ZipInputStream
+import javax.net.ssl.SSLException
 
 /**
  * Bundle update status for snackbar display
@@ -952,6 +953,7 @@ class HomeViewModel(
     fun resolveDownloadRedirect() {
         fun resolveUrlRedirect(url: String): String {
             return try {
+                // TODO: Use HttpModule instead of simple URL connections.
                 val originalUrl = URL(url)
                 val connection = originalUrl.openConnection() as HttpURLConnection
                 connection.instanceFollowRedirects = false
@@ -974,18 +976,24 @@ class HomeViewModel(
                                 val prefix = "${originalUrl.protocol}://${originalUrl.host}"
                                 if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
                             }
-                        Log.d(tag, "Result: $resolved")
+                        Log.i(tag, "Result: $resolved")
                         resolved
                     }
                 } else {
-                    Log.d(tag, "Unexpected response code: $responseCode")
+                    Log.w(tag, "Unexpected response code: $responseCode")
                     getApiOfflineWebSearchUrl()
                 }
             } catch (ex: SocketTimeoutException) {
-                Log.d(tag, "Timeout while resolving search redirect: $ex")
+                Log.w(tag, "Timeout while resolving search redirect: $ex")
+                url
+            } catch (ex: SSLException) {
+                // Simple https connections to can fail with TLS SSL errors for users on weirdo
+                // home routers. If SSL exception occurs then use the redirect url as-is and the
+                // users external browser will figure it out correctly.
+                Log.w(tag, "SSL exception while resolving search redirect: $ex")
                 url
             } catch (ex: Exception) {
-                Log.d(tag, "Exception while resolving search redirect: $ex")
+                Log.w(tag, "Exception while resolving search redirect: $ex")
                 getApiOfflineWebSearchUrl()
             }
         }
@@ -1002,7 +1010,7 @@ class HomeViewModel(
             var resolved = resolveUrlRedirect(searchUrl)
 
             if (resolved.startsWith(MORPHE_API_URL)) {
-                Log.d(tag, "Redirect still on API host, resolving again")
+                Log.i(tag, "Redirect still on API host, resolving again")
                 resolved = resolveUrlRedirect(resolved)
             }
 
@@ -1037,7 +1045,7 @@ class HomeViewModel(
             showDownloadInstructionsDialog = false
             showFilePickerPromptDialog = true
         } else {
-            Log.d(tag, "Failed to open URL")
+            Log.w(tag, "Failed to open URL")
             app.toast(app.getString(R.string.sources_management_failed_to_open_url))
             showDownloadInstructionsDialog = false
             cleanupPendingData()
