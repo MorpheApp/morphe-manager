@@ -104,8 +104,11 @@ class MorpheAPI(
 
     private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
         val normalizedRoute = route.trimStart('/')
-        return client.request {
-            url("$MORPHE_API_URL/v2/$normalizedRoute")
+        val urlString = "$MORPHE_API_URL/v2/$normalizedRoute"
+        return client.runWithRetry(route) {
+            client.request {
+                url(urlString)
+            }
         }
     }
 

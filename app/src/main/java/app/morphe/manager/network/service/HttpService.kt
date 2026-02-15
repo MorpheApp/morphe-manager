@@ -43,7 +43,7 @@ class HttpService(
                 try {
                     val response = http.request {
                         builder()
-                        Log.d(tag, "HttpService.request: Connecting to URL: ${url.buildString()}")
+                        Log.i(tag, "HttpService.request: Connecting to URL: ${url.buildString()}")
                     }
 
                     if (response.status == HttpStatusCode.TooManyRequests) {
@@ -94,7 +94,7 @@ class HttpService(
             runWith429Retry("streamTo") {
                 http.prepareGet {
                     builder()
-                    Log.d(tag, "HttpService.streamTo: Connecting to URL: ${url.buildString()}")
+                    Log.i(tag, "HttpService.streamTo: Connecting to URL: ${url.buildString()}")
                 }.execute { httpResponse ->
                     when {
                         httpResponse.status == HttpStatusCode.TooManyRequests -> {
@@ -149,7 +149,7 @@ class HttpService(
                         header(HttpHeaders.Range, "bytes=$resumeFrom-")
                     }
                     builder()
-                    Log.d(tag, "HttpService.download: Connecting to URL: ${url.buildString()}")
+                    Log.i(tag, "HttpService.download: Connecting to URL: ${url.buildString()}")
                 }.execute { httpResponse ->
                     when {
                         httpResponse.status == HttpStatusCode.TooManyRequests -> throw TooManyRequestsException(httpResponse.retryAfterMillis())
@@ -235,6 +235,40 @@ class HttpService(
         val headerValue = headers[HttpHeaders.RetryAfter] ?: return null
         return headerValue.toLongOrNull()?.coerceAtLeast(0)?.times(1000)
     }
+
+    @PublishedApi
+    internal suspend fun <T> runWithRetry(
+        operationName: String,
+        block: suspend () -> T
+    ): T {
+        var attempt = 0
+        val delayMs = INITIAL_RETRY_DELAY_MS
+        var currentDelay = delayMs
+        while (true) {
+            try {
+                attempt += 1
+                return block()
+            } catch (t: Exception) {
+                if (attempt >= MAX_RETRY_ATTEMPTS) {
+                    Log.e(tag, "$operationName failed on attempt $attempt/$MAX_RETRY_ATTEMPTS. " +
+                            "No more retries. Last error: ${t::class.simpleName}: ${t.message}")
+                    throw t
+                }
+
+                Log.w(
+                    tag,
+                    "$operationName failed on attempt ${t::class.simpleName}: ${t.message}"
+                )
+
+                // Delay before next retry (exponential backoff)
+                if (currentDelay > 0) {
+                    delay(currentDelay)
+                    currentDelay = (currentDelay * 2).coerceAtMost(MAX_RETRY_DELAY_MS)
+                }
+            }
+        }
+    }
+
 
     private data class RangeProbe(val supportsRanges: Boolean, val contentLength: Long?)
 
