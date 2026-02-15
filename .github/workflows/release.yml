@@ -81,7 +81,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase
           ls -l app/
-          mv app/app-release-${VERSION}.json app/app-release.json
+          mv app/app-release-new.json app/app-release.json
           git add app/app-release.json
           git commit -m "chore: update app-release.json"
           git push
