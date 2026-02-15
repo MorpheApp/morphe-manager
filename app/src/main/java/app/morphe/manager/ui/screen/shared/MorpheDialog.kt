@@ -204,6 +204,7 @@ private fun DialogContent(
                         modifier = Modifier
                             .weight(1f, fill = false)
                             .verticalScroll(rememberScrollState())
+                            .imePadding() // Automatically adds padding when keyboard opens
                     ) {
                         content()
                     }

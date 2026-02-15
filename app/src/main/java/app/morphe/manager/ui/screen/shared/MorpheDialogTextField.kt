@@ -165,7 +165,7 @@ fun MorpheDialogDropdownTextField(
     var dropdownExpanded by remember { mutableStateOf(false) }
     val textColor = LocalDialogTextColor.current
 
-    // Find display value for dropdown
+    // Show display name from map only if value exists in map, otherwise show raw value
     val displayValue = dropdownItems.entries.find { it.value == value }?.key ?: value
 
     ExposedDropdownMenuBox(
@@ -174,7 +174,12 @@ fun MorpheDialogDropdownTextField(
     ) {
         OutlinedTextField(
             value = displayValue,
-            onValueChange = onValueChange,
+            onValueChange = { newDisplayValue ->
+                // If user is editing, pass the raw input value
+                val newValue = dropdownItems[newDisplayValue] ?: newDisplayValue
+                onValueChange(newValue)
+            },
+            readOnly = false,
             label = label,
             placeholder = placeholder,
             leadingIcon = leadingIcon,
