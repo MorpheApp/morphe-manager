@@ -347,7 +347,9 @@ Are you sure you want to proceed?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
     <string name="settings_advanced_expert_mode">Expert mode</string>
-    <string name="settings_advanced_expert_mode_description">Enable advanced features and customization options</string>
+    <string name="settings_advanced_expert_mode_description">Enable complex Morphe patching settings and customization options</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Enable Expert mode?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert mode gives more control over how patches are applied, but misconfiguring settings in expert mode can result in a non-functional app</string>
     <string name="settings_advanced_strip_unused_libs">Remove unused native libraries</string>
     <string name="settings_advanced_strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
 
