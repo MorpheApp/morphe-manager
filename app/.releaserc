@@ -19,7 +19,7 @@
     [
       "@MorpheApp/changelog", {
         "releaseJson": {
-          "path": "app-release-${version}.json",
+          "path": "app-release-${nextRelease.version}.json",
           "downloadUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/morphe-manager-${version}.apk",
           "signatureUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/morphe-manager-${version}.apk.asc"
         }
@@ -31,7 +31,7 @@
       {
         "assets": [
           "CHANGELOG.md",
-          "app-release-${version}.json",
+          "app-release-${nextRelease.version}.json",
           "gradle.properties"
         ],
         "message": "chore: Release v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
