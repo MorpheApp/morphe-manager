@@ -1,3 +1,10 @@
+# app [1.7.0-dev.17](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.16...v1.7.0-dev.17) (2026-02-15)
+
+
+### Bug Fixes
+
+* Some patch options fields are not available for input ([5853168](https://github.com/MorpheApp/morphe-manager/commit/585316830a235a3d27781fe191a692c5d28ea6dc))
+
 # app [1.7.0-dev.16](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.15...v1.7.0-dev.16) (2026-02-15)
 
 
