@@ -13,7 +13,7 @@
     <string name="home_update_error">Update mislukt</string>
     <string name="home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
     <string name="home_updating_sources">Bronnen worden geüpdatet…</string>
-    <string name="home_update_progress_format">%1$s van %2$s verwerkt</string>
+    <string name="home_update_progress_format">%1$s verwerkt</string>
     <string name="home_update_success">Bronnen worden geüpdatet</string>
     <string name="home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
     <string name="home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
@@ -260,7 +260,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="saved_app_launch_unavailable">Installeer de app voordat u deze opent</string>
     <string name="package_name">Pakketnaam</string>
     <string name="failed_to_mount">Kon %s niet koppelen</string>
-    <string name="failed_to_unmount">Kon %s niet ontkoppelen</string>
+    <string name="failed_to_unmount">Mislukt om te demonteer: %s</string>
     <!-- Settings -->
     <string name="appearance">Uiterlijk</string>
     <string name="advanced">Geavanceerd</string>

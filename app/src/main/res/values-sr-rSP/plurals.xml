@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d исправка</item>
-        <item quantity="few">%d исправке</item>
-        <item quantity="other">%d исправки</item>
+        <item quantity="one">%s патч</item>
+        <item quantity="few">%s патича</item>
+        <item quantity="other">%s патича</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%d опција</item>
-        <item quantity="few">%d опције</item>
-        <item quantity="other">%d опција</item>
+        <item quantity="one">%s опција патича</item>
+        <item quantity="few">%s опције патича</item>
+        <item quantity="other">%s опција патича</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%d извор</item>
-        <item quantity="few">%d извора</item>
-        <item quantity="other">%d извора</item>
+        <item quantity="one">%s извор</item>
+        <item quantity="few">%s извора</item>
+        <item quantity="other">%s извора</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%d пакет</item>
-        <item quantity="few">%d пакета</item>
-        <item quantity="other">%d пакета</item>
+        <item quantity="one">%s пакет</item>
+        <item quantity="few">%s пакета</item>
+        <item quantity="other">%s пакета</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Изврши %d исправку</item>
-        <item quantity="few">Изврши %d исправке</item>
-        <item quantity="other">Изврши %d исправки</item>
+        <item quantity="one">Изведи %s пакет</item>
+        <item quantity="few">Изведи %s пакета</item>
+        <item quantity="other">Изведи %s пакета</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="one">%d АПК датотека</item>
-        <item quantity="few">%d АПК датотеке</item>
-        <item quantity="other">%d АПК датотека</item>
+        <item quantity="one">%s АПК датотека</item>
+        <item quantity="few">%s АПК датотеке</item>
+        <item quantity="other">%s АПК датотека</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Уклоњено је %1$d застарело исправка са чувања одабраних</item>
-        <item quantity="few">Уклоњено је %1$d застарелих исправке са чувања одабраних</item>
-        <item quantity="other">Уклоњено је %1$d застарелих исправки са чувања одабраних</item>
+        <item quantity="one">Уклао %s стари пакет из селекције сачуваног</item>
+        <item quantity="few">Уклао %s стари пакета из селекције сачуваног</item>
+        <item quantity="other">Уклао %s стари пакета из селекције сачуваног</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%1$d извор је инсталиран</item>
-        <item quantity="few">%1$d извора је инсталирано</item>
-        <item quantity="other">%1$d извора је инсталирано</item>
+        <item quantity="one">%s извор инсталиран</item>
+        <item quantity="few">%s извора инсталирано</item>
+        <item quantity="other">%s извора инсталирано</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d изабрано опција</item>
-        <item quantity="few">%d изабрано опција</item>
-        <item quantity="other">%d изабрано опција</item>
+        <item quantity="one">%s пакет изабран</item>
+        <item quantity="few">%s пакета изабрано</item>
+        <item quantity="other">%s пакета изабрано</item>
     </plurals>
 </resources>

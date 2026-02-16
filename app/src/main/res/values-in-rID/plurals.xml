@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="other">%d tambalan</item>
+        <item quantity="other">%s tambalan</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="other">%d pilihan tambalan</item>
+        <item quantity="other">%s pilihan tambalan</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="other">%d sumber</item>
+        <item quantity="other">%s sumber</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="other">%d paket</item>
+        <item quantity="other">%s paket</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">Menerapkan %d tambalan</item>
+        <item quantity="other">Menerapkan %s tambalan</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="other">%d berkas APK</item>
+        <item quantity="other">%s berkas APK</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="other">Menghapus %1$d tambalan yang sudah usang dari pemilihan yang disimpan</item>
+        <item quantity="other">Menghapus %s tambalan yang sudah usang dari pemilihan yang disimpan</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="other">%1$d sumber terpasang</item>
+        <item quantity="other">%s sumber terpasang</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="other">%d tambalan dipilih</item>
+        <item quantity="other">%s tambalan dipilih</item>
     </plurals>
 </resources>

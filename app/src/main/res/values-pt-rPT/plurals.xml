@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <plurals name="patch_count">
-        <item quantity="one">%d correção</item>
-        <item quantity="other">%d correções</item>
-    </plurals>
-    <plurals name="option_count">
-        <item quantity="one">%d opção de patch</item>
-        <item quantity="other">%d opções de patch</item>
-    </plurals>
-    <plurals name="source_count">
-        <item quantity="one">%d fonte</item>
-        <item quantity="other">%d fontes</item>
-    </plurals>
-    <plurals name="package_count">
-        <item quantity="one">%d pacote</item>
-        <item quantity="other">%d pacotes</item>
-    </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Executar %d correção</item>
-        <item quantity="other">Executar %d correções</item>
+        <item quantity="one">Executar %s patch</item>
+        <item quantity="other">Executar %s patches</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="one">%d ficheiro APK</item>
-        <item quantity="other">%d ficheiros APK</item>
+        <item quantity="one">%s ficheiro APK</item>
+        <item quantity="other">%s ficheiros APK</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Removido %1$d patch desatualizado da seleção salva</item>
-        <item quantity="other">Removidos %1$d patches desatualizados da seleção salva</item>
+        <item quantity="one">Removido %s patch antigo da seleção guardada</item>
+        <item quantity="other">Removidos %s patches antigos da seleção guardada</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%1$d fonte instalada</item>
-        <item quantity="other">%1$d fontes instaladas</item>
+        <item quantity="one">%s fonte instalada</item>
+        <item quantity="other">%s fontes instaladas</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d patch selecionado</item>
-        <item quantity="other">%d patches selecionados</item>
+        <item quantity="one">%s patch selecionado</item>
+        <item quantity="other">%s patches selecionados</item>
     </plurals>
 </resources>

@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">此应用无补丁记录</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">高级模式</string>
-    <string name="expert_mode_subtitle_extended_format">已选择 %1$s 个应用</string>
+    <string name="expert_mode_subtitle_extended_format">%2$s人中以选择%1$s</string>
     <string name="expert_mode_search">搜索补丁</string>
     <string name="expert_mode_proceed">开始修补</string>
     <string name="expert_mode_disable_all">禁用所有</string>
@@ -249,7 +249,7 @@
     <string name="patched_app_save_failed_toast">保存修补后的应用失败</string>
     <string name="download_apk">下载 APK 文件</string>
     <string name="plugin_activity_dialog_body">需要用户交互才能继续使用此插件</string>
-    <string name="patcher_process_exit_message">修补程序进程退出，代码为 %1$s。</string>
+    <string name="patcher_process_exit_message">修補程式程序結束，傳回代碼 %1$s</string>
     <string name="install_app_success">安装成功</string>
     <string name="install_app_fail">应用安装失败：%s</string>
     <string name="install_timeout_message">安装未完成。请检查系统安装程序对话框并重试</string>
