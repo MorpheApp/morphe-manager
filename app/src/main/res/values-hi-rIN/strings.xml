@@ -13,7 +13,7 @@
     <string name="home_update_error">उपडेट विफल हुआ</string>
     <string name="home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
     <string name="home_updating_sources">स्रोतों को अपडेट कर रहा हूँ…</string>
-    <string name="home_update_progress">%1$d/%2$d स्रोतें संसाधित हुईं</string>
+    <string name="home_update_progress_format">%1$s प्रोसेस्ड किया गया</string>
     <string name="home_update_success">स्रोत अपडेट पूर्ण हुआ</string>
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">कैफीन और अच्छे पैच द्वारा संचालित</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">पैच स्रोत</string>
-    <string name="sources_management_subtitle">%d स्रोत स्थापित हैं</string>
     <string name="sources_management_open_in_browser">खोल में खोल करना</string>
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
     <string name="sources_management_date_added">जोड़ा गया</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">डिलीट करें \"%s\"? यह वापस लाना संभव नहीं होगा।</string>
     <string name="sources_dialog_remote">रिमोट</string>
     <string name="sources_dialog_remote_url">स्रोत URL</string>
-    <string name="sources_dialog_remote_url_formats">"उदाहरण:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">उदाहरण:</string>
     <string name="sources_dialog_local">स्थानीय</string>
     <string name="sources_dialog_local_file">पैच स्रोत फ़ाइल का चयन करें</string>
     <string name="sources_dialog_local_file_description">स्टोरेज से .mpp पैच स्रोत फ़ाइल का चयन करें</string>
@@ -78,6 +74,8 @@
     <string name="home_apk_availability_unpatched_label">अपडेट किए बिना</string>
     <string name="home_apk_availability_yes">हां, मेरे पास है</string>
     <string name="home_apk_availability_no">नहीं, इसे ढूंढने में मेरी मदद करो</string>
+    <string name="home_apk_use_saved_with_version">प्रतिलिपि APK (v%s) का उपयोग करें</string>
+    <string name="home_app_info_no_saved_apk">कोई प्रतिलिपि APK नहीं है। पट्च करना पुनः APK फ़ाइल का चयन करना आवश्यक होगा</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ओरिजनल APK डाउनलोड करें</string>
     <string name="home_download_instructions_steps_title">निर्देश:</string>
@@ -102,17 +100,17 @@
     <string name="home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">एक्सपर्ट मोड</string>
-    <string name="expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s में से %2$s चुना गया</string>
     <string name="expert_mode_search">पैच खोजें</string>
     <string name="expert_mode_proceed">पैचिंग के लिए आगे जाएं</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
     <string name="expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
-    <string name="expert_mode_multiple_bundles_warning_title">बहुत स्रोतों से पट्च चुने गए हैं</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"आपने विभिन्न पट्च स्रोतों से पट्च चुने हैं। यह संयोजन समस्याएं या अप्रत्याशित व्यवहार का कारण हो सकता है।
+    <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
+    <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।
 
-क्या आप निश्चित हैं कि आप आगे बढ़ना चाहते हैं?"</string>
+क्या आप वास्तव में आगे बढ़ना चाहते हैं?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">यह एपीएम अनुशासित संस्करण नहीं है। आगे बढ़ने से अनुशासित एप्प्लिकेशन संस्करण हो सकता है।</string>
     <string name="home_dialog_unsupported_version_dialog_description">यह APK अनुशंसित एप्लिकेशन संस्करण नहीं है। जारी रखना परिणामस्वरूप एक कार्यक्षम एप्लिकेशन नहीं हो सकता है।</string>
@@ -160,12 +158,10 @@
     <string name="home_app_info_delete_item_patched_apk">पथचित APK फ़ाइल</string>
     <string name="home_app_info_delete_item_original_apk">मूल APK फ़ाइल</string>
     <string name="home_app_info_delete_preservation_note">आपका पथच चयन और विकल्प भविष्य के पथच के लिए सुरक्षित रहेंगे।</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Removed %d पुराने पटचेस से बचे हुए चयन को हटा दिया गया है</string>
     <string name="home_app_info_patches_name_default">पैच</string>
     <string name="home_app_info_patches_name_fallback">अनाम</string>
     <string name="home_app_info_patches_replace_fail">पैच आयात करने में विफल हो गया: %s</string>
     <string name="home_app_info_repatch_no_original_apk"> मूल APK नहीं मिला. इस ऐप को पुनः पैच करना संभव नहीं है।</string>
-    <string name="home_app_info_repatch_requires_original">रीपैच के लिए ओरिजिनल एपीएम आवश्यक है</string>
     <string name="home_app_info_original_package_name">ओरिजिनल पैकेज नाम</string>
     <string name="home_app_info_applied_patches">लागू पैच</string>
     <string name="home_app_info_patch_source_used">पैच स्रोत का उपयोग किया गया</string>
@@ -179,11 +175,17 @@
     <string name="home_app_info_app_deleted_description">यह एप्लिकेशन प्रबंधक से बाहर हटाई गई थी। इसकी कार्यक्षमता को पुनः स्थापित करने के लिए पुनः पटच करें</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोड के लिए, पैचिंग शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
+    <string name="root_pre_patch_installer_title">स्थापना विधि का चयन करें</string>
+    <string name="root_pre_patch_installer_description">आपका डिवाइस रूट एक्सेस रखता है। पट्च्ड एप्लिकेशन इंस्टॉल करने का तरीका चुनें।</string>
+    <string name="root_pre_patch_installer_mount_title">रूट माउंट</string>
+    <string name="root_pre_patch_installer_mount_description">स्टॉक एप्लिकेशन के ऊपर पट्च्ड एपीके माउंट करें। जीएमएसकोर आवश्यक नहीं।</string>
+    <string name="root_pre_patch_installer_standard_title">सामान्य इंस्टॉल</string>
+    <string name="root_pre_patch_installer_standard_description">पट्चिंग के बाद इंस्टॉलर (सिस्टम इंस्टॉलर, शिज़ुकी आदि) चुनकर अलग एप्लिकेशन के रूप में इंस्टॉल करें।</string>
+    <string name="root_pre_patch_installer_hint">इंस्टॉलेशन मेथड पट्चिंग के बाद बदल नहीं सकती जाती है।</string>
     <!-- Patcher Screen -->
-    <string name="patcher_error_copied">%1$d / %2$d patches</string>
+    <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
     <string name="patcher_error_technical">तकनीकी विवरण</string>
-    <string name="patcher_patches_progress">URL copied to clipboard</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">All Done! 🎉</string>
@@ -244,7 +246,7 @@
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="download_apk">एपीके फाइल डाउनलोड करें</string>
     <string name="plugin_activity_dialog_body">इस प्लगइन के लिए आगे बढ़ने के लिए उपयोगकर्ता इंटरैक्शन आवश्यक है।</string>
-    <string name="patcher_process_exit_message">पैचर प्रोसेस कोड %1$d से बाहर आया।</string>
+    <string name="patcher_process_exit_message">पैचर प्रक्रिया कोड %1$s के साथ समाप्त हुई</string>
     <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
     <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
     <string name="install_timeout_message">इंस्टॉलेशन पूर्ण नहीं हुई. सिस्टम इंस्टॉलर डायलॉग को जाँचें और पुन: प्रयास करें।</string>
@@ -270,9 +272,10 @@
     <string name="settings_appearance_system">सिस्टम</string>
     <string name="settings_appearance_light">लाइट</string>
     <string name="settings_appearance_dark">डार्क</string>
-    <string name="settings_appearance_black">ब्लैक</string>
     <string name="settings_appearance_dynamic">मैटेरियल यू</string>
     <string name="settings_appearance_accent_color">अक्सेंट रंग</string>
+    <string name="settings_appearance_pure_black">शुद्ध काला</string>
+    <string name="settings_appearance_pure_black_description">ओएलईडी डिस्प्ले के लिए सही काला बैकग्राउंड उपयोग करें।</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">एप्लिकेशन भाषा</string>
     <string name="settings_appearance_app_language_current">वर्तमान भाषा</string>
@@ -296,12 +299,14 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
-    <string name="settings_advanced_expert_mode_description">एक्सपर्ट मोड में एडवांस्ड सुविधाओं और अनुकूलन कोर्स उपलब्ध होंगेगा</string>
+    <string name="settings_advanced_expert_mode_description">अनुमोदित करना जटिल मॉर्फ पट्टी सेटिंग्स और कस्टमाइजेशन विकल्प</string>
+    <string name="settings_advanced_expert_mode_dialog_title">एक्सपर्ट मोड को अनुमोदित करना?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">एक्सपर्ट मोड पट्चों को लागू करने के तरीके पर अधिक नियंत्रण देता है, लेकिन एक्सपर्ट मोड में सेटिंग्स गलत करने से अप्लिकेशन में काम नहीं करने का खतरा हो सकता है</string>
     <string name="settings_advanced_strip_unused_libs">अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
     <string name="settings_advanced_strip_unused_libs_description">पुराने डिवाइस आर्किटेक्चर के लिए अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">प्रकर्षण के लिए आवश्यक</string>
+    <string name="settings_advanced_github_pat_description">प्रकाशन अनुरोध स्रोतों के लिए आवश्यक</string>
     <string name="settings_advanced_github_pat_configured">टोकन विन्यासित</string>
     <string name="settings_advanced_github_pat_how_to_get">GitHub पर्सनल एक्सेस टोकन कैसे प्राप्त करें</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub पर्सनल एक्सेस टोकन सेट करें</string>
@@ -424,7 +429,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">प्रोसेस रनटाइम सक्षम करें</string>
     <string name="settings_system_memory_limit_subtitle">पैचिंग के लिए उपलब्ध मेमोरी</string>
     <string name="settings_system_memory_limit_warning">बड़े एप्लिकेशन के पैचिंग के लिए निम्न मेमोरी लिमिट फेल हो सकती है</string>
-    <string name="settings_system_process_runtime_enabled_description">%d एमबी लिमिट</string>
+    <string name="settings_system_process_runtime_enabled_description">%s एमबी सीमा</string>
     <string name="settings_system_process_runtime_disabled_description">कन्फ़िगरेशन के लिए क्लिक करें</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">आइमपोर्ट और एक्सपोर्ट</string>
@@ -457,7 +462,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">डिबग</string>
     <string name="settings_system_export_debug_logs">डिबग लॉग्स एक्सपोर्ट करें</string>
     <string name="settings_system_export_debug_logs_description">ट्रबलशूटिंग के लिए सिस्टम लॉग्स एक्सपोर्ट करें</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">लॉग्स पढ़ने में विफल (एक्सिट कोड %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">लॉग पढ़ने में विफल रहा (अनुक्रमणिका %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">लॉग्स एक्सपोर्ट करने में विफल</string>
     <string name="settings_system_export_debug_logs_export_success">लॉग्स एक्सपोर्ट किए गए</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -480,12 +485,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">पथच चयन</string>
     <string name="settings_system_patch_selections_description">सहेजे गए पथच चयन और विकल्प प्रबंधित करें। ये एप्लिकेशन अनइंस्टॉलेशन के बाद भी persis करें।</string>
-    <string name="settings_system_patch_selections_description_short">भविष्य के पथच के लिए सहेजा गया</string>
-    <string name="settings_system_patch_selections_empty">कोई सहेजा गया पथच चयन नहीं है</string>
-    <string name="settings_system_patch_selections_has_options">विकल्प हैं</string>
-    <string name="settings_system_patch_selections_patches_options">पथच विकल्प</string>
-    <string name="settings_system_patch_selection_delete_title">पथच चयन मिटाएं</string>
-    <string name="settings_system_patch_selection_deleted">पथच चयन मिटाया गया</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">सभी चयन रीसेट करें?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">पैकेज चयन रीसेट करें?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">स्रोत चयन रीसेट करें?</string>
+    <string name="settings_system_patch_selection_no_saved">कोई सहेजा गया पटच चयन नहीं</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s Across %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
+    <string name="settings_system_patch_selection_source_format">स्रोत #%s</string>
+    <string name="settings_system_patch_selection_will_delete">यह हटाएगा:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">यह सभी पैकेजों और स्रोतों के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
+    <string name="settings_system_patch_selection_reset_package_warning">%s के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
+    <string name="settings_system_patch_selection_reset_source_warning">%1$s के लिए संरक्षित पट्टी चयन को स्थायी रूप से मिटा दिया जाएगा, स्रोत #%2$s में</string>
+    <string name="settings_system_export_source_data_fail">स्रोत डेटा निर्यात करने में विफल</string>
+    <string name="settings_system_export_source_data_success">स्रोत डेटा सफलतापूर्वक निर्यात किया गया</string>
+    <string name="settings_system_import_source_data_fail">स्रोत डेटा आयात करने में विफल</string>
+    <string name="settings_system_import_source_data_success">स्रोत डेटा सफलतापूर्वक आयात किया गया</string>
+    <string name="settings_system_patch_details_title">पटच विवरण</string>
+    <string name="settings_system_selected_patches_title">चयनित पट्टियाँ (%s)</string>
+    <string name="settings_system_patch_options_title">पट्टी विकल्प (%s)</string>
+    <string name="settings_system_no_patches_or_options">कोई पटच या विकल्प सहेजे गए नहीं</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">मorphe के बारे में</string>
     <string name="settings_system_share_website">वेबसाइट शेयर करें</string>
@@ -500,6 +518,7 @@ morphe_header_custom_dark.png
     <string name="yes">हां</string>
     <string name="no">नहीं</string>
     <string name="reset">रीसेट करें</string>
+    <string name="reset_all">सभी रीसेट करें</string>
     <string name="confirm">पुष्टि करें</string>
     <string name="warning">चेतावनी</string>
     <string name="error_">त्रुटि</string>
@@ -521,6 +540,7 @@ morphe_header_custom_dark.png
     <string name="selected">चयनित</string>
     <string name="not_selected">चयनित नहीं</string>
     <string name="rename">रename</string>
+    <string name="import_">आयात करें</string>
     <string name="export">निर्यात करें</string>
     <string name="download">डाउनलोड करें</string>
     <string name="less">Less</string>

@@ -13,7 +13,7 @@
     <string name="home_update_error">Opdatering mislykkedes</string>
     <string name="home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
     <string name="home_updating_sources">Ophaver kilder…</string>
-    <string name="home_update_progress">%1$d/%2$d kilder behandlet</string>
+    <string name="home_update_progress_format">%1$s bearbejdet</string>
     <string name="home_update_success">Ophav kilder fuldført</string>
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Drevet af koffein og gode patches</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch kilder</string>
-    <string name="sources_management_subtitle">%d kilder installeret</string>
     <string name="sources_management_open_in_browser">Åbn links i browser</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åpne URL</string>
     <string name="sources_management_date_added">Lagt til</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Slet kilde \"%s\"? Dette kan ikke fortrydes</string>
     <string name="sources_dialog_remote">Remote</string>
     <string name="sources_dialog_remote_url">Kilde-URL</string>
-    <string name="sources_dialog_remote_url_formats">"Eksempler:
-• github.com/ejer/repo
-• raw.githubusercontent.com/ejer/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Eksempler:</string>
     <string name="sources_dialog_local">Lokalt</string>
     <string name="sources_dialog_local_file">Velg patch kildefil</string>
     <string name="sources_dialog_local_file_description">Velg en .mpp patch kildefil fra lagring</string>
@@ -78,6 +74,8 @@ Kompatible versioner:"</string>
     <string name="home_apk_availability_unpatched_label">Ubehandlet</string>
     <string name="home_apk_availability_yes">Ja, jeg har den</string>
     <string name="home_apk_availability_no">Nej, hjælp mig med at finde den</string>
+    <string name="home_apk_use_saved_with_version">Brug gemt APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning vil kræve at vælge APK-filen igen</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download den originale APK</string>
     <string name="home_download_instructions_steps_title">Instruktioner:</string>
@@ -102,15 +100,15 @@ Kompatible versioner:"</string>
     <string name="home_no_patches_for_app">Ingen patches tilgængelige for dette app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
-    <string name="expert_mode_subtitle_extended">%1$d af %2$d patches valgt</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s af %2$s valgt</string>
     <string name="expert_mode_search">Søg patches</string>
     <string name="expert_mode_proceed">Fortsæt til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_no_patches">Ingen patches tilgængelige</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Valgt flere patch-kilder</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
+    <string name="expert_mode_multiple_sources_warning_title">Flere patch-kilder valgt</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
 
 Er du sikker på, at du vil fortsætte?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="home_app_info_delete_item_patched_apk">Patchet APK-fil</string>
     <string name="home_app_info_delete_item_original_apk">Original APK-fil</string>
     <string name="home_app_info_delete_preservation_note">Din patch-valg og indstillinger vil blive bevarede til fremtidig patching</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Fjernet %d forældede opdateringer fra gemt valg</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unavnet</string>
     <string name="home_app_info_patches_replace_fail">Kunne ikke importere patcher: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Original APK ikke fundet. Kan ikke genpatcher denne app</string>
-    <string name="home_app_info_repatch_requires_original">Reparering krever original APK-fil</string>
     <string name="home_app_info_original_package_name">Original pakkenavn</string>
     <string name="home_app_info_applied_patches">Brukte patcher</string>
     <string name="home_app_info_patch_source_used">Brugt kildekode</string>
@@ -180,11 +176,17 @@ Er du sikker på, at du vil fortsætte?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus kræver, at original APK er installeret på dit enhed før patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
+    <string name="root_pre_patch_installer_title">Vælg installationsmetode</string>
+    <string name="root_pre_patch_installer_description">Din enhed har root-adgang. Vælg, hvordan du vil installere den patcherede app</string>
+    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_description">Mount patcheret APK over den originale app. Ingen GmsCore nødvendig</string>
+    <string name="root_pre_patch_installer_standard_title">Standard Install</string>
+    <string name="root_pre_patch_installer_standard_description">Installer som en separat app med GmsCore support. Vælg installer (System installer, Shizuku, etc.) efter patching</string>
+    <string name="root_pre_patch_installer_hint">Installationsmetoden bestemmer, hvilke patches der er inkluderet og kan ikke ændres efter patching</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="patcher_error_log">Fejlprotokol</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
-    <string name="patcher_patches_progress">%1$d / %2$d pletter</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
     <string name="patcher_success_title">Alt færdigt! 🎉</string>
@@ -247,7 +249,7 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patch-app</string>
     <string name="download_apk">Download APK-fil</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
-    <string name="patcher_process_exit_message">Patcher-processen afsluttede med koden %1$d</string>
+    <string name="patcher_process_exit_message">Patcher-processen afgik med koden %1$s</string>
     <string name="install_app_success">Installeret succesfuldt</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
     <string name="install_timeout_message">Installationen blev ikke fuldført. Tjek systeminstalleringsdialog og prøv igen</string>
@@ -279,9 +281,10 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Lys</string>
     <string name="settings_appearance_dark">Mørk</string>
-    <string name="settings_appearance_black">Sort</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Akkentfarge</string>
+    <string name="settings_appearance_pure_black">Ren sort</string>
+    <string name="settings_appearance_pure_black_description">Brug rigtige sorte baggrunde for OLED-displays</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App-sprog</string>
     <string name="settings_appearance_app_language_current">Nåværende språk</string>
@@ -305,12 +308,14 @@ Er du sikker på, at du vil fortsætte?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Avansert innstillinger</string>
     <string name="settings_advanced_expert_mode">Avansert modus</string>
-    <string name="settings_advanced_expert_mode_description">Aktiver advanced funksjoner og tilpassingsmuligheter</string>
+    <string name="settings_advanced_expert_mode_description">Aktiver complex Morphe patch-indstillinger og tilpasningsmuligheder</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Aktiver Expert mode?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert mode giver mere kontrol over hvordan patches bliver anvendt, men en forkert konfiguration af indstillinger i expert mode kan resultere i et ikke-funktionelt program</string>
     <string name="settings_advanced_strip_unused_libs">Fjern ikke brukte native biblioteker</string>
     <string name="settings_advanced_strip_unused_libs_description">Slett ikke brukte native biblioteker for uaktuelle CPU-arkitekturer fra patcherte apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Kræves for pull request-bundler</string>
+    <string name="settings_advanced_github_pat_description">Nødvendigt for pull request-kilder</string>
     <string name="settings_advanced_github_pat_configured">Token konfigureret</string>
     <string name="settings_advanced_github_pat_how_to_get">Hvordan man får en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Angiv GitHub-personal adgangstoken</string>
@@ -434,7 +439,7 @@ Bildeformateringen må være som følger:
     <string name="settings_system_process_runtime_enable">Aktiver prosesskjøring</string>
     <string name="settings_system_memory_limit_subtitle">Minne tilgjengelig for patching</string>
     <string name="settings_system_memory_limit_warning">%d MB grense</string>
-    <string name="settings_system_process_runtime_enabled_description">Klikk for å konfigurere</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB grænse</string>
     <string name="settings_system_process_runtime_disabled_description">Importer keystore</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importér &amp; eksportér</string>
@@ -467,7 +472,7 @@ Bildeformateringen må være som følger:
     <string name="settings_system_debug">Behandle lagrede patchede app-filer</string>
     <string name="settings_system_export_debug_logs">Eksportér fejlsøgningslogfiler</string>
     <string name="settings_system_export_debug_logs_description">Slett patchede APK? </string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Er du sikker på at du vil slette den lagrede patchede APK for %s? </string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Kunne ikke læse log (udgangskode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logfiler</string>
     <string name="settings_system_export_debug_logs_export_success">Slett original APK? </string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Bildeformateringen må være som følger:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch-valg</string>
     <string name="settings_system_patch_selections_description">Håndter de gemte patch-valg og indstillinger. Disse bevares efter app-udinstallation</string>
-    <string name="settings_system_patch_selections_description_short">Gemt til fremtidig patching</string>
-    <string name="settings_system_patch_selections_empty">Ingen gemte patch-valg</string>
-    <string name="settings_system_patch_selections_has_options">Har indstillinger</string>
-    <string name="settings_system_patch_selections_patches_options">Patch-indstillinger</string>
-    <string name="settings_system_patch_selection_delete_title">Slette patch-valg</string>
-    <string name="settings_system_patch_selection_deleted">Patch-valg slettet</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Nulstil alle valg?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Nulstil pakkevalg?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Nulstil kildevalg?</string>
+    <string name="settings_system_patch_selection_no_saved">Ingen gemte patch-valg</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s over %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Kilde #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Dette vil slette:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle gemte patch-valg for alle pakker og kilder</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle gemte patch-valg for %s over alle kilder</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette gemte patch-valg for %1$s i kilde #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Kunne ikke eksportere kilde-data</string>
+    <string name="settings_system_export_source_data_success">Kilde-data eksporteret med succes</string>
+    <string name="settings_system_import_source_data_fail">Kunne ikke importere kilde-data</string>
+    <string name="settings_system_import_source_data_success">Kilde-data importeret med succes</string>
+    <string name="settings_system_patch_details_title">Patch-oplysninger</string>
+    <string name="settings_system_selected_patches_title">Valgte patches (%s)</string>
+    <string name="settings_system_patch_options_title">Patch-valg (%s)</string>
+    <string name="settings_system_no_patches_or_options">Ingen patches eller valg gemt</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Del app fra hjemmesiden</string>
@@ -510,6 +528,7 @@ Bildeformateringen må være som følger:
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="reset">Nulstil</string>
+    <string name="reset_all">Nulstil Alt</string>
     <string name="confirm">Bekræft</string>
     <string name="warning">Advarsel</string>
     <string name="error_">Feil</string>
@@ -531,6 +550,7 @@ Bildeformateringen må være som følger:
     <string name="selected">Valgt</string>
     <string name="not_selected">Ikke valgt</string>
     <string name="rename">Omdøb</string>
+    <string name="import_">Importer</string>
     <string name="export">Eksporter</string>
     <string name="download">Download</string>
     <string name="less">Mindre</string>

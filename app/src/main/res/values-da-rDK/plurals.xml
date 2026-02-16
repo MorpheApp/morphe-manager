@@ -4,6 +4,18 @@
         <item quantity="one">%d lappation</item>
         <item quantity="other">%d lappationer</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d stikproeve</item>
+        <item quantity="other">%d stikproever</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d kilde</item>
+        <item quantity="other">%d kilder</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d pakke</item>
+        <item quantity="other">%d pakker</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Udfør %d patch</item>
         <item quantity="other">Udfør %d patches</item>
@@ -12,16 +24,16 @@
         <item quantity="one">%d APK-fil</item>
         <item quantity="other">%d APK-filer</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d gemt valgt</item>
-        <item quantity="other">%d gemte valg</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Fjernet %1$d udated patch fra gemte valg</item>
+        <item quantity="other">Fjernet %1$d udated patches fra gemte valg</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Deaktiveret %d kilde</item>
-        <item quantity="other">Deaktiveret %d kilder</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d kilde installeret</item>
+        <item quantity="other">%1$d kilder installeret</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Aktiveret %d kilde</item>
-        <item quantity="other">Aktiveret %d kilder</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d stikproeve valgt</item>
+        <item quantity="other">%d stikproever valgt</item>
     </plurals>
 </resources>

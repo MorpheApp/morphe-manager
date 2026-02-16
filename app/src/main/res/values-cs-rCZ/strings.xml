@@ -13,7 +13,7 @@
     <string name="home_update_error">Aktualizace selhala</string>
     <string name="home_update_error_subtitle">Zkontrolujte připojení k internetu a zkuste to znovu</string>
     <string name="home_updating_sources">Probíhá aktualizace zdrojů…</string>
-    <string name="home_update_progress">%1$d/%2$d zdrojů zpracováno</string>
+    <string name="home_update_progress_format">%1$s zpracováno</string>
     <string name="home_update_success">Aktualizace zdrojů dokončena</string>
     <string name="home_update_success_subtitle">Vaše zdroje jsou aktuální</string>
     <string name="home_sources_are_loading">Zdroje se načítají, počkejte prosím…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Poháněno kávou a dobrými záplatami</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
-    <string name="sources_management_subtitle">%d zdrojů nainstalováno</string>
     <string name="sources_management_open_in_browser">Otevřít v prohlížeči</string>
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
     <string name="sources_management_date_added">Přidáno</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Smazat zdroj \"%s\"? Tato akce je nevratná</string>
     <string name="sources_dialog_remote">Vzdálený</string>
     <string name="sources_dialog_remote_url">URL zdroje</string>
-    <string name="sources_dialog_remote_url_formats">"Příklady:
-• github.com/vlastník/repo
-• raw.githubusercontent.com/vlastník/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Příklady:</string>
     <string name="sources_dialog_local">Lokální</string>
     <string name="sources_dialog_local_file">Vybrat soubor zdroje záplat</string>
     <string name="sources_dialog_local_file_description">Vyberte .mpp soubor zdroje záplat z úložiště</string>
@@ -78,6 +74,8 @@ Kompatibilní verze:"</string>
     <string name="home_apk_availability_unpatched_label">Neupravený</string>
     <string name="home_apk_availability_yes">Ano, mám ji</string>
     <string name="home_apk_availability_no">Ne, pomozte mi ji najít</string>
+    <string name="home_apk_use_saved_with_version">Použít uložené APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Není uloženo žádné APK. Pro patchování bude třeba vybrat soubor APK znovu.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Stáhnout původní APK</string>
     <string name="home_download_instructions_steps_title">Postup:</string>
@@ -102,15 +100,15 @@ Kompatibilní verze:"</string>
     <string name="home_no_patches_for_app">Pro tuto aplikaci nejsou k dispozici žádné záplaty</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertní režim</string>
-    <string name="expert_mode_subtitle_extended">%1$d z %2$d záplat vybráno</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s z %2$s vybráno</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
     <string name="expert_mode_enable_all">Zapnout vše</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
     <string name="expert_mode_no_patches">Nejsou dostupné žádné záplaty</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Vybráno více zdrojů patches</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Vybrali jste patches z více zdrojů patches. To může způsobit kompatibility problémy nebo neočekávané chování.
+    <string name="expert_mode_multiple_sources_warning_title">Vybráno více zdrojů pro aktualizace</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Vybrali jste aktualizace z více zdrojů. To může způsobit problémy s kompatibilitou nebo neočekávané chování.
 
 Opravdu chcete pokračovat?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Opravdu chcete pokračovat?"</string>
     <string name="home_app_info_delete_item_patched_apk">Záplatovaný soubor APK</string>
     <string name="home_app_info_delete_item_original_apk">Originální soubor APK</string>
     <string name="home_app_info_delete_preservation_note">Vaše výběry záplaty a nastavení budou uchovány pro budoucí záplaty.</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Odstraněno %d zastaralých oprav z uložené výběru</string>
     <string name="home_app_info_patches_name_default">Záplaty</string>
     <string name="home_app_info_patches_name_fallback">Bez názvu</string>
     <string name="home_app_info_patches_replace_fail">Selhalo importování záplat: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Originální soubor APK nebyl nalezen. Nelze opětovně záplatovat tuto aplikaci</string>
-    <string name="home_app_info_repatch_requires_original">Opětovné záplatování vyžaduje originální APK soubor</string>
     <string name="home_app_info_original_package_name">Původní název balíčku</string>
     <string name="home_app_info_applied_patches">Použité balíčky záplat</string>
     <string name="home_app_info_patch_source_used">Zdroje záplat</string>
@@ -180,11 +176,17 @@ Opravdu chcete pokračovat?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim root vyžaduje, aby před záplatováním byl na vašem zařízení nainstalován původní APK</string>
     <string name="root_gmscore_excluded">Záplata s podporou GmsCore je v root režimu vyloučena</string>
+    <string name="root_pre_patch_installer_title">Vyberte způsob instalace</string>
+    <string name="root_pre_patch_installer_description">Vaše zařízení má přístup root. Vyberte, jak chcete nainstalovat opatřenou aplikaci.</string>
+    <string name="root_pre_patch_installer_mount_title">Mount root</string>
+    <string name="root_pre_patch_installer_mount_description">Mount opatřený APK nad standardní aplikací. Nebožský GmsCore není potřeba</string>
+    <string name="root_pre_patch_installer_standard_title">Standardní instalace</string>
+    <string name="root_pre_patch_installer_standard_description">Instalujte jako oddělenou aplikaci s podporou GmsCore. Vyberte instalační program (Systémový instalační program, Shizuku atd.) po opatření</string>
+    <string name="root_pre_patch_installer_hint">Metoda instalace určuje, které opatření jsou zahrnuty a nelze je změnit po opatření</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="patcher_error_log">Protokol chyb</string>
     <string name="patcher_error_technical">Technické detaily</string>
-    <string name="patcher_patches_progress">%1$d / %2$d záplat</string>
     <string name="patcher_long_step_warning">Tento krok může chvíli trvat. Počkejte prosím…</string>
     <string name="patcher_installing_subtitle">Skoro hotovo! Připrav se na pořádnou jízdu! 🏎️</string>
     <string name="patcher_success_title">Vše hotovo! 🎉</string>
@@ -247,7 +249,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="patched_app_save_failed_toast">Chyba při ukládání zastaralé aplikace</string>
     <string name="download_apk">Stáhnout soubor APK</string>
     <string name="plugin_activity_dialog_body">Provedení je vyžadováno pro pokračování v tomto rozšíření</string>
-    <string name="patcher_process_exit_message">Proces přepínaču skončil s kódem %1$d</string>
+    <string name="patcher_process_exit_message">Proces patcher skončil s kódem %1$s</string>
     <string name="install_app_success">Úspěšně nainstalováno</string>
     <string name="install_app_fail">Selhání instalace aplikace: %s</string>
     <string name="install_timeout_message">Instalace nebyla dokončena. Zkontrolujte dialog systémového instalátoru a zkuste to znovu</string>
@@ -279,9 +281,10 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_appearance_system">Systém</string>
     <string name="settings_appearance_light">Světlé</string>
     <string name="settings_appearance_dark">Temné</string>
-    <string name="settings_appearance_black">Černé</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Barva akcentu</string>
+    <string name="settings_appearance_pure_black">Čistá černá</string>
+    <string name="settings_appearance_pure_black_description">Používejte pravé černé pozadí pro displeje OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Jazyk aplikace</string>
     <string name="settings_appearance_app_language_current">Aktuální jazyk</string>
@@ -305,12 +308,14 @@ Opravdu chcete pokračovat?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
-    <string name="settings_advanced_expert_mode_description">Povoluje pokročilé funkce a možnosti personalizace.</string>
+    <string name="settings_advanced_expert_mode_description">Povolit pokročilé nastavení a možnosti personalizace pro Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Povolit Expert mód?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert mód poskytuje více kontroly nad aplikací patchů, ale špatná konfigurace nastavení v expert módu může vést k nefunkční aplikaci</string>
     <string name="settings_advanced_strip_unused_libs">Odstranit nepoužívané nativní knihovny</string>
     <string name="settings_advanced_strip_unused_libs_description">Smazat nativní knihovny pro nepodporované architektury CPU z patčovaných aplikací</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Potřebné pro balíčky pull requestů</string>
+    <string name="settings_advanced_github_pat_description">Požadováno pro zdroje pull requestů</string>
     <string name="settings_advanced_github_pat_configured">Token nakonfigurován</string>
     <string name="settings_advanced_github_pat_how_to_get">Jak získat token</string>
     <string name="settings_advanced_github_pat_dialog_title">Nastavit GitHub Personal Access Token</string>
@@ -434,7 +439,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_process_runtime_enable">Povolit běhové prostředí procesů</string>
     <string name="settings_system_memory_limit_subtitle">Paměť k dispozici pro záplatování</string>
     <string name="settings_system_memory_limit_warning">Nízký limit paměti může způsobit selhání při záplatování větších aplikací</string>
-    <string name="settings_system_process_runtime_enabled_description">Limit %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Klikněte pro konfiguraci</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import &amp; export</string>
@@ -467,7 +472,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_debug">Ladění</string>
     <string name="settings_system_export_debug_logs">Exportovat ladicí protokoly</string>
     <string name="settings_system_export_debug_logs_description">Exportovat systémové protokoly pro ladění</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Selhalo čtení protokolů (kód ukončení %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Selhání čtení protokolu (kód ukončení %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nepodařilo se exportovat protokoly</string>
     <string name="settings_system_export_debug_logs_export_success">Protokoly exportovány</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Rozměry obrázků musí být následující:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Výběry záplaty</string>
     <string name="settings_system_patch_selections_description">Spravujte uložené výběry záplaty a nastavení. Tyto se udržují po odinstalaci aplikace.</string>
-    <string name="settings_system_patch_selections_description_short">Uložené pro budoucí záplaty</string>
-    <string name="settings_system_patch_selections_empty">Žádné uložené výběry záplaty</string>
-    <string name="settings_system_patch_selections_has_options">Má nastavení</string>
-    <string name="settings_system_patch_selections_patches_options">Nastavení záplaty</string>
-    <string name="settings_system_patch_selection_delete_title">Smazat výběr záplaty</string>
-    <string name="settings_system_patch_selection_deleted">Výběr záplaty smazán</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Resetovat všechny výběry?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Resetovat výběry balíčku?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Resetovat výběr zdroje?</string>
+    <string name="settings_system_patch_selection_no_saved">Žádné uložené výběry záplaty</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s z %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s v %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Zdroj #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Toto smaže:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Toto trvale smaže všechny uložené výběry záplaty pro všechny balíčky a zdroje</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Toto trvale smaže všechny uložené výběry záplaty pro %s po celém zdroji</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Toto trvale smaže uložené výběry záplat pro %1$s v zdroji #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Nepodařilo se exportovat data zdroje</string>
+    <string name="settings_system_export_source_data_success">Data zdroje exportována úspěšně</string>
+    <string name="settings_system_import_source_data_fail">Nepodařilo se importovat data zdroje</string>
+    <string name="settings_system_import_source_data_success">Data zdroje importována úspěšně</string>
+    <string name="settings_system_patch_details_title">Detaily záplaty</string>
+    <string name="settings_system_selected_patches_title">Vybrané záplaty (%s)</string>
+    <string name="settings_system_patch_options_title">Nastavení záplaty (%s)</string>
+    <string name="settings_system_no_patches_or_options">Žádné uložené záplaty nebo nastavení</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaci</string>
     <string name="settings_system_share_website">Sdílet webovou stránku</string>
@@ -510,6 +528,7 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="reset">Resetovat</string>
+    <string name="reset_all">Resetovat vše</string>
     <string name="confirm">Potvrdit</string>
     <string name="warning">Varování</string>
     <string name="error_">Chyba</string>
@@ -531,6 +550,7 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="selected">Vybráno</string>
     <string name="not_selected">Nevybráno</string>
     <string name="rename">Přejmenovat</string>
+    <string name="import_">Importovat</string>
     <string name="export">Exportovat</string>
     <string name="download">Stáhnout</string>
     <string name="less">Méně</string>

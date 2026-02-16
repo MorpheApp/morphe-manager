@@ -3,19 +3,28 @@
     <plurals name="patch_count">
         <item quantity="other">%d tambalan</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d pilihan tambalan</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d sumber</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d paket</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">Menerapkan %d tambalan</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="other">%d berkas APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="other">%d pemilihan yang disimpan</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="other">Menghapus %1$d tambalan yang sudah usang dari pemilihan yang disimpan</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">Menonaktifkan %d sumber</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="other">%1$d sumber terpasang</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">Mengaktifkan %d sumber</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="other">%d tambalan dipilih</item>
     </plurals>
 </resources>

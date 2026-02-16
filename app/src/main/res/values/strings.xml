@@ -16,8 +16,8 @@
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="home_updating_sources">Updating sources…</string>
-    <string name="home_update_progress">%1$d/%2$d sources processed</string>
-    <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
+    <string name="home_update_progress_format">%1$s processed</string>
+    <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
@@ -46,7 +46,6 @@
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>
-    <string name="sources_management_subtitle">%d sources installed</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_date_added">Added</string>
@@ -63,16 +62,16 @@
     <string name="sources_dialog_delete_confirm_message">Delete source \"%s\"? This cannot be undone</string>
     <string name="sources_dialog_remote">Remote</string>
     <string name="sources_dialog_remote_url">Source URL</string>
-    <string name="sources_dialog_remote_url_formats">"Examples:
+    <string name="sources_dialog_remote_url_formats_title">Examples:</string>
+    <string name="sources_dialog_remote_url_formats_list" translatable="false">"
 • github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• raw.githubusercontent.com/owner/repo/patches-bundle.json
 • example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Select patch source file</string>
     <string name="sources_dialog_local_file_description">Select a .mpp patch source file from storage</string>
     <string name="sources_dialog_local_change_file">Change file</string>
     <string name="sources_dialog_preinstalled">Pre-installed</string>
-
     <string name="sources_update_success">Update successful</string>
     <string name="sources_update_unavailable">No update available</string>
     <string name="sources_download_fail">Failed to download sources: %s</string>
@@ -87,6 +86,8 @@ Compatible versions:"</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
     <string name="home_apk_availability_yes">Yes, I have it</string>
     <string name="home_apk_availability_no">No, help me find it</string>
+    <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
 
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>
@@ -114,15 +115,15 @@ Compatible versions:"</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
-    <string name="expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s of %2$s selected</string>
     <string name="expert_mode_search">Search patches</string>
     <string name="expert_mode_proceed">Proceed to Patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
     <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_no_patches">No patches available</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Multiple patch sources selected</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"You have selected patches from multiple patch sources. This may cause compatibility issues or unexpected behavior.
+    <string name="expert_mode_multiple_sources_warning_title">Multiple patch sources selected</string>
+    <string name="expert_mode_multiple_sources_warning_message">"You have selected patches from multiple patch sources. This may cause compatibility issues or unexpected behavior.
 
 Are you sure you want to proceed?"</string>
 
@@ -177,12 +178,10 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_delete_item_patched_apk">Patched APK file</string>
     <string name="home_app_info_delete_item_original_apk">Original APK file</string>
     <string name="home_app_info_delete_preservation_note">Your patch selection and options will be preserved for future patching</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Removed %d outdated patches from saved selection</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unnamed</string>
     <string name="home_app_info_patches_replace_fail">Failed to import patches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Original APK not found. Cannot repatch this app</string>
-    <string name="home_app_info_repatch_requires_original">Repatch requires the original APK file</string>
     <string name="home_app_info_original_package_name">Original package name</string>
     <string name="home_app_info_applied_patches">Applied patches</string>
     <string name="home_app_info_patch_source_used">Patch source used</string>
@@ -199,13 +198,20 @@ Are you sure you want to proceed?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
+    <string name="root_pre_patch_installer_title">Choose installation method</string>
+    <string name="root_pre_patch_installer_description">Your device has root access. Choose how you want to install the patched app</string>
+    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_description">Mount patched APK over the stock app. No GmsCore needed</string>
+    <string name="root_pre_patch_installer_standard_title">Standard Install</string>
+    <string name="root_pre_patch_installer_standard_description">Install as a separate app with GmsCore support. Choose installer (System installer, Shizuku, etc.) after patching</string>
+    <string name="root_pre_patch_installer_hint">The installation method determines which patches are included and cannot be changed after patching</string>
 
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
-    <string name="patcher_patches_progress">%1$d / %2$d patches</string>
-    <string name="patcher_percentage" translatable="false">%1$d%%</string>
+    <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
+    <string name="patcher_percentage" translatable="false">%1$s%%</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">All Done! 🎉</string>
@@ -272,7 +278,7 @@ Are you sure you want to proceed?"</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="download_apk">Download APK file</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
-    <string name="patcher_process_exit_message">Patcher process exited with code %1$d</string>
+    <string name="patcher_process_exit_message">Patcher process exited with code %1$s</string>
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
@@ -309,9 +315,10 @@ Are you sure you want to proceed?"</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Light</string>
     <string name="settings_appearance_dark">Dark</string>
-    <string name="settings_appearance_black">Black</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accent color</string>
+    <string name="settings_appearance_pure_black">Pure Black</string>
+    <string name="settings_appearance_pure_black_description">Use true black backgrounds for OLED displays</string>
 
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App language</string>
@@ -340,13 +347,15 @@ Are you sure you want to proceed?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
     <string name="settings_advanced_expert_mode">Expert mode</string>
-    <string name="settings_advanced_expert_mode_description">Enable advanced features and customization options</string>
+    <string name="settings_advanced_expert_mode_description">Enable complex Morphe patching settings and customization options</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Enable Expert mode?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expert mode gives more control over how patches are applied, but misconfiguring settings in expert mode can result in a non-functional app</string>
     <string name="settings_advanced_strip_unused_libs">Remove unused native libraries</string>
     <string name="settings_advanced_strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
 
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Required for pull request bundles</string>
+    <string name="settings_advanced_github_pat_description">Required for pull request sources</string>
     <string name="settings_advanced_github_pat_configured">Token configured</string>
     <string name="settings_advanced_github_pat_how_to_get">How to get a token</string>
     <string name="settings_advanced_github_pat_dialog_title">Set GitHub Personal Access Token</string>
@@ -481,7 +490,7 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Enable process runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memory available for patching</string>
     <string name="settings_system_memory_limit_warning">A low memory limit may cause failures when patching larger apps</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB limit</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Click to configure</string>
 
     <!-- Settings - System Tab - Import and export keystore -->
@@ -517,7 +526,7 @@ Details: %2$s"</string>
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Export debug logs</string>
     <string name="settings_system_export_debug_logs_description">Export system logs for troubleshooting</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Failed to export logs</string>
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
 
@@ -545,12 +554,25 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
     <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation</string>
-    <string name="settings_system_patch_selections_description_short">Saved for future patching</string>
-    <string name="settings_system_patch_selections_empty">No saved patch selections</string>
-    <string name="settings_system_patch_selections_has_options">Has options</string>
-    <string name="settings_system_patch_selections_patches_options">Patches options</string>
-    <string name="settings_system_patch_selection_delete_title">Delete patch selection</string>
-    <string name="settings_system_patch_selection_deleted">Patch selection deleted</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Reset all selections?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Reset package selections?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Reset source selection?</string>
+    <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s across %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Source #%s</string>
+    <string name="settings_system_patch_selection_will_delete">This will delete:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and sources</string>
+    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for %1$s in source #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Failed to export source data</string>
+    <string name="settings_system_export_source_data_success">Source data exported successfully</string>
+    <string name="settings_system_import_source_data_fail">Failed to import source data</string>
+    <string name="settings_system_import_source_data_success">Source data imported successfully</string>
+    <string name="settings_system_patch_details_title">Patch details</string>
+    <string name="settings_system_selected_patches_title">Selected patches (%s)</string>
+    <string name="settings_system_patch_options_title">Patch options (%s)</string>
+    <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
@@ -568,6 +590,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="reset">Reset</string>
+    <string name="reset_all">Reset All</string>
     <string name="confirm">Confirm</string>
     <string name="warning">Warning</string>
     <string name="error_">Error</string>
@@ -589,6 +612,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="selected">Selected</string>
     <string name="not_selected">Not selected</string>
     <string name="rename">Rename</string>
+    <string name="import_">Import</string>
     <string name="export">Export</string>
     <string name="download">Download</string>
     <string name="less">Less</string>
@@ -633,7 +657,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="install_update_manager_failed">Failed to install update</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
-    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
+    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
     <string name="download_manager_failed">Failed to download update: %s</string>
     <string name="failed_to_check_updates">Failed to check for updates: %s</string>
     <string name="failed_to_download_update">Failed to download update: %s</string>

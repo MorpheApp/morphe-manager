@@ -13,7 +13,7 @@
     <string name="home_update_error">Ажурирање није успело</string>
     <string name="home_update_error_subtitle">Проверите интернет везу и покушајте поново</string>
     <string name="home_updating_sources">Ажурирање извора…</string>
-    <string name="home_update_progress">%1$d/%2$d извора обрађено</string>
+    <string name="home_update_progress_format">%1$s обрађено</string>
     <string name="home_update_success">Ажурирање извора завршено</string>
     <string name="home_update_success_subtitle">Ваши извори су ажурни</string>
     <string name="home_sources_are_loading">Извори се учитавају, молимо сачекајте…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Покренуто кафеином и добрим печовима</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извор печовања</string>
-    <string name="sources_management_subtitle">%d извора инсталирано</string>
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="sources_management_date_added">Додато</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Уклонити изворну \"%s\"? Ово не може да се врати.</string>
     <string name="sources_dialog_remote">Удаљни извор</string>
     <string name="sources_dialog_remote_url">УДЛАЈНИ УРЛ</string>
-    <string name="sources_dialog_remote_url_formats">"Примери:
-• github.com/vlasnik/repo
-• raw.githubusercontent.com/vlasnik/repo/glavna/patches-bundle.json
-• primer.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Примери:</string>
     <string name="sources_dialog_local">Локални</string>
     <string name="sources_dialog_local_file">Одаберите фајл извора</string>
     <string name="sources_dialog_local_file_description">Одаберите .mpp фајл извора са складишта</string>
@@ -78,6 +74,8 @@ Kompatibilne verzije:"</string>
     <string name="home_apk_availability_unpatched_label">Необрађен</string>
     <string name="home_apk_availability_yes">Да, имам га</string>
     <string name="home_apk_availability_no">Не, помозите ми да га нађем</string>
+    <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Nema saćuvanog APK-a. Patching zahtijeva ponovno odabir APK datoteke</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Преузмите оригинални APK</string>
     <string name="home_download_instructions_steps_title">Упутства:</string>
@@ -102,15 +100,15 @@ Kompatibilne verzije:"</string>
     <string name="home_no_patches_for_app">Нema печева доступно за ову апликацију</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експерт мод</string>
-    <string name="expert_mode_subtitle_extended">%1$d од %2$d печева изабрано</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s од %2$s изабрано</string>
     <string name="expert_mode_search">Претражи печеве</string>
     <string name="expert_mode_proceed">Настави са печевима</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_no_patches">Нema печева доступно</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Више извора пакета изабрано</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Изабрали сте пакете са више извора пакета. То може да изазове проблеме са компатибилношћу или неочекивано понашање.
+    <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Одабрали сте патчеве из више извора. Може да дође до проблема са компатибилношћу или неочекиваног понашања.
 
 Да ли сте сигурни да желите да наставите?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Kompatibilne verzije:"</string>
     <string name="home_app_info_delete_item_patched_apk">Патчиран APK фајл</string>
     <string name="home_app_info_delete_item_original_apk">Оригинални APK фајл</string>
     <string name="home_app_info_delete_preservation_note">Ваша патч селекција и опције ће бити сачуване за будуће патчење</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Уклањао сам %d застарелих исправки из сачуване селекције</string>
     <string name="home_app_info_patches_name_default">Патчеви</string>
     <string name="home_app_info_patches_name_fallback">Без имена</string>
     <string name="home_app_info_patches_replace_fail">Неуспешно увоз извора: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Оригинални АПК није пронађен. Не можете поново да патчирате ову апликацију.</string>
-    <string name="home_app_info_repatch_requires_original">Поново патчирање захтева оригинални APK фајл</string>
     <string name="home_app_info_original_package_name">Назив пакета</string>
     <string name="home_app_info_applied_patches">Применети патчеви</string>
     <string name="home_app_info_patch_source_used">Korišten je izvorni patch</string>
@@ -180,11 +176,17 @@ Kompatibilne verzije:"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root режим захтева да оригинални APK буде инсталиран на вашем уређају пре печовања</string>
     <string name="root_gmscore_excluded">Печ подршке GmsCore је искључен у root режиму</string>
+    <string name="root_pre_patch_installer_title">Odaberi metodu instalacije</string>
+    <string name="root_pre_patch_installer_description">Vaš uređaj ima pristup korenovom direktorijumu. Odaberite kako želite da instaliraćete patčirani app</string>
+    <string name="root_pre_patch_installer_mount_title">Koren Mount</string>
+    <string name="root_pre_patch_installer_mount_description">Montirajte patčirani APK preko stokovnog app-a. Nema GmsCore potrebe</string>
+    <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
+    <string name="root_pre_patch_installer_standard_description">Instalirajte kao odvojeni app sa podrškom GmsCore. Odaberite instalator (Sistemski instalator, Shizuku, etc.) nakon patčiranja</string>
+    <string name="root_pre_patch_installer_hint">Način instalacije određuje koji patčići su uključeni i ne može se promeniti nakon patčiranja</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Грешка је копирана у привремену меморију</string>
     <string name="patcher_error_log">Лог грешaka</string>
     <string name="patcher_error_technical">Техничке информације</string>
-    <string name="patcher_patches_progress">%1$d / %2$d печева</string>
     <string name="patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
     <string name="patcher_installing_subtitle">Скоро спремно за рад! 🎸</string>
     <string name="patcher_success_title">Све готово! 🎉</string>
@@ -247,7 +249,7 @@ Kompatibilne verzije:"</string>
     <string name="patched_app_save_failed_toast">Није успело чување крпељом потписане апликације</string>
     <string name="download_apk">Преузми APK фајл</string>
     <string name="plugin_activity_dialog_body">Неопходна је корисничка интеракција да бисте наставили са овом додатком.</string>
-    <string name="patcher_process_exit_message">Процес патчера завршен је са кодом %1$d.</string>
+    <string name="patcher_process_exit_message">Процес пачера изашао са кодом %1$s</string>
     <string name="install_app_success">Успешно инсталирано</string>
     <string name="install_app_fail">Није успело инсталирање апликације: %s</string>
     <string name="install_timeout_message">Инсталација није завршена. Проверите дијалог система за инсталацију и покушајте поново.</string>
@@ -279,9 +281,10 @@ Kompatibilne verzije:"</string>
     <string name="settings_appearance_system">Системски</string>
     <string name="settings_appearance_light">Светли</string>
     <string name="settings_appearance_dark">Тамни</string>
-    <string name="settings_appearance_black">Црни</string>
     <string name="settings_appearance_dynamic">Материјал You</string>
     <string name="settings_appearance_accent_color">Акцент боја</string>
+    <string name="settings_appearance_pure_black">Svetlo crno</string>
+    <string name="settings_appearance_pure_black_description">Koristite pravo crno pozadine za OLED displeje</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Језик апликације</string>
     <string name="settings_appearance_app_language_current">Тренутна језика</string>
@@ -305,12 +308,14 @@ Kompatibilne verzije:"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Навише подешавања</string>
     <string name="settings_advanced_expert_mode">Нави моћ</string>
-    <string name="settings_advanced_expert_mode_description">Омогућање напредних функција и опција за персонализацију</string>
+    <string name="settings_advanced_expert_mode_description">Omogući kompleksno podešavanje Morphe i personalizacija opcija</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Omogući režim eksperta?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta omogućava veću kontrolu nad primenom patchova, ali pogrešno podešavanje postavki u režimu eksperta može da rezultuje nefunkcionalnom aplikacijom</string>
     <string name="settings_advanced_strip_unused_libs">Уклонити ненужне оригиналне библиотеке</string>
     <string name="settings_advanced_strip_unused_libs_description">Брисање ненужних оригиналних библиотека може повећати патчирање, али може бити недовољно за старије уређаје</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Неопходно за пакете траженица</string>
+    <string name="settings_advanced_github_pat_description">Неопходно за изворе из GitHub pull request</string>
     <string name="settings_advanced_github_pat_configured">Токен конфигурисан</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako da dobijete token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavite GitHub Personal Access Token</string>
@@ -434,7 +439,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Омогући меморије</string>
     <string name="settings_system_memory_limit_subtitle">Кликните да конфигуришете</string>
     <string name="settings_system_memory_limit_warning">Mala ograniÄena memorija može uzrokovati greške pri nadogradnji veÄih aplikacija</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB меморије</string>
+    <string name="settings_system_process_runtime_enabled_description">%s МБ лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Упозорење: ниско ограничење меморије може довести до греша при патчирању веће апликације</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Увоз и извоз</string>
@@ -467,7 +472,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">Дебаг</string>
     <string name="settings_system_export_debug_logs">Извези евиденције отклањања грешака</string>
     <string name="settings_system_export_debug_logs_description">Извоз системских евиденција за откладавање</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Неуспешно читање евиденција (код грешка %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Неуспех у читању дневника (код изласка %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Неуспешан извоз евиденција</string>
     <string name="settings_system_export_debug_logs_export_success">Евиденције успешно извезене</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Патч селекције</string>
     <string name="settings_system_patch_selections_description">Управљајте сачуваним патч селекцијама и опцијама. Ове селекције се чувају након деинсталације апликације</string>
-    <string name="settings_system_patch_selections_description_short">Сачувано за будуће патчење</string>
-    <string name="settings_system_patch_selections_empty">Нема сачуваних патч селекција</string>
-    <string name="settings_system_patch_selections_has_options">Има опције</string>
-    <string name="settings_system_patch_selections_patches_options">Патч опције</string>
-    <string name="settings_system_patch_selection_delete_title">Обрисати патч селекцију</string>
-    <string name="settings_system_patch_selection_deleted">Патч селекција обрисана</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Да ли сте сигурни да желите да обришете све изборе?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Да ли сте сигурни да желите да обришете избор пакета?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Да ли сте сигурни да желите да обришете избор извора?</string>
+    <string name="settings_system_patch_selection_no_saved">Нema сачуваних избора пакета</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s преко %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s у %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Извор #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Ово ће обрисати:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ово ће трајно обрисати све сачуване изборе пакета за све пакете и изворе</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ово ће трајно обрисати све сачуване изборе пакета за %s преко свих извора</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ово трајно обрише сачуване изборе пакета за %1$s у извору #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Неуспешан извоз података извора</string>
+    <string name="settings_system_export_source_data_success">Подаци извора успешно извезени</string>
+    <string name="settings_system_import_source_data_fail">Неуспешан увоз података извора</string>
+    <string name="settings_system_import_source_data_success">Подаци извора успешно увезени</string>
+    <string name="settings_system_patch_details_title">Детаљи пакета</string>
+    <string name="settings_system_selected_patches_title">Изабрани пакети (%s)</string>
+    <string name="settings_system_patch_options_title">Опције пакета (%s)</string>
+    <string name="settings_system_no_patches_or_options">Нema сачуваних пакета или опција</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">О програму</string>
     <string name="settings_system_share_website">Дели веб-сајт</string>
@@ -510,6 +528,7 @@ morphe_header_custom_dark.png
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="reset">Ресетуј</string>
+    <string name="reset_all">Ресетуј све</string>
     <string name="confirm">Potvrdite</string>
     <string name="warning">Упозорење</string>
     <string name="error_">Грешка</string>
@@ -531,6 +550,7 @@ morphe_header_custom_dark.png
     <string name="selected">Одабрано</string>
     <string name="not_selected">Није одбрано</string>
     <string name="rename">Преименуј</string>
+    <string name="import_">Увоз</string>
     <string name="export">Извези</string>
     <string name="download">Преузми</string>
     <string name="less">Мање</string>
