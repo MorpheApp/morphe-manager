@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d javítás</item>
-        <item quantity="other">%d javítás</item>
+        <item quantity="one">%d módosítás</item>
+        <item quantity="other">%d módosítás</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d módosítás beállítása</item>
+        <item quantity="other">%d módosítás beállításai</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d forrás</item>
+        <item quantity="other">%d források</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d csomag</item>
+        <item quantity="other">%d csomagok</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">%d javítás futtatása</item>
-        <item quantity="other">%d javítások futtatása</item>
+        <item quantity="one">%d módosítás végrehajtása</item>
+        <item quantity="other">%d módosítás végrehajtása</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%d APK fájl</item>
-        <item quantity="other">%d APK fájlok</item>
+        <item quantity="other">%d APK fájl</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d mentett kiválasztás</item>
-        <item quantity="other">%d mentett kiválasztás</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Töröltem %1$d elavult javítást a mentett kiválasztásból</item>
+        <item quantity="other">Töröltem %1$d elavult javításokat a mentett kiválasztásból</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Letiltva %d forrás</item>
-        <item quantity="other">Letiltva %d forrást</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d forrás telepítve</item>
+        <item quantity="other">%1$d forrás telepítve</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Engedélyezve %d forrás</item>
-        <item quantity="other">Engedélyezve %d forrást</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d módosítás kiválasztva</item>
+        <item quantity="other">%d módosítás kiválasztva</item>
     </plurals>
 </resources>

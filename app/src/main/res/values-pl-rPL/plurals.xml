@@ -6,6 +6,24 @@
         <item quantity="many">%d modyfikacji</item>
         <item quantity="other">%d modyfikacji</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d opcja modyfikacji</item>
+        <item quantity="few">%d opcje modyfikacji</item>
+        <item quantity="many">%d opcji modyfikacji</item>
+        <item quantity="other">%d opcji modyfikacji</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d źródło</item>
+        <item quantity="few">%d źródła</item>
+        <item quantity="many">%d źródeł</item>
+        <item quantity="other">%d źródeł</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d pakiet</item>
+        <item quantity="few">%d pakiety</item>
+        <item quantity="many">%d pakietów</item>
+        <item quantity="other">%d pakietów</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Wykonaj %d modyfikację</item>
         <item quantity="few">Wykonaj %d modyfikacje</item>
@@ -18,22 +36,22 @@
         <item quantity="many">%d plików APK</item>
         <item quantity="other">%d plików APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d zapisany wybór</item>
-        <item quantity="few">%d zapisane wybory</item>
-        <item quantity="many">%d zapisanych wyborów</item>
-        <item quantity="other">%d zapisanych wyborów</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Usunięto %1$d przestarzałą modyfikację z zapisanych wyborów</item>
+        <item quantity="few">Usunięto %1$d przestarzałe modyfikacje z zapisanych wyborów</item>
+        <item quantity="many">Usunięto %1$d przestarzałych modyfikacji z zapisanych wyborów</item>
+        <item quantity="other">Usunięto %1$d przestarzałych modyfikacji z zapisanych wyborów</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Wyłączono %d źródło</item>
-        <item quantity="few">Wyłączono %d źródła</item>
-        <item quantity="many">Wyłączono %d źródeł</item>
-        <item quantity="other">Wyłączono %d źródeł</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d zainstalowane źródło</item>
+        <item quantity="few">%1$d zainstalowane źródła</item>
+        <item quantity="many">%1$d zainstalowanych źródeł</item>
+        <item quantity="other">%1$d zainstalowanych źródeł</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Włączono %d źródło</item>
-        <item quantity="few">Włączono %d źródła</item>
-        <item quantity="many">Włączono %d źródeł</item>
-        <item quantity="other">Włączono %d źródeł</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d wybrana modyfikacja</item>
+        <item quantity="few">%d wybrane modyfikacje</item>
+        <item quantity="many">%d wybranych modyfikacji</item>
+        <item quantity="other">%d wybranych modyfikacji</item>
     </plurals>
 </resources>

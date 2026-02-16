@@ -13,7 +13,7 @@
     <string name="home_update_error">Ažuriranje nije uspelo</string>
     <string name="home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>
-    <string name="home_update_progress">%1$d/%2$d izvora obrađeno</string>
+    <string name="home_update_progress_format">%1$s obrađeno</string>
     <string name="home_update_success">Ažuriranje izvora završeno</string>
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo sačekajte…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Pokretane kafom i dobrim zakrpama</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch izvoriÅ¡ta</string>
-    <string name="sources_management_subtitle">%d izvora instalirano</string>
     <string name="sources_management_open_in_browser">Otvori linkove u pregledaču</string>
     <string name="sources_management_failed_to_open_url">Nijeleženo otvaranje URL</string>
     <string name="sources_management_date_added">Dodato</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Obriši izvornu \"%s\"? Ova akcija ne može biti poništena</string>
     <string name="sources_dialog_remote">Udaljeno</string>
     <string name="sources_dialog_remote_url">URL izвора</string>
-    <string name="sources_dialog_remote_url_formats">"Primjeri:
-• github.com/vlasnik/oprojekat
-• raw.githubusercontent.com/vlasnik/oprojekat/glavna/patches-bundle.json
-• primer.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Primeri:</string>
     <string name="sources_dialog_local">Lokalno</string>
     <string name="sources_dialog_local_file">Izaberite patch izvor fajl</string>
     <string name="sources_dialog_local_file_description">Izaberite .mpp patch izvor fajl sa pohranom</string>
@@ -78,6 +74,8 @@ Kompatibilne verzije:"</string>
     <string name="home_apk_availability_unpatched_label">Neopterećeno</string>
     <string name="home_apk_availability_yes">Da, imam ga</string>
     <string name="home_apk_availability_no">Ne, pomozi mi da ga pronađem</string>
+    <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Nema saćuvanog APK. Patching će zahtijevati ponovno odabir APK datoteke</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Preuzmi originalnu APK</string>
     <string name="home_download_instructions_steps_title">Uputstva:</string>
@@ -102,17 +100,15 @@ Kompatibilne verzije:"</string>
     <string name="home_no_patches_for_app">Nema patchova za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Režim eksperta</string>
-    <string name="expert_mode_subtitle_extended">%1$d od %2$d patchova odabrano</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s od %2$s odabrano</string>
     <string name="expert_mode_search">Pretraži patchove</string>
     <string name="expert_mode_proceed">Nastavi patchiranje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patchova</string>
     <string name="expert_mode_no_patches">Nema dostupnih patchova</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Odabrano je patch-ova iz više izvora. Ovo može uzrokovati probleme sa kompatibilnošću ili neočekivano ponašanje.
-
-Da li ste sigurni da želite nastaviti?</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Odabrali ste patch-eve iz više izvora. Ovo može uzrokovati probleme sa kompatibilnoštom ili neočekivano ponašanje.
+    <string name="expert_mode_multiple_sources_warning_title">Izabrali ste patch-ove izvišnje izvora</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Izabrali ste patch-ove izvišnje izvora. Ovo može uzrokovati kompatibilnost problema ili neočekivano ponašanje.
 
 Da li ste sigurni da želite nastaviti?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -162,12 +158,10 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_app_info_delete_item_patched_apk">Patchiran fajl APK</string>
     <string name="home_app_info_delete_item_original_apk">Originalni fajl APK</string>
     <string name="home_app_info_delete_preservation_note">Vaš odabir patch-a i opcije će biti sačuvane za buduće patchiranje</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Uklonjeno je %d zastarelih isprava iz čuvane selekcije</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Nema imena</string>
     <string name="home_app_info_patches_replace_fail">Nijeleženo uvoz patchova: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Originalni APK nije pronađen. Nemoguće je repatchirati ovu aplikaciju</string>
-    <string name="home_app_info_repatch_requires_original">Repatch zahteva originalni APK fajl</string>
     <string name="home_app_info_original_package_name">Orginalno ime paketa</string>
     <string name="home_app_info_applied_patches">Primenuti patchovi</string>
     <string name="home_app_info_patch_source_used">Korišten je patch izvora</string>
@@ -182,11 +176,17 @@ Da li ste sigurni da želite nastaviti?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim korena zahteva da je originalni APK instaliran na vašem uređaju pre patchanja</string>
     <string name="root_gmscore_excluded">GmsCore zakrpa za podršku je isključena u root modu</string>
+    <string name="root_pre_patch_installer_title">Odaberi način instalacije</string>
+    <string name="root_pre_patch_installer_description">Vaš uređaj ima pristup korenovom direktorijumu. Odaberite način instalacije ispravljenog programa</string>
+    <string name="root_pre_patch_installer_mount_title">Montiraj ispravljeni APK preko stokovnog programa</string>
+    <string name="root_pre_patch_installer_mount_description">Montiraj ispravljeni APK preko stokovnog programa. Nema GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
+    <string name="root_pre_patch_installer_standard_description">Instaliraj kao odvojeni program s podrškom GmsCore. Odaberite instalater (Sistemski instalater, Shizuku, itd.) nakon ispravljanja</string>
+    <string name="root_pre_patch_installer_hint">Način instalacije određuje koje ispravke su uključene i ne može se promijeniti nakon ispravljanja</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Greška kopirana u privremenu memoriju</string>
     <string name="patcher_error_log">Dnevnik grešaka</string>
     <string name="patcher_error_technical">Tehničke informacije</string>
-    <string name="patcher_patches_progress">%1$d / %2$d zakrpa</string>
     <string name="patcher_long_step_warning">Ovaj korak može potrajati. Molimo sačekajte…</string>
     <string name="patcher_installing_subtitle">Skoro spremni za akciju! 🎸</string>
     <string name="patcher_success_title">Sve je završeno! 🎉</string>
@@ -249,7 +249,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patched_app_save_failed_toast">Došlo je do greške pri čuvanju zakrpljene aplikacije</string>
     <string name="download_apk">Preuzmi APK datoteku</string>
     <string name="plugin_activity_dialog_body">Potrebna je interakcija korisnika da bi se nastavilo sa ovim dodatkom</string>
-    <string name="patcher_process_exit_message">Proces patchera završio se kodom %1$d</string>
+    <string name="patcher_process_exit_message">Proces patchera završio se kodom %1$s</string>
     <string name="install_app_success">Uspešno instalirano</string>
     <string name="install_app_fail">Nije uspelo instaliranje aplikacije: %s</string>
     <string name="install_timeout_message">Instalacija nije završena. Provjerite sistemski dijalog instalacije i pokušajte ponovo</string>
@@ -281,9 +281,10 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Svetlo</string>
     <string name="settings_appearance_dark">Tamno</string>
-    <string name="settings_appearance_black">Crno</string>
     <string name="settings_appearance_dynamic">Dinamičko</string>
     <string name="settings_appearance_accent_color">Boja akcenata</string>
+    <string name="settings_appearance_pure_black">Čisti crni</string>
+    <string name="settings_appearance_pure_black_description">Koristi prave crne pozadine za OLED displeje</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Jezik aplikacije</string>
     <string name="settings_appearance_app_language_current">Trenutna jezika</string>
@@ -307,12 +308,14 @@ Da li ste sigurni da želite nastaviti?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
-    <string name="settings_advanced_expert_mode_description">Omogućava napredne mogućnosti i prilagođavanje</string>
+    <string name="settings_advanced_expert_mode_description">Omogući složeno podešavanje Morphe i opcije za prilagođavanje</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Omogućiti režim eksperta?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta daje više kontrole nad primenom patchova, ali pogrešno podešavanje u režimu eksperta može da rezultuje u nefunkcionalnoj aplikaciji</string>
     <string name="settings_advanced_strip_unused_libs">Ukloni neiskoristane native biblioteka</string>
     <string name="settings_advanced_strip_unused_libs_description">Brisanje neiskoristane native biblioteka može usporedati patchiranje ali možda neće funkcionisati na stariji uređenicima</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Potrebno za pakete zahtjeva za povlačenje</string>
+    <string name="settings_advanced_github_pat_description">Potrebno za izvore zahtjeva za povlačenje</string>
     <string name="settings_advanced_github_pat_configured">Token je konfigurisan</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako dobiti token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavi GitHub Personal Access Token</string>
@@ -398,7 +401,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_system_process_runtime_enable">Memorija dostupna za patchiranje</string>
     <string name="settings_system_memory_limit_subtitle">Upozorenje: Niska memorija ograničenja može dovesti neuspeh u patchiranju većih aplikacija</string>
     <string name="settings_system_memory_limit_warning">%d MB ograničenje</string>
-    <string name="settings_system_process_runtime_enabled_description">Kliknite da konfigurirate</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB ograničenje</string>
     <string name="settings_system_process_runtime_disabled_description">Uvezi kejtore</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Uvoz i izvoz</string>
@@ -431,7 +434,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Izvezi evidencije otklanjanja grešaka</string>
     <string name="settings_system_export_debug_logs_description">Izvezi sistemske lozove za otklonavanje</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Nijeleženo čitanje lozova (koda %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Neuspeh pri čitanju dnevnika (kôd izlaza %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Neuspešan izvoz evidencija</string>
     <string name="settings_system_export_debug_logs_export_success">Lozove izvezeno</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -454,12 +457,25 @@ Da li ste sigurni da želite nastaviti?"</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
     <string name="settings_system_patch_selections_description">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
-    <string name="settings_system_patch_selections_description_short">Sačuvano za buduće patchiranje</string>
-    <string name="settings_system_patch_selections_empty">Nema sačuvanih patch-ova</string>
-    <string name="settings_system_patch_selections_has_options">Ima opcije</string>
-    <string name="settings_system_patch_selections_patches_options">Patch-ovi opcija</string>
-    <string name="settings_system_patch_selection_delete_title">Izbriši patch-ov odabir</string>
-    <string name="settings_system_patch_selection_deleted">Patch-ov odabir je izbrisan</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Poništiti sve odabire?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Poništiti odabire paketa?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Poništiti odabir izvora?</string>
+    <string name="settings_system_patch_selection_no_saved">Nema sačuvanih odabira patch-a</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s po %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s u %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Izvor #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Ovo će da obriše:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ovo će permanentno obrisati sve sačuvane odabire patch-a za sve pakete i izvore</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ovo će permanentno obrisati sve sačuvane odabire patch-a za %s po svim izvorištima</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ovo će permanentno obrisati sačuvane izborke za %1$s u izvoru #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Neuspešno izvoz podataka izvorišta</string>
+    <string name="settings_system_export_source_data_success">Podaci izvorišta uspešno izvozeni</string>
+    <string name="settings_system_import_source_data_fail">Neuspešno uvođenje podataka izvorišta</string>
+    <string name="settings_system_import_source_data_success">Podaci izvorišta uspešno uvezeni</string>
+    <string name="settings_system_patch_details_title">Detalji patch-a</string>
+    <string name="settings_system_selected_patches_title">Izabrane ispravke (%s)</string>
+    <string name="settings_system_patch_options_title">Opcije ispravke (%s)</string>
+    <string name="settings_system_no_patches_or_options">Nema sačuvanih patch-ova ili opcija</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O programu</string>
     <string name="settings_system_share_website">Dijeli veb-sajt</string>
@@ -474,6 +490,7 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="yes">Da</string>
     <string name="no">Ne</string>
     <string name="reset">Poništi</string>
+    <string name="reset_all">Poništi sve</string>
     <string name="confirm">Potvrdi</string>
     <string name="warning">Upozorenje</string>
     <string name="error_">Greška</string>
@@ -495,6 +512,7 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="selected">Odabrano</string>
     <string name="not_selected">Nije odabrano</string>
     <string name="rename">Preimenovanje</string>
+    <string name="import_">Uvoz</string>
     <string name="export">Izvezi</string>
     <string name="download">Preuzmi</string>
     <string name="less">Manje</string>

@@ -13,7 +13,7 @@
     <string name="home_update_error">Обновление не удалось</string>
     <string name="home_update_error_subtitle">Проверьте подключение к Интернету и повторите попытку</string>
     <string name="home_updating_sources">Обновление источников…</string>
-    <string name="home_update_progress">%1$d/%2$d источников обработано</string>
+    <string name="home_update_progress_format">Обработано %1$s из </string>
     <string name="home_update_success">Обновление источников завершено</string>
     <string name="home_update_success_subtitle">Ваши источники обновлены</string>
     <string name="home_sources_are_loading">Загрузка источников, пожалуйста, подождите…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Работаем на кофеине и хороших патчах</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Источники патчей</string>
-    <string name="sources_management_subtitle">%d источник установлен</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
     <string name="sources_management_date_added">Добавлено</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Удалить источник \"%s\"? Это действие невозможно отменить</string>
     <string name="sources_dialog_remote">Удаленный</string>
     <string name="sources_dialog_remote_url">URL источника</string>
-    <string name="sources_dialog_remote_url_formats">"Примеры:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Примеры:</string>
     <string name="sources_dialog_local">Локальные</string>
     <string name="sources_dialog_local_file">Выберите исходный файл патча</string>
     <string name="sources_dialog_local_file_description">Выберите исходный файл патча .mpp из хранилища</string>
@@ -78,6 +74,8 @@
     <string name="home_apk_availability_unpatched_label">Непатченый</string>
     <string name="home_apk_availability_yes">Да, у меня есть</string>
     <string name="home_apk_availability_no">Нет, помогите мне найти</string>
+    <string name="home_apk_use_saved_with_version">Использовать сохраненный APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Нет сохраненного APK. Для патча нужно будет снова выбрать APK файл</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Загрузить оригинальный APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
@@ -92,25 +90,25 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Выберите загруженный вами APK</string>
     <string name="home_file_picker_prompt_description">Теперь выберите файл %1$s APK, который вы загрузили</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Открыть скачанный файл APK</string>
-    <string name="home_file_picker_prompt_open_apk">Открыть файл APK</string>
+    <string name="home_file_picker_prompt_open_downloaded_apk">Выбрать скачанный APK файл</string>
+    <string name="home_file_picker_prompt_open_apk">Выбрать APK файл</string>
     <string name="home_recommended_version">Рекомендуемая версия</string>
     <string name="home_selected_version">Выбранная версия</string>
     <string name="home_select_apk_title">Выбрать APK</string>
-    <string name="home_select_any_apk_description">Нажмите кнопку ниже, чтобы выбрать файл APK любого приложения для патчинга</string>
+    <string name="home_select_any_apk_description">Нажмите кнопку ниже, чтобы выбрать APK файл любого приложения для патчинга</string>
     <string name="home_invalid_apk">Недопустимый файл APK</string>
     <string name="home_no_patches_for_app">Нет доступных патчей для этого приложения</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим эксперта</string>
-    <string name="expert_mode_subtitle_extended">%1$d из %2$d патчей выбрано</string>
+    <string name="expert_mode_subtitle_extended_format">Выбрано %1$s из %2$s</string>
     <string name="expert_mode_search">Поиск патчей</string>
     <string name="expert_mode_proceed">Перейти к патчингу</string>
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
     <string name="expert_mode_no_patches">Нет доступных патчей</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Выбрано несколько источников патчей</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
+    <string name="expert_mode_multiple_sources_warning_title">Выбрано несколько источников патчей</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
 
 Вы действительно хотите продолжить?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,19 +158,17 @@
     <string name="home_app_info_delete_item_patched_apk">Патченный APK файл</string>
     <string name="home_app_info_delete_item_original_apk">Оригинальный APK файл</string>
     <string name="home_app_info_delete_preservation_note">Выбранные патчи и параметры будут сохранены для будущего патчинга</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Удалено %d устаревших патчей из сохраненного выбора</string>
     <string name="home_app_info_patches_name_default">Патчи</string>
     <string name="home_app_info_patches_name_fallback">Безымянный</string>
     <string name="home_app_info_patches_replace_fail">Не удалось импортировать патчи: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Оригинальный APK не найден. Не удалось перепаковать это приложение</string>
-    <string name="home_app_info_repatch_requires_original">Повторить патчи требует оригинального файла APK</string>
     <string name="home_app_info_original_package_name">Исходное имя пакета</string>
     <string name="home_app_info_applied_patches">Примененные патчи</string>
     <string name="home_app_info_patch_source_used">Использован источник патчей</string>
     <string name="home_app_info_install_type">Тип установки</string>
     <string name="home_app_info_install_type_custom_installer">Пользовательский установщик</string>
     <string name="home_app_info_install_type_system_installer">Системный установщик</string>
-    <string name="home_app_info_patched_at">Патched</string>
+    <string name="home_app_info_patched_at">Пропатчен</string>
     <string name="home_app_info_patch_update_available">Доступно обновление патчей</string>
     <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Перепатчайте свою программу, чтобы получить последние улучшения и исправления</string>
     <string name="home_app_info_app_deleted_warning">Приложение удалено за пределами менеджера</string>
@@ -180,11 +176,17 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root режим требует установленный непатченный APK перед установкой патчей</string>
     <string name="root_gmscore_excluded">Поддержка GmsCore отключена в режиме root</string>
+    <string name="root_pre_patch_installer_title">Выберите способ установки</string>
+    <string name="root_pre_patch_installer_description">Устройство имеет доступ root. Выберите, как вы хотите установить патченное приложение</string>
+    <string name="root_pre_patch_installer_mount_title">Root монтирование</string>
+    <string name="root_pre_patch_installer_mount_description">Монтировать патченный APK поверх стандартного приложения. GmsCore не требуется</string>
+    <string name="root_pre_patch_installer_standard_title">Стандартная установка</string>
+    <string name="root_pre_patch_installer_standard_description">Установить как отдельное приложение с поддержкой GmsCore. Выберите установщик (Системный установщик, Shizuku и т.д.) после патчинга</string>
+    <string name="root_pre_patch_installer_hint">Способ установки определяет, какие патчи включены и какие нельзя изменить после патчинга</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ошибка скопирована в буфер обмена</string>
     <string name="patcher_error_log">Журнал ошибок</string>
     <string name="patcher_error_technical">Технические детали</string>
-    <string name="patcher_patches_progress">%1$d / %2$d патчей</string>
     <string name="patcher_long_step_warning">Этот шаг может занять некоторое время. Пожалуйста, подождите…</string>
     <string name="patcher_installing_subtitle">Почти готово к работе! 🎸</string>
     <string name="patcher_success_title">Все готово! 🎉</string>
@@ -207,7 +209,7 @@
     <string name="patcher_step_unpack">Чтение файла APK</string>
     <string name="patcher_step_group_patching">Патчинг</string>
     <string name="patcher_step_group_saving">Сохранение</string>
-    <string name="patcher_step_write_patched">Запись пропатченного APK-файла</string>
+    <string name="patcher_step_write_patched">Запись патченного APK файла</string>
     <string name="patcher_step_sign_apk">Подпись пропатченного APK-файла</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Патчинг в процессе…</string>
@@ -247,7 +249,7 @@
     <string name="patched_app_save_failed_toast">Не удалось сохранить исправленное приложение</string>
     <string name="download_apk">Скачать APK-файл</string>
     <string name="plugin_activity_dialog_body">Требуется взаимодействие пользователя для продолжения работы с этим плагином</string>
-    <string name="patcher_process_exit_message">Процесс Patcher завершился с кодом %1$d</string>
+    <string name="patcher_process_exit_message">Процесс патчера завершился с кодом %1$s</string>
     <string name="install_app_success">Успешно установлено</string>
     <string name="install_app_fail">Не удалось установить приложение: %s</string>
     <string name="install_timeout_message">Установка не завершилась. Проверьте диалог системного установщика и повторите попытку</string>
@@ -279,14 +281,15 @@
     <string name="settings_appearance_system">Системная</string>
     <string name="settings_appearance_light">Светлая</string>
     <string name="settings_appearance_dark">Тёмная</string>
-    <string name="settings_appearance_black">Чёрная</string>
     <string name="settings_appearance_dynamic">Материальное «Вы»</string>
     <string name="settings_appearance_accent_color">Цвет акцента</string>
+    <string name="settings_appearance_pure_black">Чисто черный</string>
+    <string name="settings_appearance_pure_black_description">Используйте настоящие черные фоны для OLED дисплеев</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Язык приложения YouTube</string>
     <string name="settings_appearance_app_language_current">Текущий язык</string>
-    <string name="settings_appearance_translations_info_title">Переводы для некоторых языков могут быть отсутствовать или неполными</string>
-    <string name="settings_appearance_translations_info_text">Чтобы перевести новые языки или улучшить существующие переводы, посетите %s</string>
+    <string name="settings_appearance_translations_info_title">Переводы для некоторых языков могут отсутствовать или быть неполными</string>
+    <string name="settings_appearance_translations_info_text">Для перевода на новые языки или улучшения существующих переводов посетите %s</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Иконка приложения</string>
     <string name="settings_appearance_app_icon_default">По умолчанию</string>
@@ -305,12 +308,14 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки эксперта</string>
     <string name="settings_advanced_expert_mode">Режим эксперта</string>
-    <string name="settings_advanced_expert_mode_description">Включает продвинутые функции и параметры настройки</string>
+    <string name="settings_advanced_expert_mode_description">Включить комплексные настройки патчей Morphe и параметры настройки</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Включить режим эксперта?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Экспертный режим предоставляет больше контроля над применением патчей, но неправильная настройка параметров в экспертном режиме может привести к нетрудоспособности программы.</string>
     <string name="settings_advanced_strip_unused_libs">Удалить неиспользуемые нативные библиотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Удалить нативные библиотеки для неподдерживаемых архитектур CPU из пропатченных приложений</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT (Личный токен доступа)</string>
-    <string name="settings_advanced_github_pat_description">Требуется для pull request пакетов</string>
+    <string name="settings_advanced_github_pat_description">Требуется для pull request источников</string>
     <string name="settings_advanced_github_pat_configured">Токен настроен</string>
     <string name="settings_advanced_github_pat_how_to_get">Как получить токен</string>
     <string name="settings_advanced_github_pat_dialog_title">Установить Персональный Токен Доступа GitHub</string>
@@ -322,8 +327,8 @@
     <string name="settings_advanced_patch_options">Параметры патчей</string>
     <string name="settings_advanced_patch_options_youtube_description">Параметры темы, брендинга, заголовка и Shorts</string>
     <string name="settings_advanced_patch_options_youtube_music_description">Параметры темы и брендинга</string>
-    <string name="settings_advanced_patch_options_restart_message">Изменение параметров патчей требует повторной патчирования приложения, чтобы вступить в силу</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">В режиме эксперта параметры патчей будут доступны во время процесса патчирования</string>
+    <string name="settings_advanced_patch_options_restart_message">Чтобы изменения параметров патчей вступили в силу, нужно повторно патчить приложение</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">В режиме эксперта параметры патчей будут доступны во время процесса патчинга</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Цвета темы приложения</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Изменить цвет фона</string>
@@ -424,17 +429,17 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Убедитесь, что Shizuku запущен, и этой программе предоставлено разрешение</string>
     <string name="installer_use_standard">Использовать стандартный</string>
     <string name="settings_prompt_installer_on_install">Предложить установщик при установке</string>
-    <string name="settings_prompt_installer_on_install_description">Показывать диалог выбора установщика каждый раз, когда устанавливается запатченное приложение</string>
+    <string name="settings_prompt_installer_on_install_description">Показывать диалоговое окно выбора установщика каждый раз, когда вы устанавливаете патченное приложение</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Производительность</string>
     <string name="settings_system_process_runtime">Время выполнения процесса</string>
-    <string name="settings_system_process_runtime_description">Выполнять патчирование в отдельном процессе для лучшей стабильности</string>
+    <string name="settings_system_process_runtime_description">Выполнять патчинг в отдельном процессе для лучшей стабильности</string>
     <string name="settings_system_process_runtime_memory_limit">Ограничение памяти</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Более высокие ограничения памяти могут ускорить патчирование, но могут не работать на старых устройствах</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Высший предел памяти может ускорить патчинг, но может не работать на старых устройствах</string>
     <string name="settings_system_process_runtime_enable">Включить время выполнения процесса</string>
-    <string name="settings_system_memory_limit_subtitle">Доступная память для патчирования</string>
-    <string name="settings_system_memory_limit_warning">Низкое ограничение памяти может привести к сбоям при патчировании больших приложений</string>
-    <string name="settings_system_process_runtime_enabled_description">Ограничение %d МБ</string>
+    <string name="settings_system_memory_limit_subtitle">Доступная память для патчинга</string>
+    <string name="settings_system_memory_limit_warning">Низкий лимит памяти может вызвать сбой при патчинге больших приложений</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Нажмите, чтобы настроить</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Импорт &amp; экспорт</string>
@@ -467,19 +472,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_debug">Отладка</string>
     <string name="settings_system_export_debug_logs">Экспортировать журналы отладки</string>
     <string name="settings_system_export_debug_logs_description">Экспортировать журналы отладки для устранения неполадок</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Не удалось прочитать журналы (код выхода %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Не удалось прочитать журналы (код выхода %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Не удалось экспортировать журналы</string>
     <string name="settings_system_export_debug_logs_export_success">Журналы экспортированы</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Управление хранилищем</string>
     <string name="settings_system_apks_size">Общий размер: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
-    <string name="settings_system_patched_apks_title">Патched APKs</string>
-    <string name="settings_system_patched_apks_description">Управление сохраненными файлами патched приложения</string>
-    <string name="settings_system_patched_apks_empty">Пока нет сохраненных патched APK</string>
-    <string name="settings_system_patched_apks_delete_title">Удалить патched APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Вы действительно хотите удалить сохраненный патched APK для %s?</string>
-    <string name="settings_system_patched_apks_deleted">Патched APK успешно удален</string>
+    <string name="settings_system_patched_apks_title">Патченые APK</string>
+    <string name="settings_system_patched_apks_description">Управление сохраненными патчеными файлами приложений</string>
+    <string name="settings_system_patched_apks_empty">Патченые файлы APK еще не сохранены</string>
+    <string name="settings_system_patched_apks_delete_title">Удалить патченный APK ?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Уверены, что хотите удалить сохраненный патченный APK для %s?</string>
+    <string name="settings_system_patched_apks_deleted">Патченый APK удален успешно</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Оригинальные APK</string>
     <string name="settings_system_original_apks_description">Оригинальные файлы APK сохраняются для повторной установки патчей. Для каждого приложения хранится только самая новая версия</string>
@@ -490,19 +495,32 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Выбор патчей</string>
     <string name="settings_system_patch_selections_description">Управление сохраненными выбранными патчами и параметрами. Они остаются после удаления программы</string>
-    <string name="settings_system_patch_selections_description_short">Сохранено для будущего патчинга</string>
-    <string name="settings_system_patch_selections_empty">Нет сохраненных выбранных патчей</string>
-    <string name="settings_system_patch_selections_has_options">Имеет опции</string>
-    <string name="settings_system_patch_selections_patches_options">Опции патчей</string>
-    <string name="settings_system_patch_selection_delete_title">Удалить выбранный патч</string>
-    <string name="settings_system_patch_selection_deleted">Выбор патчей удален</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Сбросить все выбранные исправления?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Сбросить все выбранные исправления для пакета?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Удалить выбранное исправление?</string>
+    <string name="settings_system_patch_selection_no_saved">Нет сохраненных выбранных патчей</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$d по %2$d</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$d в %2$d</string>
+    <string name="settings_system_patch_selection_source_format">Источник #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Будет удалено:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Это навсегда удалит все сохраненные выбранные исправления для всех пакетов и источников</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Это навсегда удалит все сохраненные выбранные исправления для %s по всем источникам</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выбранные патчи для %1$s в источнике #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Не удалось экспортировать данные источника</string>
+    <string name="settings_system_export_source_data_success">Данные источника экспортированы успешно</string>
+    <string name="settings_system_import_source_data_fail">Не удалось импортировать данные источника</string>
+    <string name="settings_system_import_source_data_success">Данные источника импортированы успешно</string>
+    <string name="settings_system_patch_details_title">Детали исправления</string>
+    <string name="settings_system_selected_patches_title">Выбранные патчи (%s)</string>
+    <string name="settings_system_patch_options_title">Параметры патчей (%s)</string>
+    <string name="settings_system_no_patches_or_options">Нет сохраненных исправлений или опций</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
     <string name="settings_system_share_website_description">Поделиться официальным сайтом Morphe</string>
-    <string name="settings_system_manager_description">"Morphe — это экспериментальный проект с открытым исходным кодом, направленный на создание современного, удобного патчирования популярных приложений Android
+    <string name="settings_system_manager_description">"Morphe это экспериментальный проект с открытым кодом, ориентированный на современный и оптимизированный патчинг популярных Android приложений
 
-Open-source в своей основе, Morphe процветает на основе обратной связи и вклада сообщества для продвижения будущих инноваций"</string>
+С открытым кодом в своей основе, Morphe процветает благодаря отзывам и вкладам сообщества, стимулирующим будущие инновации"</string>
     <!-- Shared strings -->
     <string name="patches">Патчи</string>
     <string name="home">Домашняя страница</string>
@@ -510,6 +528,7 @@ Open-source в своей основе, Morphe процветает на осн�
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="reset">Сбросить</string>
+    <string name="reset_all">Сбросить все</string>
     <string name="confirm">Подтвердить</string>
     <string name="warning">Предупреждение</string>
     <string name="error_">Ошибка</string>
@@ -531,6 +550,7 @@ Open-source в своей основе, Morphe процветает на осн�
     <string name="selected">Выбрано</string>
     <string name="not_selected">Не выбрано</string>
     <string name="rename">Переименовать</string>
+    <string name="import_">Импортировать</string>
     <string name="export">Экспорт</string>
     <string name="download">Скачать</string>
     <string name="less">Меньше</string>
@@ -543,7 +563,7 @@ Open-source в своей основе, Morphe процветает на осн�
     <string name="version">Версия</string>
     <string name="patch">Патч</string>
     <string name="repatch">Применить патч</string>
-    <string name="open">Открыто</string>
+    <string name="open">Открыть</string>
     <string name="mount">Смонтировано</string>
     <string name="mounted">Смонтировано</string>
     <string name="unmounted">Размонтировано</string>

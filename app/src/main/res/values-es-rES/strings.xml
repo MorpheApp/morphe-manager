@@ -13,7 +13,7 @@
     <string name="home_update_error">La actualización falló</string>
     <string name="home_update_error_subtitle">Comprueba tu conexión a internet y vuelve a intentarlo </string>
     <string name="home_updating_sources">Actualizando fuentes…</string>
-    <string name="home_update_progress">%1$d/%2$d fuentes procesadas</string>
+    <string name="home_update_progress_format">%1$s procesado</string>
     <string name="home_update_success">Actualización de fuentes completada</string>
     <string name="home_update_success_subtitle">Tus fuentes están al día</string>
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Impulsado por cafeína y buenos parches</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fuentes de parches</string>
-    <string name="sources_management_subtitle">%d fuentes instaladas</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
     <string name="sources_management_date_added">Agregado</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Eliminar la fuente \"%s\"? Esto no se puede deshacer.</string>
     <string name="sources_dialog_remote">Remota</string>
     <string name="sources_dialog_remote_url">URL de la fuente</string>
-    <string name="sources_dialog_remote_url_formats">"Ejemplos:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• ejemplo.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Ejemplos:</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Seleccione el archivo fuente de parches</string>
     <string name="sources_dialog_local_file_description">Seleccionar un archivo fuente de parches .mpp en el almacenamiento</string>
@@ -78,6 +74,8 @@ Versiones compatibles:"</string>
     <string name="home_apk_availability_unpatched_label">No parcheado</string>
     <string name="home_apk_availability_yes">Sí, la tengo</string>
     <string name="home_apk_availability_no">No, ayúdame a encontrarla</string>
+    <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
+    <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">APKDescarga el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>
@@ -102,15 +100,15 @@ Versiones compatibles:"</string>
     <string name="home_no_patches_for_app">No hay parches disponibles para esta aplicación</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo experto</string>
-    <string name="expert_mode_subtitle_extended">%1$d de %2$d parches seleccionados</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s de %2$s seleccionados</string>
     <string name="expert_mode_search">Buscar parches</string>
     <string name="expert_mode_proceed">Proceder al parcheado</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_enable_all">Activar todo</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
     <string name="expert_mode_no_patches">No hay parches disponibles</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Varias fuentes de parches seleccionadas</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
+    <string name="expert_mode_multiple_sources_warning_title">Se han seleccionado varias fuentes de parches</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
 
 ¿Realmente quieres continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Versiones compatibles:"</string>
     <string name="home_app_info_delete_item_patched_apk">Archivo APK parcheado</string>
     <string name="home_app_info_delete_item_original_apk">Archivo APK original</string>
     <string name="home_app_info_delete_preservation_note">Tu selección de parches y opciones se conservarán para futuros parcheos</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Eliminado %d parche obsoleto de la selección guardada</string>
     <string name="home_app_info_patches_name_default">Parches</string>
     <string name="home_app_info_patches_name_fallback">Sin nombre</string>
     <string name="home_app_info_patches_replace_fail">No se pudieron importar los parches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK original no encontrado. No se puede volver a parchear esta aplicación</string>
-    <string name="home_app_info_repatch_requires_original">Volver a parchear requiere el archivo APK original</string>
     <string name="home_app_info_original_package_name">Nombre del paquete original</string>
     <string name="home_app_info_applied_patches">Parches aplicados</string>
     <string name="home_app_info_patch_source_used">Fuente de parches utilizada</string>
@@ -180,11 +176,17 @@ Versiones compatibles:"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">El modo raíz requiere que el APK original esté instalado en tu dispositivo antes de aplicar parches.</string>
     <string name="root_gmscore_excluded">El parche de soporte de GmsCore está excluido en el modo raíz</string>
+    <string name="root_pre_patch_installer_title">Elegir método de instalación</string>
+    <string name="root_pre_patch_installer_description">Su dispositivo tiene acceso root. Elija cómo quiere instalar la aplicación parcheada.</string>
+    <string name="root_pre_patch_installer_mount_title">Montaje de root</string>
+    <string name="root_pre_patch_installer_mount_description">Montar el APK parcheado sobre la aplicación original. No se necesita GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">Instalación estándar</string>
+    <string name="root_pre_patch_installer_standard_description">Instalar como una aplicación separada con soporte de GmsCore. Elija el instalador (instalador del sistema, Shizuku, etc.) después de parchear</string>
+    <string name="root_pre_patch_installer_hint">El método de instalación determina qué parches se incluyen y no se puede cambiar después de parchear</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copiado en el portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>
     <string name="patcher_error_technical">Detalles técnicos</string>
-    <string name="patcher_patches_progress">%1$d / %2$d parches</string>
     <string name="patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
     <string name="patcher_installing_subtitle">¡Casi listo para empezar! 🎸</string>
     <string name="patcher_success_title">¡Todo listo! 🎉</string>
@@ -247,7 +249,7 @@ Versiones compatibles:"</string>
     <string name="patched_app_save_failed_toast">Error al guardar la app parcheada</string>
     <string name="download_apk">Descargar archivo APK</string>
     <string name="plugin_activity_dialog_body">Se requiere interacción del usuario para continuar con este complemento.</string>
-    <string name="patcher_process_exit_message">El proceso de parcheador finalizó con el código %1$d.</string>
+    <string name="patcher_process_exit_message">El proceso del parcheador terminó con el código %1$s</string>
     <string name="install_app_success">Instalado correctamente</string>
     <string name="install_app_fail">Error al instalar la aplicación: %s</string>
     <string name="install_timeout_message">La instalación no se completó. Revisa el diálogo del instalador del sistema y vuelve a intentarlo.</string>
@@ -279,9 +281,10 @@ Versiones compatibles:"</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Claro</string>
     <string name="settings_appearance_dark">Oscuro</string>
-    <string name="settings_appearance_black">Negro</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Color de acento</string>
+    <string name="settings_appearance_pure_black">Negro puro</string>
+    <string name="settings_appearance_pure_black_description">Usar fondos negros verdaderos para pantallas OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Idioma de la aplicación</string>
     <string name="settings_appearance_app_language_current">Idioma actual</string>
@@ -305,12 +308,14 @@ Versiones compatibles:"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ajustes avanzados</string>
     <string name="settings_advanced_expert_mode">Modo experto</string>
-    <string name="settings_advanced_expert_mode_description">Activa características avanzadas y opciones de personalización</string>
+    <string name="settings_advanced_expert_mode_description">Activa ajustes complejos de parcheo de Morphe y opciones de personalización</string>
+    <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo experto?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">El modo experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente los ajustes en modo experto puede resultar en una aplicación no funcional</string>
     <string name="settings_advanced_strip_unused_libs">Eliminar bibliotecas nativas no utilizadas</string>
     <string name="settings_advanced_strip_unused_libs_description">Eliminar bibliotecas nativas para arquitecturas de CPU no compatibles de las aplicaciones parcheadas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token de acceso personal de GitHub</string>
-    <string name="settings_advanced_github_pat_description">Requerido para los paquetes de solicitudes de extracción</string>
+    <string name="settings_advanced_github_pat_description">Requerido para fuentes de solicitud de extracción</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Cómo obtener un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Establecer token de acceso personal de GitHub</string>
@@ -434,7 +439,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_process_runtime_enable">Activar tiempo de ejecución del proceso</string>
     <string name="settings_system_memory_limit_subtitle">Memoria disponible para parches</string>
     <string name="settings_system_memory_limit_warning">Un límite de memoria bajo puede causar errores al parchear aplicaciones más grandes</string>
-    <string name="settings_system_process_runtime_enabled_description">Límite de %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Límite de %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pulsa para configurar</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importar y exportar</string>
@@ -467,7 +472,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_debug">Depurar</string>
     <string name="settings_system_export_debug_logs">Exportar registros de depuración</string>
     <string name="settings_system_export_debug_logs_description">Exportar registros del sistema para solucionar problemas</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">No se pudieron leer los registros (código de salida %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Error al leer los registros (código de salida %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Error al exportar registros</string>
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Las dimensiones de la imagen deben ser las siguientes:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Opciones de parche</string>
     <string name="settings_system_patch_selections_description">Administrar las selecciones y opciones de parches guardadas. Estas persisten después de la desinstalación de la aplicación</string>
-    <string name="settings_system_patch_selections_description_short">Guardado para futuros parcheos</string>
-    <string name="settings_system_patch_selections_empty">No hay selecciones de parches guardadas</string>
-    <string name="settings_system_patch_selections_has_options">Tiene opciones</string>
-    <string name="settings_system_patch_selections_patches_options">Opciones de parches</string>
-    <string name="settings_system_patch_selection_delete_title">Eliminar selección de parches</string>
-    <string name="settings_system_patch_selection_deleted">Selección de parches eliminada</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">¿Restablecer todas las selecciones?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">¿Restablecer las selecciones de paquetes?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">¿Restablecer las selecciones de fuentes?</string>
+    <string name="settings_system_patch_selection_no_saved">No hay selecciones de parches guardadas</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s a través de %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s en %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Fuente #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Esto eliminará:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para todos los paquetes y fuentes.</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para %s en todas las fuentes.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente las selecciones de parches guardadas para %1$s en la fuente #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Error al exportar datos de fuente</string>
+    <string name="settings_system_export_source_data_success">Datos de fuente exportados correctamente</string>
+    <string name="settings_system_import_source_data_fail">Error al importar datos de fuente</string>
+    <string name="settings_system_import_source_data_success">Datos de fuente importados correctamente</string>
+    <string name="settings_system_patch_details_title">Detalles del parche</string>
+    <string name="settings_system_selected_patches_title">Parches seleccionados (%s)</string>
+    <string name="settings_system_patch_options_title">Opciones de parche (%s)</string>
+    <string name="settings_system_no_patches_or_options">No hay parches ni opciones guardadas</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Acerca de Morphe</string>
     <string name="settings_system_share_website">Compartir sitio web</string>
@@ -510,6 +528,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="reset">Restablecer</string>
+    <string name="reset_all">Restablecer todo</string>
     <string name="confirm">Confirmar</string>
     <string name="warning">Advertencia</string>
     <string name="error_">Error</string>
@@ -531,6 +550,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="selected">Seleccionado</string>
     <string name="not_selected">No seleccionado</string>
     <string name="rename">Renombrar</string>
+    <string name="import_">Importar</string>
     <string name="export">Exportar</string>
     <string name="download">Descargar</string>
     <string name="less">Menos</string>

@@ -4,6 +4,18 @@
         <item quantity="one">%d пач</item>
         <item quantity="other">%d пач</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d опция</item>
+        <item quantity="other">%d опции</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d източник</item>
+        <item quantity="other">%d източника</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d пакет</item>
+        <item quantity="other">%d пакета</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Приложи %d пач</item>
         <item quantity="other">Приложи %d пача</item>
@@ -12,16 +24,16 @@
         <item quantity="one">%d APK файл</item>
         <item quantity="other">%d APK файла</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d запазена селекция</item>
-        <item quantity="other">%d запазени селекции</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Изтрих %1$d изтегли избрани стари патча</item>
+        <item quantity="other">Изтрих %1$d изтегли избрани стари патча</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Изключен %d източник</item>
-        <item quantity="other">Изключени %d източника</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d източник инсталиран</item>
+        <item quantity="other">%1$d източника инсталирани</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Активиран %d източник</item>
-        <item quantity="other">Активирани %d източника</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d избрана латка</item>
+        <item quantity="other">%d избрани латки</item>
     </plurals>
 </resources>

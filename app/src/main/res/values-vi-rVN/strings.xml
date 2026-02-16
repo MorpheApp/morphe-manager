@@ -13,7 +13,7 @@
     <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
-    <string name="home_update_progress">Đã xử lý %1$d/%2$d nguồn</string>
+    <string name="home_update_progress_format">Đã xử lý %1$s</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
     <string name="home_update_success_subtitle">Đã cập nhật nguồn mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Nạp caffein có ngay bản vá xịn</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
-    <string name="sources_management_subtitle">Đã cài đặt %d nguồn</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_management_date_added">Đã thêm</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Bạn có muốn xóa nguồn \"%s\" không? Thao tác này không thể hoàn tác đâu</string>
     <string name="sources_dialog_remote">Từ URL</string>
     <string name="sources_dialog_remote_url">URL nguồn</string>
-    <string name="sources_dialog_remote_url_formats">"Ví dụ:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Ví dụ:</string>
     <string name="sources_dialog_local">Từ bộ nhớ trong</string>
     <string name="sources_dialog_local_file">Chọn tệp nguồn vá</string>
     <string name="sources_dialog_local_file_description">Chọn tệp nguồn vá .mpp từ bộ nhớ trong</string>
@@ -78,6 +74,8 @@ Danh sách phiên bản tương thích:"</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_yes">Rồi, tôi đã có nó</string>
     <string name="home_apk_availability_no">Chưa, hãy giúp tôi tìm nó</string>
+    <string name="home_apk_use_saved_with_version">Dùng APK đã lưu (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Tải APK gốc</string>
     <string name="home_download_instructions_steps_title">Hướng dẫn:</string>
@@ -102,15 +100,15 @@ Danh sách phiên bản tương thích:"</string>
     <string name="home_no_patches_for_app">Không có bản vá nào cho ứng dụng này</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
-    <string name="expert_mode_subtitle_extended">Đã chọn %1$d/%2$d bản vá</string>
+    <string name="expert_mode_subtitle_extended_format">Đã chọn %1$s/%2$s</string>
     <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_no_patches">Không có bản vá nào</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Đã chọn nhiều nguồn bản</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó có thể khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
+    <string name="expert_mode_multiple_sources_warning_title">Đã chọn nhiều nguồn vá</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
 
 Bạn có chắc muốn tiếp tục không?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="home_app_info_delete_item_patched_apk">Tệp APK đã vá</string>
     <string name="home_app_info_delete_item_original_apk">Tệp APK gốc</string>
     <string name="home_app_info_delete_preservation_note">Các bản vá bạn đã chọn và các tuỳ chỉnh sẽ được lưu lại cho những lần vá sau</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Đã loại bỏ %d bản vá lỗi thời khỏi danh sách bản vá đã chọn</string>
     <string name="home_app_info_patches_name_default">Số bản vá</string>
     <string name="home_app_info_patches_name_fallback">Chưa có tên</string>
     <string name="home_app_info_patches_replace_fail">Không thể nhập bản vá: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Không tìm thấy APK gốc nên không thể vá lại ứng dụng này</string>
-    <string name="home_app_info_repatch_requires_original">Bạn cần APK gốc để vá lại</string>
     <string name="home_app_info_original_package_name">Tên gói ban đầu</string>
     <string name="home_app_info_applied_patches">Bản vá đã áp dụng</string>
     <string name="home_app_info_patch_source_used">Nguồn vá đã dùng</string>
@@ -180,11 +176,17 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Chế độ root yêu cầu APK gốc phải được cài đặt trên thiết bị trước khi vá</string>
     <string name="root_gmscore_excluded">Chế độ root không cần bản vá \'GmsCore support\'</string>
+    <string name="root_pre_patch_installer_title">Chọn phương thức cài đặt</string>
+    <string name="root_pre_patch_installer_description">Thiết bị của bạn đã có quyền root. Hãy chọn cách bạn muốn cài đặt ứng dụng đã vá</string>
+    <string name="root_pre_patch_installer_mount_title">Gắn kết bằng root</string>
+    <string name="root_pre_patch_installer_mount_description">Gắn APK đã patch đè lên ứng dụng gốc. Không cần dùng GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">Cài đặt tiêu chuẩn</string>
+    <string name="root_pre_patch_installer_standard_description">Cài đặt như ứng dụng riêng, có hỗ trợ GmsCore. Sau khi vá xong, bạn có thể chọn trình cài đặt (Trình cài đặt hệ thống, Shizuku, v.v.)</string>
+    <string name="root_pre_patch_installer_hint">Phương thức cài đặt sẽ quyết định bản vá nào được áp dụng và không thể thay đổi sau khi vá</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="patcher_error_log">Nhật ký lỗi</string>
     <string name="patcher_error_technical">Chi tiết kỹ thuật</string>
-    <string name="patcher_patches_progress">%1$d/%2$d bản vá</string>
     <string name="patcher_long_step_warning">Bước này có thể hơi lâu một chút. Vui lòng chờ…</string>
     <string name="patcher_installing_subtitle">Gần xong rồi, chuẩn bị quẩy thôi! 🎸</string>
     <string name="patcher_success_title">Hoàn tất! 🎉</string>
@@ -247,7 +249,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patched_app_save_failed_toast">Không thể lưu ứng dụng đã vá</string>
     <string name="download_apk">Tải tệp APK</string>
     <string name="plugin_activity_dialog_body">Bạn vẫn cần tự thao tác để tải ứng dụng</string>
-    <string name="patcher_process_exit_message">Tiến trình vá đã dừng với mã lỗi %1$d</string>
+    <string name="patcher_process_exit_message">Tiến trình vá đã dừng với mã lỗi %1$s</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
     <string name="install_app_fail">Không thể cài đặt ứng dụng: %s</string>
     <string name="install_timeout_message">Cài đặt không thành công. Hãy kiểm tra hộp thoại cài đặt của hệ thống và thử lại</string>
@@ -279,9 +281,10 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_appearance_system">Hệ thống</string>
     <string name="settings_appearance_light">Sáng</string>
     <string name="settings_appearance_dark">Tối</string>
-    <string name="settings_appearance_black">Đen</string>
     <string name="settings_appearance_dynamic">Cá nhân hóa</string>
     <string name="settings_appearance_accent_color">Màu nổi bật</string>
+    <string name="settings_appearance_pure_black">Đen tuyệt đối</string>
+    <string name="settings_appearance_pure_black_description">Dùng nền đen tuyệt đối để hiển thị tối ưu trên màn hình OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Ngôn ngữ</string>
     <string name="settings_appearance_app_language_current">Ngôn ngữ hiện tại</string>
@@ -305,12 +308,14 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Chuyên gia</string>
     <string name="settings_advanced_expert_mode">Chế độ chuyên gia</string>
-    <string name="settings_advanced_expert_mode_description">Bật tính năng nâng cao và tùy chỉnh</string>
+    <string name="settings_advanced_expert_mode_description">Mở khoá các tuỳ chỉnh vá nâng cao của Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Bật chế độ Chuyên gia?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Chế độ chuyên gia cho phép bạn tùy chỉnh sâu hơn về cách các bản vá được áp dụng, nhưng nếu bạn chỉnh không đúng có thể khiến ứng dụng không hoạt động</string>
     <string name="settings_advanced_strip_unused_libs">Xóa thư viện gốc không cần</string>
     <string name="settings_advanced_strip_unused_libs_description">Xóa thư viện gốc cho kiến trúc CPU không được hỗ trợ từ ứng dụng đã vá</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Mã PAT GitHub</string>
-    <string name="settings_advanced_github_pat_description">Bắt buộc đối với các gói pull request</string>
+    <string name="settings_advanced_github_pat_description">Bắt buộc đối với các nguồn pull request</string>
     <string name="settings_advanced_github_pat_configured">Đã cấu hình token</string>
     <string name="settings_advanced_github_pat_how_to_get">Cách lấy token</string>
     <string name="settings_advanced_github_pat_dialog_title">Thiết lập Personal Access Token của GitHub</string>
@@ -434,7 +439,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_process_runtime_enable">Bật tiến trình riêng</string>
     <string name="settings_system_memory_limit_subtitle">Bộ nhớ cho quá trình vá</string>
     <string name="settings_system_memory_limit_warning">Nếu bộ nhớ quá thấp có thể khiến bạn gặp lỗi trong quá trình vá ứng dụng lớn</string>
-    <string name="settings_system_process_runtime_enabled_description">Giới hạn %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Giới hạn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Bấm để cấu hình</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Xuất &amp; Nhập</string>
@@ -467,7 +472,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_debug">Gỡ lỗi</string>
     <string name="settings_system_export_debug_logs">Nhật ký gỡ lỗi</string>
     <string name="settings_system_export_debug_logs_description">Xuất nhật ký hệ thống để khắc phục lỗi</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Không thể xuất nhật ký</string>
     <string name="settings_system_export_debug_logs_export_success">Đã xuất nhật ký</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Kích thước hình ảnh yêu cầu:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bản vá đã chọn</string>
     <string name="settings_system_patch_selections_description">Quản lý bản vá đã chọn và các tùy chỉnh. Chúng vẫn được lưu lại ngay cả khi bạn gỡ cài đặt ứng dụng</string>
-    <string name="settings_system_patch_selections_description_short">Đã lưu cho lần vá sau</string>
-    <string name="settings_system_patch_selections_empty">Không có bản vá đã chọn được lưu</string>
-    <string name="settings_system_patch_selections_has_options">Có thể chỉnh</string>
-    <string name="settings_system_patch_selections_patches_options">Tùy chỉnh bản vá</string>
-    <string name="settings_system_patch_selection_delete_title">Xóa bản vá đã chọn</string>
-    <string name="settings_system_patch_selection_deleted">Đã xóa bản vá đã chọn</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Đặt lại toàn bộ bản vá đã chọn?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Đặt lại gói đã chọn?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Đặt lại nguồn đã chọn?</string>
+    <string name="settings_system_patch_selection_no_saved">Không có bản vá đã chọn được lưu</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s đến %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s trong %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Nguồn #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Thao tác sẽ xóa:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Toàn bộ bản vá đã lưu cho %s (trong mọi nguồn) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho %1$s (trong nguồn #%2$s) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_export_source_data_fail">Không thể xuất dữ liệu nguồn</string>
+    <string name="settings_system_export_source_data_success">Đã xuất dữ liệu nguồn thành công</string>
+    <string name="settings_system_import_source_data_fail">Không thể nhập dữ liệu nguồn</string>
+    <string name="settings_system_import_source_data_success">Đã nhập dữ liệu nguồn thành công</string>
+    <string name="settings_system_patch_details_title">Chi tiết bản vá</string>
+    <string name="settings_system_selected_patches_title">Số bản vá đã chọn (%s)</string>
+    <string name="settings_system_patch_options_title">Số bản vá đã chỉnh (%s)</string>
+    <string name="settings_system_no_patches_or_options">Không có bản vá hoặc tùy chỉnh được lưu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
@@ -510,6 +528,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="yes">Có</string>
     <string name="no">Không</string>
     <string name="reset">Đặt lại</string>
+    <string name="reset_all">Đặt lại tất cả</string>
     <string name="confirm">OK</string>
     <string name="warning">Cảnh báo</string>
     <string name="error_">Lỗi</string>
@@ -531,6 +550,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="selected">Đã chọn</string>
     <string name="not_selected">Không chọn</string>
     <string name="rename">Đổi tên</string>
+    <string name="import_">Nhập</string>
     <string name="export">Xuất</string>
     <string name="download">Tải xuống</string>
     <string name="less">Thu gọn</string>

@@ -4,6 +4,7 @@
     <string name="home_other_apps">Andra appar</string>
     <string name="home_not_patched_yet">Inte korrigerad än</string>
     <string name="home_no_patches_available">Inga korrigeringar är tillgängliga</string>
+    <string name="home_default_source_disabled">Morphe-korrigeringskällan är inaktiverad. Aktivera den i Korrigeringskällor eller använd expertläget</string>
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <!-- Home Screen - Update Notifications -->
@@ -12,7 +13,7 @@
     <string name="home_update_error">Uppdateringen misslyckades</string>
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
-    <string name="home_update_progress">%1$d/%2$d källor behandlade</string>
+    <string name="home_update_progress_format">%1$s har bearbetats</string>
     <string name="home_update_success">Uppdateringen av källor är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
@@ -39,7 +40,6 @@
     <string name="home_greeting_10">Drivs av koffein och bra korrigeringar</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Korrigeringskällor</string>
-    <string name="sources_management_subtitle">%d källor installerade</string>
     <string name="sources_management_open_in_browser">Öppna i webbläsaren</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
     <string name="sources_management_date_added">Tillagd</string>
@@ -55,6 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Ta bort källan \"%s\"? Det går inte att ångra den här åtgärden</string>
     <string name="sources_dialog_remote">Fjärrbaserad</string>
     <string name="sources_dialog_remote_url">Webbadress för källan</string>
+    <string name="sources_dialog_remote_url_formats_title">Exempel:</string>
     <string name="sources_dialog_local">Lokal</string>
     <string name="sources_dialog_local_file">Välj källfil för korrigeringar</string>
     <string name="sources_dialog_local_file_description">Välj en källfil för korrigeringar i .mpp-format från lagringen</string>
@@ -65,8 +66,16 @@
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Har du den ursprungliga okorrigerade APK-filen?</string>
+    <string name="home_apk_availability_dialog_simple">Om du vill korrigera %1$s behöver du en okorrigerad APK-fil med följande version:</string>
+    <string name="home_apk_availability_dialog_expert">"Har du en okorrigerad %1$s-APK-fil?
+
+Kompatibla versioner:"</string>
+    <string name="home_apk_availability_recommended_label">Rekommenderad</string>
+    <string name="home_apk_availability_unpatched_label">Okorrigerad</string>
     <string name="home_apk_availability_yes">Ja, jag har den</string>
     <string name="home_apk_availability_no">Nej, hjälp mig att hitta den</string>
+    <string name="home_apk_use_saved_with_version">Använd sparad APK-fil (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Ingen sparad APK-fil. Appkorrigeringen kräver att du väljer APK-filen igen</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Ladda ned den ursprungliga APK-filen</string>
     <string name="home_download_instructions_steps_title">Anvisningar:</string>
@@ -91,19 +100,21 @@
     <string name="home_no_patches_for_app">Inga korrigeringar är tillgängliga för den här appen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertläge</string>
-    <string name="expert_mode_subtitle_extended">%1$d av %2$d korrigeringar valda</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s av %2$s har valts</string>
     <string name="expert_mode_search">Sök efter korrigeringar</string>
-    <string name="expert_mode_proceed">Fortsätt till Korrigering</string>
+    <string name="expert_mode_proceed">Fortsätt till appkorrigeringen</string>
     <string name="expert_mode_disable_all">Inaktivera alla</string>
     <string name="expert_mode_enable_all">Aktivera alla</string>
     <string name="expert_mode_no_results">Inga korrigeringar hittades</string>
     <string name="expert_mode_no_patches">Inga korrigeringar är tillgängliga</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Flera korrigeringskällor har valts</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
+    <string name="expert_mode_multiple_sources_warning_title">Flera korrigeringskällor har valts</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Version som inte stöds</string>
     <string name="home_dialog_unsupported_version_dialog_description">Den här APK-filen är inte en rekommenderad appversion. Om du fortsätter kan det leda till att appen inte fungerar</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Fortsätt ändå</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Kompatibla versioner:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Stöds inte</string>
     <string name="home_dialog_wrong_package_title">Fel paket har valts</string>
     <string name="home_dialog_wrong_package_description">Den valda APK-filen är inte för den app du avsåg att korrigera</string>
     <string name="home_dialog_expected_package">Förväntat paket:</string>
@@ -120,6 +131,8 @@
     <string name="adaptive_icon_create">Skapa adaptiv ikon</string>
     <string name="adaptive_icon_instructions">Välj en förgrundsbild, välj bakgrundsfärg och justera förhandsgranskningen genom att nypa den</string>
     <string name="adaptive_icon_preview">Förhandsgranskning</string>
+    <string name="adaptive_icon_select_image">Välj bild</string>
+    <string name="adaptive_icon_change_image">Ändra bild</string>
     <string name="adaptive_icon_background_color">Bakgrundsfärg</string>
     <string name="adaptive_icon_reset_transform">Återställ position och skala</string>
     <string name="adaptive_icon_safe_zone_inner">Säker zon (alltid synlig)</string>
@@ -138,11 +151,15 @@
     <string name="header_creator_folder_explanation">Välj var mappen \"morphe_branding/morphe_header\" ska skapas med genererade sidhuvudfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
+    <string name="home_app_info_remove_app_warning">Det här tar bort följande permanent:</string>
+    <string name="home_app_info_delete_item_database">Databaspost</string>
+    <string name="home_app_info_delete_item_patched_apk">Korrigerad APK-fil</string>
+    <string name="home_app_info_delete_item_original_apk">Ursprunglig APK-fil</string>
+    <string name="home_app_info_delete_preservation_note">Ditt urval av korrigeringar och dess inställningar sparas för framtida appkorrigering</string>
     <string name="home_app_info_patches_name_default">Korrigeringar</string>
     <string name="home_app_info_patches_name_fallback">Namnlös</string>
     <string name="home_app_info_patches_replace_fail">Det gick inte att importera korrigeringar: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Den ursprungliga APK-filen hittades inte. Det går inte att korrigera den här appen igen</string>
-    <string name="home_app_info_repatch_requires_original">Den ursprungliga APK-filen krävs för att kunna korrigera igen</string>
     <string name="home_app_info_original_package_name">Ursprungligt paketnamn</string>
     <string name="home_app_info_applied_patches">Tillämpade korrigeringar</string>
     <string name="home_app_info_patch_source_used">Korrigeringskälla som används</string>
@@ -152,14 +169,22 @@
     <string name="home_app_info_patched_at">Korrigerad</string>
     <string name="home_app_info_patch_update_available">Uppdatering för korrigeringar är tillgänglig</string>
     <string name="home_app_info_patch_update_available_description">En nyare version av korrigeringarna är tillgänglig. Korrigera din app igen för att få de senaste förbättringarna och felkorrigeringarna</string>
+    <string name="home_app_info_app_deleted_warning">Appen har avinstallerats utanför Manager</string>
+    <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Manager. Korrigera den igen för att återställa funktionaliteten</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan korrigering</string>
     <string name="root_gmscore_excluded">Stödkorrigeringen för GmsCore exkluderas i rotläge</string>
+    <string name="root_pre_patch_installer_title">Välj installationsmetod</string>
+    <string name="root_pre_patch_installer_description">Din enhet har rotåtkomst. Välj hur du vill installera den korrigerade appen</string>
+    <string name="root_pre_patch_installer_mount_title">Rotmontering</string>
+    <string name="root_pre_patch_installer_mount_description">Montera den korrigerade APK-filen över standardappen. Inget GmsCore behövs</string>
+    <string name="root_pre_patch_installer_standard_title">Standardinstallation</string>
+    <string name="root_pre_patch_installer_standard_description">Installera som en separat app med stöd för GmsCore. Välj en installerare (Systemets installerare, Shizuku med flera) efter appkorrigeringen</string>
+    <string name="root_pre_patch_installer_hint">Installationsmetoden bestämmer vilka korrigeringar som inkluderas och kan inte ändras efter appkorrigeringen</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fel kopierat till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
     <string name="patcher_error_technical">Teknisk information</string>
-    <string name="patcher_patches_progress">%1$d/%2$d korrigeringar</string>
     <string name="patcher_long_step_warning">Det här steget kan ta en stund. Vänta …</string>
     <string name="patcher_installing_subtitle">Nästan redo att rocka loss! 🎸</string>
     <string name="patcher_success_title">Klart! 🎉</string>
@@ -203,12 +228,12 @@
     <string name="patcher_message_10">Bra korrigeringar är värda att vänta på … ⏳</string>
     <string name="patcher_message_11">Polerar pixlar tills de glänser … 💎</string>
     <string name="patcher_message_12">Vänligen sitt kvar tills kaptenen stänger av \"Korrigering pågår\"-skylten … 💺✈️</string>
-    <string name="patcher_message_13">Tillagar din korrigerade app, varm och färsk … 🍳</string>
+    <string name="patcher_message_13">Tillreder din korrigerade app, varm och färsk … 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Förhandlar artigt med bytekod … 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="patcher_message_15">Systemet är normalt … korrigeringsbanan är stabil … 🚀</string>
-    <string name="patcher_message_16">Pressar ut extra kraft, som juice från en digital citron … 🍋</string>
+    <string name="patcher_message_16">Pressar ut extra kraft, som saft ur en digital citron … 🍋</string>
     <string name="patcher_message_17">Uppmuntrar appen att acceptera sitt nya, bättre jag … 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Ändrar appens superposition från okorrigerad till korrigerad … 📦⚛️</string>
@@ -221,7 +246,8 @@
     <string name="patched_app_saved_toast">Den korrigerade appen sparades till senare</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den korrigerade appen</string>
     <string name="download_apk">Ladda ned APK-fil</string>
-    <string name="patcher_process_exit_message">Korrigeringsprocessen avslutades med koden %1$d</string>
+    <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med det här plugin-programmet</string>
+    <string name="patcher_process_exit_message">Korrigeringsprocessen avslutades med koden %1$s</string>
     <string name="install_app_success">Installationen lyckades</string>
     <string name="install_app_fail">Det gick inte att installera appen: %s</string>
     <string name="install_timeout_message">Installationen slutfördes inte. Kontrollera systemets installationsdialogruta och försök igen</string>
@@ -229,6 +255,7 @@
     <string name="saved_app_export_failed">Det gick inte att exportera den korrigerade appen</string>
     <string name="saved_app_removed_toast">Tog bort den sparade korrigerade appen</string>
     <string name="saved_app_copy_removed_toast">Tog bort den sparade kopian</string>
+    <string name="saved_app_launch_unavailable">Installera appen innan du öppnar den</string>
     <string name="package_name">Paketnamn</string>
     <string name="failed_to_mount">Det gick inte att montera: %s</string>
     <string name="failed_to_unmount">Det gick inte att avmontera: %s</string>
@@ -240,18 +267,22 @@
     <string name="settings_appearance_background">Bakgrundsanimation</string>
     <string name="settings_appearance_background_circles">Cirklar</string>
     <string name="settings_appearance_background_rings">Ringar</string>
+    <string name="settings_appearance_background_mesh">Nät</string>
     <string name="settings_appearance_background_space">Rymden</string>
     <string name="settings_appearance_background_shapes">Former</string>
     <string name="settings_appearance_background_snow">Snö</string>
     <string name="settings_appearance_background_none">Ingen</string>
+    <string name="settings_appearance_parallax_effect">Parallaxeffekt</string>
+    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när enheten lutas</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Ljust</string>
     <string name="settings_appearance_dark">Mörkt</string>
-    <string name="settings_appearance_black">Svart</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accentfärg</string>
+    <string name="settings_appearance_pure_black">Rent svart</string>
+    <string name="settings_appearance_pure_black_description">Använd bakgrunder med äkta svärta för OLED-skärmar</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
@@ -275,10 +306,21 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
-    <string name="settings_advanced_expert_mode_description">Aktivera avancerade funktioner och anpassningsalternativ</string>
+    <string name="settings_advanced_expert_mode_description">Aktivera komplexa korrigeringsinställningar och anpassningsalternativ för Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläget?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur korrigeringar tillämpas, men om du felaktigt konfigurerar inställningar i expertläget kan det leda till att appen inte fungerar</string>
     <string name="settings_advanced_strip_unused_libs">Ta bort oanvända inbyggda bibliotek</string>
     <string name="settings_advanced_strip_unused_libs_description">Ta bort inbyggda bibliotek för CPU-arkitekturer som inte stöds från korrigerade appar.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">GitHub-PAT</string>
+    <string name="settings_advanced_github_pat_description">Krävs för att använda hämtningsbegäranden som källor</string>
+    <string name="settings_advanced_github_pat_configured">Token konfigurerad</string>
+    <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
+    <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
+    <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken (PAT) för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en PAT med omfattningen public_repo github.com</string>
+    <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till din PAT i exporterade Manager-inställningar</string>
+    <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Korrigeringsalternativ</string>
     <string name="settings_advanced_patch_options_youtube_description">Tema, varumärkning, sidhuvud och Shorts-alternativ</string>
@@ -352,34 +394,50 @@ Bildernas mått ska vara följande:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Ta bort knappen Shorts från widgeten i startprogrammet</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installerare</string>
-    <string name="installer_internal_name">Systeminstallationsprogram</string>
+    <string name="installer_title">Välj installerare</string>
+    <string name="installer_internal_name">Systemets installerare</string>
     <string name="installer_internal_description">Använd Androids pakethanterare</string>
     <string name="installer_auto_saved_name">Installerare för rotningsmontering</string>
     <string name="installer_auto_saved_description">Monterar den korrigerade APK-filen över den installerade appen (rotåtkomst krävs)</string>
+    <string name="installer_shizuku_description">Installera tyst med Shizuku eller Sui</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
     <string name="installer_none_description">Ingen alternativ installerare har konfigurerats</string>
     <string name="installer_status_requires_root">Kräver rotåtkomst</string>
+    <string name="installer_status_not_supported">Stöds inte för den här åtgärden</string>
     <string name="installer_status_shizuku_not_installed">Installera Shizuku eller Sui för att använda det här alternativet</string>
+    <string name="installer_status_shizuku_not_running">Starta Shizuku eller Sui och försök igen</string>
     <string name="installer_status_shizuku_permission">Ge Shizuku behörighet till Morphe från Shizuku-appen</string>
     <string name="installer_mount_warning_install">Din primära installerare har angetts till den rootade monteringsinstalleraren. Den här sparade appen installerades inte med montering</string>
-    <string name="mount_version_mismatch_message">Standardappversionen (%2$s) matchar inte den patchade appversionen (%1$s). Montera den matchande standardversionen och försök igen</string>
+    <string name="mount_version_mismatch_message">Standardappens version (%2$s) matchar inte den korrigerade appens version (%1$s). Montera den matchande standardversionen och försök igen</string>
+    <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
     <string name="installer_action_open_shizuku">Öppna Shizuku</string>
     <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till en annan installerare</string>
     <string name="installer_hint_blocked">Installationen blockerades av Android. Kontrollera Play Protect eller säkerhetsinställningarna</string>
     <string name="installer_hint_conflict">En annan app med det här paketnamnet är redan installerad. Avinstallera den innan du fortsätter</string>
     <string name="installer_hint_incompatible">APK-filen är inte kompatibel med den här enheten eller Android-versionen</string>
     <string name="installer_hint_invalid">APK-filen är ogiltig eller skadad</string>
+    <string name="installer_hint_storage">Det finns inte tillräckligt med lagringsutrymme för installationen</string>
+    <string name="installer_hint_timeout">Tidsgränsen överskreds för installationen. Försök igen</string>
+    <string name="installer_hint_aborted">Installationen avbröts</string>
     <string name="installer_external_launched">Öppnar %1$s …</string>
+    <string name="installer_external_timeout">%1$s bekräftade inte installationen. Kontrollera den andra appen och försök igen</string>
+    <string name="installer_external_success">%1$s meddelade om en lyckad installation</string>
+    <string name="installer_unavailable_title">%s är inte tillgänglig</string>
+    <string name="installer_unavailable_message">Din föredragna installerare (%s) är för närvarande inte tillgänglig. Du kan åtgärda problemet och försöka igen eller använda standardinstalleraren istället</string>
+    <string name="installer_unavailable_shizuku_hint">Se till att Shizuku körs och att appen har tilldelats behörighet</string>
+    <string name="installer_use_standard">Använd standardinstalleraren</string>
+    <string name="settings_prompt_installer_on_install">Be om installerare vid installation</string>
+    <string name="settings_prompt_installer_on_install_description">Visa en dialogruta för att välja en installerare varje gång du installerar en korrigerad app</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prestanda</string>
-    <string name="settings_system_process_runtime">Processkörning</string>
+    <string name="settings_system_process_runtime">Processexekvering</string>
     <string name="settings_system_process_runtime_description">Kör appkorrigeringen i en separat process för bättre stabilitet</string>
     <string name="settings_system_process_runtime_memory_limit">Minnesgräns</string>
     <string name="settings_system_process_runtime_memory_limit_description">Högre minnesgränser kan göra appkorrigeringen snabbare, men det kan hända att det inte fungerar med äldre enheter</string>
-    <string name="settings_system_process_runtime_enable">Aktivera processkörning</string>
-    <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för appkorrigering</string>
+    <string name="settings_system_process_runtime_enable">Aktivera processexekvering</string>
+    <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för appkorrigeringen</string>
     <string name="settings_system_memory_limit_warning">En låg minnesgräns kan leda till fel när du korrigerar större appar</string>
-    <string name="settings_system_process_runtime_enabled_description">Gräns på %d MB</string>
+    <string name="settings_system_process_runtime_enabled_description">Gräns på %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Tryck för att konfigurera</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importera och exportera</string>
@@ -412,10 +470,11 @@ Bildernas mått ska vara följande:
     <string name="settings_system_debug">Felsökning</string>
     <string name="settings_system_export_debug_logs">Exportera felsökningsloggar</string>
     <string name="settings_system_export_debug_logs_description">Exportera systemloggar för felsökning</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Det gick inte att exportera loggar</string>
     <string name="settings_system_export_debug_logs_export_success">Loggar exporterade</string>
     <!-- Settings - System Tab - Storage Management Section -->
+    <string name="settings_system_storage_management">Lagringshantering</string>
     <string name="settings_system_apks_size">Total storlek: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Korrigerade APK-filer</string>
@@ -432,6 +491,27 @@ Bildernas mått ska vara följande:
     <string name="settings_system_original_apks_delete_title">Ta bort ursprunglig APK-fil?</string>
     <string name="settings_system_original_apks_delete_confirm">Ta bort den ursprungliga APK-filen för %s? Du kan inte korrigera appen igen utan att ange en ny APK-fil</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Korrigeringsurval</string>
+    <string name="settings_system_patch_selections_description">Hantera sparade korrigeringsurval och -alternativ. Dessa blir kvar om appar avinstalleras</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Återställ alla urval?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Återställ paketurval?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Återställ källurval?</string>
+    <string name="settings_system_patch_selection_no_saved">Inga sparade korrigeringsurval</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s från %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Källa %s</string>
+    <string name="settings_system_patch_selection_will_delete">Det här tar bort:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Det här tar bort alla sparade korrigeringsurval för alla paket och källor permanent</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Det här tar bort alla sparade korrigeringsurval för %s från alla källor permanent</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Det här tar bort sparade korrigeringsurval för %1$s i källa %2$s permanent</string>
+    <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
+    <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
+    <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
+    <string name="settings_system_import_source_data_success">Källdata har importerats</string>
+    <string name="settings_system_patch_details_title">Korrigeringsinformation</string>
+    <string name="settings_system_selected_patches_title">Valda korrigeringar (%s)</string>
+    <string name="settings_system_patch_options_title">Korrigeringsalternativ (%s)</string>
+    <string name="settings_system_no_patches_or_options">Inga korrigeringar eller alternativ har sparats</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
@@ -446,6 +526,8 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="reset">Återställ</string>
+    <string name="reset_all">Återställ alla</string>
+    <string name="confirm">Bekräfta</string>
     <string name="warning">Varning</string>
     <string name="error_">Fel</string>
     <string name="retry">Försök igen</string>
@@ -466,6 +548,7 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="selected">Vald</string>
     <string name="not_selected">Inte vald</string>
     <string name="rename">Byt namn</string>
+    <string name="import_">Importera</string>
     <string name="export">Exportera</string>
     <string name="download">Ladda ned</string>
     <string name="less">Mindre</string>
@@ -487,6 +570,7 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="installed">Installerad</string>
     <string name="reinstall">Installera om</string>
     <string name="uninstall">Avinstallera</string>
+    <string name="uninstalled">Avinstallerad</string>
     <string name="save">Spara</string>
     <string name="saved">Sparad</string>
     <string name="update">Uppdatera</string>
@@ -495,10 +579,12 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="unmounting_ellipsis">Avmonterar …</string>
     <string name="importing_ellipsis">Importerar …</string>
     <string name="changelog">Visa ändringsloggar</string>
+    <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
     <string name="changelog_loading">Läser in ändringsloggen</string>
     <string name="changelog_download_fail">Det gick inte att ladda ned ändringsloggen: %s</string>
     <string name="changelog_retry">Försök igen</string>
     <string name="changelog_empty">Ingen ändringslogg är tillgänglig</string>
+    <string name="no_network_toast">Ingen internetanslutning är tillgänglig</string>
     <string name="update_available">En uppdatering är tillgänglig</string>
     <string name="ready_to_install_update">Redo att installera uppdatering</string>
     <string name="update_completed">Uppdatering installerad</string>

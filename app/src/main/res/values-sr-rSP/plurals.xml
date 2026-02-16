@@ -5,6 +5,21 @@
         <item quantity="few">%d исправке</item>
         <item quantity="other">%d исправки</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d опција</item>
+        <item quantity="few">%d опције</item>
+        <item quantity="other">%d опција</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d извор</item>
+        <item quantity="few">%d извора</item>
+        <item quantity="other">%d извора</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d пакет</item>
+        <item quantity="few">%d пакета</item>
+        <item quantity="other">%d пакета</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Изврши %d исправку</item>
         <item quantity="few">Изврши %d исправке</item>
@@ -15,19 +30,19 @@
         <item quantity="few">%d АПК датотеке</item>
         <item quantity="other">%d АПК датотека</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d сачувана селекција</item>
-        <item quantity="few">%d сачуваних селекција</item>
-        <item quantity="other">%d сачуваних селекција</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Уклоњено је %1$d застарело исправка са чувања одабраних</item>
+        <item quantity="few">Уклоњено је %1$d застарелих исправке са чувања одабраних</item>
+        <item quantity="other">Уклоњено је %1$d застарелих исправки са чувања одабраних</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Онемогућено %d извор</item>
-        <item quantity="few">Онемогућено %d извора</item>
-        <item quantity="other">Онемогућено %d извора</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d извор је инсталиран</item>
+        <item quantity="few">%1$d извора је инсталирано</item>
+        <item quantity="other">%1$d извора је инсталирано</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Омогућено %d извор</item>
-        <item quantity="few">Омогућено %d извора</item>
-        <item quantity="other">Омогућено %d извора</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d изабрано опција</item>
+        <item quantity="few">%d изабрано опција</item>
+        <item quantity="other">%d изабрано опција</item>
     </plurals>
 </resources>

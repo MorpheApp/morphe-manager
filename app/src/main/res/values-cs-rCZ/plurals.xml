@@ -6,6 +6,24 @@
         <item quantity="many">%d záplat</item>
         <item quantity="other">%d záplat</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d záplatová možnost</item>
+        <item quantity="few">%d záplatové možnosti</item>
+        <item quantity="many">%d záplatových možností</item>
+        <item quantity="other">%d záplatových možností</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d zdroj</item>
+        <item quantity="few">%d zdroje</item>
+        <item quantity="many">%d zdrojů</item>
+        <item quantity="other">%d zdrojů</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d balíček</item>
+        <item quantity="few">%d balíčky</item>
+        <item quantity="many">%d balíčků</item>
+        <item quantity="other">%d balíčků</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Provést %d záplatu</item>
         <item quantity="few">Provést %d záplaty</item>
@@ -18,22 +36,22 @@
         <item quantity="many">%d souborů APK</item>
         <item quantity="other">%d souborů APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d uložená výběr</item>
-        <item quantity="few">%d uložené výběry</item>
-        <item quantity="many">%d uložených výběrů</item>
-        <item quantity="other">%d uložených výběrů</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Odstranil jsem %1$d zastaralou opravu ze uložené výběru</item>
+        <item quantity="few">Odstranil jsem %1$d zastaralé opravy ze uložené výběru</item>
+        <item quantity="many">Odstranil jsem %1$d zastaralých oprav ze uložené výběru</item>
+        <item quantity="other">Odstranil jsem %1$d zastaralých oprav ze uložené výběru</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Zakázáno %d zdroj</item>
-        <item quantity="few">Zakázáno %d zdrojů</item>
-        <item quantity="many">Zakázáno %d zdrojů</item>
-        <item quantity="other">Zakázáno %d zdrojů</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">Instalováno %1$d zdrojů</item>
+        <item quantity="few">Instalováno %1$d zdroje</item>
+        <item quantity="many">Instalováno %1$d zdrojů</item>
+        <item quantity="other">Instalováno %1$d zdrojů</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Povoleno %d zdroj</item>
-        <item quantity="few">Povoleno %d zdrojů</item>
-        <item quantity="many">Povoleno %d zdrojů</item>
-        <item quantity="other">Povoleno %d zdrojů</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d z  záplat vybráno</item>
+        <item quantity="few">%d z  záplat vybráno</item>
+        <item quantity="many">%d z  záplat vybráno</item>
+        <item quantity="other">%d z  záplat vybráno</item>
     </plurals>
 </resources>

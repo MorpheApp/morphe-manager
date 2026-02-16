@@ -8,6 +8,30 @@
         <item quantity="many">%d تعديلًا</item>
         <item quantity="other">%d تعديلات</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="zero">%d خيارات التعديل</item>
+        <item quantity="one">%d خيارة التعديل</item>
+        <item quantity="two">%d خيارات التعديل</item>
+        <item quantity="few">%d خيارات التعديل</item>
+        <item quantity="many">%d خيارات التعديل</item>
+        <item quantity="other">%d خيارات التعديل</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="zero">%d مصادر التعديل</item>
+        <item quantity="one">%d مصدر التعديل</item>
+        <item quantity="two">%d مصادر التعديل</item>
+        <item quantity="few">%d مصادر التعديل</item>
+        <item quantity="many">%d مصادر التعديل</item>
+        <item quantity="other">%d مصادر التعديل</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="zero">%d أي حزمة</item>
+        <item quantity="one">%d أي حزمة</item>
+        <item quantity="two">%d أي حزمة</item>
+        <item quantity="few">%d أي حزمة</item>
+        <item quantity="many">%d أي حزمة</item>
+        <item quantity="other">%d أي حزمة</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="zero">تنفيذ %d تعديل</item>
         <item quantity="one">تنفيذ %d تعديل</item>
@@ -24,28 +48,28 @@
         <item quantity="many">%d ملفات APK</item>
         <item quantity="other">%d ملف APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="zero">%d تحديد محفوظ</item>
-        <item quantity="one">%d تحديد محفوظ</item>
-        <item quantity="two">%d تحديدان محفوظان</item>
-        <item quantity="few">%d تحديدات محفوظة</item>
-        <item quantity="many">%d تحديدات محفوظة</item>
-        <item quantity="other">%d تحديد محفوظ</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="zero">تمت إزالة %1$d تعديلات قديمة من التحديد المحفوظ</item>
+        <item quantity="one">تمت إزالة %1$d تعديلات قديمة من التحديد المحفوظ</item>
+        <item quantity="two">تمت إزالة %1$d تعديلات قديمة من التحديد المحفوظ</item>
+        <item quantity="few">تمت إزالة %1$d تعديلات قديمة من التحديد المحفوظ</item>
+        <item quantity="many">تمت إزالة %1$d تعديلات قديمة من التحديد المحفوظ</item>
+        <item quantity="other">تمت إزالة %1$d تعديلات قديمة من التحديد المحفوظ</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="zero">تم تعطيل %d مصدر</item>
-        <item quantity="one">تم تعطيل %d مصدر</item>
-        <item quantity="two">تم تعطيل %d مصدران</item>
-        <item quantity="few">تم تعطيل %d مصادر</item>
-        <item quantity="many">تم تعطيل %d مصادر</item>
-        <item quantity="other">تم تعطيل %d مصدر</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="zero">%1$d مصادر تم تثبيتها</item>
+        <item quantity="one">%1$d مصدر تم تثبيتها</item>
+        <item quantity="two">%1$d مصادر تم تثبيتها</item>
+        <item quantity="few">%1$d مصادر تم تثبيتها</item>
+        <item quantity="many">%1$d مصادر تم تثبيتها</item>
+        <item quantity="other">%1$d مصادر تم تثبيتها</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="zero">تم تمكين %d مصدر</item>
-        <item quantity="one">تم تمكين %d مصدر</item>
-        <item quantity="two">تم تمكين %d مصدران</item>
-        <item quantity="few">تم تمكين %d مصادر</item>
-        <item quantity="many">تم تمكين %d مصادر</item>
-        <item quantity="other">تم تمكين %d مصدر</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="zero">%d تعديلات محددة</item>
+        <item quantity="one">%d تعديل محدد</item>
+        <item quantity="two">%d تعديلات محددة</item>
+        <item quantity="few">%d تعديلات محددة</item>
+        <item quantity="many">%d تعديلات محددة</item>
+        <item quantity="other">%d تعديلات محددة</item>
     </plurals>
 </resources>

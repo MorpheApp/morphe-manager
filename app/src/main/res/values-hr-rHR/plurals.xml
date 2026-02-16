@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d zakrpa</item>
-        <item quantity="few">%d zakrpe</item>
-        <item quantity="other">%d zakrpe</item>
+        <item quantity="one">%d patch</item>
+        <item quantity="few">%d patcheva </item>
+        <item quantity="other">%d patcheva </item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d opcija patchanja</item>
+        <item quantity="few">%d opcije patchanja</item>
+        <item quantity="other">%d opcija patchanja</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d izvor</item>
+        <item quantity="few">%d izvora</item>
+        <item quantity="other">%d izvora</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paket</item>
+        <item quantity="few">%d paketa</item>
+        <item quantity="other">%d paketa</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Izvrši %d popravku</item>
-        <item quantity="few">Izvrši %d popravku</item>
-        <item quantity="other">Izvrši %d popravke</item>
+        <item quantity="one">Izvrši %d patch</item>
+        <item quantity="few">Izvrši %d patcheva </item>
+        <item quantity="other">Izvrši %d patcheva </item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d aplikacija</item>
+        <item quantity="few">%d aplikacija</item>
+        <item quantity="other">%d aplikacija</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Uklonjen je %1$d zastario patch iz spremljenog odabira</item>
+        <item quantity="few">Uklonjeno %1$d zastarjelih patcheva iz spremljenog odabira</item>
+        <item quantity="other">Uklonjeno %1$d zastarjelih patcheva iz spremljenog odabira</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d izvor instaliran</item>
+        <item quantity="few">%1$d izvora instalirano</item>
+        <item quantity="other">%1$d izvora instalirano</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d odabran od %d patcheva</item>
+        <item quantity="few">%d odabrano od %d patcheva</item>
+        <item quantity="other">%d odabrano od %d patcheva</item>
     </plurals>
 </resources>

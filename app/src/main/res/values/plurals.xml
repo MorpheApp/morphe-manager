@@ -4,6 +4,18 @@
         <item quantity="one">%d patch</item>
         <item quantity="other">%d patches</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d patch option</item>
+        <item quantity="other">%d patch options</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d source</item>
+        <item quantity="other">%d sources</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d package</item>
+        <item quantity="other">%d packages</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Execute %d patch</item>
         <item quantity="other">Execute %d patches</item>
@@ -12,16 +24,16 @@
         <item quantity="one">%d APK file</item>
         <item quantity="other">%d APK files</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d saved selection</item>
-        <item quantity="other">%d saved selections</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Removed %1$d outdated patch from saved selection</item>
+        <item quantity="other">Removed %1$d outdated patches from saved selection</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Disabled %d source</item>
-        <item quantity="other">Disabled %d sources</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d source installed</item>
+        <item quantity="other">%1$d sources installed</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Enabled %d source</item>
-        <item quantity="other">Enabled %d sources</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d patch selected</item>
+        <item quantity="other">%d patches selected</item>
     </plurals>
 </resources>

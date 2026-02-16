@@ -3,19 +3,28 @@
     <plurals name="patch_count">
         <item quantity="other">%d 个补丁</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d 个选项</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d 个源</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d 个包</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">执行 %d 个补丁</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="other">%d 个 APK 文件</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="other">%d 个保存的选择</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="other">移除了保存的选择中的%1$d个过时的补丁</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">禁用了 %d 个源</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="other">安装了%1$d个源</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">启用了 %d 个源</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="other">已选择 %d 个补丁</item>
     </plurals>
 </resources>

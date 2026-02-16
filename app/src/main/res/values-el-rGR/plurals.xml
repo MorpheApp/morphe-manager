@@ -4,6 +4,18 @@
         <item quantity="one">%d τροποποίηση</item>
         <item quantity="other">%d τροποποιήσεις</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d επιλογή τροποποίησης</item>
+        <item quantity="other">%d επιλογές τροποποιήσεων</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d πηγή</item>
+        <item quantity="other">%d πηγές</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d πακέτο</item>
+        <item quantity="other">%d πακέτα</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Εκτέλεση %d τροποποίησης</item>
         <item quantity="other">Εκτέλεση %d τροποποιήσεων</item>
@@ -12,16 +24,16 @@
         <item quantity="one">%d αρχείο APK</item>
         <item quantity="other">%d αρχεία APK</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d επιλεγμένη αποθήκευση</item>
-        <item quantity="other">%d επιλεγμένες αποθηκεύσεις</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Αφαιρέθηκε %1$d παλιά τροποποίηση από τις αποθηκευμένες επιλογές</item>
+        <item quantity="other">Αφαιρέθηκαν %1$d παλιές τροποποιήσεις από τις αποθηκευμένες επιλογές</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Απενεργοποιήθηκε %d πηγή</item>
-        <item quantity="other">Απενεργοποιήθηκαν %d πηγές</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d πηγή εγκατεστημένη</item>
+        <item quantity="other">%1$d πηγές εγκατεστημένες</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Ενεργοποιήθηκε %d πηγή</item>
-        <item quantity="other">Ενεργοποιήθηκαν %d πηγές</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d επιλεγμένη τροποποίηση</item>
+        <item quantity="other">%d επιλεγμένες τροποποιήσεις</item>
     </plurals>
 </resources>
