@@ -21,6 +21,7 @@ fun ChangelogDialog(
     updateViewModel: UpdateViewModel
 ) {
     val textColor = LocalDialogTextColor.current
+    val releaseInfo = updateViewModel.currentVersionReleaseInfo
 
     // Load current version changelog when dialog opens
     LaunchedEffect(Unit) {
@@ -31,15 +32,23 @@ fun ChangelogDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.changelog),
         footer = {
-            MorpheDialogButton(
-                text = stringResource(android.R.string.ok),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
+            MorpheDialogButtonColumn {
+                if (releaseInfo != null) {
+                    // Show changelog button in footer
+                    ChangelogButton(
+                        pageUrl = releaseInfo.pageUrl,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                MorpheDialogButton(
+                    text = stringResource(android.R.string.ok),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
-        val releaseInfo = updateViewModel.currentVersionReleaseInfo
-
         if (releaseInfo == null) {
             // Shimmer loading state with header and content
             ChangelogSectionLoading()
