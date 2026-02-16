@@ -13,7 +13,7 @@
     <string name="home_update_error">Actualizarea a eșuat</string>
     <string name="home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
     <string name="home_updating_sources">Se actualizează surse…</string>
-    <string name="home_update_progress">%1$d/%2$d surse procesate</string>
+    <string name="home_update_progress_format">%1$s procesat</string>
     <string name="home_update_success">Actualizare surse finalizată</string>
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele, așteptați…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">Alimentat de cafea şi patch-uri bune</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sursă de remediere</string>
-    <string name="sources_management_subtitle">%d surse instalate</string>
     <string name="sources_management_open_in_browser">Deschide în browser</string>
     <string name="sources_management_failed_to_open_url">Eșec la deschiderea URL-ului</string>
     <string name="sources_management_date_added">Adăugat</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">Ștergeți sursa \"%s\"? Acest lucru nu poate fi anulat.</string>
     <string name="sources_dialog_remote">Distanță</string>
     <string name="sources_dialog_remote_url">URL-ul sursei</string>
-    <string name="sources_dialog_remote_url_formats">"Exemple:
-• github.com/proprietar/proiect
-• raw.githubusercontent.com/proprietar/proiect/main/patches-bundle.json
-• exemple.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Exemple:</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Selectează fișierul sursei de patach</string>
     <string name="sources_dialog_local_file_description">Selectați un fișier .mpp de sursă de patach din stocare</string>
@@ -78,6 +74,8 @@ Versiuni compatibile:"</string>
     <string name="home_apk_availability_unpatched_label">Neactualizat</string>
     <string name="home_apk_availability_yes">Da, o am</string>
     <string name="home_apk_availability_no">Nu, ajută-mă să o găsesc</string>
+    <string name="home_apk_use_saved_with_version">Folosește APK salvat (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patching va necesita selectarea din nou a fișierului APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descărcați APK-ul original</string>
     <string name="home_download_instructions_steps_title">Instrucțiuni:</string>
@@ -102,15 +100,15 @@ Versiuni compatibile:"</string>
     <string name="home_no_patches_for_app">Nu există patch-uri disponibile pentru această aplicație</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
-    <string name="expert_mode_subtitle_extended">%1$d din %2$d patch-uri selectate</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s din %2$s selectat</string>
     <string name="expert_mode_search">Caută patch-uri</string>
     <string name="expert_mode_proceed">Procedează la patchare</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_no_patches">Nu există patch-uri disponibile</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Sursă de modificare multiplă selectată</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Ați selectat modificări din surse multiple. Acest lucru poate duce la probleme de compatibilitate sau comportament neașteptat.
+    <string name="expert_mode_multiple_sources_warning_title">Sursă de modificare multiplă selectată</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Ați selectat modificări din surse de modificare multiple. Acest lucru poate cauza probleme de compatibilitate sau comportament neașteptat.
 
 Sunteți sigur că doriți să continuați?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="home_app_info_delete_item_patched_apk">Fișierul APK modificat</string>
     <string name="home_app_info_delete_item_original_apk">Fișierul APK original</string>
     <string name="home_app_info_delete_preservation_note">Selectia și opțiunile de modificare vor fi păstrate pentru viitoarele modificări</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Eliminat %d pacheturi vechi din selecţie salvată</string>
     <string name="home_app_info_patches_name_default">Patachuri</string>
     <string name="home_app_info_patches_name_fallback">Fără nume</string>
     <string name="home_app_info_patches_replace_fail">Nu s-a putut importa patachuri: %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK original nu găsit. Nu se poate repata acest aplicație</string>
-    <string name="home_app_info_repatch_requires_original">Repatachizare necesită fișierul APK original</string>
     <string name="home_app_info_original_package_name">Numele pachetului original</string>
     <string name="home_app_info_applied_patches">Patachuri aplica</string>
     <string name="home_app_info_patch_source_used">Sursă de actualizare utilizată</string>
@@ -180,11 +176,17 @@ Sunteți sigur că doriți să continuați?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
+    <string name="root_pre_patch_installer_title">Alege metodă de instalare</string>
+    <string name="root_pre_patch_installer_description">Dispozitivul are acces la root. Alegeți cum vrei să instalezi aplicația patcheată</string>
+    <string name="root_pre_patch_installer_mount_title">Montaj root</string>
+    <string name="root_pre_patch_installer_mount_description">Montați APK-ul patcheat deasupra aplicației de bază. Nu este necesar GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">Instalare standard</string>
+    <string name="root_pre_patch_installer_standard_description">Instalează ca aplicație separată cu sprijin GmsCore. Alegeți instalatorul (Instalatorul sistemului, Shizuku, etc.) după patchare</string>
+    <string name="root_pre_patch_installer_hint">Metoda de instalare determină carele patchuri sunt incluse și nu poate fi schimbată după patchare</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="patcher_error_log">Jurnal erori</string>
     <string name="patcher_error_technical">Detalii tehnice</string>
-    <string name="patcher_patches_progress">%1$d / %2$d patch-uri</string>
     <string name="patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
     <string name="patcher_installing_subtitle">Aproape gata de distracție! 🎸</string>
     <string name="patcher_success_title">Totul gata! 🎉</string>
@@ -247,7 +249,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
     <string name="download_apk">Descarcă fișierul APK</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
-    <string name="patcher_process_exit_message">Procesul de pata a ieșit cu codul %1$d</string>
+    <string name="patcher_process_exit_message">Procesul de patch a ieșit cu codul %1$s</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
     <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul instalatorului sistemului și reîncercați</string>
@@ -279,9 +281,10 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Luminos</string>
     <string name="settings_appearance_dark">Tunet</string>
-    <string name="settings_appearance_black">Negru</string>
     <string name="settings_appearance_dynamic">Materialul Tu</string>
     <string name="settings_appearance_accent_color">Culoarea accentului</string>
+    <string name="settings_appearance_pure_black">Negru pur</string>
+    <string name="settings_appearance_pure_black_description">Folosește fonduri negre adevărate pentru afișaje OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Limba aplicației</string>
     <string name="settings_appearance_app_language_current">Limbajul curent</string>
@@ -305,12 +308,14 @@ Sunteți sigur că doriți să continuați?"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
-    <string name="settings_advanced_expert_mode_description">Activează funcții avansate și opțiuni de personalizare</string>
+    <string name="settings_advanced_expert_mode_description">Activează setările complexe de pateâturi Morphe si opârii de personalizare</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Vrei sâ activezi modul expert?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Modul expert oferâ mai mult control asupra modului cum pateâturile sunt aplicaâ, dar o configurare greşită a setârilor poate duce la o aplicaâ nefuncțională</string>
     <string name="settings_advanced_strip_unused_libs">Elimina librări native nefolosite</string>
     <string name="settings_advanced_strip_unused_libs_description">Șterge librări native pentru arhitecturi CPU nesupuse de pe aplicații patachate</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token GitHub</string>
-    <string name="settings_advanced_github_pat_description">Necesar pentru pachete de cereri de tractare</string>
+    <string name="settings_advanced_github_pat_description">Nevoie pentru surse de cerere de preluare</string>
     <string name="settings_advanced_github_pat_configured">Token configurat</string>
     <string name="settings_advanced_github_pat_how_to_get">Cum obţiţi un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Setare GitHub Personal Access Token</string>
@@ -434,7 +439,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_process_runtime_enable">Activează rulare proces</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
     <string name="settings_system_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când patachizați aplicații mai mari</string>
-    <string name="settings_system_process_runtime_enabled_description">%d MB limit</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB limită</string>
     <string name="settings_system_process_runtime_disabled_description">Clic pentru a configura</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importă și exportă</string>
@@ -467,7 +472,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_debug">Debbug</string>
     <string name="settings_system_export_debug_logs">Exportare jurnale de depanare</string>
     <string name="settings_system_export_debug_logs_description">Exportă jurnale sistem pentru rezolvarea problemelor</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Nu s-a putut citi jurnalele (cod de ieșire %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Eșuare la citirea journal-ului (cod de ieșire %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Eșec la exportarea jurnalelor</string>
     <string name="settings_system_export_debug_logs_export_success">Jurnale exportate</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Gestiune selectii de modificări</string>
     <string name="settings_system_patch_selections_description">Gestiune selectii de modificări și opțiuni. Acestea persistă după dezinstalarea aplicației</string>
-    <string name="settings_system_patch_selections_description_short">Păstrat pentru viitoarele modificări</string>
-    <string name="settings_system_patch_selections_empty">Nici o selectie de modificări păstrată</string>
-    <string name="settings_system_patch_selections_has_options">Are opțiuni</string>
-    <string name="settings_system_patch_selections_patches_options">Opțiuni de modificare</string>
-    <string name="settings_system_patch_selection_delete_title">Ștergeți selectia de modificări</string>
-    <string name="settings_system_patch_selection_deleted">Selectia de modificări ștergă</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Resetați toate selectiile?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Resetați selectiile pachetului?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Resetați selectia sursei?</string>
+    <string name="settings_system_patch_selection_no_saved">Nicio selectie salvată</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s peste %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s în %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Sursă #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Acesta va șterge:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru toate pachetele și sursele</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru %s peste toate sursele</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Acțiunea va șterge definitiv selecțiile de patch-uri salvate pentru %1$s în sursă #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Eșec la exportarea datelor sursei</string>
+    <string name="settings_system_export_source_data_success">Datele sursei exportate cu succes</string>
+    <string name="settings_system_import_source_data_fail">Eșec la importarea datelor sursei</string>
+    <string name="settings_system_import_source_data_success">Datele sursei importate cu succes</string>
+    <string name="settings_system_patch_details_title">Detalii pachet</string>
+    <string name="settings_system_selected_patches_title">Patch-uri selectate (%s)</string>
+    <string name="settings_system_patch_options_title">Opțiuni patch-uri (%s)</string>
+    <string name="settings_system_no_patches_or_options">Nicio pachet sau opțiune salvată</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_share_website">Partajează website</string>
@@ -510,6 +528,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="yes">Da</string>
     <string name="no">Nu</string>
     <string name="reset">Resetare</string>
+    <string name="reset_all">Resetați tot</string>
     <string name="confirm">Confirmă</string>
     <string name="warning">Atenție</string>
     <string name="error_">Eroare</string>
@@ -531,6 +550,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="selected">Selectat</string>
     <string name="not_selected">Neselectat</string>
     <string name="rename">Redenumește</string>
+    <string name="import_">Importare</string>
     <string name="export">Exporta</string>
     <string name="download">Descărcare</string>
     <string name="less">Mai puțin</string>

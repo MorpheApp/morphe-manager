@@ -29,7 +29,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
-        android:name="app.revanced.manager.ManagerApplication"
+        android:name="app.morphe.manager.ManagerApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="false"
@@ -39,7 +39,7 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ReVancedManager"
+        android:theme="@style/Theme.MorpheManager"
         tools:targetApi="34">
 
         <provider
@@ -52,10 +52,10 @@
 
         <!-- Main Activity without launcher -->
         <activity
-            android:name="app.revanced.manager.MainActivity"
+            android:name="app.morphe.manager.MainActivity"
             android:exported="true"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
-            android:theme="@style/Theme.ReVancedManager">
+            android:theme="@style/Theme.MorpheManager">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,13 +65,13 @@
 
         <!-- Default launcher icon -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivity_Default"
+            android:name="app.morphe.manager.MainActivity_Default"
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:targetActivity="app.revanced.manager.MainActivity">
+            android:targetActivity="app.morphe.manager.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -80,13 +80,13 @@
 
         <!-- Alternative launcher icons -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivity_Light_2"
+            android:name="app.morphe.manager.MainActivity_Light_2"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_light_2"
             android:roundIcon="@mipmap/ic_launcher_light_2"
             android:label="@string/app_name"
-            android:targetActivity="app.revanced.manager.MainActivity">
+            android:targetActivity="app.morphe.manager.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -94,13 +94,13 @@
         </activity-alias>
 
         <activity-alias
-            android:name="app.revanced.manager.MainActivity_Light_3"
+            android:name="app.morphe.manager.MainActivity_Light_3"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_light_3"
             android:roundIcon="@mipmap/ic_launcher_light_3"
             android:label="@string/app_name"
-            android:targetActivity="app.revanced.manager.MainActivity">
+            android:targetActivity="app.morphe.manager.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -108,13 +108,13 @@
         </activity-alias>
 
         <activity-alias
-            android:name="app.revanced.manager.MainActivity_Dark_1"
+            android:name="app.morphe.manager.MainActivity_Dark_1"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dark_1"
             android:roundIcon="@mipmap/ic_launcher_dark_1"
             android:label="@string/app_name"
-            android:targetActivity="app.revanced.manager.MainActivity">
+            android:targetActivity="app.morphe.manager.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -122,13 +122,13 @@
         </activity-alias>
 
         <activity-alias
-            android:name="app.revanced.manager.MainActivity_Dark_2"
+            android:name="app.morphe.manager.MainActivity_Dark_2"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dark_2"
             android:roundIcon="@mipmap/ic_launcher_dark_2"
             android:label="@string/app_name"
-            android:targetActivity="app.revanced.manager.MainActivity">
+            android:targetActivity="app.morphe.manager.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -136,27 +136,27 @@
         </activity-alias>
 
         <activity-alias
-            android:name="app.revanced.manager.MainActivity_Dark_3"
+            android:name="app.morphe.manager.MainActivity_Dark_3"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dark_3"
             android:roundIcon="@mipmap/ic_launcher_dark_3"
             android:label="@string/app_name"
-            android:targetActivity="app.revanced.manager.MainActivity">
+            android:targetActivity="app.morphe.manager.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
 
-        <service android:name="app.revanced.manager.service.InstallService" />
-        <service android:name="app.revanced.manager.service.UninstallService" />
+        <service android:name="app.morphe.manager.service.InstallService" />
+        <service android:name="app.morphe.manager.service.UninstallService" />
 
         <receiver
-            android:name="app.revanced.manager.receiver.InstallReceiver"
+            android:name="app.morphe.manager.receiver.InstallReceiver"
             android:exported="false" />
         <receiver
-            android:name="app.revanced.manager.receiver.UninstallReceiver"
+            android:name="app.morphe.manager.receiver.UninstallReceiver"
             android:exported="false" />
 
         <service
@@ -170,7 +170,7 @@
         </service>
 
         <provider
-            android:name="app.revanced.manager.domain.installer.InstallerFileProvider"
+            android:name="app.morphe.manager.domain.installer.InstallerFileProvider"
             android:authorities="${applicationId}.installerfileprovider"
             android:exported="false"
             android:grantUriPermissions="true" />

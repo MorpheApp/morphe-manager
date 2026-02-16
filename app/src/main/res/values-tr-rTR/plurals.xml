@@ -4,24 +4,36 @@
         <item quantity="one">%d yama</item>
         <item quantity="other">%d yama</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d yama seçeneği</item>
+        <item quantity="other">%d yama seçeneği</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d kaynak</item>
+        <item quantity="other">%d kaynak</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paket</item>
+        <item quantity="other">%d paket</item>
+    </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">%d yama yürütüldü</item>
-        <item quantity="other">%d yama yürütüldü</item>
+        <item quantity="one">%d yama uygula</item>
+        <item quantity="other">%d yama uygula</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%d APK dosyası</item>
         <item quantity="other">%d APK dosyası</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d kaydedilen seçim</item>
-        <item quantity="other">%d kaydedilen seçim</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Kaydedilmiş seçimden %1$d eskimiş yama kaldırıldı</item>
+        <item quantity="other">Kaydedilmiş seçimden %1$d eskimiş yama kaldırıldı</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">%d kaynaktan devre dışı bırakıldı</item>
-        <item quantity="other">%d kaynaktan devre dışı bırakıldı</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d kaynak yüklendi</item>
+        <item quantity="other">%1$d kaynak yüklendi</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">%d kaynaktan etkinleştirildi</item>
-        <item quantity="other">%d kaynaktan etkinleştirildi</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d yama seçildi</item>
+        <item quantity="other">%d yama seçildi</item>
     </plurals>
 </resources>

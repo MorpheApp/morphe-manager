@@ -13,7 +13,7 @@
     <string name="home_update_error">فشل التحديث</string>
     <string name="home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
-    <string name="home_update_progress">%1$d/%2$d مصادر تم معالجتها</string>
+    <string name="home_update_progress_format">%1$s تمت معالجتها</string>
     <string name="home_update_success">اكتمل تحديث المصادر</string>
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
@@ -40,7 +40,6 @@
     <string name="home_greeting_10">مدعوم بالكافيين والتعديلات الجيدة</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">مصادر التعديل</string>
-    <string name="sources_management_subtitle">%d مصادر تم تثبيتها</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_management_date_added">تمت الإضافة</string>
@@ -56,10 +55,7 @@
     <string name="sources_dialog_delete_confirm_message">هل تريد حذف المصدر «%s»؟ لا يمكن التراجع عن هذا الإجراء</string>
     <string name="sources_dialog_remote">عن بُعد</string>
     <string name="sources_dialog_remote_url">رابط المصدر</string>
-    <string name="sources_dialog_remote_url_formats">"مثال:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">أمثلة:</string>
     <string name="sources_dialog_local">محلي</string>
     <string name="sources_dialog_local_file">تحديد ملف مصدر التعديل</string>
     <string name="sources_dialog_local_file_description">حدد ملف مصدر تعديل .mpp من وحدة التخزين</string>
@@ -78,6 +74,8 @@
     <string name="home_apk_availability_unpatched_label">غير معدل</string>
     <string name="home_apk_availability_yes">نعم، لديّ</string>
     <string name="home_apk_availability_no">لا، ساعدني في العثور عليه</string>
+    <string name="home_apk_use_saved_with_version">استخدام ملف APK المحفوظ (v%s)</string>
+    <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">تنزيل ملف APK الأصلي</string>
     <string name="home_download_instructions_steps_title">التعليمات:</string>
@@ -102,15 +100,15 @@
     <string name="home_no_patches_for_app">لا يوجد تعديلات متاحة لهذا التطبيق</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">وضع الخبير</string>
-    <string name="expert_mode_subtitle_extended">%1$d من %2$d تعديلات تم تحديدها</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s من %2$s محدد</string>
     <string name="expert_mode_search">البحث عن التعديلات</string>
     <string name="expert_mode_proceed">المضي قدمًا إلى التعديل</string>
     <string name="expert_mode_disable_all">تعطيل الكل</string>
     <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
     <string name="expert_mode_no_patches">لا يوجد تعديلات متاحة</string>
-    <string name="expert_mode_multiple_bundles_warning_title">تم تحديد مصادر تعديل متعددة</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
+    <string name="expert_mode_multiple_sources_warning_title">تم تحديد مصادر تعديل متعددة</string>
+    <string name="expert_mode_multiple_sources_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
 
 هل أنت متأكد من رغبتك في المتابعة؟"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -160,12 +158,10 @@
     <string name="home_app_info_delete_item_patched_apk">ملف APK معدّل</string>
     <string name="home_app_info_delete_item_original_apk">ملف APK الأصلي</string>
     <string name="home_app_info_delete_preservation_note">سيتم الاحتفاظ باختياراتك وخياراتك للتعديلات المستقبلية</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">تمت إزالة %d تعديلات قديمة من التحديد المحفوظ</string>
     <string name="home_app_info_patches_name_default">التعديلات</string>
     <string name="home_app_info_patches_name_fallback">بدون اسم</string>
     <string name="home_app_info_patches_replace_fail">فشل استيراد التعديلات: %s</string>
     <string name="home_app_info_repatch_no_original_apk">لم يتم العثور على ملف APK الأصلي. لا يمكن إعادة تعديل هذا التطبيق</string>
-    <string name="home_app_info_repatch_requires_original">إعادة التعديل يتطلب ملف APK الأصلي</string>
     <string name="home_app_info_original_package_name">اسم الحزمة الأصلي</string>
     <string name="home_app_info_applied_patches">التعديلات المطبقة</string>
     <string name="home_app_info_patch_source_used">مصدر التعديل المستخدم</string>
@@ -180,11 +176,17 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل</string>
     <string name="root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
+    <string name="root_pre_patch_installer_title">اختر طريقة التثبيت</string>
+    <string name="root_pre_patch_installer_description">جهازك لديه صلاحيات Root. اختر الطريقة التي تريد تثبيت التطبيق المُعدَّل بها</string>
+    <string name="root_pre_patch_installer_mount_title">تركيب Root</string>
+    <string name="root_pre_patch_installer_mount_description">تركيب APK المعدل فوق التطبيق الأصلي. لا تحتاج إلى GmsCore</string>
+    <string name="root_pre_patch_installer_standard_title">تثبيت قياسي</string>
+    <string name="root_pre_patch_installer_standard_description">تثبيت كمتطبيق منفصل مع دعم GmsCore. اختر أداة التثبيت (النظام, Shizuku, إلخ.) بعد التعديل</string>
+    <string name="root_pre_patch_installer_hint">تحدد طريقة التثبيت أي تعديلات يتم تضمينها ولا يمكن تغييرها بعد التعديل</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="patcher_error_log">سجل الأخطاء</string>
     <string name="patcher_error_technical">التفاصيل التقنية</string>
-    <string name="patcher_patches_progress">%1$d / %2$d تعديلات</string>
     <string name="patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
     <string name="patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
     <string name="patcher_success_title">تم الانتهاء! 🎉</string>
@@ -247,7 +249,7 @@
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
     <string name="download_apk">تنزيل ملف APK</string>
     <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي</string>
-    <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$d</string>
+    <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$s</string>
     <string name="install_app_success">تم التثبيت بنجاح</string>
     <string name="install_app_fail">فشل تثبيت التطبيق: %s</string>
     <string name="install_timeout_message">لم يكتمل التثبيت. تحقق من مربع حوار أداة التثبيت في النظام وحاول مرة أخرى</string>
@@ -279,9 +281,10 @@
     <string name="settings_appearance_system">النظام</string>
     <string name="settings_appearance_light">فاتح</string>
     <string name="settings_appearance_dark">داكن</string>
-    <string name="settings_appearance_black">أسود</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">لون التمييز</string>
+    <string name="settings_appearance_pure_black">اسود نقي</string>
+    <string name="settings_appearance_pure_black_description">استخدام خلفيات سوداء حقيقية لشاشات OLED</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">لغة التطبيق</string>
     <string name="settings_appearance_app_language_current">اللغة الحالية</string>
@@ -305,12 +308,14 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
     <string name="settings_advanced_expert_mode">وضع الخبير</string>
-    <string name="settings_advanced_expert_mode_description">تمكين الميزات المتقدمة وتخصيص الخيارات</string>
+    <string name="settings_advanced_expert_mode_description">تفعيل إعدادات تعديل Morphe المتقدمة وخيارات التخصيص</string>
+    <string name="settings_advanced_expert_mode_dialog_title">تمكين وضع الخبير؟</string>
+    <string name="settings_advanced_expert_mode_dialog_message">وضع الخبير يوفر مزيدًا من التحكم في كيفية تطبيق التعديلات، ولكن الإعداد الخاطئ لوضع الخبير يمكن أن يوقف التطبيق عن العمل</string>
     <string name="settings_advanced_strip_unused_libs">إزالة المكتبات الأصلية غير المستخدمة</string>
     <string name="settings_advanced_strip_unused_libs_description">حذف المكتبات الأصلية لبنى المعالجات غير المدعومة من التطبيقات المعدلة</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">رمز GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">مطلوب لحزم طلبات السحب</string>
+    <string name="settings_advanced_github_pat_description">مطلوب لمصادر طلب السحب</string>
     <string name="settings_advanced_github_pat_configured">تم تكوين الرمز</string>
     <string name="settings_advanced_github_pat_how_to_get">كيفية الحصول على رمز وصول</string>
     <string name="settings_advanced_github_pat_dialog_title">تعيين رمز وصول شخصي لـ GitHub</string>
@@ -434,7 +439,7 @@
     <string name="settings_system_process_runtime_enable">تمكين وقت تشغيل العملية</string>
     <string name="settings_system_memory_limit_subtitle">الذاكرة المتاحة للتعديل</string>
     <string name="settings_system_memory_limit_warning">الحد الأدنى للذاكرة قد يتسبب في فشل عند تعديل التطبيقات الأكبر حجمًا</string>
-    <string name="settings_system_process_runtime_enabled_description">حد %d ميغابايت</string>
+    <string name="settings_system_process_runtime_enabled_description">حد %s ميغابايت</string>
     <string name="settings_system_process_runtime_disabled_description">انقر هنا للتهيئة</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">استيراد &amp; تصدير</string>
@@ -467,7 +472,7 @@
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">تصدير سجلات تصحيح الأخطاء</string>
     <string name="settings_system_export_debug_logs_description">تصدير سجلات النظام للتشخيص</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">فشل في قراءة السجلات (رمز الخروج %d)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">فشل في قراءة السجلات (رمز الخروج %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">فشل تصدير السجلات</string>
     <string name="settings_system_export_debug_logs_export_success">تم تصدير السجلات</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -490,12 +495,25 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">خيارات التعديل</string>
     <string name="settings_system_patch_selections_description">إدارة خيارات وتعديلات البرامج المحفوظة. تبقى هذه الخيارات محفوظة حتى بعد إلغاء تثبيت التطبيق.</string>
-    <string name="settings_system_patch_selections_description_short">تم الحفظ للتعديل المستقبلي</string>
-    <string name="settings_system_patch_selections_empty">لا يوجد تحديدات تعديل محفوظة</string>
-    <string name="settings_system_patch_selections_has_options">له خيارات</string>
-    <string name="settings_system_patch_selections_patches_options">خيارات التعديل</string>
-    <string name="settings_system_patch_selection_delete_title">حذف تحديد التعديل</string>
-    <string name="settings_system_patch_selection_deleted">تم حذف تحديد التعديل</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">إعادة تعيين كل التحديدات؟</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">إعادة تعيين تحديدات الحزمة؟</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">إعادة تعيين تحديد المصدر؟</string>
+    <string name="settings_system_patch_selection_no_saved">لا يوجد تحديدات تعديل محفوظة</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s عبر %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s في %2$s</string>
+    <string name="settings_system_patch_selection_source_format">مصدر #%s</string>
+    <string name="settings_system_patch_selection_will_delete">هذا سيحذف:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">هذا سيحذف كل تحديدات التعديلات محفوظة بشكل دائم لجميع الحزم والمصادر</string>
+    <string name="settings_system_patch_selection_reset_package_warning">هذا سيحذف كل تحديدات التعديلات المحفوظة بشكل دائم لـ %s عبر جميع المصادر</string>
+    <string name="settings_system_patch_selection_reset_source_warning">هذا سيحذف تحديدات التعديلات المحفوظة لـ %1$s في مصدر #%2$s</string>
+    <string name="settings_system_export_source_data_fail">فشل تصدير بيانات المصدر</string>
+    <string name="settings_system_export_source_data_success">تم تصدير بيانات المصدر بنجاح</string>
+    <string name="settings_system_import_source_data_fail">فشل استيراد بيانات المصدر</string>
+    <string name="settings_system_import_source_data_success">تم استيراد بيانات المصدر بنجاح</string>
+    <string name="settings_system_patch_details_title">تفاصيل التعديل</string>
+    <string name="settings_system_selected_patches_title">التعديلات المحددة (%s)</string>
+    <string name="settings_system_patch_options_title">خيارات التعديل (%s)</string>
+    <string name="settings_system_no_patches_or_options">لا يوجد معدلات أو خيارات محفوظة</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">لمحة</string>
     <string name="settings_system_share_website">مشاركة الموقع الإلكتروني</string>
@@ -510,6 +528,7 @@
     <string name="yes">نعم</string>
     <string name="no">لا</string>
     <string name="reset">إعادة التعيين</string>
+    <string name="reset_all">إعادة تعيين الكل</string>
     <string name="confirm">تأكيد</string>
     <string name="warning">تحذير</string>
     <string name="error_">خطأ</string>
@@ -531,6 +550,7 @@
     <string name="selected">محدد</string>
     <string name="not_selected">غير محدد</string>
     <string name="rename">إعادة تسمية</string>
+    <string name="import_">استيراد</string>
     <string name="export">تصدير</string>
     <string name="download">تنزيل</string>
     <string name="less">أقل</string>

@@ -6,6 +6,24 @@
         <item quantity="many">%d патчей</item>
         <item quantity="other">%d патчей</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d опция патча</item>
+        <item quantity="few">%d опции патча</item>
+        <item quantity="many">%d опций патча</item>
+        <item quantity="other">%d опций патча</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d источник</item>
+        <item quantity="few">%d источника</item>
+        <item quantity="many">%d источников</item>
+        <item quantity="other">%d источников</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d пакет</item>
+        <item quantity="few">%d пакета</item>
+        <item quantity="many">%d пакетов</item>
+        <item quantity="other">%d пакетов</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Выполнить %d патч</item>
         <item quantity="few">Выполнить %d патчи</item>
@@ -18,22 +36,22 @@
         <item quantity="many">%d APK файлов</item>
         <item quantity="other">%d APK файлов</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d сохраненный выбор</item>
-        <item quantity="few">%d сохраненные выбраны</item>
-        <item quantity="many">%d сохраненных выборов</item>
-        <item quantity="other">%d сохраненных выборов</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Удалено %1$d устаревший патч из сохраненного выбора</item>
+        <item quantity="few">Удалено %1$d устаревших патчей из сохраненного выбора</item>
+        <item quantity="many">Удалено %1$d устаревшие патчи из сохраненного выбора</item>
+        <item quantity="other">Удалено %1$d устаревшие патчи из сохраненного выбора</item>
     </plurals>
-    <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Отключено %d источник</item>
-        <item quantity="few">Отключено %d источников</item>
-        <item quantity="many">Отключено %d источников</item>
-        <item quantity="other">Отключено %d источников</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d источник установлен</item>
+        <item quantity="few">%1$d источника установлено</item>
+        <item quantity="many">%1$d источников установлено</item>
+        <item quantity="other">%1$d источников установлено</item>
     </plurals>
-    <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Включено %d источник</item>
-        <item quantity="few">Включено %d источников</item>
-        <item quantity="many">Включено %d источников</item>
-        <item quantity="other">Включено %d источников</item>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d патч выбран</item>
+        <item quantity="few">%d патчи выбрано</item>
+        <item quantity="many">%d патчи выбрано</item>
+        <item quantity="other">%d патчи выбрано</item>
     </plurals>
 </resources>
