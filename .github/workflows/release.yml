@@ -77,11 +77,18 @@ jobs:
         run: |
           git config user.name "semantic-release-bot"
           git config user.email "semantic-release-bot@martynus.net"
+          
+          # Make sure we're rebasing onto the latest remote branch
+          git fetch origin
+          git rebase origin/${GITHUB_REF_NAME}
+          
           mv app/app-release-new.json app/app-release.json
           git add app/app-release.json
           git rm --cached -f app/app-release-new.json
           git commit -m "chore: Update app-release.json"
-          git push
+          
+          # Push explicitly to the branch that triggered the workflow
+          git push origin HEAD:${GITHUB_REF_NAME}
 
       - name: Attest
         if: steps.release.outputs.NEW_TAG != ''
