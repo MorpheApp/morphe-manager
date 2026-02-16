@@ -1,3 +1,15 @@
+# app [1.8.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.1...v1.8.0-dev.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* When source is disabled allow button presses but change the card background to red ([9b3a498](https://github.com/MorpheApp/morphe-manager/commit/9b3a49831241cf19c4e1d21474f33b6a4060b4af))
+
+
+### Features
+
+* Show changelog button in all changelog dialogs ([f925de0](https://github.com/MorpheApp/morphe-manager/commit/f925de0351609248465dd4dd1bafe2f1c7a35794))
+
 ## app [1.7.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0...v1.7.1) (2026-02-16)
 
 
