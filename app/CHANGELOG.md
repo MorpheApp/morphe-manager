@@ -1,3 +1,10 @@
+# app [1.7.0-dev.18](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.17...v1.7.0-dev.18) (2026-02-16)
+
+
+### Features
+
+* Use APKEditor for APKM merging ([#137](https://github.com/MorpheApp/morphe-manager/issues/137)) ([9ed8f5b](https://github.com/MorpheApp/morphe-manager/commit/9ed8f5b0145cfed48662eb4da385525fe29cfe2a))
+
 # app [1.7.0-dev.17](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.16...v1.7.0-dev.17) (2026-02-15)
 
 
