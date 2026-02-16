@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-16T14:48:28.452Z",
-  "description": "## app [1.7.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0...v1.7.1) (2026-02-16)\n\n\n### Bug Fixes\n\n* Update translations from Crowdin ([e0d7db9](https://github.com/MorpheApp/morphe-manager/commit/e0d7db9e95cac5b7feb0d26a22a9eb898a31791a))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.1/morphe-manager-1.7.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.1/morphe-manager-1.7.1.apk.asc",
-  "version": "1.7.1"
+  "created_at": "2026-02-16T18:55:32.670Z",
+  "description": "# app [1.8.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.1...v1.8.0-dev.1) (2026-02-16)\n\n\n### Bug Fixes\n\n* When source is disabled allow button presses but change the card background to red ([9b3a498](https://github.com/MorpheApp/morphe-manager/commit/9b3a49831241cf19c4e1d21474f33b6a4060b4af))\n\n\n### Features\n\n* Show changelog button in all changelog dialogs ([f925de0](https://github.com/MorpheApp/morphe-manager/commit/f925de0351609248465dd4dd1bafe2f1c7a35794))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.8.0-dev.1/morphe-manager-1.8.0-dev.1.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.8.0-dev.1/morphe-manager-1.8.0-dev.1.apk.asc",
+  "version": "1.8.0-dev.1"
 }
