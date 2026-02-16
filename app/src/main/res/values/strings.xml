@@ -645,7 +645,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
 
     <string name="changelog">View changelogs</string>
     <string name="changelog_description">Check out the latest changes in this update</string>
-    <string name="changelog_loading">Loading changelog</string>
     <string name="changelog_download_fail">Failed to download changelog: %s</string>
     <string name="changelog_retry">Retry</string>
     <string name="changelog_empty">No changelog available</string>

@@ -285,28 +285,8 @@ fun ManagerUpdateDetailsDialog(
 
                 UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
                     if (releaseInfo == null) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 48.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(20.dp)
-                            ) {
-                                CircularProgressIndicator(
-                                    color = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(48.dp)
-                                )
-                                Text(
-                                    text = stringResource(R.string.changelog_loading),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = secondaryColor,
-                                    textAlign = TextAlign.Center
-                                )
-                            }
-                        }
+                        // Shimmer loading state
+                        ChangelogSectionLoading()
                     } else {
                         // Changelog content only
                         ChangelogSection(
