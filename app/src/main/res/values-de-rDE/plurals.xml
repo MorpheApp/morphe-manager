@@ -4,20 +4,36 @@
         <item quantity="one">%d Patch</item>
         <item quantity="other">%d Patches</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d Option</item>
+        <item quantity="other">%d Optionen</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d Quelle</item>
+        <item quantity="other">%d Quellen</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d Paket</item>
+        <item quantity="other">%d Pakete</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Führe %d Patch aus</item>
         <item quantity="other">Führe %d Patches aus</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d ausgewählt</item>
-        <item quantity="other">%d ausgewählt</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK-Datei</item>
+        <item quantity="other">%d APK-Dateien</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d Patch</item>
-        <item quantity="other">%d Patches</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Entfernt %1$d veralteten Patch aus der gespeicherten Auswahl</item>
+        <item quantity="other">Entfernt %1$d veraltete Patches aus der gespeicherten Auswahl</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d Paket</item>
-        <item quantity="other">%d Pakete</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d Quelle installiert</item>
+        <item quantity="other">%1$d Quellen installiert</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d Patch ausgewählt</item>
+        <item quantity="other">%d Patches ausgewählt</item>
     </plurals>
 </resources>

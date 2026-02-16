@@ -3,16 +3,28 @@
     <plurals name="patch_count">
         <item quantity="other">%d bản vá</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d tùy chỉnh bản vá</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d nguồn</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d gói</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">Thực thi %d bản vá</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="other">%d đã chọn</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">%d tệp APK</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="other">%d bản vá</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="other">Đã loại bỏ %1$d bản vá lỗi thời khỏi danh sách bản vá đã lưu</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="other">%d gói</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="other">Đã cài đặt %1$d nguồn</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="other">Đã chọn %d bản vá</item>
     </plurals>
 </resources>

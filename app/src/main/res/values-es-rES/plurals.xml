@@ -4,20 +4,36 @@
         <item quantity="one">%d parche</item>
         <item quantity="other">%d parches</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d opción de parche</item>
+        <item quantity="other">%d opciones de parche</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d fuente</item>
+        <item quantity="other">%d fuentes</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paquete</item>
+        <item quantity="other">%d paquetes</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Ejecutar %d parche</item>
         <item quantity="other">Ejecutar %d parches</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d seleccionado</item>
-        <item quantity="other">%d seleccionados</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d archivo APK</item>
+        <item quantity="other">%d archivos APK</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d parche</item>
-        <item quantity="other">%d parches</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Eliminado %1$d parche obsoleto de la selección guardada</item>
+        <item quantity="other">Eliminados %1$d parches obsoletos de la selección guardada</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d paquete</item>
-        <item quantity="other">%d paquetes</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d fuente instalada</item>
+        <item quantity="other">%1$d fuentes instaladas</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d parche seleccionado</item>
+        <item quantity="other">%d parches seleccionados</item>
     </plurals>
 </resources>

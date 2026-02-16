@@ -6,28 +6,52 @@
         <item quantity="many">%d תיקונים</item>
         <item quantity="other">%d תיקונים</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d תוספת</item>
+        <item quantity="two">%d תוספות</item>
+        <item quantity="many">%d תוספות</item>
+        <item quantity="other">%d תוספות</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d מקור</item>
+        <item quantity="two">%d מקורות</item>
+        <item quantity="many">%d מקורות</item>
+        <item quantity="other">%d מקורות</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d חבילה</item>
+        <item quantity="two">%d חבילות</item>
+        <item quantity="many">%d חבילות</item>
+        <item quantity="other">%d חבילות</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">הפעל %d תיקון</item>
         <item quantity="two">הפעל %d תיקונים</item>
         <item quantity="many">הפעל %d תיקונים</item>
         <item quantity="other">הפעל %d תיקונים</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d נבחרו</item>
-        <item quantity="two">%d נבחרו</item>
-        <item quantity="many">%d נבחרו</item>
-        <item quantity="other">%d נבחרו</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d קובץ APK</item>
+        <item quantity="two">%d קובצי APK</item>
+        <item quantity="many">%d קובצי APK</item>
+        <item quantity="other">%d קובצי APK</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d טלאי</item>
-        <item quantity="two">%d טלאים</item>
-        <item quantity="many">%d טלאים</item>
-        <item quantity="other">%d טלאים</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">הסר %1$d תיקון מיושן מהסלקציה המוגמרת</item>
+        <item quantity="two">הסר %1$d תיקונים מיושנים מהסלקציה המוגמרת</item>
+        <item quantity="many">הסר %1$d תיקונים מיושנים מהסלקציה המוגמרת</item>
+        <item quantity="other">הסר %1$d תיקונים מיושנים מהסלקציה המוגמרת</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d חבילה</item>
-        <item quantity="two">%d חבילות</item>
-        <item quantity="many">%d חבילות</item>
-        <item quantity="other">%d חבילות</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d מקורstalled</item>
+        <item quantity="two">%1$d מקורותstalled</item>
+        <item quantity="many">%1$d מקורותstalled</item>
+        <item quantity="other">%1$d מקורותstalled</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d תוספת נבחרה</item>
+        <item quantity="two">%d תוספות נבחרות</item>
+        <item quantity="many">%d תוספות נבחרות</item>
+        <item quantity="other">%d תוספות נבחרות</item>
     </plurals>
 </resources>

@@ -6,28 +6,52 @@
         <item quantity="many">%d modyfikacji</item>
         <item quantity="other">%d modyfikacji</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d opcja modyfikacji</item>
+        <item quantity="few">%d opcje modyfikacji</item>
+        <item quantity="many">%d opcji modyfikacji</item>
+        <item quantity="other">%d opcji modyfikacji</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d źródło</item>
+        <item quantity="few">%d źródła</item>
+        <item quantity="many">%d źródeł</item>
+        <item quantity="other">%d źródeł</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d pakiet</item>
+        <item quantity="few">%d pakiety</item>
+        <item quantity="many">%d pakietów</item>
+        <item quantity="other">%d pakietów</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Wykonaj %d modyfikację</item>
         <item quantity="few">Wykonaj %d modyfikacje</item>
         <item quantity="many">Wykonaj %d modyfikacji</item>
         <item quantity="other">Wykonaj %d modyfikacji</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d wybrana</item>
-        <item quantity="few">%d wybranych</item>
-        <item quantity="many">%d wybranych</item>
-        <item quantity="other">%d wybranych</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d plik APK</item>
+        <item quantity="few">%d pliki APK</item>
+        <item quantity="many">%d plików APK</item>
+        <item quantity="other">%d plików APK</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d modyfikacja</item>
-        <item quantity="few">%d modyfikacje</item>
-        <item quantity="many">%d modyfikacji</item>
-        <item quantity="other">%d modyfilacji</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Usunięto %1$d przestarzałą modyfikację z zapisanych wyborów</item>
+        <item quantity="few">Usunięto %1$d przestarzałe modyfikacje z zapisanych wyborów</item>
+        <item quantity="many">Usunięto %1$d przestarzałych modyfikacji z zapisanych wyborów</item>
+        <item quantity="other">Usunięto %1$d przestarzałych modyfikacji z zapisanych wyborów</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d pakiet</item>
-        <item quantity="few">%d pakiety</item>
-        <item quantity="many">%d pakietów</item>
-        <item quantity="other">%d pakietów</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d zainstalowane źródło</item>
+        <item quantity="few">%1$d zainstalowane źródła</item>
+        <item quantity="many">%1$d zainstalowanych źródeł</item>
+        <item quantity="other">%1$d zainstalowanych źródeł</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d wybrana modyfikacja</item>
+        <item quantity="few">%d wybrane modyfikacje</item>
+        <item quantity="many">%d wybranych modyfikacji</item>
+        <item quantity="other">%d wybranych modyfikacji</item>
     </plurals>
 </resources>

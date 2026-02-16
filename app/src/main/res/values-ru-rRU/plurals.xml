@@ -2,32 +2,56 @@
 <resources>
     <plurals name="patch_count">
         <item quantity="one">%d патч</item>
-        <item quantity="few">%d исправления</item>
-        <item quantity="many">%d исправлений</item>
-        <item quantity="other">%d исправлений</item>
+        <item quantity="few">%d патчи</item>
+        <item quantity="many">%d патчей</item>
+        <item quantity="other">%d патчей</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d опция патча</item>
+        <item quantity="few">%d опции патча</item>
+        <item quantity="many">%d опций патча</item>
+        <item quantity="other">%d опций патча</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d источник</item>
+        <item quantity="few">%d источника</item>
+        <item quantity="many">%d источников</item>
+        <item quantity="other">%d источников</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d пакет</item>
+        <item quantity="few">%d пакета</item>
+        <item quantity="many">%d пакетов</item>
+        <item quantity="other">%d пакетов</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Выполнить %d патч</item>
-        <item quantity="few">Выполнить %d исправления</item>
-        <item quantity="many">Выполнить %d исправлений</item>
-        <item quantity="other">Выполнить %d исправлений</item>
+        <item quantity="few">Выполнить %d патчи</item>
+        <item quantity="many">Выполнить %d патчей</item>
+        <item quantity="other">Выполнить %d патчей</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d выбрано</item>
-        <item quantity="few">%d выбрано</item>
-        <item quantity="many">%d выбрано</item>
-        <item quantity="other">%d выбрано</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK файл</item>
+        <item quantity="few">%d APK файлы</item>
+        <item quantity="many">%d APK файлов</item>
+        <item quantity="other">%d APK файлов</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d патч</item>
-        <item quantity="few">%d заплатки</item>
-        <item quantity="many">%d заплаток</item>
-        <item quantity="other">%d заплаток</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Удалено %1$d устаревший патч из сохраненного выбора</item>
+        <item quantity="few">Удалено %1$d устаревших патчей из сохраненного выбора</item>
+        <item quantity="many">Удалено %1$d устаревшие патчи из сохраненного выбора</item>
+        <item quantity="other">Удалено %1$d устаревшие патчи из сохраненного выбора</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d пакет</item>
-        <item quantity="few">%d сборки</item>
-        <item quantity="many">%d сборок</item>
-        <item quantity="other">%d сборок</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d источник установлен</item>
+        <item quantity="few">%1$d источника установлено</item>
+        <item quantity="many">%1$d источников установлено</item>
+        <item quantity="other">%1$d источников установлено</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d патч выбран</item>
+        <item quantity="few">%d патчи выбрано</item>
+        <item quantity="many">%d патчи выбрано</item>
+        <item quantity="other">%d патчи выбрано</item>
     </plurals>
 </resources>

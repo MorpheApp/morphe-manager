@@ -4,20 +4,36 @@
         <item quantity="one">%d patch</item>
         <item quantity="other">%d patchs</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d option de patch</item>
+        <item quantity="other">%d options de patch</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d source</item>
+        <item quantity="other">%d sources</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d package</item>
+        <item quantity="other">%d packages</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Exécuter %d patch</item>
         <item quantity="other">Exécuter %d patchs</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d sélectionné</item>
-        <item quantity="other">%d sélectionnés</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d fichier APK</item>
+        <item quantity="other">%d fichiers APK</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d patch</item>
-        <item quantity="other">%d patchs</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">​%1$d patch obsolète a été supprimé de la sélection enregistrée</item>
+        <item quantity="other">​%1$d patchs obsolètes ont été supprimés de la sélection enregistrée</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d bundle</item>
-        <item quantity="other">%d bundles</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d source installée</item>
+        <item quantity="other">%1$d sources installées</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d patch sélectionné</item>
+        <item quantity="other">%d patchs sélectionnés</item>
     </plurals>
 </resources>

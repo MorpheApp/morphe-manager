@@ -2,32 +2,56 @@
 <resources>
     <plurals name="patch_count">
         <item quantity="one">%d патч</item>
-        <item quantity="few">%d патчів</item>
+        <item quantity="few">%d патчі</item>
         <item quantity="many">%d патчів</item>
-        <item quantity="other">%d патчі</item>
+        <item quantity="other">%d патчів</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d параметр патча</item>
+        <item quantity="few">%d параметри патча</item>
+        <item quantity="many">%d параметрів патча</item>
+        <item quantity="other">%d параметрів патча</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d джерелі</item>
+        <item quantity="few">%d джерелах</item>
+        <item quantity="many">%d джерелах</item>
+        <item quantity="other">%d джерелах</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d пакет</item>
+        <item quantity="few">%d пакети</item>
+        <item quantity="many">%d пакетів</item>
+        <item quantity="other">%d пакетів</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Виконати %d патч</item>
-        <item quantity="few">Виконати %d патчів</item>
+        <item quantity="few">Виконати %d патчі</item>
         <item quantity="many">Виконати %d патчів</item>
-        <item quantity="other">Виконати %d патчі</item>
+        <item quantity="other">Виконати %d патчів</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d вибрано</item>
-        <item quantity="few">%d вибрано</item>
-        <item quantity="many">%d вибрано</item>
-        <item quantity="other">%d вибрано</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK файл</item>
+        <item quantity="few">%d APK файли</item>
+        <item quantity="many">%d APK файлів</item>
+        <item quantity="other">%d APK файлів</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d патч</item>
-        <item quantity="few">%d патчів</item>
-        <item quantity="many">%d патчів</item>
-        <item quantity="other">%d патчі</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Видалено %1$d застарілий патч зі збереженого вибору</item>
+        <item quantity="few">Видалено %1$d застарілих патчів зі збереженого вибору</item>
+        <item quantity="many">Видалено %1$d застарілих патчів зі збереженого вибору</item>
+        <item quantity="other">Видалено %1$d застарілих патчів зі збереженого вибору</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d пакет</item>
-        <item quantity="few">%d пакетів</item>
-        <item quantity="many">%d пакетів</item>
-        <item quantity="other">%d пакети</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d джерело встановлено</item>
+        <item quantity="few">%1$d джерел встановлено</item>
+        <item quantity="many">%1$d джерел встановлено</item>
+        <item quantity="other">%1$d джерел встановлено</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d патч вибрано</item>
+        <item quantity="few">%d патча вибрано</item>
+        <item quantity="many">%d патчів вибрано</item>
+        <item quantity="other">%d патчів вибрано</item>
     </plurals>
 </resources>

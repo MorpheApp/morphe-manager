@@ -1,253 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Morphe Home Screen -->
-    <string name="morphe_home_other_apps">Inne aplikacje</string>
-    <string name="morphe_home">Strona główna</string>
-    <string name="morphe_home_not_patched_yet">Jeszcze niezmodyfikowana</string>
+    <!-- Home Screen -->
+    <string name="home_other_apps">Inne aplikacje</string>
+    <string name="home_not_patched_yet">Jeszcze niezmodyfikowana</string>
+    <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
+    <string name="home_default_source_disabled">Źródło modyfikacji Morphe jest wyłączone. Włącz je w sekcji Źródła modyfikacji lub skorzystaj z trybu eksperckiego</string>
+    <string name="android_11_bug_dialog_title">Błąd w systemie Android 11</string>
+    <string name="android_11_bug_dialog_description">Uprawnienie do instalowania aplikacji musi zostać nadane wcześniej, aby uniknąć błędu w systemie Android 11, który negatywnie wpływa na komfort użytkowania</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="morphe_home_update_available">Dostępna aktualizacja menedżera</string>
-    <string name="morphe_home_update_available_subtitle">Nowa wersja jest gotowa do instalacji</string>
-    <string name="morphe_home_update_error">Aktualizacja nie powiodła się</string>
-    <string name="morphe_home_update_error_subtitle">Sprawdź swoje połączenie internetowe i spróbuj ponownie</string>
-    <string name="morphe_home_updating_sources">Aktualizowanie źródeł…</string>
-    <string name="morphe_home_update_progress">Przetworzono %1$d z %2$d źródeł</string>
-    <string name="morphe_home_update_success">Aktualizacja źródeł zakończona</string>
-    <string name="morphe_home_update_success_subtitle">Twoje źródła są aktualne</string>
-    <string name="morphe_home_sources_are_loading">Ładowanie źródeł, proszę czekać…</string>
-    <string name="morphe_home_please_wait">Proszę czekać…</string>
+    <string name="home_update_available">Dostępna aktualizacja menedżera</string>
+    <string name="home_update_available_subtitle">Nowa wersja jest gotowa do instalacji</string>
+    <string name="home_update_error">Aktualizacja nie powiodła się</string>
+    <string name="home_update_error_subtitle">Sprawdź swoje połączenie internetowe i spróbuj ponownie</string>
+    <string name="home_updating_sources">Aktualizowanie źródeł…</string>
+    <string name="home_update_progress_format">%1$s przetworzonych</string>
+    <string name="home_update_success">Aktualizacja źródeł zakończona</string>
+    <string name="home_update_success_subtitle">Twoje źródła są aktualne</string>
+    <string name="home_sources_are_loading">Wczytywanie źródeł, proszę czekać…</string>
+    <string name="home_please_wait">Proszę czekać…</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="morphe_home_greeting_1">Jaką aplikację chcesz zmodyfikować?</string>
+    <string name="home_greeting_1">Jaką aplikację chcesz zmodyfikować?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">Gotowy, by znowu uczynić YouTube legendarnym?</string>
-    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Zapnij pasy, czas na modyfikowanie</string>
+    <string name="home_greeting_2">Gotowy, by znowu uczynić aplikacje legendarnymi?</string>
+    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <string name="home_greeting_3">Zapnij pasy, czas na modyfikowanie</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Kolejny dzień, kolejne zwycięstwo AdBlocka</string>
+    <string name="home_greeting_4">Kolejny dzień, kolejne zwycięstwo AdBlocka</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">Chcesz oglądać reklamy? Ja też nie</string>
+    <string name="home_greeting_5">Chcesz oglądać reklamy? Ja też nie</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Sprawmy, aby Twoje aplikacje zachowywały się</string>
+    <string name="home_greeting_6">Sprawmy, by Twoje aplikacje działały jak należy</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Dzisiejsza prognoza: 100% szans na zmodyfikowanie</string>
+    <string name="home_greeting_7">Dzisiejsza prognoza: 100% szans na zmodyfikowanie</string>
     <!-- From mediocrity to amazing -->
-    <string name="morphe_home_greeting_8">Gotowy, by zmienić przeciętność w niesamowitość?</string>
+    <string name="home_greeting_8">Gotowy, by zmienić przeciętność w niesamowitość?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Ratujemy aplikacje przed nimi samymi od dzisiaj</string>
+    <string name="home_greeting_9">Ratujemy aplikacje przed nimi samymi od dzisiaj</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Napędzani kawą i dobrymi modyfikacjami</string>
-    <!-- Sources Management -->
-    <string name="morphe_home_sources">Źródła modyfikacji</string>
-    <string name="morphe_sources_management_subtitle">%d zainstalowanych źródeł</string>
-    <string name="morphe_sources_delete_confirm_message">Usunąć źródło \"%s\"? Tej operacji nie da się cofnąć.</string>
-    <string name="morphe_sources_open_in_browser">Otwórz w przeglądarce</string>
-    <string name="morphe_sources_failed_to_open_url">Nie udało się otworzyć strony</string>
-    <string name="morphe_sources_date_added">Dodano</string>
-    <string name="morphe_sources_date_updated">Zaktualizowano</string>
-    <string name="morphe_enabled">Włączone</string>
-    <string name="morphe_disabled">Wyłączone</string>
-    <string name="morphe_rename">Zmień nazwę</string>
-    <!-- Add Sources Dialog -->
-    <string name="morphe_add_patch_source">Dodaj źródło modyfikacji</string>
-    <string name="morphe_add_patch_source_remote">Zdalne</string>
-    <string name="morphe_add_patch_source_remote_url">Adres URL źródła</string>
-    <string name="morphe_add_patch_source_remote_description">Wprowadź adres URL punktu końcowego JSON dla zdalnego źródła modyfikacji</string>
-    <string name="morphe_add_patch_source_local">Lokalne</string>
-    <string name="morphe_add_patch_source_local_file">Wybierz plik źródłowy modyfikacji</string>
-    <string name="morphe_add_patch_source_local_file_description">Wybierz plik źródłowy .mpp z pamięci urządzenia</string>
-    <string name="morphe_add_patch_source_local_change_file">Zmień plik</string>
-    <string name="morphe_home_no_patches_available">Brak dostępnych modyfikacji</string>
-    <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Czy masz oryginalny, niezmodyfikowany plik APK?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Aby zmodyfikować %1$s, potrzebujesz wersji %2$s (niezmodyfikowanej)</string>
-    <string name="morphe_home_apk_availability_yes">Tak, mam</string>
-    <string name="morphe_home_apk_availability_no">Nie, pomóż mi ją znaleźć</string>
-    <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Pobierz oryginalny plik APK</string>
-    <string name="morphe_home_download_instructions_steps_title">Instrukcje:</string>
-    <string name="morphe_home_download_instructions_step1">Naciśnij przycisk \'%1$s\' poniżej</string>
-    <string name="morphe_home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
-    <string name="morphe_home_download_instructions_step3">Poczekaj, aż pobieranie się zakończy, i &lt;b&gt;nie instaluj&lt;/b&gt; pliku APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">Poczekaj, aż pobieranie się zakończy, a następnie &lt;b&gt;zainstaluj plik APK&lt;/b&gt;</string>
-    <string name="morphe_home_download_instructions_step4">Po zakończeniu pobierania otwórz tę aplikację ponownie</string>
-    <string name="morphe_home_download_instructions_step4_mount">Po zainstalowaniu oryginalnego pliku APK otwórz tę aplikację ponownie</string>
-    <string name="morphe_home_download_instructions_continue">Kontynuuj do APKMirror.com</string>
-    <!-- Dialog 3: File Picker Prompt -->
-    <string name="morphe_home_file_picker_prompt_title">Wybierz pobrany plik APK</string>
-    <string name="morphe_home_file_picker_prompt_description">Teraz wybierz pobrany plik APK %1$s.</string>
-    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Otwórz pobrany plik APK</string>
-    <string name="morphe_home_file_picker_prompt_open_apk">Otwórz plik APK</string>
-    <string name="morphe_home_recommended_version">Zalecana wersja</string>
-    <string name="morphe_patcher_selected_version">Wybrana wersja</string>
-    <string name="morphe_home_select_apk_title">Wybierz plik APK</string>
-    <string name="morphe_home_select_any_apk_description">Stuknij przycisk poniżej, aby wybrać plik APK dowolnej aplikacji do modyfikacji</string>
-    <string name="morphe_home_invalid_apk">Nieprawidłowy plik APK</string>
-    <string name="morphe_home_no_patches_for_app">Brak dostępnych modyfikacji dla tej aplikacji</string>
-    <!-- Dialog 4: Expert Mode Dialog -->
-    <string name="morphe_expert_mode_title">Tryb ekspercki</string>
-    <string name="morphe_expert_mode_subtitle_extended">Zaznaczono %1$d z %2$d modyfikacji</string>
-    <string name="morphe_expert_mode_search">Szukaj modyfikacji</string>
-    <string name="morphe_expert_mode_proceed">Przejdź do modyfikowania</string>
-    <string name="morphe_expert_mode_disable_all">Wyłącz wszystkie</string>
-    <string name="morphe_expert_mode_enable_all">Włącz wszystkie</string>
-    <string name="morphe_expert_mode_has_options">Konfigurowalne</string>
-    <string name="morphe_expert_mode_no_results">Brak znalezionych modyfikacji</string>
-    <string name="morphe_expert_mode_no_patches">Brak dostępnych modyfikacji</string>
+    <string name="home_greeting_10">Napędzani kawą i dobrymi modyfikacjami</string>
+    <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">Źródła modyfikacji</string>
+    <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
+    <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
+    <string name="sources_management_date_added">Dodano</string>
+    <string name="sources_management_date_updated">Zaktualizowano</string>
+    <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
+    <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
+    <string name="sources_dialog_duplicate_name_error">Źródło modyfikacji o tej nazwie już istnieje</string>
+    <string name="sources_dialog_missing_error">Nie można zaktualizować tego źródła modyfikacji</string>
+    <string name="sources_dialog_view_any_version">Dowolna wersja</string>
+    <string name="sources_dialog_view_any_package">Dowolny pakiet</string>
+    <string name="sources_dialog_add_source">Dodaj źródło modyfikacji</string>
+    <string name="sources_dialog_delete_confirm_message">Usunąć źródło \"%s\"? Tej operacji nie da się cofnąć</string>
+    <string name="sources_dialog_remote">Zdalne</string>
+    <string name="sources_dialog_remote_url">Adres URL źródła</string>
+    <string name="sources_dialog_remote_url_formats_title">Przykłady:</string>
+    <string name="sources_dialog_local">Lokalne</string>
+    <string name="sources_dialog_local_file">Wybierz plik źródłowy modyfikacji</string>
+    <string name="sources_dialog_local_file_description">Wybierz plik źródłowy .mpp z pamięci urządzenia</string>
+    <string name="sources_dialog_local_change_file">Zmień plik</string>
+    <string name="sources_dialog_preinstalled">Zainstalowany fabrycznie</string>
+    <string name="sources_update_success">Aktualizacja zakończona pomyślnie</string>
+    <string name="sources_update_unavailable">Brak dostępnych aktualizacji</string>
+    <string name="sources_download_fail">Nie udało się pobrać źródeł: %s</string>
+    <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_dialog_title">Czy masz oryginalny, niezmodyfikowany plik APK?</string>
+    <string name="home_apk_availability_dialog_simple">Aby zmodyfikować %1$s, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
+    <string name="home_apk_availability_dialog_expert">"Czy masz niezmodyfikowany plik APK %1$s?
+
+Kompatybilne wersje:"</string>
+    <string name="home_apk_availability_recommended_label">Zalecana</string>
+    <string name="home_apk_availability_unpatched_label">Niezmodyfikowana</string>
+    <string name="home_apk_availability_yes">Tak, mam</string>
+    <string name="home_apk_availability_no">Nie, pomóż mi ją znaleźć</string>
+    <string name="home_apk_use_saved_with_version">Użyj zapisanego pliku APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
+    <!-- Home Screen - Dialog 2: Download Instructions -->
+    <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
+    <string name="home_download_instructions_steps_title">Instrukcje:</string>
+    <string name="home_download_instructions_step1">Naciśnij przycisk \"%1$s\" poniżej</string>
+    <string name="home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
+    <string name="home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
+    <string name="home_download_instructions_step3">Poczekaj na zakończenie pobierania i &lt;b&gt;nie instaluj&lt;/b&gt; pliku APK</string>
+    <string name="home_download_instructions_step3_mount">Poczekaj na zakończenie pobierania, a następnie &lt;b&gt;zainstaluj plik APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">Po zakończeniu pobierania otwórz tę aplikację ponownie</string>
+    <string name="home_download_instructions_step4_mount">Po zainstalowaniu oryginalnego pliku APK otwórz tę aplikację ponownie</string>
+    <string name="home_download_instructions_continue">Przejdź do APKMirror.com</string>
+    <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_file_picker_prompt_title">Wybierz pobrany plik APK</string>
+    <string name="home_file_picker_prompt_description">Teraz wybierz pobrany plik APK %1$s</string>
+    <string name="home_file_picker_prompt_open_downloaded_apk">Otwórz pobrany plik APK</string>
+    <string name="home_file_picker_prompt_open_apk">Otwórz plik APK</string>
+    <string name="home_recommended_version">Zalecana wersja</string>
+    <string name="home_selected_version">Wybrana wersja</string>
+    <string name="home_select_apk_title">Wybierz plik APK</string>
+    <string name="home_select_any_apk_description">Stuknij przycisk poniżej, aby wybrać plik APK dowolnej aplikacji do modyfikacji</string>
+    <string name="home_invalid_apk">Nieprawidłowy plik APK</string>
+    <string name="home_no_patches_for_app">Brak dostępnych modyfikacji dla tej aplikacji</string>
+    <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_title">Tryb ekspercki</string>
+    <string name="expert_mode_subtitle_extended_format">Wybrano %1$s z %2$s modyfikacji</string>
+    <string name="expert_mode_search">Szukaj modyfikacji</string>
+    <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
+    <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
+    <string name="expert_mode_enable_all">Włącz wszystkie</string>
+    <string name="expert_mode_no_results">Brak znalezionych modyfikacji</string>
+    <string name="expert_mode_no_patches">Brak dostępnych modyfikacji</string>
+    <string name="expert_mode_multiple_sources_warning_title">Wybrano wiele źródeł modyfikacji</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Wybrano modyfikacje z wielu źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane działanie aplikacji.
+
+Czy na pewno chcesz kontynuować?"</string>
+    <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_dialog_unsupported_version_dialog_title">Niewspierana wersja</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie posiadała błędy</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Kompatybilne wersje:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Niewspierana</string>
+    <string name="home_dialog_wrong_package_title">Wybrano zły pakiet instalacyjny</string>
+    <string name="home_dialog_wrong_package_description">Wybrany plik APK nie jest przeznaczony dla aplikacji, którą zamierzałeś zmodyfikować</string>
+    <string name="home_dialog_expected_package">Oczekiwany pakiet:</string>
+    <string name="home_dialog_selected_package">Wybrany pakiet:</string>
     <!-- Patch Options -->
-    <string name="morphe_custom_color">Kolor niestandardowy</string>
-    <string name="morphe_hex_color">Kolor w formacie HEX</string>
-    <string name="morphe_patch_option_instructions">Instrukcje</string>
-    <string name="morphe_patch_option_enter_value">Wprowadź wartość</string>
-    <string name="morphe_patch_option_enter_number">Wprowadź liczbę</string>
-    <string name="morphe_patch_option_enter_decimal">Wprowadź liczbę dziesiętną</string>
-    <string name="morphe_patch_option_pick_folder">Wybierz folder</string>
-    <string name="expand">Rozwiń</string>
-    <string name="collapse">Zwiń</string>
-    <!-- App Info Screen -->
-    <string name="uninstall_app_confirmation">Czy na pewno chcesz odinstalować tę aplikację?</string>
-    <string name="saved_app_delete_confirmation">Czy na pewno chcesz usunąć tę zapisaną aplikację?</string>
-    <string name="saved_copy_delete_confirmation">Czy na pewno chcesz usunąć zapisaną kopię?</string>
-    <string name="view">Wyświetl</string>
-    <!-- Repatch Feature -->
-    <string name="morphe_repatch_no_original_apk">Nie znaleziono oryginalnego pliku APK. Nie można ponownie zmodyfikować tej aplikacji.</string>
-    <string name="morphe_repatch_requires_original">Ponowna modyfikacja wymaga oryginalnego pliku APK</string>
-    <!-- Storage Management -->
-    <string name="morphe_storage_management">Zarządzanie Pamięcią</string>
-    <string name="morphe_apks_count">%d plików APK</string>
-    <string name="morphe_apks_size">Całkowity rozmiar: %s</string>
-    <!-- Patched APKs Management -->
-    <string name="morphe_patched_apks_management">Zmodyfikowane pliki APK</string>
-    <string name="morphe_patched_apks_title">Zmodyfikowane pliki APK</string>
-    <string name="morphe_patched_apks_description">Zarządzaj zapisanymi plikami zmodyfikowanych aplikacji</string>
-    <string name="morphe_patched_apks_empty">Brak zapisanych plików APK</string>
-    <string name="morphe_patched_apks_delete_title">Usunąć zmodyfikowany plik APK?</string>
-    <string name="morphe_patched_apks_delete_confirm">Czy na pewno chcesz usunąć zapisany, zmodyfikowany plik APK dla %s?</string>
-    <string name="morphe_patched_apks_deleted">Pomyślnie usunięto zmodyfikowany plik APK</string>
-    <!-- Original APKs Management -->
-    <string name="morphe_original_apks_management">Oryginalne pliki APK</string>
-    <string name="morphe_original_apks_title">Oryginalne pliki APK</string>
-    <string name="morphe_original_apks_description">Oryginalne pliki APK są przechowywane na potrzeby ponownej modyfikacji. Dla każdej aplikacji zachowywana jest tylko najnowsza wersja.</string>
-    <string name="morphe_original_apks_empty">Brak zapisanych oryginalnych plików APK</string>
-    <string name="morphe_original_apks_deleted">Pomyślnie usunięto oryginalny plik APK</string>
-    <string name="morphe_original_apks_saved">Oryginalny plik APK został zapisany</string>
-    <string name="morphe_original_apks_save_failed">Nie udało się zapisać oryginalnego pliku APK</string>
-    <string name="morphe_original_apks_delete_title">Usunąć oryginalny plik APK?</string>
-    <string name="morphe_original_apks_delete_confirm">Usunąć oryginalny plik APK dla aplikacji %s? Nie będziesz mógł ponownie modyfikować bez wybrania nowego pliku APK.</string>
-    <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem.</string>
-    <string name="morphe_root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
-    <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_error_copied">Błąd skopiowano do schowka</string>
-    <string name="morphe_patcher_error_log">Dziennik błędów</string>
-    <string name="morphe_patcher_error_technical">Szczegóły techniczne</string>
-    <string name="morphe_patcher_patches_progress">%1$d z %2$d modyfikacji</string>
-    <string name="morphe_patcher_long_step_warning">Ten krok może potrwać chwilę. Proszę czekać…</string>
-    <string name="morphe_patcher_installing">Instalowanie…</string>
-    <string name="morphe_patcher_installing_subtitle">Prawie gotowe do działania!</string>
-    <string name="morphe_patcher_success_title">Wszystko gotowe! 🎉</string>
-    <string name="morphe_patcher_success_subtitle">Twoja aplikacja została zmodyfikowana i zainstalowana!</string>
-    <string name="morphe_patcher_complete_title">Modyfikowanie zakończone! ✨</string>
-    <string name="morphe_patcher_failed_title">Ups! Coś poszło nie tak</string>
-    <string name="morphe_patcher_failed_subtitle">Sprawdź poniższe szczegóły błędu</string>
-    <string name="morphe_patcher_failed_dialog_title">Modyfikowanie nie powiodło się</string>
-    <string name="morphe_patcher_unknown_error">Wystąpił nieznany błąd</string>
-    <string name="morphe_patcher_mounting">Mountowanie...</string>
-    <string name="morphe_patcher_conflict_title">Konflikt pakietów</string>
-    <string name="morphe_patcher_conflict_subtitle">Musisz odinstalować istniejącą wersję</string>
-    <string name="morphe_patcher_install_error_title">Błąd podczas instalacji</string>
-    <string name="morphe_patcher_install_error_subtitle">Spróbuj odinstalować i ponownie zainstalować</string>
-    <string name="morphe_patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
-    <string name="morphe_patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zmountować</string>
-    <string name="morphe_patcher_unsupported_version_dialog_title">Niewspierana wersja</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie posiadała błędy.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
-    <string name="morphe_patcher_wrong_package_title">Wybrano zły pakiet instalacyjny</string>
-    <string name="morphe_patcher_wrong_package_description">Wybrany plik APK nie jest przeznaczony dla aplikacji, którą zamierzałeś zmodyfikować.</string>
-    <string name="morphe_patcher_expected_package">Oczekiwany pakiet</string>
-    <string name="morphe_patcher_selected_package">Wybrany pakiet</string>
-    <string name="morphe_patcher_message_1">Przekształcanie Twojej aplikacji w coś niesamowitego… 🏆</string>
-    <string name="morphe_patcher_message_2">Uczenie starych aplikacji, nowych sztuczek… 🎩</string>
-    <string name="morphe_patcher_message_3">Podrasowywanie Twojej aplikacji w toku… 🔧</string>
-    <string name="morphe_patcher_message_4">Tworzenie cyfrowej magii…</string>
-    <string name="morphe_patcher_message_5">Polecana przerwa na kawę… ☕</string>
-    <string name="morphe_patcher_message_6">Spójrz za okno, jest tam ładnie… 🌤️</string>
-    <string name="morphe_patcher_message_7">Dostosowywanie zer i jedynek… 🤖</string>
-    <string name="morphe_patcher_message_8">Rozplątywanie cyfrowego spaghetti… 🍝</string>
+    <string name="custom_color">Kolor niestandardowy</string>
+    <string name="hex_color">Kolor w formacie HEX</string>
+    <string name="patch_option_instructions">Instrukcje</string>
+    <string name="patch_option_enter_value">Wprowadź wartość</string>
+    <string name="patch_option_enter_number">Wprowadź liczbę</string>
+    <string name="patch_option_enter_decimal">Wprowadź liczbę dziesiętną</string>
+    <string name="patch_option_pick_folder">Wybierz folder</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_create">Utwórz ikonę adaptacyjną</string>
+    <string name="adaptive_icon_instructions">Wybierz obraz pierwszego planu, wybierz kolor tła i dostosuj podgląd za pomocą gestów uszczypnięcia</string>
+    <string name="adaptive_icon_preview">Podgląd</string>
+    <string name="adaptive_icon_select_image">Wybierz obraz</string>
+    <string name="adaptive_icon_change_image">Zmień obraz</string>
+    <string name="adaptive_icon_background_color">Kolor tła</string>
+    <string name="adaptive_icon_reset_transform">Zresetuj pozycję i skalę</string>
+    <string name="adaptive_icon_safe_zone_inner">Bezpieczna strefa (zawsze widoczna)</string>
+    <string name="adaptive_icon_safe_zone_outer">Strefa maskowania (może być przycięta)</string>
+    <string name="adaptive_icon_created_success">Ikona adaptacyjna została utworzona pomyślnie</string>
+    <string name="adaptive_icon_creation_failed">Nie udało się utworzyć ikony adaptacyjnej</string>
+    <string name="adaptive_icon_folder_explanation">Wybierz miejsce utworzenia folderu \"morphe_branding/morphe_icons\" z utworzonymi plikami ikon</string>
+    <!-- Header Creator -->
+    <string name="header_creator_create">Utwórz własny nagłówek</string>
+    <string name="header_creator_instructions">Wybierz obrazy dla jasnego i ciemnego motywu, a następnie dostosuj je za pomocą gestów uszczypnięcia</string>
+    <string name="header_creator_light_theme">Nagłówek motywu jasnego</string>
+    <string name="header_creator_dark_theme">Nagłówek motywu ciemnego</string>
+    <string name="header_creator_no_image">Nie wybrano żadnego obrazu</string>
+    <string name="header_creator_success">Nagłówek utworzony pomyślnie</string>
+    <string name="header_creator_failed">Nie udało się utworzyć nagłówka</string>
+    <string name="header_creator_folder_explanation">Wybierz miejsce utworzenia folderu \"morphe_branding/morphe_header\" z utworzonymi plikami nagłówka</string>
+    <!-- Home Screen - App Info Screen -->
+    <string name="home_app_info_uninstall_app_confirmation">Czy na pewno chcesz odinstalować tę aplikację?</string>
+    <string name="home_app_info_remove_app_warning">To trwale usunie:</string>
+    <string name="home_app_info_delete_item_database">Wpis w bazie danych</string>
+    <string name="home_app_info_delete_item_patched_apk">Zmodyfikowany plik APK</string>
+    <string name="home_app_info_delete_item_original_apk">Oryginalny plik APK</string>
+    <string name="home_app_info_delete_preservation_note">Wybrane modyfikacje i opcje zostaną zachowane do przyszłego modyfikowania</string>
+    <string name="home_app_info_patches_name_default">Modyfikacje</string>
+    <string name="home_app_info_patches_name_fallback">Nienazwana</string>
+    <string name="home_app_info_patches_replace_fail">Nie udało się zaimportować modyfikacji: %s</string>
+    <string name="home_app_info_repatch_no_original_apk">Nie znaleziono oryginalnego pliku APK. Nie można ponownie zmodyfikować tej aplikacji</string>
+    <string name="home_app_info_original_package_name">Oryginalna nazwa pakietu</string>
+    <string name="home_app_info_applied_patches">Zastosowane modyfikacje</string>
+    <string name="home_app_info_patch_source_used">Użyte źródło modyfikacji</string>
+    <string name="home_app_info_install_type">Typ instalacji</string>
+    <string name="home_app_info_install_type_custom_installer">Własny instalator</string>
+    <string name="home_app_info_install_type_system_installer">Instalator systemowy</string>
+    <string name="home_app_info_patched_at">Zmodyfikowano</string>
+    <string name="home_app_info_patch_update_available">Dostępna aktualizacja modyfikacji</string>
+    <string name="home_app_info_patch_update_available_description">Dostępna jest nowsza wersja modyfikacji. Zmodyfikuj aplikację ponownie, aby otrzymać najnowsze ulepszenia i poprawki</string>
+    <string name="home_app_info_app_deleted_warning">Aplikacja odinstalowana poza menedżerem</string>
+    <string name="home_app_info_app_deleted_description">Ta aplikacja została odinstalowana poza menedżerem. Zmodyfikuj ją ponownie, by przywrócić funkcjonalność</string>
+    <!-- Home Screen - Root Mode -->
+    <string name="root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem</string>
+    <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
+    <string name="root_pre_patch_installer_title">Wybierz metodę instalacji</string>
+    <string name="root_pre_patch_installer_description">Wykryto uprawnienia root. Wybierz sposób instalacji zmodyfikowanej aplikacji</string>
+    <string name="root_pre_patch_installer_mount_title">Mountowanie Root</string>
+    <string name="root_pre_patch_installer_mount_description">Zmountuj zmodyfikowany plik APK nad oryginalną aplikacją. GmsCore nie jest wymagany</string>
+    <string name="root_pre_patch_installer_standard_title">Standardowa instalacja</string>
+    <string name="root_pre_patch_installer_standard_description">Zainstaluj jako oddzielną aplikację ze wsparciem GmsCore. Wybierz instalator (Systemowy, Shizuku itp.) po zakończeniu modyfikacji</string>
+    <string name="root_pre_patch_installer_hint">Metoda instalacji określa zakres dostępnych modyfikacji i nie może zostać zmieniona po rozpoczęciu procesu</string>
+    <!-- Patcher Screen -->
+    <string name="patcher_error_copied">Skopiowano błąd do schowka</string>
+    <string name="patcher_error_log">Dziennik błędów</string>
+    <string name="patcher_error_technical">Szczegóły techniczne</string>
+    <string name="patcher_long_step_warning">Ten krok może potrwać chwilę. Proszę czekać…</string>
+    <string name="patcher_installing_subtitle">Prawie gotowe do działania!</string>
+    <string name="patcher_success_title">Wszystko gotowe! 🎉</string>
+    <string name="patcher_success_subtitle">Twoja aplikacja została zmodyfikowana i zainstalowana!</string>
+    <string name="patcher_complete_title">Modyfikowanie zakończone! ✨</string>
+    <string name="patcher_failed_title">Ups! Coś poszło nie tak</string>
+    <string name="patcher_failed_subtitle">Sprawdź poniższe szczegóły błędu</string>
+    <string name="patcher_failed_dialog_title">Modyfikowanie nie powiodło się</string>
+    <string name="patcher_unknown_error">Wystąpił nieznany błąd</string>
+    <string name="patcher_conflict_title">Konflikt pakietów</string>
+    <string name="patcher_conflict_subtitle">Musisz odinstalować istniejącą wersję</string>
+    <string name="patcher_install_error_title">Błąd podczas instalacji</string>
+    <string name="patcher_install_error_subtitle">Spróbuj odinstalować i ponownie zainstalować</string>
+    <string name="patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
+    <string name="patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zmountować</string>
+    <!-- Patcher Screen - Patcher Steps -->
+    <string name="patcher_step_group_preparing">Przygotowywanie</string>
+    <string name="patcher_step_load_patches">Wczytywanie modyfikacji</string>
+    <string name="patcher_step_prepare_split_apk">Scalanie podzielonego pliku APK</string>
+    <string name="patcher_step_unpack">Odczytano plik APK</string>
+    <string name="patcher_step_group_patching">Modyfikowanie</string>
+    <string name="patcher_step_group_saving">Zapisywanie</string>
+    <string name="patcher_step_write_patched">Zapisywanie zmodyfikowanego pliku APK</string>
+    <string name="patcher_step_sign_apk">Podpisywanie zmodyfikowanego pliku APK</string>
+    <!-- Patcher Screen - Patcher Worker -->
+    <string name="patcher_notification_title">Modyfikowanie w toku…</string>
+    <string name="patcher_notification_text">Stuknij, aby wrócić do modyfikatora</string>
+    <string name="patcher_stop_confirm_title">Zatrzymaj modyfikator</string>
+    <string name="patcher_stop_confirm_description">Czy na pewno chcesz zatrzymać proces modyfikowania?</string>
+    <!-- Patcher Screen - Patcher Messages -->
+    <string name="patcher_message_1">Przekształcanie Twojej aplikacji w coś niesamowitego… 🏆</string>
+    <string name="patcher_message_2">Uczenie starych aplikacji nowych sztuczek… 🎩</string>
+    <string name="patcher_message_3">Podrasowywanie Twojej aplikacji w toku… 🔧</string>
+    <string name="patcher_message_4">Tworzenie cyfrowej magii…</string>
+    <string name="patcher_message_5">Polecana przerwa na kawę… ☕</string>
+    <string name="patcher_message_6">Spójrz za okno, jest tam ładnie… 🌤️</string>
+    <string name="patcher_message_7">Dostosowywanie zer i jedynek… 🤖</string>
+    <string name="patcher_message_8">Rozplątywanie cyfrowego spaghetti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Naprawianie błędów w oryginalnej aplikacji… 🪲</string>
-    <string name="morphe_patcher_message_10">Świetne modyfikacje są warte czekania… ⏳</string>
-    <string name="morphe_patcher_message_11">Polerowanie pikseli, aż zaczną lśnić… 💎</string>
-    <string name="morphe_patcher_message_12">Proszę pozostać na swoim miejscu, dopóki kapitan nie wyłączy znaku \"Trwa modyfikowanie\"... 💺✈️</string>
-    <string name="morphe_patcher_message_13">Przyrządzanie Twojej zmodyfikowanej aplikacji, tak aby była świeża i gorąca… 🍳</string>
+    <string name="patcher_message_9">Naprawianie błędów w oryginalnej aplikacji… 🪲</string>
+    <string name="patcher_message_10">Świetne modyfikacje są warte czekania… ⏳</string>
+    <string name="patcher_message_11">Polerowanie pikseli, aż zaczną lśnić… 💎</string>
+    <string name="patcher_message_12">Proszę pozostać na swoim miejscu, dopóki kapitan nie wyłączy znaku \"Trwa modyfikowanie\"... 💺✈️</string>
+    <string name="patcher_message_13">Przyrządzanie Twojej zmodyfikowanej aplikacji, tak aby była świeża i gorąca… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">Dogadywanie szczegółów z kodem binarnym… 🤝</string>
+    <string name="patcher_message_14">Dogadywanie szczegółów z kodem binarnym… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">Wszystkie systemy sprawdzone… trajektoria modyfikowania jest stabilna… 🚀</string>
-    <string name="morphe_patcher_message_16">Wyciskanie jeszcze odrobinkę dodatkowej mocy, jak soku z cyfrowej cytryny… 🍋</string>
-    <string name="morphe_patcher_message_17">Zachęcanie aplikacji do zaakceptowania swojej nowej, lepszej wersji… 🌱</string>
+    <string name="patcher_message_15">Wszystkie systemy sprawdzone… trajektoria modyfikowania jest stabilna… 🚀</string>
+    <string name="patcher_message_16">Wyciskanie jeszcze odrobinkę dodatkowej mocy, jak soku z cyfrowej cytryny… 🍋</string>
+    <string name="patcher_message_17">Zachęcanie aplikacji do zaakceptowania swojej nowej, lepszej wersji… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="morphe_patcher_message_18">Zmiana superpozycji aplikacji z niezmodyfikowanej na zmodyfikowaną… 📦⚛️</string>
+    <string name="patcher_message_18">Zmiana superpozycji aplikacji z niezmodyfikowanej na zmodyfikowaną… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="morphe_patcher_message_19">Twoja aplikacja ma gorączkę, a jedyną receptą jest więcej modyfikacji… 🩺🔔</string>
-    <string name="morphe_patcher_message_20">Usuwanie bzdur. Proszę czekać… 🗑️</string>
-    <!-- Appearance Tab -->
-    <string name="morphe_appearance_options">Opcje wyglądu</string>
-    <string name="morphe_appearance_options_description">Dostosuj motywy, kolory i tła</string>
-    <string name="morphe_appearance_current_language">Aktualny język</string>
-    <string name="morphe_appearance_search">Szukaj</string>
-    <string name="morphe_appearance_no_results">Nie znaleziono wyników</string>
-    <string name="morphe_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą nie istnieć lub być niekompletne</string>
-    <string name="morphe_appearance_translations_info_text">Aby przetłumaczyć nowe języki lub poprawić istniejącie tłumaczenia, odwiedź %s</string>
-    <string name="morphe_background_type">Animacja tła</string>
-    <string name="morphe_background_type_circles">Okręgi</string>
-    <string name="morphe_background_type_rings">Pierścienie</string>
-    <string name="morphe_background_type_waves">Fale</string>
-    <string name="morphe_background_type_space">Kosmos</string>
-    <string name="morphe_background_type_shapes">Kształty</string>
-    <string name="morphe_background_type_snow">Śnieg</string>
-    <string name="morphe_background_type_none">Brak</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Ikona aplikacji</string>
-    <string name="morphe_app_icon_selector_description">Zmień ikonę aplikacji</string>
-    <string name="morphe_app_icon_default">Domyślna</string>
-    <string name="morphe_app_icon_light_2">Niebo</string>
-    <string name="morphe_app_icon_light_3">Zmierzch</string>
-    <string name="morphe_app_icon_dark_1">Ocean</string>
-    <string name="morphe_app_icon_dark_2">Pustka</string>
-    <string name="morphe_app_icon_dark_3">Indygo</string>
-    <string name="morphe_app_icon_change_dialog_title">Zmienić ikonę aplikacji?</string>
-    <string name="morphe_app_icon_change_dialog_message">Zmienić na \'%1$s\' i uruchomić ponownie?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Zmień ikonę</string>
-    <!-- Advanced Tab -->
-    <string name="morphe_expert_section">Ustawienia eksperckie</string>
-    <string name="morphe_settings_expert_mode">Tryb ekspercki</string>
-    <string name="morphe_settings_expert_mode_description">Włącz zaawansowane funkcje i opcje personalizacji</string>
-    <string name="morphe_update_use_prereleases">Używaj wersji przedpremierowych Morphe</string>
-    <string name="morphe_update_use_prereleases_description">Zdobądź wcześniejszy dostęp do nowych aktualizacji i funkcji menedżera</string>
-    <string name="morphe_patch_options_expert_mode_notice">W trybie eksperckim opcje modyfikacji będą dostępne podczas modyfikowania</string>
-    <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Ustawienia modyfikacji</string>
-    <string name="morphe_patch_options_youtube_description">Motyw, marka, nagłówek i ustawienia Shortsów</string>
-    <string name="morphe_patch_options_youtube_music_description">Ustawienia motywu i marki</string>
-    <string name="morphe_patch_options_restart_message">Zmiana ustawień modyfikacji wymaga ponownego zmodyfikowania aplikacji w celu zastosowania zmian</string>
-    <!-- Patch Options Section: Theme Colors -->
-    <string name="morphe_patch_options_theme_colors">Kolory motywu</string>
-    <string name="morphe_patch_options_theme_colors_description">Zmień kolor tła</string>
-    <string name="morphe_patch_options_dark_theme_color">Kolor tła motywu ciemnego</string>
-    <string name="morphe_patch_options_dark_theme_color_description">Może to być kolor hex (#RRGGBB) lub odwzorowanie zasobu kolorowego</string>
-    <string name="morphe_patch_options_light_theme_color">Kolor tła motyvu jasnego</string>
-    <string name="morphe_patch_options_light_theme_color_description">Może to być kolor hex (#RRGGBB) lub odwzorowanie zasobu kolorowego</string>
-    <string name="morphe_patch_options_loading">Ładowanie ustawień modyfikacji…</string>
-    <string name="morphe_patch_options_waiting_for_source">Zaczekaj na aktualizację źródła modyfikacji</string>
-    <string name="morphe_patch_options_load_error">Błąd podczas ładowania ustawień modyfikacji</string>
-    <string name="morphe_patch_options_no_available">Brak ustawień dla tej modyfikacji</string>
-    <!-- Patch Options Section: Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">Niestandardowa marka</string>
-    <string name="morphe_patch_options_custom_branding_description">Zmień widoczną nazwę aplikacji</string>
-    <string name="morphe_patch_options_custom_branding_app_name">Nazwa aplikacji</string>
-    <string name="morphe_patch_options_custom_branding_app_name_hint">Wprowadź niestandardową nazwę</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon">Niestandardowa ikona</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Katalog z obrazami do użycia jako własna ikona.
+    <string name="patcher_message_19">Twoja aplikacja ma gorączkę, a jedyną receptą jest więcej modyfikacji… 🩺🔔</string>
+    <string name="patcher_message_20">Usuwanie bzdur. Proszę czekać… 🗑️</string>
+    <!-- Patcher Screen - Other hidden strings -->
+    <string name="applying_patches">Modyfikowanie aplikacji</string>
+    <string name="failed_to_execute_patch">Nie udało się zastosować %s</string>
+    <string name="patched_app_saved_toast">Zmodyfikowana aplikacja zapisana na później</string>
+    <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
+    <string name="download_apk">Pobierz plik APK</string>
+    <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
+    <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %1$s</string>
+    <string name="install_app_success">Zainstalowano pomyślnie</string>
+    <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
+    <string name="install_timeout_message">Instalacja nie została zakończona. Sprawdź okno instalatora systemowego i spróbuj ponownie</string>
+    <string name="save_apk_success">Zapisano plik APK</string>
+    <string name="saved_app_export_failed">Nie udało się wyeksportować zmodyfikowanej aplikacji</string>
+    <string name="saved_app_removed_toast">Usunięto zapisaną zmodyfikowaną aplikację</string>
+    <string name="saved_app_copy_removed_toast">Usunięto zapisaną kopię</string>
+    <string name="saved_app_launch_unavailable">Zainstaluj aplikację, aby móc ją otworzyć</string>
+    <string name="package_name">Nazwa pakietu</string>
+    <string name="failed_to_mount">Nie udało się zmountować: %s</string>
+    <string name="failed_to_unmount">Nie udało się odmountować: %s</string>
+    <!-- Settings -->
+    <string name="appearance">Wygląd</string>
+    <string name="advanced">Zaawansowane</string>
+    <string name="system">System</string>
+    <!-- Settings - Appearance Tab - Background animation -->
+    <string name="settings_appearance_background">Animacja tła</string>
+    <string name="settings_appearance_background_circles">Okręgi</string>
+    <string name="settings_appearance_background_rings">Pierścienie</string>
+    <string name="settings_appearance_background_mesh">Siatka</string>
+    <string name="settings_appearance_background_space">Kosmos</string>
+    <string name="settings_appearance_background_shapes">Kształty</string>
+    <string name="settings_appearance_background_snow">Śnieg</string>
+    <string name="settings_appearance_background_none">Brak</string>
+    <string name="settings_appearance_parallax_effect">Efekt paralaksy</string>
+    <string name="settings_appearance_parallax_effect_description">Gładkie przesuwanie tła przy nachyleniu urządzenia</string>
+    <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_theme">Motyw</string>
+    <string name="settings_appearance_system">Systemowy</string>
+    <string name="settings_appearance_light">Jasny</string>
+    <string name="settings_appearance_dark">Ciemny</string>
+    <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_accent_color">Kolor akcentu</string>
+    <string name="settings_appearance_pure_black">Głęboka czerń</string>
+    <string name="settings_appearance_pure_black_description">Użyj głębokiej czerni tła dla wyświetlaczy OLED</string>
+    <!-- Settings - Appearance Tab - Language Selector -->
+    <string name="settings_appearance_app_language">Język aplikacji</string>
+    <string name="settings_appearance_app_language_current">Obecny język</string>
+    <string name="settings_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą nie istnieć lub być niekompletne</string>
+    <string name="settings_appearance_translations_info_text">Aby przetłumaczyć aplikację na nowe języki lub poprawić istniejące tłumaczenia, odwiedź stronę %s</string>
+    <!-- Settings - Appearance Tab - App Icon Selector -->
+    <string name="settings_appearance_app_icon_selector_title">Ikona aplikacji</string>
+    <string name="settings_appearance_app_icon_default">Domyślna</string>
+    <string name="settings_appearance_app_icon_light_2">Niebo</string>
+    <string name="settings_appearance_app_icon_light_3">Zachód słońca</string>
+    <string name="settings_appearance_app_icon_dark_1">Ocean</string>
+    <string name="settings_appearance_app_icon_dark_2">Pustka</string>
+    <string name="settings_appearance_app_icon_dark_3">Indygo</string>
+    <string name="settings_appearance_app_icon_change_dialog_title">Zmienić ikonę aplikacji?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Zmienić na \"%1$s\" i uruchomić ponownie?</string>
+    <string name="settings_appearance_app_icon_change_dialog_confirm">Zmień ikonę</string>
+    <!-- Settings - Advanced Tab - Updates Section -->
+    <string name="settings_advanced_updates">Aktualizacje</string>
+    <string name="settings_advanced_updates_use_prereleases">Używaj wersji przedpremierowych</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Zdobądź wcześniejszy dostęp do nowych aktualizacji i funkcji menedżera</string>
+    <!-- Settings - Advanced Tab - Expert settings Section -->
+    <string name="settings_advanced_expert">Ustawienia eksperckie</string>
+    <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
+    <string name="settings_advanced_expert_mode_description">Włącz zaawansowane ustawienia modyfikacji oraz opcje personalizacji Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
+    <string name="settings_advanced_strip_unused_libs">Usuń nieużywane biblioteki systemowe</string>
+    <string name="settings_advanced_strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">Token GitHub</string>
+    <string name="settings_advanced_github_pat_description">Wymagane dla źródeł z Pull Requestów</string>
+    <string name="settings_advanced_github_pat_configured">Token skonfigurowany</string>
+    <string name="settings_advanced_github_pat_how_to_get">Jak uzyskać token</string>
+    <string name="settings_advanced_github_pat_dialog_title">Ustaw token GitHub</string>
+    <string name="settings_advanced_github_pat_dialog_description">Ustaw Personal Access Token na GitHub, aby móc dodawać Pull Requesty jako zewnętrzne źródła. Utwórz token z uprawnieniem public_repo na github.com</string>
+    <string name="settings_advanced_github_pat_export_include_label">Uwzględnij w eksporcie ustawień</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ten token do eksportu ustawień menedżera</string>
+    <string name="settings_advanced_github_pat_export_warning">Nie udostępniaj swojego tokena. Jeśli dołączysz go do eksportu ustawień, zachowaj ten plik prywatnie, ponieważ zawiera on token</string>
+    <!-- Settings - Advanced Tab - Patch Options Section -->
+    <string name="settings_advanced_patch_options">Ustawienia modyfikacji</string>
+    <string name="settings_advanced_patch_options_youtube_description">Motyw, marka, nagłówek i ustawienia Shortsów</string>
+    <string name="settings_advanced_patch_options_youtube_music_description">Ustawienia motywu i marki</string>
+    <string name="settings_advanced_patch_options_restart_message">Zmiana ustawień modyfikacji wymaga ponownego zmodyfikowania aplikacji w celu zastosowania zmian</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">W trybie eksperckim opcje modyfikacji będą dostępne podczas modyfikowania</string>
+    <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
+    <string name="settings_advanced_patch_options_theme_colors">Kolory motywu aplikacji</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">Zmień kolor tła</string>
+    <string name="settings_advanced_patch_options_dark_theme_color">Kolor tła motywu ciemnego</string>
+    <string name="settings_advanced_patch_options_light_theme_color">Kolor tła motywu jasnego</string>
+    <string name="settings_advanced_patch_options_theme_color_description">Może być kolorem szesnastkowym (#RRGGBB) lub odwołaniem do zasobu kolorów</string>
+    <string name="settings_advanced_patch_options_loading">Wczytywanie ustawień modyfikacji…</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Zaczekaj na aktualizację źródła modyfikacji</string>
+    <string name="settings_advanced_patch_options_load_error">Błąd podczas ładowania ustawień modyfikacji</string>
+    <string name="settings_advanced_patch_options_no_available">Brak ustawień dla tej modyfikacji</string>
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
+    <string name="settings_advanced_patch_options_custom_branding">Niestandardowa marka</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Zmień widoczną nazwę aplikacji</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_name">Nazwa aplikacji</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Wprowadź niestandardową nazwę</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon">Niestandardowa ikona</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Katalog z obrazami do użycia jako własna ikona.
 
 Katalog musi zawierać jeden lub więcej z następujących katalogów, w zależności od DPI urządzenia:
 - mipmap-mdpi
@@ -270,10 +368,10 @@ Wymagane są następujące wymiary obrazów:
 Ścieżka może zawierać katalog 'drawable' z dowolnymi plikami czarno-białych ikon:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Patch Options Section: Custom Header -->
-    <string name="morphe_patch_options_custom_header">Niestandardowe logo</string>
-    <string name="morphe_patch_options_custom_header_description">Zmień logo</string>
-    <string name="morphe_patch_options_custom_header_instruction">"Katalog z obrazami do użycia jako własne logo.
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
+    <string name="settings_advanced_patch_options_custom_header">Niestandardowe logo</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Zmień logo</string>
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Katalog z obrazami do użycia jako własne logo.
 
 Katalog musi zawierać jeden lub więcej z następujących katalogów, w zależności od DPI urządzenia:
 - drawable-hdpi
@@ -290,850 +388,222 @@ Wymagane są następujące wymiary obrazów:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Patch Options Section: Hide Shorts -->
-    <string name="morphe_patch_options_hide_shorts_features">Ukryj funkcje Shorts</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">Ukryj skrót do Shortsów</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Usuń Shortsy z menu długiego naciskania w launcherze</string>
-    <string name="morphe_patch_options_hide_shorts_widget">Ukryj widżet z Shortsami</string>
-    <string name="morphe_patch_options_hide_shorts_widget_description">Usuń przycisk do Shortsów z widżeta w launcherze</string>
-    <!-- System Tab -->
-    <string name="morphe_performance">Wydajność</string>
-    <string name="morphe_process_runtime">Środowisko procesu</string>
-    <string name="morphe_process_runtime_description">Uruchamiaj modyfikowanie w oddzielnym procesie dla lepszej stabilności</string>
-    <string name="morphe_process_runtime_memory_limit">Limit pamięci</string>
-    <string name="morphe_process_runtime_memory_limit_help">Wyższe limity pamięci mogą przyspieszyć modyfikowanie, ale mogą nie działać na starszych urządzeniach</string>
-    <string name="morphe_enable_process_runtime">Włącz środowisko procesu</string>
-    <string name="morphe_memory_limit_subtitle">Pamięć dostępna dla procesu modyfikowania</string>
-    <string name="morphe_memory_limit_warning">Niski limit pamięci może powodować błędy podczas modyfikowania większych aplikacji</string>
-    <string name="morphe_process_runtime_enabled_description">Limit: %d MB</string>
-    <string name="morphe_process_runtime_disabled_description">Stuknij, aby skonfigurować</string>
-    <!-- About Section -->
-    <string name="morphe_share_website">Udostępnij stronę</string>
-    <string name="morphe_share_website_description">Udostępnij oficjalną stronę Morphe</string>
-    <!-- Other strings -->
-    <string name="patcher">Modyfikator</string>
-    <string name="patches">Modyfikacje</string>
-    <string name="patch_bundles">Pakiety modyfikacji</string>
-    <string name="patch_bundle">Pakiet modyfikacji</string>
-    <!-- Morphe -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
+    <string name="settings_advanced_patch_options_hide_shorts_features">Ukryj funkcje Shorts</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ukryj skrót do Shortsów</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Usuń Shortsy z menu długiego naciskania w launcherze</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget">Ukryj widżet z Shortsami</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Usuń przycisk do Shortsów z widżetu w launcherze</string>
+    <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
-    <string name="plugin_host_permission_label">Host wtyczek Morphe</string>
-    <string name="plugin_host_permission_description">Służy do kontrolowania dostępu do wtyczek Morphe. Tylko Morphe ma tę funkcję.</string>
-    <string name="toast_copied_to_clipboard">Skopiowano!</string>
-    <string name="copy_to_clipboard">Kopiuj do schowka</string>
-    <string name="settings">Ustawienia</string>
-    <string name="select_app">Wybierz aplikację</string>
-    <string name="app_filter_title">Filtruj aplikacje</string>
-    <string name="app_filter_installed_only">Tylko zainstalowane</string>
-    <string name="app_filter_patches_available">Z dostępnymi modyfikacjami</string>
-    <string name="app_filter_no_results">Brak aplikacji spełniających Twoje filtry.</string>
-    <string name="new_downloader_plugins_notification">Dostępne są nowe wtyczki. Kliknij tutaj, aby je skonfigurować.</string>
-    <string name="unsupported_architecture_warning">Modyfikowanie na tej architekturze urządzenia jest nieobsługiwane i najprawdopodobniej zakończy się niepowodzeniem.</string>
-    <string name="import_">Zaimportuj</string>
-    <string name="file_field_not_set">Nie wybrano</string>
-    <string name="field_not_set">Nie ustawiono</string>
-    <string name="patches_missing">Brakujące</string>
-    <string name="patches_error">Błąd</string>
-    <string name="patches_error_description">Nie można załadować modyfikacji. Kliknij, aby zobaczyć błąd</string>
-    <string name="patches_not_downloaded">Modyfikacje nie zostały pobrane. Kliknij tutaj, aby je pobrać</string>
-    <string name="patches_name_default">Modyfikacje</string>
-    <string name="patches_name_fallback">Nienazwana</string>
-    <string name="bundle_uid">UID pakietu</string>
-    <string name="patches_display_name">Nazwa wyświetlana</string>
-    <string name="android_11_bug_dialog_title">Błąd Android 11</string>
-    <string name="android_11_bug_dialog_description">Uprawnienia do instalacji aplikacji muszą zostać przyznane z góry, aby uniknąć błędu w systemie Android 11, który negatywnie wpłynie na komfort użytkowania.</string>
-    <string name="no_network_toast">Brak połączenia internetowego</string>
-    <string name="selected_app_meta_any_version">Dowolna dostępna wersja</string>
-    <string name="app_source_dialog_title">Wybierz źródło</string>
-    <string name="app_source_dialog_option_auto">Automatycznie</string>
-    <string name="app_source_dialog_option_auto_description">Użyj wszystkich dostępnych programów do pobrania, aby pobrać aplikację</string>
-    <string name="app_source_dialog_option_auto_unavailable">Brak dostępnych wtyczek</string>
-    <string name="app_source_dialog_option_storage">Pamięć</string>
-    <string name="app_source_dialog_option_storage_description">Wybierz APK z pamięci lokalnej</string>
-    <string name="app_source_dialog_option_installed_no_root">Zmountowanych aplikacji nie można ponownie zmodyfikować bez dostępu roota</string>
-    <string name="app_source_dialog_option_installed_version_not_suggested">Wersja %s nie jest zgodna z sugerowaną wersją</string>
-    <string name="bundle_version_item">Rekomendacja pakietu</string>
-    <string name="bundle_version_item_description_default">Używając domyślnej rekomendacji</string>
-    <string name="bundle_version_item_description_selected">Następująca wersja %1$s (%2$s)</string>
-    <string name="bundle_version_dialog_title">Wybierz pakiet</string>
-    <string name="bundle_version_dialog_description">Wybierz, który z pakietów powinien być używany podczas pobierania APK.</string>
-    <string name="bundle_version_dialog_default">Użyj domyślnej rekomendacji</string>
-    <string name="bundle_version_dialog_default_subtitle">Automatycznie wybierz najczęściej używaną kompatybilną wersję.</string>
-    <string name="bundle_version_all_versions">Wszystkie wersje</string>
-    <string name="bundle_version_no_version">Brak sugerowanej wersji</string>
-    <string name="bundle_version_suggested_label">Sugerowana wersja: %1$s</string>
-    <string name="bundle_update_manual_available">Dostępna aktualizacja</string>
-    <string name="bundle_update_manual_available_with_version">Dostępna aktualizacja: %1$s</string>
-    <string name="bundle_update_progress">Przetworzono %1$d z %2$d pakietów</string>
-    <string name="bundle_update_banner_title">Aktualizowanie pakietów modyfikacji</string>
-    <string name="bundle_reorder">Zorganizuj pakiety</string>
-    <string name="bundle_reorder_title">Zorganizuj pakiety modyfikacji</string>
-    <string name="bundle_reorder_description">Przeciągnij uchwyt, aby zmienić kolejność pakietów na liście i w menu wyboru modyfikacji.</string>
-    <string name="bundle_actions_expand">Pokaż akcje pakietu</string>
-    <string name="bundle_actions_collapse">Ukryj akcje pakietu</string>
-    <string name="patch_bundle_duplicate_name_error">Pakiet modyfikacji o tej nazwie już istnieje</string>
-    <string name="patch_bundle_missing_error">Nie można zaktualizować tego pakietu modyfikacji.</string>
-    <string name="bundle_release_page">Otwórz stronę wydania</string>
-    <string name="bundle_release_page_unavailable">Strona wydania nie jest dostępna dla tego pakietu</string>
-    <string name="bundle_release_page_error">Nie można otworzyć strony wydania: %s</string>
-    <string name="bundle_links_title">Linki dla %1$s</string>
-    <string name="bundle_link_release">Wydanie na GitHubie</string>
-    <string name="bundle_link_catalog">Katalog listy modyfikacji</string>
-    <string name="bundle_catalog_unavailable">Katalog listy modyfikacji jest niedostępny</string>
-    <string name="show_suggested_versions">Pokaż sugerowane wersje</string>
-    <string name="hide_suggested_versions">Ukryj sugerowane wersje</string>
-    <string name="show_other_versions">Pokaż inne wersje</string>
-    <string name="other_supported_versions_title">Inne wspierane wersje (%1$s)</string>
-    <string name="other_supported_versions_empty">Brak innych wspieranych wersji.</string>
-    <string name="other_supported_versions_all">Wspiera wszystkie wersje.</string>
-    <string name="bundle_version_dialog_recommended">Sugerowana wersja: %1$s</string>
-    <string name="bundle_version_dialog_selected_override">Wybrana wersja: %1$s</string>
-    <string name="bundle_version_dialog_selected_indicator">Wybrano</string>
-    <string name="bundle_version_dialog_other_title">Wybierz inną wspieraną wersję:</string>
-    <string name="bundle_version_dialog_locked_title">Zabezpieczenia wersji są włączone</string>
-    <string name="bundle_version_dialog_locked_hint">Przejdź do Ustawienia &gt; Zaawansowane &gt; Zabezpieczenia i ustaw \"Wymagaj sugerowanej wersji aplikacji\" (przełącznik wyłączony) oraz „Wyłącz sprawdzanie zgodności wersji\" (przełącznik włączony), aby wybrać wersje specyficzne dla pakietu.</string>
-    <string name="patch_versions_dialog_title">Wersje wspierane dla %1$s</string>
-    <string name="patch_selector_item">Wybierz modyfikacje</string>
-    <string name="patch_selector_item_description">%d zaznaczonych modyfikacji</string>
-    <string name="no_patches_selected">Nie wybrano żadnych modyfikacji</string>
-    <string name="network_unavailable_warning">Twoje urządzenie nie jest połączone z Internetem. Pobieranie zakończy się niepowodzeniem.</string>
-    <string name="apk_source_selector_item">Wybierz źródło APK</string>
-    <string name="apk_source_auto">Korzystając z wszystkich programów do pobierania APK</string>
-    <string name="apk_source_downloader">Korzystając z %s</string>
-    <string name="apk_source_installed">Korzystając z zainstalowanego APK</string>
-    <string name="apk_source_local">Korzystając z lokalnego pliku APK</string>
-    <string name="apk_source_downloaded">Korzystając z pobranego APK</string>
-    <string name="auto_updates_dialog_title">Konfiguruj aktualizacje</string>
-    <string name="auto_updates_dialog_description">Czy chcesz, aby Morphe okresowo sprawdzał aktualizacje następujących komponentów?</string>
-    <string name="auto_updates_dialog_patches">Modyfikacje Morphe</string>
-    <string name="auto_updates_dialog_note">Te ustawienia można zmienić później.</string>
-    <string name="appearance">Wygląd</string>
-    <string name="appearance_description">Motyw, dynamiczny kolor</string>
-    <string name="updates">Aktualizacje</string>
-    <string name="updates_description">Sprawdzaj aktualizacje i przeglądaj dziennik zmian</string>
-    <string name="downloads">Pobrane</string>
-    <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <string name="import_export">Import i eksport</string>
-    <string name="import_export_description">Magazyn kluczy, ustawienia i wybór modyfikacji</string>
-    <string name="changelog">Przeglądaj dzienniki zmian</string>
-    <string name="changelog_loading">Ładowanie dziennika zmian</string>
-    <string name="changelog_download_fail">Nie udało się pobrać dziennika zmian: %s</string>
-    <string name="changelog_description">Sprawdź najnowsze zmiany w tej aktualizacji</string>
-    <string name="advanced">Zaawansowane</string>
-    <string name="advanced_description">Adres URL API, limit pamięci, debugowanie</string>
-    <string name="about">O aplikacji</string>
-    <!-- Morphe -->
-    <string name="accent_color_presets">Akcent</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="theme_preview_title">Podgląd wyglądu</string>
-    <!-- Morphe -->
-    <string name="theme_presets">Domyślne motywy</string>
-    <!-- Morphe -->
-    <string name="theme_preset_default">Systemowy</string>
-    <string name="theme_preset_amoled">Czysta czerń</string>
-    <string name="theme_preset_dynamic">Material You</string>
-    <!-- Morphe -->
-    <string name="color_channel_red">Czerwony</string>
-    <string name="color_channel_green">Zielony</string>
-    <string name="color_channel_blue">Niebieski</string>
-    <string name="theme">Motyw</string>
-    <string name="safeguards">Zabezpieczenia</string>
-    <string name="patch_compat_check">Wyłącz sprawdzanie kompatybilności wersji</string>
-    <string name="patch_compat_check_description">Nie ograniczaj modyfikacji do kompatybilnych wersji aplikacji</string>
-    <string name="patch_compat_check_confirmation">"Wybór niekompatybilnych modyfikacji może skutkować niedziałającą aplikacją.
-
-Czy na pewno chcesz kontynuować?"</string>
-    <string name="suggested_version_safeguard">Wymagaj sugerowanej wersji aplikacji</string>
-    <string name="suggested_version_safeguard_description">Wymuś wybór sugerowanej wersji aplikacji</string>
-    <string name="suggested_version_safeguard_confirmation">"Wybranie wersji aplikacji, która nie jest sugerowana, może spowodować problemy.
-
-Czy mimo to chcesz kontynuować?"</string>
-    <string name="patch_selection_safeguard">Zezwól na zmianę wyboru modyfikacji i ustawień</string>
-    <string name="patch_selection_safeguard_description">Nie blokuj wybierania lub odznaczania modyfikacji i dostosowywania ustawień</string>
-    <string name="patch_selection_safeguard_confirmation">"Zmiana wyboru modyfikacji może spowodować nieoczekiwane problemy.
-
-Włączyć mimo to?"</string>
-    <string name="universal_patches_safeguard">Pokaż i zezwól na używanie uniwersalnych modyfikacji</string>
-    <string name="universal_patches_safeguard_description">Nie ukrywaj uniwersalnych modyfikacji ani nie blokuj ich używania</string>
-    <string name="universal_patches_profile_blocked_title">Uniwersalne modyfikacje wyłączone</string>
-    <string name="universal_patches_profile_blocked_description">Ten profil modyfikacji zawiera uniwersalne modyfikacje. Włącz \"%1$s\" w ustawieniach zaawansowanych, aby z nich korzystać.</string>
-    <string name="universal_patches_app_blocked_description">Ta aplikacja zawiera uniwersalne modyfikacje. Włącz \"%1$s\" w ustawieniach zaawansowanych, aby kontynuować.</string>
-    <string name="import_keystore">Importuj magazyn kluczy</string>
-    <string name="import_keystore_description">Importuj niestandardowy magazyn kluczy</string>
-    <string name="import_keystore_dialog_title">Wprowadź dane uwierzytelniające magazynu kluczy</string>
-    <string name="import_keystore_dialog_description">Musisz wpisać dane uwierzytelniające magazynu kluczy, by go zaimportować.</string>
-    <string name="import_keystore_dialog_alias_field">Nazwa użytkownika (alias)</string>
-    <string name="import_keystore_dialog_password_field">Hasło</string>
-    <string name="import_keystore_dialog_button">Zaimportuj</string>
-    <string name="import_keystore_wrong_credentials">Nieprawidłowe dane uwierzytelniające magazynu kluczy</string>
-    <string name="import_keystore_success">Zaimportowano magazyn kluczy</string>
-    <string name="export_keystore">Eksportuj magazyn kluczy</string>
-    <string name="export_keystore_description">Wyeksportuj bieżący magazyn kluczy</string>
-    <string name="export_keystore_unavailable">Brak magazynu kluczy do wyeksportowania</string>
-    <string name="export_keystore_success">Wyeksportowano magazyn kluczy</string>
-    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
-    <string name="regenerate_keystore_success">Magazyn kluczy został pomyślnie zastąpiony</string>
-    <string name="import_patch_selection">Zaimportuj wybór modyfikacji</string>
-    <string name="import_patch_selection_description">Zaimportuj wybór modyfikacji z pliku JSON</string>
-    <string name="import_patch_selection_fail">Nie można zaimportować wyboru modyfikacji: %s</string>
-    <string name="import_patch_selection_success">Zaimportowano wybór modyfikacji</string>
-    <string name="import_patch_bundles">Zaimportuj pakiety modyfikacji</string>
-    <string name="import_patch_bundles_description">Przywróć zdalne pakiety modyfikacji z pliku JSON</string>
-    <string name="import_patch_bundles_fail">Nie można zaimportować pakietów modyfikacji: %s</string>
-    <string name="import_patch_bundles_in_progress">Importowanie…</string>
-    <string name="import_patch_bundles_success">Zaimportowano %d pakietów modyfikacji</string>
-    <string name="import_patch_bundles_updated">Zaktualizowano %d pakietów modyfikacji</string>
-    <string name="import_patch_bundles_none">Nie zaimportowano żadnych nowych pakietów modyfikacji</string>
-    <string name="import_patch_bundles_banner_title">Importowanie pakietów modyfikacji</string>
-    <string name="import_patch_bundles_banner_subtitle">Przetworzono %1$d z %2$d</string>
-    <string name="import_patch_bundles_banner_steps">Krok %1$d z %2$d</string>
-    <string name="import_patch_profiles">Zaimportuj profile modyfikacji</string>
-    <string name="import_patch_profiles_description">Zaimportuj zapisane profile modyfikacji z pliku JSON</string>
-    <string name="import_patch_profiles_fail">Nie można zaimportować profili modyfikacji: %s</string>
-    <string name="import_patch_profiles_success">Zaimportowano %d profili modyfikacji</string>
-    <string name="import_patch_profiles_partial">Zaimportowano %1$d profili modyfikacji, %2$d pominięto</string>
-    <string name="import_patch_profiles_skipped">Pominięto %d zduplikowanych profili modyfikacji</string>
-    <string name="import_patch_profiles_none">Nie zaimportowano żadnych profili modyfikacji</string>
-    <string name="import_manager_settings">Ustawienia menedżera importu</string>
-    <string name="import_manager_settings_description">Przywróć zapisane ustawienia menedżera z pliku JSON</string>
-    <string name="import_manager_settings_fail">Nie można zaimportować ustawień menedżera: %s</string>
-    <string name="import_manager_settings_success">Zaimportowano ustawienia menedżera</string>
-    <string name="export_patch_selection">Wyeksportuj wybór modyfikacji</string>
-    <string name="export_patch_selection_description">Wyeksportuj wybór modyfikacji do pliku JSON</string>
-    <string name="export_patch_selection_fail">Nie można wyeksportować wyboru modyfikacji: %s</string>
-    <string name="export_patch_selection_success">Wyeksportowano wybór modyfikacji</string>
-    <string name="export_patch_bundles">Wyeksportuj pakiety modyfikacji</string>
-    <string name="export_patch_bundles_description">Zapisz zaimportowane zdalne pakiety modyfikacji do pliku JSON</string>
-    <string name="export_patch_bundles_fail">Nie można wyeksportować pakietów modyfikacji: %s</string>
-    <string name="export_patch_bundles_success">Wyeksportowano %d pakietów modyfikacji</string>
-    <string name="export_patch_bundles_partial">Wyeksportowano %1$d pakietów modyfikacji. Niektóre pakiety nie mogły zostać wyeksportowane, ponieważ zostały dodane lokalnie.</string>
-    <string name="bundle_type_remote">Zdalny</string>
-    <string name="bundle_type_local">Lokalny</string>
-    <string name="bundle_type_preinstalled">Zainstalowany fabrycznie</string>
-    <string name="bundle_created_at">Utworzono %1$s</string>
-    <string name="bundle_updated_at">Zaktualizowano %1$s</string>
-    <string name="bundle_changelog">Dziennik zmian</string>
-    <string name="bundle_view_changelog">Wyświetl najnowszy dziennik zmian</string>
-    <string name="bundle_changelog_error">Nie udało się załadować dziennika zmian: %s</string>
-    <string name="bundle_changelog_retry">Spróbuj ponownie</string>
-    <string name="bundle_changelog_empty">Brak dostępnego dziennika zmian</string>
-    <string name="export_patch_profiles">Wyeksportuj profile modyfikacji</string>
-    <string name="export_patch_profiles_description">Wyeksportuj wszystkie profile modyfikacji do pliku JSON</string>
-    <string name="export_patch_profiles_fail">Nie można wyeksportować profili modyfikacji: %s</string>
-    <string name="export_patch_profiles_success">Wyeksportowano %d profili modyfikacji</string>
-    <string name="export_patch_profiles_empty">Nie ma profili modyfikacji do wyeksportowania</string>
-    <string name="export_manager_settings">Wyeksportuj ustawienia menedżera</string>
-    <string name="export_manager_settings_description">Zapisz wszystkie ustawienia menedżera do pliku JSON</string>
-    <string name="export_manager_settings_fail">Nie można wyeksportować ustawień menedżera: %s</string>
-    <string name="export_manager_settings_success">Wyeksportowano ustawienia menedżera</string>
-    <string name="reset_patch_selection">Zresetuj wybór modyfikacji</string>
-    <string name="reset_patch_selection_description">Zresetuj zapisany wybór modyfikacji</string>
-    <string name="reset_patch_options">Zresetuj ustawienia modyfikacji</string>
-    <string name="reset_patch_options_description">Zresetuj zapisane ustawienia modyfikacji</string>
-    <string name="reset_patch_selection_success">Wybór modyfikacji został zresetowany</string>
-    <string name="patch_selection_deselected_all_toast">Odznaczono wszystkie modyfikacje</string>
-    <string name="patch_selection_deselected_bundle_toast">Odznaczono wszystkie modyfikacje %s</string>
-    <string name="patch_selection_no_selected_bundle_toast">Brak modyfikacji do odznaczenia dla %s</string>
-    <string name="patch_selection_selected_all_toast">Wybrano wszystkie modyfikacje</string>
-    <string name="patch_selection_select_all_empty_toast">Brak dostępnych modyfikacji do wybrania</string>
-    <string name="patch_selection_selected_bundle_toast">Wybrano wszystkie modyfikacje %s</string>
-    <string name="patch_selection_select_bundle_empty_toast">Brak modyfikacji do wybrania dla %s</string>
-    <string name="patch_selection_all_actions_hidden_toast">Wszystkie przyciski akcji są ukryte, włącz przynajmniej jeden w ustawieniach</string>
-    <string name="patch_selection_reset_bundle_toast">Przywróć domyślne dla %s</string>
-    <string name="patch_selection_button_label_all">Odznacz wszystko</string>
-    <string name="patch_selection_button_label_bundle">Odznacz pakiet</string>
-    <string name="patch_selection_button_label_defaults">Wszystkie domyślne</string>
-    <string name="patch_selection_button_label_select_bundle">Wybierz pakiet</string>
-    <string name="patch_selection_button_label_select_all">Wybierz wszystko</string>
-    <string name="patch_selection_button_label_undo_action">Cofnij akcję</string>
-    <string name="patch_selection_button_label_redo_action">Ponów akcję</string>
-    <string name="patch_selection_history_undo">Cofnięto %1$s</string>
-    <string name="patch_selection_history_redo">Przywrócono %1$s</string>
-    <string name="patch_selection_action_all_defaults">wszystkie domyślne</string>
-    <string name="patch_selection_action_deselect_all">anuluj zaznaczenie wszystkich</string>
-    <string name="patch_selection_action_select_all">zaznacz wszystkie</string>
-    <string name="patch_selection_action_select_bundle">zaznacz pakiet \"%1$s\"</string>
-    <string name="patch_selection_action_deselect_bundle">anuluj zaznaczenie pakietu \"%1$s\"</string>
-    <string name="patch_selection_action_bundle_defaults">domyślne ustawienia pakietu \"%1$s\"</string>
-    <string name="disable_patch_selection_confirmations">Wyłącz potwierdzenia akcji</string>
-    <string name="disable_patch_selection_confirmations_description">Pomiń okna dialogowe z potwierdzeniem dla akcji wyboru modyfikacji</string>
-    <string name="disable_patch_selection_confirmations_warning">Wyłączenie potwierdzeń może spowodować niezamierzone masowe zmiany.</string>
-    <string name="patch_selection_collapse_on_toggle">Ukryj akcje po przełączeniu modyfikacji</string>
-    <string name="patch_selection_collapse_on_toggle_description">Automatycznie ukrywaj przyciski akcji wyboru modyfikacji po wybraniu lub anulowaniu wyboru modyfikacji</string>
-    <string name="patch_selection_action_order_title">Kolejność przycisków akcji wyboru modyfikacji</string>
-    <string name="patch_selection_action_order_description">Wybierz kolejność układu dla przycisków akcji wyboru modyfikacji</string>
-    <string name="patch_selection_action_visibility_title">Ukryj przyciski akcji w panelu wyboru aktualizacji</string>
-    <string name="patch_selection_action_visibility_description">Wybierz, które przyciski akcji są widoczne w panelu wyboru aktualizacji</string>
-    <string name="patch_selection_action_visibility_reset">Pokaż wszystkie przyciski akcji</string>
-    <string name="patch_selection_action_order_reset">Przywróć domyślną kolejność</string>
-    <string name="patch_selection_confirm_deselect_bundle_title">Anulować wybór pakietu?</string>
-    <string name="patch_selection_confirm_deselect_bundle_message">Anulować wybór wszystkich modyfikacji z %1$s?</string>
-    <string name="patch_selection_confirm_deselect_all_title">Anulować wybór wszystkich modyfikacji?</string>
-    <string name="patch_selection_confirm_deselect_all_message">Spowoduje to wyczyszczenie wszystkich wybranych modyfikacji we wszystkich pakietach.</string>
-    <string name="patch_selection_confirm_bundle_defaults_title">Przywrócić domyślne ustawienia pakietu?</string>
-    <string name="patch_selection_confirm_bundle_defaults_message">Przywróci to zalecane domyślne ustawienia dla %1$s.</string>
-    <string name="patch_selection_confirm_select_bundle_title">Wybierz pakiet?</string>
-    <string name="patch_selection_confirm_select_bundle_message">Zaznaczyć wszystkie modyfikacje dostarczone przez %1$s?</string>
-    <string name="patch_selection_confirm_select_all_title">Zaznaczyć wszystkie modyfikacje?</string>
-    <string name="patch_selection_confirm_select_all_message">To zaznaczy każdą modyfikację we wszystkich pakietach.</string>
-    <string name="patch_selection_button_label_reset_bundle">Domyślne ustawienia pakietu</string>
-    <string name="patch_profile_save_label">Zapisz profil</string>
-    <string name="patch_selection_toggle_expand">Pokaż akcje</string>
-    <string name="patch_selection_toggle_collapse">Ukryj akcje</string>
-    <string name="patch_selection_reset_all">Zresetuj zaznaczenie modyfikacji globalnie</string>
-    <string name="patch_selection_reset_all_dialog_description">"Zaraz zresetujesz wszystkie wybory modyfikacji. Będziesz musiał ręcznie wybrać każdą łatkę ponownie.
-
-Profile modyfikacji nie zostaną zmienione."</string>
-    <string name="patch_selection_reset_all_description">Resetuje wszystkie wybory modyfikacji</string>
-    <string name="patch_selection_reset_dialog_title">Resetować domyślne ustawienia modyfikacji?</string>
-    <string name="patch_selection_reset_dialog_message">Przywróci to wybory i ustawienia modyfikacji do zalecanych wartości domyślnych.</string>
-    <string name="patch_selection_reset_package">Zresetuj wybory modyfikacji dla aplikacji</string>
-    <string name="patch_selection_reset_package_dialog_description">"Zaraz zresetujesz wybór modyfikacji dla aplikacji \"%s\". Ręcznie wybierzesz każdą modyfikację ponownie.
-
-Profile modyfikacji nie zostaną zmienione."</string>
-    <string name="patch_selection_reset_package_description">Resetuje wybór modyfikacji dla pojedynczej aplikacji</string>
-    <string name="patch_selection_reset_patches">Zresetuj wybór modyfikacji (pojedynczy)</string>
-    <string name="patch_selection_reset_patches_dialog_description">"Zaraz zresetujesz wybór modyfikacji dla \"%s\". Ręcznie wybierzesz każdą modyfikację ponownie.
-
-Profile modyfikacji nie zostaną zmienione."</string>
-    <string name="patch_selection_reset_patches_description">Resetuje wybór modyfikacji dla określonej kolekcji modyfikacji</string>
-    <string name="patch_options_reset_package">Zresetuj ustawienia modyfikacji dla aplikacji</string>
-    <string name="patch_options_reset_package_dialog_description">"Zaraz zresetujesz ustawienia modyfikacji dla aplikacji \"%s\". Ręcznie zmienisz wszystkie ustawienia ponownie.
-
-Profile modyfikacji nie zostaną zmienione."</string>
-    <string name="patch_options_reset_package_description">Resetuje ustawienia modyfikacji dla pojedynczej aplikacji</string>
-    <string name="patch_options_reset_patches">Resetuj ustawienia modyfikacji (pojedynczy)</string>
-    <string name="patch_options_reset_patches_dialog_description">"Zaraz zresetujesz ustawienia modyfikacji dla \"%s\". Ręcznie zmienisz wszystkie ustawienia ponownie.
-
-Profile modyfikacji nie zostaną zmienione."</string>
-    <string name="patch_options_reset_patches_description">Resetuje ustawienia modyfikacji dla określonej kolekcji modyfikacji</string>
-    <string name="patch_options_reset_all">Zresetuj ustawienia modyfikacji globalnie</string>
-    <string name="patch_options_reset_all_dialog_description">"Zaraz zresetujesz wszystkie ustawienia modyfikacji. Będziesz musiał zmienić wszystkie ustawienia ponownie.
-
-Profile modyfikacji nie zostaną zmienione."</string>
-    <string name="patch_options_reset_all_description">Resetuje wszystkie ustawienia modyfikacji</string>
-    <string name="download_settings">Ustawienia pobierania</string>
-    <string name="downloader_auto_save_title">Automatycznie zapisuj pobrane APK</string>
-    <string name="downloader_auto_save_description">Zachowaj pliki APK pobrane za pomocą wtyczek do ponownego użycia. Wyłącz, aby usunąć je po zastosowaniu modyfikacji.</string>
-    <string name="downloader_plugins">Wtyczki</string>
-    <string name="downloader_plugin_state_trusted">Zaufane</string>
-    <string name="downloader_plugin_state_failed">Nie udało się załadować. Kliknij, aby uzyskać więcej szczegółów</string>
-    <string name="downloader_plugin_state_untrusted">Niezaufane</string>
-    <string name="downloader_plugin_trust_dialog_title">Ufać wtyczce?</string>
-    <string name="downloader_plugin_revoke_trust_dialog_title">Pozbyć się zaufania?</string>
-    <string name="downloader_plugin_trust_dialog_body">"Nazwa pakietu: %1$s
-Podpis (SHA-256): %2$s"</string>
-    <string name="downloader_plugin_view_error">Zobacz szczegóły błędu</string>
-    <string name="downloader_plugin_failed_dialog_body">Nie można załadować \"%1$s\". Możesz wyświetlić szczegóły błędu lub odinstalować wtyczkę.</string>
-    <string name="downloader_plugin_uninstall_title">Odinstalować wtyczkę?</string>
-    <string name="downloader_plugin_uninstall_description">Czy na pewno chcesz odinstalować \"%1$s\"?</string>
-    <string name="downloader_plugin_delete_apps_title">Usuń zaznaczone aplikacje</string>
-    <string name="downloader_plugin_delete_apps_description">Czy na pewno chcesz usunąć zaznaczone aplikacje?</string>
-    <string name="downloader_settings_no_apps">Nie znaleziono pobranych aplikacji.</string>
-    <string name="search_apps">Szukaj aplikacji…</string>
-    <string name="yes">Tak</string>
-    <string name="no">Nie</string>
-    <string name="edit">Edytuj</string>
-    <string name="dialog_input_placeholder">Wartość</string>
-    <string name="reset">Zresetuj</string>
-    <string name="share">Udostępnij</string>
-    <string name="patch">Modyfikuj</string>
-    <string name="select_from_storage">Wybierz z pamięci</string>
-    <string name="select_from_storage_description">Wybierz plik APK z pamięci za pomocą selektora plików</string>
-    <string name="type_anything">Wpisz cokolwiek, aby kontynuować</string>
-    <string name="search">Szukaj modyfikacji...</string>
-    <string name="apply">Zastosuj</string>
-    <string name="help">Pomoc</string>
-    <string name="back">Wstecz</string>
-    <string name="warning">Ostrzeżenie</string>
-    <string name="add">Dodaj</string>
-    <string name="close">Zamknij</string>
-    <string name="clear">Wyczyść</string>
-    <string name="system">System</string>
-    <string name="light">Jasny</string>
-    <string name="dark">Ciemny</string>
-    <string name="black">Czarny</string>
-    <string name="downloaded_apps">Pobrane aplikacje</string>
-    <string name="process_runtime">Uruchom Modyfikator w innym procesie</string>
-    <string name="process_runtime_description">Przyspiesza modyfikowanie przez użycie oddzielnego procesu</string>
-    <string name="process_runtime_description_not_available">Ta funkcja wymaga systemu Android 11 lub nowszego</string>
-    <string name="strip_unused_libs">Usuń nieużywane biblioteki natywne</string>
-    <string name="strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
-    <string name="process_runtime_memory_limit">Limit pamięci procesu Modyfikatora</string>
-    <string name="process_runtime_memory_limit_description">Maksymalna ilość pamięci, jaką może wykorzystać proces Modyfikatora (w megabajtach)</string>
-    <string name="reset_to_recommended">Zresetuj do rekomendowanych</string>
-    <string name="patcher_auto_collapse_steps">Automatycznie zwijaj zakończone kroki modyfikatora</string>
-    <string name="patcher_auto_collapse_steps_description">Automatycznie zwijaj każdy widżet postępu modyfikatora po zakończeniu wszystkich jego kroków</string>
-    <string name="patch_bundle_rename">Zmień nazwę pakietu modyfikacji</string>
-    <string name="patch_profile_view_options">Wyświetl ustawienia</string>
-    <string name="patch_profile_patch_options_title">Ustawienia dla %1$s</string>
-    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
-    <string name="app_exporting">Eksportowanie aplikacji</string>
-    <string name="export_name_format">Format nazwy pliku eksportu</string>
-    <string name="export_name_format_description">Dostosuj domyślną nazwę pliku dla eksportowanych zmodyfikowanych aplikacji</string>
-    <string name="export_name_format_dialog_title">Format nazwy pliku eksportu</string>
-    <string name="export_name_format_dialog_supporting">Użyj poniższych symboli zastępczych do utworzenia nazwy pliku. Rozszerzenie .apk jest dodawane automatycznie, jeśli go brakuje.</string>
-    <string name="export_name_format_preview_label">Podgląd</string>
-    <string name="export_name_format_variables">Zmienne</string>
-    <string name="export_name_format_reset">Zresetuj do domyślnych</string>
-    <string name="export_name_format_error_blank">Format nazwy pliku nie może być pusty.</string>
-    <string name="export_name_format_current">Obecny wzór: %1$s</string>
-    <string name="export_name_format_insert">Wstaw</string>
-    <string name="export_name_variable_app_name">Nazwa aplikacji</string>
-    <string name="export_name_variable_app_name_description">Zastąpiono nazwą wyświetlaną aplikacji.</string>
-    <string name="export_name_variable_package_name">Nazwa pakietu</string>
-    <string name="export_name_variable_package_name_description">Zastąpiono nazwą pakietu aplikacji.</string>
-    <string name="export_name_variable_app_version">Wersja aplikacji</string>
-    <string name="export_name_variable_app_version_description">Zastąpiono nazwą wersji aplikacji.</string>
-    <string name="export_name_variable_patches_version">Wersje modyfikacji</string>
-    <string name="export_name_variable_patches_version_description">Zastąpiono wersjami pakietów zastosowanych modyfikacji.</string>
-    <string name="export_name_variable_bundle_names">Nazwy pakietów modyfikacji</string>
-    <string name="export_name_variable_bundle_names_description">Zastąpiono nazwami pakietów zastosowanych modyfikacji.</string>
-    <string name="export_name_variable_manager_version">Wersja menedżera</string>
-    <string name="export_name_variable_manager_version_description">Zastąpiono wersją menedżera.</string>
-    <string name="export_name_variable_timestamp">Czas</string>
-    <string name="export_name_variable_timestamp_description">Zastąpiono obecnym czasem (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date">Data</string>
-    <string name="export_name_variable_date_description">Zastąpiono obecną datą (yyyyMMdd).</string>
-    <string name="debug_logs_export">Wyeksportuj logi od debugowania</string>
-    <string name="debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %d)</string>
-    <string name="debug_logs_export_failed">Nie udało się wyeksportować logów</string>
-    <string name="debug_logs_export_success">Wyeksportowano logi</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="api_url_dialog_description">Zmień adres URL API Morphe. Morphe używa tego API do pobierania modyfikacji i aktualizacji.</string>
-    <string name="api_url_dialog_warning">Morphe łączy się z API, aby pobierać modyfikacje i aktualizacje. Upewnij się, że mu ufasz.</string>
-    <string name="api_url_dialog_save">Ustaw</string>
-    <string name="api_url_dialog_reset">Zresetuj adres URL API</string>
-    <!-- Morphe -->
-    <string name="github_pat_description">Osobisty token dostępu GitHub wymagany do integracji z GitHub</string>
-    <string name="set_github_pat_dialog_title">Ustaw GitHub PAT</string>
-    <string name="set_github_pat_dialog_description">Ustaw osobisty token dostępu GitHub, aby móc dodawać Pull Requesty jako zewnętrzne źródła. Utwórz token PAT z zakresem public_repo</string>
-    <string name="include_github_pat_in_exports_label">Uwzględnij w eksporcie ustawień</string>
-    <string name="include_github_pat_in_exports_supporting">Dodaj ten PAT do eksportowanych ustawień menedżera</string>
-    <string name="include_github_pat_in_exports_warning">Nie udostępniaj swojego PAT. Jeśli uwzględniasz go w eksporcie ustawień, przechowuj ten plik prywatnie, ponieważ zawiera token.</string>
-    <string name="app_language">Język aplikacji</string>
-    <string name="language_dialog_title">Wybierz język aplikacji</string>
-    <string name="language_option_system">Użyj języka urządzenia</string>
-    <string name="device_memory_limit_format">%1$d MB (normalny) - %2$d MB (duży)</string>
-    <string name="patches_force_download">Wymuś pobranie wszystkich pakietów modyfikacji</string>
-    <string name="patches_reset">Zresetuj pakiety modyfikacji</string>
-    <string name="storage">Pamięć</string>
-    <string name="no_patch_found">Nie znaleziono żadnych modyfikacji. Sprawdź swoje modyfikacje</string>
-    <string name="tab_apps">Aplikacje</string>
-    <string name="tab_patches">Pakiety modyfikacji</string>
-    <string name="tab_profiles">Profile modyfikacji</string>
-    <string name="delete">Usuń</string>
-    <string name="disable">Wyłącz</string>
-    <string name="enable">Włącz</string>
-    <string name="patch_bundle_disabled_toast">Wyłączono %d paczkę(ki)</string>
-    <string name="patch_bundle_enabled_toast">Włączono %d paczkę(ki)</string>
-    <string name="patches_disable_single_dialog_description">Wyłączyć \"%s\"?</string>
-    <string name="patches_enable_single_dialog_description">Włączyć \"%s\"?</string>
-    <string name="refresh">Odśwież</string>
-    <string name="download_apk">Pobierz plik APK</string>
-    <string name="patches_download_fail">Nie udało się pobrać modyfikacji: %s</string>
-    <string name="patches_replace_fail">Nie udało się zaimportować modyfikacji: %s</string>
-    <string name="no_patched_apps_found">Nie znaleziono zmodyfikowanych aplikacji</string>
-    <string name="patches_selected">%s paczka(ki) modyfikacji została(y) zaznaczona(e)</string>
-    <string name="patch_profiles_selected">Wybrano profil modyfikacji %1$d</string>
-    <string name="selected_apps_count">Wybrano aplikację %1$d</string>
-    <string name="selected_apps_delete_dialog_description">Usunąć zaznaczone aplikacje z menedżera? Zainstalowane aplikacje na Twoim urządzeniu nie zostaną usunięte.</string>
-    <string name="incompatible_patches">Niekompatybilne modyfikacje</string>
-    <string name="universal_patches">Uniwersalne modyfikacje</string>
-    <string name="patch_selection_reset_toast">Wybory i ustawienia modyfikacji zostały przywrócone do zalecanych wartości domyślnych</string>
-    <string name="patch_options_reset_toast">Ustawienia modyfikacji zostały przywrócone</string>
-    <string name="non_suggested_version_warning_title">Niesugerowana wersja</string>
-    <string name="non_suggested_version_warning_description">"Wersja aplikacji, którą wybrałeś, nie odpowiada sugerowanej wersji.
-Proszę użyć sugerowanej wersji: %s
-
-Aby kontynuować mimo to, wyłącz \"Wymagaj sugerowanej wersji aplikacji\" w ustawieniach zaawansowanych."</string>
-    <string name="selection_warning_description">"Zaleca się używanie domyślnego wyboru i ustawień modyfikacji. Zmiana ich może spowodować nieoczekiwane problemy.
-
-Musisz włączyć \"Zezwól na zmianę wyboru i ustawień modyfikacji\" w ustawieniach zaawansowanych przed zmienianiem wyboru modyfikacji."</string>
-    <string name="patch_profile_save_action">Zapisz profil modyfikacji</string>
-    <string name="patch_profile_select_bundles_title">Wybierz pakiety modyfikacji</string>
-    <string name="patch_profile_select_bundles_description">Wybierz pakiety modyfikacji do uwzględnienia w tym profilu.</string>
-    <string name="patch_profile_select_bundles_empty">Brak dostępnych pakietów modyfikacji do zapisania.</string>
-    <string name="patch_profile_name_title">Nazwij profil modyfikacji</string>
-    <string name="patch_profile_name_description">Wprowadź nazwę dla tego profilu modyfikacji lub wybierz jedną z poniższych, aby go zaktualizować</string>
-    <string name="patch_profile_update_existing_title">Zaktualizuj istniejący profil</string>
-    <string name="patch_profile_update_existing_description">Stuknij zapisany profil, aby go nadpisać, lub pozostaw wszystko niezaznaczone, aby utworzyć nowy profil.</string>
-    <string name="patch_profile_name_hint">Nazwa profilu</string>
-    <string name="patch_profile_saved_toast">Zapisano profil modyfikacji \"%1$s\"</string>
-    <string name="patch_profile_duplicate_toast">Profil modyfikacji \"%1$s\" już istnieje dla tej aplikacji</string>
-    <string name="patch_profile_updated_toast">Zaktualizowano profil modyfikacji \"%1$s\"</string>
-    <string name="patch_profile_save_failed_toast">Nie udało się zapisać profilu modyfikacji</string>
-    <string name="patch_profile_rename">Zmień nazwę</string>
-    <string name="patch_profile_rename_title">Zmień nazwę profilu modyfikacji</string>
-    <string name="patch_profile_version_override_action">Zaktualizuj ustawienia wersji profilu</string>
-    <string name="patch_profile_version_override_title">Ustawienia wersji dla \"%1$s\"</string>
-    <string name="patch_profile_version_override_message">Ustaw konkretną wersję aplikacji do przechowywania z tym profilem lub wybierz wszystkie wersje.</string>
-    <string name="patch_profile_version_override_label">Wersja aplikacji</string>
-    <string name="patch_profile_version_override_hint">np. 18.27.35</string>
-    <string name="patch_profile_version_override_all_versions">Użyj wszystkich wersji</string>
-    <string name="patch_profile_version_override_saved_toast">Wersja profilu zaktualizowana</string>
-    <string name="patch_profile_version_override_failed_toast">Nie udało się zaktualizować wersji profilu</string>
-    <string name="patch_profile_version_override_set_to_all">Nie wprowadzono wersji, zapisano jako \"%1$s\"</string>
-    <string name="patch_profile_version_conflict_title">Zachować nadpisanie wersji?</string>
-    <string name="patch_profile_version_conflict_message">"Bieżąca wersja: %1$s
-Nadchodząca wersja: %2$s
-Która wersja powinna zostać zapisana w tym profilu?"</string>
-    <string name="patch_profile_version_conflict_use_new">Użyj nadchodzącej wersji</string>
-    <string name="patch_profile_version_conflict_keep_existing">Zachowaj istniejącą wersję</string>
-    <string name="patch_profile_empty_state">Zapisz konfigurację z ekranu wyboru modyfikacji, aby zobaczyć ją tutaj.</string>
-    <string name="patch_profile_missing_bundles_toast">Niektóre pakiety w tym profilu są niedostępne i zostaną pominięte.</string>
-    <string name="patch_profile_changed_patches_toast">Niektóre modyfikacje lub ustawienia w tym profilu nie pasują już do pakietu i zostały pominięte.</string>
-    <string name="patch_profile_no_available_bundles_toast">Żadne pakiety w tym profilu nie są dostępne. Zaktualizuj swoje pakiety i spróbuj ponownie.</string>
-    <string name="patch_profile_launch_error">Nie można otworzyć tego profilu modyfikacji.</string>
-    <string name="patch_profile_show_more">Pokaż więcej</string>
-    <string name="patch_profile_show_less">Pokaż mniej</string>
-    <string name="patch_profile_created_at">Utworzono %1$s</string>
-    <string name="patch_profile_bundle_unavailable_suffix">%1$s (niedostępny)</string>
-    <string name="patch_profile_bundle_change_uid">Zmień UID</string>
-    <string name="patch_profile_bundle_change_uid_title">Zmień UID dla %1$s</string>
-    <string name="patch_profile_bundle_change_uid_invalid">Wprowadź prawidłowy numeryczny identyfikator UID.</string>
-    <string name="patch_profile_bundle_change_uid_success">Zaktualizowano UID pakietu do %1$d.</string>
-    <string name="patch_profile_bundle_change_uid_not_found">Nie znaleziono lokalnego pakietu modyfikacji z UID %1$d.</string>
-    <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %1$d.</string>
-    <string name="patcher_memory_adjustment_title">Modyfikatorowi zabrakło pamięci</string>
-    <!-- Dormant code and not used -->
-    <!-- Dormant code and not used -->
-    <string name="patcher_memory_adjustment_retry">Spróbuj ponownie</string>
-    <string name="patcher_memory_adjustment_dismiss">Odrzuć</string>
-    <string name="patcher_missing_patch_title">Wybór modyfikacji wymaga uwagi</string>
-    <string name="patcher_preflight_missing_patch_remove">Usuń brakujące modyfikacje</string>
-    <string name="patcher_preflight_missing_patch_proceed">Kontynuuj mimo wszystko</string>
-    <string name="patcher_preflight_missing_patch_message">"Poniższe aktualizacje nie są dostępne w obecnym pakiecie:
-%1$s
-Możesz usunąć je automatycznie, zmień wybór, lub kontynuuj mimo to."</string>
-    <string name="patcher_missing_patch_review">Przegląd wyboru</string>
-    <string name="patch_selector_missing_patch_title">Zaznacz ponownie brakujące modyfikacje</string>
-    <string name="patch_selector_missing_patch_message">"Te modyfikacje wymagają ponownego zaznaczenia:
-%1$s
-Włącz je ponownie (lub wybierz alternatywy), a następnie spróbuj ponownie zastosować modyfikacje."</string>
-    <string name="patch_profile_delete_multiple_dialog_description">Usunąć wybrane profile modyfikacji?</string>
-    <string name="this_version">Ta wersja</string>
-    <string name="universal">Dowolna aplikacja</string>
-    <string name="search_patches">Szukaj modyfikacji</string>
-    <string name="app_version_not_compatible">"Ta modyfikacja nie jest zgodna z wybraną wersją aplikacji (%1$s).
-
-Jest ona zgodna tylko z następującą wersją: %2$s."</string>
-    <string name="failed_to_load_apk">Nie udało się załadować pliku APK</string>
-    <string name="loading">Wczytywanie…</string>
-    <string name="not_installed">Nie zainstalowano</string>
-    <string name="installed">Zainstalowano</string>
-    <string name="app_info">Informacje o aplikacji</string>
-    <string name="uninstall">Odinstaluj</string>
-    <string name="repatch">Zmodyfikuj ponownie</string>
-    <string name="install_type">Typ instalacji</string>
-    <string name="package_name">Nazwa pakietu</string>
-    <string name="original_package_name">Oryginalna nazwa pakietu</string>
-    <string name="applied_patches">Zastosowane modyfikacje</string>
-    <string name="view_applied_patches">Zobacz zastosowane modyfikacje</string>
-    <string name="patch_bundles_used">Użyte pakiety modyfikacji</string>
-    <string name="applied_patches_empty">Brak zarejestrowanych modyfikacji dla tej aplikacji</string>
-    <string name="applied_patches_bundle_missing">Metadane pakietu są niedostępne. Wyświetlanie zapisanych nazw modyfikacji.</string>
-    <string name="no_patch_bundles_tracked">Brak zarejestrowanych pakietów modyfikacji dla tej aplikacji</string>
-    <string name="mount_install">Instalator z mountowaniem roota</string>
-    <string name="mounted">Zmaountowano</string>
-    <string name="unmounted">Odmountowano</string>
-    <string name="install_type_custom_installer">Niestandardowy instalator</string>
-    <string name="install_type_system_installer">Instalator systemowy</string>
-    <string name="install_type_mount_label">Instalator z mountowaniem roota</string>
-    <string name="not_mounted">Nie zmountowano</string>
-    <string name="mount">Zmountuj</string>
-    <string name="unmount">Odmountuj</string>
-    <string name="unmount_confirm_description">Czy chcesz odmountować aplikację?</string>
-    <string name="saved_install">Zapisano</string>
-    <string name="failed_to_mount">Nie udało się zmountować: %s</string>
-    <string name="failed_to_unmount">Nie udało się odmountować: %s</string>
-    <string name="unpatch_app">Usunąć modyfikacje z aplikacji?</string>
-    <string name="unpatch_description">Czy na pewno chcesz usunąć modyfikacje z tej aplikacji?</string>
-    <string name="downloader_app_not_found">Pobieracz nie znalazł aplikacji</string>
-    <string name="downloader_error">Błąd pobierania: %s</string>
-    <string name="downloader_no_plugins_installed">Nie zainstalowano pobieracza.</string>
-    <string name="downloader_no_plugins_available">Pobieracze są zainstalowane, ale żaden nie jest zaufany. Sprawdź ustawienia.</string>
-    <string name="downloader_plugin_uninstall_success">Odinstalowano %1$s</string>
-    <string name="downloader_plugin_uninstall_failed">Nie udało się odinstalować %1$s</string>
-    <string name="downloaded_apps_export">Wyeksportuj wybrane aplikacje</string>
-    <string name="downloaded_apps_export_success">Wyeksportowano %1$d aplikacji</string>
-    <string name="downloaded_apps_export_failed">Nie udało się wyeksportować pobranych aplikacji</string>
-    <string name="already_patched">Już zmodyfikowane</string>
-    <string name="patch_selector_sheet_filter_title">Filtr</string>
-    <string name="patch_selector_sheet_filter_compat_title">Kompatybilność</string>
-    <string name="patch_selector_sheet_filter_sort_title">Sortowanie</string>
-    <string name="patch_selector_sheet_filter_sort_alphabetical">Alfabetycznie</string>
-    <string name="patch_selector_sheet_filter_sort_has_settings">Ma ustawienia</string>
-    <string name="patch_selector_sheet_filter_sort_no_settings">Brak ustawień</string>
-    <string name="string_option_menu_description">Więcej opcji</string>
-    <string name="option_preset_custom_value">Niestandardowa wartość</string>
-    <string name="path_selector">Wybierz z pamięci</string>
-    <string name="path_selector_parent_dir">Poprzedni katalog</string>
-    <string name="path_selector_dirs">Katalogi</string>
-    <string name="path_selector_files">Pliki</string>
-    <string name="show_password_field">Pokaż hasło</string>
-    <string name="hide_password_field">Ukryj hasło</string>
-    <string name="installer_primary_title">Instalator</string>
-    <string name="installer_fallback_title">Instalator zapasowy</string>
+    <string name="installer_title">Wybierz instalator</string>
     <string name="installer_internal_name">Instalator systemowy</string>
     <string name="installer_internal_description">Użyj instalatora pakietów Androida</string>
-    <string name="installer_auto_saved_name">Instalator z moutowaniem roota</string>
-    <string name="installer_auto_saved_description">Mountuje zmodyfikowany plik APK nad zainstalowaną aplikacją (wymaga uprawnień roota).</string>
-    <string name="installer_shizuku_description">Instaluj cicho za pomocą Shizuku lub Sui.</string>
+    <string name="installer_auto_saved_name">Instalator z mountowaniem roota</string>
+    <string name="installer_auto_saved_description">Mountuje zmodyfikowany plik APK nad zainstalowaną aplikacją (wymaga uprawnień roota)</string>
+    <string name="installer_shizuku_description">Instaluj w tle za pomocą Shizuku lub Sui</string>
     <string name="installer_option_none">Brak instalatora zapasowego</string>
     <string name="installer_none_description">Nie skonfigurowano instalatora zapasowego</string>
     <string name="installer_status_requires_root">Wymaga dostępu roota</string>
-    <string name="installer_status_not_supported">Niewspierane dla tej akcji.</string>
-    <string name="installer_status_shizuku_not_installed">Zainstaluj Shizuku lub Sui, aby skorzystać z tej opcji.</string>
-    <string name="installer_status_shizuku_not_running">Uruchom Shizuku lub Sui i spróbuj ponownie.</string>
-    <string name="installer_status_shizuku_permission">Nadaj uprawnienia Shizuku dla Morphe z aplikacji Shizuku.</string>
-    <string name="installer_mount_warning_title">Wybrano instalator z mountowania roota</string>
-    <string name="installer_mount_warning_install">Główny instalator został ustawiony na instalator z mountowaniem roota. Ta zapisana aplikacja nie została zainstalowana przy użyciu mountowania.</string>
-    <string name="installer_mount_warning_update">Główny instalator został ustawiony na instalator z mountowaniem roota. Ta zapisana aplikacja nie została zainstalowana przy użyciu mountowania.</string>
-    <string name="installer_mount_warning_uninstall">Główny instalator został ustawiony na instalator z mountowaniem roota. Ta zapisana aplikacja nie została zainstalowana przy użyciu mountowania.</string>
-    <string name="installer_mount_mismatch_title">Instalator z mountowaniem roota nie został wybrany</string>
-    <string name="installer_mount_mismatch_install">Ta aplikacja została zainstalowana przy użyciu instalatora z mountowaniem roota. Przełącz główny instalator z powrotem, aby użyć akcji mountowania, a następnie zmountuj.</string>
-    <string name="installer_mount_mismatch_update">Ta aplikacja została zainstalowana przy użyciu instalatora z mountowaniem roota. Przełącz główny instalator z powrotem, aby użyć akcji mountowania, a następnie zmountuj ponownie.</string>
-    <string name="installer_mount_mismatch_uninstall">Ta aplikacja została zainstalowana przy użyciu instalatora z mountowaniem roota. Przełącz główny instalator z powrotem, aby użyć akcji mountowania, a następnie odmountuj.</string>
-    <string name="mount_version_mismatch_title">Mountowanie nie powiodło się</string>
-    <string name="mount_version_mismatch_message">Wersja oryginalnej aplikacji (%2$s) nie pasuje do wersji zmodyfikowanej aplikacji (%1$s). Zmountuj pasującą wersję oryginalną, a następnie spróbuj ponownie.</string>
-    <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest wspierana.</string>
+    <string name="installer_status_not_supported">Niewspierane dla tej akcji</string>
+    <string name="installer_status_shizuku_not_installed">Zainstaluj Shizuku lub Sui, aby użyć tej opcji</string>
+    <string name="installer_status_shizuku_not_running">Uruchom Shizuku lub Sui i spróbuj ponownie</string>
+    <string name="installer_status_shizuku_permission">Nadaj uprawnienie dla Morphe w aplikacji Shizuku</string>
+    <string name="installer_mount_warning_install">Główny instalator został ustawiony na instalator z mountowaniem roota. Ta zapisana aplikacja nie została zainstalowana przy użyciu mountowania</string>
+    <string name="mount_version_mismatch_message">Wersja oryginalnej aplikacji (%2$s) nie pasuje do wersji zmodyfikowanej aplikacji (%1$s). Zmountuj pasującą wersję oryginalną, a następnie spróbuj ponownie</string>
+    <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest wspierana</string>
     <string name="installer_action_open_shizuku">Otwórz Shizuku</string>
-    <string name="installer_shizuku_launch_failed">Nie można otworzyć Shizuku. Uruchom je ręcznie i spróbuj ponownie.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="installer_custom_tab_saved">Zapisane</string>
-    <string name="installer_custom_saved_note">Instalatory dodane ręcznie przez użytkownika do menu wyboru Głównego i Zapasowego instalatora.</string>
-    <string name="installer_custom_tab_auto_saved">Automatycznie zapisane</string>
-    <string name="installer_custom_auto_note">Instalatory automatycznie wykryte i dodane do menu wyboru Głównego i Zapasowego instalatora.</string>
-    <string name="installer_custom_tab_discover">Odkryj</string>
-    <string name="installer_custom_close">Zamknij</string>
-    <string name="installer_custom_manage_description">Zapisz działania instalatorów zewnętrznych do użycia jako główne lub zapasowe instalatory</string>
-    <string name="installer_custom_input_label">Nazwa pakietu</string>
-    <string name="installer_custom_package_hint">Wpisz nazwę pakietu i stuknij „Znajdź instalatory”, aby odkryć działania instalatorów</string>
-    <string name="installer_custom_lookup">Znajdź instalatory</string>
-    <string name="installer_custom_lookup_empty">Najpierw wprowadź nazwę pakietu.</string>
-    <string name="installer_custom_searching">Wyszukiwanie działań instalatora…</string>
-    <string name="installer_custom_lookup_found">Znaleziono instalator %1$d.</string>
-    <string name="installer_custom_action_add">Zapisz instalator</string>
-    <string name="installer_custom_action_remove">Usuń zapisany instalator</string>
-    <string name="installer_custom_builtin_indicator">Automatycznie zapisane</string>
-    <string name="installer_custom_saved_indicator">Zapisane</string>
-    <string name="installer_custom_lookup_none">Nie znaleziono działań instalatora dla %1$s.</string>
-    <string name="installer_custom_candidates_title">Dostępne działania dla %1$s</string>
-    <string name="installer_custom_saved_header">Zapisane instalatory</string>
-    <string name="installer_custom_empty">Nie zapisano jeszcze żadnych niestandardowych instalatorów.</string>
-    <string name="installer_custom_added">Niestandardowy instalator został zapisany.</string>
-    <string name="installer_custom_exists">Ten instalator jest już zapisany.</string>
-    <string name="installer_custom_removed">Niestandardowy instalator został usunięty.</string>
-    <string name="installer_custom_remove_failed">Nie można usunąć instalatora. Spróbuj ponownie.</string>
-    <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator.</string>
-    <string name="installer_hint_blocked">Instalacja została zablokowana przez Androida. Sprawdź Play Protect lub ustawienia bezpieczeństwa.</string>
-    <string name="installer_hint_conflict">Inna aplikacja z tą nazwą pakietu jest już zainstalowana. Odinstaluj ją, aby kontynuować.</string>
-    <string name="installer_hint_incompatible">Plik APK nie jest zgodny z tym urządzeniem lub wersją Androida.</string>
-    <string name="installer_hint_invalid">Plik APK jest nieprawidłowy lub uszkodzony.</string>
-    <string name="installer_hint_storage">Nie ma wystarczającej ilości miejsca na dysku do zainstalowania.</string>
-    <string name="installer_hint_timeout">Instalacja zakończyła się błędem przekroczenia czasu. Spróbuj ponownie.</string>
-    <string name="installer_hint_aborted">Instalacja została anulowana.</string>
-    <string name="installer_hint_with_reason">"%1$s
-
-Szczegóły: %2$s"</string>
+    <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>
+    <string name="installer_hint_blocked">Instalacja została zablokowana przez Androida. Sprawdź Play Protect lub ustawienia bezpieczeństwa</string>
+    <string name="installer_hint_conflict">Inna aplikacja o tej samej nazwie pakietu jest już zainstalowana. Odinstaluj ją, aby kontynuować</string>
+    <string name="installer_hint_incompatible">Plik APK nie jest zgodny z tym urządzeniem lub wersją Androida</string>
+    <string name="installer_hint_invalid">Plik APK jest nieprawidłowy lub uszkodzony</string>
+    <string name="installer_hint_storage">Za mało miejsca w pamięci urządzenia, aby ukończyć instalację</string>
+    <string name="installer_hint_timeout">Przekroczono czas instalacji. Spróbuj ponownie</string>
+    <string name="installer_hint_aborted">Instalacja została anulowana</string>
     <string name="installer_external_launched">Otwieranie %1$s…</string>
-    <string name="installer_external_timeout">%1$s nie potwierdził instalacji. Sprawdź inną aplikację i spróbuj ponownie.</string>
-    <string name="installer_external_success">%1$s zgłosił pomyślną instalację.</string>
-    <string name="installer_external_finished_no_change">%1$s zakończono bez instalacji aplikacji. Sprawdź komunikat o błędzie w instalatorze i spróbuj ponownie.</string>
-    <string name="installing_ellipsis">Instalowanie…</string>
-    <string name="uninstalling_ellipsis">Usuwanie...</string>
-    <string name="mounting_ellipsis">Mountowanie…</string>
-    <string name="unmounting">Odmountowywanie…</string>
-    <string name="install_app">Zainstaluj</string>
-    <string name="install_app_success">Zainstalowano pomyślnie</string>
-    <string name="install_app_fail_title">Instalacja nie powiodła się</string>
-    <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
-    <string name="install_app_fail_missing_stock">Brak oryginalnego pliku APK dla instalacji z mountem.</string>
-    <string name="mount_split_not_supported">Instalator z mountowaniem roota nie obsługuje rozdzielonych plików APK. Zamiast tego użyj instalatora systemowego.</string>
-    <string name="mount_app_fail_title">Mountowanie nie powiodło się</string>
-    <string name="install_timeout_message">Instalacja nie została zakończona. Sprawdź okno dialogowe instalatora systemowego i spróbuj ponownie.</string>
-    <string name="uninstall_timeout_message">Usuwanie nie zakończyło się. Sprawdź okno dialogowe odinstalowywania i spróbuj ponownie.</string>
-    <string name="reinstall_app_fail">Nie udało się ponownie zainstalować aplikacji: %s</string>
-    <string name="uninstall_app_fail">Nie udało się odinstalować aplikacji: %s</string>
-    <string name="open_app">Otwórz</string>
-    <string name="save_apk">Zapisz APK</string>
-    <string name="save_apk_success">Zapisano APK</string>
-    <string name="saved_app_export_success">Wyeksportowano zmodyfikowaną aplikację</string>
-    <string name="saved_app_export_failed">Nie udało się wyeksportować zmodyfikowanej aplikacji</string>
-    <string name="saved_app_removed_toast">Usunięto zapisaną zmodyfikowaną aplikację</string>
-    <string name="saved_app_copy_removed_toast">Usunięto zapisaną kopię</string>
-    <string name="delete_saved_app_title">Usuń zapisaną aplikację</string>
-    <string name="delete_saved_app_description">Spowoduje to usunięcie wpisu zapisanej aplikacji i powiązanego pliku APK.</string>
-    <string name="delete_saved_entry_title">Usuń zapisany wpis aplikacji</string>
-    <string name="delete_saved_entry_description">Spowoduje to usunięcie zapisanego wpisu aplikacji i powiązanego pliku APK. Aplikacja pozostanie zainstalowana.</string>
-    <string name="saved_app_launch_unavailable">Zainstaluj aplikację przed jej otwarciem.</string>
-    <string name="install_saved_app">Zainstaluj</string>
-    <string name="remount_saved_app">Zmountuj ponownie</string>
-    <string name="update_saved_app">Zaktualizuj</string>
-    <string name="saved_app_install_success">Zainstalowano zapisaną aplikację</string>
-    <string name="saved_app_install_failed">Nie udało się zainstalować zapisanej aplikacji</string>
-    <string name="saved_app_uninstall_title">Odinstalować zainstalowaną kopię?</string>
-    <string name="saved_app_uninstall_description">Usuwa to tylko zainstalowaną wersję. Twój zapisany plik APK nie zostanie usunięty.</string>
-    <string name="saved_app_install_missing">Nie znaleziono zapisanego pliku APK</string>
-    <string name="save_logs">Zapisz logi</string>
-    <string name="plugin_activity_dialog_body">Do kontynuowania z tym pluginem wymagana jest interakcja użytkownika.</string>
-    <string name="select_install_type">Wybierz typ instalacji</string>
-    <string name="patcher_step_group_preparing">Przygotowywanie</string>
-    <string name="patcher_step_load_patches">Ładowanie modyfikacji</string>
-    <string name="patcher_step_prepare_split_apk">Scalanie podzielonego pliku APK</string>
-    <string name="patcher_step_unpack">Odczytano plik APK</string>
-    <string name="patcher_step_group_patching">Modyfikowanie</string>
-    <string name="patcher_step_group_saving">Zapisywanie</string>
-    <string name="patcher_step_write_patched">Zapisywanie zmodyfikowanego pliku APK</string>
-    <string name="patcher_step_sign_apk">Podpisywanie zmodyfikowanego pliku APK</string>
-    <string name="patcher_notification_title">Modyfikowanie w toku…</string>
-    <string name="patcher_notification_text">Stuknij, aby wrócić do modyfikatora</string>
-    <string name="patcher_stop_confirm_title">Zatrzymaj modyfikator</string>
-    <string name="patcher_stop_confirm_description">Czy na pewno chcesz zatrzymać proces modyfikowania?</string>
-    <string name="patcher_install_in_progress_title">Instalacja w toku</string>
-    <string name="patcher_install_in_progress">Instalacja jest w toku. Proszę czekać</string>
-    <string name="patcher_install_in_progress_leave">Wyjdź mimo to</string>
-    <string name="patcher_install_in_progress_stay">Zostań</string>
-    <string name="patcher_mount_in_progress_title">Mountowanie w toku</string>
-    <string name="patcher_mount_in_progress">Mountowanie w toku. Proszę czekać</string>
-    <string name="applying_patches">Stosowanie modyfikacji</string>
-    <string name="applying_patch">Stosowanie %s</string>
-    <string name="failed_to_execute_patch">Nie udało się zastosować %s</string>
-    <string name="save_patched_app_dialog_title">Opuścić modyfikator?</string>
-    <string name="save_patched_app_dialog_message">Zaraz opuścisz modyfikator. Zmodyfikowana aplikacja zostanie utracona, chyba że ją zapiszesz.</string>
-    <string name="save_patched_app_dialog_save">Zapisz zmodyfikowaną aplikację</string>
-    <string name="save_patched_app_dialog_leave">Opuść bez zapisywania</string>
-    <string name="save_patched_app_dialog_cancel">Pozostań w modyfikatorze</string>
-    <string name="save_patched_app_dialog_hint_save">Zapisuje zmodyfikowany plik APK w zakładce Aplikacje do przyszłej instalacji.</string>
-    <string name="save_patched_app_dialog_hint_leave">Usuwa zmodyfikowany plik APK i wraca do poprzedniego ekranu.</string>
-    <string name="patched_app_saved_toast">Zmodyfikowana aplikacja zapisana na później</string>
-    <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
-    <string name="step_completed">ukończono</string>
-    <string name="step_failed">nie powiodło się</string>
-    <string name="step_running">w trakcie</string>
-    <string name="step_waiting">oczekuje</string>
-    <string name="expand_content">rozwiń</string>
-    <string name="collapse_content">zwiń</string>
-    <string name="drag_handle">zmień kolejność</string>
-    <string name="more">Więcej</string>
-    <string name="less">Mniej</string>
-    <string name="continue_">Kontynuuj</string>
-    <string name="dismiss">Odrzuć</string>
-    <string name="version">Wersja</string>
-    <string name="published">Opublikowano</string>
-    <string name="developer_options">Opcje programisty</string>
-    <string name="developer_options_description">Opcje debugowania problemów</string>
-    <string name="patches_update_success">Aktualizacja pomyślna</string>
-    <string name="patches_update_unavailable">Brak dostępnej aktualizacji</string>
-    <string name="view_patches">Wyświetl modyfikacje</string>
-    <string name="patches_view_any_version">Dowolna wersja</string>
-    <string name="patches_view_any_package">Dowolny pakiet</string>
-    <string name="patches_delete_single_dialog_description">Czy na pewno chcesz usunąć \"%s\"?</string>
-    <string name="patches_delete_multiple_dialog_description">Czy na pewno chcesz usunąć wybrane pakiety modyfikacji?</string>
-    <string name="about_revanced_manager">O Morphe</string>
-    <string name="revanced_manager_description">"Morphe to eksperymentalny projekt open-source skupiający się na tworzeniu nowoczesnego, usprawnionego modyfikowania popularnych aplikacji na Androida
+    <string name="installer_external_timeout">%1$s nie potwierdził instalacji. Sprawdź inną aplikację i spróbuj ponownie</string>
+    <string name="installer_external_success">%1$s zgłasza pomyślną instalację</string>
+    <string name="installer_unavailable_title">%s niedostępny</string>
+    <string name="installer_unavailable_message">Twój preferowany instalator (%s) jest obecnie niedostępny. Możesz naprawić problem i spróbować ponownie lub zamiast tego użyć standardowego instalatora</string>
+    <string name="installer_unavailable_shizuku_hint">Upewnij się, że Shizuku jest uruchomione, a tej aplikacji przyznano odpowiednie uprawnienia</string>
+    <string name="installer_use_standard">Użyj standardowego</string>
+    <string name="settings_prompt_installer_on_install">Pytaj o instalator przy instalacji</string>
+    <string name="settings_prompt_installer_on_install_description">Pokazuj okno wyboru instalatora przy każdym instalowaniu zmodyfikowanej aplikacji</string>
+    <!-- Settings - System Tab - Performance Section -->
+    <string name="settings_system_performance">Wydajność</string>
+    <string name="settings_system_process_runtime">Środowisko procesu</string>
+    <string name="settings_system_process_runtime_description">Uruchamiaj modyfikowanie w oddzielnym procesie dla lepszej stabilności</string>
+    <string name="settings_system_process_runtime_memory_limit">Limit pamięci</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Wyższe limity pamięci mogą przyspieszyć modyfikowanie, ale mogą nie działać na starszych urządzeniach</string>
+    <string name="settings_system_process_runtime_enable">Włącz środowisko procesu</string>
+    <string name="settings_system_memory_limit_subtitle">Pamięć dostępna dla procesu modyfikowania</string>
+    <string name="settings_system_memory_limit_warning">Niski limit pamięci może powodować błędy podczas modyfikowania większych aplikacji</string>
+    <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
+    <string name="settings_system_process_runtime_disabled_description">Stuknij, aby skonfigurować</string>
+    <!-- Settings - System Tab - Import and export keystore -->
+    <string name="settings_system_import_export">Import i eksport</string>
+    <string name="settings_system_import_keystore">Importuj magazyn kluczy</string>
+    <string name="settings_system_import_keystore_description">Importuj własny magazyn kluczy</string>
+    <string name="settings_system_import_keystore_dialog_title">Wprowadź dane uwierzytelniające magazynu kluczy</string>
+    <string name="settings_system_import_keystore_dialog_description">Musisz wpisać dane uwierzytelniające magazynu kluczy, aby go zaimportować</string>
+    <string name="settings_system_import_keystore_dialog_alias_field">Nazwa użytkownika (Alias)</string>
+    <string name="settings_system_import_keystore_dialog_password_field">Hasło</string>
+    <string name="settings_system_import_keystore_dialog_button">Zaimportuj</string>
+    <string name="settings_system_import_keystore_wrong_credentials">Nieprawidłowe dane uwierzytelniające magazynu kluczy</string>
+    <string name="settings_system_import_keystore_success">Zaimportowano magazyn kluczy</string>
+    <string name="settings_system_import_keystore_failed">Nie udało się zaimportować magazynu kluczy</string>
+    <string name="settings_system_export_keystore">Eksportuj magazyn kluczy</string>
+    <string name="settings_system_export_keystore_description">Eksportuj obecny magazyn kluczy</string>
+    <string name="settings_system_export_keystore_unavailable">Brak dostępnego magazynu kluczy do eksportu</string>
+    <string name="settings_system_export_keystore_success">Wyeksportowano magazyn kluczy</string>
+    <string name="settings_system_show_password_field">Pokaż hasło</string>
+    <string name="settings_system_hide_password_field">Ukryj hasło</string>
+    <!-- Settings - System Tab - Import and Export Manager Settings -->
+    <string name="settings_system_import_manager_settings">Importuj ustawienia menedżera</string>
+    <string name="settings_system_import_manager_settings_description">Przywróć ustawienia menedżera z pliku JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Nie udało się zaimportować ustawień menedżera: %s</string>
+    <string name="settings_system_import_manager_settings_success">Zaimportowano ustawienia menedżera</string>
+    <string name="settings_system_export_manager_settings">Wyeksportuj ustawienia menedżera</string>
+    <string name="settings_system_export_manager_settings_description">Zapisz ustawienia menedżera do pliku JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Nie udało się wyeksportować ustawień menedżera: %s</string>
+    <string name="settings_system_export_manager_settings_success">Wyeksportowano ustawienia menedżera</string>
+    <!-- Settings - System Tab - Debug Section -->
+    <string name="settings_system_debug">Debugowanie</string>
+    <string name="settings_system_export_debug_logs">Wyeksportuj logi do debugowania</string>
+    <string name="settings_system_export_debug_logs_description">Eksportuj logi systemowe do debugowania</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %s)</string>
+    <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
+    <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
+    <!-- Settings - System Tab - Storage Management Section -->
+    <string name="settings_system_storage_management">Zarządzanie pamięcią</string>
+    <string name="settings_system_apks_size">Całkowity rozmiar: %s</string>
+    <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
+    <string name="settings_system_patched_apks_title">Zmodyfikowane pliki APK</string>
+    <string name="settings_system_patched_apks_description">Zarządzaj zapisanymi plikami zmodyfikowanych aplikacji</string>
+    <string name="settings_system_patched_apks_empty">Brak zapisanych plików APK</string>
+    <string name="settings_system_patched_apks_delete_title">Usunąć zmodyfikowany plik APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Czy na pewno chcesz usunąć zapisany, zmodyfikowany plik APK dla %s?</string>
+    <string name="settings_system_patched_apks_deleted">Pomyślnie usunięto zmodyfikowany plik APK</string>
+    <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <string name="settings_system_original_apks_title">Oryginalne pliki APK</string>
+    <string name="settings_system_original_apks_description">Oryginalne pliki APK są przechowywane na potrzeby ponownej modyfikacji. Dla każdej aplikacji zachowywana jest tylko najnowsza wersja</string>
+    <string name="settings_system_original_apks_empty">Brak zapisanych oryginalnych plików APK</string>
+    <string name="settings_system_original_apks_deleted">Pomyślnie usunięto oryginalny plik APK</string>
+    <string name="settings_system_original_apks_delete_title">Usunąć oryginalny plik APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Usunąć oryginalny plik APK dla aplikacji %s? Nie będziesz mógł ponownie modyfikować bez wybrania nowego pliku APK</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
+    <string name="settings_system_patch_selections_description">Zarządzaj zapisanymi wyborami i opcjami modyfikacji. Pozostają one zachowane po odinstalowaniu aplikacji</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Zresetować wszystkie wybory?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Zresetować wybory pakietu?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Zresetować wybór źródła?</string>
+    <string name="settings_system_patch_selection_no_saved">Brak zapisanych wyborów modyfikacji</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s przez %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s w %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Adres źródła #%s</string>
+    <string name="settings_system_patch_selection_will_delete">To usunie:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wszystkich pakietów i źródeł</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla pakietu %s we wszystkich źródłach</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Spowoduje to trwałe usunięcie zapisanych wyborów modyfikacji dla %1$s w źródle #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Nie udało się wyeksportować danych źródła</string>
+    <string name="settings_system_export_source_data_success">Dane źródła wyeksportowane pomyślnie</string>
+    <string name="settings_system_import_source_data_fail">Nie udało się zaimportować danych źródła</string>
+    <string name="settings_system_import_source_data_success">Dane źródła zaimportowane pomyślnie</string>
+    <string name="settings_system_patch_details_title">Szczegóły modyfikacji</string>
+    <string name="settings_system_selected_patches_title">Wybrane modyfikacje (%s)</string>
+    <string name="settings_system_patch_options_title">Ustawienia modyfikacji (%s)</string>
+    <string name="settings_system_no_patches_or_options">Brak zapisanych modyfikacji lub opcji</string>
+    <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_about">O aplikacji</string>
+    <string name="settings_system_share_website">Udostępnij stronę</string>
+    <string name="settings_system_share_website_description">Udostępnij oficjalną stronę Morphe</string>
+    <string name="settings_system_manager_description">"Morphe to eksperymentalny projekt otwartoźródłowy, którego celem jest nowoczesne i sprawne modyfikowanie popularnych aplikacji na Androida
 
-Podstawą Morphe jest otwartość, a jego rozwój napędzany jest opiniami i wkładem społeczności w przyszłe innowacje."</string>
-    <string name="here">tutaj.</string>
+Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytkowników, które napędzają dalszy rozwój i innowacje"</string>
+    <!-- Shared strings -->
+    <string name="patches">Modyfikacje</string>
+    <string name="home">Strona główna</string>
+    <string name="settings">Ustawienia</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="reset">Zresetuj</string>
+    <string name="reset_all">Zresetuj wszystko</string>
+    <string name="confirm">Potwierdź</string>
+    <string name="warning">Ostrzeżenie</string>
+    <string name="error_">Błąd</string>
+    <string name="retry">Spróbuj ponownie</string>
+    <string name="add">Dodaj</string>
+    <string name="close">Zamknij</string>
+    <string name="clear">Wyczyść</string>
+    <string name="delete">Usuń</string>
+    <string name="disable">Wyłącz</string>
+    <string name="enable">Włącz</string>
+    <string name="loading">Wczytywanie…</string>
+    <string name="not_installed">Nie zainstalowano</string>
+    <string name="view">Wyświetl</string>
+    <string name="search">Szukaj</string>
+    <string name="search_no_results">Nie znaleziono wyników</string>
+    <string name="any_version">Dowolna</string>
+    <string name="enabled">Włączone</string>
+    <string name="disabled">Wyłączone</string>
+    <string name="selected">Wybrane</string>
+    <string name="not_selected">Nie wybrano</string>
+    <string name="rename">Zmień nazwę</string>
+    <string name="import_">Zaimportuj</string>
+    <string name="export">Eksportuj</string>
+    <string name="download">Pobierz</string>
+    <string name="less">Mniej</string>
+    <string name="expand">Rozwiń</string>
+    <string name="expanded">Rozwinięte</string>
+    <string name="collapse">Zwiń</string>
+    <string name="collapsed">Zwinięte</string>
+    <string name="available">Dostępne</string>
+    <string name="continue_">Kontynuuj</string>
+    <string name="version">Wersja</string>
+    <string name="patch">Modyfikuj</string>
+    <string name="repatch">Zmodyfikuj ponownie</string>
+    <string name="open">Otwórz</string>
+    <string name="mount">Zmountuj</string>
+    <string name="mounted">Zmountowano</string>
+    <string name="unmounted">Odmountowano</string>
+    <string name="remount">Zmountuj ponownie</string>
+    <string name="install">Zainstaluj</string>
+    <string name="installed">Zainstalowano</string>
+    <string name="reinstall">Zainstaluj ponownie</string>
+    <string name="uninstall">Odinstaluj</string>
+    <string name="uninstalled">Odinstalowano</string>
+    <string name="save">Zapisz</string>
+    <string name="saved">Zapisano</string>
+    <string name="update">Zaktualizuj</string>
+    <string name="installing_ellipsis">Instalowanie…</string>
+    <string name="mounting_ellipsis">Mountowanie…</string>
+    <string name="unmounting_ellipsis">Odmountowywanie…</string>
+    <string name="importing_ellipsis">Importowanie…</string>
+    <string name="changelog">Przeglądaj dzienniki zmian</string>
+    <string name="changelog_description">Sprawdź ostatnie zmiany w tej aktualizacji</string>
+    <string name="changelog_loading">Wczytywanie dziennika zmian</string>
+    <string name="changelog_download_fail">Nie udało się pobrać dziennika zmian: %s</string>
+    <string name="changelog_retry">Spróbuj ponownie</string>
+    <string name="changelog_empty">Brak dostępnej historii zmian</string>
+    <string name="no_network_toast">Brak połączenia z internetem</string>
     <string name="update_available">Dostępna jest aktualizacja</string>
     <string name="ready_to_install_update">Gotowy do zainstalowania aktualizacji</string>
     <string name="update_completed">Zainstalowano aktualizację</string>
     <string name="install_update_manager_failed">Nie udało się zainstalować aktualizacji</string>
-    <string name="manual_update_check">Sprawdź aktualizacje</string>
-    <string name="manual_update_check_description">Ręcznie sprawdź aktualizacje</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="update_checking_manager">Sprawdzaj aktualizacje przy uruchomieniu</string>
-    <string name="update_checking_manager_description">Sprawdzaj nowe wersje Morphe po uruchomieniu aplikacji</string>
-    <string name="manager_prereleases">Używaj wersji przedpremierowych</string>
-    <string name="manager_prereleases_description">Używaj wersji przedpremierowych Morphe</string>
-    <string name="update_published">Opublikowano %s</string>
-    <string name="battery_optimization_notification">Optymalizacje baterii muszą zostać wyłączone, aby Morphe działało poprawnie w tle. Kliknij tutaj, aby wyłączyć optymalizacje.</string>
     <string name="installing_manager_update">Instalowanie aktualizacji...</string>
     <string name="downloading_manager_update">Pobieranie aktualizacji...</string>
-    <string name="manager_update_banner_title">Pobieranie aktualizacji menedżera</string>
     <string name="download_manager_failed">Nie udało się pobrać aktualizacji: %s</string>
-    <string name="save">Zapisz</string>
-    <string name="save_with_count">Zapisz (%1$s)</string>
-    <string name="update">Zaktualizuj</string>
-    <string name="empty">Puste</string>
+    <string name="failed_to_check_updates">Nie udało się sprawdzić aktualizacji: %s</string>
+    <string name="failed_to_download_update">Nie udało się pobrać aktualizacji: %s</string>
+    <string name="resume_download">Wznów pobieranie</string>
+    <string name="download_confirmation_metered">"Korzystasz obecnie z połączenia taryfowego, co może wiązać się z dodatkowymi opłatami u Twojego dostawcy.
+
+Czy mimo to chcesz kontynuować?"</string>
+    <string name="download_update_confirmation">Pobrać aktualizację?</string>
     <string name="just_now">Teraz</string>
     <string name="minutes_ago">%s minut temu</string>
     <string name="hours_ago">%s godzin temu</string>
     <string name="days_ago">%s dni temu</string>
     <string name="invalid_date">Nieprawidłowa data</string>
-    <string name="input_dialog_value_invalid">Nieprawidłowa wartość</string>
-    <string name="option_required">To ustawienie jest wymagane</string>
-    <string name="required_options_screen">Wymagane ustawienia</string>
-    <string name="failed_to_check_updates">Nie można sprawdzić dostępności aktualizacji: %s</string>
-    <string name="no_update_available">Brak dostępnych aktualizacji</string>
-    <string name="update_check">Sprawdzanie aktualizacji…</string>
-    <string name="update_available_dialog_description">Dostępna jest nowa wersja Morphe (%s).</string>
-    <string name="failed_to_download_update">Nie udało się pobrać aktualizacji: %s</string>
-    <string name="download">Pobierz</string>
-    <string name="resume_download">Wznów pobieranie</string>
-    <string name="download_confirmation_metered">"Jesteś obecnie połączony z siecią taryfową, co może wiązać się z dodatkowymi opłatami od Twojego dostawcy usług.
-
-Czy mimo to chcesz kontynuować?"</string>
-    <string name="download_update_confirmation">Pobrać aktualizację?</string>
-    <string name="no_contributors_found">Nie znaleziono współtwórców</string>
-    <string name="select">Zaznacz</string>
-    <string name="select_deselect_all">Zaznacz lub odznacz wszystko</string>
-    <string name="deselect_all">Odznacz wszystko</string>
-    <string name="deselect_bundle">Usuń zaznaczenie bieżącego pakietu</string>
-    <string name="select_patches_type_dialog_description">Dodaj nowe pakiety modyfikacji z adresu URL lub plików lokalnych</string>
-    <string name="local_patches_description">Dodaj pakiety modyfikacji z pamięci lokalnej.</string>
-    <string name="remote_patches_description">Dodaj pakiety modyfikacji z adresu URL. Pakiety modyfikacji mogą być automatycznie aktualizowane.</string>
-    <string name="recommended">Zalecane</string>
-    <string name="installation_failed_dialog_title">Nie udało się zainstalować</string>
-    <string name="installation_cancelled_dialog_title">Instalacja anulowana</string>
-    <string name="installation_blocked_dialog_title">Instalacja zablokowana</string>
-    <string name="installation_conflict_dialog_title">Konflikt instalacji</string>
-    <string name="installation_incompatible_dialog_title">Niezgodna instalacja</string>
-    <string name="installation_invalid_dialog_title">Nieprawidłowa instalacja</string>
-    <string name="installation_storage_issue_dialog_title">Zbyt mało miejsca</string>
-    <string name="installation_timeout_dialog_title">Przekroczono czas instalacji</string>
-    <string name="installation_failed_description">Instalacja nie powiodła się z nieznanego powodu. Spróbować ponownie?</string>
-    <string name="installation_aborted_description">Instalacja została ręcznie anulowana. Spróbować ponownie?</string>
-    <string name="installation_blocked_description">Instalacja została zablokowana. Sprawdź ustawienia zabezpieczeń urządzenia i spróbuj ponownie.</string>
-    <string name="installation_conflict_description">Instalacja została zablokowana z powodu istniejącej instalacji aplikacji. Odinstalować zainstalowaną aplikację i spróbować ponownie?</string>
-    <string name="installation_signature_mismatch_dialog_title">Niespójność podpisu</string>
-    <string name="installation_signature_mismatch_description">Zainstalowana aplikacja została podpisana inaczej. Usunąć zainstalowaną aplikację i zainstalować tą?</string>
-    <string name="installation_incompatible_description">Aplikacja jest niezgodna z tym urządzeniem. Użyj pliku APK zgodnego z tym urządzeniem i spróbuj ponownie.</string>
-    <string name="installation_invalid_description">Aplikacja jest nieprawidłowa. Odinstalować aplikację i spróbować ponownie?</string>
-    <string name="installation_storage_issue_description">Aplikacji nie można zainstalować z powodu niewystarczającej ilości miejsca. Zwolnij trochę miejsca i spróbuj ponownie.</string>
-    <string name="installation_timeout_description">Instalacja trwała zbyt długo. Spróbować ponownie?</string>
-    <string name="reinstall">Zainstaluj ponownie</string>
-    <string name="installation_signature_mismatch_confirm">Odinstaluj i zainstaluj</string>
-    <string name="show">Pokaż</string>
-    <string name="debugging">Debugowanie</string>
-    <string name="about_device">Informacje o urządzeniu</string>
-    <string name="enter_url">Wpisz adres URL</string>
-    <string name="next">Dalej</string>
-    <string name="auto_update">Automatyczna aktualizacja</string>
-    <string name="add_patches">Dodaj pakiet modyfikacji</string>
-    <string name="auto_update_description">Automatycznie aktualizuj, gdy dostępna jest nowa wersja</string>
-    <string name="patches_prereleases">Używaj wersji przedpremierowych</string>
-    <string name="patches_prereleases_description">Używaj wersji przedpremierowych %s</string>
-    <string name="patches_url">Adres URL pakietu modyfikacji</string>
-    <string name="incompatible_patches_dialog">"Te modyfikacje nie są zgodne z wybraną wersją aplikacji (%1$s).
-
-Kliknij te modyfikacje, aby zobaczyć więcej szczegółów."</string>
-    <string name="incompatible_patch">Niekompatybilna modyfikacja</string>
-    <string name="any_version">Dowolna</string>
-    <string name="never_show_again">Nie pokazuj ponownie</string>
-    <string name="show_manager_update_dialog_on_launch">Pokaż komunikat o aktualizacji przy uruchomieniu</string>
-    <string name="show_manager_update_dialog_on_launch_description">Pokaż powiadomienie wyskakujące, gdy przy uruchomieniu jest dostępna nowa aktualizacja</string>
-    <string name="failed_to_import_keystore">Nie udało się zaimportować magazynu kluczy</string>
-    <string name="export">Eksportuj</string>
-    <string name="confirm">Potwierdź</string>
 </resources>

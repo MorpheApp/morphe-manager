@@ -3,16 +3,28 @@
     <plurals name="patch_count">
         <item quantity="other">%d 個のパッチ</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="other">%d 個のパッチ オプション</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="other">%d 件のソース</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%d 個のパッケージ</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="other">%d 個のパッチを実行</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="other">%d 件選択中</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">APK ファイル %d 個</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="other">%d 個のパッチ</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="other">保存済みセレクションから互換性を失ったパッチを %1$d 個削除しました</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="other">%d 個のバンドル</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="other">インストール済みのソース %1$d 件</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="other">選択中のパッチ %d 個</item>
     </plurals>
 </resources>

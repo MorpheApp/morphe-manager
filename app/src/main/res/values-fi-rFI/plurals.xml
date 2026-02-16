@@ -4,20 +4,36 @@
         <item quantity="one">%d korjaustiedosto</item>
         <item quantity="other">%d korjaustiedostoa</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%d paikka-vaihtoehto</item>
+        <item quantity="other">%d paikka-vaihtoehtoa</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%d lähde</item>
+        <item quantity="other">%d lähdettä</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%d paketti</item>
+        <item quantity="other">%d pakettia</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Suorita %d korjaustiedosto</item>
         <item quantity="other">Suorita %d korjaustiedostoa</item>
     </plurals>
-    <plurals name="selected_count">
-        <item quantity="one">%d valittuna</item>
-        <item quantity="other">%d valittuna</item>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d tiedosto</item>
+        <item quantity="other">%d tiedostoa</item>
     </plurals>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d paikka</item>
-        <item quantity="other">%d paikkaa</item>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Poistettiin tallennetusta valinnosta %1$d vanhentunut pätkä</item>
+        <item quantity="other">Poistettiin tallennetusta valinnosta %1$d vanhentunutta pätkää</item>
     </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d nippu</item>
-        <item quantity="other">%d nippua</item>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d lähde asennettu</item>
+        <item quantity="other">%1$d lähdettä asennettu</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d paikka valittu</item>
+        <item quantity="other">%d paikkaa valittu</item>
     </plurals>
 </resources>

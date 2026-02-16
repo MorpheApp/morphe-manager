@@ -1,3 +1,310 @@
+# app [1.7.0-dev.17](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.16...v1.7.0-dev.17) (2026-02-15)
+
+
+### Bug Fixes
+
+* Some patch options fields are not available for input ([5853168](https://github.com/MorpheApp/morphe-manager/commit/585316830a235a3d27781fe191a692c5d28ea6dc))
+
+# app [1.7.0-dev.16](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.15...v1.7.0-dev.16) (2026-02-15)
+
+
+### Bug Fixes
+
+* Resolve incorrect string formatters for some translations ([13d0b8c](https://github.com/MorpheApp/morphe-manager/commit/13d0b8ce8fefe8ee1d6cfda3c6a57ba1e8aa4376))
+
+# app [1.7.0-dev.15](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.14...v1.7.0-dev.15) (2026-02-15)
+
+
+### Features
+
+* Show Expert mode confirmation dialog ([db64938](https://github.com/MorpheApp/morphe-manager/commit/db64938470193e0c5a3b615ab09694f028a39236))
+
+# app [1.7.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.13...v1.7.0-dev.14) (2026-02-15)
+
+
+### Bug Fixes
+
+* Increase default process memory ([557ff78](https://github.com/MorpheApp/morphe-manager/commit/557ff784d8ac223de35ed52ddf20dc9aa62125d5))
+
+# app [1.7.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.12...v1.7.0-dev.13) (2026-02-15)
+
+
+### Bug Fixes
+
+* Resolve Morphe showing new release is available but cannot download ([c567195](https://github.com/MorpheApp/morphe-manager/commit/c567195dbae13ca1a9931edb1d472c77ecca9942))
+
+# app [1.7.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.11...v1.7.0-dev.12) (2026-02-15)
+
+
+### Bug Fixes
+
+* Better handle opening APKMirror links on weirdo home routers ([627f075](https://github.com/MorpheApp/morphe-manager/commit/627f07571646ea5bda5b60f7198b9f77ed4be27b))
+
+# app [1.7.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.10...v1.7.0-dev.11) (2026-02-15)
+
+
+### Bug Fixes
+
+* Update release build ([0d563e6](https://github.com/MorpheApp/morphe-manager/commit/0d563e65e6c15d121588da190d4b9c7dd8d891cd))
+
+# app [1.7.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.9...v1.7.0-dev.10) (2026-02-15)
+
+
+### Bug Fixes
+
+* Update app-release.json after semantic release finishes ([77db06d](https://github.com/MorpheApp/morphe-manager/commit/77db06d0169eb7cece281d6223b2e472113d1631))
+
+# app [1.7.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.8...v1.7.0-dev.9) (2026-02-14)
+
+
+### Bug Fixes
+
+* Get patches release info from static JSON file ([a33ba20](https://github.com/MorpheApp/morphe-manager/commit/a33ba2053a75826eec6c106611ba9e5f8276ed0c))
+
+# app [1.7.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.7...v1.7.0-dev.8) (2026-02-14)
+
+
+### Bug Fixes
+
+* Prefer IPv4 connections over IPv6 ([e665e59](https://github.com/MorpheApp/morphe-manager/commit/e665e595ac50fb7925fd6814ce89beebcd4fe453))
+
+# app [1.7.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.6...v1.7.0-dev.7) (2026-02-14)
+
+
+### Bug Fixes
+
+* Change to old GitHub release logic ([94c2fb7](https://github.com/MorpheApp/morphe-manager/commit/94c2fb70f389daff493dbc2deb02c0c906940407))
+
+# app [1.7.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.5...v1.7.0-dev.6) (2026-02-14)
+
+
+### Features
+
+* New patch selections dialog ([#197](https://github.com/MorpheApp/morphe-manager/issues/197)) ([9f363ff](https://github.com/MorpheApp/morphe-manager/commit/9f363ff85aad65a8c6bcbb4d8ea20b2c2ba34374))
+
+# app [1.7.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.4...v1.7.0-dev.5) (2026-02-13)
+
+
+### Bug Fixes
+
+* Commit app-release.json after semantic release ([4f89c8c](https://github.com/MorpheApp/morphe-manager/commit/4f89c8c5e02c375f04f0540b94cb4b1a817c120f))
+
+# app [1.7.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.3...v1.7.0-dev.4) (2026-02-13)
+
+
+### Bug Fixes
+
+* Publish release before updating app-release.json ([f1c556a](https://github.com/MorpheApp/morphe-manager/commit/f1c556aa7b9d163297152c53b348f87a6960fe1a))
+
+# app [1.7.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.2...v1.7.0-dev.3) (2026-02-11)
+
+
+### Bug Fixes
+
+* Refactor changelog component and add shimmer effect ([44d0318](https://github.com/MorpheApp/morphe-manager/commit/44d03189c2e0f1ee1a6971b7cd05f8d5b98a7651))
+
+# app [1.7.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.1...v1.7.0-dev.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* Incorrect content color for badge style ([f4ad9aa](https://github.com/MorpheApp/morphe-manager/commit/f4ad9aaa70d827ab5d511ed63c0eb7bebb999f07))
+
+# app [1.7.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0...v1.7.0-dev.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* Improve patch dialog logic and fix app info display issues ([#182](https://github.com/MorpheApp/morphe-manager/issues/182)) ([a3153e9](https://github.com/MorpheApp/morphe-manager/commit/a3153e91a6c609a71dbc7850e5edc57f1394f915))
+
+
+### Features
+
+* Get manager release info from static JSON file ([#186](https://github.com/MorpheApp/morphe-manager/issues/186)) ([c75569d](https://github.com/MorpheApp/morphe-manager/commit/c75569df4f5b6d85acf0ad6e4385f6320fc7b0a8))
+
+# app [1.6.0](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0...v1.6.0) (2026-02-08)
+
+
+### Bug Fixes
+
+* Add validation of patch selections when repatching ([#174](https://github.com/MorpheApp/morphe-manager/issues/174)) ([2dba355](https://github.com/MorpheApp/morphe-manager/commit/2dba3556c8c4b6f6db2eb596c2c1df53afb2b8ef))
+* Create adaptive icons for all resolutions ([#171](https://github.com/MorpheApp/morphe-manager/issues/171)) ([f22aa3f](https://github.com/MorpheApp/morphe-manager/commit/f22aa3f343cc34270030dc52f347518e40bde322))
+* File system access request appeared where it wasn't needed ([#179](https://github.com/MorpheApp/morphe-manager/issues/179)) ([79fcec2](https://github.com/MorpheApp/morphe-manager/commit/79fcec271e9e3633cdb0ff4cbfc3689ec925db6f))
+* Show banner when patched app was has been uninstalled from the device ([562f23e](https://github.com/MorpheApp/morphe-manager/commit/562f23e845c18c5a6e4d34f631bec6ad095c77b8))
+
+
+### Features
+
+* Add an extended list of supported versions ([#155](https://github.com/MorpheApp/morphe-manager/issues/155)) ([25dafb6](https://github.com/MorpheApp/morphe-manager/commit/25dafb685b5dbc28ae6d8c64553ac9a2d5a7527f))
+* Add GitHub repo as a patch bundle source ([#157](https://github.com/MorpheApp/morphe-manager/issues/157)) ([ec0f741](https://github.com/MorpheApp/morphe-manager/commit/ec0f7415964d6982925d7c097535d9032af1330a))
+* Add installer prompt on patcher screen ([#170](https://github.com/MorpheApp/morphe-manager/issues/170)) ([b93719b](https://github.com/MorpheApp/morphe-manager/commit/b93719b9181f44760648fc1a788e4dd9ca3a8580))
+* Add optional parallax effect to animated backgrounds ([#169](https://github.com/MorpheApp/morphe-manager/issues/169)) ([bc28fa9](https://github.com/MorpheApp/morphe-manager/commit/bc28fa9f5ea90cf2db3f6a485279e65cddff5438))
+* Add stored patch selection dialog ([#167](https://github.com/MorpheApp/morphe-manager/issues/167)) ([c36b424](https://github.com/MorpheApp/morphe-manager/commit/c36b42436ddde47b6bcea8c8f3b5a8eea50137ac))
+
+# app [1.6.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.7...v1.6.0-dev.8) (2026-02-08)
+
+
+### Bug Fixes
+
+* File system access request appeared where it wasn't needed ([#179](https://github.com/MorpheApp/morphe-manager/issues/179)) ([79fcec2](https://github.com/MorpheApp/morphe-manager/commit/79fcec271e9e3633cdb0ff4cbfc3689ec925db6f))
+
+# app [1.6.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2026-02-07)
+
+
+### Bug Fixes
+
+* Show banner when patched app was has been uninstalled from the device ([562f23e](https://github.com/MorpheApp/morphe-manager/commit/562f23e845c18c5a6e4d34f631bec6ad095c77b8))
+
+# app [1.6.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.5...v1.6.0-dev.6) (2026-02-06)
+
+
+### Bug Fixes
+
+* Add validation of patch selections when repatching ([#174](https://github.com/MorpheApp/morphe-manager/issues/174)) ([2dba355](https://github.com/MorpheApp/morphe-manager/commit/2dba3556c8c4b6f6db2eb596c2c1df53afb2b8ef))
+
+# app [1.6.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.4...v1.6.0-dev.5) (2026-02-06)
+
+
+### Bug Fixes
+
+* Create adaptive icons for all resolutions ([#171](https://github.com/MorpheApp/morphe-manager/issues/171)) ([f22aa3f](https://github.com/MorpheApp/morphe-manager/commit/f22aa3f343cc34270030dc52f347518e40bde322))
+
+# app [1.6.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.3...v1.6.0-dev.4) (2026-02-06)
+
+
+### Features
+
+* Add installer prompt on patcher screen ([#170](https://github.com/MorpheApp/morphe-manager/issues/170)) ([b93719b](https://github.com/MorpheApp/morphe-manager/commit/b93719b9181f44760648fc1a788e4dd9ca3a8580))
+
+# app [1.6.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.2...v1.6.0-dev.3) (2026-02-06)
+
+
+### Features
+
+* Add optional parallax effect to animated backgrounds ([#169](https://github.com/MorpheApp/morphe-manager/issues/169)) ([bc28fa9](https://github.com/MorpheApp/morphe-manager/commit/bc28fa9f5ea90cf2db3f6a485279e65cddff5438))
+
+# app [1.6.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2026-02-05)
+
+
+### Features
+
+* Add GitHub repo as a patch bundle source ([#157](https://github.com/MorpheApp/morphe-manager/issues/157)) ([ec0f741](https://github.com/MorpheApp/morphe-manager/commit/ec0f7415964d6982925d7c097535d9032af1330a))
+* Add stored patch selection dialog ([#167](https://github.com/MorpheApp/morphe-manager/issues/167)) ([c36b424](https://github.com/MorpheApp/morphe-manager/commit/c36b42436ddde47b6bcea8c8f3b5a8eea50137ac))
+
+# app [1.6.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0...v1.6.0-dev.1) (2026-02-04)
+
+
+### Features
+
+* Add an extended list of supported versions ([#155](https://github.com/MorpheApp/morphe-manager/issues/155)) ([25dafb6](https://github.com/MorpheApp/morphe-manager/commit/25dafb685b5dbc28ae6d8c64553ac9a2d5a7527f))
+
+# app [1.5.0](https://github.com/MorpheApp/morphe-manager/compare/v1.4.1...v1.5.0) (2026-02-04)
+
+
+### Bug Fixes
+
+* Refactor app installation code ([#149](https://github.com/MorpheApp/morphe-manager/issues/149)) ([119d112](https://github.com/MorpheApp/morphe-manager/commit/119d11258148fab6e91ef7d6c2df6edda8d03754))
+* Resolve "No Activity found" crash ([#148](https://github.com/MorpheApp/morphe-manager/issues/148)) ([12ec590](https://github.com/MorpheApp/morphe-manager/commit/12ec590cc147d2742e224221b5282e082edf3053))
+* UX improvements ([#147](https://github.com/MorpheApp/morphe-manager/issues/147)) ([0029e51](https://github.com/MorpheApp/morphe-manager/commit/0029e51ff931b74278e6120b8249371e9e0a5056))
+
+
+### Features
+
+* Add pull-to-refresh gesture ([#143](https://github.com/MorpheApp/morphe-manager/issues/143)) ([50525f0](https://github.com/MorpheApp/morphe-manager/commit/50525f0183440b4a4798d0520f5f415b9e569900))
+* Add updating sources progress bar ([#152](https://github.com/MorpheApp/morphe-manager/issues/152)) ([8fd353f](https://github.com/MorpheApp/morphe-manager/commit/8fd353f3ef53da81f1151132318e832713156628))
+* **Custom branding:** Allow Manager to process custom icon/headers into the correct formats/names/sizes ([#138](https://github.com/MorpheApp/morphe-manager/issues/138)) ([b5e6c82](https://github.com/MorpheApp/morphe-manager/commit/b5e6c82745c5441e17272850ed0b47cd525b514b))
+* Show homescreen app update badges ([#132](https://github.com/MorpheApp/morphe-manager/issues/132)) ([b8adadf](https://github.com/MorpheApp/morphe-manager/commit/b8adadf782e49f55ffc1323dcc15dd6a461abd81))
+
+# app [1.5.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.6...v1.5.0-dev.7) (2026-02-03)
+
+
+### Bug Fixes
+
+* Resolve "No Activity found" crash ([#148](https://github.com/MorpheApp/morphe-manager/issues/148)) ([12ec590](https://github.com/MorpheApp/morphe-manager/commit/12ec590cc147d2742e224221b5282e082edf3053))
+
+# app [1.5.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.5...v1.5.0-dev.6) (2026-02-03)
+
+
+### Bug Fixes
+
+* Refactor app installation code ([#149](https://github.com/MorpheApp/morphe-manager/issues/149)) ([119d112](https://github.com/MorpheApp/morphe-manager/commit/119d11258148fab6e91ef7d6c2df6edda8d03754))
+
+# app [1.5.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.4...v1.5.0-dev.5) (2026-02-02)
+
+
+### Features
+
+* Add updating sources progress bar ([#152](https://github.com/MorpheApp/morphe-manager/issues/152)) ([8fd353f](https://github.com/MorpheApp/morphe-manager/commit/8fd353f3ef53da81f1151132318e832713156628))
+
+# app [1.5.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.3...v1.5.0-dev.4) (2026-02-02)
+
+
+### Features
+
+* **Custom branding:** Allow Manager to process custom icon/headers into the correct formats/names/sizes ([#138](https://github.com/MorpheApp/morphe-manager/issues/138)) ([b5e6c82](https://github.com/MorpheApp/morphe-manager/commit/b5e6c82745c5441e17272850ed0b47cd525b514b))
+
+# app [1.5.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.2...v1.5.0-dev.3) (2026-02-02)
+
+
+### Bug Fixes
+
+* UX improvements ([#147](https://github.com/MorpheApp/morphe-manager/issues/147)) ([0029e51](https://github.com/MorpheApp/morphe-manager/commit/0029e51ff931b74278e6120b8249371e9e0a5056))
+
+# app [1.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.1...v1.5.0-dev.2) (2026-02-01)
+
+
+### Features
+
+* Add pull-to-refresh gesture ([#143](https://github.com/MorpheApp/morphe-manager/issues/143)) ([50525f0](https://github.com/MorpheApp/morphe-manager/commit/50525f0183440b4a4798d0520f5f415b9e569900))
+
+# app [1.5.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.1...v1.5.0-dev.1) (2026-02-01)
+
+
+### Features
+
+* Show homescreen app update badges ([#132](https://github.com/MorpheApp/morphe-manager/issues/132)) ([b8adadf](https://github.com/MorpheApp/morphe-manager/commit/b8adadf782e49f55ffc1323dcc15dd6a461abd81))
+
+## app [1.4.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0...v1.4.1) (2026-02-01)
+
+
+### Bug Fixes
+
+* Use new Expert mode for users with old user data ([57e658c](https://github.com/MorpheApp/morphe-manager/commit/57e658c26e3c2f7822ac0d4a906a6c2fd4a35210))
+
+## app [1.4.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0...v1.4.1-dev.1) (2026-01-31)
+
+
+### Bug Fixes
+
+* Use new Expert mode for users with old user data ([57e658c](https://github.com/MorpheApp/morphe-manager/commit/57e658c26e3c2f7822ac0d4a906a6c2fd4a35210))
+
+# app [1.4.0](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2...v1.4.0) (2026-01-31)
+
+
+### Bug Fixes
+
+* 'GmsCore support' patch not excluded in root mode ([#134](https://github.com/MorpheApp/morphe-manager/issues/134)) ([a2eb5b0](https://github.com/MorpheApp/morphe-manager/commit/a2eb5b0106c53ddb352b90496d51805a4d70a6a9))
+* Resolve libaapt.so patching errors ([#133](https://github.com/MorpheApp/morphe-manager/issues/133)) ([7a443e7](https://github.com/MorpheApp/morphe-manager/commit/7a443e7215eaa9a2ddb26670518694661f57551d))
+
+
+### Features
+
+* Add Expert mode ([#107](https://github.com/MorpheApp/morphe-manager/issues/107)) ([9273b41](https://github.com/MorpheApp/morphe-manager/commit/9273b415546c4561520ccb73b4cc48a73c449a4e))
+
+# app [1.4.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0-dev.2...v1.4.0-dev.3) (2026-01-30)
+
+
+### Bug Fixes
+
+* 'GmsCore support' patch not excluded in root mode ([#134](https://github.com/MorpheApp/morphe-manager/issues/134)) ([a2eb5b0](https://github.com/MorpheApp/morphe-manager/commit/a2eb5b0106c53ddb352b90496d51805a4d70a6a9))
+
+# app [1.4.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0-dev.1...v1.4.0-dev.2) (2026-01-30)
+
+
+### Bug Fixes
+
+* Resolve libaapt.so patching errors ([#133](https://github.com/MorpheApp/morphe-manager/issues/133)) ([7a443e7](https://github.com/MorpheApp/morphe-manager/commit/7a443e7215eaa9a2ddb26670518694661f57551d))
+
 # app [1.4.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2...v1.4.0-dev.1) (2026-01-27)
 
 
