@@ -34,6 +34,6 @@
     </plurals>
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%d patch selezionato</item>
-        <item quantity="other">%d patch selezionati</item>
+        <item quantity="other">%d patch selezionate</item>
     </plurals>
 </resources>

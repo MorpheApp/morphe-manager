@@ -13,7 +13,7 @@
     <string name="home_update_error">Güncelleme başarısız</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
     <string name="home_updating_sources">Kaynaklar güncelleniyor…</string>
-    <string name="home_update_progress_format">%1$s işlenmiştir</string>
+    <string name="home_update_progress_format">%1$s işlendi</string>
     <string name="home_update_success">Kaynak güncellemesi tamamlandı</string>
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
@@ -52,7 +52,7 @@
     <string name="sources_dialog_view_any_version">Herhangi bir sürüm</string>
     <string name="sources_dialog_view_any_package">Herhangi bir paket</string>
     <string name="sources_dialog_add_source">Yama kaynağı ekle</string>
-    <string name="sources_dialog_delete_confirm_message">Kaynak \"%s\"\'yi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</string>
+    <string name="sources_dialog_delete_confirm_message">Kaynak \"%s\"\'yi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz</string>
     <string name="sources_dialog_remote">Uzak</string>
     <string name="sources_dialog_remote_url">Kaynak URL</string>
     <string name="sources_dialog_remote_url_formats_title">Örnekler:</string>
@@ -63,18 +63,18 @@
     <string name="sources_dialog_preinstalled">Ön yüklü</string>
     <string name="sources_update_success">Güncelleme başarılı</string>
     <string name="sources_update_unavailable">Güncelleme mevcut değil</string>
-    <string name="sources_download_fail">Kaynağları indirmek başarısız: %s</string>
+    <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'iniz var mı?</string>
     <string name="home_apk_availability_dialog_simple">%1$s\'i yamalamak için gerekli yamalanmamış APK sürümü:</string>
     <string name="home_apk_availability_dialog_expert">"Yamalanmamış %1$s APK'iniz var mı?
 
- Uyumlu sürümler:"</string>
+Uyumlu sürümler:"</string>
     <string name="home_apk_availability_recommended_label">Tavsiye edilen</string>
     <string name="home_apk_availability_unpatched_label">Yakınmıyan</string>
     <string name="home_apk_availability_yes">Evet, bende var</string>
     <string name="home_apk_availability_no">Hayır, bulmama yardım et</string>
-    <string name="home_apk_use_saved_with_version">Kayıtlı APK (v%s) kullanın</string>
+    <string name="home_apk_use_saved_with_version">Kaydedilmiş APK (v%s) kullan</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Tespit için tekrar APK dosyası seçin</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
@@ -249,7 +249,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="patched_app_save_failed_toast">Yamalanan uygulama kaydedilemedi</string>
     <string name="download_apk">APK dosyasını indir</string>
     <string name="plugin_activity_dialog_body">Bu eklenti için devam etmek için kullanıcı etkileşimi gerekli.</string>
-    <string name="patcher_process_exit_message">Patcher işlemi %1$s kodu ile sonlandı.</string>
+    <string name="patcher_process_exit_message">Yamalama işlemi %1$s kodu ile sonlandı</string>
     <string name="install_app_success">Başarıyla yüklendi</string>
     <string name="install_app_fail">Uygulama yüklenemedi: %s</string>
     <string name="install_timeout_message">Yükleme tamamlanmadı. Sistem yükleyici penceresini kontrol edin ve tekrar deneyin.</string>
@@ -260,7 +260,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="saved_app_launch_unavailable">Uygulamayı açmadan önce yükleyin.</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Bağlanamadı: %s</string>
-    <string name="failed_to_unmount">%s: Kaldırılamadı</string>
+    <string name="failed_to_unmount">Kaldırılamadı: %s</string>
     <!-- Settings -->
     <string name="appearance">Görünüm</string>
     <string name="advanced">Gelişmiş</string>
@@ -299,7 +299,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_appearance_app_icon_dark_2">Boşluk</string>
     <string name="settings_appearance_app_icon_dark_3">Çivit</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Uygulama simgesi değiştirilsin mi?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">%1$s simgesine değiştirmek ve yeniden başlatmak istediğinizden emin misiniz?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\' simgesine değiştirilip yeniden başlatılsın mı?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simgeyi değiştir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Güncellemeler</string>
@@ -423,9 +423,9 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_hint_aborted">Yükleme iptal edildi.</string>
     <string name="installer_external_launched">%1$s açılıyor…</string>
     <string name="installer_external_timeout">%1$s yüklemeyi onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin.</string>
-    <string name="installer_external_success">%1$s başarılı bir şekilde yüklediğini bildirdi.</string>
+    <string name="installer_external_success">%1$s başarılı bir şekilde yüklediğini bildirdi</string>
     <string name="installer_unavailable_title">%s kullanılamıyor</string>
-    <string name="installer_unavailable_message">Tercih ettiğiniz yükleyici (%s) şu anda kullanılamıyor. Sorunu çözün ve tekrar deneyin veya standart yükleyiciyi kullanın.</string>
+    <string name="installer_unavailable_message">Tercih ettiğiniz yükleyici (%s) şu anda kullanılamıyor. Sorunu çözüp tekrar deneyebilir veya standart yükleyiciyi kullanabilirsiniz</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku çalışıyor ve bu uygulama için izin verildiğinden emin olun.</string>
     <string name="installer_use_standard">Standart kullanımı kullanınız</string>
     <string name="settings_prompt_installer_on_install">Yükleme sırasında yükleyiciyi sor</string>
@@ -438,7 +438,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek bellek limiti yamalamayı hızlandırabilir ancak eski cihazlarda çalışmayabilir</string>
     <string name="settings_system_process_runtime_enable">Çalışma sürecini etkinleştir</string>
     <string name="settings_system_memory_limit_subtitle">Yamalama için kullanılabilir bellek</string>
-    <string name="settings_system_memory_limit_warning">%d MB limit</string>
+    <string name="settings_system_memory_limit_warning">Düşük bellek sınırı, daha büyük uygulamaları yamalarken hatalara neden olabilir</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Yapılandırmak için tıklayın</string>
     <!-- Settings - System Tab - Import and export keystore -->
@@ -472,7 +472,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_debug">Hata ayıklama</string>
     <string name="settings_system_export_debug_logs">Hata ayıklama kayıtlarını dışa aktar</string>
     <string name="settings_system_export_debug_logs_description">Hata ayıklama için sistem günlüklerini dışa aktar</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Logları okuyamazdım (çıkış kodu %s)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Günlükler okunamadı (çıkış kodu %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kayıtlar dışa aktarılamadı</string>
     <string name="settings_system_export_debug_logs_export_success">Günlükler dışa aktarıldı</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -483,8 +483,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_patched_apks_description">Kaydedilen değiştirilmiş uygulama dosyalarını yönet</string>
     <string name="settings_system_patched_apks_empty">Henüz hiç değiştirilmiş APK kaydedilmedi</string>
     <string name="settings_system_patched_apks_delete_title">Değiştirilmiş APK silinsin mi?</string>
-    <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen değiştirilmiş APK\'i silmek istediğinizden emin misiniz?</string>
-    <string name="settings_system_patched_apks_deleted">%s için değiştirilmiş APK başarıyla silindi</string>
+    <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen yamalı APK\'yı silmek istediğinizden emin misiniz?</string>
+    <string name="settings_system_patched_apks_deleted">%s için yamalı APK başarıyla silindi</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Orijinal APK\'ler</string>
     <string name="settings_system_original_apks_description">Orijinal APK dosyaları yenileme için saklanır. Her uygulama için en son sürüm tek bir kopyada tutulur</string>

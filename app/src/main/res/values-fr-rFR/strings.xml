@@ -499,13 +499,13 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections de package ?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de source ?</string>
     <string name="settings_system_patch_selection_no_saved">Pas de sélections de patch enregistrées</string>
-    <string name="settings_system_patch_selection_total_summary_format">%1$s entre %2$s</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s dans %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dans %2$s</string>
     <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">Cela supprimera :</string>
     <string name="settings_system_patch_selection_reset_all_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour tous les packages et sources</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour %s entre toutes les sources</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera les sélections de patch enregistrées pour %1$s dans la source #%2$s</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour %s dans toutes les sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera définitivement les sélections de patch enregistrées pour %1$s dans la source #%2$s</string>
     <string name="settings_system_export_source_data_fail">Échec de l\'exportation des données de source</string>
     <string name="settings_system_export_source_data_success">Données de source exportées avec succès</string>
     <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>
