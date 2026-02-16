@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d lappation</item>
-        <item quantity="other">%d lappationer</item>
+        <item quantity="one">%s stik</item>
+        <item quantity="other">%s stikkeplads</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%d stikproeve</item>
-        <item quantity="other">%d stikproever</item>
+        <item quantity="one">%s valgmulighed</item>
+        <item quantity="other">%s valgmuligheder</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%d kilde</item>
-        <item quantity="other">%d kilder</item>
+        <item quantity="one">%s kilde</item>
+        <item quantity="other">%s kilder</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%d pakke</item>
-        <item quantity="other">%d pakker</item>
+        <item quantity="one">%s pakke</item>
+        <item quantity="other">%s pakker</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Udfør %d patch</item>
-        <item quantity="other">Udfør %d patches</item>
+        <item quantity="one">Udfør %s patch</item>
+        <item quantity="other">Udfør %s patches</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="one">%d APK-fil</item>
-        <item quantity="other">%d APK-filer</item>
+        <item quantity="one">%s APK-fil</item>
+        <item quantity="other">%s APK-filer</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Fjernet %1$d udated patch fra gemte valg</item>
-        <item quantity="other">Fjernet %1$d udated patches fra gemte valg</item>
+        <item quantity="one">Fjernet %s forældet patch fra gemt udvalg</item>
+        <item quantity="other">Fjernet %s forældede patches fra gemt udvalg</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%1$d kilde installeret</item>
-        <item quantity="other">%1$d kilder installeret</item>
+        <item quantity="one">%s kilde installeret</item>
+        <item quantity="other">%s kilder installeret</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d stikproeve valgt</item>
-        <item quantity="other">%d stikproever valgt</item>
+        <item quantity="one">%s patch valgt</item>
+        <item quantity="other">%s patches valgt</item>
     </plurals>
 </resources>

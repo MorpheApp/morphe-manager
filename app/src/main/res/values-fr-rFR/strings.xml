@@ -162,7 +162,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="home_app_info_patches_name_fallback">Sans nom</string>
     <string name="home_app_info_patches_replace_fail">Échec de l\'importation des patchs : %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK original introuvable. Impossible de repatcher cette application</string>
-    <string name="home_app_info_original_package_name">Nom de package d\'original</string>
+    <string name="home_app_info_original_package_name">Nom de package original</string>
     <string name="home_app_info_applied_patches">Patchs appliqués</string>
     <string name="home_app_info_patch_source_used">Source de patch utilisée</string>
     <string name="home_app_info_install_type">Type d\'installation</string>

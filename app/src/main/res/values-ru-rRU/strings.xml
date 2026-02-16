@@ -284,7 +284,7 @@
     <string name="settings_appearance_dynamic">Материальное «Вы»</string>
     <string name="settings_appearance_accent_color">Цвет акцента</string>
     <string name="settings_appearance_pure_black">Чисто черный</string>
-    <string name="settings_appearance_pure_black_description">Используйте настоящие черные фоны для OLED дисплеев</string>
+    <string name="settings_appearance_pure_black_description">Используйте настоящие черные фоны для Oled / Amoled дисплеев</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Язык приложения YouTube</string>
     <string name="settings_appearance_app_language_current">Текущий язык</string>
@@ -314,12 +314,12 @@
     <string name="settings_advanced_strip_unused_libs">Удалить неиспользуемые нативные библиотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Удалить нативные библиотеки для неподдерживаемых архитектур CPU из пропатченных приложений</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
-    <string name="settings_advanced_github_pat">GitHub PAT (Личный токен доступа)</string>
-    <string name="settings_advanced_github_pat_description">Требуется для pull request источников</string>
+    <string name="settings_advanced_github_pat">GitHub Токен</string>
+    <string name="settings_advanced_github_pat_description">Обязательно для источников запросов на слияние</string>
     <string name="settings_advanced_github_pat_configured">Токен настроен</string>
     <string name="settings_advanced_github_pat_how_to_get">Как получить токен</string>
     <string name="settings_advanced_github_pat_dialog_title">Установить Персональный Токен Доступа GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Установите Личный Токен Доступа GitHub, чтобы добавить запросы на слияние как внешние источники. Создайте Токен с областью видимости. public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Установите Персональный Токен Доступа GitHub, чтобы добавить запросы на слияние как внешние источники. Создайте Токен с областью видимости. public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Включить в настройки экспорта</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Добавляет этот Токен к экспортируемым настройкам менеджера</string>
     <string name="settings_advanced_github_pat_export_warning">Не распространяйте свой Токен. Если вы включаете его в экспорт настроек, сохраните этот файл приватным, поскольку он содержит токен</string>

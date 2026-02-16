@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d parche</item>
-        <item quantity="other">%d parches</item>
+        <item quantity="one">%s parche</item>
+        <item quantity="other">%s parches</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%d opción de parche</item>
-        <item quantity="other">%d opciones de parche</item>
+        <item quantity="one">%s opción de parche</item>
+        <item quantity="other">%s opciones de parche</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%d fuente</item>
-        <item quantity="other">%d fuentes</item>
+        <item quantity="one">%s fuente</item>
+        <item quantity="other">%s fuentes</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%d paquete</item>
-        <item quantity="other">%d paquetes</item>
+        <item quantity="one">%s paquete</item>
+        <item quantity="other">%s paquetes</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Ejecutar %d parche</item>
-        <item quantity="other">Ejecutar %d parches</item>
+        <item quantity="one">Ejecutar %s parche</item>
+        <item quantity="other">Ejecutar %s parches</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="one">%d archivo APK</item>
-        <item quantity="other">%d archivos APK</item>
+        <item quantity="one">%s archivo APK</item>
+        <item quantity="other">%s archivos APK</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Eliminado %1$d parche obsoleto de la selección guardada</item>
-        <item quantity="other">Eliminados %1$d parches obsoletos de la selección guardada</item>
+        <item quantity="one">Eliminado %s parche obsoleto de la selección guardada</item>
+        <item quantity="other">Eliminados %s parches obsoletos de la selección guardada</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%1$d fuente instalada</item>
-        <item quantity="other">%1$d fuentes instaladas</item>
+        <item quantity="one">%s fuente instalada</item>
+        <item quantity="other">%s fuentes instaladas</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d parche seleccionado</item>
-        <item quantity="other">%d parches seleccionados</item>
+        <item quantity="one">%s parche seleccionado</item>
+        <item quantity="other">%s parches seleccionados</item>
     </plurals>
 </resources>

@@ -90,7 +90,7 @@
     <string name="home_download_instructions_continue">ไปที่ APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">เลือก APK ที่คุณดาวน์โหลด</string>
-    <string name="home_file_picker_prompt_description">ตอนนี้เลือกไฟล์ APK ที่คุณดาวน์โหลดมาเพิ่ง</string>
+    <string name="home_file_picker_prompt_description">ตอนนี้เลือกไฟล์ %1$s APK ที่คุณดาวน์โหลดมาแล้ว</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">เปิดไฟล์ APK ที่ดาวน์โหลดแล้ว</string>
     <string name="home_file_picker_prompt_open_apk">เปิดไฟล์ APK</string>
     <string name="home_recommended_version">เวอร์ชันแนะนำ</string>

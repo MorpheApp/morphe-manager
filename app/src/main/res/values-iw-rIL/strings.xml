@@ -80,7 +80,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">הורד את ה-APK המקורי</string>
     <string name="home_download_instructions_steps_title">הוראות:</string>
-    <string name="home_download_instructions_step1">กด \'%1$s\' buttox Shirah</string>
+    <string name="home_download_instructions_step1">לחץ על הכפתור \'%1$s\' למטה כדי להוריד</string>
     <string name="home_download_instructions_step2_part1">גלול מטה בדף האינטרנט ולחץ על</string>
     <string name="home_download_instructions_download_button_toast">לחץ הורד באתר, ולא כאן 😊</string>
     <string name="home_download_instructions_step3">המתן להשלמת ההורדה, ו&lt;b&gt;אל תתקין&lt;/b&gt; את ה-APK</string>
@@ -101,7 +101,7 @@
     <string name="home_no_patches_for_app">אין תיקונים זמינים עבור אפליקציה זו</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">מצב מומחה</string>
-    <string name="expert_mode_subtitle_extended_format">%1$ס של %2$ס נבחרו</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s מתוך %2$s נבחר</string>
     <string name="expert_mode_search">חפש תיקונים</string>
     <string name="expert_mode_proceed">המשך לתיקון</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
@@ -250,7 +250,7 @@
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
     <string name="download_apk">הורד קובץ APK</string>
     <string name="plugin_activity_dialog_body">נדרש אינטראקציה של המשתמש כדי להמשיך עם תוסף זה</string>
-    <string name="patcher_process_exit_message">הליך הפצת הריפארי הסתיים עם קוד %1$ס</string>
+    <string name="patcher_process_exit_message">פועל הפייסר יצא עם קוד %1$s</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
     <string name="install_timeout_message">ההתקנה לא הסתיימה. בדוק את דיאלוג ההתקנה של המערכת ונסה שוב</string>
@@ -384,7 +384,7 @@
     <string name="installer_hint_storage">אין מספיק מקום אחסון להתקנה</string>
     <string name="installer_hint_timeout">ההתקנה ארכה יותר מדי. נסה שוב</string>
     <string name="installer_hint_aborted">ההתקנה בוטלה</string>
-    <string name="installer_external_launched">פותח את %1$s...</string>
+    <string name="installer_external_launched">פענוח %1$s…</string>
     <string name="installer_external_timeout">%1$s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב</string>
     <string name="installer_external_success">%1$s דיווח על התקנה מוצלחת</string>
     <string name="installer_unavailable_title">%s אינו זמין</string>

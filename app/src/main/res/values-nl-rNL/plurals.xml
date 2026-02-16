@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d patch</item>
-        <item quantity="other">%d patches</item>
+        <item quantity="one">%s patch</item>
+        <item quantity="other">%s patches</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%d optie</item>
-        <item quantity="other">%d opties</item>
+        <item quantity="one">%s patch optie</item>
+        <item quantity="other">%s patch opties</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%d bron</item>
-        <item quantity="other">%d bronnen</item>
+        <item quantity="one">%s bron</item>
+        <item quantity="other">%s bronnen</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%d pakket</item>
-        <item quantity="other">%d pakketten</item>
+        <item quantity="one">%s pakket</item>
+        <item quantity="other">%s pakketten</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Voer %d patch uit</item>
-        <item quantity="other">Voer %d patches uit</item>
+        <item quantity="one">Execute %s patch</item>
+        <item quantity="other">Execute %s patches</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="one">%d APK-bestand</item>
-        <item quantity="other">%d APK-bestanden</item>
+        <item quantity="one">%s APK-bestand</item>
+        <item quantity="other">%s APK-bestanden</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Verwijderd %1$d verouderde patch uit de geselecteerde opslag</item>
-        <item quantity="other">Verwijderd %1$d verouderde patches uit de geselecteerde opslag</item>
+        <item quantity="one">Verwijderd %s verouderde patch uit opgeslagen selectie</item>
+        <item quantity="other">Verwijderd %s verouderde patches uit opgeslagen selectie</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%1$d bronnen geïnstalleerd</item>
-        <item quantity="other">%1$d bronnen geïnstalleerd</item>
+        <item quantity="one">%s bron geïnstalleerd</item>
+        <item quantity="other">%s bronnen geïnstalleerd</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d patch geselecteerd</item>
-        <item quantity="other">%d patches geselecteerd</item>
+        <item quantity="one">%s patch geselecteerd</item>
+        <item quantity="other">%s patches geselecteerd</item>
     </plurals>
 </resources>

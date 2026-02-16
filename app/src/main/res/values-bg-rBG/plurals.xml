@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d пач</item>
-        <item quantity="other">%d пач</item>
+        <item quantity="one">%s пач</item>
+        <item quantity="other">%s пача</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%d опция</item>
-        <item quantity="other">%d опции</item>
+        <item quantity="one">%s опция</item>
+        <item quantity="other">%s пач опции</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%d източник</item>
-        <item quantity="other">%d източника</item>
+        <item quantity="one">%s източник</item>
+        <item quantity="other">%s източника</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%d пакет</item>
-        <item quantity="other">%d пакета</item>
-    </plurals>
-    <plurals name="patches_executed">
-        <item quantity="one">Приложи %d пач</item>
-        <item quantity="other">Приложи %d пача</item>
+        <item quantity="one">%s пакет</item>
+        <item quantity="other">%s пакета</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="one">%d APK файл</item>
-        <item quantity="other">%d APK файла</item>
+        <item quantity="one">%s APK файл</item>
+        <item quantity="other">%s файлове APK</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Изтрих %1$d изтегли избрани стари патча</item>
-        <item quantity="other">Изтрих %1$d изтегли избрани стари патча</item>
+        <item quantity="one">Изтрих %s излишен патч от запазеното избор</item>
+        <item quantity="other">Изтрих %s излишни патча от запазеното избор</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%1$d източник инсталиран</item>
-        <item quantity="other">%1$d източника инсталирани</item>
+        <item quantity="one">%s източник инсталиран</item>
+        <item quantity="other">%s източника инсталирани</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d избрана латка</item>
-        <item quantity="other">%d избрани латки</item>
+        <item quantity="one">%s патч избра</item>
+        <item quantity="other">%s избрани латки</item>
     </plurals>
 </resources>

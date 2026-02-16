@@ -100,7 +100,7 @@ Sovittuvien versioiden:"</string>
     <string name="home_no_patches_for_app">Ei patcheja saatavilla tälle sovellukselle</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Asiantuntijan tila</string>
-    <string name="expert_mode_subtitle_extended_format">%1$sista %2$sta valittua</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s kpl %2$s valittu</string>
     <string name="expert_mode_search">Etsi patcheja</string>
     <string name="expert_mode_proceed">Jatka patchaamista</string>
     <string name="expert_mode_disable_all">Poista kaikki</string>

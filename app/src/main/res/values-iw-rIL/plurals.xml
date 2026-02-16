@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d תיקון</item>
-        <item quantity="two">%d תיקונים</item>
-        <item quantity="many">%d תיקונים</item>
-        <item quantity="other">%d תיקונים</item>
+        <item quantity="one">%s תיקון</item>
+        <item quantity="two">%s תיקונים</item>
+        <item quantity="many">%s תיקונים</item>
+        <item quantity="other">%s תיקונים</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%d תוספת</item>
-        <item quantity="two">%d תוספות</item>
-        <item quantity="many">%d תוספות</item>
-        <item quantity="other">%d תוספות</item>
+        <item quantity="one">%s אופציה של תיקון</item>
+        <item quantity="two">%s אופציות של תיקון</item>
+        <item quantity="many">%s אופציות של תיקון</item>
+        <item quantity="other">%s אופציות של תיקון</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%d מקור</item>
-        <item quantity="two">%d מקורות</item>
-        <item quantity="many">%d מקורות</item>
-        <item quantity="other">%d מקורות</item>
+        <item quantity="one">%s מקור</item>
+        <item quantity="two">%s מקורות</item>
+        <item quantity="many">%s מקורות</item>
+        <item quantity="other">%s מקורות</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%d חבילה</item>
-        <item quantity="two">%d חבילות</item>
-        <item quantity="many">%d חבילות</item>
-        <item quantity="other">%d חבילות</item>
+        <item quantity="one">%s חבילה</item>
+        <item quantity="two">%s חבילות</item>
+        <item quantity="many">%s חבילות</item>
+        <item quantity="other">%s חבילות</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">הפעל %d תיקון</item>
-        <item quantity="two">הפעל %d תיקונים</item>
-        <item quantity="many">הפעל %d תיקונים</item>
-        <item quantity="other">הפעל %d תיקונים</item>
+        <item quantity="one">התבצע %s תיקון</item>
+        <item quantity="two">התבצע %s תיקונים</item>
+        <item quantity="many">התבצע %s תיקונים</item>
+        <item quantity="other">התבצע %s תיקונים</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="one">%d קובץ APK</item>
-        <item quantity="two">%d קובצי APK</item>
-        <item quantity="many">%d קובצי APK</item>
-        <item quantity="other">%d קובצי APK</item>
+        <item quantity="one">%s קובץ APK</item>
+        <item quantity="two">%s קבצי APK</item>
+        <item quantity="many">%s קבצי APK</item>
+        <item quantity="other">%s קבצי APK</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">הסר %1$d תיקון מיושן מהסלקציה המוגמרת</item>
-        <item quantity="two">הסר %1$d תיקונים מיושנים מהסלקציה המוגמרת</item>
-        <item quantity="many">הסר %1$d תיקונים מיושנים מהסלקציה המוגמרת</item>
-        <item quantity="other">הסר %1$d תיקונים מיושנים מהסלקציה המוגמרת</item>
+        <item quantity="one">הסר %s תיקון מיושן מבחירת שמור</item>
+        <item quantity="two">הסר %s תיקונים מיושנים מבחירת שמור</item>
+        <item quantity="many">הסר %s תיקונים מיושנים מבחירת שמור</item>
+        <item quantity="other">הסר %s תיקונים מיושנים מבחירת שמור</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%1$d מקורstalled</item>
-        <item quantity="two">%1$d מקורותstalled</item>
-        <item quantity="many">%1$d מקורותstalled</item>
-        <item quantity="other">%1$d מקורותstalled</item>
+        <item quantity="one">%s מקורות מותקנות</item>
+        <item quantity="two">%s מקורות מותקנות</item>
+        <item quantity="many">%s מקורות מותקנות</item>
+        <item quantity="other">%s מקורות מותקנות</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d תוספת נבחרה</item>
-        <item quantity="two">%d תוספות נבחרות</item>
-        <item quantity="many">%d תוספות נבחרות</item>
-        <item quantity="other">%d תוספות נבחרות</item>
+        <item quantity="one">%s תיקון נבחר</item>
+        <item quantity="two">%s תיקונים נבחרים</item>
+        <item quantity="many">%s תיקונים נבחרים</item>
+        <item quantity="other">%s תיקונים נבחרים</item>
     </plurals>
 </resources>
