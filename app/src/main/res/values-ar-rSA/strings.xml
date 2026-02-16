@@ -308,9 +308,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
     <string name="settings_advanced_expert_mode">وضع الخبير</string>
-    <string name="settings_advanced_expert_mode_description">تمكين الإعدادات المتقدمة للتمكين والتخصيص</string>
-    <string name="settings_advanced_expert_mode_dialog_title">هل تريد التبديل إلى الوضع الخبير؟</string>
-    <string name="settings_advanced_expert_mode_dialog_message">الوضع الخبير يوفر المزيد من التحكم في تطبيق التثبيتات، ولكن الإعداد الخاطئ للوضع الخبير يمكن أن يوقف التطبيق عن العمل</string>
+    <string name="settings_advanced_expert_mode_description">تفعيل إعدادات تعديل Morphe المتقدمة وخيارات التخصيص</string>
+    <string name="settings_advanced_expert_mode_dialog_title">تمكين وضع الخبير؟</string>
+    <string name="settings_advanced_expert_mode_dialog_message">وضع الخبير يوفر مزيدًا من التحكم في كيفية تطبيق التعديلات، ولكن الإعداد الخاطئ لوضع الخبير يمكن أن يوقف التطبيق عن العمل</string>
     <string name="settings_advanced_strip_unused_libs">إزالة المكتبات الأصلية غير المستخدمة</string>
     <string name="settings_advanced_strip_unused_libs_description">حذف المكتبات الأصلية لبنى المعالجات غير المدعومة من التطبيقات المعدلة</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

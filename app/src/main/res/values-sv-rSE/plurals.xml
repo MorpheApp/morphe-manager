@@ -33,7 +33,7 @@
         <item quantity="other">%1$d källor installerade</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%d vald korrigering</item>
-        <item quantity="other">%d valda korrigeringar</item>
+        <item quantity="one">%d korrigering vald</item>
+        <item quantity="other">%d korrigeringar valda</item>
     </plurals>
 </resources>

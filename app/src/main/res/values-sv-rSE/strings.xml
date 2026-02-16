@@ -13,6 +13,7 @@
     <string name="home_update_error">Uppdateringen misslyckades</string>
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
+    <string name="home_update_progress_format">%1$s har bearbetats</string>
     <string name="home_update_success">Uppdateringen av källor är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
@@ -99,6 +100,7 @@ Kompatibla versioner:"</string>
     <string name="home_no_patches_for_app">Inga korrigeringar är tillgängliga för den här appen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertläge</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s av %2$s har valts</string>
     <string name="expert_mode_search">Sök efter korrigeringar</string>
     <string name="expert_mode_proceed">Fortsätt till appkorrigeringen</string>
     <string name="expert_mode_disable_all">Inaktivera alla</string>
@@ -304,10 +306,14 @@ Kompatibla versioner:"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
+    <string name="settings_advanced_expert_mode_description">Aktivera komplexa korrigeringsinställningar och anpassningsalternativ för Morphe</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläget?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur korrigeringar tillämpas, men om du felaktigt konfigurerar inställningar i expertläget kan det leda till att appen inte fungerar</string>
     <string name="settings_advanced_strip_unused_libs">Ta bort oanvända inbyggda bibliotek</string>
     <string name="settings_advanced_strip_unused_libs_description">Ta bort inbyggda bibliotek för CPU-arkitekturer som inte stöds från korrigerade appar.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub-PAT</string>
+    <string name="settings_advanced_github_pat_description">Krävs för att använda hämtningsbegäranden som källor</string>
     <string name="settings_advanced_github_pat_configured">Token konfigurerad</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
@@ -487,7 +493,25 @@ Bildernas mått ska vara följande:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Korrigeringsurval</string>
     <string name="settings_system_patch_selections_description">Hantera sparade korrigeringsurval och -alternativ. Dessa blir kvar om appar avinstalleras</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Återställ alla urval?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Återställ paketurval?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Återställ källurval?</string>
     <string name="settings_system_patch_selection_no_saved">Inga sparade korrigeringsurval</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s från %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Källa %s</string>
+    <string name="settings_system_patch_selection_will_delete">Det här tar bort:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Det här tar bort alla sparade korrigeringsurval för alla paket och källor permanent</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Det här tar bort alla sparade korrigeringsurval för %s från alla källor permanent</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Det här tar bort sparade korrigeringsurval för %1$s i källa %2$s permanent</string>
+    <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
+    <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
+    <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
+    <string name="settings_system_import_source_data_success">Källdata har importerats</string>
+    <string name="settings_system_patch_details_title">Korrigeringsinformation</string>
+    <string name="settings_system_selected_patches_title">Valda korrigeringar (%s)</string>
+    <string name="settings_system_patch_options_title">Korrigeringsalternativ (%s)</string>
+    <string name="settings_system_no_patches_or_options">Inga korrigeringar eller alternativ har sparats</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
@@ -502,6 +526,7 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="reset">Återställ</string>
+    <string name="reset_all">Återställ alla</string>
     <string name="confirm">Bekräfta</string>
     <string name="warning">Varning</string>
     <string name="error_">Fel</string>

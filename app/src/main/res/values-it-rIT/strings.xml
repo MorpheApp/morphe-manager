@@ -310,7 +310,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_advanced_expert_mode">Modalità esperto</string>
     <string name="settings_advanced_expert_mode_description">Abilita le impostazioni avanzate e le opzioni di personalizzazione del patching complesso Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Abilitare la modalità esperto?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">La modalità esperto fornisce un maggiore controllo su come vengono applicati i patch, ma la configurazione errata delle impostazioni in modalità esperto può comportare un\'applicazione non funzionante</string>
+    <string name="settings_advanced_expert_mode_dialog_message">La modalità esperto fornisce un maggiore controllo su come vengono applicate le patch, ma la configurazione errata delle impostazioni in modalità esperto può esitare in un\'applicazione non funzionante</string>
     <string name="settings_advanced_strip_unused_libs">Elimina le librerie native non utilizzate</string>
     <string name="settings_advanced_strip_unused_libs_description">Elimina i file delle librerie native dalle app patchate per le architetture CPU non supportate</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -495,9 +495,9 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Selezioni delle patch</string>
     <string name="settings_system_patch_selections_description">Gestisci le selezioni delle patch salvate e le opzioni. Queste persistono dopo la disinstallazione dell\'app</string>
-    <string name="settings_system_patch_selection_reset_all_confirm_title">Ripristina tutte le selezioni?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Ripristina le selezioni del pacchetto?</string>
-    <string name="settings_system_patch_selection_reset_source_confirm_title">Ripristina la selezione della fonte?</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Ripristinare tutte le selezioni?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Ripristinare le selezioni del pacchetto?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Ripristinare la selezione della fonte?</string>
     <string name="settings_system_patch_selection_no_saved">Nessuna selezione delle patch salvata</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s su %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
@@ -591,7 +591,7 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="ready_to_install_update">Aggiornamento pronto per l\'installazione</string>
     <string name="update_completed">Aggiornamento installato</string>
     <string name="install_update_manager_failed">Impossibile installare l\'aggiornamento</string>
-    <string name="installing_manager_update">Installazione aggiornamento in corso…</string>
+    <string name="installing_manager_update">Installazione dell\'aggiornamento in corso…</string>
     <string name="downloading_manager_update">Download dell\'aggiornamento in corso…</string>
     <string name="download_manager_failed">Download dell\'aggiornamento non riuscito: %s</string>
     <string name="failed_to_check_updates">Impossibile verificare la presenza degli aggiornamenti: %s</string>
