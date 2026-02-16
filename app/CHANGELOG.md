@@ -1,3 +1,32 @@
+# app [1.7.0](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0...v1.7.0) (2026-02-16)
+
+
+### Bug Fixes
+
+* Better handle opening APKMirror links on weirdo home routers ([627f075](https://github.com/MorpheApp/morphe-manager/commit/627f07571646ea5bda5b60f7198b9f77ed4be27b))
+* Change to old GitHub release logic ([94c2fb7](https://github.com/MorpheApp/morphe-manager/commit/94c2fb70f389daff493dbc2deb02c0c906940407))
+* Commit app-release.json after semantic release ([4f89c8c](https://github.com/MorpheApp/morphe-manager/commit/4f89c8c5e02c375f04f0540b94cb4b1a817c120f))
+* Get patches release info from static JSON file ([a33ba20](https://github.com/MorpheApp/morphe-manager/commit/a33ba2053a75826eec6c106611ba9e5f8276ed0c))
+* Improve patch dialog logic and fix app info display issues ([#182](https://github.com/MorpheApp/morphe-manager/issues/182)) ([a3153e9](https://github.com/MorpheApp/morphe-manager/commit/a3153e91a6c609a71dbc7850e5edc57f1394f915))
+* Incorrect content color for badge style ([f4ad9aa](https://github.com/MorpheApp/morphe-manager/commit/f4ad9aaa70d827ab5d511ed63c0eb7bebb999f07))
+* Increase default process memory ([557ff78](https://github.com/MorpheApp/morphe-manager/commit/557ff784d8ac223de35ed52ddf20dc9aa62125d5))
+* Prefer IPv4 connections over IPv6 ([e665e59](https://github.com/MorpheApp/morphe-manager/commit/e665e595ac50fb7925fd6814ce89beebcd4fe453))
+* Publish release before updating app-release.json ([f1c556a](https://github.com/MorpheApp/morphe-manager/commit/f1c556aa7b9d163297152c53b348f87a6960fe1a))
+* Refactor changelog component and add shimmer effect ([44d0318](https://github.com/MorpheApp/morphe-manager/commit/44d03189c2e0f1ee1a6971b7cd05f8d5b98a7651))
+* Resolve incorrect string formatters for some translations ([13d0b8c](https://github.com/MorpheApp/morphe-manager/commit/13d0b8ce8fefe8ee1d6cfda3c6a57ba1e8aa4376))
+* Resolve Morphe showing new release is available but cannot download ([c567195](https://github.com/MorpheApp/morphe-manager/commit/c567195dbae13ca1a9931edb1d472c77ecca9942))
+* Some patch options fields are not available for input ([5853168](https://github.com/MorpheApp/morphe-manager/commit/585316830a235a3d27781fe191a692c5d28ea6dc))
+* Update app-release.json after semantic release finishes ([77db06d](https://github.com/MorpheApp/morphe-manager/commit/77db06d0169eb7cece281d6223b2e472113d1631))
+* Update release build ([0d563e6](https://github.com/MorpheApp/morphe-manager/commit/0d563e65e6c15d121588da190d4b9c7dd8d891cd))
+
+
+### Features
+
+* Get manager release info from static JSON file ([#186](https://github.com/MorpheApp/morphe-manager/issues/186)) ([c75569d](https://github.com/MorpheApp/morphe-manager/commit/c75569df4f5b6d85acf0ad6e4385f6320fc7b0a8))
+* New patch selections dialog ([#197](https://github.com/MorpheApp/morphe-manager/issues/197)) ([9f363ff](https://github.com/MorpheApp/morphe-manager/commit/9f363ff85aad65a8c6bcbb4d8ea20b2c2ba34374))
+* Show Expert mode confirmation dialog ([db64938](https://github.com/MorpheApp/morphe-manager/commit/db64938470193e0c5a3b615ab09694f028a39236))
+* Use APKEditor for APKM merging ([#137](https://github.com/MorpheApp/morphe-manager/issues/137)) ([9ed8f5b](https://github.com/MorpheApp/morphe-manager/commit/9ed8f5b0145cfed48662eb4da385525fe29cfe2a))
+
 # app [1.7.0-dev.18](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.17...v1.7.0-dev.18) (2026-02-16)
 
 
