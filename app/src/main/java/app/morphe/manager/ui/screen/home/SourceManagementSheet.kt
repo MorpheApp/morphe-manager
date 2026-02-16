@@ -346,7 +346,8 @@ private fun BundleManagementCard(
                         icon = Icons.Outlined.Info,
                         title = stringResource(R.string.patches),
                         value = patchCount.toString(),
-                        onClick = onPatchesClick
+                        onClick = onPatchesClick,
+                        enabled = isEnabled
                     )
 
                     // Version
@@ -552,7 +553,8 @@ private fun BundleInfoCard(
     title: String,
     value: String,
     onClick: () -> Unit,
-    showChevron: Boolean = true
+    showChevron: Boolean = true,
+    enabled: Boolean = true
 ) {
     val contentDesc = "$title: $value"
 
@@ -562,8 +564,13 @@ private fun BundleInfoCard(
             role = Role.Button
         },
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.secondaryContainer,
-        onClick = onClick
+        color = if (enabled) {
+            MaterialTheme.colorScheme.secondaryContainer
+        } else {
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+        },
+        onClick = onClick,
+        enabled = enabled
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
