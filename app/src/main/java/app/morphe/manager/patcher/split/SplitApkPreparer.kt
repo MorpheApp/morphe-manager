@@ -17,7 +17,7 @@ import java.util.zip.ZipFile
 
 object SplitApkPreparer {
     private val SUPPORTED_EXTENSIONS = setOf("apks", "apkm", "xapk")
-//    private const val SKIPPED_STEP_PREFIX = "[skipped]"
+    private const val SKIPPED_STEP_PREFIX = "[skipped]"
     private val KNOWN_ABIS = setOf("armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64")
     private val DENSITY_QUALIFIERS =
         setOf("ldpi", "mdpi", "tvdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi")
@@ -33,7 +33,11 @@ object SplitApkPreparer {
         source: File,
         workspace: File,
         logger: Logger = defaultLogger,
-        stripNativeLibs: Boolean = false
+        stripNativeLibs: Boolean = false,
+        skipUnneededSplits: Boolean = false,
+        onProgress: ((String) -> Unit)? = null,
+        onSubSteps: ((List<String>) -> Unit)? = null,
+        sortMergedApkEntries: Boolean = false
     ): PreparationResult {
         if (!isSplitArchive(source)) {
             return PreparationResult(source, merged = false)
@@ -47,7 +51,7 @@ object SplitApkPreparer {
         return try {
             val sourceSize = source.length()
             logger.info("Preparing split APK bundle from ${source.name} (size=${sourceSize} bytes)")
-            val entries = extractSplitEntries(source, modulesDir)
+            val entries = extractSplitEntries(source, modulesDir, onProgress)
             logger.info("Found ${entries.size} split modules: ${entries.joinToString { it.name }}")
             logger.info("Module sizes: ${entries.joinToString { "${it.name}=${it.file.length()} bytes" }}")
             val mergeOrder = Merger.listMergeOrder(modulesDir.toPath())
@@ -56,7 +60,7 @@ object SplitApkPreparer {
                 if (stripNativeLibs) {
                     addAll(mergeOrder.filter { shouldSkipModule(it, supportedTokens) })
                 }
-                if (false) { // Morphe "skip unused bundles"
+                if (skipUnneededSplits) {
                     val localeTokens = deviceLocaleTokens()
                     val densityQualifier = deviceDensityQualifier()
                     addAll(
@@ -70,19 +74,22 @@ object SplitApkPreparer {
                     )
                 }
             }
-//            onSubSteps?.invoke(buildSplitSubSteps(mergeOrder, skippedModules, stripNativeLibs))
+            onSubSteps?.invoke(buildSplitSubSteps(mergeOrder, skippedModules, stripNativeLibs))
 
             Merger.merge(
                 apkDir = modulesDir.toPath(),
                 outputApk = mergedApk,
                 skipModules = skippedModules,
-//                onProgress = onProgress
+                onProgress = onProgress,
+                sortApkEntries = sortMergedApkEntries
             )
 
             if (stripNativeLibs) {
+                onProgress?.invoke("Stripping native libraries")
                 NativeLibStripper.strip(mergedApk)
             }
 
+            onProgress?.invoke("Finalizing merged APK")
             persistMergedIfDownloaded(source, mergedApk, logger)
 
             logger.info(
@@ -111,6 +118,36 @@ object SplitApkPreparer {
         }.getOrDefault(false)
 
     private data class ExtractedModule(val name: String, val file: File)
+
+    private fun buildSplitSubSteps(
+        mergeOrder: List<String>,
+        skippedModules: Set<String>,
+        stripNativeLibs: Boolean
+    ): List<String> {
+        val steps = mutableListOf<String>()
+        steps.add("Extracting split APKs")
+        val skippedLookup = skippedModules
+            .map { it.lowercase(Locale.ROOT) }
+            .toSet()
+        val (skipped, remaining) = mergeOrder.partition {
+            skippedLookup.contains(it.lowercase(Locale.ROOT))
+        }
+        (skipped + remaining).forEach { name ->
+            val label = "Merging $name"
+            val entry = if (skippedLookup.contains(name.lowercase(Locale.ROOT))) {
+                "$SKIPPED_STEP_PREFIX$label"
+            } else {
+                label
+            }
+            steps.add(entry)
+        }
+        steps.add("Writing merged APK")
+        if (stripNativeLibs) {
+            steps.add("Stripping native libraries")
+        }
+        steps.add("Finalizing merged APK")
+        return steps
+    }
 
     private fun supportedAbiTokens(): Set<String> =
         selectPrimaryAbi(Build.SUPPORTED_ABIS.toList())
@@ -214,8 +251,8 @@ object SplitApkPreparer {
             localeTokens.contains(language)
         } else {
             localeTokens.contains("${language}_r$region") ||
-                localeTokens.contains("${language}_$region") ||
-                localeTokens.contains("${language}-$region")
+                    localeTokens.contains("${language}_$region") ||
+                    localeTokens.contains("${language}-$region")
         }
     }
 
@@ -281,6 +318,7 @@ object SplitApkPreparer {
                     throw IOException("Split archive does not contain any APK entries.")
                 }
 
+                onProgress?.invoke("Extracting split APKs")
                 apkEntries.forEach { entry ->
                     val entryName = entry.name.substringAfterLast('/')
                     val destination = targetDir.resolve(entryName)
