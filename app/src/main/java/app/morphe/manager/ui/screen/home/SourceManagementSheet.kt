@@ -7,6 +7,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.clickable
@@ -25,7 +26,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
@@ -264,14 +264,24 @@ private fun BundleManagementCard(
     val disabledState = stringResource(R.string.disabled)
     val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
 
+    val isEnabled = bundle.enabled
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         tonalElevation = 3.dp,
-        color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+        color = if (isEnabled) {
+            MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+        } else {
+            // Disabled state - use error container with low opacity
+            MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.15f)
+        },
+        border = if (!isEnabled) {
+            BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.5f))
+        } else {
+            BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+        }
     ) {
-        val isEnabled = bundle.enabled
-
         // Build content description
         val contentDesc = buildString {
             append(bundle.displayTitle)
@@ -336,8 +346,7 @@ private fun BundleManagementCard(
                         icon = Icons.Outlined.Info,
                         title = stringResource(R.string.patches),
                         value = patchCount.toString(),
-                        onClick = onPatchesClick,
-                        enabled = isEnabled
+                        onClick = onPatchesClick
                     )
 
                     // Version
@@ -346,8 +355,7 @@ private fun BundleManagementCard(
                         icon = Icons.Outlined.Update,
                         title = stringResource(R.string.version),
                         value = bundle.version?.removePrefix("v") ?: "N/A",
-                        onClick = onVersionClick,
-                        enabled = isEnabled
+                        onClick = onVersionClick
                     )
 
                     // Metadata section
@@ -362,9 +370,7 @@ private fun BundleManagementCard(
                     if (bundle is RemotePatchBundle) {
                         FilledTonalButton(
                             onClick = onOpenInBrowser,
-                            enabled = isEnabled,
                             modifier = Modifier
-                                .alpha(if (isEnabled) 1f else 0.5f)
                                 .fillMaxWidth()
                                 .height(48.dp)
                                 .semantics {
@@ -546,8 +552,7 @@ private fun BundleInfoCard(
     title: String,
     value: String,
     onClick: () -> Unit,
-    showChevron: Boolean = true,
-    enabled: Boolean = true
+    showChevron: Boolean = true
 ) {
     val contentDesc = "$title: $value"
 
@@ -557,10 +562,8 @@ private fun BundleInfoCard(
             role = Role.Button
         },
         shape = RoundedCornerShape(12.dp),
-        color = if (enabled) MaterialTheme.colorScheme.secondaryContainer
-        else MaterialTheme.colorScheme.surfaceVariant,
-        onClick = onClick,
-        enabled = enabled
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        onClick = onClick
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
