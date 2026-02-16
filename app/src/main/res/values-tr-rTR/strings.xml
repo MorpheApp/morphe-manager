@@ -13,7 +13,7 @@
     <string name="home_update_error">Güncelleme başarısız</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
     <string name="home_updating_sources">Kaynaklar güncelleniyor…</string>
-    <string name="home_update_progress_format">%1$s işlenmiştir</string>
+    <string name="home_update_progress_format">%1$s işlendi</string>
     <string name="home_update_success">Kaynak güncellemesi tamamlandı</string>
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
@@ -52,7 +52,7 @@
     <string name="sources_dialog_view_any_version">Herhangi bir sürüm</string>
     <string name="sources_dialog_view_any_package">Herhangi bir paket</string>
     <string name="sources_dialog_add_source">Yama kaynağı ekle</string>
-    <string name="sources_dialog_delete_confirm_message">Kaynak \"%s\"\'yi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</string>
+    <string name="sources_dialog_delete_confirm_message">Kaynak \"%s\"\'yi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz</string>
     <string name="sources_dialog_remote">Uzak</string>
     <string name="sources_dialog_remote_url">Kaynak URL</string>
     <string name="sources_dialog_remote_url_formats_title">Örnekler:</string>
@@ -63,18 +63,18 @@
     <string name="sources_dialog_preinstalled">Ön yüklü</string>
     <string name="sources_update_success">Güncelleme başarılı</string>
     <string name="sources_update_unavailable">Güncelleme mevcut değil</string>
-    <string name="sources_download_fail">Kaynağları indirmek başarısız: %s</string>
+    <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'iniz var mı?</string>
     <string name="home_apk_availability_dialog_simple">%1$s\'i yamalamak için gerekli yamalanmamış APK sürümü:</string>
     <string name="home_apk_availability_dialog_expert">"Yamalanmamış %1$s APK'iniz var mı?
 
- Uyumlu sürümler:"</string>
+Uyumlu sürümler:"</string>
     <string name="home_apk_availability_recommended_label">Tavsiye edilen</string>
-    <string name="home_apk_availability_unpatched_label">Yakınmıyan</string>
+    <string name="home_apk_availability_unpatched_label">Yamalanmamış</string>
     <string name="home_apk_availability_yes">Evet, bende var</string>
     <string name="home_apk_availability_no">Hayır, bulmama yardım et</string>
-    <string name="home_apk_use_saved_with_version">Kayıtlı APK (v%s) kullanın</string>
+    <string name="home_apk_use_saved_with_version">Kaydedilmiş APK (v%s) kullan</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Tespit için tekrar APK dosyası seçin</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
@@ -155,7 +155,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="home_app_info_uninstall_app_confirmation">Bu uygulamayı kaldırmak istediğinizden emin misiniz?</string>
     <string name="home_app_info_remove_app_warning">Bu aşağıdakileri kalıcı olarak silecektir:</string>
     <string name="home_app_info_delete_item_database">Veritabanı girişi</string>
-    <string name="home_app_info_delete_item_patched_apk">Yama edilmiş APK dosyası</string>
+    <string name="home_app_info_delete_item_patched_apk">Yamalanmış APK dosyası</string>
     <string name="home_app_info_delete_item_original_apk">Orijinal APK dosyası</string>
     <string name="home_app_info_delete_preservation_note">Yama seçiminiz ve seçenekler gelecekteki yama için korunacak</string>
     <string name="home_app_info_patches_name_default">Yamalar</string>
@@ -177,9 +177,9 @@ Devam etmek istiyor musunuz?"</string>
     <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'in cihazınızda yüklü olmasını gerektirir</string>
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
     <string name="root_pre_patch_installer_title">Yükleme yöntemini seçin</string>
-    <string name="root_pre_patch_installer_description">Cihazın kök erişimi vardır. Uygulamayı yedeklemek istediğiniz yolu seçin</string>
+    <string name="root_pre_patch_installer_description">Cihazınınızın kök erişimi var. Yamalanmış uygulamayı nasıl yüklemek istediğinizi seçin</string>
     <string name="root_pre_patch_installer_mount_title">Kök Dağıtım</string>
-    <string name="root_pre_patch_installer_mount_description">Uygulamayı yedekli APK ile stok uygulaması üzerine monte edin. GmsCore gerektirmez</string>
+    <string name="root_pre_patch_installer_mount_description">Yamalı APK\'yi stok uygulamaya bağlayın. GmsCore gerektirmez</string>
     <string name="root_pre_patch_installer_standard_title">Standart Kurulum</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore desteği olan ayrı bir uygulama olarak kurun. Yedekleme sonra kurucuyu seçin (Sistem kurucusu, Shizuku vb.)</string>
     <string name="root_pre_patch_installer_hint">Kurulum yöntemi, hangi yedekler dahil edildiğini ve yedekleme sonrasında değiştirilememesi gerektiğini belirler</string>
@@ -245,22 +245,22 @@ Devam etmek istiyor musunuz?"</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Yamalar uygulanıyor</string>
     <string name="failed_to_execute_patch">%s uygulanamadı</string>
-    <string name="patched_app_saved_toast">Yamalanan uygulama daha sonra kaydedilmek üzere kaydedildi</string>
-    <string name="patched_app_save_failed_toast">Yamalanan uygulama kaydedilemedi</string>
+    <string name="patched_app_saved_toast">Yamalanmış uygulama daha sonrası için kaydedildi</string>
+    <string name="patched_app_save_failed_toast">Yamalanmış uygulama kaydedilemedi</string>
     <string name="download_apk">APK dosyasını indir</string>
     <string name="plugin_activity_dialog_body">Bu eklenti için devam etmek için kullanıcı etkileşimi gerekli.</string>
-    <string name="patcher_process_exit_message">Patcher işlemi %1$s kodu ile sonlandı.</string>
+    <string name="patcher_process_exit_message">Yamalama işlemi %1$s kodu ile sonlandı</string>
     <string name="install_app_success">Başarıyla yüklendi</string>
     <string name="install_app_fail">Uygulama yüklenemedi: %s</string>
     <string name="install_timeout_message">Yükleme tamamlanmadı. Sistem yükleyici penceresini kontrol edin ve tekrar deneyin.</string>
     <string name="save_apk_success">APK Kaydedildi</string>
     <string name="saved_app_export_failed">Yamalanmış uygulama dışa aktarılamadı</string>
-    <string name="saved_app_removed_toast">Kaydedilen uygulama kaldırıldı</string>
+    <string name="saved_app_removed_toast">Kayıtlı yamalanmış uygulama kaldırıldı</string>
     <string name="saved_app_copy_removed_toast">Kaydedilen kopya kaldırıldı</string>
     <string name="saved_app_launch_unavailable">Uygulamayı açmadan önce yükleyin.</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Bağlanamadı: %s</string>
-    <string name="failed_to_unmount">%s: Kaldırılamadı</string>
+    <string name="failed_to_unmount">Kaldırılamadı: %s</string>
     <!-- Settings -->
     <string name="appearance">Görünüm</string>
     <string name="advanced">Gelişmiş</string>
@@ -299,7 +299,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_appearance_app_icon_dark_2">Boşluk</string>
     <string name="settings_appearance_app_icon_dark_3">Çivit</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Uygulama simgesi değiştirilsin mi?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">%1$s simgesine değiştirmek ve yeniden başlatmak istediğinizden emin misiniz?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\' simgesine değiştirilip yeniden başlatılsın mı?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simgeyi değiştir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Güncellemeler</string>
@@ -312,7 +312,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_advanced_expert_mode_dialog_title">Uzman modunu etkinleştirin?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Uzman mod, yamaların uygulanma şeklini daha fazla kontrol etmenizi sağlar, ancak uzman modda ayarları yanlış yaparsanız uygulama işlevsiz kalabilir</string>
     <string name="settings_advanced_strip_unused_libs">Kullanılmayan yerel kütüphaneleri kaldır</string>
-    <string name="settings_advanced_strip_unused_libs_description">APK\'i yamalarken desteklenmeyen CPU mimarileri için kullanılan yerel kütüphaneleri silin</string>
+    <string name="settings_advanced_strip_unused_libs_description">APK\'yi yamalarken desteklenmeyen CPU mimarileri için kullanılan yerel kütüphaneleri silin</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Çekme isteği kaynağı için gereklidir</string>
@@ -322,7 +322,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_advanced_github_pat_dialog_description">Çekme isteklerini harici kaynak olarak eklemek için GitHub Kişisel Erişim Anahtarı ayarlayın. github.com\'da \"public_repo\" kapsamlı bir PAT (anahtar) oluşturun</string>
     <string name="settings_advanced_github_pat_export_include_label">Ayarları dışa aktarırken dahil et</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Bu PAT\'i dışa aktarılan yönetici ayarlarına ekler</string>
-    <string name="settings_advanced_github_pat_export_warning">PAT\'ı paylaşmayın. Eğer ayarları dışa aktarırken bu PAT\'i eklerseniz, o dosyayı gizli tutun, çünkü anahtarı içerir.</string>
+    <string name="settings_advanced_github_pat_export_warning">PAT\'ı paylaşmayın. Eğer ayarları dışa aktarırken bu PAT\'i eklerseniz, o dosyayı gizli tutun, çünkü anahtarı içerir</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Yama seçenekleri</string>
     <string name="settings_advanced_patch_options_youtube_description">Tema, marka, başlık ve Shorts seçenekleri</string>
@@ -400,7 +400,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_internal_name">Sistem yükleyicisi</string>
     <string name="installer_internal_description">Android paket yükleyicisini kullanın</string>
     <string name="installer_auto_saved_name">Rootlu bağlama yükleyicisi</string>
-    <string name="installer_auto_saved_description">Yama edilmiş APK\'i kurulu uygulama üzerine monte eder (kök gereklidir)</string>
+    <string name="installer_auto_saved_description">Yamalanmış APK\'yi kurulu uygulamaya bağlar (kök gereklidir)</string>
     <string name="installer_shizuku_description">Shizuku veya Sui kullanarak sessiz moda yükleyin.</string>
     <string name="installer_option_none">Yedekleme yok</string>
     <string name="installer_none_description">Yedek yükleyici yapılandırılmamış</string>
@@ -423,9 +423,9 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_hint_aborted">Yükleme iptal edildi.</string>
     <string name="installer_external_launched">%1$s açılıyor…</string>
     <string name="installer_external_timeout">%1$s yüklemeyi onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin.</string>
-    <string name="installer_external_success">%1$s başarılı bir şekilde yüklediğini bildirdi.</string>
+    <string name="installer_external_success">%1$s başarılı bir şekilde yüklediğini bildirdi</string>
     <string name="installer_unavailable_title">%s kullanılamıyor</string>
-    <string name="installer_unavailable_message">Tercih ettiğiniz yükleyici (%s) şu anda kullanılamıyor. Sorunu çözün ve tekrar deneyin veya standart yükleyiciyi kullanın.</string>
+    <string name="installer_unavailable_message">Tercih ettiğiniz yükleyici (%s) şu anda kullanılamıyor. Sorunu çözüp tekrar deneyebilir veya standart yükleyiciyi kullanabilirsiniz</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku çalışıyor ve bu uygulama için izin verildiğinden emin olun.</string>
     <string name="installer_use_standard">Standart kullanımı kullanınız</string>
     <string name="settings_prompt_installer_on_install">Yükleme sırasında yükleyiciyi sor</string>
@@ -438,7 +438,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek bellek limiti yamalamayı hızlandırabilir ancak eski cihazlarda çalışmayabilir</string>
     <string name="settings_system_process_runtime_enable">Çalışma sürecini etkinleştir</string>
     <string name="settings_system_memory_limit_subtitle">Yamalama için kullanılabilir bellek</string>
-    <string name="settings_system_memory_limit_warning">%d MB limit</string>
+    <string name="settings_system_memory_limit_warning">Düşük bellek sınırı, daha büyük uygulamaları yamalarken hatalara neden olabilir</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Yapılandırmak için tıklayın</string>
     <!-- Settings - System Tab - Import and export keystore -->
@@ -472,19 +472,19 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_debug">Hata ayıklama</string>
     <string name="settings_system_export_debug_logs">Hata ayıklama kayıtlarını dışa aktar</string>
     <string name="settings_system_export_debug_logs_description">Hata ayıklama için sistem günlüklerini dışa aktar</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Logları okuyamazdım (çıkış kodu %s)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Günlükler okunamadı (çıkış kodu %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kayıtlar dışa aktarılamadı</string>
     <string name="settings_system_export_debug_logs_export_success">Günlükler dışa aktarıldı</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Depo yönetimi</string>
     <string name="settings_system_apks_size">Toplam boyut: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
-    <string name="settings_system_patched_apks_title">Değiştirilmiş APK\'ler</string>
-    <string name="settings_system_patched_apks_description">Kaydedilen değiştirilmiş uygulama dosyalarını yönet</string>
-    <string name="settings_system_patched_apks_empty">Henüz hiç değiştirilmiş APK kaydedilmedi</string>
+    <string name="settings_system_patched_apks_title">Yamalanmış APK\'ler</string>
+    <string name="settings_system_patched_apks_description">Kayıtlı yamalanmış uygulama dosyalarını yönet</string>
+    <string name="settings_system_patched_apks_empty">Henüz hiç yamalanmış APK kaydedilmedi</string>
     <string name="settings_system_patched_apks_delete_title">Değiştirilmiş APK silinsin mi?</string>
-    <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen değiştirilmiş APK\'i silmek istediğinizden emin misiniz?</string>
-    <string name="settings_system_patched_apks_deleted">%s için değiştirilmiş APK başarıyla silindi</string>
+    <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen yamalanmış APK\'yi silmek istediğinizden emin misiniz?</string>
+    <string name="settings_system_patched_apks_deleted">%s için yamalanmış APK başarıyla silindi</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Orijinal APK\'ler</string>
     <string name="settings_system_original_apks_description">Orijinal APK dosyaları yenileme için saklanır. Her uygulama için en son sürüm tek bir kopyada tutulur</string>

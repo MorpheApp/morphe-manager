@@ -310,7 +310,7 @@
     <string name="settings_advanced_expert_mode">Режим експерта</string>
     <string name="settings_advanced_expert_mode_description">Увімкнути комплексні налаштування патчів Morphe та параметри налаштування</string>
     <string name="settings_advanced_expert_mode_dialog_title">Увімкнути режим експерта?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності програми.</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності застосунку</string>
     <string name="settings_advanced_strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Видаляє нативні бібліотеки для непідтримуваних архітектур процесора з патчених застосунків</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

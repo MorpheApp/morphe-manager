@@ -505,14 +505,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_will_delete">Будет удалено:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Это навсегда удалит все сохраненные выбранные исправления для всех пакетов и источников</string>
     <string name="settings_system_patch_selection_reset_package_warning">Это навсегда удалит все сохраненные выбранные исправления для %s по всем источникам</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выборки патчей для %1$s в источнике #%2$s</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выбранные патчи для %1$s в источнике #%2$s</string>
     <string name="settings_system_export_source_data_fail">Не удалось экспортировать данные источника</string>
     <string name="settings_system_export_source_data_success">Данные источника экспортированы успешно</string>
     <string name="settings_system_import_source_data_fail">Не удалось импортировать данные источника</string>
     <string name="settings_system_import_source_data_success">Данные источника импортированы успешно</string>
     <string name="settings_system_patch_details_title">Детали исправления</string>
     <string name="settings_system_selected_patches_title">Выбранные патчи (%s)</string>
-    <string name="settings_system_patch_options_title">Опции патчей (%s)</string>
+    <string name="settings_system_patch_options_title">Параметры патчей (%s)</string>
     <string name="settings_system_no_patches_or_options">Нет сохраненных исправлений или опций</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Об интеграции</string>

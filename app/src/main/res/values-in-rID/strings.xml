@@ -100,7 +100,7 @@ Versi yang cocok:"</string>
     <string name="home_no_patches_for_app">Tidak ada tambalan tersedia untuk aplikasi ini</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode ahli</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s dipilih dari %2$s</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s dari %2$s dipilih</string>
     <string name="expert_mode_search">Cari tambalan</string>
     <string name="expert_mode_proceed">Lanjutkan ke Menambal</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
@@ -538,7 +538,7 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="clear">Bersihkan</string>
     <string name="delete">Hapus</string>
     <string name="disable">Nonaktifkan</string>
-    <string name="enable">Diaktifkan</string>
+    <string name="enable">Aktifkan</string>
     <string name="loading">Memuat…</string>
     <string name="not_installed">Tidak terpasang</string>
     <string name="view">Lihat</string>
@@ -546,7 +546,7 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="search_no_results">Tidak ada hasil yang ditemukan</string>
     <string name="any_version">Apa pun</string>
     <string name="enabled"> Diaktifkan</string>
-    <string name="disabled">Nonaktif</string>
+    <string name="disabled">Dinonaktifkan</string>
     <string name="selected">Dipilih</string>
     <string name="not_selected">Tidak dipilih</string>
     <string name="rename">Ganti nama</string>

@@ -6,27 +6,27 @@
     </plurals>
     <plurals name="option_count">
         <item quantity="one">%d yama seçeneği</item>
-        <item quantity="other">%d yama seçenekleri</item>
+        <item quantity="other">%d yama seçeneği</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%d kaynak</item>
-        <item quantity="other">%d kaynaklar</item>
+        <item quantity="other">%d kaynak</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="one">%d paket</item>
-        <item quantity="other">%d paketler</item>
+        <item quantity="other">%d paket</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">%d yama yürütüldü</item>
-        <item quantity="other">%d yama yürütüldü</item>
+        <item quantity="one">%d yama uygula</item>
+        <item quantity="other">%d yama uygula</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%d APK dosyası</item>
         <item quantity="other">%d APK dosyası</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Kayıtlı seçenekten %1$d eskimiş düzeltiyi kaldırıldı</item>
-        <item quantity="other">Kayıtlı seçenekten %1$d eskimiş düzeltiyi kaldırıldı</item>
+        <item quantity="one">Kaydedilmiş seçimden %1$d eskimiş yama kaldırıldı</item>
+        <item quantity="other">Kaydedilmiş seçimden %1$d eskimiş yama kaldırıldı</item>
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="one">%1$d kaynak yüklendi</item>
