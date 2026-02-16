@@ -77,7 +77,6 @@ jobs:
         run: |
           git config user.name "semantic-release-bot"
           git config user.email "semantic-release-bot@martynus.net"
-          git pull --rebase
           mv app/app-release-new.json app/app-release.json
           git add app/app-release.json
           git rm --cached -f app/app-release-new.json
