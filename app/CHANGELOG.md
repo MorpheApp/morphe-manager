@@ -1,3 +1,10 @@
+## app [1.7.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0...v1.7.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* Update translations from Crowdin ([e0d7db9](https://github.com/MorpheApp/morphe-manager/commit/e0d7db9e95cac5b7feb0d26a22a9eb898a31791a))
+
 # app [1.7.0](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0...v1.7.0) (2026-02-16)
 
 
