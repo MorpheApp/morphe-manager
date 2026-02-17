@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -74,14 +73,14 @@ class MainActivity : AppCompatActivity() {
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
                 themeColorHex = customThemeColor.takeUnless { it.isBlank() }
             ) {
-                MorpheManager(vm)
+                MorpheManager()
             }
         }
     }
 }
 
 @Composable
-private fun MorpheManager(vm: MainViewModel) {
+private fun MorpheManager() {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
@@ -204,10 +203,6 @@ private fun MorpheManager(vm: MainViewModel) {
         }
     }
 }
-
-@Composable
-private fun NavController.navGraphEntry(entry: NavBackStackEntry) =
-    remember(entry) { getBackStackEntry(entry.destination.parent!!.id) }
 
 // Androidx Navigation does not support storing complex types in route objects, so we have to store them inside the saved state handle of the back stack entry instead.
 private fun <T : Parcelable, R : ComplexParameter<T>> NavController.navigateComplex(

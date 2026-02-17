@@ -343,6 +343,19 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_updates">Updates</string>
     <string name="settings_advanced_updates_use_prereleases">Use pre-release versions</string>
     <string name="settings_advanced_updates_use_prereleases_description">Get early access to new patches and manager features</string>
+    <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
+    <string name="settings_advanced_updates_background_notifications_description">Check for updates when opening the app and notify when available</string>
+    <string name="notification_channel_manager_updates">Manager Updates</string>
+    <string name="notification_channel_manager_updates_description">Notifications about new Morphe Manager versions</string>
+    <string name="notification_channel_bundle_updates">Patch Bundle Updates</string>
+    <string name="notification_channel_bundle_updates_description">Notifications about new patch bundle versions</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe Manager update available</string>
+    <string name="notification_manager_update_text">Version %1$s is ready to download</string>
+    <string name="notification_bundle_update_title">New patches available</string>
+    <string name="notification_bundle_update_text">Tap to open Morphe manager and update</string>
+    <string name="notification_permission_dialog_title">Allow notifications</string>
+    <string name="notification_permission_dialog_description">Morphe Manager needs notification permission to alert you when updates are available in the background.</string>
 
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
@@ -638,6 +651,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="save">Save</string>
     <string name="saved">Saved</string>
     <string name="update">Update</string>
+    <string name="allow">Allow</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>

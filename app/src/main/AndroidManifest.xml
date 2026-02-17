@@ -28,6 +28,10 @@
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
+    <!-- Notifications: Required on Android 13+ (API 33) to post update notifications.
+         On older versions the permission is granted automatically. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:name="app.morphe.manager.ManagerApplication"
         android:allowBackup="true"

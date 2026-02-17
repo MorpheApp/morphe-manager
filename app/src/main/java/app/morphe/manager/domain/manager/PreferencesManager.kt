@@ -36,13 +36,22 @@ class PreferencesManager(
     val useManagerPrereleases = booleanPreference("manager_prereleases", false)
     val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
 
+    /**
+     * Whether to send Android system notifications when updates are available in the background.
+     * When true, a WorkManager job runs every 30 minutes to check for manager and bundle updates
+     */
+    val backgroundUpdateNotifications = booleanPreference("background_update_notifications", true)
+
+    /** Tracks whether the POST_NOTIFICATIONS runtime permission dialog has already been shown at least once on first launch (Android 13+) */
+    val notificationPermissionRequested = booleanPreference("notification_permission_requested", false)
+
     val useExpertMode = booleanPreference("use_expert_mode", false)
 
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
 
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
-    val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install",false)
+    val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install", false)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
@@ -57,7 +66,7 @@ class PreferencesManager(
     val keystoreAlias = stringPreference("keystore_alias", KeystoreManager.DEFAULT)
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
 
-    // Others hidden settings
+    // Other hidden settings
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
@@ -138,6 +147,7 @@ class PreferencesManager(
         val autoSaveDownloaderApks: Boolean? = null,
         val backgroundType: BackgroundType? = null,
         val useExpertMode: Boolean? = null,
+        val backgroundUpdateNotifications: Boolean? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -167,7 +177,8 @@ class PreferencesManager(
         usePatchesPrereleases = usePatchesPrereleases.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         backgroundType = backgroundType.get(),
-        useExpertMode = useExpertMode.get()
+        useExpertMode = useExpertMode.get(),
+        backgroundUpdateNotifications = backgroundUpdateNotifications.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -198,6 +209,7 @@ class PreferencesManager(
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
+        snapshot.backgroundUpdateNotifications?.let { backgroundUpdateNotifications.value = it }
     }
 
     companion object {

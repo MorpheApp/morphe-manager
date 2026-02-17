@@ -12,8 +12,10 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.tag
+import app.morphe.manager.worker.UpdateCheckWorker
 import coil.Coil
 import coil.ImageLoader
 import com.topjohnwu.superuser.Shell
@@ -36,6 +38,7 @@ class ManagerApplication : Application() {
     private val prefs: PreferencesManager by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val fs: Filesystem by inject()
+    private val updateNotificationManager: UpdateNotificationManager by inject()
 
     override fun onCreate() {
         super.onCreate()
@@ -83,14 +86,25 @@ class ManagerApplication : Application() {
                 .setFlags(Shell.FLAG_MOUNT_MASTER)
         )
 
-        // Preload preferences + initialize repositories
+        // Create notification channels before any notification can be posted (required on API 26+)
+        updateNotificationManager.createNotificationChannels()
+
+        // Preload preferences, apply language, and kick off background worker if enabled
         scope.launch {
             prefs.preload()
+
             val storedLanguage = prefs.appLanguage.get().ifBlank { "system" }
             if (storedLanguage != prefs.appLanguage.get()) {
                 prefs.appLanguage.update(storedLanguage)
             }
             applyAppLanguage(storedLanguage)
+
+            // Schedule or cancel the background update worker according to current preference
+            if (prefs.backgroundUpdateNotifications.get()) {
+                UpdateCheckWorker.schedule(this@ManagerApplication)
+            } else {
+                UpdateCheckWorker.cancel(this@ManagerApplication)
+            }
         }
 
         scope.launch(Dispatchers.Default) {
