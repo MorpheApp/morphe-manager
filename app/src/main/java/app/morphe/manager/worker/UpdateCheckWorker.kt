@@ -19,6 +19,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.utils.getOrNull
+import app.morphe.manager.R
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.tag
 import kotlinx.coroutines.flow.first
@@ -39,19 +40,19 @@ import java.util.concurrent.TimeUnit
 enum class UpdateCheckInterval(val minutes: Long, val labelResId: Int) {
     HOURLY(
         minutes = 60L,
-        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_hourly
+        labelResId = R.string.settings_advanced_update_interval_hourly
     ),
     DAILY(
         minutes = 24 * 60L,
-        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_daily
+        labelResId = R.string.settings_advanced_update_interval_daily
     ),
     WEEKLY(
         minutes = 7 * 24 * 60L,
-        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_weekly
+        labelResId = R.string.settings_advanced_update_interval_weekly
     ),
     MONTHLY(
         minutes = 30 * 24 * 60L,
-        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_monthly
+        labelResId = R.string.settings_advanced_update_interval_monthly
     )
 }
 

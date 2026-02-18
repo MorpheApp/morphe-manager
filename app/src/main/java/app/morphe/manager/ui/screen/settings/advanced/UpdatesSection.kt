@@ -12,24 +12,20 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.NotificationsActive
-import androidx.compose.material.icons.outlined.Schedule
-import androidx.compose.material.icons.outlined.Science
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -226,7 +222,8 @@ fun NotificationPermissionDialog(
 
 /**
  * Dialog to select how often the background update check should run.
- * Displays all [UpdateCheckInterval] entries as selectable rows with radio buttons.
+ *
+ * Uses a discrete slider with one step per [UpdateCheckInterval] entry.
  */
 @Composable
 private fun UpdateCheckIntervalDialog(
@@ -234,62 +231,88 @@ private fun UpdateCheckIntervalDialog(
     onIntervalSelected: (UpdateCheckInterval) -> Unit,
     onDismiss: () -> Unit
 ) {
+    val entries = UpdateCheckInterval.entries
+    var sliderIndex by remember { mutableFloatStateOf(entries.indexOf(currentInterval).toFloat()) }
+    val selectedInterval = entries[sliderIndex.toInt().coerceIn(entries.indices)]
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_update_interval_dialog_title),
         footer = {
-            MorpheDialogButton(
-                text = stringResource(android.R.string.cancel),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.save),
+                onPrimaryClick = { onIntervalSelected(selectedInterval) },
+                primaryIcon = Icons.Outlined.Check,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
             )
         }
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            UpdateCheckInterval.entries.forEach { interval ->
-                val isSelected = interval == currentInterval
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
-                        .clickable { onIntervalSelected(interval) },
-                    shape = RoundedCornerShape(12.dp),
-                    color = if (isSelected) {
-                        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                    } else {
-                        MaterialTheme.colorScheme.surface.copy(alpha = 0.1f)
-                    },
-                    border = BorderStroke(
-                        width = if (isSelected) 1.5.dp else 1.dp,
-                        color = if (isSelected) {
-                            MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
-                        } else {
-                            LocalDialogTextColor.current.copy(alpha = 0.15f)
-                        }
-                    )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            // Current value chip
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        RadioButton(
-                            selected = isSelected,
-                            onClick = null,
-                            colors = RadioButtonDefaults.colors(
-                                selectedColor = MaterialTheme.colorScheme.primary,
-                                unselectedColor = LocalDialogTextColor.current.copy(alpha = 0.5f)
-                            )
-                        )
-                        Text(
-                            text = stringResource(interval.labelResId),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = LocalDialogTextColor.current,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
+                    Text(
+                        text = stringResource(selectedInterval.labelResId),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = LocalDialogTextColor.current
+                    )
+                    Text(
+                        text = stringResource(R.string.settings_advanced_update_interval_chip_subtitle),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = LocalDialogSecondaryTextColor.current,
+                        textAlign = TextAlign.Center
+                    )
                 }
             }
+
+            // Slider
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Slider(
+                    value = sliderIndex,
+                    onValueChange = { sliderIndex = it },
+                    valueRange = 0f..(entries.size - 1).toFloat(),
+                    steps = entries.size - 2, // n entries → n-2 internal steps
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(entries.first().labelResId),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                    Text(
+                        text = stringResource(entries.last().labelResId),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                }
+            }
+
+            // Battery optimisation warning
+            InfoBadge(
+                text = stringResource(R.string.settings_advanced_update_interval_battery_warning),
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.BatteryAlert
+            )
         }
     }
 }

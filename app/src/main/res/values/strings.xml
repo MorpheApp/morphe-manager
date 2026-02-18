@@ -355,6 +355,8 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_update_interval_daily">Once a day</string>
     <string name="settings_advanced_update_interval_weekly">Once a week</string>
     <string name="settings_advanced_update_interval_monthly">Once a month</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Background check frequency</string>
+    <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe manager update available</string>
     <string name="notification_manager_update_text">Version %1$s is ready to download</string>
