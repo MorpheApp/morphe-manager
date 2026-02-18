@@ -4,13 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       topic:
-        description: 'FCM topic to send to'
-        required: true
+        description: 'FCM topic (empty = auto-route by message_type + branch)'
+        required: false
         type: choice
         options:
+          - ''
           - morphe_updates
           - morphe_updates_dev
-        default: morphe_updates_dev
+          - morphe_patches_updates
+          - morphe_patches_updates_dev
+        default: ''
 
       message_type:
         description: 'Notification type'

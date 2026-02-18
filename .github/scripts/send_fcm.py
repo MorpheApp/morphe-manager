@@ -50,13 +50,6 @@ explicit_topic = os.environ.get("FCM_TOPIC", "").strip()
 branch         = os.environ.get("BRANCH", "").strip()
 new_tag        = os.environ.get("NEW_TAG", "").strip()
 
-if explicit_topic:
-    topic = explicit_topic
-elif branch == "main":
-    topic = "morphe_updates"
-else:
-    topic = "morphe_updates_dev"
-
 # Message type and version
 msg_type    = os.environ.get("FCM_TYPE", "manager_update").strip()
 fcm_version = os.environ.get("FCM_VERSION", "").strip()
@@ -64,6 +57,18 @@ fcm_version = os.environ.get("FCM_VERSION", "").strip()
 # For release workflow: derive version from tag (strip leading "v")
 if new_tag:
     fcm_version = new_tag.lstrip("v")
+
+if explicit_topic:
+    topic = explicit_topic
+else:
+    # Default routing by message type and branch:
+    #   manager_update: morphe_updates / morphe_updates_dev
+    #   bundle_update:  morphe_patches_updates / morphe_patches_updates_dev
+    is_main = (branch == "main")
+    if msg_type == "bundle_update":
+        topic = "morphe_patches_updates" if is_main else "morphe_patches_updates_dev"
+    else:
+        topic = "morphe_updates" if is_main else "morphe_updates_dev"
 
 print(f"FCM target   : {topic}")
 print(f"Message type : {msg_type}")

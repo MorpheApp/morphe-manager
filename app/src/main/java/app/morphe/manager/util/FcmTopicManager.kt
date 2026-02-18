@@ -10,50 +10,83 @@ import app.morphe.manager.BuildConfig
 import com.google.firebase.messaging.FirebaseMessaging
 
 /**
- * FCM topic for stable releases (published from the `main` branch).
- * Devices that do NOT use prereleases subscribe to this topic.
+ * FCM topic for stable manager releases (published from the `main` branch).
+ *
+ * Routing rule: subscribe when notifications are ON AND the installed manager
+ * is a stable build AND the user has not enabled prereleases.
+ * Dev builds always track [FCM_TOPIC_MANAGER_DEV] regardless of user preference,
+ * because stable manager releases are not valid upgrades for a dev build.
  */
-const val FCM_TOPIC_STABLE = "morphe_updates"
+const val FCM_TOPIC_MANAGER_STABLE = "morphe_updates"
 
 /**
- * FCM topic for prerelease builds (published from the `dev` branch).
- * Devices running a dev build OR with prereleases enabled subscribe to this topic.
+ * FCM topic for prerelease manager builds (published from the `dev` branch).
+ *
+ * Routing rule: subscribe when notifications are ON AND (the installed manager
+ * is a dev build OR the user has enabled prereleases).
  */
-const val FCM_TOPIC_DEV = "morphe_updates_dev"
+const val FCM_TOPIC_MANAGER_DEV = "morphe_updates_dev"
+
+/**
+ * FCM topic for stable patch bundle releases.
+ *
+ * Routing rule: subscribe when notifications are ON AND the user has NOT
+ * enabled prereleases. The installed manager build variant does NOT affect
+ * this subscription - a dev manager can still use stable patches.
+ */
+const val FCM_TOPIC_PATCHES_STABLE = "morphe_patches_updates"
+
+/**
+ * FCM topic for prerelease patch bundle releases.
+ *
+ * Routing rule: subscribe when notifications are ON AND the user HAS
+ * enabled prereleases.
+ */
+const val FCM_TOPIC_PATCHES_DEV = "morphe_patches_updates_dev"
 
 /**
  * Returns `true` if the currently installed manager is itself a dev/prerelease build.
  *
  * Detection is based on [BuildConfig.VERSION_NAME]: versions produced by
  * `multi-semantic-release` on the `dev` branch always contain a pre-release
- * identifier (e.g. `1.2.3-dev.1`, `1.2.3-alpha.2`, `1.2.3-beta.1`).
+ * identifier (e.g. `1.2.3-dev.1`, `1.2.3-alpha.2`).
  * Stable releases on `main` produce a clean semver like `1.2.3`.
- *
- * This is intentionally separate from the user's "Use prereleases" preference -
- * a device running a dev build should always receive dev notifications regardless
- * of what the user has toggled in Settings.
  */
 val isDevBuild: Boolean
     get() = BuildConfig.VERSION_NAME.contains('-')
 
 /**
- * Synchronises the device's FCM topic subscriptions with the current state.
+ * Synchronises **all four** FCM topic subscriptions with the user's current preferences.
  *
- * The effective topic is determined by combining two signals:
- * - [isDevBuild]    - whether the installed manager is itself a dev/prerelease build
- * - [usePrereleases] - the user's "Use prereleases" preference in Settings
+ * ## Manager topics
  *
- * Rules:
- * - Notifications OFF → unsubscribe from both topics.
- * - Notifications ON + (dev build OR prereleases enabled) → subscribe to [FCM_TOPIC_DEV],
- *   unsubscribe from [FCM_TOPIC_STABLE].
- * - Notifications ON + stable build AND prereleases disabled → subscribe to [FCM_TOPIC_STABLE],
- *   unsubscribe from [FCM_TOPIC_DEV].
+ * The manager subscription is determined by combining [isDevBuild] and [usePrereleases]:
  *
- * This ensures a device is always subscribed to exactly one topic (or none), so it
- * never receives duplicate notifications.
+ * | isDevBuild | usePrereleases | stable topic | dev topic |
+ * |------------|----------------|--------------|-----------|
+ * | false      | false          | ✓ subscribed | ✗ unsub   |
+ * | false      | true           | ✗ unsub      | ✓ subscribed |
+ * | true       | false          | ✓ subscribed | ✓ subscribed |
+ * | true       | true           | ✗ unsub      | ✓ subscribed |
  *
- * Safe to call multiple times - FCM deduplicates subscribe/unsubscribe calls internally.
+ * A dev-build user with prereleases OFF is subscribed to **both** manager topics because
+ * a stable release (e.g. `1.5.0`) is a valid upgrade from a dev build (e.g. `1.5.0-dev.1`).
+ * Enabling prereleases signals intent to stay on the cutting edge, so stable is unsubscribed.
+ *
+ * ## Patches topics
+ *
+ * The patches topic is chosen **only** by [usePrereleases], independent of [isDevBuild]:
+ * - prereleases ON  → [FCM_TOPIC_PATCHES_DEV]
+ * - prereleases OFF → [FCM_TOPIC_PATCHES_STABLE]
+ *
+ * This way a user running a dev manager build with prereleases OFF will still
+ * receive stable patch notifications - dev manager does not imply dev patches.
+ *
+ * ## Notifications OFF
+ *
+ * Unsubscribes from all four topics.
+ *
+ * Safe to call multiple times - FCM deduplicates subscribe/unsubscribe internally.
  *
  * Called from:
  * - [app.morphe.manager.ManagerApplication] on every cold start
@@ -64,33 +97,64 @@ fun syncFcmTopics(notificationsEnabled: Boolean, usePrereleases: Boolean) {
     val messaging = FirebaseMessaging.getInstance()
 
     if (!notificationsEnabled) {
-        messaging.unsubscribeFromTopic(FCM_TOPIC_STABLE)
-            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_STABLE") }
-        messaging.unsubscribeFromTopic(FCM_TOPIC_DEV)
-            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_DEV") }
+        listOf(
+            FCM_TOPIC_MANAGER_STABLE,
+            FCM_TOPIC_MANAGER_DEV,
+            FCM_TOPIC_PATCHES_STABLE,
+            FCM_TOPIC_PATCHES_DEV,
+        ).forEach { topic ->
+            messaging.unsubscribeFromTopic(topic)
+                .addOnCompleteListener { Log.d(tag, "Unsubscribed from $topic") }
+        }
         return
     }
 
-    // A device running a dev build should always track the dev topic - even if the
-    // user hasn't explicitly enabled prereleases - because stable releases are not
-    // relevant upgrades for a dev build.
-    val useDevTopic = isDevBuild || usePrereleases
+    // Matrix:
+    //   stable build + prereleases OFF → stable only      (normal stable user)
+    //   stable build + prereleases ON  → dev only         (opted into prereleases)
+    //   dev build    + prereleases OFF → stable + dev     (dev build, but stable 1.5.0 is a valid upgrade from 1.5.0-dev.1)
+    //   dev build    + prereleases ON  → dev only         (wants to stay on cutting edge)
+    val subscribeManagerStable = !usePrereleases  // stable is relevant unless user wants only prereleases
+    val subscribeManagerDev    = isDevBuild || usePrereleases  // dev is relevant for dev builds and prerelease users
 
-    Log.d(tag, "syncFcmTopics: isDevBuild=$isDevBuild, usePrereleases=$usePrereleases → topic=${if (useDevTopic) FCM_TOPIC_DEV else FCM_TOPIC_STABLE}")
+    Log.d(tag, "syncFcmTopics: isDevBuild=$isDevBuild, usePrereleases=$usePrereleases")
+    Log.d(tag, "  manager stable=$subscribeManagerStable, manager dev=$subscribeManagerDev")
+    Log.d(tag, "  patches topic → ${if (usePrereleases) FCM_TOPIC_PATCHES_DEV else FCM_TOPIC_PATCHES_STABLE}")
 
-    if (useDevTopic) {
-        messaging.subscribeToTopic(FCM_TOPIC_DEV)
+    if (subscribeManagerStable) {
+        messaging.subscribeToTopic(FCM_TOPIC_MANAGER_STABLE)
             .addOnCompleteListener { task ->
-                Log.d(tag, if (task.isSuccessful) "Subscribed to $FCM_TOPIC_DEV" else "Failed to subscribe to $FCM_TOPIC_DEV")
+                Log.d(tag, if (task.isSuccessful) "Subscribed to $FCM_TOPIC_MANAGER_STABLE" else "Failed to subscribe to $FCM_TOPIC_MANAGER_STABLE")
             }
-        messaging.unsubscribeFromTopic(FCM_TOPIC_STABLE)
-            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_STABLE") }
     } else {
-        messaging.subscribeToTopic(FCM_TOPIC_STABLE)
+        messaging.unsubscribeFromTopic(FCM_TOPIC_MANAGER_STABLE)
+            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_MANAGER_STABLE") }
+    }
+
+    if (subscribeManagerDev) {
+        messaging.subscribeToTopic(FCM_TOPIC_MANAGER_DEV)
             .addOnCompleteListener { task ->
-                Log.d(tag, if (task.isSuccessful) "Subscribed to $FCM_TOPIC_STABLE" else "Failed to subscribe to $FCM_TOPIC_STABLE")
+                Log.d(tag, if (task.isSuccessful) "Subscribed to $FCM_TOPIC_MANAGER_DEV" else "Failed to subscribe to $FCM_TOPIC_MANAGER_DEV")
             }
-        messaging.unsubscribeFromTopic(FCM_TOPIC_DEV)
-            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_DEV") }
+    } else {
+        messaging.unsubscribeFromTopic(FCM_TOPIC_MANAGER_DEV)
+            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_MANAGER_DEV") }
+    }
+
+    // Determined solely by usePrereleases - dev manager does not imply dev patches
+    if (usePrereleases) {
+        messaging.subscribeToTopic(FCM_TOPIC_PATCHES_DEV)
+            .addOnCompleteListener { task ->
+                Log.d(tag, if (task.isSuccessful) "Subscribed to $FCM_TOPIC_PATCHES_DEV" else "Failed to subscribe to $FCM_TOPIC_PATCHES_DEV")
+            }
+        messaging.unsubscribeFromTopic(FCM_TOPIC_PATCHES_STABLE)
+            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_PATCHES_STABLE") }
+    } else {
+        messaging.subscribeToTopic(FCM_TOPIC_PATCHES_STABLE)
+            .addOnCompleteListener { task ->
+                Log.d(tag, if (task.isSuccessful) "Subscribed to $FCM_TOPIC_PATCHES_STABLE" else "Failed to subscribe to $FCM_TOPIC_PATCHES_STABLE")
+            }
+        messaging.unsubscribeFromTopic(FCM_TOPIC_PATCHES_DEV)
+            .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_PATCHES_DEV") }
     }
 }
