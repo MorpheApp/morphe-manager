@@ -11,6 +11,7 @@ import app.morphe.manager.util.ExportNameFormatter
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.BuildConfig
+import app.morphe.manager.worker.UpdateCheckInterval
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
@@ -38,11 +39,14 @@ class PreferencesManager(
 
     /**
      * Whether to send Android system notifications when updates are available in the background.
-     * When true, a WorkManager job runs every 30 minutes to check for manager and bundle updates
+     * When true, a WorkManager job runs periodically to check for manager and bundle updates.
      */
     val backgroundUpdateNotifications = booleanPreference("background_update_notifications", true)
 
-    /** Tracks whether the POST_NOTIFICATIONS runtime permission dialog has already been shown at least once on first launch (Android 13+) */
+    /**  How often the background update check should run. */
+    val updateCheckInterval = enumPreference("update_check_interval", UpdateCheckInterval.DAILY)
+
+    /** Tracks whether the POST_NOTIFICATIONS runtime permission dialog has already been shown at least once on first launch (Android 13+). */
     val notificationPermissionRequested = booleanPreference("notification_permission_requested", false)
 
     val useExpertMode = booleanPreference("use_expert_mode", false)
@@ -148,6 +152,7 @@ class PreferencesManager(
         val backgroundType: BackgroundType? = null,
         val useExpertMode: Boolean? = null,
         val backgroundUpdateNotifications: Boolean? = null,
+        val updateCheckInterval: UpdateCheckInterval? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -178,7 +183,8 @@ class PreferencesManager(
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         backgroundType = backgroundType.get(),
         useExpertMode = useExpertMode.get(),
-        backgroundUpdateNotifications = backgroundUpdateNotifications.get()
+        backgroundUpdateNotifications = backgroundUpdateNotifications.get(),
+        updateCheckInterval = updateCheckInterval.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -210,6 +216,7 @@ class PreferencesManager(
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.backgroundUpdateNotifications?.let { backgroundUpdateNotifications.value = it }
+        snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
     }
 
     companion object {

@@ -345,17 +345,23 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_updates_use_prereleases_description">Get early access to new patches and manager features</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
     <string name="settings_advanced_updates_background_notifications_description">Check for updates when opening the app and notify when available</string>
-    <string name="notification_channel_manager_updates">Manager Updates</string>
-    <string name="notification_channel_manager_updates_description">Notifications about new Morphe Manager versions</string>
-    <string name="notification_channel_bundle_updates">Patch Bundle Updates</string>
+    <string name="notification_channel_manager_updates">Manager updates</string>
+    <string name="notification_channel_manager_updates_description">Notifications about new Morphe manager versions</string>
+    <string name="notification_channel_bundle_updates">Patch sources updates</string>
     <string name="notification_channel_bundle_updates_description">Notifications about new patch bundle versions</string>
+    <string name="settings_advanced_update_interval">Check frequency</string>
+    <string name="settings_advanced_update_interval_dialog_title">Check for updates</string>
+    <string name="settings_advanced_update_interval_hourly">Once an hour</string>
+    <string name="settings_advanced_update_interval_daily">Once a day</string>
+    <string name="settings_advanced_update_interval_weekly">Once a week</string>
+    <string name="settings_advanced_update_interval_monthly">Once a month</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe Manager update available</string>
+    <string name="notification_manager_update_title">Morphe manager update available</string>
     <string name="notification_manager_update_text">Version %1$s is ready to download</string>
     <string name="notification_bundle_update_title">New patches available</string>
     <string name="notification_bundle_update_text">Tap to open Morphe manager and update</string>
     <string name="notification_permission_dialog_title">Allow notifications</string>
-    <string name="notification_permission_dialog_description">Morphe Manager needs notification permission to alert you when updates are available in the background.</string>
+    <string name="notification_permission_dialog_description">Morphe manager needs notification permission to alert you when updates are available in the background</string>
 
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>

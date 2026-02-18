@@ -101,7 +101,7 @@ class ManagerApplication : Application() {
 
             // Schedule or cancel the background update worker according to current preference
             if (prefs.backgroundUpdateNotifications.get()) {
-                UpdateCheckWorker.schedule(this@ManagerApplication)
+                UpdateCheckWorker.schedule(this@ManagerApplication, prefs.updateCheckInterval.get())
             } else {
                 UpdateCheckWorker.cancel(this@ManagerApplication)
             }

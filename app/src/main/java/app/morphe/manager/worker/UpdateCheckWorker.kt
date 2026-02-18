@@ -27,8 +27,38 @@ import org.koin.core.component.inject
 import java.util.concurrent.TimeUnit
 
 /**
+ * How often the background update check WorkManager job should repeat.
+ *
+ * Each entry carries [minutes] - the repeat interval passed to
+ * [PeriodicWorkRequestBuilder] - and a string resource ID for the
+ * human-readable label shown in Settings.
+ *
+ * WorkManager enforces a minimum of 15 minutes, so [HOURLY] is the
+ * shortest practical option that also keeps battery impact negligible.
+ */
+enum class UpdateCheckInterval(val minutes: Long, val labelResId: Int) {
+    HOURLY(
+        minutes = 60L,
+        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_hourly
+    ),
+    DAILY(
+        minutes = 24 * 60L,
+        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_daily
+    ),
+    WEEKLY(
+        minutes = 7 * 24 * 60L,
+        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_weekly
+    ),
+    MONTHLY(
+        minutes = 30 * 24 * 60L,
+        labelResId = app.morphe.manager.R.string.settings_advanced_update_interval_monthly
+    )
+}
+
+/**
  * WorkManager worker that periodically checks for updates in the background.
- * Runs every 30 minutes when network is available and sends Android notifications if new updates are found.
+ * The repeat interval is controlled by [UpdateCheckInterval] and stored in
+ * [PreferencesManager.updateCheckInterval] (default: [UpdateCheckInterval.DAILY]).
  *
  * Checks for:
  * - Morphe Manager app updates
@@ -110,33 +140,32 @@ class UpdateCheckWorker(
         /** Unique name used to identify the periodic work in WorkManager */
         const val WORK_NAME = "morphe_update_check"
 
-        /** How often WorkManager should run the update check */
-        private const val INTERVAL_MINUTES = 30L
-
         /**
-         * Schedule (or reschedule) the periodic update check.
-         * Using [ExistingPeriodicWorkPolicy.KEEP] so an already-running schedule
-         * is never restarted unnecessarily.
+         * Schedule (or reschedule) the periodic update check with the given [interval].
+         *
+         * Uses [ExistingPeriodicWorkPolicy.UPDATE] so that changing the interval in Settings takes effect immediately.
          */
-        fun schedule(context: Context) {
+        fun schedule(context: Context, interval: UpdateCheckInterval = UpdateCheckInterval.DAILY) {
+            val intervalMinutes = interval.minutes
+
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
             val request = PeriodicWorkRequestBuilder<UpdateCheckWorker>(
-                INTERVAL_MINUTES, TimeUnit.MINUTES
+                intervalMinutes, TimeUnit.MINUTES
             )
                 .setConstraints(constraints)
-                .setInitialDelay(INTERVAL_MINUTES, TimeUnit.MINUTES)
+                .setInitialDelay(intervalMinutes, TimeUnit.MINUTES)
                 .build()
 
             WorkManager.getInstance(context).enqueueUniquePeriodicWork(
                 WORK_NAME,
-                ExistingPeriodicWorkPolicy.KEEP,
+                ExistingPeriodicWorkPolicy.UPDATE,
                 request
             )
 
-            Log.d("UpdateCheckWorker", "Periodic update check scheduled (every ${INTERVAL_MINUTES}m)")
+            Log.d("UpdateCheckWorker", "Periodic update check scheduled (every ${intervalMinutes}m / ${interval.name})")
         }
 
         /**
