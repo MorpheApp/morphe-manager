@@ -161,7 +161,10 @@ fun UpdatesSettingsItem(
         showBorder = true,
         leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) },
         title = stringResource(R.string.settings_advanced_updates_background_notifications),
-        subtitle = stringResource(R.string.settings_advanced_updates_background_notifications_description),
+        subtitle = stringResource(
+            if (hasGms) R.string.settings_advanced_updates_background_notifications_description_fcm
+            else R.string.settings_advanced_updates_background_notifications_description
+        ),
         trailingContent = {
             Switch(
                 checked = backgroundUpdateNotifications,
