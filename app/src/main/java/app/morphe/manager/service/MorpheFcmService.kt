@@ -68,15 +68,12 @@ class MorpheFcmService : FirebaseMessagingService() {
         when (type) {
             TYPE_MANAGER_UPDATE -> {
                 val version = data[KEY_VERSION]
-                if (version.isNullOrBlank()) {
-                    Log.w(tag, "MorpheFcmService: manager_update message missing '$KEY_VERSION' key")
-                    return
-                }
                 notificationManager.showFcmManagerUpdateNotification(version)
             }
 
             TYPE_BUNDLE_UPDATE -> {
-                notificationManager.showFcmBundleUpdateNotification()
+                val version = data[KEY_VERSION]
+                notificationManager.showFcmBundleUpdateNotification(version)
             }
 
             else -> {

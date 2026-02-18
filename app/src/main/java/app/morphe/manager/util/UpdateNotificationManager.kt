@@ -83,9 +83,7 @@ class UpdateNotificationManager(private val context: Context) {
         val notification = NotificationCompat.Builder(context, CHANNEL_MANAGER_UPDATES)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(context.getString(R.string.notification_manager_update_title))
-            .setContentText(
-                context.getString(R.string.notification_manager_update_text, newVersion)
-            )
+            .setContentText(context.getString(R.string.notification_update_text, newVersion))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(buildOpenAppIntent())
             .setAutoCancel(true)
@@ -103,7 +101,7 @@ class UpdateNotificationManager(private val context: Context) {
         val notification = NotificationCompat.Builder(context, CHANNEL_BUNDLE_UPDATES)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(context.getString(R.string.notification_bundle_update_title))
-            .setContentText(context.getString(R.string.notification_bundle_update_text))
+            .setContentText(context.getString(R.string.notification_update_text))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(buildOpenAppIntent())
             .setAutoCancel(true)
@@ -120,13 +118,17 @@ class UpdateNotificationManager(private val context: Context) {
      * No [NotificationManagerCompat.areNotificationsEnabled] guard - FCM already
      * verified delivery eligibility before waking the device.
      */
-    fun showFcmManagerUpdateNotification(newVersion: String) {
+    fun showFcmManagerUpdateNotification(version: String? = null) {
+        val contentText = if (!version.isNullOrBlank()) {
+            context.getString(R.string.notification_update_text, version)
+        } else {
+            context.getString(R.string.notification_manager_update_title)
+        }
+
         val notification = NotificationCompat.Builder(context, CHANNEL_FCM_UPDATES)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(context.getString(R.string.notification_manager_update_title))
-            .setContentText(
-                context.getString(R.string.notification_manager_update_text, newVersion)
-            )
+            .setContentText(contentText)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(buildOpenAppIntent())
             .setAutoCancel(true)
@@ -140,11 +142,17 @@ class UpdateNotificationManager(private val context: Context) {
      * Post a high-priority notification that new patch bundles are available.
      * Called from [app.morphe.manager.service.MorpheFcmService] when an FCM push arrives.
      */
-    fun showFcmBundleUpdateNotification() {
+    fun showFcmBundleUpdateNotification(version: String? = null) {
+        val contentText = if (!version.isNullOrBlank()) {
+            context.getString(R.string.notification_update_text, version)
+        } else {
+            context.getString(R.string.notification_bundle_update_text_unversioned)
+        }
+
         val notification = NotificationCompat.Builder(context, CHANNEL_FCM_UPDATES)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(context.getString(R.string.notification_bundle_update_title))
-            .setContentText(context.getString(R.string.notification_bundle_update_text))
+            .setContentText(contentText)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(buildOpenAppIntent())
             .setAutoCancel(true)

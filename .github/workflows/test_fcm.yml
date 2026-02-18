@@ -22,7 +22,7 @@ on:
         default: manager_update
 
       version:
-        description: 'Version string (only used for manager_update)'
+        description: 'Version string'
         required: false
         default: '99.0.0-test'
 

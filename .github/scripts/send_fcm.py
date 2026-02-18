@@ -59,7 +59,7 @@ else:
 
 # Message type and version
 msg_type    = os.environ.get("FCM_TYPE", "manager_update").strip()
-fcm_version = os.environ.get("FCM_VERSION", "test").strip()
+fcm_version = os.environ.get("FCM_VERSION", "").strip()
 
 # For release workflow: derive version from tag (strip leading "v")
 if new_tag:
@@ -67,7 +67,7 @@ if new_tag:
 
 print(f"FCM target   : {topic}")
 print(f"Message type : {msg_type}")
-if msg_type == "manager_update":
+if fcm_version:
     print(f"Version      : {fcm_version}")
 
 # ── Parse Service Account ──────────────────────────────────────────────────────
@@ -139,7 +139,9 @@ print("OAuth2 token obtained successfully")
 # ── Build FCM message payload ──────────────────────────────────────────────────
 
 data_payload: dict[str, str] = {"type": msg_type}
-if msg_type == "manager_update":
+# Include version in payload whenever it's provided - both manager_update and
+# bundle_update support it; the app ignores unknown keys for forward-compatibility.
+if fcm_version:
     data_payload["version"] = fcm_version
 
 fcm_message = {
