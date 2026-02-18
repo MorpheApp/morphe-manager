@@ -1,0 +1,53 @@
+name: Test FCM Notification
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'FCM topic to send to'
+        required: true
+        type: choice
+        options:
+          - morphe_updates
+          - morphe_updates_dev
+        default: morphe_updates_dev
+
+      message_type:
+        description: 'Notification type'
+        required: true
+        type: choice
+        options:
+          - manager_update
+          - bundle_update
+        default: manager_update
+
+      version:
+        description: 'Version string (only used for manager_update)'
+        required: false
+        default: '99.0.0-test'
+
+jobs:
+  test-fcm:
+    name: Test FCM push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install FCM dependencies
+        run: pip install cryptography
+
+      - name: Send test FCM notification
+        env:
+          FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
+          FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}
+          FCM_TOPIC: ${{ inputs.topic }}
+          FCM_TYPE: ${{ inputs.message_type }}
+          FCM_VERSION: ${{ inputs.version }}
+        run: python3 .github/scripts/send_fcm.py
