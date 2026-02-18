@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.settings.advanced
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -35,7 +36,18 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.worker.UpdateCheckWorker
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.launch
+
+/**
+ * Returns true if Google Play Services is available and functional on this device.
+ * When GMS is available, FCM is the primary notification channel and WorkManager
+ * interval settings are not relevant to the user.
+ */
+private fun isGmsAvailable(context: Context): Boolean =
+    GoogleApiAvailability.getInstance()
+        .isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS
 
 /**
  * Updates section settings item for the Advanced tab.
@@ -57,6 +69,10 @@ fun UpdatesSettingsItem(
 
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
+
+    // On GMS devices FCM is the primary delivery channel - WorkManager runs as a silent
+    // fallback and does not need to be configured by the user.
+    val hasGms = remember { isGmsAvailable(context) }
 
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
@@ -86,9 +102,8 @@ fun UpdatesSettingsItem(
             onPermissionResult = { granted ->
                 showNotificationPermissionDialog = false
                 if (granted) {
-                    UpdateCheckWorker.schedule(context, updateCheckInterval)
-                    // Permission just granted - sync topics with current prefs
                     syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
+                    UpdateCheckWorker.schedule(context, updateCheckInterval)
                 } else {
                     scope.launch { prefs.backgroundUpdateNotifications.update(false) }
                 }
@@ -110,15 +125,7 @@ fun UpdatesSettingsItem(
 
     // Use prereleases toggle
     RichSettingsItem(
-        onClick = {
-            // Let the parent save the pref, then re-sync FCM with the NEW value
-            onPrereleasesToggle()
-            if (backgroundUpdateNotifications) {
-                // usePrereleases is still the OLD value here - toggle means the new
-                // value is the opposite, so we pass !usePrereleases
-                syncFcmTopics(notificationsEnabled = true, usePrereleases = !usePrereleases)
-            }
-        },
+        onClick = onPrereleasesToggle,
         showBorder = true,
         leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
         title = stringResource(R.string.settings_advanced_updates_use_prereleases),
@@ -143,13 +150,11 @@ fun UpdatesSettingsItem(
                 scope.launch { prefs.backgroundUpdateNotifications.update(true) }
                 showNotificationPermissionDialog = true
             } else {
-                scope.launch { prefs.backgroundUpdateNotifications.update(newValue) }
-                if (newValue) {
-                    UpdateCheckWorker.schedule(context, updateCheckInterval)
-                    syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
-                } else {
-                    UpdateCheckWorker.cancel(context)
-                    syncFcmTopics(notificationsEnabled = false, usePrereleases = usePrereleases)
+                scope.launch {
+                    prefs.backgroundUpdateNotifications.update(newValue)
+                    syncFcmTopics(newValue, usePrereleases)
+                    if (newValue) UpdateCheckWorker.schedule(context, updateCheckInterval)
+                    else UpdateCheckWorker.cancel(context)
                 }
             }
         },
@@ -171,7 +176,7 @@ fun UpdatesSettingsItem(
 
     // Check frequency interval selector
     AnimatedVisibility(
-        visible = backgroundUpdateNotifications,
+        visible = backgroundUpdateNotifications && !hasGms,
         enter = expandVertically(animationSpec = tween(300)) + fadeIn(animationSpec = tween(300)),
         exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
     ) {

@@ -84,7 +84,7 @@ dependencies {
 
     apkEditorLib(files("$rootDir/libs/APKEditor-1.4.7.jar"))
     implementation(files(strippedApkEditorLib))
-    implementation("androidx.documentfile:documentfile:1.0.1")
+    implementation(libs.androidx.documentfile)
 
     // Native processes
     implementation(libs.kotlin.process)
@@ -121,6 +121,7 @@ dependencies {
     // Firebase Cloud Messaging
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
+    implementation(libs.play.services.base)
 
     // Markdown
     implementation(libs.markdown.renderer)

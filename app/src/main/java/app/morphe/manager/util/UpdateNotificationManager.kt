@@ -74,8 +74,6 @@ class UpdateNotificationManager(private val context: Context) {
 
     /**
      * Post a notification that a new Morphe Manager version is available.
-     *
-     * @param newVersion The new version string, e.g. "1.2.3"
      */
     fun showManagerUpdateNotification(newVersion: String) {
         if (!notificationManager.areNotificationsEnabled()) return
@@ -95,13 +93,19 @@ class UpdateNotificationManager(private val context: Context) {
     /**
      * Post a notification that new patch bundle updates are available.
      */
-    fun showBundleUpdateNotification() {
+    fun showBundleUpdateNotification(version: String? = null) {
         if (!notificationManager.areNotificationsEnabled()) return
+
+        val contentText = if (!version.isNullOrBlank()) {
+            context.getString(R.string.notification_update_text, version)
+        } else {
+            context.getString(R.string.notification_bundle_update_text_unversioned)
+        }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_BUNDLE_UPDATES)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(context.getString(R.string.notification_bundle_update_title))
-            .setContentText(context.getString(R.string.notification_update_text))
+            .setContentText(contentText)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(buildOpenAppIntent())
             .setAutoCancel(true)
@@ -113,10 +117,6 @@ class UpdateNotificationManager(private val context: Context) {
     /**
      * Post a high-priority notification that a new Morphe Manager version is available.
      * Called from [app.morphe.manager.service.MorpheFcmService] when an FCM push arrives.
-     *
-     * Uses [CHANNEL_FCM_UPDATES] (IMPORTANCE_HIGH) so the device wakes from Doze.
-     * No [NotificationManagerCompat.areNotificationsEnabled] guard - FCM already
-     * verified delivery eligibility before waking the device.
      */
     fun showFcmManagerUpdateNotification(version: String? = null) {
         val contentText = if (!version.isNullOrBlank()) {

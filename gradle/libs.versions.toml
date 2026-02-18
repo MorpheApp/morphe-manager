@@ -1,5 +1,7 @@
 [versions]
+documentfile = "1.1.0"
 ktx = "1.16.0"
+play-services-base = "18.10.0"
 ui-tooling = "1.8.1"
 viewmodel-lifecycle = "2.9.0"
 splash-screen = "1.2.0"
@@ -43,7 +45,9 @@ firebase-bom = "34.9.0"
 
 [libraries]
 # AndroidX Core
+androidx-documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
+play-services-base = { module = "com.google.android.gms:play-services-base", version.ref = "play-services-base" }
 runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "viewmodel-lifecycle" }
 runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "viewmodel-lifecycle" }
 splash-screen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash-screen" }

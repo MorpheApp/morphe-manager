@@ -1091,48 +1091,54 @@ class PatchBundleRepository(
     }
 
     /**
-     * Silently checks whether any remote bundle (auto-update or manual) has a newer version
-     * available. Does NOT download or apply the update — only compares version signatures.
+     * Silently checks whether any remote bundle has a newer version available.
+     * Does NOT download or apply the update — only compares version signatures.
      *
      * Used by [app.morphe.manager.worker.UpdateCheckWorker] for background update notifications.
      *
-     * @return true if at least one bundle has a pending update, false otherwise.
+     * @return The latest version string of the first updated bundle found (e.g. "4.21.0"),
+     *   or null if no updates are available or the check could not be completed.
      */
-    suspend fun checkForBundleUpdatesQuiet(): Boolean {
-        if (!networkInfo.isConnected()) return false
+    suspend fun checkForBundleUpdatesQuiet(): String? {
+        if (!networkInfo.isConnected()) return null
 
         val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-        if (!allowMeteredUpdates && !networkInfo.isSafe()) return false
+        if (!allowMeteredUpdates && !networkInfo.isSafe()) return null
 
         return try {
             val remoteBundles = store.state.value.sources.values
                 .filterIsInstance<RemotePatchBundle>()
 
-            if (remoteBundles.isEmpty()) return false
+            if (remoteBundles.isEmpty()) return null
 
-            // Check all remote bundles in parallel for speed
+            // Check all remote bundles in parallel for speed; return the first updated version found
             coroutineScope {
                 remoteBundles
                     .map { bundle ->
                         async {
                             try {
                                 val info = bundle.fetchLatestReleaseInfo()
-                                val latestSignature = info.version.takeUnless { it.isBlank() }
+                                val latestSignature = info.version
+                                    .removePrefix("v")
+                                    .takeUnless { it.isBlank() }
                                 val installedSignature = bundle.installedVersionSignature
-                                // Has an update when signatures differ (or installed is null)
-                                latestSignature != null && installedSignature != latestSignature
+                                // Return version when signatures differ (or installed is null)
+                                if (latestSignature != null && installedSignature != latestSignature)
+                                    latestSignature
+                                else
+                                    null
                             } catch (e: Exception) {
                                 Log.w(tag, "Failed to check update for bundle ${bundle.name}", e)
-                                false
+                                null
                             }
                         }
                     }
                     .awaitAll()
-                    .any { it }
+                    .firstOrNull { it != null }
             }
         } catch (e: Exception) {
             Log.e(tag, "Failed to quietly check for bundle updates", e)
-            false
+            null
         }
     }
 
