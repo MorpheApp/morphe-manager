@@ -18,9 +18,10 @@ import app.morphe.manager.R
 /**
  * Manages Android system notifications for Morphe Manager update events.
  *
- * Two notification types:
- * - Manager update: notifies when a new Morphe Manager APK is available
- * - Bundle update: notifies when new patches are available for download
+ * Three notification types:
+ * - Manager update (WorkManager): notifies when a new Morphe Manager APK is available
+ * - Bundle update (WorkManager): notifies when new patches are available for download
+ * - FCM high-priority: same content but delivered via Firebase Cloud Messaging
  *
  * Both notifications tap through to [MainActivity]. The notification channels are
  * created once during [createNotificationChannels] which should be called from
@@ -32,7 +33,7 @@ class UpdateNotificationManager(private val context: Context) {
 
     /**
      * Creates the required notification channels.
-     * Safe to call multiple times — Android no-ops if the channel already exists.
+     * Safe to call multiple times - Android no-ops if the channel already exists.
      * Must be called before posting any notification (required on API 26+).
      */
     fun createNotificationChannels() {
@@ -52,10 +53,23 @@ class UpdateNotificationManager(private val context: Context) {
             description = context.getString(R.string.notification_channel_bundle_updates_description)
         }
 
+        // FCM channel uses IMPORTANCE_HIGH so the notification shows as a heads-up
+        // and wakes the screen. FCM with "priority: high" delivers the message even
+        // in Doze mode via Google Play Services; IMPORTANCE_HIGH makes it visible.
+        val fcmChannel = NotificationChannel(
+            CHANNEL_FCM_UPDATES,
+            context.getString(R.string.notification_channel_fcm_updates),
+            NotificationManager.IMPORTANCE_HIGH
+        ).apply {
+            description = context.getString(R.string.notification_channel_fcm_updates_description)
+            enableVibration(true)
+        }
+
         val systemNotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         systemNotificationManager.createNotificationChannel(managerChannel)
         systemNotificationManager.createNotificationChannel(bundleChannel)
+        systemNotificationManager.createNotificationChannel(fcmChannel)
     }
 
     /**
@@ -98,6 +112,48 @@ class UpdateNotificationManager(private val context: Context) {
         notificationManager.notify(NOTIFICATION_ID_BUNDLE_UPDATE, notification)
     }
 
+    /**
+     * Post a high-priority notification that a new Morphe Manager version is available.
+     * Called from [app.morphe.manager.service.MorpheFcmService] when an FCM push arrives.
+     *
+     * Uses [CHANNEL_FCM_UPDATES] (IMPORTANCE_HIGH) so the device wakes from Doze.
+     * No [NotificationManagerCompat.areNotificationsEnabled] guard - FCM already
+     * verified delivery eligibility before waking the device.
+     */
+    fun showFcmManagerUpdateNotification(newVersion: String) {
+        val notification = NotificationCompat.Builder(context, CHANNEL_FCM_UPDATES)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(context.getString(R.string.notification_manager_update_title))
+            .setContentText(
+                context.getString(R.string.notification_manager_update_text, newVersion)
+            )
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(buildOpenAppIntent())
+            .setAutoCancel(true)
+            .build()
+
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.notify(NOTIFICATION_ID_FCM_MANAGER_UPDATE, notification)
+    }
+
+    /**
+     * Post a high-priority notification that new patch bundles are available.
+     * Called from [app.morphe.manager.service.MorpheFcmService] when an FCM push arrives.
+     */
+    fun showFcmBundleUpdateNotification() {
+        val notification = NotificationCompat.Builder(context, CHANNEL_FCM_UPDATES)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(context.getString(R.string.notification_bundle_update_title))
+            .setContentText(context.getString(R.string.notification_bundle_update_text))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(buildOpenAppIntent())
+            .setAutoCancel(true)
+            .build()
+
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.notify(NOTIFICATION_ID_FCM_BUNDLE_UPDATE, notification)
+    }
+
     /** Creates a [PendingIntent] that opens [MainActivity] when the notification is tapped. */
     private fun buildOpenAppIntent(): PendingIntent {
         val intent = Intent(context, MainActivity::class.java).apply {
@@ -112,17 +168,26 @@ class UpdateNotificationManager(private val context: Context) {
     }
 
     companion object {
-        /** Notification channel ID for manager (app) update notifications */
+        /** Notification channel ID for WorkManager manager update notifications */
         const val CHANNEL_MANAGER_UPDATES = "morphe_manager_updates"
 
-        /** Notification channel ID for patch bundle update notifications */
+        /** Notification channel ID for WorkManager bundle update notifications */
         const val CHANNEL_BUNDLE_UPDATES = "morphe_bundle_updates"
 
-        /** Stable notification ID for the "manager update available" notification */
+        /** Notification channel ID for FCM high-priority push notifications */
+        const val CHANNEL_FCM_UPDATES = "morphe_fcm_updates"
+
+        /** Stable notification ID for WorkManager manager update notification */
         private const val NOTIFICATION_ID_MANAGER_UPDATE = 1001
 
-        /** Stable notification ID for the "bundle update available" notification */
+        /** Stable notification ID for WorkManager bundle update notification */
         private const val NOTIFICATION_ID_BUNDLE_UPDATE = 1002
+
+        /** Stable notification ID for FCM manager update notification */
+        private const val NOTIFICATION_ID_FCM_MANAGER_UPDATE = 2001
+
+        /** Stable notification ID for FCM bundle update notification */
+        private const val NOTIFICATION_ID_FCM_BUNDLE_UPDATE = 2002
 
         /** PendingIntent request code for the tap-through open-app action */
         private const val REQUEST_CODE_OPEN_APP = 0

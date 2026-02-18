@@ -349,6 +349,8 @@ Are you sure you want to proceed?"</string>
     <string name="notification_channel_manager_updates_description">Notifications about new Morphe manager versions</string>
     <string name="notification_channel_bundle_updates">Patch sources updates</string>
     <string name="notification_channel_bundle_updates_description">Notifications about new patch bundle versions</string>
+    <string name="notification_channel_fcm_updates">Update alerts</string>
+    <string name="notification_channel_fcm_updates_description">Instant push notifications for new Morphe manager and patch releases. Delivered even when the app is in the background</string>
     <string name="settings_advanced_update_interval">Check frequency</string>
     <string name="settings_advanced_update_interval_dialog_title">Check for updates</string>
     <string name="settings_advanced_update_interval_hourly">Once an hour</string>

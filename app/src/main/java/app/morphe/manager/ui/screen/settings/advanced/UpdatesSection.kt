@@ -33,15 +33,18 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.worker.UpdateCheckInterval
+import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.worker.UpdateCheckWorker
 import kotlinx.coroutines.launch
 
 /**
  * Updates section settings item for the Advanced tab.
  *
- * @param usePrereleases Current value of the prereleases preference
- * @param onPrereleasesToggle Called when the prereleases switch is flipped
- * @param prefs Full [PreferencesManager] used to read and write notification / interval prefs
+ * @param usePrereleases Current value of the prereleases preference.
+ * @param onPrereleasesToggle Called when the prereleases switch is flipped.
+ *                            The caller (AdvancedTabContent) handles saving the preference;
+ *                            FCM re-sync is performed here after the callback returns.
+ * @param prefs Full [PreferencesManager] - used to read/write notification and interval prefs.
  */
 @Composable
 fun UpdatesSettingsItem(
@@ -84,6 +87,8 @@ fun UpdatesSettingsItem(
                 showNotificationPermissionDialog = false
                 if (granted) {
                     UpdateCheckWorker.schedule(context, updateCheckInterval)
+                    // Permission just granted - sync topics with current prefs
+                    syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
                 } else {
                     scope.launch { prefs.backgroundUpdateNotifications.update(false) }
                 }
@@ -105,11 +110,17 @@ fun UpdatesSettingsItem(
 
     // Use prereleases toggle
     RichSettingsItem(
-        onClick = onPrereleasesToggle,
-        showBorder = true,
-        leadingContent = {
-            MorpheIcon(icon = Icons.Outlined.Science)
+        onClick = {
+            // Let the parent save the pref, then re-sync FCM with the NEW value
+            onPrereleasesToggle()
+            if (backgroundUpdateNotifications) {
+                // usePrereleases is still the OLD value here - toggle means the new
+                // value is the opposite, so we pass !usePrereleases
+                syncFcmTopics(notificationsEnabled = true, usePrereleases = !usePrereleases)
+            }
         },
+        showBorder = true,
+        leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
         title = stringResource(R.string.settings_advanced_updates_use_prereleases),
         subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
         trailingContent = {
@@ -128,21 +139,22 @@ fun UpdatesSettingsItem(
         onClick = {
             val newValue = !backgroundUpdateNotifications
             if (newValue && !hasNotificationPermission()) {
-                // Save optimistically - dialog reverts if permission is denied
+                // Optimistic save - dialog reverts if the user denies
                 scope.launch { prefs.backgroundUpdateNotifications.update(true) }
                 showNotificationPermissionDialog = true
             } else {
-                scope.launch {
-                    prefs.backgroundUpdateNotifications.update(newValue)
-                    if (newValue) UpdateCheckWorker.schedule(context, updateCheckInterval)
-                    else UpdateCheckWorker.cancel(context)
+                scope.launch { prefs.backgroundUpdateNotifications.update(newValue) }
+                if (newValue) {
+                    UpdateCheckWorker.schedule(context, updateCheckInterval)
+                    syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
+                } else {
+                    UpdateCheckWorker.cancel(context)
+                    syncFcmTopics(notificationsEnabled = false, usePrereleases = usePrereleases)
                 }
             }
         },
         showBorder = true,
-        leadingContent = {
-            MorpheIcon(icon = Icons.Outlined.NotificationsActive)
-        },
+        leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) },
         title = stringResource(R.string.settings_advanced_updates_background_notifications),
         subtitle = stringResource(R.string.settings_advanced_updates_background_notifications_description),
         trailingContent = {
@@ -166,9 +178,7 @@ fun UpdatesSettingsItem(
         RichSettingsItem(
             onClick = { showIntervalDialog = true },
             showBorder = true,
-            leadingContent = {
-                MorpheIcon(icon = Icons.Outlined.Schedule)
-            },
+            leadingContent = { MorpheIcon(icon = Icons.Outlined.Schedule) },
             title = stringResource(R.string.settings_advanced_update_interval),
             subtitle = stringResource(updateCheckInterval.labelResId)
         )
@@ -176,11 +186,8 @@ fun UpdatesSettingsItem(
 }
 
 /**
- * Dialog shown on Android 13+ when the user enables background notifications
- * and [Manifest.permission.POST_NOTIFICATIONS] has not yet been granted.
- *
- * Triggers the system permission request. If denied, [onPermissionResult] is
- * called with `false` and the caller is expected to revert the preference.
+ * Shown on Android 13+ when POST_NOTIFICATIONS permission is needed.
+ * On older versions this dialog is never shown - the permission is auto-granted.
  */
 @Composable
 fun NotificationPermissionDialog(
@@ -221,9 +228,7 @@ fun NotificationPermissionDialog(
 }
 
 /**
- * Dialog to select how often the background update check should run.
- *
- * Uses a discrete slider with one step per [UpdateCheckInterval] entry.
+ * Discrete-slider dialog to pick the background update check interval.
  */
 @Composable
 private fun UpdateCheckIntervalDialog(

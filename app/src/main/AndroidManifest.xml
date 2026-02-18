@@ -189,5 +189,23 @@
                 android:value="androidx.startup"
                 tools:node="remove" />
         </provider>
+
+        <!-- Firebase Cloud Messaging — receives push notifications bypassing Doze mode -->
+        <service
+            android:name="app.morphe.manager.service.MorpheFcmService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Disable FCM auto-init so we only register when user opts in to notifications -->
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
+
     </application>
 </manifest>

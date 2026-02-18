@@ -16,6 +16,7 @@ import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckWorker
+import app.morphe.manager.util.syncFcmTopics
 import coil.Coil
 import coil.ImageLoader
 import com.topjohnwu.superuser.Shell
@@ -99,12 +100,21 @@ class ManagerApplication : Application() {
             }
             applyAppLanguage(storedLanguage)
 
-            // Schedule or cancel the background update worker according to current preference
-            if (prefs.backgroundUpdateNotifications.get()) {
+            // Schedule/cancel WorkManager fallback AND sync FCM topic subscriptions.
+            // FCM is the primary delivery path (bypasses Doze); WorkManager is the fallback.
+            // syncFcmTopics() ensures the device is subscribed to exactly one of:
+            //   - "morphe_updates"     (stable)     when prereleases are OFF
+            //   - "morphe_updates_dev" (prerelease) when prereleases are ON
+            // or to neither when background notifications are disabled.
+            val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
+            val usePrereleases = prefs.useManagerPrereleases.get()
+
+            if (notificationsEnabled) {
                 UpdateCheckWorker.schedule(this@ManagerApplication, prefs.updateCheckInterval.get())
             } else {
                 UpdateCheckWorker.cancel(this@ManagerApplication)
             }
+            syncFcmTopics(notificationsEnabled = notificationsEnabled, usePrereleases = usePrereleases)
         }
 
         scope.launch(Dispatchers.Default) {
