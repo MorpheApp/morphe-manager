@@ -5,10 +5,7 @@
 
 package app.morphe.manager.ui.screen
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.os.Build
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
@@ -31,11 +27,9 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.home.*
-import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
-import app.morphe.manager.worker.UpdateCheckWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -67,7 +61,6 @@ fun HomeScreen(
 
     // Dialog state for installed app info
     var showInstalledAppDialog by remember { mutableStateOf<String?>(null) }
-    var showNotificationPermissionDialogOnLaunch by remember { mutableStateOf(false) }
 
     // Pull to refresh state
     var isRefreshing by remember { mutableStateOf(false) }
@@ -141,23 +134,6 @@ fun HomeScreen(
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
         contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
-
-    // On Android 13+, request POST_NOTIFICATIONS permission once on first launch
-    // if background notifications are enabled (default: true) and not yet requested
-    LaunchedEffect(Unit) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val alreadyRequested = prefs.notificationPermissionRequested.get()
-            val isEnabled = prefs.backgroundUpdateNotifications.get()
-            val alreadyGranted = ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED
-
-            if (isEnabled && !alreadyRequested && !alreadyGranted) {
-                showNotificationPermissionDialogOnLaunch = true
-            }
-        }
-    }
 
     // Update bundle data
     LaunchedEffect(sources, bundleInfo) {
@@ -290,32 +266,6 @@ fun HomeScreen(
                 }
             )
         }
-    }
-
-    if (showNotificationPermissionDialogOnLaunch) {
-        NotificationPermissionDialog(
-            onDismissRequest = {
-                // User closed the dialog without responding - mark as requested so
-                // we don't ask again automatically, but keep the pref enabled.
-                homeViewModel.viewModelScope.launch {
-                    prefs.notificationPermissionRequested.update(true)
-                }
-                showNotificationPermissionDialogOnLaunch = false
-            },
-            onPermissionResult = { granted ->
-                homeViewModel.viewModelScope.launch {
-                    prefs.notificationPermissionRequested.update(true)
-                    if (granted) {
-                        UpdateCheckWorker.schedule(context)
-                    } else {
-                        // User denied - turn the preference off so it reflects reality
-                        prefs.backgroundUpdateNotifications.update(false)
-                        UpdateCheckWorker.cancel(context)
-                    }
-                }
-                showNotificationPermissionDialogOnLaunch = false
-            }
-        )
     }
 
     // Control snackbar visibility

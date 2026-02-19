@@ -197,7 +197,8 @@ fun UpdatesSettingsItem(
 @Composable
 fun NotificationPermissionDialog(
     onDismissRequest: () -> Unit,
-    onPermissionResult: (granted: Boolean) -> Unit
+    onPermissionResult: (granted: Boolean) -> Unit,
+    title: String = stringResource(R.string.notification_permission_dialog_title),
 ) {
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
@@ -206,7 +207,7 @@ fun NotificationPermissionDialog(
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = stringResource(R.string.notification_permission_dialog_title),
+        title = title,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.allow),

@@ -367,6 +367,7 @@ Are you sure you want to proceed?"</string>
     <string name="notification_bundle_update_text_unversioned">Tap to open Morphe manager and update</string>
     <string name="notification_permission_dialog_title">Allow notifications</string>
     <string name="notification_permission_dialog_description">Morphe manager needs notification permission to alert you when updates are available in the background</string>
+    <string name="notification_post_patch_dialog_title">Would you like to be notified when updates are available?</string>
 
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
