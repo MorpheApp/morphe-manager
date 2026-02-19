@@ -20,15 +20,24 @@ import org.koin.android.ext.android.inject
  * app process is dead — unlike WorkManager, which can be suppressed by aggressive
  * vendor battery optimisations (Xiaomi, Huawei, Samsung, OnePlus, etc.).
  *
- * ## Two-topic model
+ * ## Four-topic model
  *
- * The server publishes to two separate topics after each release:
+ * Manager and patches topics are independent — each has its own stable/dev pair:
  *
- * | Topic                  | Branch  | Audience                        |
- * |------------------------|---------|---------------------------------|
- * | `morphe_updates`       | `main`  | Users with prereleases OFF      |
- * | `morphe_updates_dev`   | `dev`   | Users with prereleases ON       |
- * | *(neither)*            |   -     | Users with notifications OFF    |
+ * | Topic                        | Audience                                              |
+ * |------------------------------|-------------------------------------------------------|
+ * | `morphe_updates`             | Manager: stable build AND prereleases OFF             |
+ * | `morphe_updates_dev`         | Manager: dev build OR prereleases ON                  |
+ * | `morphe_patches_updates`     | Patches: prereleases OFF                              |
+ * | `morphe_patches_updates_dev` | Patches: prereleases ON                               |
+ * | *(none)*                     | Notifications OFF                                     |
+ *
+ * A device with a dev manager build and prereleases OFF subscribes to **both**
+ * `morphe_updates` and `morphe_updates_dev` — a stable release (e.g. `1.5.0`) is
+ * a valid upgrade from a dev build (e.g. `1.5.0-dev.1`).
+ *
+ * The patches topic is determined solely by the "Use prereleases" preference,
+ * independent of the installed manager build variant.
  *
  * Subscription is managed by [app.morphe.manager.util.syncFcmTopics], which is called
  * whenever the user toggles "Background notifications" or "Use prereleases" in Settings,
@@ -38,11 +47,12 @@ import org.koin.android.ext.android.inject
  *
  * Every FCM message must include a `type` key in its `data` map:
  *
- * | type             | extra keys | action                                    |
- * |------------------|------------|-------------------------------------------|
- * | `manager_update` | `version`  | Calls [UpdateNotificationManager.showFcmManagerUpdateNotification] |
- * | `bundle_update`  |    -       | Calls [UpdateNotificationManager.showFcmBundleUpdateNotification]  |
+ * | type             | extra keys       | action                                                             |
+ * |------------------|------------------|--------------------------------------------------------------------|
+ * | `manager_update` | `version` (opt.) | Calls [UpdateNotificationManager.showFcmManagerUpdateNotification] |
+ * | `bundle_update`  | `version` (opt.) | Calls [UpdateNotificationManager.showFcmBundleUpdateNotification]  |
  *
+ * `version` is optional in both types for compatibility.
  * Unknown types are silently ignored for forward-compatibility with future message types.
  *
  * ## Token rotation

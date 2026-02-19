@@ -18,13 +18,20 @@ import app.morphe.manager.R
 /**
  * Manages Android system notifications for Morphe Manager update events.
  *
- * Three notification types:
- * - Manager update (WorkManager): notifies when a new Morphe Manager APK is available
- * - Bundle update (WorkManager): notifies when new patches are available for download
- * - FCM high-priority: same content but delivered via Firebase Cloud Messaging
+ * Four notification methods across two delivery channels:
  *
- * Both notifications tap through to [MainActivity]. The notification channels are
- * created once during [createNotificationChannels] which should be called from
+ * | Method                          | Channel     | Description                              |
+ * |---------------------------------|-------------|------------------------------------------|
+ * | [showManagerUpdateNotification] | WorkManager | New manager APK available (with version) |
+ * | [showBundleUpdateNotification]  | WorkManager | New patches available (with version)     |
+ * | [showFcmManagerUpdateNotification] | FCM      | Same as above, high-priority push        |
+ * | [showFcmBundleUpdateNotification]  | FCM      | Same as above, high-priority push        |
+ *
+ * FCM methods use [CHANNEL_FCM_UPDATES] (IMPORTANCE_HIGH) to wake the device from Doze.
+ * WorkManager methods use lower-priority channels for periodic background checks.
+ * All notifications tap through to [MainActivity].
+ *
+ * Channels are created once in [createNotificationChannels], called from
  * [app.morphe.manager.ManagerApplication.onCreate].
  */
 class UpdateNotificationManager(private val context: Context) {
@@ -117,6 +124,10 @@ class UpdateNotificationManager(private val context: Context) {
     /**
      * Post a high-priority notification that a new Morphe Manager version is available.
      * Called from [app.morphe.manager.service.MorpheFcmService] when an FCM push arrives.
+     *
+     * Uses [CHANNEL_FCM_UPDATES] (IMPORTANCE_HIGH) so the device wakes from Doze.
+     * No [NotificationManagerCompat.areNotificationsEnabled] guard - FCM already
+     * verified delivery eligibility before waking the device.
      */
     fun showFcmManagerUpdateNotification(version: String? = null) {
         val contentText = if (!version.isNullOrBlank()) {

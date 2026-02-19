@@ -13,7 +13,7 @@ Optional (for release workflow):
 Optional (for test workflow — override auto-routing):
   FCM_TOPIC   — Explicit topic to send to. Overrides BRANCH-based routing.
   FCM_TYPE    — Message type: "manager_update" (default) or "bundle_update"
-  FCM_VERSION — Version string to include in manager_update messages (default: "test")
+  FCM_VERSION — Version string to include in the notification (used by both manager_update and bundle_update)
 """
 
 import json

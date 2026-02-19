@@ -12,10 +12,10 @@ import com.google.firebase.messaging.FirebaseMessaging
 /**
  * FCM topic for stable manager releases (published from the `main` branch).
  *
- * Routing rule: subscribe when notifications are ON AND the installed manager
- * is a stable build AND the user has not enabled prereleases.
- * Dev builds always track [FCM_TOPIC_MANAGER_DEV] regardless of user preference,
- * because stable manager releases are not valid upgrades for a dev build.
+ * Subscribed when notifications are ON AND prereleases are OFF.
+ * Dev builds also subscribe to this topic when prereleases are OFF — a stable
+ * release (e.g. `1.5.0`) is a valid upgrade from a dev build (e.g. `1.5.0-dev.1`).
+ * See [syncFcmTopics] for the full subscription matrix.
  */
 const val FCM_TOPIC_MANAGER_STABLE = "morphe_updates"
 
