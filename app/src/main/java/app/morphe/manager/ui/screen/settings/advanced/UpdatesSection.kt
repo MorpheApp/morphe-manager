@@ -54,9 +54,7 @@ private fun isGmsAvailable(context: Context): Boolean =
  *
  * @param usePrereleases Current value of the prereleases preference.
  * @param onPrereleasesToggle Called when the prereleases switch is flipped.
- *                            The caller (AdvancedTabContent) handles saving the preference;
- *                            FCM re-sync is performed here after the callback returns.
- * @param prefs Full [PreferencesManager] - used to read/write notification and interval prefs.
+ * @param prefs Full [PreferencesManager] used to read and write notification / interval prefs.
  */
 @Composable
 fun UpdatesSettingsItem(
@@ -70,8 +68,7 @@ fun UpdatesSettingsItem(
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
 
-    // On GMS devices FCM is the primary delivery channel - WorkManager runs as a silent
-    // fallback and does not need to be configured by the user.
+    // On GMS devices FCM handles all notification delivery.
     val hasGms = remember { isGmsAvailable(context) }
 
     val enabledState = stringResource(R.string.enabled)
@@ -103,7 +100,7 @@ fun UpdatesSettingsItem(
                 showNotificationPermissionDialog = false
                 if (granted) {
                     syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
-                    UpdateCheckWorker.schedule(context, updateCheckInterval)
+                    if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                 } else {
                     scope.launch { prefs.backgroundUpdateNotifications.update(false) }
                 }
@@ -116,7 +113,7 @@ fun UpdatesSettingsItem(
             currentInterval = updateCheckInterval,
             onIntervalSelected = { selected ->
                 scope.launch { prefs.updateCheckInterval.update(selected) }
-                UpdateCheckWorker.schedule(context, selected)
+                if (!hasGms) UpdateCheckWorker.schedule(context, selected)
                 showIntervalDialog = false
             },
             onDismiss = { showIntervalDialog = false }
@@ -146,14 +143,14 @@ fun UpdatesSettingsItem(
         onClick = {
             val newValue = !backgroundUpdateNotifications
             if (newValue && !hasNotificationPermission()) {
-                // Optimistic save - dialog reverts if the user denies
+                // Save optimistically - dialog reverts if permission is denied
                 scope.launch { prefs.backgroundUpdateNotifications.update(true) }
                 showNotificationPermissionDialog = true
             } else {
                 scope.launch {
                     prefs.backgroundUpdateNotifications.update(newValue)
                     syncFcmTopics(newValue, usePrereleases)
-                    if (newValue) UpdateCheckWorker.schedule(context, updateCheckInterval)
+                    if (newValue && !hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                     else UpdateCheckWorker.cancel(context)
                 }
             }
@@ -194,8 +191,8 @@ fun UpdatesSettingsItem(
 }
 
 /**
- * Shown on Android 13+ when POST_NOTIFICATIONS permission is needed.
- * On older versions this dialog is never shown - the permission is auto-granted.
+ * Dialog shown on Android 13+ when the user enables background notifications
+ * and [Manifest.permission.POST_NOTIFICATIONS] has not yet been granted.
  */
 @Composable
 fun NotificationPermissionDialog(

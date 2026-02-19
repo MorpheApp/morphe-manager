@@ -17,6 +17,8 @@ import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckWorker
 import app.morphe.manager.util.syncFcmTopics
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import coil.Coil
 import coil.ImageLoader
 import com.topjohnwu.superuser.Shell
@@ -102,12 +104,19 @@ class ManagerApplication : Application() {
 
             // Schedule/cancel WorkManager fallback AND sync FCM topic subscriptions.
             // FCM is the primary delivery path (bypasses Doze); WorkManager is the fallback.
-            // syncFcmTopics() manages four topic subscriptions (manager stable/dev + patches stable/dev).
-            // See FcmTopicManager.kt for the full subscription matrix.
+            // syncFcmTopics() ensures the device is subscribed to exactly one of:
+            //   - "morphe_updates"     (stable)     when prereleases are OFF
+            //   - "morphe_updates_dev" (prerelease) when prereleases are ON
+            // or to neither when background notifications are disabled.
             val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
             val usePrereleases = prefs.useManagerPrereleases.get()
 
-            if (notificationsEnabled) {
+            // On GMS devices FCM is the primary delivery channel - WorkManager is not needed.
+            // Cancel any previously scheduled jobs on GMS devices.
+            val hasGms = GoogleApiAvailability.getInstance()
+                .isGooglePlayServicesAvailable(this@ManagerApplication) == ConnectionResult.SUCCESS
+
+            if (notificationsEnabled && !hasGms) {
                 UpdateCheckWorker.schedule(this@ManagerApplication, prefs.updateCheckInterval.get())
             } else {
                 UpdateCheckWorker.cancel(this@ManagerApplication)
