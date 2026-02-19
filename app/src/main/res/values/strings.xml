@@ -344,12 +344,12 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_updates_use_prereleases">Use pre-release versions</string>
     <string name="settings_advanced_updates_use_prereleases_description">Get early access to new patches and manager features</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
-    <string name="settings_advanced_updates_background_notifications_description">Check for updates when opening the app and notify when available</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodically check for updates in the background and notify when available</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Receive instant push notifications for new releases, even when the app is closed</string>
     <string name="notification_channel_manager_updates">Manager updates</string>
     <string name="notification_channel_manager_updates_description">Notifications about new Morphe manager versions</string>
     <string name="notification_channel_bundle_updates">Patch sources updates</string>
-    <string name="notification_channel_bundle_updates_description">Notifications about new patch bundle versions</string>
+    <string name="notification_channel_bundle_updates_description">Notifications about new patch source versions</string>
     <string name="notification_channel_fcm_updates">Update alerts</string>
     <string name="notification_channel_fcm_updates_description">Instant push notifications for new Morphe manager and patch releases. Delivered even when the app is in the background</string>
     <string name="settings_advanced_update_interval">Check frequency</string>
