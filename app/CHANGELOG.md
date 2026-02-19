@@ -1,3 +1,10 @@
+# app [1.8.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.1...v1.8.0-dev.2) (2026-02-19)
+
+
+### Features
+
+* Show Android notifications when patch and manager updates are available ([#217](https://github.com/MorpheApp/morphe-manager/issues/217)) ([dced36b](https://github.com/MorpheApp/morphe-manager/commit/dced36be9357ba012b1bb128c3c94e8528570f83))
+
 # app [1.8.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.1...v1.8.0-dev.1) (2026-02-16)
 
 
