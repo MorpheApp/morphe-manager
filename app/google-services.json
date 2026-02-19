@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:574971415597:android:baeaf1958ebb5a84dc7ca4",
+        "mobilesdk_app_id": "1:574971415597:android:5acf99d4cc8260eedc7ca4",
         "android_client_info": {
           "package_name": "app.morphe.manager"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCq_Jp7UkUXovVxBJBb8WMFfCY29q_pBXA"
+          "current_key": "AIzaSyAICrE-tnEhNKXh1vEbfucYWWxOr7NSr_g"
         }
       ],
       "services": {
