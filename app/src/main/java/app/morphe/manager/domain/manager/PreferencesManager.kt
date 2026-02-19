@@ -37,11 +37,8 @@ class PreferencesManager(
     val useManagerPrereleases = booleanPreference("manager_prereleases", false)
     val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
 
-    /**
-     * Whether to send Android system notifications when updates are available in the background.
-     * When true, a WorkManager job runs periodically to check for manager and bundle updates.
-     */
-    val backgroundUpdateNotifications = booleanPreference("background_update_notifications", true)
+    /**  Whether to send Android system notifications when updates are available in the background. */
+    val backgroundUpdateNotifications = booleanPreference("background_update_notifications", false)
 
     /**  How often the background update check should run. */
     val updateCheckInterval = enumPreference("update_check_interval", UpdateCheckInterval.DAILY)
