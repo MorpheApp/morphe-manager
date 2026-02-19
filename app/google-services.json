@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "509338574368",
-    "project_id": "morpheapp-2026",
-    "storage_bucket": "morpheapp-2026.firebasestorage.app"
+    "project_number": "574971415597",
+    "project_id": "morphe-manager",
+    "storage_bucket": "morphe-manager.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:509338574368:android:3f2b5ba0f9e232e50ca645",
+        "mobilesdk_app_id": "1:574971415597:android:baeaf1958ebb5a84dc7ca4",
         "android_client_info": {
           "package_name": "app.morphe.manager"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD1JDzSM-MDk53UXa1B5-Nofm0lYVAnKZg"
+          "current_key": "AIzaSyCq_Jp7UkUXovVxBJBb8WMFfCY29q_pBXA"
         }
       ],
       "services": {
