@@ -90,31 +90,16 @@ jobs:
           # Push explicitly to the branch that triggered the workflow
           git push origin HEAD:${GITHUB_REF_NAME}
 
-      - name: Setup Python for FCM
-        if: steps.release.outputs.NEW_TAG != ''
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install FCM dependencies
-        if: steps.release.outputs.NEW_TAG != ''
-        run: pip install cryptography
-
-      - name: Send FCM push notification
-        if: steps.release.outputs.NEW_TAG != ''
-        env:
-          FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
-          FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}
-          NEW_TAG: ${{ steps.release.outputs.NEW_TAG }}
-          BRANCH: ${{ github.ref_name }}
-        run: python3 .github/scripts/send_fcm.py
-
       - name: Attest
         if: steps.release.outputs.NEW_TAG != ''
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: 'Morphe Manager ${{ steps.release.outputs.NEW_TAG }}'
           subject-path: app/build/outputs/apk/release/morphe-manager*.apk
+
+      - name: Purge jsDelivr Cache
+        if: steps.release.outputs.NEW_TAG != ''
+        run: curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@${{ github.ref_name }}/app/app-release.json"
 
       - name: Generate website deploy token
         if: steps.release.outputs.NEW_TAG != ''
@@ -136,3 +121,20 @@ jobs:
               repo: 'morphe-website',
               event_type: 'trigger-deploy'
             })
+
+      - name: Setup Python for FCM
+        if: steps.release.outputs.NEW_TAG != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Send FCM push notification
+        if: steps.release.outputs.NEW_TAG != ''
+        env:
+          FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
+          FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}
+          NEW_TAG: ${{ steps.release.outputs.NEW_TAG }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          pip install cryptography
+          python3 .github/scripts/send_fcm.py
