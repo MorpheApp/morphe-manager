@@ -1,18 +1,22 @@
 package app.morphe.manager.ui.screen.patcher
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FolderOff
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -61,12 +65,17 @@ fun CancelPatchingDialog(
 /**
  * Pre-flight dialog shown when one or more patch option paths cannot be read.
  *
- * The "Open settings" route is only meaningful on Android 11+ (API 30) because
- * that is when MANAGE_EXTERNAL_STORAGE was introduced. On older Android versions
- * the dialog still shows the bad paths and the cancel-and-fix hint, but the
- * settings button is hidden because READ_EXTERNAL_STORAGE (the older permission)
- * is granted at install-time and is not the real blocker there - the path itself
- * is likely just wrong.
+ * Android permission models:
+ *
+ *  - Android 11+ (API 30+): MANAGE_EXTERNAL_STORAGE - not a runtime permission.
+ *    Must redirect to a dedicated system settings screen. Button opens
+ *    ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION; [onRetryAfterPermission]
+ *    re-runs validation when the user returns.
+ *
+ *  - Android 10 and below (API 29-): READ_EXTERNAL_STORAGE - standard runtime
+ *    permission, requested via the system "Allow / Deny" prompt directly from
+ *    within the app. If granted, [onRetryAfterPermission] re-runs validation
+ *    immediately. If denied, a warning badge is shown and only Cancel is available.
  */
 @Composable
 fun StoragePermissionDialog(
@@ -75,7 +84,20 @@ fun StoragePermissionDialog(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    val canRequestManageStorage = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+    val isApi30Plus = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+
+    // Only used on Android 10 and below where READ_EXTERNAL_STORAGE is a
+    // standard runtime permission that can be requested inline
+    var permissionDenied by remember { mutableStateOf(false) }
+    val readStorageLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            onRetryAfterPermission()
+        } else {
+            permissionDenied = true
+        }
+    }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -85,23 +107,34 @@ fun StoragePermissionDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                if (canRequestManageStorage) {
+                if (isApi30Plus) {
+                    // Android 11+ open the dedicated all-files-access settings screen
                     MorpheDialogButton(
                         text = stringResource(R.string.patcher_storage_permission_open_settings),
                         onClick = {
-                            // Open the per-app "Allow management of all files" system screen.
-                            // When the user comes back, onRetryAfterPermission re-runs preflight.
+                            // Open the per-app "Allow management of all files" system screen
+                            // When the user comes back, onRetryAfterPermission re-runs preflight
                             val intent = Intent(
                                 Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
                                 Uri.fromParts("package", context.packageName, null)
                             )
                             context.startActivity(intent)
-                            // We call retry here - the permission dialog is async and the
-                            // user will return to this screen. The re-check will naturally
-                            // fire when they come back and tap "Retry" or we observe lifecycle.
+                            // Trigger re-validation; if the user actually granted the
+                            // permission the patcher will start when they return
                             onRetryAfterPermission()
                         },
                         icon = Icons.Outlined.Settings,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                } else {
+                    // Android 10 and below request READ_EXTERNAL_STORAGE inline
+                    MorpheDialogButton(
+                        text = stringResource(R.string.patcher_storage_permission_grant),
+                        onClick = {
+                            permissionDenied = false
+                            readStorageLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        },
+                        icon = Icons.Outlined.Lock,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -122,7 +155,7 @@ fun StoragePermissionDialog(
         ) {
             Text(
                 text = stringResource(
-                    if (canRequestManageStorage) {
+                    if (isApi30Plus) {
                         R.string.patcher_storage_permission_description_api30
                     } else {
                         R.string.patcher_storage_permission_description_legacy
@@ -133,6 +166,19 @@ fun StoragePermissionDialog(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
+
+            // Shown on Android 10 and below after the user taps "Deny" on the
+            // READ_EXTERNAL_STORAGE prompt. Explains they must either grant the
+            // permission or move the files to the private app directory
+            if (permissionDenied) {
+                InfoBadge(
+                    text = stringResource(R.string.patcher_storage_permission_denied_warning),
+                    style = InfoBadgeStyle.Error,
+                    icon = Icons.Outlined.Lock,
+                    isExpanded = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
 
             // One card per failing path
             Column(
