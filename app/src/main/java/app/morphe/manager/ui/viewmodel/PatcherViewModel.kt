@@ -104,6 +104,33 @@ class PatcherViewModel(
     var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
         private set
 
+    /**
+     * Non-null when one or more patch option paths cannot be read before patching starts.
+     */
+    data class InaccessibleOptionPathsState(
+        val failures: List<PathValidationResult>
+    )
+    var inaccessibleOptionPaths by mutableStateOf<InaccessibleOptionPathsState?>(null)
+        private set
+
+    fun dismissInaccessibleOptionPathsError() {
+        inaccessibleOptionPaths = null
+    }
+
+    /**
+     * Called when the user acknowledges the storage permission warning and chooses
+     * to proceed anyway (e.g. after granting MANAGE_EXTERNAL_STORAGE in settings
+     * and returning to the app, or if they believe the path is accessible).
+     * Re-validates paths on IO dispatcher before starting the worker - if the
+     * user actually granted the permission, the paths will now be readable.
+     */
+    fun retryAfterPermission() {
+        inaccessibleOptionPaths = null
+        viewModelScope.launch {
+            runPreflightCheck()
+        }
+    }
+
     private suspend fun gatherScopedBundles(): Map<Int, PatchBundleInfo.Scoped> =
         patchBundleRepository.scopedBundleInfoFlow(
             packageName,
@@ -277,9 +304,28 @@ class PatcherViewModel(
             missingPatchWarning = MissingPatchWarningState(
                 patchNames = missing.distinct().sorted()
             )
-        } else {
-            startWorker()
+            return
         }
+
+        // Validate any file-system paths supplied as patch options before handing off to the worker.
+        val optionsToValidate = if (prefs.useExpertMode.getBlocking()) {
+            input.options
+        } else {
+            runBlocking {
+                when (packageName) {
+                    AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
+                    else -> patchOptionsPrefs.exportYouTubePatchOptions()
+                }
+            }
+        }
+
+        val pathFailures = withContext(Dispatchers.IO) { validateOptionPaths(optionsToValidate) }
+        if (pathFailures.isNotEmpty()) {
+            inaccessibleOptionPaths = InaccessibleOptionPathsState(pathFailures)
+            return
+        }
+
+        startWorker()
     }
 
     private fun startWorker() {
