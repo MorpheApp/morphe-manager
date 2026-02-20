@@ -10,6 +10,15 @@
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
 
+    <!-- Home Screen - App Button Actions -->
+    <string name="home_app_pin">Pin</string>
+    <string name="home_app_unpin">Unpin</string>
+    <string name="home_app_hide">Hide</string>
+    <string name="home_app_show_hidden">Show hidden apps</string>
+    <string name="home_app_no_hidden">No hidden apps</string>
+    <string name="home_app_hidden_apps_title">Hidden apps</string>
+    <string name="home_app_hidden_apps_hint">Tap on an app to show it in the list again</string>
+
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Manager update available</string>
     <string name="home_update_available_subtitle">New version ready to install</string>

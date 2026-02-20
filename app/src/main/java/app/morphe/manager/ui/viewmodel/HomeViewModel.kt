@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.viewmodel
 
 import android.annotation.SuppressLint
@@ -25,6 +30,7 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -32,6 +38,7 @@ import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.split.SplitApkPreparer
+import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
@@ -41,8 +48,15 @@ import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import java.io.File
 import java.io.FileNotFoundException
 import java.net.HttpURLConnection
@@ -113,7 +127,8 @@ class HomeViewModel(
     val prefs: PreferencesManager,
     private val pm: PM,
     val rootInstaller: RootInstaller,
-    private val filesystem: Filesystem
+    private val filesystem: Filesystem,
+    val homeAppButtonPrefs: HomeAppButtonPreferences
 ) : ViewModel() {
 
     val availablePatches =
@@ -184,19 +199,11 @@ class HomeViewModel(
         private set
 
     // Track available updates for installed apps
-    var appUpdatesAvailable by mutableStateOf<Map<String, Boolean>>(emptyMap())
-        private set
+    private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
+    val appUpdatesAvailable: StateFlow<Map<String, Boolean>> = _appUpdatesAvailable.asStateFlow()
 
     // Track deleted apps
     var appsDeletedStatus by mutableStateOf<Map<String, Boolean>>(emptyMap())
-        private set
-
-    // Package info for display
-    var youtubePackageInfo by mutableStateOf<PackageInfo?>(null)
-        private set
-    var youtubeMusicPackageInfo by mutableStateOf<PackageInfo?>(null)
-        private set
-    var redditPackageInfo by mutableStateOf<PackageInfo?>(null)
         private set
 
     // Using mount install (set externally)
@@ -272,7 +279,7 @@ class HomeViewModel(
         currentBundleVersion: String?
     ) = withContext(Dispatchers.IO) {
         if (currentBundleVersion == null) {
-            appUpdatesAvailable = emptyMap()
+            _appUpdatesAvailable.value = emptyMap()
             return@withContext
         }
 
@@ -296,7 +303,7 @@ class HomeViewModel(
             updates[app.currentPackageName] = hasUpdate
         }
 
-        appUpdatesAvailable = updates
+        _appUpdatesAvailable.value = updates
     }
 
     @SuppressLint("ShowToast")
@@ -395,12 +402,129 @@ class HomeViewModel(
         apiBundle?.clearChangelogCache()
     }
 
-    // Main app packages that use default bundle only
-    private val mainAppPackages = setOf(
-        AppPackages.YOUTUBE,
-        AppPackages.YOUTUBE_MUSIC,
-        AppPackages.REDDIT
-    )
+    /**
+     * Set of all unique package names that have patches across all enabled bundles.
+     * Derived reactively from bundleInfoFlow.
+     */
+    val patchablePackagesFlow: StateFlow<Set<String>> =
+        patchBundleRepository.bundleInfoFlow
+            .map { bundleInfoMap ->
+                bundleInfoMap.values.flatMap { bundleInfo ->
+                    (bundleInfo as? PatchBundleInfo)?.patches?.flatMap { patch ->
+                        patch.compatiblePackages?.map { it.packageName } ?: emptyList()
+                    } ?: emptyList()
+                }.toSet()
+            }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
+
+    /**
+     * Hidden packages filtered to only those present in currently active bundles.
+     * When a bundle is disabled/removed, its packages disappear from this flow automatically.
+     */
+    val filteredHiddenPackages: StateFlow<Set<String>> = combine(
+        homeAppButtonPrefs.hiddenPackages,
+        patchablePackagesFlow
+    ) { hidden, active ->
+        hidden.filter { it in active }.toSet()
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
+
+    /**
+     * Combined flow that produces the sorted list of home app items.
+     *
+     * Sorting order:
+     * 1. Pinned apps first (in stable order)
+     * 2. Non-pinned visible apps (alphabetical by display name)
+     * Hidden apps are excluded.
+     */
+    val homeAppItems: StateFlow<List<HomeAppItem>> = combine(
+        patchablePackagesFlow,
+        homeAppButtonPrefs.pinnedPackages,
+        homeAppButtonPrefs.hiddenPackages,
+        installedAppRepository.getAll(),
+        _appUpdatesAvailable
+    ) { packages, pinned, hidden, installedApps, updatesMap ->
+        val installedMap = installedApps.associateBy { it.originalPackageName }
+
+        packages
+            .filter { it !in hidden }
+            .map { packageName ->
+                val installedApp = installedMap[packageName]
+                val gradientColors = AppPackages.getGradientColors(packageName)
+                val isPinned = packageName in pinned
+
+                // Determine package info - tries installed (currentPackageName) first,
+                // then falls back to saved patched APK file on disk
+                val pkgInfo = installedApp?.let { loadDisplayPackageInfo(it) }
+
+                // Display name priority:
+                // 1. Real label from patched/installed PackageInfo (reflects actual patched app name)
+                // 2. Hardcoded constants (YouTube, YouTube Music, Reddit, etc.)
+                // 3. Raw package name as last resort
+                val displayName = pkgInfo
+                    ?.applicationInfo
+                    ?.loadLabel(app.packageManager)
+                    ?.toString()
+                    ?.takeIf { it.isNotBlank() && it != packageName }
+                    ?: AppPackages.getAppName(app, packageName)
+
+                // Determine deleted status
+                val isDeleted = installedApp?.let { installed ->
+                    val hasSavedCopy = listOf(
+                        filesystem.getPatchedAppFile(installed.currentPackageName, installed.version),
+                        filesystem.getPatchedAppFile(installed.originalPackageName, installed.version)
+                    ).distinctBy { it.absolutePath }.any { it.exists() }
+                    pm.isAppDeleted(
+                        packageName = installed.currentPackageName,
+                        hasSavedCopy = hasSavedCopy,
+                        wasInstalledOnDevice = installed.installType != InstallType.SAVED
+                    )
+                } == true
+
+                // Determine update status
+                val hasUpdate = installedApp?.let {
+                    updatesMap[it.currentPackageName] == true
+                } == true
+
+                HomeAppItem(
+                    packageName = packageName,
+                    displayName = displayName,
+                    gradientColors = gradientColors,
+                    installedApp = installedApp,
+                    packageInfo = pkgInfo,
+                    isPinned = isPinned,
+                    isDeleted = isDeleted,
+                    hasUpdate = hasUpdate,
+                    patchCount = 0 // Could be computed if needed
+                )
+            }
+            .sortedWith(
+                compareByDescending<HomeAppItem> { it.isPinned }
+                    .thenBy { it.displayName }
+            )
+    }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /**
+     * Toggle pin state for a package
+     */
+    fun toggleAppPin(packageName: String) {
+        homeAppButtonPrefs.togglePin(packageName)
+    }
+
+    /**
+     * Hide an app from the home screen
+     */
+    fun hideApp(packageName: String) {
+        homeAppButtonPrefs.hide(packageName)
+    }
+
+    /**
+     * Unhide an app on the home screen
+     */
+    fun unhideApp(packageName: String) {
+        homeAppButtonPrefs.unhide(packageName)
+    }
 
     /**
      * Update bundle data when sources or bundle info changes
@@ -442,29 +566,7 @@ class HomeViewModel(
     }
 
     /**
-     * Update installed apps info
-     */
-    fun updateInstalledAppsInfo(
-        youtubeApp: InstalledApp?,
-        youtubeMusicApp: InstalledApp?,
-        redditApp: InstalledApp?,
-        allInstalledApps: List<InstalledApp>
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        // Load package info in parallel
-        val youtubeJob = async { loadDisplayPackageInfo(youtubeApp) }
-        val musicJob = async { loadDisplayPackageInfo(youtubeMusicApp) }
-        val redditJob = async { loadDisplayPackageInfo(redditApp) }
-
-        youtubePackageInfo = youtubeJob.await()
-        youtubeMusicPackageInfo = musicJob.await()
-        redditPackageInfo = redditJob.await()
-
-        // Update deleted status
-        updateDeletedAppsStatus(allInstalledApps)
-    }
-
-    /**
-     * Load package info for display
+     * Load package info for display.
      */
     private fun loadDisplayPackageInfo(installedApp: InstalledApp?): PackageInfo? {
         installedApp ?: return null
@@ -820,7 +922,7 @@ class HomeViewModel(
             showExpertModeDialog = true
         } else {
             // Simple Mode: check if this is a main app or "other app"
-            val isMainApp = selectedApp.packageName in mainAppPackages
+            val isMainApp = AppPackages.isKnown(selectedApp.packageName)
 
             if (isMainApp) {
                 // For main apps: use only default bundle

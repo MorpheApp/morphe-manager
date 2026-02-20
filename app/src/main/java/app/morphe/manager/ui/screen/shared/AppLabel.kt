@@ -10,21 +10,18 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.domain.repository.InstalledAppRepository
-import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.PM
 import io.github.fornewid.placeholder.material3.placeholder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
-import androidx.compose.ui.platform.LocalResources
 
 /**
  * Universal app label component
@@ -40,7 +37,9 @@ fun AppLabel(
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     defaultText: String? = stringResource(R.string.not_installed),
-    preferredSource: AppDataSource = AppDataSource.INSTALLED
+    preferredSource: AppDataSource = AppDataSource.INSTALLED,
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: TextOverflow = TextOverflow.Clip
 ) {
     // If PackageInfo is provided, use the simple implementation
     if (packageInfo != null) {
@@ -48,7 +47,9 @@ fun AppLabel(
             packageInfo = packageInfo,
             modifier = modifier,
             style = style,
-            defaultText = defaultText
+            defaultText = defaultText,
+            maxLines = maxLines,
+            overflow = overflow
         )
         return
     }
@@ -60,7 +61,9 @@ fun AppLabel(
             modifier = modifier,
             style = style,
             defaultText = defaultText,
-            preferredSource = preferredSource
+            preferredSource = preferredSource,
+            maxLines = maxLines,
+            overflow = overflow
         )
         return
     }
@@ -69,7 +72,9 @@ fun AppLabel(
     Text(
         text = defaultText ?: stringResource(R.string.not_installed),
         modifier = modifier,
-        style = style
+        style = style,
+        maxLines = maxLines,
+        overflow = overflow
     )
 }
 
@@ -81,7 +86,9 @@ private fun SimpleAppLabel(
     packageInfo: PackageInfo,
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
-    defaultText: String? = null
+    defaultText: String? = null,
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: TextOverflow = TextOverflow.Clip
 ) {
     val context = LocalContext.current
     var label: String? by rememberSaveable { mutableStateOf(null) }
@@ -109,7 +116,9 @@ private fun SimpleAppLabel(
                 shape = RoundedCornerShape(100)
             )
             .then(modifier),
-        style = style
+        style = style,
+        maxLines = maxLines,
+        overflow = overflow
     )
 }
 
@@ -122,7 +131,9 @@ private fun ResolvedAppLabel(
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     defaultText: String? = null,
-    preferredSource: AppDataSource = AppDataSource.INSTALLED
+    preferredSource: AppDataSource = AppDataSource.INSTALLED,
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: TextOverflow = TextOverflow.Clip
 ) {
     val appDataResolver: AppDataResolver = koinInject()
 
@@ -154,7 +165,9 @@ private fun ResolvedAppLabel(
         Text(
             label ?: stringResource(R.string.loading),
             modifier = modifier,
-            style = style
+            style = style,
+            maxLines = maxLines,
+            overflow = overflow
         )
     }
 }

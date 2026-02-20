@@ -17,6 +17,18 @@ const val USE_MANAGER_DIRECT_JSON = true
 /** Controls whether patches are fetched directly from JSON files in the repository instead of using the Morphe API */
 const val USE_PATCHES_DIRECT_JSON = true
 
+/**
+ * Known app configuration: display name, gradient colors, download button color.
+ * Used for rendering home screen buttons for packages that have patches.
+ */
+data class AppConfig(
+    val displayNameResId: Int,
+    val gradientColors: List<Color>,
+    val downloadColor: Color,
+    /** Whether this app is pinned by default on the home screen for first-time users */
+    val isPinnedByDefault: Boolean = false
+)
+
 // Package identifiers with their associated colors
 object AppPackages {
     const val YOUTUBE = "com.google.android.youtube"
@@ -42,30 +54,100 @@ object AppPackages {
         Color(0xFF00AFAE)
     )
 
+    // Default gradient colors for unknown packages
+    val DEFAULT_COLORS = listOf(
+        Color(0xFF6C63FF),
+        Color(0xFF1E5AA8),
+        Color(0xFF00AFAE)
+    )
+
     // Download button colors
     val YOUTUBE_DOWNLOAD_COLOR = Color(0xFFFF0034)
     val YOUTUBE_MUSIC_DOWNLOAD_COLOR = Color(0xFFFF0034)
     val REDDIT_DOWNLOAD_COLOR = Color(0xFFFF4400)
+    val DEFAULT_DOWNLOAD_COLOR = Color(0xFF6C63FF)
+
+    /**
+     * Registry of known app configurations.
+     * Add new entries here when supporting additional apps.
+     */
+    private val knownApps: Map<String, AppConfig> = mapOf(
+        YOUTUBE to AppConfig(
+            displayNameResId = R.string.home_youtube,
+            gradientColors = YOUTUBE_COLORS,
+            downloadColor = YOUTUBE_DOWNLOAD_COLOR,
+            isPinnedByDefault = true
+        ),
+        YOUTUBE_MUSIC to AppConfig(
+            displayNameResId = R.string.home_youtube_music,
+            gradientColors = YOUTUBE_MUSIC_COLORS,
+            downloadColor = YOUTUBE_MUSIC_DOWNLOAD_COLOR,
+            isPinnedByDefault = true
+        ),
+        REDDIT to AppConfig(
+            displayNameResId = R.string.home_reddit,
+            gradientColors = REDDIT_COLORS,
+            downloadColor = REDDIT_DOWNLOAD_COLOR,
+            isPinnedByDefault = true
+        )
+    )
+
+    /**
+     * Default pinned packages for first-time users — derived from knownApps registry.
+     * To change which apps are pinned by default, update isPinnedByDefault in knownApps above.
+     */
+    val DEFAULT_PINNED_PACKAGES: Set<String> by lazy {
+        knownApps.filter { it.value.isPinnedByDefault }.keys
+    }
+
+    /**
+     * Ordered list of gradient colors for cold-start shimmer placeholders.
+     * Matches the default pinned apps order so shimmer looks correct before data loads.
+     */
+    val DEFAULT_SHIMMER_GRADIENTS: List<List<Color>> by lazy {
+        knownApps.filter { it.value.isPinnedByDefault }.values.map { it.gradientColors }
+    }
+
+    /**
+     * Get app config for a package, or null if not in the known registry
+     */
+    fun getAppConfig(packageName: String): AppConfig? = knownApps[packageName]
+
+    /**
+     * Get gradient colors for a package
+     */
+    fun getGradientColors(packageName: String): List<Color> =
+        knownApps[packageName]?.gradientColors ?: DEFAULT_COLORS
 
     /**
      * Get download button color for a package
      */
-    fun getDownloadColor(packageName: String): Color = when (packageName) {
-        YOUTUBE -> YOUTUBE_DOWNLOAD_COLOR
-        YOUTUBE_MUSIC -> YOUTUBE_MUSIC_DOWNLOAD_COLOR
-        REDDIT -> REDDIT_DOWNLOAD_COLOR
-        else -> YOUTUBE_DOWNLOAD_COLOR // Default to YouTube color
+    fun getDownloadColor(packageName: String): Color =
+        knownApps[packageName]?.downloadColor ?: DEFAULT_DOWNLOAD_COLOR
+
+    /**
+     * Get localized app name for a package.
+     * Returns the hardcoded display name for known apps,
+     * or the raw package name for unknown apps.
+     */
+    fun getAppName(context: Context, packageName: String): String {
+        val config = knownApps[packageName]
+        return if (config != null) {
+            context.getString(config.displayNameResId)
+        } else {
+            packageName
+        }
     }
 
     /**
-     * Get localized app name for a package
+     * Check if a package is in the known registry
      */
-    fun getAppName(context: Context, packageName: String): String = when (packageName) {
-        YOUTUBE -> context.getString(R.string.home_youtube)
-        YOUTUBE_MUSIC -> context.getString(R.string.home_youtube_music)
-        REDDIT -> context.getString(R.string.home_reddit)
-        else -> packageName
-    }
+    fun isKnown(packageName: String): Boolean = knownApps.containsKey(packageName)
+
+    /**
+     * Get all known package names
+     */
+    fun allKnownPackages(): Set<String> = knownApps.keys
 }
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"

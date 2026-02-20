@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
@@ -86,7 +91,8 @@ fun InstalledAppInfoDialog(
 
     // Get HomeViewModel for update status
     val homeViewModel: HomeViewModel = koinViewModel()
-    val hasUpdate = homeViewModel.appUpdatesAvailable[packageName] == true
+    val appUpdates by homeViewModel.appUpdatesAvailable.collectAsStateWithLifecycle()
+    val hasUpdate = appUpdates[packageName] == true
 
     // Dialog states
     var showUninstallConfirm by remember { mutableStateOf(false) }
