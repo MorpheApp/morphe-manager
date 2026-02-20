@@ -141,7 +141,7 @@ class UpdateNotificationManager(private val context: Context) {
             .setContentTitle(context.getString(R.string.notification_manager_update_title))
             .setContentText(contentText)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(buildOpenAppIntent())
+            .setContentIntent(buildOpenAppIntent(triggerUpdateCheck = true))
             .setAutoCancel(true)
             .build()
 
@@ -165,7 +165,7 @@ class UpdateNotificationManager(private val context: Context) {
             .setContentTitle(context.getString(R.string.notification_bundle_update_title))
             .setContentText(contentText)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(buildOpenAppIntent())
+            .setContentIntent(buildOpenAppIntent(triggerUpdateCheck = true))
             .setAutoCancel(true)
             .build()
 
@@ -173,14 +173,19 @@ class UpdateNotificationManager(private val context: Context) {
         manager.notify(NOTIFICATION_ID_FCM_BUNDLE_UPDATE, notification)
     }
 
-    /** Creates a [PendingIntent] that opens [MainActivity] when the notification is tapped. */
-    private fun buildOpenAppIntent(): PendingIntent {
+    /**
+     * Creates a [PendingIntent] that opens [MainActivity] when the notification is tapped.
+     * When [triggerUpdateCheck] is true, adds an extra so [MainActivity] will automatically
+     * trigger a bundle/manager update check on open (used for FCM push notifications).
+     */
+    private fun buildOpenAppIntent(triggerUpdateCheck: Boolean = false): PendingIntent {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            if (triggerUpdateCheck) putExtra(EXTRA_TRIGGER_UPDATE_CHECK, true)
         }
         return PendingIntent.getActivity(
             context,
-            REQUEST_CODE_OPEN_APP,
+            if (triggerUpdateCheck) REQUEST_CODE_UPDATE_CHECK else REQUEST_CODE_OPEN_APP,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
@@ -210,5 +215,17 @@ class UpdateNotificationManager(private val context: Context) {
 
         /** PendingIntent request code for the tap-through open-app action */
         private const val REQUEST_CODE_OPEN_APP = 0
+
+        /**
+         * PendingIntent request code for the tap-through open-app action with update check.
+         * Must differ from [REQUEST_CODE_OPEN_APP] so Android creates a distinct PendingIntent.
+         */
+        private const val REQUEST_CODE_UPDATE_CHECK = 1
+
+        /**
+         * Intent extra key. When set to `true`, [MainActivity] will trigger a bundle/manager
+         * update check immediately after opening. Set by FCM notification tap-through intents.
+         */
+        const val EXTRA_TRIGGER_UPDATE_CHECK = "trigger_update_check"
     }
 }

@@ -1,5 +1,6 @@
 package app.morphe.manager
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.activity.compose.setContent
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
@@ -41,6 +43,7 @@ import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
+import app.morphe.manager.util.UpdateNotificationManager
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -73,14 +76,34 @@ class MainActivity : AppCompatActivity() {
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
                 themeColorHex = customThemeColor.takeUnless { it.isBlank() }
             ) {
-                MorpheManager()
+                MorpheManager(vm)
             }
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        // Called when the app is already running and the user taps an FCM notification
+        val vm: MainViewModel = getActivityViewModel()
+        handleUpdateCheckIntent(intent, vm)
+    }
+
+    /**
+     * If the intent contains [UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK],
+     * sets the flag in [MainViewModel] - [HomeScreen] will pick it up via [LaunchedEffect].
+     */
+    private fun handleUpdateCheckIntent(intent: Intent?, vm: MainViewModel) {
+        if (intent?.getBooleanExtra(
+                UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false
+            ) == true
+        ) {
+            vm.triggerUpdateCheckOnResume = true
         }
     }
 }
 
 @Composable
-private fun MorpheManager() {
+private fun MorpheManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
@@ -144,6 +167,17 @@ private fun MorpheManager() {
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
+
+                // If opened from an FCM notification - trigger update check.
+                // vm.triggerUpdateCheckOnResume is set in handleUpdateCheckIntent()
+                // and reset here after handling.
+                LaunchedEffect(vm.triggerUpdateCheckOnResume) {
+                    if (vm.triggerUpdateCheckOnResume) {
+                        homeViewModel.patchBundleRepository.updateCheck()
+                        homeViewModel.checkForManagerUpdates()
+                        vm.triggerUpdateCheckOnResume = false
+                    }
+                }
 
                 HomeScreen(
                     onSettingsClick = { navController.navigate(Settings) },
