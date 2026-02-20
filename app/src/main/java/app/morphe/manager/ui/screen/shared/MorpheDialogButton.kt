@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.util.isDarkBackground
 
@@ -56,7 +57,7 @@ fun MorpheDialogButton(
             disabledContentColor = contentColor.copy(alpha = 0.5f)
         ),
         border = BorderStroke(1.dp, borderColor),
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp)
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 14.dp)
     ) {
         if (icon != null) {
             Icon(
@@ -64,11 +65,13 @@ fun MorpheDialogButton(
                 contentDescription = null,
                 modifier = Modifier.size(20.dp)
             )
-            Spacer(Modifier.width(10.dp))
+            Spacer(Modifier.width(8.dp))
         }
         Text(
             text = text,
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelLarge,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
@@ -112,7 +115,7 @@ fun MorpheDialogOutlinedButton(
             disabledContentColor = contentColor.copy(alpha = 0.4f)
         ),
         border = BorderStroke(1.dp, borderColor),
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp)
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 14.dp)
     ) {
         if (icon != null) {
             Icon(
@@ -120,11 +123,13 @@ fun MorpheDialogOutlinedButton(
                 contentDescription = null,
                 modifier = Modifier.size(20.dp)
             )
-            Spacer(Modifier.width(10.dp))
+            Spacer(Modifier.width(8.dp))
         }
         Text(
             text = text,
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelLarge,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
