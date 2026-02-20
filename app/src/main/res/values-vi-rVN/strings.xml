@@ -305,6 +305,31 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_advanced_updates">Cập nhật</string>
     <string name="settings_advanced_updates_use_prereleases">Bản phát hành trước</string>
     <string name="settings_advanced_updates_use_prereleases_description">Truy cập sớm các bản vá và tính năng mới của trình quản lý</string>
+    <string name="settings_advanced_updates_background_notifications">Thông báo cập nhật nền</string>
+    <string name="settings_advanced_updates_background_notifications_description">Kiểm tra cập nhật định kỳ khi ứng dụng chạy nền và báo cho bạn khi có phiên bản mới.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Nhận thông báo ngay khi có phiên bản mới, kể cả khi ứng dụng đang tắt</string>
+    <string name="notification_channel_manager_updates">Cập nhật Morphe</string>
+    <string name="notification_channel_manager_updates_description">Thông báo về các phiên bản mới của Morphe</string>
+    <string name="notification_channel_bundle_updates">Cập nhật nguồn vá</string>
+    <string name="notification_channel_bundle_updates_description">Thông báo về các phiên bản mới của nguồn vá</string>
+    <string name="notification_channel_fcm_updates">Thông báo cập nhật</string>
+    <string name="notification_channel_fcm_updates_description">Nhận thông báo ngay khi có phiên bản mới của Morphe hoặc bản vá, kể cả khi ứng dụng đang chạy nền</string>
+    <string name="settings_advanced_update_interval">Tần suất kiểm tra</string>
+    <string name="settings_advanced_update_interval_dialog_title">Kiểm tra cập nhật</string>
+    <string name="settings_advanced_update_interval_hourly">Mỗi giờ</string>
+    <string name="settings_advanced_update_interval_daily">Mỗi ngày</string>
+    <string name="settings_advanced_update_interval_weekly">Mỗi tuần</string>
+    <string name="settings_advanced_update_interval_monthly">Mỗi tháng</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Tần suất kiểm tra nền</string>
+    <string name="settings_advanced_update_interval_battery_warning">Tính năng này có thể không hoạt động trên một số thiết bị. Một số hãng như Xiaomi, Huawei, Samsung và OnePlus thường giới hạn ứng dụng chạy nền để tiết kiệm pin</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Đã có bản cập nhật Morphe</string>
+    <string name="notification_bundle_update_title">Đã có bản vá mới</string>
+    <string name="notification_update_text">Bản %1$s sẵn sàng để tải xuống</string>
+    <string name="notification_bundle_update_text_unversioned">Bấm để mở và cập nhật Morphe</string>
+    <string name="notification_permission_dialog_title">Cho phép nhận thông báo</string>
+    <string name="notification_permission_dialog_description">Để thông báo cho bạn về các bản cập nhật mới khi ứng dụng chạy nền, Morphe cần được cấp quyền thông báo</string>
+    <string name="notification_post_patch_dialog_title">Bạn có muốn nhận thông báo khi có bản cập nhật mới không?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Chuyên gia</string>
     <string name="settings_advanced_expert_mode">Chế độ chuyên gia</string>
@@ -502,7 +527,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_patch_selection_total_summary_format">%1$s đến %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s trong %2$s</string>
     <string name="settings_system_patch_selection_source_format">Nguồn #%s</string>
-    <string name="settings_system_patch_selection_will_delete">Thao tác sẽ xóa:</string>
+    <string name="settings_system_patch_selection_will_delete">Thao tác này sẽ xóa:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
     <string name="settings_system_patch_selection_reset_package_warning">Toàn bộ bản vá đã lưu cho %s (trong mọi nguồn) sẽ bị xóa vĩnh viễn</string>
     <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho %1$s (trong nguồn #%2$s) sẽ bị xóa vĩnh viễn</string>
@@ -538,7 +563,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="clear">Dọn dẹp</string>
     <string name="delete">Xoá</string>
     <string name="disable">Tắt</string>
-    <string name="enable">Bật</string>
+    <string name="enable">Không sợ</string>
     <string name="loading">Đang tải…</string>
     <string name="not_installed">Chưa cài đặt</string>
     <string name="view">Xem</string>
@@ -576,13 +601,13 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="save">Lưu</string>
     <string name="saved">Đã lưu</string>
     <string name="update">Cập nhật</string>
+    <string name="allow">Cho phép</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>
     <string name="mounting_ellipsis">Đang gắn kết…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn kết…</string>
     <string name="importing_ellipsis">Đang nhập…</string>
     <string name="changelog">Lịch sử cập nhật</string>
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
-    <string name="changelog_loading">Đang tải lịch sử cập nhật</string>
     <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>
     <string name="changelog_retry">Thử lại</string>
     <string name="changelog_empty">Không có lịch sử cập nhật</string>

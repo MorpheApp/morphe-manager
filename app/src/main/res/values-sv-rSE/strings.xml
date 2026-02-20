@@ -14,7 +14,7 @@
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
     <string name="home_update_progress_format">%1$s har bearbetats</string>
-    <string name="home_update_success">Uppdateringen av källor är klar</string>
+    <string name="home_update_success">Källuppdateringen är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
     <string name="home_please_wait">Vänta …</string>
@@ -25,7 +25,7 @@
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Spänn fast dig, det är dags för korrigeringar</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">En annan dag, ett annat annonsblockerande mästerverk</string>
+    <string name="home_greeting_4">En annan dag, ett annat mästerverk med annonsblockering</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Vill du se annonser? Inte jag heller</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
@@ -33,9 +33,9 @@
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Dagens prognos: 100 % risk för korrigeringar</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Redo att förvandla det medelmåttiga till det fantastiska?</string>
+    <string name="home_greeting_8">Redo att göra det medelmåttiga fantastiskt?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Räddar appar från sig själva ända sedan i dag</string>
+    <string name="home_greeting_9">Räddar appar från sig själva sedan i dag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Drivs av koffein och bra korrigeringar</string>
     <!-- Home Screen - Sources Management -->
@@ -303,6 +303,7 @@ Kompatibla versioner:"</string>
     <string name="settings_advanced_updates">Uppdateringar</string>
     <string name="settings_advanced_updates_use_prereleases">Använd förhandsversioner</string>
     <string name="settings_advanced_updates_use_prereleases_description">Få tidig tillgång till nya korrigeringar och Manager-funktioner</string>
+    <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
@@ -580,7 +581,6 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="importing_ellipsis">Importerar …</string>
     <string name="changelog">Visa ändringsloggar</string>
     <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
-    <string name="changelog_loading">Läser in ändringsloggen</string>
     <string name="changelog_download_fail">Det gick inte att ladda ned ändringsloggen: %s</string>
     <string name="changelog_retry">Försök igen</string>
     <string name="changelog_empty">Ingen ändringslogg är tillgänglig</string>

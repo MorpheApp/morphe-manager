@@ -305,6 +305,31 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_updates">Actualizări</string>
     <string name="settings_advanced_updates_use_prereleases">Folosește versiuni pre-lansare</string>
     <string name="settings_advanced_updates_use_prereleases_description">Obține acces timpuriu la noi patachuri și caracteristici manager</string>
+    <string name="settings_advanced_updates_background_notifications">Notificări de actualizări în fundal</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodicââ verificaââ pentru actualizââi din fundalââ ââ notificaââ câând câând disponibile</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Primește notificări instantane de push pentru noi versiuni, chiar când aplicația este închisa</string>
+    <string name="notification_channel_manager_updates">Manager updates</string>
+    <string name="notification_channel_manager_updates_description">Notificări despre noi versiuni Morphe manager</string>
+    <string name="notification_channel_bundle_updates">Actualizări de surse de patch</string>
+    <string name="notification_channel_bundle_updates_description">Notificări despre noi versiuni de sursă pentru patch-uri</string>
+    <string name="notification_channel_fcm_updates">Actualizează alertâ</string>
+    <string name="notification_channel_fcm_updates_description">Notificări instantane de fundal pentru noi lansări ale managerului Morphe și pachetelor. Livrate chiar dacă aplicația se află în fundal</string>
+    <string name="settings_advanced_update_interval">Frecvența de verificare</string>
+    <string name="settings_advanced_update_interval_dialog_title">Verifică pentru actualizări</string>
+    <string name="settings_advanced_update_interval_hourly">O dată pe oră</string>
+    <string name="settings_advanced_update_interval_daily">O dată pe zi</string>
+    <string name="settings_advanced_update_interval_weekly">O dată pe săptămână</string>
+    <string name="settings_advanced_update_interval_monthly">O dată pe lună</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Frecvența de verificare în fundal</string>
+    <string name="settings_advanced_update_interval_battery_warning">Verificările în fundal pot nu funcționa reliable pe unele dispozitive. Fabricanții precum Xiaomi, Huawei, Samsung și OnePlus adesea restrictă procesul în fundal pentru a economisi baterie</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Actualizare disponibilă pentru managerul Morphe</string>
+    <string name="notification_bundle_update_title">Există actualizări disponibile</string>
+    <string name="notification_update_text">Versiunea %1$s este gata pentru descarcare</string>
+    <string name="notification_bundle_update_text_unversioned">Apasă pentru deschidere managerul Morphe și actualizare</string>
+    <string name="notification_permission_dialog_title">Permite notificări</string>
+    <string name="notification_permission_dialog_description">Managerul Morphe are nevoie de permisiunea de notificări pentru a te alerta când sunt disponibile actualizări în fundal</string>
+    <string name="notification_post_patch_dialog_title">Doriți să fiți notificați când sunt disponibile actualizări?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
@@ -576,13 +601,13 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="save">Salvați</string>
     <string name="saved">Salvat</string>
     <string name="update">Actualizare</string>
+    <string name="allow">Permite</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
     <string name="changelog">Vizualizați jurnalele modificărilor</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
-    <string name="changelog_loading">Se încarcă jurnalul de modificări</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_retry">Reîncercați</string>
     <string name="changelog_empty">Nu există jurnale disponibile</string>

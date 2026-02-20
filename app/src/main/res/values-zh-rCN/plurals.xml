@@ -9,6 +9,21 @@
     <plurals name="source_count">
         <item quantity="other">%s 个源</item>
     </plurals>
+    <plurals name="package_count">
+        <item quantity="other">%s 个包</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="other">执行了 %s 个补丁</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">%s 个 APK 文件</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="other">从保存的选择中移除了 %s 个过期补丁</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="other">已安装 %s 个源</item>
+    </plurals>
     <plurals name="patch_selection_total_patches">
         <item quantity="other">已选择 %s 个补丁</item>
     </plurals>

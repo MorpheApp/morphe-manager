@@ -4,11 +4,11 @@
     <string name="home_other_apps">Diğer uygulamalar</string>
     <string name="home_not_patched_yet">Henüz yamalanmadı</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
-    <string name="home_default_source_disabled">Morphe yama kaynağı devre dışı bırakıldı. Lütfen yama kaynakları sayfasında etkinleştirin veya Uzman modunu kullanın</string>
+    <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode</string>
     <string name="android_11_bug_dialog_title">Android 11 hatası</string>
     <string name="android_11_bug_dialog_description">Android 11 sistemindeki kullanıcı deneyimini olumsuz etkileyecek bir hatayı önlemek için uygulama yükleme izninin önceden verilmesi gerekmektedir</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Manager güncellemesi mevcut</string>
+    <string name="home_update_available">Manager update available</string>
     <string name="home_update_available_subtitle">Yeni sürüm yükleme için hazır</string>
     <string name="home_update_error">Güncelleme başarısız</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
@@ -305,6 +305,31 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_advanced_updates">Güncellemeler</string>
     <string name="settings_advanced_updates_use_prereleases">Ön sürümleri kullan</string>
     <string name="settings_advanced_updates_use_prereleases_description">Yeni yamalara ve manager özelliklerine erken erişim sağlayın</string>
+    <string name="settings_advanced_updates_background_notifications">Arka plan güncelleme bildirimleri</string>
+    <string name="settings_advanced_updates_background_notifications_description">Arka planda güncellemeler için arama yapın ve kullanılabilir olduklarında bildirin.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Yeni sürümler için, uygulama kapalıken de anında bildirim almak için FCM kullanın</string>
+    <string name="notification_channel_manager_updates">Güncellemeleri yönetin</string>
+    <string name="notification_channel_manager_updates_description">Yeni Morphe yönetici sürümleri hakkında bildirimler</string>
+    <string name="notification_channel_bundle_updates">Yama kaynakları güncellemeleri</string>
+    <string name="notification_channel_bundle_updates_description">Yeni çapa sürümleri hakkında bildirimler</string>
+    <string name="notification_channel_fcm_updates">Güncellemeleri Yenile</string>
+    <string name="notification_channel_fcm_updates_description">Yeni Morphe yöneticisi ve yama sürümleri için anlık itikaf bildirimleri. Uygulama arka planda çalışırken de gönderilir</string>
+    <string name="settings_advanced_update_interval">Güncelleme sıklığı</string>
+    <string name="settings_advanced_update_interval_dialog_title">Güncellemeyi kontrol et</string>
+    <string name="settings_advanced_update_interval_hourly">1 saatde bir</string>
+    <string name="settings_advanced_update_interval_daily">1 günde bir</string>
+    <string name="settings_advanced_update_interval_weekly">1 haftada bir</string>
+    <string name="settings_advanced_update_interval_monthly">1 ayda bir</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Arka plan kontrol sıklığı</string>
+    <string name="settings_advanced_update_interval_battery_warning">Arka plan kontroller bazı cihazlarda çalışmayabilir. Üreticiler like Xiaomi, Huawei, Samsung ve OnePlus often agresif olarak arka plan işlemlerini kısıtlar pil tasarrufu için</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Yeni Morphe yöneticisi güncellemesi mevcut</string>
+    <string name="notification_bundle_update_title">Yeni yamalar mevcut</string>
+    <string name="notification_update_text">Sürüm %1$s indirmeye hazır</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe yöneticisine tıkla ve güncelle</string>
+    <string name="notification_permission_dialog_title">Bildirim izni</string>
+    <string name="notification_permission_dialog_description">Morphe yöneticisi arka plan güncellemeleri için bildirim iznine ihtiyaç duyar</string>
+    <string name="notification_post_patch_dialog_title">Güncellemeler mevcut olduğunda bildirileceksin mi?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ayarlar</string>
     <string name="settings_advanced_expert_mode">Uzman modu</string>
@@ -576,13 +601,13 @@ Kullanıcı geri bildirimleri ve katkılarla gelecekteki yenilikler için çalı
     <string name="save">Kaydet</string>
     <string name="saved">Kaydedildi</string>
     <string name="update">Güncelle</string>
+    <string name="allow">İzin Ver</string>
     <string name="installing_ellipsis">Yükleniyor…</string>
     <string name="mounting_ellipsis">Bağlanıyor…</string>
     <string name="unmounting_ellipsis">Çıkartılıyor…</string>
     <string name="importing_ellipsis">İçe aktarılıyor…</string>
     <string name="changelog">Değişiklik günlüklerini görüntüle</string>
     <string name="changelog_description">Bu güncellemede yapılmış son değişiklikleri inceleyin</string>
-    <string name="changelog_loading">Değişiklik günlüğü yükleniyor</string>
     <string name="changelog_download_fail">Değişiklik günlüğü indirilemedi: %s</string>
     <string name="changelog_retry">Yeniden dene</string>
     <string name="changelog_empty">Değişiklik günlüğü yok</string>

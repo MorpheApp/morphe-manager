@@ -305,6 +305,31 @@
     <string name="settings_advanced_updates">Ενημερώσεις</string>
     <string name="settings_advanced_updates_use_prereleases">Χρήση προ-έκδοσης</string>
     <string name="settings_advanced_updates_use_prereleases_description">Λάβετε πρόωπο πρόσθεσης για νέες τροποποιήσεις και λειτουργίες του διαχειριστή</string>
+    <string name="settings_advanced_updates_background_notifications">Ενημερώσεις φόντου</string>
+    <string name="settings_advanced_updates_background_notifications_description">Καταχωρείτε περιοδικά για ενημερώσεις στο παρασκήνιο και ειδοποιείτε όταν είναι διαθέσιμες</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Λαβήτε ειδοποιήσεις push για νέες εκδόσεις, ακόμα και όταν η εφαρμογή είναι κλειστή</string>
+    <string name="notification_channel_manager_updates">Διαχείριση ενημερώσεων</string>
+    <string name="notification_channel_manager_updates_description">Ειδοποιήσεις για νέες εκδόσεις Morphe</string>
+    <string name="notification_channel_bundle_updates">Ενημερώσεις πηγών τροποποίησης</string>
+    <string name="notification_channel_bundle_updates_description">Ειδοποιήσεις για νέες εκδόσεις πηγών</string>
+    <string name="notification_channel_fcm_updates">Ενημέρωση ειδοποιήσεων</string>
+    <string name="notification_channel_fcm_updates_description">Ειδοποιήσεις Push για νέες εκδόσεις Morphe manager και τροποποιήσεων. Παραδίδονται mêmes όταν η εφαρμογή είναι στο παρασκήνιο</string>
+    <string name="settings_advanced_update_interval">Συχνότητα ελέγχου</string>
+    <string name="settings_advanced_update_interval_dialog_title">Ελέγξτε για ενημερώσεις</string>
+    <string name="settings_advanced_update_interval_hourly"> Одна φορά την ώρα</string>
+    <string name="settings_advanced_update_interval_daily"> Eine φορά την ημέρα</string>
+    <string name="settings_advanced_update_interval_weekly"> Eine φορά την εβδομάδα</string>
+    <string name="settings_advanced_update_interval_monthly"> Eine φορά τον μήνα</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Συχνότητα ελέγχου παρασκήνιου</string>
+    <string name="settings_advanced_update_interval_battery_warning">Οι ελέγχοι παρασκήνιου μπορεί να δεν λειτουργούν σωστά σε ορισμένα συσκευές. Παραγωγόμενοι όπως Xiaomi, Huawei, Samsung και OnePlus συχνά περιορίζουν σφοδρά τις διαδικασίες παρασκήνιου για να σωθούν μπαταρίες</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Νέα ενημέρωση Morphe manager διαθέσιμη</string>
+    <string name="notification_bundle_update_title">Νέες τροποποιήσεις διαθέσιμες</string>
+    <string name="notification_update_text">Η έκδοση %1$s είναι έτοιμη για λήψη</string>
+    <string name="notification_bundle_update_text_unversioned">Κάντε κλικ για να ανοίξετε Morphe manager και να ενημερώσετε</string>
+    <string name="notification_permission_dialog_title">Επιτρέψτε τις ειδοποιήσεις</string>
+    <string name="notification_permission_dialog_description">Morphe manager χρειάζεται άδεια ειδοποιήσεων για να σας ειδοποιήσει όταν είναι διαθέσιμες ενημερώσεις στο παρασκήνιο</string>
+    <string name="notification_post_patch_dialog_title">Θα θέλετε να ειδοποιηθείτε όταν υπάρξουν διαθέσιμες ενημερώσεις;</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Επιλεγμένες ρυθμίσεις</string>
     <string name="settings_advanced_expert_mode">Επιλεγμένη λειτουργία</string>
@@ -574,13 +599,13 @@ morphe_header_custom_dark.png
     <string name="save">Αποθήκευση</string>
     <string name="saved">Αποθηκευμένη</string>
     <string name="update">Ενημέρωση</string>
+    <string name="allow">Επιτρέψτε</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
     <string name="unmounting_ellipsis">Αποσύνιξη…</string>
     <string name="importing_ellipsis">Εισαγωγή…</string>
     <string name="changelog">Προβολή αρχείων καταγραφής αλλαγών</string>
     <string name="changelog_description">Επισκέψου τις τελευταίες αλλαγές σε αυτή την ενημέρωση</string>
-    <string name="changelog_loading">Φόρτωση αρχείων καταγραφής αλλαγών</string>
     <string name="changelog_download_fail">Αποτυχία λήψης αρχείων καταγραφής αλλαγών: %s</string>
     <string name="changelog_retry">Επανάληψη</string>
     <string name="changelog_empty">Δεν υπάρχει διαθέσιμος καταγραφή αλλαγών</string>

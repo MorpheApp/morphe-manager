@@ -305,6 +305,31 @@
     <string name="settings_advanced_updates">التحديثات</string>
     <string name="settings_advanced_updates_use_prereleases">استخدام إصدارات ما قبل الإطلاق</string>
     <string name="settings_advanced_updates_use_prereleases_description">احصل على الوصول المبكر إلى التعديلات الجديدة وميزات الإدارة</string>
+    <string name="settings_advanced_updates_background_notifications">إشعارات تحديث الخلفية</string>
+    <string name="settings_advanced_updates_background_notifications_description">تحقق بشكل دوري من توفر تحديثات في الخلفية و الإشعار عند توفرها</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">تلقي إشعارات فورية بالإصدارات الجديدة، حتى عندما يكون التطبيق مغلقًا</string>
+    <string name="notification_channel_manager_updates">إدارة التحديثات</string>
+    <string name="notification_channel_manager_updates_description">إشعارات عن إصدارات جديدة من Morphe manager</string>
+    <string name="notification_channel_bundle_updates">تحديثات مصادر التعديل</string>
+    <string name="notification_channel_bundle_updates_description">إشعارات عن إصدارات مصدر التعديل جديدة</string>
+    <string name="notification_channel_fcm_updates">تنبيهات التحديث</string>
+    <string name="notification_channel_fcm_updates_description">إشعارات فورية لإصدارات جديدة من Morphe manager والتعديل. تصلك حتى عندما يكون التطبيق يعمل في الخلفية.</string>
+    <string name="settings_advanced_update_interval">تكرار التحقق</string>
+    <string name="settings_advanced_update_interval_dialog_title">التحقق من توفر تحديثات</string>
+    <string name="settings_advanced_update_interval_hourly">مرة في الساعة</string>
+    <string name="settings_advanced_update_interval_daily">مرة في اليوم</string>
+    <string name="settings_advanced_update_interval_weekly">مرة في الأسبوع</string>
+    <string name="settings_advanced_update_interval_monthly">مرة في الشهر</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">تكرار التحقق في الخلفية</string>
+    <string name="settings_advanced_update_interval_battery_warning">قد لا يعمل التحقق في الخلفية بشكل موثوق على بعض الأجهزة. غالبًا ماتقيّد الشركات المصنعة مثل Xiaomi، Huawei، Samsung، و OnePlus عمليات الخلفية بشدة لتوفير البطارية</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">تحديث Morphe manager متاح</string>
+    <string name="notification_bundle_update_title">تعديلات جديدة متاحة</string>
+    <string name="notification_update_text">إصدار %1$s جاهز للتحميل</string>
+    <string name="notification_bundle_update_text_unversioned">انقر لفتح Morphe manager وتحديثه</string>
+    <string name="notification_permission_dialog_title">السماح بالإشعارات</string>
+    <string name="notification_permission_dialog_description">يحتاج Morphe manager إلى إذن الإشعارات لتنبيهك عندما تكون تحديثات متاحة في الخلفية</string>
+    <string name="notification_post_patch_dialog_title">هل تريد أن يتم تنبيهك عندما تكون التحديثات متاحة؟</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
     <string name="settings_advanced_expert_mode">وضع الخبير</string>
@@ -576,13 +601,13 @@
     <string name="save">حفظ</string>
     <string name="saved">محفوظة</string>
     <string name="update">تحديث</string>
+    <string name="allow">السماح</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>
     <string name="importing_ellipsis">جارٍ استيراد…</string>
     <string name="changelog">عرض سجل التغييرات</string>
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
-    <string name="changelog_loading">جارٍ تحميل سجل التغييرات</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
     <string name="changelog_retry">إعادة المحاولة</string>
     <string name="changelog_empty">لا يتوفر سجل تغييرات</string>

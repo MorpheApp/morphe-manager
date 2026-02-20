@@ -3,60 +3,60 @@
     <!-- Home Screen -->
     <string name="home_other_apps">অন্যান্য অ্যাপ</string>
     <string name="home_not_patched_yet">এখনো প্যাচ করা হয়নি</string>
-    <string name="home_no_patches_available">কোনো প্যাচ উপলব্ধ নেই</string>
-    <string name="home_default_source_disabled">মর্ফে প্যাচের উৎসটি অক্ষম করা হয়েছে। প্যাচ উৎস শীটে এটি সক্ষম করুন অথবা এক্সপার্ট মোড ব্যবহার করুন</string>
+    <string name="home_no_patches_available">কোনো প্যাচ পাওয়া যায়নি</string>
+    <string name="home_default_source_disabled">Morphe প্যাচের সোর্সটি বন্ধ রয়েছে। প্যাচ সোর্স শীটে এটি চালু করুন অথবা এক্সপার্ট মোড ব্যবহার করুন</string>
     <string name="android_11_bug_dialog_title">অ্যান্ড্রয়েড ১১ বাগ</string>
     <string name="android_11_bug_dialog_description">এক্সপ্লোর 11 সিস্টেমের একটি বাগের কারণে অ্যাপ ইনস্টলেশন অনুমতি আগে দেওয়া উচিত। এটি ব্যবহারকারীর অভিজ্ঞতাকে নেতিবাচকভাবে প্রভাবিত করবে</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">ম্যানেজার আপডেট উপলব্ধ</string>
+    <string name="home_update_available">ম্যানেজার আপডেট পাওয়া গেছে</string>
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
-    <string name="home_updating_sources">সোর্স আপডেটিং…</string>
-    <string name="home_update_progress_format">%1$s প্রক্রিয়াকরণ সম্পন্ন হয়েছে</string>
-    <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ</string>
-    <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেটে আছে</string>
-    <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, দয়া করে অপেক্ষা করুন…</string>
+    <string name="home_updating_sources">সোর্স আপডেট হচ্ছে...</string>
+    <string name="home_update_progress_format">%1$s সম্পন্ন হয়েছে</string>
+    <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ হয়েছে</string>
+    <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
+    <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="home_please_wait">অনুগ্রহ করে অপেক্ষা করুন…</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">আপনি কোন অ্যাপ পাচ্ছতে চান?</string>
+    <string name="home_greeting_1">আপনি কোন অ্যাপ প্যাচ করতে চান?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">আপনি আবার অ্যাপ তৈরি করতে প্রস্তুত?</string>
+    <string name="home_greeting_2">আপনি কি অ্যাপ আবার ঐতিহাসিক করতে প্রস্তুত?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">বেল্ট বাঁধুন, এটা পাচ্ছিং কাল</string>
+    <string name="home_greeting_3">সিট বেল্ট বেঁধে নিন, এখন প্যাচিং এর সময়</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">আরেক দিন, আরেক অ্যাড-ব্লকড মাস্টারপিস</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">চলো বিজ্ঞাপন দেখি? আমিও তা চাইনা</string>
+    <string name="home_greeting_5">আপনি কি বিজ্ঞাপন দেখতে চান? আমিও চাইনা</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">আপনার অ্যাপগুলিকে আচরণ করতে দিন</string>
+    <string name="home_greeting_6">চলুন আপনার অ্যাপগুলিকে ভদ্র হতে শেখাই</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">আজকের পূর্বাভাস: পার্চিংয়ের 100% সম্ভাবনা</string>
+    <string name="home_greeting_7">আজকের পূর্বাভাস: প্যাচিংয়ের 100% সম্ভাবনা</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">আপাবাবা থেকে অসাধারণ হতে পারছেন?</string>
+    <string name="home_greeting_8">সাধারণ কে অসাধারণ করতে প্রস্তুত?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">আজ থেকে নিজেরই সাহায্য করছি</string>
+    <string name="home_greeting_9">অ্যাপ কে অ্যাপের থেকেই সাহায্য করছি আজ থেকে</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">ক্যাফেইন ও ভালো প্যাচ দিয়ে চালিত</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">প্যাচ উৎস</string>
-    <string name="sources_management_open_in_browser">লিংক ব্রাউজারে খুলুন</string>
+    <string name="sources_management_title">প্যাচ সোর্সগুলো</string>
+    <string name="sources_management_open_in_browser">ব্রাউজারে ওপেন করুন</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
     <string name="sources_management_date_added">যোগ করা হয়েছে</string>
     <string name="sources_management_date_updated">আপডেট করা হয়েছে</string>
     <!-- Home Screen - Sources Dialogs -->
-    <string name="sources_dialog_display_name">দেখান নাম</string>
+    <string name="sources_dialog_display_name">প্রদর্শিত নাম</string>
     <string name="sources_dialog_rename">প্যাচের নাম পরিবর্তন করুন</string>
-    <string name="sources_dialog_duplicate_name_error">এই নামের একটি প্যাচ সোর্স ইতিমে ইতিমে আছে</string>
-    <string name="sources_dialog_missing_error">এই প্যাচ উৎসটি আপডেট করতে পারেনি</string>
-    <string name="sources_dialog_view_any_version">কোনো সংস্করণ</string>
-    <string name="sources_dialog_view_any_package">কোনো প্যাকেজ</string>
-    <string name="sources_dialog_add_source">প্যাচ উৎস যোগ করুন</string>
-    <string name="sources_dialog_delete_confirm_message">ডিলিট করুন উৎস \"%s\"? এটি বাতিল করা যাবে না</string>
-    <string name="sources_dialog_remote">মূল</string>
+    <string name="sources_dialog_duplicate_name_error">এই নামের একটি প্যাচ সোর্স ইতিমধ্যে রয়েছে</string>
+    <string name="sources_dialog_missing_error">এই প্যাচ সোর্স আপডেট করা যায়নি</string>
+    <string name="sources_dialog_view_any_version">যেকোনো সংস্করণ</string>
+    <string name="sources_dialog_view_any_package">যেকোনো প্যাকেজ</string>
+    <string name="sources_dialog_add_source">প্যাচ সোর্স যোগ করুন</string>
+    <string name="sources_dialog_delete_confirm_message">\"%s\" সোর্সটি ডিলিট করুন? এটি ফেরত আনা যাবে না</string>
+    <string name="sources_dialog_remote">রিমোট</string>
     <string name="sources_dialog_remote_url">সোর্স URL</string>
     <string name="sources_dialog_remote_url_formats_title">উদাহরণ:</string>
-    <string name="sources_dialog_local">স্থানিক</string>
+    <string name="sources_dialog_local">লোকাল</string>
     <string name="sources_dialog_local_file">প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
     <string name="sources_dialog_local_file_description">স্টোর থেকে .mpp প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
     <string name="sources_dialog_local_change_file">ফাইল পরিবর্তন করুন</string>
@@ -107,7 +107,7 @@
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_no_patches">কোনো প্যাচ উপলব্ধ নেই</string>
-    <string name="expert_mode_multiple_sources_warning_title">বহু প্যাচ উৎস নির্বাচিত</string>
+    <string name="expert_mode_multiple_sources_warning_title">বহু প্যাচ সোর্স নির্বাচিত</string>
     <string name="expert_mode_multiple_sources_warning_message">"আপনি একাধিক প্যাচ উৎস থেকে প্যাচ নির্বাচন করেছেন। এটি সামঞ্জस्यতা সমস্যা বা অপ্রত্যাশিত আচরণের কারণ হতে পারে।
 
 আপনি এগিয়ে যেতে চান কি?"</string>
@@ -160,10 +160,10 @@
     <string name="home_app_info_delete_preservation_note">আপনার প্যাচ নির্বাচন ও অপশনগুলি ভবিষ্যতের প্যাচিংয়ের জন্য সংরক্ষিত থাকবে</string>
     <string name="home_app_info_patches_name_default">প্যাচগুলি</string>
     <string name="home_app_info_patches_name_fallback">নামহীন</string>
-    <string name="home_app_info_patches_replace_fail">প্যাচগুলি আমদানি করতে ব্যর্থ হয়েছে: %s</string>
+    <string name="home_app_info_patches_replace_fail">প্যাচগুলি ইমপোর্ট করতে ব্যর্থ হয়েছে: %s</string>
     <string name="home_app_info_repatch_no_original_apk">আরিজিনাল এপিকে খুঁজে পাওয়া যায়নি. এই অ্যাপের রিপ্যাচ করতে পারবো না</string>
     <string name="home_app_info_original_package_name">মূল প্যাকেজ নাম</string>
-    <string name="home_app_info_applied_patches">আমদান প্যাচগুলি</string>
+    <string name="home_app_info_applied_patches">প্রয়োগকৃত প্যাচগুলি</string>
     <string name="home_app_info_patch_source_used">প্যাচের উৎস ব্যবহৃত হয়েছে</string>
     <string name="home_app_info_install_type">ইনস্টলেশন টাইপ</string>
     <string name="home_app_info_install_type_custom_installer">কাস্টম ইনস্টলার</string>
@@ -305,6 +305,31 @@
     <string name="settings_advanced_updates">আপডেটগুলি</string>
     <string name="settings_advanced_updates_use_prereleases">প্র-রিলিজ সংস্করণগুলি ব্যবহার করুন</string>
     <string name="settings_advanced_updates_use_prereleases_description">নতুন প্যাচ ও ম্যানেজার ফিচার গুলি আগে পান</string>
+    <string name="settings_advanced_updates_background_notifications">ব্যাকগ্রাউন্ড আপডেট নোটিফিকেশন</string>
+    <string name="settings_advanced_updates_background_notifications_description">ব্যাকগ্রাউন্ডে আপডেটের জন্য পর্যায়ক্রমে চেক করুন এবং উপলব্ধ হলে বিজ্ঞপ্তি দিন।</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">নতুন রিলিজের জন্য অ্যাপটি বন্ধ থাকাকালীনেও ইমিডিয়েট পুশ নোটিফিকেশন পান</string>
+    <string name="notification_channel_manager_updates">আপডেট ব্যবস্থাপক</string>
+    <string name="notification_channel_manager_updates_description">নতুন মরফে ব্যবস্থাপক সংস্করণের নোটিফিকেশন</string>
+    <string name="notification_channel_bundle_updates">প্যাচ সোর্স আপডেট</string>
+    <string name="notification_channel_bundle_updates_description">নতুন প্যাচ সোর্স সংস্করণ সম্পর্কে বিজ্ঞপ্তি</string>
+    <string name="notification_channel_fcm_updates">আপডেট অ্যালার্টস</string>
+    <string name="notification_channel_fcm_updates_description">নতুন মরফে ম্যানেজার এবং প্যাচ রিলিজের জন্য তাত্ক্ষণিক পুশ নোটিফিকেশন। অ্যাপের ব্যাকগ্রাউন্ডেও ডেলিভার করা হয়।</string>
+    <string name="settings_advanced_update_interval">আপডেট ফিক্সারির সময়</string>
+    <string name="settings_advanced_update_interval_dialog_title">আপডেট চেক করুন</string>
+    <string name="settings_advanced_update_interval_hourly">এক ঘণ্টা অন্তরে</string>
+    <string name="settings_advanced_update_interval_daily">এক দিন অন্তরে</string>
+    <string name="settings_advanced_update_interval_weekly">এক সপ্তাহ অন্তরে</string>
+    <string name="settings_advanced_update_interval_monthly">এক মাস অন্তরে</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">ব্যাকগ্রাউন্ড চেকের সময়</string>
+    <string name="settings_advanced_update_interval_battery_warning">কিছু ডিভাইসে ব্যাকগ্রাউন্ড চেকগুলি সঠিকভাবে কাজ করতে পারে না। ব্যাটারি সংরক্ষণের জন্য ম্যানুফ্যাকচারাররা যেমন এক্সিয়োমি, হুয়াওয়েই, স্যামসাং এবং অনেপ্লাস ব্যাকগ্রাউন্ড প্রসেসগুলি সীমিত করে।</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">মরফে ম্যানেজার আপডেট পাওয়া গেছে</string>
+    <string name="notification_bundle_update_title">নতুন প্যাচ পাওয়া গেছে</string>
+    <string name="notification_update_text">%1$s সংস্করণ ডাউনলোডের জন্য প্রস্তুত</string>
+    <string name="notification_bundle_update_text_unversioned">মরফে ম্যানেজার খুলুন এবং আপডেট করুন</string>
+    <string name="notification_permission_dialog_title">নোটিফিকেশন অনুমতি দিন</string>
+    <string name="notification_permission_dialog_description">মরফে ম্যানেজার ব্যাকগ্রাউন্ডে আপডেটের জন্য নোটিফিকেশন অনুমতি চায়।</string>
+    <string name="notification_post_patch_dialog_title">আপনি আপডেটের उपलब्धতা সম্পর্কে জানতে চান?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">বিশেষ্ট সেটিংস</string>
     <string name="settings_advanced_expert_mode">বিশেষ্ট মোড</string>
@@ -419,7 +444,7 @@
     <string name="settings_system_process_runtime_enabled_description">%s এমবি সীমা</string>
     <string name="settings_system_process_runtime_disabled_description">ক্লিক করুন</string>
     <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_export">আমদানি এবং রপ্তানি</string>
+    <string name="settings_system_import_export">ইমপোর্ট &amp; এক্সপোর্ট </string>
     <string name="settings_system_import_keystore">ওয়েবসাইট শেয়ার করুন</string>
     <string name="settings_system_import_keystore_description">মরফে অফিসিয়াল ওয়েবসাইট শেয়ার করুন</string>
     <string name="settings_system_import_keystore_dialog_title">মরফে একটি পরীক্ষামূল, খোল-উৎসাহা প্রকল্প যা আপনার ফিডব্যাকের ফিডব্যাক ও অবদানকে ভিত্ত করে ভবিষ্যতা ও উন্নতরনের জন্য সম্প্রদিত হয়।
@@ -433,39 +458,39 @@
     <string name="settings_system_import_keystore_success">কী-স্টোর নাম (এলিয়াস) ভুলে</string>
     <string name="settings_system_import_keystore_failed">কী-স্টোর আমদানি ব্যর্থ হয়েছে</string>
     <string name="settings_system_export_keystore">কী-স্টোর রপ্তানি করুন</string>
-    <string name="settings_system_export_keystore_description">বর্তমান কী-স্টোর রপ্তানি করুন</string>
-    <string name="settings_system_export_keystore_unavailable">রপ্তানি করার জন্য কী-স্টোর উপলব্ধ নেই</string>
-    <string name="settings_system_export_keystore_success">কী-স্টোর রপ্তানি হয়েছে</string>
-    <string name="settings_system_show_password_field">ম্যানেজার সেটিংস আমদানি/রপ্তানি করুন</string>
-    <string name="settings_system_hide_password_field">ম্যানেজার সেটিংস আমদানি/রপ্তানি করুন</string>
+    <string name="settings_system_export_keystore_description">বর্তমান কী-স্টোর এক্সপোর্ট করুন</string>
+    <string name="settings_system_export_keystore_unavailable">এক্সপোর্ট করার জন্য কী-স্টোর পাওয়া যায়নি</string>
+    <string name="settings_system_export_keystore_success">কী-স্টোর এক্সপোর্ট হয়েছে</string>
+    <string name="settings_system_show_password_field">পাসওয়ার্ড দেখান</string>
+    <string name="settings_system_hide_password_field">পাসওয়ার্ড লুকান</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
     <string name="settings_system_import_manager_settings">ম্যানেজার সেটিংস আমদানি ব্যর্থ হয়েছে: %s</string>
     <string name="settings_system_import_manager_settings_description">ম্যানেজার সেটিংস আমদানি হয়েছে</string>
-    <string name="settings_system_import_manager_settings_fail">ম্যানেজার সেটিংস রপ্তানি করুন</string>
-    <string name="settings_system_import_manager_settings_success">ম্যানেজার সেটিংস রপ্তানি ব্যর্থ হয়েছে: %s</string>
-    <string name="settings_system_export_manager_settings">ম্যানেজার সেটিংস রপ্তানি হয়েছে</string>
+    <string name="settings_system_import_manager_settings_fail">ম্যানেজার সেটিংস ইমপোর্ট করতে ব্যর্থ হয়েছে: %s</string>
+    <string name="settings_system_import_manager_settings_success">ম্যানেজার সেটিংস ইম্পোর্ট করা হয়েছে</string>
+    <string name="settings_system_export_manager_settings">ম্যানেজার সেটিংস এক্সপোর্ট করুন</string>
     <string name="settings_system_export_manager_settings_description">ডিবাগ লগ শেয়ার করুন</string>
     <string name="settings_system_export_manager_settings_fail">ডিবাগ লগ শেয়ার ব্যর্থ হয়েছে (এক্সিট কোড: %d)</string>
     <string name="settings_system_export_manager_settings_success">ডিবাগ লগ শেয়ার হয়েছে</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">ডিবাগ</string>
     <string name="settings_system_export_debug_logs">ডিবাগ লগগুলি রফতানি করুন</string>
-    <string name="settings_system_export_debug_logs_description">ডিবাগ লগ রপ্তানি করুন</string>
+    <string name="settings_system_export_debug_logs_description">সিস্টেম লগ বের করুন ট্রাবলশুটিং এর জন্য</string>
     <string name="settings_system_export_debug_logs_export_read_failed">লগ পড়তে ব্যর্থ হয়েছে (ব্যবহার করা কোড %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">স্টোর ম্যানেজমেন্ট</string>
-    <string name="settings_system_export_debug_logs_export_success">APK(গুলি) সংখ্যা</string>
+    <string name="settings_system_export_debug_logs_export_success">লগ এক্সপোর্ট করা হয়েছে</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">স্টোরেজ ম্যানেজমেন্ট</string>
-    <string name="settings_system_apks_size">প্যাচড APK(গুলি)</string>
+    <string name="settings_system_apks_size">মোট আকার: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
-    <string name="settings_system_patched_apks_title">প্যাচড APK(গুলি) ব্যবস্থা</string>
+    <string name="settings_system_patched_apks_title">প্যাচ করা APK সমূহ</string>
     <string name="settings_system_patched_apks_description">সংরক্ষিত প্যাচড অ্যাপ ফাইলগুলি পরিচালনা করুন</string>
-    <string name="settings_system_patched_apks_empty">কোনো প্যাচড APK(গুলি) সংরক্ষিত হয়নি</string>
+    <string name="settings_system_patched_apks_empty">কোনো প্যাচকৃত APK সংরক্ষিত হয়নি</string>
     <string name="settings_system_patched_apks_delete_title">প্যাচড APK মুছে ফেলতে চানেন? </string>
     <string name="settings_system_patched_apks_delete_confirm">আপনি কি সংরক্ষিত প্যাচড APK-কে মুছে ফেলতে চানেন? %s-এর জন্য? </string>
     <string name="settings_system_patched_apks_deleted">প্যাচড APK মুছে ফেল হয়েছে</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
-    <string name="settings_system_original_apks_title">মূল APK(গুলি)</string>
+    <string name="settings_system_original_apks_title">মূল APK সমূহ</string>
     <string name="settings_system_original_apks_description">আরিজিনাল APK ফাইল পুনরায় প্যাচিংয়ের জন্য সংরক্ষিত করা হয়। প্রতিটি অ্যাপের জন্য সর্বশেষ সংস্করণটি রাখা হয়</string>
     <string name="settings_system_original_apks_empty">কোনো মূল APK ফাইল সংরক্ষিত হয়নি</string>
     <string name="settings_system_original_apks_deleted">মূল APK মুছে ফেল হয়েছে</string>
@@ -485,8 +510,8 @@
     <string name="settings_system_patch_selection_reset_all_warning">সব প্যাকেজ এবং উৎসের জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
     <string name="settings_system_patch_selection_reset_package_warning">%s এর জন্য সব উৎসের জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
     <string name="settings_system_patch_selection_reset_source_warning">%1$s এর জন্য সংরক্ষিত প্যাচ নির্বাচনকে স্থায়ীভাবে মুছে ফেলবে, সূত্র #%2$s-এ।</string>
-    <string name="settings_system_export_source_data_fail">উৎস ডাটা রপ্তানি করতে ব্যর্থ হয়েছে</string>
-    <string name="settings_system_export_source_data_success">উৎস ডাটা সফলভাবে রপ্তানি করা হয়েছে</string>
+    <string name="settings_system_export_source_data_fail">সোর্স ডাটা এক্সপোর্ট করা ব্যর্থ হয়েছে</string>
+    <string name="settings_system_export_source_data_success">সোর্স ডেটা সফলভাবে এক্সপোর্ট করা হয়েছে</string>
     <string name="settings_system_import_source_data_fail">উৎস ডাটা আমদানি করতে ব্যর্থ হয়েছে</string>
     <string name="settings_system_import_source_data_success">উৎস ডাটা সফলভাবে আমদানি করা হয়েছে</string>
     <string name="settings_system_patch_details_title">প্যাচ বিবরণ</string>
@@ -530,7 +555,7 @@
     <string name="not_selected">নির্বাচিত নয়</string>
     <string name="rename">রেনেম করুন</string>
     <string name="import_">আমদানি করুন</string>
-    <string name="export">রপ্তানি করুন</string>
+    <string name="export">এক্সপোর্ট করুন</string>
     <string name="download">ডাউনলোড</string>
     <string name="less">কম</string>
     <string name="expand">বিস্তারিত দেখুন</string>
@@ -555,13 +580,13 @@
     <string name="save">সংরক্ষণ করুন</string>
     <string name="saved">সংরক্ষিত হয়েছে</string>
     <string name="update">আপডেট</string>
+    <string name="allow">অনুমতি দিন</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>
     <string name="importing_ellipsis">আমদানি করছেন…</string>
     <string name="changelog">পরিবর্তনলগ দেখুন</string>
     <string name="changelog_description">এই আপডেটে সর্বশেষ পরিবর্তনের জন্য চেক করুন</string>
-    <string name="changelog_loading">চেঞ্জলগ লোড হচ্ছে</string>
     <string name="changelog_download_fail">চেঞ্জলগ ডাউনলোড করা যায়নি: %s</string>
     <string name="changelog_retry">পুনরায় করুন</string>
     <string name="changelog_empty">কোনো চ্যাঞলগ উপলব্ধ নেই</string>

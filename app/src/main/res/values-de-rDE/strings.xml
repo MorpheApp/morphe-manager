@@ -305,6 +305,31 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="settings_advanced_updates">Aktualisierungen</string>
     <string name="settings_advanced_updates_use_prereleases">Verwende Vorabversion</string>
     <string name="settings_advanced_updates_use_prereleases_description">Erhalte frühzeitigen Zugang zu neuen Patches und Manager-Funktionen.</string>
+    <string name="settings_advanced_updates_background_notifications">Hintergrundaktualisierungen</string>
+    <string name="settings_advanced_updates_background_notifications_description">Im Hintergrund periodisch nach Updates suchen und bei Verfügbarkeit benachrichtigen.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Erhalten Sie sofortige Push-Benachrichtigungen für neue Versionen, auch wenn die App geschlossen ist</string>
+    <string name="notification_channel_manager_updates">Aktualisierungen verwalten</string>
+    <string name="notification_channel_manager_updates_description">Benachrichtigungen über neue Morphe-Manager-Versionen</string>
+    <string name="notification_channel_bundle_updates">Patchquellenaktualisierungen</string>
+    <string name="notification_channel_bundle_updates_description">Benachrichtigungen ├╝ber neue Patch-Quellversionen</string>
+    <string name="notification_channel_fcm_updates">Aktualisierungen</string>
+    <string name="notification_channel_fcm_updates_description"> Sofortige Push-Benachrichtigungen für neue Morphe-Manager- und Patch-Veröffentlichungen. Auch wenn die App im Hintergrund ausgeführt wird.</string>
+    <string name="settings_advanced_update_interval">Aktualisierungsfrequenz</string>
+    <string name="settings_advanced_update_interval_dialog_title">Aktualisierung prüfen</string>
+    <string name="settings_advanced_update_interval_hourly">Stündlich</string>
+    <string name="settings_advanced_update_interval_daily">Täglich</string>
+    <string name="settings_advanced_update_interval_weekly">Wöchentlich</string>
+    <string name="settings_advanced_update_interval_monthly">Monatlich</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Hintergrund-Aktualisierungsfrequenz</string>
+    <string name="settings_advanced_update_interval_battery_warning">Hintergrund-Aktualisierungen können auf einigen Geräten nicht zuverlässig funktionieren. Hersteller wie Xiaomi, Huawei, Samsung und OnePlus beschränken oft aggressiv Hintergrundprozesse, um Batterieleistung zu sparen.</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Neue Morphe-Manager-Aktualisierung verfügbar</string>
+    <string name="notification_bundle_update_title">Neue Patches verfügbar</string>
+    <string name="notification_update_text">Version %1$s steht zum Download bereit</string>
+    <string name="notification_bundle_update_text_unversioned">Tippen Sie, um Morphe-Manager zu öffnen und zu aktualisieren</string>
+    <string name="notification_permission_dialog_title">Benachrichtigungen erlauben</string>
+    <string name="notification_permission_dialog_description">Morphe-Manager benötigt die Berechtigung für Benachrichtigungen, um Sie im Hintergrund über verfügbare Aktualisierungen zu informieren.</string>
+    <string name="notification_post_patch_dialog_title">Möchten Sie benachrichtigt werden, wenn Updates verfügbar sind?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Erweiterte Einstellungen</string>
     <string name="settings_advanced_expert_mode">Erweiterter Modus</string>
@@ -576,13 +601,13 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="save">Speichern</string>
     <string name="saved">Gespeichert</string>
     <string name="update">Aktualisieren</string>
+    <string name="allow">Erlauben</string>
     <string name="installing_ellipsis">Wird installiert…</string>
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Austrennen…</string>
     <string name="importing_ellipsis">Importiere…</string>
     <string name="changelog">Changelogs anzeigen</string>
     <string name="changelog_description">Entdecke die neuesten Änderungen in diesem Update</string>
-    <string name="changelog_loading">Changelog wird geladen</string>
     <string name="changelog_download_fail">Download des Changelogs fehlgeschlagen: %s</string>
     <string name="changelog_retry">Erneut versuchen</string>
     <string name="changelog_empty">Keine Protokolle verfügbar</string>

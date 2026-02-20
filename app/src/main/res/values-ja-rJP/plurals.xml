@@ -7,10 +7,10 @@
         <item quantity="other">%s 個のパッチ オプション</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="other">%s 件のソース</item>
+        <item quantity="other">ソース %s 件</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="other">%s パッケージ</item>
+        <item quantity="other">パッケージ %s 件</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="other">%s 個のパッチを実行</item>
@@ -19,7 +19,7 @@
         <item quantity="other">APK ファイル %s 個</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="other">保存済みセレクションから互換性を失ったパッチを %s 個削除しました</item>
+        <item quantity="other">保存済みセレクションから互換性を失った %s 個のパッチを削除しました</item>
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="other">インストール済みのソース %s 件</item>

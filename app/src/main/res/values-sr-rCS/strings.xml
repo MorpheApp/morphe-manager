@@ -305,6 +305,31 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_updates">Ažuriranja</string>
     <string name="settings_advanced_updates_use_prereleases">Koristite preizdane verzije</string>
     <string name="settings_advanced_updates_use_prereleases_description">Dobijete raniji pristup novim patchovima i mogućnostima meni</string>
+    <string name="settings_advanced_updates_background_notifications">Ažuriranja u pozadini</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodično proveravaj za ažuriranja u pozadini i obaveštavaj kada su dostupna</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Primaj trenutne push obavijesti za nove verzije, čak i kada je aplikacija zatvorena</string>
+    <string name="notification_channel_manager_updates">Menadžer ažuriranja</string>
+    <string name="notification_channel_manager_updates_description">Obavijesti o novim verzijama Morphe menadžera</string>
+    <string name="notification_channel_bundle_updates">Ažuriranja izvora</string>
+    <string name="notification_channel_bundle_updates_description">Obaveštenja o novim verzijama izvora</string>
+    <string name="notification_channel_fcm_updates">Ažuriraj opozive</string>
+    <string name="notification_channel_fcm_updates_description">Brzi obaveštenja za nove Morphe menadžera i ispravke. Isporučeno čak i kada je aplikacija u pozadini</string>
+    <string name="settings_advanced_update_interval">Pronalaženje frekvencije</string>
+    <string name="settings_advanced_update_interval_dialog_title">Pronalaženje ažuriranja</string>
+    <string name="settings_advanced_update_interval_hourly">Jedanput na sat</string>
+    <string name="settings_advanced_update_interval_daily">Jedanput na dan</string>
+    <string name="settings_advanced_update_interval_weekly">Jedanput na nedelju</string>
+    <string name="settings_advanced_update_interval_monthly">Jedanput na mesec</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Frekvencija pronalaženja u pozadini</string>
+    <string name="settings_advanced_update_interval_battery_warning">Pronalaženje u pozadini možda neće funkcionisati pouzdano na nekim uređajima. Proizvođači poput Xiaomi, Huawei, Samsunga i OnePlus često agresivno ograničavaju processe u pozadini da bi sačuvali bateriju</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Dostupno ažuriranje Morphe menadžera</string>
+    <string name="notification_bundle_update_title">Dostupne ispravke</string>
+    <string name="notification_update_text">Verzija %1$s je sprema za preuzimanje</string>
+    <string name="notification_bundle_update_text_unversioned">Kliknite da otvorite Morphe menadžer i ažurirajte</string>
+    <string name="notification_permission_dialog_title">Dozvoli obaveštenja</string>
+    <string name="notification_permission_dialog_description">Morphe menadžer zahteva dozvolu za obaveštenja da bi vas obaveštio kada su ažuriranja dostupna u pozadini</string>
+    <string name="notification_post_patch_dialog_title">Da li biste hteli da budete obavešteni kada su ažuriranja dostupna?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
@@ -538,13 +563,13 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="save">Sačuvaj</string>
     <string name="saved">Sačuvano</string>
     <string name="update">Ažuriraj</string>
+    <string name="allow">Dozvoli</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Montiranje…</string>
     <string name="unmounting_ellipsis">Ponovo priključaj…</string>
     <string name="importing_ellipsis">Uvozi…</string>
     <string name="changelog">Prikaži zapise o promenama</string>
     <string name="changelog_description">Pogledaj najnovije promene u ovom ažuriranju</string>
-    <string name="changelog_loading">Učitavanje zapisa o promenama</string>
     <string name="changelog_download_fail">Preuzimanje zapisa o promenama nije uspelo: %s</string>
     <string name="changelog_retry">Ponovo pokreni</string>
     <string name="changelog_empty">Nema dostupne verzije promjene</string>

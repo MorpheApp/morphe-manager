@@ -4,7 +4,7 @@
     <string name="home_other_apps">Altre app</string>
     <string name="home_not_patched_yet">Non ancora patchato</string>
     <string name="home_no_patches_available">Nessuna patch disponibile</string>
-    <string name="home_default_source_disabled">La sorgente delle patch di Morphe è disabilitata. Abilitala nel foglio delle sorgenti delle Patch o utilizza la modalità Esperto</string>
+    <string name="home_default_source_disabled">La sorgente delle patch di Morphe è disabilitata. Abilitala nella sezione Fonti delle Patch o utilizza la modalità Esperto</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso di installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
     <!-- Home Screen - Update Notifications -->
@@ -25,13 +25,13 @@
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Allaccia le cinture, è il momento di patchare</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Un altro giorno, un altro capolavoro con il blocco della pubblicità</string>
+    <string name="home_greeting_4">Un altro giorno, un altro capolavoro senza pubblicità</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Vuoi guardare gli annunci? Neanch\'io</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Facciamo comportare le tue app come vuoi tu</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Previsioni per oggi: probabilità di patchare del 100%</string>
+    <string name="home_greeting_7">Previsioni per oggi: probabilità di patch del 100%</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Pronti a trasformare il deludente in eccezionale?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -52,7 +52,7 @@
     <string name="sources_dialog_view_any_version">Qualsiasi versione</string>
     <string name="sources_dialog_view_any_package">Qualsiasi pacchetto</string>
     <string name="sources_dialog_add_source">Aggiungi la fonte delle patch</string>
-    <string name="sources_dialog_delete_confirm_message">Elimina la sorgente \"%s\"? Questa operazione non può essere annullata</string>
+    <string name="sources_dialog_delete_confirm_message">Elimina la fonte \"%s\"? Questa operazione non può essere annullata</string>
     <string name="sources_dialog_remote">A distanza</string>
     <string name="sources_dialog_remote_url">URL della fonte</string>
     <string name="sources_dialog_remote_url_formats_title">Esempi:</string>
@@ -79,7 +79,7 @@ Versioni compatibili:"</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Scarica l\'APK originale</string>
     <string name="home_download_instructions_steps_title">Istruzioni:</string>
-    <string name="home_download_instructions_step1">Premi il pulsante \'%1$s\' qua sotto</string>
+    <string name="home_download_instructions_step1">Premi il pulsante \'%1$s\' qui sotto</string>
     <string name="home_download_instructions_step2_part1">Scorri verso il basso la pagina web e premi</string>
     <string name="home_download_instructions_download_button_toast">Premi scarica sul sito web, e non qui 😊</string>
     <string name="home_download_instructions_step3">Attendi che il download si completi, e &lt;b&gt;non installare&lt;/b&gt; l\'APK</string>
@@ -89,13 +89,13 @@ Versioni compatibili:"</string>
     <string name="home_download_instructions_continue">Continua su APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Seleziona l\'APK che hai scaricato</string>
-    <string name="home_file_picker_prompt_description">Ora seleziona il file %1$s APK che hai appena scaricato</string>
+    <string name="home_file_picker_prompt_description">Ora seleziona il file APK di %1$s che hai appena scaricato</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Apri il file APK che ho scaricato</string>
     <string name="home_file_picker_prompt_open_apk">Apri il file APK</string>
     <string name="home_recommended_version">Versione consigliata</string>
     <string name="home_selected_version">Versione selezionata</string>
     <string name="home_select_apk_title">Seleziona l\'APK</string>
-    <string name="home_select_any_apk_description">Premi il pulsante qui sotto per selezionare un file APK di qualsiasi app per la patch</string>
+    <string name="home_select_any_apk_description">Premi il pulsante qui sotto per selezionare un file APK di qualsiasi app per il patching</string>
     <string name="home_invalid_apk">File APK non valido</string>
     <string name="home_no_patches_for_app">Nessuna patch disponibile per questa app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -113,7 +113,7 @@ Versioni compatibili:"</string>
 Sei sicuro di voler procedere?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versione APK non supportata</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Questo APK non è di una versione app raccomandata. Procedere potrebbe esitare in un’app non funzionante</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Questo APK non è di una versione app raccomandata. Procedere potrebbe produrre un’app non funzionante</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Procedi comunque</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versioni compatibili:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Non supportato</string>
@@ -128,7 +128,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="patch_option_enter_value">Inserisci il valore</string>
     <string name="patch_option_enter_number">Inserisci il numero</string>
     <string name="patch_option_enter_decimal">Inserisci il decimale</string>
-    <string name="patch_option_pick_folder">Segli la cartella</string>
+    <string name="patch_option_pick_folder">Scegli la cartella</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crea icona adattiva</string>
     <string name="adaptive_icon_instructions">Scegli un\'immagine in primo piano, seleziona il colore dello sfondo e regola l\'anteprima con la gesture di pinch-to-zoom</string>
@@ -138,7 +138,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="adaptive_icon_background_color">Colore dello sfondo</string>
     <string name="adaptive_icon_reset_transform">Reimposta posizione e scala</string>
     <string name="adaptive_icon_safe_zone_inner">Zona sicura (sempre visibile)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zona di maschera (potrebbde venire tagliata)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zona di maschera (potrebbe venire tagliata)</string>
     <string name="adaptive_icon_created_success">Icona adattiva creata con successo</string>
     <string name="adaptive_icon_creation_failed">Impossibile creare l\'icona adattiva</string>
     <string name="adaptive_icon_folder_explanation">Seleziona dove creare la cartella \'morphe_branding/morphe_icons\' con i file dell\'icona generata</string>
@@ -157,7 +157,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_app_info_delete_item_database">Voce del database</string>
     <string name="home_app_info_delete_item_patched_apk">File APK patchato</string>
     <string name="home_app_info_delete_item_original_apk">File APK originale</string>
-    <string name="home_app_info_delete_preservation_note">La tua selezione delle patch e delle opzioni verranno conservate per i patching futuri</string>
+    <string name="home_app_info_delete_preservation_note">La tua selezione delle patch e delle opzioni verrà conservata per i patching futuri</string>
     <string name="home_app_info_patches_name_default">Patch</string>
     <string name="home_app_info_patches_name_fallback">Senza nome</string>
     <string name="home_app_info_patches_replace_fail">Impossibile importare le patch: %s</string>
@@ -172,7 +172,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_app_info_patch_update_available">Aggiornamento delle patch disponibile</string>
     <string name="home_app_info_patch_update_available_description">È disponibile una nuova versione delle patch. Ripatcha la tua app per ottenere gli ultimi miglioramenti e correttivi</string>
     <string name="home_app_info_app_deleted_warning">App disinstallata al di fuori del manager</string>
-    <string name="home_app_info_app_deleted_description">Questa app è stata disinstallata al di fuori del manager. Repatchalz per ripristinare la funzionalità</string>
+    <string name="home_app_info_app_deleted_description">Questa app è stata disinstallata al di fuori del manager. Ripatcha per ripristinare la funzionalità</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">La modalità di root richiede che l\'APK originale sia installato sul tuo dispositivo prima del patching</string>
     <string name="root_gmscore_excluded">Il supporto per GmsCore è escluso in modalità di root</string>
@@ -224,7 +224,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="patcher_message_5">Pausa caffè consigliata… ☕</string>
     <string name="patcher_message_6">Guarda fuori, è bello là fuori… 🌤️</string>
     <string name="patcher_message_7">Regolando 1 e 0... 🤖</string>
-    <string name="patcher_message_8">Diatricando gli spaghetti digitali… 🍝</string>
+    <string name="patcher_message_8">Districando gli spaghetti digitali… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Risolvendo i problemi nell\'app non patchata… 🪲</string>
     <string name="patcher_message_10">Le grandi patch valgono l\'attesa… ⏳</string>
@@ -236,7 +236,7 @@ Sei sicuro di voler procedere?"</string>
     <!-- Space flight communications callout. -->
     <string name="patcher_message_15">Tutti i sistemi nella norma… traiettoria di patching stabile… 🚀</string>
     <string name="patcher_message_16">Spremendo potenza extra, come il succo da un limone digitale… 🍋</string>
-    <string name="patcher_message_17">Incoraggiando l\'app ad accettare il suo nuovo, migliore sè… 🌱</string>
+    <string name="patcher_message_17">Incoraggiando l\'app ad accettare il suo nuovo, migliore sé… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Cambiando la sovrapposizione dell\'app da non patchata a patchata… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
@@ -245,11 +245,11 @@ Sei sicuro di voler procedere?"</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Applicazione delle patch</string>
     <string name="failed_to_execute_patch">Impossibile applicare %s</string>
-    <string name="patched_app_saved_toast">App modificata salvata per dopo</string>
+    <string name="patched_app_saved_toast">App patchata salvata per dopo</string>
     <string name="patched_app_save_failed_toast">Impossibile salvare l\'app modificata</string>
     <string name="download_apk">Scarica il file APK</string>
     <string name="plugin_activity_dialog_body">È richiesta l\'interazione dell\'utente per procedere con questo plugin</string>
-    <string name="patcher_process_exit_message">Il processo del patcher è uscito con codice %1$s</string>
+    <string name="patcher_process_exit_message">Il processo del patcher è terminato con codice %1$s</string>
     <string name="install_app_success">Installato correttamente</string>
     <string name="install_app_fail">Impossibile installare l\'app: %s</string>
     <string name="install_timeout_message">L\'installazione non è stata completata. Controlla la finestra di dialogo dell\'installatore di sistema e riprova</string>
@@ -275,7 +275,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_appearance_background_snow">Neve</string>
     <string name="settings_appearance_background_none">Nessuna</string>
     <string name="settings_appearance_parallax_effect">Effetto parallasse</string>
-    <string name="settings_appearance_parallax_effect_description">Sfondo liscio che si sposta quando si inclina il dispositivo</string>
+    <string name="settings_appearance_parallax_effect_description">Sfondo regolare che si sposta quando si inclina il dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_system">Di sistema</string>
@@ -305,12 +305,37 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_advanced_updates">Aggiornamenti</string>
     <string name="settings_advanced_updates_use_prereleases">Usa le versioni anteprima</string>
     <string name="settings_advanced_updates_use_prereleases_description">Ottieni l\'accesso anticipato alle nuove patch e alle funzionalità del manager</string>
+    <string name="settings_advanced_updates_background_notifications">Notifiche di aggiornamento in background</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodicamente controlla gli aggiornamenti in background e notifica quando disponibili</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Ricevi notifiche push istantanee per i nuovi rilasci, anche se l\'app è chiusa</string>
+    <string name="notification_channel_manager_updates">Aggiornamenti del gestore</string>
+    <string name="notification_channel_manager_updates_description">Notifiche sulle nuove versioni del gestore Morphe</string>
+    <string name="notification_channel_bundle_updates">Aggiornamenti delle patch</string>
+    <string name="notification_channel_bundle_updates_description">Notifiche sulle nuove versioni di origine del pacchetto</string>
+    <string name="notification_channel_fcm_updates">Aggiorna allerta</string>
+    <string name="notification_channel_fcm_updates_description">Notifiche push istantanee per i nuovi rilasci di Morphe manager e patch. Consegnato anche quando l\'app è in background</string>
+    <string name="settings_advanced_update_interval">Frequenza di controllo</string>
+    <string name="settings_advanced_update_interval_dialog_title">Controlla gli aggiornamenti</string>
+    <string name="settings_advanced_update_interval_hourly">Una volta all\'ora</string>
+    <string name="settings_advanced_update_interval_daily">Una volta al giorno</string>
+    <string name="settings_advanced_update_interval_weekly">Una volta alla settimana</string>
+    <string name="settings_advanced_update_interval_monthly">Una volta al mese</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Frequenza di controllo in background</string>
+    <string name="settings_advanced_update_interval_battery_warning">I controlli in background potrebbero non funzionare correttamente su alcuni dispositivi. I produttori come Xiaomi, Huawei, Samsung e OnePlus spesso limitano in modo aggressivo i processi in background per risparmiare batteria</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Aggiornamento Morphe manager disponibile</string>
+    <string name="notification_bundle_update_title">Nuovi patch disponibili</string>
+    <string name="notification_update_text">La versione %1$s è pronta per il download</string>
+    <string name="notification_bundle_update_text_unversioned">Fai clic per aprire Morphe manager e aggiorna</string>
+    <string name="notification_permission_dialog_title">Consenti notifiche</string>
+    <string name="notification_permission_dialog_description">Morphe manager ha bisogno del permesso di notifica per avvisarti quando gli aggiornamenti sono disponibili in background</string>
+    <string name="notification_post_patch_dialog_title">Vorresti essere notificato quando ci sono aggiornamenti disponibili?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Impostazioni avanzate</string>
     <string name="settings_advanced_expert_mode">Modalità esperto</string>
-    <string name="settings_advanced_expert_mode_description">Abilita le impostazioni avanzate e le opzioni di personalizzazione del patching complesso Morphe</string>
+    <string name="settings_advanced_expert_mode_description">Abilita le impostazioni avanzate e le opzioni di personalizzazione del patching di Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Abilitare la modalità esperto?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">La modalità esperto fornisce un maggiore controllo su come vengono applicate le patch, ma la configurazione errata delle impostazioni in modalità esperto può esitare in un\'applicazione non funzionante</string>
+    <string name="settings_advanced_expert_mode_dialog_message">La modalità esperto fornisce un maggiore controllo su come vengono applicate le patch, ma la configurazione errata delle impostazioni in modalità esperto può produrre un\'app non funzionante</string>
     <string name="settings_advanced_strip_unused_libs">Elimina le librerie native non utilizzate</string>
     <string name="settings_advanced_strip_unused_libs_description">Elimina i file delle librerie native dalle app patchate per le architetture CPU non supportate</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -409,7 +434,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_status_shizuku_not_installed">Installa Shizuku o Sui per utilizzare questa opzione</string>
     <string name="installer_status_shizuku_not_running">Avvia Shizuku o Sui e riprova</string>
     <string name="installer_status_shizuku_permission">Concedi a Shizuku il permesso a Morphe dall\'app Shizuku</string>
-    <string name="installer_mount_warning_install">Il tuo installatore principale è impostato sull\'installatore montato di root. Questa app salvata non è stata installata utilizzando il montaggio</string>
+    <string name="installer_mount_warning_install">Il tuo installatore principale è impostato sull\'installatore mount con privilegi di root. Questa app salvata non è stata installata utilizzando il montaggio</string>
     <string name="mount_version_mismatch_message">La versione dell\'app di sistema (%2$s) non corrisponde alla versione dell\'app patchata (%1$s). Monta la versione di sistema corrispondente, quindi riprova</string>
     <string name="installer_status_shizuku_unsupported">La versione di Shizuku installata non è supportata</string>
     <string name="installer_action_open_shizuku">Apri Shizuku</string>
@@ -428,7 +453,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_unavailable_message">Il tuo installer preferito (%s) non è attualmente disponibile. Puoi risolvere il problema e riprovare, o utilizzare l\'installer standard</string>
     <string name="installer_unavailable_shizuku_hint">Assicurati che Shizuku sia in esecuzione e che il permesso sia concesso a questa app</string>
     <string name="installer_use_standard">Usa standard</string>
-    <string name="settings_prompt_installer_on_install">Richiedi l\'installatore all\'installazione</string>
+    <string name="settings_prompt_installer_on_install">Richiedi l\'installatore durante l\'installazione</string>
     <string name="settings_prompt_installer_on_install_description">Mostra la finestra di dialogo di selezione dell\'installatore ogni volta che installi un\'app patchata</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prestazioni</string>
@@ -442,37 +467,37 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_process_runtime_enabled_description">%s MB limite</string>
     <string name="settings_system_process_runtime_disabled_description">Clicca per configurare</string>
     <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_export">Importazione &amp; esportazione</string>
+    <string name="settings_system_import_export">Importa &amp; Esporta</string>
     <string name="settings_system_import_keystore">Importa il keystore</string>
     <string name="settings_system_import_keystore_description">Importa un keystore personalizzato</string>
     <string name="settings_system_import_keystore_dialog_title">Inserisci le credenziali del keystore</string>
-    <string name="settings_system_import_keystore_dialog_description">Sarà necessario inserire le credenziali del keystore per importarlo</string>
+    <string name="settings_system_import_keystore_dialog_description">Dovrai inserire le credenziali del keystore per importarlo</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nome utente (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
     <string name="settings_system_import_keystore_dialog_button">Importa</string>
     <string name="settings_system_import_keystore_wrong_credentials">Credenziali del keystore errate</string>
     <string name="settings_system_import_keystore_success">Keystore importato</string>
     <string name="settings_system_import_keystore_failed">Importazione del keystore non riuscita</string>
-    <string name="settings_system_export_keystore">Esporta il keystore</string>
-    <string name="settings_system_export_keystore_description">Esporta il keystore attuale</string>
+    <string name="settings_system_export_keystore">Esporta keystore</string>
+    <string name="settings_system_export_keystore_description">Esporta il keystore corrente</string>
     <string name="settings_system_export_keystore_unavailable">Nessun keystore disponibile per l\'esportazione</string>
     <string name="settings_system_export_keystore_success">Keystore esportato</string>
     <string name="settings_system_show_password_field">Mostra la password</string>
     <string name="settings_system_hide_password_field">Nascondi la password</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importa le impostazioni del manager</string>
+    <string name="settings_system_import_manager_settings">Importa impostazioni del manager</string>
     <string name="settings_system_import_manager_settings_description">Ripristina le impostazioni del manager da un file JSON</string>
     <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni del manager: %s</string>
     <string name="settings_system_import_manager_settings_success">Impostazioni del manager importate </string>
     <string name="settings_system_export_manager_settings">Esporta le impostazioni del manager</string>
-    <string name="settings_system_export_manager_settings_description">Salva impostazioni del manager in un file JSON</string>
+    <string name="settings_system_export_manager_settings_description">Salva le impostazioni del manager in un file JSON</string>
     <string name="settings_system_export_manager_settings_fail">Impossibile esportare le impostazioni del manager: %s</string>
     <string name="settings_system_export_manager_settings_success">Impostazioni del manager esportate</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
-    <string name="settings_system_export_debug_logs">Esporta i logs di debug</string>
+    <string name="settings_system_export_debug_logs">Esporta log di debug</string>
     <string name="settings_system_export_debug_logs_description">Esporta i logs di sistema per la risoluzione dei problemi </string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Lettura dei logs non riuscita (codice di uscita %s)</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Lettura dei log non riuscita (codice di uscita %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Esportazione dei logs non riuscita</string>
     <string name="settings_system_export_debug_logs_export_success">Logs esportati</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -562,7 +587,7 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="continue_">Continua</string>
     <string name="version">Versione</string>
     <string name="patch">Patch</string>
-    <string name="repatch">Repatcha</string>
+    <string name="repatch">Ripatcha</string>
     <string name="open">Apri</string>
     <string name="mount">Monta</string>
     <string name="mounted">Montato</string>
@@ -576,24 +601,24 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="save">Salva</string>
     <string name="saved">Salvato</string>
     <string name="update">Aggiorna</string>
+    <string name="allow">Consenti</string>
     <string name="installing_ellipsis">Installazione in corso…</string>
     <string name="mounting_ellipsis">Montaggio in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>
     <string name="importing_ellipsis">Riprova</string>
-    <string name="changelog">Visualizza i registri delle modifiche</string>
+    <string name="changelog">Visualizza registri delle modifiche</string>
     <string name="changelog_description">Scopri le ultime modifiche in questo aggiornamento</string>
-    <string name="changelog_loading">Caricamento del registro delle modifiche</string>
     <string name="changelog_download_fail">Download del registro delle modifiche non riuscito: %s</string>
     <string name="changelog_retry">Riprova</string>
     <string name="changelog_empty">Nessun registro delle modifiche disponibile</string>
-    <string name="no_network_toast">Non c\'è connessione internet disponibile</string>
+    <string name="no_network_toast">Connessione internet non disponibile</string>
     <string name="update_available">È disponibile un aggiornamento</string>
     <string name="ready_to_install_update">Aggiornamento pronto per l\'installazione</string>
     <string name="update_completed">Aggiornamento installato</string>
     <string name="install_update_manager_failed">Impossibile installare l\'aggiornamento</string>
     <string name="installing_manager_update">Installazione dell\'aggiornamento in corso…</string>
     <string name="downloading_manager_update">Download dell\'aggiornamento in corso…</string>
-    <string name="download_manager_failed">Download dell\'aggiornamento non riuscito: %s</string>
+    <string name="download_manager_failed">Impossibile scaricare l\'aggiornamento: %s</string>
     <string name="failed_to_check_updates">Impossibile verificare la presenza degli aggiornamenti: %s</string>
     <string name="failed_to_download_update">Impossibile scaricare l\'aggiornamento: %s</string>
     <string name="resume_download">Riprendi il download</string>
@@ -601,9 +626,9 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
 
 Vuoi comunque continuare?"</string>
     <string name="download_update_confirmation">Scaricare l\'aggiornamento?</string>
-    <string name="just_now">Giusto ora</string>
+    <string name="just_now">Adesso</string>
     <string name="minutes_ago">%sm fa</string>
-    <string name="hours_ago">%sh fa</string>
-    <string name="days_ago">%sd fa</string>
+    <string name="hours_ago">%so fa</string>
+    <string name="days_ago">%sg fa</string>
     <string name="invalid_date">Data non valida</string>
 </resources>

@@ -6,11 +6,11 @@
     <string name="home_no_patches_available">利用可能なパッチはありません</string>
     <string name="home_default_source_disabled">Morpheのパッチソースが無効になっています。パッチソース設定画面で有効にするか、エキスパートモードを使用してください。</string>
     <string name="android_11_bug_dialog_title">Android 11 のバグ</string>
-    <string name="android_11_bug_dialog_description">Android 11 では、不具合によってユーザー体験が悪化するのを防ぐため、アプリのインストール権限を事前に付与しておく必要があります</string>
+    <string name="android_11_bug_dialog_description">Android 11 では、ユーザー体験に悪影響を及ぼす不具合が確認されています。あらかじめアプリのインストール権限を付与しておいてください</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">新しいアップデートが利用可能です</string>
     <string name="home_update_available_subtitle">新しいバージョンがインストール可能です</string>
-    <string name="home_update_error">更新できませんでした</string>
+    <string name="home_update_error">更新に失敗しました</string>
     <string name="home_update_error_subtitle">インターネット接続を確認して、再度お試しください</string>
     <string name="home_updating_sources">ソースを更新中…</string>
     <string name="home_update_progress_format">%1$s 件処理済み</string>
@@ -31,13 +31,13 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">アプリを思いどおりに</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">本日の予報: パッチの確率 100%</string>
+    <string name="home_greeting_7">本日の予報: パッチ確率 100%</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">物足りないを、最高に変える準備はできた？</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">アプリを、自分自身から救う</string>
+    <string name="home_greeting_9">アプリを救う救世主になろう</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">カフェインと良いパッチで動いている</string>
+    <string name="home_greeting_10">カフェインと良質なパッチで動作中</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">このアプリに利用できるパッチはありません</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">エキスパートモード</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s 件中 %1$s 件選択中</string>
+    <string name="expert_mode_subtitle_extended_format">%2$s 中 %1$s 個選択中</string>
     <string name="expert_mode_search">パッチを検索する</string>
     <string name="expert_mode_proceed">パッチ処理に進む</string>
     <string name="expert_mode_disable_all">全て無効化する</string>
@@ -305,6 +305,31 @@
     <string name="settings_advanced_updates">更新</string>
     <string name="settings_advanced_updates_use_prereleases">プレリリース版を使用</string>
     <string name="settings_advanced_updates_use_prereleases_description">新しいパッチやマネージャー機能をいち早く利用できます</string>
+    <string name="settings_advanced_updates_background_notifications">バックグラウンド更新通知</string>
+    <string name="settings_advanced_updates_background_notifications_description">定期的にバックグラウンドで更新を確認し、利用可能な場合に通知します。</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">アプリが閉じているときでも新しいリリースのプッシュ通知を即座に受信します</string>
+    <string name="notification_channel_manager_updates">マネージャーの更新</string>
+    <string name="notification_channel_manager_updates_description">Morphe マネージャーの新しいバージョンの通知</string>
+    <string name="notification_channel_bundle_updates">パッチソースの更新</string>
+    <string name="notification_channel_bundle_updates_description">パッチソースの新しいバージョンの通知</string>
+    <string name="notification_channel_fcm_updates">アラートを更新</string>
+    <string name="notification_channel_fcm_updates_description">Morphe マネージャーおよびパッチの新しいリリースを即時のプッシュ通知でお知らせします。アプリがバックグラウンドにある場合でも配信されます</string>
+    <string name="settings_advanced_update_interval">確認頻度</string>
+    <string name="settings_advanced_update_interval_dialog_title">更新の確認</string>
+    <string name="settings_advanced_update_interval_hourly">1 時間に 1 回</string>
+    <string name="settings_advanced_update_interval_daily">1 日に 1 回</string>
+    <string name="settings_advanced_update_interval_weekly">1 週間に 1 回</string>
+    <string name="settings_advanced_update_interval_monthly">1 か月に 1 回</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">バックグラウンドでの確認頻度</string>
+    <string name="settings_advanced_update_interval_battery_warning">一部のデバイスでは、バックグラウンドでの確認が正常に動作しない場合があります。Xiaomi、Huawei、Samsung、OnePlus などのメーカーは、バッテリーを節約するためにバックグラウンド プロセスを厳しく制限することがよくあります。</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe マネージャーの更新が利用可能です</string>
+    <string name="notification_bundle_update_title">新しいパッチが利用可能です</string>
+    <string name="notification_update_text">バージョン %1$s がダウンロード可能です</string>
+    <string name="notification_bundle_update_text_unversioned">タップして Morphe マネージャーを開いて更新してください</string>
+    <string name="notification_permission_dialog_title">通知の許可</string>
+    <string name="notification_permission_dialog_description">バックグラウンドでアップデートが利用可能になったときに通知するためには、Morphe マネージャーに通知の許可を付与する必要があります。</string>
+    <string name="notification_post_patch_dialog_title">更新が利用可能になったときに通知を受け取りますか？</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">エキスパート設定</string>
     <string name="settings_advanced_expert_mode">エキスパートモード</string>
@@ -577,13 +602,13 @@ Morphe は、コミュニティのフィードバックと貢献によって発�
     <string name="save">保存</string>
     <string name="saved">保存済み</string>
     <string name="update">アップデート</string>
+    <string name="allow">許可</string>
     <string name="installing_ellipsis">インストール中…</string>
     <string name="mounting_ellipsis">マウント中…</string>
     <string name="unmounting_ellipsis">アンマウント中…</string>
     <string name="importing_ellipsis">インポート中…</string>
     <string name="changelog">変更履歴を表示</string>
     <string name="changelog_description">このアップデートでの最新の変更点を確認</string>
-    <string name="changelog_loading">変更履歴を読み込んでいます</string>
     <string name="changelog_download_fail">変更履歴のダウンロードに失敗しました: %s</string>
     <string name="changelog_retry">再試行</string>
     <string name="changelog_empty">利用可能な更新はありません</string>

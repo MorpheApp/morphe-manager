@@ -305,6 +305,31 @@
     <string name="settings_advanced_updates">更新</string>
     <string name="settings_advanced_updates_use_prereleases">使用预发布版本</string>
     <string name="settings_advanced_updates_use_prereleases_description">获取新补丁和管理器功能的早期访问</string>
+    <string name="settings_advanced_updates_background_notifications">后台更新通知</string>
+    <string name="settings_advanced_updates_background_notifications_description">定期在后台检查更新并通知可用</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">即使应用关闭也会收到新版本的即时推送通知</string>
+    <string name="notification_channel_manager_updates">管理更新</string>
+    <string name="notification_channel_manager_updates_description">有关新的 Morphe 管理版本的通知</string>
+    <string name="notification_channel_bundle_updates">补丁源更新</string>
+    <string name="notification_channel_bundle_updates_description">有关新补丁源版本的通知</string>
+    <string name="notification_channel_fcm_updates">更新警报</string>
+    <string name="notification_channel_fcm_updates_description">立即推送通知，通知新的 Morphe 管理器和补丁发布，即使应用在后台运行也会收到</string>
+    <string name="settings_advanced_update_interval">检查频率</string>
+    <string name="settings_advanced_update_interval_dialog_title">检查更新</string>
+    <string name="settings_advanced_update_interval_hourly">每小时一次</string>
+    <string name="settings_advanced_update_interval_daily">每天一次</string>
+    <string name="settings_advanced_update_interval_weekly">每周一次</string>
+    <string name="settings_advanced_update_interval_monthly">每月一次</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">后台检查频率</string>
+    <string name="settings_advanced_update_interval_battery_warning">后台检查在某些设备上可能无法可靠工作。制造商如小米、华为、三星和一加经常积极限制后台进程以节省电池</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe 管理器更新可用</string>
+    <string name="notification_bundle_update_title">有新的补丁可用</string>
+    <string name="notification_update_text">版本 %1$s 可以下载</string>
+    <string name="notification_bundle_update_text_unversioned">点击打开 Morphe 管理器并更新</string>
+    <string name="notification_permission_dialog_title">允许通知</string>
+    <string name="notification_permission_dialog_description">Morphe 管理器需要通知权限来在后台通知您更新可用</string>
+    <string name="notification_post_patch_dialog_title">您是否希望在有更新时收到通知？</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高级设置</string>
     <string name="settings_advanced_expert_mode">高级模式</string>
@@ -574,13 +599,13 @@ morphe_header_custom_dark.png
     <string name="save">保存</string>
     <string name="saved">已保存</string>
     <string name="update">更新</string>
+    <string name="allow">允许</string>
     <string name="installing_ellipsis">正在安装…</string>
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting_ellipsis">正在卸载…</string>
     <string name="importing_ellipsis">正在导入…</string>
     <string name="changelog">查看更新日志</string>
     <string name="changelog_description">查看此更新中的最新更改</string>
-    <string name="changelog_loading">正在加载更新日志</string>
     <string name="changelog_download_fail">下载更新日志失败：%s</string>
     <string name="changelog_retry">重试</string>
     <string name="changelog_empty">无可用更新日志</string>
