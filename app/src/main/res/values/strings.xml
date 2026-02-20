@@ -227,6 +227,13 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
+    <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
+    <string name="patcher_storage_permission_description_api30">One or more patch options point to paths Morphe manager cannot read. Grant storage access and tap the button then patching will start automatically</string>
+    <string name="patcher_storage_permission_description_legacy">One or more patch options point to paths that cannot be accessed. Update the paths in patch options and try again</string>
+    <string name="patcher_storage_permission_open_settings">Open storage settings</string>
+    <string name="patcher_storage_badge_denied">Permission denied</string>
+    <string name="patcher_storage_badge_missing">Not found</string>
+    <string name="patcher_storage_permission_hint">Tip: Move files to /Android/data/app.morphe.manager/files/ - no extra permissions needed</string>
 
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparing</string>

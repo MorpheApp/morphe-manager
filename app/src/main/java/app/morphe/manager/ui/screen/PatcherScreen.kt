@@ -329,6 +329,19 @@ fun PatcherScreen(
         )
     }
 
+    // Storage permission pre-flight dialog.
+    // Shown when a patch option points to an external path the app cannot read.
+    patcherViewModel.inaccessibleOptionPaths?.let { errorState ->
+        StoragePermissionDialog(
+            failures = errorState.failures,
+            onRetryAfterPermission = patcherViewModel::retryAfterPermission,
+            onDismiss = {
+                patcherViewModel.dismissInaccessibleOptionPathsError()
+                onBackClick()
+            }
+        )
+    }
+
     // Error bottom sheet
     if (state.showErrorBottomSheet) {
         ModalBottomSheet(
