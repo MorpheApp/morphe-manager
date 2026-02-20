@@ -1,3 +1,10 @@
+# app [1.8.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2026-02-20)
+
+
+### Bug Fixes
+
+* Manager crashes if the storage path cannot be accessed ([#225](https://github.com/MorpheApp/morphe-manager/issues/225)) ([896a598](https://github.com/MorpheApp/morphe-manager/commit/896a5989ffac134e1ed86df7c333a639330c2c86))
+
 # app [1.8.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.1...v1.8.0-dev.2) (2026-02-19)
 
 
