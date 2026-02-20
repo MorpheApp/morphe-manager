@@ -305,6 +305,31 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_advanced_updates">Oppdateringer</string>
     <string name="settings_advanced_updates_use_prereleases">Brug forhåndsversjoner</string>
     <string name="settings_advanced_updates_use_prereleases_description">Få tidlig adgang til nye patcher og managerfunksjoner</string>
+    <string name="settings_advanced_updates_background_notifications">Baggrundsopdateringsmeddelelser</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodisk tjek for opdateringer i baggrunden ognotify, når de er tilgængelige.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Modtag umiddelbare push-meddelelser for nye udgaver, selvom appen er lukket</string>
+    <string name="notification_channel_manager_updates">Administrer opdateringer</string>
+    <string name="notification_channel_manager_updates_description">Meddelelser om nye Morphe manager-udgaver</string>
+    <string name="notification_channel_bundle_updates">Opdateringskilder</string>
+    <string name="notification_channel_bundle_updates_description">Notifikationer om nye patchkildeversioner</string>
+    <string name="notification_channel_fcm_updates">Opdater alerts</string>
+    <string name="notification_channel_fcm_updates_description">Førtløbende push-notifikationer for nye Morphe manager og patch-udgivelser. Sendes endda, hvis app\'en er i baggrunden</string>
+    <string name="settings_advanced_update_interval">Opdateringsfrekvens</string>
+    <string name="settings_advanced_update_interval_dialog_title">Søg efter opdateringer</string>
+    <string name="settings_advanced_update_interval_hourly">En gang i timen</string>
+    <string name="settings_advanced_update_interval_daily">En gang om dagen</string>
+    <string name="settings_advanced_update_interval_weekly">En gang om ugen</string>
+    <string name="settings_advanced_update_interval_monthly">En gang om måneden</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Baggrundsopdateringsfrekvens</string>
+    <string name="settings_advanced_update_interval_battery_warning">Baggrundsopdateringer kan ikke fungere på visse enheder. Fremstillere som Xiaomi, Huawei, Samsung og OnePlus often aggressivt begrænser baggrundsprocesser for at spare batteri</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Ny Morphe manager-udgivelse tilgængelig</string>
+    <string name="notification_bundle_update_title">Nye patches tilgængelige</string>
+    <string name="notification_update_text">Version %1$s er klar til download</string>
+    <string name="notification_bundle_update_text_unversioned">Tryk for at åbne Morphe manager og opdatere</string>
+    <string name="notification_permission_dialog_title">Tillad notifikationer</string>
+    <string name="notification_permission_dialog_description">Morphe manager behøver tilladelse til notifikationer for at varsle dig, når opdateringer er tilgængelige i baggrunden</string>
+    <string name="notification_post_patch_dialog_title">Vil du blive notificeret, når opdateringer er tilgængelige?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Avansert innstillinger</string>
     <string name="settings_advanced_expert_mode">Avansert modus</string>
@@ -576,13 +601,13 @@ Bildeformateringen må være som følger:
     <string name="save">Gem</string>
     <string name="saved">Lagret</string>
     <string name="update">Opdater</string>
+    <string name="allow">Tillad</string>
     <string name="installing_ellipsis">Installerer…</string>
     <string name="mounting_ellipsis">Montering…</string>
     <string name="unmounting_ellipsis">Forkaster…</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="changelog">Se ændringslogfiler</string>
     <string name="changelog_description">Se de seneste ændringer i dette opdatering</string>
-    <string name="changelog_loading">Indlæser ændringslogfil</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslogfil: %s</string>
     <string name="changelog_retry">Prøv på nytt</string>
     <string name="changelog_empty">Ingen changelog tilgjengelig</string>

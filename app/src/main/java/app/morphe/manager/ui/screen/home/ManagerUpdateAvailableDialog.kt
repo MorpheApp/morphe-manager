@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -12,13 +11,11 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.formatMegabytes
@@ -66,15 +63,25 @@ fun ManagerUpdateDetailsDialog(
         footer = {
             when (state) {
                 UpdateViewModel.State.CAN_DOWNLOAD -> {
-                    MorpheDialogButton(
-                        text = stringResource(
-                            if (updateViewModel.canResumeDownload) R.string.resume_download
-                            else R.string.download
-                        ),
-                        onClick = { updateViewModel.downloadUpdate() },
-                        icon = Icons.Outlined.Download,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    MorpheDialogButtonColumn {
+                        MorpheDialogButton(
+                            text = stringResource(
+                                if (updateViewModel.canResumeDownload) R.string.resume_download
+                                else R.string.download
+                            ),
+                            onClick = { updateViewModel.downloadUpdate() },
+                            icon = Icons.Outlined.Download,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        // Changelog button
+                        releaseInfo?.let {
+                            ChangelogButton(
+                                pageUrl = it.pageUrl,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
                 }
 
                 UpdateViewModel.State.DOWNLOADING -> {
@@ -86,12 +93,22 @@ fun ManagerUpdateDetailsDialog(
                 }
 
                 UpdateViewModel.State.CAN_INSTALL -> {
-                    MorpheDialogButton(
-                        text = stringResource(R.string.install),
-                        onClick = { updateViewModel.installUpdate() },
-                        icon = Icons.Outlined.InstallMobile,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    MorpheDialogButtonColumn {
+                        MorpheDialogButton(
+                            text = stringResource(R.string.install),
+                            onClick = { updateViewModel.installUpdate() },
+                            icon = Icons.Outlined.InstallMobile,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        // Changelog button
+                        releaseInfo?.let {
+                            ChangelogButton(
+                                pageUrl = it.pageUrl,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
                 }
 
                 UpdateViewModel.State.INSTALLING -> {
@@ -118,6 +135,15 @@ fun ManagerUpdateDetailsDialog(
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
+
+                        // Changelog button
+                        releaseInfo?.let {
+                            ChangelogButton(
+                                pageUrl = it.pageUrl,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+
                         MorpheDialogOutlinedButton(
                             text = stringResource(android.R.string.cancel),
                             onClick = onDismiss,
@@ -187,65 +213,61 @@ fun ManagerUpdateDetailsDialog(
                         ) {
                             Column(
                                 modifier = Modifier.padding(16.dp),
-                                verticalArrangement = Arrangement.spacedBy(12.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
-                                Surface(
-                                    shape = CircleShape,
-                                    color = MaterialTheme.colorScheme.error.copy(alpha = 0.2f),
-                                    modifier = Modifier.size(56.dp)
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                    verticalAlignment = Alignment.Top
                                 ) {
-                                    Box(contentAlignment = Alignment.Center) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.ErrorOutline,
-                                            contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.error,
-                                            modifier = Modifier.size(28.dp)
+                                    Icon(
+                                        imageVector = Icons.Outlined.ErrorOutline,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.error,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Column(
+                                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.install_update_manager_failed),
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            color = MaterialTheme.colorScheme.onErrorContainer
+                                        )
+                                        Text(
+                                            text = updateViewModel.installError,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
                                         )
                                     }
                                 }
-
-                                Text(
-                                    text = stringResource(R.string.install_update_manager_failed),
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.error,
-                                    textAlign = TextAlign.Center
-                                )
-
-                                Text(
-                                    text = updateViewModel.installError,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = secondaryColor,
-                                    textAlign = TextAlign.Center
-                                )
                             }
                         }
                     }
                 }
 
                 UpdateViewModel.State.SUCCESS -> {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(16.dp),
-                        color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 48.dp),
+                        contentAlignment = Alignment.Center
                     ) {
                         Column(
-                            modifier = Modifier.padding(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(20.dp)
                         ) {
                             Surface(
                                 shape = CircleShape,
-                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f),
-                                modifier = Modifier.size(56.dp)
+                                color = MaterialTheme.colorScheme.tertiaryContainer,
+                                modifier = Modifier.size(80.dp)
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
                                         imageVector = Icons.Outlined.CheckCircle,
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.tertiary,
-                                        modifier = Modifier.size(28.dp)
+                                        modifier = Modifier.size(40.dp)
                                     )
                                 }
                             }
@@ -263,31 +285,13 @@ fun ManagerUpdateDetailsDialog(
 
                 UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
                     if (releaseInfo == null) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 48.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(20.dp)
-                            ) {
-                                CircularProgressIndicator(
-                                    color = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(48.dp)
-                                )
-                                Text(
-                                    text = stringResource(R.string.changelog_loading),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = secondaryColor,
-                                    textAlign = TextAlign.Center
-                                )
-                            }
-                        }
+                        // Shimmer loading state
+                        ChangelogSectionLoading()
                     } else {
-                        ReleaseInfoSection(
-                            releaseInfo = releaseInfo,
+                        // Changelog content only
+                        ChangelogSection(
+                            asset = releaseInfo,
+                            headerIcon = Icons.Outlined.NewReleases,
                             textColor = textColor
                         )
                     }
@@ -394,39 +398,6 @@ private fun DownloadProgressSection(
                     .height(8.dp),
                 color = MaterialTheme.colorScheme.primary,
                 trackColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-            )
-        }
-    }
-}
-
-/**
- * Release information section with version, date, and changelog
- */
-@Composable
-internal fun ReleaseInfoSection(
-    releaseInfo: MorpheAsset,
-    textColor: Color
-) {
-    val uriHandler = LocalUriHandler.current
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
-    ) {
-        // Changelog content
-        ChangelogSection(
-            asset = releaseInfo,
-            headerIcon = Icons.Outlined.NewReleases,
-            textColor = textColor
-        )
-
-        // Full changelog button
-        releaseInfo.pageUrl?.let { url ->
-            MorpheDialogButton(
-                text = stringResource(R.string.changelog),
-                onClick = { uriHandler.openUri(url) },
-                icon = Icons.AutoMirrored.Outlined.Article,
-                modifier = Modifier.fillMaxWidth()
             )
         }
     }

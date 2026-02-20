@@ -74,6 +74,8 @@ Leaganacha comhoiriúnacha:"</string>
     <string name="home_apk_availability_unpatched_label">Díphaisteáilte</string>
     <string name="home_apk_availability_yes">Sea, tá sé agam</string>
     <string name="home_apk_availability_no">Ní hea, cuidigh liom é a aimsiú</string>
+    <string name="home_apk_use_saved_with_version">Úsáid an APK sábháilte (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Níl aon APK sábháilte. Beidh ort an comhad APK a roghnú arís le haghaidh paisteála.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Íoslódáil an APK bunaidh</string>
     <string name="home_download_instructions_steps_title">Treoracha:</string>
@@ -174,6 +176,7 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Éilíonn mód fréimhe go mbeidh an APK bunaidh suiteáilte ar do ghléas sula ndéantar paisteáil</string>
     <string name="root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
+    <string name="root_pre_patch_installer_title">Roghnaigh modh suiteála</string>
     <string name="root_pre_patch_installer_description">Tá aistriúchán ar an gcuide seo. Tairgf an modh tairgfí seo an t-airgead atá déanta agat.</string>
     <string name="root_pre_patch_installer_mount_title">Tairgf</string>
     <string name="root_pre_patch_installer_mount_description">Tairgf an t-airgead atá déanta agat.</string>
@@ -302,6 +305,31 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="settings_advanced_updates">Nuashonruithe</string>
     <string name="settings_advanced_updates_use_prereleases">Úsáid leaganacha réamh-eisiúna</string>
     <string name="settings_advanced_updates_use_prereleases_description">Faigh rochtain luath ar phaistí nua agus ar ghnéithe bainisteoirí</string>
+    <string name="settings_advanced_updates_background_notifications">Nótaí athruithe cúlra</string>
+    <string name="settings_advanced_updates_background_notifications_description">Tairgfí le déanaí ar an gclár athruithe sa chugainn agus tairgfí nuair atá siad ar fáil.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Faigh notáin ghlanphoist nuashonruithe nuair atá tairgfí, go minic nuair atá an app dúnta</string>
+    <string name="notification_channel_manager_updates">Cumraigh nuashonruithe</string>
+    <string name="notification_channel_manager_updates_description">Nótaí faoi nuashonruithe Morphe</string>
+    <string name="notification_channel_bundle_updates">Athruithe foinse paiste</string>
+    <string name="notification_channel_bundle_updates_description">Torthaí faoi nua córais phatch</string>
+    <string name="notification_channel_fcm_updates">Nuashonrú</string>
+    <string name="notification_channel_fcm_updates_description">Fógairí téagmhaireachta do nuashonrúanna Morphe manager agus phaistí. Téagmhaireachta ag táirgfí an app.</string>
+    <string name="settings_advanced_update_interval">Téagmhaireacht</string>
+    <string name="settings_advanced_update_interval_dialog_title">Téagmhaireacht nuashonrú</string>
+    <string name="settings_advanced_update_interval_hourly">Téagmhaireacht uile uair</string>
+    <string name="settings_advanced_update_interval_daily">Téagmhaireacht uile lá</string>
+    <string name="settings_advanced_update_interval_weekly">Téagmhaireacht uile seachtain</string>
+    <string name="settings_advanced_update_interval_monthly">Téagmhaireacht uile mhíona</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Téagmhaireacht táirgfí sa chódú</string>
+    <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe manager update available</string>
+    <string name="notification_bundle_update_title">New patches available</string>
+    <string name="notification_update_text">Version %1$s is ready to download</string>
+    <string name="notification_bundle_update_text_unversioned">Tap to open Morphe manager and update</string>
+    <string name="notification_permission_dialog_title">Allow notifications</string>
+    <string name="notification_permission_dialog_description">Morphe manager needs notification permission to alert you when updates are available in the background</string>
+    <string name="notification_post_patch_dialog_title">Ar mhaith leat tairgfí nuashonraí?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Socruithe saineolaithe</string>
     <string name="settings_advanced_expert_mode">Mód saineolaithe</string>
@@ -571,13 +599,13 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="save">Sábháil</string>
     <string name="saved">Sábháilte</string>
     <string name="update">Nuashonrú</string>
+    <string name="allow">Allow</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
     <string name="mounting_ellipsis">Ag mountáil…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Ag iompórtáil…</string>
     <string name="changelog">Féach ar logaí athruithe</string>
     <string name="changelog_description">Féach ar na hathruithe is déanaí sa nuashonrú seo</string>
-    <string name="changelog_loading">Ag lódáil loga athruithe</string>
     <string name="changelog_download_fail">Theip ar an logála hathruithe a íoslódáil: %s</string>
     <string name="changelog_retry">Déan iarracht arís</string>
     <string name="changelog_empty">Níl aon loga athraithe ar fáil</string>

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s patch</item>
+        <item quantity="other">%s patch</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s patch option</item>
+        <item quantity="other">%s opção de patch</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s source</item>
+        <item quantity="other">%s fontes</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s package</item>
+        <item quantity="other">%s pacotes</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Executar %s patch</item>
         <item quantity="other">Executar %s patches</item>

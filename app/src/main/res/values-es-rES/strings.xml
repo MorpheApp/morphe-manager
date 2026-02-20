@@ -305,6 +305,31 @@ Versiones compatibles:"</string>
     <string name="settings_advanced_updates">Actualizaciones</string>
     <string name="settings_advanced_updates_use_prereleases">Usar versiones preliminares</string>
     <string name="settings_advanced_updates_use_prereleases_description">Obtén acceso anticipado a nuevos parches y funciones del administrador</string>
+    <string name="settings_advanced_updates_background_notifications">Notificaciones de actualización en segundo plano</string>
+    <string name="settings_advanced_updates_background_notifications_description">Comprueba periódicamente si hay actualizaciones en segundo plano y notifica cuando estén disponibles</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Recibir notificaciones push instantáneas para nuevas versiones, incluso cuando la aplicación está cerrada</string>
+    <string name="notification_channel_manager_updates">Administrar actualizaciones</string>
+    <string name="notification_channel_manager_updates_description">Notificaciones sobre nuevas versiones del gestor de Morphe</string>
+    <string name="notification_channel_bundle_updates">Actualizaciones de fuentes de parches</string>
+    <string name="notification_channel_bundle_updates_description">Notificaciones sobre nuevas versiones de fuentes de parches</string>
+    <string name="notification_channel_fcm_updates">Alertas de actualización</string>
+    <string name="notification_channel_fcm_updates_description">Notificaciones instantáneas para nuevas versiones del gestor de Morphe y de parches. Se envían incluso cuando la aplicación está en segundo plano</string>
+    <string name="settings_advanced_update_interval">Frecuencia de comprobación</string>
+    <string name="settings_advanced_update_interval_dialog_title">Buscar actualizaciones</string>
+    <string name="settings_advanced_update_interval_hourly">Una vez cada hora</string>
+    <string name="settings_advanced_update_interval_daily">Una vez al día</string>
+    <string name="settings_advanced_update_interval_weekly">Una vez a la semana</string>
+    <string name="settings_advanced_update_interval_monthly">Una vez al mes</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Frecuencia de comprobación en segundo plano</string>
+    <string name="settings_advanced_update_interval_battery_warning">Las comprobaciones en segundo plano pueden no funcionar de forma fiable en algunos dispositivos. Los fabricantes como Xiaomi, Huawei, Samsung y OnePlus a menudo restringen agresivamente los procesos en segundo plano para ahorrar batería</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Actualización del gestor de Morphe disponible</string>
+    <string name="notification_bundle_update_title">Nuevos parches disponibles</string>
+    <string name="notification_update_text">La versión %1$s está lista para descargar</string>
+    <string name="notification_bundle_update_text_unversioned">Toca para abrir el gestor de Morphe y actualizar</string>
+    <string name="notification_permission_dialog_title">Permitir notificaciones</string>
+    <string name="notification_permission_dialog_description">El gestor de Morphe necesita el permiso de notificación para avisarte cuando haya actualizaciones disponibles en segundo plano</string>
+    <string name="notification_post_patch_dialog_title">¿Quieres ser notificado cuando haya actualizaciones disponibles?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ajustes avanzados</string>
     <string name="settings_advanced_expert_mode">Modo experto</string>
@@ -561,7 +586,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="available">Disponible</string>
     <string name="continue_">Continuar</string>
     <string name="version">Versión</string>
-    <string name="patch">Parche</string>
+    <string name="patch">Parchear</string>
     <string name="repatch">Reaplicar parche</string>
     <string name="open">Abrir</string>
     <string name="mount">Montar</string>
@@ -576,13 +601,13 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="save">Guardar</string>
     <string name="saved">Guardado</string>
     <string name="update">Actualizar</string>
+    <string name="allow">Permitir</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>
     <string name="importing_ellipsis">Importando…</string>
     <string name="changelog">Ver registros de cambios</string>
     <string name="changelog_description">Revisa los últimos cambios en esta actualización</string>
-    <string name="changelog_loading">Cargando registro de cambios</string>
     <string name="changelog_download_fail">Error al descargar el registro de cambios: %s</string>
     <string name="changelog_retry">Reintentar</string>
     <string name="changelog_empty">No hay registro de cambios disponible</string>

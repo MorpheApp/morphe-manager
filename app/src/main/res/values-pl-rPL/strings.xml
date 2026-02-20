@@ -263,7 +263,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="failed_to_unmount">Nie udało się odmountować: %s</string>
     <!-- Settings -->
     <string name="appearance">Wygląd</string>
-    <string name="advanced">Zaawansowane</string>
+    <string name="advanced">Eksperckie</string>
     <string name="system">System</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Animacja tła</string>
@@ -305,6 +305,31 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_advanced_updates">Aktualizacje</string>
     <string name="settings_advanced_updates_use_prereleases">Używaj wersji przedpremierowych</string>
     <string name="settings_advanced_updates_use_prereleases_description">Zdobądź wcześniejszy dostęp do nowych aktualizacji i funkcji menedżera</string>
+    <string name="settings_advanced_updates_background_notifications">Powiadomienia o aktualizacjach w tle</string>
+    <string name="settings_advanced_updates_background_notifications_description">Okresowo sprawdzaj aktualizacje w tle i powiadamiaj, gdy będą dostępne</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Odbieraj natychmiastowe powiadomienia Push o nowych wydaniach, nawet gdy aplikacja jest zamknięta</string>
+    <string name="notification_channel_manager_updates">Aktualizacje menedżera</string>
+    <string name="notification_channel_manager_updates_description">Powiadomienia o nowych wersjach menedżera Morphe</string>
+    <string name="notification_channel_bundle_updates">Aktualizacje źródeł modyfikacji</string>
+    <string name="notification_channel_bundle_updates_description">Powiadomienia o nowych wersjach źródeł modyfikacji</string>
+    <string name="notification_channel_fcm_updates">Alerty o aktualizacjach</string>
+    <string name="notification_channel_fcm_updates_description">Natychmiastowe powiadomienia Push o nowych wydaniach menedżera i modyfikacji. Dostarczane nawet wtedy, gdy aplikacja działa w tle</string>
+    <string name="settings_advanced_update_interval">Częstotliwość sprawdzania</string>
+    <string name="settings_advanced_update_interval_dialog_title">Sprawdzaj aktualizacje</string>
+    <string name="settings_advanced_update_interval_hourly">Raz na godzinę</string>
+    <string name="settings_advanced_update_interval_daily">Raz dziennie</string>
+    <string name="settings_advanced_update_interval_weekly">Raz w tygodniu</string>
+    <string name="settings_advanced_update_interval_monthly">Raz w miesiącu</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Częstotliwość sprawdzania w tle</string>
+    <string name="settings_advanced_update_interval_battery_warning">Sprawdzanie w tle może nie działać stabilnie na niektórych urządzeniach. Producenci tacy jak Xiaomi, Huawei, Samsung czy OnePlus często agresywnie ograniczają procesy w tle, aby oszczędzać baterię</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Dostępna aktualizacja menedżera Morphe</string>
+    <string name="notification_bundle_update_title">Dostępne nowe modyfikacje</string>
+    <string name="notification_update_text">Wersja %1$s jest gotowa do pobrania</string>
+    <string name="notification_bundle_update_text_unversioned">Stuknij, aby otworzyć menedżera Morphe i zaktualizować</string>
+    <string name="notification_permission_dialog_title">Zezwól na powiadomienia</string>
+    <string name="notification_permission_dialog_description">Menedżer Morphe wymaga uprawnień do powiadomień, aby informować Cię o dostępnych aktualizacjach w tle</string>
+    <string name="notification_post_patch_dialog_title">Czy chcesz otrzymywać powiadomienia o dostępnych aktualizacjach?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
@@ -576,13 +601,13 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="save">Zapisz</string>
     <string name="saved">Zapisano</string>
     <string name="update">Zaktualizuj</string>
+    <string name="allow">Zezwól</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Mountowanie…</string>
     <string name="unmounting_ellipsis">Odmountowywanie…</string>
     <string name="importing_ellipsis">Importowanie…</string>
     <string name="changelog">Przeglądaj dzienniki zmian</string>
     <string name="changelog_description">Sprawdź ostatnie zmiany w tej aktualizacji</string>
-    <string name="changelog_loading">Wczytywanie dziennika zmian</string>
     <string name="changelog_download_fail">Nie udało się pobrać dziennika zmian: %s</string>
     <string name="changelog_retry">Spróbuj ponownie</string>
     <string name="changelog_empty">Brak dostępnej historii zmian</string>

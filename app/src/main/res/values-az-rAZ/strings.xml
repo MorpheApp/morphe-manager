@@ -305,6 +305,31 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_updates">Yenilənmələr</string>
     <string name="settings_advanced_updates_use_prereleases">Buraxılış öncəsi versiyaları istifadə et</string>
     <string name="settings_advanced_updates_use_prereleases_description">Yeni yamaqlara və menecer xüsusiyyətlərinə erkən keçid əldə edin</string>
+    <string name="settings_advanced_updates_background_notifications">Fon yenilənmə bildirişləri</string>
+    <string name="settings_advanced_updates_background_notifications_description">Fonda yeniləmələri dövri yoxla və əlçatandırsa elan et</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Hətta tətbiq bağlandıqda, yeni buraxılışlar üçün ani təkan bildirişləri al</string>
+    <string name="notification_channel_manager_updates">Menecer yenilənmələri</string>
+    <string name="notification_channel_manager_updates_description">Yeni Morphe menecer versiyaları haqqında bildirişlər</string>
+    <string name="notification_channel_bundle_updates">Yamaq mənbələri yeniləmələri</string>
+    <string name="notification_channel_bundle_updates_description">Yeni yamaq mənbə versiyaları haqqında bildirişlər</string>
+    <string name="notification_channel_fcm_updates">Yenilənmə bildirişləri</string>
+    <string name="notification_channel_fcm_updates_description">Yeni Morphe menecer və yamaq buraxılışları üçün ani təkan bildirişləri. Tətbiq fondadırsa belə bildirilir</string>
+    <string name="settings_advanced_update_interval">Yoxlanılma tezliyi</string>
+    <string name="settings_advanced_update_interval_dialog_title">Yeniləmələri yoxla</string>
+    <string name="settings_advanced_update_interval_hourly">Saatda bir dəfə</string>
+    <string name="settings_advanced_update_interval_daily">Gündə bir dəfə</string>
+    <string name="settings_advanced_update_interval_weekly">Həftədə bir dəfə</string>
+    <string name="settings_advanced_update_interval_monthly">Ayda bir dəfə</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Fon yoxlanma tezliyi</string>
+    <string name="settings_advanced_update_interval_battery_warning">Fon yoxlamaları bəzi cihazlarda davamlı işləməyə bilər. Xiaomi, Huawei, Samsung və OnePlus kimi istehsalçılar batareyanı qorumaq üçün dəfələrlə fon proseslərini ciddi şəkildə məhdudlaşdırırlar</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe menecer yenilənməsi var</string>
+    <string name="notification_bundle_update_title">Yeni yamaqlar var</string>
+    <string name="notification_update_text">%1$s versiyası yüklənilməyə hazırdır</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe menecerini açmaq və yeniləmək üçün toxun</string>
+    <string name="notification_permission_dialog_title">Bildirişləri qəbul et</string>
+    <string name="notification_permission_dialog_description">Morphe menecer fonda yeniləmələr əlçatan olduqda sizə bildirmək üçün bildiriş icazəsi istəyir</string>
+    <string name="notification_post_patch_dialog_title">Yeniləmələr əlçatandırsa bildiriş almaq istərdiniz?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Mütəxəssis tənzimləmələri</string>
     <string name="settings_advanced_expert_mode">Mütəxəssis rejimi</string>
@@ -572,13 +597,13 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="save">Saxla</string>
     <string name="saved">Saxlanıldı</string>
     <string name="update">Yenilə</string>
+    <string name="allow">İcazə verin</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>
     <string name="importing_ellipsis">İdxal olunur…</string>
     <string name="changelog">Dəyişiklik jurnallarına bax</string>
     <string name="changelog_description">Bu yeniləmədəki ən son dəyişikliklərə nəzər sal</string>
-    <string name="changelog_loading">Dəyişiklik jurnalı yüklənilir</string>
     <string name="changelog_download_fail">Dəyişiklik jurnalın yükləmək olmadı: %s</string>
     <string name="changelog_retry">Təkrar yoxla</string>
     <string name="changelog_empty">Dəyişiklik jurnalı mövcud deyil</string>

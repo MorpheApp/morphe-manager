@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Icon
@@ -17,8 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
 import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.util.relativeTime
 import com.mikepenz.markdown.compose.Markdown
@@ -59,6 +63,26 @@ fun ChangelogSection(
         if (displayMarkdown.isNotBlank()) {
             Changelog(markdown = displayMarkdown)
         }
+    }
+}
+
+/**
+ * Changelog button that opens the release page
+ */
+@Composable
+fun ChangelogButton(
+    pageUrl: String?,
+    modifier: Modifier = Modifier
+) {
+    val uriHandler = LocalUriHandler.current
+
+    pageUrl?.let { url ->
+        MorpheDialogOutlinedButton(
+            text = stringResource(R.string.changelog),
+            onClick = { uriHandler.openUri(url) },
+            icon = Icons.AutoMirrored.Outlined.Article,
+            modifier = modifier.fillMaxWidth()
+        )
     }
 }
 

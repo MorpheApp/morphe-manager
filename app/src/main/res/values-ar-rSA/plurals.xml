@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="zero">%s تعديلًا</item>
+        <item quantity="zero">%s تعديل</item>
         <item quantity="one">%s تعديل</item>
         <item quantity="two">%s تعديلان</item>
         <item quantity="few">%s تعديلات</item>
@@ -17,51 +17,59 @@
         <item quantity="other">%s خيارات التعديل</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="zero">%s مصادر التعديل</item>
-        <item quantity="one">%s مصدر التعديل</item>
-        <item quantity="two">%s مصادر التعديل</item>
-        <item quantity="few">%s مصادر التعديل</item>
-        <item quantity="many">%s مصادر التعديل</item>
-        <item quantity="other">%s مصادر التعديل</item>
+        <item quantity="zero">%s مصدر</item>
+        <item quantity="one">%s مصدر</item>
+        <item quantity="two">%s مصدر</item>
+        <item quantity="few">%s مصدر</item>
+        <item quantity="many">%s مصدر</item>
+        <item quantity="other">%s مصدر</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="zero">%s أي حزمة</item>
-        <item quantity="one">%s أي حزمة</item>
-        <item quantity="two">%s أي حزمة</item>
-        <item quantity="few">%s أي حزمة</item>
-        <item quantity="many">%s أي حزمة</item>
-        <item quantity="other">%s أي حزمة</item>
+        <item quantity="zero">%s حزمة</item>
+        <item quantity="one">%s حزمة</item>
+        <item quantity="two">%s حزمة</item>
+        <item quantity="few">%s حزمة</item>
+        <item quantity="many">%s حزمة</item>
+        <item quantity="other">%s حزمة</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="zero">تنفيذ %s تعديلًا</item>
+        <item quantity="zero">تنفيذ %s تعديل</item>
         <item quantity="one">تنفيذ %s تعديل</item>
         <item quantity="two">تنفيذ %s تعديلان</item>
         <item quantity="few">تنفيذ %s تعديلات</item>
         <item quantity="many">تنفيذ %s تعديلًا</item>
         <item quantity="other">تنفيذ %s تعديلًا</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="zero">%s ملف APK</item>
+        <item quantity="one">%s ملف APK</item>
+        <item quantity="two">%s ملفَا APK</item>
+        <item quantity="few">%s ملفات APK</item>
+        <item quantity="many">%s ملف APK</item>
+        <item quantity="other">%s ملف APK</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="zero">تمت إزالة %s تعديلات قديمة من التحديد المحفوظ</item>
-        <item quantity="one">تمت إزالة %s تعديلات قديمة من التحديد المحفوظ</item>
-        <item quantity="two">تمت إزالة %s تعديلات قديمة من التحديد المحفوظ</item>
-        <item quantity="few">تمت إزالة %s تعديلات قديمة من التحديد المحفوظ</item>
-        <item quantity="many">تمت إزالة %s تعديلات قديمة من التحديد المحفوظ</item>
-        <item quantity="other">تمت إزالة %s تعديلات قديمة من التحديد المحفوظ</item>
+        <item quantity="zero">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>
+        <item quantity="one">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>
+        <item quantity="two">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>
+        <item quantity="few">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>
+        <item quantity="many">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>
+        <item quantity="other">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="zero">%s مصادر تم تثبيتها</item>
-        <item quantity="one">%s مصدر تم تثبيتها</item>
+        <item quantity="zero">%s مصدر تم تثبيته</item>
+        <item quantity="one">%s مصدر تم تثبيته</item>
         <item quantity="two">%s مصادر تم تثبيتها</item>
-        <item quantity="few">%s مصادر تم تثبيتها</item>
-        <item quantity="many">%s مصادر تم تثبيتها</item>
-        <item quantity="other">%s مصادر تم تثبيتها</item>
+        <item quantity="few">%s مصدر تم تثبيته</item>
+        <item quantity="many">%s مصدر تم تثبيته</item>
+        <item quantity="other">%s مصدر تم تثبيته</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="zero">%s تعديلات محددة</item>
+        <item quantity="zero">%s تعديل محدد</item>
         <item quantity="one">%s تعديل محدد</item>
         <item quantity="two">%s تعديلات محددة</item>
-        <item quantity="few">%s تعديلات محددة</item>
-        <item quantity="many">%s تعديلات محددة</item>
-        <item quantity="other">%s تعديلات محددة</item>
+        <item quantity="few">%s تعديل محدد</item>
+        <item quantity="many">%s تعديل محدد</item>
+        <item quantity="other">%s تعديل محدد</item>
     </plurals>
 </resources>

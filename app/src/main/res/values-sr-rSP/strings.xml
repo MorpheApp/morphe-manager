@@ -305,6 +305,31 @@ Kompatibilne verzije:"</string>
     <string name="settings_advanced_updates">Ажурирања</string>
     <string name="settings_advanced_updates_use_prereleases">Користите преизлазне верзије</string>
     <string name="settings_advanced_updates_use_prereleases_description">Добијте ранији приступ преизлазним верзијама и функцијама управљача</string>
+    <string name="settings_advanced_updates_background_notifications">Opozori o pozadinskom ažuriranju</string>
+    <string name="settings_advanced_updates_background_notifications_description">Povremeno proveravaj da li postoje ažuriranja u pozadini i obaveštavaj kada su dostupna</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Primaj trenutne obavјеštanja za nove verzije, čak i kada je aplikacija zatvorena</string>
+    <string name="notification_channel_manager_updates">Upravljanje ažuriranjima</string>
+    <string name="notification_channel_manager_updates_description">Opozori o novim verzijama Morphe Upravljača</string>
+    <string name="notification_channel_bundle_updates">Ažuriranja izvora patch-a</string>
+    <string name="notification_channel_bundle_updates_description">Обавештења о новим верзијама извора</string>
+    <string name="notification_channel_fcm_updates">Ажурирај обавештења</string>
+    <string name="notification_channel_fcm_updates_description">Тајни пуш-нотификације за нове издања Морфе менаџера и патчева. Добијају се чак и када је апликација у позадини</string>
+    <string name="settings_advanced_update_interval">Фреквенција провере</string>
+    <string name="settings_advanced_update_interval_dialog_title">Провери за ажурирања</string>
+    <string name="settings_advanced_update_interval_hourly">Одавно једном на сат</string>
+    <string name="settings_advanced_update_interval_daily">Одавно једном на дан</string>
+    <string name="settings_advanced_update_interval_weekly">Одавно једном на недељу</string>
+    <string name="settings_advanced_update_interval_monthly">Одавно једном на месец</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Фреквенција позадинских провере</string>
+    <string name="settings_advanced_update_interval_battery_warning">Позадинске провере могу не радити на неким уређајима. Производитељи попут Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничавају позадинске процесе да би сачували батерију</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Доступно ажурирање Морфе менаџера</string>
+    <string name="notification_bundle_update_title">Доступна су нова патчеа</string>
+    <string name="notification_update_text">Верзија %1$s је спремна за преузимање</string>
+    <string name="notification_bundle_update_text_unversioned">Кликните да отворите Морфе менаџер и ажурирате</string>
+    <string name="notification_permission_dialog_title">Дозволи обавештења</string>
+    <string name="notification_permission_dialog_description">Морфе менаџер захтева дозволу за обавештења да би вас обавестио када су доступна ажурирања у позадини</string>
+    <string name="notification_post_patch_dialog_title">Желите ли да будете обавештени када су ажурирања доступна?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Навише подешавања</string>
     <string name="settings_advanced_expert_mode">Нави моћ</string>
@@ -576,13 +601,13 @@ morphe_header_custom_dark.png
     <string name="save">Сачувај</string>
     <string name="saved">Сачувано</string>
     <string name="update">Ажурирај</string>
+    <string name="allow">Дозволи</string>
     <string name="installing_ellipsis">Инсталирање…</string>
     <string name="mounting_ellipsis">Монтирање…</string>
     <string name="unmounting_ellipsis">Демонтирање…</string>
     <string name="importing_ellipsis">Увоз…</string>
     <string name="changelog">Прегледајте дневнике промена</string>
     <string name="changelog_description">Pogledajte najnovije promene u ovom ažuriranju</string>
-    <string name="changelog_loading">Учитавање дневника промена</string>
     <string name="changelog_download_fail">Није успело преузимање дневника промена: %s</string>
     <string name="changelog_retry">Поново покушајте</string>
     <string name="changelog_empty">Нема доступних промена</string>

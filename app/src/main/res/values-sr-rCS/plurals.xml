@@ -5,6 +5,21 @@
         <item quantity="few">%s patch</item>
         <item quantity="other">%s patches</item>
     </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s opcija</item>
+        <item quantity="few">%s opcije</item>
+        <item quantity="other">%s opcija</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s izvor</item>
+        <item quantity="few">%s izvora</item>
+        <item quantity="other">%s izvora</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s paket</item>
+        <item quantity="few">%s paketa</item>
+        <item quantity="other">%s paketa</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Izvrši %s patch</item>
         <item quantity="few">Izvrši %s patches</item>

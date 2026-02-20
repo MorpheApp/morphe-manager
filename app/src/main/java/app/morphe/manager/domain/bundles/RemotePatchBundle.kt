@@ -228,9 +228,22 @@ class JsonPatchBundle(
             url(normalizedEndpoint)
         }.getOrThrow()
 
-        // If pageUrl is not set, try to infer it from the endpoint
+        // If pageUrl is not set, try to infer it from the endpoint and add version tag
         if (asset.pageUrl == null) {
-            val inferredPageUrl = inferPageUrlFromEndpoint(endpoint)
+            val repoUrl = inferPageUrlFromEndpoint(endpoint)
+            val inferredPageUrl = if (repoUrl != null && asset.version.isNotBlank()) {
+                // Normalize version to ensure it starts with 'v'
+                val normalizedVersion = if (asset.version.startsWith("v")) {
+                    asset.version
+                } else {
+                    "v${asset.version}"
+                }
+                // Create proper release page URL: https://github.com/owner/repo/releases/tag/v1.0.0-dev.1
+                "$repoUrl/releases/tag/$normalizedVersion"
+            } else {
+                // Fallback to repository URL if version is missing
+                repoUrl
+            }
             asset.copy(pageUrl = inferredPageUrl)
         } else {
             asset

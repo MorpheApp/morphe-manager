@@ -54,6 +54,12 @@ import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
+import app.morphe.manager.util.syncFcmTopics
+import app.morphe.manager.worker.UpdateCheckWorker
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import kotlin.math.exp
@@ -71,7 +77,8 @@ fun PatcherScreen(
     onBackClick: () -> Unit,
     patcherViewModel: PatcherViewModel,
     usingMountInstall: Boolean,
-    installViewModel: InstallViewModel = koinViewModel()
+    installViewModel: InstallViewModel = koinViewModel(),
+    prefs: PreferencesManager = koinInject()
 ) {
     val context = LocalContext.current
     @Suppress("DEPRECATION")
@@ -81,6 +88,19 @@ fun PatcherScreen(
 
     // Remember patcher state
     val state = rememberMorphePatcherState(patcherViewModel)
+
+    // Notification prompt: shown once after first successful install or save
+    var showNotificationPrompt by rememberSaveable { mutableStateOf(false) }
+
+    val scope = rememberCoroutineScope()
+    val hasGms = remember {
+        GoogleApiAvailability.getInstance()
+            .isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS
+    }
+
+    // Prefs needed for the notification dialog
+    val usePrereleases by prefs.useManagerPrereleases.getAsState()
+    val updateCheckInterval by prefs.updateCheckInterval.getAsState()
 
     // Animated progress with dual-mode animation
     var displayProgress by rememberSaveable { mutableFloatStateOf(patcherViewModel.progress) }
@@ -223,12 +243,51 @@ fun PatcherScreen(
                     if (success) {
                         // Also save patched app metadata
                         patcherViewModel.persistPatchedApp(null, InstallType.SAVED)
+
+                        // Offer notifications after first successful save (if not already asked)
+                        if (!prefs.notificationPermissionRequested.get() &&
+                            !prefs.backgroundUpdateNotifications.get()) {
+                            showNotificationPrompt = true
+                        }
                     }
                     delay(2000)
                     state.isSaving = false
                 }
             }
         }
+    }
+
+    // Trigger notification prompt after first successful install
+    val installState = installViewModel.installState
+    LaunchedEffect(installState) {
+        if (installState is InstallViewModel.InstallState.Installed) {
+            if (!prefs.notificationPermissionRequested.get() &&
+                !prefs.backgroundUpdateNotifications.get()) {
+                showNotificationPrompt = true
+            }
+        }
+    }
+
+    // Notification prompt dialog
+    if (showNotificationPrompt) {
+        NotificationPermissionDialog(
+            title = stringResource(R.string.notification_post_patch_dialog_title),
+            onDismissRequest = {
+                scope.launch { prefs.notificationPermissionRequested.update(true) }
+                showNotificationPrompt = false
+            },
+            onPermissionResult = { granted ->
+                scope.launch {
+                    prefs.notificationPermissionRequested.update(true)
+                    if (granted) {
+                        prefs.backgroundUpdateNotifications.update(true)
+                        syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
+                        if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
+                    }
+                }
+                showNotificationPrompt = false
+            }
+        )
     }
 
     // Activity launcher for handling plugin activities or external installs
@@ -265,6 +324,19 @@ fun PatcherScreen(
             onDismiss = { state.showCancelDialog = false },
             onConfirm = {
                 state.showCancelDialog = false
+                onBackClick()
+            }
+        )
+    }
+
+    // Storage permission pre-flight dialog.
+    // Shown when a patch option points to an external path the app cannot read.
+    patcherViewModel.inaccessibleOptionPaths?.let { errorState ->
+        StoragePermissionDialog(
+            failures = errorState.failures,
+            onRetryAfterPermission = patcherViewModel::retryAfterPermission,
+            onDismiss = {
+                patcherViewModel.dismissInaccessibleOptionPathsError()
                 onBackClick()
             }
         )

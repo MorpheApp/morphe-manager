@@ -52,7 +52,7 @@
     <string name="sources_dialog_view_any_version">N\'importe quelle version</string>
     <string name="sources_dialog_view_any_package">N\'importe quel package</string>
     <string name="sources_dialog_add_source">Ajouter une source de patch</string>
-    <string name="sources_dialog_delete_confirm_message">Supprimer la source \"%s\" ? Cela ne peut pas être annulé</string>
+    <string name="sources_dialog_delete_confirm_message">Supprimer la source \"%s\" ? Cela ne peut pas être réversible</string>
     <string name="sources_dialog_remote">À distance</string>
     <string name="sources_dialog_remote_url">URL de la source</string>
     <string name="sources_dialog_remote_url_formats_title">Exemples :</string>
@@ -185,7 +185,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="root_pre_patch_installer_hint">La méthode d\'installation détermine quels patchs sont inclus et ne peut pas être modifiée après le patchage</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
-    <string name="patcher_error_log">Journal des erreurs</string>
+    <string name="patcher_error_log">Journal d\'erreur</string>
     <string name="patcher_error_technical">Détails techniques</string>
     <string name="patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
     <string name="patcher_installing_subtitle">Bientôt prêt à mettre le feu  ! 🎸</string>
@@ -213,7 +213,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patcher_step_sign_apk">Signature du fichier APK patché</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patchage en cours…</string>
-    <string name="patcher_notification_text">Appuyez pour revenir au patcher</string>
+    <string name="patcher_notification_text">Appuyez pour revenir au patcheur</string>
     <string name="patcher_stop_confirm_title">Arrêter le patcheur</string>
     <string name="patcher_stop_confirm_description">Voulez-vous vraiment arrêter le processus de patchage ?</string>
     <!-- Patcher Screen - Patcher Messages -->
@@ -230,7 +230,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patcher_message_10">Les bons patchs valent l\'attente… ⏳</string>
     <string name="patcher_message_11">Polissage de pixels pour un éclat total… 💎</string>
     <string name="patcher_message_12">Veuillez rester confortablement installé jusqu’à ce que le capitaine désactive l’indicateur \"Patchage en cours\"… 💺✈️</string>
-    <string name="patcher_message_13">Votre app patchée arrive, toute chaude et toute fraîche… 🍳</string>
+    <string name="patcher_message_13">Votre application patchée arrive, toute chaude et toute fraîche… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">En pleine négociation courtoise avec le bytecode… 🤝</string>
     <!-- Space flight communications callout. -->
@@ -240,7 +240,7 @@ Voulez-vous vraiment continuer ?"</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Changement de la superposition de l\'application de non patchée à patchée… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Votre app a de la fièvre, et la seule prescription, c’est plus de patchs… 🩺🔔</string>
+    <string name="patcher_message_19">Votre application a de la fièvre, et la seule prescription, c’est plus de patchs… 🩺🔔</string>
     <string name="patcher_message_20">Suppression des absurdités. Veuillez patienter... 🗑️</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Application des patchs</string>
@@ -305,6 +305,31 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="settings_advanced_updates">Mises à jour</string>
     <string name="settings_advanced_updates_use_prereleases">Utiliser les pré-versions</string>
     <string name="settings_advanced_updates_use_prereleases_description">Accédez en avant-première aux nouveaux patchs et aux fonctionnalités du gestionnaire</string>
+    <string name="settings_advanced_updates_background_notifications">Notifications de mise à jour en arrière-plan</string>
+    <string name="settings_advanced_updates_background_notifications_description">Vérifier périodiquement les mises à jour en arrière-plan et notifier lorsqu\'elles sont disponibles</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Recevez des notifications push instantanées pour les nouvelles sorties, même lorsque l\'application est fermée</string>
+    <string name="notification_channel_manager_updates">Mises à jour du gestionnaire</string>
+    <string name="notification_channel_manager_updates_description">Notifications concernant les nouvelles versions du gestionnaire Morphe</string>
+    <string name="notification_channel_bundle_updates">Mises à jour des sources de patch</string>
+    <string name="notification_channel_bundle_updates_description">Notifications concernant les nouvelles versions de source de patch</string>
+    <string name="notification_channel_fcm_updates">Alertes de mise à jour</string>
+    <string name="notification_channel_fcm_updates_description">Notifications push instantanées pour les nouvelles sorties du gestionnaire Morphe et les patchs. Reçues même lorsque l\'application est en arrière-plan</string>
+    <string name="settings_advanced_update_interval">Fréquence de vérification</string>
+    <string name="settings_advanced_update_interval_dialog_title">Vérifier les mises à jour</string>
+    <string name="settings_advanced_update_interval_hourly">Une fois par heure</string>
+    <string name="settings_advanced_update_interval_daily">Une fois par jour</string>
+    <string name="settings_advanced_update_interval_weekly">Une fois par semaine</string>
+    <string name="settings_advanced_update_interval_monthly">Une fois par mois</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Fréquence de vérification en arrière-plan</string>
+    <string name="settings_advanced_update_interval_battery_warning">Les vérifications en arrière-plan peuvent ne pas fonctionner fiablement sur certains appareils. Des fabricants tels que Xiaomi, Huawei, Samsung et OnePlus restreignent souvent de manière agressive les processus en arrière-plan pour économiser la batterie</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Mise à jour du gestionnaire Morphe disponible</string>
+    <string name="notification_bundle_update_title">Nouveaux patchs disponibles</string>
+    <string name="notification_update_text">La version %1$s est prête à être téléchargée</string>
+    <string name="notification_bundle_update_text_unversioned">Appuyez pour ouvrir le gestionnaire Morphe et mettre à jour</string>
+    <string name="notification_permission_dialog_title">Autoriser les notifications</string>
+    <string name="notification_permission_dialog_description">Le gestionnaire Morphe a besoin de l\'autorisation des notifications pour vous alerter lorsque des mises à jour sont disponibles en arrière-plan</string>
+    <string name="notification_post_patch_dialog_title">Souhaitez-vous être notifié lorsque des mises à jour sont disponibles ?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Paramètres Expert</string>
     <string name="settings_advanced_expert_mode">Mode Expert</string>
@@ -390,10 +415,10 @@ Les dimensions des images doivent respecter les valeurs suivantes :
 - drawable-xxxhdpi : 512×192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Masquer les fonctionnalités Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Masquer le raccourci Shorts de l\'application</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Supprimer Shorts du menu contextuel du lanceur</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget">Masquer le widget Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Supprimer le bouton Shorts du widget du lanceur</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Masquer le raccourci \'Shorts\'</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Supprimer \'Shorts\' du menu lors du maintien du lanceur</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget">Masquer le widget \'Shorts\'</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Supprimer le bouton \'Shorts\' du widget du lanceur</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installateur</string>
     <string name="installer_title">Sélectionner l\'installateur</string>
@@ -576,13 +601,13 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="save">Enregistrer</string>
     <string name="saved">Enregistré</string>
     <string name="update">Mettre à jour</string>
+    <string name="allow">Autoriser</string>
     <string name="installing_ellipsis">Installation…</string>
     <string name="mounting_ellipsis">Montage…</string>
     <string name="unmounting_ellipsis">Démontage…</string>
     <string name="importing_ellipsis">Importation…</string>
     <string name="changelog">Voir le journal des modifications</string>
     <string name="changelog_description">Découvrez les dernières modifications de cette mise à jour</string>
-    <string name="changelog_loading">Chargement du journal des modifications</string>
     <string name="changelog_download_fail">Échec du téléchargement du journal des modifications : %s</string>
     <string name="changelog_retry">Réessayer</string>
     <string name="changelog_empty">Pas de journal des modifications disponible</string>

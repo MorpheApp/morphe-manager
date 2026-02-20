@@ -1,3 +1,29 @@
+# app [1.8.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2026-02-20)
+
+
+### Bug Fixes
+
+* Manager crashes if the storage path cannot be accessed ([#225](https://github.com/MorpheApp/morphe-manager/issues/225)) ([896a598](https://github.com/MorpheApp/morphe-manager/commit/896a5989ffac134e1ed86df7c333a639330c2c86))
+
+# app [1.8.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.1...v1.8.0-dev.2) (2026-02-19)
+
+
+### Features
+
+* Show Android notifications when patch and manager updates are available ([#217](https://github.com/MorpheApp/morphe-manager/issues/217)) ([dced36b](https://github.com/MorpheApp/morphe-manager/commit/dced36be9357ba012b1bb128c3c94e8528570f83))
+
+# app [1.8.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.1...v1.8.0-dev.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* When source is disabled allow button presses but change the card background to red ([9b3a498](https://github.com/MorpheApp/morphe-manager/commit/9b3a49831241cf19c4e1d21474f33b6a4060b4af))
+
+
+### Features
+
+* Show changelog button in all changelog dialogs ([f925de0](https://github.com/MorpheApp/morphe-manager/commit/f925de0351609248465dd4dd1bafe2f1c7a35794))
+
 ## app [1.7.1](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0...v1.7.1) (2026-02-16)
 
 

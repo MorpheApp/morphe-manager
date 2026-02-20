@@ -270,7 +270,7 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_background_circles">Krugovi</string>
     <string name="settings_appearance_background_rings">Prstenovi</string>
     <string name="settings_appearance_background_mesh">Mreža</string>
-    <string name="settings_appearance_background_space">Prostor</string>
+    <string name="settings_appearance_background_space">Svemir</string>
     <string name="settings_appearance_background_shapes">Oblici</string>
     <string name="settings_appearance_background_snow">Snijeg</string>
     <string name="settings_appearance_background_none">Ništa</string>
@@ -305,6 +305,31 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_updates">Ažuriranja</string>
     <string name="settings_advanced_updates_use_prereleases">Koristi predizdanja</string>
     <string name="settings_advanced_updates_use_prereleases_description">Ostvarite rani pristup novim patchevima i značajkama upravitelja</string>
+    <string name="settings_advanced_updates_background_notifications">Obavijesti o ažuriranjima u pozadini</string>
+    <string name="settings_advanced_updates_background_notifications_description">Povremeno provjeravaj ažuriranja u pozadini i obavještavaj kada su dostupna</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Primajte trenutne push obavijesti za nove verzije, čak i kada je aplikacija zatvorena</string>
+    <string name="notification_channel_manager_updates">Upravljanje ažuriranjima</string>
+    <string name="notification_channel_manager_updates_description">Oznake o novim inačicama Morphe Upravljanja</string>
+    <string name="notification_channel_bundle_updates">Ažuriranja izvora patch-a</string>
+    <string name="notification_channel_bundle_updates_description">Obavještavanja o novim verzijama izvora</string>
+    <string name="notification_channel_fcm_updates">Ažuriraj opomnike</string>
+    <string name="notification_channel_fcm_updates_description">Trenutne push obavijesti za novu Morphe aplikaciju i izdanja patcheva. Isporučuje se čak i kada je aplikacija u pozadini.</string>
+    <string name="settings_advanced_update_interval">Povremeno provjeravanje</string>
+    <string name="settings_advanced_update_interval_dialog_title">Provjeri za ažuriranja</string>
+    <string name="settings_advanced_update_interval_hourly">Svaki sat</string>
+    <string name="settings_advanced_update_interval_daily">Svaki dan</string>
+    <string name="settings_advanced_update_interval_weekly">Svaki tjedan</string>
+    <string name="settings_advanced_update_interval_monthly">Svaki mjesec</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Učestalost provjere u pozadini</string>
+    <string name="settings_advanced_update_interval_battery_warning">Provjere u pozadini možda neće pouzdano funkcionirati na nekim uređajima. Proizvođači poput Xiaomija, Huaweija, Samsunga i OnePlusa često agresivno ograničavaju pozadinske procese kako bi uštedjeli bateriju.</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Dostupno ažuriranje Morphe menedžera</string>
+    <string name="notification_bundle_update_title">Nova patcha dostupna</string>
+    <string name="notification_update_text">Inačica %1$s je spremna za preuzimanje</string>
+    <string name="notification_bundle_update_text_unversioned">Kliknite da otvorite Morphe menedžer i ažurirajte</string>
+    <string name="notification_permission_dialog_title">Dozvoli obavijesti</string>
+    <string name="notification_permission_dialog_description">Morphe treba dopuštenje za obavijesti kako bi vas upozorio kada su ažuriranja dostupna u pozadini.</string>
+    <string name="notification_post_patch_dialog_title">Želite li biti obavješteni kada su dostupni ažuriranja?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Stručne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
@@ -518,9 +543,9 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_about">O aplikaciji</string>
     <string name="settings_system_share_website">Dijeli web stranicu</string>
     <string name="settings_system_share_website_description">Podijeli službenu stranicu Morphe</string>
-    <string name="settings_system_manager_description">"Morphe je eksperimentalni projekt otvorenog koda usmjeren na stvaranje modernog, pojednostavljenog ažuriranja popularnih Android aplikacija.
+    <string name="settings_system_manager_description">"Morphe je eksperimentalni projekt otvorenog koda usmjeren na stvaranje modernog, pojednostavljenog patchanja popularnih Android aplikacija.
 
-U svojoj srži, Morphe napreduje na povratnim informacijama i doprinosima zajednice kako bi potaknuo buduće inovacije."</string>
+Otvorenog koda svoga izvora, Morphe napreduje na povratnim informacijama i doprinosima zajednice kako bi potaknuo buduće inovacije."</string>
     <!-- Shared strings -->
     <string name="patches">Patchevi</string>
     <string name="home">Početna</string>
@@ -576,13 +601,13 @@ U svojoj srži, Morphe napreduje na povratnim informacijama i doprinosima zajedn
     <string name="save">Spremi</string>
     <string name="saved">Spremljeno</string>
     <string name="update">Ažuriraj</string>
+    <string name="allow">Dopusti</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Učitavanje…</string>
     <string name="unmounting_ellipsis">Isključivanje…</string>
     <string name="importing_ellipsis">Uvoz…</string>
     <string name="changelog">Prikaži popis promjena</string>
     <string name="changelog_description">Pogledajte najnovije promjene u ovom ažuriranju</string>
-    <string name="changelog_loading">Učitavanje promjena</string>
     <string name="changelog_download_fail">Neuspjelo preuzimanje zapisa promjena: %s</string>
     <string name="changelog_retry">Pokušaj ponovno</string>
     <string name="changelog_empty">Nema dostupnog zapisa o promjenama</string>

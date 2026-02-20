@@ -305,6 +305,31 @@ Biztosan folytatja?"</string>
     <string name="settings_advanced_updates">Frissítések</string>
     <string name="settings_advanced_updates_use_prereleases">Előzetes kiadások használata</string>
     <string name="settings_advanced_updates_use_prereleases_description">Előzetes hozzáférés az új módosításokhoz és manager funkciókhoz</string>
+    <string name="settings_advanced_updates_background_notifications">Háttérfrissítés-jelzések</string>
+    <string name="settings_advanced_updates_background_notifications_description">Háttérben periodikusan ellenőrizze az frissítéseket és értesítse, ha elérhetőek.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Rövid távú push-jelzések az új kiadásokról, még ha az alkalmazás bezárva is van</string>
+    <string name="notification_channel_manager_updates">Frissítések kezelése</string>
+    <string name="notification_channel_manager_updates_description">Morphe menedzser új verzióiról szóló jelzések</string>
+    <string name="notification_channel_bundle_updates">Patchforrás frissítések</string>
+    <string name="notification_channel_bundle_updates_description">Frissítésről érkező új forrás verziókról szóló értesítések</string>
+    <string name="notification_channel_fcm_updates">Frissítés</string>
+    <string name="notification_channel_fcm_updates_description">Morphe menedzser és módosítások frissítéseiért instant push értesítések. Az alkalmazás háttérben futáskor is kiszolgálva</string>
+    <string name="settings_advanced_update_interval">Frissítés gyakorisága</string>
+    <string name="settings_advanced_update_interval_dialog_title">Frissítés ellenőrzése</string>
+    <string name="settings_advanced_update_interval_hourly">Óránt</string>
+    <string name="settings_advanced_update_interval_daily">Naponta</string>
+    <string name="settings_advanced_update_interval_weekly">Heti</string>
+    <string name="settings_advanced_update_interval_monthly">Havi</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Háttérfrissítés gyakorisága</string>
+    <string name="settings_advanced_update_interval_battery_warning">A háttérfrissítések nem működhetnek megbízhatóan néhány eszközen. A gyártók, mint a Xiaomi, Huawei, Samsung és OnePlus gyakran erősen korlátozzák a háttérfolyamatokat, hogy a akkumulátort takarítsák</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe menedzser frissítés elérhető</string>
+    <string name="notification_bundle_update_title">Új módosítások elérhetőek</string>
+    <string name="notification_update_text">A %1$s verzió kész a letöltéshez</string>
+    <string name="notification_bundle_update_text_unversioned">Kattints a Morphe menedzser megnyitására és frissítésre</string>
+    <string name="notification_permission_dialog_title">Értesítések engedélyezése</string>
+    <string name="notification_permission_dialog_description">A Morphe menedzser az értesítések engedélyezése szükséges, hogy értesítse, amikor frissítések elérhetőek a háttérben</string>
+    <string name="notification_post_patch_dialog_title">Szeretnéd, ha értesítenénk, mikor frissítések érkeznek?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
     <string name="settings_advanced_expert_mode">Szakértői mód</string>
@@ -576,13 +601,13 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="save">Mentés</string>
     <string name="saved">Mentett</string>
     <string name="update">Frissítés</string>
+    <string name="allow">Engedélyez</string>
     <string name="installing_ellipsis">Telepítés…</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>
     <string name="importing_ellipsis">Importálás…</string>
     <string name="changelog">Változásnaplók megtekintése</string>
     <string name="changelog_description">Tekintse meg a legújabb módosításokat ebben a frissítésben</string>
-    <string name="changelog_loading">Változásnapló betöltése</string>
     <string name="changelog_download_fail">Nem sikerült letölteni a változásnaplót: %s</string>
     <string name="changelog_retry">Újra</string>
     <string name="changelog_empty">A változásnapló nem elérhető</string>

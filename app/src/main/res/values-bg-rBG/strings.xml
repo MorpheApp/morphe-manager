@@ -305,6 +305,31 @@
     <string name="settings_advanced_updates">Актуализации</string>
     <string name="settings_advanced_updates_use_prereleases">Използване на предварителни версии</string>
     <string name="settings_advanced_updates_use_prereleases_description">Получете ранна достъпност до нови замести и функции на мениджъра</string>
+    <string name="settings_advanced_updates_background_notifications">Обновления в фона</string>
+    <string name="settings_advanced_updates_background_notifications_description">Периодично проверете наличието на актуализации в фона и известите при наличност.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Получете моментални уведомления за нови версии, дори когато приложението е затворено</string>
+    <string name="notification_channel_manager_updates">Управление на обновения</string>
+    <string name="notification_channel_manager_updates_description">Уведомления за нови версии на Morphe</string>
+    <string name="notification_channel_bundle_updates">Обновения на пакет</string>
+    <string name="notification_channel_bundle_updates_description">Известия за нови версии на източника</string>
+    <string name="notification_channel_fcm_updates">Актуализиране на алертите</string>
+    <string name="notification_channel_fcm_updates_description">Бързи известувания за новите версии на Morphe manager и патчове, достъпни дори когато приложението е в фона</string>
+    <string name="settings_advanced_update_interval">Честота на проверка</string>
+    <string name="settings_advanced_update_interval_dialog_title">Проверка за актуализации</string>
+    <string name="settings_advanced_update_interval_hourly">Един път на час</string>
+    <string name="settings_advanced_update_interval_daily">Един път на ден</string>
+    <string name="settings_advanced_update_interval_weekly">Един път на седмица</string>
+    <string name="settings_advanced_update_interval_monthly">Един път на месец</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Честота на проверка в фона</string>
+    <string name="settings_advanced_update_interval_battery_warning">Проверките в фона може да не работят надеждно на някои устройства. Производители като Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничават фоновите процеси за спестяване на батерия</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Достъпна актуализация на Morphe manager</string>
+    <string name="notification_bundle_update_title">Достъпни нови патчове</string>
+    <string name="notification_update_text">Версия %1$s е готова за сваляне</string>
+    <string name="notification_bundle_update_text_unversioned">Натиснете, за да отворите Morphe manager и актуализирате</string>
+    <string name="notification_permission_dialog_title">Разрешете известувания</string>
+    <string name="notification_permission_dialog_description">Morphe manager нуждае се от разрешение за известувания, за да ви извести, когато има достъпни актуализации в фона</string>
+    <string name="notification_post_patch_dialog_title">Желая ли би да бъдете известителен, когато има достъпни актуализации?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки за експерти</string>
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
@@ -439,6 +464,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Включване на изпълнение на различни процеси</string>
     <string name="settings_system_memory_limit_subtitle">Памет, достъпен за заместителния процес</string>
     <string name="settings_system_memory_limit_warning">Нисък памет може да доведе до неуспехи при заместителния на по-големи приложения</string>
+    <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Натиснете за конфигуриране</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Импорт и износ</string>
@@ -575,13 +601,13 @@ morphe_header_custom_dark.png
     <string name="save">Запази</string>
     <string name="saved">Запазен</string>
     <string name="update">Актуализиране</string>
+    <string name="allow">Разреши</string>
     <string name="installing_ellipsis">Инсталиране…</string>
     <string name="mounting_ellipsis">Монтиране…</string>
     <string name="unmounting_ellipsis">Извличане…</string>
     <string name="importing_ellipsis">Импортиране…</string>
     <string name="changelog">Вижте дневниците на промените</string>
     <string name="changelog_description">Погледете последното обновяване</string>
-    <string name="changelog_loading">Зареждане на дневника на промените</string>
     <string name="changelog_download_fail">Неуспешно сваляне на дневника на промените: %s</string>
     <string name="changelog_retry">Повторно опитване</string>
     <string name="changelog_empty">Няма налични промени</string>

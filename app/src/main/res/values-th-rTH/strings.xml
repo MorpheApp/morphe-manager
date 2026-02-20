@@ -306,6 +306,31 @@
     <string name="settings_advanced_updates">อัปเดต</string>
     <string name="settings_advanced_updates_use_prereleases">ใช้เวอร์ชันล่วงหน้าก่อนปล่อยอย่างทางการ</string>
     <string name="settings_advanced_updates_use_prereleases_description">รับสิทธิ์การอัปเดตและฟีเจอร์ใหม่</string>
+    <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
+    <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนข้อความทันทีสำหรับการปล่อยใหม่ ๆ แม้แต่เมื่อแอปปิดอยู่</string>
+    <string name="notification_channel_manager_updates">จัดการอัปเดต</string>
+    <string name="notification_channel_manager_updates_description">การแจ้งเตือนเกี่ยวกับเวอร์ชันใหม่ ๆ ของ Morphe manager</string>
+    <string name="notification_channel_bundle_updates">การอัปเดตแหล่งข้อมูลแพทช์</string>
+    <string name="notification_channel_bundle_updates_description">การแจ้งเตือนเกี่ยวกับเวอร์ชันแหล่งที่มาใหม่</string>
+    <string name="notification_channel_fcm_updates">อัปเดตการแจ้งเตือน</string>
+    <string name="notification_channel_fcm_updates_description">การแจ้งเตือนด่วนสำหรับการอัปเดต Morphe manager และแพ็คเกจใหม่. ส่งมาถึงแม้แต่เมื่อแอปอยู่ในพื้นหลัง</string>
+    <string name="settings_advanced_update_interval">ความถี่การตรวจสอบ</string>
+    <string name="settings_advanced_update_interval_dialog_title">ตรวจสอบการอัปเดต</string>
+    <string name="settings_advanced_update_interval_hourly">ทุกชั่วโมง</string>
+    <string name="settings_advanced_update_interval_daily">ทุกวัน</string>
+    <string name="settings_advanced_update_interval_weekly">ทุกสัปดาห์</string>
+    <string name="settings_advanced_update_interval_monthly">ทุกเดือน</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">ความถี่การตรวจสอบพื้นหลัง</string>
+    <string name="settings_advanced_update_interval_battery_warning">การตรวจสอบพื้นหลังอาจไม่ทำงานได้อย่างมั่นคงบนบางอุปกรณ์. ผู้ผลิตเช่น Xiaomi, Huawei, Samsung, และ OnePlus บ่อยครั้งจำกัดขั้นตอนการทำงานพื้นหลังอย่างเข้มงวดเพื่อประหยัดแบตเตอรี่</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">มีอัปเดต Morphe manager ใหม่ให้ใช้งานแล้ว</string>
+    <string name="notification_bundle_update_title">มีแพ็คเกจใหม่ให้ใช้งาน</string>
+    <string name="notification_update_text">เวอร์ชัน %1$s เตรียมสำหรับดาวน์โหลดแล้ว</string>
+    <string name="notification_bundle_update_text_unversioned">กดเพื่อเปิด Morphe manager และอัปเดต</string>
+    <string name="notification_permission_dialog_title">อนุญาตให้มีการแจ้งเตือน</string>
+    <string name="notification_permission_dialog_description">Morphe manager 需要อนุญาตให้มีการแจ้งเตือนเพื่อแจ้งให้คุณทราบเมื่อมีการอัปเดตให้ใช้งานอยู่ในพื้นหลัง</string>
+    <string name="notification_post_patch_dialog_title">คุณต้องการรับการแจ้งเตือนเมื่อมีอัปเดตที่พร้อมใช้งานหรือไม่?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าแบบผู้เชี่ยวช์</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
@@ -577,13 +602,13 @@ morphe_header_custom_dark.png
     <string name="save">บันทึก</string>
     <string name="saved">บันทึกแล้ว</string>
     <string name="update">อัปเดต</string>
+    <string name="allow">อนุญาต</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>
     <string name="importing_ellipsis">กำลังนำเข้า…</string>
     <string name="changelog">ดูบันทึกการเปลี่ยนแปลง</string>
     <string name="changelog_description">ดูการเปลี่ยนแปลงล่าสุดในอัปเดตนี้</string>
-    <string name="changelog_loading">กำลังโหลดบันทึกการเปลี่ยนแปลง</string>
     <string name="changelog_download_fail">ดาวน์โหลดบันทึกการเปลี่ยนแปลงไม่สำเร็จ: %s</string>
     <string name="changelog_retry">ลองใหม่อีกครั้ง</string>
     <string name="changelog_empty">ไม่มีรายการอัปเดต</string>

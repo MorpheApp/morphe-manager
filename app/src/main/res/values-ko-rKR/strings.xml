@@ -8,7 +8,7 @@
     <string name="android_11_bug_dialog_title">Android 11 버그</string>
     <string name="android_11_bug_dialog_description">사용자 환경에 부정적인 영향을 미치는 Android 11 시스템 버그를 방지하려면 앱 설치 권한을 미리 부여해야 합니다</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">매니저 업데이트 사용 가능</string>
+    <string name="home_update_available">매니저 업데이트 가능</string>
     <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
     <string name="home_update_error">업데이트 실패</string>
     <string name="home_update_error_subtitle">인터넷 연결 상태를 확인하고 다시 시도하세요</string>
@@ -169,7 +169,7 @@
     <string name="home_app_info_install_type_custom_installer">커스텀 설치 프로그램</string>
     <string name="home_app_info_install_type_system_installer">시스템 설치 프로그램</string>
     <string name="home_app_info_patched_at">패치됨</string>
-    <string name="home_app_info_patch_update_available">패치 업데이트 사용 가능</string>
+    <string name="home_app_info_patch_update_available">패치 업데이트 가능</string>
     <string name="home_app_info_patch_update_available_description">새 버전의 패치가 있습니다. 최신 개선 사항 및 수정 사항을 적용하려면 앱을 다시 패치하세요</string>
     <string name="home_app_info_app_deleted_warning">앱이 매니저 외부에서 제거되었습니다</string>
     <string name="home_app_info_app_deleted_description">앱은 관리자 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
@@ -305,6 +305,31 @@
     <string name="settings_advanced_updates">업데이트</string>
     <string name="settings_advanced_updates_use_prereleases">Pre-release 버전 사용</string>
     <string name="settings_advanced_updates_use_prereleases_description">새 패치 및 매니저 기능을 미리 사용해 보세요</string>
+    <string name="settings_advanced_updates_background_notifications">백그라운드 업데이트 알림</string>
+    <string name="settings_advanced_updates_background_notifications_description">백그라운드에서 주기적으로 업데이트를 확인하고 업데이트가 있을 경우에 알림을 보냅니다</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">앱이 닫혀 있어도 새 릴리스에 대한 푸시 알림을 즉시 받습니다</string>
+    <string name="notification_channel_manager_updates">매니저 업데이트</string>
+    <string name="notification_channel_manager_updates_description">새 Morphe 관리자 버전 알림</string>
+    <string name="notification_channel_bundle_updates">패치 소스 업데이트</string>
+    <string name="notification_channel_bundle_updates_description">새 패치 소스 버전 업데이트 알림</string>
+    <string name="notification_channel_fcm_updates">업데이트 알림</string>
+    <string name="notification_channel_fcm_updates_description">새 Morphe 관리자 및 패치가 릴리스되면 즉시 푸시 알림을 받습니다. 앱이 백그라운드 상태여도 알림이 전송됩니다</string>
+    <string name="settings_advanced_update_interval">확인 빈도</string>
+    <string name="settings_advanced_update_interval_dialog_title">업데이트 확인</string>
+    <string name="settings_advanced_update_interval_hourly">한시간에 한번</string>
+    <string name="settings_advanced_update_interval_daily">하루에 한 번</string>
+    <string name="settings_advanced_update_interval_weekly">한 주에 한 번</string>
+    <string name="settings_advanced_update_interval_monthly">한 달에 한 번</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">백그라운드 확인 빈도</string>
+    <string name="settings_advanced_update_interval_battery_warning">일부 기기에서는 백그라운드 확인 기능이 정상적으로 작동하지 않을 수 있습니다. 특히 Xiaomi, Huawei, Samsung, OnePlus 기기는 배터리 최적화 정책 때문에 백그라운드 작업이 제한되는 경우가 많습니다</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe 매니저 업데이트 가능</string>
+    <string name="notification_bundle_update_title">새 패치 사용 가능</string>
+    <string name="notification_update_text">%1$s 버전 다운로드 준비 완료</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe 매니저를 열어 업데이트하려면 탭하세요</string>
+    <string name="notification_permission_dialog_title">알림 허용</string>
+    <string name="notification_permission_dialog_description">Morphe 매니저는 백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 알림 권한이 필요합니다</string>
+    <string name="notification_post_patch_dialog_title">업데이트가 있을 때 알림을 받으시겠습니까?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
@@ -577,13 +602,13 @@ morphe_header_custom_dark.png
     <string name="save">저장</string>
     <string name="saved">저장됨</string>
     <string name="update">업데이트</string>
+    <string name="allow">허용</string>
     <string name="installing_ellipsis">설치하는 중…</string>
     <string name="mounting_ellipsis">마운트하는 중…</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중…</string>
     <string name="importing_ellipsis">가져오는 중…</string>
     <string name="changelog">변경 사항 보기</string>
     <string name="changelog_description">이 업데이트의 최신 변경 사항을 확인해 보세요</string>
-    <string name="changelog_loading">변경 사항을 불러오는 중</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
     <string name="changelog_retry">다시 시도</string>
     <string name="changelog_empty">변경 사항이 없습니다</string>

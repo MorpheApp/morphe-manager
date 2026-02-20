@@ -305,6 +305,31 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_updates">Aktualizace</string>
     <string name="settings_advanced_updates_use_prereleases">Použít předběžné verze</string>
     <string name="settings_advanced_updates_use_prereleases_description">Získejte předběžný přístup k novým záplatám a funkcím Manageru</string>
+    <string name="settings_advanced_updates_background_notifications">Aktualizace pozadí</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodicky ověřujte aktualizace v pozadí a upozorněte, když jsou k dispozici.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Přijímat okamžité notifikace pro nové vydání, dokonce i když je aplikace uzavřena</string>
+    <string name="notification_channel_manager_updates">Spravovat aktualizace</string>
+    <string name="notification_channel_manager_updates_description">Notifikace o nových verzích Morphe</string>
+    <string name="notification_channel_bundle_updates">Aktualizace zdrojů záplat</string>
+    <string name="notification_channel_bundle_updates_description">Upozornění na novou verzi zdrojového kódu</string>
+    <string name="notification_channel_fcm_updates">Aktualizovat upozornění</string>
+    <string name="notification_channel_fcm_updates_description">Okamžité tlačítka pro nové Morpheho manažer a záplatové vydání. Doručeno i když aplikace je ve fonu.</string>
+    <string name="settings_advanced_update_interval">Častota kontroly</string>
+    <string name="settings_advanced_update_interval_dialog_title">Zkontrolovat aktualizace</string>
+    <string name="settings_advanced_update_interval_hourly">Jednou za hodinu</string>
+    <string name="settings_advanced_update_interval_daily">Jednou denně</string>
+    <string name="settings_advanced_update_interval_weekly">Jednou týdenně</string>
+    <string name="settings_advanced_update_interval_monthly">Jednou měsíčně</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Častota kontroly v pozadí</string>
+    <string name="settings_advanced_update_interval_battery_warning">Kontroly v pozadí nemusí fungovat spolehlivě na některých zařízeních. Výrobci jako Xiaomi, Huawei, Samsung a OnePlus často agresivně omezují procesy v pozadí pro úsporu baterie.</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Aktualizace Morpheho manažeru k dispozici</string>
+    <string name="notification_bundle_update_title">Nové záplaty k dispozici</string>
+    <string name="notification_update_text">Verze %1$s je připravena ke stažení</string>
+    <string name="notification_bundle_update_text_unversioned">Klikněte pro otevření Morpheho manažeru a aktualizaci</string>
+    <string name="notification_permission_dialog_title">Povolit upozornění</string>
+    <string name="notification_permission_dialog_description">Morpheho manažer potřebuje povolení pro upozornění, abychom vás informovali o dostupných aktualizacích v pozadí</string>
+    <string name="notification_post_patch_dialog_title">Chcete být upozorněni, když budou k dispozici aktualizace?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
@@ -576,13 +601,13 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="save">Uložit</string>
     <string name="saved">Uloženo</string>
     <string name="update">Aktualizovat</string>
+    <string name="allow">Povolit</string>
     <string name="installing_ellipsis">Instaluje se…</string>
     <string name="mounting_ellipsis">Připojování…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>
     <string name="importing_ellipsis">Importování…</string>
     <string name="changelog">Zobrazit poznámky k vydání</string>
     <string name="changelog_description">Zjistěte nejaktuálnější změny v této aktualizaci</string>
-    <string name="changelog_loading">Načítání poznámek k vydání</string>
     <string name="changelog_download_fail">Selhání stažení poznámek k vydání: %s</string>
     <string name="changelog_retry">Zkuste znovu</string>
     <string name="changelog_empty">Nejsou dostupné žádné záznamy změn</string>

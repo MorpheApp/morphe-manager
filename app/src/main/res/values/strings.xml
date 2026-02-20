@@ -227,6 +227,15 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
+    <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
+    <string name="patcher_storage_permission_description_api30">One or more patch options point to paths Morphe manager cannot read. Grant storage access and tap the button then patching will start automatically</string>
+    <string name="patcher_storage_permission_description_legacy">One or more patch options point to paths that cannot be accessed. Update the paths in patch options and try again</string>
+    <string name="patcher_storage_permission_grant">Grant storage permission</string>
+    <string name="patcher_storage_permission_denied_warning">Storage permission was denied. Grant the permission to use this path, or move the files to the app\'s private directory</string>
+    <string name="patcher_storage_permission_open_settings">Open storage settings</string>
+    <string name="patcher_storage_badge_denied">Permission denied</string>
+    <string name="patcher_storage_badge_missing">Not found</string>
+    <string name="patcher_storage_permission_hint">Tip: Move files to /Android/data/app.morphe.manager/files/ - no extra permissions needed</string>
 
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparing</string>
@@ -343,6 +352,31 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_updates">Updates</string>
     <string name="settings_advanced_updates_use_prereleases">Use pre-release versions</string>
     <string name="settings_advanced_updates_use_prereleases_description">Get early access to new patches and manager features</string>
+    <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodically check for updates in the background and notify when available</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Receive instant push notifications for new releases, even when the app is closed</string>
+    <string name="notification_channel_manager_updates">Manager updates</string>
+    <string name="notification_channel_manager_updates_description">Notifications about new Morphe manager versions</string>
+    <string name="notification_channel_bundle_updates">Patch sources updates</string>
+    <string name="notification_channel_bundle_updates_description">Notifications about new patch source versions</string>
+    <string name="notification_channel_fcm_updates">Update alerts</string>
+    <string name="notification_channel_fcm_updates_description">Instant push notifications for new Morphe manager and patch releases. Delivered even when the app is in the background</string>
+    <string name="settings_advanced_update_interval">Check frequency</string>
+    <string name="settings_advanced_update_interval_dialog_title">Check for updates</string>
+    <string name="settings_advanced_update_interval_hourly">Once an hour</string>
+    <string name="settings_advanced_update_interval_daily">Once a day</string>
+    <string name="settings_advanced_update_interval_weekly">Once a week</string>
+    <string name="settings_advanced_update_interval_monthly">Once a month</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Background check frequency</string>
+    <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe manager update available</string>
+    <string name="notification_bundle_update_title">New patches available</string>
+    <string name="notification_update_text">Version %1$s is ready to download</string>
+    <string name="notification_bundle_update_text_unversioned">Tap to open Morphe manager and update</string>
+    <string name="notification_permission_dialog_title">Allow notifications</string>
+    <string name="notification_permission_dialog_description">Morphe manager needs notification permission to alert you when updates are available in the background</string>
+    <string name="notification_post_patch_dialog_title">Would you like to be notified when updates are available?</string>
 
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
@@ -638,6 +672,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="save">Save</string>
     <string name="saved">Saved</string>
     <string name="update">Update</string>
+    <string name="allow">Allow</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
@@ -645,7 +680,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
 
     <string name="changelog">View changelogs</string>
     <string name="changelog_description">Check out the latest changes in this update</string>
-    <string name="changelog_loading">Loading changelog</string>
     <string name="changelog_download_fail">Failed to download changelog: %s</string>
     <string name="changelog_retry">Retry</string>
     <string name="changelog_empty">No changelog available</string>

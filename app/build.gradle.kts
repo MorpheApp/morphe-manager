@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.devtools)
     alias(libs.plugins.about.libraries)
+    alias(libs.plugins.google.services)
     signing
 }
 
@@ -83,7 +84,7 @@ dependencies {
 
     apkEditorLib(files("$rootDir/libs/APKEditor-1.4.7.jar"))
     implementation(files(strippedApkEditorLib))
-    implementation("androidx.documentfile:documentfile:1.0.1")
+    implementation(libs.androidx.documentfile)
 
     // Native processes
     implementation(libs.kotlin.process)
@@ -116,6 +117,11 @@ dependencies {
     implementation(libs.ktor.okhttp)
     implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.serialization)
+
+    // Firebase Cloud Messaging
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    implementation(libs.play.services.base)
 
     // Markdown
     implementation(libs.markdown.renderer)

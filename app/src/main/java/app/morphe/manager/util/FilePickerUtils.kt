@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import org.koin.compose.koinInject
+import java.io.File
 
 /**
  * Convert content:// URI to file path
@@ -84,4 +85,49 @@ fun getApkPath(context: Context, app: InstalledApp): String? {
         context.packageManager.getPackageInfo(app.currentPackageName, 0)
             .applicationInfo?.sourceDir
     }.getOrNull()
+}
+
+/**
+ * Represents the result of validating a single path-valued patch option.
+ */
+sealed class PathValidationResult {
+    data class Missing(
+        val patchName: String,
+        val optionKey: String,
+        val path: String
+    ) : PathValidationResult()
+
+    data class NotReadable(
+        val patchName: String,
+        val optionKey: String,
+        val path: String
+    ) : PathValidationResult()
+}
+
+/**
+ * Scans all patch options for string values that look like absolute file-system paths
+ * and verifies each one exists and is readable.
+ *
+ * @param options The full [Options] map (bundleUid → patchName → optionKey → value).
+ * @return A list of [PathValidationResult] entries for every path that failed validation.
+ *         An empty list means all paths are accessible.
+ */
+fun validateOptionPaths(options: Map<Int, Map<String, Map<String, Any?>>>): List<PathValidationResult> {
+    val failures = mutableListOf<PathValidationResult>()
+    for ((_, patchOptions) in options) {
+        for ((patchName, keyValues) in patchOptions) {
+            for ((optionKey, value) in keyValues) {
+                // Only validate String values that look like absolute paths.
+                val raw = value as? String ?: continue
+                if (!raw.startsWith("/")) continue
+
+                val file = File(raw)
+                when {
+                    !file.exists() -> failures += PathValidationResult.Missing(patchName, optionKey, raw)
+                    !file.canRead() -> failures += PathValidationResult.NotReadable(patchName, optionKey, raw)
+                }
+            }
+        }
+    }
+    return failures
 }

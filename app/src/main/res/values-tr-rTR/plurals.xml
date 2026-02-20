@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%s yamala</item>
+        <item quantity="one">%s yama</item>
         <item quantity="other">%s yama</item>
     </plurals>
     <plurals name="option_count">

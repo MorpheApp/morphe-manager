@@ -1090,6 +1090,58 @@ class PatchBundleRepository(
         checkManualUpdates()
     }
 
+    /**
+     * Silently checks whether any remote bundle has a newer version available.
+     * Does NOT download or apply the update — only compares version signatures.
+     *
+     * Used by [app.morphe.manager.worker.UpdateCheckWorker] for background update notifications.
+     *
+     * @return The latest version string of the first updated bundle found (e.g. "4.21.0"),
+     *   or null if no updates are available or the check could not be completed.
+     */
+    suspend fun checkForBundleUpdatesQuiet(): String? {
+        if (!networkInfo.isConnected()) return null
+
+        val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
+        if (!allowMeteredUpdates && !networkInfo.isSafe()) return null
+
+        return try {
+            val remoteBundles = store.state.value.sources.values
+                .filterIsInstance<RemotePatchBundle>()
+
+            if (remoteBundles.isEmpty()) return null
+
+            // Check all remote bundles in parallel for speed; return the first updated version found
+            coroutineScope {
+                remoteBundles
+                    .map { bundle ->
+                        async {
+                            try {
+                                val info = bundle.fetchLatestReleaseInfo()
+                                val latestSignature = info.version
+                                    .removePrefix("v")
+                                    .takeUnless { it.isBlank() }
+                                val installedSignature = bundle.installedVersionSignature
+                                // Return version when signatures differ (or installed is null)
+                                if (latestSignature != null && installedSignature != latestSignature)
+                                    latestSignature
+                                else
+                                    null
+                            } catch (e: Exception) {
+                                Log.w(tag, "Failed to check update for bundle ${bundle.name}", e)
+                                null
+                            }
+                        }
+                    }
+                    .awaitAll()
+                    .firstOrNull { it != null }
+            }
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to quietly check for bundle updates", e)
+            null
+        }
+    }
+
     suspend fun checkManualUpdates(vararg bundleUids: Int) =
         store.dispatch(ManualUpdateCheck(bundleUids.toSet().takeIf { it.isNotEmpty() }))
 

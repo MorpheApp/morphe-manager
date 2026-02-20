@@ -36,10 +36,12 @@
     <!-- Patcher Screen - Other hidden strings -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
+    <string name="settings_appearance_background_none">Nav neviena pakalpojuma</string>
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
@@ -58,4 +60,7 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
+    <string name="search">Meklēt</string>
+    <string name="enabled">Iespējots</string>
+    <string name="disabled">Atspējots</string>
 </resources>

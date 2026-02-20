@@ -296,6 +296,31 @@
     <string name="settings_advanced_updates">अपडेट</string>
     <string name="settings_advanced_updates_use_prereleases">प्री-रीलिज संस्करण उपयोग करें</string>
     <string name="settings_advanced_updates_use_prereleases_description">नए पैच और मैनेजर सुविधाओं को जल्द ही मिलेंगी</string>
+    <string name="settings_advanced_updates_background_notifications">रीलेटेड अपडेट नोटिफिकेशन्स</string>
+    <string name="settings_advanced_updates_background_notifications_description">बैकग्राउंड में अद्यतन उपलब्ध होने पर सूचित करें।</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">नई रिलीज़ के लिए इमीडिएट पुश नोटिफिकेशन प्राप्त करें, जब एप्प क्लोज हो</string>
+    <string name="notification_channel_manager_updates">अपडेट मैनेजर</string>
+    <string name="notification_channel_manager_updates_description">नई मॉर्फ मैनेजर संस्करणों के बारे में नोटिफिकेशन</string>
+    <string name="notification_channel_bundle_updates">पैच स्रोत अपडेट</string>
+    <string name="notification_channel_bundle_updates_description">नोटिफिकेशन नई पैच स्रोत संस्करणों के बारे में</string>
+    <string name="notification_channel_fcm_updates">अपडेट करें</string>
+    <string name="notification_channel_fcm_updates_description">नई मॉर्फ़ मैनेजर और पैच रिलीज के लिए तत्काल पुश नोटिफिकेशन। ऐप बैकग्राउंड में भी डिलीवर किए जाते हैं</string>
+    <string name="settings_advanced_update_interval">अपडेट दर देखें</string>
+    <string name="settings_advanced_update_interval_dialog_title">अपडेटों के लिए देखें</string>
+    <string name="settings_advanced_update_interval_hourly">एक घंटे में एक बार</string>
+    <string name="settings_advanced_update_interval_daily">एक दिन में एक बार</string>
+    <string name="settings_advanced_update_interval_weekly">एक सप्ताह में एक बार</string>
+    <string name="settings_advanced_update_interval_monthly">एक महीने में एक बार</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">बैकग्राउंड अपडेट दर</string>
+    <string name="settings_advanced_update_interval_battery_warning">कुछ डिवाइसों पर बैकग्राउंड चेकز कोष्ठक में काम नहीं करना चाहिए। बटरी बचाने के लिए मैन्युफैक्चरर जैसे कि एक्सियाومی, ह्वाईवे, सैमसंग, और वनप्लस बैकग्राउंड प्रोसेसेज को अग्रेषित रूप से प्रतिबंधित करते हैं</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">मॉर्फ़ मैनेजर अपडेट उपलब्ध है</string>
+    <string name="notification_bundle_update_title">नई पैच उपलब्ध हैं</string>
+    <string name="notification_update_text">वर्जन %1$s डाउनलोड के लिए तैयार है</string>
+    <string name="notification_bundle_update_text_unversioned">मॉर्फ़ मैनेजर खोलें और अपडेट करें</string>
+    <string name="notification_permission_dialog_title">नोटिफिकेशन अनुमति दें</string>
+    <string name="notification_permission_dialog_description">मॉर्फ़ मैनेजर बैकग्राउंड में अपडेट उपलब्ध होने पर नोटिफिकेशन अनुमति की आवश्यकता होती है ताकि आपको सूचित किया जा सके</string>
+    <string name="notification_post_patch_dialog_title">अपडेट उपलब्ध होने पर सूचित किया जाना चाहेगा?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
@@ -566,6 +591,7 @@ morphe_header_custom_dark.png
     <string name="save">सेव करें</string>
     <string name="saved">सहेजा गया</string>
     <string name="update">अपडेट</string>
+    <string name="allow">अनुमति दें</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>
     <string name="mounting_ellipsis">माउंटिंग…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>
