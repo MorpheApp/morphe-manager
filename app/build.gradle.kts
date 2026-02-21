@@ -83,7 +83,12 @@ dependencies {
     implementation(libs.morphe.library)
 
     apkEditorLib(files("$rootDir/libs/APKEditor-1.4.7.jar"))
-    implementation(files(strippedApkEditorLib))
+    compileOnly(files(strippedApkEditorLib))
+    modules {
+        module("xmlpull:xmlpull") {
+            replacedBy("com.github.REAndroid:arsclib", "arsclib bundles xmlpull")
+        }
+    }
     implementation(libs.androidx.documentfile)
 
     // Native processes
