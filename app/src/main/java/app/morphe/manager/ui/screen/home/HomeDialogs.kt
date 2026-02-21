@@ -457,8 +457,7 @@ private fun DownloadInstructionsDialog(
     val context = LocalContext.current
 
     // Get button color based on package name
-    val buttonColor = packageName?.let { AppPackages.getDownloadColor(it) }
-        ?: AppPackages.YOUTUBE_DOWNLOAD_COLOR
+    val buttonColor = AppPackages.getDownloadColor(packageName ?: "")
 
     MorpheDialog(
         onDismissRequest = onDismiss,

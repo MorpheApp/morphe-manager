@@ -1120,7 +1120,7 @@ class HomeViewModel(
     }
 
     fun getApiOfflineWebSearchUrl(): String {
-        val architecture = if (pendingPackageName == AppPackages.YOUTUBE_MUSIC) {
+        val architecture = if (pendingPackageName == KnownApp.YOUTUBE_MUSIC) {
             " (${Build.SUPPORTED_ABIS.first()})"
         } else {
             "nodpi"
