@@ -33,12 +33,18 @@ sealed class KnownApp(
         const val YOUTUBE = "com.google.android.youtube"
         const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
         const val REDDIT = "com.reddit.frontpage"
+        const val X_TWITTER = "com.twitter.android"
 
         // Shared gradient tail colors used by all known apps
         val GRADIENT_MID = Color(0xFF1E5AA8)
         val GRADIENT_END = Color(0xFF00AFAE)
 
-        val all: List<KnownApp> = listOf(YouTube, YouTubeMusic, Reddit)
+        val all: List<KnownApp> = listOf(
+            YouTube,
+            YouTubeMusic,
+            Reddit,
+            X
+        )
 
         fun fromPackage(packageName: String): KnownApp? =
             all.firstOrNull { it.packageName == packageName }
@@ -67,6 +73,12 @@ sealed class KnownApp(
         displayNameResId = R.string.home_reddit,
         accentColor = Color(0xFFFF4500),
         isPinnedByDefault = true
+    )
+
+    data object X : KnownApp(
+        packageName = X_TWITTER,
+        displayNameResId = R.string.home_x,
+        accentColor = Color(0xFF000000)
     )
 }
 

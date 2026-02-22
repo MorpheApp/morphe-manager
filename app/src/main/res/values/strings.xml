@@ -3,6 +3,7 @@
     <string name="home_youtube" translatable="false">YouTube</string>
     <string name="home_youtube_music" translatable="false">YouTube Music</string>
     <string name="home_reddit" translatable="false">Reddit</string>
+    <string name="home_x" translatable="false">X</string>
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
