@@ -6,7 +6,7 @@
     <string name="home_no_patches_available">利用可能なパッチはありません</string>
     <string name="home_default_source_disabled">Morpheのパッチソースが無効になっています。パッチソース設定画面で有効にするか、エキスパートモードを使用してください。</string>
     <string name="android_11_bug_dialog_title">Android 11 のバグ</string>
-    <string name="android_11_bug_dialog_description">Android 11 では、ユーザー体験に悪影響を及ぼす不具合が確認されています。あらかじめアプリのインストール権限を付与しておいてください</string>
+    <string name="android_11_bug_dialog_description">Android 11 では、ユーザー体験に悪影響を及ぼす不具合が確認されています。あらかじめアプリのインストール権限を許可しておいてください</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">新しいアップデートが利用可能です</string>
     <string name="home_update_available_subtitle">新しいバージョンがインストール可能です</string>
@@ -100,7 +100,7 @@
     <string name="home_no_patches_for_app">このアプリに利用できるパッチはありません</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">エキスパートモード</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s 中 %1$s 個選択中</string>
+    <string name="expert_mode_subtitle_extended_format">%1$s / %2$s を選択中</string>
     <string name="expert_mode_search">パッチを検索する</string>
     <string name="expert_mode_proceed">パッチ処理に進む</string>
     <string name="expert_mode_disable_all">全て無効化する</string>
@@ -141,16 +141,16 @@
     <string name="adaptive_icon_safe_zone_outer">マスクゾーン（切り詰められる可能性あり）</string>
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
-    <string name="adaptive_icon_folder_explanation">生成されたアイコンファイルを格納する\'morphe_branding/morphe_icons\'フォルダの作成先を選択</string>
+    <string name="adaptive_icon_folder_explanation">生成されたアイコン ファイルを格納する「morphe_branding/morphe_icons」フォルダの作成先を選択します</string>
     <!-- Header Creator -->
     <string name="header_creator_create">カスタム ヘッダーを作成</string>
-    <string name="header_creator_instructions">明るいテーマと暗いテーマの画像を選択し、ピンチツー・ゾームジェスチャーで調整</string>
+    <string name="header_creator_instructions">ライトテーマとダークテーマの画像を選択し、ピンチズーム ジェスチャーで調整します</string>
     <string name="header_creator_light_theme">明るいテーマのヘッダー</string>
     <string name="header_creator_dark_theme">暗いテーマのヘッダー</string>
     <string name="header_creator_no_image">画像が選択されていません</string>
     <string name="header_creator_success">ヘッダーの作成に成功しました</string>
     <string name="header_creator_failed">ヘッダーの作成に失敗しました</string>
-    <string name="header_creator_folder_explanation">生成されたヘッダーファイルを格納する\'morphe_branding/morphe_header\'フォルダの作成先を選択</string>
+    <string name="header_creator_folder_explanation">生成されたヘッダー ファイルを格納する「morphe_branding/morphe_header」フォルダの作成先を選択します</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">このアプリをアンインストールしますか？</string>
     <string name="home_app_info_remove_app_warning">削除します：</string>
@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">一度アンインストールしてから、再度インストールしてください</string>
     <string name="patcher_ready_to_install_subtitle">インストールするには以下のボタンを押してください</string>
     <string name="patcher_ready_to_mount_subtitle">マウントするには以下のボタンを押してください</string>
+    <string name="patcher_storage_permission_dialog_title">ストレージパスにアクセスできません</string>
+    <string name="patcher_storage_permission_description_api30">Morphe マネージャーが読み取ることができないパスを参照しているパッチ オプションが 1 つまたは複数あります。ストレージへのアクセス権限を許可してボタンをタップしてください。パッチ処理が自動的に開始されます</string>
+    <string name="patcher_storage_permission_description_legacy">アクセスできないパスを参照しているパッチ オプションが 1 つまたは複数あります。パッチ オプションのパスを修正して再度お試しください</string>
+    <string name="patcher_storage_permission_grant">ストレージへのアクセス権限を許可する</string>
+    <string name="patcher_storage_permission_denied_warning">ストレージへのアクセスが拒否されました。権限を許可してこのパスを使用するか、もしくはファイルをアプリのプライベート ディレクトリに移動してください。</string>
+    <string name="patcher_storage_permission_open_settings">ストレージの設定を開く</string>
+    <string name="patcher_storage_badge_denied">権限が許可されていません</string>
+    <string name="patcher_storage_badge_missing">見つかりません</string>
+    <string name="patcher_storage_permission_hint">ヒント: ファイルを /Android/data/app.morphe.manager/files/ に移動してください - 追加の権限は必要ありません</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">準備中</string>
     <string name="patcher_step_load_patches">パッチを読み込み中</string>
@@ -328,7 +337,7 @@
     <string name="notification_update_text">バージョン %1$s がダウンロード可能です</string>
     <string name="notification_bundle_update_text_unversioned">タップして Morphe マネージャーを開いて更新してください</string>
     <string name="notification_permission_dialog_title">通知の許可</string>
-    <string name="notification_permission_dialog_description">バックグラウンドでアップデートが利用可能になったときに通知するためには、Morphe マネージャーに通知の許可を付与する必要があります。</string>
+    <string name="notification_permission_dialog_description">バックグラウンドでアップデートが利用可能になったときに通知するためには、Morphe マネージャーに通知権限を許可する必要があります。</string>
     <string name="notification_post_patch_dialog_title">更新が利用可能になったときに通知を受け取りますか？</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">エキスパート設定</string>

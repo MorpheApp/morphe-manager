@@ -202,6 +202,15 @@ Devam etmek istiyor musunuz?"</string>
     <string name="patcher_install_error_subtitle">Kaldırıp tekrar yüklemeyi deneyin</string>
     <string name="patcher_ready_to_install_subtitle">Yüklemek için aşağıdaki düğmeye basın</string>
     <string name="patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
+    <string name="patcher_storage_permission_dialog_title">Depo yolu erişimine erişilemiyor</string>
+    <string name="patcher_storage_permission_description_api30">Bir veya daha fazla çözüm seçeneği Morphe yöneticisi tarafından okunamayan yollara işaret ediyor. Depo erişimine izin verin ve düğmeye basın, o zaman otomatik olarak çözümleme başlayacak</string>
+    <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla çözüm seçeneği erişime açıksız yollara işaret ediyor. Çözüm seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
+    <string name="patcher_storage_permission_grant">Depo erişimi izni verin</string>
+    <string name="patcher_storage_permission_denied_warning">Depo izni reddedildi. Bu yolu kullanmak için izni verin veya dosyaları uygulamaların özel dizinine taşıyın</string>
+    <string name="patcher_storage_permission_open_settings">Depo ayarlarını aç</string>
+    <string name="patcher_storage_badge_denied">İzin reddedildi</string>
+    <string name="patcher_storage_badge_missing">Bulunamadı</string>
+    <string name="patcher_storage_permission_hint">İpucu: Dosyaları /Android/data/app.morphe.manager/files/ dizinine taşıyın - ekstra izn gerektirmez</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Hazırlanıyor</string>
     <string name="patcher_step_load_patches">Yamalar yükleniyor</string>

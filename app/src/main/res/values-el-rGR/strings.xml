@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">Δοκιμάστε να απεγκαταστήσετε και να εγκαταστήσετε ξανά</string>
     <string name="patcher_ready_to_install_subtitle">Πατήστε το παρακάτω κουμπί για εγκατάσταση</string>
     <string name="patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
+    <string name="patcher_storage_permission_dialog_title">Δεν είναι δυνατός ο πρόσβαση στο διαδρομή αποθήκευσης</string>
+    <string name="patcher_storage_permission_description_api30">Ένας ή περισσότεροι επιλογές ανακύκλωσης δείχνουν σε διαδρομές που ο Morphe manager δεν μπορεί να διαβάσει. Επιτρέψτε την πρόσβαση στο αποθηκευτικό χώρο και πατήστε το κουμπί για να ξεκινήσει η ανακύκλωση αυτόματα</string>
+    <string name="patcher_storage_permission_description_legacy">Ένας ή περισσότεροι επιλογές ανακύκλωσης δείχνουν σε διαδρομές που δεν είναι προσβάσιμες. Ενημερώστε τις διαδρομές στις επιλογές ανακύκλωσης και δοκιμάστε ξανά</string>
+    <string name="patcher_storage_permission_grant">Επιτρέψτε την πρόσβαση στο αποθηκευτικό χώρο</string>
+    <string name="patcher_storage_permission_denied_warning">Δεν επιτράπηκε η άδεια αποθήκευσης. Δώσε την άδεια για να χρησιμοποιήσεις αυτήν την διαδρομή, ή μετακίνησε τα αρχεία στο ιδιωτικό διεύθυνση του εφαρμογής</string>
+    <string name="patcher_storage_permission_open_settings">Άνοιγμα ρυθμίσεων αποθήκευσης</string>
+    <string name="patcher_storage_badge_denied">Δεν επιτράπηκε η άδεια</string>
+    <string name="patcher_storage_badge_missing">Δεν βρέθηκε</string>
+    <string name="patcher_storage_permission_hint">Σuggestion: Μετακίνησε τα αρχεία σε /Android/data/app.morphe.manager/files/ - Δεν χρειάζονται επιπλέον άδειες</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Προετοιμασία</string>
     <string name="patcher_step_load_patches">Φόρτωση επιδιορθώσεων</string>

@@ -107,7 +107,7 @@ Kompatibilis verziók:"</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_no_patches">Nincsenek elérhető módosítások</string>
-    <string name="expert_mode_multiple_sources_warning_title">Több patchforrás kiválasztva</string>
+    <string name="expert_mode_multiple_sources_warning_title">Több patchforrás van kiválasztva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
 
 Biztosan folytatja?"</string>
@@ -179,9 +179,9 @@ Biztosan folytatja?"</string>
     <string name="root_pre_patch_installer_title">Válasszon telepítési módot</string>
     <string name="root_pre_patch_installer_description">Az eszköze root hozzáféréssel rendelkezik. Válassza ki, hogyan szeretné telepíteni a módosított alkalmazást</string>
     <string name="root_pre_patch_installer_mount_title">Root csatolás</string>
-    <string name="root_pre_patch_installer_mount_description">Javított APK-t fognál a stock alkalmazás fölé. Nem szükséges GmsCore</string>
+    <string name="root_pre_patch_installer_mount_description">A módosított APK-t az eredeti felé csatolja. Nem szükséges GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Szabványos telepítés</string>
-    <string name="root_pre_patch_installer_standard_description">Telepítse különálló alkalmazásként GmsCore támogatással. Válassza ki az telepítőt (Rendszer telepítő, Shizuku stb.) a javítás után</string>
+    <string name="root_pre_patch_installer_standard_description">Telepítés különálló alkalmazásként GmsCore támogatással. Válassza ki a telepítőt (Rendszertelepítő, Shizuku stb.) a módosítás után</string>
     <string name="root_pre_patch_installer_hint">Az telepítési mód határozza meg, hogy melyik javítások beletartoznak és nem módosítható a javítás után</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
@@ -202,6 +202,15 @@ Biztosan folytatja?"</string>
     <string name="patcher_install_error_subtitle">Próbálja meg eltávolítani és újratelepíteni</string>
     <string name="patcher_ready_to_install_subtitle">Nyomja meg az alábbi gombot a telepítéshez</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomja meg az alábbi gombot a csatlakoztatáshoz</string>
+    <string name="patcher_storage_permission_dialog_title">Nem lehet elérési útvonalhoz hozzáférni</string>
+    <string name="patcher_storage_permission_description_api30">Egy vagy több pata megoldás mutató az útvonalakhoz, amelyekre a Morphe menedzser nem tud olvasni. Adja meg a tárolási hozzáférést és taposson a gombra, majd a pata automatikusan indul</string>
+    <string name="patcher_storage_permission_description_legacy">Egy vagy több pata megoldás mutató az útvonalakhoz, amelyekre nem lehet hozzáférni. Változtassa meg az útvonalakat a pata megoldásokban és próbálja újra</string>
+    <string name="patcher_storage_permission_grant">Adja meg a tárolási engedélyt</string>
+    <string name="patcher_storage_permission_denied_warning">A tárolási engedélyt elvetették. Engedélyezze a tároló használatához, vagy helyezze át a fájlokat az alkalmazás magánkönyvtárába.</string>
+    <string name="patcher_storage_permission_open_settings">Nyisson meg a tárolási beállításokat</string>
+    <string name="patcher_storage_badge_denied">Engedély elvetve</string>
+    <string name="patcher_storage_badge_missing">Nem található</string>
+    <string name="patcher_storage_permission_hint">Tipp: Mozd meg a fájlokat a /Android/data/app.morphe.manager/files/ könyvtárba - nem kell extra engedélyek</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Előkészítés</string>
     <string name="patcher_step_load_patches">Módosítások betöltése</string>

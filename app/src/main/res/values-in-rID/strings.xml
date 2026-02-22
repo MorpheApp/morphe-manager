@@ -202,6 +202,15 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="patcher_install_error_subtitle">Coba copot pemasangan dan pasang lagi</string>
     <string name="patcher_ready_to_install_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
+    <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
+    <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tambalan yang mengarah pada jalur Morphe manager tidak dapat dibaca. Beri akses penyimpanan dan ketuk tombol lalu penambalan akan dimulai secara otomatis</string>
+    <string name="patcher_storage_permission_description_legacy">Satu atau lebih pilihan tambalan yang mengarah ke jalur yang tidak dapat diakses. Perbarui jalur dalam pilihan tambalan dan coba lagi</string>
+    <string name="patcher_storage_permission_grant">Beri izin penyimpanan</string>
+    <string name="patcher_storage_permission_denied_warning">Izin penyimpanan ditolak. Beri izin untuk menggunakan jalur ini, atau pindahkan berkas ke direktori pribadi aplikasi</string>
+    <string name="patcher_storage_permission_open_settings">Buka pengaturan penyimpanan</string>
+    <string name="patcher_storage_badge_denied">Izin ditolak</string>
+    <string name="patcher_storage_badge_missing">Tidak ditemukan</string>
+    <string name="patcher_storage_permission_hint">Saran: Pindahkan berkas ke /Android/data/app.morphe.manager/files/ - tidak diperlukan perizinan tambahan</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Mempersiapkan</string>
     <string name="patcher_step_load_patches">Memuat tambalan</string>
@@ -496,7 +505,7 @@ Ukuran gambar harus sebagai berikut:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Ekspor catatan debug</string>
-    <string name="settings_system_export_debug_logs_description">Ekspor catatan sistem untuk mengatasi masalah</string>
+    <string name="settings_system_export_debug_logs_description">Ekspor catatan sistem untuk menyelesaikan masalah</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Gagal membaca catatan (kode keluaran %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Gagal mengekspor catatan</string>
     <string name="settings_system_export_debug_logs_export_success">Catatan diekspor</string>

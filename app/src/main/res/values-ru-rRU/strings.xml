@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">Попробуйте удалить и установить заново</string>
     <string name="patcher_ready_to_install_subtitle">Нажмите кнопку ниже, чтобы установить</string>
     <string name="patcher_ready_to_mount_subtitle">Нажмите кнопку ниже, чтобы смонтировать</string>
+    <string name="patcher_storage_permission_dialog_title">Невозможно получить доступ к пути хранения</string>
+    <string name="patcher_storage_permission_description_api30">Один или несколько параметров патча указывают на пути, которые Morphe-менеджер не может прочитать. Предоставьте доступ к хранилищу и нажмите кнопку, чтобы автоматически начать патчинг</string>
+    <string name="patcher_storage_permission_description_legacy">Один или несколько параметров патча указывают на пути, к которым нельзя получить доступ. Обновите пути в параметрах патча и повторите попытку</string>
+    <string name="patcher_storage_permission_grant">Предоставить доступ к хранилищу</string>
+    <string name="patcher_storage_permission_denied_warning">Разрешение на хранение было отклонено. Разрешите его, чтобы использовать этот путь, или переместите файлы в директорию приложения</string>
+    <string name="patcher_storage_permission_open_settings">Открыть настройки хранения</string>
+    <string name="patcher_storage_badge_denied">Разрешение отклонено</string>
+    <string name="patcher_storage_badge_missing">Не найдено</string>
+    <string name="patcher_storage_permission_hint">Совет: переместите файлы в /Android/data/app.morphe.manager/files/ - дополнительные разрешения не требуются</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Подготовка</string>
     <string name="patcher_step_load_patches">Загрузка патчей</string>

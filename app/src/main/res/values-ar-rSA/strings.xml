@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">جرب إلغاء التثبيت والتثبيت مرة أخرى</string>
     <string name="patcher_ready_to_install_subtitle">اضغط على الزر أدناه للتثبيت</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
+    <string name="patcher_storage_permission_dialog_title">لا يمكن الوصول إلى مسار التخزين</string>
+    <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe manager قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
+    <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى.</string>
+    <string name="patcher_storage_permission_grant">منح إذن الوصول</string>
+    <string name="patcher_storage_permission_denied_warning">تم رفض الإذن على التخزين. قم بإعطاء الإذن لاستخدام هذا المسار، أو نقل الملفات إلى مجلد خاص بالتطبيق.</string>
+    <string name="patcher_storage_permission_open_settings">فتح إعدادات التخزين</string>
+    <string name="patcher_storage_badge_denied">تم رفض الإذن</string>
+    <string name="patcher_storage_badge_missing">غير موجود</string>
+    <string name="patcher_storage_permission_hint">تلميح: نقل الملفات إلى /Android/data/app.morphe.manager/files/ - لا تحتاج إلى أي إذن إضافي</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">جارٍ الإعداد</string>
     <string name="patcher_step_load_patches">جارٍ تحميل التعديلات</string>

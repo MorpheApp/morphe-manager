@@ -203,6 +203,15 @@
     <string name="patcher_install_error_subtitle">נסה להסיר ולהתקין שוב</string>
     <string name="patcher_ready_to_install_subtitle">לחץ על הכפתור למטה כדי להתקין</string>
     <string name="patcher_ready_to_mount_subtitle">לחץ על הכפתור למטה כדי לאתחל</string>
+    <string name="patcher_storage_permission_dialog_title">לא ניתן לגשת לדרך אחסון</string>
+    <string name="patcher_storage_permission_description_api30">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות למנהל Morphe. תן אישור גישה לאחסון והקש על הכפתור ואז התיקון יתחיל אוטומטית</string>
+    <string name="patcher_storage_permission_description_legacy">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות. עדכן את הדרכים באופציות התיקון ונסה שוב</string>
+    <string name="patcher_storage_permission_grant">אשר אישור גישה לאחסון</string>
+    <string name="patcher_storage_permission_denied_warning">התחשיבו את הרשאת אחסון. תן את הרשאה כדי להשתמש בפாத זה, או העבר את הקבצים לתיקיית האפליקציה הפרטית.</string>
+    <string name="patcher_storage_permission_open_settings">פתח הגדרות אחסון</string>
+    <string name="patcher_storage_badge_denied">רשאה נדחתה</string>
+    <string name="patcher_storage_badge_missing">לא נמצא</string>
+    <string name="patcher_storage_permission_hint">עצה: העבר קבצים ל- /Android/data/app.morphe.manager/files/ - אין צורך ברשאות נוספות</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">מכין</string>
     <string name="patcher_step_load_patches">טוען תיקונים</string>

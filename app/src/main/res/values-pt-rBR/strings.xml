@@ -202,6 +202,15 @@ Tem certeza de que deseja continuar?"</string>
     <string name="patcher_install_error_subtitle">Tente desinstalar e instalar novamente</string>
     <string name="patcher_ready_to_install_subtitle">Pressione o botão abaixo para instalar</string>
     <string name="patcher_ready_to_mount_subtitle">Pressione o botão abaixo para montar</string>
+    <string name="patcher_storage_permission_dialog_title">Não é possível acessar o caminho de armazenamento</string>
+    <string name="patcher_storage_permission_description_api30">Uma ou mais opções de patch apontam para caminhos que o Morphe Manager não pode ler. Conceda acesso à armazenamento e toque no botão para que o patch seja iniciado automaticamente</string>
+    <string name="patcher_storage_permission_description_legacy">Uma ou mais opções de patch apontam para caminhos que não podem ser acessados. Atualize os caminhos nas opções de patch e tente novamente</string>
+    <string name="patcher_storage_permission_grant">Conceder permissão de armazenamento</string>
+    <string name="patcher_storage_permission_denied_warning">Permissão de armazenamento foi negada. Conceda a permissão para usar este caminho ou mova os arquivos para o diretório privado do aplicativo</string>
+    <string name="patcher_storage_permission_open_settings">Abrir configurações de armazenamento</string>
+    <string name="patcher_storage_badge_denied">Permissão negada</string>
+    <string name="patcher_storage_badge_missing">Não encontrado</string>
+    <string name="patcher_storage_permission_hint">Dica: Mova os arquivos para /Android/data/app.morphe.manager/files/ - sem permissão extra necessária</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Carregando patches</string>

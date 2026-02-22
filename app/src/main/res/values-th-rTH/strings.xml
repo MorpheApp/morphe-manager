@@ -203,6 +203,15 @@
     <string name="patcher_install_error_subtitle">ลองถอนการติดตั้งแล้วติดตั้งใหม่อีกครั้ง</string>
     <string name="patcher_ready_to_install_subtitle">กดปุ่มด้านล่างเพื่อติดตั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
+    <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
+    <string name="patcher_storage_permission_description_api30">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ Morphe Manager ไม่สามารถอ่านได้ กรุณายืนยันสิทธิ์การเข้าถึงเก็บข้อมูลและกดปุ่มแล้วปรับปรุงจะเริ่มขึ้นอัตโนมัติ</string>
+    <string name="patcher_storage_permission_description_legacy">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ไม่สามารถเข้าถึงได้ อัปเดตเส้นทางในตัวเลือกการปรับปรุงและลองใหม่อีกครั้ง</string>
+    <string name="patcher_storage_permission_grant">ยืนยันสิทธิ์การเข้าถึงเก็บข้อมูล</string>
+    <string name="patcher_storage_permission_denied_warning">การอนุญาตในการใช้พื้นที่เก็บถาวรถูกปฏิเสธ。อนุญาตให้ใช้เส้นทางนี้หรือย้ายไฟล์ไปยังโฟลเดอร์ส่วนตัวของแอปพลิเคชัน</string>
+    <string name="patcher_storage_permission_open_settings">เปิดการตั้งค่าเก็บถาวร</string>
+    <string name="patcher_storage_badge_denied">การอนุญาตถูกปฏิเสธ</string>
+    <string name="patcher_storage_badge_missing">ไม่พบ</string>
+    <string name="patcher_storage_permission_hint">คำแนะนำ: ย้ายไฟล์ไปยัง /Android/data/app.morphe.manager/files/ - ไม่จำเป็นต้องมีสิทธิ์พิเศษอื่น</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">กำลังเตรียม</string>
     <string name="patcher_step_load_patches">กำลังโหลดแพตช์</string>

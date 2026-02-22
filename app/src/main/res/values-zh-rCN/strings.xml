@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">尝试重新卸载并安装</string>
     <string name="patcher_ready_to_install_subtitle">按下方按钮安装</string>
     <string name="patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
+    <string name="patcher_storage_permission_dialog_title">无法访问存储路径</string>
+    <string name="patcher_storage_permission_description_api30">一个或多个补丁选项指向 Morphe 管理器无法读取的路径。授予存储访问权限，然后自动开始补丁</string>
+    <string name="patcher_storage_permission_description_legacy">一个或多个补丁选项指向无法访问的路径。更新补丁选项中的路径，然后重试</string>
+    <string name="patcher_storage_permission_grant">授予存储权限</string>
+    <string name="patcher_storage_permission_denied_warning">存储权限已被拒绝。授予权限以使用此路径，或将文件移动到应用的私有目录</string>
+    <string name="patcher_storage_permission_open_settings">打开存储设置</string>
+    <string name="patcher_storage_badge_denied">权限被拒绝</string>
+    <string name="patcher_storage_badge_missing">未找到</string>
+    <string name="patcher_storage_permission_hint">提示：将文件移动到/Android/data/app.morphe.manager/files/ - 不需要额外权限</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">准备中</string>
     <string name="patcher_step_load_patches">加载补丁</string>

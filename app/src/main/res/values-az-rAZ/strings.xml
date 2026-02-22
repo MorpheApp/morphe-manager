@@ -202,6 +202,15 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patcher_install_error_subtitle">Silməyə və təkrar quraşdırmağa çalış</string>
     <string name="patcher_ready_to_install_subtitle">Quraşdırmaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
+    <string name="patcher_storage_permission_dialog_title">Yaddaş keçidinə keçmək olmur</string>
+    <string name="patcher_storage_permission_description_api30">Bir və ya daha çox yamaq seçimi Morphe menecerinin oxuya bilmədiyi yolları göstərir. Yaddaş girişin qəbul et və düyməyə toxun, sonra yamaqlanma birbaşa başlayacaq</string>
+    <string name="patcher_storage_permission_description_legacy">Bir və ya daha çox yamaq seçimi keçmək olmayan yolları göstərir. Yamaq seçimlərindəki yolları yeniləyin və təkrar cəhd edin</string>
+    <string name="patcher_storage_permission_grant">Yaddaş icazəsin qəbul et</string>
+    <string name="patcher_storage_permission_denied_warning">Yaddaş icazəsi rədd edildi. Bu yolu istifadə etmək üçün icazəni qəbul et və ya faylları tətbiqin şəxsi qovluğuna köçür</string>
+    <string name="patcher_storage_permission_open_settings">Yaddaş tənzimləmələrin aç</string>
+    <string name="patcher_storage_badge_denied">İcazə rədd edildi</string>
+    <string name="patcher_storage_badge_missing">Tapılmadı</string>
+    <string name="patcher_storage_permission_hint">İpucu: Faylları /Android/data/app.morphe.manager/files/ -a köçür - əlavə icazələrə ehtiyac yoxdur</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Hazırlanır</string>
     <string name="patcher_step_load_patches">Yamaqlar yüklənilir</string>

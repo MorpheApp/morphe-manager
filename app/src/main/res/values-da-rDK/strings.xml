@@ -202,6 +202,15 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="patcher_install_error_subtitle">Prøv at afinstallere og installere igen</string>
     <string name="patcher_ready_to_install_subtitle">Tryk på knappen nedenfor for at installere</string>
     <string name="patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
+    <string name="patcher_storage_permission_dialog_title">Kan ikke tilgå ende lagringssti</string>
+    <string name="patcher_storage_permission_description_api30">En eller flere patch-valg peker på stier, som Morphe Manager ikke kan læse. Tillad lagringstilgång og tryk på knappen, og patching vil starte automatisk</string>
+    <string name="patcher_storage_permission_description_legacy">En eller flere patch-valg peker på stier, som ikke kan tilgåes. Opdater stierne i patch-valg og prøv igen</string>
+    <string name="patcher_storage_permission_grant">Tillad lagringstilgang</string>
+    <string name="patcher_storage_permission_denied_warning">Lagringstilladelse blev afvist. Giv tilladelse til at bruge denne sti, eller flyt filerne til apps private mappe</string>
+    <string name="patcher_storage_permission_open_settings">Åbn lagringstilstande</string>
+    <string name="patcher_storage_badge_denied">Tilladelse afvist</string>
+    <string name="patcher_storage_badge_missing">Ikke fundet</string>
+    <string name="patcher_storage_permission_hint">Tip: Flyt filer til /Android/data/app.morphe.manager/files/ - ingen ekstra tilladelser nødvendige</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Forbereder</string>
     <string name="patcher_step_load_patches">Indlæser patches</string>

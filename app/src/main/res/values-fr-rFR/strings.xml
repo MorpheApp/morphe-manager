@@ -21,7 +21,7 @@
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quelle application voulez-vous patcher ?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Prêt à rendre les applis légendaires à nouveau ?</string>
+    <string name="home_greeting_2">Prêt à rendre les applications légendaires à nouveau ?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Attachez vos ceintures, c\'est l\'heure du patchage</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -29,7 +29,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Voulez-vous regarder des pubs ? Moi non plus</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Faisons en sorte que vos applis fonctionnent parfaitement</string>
+    <string name="home_greeting_6">Faisons en sorte que vos applications fonctionnent parfaitement</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Prévisions du jour : 100% de chance de patchage</string>
     <!-- From mediocrity to amazing -->
@@ -202,6 +202,15 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patcher_install_error_subtitle">Essayez de désinstaller puis de réinstaller</string>
     <string name="patcher_ready_to_install_subtitle">Appuyez sur le bouton ci-dessous pour installer</string>
     <string name="patcher_ready_to_mount_subtitle">Appuyez sur le bouton ci-dessous pour monter</string>
+    <string name="patcher_storage_permission_dialog_title">Impossible d\'accéder au chemin de stockage</string>
+    <string name="patcher_storage_permission_description_api30">Une ou plusieurs options de patch pointent vers des chemins que le gestionnaire Morphe ne peut pas lire. Accordez l’accès au stockage puis appuyez sur le bouton, le patchage démarrera automatiquement</string>
+    <string name="patcher_storage_permission_description_legacy">Une ou plusieurs options de patch pointent vers des chemins inaccessibles. Mettez à jour les chemins dans les options de patch puis réessayez</string>
+    <string name="patcher_storage_permission_grant">Accorder l’autorisation d’accès au stockage</string>
+    <string name="patcher_storage_permission_denied_warning">L’autorisation d’accès au stockage a été refusée. Accordez l’autorisation pour utiliser ce chemin ou déplacez les fichiers vers le répertoire privé de l’application</string>
+    <string name="patcher_storage_permission_open_settings">Ouvrir les paramètres de stockage</string>
+    <string name="patcher_storage_badge_denied">Autorisation refusée</string>
+    <string name="patcher_storage_badge_missing">Non trouvé</string>
+    <string name="patcher_storage_permission_hint">Astuce : Déplacez les fichiers vers /Android/data/app.morphe.manager/files/ - pas d\'autorisations supplémentaires nécessaires</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Préparation</string>
     <string name="patcher_step_load_patches">Chargement des patchs</string>
@@ -415,7 +424,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
 - drawable-xxxhdpi : 512×192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Masquer les fonctionnalités Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Masquer le raccourci \'Shorts\'</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Masquer le raccourci \'Shorts\' de l\'application</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Supprimer \'Shorts\' du menu lors du maintien du lanceur</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Masquer le widget \'Shorts\'</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Supprimer le bouton \'Shorts\' du widget du lanceur</string>

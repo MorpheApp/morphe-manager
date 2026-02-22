@@ -202,6 +202,15 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patcher_install_error_subtitle">Hãy thử gỡ và cài đặt lại</string>
     <string name="patcher_ready_to_install_subtitle">Bấm nút bên dưới để cài đặt</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
+    <string name="patcher_storage_permission_dialog_title">Không thể truy cập đường dẫn bộ nhớ</string>
+    <string name="patcher_storage_permission_description_api30">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến thư mục mà Morphe không thể truy cập. Hãy cấp quyền truy cập bộ nhớ, sau đó nhấn nút và quá trình vá sẽ tự động bắt đầu</string>
+    <string name="patcher_storage_permission_description_legacy">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến đường dẫn không thể truy cập. Hãy cập nhật lại đường dẫn trong phần tuỳ chỉnh bản vá và thử lại</string>
+    <string name="patcher_storage_permission_grant">Cấp quyền truy cập bộ nhớ</string>
+    <string name="patcher_storage_permission_denied_warning">Quyền truy cập bộ nhớ đã bị từ chối. Hãy cấp quyền để sử dụng đường dẫn này, hoặc di chuyển các tệp vào thư mục riêng của ứng dụng</string>
+    <string name="patcher_storage_permission_open_settings">Mở cài đặt truy cập bộ nhớ</string>
+    <string name="patcher_storage_badge_denied">Quyền truy cập bị từ chối</string>
+    <string name="patcher_storage_badge_missing">Không tìm thấy gì</string>
+    <string name="patcher_storage_permission_hint">Gợi ý: Di chuyển tệp sang /Android/data/app.morphe.manager/files/ - sẽ không cần cấp thêm quyền truy cập</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Chuẩn bị</string>
     <string name="patcher_step_load_patches">Đang tải bản vá</string>

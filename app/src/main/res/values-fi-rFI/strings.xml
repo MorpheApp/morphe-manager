@@ -202,6 +202,15 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patcher_install_error_subtitle">Yritä poistaa ja asentaa uudelleen</string>
     <string name="patcher_ready_to_install_subtitle">Paina alla olevaa painiketta asentaaksesi</string>
     <string name="patcher_ready_to_mount_subtitle">Paina alla olevaa painiketta liittääksesi</string>
+    <string name="patcher_storage_permission_dialog_title">Ei voi käsitellä tallennustietoa</string>
+    <string name="patcher_storage_permission_description_api30">Yksi tai useampi päivitysasetus osoittaa Morphe-hallinnoinnolle lukematon tiedostopolkuja. Anta tallennuslupaa ja napsauta painiketta, sitten päivitys alkaa automaattisesti</string>
+    <string name="patcher_storage_permission_description_legacy">Yksi tai useampi päivitysasetus osoittaa pääsyä ei voida käsitellä tiedostoja. Päivitä päivitysasetuksia ja yritä uudelleen</string>
+    <string name="patcher_storage_permission_grant">Anta tallennuslupa</string>
+    <string name="patcher_storage_permission_denied_warning">Tallennustilaan tarvitaan lupa. Anta lupa käyttää tätä polkua tai siirrä tiedostot sovelluksen yksityiseen kansioon.</string>
+    <string name="patcher_storage_permission_open_settings">Avaa tallennustila-asetukset</string>
+    <string name="patcher_storage_badge_denied">Lupa kieltäytynyt</string>
+    <string name="patcher_storage_badge_missing">Ei löytynyt</string>
+    <string name="patcher_storage_permission_hint">Vinkki: Siirrä tiedostot /Android/data/app.morphe.manager/files/ - ei tarvita lisälupeita</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Valmistellaan</string>
     <string name="patcher_step_load_patches">Ladataan korjauksia</string>

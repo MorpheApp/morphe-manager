@@ -202,6 +202,15 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patcher_install_error_subtitle">Spróbuj odinstalować i ponownie zainstalować</string>
     <string name="patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
     <string name="patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zmountować</string>
+    <string name="patcher_storage_permission_dialog_title">Brak dostępu do ścieżki pamięci</string>
+    <string name="patcher_storage_permission_description_api30">Jedna lub więcej opcji modyfikowania wskazuje na ścieżki, których menedżer Morphe nie może odczytać. Przyznaj dostęp do pamięci i stuknij przycisk, a modyfikowanie rozpocznie się automatycznie</string>
+    <string name="patcher_storage_permission_description_legacy">Jedna lub więcej opcji modyfikowania wskazuje na ścieżki, do których nie można uzyskać dostępu. Zaktualizuj ścieżki w opcjach modyfikowania i spróbuj ponownie</string>
+    <string name="patcher_storage_permission_grant">Przyznaj uprawnienia dostępu do pamięci</string>
+    <string name="patcher_storage_permission_denied_warning">Odmówiono uprawnień do pamięci. Przyznaj uprawnienia, aby korzystać z tej ścieżki lub przenieś pliki do prywatnego katalogu aplikacji</string>
+    <string name="patcher_storage_permission_open_settings">Otwórz ustawienia pamięci</string>
+    <string name="patcher_storage_badge_denied">Brak uprawnień</string>
+    <string name="patcher_storage_badge_missing">Nie znaleziono</string>
+    <string name="patcher_storage_permission_hint">Wskazówka: Przenieś pliki do /Android/data/app.morphe.manager/files/ - nie wymaga to dodatkowych uprawnień</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Przygotowywanie</string>
     <string name="patcher_step_load_patches">Wczytywanie modyfikacji</string>

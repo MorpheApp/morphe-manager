@@ -202,6 +202,15 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patcher_install_error_subtitle">Încercați să dezinstalați și să instalați din nou</string>
     <string name="patcher_ready_to_install_subtitle">Apăsați butonul de mai jos pentru a instala</string>
     <string name="patcher_ready_to_mount_subtitle">Apăsați butonul de mai jos pentru a monta</string>
+    <string name="patcher_storage_permission_dialog_title">Nu se poate accesa calea de stocare</string>
+    <string name="patcher_storage_permission_description_api30">Una sau mai multe opțiuni de patch indică căi de stocare pe care Morphe manager nu le poate citi. Acordați accesul la stocare și apăsați butonul, apoi începerea patch-ului se va face automat</string>
+    <string name="patcher_storage_permission_description_legacy">Una sau mai multe opțiuni de patch indică căi de stocare care nu pot fi accesate. Actualizați căile în opțiunile de patch și încercați din nou</string>
+    <string name="patcher_storage_permission_grant">Acordați permisiunea de stocare</string>
+    <string name="patcher_storage_permission_denied_warning">Permisiunea de stocare a fost refuzată. Acordați permisiunea pentru a utiliza acest drum, sau mutați fișierul în directorul privat al aplicației</string>
+    <string name="patcher_storage_permission_open_settings">Deschideți setările de stocare</string>
+    <string name="patcher_storage_badge_denied">Permisiune refuzată</string>
+    <string name="patcher_storage_badge_missing">Nu s-a găsit</string>
+    <string name="patcher_storage_permission_hint">Sugestie: Mută fișierul în /Android/data/app.morphe.manager/files/ - nu sunt necesare alte permisiuni</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Pregătire</string>
     <string name="patcher_step_load_patches">Se încarcă modificările</string>

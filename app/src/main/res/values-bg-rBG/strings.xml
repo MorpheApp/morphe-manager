@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">Опитайте да деинсталирате и инсталирате отново</string>
     <string name="patcher_ready_to_install_subtitle">Натиснете бутона по-долу за инсталиране</string>
     <string name="patcher_ready_to_mount_subtitle">Натиснете бутона по-долу за монтиране</string>
+    <string name="patcher_storage_permission_dialog_title">Не е възможно да се достъпи до пата за съхранение</string>
+    <string name="patcher_storage_permission_description_api30">Едно или повече опции за патч сочат към пътища, които Morphe мениджърът не може да чете. Дайте достъп до съхранението и натиснете бутона, след което патчирането ще започне автоматично</string>
+    <string name="patcher_storage_permission_description_legacy">Едно или повече опции за патч сочат към пътища, които не могат да бъдат достъпени. Актуализирайте пътищата в опциите за патч и опитайте отново</string>
+    <string name="patcher_storage_permission_grant">Дайте разрешение за съхранение</string>
+    <string name="patcher_storage_permission_denied_warning">Разрешение за съхранение е отказано. Разрешете разрешението за да използвате този път, или преместете файловете в директорията за частни файлове на приложението.</string>
+    <string name="patcher_storage_permission_open_settings">Отвори настройки за съхранение</string>
+    <string name="patcher_storage_badge_denied">Разрешение отказано</string>
+    <string name="patcher_storage_badge_missing">Не е намерено</string>
+    <string name="patcher_storage_permission_hint">Съвет: Преместете файловете в /Android/data/app.morphe.manager/files/ - не са нужни допълнителни разрешения</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Not selected</string>
     <string name="patcher_step_load_patches">Not set</string>

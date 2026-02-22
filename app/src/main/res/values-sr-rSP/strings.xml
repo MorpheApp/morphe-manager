@@ -202,6 +202,15 @@ Kompatibilne verzije:"</string>
     <string name="patcher_install_error_subtitle">Покушајте деинсталирати па поново инсталирати</string>
     <string name="patcher_ready_to_install_subtitle">Притисните дугме испод за инсталирање</string>
     <string name="patcher_ready_to_mount_subtitle">Притисните дугме испод за монтирање</string>
+    <string name="patcher_storage_permission_dialog_title">Не могу приступити до пута складиштења</string>
+    <string name="patcher_storage_permission_description_api30">Један или више опција пачања указују на путеве које Морфе менаџер не може да чита. Дозволите приступ складишту и тапните на дугме па пачање ће се аутоматски покренути</string>
+    <string name="patcher_storage_permission_description_legacy">Један или више опција пачања указују на путеве које не могу да се приступе. Ажурирајте путеве у опцијама пачања и покушајте поново</string>
+    <string name="patcher_storage_permission_grant">Дозволите приступ складишту</string>
+    <string name="patcher_storage_permission_denied_warning">Дозвола за складиштење је одбијена. Дозволите дозволу да бисте користили ову путању, или преместите датотеке у приватни директоријум апликације.</string>
+    <string name="patcher_storage_permission_open_settings">Отворите поставке складиштења</string>
+    <string name="patcher_storage_badge_denied">Дозвола одбијена</string>
+    <string name="patcher_storage_badge_missing">Непознато</string>
+    <string name="patcher_storage_permission_hint">Совет: Преместите датотеке у /Android/data/app.morphe.manager/files/ - није потребна додатна дозвола</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Припрема</string>
     <string name="patcher_step_load_patches">Учитавање закрпа</string>

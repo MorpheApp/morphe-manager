@@ -201,6 +201,15 @@
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
+    <string name="patcher_storage_permission_dialog_title">स्तोरेज पथ तक पहुंच नहीं हो सकती है</string>
+    <string name="patcher_storage_permission_description_api30">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो मॉर्फ़ मैनेजर पढ़ सकता है नहीं। स्टोरेज एक्सेस प्रदान करें और बटन पर टैप करें तो पैचिंग स्वचालित रूप से शुरू हो जाएगी</string>
+    <string name="patcher_storage_permission_description_legacy">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो पहुंच नहीं हो सकती है। पैच ऑप्शन में पथ्स को अद्यतन करें और पुन: प्रयास करें</string>
+    <string name="patcher_storage_permission_grant">स्टोरेज अनुमति प्रदान करें</string>
+    <string name="patcher_storage_permission_denied_warning">स्टोरेज पर्मिशन को नकारा गया। इस पथ का उपयोग करने के लिए पर्मिशन देने या फ़ाइलें ऐप की प्राइवेट डायरेक्टरी में स्थानांतरित करें।</string>
+    <string name="patcher_storage_permission_open_settings">स्टोरेज सेटिंग्स खोलें</string>
+    <string name="patcher_storage_badge_denied">पर्मिशन नकारा गया</string>
+    <string name="patcher_storage_badge_missing">नहीं मिला</string>
+    <string name="patcher_storage_permission_hint">टिप: फ़ाइलें /Android/data/app.morphe.manager/files/ में स्थानांतरित करें - अतिरिक्त पर्मिशन की आवश्यकता नहीं है</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">तैयार कर रहे हैं...</string>
     <string name="patcher_step_load_patches">पैच लोड हो रहे हैं</string>

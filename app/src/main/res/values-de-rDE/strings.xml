@@ -202,6 +202,15 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="patcher_install_error_subtitle">Versuche die App zu deinstallieren und erneut zu installieren</string>
     <string name="patcher_ready_to_install_subtitle">Drücke die Schaltfläche unten, um zu installieren</string>
     <string name="patcher_ready_to_mount_subtitle">Drücke die Schaltfläche unten, um zu mounten</string>
+    <string name="patcher_storage_permission_dialog_title">Speicherpfad kann nicht erreicht werden</string>
+    <string name="patcher_storage_permission_description_api30">Ein oder mehrere Patch-Optionen zeigen auf Pfade, die Morphe-Manager nicht lesen kann. Speicherzugriff gew√§hren und auf die Schaltfl√§che tippen, damit das Patching automatisch beginnt</string>
+    <string name="patcher_storage_permission_description_legacy">Ein oder mehrere Patch-Optionen zeigen auf Pfade, die nicht erreicht werden k√∂nnen. Pfade in Patch-Optionen aktualisieren und erneut versuchen</string>
+    <string name="patcher_storage_permission_grant">Speicherberechtigung gew√§hren</string>
+    <string name="patcher_storage_permission_denied_warning">Speicherkartenberechtigung wurde abgelehnt. Erteilen Sie die Berechtigung, um diesen Pfad zu verwenden, oder verschieben Sie die Dateien in das private Verzeichnis der App.</string>
+    <string name="patcher_storage_permission_open_settings">Speicherkarteneinstellungen öffnen</string>
+    <string name="patcher_storage_badge_denied">Berechtigung abgelehnt</string>
+    <string name="patcher_storage_badge_missing">Nicht gefunden</string>
+    <string name="patcher_storage_permission_hint">Tipp: Verschieben Sie Dateien nach /Android/data/app.morphe.manager/files/ - keine zusätzlichen Berechtigungen erforderlich</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Vorbereitung</string>
     <string name="patcher_step_load_patches">Patches werden geladen</string>

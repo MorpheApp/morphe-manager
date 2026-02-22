@@ -202,6 +202,15 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="patcher_install_error_subtitle">Pokušajte deinstalirati i instalirati ponovo</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite tipku ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite tipku ispod da učitate</string>
+    <string name="patcher_storage_permission_dialog_title">Nije moguće pristupiti putanji pohrane</string>
+    <string name="patcher_storage_permission_description_api30">Jedna ili više opcija zakrpe upućuju na putanje koje Morphe manager ne može pročitati. Omogućite pristup pohrani i dodirnite gumb, nakon čega će se krpanje automatski pokrenuti.</string>
+    <string name="patcher_storage_permission_description_legacy">Jedna ili više opcija zakrpe upućuju na putanje kojima se ne može pristupiti. Ažurirajte putanje u opcijama zakrpe i pokušajte ponovno.</string>
+    <string name="patcher_storage_permission_grant">Odobri dopuštenje za pohranu</string>
+    <string name="patcher_storage_permission_denied_warning">Dozvola za pohranu je odbijena. Dajte dopuštenje za korištenje ove putanje ili premjestite datoteke u privatni direktorij aplikacije.</string>
+    <string name="patcher_storage_permission_open_settings">Otvori postavke pohrane</string>
+    <string name="patcher_storage_badge_denied">Dozvola odbijena</string>
+    <string name="patcher_storage_badge_missing">Nije pronađeno</string>
+    <string name="patcher_storage_permission_hint">Savjet: Premjestite datoteke u /Android/data/app.morphe.manager/files/ - nisu potrebne dodatne dozvole</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Priprema</string>
     <string name="patcher_step_load_patches">Učitavanje patcheva</string>

@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">আনইনস্টল করে আবার ইনস্টল করার চেষ্টা করুন</string>
     <string name="patcher_ready_to_install_subtitle">ইনস্টল করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_ready_to_mount_subtitle">মাউন্ট করতে নিচের বোতামটি টিপুন</string>
+    <string name="patcher_storage_permission_dialog_title">স্টোরেজ পথে অ্যাক্সেস করতে পারেনি</string>
+    <string name="patcher_storage_permission_description_api30">এক বা একাধিক প্যাচ বিকল্প Morphe ম্যানেজার পড়তে পারে না। স্টোরেজ অ্যাক্সেস দিন এবং বাটন টিপে প্যাচিং শুরু হবে</string>
+    <string name="patcher_storage_permission_description_legacy">এক বা একাধিক প্যাচ বিকল্প অ্যাক্সেস করতে পারে না। প্যাচ বিকল্পগুলিতে পথ আপডেট করুন এবং আবার চেষ্টা করুন</string>
+    <string name="patcher_storage_permission_grant">স্টোরেজ অনুমতি দিন</string>
+    <string name="patcher_storage_permission_denied_warning">স্টোরেজ অনুমতি প্রত্যাখ্যাত হয়। এই পথ ব্যবহার করতে, অনুমতি দিন অথবা ফাইলগুলি অ্যাপের বেসিক ডিরেক্টরিতে সরান।</string>
+    <string name="patcher_storage_permission_open_settings">স্টোরেজ সেটিংস খুলুন</string>
+    <string name="patcher_storage_badge_denied">অনুমতি প্রত্যাখ্যাত হয়</string>
+    <string name="patcher_storage_badge_missing">পাওয়া যায়নি</string>
+    <string name="patcher_storage_permission_hint">টিপ: ফাইলগুলি /Android/data/app.morphe.manager/files/ এ সরান - অতিরিক্ত অনুমতি প্রয়োজন হয় না</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">প্রস্তুতি</string>
     <string name="patcher_step_load_patches">প্যাচ লোড হচ্ছে</string>

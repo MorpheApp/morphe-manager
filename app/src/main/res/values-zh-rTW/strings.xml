@@ -202,6 +202,15 @@
     <string name="patcher_install_error_subtitle">請嘗試解除安裝並重新安裝</string>
     <string name="patcher_ready_to_install_subtitle">按下下方按鈕即可安裝</string>
     <string name="patcher_ready_to_mount_subtitle">按下下方按鈕即可掛載</string>
+    <string name="patcher_storage_permission_dialog_title">無法存取儲存路徑</string>
+    <string name="patcher_storage_permission_description_api30">一或多個補丁選項指向Morphe管理員無法讀取的路徑。授予存取權限並點擊按鈕，然後補丁將自動啟動</string>
+    <string name="patcher_storage_permission_description_legacy">一或多個補丁選項指向無法存取的路徑。更新補丁選項中的路徑並重試</string>
+    <string name="patcher_storage_permission_grant">授予存取權限</string>
+    <string name="patcher_storage_permission_denied_warning">存儲權限已被拒絕。授予權限以使用此路徑，或將檔案移至應用程序的私有目錄</string>
+    <string name="patcher_storage_permission_open_settings">開啟存儲設定</string>
+    <string name="patcher_storage_badge_denied">權限被拒絕</string>
+    <string name="patcher_storage_badge_missing">找不到記錄</string>
+    <string name="patcher_storage_permission_hint">提示：將檔案移至 /Android/data/app.morphe.manager/files/ - 不需要額外權限</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">準備中</string>
     <string name="patcher_step_load_patches">載入修補程式</string>

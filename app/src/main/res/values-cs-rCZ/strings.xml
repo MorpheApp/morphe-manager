@@ -202,6 +202,15 @@ Opravdu chcete pokračovat?"</string>
     <string name="patcher_install_error_subtitle">Zkuste odinstalovat a nainstalovat znovu</string>
     <string name="patcher_ready_to_install_subtitle">Stiskněte tlačítko níže pro instalaci</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
+    <string name="patcher_storage_permission_dialog_title">Nelze přistupovat k cestě úložiště</string>
+    <string name="patcher_storage_permission_description_api30">Jeden nebo více možnosti pro patchování ukazují na cesty, které Morphe manager nemůže číst. Povolte přístup k úložišti a klepněte na tlačítko, pak se automaticky začne patchování</string>
+    <string name="patcher_storage_permission_description_legacy">Jeden nebo více možnosti pro patchování ukazují na cesty, které nelze přistupovat. Upravte cesty v možnostech pro patchování a zkuste to znovu</string>
+    <string name="patcher_storage_permission_grant">Povolte přístup k úložišti</string>
+    <string name="patcher_storage_permission_denied_warning">Oprávnění pro úložiště bylo zamítnuto. Povolte oprávnění pro použití této cesty, nebo přesuňte soubory do soukromého adresáře aplikace.</string>
+    <string name="patcher_storage_permission_open_settings">Otevřít nastavení úložiště</string>
+    <string name="patcher_storage_badge_denied">Oprávnění zamítnuto</string>
+    <string name="patcher_storage_badge_missing">Nenalezeno</string>
+    <string name="patcher_storage_permission_hint">Tip: Přesuňte soubory do /Android/data/app.morphe.manager/files/ - bez potřeby dalších oprávnění</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Příprava</string>
     <string name="patcher_step_load_patches">Načítání oprav</string>
