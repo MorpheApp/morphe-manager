@@ -86,11 +86,9 @@
     <string name="sources_download_fail">Failed to download sources: %s</string>
 
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
-    <string name="home_apk_availability_dialog_simple">To patch %1$s, you need an unpatched APK with version:</string>
-    <string name="home_apk_availability_dialog_expert">"Do you have an unpatched %1$s APK?
-
-Compatible versions:"</string>
+    <string name="home_apk_availability_dialog_title">Do you have the original APK?</string>
+    <string name="home_apk_availability_dialog_simple">To patch &lt;b&gt;%1$s&lt;/b&gt;, you need an unpatched APK file with version:</string>
+    <string name="home_apk_availability_dialog_expert">Compatible versions for &lt;b&gt;%1$s&lt;/b&gt;:</string>
     <string name="home_apk_availability_recommended_label">Recommended</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
     <string name="home_apk_availability_yes">Yes, I have it</string>
@@ -104,16 +102,15 @@ Compatible versions:"</string>
     <string name="home_download_instructions_step1">Press the \'%1$s\' button below</string>
     <string name="home_download_instructions_step2_part1">Scroll down the webpage and press</string>
     <string name="home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
-    <string name="home_download_instructions_step3">Wait for the download to complete, and &lt;b>do not install&lt;/b> the APK</string>
-    <string name="home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b>install the APK&lt;/b></string>
-    <string name="home_download_instructions_step4">After the download finishes, open this app again</string>
-    <string name="home_download_instructions_step4_mount">After installing the original APK, open this app again</string>
+    <string name="home_download_instructions_step3">Wait for the download to complete, and &lt;b&gt;do not install&lt;/b&gt; the APK</string>
+    <string name="home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b&gt;install the APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">After the download finishes, return to Morphe</string>
+    <string name="home_download_instructions_step4_mount">After installing the original APK, return to Morphe</string>
     <string name="home_download_instructions_continue">Continue to APKMirror.com</string>
 
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Select the APK you downloaded</string>
-    <string name="home_file_picker_prompt_description">Now select the %1$s APK file you just downloaded</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Open APK file I downloaded</string>
+    <string name="home_file_picker_prompt_title">Select downloaded APK</string>
+    <string name="home_file_picker_prompt_description">Select the &lt;b&gt;%1$s&lt;/b&gt; APK file you just downloaded</string>
     <string name="home_file_picker_prompt_open_apk">Open APK file</string>
     <string name="home_recommended_version">Recommended version</string>
     <string name="home_selected_version">Selected version</string>
@@ -126,7 +123,7 @@ Compatible versions:"</string>
     <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_subtitle_extended_format">%1$s of %2$s selected</string>
     <string name="expert_mode_search">Search patches</string>
-    <string name="expert_mode_proceed">Proceed to Patching</string>
+    <string name="expert_mode_proceed">Proceed to patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
     <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_no_results">No patches found</string>
@@ -201,8 +198,8 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_patched_at">Patched</string>
     <string name="home_app_info_patch_update_available">Patch update available</string>
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
-    <string name="home_app_info_app_deleted_warning">App uninstalled outside manager</string>
-    <string name="home_app_info_app_deleted_description">This app was uninstalled outside the manager. Repatch it to restore functionality</string>
+    <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
+    <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>

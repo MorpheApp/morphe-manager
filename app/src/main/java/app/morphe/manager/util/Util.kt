@@ -1,8 +1,6 @@
 package app.morphe.manager.util
 
 import android.content.Context
-import android.content.Intent
-import android.content.pm.ApplicationInfo
 import android.graphics.Typeface
 import android.os.Build
 import android.text.Html
@@ -12,45 +10,27 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.ListItemColors
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.R
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
@@ -59,7 +39,6 @@ import kotlinx.datetime.format.MonthNames
 import kotlinx.datetime.format.char
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import java.util.Locale
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -70,14 +49,6 @@ typealias Options = Map<Int, Map<String, Map<String, Any?>>>
 fun isArmV7(): Boolean {
     val abis = Build.SUPPORTED_ABIS.map { it.lowercase() }
     return abis.any { it.contains("armeabi-v7a") }
-}
-
-val Context.isDebuggable get() = 0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
-
-fun Context.openUrl(url: String) {
-    startActivity(Intent(Intent.ACTION_VIEW, url.toUri()).apply {
-        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-    })
 }
 
 fun Context.toastHandle(string: String, duration: Int = Toast.LENGTH_SHORT): Toast =
@@ -117,48 +88,6 @@ inline fun uiSafe(context: Context, @StringRes toastMsg: Int, logMsg: String, bl
 
 fun Throwable.simpleMessage() = this.message ?: this.cause?.message ?: this::class.simpleName
 
-inline fun LifecycleOwner.launchAndRepeatWithViewLifecycle(
-    minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    crossinline block: suspend CoroutineScope.() -> Unit
-) {
-    lifecycleScope.launch {
-        lifecycle.repeatOnLifecycle(minActiveState) {
-            block()
-        }
-    }
-}
-
-/**
- * Run [transformer] on the [Iterable] and then [combine] the result using [combiner].
- * This is used to transform collections that contain [Flow]s into something that is easier to work with.
- */
-@OptIn(ExperimentalCoroutinesApi::class)
-inline fun <T, reified R, C> Flow<Iterable<T>>.flatMapLatestAndCombine(
-    crossinline combiner: suspend (Array<R>) -> C,
-    crossinline transformer: suspend (T) -> Flow<R>,
-): Flow<C> = flatMapLatest { iterable ->
-    combine(iterable.map { transformer(it) }) {
-        combiner(it)
-    }
-}
-
-val Color.hexCode: String
-    inline get() {
-        val a: Int = (alpha * 255).toInt()
-        val r: Int = (red * 255).toInt()
-        val g: Int = (green * 255).toInt()
-        val b: Int = (blue * 255).toInt()
-        return java.lang.String.format(Locale.getDefault(), "%02X%02X%02X%02X", r, g, b, a)
-    }
-
-suspend fun <T> Flow<Iterable<T>>.collectEach(block: suspend (T) -> Unit) {
-    this.collect { iterable ->
-        iterable.forEach {
-            block(it)
-        }
-    }
-}
-
 fun LocalDateTime.relativeTime(context: Context): String {
     try {
         val now = Clock.System.now()
@@ -191,7 +120,7 @@ fun LocalDateTime.relativeTime(context: Context): String {
                 }
             }.format(this)
         }
-    } catch (e: IllegalArgumentException) {
+    } catch (_: IllegalArgumentException) {
         return context.getString(R.string.invalid_date)
     }
 }
@@ -211,14 +140,6 @@ fun resetListItemColorsCached() {
     transparentListItemColorsCached = null
 }
 
-/**
- * The default ListItem colors, but with [ListItemColors.containerColor] set to [Color.Transparent].
- */
-val transparentListItemColors
-    @Composable get() = transparentListItemColorsCached
-        ?: ListItemDefaults.colors(containerColor = Color.Transparent)
-            .also { transparentListItemColorsCached = it }
-
 @Composable
 fun <T> EventEffect(flow: Flow<T>, vararg keys: Any?, state: Lifecycle.State = Lifecycle.State.STARTED, block: suspend (T) -> Unit) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -233,74 +154,12 @@ fun <T> EventEffect(flow: Flow<T>, vararg keys: Any?, state: Lifecycle.State = L
     }
 }
 
-const val isScrollingUpSensitivity = 10
-
-@Composable
-fun LazyListState.isScrollingUp(): State<Boolean> {
-    return remember(this) {
-        var previousIndex by mutableIntStateOf(firstVisibleItemIndex)
-        var previousScrollOffset by mutableIntStateOf(firstVisibleItemScrollOffset)
-
-        derivedStateOf {
-            val indexChanged = previousIndex != firstVisibleItemIndex
-            val offsetChanged =
-                kotlin.math.abs(previousScrollOffset - firstVisibleItemScrollOffset) > isScrollingUpSensitivity
-
-            if (indexChanged) {
-                previousIndex > firstVisibleItemIndex
-            } else if (offsetChanged) {
-                previousScrollOffset > firstVisibleItemScrollOffset
-            } else {
-                true
-            }.also {
-                previousIndex = firstVisibleItemIndex
-                previousScrollOffset = firstVisibleItemScrollOffset
-            }
-        }
-    }
-}
-
-// TODO: support sensitivity
-@Composable
-fun ScrollState.isScrollingUp(): State<Boolean> {
-    return remember(this) {
-        var previousScrollOffset by mutableIntStateOf(value)
-        derivedStateOf {
-            (previousScrollOffset >= value).also {
-                previousScrollOffset = value
-            }
-        }
-    }
-}
-
-val LazyListState.isScrollingUp: Boolean @Composable get() = this.isScrollingUp().value
-val ScrollState.isScrollingUp: Boolean @Composable get() = this.isScrollingUp().value
-
-@Composable
-@ReadOnlyComposable
-fun <R> (() -> R).withHapticFeedback(constant: Int): () -> R {
-    val view = LocalView.current
-    return {
-        view.performHapticFeedback(constant)
-        this()
-    }
-}
-
-@Composable
-@ReadOnlyComposable
-fun <T, R> ((T) -> R).withHapticFeedback(constant: Int): (T) -> R {
-    val view = LocalView.current
-    return {
-        view.performHapticFeedback(constant)
-        this(it)
-    }
-}
-
 /**
  * Supports bold and italic html tags. Can be improved as needed to support more html functions.
  */
 fun htmlAnnotatedString(html: String): AnnotatedString {
-    val spanned = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+    val prepared = html.replace("\n", "<br>")
+    val spanned = Html.fromHtml(prepared, Html.FROM_HTML_MODE_LEGACY)
 
     return buildAnnotatedString {
         append(spanned.toString())

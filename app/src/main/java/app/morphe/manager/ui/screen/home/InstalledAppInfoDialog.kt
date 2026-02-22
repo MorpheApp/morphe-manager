@@ -470,6 +470,7 @@ private fun WarningBanner(
         ) {
             // Header with icon
             Row(
+                modifier = Modifier.wrapContentWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -483,7 +484,8 @@ private fun WarningBanner(
                     text = title,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
-                    color = contentColor
+                    color = contentColor,
+                    textAlign = TextAlign.Center
                 )
             }
 
