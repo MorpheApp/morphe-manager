@@ -679,6 +679,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="saved">Saved</string>
     <string name="update">Update</string>
     <string name="allow">Allow</string>
+    <string name="details">Details</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
