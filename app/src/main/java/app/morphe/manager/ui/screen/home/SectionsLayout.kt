@@ -26,7 +26,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -73,7 +72,7 @@ fun SectionsLayout(
     onTogglePin: (String) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
-    hiddenPackages: Set<String> = emptySet(),
+    hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
 
     // Other apps button
@@ -111,7 +110,7 @@ fun SectionsLayout(
                     onTogglePin = onTogglePin,
                     onHideApp = onHideApp,
                     onUnhideApp = onUnhideApp,
-                    hiddenPackages = hiddenPackages,
+                    hiddenAppItems = hiddenAppItems,
                     installedAppsLoading = installedAppsLoading,
                     onOtherAppsClick = onOtherAppsClick,
                     showOtherAppsButton = showOtherAppsButton
@@ -154,7 +153,7 @@ private fun AdaptiveContent(
     onTogglePin: (String) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
-    hiddenPackages: Set<String> = emptySet(),
+    hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
     showOtherAppsButton: Boolean = true
@@ -202,7 +201,7 @@ private fun AdaptiveContent(
                         onTogglePin = onTogglePin,
                         onHideApp = onHideApp,
                         onUnhideApp = onUnhideApp,
-                        hiddenPackages = hiddenPackages,
+                        hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
                         modifier = Modifier.weight(1f)
                     )
@@ -239,7 +238,7 @@ private fun AdaptiveContent(
                         onTogglePin = onTogglePin,
                         onHideApp = onHideApp,
                         onUnhideApp = onUnhideApp,
-                        hiddenPackages = hiddenPackages,
+                        hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -578,17 +577,24 @@ fun MainAppsSection(
     onTogglePin: (String) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
-    hiddenPackages: Set<String> = emptySet(),
+    hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
-    // Stable loading state with debounce to prevent flickering
-    // Show shimmer when explicitly loading OR when items are empty (cold start - bundles not yet loaded)
-    var stableLoadingState by remember { mutableStateOf(installedAppsLoading || homeAppItems.isEmpty()) }
+    // Track if data was ever loaded — once true, never show shimmer again on resume
+    var hasEverLoaded by remember { mutableStateOf(homeAppItems.isNotEmpty()) }
+
+    // Stable loading state with debounce to prevent flickering.
+    // Only shows shimmer on genuine cold start (data never arrived), not on app resume.
+    var stableLoadingState by remember { mutableStateOf(!hasEverLoaded) }
 
     LaunchedEffect(installedAppsLoading, homeAppItems.isEmpty()) {
-        val shouldLoad = installedAppsLoading || homeAppItems.isEmpty()
+        if (homeAppItems.isNotEmpty()) {
+            hasEverLoaded = true
+        }
+        // Once hasEverLoaded is true, never re-trigger shimmer regardless of list state
+        val shouldLoad = !hasEverLoaded || installedAppsLoading
         if (shouldLoad) {
             stableLoadingState = true
         } else {
@@ -605,7 +611,7 @@ fun MainAppsSection(
 
     if (showHiddenAppsDialog) {
         HiddenAppsDialog(
-            hiddenPackages = hiddenPackages,
+            hiddenAppItems = hiddenAppItems,
             onUnhide = onUnhideApp,
             onDismiss = { showHiddenAppsDialog = false }
         )
@@ -680,7 +686,7 @@ fun MainAppsSection(
                 }
 
                 // "Show hidden apps" button if there are hidden apps
-                if (hiddenPackages.isNotEmpty()) {
+                if (hiddenAppItems.isNotEmpty()) {
                     item(key = "show_hidden") {
                         TextButton(
                             onClick = { showHiddenAppsDialog = true },
@@ -733,6 +739,7 @@ private fun DynamicAppCard(
                     InstalledAppCard(
                         installedApp = item.installedApp,
                         packageInfo = item.packageInfo,
+                        displayName = item.displayName,
                         gradientColors = item.gradientColors,
                         onClick = { onInstalledAppClick(item.installedApp) },
                         hasUpdate = hasUpdate,
@@ -742,6 +749,8 @@ private fun DynamicAppCard(
                 } else {
                     AppButton(
                         packageName = item.packageName,
+                        displayName = item.displayName,
+                        packageInfo = item.packageInfo,
                         gradientColors = item.gradientColors,
                         onClick = onAppClick,
                         onLongClick = { showContextMenu = true }
@@ -795,6 +804,8 @@ internal fun MorpheContextMenu(
         title = item.displayName,
         titleGradientColors = item.gradientColors,
         titleIconPackageName = item.packageName,
+        titleIconPackageInfo = item.packageInfo,
+        titleIconDisplayName = item.displayName,
         onDismiss = onDismiss,
         items = listOf(
             BottomSheetMenuItem(
@@ -820,7 +831,7 @@ internal fun MorpheContextMenu(
  */
 @Composable
 internal fun HiddenAppsDialog(
-    hiddenPackages: Set<String>,
+    hiddenAppItems: List<HomeAppItem>,
     onUnhide: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -836,7 +847,7 @@ internal fun HiddenAppsDialog(
             )
         }
     ) {
-        if (hiddenPackages.isEmpty()) {
+        if (hiddenAppItems.isEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -859,10 +870,12 @@ internal fun HiddenAppsDialog(
                 )
 
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    hiddenPackages.forEach { packageName ->
+                    hiddenAppItems.forEach { item ->
                         HiddenAppRow(
-                            packageName = packageName,
-                            onUnhide = { onUnhide(packageName) }
+                            packageName = item.packageName,
+                            displayName = item.displayName,
+                            packageInfo = item.packageInfo,
+                            onUnhide = { onUnhide(item.packageName) }
                         )
                     }
                 }
@@ -877,6 +890,8 @@ internal fun HiddenAppsDialog(
 @Composable
 private fun HiddenAppRow(
     packageName: String,
+    displayName: String?,
+    packageInfo: PackageInfo?,
     onUnhide: () -> Unit
 ) {
     val view = LocalView.current
@@ -912,7 +927,8 @@ private fun HiddenAppRow(
         ) {
             // App icon
             AppIcon(
-                packageName = packageName,
+                packageInfo = packageInfo,
+                packageName = if (packageInfo == null) packageName else null,
                 contentDescription = null,
                 modifier = Modifier
                     .size(40.dp)
@@ -921,15 +937,13 @@ private fun HiddenAppRow(
             )
 
             // App name
-            AppLabel(
-                packageName = packageName,
+            Text(
+                text = displayName ?: packageName,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.SemiBold,
                     color = textColor
                 ),
                 modifier = Modifier.weight(1f),
-                defaultText = null,
-                preferredSource = AppDataSource.PATCHED_APK,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -951,6 +965,7 @@ private fun HiddenAppRow(
 fun InstalledAppCard(
     installedApp: InstalledApp,
     packageInfo: PackageInfo?,
+    displayName: String,
     gradientColors: List<Color>,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -958,7 +973,6 @@ fun InstalledAppCard(
     isAppDeleted: Boolean = false,
     onLongClick: (() -> Unit)? = null
 ) {
-    val context = LocalContext.current
     val textColor = Color.White
 
     val versionLabel = stringResource(R.string.version)
@@ -968,19 +982,14 @@ fun InstalledAppCard(
 
     val showBadge = hasUpdate
 
-    val appName = remember(packageInfo, installedApp) {
-        packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
-            ?: AppPackages.getAppName(context, installedApp.originalPackageName)
-    }
-
     val version = remember(packageInfo, installedApp, isAppDeleted) {
         val raw = packageInfo?.versionName ?: installedApp.version
         if (raw.startsWith("v")) raw else "v$raw"
     }
 
-    val contentDesc = remember(appName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel, isAppDeleted, deletedLabel) {
+    val contentDesc = remember(displayName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel, isAppDeleted, deletedLabel) {
         buildString {
-            append(appName)
+            append(displayName)
             if (version.isNotEmpty()) {
                 append(", $versionLabel $version")
             }
@@ -1016,7 +1025,7 @@ fun InstalledAppCard(
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 // App name
                 Text(
-                    text = appName,
+                    text = displayName,
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
                         shadow = Shadow(
@@ -1121,6 +1130,8 @@ private fun UpdateBadge(
 @Composable
 fun AppButton(
     packageName: String,
+    displayName: String,
+    packageInfo: PackageInfo?,
     gradientColors: List<Color>,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -1134,9 +1145,9 @@ fun AppButton(
     val disabledText = stringResource(R.string.disabled)
 
     // Build content description for accessibility
-    val contentDesc = remember(packageName, notPatchedText, disabledText, enabled) {
+    val contentDesc = remember(displayName, notPatchedText, disabledText, enabled) {
         buildString {
-            append(packageName)
+            append(displayName)
             append(", ")
             append(notPatchedText)
             if (!enabled) {
@@ -1159,9 +1170,11 @@ fun AppButton(
             }
         }
     ) {
-        // App icon resolved via AppDataResolver
+        // App icon — uses pre-resolved packageInfo, no IO on render.
+        // preferredSource is used only as fallback when packageInfo is null.
         AppIcon(
-            packageName = packageName,
+            packageInfo = packageInfo,
+            packageName = if (packageInfo == null) packageName else null,
             contentDescription = null,
             modifier = Modifier
                 .size(48.dp)
@@ -1174,9 +1187,9 @@ fun AppButton(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            // Display name resolved via AppDataResolver: patched APK → original APK → installed → constants
-            AppLabel(
-                packageName = packageName,
+            // Display name — uses pre-resolved value from HomeAppItem, no shimmer
+            Text(
+                text = displayName,
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = finalTextColor,
@@ -1186,9 +1199,6 @@ fun AppButton(
                         blurRadius = 4f
                     )
                 ),
-                modifier = Modifier,
-                defaultText = null,
-                preferredSource = AppDataSource.PATCHED_APK,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

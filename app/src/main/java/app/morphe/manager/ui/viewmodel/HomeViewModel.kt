@@ -429,6 +429,32 @@ class HomeViewModel(
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 
     /**
+     * Hidden app items with resolved display names and package info.
+     */
+    val hiddenAppItems: StateFlow<List<HomeAppItem>> = filteredHiddenPackages
+        .map { hiddenPackages ->
+            hiddenPackages.map { packageName ->
+                val resolvedData = appDataResolver.resolveAppData(
+                    packageName = packageName,
+                    preferredSource = AppDataSource.PATCHED_APK
+                )
+                HomeAppItem(
+                    packageName = packageName,
+                    displayName = resolvedData.displayName,
+                    gradientColors = AppPackages.getGradientColors(packageName),
+                    installedApp = null,
+                    packageInfo = resolvedData.packageInfo,
+                    isPinned = false,
+                    isDeleted = false,
+                    hasUpdate = false,
+                    patchCount = 0
+                )
+            }
+        }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /**
      * Combined flow that produces the sorted list of home app items.
      *
      * Sorting order:
@@ -452,20 +478,12 @@ class HomeViewModel(
                 val gradientColors = AppPackages.getGradientColors(packageName)
                 val isPinned = packageName in pinned
 
-                // Determine package info - tries installed (currentPackageName) first,
-                // then falls back to saved patched APK file on disk
-                val pkgInfo = installedApp?.let { loadDisplayPackageInfo(it) }
-
-                // Display name priority:
-                // 1. Real label from patched/installed PackageInfo (reflects actual patched app name)
-                // 2. Hardcoded constants (YouTube, YouTube Music, Reddit, etc.)
-                // 3. Raw package name as last resort
-                val displayName = pkgInfo
-                    ?.applicationInfo
-                    ?.loadLabel(app.packageManager)
-                    ?.toString()
-                    ?.takeIf { it.isNotBlank() && it != packageName }
-                    ?: AppPackages.getAppName(app, packageName)
+                // Use AppDataResolver as single source of truth for display data.
+                // Priority: PATCHED_APK → ORIGINAL_APK → INSTALLED → CONSTANTS
+                val resolvedData = appDataResolver.resolveAppData(
+                    packageName = packageName,
+                    preferredSource = AppDataSource.PATCHED_APK
+                )
 
                 // Determine deleted status
                 val isDeleted = installedApp?.let { installed ->
@@ -487,14 +505,14 @@ class HomeViewModel(
 
                 HomeAppItem(
                     packageName = packageName,
-                    displayName = displayName,
+                    displayName = resolvedData.displayName,
                     gradientColors = gradientColors,
                     installedApp = installedApp,
-                    packageInfo = pkgInfo,
+                    packageInfo = resolvedData.packageInfo,
                     isPinned = isPinned,
                     isDeleted = isDeleted,
                     hasUpdate = hasUpdate,
-                    patchCount = 0 // Could be computed if needed
+                    patchCount = 0
                 )
             }
             .sortedWith(
@@ -563,25 +581,6 @@ class HomeViewModel(
                 wasInstalledOnDevice = app.installType != InstallType.SAVED
             )
         }
-    }
-
-    /**
-     * Load package info for display.
-     */
-    private fun loadDisplayPackageInfo(installedApp: InstalledApp?): PackageInfo? {
-        installedApp ?: return null
-
-        return pm.getPackageInfo(installedApp.currentPackageName)
-            ?: run {
-                val candidates = listOf(
-                    filesystem.getPatchedAppFile(installedApp.currentPackageName, installedApp.version),
-                    filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
-                ).distinctBy { it.absolutePath }
-
-                candidates.firstOrNull { it.exists() }?.let { file ->
-                    pm.getPackageInfo(file)
-                }
-            }
     }
 
     /**

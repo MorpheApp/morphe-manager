@@ -85,7 +85,7 @@ fun HomeScreen(
     val homeAppItems by homeViewModel.homeAppItems.collectAsStateWithLifecycle()
 
     // Hidden packages filtered to only active-bundle packages (reactive)
-    val hiddenPackages by homeViewModel.filteredHiddenPackages.collectAsStateWithLifecycle()
+    val hiddenAppItems by homeViewModel.hiddenAppItems.collectAsStateWithLifecycle()
 
     val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
     if (!isDeviceRooted) {
@@ -303,7 +303,7 @@ fun HomeScreen(
                 onTogglePin = { packageName -> homeViewModel.toggleAppPin(packageName) },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
-                hiddenPackages = hiddenPackages,
+                hiddenAppItems = hiddenAppItems,
                 installedAppsLoading = homeViewModel.installedAppsLoading,
 
                 // Other apps button

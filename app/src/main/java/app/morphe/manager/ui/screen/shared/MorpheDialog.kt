@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -280,6 +281,8 @@ fun MorpheBottomSheetMenu(
     title: String? = null,
     titleGradientColors: List<Color> = emptyList(),
     titleIconPackageName: String? = null,
+    titleIconPackageInfo: PackageInfo? = null,
+    titleIconDisplayName: String? = null,
     dimAmount: Float = 0.4f
 ) {
     var visible by remember { mutableStateOf(false) }
@@ -340,9 +343,11 @@ fun MorpheBottomSheetMenu(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 when {
+                                    // Use pre-resolved packageInfo if available, fall back to packageName
                                     titleIconPackageName != null -> {
                                         AppIcon(
-                                            packageName = titleIconPackageName,
+                                            packageInfo = titleIconPackageInfo,
+                                            packageName = if (titleIconPackageInfo == null) titleIconPackageName else null,
                                             contentDescription = null,
                                             modifier = Modifier
                                                 .size(32.dp)
@@ -359,20 +364,33 @@ fun MorpheBottomSheetMenu(
                                         )
                                     }
                                 }
-                                // If we have a package name, resolve the real app name
+                                // Use pre-resolved displayName if available, otherwise fall back to AppLabel
                                 if (titleIconPackageName != null) {
-                                    AppLabel(
-                                        packageName = titleIconPackageName,
-                                        style = MaterialTheme.typography.titleMedium.copy(
-                                            fontWeight = FontWeight.Bold,
-                                            color = MaterialTheme.colorScheme.onSurface
-                                        ),
-                                        modifier = Modifier.weight(1f),
-                                        defaultText = title, // fallback to the passed title string
-                                        preferredSource = AppDataSource.PATCHED_APK,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
-                                    )
+                                    if (titleIconDisplayName != null) {
+                                        Text(
+                                            text = titleIconDisplayName,
+                                            style = MaterialTheme.typography.titleMedium.copy(
+                                                fontWeight = FontWeight.Bold,
+                                                color = MaterialTheme.colorScheme.onSurface
+                                            ),
+                                            modifier = Modifier.weight(1f),
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis
+                                        )
+                                    } else {
+                                        AppLabel(
+                                            packageName = titleIconPackageName,
+                                            style = MaterialTheme.typography.titleMedium.copy(
+                                                fontWeight = FontWeight.Bold,
+                                                color = MaterialTheme.colorScheme.onSurface
+                                            ),
+                                            modifier = Modifier.weight(1f),
+                                            defaultText = title,
+                                            preferredSource = AppDataSource.PATCHED_APK,
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis
+                                        )
+                                    }
                                 } else {
                                     Text(
                                         text = title,
