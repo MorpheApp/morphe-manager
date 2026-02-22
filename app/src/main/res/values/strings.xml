@@ -56,8 +56,6 @@
     <string name="sources_management_title">Patch sources</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
-    <string name="sources_management_date_added">Added</string>
-    <string name="sources_management_date_updated">Updated</string>
 
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
@@ -332,7 +330,7 @@ Are you sure you want to proceed?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accent color</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
-    <string name="settings_appearance_pure_black_description">Use true black backgrounds for OLED displays</string>
+    <string name="settings_appearance_pure_black_description">Use true black backgrounds</string>
 
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App language</string>
@@ -398,7 +396,7 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_github_pat_configured">Token configured</string>
     <string name="settings_advanced_github_pat_how_to_get">How to get a token</string>
     <string name="settings_advanced_github_pat_dialog_title">Set GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add Pull Requests as external sources. Create a PAT with scope public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add pull requests as external sources. Create a PAT with scope public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Include in settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported manager settings</string>
     <string name="settings_advanced_github_pat_export_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token</string>
@@ -564,7 +562,7 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Export debug logs</string>
-    <string name="settings_system_export_debug_logs_description">Export system logs for troubleshooting</string>
+    <string name="settings_system_export_debug_logs_description">Save system logs for troubleshooting</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Failed to export logs</string>
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>

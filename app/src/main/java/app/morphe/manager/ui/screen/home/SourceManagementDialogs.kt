@@ -257,7 +257,8 @@ fun BundleDeleteConfirmDialog(
                 bundle.displayTitle
             ),
             style = MaterialTheme.typography.bodyLarge,
-            color = secondaryColor
+            color = secondaryColor,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -302,7 +303,7 @@ fun RenameBundleDialog(
         ) {
             Text(
                 text = stringResource(R.string.sources_dialog_rename),
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center
             )

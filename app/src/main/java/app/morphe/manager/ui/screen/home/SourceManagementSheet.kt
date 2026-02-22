@@ -476,15 +476,40 @@ private fun BundleCardHeader(
             modifier = Modifier.size(44.dp)
         )
 
-        // Title + badges
+        // Title + badges + rename button
         Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = bundle.displayTitle,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = bundle.displayTitle,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
+                )
+
+                // Rename button (only for non-default bundles)
+                AnimatedVisibility(
+                    visible = expanded && !bundle.isDefault,
+                    enter = fadeIn() + expandHorizontally(),
+                    exit = fadeOut() + shrinkHorizontally()
+                ) {
+                    IconButton(
+                        onClick = onRename,
+                        modifier = Modifier.size(24.dp)
+                    ) {
+                        Icon(
+                            Icons.Outlined.Edit,
+                            contentDescription = stringResource(R.string.rename),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
 
             // Version
             if (showChevron) {
@@ -549,17 +574,6 @@ private fun BundleCardHeader(
                         isCompact = true
                     )
                 }
-            }
-        }
-
-        // Rename button (only for non-default bundles)
-        if (!bundle.isDefault) {
-            IconButton(onClick = onRename) {
-                Icon(
-                    Icons.Outlined.Edit,
-                    contentDescription = stringResource(R.string.rename),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
         }
 
