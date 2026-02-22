@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.viewmodel
 
 import android.annotation.SuppressLint
@@ -25,6 +30,7 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -32,6 +38,7 @@ import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.split.SplitApkPreparer
+import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
@@ -41,8 +48,7 @@ import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.net.HttpURLConnection
@@ -53,7 +59,7 @@ import java.util.zip.ZipInputStream
 import javax.net.ssl.SSLException
 
 /**
- * Bundle update status for snackbar display
+ * Bundle update status for snackbar display.
  */
 enum class BundleUpdateStatus {
     Updating,    // Update in progress
@@ -62,7 +68,7 @@ enum class BundleUpdateStatus {
 }
 
 /**
- * Dialog state for unsupported version warning
+ * Dialog state for unsupported version warning.
  */
 data class UnsupportedVersionDialogState(
     val packageName: String,
@@ -72,7 +78,7 @@ data class UnsupportedVersionDialogState(
 )
 
 /**
- * Dialog state for wrong package warning
+ * Dialog state for wrong package warning.
  */
 data class WrongPackageDialogState(
     val expectedPackage: String,
@@ -80,7 +86,7 @@ data class WrongPackageDialogState(
 )
 
 /**
- * Quick patch parameters
+ * Quick patch parameters.
  */
 data class QuickPatchParams(
     val selectedApp: SelectedApp,
@@ -89,7 +95,7 @@ data class QuickPatchParams(
 )
 
 /**
- * Saved APK information for display in APK selection dialog
+ * Saved APK information for display in APK selection dialog.
  */
 data class SavedApkInfo(
     val fileName: String,
@@ -98,8 +104,8 @@ data class SavedApkInfo(
 )
 
 /**
- * Combined ViewModel for Home and Dashboard functionality
- * Manages all dialogs, user interactions, APK processing, and bundle management
+ * Combined ViewModel for Home and Dashboard functionality.
+ * Manages all dialogs, user interactions, APK processing, and bundle management.
  */
 class HomeViewModel(
     private val app: Application,
@@ -113,7 +119,8 @@ class HomeViewModel(
     val prefs: PreferencesManager,
     private val pm: PM,
     val rootInstaller: RootInstaller,
-    private val filesystem: Filesystem
+    private val filesystem: Filesystem,
+    val homeAppButtonPrefs: HomeAppButtonPreferences
 ) : ViewModel() {
 
     val availablePatches =
@@ -127,7 +134,7 @@ class HomeViewModel(
     }
 
     /**
-     * Android 11 kills the app process after granting the "install apps" permission
+     * Android 11 kills the app process after granting the "install apps" permission.
      */
     val android11BugActive get() = Build.VERSION.SDK_INT == Build.VERSION_CODES.R && !pm.canInstallPackages()
 
@@ -184,19 +191,11 @@ class HomeViewModel(
         private set
 
     // Track available updates for installed apps
-    var appUpdatesAvailable by mutableStateOf<Map<String, Boolean>>(emptyMap())
-        private set
+    private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
+    val appUpdatesAvailable: StateFlow<Map<String, Boolean>> = _appUpdatesAvailable.asStateFlow()
 
     // Track deleted apps
     var appsDeletedStatus by mutableStateOf<Map<String, Boolean>>(emptyMap())
-        private set
-
-    // Package info for display
-    var youtubePackageInfo by mutableStateOf<PackageInfo?>(null)
-        private set
-    var youtubeMusicPackageInfo by mutableStateOf<PackageInfo?>(null)
-        private set
-    var redditPackageInfo by mutableStateOf<PackageInfo?>(null)
         private set
 
     // Using mount install (set externally)
@@ -265,14 +264,14 @@ class HomeViewModel(
     }
 
     /**
-     * Check for bundle updates for installed apps
+     * Check for bundle updates for installed apps.
      */
     suspend fun checkInstalledAppsForUpdates(
         installedApps: List<InstalledApp>,
         currentBundleVersion: String?
     ) = withContext(Dispatchers.IO) {
         if (currentBundleVersion == null) {
-            appUpdatesAvailable = emptyMap()
+            _appUpdatesAvailable.value = emptyMap()
             return@withContext
         }
 
@@ -296,7 +295,7 @@ class HomeViewModel(
             updates[app.currentPackageName] = hasUpdate
         }
 
-        appUpdatesAvailable = updates
+        _appUpdatesAvailable.value = updates
     }
 
     @SuppressLint("ShowToast")
@@ -395,15 +394,141 @@ class HomeViewModel(
         apiBundle?.clearChangelogCache()
     }
 
-    // Main app packages that use default bundle only
-    private val mainAppPackages = setOf(
-        AppPackages.YOUTUBE,
-        AppPackages.YOUTUBE_MUSIC,
-        AppPackages.REDDIT
-    )
+    /**
+     * Set of all unique package names that have patches across all enabled bundles.
+     * Derived reactively from bundleInfoFlow.
+     */
+    val patchablePackagesFlow: StateFlow<Set<String>> =
+        patchBundleRepository.bundleInfoFlow
+            .map { bundleInfoMap ->
+                bundleInfoMap.values.flatMap { bundleInfo ->
+                    (bundleInfo as? PatchBundleInfo)?.patches?.flatMap { patch ->
+                        patch.compatiblePackages?.map { it.packageName } ?: emptyList()
+                    } ?: emptyList()
+                }.toSet()
+            }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 
     /**
-     * Update bundle data when sources or bundle info changes
+     * Hidden packages filtered to only those present in currently active bundles.
+     * When a bundle is disabled/removed, its packages disappear from this flow automatically.
+     */
+    val filteredHiddenPackages: StateFlow<Set<String>> = combine(
+        homeAppButtonPrefs.hiddenPackages,
+        patchablePackagesFlow
+    ) { hidden, active ->
+        hidden.filter { it in active }.toSet()
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
+
+    /**
+     * Hidden app items with resolved display names and package info.
+     */
+    val hiddenAppItems: StateFlow<List<HomeAppItem>> = filteredHiddenPackages
+        .map { hiddenPackages ->
+            hiddenPackages.map { packageName ->
+                val resolvedData = appDataResolver.resolveAppData(
+                    packageName = packageName,
+                    preferredSource = AppDataSource.PATCHED_APK
+                )
+                HomeAppItem(
+                    packageName = packageName,
+                    displayName = resolvedData.displayName,
+                    gradientColors = AppPackages.getGradientColors(packageName),
+                    installedApp = null,
+                    packageInfo = resolvedData.packageInfo,
+                    isPinnedByDefault = KnownApp.fromPackage(packageName)?.isPinnedByDefault == true,
+                    isDeleted = false,
+                    hasUpdate = false,
+                    patchCount = 0
+                )
+            }
+        }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /**
+     * Combined flow that produces the sorted list of home app items.
+     *
+     * Sorting order by display name:
+     * 1. Patched (installed) apps first
+     * 2. Non-patched apps
+     * Hidden apps are excluded.
+     */
+    val homeAppItems: StateFlow<List<HomeAppItem>> = combine(
+        patchablePackagesFlow,
+        homeAppButtonPrefs.hiddenPackages,
+        installedAppRepository.getAll(),
+        _appUpdatesAvailable
+    ) { packages, hidden, installedApps, updatesMap ->
+        val installedMap = installedApps.associateBy { it.originalPackageName }
+
+        packages
+            .filter { it !in hidden }
+            .map { packageName ->
+                val installedApp = installedMap[packageName]
+                val gradientColors = AppPackages.getGradientColors(packageName)
+
+                // Priority: PATCHED_APK → ORIGINAL_APK → INSTALLED → CONSTANTS
+                val resolvedData = appDataResolver.resolveAppData(
+                    packageName = packageName,
+                    preferredSource = AppDataSource.PATCHED_APK
+                )
+
+                // Determine deleted status
+                val isDeleted = installedApp?.let { installed ->
+                    val hasSavedCopy = listOf(
+                        filesystem.getPatchedAppFile(installed.currentPackageName, installed.version),
+                        filesystem.getPatchedAppFile(installed.originalPackageName, installed.version)
+                    ).distinctBy { it.absolutePath }.any { it.exists() }
+                    pm.isAppDeleted(
+                        packageName = installed.currentPackageName,
+                        hasSavedCopy = hasSavedCopy,
+                        wasInstalledOnDevice = installed.installType != InstallType.SAVED
+                    )
+                } == true
+
+                // Determine update status
+                val hasUpdate = installedApp?.let {
+                    updatesMap[it.currentPackageName] == true
+                } == true
+
+                HomeAppItem(
+                    packageName = packageName,
+                    displayName = resolvedData.displayName,
+                    gradientColors = gradientColors,
+                    installedApp = installedApp,
+                    packageInfo = resolvedData.packageInfo,
+                    isPinnedByDefault = KnownApp.fromPackage(packageName)?.isPinnedByDefault == true,
+                    isDeleted = isDeleted,
+                    hasUpdate = hasUpdate,
+                    patchCount = 0
+                )
+            }
+            .sortedWith(
+                compareByDescending<HomeAppItem> { it.installedApp != null }
+                    .thenByDescending { it.isPinnedByDefault }
+                    .thenBy { it.displayName }
+            )
+    }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /**
+     * Hide an app from the home screen.
+     */
+    fun hideApp(packageName: String) {
+        homeAppButtonPrefs.hide(packageName)
+    }
+
+    /**
+     * Unhide an app on the home screen.
+     */
+    fun unhideApp(packageName: String) {
+        homeAppButtonPrefs.unhide(packageName)
+    }
+
+    /**
+     * Update bundle data when sources or bundle info changes.
      */
     fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) {
         // Get set of enabled bundle UIDs
@@ -417,14 +542,14 @@ class HomeViewModel(
     }
 
     /**
-     * Update loading state
+     * Update loading state.
      */
     fun updateLoadingState(bundleUpdateInProgress: Boolean, hasInstalledApps: Boolean) {
         installedAppsLoading = bundleUpdateInProgress || !hasInstalledApps
     }
 
     /**
-     * Update deleted apps status
+     * Update deleted apps status.
      */
     fun updateDeletedAppsStatus(installedApps: List<InstalledApp>) {
         appsDeletedStatus = installedApps.associate { app ->
@@ -442,48 +567,7 @@ class HomeViewModel(
     }
 
     /**
-     * Update installed apps info
-     */
-    fun updateInstalledAppsInfo(
-        youtubeApp: InstalledApp?,
-        youtubeMusicApp: InstalledApp?,
-        redditApp: InstalledApp?,
-        allInstalledApps: List<InstalledApp>
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        // Load package info in parallel
-        val youtubeJob = async { loadDisplayPackageInfo(youtubeApp) }
-        val musicJob = async { loadDisplayPackageInfo(youtubeMusicApp) }
-        val redditJob = async { loadDisplayPackageInfo(redditApp) }
-
-        youtubePackageInfo = youtubeJob.await()
-        youtubeMusicPackageInfo = musicJob.await()
-        redditPackageInfo = redditJob.await()
-
-        // Update deleted status
-        updateDeletedAppsStatus(allInstalledApps)
-    }
-
-    /**
-     * Load package info for display
-     */
-    private fun loadDisplayPackageInfo(installedApp: InstalledApp?): PackageInfo? {
-        installedApp ?: return null
-
-        return pm.getPackageInfo(installedApp.currentPackageName)
-            ?: run {
-                val candidates = listOf(
-                    filesystem.getPatchedAppFile(installedApp.currentPackageName, installedApp.version),
-                    filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
-                ).distinctBy { it.absolutePath }
-
-                candidates.firstOrNull { it.exists() }?.let { file ->
-                    pm.getPackageInfo(file)
-                }
-            }
-    }
-
-    /**
-     * Handle app button click
+     * Handle app button click.
      */
     fun handleAppClick(
         packageName: String,
@@ -513,7 +597,7 @@ class HomeViewModel(
     }
 
     /**
-     * Show patch dialog
+     * Show patch dialog.
      *
      * Dialog logic:
      * - SHOW dialog when:
@@ -558,7 +642,7 @@ class HomeViewModel(
     }
 
     /**
-     * Load information about saved original APK for a package
+     * Load information about saved original APK for a package.
      */
     private suspend fun loadSavedApkInfo(packageName: String): SavedApkInfo? {
         try {
@@ -588,7 +672,7 @@ class HomeViewModel(
     }
 
     /**
-     * Handle APK file selection
+     * Handle APK file selection.
      */
     fun handleApkSelection(uri: Uri?) {
         if (uri == null) {
@@ -610,7 +694,7 @@ class HomeViewModel(
     }
 
     /**
-     * Handle selection of saved APK from APK availability dialog
+     * Handle selection of saved APK from APK availability dialog.
      */
     fun handleSavedApkSelection() {
         val savedInfo = pendingSavedApkInfo
@@ -658,7 +742,7 @@ class HomeViewModel(
     }
 
     /**
-     * Process selected APK file
+     * Process selected APK file.
      */
     private suspend fun processSelectedApp(selectedApp: SelectedApp) {
         // Validate package name if expected
@@ -727,7 +811,7 @@ class HomeViewModel(
     }
 
     /**
-     * Start patching flow
+     * Start patching flow.
      */
     suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
@@ -820,7 +904,7 @@ class HomeViewModel(
             showExpertModeDialog = true
         } else {
             // Simple Mode: check if this is a main app or "other app"
-            val isMainApp = selectedApp.packageName in mainAppPackages
+            val isMainApp = AppPackages.isKnown(selectedApp.packageName)
 
             if (isMainApp) {
                 // For main apps: use only default bundle
@@ -875,7 +959,7 @@ class HomeViewModel(
     }
 
     /**
-     * Save options to repository
+     * Save options to repository.
      */
     fun saveOptions(packageName: String, options: Options) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -884,7 +968,7 @@ class HomeViewModel(
     }
 
     /**
-     * Proceed with patching
+     * Proceed with patching.
      */
     fun proceedWithPatching(
         selectedApp: SelectedApp,
@@ -918,7 +1002,7 @@ class HomeViewModel(
     }
 
     /**
-     * Update option in expert mode
+     * Update option in expert mode.
      */
     fun updateOptionInExpertMode(
         bundleUid: Int,
@@ -930,14 +1014,14 @@ class HomeViewModel(
     }
 
     /**
-     * Reset options for a patch in expert mode
+     * Reset options for a patch in expert mode.
      */
     fun resetOptionsInExpertMode(bundleUid: Int, patchName: String) {
         expertModeOptions = expertModeOptions.resetOptionsForPatch(bundleUid, patchName)
     }
 
     /**
-     * Clean up expert mode data
+     * Clean up expert mode data.
      */
     fun cleanupExpertModeData() {
         showExpertModeDialog = false
@@ -948,7 +1032,7 @@ class HomeViewModel(
     }
 
     /**
-     * Resolve download redirect
+     * Resolve download redirect.
      */
     fun resolveDownloadRedirect() {
         fun resolveUrlRedirect(url: String): String {
@@ -1018,7 +1102,7 @@ class HomeViewModel(
     }
 
     fun getApiOfflineWebSearchUrl(): String {
-        val architecture = if (pendingPackageName == AppPackages.YOUTUBE_MUSIC) {
+        val architecture = if (pendingPackageName == KnownApp.YOUTUBE_MUSIC) {
             " (${Build.SUPPORTED_ABIS.first()})"
         } else {
             "nodpi"
@@ -1033,7 +1117,7 @@ class HomeViewModel(
     }
 
     /**
-     * Handle download instructions continue
+     * Handle download instructions continue.
      */
     fun handleDownloadInstructionsContinue(onOpenUrl: (String) -> Boolean) {
         val urlToOpen = resolvedDownloadUrl!!
@@ -1050,7 +1134,7 @@ class HomeViewModel(
     }
 
     /**
-     * Clean up pending data
+     * Clean up pending data.
      */
     fun cleanupPendingData(keepSelectedApp: Boolean = false) {
         pendingPackageName = null
@@ -1072,8 +1156,8 @@ class HomeViewModel(
     }
 
     /**
-     * Extract compatible versions for each package from bundle info
-     * Returns a map of package name to sorted list of versions (newest first)
+     * Extract compatible versions for each package from bundle info.
+     * Returns a map of package name to sorted list of versions (newest first).
      */
     private fun extractCompatibleVersions(
         bundleInfo: Map<Int, Any>,
@@ -1122,8 +1206,8 @@ class HomeViewModel(
     }
 
     /**
-     * Load local APK and extract package info
-     * Supports both single APK and split APK archives (apkm, apks, xapk)
+     * Load local APK and extract package info.
+     * Supports both single APK and split APK archives (apkm, apks, xapk).
      */
     private suspend fun loadLocalApk(
         context: Context,
@@ -1178,7 +1262,7 @@ class HomeViewModel(
     }
 
     /**
-     * Extract package info from split APK archive (apkm, apks, xapk)
+     * Extract package info from split APK archive (apkm, apks, xapk).
      */
     private fun extractPackageInfoFromSplitArchive(
         context: Context,

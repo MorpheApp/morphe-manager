@@ -3,10 +3,18 @@
     <string name="home_youtube" translatable="false">YouTube</string>
     <string name="home_youtube_music" translatable="false">YouTube Music</string>
     <string name="home_reddit" translatable="false">Reddit</string>
+    <string name="home_x" translatable="false">X</string>
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
     <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode</string>
+    <string name="home_app_hide_title">Hide this app?</string>
+    <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later using the \'%1$s\' button at the bottom of the list</string>
+    <string name="home_app_will_be_hidden">This app will be hidden</string>
+    <string name="home_app_show_hidden">Show hidden apps</string>
+    <string name="home_app_no_hidden">No hidden apps</string>
+    <string name="home_app_hidden_apps_title">Hidden apps</string>
+    <string name="home_app_hidden_apps_hint">Tap on an app to show it in the list again</string>
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
 
@@ -48,8 +56,6 @@
     <string name="sources_management_title">Patch sources</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
-    <string name="sources_management_date_added">Added</string>
-    <string name="sources_management_date_updated">Updated</string>
 
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
@@ -77,11 +83,9 @@
     <string name="sources_download_fail">Failed to download sources: %s</string>
 
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
-    <string name="home_apk_availability_dialog_simple">To patch %1$s, you need an unpatched APK with version:</string>
-    <string name="home_apk_availability_dialog_expert">"Do you have an unpatched %1$s APK?
-
-Compatible versions:"</string>
+    <string name="home_apk_availability_dialog_title">Do you have the original APK?</string>
+    <string name="home_apk_availability_dialog_simple">To patch &lt;b&gt;%1$s&lt;/b&gt;, you need an unpatched APK file with version:</string>
+    <string name="home_apk_availability_dialog_expert">Compatible versions for &lt;b&gt;%1$s&lt;/b&gt;:</string>
     <string name="home_apk_availability_recommended_label">Recommended</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
     <string name="home_apk_availability_yes">Yes, I have it</string>
@@ -95,16 +99,15 @@ Compatible versions:"</string>
     <string name="home_download_instructions_step1">Press the \'%1$s\' button below</string>
     <string name="home_download_instructions_step2_part1">Scroll down the webpage and press</string>
     <string name="home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
-    <string name="home_download_instructions_step3">Wait for the download to complete, and &lt;b>do not install&lt;/b> the APK</string>
-    <string name="home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b>install the APK&lt;/b></string>
-    <string name="home_download_instructions_step4">After the download finishes, open this app again</string>
-    <string name="home_download_instructions_step4_mount">After installing the original APK, open this app again</string>
+    <string name="home_download_instructions_step3">Wait for the download to complete, and &lt;b&gt;do not install&lt;/b&gt; the APK</string>
+    <string name="home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b&gt;install the APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">After the download finishes, return to Morphe</string>
+    <string name="home_download_instructions_step4_mount">After installing the original APK, return to Morphe</string>
     <string name="home_download_instructions_continue">Continue to APKMirror.com</string>
 
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Select the APK you downloaded</string>
-    <string name="home_file_picker_prompt_description">Now select the %1$s APK file you just downloaded</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Open APK file I downloaded</string>
+    <string name="home_file_picker_prompt_title">Select downloaded APK</string>
+    <string name="home_file_picker_prompt_description">Select the &lt;b&gt;%1$s&lt;/b&gt; APK file you just downloaded</string>
     <string name="home_file_picker_prompt_open_apk">Open APK file</string>
     <string name="home_recommended_version">Recommended version</string>
     <string name="home_selected_version">Selected version</string>
@@ -117,7 +120,7 @@ Compatible versions:"</string>
     <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_subtitle_extended_format">%1$s of %2$s selected</string>
     <string name="expert_mode_search">Search patches</string>
-    <string name="expert_mode_proceed">Proceed to Patching</string>
+    <string name="expert_mode_proceed">Proceed to patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
     <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_no_results">No patches found</string>
@@ -192,8 +195,8 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_patched_at">Patched</string>
     <string name="home_app_info_patch_update_available">Patch update available</string>
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
-    <string name="home_app_info_app_deleted_warning">App uninstalled outside manager</string>
-    <string name="home_app_info_app_deleted_description">This app was uninstalled outside the manager. Repatch it to restore functionality</string>
+    <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
+    <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
@@ -327,7 +330,7 @@ Are you sure you want to proceed?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accent color</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
-    <string name="settings_appearance_pure_black_description">Use true black backgrounds for OLED displays</string>
+    <string name="settings_appearance_pure_black_description">Use true black backgrounds</string>
 
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App language</string>
@@ -393,7 +396,7 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_github_pat_configured">Token configured</string>
     <string name="settings_advanced_github_pat_how_to_get">How to get a token</string>
     <string name="settings_advanced_github_pat_dialog_title">Set GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add Pull Requests as external sources. Create a PAT with scope public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add pull requests as external sources. Create a PAT with scope public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Include in settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported manager settings</string>
     <string name="settings_advanced_github_pat_export_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token</string>
@@ -559,7 +562,7 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Export debug logs</string>
-    <string name="settings_system_export_debug_logs_description">Export system logs for troubleshooting</string>
+    <string name="settings_system_export_debug_logs_description">Save system logs for troubleshooting</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Failed to export logs</string>
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
@@ -673,6 +676,8 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="saved">Saved</string>
     <string name="update">Update</string>
     <string name="allow">Allow</string>
+    <string name="details">Details</string>
+    <string name="hide">Hide</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>

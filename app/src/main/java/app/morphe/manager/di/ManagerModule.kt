@@ -4,6 +4,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.ShizukuInstaller
 import app.morphe.manager.domain.manager.AppIconManager
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.util.PM
@@ -20,4 +21,5 @@ val managerModule = module {
     singleOf(::PatchOptionsPreferencesManager)
     singleOf(::AppIconManager)
     singleOf(::UpdateNotificationManager)
+    singleOf(::HomeAppButtonPreferences)
 }

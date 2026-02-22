@@ -1,36 +1,32 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.CheckCircle
-import androidx.compose.material.icons.outlined.Update
-import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
@@ -42,19 +38,20 @@ import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
+import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.AppPackages
-import app.morphe.manager.util.formatMegabytes
 import kotlinx.coroutines.delay
 
 /**
- * Home screen layout with 5 sections and adaptive landscape support:
- * 1. Notifications section (messages/updates)
+ * Home screen layout with dynamic app buttons:
+ * 1. Notifications section
  * 2. Greeting message section
- * 3. App buttons section (YouTube, YouTube Music, Reddit)
+ * 3. Dynamic app buttons
  * 4. Other apps button
- * 5. Bottom action bar (Bundles, Settings)
+ * 5. Bottom action bar
  */
 @Composable
 fun SectionsLayout(
@@ -65,28 +62,16 @@ fun SectionsLayout(
     hasManagerUpdate: Boolean,
     onShowUpdateDetails: () -> Unit,
 
-    // App update indicators
-    appUpdatesAvailable: Map<String, Boolean> = emptyMap(),
-
     // Greeting section
     greetingMessage: String,
 
-    // App buttons section
-    onYouTubeClick: () -> Unit,
-    onYouTubeMusicClick: () -> Unit,
-    onRedditClick: () -> Unit,
-
-    // Installed apps data
-    youtubeInstalledApp: InstalledApp? = null,
-    youtubeMusicInstalledApp: InstalledApp? = null,
-    redditInstalledApp: InstalledApp? = null,
-    youtubePackageInfo: PackageInfo? = null,
-    youtubeMusicPackageInfo: PackageInfo? = null,
-    redditPackageInfo: PackageInfo? = null,
-    youtubeIsDeleted: Boolean = false,
-    youtubeMusicIsDeleted: Boolean = false,
-    redditIsDeleted: Boolean = false,
+    // Dynamic app items
+    homeAppItems: List<HomeAppItem>,
+    onAppClick: (HomeAppItem) -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
+    onHideApp: (String) -> Unit,
+    onUnhideApp: (String) -> Unit,
+    hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
 
     // Other apps button
@@ -118,20 +103,12 @@ fun SectionsLayout(
                 AdaptiveContent(
                     windowSize = windowSize,
                     greetingMessage = greetingMessage,
-                    appUpdatesAvailable = appUpdatesAvailable,
-                    onYouTubeClick = onYouTubeClick,
-                    onYouTubeMusicClick = onYouTubeMusicClick,
-                    onRedditClick = onRedditClick,
-                    youtubeInstalledApp = youtubeInstalledApp,
-                    youtubeMusicInstalledApp = youtubeMusicInstalledApp,
-                    redditInstalledApp = redditInstalledApp,
-                    youtubePackageInfo = youtubePackageInfo,
-                    youtubeMusicPackageInfo = youtubeMusicPackageInfo,
-                    redditPackageInfo = redditPackageInfo,
-                    youtubeIsDeleted = youtubeIsDeleted,
-                    youtubeMusicIsDeleted = youtubeMusicIsDeleted,
-                    redditIsDeleted = redditIsDeleted,
+                    homeAppItems = homeAppItems,
+                    onAppClick = onAppClick,
                     onInstalledAppClick = onInstalledAppClick,
+                    onHideApp = onHideApp,
+                    onUnhideApp = onUnhideApp,
+                    hiddenAppItems = hiddenAppItems,
                     installedAppsLoading = installedAppsLoading,
                     onOtherAppsClick = onOtherAppsClick,
                     showOtherAppsButton = showOtherAppsButton
@@ -162,26 +139,18 @@ fun SectionsLayout(
 }
 
 /**
- * Adaptive content layout that switches between portrait and landscape modes
+ * Adaptive content layout that switches between portrait and landscape modes.
  */
 @Composable
 private fun AdaptiveContent(
     windowSize: WindowSize,
     greetingMessage: String,
-    appUpdatesAvailable: Map<String, Boolean> = emptyMap(),
-    onYouTubeClick: () -> Unit,
-    onYouTubeMusicClick: () -> Unit,
-    onRedditClick: () -> Unit,
-    youtubeInstalledApp: InstalledApp?,
-    youtubeMusicInstalledApp: InstalledApp?,
-    redditInstalledApp: InstalledApp?,
-    youtubePackageInfo: PackageInfo?,
-    youtubeMusicPackageInfo: PackageInfo?,
-    redditPackageInfo: PackageInfo?,
-    youtubeIsDeleted: Boolean,
-    youtubeMusicIsDeleted: Boolean,
-    redditIsDeleted: Boolean,
+    homeAppItems: List<HomeAppItem>,
+    onAppClick: (HomeAppItem) -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
+    onHideApp: (String) -> Unit,
+    onUnhideApp: (String) -> Unit,
+    hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
     showOtherAppsButton: Boolean = true
@@ -189,19 +158,19 @@ private fun AdaptiveContent(
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
     val useTwoColumns = windowSize.useTwoColumnLayout
-    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(scrollState)
+            .fillMaxSize()
             .padding(horizontal = contentPadding),
         verticalArrangement = Arrangement.spacedBy(itemSpacing)
     ) {
         if (useTwoColumns) {
             // Two-column layout for medium/expanded windows (landscape)
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing * 2),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -213,10 +182,7 @@ private fun AdaptiveContent(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    GreetingSection(
-                        message = greetingMessage,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    GreetingSection(message = greetingMessage)
                 }
 
                 // Right column: App buttons + Other apps
@@ -225,22 +191,15 @@ private fun AdaptiveContent(
                     verticalArrangement = Arrangement.spacedBy(itemSpacing)
                 ) {
                     MainAppsSection(
+                        homeAppItems = homeAppItems,
                         itemSpacing = itemSpacing,
-                        appUpdatesAvailable = appUpdatesAvailable,
-                        onYouTubeClick = onYouTubeClick,
-                        onYouTubeMusicClick = onYouTubeMusicClick,
-                        onRedditClick = onRedditClick,
-                        youtubeInstalledApp = youtubeInstalledApp,
-                        youtubeMusicInstalledApp = youtubeMusicInstalledApp,
-                        redditInstalledApp = redditInstalledApp,
-                        youtubePackageInfo = youtubePackageInfo,
-                        youtubeMusicPackageInfo = youtubeMusicPackageInfo,
-                        redditPackageInfo = redditPackageInfo,
-                        youtubeIsDeleted = youtubeIsDeleted,
-                        youtubeMusicIsDeleted = youtubeMusicIsDeleted,
-                        redditIsDeleted = redditIsDeleted,
+                        onAppClick = onAppClick,
                         onInstalledAppClick = onInstalledAppClick,
-                        installedAppsLoading = installedAppsLoading
+                        onHideApp = onHideApp,
+                        onUnhideApp = onUnhideApp,
+                        hiddenAppItems = hiddenAppItems,
+                        installedAppsLoading = installedAppsLoading,
+                        modifier = Modifier.weight(1f)
                     )
 
                     // Section 4: Other apps
@@ -257,34 +216,30 @@ private fun AdaptiveContent(
         } else {
             // Single-column layout for compact windows (portrait)
             Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(itemSpacing)
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center
             ) {
                 // Section 2: Greeting
-                GreetingSection(
-                    message = greetingMessage,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                GreetingSection(message = greetingMessage)
 
-                // Section 3: App buttons
-                MainAppsSection(
-                    itemSpacing = itemSpacing,
-                    appUpdatesAvailable = appUpdatesAvailable,
-                    onYouTubeClick = onYouTubeClick,
-                    onYouTubeMusicClick = onYouTubeMusicClick,
-                    onRedditClick = onRedditClick,
-                    youtubeInstalledApp = youtubeInstalledApp,
-                    youtubeMusicInstalledApp = youtubeMusicInstalledApp,
-                    redditInstalledApp = redditInstalledApp,
-                    youtubePackageInfo = youtubePackageInfo,
-                    youtubeMusicPackageInfo = youtubeMusicPackageInfo,
-                    redditPackageInfo = redditPackageInfo,
-                    youtubeIsDeleted = youtubeIsDeleted,
-                    youtubeMusicIsDeleted = youtubeMusicIsDeleted,
-                    redditIsDeleted = redditIsDeleted,
-                    onInstalledAppClick = onInstalledAppClick,
-                    installedAppsLoading = installedAppsLoading
-                )
+                Spacer(modifier = Modifier.height(itemSpacing))
+
+                // Section 3: Scrollable app buttons
+                Box(modifier = Modifier.weight(1f, fill = false)) {
+                    MainAppsSection(
+                        homeAppItems = homeAppItems,
+                        itemSpacing = itemSpacing,
+                        onAppClick = onAppClick,
+                        onInstalledAppClick = onInstalledAppClick,
+                        onHideApp = onHideApp,
+                        onUnhideApp = onUnhideApp,
+                        hiddenAppItems = hiddenAppItems,
+                        installedAppsLoading = installedAppsLoading,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(itemSpacing))
 
                 // Section 4: Other apps
                 if (!showOtherAppsButton) {
@@ -301,8 +256,8 @@ private fun AdaptiveContent(
 }
 
 /**
- * Section 1: Unified notifications overlay component
- * Handles both manager update and bundle update notifications
+ * Section 1: Unified notifications overlay component.
+ * Handles both manager update and bundle update notifications.
  */
 @Composable
 fun NotificationsOverlay(
@@ -350,7 +305,7 @@ fun NotificationsOverlay(
 }
 
 /**
- * Manager update snackbar
+ * Manager update snackbar.
  */
 @Composable
 fun ManagerUpdateSnackbar(
@@ -412,7 +367,7 @@ fun ManagerUpdateSnackbar(
 }
 
 /**
- * Bundle update snackbar
+ * Bundle update snackbar.
  */
 @Composable
 fun BundleUpdateSnackbar(
@@ -441,7 +396,7 @@ fun BundleUpdateSnackbar(
 }
 
 /**
- * Snackbar content with status indicator
+ * Snackbar content with status indicator.
  */
 @Composable
 private fun BundleUpdateSnackbarContent(
@@ -498,103 +453,81 @@ private fun BundleUpdateSnackbarContent(
             ) {
                 // Icon based on status
                 when (status) {
-                    BundleUpdateStatus.Success -> {
-                        Icon(
-                            imageVector = Icons.Outlined.CheckCircle,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-
-                    BundleUpdateStatus.Error -> {
-                        Icon(
-                            imageVector = Icons.Outlined.Warning,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-
-                    BundleUpdateStatus.Updating -> {
-                        CircularProgressIndicator(
-                            progress = { displayProgress },
-                            modifier = Modifier.size(24.dp),
-                            strokeWidth = 3.dp,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
+                    BundleUpdateStatus.Success -> Icon(
+                        imageVector = Icons.Outlined.CheckCircle,
+                        contentDescription = null,
+                        tint = contentColor,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    BundleUpdateStatus.Error -> Icon(
+                        imageVector = Icons.Outlined.Warning,
+                        contentDescription = null,
+                        tint = contentColor,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    BundleUpdateStatus.Updating -> CircularProgressIndicator(
+                        modifier = Modifier.size(24.dp),
+                        strokeWidth = 2.5.dp,
+                        color = contentColor
+                    )
                 }
 
                 // Text content
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = when (status) {
-                            BundleUpdateStatus.Updating -> {
-                                // Show bundle name if available and downloading
-                                if (isDownloading && progress.currentBundleName != null) {
-                                    progress.currentBundleName
-                                } else {
-                                    stringResource(R.string.home_updating_sources)
-                                }
-                            }
                             BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
                             BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
+                            BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
                         },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
-                        color = contentColor,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        color = contentColor
                     )
-                    Text(
-                        text = when (status) {
-                            BundleUpdateStatus.Updating -> {
-                                if (progress != null) {
-                                    when {
-                                        // Show download progress in MB
-                                        isDownloading -> {
-                                            stringResource(
-                                                R.string.home_update_download_progress,
-                                                formatMegabytes(progress.bytesRead),
-                                                formatMegabytes(progress.bytesTotal),
-                                                (downloadFraction * 100).toInt()
-                                            )
-                                        }
-                                        // Show source processing progress
-                                        progress.total > 0 -> {
-                                            val processedSources = pluralStringResource(
-                                                R.plurals.source_count,
-                                                progress.total,
-                                                progress.total
-                                            )
 
-                                            stringResource(
-                                                R.string.home_update_progress_format,
-                                                processedSources
-                                            )
-                                        }
-                                        // Loading state
-                                        else -> {
-                                            stringResource(R.string.home_please_wait)
-                                        }
-                                    }
-                                } else {
-                                    stringResource(R.string.home_please_wait)
-                                }
-                            }
+                    if (status == BundleUpdateStatus.Updating && progress != null) {
+                        if (isDownloading) {
+                            val readMb = progress.bytesRead.toFloat() / (1024 * 1024)
+                            val totalMb = progress.bytesTotal.toFloat() / (1024 * 1024)
+                            val percent = (downloadFraction * 100).toInt()
+                            Text(
+                                text = stringResource(
+                                    R.string.home_update_download_progress,
+                                    readMb, totalMb, percent.toString()
+                                ),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = contentColor.copy(alpha = 0.8f)
+                            )
+                        } else if (progress.currentBundleName != null) {
+                            Text(
+                                text = progress.currentBundleName,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = contentColor.copy(alpha = 0.8f),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    }
 
-                            BundleUpdateStatus.Success -> stringResource(R.string.home_update_success_subtitle)
-                            BundleUpdateStatus.Error -> stringResource(R.string.home_update_error_subtitle)
-                        },
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = contentColor.copy(alpha = 0.8f)
-                    )
+                    if (status == BundleUpdateStatus.Success) {
+                        Text(
+                            text = stringResource(R.string.home_update_success_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = contentColor.copy(alpha = 0.8f)
+                        )
+                    }
+                    if (status == BundleUpdateStatus.Error) {
+                        Text(
+                            text = stringResource(R.string.home_update_error_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = contentColor.copy(alpha = 0.8f)
+                        )
+                    }
                 }
             }
 
-            // Progress bar only for updating status
-            if (status == BundleUpdateStatus.Updating) {
+            // Progress bar for updating state
+            if (status == BundleUpdateStatus.Updating && displayProgress > 0f) {
                 LinearProgressIndicator(
                     progress = { displayProgress },
                     modifier = Modifier.fillMaxWidth(),
@@ -607,17 +540,13 @@ private fun BundleUpdateSnackbarContent(
 }
 
 /**
- * Section 2: Greeting message
+ * Section 2: Greeting message.
  */
 @Composable
 fun GreetingSection(
-    message: String,
-    modifier: Modifier = Modifier
+    message: String
 ) {
-    Box(
-        modifier = modifier.height(120.dp),
-        contentAlignment = Alignment.Center
-    ) {
+    Box(contentAlignment = Alignment.Center) {
         Text(
             text = message,
             style = MaterialTheme.typography.headlineMedium,
@@ -630,155 +559,738 @@ fun GreetingSection(
 }
 
 /**
- * Section 3: Main app buttons
+ * Section 3: Dynamic scrollable app buttons list.
  */
 @Composable
 fun MainAppsSection(
+    homeAppItems: List<HomeAppItem>,
     itemSpacing: Dp = 16.dp,
-    appUpdatesAvailable: Map<String, Boolean> = emptyMap(),
-    onYouTubeClick: () -> Unit,
-    onYouTubeMusicClick: () -> Unit,
-    onRedditClick: () -> Unit,
-    youtubeInstalledApp: InstalledApp?,
-    youtubeMusicInstalledApp: InstalledApp?,
-    redditInstalledApp: InstalledApp?,
-    youtubePackageInfo: PackageInfo?,
-    youtubeMusicPackageInfo: PackageInfo?,
-    redditPackageInfo: PackageInfo?,
-    youtubeIsDeleted: Boolean = false,
-    youtubeMusicIsDeleted: Boolean = false,
-    redditIsDeleted: Boolean = false,
+    onAppClick: (HomeAppItem) -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
+    onHideApp: (String) -> Unit,
+    onUnhideApp: (String) -> Unit,
+    hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
-    // Stable loading state with debounce to prevent flickering
-    var stableLoadingState by remember { mutableStateOf(installedAppsLoading) }
+    // Track if data was ever loaded, never show shimmer again on resume
+    var hasEverLoaded by remember { mutableStateOf(homeAppItems.isNotEmpty()) }
 
-    LaunchedEffect(installedAppsLoading) {
-        if (installedAppsLoading) {
-            // Immediately show loading
+    // Stable loading state with debounce to prevent flickering.
+    // Only shows shimmer on genuine cold start (data never arrived).
+    var stableLoadingState by remember { mutableStateOf(!hasEverLoaded) }
+
+    LaunchedEffect(installedAppsLoading, homeAppItems.isEmpty()) {
+        if (homeAppItems.isNotEmpty()) {
+            hasEverLoaded = true
+        }
+        // Once hasEverLoaded is true, never re-trigger shimmer regardless of list state
+        val shouldLoad = !hasEverLoaded || installedAppsLoading
+        if (shouldLoad) {
             stableLoadingState = true
         } else {
-            // Add delay before hiding loading to ensure data is ready
             delay(300)
             stableLoadingState = false
         }
     }
 
-    // App buttons
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(itemSpacing)
-    ) {
-        Column(
-            modifier = Modifier.widthIn(max = 500.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(itemSpacing)
-        ) {
-            // YouTube
-            AppCardWithLoading(
-                isLoading = stableLoadingState,
-                installedApp = youtubeInstalledApp,
-                packageInfo = youtubePackageInfo,
-                gradientColors = AppPackages.YOUTUBE_COLORS,
-                buttonText = stringResource(R.string.home_youtube),
-                onInstalledAppClick = onInstalledAppClick,
-                onButtonClick = onYouTubeClick,
-                hasUpdate = youtubeInstalledApp?.let {
-                    appUpdatesAvailable[it.currentPackageName] == true
-                } == true,
-                isAppDeleted = youtubeIsDeleted
-            )
+    // Placeholder gradients for cold-start shimmer
+    val placeholderGradients = remember { AppPackages.DEFAULT_SHIMMER_GRADIENTS }
 
-            // YouTube Music
-            AppCardWithLoading(
-                isLoading = stableLoadingState,
-                installedApp = youtubeMusicInstalledApp,
-                packageInfo = youtubeMusicPackageInfo,
-                gradientColors = AppPackages.YOUTUBE_MUSIC_COLORS,
-                buttonText = stringResource(R.string.home_youtube_music),
-                onInstalledAppClick = onInstalledAppClick,
-                onButtonClick = onYouTubeMusicClick,
-                hasUpdate = youtubeMusicInstalledApp?.let {
-                    appUpdatesAvailable[it.currentPackageName] == true
-                } == true,
-                isAppDeleted = youtubeMusicIsDeleted
-            )
+    // Hidden apps dialog state
+    var showHiddenAppsDialog by remember { mutableStateOf(false) }
 
-            // Reddit
-            AppCardWithLoading(
-                isLoading = stableLoadingState,
-                installedApp = redditInstalledApp,
-                packageInfo = redditPackageInfo,
-                gradientColors = AppPackages.REDDIT_COLORS,
-                buttonText = stringResource(R.string.home_reddit),
-                onInstalledAppClick = onInstalledAppClick,
-                onButtonClick = onRedditClick,
-                hasUpdate = redditInstalledApp?.let {
-                    appUpdatesAvailable[it.currentPackageName] == true
-                } == true,
-                isAppDeleted = redditIsDeleted
-            )
-        }
+    if (showHiddenAppsDialog) {
+        HiddenAppsDialog(
+            hiddenAppItems = hiddenAppItems,
+            onUnhide = onUnhideApp,
+            onDismiss = { showHiddenAppsDialog = false }
+        )
     }
-}
 
-/**
- * App card component with loading state
- */
-@Composable
-private fun AppCardWithLoading(
-    isLoading: Boolean,
-    installedApp: InstalledApp?,
-    packageInfo: PackageInfo?,
-    gradientColors: List<Color>,
-    buttonText: String,
-    onInstalledAppClick: (InstalledApp) -> Unit,
-    onButtonClick: () -> Unit,
-    hasUpdate: Boolean = false,
-    isAppDeleted: Boolean = false
-) {
-    Crossfade(
-        targetState = isLoading,
-        animationSpec = tween(300),
-        label = "app_card_crossfade"
-    ) { loading ->
-        if (loading) {
-            AppLoadingCard(gradientColors = gradientColors)
-        } else {
-            if (installedApp != null) {
-                InstalledAppCard(
-                    installedApp = installedApp,
-                    packageInfo = packageInfo,
-                    gradientColors = gradientColors,
-                    onClick = { onInstalledAppClick(installedApp) },
-                    hasUpdate = hasUpdate,
-                    isAppDeleted = isAppDeleted
-                )
+    val listState = rememberLazyListState()
+    val fadeSize = 24.dp
+
+    Box(
+        modifier = modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        LazyColumn(
+            state = listState,
+            modifier = Modifier
+                .widthIn(max = 500.dp)
+                .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+                .drawWithContent {
+                    drawContent()
+                    val fadePx = fadeSize.toPx()
+                    val canScrollUp = listState.firstVisibleItemIndex > 0 ||
+                            listState.firstVisibleItemScrollOffset > 0
+                    if (canScrollUp) {
+                        drawRect(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(Color.Transparent, Color.Black),
+                                startY = 0f,
+                                endY = fadePx
+                            ),
+                            blendMode = BlendMode.DstIn
+                        )
+                    }
+                    val canScrollDown = listState.canScrollForward
+                    if (canScrollDown) {
+                        drawRect(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(Color.Black, Color.Transparent),
+                                startY = size.height - fadePx,
+                                endY = size.height
+                            ),
+                            blendMode = BlendMode.DstIn
+                        )
+                    }
+                },
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(itemSpacing),
+            contentPadding = PaddingValues(vertical = 8.dp)
+        ) {
+            // Cold start: homeAppItems still empty - show placeholder shimmer cards
+            if (stableLoadingState && homeAppItems.isEmpty()) {
+                items(3, key = { "placeholder_$it" }) { index ->
+                    AppLoadingCard(
+                        gradientColors = placeholderGradients[index % placeholderGradients.size],
+                        modifier = Modifier.animateItem()
+                    )
+                }
             } else {
-                AppButton(
-                    text = buttonText,
-                    gradientColors = gradientColors,
-                    onClick = onButtonClick
-                )
+                items(
+                    items = homeAppItems,
+                    key = { it.packageName }
+                ) { item ->
+                    DynamicAppCard(
+                        item = item,
+                        isLoading = stableLoadingState,
+                        hasUpdate = item.hasUpdate,
+                        onAppClick = { onAppClick(item) },
+                        onInstalledAppClick = onInstalledAppClick,
+                        onHide = { onHideApp(item.packageName) },
+                        modifier = Modifier.animateItem()
+                    )
+                }
+
+                // "Show hidden apps" button if there are hidden apps
+                if (hiddenAppItems.isNotEmpty()) {
+                    item(key = "show_hidden") {
+                        TextButton(
+                            onClick = { showHiddenAppsDialog = true },
+                            modifier = Modifier.padding(top = 4.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Visibility,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(R.string.home_app_show_hidden),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 }
 
 /**
- * Shared content layout for app cards and buttons
+ * Single dynamic app card with long-press action.
  */
+@Composable
+private fun DynamicAppCard(
+    item: HomeAppItem,
+    isLoading: Boolean,
+    hasUpdate: Boolean,
+    onAppClick: () -> Unit,
+    onInstalledAppClick: (InstalledApp) -> Unit,
+    onHide: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var showContextMenu by remember { mutableStateOf(false) }
+
+    Box(modifier = modifier.fillMaxWidth()) {
+        Crossfade(
+            targetState = isLoading,
+            animationSpec = tween(300),
+            label = "app_card_crossfade_${item.packageName}"
+        ) { loading ->
+            if (loading) {
+                AppLoadingCard(gradientColors = item.gradientColors)
+            } else {
+                if (item.installedApp != null) {
+                    InstalledAppCard(
+                        installedApp = item.installedApp,
+                        packageInfo = item.packageInfo,
+                        displayName = item.displayName,
+                        gradientColors = item.gradientColors,
+                        onClick = { onInstalledAppClick(item.installedApp) },
+                        hasUpdate = hasUpdate,
+                        isAppDeleted = item.isDeleted,
+                        onLongClick = { showContextMenu = true }
+                    )
+                } else {
+                    AppButton(
+                        packageName = item.packageName,
+                        displayName = item.displayName,
+                        packageInfo = item.packageInfo,
+                        gradientColors = item.gradientColors,
+                        onClick = onAppClick,
+                        onLongClick = { showContextMenu = true }
+                    )
+                }
+            }
+        }
+
+        // Hide confirmation dialog
+        if (showContextMenu) {
+            HideAppDialog(
+                item = item,
+                onDismiss = { showContextMenu = false },
+                onHide = {
+                    onHide()
+                    showContextMenu = false
+                }
+            )
+        }
+    }
+}
+
+/**
+ * Confirmation dialog asking user whether to hide the app.
+ */
+@Composable
+internal fun HideAppDialog(
+    item: HomeAppItem,
+    onDismiss: () -> Unit,
+    onHide: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_app_hide_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.hide),
+                primaryIcon = Icons.Outlined.VisibilityOff,
+                onPrimaryClick = onHide,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            // Original app card preview
+            AppCardLayout(
+                gradientColors = item.gradientColors,
+                enabled = false,
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                AppIcon(
+                    packageInfo = item.packageInfo,
+                    packageName = if (item.packageInfo == null) item.packageName else null,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    preferredSource = AppDataSource.PATCHED_APK
+                )
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = item.displayName,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_app_will_be_hidden),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White.copy(alpha = 0.75f)
+                    )
+                }
+            }
+
+            // Explanation text
+            Text(
+                text = stringResource(
+                    R.string.home_app_hide_message,
+                    stringResource(R.string.home_app_show_hidden)
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+}
+
+/**
+ * Card dialog that lists hidden apps.
+ */
+@Composable
+internal fun HiddenAppsDialog(
+    hiddenAppItems: List<HomeAppItem>,
+    onUnhide: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        dismissOnClickOutside = true,
+        title = stringResource(R.string.home_app_hidden_apps_title),
+        footer = {
+            MorpheDialogButton(
+                text = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        if (hiddenAppItems.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 24.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = stringResource(R.string.home_app_no_hidden),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current,
+                    textAlign = TextAlign.Center
+                )
+            }
+        } else {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                InfoBadge(
+                    text = stringResource(R.string.home_app_hidden_apps_hint),
+                    icon = Icons.Outlined.TouchApp,
+                    isExpanded = true
+                )
+
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    hiddenAppItems.forEach { item ->
+                        HiddenAppRow(
+                            packageName = item.packageName,
+                            displayName = item.displayName,
+                            packageInfo = item.packageInfo,
+                            onUnhide = { onUnhide(item.packageName) }
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Single app row in [HiddenAppsDialog] rendered as a glassmorphism card.
+ */
+@Composable
+private fun HiddenAppRow(
+    packageName: String,
+    displayName: String?,
+    packageInfo: PackageInfo?,
+    onUnhide: () -> Unit
+) {
+    val view = LocalView.current
+    val textColor = LocalDialogTextColor.current
+    val gradientColors = AppPackages.getGradientColors(packageName)
+    val shape = RoundedCornerShape(16.dp)
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(
+                    colors = gradientColors.map { it.copy(alpha = 0.5f) }
+                ),
+                shape = shape
+            )
+            .background(
+                brush = Brush.linearGradient(
+                    colors = gradientColors.map { it.copy(alpha = 0.15f) }
+                )
+            )
+            .clickable {
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                onUnhide()
+            }
+            .padding(horizontal = 14.dp, vertical = 12.dp)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // App icon
+            AppIcon(
+                packageInfo = packageInfo,
+                packageName = if (packageInfo == null) packageName else null,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(RoundedCornerShape(10.dp)),
+                preferredSource = AppDataSource.PATCHED_APK
+            )
+
+            // App name
+            Text(
+                text = displayName ?: packageName,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontWeight = FontWeight.SemiBold,
+                    color = textColor
+                ),
+                modifier = Modifier.weight(1f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            // Eye icon
+            MorpheIcon(
+                icon = Icons.Outlined.Visibility,
+                tint = textColor.copy(alpha = 0.45f),
+                size = 20.dp
+            )
+        }
+    }
+}
+
+/**
+ * Installed app card with gradient background.
+ */
+@Composable
+fun InstalledAppCard(
+    installedApp: InstalledApp,
+    packageInfo: PackageInfo?,
+    displayName: String,
+    gradientColors: List<Color>,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    hasUpdate: Boolean = false,
+    isAppDeleted: Boolean = false,
+    onLongClick: (() -> Unit)? = null
+) {
+    val textColor = Color.White
+
+    val versionLabel = stringResource(R.string.version)
+    val installedLabel = stringResource(R.string.installed)
+    val updateAvailableLabel = stringResource(R.string.update_available)
+    val deletedLabel = stringResource(R.string.uninstalled)
+
+    val showBadge = hasUpdate
+
+    val version = remember(packageInfo, installedApp, isAppDeleted) {
+        val raw = packageInfo?.versionName ?: installedApp.version
+        if (raw.startsWith("v")) raw else "v$raw"
+    }
+
+    val contentDesc = remember(displayName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel, isAppDeleted, deletedLabel) {
+        buildString {
+            append(displayName)
+            if (version.isNotEmpty()) {
+                append(", $versionLabel $version")
+            }
+            append(", ")
+            append(if (isAppDeleted) deletedLabel else installedLabel)
+            if (hasUpdate && !isAppDeleted) append(", $updateAvailableLabel")
+        }
+    }
+
+    AppCardLayout(
+        gradientColors = gradientColors,
+        enabled = true,
+        onClick = onClick,
+        onLongClick = onLongClick,
+        modifier = modifier.semantics {
+            role = Role.Button
+            this.contentDescription = contentDesc
+        }
+    ) {
+        // App icon
+        AppIcon(
+            packageInfo = packageInfo,
+            packageName = installedApp.originalPackageName,
+            contentDescription = null,
+            modifier = Modifier
+                .size(48.dp)
+                .clip(RoundedCornerShape(12.dp)),
+            preferredSource = AppDataSource.INSTALLED
+        )
+
+        // App info with update badge
+        Box(modifier = Modifier.weight(1f)) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                // App name
+                Text(
+                    text = displayName,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
+                        shadow = Shadow(
+                            color = Color.Black.copy(alpha = 0.4f),
+                            offset = Offset(0f, 2f),
+                            blurRadius = 4f
+                        )
+                    ),
+                    color = textColor,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                // Version + deleted status
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = version,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.4f),
+                                offset = Offset(0f, 1f),
+                                blurRadius = 2f
+                            )
+                        ),
+                        color = textColor.copy(alpha = 0.85f)
+                    )
+
+                    if (isAppDeleted) {
+                        Text(
+                            text = "• ${stringResource(R.string.uninstalled)}",
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                shadow = Shadow(
+                                    color = Color.Black.copy(alpha = 0.4f),
+                                    offset = Offset(0f, 1f),
+                                    blurRadius = 2f
+                                )
+                            ),
+                            color = Color(0xFFFF5252),
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+
+            // Update badge
+            androidx.compose.animation.AnimatedVisibility(
+                visible = showBadge && !isAppDeleted,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(top = 0.dp, end = 0.dp),
+                enter = fadeIn(animationSpec = tween(400)) +
+                        scaleIn(initialScale = 0.8f, animationSpec = tween(400)),
+                exit = fadeOut(animationSpec = tween(300)) +
+                        scaleOut(targetScale = 0.8f, animationSpec = tween(300))
+            ) {
+                UpdateBadge()
+            }
+        }
+    }
+}
+
+/**
+ * Update badge for app cards.
+ */
+@Composable
+private fun UpdateBadge(
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.primaryContainer,
+        shadowElevation = 4.dp
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Update,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.size(14.dp)
+            )
+            Text(
+                text = stringResource(R.string.update),
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        }
+    }
+}
+
+/**
+ * App button with gradient background.
+ */
+@Composable
+fun AppButton(
+    packageName: String,
+    displayName: String,
+    packageInfo: PackageInfo?,
+    gradientColors: List<Color>,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    onLongClick: (() -> Unit)? = null
+) {
+    val textColor = Color.White
+    val finalTextColor = if (enabled) textColor else textColor.copy(alpha = 0.5f)
+
+    val notPatchedText = stringResource(R.string.home_not_patched_yet)
+    val disabledText = stringResource(R.string.disabled)
+
+    // Build content description for accessibility
+    val contentDesc = remember(displayName, notPatchedText, disabledText, enabled) {
+        buildString {
+            append(displayName)
+            append(", ")
+            append(notPatchedText)
+            if (!enabled) {
+                append(", ")
+                append(disabledText)
+            }
+        }
+    }
+
+    AppCardLayout(
+        gradientColors = gradientColors,
+        enabled = enabled,
+        onClick = onClick,
+        onLongClick = onLongClick,
+        modifier = modifier.semantics {
+            role = Role.Button
+            this.contentDescription = contentDesc
+            if (!enabled) {
+                stateDescription = disabledText
+            }
+        }
+    ) {
+        // App icon
+        AppIcon(
+            packageInfo = packageInfo,
+            packageName = if (packageInfo == null) packageName else null,
+            contentDescription = null,
+            modifier = Modifier
+                .size(48.dp)
+                .clip(RoundedCornerShape(12.dp)),
+            preferredSource = AppDataSource.PATCHED_APK
+        )
+
+        // Text info
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            // Display name
+            Text(
+                text = displayName,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = finalTextColor,
+                    shadow = Shadow(
+                        color = Color.Black.copy(alpha = 0.4f),
+                        offset = Offset(0f, 2f),
+                        blurRadius = 4f
+                    )
+                ),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            // Status text
+            Text(
+                text = notPatchedText,
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    shadow = Shadow(
+                        color = Color.Black.copy(alpha = 0.4f),
+                        offset = Offset(0f, 1f),
+                        blurRadius = 2f
+                    )
+                ),
+                color = finalTextColor.copy(alpha = 0.7f)
+            )
+        }
+    }
+}
+
+/**
+ * Section 4: Other apps button.
+ */
+@Composable
+fun OtherAppsSection(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val view = LocalView.current
+    val shape = RoundedCornerShape(20.dp)
+    val isDark = isSystemInDarkTheme()
+
+    val backgroundAlpha = if (isDark) 0.35f else 0.6f
+    val borderAlpha = if (isDark) 0.4f else 0.6f
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 12.dp)
+            .height(48.dp)
+            .clip(shape)
+            .background(
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
+            )
+            .border(
+                BorderStroke(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
+                ),
+                shape = shape
+            )
+            .clickable {
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                onClick()
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(R.string.home_other_apps),
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
+/**
+ * Shared content layout for app cards and buttons.
+ */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun AppCardLayout(
     gradientColors: List<Color>,
     enabled: Boolean,
     onClick: () -> Unit,
+    onLongClick: (() -> Unit)? = null,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -788,19 +1300,16 @@ private fun AppCardLayout(
     val backgroundAlpha = if (enabled) 0.7f else 0.3f
     val borderAlpha = if (enabled) 0.85f else 0.4f
 
-    Box(
+    BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
     ) {
-        Surface(
-            onClick = {
-                if (enabled) {
-                    // Trigger haptic feedback on click
-                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                    onClick()
-                }
-            },
+        val widthPx = constraints.maxWidth.toFloat().coerceAtLeast(1f)
+        val heightPx = constraints.maxHeight.toFloat().coerceAtLeast(1f)
+        val gradientEnd = Offset(widthPx, heightPx)
+
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(shape)
@@ -808,41 +1317,46 @@ private fun AppCardLayout(
                     width = 1.5.dp,
                     brush = Brush.linearGradient(
                         colors = gradientColors.map { it.copy(alpha = borderAlpha) },
-                        start = Offset(0f, 0f),
-                        end = Offset.Infinite
+                        start = Offset.Zero,
+                        end = gradientEnd
                     ),
                     shape = shape
-                ),
-            shape = shape,
-            color = Color.Transparent,
-            enabled = enabled
+                )
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = gradientColors.map { it.copy(alpha = backgroundAlpha) },
+                        start = Offset.Zero,
+                        end = gradientEnd
+                    )
+                )
+                .combinedClickable(
+                    enabled = enabled,
+                    onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                        onClick()
+                    },
+                    onLongClick = if (onLongClick != null) {
+                        {
+                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                            onLongClick()
+                        }
+                    } else null
+                )
         ) {
-            Box(
+            Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(
-                        brush = Brush.linearGradient(
-                            colors = gradientColors.map { it.copy(alpha = backgroundAlpha) },
-                            start = Offset(0f, 0f),
-                            end = Offset.Infinite
-                        )
-                    )
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    content = content
-                )
-            }
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                content = content
+            )
         }
     }
 }
 
 /**
- * Shimmer loading animation for app cards
+ * Shimmer loading animation for app cards.
  */
 @Composable
 fun AppLoadingCard(
@@ -889,7 +1403,7 @@ fun AppLoadingCard(
                     brush = Brush.linearGradient(
                         colors = gradientColors.map { it.copy(alpha = pulseAlpha) },
                         start = Offset(0f, 0f),
-                        end = Offset.Infinite
+                        end = Offset(1000f, 0f)
                     )
                 )
         )
@@ -932,7 +1446,6 @@ fun AppLoadingCard(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                // Title skeleton
                 ShimmerBox(
                     modifier = Modifier
                         .fillMaxWidth(0.6f)
@@ -940,8 +1453,6 @@ fun AppLoadingCard(
                     shape = RoundedCornerShape(4.dp),
                     baseColor = Color.White.copy(alpha = 0.25f)
                 )
-
-                // Subtitle skeleton
                 ShimmerBox(
                     modifier = Modifier
                         .fillMaxWidth(0.4f)
@@ -951,346 +1462,5 @@ fun AppLoadingCard(
                 )
             }
         }
-    }
-}
-
-/**
- * Installed app card with gradient background
- */
-@Composable
-fun InstalledAppCard(
-    installedApp: InstalledApp,
-    packageInfo: PackageInfo?,
-    gradientColors: List<Color>,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    hasUpdate: Boolean = false,
-    isAppDeleted: Boolean = false
-) {
-    val context = LocalContext.current
-    val textColor = Color.White
-
-    val versionLabel = stringResource(R.string.version)
-    val installedLabel = stringResource(R.string.installed)
-    val updateAvailableLabel = stringResource(R.string.update_available)
-    val deletedLabel = stringResource(R.string.uninstalled)
-
-    // Delayed visibility for badge to prevent showing during skeleton loading
-    var showBadge by remember { mutableStateOf(false) }
-
-    LaunchedEffect(hasUpdate) {
-        if (hasUpdate) {
-            delay(500) // Wait for skeleton animation to finish
-            showBadge = true
-        } else {
-            showBadge = false
-        }
-    }
-
-    // Build content description for accessibility
-    val appName = remember(packageInfo, installedApp) {
-        packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
-            ?: AppPackages.getAppName(context, installedApp.originalPackageName)
-    }
-
-    val version = remember(packageInfo, installedApp, isAppDeleted) {
-        when {
-            packageInfo != null -> {
-                packageInfo.versionName?.let {
-                    if (it.startsWith("v")) it else "v$it"
-                } ?: installedApp.version.let { "v$it" }
-            }
-            isAppDeleted -> {
-                val savedVersion = installedApp.version.let {
-                    if (it.startsWith("v")) it else "v$it"
-                }
-                savedVersion
-            }
-            else -> installedApp.version.let {
-                if (it.startsWith("v")) it else "v$it"
-            }
-        }
-    }
-
-    val contentDesc = remember(appName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel, isAppDeleted, deletedLabel) {
-        buildString {
-            append(appName)
-            if (version.isNotEmpty()) {
-                append(", ")
-                append(versionLabel)
-                append(" ")
-                append(version)
-            }
-            append(", ")
-            if (isAppDeleted) {
-                append(deletedLabel)
-            } else {
-                append(installedLabel)
-            }
-            if (hasUpdate && !isAppDeleted) {
-                append(", ")
-                append(updateAvailableLabel)
-            }
-        }
-    }
-
-    AppCardLayout(
-        gradientColors = gradientColors,
-        enabled = true,
-        onClick = onClick,
-        modifier = modifier.semantics {
-            role = Role.Button
-            this.contentDescription = contentDesc
-        }
-    ) {
-        // App icon
-        AppIcon(
-            packageInfo = packageInfo,
-            contentDescription = null, // Handled by card semantics
-            modifier = Modifier.size(48.dp)
-        )
-
-        // App info
-        Box(
-            modifier = Modifier.weight(1f)
-        ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                // App name
-                Text(
-                    text = appName,
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        shadow = Shadow(
-                            color = Color.Black.copy(alpha = 0.4f),
-                            offset = Offset(0f, 2f),
-                            blurRadius = 4f
-                        )
-                    ),
-                    color = textColor
-                )
-
-                // Show version or deletion warning
-                if (version.isNotEmpty()) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = version,
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                shadow = Shadow(
-                                    color = Color.Black.copy(alpha = 0.4f),
-                                    offset = Offset(0f, 1f),
-                                    blurRadius = 2f
-                                )
-                            ),
-                            color = textColor.copy(alpha = 0.85f)
-                        )
-
-                        if (isAppDeleted) {
-                            Text(
-                                text = "• ${stringResource(R.string.uninstalled)}",
-                                style = MaterialTheme.typography.bodyMedium.copy(
-                                    shadow = Shadow(
-                                        color = Color.Black.copy(alpha = 0.4f),
-                                        offset = Offset(0f, 1f),
-                                        blurRadius = 2f
-                                    )
-                                ),
-                                color = Color(0xFFFF5252),
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                    }
-                }
-            }
-
-            // Update badge
-            androidx.compose.animation.AnimatedVisibility(
-                visible = showBadge && !isAppDeleted,
-                modifier = Modifier.align(Alignment.BottomEnd),
-                enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
-                        scaleIn(initialScale = 0.8f, animationSpec = tween(durationMillis = 400)),
-                exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
-                        scaleOut(targetScale = 0.8f, animationSpec = tween(durationMillis = 300))
-            ) {
-                UpdateBadge()
-            }
-        }
-    }
-}
-
-/**
- * Update badge for app cards
- */
-@Composable
-private fun UpdateBadge(
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.primaryContainer,
-        shadowElevation = 4.dp
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Update,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.size(14.dp)
-            )
-            Text(
-                text = stringResource(R.string.update),
-                style = MaterialTheme.typography.labelSmall,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-        }
-    }
-}
-
-/**
- * App button with gradient background
- */
-@Composable
-fun AppButton(
-    text: String,
-    gradientColors: List<Color>,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true
-) {
-    val textColor = Color.White
-    val finalTextColor = if (enabled) textColor else textColor.copy(alpha = 0.5f)
-
-    val notPatchedText = stringResource(R.string.home_not_patched_yet)
-    val disabledText = stringResource(R.string.disabled)
-
-    // Build content description for accessibility
-    val contentDesc = remember(text, notPatchedText, disabledText, enabled) {
-        buildString {
-            append(text)
-            append(", ")
-            append(notPatchedText)
-            if (!enabled) {
-                append(", ")
-                append(disabledText)
-            }
-        }
-    }
-
-    AppCardLayout(
-        gradientColors = gradientColors,
-        enabled = enabled,
-        onClick = onClick,
-        modifier = modifier.semantics {
-            role = Role.Button
-            this.contentDescription = contentDesc
-            if (!enabled) {
-                stateDescription = disabledText
-            }
-        }
-    ) {
-        // Icon placeholder
-        Box(
-            modifier = Modifier
-                .size(48.dp)
-                .clip(RoundedCornerShape(12.dp))
-                .background(finalTextColor.copy(alpha = 0.2f)),
-            contentAlignment = Alignment.Center
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(24.dp)
-                    .clip(RoundedCornerShape(6.dp))
-                    .background(finalTextColor.copy(alpha = 0.4f))
-            )
-        }
-
-        // Text info
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            // App name
-            Text(
-                text = text,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 2f),
-                        blurRadius = 4f
-                    )
-                ),
-                color = finalTextColor
-            )
-
-            // Status text
-            Text(
-                text = notPatchedText,
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 1f),
-                        blurRadius = 2f
-                    )
-                ),
-                color = finalTextColor.copy(alpha = 0.7f)
-            )
-        }
-    }
-}
-
-/**
- * Section 4: Other apps button
- */
-@Composable
-fun OtherAppsSection(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val view = LocalView.current
-    val shape = RoundedCornerShape(20.dp)
-    val isDark = isSystemInDarkTheme()
-
-    val backgroundAlpha = if (isDark) 0.35f else 0.6f
-    val borderAlpha = if (isDark) 0.4f else 0.6f
-
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(48.dp)
-            .clip(shape)
-            .background(
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
-            )
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
-                ),
-                shape = shape
-            )
-            .clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                onClick()
-            },
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = stringResource(R.string.home_other_apps),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
     }
 }
