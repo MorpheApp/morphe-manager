@@ -533,7 +533,7 @@ private fun BundleCardHeader(
                     )
                 }
 
-                // Date badge — updated has priority over created
+                // Date badge
                 bundle.updatedAt?.let { timestamp ->
                     InfoBadge(
                         text = getRelativeTimeString(timestamp),
@@ -652,7 +652,6 @@ private fun BundleInfoCard(
         }
     }
 }
-
 
 @Composable
 private fun BundleTypeBadge(bundle: PatchBundleSource) {

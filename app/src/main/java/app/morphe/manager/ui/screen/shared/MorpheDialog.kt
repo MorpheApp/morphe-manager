@@ -5,39 +5,28 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import android.content.pm.PackageInfo
-import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
-import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.isDarkBackground
 
 /**
@@ -250,243 +239,5 @@ private fun DialogContent(
                 }
             }
         }
-    }
-}
-
-/**
- * Data class describing a single item in a [MorpheBottomSheetMenu].
- *
- * @param icon Icon displayed on the left in a tinted rounded container
- * @param label Action label text
- * @param gradientColors Gradient used for icon background tint
- * @param isDestructive If true, the item is rendered with red/error coloring
- * @param onClick Callback when the item is tapped
- */
-data class BottomSheetMenuItem(
-    val icon: ImageVector,
-    val label: String,
-    val gradientColors: List<Color> = emptyList(),
-    val isDestructive: Boolean = false,
-    val onClick: () -> Unit
-)
-
-/**
- * Bottom-anchored context menu.
- * Slides up from the bottom with a spring animation and dismisses when the backdrop is tapped.
- */
-@Composable
-fun MorpheBottomSheetMenu(
-    items: List<BottomSheetMenuItem>,
-    onDismiss: () -> Unit,
-    title: String? = null,
-    titleGradientColors: List<Color> = emptyList(),
-    titleIconPackageName: String? = null,
-    titleIconPackageInfo: PackageInfo? = null,
-    titleIconDisplayName: String? = null,
-    dimAmount: Float = 0.4f
-) {
-    var visible by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { visible = true }
-
-    Dialog(
-        onDismissRequest = onDismiss,
-        properties = DialogProperties(
-            usePlatformDefaultWidth = false,
-            dismissOnBackPress = true,
-            dismissOnClickOutside = false
-        )
-    ) {
-        val dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
-        SideEffect {
-            dialogWindow?.let {
-                it.setDimAmount(dimAmount)
-                it.setBackgroundDrawableResource(android.R.color.transparent)
-            }
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .pointerInput(Unit) { detectTapGestures { onDismiss() } },
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            AnimatedVisibility(
-                visible = visible,
-                enter = slideInVertically(
-                    initialOffsetY = { it / 2 },
-                    animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f)
-                ) + fadeIn(animationSpec = tween(200)),
-                exit = slideOutVertically(
-                    targetOffsetY = { it / 2 },
-                    animationSpec = tween(200)
-                ) + fadeOut(animationSpec = tween(200))
-            ) {
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .navigationBarsPadding()
-                        .padding(horizontal = 16.dp, vertical = 24.dp)
-                        .pointerInput(Unit) { detectTapGestures { } },
-                    shape = RoundedCornerShape(28.dp),
-                    color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    shadowElevation = 24.dp,
-                    tonalElevation = 8.dp
-                ) {
-                    Column(modifier = Modifier.padding(vertical = 8.dp)) {
-                        // Header
-                        if (title != null) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 20.dp, vertical = 12.dp),
-                                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                when {
-                                    // Use pre-resolved packageInfo if available, fall back to packageName
-                                    titleIconPackageName != null -> {
-                                        AppIcon(
-                                            packageInfo = titleIconPackageInfo,
-                                            packageName = if (titleIconPackageInfo == null) titleIconPackageName else null,
-                                            contentDescription = null,
-                                            modifier = Modifier
-                                                .size(32.dp)
-                                                .clip(RoundedCornerShape(8.dp)),
-                                            preferredSource = AppDataSource.PATCHED_APK
-                                        )
-                                    }
-                                    titleGradientColors.isNotEmpty() -> {
-                                        Box(
-                                            modifier = Modifier
-                                                .size(10.dp)
-                                                .clip(RoundedCornerShape(50))
-                                                .background(Brush.linearGradient(titleGradientColors))
-                                        )
-                                    }
-                                }
-                                // Use pre-resolved displayName if available, otherwise fall back to AppLabel
-                                if (titleIconPackageName != null) {
-                                    if (titleIconDisplayName != null) {
-                                        Text(
-                                            text = titleIconDisplayName,
-                                            style = MaterialTheme.typography.titleMedium.copy(
-                                                fontWeight = FontWeight.Bold,
-                                                color = MaterialTheme.colorScheme.onSurface
-                                            ),
-                                            modifier = Modifier.weight(1f),
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis
-                                        )
-                                    } else {
-                                        AppLabel(
-                                            packageName = titleIconPackageName,
-                                            style = MaterialTheme.typography.titleMedium.copy(
-                                                fontWeight = FontWeight.Bold,
-                                                color = MaterialTheme.colorScheme.onSurface
-                                            ),
-                                            modifier = Modifier.weight(1f),
-                                            defaultText = title,
-                                            preferredSource = AppDataSource.PATCHED_APK,
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis
-                                        )
-                                    }
-                                } else {
-                                    Text(
-                                        text = title,
-                                        style = MaterialTheme.typography.titleMedium,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.onSurface,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
-                                    )
-                                }
-                            }
-
-                            MorpheSettingsDivider(fullWidth = false)
-                            Spacer(Modifier.height(4.dp))
-                        }
-
-                        // Items
-                        items.forEach { item ->
-                            BottomSheetMenuItemRow(item = item, onDismiss = onDismiss)
-                        }
-
-                        Spacer(Modifier.height(4.dp))
-                    }
-                }
-            }
-        }
-    }
-}
-
-/**
- * Single row inside [MorpheBottomSheetMenu].
- */
-@Composable
-private fun BottomSheetMenuItemRow(
-    item: BottomSheetMenuItem,
-    onDismiss: () -> Unit
-) {
-    val view = LocalView.current
-
-    val iconBgColors = if (item.isDestructive) {
-        listOf(
-            MaterialTheme.colorScheme.errorContainer,
-            MaterialTheme.colorScheme.errorContainer
-        )
-    } else if (item.gradientColors.isNotEmpty()) {
-        item.gradientColors.map { it.copy(alpha = 0.15f) }
-    } else {
-        listOf(
-            MaterialTheme.colorScheme.primaryContainer,
-            MaterialTheme.colorScheme.primaryContainer
-        )
-    }
-
-    val iconTint = if (item.isDestructive) {
-        MaterialTheme.colorScheme.error
-    } else {
-        item.gradientColors.firstOrNull() ?: MaterialTheme.colorScheme.primary
-    }
-
-    val labelColor = if (item.isDestructive) {
-        MaterialTheme.colorScheme.error
-    } else {
-        MaterialTheme.colorScheme.onSurface
-    }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                item.onClick()
-                onDismiss()
-            }
-            .padding(horizontal = 20.dp, vertical = 14.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .size(36.dp)
-                .clip(RoundedCornerShape(10.dp))
-                .background(Brush.linearGradient(iconBgColors)),
-            contentAlignment = Alignment.Center
-        ) {
-            MorpheIcon(
-                icon = item.icon,
-                tint = iconTint,
-                size = 20.dp
-            )
-        }
-
-        Text(
-            text = item.label,
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Medium,
-            color = labelColor
-        )
     }
 }

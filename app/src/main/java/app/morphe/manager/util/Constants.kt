@@ -91,16 +91,8 @@ object AppPackages {
     val DEFAULT_DOWNLOAD_COLOR = Color(0xFF6C63FF)
 
     /**
-     * Default pinned packages for first-time users.
-     * Derived from KnownApp registry - update isPinnedByDefault there to change this.
-     */
-    val DEFAULT_PINNED_PACKAGES: Set<String> by lazy {
-        KnownApp.all.filter { it.isPinnedByDefault }.map { it.packageName }.toSet()
-    }
-
-    /**
      * Ordered list of gradient colors for cold-start shimmer placeholders.
-     * Matches the default pinned apps order so shimmer looks correct before data loads.
+     * Uses apps with isPinnedByDefault so shimmer matches the expected top items.
      */
     val DEFAULT_SHIMMER_GRADIENTS: List<List<Color>> by lazy {
         KnownApp.all.filter { it.isPinnedByDefault }.map { it.gradientColors }

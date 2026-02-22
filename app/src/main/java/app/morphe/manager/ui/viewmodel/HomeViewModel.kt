@@ -48,15 +48,7 @@ import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.net.HttpURLConnection
@@ -67,7 +59,7 @@ import java.util.zip.ZipInputStream
 import javax.net.ssl.SSLException
 
 /**
- * Bundle update status for snackbar display
+ * Bundle update status for snackbar display.
  */
 enum class BundleUpdateStatus {
     Updating,    // Update in progress
@@ -76,7 +68,7 @@ enum class BundleUpdateStatus {
 }
 
 /**
- * Dialog state for unsupported version warning
+ * Dialog state for unsupported version warning.
  */
 data class UnsupportedVersionDialogState(
     val packageName: String,
@@ -86,7 +78,7 @@ data class UnsupportedVersionDialogState(
 )
 
 /**
- * Dialog state for wrong package warning
+ * Dialog state for wrong package warning.
  */
 data class WrongPackageDialogState(
     val expectedPackage: String,
@@ -94,7 +86,7 @@ data class WrongPackageDialogState(
 )
 
 /**
- * Quick patch parameters
+ * Quick patch parameters.
  */
 data class QuickPatchParams(
     val selectedApp: SelectedApp,
@@ -103,7 +95,7 @@ data class QuickPatchParams(
 )
 
 /**
- * Saved APK information for display in APK selection dialog
+ * Saved APK information for display in APK selection dialog.
  */
 data class SavedApkInfo(
     val fileName: String,
@@ -112,8 +104,8 @@ data class SavedApkInfo(
 )
 
 /**
- * Combined ViewModel for Home and Dashboard functionality
- * Manages all dialogs, user interactions, APK processing, and bundle management
+ * Combined ViewModel for Home and Dashboard functionality.
+ * Manages all dialogs, user interactions, APK processing, and bundle management.
  */
 class HomeViewModel(
     private val app: Application,
@@ -142,7 +134,7 @@ class HomeViewModel(
     }
 
     /**
-     * Android 11 kills the app process after granting the "install apps" permission
+     * Android 11 kills the app process after granting the "install apps" permission.
      */
     val android11BugActive get() = Build.VERSION.SDK_INT == Build.VERSION_CODES.R && !pm.canInstallPackages()
 
@@ -272,7 +264,7 @@ class HomeViewModel(
     }
 
     /**
-     * Check for bundle updates for installed apps
+     * Check for bundle updates for installed apps.
      */
     suspend fun checkInstalledAppsForUpdates(
         installedApps: List<InstalledApp>,
@@ -444,7 +436,7 @@ class HomeViewModel(
                     gradientColors = AppPackages.getGradientColors(packageName),
                     installedApp = null,
                     packageInfo = resolvedData.packageInfo,
-                    isPinned = false,
+                    isPinnedByDefault = KnownApp.fromPackage(packageName)?.isPinnedByDefault == true,
                     isDeleted = false,
                     hasUpdate = false,
                     patchCount = 0
@@ -457,18 +449,17 @@ class HomeViewModel(
     /**
      * Combined flow that produces the sorted list of home app items.
      *
-     * Sorting order:
-     * 1. Pinned apps first (in stable order)
-     * 2. Non-pinned visible apps (alphabetical by display name)
+     * Sorting order by display name:
+     * 1. Patched (installed) apps first
+     * 2. Non-patched apps
      * Hidden apps are excluded.
      */
     val homeAppItems: StateFlow<List<HomeAppItem>> = combine(
         patchablePackagesFlow,
-        homeAppButtonPrefs.pinnedPackages,
         homeAppButtonPrefs.hiddenPackages,
         installedAppRepository.getAll(),
         _appUpdatesAvailable
-    ) { packages, pinned, hidden, installedApps, updatesMap ->
+    ) { packages, hidden, installedApps, updatesMap ->
         val installedMap = installedApps.associateBy { it.originalPackageName }
 
         packages
@@ -476,9 +467,7 @@ class HomeViewModel(
             .map { packageName ->
                 val installedApp = installedMap[packageName]
                 val gradientColors = AppPackages.getGradientColors(packageName)
-                val isPinned = packageName in pinned
 
-                // Use AppDataResolver as single source of truth for display data.
                 // Priority: PATCHED_APK → ORIGINAL_APK → INSTALLED → CONSTANTS
                 val resolvedData = appDataResolver.resolveAppData(
                     packageName = packageName,
@@ -509,14 +498,15 @@ class HomeViewModel(
                     gradientColors = gradientColors,
                     installedApp = installedApp,
                     packageInfo = resolvedData.packageInfo,
-                    isPinned = isPinned,
+                    isPinnedByDefault = KnownApp.fromPackage(packageName)?.isPinnedByDefault == true,
                     isDeleted = isDeleted,
                     hasUpdate = hasUpdate,
                     patchCount = 0
                 )
             }
             .sortedWith(
-                compareByDescending<HomeAppItem> { it.isPinned }
+                compareByDescending<HomeAppItem> { it.installedApp != null }
+                    .thenByDescending { it.isPinnedByDefault }
                     .thenBy { it.displayName }
             )
     }
@@ -524,28 +514,21 @@ class HomeViewModel(
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     /**
-     * Toggle pin state for a package
-     */
-    fun toggleAppPin(packageName: String) {
-        homeAppButtonPrefs.togglePin(packageName)
-    }
-
-    /**
-     * Hide an app from the home screen
+     * Hide an app from the home screen.
      */
     fun hideApp(packageName: String) {
         homeAppButtonPrefs.hide(packageName)
     }
 
     /**
-     * Unhide an app on the home screen
+     * Unhide an app on the home screen.
      */
     fun unhideApp(packageName: String) {
         homeAppButtonPrefs.unhide(packageName)
     }
 
     /**
-     * Update bundle data when sources or bundle info changes
+     * Update bundle data when sources or bundle info changes.
      */
     fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) {
         // Get set of enabled bundle UIDs
@@ -559,14 +542,14 @@ class HomeViewModel(
     }
 
     /**
-     * Update loading state
+     * Update loading state.
      */
     fun updateLoadingState(bundleUpdateInProgress: Boolean, hasInstalledApps: Boolean) {
         installedAppsLoading = bundleUpdateInProgress || !hasInstalledApps
     }
 
     /**
-     * Update deleted apps status
+     * Update deleted apps status.
      */
     fun updateDeletedAppsStatus(installedApps: List<InstalledApp>) {
         appsDeletedStatus = installedApps.associate { app ->
@@ -584,7 +567,7 @@ class HomeViewModel(
     }
 
     /**
-     * Handle app button click
+     * Handle app button click.
      */
     fun handleAppClick(
         packageName: String,
@@ -614,7 +597,7 @@ class HomeViewModel(
     }
 
     /**
-     * Show patch dialog
+     * Show patch dialog.
      *
      * Dialog logic:
      * - SHOW dialog when:
@@ -659,7 +642,7 @@ class HomeViewModel(
     }
 
     /**
-     * Load information about saved original APK for a package
+     * Load information about saved original APK for a package.
      */
     private suspend fun loadSavedApkInfo(packageName: String): SavedApkInfo? {
         try {
@@ -689,7 +672,7 @@ class HomeViewModel(
     }
 
     /**
-     * Handle APK file selection
+     * Handle APK file selection.
      */
     fun handleApkSelection(uri: Uri?) {
         if (uri == null) {
@@ -711,7 +694,7 @@ class HomeViewModel(
     }
 
     /**
-     * Handle selection of saved APK from APK availability dialog
+     * Handle selection of saved APK from APK availability dialog.
      */
     fun handleSavedApkSelection() {
         val savedInfo = pendingSavedApkInfo
@@ -759,7 +742,7 @@ class HomeViewModel(
     }
 
     /**
-     * Process selected APK file
+     * Process selected APK file.
      */
     private suspend fun processSelectedApp(selectedApp: SelectedApp) {
         // Validate package name if expected
@@ -828,7 +811,7 @@ class HomeViewModel(
     }
 
     /**
-     * Start patching flow
+     * Start patching flow.
      */
     suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
@@ -976,7 +959,7 @@ class HomeViewModel(
     }
 
     /**
-     * Save options to repository
+     * Save options to repository.
      */
     fun saveOptions(packageName: String, options: Options) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -985,7 +968,7 @@ class HomeViewModel(
     }
 
     /**
-     * Proceed with patching
+     * Proceed with patching.
      */
     fun proceedWithPatching(
         selectedApp: SelectedApp,
@@ -1019,7 +1002,7 @@ class HomeViewModel(
     }
 
     /**
-     * Update option in expert mode
+     * Update option in expert mode.
      */
     fun updateOptionInExpertMode(
         bundleUid: Int,
@@ -1031,14 +1014,14 @@ class HomeViewModel(
     }
 
     /**
-     * Reset options for a patch in expert mode
+     * Reset options for a patch in expert mode.
      */
     fun resetOptionsInExpertMode(bundleUid: Int, patchName: String) {
         expertModeOptions = expertModeOptions.resetOptionsForPatch(bundleUid, patchName)
     }
 
     /**
-     * Clean up expert mode data
+     * Clean up expert mode data.
      */
     fun cleanupExpertModeData() {
         showExpertModeDialog = false
@@ -1049,7 +1032,7 @@ class HomeViewModel(
     }
 
     /**
-     * Resolve download redirect
+     * Resolve download redirect.
      */
     fun resolveDownloadRedirect() {
         fun resolveUrlRedirect(url: String): String {
@@ -1134,7 +1117,7 @@ class HomeViewModel(
     }
 
     /**
-     * Handle download instructions continue
+     * Handle download instructions continue.
      */
     fun handleDownloadInstructionsContinue(onOpenUrl: (String) -> Boolean) {
         val urlToOpen = resolvedDownloadUrl!!
@@ -1151,7 +1134,7 @@ class HomeViewModel(
     }
 
     /**
-     * Clean up pending data
+     * Clean up pending data.
      */
     fun cleanupPendingData(keepSelectedApp: Boolean = false) {
         pendingPackageName = null
@@ -1173,8 +1156,8 @@ class HomeViewModel(
     }
 
     /**
-     * Extract compatible versions for each package from bundle info
-     * Returns a map of package name to sorted list of versions (newest first)
+     * Extract compatible versions for each package from bundle info.
+     * Returns a map of package name to sorted list of versions (newest first).
      */
     private fun extractCompatibleVersions(
         bundleInfo: Map<Int, Any>,
@@ -1223,8 +1206,8 @@ class HomeViewModel(
     }
 
     /**
-     * Load local APK and extract package info
-     * Supports both single APK and split APK archives (apkm, apks, xapk)
+     * Load local APK and extract package info.
+     * Supports both single APK and split APK archives (apkm, apks, xapk).
      */
     private suspend fun loadLocalApk(
         context: Context,
@@ -1279,7 +1262,7 @@ class HomeViewModel(
     }
 
     /**
-     * Extract package info from split APK archive (apkm, apks, xapk)
+     * Extract package info from split APK archive (apkm, apks, xapk).
      */
     private fun extractPackageInfoFromSplitArchive(
         context: Context,

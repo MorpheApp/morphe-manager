@@ -300,7 +300,6 @@ fun HomeScreen(
                     item.installedApp?.let { showInstalledAppDialog = it.currentPackageName }
                 },
                 onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
-                onTogglePin = { packageName -> homeViewModel.toggleAppPin(packageName) },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                 hiddenAppItems = hiddenAppItems,

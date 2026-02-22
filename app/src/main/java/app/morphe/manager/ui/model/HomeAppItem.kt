@@ -16,7 +16,7 @@ data class HomeAppItem(
     val gradientColors: List<Color>,
     val installedApp: InstalledApp?,
     val packageInfo: PackageInfo?,
-    val isPinned: Boolean,
+    val isPinnedByDefault: Boolean,
     val isDeleted: Boolean,
     val hasUpdate: Boolean,
     val patchCount: Int

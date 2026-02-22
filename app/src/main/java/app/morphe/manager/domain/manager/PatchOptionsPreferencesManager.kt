@@ -92,8 +92,6 @@ The image dimensions must be as follows:
 - drawable-xxxhdpi: 512x192 px"""
     }
 
-    // ==================== YouTube Options ====================
-
     // Theme - Dark
     fun darkThemeColor(packageName: String) = stringPreference(
         "${packageName}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
@@ -187,8 +185,7 @@ The image dimensions must be as follows:
 }
 
 /**
- * Gets localized text if it matches original English text,
- * otherwise returns the custom text from patch
+ * Gets localized text if it matches original English text, otherwise returns the custom text from patch.
  */
 fun getLocalizedOrCustomText(
     context: Context,

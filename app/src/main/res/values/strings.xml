@@ -8,17 +8,15 @@
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
     <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode</string>
-    <string name="android_11_bug_dialog_title">Android 11 bug</string>
-    <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
-
-    <!-- Home Screen - App Button Actions -->
-    <string name="home_app_pin">Pin</string>
-    <string name="home_app_unpin">Unpin</string>
-    <string name="home_app_hide">Hide</string>
+    <string name="home_app_hide_title">Hide this app?</string>
+    <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later using the \'%1$s\' button at the bottom of the list</string>
+    <string name="home_app_will_be_hidden">This app will be hidden</string>
     <string name="home_app_show_hidden">Show hidden apps</string>
     <string name="home_app_no_hidden">No hidden apps</string>
     <string name="home_app_hidden_apps_title">Hidden apps</string>
     <string name="home_app_hidden_apps_hint">Tap on an app to show it in the list again</string>
+    <string name="android_11_bug_dialog_title">Android 11 bug</string>
+    <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
 
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Manager update available</string>
@@ -681,6 +679,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="update">Update</string>
     <string name="allow">Allow</string>
     <string name="details">Details</string>
+    <string name="hide">Hide</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>

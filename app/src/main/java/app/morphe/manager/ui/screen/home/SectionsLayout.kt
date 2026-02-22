@@ -47,11 +47,11 @@ import kotlinx.coroutines.delay
 
 /**
  * Home screen layout with dynamic app buttons:
- * 1. Notifications section (messages/updates)
+ * 1. Notifications section
  * 2. Greeting message section
- * 3. Dynamic app buttons (scrollable, from bundle packages)
- * 4. Other apps button (outside scroll)
- * 5. Bottom action bar (Bundles, Settings)
+ * 3. Dynamic app buttons
+ * 4. Other apps button
+ * 5. Bottom action bar
  */
 @Composable
 fun SectionsLayout(
@@ -69,7 +69,6 @@ fun SectionsLayout(
     homeAppItems: List<HomeAppItem>,
     onAppClick: (HomeAppItem) -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
-    onTogglePin: (String) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
@@ -107,7 +106,6 @@ fun SectionsLayout(
                     homeAppItems = homeAppItems,
                     onAppClick = onAppClick,
                     onInstalledAppClick = onInstalledAppClick,
-                    onTogglePin = onTogglePin,
                     onHideApp = onHideApp,
                     onUnhideApp = onUnhideApp,
                     hiddenAppItems = hiddenAppItems,
@@ -141,7 +139,7 @@ fun SectionsLayout(
 }
 
 /**
- * Adaptive content layout that switches between portrait and landscape modes
+ * Adaptive content layout that switches between portrait and landscape modes.
  */
 @Composable
 private fun AdaptiveContent(
@@ -150,7 +148,6 @@ private fun AdaptiveContent(
     homeAppItems: List<HomeAppItem>,
     onAppClick: (HomeAppItem) -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
-    onTogglePin: (String) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
@@ -198,7 +195,6 @@ private fun AdaptiveContent(
                         itemSpacing = itemSpacing,
                         onAppClick = onAppClick,
                         onInstalledAppClick = onInstalledAppClick,
-                        onTogglePin = onTogglePin,
                         onHideApp = onHideApp,
                         onUnhideApp = onUnhideApp,
                         hiddenAppItems = hiddenAppItems,
@@ -206,7 +202,7 @@ private fun AdaptiveContent(
                         modifier = Modifier.weight(1f)
                     )
 
-                    // Section 4: Other apps (outside scroll)
+                    // Section 4: Other apps
                     if (!showOtherAppsButton) {
                         Spacer(modifier = Modifier.height(48.dp + itemSpacing))
                     } else {
@@ -235,7 +231,6 @@ private fun AdaptiveContent(
                         itemSpacing = itemSpacing,
                         onAppClick = onAppClick,
                         onInstalledAppClick = onInstalledAppClick,
-                        onTogglePin = onTogglePin,
                         onHideApp = onHideApp,
                         onUnhideApp = onUnhideApp,
                         hiddenAppItems = hiddenAppItems,
@@ -261,8 +256,8 @@ private fun AdaptiveContent(
 }
 
 /**
- * Section 1: Unified notifications overlay component
- * Handles both manager update and bundle update notifications
+ * Section 1: Unified notifications overlay component.
+ * Handles both manager update and bundle update notifications.
  */
 @Composable
 fun NotificationsOverlay(
@@ -310,7 +305,7 @@ fun NotificationsOverlay(
 }
 
 /**
- * Manager update snackbar
+ * Manager update snackbar.
  */
 @Composable
 fun ManagerUpdateSnackbar(
@@ -372,7 +367,7 @@ fun ManagerUpdateSnackbar(
 }
 
 /**
- * Bundle update snackbar
+ * Bundle update snackbar.
  */
 @Composable
 fun BundleUpdateSnackbar(
@@ -401,7 +396,7 @@ fun BundleUpdateSnackbar(
 }
 
 /**
- * Snackbar content with status indicator
+ * Snackbar content with status indicator.
  */
 @Composable
 private fun BundleUpdateSnackbarContent(
@@ -545,7 +540,7 @@ private fun BundleUpdateSnackbarContent(
 }
 
 /**
- * Section 2: Greeting message
+ * Section 2: Greeting message.
  */
 @Composable
 fun GreetingSection(
@@ -565,8 +560,6 @@ fun GreetingSection(
 
 /**
  * Section 3: Dynamic scrollable app buttons list.
- * Uses LazyColumn for scrollability when there are many apps.
- * Centers content vertically when items fit without scrolling (e.g. default 3 buttons).
  */
 @Composable
 fun MainAppsSection(
@@ -574,7 +567,6 @@ fun MainAppsSection(
     itemSpacing: Dp = 16.dp,
     onAppClick: (HomeAppItem) -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
-    onTogglePin: (String) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
@@ -582,11 +574,11 @@ fun MainAppsSection(
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
-    // Track if data was ever loaded — once true, never show shimmer again on resume
+    // Track if data was ever loaded, never show shimmer again on resume
     var hasEverLoaded by remember { mutableStateOf(homeAppItems.isNotEmpty()) }
 
     // Stable loading state with debounce to prevent flickering.
-    // Only shows shimmer on genuine cold start (data never arrived), not on app resume.
+    // Only shows shimmer on genuine cold start (data never arrived).
     var stableLoadingState by remember { mutableStateOf(!hasEverLoaded) }
 
     LaunchedEffect(installedAppsLoading, homeAppItems.isEmpty()) {
@@ -679,7 +671,6 @@ fun MainAppsSection(
                         hasUpdate = item.hasUpdate,
                         onAppClick = { onAppClick(item) },
                         onInstalledAppClick = onInstalledAppClick,
-                        onTogglePin = { onTogglePin(item.packageName) },
                         onHide = { onHideApp(item.packageName) },
                         modifier = Modifier.animateItem()
                     )
@@ -711,7 +702,7 @@ fun MainAppsSection(
 }
 
 /**
- * Single dynamic app card with long-press context menu.
+ * Single dynamic app card with long-press action.
  */
 @Composable
 private fun DynamicAppCard(
@@ -720,7 +711,6 @@ private fun DynamicAppCard(
     hasUpdate: Boolean,
     onAppClick: () -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
-    onTogglePin: () -> Unit,
     onHide: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -759,28 +749,11 @@ private fun DynamicAppCard(
             }
         }
 
-        // Pin indicator
-        if (!isLoading && item.isPinned) {
-            Icon(
-                imageVector = Icons.Outlined.Star,
-                contentDescription = stringResource(R.string.home_app_pin),
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(top = 8.dp, start = 10.dp)
-                    .size(16.dp),
-                tint = Color.White.copy(alpha = 0.7f)
-            )
-        }
-
-        // Context menu
+        // Hide confirmation dialog
         if (showContextMenu) {
-            MorpheContextMenu(
+            HideAppDialog(
                 item = item,
                 onDismiss = { showContextMenu = false },
-                onTogglePin = {
-                    onTogglePin()
-                    showContextMenu = false
-                },
                 onHide = {
                     onHide()
                     showContextMenu = false
@@ -791,43 +764,85 @@ private fun DynamicAppCard(
 }
 
 /**
- * Long-press context menu for a home screen app card.
+ * Confirmation dialog asking user whether to hide the app.
  */
 @Composable
-internal fun MorpheContextMenu(
+internal fun HideAppDialog(
     item: HomeAppItem,
     onDismiss: () -> Unit,
-    onTogglePin: () -> Unit,
     onHide: () -> Unit
 ) {
-    MorpheBottomSheetMenu(
-        title = item.displayName,
-        titleGradientColors = item.gradientColors,
-        titleIconPackageName = item.packageName,
-        titleIconPackageInfo = item.packageInfo,
-        titleIconDisplayName = item.displayName,
-        onDismiss = onDismiss,
-        items = listOf(
-            BottomSheetMenuItem(
-                icon = if (item.isPinned) Icons.Outlined.StarBorder else Icons.Outlined.Star,
-                label = stringResource(
-                    if (item.isPinned) R.string.home_app_unpin else R.string.home_app_pin
-                ),
-                gradientColors = item.gradientColors,
-                onClick = onTogglePin
-            ),
-            BottomSheetMenuItem(
-                icon = Icons.Outlined.VisibilityOff,
-                label = stringResource(R.string.home_app_hide),
-                gradientColors = item.gradientColors,
-                onClick = onHide
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_app_hide_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.hide),
+                primaryIcon = Icons.Outlined.VisibilityOff,
+                onPrimaryClick = onHide,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
             )
-        )
-    )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            // Original app card preview
+            AppCardLayout(
+                gradientColors = item.gradientColors,
+                enabled = false,
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                AppIcon(
+                    packageInfo = item.packageInfo,
+                    packageName = if (item.packageInfo == null) item.packageName else null,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    preferredSource = AppDataSource.PATCHED_APK
+                )
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = item.displayName,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_app_will_be_hidden),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White.copy(alpha = 0.75f)
+                    )
+                }
+            }
+
+            // Explanation text
+            Text(
+                text = stringResource(
+                    R.string.home_app_hide_message,
+                    stringResource(R.string.home_app_show_hidden)
+                ),
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
 }
 
 /**
- * Card dialog that lists hidden apps and lets the user restore them.
+ * Card dialog that lists hidden apps.
  */
 @Composable
 internal fun HiddenAppsDialog(
@@ -1091,7 +1106,7 @@ fun InstalledAppCard(
 }
 
 /**
- * Update badge for app cards
+ * Update badge for app cards.
  */
 @Composable
 private fun UpdateBadge(
@@ -1125,7 +1140,7 @@ private fun UpdateBadge(
 }
 
 /**
- * App button with gradient background for apps not yet patched.
+ * App button with gradient background.
  */
 @Composable
 fun AppButton(
@@ -1170,8 +1185,7 @@ fun AppButton(
             }
         }
     ) {
-        // App icon — uses pre-resolved packageInfo, no IO on render.
-        // preferredSource is used only as fallback when packageInfo is null.
+        // App icon
         AppIcon(
             packageInfo = packageInfo,
             packageName = if (packageInfo == null) packageName else null,
@@ -1187,7 +1201,7 @@ fun AppButton(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            // Display name — uses pre-resolved value from HomeAppItem, no shimmer
+            // Display name
             Text(
                 text = displayName,
                 style = MaterialTheme.typography.titleLarge.copy(
@@ -1220,7 +1234,7 @@ fun AppButton(
 }
 
 /**
- * Section 4: Other apps button
+ * Section 4: Other apps button.
  */
 @Composable
 fun OtherAppsSection(
