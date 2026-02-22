@@ -305,7 +305,7 @@ fun HomeDialogs(
         val bundle = homeViewModel.bundleToRename!!
 
         RenameBundleDialog(
-            initialValue = bundle.displayName.orEmpty(),
+            initialValue = bundle.displayTitle,
             onDismissRequest = {
                 homeViewModel.showRenameBundleDialog = false
                 homeViewModel.bundleToRename = null
