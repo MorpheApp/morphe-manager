@@ -507,7 +507,7 @@ class HomeViewModel(
             .sortedWith(
                 compareByDescending<HomeAppItem> { it.installedApp != null }
                     .thenByDescending { it.isPinnedByDefault }
-                    .thenBy { it.displayName }
+                    .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
             )
     }
         .flowOn(Dispatchers.IO)
