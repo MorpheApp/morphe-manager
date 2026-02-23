@@ -1,3 +1,10 @@
+# app [1.8.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2026-02-23)
+
+
+### Bug Fixes
+
+* Change "help me find apk" dialog "yes" button to open web search ([#237](https://github.com/MorpheApp/morphe-manager/issues/237)) ([b61daee](https://github.com/MorpheApp/morphe-manager/commit/b61daee7b16dbbf5e5c5b7703fb18d555210c2f7))
+
 # app [1.8.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.3...v1.8.0-dev.4) (2026-02-23)
 
 
