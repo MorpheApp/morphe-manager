@@ -361,10 +361,10 @@ private fun ApkAvailabilityDialog(
             ) {
                 // Main action buttons
                 MorpheDialogButtonRow(
-                    primaryText = stringResource(R.string.home_apk_availability_no),
+                    primaryText = stringResource(R.string.home_apk_availability_yes),
                     onPrimaryClick = onNeedApk,
                     primaryIcon = Icons.Outlined.Download,
-                    secondaryText = stringResource(R.string.home_apk_availability_yes),
+                    secondaryText = stringResource(R.string.home_apk_availability_no),
                     onSecondaryClick = onHaveApk,
                     secondaryIcon = Icons.Outlined.Check,
                     layout = DialogButtonLayout.Vertical
