@@ -83,13 +83,13 @@
     <string name="sources_download_fail">Failed to download sources: %s</string>
 
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Do you have the original APK?</string>
-    <string name="home_apk_availability_dialog_simple">To patch &lt;b&gt;%1$s&lt;/b&gt;, you need an unpatched APK file with version:</string>
-    <string name="home_apk_availability_dialog_expert">Compatible versions for &lt;b&gt;%1$s&lt;/b&gt;:</string>
+    <string name="home_apk_availability_dialog_title">Need help finding an original unpatched APK?</string>
+    <string name="home_apk_availability_dialog_simple">To patch &lt;b&gt;%s&lt;/b&gt;, you need the unpatched APK version:</string>
+    <string name="home_apk_availability_dialog_expert">To patch &lt;b&gt;%s&lt;/b&gt;, you need an unpatched APK of versions:</string>
     <string name="home_apk_availability_recommended_label">Recommended</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
-    <string name="home_apk_availability_yes">Yes, I have it</string>
-    <string name="home_apk_availability_no">No, help me find it</string>
+    <string name="home_apk_availability_yes">Yes, help me find an APK</string>
+    <string name="home_apk_availability_no">No, I already have an APK</string>
     <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
 
