@@ -1,3 +1,10 @@
+# app [1.8.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.3...v1.8.0-dev.4) (2026-02-23)
+
+
+### Features
+
+* Show all patched apps on homescreen ([#232](https://github.com/MorpheApp/morphe-manager/issues/232)) ([a265801](https://github.com/MorpheApp/morphe-manager/commit/a2658012c2e994b1b587bbb2494c7c097056079a))
+
 # app [1.8.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2026-02-20)
 
 
