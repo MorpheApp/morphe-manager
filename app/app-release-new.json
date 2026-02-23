@@ -1,7 +1,0 @@
-{
-  "created_at": "2026-02-23T15:29:18.441Z",
-  "description": "# app [1.8.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2026-02-23)\n\n\n### Bug Fixes\n\n* Change \"help me find apk\" dialog \"yes\" button to open web search ([#237](https://github.com/MorpheApp/morphe-manager/issues/237)) ([b61daee](https://github.com/MorpheApp/morphe-manager/commit/b61daee7b16dbbf5e5c5b7703fb18d555210c2f7))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.8.0-dev.5/morphe-manager-1.8.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.8.0-dev.5/morphe-manager-1.8.0-dev.5.apk.asc",
-  "version": "1.8.0-dev.5"
-}
