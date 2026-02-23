@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">尚未修补</string>
     <string name="home_no_patches_available">无可用更新</string>
     <string name="home_default_source_disabled">Morphe 补丁源已禁用。请在“补丁源”工作表中启用它或使用“专家模式”。</string>
+    <string name="home_app_hide_title">隐藏此应用？</string>
+    <string name="home_app_hide_message">此应用将从主屏幕隐藏。您可以稍后使用列表底部的“%1$s”按钮恢复它。</string>
+    <string name="home_app_will_be_hidden">此应用将被隐藏</string>
+    <string name="home_app_show_hidden">显示隐藏的应用</string>
+    <string name="home_app_no_hidden">没有隐藏的应用</string>
+    <string name="home_app_hidden_apps_title">隐藏的应用</string>
+    <string name="home_app_hidden_apps_hint">点击应用以重新显示其在列表中的位置</string>
     <string name="android_11_bug_dialog_title">Android 11 错误</string>
     <string name="android_11_bug_dialog_description">必须提前授予应用安装权限，以避免 Android 11 系统中的某个错误对用户体验造成负面影响。</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">补丁源</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
     <string name="sources_management_failed_to_open_url">执行 %s 失败</string>
-    <string name="sources_management_date_added">已添加</string>
-    <string name="sources_management_date_updated">更新于</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">显示名称</string>
     <string name="sources_dialog_rename">重命名补丁配置文件</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">无可用更新</string>
     <string name="sources_download_fail">下载补丁失败：%s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">您有原始未打补丁的 APK 吗？</string>
-    <string name="home_apk_availability_dialog_simple">要修补 %1$s，您需要一个未修补的 APK，版本为：</string>
-    <string name="home_apk_availability_dialog_expert">"您有未修补的 %1$s APK 吗？
-
-兼容版本："</string>
+    <string name="home_apk_availability_dialog_title">需要帮助找到原始未打补丁的APK吗？</string>
+    <string name="home_apk_availability_dialog_simple">要修补&lt;b&gt;%s&lt;/b&gt;，需要未修补的 APK 版本：</string>
+    <string name="home_apk_availability_dialog_expert">补丁&lt;b&gt;%s&lt;/b&gt;需要未补丁的APK版本</string>
     <string name="home_apk_availability_recommended_label">推荐</string>
     <string name="home_apk_availability_unpatched_label">未修补</string>
-    <string name="home_apk_availability_yes">是的，我有</string>
-    <string name="home_apk_availability_no">没有，帮我找一下</string>
+    <string name="home_apk_availability_yes">是的，帮我找个 APK</string>
+    <string name="home_apk_availability_no">不，我已经有APK了</string>
     <string name="home_apk_use_saved_with_version">使用保存的APK（v%s）</string>
     <string name="home_app_info_no_saved_apk">没有保存的APK。修补需要重新选择APK文件</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@
     <string name="home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
     <string name="home_download_instructions_step3">等待下载完成，并 &lt;b&gt;不要安装&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">等待下载完成，然后 &lt;b&gt;安装 APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">下载完成后，请重新打开此应用</string>
-    <string name="home_download_instructions_step4_mount">安装原始APK后，请重新打开此应用</string>
+    <string name="home_download_instructions_step4">下载完成后，返回 Morphe</string>
+    <string name="home_download_instructions_step4_mount">安装原始APK后，返回Morphe</string>
     <string name="home_download_instructions_continue">继续到 APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">选择您下载的APK</string>
-    <string name="home_file_picker_prompt_description">现在选择您刚刚下载的%1$s APK 文件</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">打开我下载的APK文件</string>
+    <string name="home_file_picker_prompt_title">选择下载的 APK</string>
+    <string name="home_file_picker_prompt_description">选择您刚刚下载的&lt;b&gt;%1$s&lt;/b&gt; APK 文件</string>
     <string name="home_file_picker_prompt_open_apk">打开APK文件</string>
     <string name="home_recommended_version">推荐版本</string>
     <string name="home_selected_version">已选版本</string>
@@ -102,7 +104,7 @@
     <string name="expert_mode_title">高级模式</string>
     <string name="expert_mode_subtitle_extended_format">%2$s人中以选择%1$s</string>
     <string name="expert_mode_search">搜索补丁</string>
-    <string name="expert_mode_proceed">开始修补</string>
+    <string name="expert_mode_proceed">开始打补丁</string>
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
@@ -171,8 +173,8 @@
     <string name="home_app_info_patched_at">已修补</string>
     <string name="home_app_info_patch_update_available">有可用的补丁更新</string>
     <string name="home_app_info_patch_update_available_description">有新的修补版本可用。重新修补您的应用以获取最新改进和修复</string>
-    <string name="home_app_info_app_deleted_warning">应用在管理员外卸载</string>
-    <string name="home_app_info_app_deleted_description">此应用在管理员外卸载。重新补丁以恢复功能</string>
+    <string name="home_app_info_app_deleted_warning">应用已卸载</string>
+    <string name="home_app_info_app_deleted_description">此应用已在 Morphe 外卸载。重新安装以恢复功能</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">根模式需要在修补前将原始 APK 安装在设备上</string>
     <string name="root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
@@ -202,6 +204,15 @@
     <string name="patcher_install_error_subtitle">尝试重新卸载并安装</string>
     <string name="patcher_ready_to_install_subtitle">按下方按钮安装</string>
     <string name="patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
+    <string name="patcher_storage_permission_dialog_title">无法访问存储路径</string>
+    <string name="patcher_storage_permission_description_api30">一个或多个补丁选项指向 Morphe 管理器无法读取的路径。授予存储访问权限，然后自动开始补丁</string>
+    <string name="patcher_storage_permission_description_legacy">一个或多个补丁选项指向无法访问的路径。更新补丁选项中的路径，然后重试</string>
+    <string name="patcher_storage_permission_grant">授予存储权限</string>
+    <string name="patcher_storage_permission_denied_warning">存储权限已被拒绝。授予权限以使用此路径，或将文件移动到应用的私有目录</string>
+    <string name="patcher_storage_permission_open_settings">打开存储设置</string>
+    <string name="patcher_storage_badge_denied">权限被拒绝</string>
+    <string name="patcher_storage_badge_missing">未找到</string>
+    <string name="patcher_storage_permission_hint">提示：将文件移动到/Android/data/app.morphe.manager/files/ - 不需要额外权限</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">准备中</string>
     <string name="patcher_step_load_patches">加载补丁</string>
@@ -284,7 +295,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">强调色</string>
     <string name="settings_appearance_pure_black">纯黑</string>
-    <string name="settings_appearance_pure_black_description">为OLED显示器使用真正的黑色背景</string>
+    <string name="settings_appearance_pure_black_description">使用真正的黑色背景</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">应用语言</string>
     <string name="settings_appearance_app_language_current">当前语言</string>
@@ -344,7 +355,7 @@
     <string name="settings_advanced_github_pat_configured">已配置令牌</string>
     <string name="settings_advanced_github_pat_how_to_get">如何获取令牌</string>
     <string name="settings_advanced_github_pat_dialog_title">设置 GitHub 个人访问令牌</string>
-    <string name="settings_advanced_github_pat_dialog_description">设置 GitHub 个人访问令牌以便能够将 Pull Request 添加为外部源。创建具有公共仓库范围的 PAT</string>
+    <string name="settings_advanced_github_pat_dialog_description">设置 GitHub 个人访问令牌以能够将 pull 请求添加为外部源。创建具有公共仓库范围的 PAT</string>
     <string name="settings_advanced_github_pat_export_include_label">包含在设置导出中</string>
     <string name="settings_advanced_github_pat_export_include_supporting">将此 PAT 添加到导出的管理器设置中</string>
     <string name="settings_advanced_github_pat_export_warning">请勿共享您的 PAT。如果您在设置导出中包含它，请将该文件保持为私有，因为它包含令牌</string>
@@ -496,7 +507,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">调试</string>
     <string name="settings_system_export_debug_logs">导出调试日志</string>
-    <string name="settings_system_export_debug_logs_description">导出系统日志以进行故障排除</string>
+    <string name="settings_system_export_debug_logs_description">保存系统日志以进行故障排除</string>
     <string name="settings_system_export_debug_logs_export_read_failed">读取日志失败 (退出代码 %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">导出日志失败</string>
     <string name="settings_system_export_debug_logs_export_success">日志已导出</string>
@@ -600,6 +611,8 @@ morphe_header_custom_dark.png
     <string name="saved">已保存</string>
     <string name="update">更新</string>
     <string name="allow">允许</string>
+    <string name="details">详细信息</string>
+    <string name="hide">隐藏</string>
     <string name="installing_ellipsis">正在安装…</string>
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting_ellipsis">正在卸载…</string>

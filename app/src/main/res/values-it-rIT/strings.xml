@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Non ancora patchato</string>
     <string name="home_no_patches_available">Nessuna patch disponibile</string>
     <string name="home_default_source_disabled">La sorgente delle patch di Morphe è disabilitata. Abilitala nella sezione Fonti delle Patch o utilizza la modalità Esperto</string>
+    <string name="home_app_hide_title">Nascondi questa app?</string>
+    <string name="home_app_hide_message">Questa app verrà nascosta dalla schermata principale. Puoi ripristinarla in seguito utilizzando il pulsante \'%1$s\' in fondo all\'elenco</string>
+    <string name="home_app_will_be_hidden">Questa app verrà nascosta</string>
+    <string name="home_app_show_hidden">Mostra app nascoste</string>
+    <string name="home_app_no_hidden">Nessuna app nascosta</string>
+    <string name="home_app_hidden_apps_title">App nascoste</string>
+    <string name="home_app_hidden_apps_hint">Tocca un\'app per mostrarla di nuovo nella lista</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso di installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Fonti delle patch</string>
     <string name="sources_management_open_in_browser">Apri nel browser</string>
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
-    <string name="sources_management_date_added">Aggiunto</string>
-    <string name="sources_management_date_updated">Aggiornato</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome visualizzato</string>
     <string name="sources_dialog_rename">Rinomina la fonte delle patch</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Nessun aggiornamento disponibile</string>
     <string name="sources_download_fail">Impossibile scaricare le fonti: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Hai l\'APK originale non patchato?</string>
-    <string name="home_apk_availability_dialog_simple">Per patchare %1$s, è necessario un APK non patchato con la versione:</string>
-    <string name="home_apk_availability_dialog_expert">"Hai un APK non patchato di %1$s?
-
-Versioni compatibili:"</string>
+    <string name="home_apk_availability_dialog_title">Hai bisogno di aiuto per trovare un\'APK originale non corretta?</string>
+    <string name="home_apk_availability_dialog_simple">Per patchare &lt;b&gt;%s&lt;/b&gt;, è necessario un APK non patchato con la versione:</string>
+    <string name="home_apk_availability_dialog_expert">Per patchare &lt;b&gt;%s&lt;/b&gt;, è necessario un APK non patchato con le versioni:</string>
     <string name="home_apk_availability_recommended_label">Consigliata</string>
     <string name="home_apk_availability_unpatched_label">Non patchato</string>
-    <string name="home_apk_availability_yes">Sì, ce l\'ho</string>
-    <string name="home_apk_availability_no">No, aiutami a trovarlo</string>
+    <string name="home_apk_availability_yes">Sì, aiutami a trovare un APK</string>
+    <string name="home_apk_availability_no">No, è giò già un APK</string>
     <string name="home_apk_use_saved_with_version">Usa l\'APK salvato (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patching richiederà la selezione del file APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Versioni compatibili:"</string>
     <string name="home_download_instructions_download_button_toast">Premi scarica sul sito web, e non qui 😊</string>
     <string name="home_download_instructions_step3">Attendi che il download si completi, e &lt;b&gt;non installare&lt;/b&gt; l\'APK</string>
     <string name="home_download_instructions_step3_mount">Attendi che il download si completi, poi &lt;b&gt;installa l\'APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Dopo il termine del download, apri nuovamente questa app</string>
-    <string name="home_download_instructions_step4_mount">Dopo aver installato l\'APK originale, apri nuovamente questa app</string>
+    <string name="home_download_instructions_step4">After the download finishes, return to Morphe</string>
+    <string name="home_download_instructions_step4_mount">Dopo aver installato l\'APK originale, torna a Morphe</string>
     <string name="home_download_instructions_continue">Continua su APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Seleziona l\'APK che hai scaricato</string>
-    <string name="home_file_picker_prompt_description">Ora seleziona il file APK di %1$s che hai appena scaricato</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Apri il file APK che ho scaricato</string>
+    <string name="home_file_picker_prompt_title">Seleziona l\'APK scaricato</string>
+    <string name="home_file_picker_prompt_description">Seleziona il file &lt;b&gt;%1$s&lt;/b&gt; APK che hai appena scaricato</string>
     <string name="home_file_picker_prompt_open_apk">Apri il file APK</string>
     <string name="home_recommended_version">Versione consigliata</string>
     <string name="home_selected_version">Versione selezionata</string>
@@ -171,8 +173,8 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_app_info_patched_at">Patchato</string>
     <string name="home_app_info_patch_update_available">Aggiornamento delle patch disponibile</string>
     <string name="home_app_info_patch_update_available_description">È disponibile una nuova versione delle patch. Ripatcha la tua app per ottenere gli ultimi miglioramenti e correttivi</string>
-    <string name="home_app_info_app_deleted_warning">App disinstallata al di fuori del manager</string>
-    <string name="home_app_info_app_deleted_description">Questa app è stata disinstallata al di fuori del manager. Ripatcha per ripristinare la funzionalità</string>
+    <string name="home_app_info_app_deleted_warning">App rimossa</string>
+    <string name="home_app_info_app_deleted_description">Questa app è stata rimossa al di fuori di Morphe. Ripatcha per ripristinare la funzionalità</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">La modalità di root richiede che l\'APK originale sia installato sul tuo dispositivo prima del patching</string>
     <string name="root_gmscore_excluded">Il supporto per GmsCore è escluso in modalità di root</string>
@@ -202,6 +204,15 @@ Sei sicuro di voler procedere?"</string>
     <string name="patcher_install_error_subtitle">Prova a disinstallare e installare di nuovo</string>
     <string name="patcher_ready_to_install_subtitle">Premi il pulsante qui sotto per installare</string>
     <string name="patcher_ready_to_mount_subtitle">Premi il pulsante qui sotto per montare</string>
+    <string name="patcher_storage_permission_dialog_title">Impossibile accedere alla cartella</string>
+    <string name="patcher_storage_permission_description_api30">Una o più opzioni di patch puntano a percorsi che Morphe non può leggere. Concedi l\'accesso alla memoria e tocca il pulsante, quindi il patching partirà automaticamente</string>
+    <string name="patcher_storage_permission_description_legacy">Una o più opzioni di patch puntano a percorsi che non possono essere accessi. Aggiorna i percorsi nelle opzioni di patch e riprova</string>
+    <string name="patcher_storage_permission_grant">Concedi l\'autorizzazione alla memoria</string>
+    <string name="patcher_storage_permission_denied_warning">Autorizzazione di archiviazione negata. Concedi l\'autorizzazione per utilizzare questo percorso o sposta i file nella directory privata dell\'app.</string>
+    <string name="patcher_storage_permission_open_settings">Apri le impostazioni di archiviazione</string>
+    <string name="patcher_storage_badge_denied">Autorizzazione negata</string>
+    <string name="patcher_storage_badge_missing">Non trovato</string>
+    <string name="patcher_storage_permission_hint">Suggerimento: sposta i file in /Android/data/app.morphe.manager/files/ - non sono necessarie autorizzazioni extra</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparazione</string>
     <string name="patcher_step_load_patches">Caricamento delle patch</string>
@@ -284,7 +295,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Tonalità in risalto</string>
     <string name="settings_appearance_pure_black">Nero assoluto</string>
-    <string name="settings_appearance_pure_black_description">Usa degli sfondi con neri assoluti per i display OLED</string>
+    <string name="settings_appearance_pure_black_description">Usa sfondi neri veri</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Lingua dell\'app</string>
     <string name="settings_appearance_app_language_current">Lingua attuale</string>
@@ -496,7 +507,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Esporta log di debug</string>
-    <string name="settings_system_export_debug_logs_description">Esporta i logs di sistema per la risoluzione dei problemi </string>
+    <string name="settings_system_export_debug_logs_description">Salva i log del sistema per la risoluzione dei problemi</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Lettura dei log non riuscita (codice di uscita %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Esportazione dei logs non riuscita</string>
     <string name="settings_system_export_debug_logs_export_success">Logs esportati</string>
@@ -602,6 +613,8 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="saved">Salvato</string>
     <string name="update">Aggiorna</string>
     <string name="allow">Consenti</string>
+    <string name="details">Dettagli</string>
+    <string name="hide">Nascondi</string>
     <string name="installing_ellipsis">Installazione in corso…</string>
     <string name="mounting_ellipsis">Montaggio in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>

@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Еще не пропатчено</string>
     <string name="home_no_patches_available">Нет доступных патчей</string>
     <string name="home_default_source_disabled">Источник патчей Morphe отключен. Включите его в списке источников патчей или воспользуйтесь режимом эксперта</string>
+    <string name="home_app_hide_title">Скрыть это приложение?</string>
+    <string name="home_app_hide_message">Это приложение будет скрыто с главного экрана. Вы можете восстановить его позже, нажав кнопку \'%1$s\' внизу списка.</string>
+    <string name="home_app_will_be_hidden">Это приложение будет скрыто</string>
+    <string name="home_app_show_hidden">Показать скрытые приложения</string>
+    <string name="home_app_no_hidden">Нет скрытых приложений</string>
+    <string name="home_app_hidden_apps_title">Скрытые приложения</string>
+    <string name="home_app_hidden_apps_hint">Нажмите на приложение, чтобы снова показать его в списке</string>
     <string name="android_11_bug_dialog_title">Ошибка Android 11</string>
     <string name="android_11_bug_dialog_description">Для нормальной работы приложения необходимо предварительно предоставить разрешение на установку, чтобы избежать ошибки в системе Android 11, которая может негативно сказаться на пользовательском опыте</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Источники патчей</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
-    <string name="sources_management_date_added">Добавлено</string>
-    <string name="sources_management_date_updated">Обновлено</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
     <string name="sources_dialog_rename">Переименовать источник патча</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Нет доступных обновлений</string>
     <string name="sources_download_fail">Не удалось загрузить источники: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">У вас есть оригинальный непатченный APK?</string>
-    <string name="home_apk_availability_dialog_simple">Чтобы патчить %1$s, вам нужен непатченый APK с версией:</string>
-    <string name="home_apk_availability_dialog_expert">"У вас есть непатченный %1$s APK?
-
-Совместимые версии:"</string>
+    <string name="home_apk_availability_dialog_title">Нужна помощь в поиске оригинального непатченого APK?</string>
+    <string name="home_apk_availability_dialog_simple">Чтобы патчить &lt;b&gt;%s&lt;/b&gt;, вам нужен непатченый APK с версией:</string>
+    <string name="home_apk_availability_dialog_expert">Чтобы патчить &lt;b&gt;%s&lt;/b&gt;, вам нужен непатченый APK с версией:</string>
     <string name="home_apk_availability_recommended_label">Рекомендуемый</string>
     <string name="home_apk_availability_unpatched_label">Непатченый</string>
-    <string name="home_apk_availability_yes">Да, у меня есть</string>
-    <string name="home_apk_availability_no">Нет, помогите мне найти</string>
+    <string name="home_apk_availability_yes">Да, помогите мне найти APK</string>
+    <string name="home_apk_availability_no">Нет, у меня уже есть APK</string>
     <string name="home_apk_use_saved_with_version">Использовать сохраненный APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Нет сохраненного APK. Для патча нужно будет снова выбрать APK файл</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@
     <string name="home_download_instructions_download_button_toast">Нажмите скачать на веб-сайте, а не здесь 😊</string>
     <string name="home_download_instructions_step3">Дождитесь завершения загрузки и &lt;b&gt;не устанавливайте&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Дождитесь завершения загрузки, затем &lt;b&gt;установите APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">После завершения загрузки снова откройте это приложение</string>
-    <string name="home_download_instructions_step4_mount">После установки исходного APK снова откройте это приложение</string>
+    <string name="home_download_instructions_step4">После завершения загрузки, вернитесь в Morphe</string>
+    <string name="home_download_instructions_step4_mount">После установки оригинального APK, вернитесь в Morphe</string>
     <string name="home_download_instructions_continue">Перейти на APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Выберите загруженный вами APK</string>
-    <string name="home_file_picker_prompt_description">Теперь выберите файл %1$s APK, который вы загрузили</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Выбрать скачанный APK файл</string>
+    <string name="home_file_picker_prompt_title">Выберите загруженный APK</string>
+    <string name="home_file_picker_prompt_description">Выберите файл &lt;b&gt;%1$s&lt;/b&gt; APK, который вы только что загрузили</string>
     <string name="home_file_picker_prompt_open_apk">Выбрать APK файл</string>
     <string name="home_recommended_version">Рекомендуемая версия</string>
     <string name="home_selected_version">Выбранная версия</string>
@@ -171,8 +173,8 @@
     <string name="home_app_info_patched_at">Пропатчен</string>
     <string name="home_app_info_patch_update_available">Доступно обновление патчей</string>
     <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Перепатчайте свою программу, чтобы получить последние улучшения и исправления</string>
-    <string name="home_app_info_app_deleted_warning">Приложение удалено за пределами менеджера</string>
-    <string name="home_app_info_app_deleted_description">Это приложение было удалено за пределами менеджера. Пропатчите его снова, чтобы восстановить функциональность</string>
+    <string name="home_app_info_app_deleted_warning">Приложение было удалено</string>
+    <string name="home_app_info_app_deleted_description">Это приложение было удалено за пределами Morphe. Пропатчите его снова, чтобы восстановить функциональность</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root режим требует установленный непатченный APK перед установкой патчей</string>
     <string name="root_gmscore_excluded">Поддержка GmsCore отключена в режиме root</string>
@@ -202,6 +204,15 @@
     <string name="patcher_install_error_subtitle">Попробуйте удалить и установить заново</string>
     <string name="patcher_ready_to_install_subtitle">Нажмите кнопку ниже, чтобы установить</string>
     <string name="patcher_ready_to_mount_subtitle">Нажмите кнопку ниже, чтобы смонтировать</string>
+    <string name="patcher_storage_permission_dialog_title">Невозможно получить доступ к пути хранения</string>
+    <string name="patcher_storage_permission_description_api30">Один или несколько параметров патча указывают на пути, которые Morphe-менеджер не может прочитать. Предоставьте доступ к хранилищу и нажмите кнопку, чтобы автоматически начать патчинг</string>
+    <string name="patcher_storage_permission_description_legacy">Один или несколько параметров патча указывают на пути, к которым нельзя получить доступ. Обновите пути в параметрах патча и повторите попытку</string>
+    <string name="patcher_storage_permission_grant">Предоставить доступ к хранилищу</string>
+    <string name="patcher_storage_permission_denied_warning">Разрешение на хранение было отклонено. Разрешите его, чтобы использовать этот путь, или переместите файлы в директорию приложения</string>
+    <string name="patcher_storage_permission_open_settings">Открыть настройки хранения</string>
+    <string name="patcher_storage_badge_denied">Разрешение отклонено</string>
+    <string name="patcher_storage_badge_missing">Не найдено</string>
+    <string name="patcher_storage_permission_hint">Совет: переместите файлы в /Android/data/app.morphe.manager/files/ - дополнительные разрешения не требуются</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Подготовка</string>
     <string name="patcher_step_load_patches">Загрузка патчей</string>
@@ -284,7 +295,7 @@
     <string name="settings_appearance_dynamic">Материальное «Вы»</string>
     <string name="settings_appearance_accent_color">Цвет акцента</string>
     <string name="settings_appearance_pure_black">Чисто черный</string>
-    <string name="settings_appearance_pure_black_description">Используйте настоящие черные фоны для Oled / Amoled дисплеев</string>
+    <string name="settings_appearance_pure_black_description">Использовать настоящий черный фон</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Язык приложения YouTube</string>
     <string name="settings_appearance_app_language_current">Текущий язык</string>
@@ -496,7 +507,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Отладка</string>
     <string name="settings_system_export_debug_logs">Экспортировать журналы отладки</string>
-    <string name="settings_system_export_debug_logs_description">Экспортировать журналы отладки для устранения неполадок</string>
+    <string name="settings_system_export_debug_logs_description">Сохранить системные журналы для устранения неполадок</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Не удалось прочитать журналы (код выхода %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Не удалось экспортировать журналы</string>
     <string name="settings_system_export_debug_logs_export_success">Журналы экспортированы</string>
@@ -602,6 +613,8 @@ morphe_header_custom_dark.png
     <string name="saved">Сохранено</string>
     <string name="update">Обновить</string>
     <string name="allow">Разрешить</string>
+    <string name="details">Детали</string>
+    <string name="hide">Скрыть</string>
     <string name="installing_ellipsis">Установка…</string>
     <string name="mounting_ellipsis">Монтаж…</string>
     <string name="unmounting_ellipsis">Размонтирование…</string>

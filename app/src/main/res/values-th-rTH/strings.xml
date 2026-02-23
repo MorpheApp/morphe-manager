@@ -6,6 +6,13 @@
     <string name="home_no_patches_available">ไม่มีแพตซ์รองรับ</string>
     <string name="home_default_source_disabled">ซอร์ซแพตซ์ของ Morphe ถูกปิดการใช้งานแล้ว 
 กรุณาเปิดซอร์ซแพตซ์ของ Morphe ที่  Patch sources sheet หรือเข้าไปตั้งค่าในโหมดเชี่ยวชาญ</string>
+    <string name="home_app_hide_title">ซ่อนแอปนี้?</string>
+    <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าหลัก คุณสามารถกู้คืนมันได้ภายหลังโดยใช้ปุ่ม \'%1$s\' ที่ด้านล่างของรายการ</string>
+    <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
+    <string name="home_app_show_hidden">แสดงแอปที่ซ่อนอยู่</string>
+    <string name="home_app_no_hidden">ไม่มีแอปที่ซ่อนอยู่</string>
+    <string name="home_app_hidden_apps_title">แอปที่ซ่อนอยู่</string>
+    <string name="home_app_hidden_apps_hint">กดแอปเพื่อแสดงในรายการอีกครั้ง</string>
     <string name="android_11_bug_dialog_title">บัก Android 11</string>
     <string name="android_11_bug_dialog_description">ต้องอนุญาตเปิดสิทธิเข้าถึงการติดตั้งแอปพลิเคชันก่อน เพื่อหลีกเลี่ยงปัญหาจากระบบปฏิบัติการ Android 11 ที่มีผลกระทบต่อการใช้งานแอปพลิเคชันนี้</string>
     <!-- Home Screen - Update Notifications -->
@@ -43,8 +50,6 @@
     <string name="sources_management_title">จัดการแหล่งข้อมูล</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
-    <string name="sources_management_date_added">เพิ่มเข้ามาแล้ว</string>
-    <string name="sources_management_date_updated">อัปเดตแล้ว</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
@@ -66,15 +71,13 @@
     <string name="sources_update_unavailable">ยังไม่มีการอัปเดต</string>
     <string name="sources_download_fail">ล้มข้อมูลแหล่งข้อมูลไม่สำเร็จ: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">มีไฟล์ APK ดังเดิมที่ไม่ได้รับการแพตซ์ไหม</string>
-    <string name="home_apk_availability_dialog_simple">เพื่อปรับปรุง %1$s คุณต้องมี APK ที่ยังไม่ได้ปรับปรุงและมีเวอร์ชัน:</string>
-    <string name="home_apk_availability_dialog_expert">"คุณมี APK ที่ยังไม่ได้ปรับปรุง %1$s หรือไม่?
-
-เวอร์ชันที่เข้ากัน:"</string>
+    <string name="home_apk_availability_dialog_title">ต้องการความช่วยเหลือในการค้นหา APK รุ่นต้นฉบับที่ยังไม่ถูกปรับปรุง?</string>
+    <string name="home_apk_availability_dialog_simple">เพื่อปรับปรุง &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK รุ่นต้นฉบับ:</string>
+    <string name="home_apk_availability_dialog_expert">เพื่อปรับปรุง &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK รุ่นต้นฉบับของเวอร์ชัน:</string>
     <string name="home_apk_availability_recommended_label">แนะนำ</string>
     <string name="home_apk_availability_unpatched_label">ไม่ได้แพตซ์</string>
-    <string name="home_apk_availability_yes">ใช่ ฉันมีแล้ว</string>
-    <string name="home_apk_availability_no">ไม่ ช่วยฉันหา</string>
+    <string name="home_apk_availability_yes">ใช่, ช่วยฉันค้นหา APK</string>
+    <string name="home_apk_availability_no">ไม่, ฉันมี APK แล้ว</string>
     <string name="home_apk_use_saved_with_version">ใช้ APK ที่ถูกบันทึก (เวอร์ชัน %s)</string>
     <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก. การปรับปรุงจะต้องเลือกไฟล์ APK อีกครั้ง</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,13 +88,12 @@
     <string name="home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
     <string name="home_download_instructions_step3">รอการดาวน์โหลดให้เรียบร้อย และ &lt;b&gt;อย่าไปติดตั้งไฟล์ &lt;/b&gt; ไปล่วงหน้าก่อน</string>
     <string name="home_download_instructions_step3_mount">รอให้การดาวน์โหลดเสร็จสิ้น แล้ว &lt;b&gt;ติดตั้ง APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">หลังจากดาวน์โหลดเสร็จแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
-    <string name="home_download_instructions_step4_mount">หลังจากติดตั้ง APK ต้นฉบับแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
+    <string name="home_download_instructions_step4">หลังจากดาวน์โหลดเสร็จแล้ว คุณจะกลับไปยัง Morphe</string>
+    <string name="home_download_instructions_step4_mount">หลังจากติดตั้ง APK รeturn to Morphe</string>
     <string name="home_download_instructions_continue">ไปที่ APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">เลือก APK ที่คุณดาวน์โหลด</string>
-    <string name="home_file_picker_prompt_description">ตอนนี้เลือกไฟล์ %1$s APK ที่คุณดาวน์โหลดมาแล้ว</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">เปิดไฟล์ APK ที่ดาวน์โหลดแล้ว</string>
+    <string name="home_file_picker_prompt_title">เลือก APK ที่ถูกดาวน์โหลด</string>
+    <string name="home_file_picker_prompt_description">เลือกไฟล์ APK <b>%1$s</b> ที่คุณดาวน์โหลดมาแล้ว</string>
     <string name="home_file_picker_prompt_open_apk">เปิดไฟล์ APK</string>
     <string name="home_recommended_version">เวอร์ชันแนะนำ</string>
     <string name="home_selected_version">เลือกเวอร์ชัน</string>
@@ -172,8 +174,8 @@
     <string name="home_app_info_patched_at">อัปเด็ดท์แล้ว</string>
     <string name="home_app_info_patch_update_available">มีอัพเดทแพตซ์ใหม่ให้ใช้งานแล้ว</string>
     <string name="home_app_info_patch_update_available_description">มีแพตซ์เวอร์ชันใหม่พร้อมใช้งานแล้ว ให้แพตซ์อีกครั้งเพื่อรับการปรับปรุงและการแก้ไขสำหรับเวอร์ชันล่าสุด</string>
-    <string name="home_app_info_app_deleted_warning">แอปถูกลบนอกจากตัวจัดการ</string>
-    <string name="home_app_info_app_deleted_description">แอปนี้ถูกลบนอกจากตัวจัดการ โปรดรีเพทช์เพื่อฟื้นฟูฟังก์ชัน</string>
+    <string name="home_app_info_app_deleted_warning">แอปถูกลบออก</string>
+    <string name="home_app_info_app_deleted_description">แอปนี้ถูกลบออกนอก Morphe. แพตซ์อีกครั้งเพื่อฟื้นฟูฟังก์ชัน</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">โหมดรากรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนปรับแก้</string>
     <string name="root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
@@ -203,6 +205,15 @@
     <string name="patcher_install_error_subtitle">ลองถอนการติดตั้งแล้วติดตั้งใหม่อีกครั้ง</string>
     <string name="patcher_ready_to_install_subtitle">กดปุ่มด้านล่างเพื่อติดตั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
+    <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
+    <string name="patcher_storage_permission_description_api30">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ Morphe Manager ไม่สามารถอ่านได้ กรุณายืนยันสิทธิ์การเข้าถึงเก็บข้อมูลและกดปุ่มแล้วปรับปรุงจะเริ่มขึ้นอัตโนมัติ</string>
+    <string name="patcher_storage_permission_description_legacy">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ไม่สามารถเข้าถึงได้ อัปเดตเส้นทางในตัวเลือกการปรับปรุงและลองใหม่อีกครั้ง</string>
+    <string name="patcher_storage_permission_grant">ยืนยันสิทธิ์การเข้าถึงเก็บข้อมูล</string>
+    <string name="patcher_storage_permission_denied_warning">การอนุญาตในการใช้พื้นที่เก็บถาวรถูกปฏิเสธ。อนุญาตให้ใช้เส้นทางนี้หรือย้ายไฟล์ไปยังโฟลเดอร์ส่วนตัวของแอปพลิเคชัน</string>
+    <string name="patcher_storage_permission_open_settings">เปิดการตั้งค่าเก็บถาวร</string>
+    <string name="patcher_storage_badge_denied">การอนุญาตถูกปฏิเสธ</string>
+    <string name="patcher_storage_badge_missing">ไม่พบ</string>
+    <string name="patcher_storage_permission_hint">คำแนะนำ: ย้ายไฟล์ไปยัง /Android/data/app.morphe.manager/files/ - ไม่จำเป็นต้องมีสิทธิ์พิเศษอื่น</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">กำลังเตรียม</string>
     <string name="patcher_step_load_patches">กำลังโหลดแพตช์</string>
@@ -285,7 +296,7 @@
     <string name="settings_appearance_dynamic">สีเส้น</string>
     <string name="settings_appearance_accent_color">สีโฆษณา</string>
     <string name="settings_appearance_pure_black">ดำสีบริสุทธิ์</string>
-    <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำจริงสำหรับหน้าจอ OLED</string>
+    <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำจริง</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">ภาษาของแอป</string>
     <string name="settings_appearance_app_language_current">ภาษาที่ใช้อยู่</string>
@@ -345,8 +356,7 @@
     <string name="settings_advanced_github_pat_configured">โทเค็นถูกกำหนดค่าแล้ว</string>
     <string name="settings_advanced_github_pat_how_to_get">วิธีการรับโทเคน</string>
     <string name="settings_advanced_github_pat_dialog_title">ตั้งค่าโทเคนการเข้าถึงส่วนบุคคลของ GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">ตั้งค่าโทเคนการเข้าถึงส่วนบุคคลของ GitHub เพื่อให้สามารถเพิ่มคำขอร้องรับรอง (Pull Requests) เป็นแหล่งข้อมูลภายนอกได้
-สร้างโทเคนกับสิทธิ์การเข้าถึง \'public_repo\' สำหรับ github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">ตั้งค่า GitHub Personal Access Token เพื่อสามารถเพิ่ม pull requests เป็นแหล่งข้อมูลภายนอกได้. สร้าง PAT ด้วยช่วงสิทธิ์ public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">รวมในการส่งออกของการตั้งค่า</string>
     <string name="settings_advanced_github_pat_export_include_supporting">เพิ่มโทเคนนี้ไปยังการตั้งค่าการจัดการที่ส่งออก</string>
     <string name="settings_advanced_github_pat_export_warning">อย่าแชร์โทเคนส่วนตัวของคุณ ถ้าคุณรวมมันเข้าไปในการส่งออกการตั้งค่า ให้เก็บไฟล์นั้นเป็นส่วนตัว เพราะมันมีโทเค็นไว้ในไฟล์</string>
@@ -498,7 +508,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">ส่งออกไฟล์การพัฒยายสำหรับการแก้ไข</string>
     <string name="settings_system_export_debug_logs">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>
-    <string name="settings_system_export_debug_logs_description">ส่งออกไฟล์การพัฒยายเสร็จ</string>
+    <string name="settings_system_export_debug_logs_description">บันทึกข้อมูลการทำงานของระบบเพื่อแก้ไขปัญหา</string>
     <string name="settings_system_export_debug_logs_export_read_failed">ล้มเหลวในการอ่านบันทึก (รหัสออก %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ส่งออกบันทึกไม่สำเร็จ</string>
     <string name="settings_system_export_debug_logs_export_success">ขนาดทั้งหมด: %s</string>
@@ -603,6 +613,8 @@ morphe_header_custom_dark.png
     <string name="saved">บันทึกแล้ว</string>
     <string name="update">อัปเดต</string>
     <string name="allow">อนุญาต</string>
+    <string name="details">รายละเอียด</string>
+    <string name="hide">ซ่อน</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>

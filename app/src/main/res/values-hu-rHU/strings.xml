@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Még nincs módosítva</string>
     <string name="home_no_patches_available">Módosítások nem elérhetőek</string>
     <string name="home_default_source_disabled">A Morphe patchforrása letiltva. Kérem engedélyezze a módosítások forrásai lapon vagy használja a szakértői módot</string>
+    <string name="home_app_hide_title">Elrejtjük ezt az alkalmazást?</string>
+    <string name="home_app_hide_message">Ez az alkalmazás elrejtve lesz a home képernyőről. Később visszaállíthatja a \'%1$s\' gomb segítségével a listában lévő alján.</string>
+    <string name="home_app_will_be_hidden">Ez az alkalmazás elrejtve lesz</string>
+    <string name="home_app_show_hidden">Mutasd el a rejtett alkalmazásokat</string>
+    <string name="home_app_no_hidden">Nincsenek rejtett alkalmazások</string>
+    <string name="home_app_hidden_apps_title">Rejtett alkalmazások</string>
+    <string name="home_app_hidden_apps_hint">Kattints egy alkalmazásra, hogy visszajöjjön a listába</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Módosítások forrásai</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
-    <string name="sources_management_date_added">Hozzáadva</string>
-    <string name="sources_management_date_updated">Frissítve</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Megjelenítendő név</string>
     <string name="sources_dialog_rename">Patchforrás átnevezése</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Nincs elérhető frissítés</string>
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Rendelkezik az eredeti, nem módosított APK-val?</string>
-    <string name="home_apk_availability_dialog_simple">A(z) %1$s módosításához szükséges egy módosítás nélküli APK, amely verziója:</string>
-    <string name="home_apk_availability_dialog_expert">"Van módosítás nélküli %1$s APK fájlja?
-
-Kompatibilis verziók:"</string>
+    <string name="home_apk_availability_dialog_title">Szuletett segítség a eredeti, nem javított APK megtalálásához</string>
+    <string name="home_apk_availability_dialog_simple">A(z) %s módosításához szükséges egy módosítás nélküli APK, amely verziója:</string>
+    <string name="home_apk_availability_dialog_expert">A(z) %s módosításához szükséges egy módosítás nélküli APK, amelyek verziói:</string>
     <string name="home_apk_availability_recommended_label">Javasolt</string>
     <string name="home_apk_availability_unpatched_label">Nem módosított</string>
-    <string name="home_apk_availability_yes">Igen, megvan</string>
-    <string name="home_apk_availability_no">Nem, segíts megtalálni</string>
+    <string name="home_apk_availability_yes">Igen, segítsz megtalálni egy APK-t</string>
+    <string name="home_apk_availability_no">Nem, már rendelkezem APK-kel</string>
     <string name="home_apk_use_saved_with_version">Használjon mentett APK-t (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választani az APK fájlt.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Kompatibilis verziók:"</string>
     <string name="home_download_instructions_download_button_toast">A weblapon nyomja meg a letöltést, és ne itt 😊</string>
     <string name="home_download_instructions_step3">Várja meg, amíg a letöltés befejeződik, és &lt;b&gt;ne telepítse&lt;/b&gt; az APK-t</string>
     <string name="home_download_instructions_step3_mount">Várja meg, amíg a letöltés befejeződik, majd &lt;b&gt;telepítse az APK-t&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">A letöltés befejezése után nyissa meg újra ezt az alkalmazást</string>
-    <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után nyissa meg újra ezt az alkalmazást</string>
+    <string name="home_download_instructions_step4">A letöltés befejezése után térjen vissza a Morphe-ba</string>
+    <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után térjen vissza Morphe-hoz</string>
     <string name="home_download_instructions_continue">Ugrás az APKMirror.com oldalra</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Válassza ki a letöltött APK-t</string>
-    <string name="home_file_picker_prompt_description">Most válassza ki a letöltött %1$s APK fájlt</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Nyissa meg a letöltött APK fájlt</string>
+    <string name="home_file_picker_prompt_title">Válasszon ki letöltött APK-t</string>
+    <string name="home_file_picker_prompt_description">Válassza ki az újonnan letöltött &lt;b&gt;%1$s&lt;/b&gt; APK fájlt</string>
     <string name="home_file_picker_prompt_open_apk">APK fájl megnyitása</string>
     <string name="home_recommended_version">Ajánlott verzió</string>
     <string name="home_selected_version">Kiválasztott verzió</string>
@@ -107,7 +109,7 @@ Kompatibilis verziók:"</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_no_patches">Nincsenek elérhető módosítások</string>
-    <string name="expert_mode_multiple_sources_warning_title">Több patchforrás kiválasztva</string>
+    <string name="expert_mode_multiple_sources_warning_title">Több patchforrás van kiválasztva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
 
 Biztosan folytatja?"</string>
@@ -171,17 +173,17 @@ Biztosan folytatja?"</string>
     <string name="home_app_info_patched_at">Módosított</string>
     <string name="home_app_info_patch_update_available">Módosítás frissítés elérhető</string>
     <string name="home_app_info_patch_update_available_description">Egy újabb módosításverzió elérhető. Módosítsa újra az alkalmazását, hogy megkapja a legújabb fejlesztéseket és javításokat</string>
-    <string name="home_app_info_app_deleted_warning">Az alkalmazást a manageren kívül törölték</string>
-    <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a manageren kívül törölték. Módosítsa újra a funkcionalitás helyreállításához</string>
+    <string name="home_app_info_app_deleted_warning">Az alkalmazást eltávolították</string>
+    <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a Morphe-n kívül törölték. Módosítsa újra a funkcionalitás helyreállításához</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a módosítás előtt</string>
     <string name="root_gmscore_excluded">A GmsCore támogatási patch nem elérhető root módban</string>
     <string name="root_pre_patch_installer_title">Válasszon telepítési módot</string>
     <string name="root_pre_patch_installer_description">Az eszköze root hozzáféréssel rendelkezik. Válassza ki, hogyan szeretné telepíteni a módosított alkalmazást</string>
     <string name="root_pre_patch_installer_mount_title">Root csatolás</string>
-    <string name="root_pre_patch_installer_mount_description">Javított APK-t fognál a stock alkalmazás fölé. Nem szükséges GmsCore</string>
+    <string name="root_pre_patch_installer_mount_description">A módosított APK-t az eredeti felé csatolja. Nem szükséges GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Szabványos telepítés</string>
-    <string name="root_pre_patch_installer_standard_description">Telepítse különálló alkalmazásként GmsCore támogatással. Válassza ki az telepítőt (Rendszer telepítő, Shizuku stb.) a javítás után</string>
+    <string name="root_pre_patch_installer_standard_description">Telepítés különálló alkalmazásként GmsCore támogatással. Válassza ki a telepítőt (Rendszertelepítő, Shizuku stb.) a módosítás után</string>
     <string name="root_pre_patch_installer_hint">Az telepítési mód határozza meg, hogy melyik javítások beletartoznak és nem módosítható a javítás után</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
@@ -202,6 +204,15 @@ Biztosan folytatja?"</string>
     <string name="patcher_install_error_subtitle">Próbálja meg eltávolítani és újratelepíteni</string>
     <string name="patcher_ready_to_install_subtitle">Nyomja meg az alábbi gombot a telepítéshez</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomja meg az alábbi gombot a csatlakoztatáshoz</string>
+    <string name="patcher_storage_permission_dialog_title">Nem lehet elérési útvonalhoz hozzáférni</string>
+    <string name="patcher_storage_permission_description_api30">Egy vagy több pata megoldás mutató az útvonalakhoz, amelyekre a Morphe menedzser nem tud olvasni. Adja meg a tárolási hozzáférést és taposson a gombra, majd a pata automatikusan indul</string>
+    <string name="patcher_storage_permission_description_legacy">Egy vagy több pata megoldás mutató az útvonalakhoz, amelyekre nem lehet hozzáférni. Változtassa meg az útvonalakat a pata megoldásokban és próbálja újra</string>
+    <string name="patcher_storage_permission_grant">Adja meg a tárolási engedélyt</string>
+    <string name="patcher_storage_permission_denied_warning">A tárolási engedélyt elvetették. Engedélyezze a tároló használatához, vagy helyezze át a fájlokat az alkalmazás magánkönyvtárába.</string>
+    <string name="patcher_storage_permission_open_settings">Nyisson meg a tárolási beállításokat</string>
+    <string name="patcher_storage_badge_denied">Engedély elvetve</string>
+    <string name="patcher_storage_badge_missing">Nem található</string>
+    <string name="patcher_storage_permission_hint">Tipp: Mozd meg a fájlokat a /Android/data/app.morphe.manager/files/ könyvtárba - nem kell extra engedélyek</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Előkészítés</string>
     <string name="patcher_step_load_patches">Módosítások betöltése</string>
@@ -284,7 +295,7 @@ Biztosan folytatja?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Kiemelő szín</string>
     <string name="settings_appearance_pure_black">Tiszta fekete</string>
-    <string name="settings_appearance_pure_black_description">OLED kijelzőkhöz használja a valódi fekete hátteret</string>
+    <string name="settings_appearance_pure_black_description">Használja a igazán fekete háttereket</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Alkalmazás nyelve</string>
     <string name="settings_appearance_app_language_current">Jelenlegi nyelv</string>
@@ -602,6 +613,8 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="saved">Mentett</string>
     <string name="update">Frissítés</string>
     <string name="allow">Engedélyez</string>
+    <string name="details">Részletek</string>
+    <string name="hide">Rejt</string>
     <string name="installing_ellipsis">Telepítés…</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>

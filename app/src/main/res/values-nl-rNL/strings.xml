@@ -5,8 +5,15 @@
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
     <string name="home_default_source_disabled">De Morphe patchbron is uitgeschakeld. Schakel hem in in het Patchbronnenblad of gebruik de Expertmodus.</string>
+    <string name="home_app_hide_title">Verberg deze app?</string>
+    <string name="home_app_hide_message">Deze app wordt verborgen van de home scherm. U kunt hem later herstellen met de knop \'%1$s\' aan de onderkant van de lijst</string>
+    <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
+    <string name="home_app_show_hidden">Toon verborgen apps</string>
+    <string name="home_app_no_hidden">Geen verborgen apps</string>
+    <string name="home_app_hidden_apps_title">Verborgen apps</string>
+    <string name="home_app_hidden_apps_hint">Tik op een app om haar weer in de lijst te tonen</string>
     <string name="android_11_bug_dialog_title">Android 11-bug</string>
-    <string name="android_11_bug_dialog_description">De toestemming voor app-installatie moet vóór tijd worden gegeven om een bug in het Android 11-systeem te vermijden, die negatief zal uitwirken op de gebruikerservaring.</string>
+    <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Manager update beschikbaar</string>
     <string name="home_update_available_subtitle">Nieuwe versie gereed voor installatie</string>
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Patchbronnen</string>
     <string name="sources_management_open_in_browser">Openen in browser</string>
     <string name="sources_management_failed_to_open_url">Kan URL niet openen</string>
-    <string name="sources_management_date_added">Toegevoegd</string>
-    <string name="sources_management_date_updated">Bijgewerkt</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Weergavenaam</string>
     <string name="sources_dialog_rename">Patchbron toevoegen</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Geen bijwerken beschikbaar</string>
     <string name="sources_download_fail">Kan bronnen niet downloaden: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Heeft u de originele ongepatchte APK?</string>
-    <string name="home_apk_availability_dialog_simple">Om %1$s te patchen, moet u een on gepatchte APK hebben met versie:</string>
-    <string name="home_apk_availability_dialog_expert">"Heeft u een on gepatchte %1$s APK?
-
-Compatibele versies:"</string>
+    <string name="home_apk_availability_dialog_title">Hulp nodig bij het vinden van een origineel ongebruiktes APK?</string>
+    <string name="home_apk_availability_dialog_simple">Om &lt;b&gt;%s&lt;/b&gt; te patchen, nodig je het ongebruikte APK:</string>
+    <string name="home_apk_availability_dialog_expert">Om &lt;b&gt;%s&lt;/b&gt; te patchen, nodig je een ongebruikte APK van versies:</string>
     <string name="home_apk_availability_recommended_label">Aanbevolen</string>
     <string name="home_apk_availability_unpatched_label">Ongepatcht</string>
-    <string name="home_apk_availability_yes">Ja, die heb ik</string>
-    <string name="home_apk_availability_no">Nee, help me die te vinden</string>
+    <string name="home_apk_availability_yes">Ja, help me vinden een APK</string>
+    <string name="home_apk_availability_no">Nee, ik heb al een APK</string>
     <string name="home_apk_use_saved_with_version">Gebruik opgeslagen APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Geen opgeslagen APK. Patching zal het selecteren van het APK-bestand opnieuw vereisen</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Compatibele versies:"</string>
     <string name="home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
     <string name="home_download_instructions_step3">Wacht tot de download is voltooid, en &lt;b&gt;installeer de APK niet&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">Wacht tot de download is voltooid, en &lt;b&gt;installeer de APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Nadat de download is voltooid, open je deze app opnieuw</string>
-    <string name="home_download_instructions_step4_mount">Nadat de oorspronkelijke APK is geïnstalleerd, open je deze app opnieuw</string>
+    <string name="home_download_instructions_step4">Na het downloaden, ga terug naar Morphe</string>
+    <string name="home_download_instructions_step4_mount">Na het installeren van het oorspronkelijke APK, ga terug naar Morphe</string>
     <string name="home_download_instructions_continue">Doorgaan naar APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Selecteer de APK die je hebt gedownload</string>
-    <string name="home_file_picker_prompt_description">Selecteer nu het %1$s APK-bestand dat u net gedownload hebt</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Open APK-bestand dat ik gedownload heb</string>
+    <string name="home_file_picker_prompt_title">Selecteer gedownloade APK</string>
+    <string name="home_file_picker_prompt_description">Selecteer het &lt;b&gt;%1$s&lt;/b&gt; APK-bestand dat u net gedownload hebt</string>
     <string name="home_file_picker_prompt_open_apk">APK-bestand openen</string>
     <string name="home_recommended_version">Aanbevolen versie</string>
     <string name="home_selected_version">Geselecteerde versie</string>
@@ -171,8 +173,8 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="home_app_info_patched_at">Gepatcht</string>
     <string name="home_app_info_patch_update_available">Patchupdate beschikbaar</string>
     <string name="home_app_info_patch_update_available_description">Er is een nieuwere versie van patches beschikbaar. Repatch uw app om de laatste verbeteringen en correcties te krijgen</string>
-    <string name="home_app_info_app_deleted_warning">App ongedaan gemaakt buiten beheer</string>
-    <string name="home_app_info_app_deleted_description">Deze app is ongedaan gemaakt buiten de beheerder. Herpatch hem om de functionaliteit te herstellen</string>
+    <string name="home_app_info_app_deleted_warning">App was verwijderd</string>
+    <string name="home_app_info_app_deleted_description">Deze app werd buiten Morphe verwijderd. Patches hem om de functionaliteit te herstellen</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus vereist dat de oorspronkelijke APK op uw apparaat geïnstalleerd is voordat gepatcht wordt</string>
     <string name="root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
@@ -185,7 +187,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="root_pre_patch_installer_hint">De installatiemethode bepaalt welke patches zijn opgenomen en kan niet worden gewijzigd na het patchen.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fout gekopieerd naar klembord</string>
-    <string name="patcher_error_log">Foutenlog</string>
+    <string name="patcher_error_log">Foutlogboek</string>
     <string name="patcher_error_technical">Technische details</string>
     <string name="patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>
@@ -202,6 +204,15 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="patcher_install_error_subtitle">Probeer opnieuw te verwijderen en te installeren</string>
     <string name="patcher_ready_to_install_subtitle">Druk op de onderstaande knop om te installeren</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op de onderstaande knop om te koppelen</string>
+    <string name="patcher_storage_permission_dialog_title">Kan opslagpad niet openen</string>
+    <string name="patcher_storage_permission_description_api30">Een of meer patch-opties wijzen naar bestanden die Morphe manager niet kan lezen. Geef opslagtoegang en druk op de knop om automatisch te patchen te starten</string>
+    <string name="patcher_storage_permission_description_legacy">Een of meer patch-opties wijzen naar bestanden die niet kunnen worden geopend. Update de bestanden in patch-opties en probeer het nogmaals</string>
+    <string name="patcher_storage_permission_grant">Geef opslagtoegang</string>
+    <string name="patcher_storage_permission_denied_warning">Opslagtoestemming werd geweigerd. Geef de toestemming om deze pad te gebruiken, of verplaats de bestanden naar de app\'s private directory</string>
+    <string name="patcher_storage_permission_open_settings">Open opslaginstellingen</string>
+    <string name="patcher_storage_badge_denied">Toestemming geweigerd</string>
+    <string name="patcher_storage_badge_missing">Niet gevonden</string>
+    <string name="patcher_storage_permission_hint">Tip: Verplaats bestanden naar /Android/data/app.morphe.manager/files/ - geen extra toestemmingen nodig</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Voorbereiden</string>
     <string name="patcher_step_load_patches">Patches laden</string>
@@ -226,7 +237,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="patcher_message_7">1\'en en 0\'en aan het aanpassen… 🤖</string>
     <string name="patcher_message_8">Digitale spaghetti aan het ontwarren… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Bugs in de on gepatchte app worden opgelost… 🪲</string>
+    <string name="patcher_message_9">Bugs in de ongepatchte app worden opgelost… 🪲</string>
     <string name="patcher_message_10">Geweldige patches zijn het wachten waard… ⏳</string>
     <string name="patcher_message_11">Pixels aan het polijsten tot ze glimmen… 💎</string>
     <string name="patcher_message_12">Blijf zitten totdat de kapitein het \"Patching in progress\"-teken uitschakelt... 💺✈️</string>
@@ -284,7 +295,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accentkleur</string>
     <string name="settings_appearance_pure_black">Puur Zwart</string>
-    <string name="settings_appearance_pure_black_description">Gebruik ware zwarte achtergronden voor OLED-schermen.</string>
+    <string name="settings_appearance_pure_black_description">Gebruik ware zwarte achtergronden</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App-taal</string>
     <string name="settings_appearance_app_language_current">Huidige taal</string>
@@ -312,31 +323,31 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="notification_channel_manager_updates_description">Notificaties over nieuwe Morphe beheerversies</string>
     <string name="notification_channel_bundle_updates">Patchbronnen-updates</string>
     <string name="notification_channel_bundle_updates_description">Meldingen over nieuwe patchbronversies</string>
-    <string name="notification_channel_fcm_updates">Update alerts</string>
-    <string name="notification_channel_fcm_updates_description">Directe pushmeldingen voor nieuwe Morphe manager en patchreleases. Geleverd zelfs als de app in de achtergrond draait.</string>
+    <string name="notification_channel_fcm_updates">Update-meldingen</string>
+    <string name="notification_channel_fcm_updates_description">Directe pushmeldingen voor nieuwe Morphe Manager- en patchreleases. Deze worden zelfs verzonden wanneer de app op de achtergrond draait</string>
     <string name="settings_advanced_update_interval">Controle frequentie</string>
-    <string name="settings_advanced_update_interval_dialog_title">Zoek naar updates</string>
+    <string name="settings_advanced_update_interval_dialog_title">Controleer op updates</string>
     <string name="settings_advanced_update_interval_hourly">Eenmaal per uur</string>
     <string name="settings_advanced_update_interval_daily">Eenmaal per dag</string>
     <string name="settings_advanced_update_interval_weekly">Eenmaal per week</string>
     <string name="settings_advanced_update_interval_monthly">Eenmaal per maand</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Achtergrondcontrole frequentie</string>
-    <string name="settings_advanced_update_interval_battery_warning">Achtergrondcontroles kunnen op sommige apparaten niet betrouwbaar werken. Manufacturers als Xiaomi, Huawei, Samsung en OnePlus belemmeren vaak achtergrondprocessen om batterijleven te besparen.</string>
+    <string name="settings_advanced_update_interval_battery_warning">Achtergrondcontroles werken mogelijk niet betrouwbaar op sommige apparaten. Fabrikanten zoals Xiaomi, Huawei, Samsung en OnePlus beperken achtergrondprocessen vaak sterk om de batterij te sparen</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe manager update beschikbaar</string>
     <string name="notification_bundle_update_title">Nieuwe patches beschikbaar</string>
     <string name="notification_update_text">Versie %1$s is klaar om te downloaden</string>
-    <string name="notification_bundle_update_text_unversioned">Klik om Morphe manager te openen en te updaten</string>
+    <string name="notification_bundle_update_text_unversioned">Tik om Morphe Manager te openen en bij te werken</string>
     <string name="notification_permission_dialog_title">Meldingen toestaan</string>
-    <string name="notification_permission_dialog_description">Morphe manager heeft meldingstoestemming nodig om je te waarschuwen als updates beschikbaar zijn in de achtergrond.</string>
-    <string name="notification_post_patch_dialog_title">Wil je worden ge├»nformeerd als er updates beschikbaar zijn?</string>
+    <string name="notification_permission_dialog_description">Morphe Manager heeft toestemming nodig voor meldingen om u te waarschuwen wanneer er updates op de achtergrond beschikbaar zijn</string>
+    <string name="notification_post_patch_dialog_title">Wilt u een melding ontvangen wanneer er updates beschikbaar zijn?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinstellingen</string>
     <string name="settings_advanced_expert_mode">Expertmodus</string>
     <string name="settings_advanced_expert_mode_description">Inschakelen complexe Morphe-patchinstellingen en aanpassingsopties</string>
     <string name="settings_advanced_expert_mode_dialog_title">Expertmodus inschakelen?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">Expertmodus biedt meer beheer over hoe patches worden toegepast, maar verkeerde instellingen in de expertmodus kunnen leiden tot een niet-werkende app</string>
-    <string name="settings_advanced_strip_unused_libs">Ongebruikte native libraries verwijderen</string>
+    <string name="settings_advanced_expert_mode_dialog_message">De expertmodus biedt meer controle over hoe patches worden toegepast, maar een verkeerde configuratie in de expertmodus kan ertoe leiden dat de app niet meer werkt</string>
+    <string name="settings_advanced_strip_unused_libs">Verwijder ongebruikte native bibliotheken</string>
     <string name="settings_advanced_strip_unused_libs_description">Verwijder native library\'s voor niet-ondersteunde CPU-architecturen uit gepatchte apps</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
@@ -344,15 +355,15 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="settings_advanced_github_pat_configured">Token geconfigureerd</string>
     <string name="settings_advanced_github_pat_how_to_get">Hoe krijg je een token</string>
     <string name="settings_advanced_github_pat_dialog_title">Stel GitHub Personal Access Token in</string>
-    <string name="settings_advanced_github_pat_dialog_description">Stel een GitHub Personal Access Token in om in staat te zijn om Pull Requests toe te voegen als externe bronnen. Maak een PAT met bereik public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Stel een GitHub Personal Access Token in om pull requests als externe bronnen toe te voegen. Maak een PAT met de scope public_repo op github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Includeren in instellingenexport</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Voegt deze PAT toe aan geëxporteerde managerinstellingen</string>
-    <string name="settings_advanced_github_pat_export_warning">Deel je PAT niet. Als je hem in een instellingsexport incluis, hou dat bestand privé omdat het het token bevat</string>
+    <string name="settings_advanced_github_pat_export_warning">Deel uw PAT niet. Als u deze in een exportbestand met instellingen opneemt, houd dat bestand dan privé, omdat het de token bevat</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patchopties</string>
-    <string name="settings_advanced_patch_options_youtube_description">Thema, branding, header en Shorts-opties</string>
+    <string name="settings_advanced_patch_options_youtube_description">Opties voor thema, branding, header en Shorts</string>
     <string name="settings_advanced_patch_options_youtube_music_description">Thema en branding-opties</string>
-    <string name="settings_advanced_patch_options_restart_message">Wijzigen van patchopties vereist repatching van de app om van kracht te worden</string>
+    <string name="settings_advanced_patch_options_restart_message">Het wijzigen van patchopties vereist dat de app opnieuw wordt gepatcht om de wijzigingen door te voeren</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">In Expertmodus zijn patchopties beschikbaar tijdens het patchingproces</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">App-themakleuren</string>
@@ -361,7 +372,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="settings_advanced_patch_options_light_theme_color">Lichte themakleur</string>
     <string name="settings_advanced_patch_options_theme_color_description">Kan een hex-kleur (#RRGGBB) zijn of een kleurbronverwijzing</string>
     <string name="settings_advanced_patch_options_loading">Patchopties laden…</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">Wacht tot de patchbron is geüpdat</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Wacht tot de patchbron is bijgewerkt</string>
     <string name="settings_advanced_patch_options_load_error">Kan patchopties niet laden</string>
     <string name="settings_advanced_patch_options_no_available">Geen opties beschikbaar voor deze patch</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -394,8 +405,8 @@ Optioneel bevat de map een 'drawable' map met een van de volgende monochrome ico
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
-    <string name="settings_advanced_patch_options_custom_header">Aangepaste koptekst</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Wijzig koptekst</string>
+    <string name="settings_advanced_patch_options_custom_header">Aangepast headerlogo</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Headerlogo wijzigen</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Map met afbeeldbestanden om te gebruiken als een aangepaste koptekst.
 
 De map moet een of meer van de volgende mappen bevatten, afhankelijk van het DPI van het apparaat:
@@ -434,7 +445,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_status_shizuku_not_installed">Installeer Shizuku of Sui om deze optie te gebruiken</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku of Sui en probeer het opnieuw</string>
     <string name="installer_status_shizuku_permission">Geef Shizuku toestemming aan Morphe uit de Shizuku-app</string>
-    <string name="installer_mount_warning_install">Uw hoofdinstallatieprogramma is ingesteld op de gewortelde mount-installatie. Deze opgeslagen app is niet geïnstalleerd met mount</string>
+    <string name="installer_mount_warning_install">Uw primaire installatieprogramma is ingesteld op het rooted mount-installatieprogramma. Deze opgeslagen app is niet geïnstalleerd met behulp van mount</string>
     <string name="mount_version_mismatch_message">Originele app-versie (%2$s) komt niet overeen met gepatchte app-versie (%1$s). Mount de overeenkomende originele versie, dan probeer het opnieuw</string>
     <string name="installer_status_shizuku_unsupported">De geïnstalleerde Shizuku-versie wordt niet ondersteund</string>
     <string name="installer_action_open_shizuku">Shizuku openen</string>
@@ -496,7 +507,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Foutopsporingslogboeken exporteren</string>
-    <string name="settings_system_export_debug_logs_description">Exporteer systeemlogboeken voor het oplossen van problemen</string>
+    <string name="settings_system_export_debug_logs_description">Sla systeemlogboeken op voor het oplossen van problemen</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Kon logs niet lezen (uitslagcode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Mislukt om logboeken te exporteren</string>
     <string name="settings_system_export_debug_logs_export_success">Logboeken geëxporteerd</string>
@@ -548,11 +559,11 @@ De afbeelddimensionen moeten als volgt zijn:
 Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen om toekomstige innovatie te drijven"</string>
     <!-- Shared strings -->
     <string name="patches">Patches</string>
-    <string name="home">Thuis</string>
+    <string name="home">Home</string>
     <string name="settings">Instellingen</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
-    <string name="reset">Terugzetten</string>
+    <string name="reset">Reset</string>
     <string name="reset_all">Alles resetten</string>
     <string name="confirm">Bevestigen</string>
     <string name="warning">Waarschuwing</string>
@@ -577,33 +588,35 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="rename">Hernoemen</string>
     <string name="import_">Importeren</string>
     <string name="export">Exporteren</string>
-    <string name="download">Downloaden</string>
+    <string name="download">Download</string>
     <string name="less">Minder</string>
     <string name="expand">Uitvouwen</string>
     <string name="expanded">Uitgebreid</string>
     <string name="collapse">Inklappen</string>
-    <string name="collapsed">Ingeslapen</string>
+    <string name="collapsed">Ingeklapt</string>
     <string name="available">Beschikbaar</string>
     <string name="continue_">Doorgaan</string>
     <string name="version">Versie</string>
     <string name="patch">Patchen</string>
     <string name="repatch">Opnieuw patchen</string>
     <string name="open">Openen</string>
-    <string name="mount">Monteren</string>
-    <string name="mounted">Gemonteerd</string>
-    <string name="unmounted">Niet gemonteerd</string>
+    <string name="mount">Mount</string>
+    <string name="mounted">Gemount</string>
+    <string name="unmounted">Niet gemount</string>
     <string name="remount">Herinstalleren</string>
     <string name="install">Installeren</string>
     <string name="installed">Geïnstalleerd</string>
-    <string name="reinstall">Opn. installeren</string>
-    <string name="uninstall">Deïnstalleren</string>
+    <string name="reinstall">Opnieuw installeren</string>
+    <string name="uninstall">Verwijderen</string>
     <string name="uninstalled">Verwijderd</string>
     <string name="save">Opslaan</string>
     <string name="saved">Opgeslagen</string>
     <string name="update">Update</string>
     <string name="allow">Toestaan</string>
+    <string name="details">Details</string>
+    <string name="hide">Verbergen</string>
     <string name="installing_ellipsis">Installeren…</string>
-    <string name="mounting_ellipsis">Monteren…</string>
+    <string name="mounting_ellipsis">Koppelen…</string>
     <string name="unmounting_ellipsis">Verwijderen…</string>
     <string name="importing_ellipsis">Importeren…</string>
     <string name="changelog">Wijzigingslogboeken bekijken</string>
