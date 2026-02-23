@@ -122,6 +122,9 @@ jobs:
               event_type: 'trigger-deploy'
             })
 
+      - name: Wait before sending FCM
+        run: sleep 300
+
       - name: Setup Python for FCM
         if: steps.release.outputs.NEW_TAG != ''
         uses: actions/setup-python@v5
