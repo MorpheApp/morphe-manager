@@ -1,3 +1,10 @@
+# app [1.8.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.5...v1.8.0-dev.6) (2026-02-23)
+
+
+### Features
+
+* Update translations from Crowdin ([a873061](https://github.com/MorpheApp/morphe-manager/commit/a873061859bb22944228c82d01b7e824917353e6))
+
 # app [1.8.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2026-02-23)
 
 

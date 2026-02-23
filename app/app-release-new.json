@@ -1,0 +1,7 @@
+{
+  "created_at": "2026-02-23T16:02:08.810Z",
+  "description": "# app [1.8.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.5...v1.8.0-dev.6) (2026-02-23)\n\n\n### Features\n\n* Update translations from Crowdin ([a873061](https://github.com/MorpheApp/morphe-manager/commit/a873061859bb22944228c82d01b7e824917353e6))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.8.0-dev.6/morphe-manager-1.8.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.8.0-dev.6/morphe-manager-1.8.0-dev.6.apk.asc",
+  "version": "1.8.0-dev.6"
+}
