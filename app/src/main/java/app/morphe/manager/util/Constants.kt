@@ -90,6 +90,30 @@ object AppPackages {
     val DEFAULT_COLORS = listOf(Color(0xFF6C63FF), KnownApp.GRADIENT_MID, KnownApp.GRADIENT_END)
     val DEFAULT_DOWNLOAD_COLOR = Color(0xFF6C63FF)
 
+    private val PACKAGE_NAME_TO_APP_NAME = mapOf(
+        "com.amazon.avod.thirdpartyclient" to "Amazon Prime Video",
+        "com.avocards" to "Avocards",
+        "me.mycake" to "Cake",
+        "com.crunchyroll.crunchyroid" to "Crunchyroll",
+        "kr.co.yjteam.dailypay" to "DAILY PAY",
+        "com.duolingo" to "Duolingo",
+        "kr.eggbun.eggconvo" to "Eggbun",
+        "jp.ne.ibis.ibispaintx.app" to "IbisPaint X2",
+        "org.languageapp.lingory" to "Lingory2",
+        "com.merriamwebster" to "Merriam-Webster",
+        "org.totschnig.myexpenses" to "MyExpenses",
+        "com.myfitnesspal.android" to "MyFitnessPal",
+        "com.pandora.android" to "Pandora",
+        "com.bambuna.podcastaddict" to "Podcast Addict",
+        "ch.protonvpn.android" to "Proton VPN",
+        "ginlemon.flowerfree" to "Smart Launcher",
+        "pl.solidexplorer2" to "Solid Explorer",
+        "net.teuida.teuida" to "Teuida",
+        "app.ttmikstories.android" to "TTMIK Stories",
+        "com.qbis.guessthecountry" to "World Map Quiz",
+        "cn.wps.moffice_eng" to "WPS Office"
+    )
+
     /**
      * Ordered list of gradient colors for cold-start shimmer placeholders.
      * Uses apps with isPinnedByDefault so shimmer matches the expected top items.
@@ -110,8 +134,17 @@ object AppPackages {
      * Get localized app name for a package.
      * Returns the hardcoded display name for known apps, or the raw package name for unknown apps.
      */
-    fun getAppName(context: Context, packageName: String): String =
-        KnownApp.fromPackage(packageName)?.let { context.getString(it.displayNameResId) } ?: packageName
+    fun getAppName(context: Context, packageName: String): String {
+        KnownApp.fromPackage(packageName)?.let {
+            return context.getString(it.displayNameResId)
+        }
+
+        PACKAGE_NAME_TO_APP_NAME[packageName]?.let {
+            return it
+        }
+
+        return packageName
+    }
 
     /** Check if a package is in the known registry. */
     fun isKnown(packageName: String): Boolean =
@@ -125,7 +158,7 @@ const val BIN_MIMETYPE  = "application/octet-stream"
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
     APK_MIMETYPE,
-    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly Android to misclassify
+    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly misclassify
     // the file as an application or something incorrect. Renaming the file and
     // removing "apkmirror.com" from the file name fixes the issue, but that's not something the
     // end user will know or should have to do. Instead, show all files to ensure the user can
