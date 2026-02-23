@@ -2,7 +2,7 @@ package app.morphe.manager.domain.manager
 
 import android.content.Context
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
-import app.morphe.manager.util.AppPackages
+import app.morphe.manager.util.KnownApp
 
 /**
  * Manages patch-specific option values that are applied during patching.
@@ -10,17 +10,12 @@ import app.morphe.manager.util.AppPackages
  * dynamically from the patch bundle repository.
  *
  * Storage keys follow the pattern: {package}_{patchName}_{optionKey}
- * where package is "youtube" or "youtube_music"
  */
 class PatchOptionsPreferencesManager(
     context: Context
 ) : BasePreferencesManager(context, "patch_options") {
 
     companion object {
-        // Package identifiers
-        const val PACKAGE_YOUTUBE = AppPackages.YOUTUBE
-        const val PACKAGE_YOUTUBE_MUSIC = AppPackages.YOUTUBE_MUSIC
-
         // Patch names (must match exactly with bundle)
         const val PATCH_THEME = "Theme"
         const val PATCH_CUSTOM_BRANDING = "Custom branding"
@@ -97,169 +92,100 @@ The image dimensions must be as follows:
 - drawable-xxxhdpi: 512x192 px"""
     }
 
-    // ==================== YouTube Options ====================
-
     // Theme - Dark
-    val darkThemeBackgroundColorYouTube = stringPreference(
-        "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
+    fun darkThemeColor(packageName: String) = stringPreference(
+        "${packageName}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
         DEFAULT_DARK_THEME
     )
 
     // Theme - Light
-    val lightThemeBackgroundColorYouTube = stringPreference(
-        "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}",
+    fun lightThemeColor(packageName: String) = stringPreference(
+        "${packageName}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}",
         DEFAULT_LIGHT_THEME
     )
 
     // Custom Branding - App Name
-    val customAppNameYouTube = stringPreference(
-        "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}",
+    fun customAppName(packageName: String) = stringPreference(
+        "${packageName}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}",
         ""
     )
 
     // Custom Branding - Icon Path
-    val customIconPathYouTube = stringPreference(
-        "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}",
+    fun customIconPath(packageName: String) = stringPreference(
+        "${packageName}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}",
         ""
     )
 
-    // Change Header - Custom Header Path
+    // Change Header - Custom Header Path (YouTube only)
     val customHeaderPath = stringPreference(
-        "${PACKAGE_YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}",
+        "${KnownApp.YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}",
         ""
     )
 
-    // Hide Shorts - App Shortcut
+    // Hide Shorts - App Shortcut (YouTube only)
     val hideShortsAppShortcut = booleanPreference(
-        "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}",
+        "${KnownApp.YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}",
         false
     )
 
-    // Hide Shorts - Widget
+    // Hide Shorts - Widget (YouTube only)
     val hideShortsWidget = booleanPreference(
-        "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}",
+        "${KnownApp.YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}",
         false
     )
 
-    // ==================== YouTube Music Options ====================
-
-    // Theme - Dark
-    val darkThemeBackgroundColorYouTubeMusic = stringPreference(
-        "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
-        DEFAULT_DARK_THEME
-    )
-
-    // Custom Branding - App Name
-    val customAppNameYouTubeMusic = stringPreference(
-        "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}",
-        ""
-    )
-
-    // Custom Branding - Icon Path
-    val customIconPathYouTubeMusic = stringPreference(
-        "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}",
-        ""
-    )
-
     /**
-     * Export YouTube specific patch options
+     * Export patch options for a given package.
      * Format: Map<BundleUid, Map<PatchName, Map<OptionKey, Value>>>
      */
-    suspend fun exportYouTubePatchOptions(): Map<Int, Map<String, Map<String, Any?>>> {
-        return buildMap {
-            // Note: Bundle UID 0 is the default Morphe bundle
-            val bundleOptions = mutableMapOf<String, MutableMap<String, Any?>>()
-
-            // Theme patch options for YouTube
-            val themeOptionsYouTube = mutableMapOf<String, Any?>()
-            darkThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() && it != DEFAULT_DARK_THEME }?.let {
-                themeOptionsYouTube[KEY_DARK_THEME_COLOR] = it
-            }
-            lightThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() && it != DEFAULT_LIGHT_THEME }?.let {
-                themeOptionsYouTube[KEY_LIGHT_THEME_COLOR] = it
-            }
-            if (themeOptionsYouTube.isNotEmpty()) {
-                bundleOptions[PATCH_THEME] = themeOptionsYouTube
-            }
-
-            // Custom Branding patch options for YouTube
-            val brandingOptionsYouTube = mutableMapOf<String, Any?>()
-            customAppNameYouTube.get().takeIf { it.isNotBlank() }?.let {
-                brandingOptionsYouTube[KEY_CUSTOM_NAME] = it
-            }
-            customIconPathYouTube.get().takeIf { it.isNotBlank() }?.let {
-                brandingOptionsYouTube[KEY_CUSTOM_ICON] = it
-            }
-            if (brandingOptionsYouTube.isNotEmpty()) {
-                bundleOptions[PATCH_CUSTOM_BRANDING] = brandingOptionsYouTube
-            }
-
-            // Change Header patch options
-            customHeaderPath.get().takeIf { it.isNotBlank() }?.let {
-                bundleOptions[PATCH_CHANGE_HEADER] = mutableMapOf(
-                    KEY_CUSTOM_HEADER to it
-                )
-            }
-
-            // Hide Shorts patch options
-            val shortsOptions = mutableMapOf<String, Any?>()
-            if (hideShortsAppShortcut.get()) {
-                shortsOptions[KEY_HIDE_SHORTS_APP_SHORTCUT] = true
-            }
-            if (hideShortsWidget.get()) {
-                shortsOptions[KEY_HIDE_SHORTS_WIDGET] = true
-            }
-            if (shortsOptions.isNotEmpty()) {
-                bundleOptions[PATCH_HIDE_SHORTS] = shortsOptions
-            }
-
-            // Bundle ID 0 = default Morphe bundle
-            if (bundleOptions.isNotEmpty()) {
-                put(0, bundleOptions)
-            }
-        }
-    }
-
-    /**
-     * Export YouTube Music specific patch options
-     * Format: Map<BundleUid, Map<PatchName, Map<OptionKey, Value>>>
-     */
-    suspend fun exportYouTubeMusicPatchOptions(): Map<Int, Map<String, Map<String, Any?>>> {
+    suspend fun exportPatchOptions(packageName: String): Map<Int, Map<String, Map<String, Any?>>> {
         return buildMap {
             val bundleOptions = mutableMapOf<String, MutableMap<String, Any?>>()
 
-            // Theme patch options for YouTube Music
-            val themeOptionsYouTubeMusic = mutableMapOf<String, Any?>()
-            darkThemeBackgroundColorYouTubeMusic.get().takeIf { it.isNotBlank() && it != DEFAULT_DARK_THEME }?.let {
-                themeOptionsYouTubeMusic[KEY_DARK_THEME_COLOR] = it
-            }
-            if (themeOptionsYouTubeMusic.isNotEmpty()) {
-                bundleOptions[PATCH_THEME] = themeOptionsYouTubeMusic
-            }
+            // Theme patch options
+            val themeOptions = mutableMapOf<String, Any?>()
+            darkThemeColor(packageName).get()
+                .takeIf { it.isNotBlank() && it != DEFAULT_DARK_THEME }
+                ?.let { themeOptions[KEY_DARK_THEME_COLOR] = it }
 
-            // Custom Branding patch options for YouTube Music
-            val brandingOptionsYouTubeMusic = mutableMapOf<String, Any?>()
-            customAppNameYouTubeMusic.get().takeIf { it.isNotBlank() }?.let {
-                brandingOptionsYouTubeMusic[KEY_CUSTOM_NAME] = it
+            // Light theme — YouTube only
+            if (packageName == KnownApp.YOUTUBE) {
+                lightThemeColor(packageName).get()
+                    .takeIf { it.isNotBlank() && it != DEFAULT_LIGHT_THEME }
+                    ?.let { themeOptions[KEY_LIGHT_THEME_COLOR] = it }
             }
-            customIconPathYouTubeMusic.get().takeIf { it.isNotBlank() }?.let {
-                brandingOptionsYouTubeMusic[KEY_CUSTOM_ICON] = it
-            }
-            if (brandingOptionsYouTubeMusic.isNotEmpty()) {
-                bundleOptions[PATCH_CUSTOM_BRANDING] = brandingOptionsYouTubeMusic
+            if (themeOptions.isNotEmpty()) bundleOptions[PATCH_THEME] = themeOptions
+
+            // Custom Branding patch options
+            val brandingOptions = mutableMapOf<String, Any?>()
+            customAppName(packageName).get()
+                .takeIf { it.isNotBlank() }
+                ?.let { brandingOptions[KEY_CUSTOM_NAME] = it }
+            customIconPath(packageName).get()
+                .takeIf { it.isNotBlank() }
+                ?.let { brandingOptions[KEY_CUSTOM_ICON] = it }
+            if (brandingOptions.isNotEmpty()) bundleOptions[PATCH_CUSTOM_BRANDING] = brandingOptions
+
+            // Change Header + Hide Shorts — YouTube only
+            if (packageName == KnownApp.YOUTUBE) {
+                customHeaderPath.get()
+                    .takeIf { it.isNotBlank() }
+                    ?.let { bundleOptions[PATCH_CHANGE_HEADER] = mutableMapOf(KEY_CUSTOM_HEADER to it) }
+
+                val shortsOptions = mutableMapOf<String, Any?>()
+                if (hideShortsAppShortcut.get()) shortsOptions[KEY_HIDE_SHORTS_APP_SHORTCUT] = true
+                if (hideShortsWidget.get()) shortsOptions[KEY_HIDE_SHORTS_WIDGET] = true
+                if (shortsOptions.isNotEmpty()) bundleOptions[PATCH_HIDE_SHORTS] = shortsOptions
             }
 
             // Bundle ID 0 = default Morphe bundle
-            if (bundleOptions.isNotEmpty()) {
-                put(0, bundleOptions)
-            }
+            if (bundleOptions.isNotEmpty()) put(0, bundleOptions)
         }
     }
 }
 
 /**
- * Gets localized text if it matches original English text,
- * otherwise returns the custom text from patch
+ * Gets localized text if it matches original English text, otherwise returns the custom text from patch.
  */
 fun getLocalizedOrCustomText(
     context: Context,

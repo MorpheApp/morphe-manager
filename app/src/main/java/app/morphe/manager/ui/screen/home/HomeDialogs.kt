@@ -305,7 +305,7 @@ fun HomeDialogs(
         val bundle = homeViewModel.bundleToRename!!
 
         RenameBundleDialog(
-            initialValue = bundle.displayName.orEmpty(),
+            initialValue = bundle.displayTitle,
             onDismissRequest = {
                 homeViewModel.showRenameBundleDialog = false
                 homeViewModel.bundleToRename = null
@@ -396,10 +396,10 @@ private fun ApkAvailabilityDialog(
             if (isExpertMode && compatibleVersions.isNotEmpty()) {
                 // Expert mode with versions: show list of versions
                 Text(
-                    text = stringResource(
+                    text = htmlAnnotatedString(stringResource(
                         R.string.home_apk_availability_dialog_expert,
                         appName
-                    ),
+                    )),
                     style = MaterialTheme.typography.bodyLarge,
                     color = secondaryColor,
                     textAlign = TextAlign.Center
@@ -413,10 +413,10 @@ private fun ApkAvailabilityDialog(
             } else {
                 // Simple mode or single version: show card with unpatched badge
                 Text(
-                    text = stringResource(
+                    text = htmlAnnotatedString(stringResource(
                         R.string.home_apk_availability_dialog_simple,
                         appName
-                    ),
+                    )),
                     style = MaterialTheme.typography.bodyLarge,
                     color = secondaryColor,
                     textAlign = TextAlign.Center
@@ -457,8 +457,7 @@ private fun DownloadInstructionsDialog(
     val context = LocalContext.current
 
     // Get button color based on package name
-    val buttonColor = packageName?.let { AppPackages.getDownloadColor(it) }
-        ?: AppPackages.YOUTUBE_DOWNLOAD_COLOR
+    val buttonColor = AppPackages.getDownloadColor(packageName ?: "")
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -636,13 +635,7 @@ private fun FilePickerPromptDialog(
         ),
         footer = {
             MorpheDialogButton(
-                text = stringResource(
-                    if (isOtherApps) {
-                        R.string.home_file_picker_prompt_open_apk
-                    } else {
-                        R.string.home_file_picker_prompt_open_downloaded_apk
-                    }
-                ),
+                text = stringResource(R.string.home_file_picker_prompt_open_apk),
                 onClick = onOpenFilePicker,
                 icon = Icons.Outlined.FolderOpen,
                 modifier = Modifier.fillMaxWidth()
@@ -653,9 +646,9 @@ private fun FilePickerPromptDialog(
 
         Text(
             text = if (isOtherApps) {
-                stringResource(R.string.home_select_any_apk_description)
+                AnnotatedString(stringResource(R.string.home_select_any_apk_description))
             } else {
-                stringResource(R.string.home_file_picker_prompt_description, appName)
+                htmlAnnotatedString(stringResource(R.string.home_file_picker_prompt_description, appName))
             },
             style = MaterialTheme.typography.bodyLarge,
             color = secondaryColor,

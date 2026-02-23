@@ -157,6 +157,7 @@ fun MorpheDialogDropdownTextField(
     showClearButton: Boolean = false,
     onFolderPickerClick: (() -> Unit)? = null,
     enabled: Boolean = true,
+    singleLine: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     @SuppressLint("ModifierParameter")
@@ -183,6 +184,7 @@ fun MorpheDialogDropdownTextField(
             label = label,
             placeholder = placeholder,
             leadingIcon = leadingIcon,
+            singleLine = singleLine,
             trailingIcon = {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),

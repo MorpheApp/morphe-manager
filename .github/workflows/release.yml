@@ -43,7 +43,7 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
-        run: ./gradlew --no-daemon assembleRelease
+        run: ./gradlew assembleRelease
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

@@ -312,10 +312,7 @@ class PatcherViewModel(
             input.options
         } else {
             runBlocking {
-                when (packageName) {
-                    AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
-                    else -> patchOptionsPrefs.exportYouTubePatchOptions()
-                }
+                patchOptionsPrefs.exportPatchOptions(packageName)
             }
         }
 
@@ -567,10 +564,7 @@ class PatcherViewModel(
         } else {
             // Simple mode: Use options from preferences manager
             runBlocking {
-                when (packageName) {
-                    AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
-                    else -> patchOptionsPrefs.exportYouTubePatchOptions()
-                }
+                patchOptionsPrefs.exportPatchOptions(packageName)
             }
         }
 
