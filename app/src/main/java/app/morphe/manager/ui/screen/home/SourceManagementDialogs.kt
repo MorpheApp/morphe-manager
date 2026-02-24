@@ -445,8 +445,8 @@ fun BundlePatchesDialog(
                     }
                 }
 
-                // Patches list
-                items(patches) { patch ->
+                // Patches list sorted alphabetically
+                items(patches.sortedBy { it.name }) { patch ->
                     var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
                         mutableStateOf(false)
                     }
@@ -568,7 +568,7 @@ private fun PatchItemCard(
                 ) {
                     patch.compatiblePackages.forEach { compatiblePackage ->
                         val packageName = compatiblePackage.packageName
-                        val versions = compatiblePackage.versions.orEmpty().reversed()
+                        val versions = compatiblePackage.versions.orEmpty()
 
                         FlowRow(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
