@@ -498,8 +498,7 @@ private fun BundlePatchControls(
                 contentColor = MaterialTheme.colorScheme.primary,
                 disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
                 disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
-            ),
-            isCompact = true
+            )
         )
         ActionPillButton(
             onClick = onResetToDefault,
@@ -508,8 +507,7 @@ private fun BundlePatchControls(
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
                 contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-            ),
-            isCompact = true
+            )
         )
         ActionPillButton(
             onClick = onDeselectAll,
@@ -521,8 +519,7 @@ private fun BundlePatchControls(
                 contentColor = MaterialTheme.colorScheme.error,
                 disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
                 disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
-            ),
-            isCompact = true
+            )
         )
     }
 }

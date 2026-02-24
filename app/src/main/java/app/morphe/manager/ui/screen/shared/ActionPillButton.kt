@@ -17,7 +17,6 @@ fun ActionPillButton(
     icon: ImageVector,
     contentDescription: String,
     enabled: Boolean = true,
-    isCompact: Boolean = false,
     colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
 ) {
     FilledTonalIconButton(
@@ -26,13 +25,13 @@ fun ActionPillButton(
         colors = colors,
         shape = RoundedCornerShape(50),
         modifier = Modifier
-            .height(if (isCompact) 36.dp else 44.dp)
-            .widthIn(min = if (isCompact) 72.dp else 96.dp)
+            .height(36.dp)
+            .widthIn(min = 72.dp)
     ) {
         Icon(
             imageVector = icon,
             contentDescription = contentDescription,
-            modifier = if (isCompact) Modifier.size(20.dp) else Modifier
+            modifier = Modifier.size(20.dp)
         )
     }
 }
