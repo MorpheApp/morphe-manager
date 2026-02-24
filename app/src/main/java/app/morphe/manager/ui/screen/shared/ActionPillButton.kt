@@ -1,19 +1,15 @@
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 /**
- * Pill-shaped action button
+ * Pill-shaped icon-only action button.
  */
 @Composable
 fun ActionPillButton(
@@ -21,6 +17,7 @@ fun ActionPillButton(
     icon: ImageVector,
     contentDescription: String,
     enabled: Boolean = true,
+    isCompact: Boolean = false,
     colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
 ) {
     FilledTonalIconButton(
@@ -29,9 +26,13 @@ fun ActionPillButton(
         colors = colors,
         shape = RoundedCornerShape(50),
         modifier = Modifier
-            .height(44.dp)
-            .widthIn(min = 96.dp)
+            .height(if (isCompact) 36.dp else 44.dp)
+            .widthIn(min = if (isCompact) 72.dp else 96.dp)
     ) {
-        Icon(icon, contentDescription)
+        Icon(
+            imageVector = icon,
+            contentDescription = contentDescription,
+            modifier = if (isCompact) Modifier.size(20.dp) else Modifier
+        )
     }
 }
