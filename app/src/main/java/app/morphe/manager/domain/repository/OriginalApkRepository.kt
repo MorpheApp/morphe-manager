@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import java.io.File
 
+private const val TAG = "OriginalApkRepository"
+
 class OriginalApkRepository(
     db: AppDatabase,
     fs: Filesystem
@@ -99,9 +101,5 @@ class OriginalApkRepository(
             file.delete()
         }
         dao.delete(originalApk)
-    }
-
-    companion object {
-        private const val TAG = "OriginalApkRepository"
     }
 }

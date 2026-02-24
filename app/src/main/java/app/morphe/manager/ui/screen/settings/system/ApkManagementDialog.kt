@@ -2,7 +2,6 @@ package app.morphe.manager.ui.screen.settings.system
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -38,7 +37,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
-import java.io.File
 
 /**
  * Type of APKs to manage
@@ -180,17 +178,6 @@ private fun PatchedApksContent(
             onDismiss = { itemToDelete = null },
             onConfirm = {
                 scope.launch {
-                    val apkPath = getApkPath(context, itemToDelete!!)
-                    apkPath?.let { path ->
-                        val deleted = runCatching {
-                            File(path).delete()
-                        }.getOrElse { false }
-
-                        if (!deleted) {
-                            Log.w("ApkManagement", "Failed to delete APK file: $path")
-                        }
-                    }
-
                     repository.delete(itemToDelete!!)
                     context.toast(context.getString(R.string.settings_system_patched_apks_deleted))
                     itemToDelete = null
