@@ -198,7 +198,10 @@ fun ExpertModeDialog(
         compactPadding = true,
         scrollable = false
     ) {
-        Column(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             // Search bar
             AnimatedVisibility(
                 visible = searchVisible,
@@ -373,7 +376,8 @@ fun ExpertModeDialog(
                             totalCount = currentFiltered.size,
                             onSelectAll = { selectAll(currentBundle.uid, currentFiltered) },
                             onDeselectAll = { deselectAll(currentBundle.uid, currentFiltered) },
-                            onResetToDefault = { resetToDefault(currentBundle.uid, currentAllPatches) }
+                            onResetToDefault = { resetToDefault(currentBundle.uid, currentAllPatches) },
+                            modifier = Modifier.padding(vertical = 8.dp)
                         )
                     } else {
                         // Reserve space so pager height stays stable when a tab has no results
@@ -435,9 +439,7 @@ fun ExpertModeDialog(
                 },
                 enabled = totalSelectedCount > 0,
                 icon = Icons.Outlined.AutoFixHigh,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp),
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
@@ -478,13 +480,12 @@ private fun BundlePatchControls(
     totalCount: Int,
     onSelectAll: () -> Unit,
     onDeselectAll: () -> Unit,
-    onResetToDefault: () -> Unit
+    onResetToDefault: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     // Action buttons
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
     ) {
         ActionPillButton(
