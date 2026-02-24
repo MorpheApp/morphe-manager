@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_no_patches_available">沒有可用的修補</string>
     <string name="home_default_source_disabled">Morphe 修補選配庫已遭停用。請將它新增為修補選配庫，或使用專家模式</string>
+    <string name="home_app_hide_title">隱藏此應用程序？</string>
+    <string name="home_app_hide_message">此應用程序將從主屏幕隱藏。您可以使用列表底部的\'%1$s\'按鈕稍後恢復它。</string>
+    <string name="home_app_will_be_hidden">此應用程序將被隱藏</string>
+    <string name="home_app_show_hidden">顯示隱藏應用程式</string>
+    <string name="home_app_no_hidden">沒有隱藏應用程式</string>
+    <string name="home_app_hidden_apps_title">隱藏應用程式</string>
+    <string name="home_app_hidden_apps_hint">點選應用程式以再次顯示在列表中</string>
     <string name="android_11_bug_dialog_title">Android 11 相關問題</string>
     <string name="android_11_bug_dialog_description">必須提前授予應用程式安裝權限，以避免 Android 11 系統中的錯誤影響使用者體驗</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">修補來源</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟連結</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
-    <string name="sources_management_date_added">已新增</string>
-    <string name="sources_management_date_updated">已更新</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載來源：%s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">你有未經修補的原始 APK 嗎？</string>
-    <string name="home_apk_availability_dialog_simple">如要修補 %1$s，你需要未修補的 APK，版本為：</string>
-    <string name="home_apk_availability_dialog_expert">"你有未修補的 %1$s APK 嗎？
-
-相容版本："</string>
+    <string name="home_apk_availability_dialog_title">需要幫助找到原始未修補的APK嗎？</string>
+    <string name="home_apk_availability_dialog_simple">要修補&lt;b&gt;%s&lt;/b&gt;，你需要未修補的 APK，版本為：</string>
+    <string name="home_apk_availability_dialog_expert">修補 &lt;b&gt;%s&lt;/b&gt; 需要未修補的 APK，版本為：</string>
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
-    <string name="home_apk_availability_yes">是的，我有</string>
-    <string name="home_apk_availability_no">沒有，幫我找一下</string>
+    <string name="home_apk_availability_yes">是的，幫我找一個 APK</string>
+    <string name="home_apk_availability_no">不，我已经有APK了</string>
     <string name="home_apk_use_saved_with_version">使用已儲存的 APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補將需要再次選擇 APK 檔案</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@
     <string name="home_download_instructions_download_button_toast">在網站上按下下載，而不是在這裡 😊</string>
     <string name="home_download_instructions_step3">等待下載完成後，&lt;b&gt;先不要安裝&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">等待下載完成後，&lt;b&gt;安裝&lt;/b&gt; APK</string>
-    <string name="home_download_instructions_step4">下載完成後，請再次開啟這個應用程式</string>
-    <string name="home_download_instructions_step4_mount">安裝原始 APK 後，請再次開啟這個應用程式</string>
+    <string name="home_download_instructions_step4">下載完成後，返回 Morphe</string>
+    <string name="home_download_instructions_step4_mount">安裝原始 APK 後，返回 Morphe</string>
     <string name="home_download_instructions_continue">前往 APKMirror.com 進行下一步</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">選取下載的 APK</string>
-    <string name="home_file_picker_prompt_description">現在選擇你剛剛下載的 %1$s APK 檔案</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">開啟我下載的 APK 檔案</string>
+    <string name="home_file_picker_prompt_title">選擇下載的 APK</string>
+    <string name="home_file_picker_prompt_description">選擇你剛剛下載的 <b>%1$s</b> APK 檔案</string>
     <string name="home_file_picker_prompt_open_apk">開啟 APK 檔案</string>
     <string name="home_recommended_version">建議版本</string>
     <string name="home_selected_version">所選版本</string>
@@ -102,7 +104,7 @@
     <string name="expert_mode_title">專家模式</string>
     <string name="expert_mode_subtitle_extended_format">已選擇 %1$s/%2$s 個修補</string>
     <string name="expert_mode_search">搜尋修補</string>
-    <string name="expert_mode_proceed">進行修補</string>
+    <string name="expert_mode_proceed">繼續修補</string>
     <string name="expert_mode_disable_all">停用全部</string>
     <string name="expert_mode_enable_all">啟用全部</string>
     <string name="expert_mode_no_results">找不到修補</string>
@@ -171,7 +173,7 @@
     <string name="home_app_info_patched_at">已修補</string>
     <string name="home_app_info_patch_update_available">有新的修補可用</string>
     <string name="home_app_info_patch_update_available_description">有更新的修補版本。重新修補你的應用程式以獲得最新的改進和修正</string>
-    <string name="home_app_info_app_deleted_warning">在管理工具外解除安裝應用程式</string>
+    <string name="home_app_info_app_deleted_warning">應用程式已卸載</string>
     <string name="home_app_info_app_deleted_description">這個應用程式已在管理工具外移除。重新修補以復原功能</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要在修補之前將原始 APK 安裝在您的裝置上</string>
@@ -202,6 +204,15 @@
     <string name="patcher_install_error_subtitle">請嘗試解除安裝並重新安裝</string>
     <string name="patcher_ready_to_install_subtitle">按下下方按鈕即可安裝</string>
     <string name="patcher_ready_to_mount_subtitle">按下下方按鈕即可掛載</string>
+    <string name="patcher_storage_permission_dialog_title">無法存取儲存路徑</string>
+    <string name="patcher_storage_permission_description_api30">一或多個補丁選項指向Morphe管理員無法讀取的路徑。授予存取權限並點擊按鈕，然後補丁將自動啟動</string>
+    <string name="patcher_storage_permission_description_legacy">一或多個補丁選項指向無法存取的路徑。更新補丁選項中的路徑並重試</string>
+    <string name="patcher_storage_permission_grant">授予存取權限</string>
+    <string name="patcher_storage_permission_denied_warning">存儲權限已被拒絕。授予權限以使用此路徑，或將檔案移至應用程序的私有目錄</string>
+    <string name="patcher_storage_permission_open_settings">開啟存儲設定</string>
+    <string name="patcher_storage_badge_denied">權限被拒絕</string>
+    <string name="patcher_storage_badge_missing">找不到記錄</string>
+    <string name="patcher_storage_permission_hint">提示：將檔案移至 /Android/data/app.morphe.manager/files/ - 不需要額外權限</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">準備中</string>
     <string name="patcher_step_load_patches">載入修補程式</string>
@@ -284,7 +295,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">強調色</string>
     <string name="settings_appearance_pure_black">純黑色</string>
-    <string name="settings_appearance_pure_black_description">為 OLED 螢幕使用純黑背景</string>
+    <string name="settings_appearance_pure_black_description">使用真正的黑色背景</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">應用程式語言</string>
     <string name="settings_appearance_app_language_current">目前語言</string>
@@ -344,7 +355,7 @@
     <string name="settings_advanced_github_pat_configured">已設定權杖</string>
     <string name="settings_advanced_github_pat_how_to_get">如何取得權杖</string>
     <string name="settings_advanced_github_pat_dialog_title">設定 GitHub 個人存取權杖</string>
-    <string name="settings_advanced_github_pat_dialog_description">請設定 GitHub 個人存取權杖 (PAT)，以便將 Pull Request 新增為外部來源。請前往 github.com 建立一個具備 public_repo 權限範圍的 PAT。</string>
+    <string name="settings_advanced_github_pat_dialog_description">設定 GitHub 個人存取權杖 (PAT)，以便將 Pull Request 新增為外部來源。請前往 github.com 建立一個具備 public_repo 權限範圍的 PAT。</string>
     <string name="settings_advanced_github_pat_export_include_label">包含在設定匯出中</string>
     <string name="settings_advanced_github_pat_export_include_supporting">將這個 PAT 新增到匯出的管理工具設定中</string>
     <string name="settings_advanced_github_pat_export_warning">請勿分享你的 PAT（個人存取權杖）。如果你在匯出設定時包含了它，請務必妥善保管該檔案，因為其中包含你的存取權杖。</string>
@@ -600,6 +611,8 @@ Morphe 以開源為核心，仰賴社群的意見與貢獻來驅動未來的創�
     <string name="saved">已儲存</string>
     <string name="update">更新</string>
     <string name="allow">允許</string>
+    <string name="details">詳細資訊</string>
+    <string name="hide">隱藏</string>
     <string name="installing_ellipsis">安裝中…</string>
     <string name="mounting_ellipsis">掛載中…</string>
     <string name="unmounting_ellipsis">正在解除掛載…</string>

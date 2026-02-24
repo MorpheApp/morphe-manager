@@ -17,55 +17,138 @@ const val USE_MANAGER_DIRECT_JSON = true
 /** Controls whether patches are fetched directly from JSON files in the repository instead of using the Morphe API */
 const val USE_PATCHES_DIRECT_JSON = true
 
-// Package identifiers with their associated colors
+/**
+ * All configuration for a known app in one place.
+ * Each app defines only its unique [accentColor] - the gradient and download color
+ * are derived automatically. To add a new app - create a new data object and add it to [all].
+ */
+sealed class KnownApp(
+    val packageName: String,
+    val displayNameResId: Int,
+    val accentColor: Color,
+    val isPinnedByDefault: Boolean = false
+) {
+    companion object {
+        // Package name constants
+        const val YOUTUBE = "com.google.android.youtube"
+        const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
+        const val REDDIT = "com.reddit.frontpage"
+        const val X_TWITTER = "com.twitter.android"
+
+        // Shared gradient tail colors used by all known apps
+        val GRADIENT_MID = Color(0xFF1E5AA8)
+        val GRADIENT_END = Color(0xFF00AFAE)
+
+        val all: List<KnownApp> = listOf(
+            YouTube,
+            YouTubeMusic,
+            Reddit,
+            X
+        )
+
+        fun fromPackage(packageName: String): KnownApp? =
+            all.firstOrNull { it.packageName == packageName }
+    }
+
+    // Gradient and download color are derived from accentColor automatically
+    val gradientColors get() = listOf(accentColor, GRADIENT_MID, GRADIENT_END)
+    val downloadColor get() = accentColor
+
+    data object YouTube : KnownApp(
+        packageName = YOUTUBE,
+        displayNameResId = R.string.home_youtube,
+        accentColor = Color(0xFFFF0033),
+        isPinnedByDefault = true
+    )
+
+    data object YouTubeMusic : KnownApp(
+        packageName = YOUTUBE_MUSIC,
+        displayNameResId = R.string.home_youtube_music,
+        accentColor = Color(0xFFFF8C3E),
+        isPinnedByDefault = true
+    )
+
+    data object Reddit : KnownApp(
+        packageName = REDDIT,
+        displayNameResId = R.string.home_reddit,
+        accentColor = Color(0xFFFF4500),
+        isPinnedByDefault = true
+    )
+
+    data object X : KnownApp(
+        packageName = X_TWITTER,
+        displayNameResId = R.string.home_x,
+        accentColor = Color(0xFF000000)
+    )
+}
+
+/**
+ * Utility object for package-based lookups.
+ */
 object AppPackages {
-    const val YOUTUBE = "com.google.android.youtube"
-    const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
-    const val REDDIT = "com.reddit.frontpage"
+    // Default colors for unknown packages
+    val DEFAULT_COLORS = listOf(Color(0xFF6C63FF), KnownApp.GRADIENT_MID, KnownApp.GRADIENT_END)
+    val DEFAULT_DOWNLOAD_COLOR = Color(0xFF6C63FF)
 
-    // Gradient colors for each package
-    val YOUTUBE_COLORS = listOf(
-        Color(0xFFFF0033),
-        Color(0xFF1E5AA8),
-        Color(0xFF00AFAE)
+    private val PACKAGE_NAME_TO_APP_NAME = mapOf(
+        "com.amazon.avod.thirdpartyclient" to "Amazon Prime Video",
+        "com.avocards" to "Avocards",
+        "me.mycake" to "Cake",
+        "com.crunchyroll.crunchyroid" to "Crunchyroll",
+        "kr.co.yjteam.dailypay" to "DAILY PAY",
+        "com.duolingo" to "Duolingo",
+        "kr.eggbun.eggconvo" to "Eggbun",
+        "jp.ne.ibis.ibispaintx.app" to "IbisPaint X2",
+        "org.languageapp.lingory" to "Lingory2",
+        "com.merriamwebster" to "Merriam-Webster",
+        "org.totschnig.myexpenses" to "MyExpenses",
+        "com.myfitnesspal.android" to "MyFitnessPal",
+        "com.pandora.android" to "Pandora",
+        "com.bambuna.podcastaddict" to "Podcast Addict",
+        "ch.protonvpn.android" to "Proton VPN",
+        "ginlemon.flowerfree" to "Smart Launcher",
+        "pl.solidexplorer2" to "Solid Explorer",
+        "net.teuida.teuida" to "Teuida",
+        "app.ttmikstories.android" to "TTMIK Stories",
+        "com.qbis.guessthecountry" to "World Map Quiz",
+        "cn.wps.moffice_eng" to "WPS Office"
     )
-
-    val YOUTUBE_MUSIC_COLORS = listOf(
-        Color(0xFFFF8C3E),
-        Color(0xFF1E5AA8),
-        Color(0xFF00AFAE)
-    )
-
-    val REDDIT_COLORS = listOf(
-        Color(0xFFFF4500),
-        Color(0xFF1E5AA8),
-        Color(0xFF00AFAE)
-    )
-
-    // Download button colors
-    val YOUTUBE_DOWNLOAD_COLOR = Color(0xFFFF0034)
-    val YOUTUBE_MUSIC_DOWNLOAD_COLOR = Color(0xFFFF0034)
-    val REDDIT_DOWNLOAD_COLOR = Color(0xFFFF4400)
 
     /**
-     * Get download button color for a package
+     * Ordered list of gradient colors for cold-start shimmer placeholders.
+     * Uses apps with isPinnedByDefault so shimmer matches the expected top items.
      */
-    fun getDownloadColor(packageName: String): Color = when (packageName) {
-        YOUTUBE -> YOUTUBE_DOWNLOAD_COLOR
-        YOUTUBE_MUSIC -> YOUTUBE_MUSIC_DOWNLOAD_COLOR
-        REDDIT -> REDDIT_DOWNLOAD_COLOR
-        else -> YOUTUBE_DOWNLOAD_COLOR // Default to YouTube color
+    val DEFAULT_SHIMMER_GRADIENTS: List<List<Color>> by lazy {
+        KnownApp.all.filter { it.isPinnedByDefault }.map { it.gradientColors }
     }
 
+    /** Get gradient colors for a package. */
+    fun getGradientColors(packageName: String): List<Color> =
+        KnownApp.fromPackage(packageName)?.gradientColors ?: DEFAULT_COLORS
+
+    /** Get download button color for a package. */
+    fun getDownloadColor(packageName: String): Color =
+        KnownApp.fromPackage(packageName)?.downloadColor ?: DEFAULT_DOWNLOAD_COLOR
+
     /**
-     * Get localized app name for a package
+     * Get localized app name for a package.
+     * Returns the hardcoded display name for known apps, or the raw package name for unknown apps.
      */
-    fun getAppName(context: Context, packageName: String): String = when (packageName) {
-        YOUTUBE -> context.getString(R.string.home_youtube)
-        YOUTUBE_MUSIC -> context.getString(R.string.home_youtube_music)
-        REDDIT -> context.getString(R.string.home_reddit)
-        else -> packageName
+    fun getAppName(context: Context, packageName: String): String {
+        KnownApp.fromPackage(packageName)?.let {
+            return context.getString(it.displayNameResId)
+        }
+
+        PACKAGE_NAME_TO_APP_NAME[packageName]?.let {
+            return it
+        }
+
+        return packageName
     }
+
+    /** Check if a package is in the known registry. */
+    fun isKnown(packageName: String): Boolean =
+        KnownApp.fromPackage(packageName) != null
 }
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"
@@ -75,7 +158,7 @@ const val BIN_MIMETYPE  = "application/octet-stream"
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
     APK_MIMETYPE,
-    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly Android to misclassify
+    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly misclassify
     // the file as an application or something incorrect. Renaming the file and
     // removing "apkmirror.com" from the file name fixes the issue, but that's not something the
     // end user will know or should have to do. Instead, show all files to ensure the user can

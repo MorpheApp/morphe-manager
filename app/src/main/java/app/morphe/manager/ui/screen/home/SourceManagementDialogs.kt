@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
@@ -256,7 +257,8 @@ fun BundleDeleteConfirmDialog(
                 bundle.displayTitle
             ),
             style = MaterialTheme.typography.bodyLarge,
-            color = secondaryColor
+            color = secondaryColor,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -296,12 +298,14 @@ fun RenameBundleDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
                 text = stringResource(R.string.sources_dialog_rename),
-                style = MaterialTheme.typography.bodyMedium,
-                color = secondaryColor
+                style = MaterialTheme.typography.bodyLarge,
+                color = secondaryColor,
+                textAlign = TextAlign.Center
             )
 
             MorpheDialogTextField(
@@ -441,8 +445,8 @@ fun BundlePatchesDialog(
                     }
                 }
 
-                // Patches list
-                items(patches) { patch ->
+                // Patches list sorted alphabetically
+                items(patches.sortedBy { it.name }) { patch ->
                     var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
                         mutableStateOf(false)
                     }
@@ -564,7 +568,7 @@ private fun PatchItemCard(
                 ) {
                     patch.compatiblePackages.forEach { compatiblePackage ->
                         val packageName = compatiblePackage.packageName
-                        val versions = compatiblePackage.versions.orEmpty().reversed()
+                        val versions = compatiblePackage.versions.orEmpty()
 
                         FlowRow(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),

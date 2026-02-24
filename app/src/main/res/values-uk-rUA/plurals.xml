@@ -3,8 +3,8 @@
     <plurals name="patch_count">
         <item quantity="one">%s патч</item>
         <item quantity="few">%s патчі</item>
-        <item quantity="many">%s патчі</item>
-        <item quantity="other">%s патчі</item>
+        <item quantity="many">%s патчів</item>
+        <item quantity="other">%s патчів</item>
     </plurals>
     <plurals name="option_count">
         <item quantity="one">%s параметр патча</item>
@@ -13,26 +13,26 @@
         <item quantity="other">%s параметрів патчів</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%s джерелі</item>
+        <item quantity="one">%s джерело</item>
         <item quantity="few">%s джерела</item>
-        <item quantity="many">%s джерелах</item>
-        <item quantity="other">%s джерелах</item>
+        <item quantity="many">%s джерел</item>
+        <item quantity="other">%s джерел</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="one">%s пакет</item>
         <item quantity="few">%s пакети</item>
-        <item quantity="many">%s пакети</item>
+        <item quantity="many">%s пакетів</item>
         <item quantity="other">%s пакетів</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Виконати %s патч</item>
         <item quantity="few">Виконати %s патча</item>
-        <item quantity="many">Виконати %s патчі</item>
-        <item quantity="other">Виконати %s патчі</item>
+        <item quantity="many">Виконати %s патчів</item>
+        <item quantity="other">Виконати %s патчів</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK файл</item>
-        <item quantity="few">%s APK файла</item>
+        <item quantity="few">%s APK файли</item>
         <item quantity="many">%s APK файлів</item>
         <item quantity="other">%s APK файлів</item>
     </plurals>
@@ -50,8 +50,8 @@
     </plurals>
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%s патч вибрано</item>
-        <item quantity="few">%s патча вибрано</item>
-        <item quantity="many">%s патча вибрано</item>
-        <item quantity="other">%s патча вибрано</item>
+        <item quantity="few">%s патчі вибрано</item>
+        <item quantity="many">%s патчів вибрано</item>
+        <item quantity="other">%s патчів вибрано</item>
     </plurals>
 </resources>

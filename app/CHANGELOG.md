@@ -1,3 +1,24 @@
+# app [1.8.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.5...v1.8.0-dev.6) (2026-02-23)
+
+
+### Features
+
+* Update translations from Crowdin ([a873061](https://github.com/MorpheApp/morphe-manager/commit/a873061859bb22944228c82d01b7e824917353e6))
+
+# app [1.8.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2026-02-23)
+
+
+### Bug Fixes
+
+* Change "help me find apk" dialog "yes" button to open web search ([#237](https://github.com/MorpheApp/morphe-manager/issues/237)) ([b61daee](https://github.com/MorpheApp/morphe-manager/commit/b61daee7b16dbbf5e5c5b7703fb18d555210c2f7))
+
+# app [1.8.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.3...v1.8.0-dev.4) (2026-02-23)
+
+
+### Features
+
+* Show all patched apps on homescreen ([#232](https://github.com/MorpheApp/morphe-manager/issues/232)) ([a265801](https://github.com/MorpheApp/morphe-manager/commit/a2658012c2e994b1b587bbb2494c7c097056079a))
+
 # app [1.8.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2026-02-20)
 
 

@@ -42,8 +42,6 @@
     <string name="sources_management_title">Izvori patcheva</string>
     <string name="sources_management_open_in_browser">Otvori u pregledniku</string>
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
-    <string name="sources_management_date_added">Dodano</string>
-    <string name="sources_management_date_updated">Ažurirano</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži naziv</string>
     <string name="sources_dialog_rename">Preimenuj izvor patcha</string>
@@ -65,15 +63,8 @@
     <string name="sources_update_unavailable">Nema dostupnih ažuriranja</string>
     <string name="sources_download_fail">Preuzimanje izvora nije uspjelo: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Imate li originalnu nepatchanu aplikaciju?</string>
-    <string name="home_apk_availability_dialog_simple">Za patchanje %1$s potrebna vam je nepatchana aplikacija s verzijom:</string>
-    <string name="home_apk_availability_dialog_expert">"Imate li nepatchanu %1$s aplikaciju?
-
-Kompatibilne verzije:"</string>
     <string name="home_apk_availability_recommended_label">Preporučeno</string>
     <string name="home_apk_availability_unpatched_label">Nepatchano</string>
-    <string name="home_apk_availability_yes">Da, imam</string>
-    <string name="home_apk_availability_no">Ne, pomozi mi pronaći</string>
     <string name="home_apk_use_saved_with_version">Koristi spremljenu aplikaciju(v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema spremljene aplikacije. Patchanje će zahtijevati ponovni odabir aplikacije</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +75,8 @@ Kompatibilne verzije:"</string>
     <string name="home_download_instructions_download_button_toast">Dodirnite download na web stranici, a ne ovdje 😊</string>
     <string name="home_download_instructions_step3">Pričekajte da se preuzimanje dovrši i &lt;b&gt;nemojte instalirati&lt;/b&gt; aplikaciju</string>
     <string name="home_download_instructions_step3_mount">Pričekajte da se preuzimanje završi, a zatim &lt;b&gt;instalirajte aplikaciju&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Nakon što se preuzimanje završi, ponovo pokrenite ovu aplikaciju</string>
-    <string name="home_download_instructions_step4_mount">Nakon instaliranja originalne aplikacije, ponovno otvorite ovu aplikaciju</string>
     <string name="home_download_instructions_continue">Nastavite na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Odaberite aplikaciju koju ste preuzeli</string>
-    <string name="home_file_picker_prompt_description">Sada odaberite %1$s datoteku koju ste nedavno preuzeli</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Otvorite preuzetu aplikaciju</string>
     <string name="home_file_picker_prompt_open_apk">Otvorite aplikaciju</string>
     <string name="home_recommended_version">Preporučena verzija</string>
     <string name="home_selected_version">Odabrana verzija</string>
@@ -102,7 +88,6 @@ Kompatibilne verzije:"</string>
     <string name="expert_mode_title">Napredni način</string>
     <string name="expert_mode_subtitle_extended_format">Odabrano je %1$s od %2$s patcheva</string>
     <string name="expert_mode_search">Pretraživanje patcheva</string>
-    <string name="expert_mode_proceed">Nastavite na patchanje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patcheva</string>
@@ -171,8 +156,6 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="home_app_info_patched_at">Patchano</string>
     <string name="home_app_info_patch_update_available">Dostupno ažuriranje patcha</string>
     <string name="home_app_info_patch_update_available_description">Dostupna je novija verzija patcheva. Ponovno instalirajte patch za aplikaciju kako biste dobili najnovija poboljšanja i ispravke.</string>
-    <string name="home_app_info_app_deleted_warning">Aplikacija deinstalirana van upravitelja</string>
-    <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan upravitelja. Patchajte  je ponovno da bi obnovili funkcionalnost</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root način zahtijeva da je originalna aplikacija instalirana na vašem uređaju prije patchanja</string>
     <string name="root_gmscore_excluded">Podrška patchanja za GmsCore je isključena u root načinu</string>
@@ -202,6 +185,15 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="patcher_install_error_subtitle">Pokušajte deinstalirati i instalirati ponovo</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite tipku ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite tipku ispod da učitate</string>
+    <string name="patcher_storage_permission_dialog_title">Nije moguće pristupiti putanji pohrane</string>
+    <string name="patcher_storage_permission_description_api30">Jedna ili više opcija zakrpe upućuju na putanje koje Morphe manager ne može pročitati. Omogućite pristup pohrani i dodirnite gumb, nakon čega će se krpanje automatski pokrenuti.</string>
+    <string name="patcher_storage_permission_description_legacy">Jedna ili više opcija zakrpe upućuju na putanje kojima se ne može pristupiti. Ažurirajte putanje u opcijama zakrpe i pokušajte ponovno.</string>
+    <string name="patcher_storage_permission_grant">Odobri dopuštenje za pohranu</string>
+    <string name="patcher_storage_permission_denied_warning">Dozvola za pohranu je odbijena. Dajte dopuštenje za korištenje ove putanje ili premjestite datoteke u privatni direktorij aplikacije.</string>
+    <string name="patcher_storage_permission_open_settings">Otvori postavke pohrane</string>
+    <string name="patcher_storage_badge_denied">Dozvola odbijena</string>
+    <string name="patcher_storage_badge_missing">Nije pronađeno</string>
+    <string name="patcher_storage_permission_hint">Savjet: Premjestite datoteke u /Android/data/app.morphe.manager/files/ - nisu potrebne dodatne dozvole</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Priprema</string>
     <string name="patcher_step_load_patches">Učitavanje patcheva</string>
@@ -284,7 +276,6 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Akcentna boja</string>
     <string name="settings_appearance_pure_black">Čisto crna</string>
-    <string name="settings_appearance_pure_black_description">Koristite istinski crne pozadine za OLED zaslone</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Jezik aplikacije</string>
     <string name="settings_appearance_app_language_current">Trenutni jezik</string>
@@ -344,7 +335,6 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_github_pat_configured">Token je konfiguriran</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako dobiti token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavite GitHub osobni pristupni token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Postavite GitHub osobni pristupni token kako biste mogli dodati Pull Requests kao vanjske izvore. Stvorite PAT s opcijom public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Uključi u postavke izvoza</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ovaj PAT u izvozne postavke upravitelja </string>
     <string name="settings_advanced_github_pat_export_warning">Ne dijelite svoj PAT. Ako ga uključite u postavke izvoza, držite tu datoteku privatnom jer sadrži token</string>
@@ -496,7 +486,6 @@ Dimenzije slike moraju biti sljedeće:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Otklanjanje grešaka</string>
     <string name="settings_system_export_debug_logs">Izvoz zapisnika o otklanjanju pogrešaka</string>
-    <string name="settings_system_export_debug_logs_description">Izvoz sistemskih zapisnika za rješavanje problema</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Nije uspjelo čitanje zapisnika (izlazni kod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Izvoz zapisnika nije uspio</string>
     <string name="settings_system_export_debug_logs_export_success">Izvezeni zapisnici</string>
@@ -602,6 +591,7 @@ Otvorenog koda svoga izvora, Morphe napreduje na povratnim informacijama i dopri
     <string name="saved">Spremljeno</string>
     <string name="update">Ažuriraj</string>
     <string name="allow">Dopusti</string>
+    <string name="details">Detalji</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Učitavanje…</string>
     <string name="unmounting_ellipsis">Isključivanje…</string>

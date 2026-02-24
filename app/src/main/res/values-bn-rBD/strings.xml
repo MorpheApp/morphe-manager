@@ -5,6 +5,12 @@
     <string name="home_not_patched_yet">এখনো প্যাচ করা হয়নি</string>
     <string name="home_no_patches_available">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="home_default_source_disabled">Morphe প্যাচের সোর্সটি বন্ধ রয়েছে। প্যাচ সোর্স শীটে এটি চালু করুন অথবা এক্সপার্ট মোড ব্যবহার করুন</string>
+    <string name="home_app_hide_title">অ্যাপটি গোপন করবেন?</string>
+    <string name="home_app_will_be_hidden">এই অ্যাপটি গোপন হবে</string>
+    <string name="home_app_show_hidden">দেখুন গোপন অ্যাপস</string>
+    <string name="home_app_no_hidden">কোনো গোপন অ্যাপ নেই</string>
+    <string name="home_app_hidden_apps_title">গোপন অ্যাপস</string>
+    <string name="home_app_hidden_apps_hint">একটি অ্যাপে ট্যাপ করুন এটি আবার তালিকায় দেখানোর জন্য</string>
     <string name="android_11_bug_dialog_title">অ্যান্ড্রয়েড ১১ বাগ</string>
     <string name="android_11_bug_dialog_description">এক্সপ্লোর 11 সিস্টেমের একটি বাগের কারণে অ্যাপ ইনস্টলেশন অনুমতি আগে দেওয়া উচিত। এটি ব্যবহারকারীর অভিজ্ঞতাকে নেতিবাচকভাবে প্রভাবিত করবে</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +48,6 @@
     <string name="sources_management_title">প্যাচ সোর্সগুলো</string>
     <string name="sources_management_open_in_browser">ব্রাউজারে ওপেন করুন</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
-    <string name="sources_management_date_added">যোগ করা হয়েছে</string>
-    <string name="sources_management_date_updated">আপডেট করা হয়েছে</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">প্রদর্শিত নাম</string>
     <string name="sources_dialog_rename">প্যাচের নাম পরিবর্তন করুন</string>
@@ -65,15 +69,13 @@
     <string name="sources_update_unavailable">আপডেট উপলব্ধ নেই</string>
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">আপনার কাছে কি মূল আনপ্যাচড APK আছে?</string>
-    <string name="home_apk_availability_dialog_simple">%1$s প্যাচ করতে, আপনার প্রয়োজন হবে:</string>
-    <string name="home_apk_availability_dialog_expert">"আপনার আছে অপ্যাচড %1$s APK?
-
-সামঞ্জস্যপূর্ণ সংস্করণ:"</string>
+    <string name="home_apk_availability_dialog_title">অপেক্ষা করছেন কোথায় একটি মূল অপছন্দিত APK?</string>
+    <string name="home_apk_availability_dialog_simple">প্যাচ করতে &lt;b&gt;%s&lt;/b&gt; এর জন্য, অ-প্যাচড এপিকি (APK) সংস্করণ দরকার:</string>
+    <string name="home_apk_availability_dialog_expert">প্যাচ করতে &lt;b&gt;%s&lt;/b&gt; এর জন্য, অ-প্যাচড এপিকি (APK) সংস্করণ দরকার:</string>
     <string name="home_apk_availability_recommended_label">প্রশংসিত</string>
     <string name="home_apk_availability_unpatched_label">অনুশিষ্টিত</string>
-    <string name="home_apk_availability_yes">হ্যাঁ, আমার আছে</string>
-    <string name="home_apk_availability_no">না, আমাকে এটি খুঁজে পেতে সাহায্য করুন</string>
+    <string name="home_apk_availability_yes">হ্যাঁ, আমাকে একটি APK খুঁজতে সাহায্য করুন</string>
+    <string name="home_apk_availability_no">না, আমি ইতিমধ্যে একটি APK পেয়েছি</string>
     <string name="home_apk_use_saved_with_version">বর্তমান সংরক্ষিত APK (v%s) ব্যবহার করুন</string>
     <string name="home_app_info_no_saved_apk">কোন সংরক্ষিত APK নেই। প্যাচিংয়ের জন্য আবার APK ফাইল নির্বাচন করতে হবে</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +86,12 @@
     <string name="home_download_instructions_download_button_toast">এখানে নয়, ওয়েবসাইটে ডাউনলোড করুন 😊</string>
     <string name="home_download_instructions_step3">ডাউনলোড শেষ হওয়ার অপেক্ষা করুন, এবং &lt;b&gt;APK ইনস্টল করবেন না&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">ডাউনলোড শেষ হওয়ার অপেক্ষা করুন, তারপর &lt;b&gt;APK ইনস্টল করুন&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">ডাউনলোড শেষ হওয়ার পর, আবার এই অ্যাপটি খুলুন</string>
-    <string name="home_download_instructions_step4_mount">মূল APK ইনস্টল করার পর, আবার এই অ্যাপটি খুলুন</string>
+    <string name="home_download_instructions_step4">পরবর্তীতে ডাউনলোড শেষ হলে, মর্ফেকে ফিরে যান</string>
+    <string name="home_download_instructions_step4_mount">APK ইনস্টল করার পর, Morphe-তে ফিরে যান</string>
     <string name="home_download_instructions_continue">APKMirror.com-এ চালিয়ে যান</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">আপনি যে APK ডাউনলোড করেছেন সেটি নির্বাচন করুন</string>
-    <string name="home_file_picker_prompt_description">এখন %1$sz নির্বাচিত APK ফাইলটি ডাউনলোড করুন</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">আমি ডাউনলোড করা APK ফাইল খুলতে চান</string>
+    <string name="home_file_picker_prompt_title">নির্বাচিত ডাউনলোডকৃত এপিকে</string>
+    <string name="home_file_picker_prompt_description">নির্বাচন করুন যুয়ুশি &lt;b&gt;%1$s&lt;/b&gt; APK ফাইল, যা তুমি জুয়ুশি ডাউনলোড করেছো</string>
     <string name="home_file_picker_prompt_open_apk">APK ফাইল খুলুন</string>
     <string name="home_recommended_version">社学牛​</string>
     <string name="home_selected_version">নির্বাচিত সংস্করণ</string>
@@ -102,7 +103,7 @@
     <string name="expert_mode_title">এক্সপার্ট মোড</string>
     <string name="expert_mode_subtitle_extended_format">%1$s টি %2$s নির্বাচিত</string>
     <string name="expert_mode_search">প্যাচ খুঁজুন</string>
-    <string name="expert_mode_proceed">প্যাচিংয়ের জন্য প্রেরণ করুন</string>
+    <string name="expert_mode_proceed">প্যাচিং শুরু করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
@@ -171,8 +172,8 @@
     <string name="home_app_info_patched_at">প্যাচ করা হয়েছে</string>
     <string name="home_app_info_patch_update_available">প্যাচ আপডেট উপলব্ধ আছে</string>
     <string name="home_app_info_patch_update_available_description">প্যাচের নতুন ভার্সন উপলব্ধ। আপনার অ্যাপকে পুনরায় প্যাচ করুন সর্বশেষ উন্নতির জন্য</string>
-    <string name="home_app_info_app_deleted_warning">অ্যাপ বাহির থেকে অপসারণ করা হয়েছে</string>
-    <string name="home_app_info_app_deleted_description">এই অ্যাপটি বাহির থেকে অপসারণ করা হয়েছে। ফাংশনালিটি পুনরুদ্ধার করতে পুনরায় প্যাচ করুন</string>
+    <string name="home_app_info_app_deleted_warning">অ্যাপটি বের করা হয়েছে</string>
+    <string name="home_app_info_app_deleted_description">এই অ্যাপটি মরফে বাইরে বের করা হয়েছে। ফাংশনালিটি পুনরুদ্ধার করতে পুনরায় প্যাচ করুন</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">রুট মোডে আরিজিনাল এপিকে ডিভাইসে ইনস্টল করা থাকতে হবে প্যাচিংয়ের আগে</string>
     <string name="root_gmscore_excluded">রুট মোডে GmsCore সমর্থন প্যাচ বাদ দেওয়া হয়েছে</string>
@@ -202,6 +203,15 @@
     <string name="patcher_install_error_subtitle">আনইনস্টল করে আবার ইনস্টল করার চেষ্টা করুন</string>
     <string name="patcher_ready_to_install_subtitle">ইনস্টল করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_ready_to_mount_subtitle">মাউন্ট করতে নিচের বোতামটি টিপুন</string>
+    <string name="patcher_storage_permission_dialog_title">স্টোরেজ পথে অ্যাক্সেস করতে পারেনি</string>
+    <string name="patcher_storage_permission_description_api30">এক বা একাধিক প্যাচ বিকল্প Morphe ম্যানেজার পড়তে পারে না। স্টোরেজ অ্যাক্সেস দিন এবং বাটন টিপে প্যাচিং শুরু হবে</string>
+    <string name="patcher_storage_permission_description_legacy">এক বা একাধিক প্যাচ বিকল্প অ্যাক্সেস করতে পারে না। প্যাচ বিকল্পগুলিতে পথ আপডেট করুন এবং আবার চেষ্টা করুন</string>
+    <string name="patcher_storage_permission_grant">স্টোরেজ অনুমতি দিন</string>
+    <string name="patcher_storage_permission_denied_warning">স্টোরেজ অনুমতি প্রত্যাখ্যাত হয়। এই পথ ব্যবহার করতে, অনুমতি দিন অথবা ফাইলগুলি অ্যাপের বেসিক ডিরেক্টরিতে সরান।</string>
+    <string name="patcher_storage_permission_open_settings">স্টোরেজ সেটিংস খুলুন</string>
+    <string name="patcher_storage_badge_denied">অনুমতি প্রত্যাখ্যাত হয়</string>
+    <string name="patcher_storage_badge_missing">পাওয়া যায়নি</string>
+    <string name="patcher_storage_permission_hint">টিপ: ফাইলগুলি /Android/data/app.morphe.manager/files/ এ সরান - অতিরিক্ত অনুমতি প্রয়োজন হয় না</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">প্রস্তুতি</string>
     <string name="patcher_step_load_patches">প্যাচ লোড হচ্ছে</string>
@@ -284,7 +294,7 @@
     <string name="settings_appearance_dynamic">এক্সেন্ট কালার</string>
     <string name="settings_appearance_accent_color">অ্যাকসেন্ট রঙ</string>
     <string name="settings_appearance_pure_black">পুরো কালো</string>
-    <string name="settings_appearance_pure_black_description">ওএলইডি ডিসপ্লে জন্য সত্য কালো পটভূমি ব্যবহার করুন</string>
+    <string name="settings_appearance_pure_black_description">বাস্তব কালো পটভূমি ব্যবহার করুন</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">অ্যাপ্লিকেশনের ভাষা</string>
     <string name="settings_appearance_app_language_current">বর্তমান ভাষা</string>
@@ -344,7 +354,7 @@
     <string name="settings_advanced_github_pat_configured">টোকেন কনফিগার করা হয়েছে</string>
     <string name="settings_advanced_github_pat_how_to_get">কিভাবে একটি টোকেন পেতে পারেন</string>
     <string name="settings_advanced_github_pat_dialog_title">গিটহাব ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন</string>
-    <string name="settings_advanced_github_pat_dialog_description">গিটহাব ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন, যাতে আপনি বাহ্যিক উৎস হিসেবে পুল রিকোয়েস্ট যোগ করতে পারেন। public_repo স্কোপের সাথে একটি PAT তৈরি করুন</string>
+    <string name="settings_advanced_github_pat_dialog_description">GitHub ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন যাতে আপনি বাহ্যিক উৎস হিসাবে পুল রিকোয়েস্ট যোগ করতে পারেন। public_repo স্কোপের একটি PAT তৈরি করুন github.com-তে</string>
     <string name="settings_advanced_github_pat_export_include_label">সেটিংসে অন্তর্ভুক্ত করুন</string>
     <string name="settings_advanced_github_pat_export_include_supporting">এই PAT কে ম্যানেজার সেটিংসে যোগ করুন</string>
     <string name="settings_advanced_github_pat_export_warning">আপনার PAT কে শেয়ার করবেন না। যদি আপনি এটি সেটিংসে অন্তর্ভুক্ত করেন, তাহলে সেই ফাইলটি বেসিক রাখুন, কারণ এটি টোকেন ধারণ করে</string>
@@ -475,7 +485,7 @@
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">ডিবাগ</string>
     <string name="settings_system_export_debug_logs">ডিবাগ লগগুলি রফতানি করুন</string>
-    <string name="settings_system_export_debug_logs_description">সিস্টেম লগ বের করুন ট্রাবলশুটিং এর জন্য</string>
+    <string name="settings_system_export_debug_logs_description">ট্রাবলশুটিং এর জন্য সিস্টেম লগ সংরক্ষণ করুন</string>
     <string name="settings_system_export_debug_logs_export_read_failed">লগ পড়তে ব্যর্থ হয়েছে (ব্যবহার করা কোড %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">স্টোর ম্যানেজমেন্ট</string>
     <string name="settings_system_export_debug_logs_export_success">লগ এক্সপোর্ট করা হয়েছে</string>
@@ -581,6 +591,8 @@
     <string name="saved">সংরক্ষিত হয়েছে</string>
     <string name="update">আপডেট</string>
     <string name="allow">অনুমতি দিন</string>
+    <string name="details">বিস্তারিত</string>
+    <string name="hide">গোপন রাখুন</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>

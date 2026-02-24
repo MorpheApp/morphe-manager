@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Još nisu ispravljene</string>
     <string name="home_no_patches_available">Nema dostupnih patchova</string>
     <string name="home_default_source_disabled">Morphe patch izvor je onemogućen. Molimo omogućite ga u listi Patch izvora ili koristite Expert mod</string>
+    <string name="home_app_hide_title">Sakrij ovu aplikaciju?</string>
+    <string name="home_app_hide_message">Ova aplikacija će biti sakrivena s glavnog ekrana. Možete je kasnije vratiti koristeći dugme \'%1$s\' na dnu liste.</string>
+    <string name="home_app_will_be_hidden">Ova aplikacija će biti sakrivena</string>
+    <string name="home_app_show_hidden">Prikaži sakrivena aplikacija</string>
+    <string name="home_app_no_hidden">Nema sakrivenih aplikacija</string>
+    <string name="home_app_hidden_apps_title">Sakrivena aplikacija</string>
+    <string name="home_app_hidden_apps_hint">Dodirnite aplikaciju da bi je ponovo prikazali na listi</string>
     <string name="android_11_bug_dialog_title">Android 11 greška</string>
     <string name="android_11_bug_dialog_description">Dozvola za instalaciju aplikacije mora biti odobrena prethodno kako bi se izbjegla greška u Android 11 sistemu koja će negativno utjecati na korisničko iskustvo</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Patch izvoriÅ¡ta</string>
     <string name="sources_management_open_in_browser">Otvori linkove u pregledaču</string>
     <string name="sources_management_failed_to_open_url">Nijeleženo otvaranje URL</string>
-    <string name="sources_management_date_added">Dodato</string>
-    <string name="sources_management_date_updated">Ažurirano</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ime ime</string>
     <string name="sources_dialog_rename">Promeni ime</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Nema dostupnih ažuracija</string>
     <string name="sources_download_fail">Nijeleženo preuzimanje izvora: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Da li poseduješ originalni ne-zakrpljeni APK?</string>
-    <string name="home_apk_availability_dialog_simple">Da bi popravili %1$s, potrebno je nepotpisani APK sa verzijom:</string>
-    <string name="home_apk_availability_dialog_expert">"Imate nepotpisani %1$s APK?
-
-Kompatibilne verzije:"</string>
+    <string name="home_apk_availability_dialog_title">Potrebna je pomoć u traženju originalnog neispravljenog APK-a</string>
+    <string name="home_apk_availability_dialog_simple">Da biste patchovali &lt;b&gt;%s&lt;/b&gt;, potrebna je nepatirana APK verzija:</string>
+    <string name="home_apk_availability_dialog_expert">Da bi popravili &lt;b&gt;%s&lt;/b&gt;, potrebno je nepokvarenog APK verzija:</string>
     <string name="home_apk_availability_recommended_label">Preporučeno</string>
     <string name="home_apk_availability_unpatched_label">Neopterećeno</string>
-    <string name="home_apk_availability_yes">Da, imam ga</string>
-    <string name="home_apk_availability_no">Ne, pomozi mi da ga pronađem</string>
+    <string name="home_apk_availability_yes">Da, pomozite mi da pronađem APK</string>
+    <string name="home_apk_availability_no">Ne, već imam APK</string>
     <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema saćuvanog APK. Patching će zahtijevati ponovno odabir APK datoteke</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Kompatibilne verzije:"</string>
     <string name="home_download_instructions_download_button_toast">Pritisnite preuzmi na sajtu, a ne ovde 😊</string>
     <string name="home_download_instructions_step3">Sačekajte da preuzimanje bude završeno, i &lt;b&gt;nemojte instalirati&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Sačekajte da preuzimanje bude završeno, a onda &lt;b&gt;instalirajte APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Nakon što se preuzimanje završi, ponovo otvori ovu aplikaciju</string>
-    <string name="home_download_instructions_step4_mount">Nakon instalacije originalnog APK-a, ponovo otvori ovu aplikaciju</string>
+    <string name="home_download_instructions_step4">Nakon što se preuzimanje završi, vratite se na Morphe</string>
+    <string name="home_download_instructions_step4_mount">Nakon instaliranja originalnog APK-a, vratite se na Morphe</string>
     <string name="home_download_instructions_continue">Nastavi na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Izaberi APK koji si preuzeo</string>
-    <string name="home_file_picker_prompt_description">Sada odaberite %1$s fajl APK koji ste nedavno preuzeli</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Otvori APK datoteku koju sam preuzeo</string>
+    <string name="home_file_picker_prompt_title">Izaberite preuzete APK</string>
+    <string name="home_file_picker_prompt_description">Odaberite &lt;b&gt;%1$s&lt;/b&gt; APK fajl koji ste nedavno preuzeli</string>
     <string name="home_file_picker_prompt_open_apk">Otvori APK datoteku</string>
     <string name="home_recommended_version">Preporučena verzija</string>
     <string name="home_selected_version">Odabrano</string>
@@ -102,7 +104,7 @@ Kompatibilne verzije:"</string>
     <string name="expert_mode_title">Režim eksperta</string>
     <string name="expert_mode_subtitle_extended_format">%1$s od %2$s odabrano</string>
     <string name="expert_mode_search">Pretraži patchove</string>
-    <string name="expert_mode_proceed">Nastavi patchiranje</string>
+    <string name="expert_mode_proceed">Pokreni ažuriranje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patchova</string>
@@ -171,8 +173,8 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_app_info_patched_at">Patcheirano</string>
     <string name="home_app_info_patch_update_available">Dostupno je nova verzija patchova</string>
     <string name="home_app_info_patch_update_available_description">Nova verzija patchova je dostupna. Ponovno patchirajte svoju aplikaciju da bi dobili najnovije poboljšanja i ispravke</string>
-    <string name="home_app_info_app_deleted_warning">Aplikacija deinstalirana izvan menadžera</string>
-    <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan menadžera. Ponovo ispuni da bi obnovila funkcionalnost</string>
+    <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
+    <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan Morphe. Ponovo je instalirajte da bi obnovili funkcionalnost</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim korena zahteva da je originalni APK instaliran na vašem uređaju pre patchanja</string>
     <string name="root_gmscore_excluded">GmsCore zakrpa za podršku je isključena u root modu</string>
@@ -202,6 +204,15 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patcher_install_error_subtitle">Pokušajte deinstalirati pa ponovo instalirati</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite dugme ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite dugme ispod za postavljanje</string>
+    <string name="patcher_storage_permission_dialog_title">Ne mogu pristupiti putu za pohranu</string>
+    <string name="patcher_storage_permission_description_api30">Jedan ili više opcija za patching ukazuju na putove koje Morphe menadžer ne može da čita. Dajte pristup pohrani i kliknite dugme, a patching će automatski početi</string>
+    <string name="patcher_storage_permission_description_legacy">Jedan ili više opcija za patching ukazuju na putove koje ne mogu biti pristupili. Ažurirajte putove u opcijama za patching i pokušajte ponovo</string>
+    <string name="patcher_storage_permission_grant">Dajte dozvolu za pohranu</string>
+    <string name="patcher_storage_permission_denied_warning">Dozvola za pohranu je odbijena. Dopustite ovu putanju da biste je koristili ili premestite fajlove u privatni direktorijum aplikacije</string>
+    <string name="patcher_storage_permission_open_settings">Otvori postavke pohrane</string>
+    <string name="patcher_storage_badge_denied">Odbijena dopuštenja</string>
+    <string name="patcher_storage_badge_missing">Nema pronađenih</string>
+    <string name="patcher_storage_permission_hint">Savet: Premestite fajlove u /Android/data/app.morphe.manager/files/ - ne potrebne su dodatne dopuštenja</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Priprema</string>
     <string name="patcher_step_load_patches">Učitavanje zakrpa</string>
@@ -284,7 +295,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_dynamic">Dinamičko</string>
     <string name="settings_appearance_accent_color">Boja akcenata</string>
     <string name="settings_appearance_pure_black">Čisti crni</string>
-    <string name="settings_appearance_pure_black_description">Koristi prave crne pozadine za OLED displeje</string>
+    <string name="settings_appearance_pure_black_description">Koristi prave crne pozadine</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Jezik aplikacije</string>
     <string name="settings_appearance_app_language_current">Trenutna jezika</string>
@@ -344,7 +355,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_github_pat_configured">Token je konfigurisan</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako dobiti token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavi GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Postavi GitHub Personal Access Token kako bi mogao dodati Pull Requests kao vanjske izvore. Stvori PAT sa opcijom public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Postavite GitHub Personal Access Token kako biste mogli dodati pull requests kao vanjske izvore. Kreirajte PAT sa opsegom public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Uključeno u postavke izvoza</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ovaj PAT u izvozne menadžerske postavke</string>
     <string name="settings_advanced_github_pat_export_warning">Ne deli svoj PAT. Ako ga uključiš u postavke izvoza, drž taj fajl privatno jer sadrži token</string>
@@ -458,7 +469,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Izvezi evidencije otklanjanja grešaka</string>
-    <string name="settings_system_export_debug_logs_description">Izvezi sistemske lozove za otklonavanje</string>
+    <string name="settings_system_export_debug_logs_description">Spremi sistemske logove za otklanjanje problema</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Neuspeh pri čitanju dnevnika (kôd izlaza %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Neuspešan izvoz evidencija</string>
     <string name="settings_system_export_debug_logs_export_success">Lozove izvezeno</string>
@@ -564,6 +575,8 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="saved">Sačuvano</string>
     <string name="update">Ažuriraj</string>
     <string name="allow">Dozvoli</string>
+    <string name="details">Detalji</string>
+    <string name="hide">Sakrij</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Montiranje…</string>
     <string name="unmounting_ellipsis">Ponovo priključaj…</string>

@@ -26,13 +26,8 @@
     <string name="home_greeting_10">قدرت گرفته از کافئین و پچ‌های خوب</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_failed_to_open_url">باز کردن لینک ناموفق بود</string>
-    <string name="sources_management_date_added">افزوده شد</string>
-    <string name="sources_management_date_updated">به روزرسانی شد</string>
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">فایل apk پچ نشده رو داری؟</string>
-    <string name="home_apk_availability_yes">بله، دارمش</string>
-    <string name="home_apk_availability_no">نه، کمکم کن پیداش کنم</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">دانلود فایل apk اصلی</string>
     <string name="home_download_instructions_steps_title">دستورالعمل‌ها:</string>

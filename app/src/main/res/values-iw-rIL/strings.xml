@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
     <string name="home_default_source_disabled">הסourse של Morphe מושבת. אנא אפשרו אותה ברשימת Sourse או השתמשו במצב של מומחה</string>
+    <string name="home_app_hide_title">הסתר את האפליקציה הזו?</string>
+    <string name="home_app_hide_message">האפליקציה תהיה מוסתרת מהתפריט הראשי. תוכל להחזיר אותה מאוחר יותר באמצעות הכפתור \'%1$s\' שבתחתית הרשימה</string>
+    <string name="home_app_will_be_hidden">האפליקציה תהיה מוסתרת</string>
+    <string name="home_app_show_hidden">הצג אפליקציות מוסתרות</string>
+    <string name="home_app_no_hidden">אין אפליקציות מוסתרות</string>
+    <string name="home_app_hidden_apps_title">אפליקציות מוסתרות</string>
+    <string name="home_app_hidden_apps_hint">לחץ על אפליקציה כדי להציג אותה בשנית ברשימה</string>
     <string name="android_11_bug_dialog_title">באג ב-Android 11</string>
     <string name="android_11_bug_dialog_description">הזכות להתקין את האפליקציה צריכה להיות מאושרת מראש כדי להימנע מבגה במערכת Android 11 שיפגע את חוויית המשתמש</string>
     <!-- Home Screen - Update Notifications -->
@@ -43,8 +50,6 @@
     <string name="sources_management_title">מקורות תיקונים</string>
     <string name="sources_management_open_in_browser">פתח בדפדפן</string>
     <string name="sources_management_failed_to_open_url">שגגה להכזת אתר</string>
-    <string name="sources_management_date_added">הוסף</string>
-    <string name="sources_management_date_updated">עודכן</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">שם תצוג</string>
     <string name="sources_dialog_rename">שנה את שם התצוגה</string>
@@ -66,15 +71,13 @@
     <string name="sources_update_unavailable">אין עדכון זמין</string>
     <string name="sources_download_fail">שגגה להוריד תצוגים: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">האם יש לך את קובץ ה-APK המקורי ללא תיקונים?</string>
-    <string name="home_apk_availability_dialog_simple">להפעיל %1$s, צריך APK לא מופץ עם גרסה:</string>
-    <string name="home_apk_availability_dialog_expert">"יש לך APK לא מופץ %1$s?
-
-גרסאות תואמות:"</string>
+    <string name="home_apk_availability_dialog_title">נזקק לעזרה במציאת APK מקורי ללא תיקונים?</string>
+    <string name="home_apk_availability_dialog_simple">להתקן &lt;b&gt;%s&lt;/b&gt;, צריך את הגרסה הלא מתוקנת של APK:</string>
+    <string name="home_apk_availability_dialog_expert">לעדכן &lt;b&gt;%s&lt;/b&gt;, צריך APK לא מעודכן של הגרסאות:</string>
     <string name="home_apk_availability_recommended_label">מומלץ</string>
     <string name="home_apk_availability_unpatched_label">לא מתקן</string>
-    <string name="home_apk_availability_yes">כן, יש לי את זה</string>
-    <string name="home_apk_availability_no">לא, עזור לי למצוא את זה</string>
+    <string name="home_apk_availability_yes">כן, עזור לי למצוא APK</string>
+    <string name="home_apk_availability_no">לא, אני כבר מחזיק APK</string>
     <string name="home_apk_use_saved_with_version">השתמש באפאק שמור (גרסה %s)</string>
     <string name="home_app_info_no_saved_apk">אין אפאק שמור. תיקון ידרש לבחור את קובץ האפאק שוב</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,13 +88,12 @@
     <string name="home_download_instructions_download_button_toast">לחץ הורד באתר, ולא כאן 😊</string>
     <string name="home_download_instructions_step3">המתן להשלמת ההורדה, ו&lt;b&gt;אל תתקין&lt;/b&gt; את ה-APK</string>
     <string name="home_download_instructions_step3_mount">המתן להשלמת ההורדה, ואז &lt;b&gt;התקן את ה-APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">לאחר שההורדה מסתיימת, פתח מחדש את האפליקציה הזו</string>
-    <string name="home_download_instructions_step4_mount">לאחר התקנת קובץ ה-APK המקורי, פתח מחדש את האפליקציה הזו</string>
+    <string name="home_download_instructions_step4">לאחר סיום ההורדה, חזרו למורפ</string>
+    <string name="home_download_instructions_step4_mount">לאחר התקנת APK המקורית, חזרו למורפ</string>
     <string name="home_download_instructions_continue">המשך ל-APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">בחר את קובץ ה-APK שהורדת</string>
-    <string name="home_file_picker_prompt_description">עכשיו בחר את הקובץ %1$s APK שאתה עומד להוריד</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">פתח קובץ APK שטעיתי</string>
+    <string name="home_file_picker_prompt_title">בחרו קובץ APK שהורד</string>
+    <string name="home_file_picker_prompt_description">בחרו את הקובץ &lt;b&gt;%1$s&lt;/b&gt; APK שהורדתם</string>
     <string name="home_file_picker_prompt_open_apk">פתח קובץ APK</string>
     <string name="home_recommended_version">версия для рекомендации</string>
     <string name="home_selected_version">נבחר</string>
@@ -103,7 +105,7 @@
     <string name="expert_mode_title">מצב מומחה</string>
     <string name="expert_mode_subtitle_extended_format">%1$s מתוך %2$s נבחר</string>
     <string name="expert_mode_search">חפש תיקונים</string>
-    <string name="expert_mode_proceed">המשך לתיקון</string>
+    <string name="expert_mode_proceed">התקדמו לתיקון</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_enable_all">הפעל את כולם</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
@@ -172,8 +174,8 @@
     <string name="home_app_info_patched_at">פיצ\'ח</string>
     <string name="home_app_info_patch_update_available">עדכון פיצ\'ה זמין זמין</string>
     <string name="home_app_info_patch_update_available_description">גרסה חדשה של תיקונים זמינה. תיקן את האפליקציה שלך כדי לקבל את התיקונים וההערות החדשים</string>
-    <string name="home_app_info_app_deleted_warning">אפליקציה בוטלה מחוץ למנהל</string>
-    <string name="home_app_info_app_deleted_description">אפליקציה זו בוטלה מחוץ למנהל. תיקנה כדי לשחזר את הפונקציונליות</string>
+    <string name="home_app_info_app_deleted_warning">האפליקציה הוסרה</string>
+    <string name="home_app_info_app_deleted_description">האפליקציה הוסרה מחוץ למורפ. תיקנה כדי לשחזר את הפונקציונליות</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">מוד רוט דורש את APK המקורי להתקין על מכשיר שלך לפני השחזור</string>
     <string name="root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
@@ -203,6 +205,15 @@
     <string name="patcher_install_error_subtitle">נסה להסיר ולהתקין שוב</string>
     <string name="patcher_ready_to_install_subtitle">לחץ על הכפתור למטה כדי להתקין</string>
     <string name="patcher_ready_to_mount_subtitle">לחץ על הכפתור למטה כדי לאתחל</string>
+    <string name="patcher_storage_permission_dialog_title">לא ניתן לגשת לדרך אחסון</string>
+    <string name="patcher_storage_permission_description_api30">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות למנהל Morphe. תן אישור גישה לאחסון והקש על הכפתור ואז התיקון יתחיל אוטומטית</string>
+    <string name="patcher_storage_permission_description_legacy">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות. עדכן את הדרכים באופציות התיקון ונסה שוב</string>
+    <string name="patcher_storage_permission_grant">אשר אישור גישה לאחסון</string>
+    <string name="patcher_storage_permission_denied_warning">התחשיבו את הרשאת אחסון. תן את הרשאה כדי להשתמש בפாத זה, או העבר את הקבצים לתיקיית האפליקציה הפרטית.</string>
+    <string name="patcher_storage_permission_open_settings">פתח הגדרות אחסון</string>
+    <string name="patcher_storage_badge_denied">רשאה נדחתה</string>
+    <string name="patcher_storage_badge_missing">לא נמצא</string>
+    <string name="patcher_storage_permission_hint">עצה: העבר קבצים ל- /Android/data/app.morphe.manager/files/ - אין צורך ברשאות נוספות</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">מכין</string>
     <string name="patcher_step_load_patches">טוען תיקונים</string>
@@ -285,7 +296,7 @@
     <string name="settings_appearance_dynamic">Morphe</string>
     <string name="settings_appearance_accent_color">צבע מוביל</string>
     <string name="settings_appearance_pure_black">שחור טהור</string>
-    <string name="settings_appearance_pure_black_description">שימוש רקע שחור אמיתי עבור מסכי OLED</string>
+    <string name="settings_appearance_pure_black_description">השתמשו בעורכים שחורים אמיתיים</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">שפת היישום</string>
     <string name="settings_appearance_app_language_current">שפה נוכח</string>
@@ -345,7 +356,7 @@
     <string name="settings_advanced_github_pat_configured">טוקן תצוגה</string>
     <string name="settings_advanced_github_pat_how_to_get">כיצד לקבל טוקן</string>
     <string name="settings_advanced_github_pat_dialog_title">הגדר טוקן גישה אישי של GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">הגדר טוקן גישה אישי של GitHub על מנת להוסיף בקשות טיפול חיצוניות. צור טוקן עם סקופ של public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">הגדרו טוקן אישור אישי של GitHub כדי שיוכלו להוסיף בקשות לשינוי כמקורות חיצוניים. צרו טוקן PAT עם סקופ של public_repo של github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">כלול בהגדרות ייצוא</string>
     <string name="settings_advanced_github_pat_export_include_supporting"> מוסיף את הטוקן הזה להגדרות ייצוא של מנהל</string>
     <string name="settings_advanced_github_pat_export_warning">אל תשתף את הטוקן שלך. אם תכלילו אותו בהגדרות ייצוא, שמור את הקובץ הפרטי כי הוא מכיל את הטוקן</string>
@@ -459,7 +470,7 @@
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">debug</string>
     <string name="settings_system_export_debug_logs">ייצוא יומני איתור באגים</string>
-    <string name="settings_system_export_debug_logs_description">ייצא את תיקוני המערכת לשימוש בטעיה</string>
+    <string name="settings_system_export_debug_logs_description">שמור יומני מערכת לצורך תיקון תקלות</string>
     <string name="settings_system_export_debug_logs_export_read_failed">שגיאה בקריאת לוגים (קוד יציאה %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">נכשל לייצא יומנים</string>
     <string name="settings_system_export_debug_logs_export_success">התיקונים יוצאו</string>
@@ -563,6 +574,8 @@
     <string name="saved">נשמר</string>
     <string name="update">עדכון</string>
     <string name="allow">אשר</string>
+    <string name="details">פרטים</string>
+    <string name="hide">הסתר</string>
     <string name="installing_ellipsis">מתקין…</string>
     <string name="mounting_ellipsis">מצרף…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>

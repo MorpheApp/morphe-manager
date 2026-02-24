@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Aún no parcheado</string>
     <string name="home_no_patches_available">No hay parches disponibles</string>
     <string name="home_default_source_disabled">La fuente de parches de Morphe está deshabilitada. Actívala en Fuentes de parches o usa el modo Experto</string>
+    <string name="home_app_hide_title">¿Ocultar esta app?</string>
+    <string name="home_app_hide_message">Esta app se ocultará de la pantalla de inicio. Puedes restaurarla más tarde usando el botón \"%1$s\" en la parte inferior de la lista</string>
+    <string name="home_app_will_be_hidden">Esta app se ocultará</string>
+    <string name="home_app_show_hidden">Mostrar apps ocultas</string>
+    <string name="home_app_no_hidden">No hay apps ocultas</string>
+    <string name="home_app_hidden_apps_title">Apps ocultas</string>
+    <string name="home_app_hidden_apps_hint">Toca en una app para mostrarla en la lista de nuevo</string>
     <string name="android_11_bug_dialog_title">Error de Android 11</string>
     <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Fuentes de parches</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
-    <string name="sources_management_date_added">Agregado</string>
-    <string name="sources_management_date_updated">Actualizado</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nombre para mostrar</string>
     <string name="sources_dialog_rename">Agregar fuente de parches</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">No hay actualización disponible</string>
     <string name="sources_download_fail">No se pudo descargar las fuentes: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">¿Tienes la APK original sin parchear?</string>
-    <string name="home_apk_availability_dialog_simple">Para parchear %1$s, necesitas un APK sin parchear con la versión:</string>
-    <string name="home_apk_availability_dialog_expert">"¿Tienes un APK de %1$s sin parchear?
-
-Versiones compatibles:"</string>
+    <string name="home_apk_availability_dialog_title">¿Necesitas ayuda para encontrar un APK original sin parchear?</string>
+    <string name="home_apk_availability_dialog_simple">Para parchear &lt;b&gt;%s&lt;/b&gt;, necesitas la versión APK sin parchear:</string>
+    <string name="home_apk_availability_dialog_expert">Para parchear &lt;b&gt;%s&lt;/b&gt;, necesitas un APK sin parchear de las versiones:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">No parcheado</string>
-    <string name="home_apk_availability_yes">Sí, la tengo</string>
-    <string name="home_apk_availability_no">No, ayúdame a encontrarla</string>
+    <string name="home_apk_availability_yes">Sí, ayúdame a encontrar un APK</string>
+    <string name="home_apk_availability_no">No, ya tengo un APK</string>
     <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Versiones compatibles:"</string>
     <string name="home_download_instructions_download_button_toast">Presiona descargar en el sitio web, y no aquí 😊</string>
     <string name="home_download_instructions_step3">Espera a que la descarga se complete, y &lt;b&gt;no instales&lt;/b&gt; el APK</string>
     <string name="home_download_instructions_step3_mount">Espera a que la descarga se complete, luego &lt;b&gt;instala el APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Después de que termine la descarga, vuelve a abrir esta aplicación</string>
-    <string name="home_download_instructions_step4_mount">Después de instalar el APK original, vuelve a abrir esta aplicación</string>
+    <string name="home_download_instructions_step4">Después de que la descarga termine, vuelve a Morphe</string>
+    <string name="home_download_instructions_step4_mount">Después de instalar el APK original, vuelve a Morphe</string>
     <string name="home_download_instructions_continue">Continuar a APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Selecciona el APK que descargaste</string>
-    <string name="home_file_picker_prompt_description">Ahora selecciona el archivo APK de %1$s que acabas de descargar</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Abrir archivo APK que descargué</string>
+    <string name="home_file_picker_prompt_title">Seleccionar APK descargado</string>
+    <string name="home_file_picker_prompt_description">Selecciona el archivo APK de &lt;b&gt;%1$s&lt;/b&gt; que acabas de descargar</string>
     <string name="home_file_picker_prompt_open_apk">Abrir archivo APK</string>
     <string name="home_recommended_version">Versión recomendada</string>
     <string name="home_selected_version">Versión seleccionada</string>
@@ -171,8 +173,8 @@ Versiones compatibles:"</string>
     <string name="home_app_info_patched_at">Parcheado</string>
     <string name="home_app_info_patch_update_available">Actualización de parches disponible</string>
     <string name="home_app_info_patch_update_available_description">Hay disponible una versión más reciente de los parches. Vuelve a parchear tu aplicación para obtener las últimas mejoras y correcciones</string>
-    <string name="home_app_info_app_deleted_warning">Aplicación desinstalada fuera del administrador</string>
-    <string name="home_app_info_app_deleted_description">Esta aplicación se desinstaló fuera del administrador. Vuelva a parchearla para restaurar la funcionalidad</string>
+    <string name="home_app_info_app_deleted_warning">La app fue desinstalada</string>
+    <string name="home_app_info_app_deleted_description">Esta app fue desinstalada fuera de Morphe. Vuelve a parchearla para restaurar la funcionalidad</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">El modo raíz requiere que el APK original esté instalado en tu dispositivo antes de aplicar parches.</string>
     <string name="root_gmscore_excluded">El parche de soporte de GmsCore está excluido en el modo raíz</string>
@@ -202,6 +204,15 @@ Versiones compatibles:"</string>
     <string name="patcher_install_error_subtitle">Intente desinstalar y volver a instalar</string>
     <string name="patcher_ready_to_install_subtitle">Pulse el botón de abajo para instalar</string>
     <string name="patcher_ready_to_mount_subtitle">Pulse el botón de abajo para montar</string>
+    <string name="patcher_storage_permission_dialog_title">No se puede acceder a la ruta de almacenamiento</string>
+    <string name="patcher_storage_permission_description_api30">Una o más opciones de parcheo apuntan a rutas que el gestor de Morphe no puede leer. Conceda acceso al almacenamiento y toque el botón para que el parcheo empiece automáticamente</string>
+    <string name="patcher_storage_permission_description_legacy">Una o varias opciones de parcheo apuntan a rutas que no se pueden acceder. Actualice las rutas en las opciones de parcheo y vuelva a intentarlo</string>
+    <string name="patcher_storage_permission_grant">Conceder permiso de almacenamiento</string>
+    <string name="patcher_storage_permission_denied_warning">Permiso de almacenamiento denegado. Conceda el permiso para usar esta ruta o mueva los archivos al directorio privado de la aplicación</string>
+    <string name="patcher_storage_permission_open_settings">Abrir ajustes de almacenamiento</string>
+    <string name="patcher_storage_badge_denied">Permiso denegado</string>
+    <string name="patcher_storage_badge_missing">No encontrado</string>
+    <string name="patcher_storage_permission_hint">Consejo: Mueva los archivos a /Android/data/app.morphe.manager/files/ - no se necesitan permisos adicionales</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Cargando parches</string>
@@ -284,7 +295,7 @@ Versiones compatibles:"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Color de acento</string>
     <string name="settings_appearance_pure_black">Negro puro</string>
-    <string name="settings_appearance_pure_black_description">Usar fondos negros verdaderos para pantallas OLED</string>
+    <string name="settings_appearance_pure_black_description">Usar fondos negros verdaderos</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Idioma de la aplicación</string>
     <string name="settings_appearance_app_language_current">Idioma actual</string>
@@ -344,7 +355,7 @@ Versiones compatibles:"</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Cómo obtener un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Establecer token de acceso personal de GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Establecer un token de acceso personal de GitHub para poder agregar solicitudes de extracción como fuentes externas. Cree un PAT con el alcance público_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Establezca un token de acceso personal (PAT) de GitHub para poder añadir solicitudes de extracción como fuentes externas. Cree un PAT con alcance public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Incluir en la exportación de ajustes</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Agrega este PAT a los ajustes exportados del administrador</string>
     <string name="settings_advanced_github_pat_export_warning">No compartas tu PAT. Si lo incluyes en una exportación de ajustes, mantén ese archivo privado porque contiene el token</string>
@@ -496,7 +507,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Depurar</string>
     <string name="settings_system_export_debug_logs">Exportar registros de depuración</string>
-    <string name="settings_system_export_debug_logs_description">Exportar registros del sistema para solucionar problemas</string>
+    <string name="settings_system_export_debug_logs_description">Guardar registros del sistema para solucionar problemas</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Error al leer los registros (código de salida %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Error al exportar registros</string>
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
@@ -602,6 +613,8 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="saved">Guardado</string>
     <string name="update">Actualizar</string>
     <string name="allow">Permitir</string>
+    <string name="details">Detalles</string>
+    <string name="hide">Ocultar</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>

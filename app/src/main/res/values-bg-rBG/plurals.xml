@@ -16,6 +16,10 @@
         <item quantity="one">%s пакет</item>
         <item quantity="other">%s пакета</item>
     </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Приложи %s пач</item>
+        <item quantity="other">Приложи %s пача</item>
+    </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK файл</item>
         <item quantity="other">%s файлове APK</item>

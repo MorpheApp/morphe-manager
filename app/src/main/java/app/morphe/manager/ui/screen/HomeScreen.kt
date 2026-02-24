@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
-import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -30,10 +29,8 @@ import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -84,6 +81,12 @@ fun HomeScreen(
     val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
+    // Dynamic app items from bundles
+    val homeAppItems by homeViewModel.homeAppItems.collectAsStateWithLifecycle()
+
+    // Hidden packages filtered to only active-bundle packages (reactive)
+    val hiddenAppItems by homeViewModel.hiddenAppItems.collectAsStateWithLifecycle()
+
     val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
     if (!isDeviceRooted) {
         // Non-root: always standard install, sync the state
@@ -106,11 +109,6 @@ fun HomeScreen(
     LaunchedEffect(Unit) {
         homeViewModel.onStartQuickPatch = onStartQuickPatch
     }
-
-    // Load installed apps
-    var youtubeInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
-    var youtubeMusicInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
-    var redditInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
 
     // Observe all installed apps
     val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
@@ -175,9 +173,6 @@ fun HomeScreen(
         }
     }
 
-    // Pass update info to sections layout
-    val appUpdatesAvailable by remember { derivedStateOf { homeViewModel.appUpdatesAvailable } }
-
     // Handle patch trigger from dialog
     LaunchedEffect(patchTriggerPackage) {
         patchTriggerPackage?.let { packageName ->
@@ -186,42 +181,10 @@ fun HomeScreen(
         }
     }
 
-    // Update installed apps when data changes
+    // Update deleted status
     LaunchedEffect(allInstalledApps) {
-        withContext(Dispatchers.IO) {
-            youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.YOUTUBE }
-            youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.YOUTUBE_MUSIC }
-            redditInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.REDDIT }
-        }
-
-        // Update package info and deleted status
-        homeViewModel.updateInstalledAppsInfo(
-            youtubeInstalledApp,
-            youtubeMusicInstalledApp,
-            redditInstalledApp,
-            allInstalledApps
-        )
-    }
-
-    // Get deleted status
-    val youtubePackageInfo by remember { derivedStateOf { homeViewModel.youtubePackageInfo } }
-    val youtubeMusicPackageInfo by remember { derivedStateOf { homeViewModel.youtubeMusicPackageInfo } }
-    val redditPackageInfo by remember { derivedStateOf { homeViewModel.redditPackageInfo } }
-
-    val appsDeletedStatus by remember { derivedStateOf { homeViewModel.appsDeletedStatus } }
-    val youtubeIsDeleted = youtubeInstalledApp?.currentPackageName?.let { appsDeletedStatus[it] } == true
-    val youtubeMusicIsDeleted = youtubeMusicInstalledApp?.currentPackageName?.let { appsDeletedStatus[it] } == true
-    val redditIsDeleted = redditInstalledApp?.currentPackageName?.let { appsDeletedStatus[it] } == true
-
-    // Update on refresh
-    LaunchedEffect(isRefreshing) {
-        if (!isRefreshing && allInstalledApps.isNotEmpty()) {
-            homeViewModel.updateInstalledAppsInfo(
-                youtubeInstalledApp,
-                youtubeMusicInstalledApp,
-                redditInstalledApp,
-                allInstalledApps
-            )
+        if (allInstalledApps.isNotEmpty()) {
+            homeViewModel.updateDeletedAppsStatus(allInstalledApps)
         }
     }
 
@@ -321,55 +284,25 @@ fun HomeScreen(
                 hasManagerUpdate = hasManagerUpdate,
                 onShowUpdateDetails = { showUpdateDetailsDialog = true },
 
-                // App update indicators
-                appUpdatesAvailable = appUpdatesAvailable,
-
                 // Greeting section
                 greetingMessage = greetingMessage,
 
-                // App buttons section
-                onYouTubeClick = {
+                // Dynamic app items
+                homeAppItems = homeAppItems,
+                onAppClick = { item ->
                     homeViewModel.handleAppClick(
-                        packageName = AppPackages.YOUTUBE,
+                        packageName = item.packageName,
                         availablePatches = availablePatches,
                         bundleUpdateInProgress = false,
                         android11BugActive = homeViewModel.android11BugActive,
-                        installedApp = youtubeInstalledApp
+                        installedApp = item.installedApp
                     )
-                    youtubeInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
+                    item.installedApp?.let { showInstalledAppDialog = it.currentPackageName }
                 },
-                onYouTubeMusicClick = {
-                    homeViewModel.handleAppClick(
-                        packageName = AppPackages.YOUTUBE_MUSIC,
-                        availablePatches = availablePatches,
-                        bundleUpdateInProgress = false,
-                        android11BugActive = homeViewModel.android11BugActive,
-                        installedApp = youtubeMusicInstalledApp
-                    )
-                    youtubeMusicInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
-                },
-                onRedditClick = {
-                    homeViewModel.handleAppClick(
-                        packageName = AppPackages.REDDIT,
-                        availablePatches = availablePatches,
-                        bundleUpdateInProgress = false,
-                        android11BugActive = homeViewModel.android11BugActive,
-                        installedApp = redditInstalledApp
-                    )
-                    redditInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
-                },
-
-                // Installed apps data
-                youtubeInstalledApp = youtubeInstalledApp,
-                youtubeMusicInstalledApp = youtubeMusicInstalledApp,
-                redditInstalledApp = redditInstalledApp,
-                youtubePackageInfo = youtubePackageInfo,
-                youtubeMusicPackageInfo = youtubeMusicPackageInfo,
-                redditPackageInfo = redditPackageInfo,
-                youtubeIsDeleted = youtubeIsDeleted,
-                youtubeMusicIsDeleted = youtubeMusicIsDeleted,
-                redditIsDeleted = redditIsDeleted,
                 onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
+                onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
+                onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
+                hiddenAppItems = hiddenAppItems,
                 installedAppsLoading = homeViewModel.installedAppsLoading,
 
                 // Other apps button

@@ -30,7 +30,7 @@ object LanguageRepository {
         val currentLocale = context.resources.configuration.locales[0]
 
         return when (code) {
-            "system" -> context.getString(R.string.system)
+            "system" -> context.getString(R.string.settings_appearance_system)
             else -> {
                 val locale = parseLocaleCode(code)
                 locale.getDisplayLanguage(currentLocale).replaceFirstChar {

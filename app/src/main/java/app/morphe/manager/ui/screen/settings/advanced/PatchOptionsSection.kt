@@ -28,7 +28,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.PatchOptionKeys
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
-import app.morphe.manager.util.AppPackages
+import app.morphe.manager.util.KnownApp
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -179,13 +179,13 @@ fun PatchOptionsSection(
             if (youtubePatches.isNotEmpty()) {
                 SectionCard {
                     AppPatchOptionsCard(
-                        packageName = AppPackages.YOUTUBE,
+                        packageName = KnownApp.YOUTUBE,
                         icon = Icons.Outlined.VideoLibrary,
                         title = stringResource(R.string.home_youtube),
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog = AppPackages.YOUTUBE },
-                        onBrandingClick = { showBrandingDialog = AppPackages.YOUTUBE },
+                        onThemeClick = { showThemeDialog = KnownApp.YOUTUBE },
+                        onBrandingClick = { showBrandingDialog = KnownApp.YOUTUBE },
                         onHeaderClick = { showHeaderDialog = true }
                     )
                 }
@@ -211,13 +211,13 @@ fun PatchOptionsSection(
             if (youtubeMusicPatches.isNotEmpty()) {
                 SectionCard {
                     AppPatchOptionsCard(
-                        packageName = AppPackages.YOUTUBE_MUSIC,
+                        packageName = KnownApp.YOUTUBE_MUSIC,
                         icon = Icons.Outlined.LibraryMusic,
                         title = stringResource(R.string.home_youtube_music),
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_music_description),
                         patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog = AppPackages.YOUTUBE_MUSIC },
-                        onBrandingClick = { showBrandingDialog = AppPackages.YOUTUBE_MUSIC },
+                        onThemeClick = { showThemeDialog = KnownApp.YOUTUBE_MUSIC },
+                        onBrandingClick = { showBrandingDialog = KnownApp.YOUTUBE_MUSIC },
                         onHeaderClick = null // No header for YouTube Music
                     )
                 }
@@ -272,7 +272,7 @@ private fun AppPatchOptionsCard(
     // Get available patches for this app type
     val hasTheme = patchOptionsViewModel.getThemeOptions(packageName) != null
     val hasBranding = patchOptionsViewModel.getBrandingOptions(packageName) != null
-    val hasHeader = packageName == AppPackages.YOUTUBE && patchOptionsViewModel.getHeaderOptions() != null
+    val hasHeader = packageName == KnownApp.YOUTUBE && patchOptionsViewModel.getHeaderOptions() != null
 
     Column {
         // Header

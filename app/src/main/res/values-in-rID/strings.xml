@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Belum ditambal</string>
     <string name="home_no_patches_available">Tidak ada tambalan tersedia</string>
     <string name="home_default_source_disabled">Sumber tambalan Morphe dinonaktifkan. Silahkan aktifkan di kolom sumber Tambalan atau gunakan Mode Ahli</string>
+    <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
+    <string name="home_app_hide_message">Aplikasi ini akan disembunyikan dari layar utama. Anda dapat memulihkannya lagi menggunakan tombol \'%1$s\' di bagian bawah daftar.</string>
+    <string name="home_app_will_be_hidden">Aplikasi ini akan disembunyikan.</string>
+    <string name="home_app_show_hidden">Tampilkan aplikasi tersembunyi</string>
+    <string name="home_app_no_hidden">Tidak ada aplikasi tersembunyi</string>
+    <string name="home_app_hidden_apps_title">Aplikasi tersembunyi</string>
+    <string name="home_app_hidden_apps_hint">Ketuk pada aplikasi untuk menampilkannya lagi di daftar</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
-    <string name="sources_management_date_added">Ditambahkan</string>
-    <string name="sources_management_date_updated">Diperbarui</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama tampilan</string>
     <string name="sources_dialog_rename">Ubah nama sumber tambalan</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Tidak ada pembaruan tersedia</string>
     <string name="sources_download_fail">Gagal mengunduh sumber: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Apakah Anda memiliki APK asli yang belum ditambal?</string>
-    <string name="home_apk_availability_dialog_simple">Untuk menambal %1$s, Anda membutuhkan APK yang belum ditambal dengan versi:</string>
-    <string name="home_apk_availability_dialog_expert">"Apakah Anda memiliki APK %1$s yang belum ditambal?
-
-Versi yang cocok:"</string>
+    <string name="home_apk_availability_dialog_title">Butuh bantuan mencari APK asli yang belum ditambal?</string>
+    <string name="home_apk_availability_dialog_simple">Untuk menambal &lt;b&gt;%s&lt;/b&gt;, Anda membutuhkan versi APK yang belum ditambal:</string>
+    <string name="home_apk_availability_dialog_expert">Untuk menambal &lt;b&gt;%s&lt;/b&gt;, Anda membutuhkan APK yang belum ditambal dengan versi:</string>
     <string name="home_apk_availability_recommended_label">Direkomendasikan</string>
     <string name="home_apk_availability_unpatched_label">Tidak ditambal</string>
-    <string name="home_apk_availability_yes">Ya, saya sudah punya</string>
-    <string name="home_apk_availability_no">Tidak, bantu saya menemukannya</string>
+    <string name="home_apk_availability_yes">Ya, bantu saya mencari APK</string>
+    <string name="home_apk_availability_no">Tidak, saya sudah memiliki APK</string>
     <string name="home_apk_use_saved_with_version">Gunakan APK yang disimpan (v%s)</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Versi yang cocok:"</string>
     <string name="home_download_instructions_download_button_toast">Tekan unduh di situs web, dan bukan di sini 😊</string>
     <string name="home_download_instructions_step3">Tunggu hingga unduhan selesai, dan &lt;b&gt;jangan memasang&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Tunggu hingga unduhan selesai, kemudian &lt;b&gt;pasang APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Setelah pengunduhan selesai, buka kembali aplikasi ini</string>
-    <string name="home_download_instructions_step4_mount">Setelah memasang APK asli, buka kembali aplikasi ini</string>
+    <string name="home_download_instructions_step4">Setelah proses unduh selesai, kembali ke Morphe</string>
+    <string name="home_download_instructions_step4_mount">Setelah memasang APK asli, kembali ke Morphe</string>
     <string name="home_download_instructions_continue">Lanjutkan ke APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Pilih APK yang Anda unduh</string>
-    <string name="home_file_picker_prompt_description">Sekarang pilih berkas %1$s APK yang baru saja Anda unduh</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Buka berkas APK yang Saya unduh</string>
+    <string name="home_file_picker_prompt_title">Pilih APK yang telah diunduh</string>
+    <string name="home_file_picker_prompt_description">Pilih berkas &lt;b&gt;%1$s&lt;/b&gt; APK yang baru saja Anda unduh</string>
     <string name="home_file_picker_prompt_open_apk">Buka berkas APK</string>
     <string name="home_recommended_version">Versi rekomendasi</string>
     <string name="home_selected_version">Versi terpilih</string>
@@ -102,7 +104,7 @@ Versi yang cocok:"</string>
     <string name="expert_mode_title">Mode ahli</string>
     <string name="expert_mode_subtitle_extended_format">%1$s dari %2$s dipilih</string>
     <string name="expert_mode_search">Cari tambalan</string>
-    <string name="expert_mode_proceed">Lanjutkan ke Menambal</string>
+    <string name="expert_mode_proceed">Lanjutkan ke Penambalan</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
@@ -171,8 +173,8 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="home_app_info_patched_at">Ditambal</string>
     <string name="home_app_info_patch_update_available">Pembaruan tambalan tersedia</string>
     <string name="home_app_info_patch_update_available_description">Versi tambalan lebih baru tersedia. Tambal ulang aplikasi Anda untuk mendapatkan pembaruan terbaru dan perbaikan</string>
-    <string name="home_app_info_app_deleted_warning">Aplikasi dicopot pemasangannya di luar manager</string>
-    <string name="home_app_info_app_deleted_description">Aplikasi ini dicopot pemasangannya di luar manager. Tambal ulang untuk memulihkan fungsinya</string>
+    <string name="home_app_info_app_deleted_warning">Aplikasi telah dihapus</string>
+    <string name="home_app_info_app_deleted_description">Aplikasi ini telah dihapus di luar Morphe. Tambal ulang untuk memulihkan fungsinya</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal</string>
     <string name="root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
@@ -202,6 +204,15 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="patcher_install_error_subtitle">Coba copot pemasangan dan pasang lagi</string>
     <string name="patcher_ready_to_install_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
+    <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
+    <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tambalan yang mengarah pada jalur Morphe manager tidak dapat dibaca. Beri akses penyimpanan dan ketuk tombol lalu penambalan akan dimulai secara otomatis</string>
+    <string name="patcher_storage_permission_description_legacy">Satu atau lebih pilihan tambalan yang mengarah ke jalur yang tidak dapat diakses. Perbarui jalur dalam pilihan tambalan dan coba lagi</string>
+    <string name="patcher_storage_permission_grant">Beri izin penyimpanan</string>
+    <string name="patcher_storage_permission_denied_warning">Izin penyimpanan ditolak. Beri izin untuk menggunakan jalur ini, atau pindahkan berkas ke direktori pribadi aplikasi</string>
+    <string name="patcher_storage_permission_open_settings">Buka pengaturan penyimpanan</string>
+    <string name="patcher_storage_badge_denied">Izin ditolak</string>
+    <string name="patcher_storage_badge_missing">Tidak ditemukan</string>
+    <string name="patcher_storage_permission_hint">Saran: Pindahkan berkas ke /Android/data/app.morphe.manager/files/ - tidak diperlukan perizinan tambahan</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Mempersiapkan</string>
     <string name="patcher_step_load_patches">Memuat tambalan</string>
@@ -284,7 +295,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Warna aksen</string>
     <string name="settings_appearance_pure_black">Hitam Pekat</string>
-    <string name="settings_appearance_pure_black_description">Gunakan latar belakang yang benar-benar hitam untuk layar OLED</string>
+    <string name="settings_appearance_pure_black_description">Gunakan latar belakang hitam murni</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Bahasa aplikasi</string>
     <string name="settings_appearance_app_language_current">Bahasa saat ini</string>
@@ -344,7 +355,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_advanced_github_pat_configured">Token dikonfigurasi</string>
     <string name="settings_advanced_github_pat_how_to_get">Cara mendapatkan token</string>
     <string name="settings_advanced_github_pat_dialog_title">Atur Token Akses Personal GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Atur Token Akses Personal GitHub supaya dapat menambahkan Permintaan Penarikan sebagai sumber eksternal. Buat PAT dengan cakupan public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Atur Token Akses Personal GitHub untuk dapat menambahkan Permintaan Penarikan sebagai sumber eksternal. Buat PAT dengan cakupan public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Masukkan dalam ekspor pengaturan</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Menambahkan PAT ini ke pengaturan manager yang diekspor</string>
     <string name="settings_advanced_github_pat_export_warning">Jangan bagikan PAT Anda. Jika Anda menyertakannya dalam ekspor pengaturan, simpan berkas tersebut secara pribadi karena berisi token</string>
@@ -496,7 +507,7 @@ Ukuran gambar harus sebagai berikut:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Ekspor catatan debug</string>
-    <string name="settings_system_export_debug_logs_description">Ekspor catatan sistem untuk mengatasi masalah</string>
+    <string name="settings_system_export_debug_logs_description">Simpan catatan sistem untuk menyelesaikan masalah</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Gagal membaca catatan (kode keluaran %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Gagal mengekspor catatan</string>
     <string name="settings_system_export_debug_logs_export_success">Catatan diekspor</string>
@@ -602,6 +613,8 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="saved">Disimpan</string>
     <string name="update">Perbarui</string>
     <string name="allow">Izinkan</string>
+    <string name="details">Rincian</string>
+    <string name="hide">Sembunyikan</string>
     <string name="installing_ellipsis">Memasang…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>

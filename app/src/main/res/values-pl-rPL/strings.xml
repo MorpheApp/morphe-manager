@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Jeszcze niezmodyfikowana</string>
     <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
     <string name="home_default_source_disabled">Źródło modyfikacji Morphe jest wyłączone. Włącz je w sekcji Źródła modyfikacji lub skorzystaj z trybu eksperckiego</string>
+    <string name="home_app_hide_title">Ukryć tę aplikację?</string>
+    <string name="home_app_hide_message">Ta aplikacja zostanie ukryta z ekranu głównego. Możesz ją przywrócić później, używając przycisku \"%1$s\" na dole listy</string>
+    <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
+    <string name="home_app_show_hidden">Pokaż ukryte aplikacje</string>
+    <string name="home_app_no_hidden">Brak ukrytych aplikacji</string>
+    <string name="home_app_hidden_apps_title">Ukryte aplikacje</string>
+    <string name="home_app_hidden_apps_hint">Stuknij w aplikację, aby ponownie wyświetlić ją na liście</string>
     <string name="android_11_bug_dialog_title">Błąd w systemie Android 11</string>
     <string name="android_11_bug_dialog_description">Uprawnienie do instalowania aplikacji musi zostać nadane wcześniej, aby uniknąć błędu w systemie Android 11, który negatywnie wpływa na komfort użytkowania</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
-    <string name="sources_management_date_added">Dodano</string>
-    <string name="sources_management_date_updated">Zaktualizowano</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
     <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Brak dostępnych aktualizacji</string>
     <string name="sources_download_fail">Nie udało się pobrać źródeł: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Czy masz oryginalny, niezmodyfikowany plik APK?</string>
-    <string name="home_apk_availability_dialog_simple">Aby zmodyfikować %1$s, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
-    <string name="home_apk_availability_dialog_expert">"Czy masz niezmodyfikowany plik APK %1$s?
-
-Kompatybilne wersje:"</string>
+    <string name="home_apk_availability_dialog_title">Potrzebujesz pomocy w znalezieniu oryginalnego pliku APK?</string>
+    <string name="home_apk_availability_dialog_simple">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
+    <string name="home_apk_availability_dialog_expert">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w jednej z poniższych wersji:</string>
     <string name="home_apk_availability_recommended_label">Zalecana</string>
     <string name="home_apk_availability_unpatched_label">Niezmodyfikowana</string>
-    <string name="home_apk_availability_yes">Tak, mam</string>
-    <string name="home_apk_availability_no">Nie, pomóż mi ją znaleźć</string>
+    <string name="home_apk_availability_yes">Tak, pomóż mi znaleźć plik APK</string>
+    <string name="home_apk_availability_no">Nie, mam już plik APK</string>
     <string name="home_apk_use_saved_with_version">Użyj zapisanego pliku APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Kompatybilne wersje:"</string>
     <string name="home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
     <string name="home_download_instructions_step3">Poczekaj na zakończenie pobierania i &lt;b&gt;nie instaluj&lt;/b&gt; pliku APK</string>
     <string name="home_download_instructions_step3_mount">Poczekaj na zakończenie pobierania, a następnie &lt;b&gt;zainstaluj plik APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Po zakończeniu pobierania otwórz tę aplikację ponownie</string>
-    <string name="home_download_instructions_step4_mount">Po zainstalowaniu oryginalnego pliku APK otwórz tę aplikację ponownie</string>
+    <string name="home_download_instructions_step4">Po zakończeniu pobierania wróć do Morphe</string>
+    <string name="home_download_instructions_step4_mount">Po zainstalowaniu oryginalnego pliku APK wróć do Morphe</string>
     <string name="home_download_instructions_continue">Przejdź do APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Wybierz pobrany plik APK</string>
-    <string name="home_file_picker_prompt_description">Teraz wybierz pobrany plik APK %1$s</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Otwórz pobrany plik APK</string>
+    <string name="home_file_picker_prompt_description">Wybierz pobrany przed chwilą plik APK &lt;b&gt;%1$s&lt;/b&gt;</string>
     <string name="home_file_picker_prompt_open_apk">Otwórz plik APK</string>
     <string name="home_recommended_version">Zalecana wersja</string>
     <string name="home_selected_version">Wybrana wersja</string>
@@ -171,8 +173,8 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="home_app_info_patched_at">Zmodyfikowano</string>
     <string name="home_app_info_patch_update_available">Dostępna aktualizacja modyfikacji</string>
     <string name="home_app_info_patch_update_available_description">Dostępna jest nowsza wersja modyfikacji. Zmodyfikuj aplikację ponownie, aby otrzymać najnowsze ulepszenia i poprawki</string>
-    <string name="home_app_info_app_deleted_warning">Aplikacja odinstalowana poza menedżerem</string>
-    <string name="home_app_info_app_deleted_description">Ta aplikacja została odinstalowana poza menedżerem. Zmodyfikuj ją ponownie, by przywrócić funkcjonalność</string>
+    <string name="home_app_info_app_deleted_warning">Aplikacja została odinstalowana</string>
+    <string name="home_app_info_app_deleted_description">Ta aplikacja została odinstalowana poza Morphe. Zmodyfikuj ją ponownie, aby przywrócić jej funkcjonalność</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem</string>
     <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
@@ -202,6 +204,15 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patcher_install_error_subtitle">Spróbuj odinstalować i ponownie zainstalować</string>
     <string name="patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
     <string name="patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zmountować</string>
+    <string name="patcher_storage_permission_dialog_title">Brak dostępu do ścieżki pamięci</string>
+    <string name="patcher_storage_permission_description_api30">Jedna lub więcej opcji modyfikowania wskazuje na ścieżki, których menedżer Morphe nie może odczytać. Przyznaj dostęp do pamięci i stuknij przycisk, a modyfikowanie rozpocznie się automatycznie</string>
+    <string name="patcher_storage_permission_description_legacy">Jedna lub więcej opcji modyfikowania wskazuje na ścieżki, do których nie można uzyskać dostępu. Zaktualizuj ścieżki w opcjach modyfikowania i spróbuj ponownie</string>
+    <string name="patcher_storage_permission_grant">Przyznaj uprawnienia dostępu do pamięci</string>
+    <string name="patcher_storage_permission_denied_warning">Odmówiono uprawnień do pamięci. Przyznaj uprawnienia, aby korzystać z tej ścieżki lub przenieś pliki do prywatnego katalogu aplikacji</string>
+    <string name="patcher_storage_permission_open_settings">Otwórz ustawienia pamięci</string>
+    <string name="patcher_storage_badge_denied">Brak uprawnień</string>
+    <string name="patcher_storage_badge_missing">Nie znaleziono</string>
+    <string name="patcher_storage_permission_hint">Wskazówka: Przenieś pliki do /Android/data/app.morphe.manager/files/ - nie wymaga to dodatkowych uprawnień</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Przygotowywanie</string>
     <string name="patcher_step_load_patches">Wczytywanie modyfikacji</string>
@@ -284,7 +295,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Kolor akcentu</string>
     <string name="settings_appearance_pure_black">Głęboka czerń</string>
-    <string name="settings_appearance_pure_black_description">Użyj głębokiej czerni tła dla wyświetlaczy OLED</string>
+    <string name="settings_appearance_pure_black_description">Używaj głębokiej czerni jako tła</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Język aplikacji</string>
     <string name="settings_appearance_app_language_current">Obecny język</string>
@@ -344,7 +355,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_advanced_github_pat_configured">Token skonfigurowany</string>
     <string name="settings_advanced_github_pat_how_to_get">Jak uzyskać token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ustaw token GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ustaw Personal Access Token na GitHub, aby móc dodawać Pull Requesty jako zewnętrzne źródła. Utwórz token z uprawnieniem public_repo na github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Ustaw Personal Access Token z GitHub, aby móc dodawać Pull Requesty jako zewnętrzne źródła. Utwórz PAT z uprawnieniem public_repo na github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Uwzględnij w eksporcie ustawień</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ten token do eksportu ustawień menedżera</string>
     <string name="settings_advanced_github_pat_export_warning">Nie udostępniaj swojego tokena. Jeśli dołączysz go do eksportu ustawień, zachowaj ten plik prywatnie, ponieważ zawiera on token</string>
@@ -496,7 +507,7 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debugowanie</string>
     <string name="settings_system_export_debug_logs">Wyeksportuj logi do debugowania</string>
-    <string name="settings_system_export_debug_logs_description">Eksportuj logi systemowe do debugowania</string>
+    <string name="settings_system_export_debug_logs_description">Zapisz logi systemowe, aby ułatwić rozwiązywanie problemów</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
     <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
@@ -602,6 +613,8 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="saved">Zapisano</string>
     <string name="update">Zaktualizuj</string>
     <string name="allow">Zezwól</string>
+    <string name="details">Szczegóły</string>
+    <string name="hide">Ukryj</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Mountowanie…</string>
     <string name="unmounting_ellipsis">Odmountowywanie…</string>

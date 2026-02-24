@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_default_source_disabled">Nguồn Morphe đang bị tắt. Vui lòng bật trong bảng nguồn vá hoặc bật Chế độ chuyên gia</string>
+    <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
+    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi màn hình chính. Bạn có thể khôi phục lại bằng nút \'%1$s\' ở cuối danh sách</string>
+    <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
+    <string name="home_app_show_hidden">Hiện ứng dụng ẩn</string>
+    <string name="home_app_no_hidden">Không có ứng dụng nào đang ẩn</string>
+    <string name="home_app_hidden_apps_title">Ứng dụng đã ẩn</string>
+    <string name="home_app_hidden_apps_hint">Bấm vào ứng dụng để đưa chúng trở lại danh sách</string>
     <string name="android_11_bug_dialog_title">Lỗi Android 11</string>
     <string name="android_11_bug_dialog_description">Cần cấp quyền cài đặt không rõ nguồn gốc cho ứng dụng trước để tránh phát sinh lỗi trên hệ thống Android 11 và gây ảnh hưởng tiêu cực đến trải nghiệm của người dùng</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
-    <string name="sources_management_date_added">Đã thêm</string>
-    <string name="sources_management_date_updated">Đã cập nhật</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Hiện không có bản cập nhật nào</string>
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Bạn đã có APK gốc chưa?</string>
-    <string name="home_apk_availability_dialog_simple">Để vá %1$s, bạn cần một APK chưa vá với phiên bản:</string>
-    <string name="home_apk_availability_dialog_expert">"Bạn có APK chưa vá của %1$s chưa?
-
-Danh sách phiên bản tương thích:"</string>
+    <string name="home_apk_availability_dialog_title">Chưa tìm được APK gốc chứ gì? Cần giúp không?</string>
+    <string name="home_apk_availability_dialog_simple">Để vá &lt;b&gt;%s&lt;/b&gt;, bạn cần APK chưa vá với phiên bản:</string>
+    <string name="home_apk_availability_dialog_expert">Để vá &lt;b&gt;%s&lt;/b&gt;, bạn cần APK chưa vá thuộc một trong các phiên bản:</string>
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
-    <string name="home_apk_availability_yes">Rồi, tôi đã có nó</string>
-    <string name="home_apk_availability_no">Chưa, hãy giúp tôi tìm nó</string>
+    <string name="home_apk_availability_yes">Có, giúp tôi với</string>
+    <string name="home_apk_availability_no">Không, tôi có APK rồi</string>
     <string name="home_apk_use_saved_with_version">Dùng APK đã lưu (v%s)</string>
     <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Danh sách phiên bản tương thích:"</string>
     <string name="home_download_instructions_download_button_toast">Bấm tải xuống trên trang web ấy, chứ không phải ở đây 😊</string>
     <string name="home_download_instructions_step3">Đợi tải xong, nhưng &lt;b&gt;không cài&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Đợi tải xong, sau đó &lt;b&gt;cài APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Sau đó, hãy quay lại ứng dụng này</string>
-    <string name="home_download_instructions_step4_mount">Sau khi cài đặt tệp APK gốc, hãy quay lại ứng dụng này</string>
+    <string name="home_download_instructions_step4">Sau khi tải xong, hãy quay lại Morphe</string>
+    <string name="home_download_instructions_step4_mount">Sau khi cài APK gốc, hãy quay lại Morphe</string>
     <string name="home_download_instructions_continue">Đi đến APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Chọn tệp APK đã tải</string>
-    <string name="home_file_picker_prompt_description">Bây giờ hãy chọn tệp APK %1$s bạn vừa tải</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Mở tệp APK tôi đã tải</string>
+    <string name="home_file_picker_prompt_title">Chọn APK đã tải</string>
+    <string name="home_file_picker_prompt_description">Chọn tệp APK &lt;b&gt;%1$s&lt;/b&gt; bạn vừa tải</string>
     <string name="home_file_picker_prompt_open_apk">Mở tệp APK</string>
     <string name="home_recommended_version">Phiên bản đề xuất</string>
     <string name="home_selected_version">Phiên bản đã chọn</string>
@@ -171,8 +173,8 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="home_app_info_patched_at">Đã vá</string>
     <string name="home_app_info_patch_update_available"> Đã có bản vá mới</string>
     <string name="home_app_info_patch_update_available_description">Đã có bản vá mới. Hãy vá lại ứng dụng để áp dụng các cải tiến và bản sửa lỗi mới nhất</string>
-    <string name="home_app_info_app_deleted_warning">Ứng dụng bị gỡ cài đặt</string>
-    <string name="home_app_info_app_deleted_description">Ứng dụng đã được gỡ cài đặt mà không thông qua trình quản lý. Hãy vá lại để khôi phục chức năng</string>
+    <string name="home_app_info_app_deleted_warning">Ứng dụng đã bị gỡ cài đặt</string>
+    <string name="home_app_info_app_deleted_description">Ứng dụng này đã bị gỡ bên ngoài Morphe. Hãy vá lại để khôi phục chức năng</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Chế độ root yêu cầu APK gốc phải được cài đặt trên thiết bị trước khi vá</string>
     <string name="root_gmscore_excluded">Chế độ root không cần bản vá \'GmsCore support\'</string>
@@ -202,6 +204,15 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patcher_install_error_subtitle">Hãy thử gỡ và cài đặt lại</string>
     <string name="patcher_ready_to_install_subtitle">Bấm nút bên dưới để cài đặt</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
+    <string name="patcher_storage_permission_dialog_title">Không thể truy cập đường dẫn bộ nhớ</string>
+    <string name="patcher_storage_permission_description_api30">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến thư mục mà Morphe không thể truy cập. Hãy cấp quyền truy cập bộ nhớ, sau đó nhấn nút và quá trình vá sẽ tự động bắt đầu</string>
+    <string name="patcher_storage_permission_description_legacy">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến đường dẫn không thể truy cập. Hãy cập nhật lại đường dẫn trong phần tuỳ chỉnh bản vá và thử lại</string>
+    <string name="patcher_storage_permission_grant">Cấp quyền truy cập bộ nhớ</string>
+    <string name="patcher_storage_permission_denied_warning">Quyền truy cập bộ nhớ đã bị từ chối. Hãy cấp quyền để sử dụng đường dẫn này, hoặc di chuyển các tệp vào thư mục riêng của ứng dụng</string>
+    <string name="patcher_storage_permission_open_settings">Mở cài đặt truy cập bộ nhớ</string>
+    <string name="patcher_storage_badge_denied">Quyền truy cập bị từ chối</string>
+    <string name="patcher_storage_badge_missing">Không tìm thấy gì</string>
+    <string name="patcher_storage_permission_hint">Gợi ý: Di chuyển tệp sang /Android/data/app.morphe.manager/files/ - sẽ không cần cấp thêm quyền truy cập</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Chuẩn bị</string>
     <string name="patcher_step_load_patches">Đang tải bản vá</string>
@@ -284,7 +295,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_appearance_dynamic">Cá nhân hóa</string>
     <string name="settings_appearance_accent_color">Màu nổi bật</string>
     <string name="settings_appearance_pure_black">Đen tuyệt đối</string>
-    <string name="settings_appearance_pure_black_description">Dùng nền đen tuyệt đối để hiển thị tối ưu trên màn hình OLED</string>
+    <string name="settings_appearance_pure_black_description">Dùng nền đen thực sự</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Ngôn ngữ</string>
     <string name="settings_appearance_app_language_current">Ngôn ngữ hiện tại</string>
@@ -344,7 +355,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_advanced_github_pat_configured">Đã cấu hình token</string>
     <string name="settings_advanced_github_pat_how_to_get">Cách lấy token</string>
     <string name="settings_advanced_github_pat_dialog_title">Thiết lập Personal Access Token của GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Thiết lập Personal Access Token để có thể thêm Pull Request làm nguồn bên ngoài. Hãy tạo một PAT với quyền public_repo tại github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Thiết lập GitHub Personal Access Token để có thể thêm Pull Request làm nguồn. Hãy tạo một PAT với quyền public_repo tại github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Thêm vào khi xuất cài đặt</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Thêm PAT khi xuất cài đặt trình quản lý</string>
     <string name="settings_advanced_github_pat_export_warning">Đừng chia sẻ PAT. Nếu bạn xuất cài đặt có chứa nó, hãy giữ tệp đó thật kín vì bên trong có token</string>
@@ -496,7 +507,7 @@ Kích thước hình ảnh yêu cầu:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Gỡ lỗi</string>
     <string name="settings_system_export_debug_logs">Nhật ký gỡ lỗi</string>
-    <string name="settings_system_export_debug_logs_description">Xuất nhật ký hệ thống để khắc phục lỗi</string>
+    <string name="settings_system_export_debug_logs_description">Lưu nhật ký hệ thống để khắc phục lỗi</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Không thể xuất nhật ký</string>
     <string name="settings_system_export_debug_logs_export_success">Đã xuất nhật ký</string>
@@ -577,7 +588,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="rename">Đổi tên</string>
     <string name="import_">Nhập</string>
     <string name="export">Xuất</string>
-    <string name="download">Tải xuống</string>
+    <string name="download">Tải về</string>
     <string name="less">Thu gọn</string>
     <string name="expand">Thêm</string>
     <string name="expanded">Đã mở rộng</string>
@@ -602,6 +613,8 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="saved">Đã lưu</string>
     <string name="update">Cập nhật</string>
     <string name="allow">Cho phép</string>
+    <string name="details">Chi tiết</string>
+    <string name="hide">Ẩn</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>
     <string name="mounting_ellipsis">Đang gắn kết…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn kết…</string>

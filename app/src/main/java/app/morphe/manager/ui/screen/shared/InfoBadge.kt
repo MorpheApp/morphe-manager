@@ -86,7 +86,7 @@ fun InfoBadge(
         else -> 12.dp
     }
 
-    val surfaceModifier = if (isCompact && !isExpanded) {
+    val surfaceModifier = if (isCompact && !isExpanded || isCentered) {
         modifier.wrapContentWidth()
     } else {
         modifier.fillMaxWidth()

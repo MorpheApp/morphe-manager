@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Δεν τροποιήθηκε ακόμα</string>
     <string name="home_no_patches_available">Δεν υπάρχουν διαθέσιμες τροποποιήσεις</string>
     <string name="home_default_source_disabled">Η πηγή τροποποιήσεων Morphe είναι απενεργοποιημένη. Παρακαλώ ενεργοποιήστε την στη φύλλα Πηγών τροποποιήσεων ή χρησιμοποιήστε τη λειτουργία Ειδικού</string>
+    <string name="home_app_hide_title">Απόκρυψη εφαρμογής;</string>
+    <string name="home_app_hide_message">Η εφαρμογή θα κρυφτεί από την οθόνη του σπιτιού. Μπορείτε να την επαναφέρετε αργότερα χρησιμοποιώντας το κουμπί ‘%1$s’ στο κάτω μέρος της λίστας.</string>
+    <string name="home_app_will_be_hidden">Η εφαρμογή θα κρυφτεί</string>
+    <string name="home_app_show_hidden">Εμφάνιση κρυφών εφαρμογών</string>
+    <string name="home_app_no_hidden">Δεν υπάρχουν κρυφές εφαρμογές</string>
+    <string name="home_app_hidden_apps_title">Κρυφές εφαρμογές</string>
+    <string name="home_app_hidden_apps_hint">Πατήστε σε μια εφαρμογή για να την εμφανίσετε στη λίστα ξανά</string>
     <string name="android_11_bug_dialog_title">Σφάλμα Android 11</string>
     <string name="android_11_bug_dialog_description">Η έγκριση της εγκατάστασης της εφαρμογής πρέπει να έχει γίνει προηγουμένως για να αποφευχθεί ένα σφάλμα στο σύστημα Android 11 που θα επηρεάσει αρνητικά την εμπειρία του χρήστη</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Πηγές τροποποίησης</string>
     <string name="sources_management_open_in_browser">Άνοιγμα σε περιηγητή</string>
     <string name="sources_management_failed_to_open_url">Αποτυχία ανοίγματος URL</string>
-    <string name="sources_management_date_added">Προστέθηκε</string>
-    <string name="sources_management_date_updated">Ενημερώθηκε</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Εμφανιζόμενο όνομα</string>
     <string name="sources_dialog_rename">Αλλαγή ονόματος πηγής τροποποίησης</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Δεν υπάρχει διαθέσιμη ενημέρωση</string>
     <string name="sources_download_fail">Αποτυχία λήψης πηγών: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Έχετε το αρχικό μη τροποποιημένο APK;</string>
-    <string name="home_apk_availability_dialog_simple">Για να τροποποιήσετε το %1$s, χρειάζεστε ένα μη τροποποιημένο APK με έκδοση:</string>
-    <string name="home_apk_availability_dialog_expert">"Έχετε ακόμα ένα μη τροποποιημένο %1$s APK;
-
-Συμβατές εκδόσεις:"</string>
+    <string name="home_apk_availability_dialog_title">Χρειάζεστε βοήθεια για να βρείτε ένα πρωτότυπο μη επαχθέν APK;</string>
+    <string name="home_apk_availability_dialog_simple">Για την επιδιόρθωση του &lt;b&gt;%s&lt;/b&gt;, χρειάζεστε την μη επιδιορθωμένη έκδοση του APK:</string>
+    <string name="home_apk_availability_dialog_expert">Για την επιδιόρθωση του &lt;b&gt;%s&lt;/b&gt;, χρειάζεστε την μη επιδιορθωμένη έκδοση του APK:</string>
     <string name="home_apk_availability_recommended_label">Συνιστάται</string>
     <string name="home_apk_availability_unpatched_label">Ανεπανόρθωτο</string>
-    <string name="home_apk_availability_yes">Ναι, το έχω</string>
-    <string name="home_apk_availability_no">Όχι, βοήθησέ με να το βρω</string>
+    <string name="home_apk_availability_yes">Ναι, βοήθεια να βρω ένα APK</string>
+    <string name="home_apk_availability_no">Όχι, ήδη έχω ένα APK</string>
     <string name="home_apk_use_saved_with_version">Χρήση αποθηκευμένου APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Δεν υπάρχει αποθηκευμένο APK. Η επαναφορά θα απαιτήσει την επιλογή του αρχείου APK ξανά</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@
     <string name="home_download_instructions_download_button_toast">Πατήστε λήψη στην ιστοσελίδα, και όχι εδώ 😊</string>
     <string name="home_download_instructions_step3">Περιμένετε μέχρι να ολοκληρωθεί η λήψη, και &lt;b&gt;μην εγκαταστήσετε&lt;/b&gt; την APK</string>
     <string name="home_download_instructions_step3_mount">Περιμένετε μέχρι να ολοκληρωθεί η λήψη, και μετά &lt;b&gt;εγκαταστήστε την APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Αφού ολοκληρωθεί η λήψη, ανοίξτε ξανά αυτήν την εφαρμογή</string>
-    <string name="home_download_instructions_step4_mount">Αφού εγκαταστήσετε το αρχικό APK, ανοίξτε ξανά αυτήν την εφαρμογή</string>
+    <string name="home_download_instructions_step4">Μετά την ολοκλήρωση του λήψιματος, επιστρέψτε στο Morphe</string>
+    <string name="home_download_instructions_step4_mount">Μετά την εγκατάσταση του αρχικού APK, επιστρέψτε στο Morphe</string>
     <string name="home_download_instructions_continue">Συνέχεια στο APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Επιλέξτε το APK που κατεβάσατε</string>
-    <string name="home_file_picker_prompt_description">Επιλέξτε τώρα το %1$s APK αρχείο που μόλις κατέβασες</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Άνοιγμα αρχείου APK που κατέβασα</string>
+    <string name="home_file_picker_prompt_title">Επιλέξτε το APK που λήφθηκε</string>
+    <string name="home_file_picker_prompt_description">Επιλέξτε το APK του <b>%1$s</b> που μόλις λήφθηκε</string>
     <string name="home_file_picker_prompt_open_apk">Άνοιγμα αρχείου APK</string>
     <string name="home_recommended_version">Προτεινόμενη έκδοση</string>
     <string name="home_selected_version">Επιλεγμένη έκδοση</string>
@@ -102,7 +104,7 @@
     <string name="expert_mode_title">Επιτυχημένος τρόπος</string>
     <string name="expert_mode_subtitle_extended_format">%1$s επιλεγμένη από %2$s επιλεγμένες</string>
     <string name="expert_mode_search">Αναζήτηση επεξεργασιών</string>
-    <string name="expert_mode_proceed">Προχωράτε στην Επεξεργασία</string>
+    <string name="expert_mode_proceed">Προχωρήστε στη τροποποίηση</string>
     <string name="expert_mode_disable_all">Απενεργοποιήστε όλα</string>
     <string name="expert_mode_enable_all">Ενεργοποιήστε όλα</string>
     <string name="expert_mode_no_results">Δεν βρέθηκαν επεξεργασίες</string>
@@ -171,8 +173,8 @@
     <string name="home_app_info_patched_at">Τροποποιημένες</string>
     <string name="home_app_info_patch_update_available">Διαθέσιμη ενημέρωση τροποποιήσεων</string>
     <string name="home_app_info_patch_update_available_description">Επαναληφθείσα έκδοση επεξεργασιών είναι διαθέσιμη. Επανεπεξεργάσου την εφαρμογή σου για να λάβεις τις τελευταίες βελτιώσεις και διορθώσεις</string>
-    <string name="home_app_info_app_deleted_warning">Εφαρμογή αφαιρέθηκε εκτός διαχειριστή</string>
-    <string name="home_app_info_app_deleted_description">Αυτή η εφαρμογή αφαιρέθηκε εκτός του διαχειριστή. Αναθεμάτισέ την για να επαναφέρετε τη λειτουργικότητα</string>
+    <string name="home_app_info_app_deleted_warning">Η εφαρμογή έχει αποσυσταθεί</string>
+    <string name="home_app_info_app_deleted_description">Η εφαρμογή αυτή αποσυνστάθηκε εκτός του Morphe. Τροποποιήστε την ξανά για να επαναφέρετε τη λειτουργικότητα</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Η λειτουργία ριζάς απαιτεί το αρχικό APK να είναι εγκατεστημένο στο διαχείριση του ριζάς.</string>
     <string name="root_gmscore_excluded">Η ενημέρωση GmsCore έχει εξαιρεθεί στη λειτουργία root</string>
@@ -202,6 +204,15 @@
     <string name="patcher_install_error_subtitle">Δοκιμάστε να απεγκαταστήσετε και να εγκαταστήσετε ξανά</string>
     <string name="patcher_ready_to_install_subtitle">Πατήστε το παρακάτω κουμπί για εγκατάσταση</string>
     <string name="patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
+    <string name="patcher_storage_permission_dialog_title">Δεν είναι δυνατός ο πρόσβαση στο διαδρομή αποθήκευσης</string>
+    <string name="patcher_storage_permission_description_api30">Ένας ή περισσότεροι επιλογές ανακύκλωσης δείχνουν σε διαδρομές που ο Morphe manager δεν μπορεί να διαβάσει. Επιτρέψτε την πρόσβαση στο αποθηκευτικό χώρο και πατήστε το κουμπί για να ξεκινήσει η ανακύκλωση αυτόματα</string>
+    <string name="patcher_storage_permission_description_legacy">Ένας ή περισσότεροι επιλογές ανακύκλωσης δείχνουν σε διαδρομές που δεν είναι προσβάσιμες. Ενημερώστε τις διαδρομές στις επιλογές ανακύκλωσης και δοκιμάστε ξανά</string>
+    <string name="patcher_storage_permission_grant">Επιτρέψτε την πρόσβαση στο αποθηκευτικό χώρο</string>
+    <string name="patcher_storage_permission_denied_warning">Δεν επιτράπηκε η άδεια αποθήκευσης. Δώσε την άδεια για να χρησιμοποιήσεις αυτήν την διαδρομή, ή μετακίνησε τα αρχεία στο ιδιωτικό διεύθυνση του εφαρμογής</string>
+    <string name="patcher_storage_permission_open_settings">Άνοιγμα ρυθμίσεων αποθήκευσης</string>
+    <string name="patcher_storage_badge_denied">Δεν επιτράπηκε η άδεια</string>
+    <string name="patcher_storage_badge_missing">Δεν βρέθηκε</string>
+    <string name="patcher_storage_permission_hint">Σuggestion: Μετακίνησε τα αρχεία σε /Android/data/app.morphe.manager/files/ - Δεν χρειάζονται επιπλέον άδειες</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Προετοιμασία</string>
     <string name="patcher_step_load_patches">Φόρτωση επιδιορθώσεων</string>
@@ -284,7 +295,7 @@
     <string name="settings_appearance_dynamic">Μαθηματικό You</string>
     <string name="settings_appearance_accent_color">Χρώμα προτίμησης</string>
     <string name="settings_appearance_pure_black">Μαύρο Καθαρό</string>
-    <string name="settings_appearance_pure_black_description">Χρησιμοποιήστε μαύρα αληθινά φόντα για οθόνες OLED</string>
+    <string name="settings_appearance_pure_black_description">Χρησιμοποιήστε φόνους με πραγματικό μαύρο</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Γλώσσα εφαρμογής</string>
     <string name="settings_appearance_app_language_current">Επιλεγμένη γλώσσα</string>
@@ -344,7 +355,7 @@
     <string name="settings_advanced_github_pat_configured">Δοκιμή-token</string>
     <string name="settings_advanced_github_pat_how_to_get">Πως να πάρετε ένα κλειδί</string>
     <string name="settings_advanced_github_pat_dialog_title">Ορισμός προσωπικού κλειδιού πρόσβασης στο GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ορισμός προσωπικού κλειδιού πρόσβασης στο GitHub για να μπορείτε να προσθέσετε αιτήσεις πρόσθεσης ως εξωτερικές πηγές. Δημιουργία PAT με το σκέλος public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Ορίστε ένα Personal Access Token στο GitHub για να μπορείτε να προσθέσετε αιτήσεις παροχής ως εξωτερικές πηγές. Δημιουργήστε ένα PAT με το σκέλος public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Συμπερίληψη στις ρυθμίσεις εξαγωγής</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Προσθήκη αυτού του PAT στις εξαγόμενες ρυθμίσεις διαχείρισης</string>
     <string name="settings_advanced_github_pat_export_warning">Δεν πρέπει να μοιράζεστε το κλειδί. Εάν το συμπεριλάβετε σε εξαγόμενες ρυθμίσεις, διατηρήστε το αρχείο ιδιωτικό, διότι περιέχει το κλειδί</string>
@@ -496,7 +507,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Δebug</string>
     <string name="settings_system_export_debug_logs">Εξαγωγή αρχείων καταγραφής εντοπισμού σφαλμάτων</string>
-    <string name="settings_system_export_debug_logs_description">Εξαγωγή αρχείων καταγραφής για ανάλυση σφαλμάτων</string>
+    <string name="settings_system_export_debug_logs_description">Αποθηκεύστε αρχεία συστήματος για τον εντοπισμό σφαλμάτων</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Αποτυχία ανάγνωσης αρχείων καταγραφής (κωδικός έξοδος %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Αποτυχία εξαγωγής αρχείων καταγραφής</string>
     <string name="settings_system_export_debug_logs_export_success">Αρχεία καταγραφής εξαγωγή</string>
@@ -600,6 +611,8 @@ morphe_header_custom_dark.png
     <string name="saved">Αποθηκευμένη</string>
     <string name="update">Ενημέρωση</string>
     <string name="allow">Επιτρέψτε</string>
+    <string name="details">Λεπτομέρειες</string>
+    <string name="hide">Απόκρυψη</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
     <string name="unmounting_ellipsis">Αποσύνιξη…</string>

@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">لم يتم تعديلها بعد</string>
     <string name="home_no_patches_available">لا يوجد تعديلات متاحة</string>
     <string name="home_default_source_disabled">مصدر تعديل Morphe معطل. يرجى تمكينه في صفحة مصادر التعديل أو استخدام وضع الخبير</string>
+    <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
+    <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا باستخدام الزر \'%1$s\' في أسفل القائمة.</string>
+    <string name="home_app_will_be_hidden">سيتم إخفاء هذا التطبيق</string>
+    <string name="home_app_show_hidden">إظهار التطبيقات المخفية</string>
+    <string name="home_app_no_hidden">لا تطبيقات مخفية</string>
+    <string name="home_app_hidden_apps_title">التطبيقات المخفية</string>
+    <string name="home_app_hidden_apps_hint">انقر على تطبيق لإظهاره في القائمة مرة أخرى</string>
     <string name="android_11_bug_dialog_title">خطأ Android 11</string>
     <string name="android_11_bug_dialog_description">يجب منح إذن تثبيت التطبيق مسبقًا لتجنب خطأ في نظام Android 11 سيؤثر سلبًا على تجربة المستخدم</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">مصادر التعديل</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
-    <string name="sources_management_date_added">تمت الإضافة</string>
-    <string name="sources_management_date_updated">محدَّث</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">الاسم المعروض</string>
     <string name="sources_dialog_rename">إعادة تسمية مصدر التعديل</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">لا يوجد تحديث متاح</string>
     <string name="sources_download_fail">فشل تنزيل مصادر التعديل: %s.</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">هل لديك ملف APK الأصلي غير المعدل؟</string>
-    <string name="home_apk_availability_dialog_simple">لتعديل %1$s، تحتاج إلى ملف APK غير معدل بالإصدار:</string>
-    <string name="home_apk_availability_dialog_expert">"هل لديك ملف APK غير معدل %1$s؟
-
-الإصدارات المتوافقة:"</string>
+    <string name="home_apk_availability_dialog_title">هل تحتاج إلى مساعدة في العثور على ملف APK أصلي غير معدل؟</string>
+    <string name="home_apk_availability_dialog_simple">لتعديل &lt;b&gt;%s&lt;/b&gt;، تحتاج إلى ملف APK غير معدل بالإصدار:</string>
+    <string name="home_apk_availability_dialog_expert">لتعديل &lt;b&gt;%s&lt;/b&gt;، تحتاج إلى ملف APK غير معدل من الإصدارات:</string>
     <string name="home_apk_availability_recommended_label">موصى به</string>
     <string name="home_apk_availability_unpatched_label">غير معدل</string>
-    <string name="home_apk_availability_yes">نعم، لديّ</string>
-    <string name="home_apk_availability_no">لا، ساعدني في العثور عليه</string>
+    <string name="home_apk_availability_yes">نعم، ساعدني في العثور على ملف APK</string>
+    <string name="home_apk_availability_no">لا، لدي ملف APK بالفعل</string>
     <string name="home_apk_use_saved_with_version">استخدام ملف APK المحفوظ (v%s)</string>
     <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@
     <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
     <string name="home_download_instructions_step3">انتظر حتى يكتمل التنزيل، و&lt;b&gt;لا تقم بتثبيت&lt;/b&gt; ملف APK</string>
     <string name="home_download_instructions_step3_mount">انتظر حتى يكتمل التنزيل، ثم &lt;b&gt;قم بتثبيت ملف APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">بعد انتهاء التنزيل، افتح هذا التطبيق مرة أخرى</string>
-    <string name="home_download_instructions_step4_mount">بعد تثبيت ملف APK الأصلي، افتح هذا التطبيق مرة أخرى</string>
+    <string name="home_download_instructions_step4">بعد انتهاء التنزيل، ارجع إلى Morphe</string>
+    <string name="home_download_instructions_step4_mount">بعد تثبيت ملف APK الأصلي، ارجع إلى Morphe</string>
     <string name="home_download_instructions_continue">المتابعة إلى APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">تحديد ملف APK الذي قمت بتنزيله</string>
-    <string name="home_file_picker_prompt_description">الآن حدد ملف %1$s APK الذي قمت بتنزيله للتو</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">فتح ملف APK الذي قمت بتنزيله</string>
+    <string name="home_file_picker_prompt_title">تحديد ملف APK الذي تم تنزيله</string>
+    <string name="home_file_picker_prompt_description">الآن حدد ملف APK &lt;b&gt;%1$s&lt;/b&gt; الذي قمت بتنزيله للتو</string>
     <string name="home_file_picker_prompt_open_apk">فتح ملف APK</string>
     <string name="home_recommended_version">الإصدار الموصى به</string>
     <string name="home_selected_version">الإصدار المحدد</string>
@@ -171,8 +173,8 @@
     <string name="home_app_info_patched_at">تم التعديل</string>
     <string name="home_app_info_patch_update_available">تحديث تعديل متاح</string>
     <string name="home_app_info_patch_update_available_description">إصدار أحدث من التعديلات متاح. اعد تعديل التطبيق للحصول على آخر التحسينات و الإصلاحات</string>
-    <string name="home_app_info_app_deleted_warning">تم إلغاء تثبيت التطبيق من خارج المدير</string>
-    <string name="home_app_info_app_deleted_description">تم إلغاء تثبيت هذا التطبيق من خارج المدير. اعد تعديله لاستعادة الوظائف</string>
+    <string name="home_app_info_app_deleted_warning">التطبيق غير مثبت</string>
+    <string name="home_app_info_app_deleted_description">تم إلغاء تثبيت هذا التطبيق من خارج Morphe. اعد تعديله لاستعادة الوظائف</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل</string>
     <string name="root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
@@ -202,6 +204,15 @@
     <string name="patcher_install_error_subtitle">جرب إلغاء التثبيت والتثبيت مرة أخرى</string>
     <string name="patcher_ready_to_install_subtitle">اضغط على الزر أدناه للتثبيت</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
+    <string name="patcher_storage_permission_dialog_title">لا يمكن الوصول إلى مسار التخزين</string>
+    <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe manager قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
+    <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى.</string>
+    <string name="patcher_storage_permission_grant">منح إذن الوصول</string>
+    <string name="patcher_storage_permission_denied_warning">تم رفض الإذن على التخزين. قم بإعطاء الإذن لاستخدام هذا المسار، أو نقل الملفات إلى مجلد خاص بالتطبيق.</string>
+    <string name="patcher_storage_permission_open_settings">فتح إعدادات التخزين</string>
+    <string name="patcher_storage_badge_denied">تم رفض الإذن</string>
+    <string name="patcher_storage_badge_missing">غير موجود</string>
+    <string name="patcher_storage_permission_hint">تلميح: نقل الملفات إلى /Android/data/app.morphe.manager/files/ - لا تحتاج إلى أي إذن إضافي</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">جارٍ الإعداد</string>
     <string name="patcher_step_load_patches">جارٍ تحميل التعديلات</string>
@@ -284,7 +295,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">لون التمييز</string>
     <string name="settings_appearance_pure_black">اسود نقي</string>
-    <string name="settings_appearance_pure_black_description">استخدام خلفيات سوداء حقيقية لشاشات OLED</string>
+    <string name="settings_appearance_pure_black_description">استخدام خلفيات سوداء حقيقية</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">لغة التطبيق</string>
     <string name="settings_appearance_app_language_current">اللغة الحالية</string>
@@ -344,7 +355,7 @@
     <string name="settings_advanced_github_pat_configured">تم تكوين الرمز</string>
     <string name="settings_advanced_github_pat_how_to_get">كيفية الحصول على رمز وصول</string>
     <string name="settings_advanced_github_pat_dialog_title">تعيين رمز وصول شخصي لـ GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">تعيين رمز وصول شخصي لـ GitHub من أجل القدرة على إضافة طلبات السحب كمصادر خارجية. إنشاء رمز وصول شخصي بنطاق public_repo</string>
+    <string name="settings_advanced_github_pat_dialog_description">تعيين رمز وصول شخصي (PAT) على GitHub لتتمكن من إضافة طلبات السحب كمصادر خارجية. أنشئ رمز وصول شخصي (PAT) بنطاق public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">تضمين في تصدير الإعدادات</string>
     <string name="settings_advanced_github_pat_export_include_supporting">يضيف هذا الرمز المميز PAT إلى إعدادات المدير المصدرة</string>
     <string name="settings_advanced_github_pat_export_warning">لا تشارك رمز PAT الخاص بك. إذا قمت بتضمينه في إعدادات التصدير، فاحتفظ بهذا الملف خاصًا لأنه يحتوي على الرمز المميز</string>
@@ -496,7 +507,7 @@
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">تصدير سجلات تصحيح الأخطاء</string>
-    <string name="settings_system_export_debug_logs_description">تصدير سجلات النظام للتشخيص</string>
+    <string name="settings_system_export_debug_logs_description">حفظ سجلات النظام للتشخيص</string>
     <string name="settings_system_export_debug_logs_export_read_failed">فشل في قراءة السجلات (رمز الخروج %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">فشل تصدير السجلات</string>
     <string name="settings_system_export_debug_logs_export_success">تم تصدير السجلات</string>
@@ -602,6 +613,8 @@
     <string name="saved">محفوظة</string>
     <string name="update">تحديث</string>
     <string name="allow">السماح</string>
+    <string name="details">التفاصيل</string>
+    <string name="hide">إخفاء</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>

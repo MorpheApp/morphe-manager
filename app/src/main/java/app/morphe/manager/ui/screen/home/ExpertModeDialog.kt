@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import androidx.compose.animation.*
@@ -71,6 +76,7 @@ fun ExpertModeDialog(
             // In Expert mode, always show all patches (force allowIncompatible = true)
             val patches = bundle.patchSequence(true)
                 .map { patch -> patch to (patch.name in selected) }
+                .sortedBy { (patch, _) -> patch.name } // Sort patches alphabetically
                 .toList()
 
             bundle to patches

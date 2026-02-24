@@ -6,13 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
-import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
-import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_CHANGE_HEADER
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_CUSTOM_BRANDING
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_HIDE_SHORTS
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_THEME
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.util.KnownApp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -97,9 +96,9 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
 
                     val compatiblePackages = patch.compatiblePackages ?: return@forEach
 
-                    // Check if patch is for YouTube
-                    val isForYouTube = compatiblePackages.any { it.packageName == PACKAGE_YOUTUBE }
-                    val isForYouTubeMusic = compatiblePackages.any { it.packageName == PACKAGE_YOUTUBE_MUSIC }
+                    // Check which apps this patch is compatible with
+                    val isForYouTube = compatiblePackages.any { it.packageName == KnownApp.YOUTUBE }
+                    val isForYouTubeMusic = compatiblePackages.any { it.packageName == KnownApp.YOUTUBE_MUSIC }
 
                     val options = patch.options?.map { option ->
                         OptionInfo(
@@ -119,12 +118,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
                         options = options
                     )
 
-                    if (isForYouTube) {
-                        youtubeOptions.add(patchOptionInfo)
-                    }
-                    if (isForYouTubeMusic) {
-                        youtubeMusicOptions.add(patchOptionInfo)
-                    }
+                    if (isForYouTube) youtubeOptions.add(patchOptionInfo)
+                    if (isForYouTubeMusic) youtubeMusicOptions.add(patchOptionInfo)
                 }
 
                 _youtubePatches.value = youtubeOptions
@@ -139,42 +134,37 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
     }
 
     /**
+     * Returns the patch list for the given package name.
+     */
+    private fun patchesForPackage(packageName: String): List<PatchOptionInfo> = when (packageName) {
+        KnownApp.YOUTUBE -> _youtubePatches.value
+        KnownApp.YOUTUBE_MUSIC -> _youtubeMusicPatches.value
+        else -> emptyList()
+    }
+
+    /**
      * Get Theme patch options for a specific package
      */
-    fun getThemeOptions(packageName: String): PatchOptionInfo? {
-        val patches = when (packageName) {
-            PACKAGE_YOUTUBE -> _youtubePatches.value
-            PACKAGE_YOUTUBE_MUSIC -> _youtubeMusicPatches.value
-            else -> emptyList()
-        }
-        return patches.find { it.patchName == "Theme" }
-    }
+    fun getThemeOptions(packageName: String): PatchOptionInfo? =
+        patchesForPackage(packageName).find { it.patchName == PATCH_THEME }
 
     /**
      * Get Custom branding patch options for a specific package
      */
-    fun getBrandingOptions(packageName: String): PatchOptionInfo? {
-        val patches = when (packageName) {
-            PACKAGE_YOUTUBE -> _youtubePatches.value
-            PACKAGE_YOUTUBE_MUSIC -> _youtubeMusicPatches.value
-            else -> emptyList()
-        }
-        return patches.find { it.patchName == "Custom branding" }
-    }
+    fun getBrandingOptions(packageName: String): PatchOptionInfo? =
+        patchesForPackage(packageName).find { it.patchName == PATCH_CUSTOM_BRANDING }
 
     /**
      * Get Change header patch options (YouTube only)
      */
-    fun getHeaderOptions(): PatchOptionInfo? {
-        return _youtubePatches.value.find { it.patchName == "Change header" }
-    }
+    fun getHeaderOptions(): PatchOptionInfo? =
+        _youtubePatches.value.find { it.patchName == PATCH_CHANGE_HEADER }
 
     /**
      * Get Hide Shorts components patch options (YouTube only)
      */
-    fun getHideShortsOptions(): PatchOptionInfo? {
-        return _youtubePatches.value.find { it.patchName == "Hide Shorts components" }
-    }
+    fun getHideShortsOptions(): PatchOptionInfo? =
+        _youtubePatches.value.find { it.patchName == PATCH_HIDE_SHORTS }
 
     /**
      * Get presets map from patch option info
