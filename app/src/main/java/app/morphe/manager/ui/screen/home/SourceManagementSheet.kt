@@ -332,7 +332,6 @@ private fun BundleManagementCard(
                 updateInfo = updateInfo,
                 expanded = expanded,
                 showChevron = !forceExpanded,
-                onRename = onRename,
                 enabled = isEnabled
             )
 
@@ -413,6 +412,7 @@ private fun BundleManagementCard(
                                     targetState = disableIcon,
                                     label = "disable_icon"
                                 ) { icon ->
+                                    // Disable button
                                     ActionPillButton(
                                         onClick = onDisable,
                                         icon = icon,
@@ -422,6 +422,7 @@ private fun BundleManagementCard(
                             }
 
                             if (bundle is RemotePatchBundle) {
+                                // Update button
                                 ActionPillButton(
                                     onClick = onUpdate,
                                     icon = Icons.Outlined.Refresh,
@@ -430,6 +431,14 @@ private fun BundleManagementCard(
                             }
 
                             if (!bundle.isDefault) {
+                                // Rename button
+                                ActionPillButton(
+                                    onClick = onRename,
+                                    icon = Icons.Outlined.Edit,
+                                    contentDescription = stringResource(R.string.rename) + " " + bundle.displayTitle
+                                )
+
+                                // Delete button
                                 ActionPillButton(
                                     onClick = onDelete,
                                     icon = Icons.Outlined.Delete,
@@ -454,7 +463,6 @@ private fun BundleCardHeader(
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     expanded: Boolean,
     showChevron: Boolean,
-    onRename: () -> Unit,
     enabled: Boolean = true
 ) {
     val rotation by animateFloatAsState(
@@ -491,24 +499,6 @@ private fun BundleCardHeader(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f)
                 )
-
-                // Rename button (only for non-default bundles)
-                AnimatedVisibility(
-                    visible = expanded && !bundle.isDefault,
-                    enter = fadeIn() + expandHorizontally(),
-                    exit = fadeOut() + shrinkHorizontally()
-                ) {
-                    IconButton(
-                        onClick = onRename,
-                        modifier = Modifier.size(24.dp)
-                    ) {
-                        Icon(
-                            Icons.Outlined.Edit,
-                            contentDescription = stringResource(R.string.rename),
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
             }
 
             // Version

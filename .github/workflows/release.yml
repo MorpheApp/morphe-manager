@@ -123,6 +123,7 @@ jobs:
             })
 
       - name: Wait before sending FCM
+        if: steps.release.outputs.NEW_TAG != ''
         run: sleep 300
 
       - name: Setup Python for FCM
