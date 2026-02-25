@@ -43,7 +43,7 @@ sealed class KnownApp(
             YouTube,
             YouTubeMusic,
             Reddit,
-            X
+            // X // Uncomment when release
         )
 
         fun fromPackage(packageName: String): KnownApp? =
