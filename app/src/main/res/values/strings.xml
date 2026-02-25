@@ -143,7 +143,7 @@ Are you sure you want to proceed?"</string>
     <string name="home_dialog_selected_package">Selected package:</string>
     <string name="home_outdated_patches_dialog_title">Mobile data is active</string>
     <string name="home_outdated_patches_dialog_message">Patch updates are disabled on mobile data. Your patches may be outdated</string>
-    <string name="home_outdated_patches_dialog_warning">Patching with outdated patches may produce an unstable result</string>
+    <string name="home_outdated_patches_dialog_warning">Patching with outdated patches may result in a broken app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
     <string name="home_outdated_patches_dialog_patch_anyway">Patch anyway</string>
 
