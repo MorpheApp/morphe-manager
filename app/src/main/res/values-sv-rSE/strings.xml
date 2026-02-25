@@ -95,7 +95,6 @@
     <string name="home_no_patches_for_app">Inga korrigeringar är tillgängliga för den här appen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertläge</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s av %2$s har valts</string>
     <string name="expert_mode_search">Sök efter korrigeringar</string>
     <string name="expert_mode_proceed">Fortsätt till appkorrigering</string>
     <string name="expert_mode_disable_all">Inaktivera alla</string>
@@ -392,7 +391,6 @@ Bildernas mått ska vara följande:
     <string name="installer_internal_name">Systemets installerare</string>
     <string name="installer_internal_description">Använd Androids pakethanterare</string>
     <string name="installer_auto_saved_name">Installerare för rotningsmontering</string>
-    <string name="installer_auto_saved_description">Monterar den korrigerade APK-filen över den installerade appen (rotåtkomst krävs)</string>
     <string name="installer_shizuku_description">Installera tyst med Shizuku eller Sui</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
     <string name="installer_none_description">Ingen alternativ installerare har konfigurerats</string>
@@ -570,6 +568,7 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="allow">Tillåt</string>
     <string name="details">Detaljer</string>
     <string name="hide">Dölj</string>
+    <string name="default_">Standard</string>
     <string name="installing_ellipsis">Installerar …</string>
     <string name="mounting_ellipsis">Monterar …</string>
     <string name="unmounting_ellipsis">Avmonterar …</string>

@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Brak dostępnych modyfikacji dla tej aplikacji</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Tryb ekspercki</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s z %2$s wybranych</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
     <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
@@ -436,7 +435,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_internal_name">Instalator systemowy</string>
     <string name="installer_internal_description">Użyj instalatora pakietów Androida</string>
     <string name="installer_auto_saved_name">Instalator z mountowaniem roota</string>
-    <string name="installer_auto_saved_description">Mountuje zmodyfikowany plik APK nad zainstalowaną aplikacją (wymaga uprawnień roota)</string>
+    <string name="installer_auto_saved_description">Mountuje zmodyfikowany plik APK nad zainstalowaną aplikacją</string>
     <string name="installer_shizuku_description">Instaluj w tle za pomocą Shizuku lub Sui</string>
     <string name="installer_option_none">Brak instalatora zapasowego</string>
     <string name="installer_none_description">Nie skonfigurowano instalatora zapasowego</string>
@@ -615,6 +614,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="allow">Zezwól</string>
     <string name="details">Szczegóły</string>
     <string name="hide">Ukryj</string>
+    <string name="default_">Domyślne</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Mountowanie…</string>
     <string name="unmounting_ellipsis">Odmountowywanie…</string>

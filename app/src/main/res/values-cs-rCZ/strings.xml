@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Pro tuto aplikaci nejsou k dispozici žádné záplaty</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertní režim</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s z %2$s vybráno</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
@@ -436,7 +435,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_internal_name">Systémový instalátor</string>
     <string name="installer_internal_description">Použít instalátor balíčků Android</string>
     <string name="installer_auto_saved_name">Instalátor s kořenovým připojením</string>
-    <string name="installer_auto_saved_description">Zamontuje záplatovaný soubor APK nad instalovanou aplikací (potřebné kořenové právo).</string>
+    <string name="installer_auto_saved_description">Nainstaluje upravený APK nad instalovanou aplikací</string>
     <string name="installer_shizuku_description">Instalujte tichou pomocí Shizuku nebo Sui</string>
     <string name="installer_option_none">Žádný záložní</string>
     <string name="installer_none_description">Není nakonfigurován žádný záložní instalátor</string>
@@ -615,6 +614,7 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="allow">Povolit</string>
     <string name="details">Detaily</string>
     <string name="hide">Skrýt</string>
+    <string name="default_">Výchozí</string>
     <string name="installing_ellipsis">Instaluje se…</string>
     <string name="mounting_ellipsis">Připojování…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>

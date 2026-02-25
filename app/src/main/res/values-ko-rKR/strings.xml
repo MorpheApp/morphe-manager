@@ -50,7 +50,7 @@
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
     <!-- Home Screen - Sources Dialogs -->
-    <string name="sources_dialog_display_name">표시되는 이름</string>
+    <string name="sources_dialog_display_name">표시 이름</string>
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
     <string name="sources_dialog_duplicate_name_error">이 이름의 패치 소스가 이미 존재합니다</string>
     <string name="sources_dialog_missing_error">이 패치 소스를 업데이트할 수 없습니다</string>
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">이 앱에 사용 가능한 패치가 없습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s 중 %1$s 개 선택됨</string>
     <string name="expert_mode_search">패치 검색</string>
     <string name="expert_mode_proceed">패치 진행</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
@@ -616,6 +615,7 @@ morphe_header_custom_dark.png
     <string name="allow">허용</string>
     <string name="details">세부 정보</string>
     <string name="hide">숨기기</string>
+    <string name="default_">기본값</string>
     <string name="installing_ellipsis">설치하는 중…</string>
     <string name="mounting_ellipsis">마운트하는 중…</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중…</string>

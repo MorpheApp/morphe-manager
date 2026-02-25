@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Tidak ada tambalan tersedia untuk aplikasi ini</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode ahli</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s dari %2$s dipilih</string>
     <string name="expert_mode_search">Cari tambalan</string>
     <string name="expert_mode_proceed">Lanjutkan ke Penambalan</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
@@ -436,7 +435,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="installer_internal_name">Pemasang sistem</string>
     <string name="installer_internal_description">Gunakan pemasang paket Android</string>
     <string name="installer_auto_saved_name">Pemasang mount root</string>
-    <string name="installer_auto_saved_description">Mount APK yang ditambal di atas aplikasi yang terpasang (memerlukan root)</string>
+    <string name="installer_auto_saved_description">Mount APK yang ditambal di atas aplikasi yang terpasang</string>
     <string name="installer_shizuku_description">Pasang secara senyap menggunakan Shizuku atau Sui</string>
     <string name="installer_option_none">Tidak ada pengganti</string>
     <string name="installer_none_description">Tidak ada pengganti pemasang yang dikonfigurasi</string>
@@ -615,6 +614,7 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="allow">Izinkan</string>
     <string name="details">Rincian</string>
     <string name="hide">Sembunyikan</string>
+    <string name="default_">Bawaan</string>
     <string name="installing_ellipsis">Memasang…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>

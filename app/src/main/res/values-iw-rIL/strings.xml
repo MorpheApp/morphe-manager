@@ -103,7 +103,6 @@
     <string name="home_no_patches_for_app">אין תיקונים זמינים עבור אפליקציה זו</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">מצב מומחה</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s מתוך %2$s נבחר</string>
     <string name="expert_mode_search">חפש תיקונים</string>
     <string name="expert_mode_proceed">התקדמו לתיקון</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
@@ -399,7 +398,7 @@
     <string name="installer_internal_name">מתקין מערכת</string>
     <string name="installer_internal_description">השתמש במתקין החבילות של Android</string>
     <string name="installer_auto_saved_name">מתקין מאונטר עם רוט</string>
-    <string name="installer_auto_saved_description">מעלה את הקובץ APK המתוקן מעל לאפליקציה המותקנת (נדרש שורש)</string>
+    <string name="installer_auto_saved_description">העלה את APK המותקן על האפליקציה המותקנת</string>
     <string name="installer_shizuku_description">התקן בסיוע שיזוקה או סוי</string>
     <string name="installer_option_none">אין חלופה</string>
     <string name="installer_none_description">לא הוגדר מתקין חלופי</string>
@@ -576,6 +575,7 @@
     <string name="allow">אשר</string>
     <string name="details">פרטים</string>
     <string name="hide">הסתר</string>
+    <string name="default_">ברירת מחדל</string>
     <string name="installing_ellipsis">מתקין…</string>
     <string name="mounting_ellipsis">מצרף…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>

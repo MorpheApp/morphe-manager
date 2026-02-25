@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Níl aon phaistí ar fáil don aip seo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mód saineolaithe</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s de %2$s roghnaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
     <string name="expert_mode_proceed">Lean ar aghaidh leis an bpaisteáil</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
@@ -434,7 +433,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_internal_name">Suiteálaí córais</string>
     <string name="installer_internal_description">Úsáid suiteálaí pacáiste Android</string>
     <string name="installer_auto_saved_name">Suiteálaí gléasta fréamhaithe</string>
-    <string name="installer_auto_saved_description">Suiteálann sé an APK paisteáilte thar an aip suiteáilte (root ag teastáil)</string>
+    <string name="installer_auto_saved_description">Tugann sé an APK paisteáilte ar an aip suiteáilte</string>
     <string name="installer_shizuku_description">Suiteáil go ciúin ag baint úsáide as Shizuku nó Sui</string>
     <string name="installer_option_none">Gan aon chúltaca</string>
     <string name="installer_none_description">Níl aon suiteálaí taca cumraithe</string>
@@ -613,6 +612,7 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="allow">Ceadaigh</string>
     <string name="details">Sonraí</string>
     <string name="hide">Folaigh</string>
+    <string name="default_">Réamhshocrú</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
     <string name="mounting_ellipsis">Ag ceangal…</string>
     <string name="unmounting_ellipsis">Ag dícheangal…</string>

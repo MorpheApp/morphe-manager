@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Nincsenek elérhető módosítások ehhez az alkalmazáshoz</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Szakértői mód</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s/%2$s módosítás kiválasztva</string>
     <string name="expert_mode_search">Patchek keresése</string>
     <string name="expert_mode_proceed">Folytatás a módosításhoz</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
@@ -436,7 +435,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_internal_name">Rendszertelepítő</string>
     <string name="installer_internal_description">Az Android csomagtelepítő használata</string>
     <string name="installer_auto_saved_name">Root telepítő</string>
-    <string name="installer_auto_saved_description">A patchelt APK-t a telepített alkalmazás fölé csatlakoztatja (root szükséges)</string>
+    <string name="installer_auto_saved_description">A megváltoztatott APK-t a telepített alkalmazás fölé helyezi</string>
     <string name="installer_shizuku_description">Telepítés csendben Shizuku vagy Sui használatával</string>
     <string name="installer_option_none">Nincs tartalék</string>
     <string name="installer_none_description">Nincs tartalék telepítő konfigurálva</string>
@@ -615,6 +614,7 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="allow">Engedélyez</string>
     <string name="details">Részletek</string>
     <string name="hide">Rejt</string>
+    <string name="default_">Alapértelmezett</string>
     <string name="installing_ellipsis">Telepítés…</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>

@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">No hay parches disponibles para esta aplicación</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo experto</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s de %2$s seleccionados</string>
     <string name="expert_mode_search">Buscar parches</string>
     <string name="expert_mode_proceed">Proceder al parcheado</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
@@ -436,7 +435,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_internal_name">Instalador del sistema</string>
     <string name="installer_internal_description">Usar el instalador de paquetes de Android</string>
     <string name="installer_auto_saved_name">Instalador de montaje con root</string>
-    <string name="installer_auto_saved_description">Monta el archivo APK parcheado sobre la aplicación instalada (se requiere root)</string>
+    <string name="installer_auto_saved_description">Monta el APK parcheado sobre la app instalada</string>
     <string name="installer_shizuku_description">Instalar en silencio usando Shizuku o Sui.</string>
     <string name="installer_option_none">Sin opción de recuperación</string>
     <string name="installer_none_description">No hay instalador de recuperación configurado</string>
@@ -615,6 +614,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="allow">Permitir</string>
     <string name="details">Detalles</string>
     <string name="hide">Ocultar</string>
+    <string name="default_">Predeterminado</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>

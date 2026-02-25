@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Для цього застосунку немає патчів</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експертний режим</string>
-    <string name="expert_mode_subtitle_extended_format">Вибрано %1$s з %2$s</string>
     <string name="expert_mode_search">Пошук патчів</string>
     <string name="expert_mode_proceed">Перейти до патчінгу</string>
     <string name="expert_mode_disable_all">Вимкнути всі</string>
@@ -223,7 +222,7 @@
     <string name="patcher_step_write_patched">Запис патченого APK файлу</string>
     <string name="patcher_step_sign_apk">Підпис патченого APK файлу</string>
     <!-- Patcher Screen - Patcher Worker -->
-    <string name="patcher_notification_title">Патчінг в процесі…</string>
+    <string name="patcher_notification_title">Триває патчінг…</string>
     <string name="patcher_notification_text">Натисніть, щоб повернутися до патчера</string>
     <string name="patcher_stop_confirm_title">Зупинити патчер</string>
     <string name="patcher_stop_confirm_description">Ви впевнені, що хочете зупинити процес патчингу?</string>
@@ -436,7 +435,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">Системний інсталятор</string>
     <string name="installer_internal_description">Використовувати менеджер пакетів Android</string>
     <string name="installer_auto_saved_name">Інсталятор з рут монтуванням</string>
-    <string name="installer_auto_saved_description">Монтує патчений APK поверх встановленого застосунку (потрібен root)</string>
+    <string name="installer_auto_saved_description">Монтує патчений APK поверх встановленого застосунку</string>
     <string name="installer_shizuku_description">Тиха установка через Shizuku або Sui</string>
     <string name="installer_option_none">Без резервного варіанту</string>
     <string name="installer_none_description">Не налаштований резервний інсталятор</string>
@@ -615,6 +614,7 @@ morphe_header_custom_dark.png
     <string name="allow">Дозволити</string>
     <string name="details">Деталі</string>
     <string name="hide">Приховати</string>
+    <string name="default_">За замовчуванням</string>
     <string name="installing_ellipsis">Інсталяція…</string>
     <string name="mounting_ellipsis">Монтування…</string>
     <string name="unmounting_ellipsis">Демонтування…</string>

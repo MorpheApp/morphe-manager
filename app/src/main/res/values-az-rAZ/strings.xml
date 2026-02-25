@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Bu tətbiq üçün yamaqlar əlçatan deyil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mütəxəssis rejimi</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s - dan %1$s ədəd seçildi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
     <string name="expert_mode_proceed">Yamaqlamağa davam et</string>
     <string name="expert_mode_disable_all">Hamısını qapat</string>
@@ -432,7 +431,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_internal_name">Sistem quraşdırıcısı</string>
     <string name="installer_internal_description">Android paket quraşdırıcısını istifadə et</string>
     <string name="installer_auto_saved_name">Root-lu montajlama quraşdırıcısı</string>
-    <string name="installer_auto_saved_description">Yamaqlanan APK-nı quraşdırılan tətbiq üzərinə montajlayır (root tələb olunur)</string>
     <string name="installer_shizuku_description">Shizuku və ya Sui istifadə edərək səssizcə quraşdır</string>
     <string name="installer_option_none">Ehtiyat yoxdur</string>
     <string name="installer_none_description">Ehtiyat quraşdırıcı qurulan deyil</string>
@@ -611,6 +609,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="allow">İcazə verin</string>
     <string name="details">Təfərrüatlar</string>
     <string name="hide">Gizlət</string>
+    <string name="default_">İlkin</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>
