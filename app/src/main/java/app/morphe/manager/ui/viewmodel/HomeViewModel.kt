@@ -281,8 +281,6 @@ class HomeViewModel(
         if (isOnMeteredWithUpdatesDisabled()) {
             pendingPatchAction = action
             showMeteredPatchingDialog = true
-            showBundleUpdateSnackbar = true
-            snackbarStatus = BundleUpdateStatus.Warning
         } else {
             viewModelScope.launch { action() }
         }
