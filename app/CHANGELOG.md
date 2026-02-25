@@ -1,3 +1,10 @@
+# app [1.8.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.6...v1.8.0-dev.7) (2026-02-25)
+
+
+### Features
+
+* Add tab layout in Expert mode dialog ([#241](https://github.com/MorpheApp/morphe-manager/issues/241)) ([2671a5e](https://github.com/MorpheApp/morphe-manager/commit/2671a5e9b73c9458bdb76cd73c432afba40a7bfe))
+
 # app [1.8.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.5...v1.8.0-dev.6) (2026-02-23)
 
 
