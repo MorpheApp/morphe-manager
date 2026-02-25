@@ -982,8 +982,9 @@ fun MeteredPatchingDialog(
                     icon = Icons.Outlined.SystemUpdateAlt
                 )
                 MorpheDialogButtonRow(
-                    primaryText = stringResource(R.string.home_outdated_patches_dialog_patch_anyway),
+                    primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
                     onPrimaryClick = onPatchAnyway,
+                    isPrimaryDestructive = true,
                     secondaryText = stringResource(android.R.string.cancel),
                     onSecondaryClick = onDismiss
                 )

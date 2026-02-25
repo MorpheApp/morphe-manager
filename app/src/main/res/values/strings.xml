@@ -141,11 +141,10 @@ Are you sure you want to proceed?"</string>
     <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch</string>
     <string name="home_dialog_expected_package">Expected package:</string>
     <string name="home_dialog_selected_package">Selected package:</string>
-    <string name="home_outdated_patches_dialog_title">Mobile data is active</string>
-    <string name="home_outdated_patches_dialog_message">Patch updates are disabled on mobile data. Your patches may be outdated</string>
+    <string name="home_outdated_patches_dialog_title">Patches may be outdated</string>
+    <string name="home_outdated_patches_dialog_message">Mobile data is active and patch updates are disabled</string>
     <string name="home_outdated_patches_dialog_warning">Patching with outdated patches may result in a broken app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
-    <string name="home_outdated_patches_dialog_patch_anyway">Patch anyway</string>
 
     <!-- Patch Options -->
     <string name="custom_color">Custom color</string>
