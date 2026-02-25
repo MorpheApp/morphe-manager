@@ -7,21 +7,15 @@ package app.morphe.manager.worker
 
 import android.content.Context
 import android.util.Log
-import androidx.work.Constraints
-import androidx.work.CoroutineWorker
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkerParameters
+import androidx.work.*
 import app.morphe.manager.BuildConfig
+import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.network.api.MorpheAPI
-import app.morphe.manager.network.utils.getOrNull
-import app.morphe.manager.R
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.tag
+import app.morphe.manager.worker.UpdateCheckInterval.HOURLY
 import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -98,24 +92,19 @@ class UpdateCheckWorker(
 
     /**
      * Check if a new Morphe Manager version is available.
-     * A notification is sent only if the remote version differs from the installed one.
+     * Delegates to [MorpheAPI.getAppUpdate] which handles semver comparison,
+     * prerelease logic and fetching from the correct branch.
      */
     private suspend fun checkForManagerUpdate() {
         if (!prefs.managerAutoUpdates.get()) return
 
-        val remoteInfo = runCatching {
-            morpheAPI.getLatestAppInfoFromJson().getOrNull()
+        val update = runCatching {
+            morpheAPI.getAppUpdate()
         }.getOrNull() ?: return
 
-        val remoteVersion = remoteInfo.version.removePrefix("v")
-        val currentVersion = BuildConfig.VERSION_NAME
-
-        if (remoteVersion != currentVersion) {
-            Log.d(tag, "UpdateCheckWorker: manager update available ($currentVersion -> $remoteVersion)")
-            notificationManager.showManagerUpdateNotification(remoteVersion)
-        } else {
-            Log.d(tag, "UpdateCheckWorker: manager is up to date ($currentVersion)")
-        }
+        val newVersion = update.version.removePrefix("v")
+        Log.d(tag, "UpdateCheckWorker: manager update available (${BuildConfig.VERSION_NAME} -> $newVersion)")
+        notificationManager.showManagerUpdateNotification(newVersion)
     }
 
     /**

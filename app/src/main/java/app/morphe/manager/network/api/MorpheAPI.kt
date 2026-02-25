@@ -11,6 +11,8 @@ import app.morphe.manager.network.utils.getOrNull
 import app.morphe.manager.util.*
 import io.ktor.client.request.header
 import io.ktor.client.request.url
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -231,22 +233,19 @@ class MorpheAPI(
     /**
      * Get manager release info from static JSON file
      */
-    private suspend fun getManagerFromJson(): APIResponse<MorpheAsset> {
-        val includePrerelease = prefs.useManagerPrereleases.get()
-        val branch = if (includePrerelease) "dev" else "main"
-
+    private suspend fun getManagerFromJson(branch: String): APIResponse<MorpheAsset> {
         return when (val response = rawFileRequest<ManagerReleaseInfo>(managerConfig, branch, "app/app-release.json")) {
             is APIResponse.Success -> {
                 val mapped = runCatching {
                     mapManagerJsonToAsset(managerConfig, response.data).also { asset ->
-                        Log.d(tag, "Manager from JSON: version=${asset.version}, url=${asset.downloadUrl}")
+                        Log.d(tag, "Manager from JSON ($branch): version=${asset.version}, url=${asset.downloadUrl}")
                     }
                 }
 
                 mapped.fold(
                     onSuccess = { APIResponse.Success(it) },
                     onFailure = { error ->
-                        Log.w(tag, "Failed to parse manager JSON", error)
+                        Log.w(tag, "Failed to parse manager JSON ($branch)", error)
                         APIResponse.Failure(APIFailure(error, null))
                     }
                 )
@@ -257,30 +256,61 @@ class MorpheAPI(
     }
 
     /**
-     * Get latest manager info - uses JSON or GitHub API based on configuration
+     * Get app update - returns the newest available version if it is strictly newer
+     * than the currently installed one.
+     *
+     * When prereleases are enabled, both stable (main) and pre-release (dev) versions
+     * are fetched in parallel and the newest one is returned.
+     *
+     * | installed      | prereleases | main    | dev           | offered        |
+     * |----------------|-------------|---------|---------------|----------------|
+     * | 1.0.0          | off         | 1.0.0   | —             | nothing        |
+     * | 1.0.0          | off         | 1.1.0   | —             | 1.1.0          |
+     * | 1.0.0          | on          | 1.0.0   | 1.0.0-dev.1   | nothing        |
+     * | 1.0.0          | on          | 1.1.0   | 1.0.0-dev.1   | 1.1.0          |
+     * | 1.0.0-dev.1    | off         | 1.0.0   | —             | 1.0.0          |
+     * | 1.0.0-dev.1    | off         | 1.1.0   | —             | 1.1.0          |
+     * | 1.0.0-dev.1    | on          | 1.0.0   | 1.0.0-dev.1   | 1.0.0          |
+     * | 1.0.0-dev.1    | on          | 1.0.0   | 1.0.0-dev.2   | 1.0.0          |
+     * | 1.0.0-dev.1    | on          | —       | 1.0.0-dev.2   | 1.0.0-dev.2    |
      */
-    suspend fun getLatestAppInfoFromJson(): APIResponse<MorpheAsset> {
-        return if (USE_MANAGER_DIRECT_JSON) {
-            getManagerFromJson().fallbackTo {
-                Log.w(tag, "Falling back to GitHub API for manager")
-                getManagerFromGitHub()
+    suspend fun getAppUpdate(): MorpheAsset? {
+        val usePrereleases = prefs.useManagerPrereleases.get()
+        val currentWeight = versionWeight(BuildConfig.VERSION_NAME.removePrefix("v"))
+
+        val candidates: List<MorpheAsset> = if (USE_MANAGER_DIRECT_JSON) {
+            if (usePrereleases) {
+                coroutineScope {
+                    val stable = async { getManagerFromJson("main").getOrNull() }
+                    val prerelease = async { getManagerFromJson("dev").getOrNull() }
+                    listOfNotNull(stable.await(), prerelease.await())
+                }
+            } else {
+                listOfNotNull(getManagerFromJson("main").getOrNull())
             }
         } else {
-            getManagerFromGitHub()
+            listOfNotNull(getManagerFromGitHub().getOrNull())
         }
+
+        return candidates
+            .filter { versionWeight(it.version.removePrefix("v")) > currentWeight }
+            .maxByOrNull { versionWeight(it.version.removePrefix("v")) }
     }
 
     /**
-     * Get latest manager info using GitHub API only
+     * Converts a version string to a comparable weight for sorting.
+     * Stable versions rank higher than pre-release with the same core.
      */
-    suspend fun getLatestAppInfo(): APIResponse<MorpheAsset> = getManagerFromGitHub()
-
-    /**
-     * Get app update - returns update info only if newer version is available
-     */
-    suspend fun getAppUpdate(): MorpheAsset? {
-        val asset = getLatestAppInfoFromJson().getOrNull() ?: return null
-        return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
+    private fun versionWeight(version: String): Long {
+        val dashIdx = version.indexOf('-')
+        val core = if (dashIdx >= 0) version.substring(0, dashIdx) else version
+        val pre = if (dashIdx >= 0) version.substring(dashIdx + 1) else null
+        val parts = core.split('.').map { it.toIntOrNull() ?: 0 }
+        val major = parts.getOrElse(0) { 0 }.toLong()
+        val minor = parts.getOrElse(1) { 0 }.toLong()
+        val patch = parts.getOrElse(2) { 0 }.toLong()
+        val preWeight = if (pre == null) 100_000L else pre.split('.').lastOrNull()?.toLongOrNull() ?: 0L
+        return major * 1_000_000_000L + minor * 1_000_000L + patch * 100_000L + preWeight
     }
 
     /**
