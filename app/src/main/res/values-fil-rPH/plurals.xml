@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s na-patch</item>
+        <item quantity="other">%s mga na-patch</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s pagpipilian ng patch</item>
+        <item quantity="other">%s mga pagpipilian ng patch</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s mapagkukunan</item>
+        <item quantity="other">%s mga mapagkukunan</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s pakete</item>
+        <item quantity="other">%s mga pakete</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Magsagawa ng %s patch</item>
+        <item quantity="other">Magsagawa ng %s mga patch</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s APK file</item>
+        <item quantity="other">%s mga APK file</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Inalis ang %s na outdated patch mula sa nakaimbak na seleksyon</item>
+        <item quantity="other">Inalis ang %s na mga outdated patch mula sa nakaimbak na seleksyon</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%s na-install na mapagkukunan</item>
+        <item quantity="other">%s na-install na mga mapagkukunan</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%s napili na patch</item>
+        <item quantity="other">%s napili na mga patch</item>
+    </plurals>
+</resources>

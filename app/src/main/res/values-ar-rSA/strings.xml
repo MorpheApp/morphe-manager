@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">تطبيقات أخرى</string>
-    <string name="home_not_patched_yet">لم يتم تعديلها بعد</string>
+    <string name="home_not_patched_yet">لم يتم تعديله بعد</string>
     <string name="home_no_patches_available">لا يوجد تعديلات متاحة</string>
     <string name="home_default_source_disabled">مصدر تعديل Morphe معطل. يرجى تمكينه في صفحة مصادر التعديل أو استخدام وضع الخبير</string>
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">لا يوجد تعديلات متاحة لهذا التطبيق</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">وضع الخبير</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s من %2$s محدد</string>
     <string name="expert_mode_search">البحث عن التعديلات</string>
     <string name="expert_mode_proceed">المضي قدمًا إلى التعديل</string>
     <string name="expert_mode_disable_all">تعطيل الكل</string>
@@ -615,6 +614,7 @@
     <string name="allow">السماح</string>
     <string name="details">التفاصيل</string>
     <string name="hide">إخفاء</string>
+    <string name="default_">الافتراضي</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>

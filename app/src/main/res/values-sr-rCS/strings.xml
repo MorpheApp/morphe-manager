@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Nema patchova za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Režim eksperta</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s od %2$s odabrano</string>
     <string name="expert_mode_search">Pretraži patchove</string>
     <string name="expert_mode_proceed">Pokreni ažuriranje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
@@ -398,7 +397,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="installer_internal_name">Sistemski instalacioni program</string>
     <string name="installer_internal_description">Koristi instalacioni program paketa Android</string>
     <string name="installer_auto_saved_name">Instalator za montažu sa root-om</string>
-    <string name="installer_auto_saved_description">Montira patchirani fajl APK preko instalirane aplikacije (potrebno je imati pristup root-u)</string>
+    <string name="installer_auto_saved_description">Instalira nadinstaliranu APK na postojeću aplikaciju</string>
     <string name="installer_shizuku_description">Instalirajte u tišini koristeći Shizuku ili Sui</string>
     <string name="installer_option_none">Bez rezervnog rešenja</string>
     <string name="installer_none_description">Nije konfigurisano nijedno rezervno instalaciono rešenje</string>
@@ -577,6 +576,7 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="allow">Dozvoli</string>
     <string name="details">Detalji</string>
     <string name="hide">Sakrij</string>
+    <string name="default_">Podrazumevana</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Montiranje…</string>
     <string name="unmounting_ellipsis">Ponovo priključaj…</string>

@@ -103,7 +103,6 @@
     <string name="home_no_patches_for_app">ไม่มีแพตซ์ที่รองรับกับแอปพลิเคชันนี้</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">โหมดผู้เชี่ยวชาญ</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s จาก %2$s ที่ถูกเลือกแล้ว</string>
     <string name="expert_mode_search">ค้นหาแพตซ์</string>
     <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
@@ -437,7 +436,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">โปรแกรมติดตั้งระบบ</string>
     <string name="installer_internal_description">ใช้โปรแกรมติดตั้งแพ็คเกจ Android</string>
     <string name="installer_auto_saved_name">ตัวติดตั้งแบบ Rooted mount</string>
-    <string name="installer_auto_saved_description">ติดตั้งไฟล์ APK ที่แก้ไขแล้วเหนือแอปที่ติดตั้งอยู่ (ต้องมีสิทธิ์ root)</string>
+    <string name="installer_auto_saved_description">ติดตั้ง APK ที่ถูกแก้ไขทับแทนแอปที่ถูกติดตั้งอยู่</string>
     <string name="installer_shizuku_description">ติดตั้งโดยไม่แสดงผลด้วย Shizuku หรือ Sui</string>
     <string name="installer_option_none">ไม่มีตัวติดตั้งสำรอง</string>
     <string name="installer_none_description">ไม่ได้กำหนดค่าตัวติดตั้งสำรอง</string>
@@ -615,6 +614,7 @@ morphe_header_custom_dark.png
     <string name="allow">อนุญาต</string>
     <string name="details">รายละเอียด</string>
     <string name="hide">ซ่อน</string>
+    <string name="default_">ค่าเริ่มต้น</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>

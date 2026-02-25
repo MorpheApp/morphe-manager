@@ -242,4 +242,5 @@ morphe_header_custom_dark.png
     <string name="settings">સેટિંગ્સ</string>
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
+    <string name="default_">ડિફૉલ્ટ</string>
 </resources>

@@ -86,7 +86,6 @@
     <string name="home_no_patches_for_app">Nema dostupnih patcheva za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Napredni način</string>
-    <string name="expert_mode_subtitle_extended_format">Odabrano je %1$s od %2$s patcheva</string>
     <string name="expert_mode_search">Pretraživanje patcheva</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
@@ -415,7 +414,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer_internal_name">Sustav</string>
     <string name="installer_internal_description">Koristi Android instalater paketa</string>
     <string name="installer_auto_saved_name">Rootani učitani instalater</string>
-    <string name="installer_auto_saved_description">Učitaj patchanu aplikaciju preko instalirane aplikacije (potrebno je imati root pristup)</string>
     <string name="installer_shizuku_description">Instaliraj tiho koristeći Shizuku ili Sui</string>
     <string name="installer_option_none">Nema rezerve </string>
     <string name="installer_none_description">Nije konfigurirana zamjena  za instalaciju</string>
@@ -592,6 +590,7 @@ Otvorenog koda svoga izvora, Morphe napreduje na povratnim informacijama i dopri
     <string name="update">Ažuriraj</string>
     <string name="allow">Dopusti</string>
     <string name="details">Detalji</string>
+    <string name="default_">Zadano</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Učitavanje…</string>
     <string name="unmounting_ellipsis">Isključivanje…</string>

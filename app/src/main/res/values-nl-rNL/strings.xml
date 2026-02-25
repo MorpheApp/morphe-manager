@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Geen patches beschikbaar voor deze app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s van %2$s geselecteerd</string>
     <string name="expert_mode_search">Zoek patches</string>
     <string name="expert_mode_proceed">Doorgaan met patchen</string>
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
@@ -436,7 +435,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_internal_name">Systeeminstaller</string>
     <string name="installer_internal_description">Gebruik de Android-pakketinstaller</string>
     <string name="installer_auto_saved_name">Geroot geïnstalleerde versie</string>
-    <string name="installer_auto_saved_description">Monteert het gepatchte APK over de geïnstalleerde app (root vereist)</string>
+    <string name="installer_auto_saved_description">Installeert het gepatchte APK over de ge├»nstalleerde app</string>
     <string name="installer_shizuku_description">Installeer onzichtbaar met Shizuku of Sui</string>
     <string name="installer_option_none">Geen fallback</string>
     <string name="installer_none_description">Er is geen fallback-installer geconfigureerd</string>
@@ -615,6 +614,7 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="allow">Toestaan</string>
     <string name="details">Details</string>
     <string name="hide">Verbergen</string>
+    <string name="default_">Standaard</string>
     <string name="installing_ellipsis">Installeren…</string>
     <string name="mounting_ellipsis">Koppelen…</string>
     <string name="unmounting_ellipsis">Verwijderen…</string>

@@ -101,7 +101,6 @@
     <string name="home_no_patches_for_app">এই অ্যাপের জন্য কোনো প্যাচ উপলব্ধ নেই</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">এক্সপার্ট মোড</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s টি %2$s নির্বাচিত</string>
     <string name="expert_mode_search">প্যাচ খুঁজুন</string>
     <string name="expert_mode_proceed">প্যাচিং শুরু করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
@@ -412,7 +411,7 @@
     <string name="installer_internal_name">সিস্টেম ইনস্টলার</string>
     <string name="installer_internal_description">অ্যান্ড্রয়েড প্যাকেজ ইনস্টলার ব্যবহার করুন</string>
     <string name="installer_auto_saved_name">রুট করা মাউন্ট ইনস্টলার</string>
-    <string name="installer_auto_saved_description">ইনস্টলড অ্যাপের উপর প্যাচড APK মাউন্ট করুন (রুট প্রয়োজন)</string>
+    <string name="installer_auto_saved_description">এপিকে (APK) প্যাচ করা ইনস্টল করা অ্যাপের উপরে স্থাপন করা হয়</string>
     <string name="installer_shizuku_description">শিজুকু বা সুই ব্যবহার করে নির্বাহিতভাবে ইনস্টল করুন</string>
     <string name="installer_option_none">কোন ফলব্যাক নেই</string>
     <string name="installer_none_description">কোনও ফলব্যাক ইনস্টলার কনফিগার করা নেই</string>
@@ -593,6 +592,7 @@
     <string name="allow">অনুমতি দিন</string>
     <string name="details">বিস্তারিত</string>
     <string name="hide">গোপন রাখুন</string>
+    <string name="default_">ডিফল্ট</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>

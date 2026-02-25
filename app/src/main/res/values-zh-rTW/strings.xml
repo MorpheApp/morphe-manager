@@ -5,9 +5,9 @@
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_no_patches_available">沒有可用的修補</string>
     <string name="home_default_source_disabled">Morphe 修補選配庫已遭停用。請將它新增為修補選配庫，或使用專家模式</string>
-    <string name="home_app_hide_title">隱藏此應用程序？</string>
-    <string name="home_app_hide_message">此應用程序將從主屏幕隱藏。您可以使用列表底部的\'%1$s\'按鈕稍後恢復它。</string>
-    <string name="home_app_will_be_hidden">此應用程序將被隱藏</string>
+    <string name="home_app_hide_title">隱藏此應用程式？</string>
+    <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您可以使用列表底部的\'%1$s\'按鈕稍後恢復它。</string>
+    <string name="home_app_will_be_hidden">此應用程式將被隱藏</string>
     <string name="home_app_show_hidden">顯示隱藏應用程式</string>
     <string name="home_app_no_hidden">沒有隱藏應用程式</string>
     <string name="home_app_hidden_apps_title">隱藏應用程式</string>
@@ -76,7 +76,7 @@
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
     <string name="home_apk_availability_yes">是的，幫我找一個 APK</string>
-    <string name="home_apk_availability_no">不，我已经有APK了</string>
+    <string name="home_apk_availability_no">不，我已經有APK了</string>
     <string name="home_apk_use_saved_with_version">使用已儲存的 APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補將需要再次選擇 APK 檔案</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">這個應用程式沒有可用的修補</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
-    <string name="expert_mode_subtitle_extended_format">已選擇 %1$s/%2$s 個修補</string>
     <string name="expert_mode_search">搜尋修補</string>
     <string name="expert_mode_proceed">繼續修補</string>
     <string name="expert_mode_disable_all">停用全部</string>
@@ -434,7 +433,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">系統安裝程式</string>
     <string name="installer_internal_description">使用 Android 套件安裝程式</string>
     <string name="installer_auto_saved_name">Root 掛載安裝程式</string>
-    <string name="installer_auto_saved_description">將修補後的 APK 安裝在已安裝的應用程式上方（需要 root 權限）</string>
+    <string name="installer_auto_saved_description">將修改後的 APK 安裝到已安裝的應用程序上</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 無聲安裝</string>
     <string name="installer_option_none">無備用</string>
     <string name="installer_none_description">未設定任何備用安裝程式</string>
@@ -613,6 +612,7 @@ Morphe 以開源為核心，仰賴社群的意見與貢獻來驅動未來的創�
     <string name="allow">允許</string>
     <string name="details">詳細資訊</string>
     <string name="hide">隱藏</string>
+    <string name="default_">預設</string>
     <string name="installing_ellipsis">安裝中…</string>
     <string name="mounting_ellipsis">掛載中…</string>
     <string name="unmounting_ellipsis">正在解除掛載…</string>

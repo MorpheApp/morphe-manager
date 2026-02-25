@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Δεν υπάρχουν επεξεργασίες διαθέσιμες για αυτήν την εφαρμογή</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Επιτυχημένος τρόπος</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s επιλεγμένη από %2$s επιλεγμένες</string>
     <string name="expert_mode_search">Αναζήτηση επεξεργασιών</string>
     <string name="expert_mode_proceed">Προχωρήστε στη τροποποίηση</string>
     <string name="expert_mode_disable_all">Απενεργοποιήστε όλα</string>
@@ -436,7 +435,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">Εγκαταστάτης συστήματος</string>
     <string name="installer_internal_description">Χρήση του εγκαταστάτη πακέτων Android</string>
     <string name="installer_auto_saved_name">Εγκαταστάτης προσάρτησης με root</string>
-    <string name="installer_auto_saved_description">Επενεμήσει το επεξεργασμένο APK πάνω από την εγκατεστημένη εφαρμογή (χρειάζεται ριζικό δικαίωμα)</string>
+    <string name="installer_auto_saved_description">Επιβάλει τη διαπαιχθείσα APK πάνω από την εγκατεστημένη εφαρμογή</string>
     <string name="installer_shizuku_description">Εγκαταστήστε τη σιωπηλώς χρησιμοποιώντας το Shizuku ή Sui.</string>
     <string name="installer_option_none">Χωρίς εφεδρεία</string>
     <string name="installer_none_description">Δεν έχει ρυθμιστεί εφεδρικός εγκαταστάτης</string>
@@ -613,6 +612,7 @@ morphe_header_custom_dark.png
     <string name="allow">Επιτρέψτε</string>
     <string name="details">Λεπτομέρειες</string>
     <string name="hide">Απόκρυψη</string>
+    <string name="default_">Προεπιλογή</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
     <string name="unmounting_ellipsis">Αποσύνιξη…</string>

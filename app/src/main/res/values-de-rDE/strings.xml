@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Keine Patches verfügbar für diese App</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-Modus</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s von %2$s ausgewählt</string>
     <string name="expert_mode_search">Suche nach Patches</string>
     <string name="expert_mode_proceed">Fortfahren zum Patchen</string>
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
@@ -436,7 +435,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_internal_name">System-Installer</string>
     <string name="installer_internal_description">Verwende den Android-Paket-Installer</string>
     <string name="installer_auto_saved_name">Root-Mount-Installer</string>
-    <string name="installer_auto_saved_description">Montiert die geänderte APK über die installierte App (Root erforderlich).</string>
+    <string name="installer_auto_saved_description">Installiert das gepatchte APK ├╝ber die installierte App</string>
     <string name="installer_shizuku_description">Installieren Sie stillschweigend mit Shizuku oder Sui</string>
     <string name="installer_option_none">Kein Fallback</string>
     <string name="installer_none_description">Es ist kein Fallback-Installer konfiguriert</string>
@@ -615,6 +614,7 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="allow">Erlauben</string>
     <string name="details">Details</string>
     <string name="hide">Verbergen</string>
+    <string name="default_">Standard</string>
     <string name="installing_ellipsis">Wird installiert…</string>
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Austrennen…</string>

@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Không có bản vá nào cho ứng dụng này</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
-    <string name="expert_mode_subtitle_extended_format">Đã chọn %1$s/%2$s</string>
     <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
@@ -436,7 +435,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_internal_name">Trình cài đặt hệ thống</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
     <string name="installer_auto_saved_name">Trình cài đặt gắn kết đã root</string>
-    <string name="installer_auto_saved_description">Gắn kết APK đã vá lên trên ứng dụng đã cài đặt (cần quyền root)</string>
+    <string name="installer_auto_saved_description">Gắn APK đã vá lên ứng dụng đã được cài đặt</string>
     <string name="installer_shizuku_description">Cài ẩn bằng Shizuku hoặc Sui</string>
     <string name="installer_option_none">Không có</string>
     <string name="installer_none_description">Chưa cấu hình trình cài đặt dự phòng</string>
@@ -615,6 +614,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="allow">Cho phép</string>
     <string name="details">Chi tiết</string>
     <string name="hide">Ẩn</string>
+    <string name="default_">Mặc định</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>
     <string name="mounting_ellipsis">Đang gắn kết…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn kết…</string>

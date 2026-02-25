@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Ingen patches tilgængelige for dette app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s af %2$s valgt</string>
     <string name="expert_mode_search">Søg patches</string>
     <string name="expert_mode_proceed">Gå videre til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
@@ -436,7 +435,7 @@ Bildeformateringen må være som følger:
     <string name="installer_internal_name">Systeminstallationsprogram</string>
     <string name="installer_internal_description">Brug Android-pakkeinstallationsprogrammet</string>
     <string name="installer_auto_saved_name">Rodet monteringsinstallationsprogram</string>
-    <string name="installer_auto_saved_description">Monterer den patchet APK over den installerede app (root kræves)</string>
+    <string name="installer_auto_saved_description">Monterer den patchede APK over den installerede app</string>
     <string name="installer_shizuku_description">Installer stille med Shizuku eller Sui</string>
     <string name="installer_option_none">Ingen fallback</string>
     <string name="installer_none_description">Ingen fallback-installationsprogram er konfigureret</string>
@@ -615,6 +614,7 @@ Bildeformateringen må være som følger:
     <string name="allow">Tillad</string>
     <string name="details">Detaljer</string>
     <string name="hide">Skjul</string>
+    <string name="default_">Standard</string>
     <string name="installing_ellipsis">Installerer…</string>
     <string name="mounting_ellipsis">Montering…</string>
     <string name="unmounting_ellipsis">Forkaster…</string>

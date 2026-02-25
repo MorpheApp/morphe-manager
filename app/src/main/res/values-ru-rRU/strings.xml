@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Нет доступных патчей для этого приложения</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим эксперта</string>
-    <string name="expert_mode_subtitle_extended_format">Выбрано %1$s из %2$s</string>
     <string name="expert_mode_search">Поиск патчей</string>
     <string name="expert_mode_proceed">Перейти к патчингу</string>
     <string name="expert_mode_disable_all">Отключить все</string>
@@ -436,7 +435,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">Системный установщик</string>
     <string name="installer_internal_description">Использовать установщик пакетов Android</string>
     <string name="installer_auto_saved_name">Установщик с root-доступом</string>
-    <string name="installer_auto_saved_description">Монтирует патченый APK поверх установленного приложения (нужен root)</string>
+    <string name="installer_auto_saved_description">Монтирует патченый APK поверх установленного приложения</string>
     <string name="installer_shizuku_description">Установить без звука с помощью Shizuku или Sui</string>
     <string name="installer_option_none">Без запасного установщика</string>
     <string name="installer_none_description">Запасной установщик не настроен</string>
@@ -615,6 +614,7 @@ morphe_header_custom_dark.png
     <string name="allow">Разрешить</string>
     <string name="details">Детали</string>
     <string name="hide">Скрыть</string>
+    <string name="default_">По умолчанию</string>
     <string name="installing_ellipsis">Установка…</string>
     <string name="mounting_ellipsis">Монтаж…</string>
     <string name="unmounting_ellipsis">Размонтирование…</string>

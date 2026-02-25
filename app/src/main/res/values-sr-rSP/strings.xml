@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Нema печева доступно за ову апликацију</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експерт мод</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s од %2$s изабрано</string>
     <string name="expert_mode_search">Претражи печеве</string>
     <string name="expert_mode_proceed">Продужи ка поправљању</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
@@ -436,7 +435,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">Системски инсталатер</string>
     <string name="installer_internal_description">Користите Андроид инсталатер пакета</string>
     <string name="installer_auto_saved_name">Инсталатер монтирања са рут приступом</string>
-    <string name="installer_auto_saved_description">Монтира патчирани APK фајл над инсталираном апликацијом (неопходно је да имате приступ кореновом директоријуму)</string>
+    <string name="installer_auto_saved_description">Montira patirane APK preko instalirane aplikacije</string>
     <string name="installer_shizuku_description">Инсталирајте у тихом режиму користећи Шизуку или Суи.</string>
     <string name="installer_option_none">Без резервне опције</string>
     <string name="installer_none_description">Није конфигурисан ниједан резервни инсталатер</string>
@@ -615,6 +614,7 @@ morphe_header_custom_dark.png
     <string name="allow">Дозволи</string>
     <string name="details">Detalji</string>
     <string name="hide">Sakrij</string>
+    <string name="default_">Подразумеван</string>
     <string name="installing_ellipsis">Инсталирање…</string>
     <string name="mounting_ellipsis">Монтирање…</string>
     <string name="unmounting_ellipsis">Демонтирање…</string>

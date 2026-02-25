@@ -8,7 +8,7 @@
     <string name="home_app_hide_title">Nascondi questa app?</string>
     <string name="home_app_hide_message">Questa app verrà nascosta dalla schermata principale. Puoi ripristinarla in seguito utilizzando il pulsante \'%1$s\' in fondo all\'elenco</string>
     <string name="home_app_will_be_hidden">Questa app verrà nascosta</string>
-    <string name="home_app_show_hidden">Mostra app nascoste</string>
+    <string name="home_app_show_hidden">Mostra le app nascoste</string>
     <string name="home_app_no_hidden">Nessuna app nascosta</string>
     <string name="home_app_hidden_apps_title">App nascoste</string>
     <string name="home_app_hidden_apps_hint">Tocca un\'app per mostrarla di nuovo nella lista</string>
@@ -70,13 +70,13 @@
     <string name="sources_update_unavailable">Nessun aggiornamento disponibile</string>
     <string name="sources_download_fail">Impossibile scaricare le fonti: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Hai bisogno di aiuto per trovare un\'APK originale non corretta?</string>
+    <string name="home_apk_availability_dialog_title">Hai bisogno di aiuto per trovare un APK originale non patchato?</string>
     <string name="home_apk_availability_dialog_simple">Per patchare &lt;b&gt;%s&lt;/b&gt;, è necessario un APK non patchato con la versione:</string>
     <string name="home_apk_availability_dialog_expert">Per patchare &lt;b&gt;%s&lt;/b&gt;, è necessario un APK non patchato con le versioni:</string>
     <string name="home_apk_availability_recommended_label">Consigliata</string>
     <string name="home_apk_availability_unpatched_label">Non patchato</string>
     <string name="home_apk_availability_yes">Sì, aiutami a trovare un APK</string>
-    <string name="home_apk_availability_no">No, è giò già un APK</string>
+    <string name="home_apk_availability_no">No, ho già un APK</string>
     <string name="home_apk_use_saved_with_version">Usa l\'APK salvato (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patching richiederà la selezione del file APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -87,7 +87,7 @@
     <string name="home_download_instructions_download_button_toast">Premi scarica sul sito web, e non qui 😊</string>
     <string name="home_download_instructions_step3">Attendi che il download si completi, e &lt;b&gt;non installare&lt;/b&gt; l\'APK</string>
     <string name="home_download_instructions_step3_mount">Attendi che il download si completi, poi &lt;b&gt;installa l\'APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">After the download finishes, return to Morphe</string>
+    <string name="home_download_instructions_step4">Dopo che il download è terminato, torna a Morphe</string>
     <string name="home_download_instructions_step4_mount">Dopo aver installato l\'APK originale, torna a Morphe</string>
     <string name="home_download_instructions_continue">Continua su APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Nessuna patch disponibile per questa app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modalità esperto</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s su %2$s selezionati</string>
     <string name="expert_mode_search">Cerca patch</string>
     <string name="expert_mode_proceed">Procedi con il patching</string>
     <string name="expert_mode_disable_all">Disabilita tutte</string>
@@ -173,8 +172,8 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_app_info_patched_at">Patchato</string>
     <string name="home_app_info_patch_update_available">Aggiornamento delle patch disponibile</string>
     <string name="home_app_info_patch_update_available_description">È disponibile una nuova versione delle patch. Ripatcha la tua app per ottenere gli ultimi miglioramenti e correttivi</string>
-    <string name="home_app_info_app_deleted_warning">App rimossa</string>
-    <string name="home_app_info_app_deleted_description">Questa app è stata rimossa al di fuori di Morphe. Ripatcha per ripristinare la funzionalità</string>
+    <string name="home_app_info_app_deleted_warning">L\'app è stata disinstallata</string>
+    <string name="home_app_info_app_deleted_description">Questa app è stata disinstallata al di fuori di Morphe. Ripatchala per ripristinare la funzionalità</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">La modalità di root richiede che l\'APK originale sia installato sul tuo dispositivo prima del patching</string>
     <string name="root_gmscore_excluded">Il supporto per GmsCore è escluso in modalità di root</string>
@@ -204,11 +203,11 @@ Sei sicuro di voler procedere?"</string>
     <string name="patcher_install_error_subtitle">Prova a disinstallare e installare di nuovo</string>
     <string name="patcher_ready_to_install_subtitle">Premi il pulsante qui sotto per installare</string>
     <string name="patcher_ready_to_mount_subtitle">Premi il pulsante qui sotto per montare</string>
-    <string name="patcher_storage_permission_dialog_title">Impossibile accedere alla cartella</string>
-    <string name="patcher_storage_permission_description_api30">Una o più opzioni di patch puntano a percorsi che Morphe non può leggere. Concedi l\'accesso alla memoria e tocca il pulsante, quindi il patching partirà automaticamente</string>
-    <string name="patcher_storage_permission_description_legacy">Una o più opzioni di patch puntano a percorsi che non possono essere accessi. Aggiorna i percorsi nelle opzioni di patch e riprova</string>
-    <string name="patcher_storage_permission_grant">Concedi l\'autorizzazione alla memoria</string>
-    <string name="patcher_storage_permission_denied_warning">Autorizzazione di archiviazione negata. Concedi l\'autorizzazione per utilizzare questo percorso o sposta i file nella directory privata dell\'app.</string>
+    <string name="patcher_storage_permission_dialog_title">Non è possibile accedere alla cartella di archiviazione</string>
+    <string name="patcher_storage_permission_description_api30">Una o più opzioni delle patch fanno riferimento a percorsi che Morphe Manager non può leggere. Concedi l\'accesso alla memoria di archiviazione e tocca il pulsante, quindi il patching partirà automaticamente</string>
+    <string name="patcher_storage_permission_description_legacy">Una o più opzioni delle patch fanno riferimento a percorsi non raggiungibili. Aggiorna i percorsi nelle opzioni delle patch e riprova</string>
+    <string name="patcher_storage_permission_grant">Concedi l\'autorizzazione alla memoria di archiviazione</string>
+    <string name="patcher_storage_permission_denied_warning">L\'autorizzazione alla memoria di archiviazione è stata negata. Concedi l\'autorizzazione per utilizzare questo percorso o sposta i file nella directory privata dell\'app.</string>
     <string name="patcher_storage_permission_open_settings">Apri le impostazioni di archiviazione</string>
     <string name="patcher_storage_badge_denied">Autorizzazione negata</string>
     <string name="patcher_storage_badge_missing">Non trovato</string>
@@ -295,7 +294,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Tonalità in risalto</string>
     <string name="settings_appearance_pure_black">Nero assoluto</string>
-    <string name="settings_appearance_pure_black_description">Usa sfondi neri veri</string>
+    <string name="settings_appearance_pure_black_description">Usa sfondi con neri assoluti</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Lingua dell\'app</string>
     <string name="settings_appearance_app_language_current">Lingua attuale</string>
@@ -316,42 +315,42 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_advanced_updates">Aggiornamenti</string>
     <string name="settings_advanced_updates_use_prereleases">Usa le versioni anteprima</string>
     <string name="settings_advanced_updates_use_prereleases_description">Ottieni l\'accesso anticipato alle nuove patch e alle funzionalità del manager</string>
-    <string name="settings_advanced_updates_background_notifications">Notifiche di aggiornamento in background</string>
-    <string name="settings_advanced_updates_background_notifications_description">Periodicamente controlla gli aggiornamenti in background e notifica quando disponibili</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Ricevi notifiche push istantanee per i nuovi rilasci, anche se l\'app è chiusa</string>
-    <string name="notification_channel_manager_updates">Aggiornamenti del gestore</string>
-    <string name="notification_channel_manager_updates_description">Notifiche sulle nuove versioni del gestore Morphe</string>
-    <string name="notification_channel_bundle_updates">Aggiornamenti delle patch</string>
-    <string name="notification_channel_bundle_updates_description">Notifiche sulle nuove versioni di origine del pacchetto</string>
-    <string name="notification_channel_fcm_updates">Aggiorna allerta</string>
-    <string name="notification_channel_fcm_updates_description">Notifiche push istantanee per i nuovi rilasci di Morphe manager e patch. Consegnato anche quando l\'app è in background</string>
-    <string name="settings_advanced_update_interval">Frequenza di controllo</string>
+    <string name="settings_advanced_updates_background_notifications">Notifiche degli aggiornamenti in background</string>
+    <string name="settings_advanced_updates_background_notifications_description">Controlla periodicamente la presenza di aggiornamenti in background e notifica quando sono disponibili</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Ricevi notifiche push istantanee per le nuove versioni, anche se l\'app è chiusa</string>
+    <string name="notification_channel_manager_updates">Aggiornamenti del Manager</string>
+    <string name="notification_channel_manager_updates_description">Notifiche sulle nuove versioni di Morphe Manager</string>
+    <string name="notification_channel_bundle_updates">Aggiornamenti delle fonti delle patch</string>
+    <string name="notification_channel_bundle_updates_description">Notifiche sulle nuove versioni delle fonti delle patch</string>
+    <string name="notification_channel_fcm_updates">Notifiche di aggiornamento</string>
+    <string name="notification_channel_fcm_updates_description">Notifiche push istantanee per le nuove versioni di Morphe Manager e delle patch. Inviate persino quando l\'app è attiva in background</string>
+    <string name="settings_advanced_update_interval">Frequenza dei controlli</string>
     <string name="settings_advanced_update_interval_dialog_title">Controlla gli aggiornamenti</string>
     <string name="settings_advanced_update_interval_hourly">Una volta all\'ora</string>
     <string name="settings_advanced_update_interval_daily">Una volta al giorno</string>
     <string name="settings_advanced_update_interval_weekly">Una volta alla settimana</string>
     <string name="settings_advanced_update_interval_monthly">Una volta al mese</string>
-    <string name="settings_advanced_update_interval_chip_subtitle">Frequenza di controllo in background</string>
-    <string name="settings_advanced_update_interval_battery_warning">I controlli in background potrebbero non funzionare correttamente su alcuni dispositivi. I produttori come Xiaomi, Huawei, Samsung e OnePlus spesso limitano in modo aggressivo i processi in background per risparmiare batteria</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Frequenza dei controlli in background</string>
+    <string name="settings_advanced_update_interval_battery_warning">I controlli in background potrebbero non funzionare in maniera affidabile su alcuni dispositivi. I produttori come Xiaomi, Huawei, Samsung e OnePlus spesso limitano in modo aggressivo i processi in background per risparmiare batteria</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Aggiornamento Morphe manager disponibile</string>
-    <string name="notification_bundle_update_title">Nuovi patch disponibili</string>
+    <string name="notification_manager_update_title">Aggiornamento di Morphe manager disponibile</string>
+    <string name="notification_bundle_update_title">Nuove patch disponibili</string>
     <string name="notification_update_text">La versione %1$s è pronta per il download</string>
-    <string name="notification_bundle_update_text_unversioned">Fai clic per aprire Morphe manager e aggiorna</string>
-    <string name="notification_permission_dialog_title">Consenti notifiche</string>
-    <string name="notification_permission_dialog_description">Morphe manager ha bisogno del permesso di notifica per avvisarti quando gli aggiornamenti sono disponibili in background</string>
+    <string name="notification_bundle_update_text_unversioned">Fai clic per aprire Morphe Manager e aggiornare</string>
+    <string name="notification_permission_dialog_title">Consenti le notifiche</string>
+    <string name="notification_permission_dialog_description">Morphe Manager ha bisogno del permesso di notifica per avvisarti quando gli aggiornamenti sono disponibili in background</string>
     <string name="notification_post_patch_dialog_title">Vorresti essere notificato quando ci sono aggiornamenti disponibili?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Impostazioni avanzate</string>
     <string name="settings_advanced_expert_mode">Modalità esperto</string>
     <string name="settings_advanced_expert_mode_description">Abilita le impostazioni avanzate e le opzioni di personalizzazione del patching di Morphe</string>
-    <string name="settings_advanced_expert_mode_dialog_title">Abilitare la modalità esperto?</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Attivare la modalità Esperto?</string>
     <string name="settings_advanced_expert_mode_dialog_message">La modalità esperto fornisce un maggiore controllo su come vengono applicate le patch, ma la configurazione errata delle impostazioni in modalità esperto può produrre un\'app non funzionante</string>
     <string name="settings_advanced_strip_unused_libs">Elimina le librerie native non utilizzate</string>
     <string name="settings_advanced_strip_unused_libs_description">Elimina i file delle librerie native dalle app patchate per le architetture CPU non supportate</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token di accesso personale di GitHub</string>
-    <string name="settings_advanced_github_pat_description">Richiesto per le fonti della richiesta di pull</string>
+    <string name="settings_advanced_github_pat_description">Richiesto per le sorgenti delle richieste di pull</string>
     <string name="settings_advanced_github_pat_configured">Token configurato</string>
     <string name="settings_advanced_github_pat_how_to_get">Come ottenere un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Imposta il token di accesso personale di GitHub</string>
@@ -436,7 +435,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_internal_name">Installatore di sistema</string>
     <string name="installer_internal_description">Usa l\'installatore dei pacchetti di Android</string>
     <string name="installer_auto_saved_name">Installatore mount con privilegi di root</string>
-    <string name="installer_auto_saved_description">Monta l\'APK corretto sull\'app installata (richiede i permessi di root)</string>
+    <string name="installer_auto_saved_description">Installa l\'APK corretto sull\'app installata</string>
     <string name="installer_shizuku_description">Installa silenziosamente utilizzando Shizuku o Sui</string>
     <string name="installer_option_none">Nessun fallback</string>
     <string name="installer_none_description">Non è configurato alcun installatore di fallback</string>
@@ -507,7 +506,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Esporta log di debug</string>
-    <string name="settings_system_export_debug_logs_description">Salva i log del sistema per la risoluzione dei problemi</string>
+    <string name="settings_system_export_debug_logs_description">Salva i logs del sistema per la risoluzione dei problemi</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Lettura dei log non riuscita (codice di uscita %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Esportazione dei logs non riuscita</string>
     <string name="settings_system_export_debug_logs_export_success">Logs esportati</string>
@@ -615,6 +614,7 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="allow">Consenti</string>
     <string name="details">Dettagli</string>
     <string name="hide">Nascondi</string>
+    <string name="default_">Predefinita</string>
     <string name="installing_ellipsis">Installazione in corso…</string>
     <string name="mounting_ellipsis">Montaggio in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>
