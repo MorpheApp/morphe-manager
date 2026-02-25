@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Nu este actualizat încă</string>
     <string name="home_no_patches_available">Nu există patch-uri disponibile</string>
     <string name="home_default_source_disabled">Sursa Morphe este dezactivată. Vă rugăm să o activați în foaia Surselor de patch sau să utilizați modul Expert</string>
+    <string name="home_app_hide_title">Ascunde această aplicație?</string>
+    <string name="home_app_hide_message">Această aplicație va fi ascunsă de ecranul principal. Poți restaura-o mai târziu folosind butonul \'%1$s\' de la fundul listei</string>
+    <string name="home_app_will_be_hidden">Această aplicație va fi ascunsă</string>
+    <string name="home_app_show_hidden">Arată aplicații ascunse</string>
+    <string name="home_app_no_hidden">Nu există aplicații ascunse</string>
+    <string name="home_app_hidden_apps_title">Aplicații ascunse</string>
+    <string name="home_app_hidden_apps_hint">Apasă pe o aplicație pentru a o arăta din nou în lista</string>
     <string name="android_11_bug_dialog_title">Eroare Android 11</string>
     <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în avans pentru a evita o problemă în sistemul Android 11 care poate afecta negativ experiența utilizatorului</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Sursă de remediere</string>
     <string name="sources_management_open_in_browser">Deschide în browser</string>
     <string name="sources_management_failed_to_open_url">Eșec la deschiderea URL-ului</string>
-    <string name="sources_management_date_added">Adăugat</string>
-    <string name="sources_management_date_updated">Actualizat</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nume afișat</string>
     <string name="sources_dialog_rename">Renumează sursă de patach</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Nu există actualizări disponibile</string>
     <string name="sources_download_fail">Eșec la descărcarea surselor: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Aveți fișierul APK original ne-patch-uit?</string>
-    <string name="home_apk_availability_dialog_simple">Pentru a aplica %1$s, trebuie să ai un APK neactualizat cu versiunea:</string>
-    <string name="home_apk_availability_dialog_expert">"Ai un APK neactualizat %1$s?
-
-Versiuni compatibile:"</string>
+    <string name="home_apk_availability_dialog_title">Nevoie de ajutor pentru a găsi un APK original neactualizat?</string>
+    <string name="home_apk_availability_dialog_simple">Pentru a aplica &lt;b&gt;%s&lt;/b&gt;, ai nevoie de versiunea APK neactualizată:</string>
+    <string name="home_apk_availability_dialog_expert">Pentru a aplica &lt;b&gt;%s&lt;/b&gt;, ai nevoie de un APK neaplicat de versiuni:</string>
     <string name="home_apk_availability_recommended_label">Recomandat</string>
     <string name="home_apk_availability_unpatched_label">Neactualizat</string>
-    <string name="home_apk_availability_yes">Da, o am</string>
-    <string name="home_apk_availability_no">Nu, ajută-mă să o găsesc</string>
+    <string name="home_apk_availability_yes">Da, ajută-mă să găsesc un APK</string>
+    <string name="home_apk_availability_no">Nu, deja am un APK</string>
     <string name="home_apk_use_saved_with_version">Folosește APK salvat (v%s)</string>
     <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patching va necesita selectarea din nou a fișierului APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Versiuni compatibile:"</string>
     <string name="home_download_instructions_download_button_toast">Apăsați descărcarea pe site, și nu aici 😊</string>
     <string name="home_download_instructions_step3">Așteptați ca descărcarea să se finalizeze, și &lt;b&gt;nu instalați&lt;/b&gt; APK-ul</string>
     <string name="home_download_instructions_step3_mount">Așteptați ca descărcarea să se finalizeze, apoi &lt;b&gt;instalați APK-ul&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">După ce se finalizează descărcarea, redeschide această aplicație</string>
-    <string name="home_download_instructions_step4_mount">După instalarea fișierului APK original, redeschide această aplicație</string>
+    <string name="home_download_instructions_step4">După ce descărcarea se termină, întoarce-te la Morphe</string>
+    <string name="home_download_instructions_step4_mount">După instalarea APK-ului original, întoarce-te la Morphe</string>
     <string name="home_download_instructions_continue">Continuați la APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selectează fișierul APK descărcat</string>
-    <string name="home_file_picker_prompt_description">Acum selectați fișierul %1$s APK pe care l-ați descărcat</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Deschide fișierul APK pe care l-am descărcat</string>
+    <string name="home_file_picker_prompt_description">Selectează fișierul APK &lt;b&gt;%1$s&lt;/b&gt; pe care l-ai descărcat recent</string>
     <string name="home_file_picker_prompt_open_apk">Deschide fișierul APK</string>
     <string name="home_recommended_version">Versiune recomandată</string>
     <string name="home_selected_version">Versiune selectată</string>
@@ -100,9 +102,8 @@ Versiuni compatibile:"</string>
     <string name="home_no_patches_for_app">Nu există patch-uri disponibile pentru această aplicație</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s din %2$s selectat</string>
     <string name="expert_mode_search">Caută patch-uri</string>
-    <string name="expert_mode_proceed">Procedează la patchare</string>
+    <string name="expert_mode_proceed">Procedează la aplicarea</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
@@ -171,8 +172,8 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="home_app_info_patched_at">Patachizat</string>
     <string name="home_app_info_patch_update_available">Actualizare patach disponibilă</string>
     <string name="home_app_info_patch_update_available_description">O versiune mai nouă a modificărilor este disponibilă. Repătați aplicația pentru a obține ultimele îmbunătățiri și corectări</string>
-    <string name="home_app_info_app_deleted_warning">Aplicatia a fost dezinstalata in afara managerului</string>
-    <string name="home_app_info_app_deleted_description">Această aplicație a fost dezinstalată în afara managerului. Repacheaza-o pentru a restaura funcționalitatea</string>
+    <string name="home_app_info_app_deleted_warning">Aplicația a fost dezinstalată</string>
+    <string name="home_app_info_app_deleted_description">Această aplicație a fost dezinstalată în afara Morphe. Aplica-o din nou pentru a restabili funcționalitatea</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
@@ -202,6 +203,15 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patcher_install_error_subtitle">Încercați să dezinstalați și să instalați din nou</string>
     <string name="patcher_ready_to_install_subtitle">Apăsați butonul de mai jos pentru a instala</string>
     <string name="patcher_ready_to_mount_subtitle">Apăsați butonul de mai jos pentru a monta</string>
+    <string name="patcher_storage_permission_dialog_title">Nu se poate accesa calea de stocare</string>
+    <string name="patcher_storage_permission_description_api30">Una sau mai multe opțiuni de patch indică căi de stocare pe care Morphe manager nu le poate citi. Acordați accesul la stocare și apăsați butonul, apoi începerea patch-ului se va face automat</string>
+    <string name="patcher_storage_permission_description_legacy">Una sau mai multe opțiuni de patch indică căi de stocare care nu pot fi accesate. Actualizați căile în opțiunile de patch și încercați din nou</string>
+    <string name="patcher_storage_permission_grant">Acordați permisiunea de stocare</string>
+    <string name="patcher_storage_permission_denied_warning">Permisiunea de stocare a fost refuzată. Acordați permisiunea pentru a utiliza acest drum, sau mutați fișierul în directorul privat al aplicației</string>
+    <string name="patcher_storage_permission_open_settings">Deschideți setările de stocare</string>
+    <string name="patcher_storage_badge_denied">Permisiune refuzată</string>
+    <string name="patcher_storage_badge_missing">Nu s-a găsit</string>
+    <string name="patcher_storage_permission_hint">Sugestie: Mută fișierul în /Android/data/app.morphe.manager/files/ - nu sunt necesare alte permisiuni</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Pregătire</string>
     <string name="patcher_step_load_patches">Se încarcă modificările</string>
@@ -284,7 +294,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_appearance_dynamic">Materialul Tu</string>
     <string name="settings_appearance_accent_color">Culoarea accentului</string>
     <string name="settings_appearance_pure_black">Negru pur</string>
-    <string name="settings_appearance_pure_black_description">Folosește fonduri negre adevărate pentru afișaje OLED</string>
+    <string name="settings_appearance_pure_black_description">Folosește fonduri negre adevărate</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Limba aplicației</string>
     <string name="settings_appearance_app_language_current">Limbajul curent</string>
@@ -305,6 +315,31 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_updates">Actualizări</string>
     <string name="settings_advanced_updates_use_prereleases">Folosește versiuni pre-lansare</string>
     <string name="settings_advanced_updates_use_prereleases_description">Obține acces timpuriu la noi patachuri și caracteristici manager</string>
+    <string name="settings_advanced_updates_background_notifications">Notificări de actualizări în fundal</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodicââ verificaââ pentru actualizââi din fundalââ ââ notificaââ câând câând disponibile</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Primește notificări instantane de push pentru noi versiuni, chiar când aplicația este închisa</string>
+    <string name="notification_channel_manager_updates">Manager updates</string>
+    <string name="notification_channel_manager_updates_description">Notificări despre noi versiuni Morphe manager</string>
+    <string name="notification_channel_bundle_updates">Actualizări de surse de patch</string>
+    <string name="notification_channel_bundle_updates_description">Notificări despre noi versiuni de sursă pentru patch-uri</string>
+    <string name="notification_channel_fcm_updates">Actualizează alertâ</string>
+    <string name="notification_channel_fcm_updates_description">Notificări instantane de fundal pentru noi lansări ale managerului Morphe și pachetelor. Livrate chiar dacă aplicația se află în fundal</string>
+    <string name="settings_advanced_update_interval">Frecvența de verificare</string>
+    <string name="settings_advanced_update_interval_dialog_title">Verifică pentru actualizări</string>
+    <string name="settings_advanced_update_interval_hourly">O dată pe oră</string>
+    <string name="settings_advanced_update_interval_daily">O dată pe zi</string>
+    <string name="settings_advanced_update_interval_weekly">O dată pe săptămână</string>
+    <string name="settings_advanced_update_interval_monthly">O dată pe lună</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Frecvența de verificare în fundal</string>
+    <string name="settings_advanced_update_interval_battery_warning">Verificările în fundal pot nu funcționa reliable pe unele dispozitive. Fabricanții precum Xiaomi, Huawei, Samsung și OnePlus adesea restrictă procesul în fundal pentru a economisi baterie</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Actualizare disponibilă pentru managerul Morphe</string>
+    <string name="notification_bundle_update_title">Există actualizări disponibile</string>
+    <string name="notification_update_text">Versiunea %1$s este gata pentru descarcare</string>
+    <string name="notification_bundle_update_text_unversioned">Apasă pentru deschidere managerul Morphe și actualizare</string>
+    <string name="notification_permission_dialog_title">Permite notificări</string>
+    <string name="notification_permission_dialog_description">Managerul Morphe are nevoie de permisiunea de notificări pentru a te alerta când sunt disponibile actualizări în fundal</string>
+    <string name="notification_post_patch_dialog_title">Doriți să fiți notificați când sunt disponibile actualizări?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
@@ -319,7 +354,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_github_pat_configured">Token configurat</string>
     <string name="settings_advanced_github_pat_how_to_get">Cum obţiţi un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Setare GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Setati un GitHub Personal Access Token pentru a putea adauga cereri de modificare ca surse externe. Creaţi un PAT cu scopul public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Setă un token de acces personal GitHub pentru a putea adăuga cereri de pull ca surse externe. Creează un token cu scopul public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Include în exportul setărilor</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adaugă acest PAT în setările exportate ale managerului</string>
     <string name="settings_advanced_github_pat_export_warning">Nu împărtăşeşti PAT-ul tău. Dacă îl includi într-un export de setări, menţine fişierul privat, deoarece conţine tokenul</string>
@@ -400,7 +435,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_internal_name">Instalator de sistem</string>
     <string name="installer_internal_description">Utilizați instalatorul de pachete Android</string>
     <string name="installer_auto_saved_name">Instalator de montare root</string>
-    <string name="installer_auto_saved_description">Montați APK-ul modificat peste aplicația instalată (necesită root)</string>
+    <string name="installer_auto_saved_description">Instalează APK-ul patcheat peste aplicația instalată</string>
     <string name="installer_shizuku_description">Instalează în mod silent folosind Shizuku sau Sui</string>
     <string name="installer_option_none">Fără opțiuni de rezervă</string>
     <string name="installer_none_description">Nu este configurat niciun instalator de rezervă</string>
@@ -471,7 +506,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debbug</string>
     <string name="settings_system_export_debug_logs">Exportare jurnale de depanare</string>
-    <string name="settings_system_export_debug_logs_description">Exportă jurnale sistem pentru rezolvarea problemelor</string>
+    <string name="settings_system_export_debug_logs_description">Salvează journal-urile sistemului pentru rezolvarea problemelor</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Eșuare la citirea journal-ului (cod de ieșire %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Eșec la exportarea jurnalelor</string>
     <string name="settings_system_export_debug_logs_export_success">Jurnale exportate</string>
@@ -576,13 +611,16 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="save">Salvați</string>
     <string name="saved">Salvat</string>
     <string name="update">Actualizare</string>
+    <string name="allow">Permite</string>
+    <string name="details">Detalii</string>
+    <string name="hide">Ascunde</string>
+    <string name="default_">Implicit</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
     <string name="changelog">Vizualizați jurnalele modificărilor</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
-    <string name="changelog_loading">Se încarcă jurnalul de modificări</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_retry">Reîncercați</string>
     <string name="changelog_empty">Nu există jurnale disponibile</string>

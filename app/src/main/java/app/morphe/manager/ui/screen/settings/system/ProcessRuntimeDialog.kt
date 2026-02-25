@@ -94,6 +94,9 @@ fun ProcessRuntimeDialog(
                             color = LocalDialogSecondaryTextColor.current
                         )
                     }
+
+                    Spacer(Modifier.width(4.dp))
+
                     Switch(
                         checked = enabled,
                         onCheckedChange = { enabled = it }

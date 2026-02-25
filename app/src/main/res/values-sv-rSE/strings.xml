@@ -14,7 +14,7 @@
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
     <string name="home_update_progress_format">%1$s har bearbetats</string>
-    <string name="home_update_success">Uppdateringen av källor är klar</string>
+    <string name="home_update_success">Källuppdateringen är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
     <string name="home_please_wait">Vänta …</string>
@@ -25,7 +25,7 @@
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Spänn fast dig, det är dags för korrigeringar</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">En annan dag, ett annat annonsblockerande mästerverk</string>
+    <string name="home_greeting_4">En annan dag, ett annat mästerverk med annonsblockering</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Vill du se annonser? Inte jag heller</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
@@ -33,17 +33,15 @@
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Dagens prognos: 100 % risk för korrigeringar</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Redo att förvandla det medelmåttiga till det fantastiska?</string>
+    <string name="home_greeting_8">Redo att göra det medelmåttiga fantastiskt?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Räddar appar från sig själva ända sedan i dag</string>
+    <string name="home_greeting_9">Räddar appar från sig själva sedan i dag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Drivs av koffein och bra korrigeringar</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Korrigeringskällor</string>
     <string name="sources_management_open_in_browser">Öppna i webbläsaren</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
-    <string name="sources_management_date_added">Tillagd</string>
-    <string name="sources_management_date_updated">Uppdaterad</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnamn</string>
     <string name="sources_dialog_rename">Byt namn på korrigeringskällan</string>
@@ -65,15 +63,13 @@
     <string name="sources_update_unavailable">Ingen uppdatering är tillgänglig</string>
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Har du den ursprungliga okorrigerade APK-filen?</string>
-    <string name="home_apk_availability_dialog_simple">Om du vill korrigera %1$s behöver du en okorrigerad APK-fil med följande version:</string>
-    <string name="home_apk_availability_dialog_expert">"Har du en okorrigerad %1$s-APK-fil?
-
-Kompatibla versioner:"</string>
+    <string name="home_apk_availability_dialog_title">Behöver hjälp att hitta ett originalet och opatchat APK?</string>
+    <string name="home_apk_availability_dialog_simple">För att korrigera &lt;b&gt;%s&lt;/b&gt; behöver du en okorrigerad APK-fil med följande version:</string>
+    <string name="home_apk_availability_dialog_expert">För att korrigera &lt;b&gt;%s&lt;/b&gt;, behöver du en okorrigerad APK-fil med versioner:</string>
     <string name="home_apk_availability_recommended_label">Rekommenderad</string>
     <string name="home_apk_availability_unpatched_label">Okorrigerad</string>
-    <string name="home_apk_availability_yes">Ja, jag har den</string>
-    <string name="home_apk_availability_no">Nej, hjälp mig att hitta den</string>
+    <string name="home_apk_availability_yes">Ja, hjälp mig hitta ett APK</string>
+    <string name="home_apk_availability_no">Nej, jag har redan en APK</string>
     <string name="home_apk_use_saved_with_version">Använd sparad APK-fil (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ingen sparad APK-fil. Appkorrigeringen kräver att du väljer APK-filen igen</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +80,12 @@ Kompatibla versioner:"</string>
     <string name="home_download_instructions_download_button_toast">Tryck på nedladdningsknappen på webbplatsen, inte här 😊</string>
     <string name="home_download_instructions_step3">Vänta tills nedladdningen är klar och &lt;b&gt;installera inte&lt;/b&gt; APK-filen</string>
     <string name="home_download_instructions_step3_mount">Vänta tills nedladdningen är klar och &lt;b&gt;installera sedan APK-filen&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Öppna den här appen igen när nedladdningen är klar</string>
-    <string name="home_download_instructions_step4_mount">Öppna den här appen igen när du har installerat den ursprungliga APK-filen</string>
+    <string name="home_download_instructions_step4">När nedladdningen är klar, återvänd till Morphe</string>
+    <string name="home_download_instructions_step4_mount"> Efter att ha installerat den ursprungliga APK-filen, återvänd till Morphe</string>
     <string name="home_download_instructions_continue">Fortsätt till APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Välj den APK-fil som du laddade ned</string>
-    <string name="home_file_picker_prompt_description">Välj nu den %1$s-APK-fil som du just laddade ned</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Öppna APK-filen som jag laddade ned</string>
+    <string name="home_file_picker_prompt_title">Välj nedladdad APK</string>
+    <string name="home_file_picker_prompt_description">Välj den &lt;b&gt;%1$s&lt;/b&gt;-APK filen du just laddade ned</string>
     <string name="home_file_picker_prompt_open_apk">Öppna APK-fil</string>
     <string name="home_recommended_version">Rekommenderad version</string>
     <string name="home_selected_version">Vald version</string>
@@ -100,9 +95,8 @@ Kompatibla versioner:"</string>
     <string name="home_no_patches_for_app">Inga korrigeringar är tillgängliga för den här appen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertläge</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s av %2$s har valts</string>
     <string name="expert_mode_search">Sök efter korrigeringar</string>
-    <string name="expert_mode_proceed">Fortsätt till appkorrigeringen</string>
+    <string name="expert_mode_proceed">Fortsätt till appkorrigering</string>
     <string name="expert_mode_disable_all">Inaktivera alla</string>
     <string name="expert_mode_enable_all">Aktivera alla</string>
     <string name="expert_mode_no_results">Inga korrigeringar hittades</string>
@@ -169,8 +163,8 @@ Kompatibla versioner:"</string>
     <string name="home_app_info_patched_at">Korrigerad</string>
     <string name="home_app_info_patch_update_available">Uppdatering för korrigeringar är tillgänglig</string>
     <string name="home_app_info_patch_update_available_description">En nyare version av korrigeringarna är tillgänglig. Korrigera din app igen för att få de senaste förbättringarna och felkorrigeringarna</string>
-    <string name="home_app_info_app_deleted_warning">Appen har avinstallerats utanför Manager</string>
-    <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Manager. Korrigera den igen för att återställa funktionaliteten</string>
+    <string name="home_app_info_app_deleted_warning">Appen har avinstallerats</string>
+    <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Korrigera den igen för att återställa funktionaliteten</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan korrigering</string>
     <string name="root_gmscore_excluded">Stödkorrigeringen för GmsCore exkluderas i rotläge</string>
@@ -282,7 +276,6 @@ Kompatibla versioner:"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accentfärg</string>
     <string name="settings_appearance_pure_black">Rent svart</string>
-    <string name="settings_appearance_pure_black_description">Använd bakgrunder med äkta svärta för OLED-skärmar</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
@@ -303,6 +296,7 @@ Kompatibla versioner:"</string>
     <string name="settings_advanced_updates">Uppdateringar</string>
     <string name="settings_advanced_updates_use_prereleases">Använd förhandsversioner</string>
     <string name="settings_advanced_updates_use_prereleases_description">Få tidig tillgång till nya korrigeringar och Manager-funktioner</string>
+    <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
@@ -317,7 +311,6 @@ Kompatibla versioner:"</string>
     <string name="settings_advanced_github_pat_configured">Token konfigurerad</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken (PAT) för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en PAT med omfattningen public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Lägger till din PAT i exporterade Manager-inställningar</string>
     <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
@@ -398,7 +391,6 @@ Bildernas mått ska vara följande:
     <string name="installer_internal_name">Systemets installerare</string>
     <string name="installer_internal_description">Använd Androids pakethanterare</string>
     <string name="installer_auto_saved_name">Installerare för rotningsmontering</string>
-    <string name="installer_auto_saved_description">Monterar den korrigerade APK-filen över den installerade appen (rotåtkomst krävs)</string>
     <string name="installer_shizuku_description">Installera tyst med Shizuku eller Sui</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
     <string name="installer_none_description">Ingen alternativ installerare har konfigurerats</string>
@@ -469,7 +461,6 @@ Bildernas mått ska vara följande:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Felsökning</string>
     <string name="settings_system_export_debug_logs">Exportera felsökningsloggar</string>
-    <string name="settings_system_export_debug_logs_description">Exportera systemloggar för felsökning</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Det gick inte att exportera loggar</string>
     <string name="settings_system_export_debug_logs_export_success">Loggar exporterade</string>
@@ -574,13 +565,16 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="save">Spara</string>
     <string name="saved">Sparad</string>
     <string name="update">Uppdatera</string>
+    <string name="allow">Tillåt</string>
+    <string name="details">Detaljer</string>
+    <string name="hide">Dölj</string>
+    <string name="default_">Standard</string>
     <string name="installing_ellipsis">Installerar …</string>
     <string name="mounting_ellipsis">Monterar …</string>
     <string name="unmounting_ellipsis">Avmonterar …</string>
     <string name="importing_ellipsis">Importerar …</string>
     <string name="changelog">Visa ändringsloggar</string>
     <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
-    <string name="changelog_loading">Läser in ändringsloggen</string>
     <string name="changelog_download_fail">Det gick inte att ladda ned ändringsloggen: %s</string>
     <string name="changelog_retry">Försök igen</string>
     <string name="changelog_empty">Ingen ändringslogg är tillgänglig</string>

@@ -11,6 +11,9 @@
     <string name="home_update_error">અપડેટ નિષ્ફળ થયું</string>
     <string name="home_update_error_subtitle">તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો</string>
     <string name="home_updating_sources">સ્ત્રોતો અધ્યતન કરી રહ્યાં છીએ...</string>
+    <string name="home_update_progress_format">%1$s પર પ્રક્રિયા થઈ</string>
+    <string name="home_update_success">સ્ત્રોતો અધ્યતન કરવાનું પૂર્ણ થયું</string>
+    <string name="home_update_success_subtitle">તમારા સ્ત્રોતો અધ્યતન જ છે</string>
     <string name="home_please_wait">કૃપા કરીને રાહ જુઓ...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">તમે કઈ એપ્લિકેશનને પેચ કરવા માંગો છો?</string>
@@ -32,15 +35,20 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">કેફીન અને સારા પેચો દ્વારા સંચાલિત</string>
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">પેચ સ્ત્રોતો</string>
     <string name="sources_management_open_in_browser">બ્રાઉઝરમાં ખોલો</string>
     <string name="sources_management_failed_to_open_url">URL ખોલવામાં નિષ્ફળ</string>
-    <string name="sources_management_date_added">ઉમેરાયેલ છે</string>
-    <string name="sources_management_date_updated">અપડેટેડ </string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">પ્રદર્શિત નામ</string>
+    <string name="sources_dialog_rename">પેચ સ્રોતનું નામ બદલો</string>
+    <string name="sources_dialog_view_any_version">કોઈપણ સંસ્કરણ</string>
+    <string name="sources_dialog_view_any_package">કોઈપણ પેકેજ</string>
+    <string name="sources_dialog_add_source">પેચ સ્રોત ઉમેરો</string>
+    <string name="sources_dialog_remote">દૂરસ્થ</string>
+    <string name="sources_dialog_remote_url">સ્રોત URL</string>
+    <string name="sources_dialog_remote_url_formats_title">ઉદાહરણો:</string>
+    <string name="sources_dialog_local">સ્થાનિક</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">શું તમારી પાસે અસલ અનપેચ્ડ APK છે?</string>
-    <string name="home_apk_availability_yes">હા, મારી પાસે છે</string>
-    <string name="home_apk_availability_no">ના, તેને શોધવામાં મને મદદ કરો</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">મૂળ APK ડાઉનલોડ કરો</string>
     <string name="home_download_instructions_steps_title">સૂચનાઓ:</string>
@@ -49,12 +57,8 @@
     <string name="home_download_instructions_download_button_toast">વેબસાઇટ પર ડાઉનલોડ દબાવો, અને અહીં નહીં 😊</string>
     <string name="home_download_instructions_step3">ડાઉનલોડ પૂર્ણ થાય ત્યાં સુધી રાહ જુઓ, અને APK &lt;b&gt;ઇન્સ્ટોલ કરશો નહીં&lt;b&gt;</string>
     <string name="home_download_instructions_step3_mount">ડાઉનલોડની રાહ જુઓ ડાઉનલોડ પૂર્ણ થાય ત્યાં સુધી રાહ જુઓ, પછી &lt;b&gt;APK ઇન્સ્ટોલ કરો&lt;b&gt;</string>
-    <string name="home_download_instructions_step4">ડાઉનલોડ સમાપ્ત થયા પછી, આ એપ્લિકેશનને ફરીથી ખોલો</string>
-    <string name="home_download_instructions_step4_mount">મૂળ APK ઇન્સ્ટોલ કર્યા પછી, આ એપ્લિકેશનને ફરીથી ખોલો</string>
     <string name="home_download_instructions_continue">APKMirror.com પર ચાલુ રાખો</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">તમે ડાઉનલોડ કરેલ APK પસંદ કરો</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">મેં ડાઉનલોડ કરેલી APK ફાઇલ ખોલો</string>
     <string name="home_recommended_version">ભલામણ કરેલ સંસ્કરણ</string>
     <string name="home_selected_version">પસંદ કરેલ સંસ્કરણ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -146,6 +150,7 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates_use_prereleases">પૂર્વ પ્રકાશિત સંસ્કરણનો ઉપયોગ કરો</string>
     <string name="settings_advanced_updates_use_prereleases_description">નવા પેચ અને મેનેજર ફીચર્સનો વહેલા અનુભવ મેળવો</string>
+    <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
@@ -237,4 +242,5 @@ morphe_header_custom_dark.png
     <string name="settings">સેટિંગ્સ</string>
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
+    <string name="default_">ડિફૉલ્ટ</string>
 </resources>

@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Ei vielä päivitetty</string>
     <string name="home_no_patches_available">Ei patcheja saatavilla</string>
     <string name="home_default_source_disabled">Morphe-patchin lähde on poistettu. Koteloa sallitaan Patch sources -lehdellään tai käytä Expert-moodia.</string>
+    <string name="home_app_hide_title">Piilota tämä sovellus?</string>
+    <string name="home_app_hide_message">Tämä sovellus piilotetaan kotinäyliköstä. Voit palauttaa sen myöhemmin painamalla alimman listan nappia \'%1$s\'.</string>
+    <string name="home_app_will_be_hidden">Tämä sovellus piilotetaan</string>
+    <string name="home_app_show_hidden">Näytä piilotetut sovellukset</string>
+    <string name="home_app_no_hidden">Ei piilotettuja sovelluksia</string>
+    <string name="home_app_hidden_apps_title">Piilotetut sovellukset</string>
+    <string name="home_app_hidden_apps_hint">Klikkaa sovellusta nähdäksesi sen listassa uudelleen</string>
     <string name="android_11_bug_dialog_title">Android 11 virhe</string>
     <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Tukemisen lähteet</string>
     <string name="sources_management_open_in_browser">Avaa linkit selaimessa</string>
     <string name="sources_management_failed_to_open_url">Ei toimi linkin avaamis</string>
-    <string name="sources_management_date_added">Lisätty</string>
-    <string name="sources_management_date_updated">Päivitetty</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Näytönimi</string>
     <string name="sources_dialog_rename">Muokka patch- lähde</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Ei ole muokkaa saatavilla</string>
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Onko sinulla alkuperäinen laikkaamaton APK?</string>
-    <string name="home_apk_availability_dialog_simple">Päivityksen %1$s varten tarvitset unpatched APK:n version:</string>
-    <string name="home_apk_availability_dialog_expert">"Oletko saanut unpatched %1$s APK:n?
-
-Sovittuvien versioiden:"</string>
+    <string name="home_apk_availability_dialog_title">Tarvitset apua etsimään alkuperäistä, patjatonta APK:tä</string>
+    <string name="home_apk_availability_dialog_simple">Pattain &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, patjaton APK-versio:</string>
+    <string name="home_apk_availability_dialog_expert">Pattain &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisiä, patjaton APK-versioita:</string>
     <string name="home_apk_availability_recommended_label">Suositeltu</string>
     <string name="home_apk_availability_unpatched_label">Ei korjattuja</string>
-    <string name="home_apk_availability_yes">Kyllä, minulla on se</string>
-    <string name="home_apk_availability_no">Ei, auta minua löytämään se</string>
+    <string name="home_apk_availability_yes">Kyllä, apua etsimään APK:tä</string>
+    <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
     <string name="home_apk_use_saved_with_version">Käytä tallennettua APK:tä (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:tä. Patching vaatii APK-tiedoston uudelleenvalinnan</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Sovittuvien versioiden:"</string>
     <string name="home_download_instructions_download_button_toast">Paina lataa verkkosivulla, ei täällä 😊</string>
     <string name="home_download_instructions_step3">Odota latauksen valmistumista ja &lt;b&gt;älä asenna&lt;/b&gt; APK:ta</string>
     <string name="home_download_instructions_step3_mount">Odota latauksen valmistumista, sitten &lt;b&gt;asenna APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Kun lataus on valmis, avaa tämä sovellus uudelleen</string>
-    <string name="home_download_instructions_step4_mount">Kun alkuperäinen APK on asennettu, avaa tämä sovellus uudelleen</string>
+    <string name="home_download_instructions_step4">Kun lataus on valmis, palaa Morpheen</string>
+    <string name="home_download_instructions_step4_mount">Kun asennat alkuperäisen APK:n, palaa Morpheen</string>
     <string name="home_download_instructions_continue">Jatka APKMirror.com:iin</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Valitse lataamasi APK</string>
-    <string name="home_file_picker_prompt_description">Valitse nyt ladottu %1$s APK-tiedosto</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Avaa ladatun APK-tiedosto</string>
+    <string name="home_file_picker_prompt_title">Valitse ladattu APK</string>
+    <string name="home_file_picker_prompt_description">Valitse juuri ladattu &lt;b&gt;%1$s&lt;/b&gt; APK-tiedosto</string>
     <string name="home_file_picker_prompt_open_apk">Avaa APK-tiedosto</string>
     <string name="home_recommended_version">Suositeltu versio</string>
     <string name="home_selected_version">Valitettu versio</string>
@@ -100,9 +102,8 @@ Sovittuvien versioiden:"</string>
     <string name="home_no_patches_for_app">Ei patcheja saatavilla tälle sovellukselle</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Asiantuntijan tila</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s kpl %2$s valittu</string>
     <string name="expert_mode_search">Etsi patcheja</string>
-    <string name="expert_mode_proceed">Jatka patchaamista</string>
+    <string name="expert_mode_proceed">Jatka pätkintä</string>
     <string name="expert_mode_disable_all">Poista kaikki</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
@@ -171,8 +172,8 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="home_app_info_patched_at">Muokattu</string>
     <string name="home_app_info_patch_update_available">Uusi patch-versio on saatavilla</string>
     <string name="home_app_info_patch_update_available_description">Uudempi korjausversio on saatavilla. Korjaa sovelluksesi uudelleen saadaksesi uusimmat parannukset ja korjaukset</string>
-    <string name="home_app_info_app_deleted_warning">Sovellus poistettu ulkopuolelta</string>
-    <string name="home_app_info_app_deleted_description">Tämä sovellus poistettiin ulkopuolelta. Korjaa se palauttamaan toiminnallisuuden</string>
+    <string name="home_app_info_app_deleted_warning">Sovellus poistettiin</string>
+    <string name="home_app_info_app_deleted_description">Tämä sovellus poistettiin Morphen ulkopuolelta. Pätkä se uudelleen palauttamaan toiminnallisuuden</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Juurtimemoodi vaatii alkuperäisen APK-tiedoston asennuksen laitteellesi ennen korjausta.</string>
     <string name="root_gmscore_excluded">GmsCore-tukikorjaus on poissuljettu juuritilassa</string>
@@ -202,6 +203,15 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patcher_install_error_subtitle">Yritä poistaa ja asentaa uudelleen</string>
     <string name="patcher_ready_to_install_subtitle">Paina alla olevaa painiketta asentaaksesi</string>
     <string name="patcher_ready_to_mount_subtitle">Paina alla olevaa painiketta liittääksesi</string>
+    <string name="patcher_storage_permission_dialog_title">Ei voi käsitellä tallennustietoa</string>
+    <string name="patcher_storage_permission_description_api30">Yksi tai useampi päivitysasetus osoittaa Morphe-hallinnoinnolle lukematon tiedostopolkuja. Anta tallennuslupaa ja napsauta painiketta, sitten päivitys alkaa automaattisesti</string>
+    <string name="patcher_storage_permission_description_legacy">Yksi tai useampi päivitysasetus osoittaa pääsyä ei voida käsitellä tiedostoja. Päivitä päivitysasetuksia ja yritä uudelleen</string>
+    <string name="patcher_storage_permission_grant">Anta tallennuslupa</string>
+    <string name="patcher_storage_permission_denied_warning">Tallennustilaan tarvitaan lupa. Anta lupa käyttää tätä polkua tai siirrä tiedostot sovelluksen yksityiseen kansioon.</string>
+    <string name="patcher_storage_permission_open_settings">Avaa tallennustila-asetukset</string>
+    <string name="patcher_storage_badge_denied">Lupa kieltäytynyt</string>
+    <string name="patcher_storage_badge_missing">Ei löytynyt</string>
+    <string name="patcher_storage_permission_hint">Vinkki: Siirrä tiedostot /Android/data/app.morphe.manager/files/ - ei tarvita lisälupeita</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Valmistellaan</string>
     <string name="patcher_step_load_patches">Ladataan korjauksia</string>
@@ -284,7 +294,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_appearance_dynamic">Materiaalinen sinetinäyttö</string>
     <string name="settings_appearance_accent_color">Kulmaväri</string>
     <string name="settings_appearance_pure_black">Puroa musta</string>
-    <string name="settings_appearance_pure_black_description">Käytä todellisia mustia taustoja OLED-näytöissä.</string>
+    <string name="settings_appearance_pure_black_description">Käytä mustia taustoja</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Sovelluksen kieli</string>
     <string name="settings_appearance_app_language_current">Nykyinen kieli</string>
@@ -305,6 +315,31 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_advanced_updates">Muutokset</string>
     <string name="settings_advanced_updates_use_prereleases">Käytä pre-release-versioita</string>
     <string name="settings_advanced_updates_use_prereleases_description">Saatat varhaisemmat uutiset patchit ja sovellusominaat</string>
+    <string name="settings_advanced_updates_background_notifications">Taustapäivityksen ilmoitukset</string>
+    <string name="settings_advanced_updates_background_notifications_description">Tarkista päivitykset taustalla säännöllisesti ja ilmoita kun ne ovat saatavilla</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Saa välittömät push-ilmoitukset uusista versioista, jopa kun sovellus on suljettu</string>
+    <string name="notification_channel_manager_updates">Hallitse päivityksiä</string>
+    <string name="notification_channel_manager_updates_description">Ilmoitukset uusista Morphe hallinnassa olevista versioista</string>
+    <string name="notification_channel_bundle_updates">Päivitysten lähteet</string>
+    <string name="notification_channel_bundle_updates_description">Uuden patchin uusimmat versiot -ilmoitukset</string>
+    <string name="notification_channel_fcm_updates">Päivitä varoittimet</string>
+    <string name="notification_channel_fcm_updates_description">Suoraviestin työntekijäpäivitykset ja pätkän uusimmat. Toimitetaan jopa kun sovellus on taustalla</string>
+    <string name="settings_advanced_update_interval">Tarkistusfrekvenssi</string>
+    <string name="settings_advanced_update_interval_dialog_title">Tarkista päivitykset</string>
+    <string name="settings_advanced_update_interval_hourly">Kertaa tunnissa</string>
+    <string name="settings_advanced_update_interval_daily">Kertaa päivässä</string>
+    <string name="settings_advanced_update_interval_weekly">Kertaa viikossa</string>
+    <string name="settings_advanced_update_interval_monthly">Kertaa kuussa</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Taustatarkistuksen frekvenssi</string>
+    <string name="settings_advanced_update_interval_battery_warning">Taustatarkistukset eivät välttämättä toimi luotettavasti kaikilla laitteilla. Tuottajat kuten Xiaomi, Huawei, Samsung ja OnePlus usein rajoittavat taustaprosesseja akun säästämiseksi</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe manager -päivitys saatavilla</string>
+    <string name="notification_bundle_update_title">Uusia pätkkiä saatavilla</string>
+    <string name="notification_update_text">Versio %1$s on valmis ladattavaksi</string>
+    <string name="notification_bundle_update_text_unversioned">Klikkaa avataksesi Morphe managerin ja päivityksen</string>
+    <string name="notification_permission_dialog_title">Salli ilmoitukset</string>
+    <string name="notification_permission_dialog_description">Morphe manager tarvitsee ilmoitusluvan päivitysten saatavuuden varoittamiseen taustalla</string>
+    <string name="notification_post_patch_dialog_title">Haluatko saada ilmoitusta, kun päivitykset ovat saatavilla?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert asetukset</string>
     <string name="settings_advanced_expert_mode">Expert-tila</string>
@@ -319,7 +354,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_advanced_github_pat_configured">Token asetettu</string>
     <string name="settings_advanced_github_pat_how_to_get">Miten saada tokenia</string>
     <string name="settings_advanced_github_pat_dialog_title">Aseta GitHubhen henkilökohtainen pääsytokeni</string>
-    <string name="settings_advanced_github_pat_dialog_description">Aseta GitHubhen henkilökohtainen pääsytokeni, jotta voit lisätä Pull Requestit ulkoisina lähteina. Luo PAT:lle skooppi public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Aseta GitHub Personal Access Token, jotta voit lisätä pull requestejä ulkoisina lähteinä. Luo PAT skopilla public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Sisällytä asetuksien viedossa</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Lisää tämä PAT viedyihin asetuksiin</string>
     <string name="settings_advanced_github_pat_export_warning">Älä jaka tämä PAT. Jos sisällytät sen asetuksien viedossa, pidä tiedosto yksityisenä, koska se sisältää tokenin</string>
@@ -400,7 +435,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="installer_internal_name">Järjestelmän asennusohjelma</string>
     <string name="installer_internal_description">Käytä Android-pakettien asennusohjelmaa</string>
     <string name="installer_auto_saved_name">Root-liitosasennusohjelma</string>
-    <string name="installer_auto_saved_description">Asentaa korjattu APK asennetun sovelluksen päälle (juurinoikeudet vaaditaan)</string>
+    <string name="installer_auto_saved_description">Asentaa korjattua APK:tä asennetun sovelluksen päälle</string>
     <string name="installer_shizuku_description">Asenna hiljaa käyttämällä Shizuku tai Sui.</string>
     <string name="installer_option_none">Ei varajärjestelmää</string>
     <string name="installer_none_description">Varajärjestelmää ei ole määritetty</string>
@@ -471,7 +506,7 @@ Kuvien mitat on oltava seuraavasti:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Tuo debug-lokit</string>
     <string name="settings_system_export_debug_logs">Vie virheenkorjauslokit</string>
-    <string name="settings_system_export_debug_logs_description">Ei saatu lukea debug-lokit: %s</string>
+    <string name="settings_system_export_debug_logs_description">Tallenna järjestelmän lokit ongelmanratkaisuun</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Epäonnistui lukemassa logeja (poistumiskoodi %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Lokien vienti epäonnistui</string>
     <string name="settings_system_export_debug_logs_export_success">%d APK(t)</string>
@@ -576,13 +611,16 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="save">Tallenna</string>
     <string name="saved">Tallennettu</string>
     <string name="update">Päivitä</string>
+    <string name="allow">Salli</string>
+    <string name="details">Tiedot</string>
+    <string name="hide">Piilota</string>
+    <string name="default_">Oletus</string>
     <string name="installing_ellipsis">Asennetaan…</string>
     <string name="mounting_ellipsis">Liitetään…</string>
     <string name="unmounting_ellipsis">Poistetaan…</string>
     <string name="importing_ellipsis">Tuotaan…</string>
     <string name="changelog">Näytä muutoshistoriat</string>
     <string name="changelog_description">Tarkastele uusimmat muutokset tässä päivityksessä</string>
-    <string name="changelog_loading">Ladataan muutostietoja</string>
     <string name="changelog_download_fail">Muutostietojen lataus epäonnistui: %s</string>
     <string name="changelog_retry">Yritä uudelleen</string>
     <string name="changelog_empty">Ei sivustetta</string>

@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Hələ yamaqlanmayıb</string>
     <string name="home_no_patches_available">Yamaqlar əlçatan deyil</string>
     <string name="home_default_source_disabled">Morphe yamaq mənbəyi qapalıdır. Xahiş olunur, bunu Yamaq mənbələri səhifəsində aktivləşdirin və ya Mütəxəssis rejimin istifadə edin</string>
+    <string name="home_app_hide_title">Bu tətbiq gizlədilsin?</string>
+    <string name="home_app_hide_message">Bu tətbiq əsas ekrandan gizlədiləcək. Siyahının aşağısındakı \'%1$s\' düyməsin istifadə edərək onu daha sonra qaytara bilərsiniz</string>
+    <string name="home_app_will_be_hidden">Bu tətbiq gizlədiləcək</string>
+    <string name="home_app_show_hidden">Gizlədilən tətbiqləri göstər</string>
+    <string name="home_app_no_hidden">Gizlədilən tətbiqlər yoxdur</string>
+    <string name="home_app_hidden_apps_title">Gizlədilən tətbiqlər</string>
+    <string name="home_app_hidden_apps_hint">Onu siyahıda təkrar göstərmək üçün tətbiq üzərinə toxun</string>
     <string name="android_11_bug_dialog_title">Android 11 səhvi</string>
     <string name="android_11_bug_dialog_description">Tətbiq quraşdırılması icazəsi istifadəçi təcrübəsinə mənfi təsir edəcək Android 11 sistemindəki səhvə mane olmaq üçün əvvəlcədən qəbul edilməlidir</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Yamaq mənbələri</string>
     <string name="sources_management_open_in_browser">Brauzerdə açın</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
-    <string name="sources_management_date_added">Əlavə edildi</string>
-    <string name="sources_management_date_updated">Yeniləndi</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Yenilənmə əlçatan deyil</string>
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Sizin orijinal, yamaqsız APK-nız var?</string>
-    <string name="home_apk_availability_dialog_simple">%1$s yamağı üçün sizin versiyaya aid yamaqlanmayan APK-ya ehtiyacınız var:</string>
-    <string name="home_apk_availability_dialog_expert">"Yamaqlanmayan %1$s APK-nız var?
-
-Uyuşan versiyalar:"</string>
+    <string name="home_apk_availability_dialog_title">Əsil yamaqlanmayan APK-nı tapmağa kömək lazımdır?</string>
+    <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;, yamaqlamaq üçün yamaqlanmayan APK versiyasına ehtiyacınız var:</string>
+    <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt; yamaqlamaq üçün versiyaların yamaqlanmayan APK-sına ehtiyacınız var:</string>
     <string name="home_apk_availability_recommended_label">Tövsiyə olunan</string>
     <string name="home_apk_availability_unpatched_label">Yamaqlanmayan</string>
-    <string name="home_apk_availability_yes">Bəli, Mənim var</string>
-    <string name="home_apk_availability_no">Xeyr, mənə bunu tapmağa kömək et</string>
+    <string name="home_apk_availability_yes">Bəli, APK tapmağa mənə kömək et</string>
+    <string name="home_apk_availability_no">Xeyr, Mənim artıq APK-m var</string>
     <string name="home_apk_use_saved_with_version">Saxlanılan APK-nı istifadə et (v%s)</string>
     <string name="home_app_info_no_saved_apk">Saxlanılan APK yoxdur. Yamaqlanma APK faylını təkrar seçmək istəyəcək</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Uyuşan versiyalar:"</string>
     <string name="home_download_instructions_download_button_toast">Burada deyil, vebsaytdakı yükləməyə toxun 😊</string>
     <string name="home_download_instructions_step3">Endirmənin tamamlanmasını gözləyin və &lt;/b&gt;APK quraşdırmayın&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">Endirmənin tamamlanmasını gözləyin, sonra &lt;b&gt;APK quraşdırın&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Yükləmə bitdikdən sonra bu tətbiqi təzədən açın</string>
-    <string name="home_download_instructions_step4_mount">Orijinal APK-nı quraşdırdıqdan sonra bu tətbiqi təzədən açın</string>
+    <string name="home_download_instructions_step4">Yükləmə bitəndən sonra Morphe-yə qayıt</string>
+    <string name="home_download_instructions_step4_mount">Əsil APK-nı quraşdırandan sonra, Morphe-yə qayıt</string>
     <string name="home_download_instructions_continue">APKMirror.com-a keçin</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Endirdiyiniz APK-nı seçin</string>
-    <string name="home_file_picker_prompt_description">İndi yenicə endirdiyiniz %1$s APK faylını seçin</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Yüklədiyim APK faylını açın</string>
+    <string name="home_file_picker_prompt_title">Yüklənilmiş APK-nı seç</string>
+    <string name="home_file_picker_prompt_description">İndicə yüklədiyiniz &lt;b&gt;%1$s&lt;/b&gt; APK faylını seçin</string>
     <string name="home_file_picker_prompt_open_apk">APK faylını aç</string>
     <string name="home_recommended_version">Tövsiyə olunan versiya</string>
     <string name="home_selected_version">Seçilən versiya</string>
@@ -100,9 +102,8 @@ Uyuşan versiyalar:"</string>
     <string name="home_no_patches_for_app">Bu tətbiq üçün yamaqlar əlçatan deyil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mütəxəssis rejimi</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s - dan %1$s ədəd seçildi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
-    <string name="expert_mode_proceed">Yamaqlamağa davam edin</string>
+    <string name="expert_mode_proceed">Yamaqlamağa davam et</string>
     <string name="expert_mode_disable_all">Hamısını qapat</string>
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
@@ -171,8 +172,8 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_app_info_patched_at">Yamaqlandı</string>
     <string name="home_app_info_patch_update_available">Yamaq yenilənməsi var</string>
     <string name="home_app_info_patch_update_available_description">Yamaqların daha yeni versiyası var. Ən son təkmilləşdirmələr və düzəlişlər üçün tətbiqinizi təkrar yamaqlayın</string>
-    <string name="home_app_info_app_deleted_warning">Tətbiq menecer xarici silindi</string>
-    <string name="home_app_info_app_deleted_description">Bu tətbiq menecer xarici silindi. Fəaliyyəti qaytarmaq üçün onu təkrar yamaqla</string>
+    <string name="home_app_info_app_deleted_warning">Tətbiq quraşdırması silindi</string>
+    <string name="home_app_info_app_deleted_description">Bu tətbiq Morphe xarici silindi. Funksionallığı qaytarmaq üçün onu təkrar quraşdır</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root rejimi yamaqdan əvvəl orijinal APK-nın cihazınızda quraşdırılmasını tələb edir</string>
     <string name="root_gmscore_excluded">GmsCore dəstək yamağı root rejimində çıxarılır</string>
@@ -202,6 +203,15 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patcher_install_error_subtitle">Silməyə və təkrar quraşdırmağa çalış</string>
     <string name="patcher_ready_to_install_subtitle">Quraşdırmaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
+    <string name="patcher_storage_permission_dialog_title">Yaddaş keçidinə keçmək olmur</string>
+    <string name="patcher_storage_permission_description_api30">Bir və ya daha çox yamaq seçimi Morphe menecerinin oxuya bilmədiyi yolları göstərir. Yaddaş girişin qəbul et və düyməyə toxun, sonra yamaqlanma birbaşa başlayacaq</string>
+    <string name="patcher_storage_permission_description_legacy">Bir və ya daha çox yamaq seçimi keçmək olmayan yolları göstərir. Yamaq seçimlərindəki yolları yeniləyin və təkrar cəhd edin</string>
+    <string name="patcher_storage_permission_grant">Yaddaş icazəsin qəbul et</string>
+    <string name="patcher_storage_permission_denied_warning">Yaddaş icazəsi rədd edildi. Bu yolu istifadə etmək üçün icazəni qəbul et və ya faylları tətbiqin şəxsi qovluğuna köçür</string>
+    <string name="patcher_storage_permission_open_settings">Yaddaş tənzimləmələrin aç</string>
+    <string name="patcher_storage_badge_denied">İcazə rədd edildi</string>
+    <string name="patcher_storage_badge_missing">Tapılmadı</string>
+    <string name="patcher_storage_permission_hint">İpucu: Faylları /Android/data/app.morphe.manager/files/ -a köçür - əlavə icazələrə ehtiyac yoxdur</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Hazırlanır</string>
     <string name="patcher_step_load_patches">Yamaqlar yüklənilir</string>
@@ -284,7 +294,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Çalar rəngi</string>
     <string name="settings_appearance_pure_black">Təmiz Qara</string>
-    <string name="settings_appearance_pure_black_description">OLED ekranlar üçün təmiz qara fonlar istifadə et</string>
+    <string name="settings_appearance_pure_black_description">Təmiz qara fonlar istifadə et</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Tətbiq dili</string>
     <string name="settings_appearance_app_language_current">Gündəlik dil</string>
@@ -305,6 +315,31 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_updates">Yenilənmələr</string>
     <string name="settings_advanced_updates_use_prereleases">Buraxılış öncəsi versiyaları istifadə et</string>
     <string name="settings_advanced_updates_use_prereleases_description">Yeni yamaqlara və menecer xüsusiyyətlərinə erkən keçid əldə edin</string>
+    <string name="settings_advanced_updates_background_notifications">Fon yenilənmə bildirişləri</string>
+    <string name="settings_advanced_updates_background_notifications_description">Fonda yeniləmələri dövri yoxla və əlçatandırsa elan et</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Hətta tətbiq bağlandıqda, yeni buraxılışlar üçün ani təkan bildirişləri al</string>
+    <string name="notification_channel_manager_updates">Menecer yenilənmələri</string>
+    <string name="notification_channel_manager_updates_description">Yeni Morphe menecer versiyaları haqqında bildirişlər</string>
+    <string name="notification_channel_bundle_updates">Yamaq mənbələri yeniləmələri</string>
+    <string name="notification_channel_bundle_updates_description">Yeni yamaq mənbə versiyaları haqqında bildirişlər</string>
+    <string name="notification_channel_fcm_updates">Yenilənmə bildirişləri</string>
+    <string name="notification_channel_fcm_updates_description">Yeni Morphe menecer və yamaq buraxılışları üçün ani təkan bildirişləri. Tətbiq fondadırsa belə bildirilir</string>
+    <string name="settings_advanced_update_interval">Yoxlanılma tezliyi</string>
+    <string name="settings_advanced_update_interval_dialog_title">Yeniləmələri yoxla</string>
+    <string name="settings_advanced_update_interval_hourly">Saatda bir dəfə</string>
+    <string name="settings_advanced_update_interval_daily">Gündə bir dəfə</string>
+    <string name="settings_advanced_update_interval_weekly">Həftədə bir dəfə</string>
+    <string name="settings_advanced_update_interval_monthly">Ayda bir dəfə</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Fon yoxlanma tezliyi</string>
+    <string name="settings_advanced_update_interval_battery_warning">Fon yoxlamaları bəzi cihazlarda davamlı işləməyə bilər. Xiaomi, Huawei, Samsung və OnePlus kimi istehsalçılar batareyanı qorumaq üçün dəfələrlə fon proseslərini ciddi şəkildə məhdudlaşdırırlar</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Morphe menecer yenilənməsi var</string>
+    <string name="notification_bundle_update_title">Yeni yamaqlar var</string>
+    <string name="notification_update_text">%1$s versiyası yüklənilməyə hazırdır</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe menecerini açmaq və yeniləmək üçün toxun</string>
+    <string name="notification_permission_dialog_title">Bildirişləri qəbul et</string>
+    <string name="notification_permission_dialog_description">Morphe menecer fonda yeniləmələr əlçatan olduqda sizə bildirmək üçün bildiriş icazəsi istəyir</string>
+    <string name="notification_post_patch_dialog_title">Yeniləmələr əlçatandırsa bildiriş almaq istərdiniz?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Mütəxəssis tənzimləmələri</string>
     <string name="settings_advanced_expert_mode">Mütəxəssis rejimi</string>
@@ -319,7 +354,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_github_pat_configured">Token quruldu</string>
     <string name="settings_advanced_github_pat_how_to_get">Token necə alınır</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Şəxsi Giriş Token-ini Yerləşdir</string>
-    <string name="settings_advanced_github_pat_dialog_description">Xarici mənbələr kimi Pull Request-ləri əlavə edə bilmək üçün GitHub Şəxsi Giriş Token-ini təyin edin. public_repo github.com fəaliyyət sahəsi ilə PAT yarat</string>
+    <string name="settings_advanced_github_pat_dialog_description">Xarici mənbələr kimi pull request-ləri əlavə edə bilmək üçün GitHub Şəxsi Giriş Token-ini təyin et. public_repo github.com fəaliyyət sahəsi ilə PAT yarat</string>
     <string name="settings_advanced_github_pat_export_include_label">Tənzimləmələr ixracında yerləşdir</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Bu PAT-ı ixrac edilən menecer tənzimləmələrinə əlavə edir</string>
     <string name="settings_advanced_github_pat_export_warning">PAT-ınızı paylaşmayın. Bunu tənzimləmələr ixracına daxil etsəniz, o faylı gizli saxlayın, çünki onun token-i var</string>
@@ -396,7 +431,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_internal_name">Sistem quraşdırıcısı</string>
     <string name="installer_internal_description">Android paket quraşdırıcısını istifadə et</string>
     <string name="installer_auto_saved_name">Root-lu montajlama quraşdırıcısı</string>
-    <string name="installer_auto_saved_description">Yamaqlanan APK-nı quraşdırılan tətbiq üzərinə montajlayır (root tələb olunur)</string>
     <string name="installer_shizuku_description">Shizuku və ya Sui istifadə edərək səssizcə quraşdır</string>
     <string name="installer_option_none">Ehtiyat yoxdur</string>
     <string name="installer_none_description">Ehtiyat quraşdırıcı qurulan deyil</string>
@@ -467,7 +501,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Yaxşılaşdırma</string>
     <string name="settings_system_export_debug_logs">Sazlanma jurnalların köçür</string>
-    <string name="settings_system_export_debug_logs_description">Problemlərin düzəldilməsi üçün sistem jurnalların ixrac et</string>
+    <string name="settings_system_export_debug_logs_description">Problemlərin düzəldilməsi üçün sistem jurnalların saxla</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Jurnalları oxumaq olmadı (çıxış şifrəsi %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Jurnalları ixrac etmək olmadı</string>
     <string name="settings_system_export_debug_logs_export_success">Jurnallar ixrac olundu</string>
@@ -572,13 +606,16 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="save">Saxla</string>
     <string name="saved">Saxlanıldı</string>
     <string name="update">Yenilə</string>
+    <string name="allow">İcazə verin</string>
+    <string name="details">Təfərrüatlar</string>
+    <string name="hide">Gizlət</string>
+    <string name="default_">İlkin</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>
     <string name="importing_ellipsis">İdxal olunur…</string>
     <string name="changelog">Dəyişiklik jurnallarına bax</string>
     <string name="changelog_description">Bu yeniləmədəki ən son dəyişikliklərə nəzər sal</string>
-    <string name="changelog_loading">Dəyişiklik jurnalı yüklənilir</string>
     <string name="changelog_download_fail">Dəyişiklik jurnalın yükləmək olmadı: %s</string>
     <string name="changelog_retry">Təkrar yoxla</string>
     <string name="changelog_empty">Dəyişiklik jurnalı mövcud deyil</string>

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import androidx.compose.animation.*
@@ -5,6 +10,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -19,7 +26,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -27,6 +33,7 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -37,12 +44,13 @@ import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.rememberFolderPickerWithPermission
 import app.morphe.manager.util.toFilePath
+import kotlinx.coroutines.launch
 
 /**
- * Advanced patch selection and configuration dialog
- * Shown before patching when expert mode is enabled
+ * Advanced patch selection and configuration dialog.
+ * Shown before patching when expert mode is enabled.
  */
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ExpertModeDialog(
     bundles: List<PatchBundleInfo.Scoped>,
@@ -57,6 +65,7 @@ fun ExpertModeDialog(
 ) {
     var selectedPatchForOptions by remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
+    var searchVisible by remember { mutableStateOf(false) }
     var showMultipleSourcesWarning by remember { mutableStateOf(false) }
 
     // Create local mutable state from incoming selectedPatches
@@ -71,6 +80,7 @@ fun ExpertModeDialog(
             // In Expert mode, always show all patches (force allowIncompatible = true)
             val patches = bundle.patchSequence(true)
                 .map { patch -> patch to (patch.name in selected) }
+                .sortedBy { (patch, _) -> patch.name } // Sort patches alphabetically
                 .toList()
 
             bundle to patches
@@ -98,27 +108,46 @@ fun ExpertModeDialog(
     // Check if multiple bundles are selected
     val hasMultipleBundles = localSelectedPatches.count { (_, patches) -> patches.isNotEmpty() } > 1
 
-    // Sync function
+    // Patch manipulation helpers
+    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
+        val map = localSelectedPatches.toMutableMap()
+        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
+        patches.forEach { (patch, enabled) -> if (!enabled) set.add(patch.name) }
+        map[bundleUid] = set
+        localSelectedPatches = map
+    }
+
+    fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
+        val map = localSelectedPatches.toMutableMap()
+        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
+        patches.forEach { (patch, enabled) -> if (enabled) set.remove(patch.name) }
+        if (set.isEmpty()) map.remove(bundleUid) else map[bundleUid] = set
+        localSelectedPatches = map
+    }
+
+    fun resetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) {
+        val defaults = allPatches.filter { (patch, _) -> patch.include }.map { (patch, _) -> patch.name }.toSet()
+        val map = localSelectedPatches.toMutableMap()
+        if (defaults.isEmpty()) map.remove(bundleUid) else map[bundleUid] = defaults
+        localSelectedPatches = map
+    }
+
+    fun togglePatch(bundleUid: Int, patchName: String) {
+        val map = localSelectedPatches.toMutableMap()
+        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
+        if (patchName in set) set.remove(patchName) else set.add(patchName)
+        if (set.isEmpty()) map.remove(bundleUid) else map[bundleUid] = set
+        localSelectedPatches = map
+    }
+
     fun syncAndProceed() {
         localSelectedPatches.forEach { (bundleUid, patches) ->
-            val originalPatches = selectedPatches[bundleUid] ?: emptySet()
-            patches.forEach { patchName ->
-                if (patchName !in originalPatches) {
-                    onPatchToggle(bundleUid, patchName)
-                }
-            }
-            originalPatches.forEach { patchName ->
-                if (patchName !in patches) {
-                    onPatchToggle(bundleUid, patchName)
-                }
-            }
+            val original = selectedPatches[bundleUid] ?: emptySet()
+            patches.forEach { if (it !in original) onPatchToggle(bundleUid, it) }
+            original.forEach { if (it !in patches) onPatchToggle(bundleUid, it) }
         }
         selectedPatches.forEach { (bundleUid, patches) ->
-            if (bundleUid !in localSelectedPatches) {
-                patches.forEach { patchName ->
-                    onPatchToggle(bundleUid, patchName)
-                }
-            }
+            if (bundleUid !in localSelectedPatches) patches.forEach { onPatchToggle(bundleUid, it) }
         }
         onProceed()
     }
@@ -126,6 +155,44 @@ fun ExpertModeDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.expert_mode_title),
+        titleTrailingContent = {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Count badge
+                InfoBadge(
+                    text = "$totalSelectedCount/$totalPatchesCount",
+                    style = if (totalSelectedCount > 0) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
+                    isCompact = true
+                )
+
+                // Search toggle button
+                FilledTonalIconButton(
+                    onClick = {
+                        searchVisible = !searchVisible
+                        if (!searchVisible) searchQuery = ""
+                    },
+                    modifier = Modifier.size(36.dp),
+                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = if (searchVisible)
+                            MaterialTheme.colorScheme.primaryContainer
+                        else
+                            MaterialTheme.colorScheme.surfaceVariant,
+                        contentColor = if (searchVisible)
+                            MaterialTheme.colorScheme.onPrimaryContainer
+                        else
+                            MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                ) {
+                    Icon(
+                        imageVector = if (searchVisible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                        contentDescription = stringResource(R.string.expert_mode_search),
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+            }
+        },
         dismissOnClickOutside = false,
         footer = null,
         compactPadding = true,
@@ -135,28 +202,12 @@ fun ExpertModeDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Fixed header section
-            Column(modifier = Modifier.fillMaxWidth()) {
-                // Subtitle with count
-                val totalPatchesText = pluralStringResource(
-                    R.plurals.patch_count,
-                    totalPatchesCount,
-                    totalPatchesCount
-                )
-
-                Text(
-                    text = stringResource(
-                        R.string.expert_mode_subtitle_extended_format,
-                        totalSelectedCount,
-                        totalPatchesText
-                    ),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                // Search bar
+            // Search bar
+            AnimatedVisibility(
+                visible = searchVisible,
+                enter = expandVertically(animationSpec = tween(250)) + fadeIn(tween(250)),
+                exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(tween(200))
+            ) {
                 MorpheDialogTextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
@@ -173,91 +224,203 @@ fun ExpertModeDialog(
                 )
             }
 
-            // Scrollable content
-            if (filteredPatchesInfo.isEmpty()) {
-                EmptyStateContent(
-                    hasSearch = searchQuery.isNotBlank(),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp)
+            // Layout mode is determined by total bundle count
+            val hasMultipleBundleLayout = allPatchesInfo.size > 1
+
+            if (!hasMultipleBundleLayout) {
+                // Single bundle
+                val (bundle, allPatches) = allPatchesInfo.first()
+                val filteredPatches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
+                val displayPatches = filteredPatches ?: emptyList()
+                val enabledCount = displayPatches.count { it.second }
+                val totalCount = displayPatches.size
+
+                // Bundle name header
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Surface(
+                        modifier = Modifier.size(32.dp),
+                        shape = RoundedCornerShape(50),
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                    ) {
+                        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                            Icon(
+                                imageVector = Icons.Outlined.Source,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    }
+                    Text(
+                        text = bundle.name,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color = LocalDialogTextColor.current,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+                BundlePatchControls(
+                    enabledCount = enabledCount,
+                    totalCount = totalCount,
+                    onSelectAll = { selectAll(bundle.uid, displayPatches) },
+                    onDeselectAll = { deselectAll(bundle.uid, displayPatches) },
+                    onResetToDefault = { resetToDefault(bundle.uid, allPatches) }
                 )
+
+                if (filteredPatches == null) {
+                    // No search results for this bundle
+                    EmptyStateContent(
+                        hasSearch = true,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    )
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                            .verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        filteredPatches.forEach { (patch, isEnabled) ->
+                            PatchCard(
+                                patch = patch,
+                                isEnabled = isEnabled,
+                                onToggle = { togglePatch(bundle.uid, patch.name) },
+                                onConfigureOptions = {
+                                    if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to patch
+                                },
+                                hasOptions = !patch.options.isNullOrEmpty()
+                            )
+                        }
+                    }
+                }
             } else {
+                // Multiple bundles tab layout
+                val pagerState = rememberPagerState { allPatchesInfo.size }
+                val coroutineScope = rememberCoroutineScope()
+
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                        .verticalScroll(rememberScrollState()),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    filteredPatchesInfo.forEach { (bundle, patches) ->
-                        val enabledCount = patches.count { it.second }
-                        val totalCount = patches.size
+                    // Tab row
+                    SecondaryScrollableTabRow(
+                        selectedTabIndex = pagerState.currentPage,
+                        edgePadding = 0.dp,
+                        divider = {},
+                        containerColor = Color.Transparent,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    ) {
+                        allPatchesInfo.forEachIndexed { index, (bundle, patches) ->
+                            val hasResults = filteredPatchesInfo.any { it.first.uid == bundle.uid }
+                            val enabledCount = patches.count { it.second }
+                            val totalCount = patches.size
+                            val isSelected = pagerState.currentPage == index
 
-                        BundleHeader(
-                            bundleName = bundle.name,
-                            enabledCount = enabledCount,
-                            totalCount = totalCount,
-                            onToggleAll = {
-                                val allEnabled = enabledCount == totalCount
-                                // If all enabled -> disable all enabled patches
-                                // If any disabled -> enable all disabled patches
+                            Tab(
+                                selected = isSelected,
+                                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
+                                selectedContentColor = MaterialTheme.colorScheme.primary,
+                                unselectedContentColor = if (hasResults)
+                                    MaterialTheme.colorScheme.onSurfaceVariant
+                                else
+                                    MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)
+                                ) {
+                                    Text(
+                                        text = bundle.name,
+                                        style = MaterialTheme.typography.labelLarge,
+                                        fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
 
-                                val currentPatches = localSelectedPatches.toMutableMap()
-                                val bundlePatches = currentPatches[bundle.uid]?.toMutableSet() ?: mutableSetOf()
+                                    Spacer(modifier = Modifier.height(2.dp))
 
-                                patches.forEach { (patch, isEnabled) ->
-                                    if (allEnabled) {
-                                        // Disable all currently enabled patches
-                                        if (isEnabled) {
-                                            bundlePatches.remove(patch.name)
-                                        }
-                                    } else {
-                                        // Enable all currently disabled patches
-                                        if (!isEnabled) {
-                                            bundlePatches.add(patch.name)
-                                        }
-                                    }
+                                    // Patch count badge
+                                    InfoBadge(
+                                        text = "$enabledCount/$totalCount",
+                                        style = if (isSelected && hasResults) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
+                                        isCompact = true,
+                                        isCentered = true
+                                    )
                                 }
-
-                                if (bundlePatches.isEmpty()) {
-                                    currentPatches.remove(bundle.uid)
-                                } else {
-                                    currentPatches[bundle.uid] = bundlePatches
-                                }
-
-                                localSelectedPatches = currentPatches
                             }
+                        }
+                    }
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                        thickness = 0.5.dp
+                    )
+
+                    // Controls fixed below the tab row
+                    val currentIndex = pagerState.currentPage
+                    val (currentBundle, currentAllPatches) = allPatchesInfo[currentIndex]
+                    val currentFiltered = filteredPatchesInfo.firstOrNull { it.first.uid == currentBundle.uid }?.second
+
+                    if (currentFiltered != null) {
+                        BundlePatchControls(
+                            enabledCount = currentFiltered.count { it.second },
+                            totalCount = currentFiltered.size,
+                            onSelectAll = { selectAll(currentBundle.uid, currentFiltered) },
+                            onDeselectAll = { deselectAll(currentBundle.uid, currentFiltered) },
+                            onResetToDefault = { resetToDefault(currentBundle.uid, currentAllPatches) },
+                            modifier = Modifier.padding(vertical = 8.dp)
                         )
+                    } else {
+                        // Reserve space so pager height stays stable when a tab has no results
+                        Spacer(modifier = Modifier.height(52.dp))
+                    }
 
-                        patches.forEach { (patch, isEnabled) ->
-                            PatchCard(
-                                patch = patch,
-                                isEnabled = isEnabled,
-                                onToggle = {
-                                    val currentPatches = localSelectedPatches.toMutableMap()
-                                    val bundlePatches = currentPatches[bundle.uid]?.toMutableSet() ?: mutableSetOf()
+                    // Pager
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) { pageIndex ->
+                        val (bundle, _) = allPatchesInfo[pageIndex]
+                        val patches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
 
-                                    if (patch.name in bundlePatches) {
-                                        bundlePatches.remove(patch.name)
-                                    } else {
-                                        bundlePatches.add(patch.name)
-                                    }
-
-                                    if (bundlePatches.isEmpty()) {
-                                        currentPatches.remove(bundle.uid)
-                                    } else {
-                                        currentPatches[bundle.uid] = bundlePatches
-                                    }
-
-                                    localSelectedPatches = currentPatches
-                                },
-                                onConfigureOptions = {
-                                    if (!patch.options.isNullOrEmpty()) {
-                                        selectedPatchForOptions = bundle.uid to patch
-                                    }
-                                },
-                                hasOptions = !patch.options.isNullOrEmpty()
+                        if (patches == null) {
+                            // No search results for this bundle
+                            EmptyStateContent(
+                                hasSearch = true,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight()
                             )
+                        } else {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState()),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                patches.forEach { (patch, isEnabled) ->
+                                    PatchCard(
+                                        patch = patch,
+                                        isEnabled = isEnabled,
+                                        onToggle = { togglePatch(bundle.uid, patch.name) },
+                                        onConfigureOptions = {
+                                            if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to patch
+                                        },
+                                        hasOptions = !patch.options.isNullOrEmpty()
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -276,7 +439,7 @@ fun ExpertModeDialog(
                 },
                 enabled = totalSelectedCount > 0,
                 icon = Icons.Outlined.AutoFixHigh,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
@@ -309,88 +472,61 @@ fun ExpertModeDialog(
 }
 
 /**
- * Bundle header showing bundle name, patch count, and toggle all button
+ * Bundle controls: three action buttons (Select All / Default / Deselect All).
  */
 @Composable
-private fun BundleHeader(
-    bundleName: String,
+private fun BundlePatchControls(
     enabledCount: Int,
     totalCount: Int,
-    onToggleAll: () -> Unit
+    onSelectAll: () -> Unit,
+    onDeselectAll: () -> Unit,
+    onResetToDefault: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    val allEnabled = enabledCount == totalCount
-
+    // Action buttons
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.weight(1f)
-        ) {
-            Surface(
-                modifier = Modifier.size(32.dp),
-                shape = RoundedCornerShape(50),
-                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Source,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(18.dp)
-                    )
-                }
-            }
-            Text(
-                text = bundleName,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = LocalDialogTextColor.current
-            )
-            Text(
-                text = "($enabledCount/$totalCount)",
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current
-            )
-        }
-
-        // All patches selection button
-        FilledTonalIconButton(
-            onClick = onToggleAll,
-            modifier = Modifier.size(32.dp),
+        ActionPillButton(
+            onClick = onSelectAll,
+            icon = Icons.Outlined.DoneAll,
+            contentDescription = stringResource(R.string.expert_mode_enable_all),
+            enabled = enabledCount < totalCount,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = if (allEnabled)
-                    MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
-                else
-                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-                contentColor = if (allEnabled)
-                    MaterialTheme.colorScheme.error
-                else
-                    MaterialTheme.colorScheme.primary
+                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                contentColor = MaterialTheme.colorScheme.primary,
+                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
             )
-        ) {
-            Icon(
-                imageVector = if (allEnabled) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
-                contentDescription = stringResource(
-                    if (allEnabled) R.string.expert_mode_disable_all
-                    else R.string.expert_mode_enable_all
-                ),
-                modifier = Modifier.size(18.dp)
+        )
+        ActionPillButton(
+            onClick = onResetToDefault,
+            icon = Icons.Outlined.Restore,
+            contentDescription = stringResource(R.string.default_),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
             )
-        }
+        )
+        ActionPillButton(
+            onClick = onDeselectAll,
+            icon = Icons.Outlined.ClearAll,
+            contentDescription = stringResource(R.string.expert_mode_disable_all),
+            enabled = enabledCount > 0,
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f),
+                contentColor = MaterialTheme.colorScheme.error,
+                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            )
+        )
     }
 }
 
+
 /**
- * Individual patch card with toggle and options button
+ * Individual patch card with toggle and options button.
  */
 @Composable
 private fun PatchCard(
@@ -496,7 +632,7 @@ private fun PatchCard(
 }
 
 /**
- * Empty state content when no patches match search or none selected
+ * Empty state content when no patches match search or none selected.
  */
 @Composable
 private fun EmptyStateContent(
@@ -534,7 +670,7 @@ private fun EmptyStateContent(
 }
 
 /**
- * Options dialog for configuring patch options
+ * Options dialog for configuring patch options.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -985,8 +1121,8 @@ private fun PathInputOption(
 }
 
 /**
- * Combined path input with dropdown presets
- * Used for options that have predefined values but also allow custom folder paths
+ * Combined path input with dropdown presets.
+ * Used for options that have predefined values but also allow custom folder paths.
  */
 @Composable
 private fun PathWithPresetsOption(
@@ -1308,7 +1444,7 @@ fun ExpandableSurface(
 }
 
 /**
- * Scrollable instructions box with fade at bottom
+ * Scrollable instructions box with fade at bottom.
  */
 @Composable
 fun ScrollableInstruction(
@@ -1363,9 +1499,8 @@ fun ScrollableInstruction(
     }
 }
 
-
 /**
- * Warning dialog shown when user selects patches from multiple sources
+ * Warning dialog shown when user selects patches from multiple sources.
  */
 @Composable
 private fun MultipleSourcesWarningDialog(

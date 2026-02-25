@@ -7,8 +7,8 @@
         <item quantity="other">%s патчей</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s параметр патча</item>
-        <item quantity="few">%s параметры патчей</item>
+        <item quantity="one">%s опция патча</item>
+        <item quantity="few">%s опции патчей</item>
         <item quantity="many">%s параметры патчей</item>
         <item quantity="other">%s параметры патчей</item>
     </plurals>

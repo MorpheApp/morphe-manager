@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Ще не патчено</string>
     <string name="home_no_patches_available">Немає доступних патчів</string>
     <string name="home_default_source_disabled">Джерело патчів Morphe вимкнене. Будь ласка, увімкніть його в джерелах патчів або скористайтеся режимом Експерт</string>
+    <string name="home_app_hide_title">Приховати цей застосунок?</string>
+    <string name="home_app_hide_message">Цей застосунок буде приховано з головного екрану. Ви можете відновити його пізніше, використовуючи кнопку \'%1$s\' внизу списку</string>
+    <string name="home_app_will_be_hidden">Цей застосунок буде приховано</string>
+    <string name="home_app_show_hidden">Показати приховані застосунки</string>
+    <string name="home_app_no_hidden">Немає прихованих застосунків</string>
+    <string name="home_app_hidden_apps_title">Приховані застосунки</string>
+    <string name="home_app_hidden_apps_hint">Натисніть на застосунок, щоб знову показати його у списку</string>
     <string name="android_11_bug_dialog_title">Помилка Android 11</string>
     <string name="android_11_bug_dialog_description">Дозвіл на встановлення застосунку необхідно надати заздалегідь, щоб уникнути помилки в Android 11, яка негативно вплине на взаємодію з користувачем</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Джерела патчів</string>
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
-    <string name="sources_management_date_added">Додано</string>
-    <string name="sources_management_date_updated">Оновлено</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Оновлення недоступне</string>
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">У вас є непатчений оригінальний APK файл?</string>
-    <string name="home_apk_availability_dialog_simple">Щоб патчити %1$s, вам потрібний непатчений APK файл з версією:</string>
-    <string name="home_apk_availability_dialog_expert">"У вас є непатчений %1$s APK файл?
-
-Сумісні версії:"</string>
+    <string name="home_apk_availability_dialog_title">Потрібна допомога у пошуку оригінального непатченого APK?</string>
+    <string name="home_apk_availability_dialog_simple">Щоб патчити &lt;b&gt;%s&lt;/b&gt;, вам потрібний непатчений APK файл з версією:</string>
+    <string name="home_apk_availability_dialog_expert">Щоб патчити &lt;b&gt;%s&lt;/b&gt;, вам потрібні непатчені APK файли з версіями:</string>
     <string name="home_apk_availability_recommended_label">Рекомендована</string>
     <string name="home_apk_availability_unpatched_label">Непатчена</string>
-    <string name="home_apk_availability_yes">Так, у мене є</string>
-    <string name="home_apk_availability_no">Ні, допоможіть мені його знайти</string>
+    <string name="home_apk_availability_yes">Так, допоможіть мені знайти APK</string>
+    <string name="home_apk_availability_no">Ні, я вже маю APK</string>
     <string name="home_apk_use_saved_with_version">Збережений APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Немає збереженого APK файлу. Для патчінгу потрібно буде знову вибрати APK файл</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,14 +87,13 @@
     <string name="home_download_instructions_download_button_toast">Натисніть завантажити на сайті, а не тут 😊</string>
     <string name="home_download_instructions_step3">Дочекайтеся завершення завантаження та &lt;b&gt;не встановлюйте&lt;/b&gt; APK файл</string>
     <string name="home_download_instructions_step3_mount">Дочекайтеся завершення завантаження та &lt;b&gt;встановіть APK файл&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Після завершення завантаження знову відкрийте цей застосунок</string>
-    <string name="home_download_instructions_step4_mount">Після встановлення оригінального APK файлу знову відкрийте цей застосунок</string>
+    <string name="home_download_instructions_step4">Після завершення завантаження поверніться до Morphe</string>
+    <string name="home_download_instructions_step4_mount">Після встановлення оригінального APK, поверніться до Morphe</string>
     <string name="home_download_instructions_continue">Перейти на APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Виберіть завантажений APK файл</string>
-    <string name="home_file_picker_prompt_description">Тепер виберіть файл %1$s APK файл, який ви щойно завантажили</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Вибрати завантажений APK файл</string>
-    <string name="home_file_picker_prompt_open_apk">Вибрати APK файл</string>
+    <string name="home_file_picker_prompt_title">Вибрати завантажений APK файл</string>
+    <string name="home_file_picker_prompt_description">Виберіть APK файл &lt;b&gt;%1$s&lt;/b&gt;, який ви щойно завантажили</string>
+    <string name="home_file_picker_prompt_open_apk">Відкрийте APK файл</string>
     <string name="home_recommended_version">Рекомендована версія</string>
     <string name="home_selected_version">Вибрана версія</string>
     <string name="home_select_apk_title">Вибрати APK файл</string>
@@ -100,7 +102,6 @@
     <string name="home_no_patches_for_app">Для цього застосунку немає патчів</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експертний режим</string>
-    <string name="expert_mode_subtitle_extended_format">Вибрано %1$s з %2$s</string>
     <string name="expert_mode_search">Пошук патчів</string>
     <string name="expert_mode_proceed">Перейти до патчінгу</string>
     <string name="expert_mode_disable_all">Вимкнути всі</string>
@@ -120,7 +121,7 @@
     <string name="home_dialog_wrong_package_title">Обрано неправильний пакет</string>
     <string name="home_dialog_wrong_package_description">Обраний APK файл не відповідає застосунку, який ви збиралися пропатчити</string>
     <string name="home_dialog_expected_package">Очікуваний пакет:</string>
-    <string name="home_dialog_selected_package">Вибраний пакет:</string>
+    <string name="home_dialog_selected_package">Обраний пакет:</string>
     <!-- Patch Options -->
     <string name="custom_color">Користувацький колір</string>
     <string name="hex_color">Шістнадцятковий колір</string>
@@ -143,7 +144,7 @@
     <string name="adaptive_icon_creation_failed">Не вдалося створити адаптивну іконку</string>
     <string name="adaptive_icon_folder_explanation">Виберіть де створити папку \'morphe_branding/morphe_icons\' зі згенерованими файлами іконок</string>
     <!-- Header Creator -->
-    <string name="header_creator_create">Створити власний заголовок</string>
+    <string name="header_creator_create">Створити заголовок</string>
     <string name="header_creator_instructions">Виберіть зображення для світлої та темної тем, а потім налаштуйте масштаб жестами</string>
     <string name="header_creator_light_theme">Заголовок для світлої теми</string>
     <string name="header_creator_dark_theme">Заголовок для темної теми</string>
@@ -154,9 +155,9 @@
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ви впевнені, що хочете видалити цей застосунок?</string>
     <string name="home_app_info_remove_app_warning">Це назавжди видалить:</string>
-    <string name="home_app_info_delete_item_database">Запис у базі даних</string>
-    <string name="home_app_info_delete_item_patched_apk">Патчений APK файл</string>
-    <string name="home_app_info_delete_item_original_apk">Оригінальний APK файл</string>
+    <string name="home_app_info_delete_item_database">Запис бази даних</string>
+    <string name="home_app_info_delete_item_patched_apk">Патчені APK файли</string>
+    <string name="home_app_info_delete_item_original_apk">Оригінальні APK файли</string>
     <string name="home_app_info_delete_preservation_note">Вибрані вами патчі та параметри будуть збережені для майбутнього патчінгу</string>
     <string name="home_app_info_patches_name_default">Патчі</string>
     <string name="home_app_info_patches_name_fallback">Без назви</string>
@@ -170,9 +171,9 @@
     <string name="home_app_info_install_type_system_installer">Системний інсталятор</string>
     <string name="home_app_info_patched_at">Пропатчено</string>
     <string name="home_app_info_patch_update_available">Доступне оновлення патчів</string>
-    <string name="home_app_info_patch_update_available_description">Доступна новіша версія патчів. Перепатчіть свою програму, щоб отримати останні покращення та виправлення</string>
-    <string name="home_app_info_app_deleted_warning">Застосунок було видалено за межами менеджеру</string>
-    <string name="home_app_info_app_deleted_description">Цей застосунок було видалено поза межами менеджера. Пропатчіть його знову, щоб відновити функціональність</string>
+    <string name="home_app_info_patch_update_available_description">Доступна новіша версія патчів. Перепатчіть застосунок, щоб отримати останні покращення та виправлення</string>
+    <string name="home_app_info_app_deleted_warning">Застосунок було видалено</string>
+    <string name="home_app_info_app_deleted_description">Це застосунок було видалено поза менеджером Morphe. Перепатчіть його, щоб відновити функціональність</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Режим root вимагає, щоб оригінальний APK файл був встановлений на вашому пристрої перед патчінгом</string>
     <string name="root_gmscore_excluded">Патч підтримки GmsCore виключено у режимі root</string>
@@ -202,6 +203,15 @@
     <string name="patcher_install_error_subtitle">Спробуйте видалити та встановити знову</string>
     <string name="patcher_ready_to_install_subtitle">Натисніть кнопку нижче, щоб встановити</string>
     <string name="patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
+    <string name="patcher_storage_permission_dialog_title">Не вдається отримати доступ до шляху зберігання</string>
+    <string name="patcher_storage_permission_description_api30">Одна або декілька опцій патчу вказують на шляхи, які менеджер Morphe не може прочитати. Надайте доступ до сховища та натисніть кнопку, після чого патчінг почнеться автоматично</string>
+    <string name="patcher_storage_permission_description_legacy">Одна або декілька опцій патчу вказують на шляхи, до яких немає доступу. Оновіть шляхи в опціях патчу та спробуйте знову</string>
+    <string name="patcher_storage_permission_grant">Надати доступ до сховища</string>
+    <string name="patcher_storage_permission_denied_warning">Дозвіл до сховища відхилено. Надайте дозвіл, щоб використовувати цей шлях, або перемістіть файли до приватного каталогу додатку</string>
+    <string name="patcher_storage_permission_open_settings">Відкрити налаштування сховища</string>
+    <string name="patcher_storage_badge_denied">Дозвіл відхилено</string>
+    <string name="patcher_storage_badge_missing">Не знайдено</string>
+    <string name="patcher_storage_permission_hint">Рекомендація: Перемістіть файли до /Android/data/app.morphe.manager/files/ - додаткові дозволи не потрібні</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Підготовка</string>
     <string name="patcher_step_load_patches">Завантаження патчів</string>
@@ -212,7 +222,7 @@
     <string name="patcher_step_write_patched">Запис патченого APK файлу</string>
     <string name="patcher_step_sign_apk">Підпис патченого APK файлу</string>
     <!-- Patcher Screen - Patcher Worker -->
-    <string name="patcher_notification_title">Патчінг в процесі…</string>
+    <string name="patcher_notification_title">Триває патчінг…</string>
     <string name="patcher_notification_text">Натисніть, щоб повернутися до патчера</string>
     <string name="patcher_stop_confirm_title">Зупинити патчер</string>
     <string name="patcher_stop_confirm_description">Ви впевнені, що хочете зупинити процес патчингу?</string>
@@ -229,7 +239,7 @@
     <string name="patcher_message_9">Виправляємо баги в непатченому застосунку… 🪲</string>
     <string name="patcher_message_10">Великі патчі варті очікування… ⏳</string>
     <string name="patcher_message_11">Полірування пікселів до блиску… 💎</string>
-    <string name="patcher_message_12">Будь ласка, залишайтеся на місці, поки капітан не вимкне знак «Триває патчінг»… 💺✈️</string>
+    <string name="patcher_message_12">Будь ласка, залишайтеся на місці, поки капітан не вимкне знак \"Триває патчінг\"… 💺✈️</string>
     <string name="patcher_message_13">Готуємо ваш оновлений застосунок, гарячий і свіжий… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Ввічливо ведемо переговори з байткодом… 🤝</string>
@@ -262,7 +272,7 @@
     <string name="failed_to_mount">Не вдалося змонтувати: %s</string>
     <string name="failed_to_unmount">Не вдалося демонтувати: %s</string>
     <!-- Settings -->
-    <string name="appearance">Зовнішній вигляд</string>
+    <string name="appearance">Вигляд</string>
     <string name="advanced">Розширені</string>
     <string name="system">Система</string>
     <!-- Settings - Appearance Tab - Background animation -->
@@ -284,14 +294,14 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Акцентний колір</string>
     <string name="settings_appearance_pure_black">Повністю чорний</string>
-    <string name="settings_appearance_pure_black_description">Використовуйте справжні чорні фони для OLED дисплеїв</string>
+    <string name="settings_appearance_pure_black_description">Використовувати справжній чорний фон</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Мова застосунку</string>
     <string name="settings_appearance_app_language_current">Поточна мова</string>
     <string name="settings_appearance_translations_info_title">Переклади деяких мов можуть бути відсутніми або неповними</string>
-    <string name="settings_appearance_translations_info_text">Щоб перекласти нові мови або покращити існуючі переклади, відвідайте %s&lt;</string>
+    <string name="settings_appearance_translations_info_text">Щоб перекласти нові мови або покращити наявні переклади, відвідайте %s</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
-    <string name="settings_appearance_app_icon_selector_title">Іконка додатку</string>
+    <string name="settings_appearance_app_icon_selector_title">Іконка застосунку</string>
     <string name="settings_appearance_app_icon_default">Стандартна</string>
     <string name="settings_appearance_app_icon_light_2">Небо</string>
     <string name="settings_appearance_app_icon_light_3">Захід сонця</string>
@@ -299,30 +309,55 @@
     <string name="settings_appearance_app_icon_dark_2">Порожнеча</string>
     <string name="settings_appearance_app_icon_dark_3">Індіго</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Змінити іконку застосунку?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Змінити на «%1$s» і перезапустити?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Змінити на \"%1$s\" і перезапустити?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Змінити іконку</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Оновлення</string>
     <string name="settings_advanced_updates_use_prereleases">Використовувати пре-релізи</string>
     <string name="settings_advanced_updates_use_prereleases_description">Отримувати ранній доступ до нових патчів та функцій менеджера</string>
+    <string name="settings_advanced_updates_background_notifications">Фонові сповіщення про оновлення</string>
+    <string name="settings_advanced_updates_background_notifications_description">Періодично перевіряти наявність оновлень у фоновому режимі та повідомляти про їх доступність</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Отримувати миттєві push-сповіщення про нові релізи, навіть коли додаток закрито</string>
+    <string name="notification_channel_manager_updates">Оновлення менеджера</string>
+    <string name="notification_channel_manager_updates_description">Сповіщення про нові версії менеджера Morphe</string>
+    <string name="notification_channel_bundle_updates">Оновлення джерел патчів</string>
+    <string name="notification_channel_bundle_updates_description">Сповіщення про нові версії джерел патчів</string>
+    <string name="notification_channel_fcm_updates">Попередження про оновлення</string>
+    <string name="notification_channel_fcm_updates_description">Миттєві push-сповіщення про нові випуски менеджера Morphe та патчів. Надсилаються навіть тоді, коли програма працює у фоновому режимі</string>
+    <string name="settings_advanced_update_interval">Частота перевірки</string>
+    <string name="settings_advanced_update_interval_dialog_title">Перевірка наявності оновлень</string>
+    <string name="settings_advanced_update_interval_hourly">Раз на годину</string>
+    <string name="settings_advanced_update_interval_daily">Раз на день</string>
+    <string name="settings_advanced_update_interval_weekly">Раз на тиждень</string>
+    <string name="settings_advanced_update_interval_monthly">Раз на місяць</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Частота перевірки у фоновому режимі</string>
+    <string name="settings_advanced_update_interval_battery_warning">Фонові перевірки можуть не працювати надійно на деяких пристроях. Виробники, такі як Xiaomi, Huawei, Samsung та OnePlus, часто агресивно обмежують фонові процеси, щоб зберегти заряд батареї</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Доступне оновлення менеджера Morphe</string>
+    <string name="notification_bundle_update_title">Доступні нові патчі</string>
+    <string name="notification_update_text">Версія %1$s готова до завантаження</string>
+    <string name="notification_bundle_update_text_unversioned">Натисніть, щоб відкрити менеджер Morphe та оновити</string>
+    <string name="notification_permission_dialog_title">Дозволити сповіщення</string>
+    <string name="notification_permission_dialog_description">Менеджер Morphe потребує дозволу на сповіщення, щоб повідомляти вас про доступні оновлення у фоновому режимі</string>
+    <string name="notification_post_patch_dialog_title">Бажаєте отримувати сповіщення про доступність оновлень?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Експертні налаштування</string>
     <string name="settings_advanced_expert_mode">Режим експерта</string>
-    <string name="settings_advanced_expert_mode_description">Увімкнути комплексні налаштування патчів Morphe та параметри налаштування</string>
+    <string name="settings_advanced_expert_mode_description">Увімкнути розширенні налаштування патчінгу Morphe та параметри кастомізації</string>
     <string name="settings_advanced_expert_mode_dialog_title">Увімкнути режим експерта?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності застосунку</string>
     <string name="settings_advanced_strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
-    <string name="settings_advanced_strip_unused_libs_description">Видаляє нативні бібліотеки для непідтримуваних архітектур процесора з патчених застосунків</string>
+    <string name="settings_advanced_strip_unused_libs_description">Видаляти нативні бібліотеки для непідтримуваних архітектур процесора з патчених застосунків</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
-    <string name="settings_advanced_github_pat_description">Потрібно для pull request джерел</string>
-    <string name="settings_advanced_github_pat_configured">Токен налаштований</string>
+    <string name="settings_advanced_github_pat_description">Потрібно для використання pull request як джерела</string>
+    <string name="settings_advanced_github_pat_configured">Токен налаштовано</string>
     <string name="settings_advanced_github_pat_how_to_get">Як отримати токен</string>
     <string name="settings_advanced_github_pat_dialog_title">Встановити GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Встановіть GitHub Personal Access Token, щоб мати змогу додавати Pull Requests як зовнішні джерела. Створіть PAT з ключем public_repo github.com</string>
-    <string name="settings_advanced_github_pat_export_include_label">Включити у налаштування експорту</string>
+    <string name="settings_advanced_github_pat_dialog_description">Встановіть GitHub Personal Access Token, щоб мати змогу додавати pull requests як зовнішні джерела. Створіть PAT з ключем public_repo github.com</string>
+    <string name="settings_advanced_github_pat_export_include_label">Включити в експорт налаштувань</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Додає цей PAT до експортованих налаштувань менеджера</string>
-    <string name="settings_advanced_github_pat_export_warning">Не поширюйте свій PAT. Якщо ви включаєте його в експорт налаштувань, збережіть цей файл приватним, оскільки він містить токен</string>
+    <string name="settings_advanced_github_pat_export_warning">Не поширюйте свій PAT (Personal access token). Якщо ви включаєте його в експорт налаштувань, збережіть цей файл приватним, оскільки він містить токен</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Параметри патчів</string>
     <string name="settings_advanced_patch_options_youtube_description">Тема, брендинг, заголовок та параметри Shorts</string>
@@ -400,7 +435,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">Системний інсталятор</string>
     <string name="installer_internal_description">Використовувати менеджер пакетів Android</string>
     <string name="installer_auto_saved_name">Інсталятор з рут монтуванням</string>
-    <string name="installer_auto_saved_description">Монтує патчений APK поверх встановленого застосунку (потрібен root)</string>
+    <string name="installer_auto_saved_description">Монтує патчений APK поверх встановленого застосунку</string>
     <string name="installer_shizuku_description">Тиха установка через Shizuku або Sui</string>
     <string name="installer_option_none">Без резервного варіанту</string>
     <string name="installer_none_description">Не налаштований резервний інсталятор</string>
@@ -439,12 +474,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Увімкнути процес патчінгу</string>
     <string name="settings_system_memory_limit_subtitle">Доступна пам\'ять для патчінгу</string>
     <string name="settings_system_memory_limit_warning">Низький ліміт пам’яті може спричинити збій при патчінгу великих застосунків</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB ліміт</string>
+    <string name="settings_system_process_runtime_enabled_description">%s МБ ліміт</string>
     <string name="settings_system_process_runtime_disabled_description">Натисніть для налаштування</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Імпорт та eкспорт</string>
-    <string name="settings_system_import_keystore">Імпортувати сховище ключів</string>
-    <string name="settings_system_import_keystore_description">Імпортує сховище ключів користувача</string>
+    <string name="settings_system_import_keystore">Імпорт сховища ключів</string>
+    <string name="settings_system_import_keystore_description">Імпортувати сховище ключів користувача</string>
     <string name="settings_system_import_keystore_dialog_title">Введіть облікові дані сховища ключів</string>
     <string name="settings_system_import_keystore_dialog_description">Вам потрібно буде ввести облікові дані сховища ключів, щоб імпортувати його</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Ім\'я користувача (псевдонім)</string>
@@ -453,25 +488,25 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_wrong_credentials">Невірні облікові дані сховища ключів</string>
     <string name="settings_system_import_keystore_success">Сховище ключів імпортовано</string>
     <string name="settings_system_import_keystore_failed">Не вдалося імпортувати сховище ключів</string>
-    <string name="settings_system_export_keystore">Експортувати сховище ключів</string>
-    <string name="settings_system_export_keystore_description">Експортує поточне сховище ключів</string>
+    <string name="settings_system_export_keystore">Експорт сховища ключів</string>
+    <string name="settings_system_export_keystore_description">Експортувати поточне сховище ключів</string>
     <string name="settings_system_export_keystore_unavailable">Немає доступного сховища ключів для експорту</string>
     <string name="settings_system_export_keystore_success">Сховище ключів експортовано</string>
     <string name="settings_system_show_password_field">Показати пароль</string>
     <string name="settings_system_hide_password_field">Приховати пароль</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Імпортувати налаштування менеджера</string>
-    <string name="settings_system_import_manager_settings_description">Відновлює налаштування менеджера з файлу JSON</string>
+    <string name="settings_system_import_manager_settings">Імпорт налаштувань менеджера</string>
+    <string name="settings_system_import_manager_settings_description">Відновити налаштування менеджера з файлу JSON</string>
     <string name="settings_system_import_manager_settings_fail">Не вдалося імпортувати налаштування менеджера: %s</string>
     <string name="settings_system_import_manager_settings_success">Налаштування менеджера імпортовано</string>
-    <string name="settings_system_export_manager_settings">Експортувати налаштування менеджера</string>
-    <string name="settings_system_export_manager_settings_description">Зберігає налаштування менеджера у файл JSON</string>
+    <string name="settings_system_export_manager_settings">Експорт налаштувань менеджера</string>
+    <string name="settings_system_export_manager_settings_description">Зберегти налаштування менеджера у файл JSON</string>
     <string name="settings_system_export_manager_settings_fail">Не вдалося експортувати налаштування менеджера: %s</string>
     <string name="settings_system_export_manager_settings_success">Налаштування менеджера експортовано</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Налагодження</string>
-    <string name="settings_system_export_debug_logs">Експортувати журнали налагодження</string>
-    <string name="settings_system_export_debug_logs_description">Експортує системні журнали для налагоджування</string>
+    <string name="settings_system_export_debug_logs">Експорт журналів налагодження</string>
+    <string name="settings_system_export_debug_logs_description">Зберегти системні журнали для налагоджування</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Не вдалося прочитати журнали (код виходу %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Не вдалося експортувати журнали</string>
     <string name="settings_system_export_debug_logs_export_success">Журнали експортовано</string>
@@ -494,7 +529,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_delete_confirm">Видалити оригінальний APK файл для %s? Ви не зможете перепатчити застосунок без надання нового APK файлу</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Вибрані патчі</string>
-    <string name="settings_system_patch_selections_description">Керування збереженими вибраними патчами та параметрами. Вони залишаються після видалення застосунку</string>
+    <string name="settings_system_patch_selections_description">Управління збереженими виборами та параметрами патчів. Вони зберігаються після деінсталяції застосунку</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Скинути всі вибрані патчі?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Скинути вибрані пакети?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Скинути вибір джерела?</string>
@@ -518,9 +553,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Про нас</string>
     <string name="settings_system_share_website">Поділитися вебсайтом</string>
     <string name="settings_system_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
-    <string name="settings_system_manager_description">"Morphe це експериментальний проєкт з відкритим кодом, орієнтований на сучасний та оптимізований патчінг популярних Android застосунків
+    <string name="settings_system_manager_description">"Morphe - це експериментальний проєкт із відкритим кодом, зосереджений на створенні сучасного та спрощеного механізму патчінгу популярних Android-застосунків.
 
-З відкритим кодом у своїй основі, Morphe процвітає завдяки відгукам та внескам спільноти, які стимулюють майбутні інновації"</string>
+Маючи відкритий код, Morphe розвивається завдяки відгукам і внескам спільноти, що сприяють подальшим інноваціям"</string>
     <!-- Shared strings -->
     <string name="patches">Патчі</string>
     <string name="home">Головна</string>
@@ -532,7 +567,7 @@ morphe_header_custom_dark.png
     <string name="confirm">Підтвердити</string>
     <string name="warning">Попередження</string>
     <string name="error_">Помилка</string>
-    <string name="retry">Повторити спробу</string>
+    <string name="retry">Повторити</string>
     <string name="add">Додати</string>
     <string name="close">Закрити</string>
     <string name="clear">Очистити</string>
@@ -572,17 +607,20 @@ morphe_header_custom_dark.png
     <string name="installed">Встановлено</string>
     <string name="reinstall">Встановити знову</string>
     <string name="uninstall">Деінсталювати</string>
-    <string name="uninstalled">Видалено</string>
+    <string name="uninstalled">Деінстальовано</string>
     <string name="save">Зберегти</string>
     <string name="saved">Збережено</string>
     <string name="update">Оновити</string>
+    <string name="allow">Дозволити</string>
+    <string name="details">Деталі</string>
+    <string name="hide">Приховати</string>
+    <string name="default_">За замовчуванням</string>
     <string name="installing_ellipsis">Інсталяція…</string>
     <string name="mounting_ellipsis">Монтування…</string>
     <string name="unmounting_ellipsis">Демонтування…</string>
     <string name="importing_ellipsis">Імпортування…</string>
     <string name="changelog">Переглянути списки змін</string>
-    <string name="changelog_description">Перегляньте останні зміни в цьому оновленні</string>
-    <string name="changelog_loading">Завантаження списку змін</string>
+    <string name="changelog_description">Перегляньте останні зміни цього оновлення</string>
     <string name="changelog_download_fail">Не вдалося завантажити список змін: %s</string>
     <string name="changelog_retry">Повторити</string>
     <string name="changelog_empty">Список змін відсутній</string>

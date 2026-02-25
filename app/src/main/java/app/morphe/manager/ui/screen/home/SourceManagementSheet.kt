@@ -3,10 +3,9 @@ package app.morphe.manager.ui.screen.home
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.clickable
@@ -25,7 +24,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
@@ -264,14 +262,34 @@ private fun BundleManagementCard(
     val disabledState = stringResource(R.string.disabled)
     val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
 
+    val isEnabled = bundle.enabled
+
+    val animatedColor by animateColorAsState(
+        targetValue = if (isEnabled) {
+            MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+        } else {
+            // Disabled state - use error container with low opacity
+            MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.15f)
+        },
+        label = "bundle_card_color"
+    )
+
+    val animatedBorderColor by animateColorAsState(
+        targetValue = if (!isEnabled) {
+            MaterialTheme.colorScheme.error.copy(alpha = 0.5f)
+        } else {
+            MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+        },
+        label = "bundle_card_border_color"
+    )
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         tonalElevation = 3.dp,
-        color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+        color = animatedColor,
+        border = BorderStroke(1.dp, animatedBorderColor)
     ) {
-        val isEnabled = bundle.enabled
-
         // Build content description
         val contentDesc = buildString {
             append(bundle.displayTitle)
@@ -314,7 +332,6 @@ private fun BundleManagementCard(
                 updateInfo = updateInfo,
                 expanded = expanded,
                 showChevron = !forceExpanded,
-                onRename = onRename,
                 enabled = isEnabled
             )
 
@@ -346,25 +363,14 @@ private fun BundleManagementCard(
                         icon = Icons.Outlined.Update,
                         title = stringResource(R.string.version),
                         value = bundle.version?.removePrefix("v") ?: "N/A",
-                        onClick = onVersionClick,
-                        enabled = isEnabled
+                        onClick = onVersionClick
                     )
-
-                    // Metadata section
-                    if (bundle.createdAt != null || bundle.updatedAt != null) {
-                        BundleMetaCard(
-                            createdAt = bundle.createdAt,
-                            updatedAt = bundle.updatedAt
-                        )
-                    }
 
                     // Open in browser button
                     if (bundle is RemotePatchBundle) {
                         FilledTonalButton(
                             onClick = onOpenInBrowser,
-                            enabled = isEnabled,
                             modifier = Modifier
-                                .alpha(if (isEnabled) 1f else 0.5f)
                                 .fillMaxWidth()
                                 .height(48.dp)
                                 .semantics {
@@ -397,17 +403,26 @@ private fun BundleManagementCard(
                                     stringResource(R.string.enable) + " " + bundle.displayTitle
                                 }
 
-                                ActionPillButton(
-                                    onClick = onDisable,
-                                    icon = if (bundle.enabled)
-                                        Icons.Outlined.Block
-                                    else
-                                        Icons.Outlined.CheckCircle,
-                                    contentDescription = disableEnableDesc
-                                )
+                                val disableIcon = if (bundle.enabled)
+                                    Icons.Outlined.Block
+                                else
+                                    Icons.Outlined.CheckCircle
+
+                                Crossfade(
+                                    targetState = disableIcon,
+                                    label = "disable_icon"
+                                ) { icon ->
+                                    // Disable button
+                                    ActionPillButton(
+                                        onClick = onDisable,
+                                        icon = icon,
+                                        contentDescription = disableEnableDesc
+                                    )
+                                }
                             }
 
                             if (bundle is RemotePatchBundle) {
+                                // Update button
                                 ActionPillButton(
                                     onClick = onUpdate,
                                     icon = Icons.Outlined.Refresh,
@@ -416,6 +431,14 @@ private fun BundleManagementCard(
                             }
 
                             if (!bundle.isDefault) {
+                                // Rename button
+                                ActionPillButton(
+                                    onClick = onRename,
+                                    icon = Icons.Outlined.Edit,
+                                    contentDescription = stringResource(R.string.rename) + " " + bundle.displayTitle
+                                )
+
+                                // Delete button
                                 ActionPillButton(
                                     onClick = onDelete,
                                     icon = Icons.Outlined.Delete,
@@ -440,7 +463,6 @@ private fun BundleCardHeader(
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     expanded: Boolean,
     showChevron: Boolean,
-    onRename: () -> Unit,
     enabled: Boolean = true
 ) {
     val rotation by animateFloatAsState(
@@ -462,15 +484,22 @@ private fun BundleCardHeader(
             modifier = Modifier.size(44.dp)
         )
 
-        // Title + badges
+        // Title + badges + rename button
         Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = bundle.displayTitle,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = bundle.displayTitle,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
+                )
+            }
 
             // Version
             if (showChevron) {
@@ -487,15 +516,20 @@ private fun BundleCardHeader(
 
             Spacer(Modifier.height(2.dp))
 
-            Row(
+            FlowRow(
+                modifier = Modifier.animateContentSize(),
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 // Bundle type badge
                 BundleTypeBadge(bundle)
 
                 // Disabled badge
-                if (!enabled) {
+                AnimatedVisibility(
+                    visible = !enabled,
+                    enter = fadeIn() + expandHorizontally(),
+                    exit = fadeOut() + shrinkHorizontally()
+                ) {
                     InfoBadge(
                         text = stringResource(R.string.disabled),
                         style = InfoBadgeStyle.Error,
@@ -513,17 +547,23 @@ private fun BundleCardHeader(
                         isCompact = true
                     )
                 }
-            }
-        }
 
-        // Rename button (only for non-default bundles)
-        if (!bundle.isDefault) {
-            IconButton(onClick = onRename) {
-                Icon(
-                    Icons.Outlined.Edit,
-                    contentDescription = stringResource(R.string.rename),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                // Date badge
+                bundle.updatedAt?.let { timestamp ->
+                    InfoBadge(
+                        text = getRelativeTimeString(timestamp),
+                        style = InfoBadgeStyle.Default,
+                        icon = Icons.Outlined.Schedule,
+                        isCompact = true
+                    )
+                } ?: bundle.createdAt?.let { timestamp ->
+                    InfoBadge(
+                        text = getRelativeTimeString(timestamp),
+                        style = InfoBadgeStyle.Default,
+                        icon = Icons.Outlined.CalendarToday,
+                        isCompact = true
+                    )
+                }
             }
         }
 
@@ -557,8 +597,11 @@ private fun BundleInfoCard(
             role = Role.Button
         },
         shape = RoundedCornerShape(12.dp),
-        color = if (enabled) MaterialTheme.colorScheme.secondaryContainer
-        else MaterialTheme.colorScheme.surfaceVariant,
+        color = if (enabled) {
+            MaterialTheme.colorScheme.secondaryContainer
+        } else {
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+        },
         onClick = onClick,
         enabled = enabled
     ) {
@@ -592,87 +635,22 @@ private fun BundleInfoCard(
                 }
             }
 
-            if (showChevron) {
-                Icon(
-                    Icons.Outlined.ChevronRight,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSecondaryContainer
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun BundleMetaCard(
-    modifier: Modifier = Modifier,
-    createdAt: Long? = null,
-    updatedAt: Long? = null
-) {
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant
-    ) {
-        Row(
-            modifier = Modifier.padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Added
-            createdAt?.let { timestamp ->
+            if (showChevron && enabled) {
                 Row(
-                    modifier = Modifier.weight(1f),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.CalendarToday,
+                        Icons.Outlined.TouchApp,
                         contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        modifier = Modifier.size(14.dp),
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
                     )
-                    Column {
-                        Text(
-                            text = stringResource(R.string.sources_management_date_added),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                        )
-                        Text(
-                            text = getRelativeTimeString(timestamp),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-            }
-
-            // Updated
-            updatedAt?.let { timestamp ->
-                Row(
-                    modifier = Modifier.weight(1f),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Schedule,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    Text(
+                        text = stringResource(R.string.details),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
                     )
-                    Column {
-                        Text(
-                            text = stringResource(R.string.sources_management_date_updated),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                        )
-                        Text(
-                            text = getRelativeTimeString(timestamp),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
                 }
             }
         }
@@ -701,14 +679,24 @@ fun BundleIcon(
 ) {
     val githubAvatarUrl = bundle.githubAvatarUrl
 
-    Surface(
-        modifier = modifier,
-        shape = CircleShape,
-        color = when {
+    val animatedColor by animateColorAsState(
+        targetValue = when {
             bundle.isDefault -> Color.White
             enabled -> MaterialTheme.colorScheme.primaryContainer
             else -> MaterialTheme.colorScheme.surfaceVariant
-        }
+        },
+        label = "bundle_icon_color"
+    )
+
+    val animatedAlpha by animateFloatAsState(
+        targetValue = if (enabled) 1f else 0.5f,
+        label = "bundle_icon_alpha"
+    )
+
+    Surface(
+        modifier = modifier.graphicsLayer { alpha = animatedAlpha },
+        shape = CircleShape,
+        color = animatedColor
     ) {
         when {
             bundle.isDefault -> {

@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Ještě nezáplatováno</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
     <string name="home_default_source_disabled">Morphe ovladač zdroj je vypnut. Prosím povolte ho v listu zdrojů ovladačů nebo použijte Expert mód</string>
+    <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
+    <string name="home_app_hide_message">Tato aplikace bude skryta z obrazovky. Můžete ji později obnovit pomocí tlačítka \'%1$s\' na dně seznamu.</string>
+    <string name="home_app_will_be_hidden">Tato aplikace bude skryta.</string>
+    <string name="home_app_show_hidden">Zobrazit skryté aplikace</string>
+    <string name="home_app_no_hidden">Žádné skryté aplikace</string>
+    <string name="home_app_hidden_apps_title">Skryté aplikace</string>
+    <string name="home_app_hidden_apps_hint">Klikněte na aplikaci, abyste ji zobrazili v seznamu znovu</string>
     <string name="android_11_bug_dialog_title">Chyba Androidu 11</string>
     <string name="android_11_bug_dialog_description">Oprávnění k instalaci aplikací musí být uděleno předem, abyste se vyhnuli chybě v systému Android 11, která negativně ovlivňuje uživatelský zážitek</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_management_open_in_browser">Otevřít v prohlížeči</string>
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
-    <string name="sources_management_date_added">Přidáno</string>
-    <string name="sources_management_date_updated">Upraveno</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazit název</string>
     <string name="sources_dialog_rename">Přejmenovat zdroj záplat</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Nejsou dostupné žádné aktualizace</string>
     <string name="sources_download_fail">Selhalo stahování zdrojů: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Máte původní nezáplatované APK?</string>
-    <string name="home_apk_availability_dialog_simple">Chcete-li opravit %1$s, potřebujete neopravený APK s verzí:</string>
-    <string name="home_apk_availability_dialog_expert">"Máte neopravený %1$s APK?
-
-Kompatibilní verze:"</string>
+    <string name="home_apk_availability_dialog_title">Potřebujete pomoc při hledání původního neopraveného APK?</string>
+    <string name="home_apk_availability_dialog_simple">Pro opravu &lt;b&gt;%s&lt;/b&gt; je potrben neopravený APK verzí:</string>
+    <string name="home_apk_availability_dialog_expert">Pro opravu &lt;b&gt;%s&lt;/b&gt; je potrben neopravený APK verzí:</string>
     <string name="home_apk_availability_recommended_label">Doporučené</string>
     <string name="home_apk_availability_unpatched_label">Neupravený</string>
-    <string name="home_apk_availability_yes">Ano, mám ji</string>
-    <string name="home_apk_availability_no">Ne, pomozte mi ji najít</string>
+    <string name="home_apk_availability_yes">Ano, pomozte mi najít APK</string>
+    <string name="home_apk_availability_no">Ne, už mám APK.</string>
     <string name="home_apk_use_saved_with_version">Použít uložené APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Není uloženo žádné APK. Pro patchování bude třeba vybrat soubor APK znovu.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Kompatibilní verze:"</string>
     <string name="home_download_instructions_download_button_toast">Stiskněte tlačítko stažení na webových stránkách, ne zde 😊</string>
     <string name="home_download_instructions_step3">Počkejte, než se stahování dokončí, stažené APK &lt;b&gt;NEinstalujte&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">Počkejte, než se stahování dokončí, stažené APK &lt;b&gt;poté nainstalujte&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Po dokončení stahování otevřete tuto aplikaci znovu</string>
-    <string name="home_download_instructions_step4_mount">Po instalaci původní APK otevřete tuto aplikaci znovu</string>
+    <string name="home_download_instructions_step4">Po dokončení stažení se vracíte do Morphe</string>
+    <string name="home_download_instructions_step4_mount">Po instalaci původního APK se vracíte do Morphe</string>
     <string name="home_download_instructions_continue">Pokračujte na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Vyberte stažené APK</string>
-    <string name="home_file_picker_prompt_description">Teď vyberte %1$s soubor APK, který právě stáhli.</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Otevřít APK soubor, který jsem stáhl</string>
+    <string name="home_file_picker_prompt_title">Vyberte stažený soubor APK</string>
+    <string name="home_file_picker_prompt_description">Vyberte soubor &lt;b&gt;%1$s&lt;/b&gt; APK, který právě stáhnul</string>
     <string name="home_file_picker_prompt_open_apk">Otevřít APK soubor</string>
     <string name="home_recommended_version">Doporučená verze</string>
     <string name="home_selected_version">Vybraná verze</string>
@@ -100,7 +102,6 @@ Kompatibilní verze:"</string>
     <string name="home_no_patches_for_app">Pro tuto aplikaci nejsou k dispozici žádné záplaty</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertní režim</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s z %2$s vybráno</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
@@ -171,8 +172,8 @@ Opravdu chcete pokračovat?"</string>
     <string name="home_app_info_patched_at">Zaplatěno</string>
     <string name="home_app_info_patch_update_available">Je k dispozici novější verze záplat.</string>
     <string name="home_app_info_patch_update_available_description">Je k dispozici novější verze záplaty. Repatchujte svou aplikaci, abyste získali nejnovější vylepšení a opravy.</string>
-    <string name="home_app_info_app_deleted_warning">Aplikace odinstalována mimo správce</string>
-    <string name="home_app_info_app_deleted_description">Tato aplikace byla odinstalována mimo správce. Opravte ji, abyste obnovili funkčnost.</string>
+    <string name="home_app_info_app_deleted_warning">Aplikace byla odinstalována</string>
+    <string name="home_app_info_app_deleted_description">Tuto aplikaci bylo odinstalováno mimo Morphe. Zápalte ji znovu, abyste obnovili funkčnost</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim root vyžaduje, aby před záplatováním byl na vašem zařízení nainstalován původní APK</string>
     <string name="root_gmscore_excluded">Záplata s podporou GmsCore je v root režimu vyloučena</string>
@@ -202,6 +203,15 @@ Opravdu chcete pokračovat?"</string>
     <string name="patcher_install_error_subtitle">Zkuste odinstalovat a nainstalovat znovu</string>
     <string name="patcher_ready_to_install_subtitle">Stiskněte tlačítko níže pro instalaci</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
+    <string name="patcher_storage_permission_dialog_title">Nelze přistupovat k cestě úložiště</string>
+    <string name="patcher_storage_permission_description_api30">Jeden nebo více možnosti pro patchování ukazují na cesty, které Morphe manager nemůže číst. Povolte přístup k úložišti a klepněte na tlačítko, pak se automaticky začne patchování</string>
+    <string name="patcher_storage_permission_description_legacy">Jeden nebo více možnosti pro patchování ukazují na cesty, které nelze přistupovat. Upravte cesty v možnostech pro patchování a zkuste to znovu</string>
+    <string name="patcher_storage_permission_grant">Povolte přístup k úložišti</string>
+    <string name="patcher_storage_permission_denied_warning">Oprávnění pro úložiště bylo zamítnuto. Povolte oprávnění pro použití této cesty, nebo přesuňte soubory do soukromého adresáře aplikace.</string>
+    <string name="patcher_storage_permission_open_settings">Otevřít nastavení úložiště</string>
+    <string name="patcher_storage_badge_denied">Oprávnění zamítnuto</string>
+    <string name="patcher_storage_badge_missing">Nenalezeno</string>
+    <string name="patcher_storage_permission_hint">Tip: Přesuňte soubory do /Android/data/app.morphe.manager/files/ - bez potřeby dalších oprávnění</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Příprava</string>
     <string name="patcher_step_load_patches">Načítání oprav</string>
@@ -284,7 +294,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Barva akcentu</string>
     <string name="settings_appearance_pure_black">Čistá černá</string>
-    <string name="settings_appearance_pure_black_description">Používejte pravé černé pozadí pro displeje OLED</string>
+    <string name="settings_appearance_pure_black_description">Použít čisté pozadí černou barvou</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Jazyk aplikace</string>
     <string name="settings_appearance_app_language_current">Aktuální jazyk</string>
@@ -305,6 +315,31 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_updates">Aktualizace</string>
     <string name="settings_advanced_updates_use_prereleases">Použít předběžné verze</string>
     <string name="settings_advanced_updates_use_prereleases_description">Získejte předběžný přístup k novým záplatám a funkcím Manageru</string>
+    <string name="settings_advanced_updates_background_notifications">Aktualizace pozadí</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodicky ověřujte aktualizace v pozadí a upozorněte, když jsou k dispozici.</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Přijímat okamžité notifikace pro nové vydání, dokonce i když je aplikace uzavřena</string>
+    <string name="notification_channel_manager_updates">Spravovat aktualizace</string>
+    <string name="notification_channel_manager_updates_description">Notifikace o nových verzích Morphe</string>
+    <string name="notification_channel_bundle_updates">Aktualizace zdrojů záplat</string>
+    <string name="notification_channel_bundle_updates_description">Upozornění na novou verzi zdrojového kódu</string>
+    <string name="notification_channel_fcm_updates">Aktualizovat upozornění</string>
+    <string name="notification_channel_fcm_updates_description">Okamžité tlačítka pro nové Morpheho manažer a záplatové vydání. Doručeno i když aplikace je ve fonu.</string>
+    <string name="settings_advanced_update_interval">Častota kontroly</string>
+    <string name="settings_advanced_update_interval_dialog_title">Zkontrolovat aktualizace</string>
+    <string name="settings_advanced_update_interval_hourly">Jednou za hodinu</string>
+    <string name="settings_advanced_update_interval_daily">Jednou denně</string>
+    <string name="settings_advanced_update_interval_weekly">Jednou týdenně</string>
+    <string name="settings_advanced_update_interval_monthly">Jednou měsíčně</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Častota kontroly v pozadí</string>
+    <string name="settings_advanced_update_interval_battery_warning">Kontroly v pozadí nemusí fungovat spolehlivě na některých zařízeních. Výrobci jako Xiaomi, Huawei, Samsung a OnePlus často agresivně omezují procesy v pozadí pro úsporu baterie.</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Aktualizace Morpheho manažeru k dispozici</string>
+    <string name="notification_bundle_update_title">Nové záplaty k dispozici</string>
+    <string name="notification_update_text">Verze %1$s je připravena ke stažení</string>
+    <string name="notification_bundle_update_text_unversioned">Klikněte pro otevření Morpheho manažeru a aktualizaci</string>
+    <string name="notification_permission_dialog_title">Povolit upozornění</string>
+    <string name="notification_permission_dialog_description">Morpheho manažer potřebuje povolení pro upozornění, abychom vás informovali o dostupných aktualizacích v pozadí</string>
+    <string name="notification_post_patch_dialog_title">Chcete být upozorněni, když budou k dispozici aktualizace?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
@@ -319,7 +354,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_github_pat_configured">Token nakonfigurován</string>
     <string name="settings_advanced_github_pat_how_to_get">Jak získat token</string>
     <string name="settings_advanced_github_pat_dialog_title">Nastavit GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Nastavte GitHub Personal Access Token pro přidávání Pull Requestů jako externí zdroje. Vytvořte PAT s rozsáhlým přístupem public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Nastavte GitHub Personal Access Token, abyste mohli přidávat žádosti jako externí zdroje. Vytvořte PAT s rozsahem public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Zahrnout do nastavení vývozu</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Přidá tento PAT do exportovaných nastavení správce</string>
     <string name="settings_advanced_github_pat_export_warning">Nezvejte svůj PAT. Pokud ho zahrnete do nastavení vývozu, držte tuto soubor soukromý, protože obsahuje token</string>
@@ -400,7 +435,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_internal_name">Systémový instalátor</string>
     <string name="installer_internal_description">Použít instalátor balíčků Android</string>
     <string name="installer_auto_saved_name">Instalátor s kořenovým připojením</string>
-    <string name="installer_auto_saved_description">Zamontuje záplatovaný soubor APK nad instalovanou aplikací (potřebné kořenové právo).</string>
+    <string name="installer_auto_saved_description">Nainstaluje upravený APK nad instalovanou aplikací</string>
     <string name="installer_shizuku_description">Instalujte tichou pomocí Shizuku nebo Sui</string>
     <string name="installer_option_none">Žádný záložní</string>
     <string name="installer_none_description">Není nakonfigurován žádný záložní instalátor</string>
@@ -471,7 +506,7 @@ Rozměry obrázků musí být následující:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Ladění</string>
     <string name="settings_system_export_debug_logs">Exportovat ladicí protokoly</string>
-    <string name="settings_system_export_debug_logs_description">Exportovat systémové protokoly pro ladění</string>
+    <string name="settings_system_export_debug_logs_description">Uložit systémové protokoly pro řešení potíží</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Selhání čtení protokolu (kód ukončení %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nepodařilo se exportovat protokoly</string>
     <string name="settings_system_export_debug_logs_export_success">Protokoly exportovány</string>
@@ -576,13 +611,16 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="save">Uložit</string>
     <string name="saved">Uloženo</string>
     <string name="update">Aktualizovat</string>
+    <string name="allow">Povolit</string>
+    <string name="details">Detaily</string>
+    <string name="hide">Skrýt</string>
+    <string name="default_">Výchozí</string>
     <string name="installing_ellipsis">Instaluje se…</string>
     <string name="mounting_ellipsis">Připojování…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>
     <string name="importing_ellipsis">Importování…</string>
     <string name="changelog">Zobrazit poznámky k vydání</string>
     <string name="changelog_description">Zjistěte nejaktuálnější změny v této aktualizaci</string>
-    <string name="changelog_loading">Načítání poznámek k vydání</string>
     <string name="changelog_download_fail">Selhání stažení poznámek k vydání: %s</string>
     <string name="changelog_retry">Zkuste znovu</string>
     <string name="changelog_empty">Nejsou dostupné žádné záznamy změn</string>

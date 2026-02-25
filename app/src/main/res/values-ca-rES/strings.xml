@@ -27,13 +27,8 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_open_in_browser">Obrir al navegador</string>
     <string name="sources_management_failed_to_open_url">Error en obrir l\'URL</string>
-    <string name="sources_management_date_added">Afegit</string>
-    <string name="sources_management_date_updated">Actualitzat</string>
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Tens l\'APK original sense pedaços?</string>
-    <string name="home_apk_availability_yes">Sí, la tinc</string>
-    <string name="home_apk_availability_no">No, ajuda\'m a trobar-la</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarrega l\'APK original</string>
     <string name="home_download_instructions_steps_title">Instruccions:</string>
@@ -42,7 +37,6 @@
     <string name="home_download_instructions_download_button_toast">Premeu \'descarrega\' al lloc web, i no aquí 😊</string>
     <string name="home_download_instructions_step3">Espereu que la descàrrega s\'acabi, i &lt;b&gt;no instal·leu&lt;/b&gt; l\'APK</string>
     <string name="home_download_instructions_step3_mount">Espereu que la descàrrega s\'acabi, i llavors&lt;b&gt;instal·leu l\'APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Després de finalitzar la descàrrega, obriu aquesta aplicació de nou</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -68,6 +62,7 @@
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->

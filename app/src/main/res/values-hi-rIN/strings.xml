@@ -5,6 +5,12 @@
     <string name="home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
     <string name="home_default_source_disabled">मorphe पैच स्रोत अक्षम है। पैच स्रोत शीट में या एक्सपर्ट मोड का उपयोग करके इसे सक्रिय करें</string>
+    <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
+    <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
+    <string name="home_app_show_hidden">छिपे हुए ऐप दिखाएं</string>
+    <string name="home_app_no_hidden">कोई छिपा ऐप नहीं</string>
+    <string name="home_app_hidden_apps_title">छिपे हुए ऐप्स</string>
+    <string name="home_app_hidden_apps_hint">टैप करें किसी ऐप पर उसे सूची में दिखाने के लिए</string>
     <string name="android_11_bug_dialog_title">एंड्रॉइड 11 बग</string>
     <string name="android_11_bug_dialog_description">एंड्रॉइड 11 सिस्टम में एक बग से बचने के लिए ऐप इंस्टॉलेशन की अनुमति समय से पहले दी जानी चाहिए जो उपयोगकर्ता अनुभव को नकारात्मक रूप से प्रभावित करेगी।</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +48,6 @@
     <string name="sources_management_title">पैच स्रोत</string>
     <string name="sources_management_open_in_browser">खोल में खोल करना</string>
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
-    <string name="sources_management_date_added">जोड़ा गया</string>
-    <string name="sources_management_date_updated">अपडेटेड </string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">नाम दर्जा करें</string>
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
@@ -65,15 +69,13 @@
     <string name="sources_update_unavailable">अपडेट उपलब्ध नहीं है</string>
     <string name="sources_download_fail">स्रोत डाउनलोड करने में विफल हो गया: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">क्या आपके पास ओरिजिनल अनपैच्ड APK है?</string>
-    <string name="home_apk_availability_dialog_simple">पैटच %1$s के लिए, आपको एक अपटच्ड एपीके के साथ संस्करण आवश्यक है:</string>
-    <string name="home_apk_availability_dialog_expert">"क्या आपके पास एक अपटच्ड %1$s एपीके है?
-
-संगत संस्करण:"</string>
+    <string name="home_apk_availability_dialog_title">अपनी सहायता के लिए मूल अप्रतिबंधित एपीएक्सी के लिए खोजें?</string>
+    <string name="home_apk_availability_dialog_simple">पैच करने के लिए &lt;b&gt;%s&lt;/b&gt;, अपैच्ड एपीएक्सी संस्करण की आवश्यकता है:</string>
+    <string name="home_apk_availability_dialog_expert">पैच करने के लिए &lt;b&gt;%s&lt;/b&gt;, अपatched एपीके की आवश्यकता है:</string>
     <string name="home_apk_availability_recommended_label">सुझाया गया</string>
     <string name="home_apk_availability_unpatched_label">अपडेट किए बिना</string>
-    <string name="home_apk_availability_yes">हां, मेरे पास है</string>
-    <string name="home_apk_availability_no">नहीं, इसे ढूंढने में मेरी मदद करो</string>
+    <string name="home_apk_availability_yes">हाँ, मुझे APK ढूंढने में मदद करें</string>
+    <string name="home_apk_availability_no">नहीं, मेरे पास पहले से ही एक एपीके है</string>
     <string name="home_apk_use_saved_with_version">प्रतिलिपि APK (v%s) का उपयोग करें</string>
     <string name="home_app_info_no_saved_apk">कोई प्रतिलिपि APK नहीं है। पट्च करना पुनः APK फ़ाइल का चयन करना आवश्यक होगा</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,12 +87,11 @@
     <string name="home_download_instructions_step3">डाउनलोड पूरा होने का इंतज़ार करें और APK को &lt;b&gt;इंस्टाल न करें&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">डाउनलोड पूरा होने का इंतज़ार करें. इसके बाद,  &lt;b&gt;APK को इंस्टाल करें&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">डाउनलोड पूरा हो जाने के बाद, इस ऐप्लिकेशन को दोबारा खोलें</string>
-    <string name="home_download_instructions_step4_mount">ओरिजनल APK को इंस्टॉल करने के बाद, इस ऐप्लिकेशन को दोबारा खोलें</string>
+    <string name="home_download_instructions_step4_mount">अपने APK को इंस्टॉल करने के बाद, वापस मॉर्फ पर जाएं</string>
     <string name="home_download_instructions_continue">APKMirror.com पर जाएं</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">डाउनलोड किए गए APK को चुनें</string>
-    <string name="home_file_picker_prompt_description">अब, डाउनलोड की गई %1$s APK फ़ाइल चुनें.</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">मैंने जो APK फ़ाइल डाउनलोड की है उसे खोलें</string>
+    <string name="home_file_picker_prompt_title">चयनित डाउनलोड एपीके</string>
+    <string name="home_file_picker_prompt_description">अपना डाउनलोड की गई &lt;b&gt;b>%1$s&lt;b&gt;/b> APK फ़ाइल चुनें</string>
     <string name="home_file_picker_prompt_open_apk">APK फ़ाइल खोलें</string>
     <string name="home_recommended_version">सुझाई गई संस्करण</string>
     <string name="home_selected_version">चयन किया गया संस्करण</string>
@@ -100,9 +101,8 @@
     <string name="home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">एक्सपर्ट मोड</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s में से %2$s चुना गया</string>
     <string name="expert_mode_search">पैच खोजें</string>
-    <string name="expert_mode_proceed">पैचिंग के लिए आगे जाएं</string>
+    <string name="expert_mode_proceed">पैचिंग के लिए आगे बढ़ें</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
@@ -171,8 +171,8 @@
     <string name="home_app_info_patched_at">पैच किया गया</string>
     <string name="home_app_info_patch_update_available">पैच अपडेट उपलब्ध है</string>
     <string name="home_app_info_patch_update_available_description">पथचों की नई संस्करण उपलब्ध है। अपने एप्लिकेशन को पुनः पथच करें नई सुधार और त्रुटि प्राप्त करने के लिए।</string>
-    <string name="home_app_info_app_deleted_warning">एप्लिकेशन प्रबंधक से बाहर हटाई गई थी</string>
-    <string name="home_app_info_app_deleted_description">यह एप्लिकेशन प्रबंधक से बाहर हटाई गई थी। इसकी कार्यक्षमता को पुनः स्थापित करने के लिए पुनः पटच करें</string>
+    <string name="home_app_info_app_deleted_warning">एप्लिकेशन उन्मोदन किया गया</string>
+    <string name="home_app_info_app_deleted_description">इस ऐप को बाहर से उन्मोदन किया गया था। मॉर्फी में पुनः स्थापित करें कार्यक्षमता पुनः प्राप्त करने के लिए</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोड के लिए, पैचिंग शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
     <string name="root_pre_patch_installer_title">स्थापना विधि का चयन करें</string>
@@ -201,6 +201,15 @@
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
+    <string name="patcher_storage_permission_dialog_title">स्तोरेज पथ तक पहुंच नहीं हो सकती है</string>
+    <string name="patcher_storage_permission_description_api30">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो मॉर्फ़ मैनेजर पढ़ सकता है नहीं। स्टोरेज एक्सेस प्रदान करें और बटन पर टैप करें तो पैचिंग स्वचालित रूप से शुरू हो जाएगी</string>
+    <string name="patcher_storage_permission_description_legacy">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो पहुंच नहीं हो सकती है। पैच ऑप्शन में पथ्स को अद्यतन करें और पुन: प्रयास करें</string>
+    <string name="patcher_storage_permission_grant">स्टोरेज अनुमति प्रदान करें</string>
+    <string name="patcher_storage_permission_denied_warning">स्टोरेज पर्मिशन को नकारा गया। इस पथ का उपयोग करने के लिए पर्मिशन देने या फ़ाइलें ऐप की प्राइवेट डायरेक्टरी में स्थानांतरित करें।</string>
+    <string name="patcher_storage_permission_open_settings">स्टोरेज सेटिंग्स खोलें</string>
+    <string name="patcher_storage_badge_denied">पर्मिशन नकारा गया</string>
+    <string name="patcher_storage_badge_missing">नहीं मिला</string>
+    <string name="patcher_storage_permission_hint">टिप: फ़ाइलें /Android/data/app.morphe.manager/files/ में स्थानांतरित करें - अतिरिक्त पर्मिशन की आवश्यकता नहीं है</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">तैयार कर रहे हैं...</string>
     <string name="patcher_step_load_patches">पैच लोड हो रहे हैं</string>
@@ -208,6 +217,7 @@
     <string name="patcher_step_unpack">APK फाइल पढ़ें</string>
     <string name="patcher_step_group_patching">पैचिंग</string>
     <string name="patcher_step_group_saving">सेव हो रहा है</string>
+    <string name="patcher_step_write_patched">पैच्ड एपीके फाइल लिखना</string>
     <string name="patcher_step_sign_apk">Signing patched APK file</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in progress…</string>
@@ -239,6 +249,7 @@
     <string name="patcher_message_18">Encouraging the app to accept its new, better self… 🌱</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">आपकी ऐप को एक बुखार है, और इसके लिए केवल एक मेडिकल रेफरेंस है... 🩺🔔</string>
+    <string name="patcher_message_20">अनावश्यक को हटाया जा रहा है। कृपया प्रतीक्षा करें… 🗑️</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Applying patches</string>
     <string name="failed_to_execute_patch">Failed to execute %s</string>
@@ -250,6 +261,7 @@
     <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
     <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
     <string name="install_timeout_message">इंस्टॉलेशन पूर्ण नहीं हुई. सिस्टम इंस्टॉलर डायलॉग को जाँचें और पुन: प्रयास करें।</string>
+    <string name="save_apk_success">एपीके सहेजा गया</string>
     <string name="saved_app_launch_unavailable">ऐप को खोलने से पहले इंस्टॉल करें।</string>
     <string name="package_name">Package name</string>
     <!-- Settings -->
@@ -275,7 +287,7 @@
     <string name="settings_appearance_dynamic">मैटेरियल यू</string>
     <string name="settings_appearance_accent_color">अक्सेंट रंग</string>
     <string name="settings_appearance_pure_black">शुद्ध काला</string>
-    <string name="settings_appearance_pure_black_description">ओएलईडी डिस्प्ले के लिए सही काला बैकग्राउंड उपयोग करें।</string>
+    <string name="settings_appearance_pure_black_description">सचमुच काले पृष्ठभूमि का उपयोग करें</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">एप्लिकेशन भाषा</string>
     <string name="settings_appearance_app_language_current">वर्तमान भाषा</string>
@@ -296,6 +308,31 @@
     <string name="settings_advanced_updates">अपडेट</string>
     <string name="settings_advanced_updates_use_prereleases">प्री-रीलिज संस्करण उपयोग करें</string>
     <string name="settings_advanced_updates_use_prereleases_description">नए पैच और मैनेजर सुविधाओं को जल्द ही मिलेंगी</string>
+    <string name="settings_advanced_updates_background_notifications">रीलेटेड अपडेट नोटिफिकेशन्स</string>
+    <string name="settings_advanced_updates_background_notifications_description">बैकग्राउंड में अद्यतन उपलब्ध होने पर सूचित करें।</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">नई रिलीज़ के लिए इमीडिएट पुश नोटिफिकेशन प्राप्त करें, जब एप्प क्लोज हो</string>
+    <string name="notification_channel_manager_updates">अपडेट मैनेजर</string>
+    <string name="notification_channel_manager_updates_description">नई मॉर्फ मैनेजर संस्करणों के बारे में नोटिफिकेशन</string>
+    <string name="notification_channel_bundle_updates">पैच स्रोत अपडेट</string>
+    <string name="notification_channel_bundle_updates_description">नोटिफिकेशन नई पैच स्रोत संस्करणों के बारे में</string>
+    <string name="notification_channel_fcm_updates">अपडेट करें</string>
+    <string name="notification_channel_fcm_updates_description">नई मॉर्फ़ मैनेजर और पैच रिलीज के लिए तत्काल पुश नोटिफिकेशन। ऐप बैकग्राउंड में भी डिलीवर किए जाते हैं</string>
+    <string name="settings_advanced_update_interval">अपडेट दर देखें</string>
+    <string name="settings_advanced_update_interval_dialog_title">अपडेटों के लिए देखें</string>
+    <string name="settings_advanced_update_interval_hourly">एक घंटे में एक बार</string>
+    <string name="settings_advanced_update_interval_daily">एक दिन में एक बार</string>
+    <string name="settings_advanced_update_interval_weekly">एक सप्ताह में एक बार</string>
+    <string name="settings_advanced_update_interval_monthly">एक महीने में एक बार</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">बैकग्राउंड अपडेट दर</string>
+    <string name="settings_advanced_update_interval_battery_warning">कुछ डिवाइसों पर बैकग्राउंड चेकز कोष्ठक में काम नहीं करना चाहिए। बटरी बचाने के लिए मैन्युफैक्चरर जैसे कि एक्सियाومی, ह्वाईवे, सैमसंग, और वनप्लस बैकग्राउंड प्रोसेसेज को अग्रेषित रूप से प्रतिबंधित करते हैं</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">मॉर्फ़ मैनेजर अपडेट उपलब्ध है</string>
+    <string name="notification_bundle_update_title">नई पैच उपलब्ध हैं</string>
+    <string name="notification_update_text">वर्जन %1$s डाउनलोड के लिए तैयार है</string>
+    <string name="notification_bundle_update_text_unversioned">मॉर्फ़ मैनेजर खोलें और अपडेट करें</string>
+    <string name="notification_permission_dialog_title">नोटिफिकेशन अनुमति दें</string>
+    <string name="notification_permission_dialog_description">मॉर्फ़ मैनेजर बैकग्राउंड में अपडेट उपलब्ध होने पर नोटिफिकेशन अनुमति की आवश्यकता होती है ताकि आपको सूचित किया जा सके</string>
+    <string name="notification_post_patch_dialog_title">अपडेट उपलब्ध होने पर सूचित किया जाना चाहेगा?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
@@ -310,7 +347,7 @@
     <string name="settings_advanced_github_pat_configured">टोकन विन्यासित</string>
     <string name="settings_advanced_github_pat_how_to_get">GitHub पर्सनल एक्सेस टोकन कैसे प्राप्त करें</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub पर्सनल एक्सेस टोकन सेट करें</string>
-    <string name="settings_advanced_github_pat_dialog_description">GitHub पर्सनल एक्सेस टोकन सेट करें ताकि आप बाहरी स्रोतों के रूप में पुल रिक्वेस्ट जोड़ सकें. public_repo स्कोप के साथ एक PAT बनाएं github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">GitHub के लिए एक व्यक्तिगत 액ेस टोकन सेट करें ताकि आप बाहरी स्रोतों के रूप में पुल रिक्वेस्ट जोड़ सकें। github.com पर सार्वजनिक_रेपो स्कोप के साथ एक PAT बनाएं</string>
     <string name="settings_advanced_github_pat_export_include_label">सेटिंगز एक्सपोर्ट में शामिल करें</string>
     <string name="settings_advanced_github_pat_export_include_supporting">यह PAT को मैनेजर सेटिंग्ज में जोड़ता है</string>
     <string name="settings_advanced_github_pat_export_warning">आपका PAT को न शेयर करें। अगर आप इसे सेटिंग्ज एक्सपोर्ट में शामिल करते हैं, तो उस फाइल को निजी रखें क्योंकि इसमें टोकन है</string>
@@ -391,7 +428,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">सिस्टम इन्स्टॉलर</string>
     <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का इस्तमाल करें</string>
     <string name="installer_auto_saved_name">रूट्ड माउंट इंस्टॉलर</string>
-    <string name="installer_auto_saved_description">पथचित APK को स्थापित एप्लिकेशन (रूट आवश्यक) पर माउंट करता है।</string>
+    <string name="installer_auto_saved_description">संस्थापित एप्लिकेशन पर पथचिह्नित एपीके को माउंट करता है</string>
     <string name="installer_shizuku_description">शिज़ुकू या साई को उपयोग करके चुपचाप इंस्टॉल करें</string>
     <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
     <string name="installer_status_requires_root">Requires root access</string>
@@ -461,7 +498,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">डिबग</string>
     <string name="settings_system_export_debug_logs">डिबग लॉग्स एक्सपोर्ट करें</string>
-    <string name="settings_system_export_debug_logs_description">ट्रबलशूटिंग के लिए सिस्टम लॉग्स एक्सपोर्ट करें</string>
+    <string name="settings_system_export_debug_logs_description">त्रुटि निवारण के लिए सिस्टम लॉग सहेजें</string>
     <string name="settings_system_export_debug_logs_export_read_failed">लॉग पढ़ने में विफल रहा (अनुक्रमणिका %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">लॉग्स एक्सपोर्ट करने में विफल</string>
     <string name="settings_system_export_debug_logs_export_success">लॉग्स एक्सपोर्ट किए गए</string>
@@ -566,10 +603,15 @@ morphe_header_custom_dark.png
     <string name="save">सेव करें</string>
     <string name="saved">सहेजा गया</string>
     <string name="update">अपडेट</string>
+    <string name="allow">अनुमति दें</string>
+    <string name="details">विवरण</string>
+    <string name="hide">छुपायें</string>
+    <string name="default_">डिफ़ॉल्ट</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>
     <string name="mounting_ellipsis">माउंटिंग…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>
     <string name="importing_ellipsis">आयम…</string>
+    <string name="changelog">चंगेलॉग्स देखें</string>
     <string name="changelog_description">इस अपडेट में नवीनतम बदलाव देखें</string>
     <string name="changelog_retry">पुनः प्रयास करें</string>
     <string name="changelog_empty">कोई चेंजलॉग उपलब्ध नहीं है</string>
@@ -577,6 +619,8 @@ morphe_header_custom_dark.png
     <string name="update_available">An update is available</string>
     <string name="ready_to_install_update">Ready to install update</string>
     <string name="update_completed">अपडेट इंस्टॉल हो गया</string>
+    <string name="installing_manager_update">अपडेट इंस्टॉल हो रहा है…</string>
+    <string name="downloading_manager_update">अपडेट डाउनलोड हो रहा है…</string>
     <string name="download_confirmation_metered">"आप मापित कनेक्शन पर हैं, और आपके सेवा प्रदाता से डेटा चार्ज लागू हो सकते हैं.
 
 क्या आप अभी भी आगे बढ़ना चाहते हैं?"</string>

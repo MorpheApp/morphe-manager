@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
@@ -256,7 +257,8 @@ fun BundleDeleteConfirmDialog(
                 bundle.displayTitle
             ),
             style = MaterialTheme.typography.bodyLarge,
-            color = secondaryColor
+            color = secondaryColor,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -296,12 +298,14 @@ fun RenameBundleDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
                 text = stringResource(R.string.sources_dialog_rename),
-                style = MaterialTheme.typography.bodyMedium,
-                color = secondaryColor
+                style = MaterialTheme.typography.bodyLarge,
+                color = secondaryColor,
+                textAlign = TextAlign.Center
             )
 
             MorpheDialogTextField(
@@ -441,8 +445,8 @@ fun BundlePatchesDialog(
                     }
                 }
 
-                // Patches list
-                items(patches) { patch ->
+                // Patches list sorted alphabetically
+                items(patches.sortedBy { it.name }) { patch ->
                     var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
                         mutableStateOf(false)
                     }
@@ -564,7 +568,7 @@ private fun PatchItemCard(
                 ) {
                     patch.compatiblePackages.forEach { compatiblePackage ->
                         val packageName = compatiblePackage.packageName
-                        val versions = compatiblePackage.versions.orEmpty().reversed()
+                        val versions = compatiblePackage.versions.orEmpty()
 
                         FlowRow(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -683,23 +687,59 @@ fun BundleChangelogDialog(
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = null,
+        title = when (state) {
+            is BundleChangelogState.Success -> null
+            is BundleChangelogState.Error -> stringResource(R.string.changelog)
+            BundleChangelogState.Loading -> stringResource(R.string.changelog)
+        },
         footer = {
-            MorpheDialogButton(
-                text = stringResource(android.R.string.ok),
-                onClick = onDismissRequest,
-                modifier = Modifier.fillMaxWidth()
-            )
+            when (val current = state) {
+                is BundleChangelogState.Success -> {
+                    MorpheDialogButtonColumn {
+                        // Show changelog button
+                        ChangelogButton(
+                            pageUrl = current.asset.pageUrl,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        MorpheDialogButton(
+                            text = stringResource(android.R.string.ok),
+                            onClick = onDismissRequest,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+                is BundleChangelogState.Error -> {
+                    MorpheDialogButtonColumn {
+                        MorpheDialogButton(
+                            text = stringResource(R.string.changelog_retry),
+                            onClick = {
+                                // Trigger reload
+                                state = BundleChangelogState.Loading
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        MorpheDialogButton(
+                            text = stringResource(android.R.string.ok),
+                            onClick = onDismissRequest,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+                BundleChangelogState.Loading -> {
+                    MorpheDialogButton(
+                        text = stringResource(android.R.string.ok),
+                        onClick = onDismissRequest,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
         }
     ) {
         when (val current = state) {
             BundleChangelogState.Loading -> ChangelogSectionLoading()
             is BundleChangelogState.Error -> BundleChangelogError(
-                error = current.throwable,
-                onDismissRequest = onDismissRequest,
-                onRetry = {
-                    // Reload on retry
-                }
+                error = current.throwable
             )
             is BundleChangelogState.Success -> BundleChangelogContent(
                 asset = current.asset
@@ -710,9 +750,7 @@ fun BundleChangelogDialog(
 
 @Composable
 private fun BundleChangelogError(
-    error: Throwable,
-    onDismissRequest: () -> Unit,
-    onRetry: () -> Unit
+    error: Throwable
 ) {
     Box(
         modifier = Modifier
@@ -741,31 +779,14 @@ private fun BundleChangelogError(
             }
 
             // Error details
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = stringResource(
-                        R.string.changelog_download_fail,
-                        error.simpleMessage().orEmpty()
-                    ),
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = LocalDialogTextColor.current
-                )
-                MorpheDialogButton(
-                    text = stringResource(R.string.changelog_retry),
-                    onClick = onRetry,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            // Dismiss button
-            MorpheDialogButton(
-                text = stringResource(android.R.string.ok),
-                onClick = onDismissRequest,
-                modifier = Modifier.fillMaxWidth()
+            Text(
+                text = stringResource(
+                    R.string.changelog_download_fail,
+                    error.simpleMessage().orEmpty()
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                color = LocalDialogTextColor.current
             )
         }
     }

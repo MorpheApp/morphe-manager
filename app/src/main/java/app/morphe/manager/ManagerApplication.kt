@@ -12,8 +12,13 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.tag
+import app.morphe.manager.worker.UpdateCheckWorker
+import app.morphe.manager.util.syncFcmTopics
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import coil.Coil
 import coil.ImageLoader
 import com.topjohnwu.superuser.Shell
@@ -36,6 +41,7 @@ class ManagerApplication : Application() {
     private val prefs: PreferencesManager by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val fs: Filesystem by inject()
+    private val updateNotificationManager: UpdateNotificationManager by inject()
 
     override fun onCreate() {
         super.onCreate()
@@ -83,14 +89,39 @@ class ManagerApplication : Application() {
                 .setFlags(Shell.FLAG_MOUNT_MASTER)
         )
 
-        // Preload preferences + initialize repositories
+        // Create notification channels before any notification can be posted (required on API 26+)
+        updateNotificationManager.createNotificationChannels()
+
+        // Preload preferences, apply language, and kick off background worker if enabled
         scope.launch {
             prefs.preload()
+
             val storedLanguage = prefs.appLanguage.get().ifBlank { "system" }
             if (storedLanguage != prefs.appLanguage.get()) {
                 prefs.appLanguage.update(storedLanguage)
             }
             applyAppLanguage(storedLanguage)
+
+            // Schedule/cancel WorkManager fallback AND sync FCM topic subscriptions.
+            // FCM is the primary delivery path (bypasses Doze); WorkManager is the fallback.
+            // syncFcmTopics() ensures the device is subscribed to exactly one of:
+            //   - "morphe_updates"     (stable)     when prereleases are OFF
+            //   - "morphe_updates_dev" (prerelease) when prereleases are ON
+            // or to neither when background notifications are disabled.
+            val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
+            val usePrereleases = prefs.useManagerPrereleases.get()
+
+            // On GMS devices FCM is the primary delivery channel - WorkManager is not needed.
+            // Cancel any previously scheduled jobs on GMS devices.
+            val hasGms = GoogleApiAvailability.getInstance()
+                .isGooglePlayServicesAvailable(this@ManagerApplication) == ConnectionResult.SUCCESS
+
+            if (notificationsEnabled && !hasGms) {
+                UpdateCheckWorker.schedule(this@ManagerApplication, prefs.updateCheckInterval.get())
+            } else {
+                UpdateCheckWorker.cancel(this@ManagerApplication)
+            }
+            syncFcmTopics(notificationsEnabled = notificationsEnabled, usePrereleases = usePrereleases)
         }
 
         scope.launch(Dispatchers.Default) {

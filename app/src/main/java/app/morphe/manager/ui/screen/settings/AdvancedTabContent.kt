@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings
 
 import androidx.compose.animation.Crossfade
@@ -21,6 +26,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.settings.advanced.GitHubPatSettingsItem
 import app.morphe.manager.ui.screen.settings.advanced.PatchOptionsSection
+import app.morphe.manager.ui.screen.settings.advanced.UpdatesSettingsItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
@@ -65,9 +71,7 @@ fun AdvancedTabContent(
         ExpertModeConfirmationDialog(
             onDismiss = { showExpertModeDialog = false },
             onConfirm = {
-                scope.launch {
-                    prefs.useExpertMode.update(true)
-                }
+                scope.launch { prefs.useExpertMode.update(true) }
                 showExpertModeDialog = false
             }
         )
@@ -81,14 +85,15 @@ fun AdvancedTabContent(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Updates
+        // Updates section
         SectionTitle(
             text = stringResource(R.string.settings_advanced_updates),
             icon = Icons.Outlined.Update
         )
 
-        RichSettingsItem(
-            onClick = {
+        UpdatesSettingsItem(
+            usePrereleases = usePrereleases.value,
+            onPrereleasesToggle = {
                 val newValue = !usePrereleases.value
                 scope.launch {
                     prefs.usePatchesPrereleases.update(newValue)
@@ -99,21 +104,7 @@ fun AdvancedTabContent(
                     patchOptionsViewModel.refresh()
                 }
             },
-            showBorder = true,
-            leadingContent = {
-                MorpheIcon(icon = Icons.Outlined.Science)
-            },
-            title = stringResource(R.string.settings_advanced_updates_use_prereleases),
-            subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
-            trailingContent = {
-                Switch(
-                    checked = usePrereleases.value,
-                    onCheckedChange = null,
-                    modifier = Modifier.semantics {
-                        stateDescription = if (usePrereleases.value) enabledState else disabledState
-                    }
-                )
-            }
+            prefs = prefs
         )
 
         // Expert settings section
@@ -129,9 +120,7 @@ fun AdvancedTabContent(
                     showExpertModeDialog = true
                 } else {
                     // Disable without confirmation
-                    scope.launch {
-                        prefs.useExpertMode.update(false)
-                    }
+                    scope.launch { prefs.useExpertMode.update(false) }
                 }
             },
             showBorder = true,
@@ -194,7 +183,7 @@ fun AdvancedTabContent(
                         }
                     )
 
-                    // Expert mode notice
+                    // Expert mode notice shown once after enabling
                     if (showExpertModeNotice) {
                         InfoBadge(
                             icon = Icons.Outlined.Info,

@@ -3,30 +3,30 @@
     <plurals name="patch_count">
         <item quantity="one">%s paiste</item>
         <item quantity="two">%s paistí</item>
-        <item quantity="few">%s paiste</item>
-        <item quantity="many">%s paiste</item>
-        <item quantity="other">%s paiste</item>
+        <item quantity="few">%s paistí</item>
+        <item quantity="many">%s paistí</item>
+        <item quantity="other">%s paistí</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s roghanna paiste</item>
+        <item quantity="one">%s rogha paiste</item>
         <item quantity="two">%s roghanna paiste</item>
         <item quantity="few">%s roghanna paiste</item>
         <item quantity="many">%s roghanna paiste</item>
         <item quantity="other">%s roghanna paiste</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%s foinsí paiste</item>
-        <item quantity="two">%s foinsí paiste</item>
-        <item quantity="few">%s foinsí paiste</item>
-        <item quantity="many">%s foinsí paiste</item>
-        <item quantity="other">%s foinsí paiste</item>
+        <item quantity="one">%s foinse</item>
+        <item quantity="two">%s foinsí</item>
+        <item quantity="few">%s foinsí</item>
+        <item quantity="many">%s foinsí</item>
+        <item quantity="other">%s foinsí</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%s aon phacáiste</item>
-        <item quantity="two">%s aon phacáiste</item>
-        <item quantity="few">%s aon phacáiste</item>
-        <item quantity="many">%s aon phacáiste</item>
-        <item quantity="other">%s aon phacáiste</item>
+        <item quantity="one">%s pacáiste</item>
+        <item quantity="two">%s pacáistí</item>
+        <item quantity="few">%s pacáistí</item>
+        <item quantity="many">%s pacáistí</item>
+        <item quantity="other">%s pacáistí</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Cuir %s paiste i gcrích</item>
@@ -37,27 +37,27 @@
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s comhad APK</item>
-        <item quantity="two">%s comhad APK</item>
-        <item quantity="few">%s comhad APK</item>
-        <item quantity="many">%s comhad APK</item>
-        <item quantity="other">%s comhad APK</item>
+        <item quantity="two">%s comhaid APK</item>
+        <item quantity="few">%s comhaid APK</item>
+        <item quantity="many">%s comhaid APK</item>
+        <item quantity="other">%s comhaid APK</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Toghadh %s seachadán seachadán atá bréagach as teagasc</item>
-        <item quantity="two">Toghadh %s seachadán seachadán atá bréagach as teagasc</item>
-        <item quantity="few">Toghadh %s seachadán seachadán atá bréagach as teagasc</item>
-        <item quantity="many">Toghadh %s seachadán seachadán atá bréagach as teagasc</item>
-        <item quantity="other">Toghadh %s seachadán seachadán atá bréagach as teagasc</item>
+        <item quantity="one">Baineadh %s paiste atá as dáta ón rogha sábháilte</item>
+        <item quantity="two">Baineadh %s paistí atá as dáta ón rogha sábháilte</item>
+        <item quantity="few">Baineadh %s paistí atá as dáta ón rogha sábháilte</item>
+        <item quantity="many">Baineadh %s paistí atá as dáta ón rogha sábháilte</item>
+        <item quantity="other">Baineadh %s paistí atá as dáta ón rogha sábháilte</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%s foinse instálaithe</item>
-        <item quantity="two">%s foinsí instálaithe</item>
-        <item quantity="few">%s foinsí instálaithe</item>
-        <item quantity="many">%s foinsí instálaithe</item>
-        <item quantity="other">%s foinsí instálaithe</item>
+        <item quantity="one">%s foinse suiteáilte</item>
+        <item quantity="two">%s foinsí suiteáilte</item>
+        <item quantity="few">%s foinsí suiteáilte</item>
+        <item quantity="many">%s foinsí suiteáilte</item>
+        <item quantity="other">%s foinsí suiteáilte</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s paistí roghnaithe</item>
+        <item quantity="one">%s paiste roghnaithe</item>
         <item quantity="two">%s paistí roghnaithe</item>
         <item quantity="few">%s paistí roghnaithe</item>
         <item quantity="many">%s paistí roghnaithe</item>

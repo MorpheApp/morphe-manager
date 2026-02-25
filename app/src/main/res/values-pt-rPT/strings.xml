@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Ainda não atualizado</string>
     <string name="home_no_patches_available">Não há patches disponíveis</string>
     <string name="home_default_source_disabled">O patch de Morphe estÃ¡ desativado. Ative-o na folha de fontes do patch ou use o modo expert.</string>
+    <string name="home_app_hide_title">Esconder este aplicativo?</string>
+    <string name="home_app_hide_message">Este aplicativo será escondido da tela inicial. Você pode restaurá-lo mais tarde usando o botão \'%1$s\' no final da lista</string>
+    <string name="home_app_will_be_hidden">Este aplicativo será escondido</string>
+    <string name="home_app_show_hidden">Mostrar apps ocultas</string>
+    <string name="home_app_no_hidden">Não há apps ocultas</string>
+    <string name="home_app_hidden_apps_title">Apps ocultas</string>
+    <string name="home_app_hidden_apps_hint">Toque em um app para mostrá-lo na lista novamente</string>
     <string name="android_11_bug_dialog_title">Erro do Android 11</string>
     <string name="android_11_bug_dialog_description">A permissÃ£o de instalaÃ§Ã£o do app deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetarÃ¡ negativamente a experiÃªncia do usuÃ¡rio.</string>
     <!-- Home Screen - Update Notifications -->
@@ -42,8 +49,6 @@
     <string name="sources_management_title">Fontes de emenda</string>
     <string name="sources_management_open_in_browser">Abrir links no navegador</string>
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
-    <string name="sources_management_date_added">Adicionado</string>
-    <string name="sources_management_date_updated">Atualizado</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome exibido</string>
     <string name="sources_dialog_rename">Renomecer fonte de patch</string>
@@ -65,15 +70,13 @@
     <string name="sources_update_unavailable">Não há atualização disponível</string>
     <string name="sources_download_fail">Falha ao baixar fontes: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Tem o APK original sem patches?</string>
-    <string name="home_apk_availability_dialog_simple">Para corrigir %1$s, vocé precisa de um APK desatualizado com a versão:</string>
-    <string name="home_apk_availability_dialog_expert">"Vocé tem um APK desatualizado %1$s?
-
-Versões compatíveis:"</string>
+    <string name="home_apk_availability_dialog_title">Precisa de ajuda para encontrar um APK original e sem patches?</string>
+    <string name="home_apk_availability_dialog_simple">Para corrigir &lt;b&gt;%s&lt;/b&gt;, vocã precisa da versão não corrigida do APK:</string>
+    <string name="home_apk_availability_dialog_expert">Para corrigir &lt;b&gt;%s&lt;/b&gt;, vocã precisa de um APK sem correções das versões:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">Não atualizado</string>
-    <string name="home_apk_availability_yes">Sim, eu tenho</string>
-    <string name="home_apk_availability_no">Não, ajude-me a encontrá-lo</string>
+    <string name="home_apk_availability_yes">Sim, me ajude a encontrar um APK</string>
+    <string name="home_apk_availability_no">Não, já tenho um APK</string>
     <string name="home_apk_use_saved_with_version">Usar APK salvo (v%s)</string>
     <string name="home_app_info_no_saved_apk">Não há APK salvo. O patch exigirá a seleção do arquivo APK novamente</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -84,13 +87,12 @@ Versões compatíveis:"</string>
     <string name="home_download_instructions_download_button_toast">Pressione o download no site, e não aqui 😊</string>
     <string name="home_download_instructions_step3">Aguarde o download ser concluído e &lt;b&gt;não instale&lt;/b&gt; o APK</string>
     <string name="home_download_instructions_step3_mount">Aguarde o download ser concluído e então &lt;b&gt;instale o APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Após o término do download, abra este app novamente</string>
-    <string name="home_download_instructions_step4_mount">Após instalar o APK original, abra este app novamente</string>
+    <string name="home_download_instructions_step4">Depois que a descarga terminar, volte para Morphe</string>
+    <string name="home_download_instructions_step4_mount">Após instalar o APK original, volte para Morphe</string>
     <string name="home_download_instructions_continue">Continuar para APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Selecione o APK que você baixou</string>
-    <string name="home_file_picker_prompt_description">Agora selecione o arquivo %1$schapk que vocã baixou recentemente</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Abrir arquivo APK baixado</string>
+    <string name="home_file_picker_prompt_title">Selecione o APK baixado</string>
+    <string name="home_file_picker_prompt_description">Selecione o arquivo &lt;b&gt;%1$s&lt;/b&gt; APK que vocã baixou recentemente</string>
     <string name="home_file_picker_prompt_open_apk">Abrir arquivo APK</string>
     <string name="home_recommended_version">Versão recomendada</string>
     <string name="home_selected_version">Versão selecionada</string>
@@ -100,9 +102,8 @@ Versões compatíveis:"</string>
     <string name="home_no_patches_for_app">Não há patches disponíveis para este aplicativo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo avançado</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s de %2$s selecionados</string>
     <string name="expert_mode_search">Pesquisar patches</string>
-    <string name="expert_mode_proceed">Iniciar patch</string>
+    <string name="expert_mode_proceed">Iniciar a atualização</string>
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
@@ -171,8 +172,8 @@ Tem certeza de que deseja continuar?"</string>
     <string name="home_app_info_patched_at">Patched</string>
     <string name="home_app_info_patch_update_available">Atualização de patch disponível</string>
     <string name="home_app_info_patch_update_available_description">Há uma versão mais nova das emendas disponível. Repare seu aplicativo para obter as últimas melhorias e correções</string>
-    <string name="home_app_info_app_deleted_warning">App desinstalado fora do gerenciador</string>
-    <string name="home_app_info_app_deleted_description">Este app foi desinstalado fora do gerenciador. Reparche-o para restaurar a funcionalidade</string>
+    <string name="home_app_info_app_deleted_warning">App desinstalado</string>
+    <string name="home_app_info_app_deleted_description">Este app foi desinstalado fora do Morphe. Reparche-o para restaurar a funcionalidade</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo raiz requer que o APK original esteja instalado em seu dispositivo antes do patch.</string>
     <string name="root_gmscore_excluded">O patch de suporte GmsCore está excluído no modo root</string>
@@ -202,6 +203,15 @@ Tem certeza de que deseja continuar?"</string>
     <string name="patcher_install_error_subtitle">Tente desinstalar e instalar novamente</string>
     <string name="patcher_ready_to_install_subtitle">Pressione o botão abaixo para instalar</string>
     <string name="patcher_ready_to_mount_subtitle">Pressione o botão abaixo para montar</string>
+    <string name="patcher_storage_permission_dialog_title">Não é possível acessar o caminho de armazenamento</string>
+    <string name="patcher_storage_permission_description_api30">Uma ou mais opções de patch apontam para caminhos que o Morphe Manager não pode ler. Conceda acesso ao armazenamento e toque no botão para que o patching comece automaticamente</string>
+    <string name="patcher_storage_permission_description_legacy">Uma ou mais opções de patch apontam para caminhos que não podem ser acessados. Atualize os caminhos nas opções de patch e tente novamente</string>
+    <string name="patcher_storage_permission_grant">Conceder permissão de armazenamento</string>
+    <string name="patcher_storage_permission_denied_warning">Permissão de armazenamento negada. Conceda a permissão para usar este caminho ou mova os arquivos para o diretório privado do aplicativo.</string>
+    <string name="patcher_storage_permission_open_settings">Abrir configurações de armazenamento</string>
+    <string name="patcher_storage_badge_denied">Permissão negada</string>
+    <string name="patcher_storage_badge_missing">Não encontrado</string>
+    <string name="patcher_storage_permission_hint">Dica: Mova os arquivos para /Android/data/app.morphe.manager/files/ - não são necessárias permissões extras</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Carregando patches</string>
@@ -284,7 +294,7 @@ Tem certeza de que deseja continuar?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Cor de destaque</string>
     <string name="settings_appearance_pure_black">Preto Puro</string>
-    <string name="settings_appearance_pure_black_description">Use fundos pretos verdadeiros para displays OLED</string>
+    <string name="settings_appearance_pure_black_description">Usar fundos pretos verdadeiros</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Idioma da aplicação</string>
     <string name="settings_appearance_app_language_current">Língua atual</string>
@@ -305,6 +315,31 @@ Tem certeza de que deseja continuar?"</string>
     <string name="settings_advanced_updates">Atualizações</string>
     <string name="settings_advanced_updates_use_prereleases">Usar versões prévias</string>
     <string name="settings_advanced_updates_use_prereleases_description">Obtenha acesso antecipado às novas patches e recursos do gerenciador</string>
+    <string name="settings_advanced_updates_background_notifications">Atualizações em segundo plano</string>
+    <string name="settings_advanced_updates_background_notifications_description">Periodicamente verifique se há atualizações em segundo plano e notifique quando disponíveis</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Receber notificações push instantâneas para novas versões, mesmo quando o app estiver fechado</string>
+    <string name="notification_channel_manager_updates">Gerenciar atualizações</string>
+    <string name="notification_channel_manager_updates_description">Notificações sobre novas versões do Gerenciador Morphe</string>
+    <string name="notification_channel_bundle_updates">Atualizações de fontes de patches</string>
+    <string name="notification_channel_bundle_updates_description">Notificações sobre novas versões de origem do patch</string>
+    <string name="notification_channel_fcm_updates">Atualizar alertas</string>
+    <string name="notification_channel_fcm_updates_description">Notificações instantâneas para novas versões do Morphe manager e patches. Entregues mesmo quando o app estiver em segundo plano</string>
+    <string name="settings_advanced_update_interval">Frequência de verificação</string>
+    <string name="settings_advanced_update_interval_dialog_title">Verificar atualizações</string>
+    <string name="settings_advanced_update_interval_hourly">Uma vez por hora</string>
+    <string name="settings_advanced_update_interval_daily">Uma vez por dia</string>
+    <string name="settings_advanced_update_interval_weekly">Uma vez por semana</string>
+    <string name="settings_advanced_update_interval_monthly">Uma vez por mês</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Frequência de verificação em segundo plano</string>
+    <string name="settings_advanced_update_interval_battery_warning">As verificações em segundo plano podem não funcionar de forma confiável em alguns dispositivos. Fabricantes como Xiaomi, Huawei, Samsung e OnePlus frequentemente restringem agressivamente os processos em segundo plano para economizar bateria</string>
+    <!-- Notification content -->
+    <string name="notification_manager_update_title">Atualização do Morphe manager disponível</string>
+    <string name="notification_bundle_update_title">Novos patches disponíveis</string>
+    <string name="notification_update_text">A versão %1$s está pronta para download</string>
+    <string name="notification_bundle_update_text_unversioned">Toque para abrir o Morphe manager e atualizar</string>
+    <string name="notification_permission_dialog_title">Permitir notificações</string>
+    <string name="notification_permission_dialog_description">O Morphe manager precisa da permissão de notificação para alertá-lo quando atualizações estiverem disponíveis em segundo plano</string>
+    <string name="notification_post_patch_dialog_title">Gostaria de ser notificado quando atualizações estiverem disponíveis?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Configurações avançadas</string>
     <string name="settings_advanced_expert_mode">Modo avançado</string>
@@ -319,7 +354,7 @@ Tem certeza de que deseja continuar?"</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Como obter um token</string>
     <string name="settings_advanced_github_pat_dialog_title">Definir Token de Acesso Pessoal do GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Defina um Token de Acesso Pessoal do GitHub para poder adicionar solicitações pull como fontes externas. Crie um PAT com a gama de \"repositório público\".</string>
+    <string name="settings_advanced_github_pat_dialog_description">Defina um token de acesso pessoal do GitHub para poder adicionar solicitações de pull como fontes externas. Crie um PAT com escopo public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Incluir na exportação de configurações</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adiciona este PAT às configurações exportadas do gerenciador</string>
     <string name="settings_advanced_github_pat_export_warning">Não compartilhe seu PAT. Se você incluí-lo em uma exportação de configurações, mantenha esse arquivo privado porque ele contém o token</string>
@@ -400,7 +435,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_internal_name">Instalador do sistema</string>
     <string name="installer_internal_description">Use o instalador de pacotes do Android</string>
     <string name="installer_auto_saved_name">Instalador de montagem com root</string>
-    <string name="installer_auto_saved_description">Monta o APK emendado sobre o aplicativo instalado (raiz necessária)</string>
+    <string name="installer_auto_saved_description">Substitui o APK remendado sobre o aplicativo instalado</string>
     <string name="installer_shizuku_description">Instale silenciosamente usando Shizuku ou Sui</string>
     <string name="installer_option_none">Sem fallback</string>
     <string name="installer_none_description">Nenhum instalador de fallback está configurado</string>
@@ -471,7 +506,7 @@ As dimensões das imagens devem ser as seguintes:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Depuração</string>
     <string name="settings_system_export_debug_logs">Exportar registos de depuração</string>
-    <string name="settings_system_export_debug_logs_description">Exportar registros do sistema para solução de problemas</string>
+    <string name="settings_system_export_debug_logs_description">Salvar logs do sistema para solução de problemas</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Falha ao ler logs (código de saída %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Falha ao exportar registros</string>
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
@@ -576,13 +611,16 @@ O Morphe é open-source em sua essência, prosperando com feedback e contribuiç
     <string name="save">Salvar</string>
     <string name="saved">Salvo</string>
     <string name="update">Atualizar</string>
+    <string name="allow">Permitir</string>
+    <string name="details">Detalhes</string>
+    <string name="hide">Ocultar</string>
+    <string name="default_">Padrão</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>
     <string name="importing_ellipsis">Importando…</string>
     <string name="changelog">Ver registos de alterações</string>
     <string name="changelog_description">Confira as últimas alterações nesta atualização</string>
-    <string name="changelog_loading">A carregar changelog</string>
     <string name="changelog_download_fail">Falha ao descarregar changelog: %s</string>
     <string name="changelog_retry">Tentar novamente</string>
     <string name="changelog_empty">Nenhum registro de atualizações disponível</string>

@@ -8,13 +8,13 @@
     </plurals>
     <plurals name="option_count">
         <item quantity="one">%s параметр патча</item>
-        <item quantity="few">%s параметри патчів</item>
-        <item quantity="many">%s параметри патчів</item>
-        <item quantity="other">%s параметри патчів</item>
+        <item quantity="few">%s параметри патча</item>
+        <item quantity="many">%s параметрів патчів</item>
+        <item quantity="other">%s параметрів патчів</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s джерело</item>
-        <item quantity="few">%s джерел</item>
+        <item quantity="few">%s джерела</item>
         <item quantity="many">%s джерел</item>
         <item quantity="other">%s джерел</item>
     </plurals>
@@ -26,7 +26,7 @@
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Виконати %s патч</item>
-        <item quantity="few">Виконати %s патчі</item>
+        <item quantity="few">Виконати %s патча</item>
         <item quantity="many">Виконати %s патчів</item>
         <item quantity="other">Виконати %s патчів</item>
     </plurals>
@@ -38,13 +38,13 @@
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Видалено %s застарілий патч зі збереженого вибору</item>
-        <item quantity="few">Видалено %s застарілих патчів зі збереженого вибору</item>
+        <item quantity="few">Видалено %s застарілі патчі зі збереженого вибору</item>
         <item quantity="many">Видалено %s застарілих патчів зі збереженого вибору</item>
         <item quantity="other">Видалено %s застарілих патчів зі збереженого вибору</item>
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s джерело встановлено</item>
-        <item quantity="few">%s джерел встановлено</item>
+        <item quantity="few">%s джерела встановлено</item>
         <item quantity="many">%s джерел встановлено</item>
         <item quantity="other">%s джерел встановлено</item>
     </plurals>

@@ -8,19 +8,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
-import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.domain.repository.InstalledAppRepository
-import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.PM
 import coil.compose.AsyncImage
-import io.github.fornewid.placeholder.material3.placeholder
 import org.koin.compose.koinInject
 
 /**
@@ -75,19 +69,18 @@ private fun SimpleAppIcon(
     contentDescription: String?,
     modifier: Modifier = Modifier
 ) {
-    var showPlaceHolder by rememberSaveable { mutableStateOf(true) }
+    val context = LocalContext.current
+    val request = remember(packageInfo.packageName) {
+        coil.request.ImageRequest.Builder(context)
+            .data(packageInfo)
+            .memoryCacheKey(packageInfo.packageName)
+            .build()
+    }
 
     AsyncImage(
-        packageInfo,
-        contentDescription,
-        Modifier
-            .placeholder(
-                visible = showPlaceHolder,
-                color = MaterialTheme.colorScheme.inverseOnSurface,
-                shape = RoundedCornerShape(100)
-            )
-            .then(modifier),
-        onSuccess = { showPlaceHolder = false }
+        model = request,
+        contentDescription = contentDescription,
+        modifier = modifier
     )
 }
 

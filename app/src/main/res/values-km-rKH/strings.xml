@@ -28,8 +28,6 @@
     <string name="sources_management_title">ប្រភពបំណះ</string>
     <string name="sources_management_open_in_browser">បើកក្នុងកម្មវិធីច្បោល</string>
     <string name="sources_management_failed_to_open_url">បរាជ័យក្នុងការបើក URL</string>
-    <string name="sources_management_date_added">បានបន្ថែម</string>
-    <string name="sources_management_date_updated">បានអាប់ដេត</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_add_source">បន្ថែមប្រភពបំណះ</string>
     <string name="sources_dialog_remote_url">URL ប្រភព</string>
@@ -65,6 +63,7 @@
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">អាយខនកម្មវិធី</string>
     <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
@@ -91,4 +90,5 @@
     <string name="disabled">បានផ្ដាច់</string>
     <string name="rename">ប្ដូរឈ្មោះ</string>
     <string name="import_">នាំចូល</string>
+    <string name="details">ព័ត៌មានលម្អិត</string>
 </resources>
