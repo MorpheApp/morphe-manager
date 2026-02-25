@@ -601,7 +601,7 @@ class PatchBundleRepository(
         return UpdateRequest(
             force = requests.any { it.force },
             showToast = requests.any { it.showToast },
-            allowUnsafeNetwork = requests.any { it.allowUnsafeNetwork },
+            allowUnsafeNetwork = requests.all { it.allowUnsafeNetwork },
             onPerBundleProgress = mergedCallback,
             predicate = { bundle -> requests.any { it.predicate(bundle) } }
         )
@@ -622,13 +622,31 @@ class PatchBundleRepository(
         }
     }
 
-    suspend fun disable(vararg bundles: PatchBundleSource) =
+    suspend fun disable(vararg bundles: PatchBundleSource) {
+        // Capture uids of bundles that are currently disabled and will be toggled ON
+        val beingEnabledUids = bundles
+            .filter { !it.enabled }
+            .map { it.uid }
+            .toSet()
+
         dispatchAction("Disable (${bundles.map { it.uid }.joinToString(",")})") {
             bundles.forEach { bundle ->
                 updateDb(bundle.uid) { it.copy(enabled = !it.enabled) }
             }
             doReload()
         }
+
+        // After store is updated, trigger update for bundles that were just enabled
+        if (beingEnabledUids.isNotEmpty()) {
+            startRemoteUpdateJob(
+                force = false,
+                showToast = false,
+                allowUnsafeNetwork = false,
+                onPerBundleProgress = null,
+                predicate = { it.uid in beingEnabledUids && it.autoUpdate && it.enabled }
+            )
+        }
+    }
 
     suspend fun remove(vararg bundles: PatchBundleSource) =
         dispatchAction("Remove (${bundles.map { it.uid }.joinToString(",")})") { state ->
@@ -1077,22 +1095,54 @@ class PatchBundleRepository(
         store.dispatch(
             Update(
                 force = force,
-                showToast = showToast
+                showToast = showToast,
+                allowUnsafeNetwork = false
             ) { it.uid == DEFAULT_SOURCE_UID }
         )
     }
 
     /**
-     * Updates all bundles that should be automatically updated.
+     * Suspends until any currently active update job completes.
      */
-    suspend fun updateCheck() {
-        store.dispatch(Update { it.autoUpdate })
+    private suspend fun awaitCurrentUpdateJob() {
+        val job = updateJobMutex.withLock { updateJob }
+        job?.join()
+    }
+
+    /**
+     * Same as [updateCheck] but suspends until the update job fully completes.
+     * Waits for any in-progress update to finish first, then runs its own update directly.
+     */
+    suspend fun updateCheckAndAwait(allowUnsafeNetwork: Boolean = false) {
+        awaitCurrentUpdateJob()
+        performRemoteUpdateWithResult(
+            force = false,
+            showToast = false,
+            allowUnsafeNetwork = allowUnsafeNetwork,
+            onPerBundleProgress = null,
+            predicate = { it.autoUpdate && it.enabled }
+        )
+    }
+
+    /**
+     * Updates all bundles that should be automatically updated AND are currently enabled.
+     * Disabled bundles are skipped - they will be updated automatically when re-enabled.
+     * Respects [PreferencesManager.allowMeteredUpdates]: if the network is metered and the
+     * user has disabled metered updates, the update is skipped and
+     * [BundleUpdateResult.SkippedMetered] is emitted so the UI can warn the user before patching.
+     *
+     * @param allowUnsafeNetwork When `true`, bypasses the metered network check and downloads
+     *   regardless. Use this when the user explicitly requests an update (e.g. "Update & patch"
+     *   dialog action).
+     */
+    suspend fun updateCheck(allowUnsafeNetwork: Boolean = false) {
+        store.dispatch(Update(allowUnsafeNetwork = allowUnsafeNetwork) { it.autoUpdate && it.enabled })
         checkManualUpdates()
     }
 
     /**
      * Silently checks whether any remote bundle has a newer version available.
-     * Does NOT download or apply the update — only compares version signatures.
+     * Does NOT download or apply the update - only compares version signatures.
      *
      * Used by [app.morphe.manager.worker.UpdateCheckWorker] for background update notifications.
      *
@@ -1103,7 +1153,7 @@ class PatchBundleRepository(
         if (!networkInfo.isConnected()) return null
 
         val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-        if (!allowMeteredUpdates && !networkInfo.isSafe()) return null
+        if (!allowMeteredUpdates && networkInfo.isMetered()) return null
 
         return try {
             val remoteBundles = store.state.value.sources.values
@@ -1148,7 +1198,7 @@ class PatchBundleRepository(
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
-        private val allowUnsafeNetwork: Boolean = true,
+        private val allowUnsafeNetwork: Boolean = false,
         private val onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
     ) : Action<State> {
@@ -1249,9 +1299,21 @@ class PatchBundleRepository(
             }
 
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowUnsafeNetwork && !allowMeteredUpdates && !networkInfo.isSafe()) {
+            if (!allowUnsafeNetwork && !allowMeteredUpdates && networkInfo.isMetered()) {
                 Log.d(tag, "Skipping update check because the network is metered.")
-                bundleUpdateProgressFlow.value = null
+                val skippedProgress = BundleUpdateProgress(
+                    total = 1,
+                    completed = 1,
+                    phase = BundleUpdatePhase.Checking,
+                    result = BundleUpdateResult.SkippedMetered,
+                )
+                bundleUpdateProgressFlow.value = skippedProgress
+                scope.launch {
+                    delay(3500)
+                    if (bundleUpdateProgressFlow.value == skippedProgress) {
+                        bundleUpdateProgressFlow.value = null
+                    }
+                }
                 return@coroutineScope
             }
 
@@ -1465,7 +1527,7 @@ class PatchBundleRepository(
             }
 
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowMeteredUpdates && !networkInfo.isSafe()) {
+            if (!allowMeteredUpdates && networkInfo.isMetered()) {
                 Log.d(tag, "Skipping manual update check because the network is down or metered.")
                 return@coroutineScope current
             }
@@ -1516,6 +1578,7 @@ class PatchBundleRepository(
         NoUpdates,      // Already up to date
         NoInternet,     // No internet connection
         Error,          // Error occurred
+        SkippedMetered, // Update skipped - network is metered and allowMeteredUpdates is false
     }
 
     data class BundleUpdateProgress(

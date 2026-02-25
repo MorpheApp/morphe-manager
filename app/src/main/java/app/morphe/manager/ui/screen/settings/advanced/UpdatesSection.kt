@@ -67,6 +67,7 @@ fun UpdatesSettingsItem(
 
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
+    val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
 
     // On GMS devices FCM handles all notification delivery.
     val hasGms = remember { isGmsAvailable(context) }
@@ -188,6 +189,26 @@ fun UpdatesSettingsItem(
             subtitle = stringResource(updateCheckInterval.labelResId)
         )
     }
+
+    // Allow updates on metered (mobile data) connections
+    RichSettingsItem(
+        onClick = {
+            scope.launch { prefs.allowMeteredUpdates.update(!allowMeteredUpdates) }
+        },
+        showBorder = true,
+        leadingContent = { MorpheIcon(icon = Icons.Outlined.SignalCellularAlt) },
+        title = stringResource(R.string.settings_advanced_updates_allow_metered),
+        subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description),
+        trailingContent = {
+            Switch(
+                checked = allowMeteredUpdates,
+                onCheckedChange = null,
+                modifier = Modifier.semantics {
+                    stateDescription = if (allowMeteredUpdates) enabledState else disabledState
+                }
+            )
+        }
+    )
 }
 
 /**

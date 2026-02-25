@@ -112,7 +112,7 @@ class UpdateViewModel(
             val release = releaseInfo ?: return@uiSafe
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
             withContext(Dispatchers.IO) {
-                if (!allowMeteredUpdates && !networkInfo.isSafe() && !ignoreInternetCheck) {
+                if (!allowMeteredUpdates && networkInfo.isMetered() && !ignoreInternetCheck) {
                     showInternetCheckDialog = true
                 } else {
                     if (currentDownloadVersion != release.version) {

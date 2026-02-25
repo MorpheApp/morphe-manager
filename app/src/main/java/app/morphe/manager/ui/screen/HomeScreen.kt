@@ -244,6 +244,7 @@ fun HomeScreen(
             PatchBundleRepository.BundleUpdateResult.NoInternet,
             PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
             PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
+            PatchBundleRepository.BundleUpdateResult.SkippedMetered -> BundleUpdateStatus.Warning
         }
     }
 
