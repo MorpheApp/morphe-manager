@@ -1,3 +1,21 @@
+# app [1.8.0](https://github.com/MorpheApp/morphe-manager/compare/v1.7.1...v1.8.0) (2026-02-25)
+
+
+### Bug Fixes
+
+* Change "help me find apk" dialog "yes" button to open web search ([#237](https://github.com/MorpheApp/morphe-manager/issues/237)) ([b61daee](https://github.com/MorpheApp/morphe-manager/commit/b61daee7b16dbbf5e5c5b7703fb18d555210c2f7))
+* Manager crashes if the storage path cannot be accessed ([#225](https://github.com/MorpheApp/morphe-manager/issues/225)) ([896a598](https://github.com/MorpheApp/morphe-manager/commit/896a5989ffac134e1ed86df7c333a639330c2c86))
+* When source is disabled allow button presses but change the card background to red ([9b3a498](https://github.com/MorpheApp/morphe-manager/commit/9b3a49831241cf19c4e1d21474f33b6a4060b4af))
+
+
+### Features
+
+* Add tab layout in Expert mode dialog ([#241](https://github.com/MorpheApp/morphe-manager/issues/241)) ([2671a5e](https://github.com/MorpheApp/morphe-manager/commit/2671a5e9b73c9458bdb76cd73c432afba40a7bfe))
+* Show all patched apps on homescreen ([#232](https://github.com/MorpheApp/morphe-manager/issues/232)) ([a265801](https://github.com/MorpheApp/morphe-manager/commit/a2658012c2e994b1b587bbb2494c7c097056079a))
+* Show Android notifications when patch and manager updates are available ([#217](https://github.com/MorpheApp/morphe-manager/issues/217)) ([dced36b](https://github.com/MorpheApp/morphe-manager/commit/dced36be9357ba012b1bb128c3c94e8528570f83))
+* Show changelog button in all changelog dialogs ([f925de0](https://github.com/MorpheApp/morphe-manager/commit/f925de0351609248465dd4dd1bafe2f1c7a35794))
+* Update translations from Crowdin ([a873061](https://github.com/MorpheApp/morphe-manager/commit/a873061859bb22944228c82d01b7e824917353e6))
+
 # app [1.8.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0-dev.6...v1.8.0-dev.7) (2026-02-25)
 
 
