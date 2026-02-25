@@ -482,7 +482,7 @@ The image dimensions must be as follows:
     <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Use the Android package installer</string>
     <string name="installer_auto_saved_name">Rooted mount installer</string>
-    <string name="installer_auto_saved_description">Mounts the patched APK over the installed app (root required)</string>
+    <string name="installer_auto_saved_description">Mounts the patched APK over the installed app</string>
     <string name="installer_shizuku_name" translatable="false">Shizuku</string>
     <string name="installer_shizuku_description">Install silently using Shizuku or Sui</string>
     <string name="installer_option_none">No fallback</string>
