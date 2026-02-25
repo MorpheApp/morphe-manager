@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.patcher
 
 import androidx.compose.animation.*
@@ -95,6 +100,7 @@ fun PatchingSuccess(
     onUninstall: (String) -> Unit,
     onOpen: () -> Unit,
     onHomeClick: () -> Unit,
+    onLogsClick: () -> Unit,
     onSaveClick: () -> Unit,
     isSaving: Boolean
 ) {
@@ -177,10 +183,12 @@ fun PatchingSuccess(
             // Bottom action bar
             PatcherBottomActionBar(
                 showCancelButton = false,
+                showLogsButton = true,
                 showHomeButton = true,
                 showSaveButton = true,
                 showErrorButton = false,
                 onCancelClick = {},
+                onLogsClick = onLogsClick,
                 onHomeClick = onHomeClick,
                 onSaveClick = onSaveClick,
                 isSaving = isSaving,

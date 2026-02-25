@@ -213,12 +213,13 @@ class PatcherWorker(
 
             val elapsed = System.currentTimeMillis() - startTime
             val rt = Runtime.getRuntime()
-            val usedMem = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
-            val totalMem = rt.totalMemory() / (1024 * 1024)
+            val heapUsed = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
+            val heapTotal = rt.totalMemory() / (1024 * 1024)
+            val heapMax = rt.maxMemory() / (1024 * 1024)
 
             args.logger.info(
                 "Patching succeeded: output=${args.output} size=${File(args.output).length()} " +
-                        "elapsed=${elapsed/1000}s memory=${usedMem}MB/${totalMem}MB"
+                        "elapsed=${elapsed}ms heapUsed=${heapUsed}MB heapTotal=${heapTotal}MB heapMax=${heapMax}MB"
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
@@ -231,7 +232,7 @@ class PatcherWorker(
             )
             val message = applicationContext.getString(
                 R.string.patcher_process_exit_message,
-                e.exitCode
+                e.exitCode.toString()
             )
             updateProgress(state = State.FAILED, message = message)
             val previousLimit = prefs.patcherProcessMemoryLimit.get()

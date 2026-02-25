@@ -81,7 +81,8 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 File(parameters.inputFile),
                 File(parameters.cacheDir),
                 logger,
-                parameters.stripNativeLibs
+                parameters.stripNativeLibs,
+                onProgress = { message -> logger.info(message) }
             )
 
             try {
@@ -100,8 +101,8 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     onProgress = { name, state, message ->
                         events.progress(name, state?.name, message)
                     }
-            ).use {
-                it.run(File(parameters.outputFile), patchList)}
+                ).use {
+                    it.run(File(parameters.outputFile), patchList)}
             } finally {
                 preparation.cleanup()
             }

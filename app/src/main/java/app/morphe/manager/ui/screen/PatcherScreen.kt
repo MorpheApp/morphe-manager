@@ -572,20 +572,35 @@ fun PatcherScreen(
         ) { patcherState ->
             when (patcherState) {
                 PatcherState.IN_PROGRESS -> {
-                    PatchingInProgress(
-                        progress = displayProgressAnimate,
-                        patchesProgress = patchesProgress,
-                        patcherViewModel = patcherViewModel,
-                        showLongStepWarning = showLongStepWarning,
-                        onCancelClick = { state.showCancelDialog = true },
-                        onHomeClick = onBackClick
-                    )
+                    val useExpertMode by prefs.useExpertMode.getAsState()
+                    if (useExpertMode) {
+                        ExpertPatchingInProgress(
+                            progress = displayProgressAnimate,
+                            patchesProgress = patchesProgress,
+                            patcherViewModel = patcherViewModel,
+                            showLongStepWarning = showLongStepWarning,
+                            patcherSucceeded = patcherSucceeded,
+                            onCancelClick = { state.showCancelDialog = true },
+                            onInstallClick = { showSuccessScreen = true },
+                            onHomeClick = onBackClick
+                        )
+                    } else {
+                        SimplePatchingInProgress(
+                            progress = displayProgressAnimate,
+                            patchesProgress = patchesProgress,
+                            patcherViewModel = patcherViewModel,
+                            showLongStepWarning = showLongStepWarning,
+                            onCancelClick = { state.showCancelDialog = true },
+                            onHomeClick = onBackClick
+                        )
+                    }
                 }
 
                 PatcherState.SUCCESS -> {
                     PatchingSuccess(
                         installViewModel = installViewModel,
                         usingMountInstall = usingMountInstall,
+                        onLogsClick = { showSuccessScreen = false },
                         onInstall = {
                             if (usingMountInstall) {
                                 // Mount install

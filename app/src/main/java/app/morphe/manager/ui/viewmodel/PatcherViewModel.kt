@@ -256,7 +256,9 @@ class PatcherViewModel(
             }
         }
 
-    private val logs = mutableListOf<Pair<LogLevel, String>>()
+    /** Real-time log entries exposed to the UI. Collected by the patcher worker. */
+    val logs = mutableStateListOf<Pair<LogLevel, String>>()
+
     private val logger = object : Logger() {
         override fun log(level: LogLevel, message: String) {
             level.androidLog(message)
@@ -264,6 +266,8 @@ class PatcherViewModel(
 
             viewModelScope.launch {
                 logs.add(level to message)
+                // Cap at 500 entries to avoid unbounded memory growth
+                if (logs.size > 500) logs.removeAt(0)
             }
         }
     }
