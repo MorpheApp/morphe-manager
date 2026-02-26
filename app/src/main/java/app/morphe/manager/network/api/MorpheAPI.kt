@@ -11,8 +11,6 @@ import app.morphe.manager.network.utils.getOrNull
 import app.morphe.manager.util.*
 import io.ktor.client.request.header
 import io.ktor.client.request.url
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -234,11 +232,12 @@ class MorpheAPI(
      * Get manager release info from static JSON file
      */
     private suspend fun getManagerFromJson(branch: String): APIResponse<MorpheAsset> {
-        return when (val response = rawFileRequest<ManagerReleaseInfo>(managerConfig, branch, "app/app-release.json")) {
+        val url = if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL
+        return when (val response = client.request<ManagerReleaseInfo> { url(url) }) {
             is APIResponse.Success -> {
                 val mapped = runCatching {
                     mapManagerJsonToAsset(managerConfig, response.data).also { asset ->
-                        Log.d(tag, "Manager from JSON ($branch): version=${asset.version}, url=${asset.downloadUrl}")
+                        Log.d(tag, "Manager from CDN ($branch): version=${asset.version}, url=${asset.downloadUrl}")
                     }
                 }
 
@@ -259,42 +258,27 @@ class MorpheAPI(
      * Get app update - returns the newest available version if it is strictly newer
      * than the currently installed one.
      *
-     * When prereleases are enabled, both stable (main) and pre-release (dev) versions
-     * are fetched in parallel and the newest one is returned.
-     *
-     * | installed      | prereleases | main    | dev           | offered        |
-     * |----------------|-------------|---------|---------------|----------------|
-     * | 1.0.0          | off         | 1.0.0   | —             | nothing        |
-     * | 1.0.0          | off         | 1.1.0   | —             | 1.1.0          |
-     * | 1.0.0          | on          | 1.0.0   | 1.0.0-dev.1   | nothing        |
-     * | 1.0.0          | on          | 1.1.0   | 1.0.0-dev.1   | 1.1.0          |
-     * | 1.0.0-dev.1    | off         | 1.0.0   | —             | 1.0.0          |
-     * | 1.0.0-dev.1    | off         | 1.1.0   | —             | 1.1.0          |
-     * | 1.0.0-dev.1    | on          | 1.0.0   | 1.0.0-dev.1   | 1.0.0          |
-     * | 1.0.0-dev.1    | on          | 1.0.0   | 1.0.0-dev.2   | 1.0.0          |
-     * | 1.0.0-dev.1    | on          | —       | 1.0.0-dev.2   | 1.0.0-dev.2    |
+     * Uses jsDelivr CDN which is cache-cleared after each release, so the JSON file
+     * is only visible once the release is fully available.
+     * The branch is determined by [PreferencesManager.useManagerPrereleases].
      */
     suspend fun getAppUpdate(): MorpheAsset? {
         val usePrereleases = prefs.useManagerPrereleases.get()
+        val branch = if (usePrereleases) "dev" else "main"
         val currentWeight = versionWeight(BuildConfig.VERSION_NAME.removePrefix("v"))
 
-        val candidates: List<MorpheAsset> = if (USE_MANAGER_DIRECT_JSON) {
-            if (usePrereleases) {
-                coroutineScope {
-                    val stable = async { getManagerFromJson("main").getOrNull() }
-                    val prerelease = async { getManagerFromJson("dev").getOrNull() }
-                    listOfNotNull(stable.await(), prerelease.await())
-                }
-            } else {
-                listOfNotNull(getManagerFromJson("main").getOrNull())
-            }
+        val candidate = if (USE_MANAGER_DIRECT_JSON) {
+            getManagerFromJson(branch).fallbackTo {
+                Log.w(tag, "Manager CDN unavailable, falling back to GitHub API")
+                getManagerFromGitHub()
+            }.getOrNull()
         } else {
-            listOfNotNull(getManagerFromGitHub().getOrNull())
-        }
+            getManagerFromGitHub().getOrNull()
+        } ?: return null
 
-        return candidates
-            .filter { versionWeight(it.version.removePrefix("v")) > currentWeight }
-            .maxByOrNull { versionWeight(it.version.removePrefix("v")) }
+        return candidate.takeIf {
+            versionWeight(it.version.removePrefix("v")) > currentWeight
+        }
     }
 
     /**
