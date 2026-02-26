@@ -69,6 +69,7 @@ fun HomeScreen(
         homeViewModel.viewModelScope.launch {
             try {
                 homeViewModel.patchBundleRepository.updateCheck()
+                homeViewModel.checkForManagerUpdates()
                 delay(500)
             } finally {
                 isRefreshing = false

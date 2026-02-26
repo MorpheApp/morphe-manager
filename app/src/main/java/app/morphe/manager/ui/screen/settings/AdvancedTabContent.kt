@@ -98,7 +98,6 @@ fun AdvancedTabContent(
                 scope.launch {
                     prefs.usePatchesPrereleases.update(newValue)
                     prefs.useManagerPrereleases.update(newValue)
-                    prefs.managerAutoUpdates.update(newValue)
                     homeViewModel.updateMorpheBundleWithChangelogClear()
                     homeViewModel.checkForManagerUpdates()
                     patchOptionsViewModel.refresh()

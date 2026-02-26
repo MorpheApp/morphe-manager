@@ -77,7 +77,6 @@ class PreferencesManager(
     )
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
-    val managerAutoUpdates = booleanPreference("manager_auto_updates", true)
     val installationTime = longPreference("manager_installation_time", 0)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
@@ -129,7 +128,6 @@ class PreferencesManager(
         val keystoreAlias: String? = null,
         val keystorePass: String? = null,
         val firstLaunch: Boolean? = null,
-        val managerAutoUpdates: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
         val usePatchesPrereleases: Boolean? = null,
@@ -174,7 +172,6 @@ class PreferencesManager(
         keystoreAlias = keystoreAlias.get(),
         keystorePass = keystorePass.get(),
         firstLaunch = firstLaunch.get(),
-        managerAutoUpdates = managerAutoUpdates.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
         usePatchesPrereleases = usePatchesPrereleases.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
@@ -206,7 +203,6 @@ class PreferencesManager(
         snapshot.keystoreAlias?.let { keystoreAlias.value = it }
         snapshot.keystorePass?.let { keystorePass.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
-        snapshot.managerAutoUpdates?.let { managerAutoUpdates.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
         snapshot.usePatchesPrereleases?.let { usePatchesPrereleases.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }

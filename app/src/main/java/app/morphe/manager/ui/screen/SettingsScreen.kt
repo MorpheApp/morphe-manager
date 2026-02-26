@@ -70,9 +70,9 @@ private enum class SettingsTab(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SettingsScreen(
+    homeViewModel: HomeViewModel,
     themeViewModel: ThemeSettingsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
-    homeViewModel: HomeViewModel = koinViewModel(),
     patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
     settingsViewModel: SettingsViewModel = koinViewModel(),
     updateViewModel: UpdateViewModel = koinViewModel {

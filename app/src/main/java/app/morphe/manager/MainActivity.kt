@@ -108,6 +108,7 @@ private fun MorpheManager(vm: MainViewModel) {
     val prefs: PreferencesManager = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
+    val homeViewModel = koinViewModel<HomeViewModel>()
 
     // Box with background at the highest level
     Box(
@@ -163,7 +164,6 @@ private fun MorpheManager(vm: MainViewModel) {
             val usingMountInstallState = mutableStateOf(false)
 
             composable<HomeScreen> { entry ->
-                val homeViewModel = koinViewModel<HomeViewModel>()
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
@@ -232,7 +232,7 @@ private fun MorpheManager(vm: MainViewModel) {
             }
 
             composable<Settings> {
-                SettingsScreen()
+                SettingsScreen(homeViewModel = homeViewModel)
             }
         }
     }
