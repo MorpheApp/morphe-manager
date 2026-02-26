@@ -764,32 +764,13 @@ class PatchBundleRepository(
         if (!isEnabled) return
 
         // Trigger update so the new channel takes effect immediately.
-        // Additionally revert the preference so the toggle snaps back to its previous state.
-        val updateSucceeded = runCatching {
-            performRemoteUpdateWithResult(
-                force = true,
-                showToast = false,
-                allowUnsafeNetwork = false,
-                onPerBundleProgress = null,
-                predicate = { it.uid == uid }
-            )
-        }.isSuccess
-
-        if (!updateSucceeded) {
-            val reverted = prefs.bundlePrereleasesEnabled.get().toMutableSet()
-            if (usePrerelease) reverted.remove(uid.toString()) else reverted.add(uid.toString())
-            prefs.bundlePrereleasesEnabled.update(reverted)
-
-            dispatchAction("Revert prerelease ($uid)") { state ->
-                val src = state.sources[uid] ?: return@dispatchAction state
-                val reverted = when (src) {
-                    is APIPatchBundle -> src.copy(usePrerelease = !usePrerelease)
-                    is JsonPatchBundle -> src.copy(usePrerelease = !usePrerelease)
-                    else -> return@dispatchAction state
-                }
-                state.copy(sources = state.sources.put(uid, reverted))
-            }
-        }
+        startRemoteUpdateJob(
+            force = true,
+            showToast = false,
+            allowUnsafeNetwork = false,
+            onPerBundleProgress = null,
+            predicate = { it.uid == uid }
+        )
     }
 
     suspend fun createLocal(expectedSize: Long? = null, createStream: suspend () -> InputStream) {
