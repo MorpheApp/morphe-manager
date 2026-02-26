@@ -107,6 +107,15 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 preparation.cleanup()
             }
 
+            val rt = Runtime.getRuntime()
+            val heapUsedMb = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
+            val heapTotalMb = rt.totalMemory() / (1024 * 1024)
+            val heapMaxMb = rt.maxMemory() / (1024 * 1024)
+            logger.info(
+                "Process heap after patching: " +
+                        "used=${heapUsedMb}MB alloc=${heapTotalMb}MB max=${heapMaxMb}MB"
+            )
+
             events.finished(null)
         }
     }

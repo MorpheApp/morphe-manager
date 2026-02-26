@@ -1,22 +1,20 @@
 package app.morphe.manager.patcher.worker
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.PowerManager
+import android.os.StatFs
 import android.util.Log
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import app.morphe.manager.R
 import app.morphe.manager.MainActivity
+import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.RootInstaller
@@ -32,10 +30,7 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
-import app.morphe.manager.util.Options
-import app.morphe.manager.util.PM
-import app.morphe.manager.util.PatchSelection
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -184,6 +179,28 @@ class PatcherWorker(
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             val selectedCount = args.selectedPatches.values.sumOf { it.size }
+
+            // Log runtime mode info
+            if (prefs.useProcessRuntime.get()) {
+                val memLimit = prefs.patcherProcessMemoryLimit.get()
+                args.logger.info("Runtime: process memoryLimit=$memLimit")
+            } else {
+                args.logger.info("Runtime: coroutine")
+            }
+
+            // Log device environment for diagnostics
+            val memInfo = ActivityManager.MemoryInfo().also {
+                (applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
+                    .getMemoryInfo(it)
+            }
+            val statFs = StatFs(applicationContext.filesDir.absolutePath)
+            args.logger.info(
+                "Device: android=${Build.VERSION.RELEASE} api=${Build.VERSION.SDK_INT} " +
+                        "ramAvail=\"${formatBytes(memInfo.availMem)}\" " +
+                        "ramTotal=\"${formatBytes(memInfo.totalMem)}\" " +
+                        "storageAvail=\"${formatBytes(statFs.availableBytes)}\" " +
+                        "storageTotal=\"${formatBytes(statFs.totalBytes)}\""
+            )
 
             args.logger.info(
                 "Patching started at ${System.currentTimeMillis()} " +

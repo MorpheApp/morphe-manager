@@ -33,7 +33,10 @@ import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
 /**
- * Simple patching in progress screen with adaptive layout.
+ * Simple mode patching screen.
+ *
+ * Shows a Animated message, circular progress indicator with percentage and patch count, and
+ * progress message.
  */
 @Composable
 fun SimplePatchingInProgress(

@@ -66,8 +66,17 @@ fun PatcherBottomActionBar(
         horizontalArrangement = Arrangement.spacedBy(32.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Left: Cancel button or Logs button
-        if (showCancelButton) {
+        // Left: Install / Cancel / Logs button
+        if (showInstallButton) {
+            BottomActionButton(
+                onClick = onInstallClick,
+                icon = Icons.Outlined.InstallMobile,
+                text = stringResource(R.string.install),
+                modifier = Modifier.weight(1f),
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        } else if (showCancelButton) {
             BottomActionButton(
                 onClick = onCancelClick,
                 icon = Icons.Default.Close,
@@ -87,17 +96,8 @@ fun PatcherBottomActionBar(
             )
         } else Spacer(Modifier.weight(1f))
 
-        // Center: Install button (takes priority) or Home button
-        if (showInstallButton) {
-            BottomActionButton(
-                onClick = onInstallClick,
-                icon = Icons.Outlined.InstallMobile,
-                text = stringResource(R.string.install),
-                modifier = Modifier.weight(1f),
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-        } else if (showHomeButton) {
+        // Center: Home button
+        if (showHomeButton && !showInstallButton) {
             BottomActionButton(
                 onClick = onHomeClick,
                 icon = Icons.Default.Home,

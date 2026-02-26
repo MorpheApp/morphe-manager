@@ -43,35 +43,59 @@ import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
 sealed interface LogItem {
-    /** Formatted startup banner (replaces the raw "Patching started at …" line). */
+    /**
+     * Structured card shown at the start of patching.
+     * Aggregates data from "Patching started at …", "Runtime: …",
+     * "Process heap memory limit: …" and "Device: …" log lines.
+     */
     data class StartBanner(
         val packageName: String,
         val version: String,
         val apkSizeMb: String,
         val patchCount: Int,
-        val isSplit: Boolean
+        val isSplit: Boolean,
+        // null when using CoroutineRuntime
+        val runtimeMemoryLimitMb: String?,
+        // device environment
+        val androidVersion: String?,
+        val ramAvailable: String?,
+        val ramTotal: String?,
+        val storageAvailable: String?,
+        val storageTotal: String?,
     ) : LogItem
 
-    /** Formatted success summary (replaces the raw "Patching succeeded: …" line). */
+    /**
+     * Structured card shown after patching succeeds.
+     * Aggregates data from "Patching succeeded: …" and
+     * "Process heap after patching: …" log lines.
+     */
     data class SuccessSummary(
         val outputSizeMb: String,
         val elapsedSec: String,
-        val heapUsedMb: String,
-        val heapTotalMb: String,
-        val heapMaxMb: String
+        // null when using CoroutineRuntime (no separate process)
+        val processHeapUsedMb: String?,
+        val processHeapAllocMb: String?,
+        val processHeapMaxMb: String?,
     ) : LogItem
 
     /** Standard single-line log entry. */
     data class Entry(val level: LogLevel, val message: String) : LogItem
 }
 
-/** Extracts a space-delimited key=value field from a flat log string. */
+/** Extracts a space-delimited key=value field from a flat log string.
+ *  Supports quoted values (e.g. key="some value with spaces"). */
 private fun String.logField(key: String): String? {
     val prefix = "$key="
     val start = indexOf(prefix).takeIf { it >= 0 } ?: return null
     val valueStart = start + prefix.length
-    val end = indexOf(' ', valueStart).takeIf { it >= 0 } ?: length
-    return substring(valueStart, end).ifBlank { null }
+    if (valueStart >= length) return null
+    return if (this[valueStart] == '"') {
+        val end = indexOf('"', valueStart + 1).takeIf { it >= 0 } ?: return null
+        substring(valueStart + 1, end).ifBlank { null }
+    } else {
+        val end = indexOf(' ', valueStart).takeIf { it >= 0 } ?: length
+        substring(valueStart, end).ifBlank { null }
+    }
 }
 
 private fun formatElapsed(ms: Long?): String {
@@ -82,37 +106,98 @@ private fun formatElapsed(ms: Long?): String {
     return if (minutes > 0) "${minutes}m ${seconds}s" else "${seconds}s"
 }
 
-private fun parseStartBanner(raw: String): LogItem.StartBanner? = runCatching {
-    val pkg = raw.logField("pkg") ?: return null
-    LogItem.StartBanner(
-        packageName = pkg,
-        version = raw.logField("version") ?: "?",
-        apkSizeMb = "%.1f MB".format((raw.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0),
-        patchCount = raw.logField("patches")?.toIntOrNull() ?: 0,
-        isSplit = raw.logField("split") == "true"
-    )
-}.getOrNull()
+/**
+ * Converts the full raw log list into display [LogItem]s in a single stateful pass.
+ *
+ * Lines that carry metadata for the banner/summary cards (Runtime, heap limit,
+ * heap-after-patching) are consumed and never emitted as plain [LogItem.Entry]s.
+ */
+internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
+    // Pre-scan for auxiliary lines so banner cards can be built in one pass.
+    var runtimeMemoryLimitMb: String? = null
+    var processHeapUsedMb: String? = null
+    var processHeapAllocMb: String? = null
+    var processHeapMaxMb: String? = null
+    var androidVersion: String? = null
+    var ramAvailable: String? = null
+    var ramTotal: String? = null
+    var storageAvailable: String? = null
+    var storageTotal: String? = null
 
-private fun parseSuccessSummary(raw: String): LogItem.SuccessSummary? = runCatching {
-    LogItem.SuccessSummary(
-        outputSizeMb = "%.1f MB".format((raw.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0),
-        elapsedSec = formatElapsed(raw.logField("elapsed")?.filter { it.isDigit() }?.toLongOrNull()),
-        heapUsedMb = raw.logField("heapUsed") ?: "?",
-        heapTotalMb = raw.logField("heapTotal") ?: "?",
-        heapMaxMb = raw.logField("heapMax") ?: "?"
-    )
-}.getOrNull()
-
-/** Parses a single raw log pair into the appropriate [LogItem]. */
-private fun Pair<LogLevel, String>.toSingleLogItem(): LogItem {
-    val (level, message) = this
-    return when {
-        message.startsWith("Patching started at ") ->
-            parseStartBanner(message) ?: LogItem.Entry(level, message)
-        message.startsWith("Patching succeeded:") ->
-            parseSuccessSummary(message) ?: LogItem.Entry(level, message)
-        else -> LogItem.Entry(level, message)
+    for ((_, message) in this) {
+        when {
+            message.startsWith("Runtime: ") -> {
+                runtimeMemoryLimitMb = message.logField("memoryLimit")?.let { "${it}MB" }
+            }
+            message.startsWith("Device: ") -> {
+                androidVersion = message.logField("android")
+                    ?.let { v -> message.logField("api")?.let { "$v (API $it)" } ?: v }
+                ramAvailable = message.logField("ramAvail")
+                ramTotal     = message.logField("ramTotal")
+                storageAvailable = message.logField("storageAvail")
+                storageTotal     = message.logField("storageTotal")
+            }
+            message.startsWith("Process heap after patching: ") -> {
+                processHeapUsedMb  = message.logField("used")
+                processHeapAllocMb = message.logField("alloc")
+                processHeapMaxMb   = message.logField("max")
+            }
+        }
     }
+
+    val skipPrefixes = setOf(
+        "Runtime: ",
+        "Process heap memory limit: ",
+        "Process heap after patching: ",
+        "Device: ",
+    )
+
+    val result = mutableListOf<LogItem>()
+    for ((level, message) in this) {
+        when {
+            skipPrefixes.any { message.startsWith(it) } -> { /* consumed above */ }
+
+            message.startsWith("Patching started at ") -> {
+                val pkg = message.logField("pkg")
+                if (pkg != null) {
+                    result += LogItem.StartBanner(
+                        packageName = pkg,
+                        version = message.logField("version") ?: "?",
+                        apkSizeMb = "%.1f MB".format(
+                            (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
+                        ),
+                        patchCount = message.logField("patches")?.toIntOrNull() ?: 0,
+                        isSplit = message.logField("split") == "true",
+                        runtimeMemoryLimitMb = runtimeMemoryLimitMb,
+                        androidVersion = androidVersion,
+                        ramAvailable = ramAvailable,
+                        ramTotal = ramTotal,
+                        storageAvailable = storageAvailable,
+                        storageTotal = storageTotal,
+                    )
+                } else {
+                    result += LogItem.Entry(level, message)
+                }
+            }
+
+            message.startsWith("Patching succeeded:") -> {
+                result += LogItem.SuccessSummary(
+                    outputSizeMb = "%.1f MB".format(
+                        (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
+                    ),
+                    elapsedSec = formatElapsed(
+                        message.logField("elapsed")?.filter { it.isDigit() }?.toLongOrNull()
+                    ),
+                    processHeapUsedMb  = processHeapUsedMb,
+                    processHeapAllocMb = processHeapAllocMb,
+                    processHeapMaxMb   = processHeapMaxMb,
+                )
+            }
+
+            else -> result += LogItem.Entry(level, message)
+        }
+    }
+    return result
 }
 
 /**
@@ -136,7 +221,6 @@ fun ExpertPatchingInProgress(
     val rawLogs = patcherViewModel.logs
     val initialIndex = (rawLogs.size - 1).coerceAtLeast(0)
     val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
-    val animateFromIndex = remember { rawLogs.size }
     val windowSize = rememberWindowSize()
     @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
@@ -190,7 +274,6 @@ fun ExpertPatchingInProgress(
 
                 ExpertLogPanel(
                     patcherViewModel = patcherViewModel,
-                    animateFromIndex = animateFromIndex,
                     listState = listState,
                     modifier = Modifier
                         .weight(0.58f)
@@ -218,7 +301,6 @@ fun ExpertPatchingInProgress(
 
                 ExpertLogPanel(
                     patcherViewModel = patcherViewModel,
-                    animateFromIndex = animateFromIndex,
                     listState = listState,
                     modifier = Modifier
                         .weight(1f)
@@ -303,7 +385,7 @@ private fun ExpertProgressHeader(
                 modifier = Modifier.weight(1f)
             ) { stepName ->
                 Text(
-                    text = stepName ?: "",
+                    text = stepName ?: stringResource(R.string.patcher_success_title),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.primary,
@@ -491,11 +573,13 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
 @Composable
 private fun ExpertLogPanel(
     patcherViewModel: PatcherViewModel,
-    animateFromIndex: Int,
     listState: LazyListState,
     modifier: Modifier = Modifier
 ) {
     val rawLogs = patcherViewModel.logs
+    // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines.
+    val logItems = remember(rawLogs.size) { rawLogs.toLogItems() }
+
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
@@ -541,23 +625,10 @@ private fun ExpertLogPanel(
                 }
 
                 items(
-                    count = rawLogs.size,
+                    count = logItems.size,
                     key = { index -> index }
                 ) { index ->
-                    val shouldAnimate = index >= animateFromIndex
-                    val item = rawLogs[index].toSingleLogItem()
-                    if (shouldAnimate) {
-                        var visible by remember { mutableStateOf(false) }
-                        LaunchedEffect(Unit) { visible = true }
-                        AnimatedVisibility(
-                            visible = visible,
-                            enter = fadeIn(tween(350))
-                        ) {
-                            LogItemContent(item)
-                        }
-                    } else {
-                        LogItemContent(item)
-                    }
+                    LogItemContent(logItems[index])
                 }
 
                 // Bottom padding so last item isn't clipped by rounded corners
@@ -623,66 +694,33 @@ private fun LogItemContent(item: LogItem) {
     }
 }
 
+private enum class CardVariant { Start, Success }
+
 /**
- * Structured card shown instead of the raw "Patching started at …" log line.
+ * Universal banner card used for both the start and success log entries.
  */
 @Composable
-private fun StartBannerCard(item: LogItem.StartBanner) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 6.dp),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f),
-        tonalElevation = 0.dp
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Text(
-                text = "Patching started",
-                style = MaterialTheme.typography.labelMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f), thickness = 1.dp)
-
-            BannerFieldFull("Package", item.packageName)
-            BannerFieldFull("Version", item.version)
-
-            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), thickness = 1.dp)
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                BannerFieldCell("APK size", item.apkSizeMb, Modifier.weight(1f))
-                BannerFieldCell("Patches", item.patchCount.toString(), Modifier.weight(1f))
-                BannerFieldCell(
-                    "Split APK", if (item.isSplit) "yes" else "no",
-                    Modifier.weight(1f),
-                    valueColor = if (item.isSplit) MaterialTheme.colorScheme.tertiary else null
-                )
-            }
-        }
+private fun PatcherInfoCard(
+    title: String,
+    variant: CardVariant,
+    badge: String? = null,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    val accentColor = when (variant) {
+        CardVariant.Start   -> MaterialTheme.colorScheme.primary
+        CardVariant.Success -> MaterialTheme.colorScheme.tertiary
     }
-}
+    val bgColor = when (variant) {
+        CardVariant.Start   -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f)
+        CardVariant.Success -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f)
+    }
 
-/**
- * Structured card shown instead of the raw "Patching succeeded: …" log line.
- */
-@Composable
-private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp, vertical = 6.dp),
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f),
+        color = bgColor,
         tonalElevation = 0.dp
     ) {
         Column(
@@ -691,43 +729,151 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
                 .padding(horizontal = 14.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
+            // Header row: title + optional badge
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Patching succeeded",
+                    text = title,
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.tertiary
+                    color = accentColor
                 )
-
-                Surface(
-                    shape = RoundedCornerShape(4.dp),
-                    color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f)
-                ) {
-                    Text(
-                        text = "✓",
-                        style = MaterialTheme.typography.labelSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.tertiary,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
-                    )
+                if (badge != null) {
+                    Surface(
+                        shape = RoundedCornerShape(4.dp),
+                        color = accentColor.copy(alpha = 0.18f)
+                    ) {
+                        Text(
+                            text = badge,
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = accentColor,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                        )
+                    }
                 }
             }
 
-            HorizontalDivider(color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f), thickness = 1.dp)
+            HorizontalDivider(color = accentColor.copy(alpha = 0.15f), thickness = 1.dp)
 
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                BannerFieldCell("Output size", item.outputSizeMb, Modifier.weight(1f))
-                BannerFieldCell("Time", item.elapsedSec, Modifier.weight(1f))
+            content()
+        }
+    }
+}
+
+/**
+ * Shown instead of the raw "Patching started at …" log line.
+ * Also surfaces runtime mode, memory limit, and device environment.
+ */
+@Composable
+private fun StartBannerCard(item: LogItem.StartBanner) {
+    PatcherInfoCard(title = "Patching started", variant = CardVariant.Start) {
+        BannerFieldFull("Package", item.packageName)
+        BannerFieldFull("Version", item.version)
+
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+            thickness = 1.dp
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            BannerFieldCell("APK size", item.apkSizeMb, Modifier.weight(1f))
+            BannerFieldCell("Patches", item.patchCount.toString(), Modifier.weight(1f))
+            BannerFieldCell(
+                label = "Split APK",
+                value = if (item.isSplit) "yes" else "no",
+                modifier = Modifier.weight(1f),
+                valueColor = if (item.isSplit) MaterialTheme.colorScheme.tertiary else null
+            )
+        }
+
+        // Runtime row
+        val runtimeLabel = if (item.runtimeMemoryLimitMb != null) "Process" else "Coroutine"
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            BannerFieldCell("Runtime", runtimeLabel, Modifier.weight(1f))
+            if (item.runtimeMemoryLimitMb != null) {
+                BannerFieldCell(
+                    label = "Heap limit",
+                    value = item.runtimeMemoryLimitMb,
+                    modifier = Modifier.weight(1f),
+                    valueColor = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+
+        // Device environment only shown when data is available
+        if (item.androidVersion != null || item.ramTotal != null) {
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
+                thickness = 1.dp
+            )
+
+            item.androidVersion?.let {
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    BannerFieldCell("Android", it, Modifier.weight(1f))
+                }
             }
 
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                BannerFieldCell("Heap used", item.heapUsedMb, Modifier.weight(1f))
-                BannerFieldCell("Heap alloc", item.heapTotalMb, Modifier.weight(1f))
-                BannerFieldCell("Heap limit", item.heapMaxMb, Modifier.weight(1f))
+            if (item.ramTotal != null) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    BannerFieldCell(
+                        label = "RAM free",
+                        value = "${item.ramAvailable ?: "?"} / ${item.ramTotal}",
+                        modifier = Modifier.weight(1f)
+                    )
+                    if (item.storageTotal != null) {
+                        BannerFieldCell(
+                            label = "Storage free",
+                            value = "${item.storageAvailable ?: "?"} / ${item.storageTotal}",
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Shown instead of the raw "Patching succeeded: …" log line.
+ */
+@Composable
+private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
+    PatcherInfoCard(title = "Patching succeeded", variant = CardVariant.Success, badge = "✓") {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            BannerFieldCell("Output size", item.outputSizeMb, Modifier.weight(1f))
+            BannerFieldCell("Time", item.elapsedSec, Modifier.weight(1f))
+        }
+
+        // Heap stats — only present when ProcessRuntime was used
+        if (item.processHeapUsedMb != null) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                BannerFieldCell(
+                    label = "Heap used",
+                    value = item.processHeapUsedMb,
+                    modifier = Modifier.weight(1f),
+                    valueColor = MaterialTheme.colorScheme.tertiary
+                )
+                BannerFieldCell("Heap alloc", item.processHeapAllocMb ?: "?", Modifier.weight(1f))
+                BannerFieldCell("Heap max",   item.processHeapMaxMb   ?: "?", Modifier.weight(1f))
             }
         }
     }
