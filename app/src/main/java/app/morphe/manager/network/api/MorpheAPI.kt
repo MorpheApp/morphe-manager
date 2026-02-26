@@ -233,7 +233,10 @@ class MorpheAPI(
      */
     private suspend fun getManagerFromJson(branch: String): APIResponse<MorpheAsset> {
         val url = if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL
-        return when (val response = client.request<ManagerReleaseInfo> { url(url) }) {
+        return when (val response = client.request<ManagerReleaseInfo> {
+            url(url)
+            header("Cache-Control", "no-cache")
+        }) {
             is APIResponse.Success -> {
                 val mapped = runCatching {
                     mapManagerJsonToAsset(managerConfig, response.data).also { asset ->
