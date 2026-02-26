@@ -58,6 +58,10 @@
     <string name="sources_management_title">Patch sources</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
+    <string name="sources_management_prerelease_toggle">Use dev channel</string>
+    <string name="sources_management_prerelease_toggle_description">Fetch patches from the dev branch instead of main</string>
+    <string name="sources_management_stable_toggle">Use stable channel</string>
+    <string name="sources_management_stable_toggle_description">Fetch patches from the main branch instead of dev</string>
 
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
@@ -358,8 +362,8 @@ Are you sure you want to proceed?"</string>
 
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
-    <string name="settings_advanced_updates_use_prereleases">Use pre-release versions</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Get early access to new patches and manager features</string>
+    <string name="settings_advanced_updates_use_prereleases">Use pre-release manager</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Receive early access to new manager versions. To get pre-release patches, enable the dev channel in each patch source separately.</string>
     <string name="settings_advanced_updates_allow_metered">Update on mobile data</string>
     <string name="settings_advanced_updates_allow_metered_description">Allow patch sources and manager updates to download over mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>

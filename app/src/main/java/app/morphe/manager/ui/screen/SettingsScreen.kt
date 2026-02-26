@@ -99,7 +99,7 @@ fun SettingsScreen(
     val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
 
     // Update
-    val usePrereleases = homeViewModel.prefs.usePatchesPrereleases.getAsState()
+    val usePrereleases = homeViewModel.prefs.useManagerPrereleases.getAsState()
 
     // Dialog states
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }

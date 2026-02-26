@@ -39,6 +39,7 @@ import java.nio.ByteOrder
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.Locale
+import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.data.room.bundles.Source as SourceInfo
 
 class PatchBundleRepository(
@@ -446,6 +447,7 @@ class PatchBundleRepository(
                 SourceInfo.API.SENTINEL,
                 true, // Morphe always auto updates
                 enabled,
+                usePrerelease = prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString()),
             )
 
             is SourceInfo.Remote -> JsonPatchBundle(
@@ -460,6 +462,7 @@ class PatchBundleRepository(
                 source.url.toString(),
                 autoUpdate,
                 enabled,
+                usePrerelease = prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString()),
             )
             is SourceInfo.GitHubPullRequest -> GitHubPullRequestBundle(
                 actualName,
@@ -633,18 +636,25 @@ class PatchBundleRepository(
             bundles.forEach { bundle ->
                 updateDb(bundle.uid) { it.copy(enabled = !it.enabled) }
             }
-            doReload()
-        }
+            val newState = doReload()
 
-        // After store is updated, trigger update for bundles that were just enabled
-        if (beingEnabledUids.isNotEmpty()) {
-            startRemoteUpdateJob(
-                force = false,
-                showToast = false,
-                allowUnsafeNetwork = false,
-                onPerBundleProgress = null,
-                predicate = { it.uid in beingEnabledUids && it.autoUpdate && it.enabled }
-            )
+            // After store is updated, trigger update for bundles that were just enabled
+            if (beingEnabledUids.isNotEmpty()) {
+                Log.d(tag, "Triggering update for re-enabled bundles: $beingEnabledUids")
+                startRemoteUpdateJob(
+                    force = false,
+                    showToast = false,
+                    allowUnsafeNetwork = false,
+                    onPerBundleProgress = null,
+                    predicate = { bundle ->
+                        val matches = bundle.uid in beingEnabledUids && bundle.enabled
+                        Log.d(tag, "  predicate check uid=${bundle.uid} inEnabled=${bundle.uid in beingEnabledUids} enabled=${bundle.enabled} → $matches")
+                        matches
+                    }
+                )
+            }
+
+            newState
         }
     }
 
@@ -716,6 +726,70 @@ class PatchBundleRepository(
         }
 
         return result
+    }
+
+    /**
+     * Toggle prerelease (dev branch) for an [APIPatchBundle] or [JsonPatchBundle].
+     * Persists in preferences, updates in-memory state, and triggers a bundle update.
+     * Reverts the change and shows a toast if the update fails (e.g. branch does not exist).
+     */
+    suspend fun setUsePrerelease(uid: Int, usePrerelease: Boolean) {
+        val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+        if (usePrerelease) current.add(uid.toString()) else current.remove(uid.toString())
+        prefs.bundlePrereleasesEnabled.update(current)
+
+        dispatchAction("Set prerelease ($uid=$usePrerelease)") { state ->
+            val src = state.sources[uid] ?: return@dispatchAction state
+            val updated = when (src) {
+                is APIPatchBundle -> src.copy(usePrerelease = usePrerelease)
+                is JsonPatchBundle -> src.copy(usePrerelease = usePrerelease)
+                else -> return@dispatchAction state
+            }
+            state.copy(sources = state.sources.put(uid, updated))
+        }
+
+        // If this is the default Morphe Patches bundle, sync FCM patches topic
+        if (uid == DEFAULT_SOURCE_UID) {
+            val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
+            syncFcmTopics(
+                notificationsEnabled = notificationsEnabled,
+                useManagerPrereleases = prefs.useManagerPrereleases.get(),
+                usePatchesPrereleases = usePrerelease,
+            )
+        }
+
+        // Skip download if the bundle is disabled - it will be downloaded when re-enabled
+        // via disable() which triggers startRemoteUpdateJob for newly enabled bundles.
+        val isEnabled = store.state.value.sources[uid]?.enabled == true
+        if (!isEnabled) return
+
+        // Trigger update so the new channel takes effect immediately.
+        // Additionally revert the preference so the toggle snaps back to its previous state.
+        val updateSucceeded = runCatching {
+            performRemoteUpdateWithResult(
+                force = true,
+                showToast = false,
+                allowUnsafeNetwork = false,
+                onPerBundleProgress = null,
+                predicate = { it.uid == uid }
+            )
+        }.isSuccess
+
+        if (!updateSucceeded) {
+            val reverted = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+            if (usePrerelease) reverted.remove(uid.toString()) else reverted.add(uid.toString())
+            prefs.bundlePrereleasesEnabled.update(reverted)
+
+            dispatchAction("Revert prerelease ($uid)") { state ->
+                val src = state.sources[uid] ?: return@dispatchAction state
+                val reverted = when (src) {
+                    is APIPatchBundle -> src.copy(usePrerelease = !usePrerelease)
+                    is JsonPatchBundle -> src.copy(usePrerelease = !usePrerelease)
+                    else -> return@dispatchAction state
+                }
+                state.copy(sources = state.sources.put(uid, reverted))
+            }
+        }
     }
 
     suspend fun createLocal(expectedSize: Long? = null, createStream: suspend () -> InputStream) {

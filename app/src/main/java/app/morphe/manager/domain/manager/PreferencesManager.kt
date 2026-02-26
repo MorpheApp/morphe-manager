@@ -37,6 +37,9 @@ class PreferencesManager(
     val useManagerPrereleases = booleanPreference("manager_prereleases", false)
     val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
 
+    /** UIDs of bundles that have prereleases (dev branch) enabled. Stored as strings. */
+    val bundlePrereleasesEnabled = stringSetPreference("bundle_prereleases_enabled", emptySet())
+
     /**  Whether to send Android system notifications when updates are available in the background. */
     val backgroundUpdateNotifications = booleanPreference("background_update_notifications", false)
 

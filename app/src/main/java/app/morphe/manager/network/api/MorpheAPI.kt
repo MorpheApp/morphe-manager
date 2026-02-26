@@ -330,8 +330,7 @@ class MorpheAPI(
     /**
      * Get patches update from Morphe API
      */
-    private suspend fun getPatchesFromApi(): APIResponse<MorpheAsset> {
-        val usePrerelease = prefs.usePatchesPrereleases.get()
+    private suspend fun getPatchesFromApi(usePrerelease: Boolean): APIResponse<MorpheAsset> {
         val route = if (usePrerelease) "patches/prerelease" else "patches"
         return apiRequest(route)
     }
@@ -339,8 +338,7 @@ class MorpheAPI(
     /**
      * Get patches update from static JSON file
      */
-    private suspend fun getPatchesFromJson(): APIResponse<MorpheAsset> {
-        val usePrerelease = prefs.usePatchesPrereleases.get()
+    private suspend fun getPatchesFromJson(usePrerelease: Boolean): APIResponse<MorpheAsset> {
         val branch = if (usePrerelease) "dev" else "main"
 
         return when (val response = rawFileRequest<PatchesReleaseInfo>(patchesConfig, branch, "patches-bundle.json")) {
@@ -365,16 +363,19 @@ class MorpheAPI(
     }
 
     /**
-     * Get patches update - uses JSON or API based on configuration
+     * Get patches update - uses JSON or API based on configuration.
+     * Pass [usePrerelease] explicitly instead of reading from prefs,
+     * so each bundle can control its own channel independently.
      */
-    suspend fun getPatchesUpdate(): APIResponse<MorpheAsset> {
+    suspend fun getPatchesUpdate(usePrerelease: Boolean? = null): APIResponse<MorpheAsset> {
+        val prereleaseResolved = usePrerelease ?: prefs.usePatchesPrereleases.get()
         return if (USE_PATCHES_DIRECT_JSON) {
-            getPatchesFromJson().fallbackTo {
+            getPatchesFromJson(prereleaseResolved).fallbackTo {
                 Log.w(tag, "Falling back to Morphe API for patches")
-                getPatchesFromApi()
+                getPatchesFromApi(prereleaseResolved)
             }
         } else {
-            getPatchesFromApi()
+            getPatchesFromApi(prereleaseResolved)
         }
     }
 
