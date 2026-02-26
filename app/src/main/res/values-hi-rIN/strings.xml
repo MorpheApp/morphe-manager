@@ -101,7 +101,6 @@
     <string name="home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">एक्सपर्ट मोड</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s में से %2$s चुना गया</string>
     <string name="expert_mode_search">पैच खोजें</string>
     <string name="expert_mode_proceed">पैचिंग के लिए आगे बढ़ें</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
@@ -429,7 +428,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">सिस्टम इन्स्टॉलर</string>
     <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का इस्तमाल करें</string>
     <string name="installer_auto_saved_name">रूट्ड माउंट इंस्टॉलर</string>
-    <string name="installer_auto_saved_description">पथचित APK को स्थापित एप्लिकेशन (रूट आवश्यक) पर माउंट करता है।</string>
+    <string name="installer_auto_saved_description">संस्थापित एप्लिकेशन पर पथचिह्नित एपीके को माउंट करता है</string>
     <string name="installer_shizuku_description">शिज़ुकू या साई को उपयोग करके चुपचाप इंस्टॉल करें</string>
     <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
     <string name="installer_status_requires_root">Requires root access</string>
@@ -607,6 +606,7 @@ morphe_header_custom_dark.png
     <string name="allow">अनुमति दें</string>
     <string name="details">विवरण</string>
     <string name="hide">छुपायें</string>
+    <string name="default_">डिफ़ॉल्ट</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>
     <string name="mounting_ellipsis">माउंटिंग…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>

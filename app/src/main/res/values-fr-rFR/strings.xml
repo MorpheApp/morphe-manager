@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Aucuns patchs disponibles pour cette application</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode Expert</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s sur %2$s sélectionnés</string>
     <string name="expert_mode_search">Rechercher des patchs</string>
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
@@ -436,7 +435,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_internal_name">Installateur système</string>
     <string name="installer_internal_description">Utiliser l\'installateur de package Android</string>
     <string name="installer_auto_saved_name">Installateur par montage root</string>
-    <string name="installer_auto_saved_description">Monte l\'APK patché par-dessus l\'application installée (root requis)</string>
+    <string name="installer_auto_saved_description">Monte l\'APK patché par-dessus l\'application installée</string>
     <string name="installer_shizuku_description">Installer silencieusement via Shizuku ou Sui</string>
     <string name="installer_option_none">Pas d\'installateur de secours</string>
     <string name="installer_none_description">Aucun installateur de secours configuré</string>
@@ -615,6 +614,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="allow">Autoriser</string>
     <string name="details">Détails</string>
     <string name="hide">Masquer</string>
+    <string name="default_">Par défaut</string>
     <string name="installing_ellipsis">Installation…</string>
     <string name="mounting_ellipsis">Montage…</string>
     <string name="unmounting_ellipsis">Démontage…</string>

@@ -328,13 +328,12 @@ fun InstallerOptionItem(
 
     // Build description with availability reason for disabled items
     val description = remember(option, enabled) {
-        buildList {
-            option.description?.takeIf { it.isNotBlank() }?.let { add(it) }
-            if (!enabled) {
-                option.availability.reason?.let { add(context.getString(it)) }
-            }
-        }.joinToString("\n")
+        option.description?.takeIf { it.isNotBlank() }
     }
+
+    val reasonText = if (!enabled) {
+        option.availability.reason?.let { context.getString(it) }
+    } else null
 
     Surface(
         modifier = Modifier
@@ -355,42 +354,56 @@ fun InstallerOptionItem(
         onClick = onSelect,
         enabled = enabled
     ) {
-        IconTextRow(
+        Column(
             modifier = Modifier.padding(16.dp),
-            leadingContent = {
-                if (option.icon != null &&
-                    (option.token == InstallerManager.Token.Shizuku ||
-                            option.token is InstallerManager.Token.Component)
-                ) {
-                    InstallerIconPreview(
-                        drawable = option.icon,
-                        selected = selected,
-                        enabled = enabled
-                    )
-                } else {
-                    RadioButton(
-                        selected = selected,
-                        onClick = null,
-                        enabled = enabled,
-                        colors = RadioButtonDefaults.colors(
-                            selectedColor = colors.primary,
-                            unselectedColor = colors.onSurfaceVariant,
-                            disabledSelectedColor = colors.onSurface.copy(alpha = 0.38f),
-                            disabledUnselectedColor = colors.onSurface.copy(alpha = 0.38f)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            IconTextRow(
+                leadingContent = {
+                    if (option.icon != null &&
+                        (option.token == InstallerManager.Token.Shizuku ||
+                                option.token is InstallerManager.Token.Component)
+                    ) {
+                        InstallerIconPreview(
+                            drawable = option.icon,
+                            selected = selected,
+                            enabled = enabled
                         )
-                    )
-                }
-            },
-            title = option.label,
-            description = description.takeIf { it.isNotBlank() },
-            trailingContent = null,
-            titleStyle = MaterialTheme.typography.bodyMedium.copy(
-                color = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f)
-            ),
-            descriptionStyle = MaterialTheme.typography.bodySmall.copy(
-                color = if (enabled) colors.onSurfaceVariant else colors.onSurfaceVariant.copy(alpha = 0.38f)
+                    } else {
+                        RadioButton(
+                            selected = selected,
+                            onClick = null,
+                            enabled = enabled,
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = colors.primary,
+                                unselectedColor = colors.onSurfaceVariant,
+                                disabledSelectedColor = colors.onSurface.copy(alpha = 0.38f),
+                                disabledUnselectedColor = colors.onSurface.copy(alpha = 0.38f)
+                            )
+                        )
+                    }
+                },
+                title = option.label,
+                description = description,
+                trailingContent = null,
+                titleStyle = MaterialTheme.typography.bodyMedium.copy(
+                    color = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f)
+                ),
+                descriptionStyle = MaterialTheme.typography.bodySmall.copy(
+                    color = if (enabled) colors.onSurfaceVariant else colors.onSurfaceVariant.copy(alpha = 0.38f)
+                )
             )
-        )
+
+            if (reasonText != null) {
+                InfoBadge(
+                    text = reasonText,
+                    style = InfoBadgeStyle.Warning,
+                    icon = Icons.Outlined.Warning,
+                    isCompact = true,
+                    modifier = Modifier.padding(start = 36.dp)
+                )
+            }
+        }
     }
 }
 

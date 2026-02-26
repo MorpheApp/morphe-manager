@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">Nu există patch-uri disponibile pentru această aplicație</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s din %2$s selectat</string>
     <string name="expert_mode_search">Caută patch-uri</string>
     <string name="expert_mode_proceed">Procedează la aplicarea</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
@@ -436,7 +435,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_internal_name">Instalator de sistem</string>
     <string name="installer_internal_description">Utilizați instalatorul de pachete Android</string>
     <string name="installer_auto_saved_name">Instalator de montare root</string>
-    <string name="installer_auto_saved_description">Montați APK-ul modificat peste aplicația instalată (necesită root)</string>
+    <string name="installer_auto_saved_description">Instalează APK-ul patcheat peste aplicația instalată</string>
     <string name="installer_shizuku_description">Instalează în mod silent folosind Shizuku sau Sui</string>
     <string name="installer_option_none">Fără opțiuni de rezervă</string>
     <string name="installer_none_description">Nu este configurat niciun instalator de rezervă</string>
@@ -615,6 +614,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="allow">Permite</string>
     <string name="details">Detalii</string>
     <string name="hide">Ascunde</string>
+    <string name="default_">Implicit</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>

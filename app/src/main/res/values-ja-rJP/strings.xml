@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">このアプリに利用できるパッチはありません</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">エキスパートモード</string>
-    <string name="expert_mode_subtitle_extended_format">%1$s / %2$s を選択中</string>
     <string name="expert_mode_search">パッチを検索する</string>
     <string name="expert_mode_proceed">パッチ処理に進む</string>
     <string name="expert_mode_disable_all">全て無効化する</string>
@@ -437,7 +436,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">システムのインストーラー</string>
     <string name="installer_internal_description">Android パッケージ インストーラーを使用します。</string>
     <string name="installer_auto_saved_name">root 権限マウント式インストーラー</string>
-    <string name="installer_auto_saved_description">パッチ済み APK をインストール済みアプリの上にマウントします（要 root 権限）</string>
+    <string name="installer_auto_saved_description">パッチ済み APK をインストール済みアプリの上にマウントします</string>
     <string name="installer_shizuku_description">Shizuku または Sui を使用してサイレントインストールします</string>
     <string name="installer_option_none">代替なし</string>
     <string name="installer_none_description">代替インストーラーは未設定です</string>
@@ -616,6 +615,7 @@ Morphe は、コミュニティのフィードバックと貢献によって発�
     <string name="allow">許可</string>
     <string name="details">詳細</string>
     <string name="hide">非表示にする</string>
+    <string name="default_">デフォルト</string>
     <string name="installing_ellipsis">インストール中…</string>
     <string name="mounting_ellipsis">マウント中…</string>
     <string name="unmounting_ellipsis">アンマウント中…</string>

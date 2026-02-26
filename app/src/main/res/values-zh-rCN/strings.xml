@@ -102,7 +102,6 @@
     <string name="home_no_patches_for_app">此应用无补丁记录</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">高级模式</string>
-    <string name="expert_mode_subtitle_extended_format">%2$s人中以选择%1$s</string>
     <string name="expert_mode_search">搜索补丁</string>
     <string name="expert_mode_proceed">开始打补丁</string>
     <string name="expert_mode_disable_all">禁用所有</string>
@@ -436,7 +435,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">系统安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
     <string name="installer_auto_saved_name">Rooted 挂载安装器</string>
-    <string name="installer_auto_saved_description">将修补后的 APK 安装在已安装的应用上（需要 root 权限）</string>
+    <string name="installer_auto_saved_description">将修补后的 APK 安装在已安装的应用程序上</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 静默安装</string>
     <string name="installer_option_none">无备用</string>
     <string name="installer_none_description">未配置备用安装程序</string>
@@ -613,6 +612,7 @@ morphe_header_custom_dark.png
     <string name="allow">允许</string>
     <string name="details">详细信息</string>
     <string name="hide">隐藏</string>
+    <string name="default_">默认</string>
     <string name="installing_ellipsis">正在安装…</string>
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting_ellipsis">正在卸载…</string>
