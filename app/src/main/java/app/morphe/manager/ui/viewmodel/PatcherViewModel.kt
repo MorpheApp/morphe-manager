@@ -25,7 +25,9 @@ import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_CURRENT
 import app.morphe.manager.patcher.runtime.ProcessRuntime
+import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_HEAP
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.*
@@ -271,16 +273,16 @@ class PatcherViewModel(
             level.androidLog(message)
 
             // Parse patcher process heap limit
-            if (message.startsWith("Process heap memory limit: ")) {
-                val mb = message.removePrefix("Process heap memory limit: ")
+            if (message.startsWith(LOG_PROCESS_PREFIX_HEAP)) {
+                val mb = message.removePrefix(LOG_PROCESS_PREFIX_HEAP)
                     .substringBefore("MB").toIntOrNull()
                 if (mb != null) viewModelScope.launch { heapLimitMb = mb }
                 // still pass through to logs
             }
 
             // Extract heap samples from process runtime polling - keep last 60
-            if (message.startsWith("Heap: current=")) {
-                val mb = message.removePrefix("Heap: current=")
+            if (message.startsWith(LOG_MEMORY_PREFIX_CURRENT)) {
+                val mb = message.removePrefix(LOG_MEMORY_PREFIX_CURRENT)
                     .substringBefore("MB").toIntOrNull()
                 if (mb != null) {
                     viewModelScope.launch {

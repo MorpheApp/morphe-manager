@@ -185,11 +185,11 @@ class PatcherWorker(
             // Log runtime mode info
             if (useProcessRuntime) {
                 val memLimit = prefs.patcherProcessMemoryLimit.get()
-                args.logger.info("Runtime: process memoryLimit=$memLimit")
+                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
                 // Start memory polling for CoroutineRuntime
                 args.logger.info("Process heap memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
-                args.logger.info("Runtime: coroutine")
+                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
                 MemoryMonitor.startMemoryPolling(args.logger)
             }
 
@@ -200,11 +200,13 @@ class PatcherWorker(
             }
             val statFs = StatFs(applicationContext.filesDir.absolutePath)
             args.logger.info(
-                "Device: android=${Build.VERSION.RELEASE} api=${Build.VERSION.SDK_INT} " +
-                        "ramAvail=\"${formatBytes(memInfo.availMem)}\" " +
-                        "ramTotal=\"${formatBytes(memInfo.totalMem)}\" " +
-                        "storageAvail=\"${formatBytes(statFs.availableBytes)}\" " +
-                        "storageTotal=\"${formatBytes(statFs.totalBytes)}\""
+                "$LOG_WORKER_PREFIX_DEVICE " +
+                        "$LOG_WORKER_FIELD_ANDROID=${Build.VERSION.RELEASE} " +
+                        "$LOG_WORKER_FIELD_API=${Build.VERSION.SDK_INT} " +
+                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytes(memInfo.availMem)}\" " +
+                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytes(memInfo.totalMem)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytes(statFs.availableBytes)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytes(statFs.totalBytes)}\""
             )
 
             args.logger.info(
@@ -241,8 +243,9 @@ class PatcherWorker(
             }
 
             args.logger.info(
-                "Patching succeeded: output=${args.output} size=${File(args.output).length()} " +
-                        "elapsed=${elapsed}ms"
+                "$LOG_WORKER_PREFIX_SUCCEEDED output=${args.output} " +
+                        "$LOG_WORKER_FIELD_SIZE=${File(args.output).length()} " +
+                        "$LOG_WORKER_FIELD_ELAPSED=${elapsed}ms"
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
@@ -289,8 +292,22 @@ class PatcherWorker(
     companion object {
         private const val LOG_PREFIX = "[Worker]"
         private fun String.logFmt() = "$LOG_PREFIX $this"
+
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
         const val PROCESS_FAILURE_MESSAGE_KEY = "process_failure_message"
+
+        const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
+        const val LOG_WORKER_PREFIX_DEVICE = "Device:"
+        const val LOG_WORKER_PREFIX_RUNTIME = "Runtime:"
+        const val LOG_WORKER_FIELD_SIZE = "size"
+        const val LOG_WORKER_FIELD_MEMORY_LIMIT = "memoryLimit"
+        const val LOG_WORKER_FIELD_ELAPSED = "elapsed"
+        const val LOG_WORKER_FIELD_ANDROID = "android"
+        const val LOG_WORKER_FIELD_API = "api"
+        const val LOG_WORKER_FIELD_RAM_AVAIL = "ramAvail"
+        const val LOG_WORKER_FIELD_RAM_TOTAL = "ramTotal"
+        const val LOG_WORKER_FIELD_STORAGE_AVAIL = "storageAvail"
+        const val LOG_WORKER_FIELD_STORAGE_TOTAL = "storageTotal"
     }
 }

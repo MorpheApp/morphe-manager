@@ -4,22 +4,20 @@ import app.morphe.manager.patcher.logger.Logger
 import java.lang.Runtime
 import kotlin.math.max
 
+
 object MemoryMonitor {
+    const val LOG_MEMORY_PREFIX_DONE = "Heap after patching:"
+    const val LOG_MEMORY_PREFIX_CURRENT = "Heap: current="
+    const val LOG_MEMORY_FIELD_AVERAGE = "average"
+    const val LOG_MEMORY_FIELD_MAX = "max"
 
-    const val MEMORY_LOG_PREFIX = "Heap after patching:"
-    const val MEMORY_LOG_FIELD_AVERAGE = "average"
-    const val MEMORY_LOG_FIELD_MAX = "max"
-
-    // Change to true to log all memory checks.
-    private const val MEMORY_MONITOR_LOG_UPDATES = true
-
-    private const val MEMORY_MONITOR_INTERVAL = 1000L
+    private const val MEMORY_MONITOR_INTERVAL = 2000L
 
     @Volatile
     private var memoryPollUsage = false
 
     @Volatile
-    var memoryPollSamples = 0
+    private var memoryPollSamples = 0
 
     @Volatile
     var memoryUsedAverage = 0L
@@ -43,9 +41,9 @@ object MemoryMonitor {
                 memoryUsedAverage =
                     (memoryUsedAverage * memoryPollSamples + used) / ++memoryPollSamples
 
-                if (MEMORY_MONITOR_LOG_UPDATES) {
+                if (true) {
                     logger.info(
-                        "Heap: current=${used}MB " +
+                        "$LOG_MEMORY_PREFIX_CURRENT${used}MB " +
                                 "average=${memoryUsedAverage}MB " +
                                 "max=${memoryUsedMax}MB"
                     )
@@ -63,8 +61,8 @@ object MemoryMonitor {
     fun stopMemoryPolling(logger: Logger) {
         memoryPollUsage = false
         logger.info(
-            "$MEMORY_LOG_PREFIX $MEMORY_LOG_FIELD_AVERAGE=${memoryUsedAverage}MB " +
-                    "$MEMORY_LOG_FIELD_MAX=${memoryUsedMax}MB"
+            "$LOG_MEMORY_PREFIX_DONE $LOG_MEMORY_FIELD_AVERAGE=${memoryUsedAverage}MB " +
+                    "$LOG_MEMORY_FIELD_MAX=${memoryUsedMax}MB"
         )
     }
 }

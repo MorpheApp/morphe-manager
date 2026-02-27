@@ -37,9 +37,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
-import app.morphe.manager.patcher.runtime.MemoryMonitor.MEMORY_LOG_FIELD_AVERAGE
-import app.morphe.manager.patcher.runtime.MemoryMonitor.MEMORY_LOG_FIELD_MAX
-import app.morphe.manager.patcher.runtime.MemoryMonitor.MEMORY_LOG_PREFIX
+import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_AVERAGE
+import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_MAX
+import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_DONE
+import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_HEAP
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ANDROID
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_API
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ELAPSED
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MEMORY_LIMIT
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_AVAIL
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_TOTAL
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_SIZE
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_AVAIL
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_TOTAL
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -131,29 +144,29 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
 
     for ((_, message) in this) {
         when {
-            message.startsWith("Runtime: ") -> {
-                runtimeMemoryLimitMb = message.logField("memoryLimit")?.let { "${it}MB" }
+            message.startsWith(LOG_WORKER_PREFIX_RUNTIME) -> {
+                runtimeMemoryLimitMb = message.logField(LOG_WORKER_FIELD_MEMORY_LIMIT)?.let { "${it}MB" }
             }
-            message.startsWith("Device: ") -> {
-                androidVersion = message.logField("android")
-                    ?.let { v -> message.logField("api")?.let { "$v (API $it)" } ?: v }
-                ramAvailable = message.logField("ramAvail")
-                ramTotal     = message.logField("ramTotal")
-                storageAvailable = message.logField("storageAvail")
-                storageTotal     = message.logField("storageTotal")
+            message.startsWith(LOG_WORKER_PREFIX_DEVICE) -> {
+                androidVersion = message.logField(LOG_WORKER_FIELD_ANDROID)?.let { v ->
+                    message.logField(LOG_WORKER_FIELD_API)?.let { "$v (API $it)" } ?: v
+                }
+                ramAvailable = message.logField(LOG_WORKER_FIELD_RAM_AVAIL)
+                ramTotal     = message.logField(LOG_WORKER_FIELD_RAM_TOTAL)
+                storageAvailable = message.logField(LOG_WORKER_FIELD_STORAGE_AVAIL)
+                storageTotal     = message.logField(LOG_WORKER_FIELD_STORAGE_TOTAL)
             }
-            message.startsWith(MEMORY_LOG_PREFIX) -> {
-                processHeapAverageMb  = message.logField(MEMORY_LOG_FIELD_AVERAGE)
-                processHeapMaxMb   = message.logField(MEMORY_LOG_FIELD_MAX)
+            message.startsWith(LOG_MEMORY_PREFIX_DONE) -> {
+                processHeapAverageMb  = message.logField(LOG_MEMORY_FIELD_AVERAGE)
+                processHeapMaxMb   = message.logField(LOG_MEMORY_FIELD_MAX)
             }
         }
     }
 
     val skipPrefixes = setOf(
-        "Runtime: ",
-        "Process heap memory limit: ",
-        MEMORY_LOG_PREFIX,
-        "Device: ",
+        LOG_PROCESS_PREFIX_HEAP,
+        LOG_MEMORY_PREFIX_DONE,
+        LOG_WORKER_PREFIX_DEVICE,
     )
 
     val result = mutableListOf<LogItem>()
@@ -188,13 +201,13 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                 }
             }
 
-            message.startsWith("Patching succeeded:") -> {
+            message.startsWith(LOG_WORKER_PREFIX_SUCCEEDED) -> {
                 result += LogItem.SuccessSummary(
                     outputSizeMb = "%.1f MB".format(
-                        (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
+                        (message.logField(LOG_WORKER_FIELD_SIZE)?.toLongOrNull() ?: 0L) / 1_048_576.0
                     ),
                     elapsedSec = formatElapsed(
-                        message.logField("elapsed")?.filter { it.isDigit() }?.toLongOrNull()
+                        message.logField(LOG_WORKER_FIELD_ELAPSED)?.filter { it.isDigit() }?.toLongOrNull()
                     ),
                     processHeapAverageMb  = processHeapAverageMb,
                     processHeapMaxMb   = processHeapMaxMb,
@@ -565,7 +578,9 @@ private fun HeapUsageGraph(
                 padded.forEach { sample ->
                     val fraction = if (maxHeapMb > 0) (sample / maxHeapMb.toFloat()).coerceIn(0f, 1f) else 0f
                     val color = if (fraction > 0.8f) warnColor else barColor
-                    Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
+                    Box(modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -638,9 +653,16 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
                     val trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)
                     val fillColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.45f)
 
-                    Box(modifier = Modifier.weight(1f).height(2.dp)) {
-                        Box(modifier = Modifier.fillMaxSize().background(trackColor))
-                        Box(modifier = Modifier.fillMaxHeight().fillMaxWidth(lineProgress).background(fillColor))
+                    Box(modifier = Modifier
+                        .weight(1f)
+                        .height(2.dp)) {
+                        Box(modifier = Modifier
+                            .fillMaxSize()
+                            .background(trackColor))
+                        Box(modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth(lineProgress)
+                            .background(fillColor))
                     }
                 }
 
