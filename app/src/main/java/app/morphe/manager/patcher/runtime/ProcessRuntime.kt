@@ -69,7 +69,11 @@ fun calculateAdaptiveMemoryLimit(context: Context): Int {
 /**
  * Runs the patcher in another process by using the app_process binary and IPC.
  */
-class ProcessRuntime(private val context: Context) : Runtime(context) {
+class ProcessRuntime(
+    private val context: Context,
+    // On Android Q and below, memory retry loop is unreliable - skip it and let the caller fall back
+    private val skipMemoryRetry: Boolean = Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q
+) : Runtime(context) {
     private val pm: PM by inject()
 
     private suspend fun awaitBinderConnection(): IPatcherProcess {
@@ -153,7 +157,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     else -> false
                 }
 
-                if (isMemoryFailure && memoryMB > minMemoryLimit) {
+                if (isMemoryFailure && !skipMemoryRetry && memoryMB > minMemoryLimit) {
                     retried = true
                     memoryMB -= PROCESS_RUNTIME_MEMORY_STEP
                     Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")

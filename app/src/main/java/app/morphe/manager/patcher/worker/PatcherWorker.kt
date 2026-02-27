@@ -172,12 +172,6 @@ class PatcherWorker(
             }
 
             val useProcessRuntime = prefs.useProcessRuntime.get()
-            val runtime = if (useProcessRuntime) {
-                ProcessRuntime(applicationContext)
-            } else {
-                CoroutineRuntime(applicationContext)
-            }
-
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             val selectedCount = args.selectedPatches.values.sumOf { it.size }
@@ -217,17 +211,49 @@ class PatcherWorker(
                 MemoryMonitor.startMemoryPolling(args.logger)
             }
 
-            runtime.execute(
-                inputFile.absolutePath,
-                patchedApk.absolutePath,
-                args.packageName,
-                args.selectedPatches,
-                args.options,
-                args.logger,
-                args.onPatchCompleted,
-                args.onProgress,
-                stripNativeLibs
-            )
+            // Execute patching. ProcessRuntime has its own retry loop that reduces memory on OOM
+            // If it still fails on Android <= Q, fall back to CoroutineRuntime
+            var usedCoroutineFallback = false
+            val runtime = if (useProcessRuntime) {
+                ProcessRuntime(applicationContext)
+            } else {
+                CoroutineRuntime(applicationContext)
+            }
+
+            try {
+                runtime.execute(
+                    inputFile.absolutePath,
+                    patchedApk.absolutePath,
+                    args.packageName,
+                    args.selectedPatches,
+                    args.options,
+                    args.logger,
+                    args.onPatchCompleted,
+                    args.onProgress,
+                    stripNativeLibs
+                )
+            } catch (e: Exception) {
+                if (!useProcessRuntime || Build.VERSION.SDK_INT > Build.VERSION_CODES.Q || !isOomRelated(e)) {
+                    throw e
+                }
+
+                args.logger.warn("Process runtime OOM on Android ${Build.VERSION.RELEASE}, falling back to coroutine runtime")
+                usedCoroutineFallback = true
+
+                MemoryMonitor.startMemoryPolling(args.logger)
+
+                CoroutineRuntime(applicationContext).execute(
+                    inputFile.absolutePath,
+                    patchedApk.absolutePath,
+                    args.packageName,
+                    args.selectedPatches,
+                    args.options,
+                    args.logger,
+                    args.onPatchCompleted,
+                    args.onProgress,
+                    stripNativeLibs
+                )
+            }
 
             if (stripNativeLibs && !inputIsSplitArchive) {
                 NativeLibStripper.strip(patchedApk)
@@ -238,7 +264,7 @@ class PatcherWorker(
 
             val elapsed = System.currentTimeMillis() - startTime
 
-            if (!useProcessRuntime) {
+            if (!useProcessRuntime || usedCoroutineFallback) {
                 MemoryMonitor.stopMemoryPolling(args.logger)
             }
 
@@ -287,6 +313,14 @@ class PatcherWorker(
         } finally {
             patchedApk.delete()
         }
+    }
+
+    private fun isOomRelated(e: Exception) = when (e) {
+        is ProcessRuntime.ProcessExitException ->
+            e.exitCode == ProcessRuntime.OOM_EXIT_CODE || e.exitCode == ProcessRuntime.SIGKILL_EXIT_CODE
+        is ProcessRuntime.RemoteFailureException ->
+            e.originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
+        else -> false
     }
 
     companion object {
