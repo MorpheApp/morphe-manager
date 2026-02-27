@@ -58,10 +58,8 @@
     <string name="sources_management_title">Patch sources</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
-    <string name="sources_management_prerelease_toggle">Use dev channel</string>
-    <string name="sources_management_prerelease_toggle_description">Fetch patches from the dev branch instead of main</string>
-    <string name="sources_management_stable_toggle">Use stable channel</string>
-    <string name="sources_management_stable_toggle_description">Fetch patches from the main branch instead of dev</string>
+    <string name="sources_management_prerelease_toggle">Use pre-release patches</string>
+    <string name="sources_management_prerelease_toggle_description">Receive early access to new experimental patches version</string>
 
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
@@ -87,6 +85,7 @@
     <string name="sources_update_success">Update successful</string>
     <string name="sources_update_unavailable">No update available</string>
     <string name="sources_download_fail">Failed to download sources: %s</string>
+    <string name="sources_download_endpoint_not_found">Could not update \'%1$s\': the patch JSON file was not found at the configured URL</string>
 
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Need help finding an original unpatched APK?</string>
@@ -363,7 +362,7 @@ Are you sure you want to proceed?"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
     <string name="settings_advanced_updates_use_prereleases">Use pre-release manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Receive early access to new manager versions. To get pre-release patches, enable the dev channel in each patch source separately.</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Receive early access to new experimental manager versions. To get pre-release patches, enable the pre-release toggle in each patch source separately</string>
     <string name="settings_advanced_updates_allow_metered">Update on mobile data</string>
     <string name="settings_advanced_updates_allow_metered_description">Allow patch sources and manager updates to download over mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
