@@ -75,8 +75,7 @@ sealed interface LogItem {
         val outputSizeMb: String,
         val elapsedSec: String,
         // null when using CoroutineRuntime (no separate process)
-        val processHeapUsedMb: String?,
-        val processHeapAllocMb: String?,
+        val processHeapAverageMb: String?,
         val processHeapMaxMb: String?,
     ) : LogItem
 
@@ -117,8 +116,7 @@ private fun formatElapsed(ms: Long?): String {
 internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     // Pre-scan for auxiliary lines so banner cards can be built in one pass.
     var runtimeMemoryLimitMb: String? = null
-    var processHeapUsedMb: String? = null
-    var processHeapAllocMb: String? = null
+    var processHeapAverageMb: String? = null
     var processHeapMaxMb: String? = null
     var androidVersion: String? = null
     var ramAvailable: String? = null
@@ -142,8 +140,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                 storageTotal     = message.logField("storageTotal")
             }
             message.startsWith("Process heap after patching: ") -> {
-                processHeapUsedMb  = message.logField("used")
-                processHeapAllocMb = message.logField("alloc")
+                processHeapAverageMb  = message.logField("average")
                 processHeapMaxMb   = message.logField("max")
             }
         }
@@ -196,8 +193,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                     elapsedSec = formatElapsed(
                         message.logField("elapsed")?.filter { it.isDigit() }?.toLongOrNull()
                     ),
-                    processHeapUsedMb  = processHeapUsedMb,
-                    processHeapAllocMb = processHeapAllocMb,
+                    processHeapAverageMb  = processHeapAverageMb,
                     processHeapMaxMb   = processHeapMaxMb,
                 )
             }
@@ -877,19 +873,13 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
         }
 
         // Heap stats — only present when ProcessRuntime was used
-        if (item.processHeapUsedMb != null) {
+        if (item.processHeapAverageMb != null) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                BannerFieldCell(
-                    label = "Heap used",
-                    value = item.processHeapUsedMb,
-                    modifier = Modifier.weight(1f),
-                    valueColor = MaterialTheme.colorScheme.tertiary
-                )
-                BannerFieldCell("Heap alloc", item.processHeapAllocMb ?: "?", Modifier.weight(1f))
-                BannerFieldCell("Heap max",   item.processHeapMaxMb   ?: "?", Modifier.weight(1f))
+                BannerFieldCell("Heap average", item.processHeapAverageMb, Modifier.weight(1f))
+                BannerFieldCell("Heap max", item.processHeapMaxMb ?: "?", Modifier.weight(1f))
             }
         }
     }

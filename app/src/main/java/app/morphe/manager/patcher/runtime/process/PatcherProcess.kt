@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
+import kotlin.math.max
 import kotlin.system.exitProcess
 
 /**
@@ -54,6 +55,8 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 override fun log(level: LogLevel, message: String) =
                     events.log(level.name, message)
             }
+
+            startMemoryPolling(logger)
 
             logger.info("Process heap memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
 
@@ -102,27 +105,67 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                         events.progress(name, state?.name, message)
                     }
                 ).use {
-                    it.run(File(parameters.outputFile), patchList)}
+                    it.run(File(parameters.outputFile), patchList)
+                }
             } finally {
                 preparation.cleanup()
             }
 
-            val rt = Runtime.getRuntime()
-            val heapUsedMb = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
-            val heapTotalMb = rt.totalMemory() / (1024 * 1024)
-            val heapMaxMb = rt.maxMemory() / (1024 * 1024)
+            memoryPollUsage = false
             logger.info(
-                "Process heap after patching: " +
-                        "used=${heapUsedMb}MB alloc=${heapTotalMb}MB max=${heapMaxMb}MB"
+                "Process heap after patching: average=${memoryUsedAverage}MB max=${memoryUsedMax}MB"
             )
 
             events.finished(null)
         }
     }
 
+    /**
+     * Launches a background coroutine that logs heap usage every 5 seconds.
+     */
+    private fun startMemoryPolling(logger: Logger) {
+        memoryPollUsage = true
+        memoryPollSamples = 0
+
+        scope.launch {
+            val rt = Runtime.getRuntime()
+
+            while (memoryPollUsage) {
+                val used = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
+                memoryUsedMax = max(memoryUsedMax, used)
+
+                memoryUsedAverage = (memoryUsedAverage * memoryPollSamples + used) /
+                        ++memoryPollSamples
+
+                if (MEMORY_MONITOR_LOG_UPDATES) {
+                    logger.info(
+                        "Heap: current=${used}MB " +
+                                "average=${memoryUsedAverage}MB " +
+                                "max=${memoryUsedMax}MB"
+                    )
+                }
+
+                kotlinx.coroutines.delay(MEMORY_MONITOR_INTERVAL)
+            }
+        }
+    }
+
     companion object {
         private val longArrayClass = LongArray::class.java
         private val emptyLongArray = LongArray(0)
+
+        private const val MEMORY_MONITOR_INTERVAL = 2000L
+        // Change to true to log all memory checks.
+        private const val MEMORY_MONITOR_LOG_UPDATES = false
+
+        @Volatile
+        private var memoryPollUsage = false
+        @Volatile
+        private var memoryPollSamples = 0
+        @Volatile
+        private var memoryUsedAverage = 0L
+        @Volatile
+        private var memoryUsedMax = 0L
 
         @SuppressLint("PrivateApi")
         @JvmStatic
