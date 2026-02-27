@@ -12,15 +12,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_LOW_WARNING
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MAX_LIMIT
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_STEP
+import app.morphe.manager.patcher.runtime.*
 import app.morphe.manager.ui.screen.shared.*
 
 /**
@@ -34,6 +32,10 @@ fun ProcessRuntimeDialog(
     onEnabledChange: (Boolean) -> Unit,
     onLimitChange: (Int) -> Unit,
 ) {
+    val context = LocalContext.current
+    // Adaptive upper bound: use device-RAM-based limit, capped at the hard maximum
+    val maxLimit: Int = calculateAdaptiveMemoryLimit(context)
+        .coerceAtMost(PROCESS_RUNTIME_MEMORY_MAX_LIMIT)
     var enabled by remember { mutableStateOf(currentEnabled) }
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
 
@@ -160,8 +162,8 @@ fun ProcessRuntimeDialog(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
                         onValueChangeFinished = { onLimitChange(sliderValue.toInt()) },
-                        valueRange = PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM.toFloat()..PROCESS_RUNTIME_MEMORY_MAX_LIMIT.toFloat(),
-                        steps = (((PROCESS_RUNTIME_MEMORY_MAX_LIMIT.toDouble() - PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM)
+                        valueRange = PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM.toFloat()..maxLimit.toFloat(),
+                        steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM)
                                 / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
                         enabled = enabled,
                         modifier = Modifier.fillMaxWidth()
@@ -177,7 +179,7 @@ fun ProcessRuntimeDialog(
                             color = LocalDialogSecondaryTextColor.current
                         )
                         Text(
-                            text = "$PROCESS_RUNTIME_MEMORY_MAX_LIMIT MB",
+                            text = "$maxLimit MB",
                             style = MaterialTheme.typography.labelSmall,
                             color = LocalDialogSecondaryTextColor.current
                         )

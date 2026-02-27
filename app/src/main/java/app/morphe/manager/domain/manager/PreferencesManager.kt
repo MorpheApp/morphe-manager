@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT
+import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.ExportNameFormatter
@@ -65,7 +65,7 @@ class PreferencesManager(
         // Armv7 silently fails and nobody has researched why yet.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
-    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_DEFAULT)
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
 
     val keystoreAlias = stringPreference("keystore_alias", KeystoreManager.DEFAULT)
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
