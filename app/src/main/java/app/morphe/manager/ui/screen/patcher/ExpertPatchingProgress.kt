@@ -550,7 +550,7 @@ private fun HeapUsageGraph(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Heap usage",
+                    text = stringResource(R.string.memory_usage),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                     fontSize = 10.sp
