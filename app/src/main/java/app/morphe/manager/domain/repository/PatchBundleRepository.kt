@@ -40,6 +40,8 @@ import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.Locale
 import app.morphe.manager.util.syncFcmTopics
+import app.morphe.manager.network.utils.APIError
+import io.ktor.client.plugins.ResponseException
 import app.morphe.manager.data.room.bundles.Source as SourceInfo
 
 class PatchBundleRepository(
@@ -462,7 +464,7 @@ class PatchBundleRepository(
                 source.url.toString(),
                 autoUpdate,
                 enabled,
-                usePrerelease = prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString()),
+                usePrerelease = shouldUsePrerelease(uid, source.url.toString()),
             )
             is SourceInfo.GitHubPullRequest -> GitHubPullRequestBundle(
                 actualName,
@@ -1000,13 +1002,22 @@ class PatchBundleRepository(
 //                return@dispatchAction state
 //            }
 
-            val src = createEntity(
+            var src = createEntity(
                 "",
                 SourceInfo.from(normalizedUrl),
                 autoUpdate,
                 createdAt = createdAt,
                 updatedAt = updatedAt
             ).load() as RemotePatchBundle
+
+            // Auto-enable prerelease if the URL explicitly targets the "dev" branch
+            if (src is JsonPatchBundle && src.endpointBranch == "dev") {
+                val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+                current.add(src.uid.toString())
+                prefs.bundlePrereleasesEnabled.update(current)
+                src = src.copy(usePrerelease = true)
+            }
+
             val allowUnsafeDownload = prefs.allowMeteredUpdates.get()
             update(
                 src,
@@ -1017,6 +1028,62 @@ class PatchBundleRepository(
             )
             state.copy(sources = state.sources.put(src.uid, src))
         }
+
+    /**
+     * Returns true if usePrerelease should be enabled for a [JsonPatchBundle] with the given [url].
+     */
+    private fun shouldUsePrerelease(uid: Int, url: String): Boolean {
+        if (prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString())) return true
+        return extractBranchFromUrl(url) == "dev"
+    }
+
+    /**
+     * Extracts the branch name from a GitHub URL.
+     * Returns null for refs/heads/... links, non-GitHub URLs, or URLs without a branch segment.
+     */
+    private fun extractBranchFromUrl(url: String): String? {
+        return try {
+            val uri = URI(url)
+            val host = uri.host?.lowercase(Locale.US) ?: return null
+            val parts = uri.path.trim('/').split('/')
+            when (host) {
+                "raw.githubusercontent.com" -> {
+                    val branch = parts.getOrNull(2) ?: return null
+                    if (branch == "refs") null else branch
+                }
+                "github.com" -> {
+                    if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
+                }
+                else -> null
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /**
+     * Extracts the HTTP status code from an exception.
+     */
+    private fun Exception.httpCodeOrNull(): Int? = when (this) {
+        is APIError -> statusCode.value
+        is ResponseException -> response.status.value
+        else -> null
+    }
+
+    /**
+     * Shows an appropriate toast for a per-bundle download failure.
+     */
+    private suspend fun handleBundleDownloadError(e: Exception, bundle: RemotePatchBundle) {
+        val code = e.httpCodeOrNull()
+        Log.e(tag, "Failed to update bundle ${bundle.name} (HTTP $code)", e)
+        if (code != null && code in 400..499
+            && bundle is JsonPatchBundle && bundle.supportsPrerelease
+        ) {
+            toast(R.string.sources_download_endpoint_not_found, bundle.displayTitle)
+        } else {
+            toast(R.string.sources_download_fail, e.message ?: e.toString())
+        }
+    }
 
     private fun normalizeRemoteBundleUrl(input: String): String {
         val trimmed = input.trim()
@@ -1435,6 +1502,9 @@ class PatchBundleRepository(
                     val result = try {
                         if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
                     } catch (_: BundleUpdateCancelled) {
+                        continue
+                    } catch (e: Exception) {
+                        handleBundleDownloadError(e, bundle)
                         continue
                     }
 

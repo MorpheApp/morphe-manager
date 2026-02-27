@@ -214,13 +214,17 @@ class JsonPatchBundle(
     val endpointBranch: String? get() = extractBranch(endpoint)
 
     /**
-     * The "stable" branch - whatever the endpoint points to if it's not "dev", otherwise "main".
+     * The "stable" branch. Always "main" - prerelease toggling is only available when
+     * the endpoint explicitly points to "main" or "dev", so switching back to stable
+     * always means "main".
      */
-    private val stableBranch: String get() = endpointBranch?.takeIf { it != "dev" } ?: "main"
+    private val stableBranch: String get() = "main"
 
     /**
      * Parse GitHub URL and convert to raw.githubusercontent.com format.
-     * If [usePrerelease] is true, uses "dev" branch; otherwise uses [stableBranch].
+     * If [usePrerelease] is true, uses "dev" branch; otherwise uses "main".
+     * Only called when [supportsPrerelease] is true, i.e. the endpoint already
+     * points to "main" or "dev" - so both branches are expected to exist.
      * Supports:
      * - https://github.com/owner/repo/tree/branch/path/file.json
      * - https://github.com/owner/repo/blob/branch/path/file.json
@@ -266,18 +270,12 @@ class JsonPatchBundle(
 
     /**
      * Returns true if this bundle supports prerelease toggling.
-     * Requires a GitHub URL with a simple branch name (not refs/heads/...).
+     * Only bundles whose endpoint explicitly points to "main" or "dev" branch support.
      */
     val supportsPrerelease: Boolean get() {
-        // endpointBranch returns null for refs/heads/... and non-GitHub URLs
-        return endpointBranch != null
+        val branch = endpointBranch ?: return false
+        return branch == "main" || branch == "dev"
     }
-
-    /**
-     * True if the endpoint already points to the dev branch.
-     * Used by the UI to know whether the toggle label should say "Use dev" or "Use stable".
-     */
-    val isEndpointOnDev: Boolean get() = endpointBranch == "dev"
 
     override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
         val normalizedEndpoint = parseGitHubUrl(endpoint)

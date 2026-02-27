@@ -408,16 +408,6 @@ private fun BundleManagementCard(
                             is APIPatchBundle -> bundle.usePrerelease
                             else -> false
                         }
-                        // If the endpoint already points to "dev", the toggle switches to stable instead
-                        val endpointOnDev = (bundle as? JsonPatchBundle)?.isEndpointOnDev == true
-                        val toggleTitle = stringResource(
-                            if (endpointOnDev) R.string.sources_management_stable_toggle
-                            else R.string.sources_management_prerelease_toggle
-                        )
-                        val toggleDescription = stringResource(
-                            if (endpointOnDev) R.string.sources_management_stable_toggle_description
-                            else R.string.sources_management_prerelease_toggle_description
-                        )
 
                         Row(
                             modifier = Modifier
@@ -429,12 +419,12 @@ private fun BundleManagementCard(
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
-                                    text = toggleTitle,
+                                    text = stringResource(R.string.sources_management_prerelease_toggle),
                                     style = MaterialTheme.typography.bodyMedium,
                                     fontWeight = FontWeight.Medium
                                 )
                                 Text(
-                                    text = toggleDescription,
+                                    text = stringResource(R.string.sources_management_prerelease_toggle_description),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
