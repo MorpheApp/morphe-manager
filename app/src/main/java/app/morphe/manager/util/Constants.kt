@@ -11,6 +11,12 @@ const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
 const val MORPHE_API_URL = "https://api.morphe.software"
 
+/** jsDelivr CDN URL for the stable manager release JSON (main branch) */
+const val MANAGER_RELEASE_JSON_URL = "https://cdn.jsdelivr.net/gh/MorpheApp/morphe-manager@main/app/app-release.json"
+
+/** jsDelivr CDN URL for the pre-release manager release JSON (dev branch) */
+const val MANAGER_PRERELEASE_JSON_URL = "https://cdn.jsdelivr.net/gh/MorpheApp/morphe-manager@dev/app/app-release.json"
+
 /** Controls whether manager updates are fetched directly from JSON files in the repository instead of using the GitHub API */
 const val USE_MANAGER_DIRECT_JSON = true
 
@@ -43,7 +49,7 @@ sealed class KnownApp(
             YouTube,
             YouTubeMusic,
             Reddit,
-            X
+            // X // Uncomment when release
         )
 
         fun fromPackage(packageName: String): KnownApp? =

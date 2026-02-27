@@ -109,7 +109,9 @@ class ManagerApplication : Application() {
             //   - "morphe_updates_dev" (prerelease) when prereleases are ON
             // or to neither when background notifications are disabled.
             val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
-            val usePrereleases = prefs.useManagerPrereleases.get()
+            val useManagerPrereleases = prefs.useManagerPrereleases.get()
+            // Patches FCM topic is determined by the default bundle (uid=0) prerelease toggle.
+            val usePatchesPrereleases = prefs.bundlePrereleasesEnabled.get().contains("0")
 
             // On GMS devices FCM is the primary delivery channel - WorkManager is not needed.
             // Cancel any previously scheduled jobs on GMS devices.
@@ -121,7 +123,11 @@ class ManagerApplication : Application() {
             } else {
                 UpdateCheckWorker.cancel(this@ManagerApplication)
             }
-            syncFcmTopics(notificationsEnabled = notificationsEnabled, usePrereleases = usePrereleases)
+            syncFcmTopics(
+                notificationsEnabled = notificationsEnabled,
+                useManagerPrereleases = useManagerPrereleases,
+                usePatchesPrereleases = usePatchesPrereleases,
+            )
         }
 
         scope.launch(Dispatchers.Default) {

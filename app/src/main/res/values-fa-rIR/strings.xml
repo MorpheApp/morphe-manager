@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">برنامه دیگر</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_error">بروزرسانی شکست خورد</string>
     <string name="home_update_error_subtitle">وضعیت اینترنتت رو چک‌ کن و دوباره امتحان کن</string>

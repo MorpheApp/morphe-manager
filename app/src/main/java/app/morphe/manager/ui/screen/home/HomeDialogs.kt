@@ -197,6 +197,15 @@ fun HomeDialogs(
         )
     }
 
+    // Metered Data dialog
+    if (homeViewModel.showMeteredPatchingDialog) {
+        MeteredPatchingDialog(
+            onDismiss = { homeViewModel.dismissMeteredPatchingDialog() },
+            onRefreshAndPatch = { homeViewModel.refreshBundlesAndContinuePatching() },
+            onPatchAnyway = { homeViewModel.dismissMeteredPatchingDialogAndProceed() }
+        )
+    }
+
     // Expert Mode Dialog
     AnimatedVisibility(
         visible = homeViewModel.showExpertModeDialog && homeViewModel.expertModeSelectedApp != null,
@@ -944,6 +953,70 @@ private fun VersionListCard(
                     )
                 }
             }
+        }
+    }
+}
+
+/**
+ * Dialog shown when the user tries to patch while there is a pending bundle update
+ * that has not been downloaded yet because the device is on a metered (mobile data).
+ */
+@Composable
+fun MeteredPatchingDialog(
+    onDismiss: () -> Unit,
+    onRefreshAndPatch: () -> Unit,
+    onPatchAnyway: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_outdated_patches_dialog_title),
+        footer = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                MorpheDialogButton(
+                    text = stringResource(R.string.home_outdated_patches_dialog_update_and_patch),
+                    onClick = onRefreshAndPatch,
+                    modifier = Modifier.fillMaxWidth(),
+                    icon = Icons.Outlined.SystemUpdateAlt
+                )
+                MorpheDialogButtonRow(
+                    primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                    onPrimaryClick = onPatchAnyway,
+                    isPrimaryDestructive = true,
+                    secondaryText = stringResource(android.R.string.cancel),
+                    onSecondaryClick = onDismiss
+                )
+            }
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.SignalCellularAlt,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(48.dp)
+            )
+
+            Text(
+                text = stringResource(R.string.home_outdated_patches_dialog_message),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            InfoBadge(
+                text = stringResource(R.string.home_outdated_patches_dialog_warning),
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
+            )
         }
     }
 }

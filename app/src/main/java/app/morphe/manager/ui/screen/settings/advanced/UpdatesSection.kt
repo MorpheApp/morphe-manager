@@ -52,14 +52,14 @@ private fun isGmsAvailable(context: Context): Boolean =
 /**
  * Updates section settings item for the Advanced tab.
  *
- * @param usePrereleases Current value of the prereleases preference.
- * @param onPrereleasesToggle Called when the prereleases switch is flipped.
+ * @param useManagerPrereleases Current value of the manager prereleases preference.
+ * @param onManagerPrereleasesToggle Called when the prereleases switch is flipped.
  * @param prefs Full [PreferencesManager] used to read and write notification / interval prefs.
  */
 @Composable
 fun UpdatesSettingsItem(
-    usePrereleases: Boolean,
-    onPrereleasesToggle: () -> Unit,
+    useManagerPrereleases: Boolean,
+    onManagerPrereleasesToggle: () -> Unit,
     prefs: PreferencesManager
 ) {
     val context = LocalContext.current
@@ -67,6 +67,7 @@ fun UpdatesSettingsItem(
 
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
+    val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
 
     // On GMS devices FCM handles all notification delivery.
     val hasGms = remember { isGmsAvailable(context) }
@@ -99,7 +100,7 @@ fun UpdatesSettingsItem(
             onPermissionResult = { granted ->
                 showNotificationPermissionDialog = false
                 if (granted) {
-                    syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
+                    syncFcmTopics(notificationsEnabled = true, useManagerPrereleases = useManagerPrereleases)
                     if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                 } else {
                     scope.launch { prefs.backgroundUpdateNotifications.update(false) }
@@ -120,19 +121,19 @@ fun UpdatesSettingsItem(
         )
     }
 
-    // Use prereleases toggle
+    // Use manager prereleases toggle
     RichSettingsItem(
-        onClick = onPrereleasesToggle,
+        onClick = onManagerPrereleasesToggle,
         showBorder = true,
         leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
         title = stringResource(R.string.settings_advanced_updates_use_prereleases),
         subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
         trailingContent = {
             Switch(
-                checked = usePrereleases,
+                checked = useManagerPrereleases,
                 onCheckedChange = null,
                 modifier = Modifier.semantics {
-                    stateDescription = if (usePrereleases) enabledState else disabledState
+                    stateDescription = if (useManagerPrereleases) enabledState else disabledState
                 }
             )
         }
@@ -149,7 +150,7 @@ fun UpdatesSettingsItem(
             } else {
                 scope.launch {
                     prefs.backgroundUpdateNotifications.update(newValue)
-                    syncFcmTopics(newValue, usePrereleases)
+                    syncFcmTopics(newValue, useManagerPrereleases = useManagerPrereleases)
                     if (newValue && !hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                     else UpdateCheckWorker.cancel(context)
                 }
@@ -188,6 +189,26 @@ fun UpdatesSettingsItem(
             subtitle = stringResource(updateCheckInterval.labelResId)
         )
     }
+
+    // Allow updates on metered (mobile data) connections
+    RichSettingsItem(
+        onClick = {
+            scope.launch { prefs.allowMeteredUpdates.update(!allowMeteredUpdates) }
+        },
+        showBorder = true,
+        leadingContent = { MorpheIcon(icon = Icons.Outlined.SignalCellularAlt) },
+        title = stringResource(R.string.settings_advanced_updates_allow_metered),
+        subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description),
+        trailingContent = {
+            Switch(
+                checked = allowMeteredUpdates,
+                onCheckedChange = null,
+                modifier = Modifier.semantics {
+                    stateDescription = if (allowMeteredUpdates) enabledState else disabledState
+                }
+            )
+        }
+    )
 }
 
 /**

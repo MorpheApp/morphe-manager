@@ -88,12 +88,10 @@ class UpdateViewModel(
     private val location = fs.tempDir.resolve("updater.apk")
     private val job = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to download Morphe Manager") {
-            // Use JSON-based update check instead of GitHub API
-            releaseInfo = morpheAPI.getLatestAppInfoFromJson().getOrNull()
+            releaseInfo = morpheAPI.getAppUpdate()
 
             if (downloadOnScreenEntry) {
-                val isUpdate = releaseInfo?.version?.removePrefix("v") != BuildConfig.VERSION_NAME
-                if (isUpdate) {
+                if (releaseInfo != null) {
                     downloadUpdate()
                 } else {
                     state = State.CAN_DOWNLOAD
@@ -112,7 +110,7 @@ class UpdateViewModel(
             val release = releaseInfo ?: return@uiSafe
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
             withContext(Dispatchers.IO) {
-                if (!allowMeteredUpdates && !networkInfo.isSafe() && !ignoreInternetCheck) {
+                if (!allowMeteredUpdates && !networkInfo.isMetered() && !ignoreInternetCheck) {
                     showInternetCheckDialog = true
                 } else {
                     if (currentDownloadVersion != release.version) {

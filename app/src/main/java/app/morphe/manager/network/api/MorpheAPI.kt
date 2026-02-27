@@ -231,22 +231,23 @@ class MorpheAPI(
     /**
      * Get manager release info from static JSON file
      */
-    private suspend fun getManagerFromJson(): APIResponse<MorpheAsset> {
-        val includePrerelease = prefs.useManagerPrereleases.get()
-        val branch = if (includePrerelease) "dev" else "main"
-
-        return when (val response = rawFileRequest<ManagerReleaseInfo>(managerConfig, branch, "app/app-release.json")) {
+    private suspend fun getManagerFromJson(branch: String): APIResponse<MorpheAsset> {
+        val url = if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL
+        return when (val response = client.request<ManagerReleaseInfo> {
+            url(url)
+            header("Cache-Control", "no-cache")
+        }) {
             is APIResponse.Success -> {
                 val mapped = runCatching {
                     mapManagerJsonToAsset(managerConfig, response.data).also { asset ->
-                        Log.d(tag, "Manager from JSON: version=${asset.version}, url=${asset.downloadUrl}")
+                        Log.d(tag, "Manager from CDN ($branch): version=${asset.version}, url=${asset.downloadUrl}")
                     }
                 }
 
                 mapped.fold(
                     onSuccess = { APIResponse.Success(it) },
                     onFailure = { error ->
-                        Log.w(tag, "Failed to parse manager JSON", error)
+                        Log.w(tag, "Failed to parse manager JSON ($branch)", error)
                         APIResponse.Failure(APIFailure(error, null))
                     }
                 )
@@ -257,30 +258,46 @@ class MorpheAPI(
     }
 
     /**
-     * Get latest manager info - uses JSON or GitHub API based on configuration
+     * Get app update - returns the newest available version if it is strictly newer
+     * than the currently installed one.
+     *
+     * Uses jsDelivr CDN which is cache-cleared after each release, so the JSON file
+     * is only visible once the release is fully available.
+     * The branch is determined by [PreferencesManager.useManagerPrereleases].
      */
-    suspend fun getLatestAppInfoFromJson(): APIResponse<MorpheAsset> {
-        return if (USE_MANAGER_DIRECT_JSON) {
-            getManagerFromJson().fallbackTo {
-                Log.w(tag, "Falling back to GitHub API for manager")
+    suspend fun getAppUpdate(): MorpheAsset? {
+        val usePrereleases = prefs.useManagerPrereleases.get()
+        val branch = if (usePrereleases) "dev" else "main"
+        val currentWeight = versionWeight(BuildConfig.VERSION_NAME.removePrefix("v"))
+
+        val candidate = if (USE_MANAGER_DIRECT_JSON) {
+            getManagerFromJson(branch).fallbackTo {
+                Log.w(tag, "Manager CDN unavailable, falling back to GitHub API")
                 getManagerFromGitHub()
-            }
+            }.getOrNull()
         } else {
-            getManagerFromGitHub()
+            getManagerFromGitHub().getOrNull()
+        } ?: return null
+
+        return candidate.takeIf {
+            versionWeight(it.version.removePrefix("v")) > currentWeight
         }
     }
 
     /**
-     * Get latest manager info using GitHub API only
+     * Converts a version string to a comparable weight for sorting.
+     * Stable versions rank higher than pre-release with the same core.
      */
-    suspend fun getLatestAppInfo(): APIResponse<MorpheAsset> = getManagerFromGitHub()
-
-    /**
-     * Get app update - returns update info only if newer version is available
-     */
-    suspend fun getAppUpdate(): MorpheAsset? {
-        val asset = getLatestAppInfoFromJson().getOrNull() ?: return null
-        return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
+    private fun versionWeight(version: String): Long {
+        val dashIdx = version.indexOf('-')
+        val core = if (dashIdx >= 0) version.substring(0, dashIdx) else version
+        val pre = if (dashIdx >= 0) version.substring(dashIdx + 1) else null
+        val parts = core.split('.').map { it.toIntOrNull() ?: 0 }
+        val major = parts.getOrElse(0) { 0 }.toLong()
+        val minor = parts.getOrElse(1) { 0 }.toLong()
+        val patch = parts.getOrElse(2) { 0 }.toLong()
+        val preWeight = if (pre == null) 100_000L else pre.split('.').lastOrNull()?.toLongOrNull() ?: 0L
+        return major * 1_000_000_000L + minor * 1_000_000L + patch * 100_000L + preWeight
     }
 
     /**
@@ -313,8 +330,7 @@ class MorpheAPI(
     /**
      * Get patches update from Morphe API
      */
-    private suspend fun getPatchesFromApi(): APIResponse<MorpheAsset> {
-        val usePrerelease = prefs.usePatchesPrereleases.get()
+    private suspend fun getPatchesFromApi(usePrerelease: Boolean): APIResponse<MorpheAsset> {
         val route = if (usePrerelease) "patches/prerelease" else "patches"
         return apiRequest(route)
     }
@@ -322,8 +338,7 @@ class MorpheAPI(
     /**
      * Get patches update from static JSON file
      */
-    private suspend fun getPatchesFromJson(): APIResponse<MorpheAsset> {
-        val usePrerelease = prefs.usePatchesPrereleases.get()
+    private suspend fun getPatchesFromJson(usePrerelease: Boolean): APIResponse<MorpheAsset> {
         val branch = if (usePrerelease) "dev" else "main"
 
         return when (val response = rawFileRequest<PatchesReleaseInfo>(patchesConfig, branch, "patches-bundle.json")) {
@@ -348,16 +363,19 @@ class MorpheAPI(
     }
 
     /**
-     * Get patches update - uses JSON or API based on configuration
+     * Get patches update - uses JSON or API based on configuration.
+     * Pass [usePrerelease] explicitly instead of reading from prefs,
+     * so each bundle can control its own channel independently.
      */
-    suspend fun getPatchesUpdate(): APIResponse<MorpheAsset> {
+    suspend fun getPatchesUpdate(usePrerelease: Boolean? = null): APIResponse<MorpheAsset> {
+        val prereleaseResolved = usePrerelease ?: prefs.usePatchesPrereleases.get()
         return if (USE_PATCHES_DIRECT_JSON) {
-            getPatchesFromJson().fallbackTo {
+            getPatchesFromJson(prereleaseResolved).fallbackTo {
                 Log.w(tag, "Falling back to Morphe API for patches")
-                getPatchesFromApi()
+                getPatchesFromApi(prereleaseResolved)
             }
         } else {
-            getPatchesFromApi()
+            getPatchesFromApi(prereleaseResolved)
         }
     }
 

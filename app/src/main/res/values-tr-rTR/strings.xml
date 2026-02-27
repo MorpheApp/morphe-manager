@@ -5,8 +5,8 @@
     <string name="home_not_patched_yet">Henüz yamalanmadı</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
     <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode</string>
-    <string name="home_app_hide_title">Uygulamayı gizle?</string>
-    <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Sonradan liste altındaki butondan \'%1$s\'yi kullanarak geri getirebilirsiniz.</string>
+    <string name="home_app_hide_title">Uygulama gizlensin mi?</string>
+    <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki \'%1$s\' düğmesini kullanarak geri getirebilirsiniz</string>
     <string name="home_app_will_be_hidden">Bu uygulama gizlenecektir</string>
     <string name="home_app_show_hidden">Gizli uygulamaları göster</string>
     <string name="home_app_no_hidden">Gizli uygulama yok</string>
@@ -57,7 +57,7 @@
     <string name="sources_dialog_view_any_version">Herhangi bir sürüm</string>
     <string name="sources_dialog_view_any_package">Herhangi bir paket</string>
     <string name="sources_dialog_add_source">Yama kaynağı ekle</string>
-    <string name="sources_dialog_delete_confirm_message">Kaynak \"%s\"\'yi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz</string>
+    <string name="sources_dialog_delete_confirm_message">\"%s\" kaynağını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz</string>
     <string name="sources_dialog_remote">Uzak</string>
     <string name="sources_dialog_remote_url">Kaynak URL</string>
     <string name="sources_dialog_remote_url_formats_title">Örnekler:</string>
@@ -73,10 +73,10 @@
     <string name="home_apk_availability_dialog_title">Orijinal, yamalanmamış bir APK bulmakta yardıma ihtiyacınız var mı?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;\'i yamalamak için bu yamalanmamış APK sürümüne ihtiyacınız var:</string>
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt;\'i yamalamak için bu yamalanmamış APK sürümlerinden birine ihtiyacınız var:</string>
-    <string name="home_apk_availability_recommended_label">Tavsiye edilen</string>
+    <string name="home_apk_availability_recommended_label">Önerilen</string>
     <string name="home_apk_availability_unpatched_label">Yamalanmamış</string>
-    <string name="home_apk_availability_yes">Evet, APK bulma yardımcım</string>
-    <string name="home_apk_availability_no">Hayır, zaten APK\'m var</string>
+    <string name="home_apk_availability_yes">Evet, APK bulmama yardım et</string>
+    <string name="home_apk_availability_no">Hayır, bende APK var</string>
     <string name="home_apk_use_saved_with_version">Kaydedilmiş APK (v%s) kullan</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Tespit için tekrar APK dosyası seçin</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -94,7 +94,7 @@
     <string name="home_file_picker_prompt_title">İndirilen APK seçin</string>
     <string name="home_file_picker_prompt_description">İndirdiğiniz &lt;b&gt;%1$s&lt;/b&gt; APK dosyasını seçin</string>
     <string name="home_file_picker_prompt_open_apk">APK dosyasını aç</string>
-    <string name="home_recommended_version">Tavsiye Edilen Sürüm</string>
+    <string name="home_recommended_version">Önerilen sürüm</string>
     <string name="home_selected_version">Seçilen sürüm</string>
     <string name="home_select_apk_title">APK seç</string>
     <string name="home_select_any_apk_description">Herhangi bir uygulamanın APK dosyasını seçmek için aşağıdaki düğmeye tıklayın</string>
@@ -114,7 +114,7 @@
 Devam etmek istiyor musunuz?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Bu APK, tavsiye edilen uygulama sürümü değil. Devam etmeniz durumunda işlevsiz bir uygulma olabilir</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Bu APK, önerilen uygulama sürümü değil. Devam edilmesi çalışmayan bir uygulamaya neden olabilir</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Yine de devam et</string>
     <string name="home_dialog_unsupported_version_compatible_versions"> Uyumlu sürümler:</string>
     <string name="home_dialog_unsupported_version_unsupported_label"> Uyumlu değil</string>
@@ -294,7 +294,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Vurgu rengi</string>
     <string name="settings_appearance_pure_black">Saf Siyah</string>
-    <string name="settings_appearance_pure_black_description">Temel siyah arkaplanlar kullanın</string>
+    <string name="settings_appearance_pure_black_description">Gerçek siyah arka planlar kullanın</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Uygulama dili</string>
     <string name="settings_appearance_app_language_current">Mevcut dil</string>
@@ -534,8 +534,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_patch_selection_reset_package_confirm_title">Paket seçimleri sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Kaynak seçimi sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_no_saved">Kaydedilmiş yama seçimi yok</string>
-    <string name="settings_system_patch_selection_total_summary_format">%2$s\'ten %1$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s\'tan %1$s</string>
+    <string name="settings_system_patch_selection_total_summary_format">%2$sten %1$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%2$stan %1$s</string>
     <string name="settings_system_patch_selection_source_format">Kaynak #%s</string>
     <string name="settings_system_patch_selection_will_delete">Bu işlem şunları silecektir:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu işlem, tüm paketler ve kaynaklar için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir</string>

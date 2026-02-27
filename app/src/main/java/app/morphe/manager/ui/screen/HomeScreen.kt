@@ -69,6 +69,7 @@ fun HomeScreen(
         homeViewModel.viewModelScope.launch {
             try {
                 homeViewModel.patchBundleRepository.updateCheck()
+                homeViewModel.checkForManagerUpdates()
                 delay(500)
             } finally {
                 isRefreshing = false
@@ -244,6 +245,7 @@ fun HomeScreen(
             PatchBundleRepository.BundleUpdateResult.NoInternet,
             PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
             PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
+            PatchBundleRepository.BundleUpdateResult.SkippedMetered -> BundleUpdateStatus.Warning
         }
     }
 

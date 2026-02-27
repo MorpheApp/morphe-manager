@@ -5,6 +5,13 @@
     <string name="home_not_patched_yet">Inte korrigerad än</string>
     <string name="home_no_patches_available">Inga korrigeringar är tillgängliga</string>
     <string name="home_default_source_disabled">Morphe-korrigeringskällan är inaktiverad. Aktivera den i Korrigeringskällor eller använd expertläget</string>
+    <string name="home_app_hide_title">Dölj den här appen?</string>
+    <string name="home_app_hide_message">Den här appen kommer att döljas från startsidan. Du kan återställa den senare med knappen %1$s längst ned i listan</string>
+    <string name="home_app_will_be_hidden">Den här appen kommer att döljas</string>
+    <string name="home_app_show_hidden">Visa dolda appar</string>
+    <string name="home_app_no_hidden">Inga dolda appar</string>
+    <string name="home_app_hidden_apps_title">Dolda appar</string>
+    <string name="home_app_hidden_apps_hint">Tryck på en app om du vill visa den i listan igen</string>
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <!-- Home Screen - Update Notifications -->
@@ -194,6 +201,15 @@
     <string name="patcher_install_error_subtitle">Försök att avinstallera och installera igen</string>
     <string name="patcher_ready_to_install_subtitle">Tryck på knappen nedan för att installera</string>
     <string name="patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
+    <string name="patcher_storage_permission_dialog_title">Det går inte att komma åt lagringssökväg</string>
+    <string name="patcher_storage_permission_description_api30">En eller fler korrigeringsalternativ pekar på sökvägar som Morphe Manager inte kan läsa. Ge åtkomst till lagringen och tryck på knappen så startas korrigeringen automatiskt</string>
+    <string name="patcher_storage_permission_description_legacy">En eller fler korrigeringsalternativ pekar på sökvägar som inte går att komma åt. Uppdatera sökvägarna i korrigeringsalternativen och försök igen</string>
+    <string name="patcher_storage_permission_grant">Ge åtkomst till lagring</string>
+    <string name="patcher_storage_permission_denied_warning">Åtkomst till lagringen nekades. Ge behörighet att använda sökvägen eller flytta filerna till appens privata katalog</string>
+    <string name="patcher_storage_permission_open_settings">Öppna lagringsinställningar</string>
+    <string name="patcher_storage_badge_denied">Behörighet nekades</string>
+    <string name="patcher_storage_badge_missing">Hittades inte</string>
+    <string name="patcher_storage_permission_hint">Tips: Flytta filerna till /Android/data/app.morphe.manager/files/ – inga extra behörigheter behövs</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Förbereder</string>
     <string name="patcher_step_load_patches">Läser in korrigeringar</string>
@@ -276,6 +292,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accentfärg</string>
     <string name="settings_appearance_pure_black">Rent svart</string>
+    <string name="settings_appearance_pure_black_description">Använd rent svarta bakgrunder</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
@@ -296,7 +313,31 @@
     <string name="settings_advanced_updates">Uppdateringar</string>
     <string name="settings_advanced_updates_use_prereleases">Använd förhandsversioner</string>
     <string name="settings_advanced_updates_use_prereleases_description">Få tidig tillgång till nya korrigeringar och Manager-funktioner</string>
+    <string name="settings_advanced_updates_background_notifications">Aviseringar om uppdateringar i bakgrunden</string>
+    <string name="settings_advanced_updates_background_notifications_description">Sök regelbundet efter uppdateringar i bakgrunden och avisera när de är tillgängliga</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Få direkta pushmeddelanden om nya versioner, även när appen är stängd</string>
+    <string name="notification_channel_manager_updates">Uppdateringar för Manager</string>
+    <string name="notification_channel_manager_updates_description">Aviseringar om nya versioner för Morphe Manager</string>
+    <string name="notification_channel_bundle_updates">Uppdateringar för korrigeringskällor</string>
+    <string name="notification_channel_bundle_updates_description">Aviseringar om nya versioner för korrigeringskällor</string>
+    <string name="notification_channel_fcm_updates">Aviseringar om uppdateringar</string>
+    <string name="notification_channel_fcm_updates_description">Direkta pushmeddelanden om nya versioner av Morphe Manager och korrigeringar. Levereras även när appen är i bakgrunden</string>
+    <string name="settings_advanced_update_interval">Sökningsfrekvens</string>
+    <string name="settings_advanced_update_interval_dialog_title">Sök efter uppdateringar</string>
+    <string name="settings_advanced_update_interval_hourly">En gång i timmen</string>
+    <string name="settings_advanced_update_interval_daily">En gång om dagen</string>
+    <string name="settings_advanced_update_interval_weekly">En gång i veckan</string>
+    <string name="settings_advanced_update_interval_monthly">En gång i månaden</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Sökningsfrekvens i bakgrunden</string>
+    <string name="settings_advanced_update_interval_battery_warning">Sökningar i bakgrunden kanske inte fungerar tillförlitligt på vissa enheter. Tillverkare som Xiaomi, Huawei, Samsung och OnePlus begränsar ofta aggressivt bakgrundsprocesser för att spara batteri</string>
     <!-- Notification content -->
+    <string name="notification_manager_update_title">Uppdatering för Morphe Manager är tillgänglig</string>
+    <string name="notification_bundle_update_title">Nya korrigeringar är tillgängliga </string>
+    <string name="notification_update_text">Version %1$s är redo att laddas ned</string>
+    <string name="notification_bundle_update_text_unversioned">Tryck för att öppna Morphe Manager och uppdatera</string>
+    <string name="notification_permission_dialog_title">Tillåt aviseringar</string>
+    <string name="notification_permission_dialog_description">Morphe Manager behöver behörighet för aviseringar för att kunna meddela dig när uppdateringar är tillgängliga i bakgrunden</string>
+    <string name="notification_post_patch_dialog_title">Vill du få aviseringar när uppdateringar är tillgängliga?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
@@ -311,6 +352,7 @@
     <string name="settings_advanced_github_pat_configured">Token konfigurerad</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
+    <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken (PAT) för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en PAT med omfattningen public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Lägger till din PAT i exporterade Manager-inställningar</string>
     <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
@@ -391,6 +433,7 @@ Bildernas mått ska vara följande:
     <string name="installer_internal_name">Systemets installerare</string>
     <string name="installer_internal_description">Använd Androids pakethanterare</string>
     <string name="installer_auto_saved_name">Installerare för rotningsmontering</string>
+    <string name="installer_auto_saved_description">Monterar den korrigerade APK-filen över den installerade appen</string>
     <string name="installer_shizuku_description">Installera tyst med Shizuku eller Sui</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
     <string name="installer_none_description">Ingen alternativ installerare har konfigurerats</string>
@@ -461,6 +504,7 @@ Bildernas mått ska vara följande:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Felsökning</string>
     <string name="settings_system_export_debug_logs">Exportera felsökningsloggar</string>
+    <string name="settings_system_export_debug_logs_description">Spara systemloggar för felsökning</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Det gick inte att exportera loggar</string>
     <string name="settings_system_export_debug_logs_export_success">Loggar exporterade</string>

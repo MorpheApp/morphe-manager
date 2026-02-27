@@ -1,3 +1,15 @@
+# app [1.9.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0...v1.9.0-dev.1) (2026-02-27)
+
+
+### Bug Fixes
+
+* Add missing permission to app manifest ([c439f71](https://github.com/MorpheApp/morphe-manager/commit/c439f7177576dbdebae770a74b963c4e590b9b68))
+
+
+### Features
+
+* Enhance patch update management and mobile data controls ([#247](https://github.com/MorpheApp/morphe-manager/issues/247)) ([5ddfa22](https://github.com/MorpheApp/morphe-manager/commit/5ddfa224e9c9288b35a2aa8ec739a6a72234fef0))
+
 # app [1.8.0](https://github.com/MorpheApp/morphe-manager/compare/v1.7.1...v1.8.0) (2026-02-25)
 
 

@@ -431,6 +431,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_internal_name">Sistem quraşdırıcısı</string>
     <string name="installer_internal_description">Android paket quraşdırıcısını istifadə et</string>
     <string name="installer_auto_saved_name">Root-lu montajlama quraşdırıcısı</string>
+    <string name="installer_auto_saved_description">Yamaqlanan APK-nı quraşdırılan tətbiq üzərinə montajlayır</string>
     <string name="installer_shizuku_description">Shizuku və ya Sui istifadə edərək səssizcə quraşdır</string>
     <string name="installer_option_none">Ehtiyat yoxdur</string>
     <string name="installer_none_description">Ehtiyat quraşdırıcı qurulan deyil</string>
