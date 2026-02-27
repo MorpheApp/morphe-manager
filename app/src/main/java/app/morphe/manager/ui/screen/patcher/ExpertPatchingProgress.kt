@@ -591,7 +591,7 @@ private fun ExpertLogPanel(
         tonalElevation = 2.dp
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            LogPanelHeader(entryCount = rawLogs.size)
+            LogPanelHeader()
 
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
@@ -643,45 +643,24 @@ private fun ExpertLogPanel(
 }
 
 /**
- * Panel header with a live-indicator dot, "Patcher Logs" label, and entry count badge.
+ * Panel header with a live-indicator dot and "Patcher Logs" label.
  */
 @Composable
-private fun LogPanelHeader(entryCount: Int) {
+private fun LogPanelHeader() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 13.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            LiveIndicatorDot(size = 8.dp)
-
-            Text(
-                text = "Patcher Logs",
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-        }
-
-        if (entryCount > 0) {
-            Surface(
-                shape = RoundedCornerShape(6.dp),
-                color = MaterialTheme.colorScheme.surfaceVariant
-            ) {
-                Text(
-                    text = entryCount.toString(),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
-                    fontFamily = FontFamily.Monospace
-                )
-            }
-        }
+        LiveIndicatorDot(size = 8.dp)
+        Text(
+            text = "Patcher Logs",
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface
+        )
     }
 }
 
