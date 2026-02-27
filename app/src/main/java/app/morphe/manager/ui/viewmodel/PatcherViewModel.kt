@@ -266,8 +266,6 @@ class PatcherViewModel(
 
             viewModelScope.launch {
                 logs.add(level to message)
-                // Cap at 500 entries to avoid unbounded memory growth
-                if (logs.size > 500) logs.removeAt(0)
             }
         }
     }
