@@ -170,6 +170,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
         LOG_PROCESS_PREFIX_COROUTINE_HEAP,
         LOG_MEMORY_PREFIX_DONE,
         LOG_WORKER_PREFIX_DEVICE,
+        LOG_WORKER_PREFIX_RUNTIME
     )
 
     val result = mutableListOf<LogItem>()

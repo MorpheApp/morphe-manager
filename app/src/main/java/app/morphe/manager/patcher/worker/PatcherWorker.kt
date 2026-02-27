@@ -182,17 +182,6 @@ class PatcherWorker(
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             val selectedCount = args.selectedPatches.values.sumOf { it.size }
 
-            // Log runtime mode info
-            if (useProcessRuntime) {
-                val memLimit = prefs.patcherProcessMemoryLimit.get()
-                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
-            } else {
-                // Start memory polling for CoroutineRuntime
-                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
-                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
-                MemoryMonitor.startMemoryPolling(args.logger)
-            }
-
             // Log device environment for diagnostics
             val memInfo = ActivityManager.MemoryInfo().also {
                 (applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
@@ -216,6 +205,17 @@ class PatcherWorker(
                         "split=$inputIsSplitArchive patches=$selectedCount " +
                         "device=${Build.MANUFACTURER} model=${Build.MODEL}"
             )
+
+            // Log runtime mode info
+            if (useProcessRuntime) {
+                val memLimit = prefs.patcherProcessMemoryLimit.get()
+                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
+            } else {
+                // Start memory polling for CoroutineRuntime
+                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
+                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
+                MemoryMonitor.startMemoryPolling(args.logger)
+            }
 
             runtime.execute(
                 inputFile.absolutePath,
