@@ -26,8 +26,6 @@ import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
 import app.morphe.manager.patcher.runtime.MemoryMonitor
-import app.morphe.manager.patcher.runtime.MemoryMonitor.memoryUsedAverage
-import app.morphe.manager.patcher.runtime.MemoryMonitor.memoryUsedMax
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
@@ -173,7 +171,8 @@ class PatcherWorker(
                 }
             }
 
-            val runtime = if (prefs.useProcessRuntime.get()) {
+            val useProcessRuntime = prefs.useProcessRuntime.get()
+            val runtime = if (useProcessRuntime) {
                 ProcessRuntime(applicationContext)
             } else {
                 CoroutineRuntime(applicationContext)
@@ -184,11 +183,14 @@ class PatcherWorker(
             val selectedCount = args.selectedPatches.values.sumOf { it.size }
 
             // Log runtime mode info
-            if (prefs.useProcessRuntime.get()) {
+            if (useProcessRuntime) {
                 val memLimit = prefs.patcherProcessMemoryLimit.get()
                 args.logger.info("Runtime: process memoryLimit=$memLimit")
             } else {
+                // Start memory polling for CoroutineRuntime
+                args.logger.info("Process heap memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
                 args.logger.info("Runtime: coroutine")
+                MemoryMonitor.startMemoryPolling(args.logger)
             }
 
             // Log device environment for diagnostics
@@ -234,11 +236,13 @@ class PatcherWorker(
 
             val elapsed = System.currentTimeMillis() - startTime
 
-            MemoryMonitor.stopMemoryPolling(args.logger)
+            if (!useProcessRuntime) {
+                MemoryMonitor.stopMemoryPolling(args.logger)
+            }
 
             args.logger.info(
                 "Patching succeeded: output=${args.output} size=${File(args.output).length()} " +
-                        "elapsed=${elapsed}ms average=${memoryUsedAverage}MB max=${memoryUsedMax}MB"
+                        "elapsed=${elapsed}ms"
             )
 
             Log.i(tag, "Patching succeeded".logFmt())

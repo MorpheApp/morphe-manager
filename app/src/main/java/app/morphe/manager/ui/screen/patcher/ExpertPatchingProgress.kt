@@ -441,7 +441,10 @@ private fun ExpertProgressHeader(
         // Memory graph
         val heapSamples = patcherViewModel.heapSamples
         val heapLimitMb = patcherViewModel.heapLimitMb
-        if (heapSamples.isNotEmpty()) {
+        AnimatedVisibility(
+            visible = heapSamples.isNotEmpty(),
+            enter = fadeIn(tween(500)) + expandVertically(tween(500)),
+        ) {
             HeapUsageGraph(
                 samples = heapSamples,
                 maxHeapMb = heapLimitMb.takeIf { it > 0 }
