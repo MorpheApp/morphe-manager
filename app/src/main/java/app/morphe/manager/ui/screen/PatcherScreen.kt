@@ -578,7 +578,6 @@ fun PatcherScreen(
                             progress = displayProgressAnimate,
                             patchesProgress = patchesProgress,
                             patcherViewModel = patcherViewModel,
-                            showLongStepWarning = showLongStepWarning,
                             patcherSucceeded = patcherSucceeded,
                             onCancelClick = { state.showCancelDialog = true },
                             onInstallClick = { showSuccessScreen = true },

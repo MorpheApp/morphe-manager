@@ -13,8 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -55,7 +53,10 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.State
-import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.contentPadding
+import app.morphe.manager.ui.screen.shared.itemSpacing
+import app.morphe.manager.ui.screen.shared.rememberWindowSize
+import app.morphe.manager.ui.screen.shared.useTwoColumnLayout
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
@@ -233,7 +234,6 @@ fun ExpertPatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
     patcherViewModel: PatcherViewModel,
-    showLongStepWarning: Boolean = false,
     patcherSucceeded: Boolean? = null,
     onCancelClick: () -> Unit,
     onInstallClick: () -> Unit = {},
@@ -289,7 +289,6 @@ fun ExpertPatchingInProgress(
                         completed = completed,
                         total = total,
                         patcherViewModel = patcherViewModel,
-                        showLongStepWarning = showLongStepWarning,
                         patcherSucceeded = patcherSucceeded
                     )
                 }
@@ -317,7 +316,6 @@ fun ExpertPatchingInProgress(
                     completed = completed,
                     total = total,
                     patcherViewModel = patcherViewModel,
-                    showLongStepWarning = showLongStepWarning,
                     patcherSucceeded = patcherSucceeded
                 )
 
@@ -362,7 +360,6 @@ private fun ExpertProgressHeader(
     completed: Int,
     total: Int,
     patcherViewModel: PatcherViewModel,
-    showLongStepWarning: Boolean,
     patcherSucceeded: Boolean? = null
 ) {
     val currentStep by remember {
@@ -436,21 +433,6 @@ private fun ExpertProgressHeader(
                     )
                 }
             }
-        }
-
-        // Long step warning
-        AnimatedVisibility(
-            visible = showLongStepWarning,
-            enter = fadeIn(tween(500)) + expandVertically(tween(500)),
-            exit = fadeOut(tween(500)) + shrinkVertically(tween(500))
-        ) {
-            InfoBadge(
-                text = stringResource(R.string.patcher_long_step_warning),
-                style = InfoBadgeStyle.Primary,
-                icon = Icons.Outlined.Info,
-                isExpanded = true,
-                modifier = Modifier.fillMaxWidth()
-            )
         }
 
         // Memory graph
