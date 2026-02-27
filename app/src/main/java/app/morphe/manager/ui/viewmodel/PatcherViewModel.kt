@@ -272,10 +272,10 @@ class PatcherViewModel(
         override fun log(level: LogLevel, message: String) {
             level.androidLog(message)
 
-            // Parse patcher process heap limit
-            if (message.startsWith(LOG_PROCESS_PREFIX_HEAP)) {
-                val mb = message.removePrefix(LOG_PROCESS_PREFIX_HEAP)
-                    .substringBefore("MB").toIntOrNull()
+            // Parse heap limit
+            if (message.startsWith(LOG_PROCESS_PREFIX_PROCESS_HEAP)) {
+                val mb = message.removePrefix(LOG_PROCESS_PREFIX_PROCESS_HEAP)
+                    .substringBefore("MB").trim().toIntOrNull()
                 if (mb != null) viewModelScope.launch { heapLimitMb = mb }
                 // still pass through to logs
             }
