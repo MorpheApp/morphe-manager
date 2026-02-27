@@ -3,7 +3,10 @@ package app.morphe.manager.ui.screen.settings.system
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Memory
+import androidx.compose.material.icons.outlined.Storage
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -28,7 +31,8 @@ fun ProcessRuntimeDialog(
     currentEnabled: Boolean,
     currentLimit: Int,
     onDismiss: () -> Unit,
-    onConfirm: (enabled: Boolean, limit: Int) -> Unit
+    onEnabledChange: (Boolean) -> Unit,
+    onLimitChange: (Int) -> Unit,
 ) {
     var enabled by remember { mutableStateOf(currentEnabled) }
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
@@ -36,17 +40,6 @@ fun ProcessRuntimeDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_process_runtime),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.save),
-                onPrimaryClick = {
-                    onConfirm(enabled, sliderValue.toInt())
-                },
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss,
-                primaryIcon = Icons.Outlined.Check
-            )
-        }
     ) {
         Column(
             modifier = Modifier
@@ -99,7 +92,10 @@ fun ProcessRuntimeDialog(
 
                     Switch(
                         checked = enabled,
-                        onCheckedChange = { enabled = it }
+                        onCheckedChange = {
+                            enabled = it
+                            onEnabledChange(it)
+                        }
                     )
                 }
             }
@@ -109,9 +105,7 @@ fun ProcessRuntimeDialog(
                 modifier = Modifier.alpha(if (enabled) 1f else 0.5f),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                HorizontalDivider(
-                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-                )
+                MorpheSettingsDivider(fullWidth = true)
 
                 // Memory limit header
                 Row(
@@ -165,6 +159,7 @@ fun ProcessRuntimeDialog(
                     Slider(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
+                        onValueChangeFinished = { onLimitChange(sliderValue.toInt()) },
                         valueRange = PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM.toFloat()..PROCESS_RUNTIME_MEMORY_MAX_LIMIT.toFloat(),
                         steps = (((PROCESS_RUNTIME_MEMORY_MAX_LIMIT.toDouble() - PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM)
                                 / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
