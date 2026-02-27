@@ -438,6 +438,18 @@ private fun ExpertProgressHeader(
             )
         }
 
+        // Memory graph
+        val heapSamples = patcherViewModel.heapSamples
+        val heapLimitMb = patcherViewModel.heapLimitMb
+        if (heapSamples.isNotEmpty()) {
+            HeapUsageGraph(
+                samples = heapSamples,
+                maxHeapMb = heapLimitMb.takeIf { it > 0 }
+                    ?: (Runtime.getRuntime().maxMemory().toInt() / (1024 * 1024)),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
         // Step pipeline
         ExpertStepPipeline(patcherViewModel = patcherViewModel)
     }
@@ -489,6 +501,89 @@ private fun ExpertLinearProgressBar(progress: Float) {
                 .clip(RoundedCornerShape(5.dp))
                 .background(Brush.horizontalGradient(listOf(container, primary)))
         )
+    }
+}
+
+/**
+ * Live bar graph showing heap usage over the last 60 seconds.
+ */
+@Composable
+private fun HeapUsageGraph(
+    samples: List<Int>,
+    maxHeapMb: Int,
+    modifier: Modifier = Modifier
+) {
+    val barColor = MaterialTheme.colorScheme.primary
+    val warnColor = MaterialTheme.colorScheme.error
+    val trackColor = MaterialTheme.colorScheme.surfaceVariant
+
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(10.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+        tonalElevation = 0.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Heap usage",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                    fontSize = 10.sp
+                )
+                Text(
+                    text = "${samples.lastOrNull() ?: 0} MB / $maxHeapMb MB",
+                    style = MaterialTheme.typography.labelSmall,
+                    fontFamily = FontFamily.Monospace,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                    fontSize = 10.sp
+                )
+            }
+
+            // Bar graph — 60 slots, filled from right
+            val slotCount = 60
+            val padded = List(slotCount - samples.size) { 0 } + samples.takeLast(slotCount)
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(36.dp),
+                horizontalArrangement = Arrangement.spacedBy(1.dp),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                padded.forEach { sample ->
+                    val fraction = if (maxHeapMb > 0) (sample / maxHeapMb.toFloat()).coerceIn(0f, 1f) else 0f
+                    val color = if (fraction > 0.8f) warnColor else barColor
+                    Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight()
+                                .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
+                                .background(if (sample > 0) trackColor.copy(alpha = 0.3f) else Color.Transparent)
+                        )
+                        if (fraction > 0f) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight(fraction)
+                                    .align(Alignment.BottomCenter)
+                                    .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
+                                    .background(color.copy(alpha = 0.75f))
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

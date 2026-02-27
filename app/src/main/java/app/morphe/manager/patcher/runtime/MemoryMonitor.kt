@@ -11,9 +11,9 @@ object MemoryMonitor {
     const val MEMORY_LOG_FIELD_MAX = "max"
 
     // Change to true to log all memory checks.
-    private const val MEMORY_MONITOR_LOG_UPDATES = false
+    private const val MEMORY_MONITOR_LOG_UPDATES = true
 
-    private const val MEMORY_MONITOR_INTERVAL = 2000L
+    private const val MEMORY_MONITOR_INTERVAL = 1000L
 
     @Volatile
     private var memoryPollUsage = false
@@ -64,7 +64,7 @@ object MemoryMonitor {
         memoryPollUsage = false
         logger.info(
             "$MEMORY_LOG_PREFIX $MEMORY_LOG_FIELD_AVERAGE=${memoryUsedAverage}MB " +
-                    "$MEMORY_LOG_FIELD_AVERAGE=${memoryUsedMax}MB"
+                    "$MEMORY_LOG_FIELD_MAX=${memoryUsedMax}MB"
         )
     }
 }

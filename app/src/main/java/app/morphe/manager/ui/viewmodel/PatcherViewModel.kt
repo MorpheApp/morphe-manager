@@ -259,9 +259,38 @@ class PatcherViewModel(
     /** Real-time log entries exposed to the UI. Collected by the patcher worker. */
     val logs = mutableStateListOf<Pair<LogLevel, String>>()
 
+    /** Heap usage samples (MB) collected every second during patching. */
+    val heapSamples = mutableStateListOf<Int>()
+
+    /** Heap limit (MB) of the patcher process - parsed from "Process heap memory limit:" log line. */
+    var heapLimitMb: Int by mutableIntStateOf(0)
+        private set
+
     private val logger = object : Logger() {
         override fun log(level: LogLevel, message: String) {
             level.androidLog(message)
+
+            // Parse patcher process heap limit
+            if (message.startsWith("Process heap memory limit: ")) {
+                val mb = message.removePrefix("Process heap memory limit: ")
+                    .substringBefore("MB").toIntOrNull()
+                if (mb != null) viewModelScope.launch { heapLimitMb = mb }
+                // still pass through to logs
+            }
+
+            // Extract heap samples from process runtime polling - keep last 60
+            if (message.startsWith("Heap: current=")) {
+                val mb = message.removePrefix("Heap: current=")
+                    .substringBefore("MB").toIntOrNull()
+                if (mb != null) {
+                    viewModelScope.launch {
+                        heapSamples.add(mb)
+                        if (heapSamples.size > 60) heapSamples.removeAt(0)
+                    }
+                }
+                return // Don't show raw heap poll lines in the log panel
+            }
+
             if (level == LogLevel.TRACE) return
 
             viewModelScope.launch {
