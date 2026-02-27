@@ -182,32 +182,6 @@ class JsonPatchBundle(
 ) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
 
     /**
-     * Extracts the branch from the endpoint URL.
-     * Returns null if the URL is not a recognized GitHub format.
-     */
-    private fun extractBranch(url: String): String? {
-        return try {
-            val uri = java.net.URI(url)
-            val host = uri.host?.lowercase(java.util.Locale.US)
-            val parts = uri.path.trim('/').split('/')
-            when (host) {
-                "raw.githubusercontent.com" -> {
-                    // Format: owner/repo/BRANCH/path...
-                    // But refs/heads/BRANCH is a direct file link - not switchable
-                    val branch = parts.getOrNull(2) ?: return null
-                    if (branch == "refs") null else branch
-                }
-                "github.com" -> {
-                    if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
-                }
-                else -> null
-            }
-        } catch (_: Exception) {
-            null
-        }
-    }
-
-    /**
      * The branch the endpoint URL currently points to (e.g. "main", "dev").
      * Returns null if the URL uses refs/heads/... or is not a recognized format.
      */
@@ -323,6 +297,33 @@ class JsonPatchBundle(
         name, uid, displayName, createdAt, updatedAt,
         installedVersionSignature, error, directory, endpoint, autoUpdate, enabled, usePrerelease,
     )
+
+    companion object {
+        /**
+         * Extracts the branch name from a GitHub URL.
+         */
+        internal fun extractBranch(url: String): String? {
+            return try {
+                val uri = java.net.URI(url)
+                val host = uri.host?.lowercase(java.util.Locale.US)
+                val parts = uri.path.trim('/').split('/')
+                when (host) {
+                    "raw.githubusercontent.com" -> {
+                        // Format: owner/repo/BRANCH/path...
+                        // But refs/heads/BRANCH is a direct file link - not switchable
+                        val branch = parts.getOrNull(2) ?: return null
+                        if (branch == "refs") null else branch
+                    }
+                    "github.com" -> {
+                        if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
+                    }
+                    else -> null
+                }
+            } catch (_: Exception) {
+                null
+            }
+        }
+    }
 }
 
 class APIPatchBundle(
