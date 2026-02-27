@@ -188,7 +188,7 @@ class PatcherWorker(
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
                 // Start memory polling for CoroutineRuntime
-                args.logger.info("Process heap memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
+                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
                 MemoryMonitor.startMemoryPolling(args.logger)
             }
@@ -300,6 +300,7 @@ class PatcherWorker(
         const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
         const val LOG_WORKER_PREFIX_DEVICE = "Device:"
         const val LOG_WORKER_PREFIX_RUNTIME = "Runtime:"
+        const val LOG_PROCESS_PREFIX_COROUTINE_HEAP = "App memory limit:"
         const val LOG_WORKER_FIELD_SIZE = "size"
         const val LOG_WORKER_FIELD_MEMORY_LIMIT = "memoryLimit"
         const val LOG_WORKER_FIELD_ELAPSED = "elapsed"

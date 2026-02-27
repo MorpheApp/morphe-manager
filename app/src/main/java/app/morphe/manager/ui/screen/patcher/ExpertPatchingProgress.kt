@@ -40,7 +40,8 @@ import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_AVERAGE
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_MAX
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_DONE
-import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_HEAP
+import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_PROCESS_PREFIX_COROUTINE_HEAP
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ANDROID
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_API
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ELAPSED
@@ -164,7 +165,8 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     }
 
     val skipPrefixes = setOf(
-        LOG_PROCESS_PREFIX_HEAP,
+        LOG_PROCESS_PREFIX_PROCESS_HEAP,
+        LOG_PROCESS_PREFIX_COROUTINE_HEAP,
         LOG_MEMORY_PREFIX_DONE,
         LOG_WORKER_PREFIX_DEVICE,
     )
