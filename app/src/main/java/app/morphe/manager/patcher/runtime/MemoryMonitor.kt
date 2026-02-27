@@ -41,13 +41,11 @@ object MemoryMonitor {
                 memoryUsedAverage =
                     (memoryUsedAverage * memoryPollSamples + used) / ++memoryPollSamples
 
-                if (true) {
-                    logger.info(
-                        "$LOG_MEMORY_PREFIX_CURRENT${used}MB " +
-                                "average=${memoryUsedAverage}MB " +
-                                "max=${memoryUsedMax}MB"
-                    )
-                }
+                logger.info(
+                    "$LOG_MEMORY_PREFIX_CURRENT${used}MB " +
+                            "average=${memoryUsedAverage}MB " +
+                            "max=${memoryUsedMax}MB"
+                )
 
                 try {
                     Thread.sleep(MEMORY_MONITOR_INTERVAL)
