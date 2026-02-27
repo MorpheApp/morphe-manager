@@ -577,16 +577,21 @@ private fun HeapUsageGraph(
                 horizontalArrangement = Arrangement.spacedBy(1.dp),
                 verticalAlignment = Alignment.Bottom
             ) {
-                val redThreshold = 0.9f
                 val memoryFractionRollingAverageSamples = 3
-                var memoryFractionAverage = 0.0
+                var memoryFractionAverage = 0f
                 padded.forEach { sample ->
-                    // Show red color only if high memory is sustained
-                    val memoryUsage = if (maxHeapMb > 0) (sample / maxHeapMb.toFloat()).coerceIn(0f, 1f) else 0f
+                    val memoryUsage = if (maxHeapMb > 0) {
+                        (sample / maxHeapMb.toFloat()).coerceIn(0f, 1f)
+                    } else 0f
+
                     memoryFractionAverage =
                         (memoryFractionAverage * memoryFractionRollingAverageSamples + memoryUsage) /
                                 (memoryFractionRollingAverageSamples + 1)
-                    val color = if (memoryFractionAverage > redThreshold) warnColor else barColor
+
+                    // Interpolate color based on how close the rolling average is to max memory.
+                    val color = androidx.compose.ui.graphics.lerp(
+                        barColor, warnColor, memoryFractionAverage
+                    )
 
                     Box(modifier = Modifier
                         .weight(1f)
