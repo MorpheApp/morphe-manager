@@ -104,13 +104,21 @@ class Session(
         }
 
         logger.info("Writing patched files...")
-        val result = patcher.get()
+        val result = withContext(Dispatchers.Default) {
+            // patcher.get() writes dex files, then encodes resources, so run on default pool
+            // instead of main thread.
+            patcher.get()
+        }
 
         val patched = tempDir.resolve("result.apk")
         withContext(Dispatchers.IO) {
             Files.copy(input.toPath(), patched.toPath(), StandardCopyOption.REPLACE_EXISTING)
         }
-        result.applyTo(patched)
+
+        withContext(Dispatchers.Default) {
+            // Run on default pool instead of I/O since we're processing large files in our own code
+            result.applyTo(patched)
+        }
 
         logger.info("Patched apk saved to $patched")
 
