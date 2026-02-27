@@ -37,6 +37,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
+import app.morphe.manager.patcher.runtime.MemoryMonitor.MEMORY_LOG_FIELD_AVERAGE
+import app.morphe.manager.patcher.runtime.MemoryMonitor.MEMORY_LOG_FIELD_MAX
+import app.morphe.manager.patcher.runtime.MemoryMonitor.MEMORY_LOG_PREFIX
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -139,9 +142,9 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                 storageAvailable = message.logField("storageAvail")
                 storageTotal     = message.logField("storageTotal")
             }
-            message.startsWith("Process heap after patching: ") -> {
-                processHeapAverageMb  = message.logField("average")
-                processHeapMaxMb   = message.logField("max")
+            message.startsWith(MEMORY_LOG_PREFIX) -> {
+                processHeapAverageMb  = message.logField(MEMORY_LOG_FIELD_AVERAGE)
+                processHeapMaxMb   = message.logField(MEMORY_LOG_FIELD_MAX)
             }
         }
     }
@@ -149,7 +152,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     val skipPrefixes = setOf(
         "Runtime: ",
         "Process heap memory limit: ",
-        "Process heap after patching: ",
+        MEMORY_LOG_PREFIX,
         "Device: ",
     )
 
@@ -851,7 +854,6 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
             BannerFieldCell("Time", item.elapsedSec, Modifier.weight(1f))
         }
 
-        // Heap stats — only present when ProcessRuntime was used
         if (item.processHeapAverageMb != null) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

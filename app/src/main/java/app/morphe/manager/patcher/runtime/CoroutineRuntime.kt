@@ -26,6 +26,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         onProgress: ProgressEventHandler,
         stripNativeLibs: Boolean,
     ) {
+        MemoryMonitor.startMemoryPolling(logger)
+
         val selectedBundles = selectedPatches.keys
         val bundles = bundles()
         val uids = bundles.entries.associate { (key, value) -> value to key }
@@ -85,6 +87,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
             }
         } finally {
             preparation.cleanup()
+
+            MemoryMonitor.stopMemoryPolling(logger)
         }
     }
 }

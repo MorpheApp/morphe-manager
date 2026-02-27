@@ -25,6 +25,9 @@ import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
+import app.morphe.manager.patcher.runtime.MemoryMonitor
+import app.morphe.manager.patcher.runtime.MemoryMonitor.memoryUsedAverage
+import app.morphe.manager.patcher.runtime.MemoryMonitor.memoryUsedMax
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
@@ -230,14 +233,12 @@ class PatcherWorker(
             updateProgress(state = State.COMPLETED) // Signing
 
             val elapsed = System.currentTimeMillis() - startTime
-            val rt = Runtime.getRuntime()
-            val heapUsed = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
-            val heapTotal = rt.totalMemory() / (1024 * 1024)
-            val heapMax = rt.maxMemory() / (1024 * 1024)
+
+            MemoryMonitor.stopMemoryPolling(args.logger)
 
             args.logger.info(
                 "Patching succeeded: output=${args.output} size=${File(args.output).length()} " +
-                        "elapsed=${elapsed}ms heapUsed=${heapUsed}MB heapTotal=${heapTotal}MB heapMax=${heapMax}MB"
+                        "elapsed=${elapsed}ms average=${memoryUsedAverage}MB max=${memoryUsedMax}MB"
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
