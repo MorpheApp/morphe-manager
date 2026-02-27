@@ -435,7 +435,7 @@
     <string name="installer_internal_name">أداة تثبيت النظام</string>
     <string name="installer_internal_description">استخدام أداة تثبيت حزم Android</string>
     <string name="installer_auto_saved_name">أداة تثبيت تركيب Rooted</string>
-    <string name="installer_auto_saved_description">يقوم بتركيب ملف APK المعدل فوق التطبيق المثبت (يتطلب Root)</string>
+    <string name="installer_auto_saved_description">يقوم بتركيب ملف APK المعدل فوق التطبيق المثبت</string>
     <string name="installer_shizuku_description">التثبيت الصامت باستخدام Shizuku أو Sui.</string>
     <string name="installer_option_none">لا بديل</string>
     <string name="installer_none_description">لم يتم تكوين أي أداة تثبيت بديلة</string>

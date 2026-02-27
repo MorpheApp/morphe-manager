@@ -63,7 +63,7 @@
     <string name="sources_dialog_remote_url_formats_title">예시:</string>
     <string name="sources_dialog_local">로컬</string>
     <string name="sources_dialog_local_file">패치 소스 파일 선택</string>
-    <string name="sources_dialog_local_file_description">기기 저장소에서 .mpp 패치 소스 파일을 선택하세요</string>
+    <string name="sources_dialog_local_file_description">저장소에서 .mpp 패치 소스 파일을 선택하세요</string>
     <string name="sources_dialog_local_change_file">파일 변경</string>
     <string name="sources_dialog_preinstalled">미리 설치됨</string>
     <string name="sources_update_success">업데이트를 성공하였습니다</string>
@@ -154,7 +154,7 @@
     <string name="header_creator_folder_explanation">만들어진 헤더 파일이 저장될 \'morphe_branding/morphe_header\' 폴더의 위치를 ​​선택하세요</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">이 앱을 정말 제거하시겠습니까?</string>
-    <string name="home_app_info_remove_app_warning">다음 항목들이 영구적으로 삭제됩니다:</string>
+    <string name="home_app_info_remove_app_warning">다음 항목들을 영구적으로 삭제합니다:</string>
     <string name="home_app_info_delete_item_database">데이터베이스 엔트리</string>
     <string name="home_app_info_delete_item_patched_apk">패치된 APK 파일</string>
     <string name="home_app_info_delete_item_original_apk">원본 APK 파일</string>
@@ -344,7 +344,7 @@
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
     <string name="settings_advanced_expert_mode_description">고급 Morphe 패치 설정과 커스텀 옵션을 활성화합니다</string>
-    <string name="settings_advanced_expert_mode_dialog_title">전문가 모드를 활성화?</string>
+    <string name="settings_advanced_expert_mode_dialog_title">전문가 모드 활성화</string>
     <string name="settings_advanced_expert_mode_dialog_message">전문가 모드에서는 패치를 적용하는 방식을 더 세밀하게 조절할 수 있지만, 설정을 잘못 건드리면 앱이 정상적으로 작동하지 않을 수 있습니다</string>
     <string name="settings_advanced_strip_unused_libs">사용되지 않는 라이브러리 제거</string>
     <string name="settings_advanced_strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
@@ -361,7 +361,7 @@ GitHub.com에서 public_repo 권한이 포함된 개인 액세스 토큰을 생�
     <string name="settings_advanced_github_pat_export_warning">개인 액세스 토큰을 공유하지 마세요. 설정 내보내기에 포함되는 경우에는 토큰이 포함되어 있으므로 해당 파일을 비공개로 유지하세요</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">패치 옵션</string>
-    <string name="settings_advanced_patch_options_youtube_description">테마, 브랜딩, 헤더 그리고 Shorts 옵션</string>
+    <string name="settings_advanced_patch_options_youtube_description">테마, 브랜딩, 헤더 및 Shorts 옵션</string>
     <string name="settings_advanced_patch_options_youtube_music_description">테마 및 브랜딩 옵션</string>
     <string name="settings_advanced_patch_options_restart_message">패치 옵션을 변경하려면 앱을 다시 패치해야 합니다</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">전문가 모드에서는 패치 과정 중에 패치 옵션을 사용할 수 있습니다</string>
@@ -381,7 +381,7 @@ GitHub.com에서 public_repo 권한이 포함된 개인 액세스 토큰을 생�
     <string name="settings_advanced_patch_options_custom_branding_app_name">앱 이름</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">커스텀 앱 이름 입력</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">커스텀 앱 아이콘</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"커스텀 앱 아이콘으로 사용할 이미지가 포함된 폴더입니다.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"커스텀 앱 아이콘으로 사용될 이미지가 있는 폴더.
 
 폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
 - mipmap-mdpi
@@ -407,7 +407,7 @@ morphe_notification_icon_custom.xml"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">커스텀 헤더 로고</string>
     <string name="settings_advanced_patch_options_custom_header_description">헤더 로고를 변경해 보세요</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"커스텀 헤더 로고로 사용될 이미지가 있는 폴더입니다.
+    <string name="settings_advanced_patch_options_custom_header_instruction">"커스텀 헤더 로고로 사용될 이미지가 있는 폴더.
 
 폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
 - drawable-hdpi
@@ -554,9 +554,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">정보</string>
     <string name="settings_system_share_website">웹사이트 공유</string>
     <string name="settings_system_share_website_description">공식 Morphe 웹사이트를 공유해 보세요</string>
-    <string name="settings_system_manager_description">"Morphe는 인기 있는 Android 앱을 현대적이고 간소화된 방식으로 패치하는 데 중점을 둔 실험적인 오픈 소스 프로젝트입니다
+    <string name="settings_system_manager_description">"Morphe는 인기 있는 안드로이드 앱을 현대적이고 간결한 방식으로 패치하는 데 초점을 둔 실험적인 오픈소스 프로젝트입니다
 
-오픈 소스의 가치를 핵심으로 하는 Morphe는 커뮤니티의 피드백과 기여를 통해 미래의 혁신을 만들어 갑니다"</string>
+핵심부터 오픈소스를 지향하며, 커뮤니티의 피드백과 기여를 바탕으로 앞으로의 혁신을 만들어갑니다"</string>
     <!-- Shared strings -->
     <string name="patches">패치</string>
     <string name="home">홈</string>
