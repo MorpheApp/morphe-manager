@@ -178,10 +178,49 @@ class JsonPatchBundle(
     endpoint: String,
     autoUpdate: Boolean,
     enabled: Boolean,
+    val usePrerelease: Boolean = false,
 ) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
 
     /**
-     * Parse GitHub URL and convert to raw.githubusercontent.com format
+     * Extracts the branch from the endpoint URL.
+     * Returns null if the URL is not a recognized GitHub format.
+     */
+    private fun extractBranch(url: String): String? {
+        return try {
+            val uri = java.net.URI(url)
+            val host = uri.host?.lowercase(java.util.Locale.US)
+            val parts = uri.path.trim('/').split('/')
+            when (host) {
+                "raw.githubusercontent.com" -> {
+                    // Format: owner/repo/BRANCH/path...
+                    // But refs/heads/BRANCH is a direct file link - not switchable
+                    val branch = parts.getOrNull(2) ?: return null
+                    if (branch == "refs") null else branch
+                }
+                "github.com" -> {
+                    if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
+                }
+                else -> null
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /**
+     * The branch the endpoint URL currently points to (e.g. "main", "dev").
+     * Returns null if the URL uses refs/heads/... or is not a recognized format.
+     */
+    val endpointBranch: String? get() = extractBranch(endpoint)
+
+    /**
+     * The "stable" branch - whatever the endpoint points to if it's not "dev", otherwise "main".
+     */
+    private val stableBranch: String get() = endpointBranch?.takeIf { it != "dev" } ?: "main"
+
+    /**
+     * Parse GitHub URL and convert to raw.githubusercontent.com format.
+     * If [usePrerelease] is true, uses "dev" branch; otherwise uses [stableBranch].
      * Supports:
      * - https://github.com/owner/repo/tree/branch/path/file.json
      * - https://github.com/owner/repo/blob/branch/path/file.json
@@ -191,11 +230,16 @@ class JsonPatchBundle(
         return try {
             val uri = java.net.URI(url)
             val host = uri.host?.lowercase(java.util.Locale.US)
+            val targetBranch = if (usePrerelease) "dev" else stableBranch
 
             when (host) {
                 "raw.githubusercontent.com" -> {
-                    // Already in correct format
-                    url
+                    val parts = uri.path.trim('/').split('/')
+                    if (parts.size < 3) return url
+                    // Don't modify refs/heads/... - it's a direct immutable link
+                    if (parts[2] == "refs") return url
+                    val newPath = "/${parts[0]}/${parts[1]}/$targetBranch/${parts.drop(3).joinToString("/")}"
+                    "https://raw.githubusercontent.com$newPath"
                 }
                 "github.com" -> {
                     // Parse: /owner/repo/tree|blob/branch/path/to/file.json
@@ -209,10 +253,9 @@ class JsonPatchBundle(
 
                     if (type !in listOf("tree", "blob")) return url
 
-                    val branch = pathParts[3]
                     val filePath = pathParts.drop(4).joinToString("/")
 
-                    "https://raw.githubusercontent.com/$owner/$repo/$branch/$filePath"
+                    "https://raw.githubusercontent.com/$owner/$repo/$targetBranch/$filePath"
                 }
                 else -> url // Unknown host, return as-is
             }
@@ -220,6 +263,21 @@ class JsonPatchBundle(
             url // If parsing fails, return original URL
         }
     }
+
+    /**
+     * Returns true if this bundle supports prerelease toggling.
+     * Requires a GitHub URL with a simple branch name (not refs/heads/...).
+     */
+    val supportsPrerelease: Boolean get() {
+        // endpointBranch returns null for refs/heads/... and non-GitHub URLs
+        return endpointBranch != null
+    }
+
+    /**
+     * True if the endpoint already points to the dev branch.
+     * Used by the UI to know whether the toggle label should say "Use dev" or "Use stable".
+     */
+    val isEndpointOnDev: Boolean get() = endpointBranch == "dev"
 
     override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
         val normalizedEndpoint = parseGitHubUrl(endpoint)
@@ -259,17 +317,13 @@ class JsonPatchBundle(
         autoUpdate: Boolean,
         enabled: Boolean
     ) = JsonPatchBundle(
-        name,
-        uid,
-        displayName,
-        createdAt,
-        updatedAt,
-        installedVersionSignature,
-        error,
-        directory,
-        endpoint,
-        autoUpdate,
-        enabled
+        name, uid, displayName, createdAt, updatedAt,
+        installedVersionSignature, error, directory, endpoint, autoUpdate, enabled, usePrerelease,
+    )
+
+    fun copy(usePrerelease: Boolean) = JsonPatchBundle(
+        name, uid, displayName, createdAt, updatedAt,
+        installedVersionSignature, error, directory, endpoint, autoUpdate, enabled, usePrerelease,
     )
 }
 
@@ -285,10 +339,12 @@ class APIPatchBundle(
     endpoint: String,
     autoUpdate: Boolean,
     enabled: Boolean,
+    val usePrerelease: Boolean = false,
 ) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
     private val api: MorpheAPI by inject()
 
-    override suspend fun getLatestInfo() = api.getPatchesUpdate().getOrThrow()
+    override suspend fun getLatestInfo() = api.getPatchesUpdate(usePrerelease).getOrThrow()
+
     override fun copy(
         error: Throwable?,
         name: String,
@@ -298,17 +354,13 @@ class APIPatchBundle(
         autoUpdate: Boolean,
         enabled: Boolean
     ) = APIPatchBundle(
-        name,
-        uid,
-        displayName,
-        createdAt,
-        updatedAt,
-        installedVersionSignature,
-        error,
-        directory,
-        endpoint,
-        autoUpdate,
-        enabled
+        name, uid, displayName, createdAt, updatedAt,
+        installedVersionSignature, error, directory, endpoint, autoUpdate, enabled, usePrerelease,
+    )
+
+    fun copy(usePrerelease: Boolean) = APIPatchBundle(
+        name, uid, displayName, createdAt, updatedAt,
+        installedVersionSignature, error, directory, endpoint, autoUpdate, enabled, usePrerelease,
     )
 }
 

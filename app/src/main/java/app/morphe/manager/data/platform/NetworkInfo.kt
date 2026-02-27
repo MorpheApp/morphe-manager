@@ -10,10 +10,11 @@ class NetworkInfo(app: Application) {
 
     private fun getCapabilities() = connectivityManager.activeNetwork?.let { connectivityManager.getNetworkCapabilities(it) }
     fun isConnected() = connectivityManager.activeNetwork != null
-    fun isUnmetered() = getCapabilities()?.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED) ?: true
+    fun isUnmetered() = getCapabilities()?.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED) != false
 
     /**
-     * Returns true if it is safe to download large files.
+     * Returns true when the active network is metered (e.g. mobile data, hotspot).
+     * Returns false when unmetered (Wi-Fi, Ethernet) or when there is no active network.
      */
-    fun isSafe() = isConnected() // && isUnmetered() // Morphe
+    fun isMetered() = isConnected() && !isUnmetered()
 }

@@ -281,7 +281,7 @@ fun PatcherScreen(
                     prefs.notificationPermissionRequested.update(true)
                     if (granted) {
                         prefs.backgroundUpdateNotifications.update(true)
-                        syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
+                        syncFcmTopics(notificationsEnabled = true, useManagerPrereleases = usePrereleases)
                         if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                     }
                 }

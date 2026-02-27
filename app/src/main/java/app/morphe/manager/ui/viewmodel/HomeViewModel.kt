@@ -64,6 +64,7 @@ import javax.net.ssl.SSLException
 enum class BundleUpdateStatus {
     Updating,    // Update in progress
     Success,     // Update completed successfully
+    Warning,     // Patches may be outdated (on metered network, updates disabled)
     Error        // Error occurred (including no internet)
 }
 
@@ -181,6 +182,12 @@ class HomeViewModel(
     var showBundleUpdateSnackbar by mutableStateOf(false)
     var snackbarStatus by mutableStateOf(BundleUpdateStatus.Updating)
 
+    // Metered network dialog: shown when user tries to patch on mobile data with updates disabled
+    var showMeteredPatchingDialog by mutableStateOf(false)
+        private set
+    // Pending patching action captured when the guard dialog is shown
+    private var pendingPatchAction: (suspend () -> Unit)? = null
+
     // Loading state for installed apps
     var installedAppsLoading by mutableStateOf(true)
 
@@ -255,9 +262,63 @@ class HomeViewModel(
         }
     }
 
-    suspend fun checkForManagerUpdates() {
-        if (!prefs.managerAutoUpdates.get() || !networkInfo.isConnected()) return
+    /**
+     * Returns `true` when the user has disabled metered updates AND is currently on
+     * a metered (mobile data) connection - meaning patches may not be up to date.
+     */
+    fun isOnMeteredWithUpdatesDisabled(): Boolean {
+        if (prefs.allowMeteredUpdates.getBlocking()) return false
+        return networkInfo.isMetered()
+    }
 
+    /**
+     * Guard entry-point for all patching flows.
+     * Shows MeteredPatchingDialog when on metered network with updates disabled,
+     * so the user can choose to update patches first or patch anyway.
+     * Otherwise launches [action] immediately.
+     */
+    fun guardPatching(action: suspend () -> Unit) {
+        if (isOnMeteredWithUpdatesDisabled()) {
+            pendingPatchAction = action
+            showMeteredPatchingDialog = true
+        } else {
+            viewModelScope.launch { action() }
+        }
+    }
+
+    /**
+     * User chose to update patches first, then automatically continue patching.
+     */
+    fun refreshBundlesAndContinuePatching() {
+        showMeteredPatchingDialog = false
+        val action = pendingPatchAction ?: return
+        pendingPatchAction = null
+        viewModelScope.launch {
+            // User explicitly requested update - bypass metered check and wait for completion
+            patchBundleRepository.updateCheckAndAwait(allowUnsafeNetwork = true)
+            action()
+        }
+    }
+
+    /**
+     * User chose to patch with the currently cached patches despite being on metered network.
+     */
+    fun dismissMeteredPatchingDialogAndProceed() {
+        showMeteredPatchingDialog = false
+        val action = pendingPatchAction ?: return
+        pendingPatchAction = null
+        viewModelScope.launch { action() }
+    }
+
+    /**
+     * User cancelled patching from the metered network dialog.
+     */
+    fun dismissMeteredPatchingDialog() {
+        showMeteredPatchingDialog = false
+        pendingPatchAction = null
+    }
+
+    suspend fun checkForManagerUpdates() {
         uiSafe(app, R.string.failed_to_check_updates, "Failed to check for updates") {
             updatedManagerVersion = morpheAPI.getAppUpdate()?.version
         }
@@ -615,29 +676,32 @@ class HomeViewModel(
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
 
-        // Load saved APK info if it exists
-        viewModelScope.launch {
-            val savedInfo = withContext(Dispatchers.IO) {
-                loadSavedApkInfo(packageName)
-            }
-            pendingSavedApkInfo = savedInfo
+        // Guard: if there is a pending bundle update on metered data, show the outdated-patches
+        // dialog before proceeding with the actual APK selection flow.
+        guardPatching { showPatchDialogInternal(packageName) }
+    }
 
-            // Check if we should auto-use saved APK in simple mode
-            val isExpertMode = prefs.useExpertMode.getBlocking()
-            val recommendedVersion = recommendedVersions[packageName]
+    private suspend fun showPatchDialogInternal(packageName: String) {
+        val savedInfo = withContext(Dispatchers.IO) {
+            loadSavedApkInfo(packageName)
+        }
+        pendingSavedApkInfo = savedInfo
 
-            val shouldAutoUseSaved = !isExpertMode &&
-                    savedInfo != null &&
-                    recommendedVersion != null &&
-                    savedInfo.version == recommendedVersion
+        // Check if we should auto-use saved APK in simple mode
+        val isExpertMode = prefs.useExpertMode.getBlocking()
+        val recommendedVersion = recommendedVersions[packageName]
 
-            if (shouldAutoUseSaved) {
-                // Skip dialog and use saved APK directly
-                handleSavedApkSelection()
-            } else {
-                // Show dialog
-                showApkAvailabilityDialog = true
-            }
+        val shouldAutoUseSaved = !isExpertMode &&
+                savedInfo != null &&
+                recommendedVersion != null &&
+                savedInfo.version == recommendedVersion
+
+        if (shouldAutoUseSaved) {
+            // Skip dialog and use saved APK directly
+            handleSavedApkSelection()
+        } else {
+            // Show dialog
+            showApkAvailabilityDialog = true
         }
     }
 
