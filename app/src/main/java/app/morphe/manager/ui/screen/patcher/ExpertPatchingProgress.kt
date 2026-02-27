@@ -577,9 +577,17 @@ private fun HeapUsageGraph(
                 horizontalArrangement = Arrangement.spacedBy(1.dp),
                 verticalAlignment = Alignment.Bottom
             ) {
+                val redThreshold = 0.85f
+                val memoryFractionRollingAverageSamples = 5
+                var memoryFractionAverage = 0.0
                 padded.forEach { sample ->
-                    val fraction = if (maxHeapMb > 0) (sample / maxHeapMb.toFloat()).coerceIn(0f, 1f) else 0f
-                    val color = if (fraction > 0.8f) warnColor else barColor
+                    // Show red color only if high memory is sustained
+                    val memoryUsage = if (maxHeapMb > 0) (sample / maxHeapMb.toFloat()).coerceIn(0f, 1f) else 0f
+                    memoryFractionAverage =
+                        (memoryFractionAverage * memoryFractionRollingAverageSamples + memoryUsage) /
+                                memoryFractionRollingAverageSamples
+                    val color = if (memoryFractionAverage > redThreshold) warnColor else barColor
+
                     Box(modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()) {
@@ -590,11 +598,11 @@ private fun HeapUsageGraph(
                                 .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
                                 .background(if (sample > 0) trackColor.copy(alpha = 0.3f) else Color.Transparent)
                         )
-                        if (fraction > 0f) {
+                        if (memoryUsage > 0f) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .fillMaxHeight(fraction)
+                                    .fillMaxHeight(memoryUsage)
                                     .align(Alignment.BottomCenter)
                                     .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
                                     .background(color.copy(alpha = 0.75f))
