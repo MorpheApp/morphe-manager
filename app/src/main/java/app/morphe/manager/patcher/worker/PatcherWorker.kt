@@ -206,7 +206,8 @@ class PatcherWorker(
                 "Patching started at ${System.currentTimeMillis()} " +
                         "pkg=${args.packageName} version=${args.input.version} " +
                         "input=${inputFile.absolutePath} size=${inputFile.length()} " +
-                        "split=$inputIsSplitArchive patches=$selectedCount"
+                        "split=$inputIsSplitArchive patches=$selectedCount " +
+                        "device=${Build.MANUFACTURER} model=${Build.MODEL}"
             )
 
             runtime.execute(

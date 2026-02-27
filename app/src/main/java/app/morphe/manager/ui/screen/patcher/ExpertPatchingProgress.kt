@@ -62,6 +62,8 @@ sealed interface LogItem {
         val ramTotal: String?,
         val storageAvailable: String?,
         val storageTotal: String?,
+        val deviceManufacturer: String?,
+        val deviceModel: String?,
     ) : LogItem
 
     /**
@@ -123,6 +125,8 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     var ramTotal: String? = null
     var storageAvailable: String? = null
     var storageTotal: String? = null
+    var deviceManufacturer: String? = null
+    var deviceModel: String? = null
 
     for ((_, message) in this) {
         when {
@@ -159,6 +163,8 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
 
             message.startsWith("Patching started at ") -> {
                 val pkg = message.logField("pkg")
+                deviceManufacturer = message.logField("device")
+                deviceModel = message.logField("model")
                 if (pkg != null) {
                     result += LogItem.StartBanner(
                         packageName = pkg,
@@ -174,6 +180,8 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                         ramTotal = ramTotal,
                         storageAvailable = storageAvailable,
                         storageTotal = storageTotal,
+                        deviceManufacturer = deviceManufacturer,
+                        deviceModel = deviceModel,
                     )
                 } else {
                     result += LogItem.Entry(level, message)
@@ -811,15 +819,23 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
         }
 
         // Device environment only shown when data is available
-        if (item.androidVersion != null || item.ramTotal != null) {
+        if (item.androidVersion != null || item.ramTotal != null || item.deviceManufacturer != null) {
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
                 thickness = 1.dp
             )
 
-            item.androidVersion?.let {
-                Row(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                item.androidVersion?.let {
                     BannerFieldCell("Android", it, Modifier.weight(1f))
+                }
+                if (item.deviceManufacturer != null || item.deviceModel != null) {
+                    val deviceLabel = listOfNotNull(item.deviceManufacturer, item.deviceModel)
+                        .joinToString(" ")
+                    BannerFieldCell("Device", deviceLabel, Modifier.weight(1f))
                 }
             }
 
