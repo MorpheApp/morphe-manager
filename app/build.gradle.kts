@@ -231,16 +231,30 @@ android {
     packaging {
         resources.excludes.addAll(
             listOf(
+                // Build junk
                 "/prebuilt/**",
-                "META-INF/DEPENDENCIES",
-                "META-INF/**.version",
-                "DebugProbesKt.bin",
-                "kotlin-tooling-metadata.json",
-                "org/bouncycastle/pqc/**.properties",
-                "org/bouncycastle/x509/**.properties",
+                "/smali.properties",
+                "/baksmali.properties",
+                "/properties/apktool.properties",
+
+                // Kotlin / debug metadata
+                "/META-INF/*.version",
+                "/META-INF/*.kotlin_module",
+                "/kotlin-tooling-metadata.json",
+                "/DebugProbesKt.bin",
+
+                // Specific META-INF junk
+                "/META-INF/DEPENDENCIES",
+                "/META-INF/INDEX.LIST",
+
+                // Crypto optional metadata
+                "/org/bouncycastle/pqc/**.properties",
+                "/org/bouncycastle/x509/**.properties"
             )
         )
+
         jniLibs {
+            excludes += "/lib/x86/*.so"
             useLegacyPackaging = true
         }
     }
