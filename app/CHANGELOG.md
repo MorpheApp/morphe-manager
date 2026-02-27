@@ -1,3 +1,10 @@
+# app [1.9.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.1...v1.9.0-dev.2) (2026-02-27)
+
+
+### Bug Fixes
+
+* Pre-release toggle is enabled if user adds link to dev branch ([28417d0](https://github.com/MorpheApp/morphe-manager/commit/28417d06d78035c86bf1ac53367ef68a594c6f63))
+
 # app [1.9.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0...v1.9.0-dev.1) (2026-02-27)
 
 
