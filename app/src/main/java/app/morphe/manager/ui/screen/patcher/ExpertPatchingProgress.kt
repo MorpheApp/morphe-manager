@@ -364,7 +364,7 @@ private fun ExpertProgressHeader(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(R.string.applying_patches),
+                text = stringResource(R.string.patching_app),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground

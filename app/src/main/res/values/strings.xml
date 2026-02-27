@@ -283,6 +283,7 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
 
     <!-- Patcher Screen - Other hidden strings -->
+    <string name="patching_app">Patching app</string>
     <string name="applying_patches">Applying patches</string>
     <string name="failed_to_execute_patch">Failed to apply %s</string>
     <string name="patched_app_saved_toast">Patched app saved for later</string>
