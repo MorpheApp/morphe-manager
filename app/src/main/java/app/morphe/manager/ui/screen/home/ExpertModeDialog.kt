@@ -249,7 +249,7 @@ fun ExpertModeDialog(
                             Icon(
                                 imageVector = Icons.Outlined.Source,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                 modifier = Modifier.size(18.dp)
                             )
                         }
@@ -495,7 +495,7 @@ private fun BundlePatchControls(
             enabled = enabledCount < totalCount,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-                contentColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
                 disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
             )
