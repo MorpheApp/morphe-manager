@@ -96,6 +96,7 @@ fun rememberMorphePatcherState(
 fun PatchingSuccess(
     installViewModel: InstallViewModel,
     usingMountInstall: Boolean,
+    isExpertMode: Boolean = false,
     onInstall: () -> Unit,
     onUninstall: (String) -> Unit,
     onOpen: () -> Unit,
@@ -183,7 +184,7 @@ fun PatchingSuccess(
             // Bottom action bar
             PatcherBottomActionBar(
                 showCancelButton = false,
-                showLogsButton = true,
+                showLogsButton = isExpertMode,
                 showHomeButton = true,
                 showSaveButton = true,
                 showErrorButton = false,

@@ -562,6 +562,8 @@ fun PatcherScreen(
             .fillMaxSize()
             .statusBarsPadding()
     ) {
+        val useExpertMode by prefs.useExpertMode.getAsState()
+
         AnimatedContent(
             targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
             transitionSpec = {
@@ -572,7 +574,6 @@ fun PatcherScreen(
         ) { patcherState ->
             when (patcherState) {
                 PatcherState.IN_PROGRESS -> {
-                    val useExpertMode by prefs.useExpertMode.getAsState()
                     if (useExpertMode) {
                         ExpertPatchingInProgress(
                             progress = displayProgressAnimate,
@@ -599,6 +600,7 @@ fun PatcherScreen(
                     PatchingSuccess(
                         installViewModel = installViewModel,
                         usingMountInstall = usingMountInstall,
+                        isExpertMode = useExpertMode,
                         onLogsClick = { showSuccessScreen = false },
                         onInstall = {
                             if (usingMountInstall) {
