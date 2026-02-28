@@ -1,22 +1,20 @@
 package app.morphe.manager.patcher.worker
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.PowerManager
+import android.os.StatFs
 import android.util.Log
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import app.morphe.manager.R
 import app.morphe.manager.MainActivity
+import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.RootInstaller
@@ -27,15 +25,13 @@ import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
+import app.morphe.manager.patcher.runtime.MemoryMonitor
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
-import app.morphe.manager.util.Options
-import app.morphe.manager.util.PM
-import app.morphe.manager.util.PatchSelection
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -175,34 +171,89 @@ class PatcherWorker(
                 }
             }
 
-            val runtime = if (prefs.useProcessRuntime.get()) {
-                ProcessRuntime(applicationContext)
-            } else {
-                CoroutineRuntime(applicationContext)
-            }
-
+            val useProcessRuntime = prefs.useProcessRuntime.get()
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             val selectedCount = args.selectedPatches.values.sumOf { it.size }
+
+            // Log device environment for diagnostics
+            val memInfo = ActivityManager.MemoryInfo().also {
+                (applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
+                    .getMemoryInfo(it)
+            }
+            val statFs = StatFs(applicationContext.filesDir.absolutePath)
+            args.logger.info(
+                "$LOG_WORKER_PREFIX_DEVICE " +
+                        "$LOG_WORKER_FIELD_ANDROID=${Build.VERSION.RELEASE} " +
+                        "$LOG_WORKER_FIELD_API=${Build.VERSION.SDK_INT} " +
+                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytes(memInfo.availMem)}\" " +
+                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytes(memInfo.totalMem)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytes(statFs.availableBytes)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytes(statFs.totalBytes)}\""
+            )
 
             args.logger.info(
                 "Patching started at ${System.currentTimeMillis()} " +
                         "pkg=${args.packageName} version=${args.input.version} " +
                         "input=${inputFile.absolutePath} size=${inputFile.length()} " +
-                        "split=$inputIsSplitArchive patches=$selectedCount"
+                        "split=$inputIsSplitArchive patches=$selectedCount " +
+                        "device=${Build.MANUFACTURER} model=${Build.MODEL}"
             )
 
-            runtime.execute(
-                inputFile.absolutePath,
-                patchedApk.absolutePath,
-                args.packageName,
-                args.selectedPatches,
-                args.options,
-                args.logger,
-                args.onPatchCompleted,
-                args.onProgress,
-                stripNativeLibs
-            )
+            // Log runtime mode info
+            if (useProcessRuntime) {
+                val memLimit = prefs.patcherProcessMemoryLimit.get()
+                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
+            } else {
+                // Start memory polling for CoroutineRuntime
+                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
+                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
+                MemoryMonitor.startMemoryPolling(args.logger)
+            }
+
+            // Execute patching. ProcessRuntime has its own retry loop that reduces memory on OOM
+            // If it still fails on Android <= Q, fall back to CoroutineRuntime
+            var usedCoroutineFallback = false
+            val runtime = if (useProcessRuntime) {
+                ProcessRuntime(applicationContext)
+            } else {
+                CoroutineRuntime(applicationContext)
+            }
+
+            try {
+                runtime.execute(
+                    inputFile.absolutePath,
+                    patchedApk.absolutePath,
+                    args.packageName,
+                    args.selectedPatches,
+                    args.options,
+                    args.logger,
+                    args.onPatchCompleted,
+                    args.onProgress,
+                    stripNativeLibs
+                )
+            } catch (e: Exception) {
+                if (!useProcessRuntime || Build.VERSION.SDK_INT > Build.VERSION_CODES.Q || !isOomRelated(e)) {
+                    throw e
+                }
+
+                args.logger.warn("Process runtime OOM on Android ${Build.VERSION.RELEASE}, falling back to coroutine runtime")
+                usedCoroutineFallback = true
+
+                MemoryMonitor.startMemoryPolling(args.logger)
+
+                CoroutineRuntime(applicationContext).execute(
+                    inputFile.absolutePath,
+                    patchedApk.absolutePath,
+                    args.packageName,
+                    args.selectedPatches,
+                    args.options,
+                    args.logger,
+                    args.onPatchCompleted,
+                    args.onProgress,
+                    stripNativeLibs
+                )
+            }
 
             if (stripNativeLibs && !inputIsSplitArchive) {
                 NativeLibStripper.strip(patchedApk)
@@ -212,13 +263,15 @@ class PatcherWorker(
             updateProgress(state = State.COMPLETED) // Signing
 
             val elapsed = System.currentTimeMillis() - startTime
-            val rt = Runtime.getRuntime()
-            val usedMem = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
-            val totalMem = rt.totalMemory() / (1024 * 1024)
+
+            if (!useProcessRuntime || usedCoroutineFallback) {
+                MemoryMonitor.stopMemoryPolling(args.logger)
+            }
 
             args.logger.info(
-                "Patching succeeded: output=${args.output} size=${File(args.output).length()} " +
-                        "elapsed=${elapsed/1000}s memory=${usedMem}MB/${totalMem}MB"
+                "$LOG_WORKER_PREFIX_SUCCEEDED output=${args.output} " +
+                        "$LOG_WORKER_FIELD_SIZE=${File(args.output).length()} " +
+                        "$LOG_WORKER_FIELD_ELAPSED=${elapsed}ms"
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
@@ -231,7 +284,7 @@ class PatcherWorker(
             )
             val message = applicationContext.getString(
                 R.string.patcher_process_exit_message,
-                e.exitCode
+                e.exitCode.toString()
             )
             updateProgress(state = State.FAILED, message = message)
             val previousLimit = prefs.patcherProcessMemoryLimit.get()
@@ -262,11 +315,34 @@ class PatcherWorker(
         }
     }
 
+    private fun isOomRelated(e: Exception) = when (e) {
+        is ProcessRuntime.ProcessExitException ->
+            e.exitCode == ProcessRuntime.OOM_EXIT_CODE || e.exitCode == ProcessRuntime.SIGKILL_EXIT_CODE
+        is ProcessRuntime.RemoteFailureException ->
+            e.originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
+        else -> false
+    }
+
     companion object {
         private const val LOG_PREFIX = "[Worker]"
         private fun String.logFmt() = "$LOG_PREFIX $this"
+
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
         const val PROCESS_FAILURE_MESSAGE_KEY = "process_failure_message"
+
+        const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
+        const val LOG_WORKER_PREFIX_DEVICE = "Device:"
+        const val LOG_WORKER_PREFIX_RUNTIME = "Runtime:"
+        const val LOG_PROCESS_PREFIX_COROUTINE_HEAP = "App memory limit:"
+        const val LOG_WORKER_FIELD_SIZE = "size"
+        const val LOG_WORKER_FIELD_MEMORY_LIMIT = "memoryLimit"
+        const val LOG_WORKER_FIELD_ELAPSED = "elapsed"
+        const val LOG_WORKER_FIELD_ANDROID = "android"
+        const val LOG_WORKER_FIELD_API = "api"
+        const val LOG_WORKER_FIELD_RAM_AVAIL = "ramAvail"
+        const val LOG_WORKER_FIELD_RAM_TOTAL = "ramTotal"
+        const val LOG_WORKER_FIELD_STORAGE_AVAIL = "storageAvail"
+        const val LOG_WORKER_FIELD_STORAGE_TOTAL = "storageTotal"
     }
 }

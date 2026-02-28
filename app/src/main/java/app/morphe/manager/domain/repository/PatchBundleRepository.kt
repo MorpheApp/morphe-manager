@@ -1030,35 +1030,14 @@ class PatchBundleRepository(
         }
 
     /**
-     * Returns true if usePrerelease should be enabled for a [JsonPatchBundle] with the given [url].
+     * Returns true if 'usePrerelease' should be enabled for a [JsonPatchBundle] with the given [url].
+     * Prerelease is enabled if:
+     * - the uid is already stored in [PreferencesManager.bundlePrereleasesEnabled] (user toggled it on)
+     * - the endpoint URL explicitly targets the "dev" branch.
      */
     private fun shouldUsePrerelease(uid: Int, url: String): Boolean {
         if (prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString())) return true
-        return extractBranchFromUrl(url) == "dev"
-    }
-
-    /**
-     * Extracts the branch name from a GitHub URL.
-     * Returns null for refs/heads/... links, non-GitHub URLs, or URLs without a branch segment.
-     */
-    private fun extractBranchFromUrl(url: String): String? {
-        return try {
-            val uri = URI(url)
-            val host = uri.host?.lowercase(Locale.US) ?: return null
-            val parts = uri.path.trim('/').split('/')
-            when (host) {
-                "raw.githubusercontent.com" -> {
-                    val branch = parts.getOrNull(2) ?: return null
-                    if (branch == "refs") null else branch
-                }
-                "github.com" -> {
-                    if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
-                }
-                else -> null
-            }
-        } catch (_: Exception) {
-            null
-        }
+        return JsonPatchBundle.extractBranch(url) == "dev"
     }
 
     /**

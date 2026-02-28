@@ -291,6 +291,10 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
     <string name="patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
 
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Patching app</string>
+    <string name="memory_usage">Memory usage</string>
+
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Applying patches</string>
     <string name="failed_to_execute_patch">Failed to apply %s</string>
@@ -689,6 +693,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="details">Details</string>
     <string name="hide">Hide</string>
     <string name="default_">Default</string>
+    <string name="logs">Logs</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
