@@ -5,6 +5,7 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
+import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.ExportNameFormatter
@@ -92,6 +93,13 @@ class PreferencesManager(
                 val now = System.currentTimeMillis()
                 installationTime.update(now)
                 Log.d(tag, "Installation time set to $now")
+            }
+
+            // Initialize process memory limit adaptively on first launch
+            if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
+                val adaptive = calculateAdaptiveMemoryLimit(context)
+                Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
+                patcherProcessMemoryLimit.update(adaptive)
             }
 
             // Auto-enable prereleases for dev versions

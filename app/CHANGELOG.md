@@ -1,3 +1,10 @@
+# app [1.9.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.3...v1.9.0-dev.4) (2026-02-28)
+
+
+### Features
+
+* Add Expert mode patching screen ([#250](https://github.com/MorpheApp/morphe-manager/issues/250)) ([5efa637](https://github.com/MorpheApp/morphe-manager/commit/5efa6374cb135e4585f0b4aab10ca5dd7039ebd6))
+
 # app [1.9.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.2...v1.9.0-dev.3) (2026-02-28)
 
 
