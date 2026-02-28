@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">新しいバージョンがインストール可能です</string>
     <string name="home_update_error">更新に失敗しました</string>
     <string name="home_update_error_subtitle">インターネット接続を確認して、再度お試しください</string>
+    <string name="home_update_skipped_metered">更新をスキップしました</string>
+    <string name="home_update_skipped_metered_subtitle">モバイルデータ通信に接続しています</string>
     <string name="home_updating_sources">ソースを更新中…</string>
     <string name="home_update_progress_format">%1$s 件処理済み</string>
     <string name="home_update_success">ソースの更新が完了しました</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
     <string name="sources_management_failed_to_open_url">URL を開けませんでした</string>
+    <string name="sources_management_prerelease_toggle">プレリリース版のパッチを使用</string>
+    <string name="sources_management_prerelease_toggle_description">実験的で新しいバージョンのパッチをいち早く使用します</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">表示名</string>
     <string name="sources_dialog_rename">パッチソースの名前を変更</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">利用可能な更新はありません</string>
     <string name="sources_download_fail">ソースのダウンロードに失敗しました: %s</string>
+    <string name="sources_download_endpoint_not_found">「%1$s」を更新できませんでした: 設定された URL にパッチ JSON ファイルが見つかりませんでした</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">純正 APK (未パッチ) を探す手伝いが必要ですか？</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; にパッチを適用するには、次のバージョンの APK (未パッチ) が必要です:</string>
@@ -122,6 +127,10 @@
     <string name="home_dialog_wrong_package_description">選択された APK は、パッチを適用しようとしているアプリのものではありません</string>
     <string name="home_dialog_expected_package">想定されるパッケージ:</string>
     <string name="home_dialog_selected_package">選択されたパッケージ:</string>
+    <string name="home_outdated_patches_dialog_title">パッチが互換性を失っている可能性があります</string>
+    <string name="home_outdated_patches_dialog_message">モバイルデータ通信に接続されているため、パッチの更新は無効になっています</string>
+    <string name="home_outdated_patches_dialog_warning">互換性を失ったパッチを適用すると、正常に動作しないアプリになる可能性があります</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">更新してパッチを適用</string>
     <!-- Patch Options -->
     <string name="custom_color">カスタムカラー</string>
     <string name="hex_color">16進数カラー</string>
@@ -313,8 +322,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">アイコンを変更</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
-    <string name="settings_advanced_updates_use_prereleases">プレリリース版を使用</string>
-    <string name="settings_advanced_updates_use_prereleases_description">新しいパッチやマネージャー機能をいち早く利用できます</string>
+    <string name="settings_advanced_updates_use_prereleases">プレリリース版のマネージャーを使用</string>
+    <string name="settings_advanced_updates_use_prereleases_description">実験的で新しいバージョンのマネージャーへの早期アクセスを受信します。 プレリリース版のパッチを取得するには、それぞれのパッチソースのプリリリース版の設定を有効にしてください</string>
+    <string name="settings_advanced_updates_allow_metered">モバイルデータ通信で更新</string>
+    <string name="settings_advanced_updates_allow_metered_description">モバイルデータ通信でのパッチソースおよびマネージャーの更新のダウンロードを許可します</string>
     <string name="settings_advanced_updates_background_notifications">バックグラウンド更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">定期的にバックグラウンドで更新を確認し、利用可能な場合に通知します。</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">アプリが閉じているときでも新しいリリースのプッシュ通知を即座に受信します</string>

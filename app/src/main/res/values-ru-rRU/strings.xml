@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Готово к установке</string>
     <string name="home_update_error">Обновление не удалось</string>
     <string name="home_update_error_subtitle">Проверьте подключение к Интернету и повторите попытку</string>
+    <string name="home_update_skipped_metered">Обновления пропущены</string>
+    <string name="home_update_skipped_metered_subtitle">Мобильные данные активны</string>
     <string name="home_updating_sources">Обновление источников…</string>
     <string name="home_update_progress_format">Обработано %1$s из </string>
     <string name="home_update_success">Обновление источников завершено</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Источники патчей</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
+    <string name="sources_management_prerelease_toggle">Использовать предварительные версии</string>
+    <string name="sources_management_prerelease_toggle_description">Получать ранний доступ к новым экспериментальным версиям патчей</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
     <string name="sources_dialog_rename">Переименовать источник патча</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Обновление успешно</string>
     <string name="sources_update_unavailable">Нет доступных обновлений</string>
     <string name="sources_download_fail">Не удалось загрузить источники: %s</string>
+    <string name="sources_download_endpoint_not_found">Не удалось обновить \'%1$s\': файл JSON патча не найден по указанному URL</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Нужна помощь в поиске оригинального непатченого APK?</string>
     <string name="home_apk_availability_dialog_simple">Чтобы патчить &lt;b&gt;%s&lt;/b&gt;, вам нужен непатченый APK с версией:</string>
@@ -122,6 +127,10 @@
     <string name="home_dialog_wrong_package_description">Выбранный APK не соответствует приложению, которое вы собирались пропатчить</string>
     <string name="home_dialog_expected_package">Ожидаемый пакет:</string>
     <string name="home_dialog_selected_package">Выбранный пакет:</string>
+    <string name="home_outdated_patches_dialog_title">Патчи могут быть устаревшими</string>
+    <string name="home_outdated_patches_dialog_message">Мобильные данные активны, а обновление патчей отключено</string>
+    <string name="home_outdated_patches_dialog_warning">Патчинг устаревшими патчами может привести к неисправности программы</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Обновить и патчить</string>
     <!-- Patch Options -->
     <string name="custom_color">Свой цвет</string>
     <string name="hex_color">Hex цвет</string>
@@ -313,8 +322,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Изменить значок</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Обновления</string>
-    <string name="settings_advanced_updates_use_prereleases">Использовать предварительные версии</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Получить ранний доступ к новым патчам и функциям менеджера</string>
+    <string name="settings_advanced_updates_use_prereleases">Использовать предварительные версии менеджера</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Получать ранний доступ к новым экспериментальным версиям менеджера. Чтобы получать предварительные версии патчей, включите переключатель предварительных версий в настройках каждого источника патчей отдельно</string>
+    <string name="settings_advanced_updates_allow_metered">Обновление от мобильного трафика</string>
+    <string name="settings_advanced_updates_allow_metered_description">Разрешить загрузку источникам патчей и обновлениям менеджера через мобильные данные</string>
     <string name="settings_advanced_updates_background_notifications">Уведомления о фоновых обновлениях</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодически проверять наличие обновлений в фоновом режиме и сообщать об их доступности</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Получайте мгновенные push-уведомления о новых релизах, даже когда приложение закрыто</string>

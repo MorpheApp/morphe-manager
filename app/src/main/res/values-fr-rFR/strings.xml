@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Nouvelle version prête à installer</string>
     <string name="home_update_error">Échec de la mise à jour</string>
     <string name="home_update_error_subtitle">Vérifiez votre connexion Internet et réessayez</string>
+    <string name="home_update_skipped_metered">Mises à jour passées</string>
+    <string name="home_update_skipped_metered_subtitle">Les données mobiles sont activées</string>
     <string name="home_updating_sources">Mise à jour des sources…</string>
     <string name="home_update_progress_format">%1$s traité</string>
     <string name="home_update_success">Mise à jour des sources complète</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Sources de patch</string>
     <string name="sources_management_open_in_browser">Ouvrir dans le navigateur</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
+    <string name="sources_management_prerelease_toggle">Utiliser les pré-versions des patchs</string>
+    <string name="sources_management_prerelease_toggle_description">Recevez un accès anticipé aux nouvelles versions expérimentales des patchs</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nom d\'affichage</string>
     <string name="sources_dialog_rename">Renommer la source de patch</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Mise à jour réussie</string>
     <string name="sources_update_unavailable">Pas de mise à jour disponible</string>
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
+    <string name="sources_download_endpoint_not_found">Impossible de mettre à jour \'%1$s\' : le fichier JSON du patch est introuvable à l’URL configurée</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Besoin d’aide pour trouver un APK original non patché ?</string>
     <string name="home_apk_availability_dialog_simple">Pour patcher &lt;b&gt;%s&lt;/b&gt;, vous avez besoin de la version APK originale non patché :</string>
@@ -122,6 +127,10 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="home_dialog_wrong_package_description">L\'APK sélectionné ne correspond pas à l\'application que vous aviez l\'intention de patcher</string>
     <string name="home_dialog_expected_package">Package attendu:</string>
     <string name="home_dialog_selected_package">Package sélectionné:</string>
+    <string name="home_outdated_patches_dialog_title">Les patchs peuvent être obsolètes</string>
+    <string name="home_outdated_patches_dialog_message">Les données mobiles sont activées et les mises à jour de patch sont désactivées</string>
+    <string name="home_outdated_patches_dialog_warning">Appliquer des patchs obsolètes peut entraîner une application défectueuse</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Mettre à jour &amp; patcher</string>
     <!-- Patch Options -->
     <string name="custom_color">Couleur personnalisée</string>
     <string name="hex_color">Couleur hexadécimale</string>
@@ -313,8 +322,11 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Changer l’icône</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mises à jour</string>
-    <string name="settings_advanced_updates_use_prereleases">Utiliser les pré-versions</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Accédez en avant-première aux nouveaux patchs et aux fonctionnalités du gestionnaire</string>
+    <string name="settings_advanced_updates_use_prereleases">Utiliser les pré-versions du gestionnaire</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Recevez un accès anticipé aux nouvelles versions expérimentales du gestionnaire.
+Pour obtenir les patchs en pré-version, activez l’option pré-versions séparément dans chaque source de patch</string>
+    <string name="settings_advanced_updates_allow_metered">Mise à jour via les données mobiles</string>
+    <string name="settings_advanced_updates_allow_metered_description">Autoriser les sources de patch et les mises à jour du gestionnaire à se télécharger via les données mobiles</string>
     <string name="settings_advanced_updates_background_notifications">Notifications de mise à jour en arrière-plan</string>
     <string name="settings_advanced_updates_background_notifications_description">Vérifier périodiquement les mises à jour en arrière-plan et notifier lorsqu\'elles sont disponibles</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Recevez des notifications push instantanées pour les nouvelles sorties, même lorsque l\'application est fermée</string>

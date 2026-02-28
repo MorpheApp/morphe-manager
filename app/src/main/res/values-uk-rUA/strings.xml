@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Нова версія готова до встановлення</string>
     <string name="home_update_error">Помилка оновлення</string>
     <string name="home_update_error_subtitle">Перевірте підключення до Інтернету та спробуйте знову</string>
+    <string name="home_update_skipped_metered">Оновлення пропущено</string>
+    <string name="home_update_skipped_metered_subtitle">Мобільні дані активні</string>
     <string name="home_updating_sources">Оновлення джерел…</string>
     <string name="home_update_progress_format">%1$s оброблено</string>
     <string name="home_update_success">Оновлення джерел завершено</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Джерела патчів</string>
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
+    <string name="sources_management_prerelease_toggle">Використовувати передрелізні патчі</string>
+    <string name="sources_management_prerelease_toggle_description">Отримайте ранній доступ до нових експериментальних патчів версії</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Оновлення успішне</string>
     <string name="sources_update_unavailable">Оновлення недоступне</string>
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
+    <string name="sources_download_endpoint_not_found">Не вдалося оновити \'%1$s\': JSON-файл патча не знайдено на налаштованій URL-адресі</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Потрібна допомога у пошуку оригінального непатченого APK?</string>
     <string name="home_apk_availability_dialog_simple">Щоб патчити &lt;b&gt;%s&lt;/b&gt;, вам потрібний непатчений APK файл з версією:</string>
@@ -122,6 +127,10 @@
     <string name="home_dialog_wrong_package_description">Обраний APK файл не відповідає застосунку, який ви збиралися пропатчити</string>
     <string name="home_dialog_expected_package">Очікуваний пакет:</string>
     <string name="home_dialog_selected_package">Обраний пакет:</string>
+    <string name="home_outdated_patches_dialog_title">Патчі можуть бути застарілими</string>
+    <string name="home_outdated_patches_dialog_message">Мобільні дані активні, оновлення патчів вимкнено</string>
+    <string name="home_outdated_patches_dialog_warning">Патчінг застарілими патчами може призвести до несправності додатку</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Оновити та патч</string>
     <!-- Patch Options -->
     <string name="custom_color">Користувацький колір</string>
     <string name="hex_color">Шістнадцятковий колір</string>
@@ -313,8 +322,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Змінити іконку</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Оновлення</string>
-    <string name="settings_advanced_updates_use_prereleases">Використовувати пре-релізи</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Отримувати ранній доступ до нових патчів та функцій менеджера</string>
+    <string name="settings_advanced_updates_use_prereleases">Використати попередні версії менеджера</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Отримайте ранній доступ до нових експериментальних версій менеджера. Щоб отримати попередні патчі, увімкніть передостанній канал у кожному джерелі патчів окремо</string>
+    <string name="settings_advanced_updates_allow_metered">Оновлення від мобільного трафіку</string>
+    <string name="settings_advanced_updates_allow_metered_description">Дозволити завантаження джерелам патчів та оновленням менеджера через мобільні дані</string>
     <string name="settings_advanced_updates_background_notifications">Фонові сповіщення про оновлення</string>
     <string name="settings_advanced_updates_background_notifications_description">Періодично перевіряти наявність оновлень у фоновому режимі та повідомляти про їх доступність</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Отримувати миттєві push-сповіщення про нові релізи, навіть коли додаток закрито</string>

@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Yeni versiya quraşdırmaq üçün hazır</string>
     <string name="home_update_error">Yenilənmə uğursuz oldu</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
+    <string name="home_update_skipped_metered">Yenilənmələr ötürüldü</string>
+    <string name="home_update_skipped_metered_subtitle">Mobil məlumat işləkdir</string>
     <string name="home_updating_sources">Mənbələr yenilənir…</string>
     <string name="home_update_progress_format">%1$s emal olundu</string>
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Yamaq mənbələri</string>
     <string name="sources_management_open_in_browser">Brauzerdə açın</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
+    <string name="sources_management_prerelease_toggle">İlkin-buraxılış yamaqları istifadə et</string>
+    <string name="sources_management_prerelease_toggle_description">Yeni təcrübi yamaqlar versiyasına erkən keçid əldə et</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Uğurlu yeniləmə</string>
     <string name="sources_update_unavailable">Yenilənmə əlçatan deyil</string>
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
+    <string name="sources_download_endpoint_not_found">\'%1$s\' yenilənə bilmədi: yamaq JSON faylı qurulan URL-də tapılmadı</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Əsil yamaqlanmayan APK-nı tapmağa kömək lazımdır?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;, yamaqlamaq üçün yamaqlanmayan APK versiyasına ehtiyacınız var:</string>
@@ -122,6 +127,10 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_dialog_wrong_package_description">Seçilən APK, yamaq üçün təyin etdiyiniz tətbiq üçün deyil</string>
     <string name="home_dialog_expected_package">Gözlənilən paket:</string>
     <string name="home_dialog_selected_package">Seçilən paket:</string>
+    <string name="home_outdated_patches_dialog_title">Yamaqlar köhnəlmiş ola bilər</string>
+    <string name="home_outdated_patches_dialog_message">Mobil məlumat işləkdir və yamaq yeniləmələri qapalıdır</string>
+    <string name="home_outdated_patches_dialog_warning">Köhnə yamaqlarla yamaqlanma tətbiq pozulmasına səbəb ola bilər</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Yenilənmə &amp; yamaq</string>
     <!-- Patch Options -->
     <string name="custom_color">Xüsusi rəng</string>
     <string name="hex_color">Altı dəyərli rəng</string>
@@ -313,8 +322,10 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simvolu dəyişdir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Yenilənmələr</string>
-    <string name="settings_advanced_updates_use_prereleases">Buraxılış öncəsi versiyaları istifadə et</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Yeni yamaqlara və menecer xüsusiyyətlərinə erkən keçid əldə edin</string>
+    <string name="settings_advanced_updates_use_prereleases">İlkin-buraxılış menecerin istifadə et</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Yeni təcrübi menecer versiyalarına erkən keçid əldə et. İlkin-buraxılış yamaqları əldə etmək üçün hər yamaq mənbəyində ayrıca ilkin-buraxılış keçidin aktivləşdir</string>
+    <string name="settings_advanced_updates_allow_metered">Mobil məlumatda yenilənmə</string>
+    <string name="settings_advanced_updates_allow_metered_description">Yamaq mənbələri və menecer yeniləmələrinə mobil məlumat üzərindən yükləmək üçün icazə ver</string>
     <string name="settings_advanced_updates_background_notifications">Fon yenilənmə bildirişləri</string>
     <string name="settings_advanced_updates_background_notifications_description">Fonda yeniləmələri dövri yoxla və əlçatandırsa elan et</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Hətta tətbiq bağlandıqda, yeni buraxılışlar üçün ani təkan bildirişləri al</string>

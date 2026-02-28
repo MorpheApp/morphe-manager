@@ -2,13 +2,35 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">برنامه دیگر</string>
+    <string name="home_not_patched_yet">هنوز پچ نشده </string>
+    <string name="home_no_patches_available">هیچ پچ ای موجود نیست </string>
+    <string name="home_default_source_disabled">منبع پچ مورف غیرفعال است. لطفا آن را در برگه منابع پچ فعال کنید یا از حالت خبره استفاده کنید</string>
+    <string name="home_app_hide_title">برنامه پنهان شود؟ </string>
+    <string name="home_app_hide_message">این برنامه از صفحه اصلی مخفی خواهد بود. بعدا می توانید آن را با استفاده از دکمه %1$s در انتهای لیست بازیابی کنید</string>
+    <string name="home_app_will_be_hidden">این برنامه پنهان میشود</string>
+    <string name="home_app_show_hidden">نمایش برنامه های پنهان شده</string>
+    <string name="home_app_no_hidden">برنامه‌ی پنهانی ندارید</string>
+    <string name="home_app_hidden_apps_title">برنامه های پنهان شده</string>
+    <string name="home_app_hidden_apps_hint">روی یک اپلیکیشن ضربه بزنید تا دوباره در لیست نمایش داده شود </string>
+    <string name="android_11_bug_dialog_title">باگ اندروید 11</string>
+    <string name="android_11_bug_dialog_description">مجوز نصب برنامه باید از قبل صادر شود تا از بروز باگ در سیستم اندروید ۱۱ که تجربه کاربری را تحت تأثیر منفی قرار می دهد، جلوگیری شود </string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">به روزرسانی منیجر در دسترس است </string>
+    <string name="home_update_available_subtitle">نسخه جدید آماده نصب است </string>
     <string name="home_update_error">بروزرسانی شکست خورد</string>
     <string name="home_update_error_subtitle">وضعیت اینترنتت رو چک‌ کن و دوباره امتحان کن</string>
+    <string name="home_update_skipped_metered">به روزرسانی ها رد شدند </string>
+    <string name="home_update_skipped_metered_subtitle">داده های موبایل فعال است </string>
+    <string name="home_updating_sources">به روزرسانی منابع…</string>
+    <string name="home_update_progress_format">%1$s پردازش شده</string>
+    <string name="home_update_success">به روزرسانی منابع کامل شد</string>
+    <string name="home_update_success_subtitle">منابع شما به روز هستند </string>
+    <string name="home_sources_are_loading">منابع در حال بارگذاری هستند، لطفا صبر کنید…</string>
     <string name="home_please_wait">لطفا صبر کنید...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">کدوم نرم‌افزار رو می‌خوای پچ کنی؟</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="home_greeting_2">آماده اید اپلیکیشن ها را دوباره افسانه ای کنید؟ </string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">محکم بشین، وقت پچ کردنه!</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -18,7 +40,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">بیا کاری کنیم اپ‌هات درست رفتار کنن</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">آب و هوای امروز: صد در صد احتمال پچ کردن</string>
+    <string name="home_greeting_7">آب و هوای امروز: %100 احتمال پچ کردن</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">آماده‌ای که معمولی رو به بی‌نظیر تبدیل کنی؟</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -26,21 +48,74 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">قدرت گرفته از کافئین و پچ‌های خوب</string>
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">منابع پچ </string>
+    <string name="sources_management_open_in_browser">باز کردن در مرورگر</string>
     <string name="sources_management_failed_to_open_url">باز کردن لینک ناموفق بود</string>
+    <string name="sources_management_prerelease_toggle">از پچ های پیش انتشار استفاده کنید</string>
+    <string name="sources_management_prerelease_toggle_description">دسترسی زودهنگام به نسخه جدید پچ های آزمایشی را دریافت کنید</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">نام نمایشی</string>
+    <string name="sources_dialog_rename">تغییر نام منبع پچ</string>
+    <string name="sources_dialog_duplicate_name_error">یک منبع پچ با این نام قبلا وجود دارد</string>
+    <string name="sources_dialog_missing_error">نتوانستم منبع این پچ را به روزرسانی کنم</string>
+    <string name="sources_dialog_view_any_version">هر نسخه ای</string>
+    <string name="sources_dialog_view_any_package">هر بسته ای</string>
+    <string name="sources_dialog_add_source">افزودن منبع پچ</string>
+    <string name="sources_dialog_delete_confirm_message">حذف منبع  «%s» ؟ این قابل بازگشت نیست</string>
+    <string name="sources_dialog_remote">از راه دور</string>
+    <string name="sources_dialog_remote_url">آدرس منبع</string>
+    <string name="sources_dialog_remote_url_formats_title">نمونه ها:</string>
+    <string name="sources_dialog_local">محلی</string>
+    <string name="sources_dialog_local_file">انتخاب فایل منبع پچ</string>
+    <string name="sources_dialog_local_file_description">یک فایل منبع پچ .mpp را از حافظه داخلی انتخاب کنید</string>
+    <string name="sources_dialog_local_change_file">تغییر فایل</string>
+    <string name="sources_dialog_preinstalled">پیش نصب شده</string>
+    <string name="sources_update_success">به روزرسانی موفقیت آمیز</string>
+    <string name="sources_update_unavailable">هیچ به روزرسانی ای در دسترس نیست</string>
+    <string name="sources_download_fail">دانلود منابع شکست خورد: %s</string>
+    <string name="sources_download_endpoint_not_found">نتوانست \'%1$s\' را به روزرسانی کند: فایل JSON پچ در URL پیکربندی شده یافت نشد</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_dialog_title">نیاز به کمک برای پیدا کردن یک APK اصلی و بدون پچ دارید؟</string>
+    <string name="home_apk_availability_dialog_simple">برای پچ &lt;b&gt;%s&lt;/b&gt;، به نسخه APK بدون پچ نیاز دارید:</string>
+    <string name="home_apk_availability_dialog_expert">برای پچ کردن &lt;b&gt;%s&lt;/b&gt;;، به یک APK بدون پچ از نسخه ها نیاز دارید:</string>
+    <string name="home_apk_availability_recommended_label">توصیه شده </string>
+    <string name="home_apk_availability_unpatched_label">پچ نشده</string>
+    <string name="home_apk_availability_yes">بله، کمکم کن یک APK پیدا کنم</string>
+    <string name="home_apk_availability_no">نه، من قبلا یک APK دارم</string>
+    <string name="home_apk_use_saved_with_version">از APK ذخیره شده (v%s) استفاده کنید</string>
+    <string name="home_app_info_no_saved_apk">هیچ APK ذخیره شده ای وجود ندارد. پچینگ نیازمند انتخاب مجدد فایل APK است</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">دانلود فایل apk اصلی</string>
     <string name="home_download_instructions_steps_title">دستورالعمل‌ها:</string>
     <string name="home_download_instructions_step1">دکمه \'%1$s\' رو در پایین فشار بده</string>
     <string name="home_download_instructions_step2_part1">به آخر صفحه برو و بزن</string>
     <string name="home_download_instructions_download_button_toast">دکمه دانلود رو توی وبسایتش بزن، نه اینجا ☺️</string>
+    <string name="home_download_instructions_step3">منتظر بمانید تا دانلود کامل شود و &lt;b&gt; نصب نکنید &lt;/b&gt; APK</string>
+    <string name="home_download_instructions_step3_mount">صبر کنید تا دانلود کامل شود، سپس &lt;b&gt;APK را نصب کنید&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">پس از پایان دانلود، به Morphe بازگردید</string>
+    <string name="home_download_instructions_step4_mount">پس از نصب APK اصلی، به Morphe بازگردید</string>
+    <string name="home_download_instructions_continue">ادامه در APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_file_picker_prompt_title">انتخاب APK دانلود شده</string>
+    <string name="home_file_picker_prompt_description">انتخاب &lt;b&gt;%1$s&lt;/b&gt; فایل APK که همین الان دانلود کردی</string>
+    <string name="home_file_picker_prompt_open_apk">فایل APK را باز کنید</string>
+    <string name="home_recommended_version">نسخه پیشنهادی</string>
+    <string name="home_selected_version">نسخه منتخب</string>
+    <string name="home_select_apk_title">انتخاب APK</string>
+    <string name="home_select_any_apk_description">دکمه زیر را لمس کنید تا فایل APK هر برنامه ای را برای وصله انتخاب کنید</string>
+    <string name="home_invalid_apk">فایل APK نامعتبر</string>
+    <string name="home_no_patches_for_app">هیچ پچ برای این اپ موجود نیست</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_title">حالت متخصص</string>
+    <string name="expert_mode_search">جستجوی پچ ها</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_dialog_wrong_package_description">APK انتخاب شده برای برنامه ای که قصد وصله آن را داشتید نیست </string>
+    <string name="home_dialog_selected_package">بسته منتخب: </string>
     <!-- Patch Options -->
+    <string name="hex_color">رنگ شش ضلعی </string>
     <string name="patch_option_instructions">دستورالعمل‌ها</string>
     <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_instructions">یک تصویر پیش زمینه انتخاب کنید، رنگ پس زمینه را انتخاب کنید و پیش نمایش را با ژست های کوچک نمایی تنظیم کنید </string>
     <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->

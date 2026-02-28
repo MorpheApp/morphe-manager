@@ -148,8 +148,6 @@
     <string name="settings_appearance_app_icon_dark_3">ઈન્ડિગો</string>
     <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\' માં બદલીને ફરી શરૂ કરીએ?</string>
     <!-- Settings - Advanced Tab - Updates Section -->
-    <string name="settings_advanced_updates_use_prereleases">પૂર્વ પ્રકાશિત સંસ્કરણનો ઉપયોગ કરો</string>
-    <string name="settings_advanced_updates_use_prereleases_description">નવા પેચ અને મેનેજર ફીચર્સનો વહેલા અનુભવ મેળવો</string>
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
