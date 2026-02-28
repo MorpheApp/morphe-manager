@@ -112,16 +112,7 @@ class ProcessRuntime(
         stripNativeLibs: Boolean,
     ) = coroutineScope {
         val minMemoryLimit = 200
-        var memoryMB = prefs.patcherProcessMemoryLimit.get().let { stored ->
-            // If never set, calculate adaptively from device RAM and persist it
-            if (stored == PROCESS_RUNTIME_MEMORY_NOT_SET) {
-                val adaptive = calculateAdaptiveMemoryLimit(context)
-                Log.i(tag, "Memory limit not set, using adaptive value: $adaptive MB (device RAM-based)")
-                prefs.patcherProcessMemoryLimit.update(adaptive)
-                adaptive
-            } else stored
-        }
-        memoryMB = max(minMemoryLimit, memoryMB)
+        var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
         var retried = false
 
         while (true) {
