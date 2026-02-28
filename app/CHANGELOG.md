@@ -1,3 +1,10 @@
+# app [1.9.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.2...v1.9.0-dev.3) (2026-02-28)
+
+
+### Bug Fixes
+
+* Remove UI stuttering during APK write when patching in-process ([#258](https://github.com/MorpheApp/morphe-manager/issues/258)) ([99f1a62](https://github.com/MorpheApp/morphe-manager/commit/99f1a6268f26f66a56afdf181a1fe9c4d0af05c1))
+
 # app [1.9.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.1...v1.9.0-dev.2) (2026-02-27)
 
 
