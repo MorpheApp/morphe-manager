@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Нова верзија спремна за инсталирање</string>
     <string name="home_update_error">Ажурирање није успело</string>
     <string name="home_update_error_subtitle">Проверите интернет везу и покушајте поново</string>
+    <string name="home_update_skipped_metered">Пропуштено ажурирања</string>
+    <string name="home_update_skipped_metered_subtitle">Мобилни подаци су активни</string>
     <string name="home_updating_sources">Ажурирање извора…</string>
     <string name="home_update_progress_format">%1$s обрађено</string>
     <string name="home_update_success">Ажурирање извора завршено</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Извор печовања</string>
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
+    <string name="sources_management_prerelease_toggle">Користите пре-издавачке пакете</string>
+    <string name="sources_management_prerelease_toggle_description">Примајте рани приступ новим експерименталним верзијама пакета</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назив за приказ</string>
     <string name="sources_dialog_rename">Преименујте изворни извор</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Успешно ажурирано</string>
     <string name="sources_update_unavailable">Нema ажурирање</string>
     <string name="sources_download_fail">Неуспешно преузимање извора: %s</string>
+    <string name="sources_download_endpoint_not_found">Није могуће ажурирати \'%1$s\': пре-издавачки JSON фајл није пронађен на конфигурисаном URL-ју</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Треба вам помоћ у пронађивању оригиналног непоправљеног АПК?</string>
     <string name="home_apk_availability_dialog_simple">Da bi popravili &lt;b&gt;%s&lt;/b&gt;, potrebno je nepopravljenu verziju APK-a:</string>
@@ -122,6 +127,10 @@
     <string name="home_dialog_wrong_package_description">Изабрани APK није за апликацију коју сте намеравали да печујете</string>
     <string name="home_dialog_expected_package">Очекивани пакет:</string>
     <string name="home_dialog_selected_package">Изабрани пакет:</string>
+    <string name="home_outdated_patches_dialog_title">Ispravke mogu biti zastarele</string>
+    <string name="home_outdated_patches_dialog_message">Mobilni podaci su aktivni, a ažuriranja ispravaka su onemogućena</string>
+    <string name="home_outdated_patches_dialog_warning">Patching sa zastarelima ispravkama može rezultirati slomljenim aplikacijama</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Ažuriraj &amp; patchiraj</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Boja u heksadecimalnom formatu</string>
@@ -313,8 +322,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Променити икону</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ажурирања</string>
-    <string name="settings_advanced_updates_use_prereleases">Користите преизлазне верзије</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Добијте ранији приступ преизлазним верзијама и функцијама управљача</string>
+    <string name="settings_advanced_updates_use_prereleases">Koristi menadžer pre-objave</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Примајте рани приступ новим експерименталним верзијама менаџера. Да би добили пре-издавачке пакете, омогућите пре-издавачки тогл у свакој изворној локацији пакета посебно</string>
+    <string name="settings_advanced_updates_allow_metered">Ažuriraj preko mobilnih podataka</string>
+    <string name="settings_advanced_updates_allow_metered_description">Dopusti izvorima ispravaka i ažuriranjima menadžera da se preuzimaju preko mobilnih podataka</string>
     <string name="settings_advanced_updates_background_notifications">Opozori o pozadinskom ažuriranju</string>
     <string name="settings_advanced_updates_background_notifications_description">Povremeno proveravaj da li postoje ažuriranja u pozadini i obaveštavaj kada su dostupna</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Primaj trenutne obavјеštanja za nove verzije, čak i kada je aplikacija zatvorena</string>

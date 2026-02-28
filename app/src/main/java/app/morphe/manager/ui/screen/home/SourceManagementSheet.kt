@@ -44,6 +44,8 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
+import app.morphe.manager.domain.bundles.APIPatchBundle
+import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.ActionPillButton
@@ -53,6 +55,7 @@ import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.net.URL
@@ -72,6 +75,7 @@ fun BundleManagementSheet(
     onRename: (PatchBundleSource) -> Unit
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
+    val scope = rememberCoroutineScope()
 
     val sources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val patchCounts by patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
@@ -176,6 +180,13 @@ fun BundleManagementSheet(
                             onDisable = { onDisable(bundle) },
                             onUpdate = { onUpdate(bundle) },
                             onRename = { onRename(bundle) },
+                            onPrereleasesToggle = when {
+                                bundle is JsonPatchBundle && bundle.supportsPrerelease ||
+                                        bundle is APIPatchBundle -> { usePrerelease ->
+                                    scope.launch { patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease) }
+                                }
+                                else -> null
+                            },
                             onPatchesClick = { bundleToShowPatches = bundle },
                             onVersionClick = {
                                 if (bundle is RemotePatchBundle) {
@@ -243,6 +254,7 @@ private fun BundleManagementCard(
     onDisable: () -> Unit,
     onUpdate: () -> Unit,
     onRename: () -> Unit,
+    onPrereleasesToggle: ((Boolean) -> Unit)?,
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
@@ -388,6 +400,46 @@ private fun BundleManagementCard(
                     }
 
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+                    // Prerelease toggle (for JsonPatchBundle with GitHub endpoint or APIPatchBundle)
+                    if (onPrereleasesToggle != null) {
+                        val currentUsePrerelease = when (bundle) {
+                            is JsonPatchBundle -> bundle.usePrerelease
+                            is APIPatchBundle -> bundle.usePrerelease
+                            else -> false
+                        }
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onPrereleasesToggle(!currentUsePrerelease) }
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.sources_management_prerelease_toggle),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.sources_management_prerelease_toggle_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+
+                            Spacer(Modifier.width(8.dp))
+
+                            Switch(
+                                checked = currentUsePrerelease,
+                                onCheckedChange = onPrereleasesToggle
+                            )
+                        }
+
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    }
 
                     // Action bar
                     Row(

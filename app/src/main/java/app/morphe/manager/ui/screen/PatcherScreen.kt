@@ -281,7 +281,7 @@ fun PatcherScreen(
                     prefs.notificationPermissionRequested.update(true)
                     if (granted) {
                         prefs.backgroundUpdateNotifications.update(true)
-                        syncFcmTopics(notificationsEnabled = true, usePrereleases = usePrereleases)
+                        syncFcmTopics(notificationsEnabled = true, useManagerPrereleases = usePrereleases)
                         if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                     }
                 }
@@ -562,6 +562,8 @@ fun PatcherScreen(
             .fillMaxSize()
             .statusBarsPadding()
     ) {
+        val useExpertMode by prefs.useExpertMode.getAsState()
+
         AnimatedContent(
             targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
             transitionSpec = {
@@ -572,20 +574,34 @@ fun PatcherScreen(
         ) { patcherState ->
             when (patcherState) {
                 PatcherState.IN_PROGRESS -> {
-                    PatchingInProgress(
-                        progress = displayProgressAnimate,
-                        patchesProgress = patchesProgress,
-                        patcherViewModel = patcherViewModel,
-                        showLongStepWarning = showLongStepWarning,
-                        onCancelClick = { state.showCancelDialog = true },
-                        onHomeClick = onBackClick
-                    )
+                    if (useExpertMode) {
+                        ExpertPatchingInProgress(
+                            progress = displayProgressAnimate,
+                            patchesProgress = patchesProgress,
+                            patcherViewModel = patcherViewModel,
+                            patcherSucceeded = patcherSucceeded,
+                            onCancelClick = { state.showCancelDialog = true },
+                            onInstallClick = { showSuccessScreen = true },
+                            onHomeClick = onBackClick
+                        )
+                    } else {
+                        SimplePatchingInProgress(
+                            progress = displayProgressAnimate,
+                            patchesProgress = patchesProgress,
+                            patcherViewModel = patcherViewModel,
+                            showLongStepWarning = showLongStepWarning,
+                            onCancelClick = { state.showCancelDialog = true },
+                            onHomeClick = onBackClick
+                        )
+                    }
                 }
 
                 PatcherState.SUCCESS -> {
                     PatchingSuccess(
                         installViewModel = installViewModel,
                         usingMountInstall = usingMountInstall,
+                        isExpertMode = useExpertMode,
+                        onLogsClick = { showSuccessScreen = false },
                         onInstall = {
                             if (usingMountInstall) {
                                 // Mount install

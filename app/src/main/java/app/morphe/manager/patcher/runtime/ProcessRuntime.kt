@@ -40,10 +40,40 @@ const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 256
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 384
 const val PROCESS_RUNTIME_MEMORY_STEP = 128
 
+// Sentinel value indicating the memory limit has never been set
+// triggers adaptive calculation on first use
+const val PROCESS_RUNTIME_MEMORY_NOT_SET = -1
+
+/**
+ * Calculates an adaptive memory limit based on total device RAM.
+ * Uses ~25% of total RAM, rounded to the nearest [PROCESS_RUNTIME_MEMORY_STEP],
+ * clamped between [PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM] and [PROCESS_RUNTIME_MEMORY_MAX_LIMIT].
+ *
+ * Example results:
+ *  2 GB RAM  → 512 MB
+ *  3 GB RAM  → 768 MB
+ *  4 GB RAM  → 1024 MB
+ *  6 GB+ RAM → 1536 MB (capped)
+ */
+fun calculateAdaptiveMemoryLimit(context: Context): Int {
+    val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+    val memInfo = android.app.ActivityManager.MemoryInfo()
+    activityManager.getMemoryInfo(memInfo)
+
+    val totalRamMb = (memInfo.totalMem / (1024 * 1024)).toInt()
+    val adaptive = ((totalRamMb * 0.25).toInt() / PROCESS_RUNTIME_MEMORY_STEP) * PROCESS_RUNTIME_MEMORY_STEP
+
+    return adaptive.coerceIn(PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM, PROCESS_RUNTIME_MEMORY_MAX_LIMIT)
+}
+
 /**
  * Runs the patcher in another process by using the app_process binary and IPC.
  */
-class ProcessRuntime(private val context: Context) : Runtime(context) {
+class ProcessRuntime(
+    private val context: Context,
+    // On Android Q and below, memory retry loop is unreliable - skip it and let the caller fall back
+    private val skipMemoryRetry: Boolean = Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q
+) : Runtime(context) {
     private val pm: PM by inject()
 
     private suspend fun awaitBinderConnection(): IPatcherProcess {
@@ -82,7 +112,16 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         stripNativeLibs: Boolean,
     ) = coroutineScope {
         val minMemoryLimit = 200
-        var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
+        var memoryMB = prefs.patcherProcessMemoryLimit.get().let { stored ->
+            // If never set, calculate adaptively from device RAM and persist it
+            if (stored == PROCESS_RUNTIME_MEMORY_NOT_SET) {
+                val adaptive = calculateAdaptiveMemoryLimit(context)
+                Log.i(tag, "Memory limit not set, using adaptive value: $adaptive MB (device RAM-based)")
+                prefs.patcherProcessMemoryLimit.update(adaptive)
+                adaptive
+            } else stored
+        }
+        memoryMB = max(minMemoryLimit, memoryMB)
         var retried = false
 
         while (true) {
@@ -118,7 +157,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     else -> false
                 }
 
-                if (isMemoryFailure && memoryMB > minMemoryLimit) {
+                if (isMemoryFailure && !skipMemoryRetry && memoryMB > minMemoryLimit) {
                     retried = true
                     memoryMB -= PROCESS_RUNTIME_MEMORY_STEP
                     Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")

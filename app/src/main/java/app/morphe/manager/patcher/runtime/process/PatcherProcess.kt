@@ -12,6 +12,7 @@ import app.morphe.manager.patcher.Session
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.patcher.runtime.MemoryMonitor
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.State
@@ -55,7 +56,9 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     events.log(level.name, message)
             }
 
-            logger.info("Process heap memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
+            MemoryMonitor.startMemoryPolling(logger)
+
+            logger.info("$LOG_PROCESS_PREFIX_PROCESS_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
 
             val allPatches = PatchBundle.Loader.patches(parameters.configurations.map { it.bundle }, parameters.packageName)
             val patchList = parameters.configurations.flatMap { config ->
@@ -81,7 +84,8 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 File(parameters.inputFile),
                 File(parameters.cacheDir),
                 logger,
-                parameters.stripNativeLibs
+                parameters.stripNativeLibs,
+                onProgress = { message -> logger.info(message) }
             )
 
             try {
@@ -100,17 +104,22 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     onProgress = { name, state, message ->
                         events.progress(name, state?.name, message)
                     }
-            ).use {
-                it.run(File(parameters.outputFile), patchList)}
+                ).use {
+                    it.run(File(parameters.outputFile), patchList)
+                }
             } finally {
                 preparation.cleanup()
+                MemoryMonitor.stopMemoryPolling(logger)
             }
 
             events.finished(null)
         }
     }
 
+
     companion object {
+        const val LOG_PROCESS_PREFIX_PROCESS_HEAP = "Process heap memory limit:"
+
         private val longArrayClass = LongArray::class.java
         private val emptyLongArray = LongArray(0)
 

@@ -4,7 +4,7 @@
     <string name="home_other_apps">其他應用程式</string>
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_no_patches_available">沒有可用的修補</string>
-    <string name="home_default_source_disabled">Morphe 修補選配庫已遭停用。請將它新增為修補選配庫，或使用專家模式</string>
+    <string name="home_default_source_disabled">Morphe 修補庫已停用。請在修補來源選單啟用該修補庫，或使用專家模式</string>
     <string name="home_app_hide_title">隱藏此應用程式？</string>
     <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您可以使用列表底部的\'%1$s\'按鈕稍後恢復它。</string>
     <string name="home_app_will_be_hidden">此應用程式將被隱藏</string>
@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">準備安裝新版本</string>
     <string name="home_update_error">更新失敗</string>
     <string name="home_update_error_subtitle">請檢查網際網路連線，然後再試一次</string>
+    <string name="home_update_skipped_metered">更新已略過</string>
+    <string name="home_update_skipped_metered_subtitle">行動數據已啟用</string>
     <string name="home_updating_sources">正在更新來源…</string>
     <string name="home_update_progress_format">%1$s 處理完畢</string>
     <string name="home_update_success">更新來源完成</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">修補來源</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟連結</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
+    <string name="sources_management_prerelease_toggle">使用預先發布補丁</string>
+    <string name="sources_management_prerelease_toggle_description">提前接收新實驗性補丁版本</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
@@ -69,14 +73,15 @@
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載來源：%s</string>
+    <string name="sources_download_endpoint_not_found">無法更新 \'%1$s\': 找不到配置的 URL 中的補丁 JSON 檔案</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">需要幫助找到原始未修補的APK嗎？</string>
+    <string name="home_apk_availability_dialog_title">需要協助找到原始未修補的 APK 嗎？</string>
     <string name="home_apk_availability_dialog_simple">要修補&lt;b&gt;%s&lt;/b&gt;，你需要未修補的 APK，版本為：</string>
     <string name="home_apk_availability_dialog_expert">修補 &lt;b&gt;%s&lt;/b&gt; 需要未修補的 APK，版本為：</string>
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
-    <string name="home_apk_availability_yes">是的，幫我找一個 APK</string>
-    <string name="home_apk_availability_no">不，我已經有APK了</string>
+    <string name="home_apk_availability_yes">是的，協助我找一個 APK</string>
+    <string name="home_apk_availability_no">不，我已經擁有 APK 了</string>
     <string name="home_apk_use_saved_with_version">使用已儲存的 APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補將需要再次選擇 APK 檔案</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,10 +90,10 @@
     <string name="home_download_instructions_step1">按下下方的「%1$s」按鈕</string>
     <string name="home_download_instructions_step2_part1">向下捲動網頁並按下</string>
     <string name="home_download_instructions_download_button_toast">在網站上按下下載，而不是在這裡 😊</string>
-    <string name="home_download_instructions_step3">等待下載完成後，&lt;b&gt;先不要安裝&lt;/b&gt; APK</string>
+    <string name="home_download_instructions_step3">等待下載完成後，&lt;b&gt;請先不要安裝&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">等待下載完成後，&lt;b&gt;安裝&lt;/b&gt; APK</string>
-    <string name="home_download_instructions_step4">下載完成後，返回 Morphe</string>
-    <string name="home_download_instructions_step4_mount">安裝原始 APK 後，返回 Morphe</string>
+    <string name="home_download_instructions_step4">下載完成後，回到 Morphe</string>
+    <string name="home_download_instructions_step4_mount">安裝原始 APK 後，回到 Morphe</string>
     <string name="home_download_instructions_continue">前往 APKMirror.com 進行下一步</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">選擇下載的 APK</string>
@@ -111,10 +116,10 @@
     <string name="expert_mode_multiple_sources_warning_title">已選擇多個修補來源</string>
     <string name="expert_mode_multiple_sources_warning_message">"你已選擇來自多個修補來源的修補。這可能會導致相容性問題或未預期的行為。
 
-確定要繼續嗎？"</string>
+你確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">不支援的版本</string>
-    <string name="home_dialog_unsupported_version_dialog_description">這個 APK 不是建議的應用程式版本。繼續可能會導致功能無法使用的應用程式</string>
+    <string name="home_dialog_unsupported_version_dialog_description">這個 APK 不是建議的應用程式版本。繼續使用可能會導致功能在應用程式內無法使用</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">仍要繼續</string>
     <string name="home_dialog_unsupported_version_compatible_versions">相容版本：</string>
     <string name="home_dialog_unsupported_version_unsupported_label">不支援</string>
@@ -122,6 +127,10 @@
     <string name="home_dialog_wrong_package_description">你選擇的 APK 不符合你想要修補的應用程式</string>
     <string name="home_dialog_expected_package">預期套件：</string>
     <string name="home_dialog_selected_package">選取套件：</string>
+    <string name="home_outdated_patches_dialog_title">補丁可能已過期</string>
+    <string name="home_outdated_patches_dialog_message">行動數據使用中，已停用補丁更新</string>
+    <string name="home_outdated_patches_dialog_warning">使用過期補丁可能會導致應用程式故障</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">更新和補丁</string>
     <!-- Patch Options -->
     <string name="custom_color">自訂顏色</string>
     <string name="hex_color">十六進位顏色</string>
@@ -291,7 +300,7 @@
     <string name="settings_appearance_system">系統</string>
     <string name="settings_appearance_light">淺色</string>
     <string name="settings_appearance_dark">深色</string>
-    <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_dynamic">動態顏色</string>
     <string name="settings_appearance_accent_color">強調色</string>
     <string name="settings_appearance_pure_black">純黑色</string>
     <string name="settings_appearance_pure_black_description">使用真正的黑色背景</string>
@@ -313,8 +322,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">變更圖示</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
-    <string name="settings_advanced_updates_use_prereleases">使用預先發布版</string>
-    <string name="settings_advanced_updates_use_prereleases_description">搶先體驗最新的修正更新與管理工具功能。</string>
+    <string name="settings_advanced_updates_use_prereleases">使用預發布版本管理員</string>
+    <string name="settings_advanced_updates_use_prereleases_description">提前接收新實驗性管理員版本。要取得預先發布補丁，請在每個補丁來源單獨啟用預先發布切換</string>
+    <string name="settings_advanced_updates_allow_metered">使用行動數據更新</string>
+    <string name="settings_advanced_updates_allow_metered_description">允許補丁源和管理工具更新在使用行動數據時進行下載</string>
     <string name="settings_advanced_updates_background_notifications">背景更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">定期在背景檢查更新並在可用時通知</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">即使應用程序關閉，也會收到新版本的即時推送通知</string>
@@ -349,7 +360,7 @@
     <string name="settings_advanced_strip_unused_libs">刪除未使用的原生函式庫</string>
     <string name="settings_advanced_strip_unused_libs_description">刪除不支援的 CPU 架構原生函式庫修補的應用程式</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
-    <string name="settings_advanced_github_pat">GitHub PAT</string>
+    <string name="settings_advanced_github_pat">GitHub 權杖</string>
     <string name="settings_advanced_github_pat_description">用於合併請求捆綁包</string>
     <string name="settings_advanced_github_pat_configured">已設定權杖</string>
     <string name="settings_advanced_github_pat_how_to_get">如何取得權杖</string>

@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Připravena nová verze k instalaci</string>
     <string name="home_update_error">Aktualizace selhala</string>
     <string name="home_update_error_subtitle">Zkontrolujte připojení k internetu a zkuste to znovu</string>
+    <string name="home_update_skipped_metered">Aktualizace přeskočeny</string>
+    <string name="home_update_skipped_metered_subtitle">Mobilní data jsou aktivní</string>
     <string name="home_updating_sources">Probíhá aktualizace zdrojů…</string>
     <string name="home_update_progress_format">%1$s zpracováno</string>
     <string name="home_update_success">Aktualizace zdrojů dokončena</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_management_open_in_browser">Otevřít v prohlížeči</string>
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
+    <string name="sources_management_prerelease_toggle">Použít předběžné patche</string>
+    <string name="sources_management_prerelease_toggle_description">Získejte předběžný přístup k novým experimentálním verzím patche. Pro získání předběžných patche zapněte předběžný přepínač u každé zdrojové lokace odděleně.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazit název</string>
     <string name="sources_dialog_rename">Přejmenovat zdroj záplat</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Aktualizace úspěšná</string>
     <string name="sources_update_unavailable">Nejsou dostupné žádné aktualizace</string>
     <string name="sources_download_fail">Selhalo stahování zdrojů: %s</string>
+    <string name="sources_download_endpoint_not_found">Nebylo možné aktualizovat \'%1$s\': soubor JSON s patchem nebyl nalezen na nakonfigurované URL</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Potřebujete pomoc při hledání původního neopraveného APK?</string>
     <string name="home_apk_availability_dialog_simple">Pro opravu &lt;b&gt;%s&lt;/b&gt; je potrben neopravený APK verzí:</string>
@@ -122,6 +127,10 @@ Opravdu chcete pokračovat?"</string>
     <string name="home_dialog_wrong_package_description">Vybrané APK není pro aplikaci, kterou jste chtěli záplatovat</string>
     <string name="home_dialog_expected_package">Očekávaný balíček:</string>
     <string name="home_dialog_selected_package">Vybraný balíček:</string>
+    <string name="home_outdated_patches_dialog_title">Patče mohou být zastaralé</string>
+    <string name="home_outdated_patches_dialog_message">Mobilní data jsou aktivní a aktualizace patčů jsou zakázány</string>
+    <string name="home_outdated_patches_dialog_warning">Používání zastaralých patčů může způsobit poškození aplikace</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Aktualizovat &amp; patčit</string>
     <!-- Patch Options -->
     <string name="custom_color">Vlastní barva</string>
     <string name="hex_color">Barva ve formátu Hex</string>
@@ -314,7 +323,9 @@ Opravdu chcete pokračovat?"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizace</string>
     <string name="settings_advanced_updates_use_prereleases">Použít předběžné verze</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Získejte předběžný přístup k novým záplatám a funkcím Manageru</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Získejte předběžný přístup k novým experimentálním verzím manažera. Pro získání předběžných patche zapněte předběžný přepínač u každé zdrojové lokace odděleně.</string>
+    <string name="settings_advanced_updates_allow_metered">Aktualizovat přes mobilní data</string>
+    <string name="settings_advanced_updates_allow_metered_description">Povolovat stahování zdrojů patčů a aktualizací správce přes mobilní data</string>
     <string name="settings_advanced_updates_background_notifications">Aktualizace pozadí</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodicky ověřujte aktualizace v pozadí a upozorněte, když jsou k dispozici.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Přijímat okamžité notifikace pro nové vydání, dokonce i když je aplikace uzavřena</string>

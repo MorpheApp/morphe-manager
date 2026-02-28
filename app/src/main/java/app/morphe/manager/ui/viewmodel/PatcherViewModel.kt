@@ -25,11 +25,17 @@ import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_CURRENT
 import app.morphe.manager.patcher.runtime.ProcessRuntime
+import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.State
+import app.morphe.manager.ui.model.Step
+import app.morphe.manager.ui.model.StepCategory
+import app.morphe.manager.ui.model.StepId
+import app.morphe.manager.ui.model.StepProgressProvider
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.util.*
 import app.morphe.manager.util.saver.snapshotStateListSaver
@@ -37,8 +43,11 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
@@ -256,10 +265,41 @@ class PatcherViewModel(
             }
         }
 
-    private val logs = mutableListOf<Pair<LogLevel, String>>()
+    /** Real-time log entries exposed to the UI. Collected by the patcher worker. */
+    val logs = mutableStateListOf<Pair<LogLevel, String>>()
+
+    /** Heap usage samples (MB) collected every second during patching. */
+    val heapSamples = mutableStateListOf<Int>()
+
+    /** Heap limit (MB) of the patcher process - parsed from "Process heap memory limit:" log line. */
+    var heapLimitMb: Int by mutableIntStateOf(0)
+        private set
+
     private val logger = object : Logger() {
         override fun log(level: LogLevel, message: String) {
             level.androidLog(message)
+
+            // Parse heap limit
+            if (message.startsWith(LOG_PROCESS_PREFIX_PROCESS_HEAP)) {
+                val mb = message.removePrefix(LOG_PROCESS_PREFIX_PROCESS_HEAP)
+                    .substringBefore("MB").trim().toIntOrNull()
+                if (mb != null) viewModelScope.launch { heapLimitMb = mb }
+                // still pass through to logs
+            }
+
+            // Extract heap samples from process runtime polling - keep last 60
+            if (message.startsWith(LOG_MEMORY_PREFIX_CURRENT)) {
+                val mb = message.removePrefix(LOG_MEMORY_PREFIX_CURRENT)
+                    .substringBefore("MB").toIntOrNull()
+                if (mb != null) {
+                    viewModelScope.launch {
+                        heapSamples.add(mb)
+                        if (heapSamples.size > 60) heapSamples.removeAt(0)
+                    }
+                }
+                return // Don't show raw heap poll lines in the log panel
+            }
+
             if (level == LogLevel.TRACE) return
 
             viewModelScope.launch {

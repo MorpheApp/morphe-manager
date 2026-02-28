@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.patcher
 
 import androidx.compose.animation.*
@@ -28,10 +33,13 @@ import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
 /**
- * Patching in progress screen with adaptive layout
+ * Simple mode patching screen.
+ *
+ * Shows a Animated message, circular progress indicator with percentage and patch count, and
+ * progress message.
  */
 @Composable
-fun PatchingInProgress(
+fun SimplePatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
     patcherViewModel: PatcherViewModel,
@@ -98,7 +106,7 @@ fun PatchingInProgress(
 }
 
 /**
- * Adaptive content layout for patching progress
+ * Adaptive content layout for patching progress.
  */
 @Composable
 private fun AdaptiveProgressContent(
@@ -183,7 +191,7 @@ private fun AdaptiveProgressContent(
 }
 
 /**
- * Progress message section
+ * Progress message section.
  */
 @Composable
 private fun ProgressMessageSection(currentMessage: Int) {
@@ -198,7 +206,7 @@ private fun ProgressMessageSection(currentMessage: Int) {
 }
 
 /**
- * Progress details section
+ * Progress details section.
  */
 @Composable
 private fun ProgressDetailsSection(
@@ -236,7 +244,7 @@ private fun ProgressDetailsSection(
 }
 
 /**
- * Animated message with fade transitions
+ * Animated message with fade transitions.
  */
 @Composable
 private fun AnimatedMessage(messageResId: Int) {
@@ -261,7 +269,7 @@ private fun AnimatedMessage(messageResId: Int) {
 }
 
 /**
- * Circular progress indicator with percentage and patch count
+ * Circular progress indicator with percentage and patch count.
  */
 @Composable
 private fun CircularProgressWithStats(
@@ -328,7 +336,7 @@ private fun CircularProgressWithStats(
 }
 
 /**
- * Current step indicator
+ * Current step indicator.
  */
 @Composable
 fun CurrentStepIndicator(
