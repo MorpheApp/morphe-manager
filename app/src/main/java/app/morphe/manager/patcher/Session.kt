@@ -96,7 +96,6 @@ class Session(
         }
 
         with(patcher) {
-            logger.info("Merging integrations")
             this += selectedPatches.toSet()
 
             logger.info("Applying patches...")
