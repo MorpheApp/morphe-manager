@@ -170,7 +170,7 @@ Are you sure you want to proceed?"</string>
     <string name="adaptive_icon_safe_zone_outer">Mask zone (may be clipped)</string>
     <string name="adaptive_icon_created_success">Adaptive icon created successfully</string>
     <string name="adaptive_icon_creation_failed">Failed to create adaptive icon</string>
-    <string name="adaptive_icon_folder_explanation">Select where to create \'morphe_branding/morphe_icons\' folder with generated icon files</string>
+    <string name="adaptive_icon_folder_explanation">Select where to create \'%1$s/%2$s\' folder with generated icon files</string>
 
     <!-- Header Creator -->
     <string name="header_creator_create">Create custom header</string>
@@ -180,7 +180,7 @@ Are you sure you want to proceed?"</string>
     <string name="header_creator_no_image">No image selected</string>
     <string name="header_creator_success">Header created successfully</string>
     <string name="header_creator_failed">Failed to create header</string>
-    <string name="header_creator_folder_explanation">Select where to create \'morphe_branding/morphe_header\' folder with generated header files</string>
+    <string name="header_creator_folder_explanation">Select where to create \'%1$s/%2$s\' folder with generated header files</string>
 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
