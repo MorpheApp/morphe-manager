@@ -233,6 +233,7 @@ Jeste li sigurni da želite nastaviti?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Vaša aplikacija ima temperaturu, a jedini recept su još patcheva… 🩺🔔</string>
     <string name="patcher_message_20">Uklanjam besmislice. Molim vas, pričekajte… 🗑️</string>
+    <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Primjenjivanje patcheva</string>
     <string name="failed_to_execute_patch">Nije moguće primijeniti %s</string>
@@ -293,8 +294,6 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Promijeni ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ažuriranja</string>
-    <string name="settings_advanced_updates_use_prereleases">Koristi predizdanja</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Ostvarite rani pristup novim patchevima i značajkama upravitelja</string>
     <string name="settings_advanced_updates_background_notifications">Obavijesti o ažuriranjima u pozadini</string>
     <string name="settings_advanced_updates_background_notifications_description">Povremeno provjeravaj ažuriranja u pozadini i obavještavaj kada su dostupna</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Primajte trenutne push obavijesti za nove verzije, čak i kada je aplikacija zatvorena</string>

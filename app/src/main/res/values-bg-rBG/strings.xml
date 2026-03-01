@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Готово за инсталиране</string>
     <string name="home_update_error">Неуспешно актуализиране</string>
     <string name="home_update_error_subtitle">Проверете връзката си с интернет и опитайте отново</string>
+    <string name="home_update_skipped_metered">Пропуснати актуализации</string>
+    <string name="home_update_skipped_metered_subtitle">Мобилен дан е активен</string>
     <string name="home_updating_sources">Обновяне на източници…</string>
     <string name="home_update_progress_format">%1$s обработен</string>
     <string name="home_update_success">Обновяне на източниците завършено</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Източници за поправки</string>
     <string name="sources_management_open_in_browser">Отваряне в браузър</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
+    <string name="sources_management_prerelease_toggle">Използвайте предварителни пакети</string>
+    <string name="sources_management_prerelease_toggle_description">Получайте достъп преди други до нови експериментални версии на пакети</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Име на диалога</string>
     <string name="sources_dialog_rename">Преименуване на източник</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Успешно обновяване</string>
     <string name="sources_update_unavailable">Няма достъпно обновление</string>
     <string name="sources_download_fail">Неуспешно сваляне на източника: %s</string>
+    <string name="sources_download_endpoint_not_found">Не може да се обнови \'%1$s\': предварителният JSON файл на пакета не е намерен на конфигурирания URL</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Трябва ви помощ за намиране на оригинален непатчен APK?</string>
     <string name="home_apk_availability_dialog_simple">За да оновяваш &lt;b&gt;%s&lt;/b&gt;, ти трябва непрошатата версия на APK:</string>
@@ -122,6 +127,10 @@
     <string name="home_dialog_wrong_package_description">Избраното APK не е за приложението, което искате да поправите</string>
     <string name="home_dialog_expected_package">Очакван пакет:</string>
     <string name="home_dialog_selected_package">Избран пакет:</string>
+    <string name="home_outdated_patches_dialog_title">Патчовете могат да бъдат остарели</string>
+    <string name="home_outdated_patches_dialog_message">Мобилен интернет е активен и патчовете са изключени</string>
+    <string name="home_outdated_patches_dialog_warning">Патчване с остарели патчове може да доведе до счупване на приложението</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Обновяване и патчване</string>
     <!-- Patch Options -->
     <string name="custom_color">Навикнат цвят</string>
     <string name="hex_color">Хекс цвят</string>
@@ -252,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Вашият апарат има температура, а единствената рецепта е повече патчи… 🩺🔔</string>
     <string name="patcher_message_20">Премахвам глупостите. Моля, изчакайте… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Патчване на приложението</string>
+    <string name="memory_usage">Използване на памет</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Error</string>
     <string name="failed_to_execute_patch">Неуспешно прилагане на %s</string>
@@ -313,8 +325,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Промяна на икона</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Актуализации</string>
-    <string name="settings_advanced_updates_use_prereleases">Използване на предварителни версии</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Получете ранна достъпност до нови замести и функции на мениджъра</string>
+    <string name="settings_advanced_updates_use_prereleases">Използвайте предварително пускане</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Получайте достъп преди други до нови експериментални версии на мениджъра. За да получите предварителни пакети, включете предварителния превключвател в всеки източник на пакети отделно</string>
+    <string name="settings_advanced_updates_allow_metered">Обновяване по мобилен интернет</string>
+    <string name="settings_advanced_updates_allow_metered_description">Разрешете източниците на патчове и обновленията на мениджъра да се изтеглят през мобилен интернет</string>
     <string name="settings_advanced_updates_background_notifications">Обновления в фона</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодично проверете наличието на актуализации в фона и известите при наличност.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Получете моментални уведомления за нови версии, дори когато приложението е затворено</string>
@@ -615,6 +629,7 @@ morphe_header_custom_dark.png
     <string name="details">Детайли</string>
     <string name="hide">Скриване</string>
     <string name="default_">По подразбиране</string>
+    <string name="logs">Дневници</string>
     <string name="installing_ellipsis">Инсталиране…</string>
     <string name="mounting_ellipsis">Монтиране…</string>
     <string name="unmounting_ellipsis">Извличане…</string>

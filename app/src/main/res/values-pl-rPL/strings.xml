@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Nowa wersja jest gotowa do instalacji</string>
     <string name="home_update_error">Aktualizacja nie powiodła się</string>
     <string name="home_update_error_subtitle">Sprawdź swoje połączenie internetowe i spróbuj ponownie</string>
+    <string name="home_update_skipped_metered">Pominięto aktualizacje</string>
+    <string name="home_update_skipped_metered_subtitle">Dane mobilne są aktywne</string>
     <string name="home_updating_sources">Aktualizowanie źródeł…</string>
     <string name="home_update_progress_format">%1$s przetworzonych</string>
     <string name="home_update_success">Aktualizacja źródeł zakończona</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
+    <string name="sources_management_prerelease_toggle">Używaj przedpremierowych wersji modyfikacji</string>
+    <string name="sources_management_prerelease_toggle_description">Uzyskaj wczesny dostęp do nowych, eksperymentalnych wersji modyfikacji</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
     <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Aktualizacja zakończona pomyślnie</string>
     <string name="sources_update_unavailable">Brak dostępnych aktualizacji</string>
     <string name="sources_download_fail">Nie udało się pobrać źródeł: %s</string>
+    <string name="sources_download_endpoint_not_found">Nie można zaktualizować \"%1$s\": nie znaleziono pliku JSON z modyfikacjami pod skonfigurowanym adresem URL</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Potrzebujesz pomocy w znalezieniu oryginalnego pliku APK?</string>
     <string name="home_apk_availability_dialog_simple">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
@@ -122,6 +127,10 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="home_dialog_wrong_package_description">Wybrany plik APK nie jest przeznaczony dla aplikacji, którą zamierzałeś zmodyfikować</string>
     <string name="home_dialog_expected_package">Oczekiwany pakiet:</string>
     <string name="home_dialog_selected_package">Wybrany pakiet:</string>
+    <string name="home_outdated_patches_dialog_title">Modyfikacje mogą być przestarzałe</string>
+    <string name="home_outdated_patches_dialog_message">Dane mobilne są aktywne, a aktualizacje modyfikacji zostały wyłączone</string>
+    <string name="home_outdated_patches_dialog_warning">Używanie przestarzałych modyfikacji może spowodować uszkodzenie aplikacji</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Aktualizuj i modyfikuj</string>
     <!-- Patch Options -->
     <string name="custom_color">Kolor niestandardowy</string>
     <string name="hex_color">Kolor w formacie HEX</string>
@@ -252,6 +261,9 @@ Czy na pewno chcesz kontynuować?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Twoja aplikacja ma gorączkę, a jedyną receptą jest więcej modyfikacji… 🩺🔔</string>
     <string name="patcher_message_20">Usuwanie bzdur. Proszę czekać… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Modyfikowanie aplikacji</string>
+    <string name="memory_usage">Zużycie pamięci</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Modyfikowanie aplikacji</string>
     <string name="failed_to_execute_patch">Nie udało się zastosować %s</string>
@@ -313,8 +325,10 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Zmień ikonę</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizacje</string>
-    <string name="settings_advanced_updates_use_prereleases">Używaj wersji przedpremierowych</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Zdobądź wcześniejszy dostęp do nowych aktualizacji i funkcji menedżera</string>
+    <string name="settings_advanced_updates_use_prereleases">Używaj wersji przedpremierowych menedżera</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Uzyskaj wczesny dostęp do nowych, eksperymentalnych wersji menedżera. Aby otrzymywać przedpremierowe modyfikacje, włącz opcję wersji przedpremierowych osobno dla każdego źródła modyfikacji</string>
+    <string name="settings_advanced_updates_allow_metered">Aktualizuj za pomocą danych mobilnych</string>
+    <string name="settings_advanced_updates_allow_metered_description">Zezwalaj na pobieranie aktualizacji źródeł modyfikacji i menedżera przez dane mobilne</string>
     <string name="settings_advanced_updates_background_notifications">Powiadomienia o aktualizacjach w tle</string>
     <string name="settings_advanced_updates_background_notifications_description">Okresowo sprawdzaj aktualizacje w tle i powiadamiaj, gdy będą dostępne</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Odbieraj natychmiastowe powiadomienia Push o nowych wydaniach, nawet gdy aplikacja jest zamknięta</string>
@@ -615,6 +629,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="details">Szczegóły</string>
     <string name="hide">Ukryj</string>
     <string name="default_">Domyślne</string>
+    <string name="logs">Logi</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Mountowanie…</string>
     <string name="unmounting_ellipsis">Odmountowywanie…</string>

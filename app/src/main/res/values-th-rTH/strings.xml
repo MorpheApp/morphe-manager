@@ -20,6 +20,8 @@
     <string name="home_update_available_subtitle">เวอร์ชันใหม่พร้อมถูกติดตั้งแล้ว</string>
     <string name="home_update_error">อัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
+    <string name="home_update_skipped_metered">อัปเดตข้าม</string>
+    <string name="home_update_skipped_metered_subtitle">ข้อมูลมือถือใช้งานอยู่</string>
     <string name="home_updating_sources">กำลังอัพเดทข้อมูล…</string>
     <string name="home_update_progress_format">%1$s ถูกประมวลผลแล้ว</string>
     <string name="home_update_success">การอัพเดทแหล่งข้อมูลเสร็จสมบูรณ์แล้ว</string>
@@ -50,6 +52,8 @@
     <string name="sources_management_title">จัดการแหล่งข้อมูล</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
+    <string name="sources_management_prerelease_toggle">ใช้แพทช์ก่อนปล่อยอย่างทางการ</string>
+    <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงเวอร์ชันใหม่ของแพทช์ทดลองก่อนอื่น</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
@@ -70,6 +74,7 @@
     <string name="sources_update_success">อัปเดตเสร็จสมบูรณ์</string>
     <string name="sources_update_unavailable">ยังไม่มีการอัปเดต</string>
     <string name="sources_download_fail">ล้มข้อมูลแหล่งข้อมูลไม่สำเร็จ: %s</string>
+    <string name="sources_download_endpoint_not_found">ไม่สามารถอัปเดต \'%1$s\': ไม่พบไฟล์ JSON ของแพทช์ที่ URL ที่กำหนด</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">ต้องการความช่วยเหลือในการค้นหา APK รุ่นต้นฉบับที่ยังไม่ถูกปรับปรุง?</string>
     <string name="home_apk_availability_dialog_simple">เพื่อปรับปรุง &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK รุ่นต้นฉบับ:</string>
@@ -123,6 +128,10 @@
     <string name="home_dialog_wrong_package_description">ไฟล์ APK ที่เลือกไว้ ไม่ใช่แอปพลิเคชันสำหรับทำการแพตซ์</string>
     <string name="home_dialog_expected_package">แพคเกจที่คาดหวัง:</string>
     <string name="home_dialog_selected_package">แพตซ์ที่เลือก:</string>
+    <string name="home_outdated_patches_dialog_title">อาจมีปรับปรุงที่เลิกใช้แล้ว</string>
+    <string name="home_outdated_patches_dialog_message">ข้อมูลเคลื่อนที่มีการใช้งานและปรับปรุงถูกหยุด</string>
+    <string name="home_outdated_patches_dialog_warning">อาจมีปัญหาในแอปพลิเคชันถ้าใช้ปรับปรุงที่เลิกใช้แล้ว</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">อัปเดตและปรับปรุง</string>
     <!-- Patch Options -->
     <string name="custom_color">สีแบบกำหนดเอง</string>
     <string name="hex_color">สี hexadecimal</string>
@@ -253,6 +262,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">แอปของคุณมีไข้ และวิธีรักษาเดียวคือต้องใช้แพตช์เพิ่ม... 🩺🔔</string>
     <string name="patcher_message_20">กำลังไล่เบา กรุณารอสักครู่… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">กำลังปรับปรุงแอป</string>
+    <string name="memory_usage">การใช้พื้นที่ความจำ</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">กำลังใช้แพตช์</string>
     <string name="failed_to_execute_patch">ไม่สามารถใช้ %s ได้</string>
@@ -314,8 +326,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">เปลี่ยนไอสัญ</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">อัปเดต</string>
-    <string name="settings_advanced_updates_use_prereleases">ใช้เวอร์ชันล่วงหน้าก่อนปล่อยอย่างทางการ</string>
-    <string name="settings_advanced_updates_use_prereleases_description">รับสิทธิ์การอัปเดตและฟีเจอร์ใหม่</string>
+    <string name="settings_advanced_updates_use_prereleases">ใช้ตัวจัดการรุ่นก่อนปล่อย</string>
+    <string name="settings_advanced_updates_use_prereleases_description">รับสิทธิ์เข้าถึงเวอร์ชันใหม่ของตัวจัดการทดลองก่อนอื่น เพื่อรับแพทช์ก่อนปล่อยอย่างทางการ ให้เปิดตัวเลือกก่อนปล่อยในแต่ละแหล่งที่มาของแพทช์</string>
+    <string name="settings_advanced_updates_allow_metered">อัปเดตบนข้อมูลเคลื่อนที่</string>
+    <string name="settings_advanced_updates_allow_metered_description">อนุญาตให้แหล่งที่มาและตัวจัดการอัปเดตดาวน์โหลดบนข้อมูลเคลื่อนที่</string>
     <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
     <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนข้อความทันทีสำหรับการปล่อยใหม่ ๆ แม้แต่เมื่อแอปปิดอยู่</string>
@@ -615,6 +629,7 @@ morphe_header_custom_dark.png
     <string name="details">รายละเอียด</string>
     <string name="hide">ซ่อน</string>
     <string name="default_">ค่าเริ่มต้น</string>
+    <string name="logs">บันทึก</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>

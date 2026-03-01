@@ -39,6 +39,9 @@ import java.nio.ByteOrder
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.Locale
+import app.morphe.manager.util.syncFcmTopics
+import app.morphe.manager.network.utils.APIError
+import io.ktor.client.plugins.ResponseException
 import app.morphe.manager.data.room.bundles.Source as SourceInfo
 
 class PatchBundleRepository(
@@ -446,6 +449,7 @@ class PatchBundleRepository(
                 SourceInfo.API.SENTINEL,
                 true, // Morphe always auto updates
                 enabled,
+                usePrerelease = prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString()),
             )
 
             is SourceInfo.Remote -> JsonPatchBundle(
@@ -460,6 +464,7 @@ class PatchBundleRepository(
                 source.url.toString(),
                 autoUpdate,
                 enabled,
+                usePrerelease = shouldUsePrerelease(uid, source.url.toString()),
             )
             is SourceInfo.GitHubPullRequest -> GitHubPullRequestBundle(
                 actualName,
@@ -601,7 +606,7 @@ class PatchBundleRepository(
         return UpdateRequest(
             force = requests.any { it.force },
             showToast = requests.any { it.showToast },
-            allowUnsafeNetwork = requests.any { it.allowUnsafeNetwork },
+            allowUnsafeNetwork = requests.all { it.allowUnsafeNetwork },
             onPerBundleProgress = mergedCallback,
             predicate = { bundle -> requests.any { it.predicate(bundle) } }
         )
@@ -622,13 +627,38 @@ class PatchBundleRepository(
         }
     }
 
-    suspend fun disable(vararg bundles: PatchBundleSource) =
+    suspend fun disable(vararg bundles: PatchBundleSource) {
+        // Capture uids of bundles that are currently disabled and will be toggled ON
+        val beingEnabledUids = bundles
+            .filter { !it.enabled }
+            .map { it.uid }
+            .toSet()
+
         dispatchAction("Disable (${bundles.map { it.uid }.joinToString(",")})") {
             bundles.forEach { bundle ->
                 updateDb(bundle.uid) { it.copy(enabled = !it.enabled) }
             }
-            doReload()
+            val newState = doReload()
+
+            // After store is updated, trigger update for bundles that were just enabled
+            if (beingEnabledUids.isNotEmpty()) {
+                Log.d(tag, "Triggering update for re-enabled bundles: $beingEnabledUids")
+                startRemoteUpdateJob(
+                    force = false,
+                    showToast = false,
+                    allowUnsafeNetwork = false,
+                    onPerBundleProgress = null,
+                    predicate = { bundle ->
+                        val matches = bundle.uid in beingEnabledUids && bundle.enabled
+                        Log.d(tag, "  predicate check uid=${bundle.uid} inEnabled=${bundle.uid in beingEnabledUids} enabled=${bundle.enabled} → $matches")
+                        matches
+                    }
+                )
+            }
+
+            newState
         }
+    }
 
     suspend fun remove(vararg bundles: PatchBundleSource) =
         dispatchAction("Remove (${bundles.map { it.uid }.joinToString(",")})") { state ->
@@ -698,6 +728,51 @@ class PatchBundleRepository(
         }
 
         return result
+    }
+
+    /**
+     * Toggle prerelease (dev branch) for an [APIPatchBundle] or [JsonPatchBundle].
+     * Persists in preferences, updates in-memory state, and triggers a bundle update.
+     * Reverts the change and shows a toast if the update fails (e.g. branch does not exist).
+     */
+    suspend fun setUsePrerelease(uid: Int, usePrerelease: Boolean) {
+        val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+        if (usePrerelease) current.add(uid.toString()) else current.remove(uid.toString())
+        prefs.bundlePrereleasesEnabled.update(current)
+
+        dispatchAction("Set prerelease ($uid=$usePrerelease)") { state ->
+            val src = state.sources[uid] ?: return@dispatchAction state
+            val updated = when (src) {
+                is APIPatchBundle -> src.copy(usePrerelease = usePrerelease)
+                is JsonPatchBundle -> src.copy(usePrerelease = usePrerelease)
+                else -> return@dispatchAction state
+            }
+            state.copy(sources = state.sources.put(uid, updated))
+        }
+
+        // If this is the default Morphe Patches bundle, sync FCM patches topic
+        if (uid == DEFAULT_SOURCE_UID) {
+            val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
+            syncFcmTopics(
+                notificationsEnabled = notificationsEnabled,
+                useManagerPrereleases = prefs.useManagerPrereleases.get(),
+                usePatchesPrereleases = usePrerelease,
+            )
+        }
+
+        // Skip download if the bundle is disabled - it will be downloaded when re-enabled
+        // via disable() which triggers startRemoteUpdateJob for newly enabled bundles.
+        val isEnabled = store.state.value.sources[uid]?.enabled == true
+        if (!isEnabled) return
+
+        // Trigger update so the new channel takes effect immediately.
+        startRemoteUpdateJob(
+            force = true,
+            showToast = false,
+            allowUnsafeNetwork = false,
+            onPerBundleProgress = null,
+            predicate = { it.uid == uid }
+        )
     }
 
     suspend fun createLocal(expectedSize: Long? = null, createStream: suspend () -> InputStream) {
@@ -927,13 +1002,22 @@ class PatchBundleRepository(
 //                return@dispatchAction state
 //            }
 
-            val src = createEntity(
+            var src = createEntity(
                 "",
                 SourceInfo.from(normalizedUrl),
                 autoUpdate,
                 createdAt = createdAt,
                 updatedAt = updatedAt
             ).load() as RemotePatchBundle
+
+            // Auto-enable prerelease if the URL explicitly targets the "dev" branch
+            if (src is JsonPatchBundle && src.endpointBranch == "dev") {
+                val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+                current.add(src.uid.toString())
+                prefs.bundlePrereleasesEnabled.update(current)
+                src = src.copy(usePrerelease = true)
+            }
+
             val allowUnsafeDownload = prefs.allowMeteredUpdates.get()
             update(
                 src,
@@ -944,6 +1028,41 @@ class PatchBundleRepository(
             )
             state.copy(sources = state.sources.put(src.uid, src))
         }
+
+    /**
+     * Returns true if 'usePrerelease' should be enabled for a [JsonPatchBundle] with the given [url].
+     * Prerelease is enabled if:
+     * - the uid is already stored in [PreferencesManager.bundlePrereleasesEnabled] (user toggled it on)
+     * - the endpoint URL explicitly targets the "dev" branch.
+     */
+    private fun shouldUsePrerelease(uid: Int, url: String): Boolean {
+        if (prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString())) return true
+        return JsonPatchBundle.extractBranch(url) == "dev"
+    }
+
+    /**
+     * Extracts the HTTP status code from an exception.
+     */
+    private fun Exception.httpCodeOrNull(): Int? = when (this) {
+        is APIError -> statusCode.value
+        is ResponseException -> response.status.value
+        else -> null
+    }
+
+    /**
+     * Shows an appropriate toast for a per-bundle download failure.
+     */
+    private suspend fun handleBundleDownloadError(e: Exception, bundle: RemotePatchBundle) {
+        val code = e.httpCodeOrNull()
+        Log.e(tag, "Failed to update bundle ${bundle.name} (HTTP $code)", e)
+        if (code != null && code in 400..499
+            && bundle is JsonPatchBundle && bundle.supportsPrerelease
+        ) {
+            toast(R.string.sources_download_endpoint_not_found, bundle.displayTitle)
+        } else {
+            toast(R.string.sources_download_fail, e.message ?: e.toString())
+        }
+    }
 
     private fun normalizeRemoteBundleUrl(input: String): String {
         val trimmed = input.trim()
@@ -1077,22 +1196,54 @@ class PatchBundleRepository(
         store.dispatch(
             Update(
                 force = force,
-                showToast = showToast
+                showToast = showToast,
+                allowUnsafeNetwork = false
             ) { it.uid == DEFAULT_SOURCE_UID }
         )
     }
 
     /**
-     * Updates all bundles that should be automatically updated.
+     * Suspends until any currently active update job completes.
      */
-    suspend fun updateCheck() {
-        store.dispatch(Update { it.autoUpdate })
+    private suspend fun awaitCurrentUpdateJob() {
+        val job = updateJobMutex.withLock { updateJob }
+        job?.join()
+    }
+
+    /**
+     * Same as [updateCheck] but suspends until the update job fully completes.
+     * Waits for any in-progress update to finish first, then runs its own update directly.
+     */
+    suspend fun updateCheckAndAwait(allowUnsafeNetwork: Boolean = false) {
+        awaitCurrentUpdateJob()
+        performRemoteUpdateWithResult(
+            force = false,
+            showToast = false,
+            allowUnsafeNetwork = allowUnsafeNetwork,
+            onPerBundleProgress = null,
+            predicate = { it.autoUpdate && it.enabled }
+        )
+    }
+
+    /**
+     * Updates all bundles that should be automatically updated AND are currently enabled.
+     * Disabled bundles are skipped - they will be updated automatically when re-enabled.
+     * Respects [PreferencesManager.allowMeteredUpdates]: if the network is metered and the
+     * user has disabled metered updates, the update is skipped and
+     * [BundleUpdateResult.SkippedMetered] is emitted so the UI can warn the user before patching.
+     *
+     * @param allowUnsafeNetwork When `true`, bypasses the metered network check and downloads
+     *   regardless. Use this when the user explicitly requests an update (e.g. "Update & patch"
+     *   dialog action).
+     */
+    suspend fun updateCheck(allowUnsafeNetwork: Boolean = false) {
+        store.dispatch(Update(allowUnsafeNetwork = allowUnsafeNetwork) { it.autoUpdate && it.enabled })
         checkManualUpdates()
     }
 
     /**
      * Silently checks whether any remote bundle has a newer version available.
-     * Does NOT download or apply the update — only compares version signatures.
+     * Does NOT download or apply the update - only compares version signatures.
      *
      * Used by [app.morphe.manager.worker.UpdateCheckWorker] for background update notifications.
      *
@@ -1103,7 +1254,7 @@ class PatchBundleRepository(
         if (!networkInfo.isConnected()) return null
 
         val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-        if (!allowMeteredUpdates && !networkInfo.isSafe()) return null
+        if (!allowMeteredUpdates && networkInfo.isMetered()) return null
 
         return try {
             val remoteBundles = store.state.value.sources.values
@@ -1148,7 +1299,7 @@ class PatchBundleRepository(
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
-        private val allowUnsafeNetwork: Boolean = true,
+        private val allowUnsafeNetwork: Boolean = false,
         private val onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
     ) : Action<State> {
@@ -1249,9 +1400,21 @@ class PatchBundleRepository(
             }
 
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowUnsafeNetwork && !allowMeteredUpdates && !networkInfo.isSafe()) {
+            if (!allowUnsafeNetwork && !allowMeteredUpdates && networkInfo.isMetered()) {
                 Log.d(tag, "Skipping update check because the network is metered.")
-                bundleUpdateProgressFlow.value = null
+                val skippedProgress = BundleUpdateProgress(
+                    total = 1,
+                    completed = 1,
+                    phase = BundleUpdatePhase.Checking,
+                    result = BundleUpdateResult.SkippedMetered,
+                )
+                bundleUpdateProgressFlow.value = skippedProgress
+                scope.launch {
+                    delay(3500)
+                    if (bundleUpdateProgressFlow.value == skippedProgress) {
+                        bundleUpdateProgressFlow.value = null
+                    }
+                }
                 return@coroutineScope
             }
 
@@ -1318,6 +1481,9 @@ class PatchBundleRepository(
                     val result = try {
                         if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
                     } catch (_: BundleUpdateCancelled) {
+                        continue
+                    } catch (e: Exception) {
+                        handleBundleDownloadError(e, bundle)
                         continue
                     }
 
@@ -1465,7 +1631,7 @@ class PatchBundleRepository(
             }
 
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowMeteredUpdates && !networkInfo.isSafe()) {
+            if (!allowMeteredUpdates && networkInfo.isMetered()) {
                 Log.d(tag, "Skipping manual update check because the network is down or metered.")
                 return@coroutineScope current
             }
@@ -1516,6 +1682,7 @@ class PatchBundleRepository(
         NoUpdates,      // Already up to date
         NoInternet,     // No internet connection
         Error,          // Error occurred
+        SkippedMetered, // Update skipped - network is metered and allowMeteredUpdates is false
     }
 
     data class BundleUpdateProgress(

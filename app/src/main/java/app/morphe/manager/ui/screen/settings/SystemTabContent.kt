@@ -68,12 +68,11 @@ fun SystemTabContent(
             currentEnabled = useProcessRuntime,
             currentLimit = memoryLimit,
             onDismiss = { showProcessRuntimeDialog = false },
-            onConfirm = { enabled, limit ->
-                scope.launch {
-                    prefs.useProcessRuntime.update(enabled)
-                    prefs.patcherProcessMemoryLimit.update(limit)
-                    showProcessRuntimeDialog = false
-                }
+            onEnabledChange = { enabled ->
+                scope.launch { prefs.useProcessRuntime.update(enabled) }
+            },
+            onLimitChange = { limit ->
+                scope.launch { prefs.patcherProcessMemoryLimit.update(limit) }
             }
         )
     }
@@ -115,39 +114,37 @@ fun SystemTabContent(
             )
         }
 
-        // Performance (Expert mode only)
-        if (useExpertMode) {
-            SectionTitle(
-                text = stringResource(R.string.settings_system_performance),
-                icon = Icons.Outlined.Speed
-            )
+        // Performance
+        SectionTitle(
+            text = stringResource(R.string.settings_system_performance),
+            icon = Icons.Outlined.Speed
+        )
 
-            SectionCard {
-                RichSettingsItem(
-                    onClick = { showProcessRuntimeDialog = true },
-                    title = stringResource(R.string.settings_system_process_runtime),
-                    subtitle = if (useProcessRuntime)
-                        stringResource(R.string.settings_system_process_runtime_enabled_description, memoryLimit)
-                    else stringResource(R.string.settings_system_process_runtime_disabled_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Memory)
-                    },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            InfoBadge(
-                                text = if (useProcessRuntime) stringResource(R.string.enabled)
-                                else stringResource(R.string.disabled),
-                                style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
-                                isCompact = true
-                            )
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                        }
+        SectionCard {
+            RichSettingsItem(
+                onClick = { showProcessRuntimeDialog = true },
+                title = stringResource(R.string.settings_system_process_runtime),
+                subtitle = if (useProcessRuntime)
+                    stringResource(R.string.settings_system_process_runtime_enabled_description, memoryLimit)
+                else stringResource(R.string.settings_system_process_runtime_disabled_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Memory)
+                },
+                trailingContent = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        InfoBadge(
+                            text = if (useProcessRuntime) stringResource(R.string.enabled)
+                            else stringResource(R.string.disabled),
+                            style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
+                            isCompact = true
+                        )
+                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
                     }
-                )
-            }
+                }
+            )
         }
 
         // Import & Export (Expert mode only)

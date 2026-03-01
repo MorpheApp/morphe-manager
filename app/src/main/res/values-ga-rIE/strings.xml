@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Tá nuashonrú nua ar fáil</string>
     <string name="home_update_error">Theip ar nuashonrú</string>
     <string name="home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
+    <string name="home_update_skipped_metered">Nuashonruithe scipeáilte</string>
+    <string name="home_update_skipped_metered_subtitle">Tá sonraí soghluaiste gníomhach</string>
     <string name="home_updating_sources">Ag nuashonrú na foinsí…</string>
     <string name="home_update_progress_format">%1$s próiseáilte</string>
     <string name="home_update_success">Foinsí nuashonraithe críochnaithe</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
+    <string name="sources_management_prerelease_toggle">Bain úsáid as paistí réamh-eisiúna</string>
+    <string name="sources_management_prerelease_toggle_description">Faigh rochtain luath ar leagan nua paistí turgnamhacha</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ainm taispeána</string>
     <string name="sources_dialog_rename">Athainmnigh foinse an phaiste</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Nuashonrú rathúil</string>
     <string name="sources_update_unavailable">Níl aon nuashonrú ar fáil</string>
     <string name="sources_download_fail">Theip ar an pacáiste a íoslódáil: %s</string>
+    <string name="sources_download_endpoint_not_found">Níorbh fhéidir \'%1$s\' a nuashonrú: níor aimsíodh an comhad paiste JSON ag an URL cumraithe</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">An bhfuil cabhair uait chun APK bunaidh neamhphaisteáilte a aimsiú?</string>
     <string name="home_apk_availability_dialog_simple">Chun &lt;b&gt;%s&lt;/b&gt;, a phaisteáil, beidh an leagan APK neamhphaisteáilte ag teastáil uait:</string>
@@ -122,6 +127,10 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="home_dialog_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air</string>
     <string name="home_dialog_expected_package">Pacáiste ionchais:</string>
     <string name="home_dialog_selected_package">Pacáiste roghnaithe:</string>
+    <string name="home_outdated_patches_dialog_title">B’fhéidir go bhfuil na paistí as dáta</string>
+    <string name="home_outdated_patches_dialog_message">Tá sonraí soghluaiste gníomhach agus tá nuashonruithe paiste díchumasaithe</string>
+    <string name="home_outdated_patches_dialog_warning">D’fhéadfadh go mbeadh aip briste mar thoradh ar phaistí le paistí atá as dáta</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Nuashonrú &amp; Paiste</string>
     <!-- Patch Options -->
     <string name="custom_color">Dath saincheaptha</string>
     <string name="hex_color">Dath heicsidheachúlach</string>
@@ -252,6 +261,9 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
     <string name="patcher_message_20">Ag baint na amaidí. Fan le do thoil… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Tá paisteán déanta ag an app</string>
+    <string name="memory_usage">Úsáid an tseomra</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paistí á gcur i bhfeidhm</string>
     <string name="failed_to_execute_patch">Theip ar %s a chur i bhfeidhm</string>
@@ -313,8 +325,10 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Athraigh deilbhín</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nuashonruithe</string>
-    <string name="settings_advanced_updates_use_prereleases">Úsáid leaganacha réamh-eisiúna</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Faigh rochtain luath ar phaistí nua agus ar ghnéithe bainisteoirí</string>
+    <string name="settings_advanced_updates_use_prereleases">Bain úsáid as bainisteoir réamh-eisiúna</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Faigh rochtain luath ar leaganacha nua de bhainisteoirí turgnamhacha. Chun paistí réamh-eisiúna a fháil, cumasaigh an lascán réamh-eisiúna i ngach foinse paiste ar leithligh</string>
+    <string name="settings_advanced_updates_allow_metered">Nuashonrú ar shonraí soghluaiste</string>
+    <string name="settings_advanced_updates_allow_metered_description">Ceadaigh foinsí paiste agus nuashonruithe bainisteoirí a íoslódáil thar shonraí soghluaiste</string>
     <string name="settings_advanced_updates_background_notifications">Fógraí nuashonraithe cúlra</string>
     <string name="settings_advanced_updates_background_notifications_description">Seiceáil go tréimhsiúil le haghaidh nuashonruithe sa chúlra agus cuir in iúl nuair a bhíonn siad ar fáil</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Faigh fógraí brú láithreacha le haghaidh eisiúintí nua, fiú nuair a bhíonn an aip dúnta</string>
@@ -433,7 +447,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_internal_name">Suiteálaí córais</string>
     <string name="installer_internal_description">Úsáid suiteálaí pacáiste Android</string>
     <string name="installer_auto_saved_name">Suiteálaí gléasta fréamhaithe</string>
-    <string name="installer_auto_saved_description">Tugann sé an APK paisteáilte ar an aip suiteáilte</string>
+    <string name="installer_auto_saved_description">Suiteálann sé an APK paisteáilte thar an aip suiteáilte</string>
     <string name="installer_shizuku_description">Suiteáil go ciúin ag baint úsáide as Shizuku nó Sui</string>
     <string name="installer_option_none">Gan aon chúltaca</string>
     <string name="installer_none_description">Níl aon suiteálaí taca cumraithe</string>
@@ -613,6 +627,7 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="details">Sonraí</string>
     <string name="hide">Folaigh</string>
     <string name="default_">Réamhshocrú</string>
+    <string name="logs">Clár</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
     <string name="mounting_ellipsis">Ag ceangal…</string>
     <string name="unmounting_ellipsis">Ag dícheangal…</string>

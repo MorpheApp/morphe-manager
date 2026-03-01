@@ -425,12 +425,14 @@ private fun BundleUpdateSnackbarContent(
 
     val containerColor = when (status) {
         BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
+        BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.secondaryContainer
         BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
         BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
     }
 
     val contentColor = when (status) {
         BundleUpdateStatus.Success -> MaterialTheme.colorScheme.onPrimaryContainer
+        BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.onSecondaryContainer
         BundleUpdateStatus.Error -> MaterialTheme.colorScheme.onErrorContainer
         BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.onSurfaceVariant
     }
@@ -459,6 +461,12 @@ private fun BundleUpdateSnackbarContent(
                         tint = contentColor,
                         modifier = Modifier.size(24.dp)
                     )
+                    BundleUpdateStatus.Warning -> Icon(
+                        imageVector = Icons.Outlined.SignalCellularAlt,
+                        contentDescription = null,
+                        tint = contentColor,
+                        modifier = Modifier.size(24.dp)
+                    )
                     BundleUpdateStatus.Error -> Icon(
                         imageVector = Icons.Outlined.Warning,
                         contentDescription = null,
@@ -477,6 +485,7 @@ private fun BundleUpdateSnackbarContent(
                     Text(
                         text = when (status) {
                             BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
+                            BundleUpdateStatus.Warning -> stringResource(R.string.home_update_skipped_metered)
                             BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
                             BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
                         },
@@ -484,6 +493,14 @@ private fun BundleUpdateSnackbarContent(
                         fontWeight = FontWeight.Bold,
                         color = contentColor
                     )
+
+                    if (status == BundleUpdateStatus.Warning) {
+                        Text(
+                            text = stringResource(R.string.home_update_skipped_metered_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = contentColor.copy(alpha = 0.8f)
+                        )
+                    }
 
                     if (status == BundleUpdateStatus.Updating && progress != null) {
                         if (isDownloading) {

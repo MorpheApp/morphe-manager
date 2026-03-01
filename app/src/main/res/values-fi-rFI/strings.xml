@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Uusi versio valmis asennukseen</string>
     <string name="home_update_error">Päivitys epäonnistui</string>
     <string name="home_update_error_subtitle">Tarkista internet-yhteytesi ja yritä uudelleen</string>
+    <string name="home_update_skipped_metered">Päivitykset ohitettu</string>
+    <string name="home_update_skipped_metered_subtitle">Liikenneverkko on aktiivinen</string>
     <string name="home_updating_sources">Päivitetään lähteitä…</string>
     <string name="home_update_progress_format">%1$s onnistuttiin</string>
     <string name="home_update_success">Lähteiden päivitys valmis</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Tukemisen lähteet</string>
     <string name="sources_management_open_in_browser">Avaa linkit selaimessa</string>
     <string name="sources_management_failed_to_open_url">Ei toimi linkin avaamis</string>
+    <string name="sources_management_prerelease_toggle">Käytä ennakkopäivityksiä</string>
+    <string name="sources_management_prerelease_toggle_description">Saa varhainen pääsy uusiin kokeellisiin versiomiin. Käytä ennakkopäivityksiä.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Näytönimi</string>
     <string name="sources_dialog_rename">Muokka patch- lähde</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Muokitus onnistui</string>
     <string name="sources_update_unavailable">Ei ole muokkaa saatavilla</string>
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
+    <string name="sources_download_endpoint_not_found">Ei voitu päivittää \'%1$s\': ennakkopäivitys JSON-tiedostoa ei löytynyt määritetystä URL-osoitteesta.</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Tarvitset apua etsimään alkuperäistä, patjatonta APK:tä</string>
     <string name="home_apk_availability_dialog_simple">Pattain &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, patjaton APK-versio:</string>
@@ -122,6 +127,10 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="home_dialog_wrong_package_description">Valittu APK ei ole sovellukselle, jonka halusit korjata</string>
     <string name="home_dialog_expected_package">Odotettu paketti:</string>
     <string name="home_dialog_selected_package">Valittu paketti:</string>
+    <string name="home_outdated_patches_dialog_title">Päivitykset saattavat olla vanhentuneita</string>
+    <string name="home_outdated_patches_dialog_message">Liikenneverkko on aktiivinen ja päivitykset ovat poistettu</string>
+    <string name="home_outdated_patches_dialog_warning">Päivityksen teko vanhentuneilla päivityksillä saattaa johtaa rikkoutuneeseen sovellukseen</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Päivitä &amp; päivitä</string>
     <!-- Patch Options -->
     <string name="custom_color">Mukautettu väri</string>
     <string name="hex_color">HEX-väri</string>
@@ -252,6 +261,9 @@ Oletko varma, että haluat jatkaa?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Sovelluksellasi on kuumetta, ja ainoa resepti on lisää korjauksia… 🩺🔔</string>
     <string name="patcher_message_20">Poistetaan hölynpölyä. Odota hetki… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Muokkaa sovellusta</string>
+    <string name="memory_usage">Muistiutuminen</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paikkojen käyttöönotto</string>
     <string name="failed_to_execute_patch">Virhe %s:n suorittamisessa</string>
@@ -313,8 +325,10 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Muokka ulkon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Muutokset</string>
-    <string name="settings_advanced_updates_use_prereleases">Käytä pre-release-versioita</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Saatat varhaisemmat uutiset patchit ja sovellusominaat</string>
+    <string name="settings_advanced_updates_use_prereleases">Käytä ennakkoasetuksia</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Saa varhainen pääsy uusiin kokeellisiin hallintajärjestelmäversioihin. Saa ennakkopäivitykset, kun otat käyttöön ennakkopäivitys-vaihde jokaisessa päivitys lähteessä erikseen.</string>
+    <string name="settings_advanced_updates_allow_metered">Päivitä liikenneverkossa</string>
+    <string name="settings_advanced_updates_allow_metered_description">Salli päivitys lähteet ja asetus päivitykset ladata liikenneverkossa</string>
     <string name="settings_advanced_updates_background_notifications">Taustapäivityksen ilmoitukset</string>
     <string name="settings_advanced_updates_background_notifications_description">Tarkista päivitykset taustalla säännöllisesti ja ilmoita kun ne ovat saatavilla</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Saa välittömät push-ilmoitukset uusista versioista, jopa kun sovellus on suljettu</string>
@@ -615,6 +629,7 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="details">Tiedot</string>
     <string name="hide">Piilota</string>
     <string name="default_">Oletus</string>
+    <string name="logs">Päiväkirjat</string>
     <string name="installing_ellipsis">Asennetaan…</string>
     <string name="mounting_ellipsis">Liitetään…</string>
     <string name="unmounting_ellipsis">Poistetaan…</string>

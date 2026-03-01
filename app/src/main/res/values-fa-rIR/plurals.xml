@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s پچ</item>
+        <item quantity="other">%s پچ ها</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">حذف شده %s پچ قدیمی از انتخاب ذخیره شده</item>
+        <item quantity="other">حذف شده %s پچ های قدیمی از انتخاب ذخیره شده</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%s سورس نصب شده</item>
+        <item quantity="other">%s منابع نصب شده</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%s پچ انتخاب شد</item>
+        <item quantity="other">%s پچ های انتخاب شده</item>
+    </plurals>
+</resources>

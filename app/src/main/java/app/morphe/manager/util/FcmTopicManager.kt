@@ -60,14 +60,14 @@ val isDevBuild: Boolean
  *
  * ## Manager topics
  *
- * The manager subscription is determined by combining [isDevBuild] and [usePrereleases]:
+ * The manager subscription is determined by combining [isDevBuild] and [useManagerPrereleases]:
  *
- * | isDevBuild | usePrereleases | stable topic | dev topic |
- * |------------|----------------|--------------|-----------|
- * | false      | false          | ✓ subscribed | ✗ unsub   |
- * | false      | true           | ✗ unsub      | ✓ subscribed |
- * | true       | false          | ✓ subscribed | ✓ subscribed |
- * | true       | true           | ✗ unsub      | ✓ subscribed |
+ * | isDevBuild | useManagerPrereleases | stable topic | dev topic |
+ * |------------|----------------------|--------------|-----------|
+ * | false      | false                | ✓ subscribed | ✗ unsub   |
+ * | false      | true                 | ✗ unsub      | ✓ subscribed |
+ * | true       | false                | ✓ subscribed | ✓ subscribed |
+ * | true       | true                 | ✗ unsub      | ✓ subscribed |
  *
  * A dev-build user with prereleases OFF is subscribed to **both** manager topics because
  * a stable release (e.g. `1.5.0`) is a valid upgrade from a dev build (e.g. `1.5.0-dev.1`).
@@ -75,12 +75,12 @@ val isDevBuild: Boolean
  *
  * ## Patches topics
  *
- * The patches topic is chosen **only** by [usePrereleases], independent of [isDevBuild]:
+ * The patches topic is chosen **only** by [usePatchesPrereleases], which reflects whether
+ * the default Morphe Patches bundle (uid=0) has dev channel enabled:
  * - prereleases ON  → [FCM_TOPIC_PATCHES_DEV]
  * - prereleases OFF → [FCM_TOPIC_PATCHES_STABLE]
  *
- * This way a user running a dev manager build with prereleases OFF will still
- * receive stable patch notifications - dev manager does not imply dev patches.
+ * Custom third-party bundles do not have FCM topics — only the built-in Morphe bundle does.
  *
  * ## Notifications OFF
  *
@@ -92,7 +92,11 @@ val isDevBuild: Boolean
  * - [app.morphe.manager.ManagerApplication] on every cold start
  * - [app.morphe.manager.ui.screen.settings.advanced.UpdatesSettingsItem] on preference toggle
  */
-fun syncFcmTopics(notificationsEnabled: Boolean, usePrereleases: Boolean) {
+fun syncFcmTopics(
+    notificationsEnabled: Boolean,
+    useManagerPrereleases: Boolean,
+    usePatchesPrereleases: Boolean = false,
+) {
     val tag = "FcmTopicSync"
     val messaging = FirebaseMessaging.getInstance()
 
@@ -114,12 +118,12 @@ fun syncFcmTopics(notificationsEnabled: Boolean, usePrereleases: Boolean) {
     //   stable build + prereleases ON  → dev only         (opted into prereleases)
     //   dev build    + prereleases OFF → stable + dev     (dev build, but stable 1.5.0 is a valid upgrade from 1.5.0-dev.1)
     //   dev build    + prereleases ON  → dev only         (wants to stay on cutting edge)
-    val subscribeManagerStable = !usePrereleases  // stable is relevant unless user wants only prereleases
-    val subscribeManagerDev    = isDevBuild || usePrereleases  // dev is relevant for dev builds and prerelease users
+    val subscribeManagerStable = !useManagerPrereleases // stable is relevant unless user wants only prereleases
+    val subscribeManagerDev    = isDevBuild || useManagerPrereleases // dev is relevant for dev builds and prerelease users
 
-    Log.d(tag, "syncFcmTopics: isDevBuild=$isDevBuild, usePrereleases=$usePrereleases")
+    Log.d(tag, "syncFcmTopics: isDevBuild=$isDevBuild, useManagerPrereleases=$useManagerPrereleases, usePatchesPrereleases=$usePatchesPrereleases")
     Log.d(tag, "  manager stable=$subscribeManagerStable, manager dev=$subscribeManagerDev")
-    Log.d(tag, "  patches topic → ${if (usePrereleases) FCM_TOPIC_PATCHES_DEV else FCM_TOPIC_PATCHES_STABLE}")
+    Log.d(tag, "  patches topic → ${if (usePatchesPrereleases) FCM_TOPIC_PATCHES_DEV else FCM_TOPIC_PATCHES_STABLE}")
 
     if (subscribeManagerStable) {
         messaging.subscribeToTopic(FCM_TOPIC_MANAGER_STABLE)
@@ -141,8 +145,8 @@ fun syncFcmTopics(notificationsEnabled: Boolean, usePrereleases: Boolean) {
             .addOnCompleteListener { Log.d(tag, "Unsubscribed from $FCM_TOPIC_MANAGER_DEV") }
     }
 
-    // Determined solely by usePrereleases - dev manager does not imply dev patches
-    if (usePrereleases) {
+    // Determined solely by usePatchesPrereleases (default bundle dev toggle)
+    if (usePatchesPrereleases) {
         messaging.subscribeToTopic(FCM_TOPIC_PATCHES_DEV)
             .addOnCompleteListener { task ->
                 Log.d(tag, if (task.isSuccessful) "Subscribed to $FCM_TOPIC_PATCHES_DEV" else "Failed to subscribe to $FCM_TOPIC_PATCHES_DEV")

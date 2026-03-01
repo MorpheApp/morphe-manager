@@ -8,9 +8,7 @@ import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.resetListItemColorsCached
 import app.morphe.manager.util.toHexString
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 enum class ThemePreset {
     DEFAULT,
@@ -30,19 +28,10 @@ class ThemeSettingsViewModel(
     val prefs: PreferencesManager
 ) : ViewModel() {
     private val presetConfigs = mapOf(
-        ThemePreset.DEFAULT to ThemePresetConfig(
-            theme = Theme.SYSTEM
-        ),
-        ThemePreset.LIGHT to ThemePresetConfig(
-            theme = Theme.LIGHT
-        ),
-        ThemePreset.DARK to ThemePresetConfig(
-            theme = Theme.DARK
-        ),
-        ThemePreset.DYNAMIC to ThemePresetConfig(
-            theme = Theme.SYSTEM,
-            dynamicColor = true
-        )
+        ThemePreset.DEFAULT to ThemePresetConfig(theme = Theme.SYSTEM),
+        ThemePreset.LIGHT to ThemePresetConfig(theme = Theme.LIGHT),
+        ThemePreset.DARK to ThemePresetConfig(theme = Theme.DARK),
+        ThemePreset.DYNAMIC to ThemePresetConfig(theme = Theme.SYSTEM, dynamicColor = true)
     )
 
     fun setCustomAccentColor(color: Color?) = viewModelScope.launch {
@@ -51,11 +40,14 @@ class ThemeSettingsViewModel(
         resetListItemColorsCached()
     }
 
+    /**
+     * Change the app language.
+     */
     fun setAppLanguage(languageCode: String) = viewModelScope.launch {
         prefs.appLanguage.update(languageCode)
-        withContext(Dispatchers.Main) {
-            applyAppLanguage(languageCode)
-        }
+        // Apply immediately on the calling coroutine - setApplicationLocales posts
+        // internally to the main thread and is safe to call from any thread
+        applyAppLanguage(languageCode)
     }
 
     fun applyThemePreset(preset: ThemePreset) = viewModelScope.launch {

@@ -1,3 +1,36 @@
+# app [1.9.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.3...v1.9.0-dev.4) (2026-02-28)
+
+
+### Features
+
+* Add Expert mode patching screen ([#250](https://github.com/MorpheApp/morphe-manager/issues/250)) ([5efa637](https://github.com/MorpheApp/morphe-manager/commit/5efa6374cb135e4585f0b4aab10ca5dd7039ebd6))
+
+# app [1.9.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.2...v1.9.0-dev.3) (2026-02-28)
+
+
+### Bug Fixes
+
+* Remove UI stuttering during APK write when patching in-process ([#258](https://github.com/MorpheApp/morphe-manager/issues/258)) ([99f1a62](https://github.com/MorpheApp/morphe-manager/commit/99f1a6268f26f66a56afdf181a1fe9c4d0af05c1))
+
+# app [1.9.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0-dev.1...v1.9.0-dev.2) (2026-02-27)
+
+
+### Bug Fixes
+
+* Pre-release toggle is enabled if user adds link to dev branch ([28417d0](https://github.com/MorpheApp/morphe-manager/commit/28417d06d78035c86bf1ac53367ef68a594c6f63))
+
+# app [1.9.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0...v1.9.0-dev.1) (2026-02-27)
+
+
+### Bug Fixes
+
+* Add missing permission to app manifest ([c439f71](https://github.com/MorpheApp/morphe-manager/commit/c439f7177576dbdebae770a74b963c4e590b9b68))
+
+
+### Features
+
+* Enhance patch update management and mobile data controls ([#247](https://github.com/MorpheApp/morphe-manager/issues/247)) ([5ddfa22](https://github.com/MorpheApp/morphe-manager/commit/5ddfa224e9c9288b35a2aa8ec739a6a72234fef0))
+
 # app [1.8.0](https://github.com/MorpheApp/morphe-manager/compare/v1.7.1...v1.8.0) (2026-02-25)
 
 

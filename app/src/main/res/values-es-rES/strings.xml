@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Nueva versión lista para instalar</string>
     <string name="home_update_error">La actualización falló</string>
     <string name="home_update_error_subtitle">Comprueba tu conexión a internet y vuelve a intentarlo </string>
+    <string name="home_update_skipped_metered">Actualización omitida</string>
+    <string name="home_update_skipped_metered_subtitle">Los datos móviles están activos</string>
     <string name="home_updating_sources">Actualizando fuentes…</string>
     <string name="home_update_progress_format">%1$s procesado</string>
     <string name="home_update_success">Actualización de fuentes completada</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">Fuentes de parches</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
+    <string name="sources_management_prerelease_toggle">Usar versiones preliminares de parches</string>
+    <string name="sources_management_prerelease_toggle_description">Recibir acceso temprano a nuevas versiones experimentales de parches</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nombre para mostrar</string>
     <string name="sources_dialog_rename">Agregar fuente de parches</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Actualización correcta</string>
     <string name="sources_update_unavailable">No hay actualización disponible</string>
     <string name="sources_download_fail">No se pudo descargar las fuentes: %s</string>
+    <string name="sources_download_endpoint_not_found">No se pudo actualizar \'%1$s\': no se encontró el archivo JSON de parches en la URL configurada</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">¿Necesitas ayuda para encontrar un APK original sin parchear?</string>
     <string name="home_apk_availability_dialog_simple">Para parchear &lt;b&gt;%s&lt;/b&gt;, necesitas la versión APK sin parchear:</string>
@@ -122,6 +127,10 @@
     <string name="home_dialog_wrong_package_description">El APK seleccionado no es para la aplicación que pretendías parchear</string>
     <string name="home_dialog_expected_package">Paquete esperado:</string>
     <string name="home_dialog_selected_package">Paquete seleccionado:</string>
+    <string name="home_outdated_patches_dialog_title">Los parches pueden estar desactualizados</string>
+    <string name="home_outdated_patches_dialog_message">Los datos móviles están activos y las actualizaciones de parches están desactivadas</string>
+    <string name="home_outdated_patches_dialog_warning">La app podría no funcionar correctamente si se aplican parches obsoletos</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Actualizar y parchear</string>
     <!-- Patch Options -->
     <string name="custom_color">Color personalizado</string>
     <string name="hex_color">Color HEX</string>
@@ -252,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tu aplicación tiene fiebre y la única receta son más parches… 🩺🔔</string>
     <string name="patcher_message_20">Eliminando tonterías. Por favor, espere… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Parcheando la app</string>
+    <string name="memory_usage">Uso de memoria</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplicando parches</string>
     <string name="failed_to_execute_patch">Error al aplicar %s</string>
@@ -313,11 +325,13 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Cambiar icono</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Actualizaciones</string>
-    <string name="settings_advanced_updates_use_prereleases">Usar versiones preliminares</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Obtén acceso anticipado a nuevos parches y funciones del administrador</string>
+    <string name="settings_advanced_updates_use_prereleases">Usar versiones preliminares del gestor</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Recibir acceso temprano a nuevas versiones experimentales del gestor. Para obtener versiones preliminares de parches, activa la opción de versiones preliminares en cada fuente de parches por separado</string>
+    <string name="settings_advanced_updates_allow_metered">Actualizar con datos móviles</string>
+    <string name="settings_advanced_updates_allow_metered_description">Permitir que las fuentes de parches y las actualizaciones del gestor se descarguen a través de datos móviles</string>
     <string name="settings_advanced_updates_background_notifications">Notificaciones de actualización en segundo plano</string>
     <string name="settings_advanced_updates_background_notifications_description">Comprueba periódicamente si hay actualizaciones en segundo plano y notifica cuando estén disponibles</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Recibir notificaciones push instantáneas para nuevas versiones, incluso cuando la aplicación está cerrada</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Recibir notificaciones instantáneas de las nuevas versiones, incluso cuando la app esté cerrada</string>
     <string name="notification_channel_manager_updates">Administrar actualizaciones</string>
     <string name="notification_channel_manager_updates_description">Notificaciones sobre nuevas versiones del gestor de Morphe</string>
     <string name="notification_channel_bundle_updates">Actualizaciones de fuentes de parches</string>
@@ -615,6 +629,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="details">Detalles</string>
     <string name="hide">Ocultar</string>
     <string name="default_">Predeterminado</string>
+    <string name="logs">Registros</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>

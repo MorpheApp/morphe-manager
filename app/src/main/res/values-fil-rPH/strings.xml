@@ -252,6 +252,7 @@ Nais mo bang magpatuloy?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">May lagnat ang aplikasyon mo, at ang tanging reseta ay ang maraming patch… 🩺🔔</string>
     <string name="patcher_message_20">Inaalis ang mga walang saysay. Mangyaring maghintay… 🗑️</string>
+    <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Inilalapat ang mga patch</string>
     <string name="failed_to_execute_patch">Nabigong ilapat %s</string>
@@ -313,8 +314,6 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Baguhin ang icon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mga update</string>
-    <string name="settings_advanced_updates_use_prereleases">Gamitin ang mga unang inilabas na mga bersyon</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Kumuha ng maagang pag-access sa mga bagong patch at mga tampok ng manager</string>
     <string name="settings_advanced_updates_background_notifications">Mga notipikasyon sa pag-update sa background</string>
     <string name="settings_advanced_updates_background_notifications_description">Paminsan-minsang suriin ang mga update sa background at abisuhan kung magagamit</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Tumanggap ng agarang abiso para sa bagong release, kahit sarado ang aplikasyon</string>

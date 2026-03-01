@@ -18,6 +18,8 @@
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
+    <string name="home_update_skipped_metered">আপডেটগুলি ছাড়া রাখা হয়েছে</string>
+    <string name="home_update_skipped_metered_subtitle">মোবাইল ডেটা সক্রিয়</string>
     <string name="home_updating_sources">সোর্স আপডেট হচ্ছে...</string>
     <string name="home_update_progress_format">%1$s সম্পন্ন হয়েছে</string>
     <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ হয়েছে</string>
@@ -48,6 +50,8 @@
     <string name="sources_management_title">প্যাচ সোর্সগুলো</string>
     <string name="sources_management_open_in_browser">ব্রাউজারে ওপেন করুন</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
+    <string name="sources_management_prerelease_toggle">পূর্ব-প্রকাশিত প্যাচ ব্যবহার করুন</string>
+    <string name="sources_management_prerelease_toggle_description">নতুন পরীক্ষামূলক প্যাচ সংস্করণের জন্য আগে অ্যাক্সেস পান</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">প্রদর্শিত নাম</string>
     <string name="sources_dialog_rename">প্যাচের নাম পরিবর্তন করুন</string>
@@ -68,6 +72,7 @@
     <string name="sources_update_success">আপডেট সফল হয়েছে</string>
     <string name="sources_update_unavailable">আপডেট উপলব্ধ নেই</string>
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
+    <string name="sources_download_endpoint_not_found">\'%1$s\' এর জন্য আপডেট করতে পারেনি: কনফিগার করা URL-তে প্যাচ JSON ফাইলটি পাওয়া যায়নি</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">অপেক্ষা করছেন কোথায় একটি মূল অপছন্দিত APK?</string>
     <string name="home_apk_availability_dialog_simple">প্যাচ করতে &lt;b&gt;%s&lt;/b&gt; এর জন্য, অ-প্যাচড এপিকি (APK) সংস্করণ দরকার:</string>
@@ -121,6 +126,10 @@
     <string name="home_dialog_wrong_package_description">নির্বাচিত APK অ্যাপের জন্য নির্বাচিত হয়নি</string>
     <string name="home_dialog_expected_package">অ্যাপের নাম:</string>
     <string name="home_dialog_selected_package">নির্বাচিত অ্যাপ:</string>
+    <string name="home_outdated_patches_dialog_title">প্যাচগুলি পুরানো হতে পারে</string>
+    <string name="home_outdated_patches_dialog_message">মোবাইল ডেটা সক্রিয় এবং প্যাচ আপডেট অক্ষম</string>
+    <string name="home_outdated_patches_dialog_warning">পুরানো প্যাচগুলি ব্যবহার করে অ্যাপটি ভেঙে যেতে পারে</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">আপডেট ও প্যাচ করুন</string>
     <!-- Patch Options -->
     <string name="custom_color">కస్టమ్‌ క్రోమ్‌</string>
     <string name="hex_color">డిస్‌క్‌వర్‌ కోడ్ రంగు</string>
@@ -251,6 +260,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">আপনার অ্যাপের জ্বর হয়েছে, এবং এর একমাত্র প্রতিকার হল আরও প্যাচ… 🩺🔔</string>
     <string name="patcher_message_20">অর্থহীন কথাগুলো সরিয়ে ফেলা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">অ্যাপটি প্যাচিং করছি</string>
+    <string name="memory_usage">মেমরি ব্যবহার</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">প্যাচ প্রয়োগ করা হচ্ছে</string>
     <string name="failed_to_execute_patch">%s প্রয়োগ করতে ব্যর্থ</string>
@@ -312,8 +324,10 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">আইকন পরিবর্তন করুন</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">আপডেটগুলি</string>
-    <string name="settings_advanced_updates_use_prereleases">প্র-রিলিজ সংস্করণগুলি ব্যবহার করুন</string>
-    <string name="settings_advanced_updates_use_prereleases_description">নতুন প্যাচ ও ম্যানেজার ফিচার গুলি আগে পান</string>
+    <string name="settings_advanced_updates_use_prereleases">প্রি-রিলিজ ম্যানেজার ব্যবহার করুন</string>
+    <string name="settings_advanced_updates_use_prereleases_description">নতুন পরীক্ষামূলক ম্যানেজার সংস্করণের জন্য আগে অ্যাক্সেস পান। পূর্ব-প্রকাশিত প্যাচ পেতে, প্রতিটি প্যাচ উৎসের জন্য পৃথকভাবে পূর্ব-প্রকাশিত টগলটি সক্রিয় করুন</string>
+    <string name="settings_advanced_updates_allow_metered">মোবাইল ডেটায় আপডেট করুন</string>
+    <string name="settings_advanced_updates_allow_metered_description">মোবাইল ডেটা দিয়ে প্যাচ উৎস এবং ম্যানেজার আপডেট ডাউনলোড করুন</string>
     <string name="settings_advanced_updates_background_notifications">ব্যাকগ্রাউন্ড আপডেট নোটিফিকেশন</string>
     <string name="settings_advanced_updates_background_notifications_description">ব্যাকগ্রাউন্ডে আপডেটের জন্য পর্যায়ক্রমে চেক করুন এবং উপলব্ধ হলে বিজ্ঞপ্তি দিন।</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">নতুন রিলিজের জন্য অ্যাপটি বন্ধ থাকাকালীনেও ইমিডিয়েট পুশ নোটিফিকেশন পান</string>
@@ -593,6 +607,7 @@
     <string name="details">বিস্তারিত</string>
     <string name="hide">গোপন রাখুন</string>
     <string name="default_">ডিফল্ট</string>
+    <string name="logs">লগসমূহ</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>

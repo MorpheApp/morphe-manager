@@ -4,7 +4,8 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT
+import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
+import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.ExportNameFormatter
@@ -37,6 +38,9 @@ class PreferencesManager(
     val useManagerPrereleases = booleanPreference("manager_prereleases", false)
     val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
 
+    /** UIDs of bundles that have prereleases (dev branch) enabled. Stored as strings. */
+    val bundlePrereleasesEnabled = stringSetPreference("bundle_prereleases_enabled", emptySet())
+
     /**  Whether to send Android system notifications when updates are available in the background. */
     val backgroundUpdateNotifications = booleanPreference("background_update_notifications", false)
 
@@ -62,7 +66,7 @@ class PreferencesManager(
         // Armv7 silently fails and nobody has researched why yet.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
-    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_DEFAULT)
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
 
     val keystoreAlias = stringPreference("keystore_alias", KeystoreManager.DEFAULT)
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
@@ -77,7 +81,6 @@ class PreferencesManager(
     )
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
-    val managerAutoUpdates = booleanPreference("manager_auto_updates", true)
     val installationTime = longPreference("manager_installation_time", 0)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
@@ -90,6 +93,13 @@ class PreferencesManager(
                 val now = System.currentTimeMillis()
                 installationTime.update(now)
                 Log.d(tag, "Installation time set to $now")
+            }
+
+            // Initialize process memory limit adaptively on first launch
+            if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
+                val adaptive = calculateAdaptiveMemoryLimit(context)
+                Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
+                patcherProcessMemoryLimit.update(adaptive)
             }
 
             // Auto-enable prereleases for dev versions
@@ -129,7 +139,6 @@ class PreferencesManager(
         val keystoreAlias: String? = null,
         val keystorePass: String? = null,
         val firstLaunch: Boolean? = null,
-        val managerAutoUpdates: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
         val usePatchesPrereleases: Boolean? = null,
@@ -174,7 +183,6 @@ class PreferencesManager(
         keystoreAlias = keystoreAlias.get(),
         keystorePass = keystorePass.get(),
         firstLaunch = firstLaunch.get(),
-        managerAutoUpdates = managerAutoUpdates.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
         usePatchesPrereleases = usePatchesPrereleases.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
@@ -206,7 +214,6 @@ class PreferencesManager(
         snapshot.keystoreAlias?.let { keystoreAlias.value = it }
         snapshot.keystorePass?.let { keystorePass.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
-        snapshot.managerAutoUpdates?.let { managerAutoUpdates.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
         snapshot.usePatchesPrereleases?.let { usePatchesPrereleases.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }

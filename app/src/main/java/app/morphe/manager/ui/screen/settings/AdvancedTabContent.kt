@@ -92,16 +92,12 @@ fun AdvancedTabContent(
         )
 
         UpdatesSettingsItem(
-            usePrereleases = usePrereleases.value,
-            onPrereleasesToggle = {
+            useManagerPrereleases = usePrereleases.value,
+            onManagerPrereleasesToggle = {
                 val newValue = !usePrereleases.value
                 scope.launch {
-                    prefs.usePatchesPrereleases.update(newValue)
                     prefs.useManagerPrereleases.update(newValue)
-                    prefs.managerAutoUpdates.update(newValue)
-                    homeViewModel.updateMorpheBundleWithChangelogClear()
                     homeViewModel.checkForManagerUpdates()
-                    patchOptionsViewModel.refresh()
                 }
             },
             prefs = prefs
