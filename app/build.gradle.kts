@@ -182,7 +182,6 @@ android {
 
     buildTypes {
         debug {
-            isPseudoLocalesEnabled = true
             buildConfigField("long", "BUILD_ID", "${Random.nextLong()}L")
         }
 
@@ -271,12 +270,6 @@ android {
         compose = true
         aidl = true
         buildConfig = true
-    }
-
-    android {
-        androidResources {
-            generateLocaleConfig = true
-        }
     }
 
     externalNativeBuild {
