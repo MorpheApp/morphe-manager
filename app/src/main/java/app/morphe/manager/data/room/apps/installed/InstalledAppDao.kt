@@ -57,4 +57,13 @@ interface InstalledAppDao {
 
     @Delete
     suspend fun delete(installedApp: InstalledApp)
+
+    /**
+     * Returns all installed app records that share the same original package name
+     * but have a different current package name.
+     * Used to clean up stale entries when repatching with a different bundle
+     * that produces a different current package name (e.g. due to package renaming).
+     */
+    @Query("SELECT * FROM installed_app WHERE original_package_name = :originalPackageName AND current_package_name != :currentPackageName")
+    suspend fun getStaleEntries(originalPackageName: String, currentPackageName: String): List<InstalledApp>
 }
