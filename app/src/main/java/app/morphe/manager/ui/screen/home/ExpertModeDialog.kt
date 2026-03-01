@@ -63,7 +63,7 @@ fun ExpertModeDialog(
     onProceed: () -> Unit,
     allowIncompatible: Boolean = false
 ) {
-    var selectedPatchForOptions by remember { mutableStateOf<Triple<Int, PatchInfo, Boolean>?>(null) }
+    var selectedPatchForOptions by remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
     var searchVisible by remember { mutableStateOf(false) }
     var showMultipleSourcesWarning by remember { mutableStateOf(false) }
@@ -294,7 +294,7 @@ fun ExpertModeDialog(
                                 isEnabled = isEnabled,
                                 onToggle = { togglePatch(bundle.uid, patch.name) },
                                 onConfigureOptions = {
-                                    if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = Triple(bundle.uid, patch, bundle.uid == 0)
+                                    if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to patch
                                 },
                                 hasOptions = !patch.options.isNullOrEmpty()
                             )
@@ -415,7 +415,7 @@ fun ExpertModeDialog(
                                         isEnabled = isEnabled,
                                         onToggle = { togglePatch(bundle.uid, patch.name) },
                                         onConfigureOptions = {
-                                            if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = Triple(bundle.uid, patch, bundle.uid == 0)
+                                            if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to patch
                                         },
                                         hasOptions = !patch.options.isNullOrEmpty()
                                     )
@@ -456,10 +456,10 @@ fun ExpertModeDialog(
     }
 
     // Options dialog
-    selectedPatchForOptions?.let { (bundleUid, patch, isDefaultBundle) ->
+    selectedPatchForOptions?.let { (bundleUid, patch) ->
         PatchOptionsDialog(
             patch = patch,
-            isDefaultBundle = isDefaultBundle,
+            isDefaultBundle = bundleUid == 0,
             values = options[bundleUid]?.get(patch.name),
             onValueChange = { key, value ->
                 onOptionChange(bundleUid, patch.name, key, value)
