@@ -261,6 +261,9 @@ Biztosan folytatja?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Az alkalmazása lázas, és az egyetlen gyógyír rá a mégtöbb módosítás… 🩺🔔</string>
     <string name="patcher_message_20">Ostobaságok eltávolítása. Kérjük, maradjon készen… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Alkalmazás frissítése</string>
+    <string name="memory_usage">Memória használat</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Módosítások alkalmazása</string>
     <string name="failed_to_execute_patch">Nem sikerült alkalmazni: %s</string>
@@ -626,6 +629,7 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="details">Részletek</string>
     <string name="hide">Rejt</string>
     <string name="default_">Alapértelmezett</string>
+    <string name="logs">Naplók</string>
     <string name="installing_ellipsis">Telepítés…</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>

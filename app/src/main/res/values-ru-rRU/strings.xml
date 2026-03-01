@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">У вашего приложения жар, и единственное лекарство — больше патчей… 🩺🔔</string>
     <string name="patcher_message_20">Убираем ерунду. Пожалуйста, подождите… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Патчинг приложения</string>
+    <string name="memory_usage">Использование памяти</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Применение патчей</string>
     <string name="failed_to_execute_patch">Не удалось применить %s</string>
@@ -559,7 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_details_title">Детали исправления</string>
     <string name="settings_system_selected_patches_title">Выбранные патчи (%s)</string>
     <string name="settings_system_patch_options_title">Параметры патчей (%s)</string>
-    <string name="settings_system_no_patches_or_options">Нет сохраненных исправлений или опций</string>
+    <string name="settings_system_no_patches_or_options">Нет сохраненных патчей или параметров</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
@@ -626,6 +629,7 @@ morphe_header_custom_dark.png
     <string name="details">Детали</string>
     <string name="hide">Скрыть</string>
     <string name="default_">По умолчанию</string>
+    <string name="logs">Журналы</string>
     <string name="installing_ellipsis">Установка…</string>
     <string name="mounting_ellipsis">Монтаж…</string>
     <string name="unmounting_ellipsis">Размонтирование…</string>

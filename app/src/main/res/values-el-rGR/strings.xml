@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Η εφαρμογή σας έχει πυρετό, και η μόνη συνταγή είναι περισσότερες τροποποιήσεις... 🩺🔔</string>
     <string name="patcher_message_20">Αφαιρώ ανοησίες. Παρακαλούμε περιμένετε… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Τροποποίηση εφαρμογών</string>
+    <string name="memory_usage">Χρήση μνήμης</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Εφαρμογή επιδιορθώσεων</string>
     <string name="failed_to_execute_patch">Αποτυχία εφαρμογής %s</string>
@@ -624,6 +627,7 @@ morphe_header_custom_dark.png
     <string name="details">Λεπτομέρειες</string>
     <string name="hide">Απόκρυψη</string>
     <string name="default_">Προεπιλογή</string>
+    <string name="logs">Εγγραφές</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
     <string name="unmounting_ellipsis">Αποσύνιξη…</string>

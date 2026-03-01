@@ -261,6 +261,9 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
     <string name="patcher_message_20">Ag baint na amaidí. Fan le do thoil… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Tá paisteán déanta ag an app</string>
+    <string name="memory_usage">Úsáid an tseomra</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paistí á gcur i bhfeidhm</string>
     <string name="failed_to_execute_patch">Theip ar %s a chur i bhfeidhm</string>
@@ -624,6 +627,7 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="details">Sonraí</string>
     <string name="hide">Folaigh</string>
     <string name="default_">Réamhshocrú</string>
+    <string name="logs">Clár</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
     <string name="mounting_ellipsis">Ag ceangal…</string>
     <string name="unmounting_ellipsis">Ag dícheangal…</string>

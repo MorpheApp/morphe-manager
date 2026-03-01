@@ -261,6 +261,9 @@ Er du sikker på, at du vil fortsætte?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Din app har feber, og den eneste recept er flere patches… 🩺🔔</string>
     <string name="patcher_message_20">Fjerner vrøvl. Venligst vent… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Patcher app</string>
+    <string name="memory_usage">Mindebruger</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Anvender patches</string>
     <string name="failed_to_execute_patch">Kunne ikke anvende %s</string>
@@ -626,6 +629,7 @@ Bildeformateringen må være som følger:
     <string name="details">Detaljer</string>
     <string name="hide">Skjul</string>
     <string name="default_">Standard</string>
+    <string name="logs">Logfiler</string>
     <string name="installing_ellipsis">Installerer…</string>
     <string name="mounting_ellipsis">Montering…</string>
     <string name="unmounting_ellipsis">Forkaster…</string>

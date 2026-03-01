@@ -261,6 +261,9 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tətbiqinizin hərarəti var və yeganə resept daha çox yamaqdır... 🩺🔔 </string>
     <string name="patcher_message_20">Lazımsız olanı silirəm. Zəhmət olmasa, gözləyin... 🗑️ </string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Tətbiqi yamaqlama</string>
+    <string name="memory_usage">Yaddaş istifadəsi</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Yamaqlar tətbiq olunur</string>
     <string name="failed_to_execute_patch">%s tətbiq etmək uğursuz oldu</string>
@@ -622,6 +625,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="details">Təfərrüatlar</string>
     <string name="hide">Gizlət</string>
     <string name="default_">İlkin</string>
+    <string name="logs">Jurnallar</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>

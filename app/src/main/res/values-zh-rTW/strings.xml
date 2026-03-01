@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">你的應用程式發燒了，唯一的處方是更多的修補… 🩺🔔</string>
     <string name="patcher_message_20">正在移除不必要的內容。請稍候… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">修補應用程式</string>
+    <string name="memory_usage">記憶體使用量</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">套用修補程式</string>
     <string name="failed_to_execute_patch">無法套用 %s</string>
@@ -328,7 +331,7 @@
     <string name="settings_advanced_updates_allow_metered_description">允許補丁源和管理工具更新在使用行動數據時進行下載</string>
     <string name="settings_advanced_updates_background_notifications">背景更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">定期在背景檢查更新並在可用時通知</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">即使應用程序關閉，也會收到新版本的即時推送通知</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">即使應用程式關閉，也能收到新版本的即時推送通知</string>
     <string name="notification_channel_manager_updates">管理工具更新</string>
     <string name="notification_channel_manager_updates_description">有關新的 Morphe 管理工具版本的通知</string>
     <string name="notification_channel_bundle_updates">修補來源更新</string>
@@ -624,6 +627,7 @@ Morphe 以開源為核心，仰賴社群的意見與貢獻來驅動未來的創�
     <string name="details">詳細資訊</string>
     <string name="hide">隱藏</string>
     <string name="default_">預設</string>
+    <string name="logs">日誌</string>
     <string name="installing_ellipsis">安裝中…</string>
     <string name="mounting_ellipsis">掛載中…</string>
     <string name="unmounting_ellipsis">正在解除掛載…</string>

@@ -259,6 +259,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Din app har feber, och det enda botemedlet är fler korrigeringar … 🩺🔔</string>
     <string name="patcher_message_20">Tar bort nonsens. Var god dröj … 🗑️</string>
+    <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Tillämpar korrigeringar</string>
     <string name="failed_to_execute_patch">Det gick inte att tillämpa %s</string>

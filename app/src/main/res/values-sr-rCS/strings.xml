@@ -261,6 +261,9 @@ Da li ste sigurni da želite nastaviti?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Vaša aplikacija ima temperaturu, a jedini lek je više zakrpa… 🩺🔔</string>
     <string name="patcher_message_20">Uklanjanje besmislica. Molimo pričekajte… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Uređivanje aplikacija</string>
+    <string name="memory_usage">Upotreba memorije</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Primena peča</string>
     <string name="failed_to_execute_patch">Došlo je do greške pri primeni %s</string>
@@ -588,6 +591,7 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="details">Detalji</string>
     <string name="hide">Sakrij</string>
     <string name="default_">Podrazumevana</string>
+    <string name="logs">Dnevnici</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Montiranje…</string>
     <string name="unmounting_ellipsis">Ponovo priključaj…</string>

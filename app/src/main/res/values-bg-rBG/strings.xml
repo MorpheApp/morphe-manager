@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Вашият апарат има температура, а единствената рецепта е повече патчи… 🩺🔔</string>
     <string name="patcher_message_20">Премахвам глупостите. Моля, изчакайте… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Патчване на приложението</string>
+    <string name="memory_usage">Използване на памет</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Error</string>
     <string name="failed_to_execute_patch">Неуспешно прилагане на %s</string>
@@ -626,6 +629,7 @@ morphe_header_custom_dark.png
     <string name="details">Детайли</string>
     <string name="hide">Скриване</string>
     <string name="default_">По подразбиране</string>
+    <string name="logs">Дневници</string>
     <string name="installing_ellipsis">Инсталиране…</string>
     <string name="mounting_ellipsis">Монтиране…</string>
     <string name="unmounting_ellipsis">Извличане…</string>

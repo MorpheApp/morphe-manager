@@ -259,6 +259,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">आपकी ऐप को एक बुखार है, और इसके लिए केवल एक मेडिकल रेफरेंस है... 🩺🔔</string>
     <string name="patcher_message_20">अनावश्यक को हटाया जा रहा है। कृपया प्रतीक्षा करें… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">एप्लिकेशन को पैच करना</string>
+    <string name="memory_usage">मेमोरी का उपयोग</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Applying patches</string>
     <string name="failed_to_execute_patch">Failed to execute %s</string>
@@ -618,6 +621,7 @@ morphe_header_custom_dark.png
     <string name="details">विवरण</string>
     <string name="hide">छुपायें</string>
     <string name="default_">डिफ़ॉल्ट</string>
+    <string name="logs">लॉग्स</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>
     <string name="mounting_ellipsis">माउंटिंग…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>

@@ -8,8 +8,8 @@
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
     <string name="home_app_hide_message">이 앱이 홈 화면에서 숨겨집니다. 나중에 목록 하단에 있는 \'%1$s\' 버튼을 사용하여 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
-    <string name="home_app_show_hidden">숨겨진 앱 보이기</string>
-    <string name="home_app_no_hidden">숨겨진 앱 없음</string>
+    <string name="home_app_show_hidden">숨겨진 앱 표시</string>
+    <string name="home_app_no_hidden">숨겨진 앱이 없습니다</string>
     <string name="home_app_hidden_apps_title">숨겨진 앱</string>
     <string name="home_app_hidden_apps_hint">앱을 탭하여 목록에 다시 표시할 수 있습니다</string>
     <string name="android_11_bug_dialog_title">Android 11 버그</string>
@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">앱에서 열이 좀 나네요, 유일한 처방은 더 많은 패치뿐입니다… 🩺🔔</string>
     <string name="patcher_message_20">잡소리를 삭제 중, 잠시만 기다려 주세요… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">앱 패치</string>
+    <string name="memory_usage">메모리 사용량</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">패치를 적용하는 중</string>
     <string name="failed_to_execute_patch">\'%s\'을 적용할 수 없습니다</string>
@@ -627,6 +630,7 @@ morphe_header_custom_dark.png
     <string name="details">세부 정보</string>
     <string name="hide">숨기기</string>
     <string name="default_">기본값</string>
+    <string name="logs">로그</string>
     <string name="installing_ellipsis">설치하는 중…</string>
     <string name="mounting_ellipsis">마운트하는 중…</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중…</string>
