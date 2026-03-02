@@ -1,3 +1,10 @@
+## app [1.10.2-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.10.1...v1.10.2-dev.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* Manager does not show updates if available ([#270](https://github.com/MorpheApp/morphe-manager/issues/270)) ([4e6f2af](https://github.com/MorpheApp/morphe-manager/commit/4e6f2afee34894c271903b6ea18a2b1a2cfe5ee1))
+
 ## app [1.10.1](https://github.com/MorpheApp/morphe-manager/compare/v1.10.0...v1.10.1) (2026-03-02)
 
 
