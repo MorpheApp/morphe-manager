@@ -33,8 +33,8 @@ import androidx.core.content.ContextCompat
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.manager.util.syncFcmTopics
+import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.manager.worker.UpdateCheckWorker
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -68,6 +68,7 @@ fun UpdatesSettingsItem(
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
     val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
+    val usePatchesPrereleases by prefs.usePatchesPrereleases.getAsState()
 
     // On GMS devices FCM handles all notification delivery.
     val hasGms = remember { isGmsAvailable(context) }
@@ -123,7 +124,17 @@ fun UpdatesSettingsItem(
 
     // Use manager prereleases toggle
     RichSettingsItem(
-        onClick = onManagerPrereleasesToggle,
+        onClick = {
+            val newValue = !useManagerPrereleases
+            scope.launch {
+                syncFcmTopics(
+                    notificationsEnabled = backgroundUpdateNotifications,
+                    useManagerPrereleases = newValue,
+                    usePatchesPrereleases = usePatchesPrereleases
+                )
+            }
+            onManagerPrereleasesToggle()
+        },
         showBorder = true,
         leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
         title = stringResource(R.string.settings_advanced_updates_use_prereleases),
