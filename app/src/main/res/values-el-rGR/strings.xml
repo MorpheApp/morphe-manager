@@ -151,7 +151,7 @@
     <string name="adaptive_icon_safe_zone_outer">Περιοχή μάσκας (может κοπεί)</string>
     <string name="adaptive_icon_created_success">Δημιουργήθηκε επιτυχώς το εικονίδιο προσαρμογής</string>
     <string name="adaptive_icon_creation_failed">Ατυχήθηκε η δημιουργία του εικονιδίου προσαρμογής</string>
-    <string name="adaptive_icon_folder_explanation">Επιλέξτε τον τόπο δημιουργίας της φακέλου \'morphe_branding/morphe_icons\' με τα δημιουργημένα αρχεία εικονιδίου</string>
+    <string name="adaptive_icon_folder_explanation">Επιλέξτε όπου να δημιουργήσετε την φάκελο \'%1$s/%2$s\' με τα δημιουργημένα αρχεία εικονίδων</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Δημιουργία προσαρμοσμένου κεφαλίδας</string>
     <string name="header_creator_instructions">Επιλέξτε εικόνες για φωτεινές και σκοτεινές θεματικές, στη συνέχεια προσαρμόστε με κινήσεις pinch-to-zoom</string>
@@ -160,7 +160,7 @@
     <string name="header_creator_no_image">Δεν επιλέχθηκε εικόνα</string>
     <string name="header_creator_success">Δημιουργήθηκε επιτυχώς η κεφαλίδα</string>
     <string name="header_creator_failed">Ατυχήθηκε η δημιουργία της κεφαλίδας</string>
-    <string name="header_creator_folder_explanation">Επιλέξτε τον τόπο δημιουργίας της φακέλου \'morphe_branding/morphe_header\' με τα δημιουργημένα αρχεία κεφαλίδας</string>
+    <string name="header_creator_folder_explanation">Επιλέξτε όπου να δημιουργήσετε την φάκελο \'%1$s/%2$s\' με τα δημιουργημένα αρχεία κεφαλίδας</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Είστε βέβαιοι ότι θέλετε να αποσυνήτε αυτή την εφαρμογή;</string>
     <string name="home_app_info_remove_app_warning">Θα διαγραφεί οριστικά:</string>

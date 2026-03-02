@@ -151,7 +151,7 @@
     <string name="adaptive_icon_safe_zone_outer">منطقة القناع (قد تكون مقصوصة)</string>
     <string name="adaptive_icon_created_success">تم إنشاء أيقونة تكيفية بنجاح</string>
     <string name="adaptive_icon_creation_failed">فشل إنشاء أيقونة تكيفية</string>
-    <string name="adaptive_icon_folder_explanation">حدد مكان إنشاء مجلد \'morphe_branding/morphe_icons\' مع ملفات الأيقونة المنشأة</string>
+    <string name="adaptive_icon_folder_explanation">حدد مكان إنشاء مجلد \'%1$s/%2$s\' مع ملفات الأيقونة المنشأة</string>
     <!-- Header Creator -->
     <string name="header_creator_create">إنشاء علامة شعار مخصصة</string>
     <string name="header_creator_instructions">اختر صورًا للمظاهر الفاتحة والداكنة، ثم اضبطها باستخدام إيماءات التكبير والتصغير.</string>
@@ -160,7 +160,7 @@
     <string name="header_creator_no_image">لم يتم تحديد أي صورة</string>
     <string name="header_creator_success">تم إنشاء علامة الشعار بنجاح</string>
     <string name="header_creator_failed">تعذر إنشاء علامة الشعار</string>
-    <string name="header_creator_folder_explanation">حدد مكان إنشاء مجلد \'morphe_branding/morphe_header\' مع ملفات علامة الشعار المنشأة</string>
+    <string name="header_creator_folder_explanation">حدد مكان إنشاء مجلد \'%1$s/%2$s\' مع ملفات علامة الشعار المنشأة</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">هل تريد بالتأكيد حذف هذا التطبيق؟</string>
     <string name="home_app_info_remove_app_warning">هذا سيحذف بشكل دائم:</string>

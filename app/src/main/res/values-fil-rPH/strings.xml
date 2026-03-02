@@ -142,7 +142,6 @@ Nais mo bang magpatuloy?"</string>
     <string name="adaptive_icon_safe_zone_outer">Nakatakip na lugar (maaaring nakabit)</string>
     <string name="adaptive_icon_created_success">Matagumpay na nalikha ang naangkop na icon</string>
     <string name="adaptive_icon_creation_failed">Nabigong maglikha ng inaangkop na icon</string>
-    <string name="adaptive_icon_folder_explanation">Piliin kung saan lilikha ang \'morphe_branding/morphe_icons\' na folder na may nabuong mga icon file</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Gumawa ng isang pasadyang header</string>
     <string name="header_creator_instructions">Piliin ang mga larawan para sa maliwanag at madilim na tema, pagkatapos i-adjust gamit ang pinch-to-zoom na mga gesture</string>
@@ -151,7 +150,6 @@ Nais mo bang magpatuloy?"</string>
     <string name="header_creator_no_image">Walang napiling larawan</string>
     <string name="header_creator_success">Matagumpay na nilikha ang header</string>
     <string name="header_creator_failed">Nabigong maglikha ng header</string>
-    <string name="header_creator_folder_explanation">Piliin kung saan lilikha ang \'morphe_branding/morphe_header\' na folder na may nabuong na mga header file</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Nais mo bang burahin ang aplikasyong ito? </string>
     <string name="home_app_info_remove_app_warning">Permanenteng buburahin ang:</string>

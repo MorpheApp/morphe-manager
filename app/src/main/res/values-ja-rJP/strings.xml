@@ -151,16 +151,16 @@
     <string name="adaptive_icon_safe_zone_outer">マスクゾーン（切り詰められる可能性あり）</string>
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
-    <string name="adaptive_icon_folder_explanation">生成されたアイコン ファイルを格納する「morphe_branding/morphe_icons」フォルダの作成先を選択します</string>
+    <string name="adaptive_icon_folder_explanation">生成したアイコン ファイルを格納する「%1$s/%2$s」フォルダを作成する場所を選択します</string>
     <!-- Header Creator -->
     <string name="header_creator_create">カスタム ヘッダーを作成</string>
     <string name="header_creator_instructions">ライトテーマとダークテーマの画像を選択し、ピンチズーム ジェスチャーで調整します</string>
-    <string name="header_creator_light_theme">明るいテーマのヘッダー</string>
-    <string name="header_creator_dark_theme">暗いテーマのヘッダー</string>
+    <string name="header_creator_light_theme">ライトテーマのヘッダー</string>
+    <string name="header_creator_dark_theme">ダークテーマのヘッダー</string>
     <string name="header_creator_no_image">画像が選択されていません</string>
     <string name="header_creator_success">ヘッダーの作成に成功しました</string>
     <string name="header_creator_failed">ヘッダーの作成に失敗しました</string>
-    <string name="header_creator_folder_explanation">生成されたヘッダー ファイルを格納する「morphe_branding/morphe_header」フォルダの作成先を選択します</string>
+    <string name="header_creator_folder_explanation">生成したヘッダー ファイルを格納する「%1$s/%2$s」フォルダを作成する場所を選択します</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">このアプリをアンインストールしますか？</string>
     <string name="home_app_info_remove_app_warning">削除します：</string>
@@ -357,9 +357,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">エキスパート設定</string>
     <string name="settings_advanced_expert_mode">エキスパートモード</string>
-    <string name="settings_advanced_expert_mode_description">エキスパットモードの設定を有効にし、カスタマイズオプションを有効にします</string>
-    <string name="settings_advanced_expert_mode_dialog_title">エキスパットモードを有効にしますか？</string>
-    <string name="settings_advanced_expert_mode_dialog_message">エキスパットモードはパッチの適用方法に対する制御を提供しますが、エキスパットモードの設定を誤って構成すると、アプリが機能しない可能性があります</string>
+    <string name="settings_advanced_expert_mode_description">Morphe のパッチ処理に関する高度な設定およびカスタマイズのためのオプションを有効にします</string>
+    <string name="settings_advanced_expert_mode_dialog_title">エキスパート モードを有効にしますか？</string>
+    <string name="settings_advanced_expert_mode_dialog_message">エキスパート モードでは、パッチの適用方法をより細かく制御できますが、設定を誤るとアプリが正常に動作しなくなる可能性があります</string>
     <string name="settings_advanced_strip_unused_libs">未使用のネイティブライブラリの削除</string>
     <string name="settings_advanced_strip_unused_libs_description">パッチ適用済みアプリから、非対応の CPU アーキテクチャ向けネイティブ ライブラリを削除します</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -373,10 +373,10 @@
     <string name="settings_advanced_github_pat_export_include_supporting">この PAT をマネージャー設定のエクスポートに追加します</string>
     <string name="settings_advanced_github_pat_export_warning">PAT を共有しないでください。設定のエクスポートに含める場合、PAT が含まれるそのファイルも公開しないようにしてください</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
-    <string name="settings_advanced_patch_options">パッチ設定</string>
-    <string name="settings_advanced_patch_options_youtube_description">テーマ、ブランディング、ヘッダー、ショートの設定</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">テーマとブランディングの設定</string>
-    <string name="settings_advanced_patch_options_restart_message">パッチ設定の変更は、アプリの再パッチ後に反映されます</string>
+    <string name="settings_advanced_patch_options">パッチ オプション</string>
+    <string name="settings_advanced_patch_options_youtube_description">テーマ、ブランディング、ヘッダー、ショートのオプション</string>
+    <string name="settings_advanced_patch_options_youtube_music_description">テーマとブランディングのオプション</string>
+    <string name="settings_advanced_patch_options_restart_message">パッチ オプションの変更を反映するには、アプリの再パッチが必要です</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">エキスパートモードでは、パッチ適用の過程でパッチオプションを設定できます</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">アプリのテーマカラー</string>
@@ -384,9 +384,9 @@
     <string name="settings_advanced_patch_options_dark_theme_color">ダークテーマのバックグラウンドカラー</string>
     <string name="settings_advanced_patch_options_light_theme_color">ライトテーマのバックグラウンドカラー</string>
     <string name="settings_advanced_patch_options_theme_color_description">16 進数のカラーコード (#RRGGBB) またはリソース参照で色を指定します</string>
-    <string name="settings_advanced_patch_options_loading">パッチ設定を読み込み中…</string>
+    <string name="settings_advanced_patch_options_loading">パッチ オプションを読み込み中…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">パッチソースの更新を待機します</string>
-    <string name="settings_advanced_patch_options_load_error">パッチ設定の読み込みに失敗しました</string>
+    <string name="settings_advanced_patch_options_load_error">パッチ オプションの読み込みに失敗しました</string>
     <string name="settings_advanced_patch_options_no_available">このパッチに利用できるオプションはありません</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">カスタム ブランディング</string>

@@ -19,7 +19,7 @@
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
     <string name="home_update_error">Uppdateringen misslyckades</string>
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
-    <string name="home_update_skipped_metered">Uppdateringar hoppades över</string>
+    <string name="home_update_skipped_metered">Uppdateringar hoppas över</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
     <string name="home_update_progress_format">%1$s har bearbetats</string>
@@ -149,7 +149,6 @@
     <string name="adaptive_icon_safe_zone_outer">Maskzon (kan beskäras)</string>
     <string name="adaptive_icon_created_success">Adaptiv ikon har skapats</string>
     <string name="adaptive_icon_creation_failed">Det gick inte att skapa adaptiv ikon</string>
-    <string name="adaptive_icon_folder_explanation">Välj var mappen \"morphe_branding/morphe_icons\" ska skapas med genererade ikonfiler</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Skapa anpassat sidhuvud</string>
     <string name="header_creator_instructions">Välj bilder för ljust och mörkt tema, och justera sedan genom att nypa</string>
@@ -158,7 +157,6 @@
     <string name="header_creator_no_image">Ingen bild har valts</string>
     <string name="header_creator_success">Sidhuvud har skapats</string>
     <string name="header_creator_failed">Det gick inte att skapa sidhuvud</string>
-    <string name="header_creator_folder_explanation">Välj var mappen \"morphe_branding/morphe_header\" ska skapas med genererade sidhuvudfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
     <string name="home_app_info_remove_app_warning">Det här tar bort följande permanent:</string>

@@ -151,7 +151,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="adaptive_icon_safe_zone_outer">Maskenzone (kann abgeschnitten werden)</string>
     <string name="adaptive_icon_created_success">Adaptives Icon erfolgreich erstellt</string>
     <string name="adaptive_icon_creation_failed">Fehler beim Erstellen des adaptiven Icons</string>
-    <string name="adaptive_icon_folder_explanation">Wählen Sie, wo der Ordner \'morphe_branding/morphe_icons\' mit den generierten Icon-Dateien erstellt werden soll</string>
+    <string name="adaptive_icon_folder_explanation">W√§hlen Sie, wo Sie den Ordner \'%1$s/%2$s\' mit generierten Icon-Dateien erstellen m√∂chten</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Benutzerdefinierten Header erstellen</string>
     <string name="header_creator_instructions">Wählen Sie Bilder für helle und dunkle Themen aus und passen Sie sie mit Pinch-to-Zoom-Gesten an</string>
@@ -160,7 +160,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="header_creator_no_image">Kein Bild ausgewählt</string>
     <string name="header_creator_success">Header erfolgreich erstellt</string>
     <string name="header_creator_failed">Fehler beim Erstellen des Headers</string>
-    <string name="header_creator_folder_explanation">Wählen Sie, wo der Ordner \'morphe_branding/morphe_header\' mit den generierten Header-Dateien erstellt werden soll</string>
+    <string name="header_creator_folder_explanation">W√§hlen Sie, wo Sie den Ordner \'%1$s/%2$s\' mit generierten Header-Dateien erstellen m√∂chten</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sind Sie sicher, dass Sie diese App deinstallieren möchten?</string>
     <string name="home_app_info_remove_app_warning">Dies löscht dauerhaft:</string>

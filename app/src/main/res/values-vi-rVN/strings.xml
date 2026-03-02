@@ -151,7 +151,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="adaptive_icon_safe_zone_outer">Vùng mặt nạ (có thể bị cắt)</string>
     <string name="adaptive_icon_created_success">Đã tạo biểu tượng thích ứng thành công</string>
     <string name="adaptive_icon_creation_failed">Không thể tạo biểu tượng thích ứng</string>
-    <string name="adaptive_icon_folder_explanation">Chọn vị trí để tạo thư mục \'morphe_branding/morphe_icons\' với các tệp biểu tượng đã tạo</string>
+    <string name="adaptive_icon_folder_explanation">Chọn vị trí để tạo thư mục \'%1$s/%2$s\' chứa các tệp biểu tượng đã tạo</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Tạo logo tùy chỉnh</string>
     <string name="header_creator_instructions">Chọn hình ảnh cho các chủ đề sáng và tối, sau đó điều chỉnh bằng cách chụm để thu phóng</string>
@@ -160,7 +160,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="header_creator_no_image">Không có hình ảnh nào được chọn</string>
     <string name="header_creator_success">Đã tạo logo thành công</string>
     <string name="header_creator_failed">Không thể tạo logo</string>
-    <string name="header_creator_folder_explanation">Chọn vị trí để tạo thư mục \'morphe_branding/morphe_header\' với các tệp logo đã tạo</string>
+    <string name="header_creator_folder_explanation">Chọn vị trí để tạo thư mục \'%1$s/%2$s\' chứa các tệp logo đã tạo</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bạn có chắc muốn gỡ ứng dụng này không?</string>
     <string name="home_app_info_remove_app_warning">Thao tác này sẽ xóa vĩnh viễn:</string>

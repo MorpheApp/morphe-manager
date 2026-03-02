@@ -151,7 +151,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="adaptive_icon_safe_zone_outer">Örtük yeri (kəsilmiş ola bilər)</string>
     <string name="adaptive_icon_created_success">Uyğun simvol uğurla yaradıldı</string>
     <string name="adaptive_icon_creation_failed">Uyğun simvol yaratmaq olmadı</string>
-    <string name="adaptive_icon_folder_explanation">Yaradılmış simvol faylları ilə \'morphe_branding/morphe_icons\' qovluğunun harada yaradılacağın seç</string>
+    <string name="adaptive_icon_folder_explanation">Yaradılan simvol faylları ilə \'%1$s/%2$s\' qovluğunun harada yaradılacağını seç</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Xüsusi sərlövhə yarat</string>
     <string name="header_creator_instructions">İşıqlı və qaranlıq koloritlər üçün şəkillər seç, sonra böyütmək üçün çimdikləmə jestləri ilə nizamla</string>
@@ -160,7 +160,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="header_creator_no_image">Seçilən şəkil yoxdur</string>
     <string name="header_creator_success">Sərlövhə uğurla yaradıldı</string>
     <string name="header_creator_failed">Sərlövhə yaratmaq olmadı</string>
-    <string name="header_creator_folder_explanation">Yaradılan sərlövhə faylları ilə \'morphe_branding/morphe_header\' qovluğunun harada yaradılacağını seç</string>
+    <string name="header_creator_folder_explanation">Yaradılan sərlövhə faylları ilə \'%1$s/%2$s\' qovluğunun harada yaradılacağını seç</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu tətbiqi silmək istədiyinizə əminsiniz?</string>
     <string name="home_app_info_remove_app_warning">Bu, həmişəlik silinəcək:</string>
