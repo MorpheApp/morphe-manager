@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.domain.manager
 
 import android.content.Context
@@ -116,9 +121,9 @@ The image dimensions must be as follows:
         ""
     )
 
-    // Change Header - Custom Header Path (YouTube only)
-    val customHeaderPath = stringPreference(
-        "${KnownApp.YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}",
+    // Change Header - Custom Header Path
+    fun customHeaderPath(packageName: String) = stringPreference(
+        "${packageName}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}",
         ""
     )
 
@@ -148,7 +153,7 @@ The image dimensions must be as follows:
                 .takeIf { it.isNotBlank() && it != DEFAULT_DARK_THEME }
                 ?.let { themeOptions[KEY_DARK_THEME_COLOR] = it }
 
-            // Light theme — YouTube only
+            // Light theme option (YouTube only)
             if (packageName == KnownApp.YOUTUBE) {
                 lightThemeColor(packageName).get()
                     .takeIf { it.isNotBlank() && it != DEFAULT_LIGHT_THEME }
@@ -166,12 +171,13 @@ The image dimensions must be as follows:
                 ?.let { brandingOptions[KEY_CUSTOM_ICON] = it }
             if (brandingOptions.isNotEmpty()) bundleOptions[PATCH_CUSTOM_BRANDING] = brandingOptions
 
-            // Change Header + Hide Shorts — YouTube only
-            if (packageName == KnownApp.YOUTUBE) {
-                customHeaderPath.get()
-                    .takeIf { it.isNotBlank() }
-                    ?.let { bundleOptions[PATCH_CHANGE_HEADER] = mutableMapOf(KEY_CUSTOM_HEADER to it) }
+            // Change Header patch options
+            customHeaderPath(packageName).get()
+                .takeIf { it.isNotBlank() }
+                ?.let { bundleOptions[PATCH_CHANGE_HEADER] = mutableMapOf(KEY_CUSTOM_HEADER to it) }
 
+            // Hide Shorts patch options (YouTube only)
+            if (packageName == KnownApp.YOUTUBE) {
                 val shortsOptions = mutableMapOf<String, Any?>()
                 if (hideShortsAppShortcut.get()) shortsOptions[KEY_HIDE_SHORTS_APP_SHORTCUT] = true
                 if (hideShortsWidget.get()) shortsOptions[KEY_HIDE_SHORTS_WIDGET] = true

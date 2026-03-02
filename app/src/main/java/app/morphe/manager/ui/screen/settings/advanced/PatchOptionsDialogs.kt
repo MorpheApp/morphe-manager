@@ -416,7 +416,7 @@ fun CustomHeaderDialog(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
+    var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath(packageName).getBlocking()) }
 
     // State for header creator dialog
     var showHeaderCreator by remember { mutableStateOf(false) }
@@ -441,7 +441,7 @@ fun CustomHeaderDialog(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = {
                     scope.launch {
-                        patchOptionsPrefs.customHeaderPath.update(headerPath)
+                        patchOptionsPrefs.customHeaderPath(packageName).update(headerPath)
                         onDismiss()
                     }
                 },
