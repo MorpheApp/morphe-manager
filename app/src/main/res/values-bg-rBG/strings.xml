@@ -151,7 +151,7 @@
     <string name="adaptive_icon_safe_zone_outer">Маска зона (може да бъде отрязана)</string>
     <string name="adaptive_icon_created_success">Адаптивен иконо създаден успешно</string>
     <string name="adaptive_icon_creation_failed">Неуспешно създаване на адаптивен иконо</string>
-    <string name="adaptive_icon_folder_explanation">Избери къде да се създаде папката \'morphe_branding/morphe_icons\' с генерираните файлове на иконо</string>
+    <string name="adaptive_icon_folder_explanation">Избери къде да създадеш папката \'%1$s/%2$s\' с генерирани иконки</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Създай кастомен хедър</string>
     <string name="header_creator_instructions">Избери изображения за светли и тъмни теми, след това настрой с жестове за сгъване с два пръста</string>
@@ -160,7 +160,7 @@
     <string name="header_creator_no_image">Няма избрано изображение</string>
     <string name="header_creator_success">Заглавието е създадено успешно</string>
     <string name="header_creator_failed">Неуспешно създаване на заглавие</string>
-    <string name="header_creator_folder_explanation">Избери къде да се създаде папката \'morphe_branding/morphe_header\' с генерираните файлове на заглавието</string>
+    <string name="header_creator_folder_explanation">Избери къде да създадеш папката \'%1$s/%2$s\' с генерирани заглавни файлове</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Сигурни ли сте, че искате да деинсталирате това приложение?</string>
     <string name="home_app_info_remove_app_warning">Това ще изтрие завинаги:</string>

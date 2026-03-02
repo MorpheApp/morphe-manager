@@ -151,7 +151,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="adaptive_icon_safe_zone_outer">Zona tertutup (mungkin dipotong)</string>
     <string name="adaptive_icon_created_success">Ikon adaptif berhasil dibuat</string>
     <string name="adaptive_icon_creation_failed">Gagal membuat ikon adaptif</string>
-    <string name="adaptive_icon_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_icons\' dengan berkas ikon yang sudah dibuat</string>
+    <string name="adaptive_icon_folder_explanation">Pilih lokasi untuk membuat folder \'%1$s/%2$s\' dengan berkas ikon yang sudah dibuat</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Buat header khusus</string>
     <string name="header_creator_instructions">Pilih gambar untuk tema terang dan gelap, lalu sesuaikan dengan gerakan mencubit untuk memperbesar</string>
@@ -160,7 +160,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="header_creator_no_image">Tidak ada gambar yang dipilih</string>
     <string name="header_creator_success">Header berhasil dibuat</string>
     <string name="header_creator_failed">Gagal membuat header</string>
-    <string name="header_creator_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_header\' dengan berkas header yang sudah dibuat</string>
+    <string name="header_creator_folder_explanation">Pilih lokasi untuk membuat folder \'%1$s/%2$s\' dengan berkas header yang sudah dibuat</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Apakah Anda yakin ingin mencopot pemasangan aplikasi ini?</string>
     <string name="home_app_info_remove_app_warning">Ini akan menghapus secara permanen:</string>

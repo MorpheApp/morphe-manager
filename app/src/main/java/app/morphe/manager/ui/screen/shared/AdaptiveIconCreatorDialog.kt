@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import android.annotation.SuppressLint
@@ -52,7 +57,13 @@ import kotlin.math.abs
 private object AdaptiveIconConfig {
     // Folder structure
     const val BRANDING_FOLDER_NAME = "morphe_branding"
-    const val ICONS_FOLDER_NAME = "morphe_icons"
+    const val YOUTUBE_ICONS_FOLDER_NAME = "morphe_icons_youtube"
+    const val YTM_ICONS_FOLDER_NAME = "morphe_icons_music"
+
+    fun iconFolderName(packageName: String) = when (packageName) {
+        KnownApp.YOUTUBE_MUSIC -> YTM_ICONS_FOLDER_NAME
+        else -> YOUTUBE_ICONS_FOLDER_NAME
+    }
 
     // File names
     const val BACKGROUND_FILE_NAME = "morphe_adaptive_background_custom.png"
@@ -102,6 +113,7 @@ private object AdaptiveIconConfig {
  */
 @Composable
 fun AdaptiveIconCreatorDialog(
+    packageName: String,
     onDismiss: () -> Unit,
     onIconCreated: (String) -> Unit
 ) {
@@ -159,6 +171,7 @@ fun AdaptiveIconCreatorDialog(
                     val success = createAdaptiveIcons(
                         context = context,
                         baseUri = it,
+                        packageName = packageName,
                         foregroundBitmap = foregroundBitmap!!,
                         backgroundColor = backgroundColor,
                         scale = scale,
@@ -200,7 +213,11 @@ fun AdaptiveIconCreatorDialog(
                     exit = fadeOut() + shrinkVertically()
                 ) {
                     InfoBadge(
-                        text = stringResource(R.string.adaptive_icon_folder_explanation),
+                        text = stringResource(
+                            R.string.adaptive_icon_folder_explanation,
+                            AdaptiveIconConfig.BRANDING_FOLDER_NAME,
+                            AdaptiveIconConfig.iconFolderName(packageName)
+                        ),
                         style = InfoBadgeStyle.Primary,
                         icon = Icons.Outlined.Info
                     )
@@ -580,6 +597,7 @@ private fun SafeZoneLegendItem(
 private suspend fun createAdaptiveIcons(
     context: Context,
     baseUri: Uri,
+    packageName: String,
     foregroundBitmap: Bitmap,
     backgroundColor: String,
     scale: Float,
@@ -591,7 +609,7 @@ private suspend fun createAdaptiveIcons(
         val basePath = baseUri.toFilePath()
         val baseDir = File(basePath)
 
-        // Create directory structure: morphe_branding/morphe_icons
+        // Create directory structure: morphe_branding/morphe_icons_youtube or morphe_icons_music
         val brandingDir = File(baseDir, AdaptiveIconConfig.BRANDING_FOLDER_NAME)
         if (!brandingDir.exists()) brandingDir.mkdirs()
 
@@ -601,7 +619,7 @@ private suspend fun createAdaptiveIcons(
             nomediaFile.createNewFile()
         }
 
-        val iconsDir = File(brandingDir, AdaptiveIconConfig.ICONS_FOLDER_NAME)
+        val iconsDir = File(brandingDir, AdaptiveIconConfig.iconFolderName(packageName))
         if (!iconsDir.exists()) iconsDir.mkdirs()
 
         // Get preview density for offset calculations

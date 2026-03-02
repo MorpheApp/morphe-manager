@@ -150,7 +150,7 @@
     <string name="adaptive_icon_safe_zone_outer">मास्क ज़ोन (क्लिप हो सकता है)</string>
     <string name="adaptive_icon_created_success">एडैप्टिव आइकॉन सफलतापूर्वक बनाया गया</string>
     <string name="adaptive_icon_creation_failed">एडैप्टिव आइकॉन को बनाना विफल रहा</string>
-    <string name="adaptive_icon_folder_explanation">जेनरेटेड आइकॉन फाइलों के साथ \'मorphe_branding/morphe_icons\' फोल्डर को कहाँ बनाएं</string>
+    <string name="adaptive_icon_folder_explanation">चुनें कि Where to create \'%1$s/%2$s\' फोल्डर with generated icon files</string>
     <!-- Header Creator -->
     <string name="header_creator_create">कस्टम हेडर बनाएं</string>
     <string name="header_creator_instructions">लाइट और डार्क थीम के लिए छवियां चुनें, फिर पिन्च-टू-ज़ूम गेस्टर से अदजस्ट करें</string>
@@ -159,7 +159,7 @@
     <string name="header_creator_no_image">कोई छवि चुनी गई नहीं</string>
     <string name="header_creator_success">हेडर सफलतापूर्वक बनाया गया</string>
     <string name="header_creator_failed">हेडर को बनाना विफल रहा</string>
-    <string name="header_creator_folder_explanation">जेनरेटेड हेडर फाइलों के साथ \'मorphe_branding/morphe_header\' फोल्डर को कहाँ बनाएं</string>
+    <string name="header_creator_folder_explanation">चुनें कि Where to create \'%1$s/%2$s\' फोल्डर with generated header files</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">क्या आप वाकई तौर पर इस ऐप को अनइंस्टॉल करना चाहते हैं?</string>
     <string name="home_app_info_remove_app_warning">यह स्थायी रूप से मिटाएगा:</string>

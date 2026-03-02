@@ -1,3 +1,10 @@
+# app [1.10.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0...v1.10.0-dev.1) (2026-03-01)
+
+
+### Features
+
+* Support YT Music change header option ([#264](https://github.com/MorpheApp/morphe-manager/issues/264)) ([3d11e21](https://github.com/MorpheApp/morphe-manager/commit/3d11e21e37ee225750d43204b8876d598d764f63))
+
 # app [1.9.0](https://github.com/MorpheApp/morphe-manager/compare/v1.8.0...v1.9.0) (2026-03-01)
 
 

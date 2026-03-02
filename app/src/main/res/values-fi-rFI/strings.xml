@@ -151,7 +151,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="adaptive_icon_safe_zone_outer">Maskin alue (saattaa leikata)</string>
     <string name="adaptive_icon_created_success">Adaptiivinen kuvake luotu onnistuneesti</string>
     <string name="adaptive_icon_creation_failed">Ei onnistu luoda adaptiivista kuvaetta</string>
-    <string name="adaptive_icon_folder_explanation">Valitse missä luoda \'morphe_branding/morphe_icons\' kansio luotujen kuvakkeiden kanssa</string>
+    <string name="adaptive_icon_folder_explanation">Valitse, missää luoda \'%1$s/%2$s\' kansio generoiduilla kuvakuvitiedostoilla</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Luo mukautettu otsikko</string>
     <string name="header_creator_instructions">Valitse kuvat valoiselle ja tummalle teemalle, sitten säädä pinch-to-zoom-puhkein</string>
@@ -160,7 +160,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="header_creator_no_image">Ei kuvaa valittu</string>
     <string name="header_creator_success">Otsikko luotu onnistuneesti</string>
     <string name="header_creator_failed">Ei onnistu luoda otsikkoa</string>
-    <string name="header_creator_folder_explanation">Valitse missä luoda \'morphe_branding/morphe_header\' kansio luotujen otsikoiden kanssa</string>
+    <string name="header_creator_folder_explanation">Valitse, missää luoda \'%1$s/%2$s\' kansiota luotavaa päätiedostoa sisältäviä tiedostoja</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Oletko varmaasi poistaa tätä sovellusta? Tätä ei voi peruuttaa.</string>
     <string name="home_app_info_remove_app_warning">Tämä poistaa pysyvästi:</string>

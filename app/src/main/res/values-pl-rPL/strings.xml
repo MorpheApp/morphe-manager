@@ -151,7 +151,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="adaptive_icon_safe_zone_outer">Strefa maskowania (może być przycięta)</string>
     <string name="adaptive_icon_created_success">Ikona adaptacyjna została utworzona pomyślnie</string>
     <string name="adaptive_icon_creation_failed">Nie udało się utworzyć ikony adaptacyjnej</string>
-    <string name="adaptive_icon_folder_explanation">Wybierz miejsce utworzenia folderu \"morphe_branding/morphe_icons\" z utworzonymi plikami ikon</string>
+    <string name="adaptive_icon_folder_explanation">Wybierz miejsce docelowe dla folderu \"%1$s/%2$s\" z wygenerowanymi plikami ikon</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Utwórz własny nagłówek</string>
     <string name="header_creator_instructions">Wybierz obrazy dla jasnego i ciemnego motywu, a następnie dostosuj je za pomocą gestów uszczypnięcia</string>
@@ -160,7 +160,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="header_creator_no_image">Nie wybrano żadnego obrazu</string>
     <string name="header_creator_success">Nagłówek utworzony pomyślnie</string>
     <string name="header_creator_failed">Nie udało się utworzyć nagłówka</string>
-    <string name="header_creator_folder_explanation">Wybierz miejsce utworzenia folderu \"morphe_branding/morphe_header\" z utworzonymi plikami nagłówka</string>
+    <string name="header_creator_folder_explanation">Wybierz miejsce docelowe dla folderu \"%1$s/%2$s\" z wygenerowanymi plikami nagłówków</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Czy na pewno chcesz odinstalować tę aplikację?</string>
     <string name="home_app_info_remove_app_warning">To trwale usunie:</string>

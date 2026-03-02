@@ -151,7 +151,7 @@
     <string name="adaptive_icon_safe_zone_outer">遮罩区域（可能会被剪切）</string>
     <string name="adaptive_icon_created_success">适配图标创建成功</string>
     <string name="adaptive_icon_creation_failed">无法创建适配图标</string>
-    <string name="adaptive_icon_folder_explanation">选择创建\'morphe_branding/morphe_icons\'文件夹的位置，其中包含生成的图标文件</string>
+    <string name="adaptive_icon_folder_explanation">选择创建包含生成的图标文件的 \'%1$s/%2$s\' 文件夹的位置</string>
     <!-- Header Creator -->
     <string name="header_creator_create">创建自定义标头</string>
     <string name="header_creator_instructions">选择轻、暗两种主题的图像，然后使用捏合手势进行调整</string>
@@ -160,7 +160,7 @@
     <string name="header_creator_no_image">未选择任何图像</string>
     <string name="header_creator_success">标题创建成功</string>
     <string name="header_creator_failed">无法创建标题</string>
-    <string name="header_creator_folder_explanation">选择创建\'morphe_branding/morphe_header\'文件夹的位置，其中包含生成的标题文件</string>
+    <string name="header_creator_folder_explanation">选择创建包含生成的头文件的 \'%1$s/%2$s\' 文件夹的位置</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">是否要卸载此应用？</string>
     <string name="home_app_info_remove_app_warning">这将永久删除：</string>

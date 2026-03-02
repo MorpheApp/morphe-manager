@@ -151,7 +151,7 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="adaptive_icon_safe_zone_outer">Crios maisc (féadfar é a bhearradh)</string>
     <string name="adaptive_icon_created_success">Cruthaíodh deilbhín oiriúnaitheach go rathúil</string>
     <string name="adaptive_icon_creation_failed">Theip ar dheilbhín oiriúnaitheach a chruthú</string>
-    <string name="adaptive_icon_folder_explanation">Roghnaigh cá háit le fillteán \'morphe_branding/morphe_icons\' a chruthú leis na comhaid deilbhín a ghintear</string>
+    <string name="adaptive_icon_folder_explanation">Roghnaigh cá háit le fillteán \'%1$s/%2$s\' a chruthú leis na comhaid deilbhín a ghintear</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Cruthaigh ceanntásc saincheaptha</string>
     <string name="header_creator_instructions">Roghnaigh íomhánna le haghaidh téamaí geala agus dorcha, agus ansin coigeartaigh iad le gothaí pinch-to-súmáil</string>
@@ -160,7 +160,7 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="header_creator_no_image">Níl aon íomhá roghnaithe</string>
     <string name="header_creator_success">Cruthaíodh ceanntásc go rathúil</string>
     <string name="header_creator_failed">Theip ar cheanntásc a chruthú</string>
-    <string name="header_creator_folder_explanation">Roghnaigh cá háit a thugann \'morphe_branding/morphe_header\' uimhir íomhánna tairbheacha</string>
+    <string name="header_creator_folder_explanation">Roghnaigh cá háit le fillteán \'%1$s/%2$s\' a chruthú leis na uimhreacha tairbheacha a ghintear</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">An bhfuil tú cinnte gur mian leat an aip seo a dhíshuiteáil?</string>
     <string name="home_app_info_remove_app_warning">Scriosfaidh sé seo go buan:</string>
@@ -262,8 +262,8 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
     <string name="patcher_message_20">Ag baint na amaidí. Fan le do thoil… 🗑️</string>
     <!-- Expert patcher Screen -->
-    <string name="patching_app">Tá paisteán déanta ag an app</string>
-    <string name="memory_usage">Úsáid an tseomra</string>
+    <string name="patching_app">Aip paisteála</string>
+    <string name="memory_usage">Úsáid chuimhne</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paistí á gcur i bhfeidhm</string>
     <string name="failed_to_execute_patch">Theip ar %s a chur i bhfeidhm</string>
@@ -627,7 +627,7 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="details">Sonraí</string>
     <string name="hide">Folaigh</string>
     <string name="default_">Réamhshocrú</string>
-    <string name="logs">Clár</string>
+    <string name="logs">Logaí</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
     <string name="mounting_ellipsis">Ag ceangal…</string>
     <string name="unmounting_ellipsis">Ag dícheangal…</string>

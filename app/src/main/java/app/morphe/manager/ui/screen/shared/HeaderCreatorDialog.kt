@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import android.annotation.SuppressLint
@@ -38,6 +43,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
 import app.morphe.manager.R
+import app.morphe.manager.util.KnownApp
 import app.morphe.manager.util.toFilePath
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.Dispatchers
@@ -53,11 +59,17 @@ import kotlin.math.abs
 private object HeaderConfig {
     // Folder structure
     const val BRANDING_FOLDER_NAME = "morphe_branding"
-    const val HEADER_FOLDER_NAME = "morphe_header"
+    const val YOUTUBE_HEADER_FOLDER_NAME = "morphe_header_youtube"
+    const val YTM_HEADER_FOLDER_NAME = "morphe_header_music"
 
     // File names
-    const val LIGHT_HEADER_FILE_NAME = "morphe_header_custom_light.png"
-    const val DARK_HEADER_FILE_NAME = "morphe_header_custom_dark.png"
+    const val LIGHT_HEADER_FILE_NAME = "morphe_header_custom_light"
+    const val DARK_HEADER_FILE_NAME = "morphe_header_custom_dark"
+
+    fun headerFolderName(packageName: String) = when (packageName) {
+        KnownApp.YOUTUBE_MUSIC -> YTM_HEADER_FOLDER_NAME
+        else -> YOUTUBE_HEADER_FOLDER_NAME
+    }
 
     // Density folders and sizes (width x height)
     val DENSITY_CONFIGS = mapOf(
@@ -83,15 +95,19 @@ private object HeaderConfig {
 }
 
 /**
- * Dialog for creating custom headers with light and dark theme variants
- * Generates header images in proper sizes for all screen densities
+ * Dialog for creating custom headers with light and dark theme variants.
+ * Generates header images in proper sizes for all screen densities.
  */
 @Composable
 fun HeaderCreatorDialog(
+    packageName: String,
     onDismiss: () -> Unit,
     onHeaderCreated: (String) -> Unit
 ) {
     val scope = rememberCoroutineScope()
+
+    // YouTube Music has no light theme - show only the dark variant section
+    val showLightVariant = packageName != KnownApp.YOUTUBE_MUSIC
 
     var lightHeaderUri by remember { mutableStateOf<Uri?>(null) }
     var lightHeaderBitmap by remember { mutableStateOf<Bitmap?>(null) }
@@ -168,6 +184,9 @@ fun HeaderCreatorDialog(
     val successMessage = stringResource(R.string.header_creator_success)
     val failureMessage = stringResource(R.string.header_creator_failed)
 
+    // Whether all required images are provided
+    val canCreate = darkHeaderBitmap != null && (!showLightVariant || lightHeaderBitmap != null)
+
     val folderPicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocumentTree()
     ) { uri ->
@@ -177,8 +196,11 @@ fun HeaderCreatorDialog(
                     val success = createHeaderFiles(
                         context = context,
                         baseUri = it,
-                        lightHeaderBitmap = lightHeaderBitmap!!,
+                        packageName = packageName,
+                        lightHeaderBitmap = if (showLightVariant) lightHeaderBitmap else null,
                         darkHeaderBitmap = darkHeaderBitmap!!,
+                        lightFileName = HeaderConfig.LIGHT_HEADER_FILE_NAME,
+                        darkFileName = HeaderConfig.DARK_HEADER_FILE_NAME,
                         lightScale = lightScale,
                         lightOffsetX = lightOffsetX,
                         lightOffsetY = lightOffsetY,
@@ -216,12 +238,16 @@ fun HeaderCreatorDialog(
             ) {
                 // Explanation text
                 AnimatedVisibility(
-                    visible = lightHeaderBitmap != null && darkHeaderBitmap != null,
+                    visible = canCreate,
                     enter = fadeIn() + expandVertically(),
                     exit = fadeOut() + shrinkVertically()
                 ) {
                     InfoBadge(
-                        text = stringResource(R.string.header_creator_folder_explanation),
+                        text = stringResource(
+                            R.string.header_creator_folder_explanation,
+                            HeaderConfig.BRANDING_FOLDER_NAME,
+                            HeaderConfig.headerFolderName(packageName)
+                        ),
                         style = InfoBadgeStyle.Primary,
                         icon = Icons.Outlined.Info
                     )
@@ -231,7 +257,7 @@ fun HeaderCreatorDialog(
                 MorpheDialogButton(
                     text = stringResource(R.string.header_creator_create),
                     onClick = { folderPicker.launch(null) },
-                    enabled = lightHeaderBitmap != null && darkHeaderBitmap != null,
+                    enabled = canCreate,
                     icon = Icons.Outlined.Save,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -250,59 +276,61 @@ fun HeaderCreatorDialog(
             )
 
             // Light header section
-            Text(
-                text = stringResource(R.string.header_creator_light_theme),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Bold,
-                color = LocalDialogTextColor.current
-            )
+            if (showLightVariant) {
+                Text(
+                    text = stringResource(R.string.header_creator_light_theme),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = LocalDialogTextColor.current
+                )
 
-            HeaderPreview(
-                headerBitmap = lightHeaderBitmap,
-                scale = lightScale,
-                offsetX = lightOffsetX,
-                offsetY = lightOffsetY,
-                isDarkTheme = false,
-                onScaleChange = { newScale ->
-                    lightScale = newScale.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE)
-                },
-                onOffsetChange = { newOffsetX, newOffsetY ->
-                    lightOffsetX = newOffsetX.coerceIn(-HeaderConfig.MAX_OFFSET, HeaderConfig.MAX_OFFSET)
-                    lightOffsetY = newOffsetY.coerceIn(-HeaderConfig.MAX_OFFSET, HeaderConfig.MAX_OFFSET)
-                }
-            )
-
-            // Reset transform button for light header
-            if (lightHeaderBitmap != null && (lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f)) {
-                TextButton(
-                    onClick = {
-                        lightScale = 1f
-                        lightOffsetX = 0f
-                        lightOffsetY = 0f
+                HeaderPreview(
+                    headerBitmap = lightHeaderBitmap,
+                    scale = lightScale,
+                    offsetX = lightOffsetX,
+                    offsetY = lightOffsetY,
+                    isDarkTheme = false,
+                    onScaleChange = { newScale ->
+                        lightScale = newScale.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE)
                     },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.RestartAlt,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(stringResource(R.string.adaptive_icon_reset_transform))
+                    onOffsetChange = { newOffsetX, newOffsetY ->
+                        lightOffsetX = newOffsetX.coerceIn(-HeaderConfig.MAX_OFFSET, HeaderConfig.MAX_OFFSET)
+                        lightOffsetY = newOffsetY.coerceIn(-HeaderConfig.MAX_OFFSET, HeaderConfig.MAX_OFFSET)
+                    }
+                )
+
+                // Reset transform button for light header
+                if (lightHeaderBitmap != null && (lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f)) {
+                    TextButton(
+                        onClick = {
+                            lightScale = 1f
+                            lightOffsetX = 0f
+                            lightOffsetY = 0f
+                        },
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.RestartAlt,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(stringResource(R.string.adaptive_icon_reset_transform))
+                    }
                 }
+
+                MorpheDialogButton(
+                    text = if (lightHeaderUri == null)
+                        stringResource(R.string.adaptive_icon_select_image)
+                    else
+                        stringResource(R.string.adaptive_icon_change_image),
+                    onClick = { lightHeaderPicker.launch("image/*") },
+                    icon = Icons.Outlined.LightMode,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                HorizontalDivider()
             }
-
-            MorpheDialogButton(
-                text = if (lightHeaderUri == null)
-                    stringResource(R.string.adaptive_icon_select_image)
-                else
-                    stringResource(R.string.adaptive_icon_change_image),
-                onClick = { lightHeaderPicker.launch("image/*") },
-                icon = Icons.Outlined.LightMode,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            HorizontalDivider()
 
             // Dark header section
             Text(
@@ -544,14 +572,18 @@ private fun HeaderPreview(
 }
 
 /**
- * Create header files in proper structure
- * Returns the path to morphe_header folder or null if failed
+ * Create header files in proper structure.
+ * [lightHeaderBitmap] is null when the light variant is not needed (e.g. YouTube Music).
+ * Returns the path to morphe_header folder or null if failed.
  */
 private suspend fun createHeaderFiles(
     context: Context,
     baseUri: Uri,
-    lightHeaderBitmap: Bitmap,
+    packageName: String,
+    lightHeaderBitmap: Bitmap?,
     darkHeaderBitmap: Bitmap,
+    lightFileName: String,
+    darkFileName: String,
     lightScale: Float,
     lightOffsetX: Float,
     lightOffsetY: Float,
@@ -587,30 +619,31 @@ private suspend fun createHeaderFiles(
             nomediaFile.createNewFile()
         }
 
-        val headerDir = File(brandingDir, HeaderConfig.HEADER_FOLDER_NAME)
+        val headerDir = File(brandingDir, HeaderConfig.headerFolderName(packageName))
         if (!headerDir.exists()) headerDir.mkdirs()
 
         val drawableDir = File(headerDir, folderName)
         if (!drawableDir.exists()) drawableDir.mkdirs()
 
-        // Create light header
-        val lightScaled = createScaledHeader(
-            context = context,
-            sourceBitmap = lightHeaderBitmap,
-            targetWidth = targetWidth,
-            targetHeight = targetHeight,
-            scale = lightScale,
-            offsetX = lightOffsetX,
-            offsetY = lightOffsetY
-        )
-
-        // Save light header
-        val lightFile = File(drawableDir, HeaderConfig.LIGHT_HEADER_FILE_NAME)
-        FileOutputStream(lightFile).use { out ->
-            lightScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+        // Save light header (only for apps that support it)
+        if (lightHeaderBitmap != null) {
+            val lightScaled = createScaledHeader(
+                context = context,
+                sourceBitmap = lightHeaderBitmap,
+                targetWidth = targetWidth,
+                targetHeight = targetHeight,
+                scale = lightScale,
+                offsetX = lightOffsetX,
+                offsetY = lightOffsetY
+            )
+            val lightFile = File(drawableDir, "$lightFileName.png")
+            FileOutputStream(lightFile).use { out ->
+                lightScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+            }
+            lightScaled.recycle()
         }
 
-        // Create dark header
+        // Save dark header
         val darkScaled = createScaledHeader(
             context = context,
             sourceBitmap = darkHeaderBitmap,
@@ -620,15 +653,10 @@ private suspend fun createHeaderFiles(
             offsetX = darkOffsetX,
             offsetY = darkOffsetY
         )
-
-        // Save dark header
-        val darkFile = File(drawableDir, HeaderConfig.DARK_HEADER_FILE_NAME)
+        val darkFile = File(drawableDir, "$darkFileName.png")
         FileOutputStream(darkFile).use { out ->
             darkScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
         }
-
-        // Clean up
-        lightScaled.recycle()
         darkScaled.recycle()
 
         // Return path to 'morphe_header' folder
@@ -640,8 +668,8 @@ private suspend fun createHeaderFiles(
 }
 
 /**
- * Helper function to create scaled and positioned header bitmap
- * Uses the same logic as preview: fit image to canvas, then apply scale and offset
+ * Helper function to create scaled and positioned header bitmap.
+ * Uses the same logic as preview: fit image to canvas, then apply scale and offset.
  */
 @SuppressLint("UseKtx")
 private fun createScaledHeader(

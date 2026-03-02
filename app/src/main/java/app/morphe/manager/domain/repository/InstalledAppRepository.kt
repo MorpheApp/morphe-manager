@@ -50,6 +50,11 @@ class InstalledAppRepository(
         val bundleVersions = patchBundleRepository.sources.first()
             .associate { it.uid to it.version }
 
+        // Remove stale records for the same original package but different current package name
+        // This happens when repatching with a different bundle
+        val staleEntries = dao.getStaleEntries(originalPackageName, currentPackageName)
+        staleEntries.forEach { dao.delete(it) }
+
         dao.upsertApp(
             InstalledApp(
                 currentPackageName = currentPackageName,

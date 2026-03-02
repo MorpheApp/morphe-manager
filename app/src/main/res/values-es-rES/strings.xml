@@ -61,7 +61,7 @@
     <string name="sources_dialog_view_any_version">Cualquier versión</string>
     <string name="sources_dialog_view_any_package">Cualquier paquete</string>
     <string name="sources_dialog_add_source">Agregar fuente de parches</string>
-    <string name="sources_dialog_delete_confirm_message">Eliminar la fuente \"%s\"? Esto no se puede deshacer.</string>
+    <string name="sources_dialog_delete_confirm_message">¿Eliminar la fuente \"%s\"? Esto no se puede deshacer.</string>
     <string name="sources_dialog_remote">Remota</string>
     <string name="sources_dialog_remote_url">URL de la fuente</string>
     <string name="sources_dialog_remote_url_formats_title">Ejemplos:</string>
@@ -151,7 +151,7 @@
     <string name="adaptive_icon_safe_zone_outer">Zona de máscara (puede ser recortada)</string>
     <string name="adaptive_icon_created_success">Ícono adaptativo creado con éxito</string>
     <string name="adaptive_icon_creation_failed">No se pudo crear el ícono adaptativo</string>
-    <string name="adaptive_icon_folder_explanation">Seleccionar dónde crear la carpeta \'morphe_branding/morphe_icons\' con los archivos del ícono generado</string>
+    <string name="adaptive_icon_folder_explanation">Seleccione dónde crear la carpeta \"%1$s/%2$s\" con los archivos de iconos generados</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crear encabezado personalizado</string>
     <string name="header_creator_instructions">Elija imágenes para temas claros y oscuros, luego ajuste con gestos de pellizco</string>
@@ -160,7 +160,7 @@
     <string name="header_creator_no_image">No se ha seleccionado ninguna imagen</string>
     <string name="header_creator_success">Encabezado creado con éxito</string>
     <string name="header_creator_failed">No se pudo crear el encabezado</string>
-    <string name="header_creator_folder_explanation">Seleccionar dónde crear la carpeta \'morphe_branding/morphe_header\' con los archivos del encabezado generado</string>
+    <string name="header_creator_folder_explanation">Seleccione dónde crear la carpeta \"%1$s/%2$s\" con los archivos de encabezados generados</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">¿Realmente quieres desinstalar esta aplicación?</string>
     <string name="home_app_info_remove_app_warning">Esto eliminará permanentemente:</string>

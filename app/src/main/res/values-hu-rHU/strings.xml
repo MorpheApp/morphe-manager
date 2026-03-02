@@ -151,7 +151,7 @@ Biztosan folytatja?"</string>
     <string name="adaptive_icon_safe_zone_outer">Maszkzóna (levágható)</string>
     <string name="adaptive_icon_created_success">Az adaptív ikon sikeresen létrehozva</string>
     <string name="adaptive_icon_creation_failed">Nem sikerült az adaptív ikon létrehozása</string>
-    <string name="adaptive_icon_folder_explanation">Válassza ki a \'morphe_branding/morphe_icons\' mappa helyét a létrehozott ikonfájlok számára</string>
+    <string name="adaptive_icon_folder_explanation">Válassza ki a \'%1$s/%2$s\' mappa helyét a létrehozott ikonfájlok számára</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Egyéni fejléc létrehozása</string>
     <string name="header_creator_instructions">Válasszon képeket a világos és sötét témákhoz, majd állítsa be két ujjal történő nagyítás mozdulattal.</string>
@@ -160,7 +160,7 @@ Biztosan folytatja?"</string>
     <string name="header_creator_no_image">Nincs kép kiválasztva</string>
     <string name="header_creator_success">A fejléc sikeresen létrehozva</string>
     <string name="header_creator_failed">Nem sikerült a fejléc létrehozása</string>
-    <string name="header_creator_folder_explanation">Válassza ki a \'morphe_branding/morphe_header\' mappa helyêt a létrehozott fejlécfájlok számára</string>
+    <string name="header_creator_folder_explanation">Válassza ki a \'%1$s/%2$s\' mappa helyét a létrehozott fejlécfájlok számára</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Biztosan el akarja távolítani ezt az alkalmazást?</string>
     <string name="home_app_info_remove_app_warning">Ezzel véglegesen törli:</string>

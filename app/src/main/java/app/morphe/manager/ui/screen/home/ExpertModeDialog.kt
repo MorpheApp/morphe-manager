@@ -459,6 +459,7 @@ fun ExpertModeDialog(
     selectedPatchForOptions?.let { (bundleUid, patch) ->
         PatchOptionsDialog(
             patch = patch,
+            isDefaultBundle = bundleUid == 0,
             values = options[bundleUid]?.get(patch.name),
             onValueChange = { key, value ->
                 onOptionChange(bundleUid, patch.name, key, value)
@@ -676,11 +677,15 @@ private fun EmptyStateContent(
 @Composable
 private fun PatchOptionsDialog(
     patch: PatchInfo,
+    isDefaultBundle: Boolean,
     values: Map<String, Any?>?,
     onValueChange: (String, Any?) -> Unit,
     onReset: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    // Derive the target package from the patch's compatible packages list
+    val packageName = patch.compatiblePackages?.firstOrNull()?.packageName.orEmpty()
+
     var showColorPicker by remember { mutableStateOf<Pair<String, String>?>(null) }
 
     MorpheDialog(
@@ -756,6 +761,8 @@ private fun PatchOptionsDialog(
                             description = option.description,
                             value = value?.toString() ?: "",
                             presets = option.presets,
+                            packageName = packageName,
+                            isDefaultBundle = isDefaultBundle,
                             onValueChange = { onValueChange(key, it) }
                         )
                     }
@@ -788,6 +795,8 @@ private fun PatchOptionsDialog(
                             title = option.title,
                             description = option.description,
                             value = value?.toString() ?: "",
+                            packageName = packageName,
+                            isDefaultBundle = isDefaultBundle,
 //                            required = option.required,
                             onValueChange = { onValueChange(key, it) }
                         )
@@ -1017,6 +1026,8 @@ private fun PathInputOption(
     title: String,
     description: String,
     value: String,
+    packageName: String,
+    isDefaultBundle: Boolean,
 //    required: Boolean,
     onValueChange: (String) -> Unit
 ) {
@@ -1063,8 +1074,8 @@ private fun PathInputOption(
             onFolderPickerClick = { folderPicker() }
         )
 
-        // Create Icon button
-        if (isIconField) {
+        // Create Icon button (only for the default Morphe bundle)
+        if (isIconField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create),
                 onClick = { showIconCreator = true },
@@ -1073,8 +1084,8 @@ private fun PathInputOption(
             )
         }
 
-        // Create Header button
-        if (isHeaderField) {
+        // Create Header button (only for the default Morphe bundle)
+        if (isHeaderField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.header_creator_create),
                 onClick = { showHeaderCreator = true },
@@ -1100,6 +1111,7 @@ private fun PathInputOption(
     // Icon creator dialog
     if (showIconCreator) {
         AdaptiveIconCreatorDialog(
+            packageName = packageName,
             onDismiss = { showIconCreator = false },
             onIconCreated = { path ->
                 onValueChange(path)
@@ -1111,6 +1123,7 @@ private fun PathInputOption(
     // Header creator dialog
     if (showHeaderCreator) {
         HeaderCreatorDialog(
+            packageName = packageName,
             onDismiss = { showHeaderCreator = false },
             onHeaderCreated = { path ->
                 onValueChange(path)
@@ -1130,6 +1143,8 @@ private fun PathWithPresetsOption(
     description: String,
     value: String,
     presets: Map<String, *>,
+    packageName: String,
+    isDefaultBundle: Boolean,
     onValueChange: (String) -> Unit
 ) {
     var showIconCreator by remember { mutableStateOf(false) }
@@ -1185,8 +1200,8 @@ private fun PathWithPresetsOption(
             onFolderPickerClick = { folderPicker() }
         )
 
-        // Create Icon button
-        if (isIconField) {
+        // Create Icon button (only for the default Morphe bundle)
+        if (isIconField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create),
                 onClick = { showIconCreator = true },
@@ -1195,8 +1210,8 @@ private fun PathWithPresetsOption(
             )
         }
 
-        // Create Header button
-        if (isHeaderField) {
+        // Create Header button (only for the default Morphe bundle)
+        if (isHeaderField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.header_creator_create),
                 onClick = { showHeaderCreator = true },
@@ -1224,6 +1239,7 @@ private fun PathWithPresetsOption(
     // Icon creator dialog
     if (showIconCreator) {
         AdaptiveIconCreatorDialog(
+            packageName = packageName,
             onDismiss = { showIconCreator = false },
             onIconCreated = { path ->
                 onValueChange(path)
@@ -1235,6 +1251,7 @@ private fun PathWithPresetsOption(
     // Header creator dialog
     if (showHeaderCreator) {
         HeaderCreatorDialog(
+            packageName = packageName,
             onDismiss = { showHeaderCreator = false },
             onHeaderCreated = { path ->
                 onValueChange(path)
