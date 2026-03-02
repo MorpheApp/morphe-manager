@@ -97,8 +97,8 @@ fun AdvancedTabContent(
                 val newValue = !usePrereleases.value
                 scope.launch {
                     prefs.useManagerPrereleases.update(newValue)
-                    homeViewModel.checkForManagerUpdates()
                 }
+                homeViewModel.triggerUpdateCheck()
             },
             prefs = prefs
         )
