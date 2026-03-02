@@ -260,6 +260,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">আপনার অ্যাপের জ্বর হয়েছে, এবং এর একমাত্র প্রতিকার হল আরও প্যাচ… 🩺🔔</string>
     <string name="patcher_message_20">অর্থহীন কথাগুলো সরিয়ে ফেলা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">অ্যাপটি প্যাচিং করছি</string>
+    <string name="memory_usage">মেমরি ব্যবহার</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">প্যাচ প্রয়োগ করা হচ্ছে</string>
     <string name="failed_to_execute_patch">%s প্রয়োগ করতে ব্যর্থ</string>
@@ -604,6 +607,7 @@
     <string name="details">বিস্তারিত</string>
     <string name="hide">গোপন রাখুন</string>
     <string name="default_">ডিফল্ট</string>
+    <string name="logs">লগসমূহ</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>

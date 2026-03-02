@@ -36,7 +36,7 @@ import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 /**
- * Home Screen with 5-section layout
+ * Home Screen with 5-section layout.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("LocalContextGetResourceValueCall")
@@ -227,7 +227,8 @@ fun HomeScreen(
                 onTriggerPatchFlow = { originalPackageName ->
                     showInstalledAppDialog = null
                     homeViewModel.showPatchDialog(originalPackageName)
-                }
+                },
+                homeViewModel = homeViewModel
             )
         }
     }

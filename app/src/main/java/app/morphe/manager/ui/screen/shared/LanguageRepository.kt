@@ -3,6 +3,7 @@ package app.morphe.manager.ui.screen.shared
 import android.content.Context
 import app.morphe.manager.R
 import app.morphe.manager.util.parseLocaleCode
+import app.morphe.manager.util.parseLocalesConfig
 import java.util.Locale
 
 /**
@@ -23,8 +24,15 @@ object LanguageRepository {
         "sr", // Serbian: sr-CS / sr-SP
     )
 
+    // Cached language list (cleared on locale change via getSupportedLanguages)
+    @Volatile
+    private var cachedLanguages: List<LanguageOption>? = null
+    @Volatile
+    private var cachedForLocale: Locale? = null
+
     /**
-     * Get display name for a language code with proper localization
+     * Get display name for a language code with proper localization.
+     * Returns the system label for "system", otherwise the language display name.
      */
     fun getLanguageDisplayName(code: String, context: Context): String {
         val currentLocale = context.resources.configuration.locales[0]
@@ -32,7 +40,7 @@ object LanguageRepository {
         return when (code) {
             "system" -> context.getString(R.string.settings_appearance_system)
             else -> {
-                val locale = parseLocaleCode(code)
+                val locale = parseLocaleCode(code) ?: return context.getString(R.string.settings_appearance_system)
                 locale.getDisplayLanguage(currentLocale).replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(currentLocale) else it.toString()
                 }
@@ -41,10 +49,18 @@ object LanguageRepository {
     }
 
     /**
-     * Get list of all supported languages
+     * Get list of all supported languages, read from `res/xml/locales_config.xml`.
+     *
+     * The result is cached per display locale - the cache is invalidated automatically
+     * when the device or app locale changes.
      */
     fun getSupportedLanguages(context: Context): List<LanguageOption> {
         val currentLocale = context.resources.configuration.locales[0]
+
+        // Return cache if the display locale hasn't changed
+        cachedLanguages?.let { cached ->
+            if (cachedForLocale == currentLocale) return cached
+        }
 
         val systemOption = LanguageOption(
             code = "system",
@@ -53,56 +69,45 @@ object LanguageRepository {
             flag = "🌐"
         )
 
+        val englishLocale = Locale("en")
         val englishOption = LanguageOption(
             code = "en",
-            displayName = Locale("en").getDisplayLanguage(currentLocale).replaceFirstChar {
+            displayName = englishLocale.getDisplayLanguage(currentLocale).replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(currentLocale) else it.toString()
             },
-            nativeName = Locale("en").getDisplayLanguage(Locale("en")).replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale("en")) else it.toString()
+            nativeName = englishLocale.getDisplayLanguage(englishLocale).replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(englishLocale) else it.toString()
             },
             flag = "🇺🇸"
         )
 
-        val languageCodes = listOf(
-            "af-rZA","am-rET","ar-rSA","as-rIN","az-rAZ","be-rBY","bg-rBG",
-            "bn-rBD","bs-rBA","ca-rES","cs-rCZ","da-rDK","de-rDE","el-rGR",
-            "es-rES","et-rEE","eu-rES","fa-rIR","fi-rFI","fil-rPH","fr-rFR",
-            "ga-rIE","gl-rES","gn-rPY","gu-rIN","hi-rIN","hr-rHR","hu-rHU",
-            "hy-rAM","in-rID","is-rIS","it-rIT","iw-rIL","ja-rJP","ka-rGE",
-            "kk-rKZ","km-rKH","kn-rIN","ko-rKR","ky-rKG","lo-rLA","lt-rLT",
-            "lv-rLV","mai-rIN","mk-rMK","ml-rIN","mn-rMN","mr-rIN","ms-rMY",
-            "my-rMM","nb-rNO","ne-rNP","nl-rNL","or-rIN","pa-rIN","pl-rPL",
-            "pt-rBR","pt-rPT","ro-rRO","ru-rRU","si-rLK","sk-rSK","sl-rSI",
-            "sq-rAL","sr-rCS","sr-rSP","sv-rSE","sw-rKE","ta-rIN","te-rIN",
-            "th-rTH","tr-rTR","uk-rUA","ur-rIN","uz-rUZ","vi-rVN",
-            "zh-rCN","zh-rTW","zu-rZA"
-        )
+        // Read locale codes from locales_config.xml
+        val localeCodes = parseLocalesConfig(context)
 
-        val otherLanguages = languageCodes.map { code ->
-            val locale = parseLocaleCode(code)
+        val otherLanguages = localeCodes.mapNotNull { code ->
+            val locale = parseLocaleCode(code) ?: return@mapNotNull null
             LanguageOption(
                 code = code,
                 displayName = getDisplayNameSmart(locale, currentLocale),
                 nativeName = getDisplayNameSmart(locale, locale),
-                flag = getFlagEmoji(code)
+                flag = getFlagEmoji(locale)
             )
         }.sortedBy { it.displayName }
 
         // System → English → all others alphabetically
-        return listOf(systemOption, englishOption) + otherLanguages
+        val result = listOf(systemOption, englishOption) + otherLanguages
+
+        cachedLanguages = result
+        cachedForLocale = currentLocale
+
+        return result
     }
 
     /**
-     * Get flag emoji for language code
+     * Get flag emoji from a [Locale]'s country code.
      */
-    private fun getFlagEmoji(code: String): String {
-        val country = when {
-            code.contains("-r") -> code.substringAfter("-r")
-            code.contains("_") -> code.substringAfter("_")
-            else -> "US"
-        }
-
+    private fun getFlagEmoji(locale: Locale): String {
+        val country = locale.country.takeIf { it.length == 2 } ?: return "🌐"
         return try {
             val first = Character.codePointAt(country, 0) - 0x41 + 0x1F1E6
             val second = Character.codePointAt(country, 1) - 0x41 + 0x1F1E6
@@ -117,13 +122,11 @@ object LanguageRepository {
      * For all other languages, only the language name is shown.
      */
     private fun getDisplayNameSmart(locale: Locale, displayLocale: Locale): String {
-        val language = locale.language
-
         val baseName = locale.getDisplayLanguage(displayLocale)
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(displayLocale) else it.toString() }
 
         // Show country only if language requires it and country is present
-        if (language !in languagesRequiringRegion || locale.country.isEmpty()) {
+        if (locale.language !in languagesRequiringRegion || locale.country.isEmpty()) {
             return baseName
         }
 

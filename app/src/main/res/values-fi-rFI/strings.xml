@@ -261,6 +261,9 @@ Oletko varma, että haluat jatkaa?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Sovelluksellasi on kuumetta, ja ainoa resepti on lisää korjauksia… 🩺🔔</string>
     <string name="patcher_message_20">Poistetaan hölynpölyä. Odota hetki… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Muokkaa sovellusta</string>
+    <string name="memory_usage">Muistiutuminen</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paikkojen käyttöönotto</string>
     <string name="failed_to_execute_patch">Virhe %s:n suorittamisessa</string>
@@ -626,6 +629,7 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="details">Tiedot</string>
     <string name="hide">Piilota</string>
     <string name="default_">Oletus</string>
+    <string name="logs">Päiväkirjat</string>
     <string name="installing_ellipsis">Asennetaan…</string>
     <string name="mounting_ellipsis">Liitetään…</string>
     <string name="unmounting_ellipsis">Poistetaan…</string>

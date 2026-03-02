@@ -14,6 +14,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.applyAppLanguage
+import app.morphe.manager.util.migrateLegacyLocaleCode
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckWorker
 import app.morphe.manager.util.syncFcmTopics
@@ -92,15 +93,9 @@ class ManagerApplication : Application() {
         // Create notification channels before any notification can be posted (required on API 26+)
         updateNotificationManager.createNotificationChannels()
 
-        // Preload preferences, apply language, and kick off background worker if enabled
+        // Preload preferences and kick off background worker/FCM sync.
         scope.launch {
             prefs.preload()
-
-            val storedLanguage = prefs.appLanguage.get().ifBlank { "system" }
-            if (storedLanguage != prefs.appLanguage.get()) {
-                prefs.appLanguage.update(storedLanguage)
-            }
-            applyAppLanguage(storedLanguage)
 
             // Schedule/cancel WorkManager fallback AND sync FCM topic subscriptions.
             // FCM is the primary delivery path (bypasses Doze); WorkManager is the fallback.
@@ -162,15 +157,39 @@ class ManagerApplication : Application() {
         })
     }
 
+    /**
+     * Apply the stored app language as early as possible - before any Activity or
+     * Resources object is created. This is the **single place** where locale is applied
+     * on cold start.
+     */
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
 
-        // Apply stored app language as early as possible using DataStore, but never crash startup.
+        // ============================================================================
+        // TEMPORARY MIGRATION: Legacy locale code format (e.g. "uk-rUA") → BCP 47 ("uk-UA").
+        // TODO: Remove migration block and uncomment the simple version below
+        //  after most users have migrated (recommended: 3-6 months after release)
+        // ============================================================================
         val storedLang = runCatching {
             base?.let {
-                runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "system" }
+                val pm = PreferencesManager(it)
+                val raw = runBlocking { pm.appLanguage.get() }.ifBlank { "system" }
+                val migrated = migrateLegacyLocaleCode(raw)
+                if (migrated != raw) {
+                    runBlocking { pm.appLanguage.update(migrated) }
+                }
+                migrated
             }
         }.getOrNull() ?: "system"
+        // ============================================================================
+        // Simple version (uncomment after removing migration above):
+        //
+        // val storedLang = runCatching {
+        //     base?.let {
+        //         runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "system" }
+        //     }
+        // }.getOrNull() ?: "system"
+        // ============================================================================
 
         applyAppLanguage(storedLang)
 
@@ -236,7 +255,7 @@ class ManagerApplication : Application() {
 
             // Mark migration as complete
             prefs.edit { putBoolean(migrationKey, true) }
-            Log.d(tag, "Old app icon components migration completed - users will see default icon")
+            Log.d(tag, "Old app icon components migration completed")
 
         } catch (e: Exception) {
             Log.e(tag, "Failed to disable old icon components", e)

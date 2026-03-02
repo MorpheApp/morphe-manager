@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tu aplicación tiene fiebre y la única receta son más parches… 🩺🔔</string>
     <string name="patcher_message_20">Eliminando tonterías. Por favor, espere… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Parcheando la app</string>
+    <string name="memory_usage">Uso de memoria</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplicando parches</string>
     <string name="failed_to_execute_patch">Error al aplicar %s</string>
@@ -626,6 +629,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="details">Detalles</string>
     <string name="hide">Ocultar</string>
     <string name="default_">Predeterminado</string>
+    <string name="logs">Registros</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>

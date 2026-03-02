@@ -52,7 +52,7 @@
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
     <string name="sources_management_failed_to_open_url">URL を開けませんでした</string>
     <string name="sources_management_prerelease_toggle">プレリリース版のパッチを使用</string>
-    <string name="sources_management_prerelease_toggle_description">実験的で新しいバージョンのパッチをいち早く使用します</string>
+    <string name="sources_management_prerelease_toggle_description">新しいかつ実験的なバージョンのパッチを使用します</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">表示名</string>
     <string name="sources_dialog_rename">パッチソースの名前を変更</string>
@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">アプリが発熱中。唯一の処方箋は、パッチ増量のみ… 🩺🔔</string>
     <string name="patcher_message_20">不要なものを片付け中。しばらくお待ちください… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">アプリにパッチを適用中</string>
+    <string name="memory_usage">メモリ使用量</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">パッチを適用中</string>
     <string name="failed_to_execute_patch">%s の実行に失敗しました</string>
@@ -323,7 +326,7 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
     <string name="settings_advanced_updates_use_prereleases">プレリリース版のマネージャーを使用</string>
-    <string name="settings_advanced_updates_use_prereleases_description">実験的で新しいバージョンのマネージャーへの早期アクセスを受信します。 プレリリース版のパッチを取得するには、それぞれのパッチソースのプリリリース版の設定を有効にしてください</string>
+    <string name="settings_advanced_updates_use_prereleases_description">新しいかつ実験的なバージョンのマネージャーを使用します。 プレリリース版のパッチを取得するには、各パッチソースのプレリリース版の設定をそれぞれ有効にしてください</string>
     <string name="settings_advanced_updates_allow_metered">モバイルデータ通信で更新</string>
     <string name="settings_advanced_updates_allow_metered_description">モバイルデータ通信でのパッチソースおよびマネージャーの更新のダウンロードを許可します</string>
     <string name="settings_advanced_updates_background_notifications">バックグラウンド更新通知</string>
@@ -565,9 +568,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
     <string name="settings_system_share_website_description">Morphe の公式ウェブサイトを共有する</string>
-    <string name="settings_system_manager_description">"Morphe は、人気のある Android アプリを対象にモダンで効率的なパッチ適用を目指す、実験的なオープンソースプロジェクトです。
+    <string name="settings_system_manager_description">"Morphe は、人気のある Android アプリにモダンかつ効率的にパッチを適用することを目的とする、実験的なオープンソース プロジェクトです。
 
-Morphe は、コミュニティのフィードバックと貢献によって発展しています。"</string>
+オープンソースをその中核に据える Morphe は、未来のイノベーションを推進するために、コミュニティのフィードバックと貢献によって発展しています。"</string>
     <!-- Shared strings -->
     <string name="patches">パッチ</string>
     <string name="home">ホーム</string>
@@ -627,6 +630,7 @@ Morphe は、コミュニティのフィードバックと貢献によって発�
     <string name="details">詳細</string>
     <string name="hide">非表示にする</string>
     <string name="default_">デフォルト</string>
+    <string name="logs">ログ</string>
     <string name="installing_ellipsis">インストール中…</string>
     <string name="mounting_ellipsis">マウント中…</string>
     <string name="unmounting_ellipsis">アンマウント中…</string>

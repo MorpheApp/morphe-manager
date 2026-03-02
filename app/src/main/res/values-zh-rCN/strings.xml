@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
     <string name="patcher_message_20">正在移除无意义的内容。请稍等… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">修补应用</string>
+    <string name="memory_usage">内存使用</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">应用补丁</string>
     <string name="failed_to_execute_patch">执行 %s 失败</string>
@@ -624,6 +627,7 @@ morphe_header_custom_dark.png
     <string name="details">详细信息</string>
     <string name="hide">隐藏</string>
     <string name="default_">默认</string>
+    <string name="logs">日志</string>
     <string name="installing_ellipsis">正在安装…</string>
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting_ellipsis">正在卸载…</string>

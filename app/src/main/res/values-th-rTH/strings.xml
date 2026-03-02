@@ -262,6 +262,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">แอปของคุณมีไข้ และวิธีรักษาเดียวคือต้องใช้แพตช์เพิ่ม... 🩺🔔</string>
     <string name="patcher_message_20">กำลังไล่เบา กรุณารอสักครู่… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">กำลังปรับปรุงแอป</string>
+    <string name="memory_usage">การใช้พื้นที่ความจำ</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">กำลังใช้แพตช์</string>
     <string name="failed_to_execute_patch">ไม่สามารถใช้ %s ได้</string>
@@ -626,6 +629,7 @@ morphe_header_custom_dark.png
     <string name="details">รายละเอียด</string>
     <string name="hide">ซ่อน</string>
     <string name="default_">ค่าเริ่มต้น</string>
+    <string name="logs">บันทึก</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>

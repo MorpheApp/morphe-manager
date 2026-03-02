@@ -261,6 +261,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">تطبيقك يعاني من الحمى، والوصفة الطبية الوحيدة هي المزيد من التعديل… 🩺🔔</string>
     <string name="patcher_message_20">جارٍ إزالة العبث. يرجى الانتظار… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">تعديل التطبيق</string>
+    <string name="memory_usage">استخدام الذاكرة</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">جارٍ تطبيق التعديلات</string>
     <string name="failed_to_execute_patch">فشل تطبيق %s</string>
@@ -626,6 +629,7 @@
     <string name="details">التفاصيل</string>
     <string name="hide">إخفاء</string>
     <string name="default_">الافتراضي</string>
+    <string name="logs">السجلات</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>

@@ -261,6 +261,9 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Aplikasi Anda demam, dan satu-satunya resepnya adalah lebih banyak tambalan… 🩺🔔</string>
     <string name="patcher_message_20">Menghapus omong kosong. Mohon tunggu sebentar… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Menambal aplikasi</string>
+    <string name="memory_usage">Pemakaian memori</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Menerapkan tambalan</string>
     <string name="failed_to_execute_patch">Gagal menerapkan %s</string>
@@ -626,6 +629,7 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="details">Rincian</string>
     <string name="hide">Sembunyikan</string>
     <string name="default_">Bawaan</string>
+    <string name="logs">Catatan</string>
     <string name="installing_ellipsis">Memasang…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>

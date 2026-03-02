@@ -261,6 +261,9 @@ Möchten Sie trotzdem fortfahren?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Deine App hat Fieber und die einzige Verschreibung sind mehr Patches… 🩺🔔</string>
     <string name="patcher_message_20">Unsinn entfernen. Bitte warten… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">App-Patch</string>
+    <string name="memory_usage">Speichernutzung</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Patches werden angewendet</string>
     <string name="failed_to_execute_patch">Patch %s konnte nicht angewendet werden</string>
@@ -626,6 +629,7 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="details">Details</string>
     <string name="hide">Verbergen</string>
     <string name="default_">Standard</string>
+    <string name="logs">Protokolle</string>
     <string name="installing_ellipsis">Wird installiert…</string>
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Austrennen…</string>

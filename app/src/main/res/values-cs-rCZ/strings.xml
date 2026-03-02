@@ -261,6 +261,9 @@ Opravdu chcete pokračovat?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Vaše aplikace má horečku a jediným lékem je více záplat… 🩺🔔</string>
     <string name="patcher_message_20">Odstraňuji nesmysly. Počkejte, prosím… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Patching aplikace</string>
+    <string name="memory_usage">Použití paměti</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplikují se záplaty</string>
     <string name="failed_to_execute_patch">Selhalo aplikování %s</string>
@@ -626,6 +629,7 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="details">Detaily</string>
     <string name="hide">Skrýt</string>
     <string name="default_">Výchozí</string>
+    <string name="logs">Protokoly</string>
     <string name="installing_ellipsis">Instaluje se…</string>
     <string name="mounting_ellipsis">Připojování…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>

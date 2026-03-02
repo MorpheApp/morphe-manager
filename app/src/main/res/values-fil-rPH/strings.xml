@@ -252,6 +252,7 @@ Nais mo bang magpatuloy?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">May lagnat ang aplikasyon mo, at ang tanging reseta ay ang maraming patch… 🩺🔔</string>
     <string name="patcher_message_20">Inaalis ang mga walang saysay. Mangyaring maghintay… 🗑️</string>
+    <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Inilalapat ang mga patch</string>
     <string name="failed_to_execute_patch">Nabigong ilapat %s</string>

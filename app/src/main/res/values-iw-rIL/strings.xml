@@ -262,6 +262,9 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">לאפליקציה שלך יש חום, והמרשם היחיד הוא יותר תיקונים… 🩺🔔</string>
     <string name="patcher_message_20">מסירים שטויות. אנא המתן… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">מילוי אפליקציה</string>
+    <string name="memory_usage">שימוש בזיכרון</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">החלת טלאים</string>
     <string name="failed_to_execute_patch">נכשל להחיל %s</string>
@@ -587,6 +590,7 @@
     <string name="details">פרטים</string>
     <string name="hide">הסתר</string>
     <string name="default_">ברירת מחדל</string>
+    <string name="logs">יומן</string>
     <string name="installing_ellipsis">מתקין…</string>
     <string name="mounting_ellipsis">מצרף…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>

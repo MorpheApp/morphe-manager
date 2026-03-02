@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.advanced
 
 import androidx.compose.foundation.layout.*
@@ -389,6 +394,7 @@ fun CustomBrandingDialog(
     // Icon creator dialog
     if (showIconCreator) {
         AdaptiveIconCreatorDialog(
+            packageName = packageName,
             onDismiss = { showIconCreator = false },
             onIconCreated = { path ->
                 iconPath = path
@@ -405,6 +411,7 @@ fun CustomBrandingDialog(
 fun CustomHeaderDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
     patchOptionsViewModel: PatchOptionsViewModel,
+    packageName: String,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
@@ -502,6 +509,7 @@ fun CustomHeaderDialog(
     // Header creator dialog
     if (showHeaderCreator) {
         HeaderCreatorDialog(
+            packageName = packageName,
             onDismiss = { showHeaderCreator = false },
             onHeaderCreated = { path ->
                 headerPath = path

@@ -261,6 +261,9 @@ Sunteți sigur că doriți să continuați?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Aplicația ta are febră, iar singura prescripție sunt mai multe patch-uri… 🩺🔔</string>
     <string name="patcher_message_20">Eliminăm prostii. Vă rugăm să așteptați… 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Patching aplicaţie</string>
+    <string name="memory_usage">Utilizare memorie</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplicarea modificărilor</string>
     <string name="failed_to_execute_patch">Nu s-a putut aplica %s</string>
@@ -626,6 +629,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="details">Detalii</string>
     <string name="hide">Ascunde</string>
     <string name="default_">Implicit</string>
+    <string name="logs">Jurnale</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>

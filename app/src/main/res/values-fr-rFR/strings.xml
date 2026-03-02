@@ -225,7 +225,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patcher_step_group_preparing">Préparation</string>
     <string name="patcher_step_load_patches">Chargement des patchs</string>
     <string name="patcher_step_prepare_split_apk">Fusionner l’APK fractionné</string>
-    <string name="patcher_step_unpack">Lire le fichier APK</string>
+    <string name="patcher_step_unpack">Lecture du fichier APK</string>
     <string name="patcher_step_group_patching">Patchage</string>
     <string name="patcher_step_group_saving">Enregistrement</string>
     <string name="patcher_step_write_patched">Écriture du fichier APK patché</string>
@@ -261,6 +261,9 @@ Voulez-vous vraiment continuer ?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Votre application a de la fièvre, et la seule prescription, c’est plus de patchs… 🩺🔔</string>
     <string name="patcher_message_20">Suppression des absurdités. Veuillez patienter... 🗑️</string>
+    <!-- Expert patcher Screen -->
+    <string name="patching_app">Patchage de l\'application</string>
+    <string name="memory_usage">Utilisation de la mémoire</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Application des patchs</string>
     <string name="failed_to_execute_patch">Échec de l\'application de %s</string>
@@ -627,6 +630,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="details">Détails</string>
     <string name="hide">Masquer</string>
     <string name="default_">Par défaut</string>
+    <string name="logs">Journaux</string>
     <string name="installing_ellipsis">Installation…</string>
     <string name="mounting_ellipsis">Montage…</string>
     <string name="unmounting_ellipsis">Démontage…</string>

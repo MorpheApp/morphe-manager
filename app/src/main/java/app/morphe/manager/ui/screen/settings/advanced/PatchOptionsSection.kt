@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.advanced
 
 import android.annotation.SuppressLint
@@ -49,7 +54,7 @@ fun PatchOptionsSection(
 
     var showThemeDialog by remember { mutableStateOf<String?>(null) }
     var showBrandingDialog by remember { mutableStateOf<String?>(null) }
-    var showHeaderDialog by remember { mutableStateOf(false) }
+    var showHeaderDialog by remember { mutableStateOf<String?>(null) }
 
     // Collect patch options from ViewModel
     val youtubePatches by patchOptionsViewModel.youtubePatches.collectAsState()
@@ -186,7 +191,7 @@ fun PatchOptionsSection(
                         patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = KnownApp.YOUTUBE },
                         onBrandingClick = { showBrandingDialog = KnownApp.YOUTUBE },
-                        onHeaderClick = { showHeaderDialog = true }
+                        onHeaderClick = { showHeaderDialog = KnownApp.YOUTUBE }
                     )
                 }
 
@@ -218,7 +223,7 @@ fun PatchOptionsSection(
                         patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = KnownApp.YOUTUBE_MUSIC },
                         onBrandingClick = { showBrandingDialog = KnownApp.YOUTUBE_MUSIC },
-                        onHeaderClick = null // No header for YouTube Music
+                        onHeaderClick = { showHeaderDialog = KnownApp.YOUTUBE_MUSIC }
                     )
                 }
             }
@@ -245,12 +250,13 @@ fun PatchOptionsSection(
         )
     }
 
-    // Header Dialog (YouTube only)
-    if (showHeaderDialog) {
+    // Header Dialog
+    showHeaderDialog?.let { packageName ->
         CustomHeaderDialog(
             patchOptionsPrefs = patchOptionsPrefs,
             patchOptionsViewModel = patchOptionsViewModel,
-            onDismiss = { showHeaderDialog = false }
+            packageName = packageName,
+            onDismiss = { showHeaderDialog = null }
         )
     }
 }
@@ -272,7 +278,7 @@ private fun AppPatchOptionsCard(
     // Get available patches for this app type
     val hasTheme = patchOptionsViewModel.getThemeOptions(packageName) != null
     val hasBranding = patchOptionsViewModel.getBrandingOptions(packageName) != null
-    val hasHeader = packageName == KnownApp.YOUTUBE && patchOptionsViewModel.getHeaderOptions() != null
+    val hasHeader = patchOptionsViewModel.getHeaderOptions() != null
 
     Column {
         // Header

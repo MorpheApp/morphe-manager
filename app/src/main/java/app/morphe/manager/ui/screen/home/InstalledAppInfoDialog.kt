@@ -63,7 +63,7 @@ data class AppliedPatchBundleUi(
 )
 
 /**
- * Dialog for installed app info and actions
+ * Dialog for installed app info and actions.
  */
 @SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
@@ -72,6 +72,7 @@ fun InstalledAppInfoDialog(
     onDismiss: () -> Unit,
     onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
+    homeViewModel: HomeViewModel,
     viewModel: InstalledAppInfoViewModel = koinViewModel(
         key = packageName,
         parameters = { parametersOf(packageName) }
@@ -89,8 +90,7 @@ fun InstalledAppInfoDialog(
     val isInstalling = installState is InstallViewModel.InstallState.Installing
     val mountOperation = installViewModel.mountOperation
 
-    // Get HomeViewModel for update status
-    val homeViewModel: HomeViewModel = koinViewModel()
+    // Get update status from the shared HomeViewModel instance
     val appUpdates by homeViewModel.appUpdatesAvailable.collectAsStateWithLifecycle()
     val hasUpdate = appUpdates[packageName] == true
 
@@ -432,7 +432,7 @@ fun InstalledAppInfoDialog(
 }
 
 /**
- * Unified banner component for warnings and updates
+ * Unified banner component for warnings and updates.
  */
 @Composable
 private fun WarningBanner(
