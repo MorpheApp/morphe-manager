@@ -1,3 +1,10 @@
+## app [1.10.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.10.0...v1.10.1-dev.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* Custom header does not apply to Youtube Music in simple mode ([88ed0d1](https://github.com/MorpheApp/morphe-manager/commit/88ed0d1c891c01cb5d6b81e2d4f1509f3d1cb6a2))
+
 # app [1.10.0](https://github.com/MorpheApp/morphe-manager/compare/v1.9.0...v1.10.0) (2026-03-02)
 
 
