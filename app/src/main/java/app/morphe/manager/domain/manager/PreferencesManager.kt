@@ -3,7 +3,9 @@ package app.morphe.manager.domain.manager
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
+import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
@@ -11,7 +13,6 @@ import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.ExportNameFormatter
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
-import app.morphe.manager.BuildConfig
 import app.morphe.manager.worker.UpdateCheckInterval
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
@@ -97,7 +98,9 @@ class PreferencesManager(
 
             // Initialize process memory limit adaptively on first launch
             if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
-                val adaptive = calculateAdaptiveMemoryLimit(context)
+                val adaptive = calculateAdaptiveMemoryLimit(context).coerceAtMost(
+                    PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
+                )
                 Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
                 patcherProcessMemoryLimit.update(adaptive)
             }
