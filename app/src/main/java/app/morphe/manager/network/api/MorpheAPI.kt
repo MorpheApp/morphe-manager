@@ -240,7 +240,7 @@ class MorpheAPI(
             is APIResponse.Success -> {
                 val mapped = runCatching {
                     mapManagerJsonToAsset(managerConfig, response.data).also { asset ->
-                        Log.d(tag, "Manager from CDN ($branch): version=${asset.version}, url=${asset.downloadUrl}")
+                        Log.d(tag, "Manager from JSON ($branch): version=${asset.version}, url=${asset.downloadUrl}")
                     }
                 }
 
@@ -260,26 +260,25 @@ class MorpheAPI(
     /**
      * Get app update - returns the newest available version if it is strictly newer
      * than the currently installed one.
+     * The dev channel always contains the latest version.
      *
-     * Uses jsDelivr CDN which is cache-cleared after each release, so the JSON file
-     * is only visible once the release is fully available.
-     * The branch is determined by [PreferencesManager.useManagerPrereleases].
+     * Matches the FCM subscription matrix in [app.morphe.manager.util.syncFcmTopics].
      */
     suspend fun getAppUpdate(): MorpheAsset? {
         val usePrereleases = prefs.useManagerPrereleases.get()
-        val branch = if (usePrereleases) "dev" else "main"
         val currentWeight = versionWeight(BuildConfig.VERSION_NAME.removePrefix("v"))
+        val branch = if (usePrereleases || isDevBuild) "dev" else "main"
 
         val candidate = if (USE_MANAGER_DIRECT_JSON) {
             getManagerFromJson(branch).fallbackTo {
-                Log.w(tag, "Manager CDN unavailable, falling back to GitHub API")
+                Log.w(tag, "Manager JSON unavailable, falling back to GitHub API")
                 getManagerFromGitHub()
             }.getOrNull()
         } else {
             getManagerFromGitHub().getOrNull()
-        } ?: return null
+        }
 
-        return candidate.takeIf {
+        return candidate?.takeIf {
             versionWeight(it.version.removePrefix("v")) > currentWeight
         }
     }
