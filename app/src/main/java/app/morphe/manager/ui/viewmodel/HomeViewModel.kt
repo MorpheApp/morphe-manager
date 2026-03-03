@@ -49,6 +49,8 @@ import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import java.io.File
 import java.io.FileNotFoundException
 import java.net.HttpURLConnection
@@ -57,6 +59,7 @@ import java.net.URL
 import java.net.URLEncoder.encode
 import java.util.zip.ZipInputStream
 import javax.net.ssl.SSLException
+import kotlin.time.Clock
 
 /**
  * Bundle update status for snackbar display.
@@ -257,9 +260,7 @@ class HomeViewModel(
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
     init {
-        viewModelScope.launch {
-            checkForManagerUpdates()
-        }
+        triggerUpdateCheck()
     }
 
     /**
@@ -318,9 +319,36 @@ class HomeViewModel(
         pendingPatchAction = null
     }
 
+    /**
+     * Checks for a manager update and defers showing the banner until the APK
+     * is likely fully uploaded. If the release is newer than [MANAGER_UPDATE_SHOW_DELAY_SECONDS],
+     * the banner is shown immediately; otherwise we wait out the remaining time.
+     */
+    @OptIn(kotlin.time.ExperimentalTime::class)
     suspend fun checkForManagerUpdates() {
         uiSafe(app, R.string.failed_to_check_updates, "Failed to check for updates") {
-            updatedManagerVersion = morpheAPI.getAppUpdate()?.version
+            val update = morpheAPI.getAppUpdate() ?: return@uiSafe
+
+            val releaseAgeSeconds = (Clock.System.now().toEpochMilliseconds() -
+                    update.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()) / 1_000L
+
+            if (releaseAgeSeconds < MANAGER_UPDATE_SHOW_DELAY_SECONDS) {
+                val remainingMs = (MANAGER_UPDATE_SHOW_DELAY_SECONDS - releaseAgeSeconds) * 1_000L
+                Log.d(tag, "Manager update ${update.version} is ${releaseAgeSeconds}s old, waiting ${remainingMs / 1000}s before showing banner")
+                delay(remainingMs)
+            }
+
+            updatedManagerVersion = update.version
+        }
+    }
+
+    /**
+     * Launches [checkForManagerUpdates] on [viewModelScope] so it survives composition changes.
+     * Safe to call from UI without a coroutine scope.
+     */
+    fun triggerUpdateCheck() {
+        viewModelScope.launch {
+            checkForManagerUpdates()
         }
     }
 

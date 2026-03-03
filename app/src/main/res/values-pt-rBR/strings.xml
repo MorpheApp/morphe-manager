@@ -151,7 +151,7 @@ Tem certeza de que deseja continuar?"</string>
     <string name="adaptive_icon_safe_zone_outer">Área de máscara (pode ser recortada)</string>
     <string name="adaptive_icon_created_success">Ícone adaptável criado com sucesso</string>
     <string name="adaptive_icon_creation_failed">Falha ao criar ícone adaptável</string>
-    <string name="adaptive_icon_folder_explanation">Selecionar onde criar a pasta \'morphe_branding/morphe_icons\' com os arquivos de ícone gerados</string>
+    <string name="adaptive_icon_folder_explanation">Selecione onde criar a pasta \'%1$s/%2$s\' com arquivos de ícone gerados</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Criar cabeçalho personalizado</string>
     <string name="header_creator_instructions">Escolha imagens para temas claro e escuro, depois ajuste com gestos de aproximação com dois dedos</string>
@@ -160,7 +160,7 @@ Tem certeza de que deseja continuar?"</string>
     <string name="header_creator_no_image">Nenhuma imagem selecionada</string>
     <string name="header_creator_success">Cabeçalho criado com sucesso</string>
     <string name="header_creator_failed">Falha ao criar cabeçalho</string>
-    <string name="header_creator_folder_explanation">Selecionar onde criar a pasta \'morphe_branding/morphe_header\' com os arquivos de cabeçalho gerados</string>
+    <string name="header_creator_folder_explanation">Selecione onde criar a pasta \'%1$s/%2$s\' com arquivos de cabeçalho gerados</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Tem certeza de que deseja desinstalar esse app?</string>
     <string name="home_app_info_remove_app_warning">Isto irá excluir permanentemente:</string>

@@ -51,8 +51,8 @@
     <string name="sources_management_title">Джерела патчів</string>
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
-    <string name="sources_management_prerelease_toggle">Використовувати передрелізні патчі</string>
-    <string name="sources_management_prerelease_toggle_description">Отримувати ранній доступ до нової експериментальної версії патчів</string>
+    <string name="sources_management_prerelease_toggle">Передрелізні версії патчів</string>
+    <string name="sources_management_prerelease_toggle_description">Отримувати ранній доступ до нових експериментальних версій патчів</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
@@ -151,7 +151,7 @@
     <string name="adaptive_icon_safe_zone_outer">Зона маски (може бути обрізана)</string>
     <string name="adaptive_icon_created_success">Адаптивну іконку успішно створено</string>
     <string name="adaptive_icon_creation_failed">Не вдалося створити адаптивну іконку</string>
-    <string name="adaptive_icon_folder_explanation">Виберіть де створити папку \'morphe_branding/morphe_icons\' зі згенерованими файлами іконок</string>
+    <string name="adaptive_icon_folder_explanation">Виберіть, де створити теку \'%1$s/%2$s\' зі згенерованими файлами іконок</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Створити заголовок</string>
     <string name="header_creator_instructions">Виберіть зображення для світлої та темної тем, а потім налаштуйте масштаб жестами</string>
@@ -160,7 +160,7 @@
     <string name="header_creator_no_image">Зображення не вибрано</string>
     <string name="header_creator_success">Заголовок успішно створено</string>
     <string name="header_creator_failed">Не вдалося створити заголовок</string>
-    <string name="header_creator_folder_explanation">Виберіть де створити папку \'morphe_branding/morphe_header\' зі згенерованими файлами заголовків</string>
+    <string name="header_creator_folder_explanation">Виберіть, де створити теку \'%1$s/%2$s\' зі згенерованими файлами заголовків</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ви впевнені, що хочете видалити цей застосунок?</string>
     <string name="home_app_info_remove_app_warning">Це назавжди видалить:</string>
@@ -325,8 +325,8 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Змінити іконку</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Оновлення</string>
-    <string name="settings_advanced_updates_use_prereleases">Використовувати передрелізні версії менеджера</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Отримувати ранній доступ до нових експериментальних версій менеджера. Щоб отримати передрелізні патчі, увімкніть перемикач передрелізу в кожному джерелі патчів окремо</string>
+    <string name="settings_advanced_updates_use_prereleases">Передрелізна версія менеджера</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Отримувати ранній доступ до нових експериментальних версій менеджера. Щоб отримати передрелізні версії патчів, увімкніть перемикач передрелізу в кожному джерелі патчів окремо</string>
     <string name="settings_advanced_updates_allow_metered">Оновлення через мобільну мережу</string>
     <string name="settings_advanced_updates_allow_metered_description">Дозволити завантаження джерел патчів та оновлень менеджера через мобільну мережу</string>
     <string name="settings_advanced_updates_background_notifications">Фонові сповіщення про оновлення</string>

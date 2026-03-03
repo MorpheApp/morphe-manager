@@ -96,7 +96,7 @@
     <string name="home_download_instructions_step4_mount">Orijinal APK\'yi yükledikten sonra Morphe\'ye geri dönün</string>
     <string name="home_download_instructions_continue">APKMirror.com\'a Devam Et</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">İndirilen APK\'yi seçin</string>
+    <string name="home_file_picker_prompt_title">İndirilen APK\'yi seç</string>
     <string name="home_file_picker_prompt_description">İndirdiğiniz &lt;b&gt;%1$s&lt;/b&gt; APK dosyasını seçin</string>
     <string name="home_file_picker_prompt_open_apk">APK dosyasını aç</string>
     <string name="home_recommended_version">Önerilen sürüm</string>
@@ -151,7 +151,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="adaptive_icon_safe_zone_outer">Mask zonu (kırpılabilir)</string>
     <string name="adaptive_icon_created_success">Adaptif simge başarıyla oluşturuldu</string>
     <string name="adaptive_icon_creation_failed">Adaptif simge oluşturulamadı</string>
-    <string name="adaptive_icon_folder_explanation">Oluşturulan simge dosyalarını içeren \'morphe_branding/morphe_icons\' klasörünü oluşturmak için yer seçin</string>
+    <string name="adaptive_icon_folder_explanation">Seçiniz oluşturulacak \'%1$s/%2$s\' klasörü yerini, üretilen ikon dosyaları ile</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Özel başlık oluştur</string>
     <string name="header_creator_instructions">Aydınlatma ve karanlık temalar için görüntüleri seçin, ardından dokunarak yakınlaştırın ve yakınlaştırın</string>
@@ -160,7 +160,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="header_creator_no_image">Seçilen görüntü yok</string>
     <string name="header_creator_success">Başlık başarıyla oluşturuldu</string>
     <string name="header_creator_failed">Başlık oluşturulamadı</string>
-    <string name="header_creator_folder_explanation">Oluşturulan başlık dosyalarını içeren \'morphe_branding/morphe_header\' klasörünü oluşturmak için yer seçin</string>
+    <string name="header_creator_folder_explanation">Seçiniz oluşturulacak \'%1$s/%2$s\' klasörü yerini, üretilen başlık dosyaları ile</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu uygulamayı kaldırmak istediğinizden emin misiniz?</string>
     <string name="home_app_info_remove_app_warning">Bu aşağıdakileri kalıcı olarak silecektir:</string>
@@ -263,7 +263,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="patcher_message_20">Saçmalıklar kaldırılıyor. Lütfen bekleyin… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Uygulama yamalanıyor</string>
-    <string name="memory_usage"> bellek kullanımı</string>
+    <string name="memory_usage"> Bellek kullanımı</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Yamalar uygulanıyor</string>
     <string name="failed_to_execute_patch">%s uygulanamadı</string>

@@ -51,7 +51,7 @@
     <string name="sources_management_title">Fonti delle patch</string>
     <string name="sources_management_open_in_browser">Apri nel browser</string>
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
-    <string name="sources_management_prerelease_toggle">Usa patch pre-release</string>
+    <string name="sources_management_prerelease_toggle">Usa le patch di anteprima</string>
     <string name="sources_management_prerelease_toggle_description">Ottieni l\'accesso anticipato alle nuove versioni sperimentali delle patch.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome visualizzato</string>
@@ -151,7 +151,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="adaptive_icon_safe_zone_outer">Zona di maschera (potrebbe venire tagliata)</string>
     <string name="adaptive_icon_created_success">Icona adattiva creata con successo</string>
     <string name="adaptive_icon_creation_failed">Impossibile creare l\'icona adattiva</string>
-    <string name="adaptive_icon_folder_explanation">Seleziona dove creare la cartella \'morphe_branding/morphe_icons\' con i file dell\'icona generata</string>
+    <string name="adaptive_icon_folder_explanation">Seleziona dove creare la cartella \'%1$s/%2$s\' con i file dell\'icona generati</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crea intestazione personalizzata</string>
     <string name="header_creator_instructions">Scegli le immagini per i temi chiaro e scuro, quindi regola con gesti di pinch-to-zoom</string>
@@ -160,7 +160,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="header_creator_no_image">Nessuna immagine selezionata</string>
     <string name="header_creator_success">Intestazione creata con successo</string>
     <string name="header_creator_failed">Impossibile creare l\'intestazione</string>
-    <string name="header_creator_folder_explanation">Seleziona dove creare la cartella \'morphe_branding/morphe_header\' con i file dell\'intestazione generata</string>
+    <string name="header_creator_folder_explanation">Seleziona dove creare la cartella \'%1$s/%2$s\' con i file dell\'intestazione generati</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sei sicuro di voler disinstallare questa app?</string>
     <string name="home_app_info_remove_app_warning">Questo eliminerà in modo permanente:</string>
@@ -629,7 +629,7 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="details">Dettagli</string>
     <string name="hide">Nascondi</string>
     <string name="default_">Predefinita</string>
-    <string name="logs">Registri</string>
+    <string name="logs">Tracciati</string>
     <string name="installing_ellipsis">Installazione in corso…</string>
     <string name="mounting_ellipsis">Montaggio in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>

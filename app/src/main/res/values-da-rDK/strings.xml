@@ -151,7 +151,7 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="adaptive_icon_safe_zone_outer">Maskezone (kan klippes)</string>
     <string name="adaptive_icon_created_success">Adaptiv ikon oprettet med succes</string>
     <string name="adaptive_icon_creation_failed">Kunne ikke oprette adaptiv ikon</string>
-    <string name="adaptive_icon_folder_explanation">Vælg hvor at oprette \'morphe_branding/morphe_icons\' mappe med genererede ikonfiler</string>
+    <string name="adaptive_icon_folder_explanation">Vælg hvor du vil oprette \'%1$s/%2$s\' mappe med genererede ikonfiler</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Opret tilpasset header</string>
     <string name="header_creator_instructions">Vælg billeder for lys og mørketemaer, derefter juster med pinch-to-zoom gester</string>
@@ -160,7 +160,7 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="header_creator_no_image">Ingen billede valgt</string>
     <string name="header_creator_success">Overskrift oprettet med succes</string>
     <string name="header_creator_failed">Kunne ikke oprette overskrift</string>
-    <string name="header_creator_folder_explanation">Vælg hvor at oprette \'morphe_branding/morphe_header\' mappe med genererede overskriftfiler</string>
+    <string name="header_creator_folder_explanation">Vælg hvor du vil oprette \'%1$s/%2$s\' mappe med genererede headerfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Er du sikker på at du vil fjerne denne app? </string>
     <string name="home_app_info_remove_app_warning">Dette vil permanent slette:</string>

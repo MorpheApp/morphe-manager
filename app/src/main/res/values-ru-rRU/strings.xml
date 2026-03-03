@@ -51,7 +51,7 @@
     <string name="sources_management_title">Источники патчей</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
-    <string name="sources_management_prerelease_toggle">Использовать предварительные версии</string>
+    <string name="sources_management_prerelease_toggle">Использовать пред релиз патчи</string>
     <string name="sources_management_prerelease_toggle_description">Получать ранний доступ к новым экспериментальным версиям патчей</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
@@ -151,7 +151,7 @@
     <string name="adaptive_icon_safe_zone_outer">Зона маски (может быть обрезано)</string>
     <string name="adaptive_icon_created_success">Адаптивный значок создан успешно</string>
     <string name="adaptive_icon_creation_failed">Не удалось создать адаптивный значок</string>
-    <string name="adaptive_icon_folder_explanation">Выберите место для создания папки \'morphe_branding/morphe_icons\' с Generated icon files</string>
+    <string name="adaptive_icon_folder_explanation">Выберите, где создать папку \'%1$s/%2$s\' со сгенерированными файлами иконок</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Создать собственный заголовок</string>
     <string name="header_creator_instructions">Выберите изображения для светлой и темной тем, затем отрегулируйте жестами \" pinch-to-zoom \"</string>
@@ -160,7 +160,7 @@
     <string name="header_creator_no_image">Изображение не выбрано</string>
     <string name="header_creator_success">Заголовок создан успешно</string>
     <string name="header_creator_failed">Не удалось создать заголовок</string>
-    <string name="header_creator_folder_explanation">Выберите место для создания папки \'morphe_branding/morphe_header\' с Generated header files</string>
+    <string name="header_creator_folder_explanation">Выберите, где можно создать папку \'%1$s/%2$s\' со сгенерированными файлами заголовков</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Вы действительно хотите удалить это приложение?</string>
     <string name="home_app_info_remove_app_warning">Это навсегда удалит:</string>
@@ -325,8 +325,8 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Изменить значок</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Обновления</string>
-    <string name="settings_advanced_updates_use_prereleases">Использовать предварительные версии менеджера</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Получать ранний доступ к новым экспериментальным версиям менеджера. Чтобы получать предварительные версии патчей, включите переключатель предварительных версий в настройках каждого источника патчей отдельно</string>
+    <string name="settings_advanced_updates_use_prereleases">Использовать пред релиз версию менеджера</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Получать ранний доступ к новым экспериментальным версиям менеджера. Чтобы получить пред релиз патчей, включите переключатель пред релиз в каждом источнике патчей отдельно</string>
     <string name="settings_advanced_updates_allow_metered">Обновление от мобильного трафика</string>
     <string name="settings_advanced_updates_allow_metered_description">Разрешить загрузку источникам патчей и обновлениям менеджера через мобильные данные</string>
     <string name="settings_advanced_updates_background_notifications">Уведомления о фоновых обновлениях</string>

@@ -3,6 +3,8 @@ package app.morphe.manager
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -108,7 +111,11 @@ private fun MorpheManager(vm: MainViewModel) {
     val prefs: PreferencesManager = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
-    val homeViewModel = koinViewModel<HomeViewModel>()
+
+    // HomeViewModel must be scoped to the Activity, not to a NavBackStackEntry
+    val homeViewModel: HomeViewModel = koinViewModel(
+        viewModelStoreOwner = LocalActivity.current as ComponentActivity
+    )
 
     // Box with background at the highest level
     Box(

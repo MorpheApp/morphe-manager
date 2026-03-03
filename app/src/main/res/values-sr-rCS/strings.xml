@@ -151,7 +151,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="adaptive_icon_safe_zone_outer">Maskirana zona (može biti isječena)</string>
     <string name="adaptive_icon_created_success">Adaptivni ikona uspešno kreirana</string>
     <string name="adaptive_icon_creation_failed">Neuspešno kreiranje adaptivne ikone</string>
-    <string name="adaptive_icon_folder_explanation">Odaberite gde da kreirate folder \'morphe_branding/morphe_icons\' sa generisanim fajlovima ikona</string>
+    <string name="adaptive_icon_folder_explanation">Odaberi lokaciju za stvaranje foldera \'%1$s/%2$s\' sa generisanim ikona datotekama</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Napravi personalizovanu zaglavlje</string>
     <string name="header_creator_instructions">Odaberite slike za svetle i tamne teme, a zatim prilagodite sa gestama za prstima za prstima</string>
@@ -160,7 +160,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="header_creator_no_image">Nema odabrane slike</string>
     <string name="header_creator_success">Glavna tema uspešno kreirana</string>
     <string name="header_creator_failed">Neuspešno kreiranje glavne teme</string>
-    <string name="header_creator_folder_explanation">Odaberite gde da kreirate folder \'morphe_branding/morphe_header\' sa generisanim fajlovima glavnih tema</string>
+    <string name="header_creator_folder_explanation">Odaberi lokaciju za stvaranje foldera \'%1$s/%2$s\' sa generisanim zaglavljem datotekama</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Da li zaista želite da ponišete ovu aplikaciju?</string>
     <string name="home_app_info_remove_app_warning">Ovo će trajno obrisati:</string>

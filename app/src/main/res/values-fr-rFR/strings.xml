@@ -151,7 +151,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="adaptive_icon_safe_zone_outer">Zone de masquage (peut être rognée)</string>
     <string name="adaptive_icon_created_success">Icône adaptative créée avec succès</string>
     <string name="adaptive_icon_creation_failed">Échec de la création de l\'icône adaptative</string>
-    <string name="adaptive_icon_folder_explanation">Sélectionnez l’emplacement où créer le dossier \'morphe_branding/morphe_icons\' contenant les fichiers d’icônes générés</string>
+    <string name="adaptive_icon_folder_explanation">Sélectionnez l\'emplacement pour créer le dossier \'%1$s/%2$s\' avec les fichiers d\'icônes générés</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Créer un en-tête personnalisé</string>
     <string name="header_creator_instructions">Choisissez des images pour les thèmes clair et sombre, puis ajustez-les avec des gestes de pincement pour zoomer</string>
@@ -160,7 +160,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="header_creator_no_image">Pas d\'image sélectionnée</string>
     <string name="header_creator_success">En-tête créé avec succès</string>
     <string name="header_creator_failed">Échec de la création de l\'en-tête</string>
-    <string name="header_creator_folder_explanation">Sélectionnez l’emplacement où créer le dossier \'morphe_branding/morphe_icons\' contenant les fichiers d’en-tête générés</string>
+    <string name="header_creator_folder_explanation">Sélectionnez l\'emplacement pour créer le dossier \'%1$s/%2$s\' avec les fichiers d\'en-tête générés</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Êtes-vous sûr de vouloir désinstaller cette application ?</string>
     <string name="home_app_info_remove_app_warning">Cela supprimera définitivement :</string>

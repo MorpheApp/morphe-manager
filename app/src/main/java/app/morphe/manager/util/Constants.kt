@@ -11,11 +11,22 @@ const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
 const val MORPHE_API_URL = "https://api.morphe.software"
 
-/** jsDelivr CDN URL for the stable manager release JSON (main branch) */
-const val MANAGER_RELEASE_JSON_URL = "https://cdn.jsdelivr.net/gh/MorpheApp/morphe-manager@main/app/app-release.json"
+///** jsDelivr CDN URL for the stable manager release JSON (main branch) */
+//const val MANAGER_RELEASE_JSON_URL = "https://cdn.jsdelivr.net/gh/MorpheApp/morphe-manager@main/app/app-release.json"
+///** jsDelivr CDN URL for the pre-release manager release JSON (dev branch) */
+//const val MANAGER_PRERELEASE_JSON_URL = "https://cdn.jsdelivr.net/gh/MorpheApp/morphe-manager@dev/app/app-release.json"
 
-/** jsDelivr CDN URL for the pre-release manager release JSON (dev branch) */
-const val MANAGER_PRERELEASE_JSON_URL = "https://cdn.jsdelivr.net/gh/MorpheApp/morphe-manager@dev/app/app-release.json"
+/**
+ * Delay before showing a manager update notification to the user.
+ * Gives time for the APK to be fully uploaded after app-release.json is published.
+ */
+const val MANAGER_UPDATE_SHOW_DELAY_SECONDS = 300L
+
+/** Raw GitHub URL for the stable manager release JSON (main branch) */
+const val MANAGER_RELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/main/app/app-release.json"
+
+/** Raw GitHub URL for the pre-release manager release JSON (dev branch) */
+const val MANAGER_PRERELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/dev/app/app-release.json"
 
 /** Controls whether manager updates are fetched directly from JSON files in the repository instead of using the GitHub API */
 const val USE_MANAGER_DIRECT_JSON = true

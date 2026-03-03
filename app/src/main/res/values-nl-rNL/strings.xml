@@ -151,7 +151,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="adaptive_icon_safe_zone_outer">Maskerzone (mag worden geknipt)</string>
     <string name="adaptive_icon_created_success">Adaptieve icoon succesvol gemaakt</string>
     <string name="adaptive_icon_creation_failed">Mislukt om adaptieve icoon te maken</string>
-    <string name="adaptive_icon_folder_explanation">Selecteer waar de map \'morphe_branding/morphe_icons\' met gegenereerde icoonbestanden gemaakt moet worden</string>
+    <string name="adaptive_icon_folder_explanation">Selecteer waar je de map \'%1$s/%2$s\' met gegenereerde iconbestanden wilt maken</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Aangepaste koptekst maken</string>
     <string name="header_creator_instructions">Selecteer beelden voor lichte en donkere thema\'s, en justeer met pinch-to-zoom-gesten</string>
@@ -160,7 +160,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="header_creator_no_image">Geen afbeelding geselecteerd</string>
     <string name="header_creator_success">Header succesvol gemaakt</string>
     <string name="header_creator_failed">Mislukt om header te maken</string>
-    <string name="header_creator_folder_explanation">Selecteer waar de map \'morphe_branding/morphe_header\' met gegenereerde headerbestanden gemaakt moet worden</string>
+    <string name="header_creator_folder_explanation">Selecteer waar je de map \'%1$s/%2$s\' met gegenereerde headerbestanden wilt maken</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Weet u zeker dat u deze app wilt verwijderen?</string>
     <string name="home_app_info_remove_app_warning">Dit zal permanent verwijderen:</string>

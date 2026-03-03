@@ -151,7 +151,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="adaptive_icon_safe_zone_outer">Maskovací zóna (může být skryta)</string>
     <string name="adaptive_icon_created_success">Adaptivní ikona vytvořena úspěšně</string>
     <string name="adaptive_icon_creation_failed">Nepodařilo se vytvořit adaptivní ikonu</string>
-    <string name="adaptive_icon_folder_explanation">Vyberte místo, kde se bude vytvářet složka \'morphe_branding/morphe_icons\' s generovanými ikonami</string>
+    <string name="adaptive_icon_folder_explanation">Vyberte, kde vytvořit složku \'%1$s/%2$s\' s generovanými ikonami</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Vytvořit vlastní záhlaví</string>
     <string name="header_creator_instructions">Vyberte obrázky pro světlé a tmavé téma, potom přizpůsobte gesty pinch-to-zoom</string>
@@ -160,7 +160,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="header_creator_no_image">Není vybrán žádný obrázek</string>
     <string name="header_creator_success">Záhlaví vytvořeno úspěšně</string>
     <string name="header_creator_failed">Nepodařilo se vytvořit záhlaví</string>
-    <string name="header_creator_folder_explanation">Vyberte místo, kde se bude vytvářet složka \'morphe_branding/morphe_header\' s generovanými záhlavími</string>
+    <string name="header_creator_folder_explanation">Vyberte, kde vytvořit složku \'%1$s/%2$s\' s generovanými hlavičkovými soubory</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Opravdu chcete odinstalovat tuto aplikaci?</string>
     <string name="home_app_info_remove_app_warning">Tím trvale smažete:</string>

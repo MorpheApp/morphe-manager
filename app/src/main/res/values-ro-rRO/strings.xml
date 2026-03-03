@@ -151,7 +151,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="adaptive_icon_safe_zone_outer">Zonă mascată (poate fi tăiată)</string>
     <string name="adaptive_icon_created_success">Icoana adaptivă creată cu succes</string>
     <string name="adaptive_icon_creation_failed">Eroare la crearea icoanei adaptive</string>
-    <string name="adaptive_icon_folder_explanation">Selectați unde să creați folderul \'morphe_branding/morphe_icons\' cu fișierele icoanelor generate</string>
+    <string name="adaptive_icon_folder_explanation">Selectează unde să creezi dosarul \'%1$s/%2$s\' cu fișiere de iconi generate</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Creează antet personalizat</string>
     <string name="header_creator_instructions">Alegeți imaginile pentru teme luminoase și întunecate, apoi ajustați cu gesturi de zoom cu pinț</string>
@@ -160,7 +160,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="header_creator_no_image">Nicio imagine selectată</string>
     <string name="header_creator_success">Antet creat cu succes</string>
     <string name="header_creator_failed">Eroare la crearea antetului</string>
-    <string name="header_creator_folder_explanation">Selectați unde să creați folderul \'morphe_branding/morphe_header\' cu fișierele antetului generate</string>
+    <string name="header_creator_folder_explanation">Selectează unde să creezi dosarul \'%1$s/%2$s\' cu fișiere de antet generate</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sigur doriți să ștergeți această aplicație?</string>
     <string name="home_app_info_remove_app_warning">Aceasta va șterge permanent:</string>

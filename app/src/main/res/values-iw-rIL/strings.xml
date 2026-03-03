@@ -152,7 +152,7 @@
     <string name="adaptive_icon_safe_zone_outer">אזור מסכה (может быть обрезан)</string>
     <string name="adaptive_icon_created_success">עיצוב איקונני אדפטיבי בוצע בהצלחה</string>
     <string name="adaptive_icon_creation_failed">שגיאה ביצירת עיצוב איקונני אדפטיבי</string>
-    <string name="adaptive_icon_folder_explanation">בחר היכן ליצור את הקובץ \'morphe_branding/morphe_icons\' עם הקבצים שצורנו</string>
+    <string name="adaptive_icon_folder_explanation">בחר את המקום ליצור תיקיה \"%1$s/%2$s\" עם קבצי אייקונים שנוצרו</string>
     <!-- Header Creator -->
     <string name="header_creator_create">צור כותרת מותאמת</string>
     <string name="header_creator_instructions">בחר תמונות עבור תכונות אור וחושך, ואז מתן בעזרת גישות \'pinch-to-zoom\'</string>
@@ -161,7 +161,7 @@
     <string name="header_creator_no_image">לא נבחרה תמונה</string>
     <string name="header_creator_success">עמודות ראשיות צורו בהצלחה</string>
     <string name="header_creator_failed">שגיאה ביצירת עמודות ראשיות</string>
-    <string name="header_creator_folder_explanation">בחר היכן ליצור את הקובץ \'morphe_branding/morphe_header\' עם הקבצים שצורנו</string>
+    <string name="header_creator_folder_explanation">בחר את המקום ליצור תיקיה \"%1$s/%2$s\" עם קבצי ראש (header) שנוצרו</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">האם אתה בטוח שברצונך למחוק את אפליקציה זו? </string>
     <string name="home_app_info_remove_app_warning">זוהי תהליך מחיקה קבוע:</string>

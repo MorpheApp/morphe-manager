@@ -152,7 +152,7 @@
     <string name="adaptive_icon_safe_zone_outer">เขตมาสก์ (อาจถูกตัด)</string>
     <string name="adaptive_icon_created_success">สร้างภาพประจำกิจการสำเร็จ</string>
     <string name="adaptive_icon_creation_failed">ล้มเหลวในการสร้างภาพประจำกิจการ</string>
-    <string name="adaptive_icon_folder_explanation">เลือกที่จะสร้างโฟลเดอร์ \'morphe_branding/morphe_icons\' ที่มีไฟล์ภาพประจำกิจการ</string>
+    <string name="adaptive_icon_folder_explanation">เลือกที่จะสร้างโฟลเดอร์ \'%1$s/%2$s\' ที่มีไฟล์ไอคอนที่สร้างขึ้น</string>
     <!-- Header Creator -->
     <string name="header_creator_create">สร้างเฮดเดอร์กำหนดเอง</string>
     <string name="header_creator_instructions">เลือกภาพสำหรับธีมสว่างกับมืด แล้วปรับลดขยายภาพด้วยการซูมภาพเข้าออกแบบถ่างนิ้ว</string>
@@ -161,7 +161,7 @@
     <string name="header_creator_no_image">ส่งคำขอของคุณสำเร็จ</string>
     <string name="header_creator_success">ล้มเหลวในการสร้างหัวข้อ</string>
     <string name="header_creator_failed">เลือกที่จะสร้างโฟลเดอร์ \'morphe_branding/morphe_header\' ที่มีไฟล์หัวข้อ</string>
-    <string name="header_creator_folder_explanation">เลือกที่จะสร้างโฟลเดอร์ \'morphe_branding/morphe_header\' ที่มีไฟล์หัวข้อที่สร้างขึ้น</string>
+    <string name="header_creator_folder_explanation">เลือกที่จะสร้างโฟลเดอร์ \'%1$s/%2$s\' ที่มีไฟล์หัวข้อที่สร้างขึ้น</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">คุณแน่ใจหรือไม่ว่าต้องการลบแอปนี้?</string>
     <string name="home_app_info_remove_app_warning">นี่จะลบถาวร:</string>
