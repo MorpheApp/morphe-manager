@@ -1,4 +1,5 @@
 -dontobfuscate
+-dontoptimize
 
 -keep class app.morphe.manager.patcher.runtime.process.* { *; }
 -keep class app.morphe.manager.plugin.** { *; }
