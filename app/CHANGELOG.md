@@ -1,3 +1,10 @@
+# app [1.11.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.10.2...v1.11.0-dev.1) (2026-03-03)
+
+
+### Features
+
+* Use Morphe patcher 1.2.0 ([#231](https://github.com/MorpheApp/morphe-manager/issues/231)) ([944a3ab](https://github.com/MorpheApp/morphe-manager/commit/944a3ab7fab2d689b81f5d8e6bf5224660ce11ef))
+
 ## app [1.10.2](https://github.com/MorpheApp/morphe-manager/compare/v1.10.1...v1.10.2) (2026-03-02)
 
 
