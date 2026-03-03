@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.patcher
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -60,8 +61,11 @@ import app.morphe.manager.ui.screen.shared.useTwoColumnLayout
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
-/** Accent color used for the live indicator dot, step pipeline, and progress bar. */
-private val PatcherProgressColor = Color(0xFF4CAF50)
+/** Brand blue — start of the progress gradient. */
+private val PatcherProgressBlueColor = Color(0xFF1E5AA8)
+
+/** Brand teal — used for the live indicator dot, step pipeline, progress bar end, and success state. */
+private val PatcherProgressTealColor = Color(0xFF00AFAE)
 
 sealed interface LogItem {
     /**
@@ -300,6 +304,7 @@ fun ExpertPatchingInProgress(
                 ExpertLogPanel(
                     patcherViewModel = patcherViewModel,
                     listState = listState,
+                    patcherSucceeded = patcherSucceeded,
                     modifier = Modifier
                         .weight(0.58f)
                         .fillMaxHeight()
@@ -326,6 +331,7 @@ fun ExpertPatchingInProgress(
                 ExpertLogPanel(
                     patcherViewModel = patcherViewModel,
                     listState = listState,
+                    patcherSucceeded = patcherSucceeded,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth()
@@ -421,7 +427,7 @@ private fun ExpertProgressHeader(
                 Surface(
                     shape = RoundedCornerShape(8.dp),
                     color = if (patcherSucceeded == true)
-                        MaterialTheme.colorScheme.tertiaryContainer
+                        PatcherProgressTealColor.copy(alpha = 0.18f)
                     else
                         MaterialTheme.colorScheme.primaryContainer
                 ) {
@@ -429,10 +435,7 @@ private fun ExpertProgressHeader(
                         text = "$completed / $total",
                         style = MaterialTheme.typography.labelMedium,
                         fontWeight = FontWeight.SemiBold,
-                        color = if (patcherSucceeded == true)
-                            MaterialTheme.colorScheme.onTertiaryContainer
-                        else
-                            MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
                     )
                 }
@@ -488,8 +491,6 @@ private fun ExpertLinearProgressBar(progress: Float) {
         animationSpec = tween(700, easing = FastOutSlowInEasing),
         label = "expert_linear_progress"
     )
-    val primary = MaterialTheme.colorScheme.primary
-    val container = MaterialTheme.colorScheme.primaryContainer
 
     Box(
         modifier = Modifier
@@ -503,7 +504,7 @@ private fun ExpertLinearProgressBar(progress: Float) {
                 .fillMaxHeight()
                 .fillMaxWidth(fraction = animated.coerceIn(0f, 1f))
                 .clip(RoundedCornerShape(5.dp))
-                .background(Brush.horizontalGradient(listOf(container, primary)))
+                .background(Brush.horizontalGradient(listOf(PatcherProgressBlueColor, PatcherProgressTealColor)))
         )
     }
 }
@@ -642,8 +643,8 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
                 // Animate dot color on state transitions
                 val targetDotColor = when {
                     isFailed    -> MaterialTheme.colorScheme.error
-                    isRunning   -> PatcherProgressColor
-                    isCompleted -> PatcherProgressColor.copy(alpha = 0.55f)
+                    isRunning   -> PatcherProgressTealColor
+                    isCompleted -> PatcherProgressTealColor.copy(alpha = 0.55f)
                     else        -> MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
                 }
                 val dotColor by animateColorAsState(
@@ -661,7 +662,7 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
                         label = "step_line_$index"
                     )
                     val trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)
-                    val fillColor = PatcherProgressColor.copy(alpha = 0.5f)
+                    val fillColor = PatcherProgressTealColor.copy(alpha = 0.5f)
 
                     Box(modifier = Modifier
                         .weight(1f)
@@ -711,10 +712,12 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
 private fun ExpertLogPanel(
     patcherViewModel: PatcherViewModel,
     listState: LazyListState,
+    patcherSucceeded: Boolean? = null,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
     val rawLogs = patcherViewModel.logs
-    // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines.
+    // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines
     val logItems = remember(rawLogs.size) { rawLogs.toLogItems() }
 
     Surface(
@@ -724,7 +727,7 @@ private fun ExpertLogPanel(
         tonalElevation = 2.dp
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            LogPanelHeader()
+            LogPanelHeader(isLive = patcherSucceeded == null)
 
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
@@ -779,7 +782,7 @@ private fun ExpertLogPanel(
  * Panel header with a live-indicator dot and "Patcher Logs" label.
  */
 @Composable
-private fun LogPanelHeader() {
+private fun LogPanelHeader(isLive: Boolean = true) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -787,7 +790,7 @@ private fun LogPanelHeader() {
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        LiveIndicatorDot(size = 8.dp)
+        LiveIndicatorDot(size = 8.dp, isLive = isLive)
         Text(
             text = "Patcher Logs",
             style = MaterialTheme.typography.labelLarge,
@@ -796,7 +799,6 @@ private fun LogPanelHeader() {
         )
     }
 }
-
 
 /**
  * Dispatches a [LogItem] to the appropriate composable.
@@ -824,11 +826,11 @@ private fun PatcherInfoCard(
 ) {
     val accentColor = when (variant) {
         CardVariant.Start   -> MaterialTheme.colorScheme.primary
-        CardVariant.Success -> MaterialTheme.colorScheme.tertiary
+        CardVariant.Success -> PatcherProgressTealColor
     }
     val bgColor = when (variant) {
         CardVariant.Start   -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f)
-        CardVariant.Success -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f)
+        CardVariant.Success -> PatcherProgressTealColor.copy(alpha = 0.10f)
     }
 
     Surface(
@@ -989,8 +991,8 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                BannerFieldCell("Heap average", item.processHeapAverageMb, Modifier.weight(1f))
-                BannerFieldCell("Heap max", item.processHeapMaxMb ?: "?", Modifier.weight(1f))
+                BannerFieldCell("Memory average", item.processHeapAverageMb, Modifier.weight(1f))
+                BannerFieldCell("Memory max", item.processHeapMaxMb ?: "?", Modifier.weight(1f))
             }
         }
     }
@@ -1127,25 +1129,30 @@ private val LogLevel.logBadge: String
     }
 
 /**
- * Pulsing green dot used as a "live" indicator in the log panel header and empty state.
+ * Green dot used as a "live" indicator in the log panel header and empty state.
+ * When [isLive] is true the dot pulses; when false it stays solid.
  */
 @Composable
-private fun LiveIndicatorDot(size: Dp = 8.dp) {
-    val infiniteTransition = rememberInfiniteTransition(label = "live_dot")
-    val alpha by infiniteTransition.animateFloat(
-        initialValue = 0.25f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(900, easing = EaseInOut),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "live_alpha"
-    )
+private fun LiveIndicatorDot(size: Dp = 8.dp, isLive: Boolean = true) {
+    val alpha: Float = if (isLive) {
+        val infiniteTransition = rememberInfiniteTransition(label = "live_dot")
+        infiniteTransition.animateFloat(
+            initialValue = 0.25f,
+            targetValue = 1f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(900, easing = EaseInOut),
+                repeatMode = RepeatMode.Reverse
+            ),
+            label = "live_alpha"
+        ).value
+    } else {
+        1f
+    }
 
     Box(
         modifier = Modifier
             .size(size)
             .clip(RoundedCornerShape(50))
-            .background(PatcherProgressColor.copy(alpha = alpha))
+            .background(PatcherProgressTealColor.copy(alpha = alpha))
     )
 }
