@@ -60,6 +60,9 @@ import app.morphe.manager.ui.screen.shared.useTwoColumnLayout
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
+/** Accent color used for the live indicator dot, step pipeline, and progress bar. */
+private val PatcherProgressColor = Color(0xFF4CAF50)
+
 sealed interface LogItem {
     /**
      * Structured card shown at the start of patching.
@@ -639,8 +642,8 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
                 // Animate dot color on state transitions
                 val targetDotColor = when {
                     isFailed    -> MaterialTheme.colorScheme.error
-                    isRunning   -> MaterialTheme.colorScheme.primary
-                    isCompleted -> MaterialTheme.colorScheme.tertiary
+                    isRunning   -> PatcherProgressColor
+                    isCompleted -> PatcherProgressColor.copy(alpha = 0.55f)
                     else        -> MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
                 }
                 val dotColor by animateColorAsState(
@@ -658,7 +661,7 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
                         label = "step_line_$index"
                     )
                     val trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)
-                    val fillColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.45f)
+                    val fillColor = PatcherProgressColor.copy(alpha = 0.5f)
 
                     Box(modifier = Modifier
                         .weight(1f)
@@ -1124,7 +1127,7 @@ private val LogLevel.logBadge: String
     }
 
 /**
- * Pulsing red dot used as a "live" indicator in the log panel header and empty state.
+ * Pulsing green dot used as a "live" indicator in the log panel header and empty state.
  */
 @Composable
 private fun LiveIndicatorDot(size: Dp = 8.dp) {
@@ -1143,6 +1146,6 @@ private fun LiveIndicatorDot(size: Dp = 8.dp) {
         modifier = Modifier
             .size(size)
             .clip(RoundedCornerShape(50))
-            .background(MaterialTheme.colorScheme.error.copy(alpha = alpha))
+            .background(PatcherProgressColor.copy(alpha = alpha))
     )
 }

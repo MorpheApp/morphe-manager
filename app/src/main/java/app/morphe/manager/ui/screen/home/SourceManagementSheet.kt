@@ -32,7 +32,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
+import androidx.appcompat.content.res.AppCompatResources
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -752,8 +753,11 @@ fun BundleIcon(
     ) {
         when {
             bundle.isDefault -> {
+                val context = LocalContext.current
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                    painter = rememberDrawablePainter(
+                        drawable = AppCompatResources.getDrawable(context, R.drawable.ic_launcher_foreground)
+                    ),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
                     modifier = modifier
