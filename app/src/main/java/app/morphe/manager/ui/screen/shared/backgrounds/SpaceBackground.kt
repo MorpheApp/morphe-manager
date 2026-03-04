@@ -31,8 +31,7 @@ import kotlin.random.Random
 /**
  * Animated space background with stars moving towards the viewer (warp-style perspective).
  * Uses frame-based time so [speedMultiplier] changes smoothly without restarting animations.
- * On patching completion fires a hyperspace effect - stars stretch into streaks with a radial
- * core glow - then drops back to normal starfield.
+ * On patching completion fires a white flash overlay that fades out slowly.
  */
 @Composable
 fun SpaceBackground(
@@ -61,18 +60,17 @@ fun SpaceBackground(
     // baseProgress drives the Z-depth of all stars each frame
     var baseProgress by remember { mutableFloatStateOf(0f) }
 
-    // Hyperspace effect
-    // hyperspaceProgress 0 → 1: stars stretch into streaks and a radial glow bursts from centre
-    val hyperspaceProgress = remember { Animatable(0f) }
+    // flashAlpha 0→1→0: full-screen white flash on patching completion
+    // Ramps up instantly then fades out slowly so it reads as a "success" moment
+    val flashAlpha = remember { Animatable(0f) }
 
     CompletionEffect(patchingCompleted) {
         coroutineScope.launch {
-            hyperspaceProgress.snapTo(0f)
-            // Rush to peak quickly so the effect feels punchy
-            hyperspaceProgress.animateTo(1f, tween(500, easing = FastOutSlowInEasing))
-            delay(60)
-            // Quick but not instant return - 250ms gives a "drop out of warp" feel
-            hyperspaceProgress.animateTo(0f, tween(250, easing = FastOutSlowInEasing))
+            flashAlpha.snapTo(0f)
+            // Snap to peak - the abruptness is intentional, feels like a camera flash
+            flashAlpha.animateTo(0.45f, tween(100, easing = FastOutSlowInEasing))
+            // Slow fade out so the eye can adjust naturally
+            flashAlpha.animateTo(0f, tween(500, easing = FastOutSlowInEasing))
         }
     }
 
@@ -90,9 +88,12 @@ fun SpaceBackground(
                 val delta = (frameMs - lastFrameMs).coerceIn(0L, 64L).toFloat()
                 lastFrameMs = frameMs
 
-                // Fast lerp toward target speed - 3.5/sec gives ~0.7s ramp for space specifically,
-                // noticeably faster than other backgrounds to match the "warp engine" feel
-                currentSpeed += (targetSpeedState.floatValue - currentSpeed) * (delta / 1000f) * 3.5f
+                val speedBoost = 3f // Manually change speed boost
+
+                // Lerp toward target speed with a local 2x boost on top of the global speedMultiplier -
+                // stars accelerate twice as fast as other backgrounds during patching.
+                // 5.0/sec ramp gives ~0.4s to reach full speed, matching the "warp engine" feel.
+                currentSpeed += (1f + (targetSpeedState.floatValue - 1f) * speedBoost - currentSpeed) * (delta / 1000f) * 5.0f
 
                 // Normalize baseProgress increment to 60fps baseline so delta spikes don't jump
                 baseProgress += 0.0025f * currentSpeed * (delta / 16.67f)
@@ -151,15 +152,11 @@ fun SpaceBackground(
         val centerY = height / 2f
         val tiltX   = parallaxState.tiltX.value
         val tiltY   = parallaxState.tiltY.value
-        val hp      = hyperspaceProgress.value // 0..1, drives hyperspace visuals
-
-        // Extra apparent speed boost for visual star-stretch during hyperspace.
-        // At hp=1 stars are moving 10x faster visually - gives the "jump to hyperspace" feel
-        val visualSpeedBoost = 1f + hp * 9f
+        val fa = flashAlpha.value // 0..1, drives white flash overlay
 
         // Render stars
         stars.forEach { star ->
-            val adjustedProgress = ((baseProgress * star.speed * visualSpeedBoost) + star.initialOffset) % 1f
+            val adjustedProgress = ((baseProgress * star.speed) + star.initialOffset) % 1f
             val z = (1f - adjustedProgress).coerceAtLeast(0.01f)
             if (z < 0.05f || z > 1.2f) return@forEach
 
@@ -191,32 +188,9 @@ fun SpaceBackground(
             }
             val baseAlpha = (star.baseAlpha * distAlpha * fadeIn * fadeOut).coerceIn(0f, 1f)
 
-            if (hp > 0.05f) {
-                // Hyperspace mode: draw streaks (lines from centre outward) instead of dots.
-                // Streak length scales with perspective and hyperspace progress.
-                val mag = sqrt(projectedX * projectedX + projectedY * projectedY).coerceAtLeast(0.001f)
-                val dirX = projectedX / mag
-                val dirY = projectedY / mag
-                val streakLen = hp * perspectiveFactor * 80f * star.speed
-                val tailX = finalX - dirX * streakLen
-                val tailY = finalY - dirY * streakLen
-                drawLine(
-                    brush = Brush.linearGradient(
-                        0f to starColor.copy(alpha = baseAlpha),
-                        1f to Color.Transparent,
-                        start = Offset(finalX, finalY),
-                        end   = Offset(tailX, tailY)
-                    ),
-                    start       = Offset(finalX, finalY),
-                    end         = Offset(tailX, tailY),
-                    strokeWidth = (finalSize * 1.5f).coerceAtLeast(1.5f),
-                    cap         = StrokeCap.Round
-                )
-            } else {
-                // Normal mode: glow + solid dot
-                drawCircle(color = starColor, radius = finalSize * 1.8f, center = Offset(finalX, finalY), alpha = baseAlpha * 0.2f)
-                drawCircle(color = starColor, radius = finalSize * 1.1f, center = Offset(finalX, finalY), alpha = baseAlpha)
-            }
+            // Glow + solid dot
+            drawCircle(color = starColor, radius = finalSize * 1.8f, center = Offset(finalX, finalY), alpha = baseAlpha * 0.2f)
+            drawCircle(color = starColor, radius = finalSize * 1.1f, center = Offset(finalX, finalY), alpha = baseAlpha)
         }
 
         // Render meteor
@@ -256,24 +230,10 @@ fun SpaceBackground(
             )
         }
 
-        // Hyperspace radial glow
-        // Peaks at hp=0.7, fades to nothing at hp=1.0 for a "flash then gone" feel
-        if (hp > 0f) {
-            val coreAlpha = when {
-                hp < 0.7f -> (hp / 0.7f) * 0.55f
-                else      -> (1f - (hp - 0.7f) / 0.3f) * 0.55f
-            }.coerceIn(0f, 0.55f)
-            drawCircle(
-                brush = Brush.radialGradient(
-                    0f   to Color.White.copy(alpha = coreAlpha),
-                    0.4f to Color.White.copy(alpha = coreAlpha * 0.35f),
-                    1f   to Color.Transparent,
-                    center = Offset(centerX, centerY),
-                    radius = width * 0.85f
-                ),
-                radius = width * 0.85f,
-                center = Offset(centerX, centerY)
-            )
+        // White flash overlay
+        // Full-screen rect that snaps to white then fades - clean "camera flash" feel
+        if (fa > 0f) {
+            drawRect(color = Color.White.copy(alpha = fa), size = size)
         }
     }
 }
