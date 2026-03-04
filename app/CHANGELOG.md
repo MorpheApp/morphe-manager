@@ -1,3 +1,10 @@
+# app [1.11.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.1...v1.11.0-dev.2) (2026-03-04)
+
+
+### Features
+
+* Improve information in exported manager logs ([#279](https://github.com/MorpheApp/morphe-manager/issues/279)) ([2c0c344](https://github.com/MorpheApp/morphe-manager/commit/2c0c3447d647292ec17f9c9c55145811a732a78e))
+
 # app [1.11.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.10.2...v1.11.0-dev.1) (2026-03-03)
 
 

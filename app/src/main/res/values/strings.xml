@@ -543,6 +543,7 @@ Details: %2$s"</string>
     <string name="settings_system_memory_limit_warning">A low memory limit may cause failures when patching larger apps</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Click to configure</string>
+    <string name="settings_system_process_runtime_description_not_available">This feature requires Android 11 or greater</string>
 
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import &amp; export</string>

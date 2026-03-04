@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-03-03T08:13:49.606Z",
-  "description": "# app [1.11.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.10.2...v1.11.0-dev.1) (2026-03-03)\n\n\n### Features\n\n* Use Morphe patcher 1.2.0 ([#231](https://github.com/MorpheApp/morphe-manager/issues/231)) ([944a3ab](https://github.com/MorpheApp/morphe-manager/commit/944a3ab7fab2d689b81f5d8e6bf5224660ce11ef))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.11.0-dev.1/morphe-manager-1.11.0-dev.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.11.0-dev.1/morphe-manager-1.11.0-dev.1.apk.asc",
-  "version": "1.11.0-dev.1"
+  "created_at": "2026-03-04T07:35:07.963Z",
+  "description": "# app [1.11.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.1...v1.11.0-dev.2) (2026-03-04)\n\n\n### Features\n\n* Improve information in exported manager logs ([#279](https://github.com/MorpheApp/morphe-manager/issues/279)) ([2c0c344](https://github.com/MorpheApp/morphe-manager/commit/2c0c3447d647292ec17f9c9c55145811a732a78e))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.11.0-dev.2/morphe-manager-1.11.0-dev.2.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.11.0-dev.2/morphe-manager-1.11.0-dev.2.apk.asc",
+  "version": "1.11.0-dev.2"
 }
