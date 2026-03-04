@@ -7,11 +7,7 @@ package app.morphe.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
-import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.os.VibratorManager
+import android.view.HapticFeedbackConstants
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
@@ -39,6 +35,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -93,6 +90,7 @@ fun PatcherScreen(
     onPatchingCompleted: () -> Unit = {}
 ) {
     val context = LocalContext.current
+    val view = LocalView.current
     @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
 
@@ -140,8 +138,8 @@ fun PatcherScreen(
             if (patcherSucceeded == true) {
                 delay(300) // small pause so speed resets before effect fires
                 onPatchingCompleted()
-                // Haptic feedback - double-pulse pattern: short tap then strong thump
-                vibrateSuccess(context)
+                // Haptic feedback
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             }
         }
     }
@@ -690,35 +688,5 @@ fun PatcherScreen(
                 }
             }
         }
-    }
-}
-
-/**
- * Fires a two-pulse haptic pattern on patching success:
- *   1. Short tap  (50ms)  - "attention"
- *   2. Brief gap  (80ms)
- *   3. Strong thump (120ms) - "done"
- *
- * Uses [VibrationEffect.createWaveform] on API 26+ and the legacy [Vibrator.vibrate]
- * on older devices. Silently no-ops if no vibrator is present.
- */
-private fun vibrateSuccess(context: Context) {
-    // Timings: [delay, on, off, on] - first element is initial delay (0ms)
-    val timings    = longArrayOf(0, 50, 80, 120)
-    val amplitudes = intArrayOf(0, 80, 0, 255) // 0 = silence, 255 = max
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        // API 31+: VibratorManager
-        val manager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as? VibratorManager
-        manager?.defaultVibrator?.vibrate(
-            VibrationEffect.createWaveform(timings, amplitudes, -1) // -1 = no repeat
-        )
-    } else {
-        // API 26–30: Vibrator with VibrationEffect (minSdk >= 26, so always available here)
-        @Suppress("DEPRECATION")
-        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
-        vibrator?.vibrate(
-            VibrationEffect.createWaveform(timings, amplitudes, -1)
-        )
     }
 }
