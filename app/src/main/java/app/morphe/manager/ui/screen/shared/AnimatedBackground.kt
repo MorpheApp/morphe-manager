@@ -36,7 +36,9 @@ enum class BackgroundType(val displayNameResId: Int) {
 @SuppressLint("ModifierParameter")
 fun AnimatedBackground(
     type: BackgroundType = BackgroundType.CIRCLES,
-    enableParallax: Boolean = true
+    enableParallax: Boolean = true,
+    speedMultiplier: Float = 1f,
+    patchingCompleted: Boolean = false
 ) {
     Box(
         modifier = Modifier
@@ -49,27 +51,39 @@ fun AnimatedBackground(
         when (type) {
             BackgroundType.CIRCLES -> CirclesBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.RINGS -> RingsBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.MESH -> MeshBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.SPACE -> SpaceBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.SHAPES -> ShapesBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.SNOW -> SnowBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.NONE -> Unit
         }

@@ -78,7 +78,9 @@ fun PatcherScreen(
     patcherViewModel: PatcherViewModel,
     usingMountInstall: Boolean,
     installViewModel: InstallViewModel = koinViewModel(),
-    prefs: PreferencesManager = koinInject()
+    prefs: PreferencesManager = koinInject(),
+    onBackgroundSpeedChange: (Float) -> Unit = {},
+    onPatchingCompleted: () -> Unit = {}
 ) {
     val context = LocalContext.current
     @Suppress("DEPRECATION")
@@ -112,6 +114,30 @@ fun PatcherScreen(
         animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
         label = "progress_animation"
     )
+
+    // Drive background speed: ramps 1x→3x during patching, resets on completion/failure.
+    // Uses a coroutine loop so speed tracks displayProgress in real time without recomposition churn.
+    LaunchedEffect(patcherSucceeded) {
+        if (patcherSucceeded == null) {
+            // Patching in progress — poll displayProgress every 250ms (same cadence as progress loop)
+            while (true) {
+                onBackgroundSpeedChange(1f + patcherViewModel.progress * 2f)
+                delay(250)
+            }
+        } else {
+            // Patching finished — reset speed then fire completion effect
+            onBackgroundSpeedChange(1f)
+            if (patcherSucceeded == true) {
+                delay(300) // small pause so speed resets before effect fires
+                onPatchingCompleted()
+            }
+        }
+    }
+
+    // Restore speed when leaving the screen
+    DisposableEffect(Unit) {
+        onDispose { onBackgroundSpeedChange(1f) }
+    }
 
     // Get output file from viewModel
     val outputFile = patcherViewModel.outputFile
