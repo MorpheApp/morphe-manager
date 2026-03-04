@@ -132,9 +132,9 @@ fun ShapesBackground(
             // Rotate and draw shape
             rotate(rotation, Offset(centerX, centerY)) {
                 when (config.type) {
-                    ShapeType.TRIANGLE -> drawTriangle(centerX, centerY, 200f, color)
-                    ShapeType.SQUARE   -> drawSquare  (centerX, centerY, 200f, color)
-                    ShapeType.PENTAGON -> drawPentagon(centerX, centerY, 200f, color)
+                    ShapeType.TRIANGLE -> drawTriangle(centerX, centerY, 300f, color)
+                    ShapeType.SQUARE   -> drawSquare  (centerX, centerY, 260f, color)
+                    ShapeType.PENTAGON -> drawPentagon(centerX, centerY, 280f, color)
                 }
             }
         }
