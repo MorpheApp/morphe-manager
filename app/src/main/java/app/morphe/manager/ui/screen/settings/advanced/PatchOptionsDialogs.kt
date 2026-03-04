@@ -42,7 +42,7 @@ import app.morphe.manager.util.toFilePath
 import kotlinx.coroutines.launch
 
 /**
- * Theme color selection dialog with dynamic options from bundle
+ * Theme color selection dialog with dynamic options from bundle.
  */
 @Composable
 fun ThemeColorDialog(
@@ -265,7 +265,7 @@ fun ThemeColorDialog(
 }
 
 /**
- * Custom branding dialog with folder picker and adaptive icon creator
+ * Custom branding dialog with folder picker and adaptive icon creator.
  */
 @Composable
 fun CustomBrandingDialog(
@@ -405,7 +405,7 @@ fun CustomBrandingDialog(
 }
 
 /**
- * Custom header dialog with folder picker and dynamic instructions from bundle
+ * Custom header dialog with folder picker and dynamic instructions from bundle.
  */
 @Composable
 fun CustomHeaderDialog(

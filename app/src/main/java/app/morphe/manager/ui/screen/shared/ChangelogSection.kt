@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.foundation.layout.*
@@ -30,8 +35,8 @@ import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
 
 /**
- * Unified changelog section with header and content
- * Used for manager updates, patch bundles, and settings changelog
+ * Unified changelog section with header and content.
+ * Used for manager updates, patch bundles, and settings changelog.
  */
 @Composable
 fun ChangelogSection(
@@ -67,7 +72,7 @@ fun ChangelogSection(
 }
 
 /**
- * Changelog button that opens the release page
+ * Changelog button that opens the release page.
  */
 @Composable
 fun ChangelogButton(
@@ -87,7 +92,7 @@ fun ChangelogButton(
 }
 
 /**
- * Loading state with shimmer effect for the entire changelog section
+ * Loading state with shimmer effect for the entire changelog section.
  */
 @Composable
 fun ChangelogSectionLoading(
@@ -106,7 +111,7 @@ fun ChangelogSectionLoading(
 }
 
 /**
- * Changelog header with version, date, and icon
+ * Changelog header with version, date, and icon.
  */
 @Composable
 private fun ChangelogHeader(

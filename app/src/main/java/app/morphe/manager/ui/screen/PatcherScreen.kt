@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen
 
 import android.annotation.SuppressLint
@@ -72,8 +77,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * Simplified patcher screen with progress tracking
- * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality
+ * Patcher screen with progress tracking.
+ * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality.
  */
 @SuppressLint("LocalContextGetResourceValueCall", "AutoboxingStateCreation")
 @OptIn(ExperimentalMaterial3Api::class)

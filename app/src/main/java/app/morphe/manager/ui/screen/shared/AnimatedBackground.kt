@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import android.annotation.SuppressLint
@@ -12,7 +17,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.backgrounds.*
 
 /**
- * Types of animated backgrounds available in the app
+ * Types of animated backgrounds available in the app.
  */
 enum class BackgroundType(val displayNameResId: Int) {
     CIRCLES(R.string.settings_appearance_background_circles),
@@ -29,8 +34,8 @@ enum class BackgroundType(val displayNameResId: Int) {
 }
 
 /**
- * Animated background with multiple visual styles
- * Creates subtle floating effects that can be used across all screens
+ * Animated background with multiple visual styles.
+ * Creates subtle floating effects that can be used across all screens.
  */
 @Composable
 @SuppressLint("ModifierParameter")

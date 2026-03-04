@@ -39,8 +39,8 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 /**
- * Advanced patch options section
- * Options are dynamically loaded from the patch bundle repository
+ * Advanced patch options section.
+ * Options are dynamically loaded from the patch bundle repository.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
@@ -262,7 +262,7 @@ fun PatchOptionsSection(
 }
 
 /**
- * Card component for patch options
+ * Card component for patch options.
  */
 @Composable
 private fun AppPatchOptionsCard(
@@ -338,7 +338,7 @@ private fun AppPatchOptionsCard(
 }
 
 /**
- * Hide Shorts features section (YouTube only)
+ * Hide Shorts features section (YouTube only).
  */
 @Composable
 private fun HideShortsSection(
