@@ -2,6 +2,11 @@ package app.morphe.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
@@ -119,17 +124,19 @@ fun PatcherScreen(
     // Uses a coroutine loop so speed tracks displayProgress in real time without recomposition churn.
     LaunchedEffect(patcherSucceeded) {
         if (patcherSucceeded == null) {
-            // Patching in progress — poll displayProgress every 250ms (same cadence as progress loop)
+            // Patching in progress - poll displayProgress every 250ms (same cadence as progress loop)
             while (true) {
                 onBackgroundSpeedChange(1f + patcherViewModel.progress * 2f)
                 delay(250)
             }
         } else {
-            // Patching finished — reset speed then fire completion effect
+            // Patching finished - reset speed then fire completion effect
             onBackgroundSpeedChange(1f)
             if (patcherSucceeded == true) {
                 delay(300) // small pause so speed resets before effect fires
                 onPatchingCompleted()
+                // Haptic feedback - double-pulse pattern: short tap then strong thump
+                vibrateSuccess(context)
             }
         }
     }
@@ -678,5 +685,35 @@ fun PatcherScreen(
                 }
             }
         }
+    }
+}
+
+/**
+ * Fires a two-pulse haptic pattern on patching success:
+ *   1. Short tap  (50ms)  - "attention"
+ *   2. Brief gap  (80ms)
+ *   3. Strong thump (120ms) - "done"
+ *
+ * Uses [VibrationEffect.createWaveform] on API 26+ and the legacy [Vibrator.vibrate]
+ * on older devices. Silently no-ops if no vibrator is present.
+ */
+private fun vibrateSuccess(context: Context) {
+    // Timings: [delay, on, off, on] - first element is initial delay (0ms)
+    val timings    = longArrayOf(0, 50, 80, 120)
+    val amplitudes = intArrayOf(0, 80, 0, 255) // 0 = silence, 255 = max
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        // API 31+: VibratorManager
+        val manager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as? VibratorManager
+        manager?.defaultVibrator?.vibrate(
+            VibrationEffect.createWaveform(timings, amplitudes, -1) // -1 = no repeat
+        )
+    } else {
+        // API 26–30: Vibrator with VibrationEffect (minSdk >= 26, so always available here)
+        @Suppress("DEPRECATION")
+        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+        vibrator?.vibrate(
+            VibrationEffect.createWaveform(timings, amplitudes, -1)
+        )
     }
 }
