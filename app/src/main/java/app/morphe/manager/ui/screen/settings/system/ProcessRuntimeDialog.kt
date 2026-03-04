@@ -43,6 +43,13 @@ fun ProcessRuntimeDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_process_runtime),
+        footer = {
+            MorpheDialogButton(
+                text = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     ) {
         Column(
             modifier = Modifier
