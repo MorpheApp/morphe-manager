@@ -32,7 +32,7 @@
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">Valmiit tekemään sovelluksia legendaarisiksi uudelleen?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Kiristy, on paikkausaika</string>
+    <string name="home_greeting_3">Turvavyö kiinni - nyt paikkaillaan</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">Toinen päivä, toinen mainos-estetty mestariteos</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -48,26 +48,26 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Voimanamme kofeiini ja hyvät päivitykset</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Tukemisen lähteet</string>
+    <string name="sources_management_title">Patch-lähteet</string>
     <string name="sources_management_open_in_browser">Avaa linkit selaimessa</string>
     <string name="sources_management_failed_to_open_url">Ei toimi linkin avaamis</string>
     <string name="sources_management_prerelease_toggle">Käytä ennakkopäivityksiä</string>
     <string name="sources_management_prerelease_toggle_description">Saa varhainen pääsy uusiin kokeellisiin versiomiin. Käytä ennakkopäivityksiä.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Näytönimi</string>
-    <string name="sources_dialog_rename">Muokka patch- lähde</string>
+    <string name="sources_dialog_rename">Nimeä patch uudelleen</string>
     <string name="sources_dialog_duplicate_name_error">Nimi on jo käytössä</string>
     <string name="sources_dialog_missing_error">Tätä patch-lähdettä ei voitu päivittää.</string>
     <string name="sources_dialog_view_any_version">Mikä vain versio</string>
     <string name="sources_dialog_view_any_package">Mikä vain paketti</string>
-    <string name="sources_dialog_add_source">Lisää patch- lähde</string>
+    <string name="sources_dialog_add_source">Lisää patch-lähde</string>
     <string name="sources_dialog_delete_confirm_message">Poista lähde \"%s\"? Tätä ei voi peruuttaa.</string>
-    <string name="sources_dialog_remote">Etämain</string>
+    <string name="sources_dialog_remote">Etä</string>
     <string name="sources_dialog_remote_url">Lähde-URL</string>
     <string name="sources_dialog_remote_url_formats_title">Esimerkkejä:</string>
-    <string name="sources_dialog_local">Kotima</string>
-    <string name="sources_dialog_local_file">Valitse patch- lähde-tiedosto</string>
-    <string name="sources_dialog_local_file_description">Valitse .mpp patch- lähde-tiedosto tallennokse</string>
+    <string name="sources_dialog_local">Paikallinen</string>
+    <string name="sources_dialog_local_file">Valitse patch-lähdetiedosto</string>
+    <string name="sources_dialog_local_file_description">Valitse .mpp-lähdetiedosto tallennustilasta</string>
     <string name="sources_dialog_local_change_file">Muokka tiedosto</string>
     <string name="sources_dialog_preinstalled">Esivalmis</string>
     <string name="sources_update_success">Muokitus onnistui</string>
@@ -75,12 +75,12 @@
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
     <string name="sources_download_endpoint_not_found">Ei voitu päivittää \'%1$s\': ennakkopäivitys JSON-tiedostoa ei löytynyt määritetystä URL-osoitteesta.</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Tarvitset apua etsimään alkuperäistä, patjatonta APK:tä</string>
-    <string name="home_apk_availability_dialog_simple">Pattain &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, patjaton APK-versio:</string>
-    <string name="home_apk_availability_dialog_expert">Pattain &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisiä, patjaton APK-versioita:</string>
+    <string name="home_apk_availability_dialog_title">Tarvitsetko apua etsimään alkuperäistä, paikkaamatonta APK:tä?</string>
+    <string name="home_apk_availability_dialog_simple">Paikataksesi &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, paikkamattoman APK-version:</string>
+    <string name="home_apk_availability_dialog_expert">Paikataksesi &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, paikkaamattoman APK:n versioista:</string>
     <string name="home_apk_availability_recommended_label">Suositeltu</string>
     <string name="home_apk_availability_unpatched_label">Ei korjattuja</string>
-    <string name="home_apk_availability_yes">Kyllä, apua etsimään APK:tä</string>
+    <string name="home_apk_availability_yes">Kyllä, auta minua etsimään APK</string>
     <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
     <string name="home_apk_use_saved_with_version">Käytä tallennettua APK:tä (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:tä. Patching vaatii APK-tiedoston uudelleenvalinnan</string>
@@ -288,7 +288,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="advanced">Lisäasetukset</string>
     <string name="system">Järjestelmä</string>
     <!-- Settings - Appearance Tab - Background animation -->
-    <string name="settings_appearance_background">Taustallus</string>
+    <string name="settings_appearance_background">Tausta</string>
     <string name="settings_appearance_background_circles">Piirrokkeet</string>
     <string name="settings_appearance_background_rings">Rengastet</string>
     <string name="settings_appearance_background_mesh">Ruutu</string>
@@ -305,7 +305,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_appearance_dark">Musta</string>
     <string name="settings_appearance_dynamic">Materiaalinen sinetinäyttö</string>
     <string name="settings_appearance_accent_color">Kulmaväri</string>
-    <string name="settings_appearance_pure_black">Puroa musta</string>
+    <string name="settings_appearance_pure_black">Musta</string>
     <string name="settings_appearance_pure_black_description">Käytä mustia taustoja</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Sovelluksen kieli</string>
@@ -324,16 +324,16 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Muokkaa \'%1$s\' ja käynnistykset? </string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Muokka ulkon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
-    <string name="settings_advanced_updates">Muutokset</string>
-    <string name="settings_advanced_updates_use_prereleases">Käytä ennakkoasetuksia</string>
+    <string name="settings_advanced_updates">Päivitykset</string>
+    <string name="settings_advanced_updates_use_prereleases">Käytä sovelluksen ennakkojulkaisuversiota</string>
     <string name="settings_advanced_updates_use_prereleases_description">Saa varhainen pääsy uusiin kokeellisiin hallintajärjestelmäversioihin. Saa ennakkopäivitykset, kun otat käyttöön ennakkopäivitys-vaihde jokaisessa päivitys lähteessä erikseen.</string>
-    <string name="settings_advanced_updates_allow_metered">Päivitä liikenneverkossa</string>
+    <string name="settings_advanced_updates_allow_metered">Päivitä mobiiliverkossa</string>
     <string name="settings_advanced_updates_allow_metered_description">Salli päivitys lähteet ja asetus päivitykset ladata liikenneverkossa</string>
     <string name="settings_advanced_updates_background_notifications">Taustapäivityksen ilmoitukset</string>
     <string name="settings_advanced_updates_background_notifications_description">Tarkista päivitykset taustalla säännöllisesti ja ilmoita kun ne ovat saatavilla</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Saa välittömät push-ilmoitukset uusista versioista, jopa kun sovellus on suljettu</string>
     <string name="notification_channel_manager_updates">Hallitse päivityksiä</string>
-    <string name="notification_channel_manager_updates_description">Ilmoitukset uusista Morphe hallinnassa olevista versioista</string>
+    <string name="notification_channel_manager_updates_description">Ilmoitukset uusista Morphe Manager -versioista</string>
     <string name="notification_channel_bundle_updates">Päivitysten lähteet</string>
     <string name="notification_channel_bundle_updates_description">Uuden patchin uusimmat versiot -ilmoitukset</string>
     <string name="notification_channel_fcm_updates">Päivitä varoittimet</string>
@@ -360,8 +360,8 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_advanced_expert_mode_description">Ota käyttöön Morphe-päivityksen asetukset ja mukautusvaihtoehdot</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ota Expert-moodi käyttöön?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert-moodi antaa enemmän valtaa päivitysten sovittamisesta, mutta väärin asetettu expert-moodi voi johtaa sovelluksen toimimattomuuteen</string>
-    <string name="settings_advanced_strip_unused_libs">Poistaa käyttämättä alkuperäisiä kirjastot</string>
-    <string name="settings_advanced_strip_unused_libs_description">Poistaa käyttämättä alkuperäisiä kirjastot ei ole soveltuva vanhoilla laitteilla</string>
+    <string name="settings_advanced_strip_unused_libs">Poista käyttämättömät natiivikirjastot</string>
+    <string name="settings_advanced_strip_unused_libs_description">Poista tukemattomien suoritinarkkitehtuurien natiivikirjastot paikatuista sovelluksista</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Vaatimus pull request lähteille</string>
@@ -385,7 +385,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_advanced_patch_options_light_theme_color">Valko teeman väri</string>
     <string name="settings_advanced_patch_options_theme_color_description">Väriä voi olla hex-merkki (#RRGGBB) tai väriä vastaava resurssi viite</string>
     <string name="settings_advanced_patch_options_loading">Ladataan patch- asetuksia…</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">Odota kun patch- lähde on päivitetty</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Odota, kunnes patch-lähde on päivitetty</string>
     <string name="settings_advanced_patch_options_load_error">Ei saatu ladata patch- asetuksia</string>
     <string name="settings_advanced_patch_options_no_available">Käyttäpatch- asetuksia</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -477,8 +477,8 @@ Kuvien mitat on oltava seuraavasti:
     <string name="installer_unavailable_message">Edullisin asennuksesi (%s) on tällä hetkellä käytöstä poissa. Voit korjata ongelman ja yrittää uudelleen tai käyttää standardiasennusta.</string>
     <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
     <string name="installer_use_standard">Käytä oletusta</string>
-    <string name="settings_prompt_installer_on_install">Näytä asenninvälinevalinta jokaisen patikoidun sovelluksen asennuksen yhteydessä.</string>
-    <string name="settings_prompt_installer_on_install_description">Näytä asenninvälinevalinta jokaisen patikoidun sovelluksen asennuksen yhteydessä.</string>
+    <string name="settings_prompt_installer_on_install">Kysy asennusohjelmaa asennettaessa</string>
+    <string name="settings_prompt_installer_on_install_description">Näytä asennusohjelman valintaikkuna aina, kun asennat paikatun sovelluksen.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prosessointi</string>
     <string name="settings_system_process_runtime">Käytä patchaamisen prosessin erillisen prosessin</string>
@@ -490,6 +490,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_memory_limit_warning">Muokka prosessin muistinkäytön</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB:n rajoitus</string>
     <string name="settings_system_process_runtime_disabled_description">Tuo / Vienti asetukset</string>
+    <string name="settings_system_process_runtime_description_not_available">Tämä ominaisuus vaatii Android 11 tai uudemman version</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Tuo / Vienti asetuset</string>
     <string name="settings_system_import_keystore">Tuo custom-keystore</string>
@@ -502,19 +503,19 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_import_keystore_wrong_credentials">Väärin keystore-tunnus</string>
     <string name="settings_system_import_keystore_success">Väärin keystore-tunnus</string>
     <string name="settings_system_import_keystore_failed">Keystore tuotu onnistui</string>
-    <string name="settings_system_export_keystore">Vienti keystore</string>
-    <string name="settings_system_export_keystore_description">Vienti nykyinen keystore</string>
+    <string name="settings_system_export_keystore">Vie keystore</string>
+    <string name="settings_system_export_keystore_description">Vie nykyinen keystore</string>
     <string name="settings_system_export_keystore_unavailable">Ei keystorea saatavilla vientiin</string>
     <string name="settings_system_export_keystore_success">Keystore vietyty onnistui</string>
-    <string name="settings_system_show_password_field">Tuo manager-asetukset</string>
-    <string name="settings_system_hide_password_field">Tuo manager-asetukset JSON-tiedostosta</string>
+    <string name="settings_system_show_password_field">Näytä salasana</string>
+    <string name="settings_system_hide_password_field">Piilota salasana</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Ei saatu tuoda manager-asetuksia: %s</string>
-    <string name="settings_system_import_manager_settings_description">Manager-asetukset tuotu onnistui</string>
-    <string name="settings_system_import_manager_settings_fail">Vienti manager-asetukset</string>
+    <string name="settings_system_import_manager_settings">Tuo Managerin asetukset</string>
+    <string name="settings_system_import_manager_settings_description">Palauta Managerin asetukset JSON-tiedostosta</string>
+    <string name="settings_system_import_manager_settings_fail">Managerin asetusten tuonti epäonnistui: %s</string>
     <string name="settings_system_import_manager_settings_success">Vienti manager-asetuset JSON-tiedostosta</string>
-    <string name="settings_system_export_manager_settings">Ei saatu viedä manager-asetuksia: %s</string>
-    <string name="settings_system_export_manager_settings_description">Manager-asetukset vietyty onnistui</string>
+    <string name="settings_system_export_manager_settings">Vie Managerin asetukset</string>
+    <string name="settings_system_export_manager_settings_description">Tallenna Managerin asetukset JSON-tiedostoon</string>
     <string name="settings_system_export_manager_settings_fail">Näytön</string>
     <string name="settings_system_export_manager_settings_success">Piilota näytön</string>
     <!-- Settings - System Tab - Debug Section -->
@@ -529,14 +530,14 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_apks_size">Patchettujen APK(t)</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchettujen APK(t)</string>
-    <string name="settings_system_patched_apks_description">Hallinna tallennettuja patchettuja</string>
+    <string name="settings_system_patched_apks_description">Hallitse tallennettuja paikattuja sovellustiedostoja</string>
     <string name="settings_system_patched_apks_empty">Ei tallennettuja patchettuja vielä</string>
     <string name="settings_system_patched_apks_delete_title">Poistetaanko patchettuja? Tätä ei voi peruuttaa.</string>
     <string name="settings_system_patched_apks_delete_confirm">Oletko varmaasi poistaa tallennettu patchettuja %s? Tätä ei voi peruuttaa.</string>
     <string name="settings_system_patched_apks_deleted">Tallennettu patchetti poistettu onnistuneesti</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Alkuperäisten APK(t)</string>
-    <string name="settings_system_original_apks_description">Alkuperäiset APK-tiedostot tallennetaan uudelleenpatikointia varten. Ainoastaan uusin versio säilytetään jokaiselle sovellukselle</string>
+    <string name="settings_system_original_apks_description">Alkuperäiset APK-tiedostot tallennetaan uudelleenpaikkausta varten. Kustakin sovelluksesta säilytetään vain uusin versio.</string>
     <string name="settings_system_original_apks_empty">Ei tallennettu alkuperäisiä APK(t)</string>
     <string name="settings_system_original_apks_deleted">Alkuperäisen APK(t) poistettu onnistuneesti</string>
     <string name="settings_system_original_apks_delete_title">Poistetaanko alkuperäisen APK(t)? Tätä ei voi peruuttaa.</string>
@@ -565,8 +566,8 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_no_patches_or_options">Ei tallennettuja patsas- tai vaihtoehtoja</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>
-    <string name="settings_system_share_website">Jaa verkkosivuston</string>
-    <string name="settings_system_share_website_description">Jaa virallisen Morphen verkkosivuston</string>
+    <string name="settings_system_share_website">Jaa verkkosivusto</string>
+    <string name="settings_system_share_website_description">Jaa Morphen virallinen verkkosivusto</string>
     <string name="settings_system_manager_description">"Morphe on kokeellinen avoin lähdeprojekti, joka keskittyy luomaan modernin, nopean patchaamisen Android-sovellusten patchaamista
 
 Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, jotta tuottaa tulevaisuuden kehittämistä"</string>
@@ -635,7 +636,7 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="unmounting_ellipsis">Poistetaan…</string>
     <string name="importing_ellipsis">Tuotaan…</string>
     <string name="changelog">Näytä muutoshistoriat</string>
-    <string name="changelog_description">Tarkastele uusimmat muutokset tässä päivityksessä</string>
+    <string name="changelog_description">Katso tämän päivityksen uusimmat muutokset</string>
     <string name="changelog_download_fail">Muutostietojen lataus epäonnistui: %s</string>
     <string name="changelog_retry">Yritä uudelleen</string>
     <string name="changelog_empty">Ei sivustetta</string>

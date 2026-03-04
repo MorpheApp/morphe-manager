@@ -490,6 +490,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_memory_limit_warning">Niski limit pamięci może powodować błędy podczas modyfikowania większych aplikacji</string>
     <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Stuknij, aby skonfigurować</string>
+    <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga Androida 11 lub nowszej wersji</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import i eksport</string>
     <string name="settings_system_import_keystore">Importuj magazyn kluczy</string>

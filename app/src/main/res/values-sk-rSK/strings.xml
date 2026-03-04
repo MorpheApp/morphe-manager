@@ -59,5 +59,6 @@
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_about">O aplikácii</string>
     <!-- Shared strings -->
 </resources>

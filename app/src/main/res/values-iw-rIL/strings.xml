@@ -453,6 +453,7 @@
     <string name="settings_system_memory_limit_warning">מוצא איבוד... </string>
     <string name="settings_system_process_runtime_enabled_description">%s מגביל MB</string>
     <string name="settings_system_process_runtime_disabled_description">מוצא איבוד... </string>
+    <string name="settings_system_process_runtime_description_not_available">תכונה זו דורשת אנדרואיד 11 ומעלה</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">ייבוא/ייצא הגדרות</string>
     <string name="settings_system_import_keystore">ייבוא תיקון מותאם</string>

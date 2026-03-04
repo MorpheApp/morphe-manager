@@ -490,6 +490,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">Mala ograniÄena memorija može uzrokovati greške pri nadogradnji veÄih aplikacija</string>
     <string name="settings_system_process_runtime_enabled_description">%s МБ лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Упозорење: ниско ограничење меморије може довести до греша при патчирању веће апликације</string>
+    <string name="settings_system_process_runtime_description_not_available">Ова карактеристика захтева Android 11 или новији</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_import_keystore">Увоз кластерског кључа</string>

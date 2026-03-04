@@ -490,6 +490,7 @@
     <string name="settings_system_memory_limit_warning">الحد الأدنى للذاكرة قد يتسبب في فشل عند تعديل التطبيقات الأكبر حجمًا</string>
     <string name="settings_system_process_runtime_enabled_description">حد %s ميغابايت</string>
     <string name="settings_system_process_runtime_disabled_description">انقر هنا للتهيئة</string>
+    <string name="settings_system_process_runtime_description_not_available">تتطلب هذه الميزة Android 11 أو أحدث</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">استيراد &amp; تصدير</string>
     <string name="settings_system_import_keystore">استيراد مخزن المفاتيح</string>

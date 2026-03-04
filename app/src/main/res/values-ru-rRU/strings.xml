@@ -22,13 +22,13 @@
     <string name="home_update_skipped_metered">Обновления пропущены</string>
     <string name="home_update_skipped_metered_subtitle">Мобильные данные активны</string>
     <string name="home_updating_sources">Обновление источников…</string>
-    <string name="home_update_progress_format">Обработано %1$s из </string>
+    <string name="home_update_progress_format">Обработано %1$s</string>
     <string name="home_update_success">Обновление источников завершено</string>
     <string name="home_update_success_subtitle">Ваши источники обновлены</string>
     <string name="home_sources_are_loading">Загрузка источников, пожалуйста, подождите…</string>
     <string name="home_please_wait">Пожалуйста, подождите…</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">Какое приложение вы хотите обновить?</string>
+    <string name="home_greeting_1">Какое приложение вы хотите пропатчить?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">Готовы сделать приложения снова легендарными?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
@@ -65,7 +65,7 @@
     <string name="sources_dialog_remote">Удаленный</string>
     <string name="sources_dialog_remote_url">URL источника</string>
     <string name="sources_dialog_remote_url_formats_title">Примеры:</string>
-    <string name="sources_dialog_local">Локальные</string>
+    <string name="sources_dialog_local">Локальный</string>
     <string name="sources_dialog_local_file">Выберите исходный файл патча</string>
     <string name="sources_dialog_local_file_description">Выберите исходный файл патча .mpp из хранилища</string>
     <string name="sources_dialog_local_change_file">Изменить файл</string>
@@ -490,6 +490,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">Низкий лимит памяти может вызвать сбой при патчинге больших приложений</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Нажмите, чтобы настроить</string>
+    <string name="settings_system_process_runtime_description_not_available">Эта функция требует Android 11 или выше</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Импорт &amp; экспорт</string>
     <string name="settings_system_import_keystore">Импортировать хранилище ключей</string>

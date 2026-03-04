@@ -490,6 +490,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_memory_limit_warning">Nếu bộ nhớ quá thấp có thể khiến bạn gặp lỗi trong quá trình vá ứng dụng lớn</string>
     <string name="settings_system_process_runtime_enabled_description">Giới hạn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Bấm để cấu hình</string>
+    <string name="settings_system_process_runtime_description_not_available">Tính năng này yêu cầu Android 11 trở lên</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Xuất &amp; Nhập</string>
     <string name="settings_system_import_keystore">Nhập kho khoá</string>

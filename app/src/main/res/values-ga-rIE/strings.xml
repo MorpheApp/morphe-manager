@@ -488,6 +488,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_memory_limit_warning">D’fhéadfadh teorainn íseal chuimhne teipeanna a chur faoi deara agus aipeanna níos mó á bpaisteáil</string>
     <string name="settings_system_process_runtime_enabled_description">Teorainn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Cliceáil chun cumrú</string>
+    <string name="settings_system_process_runtime_description_not_available">Is fearúr seo a dhícheanleacht Android 11 nó níos déanaidh</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Iompórtáil &amp; easpórtáil</string>
     <string name="settings_system_import_keystore">Iompórtáil stór eochracha</string>

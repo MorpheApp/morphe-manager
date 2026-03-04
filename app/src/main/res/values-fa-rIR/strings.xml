@@ -108,6 +108,7 @@
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">حالت متخصص</string>
     <string name="expert_mode_search">جستجوی پچ ها</string>
+    <string name="expert_mode_no_patches">هیچ پچ ای موجود نیست </string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_wrong_package_description">APK انتخاب شده برای برنامه ای که قصد وصله آن را داشتید نیست </string>
     <string name="home_dialog_selected_package">بسته منتخب: </string>
@@ -138,6 +139,7 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <string name="settings_advanced_expert_mode">حالت متخصص</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -154,5 +156,6 @@
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_about">درباره</string>
     <!-- Shared strings -->
 </resources>

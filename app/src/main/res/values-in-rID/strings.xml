@@ -490,6 +490,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_memory_limit_warning">Batas memori yang rendah mungkin menyebabkan kegagalan saat menambal aplikasi yang lebih besar</string>
     <string name="settings_system_process_runtime_enabled_description">Batas %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Klik untuk mengonfigurasinya</string>
+    <string name="settings_system_process_runtime_description_not_available">Fitur ini memerlukan Android 11 atau versi yang lebih baru</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Impor &amp; ekspor</string>
     <string name="settings_system_import_keystore">Impor keystore</string>

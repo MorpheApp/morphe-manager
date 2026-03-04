@@ -6,6 +6,7 @@
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
     <string name="home_default_source_disabled">मorphe पैच स्रोत अक्षम है। पैच स्रोत शीट में या एक्सपर्ट मोड का उपयोग करके इसे सक्रिय करें</string>
     <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
+    <string name="home_app_hide_message">यह ऐप होम स्क्रीन से छिपा दिया जाएगा। आप सूची के निचले भाग में मौजूद \'%1$s\' बटन का उपयोग करके बाद में इसे पुनर्स्थापित कर सकते हैं।</string>
     <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
     <string name="home_app_show_hidden">छिपे हुए ऐप दिखाएं</string>
     <string name="home_app_no_hidden">कोई छिपा ऐप नहीं</string>
@@ -482,6 +483,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">बड़े एप्लिकेशन के पैचिंग के लिए निम्न मेमोरी लिमिट फेल हो सकती है</string>
     <string name="settings_system_process_runtime_enabled_description">%s एमबी सीमा</string>
     <string name="settings_system_process_runtime_disabled_description">कन्फ़िगरेशन के लिए क्लिक करें</string>
+    <string name="settings_system_process_runtime_description_not_available">यह सुविधा Android 11 या उसके बाद के संस्करण की आवश्यकता है</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">आइमपोर्ट और एक्सपोर्ट</string>
     <string name="settings_system_import_keystore">कीस्टोर आयम</string>
