@@ -1,12 +1,14 @@
 package app.morphe.manager.ui.screen.settings
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -121,30 +123,44 @@ fun SystemTabContent(
         )
 
         SectionCard {
-            RichSettingsItem(
-                onClick = { showProcessRuntimeDialog = true },
-                title = stringResource(R.string.settings_system_process_runtime),
-                subtitle = if (useProcessRuntime)
-                    stringResource(R.string.settings_system_process_runtime_enabled_description, memoryLimit)
-                else stringResource(R.string.settings_system_process_runtime_disabled_description),
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.Memory)
-                },
-                trailingContent = {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        InfoBadge(
-                            text = if (useProcessRuntime) stringResource(R.string.enabled)
-                            else stringResource(R.string.disabled),
-                            style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
-                            isCompact = true
-                        )
-                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                RichSettingsItem(
+                    onClick = { showProcessRuntimeDialog = true },
+                    title = stringResource(R.string.settings_system_process_runtime),
+                    subtitle = if (useProcessRuntime)
+                        stringResource(R.string.settings_system_process_runtime_enabled_description, memoryLimit)
+                    else stringResource(R.string.settings_system_process_runtime_disabled_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.Memory)
+                    },
+                    trailingContent = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            InfoBadge(
+                                text = if (useProcessRuntime) stringResource(R.string.enabled)
+                                else stringResource(R.string.disabled),
+                                style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
+                                isCompact = true
+                            )
+                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                        }
                     }
-                }
-            )
+                )
+            } else {
+                IconTextRow(
+                    modifier = Modifier.padding(16.dp),
+                    leadingContent = {
+                        MorpheIcon(
+                            icon = Icons.Outlined.Memory,
+                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                        )
+                    },
+                    title = stringResource(R.string.settings_system_process_runtime),
+                    description = stringResource(R.string.settings_system_process_runtime_description_not_available)
+                )
+            }
         }
 
         // Import & Export (Expert mode only)
