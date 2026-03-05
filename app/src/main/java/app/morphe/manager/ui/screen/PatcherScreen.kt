@@ -125,11 +125,15 @@ fun PatcherScreen(
 
     // Drive background speed: ramps 1x→3x during patching, resets on completion/failure.
     // Uses a coroutine loop so speed tracks displayProgress in real time without recomposition churn.
+    // A 3-sample rolling average smooths sudden progress jumps before they reach the animation.
+    val progressSamples = remember { ArrayDeque<Float>(3) }
     LaunchedEffect(patcherSucceeded) {
         if (patcherSucceeded == null) {
             // Patching in progress - poll displayProgress every 250ms (same cadence as progress loop)
             while (true) {
-                onBackgroundSpeedChange(1f + patcherViewModel.progress * 2f)
+                progressSamples.addLast(patcherViewModel.progress)
+                if (progressSamples.size > 3) progressSamples.removeFirst()
+                onBackgroundSpeedChange(1f + progressSamples.average().toFloat() * 2f)
                 delay(250)
             }
         } else {
