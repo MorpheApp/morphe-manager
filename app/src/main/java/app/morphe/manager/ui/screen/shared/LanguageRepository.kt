@@ -81,8 +81,8 @@ object LanguageRepository {
             flag = "🇺🇸"
         )
 
-        // Read locale codes from locales_config.xml
-        val localeCodes = parseLocalesConfig(context)
+        // Read locale codes
+        val localeCodes = parseLocalesConfig()
 
         val otherLanguages = localeCodes.mapNotNull { code ->
             val locale = parseLocaleCode(code) ?: return@mapNotNull null

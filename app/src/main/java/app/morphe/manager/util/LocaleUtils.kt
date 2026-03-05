@@ -1,10 +1,7 @@
 package app.morphe.manager.util
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import app.morphe.manager.R
-import org.xmlpull.v1.XmlPullParser
 import java.util.Locale
 
 /**
@@ -58,32 +55,27 @@ fun migrateLegacyLocaleCode(code: String): String {
 }
 
 /**
- * Read supported locale codes from `res/xml/locales_config.xml`.
+ * Returns the list of supported locale codes, excluding "en" which is
+ * handled separately as the default language.
  *
- * Returns BCP 47 codes (e.g. "uk-UA", "pt-BR") excluding the base "en"
- * which is handled separately as the default language.
+ * Hardcoded to match `res/xml/locales_config.xml` - parsing that file at runtime
+ * is not possible because arsclib (which replaces xmlpull:xmlpull) causes
+ * [android.content.res.Resources.getXml] to return null.
+ *
+ * Keep in sync with `res/xml/locales_config.xml` when adding/removing languages.
  */
-fun parseLocalesConfig(context: Context): List<String> {
-    val codes = mutableListOf<String>()
-    try {
-        val parser = context.resources.getXml(R.xml.locales_config)
-        while (parser.next() != XmlPullParser.END_DOCUMENT) {
-            if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
-                val name = parser.getAttributeValue(
-                    "http://schemas.android.com/apk/res/android", "name"
-                )
-                // Skip base English — it's added separately as the default
-                if (!name.isNullOrBlank() && name != "en") {
-                    codes.add(name)
-                }
-            }
-        }
-        parser.close()
-    } catch (_: Exception) {
-        // Fallback: return empty list, only System + English will be shown
-    }
-    return codes
-}
+fun parseLocalesConfig(): List<String> = listOf(
+    "af-ZA", "am-ET", "ar-SA", "as-IN", "az-AZ", "be-BY", "bg-BG", "bn-BD",
+    "bs-BA", "ca-ES", "cs-CZ", "da-DK", "de-DE", "el-GR", "es-ES", "et-EE",
+    "eu-ES", "fa-IR", "fi-FI", "fil-PH", "fr-FR", "ga-IE", "gl-ES", "gu-IN",
+    "hi-IN", "hr-HR", "hu-HU", "hy-AM", "id-ID", "is-IS", "it-IT", "he-IL",
+    "ja-JP", "ka-GE", "kk-KZ", "km-KH", "kn-IN", "ko-KR", "ky-KG", "lo-LA",
+    "lt-LT", "lv-LV", "mai-IN", "mk-MK", "mn-MN", "ms-MY", "my-MM", "nb-NO",
+    "ne-IN", "nl-NL", "or-IN", "pa-IN", "pl-PL", "pt-BR", "pt-PT", "ro-RO",
+    "ru-RU", "si-LK", "sk-SK", "sl-SI", "sr-CS", "sr-SP", "sv-SE", "sw-KE",
+    "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "ur-IN", "uz-UZ", "vi-VN",
+    "zh-CN", "zh-TW", "zu-ZA"
+)
 
 /**
  * Apply the app language to the entire application process via
