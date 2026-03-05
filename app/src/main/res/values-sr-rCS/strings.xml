@@ -452,6 +452,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_system_memory_limit_warning">%d MB ograničenje</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB ograničenje</string>
     <string name="settings_system_process_runtime_disabled_description">Uvezi kejtore</string>
+    <string name="settings_system_process_runtime_description_not_available">Ova funkcionalnost zahteva Android 11 ili noviji</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Uvoz i izvoz</string>
     <string name="settings_system_import_keystore">Unesi podaci za kejtore</string>

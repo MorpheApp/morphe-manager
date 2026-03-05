@@ -19,6 +19,8 @@
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>
     <string name="home_update_error">Nabigo ang pag-update</string>
     <string name="home_update_error_subtitle">Suriin ang iyong koneksyon sa internet at subukan muli</string>
+    <string name="home_update_skipped_metered">Nabigo ang pag-update</string>
+    <string name="home_update_skipped_metered_subtitle">Mobile data ay aktibo</string>
     <string name="home_updating_sources">Ina-update ang mga mapagkukunan…</string>
     <string name="home_update_progress_format">%1$s naproseso</string>
     <string name="home_update_success">Nakumpleto ang mga mapagkukunan ng update</string>
@@ -49,6 +51,8 @@
     <string name="sources_management_title">I-patch ang mapagkukunan</string>
     <string name="sources_management_open_in_browser">Buksan sa browser</string>
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
+    <string name="sources_management_prerelease_toggle">Gumamit ng mga pre-release patches</string>
+    <string name="sources_management_prerelease_toggle_description">Tumanggap ng maagang pag-access sa mga bagong experimental na bersyon ng patch</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Pangalan na ipapakita</string>
     <string name="sources_dialog_rename">Baguhin ang mapagkukunan ng patch</string>
@@ -69,6 +73,7 @@
     <string name="sources_update_success">Matagumpay ang pag-update</string>
     <string name="sources_update_unavailable">Walang update na magagamit</string>
     <string name="sources_download_fail">Nabigong mag-download ang mga mapagkukunan: %s</string>
+    <string name="sources_download_endpoint_not_found">Hindi napagana ang pag-update \'%1$s\': ang patch JSON file ay hindi natagpuan sa itinakdang URL</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Kailangan mo ba ng tulong sa paghahanap sa orihinal na hindi pa na-patch na APK?</string>
     <string name="home_apk_availability_dialog_simple">Upang ma-patch ang &lt;b&gt;%s&lt;/b&gt;, kailangan mo ng hindi pa napa-patch na APK na may bersyong:</string>
@@ -122,6 +127,10 @@ Nais mo bang magpatuloy?"</string>
     <string name="home_dialog_wrong_package_description">Ang pinili mong APK ay hindi para sa aplikasyon na sinubukan mong i-patch</string>
     <string name="home_dialog_expected_package">Inaasahang pakete:</string>
     <string name="home_dialog_selected_package">Piniling pakete:</string>
+    <string name="home_outdated_patches_dialog_title">Mga patch ay maaaring luma</string>
+    <string name="home_outdated_patches_dialog_message">Mobile data ay aktibo at ang patch updates ay hindi pinapayagan</string>
+    <string name="home_outdated_patches_dialog_warning">Ang pag-patch gamit ang mga luma na patch ay maaaring magresulta sa isang nasirang app</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
     <!-- Patch Options -->
     <string name="custom_color">Pasadyang kulay</string>
     <string name="hex_color">Kulay ng Hex</string>
@@ -251,6 +260,8 @@ Nais mo bang magpatuloy?"</string>
     <string name="patcher_message_19">May lagnat ang aplikasyon mo, at ang tanging reseta ay ang maraming patch… 🩺🔔</string>
     <string name="patcher_message_20">Inaalis ang mga walang saysay. Mangyaring maghintay… 🗑️</string>
     <!-- Expert patcher Screen -->
+    <string name="patching_app">Pag-patch ng app</string>
+    <string name="memory_usage">Paggamit ng memory</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Inilalapat ang mga patch</string>
     <string name="failed_to_execute_patch">Nabigong ilapat %s</string>
@@ -312,6 +323,10 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Baguhin ang icon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mga update</string>
+    <string name="settings_advanced_updates_use_prereleases">Gumamit ng pre-release manager</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Tumanggap ng maagang pag-access sa mga bagong experimental na bersyon ng manager. Upang makuha ang mga pre-release patch, paganahin ang pre-release toggle sa bawat patch source nang paisa-isa</string>
+    <string name="settings_advanced_updates_allow_metered">I-update sa mobile data</string>
+    <string name="settings_advanced_updates_allow_metered_description">Payagan ang patch sources at manager updates na mag-download sa pamamagitan ng mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Mga notipikasyon sa pag-update sa background</string>
     <string name="settings_advanced_updates_background_notifications_description">Paminsan-minsang suriin ang mga update sa background at abisuhan kung magagamit</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Tumanggap ng agarang abiso para sa bagong release, kahit sarado ang aplikasyon</string>
@@ -473,6 +488,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_memory_limit_warning">Ang mababang limitasyon ng memorya ay maaaring magdulot ng mga pagkabigo kapag nag-patch ng mas malalaking aplikasyon</string>
     <string name="settings_system_process_runtime_enabled_description">%s limitasyon sa MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pindutin upang ikonpigura</string>
+    <string name="settings_system_process_runtime_description_not_available">Kailangan ng feature na ito ang Android 11 o mas mataas</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">I-import &amp; i-export</string>
     <string name="settings_system_import_keystore">I-import ang keystore</string>
@@ -612,6 +628,7 @@ Open-source sa core nito, ang Morphe ay umuunlad sa katugunan ng komunidad at mg
     <string name="details">Mga Detalye</string>
     <string name="hide">Itago</string>
     <string name="default_">Panimula</string>
+    <string name="logs">Mga log</string>
     <string name="installing_ellipsis">Ini-install…</string>
     <string name="mounting_ellipsis">Nagma-mount…</string>
     <string name="unmounting_ellipsis">Ina-unmount…</string>

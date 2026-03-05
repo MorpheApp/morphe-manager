@@ -91,5 +91,6 @@
     <string name="disabled">បានផ្ដាច់</string>
     <string name="rename">ប្ដូរឈ្មោះ</string>
     <string name="import_">នាំចូល</string>
+    <string name="allow">អនុញ្ញាត</string>
     <string name="details">ព័ត៌មានលម្អិត</string>
 </resources>

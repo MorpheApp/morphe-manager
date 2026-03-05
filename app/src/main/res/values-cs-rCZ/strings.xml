@@ -490,6 +490,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_memory_limit_warning">Nízký limit paměti může způsobit selhání při záplatování větších aplikací</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Klikněte pro konfiguraci</string>
+    <string name="settings_system_process_runtime_description_not_available">Tato funkce vyžaduje Android 11 nebo vyšší</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import &amp; export</string>
     <string name="settings_system_import_keystore">Importovat klíčový díl</string>

@@ -1,3 +1,10 @@
+# app [1.11.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.2...v1.11.0-dev.3) (2026-03-05)
+
+
+### Bug Fixes
+
+* Root installation fails if module path does not exist ([#282](https://github.com/MorpheApp/morphe-manager/issues/282)) ([3405802](https://github.com/MorpheApp/morphe-manager/commit/3405802d37247596d0747f00e6a98f5a10cc9c9a))
+
 # app [1.11.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.1...v1.11.0-dev.2) (2026-03-04)
 
 

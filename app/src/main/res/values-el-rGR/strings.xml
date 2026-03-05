@@ -490,6 +490,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">Μικρή ορίση μνήμης μπορεί να προκαλέσει αποτυχία κατά την επαναπροσθήση μεγαλύτερων εφαρμογών</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB όριο</string>
     <string name="settings_system_process_runtime_disabled_description">Κλικ για διαμορφισμό</string>
+    <string name="settings_system_process_runtime_description_not_available">Αυτή η λειτουργία απαιτεί Android 11 ή νεότερη έκδοση</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Εισαγωγή &amp; Εξαγωγή</string>
     <string name="settings_system_import_keystore">Εισαγωγή κλειδιόδους</string>

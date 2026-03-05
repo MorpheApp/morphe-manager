@@ -19,7 +19,7 @@
     <string name="home_update_available_subtitle">Neue Version bereit zur Installation</string>
     <string name="home_update_error">Update fehlgeschlagen</string>
     <string name="home_update_error_subtitle">Überprüfe deine Internetverbindung und versuche es erneut</string>
-    <string name="home_update_skipped_metered">Updates ├╝bergangen</string>
+    <string name="home_update_skipped_metered">Patchquellen-aktualisierung verhindert </string>
     <string name="home_update_skipped_metered_subtitle">Mobilfunk ist aktiv</string>
     <string name="home_updating_sources">Update-Sources…</string>
     <string name="home_update_progress_format">%1$s verarbeitet</string>
@@ -490,6 +490,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_memory_limit_warning">Klicken Sie hier, um die Konfiguration zu bearbeiten</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB Begrenzung</string>
     <string name="settings_system_process_runtime_disabled_description">Keystore-Import</string>
+    <string name="settings_system_process_runtime_description_not_available">Diese Funktion erfordert Android 11 oder höher</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importieren Sie Manager-Einstellungen aus einer JSON-Datei</string>
     <string name="settings_system_import_keystore">Keystore-Export</string>

@@ -488,6 +488,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">低記憶體限制可能會導致修補較大型應用程式時失敗</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB 限制</string>
     <string name="settings_system_process_runtime_disabled_description">點選以設定</string>
+    <string name="settings_system_process_runtime_description_not_available">此功能需要 Android 11 或更高版本</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">匯入與匯出</string>
     <string name="settings_system_import_keystore">匯入金鑰庫</string>

@@ -490,6 +490,7 @@ Bildeformateringen må være som følger:
     <string name="settings_system_memory_limit_warning">%d MB grense</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB grænse</string>
     <string name="settings_system_process_runtime_disabled_description">Importer keystore</string>
+    <string name="settings_system_process_runtime_description_not_available">Denne funktion kræver Android 11 eller nyere</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importér &amp; eksportér</string>
     <string name="settings_system_import_keystore">Angi keystore-legitimasjoner</string>

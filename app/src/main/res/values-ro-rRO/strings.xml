@@ -490,6 +490,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când patachizați aplicații mai mari</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limită</string>
     <string name="settings_system_process_runtime_disabled_description">Clic pentru a configura</string>
+    <string name="settings_system_process_runtime_description_not_available">Această funcție necesită Android 11 sau o versiune mai recentă</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importă și exportă</string>
     <string name="settings_system_import_keystore">Importă cheia de semnă</string>

@@ -490,6 +490,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_memory_limit_warning">Laag geheugenlimiet kan mislukken bij patching van grotere apps</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limiet</string>
     <string name="settings_system_process_runtime_disabled_description">Klik om te configureren</string>
+    <string name="settings_system_process_runtime_description_not_available">Deze functie vereist Android 11 of hoger</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importeren en exporteren</string>
     <string name="settings_system_import_keystore">Importeer keystore</string>

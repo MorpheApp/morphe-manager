@@ -491,6 +491,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_memory_limit_warning">Une limite de mémoire faible peut entraîner des échecs lors du patchage des applications plus volumineuses</string>
     <string name="settings_system_process_runtime_enabled_description">Limite de %s Mo</string>
     <string name="settings_system_process_runtime_disabled_description">Cliquez pour configurer</string>
+    <string name="settings_system_process_runtime_description_not_available">Cette fonctionnalité nécessite Android 11 ou une version ultérieure</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importer &amp; exporter</string>
     <string name="settings_system_import_keystore">Importer un keystore</string>

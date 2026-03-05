@@ -8,15 +8,15 @@
     <string name="home_app_hide_title">¿Ocultar esta app?</string>
     <string name="home_app_hide_message">Esta app se ocultará de la pantalla de inicio. Puedes restaurarla más tarde usando el botón \"%1$s\" en la parte inferior de la lista</string>
     <string name="home_app_will_be_hidden">Esta app se ocultará</string>
-    <string name="home_app_show_hidden">Mostrar apps ocultas</string>
+    <string name="home_app_show_hidden">Show hidden apps</string>
     <string name="home_app_no_hidden">No hay apps ocultas</string>
     <string name="home_app_hidden_apps_title">Apps ocultas</string>
     <string name="home_app_hidden_apps_hint">Toca en una app para mostrarla en la lista de nuevo</string>
-    <string name="android_11_bug_dialog_title">Error de Android 11</string>
+    <string name="android_11_bug_dialog_title"> Error de Android 11</string>
     <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización del gestor disponible</string>
-    <string name="home_update_available_subtitle">Nueva versión lista para instalar</string>
+    <string name="home_update_available_subtitle"></string>
     <string name="home_update_error">La actualización falló</string>
     <string name="home_update_error_subtitle">Comprueba tu conexión a internet y vuelve a intentarlo </string>
     <string name="home_update_skipped_metered">Actualización omitida</string>
@@ -490,6 +490,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_memory_limit_warning">Un límite de memoria bajo puede causar errores al parchear aplicaciones más grandes</string>
     <string name="settings_system_process_runtime_enabled_description">Límite de %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pulsa para configurar</string>
+    <string name="settings_system_process_runtime_description_not_available">Esta función requiere Android 11 o posterior</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importar y exportar</string>
     <string name="settings_system_import_keystore">Importar almacén de claves</string>

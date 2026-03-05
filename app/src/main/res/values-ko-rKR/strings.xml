@@ -491,6 +491,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">메모리 제한이 낮으면 대용랑 앱을 패치할 경우에 오류가 발생할 수 있습니다</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB 제한</string>
     <string name="settings_system_process_runtime_disabled_description">설정하려면 탭하세요</string>
+    <string name="settings_system_process_runtime_description_not_available">이 기능은 Android 11 이상이 필요합니다</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">가져오기 &amp; 내보내기</string>
     <string name="settings_system_import_keystore">키스토어 가져오기</string>

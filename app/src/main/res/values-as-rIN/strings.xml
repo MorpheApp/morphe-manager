@@ -45,6 +45,7 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
+    <string name="settings_advanced_patch_options">টা প্যাচ বিকল্প</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->

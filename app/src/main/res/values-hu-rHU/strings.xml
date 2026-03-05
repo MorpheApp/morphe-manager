@@ -490,6 +490,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_memory_limit_warning">Alacsony memóriakorlát esetén a nagyobb alkalmazások módosításakor hiba léphet fel</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB korlát</string>
     <string name="settings_system_process_runtime_disabled_description">Kattintson a konfigurálásához</string>
+    <string name="settings_system_process_runtime_description_not_available">Ez a funkció Android 11 vagy újabb verziót igényel</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importálás és exportálás</string>
     <string name="settings_system_import_keystore">Kulcstároló importálás</string>
