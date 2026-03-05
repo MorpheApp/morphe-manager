@@ -88,7 +88,7 @@ fun SpaceBackground(
                 val delta = (frameMs - lastFrameMs).coerceIn(0L, 64L).toFloat()
                 lastFrameMs = frameMs
 
-                val speedBoost = 3f // Manually change speed boost
+                val speedBoost = 3f // Local boost on top of global speedMultiplier; increase for more dramatic warp
 
                 // Lerp toward target speed with a local 2x boost on top of the global speedMultiplier -
                 // stars accelerate twice as fast as other backgrounds during patching.
@@ -158,7 +158,7 @@ fun SpaceBackground(
         stars.forEach { star ->
             val adjustedProgress = ((baseProgress * star.speed) + star.initialOffset) % 1f
             val z = (1f - adjustedProgress).coerceAtLeast(0.01f)
-            if (z < 0.05f || z > 1.2f) return@forEach
+            if (z < 0.05f || z > 1.5f) return@forEach
 
             val perspectiveFactor = 1f / z
             val baseX = star.x * width  * 0.5f
@@ -175,11 +175,11 @@ fun SpaceBackground(
             // Cull stars outside screen bounds
             if (finalX < -150 || finalX > width + 150 || finalY < -150 || finalY > height + 150) return@forEach
 
-            val sizeFactor  = perspectiveFactor * 0.65f
+            val sizeFactor  = perspectiveFactor * 0.45f
             val finalSize   = star.size * sizeFactor
 
             // Fade in from far distance, fade out when very close to camera
-            val fadeIn    = if (z > 1.0f) ((1.2f - z) / 0.2f).coerceIn(0f, 1f) else 1f
+            val fadeIn    = if (z > 1.3f) ((1.5f - z) / 0.2f).coerceIn(0f, 1f) else 1f
             val fadeOut   = if (z < 0.15f) (z / 0.15f).coerceIn(0f, 1f) else 1f
             val distAlpha = when {
                 z > 0.6f -> ((1f - z) / 0.4f).coerceIn(0f, 1f)
@@ -259,7 +259,7 @@ private fun generateStarPool(): List<StarData> = List(300) { index ->
         size          = 2f + Random.nextFloat() * 3.5f,
         baseAlpha     = 0.6f + Random.nextFloat() * 0.4f,
         depth         = depthLayer,
-        speed         = 0.5f + depthLayer * 1f,
+        speed         = 0.3f + depthLayer * 2.2f,
         initialOffset = Random.nextFloat(), // Stagger stars along Z-axis for density
         lastRegen     = -1
     )
