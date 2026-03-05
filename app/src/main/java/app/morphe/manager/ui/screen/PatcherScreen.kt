@@ -125,15 +125,17 @@ fun PatcherScreen(
 
     // Drive background speed: ramps 1x→3x during patching, resets on completion/failure.
     // Uses a coroutine loop so speed tracks displayProgress in real time without recomposition churn.
-    // A 3-sample rolling average smooths sudden progress jumps before they reach the animation.
-    val progressSamples = remember { ArrayDeque<Float>(3) }
     LaunchedEffect(patcherSucceeded) {
         if (patcherSucceeded == null) {
+            // Exponential moving average to smooths sudden progress jumps.
+            var movingAverage = 0.0f
+            // Lower factor has more abrupt animation changes.
+            val smoothingFactor = 0.25f
             // Patching in progress - poll displayProgress every 250ms (same cadence as progress loop)
             while (true) {
-                progressSamples.addLast(patcherViewModel.progress)
-                if (progressSamples.size > 3) progressSamples.removeFirst()
-                onBackgroundSpeedChange(1f + progressSamples.average().toFloat() * 2f)
+                movingAverage = (1 - smoothingFactor) * movingAverage +
+                        smoothingFactor * displayProgress
+                onBackgroundSpeedChange(1 + movingAverage)
                 delay(250)
             }
         } else {
