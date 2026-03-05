@@ -1,3 +1,10 @@
+# app [1.11.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.3...v1.11.0-dev.4) (2026-03-05)
+
+
+### Bug Fixes
+
+* The language selection list is empty ([db69dad](https://github.com/MorpheApp/morphe-manager/commit/db69dadbca9fe2c396719a93914600192b8affae))
+
 # app [1.11.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.2...v1.11.0-dev.3) (2026-03-05)
 
 
