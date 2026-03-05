@@ -26,6 +26,8 @@ enum class BackgroundType(val displayNameResId: Int) {
     SPACE(R.string.settings_appearance_background_space),
     SHAPES(R.string.settings_appearance_background_shapes),
     SNOW(R.string.settings_appearance_background_snow),
+    GRID(R.string.settings_appearance_background_grid),
+    PARTICLES(R.string.settings_appearance_background_particles),
     NONE(R.string.settings_appearance_background_none);
 
     companion object {
@@ -85,6 +87,18 @@ fun AnimatedBackground(
                 patchingCompleted = patchingCompleted
             )
             BackgroundType.SNOW -> SnowBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
+            )
+            BackgroundType.GRID -> GridBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
+            )
+            BackgroundType.PARTICLES -> ParticlesBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
                 speedMultiplier = speedMultiplier,
