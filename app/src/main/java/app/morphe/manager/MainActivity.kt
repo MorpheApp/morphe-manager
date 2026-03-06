@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Handles deep links for adding patch bundles.
      * Format: https://morphe.software/add-bundle?url=<bundle_url>[&name=<display_name>]
+     * Only GitHub URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
         val data = intent?.data ?: return
@@ -119,6 +120,12 @@ class MainActivity : AppCompatActivity() {
         if (!isAddBundle) return
 
         val url = data.getQueryParameter("url")?.takeIf { it.isNotBlank() } ?: return
+
+        // Only allow GitHub URLs for safety
+        val host = runCatching { java.net.URI(url).host?.lowercase() }.getOrNull()
+        val isGitHub = host == "github.com" || host == "raw.githubusercontent.com"
+        if (!isGitHub) return
+
         val name = data.getQueryParameter("name")?.takeIf { it.isNotBlank() }
         vm.pendingDeepLinkBundle = MainViewModel.DeepLinkBundle(url = url, name = name)
     }
