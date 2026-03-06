@@ -16,4 +16,13 @@ class MainViewModel(
      * updateCheck(), then resets the flag back to false.
      */
     var triggerUpdateCheckOnResume by mutableStateOf(false)
+
+    /**
+     * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the app is opened
+     * via a deep link to add a patch bundle. HomeScreen observes this via LaunchedEffect,
+     * shows a confirmation dialog, then resets the flag to null.
+     */
+    var pendingDeepLinkBundle: DeepLinkBundle? by mutableStateOf(null)
+
+    data class DeepLinkBundle(val url: String, val name: String?)
 }

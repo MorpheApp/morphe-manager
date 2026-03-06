@@ -73,6 +73,17 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <!-- Deep link: App Links (https://morphe.software/add-bundle?url=...) -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="morphe.software"
+                    android:pathPrefix="/add-bundle" />
+            </intent-filter>
         </activity>
 
         <!-- Default launcher icon -->

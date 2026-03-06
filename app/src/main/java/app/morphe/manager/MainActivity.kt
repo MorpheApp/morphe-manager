@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
 
         val vm: MainViewModel = getActivityViewModel()
 
+        // Handle deep link on cold start
+        handleDeepLinkIntent(intent, vm)
+
         setContent {
             val theme by vm.prefs.theme.getAsState()
             val dynamicColor by vm.prefs.dynamicColor.getAsState()
@@ -88,6 +91,7 @@ class MainActivity : AppCompatActivity() {
         // Called when the app is already running and the user taps an FCM notification
         val vm: MainViewModel = getActivityViewModel()
         handleUpdateCheckIntent(intent, vm)
+        handleDeepLinkIntent(intent, vm)
     }
 
     /**
@@ -101,6 +105,22 @@ class MainActivity : AppCompatActivity() {
         ) {
             vm.triggerUpdateCheckOnResume = true
         }
+    }
+
+    /**
+     * Handles deep links for adding patch bundles.
+     * Format: https://morphe.software/add-bundle?url=<bundle_url>[&name=<display_name>]
+     */
+    private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
+        val data = intent?.data ?: return
+        val isAddBundle = data.scheme == "https" &&
+                data.host == "morphe.software" &&
+                data.path?.startsWith("/add-bundle") == true
+        if (!isAddBundle) return
+
+        val url = data.getQueryParameter("url")?.takeIf { it.isNotBlank() } ?: return
+        val name = data.getQueryParameter("name")?.takeIf { it.isNotBlank() }
+        vm.pendingDeepLinkBundle = MainViewModel.DeepLinkBundle(url = url, name = name)
     }
 }
 
@@ -182,6 +202,14 @@ private fun MorpheManager(vm: MainViewModel) {
                         homeViewModel.patchBundleRepository.updateCheck()
                         homeViewModel.checkForManagerUpdates()
                         vm.triggerUpdateCheckOnResume = false
+                    }
+                }
+
+                // Handle deep link bundle
+                LaunchedEffect(vm.pendingDeepLinkBundle) {
+                    vm.pendingDeepLinkBundle?.let { bundle ->
+                        homeViewModel.handleDeepLinkAddBundle(bundle.url, bundle.name)
+                        vm.pendingDeepLinkBundle = null
                     }
                 }
 
