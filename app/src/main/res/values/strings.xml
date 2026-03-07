@@ -421,8 +421,7 @@ Are you sure you want to proceed?"</string>
 
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patch options</string>
-    <string name="settings_advanced_patch_options_youtube_description">Theme, branding, header, and Shorts options</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Theme and branding options</string>
+    <string name="settings_advanced_patch_options_youtube_description">Theme, branding, and header options</string>
     <string name="settings_advanced_patch_options_restart_message">Changing patch options requires re-patching the app to take effect</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">In Expert mode patch options will be available during the patching process</string>
 
