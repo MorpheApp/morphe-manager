@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">点击应用以重新显示其在列表中的位置</string>
     <string name="android_11_bug_dialog_title">Android 11 错误</string>
     <string name="android_11_bug_dialog_description">必须提前授予应用安装权限，以避免 Android 11 系统中的某个错误对用户体验造成负面影响。</string>
+    <string name="deep_link_add_source_title">添加来源</string>
+    <string name="deep_link_add_source_message">您想将此补丁源添加到Morphe吗？</string>
+    <string name="deep_link_add_source_warning">仅从您信任的来源添加来源</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">有新的更新可用</string>
+    <string name="home_update_available">Morphe更新可用</string>
     <string name="home_update_available_subtitle">新版本已准备好安装</string>
     <string name="home_update_error">更新失败</string>
     <string name="home_update_error_subtitle">请检查您的互联网连接并重试</string>
@@ -213,7 +216,7 @@
     <string name="patcher_ready_to_install_subtitle">按下方按钮安装</string>
     <string name="patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
     <string name="patcher_storage_permission_dialog_title">无法访问存储路径</string>
-    <string name="patcher_storage_permission_description_api30">一个或多个补丁选项指向 Morphe 管理器无法读取的路径。授予存储访问权限，然后自动开始补丁</string>
+    <string name="patcher_storage_permission_description_api30">一个或多个补丁选项指向Morphe无法读取的路径。授予存储访问权限并点击按钮，然后补丁将自动开始</string>
     <string name="patcher_storage_permission_description_legacy">一个或多个补丁选项指向无法访问的路径。更新补丁选项中的路径，然后重试</string>
     <string name="patcher_storage_permission_grant">授予存储权限</string>
     <string name="patcher_storage_permission_denied_warning">存储权限已被拒绝。授予权限以使用此路径，或将文件移动到应用的私有目录</string>
@@ -325,19 +328,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">更改图标</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
-    <string name="settings_advanced_updates_use_prereleases">使用预发布版本管理器</string>
-    <string name="settings_advanced_updates_use_prereleases_description">提前体验新的实验性管理器版本。要获取预发布补丁，请在每个补丁源单独启用预发布开关</string>
+    <string name="settings_advanced_updates_use_prereleases">使用预发布版Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Receive early access to new Morpheph features. To get pre-release patches, enable the pre-release toggle in each patch source separately</string>
     <string name="settings_advanced_updates_allow_metered">在移动数据上更新</string>
-    <string name="settings_advanced_updates_allow_metered_description">允许补丁源和管理器更新在移动数据上下载</string>
+    <string name="settings_advanced_updates_allow_metered_description">Allow Morphe and patch updates to download over mobile data</string>
     <string name="settings_advanced_updates_background_notifications">后台更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">定期在后台检查更新并通知可用</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">即使应用关闭也会收到新版本的即时推送通知</string>
-    <string name="notification_channel_manager_updates">管理更新</string>
-    <string name="notification_channel_manager_updates_description">有关新的 Morphe 管理版本的通知</string>
+    <string name="notification_channel_manager_updates">Morphe updates</string>
+    <string name="notification_channel_manager_updates_description">Notifications about new versions of Morphe</string>
     <string name="notification_channel_bundle_updates">补丁源更新</string>
     <string name="notification_channel_bundle_updates_description">有关新补丁源版本的通知</string>
     <string name="notification_channel_fcm_updates">更新警报</string>
-    <string name="notification_channel_fcm_updates_description">立即推送通知，通知新的 Morphe 管理器和补丁发布，即使应用在后台运行也会收到</string>
+    <string name="notification_channel_fcm_updates_description">Instant push notifications for new Morphe and patch releases. Delivered even when the app is in the background</string>
     <string name="settings_advanced_update_interval">检查频率</string>
     <string name="settings_advanced_update_interval_dialog_title">检查更新</string>
     <string name="settings_advanced_update_interval_hourly">每小时一次</string>
@@ -347,12 +350,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">后台检查频率</string>
     <string name="settings_advanced_update_interval_battery_warning">后台检查在某些设备上可能无法可靠工作。制造商如小米、华为、三星和一加经常积极限制后台进程以节省电池</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe 管理器更新可用</string>
+    <string name="notification_manager_update_title">Morphe update available</string>
     <string name="notification_bundle_update_title">有新的补丁可用</string>
     <string name="notification_update_text">版本 %1$s 可以下载</string>
-    <string name="notification_bundle_update_text_unversioned">点击打开 Morphe 管理器并更新</string>
+    <string name="notification_bundle_update_text_unversioned">Tap to open Morphe and update</string>
     <string name="notification_permission_dialog_title">允许通知</string>
-    <string name="notification_permission_dialog_description">Morphe 管理器需要通知权限来在后台通知您更新可用</string>
+    <string name="notification_permission_dialog_description">Morphe needs notification permission to alert you when updates are available in the background</string>
     <string name="notification_post_patch_dialog_title">您是否希望在有更新时收到通知？</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高级设置</string>
@@ -370,12 +373,11 @@
     <string name="settings_advanced_github_pat_dialog_title">设置 GitHub 个人访问令牌</string>
     <string name="settings_advanced_github_pat_dialog_description">设置 GitHub 个人访问令牌以能够将 pull 请求添加为外部源。创建具有公共仓库范围的 PAT</string>
     <string name="settings_advanced_github_pat_export_include_label">包含在设置导出中</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">将此 PAT 添加到导出的管理器设置中</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported Morphe settings</string>
     <string name="settings_advanced_github_pat_export_warning">请勿共享您的 PAT。如果您在设置导出中包含它，请将该文件保持为私有，因为它包含令牌</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">补丁选项</string>
-    <string name="settings_advanced_patch_options_youtube_description">主题、品牌、标题和 Shorts 选项</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">主题和品牌选项</string>
+    <string name="settings_advanced_patch_options_youtube_description">主题、品牌和标头选项</string>
     <string name="settings_advanced_patch_options_restart_message">更改补丁选项需要重新修补应用以生效</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">高级模式下补丁选项将在修补过程中可用</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_show_password_field">显示密码</string>
     <string name="settings_system_hide_password_field">隐藏密码</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">导入管理器设置</string>
-    <string name="settings_system_import_manager_settings_description">从 JSON 文件恢复管理器设置</string>
-    <string name="settings_system_import_manager_settings_fail">无法导入管理器设置：%s</string>
-    <string name="settings_system_import_manager_settings_success">管理器设置已导入</string>
-    <string name="settings_system_export_manager_settings">导出管理器设置</string>
-    <string name="settings_system_export_manager_settings_description">将管理器设置保存到 JSON 文件</string>
-    <string name="settings_system_export_manager_settings_fail">无法导出管理器设置：%s</string>
-    <string name="settings_system_export_manager_settings_success">管理器设置已导出</string>
+    <string name="settings_system_import_manager_settings">Import Morphe settings</string>
+    <string name="settings_system_import_manager_settings_description">Restore Morphe settings from a JSON file</string>
+    <string name="settings_system_import_manager_settings_fail">Failed to import Morphe settings: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe settings imported</string>
+    <string name="settings_system_export_manager_settings">Export Morphe settings</string>
+    <string name="settings_system_export_manager_settings_description">Save Morphe settings to a JSON file</string>
+    <string name="settings_system_export_manager_settings_fail">Failed to export Morphe settings: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe settings exported</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">调试</string>
     <string name="settings_system_export_debug_logs">导出调试日志</string>

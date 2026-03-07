@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Klikkaa sovellusta nähdäksesi sen listassa uudelleen</string>
     <string name="android_11_bug_dialog_title">Android 11 virhe</string>
     <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
+    <string name="deep_link_add_source_title">Lisää lähde</string>
+    <string name="deep_link_add_source_message">Haluatko lisätä tämän korjauslähteen Morpheen?</string>
+    <string name="deep_link_add_source_warning">Lisää lähde vain luotettavista lähteistä</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Uusi päivitys saatavilla</string>
+    <string name="home_update_available">Morphe-päivitys saatavilla</string>
     <string name="home_update_available_subtitle">Uusi versio valmis asennukseen</string>
     <string name="home_update_error">Päivitys epäonnistui</string>
     <string name="home_update_error_subtitle">Tarkista internet-yhteytesi ja yritä uudelleen</string>
@@ -213,7 +216,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patcher_ready_to_install_subtitle">Paina alla olevaa painiketta asentaaksesi</string>
     <string name="patcher_ready_to_mount_subtitle">Paina alla olevaa painiketta liittääksesi</string>
     <string name="patcher_storage_permission_dialog_title">Ei voi käsitellä tallennustietoa</string>
-    <string name="patcher_storage_permission_description_api30">Yksi tai useampi päivitysasetus osoittaa Morphe-hallinnoinnolle lukematon tiedostopolkuja. Anta tallennuslupaa ja napsauta painiketta, sitten päivitys alkaa automaattisesti</string>
+    <string name="patcher_storage_permission_description_api30">Yksi tai useampi korjausvaihtoehto osoittaa polkuihin, joita Morphe ei voi lukea. Myönnä tallennustilan käyttöoikeus ja napauta painiketta, niin korjaus alkaa automaattisesti</string>
     <string name="patcher_storage_permission_description_legacy">Yksi tai useampi päivitysasetus osoittaa pääsyä ei voida käsitellä tiedostoja. Päivitä päivitysasetuksia ja yritä uudelleen</string>
     <string name="patcher_storage_permission_grant">Anta tallennuslupa</string>
     <string name="patcher_storage_permission_denied_warning">Tallennustilaan tarvitaan lupa. Anta lupa käyttää tätä polkua tai siirrä tiedostot sovelluksen yksityiseen kansioon.</string>
@@ -325,19 +328,19 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Muokka ulkon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Päivitykset</string>
-    <string name="settings_advanced_updates_use_prereleases">Käytä sovelluksen ennakkojulkaisuversiota</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Saa varhainen pääsy uusiin kokeellisiin hallintajärjestelmäversioihin. Saa ennakkopäivitykset, kun otat käyttöön ennakkopäivitys-vaihde jokaisessa päivitys lähteessä erikseen.</string>
+    <string name="settings_advanced_updates_use_prereleases">Käytä esijulkaisupalvelua Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Hanki ennenaikainen pääsy uusiin Morphe-ominaisuuksiin. Hanki esijulkaisupäivityksiä ottamalla esijulkaisukytkin käyttöön erikseen jokaisessa päivityslähteessä</string>
     <string name="settings_advanced_updates_allow_metered">Päivitä mobiiliverkossa</string>
-    <string name="settings_advanced_updates_allow_metered_description">Salli päivitys lähteet ja asetus päivitykset ladata liikenneverkossa</string>
+    <string name="settings_advanced_updates_allow_metered_description">Salli Morphen ja päivitysten lataaminen mobiilidatan kautta</string>
     <string name="settings_advanced_updates_background_notifications">Taustapäivityksen ilmoitukset</string>
     <string name="settings_advanced_updates_background_notifications_description">Tarkista päivitykset taustalla säännöllisesti ja ilmoita kun ne ovat saatavilla</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Saa välittömät push-ilmoitukset uusista versioista, jopa kun sovellus on suljettu</string>
-    <string name="notification_channel_manager_updates">Hallitse päivityksiä</string>
-    <string name="notification_channel_manager_updates_description">Ilmoitukset uusista Morphe Manager -versioista</string>
+    <string name="notification_channel_manager_updates">Morphe-päivitykset</string>
+    <string name="notification_channel_manager_updates_description">Ilmoituksia Morphen uusista versioista</string>
     <string name="notification_channel_bundle_updates">Päivitysten lähteet</string>
     <string name="notification_channel_bundle_updates_description">Uuden patchin uusimmat versiot -ilmoitukset</string>
     <string name="notification_channel_fcm_updates">Päivitä varoittimet</string>
-    <string name="notification_channel_fcm_updates_description">Suoraviestin työntekijäpäivitykset ja pätkän uusimmat. Toimitetaan jopa kun sovellus on taustalla</string>
+    <string name="notification_channel_fcm_updates_description">Välittömiä push-ilmoituksia uusista Morphen ja korjausjulkaisuista. Toimitetaan vaikka sovellus olisi taustalla</string>
     <string name="settings_advanced_update_interval">Tarkistusfrekvenssi</string>
     <string name="settings_advanced_update_interval_dialog_title">Tarkista päivitykset</string>
     <string name="settings_advanced_update_interval_hourly">Kertaa tunnissa</string>
@@ -347,12 +350,12 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Taustatarkistuksen frekvenssi</string>
     <string name="settings_advanced_update_interval_battery_warning">Taustatarkistukset eivät välttämättä toimi luotettavasti kaikilla laitteilla. Tuottajat kuten Xiaomi, Huawei, Samsung ja OnePlus usein rajoittavat taustaprosesseja akun säästämiseksi</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe manager -päivitys saatavilla</string>
+    <string name="notification_manager_update_title">Morphe-päivitys saatavilla</string>
     <string name="notification_bundle_update_title">Uusia pätkkiä saatavilla</string>
     <string name="notification_update_text">Versio %1$s on valmis ladattavaksi</string>
-    <string name="notification_bundle_update_text_unversioned">Klikkaa avataksesi Morphe managerin ja päivityksen</string>
+    <string name="notification_bundle_update_text_unversioned">Avaa Morphe ja päivitä</string>
     <string name="notification_permission_dialog_title">Salli ilmoitukset</string>
-    <string name="notification_permission_dialog_description">Morphe manager tarvitsee ilmoitusluvan päivitysten saatavuuden varoittamiseen taustalla</string>
+    <string name="notification_permission_dialog_description">Morphe tarvitsee ilmoitusluvan, jotta voit saada ilmoituksen päivityksistä, kun sovellus on taustalla</string>
     <string name="notification_post_patch_dialog_title">Haluatko saada ilmoitusta, kun päivitykset ovat saatavilla?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert asetukset</string>
@@ -370,12 +373,11 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Aseta GitHubhen henkilökohtainen pääsytokeni</string>
     <string name="settings_advanced_github_pat_dialog_description">Aseta GitHub Personal Access Token, jotta voit lisätä pull requestejä ulkoisina lähteinä. Luo PAT skopilla public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Sisällytä asetuksien viedossa</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Lisää tämä PAT viedyihin asetuksiin</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Lisää tämä PAT vientiin vietäviin Morphen asetuksiin</string>
     <string name="settings_advanced_github_pat_export_warning">Älä jaka tämä PAT. Jos sisällytät sen asetuksien viedossa, pidä tiedosto yksityisenä, koska se sisältää tokenin</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patch-asetukset</string>
-    <string name="settings_advanced_patch_options_youtube_description">Teema, mainosta, otsikko ja lyhyt-versiot asetukset</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Teema ja mainosta asetukset</string>
+    <string name="settings_advanced_patch_options_youtube_description">Teema, brändäys ja otsikkokohdat</string>
     <string name="settings_advanced_patch_options_restart_message">Muokkaustustimien tulostuminen onnistuminen uudelleen patchaamisen sovelluksen</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Appin teeman värit</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_show_password_field">Näytä salasana</string>
     <string name="settings_system_hide_password_field">Piilota salasana</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Tuo Managerin asetukset</string>
-    <string name="settings_system_import_manager_settings_description">Palauta Managerin asetukset JSON-tiedostosta</string>
-    <string name="settings_system_import_manager_settings_fail">Managerin asetusten tuonti epäonnistui: %s</string>
-    <string name="settings_system_import_manager_settings_success">Vienti manager-asetuset JSON-tiedostosta</string>
-    <string name="settings_system_export_manager_settings">Vie Managerin asetukset</string>
-    <string name="settings_system_export_manager_settings_description">Tallenna Managerin asetukset JSON-tiedostoon</string>
-    <string name="settings_system_export_manager_settings_fail">Näytön</string>
-    <string name="settings_system_export_manager_settings_success">Piilota näytön</string>
+    <string name="settings_system_import_manager_settings">Tuo Morphen asetukset</string>
+    <string name="settings_system_import_manager_settings_description">Palauta Morphen asetukset JSON-tiedostosta</string>
+    <string name="settings_system_import_manager_settings_fail">Morphen asetusten tuonti epäonnistui: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphen asetukset tuotu</string>
+    <string name="settings_system_export_manager_settings">Vie Morphen asetukset</string>
+    <string name="settings_system_export_manager_settings_description">Tallenna Morphen asetukset JSON-tiedostoon</string>
+    <string name="settings_system_export_manager_settings_fail">Morphen asetusten vienti epäonnistui: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphen asetukset viety</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Tuo debug-lokit</string>
     <string name="settings_system_export_debug_logs">Vie virheenkorjauslokit</string>

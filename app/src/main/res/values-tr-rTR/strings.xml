@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Uygulamaya dokunarak listeye geri getirin</string>
     <string name="android_11_bug_dialog_title">Android 11 hatası</string>
     <string name="android_11_bug_dialog_description">Android 11 sistemindeki kullanıcı deneyimini olumsuz etkileyecek bir hatayı önlemek için uygulama yükleme izninin önceden verilmesi gerekmektedir</string>
+    <string name="deep_link_add_source_title">Kaynak ekle</string>
+    <string name="deep_link_add_source_message">Bu yamayı Morphe\'ye eklemek ister misiniz?</string>
+    <string name="deep_link_add_source_warning">Sadece güvendiğiniz kaynaklardan kaynak ekleyin</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Manager güncellemesi mevcut</string>
+    <string name="home_update_available">Morphe güncellemesi mevcut</string>
     <string name="home_update_available_subtitle">Yeni sürüm yükleme için hazır</string>
     <string name="home_update_error">Güncelleme başarısız</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
@@ -213,7 +216,7 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="patcher_ready_to_install_subtitle">Yüklemek için aşağıdaki düğmeye basın</string>
     <string name="patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
     <string name="patcher_storage_permission_dialog_title">Depo yolu erişimine erişilemiyor</string>
-    <string name="patcher_storage_permission_description_api30">Bir veya daha fazla çözüm seçeneği Morphe yöneticisi tarafından okunamayan yollara işaret ediyor. Depo erişimine izin verin ve düğmeye basın, o zaman otomatik olarak çözümleme başlayacak</string>
+    <string name="patcher_storage_permission_description_api30">Bir veya daha fazla yama seçeneği, Morphe\'nin okuyamadığı yollara işaret ediyor. Depolama erişimini verin ve düğmeye dokunun, ardından yamalama otomatik olarak başlayacaktır</string>
     <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla çözüm seçeneği erişime açıksız yollara işaret ediyor. Çözüm seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
     <string name="patcher_storage_permission_grant">Depo erişimi izni verin</string>
     <string name="patcher_storage_permission_denied_warning">Depolama izni reddedildi. Bu yolu kullanmak için izni verin veya dosyaları uygulamaların özel dizinine taşıyın</string>
@@ -325,19 +328,19 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simgeyi değiştir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Güncellemeler</string>
-    <string name="settings_advanced_updates_use_prereleases">Ön sürüm manager kullan</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Yeni deneysel manager sürümlerine erken erişim sağlayın. Ön sürüm yamaları almak için, her yama kaynağında ayrı ayrı ön sürüm seçeneğini etkinleştirin</string>
+    <string name="settings_advanced_updates_use_prereleases">Ön sürüm Morphe kullan</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe özelliklerine erken erişim sağlayın. Ön sürüm yamalarını almak için, her yama kaynağında ayrı ayrı ön sürüm seçeneğini etkinleştirin</string>
     <string name="settings_advanced_updates_allow_metered">Mobil veri üzerinden güncelle</string>
-    <string name="settings_advanced_updates_allow_metered_description">Yama kaynakları ve manager güncellemelerini mobil veri üzerinden indirmek için izin ver</string>
+    <string name="settings_advanced_updates_allow_metered_description">Morphe ve yama güncellemelerinin mobil veri üzerinden indirilmesine izin verin</string>
     <string name="settings_advanced_updates_background_notifications">Arka plan güncelleme bildirimleri</string>
     <string name="settings_advanced_updates_background_notifications_description">Arka planda düzenli aralıklarla güncellemeleri kontrol edin ve güncellemeler mevcut olduğunda bildirim gönderin</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Uygulama kapalıyken bile yeni sürümler için anında bildirim alın</string>
-    <string name="notification_channel_manager_updates">Güncellemeleri yönetin</string>
-    <string name="notification_channel_manager_updates_description">Yeni Morphe yönetici sürümleri hakkında bildirimler</string>
+    <string name="notification_channel_manager_updates">Morphe yamaları</string>
+    <string name="notification_channel_manager_updates_description">Morphe\'nin yeni sürümleri hakkında bildirimler</string>
     <string name="notification_channel_bundle_updates">Yama kaynağı güncellemeleri</string>
     <string name="notification_channel_bundle_updates_description">Yeni yama sürümleri hakkında bildirimler</string>
     <string name="notification_channel_fcm_updates">Güncellemeleri Yenile</string>
-    <string name="notification_channel_fcm_updates_description">Yeni Morphe yöneticisi ve yama sürümleri için anlık itikaf bildirimleri. Uygulama arka planda çalışırken de gönderilir</string>
+    <string name="notification_channel_fcm_updates_description">Yeni Morphe ve yama yayınları için anında bildirimler. Uygulama arka planda olsa bile teslim edilir</string>
     <string name="settings_advanced_update_interval">Güncelleme sıklığı</string>
     <string name="settings_advanced_update_interval_dialog_title">Güncellemeyi kontrol et</string>
     <string name="settings_advanced_update_interval_hourly">Saatte bir</string>
@@ -347,12 +350,12 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Arka plan kontrol sıklığı</string>
     <string name="settings_advanced_update_interval_battery_warning">Arka plan kontroller bazı cihazlarda çalışmayabilir. Üreticiler like Xiaomi, Huawei, Samsung ve OnePlus often agresif olarak arka plan işlemlerini kısıtlar pil tasarrufu için</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Yeni Morphe yöneticisi güncellemesi mevcut</string>
+    <string name="notification_manager_update_title">Morphe güncellemesi mevcut</string>
     <string name="notification_bundle_update_title">Yeni yamalar mevcut</string>
     <string name="notification_update_text">Sürüm %1$s indirmeye hazır</string>
-    <string name="notification_bundle_update_text_unversioned">Morphe yöneticisine tıkla ve güncelle</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe\'yi açmak ve güncellemek için dokunun</string>
     <string name="notification_permission_dialog_title">Bildirim izni</string>
-    <string name="notification_permission_dialog_description">Morphe yöneticisi arka plan güncellemeleri için bildirim iznine ihtiyaç duyar</string>
+    <string name="notification_permission_dialog_description">Morphe, arka planda güncellemeler kullanılabilir olduğunda sizi uyarmak için bildirim izni gerektirir</string>
     <string name="notification_post_patch_dialog_title">Güncellemeler mevcut olduğunda bildirileceksin mi?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ayarlar</string>
@@ -370,12 +373,11 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Kişisel Erişim Anahtarı ayarla</string>
     <string name="settings_advanced_github_pat_dialog_description">GitHub kişisel erişim anahtarını ayarlayın ve çekme isteklerini harici kaynak olarak ekleyin. github.com\'da \"public_repo\" kapsamlı bir PAT (anahtar) oluşturun</string>
     <string name="settings_advanced_github_pat_export_include_label">Ayarları dışa aktarırken dahil et</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Bu PAT\'i dışa aktarılan yönetici ayarlarına ekler</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Bu PAT\'yi dışa aktarılan Morphe ayarlarına ekler</string>
     <string name="settings_advanced_github_pat_export_warning">PAT\'ı paylaşmayın. Eğer ayarları dışa aktarırken bu PAT\'i eklerseniz, o dosyayı gizli tutun, çünkü anahtarı içerir</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Yama seçenekleri</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, marka, başlık ve Shorts seçenekleri</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Tema ve marka seçenekleri</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, marka ve başlık seçenekleri</string>
     <string name="settings_advanced_patch_options_restart_message">Yama seçeneklerinde değişiklik yapılması, değişikliklerin etkili olması için uygulamanın yeniden yamalanmasını gerektirir</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Uzman modunda yama seçenekleri yama işlemi sırasında kullanılabilir olacaktır</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_show_password_field">Parolayı göster</string>
     <string name="settings_system_hide_password_field">Parolayı gizle</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Ayarları içe aktar</string>
-    <string name="settings_system_import_manager_settings_description">Ayarları JSON dosyasından geri yükle</string>
-    <string name="settings_system_import_manager_settings_fail">Ayarlar içe aktarılamadı: %s</string>
-    <string name="settings_system_import_manager_settings_success">Ayarlar içe aktarıldı</string>
-    <string name="settings_system_export_manager_settings">Ayarları dışa aktar</string>
-    <string name="settings_system_export_manager_settings_description">Ayarları JSON dosyasına kaydet</string>
-    <string name="settings_system_export_manager_settings_fail">Ayarlar dışa aktarılamadı: %s</string>
-    <string name="settings_system_export_manager_settings_success">Ayarlar dışa aktarıldı</string>
+    <string name="settings_system_import_manager_settings">Morphe ayarlarını içe aktar</string>
+    <string name="settings_system_import_manager_settings_description">Morphe ayarlarını bir JSON dosyasından geri yükle</string>
+    <string name="settings_system_import_manager_settings_fail">Morphe ayarlarını içe aktarmada hata oluştu: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe ayarları içe aktarıldı</string>
+    <string name="settings_system_export_manager_settings">Morphe ayarlarını dışa aktar</string>
+    <string name="settings_system_export_manager_settings_description">Morphe ayarlarını bir JSON dosyasına kaydet</string>
+    <string name="settings_system_export_manager_settings_fail">Morphe ayarlarını dışa aktarmada hata oluştu: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe ayarları dışa aktarıldı</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Hata ayıklama</string>
     <string name="settings_system_export_debug_logs">Hata ayıklama kayıtlarını dışa aktar</string>

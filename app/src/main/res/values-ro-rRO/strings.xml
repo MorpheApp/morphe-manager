@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Apasă pe o aplicație pentru a o arăta din nou în lista</string>
     <string name="android_11_bug_dialog_title">Eroare Android 11</string>
     <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în avans pentru a evita o problemă în sistemul Android 11 care poate afecta negativ experiența utilizatorului</string>
+    <string name="deep_link_add_source_title">Adaugă sursă</string>
+    <string name="deep_link_add_source_message">Dorești să adaugi această sursă de patch la Morphe?</string>
+    <string name="deep_link_add_source_warning">Adaugă surse doar din locații de încredere</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Există actualizări disponibile</string>
+    <string name="home_update_available">Actualizare Morphe disponibilă</string>
     <string name="home_update_available_subtitle">Versiune nouă pregătită pentru instalare</string>
     <string name="home_update_error">Actualizarea a eșuat</string>
     <string name="home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
@@ -213,7 +216,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patcher_ready_to_install_subtitle">Apăsați butonul de mai jos pentru a instala</string>
     <string name="patcher_ready_to_mount_subtitle">Apăsați butonul de mai jos pentru a monta</string>
     <string name="patcher_storage_permission_dialog_title">Nu se poate accesa calea de stocare</string>
-    <string name="patcher_storage_permission_description_api30">Una sau mai multe opțiuni de patch indică căi de stocare pe care Morphe manager nu le poate citi. Acordați accesul la stocare și apăsați butonul, apoi începerea patch-ului se va face automat</string>
+    <string name="patcher_storage_permission_description_api30">Una sau mai multe opțiuni de patch indică către căi pe care Morphe nu le poate citi. Acordă acces la stocare și atinge butonul, apoi patch-uirea va începe automat</string>
     <string name="patcher_storage_permission_description_legacy">Una sau mai multe opțiuni de patch indică căi de stocare care nu pot fi accesate. Actualizați căile în opțiunile de patch și încercați din nou</string>
     <string name="patcher_storage_permission_grant">Acordați permisiunea de stocare</string>
     <string name="patcher_storage_permission_denied_warning">Permisiunea de stocare a fost refuzată. Acordați permisiunea pentru a utiliza acest drum, sau mutați fișierul în directorul privat al aplicației</string>
@@ -325,19 +328,19 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Schimbă icona</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Actualizări</string>
-    <string name="settings_advanced_updates_use_prereleases">Folosiți managerul de versiuni pre-lansare</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Primești acces precoț la noi versiuni experimentale de manager. Pentru a primi patch-uri pre-lansare, activează opțiunea pre-lansare în fiecare sursă de patch separat</string>
+    <string name="settings_advanced_updates_use_prereleases">Utilizează Morphe versiune pre-lansare</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Primește acces anticipat la funcții noi Morphe. Pentru a obține actualizări preliminare, activează comutatorul pre-lansare în fiecare sursă de actualizare separat</string>
     <string name="settings_advanced_updates_allow_metered">Actualizează pe date mobile</string>
-    <string name="settings_advanced_updates_allow_metered_description">Permite sursele de patch și actualizările managerului să descarce pe date mobile</string>
+    <string name="settings_advanced_updates_allow_metered_description">Permite ca Morphe și actualizările de patch să descarce prin date mobile</string>
     <string name="settings_advanced_updates_background_notifications">Notificări de actualizări în fundal</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodicââ verificaââ pentru actualizââi din fundalââ ââ notificaââ câând câând disponibile</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Primește notificări instantane de push pentru noi versiuni, chiar când aplicația este închisa</string>
-    <string name="notification_channel_manager_updates">Manager updates</string>
-    <string name="notification_channel_manager_updates_description">Notificări despre noi versiuni Morphe manager</string>
+    <string name="notification_channel_manager_updates">Actualizări Morphe</string>
+    <string name="notification_channel_manager_updates_description">Notificări despre noile versiuni de Morphe</string>
     <string name="notification_channel_bundle_updates">Actualizări de surse de patch</string>
     <string name="notification_channel_bundle_updates_description">Notificări despre noi versiuni de sursă pentru patch-uri</string>
     <string name="notification_channel_fcm_updates">Actualizează alertâ</string>
-    <string name="notification_channel_fcm_updates_description">Notificări instantane de fundal pentru noi lansări ale managerului Morphe și pachetelor. Livrate chiar dacă aplicația se află în fundal</string>
+    <string name="notification_channel_fcm_updates_description">Notificări push instantanee pentru lansările noi Morphe și patch. Livrate chiar și atunci când aplicația rulează în fundal</string>
     <string name="settings_advanced_update_interval">Frecvența de verificare</string>
     <string name="settings_advanced_update_interval_dialog_title">Verifică pentru actualizări</string>
     <string name="settings_advanced_update_interval_hourly">O dată pe oră</string>
@@ -347,12 +350,12 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Frecvența de verificare în fundal</string>
     <string name="settings_advanced_update_interval_battery_warning">Verificările în fundal pot nu funcționa reliable pe unele dispozitive. Fabricanții precum Xiaomi, Huawei, Samsung și OnePlus adesea restrictă procesul în fundal pentru a economisi baterie</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Actualizare disponibilă pentru managerul Morphe</string>
+    <string name="notification_manager_update_title">Actualizare Morphe disponibilă</string>
     <string name="notification_bundle_update_title">Există actualizări disponibile</string>
     <string name="notification_update_text">Versiunea %1$s este gata pentru descarcare</string>
-    <string name="notification_bundle_update_text_unversioned">Apasă pentru deschidere managerul Morphe și actualizare</string>
+    <string name="notification_bundle_update_text_unversioned">Apasă pentru a deschide Morphe și a actualiza</string>
     <string name="notification_permission_dialog_title">Permite notificări</string>
-    <string name="notification_permission_dialog_description">Managerul Morphe are nevoie de permisiunea de notificări pentru a te alerta când sunt disponibile actualizări în fundal</string>
+    <string name="notification_permission_dialog_description">Morphe are nevoie de permisiunea de notificare pentru a te avertiza când sunt disponibile actualizări în fundal</string>
     <string name="notification_post_patch_dialog_title">Doriți să fiți notificați când sunt disponibile actualizări?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
@@ -370,12 +373,11 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Setare GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">Setă un token de acces personal GitHub pentru a putea adăuga cereri de pull ca surse externe. Creează un token cu scopul public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Include în exportul setărilor</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Adaugă acest PAT în setările exportate ale managerului</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Adaugă acest PAT la setările Morphe exportate</string>
     <string name="settings_advanced_github_pat_export_warning">Nu împărtăşeşti PAT-ul tău. Dacă îl includi într-un export de setări, menţine fişierul privat, deoarece conţine tokenul</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opțiuni de patach</string>
-    <string name="settings_advanced_patch_options_youtube_description">Opțiuni de temă, branding, antetă și Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Opțiuni de temă și branding</string>
+    <string name="settings_advanced_patch_options_youtube_description">Temă, branding și opțiuni antet</string>
     <string name="settings_advanced_patch_options_restart_message">Schimbarea opțiunilor de patach necesită repatachizarea aplicației pentru a fi aplicată</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">În mod expert, opțiunile de patach vor fi disponibile în timpul procesului de patachizare</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_show_password_field">Arată parolă</string>
     <string name="settings_system_hide_password_field">Ascunde parolă</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importă setări manager</string>
-    <string name="settings_system_import_manager_settings_description">Restabilește setările manager dintr-un fișier JSON</string>
-    <string name="settings_system_import_manager_settings_fail">Nu s-a putut importa setările manager: %s</string>
-    <string name="settings_system_import_manager_settings_success">Setările manager importate</string>
-    <string name="settings_system_export_manager_settings">Exportă setări manager</string>
-    <string name="settings_system_export_manager_settings_description">Salvați setările manager într-un fișier JSON</string>
-    <string name="settings_system_export_manager_settings_fail">Nu s-a putut exporta setările manager: %s</string>
-    <string name="settings_system_export_manager_settings_success">Setările manager exportate</string>
+    <string name="settings_system_import_manager_settings">Importă setările Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Restabilește setările Morphe dintr-un fișier JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Eșec la importarea setărilor Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Setările Morphe au fost importate</string>
+    <string name="settings_system_export_manager_settings">Exportă setările Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Salvează setările Morphe într-un fișier JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Eșec la exportarea setărilor Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Setările Morphe au fost exportate</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debbug</string>
     <string name="settings_system_export_debug_logs">Exportare jurnale de depanare</string>

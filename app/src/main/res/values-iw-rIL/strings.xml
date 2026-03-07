@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">לחץ על אפליקציה כדי להציג אותה בשנית ברשימה</string>
     <string name="android_11_bug_dialog_title">באג ב-Android 11</string>
     <string name="android_11_bug_dialog_description">הזכות להתקין את האפליקציה צריכה להיות מאושרת מראש כדי להימנע מבגה במערכת Android 11 שיפגע את חוויית המשתמש</string>
+    <string name="deep_link_add_source_title">הוסף מקור</string>
+    <string name="deep_link_add_source_message">האם ברצונך להוסיף מקור תיקון זה ל-Morphe?</string>
+    <string name="deep_link_add_source_warning">הוסף מקור רק ממקורות שאתה סומך עליהם</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">עדכון ניהול זמין</string>
+    <string name="home_update_available">עדכון Morphe זמין</string>
     <string name="home_update_available_subtitle">גרסה חדשה מוכנה להתקנה</string>
     <string name="home_update_error">העדכון נכשל</string>
     <string name="home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
@@ -214,7 +217,7 @@
     <string name="patcher_ready_to_install_subtitle">לחץ על הכפתור למטה כדי להתקין</string>
     <string name="patcher_ready_to_mount_subtitle">לחץ על הכפתור למטה כדי לאתחל</string>
     <string name="patcher_storage_permission_dialog_title">לא ניתן לגשת לדרך אחסון</string>
-    <string name="patcher_storage_permission_description_api30">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות למנהל Morphe. תן אישור גישה לאחסון והקש על הכפתור ואז התיקון יתחיל אוטומטית</string>
+    <string name="patcher_storage_permission_description_api30">אפשרות אחת או יותר של תיקונים מצביעה על נתיבים ש-Morphe לא יכול לקרוא. הענק גישה לאחסון ולחץ על הכפתור ואז התיקון יתחיל באופן אוטומטי</string>
     <string name="patcher_storage_permission_description_legacy">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות. עדכן את הדרכים באופציות התיקון ונסה שוב</string>
     <string name="patcher_storage_permission_grant">אשר אישור גישה לאחסון</string>
     <string name="patcher_storage_permission_denied_warning">התחשיבו את הרשאת אחסון. תן את הרשאה כדי להשתמש בפாத זה, או העבר את הקבצים לתיקיית האפליקציה הפרטית.</string>
@@ -326,19 +329,17 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">שנה איקון</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">עדכונים</string>
-    <string name="settings_advanced_updates_use_prereleases">שימוש במנהל ערבי</string>
-    <string name="settings_advanced_updates_use_prereleases_description">קבל גישה מוקדמת לגרסאות מנהל חדשות ניסיוניות. כדי לקבל תיקונים מוקדמים, הפעל את ההגדרה של תיקונים מוקדמים בכל מקור תיקון בנפרד</string>
+    <string name="settings_advanced_updates_use_prereleases">השתמש ב-Morphe גרסת בדיקה</string>
+    <string name="settings_advanced_updates_use_prereleases_description">קבלו גישה מוקדמת לתכונות חדשות של Morphe. כדי לקבל תיקונים מוקדמים, הפעילו את המתג מוקדם בשחרור בכל מקור תיקון בנפרד</string>
     <string name="settings_advanced_updates_allow_metered">עדכן באמצעות נתוני מובייל</string>
-    <string name="settings_advanced_updates_allow_metered_description">אפשר למקורות טיקים ולעדכונים של המנהל להורד באמצעות נתוני מובייל</string>
+    <string name="settings_advanced_updates_allow_metered_description">אפשרו עדכוני Morphe ותיקונים להוריד דרך נתוני סלולר</string>
     <string name="settings_advanced_updates_background_notifications">התראות עדכונים רקע</string>
     <string name="settings_advanced_updates_background_notifications_description">עדכונים מוטבעים תדירית וודא וידיעה זמינות</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">קבל התראות דחיפות מידיות עבור גרסאות חדשות, גם כשהאפליקציה סגורה</string>
-    <string name="notification_channel_manager_updates">ניהול עדכונים</string>
-    <string name="notification_channel_manager_updates_description">התראות על גרסאות חדשות של Morphe מנהל</string>
+    <string name="notification_channel_manager_updates">עדכוני Morphe</string>
     <string name="notification_channel_bundle_updates">עדכונים של מקורות צפיפות</string>
     <string name="notification_channel_bundle_updates_description">הודעות על גרסאות חדשות של קובץ</string>
     <string name="notification_channel_fcm_updates">עדכון התראות</string>
-    <string name="notification_channel_fcm_updates_description">התראות דחיפות מידיות עבור שחרורים חדשים של Morphe מנג\'ר ופיצ\'ים. מופצות גם כאשר האפליקציה נמצאת ברקע</string>
     <string name="settings_advanced_update_interval">תדירות בדיקה</string>
     <string name="settings_advanced_update_interval_dialog_title">בדיקת עדכונים</string>
     <string name="settings_advanced_update_interval_hourly">פעם בשעה</string>
@@ -348,12 +349,9 @@
     <string name="settings_advanced_update_interval_chip_subtitle">תדירות בדיקה ברקע</string>
     <string name="settings_advanced_update_interval_battery_warning">בדיקות ברקע עשויות שלא לעבוד באופן אמין על חלק מהמכשירים. יצרנים כמו Xiaomi, Huawei, Samsung ו-OnePlus לעיתים קרובות מוגבלים את תהליכי הרקע כדי לשמר סוללה</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">עדכון Morphe מנג\'ר זמין</string>
     <string name="notification_bundle_update_title">פיצ\'ים חדשים זמינים</string>
     <string name="notification_update_text">גרסה %1$s מוכנה להורדה</string>
-    <string name="notification_bundle_update_text_unversioned">לחץ כדי לפתוח Morphe מנג\'ר ולעדכן</string>
     <string name="notification_permission_dialog_title">אישור התראות</string>
-    <string name="notification_permission_dialog_description">Morphe מנג\'ר דורש אישור התראות כדי להתריע עלך כאשר עדכונים זמינים ברקע</string>
     <string name="notification_post_patch_dialog_title">האם תרצה להודע כשעדכונים יהיו זמינים?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">הגדרות מומחג\'שיות</string>
@@ -371,12 +369,10 @@
     <string name="settings_advanced_github_pat_dialog_title">הגדר טוקן גישה אישי של GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">הגדרו טוקן אישור אישי של GitHub כדי שיוכלו להוסיף בקשות לשינוי כמקורות חיצוניים. צרו טוקן PAT עם סקופ של public_repo של github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">כלול בהגדרות ייצוא</string>
-    <string name="settings_advanced_github_pat_export_include_supporting"> מוסיף את הטוקן הזה להגדרות ייצוא של מנהל</string>
     <string name="settings_advanced_github_pat_export_warning">אל תשתף את הטוקן שלך. אם תכלילו אותו בהגדרות ייצוא, שמור את הקובץ הפרטי כי הוא מכיל את הטוקן</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">אופצ\'ים</string>
-    <string name="settings_advanced_patch_options_youtube_description">גרסה, מותג, כותב, ו-Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">גרסה ומותג</string>
+    <string name="settings_advanced_patch_options_youtube_description">נושא, מיתוג ואפשרויות כותרת</string>
     <string name="settings_advanced_patch_options_restart_message">שנה את שמה של הגרסה</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">שנה את צבע הרקעמ</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -473,14 +469,6 @@
     <string name="settings_system_show_password_field">שגגה להרוס תיקון: %s</string>
     <string name="settings_system_hide_password_field">ייבוא הגדרות של הפיצ\'ח</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">ייבוא הגדרות של הפיצ\'ח</string>
-    <string name="settings_system_import_manager_settings_description">שגגה להרוס תיקון: %s</string>
-    <string name="settings_system_import_manager_settings_fail">הגדרות של הפיצ\'ח יוצאו</string>
-    <string name="settings_system_import_manager_settings_success">הגדרות של הפיצ\'ח יוצאו</string>
-    <string name="settings_system_export_manager_settings">ייצא הגדרות של הפיצ\'ח</string>
-    <string name="settings_system_export_manager_settings_description">ייצא את הגדרות של הפיצ\'ח</string>
-    <string name="settings_system_export_manager_settings_fail">שגגה להרוס תיקון: %s</string>
-    <string name="settings_system_export_manager_settings_success">הגדרות של הפיצ\'ח יוצאו</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">debug</string>
     <string name="settings_system_export_debug_logs">ייצוא יומני איתור באגים</string>

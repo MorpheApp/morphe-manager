@@ -4,7 +4,6 @@
     <string name="home_other_apps">កម្មវិធីផ្សេង</string>
     <string name="home_not_patched_yet">មិនទាន់បានបំណេះនៅឡើយទេ</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">កម្មវិធីគ្រប់គ្រងអាចអាប់ដេតបានហើយ</string>
     <string name="home_update_available_subtitle">កំណែថ្មីត្រៀមជាស្រេច ដើម្បីដំឡើង</string>
     <string name="home_update_error">ការអាប់ដេតបានបរាជ័យ</string>
     <string name="home_update_error_subtitle">សូមពិនិត្យមើលការតភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក ហើយព្យាយាមម្តងទៀត</string>

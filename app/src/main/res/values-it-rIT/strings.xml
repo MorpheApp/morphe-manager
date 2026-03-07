@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Tocca un\'app per mostrarla di nuovo nella lista</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso di installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
+    <string name="deep_link_add_source_title">Aggiungi sorgente</string>
+    <string name="deep_link_add_source_message">Vuoi aggiungere questa sorgente patch a Morphe?</string>
+    <string name="deep_link_add_source_warning">Aggiungi sorgenti solo da fonti di cui ti fidi</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Aggiornamento del manager disponibile</string>
+    <string name="home_update_available">Aggiornamento di Morphe disponibile</string>
     <string name="home_update_available_subtitle">Nuova versione pronta per l\'installazione</string>
     <string name="home_update_error">Aggiornamento non riuscito</string>
     <string name="home_update_error_subtitle">Verifica la tua connessione internet e riprova</string>
@@ -213,7 +216,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="patcher_ready_to_install_subtitle">Premi il pulsante qui sotto per installare</string>
     <string name="patcher_ready_to_mount_subtitle">Premi il pulsante qui sotto per montare</string>
     <string name="patcher_storage_permission_dialog_title">Non è possibile accedere alla cartella di archiviazione</string>
-    <string name="patcher_storage_permission_description_api30">Una o più opzioni delle patch fanno riferimento a percorsi che Morphe Manager non può leggere. Concedi l\'accesso alla memoria di archiviazione e tocca il pulsante, quindi il patching partirà automaticamente</string>
+    <string name="patcher_storage_permission_description_api30">Una o più opzioni delle patch fanno riferimento a percorsi che Morphe non può leggere. Concedi l\'accesso alla memoria di archiviazione e tocca il pulsante, quindi il patching partirà automaticamente</string>
     <string name="patcher_storage_permission_description_legacy">Una o più opzioni delle patch fanno riferimento a percorsi non raggiungibili. Aggiorna i percorsi nelle opzioni delle patch e riprova</string>
     <string name="patcher_storage_permission_grant">Concedi l\'autorizzazione alla memoria di archiviazione</string>
     <string name="patcher_storage_permission_denied_warning">L\'autorizzazione alla memoria di archiviazione è stata negata. Concedi l\'autorizzazione per utilizzare questo percorso o sposta i file nella directory privata dell\'app.</string>
@@ -325,19 +328,19 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Cambia icona</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aggiornamenti</string>
-    <string name="settings_advanced_updates_use_prereleases">Usa il gestore delle anteprime</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Ricevi l\'accesso anticipato alle nuove versioni sperimentali del manager. Per ottenere le patch di anteprima abilita separatamente la funzionalità anteprima per ciascuna fonte delle patch.</string>
+    <string name="settings_advanced_updates_use_prereleases">Usa la versione di Morphe in anteprima</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Ricevi l\'accesso anticipato alle nuove funzionalità di Morphe. Per ottenere le patch di anteprima, abilita la funzionalità anteprima separatamente per ciascuna fonte delle patch.</string>
     <string name="settings_advanced_updates_allow_metered">Aggiorna con la connessione dei dati mobili</string>
-    <string name="settings_advanced_updates_allow_metered_description">Consenti alle fonti delle patch e agli aggiornamenti del manager di essere scaricati con la connessione dei dati mobili</string>
+    <string name="settings_advanced_updates_allow_metered_description">Consenti a Morphe e agli aggiornamenti delle patch di scaricarsi tramite la connessione dati mobili</string>
     <string name="settings_advanced_updates_background_notifications">Notifiche degli aggiornamenti in background</string>
     <string name="settings_advanced_updates_background_notifications_description">Controlla periodicamente la presenza di aggiornamenti in background e notifica quando sono disponibili</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Ricevi notifiche push istantanee per le nuove versioni, anche se l\'app è chiusa</string>
-    <string name="notification_channel_manager_updates">Aggiornamenti del Manager</string>
-    <string name="notification_channel_manager_updates_description">Notifiche sulle nuove versioni di Morphe Manager</string>
+    <string name="notification_channel_manager_updates">Aggiornamenti di Morphe</string>
+    <string name="notification_channel_manager_updates_description">Notifiche sulle nuove versioni di Morphe</string>
     <string name="notification_channel_bundle_updates">Aggiornamenti delle fonti delle patch</string>
     <string name="notification_channel_bundle_updates_description">Notifiche sulle nuove versioni delle fonti delle patch</string>
     <string name="notification_channel_fcm_updates">Notifiche di aggiornamento</string>
-    <string name="notification_channel_fcm_updates_description">Notifiche push istantanee per le nuove versioni di Morphe Manager e delle patch. Inviate persino quando l\'app è attiva in background</string>
+    <string name="notification_channel_fcm_updates_description">Notifiche push istantanee per le nuove versioni di Morphe e delle patch. Inviate persino quando l\'app è attiva in background</string>
     <string name="settings_advanced_update_interval">Frequenza dei controlli</string>
     <string name="settings_advanced_update_interval_dialog_title">Controlla gli aggiornamenti</string>
     <string name="settings_advanced_update_interval_hourly">Una volta all\'ora</string>
@@ -347,12 +350,12 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Frequenza dei controlli in background</string>
     <string name="settings_advanced_update_interval_battery_warning">I controlli in background potrebbero non funzionare in maniera affidabile su alcuni dispositivi. I produttori come Xiaomi, Huawei, Samsung e OnePlus spesso limitano in modo aggressivo i processi in background per risparmiare batteria</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Aggiornamento di Morphe manager disponibile</string>
+    <string name="notification_manager_update_title">Aggiornamento di Morphe disponibile</string>
     <string name="notification_bundle_update_title">Nuove patch disponibili</string>
     <string name="notification_update_text">La versione %1$s è pronta per il download</string>
-    <string name="notification_bundle_update_text_unversioned">Fai clic per aprire Morphe Manager e aggiornare</string>
+    <string name="notification_bundle_update_text_unversioned">Fai clic per aprire Morphe e aggiornare</string>
     <string name="notification_permission_dialog_title">Consenti le notifiche</string>
-    <string name="notification_permission_dialog_description">Morphe Manager ha bisogno del permesso di notifica per avvisarti quando gli aggiornamenti sono disponibili in background</string>
+    <string name="notification_permission_dialog_description">Morphe ha bisogno del permesso di notifica per avvisarti quando gli aggiornamenti sono disponibili in background</string>
     <string name="notification_post_patch_dialog_title">Vorresti essere notificato quando ci sono aggiornamenti disponibili?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Impostazioni avanzate</string>
@@ -370,12 +373,11 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Imposta il token di accesso personale di GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">Imposta un token di accesso personale di GitHub per poter aggiungere le richieste di pull come fonti esterne. Crea un PAT con ambito public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Includi nelle impostazioni di esportazione</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Aggiunge questo PAT alle impostazioni di gestione esportate</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Aggiunge questa PAT alle impostazioni di Morphe esportate</string>
     <string name="settings_advanced_github_pat_export_warning">Non condividere il tuo PAT. Se lo includi in un\'esportazione delle impostazioni, mantieni quel file privato perché contiene il token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opzioni delle patch</string>
-    <string name="settings_advanced_patch_options_youtube_description">Opzioni del tema, branding, intestazione e Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Opzioni del tema e branding</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, branding e opzioni di intestazione</string>
     <string name="settings_advanced_patch_options_restart_message">Modificare le opzioni di patching richiede di ripatchare l\'applicazione per applicarle</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">In modalità esperto le opzioni patch saranno disponibili durante il processo di patching</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_show_password_field">Mostra la password</string>
     <string name="settings_system_hide_password_field">Nascondi la password</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importa impostazioni del manager</string>
-    <string name="settings_system_import_manager_settings_description">Ripristina le impostazioni del manager da un file JSON</string>
-    <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni del manager: %s</string>
-    <string name="settings_system_import_manager_settings_success">Impostazioni del manager importate </string>
-    <string name="settings_system_export_manager_settings">Esporta le impostazioni del manager</string>
-    <string name="settings_system_export_manager_settings_description">Salva le impostazioni del manager in un file JSON</string>
-    <string name="settings_system_export_manager_settings_fail">Impossibile esportare le impostazioni del manager: %s</string>
-    <string name="settings_system_export_manager_settings_success">Impostazioni del manager esportate</string>
+    <string name="settings_system_import_manager_settings">Importa impostazioni di Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Ripristina le impostazioni di Morphe da un file JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni di Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Impostazioni di Morphe importate</string>
+    <string name="settings_system_export_manager_settings">Esporta impostazioni di Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Salva le impostazioni di Morphe in un file JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Impossibile esportare le impostazioni di Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Impostazioni di Morphe esportate</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Esporta log di debug</string>

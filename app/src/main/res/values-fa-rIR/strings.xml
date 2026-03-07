@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_title">باگ اندروید 11</string>
     <string name="android_11_bug_dialog_description">مجوز نصب برنامه باید از قبل صادر شود تا از بروز باگ در سیستم اندروید ۱۱ که تجربه کاربری را تحت تأثیر منفی قرار می دهد، جلوگیری شود </string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">به روزرسانی منیجر در دسترس است </string>
     <string name="home_update_available_subtitle">نسخه جدید آماده نصب است </string>
     <string name="home_update_error">بروزرسانی شکست خورد</string>
     <string name="home_update_error_subtitle">وضعیت اینترنتت رو چک‌ کن و دوباره امتحان کن</string>

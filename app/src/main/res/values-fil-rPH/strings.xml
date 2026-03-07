@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Pindutin ang isang aplikasyon upang ipakita muli sa listahan</string>
     <string name="android_11_bug_dialog_title">Isang pagkakamali sa Android 11</string>
     <string name="android_11_bug_dialog_description">Dapat pahintulutan nang maaga ang pahintulot sa pag-install ng app para maiwasan ang isang pagkakamali sa sistema ng Android 11 na negatibong makakaapekto sa karanasan ng tagagamit</string>
+    <string name="deep_link_add_source_title">Magdagdag ng mapagkukunan</string>
+    <string name="deep_link_add_source_message">Gusto mo bang idagdag ang patch source na ito sa Morphe?</string>
+    <string name="deep_link_add_source_warning">Magdagdag lamang ng mapagkukunan mula sa mga mapagkukunan na pinagkakatiwalaan mo</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Magagamit ang isang manager update</string>
+    <string name="home_update_available">Magagamit ang update para sa Morphe</string>
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>
     <string name="home_update_error">Nabigo ang pag-update</string>
     <string name="home_update_error_subtitle">Suriin ang iyong koneksyon sa internet at subukan muli</string>
@@ -213,7 +216,7 @@ Nais mo bang magpatuloy?"</string>
     <string name="patcher_ready_to_install_subtitle">Pindutin ang button sa ibaba upang ma-install</string>
     <string name="patcher_ready_to_mount_subtitle">Pindutin ang button sa ibaba upang i-mount</string>
     <string name="patcher_storage_permission_dialog_title">Hindi ma-access ang landas ng imbakan</string>
-    <string name="patcher_storage_permission_description_api30">Isa o higit pang mga pagpipilian sa patch ay tumuturo sa mga landas na hindi mabasa ng tagapamahala ng Morphe. Payagan ang access sa imbakan at pindutin ang button at pagkatapos ay awtomatikong magsisimula ang pag-patch</string>
+    <string name="patcher_storage_permission_description_api30">Isa o higit pang mga pagpipilian sa patch ay tumuturo sa mga landas na hindi mabasa ng Morphe. Bigyan ng access sa imbakan at i-tap ang button at pagkatapos ay awtomatikong magsisimula ang pag-patch</string>
     <string name="patcher_storage_permission_description_legacy">Isa o higit pang mga pagpipilian sa patch ay tumuturo sa mga landas na hindi ma-access. I-update ang mga landas sa pagpipilian ng patch at subukan muli</string>
     <string name="patcher_storage_permission_grant">Pahintulutan ang pahintulot sa imbakan</string>
     <string name="patcher_storage_permission_denied_warning">Hindi pinahihintulutan ang pahintulot sa imbakan. Payagan ang pahintulot na ito upang gamitin ang landas, o ilipat ang mga file sa pribadong direktoryo ng aplikasyon </string>
@@ -325,19 +328,19 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Baguhin ang icon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mga update</string>
-    <string name="settings_advanced_updates_use_prereleases">Gumamit ng pre-release manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Tumanggap ng maagang pag-access sa mga bagong experimental na bersyon ng manager. Upang makuha ang mga pre-release patch, paganahin ang pre-release toggle sa bawat patch source nang paisa-isa</string>
+    <string name="settings_advanced_updates_use_prereleases">Gamitin ang pre-release na Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Tumanggap ng maagang pag-access sa mga bagong feature ng Morphe. Upang makuha ang mga pre-release patch, i-enable ang pre-release toggle sa bawat pinagmulan ng patch nang hiwalay</string>
     <string name="settings_advanced_updates_allow_metered">I-update sa mobile data</string>
-    <string name="settings_advanced_updates_allow_metered_description">Payagan ang patch sources at manager updates na mag-download sa pamamagitan ng mobile data</string>
+    <string name="settings_advanced_updates_allow_metered_description">Payagan ang Morphe at mga update ng patch na mag-download sa pamamagitan ng mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Mga notipikasyon sa pag-update sa background</string>
     <string name="settings_advanced_updates_background_notifications_description">Paminsan-minsang suriin ang mga update sa background at abisuhan kung magagamit</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Tumanggap ng agarang abiso para sa bagong release, kahit sarado ang aplikasyon</string>
-    <string name="notification_channel_manager_updates">Mga manager update</string>
-    <string name="notification_channel_manager_updates_description">Mga notipikasyon tungkol sa mga bagong manager na bersyon ng Morphe</string>
+    <string name="notification_channel_manager_updates">Mga update ng Morphe</string>
+    <string name="notification_channel_manager_updates_description">Mga abiso tungkol sa mga bagong bersyon ng Morphe</string>
     <string name="notification_channel_bundle_updates">Mga update ng mapagkukunang patch</string>
     <string name="notification_channel_bundle_updates_description">Mga notipikasyon tungkol sa bagong bersyon ng mapagkukunang patch</string>
     <string name="notification_channel_fcm_updates">Mga update alert</string>
-    <string name="notification_channel_fcm_updates_description">Agarang abiso para sa bagong Morphe manager at ang ipinalabas na mga patch. Ipinapadala kahit nasa likuran ang aplikasyon</string>
+    <string name="notification_channel_fcm_updates_description">Instant push notification para sa mga bagong Morphe at patch release. Ipinapadala kahit nasa background ang app</string>
     <string name="settings_advanced_update_interval">Suriin ang prikwensiya</string>
     <string name="settings_advanced_update_interval_dialog_title">Suriin ang mga update</string>
     <string name="settings_advanced_update_interval_hourly">Minsan sa isang oras</string>
@@ -347,12 +350,12 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Kadalasan ng pagsusuri sa background</string>
     <string name="settings_advanced_update_interval_battery_warning">Maaaring hindi gumana nang mapagkakatiwalaan ang mga pagsusuri sa background sa ilang device. Ang mga tagagawa tulad ng Xiaomi, Huawei, Samsung, at OnePlus ay madalas na agresibong naghihigpit sa mga proseso sa background upang makatipid ng baterya</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Magagamit ang isang update sa Morphe manager</string>
+    <string name="notification_manager_update_title">Magagamit ang update ng Morphe</string>
     <string name="notification_bundle_update_title">Magagamit ang mga bagong patch</string>
     <string name="notification_update_text">Handa mag-download ang bersyong %1$s</string>
-    <string name="notification_bundle_update_text_unversioned">Pindutin upang buksan ang Morphe manager at i-update</string>
+    <string name="notification_bundle_update_text_unversioned">I-tap para buksan ang Morphe at i-update</string>
     <string name="notification_permission_dialog_title">Payagan ang mga notipikasyon</string>
-    <string name="notification_permission_dialog_description">Kailangan ng Morphe manager ang iyong pahintulot sa notipikasyon upang abisuhan ka kung may magagamit na mga update sa background</string>
+    <string name="notification_permission_dialog_description">Kailangan ng Morphe ang pahintulot sa notipikasyon upang abisuhan ka kapag may mga update na magagamit sa background</string>
     <string name="notification_post_patch_dialog_title">Nais mo bang abisuhan ka kung may magagamit na mga update?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
@@ -370,12 +373,11 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Itakda ang GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">Magtakda ng GitHub Personal Access Token para makapagdagdag ng mga pull request bilang mga external na source. Lumikha ng PAT na may saklaw na public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Isama sa settings export</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Idinaragdag ang PAT na ito sa mga na-export na manager settings</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Idinaragdag ang PAT na ito sa mga na-export na setting ng Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Huwag mong ibahagi ang iyong PAT. Kung isasama mo ito sa isang settings export, panatilihing pribado ang file na iyon dahil naglalaman ito ng token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Mga pagpipilian ng patch</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, tatak, header, at mga pagpipilian ng Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Tema at mga pagpipilian ng tatak</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, tatak, at mga pagpipilian sa header</string>
     <string name="settings_advanced_patch_options_restart_message">Mangangailangan ng muling pag-patch sa aplikasyon ang binagong opsyon ng patch upang magkabisa</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Sa Expert mode magagamit ang mga pagpipilian ng patch sa panahon ng pagpoproseso ng patch</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_show_password_field">Ipakita ang password</string>
     <string name="settings_system_hide_password_field">Itago ang password</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">I-import ang pagpipilian ng tagapamahala</string>
-    <string name="settings_system_import_manager_settings_description">Ibalik ang mga pagpipilian ng tagapamahala mula sa JSON file</string>
-    <string name="settings_system_import_manager_settings_fail">Nabigong ma-import ang pagpipilian ng tagapamahala: %s</string>
-    <string name="settings_system_import_manager_settings_success">Na-import ang pagpipilian ng tagapamahala</string>
-    <string name="settings_system_export_manager_settings">I-export ang pagpipilian ng tagapamahala</string>
-    <string name="settings_system_export_manager_settings_description">I-save ang pagpipilian ng tagapamahala sa isang JSON file</string>
-    <string name="settings_system_export_manager_settings_fail">Nabigong ma-export ang pagpipilian ng tagapamahala: %s</string>
-    <string name="settings_system_export_manager_settings_success">Na-export ang pagpipilian ng tagapamahala </string>
+    <string name="settings_system_import_manager_settings">I-import ang mga setting ng Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Ibalik ang mga setting ng Morphe mula sa isang JSON file</string>
+    <string name="settings_system_import_manager_settings_fail">Nabigong ma-import ang mga setting ng Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Na-import ang mga setting ng Morphe</string>
+    <string name="settings_system_export_manager_settings">I-export ang mga setting ng Morphe</string>
+    <string name="settings_system_export_manager_settings_description">I-save ang mga setting ng Morphe sa isang JSON file</string>
+    <string name="settings_system_export_manager_settings_fail">Nabigong ma-export ang mga setting ng Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Na-export ang mga setting ng Morphe</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">I-export ang mga tala ng debug</string>

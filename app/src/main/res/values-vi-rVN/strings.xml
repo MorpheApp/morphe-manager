@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Bấm vào ứng dụng để đưa chúng trở lại danh sách</string>
     <string name="android_11_bug_dialog_title">Lỗi Android 11</string>
     <string name="android_11_bug_dialog_description">Cần cấp quyền cài đặt không rõ nguồn gốc cho ứng dụng trước để tránh phát sinh lỗi trên hệ thống Android 11 và gây ảnh hưởng tiêu cực đến trải nghiệm của người dùng</string>
+    <string name="deep_link_add_source_title">Thêm nguồn</string>
+    <string name="deep_link_add_source_message">Bạn có muốn thêm nguồn vá này vào Morphe không?</string>
+    <string name="deep_link_add_source_warning">Chỉ thêm nguồn mà bạn tin tưởng</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Đã có bản cập nhật trình quản lý</string>
+    <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
     <string name="home_update_available_subtitle">Sẵn sàng để cài đặt phiên bản mới</string>
     <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
@@ -213,7 +216,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patcher_ready_to_install_subtitle">Bấm nút bên dưới để cài đặt</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
     <string name="patcher_storage_permission_dialog_title">Không thể truy cập đường dẫn bộ nhớ</string>
-    <string name="patcher_storage_permission_description_api30">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến thư mục mà Morphe không thể truy cập. Hãy cấp quyền truy cập bộ nhớ, sau đó nhấn nút và quá trình vá sẽ tự động bắt đầu</string>
+    <string name="patcher_storage_permission_description_api30">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến thư mục mà Morphe không thể truy cập. Hãy cấp quyền truy cập bộ nhớ, sau đó bấm nút và quá trình vá sẽ tự động bắt đầu</string>
     <string name="patcher_storage_permission_description_legacy">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến đường dẫn không thể truy cập. Hãy cập nhật lại đường dẫn trong phần tuỳ chỉnh bản vá và thử lại</string>
     <string name="patcher_storage_permission_grant">Cấp quyền truy cập bộ nhớ</string>
     <string name="patcher_storage_permission_denied_warning">Quyền truy cập bộ nhớ đã bị từ chối. Hãy cấp quyền để sử dụng đường dẫn này, hoặc di chuyển các tệp vào thư mục riêng của ứng dụng</string>
@@ -325,19 +328,19 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Chốt</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Cập nhật</string>
-    <string name="settings_advanced_updates_use_prereleases">Dùng Morphe thử nghiệm</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Trải nghiệm sớm các phiên bản Morphe mới. Còn để tải các bản vá thử nghiệm, bạn cần bật trong từng nguồn vá</string>
+    <string name="settings_advanced_updates_use_prereleases">Dùng bản Morphe thử nghiệm</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Trải nghiệm sớm các tính năng Morphe mới. Còn nếu bạn muốn tải các bản vá thử nghiệm, hãy bật trong từng nguồn vá</string>
     <string name="settings_advanced_updates_allow_metered">Cập nhật qua dữ liệu di động</string>
-    <string name="settings_advanced_updates_allow_metered_description">Cho phép tải nguồn bản vá và cập nhật Morphe qua dữ liệu di động</string>
+    <string name="settings_advanced_updates_allow_metered_description">Cho phép tải Morphe và cập nhật bản vá qua dữ liệu di động</string>
     <string name="settings_advanced_updates_background_notifications">Thông báo cập nhật nền</string>
     <string name="settings_advanced_updates_background_notifications_description">Kiểm tra cập nhật định kỳ khi ứng dụng chạy nền và báo cho bạn khi có phiên bản mới.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Nhận thông báo ngay khi có phiên bản mới, kể cả khi ứng dụng đang tắt</string>
     <string name="notification_channel_manager_updates">Cập nhật Morphe</string>
-    <string name="notification_channel_manager_updates_description">Thông báo về các phiên bản mới của Morphe</string>
+    <string name="notification_channel_manager_updates_description">Thông báo khi có phiên bản Morphe mới</string>
     <string name="notification_channel_bundle_updates">Cập nhật nguồn vá</string>
     <string name="notification_channel_bundle_updates_description">Thông báo về các phiên bản mới của nguồn vá</string>
     <string name="notification_channel_fcm_updates">Thông báo cập nhật</string>
-    <string name="notification_channel_fcm_updates_description">Nhận thông báo ngay khi có phiên bản mới của Morphe hoặc bản vá, kể cả khi ứng dụng đang chạy nền</string>
+    <string name="notification_channel_fcm_updates_description">Nhận thông báo ngay khi có phiên bản Morphe hoặc bản vá mới, kể cả khi ứng dụng đang chạy nền</string>
     <string name="settings_advanced_update_interval">Tần suất kiểm tra</string>
     <string name="settings_advanced_update_interval_dialog_title">Kiểm tra cập nhật</string>
     <string name="settings_advanced_update_interval_hourly">Mỗi giờ</string>
@@ -347,10 +350,10 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Tần suất kiểm tra nền</string>
     <string name="settings_advanced_update_interval_battery_warning">Tính năng này có thể không hoạt động trên một số thiết bị. Một số hãng như Xiaomi, Huawei, Samsung và OnePlus thường giới hạn ứng dụng chạy nền để tiết kiệm pin</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Đã có bản cập nhật Morphe</string>
+    <string name="notification_manager_update_title">Đã có bản cập nhật Morphe mới</string>
     <string name="notification_bundle_update_title">Đã có bản vá mới</string>
     <string name="notification_update_text">Bản %1$s sẵn sàng để tải xuống</string>
-    <string name="notification_bundle_update_text_unversioned">Bấm để mở và cập nhật Morphe</string>
+    <string name="notification_bundle_update_text_unversioned">Bấm để mở Morphe và cập nhật</string>
     <string name="notification_permission_dialog_title">Cho phép nhận thông báo</string>
     <string name="notification_permission_dialog_description">Để thông báo cho bạn về các bản cập nhật mới khi ứng dụng chạy nền, Morphe cần được cấp quyền thông báo</string>
     <string name="notification_post_patch_dialog_title">Bạn có muốn nhận thông báo khi có bản cập nhật mới không?</string>
@@ -370,12 +373,11 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Thiết lập Personal Access Token của GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">Thiết lập GitHub Personal Access Token để có thể thêm Pull Request làm nguồn. Hãy tạo một PAT với quyền public_repo tại github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Thêm vào khi xuất cài đặt</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Thêm PAT khi xuất cài đặt trình quản lý</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Thêm PAT vào khi xuất cài đặt Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Đừng chia sẻ PAT. Nếu bạn xuất cài đặt có chứa nó, hãy giữ tệp đó thật kín vì bên trong có token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Tùy chỉnh</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tùy chỉnh chủ đề, thương hiệu, logo và Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Tùy chỉnh chủ đề và thương hiệu</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tùy chỉnh chủ đề, logo đầu trang, tên và biểu tượng ứng dụng</string>
     <string name="settings_advanced_patch_options_restart_message">Sau khi tùy chỉnh bạn cần vá lại ứng dụng để áp dụng những thay đổi</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Trong chế độ chuyên gia, bạn có thể tùy chỉnh bản vá ngay trước khi vá</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_show_password_field">Hiện mật khẩu</string>
     <string name="settings_system_hide_password_field">Ẩn mật khẩu</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Nhập cài đặt trình quản lý</string>
-    <string name="settings_system_import_manager_settings_description">Khôi phục cài đặt trình quản lý đã lưu bằng tệp JSON</string>
-    <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt trình quản lý: %s</string>
-    <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt trình quản lý</string>
-    <string name="settings_system_export_manager_settings">Xuất cài đặt trình quản lý</string>
-    <string name="settings_system_export_manager_settings_description">Lưu cài đặt trình quản lý sang tệp JSON</string>
-    <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt trình quản lý: %s</string>
-    <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt trình quản lý</string>
+    <string name="settings_system_import_manager_settings">Nhập cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Khôi phục cài đặt Morphe từ tệp JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
+    <string name="settings_system_export_manager_settings">Xuất cài đặt Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Lưu cài đặt Morphe vào tệp JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt Morphe</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Gỡ lỗi</string>
     <string name="settings_system_export_debug_logs">Nhật ký gỡ lỗi</string>

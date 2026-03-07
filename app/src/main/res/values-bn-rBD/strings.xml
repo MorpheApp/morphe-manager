@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">একটি অ্যাপে ট্যাপ করুন এটি আবার তালিকায় দেখানোর জন্য</string>
     <string name="android_11_bug_dialog_title">অ্যান্ড্রয়েড ১১ বাগ</string>
     <string name="android_11_bug_dialog_description">এক্সপ্লোর 11 সিস্টেমের একটি বাগের কারণে অ্যাপ ইনস্টলেশন অনুমতি আগে দেওয়া উচিত। এটি ব্যবহারকারীর অভিজ্ঞতাকে নেতিবাচকভাবে প্রভাবিত করবে</string>
+    <string name="deep_link_add_source_title">সোর্স যোগ করুন</string>
+    <string name="deep_link_add_source_message">আপনি কি এই প্যাচ সোর্স Morphe-এ যোগ করতে চান?</string>
+    <string name="deep_link_add_source_warning">শুধুমাত্র বিশ্বস্ত সোর্স থেকে সোর্স যোগ করুন</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">ম্যানেজার আপডেট পাওয়া গেছে</string>
+    <string name="home_update_available">Morphe আপডেট উপলব্ধ</string>
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
@@ -213,7 +216,7 @@
     <string name="patcher_ready_to_install_subtitle">ইনস্টল করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_ready_to_mount_subtitle">মাউন্ট করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_storage_permission_dialog_title">স্টোরেজ পথে অ্যাক্সেস করতে পারেনি</string>
-    <string name="patcher_storage_permission_description_api30">এক বা একাধিক প্যাচ বিকল্প Morphe ম্যানেজার পড়তে পারে না। স্টোরেজ অ্যাক্সেস দিন এবং বাটন টিপে প্যাচিং শুরু হবে</string>
+    <string name="patcher_storage_permission_description_api30">একটি বা একাধিক প্যাচ অপশন এমন পথে নির্দেশ করে যা Morphe পড়তে পারে না। স্টোরেজ অ্যাক্সেস দিন এবং বোতামটি টিপুন, তাহলে প্যাচিং স্বয়ংক্রিয়ভাবে শুরু হবে।</string>
     <string name="patcher_storage_permission_description_legacy">এক বা একাধিক প্যাচ বিকল্প অ্যাক্সেস করতে পারে না। প্যাচ বিকল্পগুলিতে পথ আপডেট করুন এবং আবার চেষ্টা করুন</string>
     <string name="patcher_storage_permission_grant">স্টোরেজ অনুমতি দিন</string>
     <string name="patcher_storage_permission_denied_warning">স্টোরেজ অনুমতি প্রত্যাখ্যাত হয়। এই পথ ব্যবহার করতে, অনুমতি দিন অথবা ফাইলগুলি অ্যাপের বেসিক ডিরেক্টরিতে সরান।</string>
@@ -325,19 +328,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">আইকন পরিবর্তন করুন</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">আপডেটগুলি</string>
-    <string name="settings_advanced_updates_use_prereleases">প্রি-রিলিজ ম্যানেজার ব্যবহার করুন</string>
-    <string name="settings_advanced_updates_use_prereleases_description">নতুন পরীক্ষামূলক ম্যানেজার সংস্করণের জন্য আগে অ্যাক্সেস পান। পূর্ব-প্রকাশিত প্যাচ পেতে, প্রতিটি প্যাচ উৎসের জন্য পৃথকভাবে পূর্ব-প্রকাশিত টগলটি সক্রিয় করুন</string>
+    <string name="settings_advanced_updates_use_prereleases">প্রি-রিলিজ Morphe ব্যবহার করুন</string>
+    <string name="settings_advanced_updates_use_prereleases_description">নতুন Morphe বৈশিষ্ট্যগুলিতে দ্রুত অ্যাক্সেস পান। প্রি-রিলিজ প্যাচগুলি পেতে, প্রতিটি প্যাচ উৎসের মধ্যে প্রি-রিলিজ টগলটি সক্ষম করুন</string>
     <string name="settings_advanced_updates_allow_metered">মোবাইল ডেটায় আপডেট করুন</string>
-    <string name="settings_advanced_updates_allow_metered_description">মোবাইল ডেটা দিয়ে প্যাচ উৎস এবং ম্যানেজার আপডেট ডাউনলোড করুন</string>
+    <string name="settings_advanced_updates_allow_metered_description">Morphe এবং প্যাচ আপডেটগুলি মোবাইল ডেটার মাধ্যমে ডাউনলোড করার অনুমতি দিন</string>
     <string name="settings_advanced_updates_background_notifications">ব্যাকগ্রাউন্ড আপডেট নোটিফিকেশন</string>
     <string name="settings_advanced_updates_background_notifications_description">ব্যাকগ্রাউন্ডে আপডেটের জন্য পর্যায়ক্রমে চেক করুন এবং উপলব্ধ হলে বিজ্ঞপ্তি দিন।</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">নতুন রিলিজের জন্য অ্যাপটি বন্ধ থাকাকালীনেও ইমিডিয়েট পুশ নোটিফিকেশন পান</string>
-    <string name="notification_channel_manager_updates">আপডেট ব্যবস্থাপক</string>
-    <string name="notification_channel_manager_updates_description">নতুন মরফে ব্যবস্থাপক সংস্করণের নোটিফিকেশন</string>
+    <string name="notification_channel_manager_updates">Morphe আপডেট</string>
+    <string name="notification_channel_manager_updates_description">Morphe-এর নতুন সংস্করণের বিজ্ঞপ্তি</string>
     <string name="notification_channel_bundle_updates">প্যাচ সোর্স আপডেট</string>
     <string name="notification_channel_bundle_updates_description">নতুন প্যাচ সোর্স সংস্করণ সম্পর্কে বিজ্ঞপ্তি</string>
     <string name="notification_channel_fcm_updates">আপডেট অ্যালার্টস</string>
-    <string name="notification_channel_fcm_updates_description">নতুন মরফে ম্যানেজার এবং প্যাচ রিলিজের জন্য তাত্ক্ষণিক পুশ নোটিফিকেশন। অ্যাপের ব্যাকগ্রাউন্ডেও ডেলিভার করা হয়।</string>
+    <string name="notification_channel_fcm_updates_description">নতুন Morphe এবং প্যাচ রিলিজের জন্য ইনস্ট্যান্ট পুশ বিজ্ঞপ্তি। অ্যাপটি ব্যাকগ্রাউন্ডে থাকলেও বিতরণ করা হয়</string>
     <string name="settings_advanced_update_interval">আপডেট ফিক্সারির সময়</string>
     <string name="settings_advanced_update_interval_dialog_title">আপডেট চেক করুন</string>
     <string name="settings_advanced_update_interval_hourly">এক ঘণ্টা অন্তরে</string>
@@ -347,12 +350,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">ব্যাকগ্রাউন্ড চেকের সময়</string>
     <string name="settings_advanced_update_interval_battery_warning">কিছু ডিভাইসে ব্যাকগ্রাউন্ড চেকগুলি সঠিকভাবে কাজ করতে পারে না। ব্যাটারি সংরক্ষণের জন্য ম্যানুফ্যাকচারাররা যেমন এক্সিয়োমি, হুয়াওয়েই, স্যামসাং এবং অনেপ্লাস ব্যাকগ্রাউন্ড প্রসেসগুলি সীমিত করে।</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">মরফে ম্যানেজার আপডেট পাওয়া গেছে</string>
+    <string name="notification_manager_update_title">Morphe আপডেট উপলব্ধ</string>
     <string name="notification_bundle_update_title">নতুন প্যাচ পাওয়া গেছে</string>
     <string name="notification_update_text">%1$s সংস্করণ ডাউনলোডের জন্য প্রস্তুত</string>
-    <string name="notification_bundle_update_text_unversioned">মরফে ম্যানেজার খুলুন এবং আপডেট করুন</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe খুলুন এবং আপডেট করুন</string>
     <string name="notification_permission_dialog_title">নোটিফিকেশন অনুমতি দিন</string>
-    <string name="notification_permission_dialog_description">মরফে ম্যানেজার ব্যাকগ্রাউন্ডে আপডেটের জন্য নোটিফিকেশন অনুমতি চায়।</string>
+    <string name="notification_permission_dialog_description">আপডেট উপলব্ধ হলে Morphe আপনাকে সতর্ক করার জন্য বিজ্ঞপ্তি অনুমতির প্রয়োজন</string>
     <string name="notification_post_patch_dialog_title">আপনি আপডেটের उपलब्धতা সম্পর্কে জানতে চান?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">বিশেষ্ট সেটিংস</string>
@@ -370,12 +373,11 @@
     <string name="settings_advanced_github_pat_dialog_title">গিটহাব ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন</string>
     <string name="settings_advanced_github_pat_dialog_description">GitHub ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন যাতে আপনি বাহ্যিক উৎস হিসাবে পুল রিকোয়েস্ট যোগ করতে পারেন। public_repo স্কোপের একটি PAT তৈরি করুন github.com-তে</string>
     <string name="settings_advanced_github_pat_export_include_label">সেটিংসে অন্তর্ভুক্ত করুন</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">এই PAT কে ম্যানেজার সেটিংসে যোগ করুন</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">এই PAT-কে রপ্ত করা Morphe সেটিংস-এ যুক্ত করুন</string>
     <string name="settings_advanced_github_pat_export_warning">আপনার PAT কে শেয়ার করবেন না। যদি আপনি এটি সেটিংসে অন্তর্ভুক্ত করেন, তাহলে সেই ফাইলটি বেসিক রাখুন, কারণ এটি টোকেন ধারণ করে</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">প্যাচ বিকল্পগুলি</string>
-    <string name="settings_advanced_patch_options_youtube_description">ইউটিউব, ব্র্যান্ডিং, হেডার, শর্টস বিকল্পগুলি</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">থিম ও ব্র্যান্ডিং বিকল্পগুলি</string>
+    <string name="settings_advanced_patch_options_youtube_description">থিম, ব্র্যান্ডিং এবং হেডার অপশন</string>
     <string name="settings_advanced_patch_options_restart_message">প্যাচ বিকল্পগুলি পরিবর্তন করতে পুনরায় প্যাচ করুন</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">বিশেষ্ট মোডে প্যাচ বিকল্পগুলি সক্রিয় করা হবে</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -489,14 +491,14 @@
     <string name="settings_system_show_password_field">পাসওয়ার্ড দেখান</string>
     <string name="settings_system_hide_password_field">পাসওয়ার্ড লুকান</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">ম্যানেজার সেটিংস আমদানি ব্যর্থ হয়েছে: %s</string>
-    <string name="settings_system_import_manager_settings_description">ম্যানেজার সেটিংস আমদানি হয়েছে</string>
-    <string name="settings_system_import_manager_settings_fail">ম্যানেজার সেটিংস ইমপোর্ট করতে ব্যর্থ হয়েছে: %s</string>
-    <string name="settings_system_import_manager_settings_success">ম্যানেজার সেটিংস ইম্পোর্ট করা হয়েছে</string>
-    <string name="settings_system_export_manager_settings">ম্যানেজার সেটিংস এক্সপোর্ট করুন</string>
-    <string name="settings_system_export_manager_settings_description">ডিবাগ লগ শেয়ার করুন</string>
-    <string name="settings_system_export_manager_settings_fail">ডিবাগ লগ শেয়ার ব্যর্থ হয়েছে (এক্সিট কোড: %d)</string>
-    <string name="settings_system_export_manager_settings_success">ডিবাগ লগ শেয়ার হয়েছে</string>
+    <string name="settings_system_import_manager_settings">Morphe সেটিংস আমদানি করুন</string>
+    <string name="settings_system_import_manager_settings_description">একটি JSON ফাইল থেকে Morphe সেটিংস পুনরুদ্ধার করুন</string>
+    <string name="settings_system_import_manager_settings_fail">Morphe সেটিংস আমদানি করতে ব্যর্থ হয়েছে: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe সেটিংস আমদানি করা হয়েছে</string>
+    <string name="settings_system_export_manager_settings">Morphe সেটিংস রপ্তানি করুন</string>
+    <string name="settings_system_export_manager_settings_description">Morphe সেটিংস একটি JSON ফাইলে সংরক্ষণ করুন</string>
+    <string name="settings_system_export_manager_settings_fail">Morphe সেটিংস রপ্তানি করতে ব্যর্থ হয়েছে: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe সেটিংস রপ্তানি করা হয়েছে</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">ডিবাগ</string>
     <string name="settings_system_export_debug_logs">ডিবাগ লগগুলি রফতানি করুন</string>

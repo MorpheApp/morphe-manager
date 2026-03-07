@@ -6,7 +6,6 @@
     <string name="home_no_patches_available">કોઈ પેચો ઉપલબ્ધ નથી</string>
     <string name="android_11_bug_dialog_title">એન્ડ્રોઇડ 11 બગ</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">પ્રબંધક અધ્યતન સંસ્કરણ ઉપલબ્ધ છે</string>
     <string name="home_update_available_subtitle">નવું સંસ્કરણ ઇન્સ્ટોલ કરવા માટે તૈયાર છે</string>
     <string name="home_update_error">અપડેટ નિષ્ફળ થયું</string>
     <string name="home_update_error_subtitle">તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો</string>
@@ -154,8 +153,6 @@
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">પેચ વિકલ્પો</string>
-    <string name="settings_advanced_patch_options_youtube_description">થીમ, બ્રાન્ડિંગ, હેડર, અને શોર્ટ્સ ઓપ્શન્સ</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">થીમ અને બ્રાન્ડિંગ વિકલ્પો</string>
     <string name="settings_advanced_patch_options_restart_message">પેચ વિકલ્પો બદલવાથી નવા પ્રભાવો મેળવવા માટે એપ્લિકેશનને ફરીથી પેચ કરવાની જરૂર છે</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">એપ્લિકેશન થીમ રંગો</string>

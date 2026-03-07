@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Kattints egy alkalmazásra, hogy visszajöjjön a listába</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
+    <string name="deep_link_add_source_title">Forrás hozzáadása</string>
+    <string name="deep_link_add_source_message">Szeretné hozzáadni ezt a patch forrást a Morphe-hez?</string>
+    <string name="deep_link_add_source_warning">Csak megbízható forrásokból adj hozzá forrást</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Manager frissítés elérhető</string>
+    <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
     <string name="home_update_error">A frissítés sikertelen</string>
     <string name="home_update_error_subtitle">Ellenőrizze az internetkapcsolatát, és próbálja újra</string>
@@ -213,7 +216,7 @@ Biztosan folytatja?"</string>
     <string name="patcher_ready_to_install_subtitle">Nyomja meg az alábbi gombot a telepítéshez</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomja meg az alábbi gombot a csatlakoztatáshoz</string>
     <string name="patcher_storage_permission_dialog_title">Nem lehet elérési útvonalhoz hozzáférni</string>
-    <string name="patcher_storage_permission_description_api30">Egy vagy több pata megoldás mutató az útvonalakhoz, amelyekre a Morphe menedzser nem tud olvasni. Adja meg a tárolási hozzáférést és taposson a gombra, majd a pata automatikusan indul</string>
+    <string name="patcher_storage_permission_description_api30">Egy vagy több patch opció olyan elérési utakat mutat, amelyeket a Morphe nem tud olvasni. Adja meg a tárolási hozzáférést, majd koppintson a gombra, és a patchelés automatikusan elindul</string>
     <string name="patcher_storage_permission_description_legacy">Egy vagy több pata megoldás mutató az útvonalakhoz, amelyekre nem lehet hozzáférni. Változtassa meg az útvonalakat a pata megoldásokban és próbálja újra</string>
     <string name="patcher_storage_permission_grant">Adja meg a tárolási engedélyt</string>
     <string name="patcher_storage_permission_denied_warning">A tárolási engedélyt elvetették. Engedélyezze a tároló használatához, vagy helyezze át a fájlokat az alkalmazás magánkönyvtárába.</string>
@@ -325,19 +328,19 @@ Biztosan folytatja?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ikon megváltoztatása</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Frissítések</string>
-    <string name="settings_advanced_updates_use_prereleases">Előzetes kiadások használata</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Korai hozzáférés új kísérleti menedzser kiadásokhoz. Előzetes patch-okat használnihoz, engedélyezd az előzetes kiadások kapcsolóját minden patch forrásban külön</string>
+    <string name="settings_advanced_updates_use_prereleases">Használja a Morphe előzetes kiadását</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Korlátozott hozzáférést biztosít az új Morphe funkciókhoz. A bétaverziós javításokhoz engedélyezze a bétaverzió kapcsolót minden egyes forrásban külön-külön</string>
     <string name="settings_advanced_updates_allow_metered">Mobil adatokon frissítés</string>
-    <string name="settings_advanced_updates_allow_metered_description">Engedélyezze a frissítési források és a menedzser frissítések mobil adatokon történő letöltését</string>
+    <string name="settings_advanced_updates_allow_metered_description">Engedélyezze, hogy a Morphe és a frissítések mobiladat-kapcsolaton keresztül is letöltődjenek</string>
     <string name="settings_advanced_updates_background_notifications">Háttérfrissítés-jelzések</string>
     <string name="settings_advanced_updates_background_notifications_description">Háttérben periodikusan ellenőrizze az frissítéseket és értesítse, ha elérhetőek.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Rövid távú push-jelzések az új kiadásokról, még ha az alkalmazás bezárva is van</string>
-    <string name="notification_channel_manager_updates">Frissítések kezelése</string>
-    <string name="notification_channel_manager_updates_description">Morphe menedzser új verzióiról szóló jelzések</string>
+    <string name="notification_channel_manager_updates">Morphe frissítések</string>
+    <string name="notification_channel_manager_updates_description">Értesítések az új Morphe verziókról</string>
     <string name="notification_channel_bundle_updates">Patchforrás frissítések</string>
     <string name="notification_channel_bundle_updates_description">Frissítésről érkező új forrás verziókról szóló értesítések</string>
     <string name="notification_channel_fcm_updates">Frissítés</string>
-    <string name="notification_channel_fcm_updates_description">Morphe menedzser és módosítások frissítéseiért instant push értesítések. Az alkalmazás háttérben futáskor is kiszolgálva</string>
+    <string name="notification_channel_fcm_updates_description">Azonnali push értesítések az új Morphe és frissítések megjelenéséről. Értesítést küld, még akkor is, ha az alkalmazás háttérben fut</string>
     <string name="settings_advanced_update_interval">Frissítés gyakorisága</string>
     <string name="settings_advanced_update_interval_dialog_title">Frissítés ellenőrzése</string>
     <string name="settings_advanced_update_interval_hourly">Óránt</string>
@@ -347,12 +350,12 @@ Biztosan folytatja?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Háttérfrissítés gyakorisága</string>
     <string name="settings_advanced_update_interval_battery_warning">A háttérfrissítések nem működhetnek megbízhatóan néhány eszközen. A gyártók, mint a Xiaomi, Huawei, Samsung és OnePlus gyakran erősen korlátozzák a háttérfolyamatokat, hogy a akkumulátort takarítsák</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe menedzser frissítés elérhető</string>
+    <string name="notification_manager_update_title">Morphe frissítés elérhető</string>
     <string name="notification_bundle_update_title">Új módosítások elérhetőek</string>
     <string name="notification_update_text">A %1$s verzió kész a letöltéshez</string>
-    <string name="notification_bundle_update_text_unversioned">Kattints a Morphe menedzser megnyitására és frissítésre</string>
+    <string name="notification_bundle_update_text_unversioned">Koppintson a Morphe megnyitásához és a frissítéshez</string>
     <string name="notification_permission_dialog_title">Értesítések engedélyezése</string>
-    <string name="notification_permission_dialog_description">A Morphe menedzser az értesítések engedélyezése szükséges, hogy értesítse, amikor frissítések elérhetőek a háttérben</string>
+    <string name="notification_permission_dialog_description">A Morphe-nek értesítési engedélyre van szüksége ahhoz, hogy értesítse Önt, amikor frissítések érhetők el a háttérben</string>
     <string name="notification_post_patch_dialog_title">Szeretnéd, ha értesítenénk, mikor frissítések érkeznek?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
@@ -370,12 +373,11 @@ Biztosan folytatja?"</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Personal Access Token beállítása</string>
     <string name="settings_advanced_github_pat_dialog_description">GitHub Personal Access Token beállítása a Pull Requestek külső forrásként történő hozzáadásához. PAT létrehozása public_repo hatókörrel.</string>
     <string name="settings_advanced_github_pat_export_include_label">Felvétel az exportált beállítások közé</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Hozzáadja ezt a PAT-ot a manager exportált beállításaihoz</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Hozzáadja ezt a PAT-ot a Morphe exportált beállításaihoz</string>
     <string name="settings_advanced_github_pat_export_warning">Ne ossza meg a PAT-ot. Ha felveszi az exportált beállításokba, kezelje privátként a fájlt, mert tartalmazza a tokent</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Módosítás beállításai</string>
-    <string name="settings_advanced_patch_options_youtube_description">Téma, márka, fejléc és Shorts lehetőségek</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Téma és márka lehetőségek</string>
+    <string name="settings_advanced_patch_options_youtube_description">Téma, márka és fejlőpánt opciók</string>
     <string name="settings_advanced_patch_options_restart_message">A patchbeállítások megváltoztatása után szükség van az alkalmazás újbóli módosítására, hogy a változások érvénybe lépjenek.</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Szakértői módban a módosítás beállításai a módosítási folyamat során lesznek elérhetők.</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_show_password_field">Jelszó megjelenítése</string>
     <string name="settings_system_hide_password_field">Jelszó elrejtése</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Manager beállításainak importálása</string>
-    <string name="settings_system_import_manager_settings_description">Managerbeállítások visszaállítása JSON fájlból</string>
-    <string name="settings_system_import_manager_settings_fail">Nem sikerült importálni a manager beállításokat: %s</string>
-    <string name="settings_system_import_manager_settings_success">Managerbeállítások sikeresen importálva</string>
-    <string name="settings_system_export_manager_settings">A manager beállításainak exportálása</string>
-    <string name="settings_system_export_manager_settings_description">A manager beállításainak mentése JSON fájlba</string>
-    <string name="settings_system_export_manager_settings_fail">Nem sikerült exportálni a managerbeállításokat: %s</string>
-    <string name="settings_system_export_manager_settings_success">Managerbeállítások sikeresen exportálva</string>
+    <string name="settings_system_import_manager_settings">Importálja a Morphe beállításait</string>
+    <string name="settings_system_import_manager_settings_description">Állítsa vissza a Morphe beállításait egy JSON fájlból</string>
+    <string name="settings_system_import_manager_settings_fail">Hiba történt a Morphe beállításainak importálásakor: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe beállítások importálva</string>
+    <string name="settings_system_export_manager_settings">Exportálja a Morphe beállításait</string>
+    <string name="settings_system_export_manager_settings_description">Mentsébe a Morphe beállításait egy JSON fájlba</string>
+    <string name="settings_system_export_manager_settings_fail">Hiba történt a Morphe beállításainak exportálásakor: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe beállítások sikeresen exportálva</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Hibakeresés</string>
     <string name="settings_system_export_debug_logs">Hibakeresési naplók exportálása</string>
