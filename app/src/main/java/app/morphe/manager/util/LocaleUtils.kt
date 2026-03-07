@@ -69,12 +69,12 @@ fun parseLocalesConfig(): List<String> = listOf(
     "bs-BA", "ca-ES", "cs-CZ", "da-DK", "de-DE", "el-GR", "es-ES", "et-EE",
     "eu-ES", "fa-IR", "fi-FI", "fil-PH", "fr-FR", "ga-IE", "gl-ES", "gu-IN",
     "hi-IN", "hr-HR", "hu-HU", "hy-AM", "id-ID", "is-IS", "it-IT", "he-IL",
-    "ja-JP", "ka-GE", "kk-KZ", "km-KH", "kn-IN", "ko-KR", "ky-KG", "lo-LA",
-    "lt-LT", "lv-LV", "mai-IN", "mk-MK", "mn-MN", "ms-MY", "my-MM", "nb-NO",
-    "ne-IN", "nl-NL", "or-IN", "pa-IN", "pl-PL", "pt-BR", "pt-PT", "ro-RO",
-    "ru-RU", "si-LK", "sk-SK", "sl-SI", "sr-CS", "sr-SP", "sv-SE", "sw-KE",
-    "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "ur-IN", "uz-UZ", "vi-VN",
-    "zh-CN", "zh-TW", "zu-ZA"
+    "ja-JP", "kmr-TR", "ka-GE", "kk-KZ", "km-KH", "kn-IN", "ko-KR", "ky-KG",
+    "lo-LA", "lt-LT", "lv-LV", "mai-IN", "mk-MK", "mn-MN", "ms-MY", "my-MM",
+    "nb-NO", "ne-IN", "nl-NL", "or-IN", "pa-IN", "pl-PL", "pt-BR", "pt-PT",
+    "ro-RO", "ru-RU", "si-LK", "sk-SK", "sl-SI", "sr-CS", "sr-SP", "sv-SE",
+    "sw-KE", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "ur-IN", "uz-UZ",
+    "vi-VN", "zh-CN", "zh-TW", "zu-ZA"
 )
 
 /**
