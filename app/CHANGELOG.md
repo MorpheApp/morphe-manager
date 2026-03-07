@@ -1,3 +1,10 @@
+# app [1.11.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.5...v1.11.0-dev.6) (2026-03-07)
+
+
+### Features
+
+* Add deep link support ([#290](https://github.com/MorpheApp/morphe-manager/issues/290)) ([3b57efb](https://github.com/MorpheApp/morphe-manager/commit/3b57efb170e56eea1821dcbf2c49dcc2b795763a))
+
 # app [1.11.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.4...v1.11.0-dev.5) (2026-03-07)
 
 
