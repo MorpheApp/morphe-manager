@@ -148,7 +148,7 @@ class HomeViewModel(
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
     var showBundleManagementSheet by mutableStateOf(false)
-    var showAddBundleDialog by mutableStateOf(false)
+    var showAddSourceDialog by mutableStateOf(false)
     var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
     var showRenameBundleDialog by mutableStateOf(false)
 
@@ -482,7 +482,7 @@ class HomeViewModel(
      * Called when the app is opened via a deep link containing a bundle URL.
      * Shows a confirmation dialog instead of adding silently.
      */
-    fun handleDeepLinkAddBundle(url: String, name: String?) {
+    fun handleDeepLinkAddSource(url: String, name: String?) {
         deepLinkPendingBundle = DeepLinkBundle(url = url, name = name)
     }
 

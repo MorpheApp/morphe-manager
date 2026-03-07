@@ -108,16 +108,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Handles deep links for adding patch bundles.
-     * Format: https://morphe.software/add-bundle?url=<bundle_url>[&name=<display_name>]
+     * Handles deep links for adding patch sources.
+     * Format: https://morphe.software/add-source?url=<source_url>[&name=<display_name>]
      * Only GitHub URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
         val data = intent?.data ?: return
-        val isAddBundle = data.scheme == "https" &&
+        val isAddSource = data.scheme == "https" &&
                 data.host == "morphe.software" &&
-                data.path?.startsWith("/add-bundle") == true
-        if (!isAddBundle) return
+                data.path?.startsWith("/add-source") == true
+        if (!isAddSource) return
 
         val url = data.getQueryParameter("url")?.takeIf { it.isNotBlank() } ?: return
 
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         if (!isGitHub) return
 
         val name = data.getQueryParameter("name")?.takeIf { it.isNotBlank() }
-        vm.pendingDeepLinkBundle = MainViewModel.DeepLinkBundle(url = url, name = name)
+        vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(url = url, name = name)
     }
 }
 
@@ -212,11 +212,11 @@ private fun MorpheManager(vm: MainViewModel) {
                     }
                 }
 
-                // Handle deep link bundle
-                LaunchedEffect(vm.pendingDeepLinkBundle) {
-                    vm.pendingDeepLinkBundle?.let { bundle ->
-                        homeViewModel.handleDeepLinkAddBundle(bundle.url, bundle.name)
-                        vm.pendingDeepLinkBundle = null
+                // Handle deep link source
+                LaunchedEffect(vm.pendingDeepLinkSource) {
+                    vm.pendingDeepLinkSource?.let { bundle ->
+                        homeViewModel.handleDeepLinkAddSource(bundle.url, bundle.name)
+                        vm.pendingDeepLinkSource = null
                     }
                 }
 

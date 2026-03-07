@@ -74,7 +74,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
-            <!-- Deep link: App Links (https://morphe.software/add-bundle?url=...) -->
+            <!-- Deep link: App Links (https://morphe.software/add-source?url=...) -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -82,7 +82,7 @@
                 <data
                     android:scheme="https"
                     android:host="morphe.software"
-                    android:pathPrefix="/add-bundle" />
+                    android:pathPrefix="/add-source" />
             </intent-filter>
         </activity>
 

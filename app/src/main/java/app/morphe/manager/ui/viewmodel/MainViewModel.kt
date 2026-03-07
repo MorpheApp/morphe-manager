@@ -19,10 +19,10 @@ class MainViewModel(
 
     /**
      * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the app is opened
-     * via a deep link to add a patch bundle. HomeScreen observes this via LaunchedEffect,
+     * via a deep link to add a patch source. HomeScreen observes this via LaunchedEffect,
      * shows a confirmation dialog, then resets the flag to null.
      */
-    var pendingDeepLinkBundle: DeepLinkBundle? by mutableStateOf(null)
+    var pendingDeepLinkSource: DeepLinkSource? by mutableStateOf(null)
 
-    data class DeepLinkBundle(val url: String, val name: String?)
+    data class DeepLinkSource(val url: String, val name: String?)
 }

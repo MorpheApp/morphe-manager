@@ -69,7 +69,7 @@ import java.net.URL
 @Composable
 fun BundleManagementSheet(
     onDismissRequest: () -> Unit,
-    onAddBundle: () -> Unit,
+    onAddSource: () -> Unit,
     onDelete: (PatchBundleSource) -> Unit,
     onDisable: (PatchBundleSource) -> Unit,
     onUpdate: (PatchBundleSource) -> Unit,
@@ -143,7 +143,7 @@ fun BundleManagementSheet(
                     }
 
                     FilledIconButton(
-                        onClick = onAddBundle,
+                        onClick = onAddSource,
                         colors = IconButtonDefaults.filledIconButtonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer
                         )

@@ -18,9 +18,9 @@
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
 
-    <string name="deep_link_add_bundle_title">Add source</string>
-    <string name="deep_link_add_bundle_message">Do you want to add this patch source to Morphe Manager?</string>
-    <string name="deep_link_add_bundle_warning">Only add source from sources you trust</string>
+    <string name="deep_link_add_source_title">Add source</string>
+    <string name="deep_link_add_source_message">Do you want to add this patch source to Morphe Manager?</string>
+    <string name="deep_link_add_source_warning">Only add source from sources you trust</string>
 
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Manager update available</string>

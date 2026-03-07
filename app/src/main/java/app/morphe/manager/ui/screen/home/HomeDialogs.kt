@@ -254,9 +254,9 @@ fun HomeDialogs(
     if (homeViewModel.showBundleManagementSheet) {
         BundleManagementSheet(
             onDismissRequest = { homeViewModel.showBundleManagementSheet = false },
-            onAddBundle = {
+            onAddSource = {
                 homeViewModel.showBundleManagementSheet = false
-                homeViewModel.showAddBundleDialog = true
+                homeViewModel.showAddSourceDialog = true
             },
             onDelete = { bundle ->
                 scope.launch {
@@ -283,15 +283,15 @@ fun HomeDialogs(
     }
 
     // Add bundle dialog
-    if (homeViewModel.showAddBundleDialog) {
-        AddBundleDialog(
+    if (homeViewModel.showAddSourceDialog) {
+        AddSourceDialog(
             onDismiss = {
-                homeViewModel.showAddBundleDialog = false
+                homeViewModel.showAddSourceDialog = false
                 homeViewModel.selectedBundleUri = null
                 homeViewModel.selectedBundlePath = null
             },
             onLocalSubmit = {
-                homeViewModel.showAddBundleDialog = false
+                homeViewModel.showAddSourceDialog = false
                 homeViewModel.selectedBundleUri?.let { uri ->
                     homeViewModel.createLocalSource(uri)
                 }
@@ -299,7 +299,7 @@ fun HomeDialogs(
                 homeViewModel.selectedBundlePath = null
             },
             onRemoteSubmit = { url ->
-                homeViewModel.showAddBundleDialog = false
+                homeViewModel.showAddSourceDialog = false
                 homeViewModel.createRemoteSource(url, true)
             },
             onLocalPick = {
@@ -311,7 +311,7 @@ fun HomeDialogs(
 
     // Deep link: Add bundle confirmation dialog
     homeViewModel.deepLinkPendingBundle?.let { bundle ->
-        DeepLinkAddBundleDialog(
+        DeepLinkAddSourceDialog(
             url = bundle.url,
             name = bundle.name,
             onConfirm = { homeViewModel.confirmDeepLinkBundle() },
@@ -1036,7 +1036,7 @@ fun MeteredPatchingDialog(
  * Displays the URL (and optional name) and asks the user to confirm before adding.
  */
 @Composable
-fun DeepLinkAddBundleDialog(
+fun DeepLinkAddSourceDialog(
     url: String,
     name: String?,
     onConfirm: () -> Unit,
@@ -1044,7 +1044,7 @@ fun DeepLinkAddBundleDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.deep_link_add_bundle_title),
+        title = stringResource(R.string.deep_link_add_source_title),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.add),
@@ -1068,7 +1068,7 @@ fun DeepLinkAddBundleDialog(
             )
 
             Text(
-                text = stringResource(R.string.deep_link_add_bundle_message),
+                text = stringResource(R.string.deep_link_add_source_message),
                 style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogSecondaryTextColor.current,
                 textAlign = TextAlign.Center,
@@ -1103,7 +1103,7 @@ fun DeepLinkAddBundleDialog(
             }
 
             InfoBadge(
-                text = stringResource(R.string.deep_link_add_bundle_warning),
+                text = stringResource(R.string.deep_link_add_source_warning),
                 style = InfoBadgeStyle.Warning,
                 icon = Icons.Outlined.Warning,
                 isExpanded = true
