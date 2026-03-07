@@ -254,9 +254,9 @@ fun HomeDialogs(
     if (homeViewModel.showBundleManagementSheet) {
         BundleManagementSheet(
             onDismissRequest = { homeViewModel.showBundleManagementSheet = false },
-            onAddBundle = {
+            onAddSource = {
                 homeViewModel.showBundleManagementSheet = false
-                homeViewModel.showAddBundleDialog = true
+                homeViewModel.showAddSourceDialog = true
             },
             onDelete = { bundle ->
                 scope.launch {
@@ -283,15 +283,15 @@ fun HomeDialogs(
     }
 
     // Add bundle dialog
-    if (homeViewModel.showAddBundleDialog) {
-        AddBundleDialog(
+    if (homeViewModel.showAddSourceDialog) {
+        AddSourceDialog(
             onDismiss = {
-                homeViewModel.showAddBundleDialog = false
+                homeViewModel.showAddSourceDialog = false
                 homeViewModel.selectedBundleUri = null
                 homeViewModel.selectedBundlePath = null
             },
             onLocalSubmit = {
-                homeViewModel.showAddBundleDialog = false
+                homeViewModel.showAddSourceDialog = false
                 homeViewModel.selectedBundleUri?.let { uri ->
                     homeViewModel.createLocalSource(uri)
                 }
@@ -299,13 +299,23 @@ fun HomeDialogs(
                 homeViewModel.selectedBundlePath = null
             },
             onRemoteSubmit = { url ->
-                homeViewModel.showAddBundleDialog = false
+                homeViewModel.showAddSourceDialog = false
                 homeViewModel.createRemoteSource(url, true)
             },
             onLocalPick = {
                 openBundlePicker()
             },
             selectedLocalPath = homeViewModel.selectedBundlePath
+        )
+    }
+
+    // Deep link: Add bundle confirmation dialog
+    homeViewModel.deepLinkPendingBundle?.let { bundle ->
+        DeepLinkAddSourceDialog(
+            url = bundle.url,
+            name = bundle.name,
+            onConfirm = { homeViewModel.confirmDeepLinkBundle() },
+            onDismiss = { homeViewModel.dismissDeepLinkBundle() }
         )
     }
 
@@ -1013,6 +1023,87 @@ fun MeteredPatchingDialog(
 
             InfoBadge(
                 text = stringResource(R.string.home_outdated_patches_dialog_warning),
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
+            )
+        }
+    }
+}
+
+/**
+ * Confirmation dialog shown when the app is opened via a deep link to add a patch bundle.
+ * Displays the URL (and optional name) and asks the user to confirm before adding.
+ */
+@Composable
+fun DeepLinkAddSourceDialog(
+    url: String,
+    name: String?,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.deep_link_add_source_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.add),
+                onPrimaryClick = onConfirm,
+                primaryIcon = Icons.Outlined.Extension,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Extension,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(48.dp)
+            )
+
+            Text(
+                text = stringResource(R.string.deep_link_add_source_message),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Bundle details card
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    if (name != null) {
+                        Text(
+                            text = name,
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.SemiBold,
+                            color = LocalDialogTextColor.current
+                        )
+                    }
+                    Text(
+                        text = url,
+                        style = MaterialTheme.typography.bodySmall,
+                        fontFamily = FontFamily.Monospace,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                }
+            }
+
+            InfoBadge(
+                text = stringResource(R.string.deep_link_add_source_warning),
                 style = InfoBadgeStyle.Warning,
                 icon = Icons.Outlined.Warning,
                 isExpanded = true

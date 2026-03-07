@@ -21,7 +21,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -65,6 +64,9 @@ class MainActivity : AppCompatActivity() {
 
         val vm: MainViewModel = getActivityViewModel()
 
+        // Handle deep link on cold start
+        handleDeepLinkIntent(intent, vm)
+
         setContent {
             val theme by vm.prefs.theme.getAsState()
             val dynamicColor by vm.prefs.dynamicColor.getAsState()
@@ -86,9 +88,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        // Called when the app is already running and the user taps an FCM notification
         val vm: MainViewModel = getActivityViewModel()
         handleUpdateCheckIntent(intent, vm)
+        handleDeepLinkIntent(intent, vm)
     }
 
     /**
@@ -102,6 +104,24 @@ class MainActivity : AppCompatActivity() {
         ) {
             vm.triggerUpdateCheckOnResume = true
         }
+    }
+
+    /**
+     * Handles deep links for adding patch sources.
+     * Format: https://morphe.software/add-source?github=owner/repo[&name=Display+Name]
+     * Only GitHub URLs are accepted for safety.
+     */
+    private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
+        val data = intent?.data ?: return
+        val isAddSource = data.scheme == "https" &&
+                data.host == "morphe.software" &&
+                data.path?.startsWith("/add-source") == true
+        if (!isAddSource) return
+
+        val repo = data.getQueryParameter("github")?.takeIf { it.isNotBlank() } ?: return
+        val url = "https://github.com/$repo"
+        val name = data.getQueryParameter("name")?.takeIf { it.isNotBlank() }
+        vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(url = url, name = name)
     }
 }
 
@@ -183,6 +203,14 @@ private fun MorpheManager(vm: MainViewModel) {
                         homeViewModel.patchBundleRepository.updateCheck()
                         homeViewModel.checkForManagerUpdates()
                         vm.triggerUpdateCheckOnResume = false
+                    }
+                }
+
+                // Handle deep link source
+                LaunchedEffect(vm.pendingDeepLinkSource) {
+                    vm.pendingDeepLinkSource?.let { bundle ->
+                        homeViewModel.handleDeepLinkAddSource(bundle.url, bundle.name)
+                        vm.pendingDeepLinkSource = null
                     }
                 }
 

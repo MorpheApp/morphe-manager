@@ -1,3 +1,6 @@
+# Copyright 2026 Morphe.
+# https://github.com/MorpheApp/morphe-manager
+
 #!/usr/bin/env python3
 """
 Send an FCM push notification to a Morphe Manager topic.

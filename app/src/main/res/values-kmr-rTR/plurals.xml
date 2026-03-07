@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s çareser</item>
+        <item quantity="other">%s çareserên</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s vebûna hevsêr</item>
+        <item quantity="other">%s vebûnên hevsêr</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s çavkanî</item>
+        <item quantity="other">%s çavkanîyên</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s pakêt</item>
+        <item quantity="other">%s pakêtan</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Ji bo %s çareser vekînin</item>
+        <item quantity="other">Ji bo %s çareserên vekînin</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s pelê APK</item>
+        <item quantity="other">%s pelên APK</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">%s çaresera qeyî ji hejmara dane yê parastî hate rakirin</item>
+        <item quantity="other">%s çareserên qeyî ji hejmara dane yê parastî hate rakirin</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%s çavkanî hate saz kirin</item>
+        <item quantity="other">%s çavkanîyên hate saz kirin</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%s çareser hatin hilbijartin</item>
+        <item quantity="other">%s çareserên hatin hilbijartin</item>
+    </plurals>
+</resources>

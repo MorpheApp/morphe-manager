@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-03-02T19:31:21.014Z",
-  "description": "## app [1.10.2](https://github.com/MorpheApp/morphe-manager/compare/v1.10.1...v1.10.2) (2026-03-02)\n\n\n### Bug Fixes\n\n* Manager does not show updates if available ([#270](https://github.com/MorpheApp/morphe-manager/issues/270)) ([4e6f2af](https://github.com/MorpheApp/morphe-manager/commit/4e6f2afee34894c271903b6ea18a2b1a2cfe5ee1))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.10.2/morphe-manager-1.10.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.10.2/morphe-manager-1.10.2.apk.asc",
-  "version": "1.10.2"
+  "created_at": "2026-03-07T18:01:14.927Z",
+  "description": "# app [1.11.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.5...v1.11.0-dev.6) (2026-03-07)\n\n\n### Features\n\n* Add deep link support ([#290](https://github.com/MorpheApp/morphe-manager/issues/290)) ([3b57efb](https://github.com/MorpheApp/morphe-manager/commit/3b57efb170e56eea1821dcbf2c49dcc2b795763a))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.11.0-dev.6/morphe-manager-1.11.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.11.0-dev.6/morphe-manager-1.11.0-dev.6.apk.asc",
+  "version": "1.11.0-dev.6"
 }

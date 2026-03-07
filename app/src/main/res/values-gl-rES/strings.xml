@@ -37,6 +37,7 @@
     <!-- Patcher Screen - Other hidden strings -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
+    <string name="settings_appearance_background_none">Ningún</string>
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
@@ -60,4 +61,6 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
+    <string name="enabled">Activado</string>
+    <string name="disabled">Desactivado</string>
 </resources>

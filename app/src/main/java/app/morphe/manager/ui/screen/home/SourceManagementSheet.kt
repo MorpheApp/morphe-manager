@@ -32,7 +32,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
+import androidx.appcompat.content.res.AppCompatResources
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.APIPatchBundle
@@ -68,7 +70,7 @@ import java.net.URL
 @Composable
 fun BundleManagementSheet(
     onDismissRequest: () -> Unit,
-    onAddBundle: () -> Unit,
+    onAddSource: () -> Unit,
     onDelete: (PatchBundleSource) -> Unit,
     onDisable: (PatchBundleSource) -> Unit,
     onUpdate: (PatchBundleSource) -> Unit,
@@ -142,7 +144,7 @@ fun BundleManagementSheet(
                     }
 
                     FilledIconButton(
-                        onClick = onAddBundle,
+                        onClick = onAddSource,
                         colors = IconButtonDefaults.filledIconButtonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer
                         )
@@ -729,6 +731,7 @@ fun BundleIcon(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
+    val bundleAvatarUrl = bundle.bundleAvatarUrl
     val githubAvatarUrl = bundle.githubAvatarUrl
 
     val animatedColor by animateColorAsState(
@@ -752,8 +755,11 @@ fun BundleIcon(
     ) {
         when {
             bundle.isDefault -> {
+                val context = LocalContext.current
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                    painter = rememberDrawablePainter(
+                        drawable = AppCompatResources.getDrawable(context, R.drawable.ic_launcher_foreground)
+                    ),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
                     modifier = modifier
@@ -764,9 +770,10 @@ fun BundleIcon(
                 )
             }
 
-            githubAvatarUrl != null -> {
+            bundleAvatarUrl != null || githubAvatarUrl != null -> {
                 RemoteAvatar(
-                    url = githubAvatarUrl,
+                    url = bundleAvatarUrl ?: githubAvatarUrl!!,
+                    fallbackUrl = if (bundleAvatarUrl != null) githubAvatarUrl else null,
                     modifier = Modifier.fillMaxSize()
                 )
             }
@@ -789,12 +796,14 @@ fun BundleIcon(
 @Composable
 private fun RemoteAvatar(
     url: String,
+    fallbackUrl: String? = null,
     modifier: Modifier = Modifier
 ) {
     var bitmap by remember(url) { mutableStateOf<Bitmap?>(null) }
 
-    LaunchedEffect(url) {
+    LaunchedEffect(url, fallbackUrl) {
         bitmap = loadGitHubAvatar(url)
+            ?: fallbackUrl?.let { loadGitHubAvatar(it) }
     }
 
     if (bitmap != null) {

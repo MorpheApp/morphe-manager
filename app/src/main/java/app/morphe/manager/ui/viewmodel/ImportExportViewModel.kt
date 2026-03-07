@@ -1,5 +1,6 @@
 package app.morphe.manager.ui.viewmodel
 
+import android.app.ActivityManager
 import android.app.Application
 import android.net.Uri
 import android.util.Log
@@ -260,16 +261,55 @@ class ImportExportViewModel(
         val exitCode = try {
             withContext(Dispatchers.IO) {
                 contentResolver.openOutputStream(target)!!.bufferedWriter().use { writer ->
+
+                    val versionName = runCatching {
+                        app.packageManager.getPackageInfo(app.packageName, 0).versionName
+                    }.getOrDefault("unknown")
+
+                    writer.write("=== Morphe Manager Debug Log ===\n")
+                    writer.write("Date       : ${LocalDateTime.now()}\n")
+                    writer.write("Version    : $versionName\n")
+
+                    writer.write("\n--- Device ---\n")
+                    writer.write("Model      : ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}\n")
+                    writer.write("Android    : ${android.os.Build.VERSION.RELEASE} (SDK ${android.os.Build.VERSION.SDK_INT})\n")
+                    writer.write("ABI        : ${android.os.Build.SUPPORTED_ABIS.joinToString()}\n")
+                    writer.write("Locale     : ${java.util.Locale.getDefault().toLanguageTag()}\n")
+
+                    writer.write("\n--- Memory ---\n")
+                    val activityManager = app.getSystemService(ActivityManager::class.java)
+                    val memInfo = ActivityManager.MemoryInfo().also { activityManager.getMemoryInfo(it) }
+                    val toMb = { bytes: Long -> bytes / 1024 / 1024 }
+                    writer.write("RAM avail  : ${toMb(memInfo.availMem)} MB / ${toMb(memInfo.totalMem)} MB\n")
+                    writer.write("Low memory : ${memInfo.lowMemory}\n")
+                    writer.write("Low mem thr: ${toMb(memInfo.threshold)} MB\n")
+
+                    writer.write("\n--- Storage ---\n")
+                    val internalDir = app.filesDir
+                    val toMbL = { bytes: Long -> bytes / 1024 / 1024 }
+                    writer.write("Internal   : ${toMbL(internalDir.freeSpace)} MB free / ${toMbL(internalDir.totalSpace)} MB total\n")
+                    val externalDir = app.getExternalFilesDir(null)
+                    if (externalDir != null) {
+                        writer.write("External   : ${toMbL(externalDir.freeSpace)} MB free / ${toMbL(externalDir.totalSpace)} MB total\n")
+                    }
+
+                    writer.write("\n--- Environment ---\n")
+                    val hasRoot = runCatching {
+                        Runtime.getRuntime().exec(arrayOf("su", "-c", "id")).waitFor() == 0
+                    }.getOrDefault(false)
+                    writer.write("Root access: $hasRoot\n")
+
+                    writer.write("\n=== Logcat ===\n\n")
+
                     val consumer = Redirect.Consume { flow ->
                         flow
-                            .onEach { line ->
-                                writer.write("$line\n")
-                            }
+                            .onEach { line -> writer.write("$line\n") }
                             .flowOn(Dispatchers.IO)
                             .collect { }
                     }
 
-                    process("logcat", "-d", stdout = consumer).resultCode
+                    // Filter logs by current process UID to include only Morphe Manager logs
+                    process("logcat", "-d", "--uid=${app.applicationInfo.uid}", stdout = consumer).resultCode
                 }
             }
         } catch (e: CancellationException) {

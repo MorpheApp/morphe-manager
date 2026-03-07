@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.time.withTimeoutOrNull
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.IOException
 import java.time.Duration
 
 class RootInstaller(
@@ -283,7 +284,10 @@ class RootInstaller(
             execute("pm install \"${stockApp.absolutePath}\"").assertSuccess("Failed to install stock app")
         }
 
-        remoteFS.getFile(modulePath).mkdir()
+        val moduleDir = remoteFS.getFile(modulePath)
+        if (!moduleDir.exists() && !moduleDir.mkdirs()) {
+            throw IOException("Failed to create module directory: $modulePath")
+        }
 
         listOf(
             "service.sh",

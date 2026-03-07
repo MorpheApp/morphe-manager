@@ -220,6 +220,10 @@ class MorpheAPI(
     // REGION: Manager Updates
     // ============================================================================
 
+    /** Returns `true` if the currently installed manager is itself a dev/prerelease build. */
+    val isDevBuild: Boolean
+        get() = BuildConfig.VERSION_NAME.contains('-')
+
     /**
      * Get latest manager update using GitHub API
      */
