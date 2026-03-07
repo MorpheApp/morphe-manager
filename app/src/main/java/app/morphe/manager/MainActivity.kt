@@ -109,7 +109,10 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Handles deep links for adding patch sources.
-     * Format: https://morphe.software/add-source?url=<source_url>[&name=<display_name>]
+     * Formats:
+     *   https://morphe.software/add-source?url=https://github.com/owner/repo
+     *   https://morphe.software/add-source?github=owner/repo
+     * Optional: &name=Display+Name
      * Only GitHub URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
@@ -119,7 +122,10 @@ class MainActivity : AppCompatActivity() {
                 data.path?.startsWith("/add-source") == true
         if (!isAddSource) return
 
-        val url = data.getQueryParameter("url")?.takeIf { it.isNotBlank() } ?: return
+        val url = data.getQueryParameter("url")?.takeIf { it.isNotBlank() }
+            ?: data.getQueryParameter("github")?.takeIf { it.isNotBlank() }
+                ?.let { "https://github.com/$it" }
+            ?: return
 
         // Only allow GitHub URLs for safety
         val host = runCatching { java.net.URI(url).host?.lowercase() }.getOrNull()
