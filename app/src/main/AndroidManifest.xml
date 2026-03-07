@@ -74,7 +74,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
-            <!-- Deep link: App Links (https://morphe.software/add-source?url=...) -->
+            <!-- Deep link: App Links (https://morphe.software/add-source?github=...) -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
