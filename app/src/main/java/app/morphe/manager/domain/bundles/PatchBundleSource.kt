@@ -86,6 +86,17 @@ sealed class PatchBundleSource(
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
 
         /**
+         * Get custom bundle avatar URL (patches-bundle.png next to patches-bundle.json).
+         * Returns null if the endpoint does not contain patches-bundle.json.
+         */
+        val PatchBundleSource.bundleAvatarUrl: String? get() {
+            val remote = this as? RemotePatchBundle ?: return null
+            return if (remote.endpoint.contains("patches-bundle.json", ignoreCase = true))
+                remote.endpoint.replace("patches-bundle.json", "patches-bundle.png", ignoreCase = true)
+            else null
+        }
+
+        /**
          * Get GitHub avatar URL if this bundle is from a GitHub repository
          */
         val PatchBundleSource.githubAvatarUrl: String? get() {
