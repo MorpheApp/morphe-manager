@@ -162,7 +162,7 @@
     <string name="header_creator_failed">Не удалось создать заголовок</string>
     <string name="header_creator_folder_explanation">Выберите, где можно создать папку \'%1$s/%2$s\' со сгенерированными файлами заголовков</string>
     <!-- Home Screen - App Info Screen -->
-    <string name="home_app_info_uninstall_app_confirmation">Вы действительно хотите удалить это приложение?</string>
+    <string name="home_app_info_uninstall_app_confirmation">Вы действительно хотите деинсталировать это приложение?</string>
     <string name="home_app_info_remove_app_warning">Это навсегда удалит:</string>
     <string name="home_app_info_delete_item_database">Запись в базе данных</string>
     <string name="home_app_info_delete_item_patched_apk">Патченный APK файл</string>
@@ -181,7 +181,7 @@
     <string name="home_app_info_patched_at">Пропатчен</string>
     <string name="home_app_info_patch_update_available">Доступно обновление патчей</string>
     <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Перепатчайте свою программу, чтобы получить последние улучшения и исправления</string>
-    <string name="home_app_info_app_deleted_warning">Приложение было удалено</string>
+    <string name="home_app_info_app_deleted_warning">Приложение было деинсталировано</string>
     <string name="home_app_info_app_deleted_description">Это приложение было удалено за пределами Morphe. Пропатчите его снова, чтобы восстановить функциональность</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root режим требует установленный непатченный APK перед установкой патчей</string>
@@ -621,7 +621,7 @@ morphe_header_custom_dark.png
     <string name="install">Установить</string>
     <string name="installed">Установлено</string>
     <string name="reinstall">Переустановить</string>
-    <string name="uninstall">Удалить</string>
+    <string name="uninstall">Деинсталяция</string>
     <string name="uninstalled">Удалено</string>
     <string name="save">Сохранить</string>
     <string name="saved">Сохранено</string>

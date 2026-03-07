@@ -108,16 +108,15 @@
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Uzman modu</string>
     <string name="expert_mode_search">Yamaları ara</string>
-    <string name="expert_mode_proceed">Yamalamaya devam edin</string>
+    <string name="expert_mode_proceed">Yamalamaya başla</string>
     <string name="expert_mode_disable_all">Hepsini devre dışı bırak</string>
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_no_results">Yama bulunamadı</string>
     <string name="expert_mode_no_patches">Yama mevcut değil</string>
     <string name="expert_mode_multiple_sources_warning_title">Çoklu yama kaynağı seçildi</string>
-    <string name="expert_mode_multiple_sources_warning_message">"Birden fazla yama kaynağından yama seçtiniz. Bu, uyumluluk sorunlarına veya beklenmedik davranışlara neden olabilir. 
+    <string name="expert_mode_multiple_sources_warning_message">"Birden fazla yama kaynağından yama seçtiniz. Bu, uyumluluk sorunlarına veya beklenmedik davranışlara neden olabilir.
 
-Devam etmek istediğinizden emin misiniz?
-"</string>
+Devam etmek istediğinizden emin misiniz?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
     <string name="home_dialog_unsupported_version_dialog_description">Bu APK, önerilen uygulama sürümü değil. Devam edilmesi çalışmayan bir uygulamaya neden olabilir</string>
@@ -128,7 +127,7 @@ Devam etmek istediğinizden emin misiniz?
     <string name="home_dialog_wrong_package_description">Seçilen APK, işaretlediğiniz uygulamaya ait değil</string>
     <string name="home_dialog_expected_package">Beklenen paket:</string>
     <string name="home_dialog_selected_package">Seçilen paket:</string>
-    <string name="home_outdated_patches_dialog_title">Yığınlar eskimiş olabilir</string>
+    <string name="home_outdated_patches_dialog_title">Yamalar eskimiş olabilir</string>
     <string name="home_outdated_patches_dialog_message">Mobil veri etkin ve yama güncellemeleri devre dışı bırakıldı</string>
     <string name="home_outdated_patches_dialog_warning">Eskimiş yamaları kullanmak uygulamanın bozulmasına neden olabilir</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Güncelle &amp; yamala</string>
@@ -183,7 +182,7 @@ Devam etmek istediğinizden emin misiniz?
     <string name="home_app_info_patch_update_available">Yama paketi güncellemesi mevcut</string>
     <string name="home_app_info_patch_update_available_description">Daha yeni sürüm yamalar mevcut. En son iyileştirmeleri ve düzeltmeleri almak için uygulamayı yeniden yamalayın</string>
     <string name="home_app_info_app_deleted_warning">Uygulama kaldırıldı</string>
-    <string name="home_app_info_app_deleted_description">Bu uygulama Morphe dışında kaldırıldı. İşlevselliği geri getirmek için yeniden yamalamaya devam edin</string>
+    <string name="home_app_info_app_deleted_description">Bu uygulama Morphe dışından kaldırıldı. İşlevselliği geri getirmek için yeniden yamalayın</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'in cihazınızda yüklü olmasını gerektirir</string>
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
@@ -535,7 +534,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_patched_apks_empty">Henüz hiç yamalanmış APK kaydedilmedi</string>
     <string name="settings_system_patched_apks_delete_title">Yamalanmış APK silinsin mi?</string>
     <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen yamalanmış APK\'yi silmek istediğinizden emin misiniz?</string>
-    <string name="settings_system_patched_apks_deleted">%s için yamalanmış APK başarıyla silindi</string>
+    <string name="settings_system_patched_apks_deleted">Yamalanmış APK başarıyla silindi</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Orijinal APK\'ler</string>
     <string name="settings_system_original_apks_description">Orijinal APK dosyaları yenileme için saklanır. Her uygulama için en son sürüm tek bir kopyada tutulur</string>

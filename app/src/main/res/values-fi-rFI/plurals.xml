@@ -5,8 +5,8 @@
         <item quantity="other">%s paikkaukset</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s valintapäätös</item>
-        <item quantity="other">%s valintapäätöspäätöksiä</item>
+        <item quantity="one">%s paikkausasetus</item>
+        <item quantity="other">%s paikkausasetusta</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s lähde</item>

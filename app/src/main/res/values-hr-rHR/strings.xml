@@ -490,6 +490,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_memory_limit_warning">Nisko ograničenje memorije može uzrokovati greške prilikom patchanja većih aplikacija</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB ograničenje</string>
     <string name="settings_system_process_runtime_disabled_description">Dodirnite za konfiguraciju</string>
+    <string name="settings_system_process_runtime_description_not_available">Ova značajka zahtijeva Android 11 ili noviji</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Izvoz &amp; uvoz</string>
     <string name="settings_system_import_keystore">Uvezi spremište ključeva</string>

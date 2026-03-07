@@ -37,6 +37,7 @@
     <locale android:name="ka-GE" />
     <locale android:name="kk-KZ" />
     <locale android:name="km-KH" />
+    <locale android:name="kmr-TR" />
     <locale android:name="kn-IN" />
     <locale android:name="ko-KR" />
     <locale android:name="ky-KG" />

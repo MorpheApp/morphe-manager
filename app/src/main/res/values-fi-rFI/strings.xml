@@ -224,7 +224,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Valmistellaan</string>
     <string name="patcher_step_load_patches">Ladataan korjauksia</string>
-    <string name="patcher_step_prepare_split_apk">Yhdistää jakamattomat APK-tiedostot</string>
+    <string name="patcher_step_prepare_split_apk">Yhdistetään jaettu APK</string>
     <string name="patcher_step_unpack">Lue APK-tiedosto</string>
     <string name="patcher_step_group_patching">Korjataan</string>
     <string name="patcher_step_group_saving">Tallennetaan</string>
@@ -262,8 +262,8 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patcher_message_19">Sovelluksellasi on kuumetta, ja ainoa resepti on lisää korjauksia… 🩺🔔</string>
     <string name="patcher_message_20">Poistetaan hölynpölyä. Odota hetki… 🗑️</string>
     <!-- Expert patcher Screen -->
-    <string name="patching_app">Muokkaa sovellusta</string>
-    <string name="memory_usage">Muistiutuminen</string>
+    <string name="patching_app">Paikataan sovellusta</string>
+    <string name="memory_usage">Muistinkäyttö</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paikkojen käyttöönotto</string>
     <string name="failed_to_execute_patch">Virhe %s:n suorittamisessa</string>
@@ -492,7 +492,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_process_runtime_disabled_description">Tuo / Vienti asetukset</string>
     <string name="settings_system_process_runtime_description_not_available">Tämä ominaisuus vaatii Android 11 tai uudemman version</string>
     <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_export">Tuo / Vienti asetuset</string>
+    <string name="settings_system_import_export">Tuo ja vie</string>
     <string name="settings_system_import_keystore">Tuo custom-keystore</string>
     <string name="settings_system_import_keystore_description">Tuo custom-keystore</string>
     <string name="settings_system_import_keystore_dialog_title">Anna keystore-tunnus (alias)</string>

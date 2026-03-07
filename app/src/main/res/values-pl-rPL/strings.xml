@@ -490,16 +490,16 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_memory_limit_warning">Niski limit pamięci może powodować błędy podczas modyfikowania większych aplikacji</string>
     <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Stuknij, aby skonfigurować</string>
-    <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga Androida 11 lub nowszej wersji</string>
+    <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga systemu Android 11 lub nowszego</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import i eksport</string>
     <string name="settings_system_import_keystore">Importuj magazyn kluczy</string>
     <string name="settings_system_import_keystore_description">Importuj własny magazyn kluczy</string>
     <string name="settings_system_import_keystore_dialog_title">Wprowadź dane uwierzytelniające magazynu kluczy</string>
-    <string name="settings_system_import_keystore_dialog_description">Musisz wpisać dane uwierzytelniające magazynu kluczy, aby go zaimportować</string>
+    <string name="settings_system_import_keystore_dialog_description">Musisz wprowadzić dane uwierzytelniające magazynu kluczy, aby go zaimportować</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nazwa użytkownika (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Hasło</string>
-    <string name="settings_system_import_keystore_dialog_button">Zaimportuj</string>
+    <string name="settings_system_import_keystore_dialog_button">Importuj</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nieprawidłowe dane uwierzytelniające magazynu kluczy</string>
     <string name="settings_system_import_keystore_success">Zaimportowano magazyn kluczy</string>
     <string name="settings_system_import_keystore_failed">Nie udało się zaimportować magazynu kluczy</string>
@@ -520,7 +520,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_export_manager_settings_success">Wyeksportowano ustawienia menedżera</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debugowanie</string>
-    <string name="settings_system_export_debug_logs">Wyeksportuj logi do debugowania</string>
+    <string name="settings_system_export_debug_logs">Wyeksportuj logi debugowania</string>
     <string name="settings_system_export_debug_logs_description">Zapisz logi systemowe, aby ułatwić rozwiązywanie problemów</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
@@ -600,7 +600,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="selected">Wybrane</string>
     <string name="not_selected">Nie wybrano</string>
     <string name="rename">Zmień nazwę</string>
-    <string name="import_">Zaimportuj</string>
+    <string name="import_">Importuj</string>
     <string name="export">Eksportuj</string>
     <string name="download">Pobierz</string>
     <string name="less">Mniej</string>
@@ -656,8 +656,8 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
 Czy mimo to chcesz kontynuować?"</string>
     <string name="download_update_confirmation">Pobrać aktualizację?</string>
     <string name="just_now">Teraz</string>
-    <string name="minutes_ago">%s minut temu</string>
-    <string name="hours_ago">%s godzin temu</string>
-    <string name="days_ago">%s dni temu</string>
+    <string name="minutes_ago">%s min. temu</string>
+    <string name="hours_ago">%s godz. temu</string>
+    <string name="days_ago">%s d. temu</string>
     <string name="invalid_date">Nieprawidłowa data</string>
 </resources>

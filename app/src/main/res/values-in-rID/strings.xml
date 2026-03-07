@@ -3,7 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Aplikasi lainnya</string>
     <string name="home_not_patched_yet">Belum ditambal</string>
-    <string name="home_no_patches_available">Tidak ada tambalan tersedia</string>
+    <string name="home_no_patches_available">Tidak ada tambalan yang tersedia</string>
     <string name="home_default_source_disabled">Sumber tambalan Morphe dinonaktifkan. Silahkan aktifkan di kolom sumber Tambalan atau gunakan Mode Ahli</string>
     <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
     <string name="home_app_hide_message">Aplikasi ini akan disembunyikan dari layar utama. Anda dapat memulihkannya lagi menggunakan tombol \'%1$s\' di bagian bawah daftar.</string>
@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Tersedia pembaruan Manager</string>
+    <string name="home_update_available">Pembaruan Manager tersedia</string>
     <string name="home_update_available_subtitle">Versi baru siap dipasang</string>
     <string name="home_update_error">Pembaruan gagal</string>
     <string name="home_update_error_subtitle">Periksa koneksi internet Anda dan coba lagi</string>
@@ -34,7 +34,7 @@
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Bersiaplah, waktunya menambal</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Satu hari lagi, karya tanpa iklan lainnya</string>
+    <string name="home_greeting_4">Hari lain, mahakarya tanpa iklan lainnya</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Mau nonton iklan? Saya pun tidak</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->

@@ -149,6 +149,7 @@
     <string name="adaptive_icon_safe_zone_outer">Maskzon (kan beskäras)</string>
     <string name="adaptive_icon_created_success">Adaptiv ikon har skapats</string>
     <string name="adaptive_icon_creation_failed">Det gick inte att skapa adaptiv ikon</string>
+    <string name="adaptive_icon_folder_explanation">Välj var mappen \"%1$s/%2$s\" ska skapas med genererade ikonfiler</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Skapa anpassat sidhuvud</string>
     <string name="header_creator_instructions">Välj bilder för ljust och mörkt tema, och justera sedan genom att nypa</string>
@@ -157,6 +158,7 @@
     <string name="header_creator_no_image">Ingen bild har valts</string>
     <string name="header_creator_success">Sidhuvud har skapats</string>
     <string name="header_creator_failed">Det gick inte att skapa sidhuvud</string>
+    <string name="header_creator_folder_explanation">Välj var mappen \"%1$s/%2$s\" ska skapas med genererade sidhuvudfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
     <string name="home_app_info_remove_app_warning">Det här tar bort följande permanent:</string>
@@ -258,6 +260,8 @@
     <string name="patcher_message_19">Din app har feber, och det enda botemedlet är fler korrigeringar … 🩺🔔</string>
     <string name="patcher_message_20">Tar bort nonsens. Var god dröj … 🗑️</string>
     <!-- Expert patcher Screen -->
+    <string name="patching_app">Korrigerar appen</string>
+    <string name="memory_usage">Minnesanvändning</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Tillämpar korrigeringar</string>
     <string name="failed_to_execute_patch">Det gick inte att tillämpa %s</string>
@@ -484,6 +488,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_memory_limit_warning">En låg minnesgräns kan leda till fel när du korrigerar större appar</string>
     <string name="settings_system_process_runtime_enabled_description">Gräns på %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Tryck för att konfigurera</string>
+    <string name="settings_system_process_runtime_description_not_available">Den här funktionen kräver Android 11 eller senare</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importera och exportera</string>
     <string name="settings_system_import_keystore">Importera nyckellager</string>
@@ -623,6 +628,7 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="details">Information</string>
     <string name="hide">Dölj</string>
     <string name="default_">Standard</string>
+    <string name="logs">Loggar</string>
     <string name="installing_ellipsis">Installerar …</string>
     <string name="mounting_ellipsis">Monterar …</string>
     <string name="unmounting_ellipsis">Avmonterar …</string>

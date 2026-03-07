@@ -148,9 +148,15 @@ class HomeViewModel(
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
     var showBundleManagementSheet by mutableStateOf(false)
-    var showAddBundleDialog by mutableStateOf(false)
+    var showAddSourceDialog by mutableStateOf(false)
     var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
     var showRenameBundleDialog by mutableStateOf(false)
+
+    // Deep link: pending bundle to add via confirmation dialog
+    var deepLinkPendingBundle by mutableStateOf<DeepLinkBundle?>(null)
+        private set
+
+    data class DeepLinkBundle(val url: String, val name: String?)
 
     // Expert mode state
     var showExpertModeDialog by mutableStateOf(false)
@@ -470,6 +476,26 @@ class HomeViewModel(
         withContext(NonCancellable) {
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
         }
+    }
+
+    /**
+     * Called when the app is opened via a deep link containing a bundle URL.
+     * Shows a confirmation dialog instead of adding silently.
+     */
+    fun handleDeepLinkAddSource(url: String, name: String?) {
+        deepLinkPendingBundle = DeepLinkBundle(url = url, name = name)
+    }
+
+    /** User confirmed adding the bundle from the deep link confirmation dialog. */
+    fun confirmDeepLinkBundle() {
+        val bundle = deepLinkPendingBundle ?: return
+        deepLinkPendingBundle = null
+        createRemoteSource(bundle.url, autoUpdate = true)
+    }
+
+    /** User dismissed the deep link confirmation dialog. */
+    fun dismissDeepLinkBundle() {
+        deepLinkPendingBundle = null
     }
 
     suspend fun updateMorpheBundleWithChangelogClear() {

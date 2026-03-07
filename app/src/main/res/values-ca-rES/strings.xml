@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">Altres aplicacions</string>
+    <string name="home_not_patched_yet">Encara no s\'ha aplicat la correcció</string>
+    <string name="home_no_patches_available">No hi ha pegats disponibles</string>
+    <string name="home_default_source_disabled">La font de \'Morphe\' està deshabilitada. Si us plau, habiliteu-la al full de fonts de pegats o utilitzeu el mode Expert</string>
+    <string name="home_app_hide_title">Amagar aquesta aplicació?</string>
+    <string name="home_app_hide_message">L\'aplicació s\'ocultarà de la pantalla d\'inici. Podeu restaurar-la més endavant utilitzant el botó \'%1$s\' a la part inferior de la llista</string>
+    <string name="home_app_will_be_hidden">Aquesta aplicació s\'ocultarà</string>
+    <string name="home_app_show_hidden">Mostrar aplicacions ocultes</string>
+    <string name="home_app_no_hidden">No hi ha aplicacions ocultes</string>
+    <string name="home_app_hidden_apps_title">Aplicacions ocultes</string>
+    <string name="home_app_hidden_apps_hint">Toca a una app per mostrar-la a la llista de nou</string>
+    <string name="android_11_bug_dialog_title">Error de l\'Android 11</string>
+    <string name="android_11_bug_dialog_description">El permís d\'instal·lació de l\'aplicació s\'ha d\'atorgar amb anterioritat per evitar un error en el sistema Android 11 que afectarà negativament l\'experiència de l\'usuari</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Actualització del gestor disponible</string>
+    <string name="home_update_available_subtitle">Nova versió disponible per instal·lar</string>
     <string name="home_update_error">Actualització fallida</string>
     <string name="home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
+    <string name="home_update_skipped_metered">Actualització ignorada</string>
+    <string name="home_update_skipped_metered_subtitle">Les dades mòbils estan actives</string>
+    <string name="home_updating_sources">Actualitzant fonts…</string>
+    <string name="home_update_progress_format">%1$s processat</string>
+    <string name="home_update_success">Actualització completada</string>
+    <string name="home_update_success_subtitle">Les teves fonts estan actualitzades</string>
+    <string name="home_sources_are_loading">S\'estan carregant les fonts, si us plau espereu…</string>
     <string name="home_please_wait">Espereu...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
