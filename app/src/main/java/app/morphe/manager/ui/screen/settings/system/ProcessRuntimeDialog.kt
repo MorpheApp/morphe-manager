@@ -34,14 +34,22 @@ fun ProcessRuntimeDialog(
 ) {
     val context = LocalContext.current
     // Adaptive upper bound: use device-RAM-based limit, capped at the hard maximum
-    val maxLimit: Int = calculateAdaptiveMemoryLimit(context)
-        .coerceAtMost(PROCESS_RUNTIME_MEMORY_MAX_LIMIT)
+    val maxLimit: Int = calculateAdaptiveMemoryLimit(context).coerceIn(
+        PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION, PROCESS_RUNTIME_MEMORY_MAX_LIMIT
+    )
     var enabled by remember { mutableStateOf(currentEnabled) }
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_process_runtime),
+        footer = {
+            MorpheDialogButton(
+                text = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     ) {
         Column(
             modifier = Modifier

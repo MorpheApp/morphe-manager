@@ -219,7 +219,7 @@ fun PatchOptionsSection(
                         packageName = KnownApp.YOUTUBE_MUSIC,
                         icon = Icons.Outlined.LibraryMusic,
                         title = stringResource(R.string.home_youtube_music),
-                        description = stringResource(R.string.settings_advanced_patch_options_youtube_music_description),
+                        description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = KnownApp.YOUTUBE_MUSIC },
                         onBrandingClick = { showBrandingDialog = KnownApp.YOUTUBE_MUSIC },
