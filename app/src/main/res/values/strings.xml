@@ -19,11 +19,11 @@
     <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
 
     <string name="deep_link_add_source_title">Add source</string>
-    <string name="deep_link_add_source_message">Do you want to add this patch source to Morphe Manager?</string>
+    <string name="deep_link_add_source_message">Do you want to add this patch source to Morphe?</string>
     <string name="deep_link_add_source_warning">Only add source from sources you trust</string>
 
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Manager update available</string>
+    <string name="home_update_available">Morphe update available</string>
     <string name="home_update_available_subtitle">New version ready to install</string>
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
@@ -243,7 +243,7 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
-    <string name="patcher_storage_permission_description_api30">One or more patch options point to paths Morphe manager cannot read. Grant storage access and tap the button then patching will start automatically</string>
+    <string name="patcher_storage_permission_description_api30">One or more patch options point to paths Morphe cannot read. Grant storage access and tap the button then patching will start automatically</string>
     <string name="patcher_storage_permission_description_legacy">One or more patch options point to paths that cannot be accessed. Update the paths in patch options and try again</string>
     <string name="patcher_storage_permission_grant">Grant storage permission</string>
     <string name="patcher_storage_permission_denied_warning">Storage permission was denied. Grant the permission to use this path, or move the files to the app\'s private directory</string>
@@ -369,19 +369,19 @@ Are you sure you want to proceed?"</string>
 
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
-    <string name="settings_advanced_updates_use_prereleases">Use pre-release manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Receive early access to new experimental manager versions. To get pre-release patches, enable the pre-release toggle in each patch source separately</string>
+    <string name="settings_advanced_updates_use_prereleases">Use pre-release Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Receive early access to new Morphe features. To get pre-release patches, enable the pre-release toggle in each patch source separately</string>
     <string name="settings_advanced_updates_allow_metered">Update on mobile data</string>
-    <string name="settings_advanced_updates_allow_metered_description">Allow patch sources and manager updates to download over mobile data</string>
+    <string name="settings_advanced_updates_allow_metered_description">Allow Morphe and patch updates to download over mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodically check for updates in the background and notify when available</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Receive instant push notifications for new releases, even when the app is closed</string>
-    <string name="notification_channel_manager_updates">Manager updates</string>
-    <string name="notification_channel_manager_updates_description">Notifications about new Morphe manager versions</string>
+    <string name="notification_channel_manager_updates">Morphe updates</string>
+    <string name="notification_channel_manager_updates_description">Notifications about new versions of Morphe</string>
     <string name="notification_channel_bundle_updates">Patch sources updates</string>
     <string name="notification_channel_bundle_updates_description">Notifications about new patch source versions</string>
     <string name="notification_channel_fcm_updates">Update alerts</string>
-    <string name="notification_channel_fcm_updates_description">Instant push notifications for new Morphe manager and patch releases. Delivered even when the app is in the background</string>
+    <string name="notification_channel_fcm_updates_description">Instant push notifications for new Morphe and patch releases. Delivered even when the app is in the background</string>
     <string name="settings_advanced_update_interval">Check frequency</string>
     <string name="settings_advanced_update_interval_dialog_title">Check for updates</string>
     <string name="settings_advanced_update_interval_hourly">Once an hour</string>
@@ -391,12 +391,12 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Background check frequency</string>
     <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe manager update available</string>
+    <string name="notification_manager_update_title">Morphe update available</string>
     <string name="notification_bundle_update_title">New patches available</string>
     <string name="notification_update_text">Version %1$s is ready to download</string>
-    <string name="notification_bundle_update_text_unversioned">Tap to open Morphe manager and update</string>
+    <string name="notification_bundle_update_text_unversioned">Tap to open Morphe and update</string>
     <string name="notification_permission_dialog_title">Allow notifications</string>
-    <string name="notification_permission_dialog_description">Morphe manager needs notification permission to alert you when updates are available in the background</string>
+    <string name="notification_permission_dialog_description">Morphe needs notification permission to alert you when updates are available in the background</string>
     <string name="notification_post_patch_dialog_title">Would you like to be notified when updates are available?</string>
 
     <!-- Settings - Advanced Tab - Expert settings Section -->
@@ -416,7 +416,7 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Set GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add pull requests as external sources. Create a PAT with scope public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Include in settings export</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported manager settings</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported Morphe settings</string>
     <string name="settings_advanced_github_pat_export_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token</string>
 
     <!-- Settings - Advanced Tab - Patch Options Section -->
@@ -569,14 +569,14 @@ Details: %2$s"</string>
     <string name="settings_system_hide_password_field">Hide password</string>
 
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Import manager settings</string>
-    <string name="settings_system_import_manager_settings_description">Restore manager settings from a JSON file</string>
-    <string name="settings_system_import_manager_settings_fail">Failed to import manager settings: %s</string>
-    <string name="settings_system_import_manager_settings_success">Manager settings imported</string>
-    <string name="settings_system_export_manager_settings">Export manager settings</string>
-    <string name="settings_system_export_manager_settings_description">Save manager settings to a JSON file</string>
-    <string name="settings_system_export_manager_settings_fail">Failed to export manager settings: %s</string>
-    <string name="settings_system_export_manager_settings_success">Manager settings exported</string>
+    <string name="settings_system_import_manager_settings">Import Morphe settings</string>
+    <string name="settings_system_import_manager_settings_description">Restore Morphe settings from a JSON file</string>
+    <string name="settings_system_import_manager_settings_fail">Failed to import Morphe settings: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe settings imported</string>
+    <string name="settings_system_export_manager_settings">Export Morphe settings</string>
+    <string name="settings_system_export_manager_settings_description">Save Morphe settings to a JSON file</string>
+    <string name="settings_system_export_manager_settings_fail">Failed to export Morphe settings: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe settings exported</string>
 
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
