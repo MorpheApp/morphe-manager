@@ -64,14 +64,19 @@ fun ShapesBackground(
     // Positions are normalised to [0..1] screen space and computed each frame - no fixed grid.
     val shapes = remember {
         listOf(
-            ShapeConfig(0.18f, 0.22f, 1.00f, 1.15f,  0.92f, 1.08f,  0.095f, 0.065f, Vec3(0.25f, 0.70f, 0.45f), ShapeType.TRIANGLE, 0.80f, 195f, 5.5f),
-            ShapeConfig(0.78f, 0.20f, 1.35f, 0.88f,  1.02f, 0.75f,  0.080f, 0.055f, Vec3(0.55f, 0.25f, 0.95f), ShapeType.SQUARE,   0.65f, 170f, 4.0f),
-            ShapeConfig(0.25f, 0.55f, 0.90f, 1.32f,  1.15f, 0.98f,  0.110f, 0.075f, Vec3(0.35f, 0.95f, 0.28f), ShapeType.PENTAGON, 0.55f, 210f, 3.0f),
-            ShapeConfig(0.75f, 0.50f, 1.10f, 0.82f,  0.85f, 1.25f,  0.085f, 0.070f, Vec3(0.85f, 0.38f, 0.65f), ShapeType.TRIANGLE, 0.45f, 180f, 6.0f),
-            ShapeConfig(0.38f, 0.65f, 1.55f, 1.12f,  1.18f, 0.92f,  0.095f, 0.065f, Vec3(0.45f, 0.65f, 1.10f), ShapeType.SQUARE,   0.70f, 220f, 3.5f),
-            ShapeConfig(0.65f, 0.70f, 0.98f, 1.28f,  0.78f, 1.10f,  0.105f, 0.075f, Vec3(0.95f, 0.35f, 0.55f), ShapeType.PENTAGON, 0.60f, 165f, 5.0f),
-            ShapeConfig(0.20f, 0.82f, 1.25f, 0.98f,  1.45f, 0.88f,  0.090f, 0.070f, Vec3(0.65f, 0.85f, 0.38f), ShapeType.TRIANGLE, 0.50f, 200f, 4.5f),
-            ShapeConfig(0.80f, 0.78f, 0.78f, 1.18f,  1.00f, 1.30f,  0.080f, 0.065f, Vec3(0.25f, 0.55f, 0.85f), ShapeType.SQUARE,   0.45f, 185f, 3.0f),
+            //               cx     cy    fx1   fx2   fy1   fy2   ampX   ampY   rotSpeeds               type              depth  scale  stroke  color  alpha
+            // Top third
+            ShapeConfig(0.15f, 0.12f, 1.00f, 1.35f, 0.85f, 1.20f, 0.090f, 0.060f, Vec3(0.30f, 0.80f, 0.50f), ShapeType.TRIANGLE, 0.80f, 235f,  6.5f, 0, 0.20f),
+            ShapeConfig(0.50f, 0.18f, 1.45f, 0.75f, 1.10f, 0.65f, 0.075f, 0.055f, Vec3(0.60f, 0.25f, 1.00f), ShapeType.HEXAGON,  0.65f, 205f,  3.5f, 1, 0.16f),
+            ShapeConfig(0.84f, 0.10f, 0.85f, 1.60f, 0.70f, 1.40f, 0.085f, 0.065f, Vec3(0.45f, 1.05f, 0.30f), ShapeType.PENTAGON, 0.55f, 255f,  2.5f, 2, 0.14f),
+            // Middle third
+            ShapeConfig(0.10f, 0.42f, 1.20f, 0.90f, 1.30f, 0.80f, 0.080f, 0.070f, Vec3(0.90f, 0.40f, 0.70f), ShapeType.SQUARE,   0.45f, 220f,  7.0f, 2, 0.18f),
+            ShapeConfig(0.45f, 0.38f, 0.75f, 1.50f, 0.90f, 1.55f, 0.095f, 0.060f, Vec3(0.50f, 0.70f, 1.20f), ShapeType.TRIANGLE, 0.70f, 265f,  4.0f, 0, 0.16f),
+            ShapeConfig(0.82f, 0.50f, 1.55f, 0.80f, 1.20f, 0.75f, 0.085f, 0.075f, Vec3(1.00f, 0.30f, 0.60f), ShapeType.DIAMOND,  0.60f, 200f,  2.0f, 1, 0.15f),
+            // Bottom third
+            ShapeConfig(0.22f, 0.72f, 0.90f, 1.30f, 0.75f, 1.10f, 0.080f, 0.065f, Vec3(0.70f, 0.90f, 0.40f), ShapeType.PENTAGON, 0.50f, 242f,  5.5f, 1, 0.17f),
+            ShapeConfig(0.58f, 0.68f, 1.30f, 0.70f, 1.50f, 0.90f, 0.075f, 0.070f, Vec3(0.25f, 0.60f, 0.90f), ShapeType.HEXAGON,  0.45f, 224f,  3.0f, 2, 0.15f),
+            ShapeConfig(0.88f, 0.80f, 0.70f, 1.45f, 1.00f, 1.35f, 0.090f, 0.060f, Vec3(0.80f, 0.45f, 0.75f), ShapeType.TRIANGLE, 0.65f, 212f,  8.0f, 0, 0.21f),
         )
     }
 
@@ -108,7 +113,7 @@ fun ShapesBackground(
                     config.ampX * 0.25f * sin(t * twoPi * config.freqX2 / basePeriod + 1.4f)
             val py = config.cy + config.ampY * sin(t * twoPi * config.freqY1 / basePeriod + 0.8f) +
                     config.ampY * 0.20f * cos(t * twoPi * config.freqY2 / basePeriod + 0.3f)
-            Offset(px.coerceIn(0.08f, 0.92f), py.coerceIn(0.08f, 0.92f))
+            Offset(px, py)
         }
     }
 
@@ -134,7 +139,7 @@ fun ShapesBackground(
                     config.ampX * 0.25f * sin(t * twoPi * config.freqX2 / basePeriod + 1.4f)
             val py = config.cy + config.ampY * sin(t * twoPi * config.freqY1 / basePeriod + 0.8f) +
                     config.ampY * 0.20f * cos(t * twoPi * config.freqY2 / basePeriod + 0.3f)
-            Offset(px.coerceIn(0.08f, 0.92f), py.coerceIn(0.08f, 0.92f))
+            Offset(px, py)
         }
 
         shapes.forEachIndexed { i, _ ->
@@ -176,8 +181,10 @@ fun ShapesBackground(
             val totalAngleY = angleY + scatterBoost
             val totalAngleZ = angleZ + scatterBoost * 0.8f
 
-            val alpha = if (sp > 0f) (1f - sp).coerceIn(0f, 1f) * 0.12f else 0.12f
-            val color = when (index % 3) {
+            // Each shape has its own base alpha and color
+            val alpha = if (sp > 0f) (1f - sp).coerceIn(0f, 1f) * config.alpha else config.alpha
+            // Filled shapes need slightly more presence — boost alpha a touch
+            val color = when (config.colorIndex) {
                 0    -> primaryColor
                 1    -> secondaryColor
                 else -> tertiaryColor
@@ -242,7 +249,7 @@ private fun project3D(
     }
 }
 
-/** Draws a closed polygon stroke from the projected 2D vertices. */
+/** Draws a filled + stroked closed polygon from the projected 2D vertices. */
 private fun DrawScope.drawShape3D(vertices: List<Offset>, color: Color, strokeWidth: Float) {
     if (vertices.size < 2) return
     val path = Path().apply {
@@ -250,13 +257,18 @@ private fun DrawScope.drawShape3D(vertices: List<Offset>, color: Color, strokeWi
         for (i in 1 until vertices.size) lineTo(vertices[i].x, vertices[i].y)
         close()
     }
+    // Fill at 40% of stroke alpha so shape reads clearly without being too heavy
+    drawPath(path, color.copy(alpha = color.alpha * 0.4f))
+    // Stroke on top for the crisp outline
     drawPath(path, color, style = Stroke(width = strokeWidth))
 }
 
 private enum class ShapeType {
     TRIANGLE,
     SQUARE,
-    PENTAGON;
+    PENTAGON,
+    HEXAGON,
+    DIAMOND;
 
     /**
      * Returns base 3D vertices normalised to [-1, 1] lying in the XY plane (z = 0).
@@ -275,6 +287,15 @@ private enum class ShapeType {
             val a = -PI.toFloat() / 2f + i * 2f * PI.toFloat() / 5f
             Vec3(cos(a), sin(a), 0f)
         }
+        HEXAGON -> List(6) { i ->
+            val a = i * 2f * PI.toFloat() / 6f
+            Vec3(cos(a), sin(a), 0f)
+        }
+        DIAMOND -> listOf(
+            Vec3( 0f,  -1.3f, 0f), Vec3( 0.8f, -0.2f, 0f),
+            Vec3( 0.5f, 1.0f, 0f), Vec3(-0.5f,  1.0f, 0f),
+            Vec3(-0.8f, -0.2f, 0f)
+        )
     }
 }
 
@@ -291,5 +312,7 @@ private data class ShapeConfig(
     val type: ShapeType,
     val depth: Float,       // Depth for parallax effect
     val scale: Float,       // Rendered size in pixels
-    val strokeWidth: Float  // Outline thickness in pixels
+    val strokeWidth: Float, // Outline thickness in pixels
+    val colorIndex: Int,    // 0=primary, 1=secondary, 2=tertiary
+    val alpha: Float        // Base opacity (0..1)
 )

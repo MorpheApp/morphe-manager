@@ -80,15 +80,14 @@ fun ParticlesBackground(
 
     // explodeProgress 0→1: particles burst from centre, then drift back naturally
     val explodeProgress = remember { Animatable(0f) }
-    val explodeFired    = remember { mutableStateOf(false) }
 
     CompletionEffect(patchingCompleted) {
         coroutineScope.launch {
-            explodeFired.value = true
             explodeProgress.snapTo(0f)
+            // Burst outward
             explodeProgress.animateTo(1f, tween(500, easing = FastOutSlowInEasing))
-            explodeFired.value = false
-            explodeProgress.animateTo(0f, tween(600, easing = FastOutSlowInEasing))
+            // Smooth return — ep goes 1→0 so push gradually decreases to zero
+            explodeProgress.animateTo(0f, tween(800, easing = FastOutSlowInEasing))
         }
     }
 
@@ -151,8 +150,9 @@ fun ParticlesBackground(
             val baseX = p.x * size.width  + tiltX * parallaxStrength
             val baseY = p.y * size.height + tiltY * parallaxStrength
 
-            // During explosion push outward from centre
-            if (ep > 0f && explodeFired.value) {
+            // During explosion push outward from centre — ep smoothly goes 0→1→0
+            // so return is just the same offset shrinking back to zero (no snap)
+            if (ep > 0f) {
                 val dirX  = baseX - cx
                 val dirY  = baseY - cy
                 val eased = ep * ep

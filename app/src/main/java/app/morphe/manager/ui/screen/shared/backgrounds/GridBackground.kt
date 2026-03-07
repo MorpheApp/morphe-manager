@@ -94,7 +94,7 @@ fun GridBackground(
                 val wave = sin(t * twoPi / 3800f - ripplePhase)
 
                 // Base dot radius oscillates with the wave
-                val baseRadius = 4.2f + wave * 2.1f
+                val baseRadius = 5.0f + wave * 2.5f
 
                 // Shockwave: dots near the expanding ring get a strong size boost
                 val distFromWave = kotlin.math.abs(dist - waveRadius)
@@ -114,12 +114,12 @@ fun GridBackground(
                 }
 
                 // Alpha: dims toward edges, brightens near shockwave ring
-                val edgeDim   = (1f - dist / maxDist).coerceIn(0.4f, 1f)
-                val baseAlpha = 0.18f + wave * 0.07f
+                val edgeDim   = (1f - dist / maxDist).coerceIn(0.55f, 1f)
+                val baseAlpha = 0.30f + wave * 0.10f
                 val shockAlpha = if (sw > 0f && distFromWave < waveWidth) {
                     (1f - distFromWave / waveWidth) * 0.18f
                 } else 0f
-                val finalAlpha = ((baseAlpha + shockAlpha) * edgeDim).coerceIn(0f, 0.35f)
+                val finalAlpha = ((baseAlpha + shockAlpha) * edgeDim).coerceIn(0f, 0.50f)
 
                 drawCircle(
                     color  = color.copy(alpha = finalAlpha),
