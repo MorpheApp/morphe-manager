@@ -85,11 +85,11 @@
     <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">APKDescarga el APK original</string>
+    <string name="home_download_instructions_title">Descargar el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>
-    <string name="home_download_instructions_step1">Presiona el botón \'%1$s\' de abajo</string>
-    <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y presiona</string>
-    <string name="home_download_instructions_download_button_toast">Presiona descargar en el sitio web, y no aquí 😊</string>
+    <string name="home_download_instructions_step1">Pulsa el botón \"%1$s\" de abajo</string>
+    <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
+    <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, y no aquí 😊</string>
     <string name="home_download_instructions_step3">Espera a que la descarga se complete, y &lt;b&gt;no instales&lt;/b&gt; el APK</string>
     <string name="home_download_instructions_step3_mount">Espera a que la descarga se complete, luego &lt;b&gt;instala el APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Después de que la descarga termine, vuelve a Morphe</string>
@@ -490,7 +490,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_memory_limit_warning">Un límite de memoria bajo puede causar errores al parchear aplicaciones más grandes</string>
     <string name="settings_system_process_runtime_enabled_description">Límite de %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pulsa para configurar</string>
-    <string name="settings_system_process_runtime_description_not_available">Esta función requiere Android 11 o posterior</string>
+    <string name="settings_system_process_runtime_description_not_available">Esta función requiere Android 11 o superior</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importar y exportar</string>
     <string name="settings_system_import_keystore">Importar almacén de claves</string>

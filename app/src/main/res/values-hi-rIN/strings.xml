@@ -185,6 +185,7 @@
     <string name="home_app_info_app_deleted_description">इस ऐप को बाहर से उन्मोदन किया गया था। मॉर्फी में पुनः स्थापित करें कार्यक्षमता पुनः प्राप्त करने के लिए</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोड के लिए, पैचिंग शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
+    <string name="root_gmscore_excluded">श्ळ लेरे सेप्नि साधार्य लैि लुन्यिानि ला</string>
     <string name="root_pre_patch_installer_title">स्थापना विधि का चयन करें</string>
     <string name="root_pre_patch_installer_description">आपका डिवाइस रूट एक्सेस रखता है। पट्च्ड एप्लिकेशन इंस्टॉल करने का तरीका चुनें।</string>
     <string name="root_pre_patch_installer_mount_title">रूट माउंट</string>
@@ -275,8 +276,13 @@
     <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
     <string name="install_timeout_message">इंस्टॉलेशन पूर्ण नहीं हुई. सिस्टम इंस्टॉलर डायलॉग को जाँचें और पुन: प्रयास करें।</string>
     <string name="save_apk_success">एपीके सहेजा गया</string>
+    <string name="saved_app_export_failed">\"पैच किया गया ऐप एक्सपोर्ट करने में विफल।\"</string>
+    <string name="saved_app_removed_toast">हटाया गया सहेजा गया पैच किया हुआ ऐप</string>
+    <string name="saved_app_copy_removed_toast">हटाया गया सहेजा गया कॉपी</string>
     <string name="saved_app_launch_unavailable">ऐप को खोलने से पहले इंस्टॉल करें।</string>
     <string name="package_name">Package name</string>
+    <string name="failed_to_mount">%s को माउंट करने में विफल</string>
+    <string name="failed_to_unmount">%s को अनमाउंट करने में विफल।</string>
     <!-- Settings -->
     <string name="appearance">स्वरूप</string>
     <string name="advanced">उन्नत</string>
@@ -446,6 +452,7 @@ morphe_header_custom_dark.png
     <string name="installer_auto_saved_description">संस्थापित एप्लिकेशन पर पथचिह्नित एपीके को माउंट करता है</string>
     <string name="installer_shizuku_description">शिज़ुकू या साई को उपयोग करके चुपचाप इंस्टॉल करें</string>
     <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
+    <string name="installer_none_description">कोई बैकअप इंस्टॉलर कॉन्फ़िगर नहीं किया गया है</string>
     <string name="installer_status_requires_root">Requires root access</string>
     <string name="installer_status_not_supported">इस क्रिया के लिए समर्थित नहीं है</string>
     <string name="installer_status_shizuku_not_installed">इस विकल्प का उपयोग करने के लिए शिज़ुकू या साई इंस्टॉल करें</string>
@@ -630,14 +637,20 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">आयम…</string>
     <string name="changelog">चंगेलॉग्स देखें</string>
     <string name="changelog_description">इस अपडेट में नवीनतम बदलाव देखें</string>
+    <string name="changelog_download_fail">परिवर्तन लॉग डाउनलोड करने में विफल: %s</string>
     <string name="changelog_retry">पुनः प्रयास करें</string>
     <string name="changelog_empty">कोई चेंजलॉग उपलब्ध नहीं है</string>
     <string name="no_network_toast">इंटरनेट कनेक्शन उपलब्ध नहीं है</string>
     <string name="update_available">An update is available</string>
     <string name="ready_to_install_update">Ready to install update</string>
     <string name="update_completed">अपडेट इंस्टॉल हो गया</string>
+    <string name="install_update_manager_failed">अपडेट स्थापित करने में विफल</string>
     <string name="installing_manager_update">अपडेट इंस्टॉल हो रहा है…</string>
     <string name="downloading_manager_update">अपडेट डाउनलोड हो रहा है…</string>
+    <string name="download_manager_failed">अपडेट डाउनलोड करने में विफल: %s</string>
+    <string name="failed_to_check_updates">अपडेट के लिए जाँच करने में विफल: %s</string>
+    <string name="failed_to_download_update">अपडेट डाउनलोड करने में विफल: %s</string>
+    <string name="resume_download">डाउनलोड फिर से शुरू करें</string>
     <string name="download_confirmation_metered">"आप मापित कनेक्शन पर हैं, और आपके सेवा प्रदाता से डेटा चार्ज लागू हो सकते हैं.
 
 क्या आप अभी भी आगे बढ़ना चाहते हैं?"</string>

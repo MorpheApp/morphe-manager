@@ -490,7 +490,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">Низький ліміт пам’яті може спричинити збій при патчінгу великих застосунків</string>
     <string name="settings_system_process_runtime_enabled_description">%s МБ ліміт</string>
     <string name="settings_system_process_runtime_disabled_description">Натисніть для налаштування</string>
-    <string name="settings_system_process_runtime_description_not_available">Ця функція вимагає Android 11 або вище</string>
+    <string name="settings_system_process_runtime_description_not_available">Для цієї функції потрібна версія Android 11 або новіша</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Імпорт та eкспорт</string>
     <string name="settings_system_import_keystore">Імпорт сховища ключів</string>

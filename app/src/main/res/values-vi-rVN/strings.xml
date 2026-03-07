@@ -125,8 +125,8 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Không tương thích</string>
     <string name="home_dialog_wrong_package_title">Chọn sai gói rồi</string>
     <string name="home_dialog_wrong_package_description">APK đã chọn không dành cho ứng dụng mà bạn định vá</string>
-    <string name="home_dialog_expected_package">Gói yêu cầu:</string>
-    <string name="home_dialog_selected_package">Gói đã chọn:</string>
+    <string name="home_dialog_expected_package">Cần gói:</string>
+    <string name="home_dialog_selected_package">Nhưng bạn lại chọn gói:</string>
     <string name="home_outdated_patches_dialog_title">Một số bản vá có thể đã cũ</string>
     <string name="home_outdated_patches_dialog_message">Bạn đang bật dữ liệu di động vì vậy tự động cập nhật bản vá sẽ bị tắt</string>
     <string name="home_outdated_patches_dialog_warning">Sử dụng các bản vá cũ có thể khiến ứng dụng bị hỏng</string>
