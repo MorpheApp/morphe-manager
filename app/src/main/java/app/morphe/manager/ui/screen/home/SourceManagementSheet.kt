@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.APIPatchBundle
@@ -69,7 +70,7 @@ import java.net.URL
 @Composable
 fun BundleManagementSheet(
     onDismissRequest: () -> Unit,
-    onAddBundle: () -> Unit,
+    onAddSource: () -> Unit,
     onDelete: (PatchBundleSource) -> Unit,
     onDisable: (PatchBundleSource) -> Unit,
     onUpdate: (PatchBundleSource) -> Unit,
@@ -143,7 +144,7 @@ fun BundleManagementSheet(
                     }
 
                     FilledIconButton(
-                        onClick = onAddBundle,
+                        onClick = onAddSource,
                         colors = IconButtonDefaults.filledIconButtonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer
                         )
@@ -730,6 +731,7 @@ fun BundleIcon(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
+    val bundleAvatarUrl = bundle.bundleAvatarUrl
     val githubAvatarUrl = bundle.githubAvatarUrl
 
     val animatedColor by animateColorAsState(
@@ -768,9 +770,10 @@ fun BundleIcon(
                 )
             }
 
-            githubAvatarUrl != null -> {
+            bundleAvatarUrl != null || githubAvatarUrl != null -> {
                 RemoteAvatar(
-                    url = githubAvatarUrl,
+                    url = bundleAvatarUrl ?: githubAvatarUrl!!,
+                    fallbackUrl = if (bundleAvatarUrl != null) githubAvatarUrl else null,
                     modifier = Modifier.fillMaxSize()
                 )
             }
@@ -793,12 +796,14 @@ fun BundleIcon(
 @Composable
 private fun RemoteAvatar(
     url: String,
+    fallbackUrl: String? = null,
     modifier: Modifier = Modifier
 ) {
     var bitmap by remember(url) { mutableStateOf<Bitmap?>(null) }
 
-    LaunchedEffect(url) {
+    LaunchedEffect(url, fallbackUrl) {
         bitmap = loadGitHubAvatar(url)
+            ?: fallbackUrl?.let { loadGitHubAvatar(it) }
     }
 
     if (bitmap != null) {
