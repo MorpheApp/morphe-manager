@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Tryck på en app om du vill visa den i listan igen</string>
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
+    <string name="deep_link_add_source_title">Lägg till källa</string>
+    <string name="deep_link_add_source_message">Vill du lägga till den här korrigeringskällan i Morphe?</string>
+    <string name="deep_link_add_source_warning">Lägg bara till källor från källor du litar på</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Uppdatering för Manager är tillgänglig</string>
+    <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
     <string name="home_update_error">Uppdateringen misslyckades</string>
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
@@ -149,6 +152,7 @@
     <string name="adaptive_icon_safe_zone_outer">Maskzon (kan beskäras)</string>
     <string name="adaptive_icon_created_success">Adaptiv ikon har skapats</string>
     <string name="adaptive_icon_creation_failed">Det gick inte att skapa adaptiv ikon</string>
+    <string name="adaptive_icon_folder_explanation">Välj var mappen \"%1$s/%2$s\" ska skapas med genererade ikonfiler</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Skapa anpassat sidhuvud</string>
     <string name="header_creator_instructions">Välj bilder för ljust och mörkt tema, och justera sedan genom att nypa</string>
@@ -157,6 +161,7 @@
     <string name="header_creator_no_image">Ingen bild har valts</string>
     <string name="header_creator_success">Sidhuvud har skapats</string>
     <string name="header_creator_failed">Det gick inte att skapa sidhuvud</string>
+    <string name="header_creator_folder_explanation">Välj var mappen \"%1$s/%2$s\" ska skapas med genererade sidhuvudfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
     <string name="home_app_info_remove_app_warning">Det här tar bort följande permanent:</string>
@@ -197,7 +202,7 @@
     <string name="patcher_installing_subtitle">Nästan redo att rocka loss! 🎸</string>
     <string name="patcher_success_title">Klart! 🎉</string>
     <string name="patcher_success_subtitle">Din app är korrigerad och installerad!</string>
-    <string name="patcher_complete_title">Korrigeringen är klar! ✨</string>
+    <string name="patcher_complete_title">Appkorrigeringen är klar! ✨</string>
     <string name="patcher_failed_title">Hoppsan! Något gick fel</string>
     <string name="patcher_failed_subtitle">Kontrollera felinformationen nedan</string>
     <string name="patcher_failed_dialog_title">Korrigeringen misslyckades</string>
@@ -209,7 +214,7 @@
     <string name="patcher_ready_to_install_subtitle">Tryck på knappen nedan för att installera</string>
     <string name="patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
     <string name="patcher_storage_permission_dialog_title">Det går inte att komma åt lagringssökväg</string>
-    <string name="patcher_storage_permission_description_api30">En eller fler korrigeringsalternativ pekar på sökvägar som Morphe Manager inte kan läsa. Ge åtkomst till lagringen och tryck på knappen så startas korrigeringen automatiskt</string>
+    <string name="patcher_storage_permission_description_api30">En eller fler korrigeringsalternativ pekar på sökvägar som Morphe inte kan läsa. Ge åtkomst till lagringen och tryck på knappen så startas appkorrigeringen automatiskt</string>
     <string name="patcher_storage_permission_description_legacy">En eller fler korrigeringsalternativ pekar på sökvägar som inte går att komma åt. Uppdatera sökvägarna i korrigeringsalternativen och försök igen</string>
     <string name="patcher_storage_permission_grant">Ge åtkomst till lagring</string>
     <string name="patcher_storage_permission_denied_warning">Åtkomst till lagringen nekades. Ge behörighet att använda sökvägen eller flytta filerna till appens privata katalog</string>
@@ -228,8 +233,8 @@
     <string name="patcher_step_sign_apk">Signerar korrigerad APK-fil</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Korrigering pågår …</string>
-    <string name="patcher_notification_text">Tryck för att återgå till korrigeringen</string>
-    <string name="patcher_stop_confirm_title">Stoppa korrigeringen</string>
+    <string name="patcher_notification_text">Tryck för att återgå till appkorrigeringen</string>
+    <string name="patcher_stop_confirm_title">Stoppa appkorrigeringen</string>
     <string name="patcher_stop_confirm_description">Är du säker på att du vill stoppa korrigeringsprocessen?</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">Omvandlar din app till något fantastiskt … 🏆</string>
@@ -258,6 +263,8 @@
     <string name="patcher_message_19">Din app har feber, och det enda botemedlet är fler korrigeringar … 🩺🔔</string>
     <string name="patcher_message_20">Tar bort nonsens. Var god dröj … 🗑️</string>
     <!-- Expert patcher Screen -->
+    <string name="patching_app">Korrigerar appen</string>
+    <string name="memory_usage">Minnesanvändning</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Tillämpar korrigeringar</string>
     <string name="failed_to_execute_patch">Det gick inte att tillämpa %s</string>
@@ -265,7 +272,7 @@
     <string name="patched_app_save_failed_toast">Det gick inte att spara den korrigerade appen</string>
     <string name="download_apk">Ladda ned APK-fil</string>
     <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med det här plugin-programmet</string>
-    <string name="patcher_process_exit_message">Korrigeringsprocessen avslutades med koden %1$s</string>
+    <string name="patcher_process_exit_message">Appkorrigeringsprocessen avslutades med koden %1$s</string>
     <string name="install_app_success">Installationen lyckades</string>
     <string name="install_app_fail">Det gick inte att installera appen: %s</string>
     <string name="install_timeout_message">Installationen slutfördes inte. Kontrollera systemets installationsdialogruta och försök igen</string>
@@ -319,19 +326,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ändra ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Uppdateringar</string>
-    <string name="settings_advanced_updates_use_prereleases">Använd förhandsversioner av Manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Få tidig åtkomst till nya experimentella Manager-versioner. Om du vill få förhandsversioner av korrigeringar aktiverar du reglaget för förhandsversioner i varje enskild källa</string>
+    <string name="settings_advanced_updates_use_prereleases">Använd förhandsversioner av Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Få tidig åtkomst till nya Morphe-funktioner. Om du vill få förhandsversioner av korrigeringar aktiverar du reglaget för förhandsversioner i varje enskild korrigeringskälla</string>
     <string name="settings_advanced_updates_allow_metered">Uppdatera via mobildata</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tillåt att uppdateringar för korrigeringskällor och Manager laddas ned via mobildata</string>
+    <string name="settings_advanced_updates_allow_metered_description">Tillåt att uppdateringar för Morphe och korrigeringar laddas ned via mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Aviseringar om uppdateringar i bakgrunden</string>
     <string name="settings_advanced_updates_background_notifications_description">Sök regelbundet efter uppdateringar i bakgrunden och avisera när de är tillgängliga</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Få direkta pushmeddelanden om nya versioner, även när appen är stängd</string>
-    <string name="notification_channel_manager_updates">Uppdateringar för Manager</string>
-    <string name="notification_channel_manager_updates_description">Aviseringar om nya versioner för Morphe Manager</string>
+    <string name="notification_channel_manager_updates">Uppdateringar för Morphe</string>
+    <string name="notification_channel_manager_updates_description">Aviseringar om nya versioner av Morphe</string>
     <string name="notification_channel_bundle_updates">Uppdateringar för korrigeringskällor</string>
     <string name="notification_channel_bundle_updates_description">Aviseringar om nya versioner för korrigeringskällor</string>
     <string name="notification_channel_fcm_updates">Aviseringar om uppdateringar</string>
-    <string name="notification_channel_fcm_updates_description">Direkta pushmeddelanden om nya versioner av Morphe Manager och korrigeringar. Levereras även när appen är i bakgrunden</string>
+    <string name="notification_channel_fcm_updates_description">Direkta pushmeddelanden om nya versioner av Morphe och korrigeringar. Levereras även när appen är i bakgrunden</string>
     <string name="settings_advanced_update_interval">Sökningsfrekvens</string>
     <string name="settings_advanced_update_interval_dialog_title">Sök efter uppdateringar</string>
     <string name="settings_advanced_update_interval_hourly">En gång i timmen</string>
@@ -341,12 +348,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">Sökningsfrekvens i bakgrunden</string>
     <string name="settings_advanced_update_interval_battery_warning">Sökningar i bakgrunden kanske inte fungerar tillförlitligt på vissa enheter. Tillverkare som Xiaomi, Huawei, Samsung och OnePlus begränsar ofta aggressivt bakgrundsprocesser för att spara batteri</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Uppdatering för Morphe Manager är tillgänglig</string>
+    <string name="notification_manager_update_title">Uppdatering för Morphe är tillgänglig</string>
     <string name="notification_bundle_update_title">Nya korrigeringar är tillgängliga </string>
     <string name="notification_update_text">Version %1$s är redo att laddas ned</string>
-    <string name="notification_bundle_update_text_unversioned">Tryck för att öppna Morphe Manager och uppdatera</string>
+    <string name="notification_bundle_update_text_unversioned">Tryck för att öppna Morphe och uppdatera</string>
     <string name="notification_permission_dialog_title">Tillåt aviseringar</string>
-    <string name="notification_permission_dialog_description">Morphe Manager behöver behörighet för aviseringar för att kunna meddela dig när uppdateringar är tillgängliga i bakgrunden</string>
+    <string name="notification_permission_dialog_description">Morphe behöver behörighet att skicka aviseringar för att kunna meddela dig när uppdateringar är tillgängliga i bakgrunden</string>
     <string name="notification_post_patch_dialog_title">Vill du få aviseringar när uppdateringar är tillgängliga?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
@@ -364,12 +371,11 @@
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken (PAT) för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en PAT med omfattningen public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till din PAT i exporterade Manager-inställningar</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till denna PAT i exporterade Morphe-inställningar</string>
     <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Korrigeringsalternativ</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, varumärkning, sidhuvud och Shorts-alternativ</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Tema- och varumärkningsalternativ</string>
+    <string name="settings_advanced_patch_options_youtube_description">Alternativ för tema, varumärke och sidhuvud</string>
     <string name="settings_advanced_patch_options_restart_message">Om du ändrar korrigeringsalternativen måste du korrigera appen igen för att ändringarna ska träda i kraft</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I expertläget blir korrigeringsalternativ tillgängliga under korrigeringsprocessen</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -484,6 +490,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_memory_limit_warning">En låg minnesgräns kan leda till fel när du korrigerar större appar</string>
     <string name="settings_system_process_runtime_enabled_description">Gräns på %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Tryck för att konfigurera</string>
+    <string name="settings_system_process_runtime_description_not_available">Den här funktionen kräver Android 11 eller senare</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Importera och exportera</string>
     <string name="settings_system_import_keystore">Importera nyckellager</string>
@@ -503,14 +510,14 @@ Bildernas mått ska vara följande:
     <string name="settings_system_show_password_field">Visa lösenord</string>
     <string name="settings_system_hide_password_field">Dölj lösenord</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importera Manager-inställningar</string>
-    <string name="settings_system_import_manager_settings_description">Återställ Manager-inställningar från en JSON-fil</string>
-    <string name="settings_system_import_manager_settings_fail">Det gick inte att importera Manager-inställningar: %s</string>
-    <string name="settings_system_import_manager_settings_success">Manager-inställningar importerade</string>
-    <string name="settings_system_export_manager_settings">Exportera Manager-inställningar</string>
-    <string name="settings_system_export_manager_settings_description">Spara Manager-inställningar i en JSON-fil</string>
-    <string name="settings_system_export_manager_settings_fail">Det gick inte att exportera Manager-inställningar: %s</string>
-    <string name="settings_system_export_manager_settings_success">Manager-inställningar exporterade</string>
+    <string name="settings_system_import_manager_settings">Importera Morphe-inställningar</string>
+    <string name="settings_system_import_manager_settings_description">Återställ Morphe-inställningar från en JSON-fil</string>
+    <string name="settings_system_import_manager_settings_fail">Det gick inte att importera Morphe-inställningar: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe-inställningar importerade</string>
+    <string name="settings_system_export_manager_settings">Exportera Morphe-inställningar</string>
+    <string name="settings_system_export_manager_settings_description">Spara Morphe-inställningar i en JSON-fil</string>
+    <string name="settings_system_export_manager_settings_fail">Det gick inte att exportera Morphe-inställningar: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe-inställningar exporterade</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Felsökning</string>
     <string name="settings_system_export_debug_logs">Exportera felsökningsloggar</string>
@@ -542,13 +549,13 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patch_selection_reset_package_confirm_title">Återställ paketurval?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Återställ källurval?</string>
     <string name="settings_system_patch_selection_no_saved">Inga sparade korrigeringsurval</string>
-    <string name="settings_system_patch_selection_total_summary_format">%1$s från %2$s</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Källa %s</string>
     <string name="settings_system_patch_selection_will_delete">Det här tar bort:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Det här tar bort alla sparade korrigeringsurval för alla paket och källor permanent</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Det här tar bort alla sparade korrigeringsurval för %s från alla källor permanent</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Det här tar bort sparade korrigeringsurval för %1$s i källa %2$s permanent</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Det här tar bort alla sparade korrigeringsurval för %s i alla källor permanent</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Det här tar bort det sparade korrigeringsurvalet för %1$s i källa %2$s permanent</string>
     <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
     <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
     <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
@@ -623,6 +630,7 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="details">Information</string>
     <string name="hide">Dölj</string>
     <string name="default_">Standard</string>
+    <string name="logs">Loggar</string>
     <string name="installing_ellipsis">Installerar …</string>
     <string name="mounting_ellipsis">Monterar …</string>
     <string name="unmounting_ellipsis">Avmonterar …</string>

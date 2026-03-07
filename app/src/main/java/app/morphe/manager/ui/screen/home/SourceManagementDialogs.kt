@@ -48,7 +48,7 @@ import org.koin.compose.koinInject
  */
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AddBundleDialog(
+fun AddSourceDialog(
     onDismiss: () -> Unit,
     onLocalSubmit: () -> Unit,
     onRemoteSubmit: (url: String) -> Unit,
