@@ -1,3 +1,10 @@
+# app [1.11.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.4...v1.11.0-dev.5) (2026-03-07)
+
+
+### Features
+
+* add Kurmanji (kmr-TR) language support ([516c200](https://github.com/MorpheApp/morphe-manager/commit/516c2001ebac4b6530d7560bf2797270a0d7942c))
+
 # app [1.11.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.3...v1.11.0-dev.4) (2026-03-05)
 
 
