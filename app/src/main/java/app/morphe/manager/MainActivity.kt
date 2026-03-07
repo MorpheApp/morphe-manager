@@ -88,7 +88,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        // Called when the app is already running and the user taps an FCM notification
         val vm: MainViewModel = getActivityViewModel()
         handleUpdateCheckIntent(intent, vm)
         handleDeepLinkIntent(intent, vm)
@@ -109,10 +108,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Handles deep links for adding patch sources.
-     * Formats:
-     *   https://morphe.software/add-source?url=https://github.com/owner/repo
-     *   https://morphe.software/add-source?github=owner/repo
-     * Optional: &name=Display+Name
+     * Format: https://morphe.software/add-source?github=owner/repo[&name=Display+Name]
      * Only GitHub URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
@@ -122,16 +118,8 @@ class MainActivity : AppCompatActivity() {
                 data.path?.startsWith("/add-source") == true
         if (!isAddSource) return
 
-        val url = data.getQueryParameter("url")?.takeIf { it.isNotBlank() }
-            ?: data.getQueryParameter("github")?.takeIf { it.isNotBlank() }
-                ?.let { "https://github.com/$it" }
-            ?: return
-
-        // Only allow GitHub URLs for safety
-        val host = runCatching { java.net.URI(url).host?.lowercase() }.getOrNull()
-        val isGitHub = host == "github.com" || host == "raw.githubusercontent.com"
-        if (!isGitHub) return
-
+        val repo = data.getQueryParameter("github")?.takeIf { it.isNotBlank() } ?: return
+        val url = "https://github.com/$repo"
         val name = data.getQueryParameter("name")?.takeIf { it.isNotBlank() }
         vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(url = url, name = name)
     }
