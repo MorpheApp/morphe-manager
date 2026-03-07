@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">點選應用程式以再次顯示在列表中</string>
     <string name="android_11_bug_dialog_title">Android 11 相關問題</string>
     <string name="android_11_bug_dialog_description">必須提前授予應用程式安裝權限，以避免 Android 11 系統中的錯誤影響使用者體驗</string>
+    <string name="deep_link_add_source_title">新增來源</string>
+    <string name="deep_link_add_source_message">您是否要將此修補程式來源新增至 Morphe？</string>
+    <string name="deep_link_add_source_warning">僅從您信任的來源新增修補程式</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">管理工具有可用的更新</string>
+    <string name="home_update_available">Morphe 更新可用</string>
     <string name="home_update_available_subtitle">準備安裝新版本</string>
     <string name="home_update_error">更新失敗</string>
     <string name="home_update_error_subtitle">請檢查網際網路連線，然後再試一次</string>
@@ -213,7 +216,7 @@
     <string name="patcher_ready_to_install_subtitle">按下下方按鈕即可安裝</string>
     <string name="patcher_ready_to_mount_subtitle">按下下方按鈕即可掛載</string>
     <string name="patcher_storage_permission_dialog_title">無法存取儲存路徑</string>
-    <string name="patcher_storage_permission_description_api30">一或多個補丁選項指向Morphe管理員無法讀取的路徑。授予存取權限並點擊按鈕，然後補丁將自動啟動</string>
+    <string name="patcher_storage_permission_description_api30">一個或多個修補程式選項指向 Morphe 無法讀取的路徑。請授予儲存空間存取權，然後點擊按鈕，修補程式將自動開始。</string>
     <string name="patcher_storage_permission_description_legacy">一或多個補丁選項指向無法存取的路徑。更新補丁選項中的路徑並重試</string>
     <string name="patcher_storage_permission_grant">授予存取權限</string>
     <string name="patcher_storage_permission_denied_warning">存儲權限已被拒絕。授予權限以使用此路徑，或將檔案移至應用程式的私有目錄</string>
@@ -325,19 +328,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">變更圖示</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
-    <string name="settings_advanced_updates_use_prereleases">使用預發布版本管理員</string>
-    <string name="settings_advanced_updates_use_prereleases_description">提前接收新實驗性管理員版本。要取得預先發布補丁，請在每個補丁來源單獨啟用預先發布切換</string>
+    <string name="settings_advanced_updates_use_prereleases">使用預發布版 Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">接收最新的 Morphe 功能搶先體驗。要取得預發布版本修補程式，請在每個修補程式來源中分別啟用預發布版本切換開關</string>
     <string name="settings_advanced_updates_allow_metered">使用行動數據更新</string>
-    <string name="settings_advanced_updates_allow_metered_description">允許補丁源和管理工具更新在使用行動數據時進行下載</string>
+    <string name="settings_advanced_updates_allow_metered_description">允許 Morphe 和修補程式更新透過行動數據下載</string>
     <string name="settings_advanced_updates_background_notifications">背景更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">定期在背景檢查更新並在可用時通知</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">即使應用程式關閉，也能收到新版本的即時推送通知</string>
-    <string name="notification_channel_manager_updates">管理工具更新</string>
-    <string name="notification_channel_manager_updates_description">有關新的 Morphe 管理工具版本的通知</string>
+    <string name="notification_channel_manager_updates">Morphe 更新</string>
+    <string name="notification_channel_manager_updates_description">關於 Morphe 新版本的通知</string>
     <string name="notification_channel_bundle_updates">修補來源更新</string>
     <string name="notification_channel_bundle_updates_description">有關新版本源代碼的通知</string>
     <string name="notification_channel_fcm_updates">更新警示</string>
-    <string name="notification_channel_fcm_updates_description">即時推播最新的 Morphe 管理工具與修補發布通知；即使應用程式處於背景狀態，也能準確送達</string>
+    <string name="notification_channel_fcm_updates_description">即時推播最新的 Morphe 與修補程式發布通知；即使應用程式處於背景狀態，也能準確送達</string>
     <string name="settings_advanced_update_interval">檢查頻率</string>
     <string name="settings_advanced_update_interval_dialog_title">檢查更新</string>
     <string name="settings_advanced_update_interval_hourly">每小時一次</string>
@@ -347,12 +350,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">背景檢查頻率</string>
     <string name="settings_advanced_update_interval_battery_warning">由於小米、華為、三星及一加等手機廠商為了延長續航力，通常會嚴格限制背景處理程序的執行，這可能導致背景檢查功能在這些裝置上無法穩定運作。</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe 管理工具有可用的更新</string>
+    <string name="notification_manager_update_title">Morphe 更新可用</string>
     <string name="notification_bundle_update_title">新的修補程式可用</string>
     <string name="notification_update_text">版本 %1$s 準備下載</string>
-    <string name="notification_bundle_update_text_unversioned">輕觸即可開啟 Morphe 管理工具並更新</string>
+    <string name="notification_bundle_update_text_unversioned">輕觸即可開啟 Morphe 並更新</string>
     <string name="notification_permission_dialog_title">允許通知</string>
-    <string name="notification_permission_dialog_description">Morphe 管理工具需要通知權限，以便在背景有可用更新時提醒你</string>
+    <string name="notification_permission_dialog_description">Morphe 需要通知權限，以便在背景有可用更新時提醒你</string>
     <string name="notification_post_patch_dialog_title">你想收到更新可用通知嗎？</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">進階設定</string>
@@ -370,12 +373,11 @@
     <string name="settings_advanced_github_pat_dialog_title">設定 GitHub 個人存取權杖</string>
     <string name="settings_advanced_github_pat_dialog_description">設定 GitHub 個人存取權杖 (PAT)，以便將 Pull Request 新增為外部來源。請前往 github.com 建立一個具備 public_repo 權限範圍的 PAT。</string>
     <string name="settings_advanced_github_pat_export_include_label">包含在設定匯出中</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">將這個 PAT 新增到匯出的管理工具設定中</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">將此 PAT 新增到匯出的 Morphe 設定中</string>
     <string name="settings_advanced_github_pat_export_warning">請勿分享你的 PAT（個人存取權杖）。如果你在匯出設定時包含了它，請務必妥善保管該檔案，因為其中包含你的存取權杖。</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">修補選項</string>
-    <string name="settings_advanced_patch_options_youtube_description">主題、品牌、標頭和 Shorts 選項</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">主題和品牌選項</string>
+    <string name="settings_advanced_patch_options_youtube_description">主題、品牌和標題選項</string>
     <string name="settings_advanced_patch_options_restart_message">變更修補選項需要重新修補應用程式才能生效</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">在專家模式下，修補選項將在修補過程中可用</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -508,14 +510,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_show_password_field">顯示密碼</string>
     <string name="settings_system_hide_password_field">隱藏密碼</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">匯入管理工具設定</string>
-    <string name="settings_system_import_manager_settings_description">從 JSON 檔案還原管理工具設定</string>
-    <string name="settings_system_import_manager_settings_fail">無法匯入管理工具設定：%s</string>
-    <string name="settings_system_import_manager_settings_success">已匯入管理工具設定</string>
-    <string name="settings_system_export_manager_settings">匯出管理工具設定</string>
-    <string name="settings_system_export_manager_settings_description">將管理工具設定儲存到 JSON 檔案</string>
-    <string name="settings_system_export_manager_settings_fail">無法匯出管理工具設定：%s</string>
-    <string name="settings_system_export_manager_settings_success">已匯出管理工具設定</string>
+    <string name="settings_system_import_manager_settings">匯入 Morphe 設定</string>
+    <string name="settings_system_import_manager_settings_description">從 JSON 檔案還原 Morphe 設定</string>
+    <string name="settings_system_import_manager_settings_fail">匯入 Morphe 設定失敗：%s</string>
+    <string name="settings_system_import_manager_settings_success">已匯入 Morphe 設定</string>
+    <string name="settings_system_export_manager_settings">匯出 Morphe 設定</string>
+    <string name="settings_system_export_manager_settings_description">將 Morphe 設定儲存到 JSON 檔案</string>
+    <string name="settings_system_export_manager_settings_fail">匯出 Morphe 設定失敗：%s</string>
+    <string name="settings_system_export_manager_settings_success">已匯出 Morphe 設定</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">偵錯</string>
     <string name="settings_system_export_debug_logs">匯出偵錯記錄</string>

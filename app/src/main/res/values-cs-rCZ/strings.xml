@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Klikněte na aplikaci, abyste ji zobrazili v seznamu znovu</string>
     <string name="android_11_bug_dialog_title">Chyba Androidu 11</string>
     <string name="android_11_bug_dialog_description">Oprávnění k instalaci aplikací musí být uděleno předem, abyste se vyhnuli chybě v systému Android 11, která negativně ovlivňuje uživatelský zážitek</string>
+    <string name="deep_link_add_source_title">Přidat zdroj</string>
+    <string name="deep_link_add_source_message">Chcete přidat tento zdroj záplaty do Morphe?</string>
+    <string name="deep_link_add_source_warning">Přidávejte zdroje pouze z důvěryhodných zdrojů</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Aktualizace Manageru k dispozici</string>
+    <string name="home_update_available">Dostupná aktualizace Morphe</string>
     <string name="home_update_available_subtitle">Připravena nová verze k instalaci</string>
     <string name="home_update_error">Aktualizace selhala</string>
     <string name="home_update_error_subtitle">Zkontrolujte připojení k internetu a zkuste to znovu</string>
@@ -213,7 +216,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="patcher_ready_to_install_subtitle">Stiskněte tlačítko níže pro instalaci</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
     <string name="patcher_storage_permission_dialog_title">Nelze přistupovat k cestě úložiště</string>
-    <string name="patcher_storage_permission_description_api30">Jeden nebo více možnosti pro patchování ukazují na cesty, které Morphe manager nemůže číst. Povolte přístup k úložišti a klepněte na tlačítko, pak se automaticky začne patchování</string>
+    <string name="patcher_storage_permission_description_api30">Jedna nebo více možností záplaty odkazuje na cesty, které Morphe nemůže číst. Udělte oprávnění ke úložišti a klepněte na tlačítko, poté se záplatování spustí automaticky</string>
     <string name="patcher_storage_permission_description_legacy">Jeden nebo více možnosti pro patchování ukazují na cesty, které nelze přistupovat. Upravte cesty v možnostech pro patchování a zkuste to znovu</string>
     <string name="patcher_storage_permission_grant">Povolte přístup k úložišti</string>
     <string name="patcher_storage_permission_denied_warning">Oprávnění pro úložiště bylo zamítnuto. Povolte oprávnění pro použití této cesty, nebo přesuňte soubory do soukromého adresáře aplikace.</string>
@@ -325,19 +328,19 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Změnit ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizace</string>
-    <string name="settings_advanced_updates_use_prereleases">Použít předběžné verze</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Získejte předběžný přístup k novým experimentálním verzím manažera. Pro získání předběžných patche zapněte předběžný přepínač u každé zdrojové lokace odděleně.</string>
+    <string name="settings_advanced_updates_use_prereleases">Použít předběžnou verzi Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Získejte předběžný přístup k novým funkcím Morphe. Pro získání předběžných verzí oprav povolte přepínač předběžné verze v každém zdroji oprav samostatně</string>
     <string name="settings_advanced_updates_allow_metered">Aktualizovat přes mobilní data</string>
-    <string name="settings_advanced_updates_allow_metered_description">Povolovat stahování zdrojů patčů a aktualizací správce přes mobilní data</string>
+    <string name="settings_advanced_updates_allow_metered_description">Povolit Morphe a aktualizace oprav ke stažení přes mobilní data</string>
     <string name="settings_advanced_updates_background_notifications">Aktualizace pozadí</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodicky ověřujte aktualizace v pozadí a upozorněte, když jsou k dispozici.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Přijímat okamžité notifikace pro nové vydání, dokonce i když je aplikace uzavřena</string>
-    <string name="notification_channel_manager_updates">Spravovat aktualizace</string>
-    <string name="notification_channel_manager_updates_description">Notifikace o nových verzích Morphe</string>
+    <string name="notification_channel_manager_updates">Aktualizace Morphe</string>
+    <string name="notification_channel_manager_updates_description">Oznámení o nových verzích Morphe</string>
     <string name="notification_channel_bundle_updates">Aktualizace zdrojů záplat</string>
     <string name="notification_channel_bundle_updates_description">Upozornění na novou verzi zdrojového kódu</string>
     <string name="notification_channel_fcm_updates">Aktualizovat upozornění</string>
-    <string name="notification_channel_fcm_updates_description">Okamžité tlačítka pro nové Morpheho manažer a záplatové vydání. Doručeno i když aplikace je ve fonu.</string>
+    <string name="notification_channel_fcm_updates_description">Okamžitá push oznámení pro nové Morphe a vydání oprav. Doručena i když aplikace běží na pozadí</string>
     <string name="settings_advanced_update_interval">Častota kontroly</string>
     <string name="settings_advanced_update_interval_dialog_title">Zkontrolovat aktualizace</string>
     <string name="settings_advanced_update_interval_hourly">Jednou za hodinu</string>
@@ -347,12 +350,12 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Častota kontroly v pozadí</string>
     <string name="settings_advanced_update_interval_battery_warning">Kontroly v pozadí nemusí fungovat spolehlivě na některých zařízeních. Výrobci jako Xiaomi, Huawei, Samsung a OnePlus často agresivně omezují procesy v pozadí pro úsporu baterie.</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Aktualizace Morpheho manažeru k dispozici</string>
+    <string name="notification_manager_update_title">Dostupná aktualizace Morphe</string>
     <string name="notification_bundle_update_title">Nové záplaty k dispozici</string>
     <string name="notification_update_text">Verze %1$s je připravena ke stažení</string>
-    <string name="notification_bundle_update_text_unversioned">Klikněte pro otevření Morpheho manažeru a aktualizaci</string>
+    <string name="notification_bundle_update_text_unversioned">Klepněte pro otevření Morphe a aktualizaci</string>
     <string name="notification_permission_dialog_title">Povolit upozornění</string>
-    <string name="notification_permission_dialog_description">Morpheho manažer potřebuje povolení pro upozornění, abychom vás informovali o dostupných aktualizacích v pozadí</string>
+    <string name="notification_permission_dialog_description">Morphe potřebuje oprávnění pro oznámení, aby vás upozornila na dostupné aktualizace na pozadí</string>
     <string name="notification_post_patch_dialog_title">Chcete být upozorněni, když budou k dispozici aktualizace?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
@@ -370,12 +373,11 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Nastavit GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">Nastavte GitHub Personal Access Token, abyste mohli přidávat žádosti jako externí zdroje. Vytvořte PAT s rozsahem public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Zahrnout do nastavení vývozu</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Přidá tento PAT do exportovaných nastavení správce</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Přidá toto PAT do exportovaných nastavení Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Nezvejte svůj PAT. Pokud ho zahrnete do nastavení vývozu, držte tuto soubor soukromý, protože obsahuje token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Nastavení záplaty</string>
-    <string name="settings_advanced_patch_options_youtube_description">Téma, branding, záhlaví a možnosti pro Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Možnosti nastavení tématu a značení</string>
+    <string name="settings_advanced_patch_options_youtube_description">Téma, branding, záhlaví a možnosti</string>
     <string name="settings_advanced_patch_options_restart_message">Pro změnu nastavení záplaty je nutné aplikaci opětovně záplatovat</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">V Expertním režimu budou možnosti záplat dostupné během procesu záplatování</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_show_password_field">Zobrazit heslo</string>
     <string name="settings_system_hide_password_field">Skrýt heslo</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importovat nastavení správce</string>
-    <string name="settings_system_import_manager_settings_description">Obnovit nastavení správce z JSON souboru</string>
-    <string name="settings_system_import_manager_settings_fail">Selhalo importování nastavení správce: %s</string>
-    <string name="settings_system_import_manager_settings_success">Nastavení správce importováno</string>
-    <string name="settings_system_export_manager_settings">Exportovat nastavení správce</string>
-    <string name="settings_system_export_manager_settings_description">Uložit nastavení správce do JSON souboru</string>
-    <string name="settings_system_export_manager_settings_fail">Selhalo exportování nastavení správce: %s</string>
-    <string name="settings_system_export_manager_settings_success">Nastavení správce exportováno</string>
+    <string name="settings_system_import_manager_settings">Importovat nastavení Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Obnovit nastavení Morphe ze souboru JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Nepodařilo se importovat nastavení Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Nastavení Morphe importována</string>
+    <string name="settings_system_export_manager_settings">Exportovat nastavení Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Uložit nastavení Morphe do souboru JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Nepodařilo se exportovat nastavení Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Nastavení Morphe exportována</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Ladění</string>
     <string name="settings_system_export_debug_logs">Exportovat ladicí protokoly</string>

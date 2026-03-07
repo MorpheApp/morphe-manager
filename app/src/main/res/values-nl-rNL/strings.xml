@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Tik op een app om haar weer in de lijst te tonen</string>
     <string name="android_11_bug_dialog_title">Android 11-bug</string>
     <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
+    <string name="deep_link_add_source_title">Bron toevoegen</string>
+    <string name="deep_link_add_source_message">Wilt u deze patchbron toevoegen aan Morphe?</string>
+    <string name="deep_link_add_source_warning">Voeg alleen bronnen toe van bronnen waarvan u vertrouwt.</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Manager update beschikbaar</string>
+    <string name="home_update_available">Morphe-update beschikbaar</string>
     <string name="home_update_available_subtitle">Nieuwe versie gereed voor installatie</string>
     <string name="home_update_error">Update mislukt</string>
     <string name="home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
@@ -213,7 +216,7 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="patcher_ready_to_install_subtitle">Druk op de onderstaande knop om te installeren</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op de onderstaande knop om te koppelen</string>
     <string name="patcher_storage_permission_dialog_title">Kan opslagpad niet openen</string>
-    <string name="patcher_storage_permission_description_api30">Een of meer patchopties verwijzen naar paden die Morphe Manager niet kan lezen. Geef toegang tot de opslag en tik op de knop; het patchproces start dan automatisch</string>
+    <string name="patcher_storage_permission_description_api30">Een of meer patchopties verwijzen naar paden die Morphe niet kan lezen. Geef toegang tot de opslag en tik op de knop; het patchproces start dan automatisch</string>
     <string name="patcher_storage_permission_description_legacy">Een of meer patch-opties wijzen naar bestanden die niet kunnen worden geopend. Update de bestanden in patch-opties en probeer het nogmaals</string>
     <string name="patcher_storage_permission_grant">Geef opslagtoegang</string>
     <string name="patcher_storage_permission_denied_warning">Toegang tot de opslaglocatie is geweigerd. Geef toestemming om dit pad te gebruiken of verplaats de bestanden naar de privémap van de app</string>
@@ -325,19 +328,19 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Icoon wijzigen</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
-    <string name="settings_advanced_updates_use_prereleases">Gebruik pre-release manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Krijg vroege toegang tot nieuwe experimentele manager-versies. Om vooruitlopende patches te krijgen, schakel het vooruitlopende toggle in voor elke patchbron afzonderlijk in</string>
+    <string name="settings_advanced_updates_use_prereleases">Gebruik Morphe pre-release</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Ontvang vroegtijdige toegang tot nieuwe Morphe-functies. Om pre-release-patches te krijgen, schakel de pre-release-schakelaar in voor elke patchbron afzonderlijk</string>
     <string name="settings_advanced_updates_allow_metered">Update via mobiele data</string>
-    <string name="settings_advanced_updates_allow_metered_description">Laat patchbronnen en manager-updates downloaden via mobiele data</string>
+    <string name="settings_advanced_updates_allow_metered_description">Sta Morphe en patch-updates toe om te downloaden via mobiele data</string>
     <string name="settings_advanced_updates_background_notifications">Achtergrondupdate-notificaties</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodiek controleren op updates in de achtergrond en melden als beschikbaar</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm"> ontvang direct push-notificaties voor nieuwe releases, zelfs als de app gesloten is</string>
-    <string name="notification_channel_manager_updates">Beheer updates</string>
-    <string name="notification_channel_manager_updates_description">Notificaties over nieuwe Morphe beheerversies</string>
+    <string name="notification_channel_manager_updates">Morphe-updates</string>
+    <string name="notification_channel_manager_updates_description">Meldingen over nieuwe versies van Morphe</string>
     <string name="notification_channel_bundle_updates">Patchbronnen-updates</string>
     <string name="notification_channel_bundle_updates_description">Meldingen over nieuwe patchbronversies</string>
     <string name="notification_channel_fcm_updates">Update-meldingen</string>
-    <string name="notification_channel_fcm_updates_description">Directe pushmeldingen voor nieuwe Morphe Manager- en patchreleases. Deze worden zelfs verzonden wanneer de app op de achtergrond draait</string>
+    <string name="notification_channel_fcm_updates_description">Directe pushmeldingen voor nieuwe Morphe- en patchreleases. Worden zelfs verzonden wanneer de app op de achtergrond draait</string>
     <string name="settings_advanced_update_interval">Controle frequentie</string>
     <string name="settings_advanced_update_interval_dialog_title">Controleer op updates</string>
     <string name="settings_advanced_update_interval_hourly">Eenmaal per uur</string>
@@ -347,12 +350,12 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Achtergrondcontrole frequentie</string>
     <string name="settings_advanced_update_interval_battery_warning">Achtergrondcontroles werken mogelijk niet betrouwbaar op sommige apparaten. Fabrikanten zoals Xiaomi, Huawei, Samsung en OnePlus beperken achtergrondprocessen vaak sterk om de batterij te sparen</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe manager update beschikbaar</string>
+    <string name="notification_manager_update_title">Morphe-update beschikbaar</string>
     <string name="notification_bundle_update_title">Nieuwe patches beschikbaar</string>
     <string name="notification_update_text">Versie %1$s is klaar om te downloaden</string>
-    <string name="notification_bundle_update_text_unversioned">Tik om Morphe Manager te openen en bij te werken</string>
+    <string name="notification_bundle_update_text_unversioned">Tik om Morphe te openen en bij te werken</string>
     <string name="notification_permission_dialog_title">Meldingen toestaan</string>
-    <string name="notification_permission_dialog_description">Morphe Manager heeft toestemming nodig voor meldingen om u te waarschuwen wanneer er updates op de achtergrond beschikbaar zijn</string>
+    <string name="notification_permission_dialog_description">Morphe heeft toestemming nodig voor meldingen om u te waarschuwen wanneer er updates op de achtergrond beschikbaar zijn</string>
     <string name="notification_post_patch_dialog_title">Wilt u een melding ontvangen wanneer er updates beschikbaar zijn?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinstellingen</string>
@@ -370,12 +373,11 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Stel GitHub Personal Access Token in</string>
     <string name="settings_advanced_github_pat_dialog_description">Stel een GitHub Personal Access Token in om pull requests als externe bronnen toe te voegen. Maak een PAT met de scope public_repo op github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Opnemen in instellingen exporteren</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Voegt deze PAT toe aan geëxporteerde managerinstellingen</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Voegt deze PAT toe aan de geëxporteerde Morphe-instellingen</string>
     <string name="settings_advanced_github_pat_export_warning">Deel uw PAT niet. Als u deze in een exportbestand met instellingen opneemt, houd dat bestand dan privé, omdat het de token bevat</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patchopties</string>
-    <string name="settings_advanced_patch_options_youtube_description">Opties voor thema, branding, header en Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Thema en branding-opties</string>
+    <string name="settings_advanced_patch_options_youtube_description">Thema, branding en headeropties</string>
     <string name="settings_advanced_patch_options_restart_message">Het wijzigen van patchopties vereist dat de app opnieuw wordt gepatcht om de wijzigingen door te voeren</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">In Expertmodus zijn patchopties beschikbaar tijdens het patchingproces</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_show_password_field">Toon wachtwoord</string>
     <string name="settings_system_hide_password_field">Wachtwoord verbergen</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importeer manager-instellingen</string>
-    <string name="settings_system_import_manager_settings_description">Herstel manager-instellingen uit een JSON-bestand</string>
-    <string name="settings_system_import_manager_settings_fail">Kan manager-instellingen niet importeren: %s</string>
-    <string name="settings_system_import_manager_settings_success">Manager-instellingen geïmporteerd</string>
-    <string name="settings_system_export_manager_settings">Exporteer manager-instellingen</string>
-    <string name="settings_system_export_manager_settings_description">Sla manager-instellingen op in een JSON-bestand</string>
-    <string name="settings_system_export_manager_settings_fail">Kan manager-instellingen niet exporteren: %s</string>
-    <string name="settings_system_export_manager_settings_success">Manager-instellingen geëxporteerd</string>
+    <string name="settings_system_import_manager_settings">Importeer Morphe-instellingen</string>
+    <string name="settings_system_import_manager_settings_description">Herstel Morphe-instellingen uit een JSON-bestand</string>
+    <string name="settings_system_import_manager_settings_fail">Importeren van Morphe-instellingen mislukt: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe-instellingen geïmporteerd</string>
+    <string name="settings_system_export_manager_settings">Exporteer Morphe-instellingen</string>
+    <string name="settings_system_export_manager_settings_description">Sla Morphe-instellingen op in een JSON-bestand</string>
+    <string name="settings_system_export_manager_settings_fail">Exporteren van Morphe-instellingen mislukt: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe-instellingen geëxporteerd</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Foutopsporingslogboeken exporteren</string>

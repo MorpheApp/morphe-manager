@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">टैप करें किसी ऐप पर उसे सूची में दिखाने के लिए</string>
     <string name="android_11_bug_dialog_title">एंड्रॉइड 11 बग</string>
     <string name="android_11_bug_dialog_description">एंड्रॉइड 11 सिस्टम में एक बग से बचने के लिए ऐप इंस्टॉलेशन की अनुमति समय से पहले दी जानी चाहिए जो उपयोगकर्ता अनुभव को नकारात्मक रूप से प्रभावित करेगी।</string>
+    <string name="deep_link_add_source_title">स्रोत जोड़ें</string>
+    <string name="deep_link_add_source_message">क्या आप इस पैच स्रोत को मोर्फे में जोड़ना चाहेंगे?</string>
+    <string name="deep_link_add_source_warning">केवल उन स्रोतों से स्रोत जोड़ें जिन पर आप भरोसा करते हैं</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">मेन्यर अपडेट उपलब्ध है</string>
+    <string name="home_update_available">मोर्फे अपडेट उपलब्ध है</string>
     <string name="home_update_available_subtitle">नई संस्करण तैयार है</string>
     <string name="home_update_error">उपडेट विफल हुआ</string>
     <string name="home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
@@ -213,7 +216,7 @@
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_storage_permission_dialog_title">स्तोरेज पथ तक पहुंच नहीं हो सकती है</string>
-    <string name="patcher_storage_permission_description_api30">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो मॉर्फ़ मैनेजर पढ़ सकता है नहीं। स्टोरेज एक्सेस प्रदान करें और बटन पर टैप करें तो पैचिंग स्वचालित रूप से शुरू हो जाएगी</string>
+    <string name="patcher_storage_permission_description_api30">एक या अधिक पैच विकल्प ऐसे पथों की ओर इशारा करते हैं जिन्हें मोर्फे नहीं पढ़ सकता है। स्टोरेज एक्सेस प्रदान करें और बटन पर टैप करें, फिर पैचिंग स्वचालित रूप से शुरू हो जाएगी</string>
     <string name="patcher_storage_permission_description_legacy">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो पहुंच नहीं हो सकती है। पैच ऑप्शन में पथ्स को अद्यतन करें और पुन: प्रयास करें</string>
     <string name="patcher_storage_permission_grant">स्टोरेज अनुमति प्रदान करें</string>
     <string name="patcher_storage_permission_denied_warning">स्टोरेज पर्मिशन को नकारा गया। इस पथ का उपयोग करने के लिए पर्मिशन देने या फ़ाइलें ऐप की प्राइवेट डायरेक्टरी में स्थानांतरित करें।</string>
@@ -325,19 +328,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">आइकॉन बदलें</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">अपडेट</string>
-    <string name="settings_advanced_updates_use_prereleases">प्रिलीस रिलीज़ मैनेजर का उपयोग करें</string>
-    <string name="settings_advanced_updates_use_prereleases_description">नए प्रयोगात्मक प्रबंधक संस्करणों को जल्दी से प्राप्त करें। प्रिलीस पथचों को प्राप्त करने के लिए, प्रत्येक पथच स्रोत को अलग-अलग एनबल करें</string>
+    <string name="settings_advanced_updates_use_prereleases">प्री-रिलीज़ मोर्फे का उपयोग करें</string>
+    <string name="settings_advanced_updates_use_prereleases_description">नए मोर्फ़ सुविधाओं तक जल्दी पहुंच प्राप्त करें। प्री-रिलीज़ पैच प्राप्त करने के लिए, प्रत्येक पैच स्रोत में प्री-रिलीज़ टॉगल को सक्षम करें</string>
     <string name="settings_advanced_updates_allow_metered">मोबाइल डेटा पर अपडेट करें</string>
-    <string name="settings_advanced_updates_allow_metered_description">पैच स्रोतों और मैनेजर अपडेट को मोबाइल डेटा पर डाउनलोड करने की अनुमति दें</string>
+    <string name="settings_advanced_updates_allow_metered_description">मोबाइल डेटा पर मोर्फ़ और पैच अपडेट डाउनलोड करने की अनुमति दें</string>
     <string name="settings_advanced_updates_background_notifications">रीलेटेड अपडेट नोटिफिकेशन्स</string>
     <string name="settings_advanced_updates_background_notifications_description">बैकग्राउंड में अद्यतन उपलब्ध होने पर सूचित करें।</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">नई रिलीज़ के लिए इमीडिएट पुश नोटिफिकेशन प्राप्त करें, जब एप्प क्लोज हो</string>
-    <string name="notification_channel_manager_updates">अपडेट मैनेजर</string>
-    <string name="notification_channel_manager_updates_description">नई मॉर्फ मैनेजर संस्करणों के बारे में नोटिफिकेशन</string>
+    <string name="notification_channel_manager_updates">मोर्फ़ अपडेट</string>
+    <string name="notification_channel_manager_updates_description">मोर्फ़ के नए संस्करणों के बारे में सूचनाएं</string>
     <string name="notification_channel_bundle_updates">पैच स्रोत अपडेट</string>
     <string name="notification_channel_bundle_updates_description">नोटिफिकेशन नई पैच स्रोत संस्करणों के बारे में</string>
     <string name="notification_channel_fcm_updates">अपडेट करें</string>
-    <string name="notification_channel_fcm_updates_description">नई मॉर्फ़ मैनेजर और पैच रिलीज के लिए तत्काल पुश नोटिफिकेशन। ऐप बैकग्राउंड में भी डिलीवर किए जाते हैं</string>
+    <string name="notification_channel_fcm_updates_description">नए मोर्फ़ और पैच रिलीज़ के लिए त्वरित पुश सूचनाएं। जब ऐप पृष्ठभूमि में हो तो भी वितरित किया गया</string>
     <string name="settings_advanced_update_interval">अपडेट दर देखें</string>
     <string name="settings_advanced_update_interval_dialog_title">अपडेटों के लिए देखें</string>
     <string name="settings_advanced_update_interval_hourly">एक घंटे में एक बार</string>
@@ -347,12 +350,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">बैकग्राउंड अपडेट दर</string>
     <string name="settings_advanced_update_interval_battery_warning">कुछ डिवाइसों पर बैकग्राउंड चेकز कोष्ठक में काम नहीं करना चाहिए। बटरी बचाने के लिए मैन्युफैक्चरर जैसे कि एक्सियाومی, ह्वाईवे, सैमसंग, और वनप्लस बैकग्राउंड प्रोसेसेज को अग्रेषित रूप से प्रतिबंधित करते हैं</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">मॉर्फ़ मैनेजर अपडेट उपलब्ध है</string>
+    <string name="notification_manager_update_title">मोर्फ़ अपडेट उपलब्ध है</string>
     <string name="notification_bundle_update_title">नई पैच उपलब्ध हैं</string>
     <string name="notification_update_text">वर्जन %1$s डाउनलोड के लिए तैयार है</string>
-    <string name="notification_bundle_update_text_unversioned">मॉर्फ़ मैनेजर खोलें और अपडेट करें</string>
+    <string name="notification_bundle_update_text_unversioned">मोर्फ़ और अपडेट करने के लिए टैप करें</string>
     <string name="notification_permission_dialog_title">नोटिफिकेशन अनुमति दें</string>
-    <string name="notification_permission_dialog_description">मॉर्फ़ मैनेजर बैकग्राउंड में अपडेट उपलब्ध होने पर नोटिफिकेशन अनुमति की आवश्यकता होती है ताकि आपको सूचित किया जा सके</string>
+    <string name="notification_permission_dialog_description">जब पृष्ठभूमि में अपडेट उपलब्ध हों तो आपको अलर्ट करने के लिए मोर्फ़ को अधिसूचना अनुमति की आवश्यकता है</string>
     <string name="notification_post_patch_dialog_title">अपडेट उपलब्ध होने पर सूचित किया जाना चाहेगा?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
@@ -370,12 +373,11 @@
     <string name="settings_advanced_github_pat_dialog_title">GitHub पर्सनल एक्सेस टोकन सेट करें</string>
     <string name="settings_advanced_github_pat_dialog_description">GitHub के लिए एक व्यक्तिगत 액ेस टोकन सेट करें ताकि आप बाहरी स्रोतों के रूप में पुल रिक्वेस्ट जोड़ सकें। github.com पर सार्वजनिक_रेपो स्कोप के साथ एक PAT बनाएं</string>
     <string name="settings_advanced_github_pat_export_include_label">सेटिंगز एक्सपोर्ट में शामिल करें</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">यह PAT को मैनेजर सेटिंग्ज में जोड़ता है</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">निर्यातित मोर्फ़ सेटिंग्स में यह PAT जोड़ता है</string>
     <string name="settings_advanced_github_pat_export_warning">आपका PAT को न शेयर करें। अगर आप इसे सेटिंग्ज एक्सपोर्ट में शामिल करते हैं, तो उस फाइल को निजी रखें क्योंकि इसमें टोकन है</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">पैच ऑप्शंस</string>
-    <string name="settings_advanced_patch_options_youtube_description">यूट्यूब के लिए थีม, ब्रांडिंग, हेडर, और शॉर्ट्स ऑप्शंस</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">थीम और ब्रांडिंग ऑप्शंस</string>
+    <string name="settings_advanced_patch_options_youtube_description">विषय, ब्रांडिंग और हेडर विकल्प</string>
     <string name="settings_advanced_patch_options_restart_message">पैच ऑप्शंस को बदलने के लिए फिर से पैच करना आवश्यक होगा</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">एक्सपर्ट मोड में पैच ऑप्शंस एडिटिंग के दौरान उपलब्ध होंगेगा</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_show_password_field">पासवर्ड दिखाएं</string>
     <string name="settings_system_hide_password_field">पासवर्ड छिपाएं</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">मैनेजर सेटिंग्स आयम करें</string>
-    <string name="settings_system_import_manager_settings_description">एमएनएफएस फ़ाइल से मैनेजर सेटिंग्स पुनर्प्राप्त करें</string>
-    <string name="settings_system_import_manager_settings_fail">मैनेजर सेटिंग्स आयम करने में विफल: %s</string>
-    <string name="settings_system_import_manager_settings_success">मैनेजर सेटिंग्स आयम किए गए</string>
-    <string name="settings_system_export_manager_settings">मैनेजर सेटिंग्स एक्सपोर्ट करें</string>
-    <string name="settings_system_export_manager_settings_description">एमएनएफएस फ़ाइल में मैनेजर सेटिंग्स सहेजें</string>
-    <string name="settings_system_export_manager_settings_fail">मैनेजर सेटिंग्स एक्सपोर्ट करने में विफल: %s</string>
-    <string name="settings_system_export_manager_settings_success">मैनेजर सेटिंग्स एक्सपोर्ट किए गए</string>
+    <string name="settings_system_import_manager_settings">मोर्फ़ सेटिंग्स आयात करें</string>
+    <string name="settings_system_import_manager_settings_description">एक JSON फ़ाइल से मोर्फ़ सेटिंग्स पुनर्स्थापित करें</string>
+    <string name="settings_system_import_manager_settings_fail">मोर्फ़ सेटिंग्स आयात करने में विफल: %s</string>
+    <string name="settings_system_import_manager_settings_success">मोर्फ़ सेटिंग्स आयात की गईं</string>
+    <string name="settings_system_export_manager_settings">मोर्फ़ सेटिंग्स निर्यात करें</string>
+    <string name="settings_system_export_manager_settings_description">मोर्फ़ सेटिंग्स को एक JSON फ़ाइल में सहेजें</string>
+    <string name="settings_system_export_manager_settings_fail">मोर्फ़ सेटिंग्स निर्यात करने में विफल: %s</string>
+    <string name="settings_system_export_manager_settings_success">मोर्फ़ सेटिंग्स निर्यात की गईं</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">डिबग</string>
     <string name="settings_system_export_debug_logs">डिबग लॉग्स एक्सपोर्ट करें</string>

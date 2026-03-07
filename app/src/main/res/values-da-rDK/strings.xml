@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Tryk på en app for at vise den igen i listen</string>
     <string name="android_11_bug_dialog_title">Android 11-fejl</string>
     <string name="android_11_bug_dialog_description">App-installationsrettighed skal give i forvejen for at undgå en fejl i Android 11-systemet, der vil have en negativ indflydelse på brugeroplevelsen</string>
+    <string name="deep_link_add_source_title">Tilføj kilde</string>
+    <string name="deep_link_add_source_message">Vil du tilføje denne patch-kilde til Morphe?</string>
+    <string name="deep_link_add_source_warning">Tilføj kun kilder fra kilder, du stoler på</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Manager opdatering tilgængelig</string>
+    <string name="home_update_available">Morphe-opdatering tilgængelig</string>
     <string name="home_update_available_subtitle">Ny version klar til installation</string>
     <string name="home_update_error">Opdatering mislykkedes</string>
     <string name="home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
@@ -213,7 +216,7 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="patcher_ready_to_install_subtitle">Tryk på knappen nedenfor for at installere</string>
     <string name="patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
     <string name="patcher_storage_permission_dialog_title">Kan ikke tilgå ende lagringssti</string>
-    <string name="patcher_storage_permission_description_api30">En eller flere patch-valg peker på stier, som Morphe Manager ikke kan læse. Tillad lagringstilgång og tryk på knappen, og patching vil starte automatisk</string>
+    <string name="patcher_storage_permission_description_api30">En eller flere patch-muligheder peger på stier, som Morphe ikke kan læse. Giv storage-adgang og tryk på knappen, så patching starter automatisk</string>
     <string name="patcher_storage_permission_description_legacy">En eller flere patch-valg peker på stier, som ikke kan tilgåes. Opdater stierne i patch-valg og prøv igen</string>
     <string name="patcher_storage_permission_grant">Tillad lagringstilgang</string>
     <string name="patcher_storage_permission_denied_warning">Lagringstilladelse blev afvist. Giv tilladelse til at bruge denne sti, eller flyt filerne til apps private mappe</string>
@@ -325,19 +328,19 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Endre ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Oppdateringer</string>
-    <string name="settings_advanced_updates_use_prereleases">Brug foreløbig manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Få tidligt adgang til nye eksperimentelle manager versioner. For at modtage forudslæppet patches, aktiver forudslæppet vælgeren i hver patches kilde separat</string>
+    <string name="settings_advanced_updates_use_prereleases">Brug pre-release Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Modtag tidlig adgang til nye Morphe-funktioner. For at få pre-release patches, skal du aktivere den pre-release-kontakt i hver patch-kilde separat</string>
     <string name="settings_advanced_updates_allow_metered">Opdater over mobilnet</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tillad patch-kilder og manager-opdateringer at hente over mobilnet</string>
+    <string name="settings_advanced_updates_allow_metered_description">Tillad Morphe og patch-opdateringer at downloade over mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Baggrundsopdateringsmeddelelser</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodisk tjek for opdateringer i baggrunden ognotify, når de er tilgængelige.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Modtag umiddelbare push-meddelelser for nye udgaver, selvom appen er lukket</string>
-    <string name="notification_channel_manager_updates">Administrer opdateringer</string>
-    <string name="notification_channel_manager_updates_description">Meddelelser om nye Morphe manager-udgaver</string>
+    <string name="notification_channel_manager_updates">Morphe-opdateringer</string>
+    <string name="notification_channel_manager_updates_description">Notifikationer om nye versioner af Morphe</string>
     <string name="notification_channel_bundle_updates">Opdateringskilder</string>
     <string name="notification_channel_bundle_updates_description">Notifikationer om nye patchkildeversioner</string>
     <string name="notification_channel_fcm_updates">Opdater alerts</string>
-    <string name="notification_channel_fcm_updates_description">Førtløbende push-notifikationer for nye Morphe manager og patch-udgivelser. Sendes endda, hvis app\'en er i baggrunden</string>
+    <string name="notification_channel_fcm_updates_description">Øjeblikkelige push-notifikationer for nye Morphe- og patch-udgivelser. Leveret selv når appen er i baggrunden</string>
     <string name="settings_advanced_update_interval">Opdateringsfrekvens</string>
     <string name="settings_advanced_update_interval_dialog_title">Søg efter opdateringer</string>
     <string name="settings_advanced_update_interval_hourly">En gang i timen</string>
@@ -347,12 +350,12 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Baggrundsopdateringsfrekvens</string>
     <string name="settings_advanced_update_interval_battery_warning">Baggrundsopdateringer kan ikke fungere på visse enheder. Fremstillere som Xiaomi, Huawei, Samsung og OnePlus often aggressivt begrænser baggrundsprocesser for at spare batteri</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Ny Morphe manager-udgivelse tilgængelig</string>
+    <string name="notification_manager_update_title">Morphe-opdatering tilgængelig</string>
     <string name="notification_bundle_update_title">Nye patches tilgængelige</string>
     <string name="notification_update_text">Version %1$s er klar til download</string>
-    <string name="notification_bundle_update_text_unversioned">Tryk for at åbne Morphe manager og opdatere</string>
+    <string name="notification_bundle_update_text_unversioned">Tryk for at åbne Morphe og opdatere</string>
     <string name="notification_permission_dialog_title">Tillad notifikationer</string>
-    <string name="notification_permission_dialog_description">Morphe manager behøver tilladelse til notifikationer for at varsle dig, når opdateringer er tilgængelige i baggrunden</string>
+    <string name="notification_permission_dialog_description">Morphe har brug for notifikationsadgang for at advare dig, når opdateringer er tilgængelige i baggrunden</string>
     <string name="notification_post_patch_dialog_title">Vil du blive notificeret, når opdateringer er tilgængelige?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Avansert innstillinger</string>
@@ -370,12 +373,11 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Angiv GitHub-personal adgangstoken</string>
     <string name="settings_advanced_github_pat_dialog_description">Indstil en GitHub Personal Access Token for at kunne tilføje pull requests som eksterne kilder. Opret en PAT med scope public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkluder i indstillingersexport</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Tilføjer denne PAT til eksportede manager-indstillinger</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Tilføjer denne PAT til eksporterede Morphe-indstillinger</string>
     <string name="settings_advanced_github_pat_export_warning">Del ikke dit PAT. Hvis du inkluderer det i en indstillingersexport, hold filen privat, da den indeholder tokenet</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patchvalg</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, merke og header- og Shorts-valg</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Tema og merkevalg</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, branding og sidehovedindstillinger</string>
     <string name="settings_advanced_patch_options_restart_message">Changing patch options krever å reparere appen for å få effekt</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I avansert modus vil patchvalg være tilgjengelig under patchprosessen</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Bildeformateringen må være som følger:
     <string name="settings_system_show_password_field">Managerinnstillinger eksportert</string>
     <string name="settings_system_hide_password_field">Feil</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Eksporter systemlogger for feilsøking</string>
-    <string name="settings_system_import_manager_settings_description">Kunne ikke lese loggene (feilkode %d)</string>
-    <string name="settings_system_import_manager_settings_fail">Loggene eksportert</string>
-    <string name="settings_system_import_manager_settings_success">Lagring</string>
-    <string name="settings_system_export_manager_settings">%d APK(s)</string>
-    <string name="settings_system_export_manager_settings_description">Total størrelse: %s</string>
-    <string name="settings_system_export_manager_settings_fail">Patchede APK-er</string>
-    <string name="settings_system_export_manager_settings_success">Patchede APK-er</string>
+    <string name="settings_system_import_manager_settings">Importer Morphe-indstillinger</string>
+    <string name="settings_system_import_manager_settings_description">Gendan Morphe-indstillinger fra en JSON-fil</string>
+    <string name="settings_system_import_manager_settings_fail">Fejl ved import af Morphe-indstillinger: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe-indstillinger importeret</string>
+    <string name="settings_system_export_manager_settings">Eksportér Morphe-indstillinger</string>
+    <string name="settings_system_export_manager_settings_description">Gem Morphe-indstillinger til en JSON-fil</string>
+    <string name="settings_system_export_manager_settings_fail">Fejl ved eksport af Morphe-indstillinger: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe-indstillinger eksporteret</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Behandle lagrede patchede app-filer</string>
     <string name="settings_system_export_debug_logs">Eksportér fejlsøgningslogfiler</string>

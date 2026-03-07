@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Uppdatering för Manager är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
     <string name="home_update_error">Uppdateringen misslyckades</string>
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
@@ -211,7 +210,6 @@
     <string name="patcher_ready_to_install_subtitle">Tryck på knappen nedan för att installera</string>
     <string name="patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
     <string name="patcher_storage_permission_dialog_title">Det går inte att komma åt lagringssökväg</string>
-    <string name="patcher_storage_permission_description_api30">En eller fler korrigeringsalternativ pekar på sökvägar som Morphe Manager inte kan läsa. Ge åtkomst till lagringen och tryck på knappen så startas korrigeringen automatiskt</string>
     <string name="patcher_storage_permission_description_legacy">En eller fler korrigeringsalternativ pekar på sökvägar som inte går att komma åt. Uppdatera sökvägarna i korrigeringsalternativen och försök igen</string>
     <string name="patcher_storage_permission_grant">Ge åtkomst till lagring</string>
     <string name="patcher_storage_permission_denied_warning">Åtkomst till lagringen nekades. Ge behörighet att använda sökvägen eller flytta filerna till appens privata katalog</string>
@@ -323,19 +321,13 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ändra ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Uppdateringar</string>
-    <string name="settings_advanced_updates_use_prereleases">Använd förhandsversioner av Manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Få tidig åtkomst till nya experimentella Manager-versioner. Om du vill få förhandsversioner av korrigeringar aktiverar du reglaget för förhandsversioner i varje enskild källa</string>
     <string name="settings_advanced_updates_allow_metered">Uppdatera via mobildata</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tillåt att uppdateringar för korrigeringskällor och Manager laddas ned via mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Aviseringar om uppdateringar i bakgrunden</string>
     <string name="settings_advanced_updates_background_notifications_description">Sök regelbundet efter uppdateringar i bakgrunden och avisera när de är tillgängliga</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Få direkta pushmeddelanden om nya versioner, även när appen är stängd</string>
-    <string name="notification_channel_manager_updates">Uppdateringar för Manager</string>
-    <string name="notification_channel_manager_updates_description">Aviseringar om nya versioner för Morphe Manager</string>
     <string name="notification_channel_bundle_updates">Uppdateringar för korrigeringskällor</string>
     <string name="notification_channel_bundle_updates_description">Aviseringar om nya versioner för korrigeringskällor</string>
     <string name="notification_channel_fcm_updates">Aviseringar om uppdateringar</string>
-    <string name="notification_channel_fcm_updates_description">Direkta pushmeddelanden om nya versioner av Morphe Manager och korrigeringar. Levereras även när appen är i bakgrunden</string>
     <string name="settings_advanced_update_interval">Sökningsfrekvens</string>
     <string name="settings_advanced_update_interval_dialog_title">Sök efter uppdateringar</string>
     <string name="settings_advanced_update_interval_hourly">En gång i timmen</string>
@@ -345,12 +337,9 @@
     <string name="settings_advanced_update_interval_chip_subtitle">Sökningsfrekvens i bakgrunden</string>
     <string name="settings_advanced_update_interval_battery_warning">Sökningar i bakgrunden kanske inte fungerar tillförlitligt på vissa enheter. Tillverkare som Xiaomi, Huawei, Samsung och OnePlus begränsar ofta aggressivt bakgrundsprocesser för att spara batteri</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Uppdatering för Morphe Manager är tillgänglig</string>
     <string name="notification_bundle_update_title">Nya korrigeringar är tillgängliga </string>
     <string name="notification_update_text">Version %1$s är redo att laddas ned</string>
-    <string name="notification_bundle_update_text_unversioned">Tryck för att öppna Morphe Manager och uppdatera</string>
     <string name="notification_permission_dialog_title">Tillåt aviseringar</string>
-    <string name="notification_permission_dialog_description">Morphe Manager behöver behörighet för aviseringar för att kunna meddela dig när uppdateringar är tillgängliga i bakgrunden</string>
     <string name="notification_post_patch_dialog_title">Vill du få aviseringar när uppdateringar är tillgängliga?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
@@ -368,12 +357,9 @@
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken (PAT) för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en PAT med omfattningen public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till din PAT i exporterade Manager-inställningar</string>
     <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Korrigeringsalternativ</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, varumärkning, sidhuvud och Shorts-alternativ</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Tema- och varumärkningsalternativ</string>
     <string name="settings_advanced_patch_options_restart_message">Om du ändrar korrigeringsalternativen måste du korrigera appen igen för att ändringarna ska träda i kraft</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I expertläget blir korrigeringsalternativ tillgängliga under korrigeringsprocessen</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -508,14 +494,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_show_password_field">Visa lösenord</string>
     <string name="settings_system_hide_password_field">Dölj lösenord</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importera Manager-inställningar</string>
-    <string name="settings_system_import_manager_settings_description">Återställ Manager-inställningar från en JSON-fil</string>
-    <string name="settings_system_import_manager_settings_fail">Det gick inte att importera Manager-inställningar: %s</string>
-    <string name="settings_system_import_manager_settings_success">Manager-inställningar importerade</string>
-    <string name="settings_system_export_manager_settings">Exportera Manager-inställningar</string>
-    <string name="settings_system_export_manager_settings_description">Spara Manager-inställningar i en JSON-fil</string>
-    <string name="settings_system_export_manager_settings_fail">Det gick inte att exportera Manager-inställningar: %s</string>
-    <string name="settings_system_export_manager_settings_success">Manager-inställningar exporterade</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Felsökning</string>
     <string name="settings_system_export_debug_logs">Exportera felsökningsloggar</string>

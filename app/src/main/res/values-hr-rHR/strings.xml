@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">Dopuštenje za instalaciju aplikacije mora se dati unaprijed kako bi se izbjegla greška u sustavu Android 11 koja će negativno utjecati na korisničko iskustvo</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
     <string name="home_update_error">Ažuriranje nije uspjelo</string>
     <string name="home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
@@ -213,7 +212,6 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite tipku ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite tipku ispod da učitate</string>
     <string name="patcher_storage_permission_dialog_title">Nije moguće pristupiti putanji pohrane</string>
-    <string name="patcher_storage_permission_description_api30">Jedna ili više opcija zakrpe upućuju na putanje koje Morphe manager ne može pročitati. Omogućite pristup pohrani i dodirnite gumb, nakon čega će se krpanje automatski pokrenuti.</string>
     <string name="patcher_storage_permission_description_legacy">Jedna ili više opcija zakrpe upućuju na putanje kojima se ne može pristupiti. Ažurirajte putanje u opcijama zakrpe i pokušajte ponovno.</string>
     <string name="patcher_storage_permission_grant">Odobri dopuštenje za pohranu</string>
     <string name="patcher_storage_permission_denied_warning">Dozvola za pohranu je odbijena. Dajte dopuštenje za korištenje ove putanje ili premjestite datoteke u privatni direktorij aplikacije.</string>
@@ -325,19 +323,13 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Promijeni ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ažuriranja</string>
-    <string name="settings_advanced_updates_use_prereleases">Koristite predizdanja aplikacije</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Ostvarite rani pristup novim eksperimentalnim verzijama aplikacije. Da biste dobili predizdanja patcheva, omogućite prečac za predizdanje u svakom izvoru patcha zasebno.</string>
     <string name="settings_advanced_updates_allow_metered">Ažuriraj mobilnim podacima</string>
-    <string name="settings_advanced_updates_allow_metered_description">Dopustite preuzimanje izvora patcha i ažuriranja apklikacije putem mobilnih podataka</string>
     <string name="settings_advanced_updates_background_notifications">Obavijesti o ažuriranjima u pozadini</string>
     <string name="settings_advanced_updates_background_notifications_description">Povremeno provjeravaj ažuriranja u pozadini i obavještavaj kada su dostupna</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Primajte trenutne push obavijesti za nove verzije, čak i kada je aplikacija zatvorena</string>
-    <string name="notification_channel_manager_updates">Upravljanje ažuriranjima</string>
-    <string name="notification_channel_manager_updates_description">Oznake o novim inačicama Morphe Upravljanja</string>
     <string name="notification_channel_bundle_updates">Ažuriranja izvora patch-a</string>
     <string name="notification_channel_bundle_updates_description">Obavještavanja o novim verzijama izvora</string>
     <string name="notification_channel_fcm_updates">Ažuriraj opomnike</string>
-    <string name="notification_channel_fcm_updates_description">Trenutne push obavijesti za novu Morphe aplikaciju i izdanja patcheva. Isporučuje se čak i kada je aplikacija u pozadini.</string>
     <string name="settings_advanced_update_interval">Povremeno provjeravanje</string>
     <string name="settings_advanced_update_interval_dialog_title">Provjeri za ažuriranja</string>
     <string name="settings_advanced_update_interval_hourly">Svaki sat</string>
@@ -347,12 +339,9 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Učestalost provjere u pozadini</string>
     <string name="settings_advanced_update_interval_battery_warning">Provjere u pozadini možda neće pouzdano funkcionirati na nekim uređajima. Proizvođači poput Xiaomija, Huaweija, Samsunga i OnePlusa često agresivno ograničavaju pozadinske procese kako bi uštedjeli bateriju.</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Dostupno ažuriranje Morphe menedžera</string>
     <string name="notification_bundle_update_title">Nova patcha dostupna</string>
     <string name="notification_update_text">Inačica %1$s je spremna za preuzimanje</string>
-    <string name="notification_bundle_update_text_unversioned">Kliknite da otvorite Morphe menedžer i ažurirajte</string>
     <string name="notification_permission_dialog_title">Dozvoli obavijesti</string>
-    <string name="notification_permission_dialog_description">Morphe treba dopuštenje za obavijesti kako bi vas upozorio kada su ažuriranja dostupna u pozadini.</string>
     <string name="notification_post_patch_dialog_title">Želite li biti obavješteni kada su dostupni ažuriranja?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Stručne postavke</string>
@@ -370,12 +359,9 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavite GitHub osobni pristupni token</string>
     <string name="settings_advanced_github_pat_dialog_description">Postavite GitHub Personal Access Token kako biste mogli dodavati zahtjeve za povlačenjem kao vanjske izvore. Izradite PAT s opsegom public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Uključi u postavke izvoza</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ovaj PAT u izvozne postavke upravitelja </string>
     <string name="settings_advanced_github_pat_export_warning">Ne dijelite svoj PAT. Ako ga uključite u postavke izvoza, držite tu datoteku privatnom jer sadrži token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opcije patchanja</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, brendiranje, zaglavlje i opcije za Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Opcije teme i brenda</string>
     <string name="settings_advanced_patch_options_restart_message">Promjena opcija patchanja zahtijeva ponovno instaliranje patcha da bi imalo efekta</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">U naprednom načinu opcije patchanja će biti dostupne tijekom procesa patchanja</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +496,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_show_password_field">Pokaži lozinku</string>
     <string name="settings_system_hide_password_field">Sakrij lozinku</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Uvezi postavke upravitelja</string>
-    <string name="settings_system_import_manager_settings_description">Vrati postavke upravitelja iz JSON datoteke</string>
-    <string name="settings_system_import_manager_settings_fail">Nije uspio uvoz postavki upravitelja: %s</string>
-    <string name="settings_system_import_manager_settings_success">Postavke upravitelja uvezene</string>
-    <string name="settings_system_export_manager_settings">Izvezi postavke upravitelja</string>
-    <string name="settings_system_export_manager_settings_description">Spremi postavke upravitelja u JSON datoteku</string>
-    <string name="settings_system_export_manager_settings_fail">Izvoz postavki upravitelja nije uspio: %s</string>
-    <string name="settings_system_export_manager_settings_success">Postavke upravitelja izvezene</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Otklanjanje grešaka</string>
     <string name="settings_system_export_debug_logs">Izvoz zapisnika o otklanjanju pogrešaka</string>

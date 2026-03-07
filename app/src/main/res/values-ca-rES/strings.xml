@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_title">Error de l\'Android 11</string>
     <string name="android_11_bug_dialog_description">El permís d\'instal·lació de l\'aplicació s\'ha d\'atorgar amb anterioritat per evitar un error en el sistema Android 11 que afectarà negativament l\'experiència de l\'usuari</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Actualització del gestor disponible</string>
     <string name="home_update_available_subtitle">Nova versió disponible per instal·lar</string>
     <string name="home_update_error">Actualització fallida</string>
     <string name="home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
@@ -30,6 +29,7 @@
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="home_greeting_2">Esteu llestos per convertir les aplicacions en llegendàries de nou?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Aguanta\'t, és l\'hora dels pedaços</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -47,9 +47,15 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Funciona a base de cafeïna i bons pedaços</string>
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">Fonts de pegats</string>
     <string name="sources_management_open_in_browser">Obrir al navegador</string>
     <string name="sources_management_failed_to_open_url">Error en obrir l\'URL</string>
+    <string name="sources_management_prerelease_toggle">Utilitza pegats de pre-llançament</string>
+    <string name="sources_management_prerelease_toggle_description">Rebre accés anticipat a noves versions experimentals de pegats</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">Nom mostrat</string>
+    <string name="sources_dialog_rename">Canviar la font del pegat</string>
+    <string name="sources_dialog_duplicate_name_error">Una font de pegats amb aquest nom ja existeix</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarrega l\'APK original</string>
@@ -61,6 +67,7 @@
     <string name="home_download_instructions_step3_mount">Espereu que la descàrrega s\'acabi, i llavors&lt;b&gt;instal·leu l\'APK&lt;/b&gt;</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_no_patches">No hi ha pegats disponibles</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- Patch Options -->
     <string name="patch_option_instructions">Instruccions</string>

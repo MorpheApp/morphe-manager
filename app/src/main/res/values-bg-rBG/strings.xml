@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Натиснете върху приложението, за да го покажете отново в списъка</string>
     <string name="android_11_bug_dialog_title">Грешка на Android 11</string>
     <string name="android_11_bug_dialog_description">Предварително трябва да се предостави право за инсталиране на приложението, за да се избегне грешка в системата Android 11, която ще повлияе негативно на потребителския опит</string>
+    <string name="deep_link_add_source_title">Добавяне на източник</string>
+    <string name="deep_link_add_source_message">Искате ли да добавите този източник на корекции към Morphe?</string>
+    <string name="deep_link_add_source_warning">Добавяйте източници само от източници, на които имате доверие</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Достигна достъпно обновление</string>
+    <string name="home_update_available">Налично е ново обновление за Morphe</string>
     <string name="home_update_available_subtitle">Готово за инсталиране</string>
     <string name="home_update_error">Неуспешно актуализиране</string>
     <string name="home_update_error_subtitle">Проверете връзката си с интернет и опитайте отново</string>
@@ -213,7 +216,7 @@
     <string name="patcher_ready_to_install_subtitle">Натиснете бутона по-долу за инсталиране</string>
     <string name="patcher_ready_to_mount_subtitle">Натиснете бутона по-долу за монтиране</string>
     <string name="patcher_storage_permission_dialog_title">Не е възможно да се достъпи до пата за съхранение</string>
-    <string name="patcher_storage_permission_description_api30">Едно или повече опции за патч сочат към пътища, които Morphe мениджърът не може да чете. Дайте достъп до съхранението и натиснете бутона, след което патчирането ще започне автоматично</string>
+    <string name="patcher_storage_permission_description_api30">Една или повече опции за корекции сочат към пътища, които Morphe не може да прочете. Предоставете достъп до хранилището и натиснете бутона, след което корекциите ще започнат автоматично</string>
     <string name="patcher_storage_permission_description_legacy">Едно или повече опции за патч сочат към пътища, които не могат да бъдат достъпени. Актуализирайте пътищата в опциите за патч и опитайте отново</string>
     <string name="patcher_storage_permission_grant">Дайте разрешение за съхранение</string>
     <string name="patcher_storage_permission_denied_warning">Разрешение за съхранение е отказано. Разрешете разрешението за да използвате този път, или преместете файловете в директорията за частни файлове на приложението.</string>
@@ -325,19 +328,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Промяна на икона</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Актуализации</string>
-    <string name="settings_advanced_updates_use_prereleases">Използвайте предварително пускане</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Получайте достъп преди други до нови експериментални версии на мениджъра. За да получите предварителни пакети, включете предварителния превключвател в всеки източник на пакети отделно</string>
+    <string name="settings_advanced_updates_use_prereleases">Използвайте предварителна версия на Morphe</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Получете ранeн достъп до нови функции на Morphe. За да получавате предварителни версии на корекции, активирайте превключвателя за предварителни версии във всеки източник на корекции поотделно</string>
     <string name="settings_advanced_updates_allow_metered">Обновяване по мобилен интернет</string>
-    <string name="settings_advanced_updates_allow_metered_description">Разрешете източниците на патчове и обновленията на мениджъра да се изтеглят през мобилен интернет</string>
+    <string name="settings_advanced_updates_allow_metered_description">Разрешете на Morphe и актуализациите на корекциите да изтеглят през мобилни данни</string>
     <string name="settings_advanced_updates_background_notifications">Обновления в фона</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодично проверете наличието на актуализации в фона и известите при наличност.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Получете моментални уведомления за нови версии, дори когато приложението е затворено</string>
-    <string name="notification_channel_manager_updates">Управление на обновения</string>
-    <string name="notification_channel_manager_updates_description">Уведомления за нови версии на Morphe</string>
+    <string name="notification_channel_manager_updates">Актуализации на Morphe</string>
+    <string name="notification_channel_manager_updates_description">Известия за нови версии на Morphe</string>
     <string name="notification_channel_bundle_updates">Обновения на пакет</string>
     <string name="notification_channel_bundle_updates_description">Известия за нови версии на източника</string>
     <string name="notification_channel_fcm_updates">Актуализиране на алертите</string>
-    <string name="notification_channel_fcm_updates_description">Бързи известувания за новите версии на Morphe manager и патчове, достъпни дори когато приложението е в фона</string>
+    <string name="notification_channel_fcm_updates_description">Незабавни push известия за нови издания на Morphe и корекции. Доставят се дори когато приложението е във фонов режим</string>
     <string name="settings_advanced_update_interval">Честота на проверка</string>
     <string name="settings_advanced_update_interval_dialog_title">Проверка за актуализации</string>
     <string name="settings_advanced_update_interval_hourly">Един път на час</string>
@@ -347,12 +350,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">Честота на проверка в фона</string>
     <string name="settings_advanced_update_interval_battery_warning">Проверките в фона може да не работят надеждно на някои устройства. Производители като Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничават фоновите процеси за спестяване на батерия</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Достъпна актуализация на Morphe manager</string>
+    <string name="notification_manager_update_title">Налично е актуализация на Morphe</string>
     <string name="notification_bundle_update_title">Достъпни нови патчове</string>
     <string name="notification_update_text">Версия %1$s е готова за сваляне</string>
-    <string name="notification_bundle_update_text_unversioned">Натиснете, за да отворите Morphe manager и актуализирате</string>
+    <string name="notification_bundle_update_text_unversioned">Докоснете, за да отворите Morphe и да актуализирате</string>
     <string name="notification_permission_dialog_title">Разрешете известувания</string>
-    <string name="notification_permission_dialog_description">Morphe manager нуждае се от разрешение за известувания, за да ви извести, когато има достъпни актуализации в фона</string>
+    <string name="notification_permission_dialog_description">Morphe се нуждае от разрешение за известия, за да ви предупреди, когато има актуализации във фонов режим</string>
     <string name="notification_post_patch_dialog_title">Желая ли би да бъдете известителен, когато има достъпни актуализации?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки за експерти</string>
@@ -370,12 +373,11 @@
     <string name="settings_advanced_github_pat_dialog_title">Задайте GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">За да можете да добавяте източници като външни източници, задайте GitHub Personal Access Token. Създайте PAT с обхват public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Включи в извеждане на настройки</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Добавя този PAT към изведените настройки на мениджъра</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Добавя този PAT към експортираните настройки на Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Не споделяйте вашия PAT. Ако го включите в извеждане на настройки, пазете този файл в приватен режим, защото съдържа токена</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Опции за замести</string>
-    <string name="settings_advanced_patch_options_youtube_description">Опции за тема, брандиране, заглавка и къси видеоклипове</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Опции за тема и брандиране</string>
+    <string name="settings_advanced_patch_options_youtube_description">Тема, брандиране и опции за заглавие</string>
     <string name="settings_advanced_patch_options_restart_message">Промените на опциите за замести трябва да бъдат приложени отново, за да влязат в сила</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">В режима за експерти опциите за замести ще бъдат налични по време на заместителния процес</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_show_password_field">Показване на парола</string>
     <string name="settings_system_hide_password_field">Скриване на парола</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Импортиране на настройки на мениджъра</string>
-    <string name="settings_system_import_manager_settings_description">Възвръщане на настройки на мениджъра от JSON файл</string>
-    <string name="settings_system_import_manager_settings_fail">Неуспешно импортиране на настройки на мениджъра: %s</string>
-    <string name="settings_system_import_manager_settings_success">Настройки на мениджъра са импортирани</string>
-    <string name="settings_system_export_manager_settings">Износ на настройки на мениджъра</string>
-    <string name="settings_system_export_manager_settings_description">Спасяване на настройки на мениджъра в JSON файл</string>
-    <string name="settings_system_export_manager_settings_fail">Неуспешен износ на настройки на мениджъра: %s</string>
-    <string name="settings_system_export_manager_settings_success">Настройки на мениджъра са изнесени</string>
+    <string name="settings_system_import_manager_settings">Импортиране на настройките на Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Възстановете настройките на Morphe от JSON файл</string>
+    <string name="settings_system_import_manager_settings_fail">Неуспешно импортиране на настройките на Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Настройките на Morphe са импортирани</string>
+    <string name="settings_system_export_manager_settings">Експортиране на настройките на Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Запазете настройките на Morphe в JSON файл</string>
+    <string name="settings_system_export_manager_settings_fail">Неуспешно експортиране на настройките на Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Настройките на Morphe са експортирани</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Отлад</string>
     <string name="settings_system_export_debug_logs">Експортиране на логове за отстраняване на грешки</string>

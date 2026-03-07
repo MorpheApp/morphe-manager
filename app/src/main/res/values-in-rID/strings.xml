@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Ketuk pada aplikasi untuk menampilkannya lagi di daftar</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna</string>
+    <string name="deep_link_add_source_title">Tambah sumber</string>
+    <string name="deep_link_add_source_message">Apakah Anda ingin menambahkan sumber tambalan ini ke Morphe?</string>
+    <string name="deep_link_add_source_warning">Hanya tambahkan sumber dari sumber yang Anda percayai</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Pembaruan Manager tersedia</string>
+    <string name="home_update_available">Pembaruan Morphe tersedia</string>
     <string name="home_update_available_subtitle">Versi baru siap dipasang</string>
     <string name="home_update_error">Pembaruan gagal</string>
     <string name="home_update_error_subtitle">Periksa koneksi internet Anda dan coba lagi</string>
@@ -213,7 +216,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="patcher_ready_to_install_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
     <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
-    <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tambalan yang mengarah pada jalur Morphe manager tidak dapat dibaca. Beri akses penyimpanan dan ketuk tombol lalu penambalan akan dimulai secara otomatis</string>
+    <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tambalan yang mengarah pada jalur Morphe tidak dapat dibaca. Beri akses penyimpanan dan ketuk tombol lalu penambalan akan dimulai secara otomatis</string>
     <string name="patcher_storage_permission_description_legacy">Satu atau lebih pilihan tambalan yang mengarah ke jalur yang tidak dapat diakses. Perbarui jalur dalam pilihan tambalan dan coba lagi</string>
     <string name="patcher_storage_permission_grant">Beri izin penyimpanan</string>
     <string name="patcher_storage_permission_denied_warning">Izin penyimpanan ditolak. Beri izin untuk menggunakan jalur ini, atau pindahkan berkas ke direktori pribadi aplikasi</string>
@@ -325,19 +328,19 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ubah ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Pembaruan</string>
-    <string name="settings_advanced_updates_use_prereleases">Gunakan pra-rilis manager</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Dapatkan akses awal ke versi baru manager. Untuk mendapatkan tambalan pra-rilis, aktifkan tombol pra-rilis di setiap sumber tambalan secara terpisah</string>
+    <string name="settings_advanced_updates_use_prereleases">Gunakan Morphe versi pra-rilis</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Dapatkan akses awal ke fitur baru Morphe. Untuk mendapatkan tambalan pra-rilis, aktifkan tombol pra-rilis di setiap sumber tambalan secara terpisah</string>
     <string name="settings_advanced_updates_allow_metered">Perbarui di data seluler</string>
-    <string name="settings_advanced_updates_allow_metered_description">Izinkan sumber tambalan dan pembaruan manager untuk mendownload melalui data seluler</string>
+    <string name="settings_advanced_updates_allow_metered_description">Izinkan Morphe dan pembaruan tambalan untuk mengunduh melalui data seluler</string>
     <string name="settings_advanced_updates_background_notifications">Pemberitahuan pembaruan latar belakang</string>
     <string name="settings_advanced_updates_background_notifications_description">Periksa pembaruan secara berkala di latar belakang dan beritahu saat pembaruan tersedia</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Terima notifikasi teks segera untuk rilis baru, bahkan ketika aplikasi ditutup</string>
-    <string name="notification_channel_manager_updates">Kelola pembaruan</string>
-    <string name="notification_channel_manager_updates_description">Pemberitahuan tentang versi Morphe manager baru</string>
+    <string name="notification_channel_manager_updates">Tambalan Morphe</string>
+    <string name="notification_channel_manager_updates_description">Notifikasi tentang versi baru Morphe</string>
     <string name="notification_channel_bundle_updates">Pemberitahuan tentang versi patch bundle baru</string>
     <string name="notification_channel_bundle_updates_description">Pemberitahuan tentang versi sumber tambalan baru</string>
     <string name="notification_channel_fcm_updates">Perbarui peringatan</string>
-    <string name="notification_channel_fcm_updates_description">Pemberitahuan teks langsung untuk rilis baru Morphe manager dan patch. Diterima bahkan saat aplikasi di latar belakang</string>
+    <string name="notification_channel_fcm_updates_description">Notifikasi push instan untuk rilis Morphe dan tambalan baru. Terkirim bahkan saat aplikasi berada di latar belakang</string>
     <string name="settings_advanced_update_interval">Jadwal periksa</string>
     <string name="settings_advanced_update_interval_dialog_title">Periksa untuk pembaruan</string>
     <string name="settings_advanced_update_interval_hourly">Sekali dalam jam</string>
@@ -347,12 +350,12 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Jadwal periksa latar belakang</string>
     <string name="settings_advanced_update_interval_battery_warning">Periksa latar belakang mungkin tidak bekerja dengan baik pada beberapa perangkat. Produsen seperti Xiaomi, Huawei, Samsung, dan OnePlus sering membatasi proses latar belakang untuk menghemat baterai</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Pembaruan Morphe manager tersedia</string>
+    <string name="notification_manager_update_title">Pembaruan Morphe tersedia</string>
     <string name="notification_bundle_update_title">Patches baru tersedia</string>
     <string name="notification_update_text">Versi %1$s siap untuk diunduh</string>
-    <string name="notification_bundle_update_text_unversioned">Tetap untuk membuka Morphe manager dan memperbarui</string>
+    <string name="notification_bundle_update_text_unversioned">Ketuk untuk membuka Morphe dan memperbarui</string>
     <string name="notification_permission_dialog_title">Izinkan pemberitahuan</string>
-    <string name="notification_permission_dialog_description">Morphe manager membutuhkan izin pemberitahuan untuk memberitahukan Anda saat pembaruan tersedia di latar belakang</string>
+    <string name="notification_permission_dialog_description">Morphe memerlukan izin notifikasi untuk memberi tahu Anda saat pembaruan tersedia di latar belakang</string>
     <string name="notification_post_patch_dialog_title">Apakah Anda ingin menerima pemberitahuan ketika pembaruan tersedia?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Pengaturan ahli</string>
@@ -370,12 +373,11 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Atur Token Akses Personal GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">Atur Token Akses Personal GitHub untuk dapat menambahkan Permintaan Penarikan sebagai sumber eksternal. Buat PAT dengan cakupan public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Masukkan dalam ekspor pengaturan</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Menambahkan PAT ini ke pengaturan manager yang diekspor</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Menambahkan PAT ini ke pengaturan Morphe yang diekspor</string>
     <string name="settings_advanced_github_pat_export_warning">Jangan bagikan PAT Anda. Jika Anda menyertakannya dalam ekspor pengaturan, simpan berkas tersebut secara pribadi karena berisi token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Pilihan tambalan</string>
-    <string name="settings_advanced_patch_options_youtube_description">Pilihan tema, branding, header, dan Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Pilihan tema dan branding</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, branding, dan opsi header</string>
     <string name="settings_advanced_patch_options_restart_message">Mengubah pilihan tambalan memerlukan menambal ulang aplikasi agar perubahan berlaku</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Dalam mode Ahli pilihan tambalan akan tersedia selama proses penambalan</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_show_password_field">Tampilkan kata sandi</string>
     <string name="settings_system_hide_password_field">Sembunyikan kata sandi</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Impor pengaturan manager</string>
-    <string name="settings_system_import_manager_settings_description">Pulihkan pengaturan manager dari berkas JSON</string>
-    <string name="settings_system_import_manager_settings_fail">Gagal mengimpor pengaturan manager: %s</string>
-    <string name="settings_system_import_manager_settings_success">Pengaturan manager diimpor</string>
-    <string name="settings_system_export_manager_settings">Ekspor pengaturan manager</string>
-    <string name="settings_system_export_manager_settings_description">Simpan pengaturan manager ke berkas JSON</string>
-    <string name="settings_system_export_manager_settings_fail">Gagal mengekspor pengaturan manager: %s</string>
-    <string name="settings_system_export_manager_settings_success">Pengaturan manager diekspor</string>
+    <string name="settings_system_import_manager_settings">Impor pengaturan Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Pulihkan pengaturan Morphe dari berkas JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Gagal mengimpor pengaturan Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Pengaturan Morphe diimpor</string>
+    <string name="settings_system_export_manager_settings">Ekspor pengaturan Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Simpan pengaturan Morphe ke berkas JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Gagal mengekspor pengaturan Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Pengaturan Morphe diekspor</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Ekspor catatan debug</string>

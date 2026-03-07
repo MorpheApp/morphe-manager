@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Tapáil ar aip chun í a thaispeáint sa liosta arís</string>
     <string name="android_11_bug_dialog_title">Fabht Android 11</string>
     <string name="android_11_bug_dialog_description">Ní mór cead suiteála na haipe a ghéilleadh roimh ré chun seachaint ar earráid i gcóras Android 11 a dhéanfaidh dochar d\'eispéireas an úsáideora</string>
+    <string name="deep_link_add_source_title">Add foinse</string>
+    <string name="deep_link_add_source_message">An cosúil leat é seo a chur go Morphe?</string>
+    <string name="deep_link_add_source_warning">Níor add foinse ach óna dtaobh tú muintir</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Nuashonrú ar fáil</string>
+    <string name="home_update_available">Nuashonrú Morphe ar fáil</string>
     <string name="home_update_available_subtitle">Tá nuashonrú nua ar fáil</string>
     <string name="home_update_error">Theip ar nuashonrú</string>
     <string name="home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
@@ -213,7 +216,7 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="patcher_ready_to_install_subtitle">Brúigh an cnaipe thíos chun é a shuiteáil</string>
     <string name="patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
     <string name="patcher_storage_permission_dialog_title">Ní féidir rochtain a fháil ar an gcosán stórála</string>
-    <string name="patcher_storage_permission_description_api30">Léiríonn rogha paiste amháin nó níos mó cosáin nach féidir le bainisteoir Morphe a léamh. Deonaigh rochtain stórála agus tapáil an cnaipe ansin tosóidh an paisteáil go huathoibríoch.</string>
+    <string name="patcher_storage_permission_description_api30">Léiríonn rogha paiste amháin nó níos mó cosáin nach féidir le Morphe a léamh. Deonaigh rochtain stórála agus tapáil an cnaipe ansin tosóidh an paisteáil go huathoibríoch.</string>
     <string name="patcher_storage_permission_description_legacy">Léiríonn rogha paiste amháin nó níos mó cosáin nach féidir rochtain a fháil orthu. Nuashonraigh na cosáin sna roghanna paiste agus déan iarracht arís.</string>
     <string name="patcher_storage_permission_grant">Deonaigh cead stórála</string>
     <string name="patcher_storage_permission_denied_warning">Diúltaíodh cead stórála. Deonaigh an cead an cosán seo a úsáid, nó bog na comhaid chuig eolaire príobháideach an aip.</string>
@@ -325,19 +328,19 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Athraigh deilbhín</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nuashonruithe</string>
-    <string name="settings_advanced_updates_use_prereleases">Bain úsáid as bainisteoir réamh-eisiúna</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Faigh rochtain luath ar leaganacha nua de bhainisteoirí turgnamhacha. Chun paistí réamh-eisiúna a fháil, cumasaigh an lascán réamh-eisiúna i ngach foinse paiste ar leithligh</string>
+    <string name="settings_advanced_updates_use_prereleases">Bain úsáid as Morphe réamh-eisiúna</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Faigh rochtain luath ar fheidhmeanna nua Morphe. Chun paistí réamh-eisiúna a fháil, cumasaigh an lascán réamh-eisiúna i ngach foinse paiste ar leithligh</string>
     <string name="settings_advanced_updates_allow_metered">Nuashonrú ar shonraí soghluaiste</string>
-    <string name="settings_advanced_updates_allow_metered_description">Ceadaigh foinsí paiste agus nuashonruithe bainisteoirí a íoslódáil thar shonraí soghluaiste</string>
+    <string name="settings_advanced_updates_allow_metered_description">Ceadaigh nuashonruithe Morphe agus paistí a íoslódáil thar shonraí soghluaiste</string>
     <string name="settings_advanced_updates_background_notifications">Fógraí nuashonraithe cúlra</string>
     <string name="settings_advanced_updates_background_notifications_description">Seiceáil go tréimhsiúil le haghaidh nuashonruithe sa chúlra agus cuir in iúl nuair a bhíonn siad ar fáil</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Faigh fógraí brú láithreacha le haghaidh eisiúintí nua, fiú nuair a bhíonn an aip dúnta</string>
-    <string name="notification_channel_manager_updates">Nuashonruithe bainisteoirí</string>
-    <string name="notification_channel_manager_updates_description">Fógraí faoi leaganacha nua de bhainisteoir Morphe</string>
+    <string name="notification_channel_manager_updates">Paistí Morphe</string>
+    <string name="notification_channel_manager_updates_description">Fógraí faoi leaganacha nua Morphe</string>
     <string name="notification_channel_bundle_updates">Nuashonruithe foinsí paiste</string>
     <string name="notification_channel_bundle_updates_description">Fógraí faoi leaganacha nua foinse paiste</string>
     <string name="notification_channel_fcm_updates">Foláirimh nuashonraithe</string>
-    <string name="notification_channel_fcm_updates_description">Fógraí brú meandaracha le haghaidh bainisteoirí agus paistí nua Morphe. Seachadtar iad fiú nuair atá an aip sa chúlra.</string>
+    <string name="notification_channel_fcm_updates_description">Fógraí brú meandaracha le haghaidh fheidhmeanna agus paistí nua Morphe. Seachadtar iad fiú nuair atá an aip sa chúlra.</string>
     <string name="settings_advanced_update_interval">Seiceáil minicíocht</string>
     <string name="settings_advanced_update_interval_dialog_title">Seiceáil le haghaidh nuashonruithe</string>
     <string name="settings_advanced_update_interval_hourly">Uair san uair</string>
@@ -347,12 +350,12 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Minicíocht seiceálacha cúlra</string>
     <string name="settings_advanced_update_interval_battery_warning">B’fhéidir nach n-oibreoidh seiceálacha cúlra go hiontaofa ar roinnt gléasanna. Is minic a chuireann monaróirí cosúil le Xiaomi, Huawei, Samsung, agus OnePlus srian dian ar phróisis chúlra chun ceallraí a shábháil.</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Nuashonrú bainisteoir Morphe ar fáil</string>
+    <string name="notification_manager_update_title">Nuashonrú Morphe ar fáil</string>
     <string name="notification_bundle_update_title">Paistí nua ar fáil</string>
     <string name="notification_update_text">Tá leagan %1$s réidh le híoslódáil</string>
-    <string name="notification_bundle_update_text_unversioned">Beartaigh chun bainisteoir Morphe a oscailt agus a nuashonrú</string>
+    <string name="notification_bundle_update_text_unversioned">Beartaigh chun Morphe a oscailt agus a nuashonrú</string>
     <string name="notification_permission_dialog_title">Ceadaigh fógraí</string>
-    <string name="notification_permission_dialog_description">Teastaíonn cead fógra ó bhainisteoir Morphe chun foláireamh a thabhairt duit nuair a bhíonn nuashonruithe ar fáil sa chúlra</string>
+    <string name="notification_permission_dialog_description">Teastaíonn cead fógra ó Morphe chun foláireamh a thabhairt duit nuair a bhíonn nuashonruithe ar fáil sa chúlra</string>
     <string name="notification_post_patch_dialog_title">Ar mhaith leat fógra a fháil nuair a bheidh nuashonruithe ar fáil?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Socruithe saineolaithe</string>
@@ -370,12 +373,11 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Socraigh Comhartha Rochtana Pearsanta GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">Socraigh Comhartha Rochtana Pearsanta GitHub chun go mbeidh tú in ann iarratais tarraingthe a chur leis mar fhoinsí seachtracha. Cruthaigh PAT le raon feidhme public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Cuir san áireamh in easpórtáil socruithe</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Cuireann sé an PAT seo le socruithe bainisteoir onnmhairithe</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Cuireann sé an PAT seo le socruithe Morphe onnmhairithe</string>
     <string name="settings_advanced_github_pat_export_warning">Ná roinn do PAT. Má chuireann tú san áireamh é in easpórtáil socruithe, coinnigh an comhad sin príobháideach mar go bhfuil an comhartha ann.</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Roghanna paiste</string>
     <string name="settings_advanced_patch_options_youtube_description">Roghanna téama, brandála, ceanntásca agus Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Roghanna téama agus brandála</string>
     <string name="settings_advanced_patch_options_restart_message">Éilíonn athrú roghanna paiste athphaisteáil ar an aip le go dtiocfaidh sé i bhfeidhm</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I mód Saineolaí beidh roghanna paiste ar fáil le linn an phróisis paisteála</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -508,14 +510,14 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_show_password_field">Taispeáin an focal faire</string>
     <string name="settings_system_hide_password_field">Folaigh an focal faire</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Socruithe bainisteoir allmhairithe</string>
-    <string name="settings_system_import_manager_settings_description">Athchóirigh socruithe bainisteoir ó chomhad JSON</string>
-    <string name="settings_system_import_manager_settings_fail">Theip ar shocruithe an bhainisteora a iompórtáil: %s</string>
-    <string name="settings_system_import_manager_settings_success">Socruithe bainisteoir allmhairithe</string>
-    <string name="settings_system_export_manager_settings">Socruithe bainisteoir onnmhairithe</string>
-    <string name="settings_system_export_manager_settings_description">Sábháil socruithe bainisteora chuig comhad JSON</string>
-    <string name="settings_system_export_manager_settings_fail">Theip ar shocruithe an bhainisteora a easpórtáil: %s</string>
-    <string name="settings_system_export_manager_settings_success">Socruithe an bhainisteora onnmhairithe</string>
+    <string name="settings_system_import_manager_settings">Socruithe Morphe allmhairithe</string>
+    <string name="settings_system_import_manager_settings_description">Athchóirigh socruithe Morphe ó chomhad JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Theip ar shocruithe Morphe a iompórtáil: %s</string>
+    <string name="settings_system_import_manager_settings_success">Socruithe Morphe allmhairithe</string>
+    <string name="settings_system_export_manager_settings">Socruithe Morphe onnmhairithe</string>
+    <string name="settings_system_export_manager_settings_description">Sábháil socruithe Morphe chuig comhad JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Theip ar shocruithe Morphe a easpórtáil: %s</string>
+    <string name="settings_system_export_manager_settings_success">Socruithe Morphe onnmhairithe</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Dífhabhtú</string>
     <string name="settings_system_export_debug_logs">Easpórtáil logaí dífhabhtaithe</string>

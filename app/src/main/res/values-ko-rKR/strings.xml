@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">앱을 탭하여 목록에 다시 표시할 수 있습니다</string>
     <string name="android_11_bug_dialog_title">Android 11 버그</string>
     <string name="android_11_bug_dialog_description">사용자 환경에 부정적인 영향을 미치는 Android 11 시스템 버그를 방지하려면 앱 설치 권한을 미리 부여해야 합니다</string>
+    <string name="deep_link_add_source_title">소스 추가</string>
+    <string name="deep_link_add_source_message">이 패치 소스를 Morphe에 추가하시겠습니까?</string>
+    <string name="deep_link_add_source_warning">신뢰할 수 있는 출처의 소스만 추가하세요</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">매니저 업데이트 가능</string>
+    <string name="home_update_available">Morphe 업데이트 사용 가능</string>
     <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
     <string name="home_update_error">업데이트 실패</string>
     <string name="home_update_error_subtitle">인터넷 연결 상태를 확인하고 다시 시도하세요</string>
@@ -179,7 +182,7 @@
     <string name="home_app_info_install_type_custom_installer">커스텀 설치 프로그램</string>
     <string name="home_app_info_install_type_system_installer">시스템 설치 프로그램</string>
     <string name="home_app_info_patched_at">패치 일자</string>
-    <string name="home_app_info_patch_update_available">패치 업데이트 가능</string>
+    <string name="home_app_info_patch_update_available">패치 업데이트 사용 가능</string>
     <string name="home_app_info_patch_update_available_description">새 버전의 패치가 있습니다. 최신 개선 사항 및 수정 사항을 적용하려면 앱을 다시 패치하세요</string>
     <string name="home_app_info_app_deleted_warning">앱이 제거되었습니다</string>
     <string name="home_app_info_app_deleted_description">이 앱은 Morphe 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
@@ -213,7 +216,7 @@
     <string name="patcher_ready_to_install_subtitle">설치하시려면 아래 버튼을 탭하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_storage_permission_dialog_title">저장소 경로에 접근할 수 없음</string>
-    <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe 매니저가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 부여하고 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
+    <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 허용한 후에 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
     <string name="patcher_storage_permission_description_legacy">하나 이상의 패치 옵션이 접근할 수 없는 경로를 가리키고 있습니다. 패치 옵션에서 경로를 업데이트하고 다시 시도하세요</string>
     <string name="patcher_storage_permission_grant">저장소 권한 부여</string>
     <string name="patcher_storage_permission_denied_warning">저장소 권한이 거부되었습니다. 이 경로를 사용하려면 권한을 부여하거나, 파일을 앱 전용 디렉터리로 옮겨주세요</string>
@@ -325,19 +328,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
-    <string name="settings_advanced_updates_use_prereleases">Pre-release 매니저 사용</string>
-    <string name="settings_advanced_updates_use_prereleases_description">새 실험 매니저 버전을 미리 받아볼 수 있습니다. Pre-release 패치를 받으려면 각 패치 소스에서 Pre-release 토글을 따로 활성화하세요</string>
+    <string name="settings_advanced_updates_use_prereleases">Pre-release Morphe 사용</string>
+    <string name="settings_advanced_updates_use_prereleases_description">새 Morphe 기능을 미리 사용합니다. Pre-release 패치를 받으려면 각 패치 소스에서 Pre-release 토글을 개별적으로 활성화하세요</string>
     <string name="settings_advanced_updates_allow_metered">모바일 데이터에서 업데이트</string>
-    <string name="settings_advanced_updates_allow_metered_description">모바일 데이터 사용 시 패치 소스 및 매니저 업데이트 다운로드를 허용합니다</string>
+    <string name="settings_advanced_updates_allow_metered_description">모바일 데이터를 사용하여 Morphe 및 패치 업데이트를 다운로드하도록 허용합니다</string>
     <string name="settings_advanced_updates_background_notifications">백그라운드 업데이트 알림</string>
     <string name="settings_advanced_updates_background_notifications_description">백그라운드에서 주기적으로 업데이트를 확인하고 업데이트가 있을 경우에 알림을 보냅니다</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">앱이 닫혀 있어도 새 릴리스에 대한 푸시 알림을 즉시 받습니다</string>
-    <string name="notification_channel_manager_updates">매니저 업데이트</string>
-    <string name="notification_channel_manager_updates_description">새 Morphe 매니저 버전 알림</string>
+    <string name="notification_channel_manager_updates">Morphe 업데이트</string>
+    <string name="notification_channel_manager_updates_description">Morphe 새 버전 알림</string>
     <string name="notification_channel_bundle_updates">패치 소스 업데이트</string>
     <string name="notification_channel_bundle_updates_description">새 패치 소스 버전 업데이트 알림</string>
     <string name="notification_channel_fcm_updates">업데이트 알림</string>
-    <string name="notification_channel_fcm_updates_description">새 Morphe 매니저 및 패치가 릴리스되면 즉시 푸시 알림을 받습니다. 앱이 백그라운드 상태여도 알림이 전송됩니다</string>
+    <string name="notification_channel_fcm_updates_description">새 Morphe 및 패치 릴리스에 대한 푸시 알림을 즉시 받습니다. 앱이 백그라운드에 있는 경우에도 전달됩니다</string>
     <string name="settings_advanced_update_interval">확인 빈도</string>
     <string name="settings_advanced_update_interval_dialog_title">업데이트 확인</string>
     <string name="settings_advanced_update_interval_hourly">한시간에 한번</string>
@@ -347,12 +350,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">백그라운드 확인 빈도</string>
     <string name="settings_advanced_update_interval_battery_warning">일부 기기에서는 백그라운드 확인 기능이 정상적으로 작동하지 않을 수 있습니다. 특히 Xiaomi, Huawei, Samsung, OnePlus 기기는 배터리 최적화 정책 때문에 백그라운드 작업이 제한되는 경우가 많습니다</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe 매니저 업데이트 가능</string>
+    <string name="notification_manager_update_title">Morphe 업데이트 사용 가능</string>
     <string name="notification_bundle_update_title">새 패치 사용 가능</string>
     <string name="notification_update_text">%1$s 버전 다운로드 준비 완료</string>
-    <string name="notification_bundle_update_text_unversioned">Morphe 매니저를 열어 업데이트하려면 탭하세요</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe를 열고 업데이트하려면 탭하세요</string>
     <string name="notification_permission_dialog_title">알림 허용</string>
-    <string name="notification_permission_dialog_description">Morphe 매니저는 백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 알림 권한이 필요합니다</string>
+    <string name="notification_permission_dialog_description">백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 Morphe에 알림 권한이 필요합니다</string>
     <string name="notification_post_patch_dialog_title">업데이트가 있을 때 알림을 받으시겠습니까?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
@@ -371,12 +374,11 @@
     <string name="settings_advanced_github_pat_dialog_description">풀 리퀘스트를 외부 소스로 사용하기 위해 GitHub 개인 액세스 토큰이 필요합니다.
 GitHub.com에서 public_repo 권한이 포함된 개인 액세스 토큰을 생성하세요</string>
     <string name="settings_advanced_github_pat_export_include_label">설정 내보내기에 포함</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">내보낼 매니저 설정에 이 개인 액세스 토큰을 포함합니다</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">내보낼 Morphe 설정에 이 개인 액세스 토큰을 추가합니다</string>
     <string name="settings_advanced_github_pat_export_warning">개인 액세스 토큰을 공유하지 마세요. 설정 내보내기에 포함되는 경우에는 토큰이 포함되어 있으므로 해당 파일을 비공개로 유지하세요</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">패치 옵션</string>
-    <string name="settings_advanced_patch_options_youtube_description">테마, 브랜딩, 헤더 및 Shorts 옵션</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">테마 및 브랜딩 옵션</string>
+    <string name="settings_advanced_patch_options_youtube_description">테마, 브랜딩, 헤더 옵션</string>
     <string name="settings_advanced_patch_options_restart_message">패치 옵션을 변경하려면 앱을 다시 패치해야 합니다</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">전문가 모드에서는 패치 과정 중에 패치 옵션을 사용할 수 있습니다</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -511,14 +513,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_show_password_field">비밀번호 표시</string>
     <string name="settings_system_hide_password_field">비밀번호 숨기기</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">매니저 설정 가져오기</string>
-    <string name="settings_system_import_manager_settings_description">매니져 설정을 JSON 파일에서 가져옵니다</string>
-    <string name="settings_system_import_manager_settings_fail">매니저 설정을 가져올 수 없습니다: %s</string>
-    <string name="settings_system_import_manager_settings_success">매니저 설정을 가져왔습니다</string>
-    <string name="settings_system_export_manager_settings">매니저 설정 내보내기</string>
-    <string name="settings_system_export_manager_settings_description">매니저 설정을 JSON 파일으로 내보냅니다</string>
-    <string name="settings_system_export_manager_settings_fail">매니저 설정을 내보낼 수 없습니다: %s</string>
-    <string name="settings_system_export_manager_settings_success">매니저 설정을 내보냈습니다</string>
+    <string name="settings_system_import_manager_settings">Morphe 설정 가져오기</string>
+    <string name="settings_system_import_manager_settings_description">Morphe 설정을 JSON 파일에서 가져옵니다</string>
+    <string name="settings_system_import_manager_settings_fail">Morphe 설정을 가져올 수 없습니다: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe 설정을 가져왔습니다</string>
+    <string name="settings_system_export_manager_settings">Morphe 설정 내보내기</string>
+    <string name="settings_system_export_manager_settings_description">Morphe 설정을 JSON 파일으로 내보냅니다</string>
+    <string name="settings_system_export_manager_settings_fail">Morphe 설정을 내보낼 수 없습니다: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe 설정을 내보냈습니다</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">디버그</string>
     <string name="settings_system_export_debug_logs">디버그 로그 내보내기</string>

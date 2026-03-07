@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">انقر على تطبيق لإظهاره في القائمة مرة أخرى</string>
     <string name="android_11_bug_dialog_title">خطأ Android 11</string>
     <string name="android_11_bug_dialog_description">يجب منح إذن تثبيت التطبيق مسبقًا لتجنب خطأ في نظام Android 11 سيؤثر سلبًا على تجربة المستخدم</string>
+    <string name="deep_link_add_source_title">إضافة مصدر</string>
+    <string name="deep_link_add_source_message">هل تريد إضافة مصدر التصحيح هذا إلى Morphe؟</string>
+    <string name="deep_link_add_source_warning">أضف المصادر فقط من مصادر موثوقة</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">تحديث المدير متاح</string>
+    <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
     <string name="home_update_error">فشل التحديث</string>
     <string name="home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
@@ -213,7 +216,7 @@
     <string name="patcher_ready_to_install_subtitle">اضغط على الزر أدناه للتثبيت</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
     <string name="patcher_storage_permission_dialog_title">لا يمكن الوصول إلى مسار التخزين</string>
-    <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe manager قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
+    <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
     <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى.</string>
     <string name="patcher_storage_permission_grant">منح إذن الوصول</string>
     <string name="patcher_storage_permission_denied_warning">تم رفض الإذن على التخزين. قم بإعطاء الإذن لاستخدام هذا المسار، أو نقل الملفات إلى مجلد خاص بالتطبيق.</string>
@@ -325,19 +328,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">تغيير الأيقونة</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">التحديثات</string>
-    <string name="settings_advanced_updates_use_prereleases">استخدام مدير إصدارات ما قبل الإطلاق</string>
-    <string name="settings_advanced_updates_use_prereleases_description">احصل على وصول مبكر إلى إصدارات ما قبل الإطلاق الجديدة للمدير. للحصول على إصدارات ما قبل الإطلاق، قم بتمكين قناة التطوير في كل مصدر تعديل على حدة</string>
+    <string name="settings_advanced_updates_use_prereleases">استخدام Morphe للإصدارات التجريبية</string>
+    <string name="settings_advanced_updates_use_prereleases_description">احصل على وصول مبكر إلى ميزات Morphe جديدة. لكي تحصل على إصلاحات ما قبل الإصدار، قم بتمكين مفتاح التشغيل المسبق للإصدار في كل مصدر إصلاح على حدة</string>
     <string name="settings_advanced_updates_allow_metered">التحديث على بيانات الجوّال</string>
-    <string name="settings_advanced_updates_allow_metered_description">السماح بتنزيل مصادر التعديلات و تحديثات المدير عبر بيانات الجوّال</string>
+    <string name="settings_advanced_updates_allow_metered_description">السماح لتحديثات Morphe و patch بتنزيل عبر بيانات الجوال</string>
     <string name="settings_advanced_updates_background_notifications">إشعارات تحديث الخلفية</string>
     <string name="settings_advanced_updates_background_notifications_description">تحقق بشكل دوري من توفر تحديثات في الخلفية و الإشعار عند توفرها</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">تلقي إشعارات فورية بالإصدارات الجديدة، حتى عندما يكون التطبيق مغلقًا</string>
-    <string name="notification_channel_manager_updates">إدارة التحديثات</string>
-    <string name="notification_channel_manager_updates_description">إشعارات عن إصدارات جديدة من Morphe manager</string>
+    <string name="notification_channel_manager_updates">تعديلات Morphe</string>
+    <string name="notification_channel_manager_updates_description">إشعارات حول الإصدارات الجديدة من Morphe</string>
     <string name="notification_channel_bundle_updates">تحديثات مصادر التعديل</string>
     <string name="notification_channel_bundle_updates_description">إشعارات عن إصدارات مصدر التعديل جديدة</string>
     <string name="notification_channel_fcm_updates">تنبيهات التحديث</string>
-    <string name="notification_channel_fcm_updates_description">إشعارات فورية لإصدارات جديدة من Morphe manager والتعديل. تصلك حتى عندما يكون التطبيق يعمل في الخلفية.</string>
+    <string name="notification_channel_fcm_updates_description">إشعارات فورية لإصدارات جديدة من Morphe و patch. تصلك حتى عندما يكون التطبيق يعمل في الخلفية</string>
     <string name="settings_advanced_update_interval">تكرار التحقق</string>
     <string name="settings_advanced_update_interval_dialog_title">التحقق من توفر تحديثات</string>
     <string name="settings_advanced_update_interval_hourly">مرة في الساعة</string>
@@ -347,12 +350,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">تكرار التحقق في الخلفية</string>
     <string name="settings_advanced_update_interval_battery_warning">قد لا يعمل التحقق في الخلفية بشكل موثوق على بعض الأجهزة. غالبًا ماتقيّد الشركات المصنعة مثل Xiaomi، Huawei، Samsung، و OnePlus عمليات الخلفية بشدة لتوفير البطارية</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">تحديث Morphe manager متاح</string>
+    <string name="notification_manager_update_title">تحديث Morphe متاح</string>
     <string name="notification_bundle_update_title">تعديلات جديدة متاحة</string>
     <string name="notification_update_text">إصدار %1$s جاهز للتحميل</string>
-    <string name="notification_bundle_update_text_unversioned">انقر لفتح Morphe manager وتحديثه</string>
+    <string name="notification_bundle_update_text_unversioned">انقر لفتح Morphe وتحديثه</string>
     <string name="notification_permission_dialog_title">السماح بالإشعارات</string>
-    <string name="notification_permission_dialog_description">يحتاج Morphe manager إلى إذن الإشعارات لتنبيهك عندما تكون تحديثات متاحة في الخلفية</string>
+    <string name="notification_permission_dialog_description">يحتاج Morphe إلى إذن الإشعارات لتنبيهك عندما تكون تحديثات متاحة في الخلفية</string>
     <string name="notification_post_patch_dialog_title">هل تريد أن يتم تنبيهك عندما تكون التحديثات متاحة؟</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
@@ -370,12 +373,11 @@
     <string name="settings_advanced_github_pat_dialog_title">تعيين رمز وصول شخصي لـ GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">تعيين رمز وصول شخصي (PAT) على GitHub لتتمكن من إضافة طلبات السحب كمصادر خارجية. أنشئ رمز وصول شخصي (PAT) بنطاق public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">تضمين في تصدير الإعدادات</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">يضيف هذا الرمز المميز PAT إلى إعدادات المدير المصدرة</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">يضيف هذا الرمز المميز PAT إلى إعدادات Morphe المصدرة</string>
     <string name="settings_advanced_github_pat_export_warning">لا تشارك رمز PAT الخاص بك. إذا قمت بتضمينه في إعدادات التصدير، فاحتفظ بهذا الملف خاصًا لأنه يحتوي على الرمز المميز</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">خيارات التعديل</string>
     <string name="settings_advanced_patch_options_youtube_description">المظهر، الشعار، الهوية، وخيارات Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">خيارات المظهر و الشعار</string>
     <string name="settings_advanced_patch_options_restart_message">يتطلب تغيير خيارات التعديل إعادة تعديل التطبيق حتى تسري التغييرات</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">في وضع الخبير، ستتوفر خيارات التعديل أثناء عملية التعديل</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -510,14 +512,14 @@
     <string name="settings_system_show_password_field">عرض كلمة المرور</string>
     <string name="settings_system_hide_password_field">إخفاء كلمة المرور</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">استيراد إعدادات المدير</string>
-    <string name="settings_system_import_manager_settings_description">استعادة إعدادات المدير من ملف JSON</string>
-    <string name="settings_system_import_manager_settings_fail">تعذر استيراد إعدادات المدير: %s</string>
-    <string name="settings_system_import_manager_settings_success">تم استيراد إعدادات المدير</string>
-    <string name="settings_system_export_manager_settings">تصدير إعدادات المدير</string>
-    <string name="settings_system_export_manager_settings_description">حفظ جميع إعدادات المدير في ملف JSON</string>
-    <string name="settings_system_export_manager_settings_fail">تعذر تصدير إعدادات المدير: %s</string>
-    <string name="settings_system_export_manager_settings_success">تم تصدير إعدادات المدير</string>
+    <string name="settings_system_import_manager_settings">استيراد إعدادات Morphe</string>
+    <string name="settings_system_import_manager_settings_description">استعادة إعدادات Morphe من ملف JSON</string>
+    <string name="settings_system_import_manager_settings_fail">تعذر استيراد إعدادات Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">تم استيراد إعدادات Morphe</string>
+    <string name="settings_system_export_manager_settings">تصدير إعدادات Morphe</string>
+    <string name="settings_system_export_manager_settings_description">حفظ جميع إعدادات Morphe في ملف JSON</string>
+    <string name="settings_system_export_manager_settings_fail">تعذر تصدير إعدادات Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">تم تصدير إعدادات Morphe</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">تصدير سجلات تصحيح الأخطاء</string>

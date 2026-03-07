@@ -15,8 +15,11 @@
     <string name="home_app_hidden_apps_hint">กดแอปเพื่อแสดงในรายการอีกครั้ง</string>
     <string name="android_11_bug_dialog_title">บัก Android 11</string>
     <string name="android_11_bug_dialog_description">ต้องอนุญาตเปิดสิทธิเข้าถึงการติดตั้งแอปพลิเคชันก่อน เพื่อหลีกเลี่ยงปัญหาจากระบบปฏิบัติการ Android 11 ที่มีผลกระทบต่อการใช้งานแอปพลิเคชันนี้</string>
+    <string name="deep_link_add_source_title">เพิ่มแหล่งที่มา</string>
+    <string name="deep_link_add_source_message">คุณต้องการเพิ่มแหล่งที่มาแพตช์นี้ไปยัง Morphe หรือไม่?</string>
+    <string name="deep_link_add_source_warning">เพิ่มแหล่งที่มาเฉพาะจากแหล่งที่คุณเชื่อถือเท่านั้น</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">มีอัพเดทแอปพลิเคชันใหม่ให้ใช้งานแล้ว</string>
+    <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
     <string name="home_update_available_subtitle">เวอร์ชันใหม่พร้อมถูกติดตั้งแล้ว</string>
     <string name="home_update_error">อัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
@@ -214,7 +217,7 @@
     <string name="patcher_ready_to_install_subtitle">กดปุ่มด้านล่างเพื่อติดตั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
     <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
-    <string name="patcher_storage_permission_description_api30">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ Morphe Manager ไม่สามารถอ่านได้ กรุณายืนยันสิทธิ์การเข้าถึงเก็บข้อมูลและกดปุ่มแล้วปรับปรุงจะเริ่มขึ้นอัตโนมัติ</string>
+    <string name="patcher_storage_permission_description_api30">ตัวเลือกแพตช์อย่างน้อยหนึ่งรายการชี้ไปยังพาธที่ Morphe ไม่สามารถอ่านได้ ให้สิทธิ์การเข้าถึงพื้นที่เก็บข้อมูลและแตะปุ่ม จากนั้นการแพตช์จะเริ่มทำงานโดยอัตโนมัติ</string>
     <string name="patcher_storage_permission_description_legacy">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ไม่สามารถเข้าถึงได้ อัปเดตเส้นทางในตัวเลือกการปรับปรุงและลองใหม่อีกครั้ง</string>
     <string name="patcher_storage_permission_grant">ยืนยันสิทธิ์การเข้าถึงเก็บข้อมูล</string>
     <string name="patcher_storage_permission_denied_warning">การอนุญาตในการใช้พื้นที่เก็บถาวรถูกปฏิเสธ。อนุญาตให้ใช้เส้นทางนี้หรือย้ายไฟล์ไปยังโฟลเดอร์ส่วนตัวของแอปพลิเคชัน</string>
@@ -326,19 +329,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">เปลี่ยนไอสัญ</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">อัปเดต</string>
-    <string name="settings_advanced_updates_use_prereleases">ใช้ตัวจัดการรุ่นก่อนปล่อย</string>
-    <string name="settings_advanced_updates_use_prereleases_description">รับสิทธิ์เข้าถึงเวอร์ชันใหม่ของตัวจัดการทดลองก่อนอื่น เพื่อรับแพทช์ก่อนปล่อยอย่างทางการ ให้เปิดตัวเลือกก่อนปล่อยในแต่ละแหล่งที่มาของแพทช์</string>
+    <string name="settings_advanced_updates_use_prereleases">ใช้ Morphe รุ่นทดลองก่อนเปิดตัว</string>
+    <string name="settings_advanced_updates_use_prereleases_description">รับสิทธิพิเศษในการเข้าถึงคุณสมบัติใหม่ๆ ของ Morphe ก่อนใคร เพื่อรับแพตช์รุ่นทดลอง ให้เปิดใช้งานตัวเลือกทดลองก่อนในแต่ละแหล่งที่มาของแพตช์</string>
     <string name="settings_advanced_updates_allow_metered">อัปเดตบนข้อมูลเคลื่อนที่</string>
-    <string name="settings_advanced_updates_allow_metered_description">อนุญาตให้แหล่งที่มาและตัวจัดการอัปเดตดาวน์โหลดบนข้อมูลเคลื่อนที่</string>
+    <string name="settings_advanced_updates_allow_metered_description">อนุญาตให้ Morphe และอัปเดตแพตช์ดาวน์โหลดผ่านข้อมูลมือถือ</string>
     <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
     <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนข้อความทันทีสำหรับการปล่อยใหม่ ๆ แม้แต่เมื่อแอปปิดอยู่</string>
-    <string name="notification_channel_manager_updates">จัดการอัปเดต</string>
-    <string name="notification_channel_manager_updates_description">การแจ้งเตือนเกี่ยวกับเวอร์ชันใหม่ ๆ ของ Morphe manager</string>
+    <string name="notification_channel_manager_updates">อัปเดต Morphe</string>
+    <string name="notification_channel_manager_updates_description">การแจ้งเตือนเกี่ยวกับเวอร์ชันใหม่ของ Morphe</string>
     <string name="notification_channel_bundle_updates">การอัปเดตแหล่งข้อมูลแพทช์</string>
     <string name="notification_channel_bundle_updates_description">การแจ้งเตือนเกี่ยวกับเวอร์ชันแหล่งที่มาใหม่</string>
     <string name="notification_channel_fcm_updates">อัปเดตการแจ้งเตือน</string>
-    <string name="notification_channel_fcm_updates_description">การแจ้งเตือนด่วนสำหรับการอัปเดต Morphe manager และแพ็คเกจใหม่. ส่งมาถึงแม้แต่เมื่อแอปอยู่ในพื้นหลัง</string>
+    <string name="notification_channel_fcm_updates_description">รับการแจ้งเตือนแบบพุชทันทีสำหรับการเปิดตัว Morphe และแพตช์ใหม่ จัดส่งแม้ว่าแอปจะอยู่ในพื้นหลัง</string>
     <string name="settings_advanced_update_interval">ความถี่การตรวจสอบ</string>
     <string name="settings_advanced_update_interval_dialog_title">ตรวจสอบการอัปเดต</string>
     <string name="settings_advanced_update_interval_hourly">ทุกชั่วโมง</string>
@@ -348,12 +351,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">ความถี่การตรวจสอบพื้นหลัง</string>
     <string name="settings_advanced_update_interval_battery_warning">การตรวจสอบพื้นหลังอาจไม่ทำงานได้อย่างมั่นคงบนบางอุปกรณ์. ผู้ผลิตเช่น Xiaomi, Huawei, Samsung, และ OnePlus บ่อยครั้งจำกัดขั้นตอนการทำงานพื้นหลังอย่างเข้มงวดเพื่อประหยัดแบตเตอรี่</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">มีอัปเดต Morphe manager ใหม่ให้ใช้งานแล้ว</string>
+    <string name="notification_manager_update_title">มีการอัปเดต Morphe แล้ว</string>
     <string name="notification_bundle_update_title">มีแพ็คเกจใหม่ให้ใช้งาน</string>
     <string name="notification_update_text">เวอร์ชัน %1$s เตรียมสำหรับดาวน์โหลดแล้ว</string>
-    <string name="notification_bundle_update_text_unversioned">กดเพื่อเปิด Morphe manager และอัปเดต</string>
+    <string name="notification_bundle_update_text_unversioned">แตะเพื่อเปิด Morphe และอัปเดต</string>
     <string name="notification_permission_dialog_title">อนุญาตให้มีการแจ้งเตือน</string>
-    <string name="notification_permission_dialog_description">Morphe manager 需要อนุญาตให้มีการแจ้งเตือนเพื่อแจ้งให้คุณทราบเมื่อมีการอัปเดตให้ใช้งานอยู่ในพื้นหลัง</string>
+    <string name="notification_permission_dialog_description">Morphe ต้องการสิทธิ์การแจ้งเตือนเพื่อแจ้งให้คุณทราบเมื่อมีการอัปเดตพร้อมใช้งานในพื้นหลัง</string>
     <string name="notification_post_patch_dialog_title">คุณต้องการรับการแจ้งเตือนเมื่อมีอัปเดตที่พร้อมใช้งานหรือไม่?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าแบบผู้เชี่ยวช์</string>
@@ -371,12 +374,11 @@
     <string name="settings_advanced_github_pat_dialog_title">ตั้งค่าโทเคนการเข้าถึงส่วนบุคคลของ GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">ตั้งค่า GitHub Personal Access Token เพื่อสามารถเพิ่ม pull requests เป็นแหล่งข้อมูลภายนอกได้. สร้าง PAT ด้วยช่วงสิทธิ์ public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">รวมในการส่งออกของการตั้งค่า</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">เพิ่มโทเคนนี้ไปยังการตั้งค่าการจัดการที่ส่งออก</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">เพิ่ม PAT นี้ในการตั้งค่า Morphe ที่ส่งออก</string>
     <string name="settings_advanced_github_pat_export_warning">อย่าแชร์โทเคนส่วนตัวของคุณ ถ้าคุณรวมมันเข้าไปในการส่งออกการตั้งค่า ให้เก็บไฟล์นั้นเป็นส่วนตัว เพราะมันมีโทเค็นไว้ในไฟล์</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">ตัวเลือกแพตช์</string>
-    <string name="settings_advanced_patch_options_youtube_description">ตัวเลือกธง,แบรนด์,หัวหน้า และ Shorts</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">ตัวเลือกธีมและแบรนด์ดิ้ง</string>
+    <string name="settings_advanced_patch_options_youtube_description">ธีม, แบรนด์, และตัวเลือกส่วนหัว</string>
     <string name="settings_advanced_patch_options_restart_message">เปลี่ยนตัวเลือกแพตช์ต้องรีสตาร์ทอีกครั้ง</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">ในการตั้งค่าแบบเชี่ยวชาญจะมีตัวเลือกแพตช์ในระหว่างกระบวนการแพตช์</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -511,14 +513,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_show_password_field">นำเข้าและส่งออกการตั้งค่า</string>
     <string name="settings_system_hide_password_field">นำเข้าและส่งออกการตั้งค่า</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">ล้มการนำเข้าและส่งออกการตั้งค่า: %s</string>
-    <string name="settings_system_import_manager_settings_description">นำเข้าและส่งออกการตั้งค่าเสร็จ</string>
-    <string name="settings_system_import_manager_settings_fail">ล้มเหลวในการนำเข้าค่าแคชเมนเจอร์: %s</string>
-    <string name="settings_system_import_manager_settings_success">ส่งออกการตั้งค่า</string>
-    <string name="settings_system_export_manager_settings">บันทึกการตั้งค่าไว้เป็นไฟล์ JSON</string>
-    <string name="settings_system_export_manager_settings_description">ล้มการส่งออกการตั้งค่า: %s</string>
-    <string name="settings_system_export_manager_settings_fail">ส่งออกการตั้งค่าเสร็จ</string>
-    <string name="settings_system_export_manager_settings_success">การพัฒยาย</string>
+    <string name="settings_system_import_manager_settings">นำเข้าการตั้งค่า Morphe</string>
+    <string name="settings_system_import_manager_settings_description">กู้คืนการตั้งค่า Morphe จากไฟล์ JSON</string>
+    <string name="settings_system_import_manager_settings_fail">การนำเข้าการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
+    <string name="settings_system_import_manager_settings_success">นำเข้าการตั้งค่า Morphe สำเร็จ</string>
+    <string name="settings_system_export_manager_settings">ส่งออกการตั้งค่า Morphe</string>
+    <string name="settings_system_export_manager_settings_description">บันทึกการตั้งค่า Morphe ลงในไฟล์ JSON</string>
+    <string name="settings_system_export_manager_settings_fail">การส่งออกการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
+    <string name="settings_system_export_manager_settings_success">ส่งออกการตั้งค่า Morphe สำเร็จ</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">ส่งออกไฟล์การพัฒยายสำหรับการแก้ไข</string>
     <string name="settings_system_export_debug_logs">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>

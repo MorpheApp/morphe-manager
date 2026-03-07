@@ -14,8 +14,11 @@
     <string name="home_app_hidden_apps_hint">Dodirnite aplikaciju da bi je ponovo prikazali na listi</string>
     <string name="android_11_bug_dialog_title">Android 11 greška</string>
     <string name="android_11_bug_dialog_description">Dozvola za instalaciju aplikacije mora biti odobrena prethodno kako bi se izbjegla greška u Android 11 sistemu koja će negativno utjecati na korisničko iskustvo</string>
+    <string name="deep_link_add_source_title">Dodaj izvor</string>
+    <string name="deep_link_add_source_message">Da li želite da dodate ovaj izvor patch-a u Morphe?</string>
+    <string name="deep_link_add_source_warning">Dodaj izvor samo iz izvora kojima verujete</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Ažuriranje menadžera dostupno</string>
+    <string name="home_update_available">Dostupno ažuriranje za Morphe</string>
     <string name="home_update_available_subtitle">Nova verzija sprema za instalaciju</string>
     <string name="home_update_error">Ažuriranje nije uspelo</string>
     <string name="home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
@@ -213,7 +216,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite dugme ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite dugme ispod za postavljanje</string>
     <string name="patcher_storage_permission_dialog_title">Ne mogu pristupiti putu za pohranu</string>
-    <string name="patcher_storage_permission_description_api30">Jedan ili više opcija za patching ukazuju na putove koje Morphe menadžer ne može da čita. Dajte pristup pohrani i kliknite dugme, a patching će automatski početi</string>
+    <string name="patcher_storage_permission_description_api30">Jedna ili više opcija patch-a pokazuju na putanje koje Morphe ne može da čita. Dajte dozvolu za skladište i dodirnite dugme, a zatim će se patching automatski pokrenuti</string>
     <string name="patcher_storage_permission_description_legacy">Jedan ili više opcija za patching ukazuju na putove koje ne mogu biti pristupili. Ažurirajte putove u opcijama za patching i pokušajte ponovo</string>
     <string name="patcher_storage_permission_grant">Dajte dozvolu za pohranu</string>
     <string name="patcher_storage_permission_denied_warning">Dozvola za pohranu je odbijena. Dopustite ovu putanju da biste je koristili ili premestite fajlove u privatni direktorijum aplikacije</string>
@@ -325,19 +328,19 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Promeni ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ažuriranja</string>
-    <string name="settings_advanced_updates_use_prereleases">Koristi prethodni menadžer</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Primaj raniji pristup novim eksperimentalnim verzijama menadžera. Da bi dobili preizdavačke ispravke, omogući preizdavački prekidač u svakoj izvornoj ispravci posebe.</string>
+    <string name="settings_advanced_updates_use_prereleases">Koristite Morphe pre-verziju</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Примајте рану приступ новим функцијама у Morphe-у. Да бисте добили прет-издавачке исправке, омогућите прет-издавачки окидач у сваком извору исправки одвојено</string>
     <string name="settings_advanced_updates_allow_metered">Ažuriraj na mobilnim podacima</string>
-    <string name="settings_advanced_updates_allow_metered_description">Dozvoli patch izvorima i menadžer ažuriranjima da se preuzimaju preko mobilnih podataka</string>
+    <string name="settings_advanced_updates_allow_metered_description">Омогућите Morphe-у и надоградњама исправки да се преузму преко мобилних података</string>
     <string name="settings_advanced_updates_background_notifications">Ažuriranja u pozadini</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodično proveravaj za ažuriranja u pozadini i obaveštavaj kada su dostupna</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Primaj trenutne push obavijesti za nove verzije, čak i kada je aplikacija zatvorena</string>
-    <string name="notification_channel_manager_updates">Menadžer ažuriranja</string>
-    <string name="notification_channel_manager_updates_description">Obavijesti o novim verzijama Morphe menadžera</string>
+    <string name="notification_channel_manager_updates">Надоградње Morphe-а</string>
+    <string name="notification_channel_manager_updates_description">Обавештења о новим верзијама Morphe-а</string>
     <string name="notification_channel_bundle_updates">Ažuriranja izvora</string>
     <string name="notification_channel_bundle_updates_description">Obaveštenja o novim verzijama izvora</string>
     <string name="notification_channel_fcm_updates">Ažuriraj opozive</string>
-    <string name="notification_channel_fcm_updates_description">Brzi obaveštenja za nove Morphe menadžera i ispravke. Isporučeno čak i kada je aplikacija u pozadini</string>
+    <string name="notification_channel_fcm_updates_description">Инстант пуш обавештења за нове издања Morphe-а и исправки. Доставља се чак и када је апликација у позадини</string>
     <string name="settings_advanced_update_interval">Pronalaženje frekvencije</string>
     <string name="settings_advanced_update_interval_dialog_title">Pronalaženje ažuriranja</string>
     <string name="settings_advanced_update_interval_hourly">Jedanput na sat</string>
@@ -347,12 +350,12 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Frekvencija pronalaženja u pozadini</string>
     <string name="settings_advanced_update_interval_battery_warning">Pronalaženje u pozadini možda neće funkcionisati pouzdano na nekim uređajima. Proizvođači poput Xiaomi, Huawei, Samsunga i OnePlus često agresivno ograničavaju processe u pozadini da bi sačuvali bateriju</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Dostupno ažuriranje Morphe menadžera</string>
+    <string name="notification_manager_update_title">Доступна је надоградња Morphe-а</string>
     <string name="notification_bundle_update_title">Dostupne ispravke</string>
     <string name="notification_update_text">Verzija %1$s je sprema za preuzimanje</string>
-    <string name="notification_bundle_update_text_unversioned">Kliknite da otvorite Morphe menadžer i ažurirajte</string>
+    <string name="notification_bundle_update_text_unversioned">Додирните да бисте отворили Morphe и надоградили</string>
     <string name="notification_permission_dialog_title">Dozvoli obaveštenja</string>
-    <string name="notification_permission_dialog_description">Morphe menadžer zahteva dozvolu za obaveštenja da bi vas obaveštio kada su ažuriranja dostupna u pozadini</string>
+    <string name="notification_permission_dialog_description">Morphe треба дозволу за обавештења да вас упозори када су доступне надоградње у позадини</string>
     <string name="notification_post_patch_dialog_title">Da li biste hteli da budete obavešteni kada su ažuriranja dostupna?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne postavke</string>
@@ -370,12 +373,11 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavi GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">Postavite GitHub Personal Access Token kako biste mogli dodati pull requests kao vanjske izvore. Kreirajte PAT sa opsegom public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Uključeno u postavke izvoza</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ovaj PAT u izvozne menadžerske postavke</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Додаје овај PAT у извозене подешавања Morphe-а</string>
     <string name="settings_advanced_github_pat_export_warning">Ne deli svoj PAT. Ako ga uključiš u postavke izvoza, drž taj fajl privatno jer sadrži token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opcije patchiranja</string>
-    <string name="settings_advanced_patch_options_youtube_description">Teme, brandiranje, zaglavlje i kratke opcije</string>
-    <string name="settings_advanced_patch_options_youtube_music_description">Teme i brandiranje opcije</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, brendiranje i opcije zaglavlja</string>
     <string name="settings_advanced_patch_options_restart_message">Promene u patchiranju se primenjuju tek kada se ponovno patchira aplikacija</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">U naprednom načinu opcije patchiranja će biti dostupne tokom procesa patchiranja</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -472,14 +474,14 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_system_show_password_field">Prikaži lozinku</string>
     <string name="settings_system_hide_password_field">Sakrij lozinku</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Uvezi postavke menija</string>
-    <string name="settings_system_import_manager_settings_description">Vrati postavke menija iz JSON fajla</string>
-    <string name="settings_system_import_manager_settings_fail">Nijeleženo uvoz postavki menija: %s</string>
-    <string name="settings_system_import_manager_settings_success">Postavke menija uvezeno</string>
-    <string name="settings_system_export_manager_settings">Izvezi postavke menija</string>
-    <string name="settings_system_export_manager_settings_description">Sačuvaj postavke menija u JSON fajl</string>
-    <string name="settings_system_export_manager_settings_fail">Nijeleženo izvoz postavki menija: %s</string>
-    <string name="settings_system_export_manager_settings_success">Postavke menija izvezeno</string>
+    <string name="settings_system_import_manager_settings">Увезите подешавања Morphe-а</string>
+    <string name="settings_system_import_manager_settings_description">Вратите подешавања Morphe-а из JSON датотеке</string>
+    <string name="settings_system_import_manager_settings_fail">Није успело увожење подешавања Morphe-а: %s</string>
+    <string name="settings_system_import_manager_settings_success">Увезена су подешавања Morphe-а</string>
+    <string name="settings_system_export_manager_settings">Извезите подешавања Morphe-а</string>
+    <string name="settings_system_export_manager_settings_description">Сачувајте подешавања Morphe-а у JSON датотеку</string>
+    <string name="settings_system_export_manager_settings_fail">Није успело извожење подешавања Morphe-а: %s</string>
+    <string name="settings_system_export_manager_settings_success">Извезена су подешавања Morphe-а</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
     <string name="settings_system_export_debug_logs">Izvezi evidencije otklanjanja grešaka</string>
