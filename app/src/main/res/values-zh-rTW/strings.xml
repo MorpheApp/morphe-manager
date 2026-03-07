@@ -22,8 +22,8 @@
     <string name="home_update_available_subtitle">準備安裝新版本</string>
     <string name="home_update_error">更新失敗</string>
     <string name="home_update_error_subtitle">請檢查網際網路連線，然後再試一次</string>
-    <string name="home_update_skipped_metered">更新已略過</string>
-    <string name="home_update_skipped_metered_subtitle">行動數據已啟用</string>
+    <string name="home_update_skipped_metered">已略過更新</string>
+    <string name="home_update_skipped_metered_subtitle">已啟用行動數據</string>
     <string name="home_updating_sources">正在更新來源…</string>
     <string name="home_update_progress_format">%1$s 處理完畢</string>
     <string name="home_update_success">更新來源完成</string>
