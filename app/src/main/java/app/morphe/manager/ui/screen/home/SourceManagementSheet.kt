@@ -1,8 +1,14 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
@@ -32,8 +38,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.appcompat.content.res.AppCompatResources
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -42,12 +46,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.bundles.APIPatchBundle
+import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
-import app.morphe.manager.domain.bundles.APIPatchBundle
-import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.ActionPillButton
@@ -56,6 +60,7 @@ import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
 import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -63,7 +68,7 @@ import org.koin.compose.koinInject
 import java.net.URL
 
 /**
- * Bottom sheet for managing patch bundles
+ * Bottom sheet for managing patch bundles.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -82,10 +87,18 @@ fun BundleManagementSheet(
     val sources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val patchCounts by patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
+    val activeUpdateUids by patchBundleRepository.activeUpdateUidsFlow.collectAsStateWithLifecycle(emptySet())
 
     var bundleToDelete by remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowPatches by remember { mutableStateOf<PatchBundleSource?>(null) }
-    var bundleToShowChangelog by remember { mutableStateOf<RemotePatchBundle?>(null) }
+    var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
+    val bundleToShowChangelog = bundleToShowChangelogUid
+        ?.let { uid -> sources.filterIsInstance<RemotePatchBundle>().find { it.uid == uid } }
+    val bundleToShowChangelogKey = bundleToShowChangelog?.let {
+        val usePrerelease = (it as? APIPatchBundle)?.usePrerelease == true
+                || (it as? JsonPatchBundle)?.usePrerelease == true
+        "${it.installedVersionSignature}|$usePrerelease"
+    }
 
     // Check if only default bundle exists
     val isSingleDefaultBundle = sources.size == 1
@@ -178,6 +191,7 @@ fun BundleManagementSheet(
                             bundle = bundle,
                             patchCount = patchCounts[bundle.uid] ?: 0,
                             updateInfo = manualUpdateInfo[bundle.uid],
+                            isUpdating = bundle.uid in activeUpdateUids,
                             onDelete = { bundleToDelete = bundle },
                             onDisable = { onDisable(bundle) },
                             onUpdate = { onUpdate(bundle) },
@@ -185,6 +199,10 @@ fun BundleManagementSheet(
                             onPrereleasesToggle = when {
                                 bundle is JsonPatchBundle && bundle.supportsPrerelease ||
                                         bundle is APIPatchBundle -> { usePrerelease ->
+                                    if (bundle.uid == bundleToShowChangelogUid) {
+                                        bundleToShowChangelogUid = null
+                                    }
+                                    bundle.clearChangelogCache()
                                     scope.launch { patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease) }
                                 }
                                 else -> null
@@ -192,7 +210,7 @@ fun BundleManagementSheet(
                             onPatchesClick = { bundleToShowPatches = bundle },
                             onVersionClick = {
                                 if (bundle is RemotePatchBundle) {
-                                    bundleToShowChangelog = bundle
+                                    bundleToShowChangelogUid = bundle.uid
                                 }
                             },
                             onOpenInBrowser = {
@@ -237,21 +255,24 @@ fun BundleManagementSheet(
 
     // Changelog dialog
     if (bundleToShowChangelog != null) {
-        BundleChangelogDialog(
-            src = bundleToShowChangelog!!,
-            onDismissRequest = { bundleToShowChangelog = null }
-        )
+        key(bundleToShowChangelogKey) {
+            BundleChangelogDialog(
+                src = bundleToShowChangelog,
+                onDismissRequest = { bundleToShowChangelogUid = null }
+            )
+        }
     }
 }
 
 /**
- * Card for individual bundle management
+ * Card for individual bundle management.
  */
 @Composable
 private fun BundleManagementCard(
     bundle: PatchBundleSource,
     patchCount: Int,
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
+    isUpdating: Boolean = false,
     onDelete: () -> Unit,
     onDisable: () -> Unit,
     onUpdate: () -> Unit,
@@ -368,7 +389,7 @@ private fun BundleManagementCard(
                         title = stringResource(R.string.patches),
                         value = patchCount.toString(),
                         onClick = onPatchesClick,
-                        enabled = isEnabled
+                        enabled = isEnabled && !isUpdating
                     )
 
                     // Version
@@ -377,7 +398,8 @@ private fun BundleManagementCard(
                         icon = Icons.Outlined.Update,
                         title = stringResource(R.string.version),
                         value = bundle.version?.removePrefix("v") ?: "N/A",
-                        onClick = onVersionClick
+                        onClick = onVersionClick,
+                        enabled = !isUpdating
                     )
 
                     // Open in browser button
@@ -797,6 +819,7 @@ fun BundleIcon(
 private fun RemoteAvatar(
     url: String,
     fallbackUrl: String? = null,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
     // Initialise immediately from cache

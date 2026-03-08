@@ -5,6 +5,7 @@ import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.network.utils.getOrThrow
+import app.morphe.manager.util.ChangelogEntry
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -125,20 +126,65 @@ sealed class RemotePatchBundle(
         return asset
     }
 
+    /**
+     * Shared cache logic for [fetchChangelogEntries] and its overrides.
+     */
+    protected suspend fun fetchAndCacheEntries(
+        cacheKey: String,
+        sinceVersion: String?,
+        fetch: suspend () -> List<ChangelogEntry>
+    ): List<ChangelogEntry> {
+        val now = System.currentTimeMillis()
+        val allEntries = entriesCacheMutex.withLock {
+            entriesCache[cacheKey]?.takeIf { now - it.first <= CHANGELOG_CACHE_TTL }?.second
+        } ?: run {
+            val fetched = fetch()
+            entriesCacheMutex.withLock { entriesCache[cacheKey] = now to fetched }
+            fetched
+        }
+        return if (sinceVersion != null)
+            app.morphe.manager.util.ChangelogParser.entriesNewerThan(allEntries, sinceVersion)
+        else allEntries
+    }
+
+    /**
+     * Fetches entries from CHANGELOG.md next to the bundle endpoint.
+     * Results cached for [CHANGELOG_CACHE_TTL]; invalidate via [clearChangelogCache].
+     */
+    open suspend fun fetchChangelogEntries(
+        sinceVersion: String? = null
+    ): List<ChangelogEntry> {
+        val api: MorpheAPI by inject()
+        val changelogUrl = api.changelogUrlFromBundleEndpoint(endpoint) ?: return emptyList()
+        return fetchAndCacheEntries("$uid|$changelogUrl", sinceVersion) {
+            api.fetchChangelogFromUrl(changelogUrl)
+        }
+    }
+
     fun clearChangelogCache() {
-        val key = "$uid|$endpoint"
+        val assetKey = "$uid|$endpoint"
         changelogCacheMutex.tryLock()
         try {
-            changelogCache.remove(key)
+            changelogCache.remove(assetKey)
         } finally {
             changelogCacheMutex.unlock()
+        }
+
+        entriesCacheMutex.tryLock()
+
+        try {
+            entriesCache.keys.removeAll { it.startsWith("$uid|") }
+        } finally {
+            entriesCacheMutex.unlock()
         }
     }
 
     companion object {
-        private const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
+        internal const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
         private val changelogCacheMutex = Mutex()
         private val changelogCache = mutableMapOf<String, CachedChangelog>()
+        internal val entriesCacheMutex = Mutex()
+        internal val entriesCache = mutableMapOf<String, Pair<Long, List<ChangelogEntry>>>()
 
         /**
          * Infer GitHub page URL from various endpoint formats
@@ -280,6 +326,16 @@ class JsonPatchBundle(
         }
     }
 
+    override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
+        // endpoint stores the original branch - rebuild the URL for the active branch
+        val api: MorpheAPI by inject()
+        val activeEndpoint = parseGitHubUrl(endpoint)
+        val changelogUrl = api.changelogUrlFromBundleEndpoint(activeEndpoint) ?: return emptyList()
+        return fetchAndCacheEntries("$uid|$changelogUrl", sinceVersion) {
+            api.fetchChangelogFromUrl(changelogUrl)
+        }
+    }
+
     override fun copy(
         error: Throwable?,
         name: String,
@@ -343,6 +399,11 @@ class APIPatchBundle(
     private val api: MorpheAPI by inject()
 
     override suspend fun getLatestInfo() = api.getPatchesUpdate(usePrerelease).getOrThrow()
+
+    override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
+        val branch = if (usePrerelease) "dev" else "main"
+        return fetchAndCacheEntries("$uid|$branch", sinceVersion) { api.fetchPatchesChangelog(branch) }
+    }
 
     override fun copy(
         error: Throwable?,
