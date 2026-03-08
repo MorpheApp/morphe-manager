@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
     <string name="sources_management_prerelease_toggle">Gumamit ng mga pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Tumanggap ng maagang pag-access sa mga bagong experimental na bersyon ng patch</string>
+    <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Pangalan na ipapakita</string>
     <string name="sources_dialog_rename">Baguhin ang mapagkukunan ng patch</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Paganahin lahat</string>
     <string name="expert_mode_no_results">Walang nakita na patch</string>
     <string name="expert_mode_no_patches">Walang magagamit na patch</string>
+    <string name="expert_mode_universal_patches">Mga unibersal na patch</string>
     <string name="expert_mode_multiple_sources_warning_title">Maramihang mga mapagkukunang patch ang napili</string>
     <string name="expert_mode_multiple_sources_warning_message">"Pinili mo ang mga patch mula sa maramihang mapagkukunang patch. Maaari itong magdulot ng isyu sa kompatibilidad o hindi inaasahang kilos.
 

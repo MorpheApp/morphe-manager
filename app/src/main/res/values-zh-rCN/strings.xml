@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">执行 %s 失败</string>
     <string name="sources_management_prerelease_toggle">使用预发布补丁</string>
     <string name="sources_management_prerelease_toggle_description">提前体验新的实验性补丁版本</string>
+    <string name="sources_management_already_exists">此资源已添加</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">显示名称</string>
     <string name="sources_dialog_rename">重命名补丁配置文件</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_no_patches">无可用更新</string>
+    <string name="expert_mode_universal_patches">通用补丁</string>
     <string name="expert_mode_multiple_sources_warning_title">已选择多个补丁源</string>
     <string name="expert_mode_multiple_sources_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意想不到的行为。
 

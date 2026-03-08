@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
     <string name="sources_management_prerelease_toggle">Usar patches pré-lançamento</string>
     <string name="sources_management_prerelease_toggle_description">Receber acesso antecipado a novas versões experimentais de patches</string>
+    <string name="sources_management_already_exists">Esta fonte já foi adicionada</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome de exibição</string>
     <string name="sources_dialog_rename">Renomear origem de patch</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Ativar todos</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_no_patches">Não há atualizações disponíveis</string>
+    <string name="expert_mode_universal_patches">Patches universais</string>
     <string name="expert_mode_multiple_sources_warning_title">Várias fontes de patch selecionadas</string>
     <string name="expert_mode_multiple_sources_warning_message">"Você selecionou patches de várias fontes de patch. Isso pode causar problemas de compatibilidade ou comportamento inesperado.
 

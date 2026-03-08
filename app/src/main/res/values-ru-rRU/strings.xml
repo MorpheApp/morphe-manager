@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
     <string name="sources_management_prerelease_toggle">Использовать пред релиз патчи</string>
     <string name="sources_management_prerelease_toggle_description">Получать ранний доступ к новым экспериментальным версиям патчей</string>
+    <string name="sources_management_already_exists">Этот источник уже добавлен</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
     <string name="sources_dialog_rename">Переименовать источник патча</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
     <string name="expert_mode_no_patches">Нет доступных патчей</string>
+    <string name="expert_mode_universal_patches">Универсальные патчи</string>
     <string name="expert_mode_multiple_sources_warning_title">Выбрано несколько источников патчей</string>
     <string name="expert_mode_multiple_sources_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
 
@@ -377,7 +379,7 @@
     <string name="settings_advanced_github_pat_export_warning">Не распространяйте свой Токен. Если вы включаете его в экспорт настроек, сохраните этот файл приватным, поскольку он содержит токен</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Параметры патчей</string>
-    <string name="settings_advanced_patch_options_youtube_description">Тема оформления, брендинг и параметры заголовка</string>
+    <string name="settings_advanced_patch_options_youtube_description">Тема, брендинг, и параметры заголовка</string>
     <string name="settings_advanced_patch_options_restart_message">Чтобы изменения параметров патчей вступили в силу, нужно повторно патчить приложение</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">В режиме эксперта параметры патчей будут доступны во время процесса патчинга</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->

@@ -116,6 +116,7 @@
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
     <string name="expert_mode_no_patches">Níl aon phaistí ar fáil</string>
+    <string name="expert_mode_universal_patches">Paistí uilíocha</string>
     <string name="expert_mode_multiple_sources_warning_title">Ilfhoinsí paiste roghnaithe</string>
     <string name="expert_mode_multiple_sources_warning_message">"Tá paistí roghnaithe agat ó fhoinsí éagsúla paistí. D’fhéadfadh fadhbanna comhoiriúnachta nó iompar gan choinne a bheith mar thoradh air seo.
 

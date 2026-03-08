@@ -57,6 +57,7 @@
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_prerelease_toggle">ใช้แพทช์ก่อนปล่อยอย่างทางการ</string>
     <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงเวอร์ชันใหม่ของแพทช์ทดลองก่อนอื่น</string>
+    <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
@@ -117,6 +118,7 @@
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
     <string name="expert_mode_no_patches">ไม่มีแพตซ์ให้ใช้งาน</string>
+    <string name="expert_mode_universal_patches">แพตช์สากล</string>
     <string name="expert_mode_multiple_sources_warning_title">หลายแหล่งปรับปรุงถูกเลือก</string>
     <string name="expert_mode_multiple_sources_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
 

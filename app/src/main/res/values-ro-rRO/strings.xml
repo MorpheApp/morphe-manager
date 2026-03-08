@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Eșec la deschiderea URL-ului</string>
     <string name="sources_management_prerelease_toggle">Folosiți patch-uri pre-lansare</string>
     <string name="sources_management_prerelease_toggle_description">Primești acces precoț la noi versiuni experimentale de patch-uri</string>
+    <string name="sources_management_already_exists">Această sursă a fost deja adăugată</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nume afișat</string>
     <string name="sources_dialog_rename">Renumează sursă de patach</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_no_patches">Nu există patch-uri disponibile</string>
+    <string name="expert_mode_universal_patches">Patch-uri universale</string>
     <string name="expert_mode_multiple_sources_warning_title">Sursă de modificare multiplă selectată</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ați selectat modificări din surse de modificare multiple. Acest lucru poate cauza probleme de compatibilitate sau comportament neașteptat.
 

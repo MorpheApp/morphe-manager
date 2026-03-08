@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Nijeleženo otvaranje URL</string>
     <string name="sources_management_prerelease_toggle">Koristi preizdavačke ispravke</string>
     <string name="sources_management_prerelease_toggle_description">Primaj raniji pristup novim eksperimentalnim verzijama ispravaka</string>
+    <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ime ime</string>
     <string name="sources_dialog_rename">Promeni ime</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patchova</string>
     <string name="expert_mode_no_patches">Nema dostupnih patchova</string>
+    <string name="expert_mode_universal_patches">Univerzalni patch-evi</string>
     <string name="expert_mode_multiple_sources_warning_title">Izabrali ste patch-ove izvišnje izvora</string>
     <string name="expert_mode_multiple_sources_warning_message">"Izabrali ste patch-ove izvišnje izvora. Ovo može uzrokovati kompatibilnost problema ili neočekivano ponašanje.
 

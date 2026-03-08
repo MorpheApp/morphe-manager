@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
     <string name="sources_management_prerelease_toggle">Použít předběžné patche</string>
     <string name="sources_management_prerelease_toggle_description">Získejte předběžný přístup k novým experimentálním verzím patche. Pro získání předběžných patche zapněte předběžný přepínač u každé zdrojové lokace odděleně.</string>
+    <string name="sources_management_already_exists">Tento zdroj byl již přidán</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazit název</string>
     <string name="sources_dialog_rename">Přejmenovat zdroj záplat</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Zapnout vše</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
     <string name="expert_mode_no_patches">Nejsou dostupné žádné záplaty</string>
+    <string name="expert_mode_universal_patches">Univerzální záplaty</string>
     <string name="expert_mode_multiple_sources_warning_title">Vybráno více zdrojů pro aktualizace</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vybrali jste aktualizace z více zdrojů. To může způsobit problémy s kompatibilitou nebo neočekávané chování.
 

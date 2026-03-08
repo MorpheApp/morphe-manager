@@ -15,8 +15,8 @@
     <string name="android_11_bug_dialog_title">خطأ Android 11</string>
     <string name="android_11_bug_dialog_description">يجب منح إذن تثبيت التطبيق مسبقًا لتجنب خطأ في نظام Android 11 سيؤثر سلبًا على تجربة المستخدم</string>
     <string name="deep_link_add_source_title">إضافة مصدر</string>
-    <string name="deep_link_add_source_message">هل تريد إضافة مصدر التصحيح هذا إلى Morphe؟</string>
-    <string name="deep_link_add_source_warning">أضف المصادر فقط من مصادر موثوقة</string>
+    <string name="deep_link_add_source_message">هل تريد إضافة مصدر التعديل هذا إلى Morphe؟</string>
+    <string name="deep_link_add_source_warning">أضف مصدر فقط من المصادر التي تثق بها</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_management_prerelease_toggle">استخدام إصدارات تعديلات ما قبل الإطلاق</string>
     <string name="sources_management_prerelease_toggle_description">احصل على وصول مبكر إلى إصدار تعديلات ما قبل الإطلاق</string>
+    <string name="sources_management_already_exists">تمت إضافة هذا المصدر بالفعل</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">الاسم المعروض</string>
     <string name="sources_dialog_rename">إعادة تسمية مصدر التعديل</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
     <string name="expert_mode_no_patches">لا يوجد تعديلات متاحة</string>
+    <string name="expert_mode_universal_patches">التعديلات الشاملة</string>
     <string name="expert_mode_multiple_sources_warning_title">تم تحديد مصادر تعديل متعددة</string>
     <string name="expert_mode_multiple_sources_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
 
@@ -328,19 +330,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">تغيير الأيقونة</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">التحديثات</string>
-    <string name="settings_advanced_updates_use_prereleases">استخدام Morphe للإصدارات التجريبية</string>
-    <string name="settings_advanced_updates_use_prereleases_description">احصل على وصول مبكر إلى ميزات Morphe جديدة. لكي تحصل على إصلاحات ما قبل الإصدار، قم بتمكين مفتاح التشغيل المسبق للإصدار في كل مصدر إصلاح على حدة</string>
+    <string name="settings_advanced_updates_use_prereleases">استخدام إصدارات Morphe ما قبل الإطلاق</string>
+    <string name="settings_advanced_updates_use_prereleases_description">احصل على وصول مبكر إلى ميزات Morphe جديدة. لكي تحصل على تعديلات ما قبل الإصدار، قم بتمكين مفتاح ما قبل الإطلاق في كل مصدر تعديل على حدة</string>
     <string name="settings_advanced_updates_allow_metered">التحديث على بيانات الجوّال</string>
-    <string name="settings_advanced_updates_allow_metered_description">السماح لتحديثات Morphe و patch بتنزيل عبر بيانات الجوال</string>
+    <string name="settings_advanced_updates_allow_metered_description">السماح بتنزيل تحديثات Morphe و التعديلات عبر بيانات الجوّال</string>
     <string name="settings_advanced_updates_background_notifications">إشعارات تحديث الخلفية</string>
     <string name="settings_advanced_updates_background_notifications_description">تحقق بشكل دوري من توفر تحديثات في الخلفية و الإشعار عند توفرها</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">تلقي إشعارات فورية بالإصدارات الجديدة، حتى عندما يكون التطبيق مغلقًا</string>
-    <string name="notification_channel_manager_updates">تعديلات Morphe</string>
+    <string name="notification_channel_manager_updates">تحديثات Morphe</string>
     <string name="notification_channel_manager_updates_description">إشعارات حول الإصدارات الجديدة من Morphe</string>
     <string name="notification_channel_bundle_updates">تحديثات مصادر التعديل</string>
     <string name="notification_channel_bundle_updates_description">إشعارات عن إصدارات مصدر التعديل جديدة</string>
     <string name="notification_channel_fcm_updates">تنبيهات التحديث</string>
-    <string name="notification_channel_fcm_updates_description">إشعارات فورية لإصدارات جديدة من Morphe و patch. تصلك حتى عندما يكون التطبيق يعمل في الخلفية</string>
+    <string name="notification_channel_fcm_updates_description">إشعارات فورية لإصدارات جديدة من Morphe و التعديلات. تصلك حتى عندما يكون التطبيق يعمل في الخلفية</string>
     <string name="settings_advanced_update_interval">تكرار التحقق</string>
     <string name="settings_advanced_update_interval_dialog_title">التحقق من توفر تحديثات</string>
     <string name="settings_advanced_update_interval_hourly">مرة في الساعة</string>
@@ -355,7 +357,7 @@
     <string name="notification_update_text">إصدار %1$s جاهز للتحميل</string>
     <string name="notification_bundle_update_text_unversioned">انقر لفتح Morphe وتحديثه</string>
     <string name="notification_permission_dialog_title">السماح بالإشعارات</string>
-    <string name="notification_permission_dialog_description">يحتاج Morphe إلى إذن الإشعارات لتنبيهك عندما تكون تحديثات متاحة في الخلفية</string>
+    <string name="notification_permission_dialog_description">يحتاج Morphe إلى إذن الإشعارات لتنبيهك عند توفر تحديثات في الخلفية</string>
     <string name="notification_post_patch_dialog_title">هل تريد أن يتم تنبيهك عندما تكون التحديثات متاحة؟</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
@@ -377,7 +379,7 @@
     <string name="settings_advanced_github_pat_export_warning">لا تشارك رمز PAT الخاص بك. إذا قمت بتضمينه في إعدادات التصدير، فاحتفظ بهذا الملف خاصًا لأنه يحتوي على الرمز المميز</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">خيارات التعديل</string>
-    <string name="settings_advanced_patch_options_youtube_description">المظهر، الشعار، الهوية، وخيارات Shorts</string>
+    <string name="settings_advanced_patch_options_youtube_description">المظهر، الهوية، وخيارات علامة الشعار</string>
     <string name="settings_advanced_patch_options_restart_message">يتطلب تغيير خيارات التعديل إعادة تعديل التطبيق حتى تسري التغييرات</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">في وضع الخبير، ستتوفر خيارات التعديل أثناء عملية التعديل</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
