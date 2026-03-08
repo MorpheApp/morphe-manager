@@ -1002,6 +1002,19 @@ class PatchBundleRepository(
 //                return@dispatchAction state
 //            }
 
+
+            // Check for duplicate source
+            val isDuplicate = state.sources.values.any { src ->
+                src is RemotePatchBundle && src.endpoint.equals(normalizedUrl, ignoreCase = true)
+            }
+
+            if (isDuplicate) {
+                withContext(Dispatchers.Main) {
+                    app.toast(app.getString(R.string.sources_management_already_exists))
+                }
+                return@dispatchAction state
+            }
+
             var src = createEntity(
                 "",
                 SourceInfo.from(normalizedUrl),
