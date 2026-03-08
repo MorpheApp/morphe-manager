@@ -15,8 +15,8 @@
     <string name="android_11_bug_dialog_title">Помилка Android 11</string>
     <string name="android_11_bug_dialog_description">Дозвіл на встановлення застосунку необхідно надати заздалегідь, щоб уникнути помилки в Android 11, яка негативно вплине на взаємодію з користувачем</string>
     <string name="deep_link_add_source_title">Додати джерело</string>
-    <string name="deep_link_add_source_message">Ви хочете додати це джерело патчу в Morphe?</string>
-    <string name="deep_link_add_source_warning">Додавайте джерела лише з джерел, яким ви довіряєте</string>
+    <string name="deep_link_add_source_message">Ви хочете додати це джерело патчів в Morphe?</string>
+    <string name="deep_link_add_source_warning">Додавайте лише джерела, яким ви довіряєте.</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступне оновлення Morphe</string>
     <string name="home_update_available_subtitle">Нова версія готова до встановлення</string>
@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_management_prerelease_toggle">Передрелізні версії патчів</string>
     <string name="sources_management_prerelease_toggle_description">Отримувати ранній доступ до нових експериментальних версій патчів</string>
+    <string name="sources_management_already_exists">Це джерело вже додано</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Увімкнути всі</string>
     <string name="expert_mode_no_results">Патчі не знайдено</string>
     <string name="expert_mode_no_patches">Патчі недоступні</string>
+    <string name="expert_mode_universal_patches">Універсальні патчі</string>
     <string name="expert_mode_multiple_sources_warning_title">Вибрано декілька джерел патчів</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ви вибрали патчі з кількох джерел патчів. Це може спричинити проблеми сумісності або неочікувану поведінку.
 
@@ -216,7 +218,7 @@
     <string name="patcher_ready_to_install_subtitle">Натисніть кнопку нижче, щоб встановити</string>
     <string name="patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
     <string name="patcher_storage_permission_dialog_title">Не вдається отримати доступ до шляху зберігання</string>
-    <string name="patcher_storage_permission_description_api30">Один або декілька параметрів патчу вказують на шляхи, які Morphe не може прочитати. Надайте доступ до сховища та натисніть кнопку, після чого патч розпочнеться автоматично</string>
+    <string name="patcher_storage_permission_description_api30">Один або декілька параметрів патчів вказують на шляхи, які Morphe не може прочитати. Надайте доступ до сховища та натисніть кнопку, після чого патчінг розпочнеться автоматично</string>
     <string name="patcher_storage_permission_description_legacy">Одна або декілька опцій патчу вказують на шляхи, до яких немає доступу. Оновіть шляхи в опціях патчу та спробуйте знову</string>
     <string name="patcher_storage_permission_grant">Надати доступ до сховища</string>
     <string name="patcher_storage_permission_denied_warning">Дозвіл до сховища відхилено. Надайте дозвіл, щоб використовувати цей шлях, або перемістіть файли до приватного каталогу додатку</string>
@@ -328,19 +330,19 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Змінити іконку</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Оновлення</string>
-    <string name="settings_advanced_updates_use_prereleases">Використовувати попередню версію Morphe</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Отримайте ранній доступ до нових функцій Morphe. Щоб отримати перед реліз патчі, увімкніть перемикач перед релізу в кожному джерелі патчів окремо</string>
+    <string name="settings_advanced_updates_use_prereleases">Передрелізна версія менеджера</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Отримувати ранній доступ до нових функцій Morphe. Щоб отримувати передрелізні версії патчів, увімкніть перемикач передрелізу в кожному джерелі патчів окремо</string>
     <string name="settings_advanced_updates_allow_metered">Оновлення через мобільну мережу</string>
-    <string name="settings_advanced_updates_allow_metered_description">Дозволити завантаження оновлень Morphe та патчів через мобільні дані</string>
+    <string name="settings_advanced_updates_allow_metered_description">Дозволити завантаження оновлень Morphe та патчів через мобільну мережу</string>
     <string name="settings_advanced_updates_background_notifications">Фонові сповіщення про оновлення</string>
     <string name="settings_advanced_updates_background_notifications_description">Періодично перевіряти наявність оновлень у фоновому режимі та повідомляти про їх доступність</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Отримувати миттєві push-сповіщення про нові релізи, навіть коли додаток закрито</string>
-    <string name="notification_channel_manager_updates">Morphe оновлення</string>
+    <string name="notification_channel_manager_updates">Оновлення Morphe</string>
     <string name="notification_channel_manager_updates_description">Сповіщення про нові версії Morphe</string>
     <string name="notification_channel_bundle_updates">Оновлення джерел патчів</string>
     <string name="notification_channel_bundle_updates_description">Сповіщення про нові версії джерел патчів</string>
     <string name="notification_channel_fcm_updates">Попередження про оновлення</string>
-    <string name="notification_channel_fcm_updates_description">Миттєві push-сповіщення про нові релізи Morphe та патчів. Доставляються навіть тоді, коли програма працює у фоновому режимі.</string>
+    <string name="notification_channel_fcm_updates_description">Миттєві push-сповіщення про нові релізи Morphe та патчів. Доставляються навіть тоді, коли програма працює у фоновому режимі</string>
     <string name="settings_advanced_update_interval">Частота перевірки</string>
     <string name="settings_advanced_update_interval_dialog_title">Перевірка наявності оновлень</string>
     <string name="settings_advanced_update_interval_hourly">Раз на годину</string>
@@ -373,11 +375,11 @@
     <string name="settings_advanced_github_pat_dialog_title">Встановити GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">Встановіть GitHub Personal Access Token, щоб мати змогу додавати pull requests як зовнішні джерела. Створіть PAT з ключем public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Включити в експорт налаштувань</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Додає цей Токен до експортованих налаштувань Morphe</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Додає цей PAT до експортованих налаштувань Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Не поширюйте свій PAT (Personal access token). Якщо ви включаєте його в експорт налаштувань, збережіть цей файл приватним, оскільки він містить токен</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Параметри патчів</string>
-    <string name="settings_advanced_patch_options_youtube_description">Тема, брендинг та параметри заголовка</string>
+    <string name="settings_advanced_patch_options_youtube_description">Параметри теми, брендингу та заголовку</string>
     <string name="settings_advanced_patch_options_restart_message">Щоб зміни параметрів патчів набрали чинності, потрібно повторно патчити застосунок</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">У режимі експерта параметри патчів будуть доступні під час процесу патчінгу</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -515,11 +517,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings">Імпорт налаштувань Morphe</string>
     <string name="settings_system_import_manager_settings_description">Відновити налаштування Morphe з файлу JSON</string>
     <string name="settings_system_import_manager_settings_fail">Не вдалося імпортувати налаштування Morphe: %s</string>
-    <string name="settings_system_import_manager_settings_success">Morphe налаштування імпортовано</string>
+    <string name="settings_system_import_manager_settings_success">Налаштування Morphe імпортовано</string>
     <string name="settings_system_export_manager_settings">Експорт налаштувань Morphe</string>
     <string name="settings_system_export_manager_settings_description">Зберегти налаштування Morphe у файл JSON</string>
     <string name="settings_system_export_manager_settings_fail">Не вдалося експортувати налаштування Morphe: %s</string>
-    <string name="settings_system_export_manager_settings_success">Morphe налаштування експортовано</string>
+    <string name="settings_system_export_manager_settings_success">Налаштування Morphe експортовано</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Налагодження</string>
     <string name="settings_system_export_debug_logs">Експорт журналів налагодження</string>

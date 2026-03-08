@@ -288,17 +288,13 @@ fun ExpertModeDialog(
                             .verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        filteredPatches.forEach { (patch, isEnabled) ->
-                            PatchCard(
-                                patch = patch,
-                                isEnabled = isEnabled,
-                                onToggle = { togglePatch(bundle.uid, patch.name) },
-                                onConfigureOptions = {
-                                    if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to patch
-                                },
-                                hasOptions = !patch.options.isNullOrEmpty()
-                            )
-                        }
+                        PatchListWithUniversalSection(
+                            patches = filteredPatches,
+                            onToggle = { togglePatch(bundle.uid, it) },
+                            onConfigureOptions = {
+                                if (!it.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to it
+                            }
+                        )
                     }
                 }
             } else {
@@ -409,17 +405,13 @@ fun ExpertModeDialog(
                                     .verticalScroll(rememberScrollState()),
                                 verticalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                patches.forEach { (patch, isEnabled) ->
-                                    PatchCard(
-                                        patch = patch,
-                                        isEnabled = isEnabled,
-                                        onToggle = { togglePatch(bundle.uid, patch.name) },
-                                        onConfigureOptions = {
-                                            if (!patch.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to patch
-                                        },
-                                        hasOptions = !patch.options.isNullOrEmpty()
-                                    )
-                                }
+                                PatchListWithUniversalSection(
+                                    patches = patches,
+                                    onToggle = { togglePatch(bundle.uid, it) },
+                                    onConfigureOptions = {
+                                        if (!it.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to it
+                                    }
+                                )
                             }
                         }
                     }
@@ -469,6 +461,68 @@ fun ExpertModeDialog(
             },
             onDismiss = { selectedPatchForOptions = null }
         )
+    }
+}
+
+/**
+ * Renders a patch list split into regular patches and a "Universal patches" section at the bottom.
+ * Universal patches are those with no compatible packages defined.
+ */
+@Composable
+private fun PatchListWithUniversalSection(
+    patches: List<Pair<PatchInfo, Boolean>>,
+    onToggle: (String) -> Unit,
+    onConfigureOptions: (PatchInfo) -> Unit,
+) {
+    val (regular, universal) = remember(patches) {
+        patches.partition { (patch, _) -> !patch.compatiblePackages.isNullOrEmpty() }
+    }
+
+    regular.forEach { (patch, isEnabled) ->
+        PatchCard(
+            patch = patch,
+            isEnabled = isEnabled,
+            onToggle = { onToggle(patch.name) },
+            onConfigureOptions = { onConfigureOptions(patch) },
+            hasOptions = !patch.options.isNullOrEmpty()
+        )
+    }
+
+    if (universal.isNotEmpty()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = if (regular.isNotEmpty()) 8.dp else 0.dp, bottom = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Public,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.size(14.dp)
+            )
+            Text(
+                text = stringResource(R.string.expert_mode_universal_patches),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            HorizontalDivider(
+                modifier = Modifier.weight(1f),
+                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                thickness = 0.5.dp
+            )
+        }
+
+        universal.forEach { (patch, isEnabled) ->
+            PatchCard(
+                patch = patch,
+                isEnabled = isEnabled,
+                onToggle = { onToggle(patch.name) },
+                onConfigureOptions = { onConfigureOptions(patch) },
+                hasOptions = !patch.options.isNullOrEmpty()
+            )
+        }
     }
 }
 

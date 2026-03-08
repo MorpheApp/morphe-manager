@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Serokê URL nefirote</string>
     <string name="sources_management_prerelease_toggle">Dirûtinên pêşbirî bikar bîne</string>
     <string name="sources_management_prerelease_toggle_description">Rêxistinê zûtir vekişîna versiyonên eksperîmental ên nû bistîne</string>
+    <string name="sources_management_already_exists">Evîn pêştirîye, berê zêdekirine.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Navnê nîşankêr</string>
     <string name="sources_dialog_rename">Ji bo guherîna çavkaniyê navê nû</string>
@@ -115,6 +116,7 @@
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
     <string name="expert_mode_no_patches">Paqejî te hebin</string>
+    <string name="expert_mode_universal_patches">Pêtên hevpar.</string>
     <string name="expert_mode_multiple_sources_warning_title">Berî çend seyarên bejna tê</string>
     <string name="expert_mode_multiple_sources_warning_message">"Hûn bejna seyarê berî çendan bejna kirin. Gûma serdebaza pêşçuna bêgîri azre be."</string>
     <!-- Home Screen - Home Sub-Dialogs -->

@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Ei toimi linkin avaamis</string>
     <string name="sources_management_prerelease_toggle">Käytä ennakkopäivityksiä</string>
     <string name="sources_management_prerelease_toggle_description">Saa varhainen pääsy uusiin kokeellisiin versiomiin. Käytä ennakkopäivityksiä.</string>
+    <string name="sources_management_already_exists">Tämä lähde on jo lisätty</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Näytönimi</string>
     <string name="sources_dialog_rename">Nimeä patch uudelleen</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
     <string name="expert_mode_no_patches">Ei patcheja saatavilla</string>
+    <string name="expert_mode_universal_patches">Yleismaailmalliset korjaukset</string>
     <string name="expert_mode_multiple_sources_warning_title">Valittu useita päivitys lähteitä</string>
     <string name="expert_mode_multiple_sources_warning_message">"Olet valinnut päivitykset useista päivitys lähteistä. Tämä saattaa aiheuttaa yhteensopivuusongelmia tai odottamattomia toimintoja.
 

@@ -14,9 +14,9 @@
     <string name="home_app_hidden_apps_hint">Tocca un\'app per mostrarla di nuovo nella lista</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso di installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
-    <string name="deep_link_add_source_title">Aggiungi sorgente</string>
-    <string name="deep_link_add_source_message">Vuoi aggiungere questa sorgente patch a Morphe?</string>
-    <string name="deep_link_add_source_warning">Aggiungi sorgenti solo da fonti di cui ti fidi</string>
+    <string name="deep_link_add_source_title">Aggiungi fonte</string>
+    <string name="deep_link_add_source_message">Vuoi aggiungere questa fonte delle patch a Morphe?</string>
+    <string name="deep_link_add_source_warning">Aggiungi solo fonti da fonti di cui ti fidi</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Aggiornamento di Morphe disponibile</string>
     <string name="home_update_available_subtitle">Nuova versione pronta per l\'installazione</string>
@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
     <string name="sources_management_prerelease_toggle">Usa le patch di anteprima</string>
     <string name="sources_management_prerelease_toggle_description">Ottieni l\'accesso anticipato alle nuove versioni sperimentali delle patch.</string>
+    <string name="sources_management_already_exists">Questa fonte è già stata aggiunta</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome visualizzato</string>
     <string name="sources_dialog_rename">Rinomina la fonte delle patch</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Abilita tutte</string>
     <string name="expert_mode_no_results">Nessuna patch trovata</string>
     <string name="expert_mode_no_patches">Nessuna patch disponibile</string>
+    <string name="expert_mode_universal_patches">Patch universali</string>
     <string name="expert_mode_multiple_sources_warning_title">Molteplici fonti delle patch selezionate</string>
     <string name="expert_mode_multiple_sources_warning_message">"Hai selezionato delle patch da molteplici fonti delle patch. Ciò potrebbe causare problemi di compatibilità o comportamenti imprevisti.
 

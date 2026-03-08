@@ -1,3 +1,40 @@
+# app [1.12.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0...v1.12.0-dev.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* Cache source avatars to prevent flicker on sheet reopen ([8e8a350](https://github.com/MorpheApp/morphe-manager/commit/8e8a35050d2da83736e0737e4d151e401f19696f))
+* Prevent adding duplicate patch sources ([d616d7f](https://github.com/MorpheApp/morphe-manager/commit/d616d7f46f3f95424529992687152bd3f93740fa))
+
+
+### Features
+
+* Group universal patches into separate section in ExpertModeDialog ([4c833da](https://github.com/MorpheApp/morphe-manager/commit/4c833da021d2e5a180cf39f9709b2d2f1ecce606))
+* Parse CHANGELOG.md for changelogs ([84eb6ef](https://github.com/MorpheApp/morphe-manager/commit/84eb6efa5b78e1b0a881b29f311542f98ce1fd7d))
+
+# app [1.11.0](https://github.com/MorpheApp/morphe-manager/compare/v1.10.2...v1.11.0) (2026-03-07)
+
+
+### Bug Fixes
+
+* Root installation fails if module path does not exist ([#282](https://github.com/MorpheApp/morphe-manager/issues/282)) ([3405802](https://github.com/MorpheApp/morphe-manager/commit/3405802d37247596d0747f00e6a98f5a10cc9c9a))
+* The language selection list is empty ([db69dad](https://github.com/MorpheApp/morphe-manager/commit/db69dadbca9fe2c396719a93914600192b8affae))
+
+
+### Features
+
+* Add deep link support ([#290](https://github.com/MorpheApp/morphe-manager/issues/290)) ([3b57efb](https://github.com/MorpheApp/morphe-manager/commit/3b57efb170e56eea1821dcbf2c49dcc2b795763a))
+* add Kurmanji (kmr-TR) language support ([516c200](https://github.com/MorpheApp/morphe-manager/commit/516c2001ebac4b6530d7560bf2797270a0d7942c))
+* Improve information in exported manager logs ([#279](https://github.com/MorpheApp/morphe-manager/issues/279)) ([2c0c344](https://github.com/MorpheApp/morphe-manager/commit/2c0c3447d647292ec17f9c9c55145811a732a78e))
+* Use Morphe patcher 1.2.0 ([#231](https://github.com/MorpheApp/morphe-manager/issues/231)) ([944a3ab](https://github.com/MorpheApp/morphe-manager/commit/944a3ab7fab2d689b81f5d8e6bf5224660ce11ef))
+
+# app [1.11.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.5...v1.11.0-dev.6) (2026-03-07)
+
+
+### Features
+
+* Add deep link support ([#290](https://github.com/MorpheApp/morphe-manager/issues/290)) ([3b57efb](https://github.com/MorpheApp/morphe-manager/commit/3b57efb170e56eea1821dcbf2c49dcc2b795763a))
+
 # app [1.11.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0-dev.4...v1.11.0-dev.5) (2026-03-07)
 
 

@@ -5,13 +5,13 @@
     <string name="home_not_patched_yet">Még nincs módosítva</string>
     <string name="home_no_patches_available">Módosítások nem elérhetőek</string>
     <string name="home_default_source_disabled">A Morphe patchforrása letiltva. Kérem engedélyezze a módosítások forrásai lapon vagy használja a szakértői módot</string>
-    <string name="home_app_hide_title">Elrejtjük ezt az alkalmazást?</string>
-    <string name="home_app_hide_message">Ez az alkalmazás elrejtve lesz a home képernyőről. Később visszaállíthatja a \'%1$s\' gomb segítségével a listában lévő alján.</string>
-    <string name="home_app_will_be_hidden">Ez az alkalmazás elrejtve lesz</string>
-    <string name="home_app_show_hidden">Mutasd el a rejtett alkalmazásokat</string>
+    <string name="home_app_hide_title">Elrejti az alkalmazást?</string>
+    <string name="home_app_hide_message">Ez az alkalmazás el lesz rejtve kezdőképernyőről. Később visszaállíthatja a \'%1$s\' gomb segítségével a lista alján.</string>
+    <string name="home_app_will_be_hidden">Az alkalmazás el lesz rejtve</string>
+    <string name="home_app_show_hidden">Rejtett alkalmazások megjelenítése</string>
     <string name="home_app_no_hidden">Nincsenek rejtett alkalmazások</string>
     <string name="home_app_hidden_apps_title">Rejtett alkalmazások</string>
-    <string name="home_app_hidden_apps_hint">Kattints egy alkalmazásra, hogy visszajöjjön a listába</string>
+    <string name="home_app_hidden_apps_hint">Koppintson egy alkalmazásra, hogy újra megjelenjen a listában</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
     <string name="deep_link_add_source_title">Forrás hozzáadása</string>
@@ -22,8 +22,8 @@
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
     <string name="home_update_error">A frissítés sikertelen</string>
     <string name="home_update_error_subtitle">Ellenőrizze az internetkapcsolatát, és próbálja újra</string>
-    <string name="home_update_skipped_metered">Frissítés kihagyva</string>
-    <string name="home_update_skipped_metered_subtitle">Mobil adatok aktívak</string>
+    <string name="home_update_skipped_metered">Frissítések kihagyva</string>
+    <string name="home_update_skipped_metered_subtitle">Mobil adat aktív</string>
     <string name="home_updating_sources">Források frissítése…</string>
     <string name="home_update_progress_format">%1$s feldolgozva</string>
     <string name="home_update_success">A források frissítése befejeződött</string>
@@ -54,8 +54,9 @@
     <string name="sources_management_title">Módosítások forrásai</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
-    <string name="sources_management_prerelease_toggle">Előzetes kiadások használata</string>
-    <string name="sources_management_prerelease_toggle_description">Korai hozzáférés új kísérleti kiadásokhoz</string>
+    <string name="sources_management_prerelease_toggle">Előzetes kiadású módosítások használata</string>
+    <string name="sources_management_prerelease_toggle_description">Korai hozzáférés az új, kísérleti módosítások verzióihoz</string>
+    <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Megjelenítendő név</string>
     <string name="sources_dialog_rename">Patchforrás átnevezése</string>
@@ -76,15 +77,15 @@
     <string name="sources_update_success">A frissítés sikeres</string>
     <string name="sources_update_unavailable">Nincs elérhető frissítés</string>
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
-    <string name="sources_download_endpoint_not_found">Nem lehet frissíteni a \'%1$s\': a patch JSON fájl nem található a beállított URL-n</string>
+    <string name="sources_download_endpoint_not_found">Nem sikerült frissíteni ezt: \'%1$s\' - A módosítás JSON fájlja nem található a beállított URL-n</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Szuletett segítség a eredeti, nem javított APK megtalálásához</string>
-    <string name="home_apk_availability_dialog_simple">A(z) %s módosításához szükséges egy módosítás nélküli APK, amely verziója:</string>
-    <string name="home_apk_availability_dialog_expert">A(z) %s módosításához szükséges egy módosítás nélküli APK, amelyek verziói:</string>
+    <string name="home_apk_availability_dialog_title">Segítségre van szüksége az eredeti, módosítások nélküli APK megtalálásához?</string>
+    <string name="home_apk_availability_dialog_simple">A(z) &lt;b&gt;%s&lt;/b&gt; módosításához szükséges egy módosítás nélküli APK, amely verziója:</string>
+    <string name="home_apk_availability_dialog_expert">A(z) &lt;b&gt;%s&lt;/b&gt; módosításához szükséges egy módosítás nélküli APK, amelyek verziói:</string>
     <string name="home_apk_availability_recommended_label">Javasolt</string>
     <string name="home_apk_availability_unpatched_label">Nem módosított</string>
-    <string name="home_apk_availability_yes">Igen, segítsz megtalálni egy APK-t</string>
-    <string name="home_apk_availability_no">Nem, már rendelkezem APK-kel</string>
+    <string name="home_apk_availability_yes">Igen, segíts megtalálni az APK-t</string>
+    <string name="home_apk_availability_no">Nem, már megvan az APK</string>
     <string name="home_apk_use_saved_with_version">Használjon mentett APK-t (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választani az APK fájlt.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -95,12 +96,12 @@
     <string name="home_download_instructions_download_button_toast">A weblapon nyomja meg a letöltést, és ne itt 😊</string>
     <string name="home_download_instructions_step3">Várja meg, amíg a letöltés befejeződik, és &lt;b&gt;ne telepítse&lt;/b&gt; az APK-t</string>
     <string name="home_download_instructions_step3_mount">Várja meg, amíg a letöltés befejeződik, majd &lt;b&gt;telepítse az APK-t&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">A letöltés befejezése után térjen vissza a Morphe-ba</string>
-    <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után térjen vissza Morphe-hoz</string>
+    <string name="home_download_instructions_step4">A letöltés befejezése után térjen vissza a Morphe alkalmazásba</string>
+    <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után térjen vissza Morphe alkalmazásba</string>
     <string name="home_download_instructions_continue">Ugrás az APKMirror.com oldalra</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Válasszon ki letöltött APK-t</string>
-    <string name="home_file_picker_prompt_description">Válassza ki az újonnan letöltött &lt;b&gt;%1$s&lt;/b&gt; APK fájlt</string>
+    <string name="home_file_picker_prompt_title">Válassza ki a letöltött APK-t</string>
+    <string name="home_file_picker_prompt_description">Válassza ki a most letöltött &lt;b&gt;%1$s&lt;/b&gt; APK fájlt</string>
     <string name="home_file_picker_prompt_open_apk">APK fájl megnyitása</string>
     <string name="home_recommended_version">Ajánlott verzió</string>
     <string name="home_selected_version">Kiválasztott verzió</string>
@@ -111,11 +112,12 @@
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Szakértői mód</string>
     <string name="expert_mode_search">Patchek keresése</string>
-    <string name="expert_mode_proceed">Folytatás a módosításhoz</string>
+    <string name="expert_mode_proceed">Módosítás indítása</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_no_patches">Nincsenek elérhető módosítások</string>
+    <string name="expert_mode_universal_patches">Univerzális módosítások</string>
     <string name="expert_mode_multiple_sources_warning_title">Több patchforrás van kiválasztva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
 
@@ -130,10 +132,10 @@ Biztosan folytatja?"</string>
     <string name="home_dialog_wrong_package_description">A kiválasztott APK nem ahhoz az alkalmazáshoz tartozik, amelyet módosítani szeretne</string>
     <string name="home_dialog_expected_package">Várt csomag:</string>
     <string name="home_dialog_selected_package">Kiválasztott csomag:</string>
-    <string name="home_outdated_patches_dialog_title">A frissítések lemaradtak</string>
-    <string name="home_outdated_patches_dialog_message">Mobil adatok aktívak és a frissítések letiltva</string>
-    <string name="home_outdated_patches_dialog_warning">A frissítéssel lemaradt frissítések használata lehetséges alkalmazáshibát okozhat</string>
-    <string name="home_outdated_patches_dialog_update_and_patch">Frissítés &amp; frissítés</string>
+    <string name="home_outdated_patches_dialog_title">A módosítások elavultak lehetnek</string>
+    <string name="home_outdated_patches_dialog_message">A mobil adat aktív és a módosítások frissítése le van tiltva</string>
+    <string name="home_outdated_patches_dialog_warning">Az elavult módosítások használata hibás alkalmazást eredményezhet</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">&amp; módosítás frissítése</string>
     <!-- Patch Options -->
     <string name="custom_color">Egyedi szín</string>
     <string name="hex_color">Hex szín</string>
@@ -195,7 +197,7 @@ Biztosan folytatja?"</string>
     <string name="root_pre_patch_installer_mount_description">A módosított APK-t az eredeti felé csatolja. Nem szükséges GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Szabványos telepítés</string>
     <string name="root_pre_patch_installer_standard_description">Telepítés különálló alkalmazásként GmsCore támogatással. Válassza ki a telepítőt (Rendszertelepítő, Shizuku stb.) a módosítás után</string>
-    <string name="root_pre_patch_installer_hint">Az telepítési mód határozza meg, hogy melyik javítások beletartoznak és nem módosítható a javítás után</string>
+    <string name="root_pre_patch_installer_hint">A telepítési mód határozza meg, hogy mely módosítások kerülnek beépítésre, amiket nem lehet megváltoztatni a módosítás után</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="patcher_error_log">Hibanapló</string>
