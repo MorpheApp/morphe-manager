@@ -57,6 +57,7 @@
     <string name="sources_management_failed_to_open_url">שגגה להכזת אתר</string>
     <string name="sources_management_prerelease_toggle">השתמש בתיקונים מוקדמים</string>
     <string name="sources_management_prerelease_toggle_description">קבל גישה מוקדמת לגרסאות חדשות של תיקונים ניסיוניים</string>
+    <string name="sources_management_already_exists">מקור זה כבר נוסף</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">שם תצוג</string>
     <string name="sources_dialog_rename">שנה את שם התצוגה</string>
@@ -117,6 +118,7 @@
     <string name="expert_mode_enable_all">הפעל את כולם</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
     <string name="expert_mode_no_patches">אין תיקונים זמינים</string>
+    <string name="expert_mode_universal_patches">עדכונים אוניברסליים</string>
     <string name="expert_mode_multiple_sources_warning_title">נבחרו מקורות ציורים מרובים</string>
     <string name="expert_mode_multiple_sources_warning_message">"בחרת בקבצי ציורים ממקורות מרובים. זה עשוי לגרום למחלוקות תאימות או התנהגות בלתי צפויה.
 

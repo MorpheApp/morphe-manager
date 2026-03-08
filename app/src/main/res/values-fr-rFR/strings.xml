@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_management_prerelease_toggle">Utiliser les pré-versions des patchs</string>
     <string name="sources_management_prerelease_toggle_description">Recevez un accès anticipé aux nouvelles versions expérimentales des patchs</string>
+    <string name="sources_management_already_exists">Cette source a déjà été ajoutée</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nom d\'affichage</string>
     <string name="sources_dialog_rename">Renommer la source de patch</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
     <string name="expert_mode_no_patches">Aucuns patchs disponibles</string>
+    <string name="expert_mode_universal_patches">Patchs universels</string>
     <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
 
@@ -227,7 +229,7 @@ Voulez-vous vraiment continuer ?"</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Préparation</string>
     <string name="patcher_step_load_patches">Chargement des patchs</string>
-    <string name="patcher_step_prepare_split_apk">Fusionner l’APK fractionné</string>
+    <string name="patcher_step_prepare_split_apk">Fusion de l’APK fractionné</string>
     <string name="patcher_step_unpack">Lecture du fichier APK</string>
     <string name="patcher_step_group_patching">Patchage</string>
     <string name="patcher_step_group_saving">Enregistrement</string>

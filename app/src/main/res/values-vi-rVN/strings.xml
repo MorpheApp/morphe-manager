@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_management_prerelease_toggle">Dùng bản vá thử nghiệm</string>
     <string name="sources_management_prerelease_toggle_description">Trải nghiệm sớm các bản vá mới</string>
+    <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Bật tất cả</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_no_patches">Không có bản vá nào</string>
+    <string name="expert_mode_universal_patches">Bản vá phổ quát</string>
     <string name="expert_mode_multiple_sources_warning_title">Đã chọn nhiều nguồn vá</string>
     <string name="expert_mode_multiple_sources_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
 
@@ -308,7 +310,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_appearance_dark">Tối</string>
     <string name="settings_appearance_dynamic">Cá nhân hóa</string>
     <string name="settings_appearance_accent_color">Màu nổi bật</string>
-    <string name="settings_appearance_pure_black">Đen tuyệt đối</string>
+    <string name="settings_appearance_pure_black">Đen tuyền</string>
     <string name="settings_appearance_pure_black_description">Dùng nền đen thực sự</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Ngôn ngữ</string>

@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
     <string name="sources_management_prerelease_toggle">পূর্ব-প্রকাশিত প্যাচ ব্যবহার করুন</string>
     <string name="sources_management_prerelease_toggle_description">নতুন পরীক্ষামূলক প্যাচ সংস্করণের জন্য আগে অ্যাক্সেস পান</string>
+    <string name="sources_management_already_exists">এই উৎসটি ইতিমধ্যেই যোগ করা হয়েছে</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">প্রদর্শিত নাম</string>
     <string name="sources_dialog_rename">প্যাচের নাম পরিবর্তন করুন</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_no_patches">কোনো প্যাচ উপলব্ধ নেই</string>
+    <string name="expert_mode_universal_patches">সার্বজনীন প্যাচ</string>
     <string name="expert_mode_multiple_sources_warning_title">বহু প্যাচ সোর্স নির্বাচিত</string>
     <string name="expert_mode_multiple_sources_warning_message">"আপনি একাধিক প্যাচ উৎস থেকে প্যাচ নির্বাচন করেছেন। এটি সামঞ্জस्यতা সমস্যা বা অপ্রত্যাশিত আচরণের কারণ হতে পারে।
 

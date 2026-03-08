@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
     <string name="sources_management_prerelease_toggle">Usar versiones preliminares de parches</string>
     <string name="sources_management_prerelease_toggle_description">Recibir acceso temprano a nuevas versiones experimentales de parches</string>
+    <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nombre para mostrar</string>
     <string name="sources_dialog_rename">Agregar fuente de parches</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Activar todo</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
     <string name="expert_mode_no_patches">No hay parches disponibles</string>
+    <string name="expert_mode_universal_patches">Parches universales</string>
     <string name="expert_mode_multiple_sources_warning_title">Se han seleccionado varias fuentes de parches</string>
     <string name="expert_mode_multiple_sources_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
 

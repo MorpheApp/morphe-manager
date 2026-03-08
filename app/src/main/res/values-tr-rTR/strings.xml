@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_management_prerelease_toggle">Ön sürüm yamaları kullan</string>
     <string name="sources_management_prerelease_toggle_description">Yeni deneysel yamaların erken erişimine sahip olun</string>
+    <string name="sources_management_already_exists">Bu kaynak zaten eklenmiş</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünen ad</string>
     <string name="sources_dialog_rename">Yama kaynağını yeniden adlandır</string>
@@ -90,7 +91,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>
-    <string name="home_download_instructions_step1">Aşağıdaki \'%1$s\' düğmesine tıklayın</string>
+    <string name="home_download_instructions_step1">Aşağıdaki \"%1$s\" düğmesine tıklayın</string>
     <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'i &lt;b&gt;yüklemeyin&lt;/b&gt;</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_no_results">Yama bulunamadı</string>
     <string name="expert_mode_no_patches">Yama mevcut değil</string>
+    <string name="expert_mode_universal_patches">Evrensel yamalar</string>
     <string name="expert_mode_multiple_sources_warning_title">Çoklu yama kaynağı seçildi</string>
     <string name="expert_mode_multiple_sources_warning_message">"Birden fazla yama kaynağından yama seçtiniz. Bu, uyumluluk sorunlarına veya beklenmedik davranışlara neden olabilir.
 

@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
     <string name="sources_management_prerelease_toggle">प्रिलीस रिलीज़ पथचों को उपयोग करें</string>
     <string name="sources_management_prerelease_toggle_description">नए प्रयोगात्मक पथचों की नई संस्करणों को जल्दी से प्राप्त करें</string>
+    <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">नाम दर्जा करें</string>
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
     <string name="expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
+    <string name="expert_mode_universal_patches">सार्वभौमिक पैच</string>
     <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
     <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।
 

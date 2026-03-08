@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="sources_management_prerelease_toggle">Користите пре-издавачке пакете</string>
     <string name="sources_management_prerelease_toggle_description">Примајте рани приступ новим експерименталним верзијама пакета</string>
+    <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назив за приказ</string>
     <string name="sources_dialog_rename">Преименујте изворни извор</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_no_patches">Нema печева доступно</string>
+    <string name="expert_mode_universal_patches">Универзалне површине</string>
     <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
     <string name="expert_mode_multiple_sources_warning_message">"Одабрали сте патчеве из више извора. Може да дође до проблема са компатибилношћу или неочекиваног понашања.
 

@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_management_prerelease_toggle">Передрелізні версії патчів</string>
     <string name="sources_management_prerelease_toggle_description">Отримувати ранній доступ до нових експериментальних версій патчів</string>
+    <string name="sources_management_already_exists">Це джерело вже додано</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Увімкнути всі</string>
     <string name="expert_mode_no_results">Патчі не знайдено</string>
     <string name="expert_mode_no_patches">Патчі недоступні</string>
+    <string name="expert_mode_universal_patches">Універсальні патчі</string>
     <string name="expert_mode_multiple_sources_warning_title">Вибрано декілька джерел патчів</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ви вибрали патчі з кількох джерел патчів. Це може спричинити проблеми сумісності або неочікувану поведінку.
 

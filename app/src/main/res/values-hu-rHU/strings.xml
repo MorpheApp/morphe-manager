@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
     <string name="sources_management_prerelease_toggle">Előzetes kiadások használata</string>
     <string name="sources_management_prerelease_toggle_description">Korai hozzáférés új kísérleti kiadásokhoz</string>
+    <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Megjelenítendő név</string>
     <string name="sources_dialog_rename">Patchforrás átnevezése</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_no_patches">Nincsenek elérhető módosítások</string>
+    <string name="expert_mode_universal_patches">Univerzális módosítások</string>
     <string name="expert_mode_multiple_sources_warning_title">Több patchforrás van kiválasztva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
 

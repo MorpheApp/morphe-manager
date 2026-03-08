@@ -16,7 +16,7 @@
     <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna</string>
     <string name="deep_link_add_source_title">Tambah sumber</string>
     <string name="deep_link_add_source_message">Apakah Anda ingin menambahkan sumber tambalan ini ke Morphe?</string>
-    <string name="deep_link_add_source_warning">Hanya tambahkan sumber dari sumber yang Anda percayai</string>
+    <string name="deep_link_add_source_warning">Hanya tambahkan sumber dari sumber-sumber yang Anda percayai</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Pembaruan Morphe tersedia</string>
     <string name="home_update_available_subtitle">Versi baru siap dipasang</string>
@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_management_prerelease_toggle">Gunakan tambalan pra-rilis</string>
     <string name="sources_management_prerelease_toggle_description">Dapatkan akses awal ke versi tambalan baru eksperimental</string>
+    <string name="sources_management_already_exists">Sumber ini sudah ditambahkan</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama tampilan</string>
     <string name="sources_dialog_rename">Ubah nama sumber tambalan</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_no_patches">Tidak ada tambalan tersedia</string>
+    <string name="expert_mode_universal_patches">Tambalan universal</string>
     <string name="expert_mode_multiple_sources_warning_title">Berbagai sumber tambalan telah dipilih</string>
     <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tambalan dari berbagai sumber. Hal ini dapat menyebabkan masalah kompatibilitas atau masalah yang tidak terduga.
 
@@ -336,11 +338,11 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_advanced_updates_background_notifications_description">Periksa pembaruan secara berkala di latar belakang dan beritahu saat pembaruan tersedia</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Terima notifikasi teks segera untuk rilis baru, bahkan ketika aplikasi ditutup</string>
     <string name="notification_channel_manager_updates">Tambalan Morphe</string>
-    <string name="notification_channel_manager_updates_description">Notifikasi tentang versi baru Morphe</string>
+    <string name="notification_channel_manager_updates_description">Pemberitahuan tentang versi baru Morphe</string>
     <string name="notification_channel_bundle_updates">Pemberitahuan tentang versi patch bundle baru</string>
     <string name="notification_channel_bundle_updates_description">Pemberitahuan tentang versi sumber tambalan baru</string>
     <string name="notification_channel_fcm_updates">Perbarui peringatan</string>
-    <string name="notification_channel_fcm_updates_description">Notifikasi push instan untuk rilis Morphe dan tambalan baru. Terkirim bahkan saat aplikasi berada di latar belakang</string>
+    <string name="notification_channel_fcm_updates_description">Pemberitahuan dorong instan untuk rilis Morphe dan tambalan baru. Terkirim bahkan saat aplikasi berada di latar belakang</string>
     <string name="settings_advanced_update_interval">Jadwal periksa</string>
     <string name="settings_advanced_update_interval_dialog_title">Periksa untuk pembaruan</string>
     <string name="settings_advanced_update_interval_hourly">Sekali dalam jam</string>
@@ -355,7 +357,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="notification_update_text">Versi %1$s siap untuk diunduh</string>
     <string name="notification_bundle_update_text_unversioned">Ketuk untuk membuka Morphe dan memperbarui</string>
     <string name="notification_permission_dialog_title">Izinkan pemberitahuan</string>
-    <string name="notification_permission_dialog_description">Morphe memerlukan izin notifikasi untuk memberi tahu Anda saat pembaruan tersedia di latar belakang</string>
+    <string name="notification_permission_dialog_description">Morphe memerlukan izin pemberitahuan untuk memberi tahu Anda saat pembaruan tersedia di latar belakang</string>
     <string name="notification_post_patch_dialog_title">Apakah Anda ingin menerima pemberitahuan ketika pembaruan tersedia?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Pengaturan ahli</string>
@@ -377,7 +379,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="settings_advanced_github_pat_export_warning">Jangan bagikan PAT Anda. Jika Anda menyertakannya dalam ekspor pengaturan, simpan berkas tersebut secara pribadi karena berisi token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Pilihan tambalan</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, branding, dan opsi header</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, branding, dan pilihan header</string>
     <string name="settings_advanced_patch_options_restart_message">Mengubah pilihan tambalan memerlukan menambal ulang aplikasi agar perubahan berlaku</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Dalam mode Ahli pilihan tambalan akan tersedia selama proses penambalan</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->

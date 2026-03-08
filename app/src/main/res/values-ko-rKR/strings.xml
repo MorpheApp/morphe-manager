@@ -54,8 +54,9 @@
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
-    <string name="sources_management_prerelease_toggle">Pre-release 패치 사용</string>
+    <string name="sources_management_prerelease_toggle">패치 Pre-release 버전 사용</string>
     <string name="sources_management_prerelease_toggle_description">새 실험 패치 버전을 미리 받아보세요</string>
+    <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">표시 이름</string>
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
     <string name="expert_mode_no_patches">사용 가능한 패치가 없습니다</string>
+    <string name="expert_mode_universal_patches">유니버셜 패치</string>
     <string name="expert_mode_multiple_sources_warning_title">여러 패치 소스가 선택됨</string>
     <string name="expert_mode_multiple_sources_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
 
@@ -216,7 +218,7 @@
     <string name="patcher_ready_to_install_subtitle">설치하시려면 아래 버튼을 탭하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_storage_permission_dialog_title">저장소 경로에 접근할 수 없음</string>
-    <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 허용한 후에 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
+    <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 부여하고 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
     <string name="patcher_storage_permission_description_legacy">하나 이상의 패치 옵션이 접근할 수 없는 경로를 가리키고 있습니다. 패치 옵션에서 경로를 업데이트하고 다시 시도하세요</string>
     <string name="patcher_storage_permission_grant">저장소 권한 부여</string>
     <string name="patcher_storage_permission_denied_warning">저장소 권한이 거부되었습니다. 이 경로를 사용하려면 권한을 부여하거나, 파일을 앱 전용 디렉터리로 옮겨주세요</string>
@@ -328,7 +330,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
-    <string name="settings_advanced_updates_use_prereleases">Pre-release Morphe 사용</string>
+    <string name="settings_advanced_updates_use_prereleases">Morphe Pre-release 버전 사용</string>
     <string name="settings_advanced_updates_use_prereleases_description">새 Morphe 기능을 미리 사용합니다. Pre-release 패치를 받으려면 각 패치 소스에서 Pre-release 토글을 개별적으로 활성화하세요</string>
     <string name="settings_advanced_updates_allow_metered">모바일 데이터에서 업데이트</string>
     <string name="settings_advanced_updates_allow_metered_description">모바일 데이터를 사용하여 Morphe 및 패치 업데이트를 다운로드하도록 허용합니다</string>
@@ -355,7 +357,7 @@
     <string name="notification_update_text">%1$s 버전 다운로드 준비 완료</string>
     <string name="notification_bundle_update_text_unversioned">Morphe를 열고 업데이트하려면 탭하세요</string>
     <string name="notification_permission_dialog_title">알림 허용</string>
-    <string name="notification_permission_dialog_description">백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 Morphe에 알림 권한이 필요합니다</string>
+    <string name="notification_permission_dialog_description">Morphe는 백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 알림 권한이 필요합니다</string>
     <string name="notification_post_patch_dialog_title">업데이트가 있을 때 알림을 받으시겠습니까?</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
@@ -374,7 +376,7 @@
     <string name="settings_advanced_github_pat_dialog_description">풀 리퀘스트를 외부 소스로 사용하기 위해 GitHub 개인 액세스 토큰이 필요합니다.
 GitHub.com에서 public_repo 권한이 포함된 개인 액세스 토큰을 생성하세요</string>
     <string name="settings_advanced_github_pat_export_include_label">설정 내보내기에 포함</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">내보낼 Morphe 설정에 이 개인 액세스 토큰을 추가합니다</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">내보낼 Morphe 설정에 개인 액세스 토큰을 추가합니다</string>
     <string name="settings_advanced_github_pat_export_warning">개인 액세스 토큰을 공유하지 마세요. 설정 내보내기에 포함되는 경우에는 토큰이 포함되어 있으므로 해당 파일을 비공개로 유지하세요</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">패치 옵션</string>

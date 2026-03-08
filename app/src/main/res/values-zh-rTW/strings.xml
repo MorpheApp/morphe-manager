@@ -56,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
     <string name="sources_management_prerelease_toggle">使用預先發布補丁</string>
     <string name="sources_management_prerelease_toggle_description">提前接收新實驗性補丁版本</string>
+    <string name="sources_management_already_exists">此來源已新增</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
@@ -116,6 +117,7 @@
     <string name="expert_mode_enable_all">啟用全部</string>
     <string name="expert_mode_no_results">找不到修補</string>
     <string name="expert_mode_no_patches">沒有可用的修補</string>
+    <string name="expert_mode_universal_patches">通用修補程式</string>
     <string name="expert_mode_multiple_sources_warning_title">已選擇多個修補來源</string>
     <string name="expert_mode_multiple_sources_warning_message">"你已選擇來自多個修補來源的修補。這可能會導致相容性問題或未預期的行為。
 
