@@ -1,18 +1,10 @@
 package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
-import android.content.ActivityNotFoundException
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageInstaller
 import androidx.annotation.StringRes
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,25 +12,17 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
+import app.morphe.manager.domain.installer.InstallerManager
+import app.morphe.manager.domain.installer.ShizukuInstaller
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.network.service.HttpService
-import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.ShizukuInstaller
 import app.morphe.manager.service.InstallService
-import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.network.utils.getOrNull
-import app.morphe.manager.util.PM
-import app.morphe.manager.util.toast
-import app.morphe.manager.util.uiSafe
-import app.morphe.manager.util.simpleMessage
+import app.morphe.manager.util.*
 import io.ktor.client.plugins.onDownload
 import io.ktor.client.request.url
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -78,8 +62,12 @@ class UpdateViewModel(
     var releaseInfo: MorpheAsset? by mutableStateOf(null)
         private set
 
-    // Release info for changelog dialog
-    var currentVersionReleaseInfo: MorpheAsset? by mutableStateOf(null)
+    // Changelog entry for the currently installed manager version (shown in Settings → Changelog)
+    var currentVersionChangelogEntry: ChangelogEntry? by mutableStateOf(null)
+        private set
+
+    // All changelog entries newer than the currently installed version (shown in update dialog)
+    var missedChangelogEntries: List<ChangelogEntry>? by mutableStateOf(null)
         private set
 
     var canResumeDownload by mutableStateOf(false)
@@ -89,6 +77,10 @@ class UpdateViewModel(
     private val job = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to download Morphe Manager") {
             releaseInfo = morpheAPI.getAppUpdate()
+
+            if (releaseInfo != null) {
+                loadMissedChangelog()
+            }
 
             if (downloadOnScreenEntry) {
                 if (releaseInfo != null) {
@@ -358,12 +350,26 @@ class UpdateViewModel(
     }
 
     /**
-     * Load changelog for currently installed version
+     * Load all changelog entries newer than the currently installed version.
+     * Called automatically after a successful update check.
+     */
+    private fun loadMissedChangelog() = viewModelScope.launch {
+        uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
+            val installedVersion = BuildConfig.VERSION_NAME.removePrefix("v")
+            val entries = morpheAPI.fetchManagerChangelog()
+            missedChangelogEntries = ChangelogParser.entriesNewerThan(entries, installedVersion)
+        }
+    }
+
+    /**
+     * Load changelog entry for the currently installed manager version from CHANGELOG.md.
+     * Reads the static CHANGELOG.md file.
      */
     fun loadCurrentVersionChangelog() = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
-            val currentVersion = "v${BuildConfig.VERSION_NAME}"
-            currentVersionReleaseInfo = morpheAPI.getManagerReleaseByVersion(currentVersion).getOrNull()
+            val currentVersion = BuildConfig.VERSION_NAME.removePrefix("v")
+            val entries = morpheAPI.fetchManagerChangelog()
+            currentVersionChangelogEntry = ChangelogParser.findVersion(entries, currentVersion)
         }
     }
 
