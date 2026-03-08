@@ -90,6 +90,9 @@ class PatchBundleRepository(
     private val updateJobMutex = Mutex()
     private var updateJob: Job? = null
     private val updateStateMutex = Mutex()
+    private val _activeUpdateUidsFlow = MutableStateFlow<Set<Int>>(emptySet())
+    val activeUpdateUidsFlow: StateFlow<Set<Int>> = _activeUpdateUidsFlow.asStateFlow()
+
     @Volatile
     private var activeUpdateUids: Set<Int> = emptySet()
     @Volatile
@@ -142,6 +145,7 @@ class PatchBundleRepository(
         updateStateMutex.withLock {
             activeUpdateUids = uids
             cancelledUpdateUids = emptySet()
+            _activeUpdateUidsFlow.value = uids
         }
     }
 
@@ -149,6 +153,7 @@ class PatchBundleRepository(
         updateStateMutex.withLock {
             activeUpdateUids = emptySet()
             cancelledUpdateUids = emptySet()
+            _activeUpdateUidsFlow.value = emptySet()
         }
     }
 
