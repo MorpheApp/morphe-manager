@@ -1,3 +1,17 @@
+# app [1.12.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0...v1.12.0-dev.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* Cache source avatars to prevent flicker on sheet reopen ([8e8a350](https://github.com/MorpheApp/morphe-manager/commit/8e8a35050d2da83736e0737e4d151e401f19696f))
+* Prevent adding duplicate patch sources ([d616d7f](https://github.com/MorpheApp/morphe-manager/commit/d616d7f46f3f95424529992687152bd3f93740fa))
+
+
+### Features
+
+* Group universal patches into separate section in ExpertModeDialog ([4c833da](https://github.com/MorpheApp/morphe-manager/commit/4c833da021d2e5a180cf39f9709b2d2f1ecce606))
+* Parse CHANGELOG.md for changelogs ([84eb6ef](https://github.com/MorpheApp/morphe-manager/commit/84eb6efa5b78e1b0a881b29f311542f98ce1fd7d))
+
 # app [1.11.0](https://github.com/MorpheApp/morphe-manager/compare/v1.10.2...v1.11.0) (2026-03-07)
 
 
