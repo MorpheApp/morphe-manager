@@ -85,8 +85,10 @@ object ChangelogParser {
         installedVersion: String?
     ): List<ChangelogEntry> {
         if (installedVersion == null) return entries
+        val installedDate = findVersion(entries, installedVersion)?.date
         return entries.filter { entry ->
-            isNewerVersion(installedVersion, entry.version)
+            isNewerVersion(installedVersion, entry.version) &&
+                    (installedDate == null || entry.date == null || entry.date >= installedDate)
         }
     }
 
