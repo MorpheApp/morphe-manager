@@ -799,11 +799,16 @@ private fun RemoteAvatar(
     fallbackUrl: String? = null,
     modifier: Modifier = Modifier
 ) {
-    var bitmap by remember(url) { mutableStateOf<Bitmap?>(null) }
+    // Initialise immediately from cache
+    var bitmap by remember(url) {
+        mutableStateOf(AvatarCache[url] ?: fallbackUrl?.let { AvatarCache[it] })
+    }
 
     LaunchedEffect(url, fallbackUrl) {
-        bitmap = loadGitHubAvatar(url)
-            ?: fallbackUrl?.let { loadGitHubAvatar(it) }
+        if (bitmap == null) {
+            bitmap = loadGitHubAvatar(url)
+                ?: fallbackUrl?.let { loadGitHubAvatar(it) }
+        }
     }
 
     if (bitmap != null) {
@@ -817,9 +822,20 @@ private fun RemoteAvatar(
 }
 
 /**
- * Load GitHub avatar image from URL
+ * In-memory avatar cache scoped to the process lifetime.
+ */
+private object AvatarCache {
+    private val cache = mutableMapOf<String, Bitmap>()
+
+    operator fun get(url: String): Bitmap? = cache[url]
+    operator fun set(url: String, bitmap: Bitmap) { cache[url] = bitmap }
+}
+
+/**
+ * Load GitHub avatar image from URL, storing the result in [AvatarCache].
  */
 private suspend fun loadGitHubAvatar(url: String): Bitmap? = withContext(Dispatchers.IO) {
+    AvatarCache[url]?.let { return@withContext it }
     try {
         val connection = URL(url).openConnection()
         connection.connectTimeout = 5000
@@ -828,7 +844,7 @@ private suspend fun loadGitHubAvatar(url: String): Bitmap? = withContext(Dispatc
 
         connection.getInputStream().use { input ->
             BitmapFactory.decodeStream(input)
-        }
+        }?.also { AvatarCache[url] = it }
     } catch (_: Exception) {
         null
     }
