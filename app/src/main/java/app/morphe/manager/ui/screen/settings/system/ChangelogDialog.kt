@@ -18,8 +18,8 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 
 /**
- * Changelog dialog
- * Displays the changelog for currently installed manager version
+ * Changelog dialog.
+ * Displays the changelog for currently installed manager version.
  */
 @Composable
 fun ChangelogDialog(

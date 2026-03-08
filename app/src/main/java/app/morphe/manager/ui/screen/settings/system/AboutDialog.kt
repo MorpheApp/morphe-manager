@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.appcompat.content.res.AppCompatResources
@@ -27,8 +32,8 @@ import app.morphe.manager.ui.viewmodel.AboutViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 /**
- * About dialog
- * Shows app icon, version, description, and social links
+ * About dialog.
+ * Shows app icon, version, description, and social links.
  */
 @Composable
 fun AboutDialog(onDismiss: () -> Unit) {
@@ -137,8 +142,8 @@ fun AboutDialog(onDismiss: () -> Unit) {
 }
 
 /**
- * Social link button
- * Styled button for opening social media links
+ * Social link button.
+ * Styled button for opening social media links.
  */
 @Composable
 private fun SocialIconButton(

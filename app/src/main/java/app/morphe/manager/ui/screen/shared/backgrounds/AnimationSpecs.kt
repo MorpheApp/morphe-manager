@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared.backgrounds
 
 import android.content.Context
@@ -11,49 +16,44 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 /**
- * Reusable animation specifications for backgrounds
+ * Frame-based time accumulator that respects a [speedMultiplier].
+ * Returns a [State<Float>] that increases every frame by (deltaMs * speedMultiplier).
+ * This allows smooth speed changes without restarting animations.
  */
-object BackgroundAnimationSpecs {
-    /**
-     * Generic float animation with customizable duration
-     */
-    fun floatAnimation(
-        duration: Int,
-        easing: Easing = LinearEasing,
-        repeatMode: RepeatMode = RepeatMode.Reverse
-    ): InfiniteRepeatableSpec<Float> = infiniteRepeatable(
-        animation = tween(duration, easing = easing),
-        repeatMode = repeatMode
-    )
+@Composable
+fun rememberAnimatedTime(speedMultiplier: Float): State<Float> {
+    val time = remember { mutableFloatStateOf(0f) }
+    // targetSpeed is updated every recomposition via SideEffect (composition thread, safe to read in frame callback)
+    val targetSpeed = remember { mutableFloatStateOf(speedMultiplier) }
+    SideEffect { targetSpeed.floatValue = speedMultiplier }
 
-    /**
-     * Very slow movement (10-12s)
-     */
-    fun verySlowFloat(duration: Int = 11000) = floatAnimation(duration)
+    LaunchedEffect(Unit) {
+        var lastFrameMs = withInfiniteAnimationFrameMillis { it }
+        var currentSpeed = targetSpeed.floatValue
+        while (true) {
+            withInfiniteAnimationFrameMillis { frameMs ->
+                val delta = (frameMs - lastFrameMs).coerceIn(0L, 64L).toFloat()
+                lastFrameMs = frameMs
+                // Smooth lerp: 2.5/sec ramp — ~0.8s to reach target speed.
+                // High enough to feel reactive, low enough to avoid jarring jumps.
+                currentSpeed += (targetSpeed.floatValue - currentSpeed) * (delta / 1000f) * 2.5f
+                time.floatValue += delta * currentSpeed
+            }
+        }
+    }
+    return time
+}
 
-    /**
-     * Slow movement (8-10s)
-     */
-    fun slowFloat(duration: Int = 9000) = floatAnimation(duration)
 
-    /**
-     * Medium movement (6-8s)
-     */
-    fun mediumFloat(duration: Int = 7000) = floatAnimation(duration)
-
-    /**
-     * Fast movement (4-6s)
-     */
-    fun fastFloat(duration: Int = 5000) = floatAnimation(duration)
-
-    /**
-     * Rotation animation that restarts (for continuous spinning)
-     */
-    fun rotationAnimation(duration: Int = 20000): InfiniteRepeatableSpec<Float> =
-        infiniteRepeatable(
-            animation = tween(duration, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        )
+/**
+ * Fires [onCompleted] exactly once when [patchingCompleted] flips to true.
+ * Named with uppercase as required by Compose convention for Unit-returning Composables.
+ */
+@Composable
+fun CompletionEffect(patchingCompleted: Boolean, onCompleted: () -> Unit) {
+    LaunchedEffect(patchingCompleted) {
+        if (patchingCompleted) onCompleted()
+    }
 }
 
 /**

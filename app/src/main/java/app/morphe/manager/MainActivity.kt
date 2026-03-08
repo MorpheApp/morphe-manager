@@ -132,6 +132,11 @@ private fun MorpheManager(vm: MainViewModel) {
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
 
+    // Patcher background speed — driven by PatcherViewModel when on patcher screen.
+    // Exposed as a top-level mutable state so PatcherScreen can write into it.
+    val patcherBackgroundSpeed = androidx.compose.runtime.remember { androidx.compose.runtime.mutableFloatStateOf(1f) }
+    val patchingCompleted = androidx.compose.runtime.remember { mutableStateOf(false) }
+
     // HomeViewModel must be scoped to the Activity, not to a NavBackStackEntry
     val homeViewModel: HomeViewModel = koinViewModel(
         viewModelStoreOwner = LocalActivity.current as ComponentActivity
@@ -146,7 +151,9 @@ private fun MorpheManager(vm: MainViewModel) {
         // Show animated background
         AnimatedBackground(
             type = backgroundType,
-            enableParallax = enableParallax
+            enableParallax = enableParallax,
+            speedMultiplier = patcherBackgroundSpeed.floatValue,
+            patchingCompleted = patchingCompleted.value
         )
 
         // All content on top of background
@@ -259,9 +266,15 @@ private fun MorpheManager(vm: MainViewModel) {
                 val params = it.getComplexArg<Patcher.ViewModelParams>()
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 PatcherScreen(
-                    onBackClick = navController::popBackStack,
+                    onBackClick = {
+                        patcherBackgroundSpeed.floatValue = 1f
+                        patchingCompleted.value = false
+                        navController.popBackStack()
+                    },
                     patcherViewModel = patcherViewModel,
-                    usingMountInstall = usingMountInstallState.value
+                    usingMountInstall = usingMountInstallState.value,
+                    onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
+                    onPatchingCompleted = { patchingCompleted.value = true }
                 )
                 return@composable
             }

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.Arrangement
@@ -24,8 +29,8 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 
 /**
- * Keystore Credentials Dialog
- * Allows entering alias and password for keystore import
+ * Keystore Credentials Dialog.
+ * Allows entering alias and password for keystore import.
  */
 @Composable
 fun KeystoreCredentialsDialog(

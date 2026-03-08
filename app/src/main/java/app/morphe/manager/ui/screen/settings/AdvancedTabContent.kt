@@ -33,7 +33,7 @@ import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
 
 /**
- * Advanced tab content
+ * Advanced tab content.
  */
 @Composable
 fun AdvancedTabContent(
@@ -209,7 +209,7 @@ fun AdvancedTabContent(
 }
 
 /**
- * Dialog to confirm enabling Expert mode
+ * Dialog to confirm enabling Expert mode.
  */
 @Composable
 private fun ExpertModeConfirmationDialog(

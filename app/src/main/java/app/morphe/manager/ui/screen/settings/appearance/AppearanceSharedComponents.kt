@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.compose.foundation.BorderStroke
@@ -26,8 +31,8 @@ import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.screen.shared.rememberWindowSize
 
 /**
- * Standard icon-based option card for appearance settings
- * Used for backgrounds, themes, and other icon-based selections
+ * Standard icon-based option card for appearance settings.
+ * Used for backgrounds, themes, and other icon-based selections.
  */
 @Composable
 fun ModernIconOptionCard(
@@ -111,8 +116,8 @@ fun ModernIconOptionCard(
 }
 
 /**
- * Compact horizontal card for single-row selections
- * Used for "Not selected" option in color picker
+ * Compact horizontal card for single-row selections.
+ * Used for "Not selected" option in color picker.
  */
 @Composable
 fun CompactOptionCard(

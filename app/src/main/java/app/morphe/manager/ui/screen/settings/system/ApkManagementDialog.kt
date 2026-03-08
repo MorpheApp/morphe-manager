@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import android.annotation.SuppressLint
@@ -39,7 +44,7 @@ import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
 /**
- * Type of APKs to manage
+ * Type of APKs to manage.
  */
 enum class ApkManagementType {
     PATCHED,
@@ -47,7 +52,7 @@ enum class ApkManagementType {
 }
 
 /**
- * Data class representing an APK item for display
+ * Data class representing an APK item for display.
  */
 data class ApkItemData(
     val packageName: String,
@@ -57,7 +62,7 @@ data class ApkItemData(
 )
 
 /**
- * Data class representing an APK item with reference to InstalledApp
+ * Data class representing an APK item with reference to InstalledApp.
  */
 private data class ApkItemDataWithApp(
     val packageName: String,
@@ -75,7 +80,7 @@ private data class ApkItemDataWithApp(
 }
 
 /**
- * Universal dialog for managing APK files (patched or original)
+ * Universal dialog for managing APK files (patched or original).
  */
 @SuppressLint("LocalContextGetResourceValueCheck")
 @Composable

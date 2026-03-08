@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.compose.foundation.background
@@ -23,7 +28,7 @@ import app.morphe.manager.util.darken
 import app.morphe.manager.util.toColorOrNull
 
 /**
- * Predefined accent color palette
+ * Predefined accent color palette.
  */
 val THEME_PRESET_COLORS = listOf(
     Color(0xFF6750A4),
@@ -43,7 +48,7 @@ val THEME_PRESET_COLORS = listOf(
 )
 
 /**
- * Accent color selector with adaptive color grid
+ * Accent color selector with adaptive color grid.
  */
 @Composable
 fun AccentColorSelector(

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import android.content.Context
@@ -7,7 +12,7 @@ import app.morphe.manager.util.parseLocalesConfig
 import java.util.Locale
 
 /**
- * Data class for language options
+ * Data class for language options.
  */
 data class LanguageOption(
     val code: String,

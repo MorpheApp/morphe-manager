@@ -54,7 +54,7 @@ import java.io.FileOutputStream
 import kotlin.math.abs
 
 /**
- * Configuration constants for header creation
+ * Configuration constants for header creation.
  */
 private object HeaderConfig {
     // Folder structure
@@ -389,7 +389,7 @@ fun HeaderCreatorDialog(
 }
 
 /**
- * Preview component for header with transform gestures
+ * Preview component for header with transform gestures.
  */
 @SuppressLint("LocalContextResourcesRead")
 @Composable

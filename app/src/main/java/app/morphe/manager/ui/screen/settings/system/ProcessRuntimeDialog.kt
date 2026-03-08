@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.*
@@ -22,7 +27,7 @@ import app.morphe.manager.patcher.runtime.*
 import app.morphe.manager.ui.screen.shared.*
 
 /**
- * Dialog for configuring process runtime settings
+ * Dialog for configuring process runtime settings.
  */
 @Composable
 fun ProcessRuntimeDialog(

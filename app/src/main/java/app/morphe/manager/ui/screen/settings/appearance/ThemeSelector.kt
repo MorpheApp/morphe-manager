@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.compose.foundation.layout.*
@@ -14,7 +19,7 @@ import app.morphe.manager.ui.screen.shared.rememberWindowSize
 import app.morphe.manager.ui.theme.Theme
 
 /**
- * Theme mode selector with adaptive grid
+ * Theme mode selector with adaptive grid.
  */
 @Composable
 fun ThemeSelector(
