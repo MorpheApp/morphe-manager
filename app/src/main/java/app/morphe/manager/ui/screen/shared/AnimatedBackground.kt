@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import android.annotation.SuppressLint
@@ -12,7 +17,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.backgrounds.*
 
 /**
- * Types of animated backgrounds available in the app
+ * Types of animated backgrounds available in the app.
  */
 enum class BackgroundType(val displayNameResId: Int) {
     CIRCLES(R.string.settings_appearance_background_circles),
@@ -21,6 +26,8 @@ enum class BackgroundType(val displayNameResId: Int) {
     SPACE(R.string.settings_appearance_background_space),
     SHAPES(R.string.settings_appearance_background_shapes),
     SNOW(R.string.settings_appearance_background_snow),
+    GRID(R.string.settings_appearance_background_grid),
+    PARTICLES(R.string.settings_appearance_background_particles),
     NONE(R.string.settings_appearance_background_none);
 
     companion object {
@@ -29,14 +36,16 @@ enum class BackgroundType(val displayNameResId: Int) {
 }
 
 /**
- * Animated background with multiple visual styles
- * Creates subtle floating effects that can be used across all screens
+ * Animated background with multiple visual styles.
+ * Creates subtle floating effects that can be used across all screens.
  */
 @Composable
 @SuppressLint("ModifierParameter")
 fun AnimatedBackground(
     type: BackgroundType = BackgroundType.CIRCLES,
-    enableParallax: Boolean = true
+    enableParallax: Boolean = true,
+    speedMultiplier: Float = 1f,
+    patchingCompleted: Boolean = false
 ) {
     Box(
         modifier = Modifier
@@ -49,27 +58,51 @@ fun AnimatedBackground(
         when (type) {
             BackgroundType.CIRCLES -> CirclesBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.RINGS -> RingsBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.MESH -> MeshBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.SPACE -> SpaceBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.SHAPES -> ShapesBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.SNOW -> SnowBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
+            )
+            BackgroundType.GRID -> GridBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
+            )
+            BackgroundType.PARTICLES -> ParticlesBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax,
+                speedMultiplier = speedMultiplier,
+                patchingCompleted = patchingCompleted
             )
             BackgroundType.NONE -> Unit
         }

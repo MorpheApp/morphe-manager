@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings
 
 import android.app.Activity
@@ -35,7 +40,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * Appearance tab content
+ * Appearance tab content.
  */
 @Composable
 fun AppearanceTabContent(
@@ -230,7 +235,7 @@ fun AppearanceTabContent(
 }
 
 /**
- * Language selection section
+ * Language selection section.
  */
 @Composable
 private fun LanguageSection(

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.advanced
 
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +26,7 @@ import app.morphe.manager.ui.screen.shared.*
 import kotlinx.coroutines.launch
 
 /**
- * GitHub PAT settings item for Advanced tab
+ * GitHub PAT settings item for Advanced tab.
  */
 @Composable
 fun GitHubPatSettingsItem(
@@ -74,7 +79,7 @@ fun GitHubPatSettingsItem(
 }
 
 /**
- * GitHub PAT configuration dialog
+ * GitHub PAT configuration dialog.
  */
 @Composable
 private fun GitHubPatDialog(

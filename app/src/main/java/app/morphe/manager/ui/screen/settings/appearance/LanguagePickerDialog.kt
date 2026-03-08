@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.compose.foundation.layout.*
@@ -25,7 +30,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 
 /**
- * Language picker dialog with searchable list
+ * Language picker dialog with searchable list.
  */
 @Composable
 fun LanguagePickerDialog(
@@ -123,7 +128,7 @@ fun LanguagePickerDialog(
 }
 
 /**
- * Individual language item in the list
+ * Individual language item in the list.
  */
 @Composable
 private fun LanguageItem(
