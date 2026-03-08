@@ -37,6 +37,7 @@
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
     <string name="home_please_wait">Please wait…</string>
 
+
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -64,6 +65,7 @@
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_prerelease_toggle">Use pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Receive early access to new experimental patches version</string>
+    <string name="sources_management_already_exists">This source has already been added</string>
 
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
