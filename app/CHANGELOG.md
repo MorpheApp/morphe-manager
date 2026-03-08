@@ -1,3 +1,10 @@
+# app [1.12.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.1...v1.12.0-dev.2) (2026-03-08)
+
+
+### Features
+
+* Use interactive background animations ([#284](https://github.com/MorpheApp/morphe-manager/issues/284)) ([fca12bf](https://github.com/MorpheApp/morphe-manager/commit/fca12bf0e9b3e4614255de82bc60fd634e015f35))
+
 # app [1.12.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.11.0...v1.12.0-dev.1) (2026-03-08)
 
 
