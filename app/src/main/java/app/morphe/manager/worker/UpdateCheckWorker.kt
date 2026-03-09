@@ -7,21 +7,15 @@ package app.morphe.manager.worker
 
 import android.content.Context
 import android.util.Log
-import androidx.work.Constraints
-import androidx.work.CoroutineWorker
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkerParameters
+import androidx.work.*
 import app.morphe.manager.BuildConfig
+import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.network.api.MorpheAPI
-import app.morphe.manager.network.utils.getOrNull
-import app.morphe.manager.R
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.tag
+import app.morphe.manager.worker.UpdateCheckInterval.HOURLY
 import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -140,17 +134,15 @@ class UpdateCheckWorker(
          * Uses [ExistingPeriodicWorkPolicy.UPDATE] so that changing the interval in Settings takes effect immediately.
          */
         fun schedule(context: Context, interval: UpdateCheckInterval = UpdateCheckInterval.DAILY) {
-            val intervalMinutes = interval.minutes
-
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
             val request = PeriodicWorkRequestBuilder<UpdateCheckWorker>(
-                intervalMinutes, TimeUnit.MINUTES
+                interval.minutes, TimeUnit.MINUTES
             )
                 .setConstraints(constraints)
-                .setInitialDelay(intervalMinutes, TimeUnit.MINUTES)
+                .setInitialDelay(interval.minutes, TimeUnit.MINUTES)
                 .build()
 
             WorkManager.getInstance(context).enqueueUniquePeriodicWork(
@@ -159,7 +151,7 @@ class UpdateCheckWorker(
                 request
             )
 
-            Log.d("UpdateCheckWorker", "Periodic update check scheduled (every ${intervalMinutes}m / ${interval.name})")
+            Log.d("UpdateCheckWorker", "Periodic update check scheduled (every ${interval.minutes}m / ${interval.name})")
         }
 
         /**

@@ -89,21 +89,10 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         val vm: MainViewModel = getActivityViewModel()
-        handleUpdateCheckIntent(intent, vm)
-        handleDeepLinkIntent(intent, vm)
-    }
-
-    /**
-     * If the intent contains [UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK],
-     * sets the flag in [MainViewModel] - [HomeScreen] will pick it up via [LaunchedEffect].
-     */
-    private fun handleUpdateCheckIntent(intent: Intent?, vm: MainViewModel) {
-        if (intent?.getBooleanExtra(
-                UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false
-            ) == true
-        ) {
-            vm.triggerUpdateCheckOnResume = true
+        if (intent.getBooleanExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false)) {
+            vm.pendingUpdateCheck = true
         }
+        handleDeepLinkIntent(intent, vm)
     }
 
     /**
@@ -202,14 +191,13 @@ private fun MorpheManager(vm: MainViewModel) {
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
 
-                // If opened from an FCM notification - trigger update check.
-                // vm.triggerUpdateCheckOnResume is set in handleUpdateCheckIntent()
-                // and reset here after handling.
-                LaunchedEffect(vm.triggerUpdateCheckOnResume) {
-                    if (vm.triggerUpdateCheckOnResume) {
+                // If opened from an FCM notification, trigger an update check.
+                // vm.pendingUpdateCheck is set in onNewIntent() and reset here after handling.
+                LaunchedEffect(vm.pendingUpdateCheck) {
+                    if (vm.pendingUpdateCheck) {
                         homeViewModel.patchBundleRepository.updateCheck()
                         homeViewModel.checkForManagerUpdates()
-                        vm.triggerUpdateCheckOnResume = false
+                        vm.pendingUpdateCheck = false
                     }
                 }
 

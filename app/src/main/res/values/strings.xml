@@ -37,7 +37,6 @@
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
     <string name="home_please_wait">Please wait…</string>
 
-
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -381,12 +380,6 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodically check for updates in the background and notify when available</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Receive instant push notifications for new releases, even when the app is closed</string>
-    <string name="notification_channel_manager_updates">Morphe updates</string>
-    <string name="notification_channel_manager_updates_description">Notifications about new versions of Morphe</string>
-    <string name="notification_channel_bundle_updates">Patch sources updates</string>
-    <string name="notification_channel_bundle_updates_description">Notifications about new patch source versions</string>
-    <string name="notification_channel_fcm_updates">Update alerts</string>
-    <string name="notification_channel_fcm_updates_description">Instant push notifications for new Morphe and patch releases. Delivered even when the app is in the background</string>
     <string name="settings_advanced_update_interval">Check frequency</string>
     <string name="settings_advanced_update_interval_dialog_title">Check for updates</string>
     <string name="settings_advanced_update_interval_hourly">Once an hour</string>
@@ -395,6 +388,7 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_update_interval_monthly">Once a month</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Background check frequency</string>
     <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
+
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe update available</string>
     <string name="notification_bundle_update_title">New patches available</string>
@@ -403,6 +397,10 @@ Are you sure you want to proceed?"</string>
     <string name="notification_permission_dialog_title">Allow notifications</string>
     <string name="notification_permission_dialog_description">Morphe needs notification permission to alert you when updates are available in the background</string>
     <string name="notification_post_patch_dialog_title">Would you like to be notified when updates are available?</string>
+    <string name="notification_channel_fcm_updates">Update notifications</string>
+    <string name="notification_channel_fcm_updates_description">Notifications about new Morphe and patch releases</string>
+    <string name="notification_channel_patcher">Patching</string>
+    <string name="notification_channel_patcher_description">Shown while Morphe is patching an app in the background</string>
 
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>

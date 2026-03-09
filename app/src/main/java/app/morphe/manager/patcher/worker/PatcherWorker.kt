@@ -78,8 +78,12 @@ class PatcherWorker(
             applicationContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE
         )
         val channel = NotificationChannel(
-            "morphe-patcher-patching", "Patching", NotificationManager.IMPORTANCE_LOW
-        )
+            "morphe-patcher-patching",
+            applicationContext.getString(R.string.notification_channel_patcher),
+            NotificationManager.IMPORTANCE_LOW
+        ).apply {
+            description = applicationContext.getString(R.string.notification_channel_patcher_description)
+        }
         val notificationManager =
             applicationContext.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)

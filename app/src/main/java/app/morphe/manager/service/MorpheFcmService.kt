@@ -5,6 +5,7 @@
 
 package app.morphe.manager.service
 
+import android.annotation.SuppressLint
 import android.util.Log
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.tag
@@ -47,19 +48,15 @@ import org.koin.android.ext.android.inject
  *
  * Every FCM message must include a `type` key in its `data` map:
  *
- * | type             | extra keys       | action                                                             |
- * |------------------|------------------|--------------------------------------------------------------------|
- * | `manager_update` | `version` (opt.) | Calls [UpdateNotificationManager.showFcmManagerUpdateNotification] |
- * | `bundle_update`  | `version` (opt.) | Calls [UpdateNotificationManager.showFcmBundleUpdateNotification]  |
+ * | type             | extra keys       | action                                                          |
+ * |------------------|------------------|-----------------------------------------------------------------|
+ * | `manager_update` | `version` (opt.) | Calls [UpdateNotificationManager.showManagerUpdateNotification] |
+ * | `bundle_update`  | `version` (opt.) | Calls [UpdateNotificationManager.showBundleUpdateNotification]  |
  *
  * `version` is optional in both types for compatibility.
  * Unknown types are silently ignored for forward-compatibility with future message types.
- *
- * ## Token rotation
- *
- * [onNewToken] is called when FCM rotates the registration token. Topic subscriptions
- * survive rotation automatically - Play Services re-subscribes with the new token.
  */
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class MorpheFcmService : FirebaseMessagingService() {
 
     private val notificationManager: UpdateNotificationManager by inject()
@@ -73,34 +70,14 @@ class MorpheFcmService : FirebaseMessagingService() {
         }
 
         val type = data[KEY_TYPE]
+        val version = data[KEY_VERSION]
         Log.d(tag, "MorpheFcmService: message received, type=$type, topic=${message.from}")
 
         when (type) {
-            TYPE_MANAGER_UPDATE -> {
-                val version = data[KEY_VERSION]
-                notificationManager.showFcmManagerUpdateNotification(version)
-            }
-
-            TYPE_BUNDLE_UPDATE -> {
-                val version = data[KEY_VERSION]
-                notificationManager.showFcmBundleUpdateNotification(version)
-            }
-
-            else -> {
-                // Silently ignore unknown types - keeps old builds compatible with new message types
-                Log.d(tag, "MorpheFcmService: unknown type '$type' - ignoring")
-            }
+            TYPE_MANAGER_UPDATE -> notificationManager.showManagerUpdateNotification(version)
+            TYPE_BUNDLE_UPDATE  -> notificationManager.showBundleUpdateNotification(version)
+            else -> Log.d(tag, "MorpheFcmService: unknown type '$type' - ignoring")
         }
-    }
-
-    /**
-     * Called by FCM when the registration token is rotated.
-     *
-     * Because Morphe Manager uses topic-based messaging, token rotation is fully
-     * transparent - Play Services re-subscribes to all active topics automatically.
-     */
-    override fun onNewToken(token: String) {
-        Log.d(tag, "MorpheFcmService: registration token refreshed (topics will re-subscribe automatically)")
     }
 
     companion object {
