@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun AdvancedTabContent(
-    usePrereleases: State<Boolean>,
+    useManagerPrereleases: State<Boolean>,
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel,
     prefs: PreferencesManager
@@ -92,9 +92,9 @@ fun AdvancedTabContent(
         )
 
         UpdatesSettingsItem(
-            useManagerPrereleases = usePrereleases.value,
+            useManagerPrereleases = useManagerPrereleases.value,
             onManagerPrereleasesToggle = {
-                val newValue = !usePrereleases.value
+                val newValue = !useManagerPrereleases.value
                 scope.launch {
                     prefs.useManagerPrereleases.update(newValue)
                 }

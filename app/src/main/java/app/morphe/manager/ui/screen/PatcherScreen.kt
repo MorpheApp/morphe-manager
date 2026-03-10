@@ -109,7 +109,8 @@ fun PatcherScreen(
     }
 
     // Prefs needed for the notification dialog
-    val usePrereleases by prefs.useManagerPrereleases.getAsState()
+    val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
+    val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
 
     // Animated progress with dual-mode animation
@@ -323,7 +324,11 @@ fun PatcherScreen(
                     prefs.notificationPermissionRequested.update(true)
                     if (granted) {
                         prefs.backgroundUpdateNotifications.update(true)
-                        syncFcmTopics(notificationsEnabled = true, useManagerPrereleases = usePrereleases)
+                        syncFcmTopics(
+                            notificationsEnabled = true,
+                            useManagerPrereleases = useManagerPrereleases,
+                            usePatchesPrereleases = usePatchesPrereleases.contains("0")
+                        )
                         if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                     }
                 }

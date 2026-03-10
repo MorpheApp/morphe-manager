@@ -104,7 +104,7 @@ fun SettingsScreen(
     val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
 
     // Update
-    val usePrereleases = homeViewModel.prefs.useManagerPrereleases.getAsState()
+    val useManagerPrereleases = homeViewModel.prefs.useManagerPrereleases.getAsState()
 
     // Dialog states
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
@@ -224,7 +224,7 @@ fun SettingsScreen(
                 )
 
                 SettingsTab.ADVANCED -> AdvancedTabContent(
-                    usePrereleases = usePrereleases,
+                    useManagerPrereleases = useManagerPrereleases,
                     patchOptionsViewModel = patchOptionsViewModel,
                     homeViewModel = homeViewModel,
                     prefs = prefs

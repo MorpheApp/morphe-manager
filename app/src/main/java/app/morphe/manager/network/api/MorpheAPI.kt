@@ -427,18 +427,16 @@ class MorpheAPI(
 
     /**
      * Get patches update - uses JSON or API based on configuration.
-     * Pass [usePrerelease] explicitly instead of reading from prefs,
-     * so each bundle can control its own channel independently.
+     * Pass [usePrerelease] explicitly so each bundle can control its own channel independently.
      */
-    suspend fun getPatchesUpdate(usePrerelease: Boolean? = null): APIResponse<MorpheAsset> {
-        val prereleaseResolved = usePrerelease ?: prefs.usePatchesPrereleases.get()
+    suspend fun getPatchesUpdate(usePrerelease: Boolean): APIResponse<MorpheAsset> {
         return if (USE_PATCHES_DIRECT_JSON) {
-            getPatchesFromJson(prereleaseResolved).fallbackTo {
+            getPatchesFromJson(usePrerelease).fallbackTo {
                 Log.w(tag, "Falling back to Morphe API for patches")
-                getPatchesFromApi(prereleaseResolved)
+                getPatchesFromApi(usePrerelease)
             }
         } else {
-            getPatchesFromApi(prereleaseResolved)
+            getPatchesFromApi(usePrerelease)
         }
     }
 
