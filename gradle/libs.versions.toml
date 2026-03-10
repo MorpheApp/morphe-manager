@@ -42,6 +42,7 @@ shizuku = "13.1.5"
 hiddenapibypass = "6.1"
 semver-parser = "3.0.0"
 firebase-bom = "34.9.0"
+arsclib = "2664403e24"
 
 [libraries]
 # AndroidX Core
@@ -87,6 +88,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-ver
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
 
 # Patcher
+arsclib = { module = "com.github.REAndroid:arsclib", version.ref = "arsclib" }
 morphe-patcher = { group = "app.morphe", name = "morphe-patcher", version.ref = "morphe-patcher" }
 morphe-library = { group = "app.morphe", name = "morphe-library", version.ref = "morphe-library" }
 
