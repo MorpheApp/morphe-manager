@@ -155,10 +155,8 @@ fun HomeScreen(
         if (bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.Success ||
             bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.NoUpdates) {
 
-            val defaultBundle = sources.firstOrNull { it.uid == 0 }
             homeViewModel.checkInstalledAppsForUpdates(
                 installedApps = allInstalledApps,
-                currentBundleVersion = defaultBundle?.version
             )
         }
     }
@@ -166,10 +164,8 @@ fun HomeScreen(
     // Also check on initial load
     LaunchedEffect(allInstalledApps, sources) {
         if (allInstalledApps.isNotEmpty() && sources.isNotEmpty()) {
-            val defaultBundle = sources.firstOrNull { it.uid == 0 }
             homeViewModel.checkInstalledAppsForUpdates(
                 installedApps = allInstalledApps,
-                currentBundleVersion = defaultBundle?.version
             )
         }
     }
@@ -310,10 +306,6 @@ fun HomeScreen(
 
                 // Other apps button
                 onOtherAppsClick = {
-                    if (availablePatches <= 0) {
-                        context.toast(context.getString(R.string.home_sources_are_loading))
-                        return@SectionsLayout
-                    }
                     homeViewModel.pendingPackageName = null
                     homeViewModel.pendingAppName = context.getString(R.string.home_other_apps)
                     homeViewModel.pendingRecommendedVersion = null

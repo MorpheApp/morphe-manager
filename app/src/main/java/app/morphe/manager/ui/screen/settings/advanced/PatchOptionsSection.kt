@@ -186,7 +186,7 @@ fun PatchOptionsSection(
                     AppPatchOptionsCard(
                         packageName = KnownApp.YOUTUBE,
                         icon = Icons.Outlined.VideoLibrary,
-                        title = stringResource(R.string.home_youtube),
+                        title = KnownApp.YouTube.displayName,
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = KnownApp.YOUTUBE },
@@ -218,7 +218,7 @@ fun PatchOptionsSection(
                     AppPatchOptionsCard(
                         packageName = KnownApp.YOUTUBE_MUSIC,
                         icon = Icons.Outlined.LibraryMusic,
-                        title = stringResource(R.string.home_youtube_music),
+                        title = KnownApp.YouTubeMusic.displayName,
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = KnownApp.YOUTUBE_MUSIC },
@@ -365,7 +365,7 @@ private fun HideShortsSection(
         // Header
         CardHeader(
             icon = Icons.Outlined.VisibilityOff,
-            title = stringResource(R.string.home_youtube),
+            title = KnownApp.YouTube.displayName,
             description = stringResource(R.string.settings_advanced_patch_options_hide_shorts_features)
         )
 
