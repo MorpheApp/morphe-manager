@@ -282,7 +282,7 @@ class HomeViewModel(
      * Guard entry-point for all patching flows.
      * Shows MeteredPatchingDialog when on metered network with updates disabled,
      * so the user can choose to update patches first or patch anyway.
-     * Otherwise launches [action] immediately.
+     * Otherwise, launches [action] immediately.
      */
     fun guardPatching(action: suspend () -> Unit) {
         if (isOnMeteredWithUpdatesDisabled()) {
@@ -318,7 +318,7 @@ class HomeViewModel(
     }
 
     /**
-     * User cancelled patching from the metered network dialog.
+     * User canceled patching from the metered network dialog.
      */
     fun dismissMeteredPatchingDialog() {
         showMeteredPatchingDialog = false
@@ -885,7 +885,11 @@ class HomeViewModel(
                 .first()
         }
 
-        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch ->
+            // Universal patches (no compatiblePackages) are always counted as available
+            // regardless of their default `use` flag
+            patch.include || patch.compatiblePackages == null
+        }
         val totalPatches = patches.values.sumOf { it.size }
 
         // Check if any patches available
@@ -1049,12 +1053,14 @@ class HomeViewModel(
 
                 proceedWithPatching(selectedApp, patches, emptyMap())
             } else {
-                // For "Other Apps": search all enabled bundles for patches
+                // For "Other Apps": search all enabled bundles for patches.
+                // Include patches that are either enabled by default OR universal
+                // (compatiblePackages == null), since the user explicitly chose this APK.
                 val bundleWithPatches = allBundles
                     .filter { it.enabled }
                     .map { bundle ->
                         val patchNames = bundle.patchSequence(allowIncompatible)
-                            .filter { it.include }
+                            .filter { it.include || it.compatiblePackages == null }
                             .mapTo(mutableSetOf()) { it.name }
                         bundle to patchNames
                     }

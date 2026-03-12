@@ -748,7 +748,7 @@ private sealed interface OptionKind {
  * All type-detection heuristics live here, keeping the UI when-expression clean and exhaustive.
  */
 private fun resolveOptionKind(option: Option<*>, value: Any?): OptionKind {
-    val t       = option.type.toString()
+    val t        = option.type.toString()
     val isArray  = t.contains("Array")
     val isString = t.contains("String") && !isArray
 
