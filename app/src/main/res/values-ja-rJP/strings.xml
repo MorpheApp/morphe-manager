@@ -144,15 +144,18 @@
     <string name="patch_option_enter_number">数値を入力してください</string>
     <string name="patch_option_enter_decimal">小数点を入力してください</string>
     <string name="patch_option_pick_folder">フォルダーを選択する</string>
+    <string name="patch_option_list_duplicate">この値はすでに存在します</string>
+    <string name="patch_option_list_empty">値は空にできません</string>
+    <string name="patch_option_list_empty_state">まだ値が追加されていません</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">アダプティブ アイコンを作成</string>
-    <string name="adaptive_icon_instructions">前景画像を選択し、背景色を設定して、プレビューをピンチで拡大・縮小して調整します</string>
+    <string name="adaptive_icon_instructions">前景画像を選択、背景色を設定し、プレビューをピンチで拡大・縮小して調整します</string>
     <string name="adaptive_icon_preview">プレビュー</string>
     <string name="adaptive_icon_select_image">画像を選択</string>
     <string name="adaptive_icon_change_image">画像を変更</string>
     <string name="adaptive_icon_background_color">背景色</string>
     <string name="adaptive_icon_reset_transform">位置とスケールをリセット</string>
-    <string name="adaptive_icon_safe_zone_inner">セーフゾーン（常に表示）</string>
+    <string name="adaptive_icon_safe_zone_inner">セーフゾーン（常に表示される）</string>
     <string name="adaptive_icon_safe_zone_outer">マスクゾーン（切り取られる可能性あり）</string>
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
@@ -185,7 +188,7 @@
     <string name="home_app_info_install_type_system_installer">システムのインストーラー</string>
     <string name="home_app_info_patched_at">パッチの適用</string>
     <string name="home_app_info_patch_update_available">パッチの更新が利用可能です</string>
-    <string name="home_app_info_patch_update_available_description">新しいバージョンのパッチが利用可能です。最新の改善を反映するには、アプリを再パッチしてください</string>
+    <string name="home_app_info_patch_update_available_description">新しいバージョンのパッチが利用可能です。最新の変更を反映するには、アプリを再パッチしてください</string>
     <string name="home_app_info_app_deleted_warning">アプリがアンインストールされました</string>
     <string name="home_app_info_app_deleted_description">Morphe 外でアプリがアンインストールされました。機能を復元するには、再パッチしてください</string>
     <!-- Home Screen - Root Mode -->
@@ -300,9 +303,11 @@
     <string name="settings_appearance_background_space">宇宙</string>
     <string name="settings_appearance_background_shapes">図形</string>
     <string name="settings_appearance_background_snow">雪</string>
+    <string name="settings_appearance_background_grid">グリッド</string>
+    <string name="settings_appearance_background_particles">パーティクル</string>
     <string name="settings_appearance_background_none">なし</string>
     <string name="settings_appearance_parallax_effect">パララックス効果</string>
-    <string name="settings_appearance_parallax_effect_description">デバイスを傾けると背景が滑らかに移動します</string>
+    <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">テーマ</string>
     <string name="settings_appearance_system">システム</string>
@@ -311,7 +316,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">アクセントカラー</string>
     <string name="settings_appearance_pure_black">ピュアブラック</string>
-    <string name="settings_appearance_pure_black_description">真っ黒の背景を使用します</string>
+    <string name="settings_appearance_pure_black_description">真っ黒な背景を使用します</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">アプリの言語</string>
     <string name="settings_appearance_app_language_current">現在の言語</string>
@@ -337,12 +342,6 @@
     <string name="settings_advanced_updates_background_notifications">バックグラウンドでの更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">バックグラウンドで定期的に更新を確認し、利用可能な場合に通知します</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">アプリを閉じているときでも、新しいリリースのプッシュ通知を即時に受け取ります</string>
-    <string name="notification_channel_manager_updates">Morphe の更新通知</string>
-    <string name="notification_channel_manager_updates_description">Morphe の新しいバージョンの通知</string>
-    <string name="notification_channel_bundle_updates">パッチソースの更新通知</string>
-    <string name="notification_channel_bundle_updates_description">パッチソースの新しいバージョンの通知</string>
-    <string name="notification_channel_fcm_updates">更新アラート</string>
-    <string name="notification_channel_fcm_updates_description">新しい Morphe およびパッチのリリースの即時のプッシュ通知。アプリがバックグラウンドにある場合でも配信されます</string>
     <string name="settings_advanced_update_interval">確認頻度</string>
     <string name="settings_advanced_update_interval_dialog_title">更新の確認</string>
     <string name="settings_advanced_update_interval_hourly">1 時間に 1 回</string>
@@ -359,6 +358,10 @@
     <string name="notification_permission_dialog_title">通知の許可</string>
     <string name="notification_permission_dialog_description">バックグラウンドで更新が利用可能になった際に通知するには、Morphe に通知権限を許可する必要があります</string>
     <string name="notification_post_patch_dialog_title">更新が利用可能になった際に通知を受け取りますか？</string>
+    <string name="notification_channel_fcm_updates">更新通知</string>
+    <string name="notification_channel_fcm_updates_description">新しい Morphe およびパッチのリリースに関する通知</string>
+    <string name="notification_channel_patcher">パッチ処理</string>
+    <string name="notification_channel_patcher_description">バックグラウンドで Morphe がアプリにパッチを適用しているときに表示されます</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">エキスパート設定</string>
     <string name="settings_advanced_expert_mode">エキスパートモード</string>
@@ -373,7 +376,7 @@
     <string name="settings_advanced_github_pat_configured">PAT が設定されました</string>
     <string name="settings_advanced_github_pat_how_to_get">PAT を取得するには</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub の Personal Access Token の設定</string>
-    <string name="settings_advanced_github_pat_dialog_description">プルリクエストを外部ソースとして追加するには、 GitHub の Personal Access Token （PAT） を設定する必要があります。スコープ public_repo の PAT を github.com で作成してください</string>
+    <string name="settings_advanced_github_pat_dialog_description">プルリクエストを外部ソースとして追加するには、 GitHub の Personal Access Token （PAT） を設定する必要があります。スコープ `public_repo` を指定した PAT を github.com で作成してください</string>
     <string name="settings_advanced_github_pat_export_include_label">設定のエクスポートに含める</string>
     <string name="settings_advanced_github_pat_export_include_supporting">この PAT をエクスポートした Morphe の設定に追加します</string>
     <string name="settings_advanced_github_pat_export_warning">PAT を共有しないでください。設定のエクスポートに含める場合、PAT が含まれるそのファイルも公開しないようにしてください</string>
@@ -492,9 +495,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_memory_limit_description">メモリ制限を高く設定すると、パッチの処理速度を向上させることができますが、古いデバイスでは機能しない可能性があります</string>
     <string name="settings_system_process_runtime_enable">別プロセスでの実行を有効化</string>
     <string name="settings_system_memory_limit_subtitle">パッチに使用できるメモリ</string>
-    <string name="settings_system_memory_limit_warning">大きなアプリをパッチする際に、メモリ制限が低いと失敗する可能性があります</string>
+    <string name="settings_system_memory_limit_warning">メモリ制限が低い場合、大規模なアプリをパッチする際に失敗する可能性があります</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB 制限</string>
-    <string name="settings_system_process_runtime_disabled_description">タップして構成します</string>
+    <string name="settings_system_process_runtime_disabled_description">タップして構成</string>
     <string name="settings_system_process_runtime_description_not_available">本機能は Android 11 以上で利用できます</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">インポートとエクスポート</string>
@@ -510,7 +513,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_failed">キーストアのインポートに失敗しました</string>
     <string name="settings_system_export_keystore">キーストアをエクスポート</string>
     <string name="settings_system_export_keystore_description">現在のキーストアをエクスポートします</string>
-    <string name="settings_system_export_keystore_unavailable">キーストアをエクスポートするには、キーストアが必要です</string>
+    <string name="settings_system_export_keystore_unavailable">エクスポート可能なキーストアはありません</string>
     <string name="settings_system_export_keystore_success">キーストアをエクスポートしました</string>
     <string name="settings_system_show_password_field">パスワードを表示</string>
     <string name="settings_system_hide_password_field">パスワードを非表示</string>
@@ -573,9 +576,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
     <string name="settings_system_share_website_description">Morphe の公式ウェブサイトを共有します</string>
-    <string name="settings_system_manager_description">"Morphe は、人気の Android アプリ向けにモダンでシンプルなパッチ適用を目指した実験的オープンソースプロジェクトです。
+    <string name="settings_system_manager_description">"Morphe は、人気の Android アプリ向けにモダンでシンプルなパッチの適用を目指す、実験的なオープンソースプロジェクトです。
 
-オープンソースを基本とし、コミュニティからのフィードバックや貢献によって発展しています"</string>
+オープンソースを基とし、コミュニティからのフィードバックや貢献によって発展しています"</string>
     <!-- Shared strings -->
     <string name="patches">パッチ</string>
     <string name="home">ホーム</string>
@@ -592,6 +595,7 @@ morphe_header_custom_dark.png
     <string name="close">閉じる</string>
     <string name="clear">クリア</string>
     <string name="delete">削除</string>
+    <string name="remove">削除</string>
     <string name="disable">無効</string>
     <string name="enable">有効にする</string>
     <string name="loading">読み込み中…</string>

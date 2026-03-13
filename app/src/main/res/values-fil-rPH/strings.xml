@@ -144,6 +144,9 @@ Nais mo bang magpatuloy?"</string>
     <string name="patch_option_enter_number">Ilagay ang numero</string>
     <string name="patch_option_enter_decimal">Ilagay ang decimal</string>
     <string name="patch_option_pick_folder">Piliin ang folder</string>
+    <string name="patch_option_list_duplicate">May umiiral na ang halagang ito</string>
+    <string name="patch_option_list_empty">Hindi maaaring walang laman ang halaga</string>
+    <string name="patch_option_list_empty_state">Walang idinagdag na halaga pa</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Gumawa ng iniangkop na icon</string>
     <string name="adaptive_icon_instructions">Piliin ang isang foreground na larawan, piliin ang likurang kulay, at i-adjust ang preview gamit ang pinch-to-zoom na mga gesture</string>
@@ -300,6 +303,8 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_appearance_background_space">Puwang</string>
     <string name="settings_appearance_background_shapes">Mga hugis</string>
     <string name="settings_appearance_background_snow">Niyebe</string>
+    <string name="settings_appearance_background_grid">Griyá</string>
+    <string name="settings_appearance_background_particles">Partikulo</string>
     <string name="settings_appearance_background_none">Wala</string>
     <string name="settings_appearance_parallax_effect">Epekto ng parallax</string>
     <string name="settings_appearance_parallax_effect_description">Maayos na paglilipat ng background kapag tinatagilid ang device</string>
@@ -337,12 +342,6 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_advanced_updates_background_notifications">Mga notipikasyon sa pag-update sa background</string>
     <string name="settings_advanced_updates_background_notifications_description">Paminsan-minsang suriin ang mga update sa background at abisuhan kung magagamit</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Tumanggap ng agarang abiso para sa bagong release, kahit sarado ang aplikasyon</string>
-    <string name="notification_channel_manager_updates">Mga update ng Morphe</string>
-    <string name="notification_channel_manager_updates_description">Mga abiso tungkol sa mga bagong bersyon ng Morphe</string>
-    <string name="notification_channel_bundle_updates">Mga update ng mapagkukunang patch</string>
-    <string name="notification_channel_bundle_updates_description">Mga notipikasyon tungkol sa bagong bersyon ng mapagkukunang patch</string>
-    <string name="notification_channel_fcm_updates">Mga update alert</string>
-    <string name="notification_channel_fcm_updates_description">Instant push notification para sa mga bagong Morphe at patch release. Ipinapadala kahit nasa background ang app</string>
     <string name="settings_advanced_update_interval">Suriin ang prikwensiya</string>
     <string name="settings_advanced_update_interval_dialog_title">Suriin ang mga update</string>
     <string name="settings_advanced_update_interval_hourly">Minsan sa isang oras</string>
@@ -359,6 +358,10 @@ Nais mo bang magpatuloy?"</string>
     <string name="notification_permission_dialog_title">Payagan ang mga notipikasyon</string>
     <string name="notification_permission_dialog_description">Kailangan ng Morphe ang pahintulot sa notipikasyon upang abisuhan ka kapag may mga update na magagamit sa background</string>
     <string name="notification_post_patch_dialog_title">Nais mo bang abisuhan ka kung may magagamit na mga update?</string>
+    <string name="notification_channel_fcm_updates">I-update ang mga notipikasyon</string>
+    <string name="notification_channel_fcm_updates_description">Mga notipikasyon tungkol sa mga bagong Morphe at paglabas ng patch</string>
+    <string name="notification_channel_patcher">Nagpa-patch</string>
+    <string name="notification_channel_patcher_description">Ipinapakita habang ina-patch ng Morphe ang isang app sa background</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
     <string name="settings_advanced_expert_mode">Expert mode</string>
@@ -591,6 +594,7 @@ Open-source sa core nito, ang Morphe ay umuunlad sa katugunan ng komunidad at mg
     <string name="close">Isara</string>
     <string name="clear">Alisin</string>
     <string name="delete">Burahin</string>
+    <string name="remove">Alisin</string>
     <string name="disable">Patayin</string>
     <string name="enable">Paganahin</string>
     <string name="loading">Naglo-load…</string>

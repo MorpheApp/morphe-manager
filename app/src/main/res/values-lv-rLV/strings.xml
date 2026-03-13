@@ -61,6 +61,7 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
+    <string name="remove">Noņemt</string>
     <string name="search">Meklēt</string>
     <string name="enabled">Iespējots</string>
     <string name="disabled">Atspējots</string>

@@ -885,9 +885,12 @@ class HomeViewModel(
 
     /**
      * Process selected APK file.
+     *
+     * This function only answers: "do any patches EXIST for this APK?"
+     * The include/selection logic is handled in [startPatchingWithApp].
      */
     private suspend fun processSelectedApp(selectedApp: SelectedApp) {
-        // Validate package name if expected
+        // Validate package name if expected (known-app flow sets pendingPackageName)
         if (pendingPackageName != null && selectedApp.packageName != pendingPackageName) {
             showWrongPackageDialog = WrongPackageDialogState(
                 expectedPackage = pendingPackageName!!,
@@ -902,44 +905,57 @@ class HomeViewModel(
 
         val allowIncompatible = prefs.disablePatchVersionCompatCheck.getBlocking()
 
-        // Get available patches
+        // Get scoped bundles for this APK (package + version).
+        // Scoped.patches contains every patch that is compatible with this packageName
+        // (including universal patches where compatiblePackages == null).
+        // Scoped.compatible = version matches, Scoped.incompatible = package matches but wrong version,
+        // Scoped.universal = compatiblePackages == null (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
             patchBundleRepository
                 .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
                 .first()
         }
 
-        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
-        val totalPatches = patches.values.sumOf { it.size }
+        val enabledBundles = bundles.filter { it.enabled }
 
-        // Check if any patches available
-        if (totalPatches == 0) {
-            // First check if we have version info for this package
-            val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
+        // Categorize what exists across all enabled bundles for this APK:
+        val hasCompatible   = enabledBundles.any { it.compatible.isNotEmpty() }   // right pkg + right version
+        val hasIncompatible = enabledBundles.any { it.incompatible.isNotEmpty() } // right pkg, wrong version
+        val hasUniversal    = enabledBundles.any { it.universal.isNotEmpty() }    // no pkg restriction
+        val hasAnything     = hasCompatible || hasIncompatible || hasUniversal
 
-            if (recommendedVersion != null || allVersions.isNotEmpty()) {
-                // Patches exist for this package, but not for this version
-                pendingSelectedApp = selectedApp
-                showUnsupportedVersionDialog = UnsupportedVersionDialogState(
-                    packageName = selectedApp.packageName,
-                    version = selectedApp.version ?: "unknown",
-                    recommendedVersion = recommendedVersion,
-                    allCompatibleVersions = allVersions
-                )
-                cleanupPendingData(keepSelectedApp = true)
-                return
-            } else {
-                // No patches at all for this package
-                app.toast(app.getString(R.string.home_no_patches_for_app))
-                if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
-                    selectedApp.file.delete()
-                }
-                cleanupPendingData()
-                return
+        if (!hasAnything) {
+            // Truly no patches exist for this package in any enabled bundle
+            app.toast(app.getString(R.string.home_no_patches_available))
+            if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
+                selectedApp.file.delete()
             }
+            cleanupPendingData()
+            return
         }
 
+        // Show the unsupported-version warning when:
+        //   - version-specific patches exist for this package (incompatible list is non-empty)
+        //   - BUT none of them match this APK version (compatible list is empty)
+        //   - AND the user has NOT disabled the version compat check
+        // Universal patches do not suppress this warning — the user should still be informed
+        // that the APK version is not officially supported.
+        val versionMismatch = !hasCompatible && hasIncompatible
+        if (versionMismatch && !allowIncompatible) {
+            val recommendedVersion = recommendedVersions[selectedApp.packageName]
+            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
+            pendingSelectedApp = selectedApp
+            showUnsupportedVersionDialog = UnsupportedVersionDialogState(
+                packageName = selectedApp.packageName,
+                version = selectedApp.version ?: "unknown",
+                recommendedVersion = recommendedVersion,
+                allCompatibleVersions = allVersions
+            )
+            cleanupPendingData(keepSelectedApp = true)
+            return
+        }
+
+        // Patches exist and are applicable → proceed.
         // For root-capable devices, we must know the installation method BEFORE patching
         // because it affects which patches are included (GmsCore is excluded for mount install).
         // Show the pre-patching installer dialog so the user can choose.
@@ -1046,38 +1062,35 @@ class HomeViewModel(
             showExpertModeDialog = true
         } else {
             // Simple Mode: check if this is a main app or "other app"
-            val isMainApp = AppPackages.isKnown(selectedApp.packageName)
-
-            if (isMainApp) {
-                // For main apps: use only default bundle
-                val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
-
-                if (defaultBundle == null || !defaultBundle.enabled) {
-                    app.toast(app.getString(R.string.home_default_source_disabled))
-                    cleanupPendingData()
-                    return
-                }
-
-                // Always use default selection in Simple Mode
-                val patchNames = defaultBundle.patchSequence(allowIncompatible)
+            // Prefer the default bundle if it is enabled and has patches for this package.
+            // If the default bundle is disabled or has no patches, fall through to use
+            // all enabled bundles — this allows third-party bundles to work for known apps too.
+            val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
+            val defaultPatchNames = if (defaultBundle != null && defaultBundle.enabled) {
+                defaultBundle.patchSequence(allowIncompatible)
                     .filter { it.include }
                     .mapTo(mutableSetOf()) { it.name }
+            } else {
+                emptySet()
+            }
 
-                if (patchNames.isEmpty()) {
-                    app.toast(app.getString(R.string.home_no_patches_available))
-                    cleanupPendingData()
-                    return
-                }
-
-                val patches = mapOf(defaultBundle.uid to patchNames).applyGmsCoreFilter()
-
+            if (defaultPatchNames.isNotEmpty()) {
+                // Default bundle is active and has patches → use it (simple mode behavior)
+                val patches = mapOf(defaultBundle!!.uid to defaultPatchNames).applyGmsCoreFilter()
                 proceedWithPatching(selectedApp, patches, emptyMap())
             } else {
-                // For "Other Apps": search all enabled bundles for patches
+                // For "Other Apps": collect patches from all enabled bundles.
+                // A patch is applicable if:
+                //   - compatiblePackages == null (universal), OR
+                //   - compatiblePackages contains this packageName
+                // We use allowIncompatible=true here because the user explicitly chose
+                // this APK file, so version mismatches should not block patching.
                 val bundleWithPatches = allBundles
                     .filter { it.enabled }
                     .map { bundle ->
-                        val patchNames = bundle.patchSequence(allowIncompatible)
+                        // patchSequence(true) = all patches in Scoped.patches
+                        // which already contains only compatible+incompatible+universal for this pkg.
+                        val patchNames = bundle.patchSequence(allowIncompatible = true)
                             .filter { it.include }
                             .mapTo(mutableSetOf()) { it.name }
                         bundle to patchNames
@@ -1085,12 +1098,30 @@ class HomeViewModel(
                     .filter { (_, patches) -> patches.isNotEmpty() }
 
                 if (bundleWithPatches.isEmpty()) {
-                    app.toast(app.getString(R.string.home_no_patches_available))
-                    cleanupPendingData()
+                    // No patches have include=true (use=true in the bundle JSON).
+                    // This is the case for third-party bundles where all universal patches
+                    // ship with use=false and require explicit user configuration.
+                    // Fall through to expert mode so the user can select and configure patches.
+                    val currentBundleUids = allBundles.map { it.uid }.toSet()
+
+                    val savedSelections = withContext(Dispatchers.IO) {
+                        patchSelectionRepository.getAllSelectionsForPackage(selectedApp.packageName)
+                            .filterKeys { it in currentBundleUids }
+                    }
+                    val savedOptions = withContext(Dispatchers.IO) {
+                        optionsRepository.getAllOptionsForPackage(selectedApp.packageName, bundlesMap)
+                            .filterKeys { it in currentBundleUids }
+                    }
+
+                    expertModeSelectedApp = selectedApp
+                    expertModeBundles = allBundles
+                    expertModePatches = savedSelections.toMutableMap()
+                    expertModeOptions = savedOptions.toMutableMap()
+                    showExpertModeDialog = true
                     return
                 }
 
-                // Use all available patches from all bundles
+                // Use all include=true patches from all bundles
                 val patches = bundleWithPatches
                     .associate { (bundle, patches) -> bundle.uid to patches }
                     .applyGmsCoreFilter()

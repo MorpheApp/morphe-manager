@@ -144,6 +144,9 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patch_option_enter_number">Wprowadź liczbę</string>
     <string name="patch_option_enter_decimal">Wprowadź liczbę dziesiętną</string>
     <string name="patch_option_pick_folder">Wybierz folder</string>
+    <string name="patch_option_list_duplicate">Ta wartość już istnieje</string>
+    <string name="patch_option_list_empty">Wartość nie może być pusta</string>
+    <string name="patch_option_list_empty_state">Jeszcze nie dodano żadnych wartości</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Utwórz ikonę adaptacyjną</string>
     <string name="adaptive_icon_instructions">Wybierz obraz pierwszego planu, wybierz kolor tła i dostosuj podgląd za pomocą gestów uszczypnięcia</string>
@@ -300,6 +303,8 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_appearance_background_space">Kosmos</string>
     <string name="settings_appearance_background_shapes">Kształty</string>
     <string name="settings_appearance_background_snow">Śnieg</string>
+    <string name="settings_appearance_background_grid">Kratka</string>
+    <string name="settings_appearance_background_particles">Cząsteczki</string>
     <string name="settings_appearance_background_none">Brak</string>
     <string name="settings_appearance_parallax_effect">Efekt paralaksy</string>
     <string name="settings_appearance_parallax_effect_description">Gładkie przesuwanie tła przy nachyleniu urządzenia</string>
@@ -337,12 +342,6 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="settings_advanced_updates_background_notifications">Powiadomienia o aktualizacjach w tle</string>
     <string name="settings_advanced_updates_background_notifications_description">Okresowo sprawdzaj aktualizacje w tle i powiadamiaj, gdy będą dostępne</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Odbieraj natychmiastowe powiadomienia Push o nowych wydaniach, nawet gdy aplikacja jest zamknięta</string>
-    <string name="notification_channel_manager_updates">Aktualizacje Morphe</string>
-    <string name="notification_channel_manager_updates_description">Powiadomienia o nowych wersjach Morphe</string>
-    <string name="notification_channel_bundle_updates">Aktualizacje źródeł modyfikacji</string>
-    <string name="notification_channel_bundle_updates_description">Powiadomienia o nowych wersjach źródeł modyfikacji</string>
-    <string name="notification_channel_fcm_updates">Alerty o aktualizacjach</string>
-    <string name="notification_channel_fcm_updates_description">Natychmiastowe powiadomienia Push o nowych wydaniach Morphe i modyfikacji. Dostarczane nawet wtedy, gdy aplikacja działa w tle</string>
     <string name="settings_advanced_update_interval">Częstotliwość sprawdzania</string>
     <string name="settings_advanced_update_interval_dialog_title">Sprawdzaj aktualizacje</string>
     <string name="settings_advanced_update_interval_hourly">Raz na godzinę</string>
@@ -359,6 +358,10 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="notification_permission_dialog_title">Zezwól na powiadomienia</string>
     <string name="notification_permission_dialog_description">Morphe wymaga uprawnień do powiadomień, aby informować Cię o dostępnych aktualizacjach w tle</string>
     <string name="notification_post_patch_dialog_title">Czy chcesz otrzymywać powiadomienia o dostępnych aktualizacjach?</string>
+    <string name="notification_channel_fcm_updates">Powiadomienia o aktualizacjach</string>
+    <string name="notification_channel_fcm_updates_description">Powiadomienia o nowych wersjach Morphe oraz modyfikacji</string>
+    <string name="notification_channel_patcher">Modyfikowanie</string>
+    <string name="notification_channel_patcher_description">Wyświetlane, gdy Morphe modyfikuje aplikację w tle</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
@@ -497,13 +500,13 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga systemu Android 11 lub nowszego</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import i eksport</string>
-    <string name="settings_system_import_keystore">Importuj magazyn kluczy</string>
-    <string name="settings_system_import_keystore_description">Importuj własny magazyn kluczy</string>
+    <string name="settings_system_import_keystore">Zaimportuj magazyn kluczy</string>
+    <string name="settings_system_import_keystore_description">Zaimportuj własny magazyn kluczy</string>
     <string name="settings_system_import_keystore_dialog_title">Wprowadź dane uwierzytelniające magazynu kluczy</string>
     <string name="settings_system_import_keystore_dialog_description">Musisz wprowadzić dane uwierzytelniające magazynu kluczy, aby go zaimportować</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nazwa użytkownika (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Hasło</string>
-    <string name="settings_system_import_keystore_dialog_button">Importuj</string>
+    <string name="settings_system_import_keystore_dialog_button">Zaimportuj</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nieprawidłowe dane uwierzytelniające magazynu kluczy</string>
     <string name="settings_system_import_keystore_success">Zaimportowano magazyn kluczy</string>
     <string name="settings_system_import_keystore_failed">Nie udało się zaimportować magazynu kluczy</string>
@@ -514,7 +517,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_show_password_field">Pokaż hasło</string>
     <string name="settings_system_hide_password_field">Ukryj hasło</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importuj ustawienia Morphe</string>
+    <string name="settings_system_import_manager_settings">Zaimportuj ustawienia Morphe</string>
     <string name="settings_system_import_manager_settings_description">Przywróć ustawienia Morphe z pliku JSON</string>
     <string name="settings_system_import_manager_settings_fail">Nie udało się zaimportować ustawień Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Zaimportowano ustawienia Morphe</string>
@@ -591,6 +594,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="close">Zamknij</string>
     <string name="clear">Wyczyść</string>
     <string name="delete">Usuń</string>
+    <string name="remove">Usuń</string>
     <string name="disable">Wyłącz</string>
     <string name="enable">Włącz</string>
     <string name="loading">Wczytywanie…</string>
@@ -604,7 +608,7 @@ Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytk
     <string name="selected">Wybrane</string>
     <string name="not_selected">Nie wybrano</string>
     <string name="rename">Zmień nazwę</string>
-    <string name="import_">Importuj</string>
+    <string name="import_">Zaimportuj</string>
     <string name="export">Eksportuj</string>
     <string name="download">Pobierz</string>
     <string name="less">Mniej</string>

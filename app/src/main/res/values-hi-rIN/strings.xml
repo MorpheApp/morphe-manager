@@ -144,6 +144,9 @@
     <string name="patch_option_enter_number">नंबर दर्ज करें</string>
     <string name="patch_option_enter_decimal">दशमलव दर्ज करें</string>
     <string name="patch_option_pick_folder">फ़ोल्डर चुनें</string>
+    <string name="patch_option_list_duplicate">यह मान पहले से मौजूद है</string>
+    <string name="patch_option_list_empty">मान खाली नहीं हो सकता</string>
+    <string name="patch_option_list_empty_state">अभी तक कोई मान नहीं जोड़ा गया है</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">अनुकूलित आइकॉन बनाएं</string>
     <string name="adaptive_icon_instructions">फोरग्राउंड छवि चुनें, बैकग्राउंड रंग चुनें और पिन्च-टू-ज़ूम गेस्टर से प्रीव्यू को अनुकूलित करें</string>
@@ -300,6 +303,8 @@
     <string name="settings_appearance_background_space">खगोल</string>
     <string name="settings_appearance_background_shapes">आकार</string>
     <string name="settings_appearance_background_snow">बारिशक</string>
+    <string name="settings_appearance_background_grid">ग्रिड</string>
+    <string name="settings_appearance_background_particles">कण</string>
     <string name="settings_appearance_background_none">कुछ</string>
     <string name="settings_appearance_parallax_effect">परालैक्स प्रभाव</string>
     <string name="settings_appearance_parallax_effect_description">डिवाइस को झुकाने पर पृष्ठभूमि को मधयम गति से बदलना</string>
@@ -337,12 +342,6 @@
     <string name="settings_advanced_updates_background_notifications">रीलेटेड अपडेट नोटिफिकेशन्स</string>
     <string name="settings_advanced_updates_background_notifications_description">बैकग्राउंड में अद्यतन उपलब्ध होने पर सूचित करें।</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">नई रिलीज़ के लिए इमीडिएट पुश नोटिफिकेशन प्राप्त करें, जब एप्प क्लोज हो</string>
-    <string name="notification_channel_manager_updates">मोर्फ़ अपडेट</string>
-    <string name="notification_channel_manager_updates_description">मोर्फ़ के नए संस्करणों के बारे में सूचनाएं</string>
-    <string name="notification_channel_bundle_updates">पैच स्रोत अपडेट</string>
-    <string name="notification_channel_bundle_updates_description">नोटिफिकेशन नई पैच स्रोत संस्करणों के बारे में</string>
-    <string name="notification_channel_fcm_updates">अपडेट करें</string>
-    <string name="notification_channel_fcm_updates_description">नए मोर्फ़ और पैच रिलीज़ के लिए त्वरित पुश सूचनाएं। जब ऐप पृष्ठभूमि में हो तो भी वितरित किया गया</string>
     <string name="settings_advanced_update_interval">अपडेट दर देखें</string>
     <string name="settings_advanced_update_interval_dialog_title">अपडेटों के लिए देखें</string>
     <string name="settings_advanced_update_interval_hourly">एक घंटे में एक बार</string>
@@ -359,6 +358,10 @@
     <string name="notification_permission_dialog_title">नोटिफिकेशन अनुमति दें</string>
     <string name="notification_permission_dialog_description">जब पृष्ठभूमि में अपडेट उपलब्ध हों तो आपको अलर्ट करने के लिए मोर्फ़ को अधिसूचना अनुमति की आवश्यकता है</string>
     <string name="notification_post_patch_dialog_title">अपडेट उपलब्ध होने पर सूचित किया जाना चाहेगा?</string>
+    <string name="notification_channel_fcm_updates">अपडेट सूचनाएं</string>
+    <string name="notification_channel_fcm_updates_description">नए मोर्फ़ और पैच रिलीज़ के बारे में सूचनाएं</string>
+    <string name="notification_channel_patcher">पैचिंग</string>
+    <string name="notification_channel_patcher_description">जब मोर्फ़ पृष्ठभूमि में किसी ऐप को पैच कर रहा हो तो दिखाया गया</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
@@ -591,6 +594,7 @@ morphe_header_custom_dark.png
     <string name="close">बंद करे</string>
     <string name="clear">खाली करें</string>
     <string name="delete">हटाएं</string>
+    <string name="remove">निकालें</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
     <string name="loading">Loading…</string>

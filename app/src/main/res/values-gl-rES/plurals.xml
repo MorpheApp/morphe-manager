@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s parche</item>
+        <item quantity="other">%s parches</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s opción de parche</item>
+        <item quantity="other">%s opcións de parche</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s fontes</item>
+        <item quantity="other">%s fontes</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s paquete</item>
+        <item quantity="other">%s paquetes</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Executar parche %s</item>
+        <item quantity="other">Executar parches %s</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s arquivo APK</item>
+        <item quantity="other">%s arquivos APK</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Eliminado %s parche obsoleto de la selección gardada</item>
+        <item quantity="other">Eliminados %s parches obsoletos de la selección gardada</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%s fonte instalada</item>
+        <item quantity="other">%s fontes instaladas</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">Parche %s seleccionado</item>
+        <item quantity="other">Parches %s seleccionados</item>
+    </plurals>
+</resources>

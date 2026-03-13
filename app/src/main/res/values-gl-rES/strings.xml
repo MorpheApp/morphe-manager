@@ -61,6 +61,7 @@
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
+    <string name="remove">Eliminar</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
 </resources>

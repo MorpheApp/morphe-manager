@@ -144,6 +144,9 @@ Tem certeza de que deseja continuar?"</string>
     <string name="patch_option_enter_number">Digite um número</string>
     <string name="patch_option_enter_decimal">Digite um decimal</string>
     <string name="patch_option_pick_folder">Selecionar pasta</string>
+    <string name="patch_option_list_duplicate">Este valor já existe</string>
+    <string name="patch_option_list_empty">Valor não pode estar vazio</string>
+    <string name="patch_option_list_empty_state">Nenhum valor adicionado ainda</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Criar ícone adaptável</string>
     <string name="adaptive_icon_instructions">Escolha uma imagem de primeiro plano, selecione a cor de fundo e ajuste a visualizaÃ§Ã£o com gestos de pinch-to-zoom</string>
@@ -300,6 +303,8 @@ Tem certeza de que deseja continuar?"</string>
     <string name="settings_appearance_background_space">Espaço</string>
     <string name="settings_appearance_background_shapes">Formas</string>
     <string name="settings_appearance_background_snow">Neve</string>
+    <string name="settings_appearance_background_grid">Grade</string>
+    <string name="settings_appearance_background_particles">Partículas</string>
     <string name="settings_appearance_background_none">Nenhum</string>
     <string name="settings_appearance_parallax_effect">Efeito de paralaxe</string>
     <string name="settings_appearance_parallax_effect_description">Deslocamento suave do fundo ao inclinar o dispositivo</string>
@@ -337,12 +342,6 @@ Tem certeza de que deseja continuar?"</string>
     <string name="settings_advanced_updates_background_notifications">Notificações de atualização em segundo plano</string>
     <string name="settings_advanced_updates_background_notifications_description">Verifique periodicamente por atualizações em segundo plano e notifique quando disponíveis</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Receber notificações push instantâneas para novos lançamentos, mesmo quando o aplicativo estiver fechado</string>
-    <string name="notification_channel_manager_updates">Atualizações do Morphe</string>
-    <string name="notification_channel_manager_updates_description">Notificações sobre novas versões do Morphe</string>
-    <string name="notification_channel_bundle_updates">Atualizações de pacotes de patches</string>
-    <string name="notification_channel_bundle_updates_description">Notificações sobre novas versões de origem do patch</string>
-    <string name="notification_channel_fcm_updates">Atualizar alertas</string>
-    <string name="notification_channel_fcm_updates_description">Notificações push instantâneas para novas versões do Morphe e patches. Entregue mesmo quando o aplicativo estiver em segundo plano</string>
     <string name="settings_advanced_update_interval">Frequência de verificação</string>
     <string name="settings_advanced_update_interval_dialog_title">Verificar atualizações</string>
     <string name="settings_advanced_update_interval_hourly">Uma vez por hora</string>
@@ -359,6 +358,10 @@ Tem certeza de que deseja continuar?"</string>
     <string name="notification_permission_dialog_title">Permitir notificações</string>
     <string name="notification_permission_dialog_description">O Morphe precisa de permissão de notificação para alertá-lo quando as atualizações estiverem disponíveis em segundo plano</string>
     <string name="notification_post_patch_dialog_title">Gostaria de ser notificado quando atualizações estiverem disponíveis?</string>
+    <string name="notification_channel_fcm_updates">Atualizações de notificações</string>
+    <string name="notification_channel_fcm_updates_description">Notificações sobre novas versões do Morphe e patches</string>
+    <string name="notification_channel_patcher">Aplicando patches</string>
+    <string name="notification_channel_patcher_description">Exibido enquanto o Morphe aplica um patch em um aplicativo em segundo plano</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Configurações avançadas</string>
     <string name="settings_advanced_expert_mode">Modo avançado</string>
@@ -591,6 +594,7 @@ Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovaç�
     <string name="close">Fechar</string>
     <string name="clear">Limpar</string>
     <string name="delete">Excluir</string>
+    <string name="remove">Remover</string>
     <string name="disable">Desativar</string>
     <string name="enable">Ativar</string>
     <string name="loading">Carregando…</string>
