@@ -1,3 +1,10 @@
+# app [1.12.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.2...v1.12.0-dev.3) (2026-03-13)
+
+
+### Bug Fixes
+
+* Add list editor dialog for `List<String>` patch options ([#318](https://github.com/MorpheApp/morphe-manager/issues/318)) ([5b722d2](https://github.com/MorpheApp/morphe-manager/commit/5b722d27f979d32a18a04b0bbefb36b0add6e80d))
+
 # app [1.12.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.1...v1.12.0-dev.2) (2026-03-08)
 
 

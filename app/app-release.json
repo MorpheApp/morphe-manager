@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-03-08T22:33:11.044Z",
-  "description": "# app [1.12.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.1...v1.12.0-dev.2) (2026-03-08)\n\n\n### Features\n\n* Use interactive background animations ([#284](https://github.com/MorpheApp/morphe-manager/issues/284)) ([fca12bf](https://github.com/MorpheApp/morphe-manager/commit/fca12bf0e9b3e4614255de82bc60fd634e015f35))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.2/morphe-manager-1.12.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.2/morphe-manager-1.12.0-dev.2.apk.asc",
-  "version": "1.12.0-dev.2"
+  "created_at": "2026-03-13T07:31:46.439Z",
+  "description": "# app [1.12.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.2...v1.12.0-dev.3) (2026-03-13)\n\n\n### Bug Fixes\n\n* Add list editor dialog for `List<String>` patch options ([#318](https://github.com/MorpheApp/morphe-manager/issues/318)) ([5b722d2](https://github.com/MorpheApp/morphe-manager/commit/5b722d27f979d32a18a04b0bbefb36b0add6e80d))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.3/morphe-manager-1.12.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.3/morphe-manager-1.12.0-dev.3.apk.asc",
+  "version": "1.12.0-dev.3"
 }
