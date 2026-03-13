@@ -7,7 +7,6 @@
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
-    <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode</string>
     <string name="home_app_hide_title">Hide this app?</string>
     <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later using the \'%1$s\' button at the bottom of the list</string>
     <string name="home_app_will_be_hidden">This app will be hidden</string>
