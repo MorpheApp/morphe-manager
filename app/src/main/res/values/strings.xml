@@ -163,6 +163,9 @@ Are you sure you want to proceed?"</string>
     <string name="patch_option_enter_number">Enter number</string>
     <string name="patch_option_enter_decimal">Enter decimal</string>
     <string name="patch_option_pick_folder">Pick folder</string>
+    <string name="patch_option_list_duplicate">This value already exists</string>
+    <string name="patch_option_list_empty">Value cannot be empty</string>
+    <string name="patch_option_list_empty_state">No values added yet</string>
 
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Create adaptive icon</string>
@@ -657,6 +660,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="close">Close</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
     <string name="loading">Loading…</string>

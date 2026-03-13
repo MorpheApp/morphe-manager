@@ -1012,8 +1012,6 @@ fun InstalledAppCard(
     val updateAvailableLabel = stringResource(R.string.update_available)
     val deletedLabel = stringResource(R.string.uninstalled)
 
-    val showBadge = hasUpdate
-
     val version = remember(packageInfo, installedApp, isAppDeleted) {
         val raw = packageInfo?.versionName ?: installedApp.version
         if (raw.startsWith("v")) raw else "v$raw"
@@ -1107,7 +1105,7 @@ fun InstalledAppCard(
 
             // Update badge
             androidx.compose.animation.AnimatedVisibility(
-                visible = showBadge && !isAppDeleted,
+                visible = hasUpdate && !isAppDeleted,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(top = 0.dp, end = 0.dp),

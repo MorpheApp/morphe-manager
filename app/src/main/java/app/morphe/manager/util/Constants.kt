@@ -47,10 +47,10 @@ sealed class KnownApp(
 ) {
     companion object {
         // Package name constants
-        const val YOUTUBE = "com.google.android.youtube"
+        const val YOUTUBE       = "com.google.android.youtube"
         const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
-        const val REDDIT = "com.reddit.frontpage"
-        const val X_TWITTER = "com.twitter.android"
+        const val REDDIT        = "com.reddit.frontpage"
+        const val X_TWITTER     = "com.twitter.android"
 
         // Shared gradient tail colors used by all known apps
         val GRADIENT_MID = Color(0xFF1E5AA8)
@@ -108,6 +108,7 @@ object AppPackages {
     val DEFAULT_DOWNLOAD_COLOR = Color(0xFF6C63FF)
 
     private val PACKAGE_NAME_TO_APP_NAME = mapOf(
+        "com.twitter.android" to "X", // Remove when release
         "com.amazon.avod.thirdpartyclient" to "Amazon Prime Video",
         "com.avocards" to "Avocards",
         "me.mycake" to "Cake",
