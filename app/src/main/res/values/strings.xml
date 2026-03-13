@@ -7,7 +7,6 @@
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
-    <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode</string>
     <string name="home_app_hide_title">Hide this app?</string>
     <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later using the \'%1$s\' button at the bottom of the list</string>
     <string name="home_app_will_be_hidden">This app will be hidden</string>
@@ -124,7 +123,6 @@
     <string name="home_select_apk_title">Select APK</string>
     <string name="home_select_any_apk_description">Tap the button below to select an APK file of any app for patching</string>
     <string name="home_invalid_apk">Invalid APK file</string>
-    <string name="home_no_patches_for_app">No patches available for this app</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
@@ -133,7 +131,6 @@
     <string name="expert_mode_disable_all">Disable all</string>
     <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_no_results">No patches found</string>
-    <string name="expert_mode_no_patches">No patches available</string>
     <string name="expert_mode_universal_patches">Universal patches</string>
     <string name="expert_mode_multiple_sources_warning_title">Multiple patch sources selected</string>
     <string name="expert_mode_multiple_sources_warning_message">"You have selected patches from multiple patch sources. This may cause compatibility issues or unexpected behavior.
