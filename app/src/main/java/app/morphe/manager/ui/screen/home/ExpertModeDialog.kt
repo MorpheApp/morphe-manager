@@ -716,7 +716,7 @@ private fun EmptyStateContent(
                     if (hasSearch)
                         R.string.expert_mode_no_results
                     else
-                        R.string.expert_mode_no_patches
+                        R.string.home_no_patches_available
                 ),
                 style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogSecondaryTextColor.current,
