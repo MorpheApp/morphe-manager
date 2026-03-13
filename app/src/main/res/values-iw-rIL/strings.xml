@@ -145,6 +145,9 @@
     <string name="patch_option_enter_number">הזן מספר</string>
     <string name="patch_option_enter_decimal">הזן ספרתי</string>
     <string name="patch_option_pick_folder">בחר תיקיה</string>
+    <string name="patch_option_list_duplicate">ערך זה כבר קיים</string>
+    <string name="patch_option_list_empty">ערך לא יכול להיות ריק</string>
+    <string name="patch_option_list_empty_state">עדיין לא נוספו ערכים</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">צור סמלapte</string>
     <string name="adaptive_icon_instructions">בחר תמונה קדמית, בחר צבע רקע, והסיט את התצוגה עם גסיסות צפייה</string>
@@ -301,6 +304,8 @@
     <string name="settings_appearance_background_space">חלל</string>
     <string name="settings_appearance_background_shapes">צורות</string>
     <string name="settings_appearance_background_snow">שלג</string>
+    <string name="settings_appearance_background_grid">רשת</string>
+    <string name="settings_appearance_background_particles">חלקיקים</string>
     <string name="settings_appearance_background_none">אין</string>
     <string name="settings_appearance_parallax_effect">אפקט פארלקס</string>
     <string name="settings_appearance_parallax_effect_description">הדגמה חלקה של רקע בעת טיפוס של המכשיר</string>
@@ -338,10 +343,6 @@
     <string name="settings_advanced_updates_background_notifications">התראות עדכונים רקע</string>
     <string name="settings_advanced_updates_background_notifications_description">עדכונים מוטבעים תדירית וודא וידיעה זמינות</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">קבל התראות דחיפות מידיות עבור גרסאות חדשות, גם כשהאפליקציה סגורה</string>
-    <string name="notification_channel_manager_updates">עדכוני Morphe</string>
-    <string name="notification_channel_bundle_updates">עדכונים של מקורות צפיפות</string>
-    <string name="notification_channel_bundle_updates_description">הודעות על גרסאות חדשות של קובץ</string>
-    <string name="notification_channel_fcm_updates">עדכון התראות</string>
     <string name="settings_advanced_update_interval">תדירות בדיקה</string>
     <string name="settings_advanced_update_interval_dialog_title">בדיקת עדכונים</string>
     <string name="settings_advanced_update_interval_hourly">פעם בשעה</string>
@@ -355,6 +356,10 @@
     <string name="notification_update_text">גרסה %1$s מוכנה להורדה</string>
     <string name="notification_permission_dialog_title">אישור התראות</string>
     <string name="notification_post_patch_dialog_title">האם תרצה להודע כשעדכונים יהיו זמינים?</string>
+    <string name="notification_channel_fcm_updates">עדכוני התראות</string>
+    <string name="notification_channel_fcm_updates_description">התראות לגבי גרסאות חדשות של Morphe ותיקונים</string>
+    <string name="notification_channel_patcher">תיקונים</string>
+    <string name="notification_channel_patcher_description">מוצג בזמן ש-Morphe מתקן אפליקציה ברקע</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">הגדרות מומחג\'שיות</string>
     <string name="settings_advanced_expert_mode">מצב מומחג\'שיות</string>
@@ -538,6 +543,7 @@
     <string name="close">סגור</string>
     <string name="clear">נקה</string>
     <string name="delete">מחק</string>
+    <string name="remove">הסר</string>
     <string name="disable">השבת</string>
     <string name="enable">Включить</string>
     <string name="loading">טוען…</string>

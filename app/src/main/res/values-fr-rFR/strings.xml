@@ -144,6 +144,9 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patch_option_enter_number">Entrer un nombre</string>
     <string name="patch_option_enter_decimal">Entrer un décimal</string>
     <string name="patch_option_pick_folder">Choisir un dossier</string>
+    <string name="patch_option_list_duplicate">Cette valeur existe déjà</string>
+    <string name="patch_option_list_empty">La valeur ne peut pas être vide</string>
+    <string name="patch_option_list_empty_state">Aucune valeur ajoutée pour le moment</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Créer une icône adaptative</string>
     <string name="adaptive_icon_instructions">Choisissez une image de premier plan, sélectionnez une couleur d’arrière-plan et ajustez l’aperçu à l’aide des gestes de pincement pour zoomer</string>
@@ -300,6 +303,8 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="settings_appearance_background_space">Espace</string>
     <string name="settings_appearance_background_shapes">Formes</string>
     <string name="settings_appearance_background_snow">Neige</string>
+    <string name="settings_appearance_background_grid">Grille</string>
+    <string name="settings_appearance_background_particles">Particules</string>
     <string name="settings_appearance_background_none">Aucun</string>
     <string name="settings_appearance_parallax_effect">Effet de parallaxe</string>
     <string name="settings_appearance_parallax_effect_description">Déplacement d\'arrière-plan fluide lors de l\'inclinaison de l\'appareil</string>
@@ -337,13 +342,7 @@ Pour obtenir les patchs en pré-version, activez l’option pré-versions sépar
     <string name="settings_advanced_updates_allow_metered_description">Autoriser Morphe et les mises à jour de patch à se télécharger via les données mobiles</string>
     <string name="settings_advanced_updates_background_notifications">Notifications de mise à jour en arrière-plan</string>
     <string name="settings_advanced_updates_background_notifications_description">Vérifier périodiquement les mises à jour en arrière-plan et notifier lorsqu\'elles sont disponibles</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Recevez des notifications push instantanées pour les nouvelles sorties, même lorsque l\'application est fermée</string>
-    <string name="notification_channel_manager_updates">Mise à jour de Morphe</string>
-    <string name="notification_channel_manager_updates_description">Notifications concernant les nouvelles versions de Morphe</string>
-    <string name="notification_channel_bundle_updates">Mises à jour des sources de patch</string>
-    <string name="notification_channel_bundle_updates_description">Notifications concernant les nouvelles versions de source de patch</string>
-    <string name="notification_channel_fcm_updates">Alertes de mise à jour</string>
-    <string name="notification_channel_fcm_updates_description">Notifications push instantanées pour les nouvelles sorties de Morphe et les patchs. Reçues même lorsque l\'application est en arrière-plan</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Recevez des notifications push instantanées pour les nouvelles versions, même lorsque l\'application est fermée</string>
     <string name="settings_advanced_update_interval">Fréquence de vérification</string>
     <string name="settings_advanced_update_interval_dialog_title">Vérifier les mises à jour</string>
     <string name="settings_advanced_update_interval_hourly">Une fois par heure</string>
@@ -360,6 +359,10 @@ Pour obtenir les patchs en pré-version, activez l’option pré-versions sépar
     <string name="notification_permission_dialog_title">Autoriser les notifications</string>
     <string name="notification_permission_dialog_description">Morphe a besoin de l\'autorisation des notifications pour vous alerter lorsque des mises à jour sont disponibles en arrière-plan</string>
     <string name="notification_post_patch_dialog_title">Souhaitez-vous être notifié lorsque des mises à jour sont disponibles ?</string>
+    <string name="notification_channel_fcm_updates">Notifications de mise à jour</string>
+    <string name="notification_channel_fcm_updates_description">Notifications concernant les nouvelles versions de Morphe et les patchs</string>
+    <string name="notification_channel_patcher">Patchage</string>
+    <string name="notification_channel_patcher_description">Affiché pendant que Morphe patch une application en arrière-plan</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Paramètres Expert</string>
     <string name="settings_advanced_expert_mode">Mode Expert</string>
@@ -592,6 +595,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="close">Fermer</string>
     <string name="clear">Effacer</string>
     <string name="delete">Supprimer</string>
+    <string name="remove">Supprimer</string>
     <string name="disable">Désactiver</string>
     <string name="enable">Activer</string>
     <string name="loading">Chargement…</string>

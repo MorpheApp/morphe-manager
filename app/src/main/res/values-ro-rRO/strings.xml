@@ -144,6 +144,9 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patch_option_enter_number">Introduceți numărul</string>
     <string name="patch_option_enter_decimal">Introduceți decimal</string>
     <string name="patch_option_pick_folder">Alege folder</string>
+    <string name="patch_option_list_duplicate">Această valoare există deja</string>
+    <string name="patch_option_list_empty">Valoarea nu poate fi goală</string>
+    <string name="patch_option_list_empty_state">Nu au fost adăugate valori încă</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Creează iconiță adaptivă</string>
     <string name="adaptive_icon_instructions">Alege o imagine de fundal, selectează culoarea de fundal și ajustează previzualizarea cu gesturi de zoom cu degetul</string>
@@ -300,6 +303,8 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_appearance_background_space">Spațiu</string>
     <string name="settings_appearance_background_shapes">Forme</string>
     <string name="settings_appearance_background_snow">Snow</string>
+    <string name="settings_appearance_background_grid">Grilã</string>
+    <string name="settings_appearance_background_particles">Particule</string>
     <string name="settings_appearance_background_none">Fără</string>
     <string name="settings_appearance_parallax_effect">Efect parallax</string>
     <string name="settings_appearance_parallax_effect_description">Schimbare suedea a fundalului când se înclina dispozitivul</string>
@@ -337,12 +342,6 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_updates_background_notifications">Notificări de actualizări în fundal</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodicââ verificaââ pentru actualizââi din fundalââ ââ notificaââ câând câând disponibile</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Primește notificări instantane de push pentru noi versiuni, chiar când aplicația este închisa</string>
-    <string name="notification_channel_manager_updates">Actualizări Morphe</string>
-    <string name="notification_channel_manager_updates_description">Notificări despre noile versiuni de Morphe</string>
-    <string name="notification_channel_bundle_updates">Actualizări de surse de patch</string>
-    <string name="notification_channel_bundle_updates_description">Notificări despre noi versiuni de sursă pentru patch-uri</string>
-    <string name="notification_channel_fcm_updates">Actualizează alertâ</string>
-    <string name="notification_channel_fcm_updates_description">Notificări push instantanee pentru lansările noi Morphe și patch. Livrate chiar și atunci când aplicația rulează în fundal</string>
     <string name="settings_advanced_update_interval">Frecvența de verificare</string>
     <string name="settings_advanced_update_interval_dialog_title">Verifică pentru actualizări</string>
     <string name="settings_advanced_update_interval_hourly">O dată pe oră</string>
@@ -359,6 +358,10 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="notification_permission_dialog_title">Permite notificări</string>
     <string name="notification_permission_dialog_description">Morphe are nevoie de permisiunea de notificare pentru a te avertiza când sunt disponibile actualizări în fundal</string>
     <string name="notification_post_patch_dialog_title">Doriți să fiți notificați când sunt disponibile actualizări?</string>
+    <string name="notification_channel_fcm_updates">Actualizări notificări</string>
+    <string name="notification_channel_fcm_updates_description">Notificări despre lansări noi Morphe și patch-uri</string>
+    <string name="notification_channel_patcher">Aplicarea de patch-uri</string>
+    <string name="notification_channel_patcher_description">Afișate în timp ce Morphe aplică un patch unei aplicații în fundal</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
@@ -591,6 +594,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="close">Închidere</string>
     <string name="clear">Golire</string>
     <string name="delete">Șterge</string>
+    <string name="remove">Șterge</string>
     <string name="disable">Dezactivează</string>
     <string name="enable">Activat</string>
     <string name="loading">Se încarcă…</string>

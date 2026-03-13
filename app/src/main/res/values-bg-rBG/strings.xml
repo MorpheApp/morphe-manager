@@ -144,6 +144,9 @@
     <string name="patch_option_enter_number">Въведете число</string>
     <string name="patch_option_enter_decimal">Въведете десетично число</string>
     <string name="patch_option_pick_folder">Избор на папка</string>
+    <string name="patch_option_list_duplicate">Тази стойност вече съществува</string>
+    <string name="patch_option_list_empty">Стойността не може да бъде празна</string>
+    <string name="patch_option_list_empty_state">Още не са добавени стойности</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Създай адаптивен икон</string>
     <string name="adaptive_icon_instructions">Изберете изображение на преден план, изберете фонова боя, и настройте превьюто с жестове за разширяване с два пръста</string>
@@ -300,6 +303,8 @@
     <string name="settings_appearance_background_space">Пространство</string>
     <string name="settings_appearance_background_shapes">Форми</string>
     <string name="settings_appearance_background_snow">Снег</string>
+    <string name="settings_appearance_background_grid">Решетка</string>
+    <string name="settings_appearance_background_particles">Частици</string>
     <string name="settings_appearance_background_none">Без</string>
     <string name="settings_appearance_parallax_effect">Ефект на паралакса</string>
     <string name="settings_appearance_parallax_effect_description">Сгладко преместване на фона при накланяне на устройството</string>
@@ -337,12 +342,6 @@
     <string name="settings_advanced_updates_background_notifications">Обновления в фона</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодично проверете наличието на актуализации в фона и известите при наличност.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Получете моментални уведомления за нови версии, дори когато приложението е затворено</string>
-    <string name="notification_channel_manager_updates">Актуализации на Morphe</string>
-    <string name="notification_channel_manager_updates_description">Известия за нови версии на Morphe</string>
-    <string name="notification_channel_bundle_updates">Обновения на пакет</string>
-    <string name="notification_channel_bundle_updates_description">Известия за нови версии на източника</string>
-    <string name="notification_channel_fcm_updates">Актуализиране на алертите</string>
-    <string name="notification_channel_fcm_updates_description">Незабавни push известия за нови издания на Morphe и корекции. Доставят се дори когато приложението е във фонов режим</string>
     <string name="settings_advanced_update_interval">Честота на проверка</string>
     <string name="settings_advanced_update_interval_dialog_title">Проверка за актуализации</string>
     <string name="settings_advanced_update_interval_hourly">Един път на час</string>
@@ -359,6 +358,10 @@
     <string name="notification_permission_dialog_title">Разрешете известувания</string>
     <string name="notification_permission_dialog_description">Morphe се нуждае от разрешение за известия, за да ви предупреди, когато има актуализации във фонов режим</string>
     <string name="notification_post_patch_dialog_title">Желая ли би да бъдете известителен, когато има достъпни актуализации?</string>
+    <string name="notification_channel_fcm_updates">Актуализации на нотификациите</string>
+    <string name="notification_channel_fcm_updates_description">Нотификации за нови издания на Morphe и пачове</string>
+    <string name="notification_channel_patcher">Пачове</string>
+    <string name="notification_channel_patcher_description">Показва се, когато Morphe актуализира приложение във фона</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки за експерти</string>
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
@@ -591,6 +594,7 @@ morphe_header_custom_dark.png
     <string name="close">Затвори</string>
     <string name="clear">Изчисти</string>
     <string name="delete">Изтриване</string>
+    <string name="remove">Премахни</string>
     <string name="disable">Деактивирай</string>
     <string name="enable">Активирай</string>
     <string name="loading">Зареждане…</string>

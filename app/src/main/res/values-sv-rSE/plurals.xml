@@ -29,8 +29,8 @@
         <item quantity="other">Tog bort %s inaktuella korrigeringar från sparat urval</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%s källa installerad</item>
-        <item quantity="other">%s källor installerade</item>
+        <item quantity="one">%s installerad källa</item>
+        <item quantity="other">%s installerade källor</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%s vald korrigering</item>

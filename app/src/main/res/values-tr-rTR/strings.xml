@@ -144,28 +144,31 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="patch_option_enter_number">Sayı girin</string>
     <string name="patch_option_enter_decimal">Ondalık girin</string>
     <string name="patch_option_pick_folder">Klasör seçin</string>
+    <string name="patch_option_list_duplicate">Bu değer zaten var</string>
+    <string name="patch_option_list_empty">Değer boş olamaz</string>
+    <string name="patch_option_list_empty_state">Henüz bir değer eklenmedi</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Adaptif simge oluştur</string>
-    <string name="adaptive_icon_instructions">Arka plan rengi seçmek için ön plan görüntüsü seçin, ve sarsma-zoom işaretleriyle özniteliği ayarlayın</string>
+    <string name="adaptive_icon_instructions">Ön plan görüntüsü seçin, arka plan rengini belirleyin ve yakınlaştırma/uzaklaştırma hareketleriyle ön izlemeyi ayarlayın</string>
     <string name="adaptive_icon_preview">Ön izleme</string>
     <string name="adaptive_icon_select_image">Resim seç</string>
     <string name="adaptive_icon_change_image">Resmi değiştir</string>
     <string name="adaptive_icon_background_color">Arka plan rengi</string>
-    <string name="adaptive_icon_reset_transform">Pozisyon ve ölçeki sıfırla</string>
-    <string name="adaptive_icon_safe_zone_inner">Güvenli alan (her zaman görüntülenir)</string>
-    <string name="adaptive_icon_safe_zone_outer">Mask zonu (kırpılabilir)</string>
+    <string name="adaptive_icon_reset_transform">Pozisyon ve ölçeği sıfırla</string>
+    <string name="adaptive_icon_safe_zone_inner">Güvenli alan (her zaman görünür)</string>
+    <string name="adaptive_icon_safe_zone_outer">Maske alanı (kırpılabilir)</string>
     <string name="adaptive_icon_created_success">Adaptif simge başarıyla oluşturuldu</string>
     <string name="adaptive_icon_creation_failed">Adaptif simge oluşturulamadı</string>
-    <string name="adaptive_icon_folder_explanation">Seçiniz oluşturulacak \'%1$s/%2$s\' klasörü yerini, üretilen ikon dosyaları ile</string>
+    <string name="adaptive_icon_folder_explanation">Oluşturulan simge dosyalarıyla \'%1$s/%2$s\' klasörünün nerede oluşturulacağını seçin</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Özel başlık oluştur</string>
-    <string name="header_creator_instructions">Aydınlatma ve karanlık temalar için görüntüleri seçin, ardından dokunarak yakınlaştırın ve yakınlaştırın</string>
-    <string name="header_creator_light_theme">Aydınlatma teması başlığı</string>
-    <string name="header_creator_dark_theme">Karanlık teması başlığı</string>
+    <string name="header_creator_instructions">Açık ve koyu temalar için görseller seçin, ardından yakınlaştırma/uzaklaştırma hareketleriyle ayarlamalar yapın</string>
+    <string name="header_creator_light_theme">Açık tema başlığı</string>
+    <string name="header_creator_dark_theme">Koyu tema başlığı</string>
     <string name="header_creator_no_image">Seçilen görüntü yok</string>
     <string name="header_creator_success">Başlık başarıyla oluşturuldu</string>
     <string name="header_creator_failed">Başlık oluşturulamadı</string>
-    <string name="header_creator_folder_explanation">Seçiniz oluşturulacak \'%1$s/%2$s\' klasörü yerini, üretilen başlık dosyaları ile</string>
+    <string name="header_creator_folder_explanation">Oluşturulan başlık dosyalarıyla \'%1$s/%2$s\' klasörünün nerede oluşturulacağını seçin</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu uygulamayı kaldırmak istediğinizden emin misiniz?</string>
     <string name="home_app_info_remove_app_warning">Bu aşağıdakileri kalıcı olarak silecektir:</string>
@@ -300,6 +303,8 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="settings_appearance_background_space">Uzay</string>
     <string name="settings_appearance_background_shapes">Şekiller</string>
     <string name="settings_appearance_background_snow">Kar</string>
+    <string name="settings_appearance_background_grid">Izgara</string>
+    <string name="settings_appearance_background_particles">Parçacıklar</string>
     <string name="settings_appearance_background_none">Yok</string>
     <string name="settings_appearance_parallax_effect">Paralaks etkisi</string>
     <string name="settings_appearance_parallax_effect_description">Cihaz eğildiğinde arka planın yumuşak bir şekilde kayması</string>
@@ -337,12 +342,6 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="settings_advanced_updates_background_notifications">Arka plan güncelleme bildirimleri</string>
     <string name="settings_advanced_updates_background_notifications_description">Arka planda düzenli aralıklarla güncellemeleri kontrol edin ve güncellemeler mevcut olduğunda bildirim gönderin</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Uygulama kapalıyken bile yeni sürümler için anında bildirim alın</string>
-    <string name="notification_channel_manager_updates">Morphe güncellemeleri</string>
-    <string name="notification_channel_manager_updates_description">Morphe\'nin yeni sürümleriyle ilgili bildirimler</string>
-    <string name="notification_channel_bundle_updates">Yama kaynağı güncellemeleri</string>
-    <string name="notification_channel_bundle_updates_description">Yeni yama sürümleri hakkında bildirimler</string>
-    <string name="notification_channel_fcm_updates">Güncellemeleri Yenile</string>
-    <string name="notification_channel_fcm_updates_description">Yeni Morphe ve yama sürümleri için anında bildirimler. Uygulama arka planda olsa bile gönderilir.</string>
     <string name="settings_advanced_update_interval">Güncelleme sıklığı</string>
     <string name="settings_advanced_update_interval_dialog_title">Güncellemeyi kontrol et</string>
     <string name="settings_advanced_update_interval_hourly">Saatte bir</string>
@@ -359,6 +358,10 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="notification_permission_dialog_title">Bildirim izni</string>
     <string name="notification_permission_dialog_description">Morphe, arka planda güncellemeler kullanılabilir olduğunda sizi uyarmak için bildirim izni gerektirir</string>
     <string name="notification_post_patch_dialog_title">Güncellemeler mevcut olduğunda bildirileceksin mi?</string>
+    <string name="notification_channel_fcm_updates">Güncelleme bildirimleri</string>
+    <string name="notification_channel_fcm_updates_description">Yeni Morphe ve yama sürümleri hakkında bildirimler</string>
+    <string name="notification_channel_patcher">Yamalanıyor</string>
+    <string name="notification_channel_patcher_description">Morphe bir uygulamayı arka planda yamalarken gösterilir</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ayarlar</string>
     <string name="settings_advanced_expert_mode">Uzman modu</string>
@@ -398,16 +401,16 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Uygulama adı</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Özel adı girin</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Özel filtre</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Dosya seçin
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Özel simge olarak kullanılacak resimlerin bulunduğu klasör.
 
-Dosya şu yapıya sahip olmalıdır:
+Klasör, cihazın DPI değerine bağlı olarak aşağıdaki klasörlerden birini veya daha fazlasını içermelidir:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Her bir dosya şu dosyaları içermelidir:
+Her bir klasör şu dosyaların tamamını içermelidir:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
@@ -418,21 +421,22 @@ Resim boyutları şu şekilde olmalıdır:
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Seçenek olarak, yol 'drawable' dosyasıyla monokrom simge dosyaları içerebilir:
+İsteğe bağlı olarak, dosya yolu monokrom simge dosyalarından herhangi birini içeren bir 'drawable'
+klasörü içerebilir:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Özel başlık logosu</string>
     <string name="settings_advanced_patch_options_custom_header_description">Başlık logosunu değiştir</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"Dosya seçin
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Özel başlık logosu olarak kullanılacak resimlerin bulunduğu klasör.
 
-Dosya şu yapıya sahip olmalıdır:
+Klasör, cihazın DPI değerine bağlı olarak aşağıdaki klasörlerden birini veya daha fazlasını içermelidir:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-Her bir dosya şu dosyaları içermelidir:
+Her bir klasör şu dosyaların tamamını içermelidir:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
@@ -591,6 +595,7 @@ Kullanıcı geri bildirimleri ve katkılarla gelecekteki yenilikler için çalı
     <string name="close">Kapat</string>
     <string name="clear">Temizle</string>
     <string name="delete">Sil</string>
+    <string name="remove">Kaldır</string>
     <string name="disable">Devre dışı bırak</string>
     <string name="enable">Aç</string>
     <string name="loading">Yükleniyor…</string>
@@ -599,7 +604,7 @@ Kullanıcı geri bildirimleri ve katkılarla gelecekteki yenilikler için çalı
     <string name="search">Arama</string>
     <string name="search_no_results">Sonuç bulunamadı</string>
     <string name="any_version">Herhangi</string>
-    <string name="enabled">Etkinleştirildi</string>
+    <string name="enabled">Etkin</string>
     <string name="disabled">Devre dışı</string>
     <string name="selected">Seçildi</string>
     <string name="not_selected">Seçilmedi</string>
