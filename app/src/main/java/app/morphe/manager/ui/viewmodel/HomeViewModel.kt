@@ -902,7 +902,7 @@ class HomeViewModel(
 
         if (!hasAnything) {
             // Truly no patches exist for this package in any enabled bundle
-            app.toast(app.getString(R.string.home_no_patches_for_app))
+            app.toast(app.getString(R.string.home_no_patches_available))
             if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
                 selectedApp.file.delete()
             }
