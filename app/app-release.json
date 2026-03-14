@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-03-13T07:31:46.439Z",
-  "description": "# app [1.12.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.2...v1.12.0-dev.3) (2026-03-13)\n\n\n### Bug Fixes\n\n* Add list editor dialog for `List<String>` patch options ([#318](https://github.com/MorpheApp/morphe-manager/issues/318)) ([5b722d2](https://github.com/MorpheApp/morphe-manager/commit/5b722d27f979d32a18a04b0bbefb36b0add6e80d))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.3/morphe-manager-1.12.0-dev.3.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.3/morphe-manager-1.12.0-dev.3.apk.asc",
-  "version": "1.12.0-dev.3"
+  "created_at": "2026-03-13T15:40:45.035Z",
+  "description": "# app [1.12.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.3...v1.12.0-dev.4) (2026-03-13)\n\n\n### Bug Fixes\n\n* Allow third-party universal patches in `Other Apps` flow ([#322](https://github.com/MorpheApp/morphe-manager/issues/322)) ([b888ff7](https://github.com/MorpheApp/morphe-manager/commit/b888ff77e58618dc9a5691ef0e96381092a227c5))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.4/morphe-manager-1.12.0-dev.4.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.4/morphe-manager-1.12.0-dev.4.apk.asc",
+  "version": "1.12.0-dev.4"
 }
