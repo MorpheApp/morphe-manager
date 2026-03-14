@@ -391,7 +391,7 @@ class HomeViewModel(
         installedApps.forEach { app ->
             // Get stored bundle versions for this app
             val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
-            val appChangelogName = AppPackages.getChangelogName(app.originalPackageName)
+            val appName = resolveChangelogName(app.originalPackageName)
 
             // Check if any bundle used for this app has been updated
             val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
@@ -403,11 +403,11 @@ class HomeViewModel(
                 // Unknown app name (null) → show badge (can't match scopes).
                 // Known name but no matching scope → no badge.
                 val entries = changelogByUid[bundleUid] ?: return@any true
-                if (appChangelogName == null) return@any true
+                if (appName == null) return@any true
                 ChangelogParser.hasChangesFor(
                     entries = entries,
                     installedVersion = storedVersion,
-                    appName = appChangelogName,
+                    appName = appName,
                 )
             }
 
@@ -416,6 +416,16 @@ class HomeViewModel(
 
         _appUpdatesAvailable.value = updates
     }
+
+    /**
+     * Returns the name to match against changelog bullet scopes for [packageName].
+     *
+     * Returns null when the package is unknown and not installed.
+     * Callers should treat null as "show badge" (safe fallback).
+     */
+    private fun resolveChangelogName(packageName: String): String? =
+        AppPackages.getChangelogName(packageName)
+            ?: pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
 
     @SuppressLint("ShowToast")
     private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {

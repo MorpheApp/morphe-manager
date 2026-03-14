@@ -163,10 +163,6 @@ object AppPackages {
     fun getChangelogName(packageName: String): String? =
         KnownApp.fromPackage(packageName)?.displayName
             ?: PACKAGE_NAME_TO_APP_NAME[packageName]
-
-    /** Check if a package is in the known registry. */
-    fun isKnown(packageName: String): Boolean =
-        KnownApp.fromPackage(packageName) != null
 }
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"

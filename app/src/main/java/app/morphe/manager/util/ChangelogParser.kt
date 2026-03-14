@@ -121,10 +121,7 @@ object ChangelogParser {
     /**
      * Returns true if any changelog entry newer than [installedVersion] has a
      * scoped bullet whose scope exactly matches [appName] or starts with `"$appName - "`.
-     *
-     * [appName] is the display name of the app as it appears in changelog scopes,
-     * e.g. `"YouTube"`, `"YouTube Music"`, `"Reddit"`. The caller is responsible
-     * for resolving the correct name from the patch bundle's compatible packages.
+     * Comparison is case-insensitive.
      */
     fun hasChangesFor(
         entries: List<ChangelogEntry>,
@@ -134,7 +131,10 @@ object ChangelogParser {
         val newerEntries = entriesNewerThan(entries, installedVersion)
         if (newerEntries.isEmpty()) return false
         return newerEntries.any { entry ->
-            entry.affectedScopes.any { scope -> scope == appName || scope.startsWith("$appName - ") }
+            entry.affectedScopes.any { scope ->
+                scope.equals(appName, ignoreCase = true) ||
+                        scope.startsWith("$appName - ", ignoreCase = true)
+            }
         }
     }
 
