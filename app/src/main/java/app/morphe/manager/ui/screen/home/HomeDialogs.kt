@@ -37,6 +37,7 @@ import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.AppPackages
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
+import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.*
 
 /**
@@ -360,8 +361,8 @@ fun HomeDialogs(
 @Composable
 private fun ApkAvailabilityDialog(
     appName: String,
-    recommendedVersion: String?,
-    compatibleVersions: List<String>,
+    recommendedVersion: AppTarget?,
+    compatibleVersions: List<AppTarget>,
     usingMountInstall: Boolean,
     isExpertMode: Boolean,
     savedApkInfo: SavedApkInfo?,
@@ -405,6 +406,7 @@ private fun ApkAvailabilityDialog(
         }
     ) {
         val secondaryColor = LocalDialogSecondaryTextColor.current
+        val anyString = stringResource(R.string.any_version)
 
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -426,7 +428,7 @@ private fun ApkAvailabilityDialog(
 
                 // Unified version list card
                 VersionListCard(
-                    versions = compatibleVersions,
+                    versions = compatibleVersions.map { it.version ?: anyString },
                     recommendedIndex = 0
                 )
             } else {
@@ -441,7 +443,7 @@ private fun ApkAvailabilityDialog(
                     textAlign = TextAlign.Center
                 )
 
-                val versionToShow = recommendedVersion ?: stringResource(R.string.any_version)
+                val versionToShow = recommendedVersion?.version ?: anyString
                 VersionListCard(
                     versions = listOf(versionToShow),
                     showUnpatchedBadge = true
@@ -892,7 +894,7 @@ fun WrongPackageDialog(
  */
 @Composable
 private fun VersionListCard(
-    versions: List<String>,
+    versions: List<String>, // FIXME: use AppTarget
     recommendedIndex: Int = 0,
     isCompatible: Boolean = false,
     showUnpatchedBadge: Boolean = false,
