@@ -53,7 +53,9 @@ class PM(
                 .groupingBy { it.packageName }
                 .eachCount()
 
-            compatiblePackages.keys.map { pkg ->
+
+            compatiblePackages.keys.mapNotNull { pkg ->
+                if (pkg == null) return@mapNotNull null // FIXME?
                 getPackageInfo(pkg)?.let { packageInfo ->
                     AppInfo(
                         pkg,
@@ -196,6 +198,7 @@ class PM(
         ).apply {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
                 setRequestUpdateOwnership(true)
+            @SuppressLint("WrongConstant")
             setInstallReason(PackageManager.INSTALL_REASON_USER)
         }
 

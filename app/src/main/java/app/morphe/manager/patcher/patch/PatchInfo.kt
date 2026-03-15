@@ -1,12 +1,11 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
+import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.resourcePatch
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.collections.immutable.toImmutableSet
 import kotlin.reflect.KType
 import app.morphe.patcher.patch.Option as PatchOption
 
@@ -14,19 +13,14 @@ data class PatchInfo(
     val name: String,
     val description: String?,
     val include: Boolean,
-    val compatiblePackages: ImmutableList<CompatiblePackage>?,
+    val compatiblePackages: List<Compatibility>?,
     val options: ImmutableList<Option<*>>?
 ) {
     constructor(patch: Patch<*>) : this(
         patch.name.orEmpty(),
         patch.description,
         patch.use,
-        patch.compatiblePackages?.map { (pkgName, versions) ->
-            CompatiblePackage(
-                pkgName,
-                versions?.toImmutableSet()
-            )
-        }?.toImmutableList(),
+        patch.compatibility,
         patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList()
     )
 
@@ -37,10 +31,8 @@ data class PatchInfo(
         val packages = compatiblePackages ?: return true // Universal patch
 
         return packages.any { pkg ->
-            if (pkg.packageName != packageName) return@any false
-            if (pkg.versions == null) return@any true
-
-            versionName != null && versionName in pkg.versions
+            pkg.packageName == null || pkg.packageName == packageName ||
+                    pkg.targets.any { it.version == versionName }
         }
     }
 
@@ -52,16 +44,10 @@ data class PatchInfo(
     fun toPatcherPatch(): Patch<*> =
         resourcePatch(name = name, description = description, use = include) {
             compatiblePackages?.let { pkgs ->
-                compatibleWith(*pkgs.map { it.packageName to it.versions }.toTypedArray())
+                compatibleWith(*pkgs.toTypedArray())
             }
         }
 }
-
-@Immutable
-data class CompatiblePackage(
-    val packageName: String,
-    val versions: ImmutableSet<String>?
-)
 
 @Immutable
 data class Option<T>(

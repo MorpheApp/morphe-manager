@@ -572,15 +572,16 @@ private fun PatchItemCard(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     patch.compatiblePackages.forEach { compatiblePackage ->
-                        val packageName = compatiblePackage.packageName
-                        val versions = compatiblePackage.versions.orEmpty()
+                        val anyString = stringResource(R.string.any_version)
+                        val appName = compatiblePackage.name ?: (compatiblePackage.packageName ?: anyString)
+                        val versions = compatiblePackage.targets
 
                         FlowRow(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             InfoBadge(
-                                text = packageName,
+                                text = appName,
                                 icon = Icons.Outlined.Apps,
                                 style = InfoBadgeStyle.Primary,
                                 isCompact = true,
@@ -591,7 +592,7 @@ private fun PatchItemCard(
                                 if (expandVersions) {
                                     versions.forEach { version ->
                                         InfoBadge(
-                                            text = version,
+                                            text = version.version ?: anyString,
                                             icon = Icons.Outlined.Code,
                                             style = InfoBadgeStyle.Default,
                                             isCompact = true,
@@ -600,7 +601,7 @@ private fun PatchItemCard(
                                     }
                                 } else {
                                     InfoBadge(
-                                        text = versions.first(),
+                                        text = versions.first().version ?: anyString,
                                         icon = Icons.Outlined.Code,
                                         style = InfoBadgeStyle.Default,
                                         isCompact = true,

@@ -47,6 +47,7 @@ import app.morphe.manager.util.PatchSelectionUtils.togglePatch
 import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
+import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.TimeZone
@@ -59,6 +60,7 @@ import java.net.URL
 import java.net.URLEncoder.encode
 import java.util.zip.ZipInputStream
 import javax.net.ssl.SSLException
+import kotlin.collections.sortedDescending
 import kotlin.time.Clock
 
 /**
@@ -181,8 +183,8 @@ class HomeViewModel(
     // Pending data during APK selection
     var pendingPackageName by mutableStateOf<String?>(null)
     var pendingAppName by mutableStateOf<String?>(null)
-    var pendingRecommendedVersion by mutableStateOf<String?>(null)
-    var pendingCompatibleVersions by mutableStateOf<List<String>>(emptyList())
+    var pendingRecommendedVersion by mutableStateOf<AppTarget?>(null)
+    var pendingCompatibleVersions by mutableStateOf<List<AppTarget>>(emptyList())
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
     var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
@@ -201,9 +203,9 @@ class HomeViewModel(
     var installedAppsLoading by mutableStateOf(true)
 
     // Bundle data
-    var recommendedVersions: Map<String, String> = emptyMap()
+    var recommendedVersions: Map<String, AppTarget> = emptyMap()
         private set
-    var compatibleVersions: Map<String, List<String>> = emptyMap()
+    var compatibleVersions: Map<String, List<AppTarget>> = emptyMap()
         private set
 
     // Track available updates for installed apps
@@ -518,7 +520,7 @@ class HomeViewModel(
             .map { bundleInfoMap ->
                 bundleInfoMap.values.flatMap { bundleInfo ->
                     (bundleInfo as? PatchBundleInfo)?.patches?.flatMap { patch ->
-                        patch.compatiblePackages?.map { it.packageName } ?: emptyList()
+                        patch.compatiblePackages?.mapNotNull { it.packageName } ?: emptyList()
                     } ?: emptyList()
                 }.toSet()
             }
@@ -652,7 +654,7 @@ class HomeViewModel(
         // Extract versions from all enabled bundles
         val versionData = extractCompatibleVersions(bundleInfo, enabledBundleUids)
 
-        recommendedVersions = versionData.mapValues { it.value.firstOrNull() ?: "" }
+        recommendedVersions = versionData.mapValues { it.value.last() }
         compatibleVersions = versionData
     }
 
@@ -748,7 +750,7 @@ class HomeViewModel(
         val shouldAutoUseSaved = !isExpertMode &&
                 savedInfo != null &&
                 recommendedVersion != null &&
-                savedInfo.version == recommendedVersion
+                savedInfo.version == recommendedVersion.version
 
         if (shouldAutoUseSaved) {
             // Skip dialog and use saved APK directly
@@ -924,8 +926,9 @@ class HomeViewModel(
             showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
                 version = selectedApp.version ?: "unknown",
-                recommendedVersion = recommendedVersion,
-                allCompatibleVersions = allVersions
+                // FIXME? Should any version be null and not an empty string?
+                recommendedVersion = recommendedVersion?.version ?: "",
+                allCompatibleVersions = allVersions.map { it.version ?: "" }
             )
             cleanupPendingData(keepSelectedApp = true)
             return
@@ -1229,7 +1232,7 @@ class HomeViewModel(
         }
 
         // Handle null pendingRecommendedVersion
-        val escapedVersion = pendingRecommendedVersion?.let { encode(it, "UTF-8") } ?: "any"
+        val escapedVersion = pendingRecommendedVersion?.let { encode(it.version, "UTF-8") } ?: "any"
         val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
@@ -1311,9 +1314,9 @@ class HomeViewModel(
     private fun extractCompatibleVersions(
         bundleInfo: Map<Int, Any>,
         enabledBundleUids: Set<Int> = emptySet()
-    ): Map<String, List<String>> {
+    ): Map<String, List<AppTarget>> {
         // Collect versions from all enabled bundles
-        val allVersionsByPackage = mutableMapOf<String, MutableSet<String>>()
+        val allVersionsByPackage = mutableMapOf<String, MutableList<AppTarget>>()
 
         bundleInfo.forEach { (bundleUid, bundleData) ->
             // Skip disabled bundles if we have the enabled list
@@ -1336,13 +1339,13 @@ class HomeViewModel(
                     .flatMap { patch ->
                         patch.compatiblePackages
                             ?.firstOrNull { it.packageName == packageName }
-                            ?.versions
+                            ?.targets
                             ?: emptyList()
                     }
                     .distinct()
 
-                if (versions.isNotEmpty()) {
-                    allVersionsByPackage.getOrPut(packageName) { mutableSetOf() }
+                if (packageName != null && versions.isNotEmpty()) {
+                    allVersionsByPackage.getOrPut(packageName) { mutableListOf() }
                         .addAll(versions)
                 }
             }
@@ -1350,7 +1353,7 @@ class HomeViewModel(
 
         // Convert to sorted lists (newest first)
         return allVersionsByPackage.mapValues { (_, versions) ->
-            versions.toList().sortedDescending()
+            versions.sortedDescending()
         }.filterValues { it.isNotEmpty() }
     }
 
