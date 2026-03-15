@@ -33,11 +33,11 @@ import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
 
 /**
- * Advanced tab content
+ * Advanced tab content.
  */
 @Composable
 fun AdvancedTabContent(
-    usePrereleases: State<Boolean>,
+    useManagerPrereleases: State<Boolean>,
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel,
     prefs: PreferencesManager
@@ -92,9 +92,9 @@ fun AdvancedTabContent(
         )
 
         UpdatesSettingsItem(
-            useManagerPrereleases = usePrereleases.value,
+            useManagerPrereleases = useManagerPrereleases.value,
             onManagerPrereleasesToggle = {
-                val newValue = !usePrereleases.value
+                val newValue = !useManagerPrereleases.value
                 scope.launch {
                     prefs.useManagerPrereleases.update(newValue)
                 }
@@ -209,7 +209,7 @@ fun AdvancedTabContent(
 }
 
 /**
- * Dialog to confirm enabling Expert mode
+ * Dialog to confirm enabling Expert mode.
  */
 @Composable
 private fun ExpertModeConfirmationDialog(

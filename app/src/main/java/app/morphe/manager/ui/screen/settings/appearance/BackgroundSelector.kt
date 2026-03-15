@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.compose.foundation.layout.*
@@ -14,7 +19,7 @@ import app.morphe.manager.ui.screen.shared.WindowWidthSizeClass
 import app.morphe.manager.ui.screen.shared.rememberWindowSize
 
 /**
- * Background animation selector with adaptive grid
+ * Background animation selector with adaptive grid.
  */
 @Composable
 fun BackgroundSelector(
@@ -60,14 +65,16 @@ fun BackgroundSelector(
 }
 
 /**
- * Get icon for background type
+ * Get icon for background type.
  */
 private fun getBackgroundIcon(type: BackgroundType): ImageVector = when (type) {
-    BackgroundType.CIRCLES -> Icons.Outlined.Circle
-    BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
-    BackgroundType.MESH -> Icons.Outlined.Grid3x3
-    BackgroundType.SPACE -> Icons.Outlined.AutoAwesome
-    BackgroundType.SHAPES -> Icons.Outlined.Pentagon
-    BackgroundType.SNOW -> Icons.Outlined.AcUnit
-    BackgroundType.NONE -> Icons.Outlined.VisibilityOff
+    BackgroundType.CIRCLES   -> Icons.Outlined.Circle
+    BackgroundType.RINGS     -> Icons.Outlined.RadioButtonUnchecked
+    BackgroundType.MESH      -> Icons.Outlined.Grid3x3
+    BackgroundType.SPACE     -> Icons.Outlined.AutoAwesome
+    BackgroundType.SHAPES    -> Icons.Outlined.Pentagon
+    BackgroundType.SNOW      -> Icons.Outlined.AcUnit
+    BackgroundType.GRID      -> Icons.Outlined.Apps
+    BackgroundType.PARTICLES -> Icons.Outlined.BubbleChart
+    BackgroundType.NONE      -> Icons.Outlined.VisibilityOff
 }

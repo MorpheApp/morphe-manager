@@ -89,21 +89,10 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         val vm: MainViewModel = getActivityViewModel()
-        handleUpdateCheckIntent(intent, vm)
-        handleDeepLinkIntent(intent, vm)
-    }
-
-    /**
-     * If the intent contains [UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK],
-     * sets the flag in [MainViewModel] - [HomeScreen] will pick it up via [LaunchedEffect].
-     */
-    private fun handleUpdateCheckIntent(intent: Intent?, vm: MainViewModel) {
-        if (intent?.getBooleanExtra(
-                UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false
-            ) == true
-        ) {
-            vm.triggerUpdateCheckOnResume = true
+        if (intent.getBooleanExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false)) {
+            vm.pendingUpdateCheck = true
         }
+        handleDeepLinkIntent(intent, vm)
     }
 
     /**
@@ -132,6 +121,11 @@ private fun MorpheManager(vm: MainViewModel) {
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
 
+    // Patcher background speed — driven by PatcherViewModel when on patcher screen.
+    // Exposed as a top-level mutable state so PatcherScreen can write into it.
+    val patcherBackgroundSpeed = androidx.compose.runtime.remember { androidx.compose.runtime.mutableFloatStateOf(1f) }
+    val patchingCompleted = androidx.compose.runtime.remember { mutableStateOf(false) }
+
     // HomeViewModel must be scoped to the Activity, not to a NavBackStackEntry
     val homeViewModel: HomeViewModel = koinViewModel(
         viewModelStoreOwner = LocalActivity.current as ComponentActivity
@@ -146,7 +140,9 @@ private fun MorpheManager(vm: MainViewModel) {
         // Show animated background
         AnimatedBackground(
             type = backgroundType,
-            enableParallax = enableParallax
+            enableParallax = enableParallax,
+            speedMultiplier = patcherBackgroundSpeed.floatValue,
+            patchingCompleted = patchingCompleted.value
         )
 
         // All content on top of background
@@ -195,14 +191,13 @@ private fun MorpheManager(vm: MainViewModel) {
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
 
-                // If opened from an FCM notification - trigger update check.
-                // vm.triggerUpdateCheckOnResume is set in handleUpdateCheckIntent()
-                // and reset here after handling.
-                LaunchedEffect(vm.triggerUpdateCheckOnResume) {
-                    if (vm.triggerUpdateCheckOnResume) {
+                // If opened from an FCM notification, trigger an update check.
+                // vm.pendingUpdateCheck is set in onNewIntent() and reset here after handling.
+                LaunchedEffect(vm.pendingUpdateCheck) {
+                    if (vm.pendingUpdateCheck) {
                         homeViewModel.patchBundleRepository.updateCheck()
                         homeViewModel.checkForManagerUpdates()
-                        vm.triggerUpdateCheckOnResume = false
+                        vm.pendingUpdateCheck = false
                     }
                 }
 
@@ -259,9 +254,15 @@ private fun MorpheManager(vm: MainViewModel) {
                 val params = it.getComplexArg<Patcher.ViewModelParams>()
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 PatcherScreen(
-                    onBackClick = navController::popBackStack,
+                    onBackClick = {
+                        patcherBackgroundSpeed.floatValue = 1f
+                        patchingCompleted.value = false
+                        navController.popBackStack()
+                    },
                     patcherViewModel = patcherViewModel,
-                    usingMountInstall = usingMountInstallState.value
+                    usingMountInstall = usingMountInstallState.value,
+                    onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
+                    onPatchingCompleted = { patchingCompleted.value = true }
                 )
                 return@composable
             }

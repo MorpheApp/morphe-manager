@@ -98,11 +98,9 @@ class ManagerApplication : Application() {
             prefs.preload()
 
             // Schedule/cancel WorkManager fallback AND sync FCM topic subscriptions.
-            // FCM is the primary delivery path (bypasses Doze); WorkManager is the fallback.
-            // syncFcmTopics() ensures the device is subscribed to exactly one of:
-            //   - "morphe_updates"     (stable)     when prereleases are OFF
-            //   - "morphe_updates_dev" (prerelease) when prereleases are ON
-            // or to neither when background notifications are disabled.
+            // FCM is the primary delivery path (bypasses Doze); WorkManager is the fallback
+            // for non-GMS devices. syncFcmTopics() subscribes to the correct stable/dev
+            // topics based on user preferences, or unsubscribes from all when disabled.
             val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
             val useManagerPrereleases = prefs.useManagerPrereleases.get()
             // Patches FCM topic is determined by the default bundle (uid=0) prerelease toggle.

@@ -20,7 +20,7 @@ serialization = "1.8.0"
 collection = "0.3.8"
 datetime = "0.6.1"
 room-version = "2.7.1"
-morphe-patcher = "1.2.0"
+morphe-patcher = "1.3.0-dev.3" # TODO: Change to stable release when available
 morphe-library = "1.3.0"
 koin = "3.5.3"
 ktor = "2.3.9"
@@ -42,6 +42,7 @@ shizuku = "13.1.5"
 hiddenapibypass = "6.1"
 semver-parser = "3.0.0"
 firebase-bom = "34.9.0"
+arsclib = "9696ffecda"
 
 [libraries]
 # AndroidX Core
@@ -87,6 +88,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-ver
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
 
 # Patcher
+arsclib = { module = "com.github.MorpheApp:ARSCLib", version.ref = "arsclib" }
 morphe-patcher = { group = "app.morphe", name = "morphe-patcher", version.ref = "morphe-patcher" }
 morphe-library = { group = "app.morphe", name = "morphe-library", version.ref = "morphe-library" }
 

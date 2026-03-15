@@ -1,7 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.view.HapticFeedbackConstants
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
@@ -29,6 +35,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -67,8 +74,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * Simplified patcher screen with progress tracking
- * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality
+ * Patcher screen with progress tracking.
+ * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality.
  */
 @SuppressLint("LocalContextGetResourceValueCall", "AutoboxingStateCreation")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,9 +85,12 @@ fun PatcherScreen(
     patcherViewModel: PatcherViewModel,
     usingMountInstall: Boolean,
     installViewModel: InstallViewModel = koinViewModel(),
-    prefs: PreferencesManager = koinInject()
+    prefs: PreferencesManager = koinInject(),
+    onBackgroundSpeedChange: (Float) -> Unit = {},
+    onPatchingCompleted: () -> Unit = {}
 ) {
     val context = LocalContext.current
+    val view = LocalView.current
     @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
 
@@ -99,7 +109,8 @@ fun PatcherScreen(
     }
 
     // Prefs needed for the notification dialog
-    val usePrereleases by prefs.useManagerPrereleases.getAsState()
+    val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
+    val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
 
     // Animated progress with dual-mode animation
@@ -112,6 +123,38 @@ fun PatcherScreen(
         animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
         label = "progress_animation"
     )
+
+    // Drive background speed: ramps 1x→3x during patching, resets on completion/failure.
+    // Uses a coroutine loop so speed tracks displayProgress in real time without recomposition churn.
+    LaunchedEffect(patcherSucceeded) {
+        if (patcherSucceeded == null) {
+            // Exponential moving average to smooths sudden progress jumps.
+            var movingAverage = 0.0f
+            // Lower factor has more abrupt animation changes.
+            val smoothingFactor = 0.25f
+            // Patching in progress - poll displayProgress every 250ms (same cadence as progress loop)
+            while (true) {
+                movingAverage = (1 - smoothingFactor) * movingAverage +
+                        smoothingFactor * displayProgress
+                onBackgroundSpeedChange(1 + movingAverage)
+                delay(250)
+            }
+        } else {
+            // Patching finished - reset speed then fire completion effect
+            onBackgroundSpeedChange(1f)
+            if (patcherSucceeded == true) {
+                delay(300) // small pause so speed resets before effect fires
+                onPatchingCompleted()
+                // Haptic feedback
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+            }
+        }
+    }
+
+    // Restore speed when leaving the screen
+    DisposableEffect(Unit) {
+        onDispose { onBackgroundSpeedChange(1f) }
+    }
 
     // Get output file from viewModel
     val outputFile = patcherViewModel.outputFile
@@ -281,7 +324,11 @@ fun PatcherScreen(
                     prefs.notificationPermissionRequested.update(true)
                     if (granted) {
                         prefs.backgroundUpdateNotifications.update(true)
-                        syncFcmTopics(notificationsEnabled = true, useManagerPrereleases = usePrereleases)
+                        syncFcmTopics(
+                            notificationsEnabled = true,
+                            useManagerPrereleases = useManagerPrereleases,
+                            usePatchesPrereleases = usePatchesPrereleases.contains("0")
+                        )
                         if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                     }
                 }

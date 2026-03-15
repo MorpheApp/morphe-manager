@@ -227,10 +227,7 @@
             </intent-filter>
         </service>
 
-        <!-- Disable FCM auto-init so we only register when user opts in to notifications -->
-        <meta-data
-            android:name="firebase_messaging_auto_init_enabled"
-            android:value="false" />
+        <!-- Disable Firebase Analytics -->
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />

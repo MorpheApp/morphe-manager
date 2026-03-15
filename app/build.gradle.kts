@@ -16,26 +16,6 @@ plugins {
 
 val outputApkFileName = "${rootProject.name}-$version.apk"
 
-val apkEditorLib by configurations.creating
-
-val strippedApkEditorLib by tasks.registering(Jar::class) {
-    archiveFileName.set("APKEditor-android.jar")
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    doFirst {
-        from(apkEditorLib.resolve().map { zipTree(it) })
-    }
-    exclude(
-        "android/**",
-        "org/xmlpull/**",
-        "antlr/**",
-        "org/antlr/**",
-        "com/beust/jcommander/**",
-        "javax/annotation/**",
-        "smali.properties",
-        "baksmali.properties"
-    )
-}
-
 dependencies {
     // AndroidX Core
     implementation(libs.androidx.ktx)
@@ -79,16 +59,15 @@ dependencies {
     ksp(libs.room.compiler)
 
     // Morphe
+    implementation(libs.arsclib)
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
 
-    apkEditorLib(files("$rootDir/libs/APKEditor-1.4.7.jar"))
-    compileOnly(files(strippedApkEditorLib))
-    modules {
-        module("xmlpull:xmlpull") {
-            replacedBy("com.github.REAndroid:arsclib", "arsclib bundles xmlpull")
-        }
+    // Exclude xmlpull as it's included in Android already
+    configurations.configureEach {
+        exclude(group = "xmlpull", module = "xmlpull")
     }
+
     implementation(libs.androidx.documentfile)
 
     // Native processes
@@ -286,6 +265,7 @@ android {
 
     lint {
         disable += setOf("MissingTranslation")
+        baseline = file("lint-baseline.xml")
     }
 }
 

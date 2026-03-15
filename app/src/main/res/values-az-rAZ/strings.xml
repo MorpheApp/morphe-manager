@@ -14,7 +14,11 @@
     <string name="home_app_hidden_apps_hint">Onu siyahıda təkrar göstərmək üçün tətbiq üzərinə toxun</string>
     <string name="android_11_bug_dialog_title">Android 11 səhvi</string>
     <string name="android_11_bug_dialog_description">Tətbiq quraşdırılması icazəsi istifadəçi təcrübəsinə mənfi təsir edəcək Android 11 sistemindəki səhvə mane olmaq üçün əvvəlcədən qəbul edilməlidir</string>
+    <string name="deep_link_add_source_title">Mənbə əlavə et</string>
+    <string name="deep_link_add_source_message">Bu yamaq mənbəyin Morphe-yə əlavə etmək istəyirsiniz?</string>
+    <string name="deep_link_add_source_warning">Yalnız güvəndiyiniz mənbələrdən mənbə əlavə edin</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Əlçatan Morphe yenilənməsi</string>
     <string name="home_update_available_subtitle">Yeni versiya quraşdırmaq üçün hazır</string>
     <string name="home_update_error">Yenilənmə uğursuz oldu</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
@@ -52,6 +56,7 @@
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="sources_management_prerelease_toggle">İlkin-buraxılış yamaqları istifadə et</string>
     <string name="sources_management_prerelease_toggle_description">Yeni təcrübi yamaqlar versiyasına erkən keçid əldə et</string>
+    <string name="sources_management_already_exists">Bu mənbə artıq əlavə edilib</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
@@ -112,6 +117,7 @@
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
     <string name="expert_mode_no_patches">Yamaqlar əlçatan deyil</string>
+    <string name="expert_mode_universal_patches">Ümumi yamaqlar</string>
     <string name="expert_mode_multiple_sources_warning_title">Çoxlu yamaq mənbəyi seçilib</string>
     <string name="expert_mode_multiple_sources_warning_message">"Çoxlu yamaq mənbəyindən yamaqlar seçmisiniz. Bu, uyuşma problemlərinə və ya gözlənilməz fəaliyyətə səbəb ola bilər.
 
@@ -212,6 +218,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patcher_ready_to_install_subtitle">Quraşdırmaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_storage_permission_dialog_title">Yaddaş keçidinə keçmək olmur</string>
+    <string name="patcher_storage_permission_description_api30">Bir və ya daha çox yamaq seçimi Morphe-nin oxuya bilmədiyi yolları işarə edir. Yaddaş girişin qəbul et və düyməyə toxun, sonra yamaqlanma birbaşa başlayacaq</string>
     <string name="patcher_storage_permission_description_legacy">Bir və ya daha çox yamaq seçimi keçmək olmayan yolları göstərir. Yamaq seçimlərindəki yolları yeniləyin və təkrar cəhd edin</string>
     <string name="patcher_storage_permission_grant">Yaddaş icazəsin qəbul et</string>
     <string name="patcher_storage_permission_denied_warning">Yaddaş icazəsi rədd edildi. Bu yolu istifadə etmək üçün icazəni qəbul et və ya faylları tətbiqin şəxsi qovluğuna köçür</string>
@@ -293,6 +300,8 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_background_space">Kosmos</string>
     <string name="settings_appearance_background_shapes">Fiqurlar</string>
     <string name="settings_appearance_background_snow">Qar</string>
+    <string name="settings_appearance_background_grid">Şəbəkə</string>
+    <string name="settings_appearance_background_particles">Zərrəciklər</string>
     <string name="settings_appearance_background_none">Heç biri</string>
     <string name="settings_appearance_parallax_effect">Parallaks effekti</string>
     <string name="settings_appearance_parallax_effect_description">Cihazı çevirərkən fonu rəvan şəkildə tərpətmək</string>
@@ -323,13 +332,13 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simvolu dəyişdir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Yenilənmələr</string>
+    <string name="settings_advanced_updates_use_prereleases">İlkin-buraxılış Morphe-ni istifadə et</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe xüsusiyyətlərinə erkən keçid əldə et. İlkin-buraxılış yamaqları əldə etmək üçün ilkin-buraxılış keçidin hər yamaq mənbəyində ayrıca aktivləşdir</string>
     <string name="settings_advanced_updates_allow_metered">Mobil məlumatda yenilənmə</string>
+    <string name="settings_advanced_updates_allow_metered_description">Morphe və yamaq yeniləmələrinə mobil məlumat üzərindən yükləmək üçün icazə ver</string>
     <string name="settings_advanced_updates_background_notifications">Fon yenilənmə bildirişləri</string>
     <string name="settings_advanced_updates_background_notifications_description">Fonda yeniləmələri dövri yoxla və əlçatandırsa elan et</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Hətta tətbiq bağlandıqda, yeni buraxılışlar üçün ani təkan bildirişləri al</string>
-    <string name="notification_channel_bundle_updates">Yamaq mənbələri yeniləmələri</string>
-    <string name="notification_channel_bundle_updates_description">Yeni yamaq mənbə versiyaları haqqında bildirişlər</string>
-    <string name="notification_channel_fcm_updates">Yenilənmə bildirişləri</string>
     <string name="settings_advanced_update_interval">Yoxlanılma tezliyi</string>
     <string name="settings_advanced_update_interval_dialog_title">Yeniləmələri yoxla</string>
     <string name="settings_advanced_update_interval_hourly">Saatda bir dəfə</string>
@@ -339,10 +348,17 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Fon yoxlanma tezliyi</string>
     <string name="settings_advanced_update_interval_battery_warning">Fon yoxlamaları bəzi cihazlarda davamlı işləməyə bilər. Xiaomi, Huawei, Samsung və OnePlus kimi istehsalçılar batareyanı qorumaq üçün dəfələrlə fon proseslərini ciddi şəkildə məhdudlaşdırırlar</string>
     <!-- Notification content -->
+    <string name="notification_manager_update_title">Əlçatan Morphe yenilənməsi</string>
     <string name="notification_bundle_update_title">Yeni yamaqlar var</string>
     <string name="notification_update_text">%1$s versiyası yüklənilməyə hazırdır</string>
+    <string name="notification_bundle_update_text_unversioned">Morphe-ni açmaq və yeniləmək üçün toxun</string>
     <string name="notification_permission_dialog_title">Bildirişləri qəbul et</string>
+    <string name="notification_permission_dialog_description">Morphe fonda yeniləmələr əlçatan olduqda sizə bildirmək üçün bildiriş icazəsi istəyir</string>
     <string name="notification_post_patch_dialog_title">Yeniləmələr əlçatandırsa bildiriş almaq istərdiniz?</string>
+    <string name="notification_channel_fcm_updates">Yenilənmə bildirişləri</string>
+    <string name="notification_channel_fcm_updates_description">Yeni Morphe və yamaq buraxılışları haqqında bildirişlər </string>
+    <string name="notification_channel_patcher">Yamaqlanır</string>
+    <string name="notification_channel_patcher_description">Morphe tətbiqi fonda yamaqlayarkən görünür</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Mütəxəssis tənzimləmələri</string>
     <string name="settings_advanced_expert_mode">Mütəxəssis rejimi</string>
@@ -359,9 +375,11 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Şəxsi Giriş Token-ini Yerləşdir</string>
     <string name="settings_advanced_github_pat_dialog_description">Xarici mənbələr kimi pull request-ləri əlavə edə bilmək üçün GitHub Şəxsi Giriş Token-ini təyin et. public_repo github.com fəaliyyət sahəsi ilə PAT yarat</string>
     <string name="settings_advanced_github_pat_export_include_label">Tənzimləmələr ixracında yerləşdir</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Bu PAT-ı ixrac edilən Morphe tənzimləmələrinə əlavə edir</string>
     <string name="settings_advanced_github_pat_export_warning">PAT-ınızı paylaşmayın. Bunu tənzimləmələr ixracına daxil etsəniz, o faylı gizli saxlayın, çünki onun token-i var</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Yamaq seçimləri</string>
+    <string name="settings_advanced_patch_options_youtube_description">Kolorit, markalanma və sərlövhə seçimləri</string>
     <string name="settings_advanced_patch_options_restart_message">Yamaq seçimlərini dəyişdirmə təsir etmək üçün tətbiqi təkrar yamaqlamağa ehtiyac duyur</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Mütəxəssis rejimində yamaq seçimləri yamaqlanma prosesi əsnasında əlçatan olacaq</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -492,6 +510,14 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_show_password_field">Parolu göstər</string>
     <string name="settings_system_hide_password_field">Parolu gizlət</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
+    <string name="settings_system_import_manager_settings">Morphe tənzimləmələrin idxal et</string>
+    <string name="settings_system_import_manager_settings_description">JSON faylından Morphe tənzimləmələrin qaytar</string>
+    <string name="settings_system_import_manager_settings_fail">Morphe tənzimləmələrin idxal etmək olmadı: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe tənzimləmələri idxal edildi</string>
+    <string name="settings_system_export_manager_settings">Morphe tənzimləmələrin köçür</string>
+    <string name="settings_system_export_manager_settings_description">Morphe tənzimləmələrin JSON faylında saxla</string>
+    <string name="settings_system_export_manager_settings_fail">Morphe tənzimləmələrin ixrac etmək olmadı: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe tənzimləmələri ixrac olundu</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Yaxşılaşdırma</string>
     <string name="settings_system_export_debug_logs">Sazlanma jurnalların köçür</string>
@@ -561,6 +587,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="close">Qapat</string>
     <string name="clear">Təmizlə</string>
     <string name="delete">Sil</string>
+    <string name="remove">Sil</string>
     <string name="disable">Qapadın</string>
     <string name="enable">Aktivləşdir</string>
     <string name="loading">Yüklənilir…</string>
