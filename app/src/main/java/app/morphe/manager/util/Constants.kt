@@ -1,8 +1,6 @@
 package app.morphe.manager.util
 
-import android.content.Context
 import androidx.compose.ui.graphics.Color
-import app.morphe.manager.R
 
 const val tag = "Morphe Manager"
 
@@ -41,7 +39,7 @@ const val USE_PATCHES_DIRECT_JSON = true
  */
 sealed class KnownApp(
     val packageName: String,
-    val displayNameResId: Int,
+    val displayName: String,
     val accentColor: Color,
     val isPinnedByDefault: Boolean = false
 ) {
@@ -51,6 +49,12 @@ sealed class KnownApp(
         const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
         const val REDDIT        = "com.reddit.frontpage"
         const val X_TWITTER     = "com.twitter.android"
+
+        // Display name constants
+        const val YOUTUBE_NAME = "YouTube"
+        const val YOUTUBE_MUSIC_NAME = "YouTube Music"
+        const val REDDIT_NAME = "Reddit"
+        const val X_NAME = "X"
 
         // Shared gradient tail colors used by all known apps
         val GRADIENT_MID = Color(0xFF1E5AA8)
@@ -73,28 +77,28 @@ sealed class KnownApp(
 
     data object YouTube : KnownApp(
         packageName = YOUTUBE,
-        displayNameResId = R.string.home_youtube,
+        displayName = YOUTUBE_NAME,
         accentColor = Color(0xFFFF0033),
         isPinnedByDefault = true
     )
 
     data object YouTubeMusic : KnownApp(
         packageName = YOUTUBE_MUSIC,
-        displayNameResId = R.string.home_youtube_music,
+        displayName = YOUTUBE_MUSIC_NAME,
         accentColor = Color(0xFFFF8C3E),
         isPinnedByDefault = true
     )
 
     data object Reddit : KnownApp(
         packageName = REDDIT,
-        displayNameResId = R.string.home_reddit,
+        displayName = REDDIT_NAME,
         accentColor = Color(0xFFFF4500),
         isPinnedByDefault = true
     )
 
     data object X : KnownApp(
         packageName = X_TWITTER,
-        displayNameResId = R.string.home_x,
+        displayName = X_NAME,
         accentColor = Color(0xFF000000)
     )
 }
@@ -148,25 +152,17 @@ object AppPackages {
     fun getDownloadColor(packageName: String): Color =
         KnownApp.fromPackage(packageName)?.downloadColor ?: DEFAULT_DOWNLOAD_COLOR
 
+    /** Get display name for a package, or the package name itself if not in any registry. */
+    fun getAppName(packageName: String): String =
+        getChangelogName(packageName) ?: packageName
+
     /**
-     * Get localized app name for a package.
-     * Returns the hardcoded display name for known apps, or the raw package name for unknown apps.
+     * Returns the display name used in conventional-changelog bullet scopes for [packageName].
+     * Returns null for packages not present in any registry.
      */
-    fun getAppName(context: Context, packageName: String): String {
-        KnownApp.fromPackage(packageName)?.let {
-            return context.getString(it.displayNameResId)
-        }
-
-        PACKAGE_NAME_TO_APP_NAME[packageName]?.let {
-            return it
-        }
-
-        return packageName
-    }
-
-    /** Check if a package is in the known registry. */
-    fun isKnown(packageName: String): Boolean =
-        KnownApp.fromPackage(packageName) != null
+    fun getChangelogName(packageName: String): String? =
+        KnownApp.fromPackage(packageName)?.displayName
+            ?: PACKAGE_NAME_TO_APP_NAME[packageName]
 }
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"

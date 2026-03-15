@@ -7,6 +7,7 @@ data class ChangelogEntry(
     val version: String,
     val date: String?,
     val content: String,
+    val affectedScopes: Set<String> = emptySet(),
 )
 
 /**
@@ -20,7 +21,7 @@ object ChangelogParser {
     /**
      * Matches both changelog heading styles:
      *   `# [VERSION](url) (DATE)`         — patches / no-label style
-     *   `# app [VERSION](url) (DATE)`     — manager / labelled style
+     *   `# app [VERSION](url) (DATE)`     — manager / labeled style
      *
      * Capture groups:
      *   1 → version string
@@ -31,12 +32,35 @@ object ChangelogParser {
         RegexOption.IGNORE_CASE
     )
 
+    /**
+     * Matches the bold scope prefix in a conventional-changelog bullet:
+     *   `* **YouTube - Hide ads:** text`  →  group 1 = `YouTube - Hide ads`
+     *   `* **Reddit:** text`              →  group 1 = `Reddit`
+     *
+     * The colon sits *inside* the bold span (`**scope:**`) as emitted by
+     * conventional-changelog. Lines without this pattern are unscoped (global)
+     * and are intentionally ignored to avoid false-positive update badges.
+     */
+    private val BULLET_SCOPE_RE = Regex("""^\* \*\*(.+?):\*\*""")
+
     // Commit hash links: ([abc1234](https://...commit/...)) → removed, noise with no value in UI
     private val COMMIT_LINK_REGEX = Regex("""\s*\(\[([0-9a-f]{7,})]\([^)]+/commit/[^)]+\)\)""")
 
     private fun String.sanitizeContent(): String = this
         .replace(COMMIT_LINK_REGEX, "")
         .trimEnd()
+
+    /**
+     * Extracts the set of raw scope prefixes from one version entry's content.
+     */
+    private fun resolveAffectedScopes(content: String): Set<String> {
+        val scopes = mutableSetOf<String>()
+        for (line in content.lines()) {
+            val scope = BULLET_SCOPE_RE.find(line.trim())?.groupValues?.get(1) ?: continue
+            scopes += scope
+        }
+        return scopes
+    }
 
     /**
      * Parse raw CHANGELOG.md text into a list of [ChangelogEntry], ordered
@@ -52,10 +76,12 @@ object ChangelogParser {
 
         fun flush() {
             val v = currentVersion ?: return
+            val raw = currentContent.toString()
             entries += ChangelogEntry(
                 version = v,
                 date = currentDate,
-                content = currentContent.toString().sanitizeContent()
+                content = raw.sanitizeContent(),
+                affectedScopes = resolveAffectedScopes(raw),
             )
         }
 
@@ -89,6 +115,26 @@ object ChangelogParser {
         return entries.filter { entry ->
             isNewerVersion(installedVersion, entry.version) &&
                     (installedDate == null || entry.date == null || entry.date >= installedDate)
+        }
+    }
+
+    /**
+     * Returns true if any changelog entry newer than [installedVersion] has a
+     * scoped bullet whose scope exactly matches [appName] or starts with `"$appName - "`.
+     * Comparison is case-insensitive.
+     */
+    fun hasChangesFor(
+        entries: List<ChangelogEntry>,
+        installedVersion: String?,
+        appName: String,
+    ): Boolean {
+        val newerEntries = entriesNewerThan(entries, installedVersion)
+        if (newerEntries.isEmpty()) return false
+        return newerEntries.any { entry ->
+            entry.affectedScopes.any { scope ->
+                scope.equals(appName, ignoreCase = true) ||
+                        scope.startsWith("$appName - ", ignoreCase = true)
+            }
         }
     }
 

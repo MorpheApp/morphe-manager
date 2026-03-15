@@ -28,6 +28,8 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.morphe.manager.util.ChangelogEntry
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
@@ -60,6 +62,8 @@ import java.net.URLEncoder.encode
 import java.util.zip.ZipInputStream
 import javax.net.ssl.SSLException
 import kotlin.time.Clock
+
+import app.morphe.manager.util.ChangelogParser
 
 /**
  * Bundle update status for snackbar display.
@@ -360,31 +364,51 @@ class HomeViewModel(
 
     /**
      * Check for bundle updates for installed apps.
+     *
+     * Iterates all active bundles. For each [RemotePatchBundle], if a changelog is available
+     * and uses conventional-changelog scopes, only apps with explicit changes in newer
+     * entries receive an update badge.
      */
     suspend fun checkInstalledAppsForUpdates(
         installedApps: List<InstalledApp>,
-        currentBundleVersion: String?
     ) = withContext(Dispatchers.IO) {
-        if (currentBundleVersion == null) {
+        val sources = patchBundleRepository.sources.first()
+        if (sources.isEmpty()) {
             _appUpdatesAvailable.value = emptyMap()
             return@withContext
         }
+
+        val changelogByUid: Map<Int, List<ChangelogEntry>?> = sources.associate { source ->
+            source.uid to runCatching {
+                source.asRemoteOrNull?.fetchChangelogEntries(sinceVersion = null)
+            }.getOrNull()
+        }
+
+        val currentVersionByUid: Map<Int, String?> = sources.associate { it.uid to it.version }
 
         val updates = mutableMapOf<String, Boolean>()
 
         installedApps.forEach { app ->
             // Get stored bundle versions for this app
             val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
+            val appName = resolveChangelogName(app.originalPackageName)
 
             // Check if any bundle used for this app has been updated
             val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
-                // Only check default bundle (UID 0) for main apps
-                if (bundleUid == DEFAULT_SOURCE_UID) {
-                    // Compare stored version with current version
-                    isNewerVersion(storedVersion, currentBundleVersion)
-                } else {
-                    false // For now, only track default bundle updates
-                }
+                val currentVersion = currentVersionByUid[bundleUid] ?: return@any false
+                if (!isNewerVersion(storedVersion, currentVersion)) return@any false
+
+                // Bundle is newer - refine with changelog if available.
+                // No changelog (null) → show badge (network error or local bundle).
+                // Unknown app name (null) → show badge (can't match scopes).
+                // Known name but no matching scope → no badge.
+                val entries = changelogByUid[bundleUid] ?: return@any true
+                if (appName == null) return@any true
+                ChangelogParser.hasChangesFor(
+                    entries = entries,
+                    installedVersion = storedVersion,
+                    appName = appName,
+                )
             }
 
             updates[app.currentPackageName] = hasUpdate
@@ -392,6 +416,16 @@ class HomeViewModel(
 
         _appUpdatesAvailable.value = updates
     }
+
+    /**
+     * Returns the name to match against changelog bullet scopes for [packageName].
+     *
+     * Returns null when the package is unknown and not installed.
+     * Callers should treat null as "show badge" (safe fallback).
+     */
+    private fun resolveChangelogName(packageName: String): String? =
+        AppPackages.getChangelogName(packageName)
+            ?: pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
 
     @SuppressLint("ShowToast")
     private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
@@ -726,7 +760,7 @@ class HomeViewModel(
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
-        pendingAppName = AppPackages.getAppName(app, packageName)
+        pendingAppName = AppPackages.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
 
