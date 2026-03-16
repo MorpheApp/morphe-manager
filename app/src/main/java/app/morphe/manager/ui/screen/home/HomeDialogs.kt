@@ -222,12 +222,17 @@ fun HomeDialogs(
             onPickAnother = {
                 homeViewModel.showSplitApkWarningDialog = false
                 homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) {
-                        app.file.delete()
-                    }
+                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
                 }
                 homeViewModel.pendingSelectedApp = null
                 storagePickerLauncher()
+            },
+            onDismiss = {
+                homeViewModel.showSplitApkWarningDialog = false
+                homeViewModel.pendingSelectedApp?.let { app ->
+                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
+                }
+                homeViewModel.pendingSelectedApp = null
             }
         )
     }
@@ -239,9 +244,7 @@ fun HomeDialogs(
             onPickAnother = {
                 homeViewModel.showInvalidSignatureDialog = null
                 homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) {
-                        app.file.delete()
-                    }
+                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
                 }
                 homeViewModel.pendingSelectedApp = null
                 storagePickerLauncher()
@@ -254,6 +257,13 @@ fun HomeDialogs(
                         homeViewModel.pendingSelectedApp = null
                     }
                 }
+            },
+            onDismiss = {
+                homeViewModel.showInvalidSignatureDialog = null
+                homeViewModel.pendingSelectedApp?.let { app ->
+                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
+                }
+                homeViewModel.pendingSelectedApp = null
             }
         )
     }
@@ -892,10 +902,11 @@ private fun UnsupportedVersionWarningDialog(
 fun InvalidSignatureDialog(
     appName: String,
     onPickAnother: () -> Unit,
-    onProceed: () -> Unit
+    onProceed: () -> Unit,
+    onDismiss: () -> Unit
 ) {
     MorpheDialog(
-        onDismissRequest = onPickAnother,
+        onDismissRequest = onDismiss,
         title = stringResource(R.string.home_invalid_signature_title),
         footer = {
             MorpheDialogButtonRow(
@@ -915,7 +926,7 @@ fun InvalidSignatureDialog(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                imageVector = Icons.Outlined.VerifiedUser,
+                imageVector = Icons.Outlined.GppBad,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.error,
                 modifier = Modifier.size(48.dp)
@@ -946,10 +957,11 @@ fun InvalidSignatureDialog(
 @Composable
 fun SplitApkWarningDialog(
     appName: String,
-    onPickAnother: () -> Unit
+    onPickAnother: () -> Unit,
+    onDismiss: () -> Unit
 ) {
     MorpheDialog(
-        onDismissRequest = onPickAnother,
+        onDismissRequest = onDismiss,
         title = stringResource(R.string.home_split_apk_warning_title),
         footer = {
             MorpheDialogButtonRow(
@@ -957,7 +969,7 @@ fun SplitApkWarningDialog(
                 onPrimaryClick = onPickAnother,
                 primaryIcon = Icons.Outlined.FolderOpen,
                 secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onPickAnother,
+                onSecondaryClick = onDismiss,
                 layout = DialogButtonLayout.Vertical,
             )
         }
