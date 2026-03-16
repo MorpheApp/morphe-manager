@@ -79,12 +79,12 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
         fun patches(bundles: Iterable<PatchBundle>, packageName: String) =
             bundles.associateWith { bundle ->
                 loadBundle(bundle).filter { patch ->
-                    val compatiblePackages = patch.compatibility
+                    val compatibility = patch.compatibility
                         ?: return@filter true // Universal patch
 
-                    compatiblePackages.any { compatibility ->
-                        compatibility.packageName == packageName ||
-                                compatibility.packageName == null
+                    compatibility.any { compat ->
+                        compat.packageName == packageName ||
+                                compat.packageName == null // Universal compatibility entry
                     }
                 }.toSet()
             }

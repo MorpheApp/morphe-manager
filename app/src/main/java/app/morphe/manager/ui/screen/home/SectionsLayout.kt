@@ -42,7 +42,7 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
 import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.AppPackages
+import app.morphe.manager.util.KnownApps
 import kotlinx.coroutines.delay
 
 /**
@@ -613,16 +613,16 @@ fun MainAppsSection(
     }
 
     // Placeholder gradients for cold-start shimmer
-    val placeholderGradients = remember { AppPackages.DEFAULT_SHIMMER_GRADIENTS }
+    val placeholderGradients = remember { KnownApps.DEFAULT_SHIMMER_GRADIENTS }
 
     // Hidden apps dialog state
-    var showHiddenAppsDialog by remember { mutableStateOf(false) }
+    val showHiddenAppsDialog = remember { mutableStateOf(false) }
 
-    if (showHiddenAppsDialog) {
+    if (showHiddenAppsDialog.value) {
         HiddenAppsDialog(
             hiddenAppItems = hiddenAppItems,
             onUnhide = onUnhideApp,
-            onDismiss = { showHiddenAppsDialog = false }
+            onDismiss = { showHiddenAppsDialog.value = false }
         )
     }
 
@@ -697,7 +697,7 @@ fun MainAppsSection(
                 if (hiddenAppItems.isNotEmpty()) {
                     item(key = "show_hidden") {
                         TextButton(
-                            onClick = { showHiddenAppsDialog = true },
+                            onClick = { showHiddenAppsDialog.value = true },
                             modifier = Modifier.padding(top = 4.dp)
                         ) {
                             Icon(
@@ -906,6 +906,7 @@ internal fun HiddenAppsDialog(
                         HiddenAppRow(
                             packageName = item.packageName,
                             displayName = item.displayName,
+                            gradientColors = item.gradientColors,
                             packageInfo = item.packageInfo,
                             onUnhide = { onUnhide(item.packageName) }
                         )
@@ -923,12 +924,12 @@ internal fun HiddenAppsDialog(
 private fun HiddenAppRow(
     packageName: String,
     displayName: String?,
+    gradientColors: List<Color>,
     packageInfo: PackageInfo?,
     onUnhide: () -> Unit
 ) {
     val view = LocalView.current
     val textColor = LocalDialogTextColor.current
-    val gradientColors = AppPackages.getGradientColors(packageName)
     val shape = RoundedCornerShape(16.dp)
 
     Box(
@@ -1104,6 +1105,7 @@ fun InstalledAppCard(
             }
 
             // Update badge
+            @Suppress("RemoveRedundantQualifierName")
             androidx.compose.animation.AnimatedVisibility(
                 visible = hasUpdate && !isAppDeleted,
                 modifier = Modifier

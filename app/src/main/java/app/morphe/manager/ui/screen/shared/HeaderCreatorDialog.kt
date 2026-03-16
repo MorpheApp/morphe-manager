@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
 import app.morphe.manager.R
-import app.morphe.manager.util.KnownApp
+import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.toFilePath
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.Dispatchers
@@ -67,7 +67,7 @@ private object HeaderConfig {
     const val DARK_HEADER_FILE_NAME = "morphe_header_custom_dark"
 
     fun headerFolderName(packageName: String) = when (packageName) {
-        KnownApp.YOUTUBE_MUSIC -> YTM_HEADER_FOLDER_NAME
+        KnownApps.YOUTUBE_MUSIC -> YTM_HEADER_FOLDER_NAME
         else -> YOUTUBE_HEADER_FOLDER_NAME
     }
 
@@ -107,7 +107,7 @@ fun HeaderCreatorDialog(
     val scope = rememberCoroutineScope()
 
     // YouTube Music has no light theme - show only the dark variant section
-    val showLightVariant = packageName != KnownApp.YOUTUBE_MUSIC
+    val showLightVariant = packageName != KnownApps.YOUTUBE_MUSIC
 
     var lightHeaderUri by remember { mutableStateOf<Uri?>(null) }
     var lightHeaderBitmap by remember { mutableStateOf<Bitmap?>(null) }

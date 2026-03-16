@@ -573,8 +573,8 @@ private fun PatchItemCard(
                 ) {
                     patch.compatiblePackages.forEach { compatiblePackage ->
                         val anyString = stringResource(R.string.any_version)
-                        val appName = compatiblePackage.name ?: (compatiblePackage.packageName ?: anyString)
-                        val versions = compatiblePackage.targets
+                        val appName = compatiblePackage.displayName ?: compatiblePackage.packageName ?: anyString
+                        val versions = compatiblePackage.versions.orEmpty()
 
                         FlowRow(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -591,19 +591,24 @@ private fun PatchItemCard(
                             if (versions.isNotEmpty()) {
                                 if (expandVersions) {
                                     versions.forEach { version ->
+                                        val isExperimental =
+                                            compatiblePackage.experimentalVersions?.contains(version) == true
                                         InfoBadge(
-                                            text = version.version ?: anyString,
-                                            icon = Icons.Outlined.Code,
-                                            style = InfoBadgeStyle.Default,
+                                            text = version,
+                                            icon = if (isExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
+                                            style = if (isExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
                                             isCompact = true,
                                             modifier = Modifier.align(Alignment.CenterVertically)
                                         )
                                     }
                                 } else {
+                                    val firstVersion = versions.first()
+                                    val firstIsExperimental =
+                                        compatiblePackage.experimentalVersions?.contains(firstVersion) == true
                                     InfoBadge(
-                                        text = versions.first().version ?: anyString,
-                                        icon = Icons.Outlined.Code,
-                                        style = InfoBadgeStyle.Default,
+                                        text = firstVersion,
+                                        icon = if (firstIsExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
+                                        style = if (firstIsExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
                                         isCompact = true,
                                         modifier = Modifier.align(Alignment.CenterVertically)
                                     )

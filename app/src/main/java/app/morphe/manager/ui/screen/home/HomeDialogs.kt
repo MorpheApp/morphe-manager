@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
@@ -14,6 +19,7 @@ import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -27,6 +33,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -34,14 +41,14 @@ import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
-import app.morphe.manager.util.AppPackages
+import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.*
 
 /**
- * Container for all MorpheHomeScreen dialogs
+ * Container for all MorpheHomeScreen dialogs.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
@@ -106,9 +113,16 @@ fun HomeDialogs(
         // Remember packageName to prevent color flickering during exit animation
         val packageName = remember { homeViewModel.pendingPackageName }
 
+        // Resolve download button color: bundle declared → default
+        val bundleMetadata by homeViewModel.bundleAppMetadataFlow.collectAsStateWithLifecycle()
+        val downloadColor = remember(packageName, bundleMetadata) {
+            bundleMetadata[packageName ?: ""]?.downloadColor
+                ?: KnownApps.DEFAULT_DOWNLOAD_COLOR
+        }
+
         DownloadInstructionsDialog(
             usingMountInstall = usingMountInstall,
-            packageName = packageName,
+            downloadColor = downloadColor,
             onDismiss = {
                 homeViewModel.showDownloadInstructionsDialog = false
                 homeViewModel.cleanupPendingData()
@@ -159,8 +173,10 @@ fun HomeDialogs(
 
         UnsupportedVersionWarningDialog(
             version = dialogState.version,
-            recommendedVersion = dialogState.recommendedVersion,
-            allCompatibleVersions = dialogState.allCompatibleVersions,
+            recommendedVersion = dialogState.recommendedVersion?.version,
+            allCompatibleVersions = dialogState.allCompatibleVersions.map { it.version ?: "" }.filter { it.isNotEmpty() },
+            experimentalVersions = homeViewModel.getExperimentalVersionsForPackage(dialogState.packageName),
+            isExperimental = dialogState.isExperimental,
             isExpertMode = isExpertMode,
             onDismiss = {
                 homeViewModel.showUnsupportedVersionDialog = null
@@ -195,6 +211,50 @@ fun HomeDialogs(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
             onDismiss = { homeViewModel.showWrongPackageDialog = null }
+        )
+    }
+
+    // Split APK Warning Dialog - shown when user picks a split APK for an app that requires full APK
+    if (homeViewModel.showSplitApkWarningDialog) {
+        val appName = homeViewModel.pendingAppName ?: ""
+        SplitApkWarningDialog(
+            appName = appName,
+            onPickAnother = {
+                homeViewModel.showSplitApkWarningDialog = false
+                homeViewModel.pendingSelectedApp?.let { app ->
+                    if (app is SelectedApp.Local && app.temporary) {
+                        app.file.delete()
+                    }
+                }
+                homeViewModel.pendingSelectedApp = null
+                storagePickerLauncher()
+            }
+        )
+    }
+
+    // Invalid Signature Dialog - shown when the APK is not signed by the expected certificate
+    homeViewModel.showInvalidSignatureDialog?.let { dialogState ->
+        InvalidSignatureDialog(
+            appName = dialogState.appName,
+            onPickAnother = {
+                homeViewModel.showInvalidSignatureDialog = null
+                homeViewModel.pendingSelectedApp?.let { app ->
+                    if (app is SelectedApp.Local && app.temporary) {
+                        app.file.delete()
+                    }
+                }
+                homeViewModel.pendingSelectedApp = null
+                storagePickerLauncher()
+            },
+            onProceed = {
+                homeViewModel.showInvalidSignatureDialog = null
+                homeViewModel.pendingSelectedApp?.let { selectedApp ->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        homeViewModel.processSelectedAppIgnoringSignature(selectedApp)
+                        homeViewModel.pendingSelectedApp = null
+                    }
+                }
+            }
         )
     }
 
@@ -356,7 +416,7 @@ fun HomeDialogs(
 }
 
 /**
- * Dialog 1: Initial "Do you have the APK?" dialog
+ * Dialog 1: Initial "Do you have the APK?" dialog.
  */
 @Composable
 private fun ApkAvailabilityDialog(
@@ -429,7 +489,12 @@ private fun ApkAvailabilityDialog(
                 // Unified version list card
                 VersionListCard(
                     versions = compatibleVersions.map { it.version ?: anyString },
-                    recommendedIndex = 0
+                    experimentalVersions = compatibleVersions
+                        .filter { it.isExperimental }
+                        .mapNotNull { it.version }
+                        .toSet(),
+                    recommendedIndex = compatibleVersions.indexOfFirst { !it.isExperimental }
+                        .takeIf { it >= 0 } ?: 0
                 )
             } else {
                 // Simple mode or single version: show card with unpatched badge
@@ -465,20 +530,17 @@ private fun ApkAvailabilityDialog(
 }
 
 /**
- * Dialog 2: Download instructions dialog
+ * Dialog 2: Download instructions dialog.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 private fun DownloadInstructionsDialog(
     usingMountInstall: Boolean,
-    packageName: String?,
+    downloadColor: Color,
     onDismiss: () -> Unit,
     onContinue: () -> Unit
 ) {
     val context = LocalContext.current
-
-    // Get button color based on package name
-    val buttonColor = AppPackages.getDownloadColor(packageName ?: "")
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -542,7 +604,7 @@ private fun DownloadInstructionsDialog(
                                 )
                             },
                             shape = RoundedCornerShape(1.dp),
-                            color = buttonColor
+                            color = downloadColor
                         ) {
                             Row(
                                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
@@ -636,7 +698,7 @@ private fun InstructionStep(
 }
 
 /**
- * Dialog 3: File picker prompt dialog
+ * Dialog 3: File picker prompt dialog.
  */
 @Composable
 private fun FilePickerPromptDialog(
@@ -680,13 +742,15 @@ private fun FilePickerPromptDialog(
 }
 
 /**
- * Unsupported version warning dialog
+ * Unsupported version warning dialog.
  */
 @Composable
 private fun UnsupportedVersionWarningDialog(
     version: String,
     recommendedVersion: String?,
     allCompatibleVersions: List<String>,
+    experimentalVersions: Set<String> = emptySet(),
+    isExperimental: Boolean = false,
     isExpertMode: Boolean,
     onDismiss: () -> Unit,
     onProceed: () -> Unit
@@ -712,7 +776,12 @@ private fun UnsupportedVersionWarningDialog(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.home_dialog_unsupported_version_dialog_description),
+                text = stringResource(
+                    if (isExperimental)
+                        R.string.home_dialog_unsupported_version_experimental_description
+                    else
+                        R.string.home_dialog_unsupported_version_dialog_description
+                ),
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center
@@ -722,7 +791,7 @@ private fun UnsupportedVersionWarningDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // Selected version (red card)
+                // Selected version card
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(R.string.home_selected_version),
@@ -733,7 +802,10 @@ private fun UnsupportedVersionWarningDialog(
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(14.dp),
-                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                        color = if (isExperimental)
+                            MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
+                        else
+                            MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
                         tonalElevation = 1.dp
                     ) {
                         Row(
@@ -748,14 +820,25 @@ private fun UnsupportedVersionWarningDialog(
                                 style = MaterialTheme.typography.bodyLarge,
                                 fontFamily = FontFamily.Monospace,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.error
+                                color = if (isExperimental)
+                                    MaterialTheme.colorScheme.tertiary
+                                else
+                                    MaterialTheme.colorScheme.error
                             )
 
-                            InfoBadge(
-                                text = stringResource(R.string.home_dialog_unsupported_version_unsupported_label),
-                                style = InfoBadgeStyle.Error,
-                                isCompact = true
-                            )
+                            if (isExperimental) {
+                                InfoBadge(
+                                    text = stringResource(R.string.home_dialog_unsupported_version_experimental_label),
+                                    style = InfoBadgeStyle.Warning,
+                                    isCompact = true
+                                )
+                            } else {
+                                InfoBadge(
+                                    text = stringResource(R.string.home_dialog_unsupported_version_unsupported_label),
+                                    style = InfoBadgeStyle.Error,
+                                    isCompact = true
+                                )
+                            }
                         }
                     }
                 }
@@ -772,8 +855,11 @@ private fun UnsupportedVersionWarningDialog(
 
                         VersionListCard(
                             versions = allCompatibleVersions,
-                            recommendedIndex = 0,
-                            isCompatible = true
+                            recommendedIndex = allCompatibleVersions
+                                .indexOfFirst { it !in experimentalVersions }
+                                .takeIf { it >= 0 } ?: 0,
+                            isCompatible = true,
+                            experimentalVersions = experimentalVersions
                         )
                     }
                 } else if (recommendedVersion != null) {
@@ -788,7 +874,8 @@ private fun UnsupportedVersionWarningDialog(
                         VersionListCard(
                             versions = listOf(recommendedVersion),
                             recommendedIndex = 0,
-                            isCompatible = true
+                            isCompatible = true,
+                            experimentalVersions = experimentalVersions
                         )
                     }
                 }
@@ -798,7 +885,115 @@ private fun UnsupportedVersionWarningDialog(
 }
 
 /**
- * Wrong package dialog
+ * Warning dialog shown when the selected APK's signing certificate does not match
+ * the expected signatures declared in the patch bundle.
+ */
+@Composable
+fun InvalidSignatureDialog(
+    appName: String,
+    onPickAnother: () -> Unit,
+    onProceed: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onPickAnother,
+        title = stringResource(R.string.home_invalid_signature_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.home_split_apk_warning_pick_another),
+                onPrimaryClick = onPickAnother,
+                primaryIcon = Icons.Outlined.FolderOpen,
+                secondaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                onSecondaryClick = onProceed,
+                isPrimaryDestructive = false,
+                layout = DialogButtonLayout.Vertical,
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.VerifiedUser,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.error,
+                modifier = Modifier.size(48.dp)
+            )
+            Text(
+                text = htmlAnnotatedString(
+                    stringResource(R.string.home_invalid_signature_message, appName)
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            InfoBadge(
+                text = stringResource(R.string.home_invalid_signature_badge),
+                style = InfoBadgeStyle.Error,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
+            )
+        }
+    }
+}
+
+/**
+ * Blocking dialog shown when the user selects a split APK archive (.apks / .apkm / .xapk)
+ * for an app that requires a full APK.
+ */
+@Composable
+fun SplitApkWarningDialog(
+    appName: String,
+    onPickAnother: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onPickAnother,
+        title = stringResource(R.string.home_split_apk_warning_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.home_split_apk_warning_pick_another),
+                onPrimaryClick = onPickAnother,
+                primaryIcon = Icons.Outlined.FolderOpen,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onPickAnother,
+                layout = DialogButtonLayout.Vertical,
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.FolderZip,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(48.dp)
+            )
+            Text(
+                text = htmlAnnotatedString(
+                    stringResource(R.string.home_split_apk_warning_message, appName)
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            InfoBadge(
+                text = stringResource(R.string.home_split_apk_warning_badge),
+                style = InfoBadgeStyle.Error,
+                icon = Icons.Outlined.Error,
+                isExpanded = true
+            )
+        }
+    }
+}
+
+/**
+ * Wrong package dialog.
  */
 @Composable
 fun WrongPackageDialog(
@@ -890,14 +1085,15 @@ fun WrongPackageDialog(
 }
 
 /**
- * Unified version list card component
+ * Unified version list card component.
  */
 @Composable
 private fun VersionListCard(
-    versions: List<String>, // FIXME: use AppTarget
+    versions: List<String>,
     recommendedIndex: Int = 0,
     isCompatible: Boolean = false,
     showUnpatchedBadge: Boolean = false,
+    experimentalVersions: Set<String> = emptySet(),
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -928,6 +1124,8 @@ private fun VersionListCard(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             versions.forEachIndexed { index, version ->
+                val isExperimentalVersion = version in experimentalVersions
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -939,18 +1137,25 @@ private fun VersionListCard(
                         style = MaterialTheme.typography.bodyLarge,
                         fontFamily = FontFamily.Monospace,
                         fontWeight = if (index == recommendedIndex) FontWeight.Bold else FontWeight.Normal,
-                        color = textColor
+                        color = if (isExperimentalVersion)
+                            MaterialTheme.colorScheme.tertiary
+                        else
+                            textColor
                     )
 
-                    // Badge
-                    if (index == recommendedIndex && !showUnpatchedBadge) {
-                        InfoBadge(
+                    // Badges
+                    when {
+                        isExperimentalVersion -> InfoBadge(
+                            text = stringResource(R.string.home_dialog_unsupported_version_experimental_label),
+                            style = InfoBadgeStyle.Warning,
+                            isCompact = true
+                        )
+                        index == recommendedIndex && !showUnpatchedBadge -> InfoBadge(
                             text = stringResource(R.string.home_apk_availability_recommended_label),
                             style = InfoBadgeStyle.Primary,
                             isCompact = true
                         )
-                    } else if (showUnpatchedBadge && versions.size == 1) {
-                        InfoBadge(
+                        showUnpatchedBadge && versions.size == 1 -> InfoBadge(
                             text = stringResource(R.string.home_apk_availability_unpatched_label),
                             style = InfoBadgeStyle.Warning,
                             isCompact = true

@@ -221,7 +221,7 @@ class AppDataResolver(
     private fun getFromConstants(packageName: String): ResolvedAppData {
         return ResolvedAppData(
             packageName = packageName,
-            displayName = AppPackages.getAppName(context, packageName),
+            displayName = KnownApps.getAppName(context, packageName),
             version = null,
             icon = null,
             packageInfo = null,

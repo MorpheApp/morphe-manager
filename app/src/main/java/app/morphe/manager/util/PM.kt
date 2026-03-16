@@ -50,22 +50,15 @@ class PM(
             val compatiblePackages = bundles
                 .flatMap { (_, bundle) -> bundle.patches }
                 .flatMap { it.compatiblePackages.orEmpty() }
-                .groupingBy { it.packageName }
+                .mapNotNull { pkg -> pkg.packageName }
+                .groupingBy { it }
                 .eachCount()
 
-
-            compatiblePackages.keys.mapNotNull { pkg ->
-                if (pkg == null) return@mapNotNull null // FIXME?
-                getPackageInfo(pkg)?.let { packageInfo ->
-                    AppInfo(
-                        pkg,
-                        compatiblePackages[pkg],
-                        packageInfo
-                    )
-                } ?: AppInfo(
+            compatiblePackages.keys.map { pkg ->
+                AppInfo(
                     pkg,
                     compatiblePackages[pkg],
-                    null
+                    getPackageInfo(pkg)
                 )
             }
         }
@@ -80,8 +73,9 @@ class PM(
             }
         }
 
-        if (compatibleApps.await().isNotEmpty()) {
-            (compatibleApps.await() + installedApps.await())
+        val compatibleList = compatibleApps.await()
+        if (compatibleList.isNotEmpty()) {
+            (compatibleList + installedApps.await())
                 .distinctBy { it.packageName }
                 .sortedWith(
                     compareByDescending<AppInfo> {
