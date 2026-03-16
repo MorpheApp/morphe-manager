@@ -4,7 +4,6 @@
     <string name="home_other_apps">Andet</string>
     <string name="home_not_patched_yet">Ikke patchet endnu</string>
     <string name="home_no_patches_available">Ingen patches tilgængelige</string>
-    <string name="home_default_source_disabled">Morphe-patch kilden er deaktiveret. Aktiver den i Patchkilderark eller brug Expert-modus</string>
     <string name="home_app_hide_title">Skjul denne app?</string>
     <string name="home_app_hide_message">Denne app bliver skjult fra hjemmeskærmen. Du kan gendanne den senere ved at bruge knappen \'%1$s\' nederst i listen</string>
     <string name="home_app_will_be_hidden">Denne app bliver skjult</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Vælg APK</string>
     <string name="home_select_any_apk_description">Tryk på knappen nedenfor for at vælge en APK-fil for et hvilket som helst app for at patche</string>
     <string name="home_invalid_apk">Ugyldig APK-fil</string>
-    <string name="home_no_patches_for_app">Ingen patches tilgængelige for dette app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
     <string name="expert_mode_search">Søg patches</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
-    <string name="expert_mode_no_patches">Ingen patches tilgængelige</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
     <string name="expert_mode_multiple_sources_warning_title">Flere patch-kilder valgt</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.

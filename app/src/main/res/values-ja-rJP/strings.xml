@@ -4,7 +4,6 @@
     <string name="home_other_apps">その他のアプリ</string>
     <string name="home_not_patched_yet">まだパッチされていません</string>
     <string name="home_no_patches_available">利用可能なパッチはありません</string>
-    <string name="home_default_source_disabled">Morphe のパッチソースは無効になっています。 パッチソースの画面で有効にするか、エキスパートモードを使用してください。</string>
     <string name="home_app_hide_title">このアプリを非表示にしますか？</string>
     <string name="home_app_hide_message">このアプリはホーム画面から非表示になります。後でリスト下部の 「%1$s」 ボタンから復元できます</string>
     <string name="home_app_will_be_hidden">このアプリは非表示になります</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">APK を選択</string>
     <string name="home_select_any_apk_description">以下のボタンをタップして、パッチを当てたいアプリの APK ファイルを選択してください</string>
     <string name="home_invalid_apk">無効な APK ファイル</string>
-    <string name="home_no_patches_for_app">このアプリには適用できるパッチがありません</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">エキスパートモード</string>
     <string name="expert_mode_search">パッチを検索</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">全て無効化する</string>
     <string name="expert_mode_enable_all">全て有効化する</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
-    <string name="expert_mode_no_patches">利用可能なパッチはありません</string>
     <string name="expert_mode_universal_patches">ユニバーサルパッチ</string>
     <string name="expert_mode_multiple_sources_warning_title">複数のパッチソースが選択されました</string>
     <string name="expert_mode_multiple_sources_warning_message">"複数のパッチソースからパッチを選択しました。これは互換性の問題や予期しない動作を引き起こす可能性があります。
@@ -205,7 +202,7 @@
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
     <string name="patcher_error_technical">技術的な詳細</string>
-    <string name="patcher_long_step_warning">これには時間がかかる場合があります。お待ちください…</string>
+    <string name="patcher_long_step_warning">この処理には時間がかかる場合があります。お待ちください…</string>
     <string name="patcher_installing_subtitle">もうすぐ準備完了！🎸</string>
     <string name="patcher_success_title">完了しました！🎉</string>
     <string name="patcher_success_subtitle">アプリのパッチ適用とインストールが完了しました！</string>
@@ -387,9 +384,9 @@
     <string name="settings_advanced_patch_options_expert_mode_notice">エキスパートモードでは、パッチ適用の過程でパッチオプションを設定できます</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">アプリのテーマカラー</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">バックグラウンドカラーを変更する</string>
-    <string name="settings_advanced_patch_options_dark_theme_color">ダークテーマのバックグラウンドカラー</string>
-    <string name="settings_advanced_patch_options_light_theme_color">ライトテーマのバックグラウンドカラー</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">バックグラウンド カラーを変更する</string>
+    <string name="settings_advanced_patch_options_dark_theme_color">ダークテーマのバックグラウンド カラー</string>
+    <string name="settings_advanced_patch_options_light_theme_color">ライトテーマのバックグラウンド カラー</string>
     <string name="settings_advanced_patch_options_theme_color_description">16進カラー （#RRGGBB） またはカラーリソース参照を指定できます</string>
     <string name="settings_advanced_patch_options_loading">パッチ オプションを読み込み中…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">パッチソースが更新されるまで待機する</string>
@@ -490,7 +487,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">パフォーマンス</string>
     <string name="settings_system_process_runtime">別プロセスで実行</string>
-    <string name="settings_system_process_runtime_description">パッチの安定性を向上させるために、別のプロセスでパッチを実行します</string>
+    <string name="settings_system_process_runtime_description">安定性を向上させるために、パッチ処理を別プロセスで実行します</string>
     <string name="settings_system_process_runtime_memory_limit">メモリ制限</string>
     <string name="settings_system_process_runtime_memory_limit_description">メモリ制限を高く設定すると、パッチの処理速度を向上させることができますが、古いデバイスでは機能しない可能性があります</string>
     <string name="settings_system_process_runtime_enable">別プロセスでの実行を有効化</string>

@@ -4,7 +4,6 @@
     <string name="home_other_apps">Muut sovellukset</string>
     <string name="home_not_patched_yet">Ei vielä päivitetty</string>
     <string name="home_no_patches_available">Ei patcheja saatavilla</string>
-    <string name="home_default_source_disabled">Morphe-patchin lähde on poistettu. Koteloa sallitaan Patch sources -lehdellään tai käytä Expert-moodia.</string>
     <string name="home_app_hide_title">Piilota tämä sovellus?</string>
     <string name="home_app_hide_message">Tämä sovellus piilotetaan kotinäyliköstä. Voit palauttaa sen myöhemmin painamalla alimman listan nappia \'%1$s\'.</string>
     <string name="home_app_will_be_hidden">Tämä sovellus piilotetaan</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Valitse APK</string>
     <string name="home_select_any_apk_description">Klikkaa alla olevaa painiketta valitaksesi minkä tahansa sovelluksen APK-tiedoston patchaamiseen</string>
     <string name="home_invalid_apk">Virheellinen APK-tiedosto</string>
-    <string name="home_no_patches_for_app">Ei patcheja saatavilla tälle sovellukselle</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Asiantuntijan tila</string>
     <string name="expert_mode_search">Etsi patcheja</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Poista kaikki</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
-    <string name="expert_mode_no_patches">Ei patcheja saatavilla</string>
     <string name="expert_mode_universal_patches">Yleismaailmalliset korjaukset</string>
     <string name="expert_mode_multiple_sources_warning_title">Valittu useita päivitys lähteitä</string>
     <string name="expert_mode_multiple_sources_warning_message">"Olet valinnut päivitykset useista päivitys lähteistä. Tämä saattaa aiheuttaa yhteensopivuusongelmia tai odottamattomia toimintoja.

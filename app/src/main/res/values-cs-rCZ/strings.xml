@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ostatní aplikace</string>
     <string name="home_not_patched_yet">Ještě nezáplatováno</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
-    <string name="home_default_source_disabled">Morphe ovladač zdroj je vypnut. Prosím povolte ho v listu zdrojů ovladačů nebo použijte Expert mód</string>
     <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
     <string name="home_app_hide_message">Tato aplikace bude skryta z obrazovky. Můžete ji později obnovit pomocí tlačítka \'%1$s\' na dně seznamu.</string>
     <string name="home_app_will_be_hidden">Tato aplikace bude skryta.</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Vybrat APK</string>
     <string name="home_select_any_apk_description">Klikněte na tlačítko níže pro výběr APK souboru libovolné aplikace na záplatování</string>
     <string name="home_invalid_apk">Neplatný soubor APK</string>
-    <string name="home_no_patches_for_app">Pro tuto aplikaci nejsou k dispozici žádné záplaty</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertní režim</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Vypnout vše</string>
     <string name="expert_mode_enable_all">Zapnout vše</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
-    <string name="expert_mode_no_patches">Nejsou dostupné žádné záplaty</string>
     <string name="expert_mode_universal_patches">Univerzální záplaty</string>
     <string name="expert_mode_multiple_sources_warning_title">Vybráno více zdrojů pro aktualizace</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vybrali jste aktualizace z více zdrojů. To může způsobit problémy s kompatibilitou nebo neočekávané chování.

@@ -4,7 +4,6 @@
     <string name="home_other_apps">Iba pang mga aplikasyon</string>
     <string name="home_not_patched_yet">Hindi pa na-patch</string>
     <string name="home_no_patches_available">Walang patch na magagamit</string>
-    <string name="home_default_source_disabled">Nakapatay ang mapagkukunan ng Morphe patch. Mangyaring paganahin ito sa Patch sources sheet o gumamit ng Expert mode</string>
     <string name="home_app_hide_title">Itago ang aplikasyong ito?</string>
     <string name="home_app_hide_message">Itatago ang aplikasyong ito mula sa home screen. Maaari mong buksan mamaya gamit ang \'%1$s\' na button sa ibaba ng listahan</string>
     <string name="home_app_will_be_hidden">Itatago ang aplikasyong ito</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Piliin ang APK</string>
     <string name="home_select_any_apk_description">Pindutin ang button sa ibaba upang pillin ang APK file ng anumang aplikasyon para sa pagpa-patch</string>
     <string name="home_invalid_apk">Imbalido na APK file</string>
-    <string name="home_no_patches_for_app">Walang patch na magagamit para sa aplikasyong ito</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_search">Maghanap ng mga patch</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Patayin lahat</string>
     <string name="expert_mode_enable_all">Paganahin lahat</string>
     <string name="expert_mode_no_results">Walang nakita na patch</string>
-    <string name="expert_mode_no_patches">Walang magagamit na patch</string>
     <string name="expert_mode_universal_patches">Mga unibersal na patch</string>
     <string name="expert_mode_multiple_sources_warning_title">Maramihang mga mapagkukunang patch ang napili</string>
     <string name="expert_mode_multiple_sources_warning_message">"Pinili mo ang mga patch mula sa maramihang mapagkukunang patch. Maaari itong magdulot ng isyu sa kompatibilidad o hindi inaasahang kilos.

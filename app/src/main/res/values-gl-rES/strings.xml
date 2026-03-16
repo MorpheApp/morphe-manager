@@ -1,19 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_no_patches_available">Non hai parches dispoñibles</string>
+    <string name="home_app_hide_title">Ocultar esta aplicación?</string>
+    <string name="home_app_hide_message">Esta aplicación ocultarase da pantalla de inicio. Pode restaurala máis tarde empregando o botón %1$s na parte inferior da lista</string>
+    <string name="home_app_will_be_hidden">Ocultarase esta aplicación</string>
+    <string name="home_app_show_hidden">Mostrar aplicacións ocultas</string>
+    <string name="home_app_no_hidden">Non hai aplicacións ocultas</string>
+    <string name="home_app_hidden_apps_title">Aplicacións ocultas</string>
+    <string name="home_app_hidden_apps_hint">Toque nunha aplicación para mostrala de novo na listaxe</string>
+    <string name="android_11_bug_dialog_title">Erro de Android 11</string>
+    <string name="android_11_bug_dialog_description">O permiso de instalación da aplicación debe concederse con antelación para evitar un erro no sistema Android 11 que afectará negativamente á experiencia do usuario</string>
+    <string name="deep_link_add_source_title">Engadir fonte</string>
+    <string name="deep_link_add_source_message">Desexa engadir esta fonte de parches a Morphe?</string>
+    <string name="deep_link_add_source_warning">Únicamente engada fontes de orixe fiable</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Actualización de Morphe dispoñible</string>
+    <string name="home_update_available_subtitle">Nova versión lista para instalar</string>
+    <string name="home_update_error">Erro ao actualizar</string>
+    <string name="home_update_error_subtitle">Comprobe a súa conexión a Internet e ténteo de novo</string>
+    <string name="home_update_skipped_metered">Actualizacións omitidas</string>
+    <string name="home_update_skipped_metered_subtitle">Os datos móbiles están activados</string>
+    <string name="home_updating_sources">Actualizando fontes…</string>
+    <string name="home_update_progress_format">%1$s procesado</string>
+    <string name="home_update_success">Actualización de fontes completa</string>
+    <string name="home_update_success_subtitle">As súas fontes están ao día</string>
+    <string name="home_sources_are_loading">As fontes están a cargar, por favor agarde...</string>
+    <string name="home_please_wait">Por favor agarde...</string>
     <!-- Home Screen - Home Greetings -->
+    <string name="home_greeting_1">Qué aplicación desexa parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="home_greeting_2">Listo para facer as aplicacións lexendarias de novo?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <string name="home_greeting_3">Abroche o cinto, é a hora dos parches</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="home_greeting_4">Outro día máis, outra obra mestra con bloqueo de anuncios</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="home_greeting_5">Quere ver anuncios? Eu tampouco</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="home_greeting_6">Faga que as súas aplicacións se comporten</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="home_greeting_7">Previsión do día: 100% de probabilidade de parcheo</string>
     <!-- From mediocrity to amazing -->
+    <string name="home_greeting_8">Listo para transformar o mediocre en algo incrible?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="home_greeting_9">Salvando as aplicacións de si mesmas dende hoxe</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="home_greeting_10">Propulsado por cafeína e bos parches</string>
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">Fonte de parches</string>
+    <string name="sources_management_open_in_browser">Abrir no navegador</string>
+    <string name="sources_management_failed_to_open_url">Erro ao abrir o URL</string>
+    <string name="sources_management_prerelease_toggle">Empregar versións preliminares dos parches</string>
+    <string name="sources_management_prerelease_toggle_description">Recibir acceso anticipado a novas versións experimentales dos parches</string>
+    <string name="sources_management_already_exists">Esta fonte xa foi engadida</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">Nome a amosar</string>
+    <string name="sources_dialog_rename">Renomear fonte do parche</string>
+    <string name="sources_dialog_duplicate_name_error">Unha fonte de parches con este nome xa existe</string>
+    <string name="sources_dialog_missing_error">Non se puido actualizar esta fonte de parches</string>
+    <string name="sources_dialog_view_any_version">Calquera versión</string>
+    <string name="sources_dialog_view_any_package">Calquera paquete</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <!-- Home Screen - Dialog 3: File Picker Prompt -->

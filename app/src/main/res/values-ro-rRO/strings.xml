@@ -4,7 +4,6 @@
     <string name="home_other_apps">Alte aplicații</string>
     <string name="home_not_patched_yet">Nu este actualizat încă</string>
     <string name="home_no_patches_available">Nu există patch-uri disponibile</string>
-    <string name="home_default_source_disabled">Sursa Morphe este dezactivată. Vă rugăm să o activați în foaia Surselor de patch sau să utilizați modul Expert</string>
     <string name="home_app_hide_title">Ascunde această aplicație?</string>
     <string name="home_app_hide_message">Această aplicație va fi ascunsă de ecranul principal. Poți restaura-o mai târziu folosind butonul \'%1$s\' de la fundul listei</string>
     <string name="home_app_will_be_hidden">Această aplicație va fi ascunsă</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Selectează APK</string>
     <string name="home_select_any_apk_description">Apasa butonul de mai jos pentru a selecta un fișier APK al oricărei aplicații pentru patchare</string>
     <string name="home_invalid_apk">Fișier APK invalid</string>
-    <string name="home_no_patches_for_app">Nu există patch-uri disponibile pentru această aplicație</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
     <string name="expert_mode_search">Caută patch-uri</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
-    <string name="expert_mode_no_patches">Nu există patch-uri disponibile</string>
     <string name="expert_mode_universal_patches">Patch-uri universale</string>
     <string name="expert_mode_multiple_sources_warning_title">Sursă de modificare multiplă selectată</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ați selectat modificări din surse de modificare multiple. Acest lucru poate cauza probleme de compatibilitate sau comportament neașteptat.

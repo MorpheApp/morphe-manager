@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ezkrifên din</string>
     <string name="home_not_patched_yet">Henda ne paqijkirin</string>
     <string name="home_no_patches_available">Paqijî ne hebin.</string>
-    <string name="home_default_source_disabled">Guherîna patch sehkirî tê astênî. Ji bo Patch sorcê hayiyan bîn \'Sərçen\' î yo ey li \'Expert mode\' biqewmê</string>
     <string name="home_app_hide_title">Epp şifre bike?</string>
     <string name="home_app_hide_message">Epp ji leşkeriyê vê zanîna Kilê bê. Tu wê radeye sererît bêmezinî rokişiye ku pêşîtegiya \'%1$s\' piştê hilvedana li vê qasetan biçe.</string>
     <string name="home_app_will_be_hidden">Epp şifre be</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">APK safînak</string>
     <string name="home_select_any_apk_description">Seroki pêşniyar be ku APK entê antî ek şêwaziyê sazkirinê ji her aplikasyonê pêş andazeşîne</string>
     <string name="home_invalid_apk">Dosya APK ne sazbûne</string>
-    <string name="home_no_patches_for_app">Ji bo ev aplikasyon ne paqejî peyivin</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Ferman ekspertê</string>
     <string name="expert_mode_search">Paqejî bîne lêgeran</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Hemû çêbake</string>
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
-    <string name="expert_mode_no_patches">Paqejî te hebin</string>
     <string name="expert_mode_universal_patches">Pêtên hevpar.</string>
     <string name="expert_mode_multiple_sources_warning_title">Berî çend seyarên bejna tê</string>
     <string name="expert_mode_multiple_sources_warning_message">"Hûn bejna seyarê berî çendan bejna kirin. Gûma serdebaza pêşçuna bêgîri azre be."</string>

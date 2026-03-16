@@ -4,7 +4,6 @@
     <string name="home_other_apps">Другие приложения</string>
     <string name="home_not_patched_yet">Еще не пропатчено</string>
     <string name="home_no_patches_available">Нет доступных патчей</string>
-    <string name="home_default_source_disabled">Источник патчей Morphe отключен. Включите его в списке источников патчей или воспользуйтесь режимом эксперта</string>
     <string name="home_app_hide_title">Скрыть это приложение?</string>
     <string name="home_app_hide_message">Это приложение будет скрыто с главного экрана. Вы можете восстановить его позже, нажав кнопку \'%1$s\' внизу списка.</string>
     <string name="home_app_will_be_hidden">Это приложение будет скрыто</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Выбрать APK</string>
     <string name="home_select_any_apk_description">Нажмите кнопку ниже, чтобы выбрать APK файл любого приложения для патчинга</string>
     <string name="home_invalid_apk">Недопустимый файл APK</string>
-    <string name="home_no_patches_for_app">Нет доступных патчей для этого приложения</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим эксперта</string>
     <string name="expert_mode_search">Поиск патчей</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
-    <string name="expert_mode_no_patches">Нет доступных патчей</string>
     <string name="expert_mode_universal_patches">Универсальные патчи</string>
     <string name="expert_mode_multiple_sources_warning_title">Выбрано несколько источников патчей</string>
     <string name="expert_mode_multiple_sources_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
@@ -337,7 +334,7 @@
     <string name="settings_advanced_updates">Обновления</string>
     <string name="settings_advanced_updates_use_prereleases">Использовать предварительную версию Morphe</string>
     <string name="settings_advanced_updates_use_prereleases_description">Получите ранний доступ к новым функциям Morphe. Чтобы получить пред релиз патчи, включите переключатель пред релиз в каждом источнике патчей отдельно</string>
-    <string name="settings_advanced_updates_allow_metered">Обновление от мобильного трафика</string>
+    <string name="settings_advanced_updates_allow_metered">Обновление от мобильных данных</string>
     <string name="settings_advanced_updates_allow_metered_description">Разрешить загрузку обновлений Morphe и патчей через мобильные данные</string>
     <string name="settings_advanced_updates_background_notifications">Уведомления о фоновых обновлениях</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодически проверять наличие обновлений в фоновом режиме и сообщать об их доступности</string>

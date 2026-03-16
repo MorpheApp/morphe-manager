@@ -4,7 +4,6 @@
     <string name="home_other_apps">Άλλες εφαρμογές</string>
     <string name="home_not_patched_yet">Δεν τροποιήθηκε ακόμα</string>
     <string name="home_no_patches_available">Δεν υπάρχουν διαθέσιμες τροποποιήσεις</string>
-    <string name="home_default_source_disabled">Η πηγή τροποποιήσεων Morphe είναι απενεργοποιημένη. Παρακαλώ ενεργοποιήστε την στη φύλλα Πηγών τροποποιήσεων ή χρησιμοποιήστε τη λειτουργία Ειδικού</string>
     <string name="home_app_hide_title">Απόκρυψη εφαρμογής;</string>
     <string name="home_app_hide_message">Η εφαρμογή θα κρυφτεί από την οθόνη του σπιτιού. Μπορείτε να την επαναφέρετε αργότερα χρησιμοποιώντας το κουμπί ‘%1$s’ στο κάτω μέρος της λίστας.</string>
     <string name="home_app_will_be_hidden">Η εφαρμογή θα κρυφτεί</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Επιλογή APK</string>
     <string name="home_select_any_apk_description">Κάντε κλικ στο κουμπί παρακάτω για να επιλέξετε ένα αρχείο APK οποιουδήποτε εφαρμογής για επεξεργασία</string>
     <string name="home_invalid_apk">Αρχείο APK μη έγκυρο</string>
-    <string name="home_no_patches_for_app">Δεν υπάρχουν επεξεργασίες διαθέσιμες για αυτήν την εφαρμογή</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Επιτυχημένος τρόπος</string>
     <string name="expert_mode_search">Αναζήτηση επεξεργασιών</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Απενεργοποιήστε όλα</string>
     <string name="expert_mode_enable_all">Ενεργοποιήστε όλα</string>
     <string name="expert_mode_no_results">Δεν βρέθηκαν επεξεργασίες</string>
-    <string name="expert_mode_no_patches">Δεν υπάρχουν επεξεργασίες διαθέσιμες</string>
     <string name="expert_mode_universal_patches">Παγκόσμιες ενημερώσεις</string>
     <string name="expert_mode_multiple_sources_warning_title">Επιλέχτηκαν πολλαπλές πηγές αναθεώρησης</string>
     <string name="expert_mode_multiple_sources_warning_message">"Επιλέξατε αναθεώρηση από πολλαπλές πηγές. Αυτό μπορεί να προκαλέσει προβλήματα συμβατότητας ή άγνωστο συμπεριφορά.

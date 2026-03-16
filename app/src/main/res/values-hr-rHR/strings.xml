@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ostale aplikacije</string>
     <string name="home_not_patched_yet">Još nije patchano</string>
     <string name="home_no_patches_available">Nema dostupnih patcheva</string>
-    <string name="home_default_source_disabled">Izvor Morphe patcha je onemogućen. Molimo omogućite ga u listi Izvora patcheva ili koristite Napredni način rada.</string>
     <string name="home_app_hide_title">Sakriti ovu aplikaciju?</string>
     <string name="home_app_hide_message">Ova će aplikacija biti skrivena s početnog zaslona. Kasnije je možete vratiti pomoću tipke \'%1$s\' na dnu popisa</string>
     <string name="home_app_will_be_hidden">Ova će aplikacija biti skrivena</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Odaberite aplikaciju</string>
     <string name="home_select_any_apk_description">Dodirnite tipku ispod za odabir aplikacije bilo koje aplikacije za umetanje patcha</string>
     <string name="home_invalid_apk">Nevažeća aplikacija</string>
-    <string name="home_no_patches_for_app">Nema dostupnih patcheva za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Napredni način</string>
     <string name="expert_mode_search">Pretraživanje patcheva</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patcheva</string>
-    <string name="expert_mode_no_patches">Nema dostupnih patcheva</string>
     <string name="expert_mode_universal_patches">Univerzalni patchevi</string>
     <string name="expert_mode_multiple_sources_warning_title">Odabrano više izvora patcheva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Odabrali ste patcheve iz više izvora. To može uzrokovati probleme s kompatibilnošću ili neočekivano ponašanje.
@@ -144,6 +141,9 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="patch_option_enter_number">Unesite broj</string>
     <string name="patch_option_enter_decimal">Unesite decimalu</string>
     <string name="patch_option_pick_folder">Odaberite mapu</string>
+    <string name="patch_option_list_duplicate">Ova vrijednost već postoji</string>
+    <string name="patch_option_list_empty">Vrijednost ne može biti prazna</string>
+    <string name="patch_option_list_empty_state">Još nema dodanih vrijednosti</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Stvori adaptivnu ikonu</string>
     <string name="adaptive_icon_instructions">Odaberite sliku u prvom planu, odaberite boju pozadine i prilagodite pregled gestama zumiranja štipanjem prstiju</string>

@@ -4,7 +4,6 @@
     <string name="home_other_apps">Andere Apps</string>
     <string name="home_not_patched_yet">Noch nicht gepatcht</string>
     <string name="home_no_patches_available">Keine Patches verfügbar</string>
-    <string name="home_default_source_disabled">Die Morphe-Patch-Quelle ist deaktiviert. Bitte aktivieren Sie sie im Patch-Quellenblatt oder verwenden Sie den Expertenmodus.</string>
     <string name="home_app_hide_title">Diese App ausblenden?</string>
     <string name="home_app_hide_message">Diese App wird vom Home-Bildschirm ausgeblendet. Sie können sie später über die Schaltfläche \'%1$s\' unten auf der Liste wiederherstellen.</string>
     <string name="home_app_will_be_hidden">Diese App wird ausgeblendet</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Wähle APK</string>
     <string name="home_select_any_apk_description">Tippe auf die Schaltfläche unten, um eine APK-Datei jeder App zum Patchen auszuwählen</string>
     <string name="home_invalid_apk">Ungültige APK-Datei</string>
-    <string name="home_no_patches_for_app">Keine Patches verfügbar für diese App</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-Modus</string>
     <string name="expert_mode_search">Suche nach Patches</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
     <string name="expert_mode_enable_all">Aktiviere alle</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
-    <string name="expert_mode_no_patches">Keine Patches verfügbar</string>
     <string name="expert_mode_universal_patches">Universelle Patches</string>
     <string name="expert_mode_multiple_sources_warning_title">Mehrere Patchquellen ausgewählt</string>
     <string name="expert_mode_multiple_sources_warning_message">"Sie haben Patches aus mehreren Quellen ausgewählt. Dies kann Kompatibilitätsprobleme oder unerwartetes Verhalten verursachen.

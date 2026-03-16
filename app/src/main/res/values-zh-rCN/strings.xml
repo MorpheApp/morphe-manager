@@ -4,7 +4,6 @@
     <string name="home_other_apps">其他应用</string>
     <string name="home_not_patched_yet">尚未修补</string>
     <string name="home_no_patches_available">无可用更新</string>
-    <string name="home_default_source_disabled">Morphe 补丁源已禁用。请在“补丁源”工作表中启用它或使用“专家模式”。</string>
     <string name="home_app_hide_title">隐藏此应用？</string>
     <string name="home_app_hide_message">此应用将从主屏幕隐藏。您可以稍后使用列表底部的“%1$s”按钮恢复它。</string>
     <string name="home_app_will_be_hidden">此应用将被隐藏</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">选择APK</string>
     <string name="home_select_any_apk_description">点击下方按钮选择任何应用的APK文件进行修补</string>
     <string name="home_invalid_apk">无效的APK文件</string>
-    <string name="home_no_patches_for_app">此应用无补丁记录</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">高级模式</string>
     <string name="expert_mode_search">搜索补丁</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
-    <string name="expert_mode_no_patches">无可用更新</string>
     <string name="expert_mode_universal_patches">通用补丁</string>
     <string name="expert_mode_multiple_sources_warning_title">已选择多个补丁源</string>
     <string name="expert_mode_multiple_sources_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意想不到的行为。

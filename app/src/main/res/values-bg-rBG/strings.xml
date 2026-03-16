@@ -4,7 +4,6 @@
     <string name="home_other_apps">Други приложения</string>
     <string name="home_not_patched_yet">Все още не е патчено</string>
     <string name="home_no_patches_available">Няма достъпни пачове</string>
-    <string name="home_default_source_disabled">Източникът на Морфе е изключен. Моля, включете го в листа с източници или използвайте Режим експерт.</string>
     <string name="home_app_hide_title">Скриване на това приложение?</string>
     <string name="home_app_hide_message">Това приложение ще бъде скрито от екрана \"Домашния екран\". Можете да го възстановите по-късно с помощта на бутона \"%1$s\" в долната част на списъка.</string>
     <string name="home_app_will_be_hidden">Това приложение ще бъде скрито.</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Избор на APK</string>
     <string name="home_select_any_apk_description">Натиснете бутона отдолу, за да изберете APK файл на всякакви приложения за пачове</string>
     <string name="home_invalid_apk">Невалиден APK файл</string>
-    <string name="home_no_patches_for_app">Няма достъпни пачове за това приложение</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим на експерт</string>
     <string name="expert_mode_search">Търсене на пачове</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Изключи всички</string>
     <string name="expert_mode_enable_all">Включи всички</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
-    <string name="expert_mode_no_patches">Няма достъпни пачове</string>
     <string name="expert_mode_universal_patches">Универсални пачове</string>
     <string name="expert_mode_multiple_sources_warning_title">Избрани са патове от различни източници</string>
     <string name="expert_mode_multiple_sources_warning_message">"Избрахте патове от различни източници. Това може да доведе до съвместимост проблеми или непредвидимо поведение.

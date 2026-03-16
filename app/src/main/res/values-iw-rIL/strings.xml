@@ -4,7 +4,6 @@
     <string name="home_other_apps">אפליקציות אחרות</string>
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
-    <string name="home_default_source_disabled">הסourse של Morphe מושבת. אנא אפשרו אותה ברשימת Sourse או השתמשו במצב של מומחה</string>
     <string name="home_app_hide_title">הסתר את האפליקציה הזו?</string>
     <string name="home_app_hide_message">האפליקציה תהיה מוסתרת מהתפריט הראשי. תוכל להחזיר אותה מאוחר יותר באמצעות הכפתור \'%1$s\' שבתחתית הרשימה</string>
     <string name="home_app_will_be_hidden">האפליקציה תהיה מוסתרת</string>
@@ -109,7 +108,6 @@
     <string name="home_select_apk_title">בחר APK</string>
     <string name="home_select_any_apk_description">לחץ על הכפתור למטה כדי לבחור קובץ APK של כל אפליקציה לתיקון</string>
     <string name="home_invalid_apk">קובץ APK לא חוקי</string>
-    <string name="home_no_patches_for_app">אין תיקונים זמינים עבור אפליקציה זו</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">מצב מומחה</string>
     <string name="expert_mode_search">חפש תיקונים</string>
@@ -117,7 +115,6 @@
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_enable_all">הפעל את כולם</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
-    <string name="expert_mode_no_patches">אין תיקונים זמינים</string>
     <string name="expert_mode_universal_patches">עדכונים אוניברסליים</string>
     <string name="expert_mode_multiple_sources_warning_title">נבחרו מקורות ציורים מרובים</string>
     <string name="expert_mode_multiple_sources_warning_message">"בחרת בקבצי ציורים ממקורות מרובים. זה עשוי לגרום למחלוקות תאימות או התנהגות בלתי צפויה.

@@ -4,7 +4,6 @@
     <string name="home_other_apps">그 외의 앱</string>
     <string name="home_not_patched_yet">아직 패치되지 않음</string>
     <string name="home_no_patches_available">사용 가능한 패치 없음</string>
-    <string name="home_default_source_disabled">Morphe 패치 소스가 비활성화되어 있습니다. 패치 소스 시트에서 활성화하거나 전문가 모드를 사용하세요</string>
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
     <string name="home_app_hide_message">이 앱이 홈 화면에서 숨겨집니다. 나중에 목록 하단에 있는 \'%1$s\' 버튼을 사용하여 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">APK 선택</string>
     <string name="home_select_any_apk_description">아래 버튼을 탭하여 패치할 앱의 APK 파일을 선택하세요</string>
     <string name="home_invalid_apk">APK 파일이 잘못되었습니다</string>
-    <string name="home_no_patches_for_app">이 앱에 사용 가능한 패치가 없습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
-    <string name="expert_mode_no_patches">사용 가능한 패치가 없습니다</string>
     <string name="expert_mode_universal_patches">유니버셜 패치</string>
     <string name="expert_mode_multiple_sources_warning_title">여러 패치 소스가 선택됨</string>
     <string name="expert_mode_multiple_sources_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.

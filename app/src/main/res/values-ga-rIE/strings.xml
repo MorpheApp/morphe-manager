@@ -4,7 +4,6 @@
     <string name="home_other_apps">Aipeanna eile</string>
     <string name="home_not_patched_yet">Gan paisteáil fós</string>
     <string name="home_no_patches_available">Níl aon phaistí ar fáil</string>
-    <string name="home_default_source_disabled">Tá foinse paiste Morphe díchumasaithe. Cumasaigh é sa bhileog Foinsí Paiste nó bain úsáid as mód Saineolaí.</string>
     <string name="home_app_hide_title">An bhfuil tú ag iarraidh an aip seo a cheilt?</string>
     <string name="home_app_hide_message">Beidh an aip seo i bhfolach ón scáileán baile. Is féidir leat í a athchóiriú níos déanaí trí úsáid a bhaint as an gcnaipe \'%1$s\' ag bun an liosta.</string>
     <string name="home_app_will_be_hidden">Beidh an aip seo i bhfolach</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Roghnaigh APK</string>
     <string name="home_select_any_apk_description">Beartaigh an cnaipe thíos chun comhad APK d\'aon aip a roghnú le haghaidh paisteála.</string>
     <string name="home_invalid_apk">Comhad APK neamhbhailí</string>
-    <string name="home_no_patches_for_app">Níl aon phaistí ar fáil don aip seo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mód saineolaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
-    <string name="expert_mode_no_patches">Níl aon phaistí ar fáil</string>
     <string name="expert_mode_universal_patches">Paistí uilíocha</string>
     <string name="expert_mode_multiple_sources_warning_title">Ilfhoinsí paiste roghnaithe</string>
     <string name="expert_mode_multiple_sources_warning_message">"Tá paistí roghnaithe agat ó fhoinsí éagsúla paistí. D’fhéadfadh fadhbanna comhoiriúnachta nó iompar gan choinne a bheith mar thoradh air seo.

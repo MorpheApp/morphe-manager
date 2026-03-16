@@ -4,7 +4,6 @@
     <string name="home_other_apps">अन्य ऐप्स</string>
     <string name="home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
-    <string name="home_default_source_disabled">मorphe पैच स्रोत अक्षम है। पैच स्रोत शीट में या एक्सपर्ट मोड का उपयोग करके इसे सक्रिय करें</string>
     <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
     <string name="home_app_hide_message">यह ऐप होम स्क्रीन से छिपा दिया जाएगा। आप सूची के निचले भाग में मौजूद \'%1$s\' बटन का उपयोग करके बाद में इसे पुनर्स्थापित कर सकते हैं।</string>
     <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">APK चुनें</string>
     <string name="home_select_any_apk_description">पैचिंग के लिए किसी भी ऐप के लिए APK फ़ाइल चुनने के लिए नीचे दिए गए बटन पर टैप करें</string>
     <string name="home_invalid_apk">अवैध APK फ़ाइल</string>
-    <string name="home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">एक्सपर्ट मोड</string>
     <string name="expert_mode_search">पैच खोजें</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
-    <string name="expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
     <string name="expert_mode_universal_patches">सार्वभौमिक पैच</string>
     <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
     <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।

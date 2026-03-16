@@ -4,7 +4,6 @@
     <string name="home_other_apps">تطبيقات أخرى</string>
     <string name="home_not_patched_yet">لم يتم تعديله بعد</string>
     <string name="home_no_patches_available">لا يوجد تعديلات متاحة</string>
-    <string name="home_default_source_disabled">مصدر تعديل Morphe معطل. يرجى تمكينه في صفحة مصادر التعديل أو استخدام وضع الخبير</string>
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
     <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا باستخدام الزر \'%1$s\' في أسفل القائمة.</string>
     <string name="home_app_will_be_hidden">سيتم إخفاء هذا التطبيق</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">تحديد ملف APK</string>
     <string name="home_select_any_apk_description">انقر على الزر أدناه لتحديد ملف APK لأي تطبيق لتعديله</string>
     <string name="home_invalid_apk">ملف APK غير صالح</string>
-    <string name="home_no_patches_for_app">لا يوجد تعديلات متاحة لهذا التطبيق</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">وضع الخبير</string>
     <string name="expert_mode_search">البحث عن التعديلات</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">تعطيل الكل</string>
     <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
-    <string name="expert_mode_no_patches">لا يوجد تعديلات متاحة</string>
     <string name="expert_mode_universal_patches">التعديلات الشاملة</string>
     <string name="expert_mode_multiple_sources_warning_title">تم تحديد مصادر تعديل متعددة</string>
     <string name="expert_mode_multiple_sources_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.

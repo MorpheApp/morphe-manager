@@ -4,7 +4,6 @@
     <string name="home_other_apps">Andere apps</string>
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
-    <string name="home_default_source_disabled">De Morphe-patchbron is uitgeschakeld. Schakel deze in via het tabblad Patchbronnen of gebruik de Expertmodus.</string>
     <string name="home_app_hide_title">Verberg deze app?</string>
     <string name="home_app_hide_message">Deze app wordt verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop \'%1$s\' onderaan de lijst.</string>
     <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Selecteer APK</string>
     <string name="home_select_any_apk_description">Tik op de knop hieronder om een APK-bestand van een app te selecteren voor het patchen.</string>
     <string name="home_invalid_apk">Ongeldig APK-bestand</string>
-    <string name="home_no_patches_for_app">Geen patches beschikbaar voor deze app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
     <string name="expert_mode_search">Zoek patches</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
     <string name="expert_mode_enable_all">Alles inschakelen</string>
     <string name="expert_mode_no_results">Geen patches gevonden</string>
-    <string name="expert_mode_no_patches">Geen patches beschikbaar</string>
     <string name="expert_mode_universal_patches">Universele patches</string>
     <string name="expert_mode_multiple_sources_warning_title">Meerdere patch-bronnen geselecteerd</string>
     <string name="expert_mode_multiple_sources_warning_message">"U heeft patches geselecteerd van meerdere patch-bronnen. Dit kan compatibiliteitsproblemen of onverwachte gedrag veroorzaken.

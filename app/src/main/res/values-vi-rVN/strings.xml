@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ứng dụng khác</string>
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
-    <string name="home_default_source_disabled">Nguồn Morphe đang bị tắt. Vui lòng bật trong bảng nguồn vá hoặc bật Chế độ chuyên gia</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
     <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi màn hình chính. Bạn có thể khôi phục lại bằng nút \'%1$s\' ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Chọn APK</string>
     <string name="home_select_any_apk_description">Bấm nút bên dưới để chọn tệp APK của bất kỳ ứng dụng nào để vá</string>
     <string name="home_invalid_apk">Tệp APK không đúng</string>
-    <string name="home_no_patches_for_app">Không có bản vá nào cho ứng dụng này</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
     <string name="expert_mode_search">Tìm kiếm</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
-    <string name="expert_mode_no_patches">Không có bản vá nào</string>
     <string name="expert_mode_universal_patches">Bản vá phổ quát</string>
     <string name="expert_mode_multiple_sources_warning_title">Đã chọn nhiều nguồn vá</string>
     <string name="expert_mode_multiple_sources_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
@@ -144,9 +141,9 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patch_option_enter_number">Nhập số</string>
     <string name="patch_option_enter_decimal">Nhập số thập phân</string>
     <string name="patch_option_pick_folder">Chọn thư mục</string>
-    <string name="patch_option_list_duplicate">Giá trị này đã tồn tại</string>
-    <string name="patch_option_list_empty">Giá trị không được để trống</string>
-    <string name="patch_option_list_empty_state">Chưa có giá trị nào được thêm</string>
+    <string name="patch_option_list_duplicate">Giá trị này đã tồn tại rồi</string>
+    <string name="patch_option_list_empty">Không được để trống</string>
+    <string name="patch_option_list_empty_state">Chưa thêm giá trị nào</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Tạo biểu tượng thích ứng</string>
     <string name="adaptive_icon_instructions">Chọn ảnh tiền cảnh, chọn màu nền, và điều chỉnh bằng cách chụm để thu phóng</string>

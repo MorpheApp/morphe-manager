@@ -4,7 +4,6 @@
     <string name="home_other_apps">Inne aplikacje</string>
     <string name="home_not_patched_yet">Jeszcze niezmodyfikowana</string>
     <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
-    <string name="home_default_source_disabled">Źródło modyfikacji Morphe jest wyłączone. Włącz je w sekcji Źródła modyfikacji lub skorzystaj z trybu eksperckiego</string>
     <string name="home_app_hide_title">Ukryć tę aplikację?</string>
     <string name="home_app_hide_message">Ta aplikacja zostanie ukryta z ekranu głównego. Możesz ją przywrócić później, używając przycisku \"%1$s\" na dole listy</string>
     <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Wybierz plik APK</string>
     <string name="home_select_any_apk_description">Stuknij przycisk poniżej, aby wybrać plik APK dowolnej aplikacji do modyfikacji</string>
     <string name="home_invalid_apk">Nieprawidłowy plik APK</string>
-    <string name="home_no_patches_for_app">Brak dostępnych modyfikacji dla tej aplikacji</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Tryb ekspercki</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
     <string name="expert_mode_no_results">Brak znalezionych modyfikacji</string>
-    <string name="expert_mode_no_patches">Brak dostępnych modyfikacji</string>
     <string name="expert_mode_universal_patches">Uniwersalne modyfikacje</string>
     <string name="expert_mode_multiple_sources_warning_title">Wybrano wiele źródeł modyfikacji</string>
     <string name="expert_mode_multiple_sources_warning_message">"Wybrano modyfikacje z wielu źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane działanie aplikacji.
@@ -146,7 +143,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patch_option_pick_folder">Wybierz folder</string>
     <string name="patch_option_list_duplicate">Ta wartość już istnieje</string>
     <string name="patch_option_list_empty">Wartość nie może być pusta</string>
-    <string name="patch_option_list_empty_state">Jeszcze nie dodano żadnych wartości</string>
+    <string name="patch_option_list_empty_state">Nie dodano jeszcze żadnych wartości</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Utwórz ikonę adaptacyjną</string>
     <string name="adaptive_icon_instructions">Wybierz obraz pierwszego planu, wybierz kolor tła i dostosuj podgląd za pomocą gestów uszczypnięcia</string>

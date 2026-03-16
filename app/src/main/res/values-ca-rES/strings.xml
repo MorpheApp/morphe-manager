@@ -4,7 +4,6 @@
     <string name="home_other_apps">Altres aplicacions</string>
     <string name="home_not_patched_yet">Encara no s\'ha aplicat la correcció</string>
     <string name="home_no_patches_available">No hi ha pegats disponibles</string>
-    <string name="home_default_source_disabled">La font de \'Morphe\' està deshabilitada. Si us plau, habiliteu-la al full de fonts de pegats o utilitzeu el mode Expert</string>
     <string name="home_app_hide_title">Amagar aquesta aplicació?</string>
     <string name="home_app_hide_message">L\'aplicació s\'ocultarà de la pantalla d\'inici. Podeu restaurar-la més endavant utilitzant el botó \'%1$s\' a la part inferior de la llista</string>
     <string name="home_app_will_be_hidden">Aquesta aplicació s\'ocultarà</string>
@@ -67,7 +66,6 @@
     <string name="home_download_instructions_step3_mount">Espereu que la descàrrega s\'acabi, i llavors&lt;b&gt;instal·leu l\'APK&lt;/b&gt;</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_no_patches">No hi ha pegats disponibles</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- Patch Options -->
     <string name="patch_option_instructions">Instruccions</string>

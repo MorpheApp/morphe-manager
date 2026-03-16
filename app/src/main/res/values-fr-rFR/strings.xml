@@ -4,7 +4,6 @@
     <string name="home_other_apps">Autres applications</string>
     <string name="home_not_patched_yet">Pas encore patchée</string>
     <string name="home_no_patches_available">Aucuns patchs disponibles</string>
-    <string name="home_default_source_disabled">La source de patch Morphe est désactivée. Veuillez l\'activer dans l\'onglet Sources de patch ou utiliser le mode Expert</string>
     <string name="home_app_hide_title">Masquer cette application ?</string>
     <string name="home_app_hide_message">Cette application sera masquée de l’écran d’accueil. Vous pourrez la restaurer plus tard en utilisant le bouton \'%1$s\' en bas de la liste</string>
     <string name="home_app_will_be_hidden">Cette application sera masquée</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Sélectionner un APK</string>
     <string name="home_select_any_apk_description">Appuyez sur le bouton ci-dessous pour sélectionner un fichier APK de n\'importe quelle application à patcher</string>
     <string name="home_invalid_apk">Fichier APK invalide</string>
-    <string name="home_no_patches_for_app">Aucuns patchs disponibles pour cette application</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode Expert</string>
     <string name="expert_mode_search">Rechercher des patchs</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
-    <string name="expert_mode_no_patches">Aucuns patchs disponibles</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
     <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
@@ -146,7 +143,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patch_option_pick_folder">Choisir un dossier</string>
     <string name="patch_option_list_duplicate">Cette valeur existe déjà</string>
     <string name="patch_option_list_empty">La valeur ne peut pas être vide</string>
-    <string name="patch_option_list_empty_state">Aucune valeur ajoutée pour le moment</string>
+    <string name="patch_option_list_empty_state">Pas de valeur ajoutée pour le moment</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Créer une icône adaptative</string>
     <string name="adaptive_icon_instructions">Choisissez une image de premier plan, sélectionnez une couleur d’arrière-plan et ajustez l’aperçu à l’aide des gestes de pincement pour zoomer</string>

@@ -4,7 +4,6 @@
     <string name="home_other_apps">Друге апликације</string>
     <string name="home_not_patched_yet">Još није исправљено</string>
     <string name="home_no_patches_available">Нema печева доступно</string>
-    <string name="home_default_source_disabled">Morphe patch izvor je isključen. Molimo uključite ga u listi Patch izvora ili koristite Expert mod</string>
     <string name="home_app_hide_title">Sakrij ovu aplikaciju?</string>
     <string name="home_app_hide_message">Ova aplikacija će biti sakrivena sa početnog ekrana. Možete je kasnije vratiti koristeći dugme \'%1$s\' na dnu liste.</string>
     <string name="home_app_will_be_hidden">Ova aplikacija će biti sakrivena</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Изаберите APK</string>
     <string name="home_select_any_apk_description">Кликните на дугме испод да изаберете APK фајл било ког апликација за печеве</string>
     <string name="home_invalid_apk">Невалидан APK фајл</string>
-    <string name="home_no_patches_for_app">Нema печева доступно за ову апликацију</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експерт мод</string>
     <string name="expert_mode_search">Претражи печеве</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
-    <string name="expert_mode_no_patches">Нema печева доступно</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
     <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
     <string name="expert_mode_multiple_sources_warning_message">"Одабрали сте патчеве из више извора. Може да дође до проблема са компатибилношћу или неочекиваног понашања.

@@ -4,7 +4,6 @@
     <string name="home_other_apps">Aplikasi lainnya</string>
     <string name="home_not_patched_yet">Belum ditambal</string>
     <string name="home_no_patches_available">Tidak ada tambalan yang tersedia</string>
-    <string name="home_default_source_disabled">Sumber tambalan Morphe dinonaktifkan. Silahkan aktifkan di kolom sumber Tambalan atau gunakan Mode Ahli</string>
     <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
     <string name="home_app_hide_message">Aplikasi ini akan disembunyikan dari layar utama. Anda dapat memulihkannya lagi menggunakan tombol \'%1$s\' di bagian bawah daftar.</string>
     <string name="home_app_will_be_hidden">Aplikasi ini akan disembunyikan.</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Pilih APK</string>
     <string name="home_select_any_apk_description">Ketuk tombol di bawah untuk memilih berkas APK apapun untuk ditambal</string>
     <string name="home_invalid_apk">Berkas APK tidak sah</string>
-    <string name="home_no_patches_for_app">Tidak ada tambalan tersedia untuk aplikasi ini</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode ahli</string>
     <string name="expert_mode_search">Cari tambalan</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
-    <string name="expert_mode_no_patches">Tidak ada tambalan tersedia</string>
     <string name="expert_mode_universal_patches">Tambalan universal</string>
     <string name="expert_mode_multiple_sources_warning_title">Berbagai sumber tambalan telah dipilih</string>
     <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tambalan dari berbagai sumber. Hal ini dapat menyebabkan masalah kompatibilitas atau masalah yang tidak terduga.
@@ -575,7 +572,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>
     <string name="settings_system_share_website_description">Bagikan situs web resmi Morphe</string>
-    <string name="settings_system_manager_description">"Morphe adalah proyek sumber terbuka eksperimental yang berfokus pada pengembangan modern, kemudahan untuk menambal aplikasi Android populer
+    <string name="settings_system_manager_description">"Morphe adalah proyek sumber terbuka eksperimental yang berfokus pada pembuatan tambalan modern, ringkas untuk aplikasi Android populer
 
 Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan kontribusi komunitas untuk mendorong inovasi di masa depan"</string>
     <!-- Shared strings -->

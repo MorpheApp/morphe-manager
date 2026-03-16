@@ -4,7 +4,6 @@
     <string name="home_other_apps">Diğer uygulamalar</string>
     <string name="home_not_patched_yet">Henüz yamalanmadı</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
-    <string name="home_default_source_disabled">Morphe yama kaynağı devre dışı bırakıldı. Lütfen yama kaynakları sayfasında etkinleştirin veya Uzman modunu kullanın</string>
     <string name="home_app_hide_title">Uygulama gizlensin mi?</string>
     <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki \'%1$s\' düğmesini kullanarak geri getirebilirsiniz</string>
     <string name="home_app_will_be_hidden">Bu uygulama gizlenecektir</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">APK seç</string>
     <string name="home_select_any_apk_description">Herhangi bir uygulamanın APK dosyasını seçmek için aşağıdaki düğmeye tıklayın</string>
     <string name="home_invalid_apk">Geçersiz APK dosyası</string>
-    <string name="home_no_patches_for_app">Bu uygulamaya ait yama mevcut değil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Uzman modu</string>
     <string name="expert_mode_search">Yamaları ara</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Hepsini devre dışı bırak</string>
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_no_results">Yama bulunamadı</string>
-    <string name="expert_mode_no_patches">Yama mevcut değil</string>
     <string name="expert_mode_universal_patches">Evrensel yamalar</string>
     <string name="expert_mode_multiple_sources_warning_title">Çoklu yama kaynağı seçildi</string>
     <string name="expert_mode_multiple_sources_warning_message">"Birden fazla yama kaynağından yama seçtiniz. Bu, uyumluluk sorunlarına veya beklenmedik davranışlara neden olabilir.
@@ -336,7 +333,7 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Güncellemeler</string>
     <string name="settings_advanced_updates_use_prereleases">Ön sürüm Morphe kullan</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe özelliklerine erken erişim sağlayın. Ön sürüm yamalarını almak için, her yama kaynağında ayrı ayrı ön sürüm seçeneğini etkinleştirin</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe özelliklerine erken erişim sağlayın. Ön sürüm yamaları almak için, her yama kaynağında ayrı ayrı ön sürüm seçeneğini etkinleştirin</string>
     <string name="settings_advanced_updates_allow_metered">Mobil veri üzerinden güncelle</string>
     <string name="settings_advanced_updates_allow_metered_description">Morphe ve yama güncellemelerinin mobil veri üzerinden indirilmesine izin verin</string>
     <string name="settings_advanced_updates_background_notifications">Arka plan güncelleme bildirimleri</string>
@@ -421,8 +418,7 @@ Resim boyutları şu şekilde olmalıdır:
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-İsteğe bağlı olarak, dosya yolu monokrom simge dosyalarından herhangi birini içeren bir 'drawable'
-klasörü içerebilir:
+İsteğe bağlı olarak, dosya yolu monokrom simge dosyalarından herhangi birini içeren bir 'drawable' klasörü içerebilir:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
