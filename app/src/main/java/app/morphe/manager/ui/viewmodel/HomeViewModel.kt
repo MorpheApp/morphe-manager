@@ -942,6 +942,23 @@ class HomeViewModel(
             return
         }
 
+        // Check if the selected file is a split APK while the bundle requires a full APK.
+        // This must happen BEFORE signature verification — split archives (.apkm/.apks/.xapk)
+        // are not valid APKs so PackageManager cannot read their signature, which would cause
+        // a false "invalid signature" dialog instead of the correct "split APK" warning.
+        if (selectedApp is SelectedApp.Local) {
+            val requiredApkFileType = bundleAppMetadataFlow.value[selectedApp.packageName]?.apkFileType
+
+            val isSplitFile = SplitApkPreparer.isSplitArchive(selectedApp.file)
+
+            if (isSplitFile && requiredApkFileType?.isApk == true && requiredApkFileType.isRequired) {
+                pendingSelectedApp = selectedApp
+                showSplitApkWarningDialog = true
+                cleanupPendingData(keepSelectedApp = true)
+                return
+            }
+        }
+
         // Verify APK signature against the expected signatures declared in the patch bundle.
         // Only applies to locally selected files — saved APKs were already verified on first use.
         if (selectedApp is SelectedApp.Local) {
@@ -1034,21 +1051,6 @@ class HomeViewModel(
             )
             cleanupPendingData(keepSelectedApp = true)
             return
-        }
-
-        // Check if the selected file is a split APK while the bundle requires a full APK.
-        // This check only applies to locally selected files (not saved APKs).
-        if (selectedApp is SelectedApp.Local) {
-            val requiredApkFileType = enabledBundles.firstNotNullOfOrNull { it.apkFileType }
-
-            val isSplitFile = SplitApkPreparer.isSplitArchive(selectedApp.file)
-
-            if (isSplitFile && requiredApkFileType?.isApk == true && requiredApkFileType.isRequired) {
-                pendingSelectedApp = selectedApp
-                showSplitApkWarningDialog = true
-                cleanupPendingData(keepSelectedApp = true)
-                return
-            }
         }
 
         // Patches exist and are applicable → proceed.
