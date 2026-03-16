@@ -1,3 +1,10 @@
+# app [1.12.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.4...v1.12.0-dev.5) (2026-03-16)
+
+
+### Bug Fixes
+
+* Set default minimum process memory limit to 512MB ([c28aaae](https://github.com/MorpheApp/morphe-manager/commit/c28aaae9a63dbb4b0a084938ed4092cfdddb3f37))
+
 # app [1.12.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.3...v1.12.0-dev.4) (2026-03-13)
 
 
