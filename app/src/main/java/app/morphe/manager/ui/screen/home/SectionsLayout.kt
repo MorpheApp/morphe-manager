@@ -24,8 +24,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -1294,6 +1296,14 @@ fun OtherAppsSection(
 
 /**
  * Shared content layout for app cards and buttons.
+ *
+ * Uses a multi-layer frosted glass effect:
+ * - radial gradient base tinted from card colors
+ * - top-left specular shine
+ * - bottom-right warm glow from card accent color
+ * - diagonal sweep highlight
+ * - subtle horizontal frost band
+ * - gradient border
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -1309,8 +1319,14 @@ private fun AppCardLayout(
     val shape = RoundedCornerShape(24.dp)
     val view = LocalView.current
 
-    val backgroundAlpha = if (enabled) 0.7f else 0.3f
-    val borderAlpha = if (enabled) 0.85f else 0.4f
+    val contentAlpha = if (enabled) 1f else 0.45f
+    val baseColor = gradientColors.firstOrNull() ?: Color.White
+    val midColor = gradientColors.getOrElse(1) { baseColor }
+    val endColor = gradientColors.lastOrNull() ?: baseColor
+
+    // Disabled state fades everything
+    val glassAlpha      = if (enabled) 1f else 0.5f
+    val borderAlpha     = if (enabled) 1f else 0.4f
 
     BoxWithConstraints(
         modifier = modifier
@@ -1319,28 +1335,103 @@ private fun AppCardLayout(
     ) {
         val widthPx = constraints.maxWidth.toFloat().coerceAtLeast(1f)
         val heightPx = constraints.maxHeight.toFloat().coerceAtLeast(1f)
-        val gradientEnd = Offset(widthPx, heightPx)
 
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(shape)
-                .border(
-                    width = 1.5.dp,
-                    brush = Brush.linearGradient(
-                        colors = gradientColors.map { it.copy(alpha = borderAlpha) },
-                        start = Offset.Zero,
-                        end = gradientEnd
-                    ),
-                    shape = shape
-                )
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = gradientColors.map { it.copy(alpha = backgroundAlpha) },
-                        start = Offset.Zero,
-                        end = gradientEnd
+                .drawWithContent {
+                    val w  = size.width
+                    val h  = size.height
+                    val cr = CornerRadius(24.dp.toPx())
+
+                    // Layer 1: radial base - color blooms from bottom-left
+                    drawRoundRect(
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                baseColor.copy(alpha = 0.80f * glassAlpha),
+                                midColor.copy(alpha = 0.60f * glassAlpha),
+                                endColor.copy(alpha = 0.40f * glassAlpha)
+                            ),
+                            center = Offset(w * 0.15f, h * 0.85f),
+                            radius = w * 1.1f
+                        ),
+                        cornerRadius = cr
                     )
-                )
+
+                    // Layer 2: secondary radial bloom from top-right (accent)
+                    drawRoundRect(
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                endColor.copy(alpha = 0.55f * glassAlpha),
+                                midColor.copy(alpha = 0.25f * glassAlpha),
+                                Color.Transparent
+                            ),
+                            center = Offset(w * 0.88f, h * 0.12f),
+                            radius = w * 0.75f
+                        ),
+                        cornerRadius = cr
+                    )
+
+                    // Layer 3: frosted white overlay - very subtle, just adds glass texture
+                    drawRoundRect(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color.White.copy(alpha = 0.03f * glassAlpha),
+                                Color.White.copy(alpha = 0.01f * glassAlpha),
+                                Color.White.copy(alpha = 0.02f * glassAlpha)
+                            ),
+                            startY = 0f,
+                            endY = h
+                        ),
+                        cornerRadius = cr
+                    )
+
+                    // Layer 4: diagonal sweep highlight (top-left → mid) - thin specular only
+                    drawRoundRect(
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                Color.White.copy(alpha = 0.08f * glassAlpha),
+                                Color.White.copy(alpha = 0.02f * glassAlpha),
+                                Color.Transparent
+                            ),
+                            start = Offset(0f, 0f),
+                            end   = Offset(w * 0.5f, h)
+                        ),
+                        cornerRadius = cr
+                    )
+
+                    // Layer 5: bottom edge warm reflection
+                    drawRoundRect(
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                endColor.copy(alpha = 0.22f * glassAlpha)
+                            ),
+                            center = Offset(w * 0.5f, h),
+                            radius = w * 0.65f
+                        ),
+                        cornerRadius = cr
+                    )
+
+                    drawContent()
+
+                    // Border: bright top-left → faded bottom-right
+                    drawRoundRect(
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                Color.White.copy(alpha = 0.65f * borderAlpha),
+                                midColor.copy(alpha = 0.30f * borderAlpha),
+                                endColor.copy(alpha = 0.15f * borderAlpha),
+                                Color.White.copy(alpha = 0.20f * borderAlpha)
+                            ),
+                            start = Offset(0f, 0f),
+                            end   = Offset(widthPx, heightPx)
+                        ),
+                        cornerRadius = cr,
+                        style = Stroke(width = 1.5.dp.toPx())
+                    )
+                }
                 .combinedClickable(
                     enabled = enabled,
                     onClick = {
@@ -1358,7 +1449,8 @@ private fun AppCardLayout(
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    .graphicsLayer { alpha = contentAlpha },
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 content = content
