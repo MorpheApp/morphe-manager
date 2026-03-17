@@ -817,10 +817,9 @@ internal fun HideAppDialog(
                     packageInfo = item.packageInfo,
                     packageName = if (item.packageInfo == null) item.packageName else null,
                     contentDescription = null,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(RoundedCornerShape(12.dp)),
-                    preferredSource = AppDataSource.PATCHED_APK
+                    modifier = Modifier.size(60.dp),
+                    preferredSource = AppDataSource.PATCHED_APK,
+                    placeholderGradientColors = item.gradientColors
                 )
 
                 Column(
@@ -963,10 +962,9 @@ private fun HiddenAppRow(
                 packageInfo = packageInfo,
                 packageName = if (packageInfo == null) packageName else null,
                 contentDescription = null,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(10.dp)),
-                preferredSource = AppDataSource.PATCHED_APK
+                modifier = Modifier.size(40.dp),
+                preferredSource = AppDataSource.PATCHED_APK,
+                placeholderGradientColors = gradientColors
             )
 
             // App name
@@ -1045,9 +1043,7 @@ fun InstalledAppCard(
             packageInfo = packageInfo,
             packageName = installedApp.originalPackageName,
             contentDescription = null,
-            modifier = Modifier
-                .size(48.dp)
-                .clip(RoundedCornerShape(12.dp)),
+            modifier = Modifier.size(60.dp),
             preferredSource = AppDataSource.INSTALLED
         )
 
@@ -1207,10 +1203,9 @@ fun AppButton(
             packageInfo = packageInfo,
             packageName = if (packageInfo == null) packageName else null,
             contentDescription = null,
-            modifier = Modifier
-                .size(48.dp)
-                .clip(RoundedCornerShape(12.dp)),
-            preferredSource = AppDataSource.PATCHED_APK
+            modifier = Modifier.size(60.dp),
+            preferredSource = AppDataSource.PATCHED_APK,
+            placeholderGradientColors = gradientColors
         )
 
         // Text info
@@ -1453,7 +1448,9 @@ fun AppLoadingCard(
         ) {
             // Icon skeleton
             ShimmerBox(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier
+                    .size(60.dp)
+                    .padding(6.dp),
                 shape = RoundedCornerShape(12.dp),
                 baseColor = Color.White.copy(alpha = 0.2f)
             )
