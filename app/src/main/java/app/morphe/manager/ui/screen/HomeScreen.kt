@@ -18,7 +18,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
@@ -62,10 +61,15 @@ fun HomeScreen(
     // Pull to refresh state
     var isRefreshing by remember { mutableStateOf(false) }
 
+    // Get greeting message
+    var greetingMessage by remember { mutableStateOf(context.getString(HomeAndPatcherMessages.getHomeMessage(context))) }
+
     // Handle refresh with haptic feedback
     val onRefresh: () -> Unit = {
         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
         isRefreshing = true
+        HomeAndPatcherMessages.resetHomeMessage()
+        greetingMessage = context.getString(HomeAndPatcherMessages.getHomeMessage(context))
         homeViewModel.viewModelScope.launch {
             try {
                 homeViewModel.patchBundleRepository.updateCheck()
@@ -80,7 +84,6 @@ fun HomeScreen(
     // Collect state flows
     val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
     val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
     // Dynamic app items from bundles
     val homeAppItems by homeViewModel.homeAppItems.collectAsStateWithLifecycle()
@@ -134,11 +137,6 @@ fun HomeScreen(
         contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
 
-    // Update bundle data
-    LaunchedEffect(sources, bundleInfo) {
-        homeViewModel.updateBundleData(sources, bundleInfo)
-    }
-
     // Update loading state
     LaunchedEffect(bundleUpdateProgress, allInstalledApps, availablePatches) {
         val hasLoadedApps = allInstalledApps.isNotEmpty() || availablePatches > 0
@@ -190,9 +188,6 @@ fun HomeScreen(
     }
 
     var showUpdateDetailsDialog by remember { mutableStateOf(false) }
-
-    // Get greeting message
-    val greetingMessage = stringResource(HomeAndPatcherMessages.getHomeMessage(context))
 
     // Check for manager update
     val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()

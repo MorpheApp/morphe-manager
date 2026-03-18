@@ -742,15 +742,6 @@ class HomeViewModel(
     }
 
     /**
-     * No-op stub kept for source compatibility.
-     * [recommendedVersionsFlow] and [compatibleVersionsFlow] are now reactive StateFlows
-     * derived automatically from bundleInfoFlow.
-     */
-    @Deprecated("No longer needed — versions are now reactive StateFlows", level = DeprecationLevel.WARNING)
-    @Suppress("UNUSED_PARAMETER")
-    fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) = Unit
-
-    /**
      * Returns the set of experimental version strings for a package from all currently enabled bundles.
      * Derived directly from [compatibleVersions] which already contains [AppTarget] objects.
      * Used by the UI to show "Experimental" badges on specific versions.

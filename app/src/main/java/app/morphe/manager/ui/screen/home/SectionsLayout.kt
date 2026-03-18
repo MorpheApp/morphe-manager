@@ -566,14 +566,27 @@ fun GreetingSection(
     message: String
 ) {
     Box(contentAlignment = Alignment.Center) {
-        Text(
-            text = message,
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.fillMaxWidth()
-        )
+        AnimatedContent(
+            targetState = message,
+            transitionSpec = {
+                (fadeIn(animationSpec = tween(400)) +
+                        slideInVertically(animationSpec = tween(400)) { it / 4 })
+                    .togetherWith(
+                        fadeOut(animationSpec = tween(200)) +
+                                slideOutVertically(animationSpec = tween(200)) { -it / 4 }
+                    )
+            },
+            label = "greeting_transition"
+        ) { targetMessage ->
+            Text(
+                text = targetMessage,
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 

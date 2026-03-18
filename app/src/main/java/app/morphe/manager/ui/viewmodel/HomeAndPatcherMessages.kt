@@ -57,6 +57,14 @@ object HomeAndPatcherMessages {
     }
 
     /**
+     * Resets the cached greeting so the next call to [getHomeMessage] picks a new one.
+     * Called on pull-to-refresh.
+     */
+    fun resetHomeMessage() {
+        homeGreetingMessage = null
+    }
+
+    /**
      * Witty greeting message.
      */
     fun getHomeMessage(context: Context): Int {
