@@ -1292,7 +1292,7 @@ fun DeepLinkAddSourceDialog(
             ) {
                 if (owner != null) {
                     RemoteAvatar(
-                        url = "https://api.morphe.software/v2/avatar/$owner",
+                        url = "https://github.com/$owner.png",
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
