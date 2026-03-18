@@ -6,8 +6,6 @@
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
@@ -32,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -57,15 +54,13 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.ActionPillButton
 import app.morphe.manager.ui.screen.shared.InfoBadge
 import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
+import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
-import java.net.URL
 
 /**
  * Bottom sheet for managing patch bundles.
@@ -812,63 +807,5 @@ fun BundleIcon(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun RemoteAvatar(
-    url: String,
-    fallbackUrl: String? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
-) {
-    // Initialise immediately from cache
-    var bitmap by remember(url) {
-        mutableStateOf(AvatarCache[url] ?: fallbackUrl?.let { AvatarCache[it] })
-    }
-
-    LaunchedEffect(url, fallbackUrl) {
-        if (bitmap == null) {
-            bitmap = loadGitHubAvatar(url)
-                ?: fallbackUrl?.let { loadGitHubAvatar(it) }
-        }
-    }
-
-    if (bitmap != null) {
-        Image(
-            bitmap = bitmap!!.asImageBitmap(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = modifier
-        )
-    }
-}
-
-/**
- * In-memory avatar cache scoped to the process lifetime.
- */
-private object AvatarCache {
-    private val cache = mutableMapOf<String, Bitmap>()
-
-    operator fun get(url: String): Bitmap? = cache[url]
-    operator fun set(url: String, bitmap: Bitmap) { cache[url] = bitmap }
-}
-
-/**
- * Load GitHub avatar image from URL, storing the result in [AvatarCache].
- */
-private suspend fun loadGitHubAvatar(url: String): Bitmap? = withContext(Dispatchers.IO) {
-    AvatarCache[url]?.let { return@withContext it }
-    try {
-        val connection = URL(url).openConnection()
-        connection.connectTimeout = 5000
-        connection.readTimeout = 5000
-        connection.connect()
-
-        connection.getInputStream().use { input ->
-            BitmapFactory.decodeStream(input)
-        }?.also { AvatarCache[url] = it }
-    } catch (_: Exception) {
-        null
     }
 }

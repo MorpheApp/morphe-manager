@@ -12,6 +12,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
@@ -42,10 +43,12 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.*
+import java.net.URI
 
 /**
  * Container for all MorpheHomeScreen dialogs.
@@ -1279,12 +1282,30 @@ fun DeepLinkAddSourceDialog(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Icon(
-                imageVector = Icons.Outlined.Extension,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(48.dp)
-            )
+            val owner = remember(url) {
+                runCatching { URI(url).path.trim('/').split('/').firstOrNull() }.getOrNull()
+            }
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primaryContainer,
+                modifier = Modifier.size(56.dp)
+            ) {
+                if (owner != null) {
+                    RemoteAvatar(
+                        url = "https://api.morphe.software/v2/avatar/$owner",
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Outlined.Extension,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(12.dp)
+                    )
+                }
+            }
 
             Text(
                 text = stringResource(R.string.deep_link_add_source_message),
