@@ -10,7 +10,6 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -35,11 +34,12 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
-import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.network.api.MorpheAPI
+import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
+import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
@@ -62,9 +62,7 @@ import java.net.SocketTimeoutException
 import java.net.URL
 import java.net.URLEncoder.encode
 import java.security.MessageDigest
-import java.util.zip.ZipInputStream
 import javax.net.ssl.SSLException
-import kotlin.collections.sortedDescending
 import kotlin.time.Clock
 
 /**
@@ -1002,15 +1000,32 @@ class HomeViewModel(
                 cleanupPendingData(keepSelectedApp = true)
                 return
             }
-        }
 
-        // Verify APK signature against the expected signatures declared in the patch bundle.
-        // Only applies to locally selected files — saved APKs were already verified on first use.
-        if (selectedApp is SelectedApp.Local) {
+            // Verify APK signature against the expected signatures declared in the patch bundle.
+            // For split archives (.apkm/.apks/.xapk) PackageManager cannot read the signature
+            // from the zip container directly — extract the representative base APK first and
+            // verify against that. The extracted file is cleaned up immediately after.
             val expectedSignatures = bundleAppMetadataFlow.value[selectedApp.packageName]?.signatures
             if (!expectedSignatures.isNullOrEmpty()) {
                 val signatureMatch = withContext(Dispatchers.IO) {
-                    verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
+                    if (isSplitFile) {
+                        val extracted = SplitApkInspector.extractRepresentativeApk(
+                            source = selectedApp.file,
+                            workspace = filesystem.uiTempDir
+                        )
+                        if (extracted == null) {
+                            // Cannot extract base APK — skip verification rather than false-block
+                            true
+                        } else {
+                            try {
+                                verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
+                            } finally {
+                                extracted.cleanup()
+                            }
+                        }
+                    } else {
+                        verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
+                    }
                 }
                 if (!signatureMatch) {
                     pendingSelectedApp = selectedApp
@@ -1597,8 +1612,23 @@ class HomeViewModel(
             val isSplitArchive = SplitApkPreparer.isSplitArchive(tempFile)
 
             val packageInfo = if (isSplitArchive) {
-                // Extract base APK from archive and get package info
-                extractPackageInfoFromSplitArchive(context, tempFile)
+                // Extract the representative base APK and read package info from it.
+                // SplitApkInspector uses a smarter entry-selection algorithm than a naive
+                // name search: base.apk → main/master → largest non-config → fallback.
+                val extracted = SplitApkInspector.extractRepresentativeApk(
+                    source = tempFile,
+                    workspace = filesystem.uiTempDir
+                )
+                try {
+                    extracted?.let {
+                        context.packageManager.getPackageArchiveInfo(
+                            it.file.absolutePath,
+                            PackageManager.GET_META_DATA
+                        )
+                    }
+                } finally {
+                    extracted?.cleanup()
+                }
             } else {
                 // Regular APK - parse directly
                 context.packageManager.getPackageArchiveInfo(
@@ -1620,49 +1650,6 @@ class HomeViewModel(
             )
         } catch (e: Exception) {
             Log.e(tag, "Failed to load APK", e)
-            null
-        }
-    }
-
-    /**
-     * Extract package info from split APK archive (apkm, apks, xapk).
-     */
-    private fun extractPackageInfoFromSplitArchive(
-        context: Context,
-        archiveFile: File
-    ): PackageInfo? {
-        return try {
-            ZipInputStream(archiveFile.inputStream()).use { zip ->
-                var entry = zip.nextEntry
-                while (entry != null) {
-                    val name = entry.name.lowercase()
-                    // Look for base APK (usually named base.apk, or the main APK without split suffix)
-                    if (name.endsWith(".apk") &&
-                        (name.contains("base") || !name.contains("split") && !name.contains("config"))) {
-
-                        // Extract base APK to temp file
-                        val tempBaseApk = File(context.cacheDir, "temp_base_${System.currentTimeMillis()}.apk")
-                        tempBaseApk.outputStream().use { output ->
-                            zip.copyTo(output)
-                        }
-
-                        val packageInfo = context.packageManager.getPackageArchiveInfo(
-                            tempBaseApk.absolutePath,
-                            PackageManager.GET_META_DATA
-                        )
-
-                        tempBaseApk.delete()
-
-                        if (packageInfo != null) {
-                            return packageInfo
-                        }
-                    }
-                    entry = zip.nextEntry
-                }
-                null
-            }
-        } catch (e: Exception) {
-            Log.e(tag, "Failed to extract package info from split archive", e)
             null
         }
     }
