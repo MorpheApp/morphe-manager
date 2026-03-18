@@ -280,6 +280,15 @@ fun HomeDialogs(
         )
     }
 
+    // Low Disk Space warning dialog
+    if (homeViewModel.showLowDiskSpaceDialog) {
+        LowDiskSpaceDialog(
+            freeGb = homeViewModel.lowDiskSpaceFreeGb,
+            onDismiss = { homeViewModel.dismissLowDiskSpaceDialog() },
+            onPatchAnyway = { homeViewModel.dismissLowDiskSpaceDialogAndProceed() }
+        )
+    }
+
     // Expert Mode Dialog
     AnimatedVisibility(
         visible = homeViewModel.showExpertModeDialog && homeViewModel.expertModeSelectedApp != null,
@@ -1185,6 +1194,58 @@ private fun VersionListCard(
                     )
                 }
             }
+        }
+    }
+}
+
+/**
+ * Warning dialog shown before patching starts when the device has less than 1 GB of free storage.
+ */
+@Composable
+fun LowDiskSpaceDialog(
+    freeGb: Float,
+    onDismiss: () -> Unit,
+    onPatchAnyway: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_low_disk_space_dialog_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                onPrimaryClick = onPatchAnyway,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.FolderOff,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(48.dp)
+            )
+
+            Text(
+                text = stringResource(R.string.home_low_disk_space_dialog_message, freeGb),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            InfoBadge(
+                text = stringResource(R.string.home_low_disk_space_dialog_warning),
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
+            )
         }
     }
 }

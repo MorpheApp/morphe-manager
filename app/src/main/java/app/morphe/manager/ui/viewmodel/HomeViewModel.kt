@@ -14,10 +14,12 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.StatFs
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -212,6 +214,13 @@ class HomeViewModel(
     // Metered network dialog: shown when user tries to patch on mobile data with updates disabled
     var showMeteredPatchingDialog by mutableStateOf(false)
         private set
+
+    // Low disk space warning dialog: shown when < 1 GB free before patching starts
+    var showLowDiskSpaceDialog by mutableStateOf(false)
+        private set
+    var lowDiskSpaceFreeGb by mutableFloatStateOf(0f)
+        private set
+
     // Pending patching action captured when the guard dialog is shown
     private var pendingPatchAction: (suspend () -> Unit)? = null
 
@@ -319,6 +328,17 @@ class HomeViewModel(
      * Otherwise, launches [action] immediately.
      */
     fun guardPatching(action: suspend () -> Unit) {
+        // Check available storage first — low disk space is the most common cause of
+        // cryptic "file not found" errors and corrupt output APKs during patching.
+        val lowDiskSpaceThresholdGb = 1f // Minimum free storage in GB required before patching
+        val freeBytes = StatFs(app.filesDir.absolutePath).availableBytes
+        val freeGb = freeBytes / (1024f * 1024f * 1024f)
+        if (freeGb < lowDiskSpaceThresholdGb) {
+            pendingPatchAction = action
+            lowDiskSpaceFreeGb = freeGb
+            showLowDiskSpaceDialog = true
+            return
+        }
         if (isOnMeteredWithUpdatesDisabled()) {
             pendingPatchAction = action
             showMeteredPatchingDialog = true
@@ -356,6 +376,30 @@ class HomeViewModel(
      */
     fun dismissMeteredPatchingDialog() {
         showMeteredPatchingDialog = false
+        pendingPatchAction = null
+    }
+
+    /**
+     * User chose to proceed with patching despite low disk space.
+     * Continues to the metered network check if applicable, then launches the action.
+     */
+    fun dismissLowDiskSpaceDialogAndProceed() {
+        showLowDiskSpaceDialog = false
+        val action = pendingPatchAction ?: return
+        pendingPatchAction = null
+        if (isOnMeteredWithUpdatesDisabled()) {
+            pendingPatchAction = action
+            showMeteredPatchingDialog = true
+        } else {
+            viewModelScope.launch { action() }
+        }
+    }
+
+    /**
+     * User canceled patching from the low disk space dialog.
+     */
+    fun dismissLowDiskSpaceDialog() {
+        showLowDiskSpaceDialog = false
         pendingPatchAction = null
     }
 
