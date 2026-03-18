@@ -87,6 +87,7 @@ fun ExpertModeDialog(
 
             bundle to patches
         }.filter { it.second.isNotEmpty() }
+            .sortedByDescending { (bundle, _) -> bundle.compatible.size }
     }
 
     // Filter patches based on search query
