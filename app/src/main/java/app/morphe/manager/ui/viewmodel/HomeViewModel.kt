@@ -678,6 +678,7 @@ class HomeViewModel(
             .sortedWith(
                 compareByDescending<HomeAppItem> { it.installedApp != null }
                     .thenByDescending { it.isPinnedByDefault }
+                    .thenByDescending { it.packageInfo != null }
                     .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
             )
     }
