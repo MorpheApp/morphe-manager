@@ -1,3 +1,10 @@
+# app [1.12.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.5...v1.12.0-dev.6) (2026-03-19)
+
+
+### Bug Fixes
+
+* Use latest Morphe patcher ([cb53fbb](https://github.com/MorpheApp/morphe-manager/commit/cb53fbb5814d67730b7e53e940bcac49a9df671e))
+
 # app [1.12.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.4...v1.12.0-dev.5) (2026-03-16)
 
 
