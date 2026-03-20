@@ -10,8 +10,10 @@ import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.*import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -1326,11 +1328,23 @@ fun OtherAppsSection(
     val backgroundAlpha = if (isDark) 0.35f else 0.6f
     val borderAlpha = if (isDark) 0.4f else 0.6f
 
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.97f else 1f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness    = Spring.StiffnessMedium
+        ),
+        label = "other_apps_press_scale"
+    )
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 12.dp)
             .height(48.dp)
+            .graphicsLayer { scaleX = scale; scaleY = scale }
             .clip(shape)
             .background(
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
@@ -1342,7 +1356,10 @@ fun OtherAppsSection(
                 ),
                 shape = shape
             )
-            .clickable {
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {
                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 onClick()
             },
@@ -1389,137 +1406,144 @@ private fun AppCardLayout(
     val endColor = gradientColors.lastOrNull() ?: baseColor
 
     // Disabled state fades everything
-    val glassAlpha      = if (enabled) 1f else 0.5f
-    val borderAlpha     = if (enabled) 1f else 0.4f
+    val glassAlpha  = if (enabled) 1f else 0.5f
+    val borderAlpha = if (enabled) 1f else 0.4f
 
-    BoxWithConstraints(
+    // Press scale animation
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.97f else 1f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness    = Spring.StiffnessMedium
+        ),
+        label = "card_press_scale"
+    )
+
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
-    ) {
-        val widthPx = constraints.maxWidth.toFloat().coerceAtLeast(1f)
-        val heightPx = constraints.maxHeight.toFloat().coerceAtLeast(1f)
+            .graphicsLayer { scaleX = scale; scaleY = scale }
+            .clip(shape)
+            .drawWithContent {
+                val w  = size.width
+                val h  = size.height
+                val cr = CornerRadius(24.dp.toPx())
 
-        Box(
+                // Layer 1: radial base - color blooms from bottom-left
+                drawRoundRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            baseColor.copy(alpha = 0.80f * glassAlpha),
+                            midColor.copy(alpha = 0.60f * glassAlpha),
+                            endColor.copy(alpha = 0.40f * glassAlpha)
+                        ),
+                        center = Offset(w * 0.15f, h * 0.85f),
+                        radius = w * 1.1f
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 2: secondary radial bloom from top-right (accent)
+                drawRoundRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            endColor.copy(alpha = 0.55f * glassAlpha),
+                            midColor.copy(alpha = 0.25f * glassAlpha),
+                            Color.Transparent
+                        ),
+                        center = Offset(w * 0.88f, h * 0.12f),
+                        radius = w * 0.75f
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 3: frosted white overlay - very subtle, just adds glass texture
+                drawRoundRect(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.03f * glassAlpha),
+                            Color.White.copy(alpha = 0.01f * glassAlpha),
+                            Color.White.copy(alpha = 0.02f * glassAlpha)
+                        ),
+                        startY = 0f,
+                        endY = h
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 4: diagonal sweep highlight (top-left → mid) - thin specular only
+                drawRoundRect(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.08f * glassAlpha),
+                            Color.White.copy(alpha = 0.02f * glassAlpha),
+                            Color.Transparent
+                        ),
+                        start = Offset(0f, 0f),
+                        end   = Offset(w * 0.5f, h)
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 5: bottom edge warm reflection
+                drawRoundRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            endColor.copy(alpha = 0.22f * glassAlpha)
+                        ),
+                        center = Offset(w * 0.5f, h),
+                        radius = w * 0.65f
+                    ),
+                    cornerRadius = cr
+                )
+
+                drawContent()
+
+                // Border: bright top-left → faded bottom-right
+                drawRoundRect(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.65f * borderAlpha),
+                            midColor.copy(alpha = 0.30f * borderAlpha),
+                            endColor.copy(alpha = 0.15f * borderAlpha),
+                            Color.White.copy(alpha = 0.20f * borderAlpha)
+                        ),
+                        start = Offset(0f, 0f),
+                        end   = Offset(w, h)
+                    ),
+                    cornerRadius = cr,
+                    style = Stroke(width = 1.5.dp.toPx())
+                )
+            }
+            .combinedClickable(
+                enabled = enabled,
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                    onClick()
+                },
+                onLongClick = if (onLongClick != null) {
+                    {
+                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                        onLongClick()
+                    }
+                } else null
+            )
+    ) {
+        Row(
             modifier = Modifier
                 .fillMaxSize()
-                .clip(shape)
-                .drawWithContent {
-                    val w  = size.width
-                    val h  = size.height
-                    val cr = CornerRadius(24.dp.toPx())
-
-                    // Layer 1: radial base - color blooms from bottom-left
-                    drawRoundRect(
-                        brush = Brush.radialGradient(
-                            colors = listOf(
-                                baseColor.copy(alpha = 0.80f * glassAlpha),
-                                midColor.copy(alpha = 0.60f * glassAlpha),
-                                endColor.copy(alpha = 0.40f * glassAlpha)
-                            ),
-                            center = Offset(w * 0.15f, h * 0.85f),
-                            radius = w * 1.1f
-                        ),
-                        cornerRadius = cr
-                    )
-
-                    // Layer 2: secondary radial bloom from top-right (accent)
-                    drawRoundRect(
-                        brush = Brush.radialGradient(
-                            colors = listOf(
-                                endColor.copy(alpha = 0.55f * glassAlpha),
-                                midColor.copy(alpha = 0.25f * glassAlpha),
-                                Color.Transparent
-                            ),
-                            center = Offset(w * 0.88f, h * 0.12f),
-                            radius = w * 0.75f
-                        ),
-                        cornerRadius = cr
-                    )
-
-                    // Layer 3: frosted white overlay - very subtle, just adds glass texture
-                    drawRoundRect(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.White.copy(alpha = 0.03f * glassAlpha),
-                                Color.White.copy(alpha = 0.01f * glassAlpha),
-                                Color.White.copy(alpha = 0.02f * glassAlpha)
-                            ),
-                            startY = 0f,
-                            endY = h
-                        ),
-                        cornerRadius = cr
-                    )
-
-                    // Layer 4: diagonal sweep highlight (top-left → mid) - thin specular only
-                    drawRoundRect(
-                        brush = Brush.linearGradient(
-                            colors = listOf(
-                                Color.White.copy(alpha = 0.08f * glassAlpha),
-                                Color.White.copy(alpha = 0.02f * glassAlpha),
-                                Color.Transparent
-                            ),
-                            start = Offset(0f, 0f),
-                            end   = Offset(w * 0.5f, h)
-                        ),
-                        cornerRadius = cr
-                    )
-
-                    // Layer 5: bottom edge warm reflection
-                    drawRoundRect(
-                        brush = Brush.radialGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                endColor.copy(alpha = 0.22f * glassAlpha)
-                            ),
-                            center = Offset(w * 0.5f, h),
-                            radius = w * 0.65f
-                        ),
-                        cornerRadius = cr
-                    )
-
-                    drawContent()
-
-                    // Border: bright top-left → faded bottom-right
-                    drawRoundRect(
-                        brush = Brush.linearGradient(
-                            colors = listOf(
-                                Color.White.copy(alpha = 0.65f * borderAlpha),
-                                midColor.copy(alpha = 0.30f * borderAlpha),
-                                endColor.copy(alpha = 0.15f * borderAlpha),
-                                Color.White.copy(alpha = 0.20f * borderAlpha)
-                            ),
-                            start = Offset(0f, 0f),
-                            end   = Offset(widthPx, heightPx)
-                        ),
-                        cornerRadius = cr,
-                        style = Stroke(width = 1.5.dp.toPx())
-                    )
-                }
-                .combinedClickable(
-                    enabled = enabled,
-                    onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                        onClick()
-                    },
-                    onLongClick = if (onLongClick != null) {
-                        {
-                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                            onLongClick()
-                        }
-                    } else null
-                )
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-                    .graphicsLayer { alpha = contentAlpha },
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                content = content
-            )
-        }
+                .padding(horizontal = 16.dp)
+                .graphicsLayer { alpha = contentAlpha },
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            content = content
+        )
     }
 }
 
