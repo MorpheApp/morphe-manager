@@ -122,10 +122,16 @@ fun HomeDialogs(
             bundleMetadata[packageName ?: ""]?.downloadColor
                 ?: KnownApps.DEFAULT_DOWNLOAD_COLOR
         }
+        // True when the patch bundle explicitly requires a split archive (APKM/APKS/XAPK).
+        // In that case the APKMirror button label becomes "DOWNLOAD APK BUNDLE" to match the site.
+        val isApkBundle = remember(packageName, bundleMetadata) {
+            bundleMetadata[packageName ?: ""]?.apkFileType?.isApk == false
+        }
 
         DownloadInstructionsDialog(
             usingMountInstall = usingMountInstall,
             downloadColor = downloadColor,
+            isApkBundle = isApkBundle,
             onDismiss = {
                 homeViewModel.showDownloadInstructionsDialog = false
                 homeViewModel.cleanupPendingData()
@@ -559,6 +565,7 @@ private fun ApkAvailabilityDialog(
 private fun DownloadInstructionsDialog(
     usingMountInstall: Boolean,
     downloadColor: Color,
+    isApkBundle: Boolean,
     onDismiss: () -> Unit,
     onContinue: () -> Unit
 ) {
@@ -640,7 +647,7 @@ private fun DownloadInstructionsDialog(
                                     modifier = Modifier.size(20.dp)
                                 )
                                 Text(
-                                    text = "DOWNLOAD APK",
+                                    text = if (isApkBundle) "DOWNLOAD APK BUNDLE" else "DOWNLOAD APK",
                                     style = MaterialTheme.typography.labelLarge,
                                     color = Color.White
                                 )
