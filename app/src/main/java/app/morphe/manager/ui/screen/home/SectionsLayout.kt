@@ -19,6 +19,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -309,14 +312,27 @@ fun NotificationsOverlay(
 /**
  * Manager update snackbar.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManagerUpdateSnackbar(
     visible: Boolean,
     onShowDetails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var dismissed by remember { mutableStateOf(false) }
+    LaunchedEffect(visible) { if (visible) dismissed = false }
+
+    val swipeState = rememberSwipeToDismissBoxState(
+        positionalThreshold = { totalDistance -> totalDistance * 0.4f }
+    )
+    LaunchedEffect(swipeState.currentValue) {
+        if (swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
+            dismissed = true
+        }
+    }
+
     AnimatedVisibility(
-        visible = visible,
+        visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
             animationSpec = tween(durationMillis = 500)
@@ -327,41 +343,50 @@ fun ManagerUpdateSnackbar(
         ) + fadeOut(animationSpec = tween(durationMillis = 500)),
         modifier = modifier
     ) {
-        Card(
-            modifier = modifier.padding(horizontal = 16.dp),
-            onClick = onShowDetails,
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer
-            ),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-            shape = RoundedCornerShape(16.dp)
+        SwipeToDismissBox(
+            state = swipeState,
+            backgroundContent = {},
+            enableDismissFromStartToEnd = true,
+            enableDismissFromEndToStart = true
         ) {
-            Row(
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(horizontal = 16.dp),
+                onClick = onShowDetails,
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Update,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                    modifier = Modifier.size(24.dp)
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Update,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.size(24.dp)
+                    )
 
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(R.string.home_update_available),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer
-                    )
-                    Text(
-                        text = stringResource(R.string.home_update_available_subtitle),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
-                    )
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = stringResource(R.string.home_update_available),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer
+                        )
+                        Text(
+                            text = stringResource(R.string.home_update_available_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
+                        )
+                    }
                 }
             }
         }
@@ -371,6 +396,7 @@ fun ManagerUpdateSnackbar(
 /**
  * Bundle update snackbar.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundleUpdateSnackbar(
     visible: Boolean,
@@ -378,8 +404,26 @@ fun BundleUpdateSnackbar(
     progress: PatchBundleRepository.BundleUpdateProgress?,
     modifier: Modifier = Modifier
 ) {
+    var dismissed by remember { mutableStateOf(false) }
+    // Reset when a new update cycle starts
+    LaunchedEffect(visible, status) {
+        if (visible && status == BundleUpdateStatus.Updating) dismissed = false
+    }
+
+    // Allow swipe only for terminal states - don't let user dismiss an in-progress update
+    val swipeable = status != BundleUpdateStatus.Updating
+
+    val swipeState = rememberSwipeToDismissBoxState(
+        positionalThreshold = { totalDistance -> totalDistance * 0.4f }
+    )
+    LaunchedEffect(swipeState.currentValue) {
+        if (swipeable && swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
+            dismissed = true
+        }
+    }
+
     AnimatedVisibility(
-        visible = visible,
+        visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
             animationSpec = tween(durationMillis = 500)
@@ -390,10 +434,14 @@ fun BundleUpdateSnackbar(
         ) + fadeOut(animationSpec = tween(durationMillis = 500)),
         modifier = modifier
     ) {
-        BundleUpdateSnackbarContent(
-            status = status,
-            progress = progress
-        )
+        SwipeToDismissBox(
+            state = swipeState,
+            backgroundContent = {},
+            enableDismissFromStartToEnd = swipeable,
+            enableDismissFromEndToStart = swipeable
+        ) {
+            BundleUpdateSnackbarContent(status = status, progress = progress)
+        }
     }
 }
 
