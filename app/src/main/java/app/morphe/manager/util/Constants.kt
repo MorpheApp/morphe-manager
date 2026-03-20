@@ -51,9 +51,10 @@ object KnownApps {
     val GRADIENT_MID = Color(0xFF1E5AA8)
     val GRADIENT_END = Color(0xFF00AFAE)
 
+    val DEFAULT_DOWNLOAD_COLOR = Color(0xFF0E3F6E)
+
     // Default gradient for packages with no bundle-declared color
-    val DEFAULT_COLORS = listOf(Color(0xFF6C63FF), GRADIENT_MID, GRADIENT_END)
-    val DEFAULT_DOWNLOAD_COLOR = Color(0xFF6C63FF)
+    val DEFAULT_COLORS = listOf(DEFAULT_DOWNLOAD_COLOR, GRADIENT_MID, GRADIENT_END)
 
     /**
      * A known patchable app entry.

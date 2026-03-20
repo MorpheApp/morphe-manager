@@ -59,6 +59,8 @@
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_prerelease_toggle">Use pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Receive early access to new experimental patches version</string>
+    <string name="sources_management_experimental_versions_toggle">Use experimental app versions</string>
+    <string name="sources_management_experimental_versions_toggle_description">Set the experimental app version as the recommended patching target</string>
     <string name="sources_management_already_exists">This source has already been added</string>
 
     <!-- Home Screen - Sources Dialogs -->
@@ -143,6 +145,8 @@ Are you sure you want to proceed?"</string>
     <string name="home_split_apk_warning_pick_another">Pick another APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">This version has experimental support and may be unstable or incomplete</string>
+    <string name="morphe_experimental_app_version_dialog_title">🚨 Experimental Alert 🚨</string>
+    <string name="morphe_experimental_app_version_dialog_message">You are using an experimental app version of ⚠️ &lt;b>%1$s&lt;/b>&lt;br/>&lt;br/>🔧 Expect quirky app behavior or unidentified bugs as we fine tune the patches for this app version</string>
     <string name="home_dialog_unsupported_version_dialog_title">Unsupported Version</string>
     <string name="home_dialog_unsupported_version_dialog_description">This APK is not a recommended app version. Proceeding may result in a non-functional app</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Proceed anyway</string>

@@ -208,6 +208,35 @@ fun HomeDialogs(
         )
     }
 
+    // Experimental Version Warning Dialog
+    AnimatedVisibility(
+        visible = homeViewModel.showExperimentalVersionDialog != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
+        val dialogState = homeViewModel.showExperimentalVersionDialog ?: return@AnimatedVisibility
+
+        ExperimentalVersionWarningDialog(
+            appName = dialogState.packageName.let { homeViewModel.bundleAppMetadataFlow.value[it]?.displayName ?: it },
+            onDismiss = {
+                homeViewModel.showExperimentalVersionDialog = null
+                homeViewModel.pendingSelectedApp?.let { app ->
+                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
+                }
+                homeViewModel.pendingSelectedApp = null
+            },
+            onProceed = {
+                homeViewModel.showExperimentalVersionDialog = null
+                homeViewModel.pendingSelectedApp?.let { app ->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        homeViewModel.startPatchingWithApp(app, allowIncompatible = false)
+                        homeViewModel.pendingSelectedApp = null
+                    }
+                }
+            }
+        )
+    }
+
     // Wrong Package Dialog
     AnimatedVisibility(
         visible = homeViewModel.showWrongPackageDialog != null,
@@ -1018,6 +1047,47 @@ fun SplitApkWarningDialog(
                 style = InfoBadgeStyle.Error,
                 icon = Icons.Outlined.Error,
                 isExpanded = true
+            )
+        }
+    }
+}
+
+/**
+ * Warning dialog shown when the user selects an APK version that is marked experimental
+ * in the patch bundle AND experimental-version mode is enabled for that bundle.
+ */
+@Composable
+fun ExperimentalVersionWarningDialog(
+    appName: String,
+    onDismiss: () -> Unit,
+    onProceed: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.morphe_experimental_app_version_dialog_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                onPrimaryClick = onProceed,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = htmlAnnotatedString(
+                    stringResource(R.string.morphe_experimental_app_version_dialog_message, appName)
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }

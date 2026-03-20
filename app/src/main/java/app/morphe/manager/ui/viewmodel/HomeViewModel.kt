@@ -192,6 +192,7 @@ class HomeViewModel(
 
     // Error/warning dialogs
     var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
+    var showExperimentalVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
     var showWrongPackageDialog by mutableStateOf<WrongPackageDialogState?>(null)
     var showSplitApkWarningDialog by mutableStateOf(false)
     var showInvalidSignatureDialog by mutableStateOf<InvalidSignatureDialogState?>(null)
@@ -235,12 +236,32 @@ class HomeViewModel(
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
     val recommendedVersionsFlow: StateFlow<Map<String, AppTarget>> =
-        compatibleVersionsFlow
-            .map { versionData ->
-                versionData.mapValues { (_, targets) ->
+        combine(
+            compatibleVersionsFlow,
+            prefs.bundleExperimentalVersionsEnabled.flow,
+            patchBundleRepository.bundleInfoFlow,
+            patchBundleRepository.sources
+        ) { versionData, experimentalEnabledUids, bundleInfo, sources ->
+            val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
+            // Packages for which at least one enabled bundle has experimental toggle on
+            val experimentalEnabledPackages = bundleInfo
+                .filterKeys { it in enabledUids && it.toString() in experimentalEnabledUids }
+                .values
+                .flatMap { it.patches }
+                .flatMap { it.compatiblePackages.orEmpty() }
+                .mapNotNull { it.packageName }
+                .toSet()
+
+            versionData.mapValues { (packageName, targets) ->
+                if (packageName in experimentalEnabledPackages) {
+                    // Experimental mode: prefer the highest experimental version, fallback to first
+                    targets.firstOrNull { it.isExperimental } ?: targets.first()
+                } else {
+                    // Normal mode: prefer the highest stable version, fallback to first
                     targets.firstOrNull { !it.isExperimental } ?: targets.first()
                 }
             }
+        }
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
     // Convenience accessors — read current value synchronously for non-reactive call sites
@@ -1072,6 +1093,13 @@ class HomeViewModel(
         val versionMismatch = !hasCompatible && hasIncompatible
         // Experimental check is independent — a version can be experimental AND compatible
         val isVersionExperimental = enabledBundles.any { it.isVersionExperimental }
+
+        // Check if the user has enabled experimental-version mode for this package's bundle
+        val experimentalEnabledUids = prefs.bundleExperimentalVersionsEnabled.getBlocking()
+        val isExperimentalModeEnabled = enabledBundles.any { bundle ->
+            bundle.uid.toString() in experimentalEnabledUids
+        }
+
         if (versionMismatch && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
             val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
@@ -1087,19 +1115,25 @@ class HomeViewModel(
             return
         }
 
-        // If the version is experimental, show the warning even when it is compatible —
-        // the user should be informed that this version has experimental support only.
+        // If the version is experimental, show the appropriate warning:
+        // - Experimental mode ON → ExperimentalVersionWarningDialog
+        // - Experimental mode OFF → UnsupportedVersionWarningDialog
         if (isVersionExperimental && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
             val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
             pendingSelectedApp = selectedApp
-            showUnsupportedVersionDialog = UnsupportedVersionDialogState(
+            val state = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
                 version = selectedApp.version ?: "unknown",
                 recommendedVersion = recommendedVersion,
                 allCompatibleVersions = allVersions,
                 isExperimental = true
             )
+            if (isExperimentalModeEnabled) {
+                showExperimentalVersionDialog = state
+            } else {
+                showUnsupportedVersionDialog = state
+            }
             cleanupPendingData(keepSelectedApp = true)
             return
         }
