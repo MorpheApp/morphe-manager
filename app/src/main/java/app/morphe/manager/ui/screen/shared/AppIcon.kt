@@ -124,11 +124,18 @@ private fun ResolvedAppIcon(
 
     when {
         isLoading -> {
-            // Show shimmer placeholder while loading
-            ShimmerBox(
-                modifier = modifier,
-                shape = RoundedCornerShape(15.dp)
-            )
+            // Use the same placeholder as the "no icon found" case so the size is identical during loading
+            if (placeholderGradientColors != null) {
+                GlassPlaceholderIcon(
+                    gradientColors = placeholderGradientColors,
+                    modifier = modifier
+                )
+            } else {
+                ShimmerBox(
+                    modifier = modifier,
+                    shape = RoundedCornerShape(15.dp)
+                )
+            }
         }
         resolvedPackageInfo != null -> {
             SimpleAppIcon(
