@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-03-16T19:04:29.353Z",
-  "description": "# app [1.12.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.4...v1.12.0-dev.5) (2026-03-16)\n\n\n### Bug Fixes\n\n* Set default minimum process memory limit to 512MB ([c28aaae](https://github.com/MorpheApp/morphe-manager/commit/c28aaae9a63dbb4b0a084938ed4092cfdddb3f37))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.5/morphe-manager-1.12.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.5/morphe-manager-1.12.0-dev.5.apk.asc",
-  "version": "1.12.0-dev.5"
+  "created_at": "2026-03-19T09:32:36.465Z",
+  "description": "# app [1.12.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.5...v1.12.0-dev.6) (2026-03-19)\n\n\n### Bug Fixes\n\n* Use latest Morphe patcher ([cb53fbb](https://github.com/MorpheApp/morphe-manager/commit/cb53fbb5814d67730b7e53e940bcac49a9df671e))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.6/morphe-manager-1.12.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.12.0-dev.6/morphe-manager-1.12.0-dev.6.apk.asc",
+  "version": "1.12.0-dev.6"
 }
