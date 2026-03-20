@@ -10,21 +10,22 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
  * Glass placeholder icon for apps that have not been patched yet.
  *
- * Inner padding matches the ~10% adaptive icon inset so the placeholder
- * visually aligns with real app icons.
+ * No inner padding is applied by default - pass [innerPadding] explicitly when you need
+ * the placeholder to optically align with adaptive icons (which have ~10% inset).
+ * Corner radius scales automatically with the drawn size.
  */
 @Composable
 fun GlassPlaceholderIcon(
     gradientColors: List<Color>,
     modifier: Modifier = Modifier,
-    innerPadding: androidx.compose.ui.unit.Dp = 6.dp
+    innerPadding: Dp = 0.dp
 ) {
-    val cornerRadius = 12.dp
     val baseColor = gradientColors.firstOrNull() ?: Color.White
     val midColor = gradientColors.getOrElse(1) { baseColor }
     val endColor = gradientColors.lastOrNull() ?: baseColor
@@ -33,7 +34,8 @@ fun GlassPlaceholderIcon(
         modifier = modifier
             .padding(innerPadding)
             .drawWithContent {
-                val cr = CornerRadius(cornerRadius.toPx())
+                // Corner radius = ~20% of the shorter side, matching adaptive icon rounding
+                val cr = CornerRadius(minOf(size.width, size.height) * 0.20f)
                 val w = size.width
                 val h = size.height
 

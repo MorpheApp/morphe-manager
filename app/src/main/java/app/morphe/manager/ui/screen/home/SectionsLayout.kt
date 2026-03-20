@@ -882,7 +882,8 @@ internal fun HideAppDialog(
                     contentDescription = null,
                     modifier = Modifier.size(60.dp),
                     preferredSource = AppDataSource.PATCHED_APK,
-                    placeholderGradientColors = item.gradientColors
+                    placeholderGradientColors = item.gradientColors,
+                    placeholderInnerPadding = 6.dp
                 )
 
                 Column(
@@ -1025,9 +1026,10 @@ private fun HiddenAppRow(
                 packageInfo = packageInfo,
                 packageName = if (packageInfo == null) packageName else null,
                 contentDescription = null,
-                modifier = Modifier.size(40.dp),
+                modifier = Modifier.size(48.dp),
                 preferredSource = AppDataSource.PATCHED_APK,
-                placeholderGradientColors = gradientColors
+                placeholderGradientColors = gradientColors,
+                placeholderInnerPadding = 4.dp
             )
 
             // App name
@@ -1268,7 +1270,8 @@ fun AppButton(
             contentDescription = null,
             modifier = Modifier.size(60.dp),
             preferredSource = AppDataSource.PATCHED_APK,
-            placeholderGradientColors = gradientColors
+            placeholderGradientColors = gradientColors,
+            placeholderInnerPadding = 6.dp
         )
 
         // Text info

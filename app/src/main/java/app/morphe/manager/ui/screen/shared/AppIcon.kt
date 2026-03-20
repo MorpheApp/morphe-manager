@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
@@ -25,9 +26,9 @@ import org.koin.compose.koinInject
  * Automatically resolves icon from available sources:
  * installed app → original APK → patched APK → constants → fallback
  *
- * @param placeholderGradientColors When provided and no icon can be resolved, shows a
- *   [GlassPlaceholderIcon] instead of the generic Android robot icon. Pass the same
- *   gradient colors used by the parent app card so the placeholder blends with the card.
+ * @param placeholderInnerPadding Inner padding applied only to [GlassPlaceholderIcon] so it
+ *   optically aligns with adaptive icons (which have ~10% inset). Real icons are not affected.
+ *   Use 6.dp for large cards (60dp), 0.dp (default) for smaller contexts like list rows.
  */
 @Composable
 fun AppIcon(
@@ -37,7 +38,8 @@ fun AppIcon(
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
     preferredSource: AppDataSource = AppDataSource.INSTALLED,
-    placeholderGradientColors: List<Color>? = null
+    placeholderGradientColors: List<Color>? = null,
+    placeholderInnerPadding: Dp = 0.dp
 ) {
     // If PackageInfo is provided, use the simple implementation
     if (packageInfo != null) {
@@ -56,7 +58,8 @@ fun AppIcon(
             contentDescription = contentDescription,
             modifier = modifier,
             preferredSource = preferredSource,
-            placeholderGradientColors = placeholderGradientColors
+            placeholderGradientColors = placeholderGradientColors,
+            placeholderInnerPadding = placeholderInnerPadding
         )
         return
     }
@@ -65,7 +68,8 @@ fun AppIcon(
     if (placeholderGradientColors != null) {
         GlassPlaceholderIcon(
             gradientColors = placeholderGradientColors,
-            modifier = modifier
+            modifier = modifier,
+            innerPadding = placeholderInnerPadding
         )
     } else {
         FallbackIcon(
@@ -108,7 +112,8 @@ private fun ResolvedAppIcon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     preferredSource: AppDataSource = AppDataSource.INSTALLED,
-    placeholderGradientColors: List<Color>? = null
+    placeholderGradientColors: List<Color>? = null,
+    placeholderInnerPadding: Dp = 0.dp
 ) {
     val appDataResolver: AppDataResolver = koinInject()
 
@@ -124,11 +129,12 @@ private fun ResolvedAppIcon(
 
     when {
         isLoading -> {
-            // Use the same placeholder as the "no icon found" case so the size is identical during loading
+            // Show the same placeholder as the resolved state so size stays consistent
             if (placeholderGradientColors != null) {
                 GlassPlaceholderIcon(
                     gradientColors = placeholderGradientColors,
-                    modifier = modifier
+                    modifier = modifier,
+                    innerPadding = placeholderInnerPadding
                 )
             } else {
                 ShimmerBox(
@@ -148,7 +154,8 @@ private fun ResolvedAppIcon(
             // No icon found - show glass placeholder tinted to card colors
             GlassPlaceholderIcon(
                 gradientColors = placeholderGradientColors,
-                modifier = modifier
+                modifier = modifier,
+                innerPadding = placeholderInnerPadding
             )
         }
         else -> {
