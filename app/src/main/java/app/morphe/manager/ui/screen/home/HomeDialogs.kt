@@ -550,7 +550,8 @@ private fun ApkAvailabilityDialog(
                         .filter { it.isExperimental }
                         .mapNotNull { it.version }
                         .toSet(),
-                    recommendedIndex = compatibleVersions.indexOfFirst { !it.isExperimental }
+                    recommendedIndex = compatibleVersions
+                        .indexOfFirst { it.version == recommendedVersion?.version }
                         .takeIf { it >= 0 } ?: 0
                 )
             } else {
