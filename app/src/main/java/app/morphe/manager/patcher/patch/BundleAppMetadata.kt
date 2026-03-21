@@ -6,6 +6,7 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import app.morphe.manager.util.KnownApps
 import app.morphe.patcher.patch.ApkFileType
 
@@ -100,12 +101,10 @@ data class BundleAppMetadata(
         // TODO: Remove once all active bundles ship Compatibility with appIconColor field.
         //  Transitional fallback for the period between Manager 1.3.0 release and
         //  patch bundles being updated to use the new Compatibility API.
-        private fun legacyAppIconColor(packageName: String): Int? = when (packageName) {
-            KnownApps.YOUTUBE       -> 0xFF0000  // YouTube red
-            KnownApps.YOUTUBE_MUSIC -> 0xFF0000  // YouTube Music red
-            KnownApps.REDDIT        -> 0xFF4500  // Reddit orange-red
-            KnownApps.X_TWITTER     -> 0x000000  // X black
-            else                    -> null
-        }
+        private fun legacyAppIconColor(packageName: String): Int? =
+            KnownApps.fromPackage(packageName)?.brandColor?.let { color ->
+                // appIconColor spec uses 0xRRGGBB - strip alpha from ARGB
+                color.toArgb() and 0x00FFFFFF
+            }
     }
 }

@@ -489,9 +489,11 @@ class HomeViewModel(
         val updates = mutableMapOf<String, Boolean>()
 
         installedApps.forEach { app ->
+            // Get stored bundle versions for this app
             val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
             val appName = resolveChangelogName(app.originalPackageName)
 
+            // Check if any bundle used for this app has been updated
             val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
                 val currentVersion = currentVersionByUid[bundleUid] ?: return@any false
                 if (!isNewerVersion(storedVersion, currentVersion)) return@any false
