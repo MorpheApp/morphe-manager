@@ -1070,7 +1070,6 @@ fun ExperimentalVersionWarningDialog(
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
                 onPrimaryClick = onProceed,
-                isPrimaryDestructive = true,
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
