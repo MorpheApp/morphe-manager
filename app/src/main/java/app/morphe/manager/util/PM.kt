@@ -50,20 +50,15 @@ class PM(
             val compatiblePackages = bundles
                 .flatMap { (_, bundle) -> bundle.patches }
                 .flatMap { it.compatiblePackages.orEmpty() }
-                .groupingBy { it.packageName }
+                .mapNotNull { pkg -> pkg.packageName }
+                .groupingBy { it }
                 .eachCount()
 
             compatiblePackages.keys.map { pkg ->
-                getPackageInfo(pkg)?.let { packageInfo ->
-                    AppInfo(
-                        pkg,
-                        compatiblePackages[pkg],
-                        packageInfo
-                    )
-                } ?: AppInfo(
+                AppInfo(
                     pkg,
                     compatiblePackages[pkg],
-                    null
+                    getPackageInfo(pkg)
                 )
             }
         }
@@ -78,8 +73,9 @@ class PM(
             }
         }
 
-        if (compatibleApps.await().isNotEmpty()) {
-            (compatibleApps.await() + installedApps.await())
+        val compatibleList = compatibleApps.await()
+        if (compatibleList.isNotEmpty()) {
+            (compatibleList + installedApps.await())
                 .distinctBy { it.packageName }
                 .sortedWith(
                     compareByDescending<AppInfo> {
@@ -196,6 +192,7 @@ class PM(
         ).apply {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
                 setRequestUpdateOwnership(true)
+            @SuppressLint("WrongConstant")
             setInstallReason(PackageManager.INSTALL_REASON_USER)
         }
 

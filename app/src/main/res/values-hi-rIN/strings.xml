@@ -4,7 +4,6 @@
     <string name="home_other_apps">अन्य ऐप्स</string>
     <string name="home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
-    <string name="home_default_source_disabled">मorphe पैच स्रोत अक्षम है। पैच स्रोत शीट में या एक्सपर्ट मोड का उपयोग करके इसे सक्रिय करें</string>
     <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
     <string name="home_app_hide_message">यह ऐप होम स्क्रीन से छिपा दिया जाएगा। आप सूची के निचले भाग में मौजूद \'%1$s\' बटन का उपयोग करके बाद में इसे पुनर्स्थापित कर सकते हैं।</string>
     <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
     <string name="sources_management_prerelease_toggle">प्रिलीस रिलीज़ पथचों को उपयोग करें</string>
     <string name="sources_management_prerelease_toggle_description">नए प्रयोगात्मक पथचों की नई संस्करणों को जल्दी से प्राप्त करें</string>
+    <string name="sources_management_experimental_versions_toggle">प्रयोगशील ऐप संस्करणों का उपयोग करें</string>
+    <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हो तो प्रयोगशील ऐप लक्ष्यों को पैच करें</string>
     <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">नाम दर्जा करें</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">APK चुनें</string>
     <string name="home_select_any_apk_description">पैचिंग के लिए किसी भी ऐप के लिए APK फ़ाइल चुनने के लिए नीचे दिए गए बटन पर टैप करें</string>
     <string name="home_invalid_apk">अवैध APK फ़ाइल</string>
-    <string name="home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">एक्सपर्ट मोड</string>
     <string name="expert_mode_search">पैच खोजें</string>
@@ -116,7 +116,6 @@
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
-    <string name="expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
     <string name="expert_mode_universal_patches">सार्वभौमिक पैच</string>
     <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
     <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।
@@ -578,6 +577,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"मोरफे एक प्रयोगशाला आधारित खुले स्रोत प्रोजेक्ट है जो लोकप्रिय एंड्रॉइड एप्लिकेशन के आधुनिक, व्यवस्थित पैचिंग के लिए ध्यान केंद्रित करता है
 
 खुले स्रोत के मूल में, मोरफे समुदाय के फीडबैक और योगदान को प्रोत्साहित करता है ताकि भविष्य के नवीनता को प्रेरित किया जाए"</string>
+    <string name="credits">क्रेडिट</string>
+    <string name="credits_current_development">वर्तमान विकास</string>
+    <string name="credits_prior_development">पिछला विकास</string>
     <!-- Shared strings -->
     <string name="patches">पैच</string>
     <string name="home">घर</string>

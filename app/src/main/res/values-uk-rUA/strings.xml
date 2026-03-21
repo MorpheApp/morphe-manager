@@ -4,7 +4,6 @@
     <string name="home_other_apps">Інші застосунки</string>
     <string name="home_not_patched_yet">Ще не патчено</string>
     <string name="home_no_patches_available">Немає доступних патчів</string>
-    <string name="home_default_source_disabled">Джерело патчів Morphe вимкнене. Будь ласка, увімкніть його в джерелах патчів або скористайтеся режимом Експерт</string>
     <string name="home_app_hide_title">Приховати цей застосунок?</string>
     <string name="home_app_hide_message">Цей застосунок буде приховано з головного екрану. Ви можете відновити його пізніше, використовуючи кнопку \'%1$s\' внизу списку</string>
     <string name="home_app_will_be_hidden">Цей застосунок буде приховано</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_management_prerelease_toggle">Передрелізні версії патчів</string>
     <string name="sources_management_prerelease_toggle_description">Отримувати ранній доступ до нових експериментальних версій патчів</string>
+    <string name="sources_management_experimental_versions_toggle">Використовувати експериментальні версії застосунку</string>
+    <string name="sources_management_experimental_versions_toggle_description">Застосувати патчі до експериментальних цілей застосунку, якщо доступно</string>
     <string name="sources_management_already_exists">Це джерело вже додано</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Вибрати APK файл</string>
     <string name="home_select_any_apk_description">Натисніть кнопку нижче, щоб вибрати APK файл будь-якого застосунку для патчінгу</string>
     <string name="home_invalid_apk">Некоректний APK файл</string>
-    <string name="home_no_patches_for_app">Для цього застосунку немає патчів</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експертний режим</string>
     <string name="expert_mode_search">Пошук патчів</string>
@@ -116,7 +116,6 @@
     <string name="expert_mode_disable_all">Вимкнути всі</string>
     <string name="expert_mode_enable_all">Увімкнути всі</string>
     <string name="expert_mode_no_results">Патчі не знайдено</string>
-    <string name="expert_mode_no_patches">Патчі недоступні</string>
     <string name="expert_mode_universal_patches">Універсальні патчі</string>
     <string name="expert_mode_multiple_sources_warning_title">Вибрано декілька джерел патчів</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ви вибрали патчі з кількох джерел патчів. Це може спричинити проблеми сумісності або неочікувану поведінку.
@@ -144,9 +143,9 @@
     <string name="patch_option_enter_number">Ввести число</string>
     <string name="patch_option_enter_decimal">Введіть десяткове число</string>
     <string name="patch_option_pick_folder">Вибрати папку</string>
-    <string name="patch_option_list_duplicate">Ця змінна вже існує</string>
+    <string name="patch_option_list_duplicate">Це значення вже існує</string>
     <string name="patch_option_list_empty">Значення не може бути порожнім</string>
-    <string name="patch_option_list_empty_state">Значення ще не додано</string>
+    <string name="patch_option_list_empty_state">Значень ще не додано</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Створити адаптивну іконку</string>
     <string name="adaptive_icon_instructions">Виберіть зображення переднього плану, виберіть колір фону та налаштуйте попередній перегляд за допомогою жестів масштабування</string>
@@ -578,6 +577,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"Morphe - це експериментальний проєкт із відкритим кодом, зосереджений на створенні сучасного та спрощеного механізму патчінгу популярних Android-застосунків.
 
 Маючи відкритий код, Morphe розвивається завдяки відгукам і внескам спільноти, що сприяють подальшим інноваціям"</string>
+    <string name="credits">Подяки</string>
+    <string name="credits_current_development">Поточна розробка</string>
+    <string name="credits_prior_development">Попередня розробка</string>
     <!-- Shared strings -->
     <string name="patches">Патчі</string>
     <string name="home">Головна</string>

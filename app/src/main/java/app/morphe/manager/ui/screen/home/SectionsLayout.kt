@@ -10,8 +10,10 @@ import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.*import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -19,13 +21,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -42,7 +49,7 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
 import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.AppPackages
+import app.morphe.manager.util.KnownApps
 import kotlinx.coroutines.delay
 
 /**
@@ -307,14 +314,27 @@ fun NotificationsOverlay(
 /**
  * Manager update snackbar.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManagerUpdateSnackbar(
     visible: Boolean,
     onShowDetails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var dismissed by remember { mutableStateOf(false) }
+    LaunchedEffect(visible) { if (visible) dismissed = false }
+
+    val swipeState = rememberSwipeToDismissBoxState(
+        positionalThreshold = { totalDistance -> totalDistance * 0.4f }
+    )
+    LaunchedEffect(swipeState.currentValue) {
+        if (swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
+            dismissed = true
+        }
+    }
+
     AnimatedVisibility(
-        visible = visible,
+        visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
             animationSpec = tween(durationMillis = 500)
@@ -325,41 +345,50 @@ fun ManagerUpdateSnackbar(
         ) + fadeOut(animationSpec = tween(durationMillis = 500)),
         modifier = modifier
     ) {
-        Card(
-            modifier = modifier.padding(horizontal = 16.dp),
-            onClick = onShowDetails,
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer
-            ),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-            shape = RoundedCornerShape(16.dp)
+        SwipeToDismissBox(
+            state = swipeState,
+            backgroundContent = {},
+            enableDismissFromStartToEnd = true,
+            enableDismissFromEndToStart = true
         ) {
-            Row(
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(horizontal = 16.dp),
+                onClick = onShowDetails,
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Update,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                    modifier = Modifier.size(24.dp)
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Update,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.size(24.dp)
+                    )
 
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(R.string.home_update_available),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer
-                    )
-                    Text(
-                        text = stringResource(R.string.home_update_available_subtitle),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
-                    )
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = stringResource(R.string.home_update_available),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer
+                        )
+                        Text(
+                            text = stringResource(R.string.home_update_available_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
+                        )
+                    }
                 }
             }
         }
@@ -369,6 +398,7 @@ fun ManagerUpdateSnackbar(
 /**
  * Bundle update snackbar.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundleUpdateSnackbar(
     visible: Boolean,
@@ -376,8 +406,26 @@ fun BundleUpdateSnackbar(
     progress: PatchBundleRepository.BundleUpdateProgress?,
     modifier: Modifier = Modifier
 ) {
+    var dismissed by remember { mutableStateOf(false) }
+    // Reset when a new update cycle starts
+    LaunchedEffect(visible, status) {
+        if (visible && status == BundleUpdateStatus.Updating) dismissed = false
+    }
+
+    // Allow swipe only for terminal states - don't let user dismiss an in-progress update
+    val swipeable = status != BundleUpdateStatus.Updating
+
+    val swipeState = rememberSwipeToDismissBoxState(
+        positionalThreshold = { totalDistance -> totalDistance * 0.4f }
+    )
+    LaunchedEffect(swipeState.currentValue) {
+        if (swipeable && swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
+            dismissed = true
+        }
+    }
+
     AnimatedVisibility(
-        visible = visible,
+        visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
             animationSpec = tween(durationMillis = 500)
@@ -388,10 +436,14 @@ fun BundleUpdateSnackbar(
         ) + fadeOut(animationSpec = tween(durationMillis = 500)),
         modifier = modifier
     ) {
-        BundleUpdateSnackbarContent(
-            status = status,
-            progress = progress
-        )
+        SwipeToDismissBox(
+            state = swipeState,
+            backgroundContent = {},
+            enableDismissFromStartToEnd = swipeable,
+            enableDismissFromEndToStart = swipeable
+        ) {
+            BundleUpdateSnackbarContent(status = status, progress = progress)
+        }
     }
 }
 
@@ -564,14 +616,27 @@ fun GreetingSection(
     message: String
 ) {
     Box(contentAlignment = Alignment.Center) {
-        Text(
-            text = message,
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.fillMaxWidth()
-        )
+        AnimatedContent(
+            targetState = message,
+            transitionSpec = {
+                (fadeIn(animationSpec = tween(400)) +
+                        slideInVertically(animationSpec = tween(400)) { it / 4 })
+                    .togetherWith(
+                        fadeOut(animationSpec = tween(200)) +
+                                slideOutVertically(animationSpec = tween(200)) { -it / 4 }
+                    )
+            },
+            label = "greeting_transition"
+        ) { targetMessage ->
+            Text(
+                text = targetMessage,
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -613,16 +678,16 @@ fun MainAppsSection(
     }
 
     // Placeholder gradients for cold-start shimmer
-    val placeholderGradients = remember { AppPackages.DEFAULT_SHIMMER_GRADIENTS }
+    val placeholderGradients = remember { KnownApps.DEFAULT_SHIMMER_GRADIENTS }
 
     // Hidden apps dialog state
-    var showHiddenAppsDialog by remember { mutableStateOf(false) }
+    val showHiddenAppsDialog = remember { mutableStateOf(false) }
 
-    if (showHiddenAppsDialog) {
+    if (showHiddenAppsDialog.value) {
         HiddenAppsDialog(
             hiddenAppItems = hiddenAppItems,
             onUnhide = onUnhideApp,
-            onDismiss = { showHiddenAppsDialog = false }
+            onDismiss = { showHiddenAppsDialog.value = false }
         )
     }
 
@@ -697,7 +762,7 @@ fun MainAppsSection(
                 if (hiddenAppItems.isNotEmpty()) {
                     item(key = "show_hidden") {
                         TextButton(
-                            onClick = { showHiddenAppsDialog = true },
+                            onClick = { showHiddenAppsDialog.value = true },
                             modifier = Modifier.padding(top = 4.dp)
                         ) {
                             Icon(
@@ -817,10 +882,10 @@ internal fun HideAppDialog(
                     packageInfo = item.packageInfo,
                     packageName = if (item.packageInfo == null) item.packageName else null,
                     contentDescription = null,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(RoundedCornerShape(12.dp)),
-                    preferredSource = AppDataSource.PATCHED_APK
+                    modifier = Modifier.size(60.dp),
+                    preferredSource = AppDataSource.PATCHED_APK,
+                    placeholderGradientColors = item.gradientColors,
+                    placeholderInnerPadding = 6.dp
                 )
 
                 Column(
@@ -906,6 +971,7 @@ internal fun HiddenAppsDialog(
                         HiddenAppRow(
                             packageName = item.packageName,
                             displayName = item.displayName,
+                            gradientColors = item.gradientColors,
                             packageInfo = item.packageInfo,
                             onUnhide = { onUnhide(item.packageName) }
                         )
@@ -923,12 +989,12 @@ internal fun HiddenAppsDialog(
 private fun HiddenAppRow(
     packageName: String,
     displayName: String?,
+    gradientColors: List<Color>,
     packageInfo: PackageInfo?,
     onUnhide: () -> Unit
 ) {
     val view = LocalView.current
     val textColor = LocalDialogTextColor.current
-    val gradientColors = AppPackages.getGradientColors(packageName)
     val shape = RoundedCornerShape(16.dp)
 
     Box(
@@ -962,10 +1028,10 @@ private fun HiddenAppRow(
                 packageInfo = packageInfo,
                 packageName = if (packageInfo == null) packageName else null,
                 contentDescription = null,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(10.dp)),
-                preferredSource = AppDataSource.PATCHED_APK
+                modifier = Modifier.size(48.dp),
+                preferredSource = AppDataSource.PATCHED_APK,
+                placeholderGradientColors = gradientColors,
+                placeholderInnerPadding = 4.dp
             )
 
             // App name
@@ -1044,9 +1110,7 @@ fun InstalledAppCard(
             packageInfo = packageInfo,
             packageName = installedApp.originalPackageName,
             contentDescription = null,
-            modifier = Modifier
-                .size(48.dp)
-                .clip(RoundedCornerShape(12.dp)),
+            modifier = Modifier.size(60.dp),
             preferredSource = AppDataSource.INSTALLED
         )
 
@@ -1104,6 +1168,7 @@ fun InstalledAppCard(
             }
 
             // Update badge
+            @Suppress("RemoveRedundantQualifierName")
             androidx.compose.animation.AnimatedVisibility(
                 visible = hasUpdate && !isAppDeleted,
                 modifier = Modifier
@@ -1205,10 +1270,10 @@ fun AppButton(
             packageInfo = packageInfo,
             packageName = if (packageInfo == null) packageName else null,
             contentDescription = null,
-            modifier = Modifier
-                .size(48.dp)
-                .clip(RoundedCornerShape(12.dp)),
-            preferredSource = AppDataSource.PATCHED_APK
+            modifier = Modifier.size(60.dp),
+            preferredSource = AppDataSource.PATCHED_APK,
+            placeholderGradientColors = gradientColors,
+            placeholderInnerPadding = 6.dp
         )
 
         // Text info
@@ -1263,11 +1328,23 @@ fun OtherAppsSection(
     val backgroundAlpha = if (isDark) 0.35f else 0.6f
     val borderAlpha = if (isDark) 0.4f else 0.6f
 
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.97f else 1f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness    = Spring.StiffnessMedium
+        ),
+        label = "other_apps_press_scale"
+    )
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 12.dp)
             .height(48.dp)
+            .graphicsLayer { scaleX = scale; scaleY = scale }
             .clip(shape)
             .background(
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
@@ -1279,7 +1356,10 @@ fun OtherAppsSection(
                 ),
                 shape = shape
             )
-            .clickable {
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {
                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 onClick()
             },
@@ -1297,6 +1377,14 @@ fun OtherAppsSection(
 
 /**
  * Shared content layout for app cards and buttons.
+ *
+ * Uses a multi-layer frosted glass effect:
+ * - radial gradient base tinted from card colors
+ * - top-left specular shine
+ * - bottom-right warm glow from card accent color
+ * - diagonal sweep highlight
+ * - subtle horizontal frost band
+ * - gradient border
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -1312,61 +1400,150 @@ private fun AppCardLayout(
     val shape = RoundedCornerShape(24.dp)
     val view = LocalView.current
 
-    val backgroundAlpha = if (enabled) 0.7f else 0.3f
-    val borderAlpha = if (enabled) 0.85f else 0.4f
+    val contentAlpha = if (enabled) 1f else 0.45f
+    val baseColor = gradientColors.firstOrNull() ?: Color.White
+    val midColor = gradientColors.getOrElse(1) { baseColor }
+    val endColor = gradientColors.lastOrNull() ?: baseColor
 
-    BoxWithConstraints(
+    // Disabled state fades everything
+    val glassAlpha  = if (enabled) 1f else 0.5f
+    val borderAlpha = if (enabled) 1f else 0.4f
+
+    // Press scale animation
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.97f else 1f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness    = Spring.StiffnessMedium
+        ),
+        label = "card_press_scale"
+    )
+
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
-    ) {
-        val widthPx = constraints.maxWidth.toFloat().coerceAtLeast(1f)
-        val heightPx = constraints.maxHeight.toFloat().coerceAtLeast(1f)
-        val gradientEnd = Offset(widthPx, heightPx)
+            .graphicsLayer { scaleX = scale; scaleY = scale }
+            .clip(shape)
+            .drawWithContent {
+                val w  = size.width
+                val h  = size.height
+                val cr = CornerRadius(24.dp.toPx())
 
-        Box(
+                // Layer 1: radial base - color blooms from bottom-left
+                drawRoundRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            baseColor.copy(alpha = 0.80f * glassAlpha),
+                            midColor.copy(alpha = 0.60f * glassAlpha),
+                            endColor.copy(alpha = 0.40f * glassAlpha)
+                        ),
+                        center = Offset(w * 0.15f, h * 0.85f),
+                        radius = w * 1.1f
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 2: secondary radial bloom from top-right (accent)
+                drawRoundRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            endColor.copy(alpha = 0.55f * glassAlpha),
+                            midColor.copy(alpha = 0.25f * glassAlpha),
+                            Color.Transparent
+                        ),
+                        center = Offset(w * 0.88f, h * 0.12f),
+                        radius = w * 0.75f
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 3: frosted white overlay - very subtle, just adds glass texture
+                drawRoundRect(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.03f * glassAlpha),
+                            Color.White.copy(alpha = 0.01f * glassAlpha),
+                            Color.White.copy(alpha = 0.02f * glassAlpha)
+                        ),
+                        startY = 0f,
+                        endY = h
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 4: diagonal sweep highlight (top-left → mid) - thin specular only
+                drawRoundRect(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.08f * glassAlpha),
+                            Color.White.copy(alpha = 0.02f * glassAlpha),
+                            Color.Transparent
+                        ),
+                        start = Offset(0f, 0f),
+                        end   = Offset(w * 0.5f, h)
+                    ),
+                    cornerRadius = cr
+                )
+
+                // Layer 5: bottom edge warm reflection
+                drawRoundRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            endColor.copy(alpha = 0.22f * glassAlpha)
+                        ),
+                        center = Offset(w * 0.5f, h),
+                        radius = w * 0.65f
+                    ),
+                    cornerRadius = cr
+                )
+
+                drawContent()
+
+                // Border: bright top-left → faded bottom-right
+                drawRoundRect(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.65f * borderAlpha),
+                            midColor.copy(alpha = 0.30f * borderAlpha),
+                            endColor.copy(alpha = 0.15f * borderAlpha),
+                            Color.White.copy(alpha = 0.20f * borderAlpha)
+                        ),
+                        start = Offset(0f, 0f),
+                        end   = Offset(w, h)
+                    ),
+                    cornerRadius = cr,
+                    style = Stroke(width = 1.5.dp.toPx())
+                )
+            }
+            .combinedClickable(
+                enabled = enabled,
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                    onClick()
+                },
+                onLongClick = if (onLongClick != null) {
+                    {
+                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                        onLongClick()
+                    }
+                } else null
+            )
+    ) {
+        Row(
             modifier = Modifier
                 .fillMaxSize()
-                .clip(shape)
-                .border(
-                    width = 1.5.dp,
-                    brush = Brush.linearGradient(
-                        colors = gradientColors.map { it.copy(alpha = borderAlpha) },
-                        start = Offset.Zero,
-                        end = gradientEnd
-                    ),
-                    shape = shape
-                )
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = gradientColors.map { it.copy(alpha = backgroundAlpha) },
-                        start = Offset.Zero,
-                        end = gradientEnd
-                    )
-                )
-                .combinedClickable(
-                    enabled = enabled,
-                    onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                        onClick()
-                    },
-                    onLongClick = if (onLongClick != null) {
-                        {
-                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                            onLongClick()
-                        }
-                    } else null
-                )
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                content = content
-            )
-        }
+                .padding(horizontal = 16.dp)
+                .graphicsLayer { alpha = contentAlpha },
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            content = content
+        )
     }
 }
 
@@ -1451,7 +1628,9 @@ fun AppLoadingCard(
         ) {
             // Icon skeleton
             ShimmerBox(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier
+                    .size(60.dp)
+                    .padding(6.dp),
                 shape = RoundedCornerShape(12.dp),
                 baseColor = Color.White.copy(alpha = 0.2f)
             )

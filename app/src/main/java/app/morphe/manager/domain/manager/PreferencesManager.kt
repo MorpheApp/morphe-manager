@@ -41,6 +41,9 @@ class PreferencesManager(
     /** UIDs of bundles that have prereleases (dev branch) enabled. Stored as strings. */
     val bundlePrereleasesEnabled = stringSetPreference("bundle_prereleases_enabled", emptySet())
 
+    /** UIDs of bundles for which experimental app versions are preferred as the recommended target. */
+    val bundleExperimentalVersionsEnabled = stringSetPreference("bundle_experimental_versions_enabled", emptySet())
+
     /**  Whether to send Android system notifications when updates are available in the background. */
     val backgroundUpdateNotifications = booleanPreference("background_update_notifications", false)
 
@@ -146,6 +149,7 @@ class PreferencesManager(
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
         val bundlePrereleasesEnabled: Set<String>? = null,
+        val bundleExperimentalVersionsEnabled: Set<String>? = null,
         val disablePatchVersionCompatCheck: Boolean? = null,
         val disableSelectionWarning: Boolean? = null,
         val disableUniversalPatchCheck: Boolean? = null,
@@ -189,6 +193,7 @@ class PreferencesManager(
         firstLaunch = firstLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
         bundlePrereleasesEnabled = bundlePrereleasesEnabled.get(),
+        bundleExperimentalVersionsEnabled = bundleExperimentalVersionsEnabled.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         backgroundType = backgroundType.get(),
         useExpertMode = useExpertMode.get(),
@@ -220,6 +225,7 @@ class PreferencesManager(
         snapshot.firstLaunch?.let { firstLaunch.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
         snapshot.bundlePrereleasesEnabled?.let { bundlePrereleasesEnabled.value = it }
+        snapshot.bundleExperimentalVersionsEnabled?.let { bundleExperimentalVersionsEnabled.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }

@@ -4,7 +4,6 @@
     <string name="home_other_apps">그 외의 앱</string>
     <string name="home_not_patched_yet">아직 패치되지 않음</string>
     <string name="home_no_patches_available">사용 가능한 패치 없음</string>
-    <string name="home_default_source_disabled">Morphe 패치 소스가 비활성화되어 있습니다. 패치 소스 시트에서 활성화하거나 전문가 모드를 사용하세요</string>
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
     <string name="home_app_hide_message">이 앱이 홈 화면에서 숨겨집니다. 나중에 목록 하단에 있는 \'%1$s\' 버튼을 사용하여 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
     <string name="sources_management_prerelease_toggle">패치 Pre-release 버전 사용</string>
     <string name="sources_management_prerelease_toggle_description">새 실험 패치 버전을 미리 받아보세요</string>
+    <string name="sources_management_experimental_versions_toggle">실험적 앱 버전 사용</string>
+    <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우 실험적 앱 대상 패치</string>
     <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">표시 이름</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">APK 선택</string>
     <string name="home_select_any_apk_description">아래 버튼을 탭하여 패치할 앱의 APK 파일을 선택하세요</string>
     <string name="home_invalid_apk">APK 파일이 잘못되었습니다</string>
-    <string name="home_no_patches_for_app">이 앱에 사용 가능한 패치가 없습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
@@ -116,13 +116,22 @@
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
-    <string name="expert_mode_no_patches">사용 가능한 패치가 없습니다</string>
     <string name="expert_mode_universal_patches">유니버셜 패치</string>
     <string name="expert_mode_multiple_sources_warning_title">여러 패치 소스가 선택됨</string>
     <string name="expert_mode_multiple_sources_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
 
 그래도 계속하시겠습니까?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">검증되지 않은 APK</string>
+    <string name="home_invalid_signature_badge">이 APK는 원래 버전이 아닐 수 있습니다.</string>
+    <string name="home_split_apk_warning_title">분할 APK는 지원되지 않습니다.</string>
+    <string name="home_split_apk_warning_message">분할 APK 번들(&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)을 선택하셨습니다. &lt;b&gt;%s&lt;/b&gt;는(은) &lt;b&gt;전체 APK&lt;/b&gt;가 필요합니다. 분할 번들은 이 앱에 패치할 수 없습니다.</string>
+    <string name="home_split_apk_warning_badge">계속하려면 전체 APK가 필요합니다.</string>
+    <string name="home_split_apk_warning_pick_another">다른 APK를 선택하세요.</string>
+    <string name="home_dialog_unsupported_version_experimental_label">실험적</string>
+    <string name="home_dialog_unsupported_version_experimental_description">이 버전은 실험적 지원을 제공하며 불안정하거나 불완전할 수 있습니다.</string>
+    <string name="morphe_experimental_app_version_dialog_title">실험해 보시겠습니까? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt;의 이 버전에는 초기 실험적 지원이 있습니다.&lt;br/&gt;&lt;br/&gt;🔧 이 앱 버전에 대한 패치가 개선됨에 따라 다소 이상한 앱 동작이나 식별되지 않은 버그가 발생할 수 있습니다.</string>
     <string name="home_dialog_unsupported_version_dialog_title">지원되지 않는 버전</string>
     <string name="home_dialog_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속 진행하면 앱이 제대로 작동하지 않을 수 있습니다</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">계속 진행</string>
@@ -136,6 +145,9 @@
     <string name="home_outdated_patches_dialog_message">모바일 데이터가 활성화되어 있고 패치 업데이트가 비활성화되었습니다</string>
     <string name="home_outdated_patches_dialog_warning">오래된 패치를 사용하면 앱이 손상될 수 있습니다</string>
     <string name="home_outdated_patches_dialog_update_and_patch">업데이트 &amp; 패치</string>
+    <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
+    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치하려면 정상적으로 작동하려면 최소 1 GB의 여유 공간이 필요합니다.</string>
+    <string name="home_low_disk_space_dialog_warning">계속하면 \"파일을 찾을 수 없음\" 오류 또는 손상된 출력 APK가 발생할 수 있습니다.</string>
     <!-- Patch Options -->
     <string name="custom_color">커스텀 색상</string>
     <string name="hex_color">헥스 색상 코드</string>
@@ -579,6 +591,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"Morphe는 인기 있는 안드로이드 앱을 현대적이고 간결한 방식으로 패치하는 데 초점을 둔 실험적인 오픈소스 프로젝트입니다
 
 핵심부터 오픈소스를 지향하며, 커뮤니티의 피드백과 기여를 바탕으로 앞으로의 혁신을 만들어갑니다"</string>
+    <string name="credits">크레딧</string>
+    <string name="credits_current_development">현재 개발</string>
+    <string name="credits_prior_development">이전 개발</string>
     <!-- Shared strings -->
     <string name="patches">패치</string>
     <string name="home">홈</string>
@@ -603,7 +618,7 @@ morphe_header_custom_dark.png
     <string name="view">보기</string>
     <string name="search">검색</string>
     <string name="search_no_results">검색 결과가 없습니다</string>
-    <string name="any_version">모든</string>
+    <string name="any_version">모든 버전</string>
     <string name="enabled">활성화됨</string>
     <string name="disabled">비활성화됨</string>
     <string name="selected">선택됨</string>

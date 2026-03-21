@@ -61,7 +61,7 @@ private object AdaptiveIconConfig {
     const val YTM_ICONS_FOLDER_NAME = "morphe_icons_music"
 
     fun iconFolderName(packageName: String) = when (packageName) {
-        KnownApp.YOUTUBE_MUSIC -> YTM_ICONS_FOLDER_NAME
+        KnownApps.YOUTUBE_MUSIC -> YTM_ICONS_FOLDER_NAME
         else -> YOUTUBE_ICONS_FOLDER_NAME
     }
 

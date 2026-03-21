@@ -1,3 +1,24 @@
+# app [1.12.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.6...v1.12.0-dev.7) (2026-03-21)
+
+
+### Features
+
+* Use Morphe patcher 1.3.0 ([#329](https://github.com/MorpheApp/morphe-manager/issues/329)) ([344a06c](https://github.com/MorpheApp/morphe-manager/commit/344a06c43d46f7e6be1ca9292aea639a5677d542))
+
+# app [1.12.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.5...v1.12.0-dev.6) (2026-03-19)
+
+
+### Bug Fixes
+
+* Use latest Morphe patcher ([cb53fbb](https://github.com/MorpheApp/morphe-manager/commit/cb53fbb5814d67730b7e53e940bcac49a9df671e))
+
+# app [1.12.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.4...v1.12.0-dev.5) (2026-03-16)
+
+
+### Bug Fixes
+
+* Set default minimum process memory limit to 512MB ([c28aaae](https://github.com/MorpheApp/morphe-manager/commit/c28aaae9a63dbb4b0a084938ed4092cfdddb3f37))
+
 # app [1.12.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.3...v1.12.0-dev.4) (2026-03-13)
 
 

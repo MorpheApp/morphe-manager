@@ -780,6 +780,19 @@ class PatchBundleRepository(
         )
     }
 
+    /**
+     * Toggle experimental-version mode for a bundle.
+     *
+     * When enabled, the highest experimental app version declared in the bundle's
+     * Compatibility targets becomes the recommended patching target for that app.
+     * When disabled, the highest stable (non-experimental) version is recommended instead.
+     */
+    suspend fun setUseExperimentalVersions(uid: Int, useExperimental: Boolean) {
+        val current = prefs.bundleExperimentalVersionsEnabled.get().toMutableSet()
+        if (useExperimental) current.add(uid.toString()) else current.remove(uid.toString())
+        prefs.bundleExperimentalVersionsEnabled.update(current)
+    }
+
     suspend fun createLocal(expectedSize: Long? = null, createStream: suspend () -> InputStream) {
         var copyTotal: Long? = expectedSize?.takeIf { it > 0L }
         var copyRead = 0L
@@ -1090,8 +1103,8 @@ class PatchBundleRepository(
             throw IllegalArgumentException("Invalid bundle URL: ${e.message ?: trimmed}")
         }
 
-        var host = parsed.host
-        var pathSegments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
+        val host = parsed.host
+        val pathSegments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
 
         // Handle GitHub repository URLs
         if (host.equals("github.com", ignoreCase = true)) {
@@ -1622,7 +1635,7 @@ class PatchBundleRepository(
         }
     }
 
-    private class BundleUpdateCancelled() : Exception()
+    private class BundleUpdateCancelled : Exception()
 
     private inner class ManualUpdateCheck(
         private val targetUids: Set<Int>? = null

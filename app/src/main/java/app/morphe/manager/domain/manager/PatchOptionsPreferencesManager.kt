@@ -7,7 +7,7 @@ package app.morphe.manager.domain.manager
 
 import android.content.Context
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
-import app.morphe.manager.util.KnownApp
+import app.morphe.manager.util.KnownApps
 
 /**
  * Manages patch-specific option values that are applied during patching.
@@ -129,13 +129,13 @@ The image dimensions must be as follows:
 
     // Hide Shorts - App Shortcut (YouTube only)
     val hideShortsAppShortcut = booleanPreference(
-        "${KnownApp.YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}",
+        "${KnownApps.YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}",
         false
     )
 
     // Hide Shorts - Widget (YouTube only)
     val hideShortsWidget = booleanPreference(
-        "${KnownApp.YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}",
+        "${KnownApps.YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}",
         false
     )
 
@@ -154,7 +154,7 @@ The image dimensions must be as follows:
                 ?.let { themeOptions[KEY_DARK_THEME_COLOR] = it }
 
             // Light theme option (YouTube only)
-            if (packageName == KnownApp.YOUTUBE) {
+            if (packageName == KnownApps.YOUTUBE) {
                 lightThemeColor(packageName).get()
                     .takeIf { it.isNotBlank() && it != DEFAULT_LIGHT_THEME }
                     ?.let { themeOptions[KEY_LIGHT_THEME_COLOR] = it }
@@ -177,7 +177,7 @@ The image dimensions must be as follows:
                 ?.let { bundleOptions[PATCH_CHANGE_HEADER] = mutableMapOf(KEY_CUSTOM_HEADER to it) }
 
             // Hide Shorts patch options (YouTube only)
-            if (packageName == KnownApp.YOUTUBE) {
+            if (packageName == KnownApps.YOUTUBE) {
                 val shortsOptions = mutableMapOf<String, Any?>()
                 if (hideShortsAppShortcut.get()) shortsOptions[KEY_HIDE_SHORTS_APP_SHORTCUT] = true
                 if (hideShortsWidget.get()) shortsOptions[KEY_HIDE_SHORTS_WIDGET] = true

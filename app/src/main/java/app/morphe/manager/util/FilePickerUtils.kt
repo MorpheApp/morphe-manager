@@ -22,19 +22,18 @@ fun Uri.toFilePath(): String {
     return when {
         // Handle tree URIs
         path.startsWith("/tree/primary:") -> {
-            path.replace("/tree/primary:", "/storage/emulated/0/")
+            Uri.decode(path.replace("/tree/primary:", "/storage/emulated/0/"))
         }
         // Handle document URIs
         path.startsWith("/document/primary:") -> {
-            path.replace("/document/primary:", "/storage/emulated/0/")
+            Uri.decode(path.replace("/document/primary:", "/storage/emulated/0/"))
         }
         // Handle other primary storage paths
         path.contains("primary:") -> {
-            path.substringAfter("primary:")
-                .let { "/storage/emulated/0/$it" }
+            Uri.decode(path.substringAfter("primary:").let { "/storage/emulated/0/$it" })
         }
         // Fallback to original URI string
-        else -> this.toString()
+        else -> Uri.decode(this.toString())
     }
 }
 

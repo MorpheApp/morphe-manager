@@ -4,8 +4,6 @@
     <string name="home_other_apps">แอปอื่น ๆ</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพทช์</string>
     <string name="home_no_patches_available">ไม่มีแพตซ์รองรับ</string>
-    <string name="home_default_source_disabled">ซอร์ซแพตซ์ของ Morphe ถูกปิดการใช้งานแล้ว 
-กรุณาเปิดซอร์ซแพตซ์ของ Morphe ที่  Patch sources sheet หรือเข้าไปตั้งค่าในโหมดเชี่ยวชาญ</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้?</string>
     <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าหลัก คุณสามารถกู้คืนมันได้ภายหลังโดยใช้ปุ่ม \'%1$s\' ที่ด้านล่างของรายการ</string>
     <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
@@ -57,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_prerelease_toggle">ใช้แพทช์ก่อนปล่อยอย่างทางการ</string>
     <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงเวอร์ชันใหม่ของแพทช์ทดลองก่อนอื่น</string>
+    <string name="sources_management_experimental_versions_toggle">ใช้เวอร์ชันทดลองของแอป</string>
+    <string name="sources_management_experimental_versions_toggle_description">แก้ไขเป้าหมายแอปเวอร์ชันทดลองหากมี</string>
     <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
@@ -109,7 +109,6 @@
     <string name="home_select_apk_title">เลือกไฟล์ APK</string>
     <string name="home_select_any_apk_description">กดปุ่มด้านล่างเพื่อเลือกไฟล์ APK ของแอปพลิเคชันใด ๆ เพื่อการแพตซ์</string>
     <string name="home_invalid_apk">ไฟล์ APK ไม่ถูกต้อง</string>
-    <string name="home_no_patches_for_app">ไม่มีแพตซ์ที่รองรับกับแอปพลิเคชันนี้</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">โหมดผู้เชี่ยวชาญ</string>
     <string name="expert_mode_search">ค้นหาแพตซ์</string>
@@ -117,7 +116,6 @@
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
-    <string name="expert_mode_no_patches">ไม่มีแพตซ์ให้ใช้งาน</string>
     <string name="expert_mode_universal_patches">แพตช์สากล</string>
     <string name="expert_mode_multiple_sources_warning_title">หลายแหล่งปรับปรุงถูกเลือก</string>
     <string name="expert_mode_multiple_sources_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
@@ -578,6 +576,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
     <string name="settings_system_share_website_description">เลือก</string>
     <string name="settings_system_manager_description">"ไม่เลือก"</string>
+    <string name="credits">เครดิต</string>
+    <string name="credits_current_development">การพัฒนาปัจจุบัน</string>
+    <string name="credits_prior_development">การพัฒนาที่ผ่านมา</string>
     <!-- Shared strings -->
     <string name="patches">แพตช์</string>
     <string name="home">หน้าแรก</string>

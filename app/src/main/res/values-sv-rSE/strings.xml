@@ -4,7 +4,6 @@
     <string name="home_other_apps">Andra appar</string>
     <string name="home_not_patched_yet">Inte korrigerad än</string>
     <string name="home_no_patches_available">Inga korrigeringar är tillgängliga</string>
-    <string name="home_default_source_disabled">Morphe-korrigeringskällan är inaktiverad. Aktivera den i bladet Korrigeringskällor eller använd expertläget</string>
     <string name="home_app_hide_title">Dölj den här appen?</string>
     <string name="home_app_hide_message">Den här appen döljs från startsidan. Du kan återställa den senare med knappen \"%1$s\" längst ned i listan</string>
     <string name="home_app_will_be_hidden">Den här appen döljs</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">Välj en APK-fil</string>
     <string name="home_select_any_apk_description">Tryck på knappen nedan för att välja en APK-fil för valfri app som du vill korrigera</string>
     <string name="home_invalid_apk">Ogiltig APK-fil</string>
-    <string name="home_no_patches_for_app">Inga korrigeringar är tillgängliga för den här appen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertläge</string>
     <string name="expert_mode_search">Sök efter korrigeringar</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Inaktivera alla</string>
     <string name="expert_mode_enable_all">Aktivera alla</string>
     <string name="expert_mode_no_results">Inga korrigeringar hittades</string>
-    <string name="expert_mode_no_patches">Inga korrigeringar är tillgängliga</string>
     <string name="expert_mode_universal_patches">Universella korrigeringar</string>
     <string name="expert_mode_multiple_sources_warning_title">Flera korrigeringskällor har valts</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
@@ -142,6 +139,9 @@
     <string name="patch_option_enter_number">Ange tal</string>
     <string name="patch_option_enter_decimal">Ange decimaltal</string>
     <string name="patch_option_pick_folder">Välj mapp</string>
+    <string name="patch_option_list_duplicate">Det här värdet finns redan</string>
+    <string name="patch_option_list_empty">Värdet kan inte vara tomt</string>
+    <string name="patch_option_list_empty_state">Inga värden har lagts till ännu</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Skapa adaptiv ikon</string>
     <string name="adaptive_icon_instructions">Välj en förgrundsbild, välj bakgrundsfärg och justera förhandsgranskningen genom att nypa den</string>
@@ -195,7 +195,7 @@
     <string name="root_pre_patch_installer_mount_description">Montera den korrigerade APK-filen över standardappen. Inget GmsCore behövs</string>
     <string name="root_pre_patch_installer_standard_title">Standardinstallation</string>
     <string name="root_pre_patch_installer_standard_description">Installera som en separat app med stöd för GmsCore. Välj en installerare (Systemets installerare, Shizuku med flera) efter appkorrigeringen</string>
-    <string name="root_pre_patch_installer_hint">Installationsmetoden bestämmer vilka korrigeringar som inkluderas och kan inte ändras efter appkorrigeringen</string>
+    <string name="root_pre_patch_installer_hint">Installationsmetoden bestämmer vilka korrigeringar som ingår och kan inte ändras efter appkorrigeringen</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fel kopierat till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
@@ -589,6 +589,7 @@ Morphe bygger på öppen källkod och utvecklas utifrån feedback och bidrag fr�
     <string name="close">Stäng</string>
     <string name="clear">Rensa</string>
     <string name="delete">Ta bort</string>
+    <string name="remove">Ta bort</string>
     <string name="disable">Inaktivera</string>
     <string name="enable">Aktivera</string>
     <string name="loading">Läser in …</string>

@@ -52,18 +52,30 @@ sealed class PatchBundleInfo {
             val incompatible = mutableListOf<PatchInfo>()
             val universal = mutableListOf<PatchInfo>()
 
-            relevantPatches.forEach {
-                val targetList = when {
-                    it.compatiblePackages == null -> universal
-                    it.supports(
-                        packageName,
-                        version
-                    ) -> compatible
+            // Accumulate all per-package metadata in a single pass
+            var isVersionExperimental = false
+            var appIconColor: Int? = null
+            var apkFileType: app.morphe.patcher.patch.ApkFileType? = null
+            var displayName: String? = null
+            val signaturesAcc = mutableSetOf<String>()
 
+            relevantPatches.forEach { patch ->
+                // Categorise into compatible / incompatible / universal
+                val targetList = when {
+                    patch.compatiblePackages == null -> universal
+                    patch.supports(packageName, version) -> compatible
                     else -> incompatible
                 }
+                targetList.add(patch)
 
-                targetList.add(it)
+                // Collect metadata (first non-null wins for scalar fields)
+                if (version != null && !isVersionExperimental) {
+                    isVersionExperimental = patch.isExperimental(packageName, version)
+                }
+                if (appIconColor == null) appIconColor = patch.appIconColorFor(packageName)
+                if (apkFileType == null) apkFileType = patch.apkFileTypeFor(packageName)
+                if (displayName == null) displayName = patch.displayNameFor(packageName)
+                patch.signaturesFor(packageName)?.let { signaturesAcc.addAll(it) }
             }
 
             return Scoped(
@@ -74,7 +86,12 @@ sealed class PatchBundleInfo {
                 relevantPatches,
                 compatible,
                 incompatible,
-                universal
+                universal,
+                isVersionExperimental = isVersionExperimental,
+                appIconColor = appIconColor,
+                apkFileType = apkFileType,
+                displayName = displayName,
+                signatures = signaturesAcc.takeIf { it.isNotEmpty() },
             )
         }
     }
@@ -85,6 +102,11 @@ sealed class PatchBundleInfo {
      * @param compatible Patches that are compatible with the specified package name and version.
      * @param incompatible Patches that are compatible with the specified package name but not version.
      * @param universal Patches that are compatible with all packages.
+     * @param isVersionExperimental Whether the selected app version is marked as experimental in this bundle.
+     * @param appIconColor The 0xAARRGGBB app icon background color declared in the bundle, or null.
+     * @param apkFileType The preferred/required APK file type declared in the bundle, or null.
+     * @param displayName The app display name declared in the patch bundle (e.g. "YouTube"), or null.
+     * @param signatures Valid SHA-256 signing fingerprints of the original app, or null if not declared.
      * @see [PatchBundleInfo.Global.forPackage]
      * @see [PatchBundleInfo]
      */
@@ -96,7 +118,12 @@ sealed class PatchBundleInfo {
         override val patches: List<PatchInfo>,
         val compatible: List<PatchInfo>,
         val incompatible: List<PatchInfo>,
-        val universal: List<PatchInfo>
+        val universal: List<PatchInfo>,
+        val isVersionExperimental: Boolean = false,
+        val appIconColor: Int? = null,
+        val apkFileType: app.morphe.patcher.patch.ApkFileType? = null,
+        val displayName: String? = null,
+        val signatures: Set<String>? = null,
     ) : PatchBundleInfo() {
         fun patchSequence(allowIncompatible: Boolean) = if (allowIncompatible) {
             patches.asSequence()

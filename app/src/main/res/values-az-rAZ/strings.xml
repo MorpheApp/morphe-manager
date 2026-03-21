@@ -4,7 +4,6 @@
     <string name="home_other_apps">Digər tətbiqlər</string>
     <string name="home_not_patched_yet">Hələ yamaqlanmayıb</string>
     <string name="home_no_patches_available">Yamaqlar əlçatan deyil</string>
-    <string name="home_default_source_disabled">Morphe yamaq mənbəyi qapalıdır. Xahiş olunur, bunu Yamaq mənbələri səhifəsində aktivləşdirin və ya Mütəxəssis rejimin istifadə edin</string>
     <string name="home_app_hide_title">Bu tətbiq gizlədilsin?</string>
     <string name="home_app_hide_message">Bu tətbiq əsas ekrandan gizlədiləcək. Siyahının aşağısındakı \'%1$s\' düyməsin istifadə edərək onu daha sonra qaytara bilərsiniz</string>
     <string name="home_app_will_be_hidden">Bu tətbiq gizlədiləcək</string>
@@ -108,7 +107,6 @@
     <string name="home_select_apk_title">APK Seçin</string>
     <string name="home_select_any_apk_description">Hər hansı tətbiqin APK faylını yamaqlama məqsədilə seçmək üçün aşağıda düyməyə toxun</string>
     <string name="home_invalid_apk">Etibarsız APK faylı</string>
-    <string name="home_no_patches_for_app">Bu tətbiq üçün yamaqlar əlçatan deyil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mütəxəssis rejimi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
@@ -116,7 +114,6 @@
     <string name="expert_mode_disable_all">Hamısını qapat</string>
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
-    <string name="expert_mode_no_patches">Yamaqlar əlçatan deyil</string>
     <string name="expert_mode_universal_patches">Ümumi yamaqlar</string>
     <string name="expert_mode_multiple_sources_warning_title">Çoxlu yamaq mənbəyi seçilib</string>
     <string name="expert_mode_multiple_sources_warning_message">"Çoxlu yamaq mənbəyindən yamaqlar seçmisiniz. Bu, uyuşma problemlərinə və ya gözlənilməz fəaliyyətə səbəb ola bilər.
@@ -144,6 +141,9 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patch_option_enter_number">Sayı qeyd edin</string>
     <string name="patch_option_enter_decimal">Onluq qeyd edin</string>
     <string name="patch_option_pick_folder">Qovluq seçin</string>
+    <string name="patch_option_list_duplicate">Bu dəyər artıq var</string>
+    <string name="patch_option_list_empty">Dəyər boş ola bilməz</string>
+    <string name="patch_option_list_empty_state">Hələ dəyər əlavə edilməyib</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Uyğun simvol yarat</string>
     <string name="adaptive_icon_instructions">Ön səhnə şəklin seçin, fon rəngini seçin və önizləməni böyütmək üçün çimdikləmə jestləri ilə nizamlayın</string>
@@ -571,6 +571,9 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"Morphe sevimli Android tətbiqlərinin müasir yaradılması, axarlı yamaqlanmasında cəmlənmiş təcrübi açıq mənbə layihədir
 
 Əsasında açıq mənbəli Morphe gələcək yeniliyi idarə etmək üçün icma rəyləri və töhfələri sayəsində inkişaf edir"</string>
+    <string name="credits">Sərmayələr</string>
+    <string name="credits_current_development">Hazırkı inkişaf</string>
+    <string name="credits_prior_development">Əvvəlki inkişaf</string>
     <!-- Shared strings -->
     <string name="patches">Yamaqlar</string>
     <string name="home">Əsas səhifə</string>

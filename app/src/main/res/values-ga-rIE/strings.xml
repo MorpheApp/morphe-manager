@@ -4,7 +4,6 @@
     <string name="home_other_apps">Aipeanna eile</string>
     <string name="home_not_patched_yet">Gan paisteáil fós</string>
     <string name="home_no_patches_available">Níl aon phaistí ar fáil</string>
-    <string name="home_default_source_disabled">Tá foinse paiste Morphe díchumasaithe. Cumasaigh é sa bhileog Foinsí Paiste nó bain úsáid as mód Saineolaí.</string>
     <string name="home_app_hide_title">An bhfuil tú ag iarraidh an aip seo a cheilt?</string>
     <string name="home_app_hide_message">Beidh an aip seo i bhfolach ón scáileán baile. Is féidir leat í a athchóiriú níos déanaí trí úsáid a bhaint as an gcnaipe \'%1$s\' ag bun an liosta.</string>
     <string name="home_app_will_be_hidden">Beidh an aip seo i bhfolach</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_management_prerelease_toggle">Bain úsáid as paistí réamh-eisiúna</string>
     <string name="sources_management_prerelease_toggle_description">Faigh rochtain luath ar leagan nua paistí turgnamhacha</string>
+    <string name="sources_management_experimental_versions_toggle">Úsáid leaganacha tástálacha</string>
+    <string name="sources_management_experimental_versions_toggle_description">Leasú leaganacha tástálacha, má tá siad ar fáil</string>
     <string name="sources_management_already_exists">Tá an foinse seo curtha leis cheana féin</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ainm taispeána</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Roghnaigh APK</string>
     <string name="home_select_any_apk_description">Beartaigh an cnaipe thíos chun comhad APK d\'aon aip a roghnú le haghaidh paisteála.</string>
     <string name="home_invalid_apk">Comhad APK neamhbhailí</string>
-    <string name="home_no_patches_for_app">Níl aon phaistí ar fáil don aip seo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mód saineolaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
@@ -116,13 +116,23 @@
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
-    <string name="expert_mode_no_patches">Níl aon phaistí ar fáil</string>
     <string name="expert_mode_universal_patches">Paistí uilíocha</string>
     <string name="expert_mode_multiple_sources_warning_title">Ilfhoinsí paiste roghnaithe</string>
     <string name="expert_mode_multiple_sources_warning_message">"Tá paistí roghnaithe agat ó fhoinsí éagsúla paistí. D’fhéadfadh fadhbanna comhoiriúnachta nó iompar gan choinne a bheith mar thoradh air seo.
 
 An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APKannaíseach</string>
+    <string name="home_invalid_signature_message">Ní athruithe APK a roghnú sibh do &lt;b&gt;%s&lt;/b&gt; le comhaid síniúth fhadcheart a bhagairt. Seans go bhfuil sé modhnaithe nó ón bhfoinse neamhdtrustaithe</string>
+    <string name="home_invalid_signature_badge">Seans nach bhfuil an APK seo mar bhunaí</string>
+    <string name="home_split_apk_warning_title">Ná bacadh tacaíocht APK roinnte</string>
+    <string name="home_split_apk_warning_message">Roghnaigh tú freastal APK roinnte (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; éilíonn &lt;b&gt;APK iomlán&lt;/b&gt; - ní féidir freastail roinnte a bheith feistear do chael seo tógtha</string>
+    <string name="home_split_apk_warning_badge">Éilíonn APK iomlán chun dul ar aghaidh</string>
+    <string name="home_split_apk_warning_pick_another">Roghnaigh APK eile</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Turgnamhach</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Feidir gur neamhstadach nó neamhiomlán tacaíocht turgnamhach seo</string>
+    <string name="morphe_experimental_app_version_dialog_title">An mhaith leat a turgnamh? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Leagan &lt;b&gt;%s&lt;/b&gt; seo a bhfuil tacaíocht luath turgnamhach ann&lt;br/&gt;&lt;br/&gt;🔧 Fan le do thoil dímheascailt app nó leictheoirí neamhaird mar atá na feistear á bainistiú do leagan app seo</string>
     <string name="home_dialog_unsupported_version_dialog_title">Leagan Gan Tacaíocht</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ní leagan molta den aip é an APK seo. D’fhéadfadh sé nach n-oibreodh an aip má leanann tú ar aghaidh</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Lean ar aghaidh ar aon nós</string>
@@ -136,6 +146,9 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="home_outdated_patches_dialog_message">Tá sonraí soghluaiste gníomhach agus tá nuashonruithe paiste díchumasaithe</string>
     <string name="home_outdated_patches_dialog_warning">D’fhéadfadh go mbeadh aip briste mar thoradh ar phaistí le paistí atá as dáta</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Nuashonrú &amp; Paiste</string>
+    <string name="home_low_disk_space_dialog_title">Spás disco ísl</string>
+    <string name="home_low_disk_space_dialog_message">Ach %1$.2f GB de spás fágtha atá ar fáil. Éilíonn feistear ar a laghad 1 GB de spás fágtha chun obair go ceart</string>
+    <string name="home_low_disk_space_dialog_warning">Éadh go bhféadfadh ‘file not found’ a bhraoibh, nó APK aschuir cora</string>
     <!-- Patch Options -->
     <string name="custom_color">Dath saincheaptha</string>
     <string name="hex_color">Dath heicsidheachúlach</string>
@@ -576,6 +589,9 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_manager_description">"Is tionscadal foinse oscailte turgnamhach é Morphe atá dírithe ar phaisteáil nua-aimseartha, sruthlínithe a chruthú d'aipeanna Android coitianta.
 
 Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníocaíochtaí ón bpobal chun nuálaíocht amach anseo a thiomáint."</string>
+    <string name="credits">Crèidteacha</string>
+    <string name="credits_current_development">Forbairt reatha</string>
+    <string name="credits_prior_development">Forbairt roimh réidh</string>
     <!-- Shared strings -->
     <string name="patches">Paistí</string>
     <string name="home">Baile</string>

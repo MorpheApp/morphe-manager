@@ -42,7 +42,7 @@ data class ResolvedAppData(
  * 4. Constants (hardcoded app names)
  */
 class AppDataResolver(
-    context: Context,
+    private val context: Context,
     private val pm: PM,
     private val originalApkRepository: OriginalApkRepository,
     private val installedAppRepository: InstalledAppRepository,
@@ -221,7 +221,7 @@ class AppDataResolver(
     private fun getFromConstants(packageName: String): ResolvedAppData {
         return ResolvedAppData(
             packageName = packageName,
-            displayName = AppPackages.getAppName(packageName),
+            displayName = KnownApps.getAppName(context, packageName),
             version = null,
             icon = null,
             packageInfo = null,

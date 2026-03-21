@@ -4,7 +4,6 @@
     <string name="home_other_apps">Outros apps</string>
     <string name="home_not_patched_yet">Não patchado ainda</string>
     <string name="home_no_patches_available">Não há atualizações disponíveis</string>
-    <string name="home_default_source_disabled">O recurso de patch Morphe está desativado. Por favor, ative-o na planilha de fontes de patch ou use o modo Expert.</string>
     <string name="home_app_hide_title">Esconder este aplicativo?</string>
     <string name="home_app_hide_message">Este aplicativo será escondido da tela inicial. Você pode restaurá-lo mais tarde usando o botão \'%1$s\' no final da lista</string>
     <string name="home_app_will_be_hidden">Este aplicativo será escondido</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
     <string name="sources_management_prerelease_toggle">Usar patches pré-lançamento</string>
     <string name="sources_management_prerelease_toggle_description">Receber acesso antecipado a novas versões experimentais de patches</string>
+    <string name="sources_management_experimental_versions_toggle">Utilizar versões experimentais do app</string>
+    <string name="sources_management_experimental_versions_toggle_description">Aplicar patches nas versões experimentais do app, se disponíveis</string>
     <string name="sources_management_already_exists">Esta fonte já foi adicionada</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome de exibição</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Selecionar APK</string>
     <string name="home_select_any_apk_description">Toque no botão abaixo para selecionar um arquivo APK de qualquer app para aplicar os patches</string>
     <string name="home_invalid_apk">Arquivo APK inválido</string>
-    <string name="home_no_patches_for_app">Não há patches disponíveis para este app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo expert</string>
     <string name="expert_mode_search">Procurar patches</string>
@@ -116,7 +116,6 @@
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
-    <string name="expert_mode_no_patches">Não há atualizações disponíveis</string>
     <string name="expert_mode_universal_patches">Patches universais</string>
     <string name="expert_mode_multiple_sources_warning_title">Várias fontes de patch selecionadas</string>
     <string name="expert_mode_multiple_sources_warning_message">"Você selecionou patches de várias fontes de patch. Isso pode causar problemas de compatibilidade ou comportamento inesperado.
@@ -578,6 +577,9 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_manager_description">"Morphe é um projeto experimental de código aberto focado em criar um patch moderno e enxuto de aplicativos populares do Android
 
 Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovações futuras"</string>
+    <string name="credits">Créditos</string>
+    <string name="credits_current_development">Desenvolvimento atual</string>
+    <string name="credits_prior_development">Desenvolvimento anterior</string>
     <!-- Shared strings -->
     <string name="patches">Remendos</string>
     <string name="home">Início</string>

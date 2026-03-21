@@ -4,7 +4,6 @@
     <string name="home_other_apps">Andere apps</string>
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
-    <string name="home_default_source_disabled">De Morphe-patchbron is uitgeschakeld. Schakel deze in via het tabblad Patchbronnen of gebruik de Expertmodus.</string>
     <string name="home_app_hide_title">Verberg deze app?</string>
     <string name="home_app_hide_message">Deze app wordt verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop \'%1$s\' onderaan de lijst.</string>
     <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Kan URL niet openen</string>
     <string name="sources_management_prerelease_toggle">Gebruik patches van vóór de release</string>
     <string name="sources_management_prerelease_toggle_description">Krijg vroegtijdige toegang tot nieuwe experimentele patchversies</string>
+    <string name="sources_management_experimental_versions_toggle">Experimentele app-versies gebruiken</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patch experimentele app-targets indien beschikbaar</string>
     <string name="sources_management_already_exists">Deze bron is al toegevoegd</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Weergavenaam</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Selecteer APK</string>
     <string name="home_select_any_apk_description">Tik op de knop hieronder om een APK-bestand van een app te selecteren voor het patchen.</string>
     <string name="home_invalid_apk">Ongeldig APK-bestand</string>
-    <string name="home_no_patches_for_app">Geen patches beschikbaar voor deze app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
     <string name="expert_mode_search">Zoek patches</string>
@@ -116,13 +116,23 @@
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
     <string name="expert_mode_enable_all">Alles inschakelen</string>
     <string name="expert_mode_no_results">Geen patches gevonden</string>
-    <string name="expert_mode_no_patches">Geen patches beschikbaar</string>
     <string name="expert_mode_universal_patches">Universele patches</string>
     <string name="expert_mode_multiple_sources_warning_title">Meerdere patch-bronnen geselecteerd</string>
     <string name="expert_mode_multiple_sources_warning_message">"U heeft patches geselecteerd van meerdere patch-bronnen. Dit kan compatibiliteitsproblemen of onverwachte gedrag veroorzaken.
 
 Weet u zeker dat u doorgaat?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Onbevestigd APK</string>
+    <string name="home_invalid_signature_message">Het APK-bestand dat u hebt geselecteerd voor &lt;b&gt;%s&lt;/b&gt; komt niet overeen met het verwachte ondertekeningscertificaat. Het kan gewijzigd zijn of afkomstig zijn van een onbetrouwbare bron</string>
+    <string name="home_invalid_signature_badge">Dit APK-bestand is mogelijk niet het origineel</string>
+    <string name="home_split_apk_warning_title">Split APK wordt niet ondersteund</string>
+    <string name="home_split_apk_warning_message">U heeft een split APK-bundel (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) geselecteerd. &lt;b&gt;%s&lt;/b&gt; vereist een &lt;b&gt;volledig APK-bestand&lt;/b&gt; - split-bundels kunnen niet worden gepatcht voor deze app</string>
+    <string name="home_split_apk_warning_badge">Een volledig APK-bestand is vereist om verder te gaan</string>
+    <string name="home_split_apk_warning_pick_another">Selecteer een ander APK-bestand</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Experimenteel</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Deze versie heeft experimentele ondersteuning en kan instabiel of onvolledig zijn</string>
+    <string name="morphe_experimental_app_version_dialog_title">Wilt u experimenteren? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Deze versie van &lt;b&gt;%s&lt;/b&gt; heeft vroege experimentele ondersteuning&lt;br/&gt;&lt;br/&gt;🔧 Verwacht vreemd app-gedrag of onbekende bugs, aangezien de patches worden verfijnd voor deze app-versie</string>
     <string name="home_dialog_unsupported_version_dialog_title">Niet-ondersteunde versie</string>
     <string name="home_dialog_unsupported_version_dialog_description">Deze APK is geen aanbevolen app-versie. Doorgaan kan ertoe leiden dat de app niet werkt</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Toch doorgaan</string>
@@ -136,6 +146,9 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="home_outdated_patches_dialog_message">Mobiele data is actief en patch-updates zijn uitgeschakeld</string>
     <string name="home_outdated_patches_dialog_warning">Het installeren van verouderde patches kan ertoe leiden dat de app niet meer werkt</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
+    <string name="home_low_disk_space_dialog_title">Weinig schijfruimte</string>
+    <string name="home_low_disk_space_dialog_message">Slechts %1$.2f GB vrije opslagruimte beschikbaar. Patching vereist minimaal 1 GB vrije ruimte om correct te werken</string>
+    <string name="home_low_disk_space_dialog_warning">Doorgaan kan resulteren in een foutmelding \'bestand niet gevonden\' of een beschadigd output APK-bestand</string>
     <!-- Patch Options -->
     <string name="custom_color">Aangepaste kleur</string>
     <string name="hex_color">Hex-kleur</string>
@@ -578,6 +591,9 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_manager_description">"Morphe is een experimentele open-source project gericht op het creëren van een moderne, gestroomde patching van populaire Android-apps
 
 Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen om toekomstige innovatie te drijven"</string>
+    <string name="credits">Credits</string>
+    <string name="credits_current_development">Huidige ontwikkeling</string>
+    <string name="credits_prior_development">Eerdere ontwikkeling</string>
     <!-- Shared strings -->
     <string name="patches">Patches</string>
     <string name="home">Home</string>

@@ -4,7 +4,6 @@
     <string name="home_other_apps">Inne aplikacje</string>
     <string name="home_not_patched_yet">Jeszcze niezmodyfikowana</string>
     <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
-    <string name="home_default_source_disabled">Źródło modyfikacji Morphe jest wyłączone. Włącz je w sekcji Źródła modyfikacji lub skorzystaj z trybu eksperckiego</string>
     <string name="home_app_hide_title">Ukryć tę aplikację?</string>
     <string name="home_app_hide_message">Ta aplikacja zostanie ukryta z ekranu głównego. Możesz ją przywrócić później, używając przycisku \"%1$s\" na dole listy</string>
     <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="sources_management_prerelease_toggle">Używaj przedpremierowych wersji modyfikacji</string>
     <string name="sources_management_prerelease_toggle_description">Uzyskaj wczesny dostęp do nowych, eksperymentalnych wersji modyfikacji</string>
+    <string name="sources_management_experimental_versions_toggle">Używaj eksperymentalnych wersji aplikacji</string>
+    <string name="sources_management_experimental_versions_toggle_description">Łať patchować eksperymentalne cele aplikacji, jeśli są dostępne</string>
     <string name="sources_management_already_exists">To źródło zostało już dodane</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Wybierz plik APK</string>
     <string name="home_select_any_apk_description">Stuknij przycisk poniżej, aby wybrać plik APK dowolnej aplikacji do modyfikacji</string>
     <string name="home_invalid_apk">Nieprawidłowy plik APK</string>
-    <string name="home_no_patches_for_app">Brak dostępnych modyfikacji dla tej aplikacji</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Tryb ekspercki</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
@@ -116,13 +116,22 @@
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
     <string name="expert_mode_no_results">Brak znalezionych modyfikacji</string>
-    <string name="expert_mode_no_patches">Brak dostępnych modyfikacji</string>
     <string name="expert_mode_universal_patches">Uniwersalne modyfikacje</string>
     <string name="expert_mode_multiple_sources_warning_title">Wybrano wiele źródeł modyfikacji</string>
     <string name="expert_mode_multiple_sources_warning_message">"Wybrano modyfikacje z wielu źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane działanie aplikacji.
 
 Czy na pewno chcesz kontynuować?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Niezweryfikowany APK</string>
+    <string name="home_invalid_signature_badge">Ten APK może nie być oryginalny</string>
+    <string name="home_split_apk_warning_title">Split APK nie obsługiwany</string>
+    <string name="home_split_apk_warning_message">Wybrałeś pakiet APK podzielony (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; wymaga &lt;b&gt;pełnego APK&lt;/b&gt; - pakiety podzielone nie mogą być łatane dla tej aplikacji</string>
+    <string name="home_split_apk_warning_badge">Do kontynuacji wymagany jest pełny APK</string>
+    <string name="home_split_apk_warning_pick_another">Wybierz inny APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Eksperymentalny</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ta wersja ma eksperymentalne wsparcie i może być niestabilna lub niekompletna</string>
+    <string name="morphe_experimental_app_version_dialog_title">Czy chcesz eksperymentować? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ta wersja &lt;b&gt;%s&lt;/b&gt; ma wczesne eksperymentalne wsparcie&lt;br/&gt;&lt;br/&gt;🔧 Oczekuj dziwnego zachowania aplikacji lub nieznanych błędów, ponieważ poprawki są dopracowywane dla tej wersji aplikacji</string>
     <string name="home_dialog_unsupported_version_dialog_title">Niewspierana wersja</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie posiadała błędy</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
@@ -136,6 +145,9 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="home_outdated_patches_dialog_message">Dane mobilne są aktywne, a aktualizacje modyfikacji zostały wyłączone</string>
     <string name="home_outdated_patches_dialog_warning">Używanie przestarzałych modyfikacji może spowodować uszkodzenie aplikacji</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aktualizuj i modyfikuj</string>
+    <string name="home_low_disk_space_dialog_title">Niska ilość miejsca na dysku</string>
+    <string name="home_low_disk_space_dialog_message">Dostępne jest tylko %1$.2f GB wolnego miejsca. Łatanie wymaga co najmniej 1 GB wolnego miejsca, aby działać poprawnie</string>
+    <string name="home_low_disk_space_dialog_warning">Kontynuacja może spowodować błąd „plik nie znaleziony” lub uszkodzony APK wyjściowy</string>
     <!-- Patch Options -->
     <string name="custom_color">Kolor niestandardowy</string>
     <string name="hex_color">Kolor w formacie HEX</string>
@@ -146,7 +158,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patch_option_pick_folder">Wybierz folder</string>
     <string name="patch_option_list_duplicate">Ta wartość już istnieje</string>
     <string name="patch_option_list_empty">Wartość nie może być pusta</string>
-    <string name="patch_option_list_empty_state">Jeszcze nie dodano żadnych wartości</string>
+    <string name="patch_option_list_empty_state">Nie dodano jeszcze żadnych wartości</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Utwórz ikonę adaptacyjną</string>
     <string name="adaptive_icon_instructions">Wybierz obraz pierwszego planu, wybierz kolor tła i dostosuj podgląd za pomocą gestów uszczypnięcia</string>
@@ -157,14 +169,14 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="adaptive_icon_reset_transform">Zresetuj pozycję i skalę</string>
     <string name="adaptive_icon_safe_zone_inner">Bezpieczna strefa (zawsze widoczna)</string>
     <string name="adaptive_icon_safe_zone_outer">Strefa maskowania (może być przycięta)</string>
-    <string name="adaptive_icon_created_success">Ikona adaptacyjna została utworzona pomyślnie</string>
+    <string name="adaptive_icon_created_success">Ikona adaptacyjna utworzona pomyślnie</string>
     <string name="adaptive_icon_creation_failed">Nie udało się utworzyć ikony adaptacyjnej</string>
     <string name="adaptive_icon_folder_explanation">Wybierz miejsce docelowe dla folderu \"%1$s/%2$s\" z wygenerowanymi plikami ikon</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Utwórz własny nagłówek</string>
     <string name="header_creator_instructions">Wybierz obrazy dla jasnego i ciemnego motywu, a następnie dostosuj je za pomocą gestów uszczypnięcia</string>
-    <string name="header_creator_light_theme">Nagłówek motywu jasnego</string>
-    <string name="header_creator_dark_theme">Nagłówek motywu ciemnego</string>
+    <string name="header_creator_light_theme">Nagłówek jasnego motywu</string>
+    <string name="header_creator_dark_theme">Nagłówek ciemnego motywu</string>
     <string name="header_creator_no_image">Nie wybrano żadnego obrazu</string>
     <string name="header_creator_success">Nagłówek utworzony pomyślnie</string>
     <string name="header_creator_failed">Nie udało się utworzyć nagłówka</string>
@@ -215,7 +227,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patcher_failed_dialog_title">Modyfikowanie nie powiodło się</string>
     <string name="patcher_unknown_error">Wystąpił nieznany błąd</string>
     <string name="patcher_conflict_title">Konflikt pakietów</string>
-    <string name="patcher_conflict_subtitle">Musisz odinstalować istniejącą wersję</string>
+    <string name="patcher_conflict_subtitle">Musisz odinstalować obecną wersję</string>
     <string name="patcher_install_error_title">Błąd podczas instalacji</string>
     <string name="patcher_install_error_subtitle">Spróbuj odinstalować i ponownie zainstalować</string>
     <string name="patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
@@ -320,7 +332,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Język aplikacji</string>
     <string name="settings_appearance_app_language_current">Obecny język</string>
-    <string name="settings_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą nie istnieć lub być niekompletne</string>
+    <string name="settings_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą być niekompletne</string>
     <string name="settings_appearance_translations_info_text">Aby przetłumaczyć aplikację na nowe języki lub poprawić istniejące tłumaczenia, odwiedź stronę %s</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacji</string>
@@ -388,8 +400,8 @@ Czy na pewno chcesz kontynuować?"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Kolory motywu aplikacji</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Zmień kolor tła</string>
-    <string name="settings_advanced_patch_options_dark_theme_color">Kolor tła motywu ciemnego</string>
-    <string name="settings_advanced_patch_options_light_theme_color">Kolor tła motywu jasnego</string>
+    <string name="settings_advanced_patch_options_dark_theme_color">Kolor tła ciemnego motywu</string>
+    <string name="settings_advanced_patch_options_light_theme_color">Kolor tła jasnego motywu</string>
     <string name="settings_advanced_patch_options_theme_color_description">Może być kolorem szesnastkowym (#RRGGBB) lub odwołaniem do zasobu kolorów</string>
     <string name="settings_advanced_patch_options_loading">Wczytywanie ustawień modyfikacji…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">Zaczekaj na aktualizację źródła modyfikacji</string>
@@ -572,12 +584,15 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patch_options_title">Ustawienia modyfikacji (%s)</string>
     <string name="settings_system_no_patches_or_options">Brak zapisanych modyfikacji lub opcji</string>
     <!-- Settings - System Tab - About Section -->
-    <string name="settings_system_about">O aplikacji</string>
+    <string name="settings_system_about">Informacje</string>
     <string name="settings_system_share_website">Udostępnij stronę</string>
     <string name="settings_system_share_website_description">Udostępnij oficjalną stronę Morphe</string>
     <string name="settings_system_manager_description">"Morphe to eksperymentalny projekt otwartoźródłowy, którego celem jest nowoczesne i sprawne modyfikowanie popularnych aplikacji na Androida
 
 Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytkowników, które napędzają dalszy rozwój i innowacje"</string>
+    <string name="credits">Podziękowania</string>
+    <string name="credits_current_development">Obecny rozwój</string>
+    <string name="credits_prior_development">Wcześniejszy rozwój</string>
     <!-- Shared strings -->
     <string name="patches">Modyfikacje</string>
     <string name="home">Strona główna</string>

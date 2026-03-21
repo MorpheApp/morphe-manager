@@ -2,6 +2,9 @@ name: Build pull request
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - dev
 
 jobs:
   build:
