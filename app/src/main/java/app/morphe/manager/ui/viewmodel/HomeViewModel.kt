@@ -29,6 +29,7 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
@@ -516,12 +517,12 @@ class HomeViewModel(
 
     /**
      * Resolves the changelog scope name for [packageName].
-     * 1. [KnownApps.getChangelogName] — static registry (offline, reliable).
+     * 1. [KnownApps.fallbackName] — static registry (offline, reliable).
      * 2. [PM] label — system label for any installed app not in the registry.
      * Returns null when neither source yields a name.
      */
     private fun resolveChangelogName(packageName: String): String? =
-        KnownApps.getChangelogName(packageName)
+        KnownApps.fallbackName(packageName)
             ?: pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
 
     @SuppressLint("ShowToast")
@@ -686,7 +687,7 @@ class HomeViewModel(
             )
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
-            } ?: bundleMeta?.displayName ?: KnownApps.getAppName(app, packageName)
+            } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
             val gradientColors = bundleMeta?.gradientColors ?: KnownApps.DEFAULT_COLORS
             HomeAppItem(
                 packageName = packageName,
@@ -740,7 +741,7 @@ class HomeViewModel(
                 // Display name priority: installed/patched APK label → bundle declared → KnownApps fallback
                 val displayName = resolvedData.displayName.takeIf {
                     resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
-                } ?: bundleMeta?.displayName ?: KnownApps.getAppName(app, packageName)
+                } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
 
                 // Determine deleted status
                 val isDeleted = installedApp?.let { installed ->
@@ -878,7 +879,7 @@ class HomeViewModel(
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
-        pendingAppName = KnownApps.getAppName(app, packageName)
+        pendingAppName = KnownApps.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
 
@@ -1077,7 +1078,7 @@ class HomeViewModel(
                     pendingSelectedApp = selectedApp
                     showInvalidSignatureDialog = InvalidSignatureDialogState(
                         packageName = selectedApp.packageName,
-                        appName = pendingAppName ?: KnownApps.getAppName(app, selectedApp.packageName)
+                        appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
                     )
                     cleanupPendingData(keepSelectedApp = true)
                     return

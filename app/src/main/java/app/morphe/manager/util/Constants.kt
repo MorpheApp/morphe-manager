@@ -122,9 +122,8 @@ object KnownApps {
      * Returns a display name for [packageName].
      * Priority: fallback table → raw package name.
      * Used as the last resort when bundle metadata and installed labels are unavailable.
-     * Note: [Context] parameter kept for API compatibility - no longer needed for resource lookup.
      */
-    fun getAppName(@Suppress("UNUSED_PARAMETER") context: Context, packageName: String): String =
+    fun getAppName(packageName: String): String =
         FALLBACK_NAMES[packageName] ?: packageName
 
     /**
@@ -133,13 +132,6 @@ object KnownApps {
      * Used for transitional metadata fallbacks where absence should be preserved.
      */
     fun fallbackName(packageName: String): String? = FALLBACK_NAMES[packageName]
-
-    /**
-     * Returns the name used to match conventional-changelog bullet scopes for [packageName].
-     * Returns null for packages not present in [FALLBACK_NAMES] — callers should then
-     * fall back to the system PackageManager label.
-     */
-    fun getChangelogName(packageName: String): String? = FALLBACK_NAMES[packageName]
 }
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"

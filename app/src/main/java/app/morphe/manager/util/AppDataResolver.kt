@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.util
 
 import android.content.Context
@@ -13,7 +18,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 /**
- * Data source priority for app information
+ * Data source priority for app information.
  */
 enum class AppDataSource {
     INSTALLED,     // Installed app via PackageManager
@@ -23,7 +28,7 @@ enum class AppDataSource {
 }
 
 /**
- * Resolved app data from any available source
+ * Resolved app data from any available source.
  */
 data class ResolvedAppData(
     val packageName: String,
@@ -42,7 +47,7 @@ data class ResolvedAppData(
  * 4. Constants (hardcoded app names)
  */
 class AppDataResolver(
-    private val context: Context,
+    context: Context,
     private val pm: PM,
     private val originalApkRepository: OriginalApkRepository,
     private val installedAppRepository: InstalledAppRepository,
@@ -51,7 +56,7 @@ class AppDataResolver(
     private val packageManager: PackageManager = context.packageManager
 
     /**
-     * Resolve app data from any available source
+     * Resolve app data from any available source.
      * @param packageName Package name to resolve
      * @param preferredSource Preferred data source (will still fallback if unavailable)
      * @return ResolvedAppData with information from the best available source
@@ -106,7 +111,7 @@ class AppDataResolver(
     }
 
     /**
-     * Try to get app data from installed app
+     * Try to get app data from installed app.
      */
     private fun tryGetFromInstalled(packageName: String): ResolvedAppData? {
         return try {
@@ -127,7 +132,7 @@ class AppDataResolver(
     }
 
     /**
-     * Try to get app data from saved original APK
+     * Try to get app data from saved original APK.
      */
     private suspend fun tryGetFromOriginalApk(packageName: String): ResolvedAppData? {
         return try {
@@ -162,9 +167,9 @@ class AppDataResolver(
     }
 
     /**
-     * Try to get app data from saved patched APK
+     * Try to get app data from saved patched APK.
      * Searches both by direct package name match and by originalPackageName
-     * to handle cases where the search uses original package but app is patched with different name
+     * to handle cases where the search uses original package but app is patched with different name.
      */
     private suspend fun tryGetFromPatchedApk(packageName: String): ResolvedAppData? {
         return try {
@@ -216,12 +221,12 @@ class AppDataResolver(
     }
 
     /**
-     * Get app data from hardcoded constants
+     * Get app data from hardcoded constants.
      */
     private fun getFromConstants(packageName: String): ResolvedAppData {
         return ResolvedAppData(
             packageName = packageName,
-            displayName = KnownApps.getAppName(context, packageName),
+            displayName = KnownApps.getAppName(packageName),
             version = null,
             icon = null,
             packageInfo = null,
