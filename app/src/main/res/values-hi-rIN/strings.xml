@@ -122,6 +122,17 @@
 
 क्या आप वास्तव में आगे बढ़ना चाहते हैं?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">अपरिचित APK</string>
+    <string name="home_invalid_signature_message">आपके द्वारा चयनित APK &lt;b&gt;%s&lt;/b&gt; प्रमाण पत्र से मेल नहीं खाता। यह संशोधित किया गया हो सकता है या किसी अविश्वसनीय स्रोत से हो सकता है</string>
+    <string name="home_invalid_signature_badge">यह APK मूल नहीं हो सकता है</string>
+    <string name="home_split_apk_warning_title">स्प्लिट APK समर्थित नहीं है</string>
+    <string name="home_split_apk_warning_message">आपने एक स्प्लिट APK बंडल (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) चुना है। &lt;b&gt;%s&lt;/b&gt; को एक &lt;b&gt;पूर्ण APK&lt;/b&gt; की आवश्यकता है - इस ऐप के लिए स्प्लिट बंडल को पैच नहीं किया जा सकता है</string>
+    <string name="home_split_apk_warning_badge">जारी रखने के लिए पूर्ण APK की आवश्यकता है</string>
+    <string name="home_split_apk_warning_pick_another">कोई दूसरा APK चुनें</string>
+    <string name="home_dialog_unsupported_version_experimental_label">प्रायोगिक</string>
+    <string name="home_dialog_unsupported_version_experimental_description">इस संस्करण का प्रायोगिक समर्थन है और अस्थिर या अधूरा हो सकता है</string>
+    <string name="morphe_experimental_app_version_dialog_title">क्या आप प्रयोग करना चाहेंगे? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; के इस संस्करण का शुरुआती प्रायोगिक समर्थन है&lt;br/&gt;&lt;br/&gt;🔧 इस ऐप संस्करण के लिए पैच को परिष्कृत किए जाने के कारण ऐप व्यवहार या अज्ञात बग असामान्य हो सकते हैं</string>
     <string name="home_dialog_unsupported_version_dialog_title">यह एपीएम अनुशासित संस्करण नहीं है। आगे बढ़ने से अनुशासित एप्प्लिकेशन संस्करण हो सकता है।</string>
     <string name="home_dialog_unsupported_version_dialog_description">यह APK अनुशंसित एप्लिकेशन संस्करण नहीं है। जारी रखना परिणामस्वरूप एक कार्यक्षम एप्लिकेशन नहीं हो सकता है।</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">अब भी आगे बढ़ें</string>
@@ -135,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">मोबाइल डेटा सक्रिय है और पैच अपडेट बंद हैं</string>
     <string name="home_outdated_patches_dialog_warning">पुराने पैच से पैच करना हो सकता है कि एप्लिकेशन को तोड़ सकता है</string>
     <string name="home_outdated_patches_dialog_update_and_patch">अपडेट करें &amp; पैच करें</string>
+    <string name="home_low_disk_space_dialog_title">कम डिस्क स्थान</string>
+    <string name="home_low_disk_space_dialog_message">उपलब्ध मुफ्त संग्रहण का केवल %1$.2f GB है। सही ढंग से काम करने के लिए पैचिंग के लिए कम से कम 1 GB मुफ्त स्थान की आवश्यकता होती है</string>
+    <string name="home_low_disk_space_dialog_warning">आगे बढ़ने पर \"फ़ाइल नहीं मिली\" त्रुटि या करप्ट आउटपुट APK हो सकता है</string>
     <!-- Patch Options -->
     <string name="custom_color">कस्टम रंग</string>
     <string name="hex_color">हेक्स रंग</string>

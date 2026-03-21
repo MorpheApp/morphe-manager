@@ -122,6 +122,17 @@
 
 Nais mo bang magpatuloy?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Hindi beripikadong APK</string>
+    <string name="home_invalid_signature_message">Ang APK na pinili mo para sa &lt;b&gt;%s&lt;/b&gt; ay hindi tumutugma sa inaasahang certificate ng paglagda. Maaaring ito ay binago o mula sa hindi pinagkakatiwalaang pinagmulan</string>
+    <string name="home_invalid_signature_badge">Maaaring hindi ang orihinal ang APK na ito</string>
+    <string name="home_split_apk_warning_title">Hindi suportado ang Split APK</string>
+    <string name="home_split_apk_warning_message">Pinili mo ang split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; ay nangangailangan ng &lt;b&gt;full APK&lt;/b&gt; - hindi maaaring i-patch ang mga split bundle para sa app na ito</string>
+    <string name="home_split_apk_warning_badge">Kailangan ng full APK para magpatuloy</string>
+    <string name="home_split_apk_warning_pick_another">Pumili ng ibang APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Pang-eksperimentong</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ang bersyong ito ay may pang-eksperimentong suporta at maaaring hindi matatag o hindi kumpleto</string>
+    <string name="morphe_experimental_app_version_dialog_title">Gusto mo bang mag-eksperimento? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ang bersyong ito ng &lt;b&gt;%s&lt;/b&gt; ay may maagang pang-eksperimentong suporta&lt;br/&gt;&lt;br/&gt;🔧 Asahan ang mga kakaibang pag-uugali ng app o hindi natukoy na mga bug habang ang mga patch ay pinino para sa bersyong ito ng app</string>
     <string name="home_dialog_unsupported_version_dialog_title">Hindi suportadong bersyon</string>
     <string name="home_dialog_unsupported_version_dialog_description">Hindi inirerekomenda ang bersyon ng APK na ito. Maaaring maging resulta sa hindi gumaganang aplikasyon kung magpatuloy.</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Magpatuloy pa rin</string>
@@ -135,6 +146,9 @@ Nais mo bang magpatuloy?"</string>
     <string name="home_outdated_patches_dialog_message">Mobile data ay aktibo at ang patch updates ay hindi pinapayagan</string>
     <string name="home_outdated_patches_dialog_warning">Ang pag-patch gamit ang mga luma na patch ay maaaring magresulta sa isang nasirang app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
+    <string name="home_low_disk_space_dialog_title">Mababang espasyo sa disk</string>
+    <string name="home_low_disk_space_dialog_message">Mayroon lamang %1$.2f GB ng libreng imbakan na available. Ang pag-patch ay nangangailangan ng hindi bababa sa 1 GB ng libreng espasyo upang gumana nang tama</string>
+    <string name="home_low_disk_space_dialog_warning">Ang pagpapatuloy ay maaaring magresulta sa isang error na \"file not found\" o isang corrupt na output APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Pasadyang kulay</string>
     <string name="hex_color">Kulay ng Hex</string>

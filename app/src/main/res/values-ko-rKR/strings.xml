@@ -55,8 +55,8 @@
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
     <string name="sources_management_prerelease_toggle">패치 Pre-release 버전 사용</string>
     <string name="sources_management_prerelease_toggle_description">새 실험 패치 버전을 미리 받아보세요</string>
-    <string name="sources_management_experimental_versions_toggle">실험적 앱 버전 사용</string>
-    <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우 실험적 앱 대상 패치</string>
+    <string name="sources_management_experimental_versions_toggle">실험 앱 버전 사용</string>
+    <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우 실험 앱 버전으로 패치합니다</string>
     <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">표시 이름</string>
@@ -123,15 +123,16 @@
 그래도 계속하시겠습니까?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">검증되지 않은 APK</string>
-    <string name="home_invalid_signature_badge">이 APK는 원래 버전이 아닐 수 있습니다.</string>
-    <string name="home_split_apk_warning_title">분할 APK는 지원되지 않습니다.</string>
-    <string name="home_split_apk_warning_message">분할 APK 번들(&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)을 선택하셨습니다. &lt;b&gt;%s&lt;/b&gt;는(은) &lt;b&gt;전체 APK&lt;/b&gt;가 필요합니다. 분할 번들은 이 앱에 패치할 수 없습니다.</string>
-    <string name="home_split_apk_warning_badge">계속하려면 전체 APK가 필요합니다.</string>
-    <string name="home_split_apk_warning_pick_another">다른 APK를 선택하세요.</string>
-    <string name="home_dialog_unsupported_version_experimental_label">실험적</string>
-    <string name="home_dialog_unsupported_version_experimental_description">이 버전은 실험적 지원을 제공하며 불안정하거나 불완전할 수 있습니다.</string>
+    <string name="home_invalid_signature_message">선택된 &lt;b&gt;%s&lt;/b&gt;에 대한 APK는 예상된 서명 인증서와 일치하지 않습니다. 수정되었거나 신뢰할 수 없는 출처에서 가져온 파일일 수 있습니다</string>
+    <string name="home_invalid_signature_badge">이 파일은 순정 APK가 아닐 수 있습니다</string>
+    <string name="home_split_apk_warning_title">분할 APK는 지원되지 않습니다</string>
+    <string name="home_split_apk_warning_message">분할 APK 번들(&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)을 선택하셨습니다. &lt;b&gt;%s&lt;/b&gt;는 &lt;b&gt;완전한 APK&lt;/b&gt;가 필요하며, 분할 번들로 패치할 수 없습니다</string>
+    <string name="home_split_apk_warning_badge">계속하려면 완전한 APK가 필요합니다</string>
+    <string name="home_split_apk_warning_pick_another">다른 APK를 선택하세요</string>
+    <string name="home_dialog_unsupported_version_experimental_label">실험 버전</string>
+    <string name="home_dialog_unsupported_version_experimental_description">이 버전은 실험적 지원이 포함되어 있으며, 불안정하거나 완전하지 않을 수 있습니다</string>
     <string name="morphe_experimental_app_version_dialog_title">실험해 보시겠습니까? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt;의 이 버전에는 초기 실험적 지원이 있습니다.&lt;br/&gt;&lt;br/&gt;🔧 이 앱 버전에 대한 패치가 개선됨에 따라 다소 이상한 앱 동작이나 식별되지 않은 버그가 발생할 수 있습니다.</string>
+    <string name="morphe_experimental_app_version_dialog_message">이 &lt;b&gt;%s&lt;/b&gt; 버전은 초기 실험적 지원이 제공됩니다&lt;br/&gt;&lt;br/&gt;🔧 이 앱 버전에 맞게 패치가 개선되는 과정이므로, 예상되지 않은 동작이나 확인되지 않은 버그가 발생할 수 있습니다</string>
     <string name="home_dialog_unsupported_version_dialog_title">지원되지 않는 버전</string>
     <string name="home_dialog_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속 진행하면 앱이 제대로 작동하지 않을 수 있습니다</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">계속 진행</string>
@@ -146,8 +147,8 @@
     <string name="home_outdated_patches_dialog_warning">오래된 패치를 사용하면 앱이 손상될 수 있습니다</string>
     <string name="home_outdated_patches_dialog_update_and_patch">업데이트 &amp; 패치</string>
     <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
-    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치하려면 정상적으로 작동하려면 최소 1 GB의 여유 공간이 필요합니다.</string>
-    <string name="home_low_disk_space_dialog_warning">계속하면 \"파일을 찾을 수 없음\" 오류 또는 손상된 출력 APK가 발생할 수 있습니다.</string>
+    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치가 정상적으로 작동하려면 최소 1GB 이상의 공간이 필요합니다</string>
+    <string name="home_low_disk_space_dialog_warning">계속 진행하면 “파일을 찾을 수 없습니다” 오류가 발생하거나 손상된 APK 파일이 생성될 수 있습니다</string>
     <!-- Patch Options -->
     <string name="custom_color">커스텀 색상</string>
     <string name="hex_color">헥스 색상 코드</string>

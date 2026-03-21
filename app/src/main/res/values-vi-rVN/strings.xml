@@ -55,8 +55,8 @@
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_management_prerelease_toggle">Dùng bản vá thử nghiệm</string>
     <string name="sources_management_prerelease_toggle_description">Trải nghiệm sớm các bản vá mới</string>
-    <string name="sources_management_experimental_versions_toggle">Sử dụng các phiên bản ứng dụng thử nghiệm</string>
-    <string name="sources_management_experimental_versions_toggle_description">Áp dụng các bản vá cho các mục tiêu ứng dụng thử nghiệm nếu có</string>
+    <string name="sources_management_experimental_versions_toggle">Dùng ứng dụng bản thử nghiệm</string>
+    <string name="sources_management_experimental_versions_toggle_description">Áp dụng bản vá cho phiên bản thử nghiệm (nếu có)</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
@@ -122,6 +122,17 @@
 
 Bạn có chắc muốn tiếp tục không?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK chưa xác minh</string>
+    <string name="home_invalid_signature_message">Tệp APK bạn chọn cho &lt;b&gt;%s&lt;/b&gt; không khớp với chữ ký dự kiến. Nó có thể đã bị chỉnh sửa hoặc đến từ một nguồn không đáng tin</string>
+    <string name="home_invalid_signature_badge">Không phải APK gốc</string>
+    <string name="home_split_apk_warning_title">Không hỗ trợ APK chia nhỏ</string>
+    <string name="home_split_apk_warning_message">Bạn đã chọn một gói APK chia nhỏ (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; cần một &lt;b&gt;APK đầy đủ&lt;/b&gt; - các gói chia nhỏ không thể vá cho ứng dụng này</string>
+    <string name="home_split_apk_warning_badge">Cần một APK đầy đủ để tiếp tục</string>
+    <string name="home_split_apk_warning_pick_another">Chọn APK khác</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Thử nghiệm</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Phiên bản này vẫn đang thử nghiệm và có thể không ổn định hoặc chưa hoàn thiện</string>
+    <string name="morphe_experimental_app_version_dialog_title">Muốn thử không? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Phiên bản &lt;b&gt;%s&lt;/b&gt; này hiện mới được hỗ trợ thử nghiệm&lt;br/&gt;&lt;br/&gt;🔧 Ứng dụng có thể hoạt động chưa ổn định hoặc còn lỗi trong quá trình hoàn thiện bản vá</string>
     <string name="home_dialog_unsupported_version_dialog_title">Phiên bản không hỗ trợ</string>
     <string name="home_dialog_unsupported_version_dialog_description">Phiên bản APK này không được đề xuất. Tiếp tục có thể dẫn đến ứng dụng không hoạt động</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Vẫn tiếp tục</string>
@@ -135,6 +146,9 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="home_outdated_patches_dialog_message">Bạn đang bật dữ liệu di động vì vậy tự động cập nhật bản vá sẽ bị tắt</string>
     <string name="home_outdated_patches_dialog_warning">Sử dụng các bản vá cũ có thể khiến ứng dụng bị hỏng</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Cập nhật &amp; vá</string>
+    <string name="home_low_disk_space_dialog_title">Hết dung lượng lưu trữ</string>
+    <string name="home_low_disk_space_dialog_message">Chỉ còn %1$.2f GB dung lượng trống. Trong khi đó bạn cần tối thiểu 1GB để quá trình vá ổn định</string>
+    <string name="home_low_disk_space_dialog_warning">Tiếp tục có thể dẫn đến lỗi \"không tìm thấy tệp\" hoặc vá ra apk bị hỏng</string>
     <!-- Patch Options -->
     <string name="custom_color">Tùy chỉnh màu</string>
     <string name="hex_color">Mã hex</string>

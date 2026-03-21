@@ -122,6 +122,17 @@
 
 Да ли сте сигурни да желите да наставите?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Непотврђена APK</string>
+    <string name="home_invalid_signature_message">APK коју сте изабрали за &lt;b&gt;%s&lt;/b&gt; не одговара очекиваној потписне сведочеству. Можда је измењена или потиче из непоузданог извора</string>
+    <string name="home_invalid_signature_badge">Ова APK можда није оригинална</string>
+    <string name="home_split_apk_warning_title">Подржана је само раздвојена APK</string>
+    <string name="home_split_apk_warning_message">Изабрали сте раздвојени APK пакет (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; захтева &lt;b&gt;цео APK&lt;/b&gt; - раздвојени пакети не могу бити поправљени за ову апликацију</string>
+    <string name="home_split_apk_warning_badge">Потребан је цео APK да бисте наставили</string>
+    <string name="home_split_apk_warning_pick_another">Изаберите другу APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Експериментално</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ова верзија има експерименталну подршку и може бити нестабилна или непотпуна</string>
+    <string name="morphe_experimental_app_version_dialog_title">Желите ли да експериментишете? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ова верзија &lt;b&gt;%s&lt;/b&gt; има рану експерименталну подршку&lt;br/&gt;&lt;br/&gt;🔧 Очекујте чудно понашање апликације или неоткривене грешке док се поправке унапређују за ову верзију апликације</string>
     <string name="home_dialog_unsupported_version_dialog_title">Неподржана верзија</string>
     <string name="home_dialog_unsupported_version_dialog_description">Овај APK није препоручена верзија апликације. Настављање може резултирати нефункционалном апликацијом</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Ипак настави</string>
@@ -135,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">Mobilni podaci su aktivni, a ažuriranja ispravaka su onemogućena</string>
     <string name="home_outdated_patches_dialog_warning">Patching sa zastarelima ispravkama može rezultirati slomljenim aplikacijama</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ažuriraj &amp; patchiraj</string>
+    <string name="home_low_disk_space_dialog_title">Мало дисковног простора</string>
+    <string name="home_low_disk_space_dialog_message">Доступно је само %1$.2f GB слободне меморије. Поправка захтева најмање 1 GB слободне меморије да би исправно радила</string>
+    <string name="home_low_disk_space_dialog_warning">Настављање може довести до грешке \"фајл није пронађен\" или до неисправног APK излаза</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Boja u heksadecimalnom formatu</string>

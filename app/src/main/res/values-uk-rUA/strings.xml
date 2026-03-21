@@ -55,8 +55,8 @@
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_management_prerelease_toggle">Передрелізні версії патчів</string>
     <string name="sources_management_prerelease_toggle_description">Отримувати ранній доступ до нових експериментальних версій патчів</string>
-    <string name="sources_management_experimental_versions_toggle">Використовувати експериментальні версії застосунку</string>
-    <string name="sources_management_experimental_versions_toggle_description">Застосувати патчі до експериментальних цілей застосунку, якщо доступно</string>
+    <string name="sources_management_experimental_versions_toggle">Експериментальні версії застосунків</string>
+    <string name="sources_management_experimental_versions_toggle_description">Застосувати патчі до експериментальних версій застосунків, якщо вони доступні</string>
     <string name="sources_management_already_exists">Це джерело вже додано</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
@@ -122,6 +122,17 @@
 
 Ви впевнені, що хочете продовжити?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Непідтверджений APK</string>
+    <string name="home_invalid_signature_message">Вибраний вами APK файл для &lt;b&gt;%s&lt;/b&gt; не відповідає очікуваному сертифікату підпису. Можливо, він змінений або походить з ненадійного джерела</string>
+    <string name="home_invalid_signature_badge">Цей APK файл може бути неоригінальним</string>
+    <string name="home_split_apk_warning_title">Split APK не підтримується</string>
+    <string name="home_split_apk_warning_message">Ви вибрали split APK пакет (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; вимагає &lt;b&gt;повного APK&lt;/b&gt; - split пакети не можна пропатчити для цього застосунку</string>
+    <string name="home_split_apk_warning_badge">Для продовження потрібен повний APK</string>
+    <string name="home_split_apk_warning_pick_another">Виберіть інший APK файл</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Експериментальна</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ця версія має експериментальну підтримку та може бути нестабільною або неповною</string>
+    <string name="morphe_experimental_app_version_dialog_title">Ви хочете експериментувати? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ця версія &lt;b&gt;%s&lt;/b&gt; має ранню експериментальну підтримку&lt;br/&gt;&lt;br/&gt;🔧 Очікуйте нестандартну поведінку застосунку або непередбачувані помилки, оскільки патчі ще доопрацьовуються для цієї версії</string>
     <string name="home_dialog_unsupported_version_dialog_title">Непідтримувана версія</string>
     <string name="home_dialog_unsupported_version_dialog_description">Цей APK файл має не рекомендовану версію застосунку. Продовження може призвести до некоректної роботи застосунку</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Продовжити все одно</string>
@@ -135,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">Мобільна мережа активна, оновлення патчів вимкнено</string>
     <string name="home_outdated_patches_dialog_warning">Патчінг застарілими патчами може призвести до несправності застосунку</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Оновити та патчити</string>
+    <string name="home_low_disk_space_dialog_title">Недостатньо місця на диску</string>
+    <string name="home_low_disk_space_dialog_message">Доступно лише %1$.2f GB вільного дискового простору. Для коректної роботи патчінгу потрібно щонайменше 1 ГБ вільного місця</string>
+    <string name="home_low_disk_space_dialog_warning">Продовження може призвести до помилки \"файл не знайдено\" або пошкодження вихідного APK файлу</string>
     <!-- Patch Options -->
     <string name="custom_color">Користувацький колір</string>
     <string name="hex_color">Шістнадцятковий колір</string>

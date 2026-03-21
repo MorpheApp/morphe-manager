@@ -122,6 +122,17 @@
 
 Apakah Anda yakin ingin melanjutkan?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK Tidak Terverifikasi</string>
+    <string name="home_invalid_signature_message">APK yang Anda pilih untuk &lt;b&gt;%s&lt;/b&gt; tidak sesuai dengan sertifikat penandatanganan yang diharapkan. Ini mungkin telah dimodifikasi atau berasal dari sumber yang tidak terpercaya</string>
+    <string name="home_invalid_signature_badge">APK ini mungkin bukan versi aslinya</string>
+    <string name="home_split_apk_warning_title">APK split tidak didukung</string>
+    <string name="home_split_apk_warning_message">Anda telah memilih bundel APK split (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; memerlukan &lt;b&gt;APK lengkap&lt;/b&gt; - bundel split tidak dapat dipatch untuk aplikasi ini</string>
+    <string name="home_split_apk_warning_badge">APK lengkap diperlukan untuk melanjutkan</string>
+    <string name="home_split_apk_warning_pick_another">Pilih APK lain</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Eksperimental</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Versi ini memiliki dukungan eksperimental dan mungkin tidak stabil atau tidak lengkap</string>
+    <string name="morphe_experimental_app_version_dialog_title">Apakah Anda ingin bereksperimen? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Versi &lt;b&gt;%s&lt;/b&gt; ini memiliki dukungan eksperimental awal&lt;br/&gt;&lt;br/&gt;🔧 Harapkan perilaku aplikasi yang aneh atau bug yang tidak teridentifikasi saat patch disempurnakan untuk versi aplikasi ini</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versi tidak didukung</string>
     <string name="home_dialog_unsupported_version_dialog_description">APK ini bukan versi aplikasi yang direkomendasikan. Tetap melanjutkan mungkin membuat aplikasi menjadi tidak berfungsi</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Tetap lanjutkan</string>
@@ -135,6 +146,9 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="home_outdated_patches_dialog_message">Data seluler aktif dan pembaruan tambalan dinonaktifkan</string>
     <string name="home_outdated_patches_dialog_warning">Menambal dengan tambalan yang sudah usang mungkin menghasilkan aplikasi yang rusak</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Perbarui &amp; tambalan</string>
+    <string name="home_low_disk_space_dialog_title">Ruang disk rendah</string>
+    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang penyimpanan yang tersedia. Penambalan memerlukan setidaknya 1 GB ruang kosong untuk berfungsi dengan benar</string>
+    <string name="home_low_disk_space_dialog_warning">Melanjutkan dapat mengakibatkan kesalahan \"file not found\" atau APK keluaran yang rusak</string>
     <!-- Patch Options -->
     <string name="custom_color">Warna Khusus</string>
     <string name="hex_color">Warna hex</string>

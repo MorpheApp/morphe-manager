@@ -122,6 +122,17 @@
 
 Tem certeza de que deseja continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK não verificado</string>
+    <string name="home_invalid_signature_message">O APK selecionado para &lt;b&gt;%s&lt;/b&gt; não corresponde ao certificado de assinatura esperado. Ele pode ter sido modificado ou ser de uma fonte não confiável</string>
+    <string name="home_invalid_signature_badge">Este APK pode não ser o original</string>
+    <string name="home_split_apk_warning_title">APK dividido não suportado</string>
+    <string name="home_split_apk_warning_message">Você selecionou um pacote APK dividido (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; requer um &lt;b&gt;APK completo&lt;/b&gt; - pacotes divididos não podem ser corrigidos para este aplicativo</string>
+    <string name="home_split_apk_warning_badge">Um APK completo é necessário para continuar</string>
+    <string name="home_split_apk_warning_pick_another">Escolha outro APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Esta versão tem suporte experimental e pode ser instável ou incompleta</string>
+    <string name="morphe_experimental_app_version_dialog_title">Você quer experimentar? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Esta versão de &lt;b&gt;%s&lt;/b&gt; tem suporte experimental inicial&lt;br/&gt;&lt;br/&gt;🔧 Espere comportamentos estranhos do aplicativo ou bugs não identificados, pois os patches estão sendo refinados para esta versão do aplicativo</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versão não suportada</string>
     <string name="home_dialog_unsupported_version_dialog_description">Este APK não é uma versão recomendada do app. Prosseguir pode resultar em mau funcionamento</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuar mesmo assim</string>
@@ -135,6 +146,9 @@ Tem certeza de que deseja continuar?"</string>
     <string name="home_outdated_patches_dialog_message">Dados móveis estão ativos e atualizações de patch estão desativadas</string>
     <string name="home_outdated_patches_dialog_warning">Usar patches desatualizados pode resultar em um aplicativo quebrado</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Atualizar &amp; patch</string>
+    <string name="home_low_disk_space_dialog_title">Pouco espaço em disco</string>
+    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento livre disponível. A correção requer pelo menos 1 GB de espaço livre para funcionar corretamente</string>
+    <string name="home_low_disk_space_dialog_warning">Prosseguir pode resultar em um erro de \"arquivo não encontrado\" ou um APK de saída corrompido</string>
     <!-- Patch Options -->
     <string name="custom_color">Cor Personalizada</string>
     <string name="hex_color">Cor HEX</string>

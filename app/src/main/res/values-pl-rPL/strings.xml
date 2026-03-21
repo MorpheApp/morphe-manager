@@ -56,7 +56,7 @@
     <string name="sources_management_prerelease_toggle">Używaj przedpremierowych wersji modyfikacji</string>
     <string name="sources_management_prerelease_toggle_description">Uzyskaj wczesny dostęp do nowych, eksperymentalnych wersji modyfikacji</string>
     <string name="sources_management_experimental_versions_toggle">Używaj eksperymentalnych wersji aplikacji</string>
-    <string name="sources_management_experimental_versions_toggle_description">Łať patchować eksperymentalne cele aplikacji, jeśli są dostępne</string>
+    <string name="sources_management_experimental_versions_toggle_description">Modyfikuj wersje eksperymentalne, jeśli są dostępne</string>
     <string name="sources_management_already_exists">To źródło zostało już dodane</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
@@ -122,16 +122,17 @@
 
 Czy na pewno chcesz kontynuować?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">Niezweryfikowany APK</string>
-    <string name="home_invalid_signature_badge">Ten APK może nie być oryginalny</string>
-    <string name="home_split_apk_warning_title">Split APK nie obsługiwany</string>
-    <string name="home_split_apk_warning_message">Wybrałeś pakiet APK podzielony (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; wymaga &lt;b&gt;pełnego APK&lt;/b&gt; - pakiety podzielone nie mogą być łatane dla tej aplikacji</string>
-    <string name="home_split_apk_warning_badge">Do kontynuacji wymagany jest pełny APK</string>
-    <string name="home_split_apk_warning_pick_another">Wybierz inny APK</string>
-    <string name="home_dialog_unsupported_version_experimental_label">Eksperymentalny</string>
-    <string name="home_dialog_unsupported_version_experimental_description">Ta wersja ma eksperymentalne wsparcie i może być niestabilna lub niekompletna</string>
-    <string name="morphe_experimental_app_version_dialog_title">Czy chcesz eksperymentować? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Ta wersja &lt;b&gt;%s&lt;/b&gt; ma wczesne eksperymentalne wsparcie&lt;br/&gt;&lt;br/&gt;🔧 Oczekuj dziwnego zachowania aplikacji lub nieznanych błędów, ponieważ poprawki są dopracowywane dla tej wersji aplikacji</string>
+    <string name="home_invalid_signature_title">Niezweryfikowany plik APK</string>
+    <string name="home_invalid_signature_message">Wybrany plik APK dla &lt;b&gt;%s&lt;/b&gt; nie zgadza się z oczekiwanym certyfikatem podpisu. Może być zmodyfikowany lub pochodzić z niezaufanego źródła</string>
+    <string name="home_invalid_signature_badge">Ten plik APK może nie być oryginalny</string>
+    <string name="home_split_apk_warning_title">Podzielony plik APK nie jest obsługiwany</string>
+    <string name="home_split_apk_warning_message">Wybrano pakiet podzielonego pliku APK (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; wymaga &lt;b&gt;pełnego pliku APK&lt;/b&gt; - podzielone pakiety nie mogą być zmodyfikowane dla tej aplikacji</string>
+    <string name="home_split_apk_warning_badge">Wymagany jest pełny plik APK</string>
+    <string name="home_split_apk_warning_pick_another">Wybierz inny plik APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Eksperymentalna</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ta wersja ma wsparcie eksperymentalne i może być niestabilna lub niekompletna</string>
+    <string name="morphe_experimental_app_version_dialog_title">Chcesz poeksperymentować? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ta wersja &lt;b&gt;%s&lt;/b&gt; ma wczesne wsparcie eksperymentalne&lt;br/&gt;&lt;br/&gt;🔧 Spodziewaj się niestabilnego działania aplikacji lub nieznanych błędów do czasu dopracowania modyfikacji dla tej wersji</string>
     <string name="home_dialog_unsupported_version_dialog_title">Niewspierana wersja</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie posiadała błędy</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
@@ -145,9 +146,9 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="home_outdated_patches_dialog_message">Dane mobilne są aktywne, a aktualizacje modyfikacji zostały wyłączone</string>
     <string name="home_outdated_patches_dialog_warning">Używanie przestarzałych modyfikacji może spowodować uszkodzenie aplikacji</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aktualizuj i modyfikuj</string>
-    <string name="home_low_disk_space_dialog_title">Niska ilość miejsca na dysku</string>
-    <string name="home_low_disk_space_dialog_message">Dostępne jest tylko %1$.2f GB wolnego miejsca. Łatanie wymaga co najmniej 1 GB wolnego miejsca, aby działać poprawnie</string>
-    <string name="home_low_disk_space_dialog_warning">Kontynuacja może spowodować błąd „plik nie znaleziony” lub uszkodzony APK wyjściowy</string>
+    <string name="home_low_disk_space_dialog_title">Mało miejsca na dysku</string>
+    <string name="home_low_disk_space_dialog_message">Dostępne tylko %1$.2f GB wolnego miejsca. Modyfikowanie wymaga co najmniej 1 GB wolnego miejsca do poprawnego działania</string>
+    <string name="home_low_disk_space_dialog_warning">Kontynuowanie może skutkować błędem \"Nie znaleziono pliku\" lub uszkodzeniem wyjściowego pliku APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Kolor niestandardowy</string>
     <string name="hex_color">Kolor w formacie HEX</string>

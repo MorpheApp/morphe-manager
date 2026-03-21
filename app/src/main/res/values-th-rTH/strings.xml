@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">แอปอื่น ๆ</string>
+    <string name="home_other_apps">แอปพลิเคชันอื่นๆ</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพทช์</string>
     <string name="home_no_patches_available">ไม่มีแพตซ์รองรับ</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้?</string>
@@ -122,6 +122,17 @@
 
 คุณแน่ใจที่จะดำเนินต่อไปหรือไม่?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK ที่ยังไม่ได้รับการยืนยัน</string>
+    <string name="home_invalid_signature_message">APK ที่คุณเลือกสำหรับ &lt;b&gt;%s&lt;/b&gt; ไม่ตรงกับใบรับรองการลงนามที่คาดหวัง อาจถูกแก้ไขหรือมาจากแหล่งที่ไม่น่าเชื่อถือ</string>
+    <string name="home_invalid_signature_badge">APK นี้อาจไม่ใช่ไฟล์ต้นฉบับ</string>
+    <string name="home_split_apk_warning_title">ไม่รองรับ APK แบบแยกส่วน</string>
+    <string name="home_split_apk_warning_message">คุณเลือก APK แบบแยกส่วน (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) &lt;b&gt;%s&lt;/b&gt; ต้องการ &lt;b&gt;APK เต็ม&lt;/b&gt; - ไม่สามารถแพตช์ชุดแยกส่วนสำหรับแอปนี้ได้</string>
+    <string name="home_split_apk_warning_badge">จำเป็นต้องใช้ APK เต็มเพื่อดำเนินการต่อ</string>
+    <string name="home_split_apk_warning_pick_another">เลือก APK อื่น</string>
+    <string name="home_dialog_unsupported_version_experimental_label">ทดลอง</string>
+    <string name="home_dialog_unsupported_version_experimental_description">รุ่นนี้มีการรองรับแบบทดลองและอาจไม่เสถียรหรือไม่สมบูรณ์</string>
+    <string name="morphe_experimental_app_version_dialog_title">คุณต้องการทดลองไหม? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">รุ่นนี้ของ &lt;b&gt;%s&lt;/b&gt; มีการรองรับแบบทดลองในระยะเริ่มต้น&lt;br/&gt;&lt;br/&gt;🔧 คาดว่าแอปจะทำงานแปลกๆ หรือมีข้อผิดพลาดที่ไม่สามารถระบุได้ ในขณะที่แพตช์ถูกปรับปรุงสำหรับแอปเวอร์ชันนี้</string>
     <string name="home_dialog_unsupported_version_dialog_title">เวอร์ชันนี้ไม่รองรับ</string>
     <string name="home_dialog_unsupported_version_dialog_description">ไฟล์ APK นี้ไม่ใช่เวอร์ชันแอปที่แนะนำ หากดำเนินต่อไปอาจจะใช้งานไม่ได้</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">ดำเนินต่อไป</string>
@@ -135,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">ข้อมูลเคลื่อนที่มีการใช้งานและปรับปรุงถูกหยุด</string>
     <string name="home_outdated_patches_dialog_warning">อาจมีปัญหาในแอปพลิเคชันถ้าใช้ปรับปรุงที่เลิกใช้แล้ว</string>
     <string name="home_outdated_patches_dialog_update_and_patch">อัปเดตและปรับปรุง</string>
+    <string name="home_low_disk_space_dialog_title">พื้นที่ดิสก์เหลือน้อย</string>
+    <string name="home_low_disk_space_dialog_message">พื้นที่เก็บข้อมูลว่างเหลือเพียง %1$.2f GB การแพตช์ต้องใช้พื้นที่ว่างอย่างน้อย 1 GB เพื่อทำงานได้อย่างถูกต้อง</string>
+    <string name="home_low_disk_space_dialog_warning">การดำเนินการนี้อาจส่งผลให้เกิดข้อผิดพลาด \"ไม่พบไฟล์\" หรือ APK ที่สร้างขึ้นอาจเสียหาย</string>
     <!-- Patch Options -->
     <string name="custom_color">สีแบบกำหนดเอง</string>
     <string name="hex_color">สี hexadecimal</string>

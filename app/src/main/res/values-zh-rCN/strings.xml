@@ -122,6 +122,17 @@
 
 您确定要继续吗？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">未经验证的 APK</string>
+    <string name="home_invalid_signature_message">您选择的 APK，对于 &lt;b&gt;%s&lt;/b&gt;，签名证书不匹配。它可能已被修改或来自不受信任的来源</string>
+    <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
+    <string name="home_split_apk_warning_title">不支持分包 APK</string>
+    <string name="home_split_apk_warning_message">您选择了一个分包 APK (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)。&lt;b&gt;%s&lt;/b&gt; 需要一个 &lt;b&gt;完整 APK&lt;/b&gt; — 分包无法为该应用程序打补丁</string>
+    <string name="home_split_apk_warning_badge">需要一个完整的 APK 才能继续</string>
+    <string name="home_split_apk_warning_pick_another">选择另一个 APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">实验性</string>
+    <string name="home_dialog_unsupported_version_experimental_description">此版本具有实验性支持，可能不稳定或不完整</string>
+    <string name="morphe_experimental_app_version_dialog_title">您想进行实验吗？ 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; 的此版本具有早期的实验性支持&lt;br/&gt;&lt;br/&gt;🔧 预期该应用程序行为怪异，或出现未识别的错误，因为补丁正在针对此应用版本进行完善</string>
     <string name="home_dialog_unsupported_version_dialog_title">其他支持的版本</string>
     <string name="home_dialog_unsupported_version_dialog_description">此 APK 不是推荐的应用版本。继续可能会导致应用无法使用</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">仍然继续</string>
@@ -135,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">移动数据已激活，已禁用补丁更新</string>
     <string name="home_outdated_patches_dialog_warning">使用过期补丁可能会导致应用程序无法使用</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新并补丁</string>
+    <string name="home_low_disk_space_dialog_title">磁盘空间不足</string>
+    <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用存储空间。修补程序至少需要 1 GB 的可用空间才能正常工作</string>
+    <string name="home_low_disk_space_dialog_warning">继续可能会导致“文件未找到”错误或损坏的输出 APK</string>
     <!-- Patch Options -->
     <string name="custom_color">自定义颜色</string>
     <string name="hex_color">十六进制颜色</string>

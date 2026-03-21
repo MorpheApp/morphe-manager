@@ -122,6 +122,17 @@
 
 你確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">未經驗證的 APK</string>
+    <string name="home_invalid_signature_message">您選擇的 APK 對於 &lt;b&gt;%s&lt;/b&gt; 的簽署憑證不符。它可能已被修改或來自不受信任的來源</string>
+    <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
+    <string name="home_split_apk_warning_title">不支援分割 APK</string>
+    <string name="home_split_apk_warning_message">您已選擇一個分割 APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)。&lt;b&gt;%s&lt;/b&gt; 需要 &lt;b&gt;完整 APK&lt;/b&gt; – 分割 bundle 無法為此應用程式修補</string>
+    <string name="home_split_apk_warning_badge">需要完整 APK 才能繼續</string>
+    <string name="home_split_apk_warning_pick_another">選擇另一個 APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">實驗性</string>
+    <string name="home_dialog_unsupported_version_experimental_description">此版本支援實驗性功能，可能不穩定或不完整</string>
+    <string name="morphe_experimental_app_version_dialog_title">您是否要嘗試使用？ 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; 的此版本具有早期的實驗性支援&lt;br/&gt;&lt;br/&gt;🔧 預期此應用程式版本修補程式完善時出現古怪的應用程式行為或未確定的錯誤</string>
     <string name="home_dialog_unsupported_version_dialog_title">不支援的版本</string>
     <string name="home_dialog_unsupported_version_dialog_description">這個 APK 不是建議的應用程式版本。繼續使用可能會導致功能在應用程式內無法使用</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">仍要繼續</string>
@@ -135,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">行動數據使用中，已停用補丁更新</string>
     <string name="home_outdated_patches_dialog_warning">使用過期補丁可能會導致應用程式故障</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新和補丁</string>
+    <string name="home_low_disk_space_dialog_title">磁碟空間不足</string>
+    <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用儲存空間。修補程式需要至少 1 GB 的可用空間才能正常工作</string>
+    <string name="home_low_disk_space_dialog_warning">繼續進行可能會導致 \"找不到檔案\" 的錯誤或損毀的 APK 输出</string>
     <!-- Patch Options -->
     <string name="custom_color">自訂顏色</string>
     <string name="hex_color">十六進位顏色</string>

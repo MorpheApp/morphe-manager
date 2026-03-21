@@ -55,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="sources_management_prerelease_toggle">İlkin-buraxılış yamaqları istifadə et</string>
     <string name="sources_management_prerelease_toggle_description">Yeni təcrübi yamaqlar versiyasına erkən keçid əldə et</string>
+    <string name="sources_management_experimental_versions_toggle">Təcrübi tətbiq versiyaların istifadə et</string>
+    <string name="sources_management_experimental_versions_toggle_description">Əlçatandırsa təcrübi tətbiq hədəflərin yamaqla</string>
     <string name="sources_management_already_exists">Bu mənbə artıq əlavə edilib</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
@@ -120,6 +122,9 @@
 
 Davam etmək istədiyinizə əminsiniz?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Təsdiqlənməyən APK</string>
+    <string name="home_invalid_signature_message"> &lt;b&gt;%s&lt;/b&gt; üçün seçdiyiniz APK gözlənilən imza sertifikatına uyuşmur. O, dəyişdirilən və ya etibarsız mənbədən ola bilər.</string>
+    <string name="home_invalid_signature_badge">Bu APK əsil olmaya bilər</string>
     <string name="home_dialog_unsupported_version_dialog_title">Dəstəklənməyən Versiya</string>
     <string name="home_dialog_unsupported_version_dialog_description">Bu APK tövsiyə olunan tətbiq versiyası deyil. Fəaliyyətdə qalmaq, tətbiqin işləməməsi ilə nəticələnə bilər</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Yenə də davam edilsin?</string>
