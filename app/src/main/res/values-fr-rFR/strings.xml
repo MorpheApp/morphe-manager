@@ -4,7 +4,6 @@
     <string name="home_other_apps">Autres applications</string>
     <string name="home_not_patched_yet">Pas encore patchée</string>
     <string name="home_no_patches_available">Aucuns patchs disponibles</string>
-    <string name="home_default_source_disabled">La source de patch Morphe est désactivée. Veuillez l\'activer dans l\'onglet Sources de patch ou utiliser le mode Expert</string>
     <string name="home_app_hide_title">Masquer cette application ?</string>
     <string name="home_app_hide_message">Cette application sera masquée de l’écran d’accueil. Vous pourrez la restaurer plus tard en utilisant le bouton \'%1$s\' en bas de la liste</string>
     <string name="home_app_will_be_hidden">Cette application sera masquée</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_management_prerelease_toggle">Utiliser les pré-versions des patchs</string>
     <string name="sources_management_prerelease_toggle_description">Recevez un accès anticipé aux nouvelles versions expérimentales des patchs</string>
+    <string name="sources_management_experimental_versions_toggle">Utiliser les versions expérimentales</string>
+    <string name="sources_management_experimental_versions_toggle_description">Appliquer les correctifs aux cibles d\'applications expérimentales si disponibles</string>
     <string name="sources_management_already_exists">Cette source a déjà été ajoutée</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nom d\'affichage</string>
@@ -86,10 +87,10 @@
     <string name="home_apk_availability_unpatched_label">Non patchée</string>
     <string name="home_apk_availability_yes">Oui, aidez-moi à trouver un APK</string>
     <string name="home_apk_availability_no">Non, j\'ai déjà un APK</string>
-    <string name="home_apk_use_saved_with_version">Utiliser l’APK enregistrée (v%s)</string>
-    <string name="home_app_info_no_saved_apk">Aucune APK enregistrée. Le patchage nécessitera de sélectionner à nouveau le fichier APK</string>
+    <string name="home_apk_use_saved_with_version">Utiliser l’APK enregistré (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Aucun APK enregistré. Le patchage nécessitera de sélectionner à nouveau le fichier APK</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">Télécharger l\'APK d\'origine</string>
+    <string name="home_download_instructions_title">Télécharger l\'APK original</string>
     <string name="home_download_instructions_steps_title">Instructions :</string>
     <string name="home_download_instructions_step1">Appuyez sur le bouton \'%1$s\' ci-dessous</string>
     <string name="home_download_instructions_step2_part1">Faites défiler la page Web et appuyez sur</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Sélectionner un APK</string>
     <string name="home_select_any_apk_description">Appuyez sur le bouton ci-dessous pour sélectionner un fichier APK de n\'importe quelle application à patcher</string>
     <string name="home_invalid_apk">Fichier APK invalide</string>
-    <string name="home_no_patches_for_app">Aucuns patchs disponibles pour cette application</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode Expert</string>
     <string name="expert_mode_search">Rechercher des patchs</string>
@@ -116,13 +116,23 @@
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
-    <string name="expert_mode_no_patches">Aucuns patchs disponibles</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
     <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
 
 Voulez-vous vraiment continuer ?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK non vérifié</string>
+    <string name="home_invalid_signature_message">L\'APK sélectionné pour &lt;b&gt;%s&lt;/b&gt; ne correspond pas au certificat de signature attendu. Il peut avoir été modifié ou provenir d\'une source non fiable</string>
+    <string name="home_invalid_signature_badge">Cet APK pourrait ne pas être l\'original</string>
+    <string name="home_split_apk_warning_title">APK split non pris en charge</string>
+    <string name="home_split_apk_warning_message">Vous avez sélectionné un bundle APK divisé (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; nécessite un &lt;b&gt;APK complet&lt;/b&gt; - les bundles divisés ne peuvent pas être corrigés pour cette application</string>
+    <string name="home_split_apk_warning_badge">Un APK complet est requis pour continuer</string>
+    <string name="home_split_apk_warning_pick_another">Sélectionner un autre APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Expérimental</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Cette version bénéficie d\'un support expérimental et peut être instable ou incomplète</string>
+    <string name="morphe_experimental_app_version_dialog_title">Voulez-vous expérimenter ? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Cette version de &lt;b&gt;%s&lt;/b&gt; bénéficie d\'un support expérimental précoce&lt;br/&gt;&lt;br/&gt;🔧 Attendez-vous à un comportement étrange de l\'application ou à des bogues non identifiés, car les correctifs sont affinés pour cette version de l\'application</string>
     <string name="home_dialog_unsupported_version_dialog_title">Version non supportée</string>
     <string name="home_dialog_unsupported_version_dialog_description">Cette version de l’APK n’est pas recommandée. Continuer peut rendre l’application dysfonctionnelle</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuer quand même</string>
@@ -136,6 +146,9 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="home_outdated_patches_dialog_message">Les données mobiles sont activées et les mises à jour de patch sont désactivées</string>
     <string name="home_outdated_patches_dialog_warning">Appliquer des patchs obsolètes peut entraîner une application défectueuse</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Mettre à jour &amp; patcher</string>
+    <string name="home_low_disk_space_dialog_title">Faible espace disque</string>
+    <string name="home_low_disk_space_dialog_message">Seulement %1$.2f Go d\'espace de stockage disponible. Le correctif nécessite au moins 1 Go d\'espace libre pour fonctionner correctement</string>
+    <string name="home_low_disk_space_dialog_warning">La poursuite peut entraîner une erreur « fichier introuvable » ou un APK de sortie corrompu</string>
     <!-- Patch Options -->
     <string name="custom_color">Couleur personnalisée</string>
     <string name="hex_color">Couleur hexadécimale</string>
@@ -146,7 +159,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patch_option_pick_folder">Choisir un dossier</string>
     <string name="patch_option_list_duplicate">Cette valeur existe déjà</string>
     <string name="patch_option_list_empty">La valeur ne peut pas être vide</string>
-    <string name="patch_option_list_empty_state">Aucune valeur ajoutée pour le moment</string>
+    <string name="patch_option_list_empty_state">Pas de valeur ajoutée pour le moment</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Créer une icône adaptative</string>
     <string name="adaptive_icon_instructions">Choisissez une image de premier plan, sélectionnez une couleur d’arrière-plan et ajustez l’aperçu à l’aide des gestes de pincement pour zoomer</string>
@@ -192,7 +205,7 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="home_app_info_app_deleted_warning">L’application a été désinstallée</string>
     <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Repatchez-la pour restaurer les fonctionnalités</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Le mode Root nécessite que l\'APK d\'origine soit installé sur votre appareil avant le patchage</string>
+    <string name="root_install_apk_required">Le mode Root nécessite que l\'APK original soit installé sur votre appareil avant le patchage</string>
     <string name="root_gmscore_excluded">Le patch de support GmsCore est exclu en mode root</string>
     <string name="root_pre_patch_installer_title">Choisir la méthode d\'installation</string>
     <string name="root_pre_patch_installer_description">Votre appareil dispose d\'un accès root. Choisissez comment vous souhaitez installer l\'application patchée</string>
@@ -579,6 +592,9 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_manager_description">"Morphe est un projet open source expérimental axé sur la création d'un patchage moderne et rationalisé pour les applications Android populaires.
 
 Open source dans son essence même, Morphe s'appuie sur les commentaires et les contributions de la communauté pour stimuler l'innovation future."</string>
+    <string name="credits">Crédits</string>
+    <string name="credits_current_development">Développement en cours</string>
+    <string name="credits_prior_development">Développements antérieurs</string>
     <!-- Shared strings -->
     <string name="patches">Patchs</string>
     <string name="home">Accueil</string>

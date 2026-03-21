@@ -4,7 +4,6 @@
     <string name="home_other_apps">Други приложения</string>
     <string name="home_not_patched_yet">Все още не е патчено</string>
     <string name="home_no_patches_available">Няма достъпни пачове</string>
-    <string name="home_default_source_disabled">Източникът на Морфе е изключен. Моля, включете го в листа с източници или използвайте Режим експерт.</string>
     <string name="home_app_hide_title">Скриване на това приложение?</string>
     <string name="home_app_hide_message">Това приложение ще бъде скрито от екрана \"Домашния екран\". Можете да го възстановите по-късно с помощта на бутона \"%1$s\" в долната част на списъка.</string>
     <string name="home_app_will_be_hidden">Това приложение ще бъде скрито.</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
     <string name="sources_management_prerelease_toggle">Използвайте предварителни пакети</string>
     <string name="sources_management_prerelease_toggle_description">Получайте достъп преди други до нови експериментални версии на пакети</string>
+    <string name="sources_management_experimental_versions_toggle">Използвайте експериментални версии на приложения</string>
+    <string name="sources_management_experimental_versions_toggle_description">Поправяйте експериментални цели за приложения, ако са налични</string>
     <string name="sources_management_already_exists">Този източник вече е добавен</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Име на диалога</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Избор на APK</string>
     <string name="home_select_any_apk_description">Натиснете бутона отдолу, за да изберете APK файл на всякакви приложения за пачове</string>
     <string name="home_invalid_apk">Невалиден APK файл</string>
-    <string name="home_no_patches_for_app">Няма достъпни пачове за това приложение</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим на експерт</string>
     <string name="expert_mode_search">Търсене на пачове</string>
@@ -116,13 +116,23 @@
     <string name="expert_mode_disable_all">Изключи всички</string>
     <string name="expert_mode_enable_all">Включи всички</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
-    <string name="expert_mode_no_patches">Няма достъпни пачове</string>
     <string name="expert_mode_universal_patches">Универсални пачове</string>
     <string name="expert_mode_multiple_sources_warning_title">Избрани са патове от различни източници</string>
     <string name="expert_mode_multiple_sources_warning_message">"Избрахте патове от различни източници. Това може да доведе до съвместимост проблеми или непредвидимо поведение.
 
 Сигурни ли сте, че искате да продължите?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Непотвърден APK</string>
+    <string name="home_invalid_signature_message">APK файлът, който избрахте за &lt;b&gt;%s&lt;/b&gt;, не съвпада с очаквания сертификат за подписване. Възможно е да е модифициран или да е от ненадежден източник</string>
+    <string name="home_invalid_signature_badge">Този APK може да не е оригиналният</string>
+    <string name="home_split_apk_warning_title">Сплит APK не се поддържа</string>
+    <string name="home_split_apk_warning_message">Избрали сте сплит APK пакет (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; изисква &lt;b&gt;пълен APK&lt;/b&gt; - сплит пакетите не могат да бъдат коригирани за това приложение</string>
+    <string name="home_split_apk_warning_badge">Изисква се пълен APK</string>
+    <string name="home_split_apk_warning_pick_another">Изберете друг APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Експериментално</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Тази версия има експериментална поддръжка и може да е нестабилна или непълна</string>
+    <string name="morphe_experimental_app_version_dialog_title">Искате ли да експериментирате? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Тази версия на &lt;b&gt;%s&lt;/b&gt; има ранна експериментална поддръжка&lt;br/&gt;&lt;br/&gt;🔧 Очаквайте странно поведение на приложението или неидентифицирани грешки, тъй като корекциите се усъвършенстват за тази версия на приложението</string>
     <string name="home_dialog_unsupported_version_dialog_title">Неподдържана версия</string>
     <string name="home_dialog_unsupported_version_dialog_description">Това APK не е препоръчана версия на приложението. Продължаване може да доведе до неработещо приложение</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Продължаване въпреки това</string>
@@ -136,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">Мобилен интернет е активен и патчовете са изключени</string>
     <string name="home_outdated_patches_dialog_warning">Патчване с остарели патчове може да доведе до счупване на приложението</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Обновяване и патчване</string>
+    <string name="home_low_disk_space_dialog_title">Малко място на диска</string>
+    <string name="home_low_disk_space_dialog_message">Само %1$.2f GB свободно място за съхранение. Коригирането изисква поне 1 GB свободно място, за да работи правилно</string>
+    <string name="home_low_disk_space_dialog_warning">Продължаването може да доведе до грешка \"файлът не е намерен\" или повреден изходен APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Навикнат цвят</string>
     <string name="hex_color">Хекс цвят</string>
@@ -578,6 +591,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"Morphe е експериментален отворен източник проект, фокусиран върху създаването на модерно, елегантно залепуване на популярни Android приложения
 
 Отворен източник в своето ядро, Morphe процъфтява благодарение на общността и приносите за бъдещо иновации"</string>
+    <string name="credits">Кредити</string>
+    <string name="credits_current_development">Текущо развитие</string>
+    <string name="credits_prior_development">Предишно развитие</string>
     <!-- Shared strings -->
     <string name="patches">Пачове</string>
     <string name="home">Начало</string>

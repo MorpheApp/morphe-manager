@@ -4,7 +4,6 @@
     <string name="home_other_apps">Друге апликације</string>
     <string name="home_not_patched_yet">Još није исправљено</string>
     <string name="home_no_patches_available">Нema печева доступно</string>
-    <string name="home_default_source_disabled">Morphe patch izvor je isključen. Molimo uključite ga u listi Patch izvora ili koristite Expert mod</string>
     <string name="home_app_hide_title">Sakrij ovu aplikaciju?</string>
     <string name="home_app_hide_message">Ova aplikacija će biti sakrivena sa početnog ekrana. Možete je kasnije vratiti koristeći dugme \'%1$s\' na dnu liste.</string>
     <string name="home_app_will_be_hidden">Ova aplikacija će biti sakrivena</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="sources_management_prerelease_toggle">Користите пре-издавачке пакете</string>
     <string name="sources_management_prerelease_toggle_description">Примајте рани приступ новим експерименталним верзијама пакета</string>
+    <string name="sources_management_experimental_versions_toggle">Користите експерименталне верзије апликација</string>
+    <string name="sources_management_experimental_versions_toggle_description">Исправите експерименталне циљеве апликација ако су доступни</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назив за приказ</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Изаберите APK</string>
     <string name="home_select_any_apk_description">Кликните на дугме испод да изаберете APK фајл било ког апликација за печеве</string>
     <string name="home_invalid_apk">Невалидан APK фајл</string>
-    <string name="home_no_patches_for_app">Нema печева доступно за ову апликацију</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експерт мод</string>
     <string name="expert_mode_search">Претражи печеве</string>
@@ -116,7 +116,6 @@
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
-    <string name="expert_mode_no_patches">Нema печева доступно</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
     <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
     <string name="expert_mode_multiple_sources_warning_message">"Одабрали сте патчеве из више извора. Може да дође до проблема са компатибилношћу или неочекиваног понашања.
@@ -578,6 +577,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"Morphe је експериментални отворени изворни пројекат фокусиран на креирање модернег, ефикасног патчирања популарних Андроид апликација.
 
 Отворен за заједничку употребу, Morphe процвата на корисничким поврат и доприносе од заједнице да би будући будући иновације и побољшаке."</string>
+    <string name="credits">Послужности</string>
+    <string name="credits_current_development">Тренутни развој</string>
+    <string name="credits_prior_development">Претходни развој</string>
     <!-- Shared strings -->
     <string name="patches">Флатери</string>
     <string name="home">Почетак</string>

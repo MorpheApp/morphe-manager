@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ostatní aplikace</string>
     <string name="home_not_patched_yet">Ještě nezáplatováno</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
-    <string name="home_default_source_disabled">Morphe ovladač zdroj je vypnut. Prosím povolte ho v listu zdrojů ovladačů nebo použijte Expert mód</string>
     <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
     <string name="home_app_hide_message">Tato aplikace bude skryta z obrazovky. Můžete ji později obnovit pomocí tlačítka \'%1$s\' na dně seznamu.</string>
     <string name="home_app_will_be_hidden">Tato aplikace bude skryta.</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
     <string name="sources_management_prerelease_toggle">Použít předběžné patche</string>
     <string name="sources_management_prerelease_toggle_description">Získejte předběžný přístup k novým experimentálním verzím patche. Pro získání předběžných patche zapněte předběžný přepínač u každé zdrojové lokace odděleně.</string>
+    <string name="sources_management_experimental_versions_toggle">Použít experimentální verze aplikace</string>
+    <string name="sources_management_experimental_versions_toggle_description">Použít předběžné verze cílových experimentálních aplikací, pokud jsou dostupné</string>
     <string name="sources_management_already_exists">Tento zdroj byl již přidán</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazit název</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Vybrat APK</string>
     <string name="home_select_any_apk_description">Klikněte na tlačítko níže pro výběr APK souboru libovolné aplikace na záplatování</string>
     <string name="home_invalid_apk">Neplatný soubor APK</string>
-    <string name="home_no_patches_for_app">Pro tuto aplikaci nejsou k dispozici žádné záplaty</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertní režim</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
@@ -116,13 +116,23 @@
     <string name="expert_mode_disable_all">Vypnout vše</string>
     <string name="expert_mode_enable_all">Zapnout vše</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
-    <string name="expert_mode_no_patches">Nejsou dostupné žádné záplaty</string>
     <string name="expert_mode_universal_patches">Univerzální záplaty</string>
     <string name="expert_mode_multiple_sources_warning_title">Vybráno více zdrojů pro aktualizace</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vybrali jste aktualizace z více zdrojů. To může způsobit problémy s kompatibilitou nebo neočekávané chování.
 
 Opravdu chcete pokračovat?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Neověřená APK</string>
+    <string name="home_invalid_signature_message">APK, kterou jste vybrali pro &lt;b&gt;%s&lt;/b&gt;, neodpovídá očekávanému certifikátu podpisu. Může být modifikována nebo pocházet z nedůvěryhodného zdroje</string>
+    <string name="home_invalid_signature_badge">Tato APK nemusí být originální</string>
+    <string name="home_split_apk_warning_title">Podpora pro rozdělenou APK není podporována</string>
+    <string name="home_split_apk_warning_message">Vybrali jste balíček rozdělené APK (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; vyžaduje &lt;b&gt;plnou APK&lt;/b&gt; – rozdělené balíčky nelze opravit pro tuto aplikaci</string>
+    <string name="home_split_apk_warning_badge">K pokračování je vyžadována plná APK</string>
+    <string name="home_split_apk_warning_pick_another">Vyberte jinou APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Experimentální</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Tato verze má experimentální podporu a může být nestabilní nebo neúplná</string>
+    <string name="morphe_experimental_app_version_dialog_title">Chcete experimentovat? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Tato verze &lt;b&gt;%s&lt;/b&gt; má brzkou experimentální podporu&lt;br/&gt;&lt;br/&gt;🔧 Očekávejte zvláštní chování aplikace nebo neidentifikované chyby, jak jsou opravy vylepšovány pro tuto verzi aplikace</string>
     <string name="home_dialog_unsupported_version_dialog_title">Nepodporovaná verze</string>
     <string name="home_dialog_unsupported_version_dialog_description">Tato APK není doporučenou verzí aplikace. Pokračování může vést k nefunkčnosti aplikace</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Pokračovat i tak</string>
@@ -136,6 +146,9 @@ Opravdu chcete pokračovat?"</string>
     <string name="home_outdated_patches_dialog_message">Mobilní data jsou aktivní a aktualizace patčů jsou zakázány</string>
     <string name="home_outdated_patches_dialog_warning">Používání zastaralých patčů může způsobit poškození aplikace</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aktualizovat &amp; patčit</string>
+    <string name="home_low_disk_space_dialog_title">Nedostatek místa na disku</string>
+    <string name="home_low_disk_space_dialog_message">Dostupných je pouze %1$.2f GB volného místa na disku. Oprava vyžaduje alespoň 1 GB volného místa na disku, aby správně fungovala</string>
+    <string name="home_low_disk_space_dialog_warning">Pokračování může vést k chybě \"soubor nenalezen\" nebo poškozené výstupní APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Vlastní barva</string>
     <string name="hex_color">Barva ve formátu Hex</string>
@@ -578,6 +591,9 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_manager_description">"Morphe je experimentální otevřený projekt zaměřený na vytvoření moderní, zjednodušené úpravy populárních aplikací pro Android
 
 Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a příspěvků komunity pro budoucí inovace"</string>
+    <string name="credits">Kredity</string>
+    <string name="credits_current_development">Současný vývoj</string>
+    <string name="credits_prior_development">Předchozí vývoj</string>
     <!-- Shared strings -->
     <string name="patches">Záplaty</string>
     <string name="home">Domů</string>

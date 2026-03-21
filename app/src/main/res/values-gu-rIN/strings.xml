@@ -4,11 +4,25 @@
     <string name="home_other_apps">અન્ય એપ્લિકેશનો</string>
     <string name="home_not_patched_yet">હજુ પેચ કરેલ નથી </string>
     <string name="home_no_patches_available">કોઈ પેચો ઉપલબ્ધ નથી</string>
+    <string name="home_app_hide_title">આ એપ્લિકેશનને છુપાવા માગો છો?</string>
+    <string name="home_app_hide_message">આ એપ મુખ્ય સ્ક્રીનમાંથી છુપાવવામાં આવશે. તમે સૂચિના તળિયે \'%1$s\' બટનનો ઉપયોગ કરીને ફરી પાછી તેને પુનઃસ્થાપિત કરી શકો છો</string>
+    <string name="home_app_will_be_hidden">આ એપ છુપાવવામાં આવશે</string>
+    <string name="home_app_show_hidden">છુપાવેલ એપ્લિકેશનો બતાવો</string>
+    <string name="home_app_no_hidden">કોઈ છુપાવેલી એપ્લિકેશનો નથી</string>
+    <string name="home_app_hidden_apps_title">છુપાવેલ એપ્લિકેશનો</string>
+    <string name="home_app_hidden_apps_hint">એપ્લિકેશનને ફરીથી સૂચિમાં બતાવવા માટે તેના પર ટેપ કરો</string>
     <string name="android_11_bug_dialog_title">એન્ડ્રોઇડ 11 બગ</string>
+    <string name="android_11_bug_dialog_description">એપ ઇન્સ્ટોલેશનની પરવાનગી પહેલેથી જ આપવી જરૂરી છે, કારણ કે Android 11 સિસ્ટમમાં એક બગ છે જે યુઝર અનુભવને નકારાત્મક રીતે અસર કરી શકે છે</string>
+    <string name="deep_link_add_source_title">સ્ત્રોત ઉમેરો</string>
+    <string name="deep_link_add_source_message">શું તમે આ પેચ સ્ત્રોતને મોર્ફેમાં ઉમેરવા માંગો છો?</string>
+    <string name="deep_link_add_source_warning">તમને વિશ્વાસ હોય તેવા સ્ત્રોતોમાંથી જ સ્ત્રોત ઉમેરો</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <string name="home_update_available_subtitle">નવું સંસ્કરણ ઇન્સ્ટોલ કરવા માટે તૈયાર છે</string>
     <string name="home_update_error">અપડેટ નિષ્ફળ થયું</string>
     <string name="home_update_error_subtitle">તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો</string>
+    <string name="home_update_skipped_metered">અદ્યતન છોડ્યાં</string>
+    <string name="home_update_skipped_metered_subtitle">મોબાઇલ ડેટા સક્રિય છે</string>
     <string name="home_updating_sources">સ્ત્રોતો અધ્યતન કરી રહ્યાં છીએ...</string>
     <string name="home_update_progress_format">%1$s પર પ્રક્રિયા થઈ</string>
     <string name="home_update_success">સ્ત્રોતો અધ્યતન કરવાનું પૂર્ણ થયું</string>
@@ -61,7 +75,6 @@
     <string name="home_recommended_version">ભલામણ કરેલ સંસ્કરણ</string>
     <string name="home_selected_version">પસંદ કરેલ સંસ્કરણ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_no_patches">કોઈ પેચો ઉપલબ્ધ નથી</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">અસમર્થિત સંસ્કરણ</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">ઘરની ધોરાજી ચલાવો</string>

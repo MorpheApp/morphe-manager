@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ostale aplikacije</string>
     <string name="home_not_patched_yet">Još nisu ispravljene</string>
     <string name="home_no_patches_available">Nema dostupnih patchova</string>
-    <string name="home_default_source_disabled">Morphe patch izvor je onemogućen. Molimo omogućite ga u listi Patch izvora ili koristite Expert mod</string>
     <string name="home_app_hide_title">Sakrij ovu aplikaciju?</string>
     <string name="home_app_hide_message">Ova aplikacija će biti sakrivena s glavnog ekrana. Možete je kasnije vratiti koristeći dugme \'%1$s\' na dnu liste.</string>
     <string name="home_app_will_be_hidden">Ova aplikacija će biti sakrivena</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Otvaranje URL-a nije uspelo</string>
     <string name="sources_management_prerelease_toggle">Koristi preizdavačke ispravke</string>
     <string name="sources_management_prerelease_toggle_description">Primaj raniji pristup novim eksperimentalnim verzijama ispravaka</string>
+    <string name="sources_management_experimental_versions_toggle">Koristi eksperimentalne verzije aplikacija</string>
+    <string name="sources_management_experimental_versions_toggle_description">Plesaj eksperimentalne ciljeve aplikacija ako su dostupni</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodat</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži ime</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Izaberi APK</string>
     <string name="home_select_any_apk_description">Kliknite dugme ispod da odaberete APK datoteku bilo koje aplikacije za patchiranje</string>
     <string name="home_invalid_apk">Nevažeća APK datoteka</string>
-    <string name="home_no_patches_for_app">Nema patchova za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Režim eksperta</string>
     <string name="expert_mode_search">Pretraži patchove</string>
@@ -116,7 +116,6 @@
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih zakrpa</string>
-    <string name="expert_mode_no_patches">Nema dostupnih zakrpa</string>
     <string name="expert_mode_universal_patches">Univerzalne zakrpe </string>
     <string name="expert_mode_multiple_sources_warning_title">Izabrali ste patch-ove izvišnje izvora</string>
     <string name="expert_mode_multiple_sources_warning_message">"Izabrali ste patch-ove izvišnje izvora. Ovo može uzrokovati kompatibilnost problema ili neočekivano ponašanje.
@@ -540,6 +539,9 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_system_manager_description">"Morphe je eksperimentalni otvoreni izvorni projekt fokusiran na stvaranje modernog, efikasnog patchiranja popularnih Android aplikacija
 
 Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i doprinosa za budu inovaciju"</string>
+    <string name="credits">Заслуге</string>
+    <string name="credits_current_development">Тренутни развој</string>
+    <string name="credits_prior_development">Претходни развој</string>
     <!-- Shared strings -->
     <string name="patches">Zakrpe</string>
     <string name="home">Početna</string>

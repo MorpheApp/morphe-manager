@@ -4,7 +4,6 @@
     <string name="home_other_apps">Iba pang mga aplikasyon</string>
     <string name="home_not_patched_yet">Hindi pa na-patch</string>
     <string name="home_no_patches_available">Walang patch na magagamit</string>
-    <string name="home_default_source_disabled">Nakapatay ang mapagkukunan ng Morphe patch. Mangyaring paganahin ito sa Patch sources sheet o gumamit ng Expert mode</string>
     <string name="home_app_hide_title">Itago ang aplikasyong ito?</string>
     <string name="home_app_hide_message">Itatago ang aplikasyong ito mula sa home screen. Maaari mong buksan mamaya gamit ang \'%1$s\' na button sa ibaba ng listahan</string>
     <string name="home_app_will_be_hidden">Itatago ang aplikasyong ito</string>
@@ -56,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
     <string name="sources_management_prerelease_toggle">Gumamit ng mga pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Tumanggap ng maagang pag-access sa mga bagong experimental na bersyon ng patch</string>
+    <string name="sources_management_experimental_versions_toggle">Gamitin ang mga eksperimental na bersyon ng app</string>
+    <string name="sources_management_experimental_versions_toggle_description">Kumpunihin ang mga eksperimental na target ng app kung available</string>
     <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Pangalan na ipapakita</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">Piliin ang APK</string>
     <string name="home_select_any_apk_description">Pindutin ang button sa ibaba upang pillin ang APK file ng anumang aplikasyon para sa pagpa-patch</string>
     <string name="home_invalid_apk">Imbalido na APK file</string>
-    <string name="home_no_patches_for_app">Walang patch na magagamit para sa aplikasyong ito</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_search">Maghanap ng mga patch</string>
@@ -116,7 +116,6 @@
     <string name="expert_mode_disable_all">Patayin lahat</string>
     <string name="expert_mode_enable_all">Paganahin lahat</string>
     <string name="expert_mode_no_results">Walang nakita na patch</string>
-    <string name="expert_mode_no_patches">Walang magagamit na patch</string>
     <string name="expert_mode_universal_patches">Mga unibersal na patch</string>
     <string name="expert_mode_multiple_sources_warning_title">Maramihang mga mapagkukunang patch ang napili</string>
     <string name="expert_mode_multiple_sources_warning_message">"Pinili mo ang mga patch mula sa maramihang mapagkukunang patch. Maaari itong magdulot ng isyu sa kompatibilidad o hindi inaasahang kilos.
@@ -578,6 +577,9 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_manager_description">"Ang Morphe ay isang pang-eksperimentong open-source na proyekto na nakatuon sa paggawa ng moderno, naka-streamline na pag-patch ng mga sikat na Android aplikasyon
 
 Open-source sa core nito, ang Morphe ay umuunlad sa katugunan ng komunidad at mga kontribusyon upang himukin ang pagbabago sa hinaharap"</string>
+    <string name="credits">Kredito</string>
+    <string name="credits_current_development">Kasalukuyang pag-unlad</string>
+    <string name="credits_prior_development">Naunang pag-unlad</string>
     <!-- Shared strings -->
     <string name="patches">Mga patch</string>
     <string name="home">Bahay</string>
