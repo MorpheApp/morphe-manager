@@ -10,14 +10,15 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.StatFs
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -35,8 +36,10 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.network.api.MorpheAPI
+import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
+import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
@@ -47,6 +50,8 @@ import app.morphe.manager.util.PatchSelectionUtils.togglePatch
 import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
+import app.morphe.patcher.patch.AppTarget
+import io.ktor.http.encodeURLPath
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.TimeZone
@@ -57,7 +62,7 @@ import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
 import java.net.URLEncoder.encode
-import java.util.zip.ZipInputStream
+import java.security.MessageDigest
 import javax.net.ssl.SSLException
 import kotlin.time.Clock
 
@@ -77,8 +82,10 @@ enum class BundleUpdateStatus {
 data class UnsupportedVersionDialogState(
     val packageName: String,
     val version: String,
-    val recommendedVersion: String?,
-    val allCompatibleVersions: List<String> = emptyList()
+    val recommendedVersion: AppTarget?,
+    val allCompatibleVersions: List<AppTarget> = emptyList(),
+    /** True if the selected version is marked as experimental in the patch bundle. */
+    val isExperimental: Boolean = false
 )
 
 /**
@@ -87,6 +94,16 @@ data class UnsupportedVersionDialogState(
 data class WrongPackageDialogState(
     val expectedPackage: String,
     val actualPackage: String
+)
+
+/**
+ * Dialog state for APK signature mismatch warning.
+ * Shown when the selected APK's signing certificate does not match
+ * the expected signatures declared in the patch bundle.
+ */
+data class InvalidSignatureDialogState(
+    val packageName: String,
+    val appName: String,
 )
 
 /**
@@ -176,13 +193,16 @@ class HomeViewModel(
 
     // Error/warning dialogs
     var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
+    var showExperimentalVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
     var showWrongPackageDialog by mutableStateOf<WrongPackageDialogState?>(null)
+    var showSplitApkWarningDialog by mutableStateOf(false)
+    var showInvalidSignatureDialog by mutableStateOf<InvalidSignatureDialogState?>(null)
 
     // Pending data during APK selection
     var pendingPackageName by mutableStateOf<String?>(null)
     var pendingAppName by mutableStateOf<String?>(null)
-    var pendingRecommendedVersion by mutableStateOf<String?>(null)
-    var pendingCompatibleVersions by mutableStateOf<List<String>>(emptyList())
+    var pendingRecommendedVersion by mutableStateOf<AppTarget?>(null)
+    var pendingCompatibleVersions by mutableStateOf<List<AppTarget>>(emptyList())
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
     var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
@@ -194,17 +214,60 @@ class HomeViewModel(
     // Metered network dialog: shown when user tries to patch on mobile data with updates disabled
     var showMeteredPatchingDialog by mutableStateOf(false)
         private set
+
+    // Low disk space warning dialog: shown when < 1 GB free before patching starts
+    var showLowDiskSpaceDialog by mutableStateOf(false)
+        private set
+    var lowDiskSpaceFreeGb by mutableFloatStateOf(0f)
+        private set
+
     // Pending patching action captured when the guard dialog is shown
     private var pendingPatchAction: (suspend () -> Unit)? = null
 
     // Loading state for installed apps
     var installedAppsLoading by mutableStateOf(true)
 
-    // Bundle data
-    var recommendedVersions: Map<String, String> = emptyMap()
-        private set
-    var compatibleVersions: Map<String, List<String>> = emptyMap()
-        private set
+    // Bundle data — reactive StateFlows derived directly from bundleInfoFlow
+    val compatibleVersionsFlow: StateFlow<Map<String, List<AppTarget>>> =
+        patchBundleRepository.bundleInfoFlow
+            .combine(patchBundleRepository.sources) { bundleInfo, sources ->
+                val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
+                extractCompatibleVersions(bundleInfo, enabledUids)
+            }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    val recommendedVersionsFlow: StateFlow<Map<String, AppTarget>> =
+        combine(
+            compatibleVersionsFlow,
+            prefs.bundleExperimentalVersionsEnabled.flow,
+            patchBundleRepository.bundleInfoFlow,
+            patchBundleRepository.sources
+        ) { versionData, experimentalEnabledUids, bundleInfo, sources ->
+            val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
+            // Packages for which at least one enabled bundle has experimental toggle on
+            val experimentalEnabledPackages = bundleInfo
+                .filterKeys { it in enabledUids && it.toString() in experimentalEnabledUids }
+                .values
+                .flatMap { it.patches }
+                .flatMap { it.compatiblePackages.orEmpty() }
+                .mapNotNull { it.packageName }
+                .toSet()
+
+            versionData.mapValues { (packageName, targets) ->
+                if (packageName in experimentalEnabledPackages) {
+                    // Experimental mode: prefer the highest experimental version, fallback to first
+                    targets.firstOrNull { it.isExperimental } ?: targets.first()
+                } else {
+                    // Normal mode: prefer the highest stable version, fallback to first
+                    targets.firstOrNull { !it.isExperimental } ?: targets.first()
+                }
+            }
+        }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    // Convenience accessors — read current value synchronously for non-reactive call sites
+    val recommendedVersions: Map<String, AppTarget> get() = recommendedVersionsFlow.value
+    val compatibleVersions: Map<String, List<AppTarget>> get() = compatibleVersionsFlow.value
 
     // Track available updates for installed apps
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
@@ -285,6 +348,17 @@ class HomeViewModel(
      * Otherwise, launches [action] immediately.
      */
     fun guardPatching(action: suspend () -> Unit) {
+        // Check available storage first — low disk space is the most common cause of
+        // cryptic "file not found" errors and corrupt output APKs during patching.
+        val lowDiskSpaceThresholdGb = 1f // Minimum free storage in GB required before patching
+        val freeBytes = StatFs(app.filesDir.absolutePath).availableBytes
+        val freeGb = freeBytes / (1024f * 1024f * 1024f)
+        if (freeGb < lowDiskSpaceThresholdGb) {
+            pendingPatchAction = action
+            lowDiskSpaceFreeGb = freeGb
+            showLowDiskSpaceDialog = true
+            return
+        }
         if (isOnMeteredWithUpdatesDisabled()) {
             pendingPatchAction = action
             showMeteredPatchingDialog = true
@@ -322,6 +396,30 @@ class HomeViewModel(
      */
     fun dismissMeteredPatchingDialog() {
         showMeteredPatchingDialog = false
+        pendingPatchAction = null
+    }
+
+    /**
+     * User chose to proceed with patching despite low disk space.
+     * Continues to the metered network check if applicable, then launches the action.
+     */
+    fun dismissLowDiskSpaceDialogAndProceed() {
+        showLowDiskSpaceDialog = false
+        val action = pendingPatchAction ?: return
+        pendingPatchAction = null
+        if (isOnMeteredWithUpdatesDisabled()) {
+            pendingPatchAction = action
+            showMeteredPatchingDialog = true
+        } else {
+            viewModelScope.launch { action() }
+        }
+    }
+
+    /**
+     * User canceled patching from the low disk space dialog.
+     */
+    fun dismissLowDiskSpaceDialog() {
+        showLowDiskSpaceDialog = false
         pendingPatchAction = null
     }
 
@@ -510,18 +608,22 @@ class HomeViewModel(
     }
 
     /**
+     * Per-package metadata aggregated from all enabled patch bundles.
+     * Provides display names, accent colors, APK type requirements, and valid signatures
+     * without relying on hardcoded constants for non-KnownApps packages.
+     */
+    val bundleAppMetadataFlow: StateFlow<Map<String, BundleAppMetadata>> =
+        patchBundleRepository.allBundlesInfoFlow
+            .map { bundleInfoMap -> BundleAppMetadata.buildFrom(bundleInfoMap) }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    /**
      * Set of all unique package names that have patches across all enabled bundles.
-     * Derived reactively from bundleInfoFlow.
+     * Derived from [bundleAppMetadataFlow] keys — no need to re-iterate all patches.
      */
     val patchablePackagesFlow: StateFlow<Set<String>> =
-        patchBundleRepository.bundleInfoFlow
-            .map { bundleInfoMap ->
-                bundleInfoMap.values.flatMap { bundleInfo ->
-                    (bundleInfo as? PatchBundleInfo)?.patches?.flatMap { patch ->
-                        patch.compatiblePackages?.map { it.packageName } ?: emptyList()
-                    } ?: emptyList()
-                }.toSet()
-            }
+        bundleAppMetadataFlow
+            .map { it.keys }
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 
     /**
@@ -538,26 +640,34 @@ class HomeViewModel(
     /**
      * Hidden app items with resolved display names and package info.
      */
-    val hiddenAppItems: StateFlow<List<HomeAppItem>> = filteredHiddenPackages
-        .map { hiddenPackages ->
-            hiddenPackages.map { packageName ->
-                val resolvedData = appDataResolver.resolveAppData(
-                    packageName = packageName,
-                    preferredSource = AppDataSource.PATCHED_APK
-                )
-                HomeAppItem(
-                    packageName = packageName,
-                    displayName = resolvedData.displayName,
-                    gradientColors = AppPackages.getGradientColors(packageName),
-                    installedApp = null,
-                    packageInfo = resolvedData.packageInfo,
-                    isPinnedByDefault = KnownApp.fromPackage(packageName)?.isPinnedByDefault == true,
-                    isDeleted = false,
-                    hasUpdate = false,
-                    patchCount = 0
-                )
-            }
+    val hiddenAppItems: StateFlow<List<HomeAppItem>> = combine(
+        filteredHiddenPackages,
+        bundleAppMetadataFlow
+    ) { hiddenPackages, metadata ->
+        hiddenPackages.map { packageName ->
+            val bundleMeta = metadata[packageName]
+            val knownApp = KnownApps.fromPackage(packageName)
+            val resolvedData = appDataResolver.resolveAppData(
+                packageName = packageName,
+                preferredSource = AppDataSource.PATCHED_APK
+            )
+            val displayName = resolvedData.displayName.takeIf {
+                resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
+            } ?: bundleMeta?.displayName ?: KnownApps.getAppName(app, packageName)
+            val gradientColors = bundleMeta?.gradientColors ?: KnownApps.DEFAULT_COLORS
+            HomeAppItem(
+                packageName = packageName,
+                displayName = displayName,
+                gradientColors = gradientColors,
+                installedApp = null,
+                packageInfo = resolvedData.packageInfo,
+                isPinnedByDefault = knownApp?.isPinnedByDefault == true,
+                isDeleted = false,
+                hasUpdate = false,
+                patchCount = 0
+            )
         }
+    }
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
@@ -573,21 +683,31 @@ class HomeViewModel(
         patchablePackagesFlow,
         homeAppButtonPrefs.hiddenPackages,
         installedAppRepository.getAll(),
-        _appUpdatesAvailable
-    ) { packages, hidden, installedApps, updatesMap ->
+        _appUpdatesAvailable,
+        bundleAppMetadataFlow
+    ) { packages, hidden, installedApps, updatesMap, metadata ->
         val installedMap = installedApps.associateBy { it.originalPackageName }
 
         packages
             .filter { it !in hidden }
             .map { packageName ->
                 val installedApp = installedMap[packageName]
-                val gradientColors = AppPackages.getGradientColors(packageName)
+                val bundleMeta = metadata[packageName]
+                val knownApp = KnownApps.fromPackage(packageName)
+
+                // Gradient colors: bundle declared → default (colors come from patch bundle)
+                val gradientColors = bundleMeta?.gradientColors ?: KnownApps.DEFAULT_COLORS
 
                 // Priority: PATCHED_APK → ORIGINAL_APK → INSTALLED → CONSTANTS
                 val resolvedData = appDataResolver.resolveAppData(
                     packageName = packageName,
                     preferredSource = AppDataSource.PATCHED_APK
                 )
+
+                // Display name priority: installed/patched APK label → bundle declared → KnownApps fallback
+                val displayName = resolvedData.displayName.takeIf {
+                    resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
+                } ?: bundleMeta?.displayName ?: KnownApps.getAppName(app, packageName)
 
                 // Determine deleted status
                 val isDeleted = installedApp?.let { installed ->
@@ -609,11 +729,11 @@ class HomeViewModel(
 
                 HomeAppItem(
                     packageName = packageName,
-                    displayName = resolvedData.displayName,
+                    displayName = displayName,
                     gradientColors = gradientColors,
                     installedApp = installedApp,
                     packageInfo = resolvedData.packageInfo,
-                    isPinnedByDefault = KnownApp.fromPackage(packageName)?.isPinnedByDefault == true,
+                    isPinnedByDefault = knownApp?.isPinnedByDefault == true,
                     isDeleted = isDeleted,
                     hasUpdate = hasUpdate,
                     patchCount = 0
@@ -622,6 +742,7 @@ class HomeViewModel(
             .sortedWith(
                 compareByDescending<HomeAppItem> { it.installedApp != null }
                     .thenByDescending { it.isPinnedByDefault }
+                    .thenByDescending { it.packageInfo != null }
                     .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
             )
     }
@@ -643,18 +764,16 @@ class HomeViewModel(
     }
 
     /**
-     * Update bundle data when sources or bundle info changes.
+     * Returns the set of experimental version strings for a package from all currently enabled bundles.
+     * Derived directly from [compatibleVersions] which already contains [AppTarget] objects.
+     * Used by the UI to show "Experimental" badges on specific versions.
      */
-    fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) {
-        // Get set of enabled bundle UIDs
-        val enabledBundleUids = sources.filter { it.enabled }.map { it.uid }.toSet()
-
-        // Extract versions from all enabled bundles
-        val versionData = extractCompatibleVersions(bundleInfo, enabledBundleUids)
-
-        recommendedVersions = versionData.mapValues { it.value.firstOrNull() ?: "" }
-        compatibleVersions = versionData
-    }
+    fun getExperimentalVersionsForPackage(packageName: String): Set<String> =
+        compatibleVersions[packageName]
+            ?.filter { it.isExperimental }
+            ?.mapNotNull { it.version }
+            ?.toSet()
+            ?: emptySet()
 
     /**
      * Update loading state.
@@ -726,7 +845,7 @@ class HomeViewModel(
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
-        pendingAppName = AppPackages.getAppName(app, packageName)
+        pendingAppName = KnownApps.getAppName(app, packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
 
@@ -748,7 +867,7 @@ class HomeViewModel(
         val shouldAutoUseSaved = !isExpertMode &&
                 savedInfo != null &&
                 recommendedVersion != null &&
-                savedInfo.version == recommendedVersion
+                savedInfo.version == recommendedVersion.version
 
         if (shouldAutoUseSaved) {
             // Skip dialog and use saved APK directly
@@ -879,6 +998,60 @@ class HomeViewModel(
             return
         }
 
+        // Check if the selected file is a split APK while the bundle requires a full APK.
+        // This must happen BEFORE signature verification — split archives (.apkm/.apks/.xapk)
+        // are not valid APKs so PackageManager cannot read their signature, which would cause
+        // a false "invalid signature" dialog instead of the correct "split APK" warning.
+        if (selectedApp is SelectedApp.Local) {
+            val requiredApkFileType = bundleAppMetadataFlow.value[selectedApp.packageName]?.apkFileType
+
+            val isSplitFile = SplitApkPreparer.isSplitArchive(selectedApp.file)
+
+            if (isSplitFile && requiredApkFileType?.isApk == true && requiredApkFileType.isRequired) {
+                pendingSelectedApp = selectedApp
+                showSplitApkWarningDialog = true
+                cleanupPendingData(keepSelectedApp = true)
+                return
+            }
+
+            // Verify APK signature against the expected signatures declared in the patch bundle.
+            // For split archives (.apkm/.apks/.xapk) PackageManager cannot read the signature
+            // from the zip container directly — extract the representative base APK first and
+            // verify against that. The extracted file is cleaned up immediately after.
+            val expectedSignatures = bundleAppMetadataFlow.value[selectedApp.packageName]?.signatures
+            if (!expectedSignatures.isNullOrEmpty()) {
+                val signatureMatch = withContext(Dispatchers.IO) {
+                    if (isSplitFile) {
+                        val extracted = SplitApkInspector.extractRepresentativeApk(
+                            source = selectedApp.file,
+                            workspace = filesystem.uiTempDir
+                        )
+                        if (extracted == null) {
+                            // Cannot extract base APK — skip verification rather than false-block
+                            true
+                        } else {
+                            try {
+                                verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
+                            } finally {
+                                extracted.cleanup()
+                            }
+                        }
+                    } else {
+                        verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
+                    }
+                }
+                if (!signatureMatch) {
+                    pendingSelectedApp = selectedApp
+                    showInvalidSignatureDialog = InvalidSignatureDialogState(
+                        packageName = selectedApp.packageName,
+                        appName = pendingAppName ?: KnownApps.getAppName(app, selectedApp.packageName)
+                    )
+                    cleanupPendingData(keepSelectedApp = true)
+                    return
+                }
+            }
+        }
+
         val allowIncompatible = prefs.disablePatchVersionCompatCheck.getBlocking()
 
         // Get scoped bundles for this APK (package + version).
@@ -916,7 +1089,18 @@ class HomeViewModel(
         //   - AND the user has NOT disabled the version compat check
         // Universal patches do not suppress this warning — the user should still be informed
         // that the APK version is not officially supported.
+        // Note: experimental versions are compatible (they pass the version check) but show an
+        // additional "Experimental" badge in the warning dialog.
         val versionMismatch = !hasCompatible && hasIncompatible
+        // Experimental check is independent — a version can be experimental AND compatible
+        val isVersionExperimental = enabledBundles.any { it.isVersionExperimental }
+
+        // Check if the user has enabled experimental-version mode for this package's bundle
+        val experimentalEnabledUids = prefs.bundleExperimentalVersionsEnabled.getBlocking()
+        val isExperimentalModeEnabled = enabledBundles.any { bundle ->
+            bundle.uid.toString() in experimentalEnabledUids
+        }
+
         if (versionMismatch && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
             val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
@@ -925,8 +1109,32 @@ class HomeViewModel(
                 packageName = selectedApp.packageName,
                 version = selectedApp.version ?: "unknown",
                 recommendedVersion = recommendedVersion,
-                allCompatibleVersions = allVersions
+                allCompatibleVersions = allVersions,
+                isExperimental = isVersionExperimental
             )
+            cleanupPendingData(keepSelectedApp = true)
+            return
+        }
+
+        // If the version is experimental, show the appropriate warning:
+        // - Experimental mode ON → ExperimentalVersionWarningDialog
+        // - Experimental mode OFF → UnsupportedVersionWarningDialog
+        if (isVersionExperimental && !allowIncompatible) {
+            val recommendedVersion = recommendedVersions[selectedApp.packageName]
+            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
+            pendingSelectedApp = selectedApp
+            val state = UnsupportedVersionDialogState(
+                packageName = selectedApp.packageName,
+                version = selectedApp.version ?: "unknown",
+                recommendedVersion = recommendedVersion,
+                allCompatibleVersions = allVersions,
+                isExperimental = true
+            )
+            if (isExperimentalModeEnabled) {
+                showExperimentalVersionDialog = state
+            } else {
+                showUnsupportedVersionDialog = state
+            }
             cleanupPendingData(keepSelectedApp = true)
             return
         }
@@ -936,6 +1144,20 @@ class HomeViewModel(
         // because it affects which patches are included (GmsCore is excluded for mount install).
         // Show the pre-patching installer dialog so the user can choose.
         // For non-root devices, just proceed - installer selection happens after patching.
+        if (rootInstaller.isDeviceRooted()) {
+            requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
+        } else {
+            usingMountInstall = false
+            startPatchingWithApp(selectedApp, allowIncompatible)
+        }
+    }
+
+    /**
+     * Called when the user confirms proceeding despite an APK signature mismatch.
+     * Skips the signature verification step and continues with the normal flow.
+     */
+    suspend fun processSelectedAppIgnoringSignature(selectedApp: SelectedApp) {
+        val allowIncompatible = prefs.disablePatchVersionCompatCheck.getBlocking()
         if (rootInstaller.isDeviceRooted()) {
             requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
         } else {
@@ -1229,8 +1451,8 @@ class HomeViewModel(
         }
 
         // Handle null pendingRecommendedVersion
-        val escapedVersion = pendingRecommendedVersion?.let { encode(it, "UTF-8") } ?: "any"
-        val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
+        val escapedVersion = pendingRecommendedVersion?.let { encode(it.version, "UTF-8") } ?: "any"
+        val searchQuery = "$pendingPackageName~$escapedVersion~${Build.SUPPORTED_ABIS.first()}".encodeURLPath()
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
 
@@ -1251,14 +1473,14 @@ class HomeViewModel(
     }
 
     fun getApiOfflineWebSearchUrl(): String {
-        val architecture = if (pendingPackageName == KnownApp.YOUTUBE_MUSIC) {
+        val architecture = if (pendingPackageName == KnownApps.YOUTUBE_MUSIC) {
             " (${Build.SUPPORTED_ABIS.first()})"
         } else {
             "nodpi"
         }
 
         // Handle null pendingRecommendedVersion
-        val versionPart = pendingRecommendedVersion?.let { "\"$it\"" } ?: ""
+        val versionPart = pendingRecommendedVersion?.version?.let { "\"$it\"" } ?: ""
         val searchQuery = "\"$pendingPackageName\" $versionPart $architecture site:APKMirror.com"
         val searchUrl = "https://google.com/search?q=${encode(searchQuery, "UTF-8")}"
         Log.d(tag, "Using search query: $searchQuery")
@@ -1306,52 +1528,85 @@ class HomeViewModel(
 
     /**
      * Extract compatible versions for each package from bundle info.
-     * Returns a map of package name to sorted list of versions (newest first).
+     * Returns a map of package name to sorted list of AppTargets — newest first regardless
+     * of experimental status. The [AppTarget.isExperimental] flag is preserved for badge display.
+     * Single pass per bundle — O(patches) instead of O(packages × patches).
      */
     private fun extractCompatibleVersions(
-        bundleInfo: Map<Int, Any>,
+        bundleInfo: Map<Int, PatchBundleInfo>,
         enabledBundleUids: Set<Int> = emptySet()
-    ): Map<String, List<String>> {
-        // Collect versions from all enabled bundles
-        val allVersionsByPackage = mutableMapOf<String, MutableSet<String>>()
+    ): Map<String, List<AppTarget>> {
+        val targetsByPackage = mutableMapOf<String, MutableMap<String, AppTarget>>()
 
-        bundleInfo.forEach { (bundleUid, bundleData) ->
-            // Skip disabled bundles if we have the enabled list
-            if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) {
-                return@forEach
-            }
+        bundleInfo.forEach { (bundleUid, info) ->
+            if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) return@forEach
 
-            val info = bundleData as? PatchBundleInfo ?: return@forEach
+            info.patches.forEach { patch ->
+                patch.compatiblePackages?.forEach { pkg ->
+                    val packageName = pkg.packageName ?: return@forEach
+                    val map = targetsByPackage.getOrPut(packageName) { mutableMapOf() }
 
-            // Collect all unique package names from all patches in this bundle
-            val packagesInBundle = info.patches
-                .flatMap { patch ->
-                    patch.compatiblePackages?.map { it.packageName } ?: emptyList()
-                }
-                .distinct()
-
-            // For each package, collect all compatible versions
-            packagesInBundle.forEach { packageName ->
-                val versions = info.patches
-                    .flatMap { patch ->
-                        patch.compatiblePackages
-                            ?.firstOrNull { it.packageName == packageName }
-                            ?.versions
-                            ?: emptyList()
+                    pkg.versions?.forEach { version ->
+                        val isExperimental = pkg.experimentalVersions?.contains(version) == true
+                        // If a version appears in multiple patches, prefer stable over experimental
+                        if (version !in map || isExperimental.not()) {
+                            map[version] = AppTarget(version = version, isExperimental = isExperimental)
+                        }
                     }
-                    .distinct()
-
-                if (versions.isNotEmpty()) {
-                    allVersionsByPackage.getOrPut(packageName) { mutableSetOf() }
-                        .addAll(versions)
                 }
             }
         }
 
-        // Convert to sorted lists (newest first)
-        return allVersionsByPackage.mapValues { (_, versions) ->
-            versions.toList().sortedDescending()
-        }.filterValues { it.isNotEmpty() }
+        // Sort all versions together newest→oldest regardless of experimental flag
+        return targetsByPackage
+            .mapValues { (_, map) -> map.values.sortedDescending() }
+            .filterValues { it.isNotEmpty() }
+    }
+
+    /**
+     * Verify that the APK at [apkPath] is signed with one of the [expectedSha256Signatures].
+     *
+     * Uses [PackageManager.GET_SIGNING_CERTIFICATES] (API 28+) with fallback to
+     * [PackageManager.GET_SIGNATURES] for older devices. Returns true if at least one
+     * certificate fingerprint matches, false if none match or the APK cannot be read.
+     *
+     * An empty / null [expectedSha256Signatures] is treated as "no verification required" → true.
+     */
+    @Suppress("DEPRECATION")
+    private fun verifyApkSignature(apkPath: String, expectedSha256Signatures: Set<String>): Boolean {
+        if (expectedSha256Signatures.isEmpty()) return true
+        return try {
+            val signatures: Array<android.content.pm.Signature> =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    val flags = PackageManager.GET_SIGNING_CERTIFICATES
+                    val info = app.packageManager.getPackageArchiveInfo(apkPath, flags)
+                        ?: return false
+                    val signingInfo = info.signingInfo ?: return false
+                    if (signingInfo.hasMultipleSigners()) {
+                        signingInfo.apkContentsSigners
+                    } else {
+                        signingInfo.signingCertificateHistory
+                    }
+                } else {
+                    val flags = PackageManager.GET_SIGNATURES
+                    val info = app.packageManager.getPackageArchiveInfo(apkPath, flags)
+                        ?: return false
+                    @Suppress("DEPRECATION")
+                    info.signatures ?: return false
+                }
+
+            val digest = MessageDigest.getInstance("SHA-256")
+            signatures.any { sig ->
+                // Reset before each use — MessageDigest is stateful
+                digest.reset()
+                val fingerprint = digest.digest(sig.toByteArray())
+                    .joinToString("") { b -> "%02x".format(b) }
+                fingerprint in expectedSha256Signatures
+            }
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to verify APK signature for $apkPath", e)
+            false
+        }
     }
 
     /**
@@ -1383,8 +1638,23 @@ class HomeViewModel(
             val isSplitArchive = SplitApkPreparer.isSplitArchive(tempFile)
 
             val packageInfo = if (isSplitArchive) {
-                // Extract base APK from archive and get package info
-                extractPackageInfoFromSplitArchive(context, tempFile)
+                // Extract the representative base APK and read package info from it.
+                // SplitApkInspector uses a smarter entry-selection algorithm than a naive
+                // name search: base.apk → main/master → largest non-config → fallback.
+                val extracted = SplitApkInspector.extractRepresentativeApk(
+                    source = tempFile,
+                    workspace = filesystem.uiTempDir
+                )
+                try {
+                    extracted?.let {
+                        context.packageManager.getPackageArchiveInfo(
+                            it.file.absolutePath,
+                            PackageManager.GET_META_DATA
+                        )
+                    }
+                } finally {
+                    extracted?.cleanup()
+                }
             } else {
                 // Regular APK - parse directly
                 context.packageManager.getPackageArchiveInfo(
@@ -1406,49 +1676,6 @@ class HomeViewModel(
             )
         } catch (e: Exception) {
             Log.e(tag, "Failed to load APK", e)
-            null
-        }
-    }
-
-    /**
-     * Extract package info from split APK archive (apkm, apks, xapk).
-     */
-    private fun extractPackageInfoFromSplitArchive(
-        context: Context,
-        archiveFile: File
-    ): PackageInfo? {
-        return try {
-            ZipInputStream(archiveFile.inputStream()).use { zip ->
-                var entry = zip.nextEntry
-                while (entry != null) {
-                    val name = entry.name.lowercase()
-                    // Look for base APK (usually named base.apk, or the main APK without split suffix)
-                    if (name.endsWith(".apk") &&
-                        (name.contains("base") || !name.contains("split") && !name.contains("config"))) {
-
-                        // Extract base APK to temp file
-                        val tempBaseApk = File(context.cacheDir, "temp_base_${System.currentTimeMillis()}.apk")
-                        tempBaseApk.outputStream().use { output ->
-                            zip.copyTo(output)
-                        }
-
-                        val packageInfo = context.packageManager.getPackageArchiveInfo(
-                            tempBaseApk.absolutePath,
-                            PackageManager.GET_META_DATA
-                        )
-
-                        tempBaseApk.delete()
-
-                        if (packageInfo != null) {
-                            return packageInfo
-                        }
-                    }
-                    entry = zip.nextEntry
-                }
-                null
-            }
-        } catch (e: Exception) {
-            Log.e(tag, "Failed to extract package info from split archive", e)
             null
         }
     }

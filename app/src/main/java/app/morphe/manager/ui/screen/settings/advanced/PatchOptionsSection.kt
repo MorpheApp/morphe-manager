@@ -33,7 +33,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.PatchOptionKeys
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
-import app.morphe.manager.util.KnownApp
+import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -184,14 +184,14 @@ fun PatchOptionsSection(
             if (youtubePatches.isNotEmpty()) {
                 SectionCard {
                     AppPatchOptionsCard(
-                        packageName = KnownApp.YOUTUBE,
+                        packageName = KnownApps.YOUTUBE,
                         icon = Icons.Outlined.VideoLibrary,
-                        title = stringResource(R.string.home_youtube),
+                        title = KnownApps.getAppName(context, KnownApps.YOUTUBE),
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog = KnownApp.YOUTUBE },
-                        onBrandingClick = { showBrandingDialog = KnownApp.YOUTUBE },
-                        onHeaderClick = { showHeaderDialog = KnownApp.YOUTUBE }
+                        onThemeClick = { showThemeDialog = KnownApps.YOUTUBE },
+                        onBrandingClick = { showBrandingDialog = KnownApps.YOUTUBE },
+                        onHeaderClick = { showHeaderDialog = KnownApps.YOUTUBE }
                     )
                 }
 
@@ -216,14 +216,14 @@ fun PatchOptionsSection(
             if (youtubeMusicPatches.isNotEmpty()) {
                 SectionCard {
                     AppPatchOptionsCard(
-                        packageName = KnownApp.YOUTUBE_MUSIC,
+                        packageName = KnownApps.YOUTUBE_MUSIC,
                         icon = Icons.Outlined.LibraryMusic,
-                        title = stringResource(R.string.home_youtube_music),
+                        title = KnownApps.getAppName(context, KnownApps.YOUTUBE_MUSIC),
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog = KnownApp.YOUTUBE_MUSIC },
-                        onBrandingClick = { showBrandingDialog = KnownApp.YOUTUBE_MUSIC },
-                        onHeaderClick = { showHeaderDialog = KnownApp.YOUTUBE_MUSIC }
+                        onThemeClick = { showThemeDialog = KnownApps.YOUTUBE_MUSIC },
+                        onBrandingClick = { showBrandingDialog = KnownApps.YOUTUBE_MUSIC },
+                        onHeaderClick = { showHeaderDialog = KnownApps.YOUTUBE_MUSIC }
                     )
                 }
             }
@@ -365,7 +365,7 @@ private fun HideShortsSection(
         // Header
         CardHeader(
             icon = Icons.Outlined.VisibilityOff,
-            title = stringResource(R.string.home_youtube),
+            title = KnownApps.getAppName(context, KnownApps.YOUTUBE),
             description = stringResource(R.string.settings_advanced_patch_options_hide_shorts_features)
         )
 

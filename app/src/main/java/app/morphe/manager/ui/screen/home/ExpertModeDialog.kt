@@ -87,6 +87,7 @@ fun ExpertModeDialog(
 
             bundle to patches
         }.filter { it.second.isNotEmpty() }
+            .sortedByDescending { (bundle, _) -> bundle.compatible.size }
     }
 
     // Filter patches based on search query
@@ -888,7 +889,7 @@ private fun PatchOptionsDialog(
                             presets = presets,
                             packageName = packageName,
                             isDefaultBundle = isDefaultBundle,
-                            onValueChange = { onValueChange(key, it) }
+                            onValueChange = { onValueChange(key, it.ifBlank { null }) }
                         )
                     }
 
@@ -910,7 +911,7 @@ private fun PatchOptionsDialog(
                         packageName = packageName,
                         isDefaultBundle = isDefaultBundle,
 //                        required = option.required,
-                        onValueChange = { onValueChange(key, it) }
+                        onValueChange = { onValueChange(key, it.ifBlank { null }) }
                     )
 
                     OptionKind.StringText -> TextInputOption(

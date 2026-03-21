@@ -36,7 +36,7 @@ import app.morphe.manager.ui.screen.home.ScrollableInstruction
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.PatchOptionKeys
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
-import app.morphe.manager.util.KnownApp
+import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.rememberFolderPickerWithPermission
 import app.morphe.manager.util.toFilePath
 import kotlinx.coroutines.launch
@@ -86,7 +86,7 @@ fun ThemeColorDialog(
                     scope.launch {
                         patchOptionsPrefs.darkThemeColor(packageName).update(defaultDarkColor)
                         // Light theme reset YouTube only
-                        if (packageName == KnownApp.YOUTUBE) {
+                        if (packageName == KnownApps.YOUTUBE) {
                             patchOptionsPrefs.lightThemeColor(packageName).update(defaultLightColor)
                         }
                     }
@@ -166,7 +166,7 @@ fun ThemeColorDialog(
             }
 
             // Light Theme Section (YouTube only, if available)
-            if (packageName == KnownApp.YOUTUBE && lightThemeOption != null) {
+            if (packageName == KnownApps.YOUTUBE && lightThemeOption != null) {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 val localizedTitle = getLocalizedOrCustomText(

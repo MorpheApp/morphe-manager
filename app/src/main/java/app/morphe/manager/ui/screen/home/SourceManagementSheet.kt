@@ -6,8 +6,6 @@
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
@@ -32,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -54,18 +51,17 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvat
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.ActionPillButton
 import app.morphe.manager.ui.screen.shared.InfoBadge
 import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
+import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
-import java.net.URL
 
 /**
  * Bottom sheet for managing patch bundles.
@@ -82,15 +78,18 @@ fun BundleManagementSheet(
     onRename: (PatchBundleSource) -> Unit
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
+    val prefs: PreferencesManager = koinInject()
     val scope = rememberCoroutineScope()
 
     val sources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val patchCounts by patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
     val activeUpdateUids by patchBundleRepository.activeUpdateUidsFlow.collectAsStateWithLifecycle(emptySet())
+    val experimentalVersionsEnabled by prefs.bundleExperimentalVersionsEnabled.getAsState()
+    val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
-    var bundleToDelete by remember { mutableStateOf<PatchBundleSource?>(null) }
-    var bundleToShowPatches by remember { mutableStateOf<PatchBundleSource?>(null) }
+    val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
+    val bundleToShowPatches = remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
     val bundleToShowChangelog = bundleToShowChangelogUid
         ?.let { uid -> sources.filterIsInstance<RemotePatchBundle>().find { it.uid == uid } }
@@ -187,12 +186,21 @@ fun BundleManagementSheet(
                     )
                 ) {
                     items(sources, key = { bundle -> bundle.uid }) { bundle ->
+                        val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
+                            bundleInfo[bundle.uid]?.patches?.any { patch ->
+                                patch.compatiblePackages?.any { pkg ->
+                                    pkg.experimentalVersions?.isNotEmpty() == true
+                                } == true
+                            } == true
+                        }
+                        val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
+
                         BundleManagementCard(
                             bundle = bundle,
                             patchCount = patchCounts[bundle.uid] ?: 0,
                             updateInfo = manualUpdateInfo[bundle.uid],
                             isUpdating = bundle.uid in activeUpdateUids,
-                            onDelete = { bundleToDelete = bundle },
+                            onDelete = { bundleToDelete.value = bundle },
                             onDisable = { onDisable(bundle) },
                             onUpdate = { onUpdate(bundle) },
                             onRename = { onRename(bundle) },
@@ -207,7 +215,16 @@ fun BundleManagementSheet(
                                 }
                                 else -> null
                             },
-                            onPatchesClick = { bundleToShowPatches = bundle },
+                            onExperimentalVersionsToggle = if (hasExperimentalVersions) {
+                                { useExperimental ->
+                                    scope.launch {
+                                        patchBundleRepository.setUseExperimentalVersions(bundle.uid, useExperimental)
+                                    }
+                                }
+                            } else null,
+                            hasExperimentalVersions = hasExperimentalVersions,
+                            useExperimentalVersions = useExperimentalVersions,
+                            onPatchesClick = { bundleToShowPatches.value = bundle },
                             onVersionClick = {
                                 if (bundle is RemotePatchBundle) {
                                     bundleToShowChangelogUid = bundle.uid
@@ -234,22 +251,22 @@ fun BundleManagementSheet(
     }
 
     // Delete confirmation dialog
-    if (bundleToDelete != null) {
+    if (bundleToDelete.value != null) {
         BundleDeleteConfirmDialog(
-            bundle = bundleToDelete!!,
-            onDismiss = { bundleToDelete = null },
+            bundle = bundleToDelete.value!!,
+            onDismiss = { bundleToDelete.value = null },
             onConfirm = {
-                onDelete(bundleToDelete!!)
-                bundleToDelete = null
+                onDelete(bundleToDelete.value!!)
+                bundleToDelete.value = null
             }
         )
     }
 
     // Patches dialog
-    if (bundleToShowPatches != null) {
+    if (bundleToShowPatches.value != null) {
         BundlePatchesDialog(
-            onDismissRequest = { bundleToShowPatches = null },
-            src = bundleToShowPatches!!
+            onDismissRequest = { bundleToShowPatches.value = null },
+            src = bundleToShowPatches.value!!
         )
     }
 
@@ -278,6 +295,9 @@ private fun BundleManagementCard(
     onUpdate: () -> Unit,
     onRename: () -> Unit,
     onPrereleasesToggle: ((Boolean) -> Unit)?,
+    onExperimentalVersionsToggle: ((Boolean) -> Unit)?,
+    hasExperimentalVersions: Boolean,
+    useExperimentalVersions: Boolean,
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
@@ -425,14 +445,15 @@ private fun BundleManagementCard(
 
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
+                    // Resolve prerelease state once
+                    val currentUsePrerelease = when (bundle) {
+                        is JsonPatchBundle -> bundle.usePrerelease
+                        is APIPatchBundle -> bundle.usePrerelease
+                        else -> false
+                    }
+
                     // Prerelease toggle (for JsonPatchBundle with GitHub endpoint or APIPatchBundle)
                     if (onPrereleasesToggle != null) {
-                        val currentUsePrerelease = when (bundle) {
-                            is JsonPatchBundle -> bundle.usePrerelease
-                            is APIPatchBundle -> bundle.usePrerelease
-                            else -> false
-                        }
-
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -461,7 +482,49 @@ private fun BundleManagementCard(
                                 onCheckedChange = onPrereleasesToggle
                             )
                         }
+                    }
 
+                    // Experimental versions toggle - shown for any bundle type that has experimental app version targets.
+                    // For remote bundles (prerelease supported) it additionally requires prereleases to be ON.
+                    AnimatedVisibility(
+                        visible = hasExperimentalVersions && onExperimentalVersionsToggle != null &&
+                                (onPrereleasesToggle == null || currentUsePrerelease),
+                        enter = expandVertically() + fadeIn(),
+                        exit = shrinkVertically() + fadeOut()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    onExperimentalVersionsToggle?.invoke(!useExperimentalVersions)
+                                }
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.sources_management_experimental_versions_toggle),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.sources_management_experimental_versions_toggle_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+
+                            Spacer(Modifier.width(8.dp))
+
+                            Switch(
+                                checked = useExperimentalVersions,
+                                onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) }
+                            )
+                        }
+                    }
+
+                    if (onPrereleasesToggle != null || (hasExperimentalVersions && onExperimentalVersionsToggle != null)) {
                         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                     }
 
@@ -812,63 +875,5 @@ fun BundleIcon(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun RemoteAvatar(
-    url: String,
-    fallbackUrl: String? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
-) {
-    // Initialise immediately from cache
-    var bitmap by remember(url) {
-        mutableStateOf(AvatarCache[url] ?: fallbackUrl?.let { AvatarCache[it] })
-    }
-
-    LaunchedEffect(url, fallbackUrl) {
-        if (bitmap == null) {
-            bitmap = loadGitHubAvatar(url)
-                ?: fallbackUrl?.let { loadGitHubAvatar(it) }
-        }
-    }
-
-    if (bitmap != null) {
-        Image(
-            bitmap = bitmap!!.asImageBitmap(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = modifier
-        )
-    }
-}
-
-/**
- * In-memory avatar cache scoped to the process lifetime.
- */
-private object AvatarCache {
-    private val cache = mutableMapOf<String, Bitmap>()
-
-    operator fun get(url: String): Bitmap? = cache[url]
-    operator fun set(url: String, bitmap: Bitmap) { cache[url] = bitmap }
-}
-
-/**
- * Load GitHub avatar image from URL, storing the result in [AvatarCache].
- */
-private suspend fun loadGitHubAvatar(url: String): Bitmap? = withContext(Dispatchers.IO) {
-    AvatarCache[url]?.let { return@withContext it }
-    try {
-        val connection = URL(url).openConnection()
-        connection.connectTimeout = 5000
-        connection.readTimeout = 5000
-        connection.connect()
-
-        connection.getInputStream().use { input ->
-            BitmapFactory.decodeStream(input)
-        }?.also { AvatarCache[url] = it }
-    } catch (_: Exception) {
-        null
     }
 }
