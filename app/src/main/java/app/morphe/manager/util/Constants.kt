@@ -56,18 +56,22 @@ object KnownApps {
      *
      * @param packageName The app's package name.
      * @param isPinnedByDefault Whether this app appears pinned on the home screen by default.
+     * @param brandColor App brand color used for the home screen button gradient start and
+     *   shimmer placeholder. Should match the appIconColor value shipped in the bundle's
+     *   Compatibility declaration. Null means fall back to [DEFAULT_COLORS].
      */
     data class Entry(
         val packageName: String,
         val isPinnedByDefault: Boolean = false,
+        val brandColor: Color? = null,
     )
 
     /** All known app entries in display order. */
     val all: List<Entry> = listOf(
-        Entry(YOUTUBE,       isPinnedByDefault = true),
-        Entry(YOUTUBE_MUSIC, isPinnedByDefault = true),
-        Entry(REDDIT,        isPinnedByDefault = true),
-        // Entry(X_TWITTER),  // Uncomment when release
+        Entry(REDDIT,        isPinnedByDefault = true, brandColor = Color(0xFFFF4500)),
+        Entry(YOUTUBE,       isPinnedByDefault = true, brandColor = Color(0xFFFF0033)),
+        Entry(YOUTUBE_MUSIC, isPinnedByDefault = true, brandColor = Color(0xFFFF0000)),
+        // Entry(X_TWITTER, brandColor = Color(0xFF000000)),  // Uncomment when release
     )
 
     // Fast lookup map - built once at startup.
@@ -78,11 +82,15 @@ object KnownApps {
 
     /**
      * Ordered list of shimmer placeholder gradient colors shown during cold-start loading.
-     * Uses [DEFAULT_COLORS] for every pinned slot — actual bundle colors will replace them
-     * once the bundle loads.
+     * Uses each app's [Entry.brandColor] as the gradient start — actual bundle colors will
+     * replace them once the bundle loads. Falls back to [DEFAULT_COLORS] if no brand color
+     * is declared.
      */
     val DEFAULT_SHIMMER_GRADIENTS: List<List<Color>> by lazy {
-        all.filter { it.isPinnedByDefault }.map { DEFAULT_COLORS }
+        all.filter { it.isPinnedByDefault }.map { entry ->
+            entry.brandColor?.let { color -> listOf(color, GRADIENT_MID, GRADIENT_END) }
+                ?: DEFAULT_COLORS
+        }
     }
 
     /**
@@ -122,9 +130,8 @@ object KnownApps {
      * Returns a display name for [packageName].
      * Priority: fallback table → raw package name.
      * Used as the last resort when bundle metadata and installed labels are unavailable.
-     * Note: [Context] parameter kept for API compatibility - no longer needed for resource lookup.
      */
-    fun getAppName(@Suppress("UNUSED_PARAMETER") context: Context, packageName: String): String =
+    fun getAppName(packageName: String): String =
         FALLBACK_NAMES[packageName] ?: packageName
 
     /**

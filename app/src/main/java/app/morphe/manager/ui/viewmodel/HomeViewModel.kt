@@ -29,6 +29,7 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
@@ -458,31 +459,56 @@ class HomeViewModel(
 
     /**
      * Check for bundle updates for installed apps.
+     *
+     * Iterates all active bundles. For each [RemotePatchBundle], if a changelog is
+     * available and uses conventional-changelog scopes, only apps with explicit
+     * changes in newer entries receive an update badge.
+     *
+     * Falls back to showing the badge when changelog is unavailable or the app
+     * name cannot be resolved.
      */
     suspend fun checkInstalledAppsForUpdates(
         installedApps: List<InstalledApp>,
-        currentBundleVersion: String?
     ) = withContext(Dispatchers.IO) {
-        if (currentBundleVersion == null) {
+        val sources = patchBundleRepository.sources.first()
+        if (sources.isEmpty()) {
             _appUpdatesAvailable.value = emptyMap()
             return@withContext
         }
+
+        // Pre-fetch changelog entries for every remote bundle, keyed by uid.
+        // runCatching per bundle so a network failure in one doesn't block others.
+        val changelogByUid: Map<Int, List<ChangelogEntry>?> = sources.associate { source ->
+            source.uid to runCatching {
+                source.asRemoteOrNull?.fetchChangelogEntries(sinceVersion = null)
+            }.getOrNull()
+        }
+
+        val currentVersionByUid: Map<Int, String?> = sources.associate { it.uid to it.version }
 
         val updates = mutableMapOf<String, Boolean>()
 
         installedApps.forEach { app ->
             // Get stored bundle versions for this app
             val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
+            val appName = resolveChangelogName(app.originalPackageName)
 
             // Check if any bundle used for this app has been updated
             val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
-                // Only check default bundle (UID 0) for main apps
-                if (bundleUid == DEFAULT_SOURCE_UID) {
-                    // Compare stored version with current version
-                    isNewerVersion(storedVersion, currentBundleVersion)
-                } else {
-                    false // For now, only track default bundle updates
-                }
+                val currentVersion = currentVersionByUid[bundleUid] ?: return@any false
+                if (!isNewerVersion(storedVersion, currentVersion)) return@any false
+
+                // Bundle is newer — refine with changelog if available.
+                // No changelog (null) → show badge (network error or local bundle).
+                // Unknown app name (null) → show badge (can't match scopes).
+                // Known name, no matching scope → no badge.
+                val entries = changelogByUid[bundleUid] ?: return@any true
+                if (appName == null) return@any true
+                ChangelogParser.hasChangesFor(
+                    entries = entries,
+                    installedVersion = storedVersion,
+                    appName = appName,
+                )
             }
 
             updates[app.currentPackageName] = hasUpdate
@@ -490,6 +516,16 @@ class HomeViewModel(
 
         _appUpdatesAvailable.value = updates
     }
+
+    /**
+     * Resolves the changelog scope name for [packageName].
+     * 1. [KnownApps.fallbackName] — static registry (offline, reliable).
+     * 2. [PM] label — system label for any installed app not in the registry.
+     * Returns null when neither source yields a name.
+     */
+    private fun resolveChangelogName(packageName: String): String? =
+        KnownApps.fallbackName(packageName)
+            ?: pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
 
     @SuppressLint("ShowToast")
     private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
@@ -653,7 +689,7 @@ class HomeViewModel(
             )
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
-            } ?: bundleMeta?.displayName ?: KnownApps.getAppName(app, packageName)
+            } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
             val gradientColors = bundleMeta?.gradientColors ?: KnownApps.DEFAULT_COLORS
             HomeAppItem(
                 packageName = packageName,
@@ -707,7 +743,7 @@ class HomeViewModel(
                 // Display name priority: installed/patched APK label → bundle declared → KnownApps fallback
                 val displayName = resolvedData.displayName.takeIf {
                     resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
-                } ?: bundleMeta?.displayName ?: KnownApps.getAppName(app, packageName)
+                } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
 
                 // Determine deleted status
                 val isDeleted = installedApp?.let { installed ->
@@ -845,7 +881,7 @@ class HomeViewModel(
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
-        pendingAppName = KnownApps.getAppName(app, packageName)
+        pendingAppName = KnownApps.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
 
@@ -1044,7 +1080,7 @@ class HomeViewModel(
                     pendingSelectedApp = selectedApp
                     showInvalidSignatureDialog = InvalidSignatureDialogState(
                         packageName = selectedApp.packageName,
-                        appName = pendingAppName ?: KnownApps.getAppName(app, selectedApp.packageName)
+                        appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
                     )
                     cleanupPendingData(keepSelectedApp = true)
                     return
