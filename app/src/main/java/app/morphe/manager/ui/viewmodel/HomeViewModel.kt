@@ -51,6 +51,7 @@ import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import app.morphe.patcher.patch.AppTarget
+import io.ktor.http.encodeURLPath
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.TimeZone
@@ -1451,7 +1452,7 @@ class HomeViewModel(
 
         // Handle null pendingRecommendedVersion
         val escapedVersion = pendingRecommendedVersion?.let { encode(it.version, "UTF-8") } ?: "any"
-        val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
+        val searchQuery = "$pendingPackageName~$escapedVersion~${Build.SUPPORTED_ABIS.first()}".encodeURLPath()
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
 
