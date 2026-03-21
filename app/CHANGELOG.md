@@ -1,3 +1,10 @@
+# app [1.12.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.7...v1.12.0-dev.8) (2026-03-21)
+
+
+### Features
+
+* Refine update badges using changelog scope matching ([#310](https://github.com/MorpheApp/morphe-manager/issues/310)) ([9b1cae7](https://github.com/MorpheApp/morphe-manager/commit/9b1cae7ddae4f8676b5e920a28ab1bcb4b424f34))
+
 # app [1.12.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.12.0-dev.6...v1.12.0-dev.7) (2026-03-21)
 
 
