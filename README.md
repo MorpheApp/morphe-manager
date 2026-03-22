@@ -25,7 +25,7 @@
 
 # 💊 Morphe Manager
 
-> Want to watch ads? Me neither.
+> Want to watch ads? Us neither.
 
 Morphe Manager is an Android app that patches YouTube, YouTube Music, and Reddit - stripping ads and giving you back control over your experience. No root required.
 
