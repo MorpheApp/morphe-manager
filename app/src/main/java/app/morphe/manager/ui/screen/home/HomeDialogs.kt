@@ -38,7 +38,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
@@ -187,24 +186,8 @@ fun HomeDialogs(
             experimentalVersions = homeViewModel.getExperimentalVersionsForPackage(dialogState.packageName),
             isExperimental = dialogState.isExperimental,
             isExpertMode = isExpertMode,
-            onDismiss = {
-                homeViewModel.showUnsupportedVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) {
-                        app.file.delete()
-                    }
-                }
-                homeViewModel.pendingSelectedApp = null
-            },
-            onProceed = {
-                homeViewModel.showUnsupportedVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    CoroutineScope(Dispatchers.Main).launch {
-                        homeViewModel.startPatchingWithApp(app, true)
-                        homeViewModel.pendingSelectedApp = null
-                    }
-                }
-            }
+            onDismiss = { homeViewModel.dismissUnsupportedVersionDialog() },
+            onProceed = { homeViewModel.proceedWithUnsupportedVersion() }
         )
     }
 
@@ -218,22 +201,8 @@ fun HomeDialogs(
 
         ExperimentalVersionWarningDialog(
             appName = dialogState.packageName.let { homeViewModel.bundleAppMetadataFlow.value[it]?.displayName ?: it },
-            onDismiss = {
-                homeViewModel.showExperimentalVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
-            },
-            onProceed = {
-                homeViewModel.showExperimentalVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    CoroutineScope(Dispatchers.Main).launch {
-                        homeViewModel.startPatchingWithApp(app, allowIncompatible = false)
-                        homeViewModel.pendingSelectedApp = null
-                    }
-                }
-            }
+            onDismiss = { homeViewModel.dismissExperimentalVersionDialog() },
+            onProceed = { homeViewModel.proceedWithExperimentalVersion() }
         )
     }
 
@@ -248,30 +217,21 @@ fun HomeDialogs(
         WrongPackageDialog(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
-            onDismiss = { homeViewModel.showWrongPackageDialog = null }
+            onDismiss = { homeViewModel.dismissWrongPackageDialog() }
         )
     }
 
-    // Split APK Warning Dialog - shown when user picks a split APK for an app that requires full APK
+    // Split APK Warning Dialog - shown when user picks a split APK for an app that prefers full APK
     if (homeViewModel.showSplitApkWarningDialog) {
         val appName = homeViewModel.pendingAppName ?: ""
         SplitApkWarningDialog(
             appName = appName,
+            onProceed = { homeViewModel.proceedWithSplitApk() },
             onPickAnother = {
-                homeViewModel.showSplitApkWarningDialog = false
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
+                homeViewModel.dismissSplitApkWarning()
                 storagePickerLauncher()
             },
-            onDismiss = {
-                homeViewModel.showSplitApkWarningDialog = false
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
-            }
+            onDismiss = { homeViewModel.dismissSplitApkWarning() }
         )
     }
 
@@ -280,29 +240,11 @@ fun HomeDialogs(
         InvalidSignatureDialog(
             appName = dialogState.appName,
             onPickAnother = {
-                homeViewModel.showInvalidSignatureDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
+                homeViewModel.dismissInvalidSignatureDialog()
                 storagePickerLauncher()
             },
-            onProceed = {
-                homeViewModel.showInvalidSignatureDialog = null
-                homeViewModel.pendingSelectedApp?.let { selectedApp ->
-                    CoroutineScope(Dispatchers.Main).launch {
-                        homeViewModel.processSelectedAppIgnoringSignature(selectedApp)
-                        homeViewModel.pendingSelectedApp = null
-                    }
-                }
-            },
-            onDismiss = {
-                homeViewModel.showInvalidSignatureDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
-            }
+            onProceed = { homeViewModel.proceedIgnoringSignature() },
+            onDismiss = { homeViewModel.dismissInvalidSignatureDialog() }
         )
     }
 
@@ -1000,12 +942,13 @@ fun InvalidSignatureDialog(
 }
 
 /**
- * Blocking dialog shown when the user selects a split APK archive (.apks / .apkm / .xapk)
+ * Warning dialog shown when the user selects a split APK archive (.apks / .apkm / .xapk)
  * for an app that requires a full APK.
  */
 @Composable
 fun SplitApkWarningDialog(
     appName: String,
+    onProceed: () -> Unit,
     onPickAnother: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -1014,12 +957,12 @@ fun SplitApkWarningDialog(
         title = stringResource(R.string.home_split_apk_warning_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.home_split_apk_warning_pick_another),
-                onPrimaryClick = onPickAnother,
-                primaryIcon = Icons.Outlined.FolderOpen,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss,
-                layout = DialogButtonLayout.Vertical,
+                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                onPrimaryClick = onProceed,
+                secondaryText = stringResource(R.string.home_split_apk_warning_pick_another),
+                onSecondaryClick = onPickAnother,
+                secondaryIcon = Icons.Outlined.FolderOpen,
+                layout = DialogButtonLayout.Vertical
             )
         }
     ) {
@@ -1042,12 +985,6 @@ fun SplitApkWarningDialog(
                 color = LocalDialogSecondaryTextColor.current,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
-            )
-            InfoBadge(
-                text = stringResource(R.string.home_split_apk_warning_badge),
-                style = InfoBadgeStyle.Error,
-                icon = Icons.Outlined.Error,
-                isExpanded = true
             )
         }
     }

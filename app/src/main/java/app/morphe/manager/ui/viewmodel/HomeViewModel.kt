@@ -326,6 +326,118 @@ class HomeViewModel(
         pendingPatchApp = null
     }
 
+    /**
+     * User chose to proceed with patching despite the split APK warning.
+     * Resumes [processSelectedApp] with the split check skipped.
+     */
+    fun proceedWithSplitApk() {
+        val app = pendingSelectedApp ?: return
+        showSplitApkWarningDialog = false
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            processSelectedApp(app, skipSplitCheck = true)
+        }
+    }
+
+    /**
+     * User dismissed the split APK warning without proceeding.
+     * Cleans up the temporary file if needed.
+     */
+    fun dismissSplitApkWarning() {
+        val app = pendingSelectedApp
+        showSplitApkWarningDialog = false
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User dismissed the unsupported version dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissUnsupportedVersionDialog() {
+        showUnsupportedVersionDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User chose to proceed patching with an unsupported app version.
+     * Starts patching with allowIncompatible=true so version-incompatible patches are included.
+     */
+    fun proceedWithUnsupportedVersion() {
+        showUnsupportedVersionDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            startPatchingWithApp(app, allowIncompatible = true)
+        }
+    }
+
+    /**
+     * User dismissed the experimental version warning dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissExperimentalVersionDialog() {
+        showExperimentalVersionDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User acknowledged the experimental version warning and chose to proceed.
+     * Starts patching with allowIncompatible=false — the version is supported,
+     * just flagged as experimental in the patch bundle.
+     */
+    fun proceedWithExperimentalVersion() {
+        showExperimentalVersionDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            startPatchingWithApp(app, allowIncompatible = false)
+        }
+    }
+
+    /**
+     * User dismissed the wrong package dialog.
+     */
+    fun dismissWrongPackageDialog() {
+        showWrongPackageDialog = null
+    }
+
+    /**
+     * User dismissed the invalid signature dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissInvalidSignatureDialog() {
+        showInvalidSignatureDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User chose to proceed patching despite the signature mismatch warning.
+     * Skips signature verification and resumes the patching flow.
+     */
+    fun proceedIgnoringSignature() {
+        showInvalidSignatureDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            processSelectedAppIgnoringSignature(app)
+        }
+    }
+
     // Callback for starting patch
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
@@ -1020,7 +1132,10 @@ class HomeViewModel(
      * This function only answers: "do any patches EXIST for this APK?"
      * The include/selection logic is handled in [startPatchingWithApp].
      */
-    private suspend fun processSelectedApp(selectedApp: SelectedApp) {
+    private suspend fun processSelectedApp(
+        selectedApp: SelectedApp,
+        skipSplitCheck: Boolean = false
+    ) {
         // Validate package name if expected (known-app flow sets pendingPackageName)
         if (pendingPackageName != null && selectedApp.packageName != pendingPackageName) {
             showWrongPackageDialog = WrongPackageDialogState(
@@ -1034,11 +1149,11 @@ class HomeViewModel(
             return
         }
 
-        // Check if the selected file is a split APK while the bundle requires a full APK.
+        // Warn when the selected file is a split APK while the bundle requires a full APK.
         // This must happen BEFORE signature verification — split archives (.apkm/.apks/.xapk)
         // are not valid APKs so PackageManager cannot read their signature, which would cause
         // a false "invalid signature" dialog instead of the correct "split APK" warning.
-        if (selectedApp is SelectedApp.Local) {
+        if (selectedApp is SelectedApp.Local && !skipSplitCheck) {
             val requiredApkFileType = bundleAppMetadataFlow.value[selectedApp.packageName]?.apkFileType
 
             val isSplitFile = SplitApkPreparer.isSplitArchive(selectedApp.file)
