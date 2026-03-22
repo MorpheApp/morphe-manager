@@ -1,8 +1,12 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
@@ -26,14 +30,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.appcompat.content.res.AppCompatResources
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -42,28 +43,28 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.bundles.APIPatchBundle
+import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
-import app.morphe.manager.domain.bundles.APIPatchBundle
-import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.ActionPillButton
 import app.morphe.manager.ui.screen.shared.InfoBadge
 import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
+import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
-import kotlinx.coroutines.Dispatchers
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
-import java.net.URL
 
 /**
- * Bottom sheet for managing patch bundles
+ * Bottom sheet for managing patch bundles.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,15 +78,26 @@ fun BundleManagementSheet(
     onRename: (PatchBundleSource) -> Unit
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
+    val prefs: PreferencesManager = koinInject()
     val scope = rememberCoroutineScope()
 
     val sources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val patchCounts by patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
+    val activeUpdateUids by patchBundleRepository.activeUpdateUidsFlow.collectAsStateWithLifecycle(emptySet())
+    val experimentalVersionsEnabled by prefs.bundleExperimentalVersionsEnabled.getAsState()
+    val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
-    var bundleToDelete by remember { mutableStateOf<PatchBundleSource?>(null) }
-    var bundleToShowPatches by remember { mutableStateOf<PatchBundleSource?>(null) }
-    var bundleToShowChangelog by remember { mutableStateOf<RemotePatchBundle?>(null) }
+    val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
+    val bundleToShowPatches = remember { mutableStateOf<PatchBundleSource?>(null) }
+    var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
+    val bundleToShowChangelog = bundleToShowChangelogUid
+        ?.let { uid -> sources.filterIsInstance<RemotePatchBundle>().find { it.uid == uid } }
+    val bundleToShowChangelogKey = bundleToShowChangelog?.let {
+        val usePrerelease = (it as? APIPatchBundle)?.usePrerelease == true
+                || (it as? JsonPatchBundle)?.usePrerelease == true
+        "${it.installedVersionSignature}|$usePrerelease"
+    }
 
     // Check if only default bundle exists
     val isSingleDefaultBundle = sources.size == 1
@@ -174,25 +186,48 @@ fun BundleManagementSheet(
                     )
                 ) {
                     items(sources, key = { bundle -> bundle.uid }) { bundle ->
+                        val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
+                            bundleInfo[bundle.uid]?.patches?.any { patch ->
+                                patch.compatiblePackages?.any { pkg ->
+                                    pkg.experimentalVersions?.isNotEmpty() == true
+                                } == true
+                            } == true
+                        }
+                        val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
+
                         BundleManagementCard(
                             bundle = bundle,
                             patchCount = patchCounts[bundle.uid] ?: 0,
                             updateInfo = manualUpdateInfo[bundle.uid],
-                            onDelete = { bundleToDelete = bundle },
+                            isUpdating = bundle.uid in activeUpdateUids,
+                            onDelete = { bundleToDelete.value = bundle },
                             onDisable = { onDisable(bundle) },
                             onUpdate = { onUpdate(bundle) },
                             onRename = { onRename(bundle) },
                             onPrereleasesToggle = when {
                                 bundle is JsonPatchBundle && bundle.supportsPrerelease ||
                                         bundle is APIPatchBundle -> { usePrerelease ->
+                                    if (bundle.uid == bundleToShowChangelogUid) {
+                                        bundleToShowChangelogUid = null
+                                    }
+                                    bundle.clearChangelogCache()
                                     scope.launch { patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease) }
                                 }
                                 else -> null
                             },
-                            onPatchesClick = { bundleToShowPatches = bundle },
+                            onExperimentalVersionsToggle = if (hasExperimentalVersions) {
+                                { useExperimental ->
+                                    scope.launch {
+                                        patchBundleRepository.setUseExperimentalVersions(bundle.uid, useExperimental)
+                                    }
+                                }
+                            } else null,
+                            hasExperimentalVersions = hasExperimentalVersions,
+                            useExperimentalVersions = useExperimentalVersions,
+                            onPatchesClick = { bundleToShowPatches.value = bundle },
                             onVersionClick = {
                                 if (bundle is RemotePatchBundle) {
-                                    bundleToShowChangelog = bundle
+                                    bundleToShowChangelogUid = bundle.uid
                                 }
                             },
                             onOpenInBrowser = {
@@ -216,47 +251,53 @@ fun BundleManagementSheet(
     }
 
     // Delete confirmation dialog
-    if (bundleToDelete != null) {
+    if (bundleToDelete.value != null) {
         BundleDeleteConfirmDialog(
-            bundle = bundleToDelete!!,
-            onDismiss = { bundleToDelete = null },
+            bundle = bundleToDelete.value!!,
+            onDismiss = { bundleToDelete.value = null },
             onConfirm = {
-                onDelete(bundleToDelete!!)
-                bundleToDelete = null
+                onDelete(bundleToDelete.value!!)
+                bundleToDelete.value = null
             }
         )
     }
 
     // Patches dialog
-    if (bundleToShowPatches != null) {
+    if (bundleToShowPatches.value != null) {
         BundlePatchesDialog(
-            onDismissRequest = { bundleToShowPatches = null },
-            src = bundleToShowPatches!!
+            onDismissRequest = { bundleToShowPatches.value = null },
+            src = bundleToShowPatches.value!!
         )
     }
 
     // Changelog dialog
     if (bundleToShowChangelog != null) {
-        BundleChangelogDialog(
-            src = bundleToShowChangelog!!,
-            onDismissRequest = { bundleToShowChangelog = null }
-        )
+        key(bundleToShowChangelogKey) {
+            BundleChangelogDialog(
+                src = bundleToShowChangelog,
+                onDismissRequest = { bundleToShowChangelogUid = null }
+            )
+        }
     }
 }
 
 /**
- * Card for individual bundle management
+ * Card for individual bundle management.
  */
 @Composable
 private fun BundleManagementCard(
     bundle: PatchBundleSource,
     patchCount: Int,
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
+    isUpdating: Boolean = false,
     onDelete: () -> Unit,
     onDisable: () -> Unit,
     onUpdate: () -> Unit,
     onRename: () -> Unit,
     onPrereleasesToggle: ((Boolean) -> Unit)?,
+    onExperimentalVersionsToggle: ((Boolean) -> Unit)?,
+    hasExperimentalVersions: Boolean,
+    useExperimentalVersions: Boolean,
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
@@ -368,7 +409,7 @@ private fun BundleManagementCard(
                         title = stringResource(R.string.patches),
                         value = patchCount.toString(),
                         onClick = onPatchesClick,
-                        enabled = isEnabled
+                        enabled = isEnabled && !isUpdating
                     )
 
                     // Version
@@ -377,7 +418,8 @@ private fun BundleManagementCard(
                         icon = Icons.Outlined.Update,
                         title = stringResource(R.string.version),
                         value = bundle.version?.removePrefix("v") ?: "N/A",
-                        onClick = onVersionClick
+                        onClick = onVersionClick,
+                        enabled = !isUpdating
                     )
 
                     // Open in browser button
@@ -403,14 +445,15 @@ private fun BundleManagementCard(
 
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
+                    // Resolve prerelease state once
+                    val currentUsePrerelease = when (bundle) {
+                        is JsonPatchBundle -> bundle.usePrerelease
+                        is APIPatchBundle -> bundle.usePrerelease
+                        else -> false
+                    }
+
                     // Prerelease toggle (for JsonPatchBundle with GitHub endpoint or APIPatchBundle)
                     if (onPrereleasesToggle != null) {
-                        val currentUsePrerelease = when (bundle) {
-                            is JsonPatchBundle -> bundle.usePrerelease
-                            is APIPatchBundle -> bundle.usePrerelease
-                            else -> false
-                        }
-
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -439,7 +482,49 @@ private fun BundleManagementCard(
                                 onCheckedChange = onPrereleasesToggle
                             )
                         }
+                    }
 
+                    // Experimental versions toggle - shown for any bundle type that has experimental app version targets.
+                    // For remote bundles (prerelease supported) it additionally requires prereleases to be ON.
+                    AnimatedVisibility(
+                        visible = hasExperimentalVersions && onExperimentalVersionsToggle != null &&
+                                (onPrereleasesToggle == null || currentUsePrerelease),
+                        enter = expandVertically() + fadeIn(),
+                        exit = shrinkVertically() + fadeOut()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    onExperimentalVersionsToggle?.invoke(!useExperimentalVersions)
+                                }
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.sources_management_experimental_versions_toggle),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.sources_management_experimental_versions_toggle_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+
+                            Spacer(Modifier.width(8.dp))
+
+                            Switch(
+                                checked = useExperimentalVersions,
+                                onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) }
+                            )
+                        }
+                    }
+
+                    if (onPrereleasesToggle != null || (hasExperimentalVersions && onExperimentalVersionsToggle != null)) {
                         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                     }
 
@@ -790,46 +875,5 @@ fun BundleIcon(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun RemoteAvatar(
-    url: String,
-    fallbackUrl: String? = null,
-    modifier: Modifier = Modifier
-) {
-    var bitmap by remember(url) { mutableStateOf<Bitmap?>(null) }
-
-    LaunchedEffect(url, fallbackUrl) {
-        bitmap = loadGitHubAvatar(url)
-            ?: fallbackUrl?.let { loadGitHubAvatar(it) }
-    }
-
-    if (bitmap != null) {
-        Image(
-            bitmap = bitmap!!.asImageBitmap(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = modifier
-        )
-    }
-}
-
-/**
- * Load GitHub avatar image from URL
- */
-private suspend fun loadGitHubAvatar(url: String): Bitmap? = withContext(Dispatchers.IO) {
-    try {
-        val connection = URL(url).openConnection()
-        connection.connectTimeout = 5000
-        connection.readTimeout = 5000
-        connection.connect()
-
-        connection.getInputStream().use { input ->
-            BitmapFactory.decodeStream(input)
-        }
-    } catch (_: Exception) {
-        null
     }
 }

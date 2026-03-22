@@ -4,7 +4,6 @@
     <string name="home_other_apps">Другие приложения</string>
     <string name="home_not_patched_yet">Еще не пропатчено</string>
     <string name="home_no_patches_available">Нет доступных патчей</string>
-    <string name="home_default_source_disabled">Источник патчей Morphe отключен. Включите его в списке источников патчей или воспользуйтесь режимом эксперта</string>
     <string name="home_app_hide_title">Скрыть это приложение?</string>
     <string name="home_app_hide_message">Это приложение будет скрыто с главного экрана. Вы можете восстановить его позже, нажав кнопку \'%1$s\' внизу списка.</string>
     <string name="home_app_will_be_hidden">Это приложение будет скрыто</string>
@@ -41,7 +40,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Хотите смотреть рекламу? Я тоже нет</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Сделаем так, чтобы ваши приложения работали должным образом</string>
+    <string name="home_greeting_6">Давайте сделаем ваши приложения послушными</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Прогноз на сегодня: 100% шансов на патчинг</string>
     <!-- From mediocrity to amazing -->
@@ -56,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
     <string name="sources_management_prerelease_toggle">Использовать пред релиз патчи</string>
     <string name="sources_management_prerelease_toggle_description">Получать ранний доступ к новым экспериментальным версиям патчей</string>
+    <string name="sources_management_experimental_versions_toggle">Использовать экспериментальные версии приложения</string>
+    <string name="sources_management_experimental_versions_toggle_description">При необходимости, исправить экспериментальные цели приложения</string>
+    <string name="sources_management_already_exists">Этот источник уже добавлен</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
     <string name="sources_dialog_rename">Переименовать источник патча</string>
@@ -85,7 +87,7 @@
     <string name="home_apk_availability_unpatched_label">Непатченый</string>
     <string name="home_apk_availability_yes">Да, помогите мне найти APK</string>
     <string name="home_apk_availability_no">Нет, у меня уже есть APK</string>
-    <string name="home_apk_use_saved_with_version">Использовать сохраненный APK (v%s)</string>
+    <string name="home_apk_use_saved_with_version">Сохраненный APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Нет сохраненного APK. Для патча нужно будет снова выбрать APK файл</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Загрузить оригинальный APK</string>
@@ -107,7 +109,6 @@
     <string name="home_select_apk_title">Выбрать APK</string>
     <string name="home_select_any_apk_description">Нажмите кнопку ниже, чтобы выбрать APK файл любого приложения для патчинга</string>
     <string name="home_invalid_apk">Недопустимый файл APK</string>
-    <string name="home_no_patches_for_app">Нет доступных патчей для этого приложения</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим эксперта</string>
     <string name="expert_mode_search">Поиск патчей</string>
@@ -115,12 +116,23 @@
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
-    <string name="expert_mode_no_patches">Нет доступных патчей</string>
+    <string name="expert_mode_universal_patches">Универсальные патчи</string>
     <string name="expert_mode_multiple_sources_warning_title">Выбрано несколько источников патчей</string>
     <string name="expert_mode_multiple_sources_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
 
 Вы действительно хотите продолжить?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Неподтвержденный APK</string>
+    <string name="home_invalid_signature_message">APK, выбранный для &lt;b&gt;%s&lt;/b&gt;, не соответствует ожидаемому сертификату подписи. Он мог быть изменен или получен из ненадежного источника</string>
+    <string name="home_invalid_signature_badge">Этот APK может быть не оригинальным</string>
+    <string name="home_split_apk_warning_title">Поддержка разделенных APK не поддерживается</string>
+    <string name="home_split_apk_warning_message">Вы выбрали пакет разделенного APK (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; требует &lt;b&gt;полный APK&lt;/b&gt; - разделенные пакеты не могут быть исправлены для этого приложения</string>
+    <string name="home_split_apk_warning_badge">Для продолжения требуется полный APK</string>
+    <string name="home_split_apk_warning_pick_another">Выберите другой APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Экспериментальный</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Эта версия имеет экспериментальную поддержку и может быть нестабильной или неполной</string>
+    <string name="morphe_experimental_app_version_dialog_title">Хотите поэкспериментировать? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Эта версия &lt;b&gt;%s&lt;/b&gt; имеет раннюю экспериментальную поддержку&lt;br/&gt;&lt;br/&gt;🔧 Ожидайте странного поведения приложения или необъяснимых ошибок, поскольку исправления уточняются для этой версии приложения</string>
     <string name="home_dialog_unsupported_version_dialog_title">Неподдерживаемая версия</string>
     <string name="home_dialog_unsupported_version_dialog_description">Этот APK не является рекомендуемой версией приложения. Продолжение может привести к некорректной работе приложения</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Продолжить по-любому</string>
@@ -134,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">Мобильные данные активны, а обновление патчей отключено</string>
     <string name="home_outdated_patches_dialog_warning">Патчинг устаревшими патчами может привести к неисправности программы</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Обновить и патчить</string>
+    <string name="home_low_disk_space_dialog_title">Недостаточно места на диске</string>
+    <string name="home_low_disk_space_dialog_message">Доступно всего %1$.2f ГБ свободного места. Для правильной работы исправлений требуется не менее 1 ГБ свободного места</string>
+    <string name="home_low_disk_space_dialog_warning">Продолжение может привести к ошибке \"файл не найден\" или поврежденному выходному APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Свой цвет</string>
     <string name="hex_color">Hex цвет</string>
@@ -142,6 +157,9 @@
     <string name="patch_option_enter_number">Введите число</string>
     <string name="patch_option_enter_decimal">Введите десятичную дробь</string>
     <string name="patch_option_pick_folder">Выбрать папку</string>
+    <string name="patch_option_list_duplicate">Это значение уже существует</string>
+    <string name="patch_option_list_empty">Значение не может быть пустым</string>
+    <string name="patch_option_list_empty_state">Значения еще не добавлены</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Создать адаптивную иконку</string>
     <string name="adaptive_icon_instructions">Выберите изображение переднего плана, выберите цвет фона и отрегулируйте предварительный просмотр жестами \"приблизить для увеличения\"</string>
@@ -298,6 +316,8 @@
     <string name="settings_appearance_background_space">Пространство</string>
     <string name="settings_appearance_background_shapes">Формы</string>
     <string name="settings_appearance_background_snow">Снег</string>
+    <string name="settings_appearance_background_grid">Сетка</string>
+    <string name="settings_appearance_background_particles">Частицы</string>
     <string name="settings_appearance_background_none">Нет</string>
     <string name="settings_appearance_parallax_effect">Эффект параллакса</string>
     <string name="settings_appearance_parallax_effect_description">Плавное смещение фона при наклоне устройства</string>
@@ -330,17 +350,11 @@
     <string name="settings_advanced_updates">Обновления</string>
     <string name="settings_advanced_updates_use_prereleases">Использовать предварительную версию Morphe</string>
     <string name="settings_advanced_updates_use_prereleases_description">Получите ранний доступ к новым функциям Morphe. Чтобы получить пред релиз патчи, включите переключатель пред релиз в каждом источнике патчей отдельно</string>
-    <string name="settings_advanced_updates_allow_metered">Обновление от мобильного трафика</string>
+    <string name="settings_advanced_updates_allow_metered">Обновление от мобильных данных</string>
     <string name="settings_advanced_updates_allow_metered_description">Разрешить загрузку обновлений Morphe и патчей через мобильные данные</string>
     <string name="settings_advanced_updates_background_notifications">Уведомления о фоновых обновлениях</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодически проверять наличие обновлений в фоновом режиме и сообщать об их доступности</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Получайте мгновенные push-уведомления о новых релизах, даже когда приложение закрыто</string>
-    <string name="notification_channel_manager_updates">Morphe обновления</string>
-    <string name="notification_channel_manager_updates_description">Уведомления о новых версиях Morphe</string>
-    <string name="notification_channel_bundle_updates">Обновления источников патчей</string>
-    <string name="notification_channel_bundle_updates_description">Уведомления о новых версиях исходного кода патчей</string>
-    <string name="notification_channel_fcm_updates">Обновление уведомлений</string>
-    <string name="notification_channel_fcm_updates_description">Мгновенные push-уведомления о новых релизах Morphe и патчей. Доставляются даже тогда, когда приложение работает в фоновом режиме</string>
     <string name="settings_advanced_update_interval">Частота проверки</string>
     <string name="settings_advanced_update_interval_dialog_title">Проверить наличие обновлений</string>
     <string name="settings_advanced_update_interval_hourly">Раз в час</string>
@@ -357,6 +371,10 @@
     <string name="notification_permission_dialog_title">Разрешить уведомления</string>
     <string name="notification_permission_dialog_description">Morphe требует разрешения на уведомление, чтобы сообщать вам о доступных обновлениях в фоновом режиме</string>
     <string name="notification_post_patch_dialog_title">Хотите ли вы получать уведомления, когда будут доступны обновления?</string>
+    <string name="notification_channel_fcm_updates">Обновления уведомлений</string>
+    <string name="notification_channel_fcm_updates_description">Уведомления о новых версиях Morphe и патчах</string>
+    <string name="notification_channel_patcher">Патчинг</string>
+    <string name="notification_channel_patcher_description">Отображается во время установки Morphe патча для приложения в фоновом режиме</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки эксперта</string>
     <string name="settings_advanced_expert_mode">Режим эксперта</string>
@@ -377,7 +395,7 @@
     <string name="settings_advanced_github_pat_export_warning">Не распространяйте свой Токен. Если вы включаете его в экспорт настроек, сохраните этот файл приватным, поскольку он содержит токен</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Параметры патчей</string>
-    <string name="settings_advanced_patch_options_youtube_description">Тема оформления, брендинг и параметры заголовка</string>
+    <string name="settings_advanced_patch_options_youtube_description">Тема, брендинг, и параметры заголовка</string>
     <string name="settings_advanced_patch_options_restart_message">Чтобы изменения параметров патчей вступили в силу, нужно повторно патчить приложение</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">В режиме эксперта параметры патчей будут доступны во время процесса патчинга</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -573,6 +591,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"Morphe это экспериментальный проект с открытым кодом, ориентированный на современный и оптимизированный патчинг популярных Android приложений
 
 С открытым кодом в своей основе, Morphe процветает благодаря отзывам и вкладам сообщества, стимулирующим будущие инновации"</string>
+    <string name="credits">Благодарности</string>
+    <string name="credits_current_development">Текущая разработка</string>
+    <string name="credits_prior_development">Предыдущая разработка</string>
     <!-- Shared strings -->
     <string name="patches">Патчи</string>
     <string name="home">Домашняя страница</string>
@@ -589,6 +610,7 @@ morphe_header_custom_dark.png
     <string name="close">Закрыть</string>
     <string name="clear">Очистить</string>
     <string name="delete">Удалить</string>
+    <string name="remove">Удалить</string>
     <string name="disable">Отключить</string>
     <string name="enable">Включить</string>
     <string name="loading">Загрузка…</string>

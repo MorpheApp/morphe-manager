@@ -4,7 +4,6 @@
     <string name="home_other_apps">برنامه دیگر</string>
     <string name="home_not_patched_yet">هنوز پچ نشده </string>
     <string name="home_no_patches_available">هیچ پچ ای موجود نیست </string>
-    <string name="home_default_source_disabled">منبع پچ مورف غیرفعال است. لطفا آن را در برگه منابع پچ فعال کنید یا از حالت خبره استفاده کنید</string>
     <string name="home_app_hide_title">برنامه پنهان شود؟ </string>
     <string name="home_app_hide_message">این برنامه از صفحه اصلی مخفی خواهد بود. بعدا می توانید آن را با استفاده از دکمه %1$s در انتهای لیست بازیابی کنید</string>
     <string name="home_app_will_be_hidden">این برنامه پنهان میشود</string>
@@ -103,11 +102,9 @@
     <string name="home_select_apk_title">انتخاب APK</string>
     <string name="home_select_any_apk_description">دکمه زیر را لمس کنید تا فایل APK هر برنامه ای را برای وصله انتخاب کنید</string>
     <string name="home_invalid_apk">فایل APK نامعتبر</string>
-    <string name="home_no_patches_for_app">هیچ پچ برای این اپ موجود نیست</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">حالت متخصص</string>
     <string name="expert_mode_search">جستجوی پچ ها</string>
-    <string name="expert_mode_no_patches">هیچ پچ ای موجود نیست </string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_wrong_package_description">APK انتخاب شده برای برنامه ای که قصد وصله آن را داشتید نیست </string>
     <string name="home_dialog_selected_package">بسته منتخب: </string>

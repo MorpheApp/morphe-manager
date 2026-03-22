@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import android.annotation.SuppressLint
@@ -15,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 /**
- * Badge style variants
+ * Badge style variants.
  */
 enum class InfoBadgeStyle {
     Default,
@@ -25,7 +30,7 @@ enum class InfoBadgeStyle {
     Error;
 
     /**
-     * Get container and content colors for this badge style
+     * Get container and content colors for this badge style.
      */
     @Composable
     fun colors(): Pair<Color, Color> = when (this) {
@@ -38,7 +43,7 @@ enum class InfoBadgeStyle {
 }
 
 /**
- * Info badge with optional icon
+ * Info badge with optional icon.
  *
  * @param text Badge text content
  * @param style Visual style of the badge

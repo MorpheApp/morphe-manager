@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="zero">%s تعديل</item>
+        <item quantity="zero">%s patches</item>
         <item quantity="one">%s تعديل</item>
         <item quantity="two">%s تعديلان</item>
         <item quantity="few">%s تعديلات</item>

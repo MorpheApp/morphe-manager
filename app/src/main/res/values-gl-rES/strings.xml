@@ -1,33 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">Outras aplicacións</string>
+    <string name="home_not_patched_yet">Aínda non parcheado</string>
+    <string name="home_no_patches_available">Non hai parches dispoñibles</string>
+    <string name="home_app_hide_title">Ocultar esta aplicación?</string>
+    <string name="home_app_hide_message">Esta aplicación ocultarase da pantalla de inicio. Pode restaurala máis tarde empregando o botón %1$s na parte inferior da lista</string>
+    <string name="home_app_will_be_hidden">Ocultarase esta aplicación</string>
+    <string name="home_app_show_hidden">Mostrar aplicacións ocultas</string>
+    <string name="home_app_no_hidden">Non hai aplicacións ocultas</string>
+    <string name="home_app_hidden_apps_title">Aplicacións ocultas</string>
+    <string name="home_app_hidden_apps_hint">Toque nunha aplicación para mostrala de novo na listaxe</string>
+    <string name="android_11_bug_dialog_title">Erro de Android 11</string>
+    <string name="android_11_bug_dialog_description">O permiso de instalación da aplicación debe concederse con antelación para evitar un erro no sistema Android 11 que afectará negativamente á experiencia do usuario</string>
+    <string name="deep_link_add_source_title">Engadir fonte</string>
+    <string name="deep_link_add_source_message">Desexa engadir esta fonte de parches a Morphe?</string>
+    <string name="deep_link_add_source_warning">Únicamente engada fontes de orixe fiable</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Actualización de Morphe dispoñible</string>
+    <string name="home_update_available_subtitle">Nova versión lista para instalar</string>
+    <string name="home_update_error">Erro ao actualizar</string>
+    <string name="home_update_error_subtitle">Comprobe a súa conexión a Internet e ténteo de novo</string>
+    <string name="home_update_skipped_metered">Actualizacións omitidas</string>
+    <string name="home_update_skipped_metered_subtitle">Os datos móbiles están activados</string>
+    <string name="home_updating_sources">Actualizando fontes…</string>
+    <string name="home_update_progress_format">%1$s procesado</string>
+    <string name="home_update_success">Actualización de fontes completa</string>
+    <string name="home_update_success_subtitle">As súas fontes están ao día</string>
+    <string name="home_sources_are_loading">As fontes están a cargar, por favor agarde...</string>
+    <string name="home_please_wait">Por favor agarde...</string>
     <!-- Home Screen - Home Greetings -->
+    <string name="home_greeting_1">Qué aplicación desexa parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="home_greeting_2">Listo para facer as aplicacións lexendarias de novo?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <string name="home_greeting_3">Abroche o cinto, é a hora dos parches</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="home_greeting_4">Outro día máis, outra obra mestra con bloqueo de anuncios</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="home_greeting_5">Quere ver anuncios? Eu tampouco</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="home_greeting_6">Faga que as súas aplicacións se comporten</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="home_greeting_7">Previsión do día: 100% de probabilidade de parcheo</string>
     <!-- From mediocrity to amazing -->
+    <string name="home_greeting_8">Listo para transformar o mediocre en algo incrible?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="home_greeting_9">Salvando as aplicacións de si mesmas dende hoxe</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="home_greeting_10">Propulsado por cafeína e bos parches</string>
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">Fonte de parches</string>
+    <string name="sources_management_open_in_browser">Abrir no navegador</string>
+    <string name="sources_management_failed_to_open_url">Erro ao abrir o URL</string>
+    <string name="sources_management_prerelease_toggle">Empregar versións preliminares dos parches</string>
+    <string name="sources_management_prerelease_toggle_description">Recibir acceso anticipado a novas versións experimentales dos parches</string>
+    <string name="sources_management_already_exists">Esta fonte xa foi engadida</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">Nome a amosar</string>
+    <string name="sources_dialog_rename">Renomear fonte do parche</string>
+    <string name="sources_dialog_duplicate_name_error">Unha fonte de parches con este nome xa existe</string>
+    <string name="sources_dialog_missing_error">Non se puido actualizar esta fonte de parches</string>
+    <string name="sources_dialog_view_any_version">Calquera versión</string>
+    <string name="sources_dialog_view_any_package">Calquera paquete</string>
+    <string name="sources_dialog_add_source">Engadir fonte de parche</string>
+    <string name="sources_dialog_delete_confirm_message">Eliminar fonte \"%s\"? Esta acción non se pode desfacer</string>
+    <string name="sources_dialog_remote">Remoto</string>
+    <string name="sources_dialog_remote_url">URL da fonte</string>
+    <string name="sources_dialog_remote_url_formats_title">Exemplos:</string>
+    <string name="sources_dialog_local">Local</string>
+    <string name="sources_dialog_local_file">Seleccionar o arquivo fonte do parche</string>
+    <string name="sources_dialog_local_file_description">Seleccione un arquivo de parche .mpp dende o almacenamento</string>
+    <string name="sources_dialog_local_change_file">Cambiar arquivo</string>
+    <string name="sources_dialog_preinstalled">Preinstalado</string>
+    <string name="sources_update_success">Actualización correcta</string>
+    <string name="sources_update_unavailable">Non hai actualizacións dispoñíbles</string>
+    <string name="sources_download_fail">Non se puido descargar as fontes: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_dialog_title">Precisa axuda para atopar un APK orixinal sen parchear?</string>
+    <string name="home_apk_availability_recommended_label">Recomendado</string>
+    <string name="home_apk_availability_unpatched_label">Sen parchear</string>
+    <string name="home_apk_availability_yes">Sí, axúdame a encontrar un APK</string>
+    <string name="home_apk_availability_no">Non, xa teño un APK</string>
+    <string name="home_apk_use_saved_with_version">Empregar APK gardado (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Sen APK gardado. O parche precisa seleccionar o arquivo APK de novo</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
+    <string name="home_download_instructions_title">Descargar o APK orixinal</string>
+    <string name="home_download_instructions_steps_title">Instrucións:</string>
+    <string name="home_download_instructions_step1">Prema o botón \'%1$s\' de abaixo</string>
+    <string name="home_download_instructions_step2_part1">Desprácese cara abaixo no sitio web e pulse</string>
+    <string name="home_download_instructions_download_button_toast">Prema ao botón de descarga no sitio web, e non aquí 😊</string>
+    <string name="home_download_instructions_step4">Cando remate a descarga, regrese a Morphe</string>
+    <string name="home_download_instructions_step4_mount">Tras instalar o APK orixinal, regrese a Morphe</string>
+    <string name="home_download_instructions_continue">Continuar a APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_file_picker_prompt_title">Seleccionar o APK descargado</string>
+    <string name="home_file_picker_prompt_open_apk">Abrir arquivo APK</string>
+    <string name="home_recommended_version">Versión recomendada</string>
+    <string name="home_selected_version">Versión seleccionada</string>
+    <string name="home_select_apk_title">Seleccionar APK</string>
+    <string name="home_invalid_apk">Arquivo APK non válido</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_title">Modo Experto</string>
+    <string name="expert_mode_search">Buscar parches</string>
+    <string name="expert_mode_proceed">Proceder co parcheado</string>
+    <string name="expert_mode_disable_all">Desactivar todo</string>
+    <string name="expert_mode_enable_all">Activar todo</string>
+    <string name="expert_mode_no_results">Non se atoparon parches</string>
+    <string name="expert_mode_universal_patches">Parches universais</string>
+    <string name="expert_mode_multiple_sources_warning_title">Múltiples fontes de parche seleccionadas</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_dialog_unsupported_version_dialog_title">Versión non compatible</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">Proceder de todas maneiras</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Versións compatibles:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Non compatible</string>
+    <string name="home_dialog_wrong_package_title">Paquete incorrecto seleccionado</string>
+    <string name="home_dialog_wrong_package_description">O arquivo APK seleccionado non é para a aplicación que pretende parchear</string>
+    <string name="home_dialog_expected_package">Paquete esperado:</string>
+    <string name="home_dialog_selected_package">Paquete seleccionado:</string>
+    <string name="home_outdated_patches_dialog_title">Os parches poderían estar desactualizados</string>
+    <string name="home_outdated_patches_dialog_message">Os datos móbiles están activos e as actualizacións de parche desactivadas</string>
+    <string name="home_outdated_patches_dialog_warning">Parchear con parches desactualizados pode provocar que a aplicación deixe de funcionar correctamente</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Actualizar e parchear</string>
     <!-- Patch Options -->
+    <string name="custom_color">Cor personalizada</string>
+    <string name="hex_color">Cor Hexadecimal</string>
+    <string name="patch_option_instructions">Instrucións</string>
+    <string name="patch_option_enter_value">Inserir valor</string>
+    <string name="patch_option_enter_number">Inserir número</string>
+    <string name="patch_option_enter_decimal">Inserir decimal</string>
+    <string name="patch_option_pick_folder">Escoller cartafol</string>
+    <string name="patch_option_list_duplicate">Este valor xa existe</string>
+    <string name="patch_option_list_empty">O valor non pode estar baleiro</string>
+    <string name="patch_option_list_empty_state">Non hai valores engadidos aínda</string>
     <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_create">Crear icona adaptable</string>
+    <string name="adaptive_icon_preview">Vista previa</string>
+    <string name="adaptive_icon_select_image">Seleccionar imaxe</string>
+    <string name="adaptive_icon_change_image">Cambiar imaxe</string>
+    <string name="adaptive_icon_background_color">Cor do fondo</string>
+    <string name="adaptive_icon_reset_transform">Restablecer posición e escala</string>
+    <string name="adaptive_icon_safe_zone_inner">Zona segura (sempre visible)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zona de máscara (pode ser recortada)</string>
+    <string name="adaptive_icon_created_success">Icona adaptable creada con éxito</string>
+    <string name="adaptive_icon_creation_failed">Non se puido crear a icona adaptable</string>
     <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
+    <string name="home_app_info_delete_preservation_note">A súa selección de parches e opcións conservaránse para futuros parcheos</string>
+    <string name="home_app_info_patches_name_default">Parches</string>
+    <string name="home_app_info_patches_name_fallback">Sen nome</string>
+    <string name="home_app_info_patches_replace_fail">Non se puido importar os parches: %s</string>
+    <string name="home_app_info_original_package_name">Nome orixinal do paquete</string>
+    <string name="home_app_info_applied_patches">Parches aplicados</string>
+    <string name="home_app_info_patch_source_used">Fonte de parche empregada</string>
+    <string name="home_app_info_install_type">Tipo de instalación</string>
+    <string name="home_app_info_install_type_custom_installer">Instalador personalizado</string>
+    <string name="home_app_info_install_type_system_installer">Instalador do sistema</string>
+    <string name="home_app_info_patched_at">Parcheado</string>
+    <string name="home_app_info_patch_update_available">Actualización de parche dispoñible</string>
+    <string name="home_app_info_app_deleted_description">Esta aplicación foi desinstalada fóra de Morphe. Volva a parchear para restaurar a súa funcionalidade</string>
     <!-- Home Screen - Root Mode -->
+    <string name="root_gmscore_excluded">O parche de soporte para GmsCore está excluído no modo root</string>
+    <string name="root_pre_patch_installer_title">Escolla método de instalación</string>
+    <string name="root_pre_patch_installer_description">O seu dispositivo ten acceso root. Escolla como quere instalar a aplicación parcheada</string>
+    <string name="root_pre_patch_installer_mount_title">Montaxe root</string>
+    <string name="root_pre_patch_installer_mount_description">Montar APK parcheada sobre a app orixinal. Non se precisa Gms Core</string>
+    <string name="root_pre_patch_installer_standard_title">Instalación Estándar</string>
+    <string name="root_pre_patch_installer_standard_description">Instalar coma aplicación separada con soporte para GmsCore. Escolla instalador (instalador del sistema, Shizuku, etc.) tras parchear</string>
     <!-- Patcher Screen -->
+    <string name="patcher_error_copied">Error copiado ao portapapeis</string>
+    <string name="patcher_error_log">Rexistro de erros</string>
+    <string name="patcher_error_technical">Detalles técnicos</string>
+    <string name="patcher_long_step_warning">Este paso poderá tardar un tempo. Por favor, agarde…</string>
+    <string name="patcher_installing_subtitle">Case listo para arrasar! 🎸</string>
+    <string name="patcher_success_title">Todo listo! 🎉</string>
+    <string name="patcher_success_subtitle">A súa aplicación foi parcheada e instalada!</string>
+    <string name="patcher_complete_title">Parcheado completado! ✨</string>
     <!-- Patcher Screen - Patcher Steps -->
+    <string name="patcher_step_group_preparing">Preparando</string>
+    <string name="patcher_step_load_patches">Cargando parches</string>
+    <string name="patcher_step_group_patching">Parcheando</string>
+    <string name="patcher_step_group_saving">Gardando</string>
     <!-- Patcher Screen - Patcher Worker -->
+    <string name="patcher_notification_title">Parcheado en progreso...</string>
+    <string name="patcher_notification_text">Toque para volver ao parcheador</string>
+    <string name="patcher_stop_confirm_title">Deter parcheador</string>
     <!-- Patcher Screen - Patcher Messages -->
+    <string name="patcher_message_1">Transformando a túa aplicación en algo incrible... 🏆</string>
+    <string name="patcher_message_2">Ensinando trucos novos a aplicacións vellas… 🎩</string>
+    <string name="patcher_message_3">Dando uns axustes dixitais á súa aplicación… 🔧</string>
+    <string name="patcher_message_4">Preparando maxia dixital… ☕</string>
+    <string name="patcher_message_5">Pausa para o café recomendada… ☕</string>
+    <string name="patcher_message_6">Mira fóra, vai bo tempo... 🌤️</string>
+    <string name="patcher_message_7">Axustando uns e ceros... 🤖</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <!-- "bytecode" can be translated from "the app code" -->
     <!-- Space flight communications callout. -->
@@ -60,7 +225,11 @@
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
+    <string name="credits">Créditos</string>
+    <string name="credits_current_development">Desenvolvemento actual</string>
+    <string name="credits_prior_development">Desenvolvemento previo</string>
     <!-- Shared strings -->
+    <string name="remove">Eliminar</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
 </resources>

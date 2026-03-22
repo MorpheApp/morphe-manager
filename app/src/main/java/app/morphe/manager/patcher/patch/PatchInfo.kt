@@ -2,7 +2,7 @@ package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
 import app.morphe.patcher.patch.Patch
-import app.morphe.patcher.patch.resourcePatch
+import app.morphe.patcher.patch.ApkFileType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableList
@@ -18,25 +18,49 @@ data class PatchInfo(
     val options: ImmutableList<Option<*>>?
 ) {
     constructor(patch: Patch<*>) : this(
-        patch.name.orEmpty(),
-        patch.description,
-        patch.use,
-        patch.compatiblePackages?.map { (pkgName, versions) ->
-            CompatiblePackage(
-                pkgName,
-                versions?.toImmutableSet()
-            )
-        }?.toImmutableList(),
-        patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList()
+        name = patch.name.orEmpty(),
+        description = patch.description,
+        include = patch.use,
+        compatiblePackages = patch.compatibility
+            ?.map { compatibility ->
+                CompatiblePackage(
+                    packageName = compatibility.packageName, // null = universal patch
+                    displayName = compatibility.name,
+                    versions = compatibility.targets
+                        .mapNotNull { it.version }
+                        .toImmutableSet()
+                        .takeIf { it.isNotEmpty() },
+                    appIconColor = compatibility.appIconColor,
+                    apkFileType = compatibility.apkFileType,
+                    experimentalVersions = compatibility.targets
+                        .filter { it.isExperimental }
+                        .mapNotNull { it.version }
+                        .toImmutableSet()
+                        .takeIf { it.isNotEmpty() },
+                    signatures = compatibility.signatures?.toImmutableSet()
+                )
+            }
+            ?.toImmutableList()
+        // Fallback to legacy API if new compatibility is not available
+            ?: patch.compatiblePackages?.map { (pkgName, versions) ->
+                CompatiblePackage(
+                    packageName = pkgName,
+                    versions = versions?.toImmutableSet()
+                )
+            }?.toImmutableList(),
+        options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList()
     )
 
     fun compatibleWith(packageName: String) =
-        compatiblePackages?.any { it.packageName == packageName } != false
+        compatiblePackages == null ||
+                compatiblePackages.any { it.packageName == null || it.packageName == packageName }
 
     fun supports(packageName: String, versionName: String?): Boolean {
         val packages = compatiblePackages ?: return true // Universal patch
 
         return packages.any { pkg ->
+            // Universal patch (null packageName) supports everything
+            if (pkg.packageName == null) return@any true
             if (pkg.packageName != packageName) return@any false
             if (pkg.versions == null) return@any true
 
@@ -45,22 +69,54 @@ data class PatchInfo(
     }
 
     /**
-     * Create a fake [Patch] with the same metadata as the [PatchInfo] instance.
-     * The resulting patch cannot be executed.
-     * This is necessary because some functions in Morphe Library only accept full [Patch] objects.
+     * Returns true if [versionName] is an experimental target for [packageName].
      */
-    fun toPatcherPatch(): Patch<*> =
-        resourcePatch(name = name, description = description, use = include) {
-            compatiblePackages?.let { pkgs ->
-                compatibleWith(*pkgs.map { it.packageName to it.versions }.toTypedArray())
-            }
-        }
+    fun isExperimental(packageName: String, versionName: String?): Boolean {
+        if (versionName == null) return false
+        return pkgFor(packageName)?.experimentalVersions?.contains(versionName) == true
+    }
+
+    /**
+     * Returns the display name for [packageName] declared in the patch bundle, or null if not specified.
+     */
+    fun displayNameFor(packageName: String): String? = pkgFor(packageName)?.displayName
+
+    /**
+     * Returns the SHA-256 signatures for [packageName] declared in the patch bundle, or null if not specified.
+     */
+    fun signaturesFor(packageName: String): ImmutableSet<String>? = pkgFor(packageName)?.signatures
+
+    /**
+     * Returns the preferred [ApkFileType] for [packageName], if specified.
+     */
+    fun apkFileTypeFor(packageName: String): ApkFileType? = pkgFor(packageName)?.apkFileType
+
+    /**
+     * Returns the app icon color for [packageName] as a 0xAARRGGBB int, or null if not specified.
+     */
+    fun appIconColorFor(packageName: String): Int? = pkgFor(packageName)?.appIconColor
+
+    /** Finds the [CompatiblePackage] entry for [packageName], or null if not found. */
+    private fun pkgFor(packageName: String): CompatiblePackage? =
+        compatiblePackages?.firstOrNull { it.packageName == packageName }
+
 }
 
 @Immutable
 data class CompatiblePackage(
-    val packageName: String,
-    val versions: ImmutableSet<String>?
+    /** Package name of the target app. **Null means universal patch** - compatible with any package. */
+    val packageName: String?,
+    val versions: ImmutableSet<String>?,
+    /** App display name declared in the patch bundle. Null if not specified. */
+    val displayName: String? = null,
+    /** 0xAARRGGBB color for the app icon background, or null if not specified. */
+    val appIconColor: Int? = null,
+    /** Preferred or required APK file type, or null if not specified. */
+    val apkFileType: ApkFileType? = null,
+    /** Subset of [versions] that are marked as experimental targets. */
+    val experimentalVersions: ImmutableSet<String>? = null,
+    /** Valid SHA-256 signing certificate fingerprints of the original app APK. Null means no verification. */
+    val signatures: ImmutableSet<String>? = null,
 )
 
 @Immutable

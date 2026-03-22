@@ -4,7 +4,6 @@
     <string name="home_other_apps">그 외의 앱</string>
     <string name="home_not_patched_yet">아직 패치되지 않음</string>
     <string name="home_no_patches_available">사용 가능한 패치 없음</string>
-    <string name="home_default_source_disabled">Morphe 패치 소스가 비활성화되어 있습니다. 패치 소스 시트에서 활성화하거나 전문가 모드를 사용하세요</string>
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
     <string name="home_app_hide_message">이 앱이 홈 화면에서 숨겨집니다. 나중에 목록 하단에 있는 \'%1$s\' 버튼을 사용하여 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
@@ -54,8 +53,11 @@
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
-    <string name="sources_management_prerelease_toggle">Pre-release 패치 사용</string>
+    <string name="sources_management_prerelease_toggle">패치 Pre-release 버전 사용</string>
     <string name="sources_management_prerelease_toggle_description">새 실험 패치 버전을 미리 받아보세요</string>
+    <string name="sources_management_experimental_versions_toggle">실험 앱 버전 사용</string>
+    <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우 실험 앱 버전으로 패치합니다</string>
+    <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">표시 이름</string>
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
@@ -107,7 +109,6 @@
     <string name="home_select_apk_title">APK 선택</string>
     <string name="home_select_any_apk_description">아래 버튼을 탭하여 패치할 앱의 APK 파일을 선택하세요</string>
     <string name="home_invalid_apk">APK 파일이 잘못되었습니다</string>
-    <string name="home_no_patches_for_app">이 앱에 사용 가능한 패치가 없습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
@@ -115,12 +116,23 @@
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
-    <string name="expert_mode_no_patches">사용 가능한 패치가 없습니다</string>
+    <string name="expert_mode_universal_patches">유니버셜 패치</string>
     <string name="expert_mode_multiple_sources_warning_title">여러 패치 소스가 선택됨</string>
     <string name="expert_mode_multiple_sources_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
 
 그래도 계속하시겠습니까?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">검증되지 않은 APK</string>
+    <string name="home_invalid_signature_message">선택된 &lt;b&gt;%s&lt;/b&gt;에 대한 APK는 예상된 서명 인증서와 일치하지 않습니다. 수정되었거나 신뢰할 수 없는 출처에서 가져온 파일일 수 있습니다</string>
+    <string name="home_invalid_signature_badge">이 파일은 순정 APK가 아닐 수 있습니다</string>
+    <string name="home_split_apk_warning_title">분할 APK는 지원되지 않습니다</string>
+    <string name="home_split_apk_warning_message">분할 APK 번들(&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)을 선택하셨습니다. &lt;b&gt;%s&lt;/b&gt;는 &lt;b&gt;완전한 APK&lt;/b&gt;가 필요하며, 분할 번들로 패치할 수 없습니다</string>
+    <string name="home_split_apk_warning_badge">계속하려면 완전한 APK가 필요합니다</string>
+    <string name="home_split_apk_warning_pick_another">다른 APK를 선택하세요</string>
+    <string name="home_dialog_unsupported_version_experimental_label">실험 버전</string>
+    <string name="home_dialog_unsupported_version_experimental_description">이 버전은 실험적 지원이 포함되어 있으며, 불안정하거나 완전하지 않을 수 있습니다</string>
+    <string name="morphe_experimental_app_version_dialog_title">실험해 보시겠습니까? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">이 &lt;b&gt;%s&lt;/b&gt; 버전은 초기 실험적 지원이 제공됩니다&lt;br/&gt;&lt;br/&gt;🔧 이 앱 버전에 맞게 패치가 개선되는 과정이므로, 예상되지 않은 동작이나 확인되지 않은 버그가 발생할 수 있습니다</string>
     <string name="home_dialog_unsupported_version_dialog_title">지원되지 않는 버전</string>
     <string name="home_dialog_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속 진행하면 앱이 제대로 작동하지 않을 수 있습니다</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">계속 진행</string>
@@ -134,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">모바일 데이터가 활성화되어 있고 패치 업데이트가 비활성화되었습니다</string>
     <string name="home_outdated_patches_dialog_warning">오래된 패치를 사용하면 앱이 손상될 수 있습니다</string>
     <string name="home_outdated_patches_dialog_update_and_patch">업데이트 &amp; 패치</string>
+    <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
+    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치가 정상적으로 작동하려면 최소 1GB 이상의 공간이 필요합니다</string>
+    <string name="home_low_disk_space_dialog_warning">계속 진행하면 “파일을 찾을 수 없습니다” 오류가 발생하거나 손상된 APK 파일이 생성될 수 있습니다</string>
     <!-- Patch Options -->
     <string name="custom_color">커스텀 색상</string>
     <string name="hex_color">헥스 색상 코드</string>
@@ -142,6 +157,9 @@
     <string name="patch_option_enter_number">숫자 입력</string>
     <string name="patch_option_enter_decimal">소수점 입력</string>
     <string name="patch_option_pick_folder">폴더 선택</string>
+    <string name="patch_option_list_duplicate">이 값은 이미 존재합니다</string>
+    <string name="patch_option_list_empty">값을 비워 둘 수 없습니다</string>
+    <string name="patch_option_list_empty_state">아직 값이 추가되지 않았습니다</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">적응형 아이콘 만들기</string>
     <string name="adaptive_icon_instructions">이미지 및 배경 색상을 선택하고, 손가락으로 확대하거나 축소하여 미리보기를 조정하세요</string>
@@ -216,7 +234,7 @@
     <string name="patcher_ready_to_install_subtitle">설치하시려면 아래 버튼을 탭하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_storage_permission_dialog_title">저장소 경로에 접근할 수 없음</string>
-    <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 허용한 후에 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
+    <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 부여하고 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
     <string name="patcher_storage_permission_description_legacy">하나 이상의 패치 옵션이 접근할 수 없는 경로를 가리키고 있습니다. 패치 옵션에서 경로를 업데이트하고 다시 시도하세요</string>
     <string name="patcher_storage_permission_grant">저장소 권한 부여</string>
     <string name="patcher_storage_permission_denied_warning">저장소 권한이 거부되었습니다. 이 경로를 사용하려면 권한을 부여하거나, 파일을 앱 전용 디렉터리로 옮겨주세요</string>
@@ -298,6 +316,8 @@
     <string name="settings_appearance_background_space">우주</string>
     <string name="settings_appearance_background_shapes">도형</string>
     <string name="settings_appearance_background_snow">눈송이</string>
+    <string name="settings_appearance_background_grid">격자</string>
+    <string name="settings_appearance_background_particles">입자</string>
     <string name="settings_appearance_background_none">없음</string>
     <string name="settings_appearance_parallax_effect">페럴랙스 효과</string>
     <string name="settings_appearance_parallax_effect_description">기기를 기울이면 배경이 부드럽게 이동합니다</string>
@@ -328,19 +348,13 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
-    <string name="settings_advanced_updates_use_prereleases">Pre-release Morphe 사용</string>
+    <string name="settings_advanced_updates_use_prereleases">Morphe Pre-release 버전 사용</string>
     <string name="settings_advanced_updates_use_prereleases_description">새 Morphe 기능을 미리 사용합니다. Pre-release 패치를 받으려면 각 패치 소스에서 Pre-release 토글을 개별적으로 활성화하세요</string>
     <string name="settings_advanced_updates_allow_metered">모바일 데이터에서 업데이트</string>
     <string name="settings_advanced_updates_allow_metered_description">모바일 데이터를 사용하여 Morphe 및 패치 업데이트를 다운로드하도록 허용합니다</string>
     <string name="settings_advanced_updates_background_notifications">백그라운드 업데이트 알림</string>
     <string name="settings_advanced_updates_background_notifications_description">백그라운드에서 주기적으로 업데이트를 확인하고 업데이트가 있을 경우에 알림을 보냅니다</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">앱이 닫혀 있어도 새 릴리스에 대한 푸시 알림을 즉시 받습니다</string>
-    <string name="notification_channel_manager_updates">Morphe 업데이트</string>
-    <string name="notification_channel_manager_updates_description">Morphe 새 버전 알림</string>
-    <string name="notification_channel_bundle_updates">패치 소스 업데이트</string>
-    <string name="notification_channel_bundle_updates_description">새 패치 소스 버전 업데이트 알림</string>
-    <string name="notification_channel_fcm_updates">업데이트 알림</string>
-    <string name="notification_channel_fcm_updates_description">새 Morphe 및 패치 릴리스에 대한 푸시 알림을 즉시 받습니다. 앱이 백그라운드에 있는 경우에도 전달됩니다</string>
     <string name="settings_advanced_update_interval">확인 빈도</string>
     <string name="settings_advanced_update_interval_dialog_title">업데이트 확인</string>
     <string name="settings_advanced_update_interval_hourly">한시간에 한번</string>
@@ -355,8 +369,12 @@
     <string name="notification_update_text">%1$s 버전 다운로드 준비 완료</string>
     <string name="notification_bundle_update_text_unversioned">Morphe를 열고 업데이트하려면 탭하세요</string>
     <string name="notification_permission_dialog_title">알림 허용</string>
-    <string name="notification_permission_dialog_description">백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 Morphe에 알림 권한이 필요합니다</string>
+    <string name="notification_permission_dialog_description">Morphe는 백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 알림 권한이 필요합니다</string>
     <string name="notification_post_patch_dialog_title">업데이트가 있을 때 알림을 받으시겠습니까?</string>
+    <string name="notification_channel_fcm_updates">업데이트 알림</string>
+    <string name="notification_channel_fcm_updates_description">새 Morphe 및 패치 릴리스에 대한 알림</string>
+    <string name="notification_channel_patcher">패치하는 중</string>
+    <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안 표시됩니다</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
@@ -574,6 +592,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"Morphe는 인기 있는 안드로이드 앱을 현대적이고 간결한 방식으로 패치하는 데 초점을 둔 실험적인 오픈소스 프로젝트입니다
 
 핵심부터 오픈소스를 지향하며, 커뮤니티의 피드백과 기여를 바탕으로 앞으로의 혁신을 만들어갑니다"</string>
+    <string name="credits">크레딧</string>
+    <string name="credits_current_development">현재 개발</string>
+    <string name="credits_prior_development">이전 개발</string>
     <!-- Shared strings -->
     <string name="patches">패치</string>
     <string name="home">홈</string>
@@ -590,6 +611,7 @@ morphe_header_custom_dark.png
     <string name="close">닫기</string>
     <string name="clear">지우기</string>
     <string name="delete">파일 삭제</string>
+    <string name="remove">제거</string>
     <string name="disable">비활성화</string>
     <string name="enable">활성화</string>
     <string name="loading">불러오는 중…</string>
@@ -597,7 +619,7 @@ morphe_header_custom_dark.png
     <string name="view">보기</string>
     <string name="search">검색</string>
     <string name="search_no_results">검색 결과가 없습니다</string>
-    <string name="any_version">모든</string>
+    <string name="any_version">모든 버전</string>
     <string name="enabled">활성화됨</string>
     <string name="disabled">비활성화됨</string>
     <string name="selected">선택됨</string>

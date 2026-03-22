@@ -4,7 +4,6 @@
     <string name="home_other_apps">अन्य ऐप्स</string>
     <string name="home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
-    <string name="home_default_source_disabled">मorphe पैच स्रोत अक्षम है। पैच स्रोत शीट में या एक्सपर्ट मोड का उपयोग करके इसे सक्रिय करें</string>
     <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
     <string name="home_app_hide_message">यह ऐप होम स्क्रीन से छिपा दिया जाएगा। आप सूची के निचले भाग में मौजूद \'%1$s\' बटन का उपयोग करके बाद में इसे पुनर्स्थापित कर सकते हैं।</string>
     <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
@@ -56,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
     <string name="sources_management_prerelease_toggle">प्रिलीस रिलीज़ पथचों को उपयोग करें</string>
     <string name="sources_management_prerelease_toggle_description">नए प्रयोगात्मक पथचों की नई संस्करणों को जल्दी से प्राप्त करें</string>
+    <string name="sources_management_experimental_versions_toggle">प्रयोगशील ऐप संस्करणों का उपयोग करें</string>
+    <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हो तो प्रयोगशील ऐप लक्ष्यों को पैच करें</string>
+    <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">नाम दर्जा करें</string>
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
@@ -107,7 +109,6 @@
     <string name="home_select_apk_title">APK चुनें</string>
     <string name="home_select_any_apk_description">पैचिंग के लिए किसी भी ऐप के लिए APK फ़ाइल चुनने के लिए नीचे दिए गए बटन पर टैप करें</string>
     <string name="home_invalid_apk">अवैध APK फ़ाइल</string>
-    <string name="home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">एक्सपर्ट मोड</string>
     <string name="expert_mode_search">पैच खोजें</string>
@@ -115,12 +116,23 @@
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
-    <string name="expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
+    <string name="expert_mode_universal_patches">सार्वभौमिक पैच</string>
     <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
     <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।
 
 क्या आप वास्तव में आगे बढ़ना चाहते हैं?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">अपरिचित APK</string>
+    <string name="home_invalid_signature_message">आपके द्वारा चयनित APK &lt;b&gt;%s&lt;/b&gt; प्रमाण पत्र से मेल नहीं खाता। यह संशोधित किया गया हो सकता है या किसी अविश्वसनीय स्रोत से हो सकता है</string>
+    <string name="home_invalid_signature_badge">यह APK मूल नहीं हो सकता है</string>
+    <string name="home_split_apk_warning_title">स्प्लिट APK समर्थित नहीं है</string>
+    <string name="home_split_apk_warning_message">आपने एक स्प्लिट APK बंडल (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) चुना है। &lt;b&gt;%s&lt;/b&gt; को एक &lt;b&gt;पूर्ण APK&lt;/b&gt; की आवश्यकता है - इस ऐप के लिए स्प्लिट बंडल को पैच नहीं किया जा सकता है</string>
+    <string name="home_split_apk_warning_badge">जारी रखने के लिए पूर्ण APK की आवश्यकता है</string>
+    <string name="home_split_apk_warning_pick_another">कोई दूसरा APK चुनें</string>
+    <string name="home_dialog_unsupported_version_experimental_label">प्रायोगिक</string>
+    <string name="home_dialog_unsupported_version_experimental_description">इस संस्करण का प्रायोगिक समर्थन है और अस्थिर या अधूरा हो सकता है</string>
+    <string name="morphe_experimental_app_version_dialog_title">क्या आप प्रयोग करना चाहेंगे? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; के इस संस्करण का शुरुआती प्रायोगिक समर्थन है&lt;br/&gt;&lt;br/&gt;🔧 इस ऐप संस्करण के लिए पैच को परिष्कृत किए जाने के कारण ऐप व्यवहार या अज्ञात बग असामान्य हो सकते हैं</string>
     <string name="home_dialog_unsupported_version_dialog_title">यह एपीएम अनुशासित संस्करण नहीं है। आगे बढ़ने से अनुशासित एप्प्लिकेशन संस्करण हो सकता है।</string>
     <string name="home_dialog_unsupported_version_dialog_description">यह APK अनुशंसित एप्लिकेशन संस्करण नहीं है। जारी रखना परिणामस्वरूप एक कार्यक्षम एप्लिकेशन नहीं हो सकता है।</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">अब भी आगे बढ़ें</string>
@@ -134,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">मोबाइल डेटा सक्रिय है और पैच अपडेट बंद हैं</string>
     <string name="home_outdated_patches_dialog_warning">पुराने पैच से पैच करना हो सकता है कि एप्लिकेशन को तोड़ सकता है</string>
     <string name="home_outdated_patches_dialog_update_and_patch">अपडेट करें &amp; पैच करें</string>
+    <string name="home_low_disk_space_dialog_title">कम डिस्क स्थान</string>
+    <string name="home_low_disk_space_dialog_message">उपलब्ध मुफ्त संग्रहण का केवल %1$.2f GB है। सही ढंग से काम करने के लिए पैचिंग के लिए कम से कम 1 GB मुफ्त स्थान की आवश्यकता होती है</string>
+    <string name="home_low_disk_space_dialog_warning">आगे बढ़ने पर \"फ़ाइल नहीं मिली\" त्रुटि या करप्ट आउटपुट APK हो सकता है</string>
     <!-- Patch Options -->
     <string name="custom_color">कस्टम रंग</string>
     <string name="hex_color">हेक्स रंग</string>
@@ -142,6 +157,9 @@
     <string name="patch_option_enter_number">नंबर दर्ज करें</string>
     <string name="patch_option_enter_decimal">दशमलव दर्ज करें</string>
     <string name="patch_option_pick_folder">फ़ोल्डर चुनें</string>
+    <string name="patch_option_list_duplicate">यह मान पहले से मौजूद है</string>
+    <string name="patch_option_list_empty">मान खाली नहीं हो सकता</string>
+    <string name="patch_option_list_empty_state">अभी तक कोई मान नहीं जोड़ा गया है</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">अनुकूलित आइकॉन बनाएं</string>
     <string name="adaptive_icon_instructions">फोरग्राउंड छवि चुनें, बैकग्राउंड रंग चुनें और पिन्च-टू-ज़ूम गेस्टर से प्रीव्यू को अनुकूलित करें</string>
@@ -298,6 +316,8 @@
     <string name="settings_appearance_background_space">खगोल</string>
     <string name="settings_appearance_background_shapes">आकार</string>
     <string name="settings_appearance_background_snow">बारिशक</string>
+    <string name="settings_appearance_background_grid">ग्रिड</string>
+    <string name="settings_appearance_background_particles">कण</string>
     <string name="settings_appearance_background_none">कुछ</string>
     <string name="settings_appearance_parallax_effect">परालैक्स प्रभाव</string>
     <string name="settings_appearance_parallax_effect_description">डिवाइस को झुकाने पर पृष्ठभूमि को मधयम गति से बदलना</string>
@@ -335,12 +355,6 @@
     <string name="settings_advanced_updates_background_notifications">रीलेटेड अपडेट नोटिफिकेशन्स</string>
     <string name="settings_advanced_updates_background_notifications_description">बैकग्राउंड में अद्यतन उपलब्ध होने पर सूचित करें।</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">नई रिलीज़ के लिए इमीडिएट पुश नोटिफिकेशन प्राप्त करें, जब एप्प क्लोज हो</string>
-    <string name="notification_channel_manager_updates">मोर्फ़ अपडेट</string>
-    <string name="notification_channel_manager_updates_description">मोर्फ़ के नए संस्करणों के बारे में सूचनाएं</string>
-    <string name="notification_channel_bundle_updates">पैच स्रोत अपडेट</string>
-    <string name="notification_channel_bundle_updates_description">नोटिफिकेशन नई पैच स्रोत संस्करणों के बारे में</string>
-    <string name="notification_channel_fcm_updates">अपडेट करें</string>
-    <string name="notification_channel_fcm_updates_description">नए मोर्फ़ और पैच रिलीज़ के लिए त्वरित पुश सूचनाएं। जब ऐप पृष्ठभूमि में हो तो भी वितरित किया गया</string>
     <string name="settings_advanced_update_interval">अपडेट दर देखें</string>
     <string name="settings_advanced_update_interval_dialog_title">अपडेटों के लिए देखें</string>
     <string name="settings_advanced_update_interval_hourly">एक घंटे में एक बार</string>
@@ -357,6 +371,10 @@
     <string name="notification_permission_dialog_title">नोटिफिकेशन अनुमति दें</string>
     <string name="notification_permission_dialog_description">जब पृष्ठभूमि में अपडेट उपलब्ध हों तो आपको अलर्ट करने के लिए मोर्फ़ को अधिसूचना अनुमति की आवश्यकता है</string>
     <string name="notification_post_patch_dialog_title">अपडेट उपलब्ध होने पर सूचित किया जाना चाहेगा?</string>
+    <string name="notification_channel_fcm_updates">अपडेट सूचनाएं</string>
+    <string name="notification_channel_fcm_updates_description">नए मोर्फ़ और पैच रिलीज़ के बारे में सूचनाएं</string>
+    <string name="notification_channel_patcher">पैचिंग</string>
+    <string name="notification_channel_patcher_description">जब मोर्फ़ पृष्ठभूमि में किसी ऐप को पैच कर रहा हो तो दिखाया गया</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
@@ -573,6 +591,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_manager_description">"मोरफे एक प्रयोगशाला आधारित खुले स्रोत प्रोजेक्ट है जो लोकप्रिय एंड्रॉइड एप्लिकेशन के आधुनिक, व्यवस्थित पैचिंग के लिए ध्यान केंद्रित करता है
 
 खुले स्रोत के मूल में, मोरफे समुदाय के फीडबैक और योगदान को प्रोत्साहित करता है ताकि भविष्य के नवीनता को प्रेरित किया जाए"</string>
+    <string name="credits">क्रेडिट</string>
+    <string name="credits_current_development">वर्तमान विकास</string>
+    <string name="credits_prior_development">पिछला विकास</string>
     <!-- Shared strings -->
     <string name="patches">पैच</string>
     <string name="home">घर</string>
@@ -589,6 +610,7 @@ morphe_header_custom_dark.png
     <string name="close">बंद करे</string>
     <string name="clear">खाली करें</string>
     <string name="delete">हटाएं</string>
+    <string name="remove">निकालें</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
     <string name="loading">Loading…</string>

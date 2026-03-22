@@ -86,6 +86,7 @@
     <string name="settings_system_about">អំពីកម្មវិធីនេះ</string>
     <!-- Shared strings -->
     <string name="home">ទំព័រដើម</string>
+    <string name="remove">ដកចេញ</string>
     <string name="enabled">បានបើក</string>
     <string name="disabled">បានផ្ដាច់</string>
     <string name="rename">ប្ដូរឈ្មោះ</string>

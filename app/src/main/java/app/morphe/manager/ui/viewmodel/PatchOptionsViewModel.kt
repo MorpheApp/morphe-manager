@@ -11,7 +11,7 @@ import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companio
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_HIDE_SHORTS
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_THEME
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.util.KnownApp
+import app.morphe.manager.util.KnownApps
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -97,8 +97,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
                     val compatiblePackages = patch.compatiblePackages ?: return@forEach
 
                     // Check which apps this patch is compatible with
-                    val isForYouTube = compatiblePackages.any { it.packageName == KnownApp.YOUTUBE }
-                    val isForYouTubeMusic = compatiblePackages.any { it.packageName == KnownApp.YOUTUBE_MUSIC }
+                    val isForYouTube = compatiblePackages.any { it.packageName == KnownApps.YOUTUBE }
+                    val isForYouTubeMusic = compatiblePackages.any { it.packageName == KnownApps.YOUTUBE_MUSIC }
 
                     val options = patch.options?.map { option ->
                         OptionInfo(
@@ -137,8 +137,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
      * Returns the patch list for the given package name.
      */
     private fun patchesForPackage(packageName: String): List<PatchOptionInfo> = when (packageName) {
-        KnownApp.YOUTUBE -> _youtubePatches.value
-        KnownApp.YOUTUBE_MUSIC -> _youtubeMusicPatches.value
+        KnownApps.YOUTUBE -> _youtubePatches.value
+        KnownApps.YOUTUBE_MUSIC -> _youtubeMusicPatches.value
         else -> emptyList()
     }
 

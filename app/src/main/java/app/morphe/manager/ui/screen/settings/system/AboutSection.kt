@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import android.annotation.SuppressLint
@@ -31,8 +36,8 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import org.koin.androidx.compose.koinViewModel
 
 /**
- * About section
- * Contains app info and website sharing
+ * About section.
+ * Contains app info and website sharing.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable

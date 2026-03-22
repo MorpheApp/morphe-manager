@@ -4,7 +4,6 @@
     <string name="home_other_apps">Otras aplicaciones</string>
     <string name="home_not_patched_yet">Aún no parcheado</string>
     <string name="home_no_patches_available">No hay parches disponibles</string>
-    <string name="home_default_source_disabled">La fuente de parches de Morphe está deshabilitada. Actívala en Fuentes de parches o usa el modo Experto</string>
     <string name="home_app_hide_title">¿Ocultar esta app?</string>
     <string name="home_app_hide_message">Esta app se ocultará de la pantalla de inicio. Puedes restaurarla más tarde usando el botón \"%1$s\" en la parte inferior de la lista</string>
     <string name="home_app_will_be_hidden">Esta app se ocultará</string>
@@ -56,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
     <string name="sources_management_prerelease_toggle">Usar versiones preliminares de parches</string>
     <string name="sources_management_prerelease_toggle_description">Recibir acceso temprano a nuevas versiones experimentales de parches</string>
+    <string name="sources_management_experimental_versions_toggle">Usar versiones experimentales</string>
+    <string name="sources_management_experimental_versions_toggle_description">Parchear las versiones experimentales de la aplicación, si están disponibles</string>
+    <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nombre para mostrar</string>
     <string name="sources_dialog_rename">Agregar fuente de parches</string>
@@ -107,7 +109,6 @@
     <string name="home_select_apk_title">Seleccionar APK</string>
     <string name="home_select_any_apk_description">Toca el botón de abajo para seleccionar un archivo APK de cualquier aplicación para parchear</string>
     <string name="home_invalid_apk">Archivo APK no válido</string>
-    <string name="home_no_patches_for_app">No hay parches disponibles para esta aplicación</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo experto</string>
     <string name="expert_mode_search">Buscar parches</string>
@@ -115,12 +116,23 @@
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_enable_all">Activar todo</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
-    <string name="expert_mode_no_patches">No hay parches disponibles</string>
+    <string name="expert_mode_universal_patches">Parches universales</string>
     <string name="expert_mode_multiple_sources_warning_title">Se han seleccionado varias fuentes de parches</string>
     <string name="expert_mode_multiple_sources_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
 
 ¿Realmente quieres continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK no verificado</string>
+    <string name="home_invalid_signature_message">El APK que seleccionó para &lt;b&gt;%s&lt;/b&gt; no coincide con el certificado de firma esperado. Es posible que esté modificado o provenga de una fuente no confiable</string>
+    <string name="home_invalid_signature_badge">Este APK podría no ser el original</string>
+    <string name="home_split_apk_warning_title">No se admiten APK divididos</string>
+    <string name="home_split_apk_warning_message">Ha seleccionado un paquete APK dividido (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; requiere un &lt;b&gt;APK completo&lt;/b&gt; - los paquetes divididos no se pueden parchear para esta aplicación</string>
+    <string name="home_split_apk_warning_badge">Se requiere un APK completo para continuar</string>
+    <string name="home_split_apk_warning_pick_another">Seleccione otro APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Esta versión tiene soporte experimental y podría ser inestable o incompleta</string>
+    <string name="morphe_experimental_app_version_dialog_title">¿Quieres experimentar? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Esta versión de &lt;b&gt;%s&lt;/b&gt; tiene un soporte experimental temprano&lt;br/&gt;&lt;br/&gt;🔧 Espere un comportamiento peculiar de la aplicación o errores no identificados a medida que los parches se refinan para esta versión de la aplicación</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versión no compatible</string>
     <string name="home_dialog_unsupported_version_dialog_description">Este APK no es una versión recomendada de la aplicación. Continuar puede resultar en una aplicación no funcional</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuar de todos modos</string>
@@ -134,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">Los datos móviles están activos y las actualizaciones de parches están desactivadas</string>
     <string name="home_outdated_patches_dialog_warning">La app podría no funcionar correctamente si se aplican parches obsoletos</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Actualizar y parchear</string>
+    <string name="home_low_disk_space_dialog_title">Poco espacio en disco</string>
+    <string name="home_low_disk_space_dialog_message">Solo hay %1$.2f GB de almacenamiento libre disponible. El parcheo requiere al menos 1 GB de espacio libre para funcionar correctamente</string>
+    <string name="home_low_disk_space_dialog_warning">Continuar puede provocar un error de \"archivo no encontrado\" o un APK de salida corrupto</string>
     <!-- Patch Options -->
     <string name="custom_color">Color personalizado</string>
     <string name="hex_color">Color HEX</string>
@@ -142,6 +157,9 @@
     <string name="patch_option_enter_number">Ingresar número</string>
     <string name="patch_option_enter_decimal">Ingresar decimal</string>
     <string name="patch_option_pick_folder">Elegir carpeta</string>
+    <string name="patch_option_list_duplicate">Este valor ya existe</string>
+    <string name="patch_option_list_empty">El valor no puede estar vacío</string>
+    <string name="patch_option_list_empty_state">No se han añadido valores todavía</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crear icono adaptable</string>
     <string name="adaptive_icon_instructions">Elija una imagen de primer plano, seleccione el color de fondo y ajuste la vista previa con gestos de pellizco</string>
@@ -298,6 +316,8 @@
     <string name="settings_appearance_background_space">Espacio</string>
     <string name="settings_appearance_background_shapes">Formas</string>
     <string name="settings_appearance_background_snow">Nieve</string>
+    <string name="settings_appearance_background_grid">Cuadrícula</string>
+    <string name="settings_appearance_background_particles">Partículas</string>
     <string name="settings_appearance_background_none">Ninguna</string>
     <string name="settings_appearance_parallax_effect">Efecto de paralaje</string>
     <string name="settings_appearance_parallax_effect_description">Desplazamiento suave del fondo al inclinar el dispositivo</string>
@@ -335,12 +355,6 @@
     <string name="settings_advanced_updates_background_notifications">Notificaciones de actualización en segundo plano</string>
     <string name="settings_advanced_updates_background_notifications_description">Comprueba periódicamente si hay actualizaciones en segundo plano y notifica cuando estén disponibles</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Recibir notificaciones instantáneas de las nuevas versiones, incluso cuando la app esté cerrada</string>
-    <string name="notification_channel_manager_updates">Actualizaciones de Morphe</string>
-    <string name="notification_channel_manager_updates_description">Notificaciones sobre nuevas versiones de Morphe</string>
-    <string name="notification_channel_bundle_updates">Actualizaciones de fuentes de parches</string>
-    <string name="notification_channel_bundle_updates_description">Notificaciones sobre nuevas versiones de fuentes de parches</string>
-    <string name="notification_channel_fcm_updates">Alertas de actualización</string>
-    <string name="notification_channel_fcm_updates_description">Notificaciones push instantáneas para nuevas versiones de Morphe y de parches. Se envían incluso cuando la aplicación está en segundo plano</string>
     <string name="settings_advanced_update_interval">Frecuencia de comprobación</string>
     <string name="settings_advanced_update_interval_dialog_title">Buscar actualizaciones</string>
     <string name="settings_advanced_update_interval_hourly">Una vez cada hora</string>
@@ -357,6 +371,10 @@
     <string name="notification_permission_dialog_title">Permitir notificaciones</string>
     <string name="notification_permission_dialog_description">Morphe necesita el permiso de notificación para avisarte cuando haya actualizaciones disponibles en segundo plano</string>
     <string name="notification_post_patch_dialog_title">¿Quieres ser notificado cuando haya actualizaciones disponibles?</string>
+    <string name="notification_channel_fcm_updates">Notificaciones de actualización</string>
+    <string name="notification_channel_fcm_updates_description">Notificaciones sobre nuevas versiones de Morphe y parches</string>
+    <string name="notification_channel_patcher">Parcheando</string>
+    <string name="notification_channel_patcher_description">Se muestra mientras Morphe está parcheando una aplicación en segundo plano</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ajustes avanzados</string>
     <string name="settings_advanced_expert_mode">Modo experto</string>
@@ -573,6 +591,9 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_manager_description">"Morphe es un proyecto experimental de código abierto enfocado en crear un parcheo moderno y simplificado de aplicaciones Android populares
 
 Morphe se basa en la retroalimentación y las contribuciones de la comunidad para impulsar la innovación futura."</string>
+    <string name="credits">Créditos</string>
+    <string name="credits_current_development">Desarrollo actual</string>
+    <string name="credits_prior_development">Desarrollo anterior</string>
     <!-- Shared strings -->
     <string name="patches">Parches</string>
     <string name="home">Inicio</string>
@@ -589,6 +610,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="close">Cerrar</string>
     <string name="clear">Limpiar</string>
     <string name="delete">Eliminar</string>
+    <string name="remove">Eliminar</string>
     <string name="disable">Deshabilitar</string>
     <string name="enable">Habilitar</string>
     <string name="loading">Cargando…</string>

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import androidx.compose.animation.*
@@ -32,19 +37,19 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.bundles.APIPatchBundle
+import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.simpleMessage
-import app.morphe.manager.util.toFilePath
+import app.morphe.manager.util.*
 import kotlinx.coroutines.flow.mapNotNull
 import org.koin.compose.koinInject
 
 /**
- * Dialog for adding patch bundles
+ * Dialog for adding patch bundles.
  */
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -567,7 +572,8 @@ private fun PatchItemCard(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     patch.compatiblePackages.forEach { compatiblePackage ->
-                        val packageName = compatiblePackage.packageName
+                        val anyString = stringResource(R.string.any_version)
+                        val appName = compatiblePackage.displayName ?: compatiblePackage.packageName ?: anyString
                         val versions = compatiblePackage.versions.orEmpty()
 
                         FlowRow(
@@ -575,7 +581,7 @@ private fun PatchItemCard(
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             InfoBadge(
-                                text = packageName,
+                                text = appName,
                                 icon = Icons.Outlined.Apps,
                                 style = InfoBadgeStyle.Primary,
                                 isCompact = true,
@@ -585,19 +591,24 @@ private fun PatchItemCard(
                             if (versions.isNotEmpty()) {
                                 if (expandVersions) {
                                     versions.forEach { version ->
+                                        val isExperimental =
+                                            compatiblePackage.experimentalVersions?.contains(version) == true
                                         InfoBadge(
                                             text = version,
-                                            icon = Icons.Outlined.Code,
-                                            style = InfoBadgeStyle.Default,
+                                            icon = if (isExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
+                                            style = if (isExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
                                             isCompact = true,
                                             modifier = Modifier.align(Alignment.CenterVertically)
                                         )
                                     }
                                 } else {
+                                    val firstVersion = versions.first()
+                                    val firstIsExperimental =
+                                        compatiblePackage.experimentalVersions?.contains(firstVersion) == true
                                     InfoBadge(
-                                        text = versions.first(),
-                                        icon = Icons.Outlined.Code,
-                                        style = InfoBadgeStyle.Default,
+                                        text = firstVersion,
+                                        icon = if (firstIsExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
+                                        style = if (firstIsExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
                                         isCompact = true,
                                         modifier = Modifier.align(Alignment.CenterVertically)
                                     )
@@ -666,7 +677,13 @@ private fun PatchItemCard(
 }
 
 /**
- * Dialog displaying changelog for a bundle
+ * Changelog dialog for a bundle.
+ *
+ * Prerelease channel: entries from the last stable release onwards.
+ * Stable: entries newer than the installed version, plus the installed version itself.
+ *
+ * Fetched once and cached; cache invalidated on channel switch.
+ * Falls back to GitHub Release info if CHANGELOG.md is unavailable.
  */
 @Composable
 fun BundleChangelogDialog(
@@ -675,11 +692,59 @@ fun BundleChangelogDialog(
 ) {
     var state: BundleChangelogState by remember { mutableStateOf(BundleChangelogState.Loading) }
 
-    LaunchedEffect(src.uid) {
+    LaunchedEffect(Unit) {
         state = BundleChangelogState.Loading
         state = try {
-            val asset = src.fetchLatestReleaseInfo()
-            BundleChangelogState.Success(asset)
+            val usePrerelease = (src as? APIPatchBundle)?.usePrerelease == true
+                    || (src as? JsonPatchBundle)?.usePrerelease == true
+
+            val allEntries = src.fetchChangelogEntries(sinceVersion = null)
+
+            val entries = if (usePrerelease) {
+                // Prerelease: from the last stable release onwards
+                val lastStable = allEntries.firstOrNull { !it.version.contains("-") }
+                if (lastStable != null)
+                    ChangelogParser.entriesNewerThan(allEntries, lastStable.version) + lastStable
+                else allEntries
+            } else {
+                // Stable: from the installed version onwards
+                val installed = src.installedVersionSignature
+                val installedEntry = installed?.let {
+                    ChangelogParser.findVersion(allEntries, it)
+                }
+                val newer = if (installed != null)
+                    ChangelogParser.entriesNewerThan(allEntries, installed)
+                else allEntries
+                if (installedEntry != null) newer + installedEntry else newer
+            }
+
+            // APIPatchBundle has endpoint="api" - use SOURCE_REPO_URL directly
+            val repoUrl = when (src) {
+                is APIPatchBundle -> SOURCE_REPO_URL
+                else -> RemotePatchBundle.inferPageUrlFromEndpoint(src.endpoint)
+            }
+            val latestPageUrl = entries.firstOrNull()?.version?.let { version ->
+                val tag = if (version.startsWith("v")) version else "v$version"
+                val url = repoUrl?.let { "$it/releases/tag/$tag" }
+                url
+            }
+
+            if (entries.isNotEmpty()) {
+                BundleChangelogState.Entries(entries, latestPageUrl = latestPageUrl)
+            } else {
+                // Fallback: CHANGELOG.md unavailable - use latest release info from API
+                val asset = src.fetchLatestReleaseInfo()
+                BundleChangelogState.Entries(
+                    entries = listOf(
+                        ChangelogEntry(
+                            version = asset.version,
+                            date = null,
+                            content = asset.description.sanitizePatchChangelogMarkdown()
+                        )
+                    ),
+                    latestPageUrl = asset.pageUrl
+                )
+            }
         } catch (t: Throwable) {
             BundleChangelogState.Error(t)
         }
@@ -688,20 +753,20 @@ fun BundleChangelogDialog(
     MorpheDialog(
         onDismissRequest = onDismissRequest,
         title = when (state) {
-            is BundleChangelogState.Success -> null
+            is BundleChangelogState.Entries -> null
             is BundleChangelogState.Error -> stringResource(R.string.changelog)
             BundleChangelogState.Loading -> stringResource(R.string.changelog)
         },
         footer = {
             when (val current = state) {
-                is BundleChangelogState.Success -> {
+                is BundleChangelogState.Entries -> {
                     MorpheDialogButtonColumn {
-                        // Show changelog button
-                        ChangelogButton(
-                            pageUrl = current.asset.pageUrl,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
+                        current.latestPageUrl?.let { url ->
+                            ChangelogButton(
+                                pageUrl = url,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
                         MorpheDialogButton(
                             text = stringResource(android.R.string.ok),
                             onClick = onDismissRequest,
@@ -713,10 +778,7 @@ fun BundleChangelogDialog(
                     MorpheDialogButtonColumn {
                         MorpheDialogButton(
                             text = stringResource(R.string.changelog_retry),
-                            onClick = {
-                                // Trigger reload
-                                state = BundleChangelogState.Loading
-                            },
+                            onClick = { state = BundleChangelogState.Loading },
                             modifier = Modifier.fillMaxWidth()
                         )
                         MorpheDialogButton(
@@ -738,11 +800,12 @@ fun BundleChangelogDialog(
     ) {
         when (val current = state) {
             BundleChangelogState.Loading -> ChangelogSectionLoading()
-            is BundleChangelogState.Error -> BundleChangelogError(
-                error = current.throwable
-            )
-            is BundleChangelogState.Success -> BundleChangelogContent(
-                asset = current.asset
+            is BundleChangelogState.Error -> BundleChangelogError(error = current.throwable)
+            is BundleChangelogState.Entries -> ChangelogEntriesList(
+                entries = current.entries,
+                headerIcon = Icons.Outlined.History,
+                emptyText = stringResource(R.string.changelog_empty),
+                textColor = LocalDialogTextColor.current
             )
         }
     }
@@ -792,29 +855,13 @@ private fun BundleChangelogError(
     }
 }
 
-@Composable
-private fun BundleChangelogContent(
-    asset: MorpheAsset
-) {
-    val markdown = remember(asset.description) {
-        asset.description
-            .replace("\r\n", "\n")
-            .sanitizePatchChangelogMarkdown()
-    }
-
-    // Changelog content
-    ChangelogSection(
-        asset = asset,
-        headerIcon = Icons.Outlined.History,
-        markdown = markdown,
-        emptyChangelogText = stringResource(R.string.changelog_empty),
-        textColor = LocalDialogTextColor.current
-    )
-}
-
 private sealed interface BundleChangelogState {
     data object Loading : BundleChangelogState
-    data class Success(val asset: MorpheAsset) : BundleChangelogState
+    /** [entries] are already filtered to "missed" versions, newest-first. */
+    data class Entries(
+        val entries: List<ChangelogEntry>,
+        val latestPageUrl: String?
+    ) : BundleChangelogState
     data class Error(val throwable: Throwable) : BundleChangelogState
 }
 

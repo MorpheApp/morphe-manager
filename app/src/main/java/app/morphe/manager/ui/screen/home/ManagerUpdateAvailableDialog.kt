@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.layout.*
@@ -284,13 +289,13 @@ fun ManagerUpdateDetailsDialog(
                 }
 
                 UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
-                    if (releaseInfo == null) {
+                    val entries = updateViewModel.missedChangelogEntries
+                    if (entries == null) {
                         // Shimmer loading state
                         ChangelogSectionLoading()
                     } else {
-                        // Changelog content only
-                        ChangelogSection(
-                            asset = releaseInfo,
+                        ChangelogEntriesList(
+                            entries = entries,
                             headerIcon = Icons.Outlined.NewReleases,
                             textColor = textColor
                         )

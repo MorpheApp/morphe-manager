@@ -52,7 +52,7 @@ import java.io.FileOutputStream
 import kotlin.math.abs
 
 /**
- * Configuration constants for adaptive icon creation
+ * Configuration constants for adaptive icon creation.
  */
 private object AdaptiveIconConfig {
     // Folder structure
@@ -61,7 +61,7 @@ private object AdaptiveIconConfig {
     const val YTM_ICONS_FOLDER_NAME = "morphe_icons_music"
 
     fun iconFolderName(packageName: String) = when (packageName) {
-        KnownApp.YOUTUBE_MUSIC -> YTM_ICONS_FOLDER_NAME
+        KnownApps.YOUTUBE_MUSIC -> YTM_ICONS_FOLDER_NAME
         else -> YOUTUBE_ICONS_FOLDER_NAME
     }
 
@@ -108,8 +108,8 @@ private object AdaptiveIconConfig {
 }
 
 /**
- * Dialog for creating adaptive icons with foreground and background customization
- * Generates icons in proper sizes for all screen densities
+ * Dialog for creating adaptive icons with foreground and background customization.
+ * Generates icons in proper sizes for all screen densities.
  */
 @Composable
 fun AdaptiveIconCreatorDialog(
@@ -337,7 +337,7 @@ fun AdaptiveIconCreatorDialog(
 }
 
 /**
- * Preview component showing adaptive icon with safe zones and transform gestures
+ * Preview component showing adaptive icon with safe zones and transform gestures.
  */
 @SuppressLint("LocalContextResourcesRead")
 @Composable
@@ -555,7 +555,7 @@ private fun AdaptiveIconPreview(
 }
 
 /**
- * Legend item for safe zones – shows a small circle with solid or dashed stroke
+ * Legend item for safe zones – shows a small circle with solid or dashed stroke.
  */
 @Composable
 private fun SafeZoneLegendItem(
@@ -590,8 +590,8 @@ private fun SafeZoneLegendItem(
 }
 
 /**
- * Create adaptive icon files for all densities in proper structure
- * Returns the path to morphe_icons folder or null if failed
+ * Create adaptive icon files for all densities in proper structure.
+ * Returns the path to morphe_icons folder or null if failed.
  */
 @SuppressLint("UseKtx")
 private suspend fun createAdaptiveIcons(
@@ -648,7 +648,7 @@ private suspend fun createAdaptiveIcons(
 }
 
 /**
- * Create icon files for a specific density
+ * Create icon files for a specific density.
  */
 private fun createIconsForDensity(
     iconsDir: File,

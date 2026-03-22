@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ezkrifên din</string>
     <string name="home_not_patched_yet">Henda ne paqijkirin</string>
     <string name="home_no_patches_available">Paqijî ne hebin.</string>
-    <string name="home_default_source_disabled">Guherîna patch sehkirî tê astênî. Ji bo Patch sorcê hayiyan bîn \'Sərçen\' î yo ey li \'Expert mode\' biqewmê</string>
     <string name="home_app_hide_title">Epp şifre bike?</string>
     <string name="home_app_hide_message">Epp ji leşkeriyê vê zanîna Kilê bê. Tu wê radeye sererît bêmezinî rokişiye ku pêşîtegiya \'%1$s\' piştê hilvedana li vê qasetan biçe.</string>
     <string name="home_app_will_be_hidden">Epp şifre be</string>
@@ -56,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">Serokê URL nefirote</string>
     <string name="sources_management_prerelease_toggle">Dirûtinên pêşbirî bikar bîne</string>
     <string name="sources_management_prerelease_toggle_description">Rêxistinê zûtir vekişîna versiyonên eksperîmental ên nû bistîne</string>
+    <string name="sources_management_experimental_versions_toggle">Bi navbera sepanedanên sepaneyan sererî bikarêne</string>
+    <string name="sources_management_experimental_versions_toggle_description">Ger pêwazî hebe, sepanên eksperîmental ên sepanan çêkirin</string>
+    <string name="sources_management_already_exists">Evîn pêştirîye, berê zêdekirine.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Navnê nîşankêr</string>
     <string name="sources_dialog_rename">Ji bo guherîna çavkaniyê navê nû</string>
@@ -64,6 +66,7 @@
     <string name="sources_dialog_view_any_version">Her versiyon</string>
     <string name="sources_dialog_view_any_package">Her pakêt</string>
     <string name="sources_dialog_add_source">Çavkaniyê zêde bike</string>
+    <string name="sources_dialog_delete_confirm_message">Dermanî çavkaniyê \"%s\" bifirîne?  Ev neyê vegerandin.</string>
     <string name="sources_dialog_remote">Dûr</string>
     <string name="sources_dialog_remote_url">URL-ya çavkaniyê</string>
     <string name="sources_dialog_remote_url_formats_title">Wek,</string>
@@ -91,7 +94,7 @@
     <string name="home_download_instructions_steps_title">Rêberî:</string>
     <string name="home_download_instructions_step1">Li jêr çapa \'%1$s\' biketine</string>
     <string name="home_download_instructions_step2_part1">Li ser rûbera malperê biqewime û bikşîne</string>
-    <string name="home_download_instructions_download_button_toast">Serîşewitîna lê barkêşinê li ser malperê bikşîne, ne li vir 😊</string>
+    <string name="home_download_instructions_download_button_toast">Li ser malpera çapa serdest bike, ne ku xwer li vir 😊</string>
     <string name="home_download_instructions_step3">Heke barkevtin temamm bike, û &lt;b&gt;newestîne&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Heke barkevtin temamm bike, paştrê &lt;b&gt;APK-ê saz bike&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Piştî ku server heta qedandina dewam bike, ji Morphe desteke be.</string>
@@ -106,7 +109,6 @@
     <string name="home_select_apk_title">APK safînak</string>
     <string name="home_select_any_apk_description">Seroki pêşniyar be ku APK entê antî ek şêwaziyê sazkirinê ji her aplikasyonê pêş andazeşîne</string>
     <string name="home_invalid_apk">Dosya APK ne sazbûne</string>
-    <string name="home_no_patches_for_app">Ji bo ev aplikasyon ne paqejî peyivin</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Ferman ekspertê</string>
     <string name="expert_mode_search">Paqejî bîne lêgeran</string>
@@ -114,10 +116,21 @@
     <string name="expert_mode_disable_all">Hemû çêbake</string>
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
-    <string name="expert_mode_no_patches">Paqejî te hebin</string>
+    <string name="expert_mode_universal_patches">Pêtên hevpar.</string>
     <string name="expert_mode_multiple_sources_warning_title">Berî çend seyarên bejna tê</string>
     <string name="expert_mode_multiple_sources_warning_message">"Hûn bejna seyarê berî çendan bejna kirin. Gûma serdebaza pêşçuna bêgîri azre be."</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK-ya pêşbîn nekirî</string>
+    <string name="home_invalid_signature_message">APK-ya ku hîşyarîdê bo &lt;b&gt;%s&lt;/b&gt; hilbijart, bi gîrêdanî ya ceribandinê ya pêwist nayê. Ew dikare guherîye an ji çavê nedastî be</string>
+    <string name="home_invalid_signature_badge">Ev APK nebûna orîjînal e.</string>
+    <string name="home_split_apk_warning_title">Piçûnbûna APK piştgirî nade</string>
+    <string name="home_split_apk_warning_message">Hûn paketek APK-ya qutî hilbijart ku (&lt;b&gt;.apks/.apkm/.xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; pêwisteya &lt;b&gt;APK-ya tam&lt;/b&gt; heye - pakketek qutî nikare ji bo wê sepanê çêkirinê were çêkirin</string>
+    <string name="home_split_apk_warning_badge">APK-ya tam pêwist e ku heta dawiyê were.</string>
+    <string name="home_split_apk_warning_pick_another">APK-ya din hilbijêre</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Sernişan</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ev guhertin piştgirîa ceribandiyê heye û dikare neyêbawer an jî bikêmam be</string>
+    <string name="morphe_experimental_app_version_dialog_title">Ma tu dixwazî ku eksperîmentî bikî? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ev guhertina &lt;b&gt;%s&lt;/b&gt; piştgirîa serdest ceribandiyê heye&lt;br/&gt;&lt;br/&gt;🔧 Tiştekî neyênbawer an kêmasî derdikeve, di nav de kêmasî ji bo vê guhertina sepanê têne serastkirin.</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versiyona nedastî</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ev APK nu jibo versîyona serpiraftî ne. Diriftîn dikare bi bandora kêmtir a seranser a sepanê bibe</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Belaş veşêre</string>
@@ -131,6 +144,9 @@
     <string name="home_outdated_patches_dialog_message">Dane mobîl aktîv e û nûvekirina dirûtinan qut kirin</string>
     <string name="home_outdated_patches_dialog_warning">Dirûtîna bi dirûtinên kevn dibe sedî sepanê tê birçîbûn</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Nûve bike &amp; dirûtîne</string>
+    <string name="home_low_disk_space_dialog_title">Cihê nadîtî</string>
+    <string name="home_low_disk_space_dialog_message">Tenê %1$.2f GB ji cîhê gavûdarê azad e. Çêkirina pêwisteya kêfa 1 GB cîhê gavûdarê bo ku bi rastî xebite</string>
+    <string name="home_low_disk_space_dialog_warning">Li pêşveçûn dikare di xeberê de çewisika \"pel nêzike\" an APK-ya derketî ya qels bibe.</string>
     <!-- Patch Options -->
     <string name="custom_color">Rengê standard</string>
     <string name="hex_color">Rengê hex</string>
@@ -139,6 +155,9 @@
     <string name="patch_option_enter_number">Hejmar biqîze</string>
     <string name="patch_option_enter_decimal">Desîmal biqîze</string>
     <string name="patch_option_pick_folder">Folder safînak</string>
+    <string name="patch_option_list_duplicate">Evîna vê ber bi hezaran e</string>
+    <string name="patch_option_list_empty">Qîymet nikare boçagî be</string>
+    <string name="patch_option_list_empty_state">Heta niha tiştek zêde nabe</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Îkon adaptî çêkîn</string>
     <string name="adaptive_icon_instructions">Hilbijarina wêne, hilbijartina reng a paşîn, û pêşbîniyê bi geştên pinch-to-zoom sererast bike</string>
@@ -167,6 +186,7 @@
     <string name="home_app_info_delete_item_database">Qeyda databazeyê</string>
     <string name="home_app_info_delete_item_patched_apk">APK fîla xelatandî</string>
     <string name="home_app_info_delete_item_original_apk">APK orîjînal a fîl</string>
+    <string name="home_app_info_delete_preservation_note">Epîna hilbijartinê û selegirên te ji bo nûçeyên paşê ve têne parastin</string>
     <string name="home_app_info_patches_name_default">Paqijkirin</string>
     <string name="home_app_info_patches_name_fallback">Bê nav</string>
     <string name="home_app_info_patches_replace_fail">Paqijkirinê ne serketin: %s</string>
@@ -265,6 +285,7 @@
     <string name="memory_usage">Baxê hevalê</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Kêm</string>
+    <string name="failed_to_execute_patch">Şeva pek dabeşin %s</string>
     <string name="patched_app_saved_toast">Sepeya patch kirî ji bo paşê hatiye parastin</string>
     <string name="patched_app_save_failed_toast">Hate parastina sepeya patch kirî</string>
     <string name="download_apk">Dosye APK-yê dakavêje</string>
@@ -293,6 +314,8 @@
     <string name="settings_appearance_background_space">Rewş</string>
     <string name="settings_appearance_background_shapes">Şekl</string>
     <string name="settings_appearance_background_snow">Berf</string>
+    <string name="settings_appearance_background_grid">Şebek</string>
+    <string name="settings_appearance_background_particles">Partîkel</string>
     <string name="settings_appearance_background_none">Tîya</string>
     <string name="settings_appearance_parallax_effect">Bandora Parallax</string>
     <string name="settings_appearance_parallax_effect_description">Serdestinê pêşbazinê de girtinê tê guherandin de hîrdikê alik bê yê ew zibu âniye</string>
@@ -330,12 +353,6 @@
     <string name="settings_advanced_updates_background_notifications">Ragahdaniyên nûvekirina paşînê</string>
     <string name="settings_advanced_updates_background_notifications_description">Ji bo melêstirkirina nûvekirinên paşîn baldarê de bibe û dema ku zafinan debedo bike.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Ji bo derketina nû, ragahdaniyên berbiçav bistîne, her çend sepan hatiye qewidkirin.</string>
-    <string name="notification_channel_manager_updates">Nûvekirinên Morphe</string>
-    <string name="notification_channel_manager_updates_description">Fêrî wey sûka versîyonên nû yên Morphe</string>
-    <string name="notification_channel_bundle_updates">Nûvekirinên kanala pêlavînê</string>
-    <string name="notification_channel_bundle_updates_description">Ragahdaniyên derbarê nirxê bendewarê pêlavînê</string>
-    <string name="notification_channel_fcm_updates">Îbarên nûvekirinê</string>
-    <string name="notification_channel_fcm_updates_description">Ragihînên lezgîn ên ji Morphe û veşartinên nû.  Ji aliyê din ve tê veşartin, dema ku sepan di nav de be.</string>
     <string name="settings_advanced_update_interval">Rêjeya kontrolê</string>
     <string name="settings_advanced_update_interval_dialog_title">Kontrolê ji bo nûvekirinê</string>
     <string name="settings_advanced_update_interval_hourly">Her kîsatekê</string>
@@ -352,6 +369,10 @@
     <string name="notification_permission_dialog_title">Îznayê ragahdaniyê</string>
     <string name="notification_permission_dialog_description">Morphe ji bo domandina ragihînan destûrê divê ku we ji ber ku nûvekirinên li ser were agahdar kirin.</string>
     <string name="notification_post_patch_dialog_title">Ma tu bistîyê ku dema ku nûvekirinan zafîn, ji bo te ragahdaniyê bike?</string>
+    <string name="notification_channel_fcm_updates">Nûvekarî notîfîkasyonan</string>
+    <string name="notification_channel_fcm_updates_description">Notîfîkasyonên derbarê vebûna Morphe ya din û bernameyên çêkirî</string>
+    <string name="notification_channel_patcher">Çêkirin</string>
+    <string name="notification_channel_patcher_description">Di dema ku Morphe bernameyekê di rewşê de çêdike</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Saziyên pispor</string>
     <string name="settings_advanced_expert_mode">Mode ekspert</string>
@@ -568,6 +589,9 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_manager_description">"Morphe projeyek eksperîmental a vebûyî ya vebûyî ye ku li ser afûre darêk nûjen û pêşkeftî ya sepanên Android ên populer e.
 
 Di navê vebûyî de, Morphe li ser bersivên civakê û beşdarbûna civakê ji bo rêzgîhaniya nûjeniyê serdike."</string>
+    <string name="credits">Kredît</string>
+    <string name="credits_current_development">Gelişîna heyî</string>
+    <string name="credits_prior_development">Gelişîna berê</string>
     <!-- Shared strings -->
     <string name="patches">Saxkirin</string>
     <string name="home">Mal</string>
@@ -584,6 +608,7 @@ Di navê vebûyî de, Morphe li ser bersivên civakê û beşdarbûna civakê ji
     <string name="close">Vediwere</string>
     <string name="clear">Paqij bike</string>
     <string name="delete">Firotin</string>
+    <string name="remove">Damezere</string>
     <string name="disable">Neçêbigîne</string>
     <string name="enable">Çêbigîne</string>
     <string name="loading">Bar kirin…</string>

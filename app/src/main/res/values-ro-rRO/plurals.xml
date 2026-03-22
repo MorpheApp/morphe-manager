@@ -3,12 +3,12 @@
     <plurals name="patch_count">
         <item quantity="one">%s hârtie</item>
         <item quantity="few">%s hârtie</item>
-        <item quantity="other">%s hârtie</item>
+        <item quantity="other">%s modificări </item>
     </plurals>
     <plurals name="option_count">
         <item quantity="one">%s opțiune de hârtie</item>
         <item quantity="few">%s opțiuni de hârtie</item>
-        <item quantity="other">%s opțiuni de hârtie</item>
+        <item quantity="other">%s opțiuni de modificare </item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s sursă</item>

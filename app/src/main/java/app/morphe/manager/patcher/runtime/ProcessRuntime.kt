@@ -34,10 +34,12 @@ import kotlin.math.max
 
 // Max memory value. Slightly higher values may work for some devices
 // but patching YT is the same time with both 1024 and 1600 memory.
-const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1536
+// If too much memory is requested then some devices become extremely slow
+// for unknown reason (using flash memory as swap file?).
+const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1280
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION = 1024
 const val PROCESS_RUNTIME_MEMORY_DEFAULT = 640
-const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 256
+const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 512
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 512
 const val PROCESS_RUNTIME_MEMORY_STEP = 128
 
@@ -134,7 +136,7 @@ class ProcessRuntime(
                 if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
                     if (memoryMB < PROCESS_RUNTIME_MEMORY_DEFAULT) {
                         // Don't save a value lower than the expected minimum.
-                        // Instead allow discovering the actually memory limit again next time.
+                        // Instead, allow discovering the actual memory limit again next time.
                         memoryMB = PROCESS_RUNTIME_MEMORY_DEFAULT
                     }
                     Log.i(tag, "Updating process memory limit setting to: $memoryMB")

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">แอปอื่น ๆ</string>
+    <string name="home_other_apps">แอปพลิเคชันอื่นๆ</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพทช์</string>
     <string name="home_no_patches_available">ไม่มีแพตซ์รองรับ</string>
-    <string name="home_default_source_disabled">ซอร์ซแพตซ์ของ Morphe ถูกปิดการใช้งานแล้ว 
-กรุณาเปิดซอร์ซแพตซ์ของ Morphe ที่  Patch sources sheet หรือเข้าไปตั้งค่าในโหมดเชี่ยวชาญ</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้?</string>
     <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าหลัก คุณสามารถกู้คืนมันได้ภายหลังโดยใช้ปุ่ม \'%1$s\' ที่ด้านล่างของรายการ</string>
     <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
@@ -57,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_prerelease_toggle">ใช้แพทช์ก่อนปล่อยอย่างทางการ</string>
     <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงเวอร์ชันใหม่ของแพทช์ทดลองก่อนอื่น</string>
+    <string name="sources_management_experimental_versions_toggle">ใช้เวอร์ชันทดลองของแอป</string>
+    <string name="sources_management_experimental_versions_toggle_description">แก้ไขเป้าหมายแอปเวอร์ชันทดลองหากมี</string>
+    <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
@@ -108,7 +109,6 @@
     <string name="home_select_apk_title">เลือกไฟล์ APK</string>
     <string name="home_select_any_apk_description">กดปุ่มด้านล่างเพื่อเลือกไฟล์ APK ของแอปพลิเคชันใด ๆ เพื่อการแพตซ์</string>
     <string name="home_invalid_apk">ไฟล์ APK ไม่ถูกต้อง</string>
-    <string name="home_no_patches_for_app">ไม่มีแพตซ์ที่รองรับกับแอปพลิเคชันนี้</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">โหมดผู้เชี่ยวชาญ</string>
     <string name="expert_mode_search">ค้นหาแพตซ์</string>
@@ -116,12 +116,23 @@
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
-    <string name="expert_mode_no_patches">ไม่มีแพตซ์ให้ใช้งาน</string>
+    <string name="expert_mode_universal_patches">แพตช์สากล</string>
     <string name="expert_mode_multiple_sources_warning_title">หลายแหล่งปรับปรุงถูกเลือก</string>
     <string name="expert_mode_multiple_sources_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
 
 คุณแน่ใจที่จะดำเนินต่อไปหรือไม่?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK ที่ยังไม่ได้รับการยืนยัน</string>
+    <string name="home_invalid_signature_message">APK ที่คุณเลือกสำหรับ &lt;b&gt;%s&lt;/b&gt; ไม่ตรงกับใบรับรองการลงนามที่คาดหวัง อาจถูกแก้ไขหรือมาจากแหล่งที่ไม่น่าเชื่อถือ</string>
+    <string name="home_invalid_signature_badge">APK นี้อาจไม่ใช่ไฟล์ต้นฉบับ</string>
+    <string name="home_split_apk_warning_title">ไม่รองรับ APK แบบแยกส่วน</string>
+    <string name="home_split_apk_warning_message">คุณเลือก APK แบบแยกส่วน (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) &lt;b&gt;%s&lt;/b&gt; ต้องการ &lt;b&gt;APK เต็ม&lt;/b&gt; - ไม่สามารถแพตช์ชุดแยกส่วนสำหรับแอปนี้ได้</string>
+    <string name="home_split_apk_warning_badge">จำเป็นต้องใช้ APK เต็มเพื่อดำเนินการต่อ</string>
+    <string name="home_split_apk_warning_pick_another">เลือก APK อื่น</string>
+    <string name="home_dialog_unsupported_version_experimental_label">ทดลอง</string>
+    <string name="home_dialog_unsupported_version_experimental_description">รุ่นนี้มีการรองรับแบบทดลองและอาจไม่เสถียรหรือไม่สมบูรณ์</string>
+    <string name="morphe_experimental_app_version_dialog_title">คุณต้องการทดลองไหม? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">รุ่นนี้ของ &lt;b&gt;%s&lt;/b&gt; มีการรองรับแบบทดลองในระยะเริ่มต้น&lt;br/&gt;&lt;br/&gt;🔧 คาดว่าแอปจะทำงานแปลกๆ หรือมีข้อผิดพลาดที่ไม่สามารถระบุได้ ในขณะที่แพตช์ถูกปรับปรุงสำหรับแอปเวอร์ชันนี้</string>
     <string name="home_dialog_unsupported_version_dialog_title">เวอร์ชันนี้ไม่รองรับ</string>
     <string name="home_dialog_unsupported_version_dialog_description">ไฟล์ APK นี้ไม่ใช่เวอร์ชันแอปที่แนะนำ หากดำเนินต่อไปอาจจะใช้งานไม่ได้</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">ดำเนินต่อไป</string>
@@ -135,6 +146,9 @@
     <string name="home_outdated_patches_dialog_message">ข้อมูลเคลื่อนที่มีการใช้งานและปรับปรุงถูกหยุด</string>
     <string name="home_outdated_patches_dialog_warning">อาจมีปัญหาในแอปพลิเคชันถ้าใช้ปรับปรุงที่เลิกใช้แล้ว</string>
     <string name="home_outdated_patches_dialog_update_and_patch">อัปเดตและปรับปรุง</string>
+    <string name="home_low_disk_space_dialog_title">พื้นที่ดิสก์เหลือน้อย</string>
+    <string name="home_low_disk_space_dialog_message">พื้นที่เก็บข้อมูลว่างเหลือเพียง %1$.2f GB การแพตช์ต้องใช้พื้นที่ว่างอย่างน้อย 1 GB เพื่อทำงานได้อย่างถูกต้อง</string>
+    <string name="home_low_disk_space_dialog_warning">การดำเนินการนี้อาจส่งผลให้เกิดข้อผิดพลาด \"ไม่พบไฟล์\" หรือ APK ที่สร้างขึ้นอาจเสียหาย</string>
     <!-- Patch Options -->
     <string name="custom_color">สีแบบกำหนดเอง</string>
     <string name="hex_color">สี hexadecimal</string>
@@ -143,6 +157,9 @@
     <string name="patch_option_enter_number">ป้อนตัวเลข</string>
     <string name="patch_option_enter_decimal">ป้อนตัวเลขทศนิยม</string>
     <string name="patch_option_pick_folder">เลือกโฟลเดอร์</string>
+    <string name="patch_option_list_duplicate">ค่านี้มีอยู่แล้ว</string>
+    <string name="patch_option_list_empty">ไม่สามารถเว้นว่างได้</string>
+    <string name="patch_option_list_empty_state">ยังไม่ได้เพิ่มค่าใดๆ</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">สร้างไอคอนปรับแต่ง</string>
     <string name="adaptive_icon_instructions">เลือกภาพพื้นหน้า, เลือกสีพื้นหลัง, และปรับตัวอย่างด้วยการซูมภาพเข้าออกแบบถ่างนิ้ว</string>
@@ -299,6 +316,8 @@
     <string name="settings_appearance_background_space">อวกอากาศ</string>
     <string name="settings_appearance_background_shapes">รูปแบบ</string>
     <string name="settings_appearance_background_snow">ไม่มีอะนิเวียน</string>
+    <string name="settings_appearance_background_grid">ตาราง</string>
+    <string name="settings_appearance_background_particles">อนุภาค</string>
     <string name="settings_appearance_background_none">ธง</string>
     <string name="settings_appearance_parallax_effect">เอฟเฟ็กต์พารัลแล็กซ์</string>
     <string name="settings_appearance_parallax_effect_description">การเปลี่ยนแปลงพื้นหลังที่เรียบร้อยเมื่อลดทอนอุปกรณ์</string>
@@ -336,12 +355,6 @@
     <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
     <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนข้อความทันทีสำหรับการปล่อยใหม่ ๆ แม้แต่เมื่อแอปปิดอยู่</string>
-    <string name="notification_channel_manager_updates">อัปเดต Morphe</string>
-    <string name="notification_channel_manager_updates_description">การแจ้งเตือนเกี่ยวกับเวอร์ชันใหม่ของ Morphe</string>
-    <string name="notification_channel_bundle_updates">การอัปเดตแหล่งข้อมูลแพทช์</string>
-    <string name="notification_channel_bundle_updates_description">การแจ้งเตือนเกี่ยวกับเวอร์ชันแหล่งที่มาใหม่</string>
-    <string name="notification_channel_fcm_updates">อัปเดตการแจ้งเตือน</string>
-    <string name="notification_channel_fcm_updates_description">รับการแจ้งเตือนแบบพุชทันทีสำหรับการเปิดตัว Morphe และแพตช์ใหม่ จัดส่งแม้ว่าแอปจะอยู่ในพื้นหลัง</string>
     <string name="settings_advanced_update_interval">ความถี่การตรวจสอบ</string>
     <string name="settings_advanced_update_interval_dialog_title">ตรวจสอบการอัปเดต</string>
     <string name="settings_advanced_update_interval_hourly">ทุกชั่วโมง</string>
@@ -358,6 +371,10 @@
     <string name="notification_permission_dialog_title">อนุญาตให้มีการแจ้งเตือน</string>
     <string name="notification_permission_dialog_description">Morphe ต้องการสิทธิ์การแจ้งเตือนเพื่อแจ้งให้คุณทราบเมื่อมีการอัปเดตพร้อมใช้งานในพื้นหลัง</string>
     <string name="notification_post_patch_dialog_title">คุณต้องการรับการแจ้งเตือนเมื่อมีอัปเดตที่พร้อมใช้งานหรือไม่?</string>
+    <string name="notification_channel_fcm_updates">การแจ้งเตือนอัปเดต</string>
+    <string name="notification_channel_fcm_updates_description">การแจ้งเตือนเกี่ยวกับการเปิดตัว Morphe และแพตช์ใหม่</string>
+    <string name="notification_channel_patcher">การแพตช์</string>
+    <string name="notification_channel_patcher_description">แสดงขณะที่ Morphe กำลังแพตช์แอปพลิเคชันในพื้นหลัง</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าแบบผู้เชี่ยวช์</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
@@ -573,6 +590,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
     <string name="settings_system_share_website_description">เลือก</string>
     <string name="settings_system_manager_description">"ไม่เลือก"</string>
+    <string name="credits">เครดิต</string>
+    <string name="credits_current_development">การพัฒนาปัจจุบัน</string>
+    <string name="credits_prior_development">การพัฒนาที่ผ่านมา</string>
     <!-- Shared strings -->
     <string name="patches">แพตช์</string>
     <string name="home">หน้าแรก</string>
@@ -589,6 +609,7 @@ morphe_header_custom_dark.png
     <string name="close">ปิด</string>
     <string name="clear">ล้าง</string>
     <string name="delete">ลบ</string>
+    <string name="remove">นำออก</string>
     <string name="disable">ปิดการใช้งาน</string>
     <string name="enable">อนุญาต</string>
     <string name="loading">กำลังโหลด…</string>

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings
 
 import android.annotation.SuppressLint
@@ -32,7 +37,7 @@ import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 /**
- * System tab content
+ * System tab content.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("LocalContextGetResourceValueCheck")

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,12 +13,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
+import app.morphe.manager.util.MANAGER_REPO_URL
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 
 /**
- * Changelog dialog
- * Displays the changelog for currently installed manager version
+ * Changelog dialog.
+ * Displays the changelog for currently installed manager version.
  */
 @Composable
 fun ChangelogDialog(
@@ -21,7 +27,7 @@ fun ChangelogDialog(
     updateViewModel: UpdateViewModel
 ) {
     val textColor = LocalDialogTextColor.current
-    val releaseInfo = updateViewModel.currentVersionReleaseInfo
+    val entry = updateViewModel.currentVersionChangelogEntry
 
     // Load current version changelog when dialog opens
     LaunchedEffect(Unit) {
@@ -33,14 +39,13 @@ fun ChangelogDialog(
         title = stringResource(R.string.changelog),
         footer = {
             MorpheDialogButtonColumn {
-                if (releaseInfo != null) {
-                    // Show changelog button in footer
-                    ChangelogButton(
-                        pageUrl = releaseInfo.pageUrl,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
+                ChangelogButton(
+                    pageUrl = entry?.version?.let {
+                        val tag = if (it.startsWith("v")) it else "v$it"
+                        "$MANAGER_REPO_URL/releases/tag/$tag"
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
                 MorpheDialogButton(
                     text = stringResource(android.R.string.ok),
                     onClick = onDismiss,
@@ -49,13 +54,11 @@ fun ChangelogDialog(
             }
         }
     ) {
-        if (releaseInfo == null) {
-            // Shimmer loading state with header and content
+        if (entry == null) {
             ChangelogSectionLoading()
         } else {
-            // Changelog content
-            ChangelogSection(
-                asset = releaseInfo,
+            ChangelogEntrySection(
+                entry = entry,
                 headerIcon = Icons.Outlined.NewReleases,
                 textColor = textColor
             )

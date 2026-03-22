@@ -4,7 +4,6 @@
     <string name="home_other_apps">Ostale aplikacije</string>
     <string name="home_not_patched_yet">Još nije patchano</string>
     <string name="home_no_patches_available">Nema dostupnih patcheva</string>
-    <string name="home_default_source_disabled">Izvor Morphe patcha je onemogućen. Molimo omogućite ga u listi Izvora patcheva ili koristite Napredni način rada.</string>
     <string name="home_app_hide_title">Sakriti ovu aplikaciju?</string>
     <string name="home_app_hide_message">Ova će aplikacija biti skrivena s početnog zaslona. Kasnije je možete vratiti pomoću tipke \'%1$s\' na dnu popisa</string>
     <string name="home_app_will_be_hidden">Ova će aplikacija biti skrivena</string>
@@ -14,7 +13,11 @@
     <string name="home_app_hidden_apps_hint">Dodirnite aplikaciju da biste je ponovno prikazali na popisu</string>
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">Dopuštenje za instalaciju aplikacije mora se dati unaprijed kako bi se izbjegla greška u sustavu Android 11 koja će negativno utjecati na korisničko iskustvo</string>
+    <string name="deep_link_add_source_title">Dodajte izvor</string>
+    <string name="deep_link_add_source_message">Želite li dodati ovaj izvor patcha u Morphe?</string>
+    <string name="deep_link_add_source_warning">Dodajte samo izvore iz izvora kojima vjerujete</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
     <string name="home_update_error">Ažuriranje nije uspjelo</string>
     <string name="home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
@@ -52,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
     <string name="sources_management_prerelease_toggle">Koristi predizdanja patcheva</string>
     <string name="sources_management_prerelease_toggle_description">Primite rani pristup novoj verziji eksperimentalnih patcheva</string>
+    <string name="sources_management_experimental_versions_toggle">Koristi eksperimentalne verzije aplikacija</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patchaj eksperimentalne ciljeve aplikacije ako su dostupni</string>
+    <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži naziv</string>
     <string name="sources_dialog_rename">Preimenuj izvor patcha</string>
@@ -103,7 +109,6 @@
     <string name="home_select_apk_title">Odaberite aplikaciju</string>
     <string name="home_select_any_apk_description">Dodirnite tipku ispod za odabir aplikacije bilo koje aplikacije za umetanje patcha</string>
     <string name="home_invalid_apk">Nevažeća aplikacija</string>
-    <string name="home_no_patches_for_app">Nema dostupnih patcheva za ovu aplikaciju</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Napredni način</string>
     <string name="expert_mode_search">Pretraživanje patcheva</string>
@@ -111,12 +116,23 @@
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih patcheva</string>
-    <string name="expert_mode_no_patches">Nema dostupnih patcheva</string>
+    <string name="expert_mode_universal_patches">Univerzalni patchevi</string>
     <string name="expert_mode_multiple_sources_warning_title">Odabrano više izvora patcheva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Odabrali ste patcheve iz više izvora. To može uzrokovati probleme s kompatibilnošću ili neočekivano ponašanje.
 
 Jeste li sigurni da želite nastaviti?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Nepotvrđena aplikacija</string>
+    <string name="home_invalid_signature_message">Aplikacija koju ste odabrali za&lt;b&gt;%s&lt;/b&gt; ne odgovara očekivanom certifikatu za potpis. Moguće je da je modificirana ili da potječe iz nepouzdanog izvora.</string>
+    <string name="home_invalid_signature_badge">Ovaj aplikacija možda nije original</string>
+    <string name="home_split_apk_warning_title">Split APK nisu podržani</string>
+    <string name="home_split_apk_warning_message">Odabrali ste APK skup  (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; koji zahtijeva &lt;b&gt;cijeli APK&lt;/b&gt; -podijeljeni paketi ne mogu se patchati za ovu aplikaciju</string>
+    <string name="home_split_apk_warning_badge">Za nastavak je potreban cijela APK</string>
+    <string name="home_split_apk_warning_pick_another">Odaberite drugu aplikaciju</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Eksperimentalno</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ova verzija ima eksperimentalnu podršku i možda je nestabilna ili nepotpuna</string>
+    <string name="morphe_experimental_app_version_dialog_title">Želite li eksperimentirati? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ova verzija &lt;b&gt;%s&lt;/b&gt; has early experimental support&lt;br/&gt;&lt;br/&gt;🔧 Očekujte neobično ponašanje aplikacije ili neidentificirane greške dok se patchevi dorađuju za ovu verziju aplikacije</string>
     <string name="home_dialog_unsupported_version_dialog_title">Nepodržana verzija</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ova aplikacija nije preporučena verzija. Nastavak može rezultirati nefunkcionalnom aplikacijom</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Nastavi svejedno</string>
@@ -130,6 +146,9 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="home_outdated_patches_dialog_message">Mobilni podaci su aktivni i ažuriranja patcheva su onemogućena</string>
     <string name="home_outdated_patches_dialog_warning">Korištenje zastarjelih patcheva može dovesti do neupotrebljive aplikacije</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ažuriraj &amp; patchaj</string>
+    <string name="home_low_disk_space_dialog_title">Malo prostora na disku</string>
+    <string name="home_low_disk_space_dialog_message">Dostupno je samo %1$.2f GB slobodnog prostora. Za ispravan rad patchanja potrebno je najmanje 1 GB slobodnog prostora.</string>
+    <string name="home_low_disk_space_dialog_warning">Nastavak može rezultirati greškom \"datoteka nije pronađena\" ili oštećenom izlaznom aplikacijom</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Hex boja</string>
@@ -138,6 +157,9 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="patch_option_enter_number">Unesite broj</string>
     <string name="patch_option_enter_decimal">Unesite decimalu</string>
     <string name="patch_option_pick_folder">Odaberite mapu</string>
+    <string name="patch_option_list_duplicate">Ova vrijednost već postoji</string>
+    <string name="patch_option_list_empty">Vrijednost ne može biti prazna</string>
+    <string name="patch_option_list_empty_state">Još nema dodanih vrijednosti</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Stvori adaptivnu ikonu</string>
     <string name="adaptive_icon_instructions">Odaberite sliku u prvom planu, odaberite boju pozadine i prilagodite pregled gestama zumiranja štipanjem prstiju</string>
@@ -212,6 +234,7 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite tipku ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite tipku ispod da učitate</string>
     <string name="patcher_storage_permission_dialog_title">Nije moguće pristupiti putanji pohrane</string>
+    <string name="patcher_storage_permission_description_api30">Jedna ili više opcija patcha upućuju na putanje koje Morphe ne može pročitati. Omogućite pristup pohrani i dodirnite tipku, nakon čega će se patchanje automatski pokrenuti.</string>
     <string name="patcher_storage_permission_description_legacy">Jedna ili više opcija zakrpe upućuju na putanje kojima se ne može pristupiti. Ažurirajte putanje u opcijama zakrpe i pokušajte ponovno.</string>
     <string name="patcher_storage_permission_grant">Odobri dopuštenje za pohranu</string>
     <string name="patcher_storage_permission_denied_warning">Dozvola za pohranu je odbijena. Dajte dopuštenje za korištenje ove putanje ili premjestite datoteke u privatni direktorij aplikacije.</string>
@@ -293,6 +316,8 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_background_space">Svemir</string>
     <string name="settings_appearance_background_shapes">Oblici</string>
     <string name="settings_appearance_background_snow">Snijeg</string>
+    <string name="settings_appearance_background_grid">Mreža</string>
+    <string name="settings_appearance_background_particles">Čestice</string>
     <string name="settings_appearance_background_none">Ništa</string>
     <string name="settings_appearance_parallax_effect">Efekt paralakse</string>
     <string name="settings_appearance_parallax_effect_description"> Glatko pomicanje pozadine pri naginjanju uređaja</string>
@@ -323,13 +348,13 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Promijeni ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ažuriranja</string>
+    <string name="settings_advanced_updates_use_prereleases">Koristi predizdanja Morphe aplikacije</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Ostvarite rani pristup novim značajkama Morphea. Da biste dobili predizdanja patcheva, omogućite prečac za predizdanje u svakom izvoru patcha zasebno</string>
     <string name="settings_advanced_updates_allow_metered">Ažuriraj mobilnim podacima</string>
+    <string name="settings_advanced_updates_allow_metered_description">Dopustite preuzimanje izvora patcha i ažuriranja aplikacije putem mobilnih podataka</string>
     <string name="settings_advanced_updates_background_notifications">Obavijesti o ažuriranjima u pozadini</string>
     <string name="settings_advanced_updates_background_notifications_description">Povremeno provjeravaj ažuriranja u pozadini i obavještavaj kada su dostupna</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Primajte trenutne push obavijesti za nove verzije, čak i kada je aplikacija zatvorena</string>
-    <string name="notification_channel_bundle_updates">Ažuriranja izvora patch-a</string>
-    <string name="notification_channel_bundle_updates_description">Obavještavanja o novim verzijama izvora</string>
-    <string name="notification_channel_fcm_updates">Ažuriraj opomnike</string>
     <string name="settings_advanced_update_interval">Povremeno provjeravanje</string>
     <string name="settings_advanced_update_interval_dialog_title">Provjeri za ažuriranja</string>
     <string name="settings_advanced_update_interval_hourly">Svaki sat</string>
@@ -339,10 +364,17 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Učestalost provjere u pozadini</string>
     <string name="settings_advanced_update_interval_battery_warning">Provjere u pozadini možda neće pouzdano funkcionirati na nekim uređajima. Proizvođači poput Xiaomija, Huaweija, Samsunga i OnePlusa često agresivno ograničavaju pozadinske procese kako bi uštedjeli bateriju.</string>
     <!-- Notification content -->
+    <string name="notification_manager_update_title">Dostupno ažuriranje aplikacije Morphe</string>
     <string name="notification_bundle_update_title">Nova patcha dostupna</string>
     <string name="notification_update_text">Inačica %1$s je spremna za preuzimanje</string>
+    <string name="notification_bundle_update_text_unversioned">Dodirnite za otvaranje Morphea i ažuriranje</string>
     <string name="notification_permission_dialog_title">Dozvoli obavijesti</string>
+    <string name="notification_permission_dialog_description">Morphe treba dopuštenje za obavijesti kako bi vas upozorio kada su ažuriranja dostupna u pozadini</string>
     <string name="notification_post_patch_dialog_title">Želite li biti obavješteni kada su dostupni ažuriranja?</string>
+    <string name="notification_channel_fcm_updates">Obavijesti o ažuriranju</string>
+    <string name="notification_channel_fcm_updates_description">Obavijesti o novim izdanjima Morphea i patcheva</string>
+    <string name="notification_channel_patcher">Patchanje</string>
+    <string name="notification_channel_patcher_description">Prikazuje se dok Morphe patcha aplikaciju u pozadini</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Stručne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
@@ -359,9 +391,11 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavite GitHub osobni pristupni token</string>
     <string name="settings_advanced_github_pat_dialog_description">Postavite GitHub Personal Access Token kako biste mogli dodavati zahtjeve za povlačenjem kao vanjske izvore. Izradite PAT s opsegom public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Uključi u postavke izvoza</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ovaj PAT izvezenim postavkama Morphea</string>
     <string name="settings_advanced_github_pat_export_warning">Ne dijelite svoj PAT. Ako ga uključite u postavke izvoza, držite tu datoteku privatnom jer sadrži token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opcije patchanja</string>
+    <string name="settings_advanced_patch_options_youtube_description">Tema, brendiranje i opcije zaglavlja</string>
     <string name="settings_advanced_patch_options_restart_message">Promjena opcija patchanja zahtijeva ponovno instaliranje patcha da bi imalo efekta</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">U naprednom načinu opcije patchanja će biti dostupne tijekom procesa patchanja</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -496,6 +530,14 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_show_password_field">Pokaži lozinku</string>
     <string name="settings_system_hide_password_field">Sakrij lozinku</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
+    <string name="settings_system_import_manager_settings">Uvezi Morphe postavke</string>
+    <string name="settings_system_import_manager_settings_description">Vrati Morphe postavke iz JSON datoteke</string>
+    <string name="settings_system_import_manager_settings_fail">Uvoz postavki Morphea nije uspio: %s</string>
+    <string name="settings_system_import_manager_settings_success">Morphe postavke uvezene</string>
+    <string name="settings_system_export_manager_settings">Izvezi Morphe postavke</string>
+    <string name="settings_system_export_manager_settings_description">Spremi Morphe postavke u JSON datoteku</string>
+    <string name="settings_system_export_manager_settings_fail">Izvoz postavki Morphea nije uspio: %s</string>
+    <string name="settings_system_export_manager_settings_success">Morphe postavke izvezene</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Otklanjanje grešaka</string>
     <string name="settings_system_export_debug_logs">Izvoz zapisnika o otklanjanju pogrešaka</string>
@@ -549,6 +591,9 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_manager_description">"Morphe je eksperimentalni projekt otvorenog koda usmjeren na stvaranje modernog, pojednostavljenog patchanja popularnih Android aplikacija.
 
 Otvorenog koda svoga izvora, Morphe napreduje na povratnim informacijama i doprinosima zajednice kako bi potaknuo buduće inovacije."</string>
+    <string name="credits">Zasluge</string>
+    <string name="credits_current_development">Trenutni razvoj</string>
+    <string name="credits_prior_development">Prijašnji razvoj</string>
     <!-- Shared strings -->
     <string name="patches">Patchevi</string>
     <string name="home">Početna</string>
@@ -565,6 +610,7 @@ Otvorenog koda svoga izvora, Morphe napreduje na povratnim informacijama i dopri
     <string name="close">Zatvori</string>
     <string name="clear">Izbriši</string>
     <string name="delete">Izbriši</string>
+    <string name="remove">Ukloni</string>
     <string name="disable">Onemogući</string>
     <string name="enable">Omogući</string>
     <string name="loading">Samo trenutak…</string>

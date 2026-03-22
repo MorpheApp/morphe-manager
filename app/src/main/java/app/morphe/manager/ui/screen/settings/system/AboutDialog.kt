@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.appcompat.content.res.AppCompatResources
@@ -5,6 +10,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.People
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,22 +34,36 @@ import app.morphe.manager.ui.viewmodel.AboutViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 /**
- * About dialog
- * Shows app icon, version, description, and social links
+ * About dialog.
+ * Shows app icon, version, description, social links, and credits button.
  */
 @Composable
 fun AboutDialog(onDismiss: () -> Unit) {
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
 
+    val showCreditsDialog = remember { mutableStateOf(false) }
+
+    if (showCreditsDialog.value) {
+        CreditsDialog(onDismiss = { showCreditsDialog.value = false })
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         footer = {
-            MorpheDialogOutlinedButton(
-                text = stringResource(R.string.close),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
+            MorpheDialogButtonColumn {
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.credits),
+                    onClick = { showCreditsDialog.value = true },
+                    icon = Icons.Outlined.People,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
         val textColor = LocalDialogTextColor.current
@@ -137,8 +158,8 @@ fun AboutDialog(onDismiss: () -> Unit) {
 }
 
 /**
- * Social link button
- * Styled button for opening social media links
+ * Social link button.
+ * Styled button for opening social media links.
  */
 @Composable
 private fun SocialIconButton(

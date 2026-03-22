@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import android.annotation.SuppressLint
@@ -39,7 +44,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 /**
- * Installer section
+ * Installer section.
  */
 @Composable
 fun InstallerSection(
@@ -132,7 +137,7 @@ fun InstallerSection(
 }
 
 /**
- * Container for installer selection dialog
+ * Container for installer selection dialog.
  */
 @Composable
 fun InstallerSelectionDialogContainer(
@@ -176,7 +181,7 @@ fun InstallerSelectionDialogContainer(
 }
 
 /**
- * Installer settings item
+ * Installer settings item.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
@@ -217,7 +222,7 @@ private fun InstallerSettingsItem(
 }
 
 /**
- * Dialog for selecting installer
+ * Dialog for selecting installer.
  */
 @Composable
 fun InstallerSelectionDialog(
@@ -312,7 +317,7 @@ fun InstallerSelectionDialog(
 }
 
 /**
- * Single installer option item in dialog
+ * Single installer option item in dialog.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
@@ -408,7 +413,7 @@ fun InstallerOptionItem(
 }
 
 /**
- * Installer icon preview component
+ * Installer icon preview component.
  */
 @Composable
 fun InstallerIconPreview(
@@ -456,7 +461,7 @@ fun InstallerIconPreview(
 }
 
 /**
- * Helper function to ensure valid selection and remove duplicates
+ * Helper function to ensure valid selection and remove duplicates.
  */
 fun ensureValidEntries(
     entries: List<InstallerManager.Entry>,
@@ -492,7 +497,7 @@ fun ensureValidEntries(
 }
 
 /**
- * Helper function to compare installer tokens
+ * Helper function to compare installer tokens.
  */
 fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?): Boolean = when {
     a === b -> true
@@ -662,7 +667,7 @@ fun PrePatchInstallerDialog(
 }
 
 /**
- * Clickable card representing an installer option in the pre-patch dialog
+ * Clickable card representing an installer option in the pre-patch dialog.
  */
 @Composable
 private fun InstallerOptionCard(

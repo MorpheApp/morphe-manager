@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -39,7 +44,7 @@ import kotlinx.serialization.json.*
 import org.koin.compose.koinInject
 
 /**
- * Dialog for managing patch selections
+ * Dialog for managing patch selections.
  */
 @Composable
 fun PatchSelectionManagementDialog(
@@ -162,7 +167,7 @@ fun PatchSelectionManagementDialog(
 }
 
 /**
- * Main dialog content
+ * Main dialog content.
  */
 @Composable
 private fun PatchSelectionManagementDialogContent(
@@ -217,7 +222,7 @@ private fun PatchSelectionManagementDialogContent(
 }
 
 /**
- * List of selections
+ * List of selections.
  */
 @Composable
 private fun SelectionList(
@@ -284,7 +289,7 @@ private fun SelectionList(
 }
 
 /**
- * Individual package selection item
+ * Individual package selection item.
  */
 @Composable
 private fun PackageSelectionItem(
@@ -415,7 +420,7 @@ private fun PackageSelectionItem(
 }
 
 /**
- * Individual bundle selection item
+ * Individual bundle selection item.
  */
 @Composable
 private fun BundleSelectionItem(
@@ -551,7 +556,7 @@ private fun BundleSelectionItem(
 }
 
 /**
- * Confirmation dialog for resetting all selections
+ * Confirmation dialog for resetting all selections.
  */
 @Composable
 private fun ConfirmResetAllDialog(
@@ -638,7 +643,7 @@ private fun ConfirmResetAllDialog(
 }
 
 /**
- * Confirmation dialog for resetting package selections
+ * Confirmation dialog for resetting package selections.
  */
 @Composable
 private fun ConfirmResetPackageDialog(
@@ -728,7 +733,7 @@ private fun ConfirmResetPackageDialog(
 }
 
 /**
- * Confirmation dialog for resetting package-bundle selections
+ * Confirmation dialog for resetting package-bundle selections.
  */
 @Composable
 private fun ConfirmResetPackageBundleDialog(
@@ -807,7 +812,7 @@ private fun ConfirmResetPackageBundleDialog(
 }
 
 /**
- * Reset target sealed class for dialog state
+ * Reset target sealed class for dialog state.
  */
 private sealed interface ResetTarget {
     data class Package(val packageName: String) : ResetTarget
@@ -823,7 +828,7 @@ private data class PatchDetailsTarget(
 )
 
 /**
- * Dialog showing detailed patch selections and options
+ * Dialog showing detailed patch selections and options.
  *
  * @param packageName Original package name for loading data from database
  * @param bundleUid Bundle identifier
@@ -1000,7 +1005,7 @@ private fun PatchDetailsDialog(
 }
 
 /**
- * Parse JSON string value to actual value type
+ * Parse JSON string value to actual value type.
  */
 private fun parseJsonValue(jsonString: String): Any? {
     return try {
@@ -1050,7 +1055,7 @@ private fun parseJsonValue(jsonString: String): Any? {
     }
 }
 /**
- * Format option value for display
+ * Format option value for display.
  */
 private fun formatOptionValue(value: Any?): String {
     return when (value) {

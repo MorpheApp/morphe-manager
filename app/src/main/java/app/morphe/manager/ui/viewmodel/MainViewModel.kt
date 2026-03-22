@@ -11,11 +11,11 @@ class MainViewModel(
 ) : ViewModel() {
 
     /**
-     * Set by [app.morphe.manager.MainActivity.handleUpdateCheckIntent] when the user taps
-     * an FCM update notification. HomeScreen observes this via LaunchedEffect, triggers
-     * updateCheck(), then resets the flag back to false.
+     * Set by [app.morphe.manager.MainActivity.onNewIntent] when the user taps an FCM
+     * update notification. HomeScreen observes this via LaunchedEffect, triggers
+     * an update check, then resets the flag back to false.
      */
-    var triggerUpdateCheckOnResume by mutableStateOf(false)
+    var pendingUpdateCheck by mutableStateOf(false)
 
     /**
      * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the app is opened

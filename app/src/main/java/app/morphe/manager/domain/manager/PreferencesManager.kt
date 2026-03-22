@@ -37,10 +37,12 @@ class PreferencesManager(
 
     // Advanced tab
     val useManagerPrereleases = booleanPreference("manager_prereleases", false)
-    val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
 
     /** UIDs of bundles that have prereleases (dev branch) enabled. Stored as strings. */
     val bundlePrereleasesEnabled = stringSetPreference("bundle_prereleases_enabled", emptySet())
+
+    /** UIDs of bundles for which experimental app versions are preferred as the recommended target. */
+    val bundleExperimentalVersionsEnabled = stringSetPreference("bundle_experimental_versions_enabled", emptySet())
 
     /**  Whether to send Android system notifications when updates are available in the background. */
     val backgroundUpdateNotifications = booleanPreference("background_update_notifications", false)
@@ -108,9 +110,11 @@ class PreferencesManager(
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
-                useManagerPrereleases.update(true)
-                usePatchesPrereleases.update(true)
-                prereleaseAutoEnabled.update(true)
+                edit {
+                    useManagerPrereleases.value = true
+                    bundlePrereleasesEnabled += "0"
+                    prereleaseAutoEnabled.value = true
+                }
             }
         }
     }
@@ -144,7 +148,8 @@ class PreferencesManager(
         val firstLaunch: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
-        val usePatchesPrereleases: Boolean? = null,
+        val bundlePrereleasesEnabled: Set<String>? = null,
+        val bundleExperimentalVersionsEnabled: Set<String>? = null,
         val disablePatchVersionCompatCheck: Boolean? = null,
         val disableSelectionWarning: Boolean? = null,
         val disableUniversalPatchCheck: Boolean? = null,
@@ -187,7 +192,8 @@ class PreferencesManager(
         keystorePass = keystorePass.get(),
         firstLaunch = firstLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
-        usePatchesPrereleases = usePatchesPrereleases.get(),
+        bundlePrereleasesEnabled = bundlePrereleasesEnabled.get(),
+        bundleExperimentalVersionsEnabled = bundleExperimentalVersionsEnabled.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         backgroundType = backgroundType.get(),
         useExpertMode = useExpertMode.get(),
@@ -218,7 +224,8 @@ class PreferencesManager(
         snapshot.keystorePass?.let { keystorePass.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
-        snapshot.usePatchesPrereleases?.let { usePatchesPrereleases.value = it }
+        snapshot.bundlePrereleasesEnabled?.let { bundlePrereleasesEnabled.value = it }
+        snapshot.bundleExperimentalVersionsEnabled?.let { bundleExperimentalVersionsEnabled.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }

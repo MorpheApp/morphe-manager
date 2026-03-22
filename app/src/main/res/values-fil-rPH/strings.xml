@@ -4,7 +4,6 @@
     <string name="home_other_apps">Iba pang mga aplikasyon</string>
     <string name="home_not_patched_yet">Hindi pa na-patch</string>
     <string name="home_no_patches_available">Walang patch na magagamit</string>
-    <string name="home_default_source_disabled">Nakapatay ang mapagkukunan ng Morphe patch. Mangyaring paganahin ito sa Patch sources sheet o gumamit ng Expert mode</string>
     <string name="home_app_hide_title">Itago ang aplikasyong ito?</string>
     <string name="home_app_hide_message">Itatago ang aplikasyong ito mula sa home screen. Maaari mong buksan mamaya gamit ang \'%1$s\' na button sa ibaba ng listahan</string>
     <string name="home_app_will_be_hidden">Itatago ang aplikasyong ito</string>
@@ -56,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
     <string name="sources_management_prerelease_toggle">Gumamit ng mga pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Tumanggap ng maagang pag-access sa mga bagong experimental na bersyon ng patch</string>
+    <string name="sources_management_experimental_versions_toggle">Gamitin ang mga eksperimental na bersyon ng app</string>
+    <string name="sources_management_experimental_versions_toggle_description">Kumpunihin ang mga eksperimental na target ng app kung available</string>
+    <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Pangalan na ipapakita</string>
     <string name="sources_dialog_rename">Baguhin ang mapagkukunan ng patch</string>
@@ -107,7 +109,6 @@
     <string name="home_select_apk_title">Piliin ang APK</string>
     <string name="home_select_any_apk_description">Pindutin ang button sa ibaba upang pillin ang APK file ng anumang aplikasyon para sa pagpa-patch</string>
     <string name="home_invalid_apk">Imbalido na APK file</string>
-    <string name="home_no_patches_for_app">Walang patch na magagamit para sa aplikasyong ito</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_search">Maghanap ng mga patch</string>
@@ -115,12 +116,23 @@
     <string name="expert_mode_disable_all">Patayin lahat</string>
     <string name="expert_mode_enable_all">Paganahin lahat</string>
     <string name="expert_mode_no_results">Walang nakita na patch</string>
-    <string name="expert_mode_no_patches">Walang magagamit na patch</string>
+    <string name="expert_mode_universal_patches">Mga unibersal na patch</string>
     <string name="expert_mode_multiple_sources_warning_title">Maramihang mga mapagkukunang patch ang napili</string>
     <string name="expert_mode_multiple_sources_warning_message">"Pinili mo ang mga patch mula sa maramihang mapagkukunang patch. Maaari itong magdulot ng isyu sa kompatibilidad o hindi inaasahang kilos.
 
 Nais mo bang magpatuloy?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Hindi beripikadong APK</string>
+    <string name="home_invalid_signature_message">Ang APK na pinili mo para sa &lt;b&gt;%s&lt;/b&gt; ay hindi tumutugma sa inaasahang certificate ng paglagda. Maaaring ito ay binago o mula sa hindi pinagkakatiwalaang pinagmulan</string>
+    <string name="home_invalid_signature_badge">Maaaring hindi ang orihinal ang APK na ito</string>
+    <string name="home_split_apk_warning_title">Hindi suportado ang Split APK</string>
+    <string name="home_split_apk_warning_message">Pinili mo ang split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; ay nangangailangan ng &lt;b&gt;full APK&lt;/b&gt; - hindi maaaring i-patch ang mga split bundle para sa app na ito</string>
+    <string name="home_split_apk_warning_badge">Kailangan ng full APK para magpatuloy</string>
+    <string name="home_split_apk_warning_pick_another">Pumili ng ibang APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Pang-eksperimentong</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ang bersyong ito ay may pang-eksperimentong suporta at maaaring hindi matatag o hindi kumpleto</string>
+    <string name="morphe_experimental_app_version_dialog_title">Gusto mo bang mag-eksperimento? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ang bersyong ito ng &lt;b&gt;%s&lt;/b&gt; ay may maagang pang-eksperimentong suporta&lt;br/&gt;&lt;br/&gt;🔧 Asahan ang mga kakaibang pag-uugali ng app o hindi natukoy na mga bug habang ang mga patch ay pinino para sa bersyong ito ng app</string>
     <string name="home_dialog_unsupported_version_dialog_title">Hindi suportadong bersyon</string>
     <string name="home_dialog_unsupported_version_dialog_description">Hindi inirerekomenda ang bersyon ng APK na ito. Maaaring maging resulta sa hindi gumaganang aplikasyon kung magpatuloy.</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Magpatuloy pa rin</string>
@@ -134,6 +146,9 @@ Nais mo bang magpatuloy?"</string>
     <string name="home_outdated_patches_dialog_message">Mobile data ay aktibo at ang patch updates ay hindi pinapayagan</string>
     <string name="home_outdated_patches_dialog_warning">Ang pag-patch gamit ang mga luma na patch ay maaaring magresulta sa isang nasirang app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
+    <string name="home_low_disk_space_dialog_title">Mababang espasyo sa disk</string>
+    <string name="home_low_disk_space_dialog_message">Mayroon lamang %1$.2f GB ng libreng imbakan na available. Ang pag-patch ay nangangailangan ng hindi bababa sa 1 GB ng libreng espasyo upang gumana nang tama</string>
+    <string name="home_low_disk_space_dialog_warning">Ang pagpapatuloy ay maaaring magresulta sa isang error na \"file not found\" o isang corrupt na output APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Pasadyang kulay</string>
     <string name="hex_color">Kulay ng Hex</string>
@@ -142,6 +157,9 @@ Nais mo bang magpatuloy?"</string>
     <string name="patch_option_enter_number">Ilagay ang numero</string>
     <string name="patch_option_enter_decimal">Ilagay ang decimal</string>
     <string name="patch_option_pick_folder">Piliin ang folder</string>
+    <string name="patch_option_list_duplicate">May umiiral na ang halagang ito</string>
+    <string name="patch_option_list_empty">Hindi maaaring walang laman ang halaga</string>
+    <string name="patch_option_list_empty_state">Walang idinagdag na halaga pa</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Gumawa ng iniangkop na icon</string>
     <string name="adaptive_icon_instructions">Piliin ang isang foreground na larawan, piliin ang likurang kulay, at i-adjust ang preview gamit ang pinch-to-zoom na mga gesture</string>
@@ -298,6 +316,8 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_appearance_background_space">Puwang</string>
     <string name="settings_appearance_background_shapes">Mga hugis</string>
     <string name="settings_appearance_background_snow">Niyebe</string>
+    <string name="settings_appearance_background_grid">Griyá</string>
+    <string name="settings_appearance_background_particles">Partikulo</string>
     <string name="settings_appearance_background_none">Wala</string>
     <string name="settings_appearance_parallax_effect">Epekto ng parallax</string>
     <string name="settings_appearance_parallax_effect_description">Maayos na paglilipat ng background kapag tinatagilid ang device</string>
@@ -335,12 +355,6 @@ Nais mo bang magpatuloy?"</string>
     <string name="settings_advanced_updates_background_notifications">Mga notipikasyon sa pag-update sa background</string>
     <string name="settings_advanced_updates_background_notifications_description">Paminsan-minsang suriin ang mga update sa background at abisuhan kung magagamit</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Tumanggap ng agarang abiso para sa bagong release, kahit sarado ang aplikasyon</string>
-    <string name="notification_channel_manager_updates">Mga update ng Morphe</string>
-    <string name="notification_channel_manager_updates_description">Mga abiso tungkol sa mga bagong bersyon ng Morphe</string>
-    <string name="notification_channel_bundle_updates">Mga update ng mapagkukunang patch</string>
-    <string name="notification_channel_bundle_updates_description">Mga notipikasyon tungkol sa bagong bersyon ng mapagkukunang patch</string>
-    <string name="notification_channel_fcm_updates">Mga update alert</string>
-    <string name="notification_channel_fcm_updates_description">Instant push notification para sa mga bagong Morphe at patch release. Ipinapadala kahit nasa background ang app</string>
     <string name="settings_advanced_update_interval">Suriin ang prikwensiya</string>
     <string name="settings_advanced_update_interval_dialog_title">Suriin ang mga update</string>
     <string name="settings_advanced_update_interval_hourly">Minsan sa isang oras</string>
@@ -357,6 +371,10 @@ Nais mo bang magpatuloy?"</string>
     <string name="notification_permission_dialog_title">Payagan ang mga notipikasyon</string>
     <string name="notification_permission_dialog_description">Kailangan ng Morphe ang pahintulot sa notipikasyon upang abisuhan ka kapag may mga update na magagamit sa background</string>
     <string name="notification_post_patch_dialog_title">Nais mo bang abisuhan ka kung may magagamit na mga update?</string>
+    <string name="notification_channel_fcm_updates">I-update ang mga notipikasyon</string>
+    <string name="notification_channel_fcm_updates_description">Mga notipikasyon tungkol sa mga bagong Morphe at paglabas ng patch</string>
+    <string name="notification_channel_patcher">Nagpa-patch</string>
+    <string name="notification_channel_patcher_description">Ipinapakita habang ina-patch ng Morphe ang isang app sa background</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
     <string name="settings_advanced_expert_mode">Expert mode</string>
@@ -573,6 +591,9 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_manager_description">"Ang Morphe ay isang pang-eksperimentong open-source na proyekto na nakatuon sa paggawa ng moderno, naka-streamline na pag-patch ng mga sikat na Android aplikasyon
 
 Open-source sa core nito, ang Morphe ay umuunlad sa katugunan ng komunidad at mga kontribusyon upang himukin ang pagbabago sa hinaharap"</string>
+    <string name="credits">Kredito</string>
+    <string name="credits_current_development">Kasalukuyang pag-unlad</string>
+    <string name="credits_prior_development">Naunang pag-unlad</string>
     <!-- Shared strings -->
     <string name="patches">Mga patch</string>
     <string name="home">Bahay</string>
@@ -589,6 +610,7 @@ Open-source sa core nito, ang Morphe ay umuunlad sa katugunan ng komunidad at mg
     <string name="close">Isara</string>
     <string name="clear">Alisin</string>
     <string name="delete">Burahin</string>
+    <string name="remove">Alisin</string>
     <string name="disable">Patayin</string>
     <string name="enable">Paganahin</string>
     <string name="loading">Naglo-load…</string>

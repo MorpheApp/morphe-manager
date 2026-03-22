@@ -68,7 +68,7 @@ fun UpdatesSettingsItem(
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
     val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
-    val usePatchesPrereleases by prefs.usePatchesPrereleases.getAsState()
+    val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
 
     // On GMS devices FCM handles all notification delivery.
     val hasGms = remember { isGmsAvailable(context) }
@@ -101,7 +101,11 @@ fun UpdatesSettingsItem(
             onPermissionResult = { granted ->
                 showNotificationPermissionDialog = false
                 if (granted) {
-                    syncFcmTopics(notificationsEnabled = true, useManagerPrereleases = useManagerPrereleases)
+                    syncFcmTopics(
+                        notificationsEnabled = true,
+                        useManagerPrereleases = useManagerPrereleases,
+                        usePatchesPrereleases = usePatchesPrereleases.contains("0")
+                    )
                     if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                 } else {
                     scope.launch { prefs.backgroundUpdateNotifications.update(false) }
@@ -130,7 +134,7 @@ fun UpdatesSettingsItem(
                 syncFcmTopics(
                     notificationsEnabled = backgroundUpdateNotifications,
                     useManagerPrereleases = newValue,
-                    usePatchesPrereleases = usePatchesPrereleases
+                    usePatchesPrereleases = usePatchesPrereleases.contains("0")
                 )
             }
             onManagerPrereleasesToggle()
@@ -161,7 +165,11 @@ fun UpdatesSettingsItem(
             } else {
                 scope.launch {
                     prefs.backgroundUpdateNotifications.update(newValue)
-                    syncFcmTopics(newValue, useManagerPrereleases = useManagerPrereleases)
+                    syncFcmTopics(
+                        newValue,
+                        useManagerPrereleases = useManagerPrereleases,
+                        usePatchesPrereleases = usePatchesPrereleases.contains("0")
+                    )
                     if (newValue && !hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
                     else UpdateCheckWorker.cancel(context)
                 }

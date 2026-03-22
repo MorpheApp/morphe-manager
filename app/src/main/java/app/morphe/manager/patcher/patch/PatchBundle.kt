@@ -27,14 +27,15 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
     val manifestAttributes by lazy {
         if (manifest != null)
             ManifestAttributes(
-                name = readManifestAttribute("name"),
-                version = readManifestAttribute("version"),
-                description = readManifestAttribute("description"),
-                source = readManifestAttribute("source"),
-                author = readManifestAttribute("author"),
-                contact = readManifestAttribute("contact"),
-                website = readManifestAttribute("website"),
-                license = readManifestAttribute("license")
+                name = readManifestAttribute("Name"),
+                version = readManifestAttribute("Version"),
+                description = readManifestAttribute("Description"),
+                source = readManifestAttribute("Source"),
+                author = readManifestAttribute("Author"),
+                contact = readManifestAttribute("Contact"),
+                website = readManifestAttribute("Website"),
+                license = readManifestAttribute("License"),
+                patcherVersion = readManifestAttribute("Patcher-Version"),
             ) else
             null
     }
@@ -50,7 +51,8 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
         val author: String?,
         val contact: String?,
         val website: String?,
-        val license: String?
+        val license: String?,
+        val patcherVersion: String?
     )
 
     object Loader {
@@ -77,10 +79,13 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
         fun patches(bundles: Iterable<PatchBundle>, packageName: String) =
             bundles.associateWith { bundle ->
                 loadBundle(bundle).filter { patch ->
-                    val compatiblePackages = patch.compatiblePackages
+                    val compatibility = patch.compatibility
                         ?: return@filter true // Universal patch
 
-                    compatiblePackages.any { (name, _) -> name == packageName }
+                    compatibility.any { compat ->
+                        compat.packageName == packageName ||
+                                compat.packageName == null // Universal compatibility entry
+                    }
                 }.toSet()
             }
 

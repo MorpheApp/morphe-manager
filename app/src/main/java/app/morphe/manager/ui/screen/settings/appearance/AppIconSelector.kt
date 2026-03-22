@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.appcompat.content.res.AppCompatResources
@@ -29,7 +34,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 
 /**
- * App icon selector with adaptive grid
+ * App icon selector with adaptive grid.
  */
 @Composable
 fun AppIconSelector() {
@@ -89,7 +94,7 @@ fun AppIconSelector() {
 }
 
 /**
- * Single app icon card
+ * Single app icon card.
  */
 @Composable
 private fun AppIconCard(
@@ -176,7 +181,7 @@ private fun AppIconCard(
 }
 
 /**
- * Confirmation dialog for icon change
+ * Confirmation dialog for icon change.
  */
 @Composable
 private fun AppIconChangeDialog(

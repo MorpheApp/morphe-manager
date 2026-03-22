@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.foundation.background
@@ -20,7 +25,7 @@ import app.morphe.manager.util.parseHexToRgb
 import app.morphe.manager.util.rgbToHex
 
 /**
- * Color picker dialog for custom color selection
+ * Color picker dialog for custom color selection.
  */
 @Composable
 fun ColorPickerDialog(
@@ -184,7 +189,7 @@ private fun ColorSlider(
 }
 
 /**
- * Color preview dot composable for theme presets
+ * Color preview dot composable for theme presets.
  */
 @Composable
 fun ColorPreviewDot(

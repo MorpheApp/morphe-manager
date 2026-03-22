@@ -4,7 +4,6 @@
     <string name="home_other_apps">Andet</string>
     <string name="home_not_patched_yet">Ikke patchet endnu</string>
     <string name="home_no_patches_available">Ingen patches tilgængelige</string>
-    <string name="home_default_source_disabled">Morphe-patch kilden er deaktiveret. Aktiver den i Patchkilderark eller brug Expert-modus</string>
     <string name="home_app_hide_title">Skjul denne app?</string>
     <string name="home_app_hide_message">Denne app bliver skjult fra hjemmeskærmen. Du kan gendanne den senere ved at bruge knappen \'%1$s\' nederst i listen</string>
     <string name="home_app_will_be_hidden">Denne app bliver skjult</string>
@@ -56,6 +55,9 @@
     <string name="sources_management_failed_to_open_url">Kunne ikke åpne URL</string>
     <string name="sources_management_prerelease_toggle">Brug forudslæppet patches</string>
     <string name="sources_management_prerelease_toggle_description">Få tidligt adgang til nye eksperimentelle patches versioner</string>
+    <string name="sources_management_experimental_versions_toggle">Brug eksperimentelle app-versioner</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patche eksperimentelle app-targets, hvis de er tilgængelige</string>
+    <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnavn</string>
     <string name="sources_dialog_rename">Endre navne på patch kilde</string>
@@ -107,7 +109,6 @@
     <string name="home_select_apk_title">Vælg APK</string>
     <string name="home_select_any_apk_description">Tryk på knappen nedenfor for at vælge en APK-fil for et hvilket som helst app for at patche</string>
     <string name="home_invalid_apk">Ugyldig APK-fil</string>
-    <string name="home_no_patches_for_app">Ingen patches tilgængelige for dette app</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
     <string name="expert_mode_search">Søg patches</string>
@@ -115,12 +116,23 @@
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
-    <string name="expert_mode_no_patches">Ingen patches tilgængelige</string>
+    <string name="expert_mode_universal_patches">Universelle patches</string>
     <string name="expert_mode_multiple_sources_warning_title">Flere patch-kilder valgt</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
 
 Er du sikker på, at du vil fortsætte?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Ubekræftet APK</string>
+    <string name="home_invalid_signature_message">Den APK du valgte for &lt;b&gt;%s&lt;/b&gt;, stemmer ikke overens med det forventede underskrivningscertifikat. Den kan være ændret eller fra en utroværdig kilde</string>
+    <string name="home_invalid_signature_badge">Denne APK er muligvis ikke den originale</string>
+    <string name="home_split_apk_warning_title">Split APK understøttes ikke</string>
+    <string name="home_split_apk_warning_message">Du har valgt en split APK-pakke (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; kræver en &lt;b&gt;fuld APK&lt;/b&gt; – split-pakker kan ikke patcheres til denne app</string>
+    <string name="home_split_apk_warning_badge">En fuld APK er påkrævet for at fortsætte</string>
+    <string name="home_split_apk_warning_pick_another">Vælg en anden APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Eksperimentel</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Denne version har eksperimentel support og kan være ustabil eller ufuldstændig</string>
+    <string name="morphe_experimental_app_version_dialog_title">Vil du eksperimentere? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Denne version af &lt;b&gt;%s&lt;/b&gt; har tidlig eksperimentel understøttelse&lt;br/&gt;&lt;br/&gt;🔧 Forvent mærkelige app-adfærd eller uidentificerede fejl, mens patchesene er finpudset til denne appversion</string>
     <string name="home_dialog_unsupported_version_dialog_title">Ugyldig versjon</string>
     <string name="home_dialog_unsupported_version_dialog_description">Denne APK er ikke en anbefalet app-version. At fortsætte kan resultere i en ikke-fungerende app</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Fortsett allikevel</string>
@@ -134,6 +146,9 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="home_outdated_patches_dialog_message">Mobildata er aktiv og patch-opdateringer er deaktiveret</string>
     <string name="home_outdated_patches_dialog_warning">At patchere med forældede patcher kan resultere i et brudt program</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Opdater &amp; patch</string>
+    <string name="home_low_disk_space_dialog_title">Lav diskplads</string>
+    <string name="home_low_disk_space_dialog_message">Der er kun %1$.2f GB ledig lagerplads. Patching kræver mindst 1 GB ledig plads for at fungere korrekt</string>
+    <string name="home_low_disk_space_dialog_warning">Fortsættelse kan resultere i en \"fil ikke fundet\"-fejl eller en korrupt output APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Bruglig farve</string>
     <string name="hex_color">Hex farve</string>
@@ -142,6 +157,9 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="patch_option_enter_number">Angiv tal</string>
     <string name="patch_option_enter_decimal">Angiv desimal</string>
     <string name="patch_option_pick_folder">Vælg mappe</string>
+    <string name="patch_option_list_duplicate">Denne værdi eksisterer allerede</string>
+    <string name="patch_option_list_empty">Værdien må ikke være tom</string>
+    <string name="patch_option_list_empty_state">Ingen værdier tilføjet endnu</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Opret adaptiv ikon</string>
     <string name="adaptive_icon_instructions">Vælg et forgrundsbillede, vælg baggrundsfar og justér forhåndsvisningen med pinch-to-zoom-gester</string>
@@ -298,6 +316,8 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_appearance_background_space">Rymden</string>
     <string name="settings_appearance_background_shapes">Former</string>
     <string name="settings_appearance_background_snow">Snø</string>
+    <string name="settings_appearance_background_grid">Grid</string>
+    <string name="settings_appearance_background_particles">Partikler</string>
     <string name="settings_appearance_background_none">Ingen</string>
     <string name="settings_appearance_parallax_effect">Parallax-effekt</string>
     <string name="settings_appearance_parallax_effect_description">Smootht tilting af enheden</string>
@@ -335,12 +355,6 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="settings_advanced_updates_background_notifications">Baggrundsopdateringsmeddelelser</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodisk tjek for opdateringer i baggrunden ognotify, når de er tilgængelige.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Modtag umiddelbare push-meddelelser for nye udgaver, selvom appen er lukket</string>
-    <string name="notification_channel_manager_updates">Morphe-opdateringer</string>
-    <string name="notification_channel_manager_updates_description">Notifikationer om nye versioner af Morphe</string>
-    <string name="notification_channel_bundle_updates">Opdateringskilder</string>
-    <string name="notification_channel_bundle_updates_description">Notifikationer om nye patchkildeversioner</string>
-    <string name="notification_channel_fcm_updates">Opdater alerts</string>
-    <string name="notification_channel_fcm_updates_description">Øjeblikkelige push-notifikationer for nye Morphe- og patch-udgivelser. Leveret selv når appen er i baggrunden</string>
     <string name="settings_advanced_update_interval">Opdateringsfrekvens</string>
     <string name="settings_advanced_update_interval_dialog_title">Søg efter opdateringer</string>
     <string name="settings_advanced_update_interval_hourly">En gang i timen</string>
@@ -357,6 +371,10 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="notification_permission_dialog_title">Tillad notifikationer</string>
     <string name="notification_permission_dialog_description">Morphe har brug for notifikationsadgang for at advare dig, når opdateringer er tilgængelige i baggrunden</string>
     <string name="notification_post_patch_dialog_title">Vil du blive notificeret, når opdateringer er tilgængelige?</string>
+    <string name="notification_channel_fcm_updates">Opdateringer af notifikationer</string>
+    <string name="notification_channel_fcm_updates_description">Notifikationer om nye Morphe- og patch-udgivelser</string>
+    <string name="notification_channel_patcher">Patching</string>
+    <string name="notification_channel_patcher_description">Viser, mens Morphe patcher en app i baggrunden</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Avansert innstillinger</string>
     <string name="settings_advanced_expert_mode">Avansert modus</string>
@@ -573,6 +591,9 @@ Bildeformateringen må være som følger:
     <string name="settings_system_manager_description">"Morphe er et eksperimentelt, åpent kildeprosjekt fokuser på å skape en moderne, strømlinet patching av populære Android-apper
 
 Åpent kilde på sin kjerne, Morphe trives på brukerfeedback og bidrag for å drive fremtidens innovasjon"</string>
+    <string name="credits">Credits</string>
+    <string name="credits_current_development">Current development</string>
+    <string name="credits_prior_development">Prior development</string>
     <!-- Shared strings -->
     <string name="patches">Pletter</string>
     <string name="home">Hjem</string>
@@ -589,6 +610,7 @@ Bildeformateringen må være som følger:
     <string name="close">Luk</string>
     <string name="clear">Ryd</string>
     <string name="delete">Slet</string>
+    <string name="remove">Fjern</string>
     <string name="disable">Deaktivér</string>
     <string name="enable">Aktiver</string>
     <string name="loading">Indlæser…</string>

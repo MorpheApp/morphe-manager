@@ -303,26 +303,86 @@ class MorpheAPI(
         return major * 1_000_000_000L + minor * 1_000_000L + patch * 100_000L + preWeight
     }
 
-    /**
-     * Get manager release by specific version tag
-     */
-    suspend fun getManagerReleaseByVersion(version: String): APIResponse<MorpheAsset> {
-        val normalizedVersion = normalizeVersion(version)
+    // ============================================================================
+    // REGION: Changelog (CHANGELOG.md)
+    // ============================================================================
 
-        return when (val response = githubRequest<GitHubRelease>(managerConfig, "releases/tags/$normalizedVersion")) {
-            is APIResponse.Success -> {
-                runCatching {
-                    val release = response.data
-                    val asset = release.assets.firstOrNull(::isManagerAsset)
-                        ?: throw IllegalStateException("No manager APK found in release $normalizedVersion")
-                    mapReleaseToAsset(managerConfig, release, asset)
-                }.fold(
-                    onSuccess = { APIResponse.Success(it) },
-                    onFailure = { APIResponse.Failure(APIFailure(it, null)) }
-                )
+    suspend fun fetchManagerChangelog(): List<ChangelogEntry> {
+        val branch = if (isDevBuild) "dev" else "main"
+        return fetchChangelogFromRepo(managerConfig, branch, "app/CHANGELOG.md")
+    }
+
+    /**
+     * Fetch and parse CHANGELOG.md from the first-party patches repository.
+     */
+    suspend fun fetchPatchesChangelog(branch: String = "main"): List<ChangelogEntry> {
+        return fetchChangelogFromRepo(patchesConfig, branch)
+    }
+
+    /**
+     * Fetch and parse CHANGELOG.md from an arbitrary raw URL.
+     * Used for third-party bundles that follow the Morphe template.
+     *
+     * @param changelogUrl Direct URL to the raw CHANGELOG.md file.
+     */
+    suspend fun fetchChangelogFromUrl(changelogUrl: String): List<ChangelogEntry> {
+        Log.d(tag, "Fetching changelog from: $changelogUrl")
+        return when (val response = client.request<String> { url(changelogUrl) }) {
+            is APIResponse.Success -> ChangelogParser.parse(response.data)
+            is APIResponse.Error, is APIResponse.Failure -> {
+                Log.w(tag, "Failed to fetch changelog from $changelogUrl")
+                emptyList()
             }
-            is APIResponse.Error -> APIResponse.Error(response.error)
-            is APIResponse.Failure -> APIResponse.Failure(response.error)
+        }
+    }
+
+    /**
+     * Derive the raw CHANGELOG.md URL from a patches-bundle.json endpoint URL.
+     * Returns null if the endpoint is not a recognizable GitHub URL.
+     *
+     * Examples:
+     *   https://raw.githubusercontent.com/MorpheApp/morphe-patches/main/patches-bundle.json
+     *   → https://raw.githubusercontent.com/MorpheApp/morphe-patches/main/CHANGELOG.md
+     */
+    fun changelogUrlFromBundleEndpoint(endpoint: String): String? {
+        return try {
+            val uri = java.net.URI(endpoint)
+            val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
+            val parts = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
+
+            when (host) {
+                "raw.githubusercontent.com" -> {
+                    // Format: owner/repo/branch/...
+                    if (parts.size < 3) return null
+                    val base = parts.take(3).joinToString("/")
+                    "https://raw.githubusercontent.com/$base/CHANGELOG.md"
+                }
+                "github.com" -> {
+                    // Format: owner/repo  or  owner/repo/tree/branch/...
+                    if (parts.size < 2) return null
+                    val branch = if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else "main"
+                    "https://raw.githubusercontent.com/${parts[0]}/${parts[1]}/$branch/CHANGELOG.md"
+                }
+                else -> null
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    private suspend fun fetchChangelogFromRepo(
+        config: RepoConfig,
+        branch: String,
+        path: String = "CHANGELOG.md"
+    ): List<ChangelogEntry> {
+        val url = config.rawFileUrl(branch, path)
+        Log.d(tag, "Fetching $path from: $url")
+        return when (val response = client.request<String> { url(url) }) {
+            is APIResponse.Success -> ChangelogParser.parse(response.data)
+            is APIResponse.Error, is APIResponse.Failure -> {
+                Log.w(tag, "Failed to fetch $path for ${config.name} @ $branch")
+                emptyList()
+            }
         }
     }
 
@@ -367,18 +427,16 @@ class MorpheAPI(
 
     /**
      * Get patches update - uses JSON or API based on configuration.
-     * Pass [usePrerelease] explicitly instead of reading from prefs,
-     * so each bundle can control its own channel independently.
+     * Pass [usePrerelease] explicitly so each bundle can control its own channel independently.
      */
-    suspend fun getPatchesUpdate(usePrerelease: Boolean? = null): APIResponse<MorpheAsset> {
-        val prereleaseResolved = usePrerelease ?: prefs.usePatchesPrereleases.get()
+    suspend fun getPatchesUpdate(usePrerelease: Boolean): APIResponse<MorpheAsset> {
         return if (USE_PATCHES_DIRECT_JSON) {
-            getPatchesFromJson(prereleaseResolved).fallbackTo {
+            getPatchesFromJson(usePrerelease).fallbackTo {
                 Log.w(tag, "Falling back to Morphe API for patches")
-                getPatchesFromApi(prereleaseResolved)
+                getPatchesFromApi(usePrerelease)
             }
         } else {
-            getPatchesFromApi(prereleaseResolved)
+            getPatchesFromApi(usePrerelease)
         }
     }
 
