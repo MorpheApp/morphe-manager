@@ -1073,9 +1073,6 @@ class HomeViewModel(
             val isSplitFile = SplitApkPreparer.isSplitArchive(selectedApp.file)
 
             if (isSplitFile && requiredApkFileType?.isApk == true && requiredApkFileType.isRequired) {
-                if (pendingAppName == null) {
-                    pendingAppName = KnownApps.getAppName(selectedApp.packageName)
-                }
                 pendingSelectedApp = selectedApp
                 showSplitApkWarningDialog = true
                 cleanupPendingData(keepSelectedApp = true)
