@@ -140,8 +140,9 @@ Are you sure you want to proceed?"</string>
     <string name="home_invalid_signature_message">The APK you selected for &lt;b&gt;%s&lt;/b&gt; does not match the expected signing certificate. It may be modified or from an untrusted source</string>
     <string name="home_invalid_signature_badge">This APK may not be the original</string>
     <string name="home_split_apk_warning_title">Split APK detected</string>
-    <string name="home_split_apk_warning_message">You selected a split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). A &lt;b&gt;full APK&lt;/b&gt; from APKMirror is recommended for &lt;b&gt;%s&lt;/b&gt; - patching split bundles may produce unexpected results</string>
-    <string name="home_split_apk_warning_badge">Full APK recommended for best results</string>
+    <string name="home_split_apk_warning_message">"This file is an APK bundle (&lt;b&gt;.apkm / .apks / .xapk&lt;/b&gt;).
+
+For this app, patching a &lt;b&gt;full APK&lt;/b&gt; is recommended for the best results</string>
     <string name="home_split_apk_warning_pick_another">Pick another APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">This version has experimental support and may be unstable or incomplete</string>

@@ -986,12 +986,6 @@ fun SplitApkWarningDialog(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
-            InfoBadge(
-                text = stringResource(R.string.home_split_apk_warning_badge),
-                style = InfoBadgeStyle.Warning,
-                icon = Icons.Outlined.Warning,
-                isExpanded = true
-            )
         }
     }
 }
