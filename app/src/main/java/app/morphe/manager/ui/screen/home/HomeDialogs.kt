@@ -38,7 +38,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
@@ -187,24 +186,8 @@ fun HomeDialogs(
             experimentalVersions = homeViewModel.getExperimentalVersionsForPackage(dialogState.packageName),
             isExperimental = dialogState.isExperimental,
             isExpertMode = isExpertMode,
-            onDismiss = {
-                homeViewModel.showUnsupportedVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) {
-                        app.file.delete()
-                    }
-                }
-                homeViewModel.pendingSelectedApp = null
-            },
-            onProceed = {
-                homeViewModel.showUnsupportedVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    CoroutineScope(Dispatchers.Main).launch {
-                        homeViewModel.startPatchingWithApp(app, true)
-                        homeViewModel.pendingSelectedApp = null
-                    }
-                }
-            }
+            onDismiss = { homeViewModel.dismissUnsupportedVersionDialog() },
+            onProceed = { homeViewModel.proceedWithUnsupportedVersion() }
         )
     }
 
@@ -218,22 +201,8 @@ fun HomeDialogs(
 
         ExperimentalVersionWarningDialog(
             appName = dialogState.packageName.let { homeViewModel.bundleAppMetadataFlow.value[it]?.displayName ?: it },
-            onDismiss = {
-                homeViewModel.showExperimentalVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
-            },
-            onProceed = {
-                homeViewModel.showExperimentalVersionDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    CoroutineScope(Dispatchers.Main).launch {
-                        homeViewModel.startPatchingWithApp(app, allowIncompatible = false)
-                        homeViewModel.pendingSelectedApp = null
-                    }
-                }
-            }
+            onDismiss = { homeViewModel.dismissExperimentalVersionDialog() },
+            onProceed = { homeViewModel.proceedWithExperimentalVersion() }
         )
     }
 
@@ -248,7 +217,7 @@ fun HomeDialogs(
         WrongPackageDialog(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
-            onDismiss = { homeViewModel.showWrongPackageDialog = null }
+            onDismiss = { homeViewModel.dismissWrongPackageDialog() }
         )
     }
 
@@ -257,16 +226,12 @@ fun HomeDialogs(
         val appName = homeViewModel.pendingAppName ?: ""
         SplitApkWarningDialog(
             appName = appName,
-            onProceed = {
-                homeViewModel.proceedWithSplitApk()
-            },
+            onProceed = { homeViewModel.proceedWithSplitApk() },
             onPickAnother = {
                 homeViewModel.dismissSplitApkWarning()
                 storagePickerLauncher()
             },
-            onDismiss = {
-                homeViewModel.dismissSplitApkWarning()
-            }
+            onDismiss = { homeViewModel.dismissSplitApkWarning() }
         )
     }
 
@@ -275,29 +240,11 @@ fun HomeDialogs(
         InvalidSignatureDialog(
             appName = dialogState.appName,
             onPickAnother = {
-                homeViewModel.showInvalidSignatureDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
+                homeViewModel.dismissInvalidSignatureDialog()
                 storagePickerLauncher()
             },
-            onProceed = {
-                homeViewModel.showInvalidSignatureDialog = null
-                homeViewModel.pendingSelectedApp?.let { selectedApp ->
-                    CoroutineScope(Dispatchers.Main).launch {
-                        homeViewModel.processSelectedAppIgnoringSignature(selectedApp)
-                        homeViewModel.pendingSelectedApp = null
-                    }
-                }
-            },
-            onDismiss = {
-                homeViewModel.showInvalidSignatureDialog = null
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
-            }
+            onProceed = { homeViewModel.proceedIgnoringSignature() },
+            onDismiss = { homeViewModel.dismissInvalidSignatureDialog() }
         )
     }
 

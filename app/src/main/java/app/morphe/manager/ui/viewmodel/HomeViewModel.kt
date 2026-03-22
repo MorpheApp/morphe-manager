@@ -352,6 +352,92 @@ class HomeViewModel(
         }
     }
 
+    /**
+     * User dismissed the unsupported version dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissUnsupportedVersionDialog() {
+        showUnsupportedVersionDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User chose to proceed patching with an unsupported app version.
+     * Starts patching with allowIncompatible=true so version-incompatible patches are included.
+     */
+    fun proceedWithUnsupportedVersion() {
+        showUnsupportedVersionDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            startPatchingWithApp(app, allowIncompatible = true)
+        }
+    }
+
+    /**
+     * User dismissed the experimental version warning dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissExperimentalVersionDialog() {
+        showExperimentalVersionDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User acknowledged the experimental version warning and chose to proceed.
+     * Starts patching with allowIncompatible=false — the version is supported,
+     * just flagged as experimental in the patch bundle.
+     */
+    fun proceedWithExperimentalVersion() {
+        showExperimentalVersionDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            startPatchingWithApp(app, allowIncompatible = false)
+        }
+    }
+
+    /**
+     * User dismissed the wrong package dialog.
+     */
+    fun dismissWrongPackageDialog() {
+        showWrongPackageDialog = null
+    }
+
+    /**
+     * User dismissed the invalid signature dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissInvalidSignatureDialog() {
+        showInvalidSignatureDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User chose to proceed patching despite the signature mismatch warning.
+     * Skips signature verification and resumes the patching flow.
+     */
+    fun proceedIgnoringSignature() {
+        showInvalidSignatureDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            processSelectedAppIgnoringSignature(app)
+        }
+    }
+
     // Callback for starting patch
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
