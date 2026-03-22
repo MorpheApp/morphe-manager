@@ -55,8 +55,8 @@
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_management_prerelease_toggle">استخدام إصدارات تعديلات ما قبل الإطلاق</string>
     <string name="sources_management_prerelease_toggle_description">احصل على وصول مبكر إلى إصدار تعديلات ما قبل الإطلاق</string>
-    <string name="sources_management_experimental_versions_toggle">استخدام إصدارات تجريبية من التطبيقات</string>
-    <string name="sources_management_experimental_versions_toggle_description">تطبيق إصلاحات على الأهداف التجريبية للتطبيق إذا كانت متاحة</string>
+    <string name="sources_management_experimental_versions_toggle">استخدام إصدارات تجريبية للتطبيقات</string>
+    <string name="sources_management_experimental_versions_toggle_description">تعديل الإصدارات التجريبية المستهدفة للتطبيقات إن توفرت</string>
     <string name="sources_management_already_exists">تمت إضافة هذا المصدر بالفعل</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">الاسم المعروض</string>
@@ -122,17 +122,17 @@
 
 هل أنت متأكد من رغبتك في المتابعة؟"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">APK غير مُدقَّق</string>
-    <string name="home_invalid_signature_message">ملف APK الذي اخترته لـ &lt;b&gt;%s&lt;/b&gt; لا يتطابق مع شهادة التوقيع المتوقعة. قد يكون معدلاً أو من مصدر غير موثوق به</string>
-    <string name="home_invalid_signature_badge">قد لا يكون ملف APK هذا هو الملف الأصلي</string>
-    <string name="home_split_apk_warning_title">دعم حزم APK المقسمة غير مدعوم</string>
-    <string name="home_split_apk_warning_message">لقد اخترت حزمة APK مقسمة (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; يتطلب ملف APK كاملاً - لا يمكن تصحيح الحزم المقسمة لتطبيق هذا</string>
-    <string name="home_split_apk_warning_badge">مطلوب ملف APK كامل للمتابعة</string>
+    <string name="home_invalid_signature_title">APK غير معتمد</string>
+    <string name="home_invalid_signature_message">ملف APK الذي اخترته لـ &lt;b&gt;%s&lt;/b&gt; لا يتطابق مع شهادة التوقيع الأصلية. قد يكون معدلًا أو من مصدر غير موثوق به</string>
+    <string name="home_invalid_signature_badge">قد لا يكون ملف APK هذا هو الأصلي</string>
+    <string name="home_split_apk_warning_title">تنسيق Split APK غير مدعوم</string>
+    <string name="home_split_apk_warning_message">لقد اخترت حزمة APK مقسمة (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; يتطلب &lt;b&gt;ملف APK كاملًا&lt;/b&gt; - لا يمكن تعديل الحزم المقسمة للتطبيق هذا</string>
+    <string name="home_split_apk_warning_badge">مطلوب ملف APK كاملًا للمتابعة</string>
     <string name="home_split_apk_warning_pick_another">اختر ملف APK آخر</string>
     <string name="home_dialog_unsupported_version_experimental_label">تجريبي</string>
-    <string name="home_dialog_unsupported_version_experimental_description">هذه النسخة لديها دعم تجريبي وقد تكون غير مستقرة أو غير كاملة</string>
+    <string name="home_dialog_unsupported_version_experimental_description">يوفر هذا الإصدار دعمًا تجريبيًا، وقد يكون غير مستقر أو غير مكتمل</string>
     <string name="morphe_experimental_app_version_dialog_title">هل تريد التجربة؟ 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">هذه النسخة من &lt;b&gt;%s&lt;/b&gt; لديها دعم تجريبي مبكر&lt;br/&gt;&lt;br/&gt;🔧 توقع سلوكًا غريبًا للتطبيق أو أخطاء غير معروفة حيث يتم تحسين التصحيحات لهذا إصدار التطبيق</string>
+    <string name="morphe_experimental_app_version_dialog_message">يحتوي هذا الإصدار من &lt;b&gt;%s&lt;/b&gt; على دعم تجريبي أولي&lt;br/&gt;&lt;br/&gt;🔧 توقع سلوكًا غريبًا للتطبيق أو أخطاء غير معروفة بينما يتم تحسين التعديلات لتناسب إصدار التطبيق هذا</string>
     <string name="home_dialog_unsupported_version_dialog_title">إصدار غير مدعوم</string>
     <string name="home_dialog_unsupported_version_dialog_description">ملف APK هذا ليس إصدارًا موصى به. قد تؤدي المتابعة إلى عدم عمله بشكل صحيح</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">المتابعة على أي حال</string>
@@ -147,8 +147,8 @@
     <string name="home_outdated_patches_dialog_warning">قد يؤدي التعديل باستخدام تعديلات قديمة إلى حدوث عطل في التطبيق</string>
     <string name="home_outdated_patches_dialog_update_and_patch">تحديث &amp; تعديل</string>
     <string name="home_low_disk_space_dialog_title">مساحة تخزين منخفضة</string>
-    <string name="home_low_disk_space_dialog_message">يتوفر %1$.2f جيجابايت من مساحة التخزين المجانية فقط. يتطلب التصحيح ما لا يقل عن 1 جيجابايت من مساحة التخزين المجانية لتعمل بشكل صحيح</string>
-    <string name="home_low_disk_space_dialog_warning">قد يؤدي المتابعة إلى حدوث خطأ \"ملف غير موجود\" أو ملف APK تالف</string>
+    <string name="home_low_disk_space_dialog_message">يتوفر فقط %1$.2f جيجابايت من مساحة التخزين الخالية. تتطلب عملية التعديل مساحة فارغة لا تقل عن 1 جيجابايت لتعمل بشكل صحيح</string>
+    <string name="home_low_disk_space_dialog_warning">قد تؤدي المتابعة إلى حدوث خطأ \"ملف غير موجود\" أو ملف APK تالف</string>
     <!-- Patch Options -->
     <string name="custom_color">اللون المخصص</string>
     <string name="hex_color">صيغة اللون</string>

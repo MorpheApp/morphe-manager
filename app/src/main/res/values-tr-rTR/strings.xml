@@ -129,7 +129,7 @@ Devam etmek istediğinizden emin misiniz?"</string>
     <string name="home_split_apk_warning_message">Parçalı bir APK demeti (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) seçtiniz. &lt;b&gt;%s&lt;/b&gt; için &lt;b&gt;tam bir APK&lt;/b&gt; gereklidir - bu uygulama için parçalı demetler düzeltilemez</string>
     <string name="home_split_apk_warning_badge">Devam etmek için tam bir APK gereklidir</string>
     <string name="home_split_apk_warning_pick_another">Başka bir APK seçin</string>
-    <string name="home_dialog_unsupported_version_experimental_label">Deneyimli</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Deneysel</string>
     <string name="home_dialog_unsupported_version_experimental_description">Bu sürüm deneysel destek içerir ve kararsız veya eksik olabilir</string>
     <string name="morphe_experimental_app_version_dialog_title">Deney yapmak ister misiniz? 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; sürümünün erken deneysel desteği bulunmaktadır&lt;br/&gt;&lt;br/&gt;🔧 Bu uygulama sürümü için düzeltmeler iyileştirilirken garip uygulama davranışını veya tanımlanmamış hataları bekleyin</string>

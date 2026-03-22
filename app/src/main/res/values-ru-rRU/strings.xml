@@ -40,7 +40,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Хотите смотреть рекламу? Я тоже нет</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Сделаем так, чтобы ваши приложения работали должным образом</string>
+    <string name="home_greeting_6">Давайте сделаем ваши приложения послушными</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Прогноз на сегодня: 100% шансов на патчинг</string>
     <!-- From mediocrity to amazing -->

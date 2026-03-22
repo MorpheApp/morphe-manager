@@ -55,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
     <string name="sources_management_prerelease_toggle">Använd förhandsversioner av korrigeringar</string>
     <string name="sources_management_prerelease_toggle_description">Få tidig åtkomst till nya experimentella korrigeringsversioner</string>
+    <string name="sources_management_experimental_versions_toggle">Använd experimentella appversioner</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patcha experimentella app-mål om de är tillgängliga</string>
     <string name="sources_management_already_exists">Den här källan har redan lagts till</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnamn</string>
@@ -118,6 +120,10 @@
     <string name="expert_mode_multiple_sources_warning_title">Flera korrigeringskällor har valts</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_dialog_unsupported_version_experimental_label">Experimentell</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Denna version har experimentell stöd och kan vara instabil eller ofullständig</string>
+    <string name="morphe_experimental_app_version_dialog_title">Vill du experimentera? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Denna version av &lt;b&gt;%s&lt;/b&gt; har ett tidigt experimentellt stöd&lt;br/&gt;&lt;br/&gt;🔧 Räkna med underliga appbeteenden eller okända fel eftersom patcharna förfinas för denna appversion</string>
     <string name="home_dialog_unsupported_version_dialog_title">Version som inte stöds</string>
     <string name="home_dialog_unsupported_version_dialog_description">Den här APK-filen är inte en rekommenderad appversion. Om du fortsätter kan det leda till att appen inte fungerar</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Fortsätt ändå</string>
@@ -573,6 +579,9 @@ Bildernas mått ska vara följande:
     <string name="settings_system_manager_description">"Morphe är ett experimentellt projekt med öppen källkod som fokuserar på att skapa ett modernt och smidigt sätt att korrigera populära Android-appar
 
 Morphe bygger på öppen källkod och utvecklas utifrån feedback och bidrag från gemenskapen för att driva framtida innovation"</string>
+    <string name="credits">Credits</string>
+    <string name="credits_current_development">Nuvarande utveckling</string>
+    <string name="credits_prior_development">Tidigare utveckling</string>
     <!-- Shared strings -->
     <string name="patches">Korrigeringar</string>
     <string name="home">Hem</string>

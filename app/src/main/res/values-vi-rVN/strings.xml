@@ -541,7 +541,7 @@ Kích thước hình ảnh yêu cầu:
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Gỡ lỗi</string>
     <string name="settings_system_export_debug_logs">Nhật ký gỡ lỗi</string>
-    <string name="settings_system_export_debug_logs_description">Lưu nhật ký hệ thống để khắc phục lỗi</string>
+    <string name="settings_system_export_debug_logs_description">Lưu nhật ký hệ thống để sửa lỗi</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Không thể xuất nhật ký</string>
     <string name="settings_system_export_debug_logs_export_success">Đã xuất nhật ký</string>

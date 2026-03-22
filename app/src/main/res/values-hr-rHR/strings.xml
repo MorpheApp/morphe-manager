@@ -55,6 +55,8 @@
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
     <string name="sources_management_prerelease_toggle">Koristi predizdanja patcheva</string>
     <string name="sources_management_prerelease_toggle_description">Primite rani pristup novoj verziji eksperimentalnih patcheva</string>
+    <string name="sources_management_experimental_versions_toggle">Koristi eksperimentalne verzije aplikacija</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patchaj eksperimentalne ciljeve aplikacije ako su dostupni</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži naziv</string>
@@ -120,6 +122,17 @@
 
 Jeste li sigurni da želite nastaviti?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Nepotvrđena aplikacija</string>
+    <string name="home_invalid_signature_message">Aplikacija koju ste odabrali za&lt;b&gt;%s&lt;/b&gt; ne odgovara očekivanom certifikatu za potpis. Moguće je da je modificirana ili da potječe iz nepouzdanog izvora.</string>
+    <string name="home_invalid_signature_badge">Ovaj aplikacija možda nije original</string>
+    <string name="home_split_apk_warning_title">Split APK nisu podržani</string>
+    <string name="home_split_apk_warning_message">Odabrali ste APK skup  (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; koji zahtijeva &lt;b&gt;cijeli APK&lt;/b&gt; -podijeljeni paketi ne mogu se patchati za ovu aplikaciju</string>
+    <string name="home_split_apk_warning_badge">Za nastavak je potreban cijela APK</string>
+    <string name="home_split_apk_warning_pick_another">Odaberite drugu aplikaciju</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Eksperimentalno</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ova verzija ima eksperimentalnu podršku i možda je nestabilna ili nepotpuna</string>
+    <string name="morphe_experimental_app_version_dialog_title">Želite li eksperimentirati? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ova verzija &lt;b&gt;%s&lt;/b&gt; has early experimental support&lt;br/&gt;&lt;br/&gt;🔧 Očekujte neobično ponašanje aplikacije ili neidentificirane greške dok se patchevi dorađuju za ovu verziju aplikacije</string>
     <string name="home_dialog_unsupported_version_dialog_title">Nepodržana verzija</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ova aplikacija nije preporučena verzija. Nastavak može rezultirati nefunkcionalnom aplikacijom</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Nastavi svejedno</string>
@@ -133,6 +146,9 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="home_outdated_patches_dialog_message">Mobilni podaci su aktivni i ažuriranja patcheva su onemogućena</string>
     <string name="home_outdated_patches_dialog_warning">Korištenje zastarjelih patcheva može dovesti do neupotrebljive aplikacije</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ažuriraj &amp; patchaj</string>
+    <string name="home_low_disk_space_dialog_title">Malo prostora na disku</string>
+    <string name="home_low_disk_space_dialog_message">Dostupno je samo %1$.2f GB slobodnog prostora. Za ispravan rad patchanja potrebno je najmanje 1 GB slobodnog prostora.</string>
+    <string name="home_low_disk_space_dialog_warning">Nastavak može rezultirati greškom \"datoteka nije pronađena\" ili oštećenom izlaznom aplikacijom</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Hex boja</string>
