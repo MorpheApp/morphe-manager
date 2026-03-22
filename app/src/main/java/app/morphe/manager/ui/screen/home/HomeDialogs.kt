@@ -252,25 +252,20 @@ fun HomeDialogs(
         )
     }
 
-    // Split APK Warning Dialog - shown when user picks a split APK for an app that requires full APK
+    // Split APK Warning Dialog - shown when user picks a split APK for an app that prefers full APK
     if (homeViewModel.showSplitApkWarningDialog) {
         val appName = homeViewModel.pendingAppName ?: ""
         SplitApkWarningDialog(
             appName = appName,
+            onProceed = {
+                homeViewModel.proceedWithSplitApk()
+            },
             onPickAnother = {
-                homeViewModel.showSplitApkWarningDialog = false
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
+                homeViewModel.dismissSplitApkWarning()
                 storagePickerLauncher()
             },
             onDismiss = {
-                homeViewModel.showSplitApkWarningDialog = false
-                homeViewModel.pendingSelectedApp?.let { app ->
-                    if (app is SelectedApp.Local && app.temporary) app.file.delete()
-                }
-                homeViewModel.pendingSelectedApp = null
+                homeViewModel.dismissSplitApkWarning()
             }
         )
     }
@@ -1000,12 +995,13 @@ fun InvalidSignatureDialog(
 }
 
 /**
- * Blocking dialog shown when the user selects a split APK archive (.apks / .apkm / .xapk)
+ * Warning dialog shown when the user selects a split APK archive (.apks / .apkm / .xapk)
  * for an app that requires a full APK.
  */
 @Composable
 fun SplitApkWarningDialog(
     appName: String,
+    onProceed: () -> Unit,
     onPickAnother: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -1014,12 +1010,12 @@ fun SplitApkWarningDialog(
         title = stringResource(R.string.home_split_apk_warning_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.home_split_apk_warning_pick_another),
-                onPrimaryClick = onPickAnother,
-                primaryIcon = Icons.Outlined.FolderOpen,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss,
-                layout = DialogButtonLayout.Vertical,
+                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                onPrimaryClick = onProceed,
+                secondaryText = stringResource(R.string.home_split_apk_warning_pick_another),
+                onSecondaryClick = onPickAnother,
+                secondaryIcon = Icons.Outlined.FolderOpen,
+                layout = DialogButtonLayout.Vertical
             )
         }
     ) {
@@ -1045,8 +1041,8 @@ fun SplitApkWarningDialog(
             )
             InfoBadge(
                 text = stringResource(R.string.home_split_apk_warning_badge),
-                style = InfoBadgeStyle.Error,
-                icon = Icons.Outlined.Error,
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.Warning,
                 isExpanded = true
             )
         }
