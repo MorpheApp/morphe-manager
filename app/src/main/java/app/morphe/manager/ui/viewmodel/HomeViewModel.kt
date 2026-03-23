@@ -17,6 +17,7 @@ import android.os.StatFs
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -1166,39 +1167,41 @@ class HomeViewModel(
             }
 
             // Verify APK signature against the expected signatures declared in the patch bundle.
-            // For split archives (.apkm/.apks/.xapk) PackageManager cannot read the signature
-            // from the zip container directly — extract the representative base APK first and
-            // verify against that. The extracted file is cleaned up immediately after.
-            val expectedSignatures = bundleAppMetadataFlow.value[selectedApp.packageName]?.signatures
-            if (!expectedSignatures.isNullOrEmpty()) {
-                val signatureMatch = withContext(Dispatchers.IO) {
-                    if (isSplitFile) {
-                        val extracted = SplitApkInspector.extractRepresentativeApk(
-                            source = selectedApp.file,
-                            workspace = filesystem.uiTempDir
-                        )
-                        if (extracted == null) {
-                            // Cannot extract base APK — skip verification rather than false-block
-                            true
-                        } else {
-                            try {
-                                verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
-                            } finally {
-                                extracted.cleanup()
+            // GET_SIGNING_CERTIFICATES (API 28+) is required for reliable archive signature reads.
+            // On Android 8–10 the legacy GET_SIGNATURES path cannot read signatures from
+            // archive files correctly, so we skip verification there to avoid false-blocking users.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val expectedSignatures = bundleAppMetadataFlow.value[selectedApp.packageName]?.signatures
+                if (!expectedSignatures.isNullOrEmpty()) {
+                    val signatureMatch = withContext(Dispatchers.IO) {
+                        if (isSplitFile) {
+                            val extracted = SplitApkInspector.extractRepresentativeApk(
+                                source = selectedApp.file,
+                                workspace = filesystem.uiTempDir
+                            )
+                            if (extracted == null) {
+                                // Cannot extract base APK — skip verification rather than false-block
+                                true
+                            } else {
+                                try {
+                                    verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
+                                } finally {
+                                    extracted.cleanup()
+                                }
                             }
+                        } else {
+                            verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
                         }
-                    } else {
-                        verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
                     }
-                }
-                if (!signatureMatch) {
-                    pendingSelectedApp = selectedApp
-                    showInvalidSignatureDialog = InvalidSignatureDialogState(
-                        packageName = selectedApp.packageName,
-                        appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
-                    )
-                    cleanupPendingData(keepSelectedApp = true)
-                    return
+                    if (!signatureMatch) {
+                        pendingSelectedApp = selectedApp
+                        showInvalidSignatureDialog = InvalidSignatureDialogState(
+                            packageName = selectedApp.packageName,
+                            appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
+                        )
+                        cleanupPendingData(keepSelectedApp = true)
+                        return
+                    }
                 }
             }
         }
@@ -1717,34 +1720,28 @@ class HomeViewModel(
     /**
      * Verify that the APK at [apkPath] is signed with one of the [expectedSha256Signatures].
      *
-     * Uses [PackageManager.GET_SIGNING_CERTIFICATES] (API 28+) with fallback to
-     * [PackageManager.GET_SIGNATURES] for older devices. Returns true if at least one
-     * certificate fingerprint matches, false if none match or the APK cannot be read.
-     *
-     * An empty / null [expectedSha256Signatures] is treated as "no verification required" → true.
+     * Returns true if at least one certificate fingerprint matches.
+     * An empty [expectedSha256Signatures] is treated as "no verification required" → true.
      */
-    @Suppress("DEPRECATION")
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun verifyApkSignature(apkPath: String, expectedSha256Signatures: Set<String>): Boolean {
         if (expectedSha256Signatures.isEmpty()) return true
         return try {
-            val signatures: Array<android.content.pm.Signature> =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    val flags = PackageManager.GET_SIGNING_CERTIFICATES
-                    val info = app.packageManager.getPackageArchiveInfo(apkPath, flags)
-                        ?: return false
-                    val signingInfo = info.signingInfo ?: return false
-                    if (signingInfo.hasMultipleSigners()) {
-                        signingInfo.apkContentsSigners
-                    } else {
-                        signingInfo.signingCertificateHistory
-                    }
-                } else {
-                    val flags = PackageManager.GET_SIGNATURES
-                    val info = app.packageManager.getPackageArchiveInfo(apkPath, flags)
-                        ?: return false
-                    @Suppress("DEPRECATION")
-                    info.signatures ?: return false
-                }
+            val info = app.packageManager.getPackageArchiveInfo(
+                apkPath,
+                PackageManager.GET_SIGNING_CERTIFICATES
+            ) ?: return false
+
+            info.applicationInfo?.apply {
+                sourceDir = apkPath
+                publicSourceDir = apkPath
+            }
+
+            val signingInfo = info.signingInfo ?: return false
+            val signatures = if (signingInfo.hasMultipleSigners())
+                signingInfo.apkContentsSigners
+            else
+                signingInfo.signingCertificateHistory
 
             val digest = MessageDigest.getInstance("SHA-256")
             signatures.any { sig ->
@@ -1797,21 +1794,13 @@ class HomeViewModel(
                     workspace = filesystem.uiTempDir
                 )
                 try {
-                    extracted?.let {
-                        context.packageManager.getPackageArchiveInfo(
-                            it.file.absolutePath,
-                            PackageManager.GET_META_DATA
-                        )
-                    }
+                    extracted?.let { pm.getPackageInfo(it.file) }
                 } finally {
                     extracted?.cleanup()
                 }
             } else {
                 // Regular APK - parse directly
-                context.packageManager.getPackageArchiveInfo(
-                    tempFile.absolutePath,
-                    PackageManager.GET_META_DATA
-                )
+                pm.getPackageInfo(tempFile)
             }
 
             if (packageInfo == null) {
