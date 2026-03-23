@@ -77,8 +77,8 @@ fun UpdatesSettingsItem(
     val disabledState = stringResource(R.string.disabled)
 
     // Dialog visibility state
-    var showNotificationPermissionDialog by rememberSaveable { mutableStateOf(false) }
-    var showIntervalDialog by rememberSaveable { mutableStateOf(false) }
+    val showNotificationPermissionDialog = rememberSaveable { mutableStateOf(false) }
+    val showIntervalDialog = rememberSaveable { mutableStateOf(false) }
 
     // Checks whether POST_NOTIFICATIONS is granted (Android 13+ only)
     fun hasNotificationPermission(): Boolean =
@@ -91,15 +91,15 @@ fun UpdatesSettingsItem(
             true // Auto-granted on Android < 13
         }
 
-    if (showNotificationPermissionDialog) {
+    if (showNotificationPermissionDialog.value) {
         NotificationPermissionDialog(
             onDismissRequest = {
                 // User cancelled - revert the preference back to OFF
                 scope.launch { prefs.backgroundUpdateNotifications.update(false) }
-                showNotificationPermissionDialog = false
+                showNotificationPermissionDialog.value = false
             },
             onPermissionResult = { granted ->
-                showNotificationPermissionDialog = false
+                showNotificationPermissionDialog.value = false
                 if (granted) {
                     syncFcmTopics(
                         notificationsEnabled = true,
@@ -114,15 +114,15 @@ fun UpdatesSettingsItem(
         )
     }
 
-    if (showIntervalDialog) {
+    if (showIntervalDialog.value) {
         UpdateCheckIntervalDialog(
             currentInterval = updateCheckInterval,
             onIntervalSelected = { selected ->
                 scope.launch { prefs.updateCheckInterval.update(selected) }
                 if (!hasGms) UpdateCheckWorker.schedule(context, selected)
-                showIntervalDialog = false
+                showIntervalDialog.value = false
             },
-            onDismiss = { showIntervalDialog = false }
+            onDismiss = { showIntervalDialog.value = false }
         )
     }
 
@@ -161,7 +161,7 @@ fun UpdatesSettingsItem(
             if (newValue && !hasNotificationPermission()) {
                 // Save optimistically - dialog reverts if permission is denied
                 scope.launch { prefs.backgroundUpdateNotifications.update(true) }
-                showNotificationPermissionDialog = true
+                showNotificationPermissionDialog.value = true
             } else {
                 scope.launch {
                     prefs.backgroundUpdateNotifications.update(newValue)
@@ -201,7 +201,7 @@ fun UpdatesSettingsItem(
         exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
     ) {
         RichSettingsItem(
-            onClick = { showIntervalDialog = true },
+            onClick = { showIntervalDialog.value = true },
             showBorder = true,
             leadingContent = { MorpheIcon(icon = Icons.Outlined.Schedule) },
             title = stringResource(R.string.settings_advanced_update_interval),

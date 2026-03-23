@@ -62,19 +62,19 @@ fun SystemTabContent(
     val useProcessRuntime by prefs.useProcessRuntime.getAsState()
     val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
 
-    var showProcessRuntimeDialog by remember { mutableStateOf(false) }
-    var showApkManagementDialog by remember { mutableStateOf<ApkManagementType?>(null) }
-    var showPatchSelectionDialog by remember { mutableStateOf(false) }
+    val showProcessRuntimeDialog = remember { mutableStateOf(false) }
+    val showApkManagementDialog = remember { mutableStateOf<ApkManagementType?>(null) }
+    val showPatchSelectionDialog = remember { mutableStateOf(false) }
 
     // Extract strings to avoid LocalContext issues
     val keystoreUnavailable = stringResource(R.string.settings_system_export_keystore_unavailable)
 
     // Process runtime dialog
-    if (showProcessRuntimeDialog) {
+    if (showProcessRuntimeDialog.value) {
         ProcessRuntimeDialog(
             currentEnabled = useProcessRuntime,
             currentLimit = memoryLimit,
-            onDismiss = { showProcessRuntimeDialog = false },
+            onDismiss = { showProcessRuntimeDialog.value = false },
             onEnabledChange = { enabled ->
                 scope.launch { prefs.useProcessRuntime.update(enabled) }
             },
@@ -85,17 +85,17 @@ fun SystemTabContent(
     }
 
     // APK management dialog
-    showApkManagementDialog?.let { type ->
+    showApkManagementDialog.value?.let { type ->
         ApkManagementDialog(
             type = type,
-            onDismissRequest = { showApkManagementDialog = null }
+            onDismissRequest = { showApkManagementDialog.value = null }
         )
     }
 
     // Patch selection management dialog
-    if (showPatchSelectionDialog) {
+    if (showPatchSelectionDialog.value) {
         PatchSelectionManagementDialog(
-            onDismiss = { showPatchSelectionDialog = false }
+            onDismiss = { showPatchSelectionDialog.value = false }
         )
     }
 
@@ -130,7 +130,7 @@ fun SystemTabContent(
         SectionCard {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 RichSettingsItem(
-                    onClick = { showProcessRuntimeDialog = true },
+                    onClick = { showProcessRuntimeDialog.value = true },
                     title = stringResource(R.string.settings_system_process_runtime),
                     subtitle = if (useProcessRuntime)
                         stringResource(R.string.settings_system_process_runtime_enabled_description, memoryLimit)
@@ -257,7 +257,7 @@ fun SystemTabContent(
                 val originalApkCount = allOriginalApks.size
 
                 RichSettingsItem(
-                    onClick = { showApkManagementDialog = ApkManagementType.ORIGINAL },
+                    onClick = { showApkManagementDialog.value = ApkManagementType.ORIGINAL },
                     title = stringResource(R.string.settings_system_original_apks_title),
                     subtitle = stringResource(R.string.settings_system_original_apks_description),
                     leadingContent = {
@@ -288,7 +288,7 @@ fun SystemTabContent(
                 val patchedApkCount = allInstalledApps.size
 
                 RichSettingsItem(
-                    onClick = { showApkManagementDialog = ApkManagementType.PATCHED },
+                    onClick = { showApkManagementDialog.value = ApkManagementType.PATCHED },
                     title = stringResource(R.string.settings_system_patched_apks_title),
                     subtitle = stringResource(R.string.settings_system_patched_apks_description),
                     leadingContent = {
@@ -332,7 +332,7 @@ fun SystemTabContent(
                     }
 
                     RichSettingsItem(
-                        onClick = { showPatchSelectionDialog = true },
+                        onClick = { showPatchSelectionDialog.value = true },
                         title = stringResource(R.string.settings_system_patch_selections_title),
                         subtitle = stringResource(R.string.settings_system_patch_selections_description),
                         leadingContent = {

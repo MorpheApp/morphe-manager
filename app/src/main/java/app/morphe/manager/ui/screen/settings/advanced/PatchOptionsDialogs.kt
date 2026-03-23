@@ -59,8 +59,8 @@ fun ThemeColorDialog(
     val lightColor by patchOptionsPrefs.lightThemeColor(packageName).getAsState()
 
     // Local state for custom color input
-    var showDarkColorPicker by remember { mutableStateOf(false) }
-    var showLightColorPicker by remember { mutableStateOf(false) }
+    val showDarkColorPicker = remember { mutableStateOf(false) }
+    val showLightColorPicker = remember { mutableStateOf(false) }
 
     // Get theme options from bundle
     val themeOptions = patchOptionsViewModel.getThemeOptions(packageName)
@@ -161,7 +161,7 @@ fun ThemeColorDialog(
                     colorValue = darkColor,
                     isSelected = darkPresets.values.none { it?.toString() == darkColor },
                     isCustom = true,
-                    onClick = { showDarkColorPicker = true }
+                    onClick = { showDarkColorPicker.value = true }
                 )
             }
 
@@ -217,7 +217,7 @@ fun ThemeColorDialog(
                     colorValue = lightColor,
                     isSelected = lightPresets.values.none { it?.toString() == lightColor },
                     isCustom = true,
-                    onClick = { showLightColorPicker = true }
+                    onClick = { showLightColorPicker.value = true }
                 )
             }
 
@@ -234,7 +234,7 @@ fun ThemeColorDialog(
     }
 
     // Dark Color Picker Dialog
-    if (showDarkColorPicker) {
+    if (showDarkColorPicker.value) {
         ColorPickerDialog(
             title = stringResource(R.string.settings_advanced_patch_options_dark_theme_color),
             currentColor = darkColor,
@@ -242,14 +242,14 @@ fun ThemeColorDialog(
                 scope.launch {
                     patchOptionsPrefs.darkThemeColor(packageName).update(color)
                 }
-                showDarkColorPicker = false
+                showDarkColorPicker.value = false
             },
-            onDismiss = { showDarkColorPicker = false }
+            onDismiss = { showDarkColorPicker.value = false }
         )
     }
 
     // Light Color Picker Dialog
-    if (showLightColorPicker) {
+    if (showLightColorPicker.value) {
         ColorPickerDialog(
             title = stringResource(R.string.settings_advanced_patch_options_light_theme_color),
             currentColor = lightColor,
@@ -257,9 +257,9 @@ fun ThemeColorDialog(
                 scope.launch {
                     patchOptionsPrefs.lightThemeColor(packageName).update(color)
                 }
-                showLightColorPicker = false
+                showLightColorPicker.value = false
             },
-            onDismiss = { showLightColorPicker = false }
+            onDismiss = { showLightColorPicker.value = false }
         )
     }
 }
@@ -282,7 +282,7 @@ fun CustomBrandingDialog(
     var iconPath by remember { mutableStateOf(patchOptionsPrefs.customIconPath(packageName).getBlocking()) }
 
     // State for icon creator dialog
-    var showIconCreator by remember { mutableStateOf(false) }
+    val showIconCreator = remember { mutableStateOf(false) }
 
     // Get branding options from bundle
     val brandingOptions = patchOptionsViewModel.getBrandingOptions(packageName)
@@ -356,7 +356,7 @@ fun CustomBrandingDialog(
                 // Create Icon button
                 MorpheDialogOutlinedButton(
                     text = stringResource(R.string.adaptive_icon_create),
-                    onClick = { showIconCreator = true },
+                    onClick = { showIconCreator.value = true },
                     icon = Icons.Outlined.AutoAwesome,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -392,13 +392,13 @@ fun CustomBrandingDialog(
     }
 
     // Icon creator dialog
-    if (showIconCreator) {
+    if (showIconCreator.value) {
         AdaptiveIconCreatorDialog(
             packageName = packageName,
-            onDismiss = { showIconCreator = false },
+            onDismiss = { showIconCreator.value = false },
             onIconCreated = { path ->
                 iconPath = path
-                showIconCreator = false
+                showIconCreator.value = false
             }
         )
     }
@@ -419,7 +419,7 @@ fun CustomHeaderDialog(
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath(packageName).getBlocking()) }
 
     // State for header creator dialog
-    var showHeaderCreator by remember { mutableStateOf(false) }
+    val showHeaderCreator = remember { mutableStateOf(false) }
 
     // Get header options from bundle
     val headerOptions = patchOptionsViewModel.getHeaderOptions()
@@ -473,7 +473,7 @@ fun CustomHeaderDialog(
                 // Create Header button
                 MorpheDialogOutlinedButton(
                     text = stringResource(R.string.header_creator_create),
-                    onClick = { showHeaderCreator = true },
+                    onClick = { showHeaderCreator.value = true },
                     icon = Icons.Outlined.Image,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -507,13 +507,13 @@ fun CustomHeaderDialog(
     }
 
     // Header creator dialog
-    if (showHeaderCreator) {
+    if (showHeaderCreator.value) {
         HeaderCreatorDialog(
             packageName = packageName,
-            onDismiss = { showHeaderCreator = false },
+            onDismiss = { showHeaderCreator.value = false },
             onHeaderCreated = { path ->
                 headerPath = path
-                showHeaderCreator = false
+                showHeaderCreator.value = false
             }
         )
     }
