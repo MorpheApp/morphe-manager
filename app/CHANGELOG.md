@@ -1,3 +1,10 @@
+# app [1.13.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.12.2...v1.13.0-dev.1) (2026-03-23)
+
+
+### Features
+
+* Allow patching split APKs with a warning instead of blocking ([#353](https://github.com/MorpheApp/morphe-manager/issues/353)) ([2575368](https://github.com/MorpheApp/morphe-manager/commit/2575368e8054de9f63ce5e4bf0d005b4182e7a86))
+
 ## app [1.12.2](https://github.com/MorpheApp/morphe-manager/compare/v1.12.1...v1.12.2) (2026-03-22)
 
 
