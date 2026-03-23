@@ -23,7 +23,7 @@
 </p>
 &nbsp;
 
-# 💊 Morphe Manager
+# 💊 Morphe
 
 > Want to watch ads? Us neither.
 
