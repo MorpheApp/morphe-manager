@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -139,7 +140,7 @@ private fun formatElapsed(ms: Long?): String {
  * heap-after-patching) are consumed and never emitted as plain [LogItem.Entry]s.
  */
 internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
-    // Pre-scan for auxiliary lines so banner cards can be built in one pass.
+    // Pre-scan for auxiliary lines so banner cards can be built in one pass
     var runtimeMemoryLimitMb: String? = null
     var processHeapAverageMb: String? = null
     var processHeapMaxMb: String? = null
@@ -148,8 +149,8 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     var ramTotal: String? = null
     var storageAvailable: String? = null
     var storageTotal: String? = null
-    var deviceManufacturer: String? = null
-    var deviceModel: String? = null
+    var deviceManufacturer: String?
+    var deviceModel: String?
 
     for ((_, message) in this) {
         when {
@@ -276,21 +277,21 @@ fun ExpertPatchingInProgress(
     ) {
         // Content area
         if (windowSize.useTwoColumnLayout) {
-            // Landscape: header left, log right
+            // Landscape: header + action bar left, log right
             Row(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
-                    .padding(horizontal = windowSize.contentPadding)
-                    .padding(top = windowSize.contentPadding),
+                    .padding(horizontal = windowSize.contentPadding),
                 horizontalArrangement = Arrangement.spacedBy(windowSize.contentPadding),
                 verticalAlignment = Alignment.Top
             ) {
+                // Left column: header + action bar
                 Column(
                     modifier = Modifier
                         .weight(0.42f)
                         .fillMaxHeight(),
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     ExpertProgressHeader(
                         progress = progress,
@@ -299,8 +300,28 @@ fun ExpertPatchingInProgress(
                         patcherViewModel = patcherViewModel,
                         patcherSucceeded = patcherSucceeded
                     )
+
+                    // Action bar inside left column
+                    PatcherBottomActionBar(
+                        showCancelButton = patcherSucceeded == null,
+                        showHomeButton = patcherSucceeded == true,
+                        showInstallButton = patcherSucceeded == true,
+                        showSaveButton = false,
+                        showErrorButton = false,
+                        showCopyLogsButton = true,
+                        onCancelClick = onCancelClick,
+                        onHomeClick = onHomeClick,
+                        onInstallClick = onInstallClick,
+                        onSaveClick = {},
+                        onErrorClick = {},
+                        onCopyLogsClick = {
+                            clipboardManager.setText(AnnotatedString(buildLogsText()))
+                        },
+                        modifier = Modifier.padding(horizontal = 0.dp)
+                    )
                 }
 
+                // Right column: log panel
                 ExpertLogPanel(
                     patcherViewModel = patcherViewModel,
                     listState = listState,
@@ -339,25 +360,27 @@ fun ExpertPatchingInProgress(
             }
         }
 
-        // Spacing above the action bar so it doesn't feel attached to the log panel
-        Spacer(Modifier.height(12.dp))
+        // Portrait-only: action bar below content
+        if (!windowSize.useTwoColumnLayout) {
+            Spacer(Modifier.height(12.dp))
 
-        PatcherBottomActionBar(
-            showCancelButton = patcherSucceeded == null,
-            showHomeButton = patcherSucceeded == true,
-            showInstallButton = patcherSucceeded == true,
-            showSaveButton = false,
-            showErrorButton = false,
-            showCopyLogsButton = true,
-            onCancelClick = onCancelClick,
-            onHomeClick = onHomeClick,
-            onInstallClick = onInstallClick,
-            onSaveClick = {},
-            onErrorClick = {},
-            onCopyLogsClick = {
-                clipboardManager.setText(AnnotatedString(buildLogsText()))
-            }
-        )
+            PatcherBottomActionBar(
+                showCancelButton = patcherSucceeded == null,
+                showHomeButton = patcherSucceeded == true,
+                showInstallButton = patcherSucceeded == true,
+                showSaveButton = false,
+                showErrorButton = false,
+                showCopyLogsButton = true,
+                onCancelClick = onCancelClick,
+                onHomeClick = onHomeClick,
+                onInstallClick = onInstallClick,
+                onSaveClick = {},
+                onErrorClick = {},
+                onCopyLogsClick = {
+                    clipboardManager.setText(AnnotatedString(buildLogsText()))
+                }
+            )
+        }
     }
 }
 
@@ -587,7 +610,7 @@ private fun HeapUsageGraph(
                             .toFloat()
                     }
 
-                    val color = androidx.compose.ui.graphics.lerp(barColor, warnColor, t)
+                    val color = lerp(barColor, warnColor, t)
 
                     Box(modifier = Modifier
                         .weight(1f)
