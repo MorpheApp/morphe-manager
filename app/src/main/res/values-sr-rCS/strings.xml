@@ -125,9 +125,11 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_invalid_signature_title">Nepoveren APK</string>
     <string name="home_invalid_signature_message">APK dat ste izabrali za &lt;b&gt;%s&lt;/b&gt; ne odgovara očekivanom sertifikatu za potpisivanje. Može biti izmenjen ili sa nepouzdanog izvora</string>
     <string name="home_invalid_signature_badge">Ovaj APK možda nije original</string>
-    <string name="home_split_apk_warning_title">Podržani su samo Split APK-ovi</string>
-    <string name="home_split_apk_warning_message">Izabrali ste Split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; zahteva &lt;b&gt;potpuni APK&lt;/b&gt; - split bundle-i se ne mogu popravljati za ovu aplikaciju</string>
-    <string name="home_split_apk_warning_badge">Potrebna je potpuna verzija APK-a da bi se nastavilo</string>
+    <string name="home_split_apk_warning_title">Детектован подељени APK</string>
+    <string name="home_split_apk_warning_message">"Ова датотека је APK пакета
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+За најбоље резултате, ова апликација препоручује исправљање &lt;b&gt;целог APK-а&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Izaberite neki drugi APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Eksperimentalno</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ova verzija ima eksperimentalnu podršku i može biti nestabilna ili nepotpuna</string>

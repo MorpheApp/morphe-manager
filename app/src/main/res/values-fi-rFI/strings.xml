@@ -124,9 +124,11 @@ Oletko varma, että haluat jatkaa?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Todentamaton APK</string>
     <string name="home_invalid_signature_badge">Tämä APK ei välttämättä ole alkuperäinen</string>
-    <string name="home_split_apk_warning_title">Split APK -tukea ei ole saatavilla</string>
-    <string name="home_split_apk_warning_message">Valitsit split APK -paketin (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; vaatii &lt;b&gt;täyden APK:n&lt;/b&gt; – split-paketteja ei voi paikata tälle sovellukselle</string>
-    <string name="home_split_apk_warning_badge">Paikkausta varten vaaditaan täysi APK</string>
+    <string name="home_split_apk_warning_title">APK-tiedoston tunnistettu jako</string>
+    <string name="home_split_apk_warning_message">"Tämä tiedosto on APK-paketti
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-tiedoston&lt;/b&gt; korjaamista"</string>
     <string name="home_split_apk_warning_pick_another">Valitse toinen APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Kokeellinen</string>
     <string name="home_dialog_unsupported_version_experimental_description">Tämä versio on kokeellinen ja voi olla epävakaa tai epätäydellinen</string>

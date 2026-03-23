@@ -125,9 +125,11 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="home_invalid_signature_title">APK chưa xác minh</string>
     <string name="home_invalid_signature_message">Tệp APK bạn chọn cho &lt;b&gt;%s&lt;/b&gt; không khớp với chữ ký dự kiến. Nó có thể đã bị chỉnh sửa hoặc đến từ một nguồn không đáng tin</string>
     <string name="home_invalid_signature_badge">Không phải APK gốc</string>
-    <string name="home_split_apk_warning_title">Không hỗ trợ APK chia nhỏ</string>
-    <string name="home_split_apk_warning_message">Bạn đã chọn một gói APK chia nhỏ (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; cần một &lt;b&gt;APK đầy đủ&lt;/b&gt; - các gói chia nhỏ không thể vá cho ứng dụng này</string>
-    <string name="home_split_apk_warning_badge">Cần một APK đầy đủ để tiếp tục</string>
+    <string name="home_split_apk_warning_title">Phát hiện APK chia nhỏ</string>
+    <string name="home_split_apk_warning_message">"Đây là gói APK chia nhỏ
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để vá tốt nhất"</string>
     <string name="home_split_apk_warning_pick_another">Chọn APK khác</string>
     <string name="home_dialog_unsupported_version_experimental_label">Thử nghiệm</string>
     <string name="home_dialog_unsupported_version_experimental_description">Phiên bản này vẫn đang thử nghiệm và có thể không ổn định hoặc chưa hoàn thiện</string>

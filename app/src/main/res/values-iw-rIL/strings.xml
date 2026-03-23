@@ -126,9 +126,11 @@
     <string name="home_invalid_signature_title">APK לא מאומת</string>
     <string name="home_invalid_signature_message">ה-APK שבחרת עבור &lt;b&gt;%s&lt;/b&gt; אינו תואם לתעודת החתימה הצפויה. ייתכן שהוא שונה או ממקור לא מהימן</string>
     <string name="home_invalid_signature_badge">ייתכן שה-APK הזה אינו המקורי</string>
-    <string name="home_split_apk_warning_title">לא נתמכים APK מפוצלים</string>
-    <string name="home_split_apk_warning_message">בחרת חבילת APK מפוצלת (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; דורש &lt;b&gt;APK מלא&lt;/b&gt; - חבילות מפוצלות לא יכולות להיות מתוקנות עבור אפליקציה זו</string>
-    <string name="home_split_apk_warning_badge">נדרש APK מלא כדי להמשיך</string>
+    <string name="home_split_apk_warning_title">APK מפולח זוהה</string>
+    <string name="home_split_apk_warning_message">"קובץ זה הוא חבילת APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+לתוצאות הטובות ביותר, האפליקציה הזו ממליצה על תיקון &lt;b&gt;APK מלא&lt;/b>"</string>
     <string name="home_split_apk_warning_pick_another">בחר APK אחר</string>
     <string name="home_dialog_unsupported_version_experimental_label">ניסיוני</string>
     <string name="home_dialog_unsupported_version_experimental_description">גרסה זו בעלת תמיכה ניסיונית ועשויה להיות לא יציבה או לא שלמה</string>

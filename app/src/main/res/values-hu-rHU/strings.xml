@@ -125,9 +125,11 @@ Biztosan folytatja?"</string>
     <string name="home_invalid_signature_title">Ellenőrizetlen APK</string>
     <string name="home_invalid_signature_message">Az &lt;b&gt;%s&lt;/b&gt; kiválasztott APK nem egyezik a várt aláírási tanúsítvánnyal. Lehetséges, hogy módosították vagy nem megbízható forrásból származik</string>
     <string name="home_invalid_signature_badge">Ez az APK fájl nem lehet az eredeti.</string>
-    <string name="home_split_apk_warning_title">Nem támogatott a felosztott APK</string>
-    <string name="home_split_apk_warning_message">Egy felosztott APK csomagot választott (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). A &lt;b&gt;%s&lt;/b&gt; -nek &lt;b&gt;teljes APK&lt;/b&gt; fájlra van szüksége - a felosztott csomagokat nem lehet javítani ezen az alkalmazáshoz</string>
-    <string name="home_split_apk_warning_badge">Teljes APK fájl szükséges a folytatáshoz.</string>
+    <string name="home_split_apk_warning_title">APK felületes észlelve</string>
+    <string name="home_split_apk_warning_message">"Ez a fájl egy APK csomag
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&lt;/b&gt; javítását"</string>
     <string name="home_split_apk_warning_pick_another">Válasszon egy másik APK fájlt.</string>
     <string name="home_dialog_unsupported_version_experimental_label">Kísérleti</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ez a verzió kísérleti támogatással rendelkezik, és lehet, hogy instabil vagy hiányos.</string>

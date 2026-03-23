@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">Непотвърден APK</string>
     <string name="home_invalid_signature_message">APK файлът, който избрахте за &lt;b&gt;%s&lt;/b&gt;, не съвпада с очаквания сертификат за подписване. Възможно е да е модифициран или да е от ненадежден източник</string>
     <string name="home_invalid_signature_badge">Този APK може да не е оригиналният</string>
-    <string name="home_split_apk_warning_title">Сплит APK не се поддържа</string>
-    <string name="home_split_apk_warning_message">Избрали сте сплит APK пакет (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; изисква &lt;b&gt;пълен APK&lt;/b&gt; - сплит пакетите не могат да бъдат коригирани за това приложение</string>
-    <string name="home_split_apk_warning_badge">Изисква се пълен APK</string>
+    <string name="home_split_apk_warning_title">Открит е разделен APK</string>
+    <string name="home_split_apk_warning_message">"Този файл е APK пакет
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+За най-добри резултати, това приложение препоръчва да се приложи &lt;b&gt;пълен APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Изберете друг APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Експериментално</string>
     <string name="home_dialog_unsupported_version_experimental_description">Тази версия има експериментална поддръжка и може да е нестабилна или непълна</string>

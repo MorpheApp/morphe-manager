@@ -120,6 +120,10 @@
     <string name="expert_mode_multiple_sources_warning_title">Flera korrigeringskällor har valts</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">Overifierad APK-fil</string>
+    <string name="home_invalid_signature_message">Den APK-fil du har valt för &lt;b&gt;%s&lt;/b&gt; matchar inte det förväntade signeringscertifikatet. Den kan ha modifierats eller vara från en opålitlig källa.</string>
+    <string name="home_invalid_signature_badge">Denna APK-fil kanske inte är originalet</string>
+    <string name="home_split_apk_warning_pick_another">Välj en annan APK-fil</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimentell</string>
     <string name="home_dialog_unsupported_version_experimental_description">Denna version har experimentell stöd och kan vara instabil eller ofullständig</string>
     <string name="morphe_experimental_app_version_dialog_title">Vill du experimentera? 🧪</string>
@@ -137,6 +141,8 @@
     <string name="home_outdated_patches_dialog_message">Mobildata är aktivt och korrigeringsuppdateringar har inaktiverats</string>
     <string name="home_outdated_patches_dialog_warning">Om du korrigerar med inaktuella korrigeringar kan det leda till en trasig app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Uppdatera och korrigera</string>
+    <string name="home_low_disk_space_dialog_title">Lågt diskutrymme</string>
+    <string name="home_low_disk_space_dialog_message">Endast %1$.2f GB ledigt lagringsutrymme är tillgängligt. Appkorrigering kräver minst 1 GB ledigt utrymme för att fungera korrekt</string>
     <!-- Patch Options -->
     <string name="custom_color">Anpassad färg</string>
     <string name="hex_color">Hexfärg</string>

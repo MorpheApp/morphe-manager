@@ -55,7 +55,7 @@
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_management_prerelease_toggle">Ön sürüm yamaları kullan</string>
     <string name="sources_management_prerelease_toggle_description">Yeni deneysel yamaların erken erişimine sahip olun</string>
-    <string name="sources_management_experimental_versions_toggle">Deneyysel uygulama sürümlerini kullan</string>
+    <string name="sources_management_experimental_versions_toggle">Deneysel uygulama sürümlerini kullan</string>
     <string name="sources_management_experimental_versions_toggle_description">Mevcutsa deneysel uygulama hedeflerini yama yap</string>
     <string name="sources_management_already_exists">Bu kaynak zaten eklenmiş</string>
     <!-- Home Screen - Sources Dialogs -->
@@ -123,16 +123,18 @@
 Devam etmek istediğinizden emin misiniz?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Onaylanmamış APK</string>
-    <string name="home_invalid_signature_message">Seçtiğiniz &lt;b&gt;%s&lt;/b&gt; APK\'si, beklenen imzalama sertifikasıyla eşleşmiyor. Değiştirilmiş olabilir veya güvenilmeyen bir kaynaktan olabilir</string>
+    <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt; için seçtiğiniz APK, beklenen imzalama sertifikasıyla eşleşmiyor. Değiştirilmiş olabilir veya güvenilmeyen bir kaynaktan olabilir</string>
     <string name="home_invalid_signature_badge">Bu APK orijinal olmayabilir</string>
-    <string name="home_split_apk_warning_title">Parçalı APK desteklenmiyor</string>
-    <string name="home_split_apk_warning_message">Parçalı bir APK demeti (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) seçtiniz. &lt;b&gt;%s&lt;/b&gt; için &lt;b&gt;tam bir APK&lt;/b&gt; gereklidir - bu uygulama için parçalı demetler düzeltilemez</string>
-    <string name="home_split_apk_warning_badge">Devam etmek için tam bir APK gereklidir</string>
-    <string name="home_split_apk_warning_pick_another">Başka bir APK seçin</string>
+    <string name="home_split_apk_warning_title">Bölünmüş APK tespit edildi</string>
+    <string name="home_split_apk_warning_message">"Bu dosya bir APK paketidir
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+En iyi sonuçlar için bu uygulama, tam bir &lt;b&gt;APK&lt;/b&gt; yamalamasını önerir"</string>
+    <string name="home_split_apk_warning_pick_another">Başka bir APK seç</string>
     <string name="home_dialog_unsupported_version_experimental_label">Deneysel</string>
     <string name="home_dialog_unsupported_version_experimental_description">Bu sürüm deneysel destek içerir ve kararsız veya eksik olabilir</string>
     <string name="morphe_experimental_app_version_dialog_title">Deney yapmak ister misiniz? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; sürümünün erken deneysel desteği bulunmaktadır&lt;br/&gt;&lt;br/&gt;🔧 Bu uygulama sürümü için düzeltmeler iyileştirilirken garip uygulama davranışını veya tanımlanmamış hataları bekleyin</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt;\'nin bu sürümünün erken deneysel desteği bulunmaktadır&lt;br/&gt;&lt;br/&gt;🔧 Bu uygulama sürümü için yamalar iyileştirilirken tuhaf uygulama davranışı veya tanımlanmamış hatalar bekleyin</string>
     <string name="home_dialog_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
     <string name="home_dialog_unsupported_version_dialog_description">Bu APK, önerilen uygulama sürümü değil. Devam edilmesi çalışmayan bir uygulamaya neden olabilir</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Yine de devam et</string>

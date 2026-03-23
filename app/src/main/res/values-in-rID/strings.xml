@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Aplikasi lainnya</string>
+    <string name="home_other_apps">Lainnya</string>
     <string name="home_not_patched_yet">Belum ditambal</string>
     <string name="home_no_patches_available">Tidak ada tambalan yang tersedia</string>
     <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
@@ -125,9 +125,11 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="home_invalid_signature_title">APK Tidak Terverifikasi</string>
     <string name="home_invalid_signature_message">APK yang Anda pilih untuk &lt;b&gt;%s&lt;/b&gt; tidak sesuai dengan sertifikat penandatanganan yang diharapkan. Ini mungkin telah dimodifikasi atau berasal dari sumber yang tidak terpercaya</string>
     <string name="home_invalid_signature_badge">APK ini mungkin bukan versi aslinya</string>
-    <string name="home_split_apk_warning_title">APK terpisah tidak didukung</string>
-    <string name="home_split_apk_warning_message">Anda telah memilih paket APK terpisah (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; memerlukan &lt;b&gt;APK lengkap&lt;/b&gt; - paket terpisah tidak dapat ditambal untuk aplikasi ini</string>
-    <string name="home_split_apk_warning_badge">APK lengkap diperlukan untuk melanjutkan</string>
+    <string name="home_split_apk_warning_title">APK terpisah terdeteksi</string>
+    <string name="home_split_apk_warning_message">"Berkas ini adalah bundel APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK lengkap&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Pilih APK lain</string>
     <string name="home_dialog_unsupported_version_experimental_label">Eksperimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Versi ini memiliki dukungan eksperimental dan mungkin tidak stabil atau tidak lengkap</string>

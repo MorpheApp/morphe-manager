@@ -125,9 +125,6 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_invalid_signature_title">Təsdiqlənməyən APK</string>
     <string name="home_invalid_signature_message"> &lt;b&gt;%s&lt;/b&gt; üçün seçdiyiniz APK gözlənilən imza sertifikatına uyuşmur. O, dəyişdirilən və ya etibarsız mənbədən ola bilər.</string>
     <string name="home_invalid_signature_badge">Bu APK əsil olmaya bilər</string>
-    <string name="home_split_apk_warning_title">Bölünən APK dəstəklənmir</string>
-    <string name="home_split_apk_warning_message">Siz bölünən APK paketi seçdiniz (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; &lt;b&gt;tam APK&lt;/b&gt;  tələb edir - bölünən paketlər bu tətbiq üçün yamaqlana bilməz</string>
-    <string name="home_split_apk_warning_badge">Davam etmək üçün tam APK tələb olunur</string>
     <string name="home_split_apk_warning_pick_another">Başqa APK seç</string>
     <string name="home_dialog_unsupported_version_experimental_label">Təcrübi</string>
     <string name="home_dialog_unsupported_version_experimental_description">Bu versiya təcrübi dəstəyə sahibdir və dəyişkən yaxud qüsurlu ola bilər</string>

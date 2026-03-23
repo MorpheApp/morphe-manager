@@ -55,8 +55,8 @@
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
     <string name="sources_management_prerelease_toggle">Usa le patch di anteprima</string>
     <string name="sources_management_prerelease_toggle_description">Ottieni l\'accesso anticipato alle nuove versioni sperimentali delle patch.</string>
-    <string name="sources_management_experimental_versions_toggle">Utilizza versioni sperimentali dell\'app</string>
-    <string name="sources_management_experimental_versions_toggle_description">Applica patch alle versioni sperimentali dell\'app, se disponibili</string>
+    <string name="sources_management_experimental_versions_toggle">Utilizza le versioni sperimentali delle app</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patcha le versioni sperimentali delle app, se disponibili</string>
     <string name="sources_management_already_exists">Questa fonte è già stata aggiunta</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome visualizzato</string>
@@ -125,14 +125,16 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_invalid_signature_title">APK non verificato</string>
     <string name="home_invalid_signature_message">L\'APK selezionato per &lt;b&gt;%s&lt;/b&gt; non corrisponde al certificato di firma previsto. Potrebbe essere stato modificato o provenire da una fonte non attendibile</string>
     <string name="home_invalid_signature_badge">Questo APK potrebbe non essere l\'originale</string>
-    <string name="home_split_apk_warning_title">APK suddivisi non supportati</string>
-    <string name="home_split_apk_warning_message">Hai selezionato un bundle APK suddiviso (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; richiede un &lt;b&gt;APK completo&lt;/b&gt; - i bundle suddivisi non possono essere applicati a questa app</string>
-    <string name="home_split_apk_warning_badge">È richiesto un APK completo per continuare</string>
+    <string name="home_split_apk_warning_title">Rilevato file APK split</string>
+    <string name="home_split_apk_warning_message">"Questo file è un bundle APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Per ottenere i risultati migliori, questa app raccomanda di applicare una patch a un &lt;b&gt;APK completo&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Scegli un altro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Sperimentale</string>
     <string name="home_dialog_unsupported_version_experimental_description">Questa versione ha il supporto sperimentale e potrebbe essere instabile o incompleta</string>
     <string name="morphe_experimental_app_version_dialog_title">Vuoi sperimentare? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Questa versione di &lt;b&gt;%s&lt;/b&gt; ha un supporto sperimentale iniziale&lt;br/&gt;&lt;br/&gt;🔧 Aspettati un comportamento imprevisto dell\'app o bug non identificati man mano che le patch vengono perfezionate per questa versione dell\'app</string>
+    <string name="morphe_experimental_app_version_dialog_message">Questa versione di &lt;b&gt;%s&lt;/b&gt; ha un supporto sperimentale iniziale&lt;br/&gt;&lt;br/&gt;🔧 Aspettati un comportamento imprevisto dell\'app o bug non identificati man mano che le patch vengono perfezionate per questa versione della app</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versione APK non supportata</string>
     <string name="home_dialog_unsupported_version_dialog_description">Questo APK non è di una versione app raccomandata. Procedere potrebbe produrre un’app non funzionante</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Procedi comunque</string>
@@ -146,9 +148,9 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_outdated_patches_dialog_message">La connessione con i dati mobili è attiva e gli aggiornamenti delle patch sono disabilitati</string>
     <string name="home_outdated_patches_dialog_warning">Il patching con patch obsolete potrebbe risultare in un\'app non funzionante</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aggiorna &amp; patcha</string>
-    <string name="home_low_disk_space_dialog_title">Spazio su disco insufficiente</string>
+    <string name="home_low_disk_space_dialog_title">Spazio su disco in esaurimento</string>
     <string name="home_low_disk_space_dialog_message">Disponibili solo %1$.2f GB di spazio di archiviazione libero. L\'applicazione delle patch richiede almeno 1 GB di spazio di archiviazione libero per funzionare correttamente</string>
-    <string name="home_low_disk_space_dialog_warning">La prosecuzione potrebbe causare un errore \"file non trovato\" o un APK di output corrotto</string>
+    <string name="home_low_disk_space_dialog_warning">Procedere potrebbe causare l\'errore \"file non trovato\" o esitare in un APK di output corrotto</string>
     <!-- Patch Options -->
     <string name="custom_color">Colore personalizzato</string>
     <string name="hex_color">Colore esadecimale</string>

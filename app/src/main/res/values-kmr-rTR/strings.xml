@@ -123,9 +123,11 @@
     <string name="home_invalid_signature_title">APK-ya pêşbîn nekirî</string>
     <string name="home_invalid_signature_message">APK-ya ku hîşyarîdê bo &lt;b&gt;%s&lt;/b&gt; hilbijart, bi gîrêdanî ya ceribandinê ya pêwist nayê. Ew dikare guherîye an ji çavê nedastî be</string>
     <string name="home_invalid_signature_badge">Ev APK nebûna orîjînal e.</string>
-    <string name="home_split_apk_warning_title">Piçûnbûna APK piştgirî nade</string>
-    <string name="home_split_apk_warning_message">Hûn paketek APK-ya qutî hilbijart ku (&lt;b&gt;.apks/.apkm/.xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; pêwisteya &lt;b&gt;APK-ya tam&lt;/b&gt; heye - pakketek qutî nikare ji bo wê sepanê çêkirinê were çêkirin</string>
-    <string name="home_split_apk_warning_badge">APK-ya tam pêwist e ku heta dawiyê were.</string>
+    <string name="home_split_apk_warning_title">APK-ê şikandî ye</string>
+    <string name="home_split_apk_warning_message">"Ev pel paketek APK ye
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt; çêbike."</string>
     <string name="home_split_apk_warning_pick_another">APK-ya din hilbijêre</string>
     <string name="home_dialog_unsupported_version_experimental_label">Sernişan</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ev guhertin piştgirîa ceribandiyê heye û dikare neyêbawer an jî bikêmam be</string>

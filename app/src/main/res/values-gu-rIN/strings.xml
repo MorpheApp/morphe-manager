@@ -162,6 +162,7 @@
     <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\' માં બદલીને ફરી શરૂ કરીએ?</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
+    <string name="notification_manager_update_title">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->

@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">APK ที่ยังไม่ได้รับการยืนยัน</string>
     <string name="home_invalid_signature_message">APK ที่คุณเลือกสำหรับ &lt;b&gt;%s&lt;/b&gt; ไม่ตรงกับใบรับรองการลงนามที่คาดหวัง อาจถูกแก้ไขหรือมาจากแหล่งที่ไม่น่าเชื่อถือ</string>
     <string name="home_invalid_signature_badge">APK นี้อาจไม่ใช่ไฟล์ต้นฉบับ</string>
-    <string name="home_split_apk_warning_title">ไม่รองรับ APK แบบแยกส่วน</string>
-    <string name="home_split_apk_warning_message">คุณเลือก APK แบบแยกส่วน (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) &lt;b&gt;%s&lt;/b&gt; ต้องการ &lt;b&gt;APK เต็ม&lt;/b&gt; - ไม่สามารถแพตช์ชุดแยกส่วนสำหรับแอปนี้ได้</string>
-    <string name="home_split_apk_warning_badge">จำเป็นต้องใช้ APK เต็มเพื่อดำเนินการต่อ</string>
+    <string name="home_split_apk_warning_title">ตรวจพบ APK แบบแยกส่วน</string>
+    <string name="home_split_apk_warning_message">"ไฟล์นี้เป็น APK bundle
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+สำหรับผลลัพธ์ที่ดีที่สุด แอปนี้ขอแนะนำให้อัปเดต &lt;b&gt;APK เต็ม&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">เลือก APK อื่น</string>
     <string name="home_dialog_unsupported_version_experimental_label">ทดลอง</string>
     <string name="home_dialog_unsupported_version_experimental_description">รุ่นนี้มีการรองรับแบบทดลองและอาจไม่เสถียรหรือไม่สมบูรณ์</string>

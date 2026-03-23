@@ -125,9 +125,11 @@ Weet u zeker dat u doorgaat?"</string>
     <string name="home_invalid_signature_title">Onbevestigd APK</string>
     <string name="home_invalid_signature_message">Het APK-bestand dat u hebt geselecteerd voor &lt;b&gt;%s&lt;/b&gt; komt niet overeen met het verwachte ondertekeningscertificaat. Het kan gewijzigd zijn of afkomstig zijn van een onbetrouwbare bron</string>
     <string name="home_invalid_signature_badge">Dit APK-bestand is mogelijk niet het origineel</string>
-    <string name="home_split_apk_warning_title">Split APK wordt niet ondersteund</string>
-    <string name="home_split_apk_warning_message">U heeft een split APK-bundel (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) geselecteerd. &lt;b&gt;%s&lt;/b&gt; vereist een &lt;b&gt;volledig APK-bestand&lt;/b&gt; - split-bundels kunnen niet worden gepatcht voor deze app</string>
-    <string name="home_split_apk_warning_badge">Een volledig APK-bestand is vereist om verder te gaan</string>
+    <string name="home_split_apk_warning_title">Gesplitst APK gedetecteerd</string>
+    <string name="home_split_apk_warning_message">"Dit bestand is een APK-bundel
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b&gt; te patchen"</string>
     <string name="home_split_apk_warning_pick_another">Selecteer een ander APK-bestand</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimenteel</string>
     <string name="home_dialog_unsupported_version_experimental_description">Deze versie heeft experimentele ondersteuning en kan instabiel of onvolledig zijn</string>

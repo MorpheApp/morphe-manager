@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">검증되지 않은 APK</string>
     <string name="home_invalid_signature_message">선택된 &lt;b&gt;%s&lt;/b&gt;에 대한 APK는 예상된 서명 인증서와 일치하지 않습니다. 수정되었거나 신뢰할 수 없는 출처에서 가져온 파일일 수 있습니다</string>
     <string name="home_invalid_signature_badge">이 파일은 순정 APK가 아닐 수 있습니다</string>
-    <string name="home_split_apk_warning_title">분할 APK는 지원되지 않습니다</string>
-    <string name="home_split_apk_warning_message">분할 APK 번들(&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)을 선택하셨습니다. &lt;b&gt;%s&lt;/b&gt;는 &lt;b&gt;완전한 APK&lt;/b&gt;가 필요하며, 분할 번들로 패치할 수 없습니다</string>
-    <string name="home_split_apk_warning_badge">계속하려면 완전한 APK가 필요합니다</string>
+    <string name="home_split_apk_warning_title">분할 APK가 감지되었습니다</string>
+    <string name="home_split_apk_warning_message">"이 파일은 APK 번들입니다
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)
+
+최상의 결과를 얻으려면 이 앱은 &lt;b&gt;완전한 APK&lt;/b&gt;를 패치하는 것을 권장합니다"</string>
     <string name="home_split_apk_warning_pick_another">다른 APK를 선택하세요</string>
     <string name="home_dialog_unsupported_version_experimental_label">실험 버전</string>
     <string name="home_dialog_unsupported_version_experimental_description">이 버전은 실험적 지원이 포함되어 있으며, 불안정하거나 완전하지 않을 수 있습니다</string>

@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">अपरिचित APK</string>
     <string name="home_invalid_signature_message">आपके द्वारा चयनित APK &lt;b&gt;%s&lt;/b&gt; प्रमाण पत्र से मेल नहीं खाता। यह संशोधित किया गया हो सकता है या किसी अविश्वसनीय स्रोत से हो सकता है</string>
     <string name="home_invalid_signature_badge">यह APK मूल नहीं हो सकता है</string>
-    <string name="home_split_apk_warning_title">स्प्लिट APK समर्थित नहीं है</string>
-    <string name="home_split_apk_warning_message">आपने एक स्प्लिट APK बंडल (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) चुना है। &lt;b&gt;%s&lt;/b&gt; को एक &lt;b&gt;पूर्ण APK&lt;/b&gt; की आवश्यकता है - इस ऐप के लिए स्प्लिट बंडल को पैच नहीं किया जा सकता है</string>
-    <string name="home_split_apk_warning_badge">जारी रखने के लिए पूर्ण APK की आवश्यकता है</string>
+    <string name="home_split_apk_warning_title">APK का विभाजन पता चला</string>
+    <string name="home_split_apk_warning_message">"यह फ़ाइल एक APK बंडल है
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+सर्वोत्तम परिणामों के लिए, यह ऐप एक &lt;b&gt;पूर्ण APK&lt;/b&gt; को पैच करने की अनुशंसा करता है"</string>
     <string name="home_split_apk_warning_pick_another">कोई दूसरा APK चुनें</string>
     <string name="home_dialog_unsupported_version_experimental_label">प्रायोगिक</string>
     <string name="home_dialog_unsupported_version_experimental_description">इस संस्करण का प्रायोगिक समर्थन है और अस्थिर या अधूरा हो सकता है</string>

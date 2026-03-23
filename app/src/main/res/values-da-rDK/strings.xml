@@ -125,9 +125,11 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="home_invalid_signature_title">Ubekræftet APK</string>
     <string name="home_invalid_signature_message">Den APK du valgte for &lt;b&gt;%s&lt;/b&gt;, stemmer ikke overens med det forventede underskrivningscertifikat. Den kan være ændret eller fra en utroværdig kilde</string>
     <string name="home_invalid_signature_badge">Denne APK er muligvis ikke den originale</string>
-    <string name="home_split_apk_warning_title">Split APK understøttes ikke</string>
-    <string name="home_split_apk_warning_message">Du har valgt en split APK-pakke (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; kræver en &lt;b&gt;fuld APK&lt;/b&gt; – split-pakker kan ikke patcheres til denne app</string>
-    <string name="home_split_apk_warning_badge">En fuld APK er påkrævet for at fortsætte</string>
+    <string name="home_split_apk_warning_title">Opdelt APK påvist</string>
+    <string name="home_split_apk_warning_message">"Denne fil er en APK-pakke
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Vælg en anden APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Eksperimentel</string>
     <string name="home_dialog_unsupported_version_experimental_description">Denne version har eksperimentel support og kan være ustabil eller ufuldstændig</string>

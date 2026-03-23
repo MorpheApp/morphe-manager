@@ -125,9 +125,11 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="home_invalid_signature_title">Unverifiziertes APK</string>
     <string name="home_invalid_signature_message">Das von Ihnen ausgewählte APK für &lt;b&gt;%s&lt;/b&gt; stimmt nicht mit dem erwarteten Signaturzertifikat überein. Es wurde möglicherweise geändert oder stammt von einer nicht vertrauenswürdigen Quelle</string>
     <string name="home_invalid_signature_badge">Dieses APK ist möglicherweise nicht die Originalversion</string>
-    <string name="home_split_apk_warning_title">Split APK wird nicht unterstützt</string>
-    <string name="home_split_apk_warning_message">Sie haben ein Split APK Bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;) ausgewählt. &lt;b&gt;%s&lt;/b&gt; benötigt ein &lt;b&gt;vollständiges APK&lt;/b&gt; – Split Bundles können für diese App nicht gepatcht werden</string>
-    <string name="home_split_apk_warning_badge">Ein vollständiges APK ist erforderlich, um fortzufahren</string>
+    <string name="home_split_apk_warning_title">APK erkannt</string>
+    <string name="home_split_apk_warning_message">"Diese Datei ist ein APK-Bundle
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Für optimale Ergebnisse empfiehlt diese App, ein &lt;b&gt;vollständiges APK&lt;/b&gt; zu patchen."</string>
     <string name="home_split_apk_warning_pick_another">Wählen Sie ein anderes APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimentell</string>
     <string name="home_dialog_unsupported_version_experimental_description">Diese Version hat experimentelle Unterstützung und ist möglicherweise instabil oder unvollständig</string>

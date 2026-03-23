@@ -125,9 +125,11 @@ Tem certeza de que deseja continuar?"</string>
     <string name="home_invalid_signature_title">APK não verificado</string>
     <string name="home_invalid_signature_message">O APK selecionado para &lt;b&gt;%s&lt;/b&gt; não corresponde ao certificado de assinatura esperado. Ele pode ter sido modificado ou ser de uma fonte não confiável</string>
     <string name="home_invalid_signature_badge">Este APK pode não ser o original</string>
-    <string name="home_split_apk_warning_title">APK dividido não suportado</string>
-    <string name="home_split_apk_warning_message">Você selecionou um pacote APK dividido (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; requer um &lt;b&gt;APK completo&lt;/b&gt; – pacotes divididos não podem ser corrigidos para este aplicativo</string>
-    <string name="home_split_apk_warning_badge">Um APK completo é necessário para continuar</string>
+    <string name="home_split_apk_warning_title">APK detectado</string>
+    <string name="home_split_apk_warning_message">"Este arquivo é um pacote APK.
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;b&gt;APK completo(s)&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Escolha outro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versão tem suporte experimental e pode ser instável ou incompleta</string>

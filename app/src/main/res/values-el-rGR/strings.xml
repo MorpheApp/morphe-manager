@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">Μη επαληθευμένο APK</string>
     <string name="home_invalid_signature_message">Το APK που επιλέξατε για το &lt;b&gt;%s&lt;/b&gt; δεν ταιριάζει με το αναμενόμενο πιστοποιητικό υπογραφής. Μπορεί να έχει τροποποιηθεί ή να προέρχεται από μη αξιόπιστη πηγή</string>
     <string name="home_invalid_signature_badge">Αυτό το APK μπορεί να μην είναι το πρωτότυπο</string>
-    <string name="home_split_apk_warning_title">Δεν υποστηρίζονται Split APK</string>
-    <string name="home_split_apk_warning_message">Επιλέξατε ένα split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). Το &lt;b&gt;%s&lt;/b&gt; απαιτεί ένα &lt;b&gt;πλήρες APK&lt;/b&gt; - τα split bundles δεν μπορούν να επιδιορθωθούν για αυτήν την εφαρμογή</string>
-    <string name="home_split_apk_warning_badge">Απαιτείται ένα πλήρες APK για να συνεχίσετε</string>
+    <string name="home_split_apk_warning_title">Ανιχνεύθηκε διαχωρισμένο APK</string>
+    <string name="home_split_apk_warning_message">"Αυτό το αρχείο είναι ένα πακέτο APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Για καλύτερα αποτελέσματα, αυτή η εφαρμογή συνιστά την επιδιόρθωση ενός &lt;b&gt;πλήρους APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Επιλέξτε ένα άλλο APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Πειραματικό</string>
     <string name="home_dialog_unsupported_version_experimental_description">Αυτή η έκδοση έχει πειραματική υποστήριξη και μπορεί να είναι ασταθής ή ελλιπής</string>

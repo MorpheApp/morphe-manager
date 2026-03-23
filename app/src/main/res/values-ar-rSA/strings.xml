@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">APK غير معتمد</string>
     <string name="home_invalid_signature_message">ملف APK الذي اخترته لـ &lt;b&gt;%s&lt;/b&gt; لا يتطابق مع شهادة التوقيع الأصلية. قد يكون معدلًا أو من مصدر غير موثوق به</string>
     <string name="home_invalid_signature_badge">قد لا يكون ملف APK هذا هو الأصلي</string>
-    <string name="home_split_apk_warning_title">تنسيق Split APK غير مدعوم</string>
-    <string name="home_split_apk_warning_message">لقد اخترت حزمة APK مقسمة (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; يتطلب &lt;b&gt;ملف APK كاملًا&lt;/b&gt; - لا يمكن تعديل الحزم المقسمة للتطبيق هذا</string>
-    <string name="home_split_apk_warning_badge">مطلوب ملف APK كاملًا للمتابعة</string>
+    <string name="home_split_apk_warning_title">تم اكتشاف ملف APK مُقسّم</string>
+    <string name="home_split_apk_warning_message">"هذا الملف عبارة عن حزمة APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+للحصول على أفضل النتائج، يوصي هذا التطبيق بتعديل &lt;b&gt;APK كامل&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">اختر ملف APK آخر</string>
     <string name="home_dialog_unsupported_version_experimental_label">تجريبي</string>
     <string name="home_dialog_unsupported_version_experimental_description">يوفر هذا الإصدار دعمًا تجريبيًا، وقد يكون غير مستقر أو غير مكتمل</string>
@@ -245,7 +247,7 @@
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">جارٍ الإعداد</string>
     <string name="patcher_step_load_patches">جارٍ تحميل التعديلات</string>
-    <string name="patcher_step_prepare_split_apk">دمج APK منقسم</string>
+    <string name="patcher_step_prepare_split_apk">دمج APK مُقسّم</string>
     <string name="patcher_step_unpack">قراءة ملف APK</string>
     <string name="patcher_step_group_patching">التعديل</string>
     <string name="patcher_step_group_saving">الحفظ</string>

@@ -7,9 +7,9 @@
     <string name="home_app_hide_title">Esconder este aplicativo?</string>
     <string name="home_app_hide_message">Este aplicativo será escondido da tela inicial. Você pode restaurá-lo mais tarde usando o botão \'%1$s\' no final da lista</string>
     <string name="home_app_will_be_hidden">Este aplicativo será escondido</string>
-    <string name="home_app_show_hidden">Mostrar apps ocultas</string>
-    <string name="home_app_no_hidden">Não há apps ocultas</string>
-    <string name="home_app_hidden_apps_title">Apps ocultas</string>
+    <string name="home_app_show_hidden">Mostrar aplicativos ocultos</string>
+    <string name="home_app_no_hidden">Não há aplicativos ocultos</string>
+    <string name="home_app_hidden_apps_title">Aplicativos ocultos</string>
     <string name="home_app_hidden_apps_hint">Toque em um app para mostrá-lo na lista novamente</string>
     <string name="android_11_bug_dialog_title">Bug do Android 11</string>
     <string name="android_11_bug_dialog_description">A permissão de instalação do aplicativo deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetará negativamente a experiência do usuário.</string>
@@ -22,10 +22,10 @@
     <string name="home_update_error">Falha na importação</string>
     <string name="home_update_error_subtitle">Verifique sua conexão com a internet e tente novamente</string>
     <string name="home_update_skipped_metered">Atualizações ignoradas</string>
-    <string name="home_update_skipped_metered_subtitle">Dado móvel ativo</string>
+    <string name="home_update_skipped_metered_subtitle">Dados móveis ativos</string>
     <string name="home_updating_sources">Atualizando fontes…</string>
     <string name="home_update_progress_format">%1$s processado</string>
-    <string name="home_update_success">Concluído atualização de fontes</string>
+    <string name="home_update_success">Atualização de fontes concluída</string>
     <string name="home_update_success_subtitle">Suas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">Carregando fontes, por favor aguarde…</string>
     <string name="home_please_wait">Por favor, aguarde…</string>
@@ -81,8 +81,8 @@
     <string name="sources_download_endpoint_not_found">Não foi possível atualizar \'%1$s\': o arquivo JSON do patch não foi encontrado no URL configurado</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Precisa de ajuda para encontrar um APK original e não corrigido?</string>
-    <string name="home_apk_availability_dialog_simple">Para aplicar os patches em &lt;b&gt;b>%s&lt;b&gt;/b>, vocã precisa de um APK não corrigido com a versão:</string>
-    <string name="home_apk_availability_dialog_expert">Para aplicar os patches em &lt;b&gt;%s&lt;/b&gt;, vocã precisa de um APK nÃ£o corrigido com a versÃ£o:</string>
+    <string name="home_apk_availability_dialog_simple">Para aplicar os patches em &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK não corrigido com a versão:</string>
+    <string name="home_apk_availability_dialog_expert">Para aplicar os patches em &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK não corrigido com a versão:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">Sem patches</string>
     <string name="home_apk_availability_yes">Sim, me ajude a encontrar um APK</string>
@@ -102,7 +102,7 @@
     <string name="home_download_instructions_continue">Continuar para APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selecione o APK baixado</string>
-    <string name="home_file_picker_prompt_description">Selecione o arquivo &lt;b&gt;%1$s&lt;/b&gt; APK que vocã baixou recentemente</string>
+    <string name="home_file_picker_prompt_description">Selecione o arquivo &lt;b&gt;%1$s&lt;/b&gt; APK que você baixou recentemente</string>
     <string name="home_file_picker_prompt_open_apk">Abrir arquivo APK</string>
     <string name="home_recommended_version">Versão recomendada</string>
     <string name="home_selected_version">Versão selecionada</string>
@@ -125,9 +125,11 @@ Tem certeza de que deseja continuar?"</string>
     <string name="home_invalid_signature_title">APK não verificado</string>
     <string name="home_invalid_signature_message">O APK selecionado para &lt;b&gt;%s&lt;/b&gt; não corresponde ao certificado de assinatura esperado. Ele pode ter sido modificado ou ser de uma fonte não confiável</string>
     <string name="home_invalid_signature_badge">Este APK pode não ser o original</string>
-    <string name="home_split_apk_warning_title">APK dividido não suportado</string>
-    <string name="home_split_apk_warning_message">Você selecionou um pacote APK dividido (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; requer um &lt;b&gt;APK completo&lt;/b&gt; - pacotes divididos não podem ser corrigidos para este aplicativo</string>
-    <string name="home_split_apk_warning_badge">Um APK completo é necessário para continuar</string>
+    <string name="home_split_apk_warning_title">APK detectado</string>
+    <string name="home_split_apk_warning_message">"Este arquivo é um pacote APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;b&gt;APK completo&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Escolha outro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versão tem suporte experimental e pode ser instável ou incompleta</string>

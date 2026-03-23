@@ -125,9 +125,10 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="home_invalid_signature_title">APK non vérifié</string>
     <string name="home_invalid_signature_message">L’APK que vous avez sélectionné pour &lt;b&gt;%s&lt;/b&gt; ne correspond pas au certificat de signature attendu. Il peut avoir été modifié ou provenir d’une source non fiable</string>
     <string name="home_invalid_signature_badge">Cet APK pourrait ne pas être l\'original</string>
-    <string name="home_split_apk_warning_title">APK fractionné non pris en charge</string>
-    <string name="home_split_apk_warning_message">Vous avez sélectionné un bundle APK fractionné (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; nécessite un &lt;b&gt;APK complet&lt;/b&gt; - les bundles fractionnés ne peuvent pas être patchés pour cette application</string>
-    <string name="home_split_apk_warning_badge">Un APK complet est nécessaire pour continuer</string>
+    <string name="home_split_apk_warning_title">APK fractionné détecté</string>
+    <string name="home_split_apk_warning_message">"Ce fichier est un bundle APK (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&gt;APK complet&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Sélectionner un autre APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Expérimentale</string>
     <string name="home_dialog_unsupported_version_experimental_description">Cette version bénéficie d’un support expérimental et peut être instable ou incomplète</string>

@@ -125,9 +125,11 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="home_invalid_signature_title">APK netestat</string>
     <string name="home_invalid_signature_message">Fișierul APK selectat pentru &lt;b&gt;%s&lt;/b&gt; nu corespunde certificatului de semnătură așteptat. Poate fi modificat sau provenit dintr-o sursă nesigură</string>
     <string name="home_invalid_signature_badge">Această aplicație APK poate să nu fie originală</string>
-    <string name="home_split_apk_warning_title">APK-urile împărțite nu sunt acceptate</string>
-    <string name="home_split_apk_warning_message">Ați selectat un pachet APK împărțit (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; necesită un &lt;b&gt;APK complet&lt;/b&gt; - pachetele împărțite nu pot fi corectate pentru această aplicație</string>
-    <string name="home_split_apk_warning_badge">Este necesar un APK complet pentru a continua</string>
+    <string name="home_split_apk_warning_title">APK detectat</string>
+    <string name="home_split_apk_warning_message">"Acest fișier este un pachet APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Pentru cele mai bune rezultate, această aplicație recomandă utilizarea unui &lt;b&gt;APK complet&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Alegeți un alt APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Această versiune are suport experimental și poate fi instabilă sau incompletă</string>

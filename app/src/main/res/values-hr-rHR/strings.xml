@@ -125,9 +125,6 @@ Jeste li sigurni da želite nastaviti?"</string>
     <string name="home_invalid_signature_title">Nepotvrđena aplikacija</string>
     <string name="home_invalid_signature_message">Aplikacija koju ste odabrali za&lt;b&gt;%s&lt;/b&gt; ne odgovara očekivanom certifikatu za potpis. Moguće je da je modificirana ili da potječe iz nepouzdanog izvora.</string>
     <string name="home_invalid_signature_badge">Ovaj aplikacija možda nije original</string>
-    <string name="home_split_apk_warning_title">Split APK nisu podržani</string>
-    <string name="home_split_apk_warning_message">Odabrali ste APK skup  (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; koji zahtijeva &lt;b&gt;cijeli APK&lt;/b&gt; -podijeljeni paketi ne mogu se patchati za ovu aplikaciju</string>
-    <string name="home_split_apk_warning_badge">Za nastavak je potreban cijela APK</string>
     <string name="home_split_apk_warning_pick_another">Odaberite drugu aplikaciju</string>
     <string name="home_dialog_unsupported_version_experimental_label">Eksperimentalno</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ova verzija ima eksperimentalnu podršku i možda je nestabilna ili nepotpuna</string>

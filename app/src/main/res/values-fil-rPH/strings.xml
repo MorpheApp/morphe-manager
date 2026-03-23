@@ -125,9 +125,11 @@ Nais mo bang magpatuloy?"</string>
     <string name="home_invalid_signature_title">Hindi beripikadong APK</string>
     <string name="home_invalid_signature_message">Ang APK na pinili mo para sa &lt;b&gt;%s&lt;/b&gt; ay hindi tumutugma sa inaasahang certificate ng paglagda. Maaaring ito ay binago o mula sa hindi pinagkakatiwalaang pinagmulan</string>
     <string name="home_invalid_signature_badge">Maaaring hindi ang orihinal ang APK na ito</string>
-    <string name="home_split_apk_warning_title">Hindi suportado ang Split APK</string>
-    <string name="home_split_apk_warning_message">Pinili mo ang split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; ay nangangailangan ng &lt;b&gt;full APK&lt;/b&gt; - hindi maaaring i-patch ang mga split bundle para sa app na ito</string>
-    <string name="home_split_apk_warning_badge">Kailangan ng full APK para magpatuloy</string>
+    <string name="home_split_apk_warning_title">Natuklasan ang nahati na APK</string>
+    <string name="home_split_apk_warning_message">"Ang file na ito ay isang APK bundle
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isang &lt;b&gt;buong APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Pumili ng ibang APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Pang-eksperimentong</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ang bersyong ito ay may pang-eksperimentong suporta at maaaring hindi matatag o hindi kumpleto</string>

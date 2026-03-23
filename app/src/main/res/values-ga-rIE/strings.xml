@@ -125,9 +125,11 @@ An bhfuil tú cinnte gur mian leat dul ar aghaidh?"</string>
     <string name="home_invalid_signature_title">APKannaíseach</string>
     <string name="home_invalid_signature_message">Ní athruithe APK a roghnú sibh do &lt;b&gt;%s&lt;/b&gt; le comhaid síniúth fhadcheart a bhagairt. Seans go bhfuil sé modhnaithe nó ón bhfoinse neamhdtrustaithe</string>
     <string name="home_invalid_signature_badge">Seans nach bhfuil an APK seo mar bhunaí</string>
-    <string name="home_split_apk_warning_title">Ná bacadh tacaíocht APK roinnte</string>
-    <string name="home_split_apk_warning_message">Roghnaigh tú freastal APK roinnte (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; éilíonn &lt;b&gt;APK iomlán&lt;/b&gt; - ní féidir freastail roinnte a bheith feistear do chael seo tógtha</string>
-    <string name="home_split_apk_warning_badge">Éilíonn APK iomlán chun dul ar aghaidh</string>
+    <string name="home_split_apk_warning_title">Faight APK faight</string>
+    <string name="home_split_apk_warning_message">"Is comhad seo bundl APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Le haghaidh na dtorthaí is fearr, molann an app seo míniú &lt;b&gt;APK iomlán&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Roghnaigh APK eile</string>
     <string name="home_dialog_unsupported_version_experimental_label">Turgnamhach</string>
     <string name="home_dialog_unsupported_version_experimental_description">Feidir gur neamhstadach nó neamhiomlán tacaíocht turgnamhach seo</string>

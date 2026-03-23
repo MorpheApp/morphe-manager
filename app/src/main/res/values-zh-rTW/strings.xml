@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">未經驗證的 APK</string>
     <string name="home_invalid_signature_message">您選擇的 APK 對於 &lt;b&gt;%s&lt;/b&gt; 的簽署憑證不符。它可能已被修改或來自不受信任的來源</string>
     <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
-    <string name="home_split_apk_warning_title">不支援分割 APK</string>
-    <string name="home_split_apk_warning_message">您已選擇一個分割 APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)。&lt;b&gt;%s&lt;/b&gt; 需要 &lt;b&gt;完整 APK&lt;/b&gt; – 分割 bundle 無法為此應用程式修補</string>
-    <string name="home_split_apk_warning_badge">需要完整 APK 才能繼續</string>
+    <string name="home_split_apk_warning_title">偵測到分割 APK</string>
+    <string name="home_split_apk_warning_message">"此檔案為 APK 組合
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+為獲得最佳效果，此應用程式建議修補 &lt;b&gt;完整 APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">選擇另一個 APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">實驗性</string>
     <string name="home_dialog_unsupported_version_experimental_description">此版本支援實驗性功能，可能不穩定或不完整</string>

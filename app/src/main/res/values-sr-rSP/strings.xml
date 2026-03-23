@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">Непотврђена APK</string>
     <string name="home_invalid_signature_message">APK коју сте изабрали за &lt;b&gt;%s&lt;/b&gt; не одговара очекиваној потписне сведочеству. Можда је измењена или потиче из непоузданог извора</string>
     <string name="home_invalid_signature_badge">Ова APK можда није оригинална</string>
-    <string name="home_split_apk_warning_title">Подржана је само раздвојена APK</string>
-    <string name="home_split_apk_warning_message">Изабрали сте раздвојени APK пакет (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; захтева &lt;b&gt;цео APK&lt;/b&gt; - раздвојени пакети не могу бити поправљени за ову апликацију</string>
-    <string name="home_split_apk_warning_badge">Потребан је цео APK да бисте наставили</string>
+    <string name="home_split_apk_warning_title">Детектован подељени APK</string>
+    <string name="home_split_apk_warning_message">"Овај фајл је APK пакет
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+За најбоље резултате, ова апликација препоручује поправку &lt;b&gt;целог APK-а&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Изаберите другу APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Експериментално</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ова верзија има експерименталну подршку и може бити нестабилна или непотпуна</string>

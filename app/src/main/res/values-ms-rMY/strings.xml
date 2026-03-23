@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">Aplikasi lain</string>
+    <string name="home_not_patched_yet">Belum dipatch lagi</string>
     <string name="android_11_bug_dialog_title">Pepijat Android 11</string>
     <string name="android_11_bug_dialog_description">Kebenaran pemasangan aplikasi mesti diberikan lebih awal untuk mengelakkan pepijat dalam sistem Android 11 yang akan menjejaskan pengalaman pengguna secara negatif</string>
     <!-- Home Screen - Update Notifications -->
