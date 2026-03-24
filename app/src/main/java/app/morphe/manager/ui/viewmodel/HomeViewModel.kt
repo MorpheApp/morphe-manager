@@ -60,12 +60,8 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import java.io.File
 import java.io.FileNotFoundException
-import java.net.HttpURLConnection
-import java.net.SocketTimeoutException
-import java.net.URL
 import java.net.URLEncoder.encode
 import java.security.MessageDigest
-import javax.net.ssl.SSLException
 import kotlin.time.Clock
 
 /**
@@ -1560,47 +1556,17 @@ class HomeViewModel(
      * Resolve download redirect.
      */
     fun resolveDownloadRedirect() {
-        fun resolveUrlRedirect(url: String): String {
-            return try {
-                // TODO: Use HttpModule instead of simple URL connections.
-                val originalUrl = URL(url)
-                val connection = originalUrl.openConnection() as HttpURLConnection
-                connection.instanceFollowRedirects = false
-                connection.requestMethod = "HEAD"
-                connection.connectTimeout = 5_000
-                connection.readTimeout = 5_000
-
-                val responseCode = connection.responseCode
-                if (responseCode in 300..399) {
-                    val location = connection.getHeaderField("Location")
-
-                    if (location.isNullOrBlank()) {
-                        Log.i(tag, "Location tag is blank: ${connection.responseMessage}")
-                        getApiOfflineWebSearchUrl()
-                    } else {
-                        val resolved =
-                            if (location.startsWith("http://") || location.startsWith("https://")) {
-                                location
-                            } else {
-                                val prefix = "${originalUrl.protocol}://${originalUrl.host}"
-                                if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
-                            }
-                        Log.i(tag, "Result: $resolved")
-                        resolved
-                    }
-                } else {
-                    Log.w(tag, "Unexpected response code: $responseCode")
+        suspend fun resolveUrlRedirect(url: String): String {
+            val location = morpheAPI.resolveRedirect(url)
+            return when {
+                location == null -> {
+                    Log.w(tag, "No redirect location for: $url")
                     getApiOfflineWebSearchUrl()
                 }
-            } catch (ex: SocketTimeoutException) {
-                Log.w(tag, "Timeout while resolving search redirect: $ex")
-                url
-            } catch (ex: SSLException) {
-                Log.w(tag, "SSL exception while resolving search redirect: $ex")
-                getApiOfflineWebSearchUrl()
-            } catch (ex: Exception) {
-                Log.w(tag, "Exception while resolving search redirect: $ex")
-                getApiOfflineWebSearchUrl()
+                else -> {
+                    Log.i(tag, "Result: $location")
+                    location
+                }
             }
         }
 

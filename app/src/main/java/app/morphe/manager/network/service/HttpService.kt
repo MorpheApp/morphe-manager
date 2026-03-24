@@ -11,6 +11,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
 import io.ktor.client.request.request
+import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
@@ -263,7 +264,8 @@ class HttpService(
                 val byteDelta = abs(current - lastReportedBytes.get())
                 val timeDelta = now - lastReportedAt.get()
                 if (!force && byteDelta < PROGRESS_MIN_BYTES && timeDelta < PROGRESS_INTERVAL_MS) return
-                if (lastReportedAt.compareAndSet(lastReportedAt.get(), now)) {
+                val prevTime = lastReportedAt.get()
+                if (lastReportedAt.compareAndSet(prevTime, now)) {
                     lastReportedBytes.set(current)
                     onProgress(current, totalSize)
                 }
@@ -455,6 +457,7 @@ class HttpService(
                 attempt++
                 return block()
             } catch (t: Exception) {
+                if (t is CancellationException) throw t
                 if (attempt >= MAX_RETRY_ATTEMPTS) {
                     Log.e(tag, "$operationName failed after $attempt attempts: ${t::class.simpleName}: ${t.message}")
                     throw t
@@ -476,6 +479,30 @@ class HttpService(
             ?.toLongOrNull()
             ?.coerceAtLeast(0)
             ?.times(1000)
+
+    /**
+     * Performs a HEAD request to [url] and returns the value of the Location header,
+     * or null if the server did not redirect or any error occurred.
+     *
+     * Relative Location values are resolved against [url] so callers always receive
+     * an absolute URL or null.
+     */
+    suspend fun headRedirect(url: String): String? {
+        return runCatching {
+            http.request {
+                method = HttpMethod.Head
+                url(url)
+            }.headers[HttpHeaders.Location]?.let { location ->
+                if (location.startsWith("http://") || location.startsWith("https://")) {
+                    location
+                } else {
+                    val uri = java.net.URI(url)
+                    val prefix = "${uri.scheme}://${uri.host}"
+                    if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
+                }
+            }
+        }.getOrNull()
+    }
 
     class HttpException(status: HttpStatusCode) :
         Exception("HTTP request failed with status: $status")

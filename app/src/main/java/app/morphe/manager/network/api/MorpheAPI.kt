@@ -576,6 +576,12 @@ class MorpheAPI(
     }
 
     /**
+     * Resolves a redirect URL by delegating a HEAD request to [HttpService.headRedirect].
+     * Returns the final destination URL, or null if there is no redirect or an error occurs.
+     */
+    suspend fun resolveRedirect(url: String): String? = client.headRedirect(url)
+
+    /**
      * Returns this response if successful; otherwise invokes [fallback] and returns its result.
      * Used to chain primary → fallback data sources cleanly.
      */
