@@ -180,8 +180,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
 
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Create adaptive icon</string>
-    <string name="adaptive_icon_instructions">Choose a foreground image, select background color, and adjust the preview with pinch-to-zoom gestures</string>
-    <string name="adaptive_icon_preview">Preview</string>
+    <string name="adaptive_icon_instructions">Choose a foreground image, select a background color, then use the slider or pinch gestures to adjust the preview</string>
+    <string name="adaptive_icon_preview">Adaptive icon preview</string>
+    <string name="adaptive_icon_preview_hint">For the best result, keep your icon within the solid inner circle</string>
     <string name="adaptive_icon_select_image">Select image</string>
     <string name="adaptive_icon_change_image">Change image</string>
     <string name="adaptive_icon_background_color">Background color</string>
@@ -191,6 +192,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="adaptive_icon_created_success">Adaptive icon created successfully</string>
     <string name="adaptive_icon_creation_failed">Failed to create adaptive icon</string>
     <string name="adaptive_icon_folder_explanation">Select where to create \'%1$s/%2$s\' folder with generated icon files</string>
+    <string name="notification_icon_preview">Notification icon preview</string>
+    <string name="notification_icon_preview_hint">Use the slider to resize. Drag to reposition</string>
 
     <!-- Header Creator -->
     <string name="header_creator_create">Create custom header</string>
@@ -479,9 +482,18 @@ The image dimensions must be as follows:
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Optionally, the path contains a \'drawable\' folder with any of the monochrome icon files:
+Optionally, the path contains a \'drawable\' folder with a monochrome icon file:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Optionally, the path contains a notification icon in one of the following formats:
+- XML vector drawable in \'drawable\':
+  morphe_notification_icon_custom.xml
+- PNG raster images in \'drawable-dpi\' folders:
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
 
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Custom header logo</string>

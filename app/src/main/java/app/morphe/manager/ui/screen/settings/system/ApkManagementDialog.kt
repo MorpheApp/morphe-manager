@@ -121,7 +121,7 @@ private fun PatchedApksContent(
     var isLoading by remember { mutableStateOf(true) }
 
     // Pre-resolve all app data in a single effect
-    val apkItems by produceState<List<ApkItemDataWithApp>>(
+    val apkItems by produceState(
         initialValue = emptyList(),
         key1 = allInstalledApps
     ) {
@@ -156,7 +156,7 @@ private fun PatchedApksContent(
         apkItems.sumOf { it.fileSize }
     }
 
-    var itemToDelete by remember { mutableStateOf<InstalledApp?>(null) }
+    val itemToDelete = remember { mutableStateOf<InstalledApp?>(null) }
 
     ApkManagementDialogContent(
         title = stringResource(R.string.settings_system_patched_apks_title),
@@ -169,23 +169,23 @@ private fun PatchedApksContent(
         onDismissRequest = onDismissRequest,
         items = apkItems.map { it.toApkItemData() },
         onDelete = { index ->
-            itemToDelete = apkItems[index].installedApp
+            itemToDelete.value = apkItems[index].installedApp
         }
     )
 
-    if (itemToDelete != null) {
+    if (itemToDelete.value != null) {
         DeleteConfirmationDialog(
             title = stringResource(R.string.settings_system_patched_apks_delete_title),
             message = stringResource(
                 R.string.settings_system_patched_apks_delete_confirm,
-                itemToDelete!!.currentPackageName
+                itemToDelete.value!!.currentPackageName
             ),
-            onDismiss = { itemToDelete = null },
+            onDismiss = { itemToDelete.value = null },
             onConfirm = {
                 scope.launch {
-                    repository.delete(itemToDelete!!)
+                    repository.delete(itemToDelete.value!!)
                     context.toast(context.getString(R.string.settings_system_patched_apks_deleted))
-                    itemToDelete = null
+                    itemToDelete.value = null
                 }
             }
         )
@@ -207,7 +207,7 @@ private fun OriginalApksContent(
     var isLoading by remember { mutableStateOf(true) }
 
     // Pre-resolve all app data in a single effect
-    val apkItems by produceState<List<ApkItemData>>(
+    val apkItems by produceState(
         initialValue = emptyList(),
         key1 = originalApks
     ) {
@@ -235,7 +235,7 @@ private fun OriginalApksContent(
         apkItems.sumOf { it.fileSize }
     }
 
-    var itemToDelete by remember { mutableStateOf<OriginalApk?>(null) }
+    val itemToDelete = remember { mutableStateOf<OriginalApk?>(null) }
 
     ApkManagementDialogContent(
         title = stringResource(R.string.settings_system_original_apks_title),
@@ -248,23 +248,23 @@ private fun OriginalApksContent(
         onDismissRequest = onDismissRequest,
         items = apkItems,
         onDelete = { index ->
-            itemToDelete = originalApks[index]
+            itemToDelete.value = originalApks[index]
         }
     )
 
-    if (itemToDelete != null) {
+    if (itemToDelete.value != null) {
         DeleteConfirmationDialog(
             title = stringResource(R.string.settings_system_original_apks_delete_title),
             message = stringResource(
                 R.string.settings_system_original_apks_delete_confirm,
-                itemToDelete!!.packageName
+                itemToDelete.value!!.packageName
             ),
-            onDismiss = { itemToDelete = null },
+            onDismiss = { itemToDelete.value = null },
             onConfirm = {
                 scope.launch {
-                    repository.delete(itemToDelete!!)
+                    repository.delete(itemToDelete.value!!)
                     context.toast(context.getString(R.string.settings_system_original_apks_deleted))
-                    itemToDelete = null
+                    itemToDelete.value = null
                 }
             }
         )

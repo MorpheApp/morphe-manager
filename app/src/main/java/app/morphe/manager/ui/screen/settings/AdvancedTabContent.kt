@@ -48,7 +48,7 @@ fun AdvancedTabContent(
 
     // Dialog state for expert mode
     var showExpertModeNotice by remember { mutableStateOf(false) }
-    var showExpertModeDialog by remember { mutableStateOf(false) }
+    val showExpertModeDialog = remember { mutableStateOf(false) }
     var previousExpertMode by remember { mutableStateOf(useExpertMode) }
     val gitHubPat by prefs.gitHubPat.getAsState()
     val includeGitHubPatInExports by prefs.includeGitHubPatInExports.getAsState()
@@ -67,12 +67,12 @@ fun AdvancedTabContent(
     val disabledState = stringResource(R.string.disabled)
 
     // Expert mode confirmation dialog
-    if (showExpertModeDialog) {
+    if (showExpertModeDialog.value) {
         ExpertModeConfirmationDialog(
-            onDismiss = { showExpertModeDialog = false },
+            onDismiss = { showExpertModeDialog.value = false },
             onConfirm = {
                 scope.launch { prefs.useExpertMode.update(true) }
-                showExpertModeDialog = false
+                showExpertModeDialog.value = false
             }
         )
     }
@@ -113,7 +113,7 @@ fun AdvancedTabContent(
             onClick = {
                 if (!useExpertMode) {
                     // Show confirmation dialog when enabling expert mode
-                    showExpertModeDialog = true
+                    showExpertModeDialog.value = true
                 } else {
                     // Disable without confirmation
                     scope.launch { prefs.useExpertMode.update(false) }

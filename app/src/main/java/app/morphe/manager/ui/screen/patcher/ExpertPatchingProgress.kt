@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -76,6 +77,7 @@ sealed interface LogItem {
     data class StartBanner(
         val packageName: String,
         val version: String,
+        val bundleVersion: String?,
         val apkSizeMb: String,
         val patchCount: Int,
         val isSplit: Boolean,
@@ -139,7 +141,7 @@ private fun formatElapsed(ms: Long?): String {
  * heap-after-patching) are consumed and never emitted as plain [LogItem.Entry]s.
  */
 internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
-    // Pre-scan for auxiliary lines so banner cards can be built in one pass.
+    // Pre-scan for auxiliary lines so banner cards can be built in one pass
     var runtimeMemoryLimitMb: String? = null
     var processHeapAverageMb: String? = null
     var processHeapMaxMb: String? = null
@@ -148,8 +150,8 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     var ramTotal: String? = null
     var storageAvailable: String? = null
     var storageTotal: String? = null
-    var deviceManufacturer: String? = null
-    var deviceModel: String? = null
+    var deviceManufacturer: String?
+    var deviceModel: String?
 
     for ((_, message) in this) {
         when {
@@ -193,6 +195,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                     result += LogItem.StartBanner(
                         packageName = pkg,
                         version = message.logField("version") ?: "?",
+                        bundleVersion = message.logField("bundle"),
                         apkSizeMb = "%.1f MB".format(
                             (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
                         ),
@@ -276,21 +279,21 @@ fun ExpertPatchingInProgress(
     ) {
         // Content area
         if (windowSize.useTwoColumnLayout) {
-            // Landscape: header left, log right
+            // Landscape: header + action bar left, log right
             Row(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
-                    .padding(horizontal = windowSize.contentPadding)
-                    .padding(top = windowSize.contentPadding),
+                    .padding(horizontal = windowSize.contentPadding),
                 horizontalArrangement = Arrangement.spacedBy(windowSize.contentPadding),
                 verticalAlignment = Alignment.Top
             ) {
+                // Left column: header + action bar
                 Column(
                     modifier = Modifier
                         .weight(0.42f)
                         .fillMaxHeight(),
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     ExpertProgressHeader(
                         progress = progress,
@@ -299,8 +302,28 @@ fun ExpertPatchingInProgress(
                         patcherViewModel = patcherViewModel,
                         patcherSucceeded = patcherSucceeded
                     )
+
+                    // Action bar inside left column
+                    PatcherBottomActionBar(
+                        showCancelButton = patcherSucceeded == null,
+                        showHomeButton = patcherSucceeded == true,
+                        showInstallButton = patcherSucceeded == true,
+                        showSaveButton = false,
+                        showErrorButton = false,
+                        showCopyLogsButton = true,
+                        onCancelClick = onCancelClick,
+                        onHomeClick = onHomeClick,
+                        onInstallClick = onInstallClick,
+                        onSaveClick = {},
+                        onErrorClick = {},
+                        onCopyLogsClick = {
+                            clipboardManager.setText(AnnotatedString(buildLogsText()))
+                        },
+                        modifier = Modifier.padding(horizontal = 0.dp)
+                    )
                 }
 
+                // Right column: log panel
                 ExpertLogPanel(
                     patcherViewModel = patcherViewModel,
                     listState = listState,
@@ -339,25 +362,27 @@ fun ExpertPatchingInProgress(
             }
         }
 
-        // Spacing above the action bar so it doesn't feel attached to the log panel
-        Spacer(Modifier.height(12.dp))
+        // Portrait-only: action bar below content
+        if (!windowSize.useTwoColumnLayout) {
+            Spacer(Modifier.height(12.dp))
 
-        PatcherBottomActionBar(
-            showCancelButton = patcherSucceeded == null,
-            showHomeButton = patcherSucceeded == true,
-            showInstallButton = patcherSucceeded == true,
-            showSaveButton = false,
-            showErrorButton = false,
-            showCopyLogsButton = true,
-            onCancelClick = onCancelClick,
-            onHomeClick = onHomeClick,
-            onInstallClick = onInstallClick,
-            onSaveClick = {},
-            onErrorClick = {},
-            onCopyLogsClick = {
-                clipboardManager.setText(AnnotatedString(buildLogsText()))
-            }
-        )
+            PatcherBottomActionBar(
+                showCancelButton = patcherSucceeded == null,
+                showHomeButton = patcherSucceeded == true,
+                showInstallButton = patcherSucceeded == true,
+                showSaveButton = false,
+                showErrorButton = false,
+                showCopyLogsButton = true,
+                onCancelClick = onCancelClick,
+                onHomeClick = onHomeClick,
+                onInstallClick = onInstallClick,
+                onSaveClick = {},
+                onErrorClick = {},
+                onCopyLogsClick = {
+                    clipboardManager.setText(AnnotatedString(buildLogsText()))
+                }
+            )
+        }
     }
 }
 
@@ -587,7 +612,7 @@ private fun HeapUsageGraph(
                             .toFloat()
                     }
 
-                    val color = androidx.compose.ui.graphics.lerp(barColor, warnColor, t)
+                    val color = lerp(barColor, warnColor, t)
 
                     Box(modifier = Modifier
                         .weight(1f)
@@ -889,8 +914,15 @@ private fun PatcherInfoCard(
 @Composable
 private fun StartBannerCard(item: LogItem.StartBanner) {
     PatcherInfoCard(title = "Patching started", variant = CardVariant.Start) {
-        BannerFieldFull("Package", item.packageName)
-        BannerFieldFull("Version", item.version)
+        BannerFieldCell("Package", item.packageName, Modifier.fillMaxWidth())
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            BannerFieldCell("App version", item.version, Modifier.weight(1f))
+            BannerFieldCell("Patches version", item.bundleVersion ?: "?", Modifier.weight(1f))
+        }
 
         HorizontalDivider(
             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
@@ -999,36 +1031,13 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
 }
 
 /**
- * Full-width label+value field used inside banner cards for long strings (package, version).
- */
-@Composable
-private fun BannerFieldFull(label: String, value: String) {
-    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        Text(
-            text = label.uppercase(),
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-            fontSize = 9.sp, fontFamily = FontFamily.Monospace
-        )
-
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodySmall,
-            fontFamily = FontFamily.Monospace,
-            fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 11.5.sp
-        )
-    }
-}
-
-/**
- * Compact label+value cell used in multi-column rows inside banner cards.
+ * Label+value field used inside banner cards.
  */
 @Composable
 private fun BannerFieldCell(
     label: String,
     value: String,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
     valueColor: Color? = null
 ) {
