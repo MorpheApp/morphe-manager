@@ -77,6 +77,7 @@ sealed interface LogItem {
     data class StartBanner(
         val packageName: String,
         val version: String,
+        val bundleVersion: String?,
         val apkSizeMb: String,
         val patchCount: Int,
         val isSplit: Boolean,
@@ -194,6 +195,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                     result += LogItem.StartBanner(
                         packageName = pkg,
                         version = message.logField("version") ?: "?",
+                        bundleVersion = message.logField("bundle"),
                         apkSizeMb = "%.1f MB".format(
                             (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
                         ),
@@ -912,8 +914,15 @@ private fun PatcherInfoCard(
 @Composable
 private fun StartBannerCard(item: LogItem.StartBanner) {
     PatcherInfoCard(title = "Patching started", variant = CardVariant.Start) {
-        BannerFieldFull("Package", item.packageName)
-        BannerFieldFull("Version", item.version)
+        BannerFieldCell("Package", item.packageName, Modifier.fillMaxWidth())
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            BannerFieldCell("App version", item.version, Modifier.weight(1f))
+            BannerFieldCell("Patches version", item.bundleVersion ?: "?", Modifier.weight(1f))
+        }
 
         HorizontalDivider(
             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
@@ -1022,36 +1031,13 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
 }
 
 /**
- * Full-width label+value field used inside banner cards for long strings (package, version).
- */
-@Composable
-private fun BannerFieldFull(label: String, value: String) {
-    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        Text(
-            text = label.uppercase(),
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-            fontSize = 9.sp, fontFamily = FontFamily.Monospace
-        )
-
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodySmall,
-            fontFamily = FontFamily.Monospace,
-            fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 11.5.sp
-        )
-    }
-}
-
-/**
- * Compact label+value cell used in multi-column rows inside banner cards.
+ * Label+value field used inside banner cards.
  */
 @Composable
 private fun BannerFieldCell(
     label: String,
     value: String,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
     valueColor: Color? = null
 ) {
