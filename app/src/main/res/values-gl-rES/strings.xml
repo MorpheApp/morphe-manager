@@ -135,7 +135,6 @@
     <string name="patch_option_list_empty_state">Non hai valores engadidos aínda</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crear icona adaptable</string>
-    <string name="adaptive_icon_preview">Vista previa</string>
     <string name="adaptive_icon_select_image">Seleccionar imaxe</string>
     <string name="adaptive_icon_change_image">Cambiar imaxe</string>
     <string name="adaptive_icon_background_color">Cor do fondo</string>
