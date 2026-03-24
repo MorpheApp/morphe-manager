@@ -58,7 +58,8 @@ class PatcherWorker(
         val logger: Logger,
         val onPatchCompleted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
-        val onProgress: ProgressEventHandler
+        val onProgress: ProgressEventHandler,
+        val bundleVersions: List<String> = emptyList(),
     ) {
         val packageName get() = input.packageName
     }
@@ -199,6 +200,7 @@ class PatcherWorker(
             args.logger.info(
                 "Patching started at ${System.currentTimeMillis()} " +
                         "pkg=${args.packageName} version=${args.input.version} " +
+                        "bundle=${args.bundleVersions.joinToString(",").ifBlank { "?" }} " +
                         "input=${inputFile.absolutePath} size=${inputFile.length()} " +
                         "split=$inputIsSplitArchive patches=$selectedCount " +
                         "device=${Build.MANUFACTURER} model=${Build.MODEL}"

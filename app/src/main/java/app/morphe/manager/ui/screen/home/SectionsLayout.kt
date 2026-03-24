@@ -118,16 +118,21 @@ fun SectionsLayout(
                     hiddenAppItems = hiddenAppItems,
                     installedAppsLoading = installedAppsLoading,
                     onOtherAppsClick = onOtherAppsClick,
-                    showOtherAppsButton = showOtherAppsButton
+                    showOtherAppsButton = showOtherAppsButton,
+                    onBundlesClick = onBundlesClick,
+                    onSettingsClick = onSettingsClick,
+                    isExpertModeEnabled = isExpertModeEnabled
                 )
             }
 
-            // Section 5: Bottom action bar
-            HomeBottomActionBar(
-                onBundlesClick = onBundlesClick,
-                onSettingsClick = onSettingsClick,
-                isExpertModeEnabled = isExpertModeEnabled
-            )
+            // Section 5: Bottom action bar — тільки для одноколонкового (portrait) режиму
+            if (!windowSize.useTwoColumnLayout) {
+                HomeBottomActionBar(
+                    onBundlesClick = onBundlesClick,
+                    onSettingsClick = onSettingsClick,
+                    isExpertModeEnabled = isExpertModeEnabled
+                )
+            }
         }
 
         // Section 1: Notifications overlay
@@ -160,7 +165,10 @@ private fun AdaptiveContent(
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
-    showOtherAppsButton: Boolean = true
+    showOtherAppsButton: Boolean = true,
+    onBundlesClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
+    isExpertModeEnabled: Boolean = false
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
@@ -181,7 +189,7 @@ private fun AdaptiveContent(
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing * 2),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Left column: Greeting
+                // Left column: Greeting + Bottom action bar
                 Column(
                     modifier = Modifier
                         .weight(0.5f)
@@ -189,12 +197,24 @@ private fun AdaptiveContent(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    GreetingSection(message = greetingMessage)
+                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                        GreetingSection(message = greetingMessage)
+                    }
+
+                    // Section 5: Bottom action bar
+                    HomeBottomActionBar(
+                        onBundlesClick = onBundlesClick,
+                        onSettingsClick = onSettingsClick,
+                        isExpertModeEnabled = isExpertModeEnabled,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
                 }
 
                 // Right column: App buttons + Other apps
                 Column(
-                    modifier = Modifier.weight(0.5f),
+                    modifier = Modifier
+                        .weight(0.5f)
+                        .fillMaxHeight(),
                     verticalArrangement = Arrangement.spacedBy(itemSpacing)
                 ) {
                     MainAppsSection(

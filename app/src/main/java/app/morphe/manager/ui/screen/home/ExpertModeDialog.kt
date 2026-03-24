@@ -920,7 +920,7 @@ private fun PatchOptionsDialog(
                         value = value?.toString() ?: "",
 //                        required = option.required,
                         keyboardType = KeyboardType.Text,
-                        onValueChange = { onValueChange(key, it) }
+                        onValueChange = { onValueChange(key, it.ifBlank { null }) }
                     )
 
                     OptionKind.BooleanToggle -> BooleanOptionItem(

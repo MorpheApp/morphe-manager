@@ -299,23 +299,52 @@ fun HeaderCreatorDialog(
                     }
                 )
 
-                // Reset transform button for light header
-                if (lightHeaderBitmap != null && (lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f)) {
-                    TextButton(
-                        onClick = {
-                            lightScale = 1f
-                            lightOffsetX = 0f
-                            lightOffsetY = 0f
-                        },
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                // Scale slider and reset button for light header
+                if (lightHeaderBitmap != null) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Outlined.RestartAlt,
+                            imageVector = Icons.Outlined.Image,
                             contentDescription = null,
-                            modifier = Modifier.size(18.dp)
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(stringResource(R.string.adaptive_icon_reset_transform))
+                        Slider(
+                            value = lightScale,
+                            onValueChange = { lightScale = it.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE) },
+                            valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Icon(
+                            imageVector = Icons.Outlined.Image,
+                            contentDescription = null,
+                            modifier = Modifier.size(22.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    if (lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f) {
+                        TextButton(
+                            onClick = {
+                                lightScale = 1f
+                                lightOffsetX = 0f
+                                lightOffsetY = 0f
+                            },
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.RestartAlt,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(stringResource(R.string.adaptive_icon_reset_transform))
+                        }
                     }
                 }
 
@@ -355,23 +384,52 @@ fun HeaderCreatorDialog(
                 }
             )
 
-            // Reset transform button for dark header
-            if (darkHeaderBitmap != null && (darkScale != 1f || darkOffsetX != 0f || darkOffsetY != 0f)) {
-                TextButton(
-                    onClick = {
-                        darkScale = 1f
-                        darkOffsetX = 0f
-                        darkOffsetY = 0f
-                    },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+            // Scale slider and reset button for dark header
+            if (darkHeaderBitmap != null) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.RestartAlt,
+                        imageVector = Icons.Outlined.Image,
                         contentDescription = null,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(16.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(stringResource(R.string.adaptive_icon_reset_transform))
+                    Slider(
+                        value = darkScale,
+                        onValueChange = { darkScale = it.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE) },
+                        valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Icon(
+                        imageVector = Icons.Outlined.Image,
+                        contentDescription = null,
+                        modifier = Modifier.size(22.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+
+                if (darkScale != 1f || darkOffsetX != 0f || darkOffsetY != 0f) {
+                    TextButton(
+                        onClick = {
+                            darkScale = 1f
+                            darkOffsetX = 0f
+                            darkOffsetY = 0f
+                        },
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.RestartAlt,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(stringResource(R.string.adaptive_icon_reset_transform))
+                    }
                 }
             }
 

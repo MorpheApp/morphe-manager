@@ -51,9 +51,9 @@ fun PatchSelectionManagementDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    var showResetAllConfirmation by remember { mutableStateOf(false) }
-    var resetTarget by remember { mutableStateOf<ResetTarget?>(null) }
-    var showPatchDetailsTarget by remember { mutableStateOf<PatchDetailsTarget?>(null) }
+    val showResetAllConfirmation = remember { mutableStateOf(false) }
+    val resetTarget = remember { mutableStateOf<ResetTarget?>(null) }
+    val showPatchDetailsTarget = remember { mutableStateOf<PatchDetailsTarget?>(null) }
 
     val appDataResolver: AppDataResolver = koinInject()
     val patchBundleRepository: PatchBundleRepository = koinInject()
@@ -74,24 +74,24 @@ fun PatchSelectionManagementDialog(
         totalSelections = totalSelections,
         bundleNames = bundleNames,
         onDismiss = onDismiss,
-        onShowResetAllConfirmation = { showResetAllConfirmation = true },
-        onSetResetTarget = { resetTarget = it },
-        onShowPatchDetails = { showPatchDetailsTarget = it },
+        onShowResetAllConfirmation = { showResetAllConfirmation.value = true },
+        onSetResetTarget = { resetTarget.value = it },
+        onShowPatchDetails = { showPatchDetailsTarget.value = it },
         appDataResolver = appDataResolver
     )
 
     // Reset all confirmation dialog
-    if (showResetAllConfirmation) {
+    if (showResetAllConfirmation.value) {
         val confirmAction: () -> Unit = {
             scope.launch {
                 withContext(Dispatchers.IO) {
                     selectionRepository.reset()
                     optionsRepository.reset()
                 }
-                showResetAllConfirmation = false
+                showResetAllConfirmation.value = false
             }
         }
-        val dismissAction: () -> Unit = { showResetAllConfirmation = false }
+        val dismissAction: () -> Unit = { showResetAllConfirmation.value = false }
 
         ConfirmResetAllDialog(
             totalSelections = totalSelections,
@@ -102,7 +102,7 @@ fun PatchSelectionManagementDialog(
     }
 
     // Reset specific target confirmation dialog
-    resetTarget?.let { target ->
+    resetTarget.value?.let { target ->
         when (target) {
             is ResetTarget.Package -> {
                 val bundleMap = selections[target.packageName] ?: emptyMap()
@@ -114,10 +114,10 @@ fun PatchSelectionManagementDialog(
                             selectionRepository.resetSelectionForPackage(target.packageName)
                             optionsRepository.resetOptionsForPackage(target.packageName)
                         }
-                        resetTarget = null
+                        resetTarget.value = null
                     }
                 }
-                val dismissAction: () -> Unit = { resetTarget = null }
+                val dismissAction: () -> Unit = { resetTarget.value = null }
 
                 ConfirmResetPackageDialog(
                     packageName = target.packageName,
@@ -137,10 +137,10 @@ fun PatchSelectionManagementDialog(
                             selectionRepository.resetSelectionForPackageAndBundle(target.packageName, target.bundleUid)
                             optionsRepository.resetOptionsForPackageAndBundle(target.packageName, target.bundleUid)
                         }
-                        resetTarget = null
+                        resetTarget.value = null
                     }
                 }
-                val dismissAction: () -> Unit = { resetTarget = null }
+                val dismissAction: () -> Unit = { resetTarget.value = null }
 
                 ConfirmResetPackageBundleDialog(
                     packageName = target.packageName,
@@ -155,13 +155,13 @@ fun PatchSelectionManagementDialog(
     }
 
     // Patch details dialog
-    showPatchDetailsTarget?.let { target ->
+    showPatchDetailsTarget.value?.let { target ->
         PatchDetailsDialog(
             packageName = target.packageName,
             bundleUid = target.bundleUid,
             bundleName = bundleNames[target.bundleUid],
             appDataResolver = appDataResolver,
-            onDismiss = { showPatchDetailsTarget = null }
+            onDismiss = { showPatchDetailsTarget.value = null }
         )
     }
 }
@@ -1013,9 +1013,7 @@ private fun parseJsonValue(jsonString: String): Any? {
         val json = Json {
             ignoreUnknownKeys = true
         }
-        val element = json.parseToJsonElement(jsonString)
-
-        when (element) {
+        when (val element = json.parseToJsonElement(jsonString)) {
             is JsonNull -> null
             is JsonPrimitive -> {
                 when {

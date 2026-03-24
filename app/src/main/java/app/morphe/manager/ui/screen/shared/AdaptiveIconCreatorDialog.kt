@@ -19,6 +19,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Info
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter.Companion.colorMatrix
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -38,6 +40,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -68,14 +71,24 @@ private object AdaptiveIconConfig {
     // File names
     const val BACKGROUND_FILE_NAME = "morphe_adaptive_background_custom.png"
     const val FOREGROUND_FILE_NAME = "morphe_adaptive_foreground_custom.png"
+    const val NOTIFICATION_FILE_NAME = "morphe_notification_icon_custom.png"
 
-    // Density folders and sizes - all densities will be generated
+    // Density folders and sizes
     val DENSITY_CONFIGS = listOf(
         DensityConfig("mipmap-mdpi", 108),
         DensityConfig("mipmap-hdpi", 162),
         DensityConfig("mipmap-xhdpi", 216),
         DensityConfig("mipmap-xxhdpi", 324),
         DensityConfig("mipmap-xxxhdpi", 432)
+    )
+
+    // Notification icon density folders and sizes
+    val NOTIFICATION_DENSITY_CONFIGS = listOf(
+        DensityConfig("drawable-mdpi", 24),
+        DensityConfig("drawable-hdpi", 36),
+        DensityConfig("drawable-xhdpi", 48),
+        DensityConfig("drawable-xxhdpi", 72),
+        DensityConfig("drawable-xxxhdpi", 96)
     )
 
     data class DensityConfig(val folderName: String, val size: Int)
@@ -103,8 +116,9 @@ private object AdaptiveIconConfig {
     // Default background color
     const val DEFAULT_BACKGROUND_COLOR = "#B3E5FC"
 
-    // Preview size
+    // Preview sizes
     val PREVIEW_SIZE = 200.dp
+    val NOTIFICATION_PREVIEW_SIZE = 40.dp
 }
 
 /**
@@ -122,12 +136,17 @@ fun AdaptiveIconCreatorDialog(
     var foregroundUri by remember { mutableStateOf<Uri?>(null) }
     var foregroundBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var backgroundColor by remember { mutableStateOf(AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR) }
-    var showColorPicker by remember { mutableStateOf(false) }
+    val showColorPicker = remember { mutableStateOf(false) }
 
-    // Scaling and positioning state
+    // Scaling and positioning state (adaptive icon)
     var scale by remember { mutableFloatStateOf(1f) }
     var offsetX by remember { mutableFloatStateOf(0f) }
     var offsetY by remember { mutableFloatStateOf(0f) }
+
+    // Scaling and positioning state (notification icon)
+    var notificationScale by remember { mutableFloatStateOf(1f) }
+    var notificationOffsetX by remember { mutableFloatStateOf(0f) }
+    var notificationOffsetY by remember { mutableFloatStateOf(0f) }
 
     val context = LocalContext.current
 
@@ -148,6 +167,9 @@ fun AdaptiveIconCreatorDialog(
                         scale = 1f
                         offsetX = 0f
                         offsetY = 0f
+                        notificationScale = 1f
+                        notificationOffsetX = 0f
+                        notificationOffsetY = 0f
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
@@ -176,7 +198,10 @@ fun AdaptiveIconCreatorDialog(
                         backgroundColor = backgroundColor,
                         scale = scale,
                         offsetX = offsetX,
-                        offsetY = offsetY
+                        offsetY = offsetY,
+                        notificationScale = notificationScale,
+                        notificationOffsetX = notificationOffsetX,
+                        notificationOffsetY = notificationOffsetY
                     )
 
                     withContext(Dispatchers.Main) {
@@ -245,7 +270,7 @@ fun AdaptiveIconCreatorDialog(
                 icon = Icons.Outlined.Info
             )
 
-            // Preview with safe zones
+            // Adaptive icon preview with safe zones
             AdaptiveIconPreview(
                 foregroundBitmap = foregroundBitmap,
                 backgroundColor = backgroundColor,
@@ -258,10 +283,11 @@ fun AdaptiveIconCreatorDialog(
                 onOffsetChange = { newOffsetX, newOffsetY ->
                     offsetX = newOffsetX.coerceIn(-AdaptiveIconConfig.MAX_OFFSET, AdaptiveIconConfig.MAX_OFFSET)
                     offsetY = newOffsetY.coerceIn(-AdaptiveIconConfig.MAX_OFFSET, AdaptiveIconConfig.MAX_OFFSET)
-                }
+                },
+                onBackgroundColorClick = { showColorPicker.value = true }
             )
 
-            // Reset transform button
+            // Reset adaptive transform button
             if (foregroundBitmap != null && (scale != 1f || offsetX != 0f || offsetY != 0f)) {
                 TextButton(
                     onClick = {
@@ -281,6 +307,44 @@ fun AdaptiveIconCreatorDialog(
                 }
             }
 
+            // Notification icon preview
+            if (foregroundBitmap != null) {
+                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
+
+                NotificationIconPreview(
+                    foregroundBitmap = foregroundBitmap!!,
+                    scale = notificationScale,
+                    offsetX = notificationOffsetX,
+                    offsetY = notificationOffsetY,
+                    onScaleChange = { newScale ->
+                        notificationScale = newScale.coerceIn(AdaptiveIconConfig.MIN_SCALE, AdaptiveIconConfig.MAX_SCALE)
+                    },
+                    onOffsetChange = { newOffsetX, newOffsetY ->
+                        notificationOffsetX = newOffsetX.coerceIn(-AdaptiveIconConfig.MAX_OFFSET, AdaptiveIconConfig.MAX_OFFSET)
+                        notificationOffsetY = newOffsetY.coerceIn(-AdaptiveIconConfig.MAX_OFFSET, AdaptiveIconConfig.MAX_OFFSET)
+                    }
+                )
+
+                if (notificationScale != 1f || notificationOffsetX != 0f || notificationOffsetY != 0f) {
+                    TextButton(
+                        onClick = {
+                            notificationScale = 1f
+                            notificationOffsetX = 0f
+                            notificationOffsetY = 0f
+                        },
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.RestartAlt,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(stringResource(R.string.adaptive_icon_reset_transform))
+                    }
+                }
+            }
+
             // Foreground selection
             MorpheDialogButton(
                 text = if (foregroundUri == null)
@@ -291,47 +355,19 @@ fun AdaptiveIconCreatorDialog(
                 icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()
             )
-
-            // Background color selection
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = stringResource(R.string.adaptive_icon_background_color),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    color = LocalDialogTextColor.current,
-                    modifier = Modifier.weight(1f)
-                )
-
-                Surface(
-                    onClick = { showColorPicker = true },
-                    modifier = Modifier.size(40.dp),
-                    shape = CircleShape,
-                    color = parseColorToRgb(backgroundColor).let { (r, g, b) ->
-                        Color(r, g, b)
-                    },
-                    border = BorderStroke(
-                        2.dp,
-                        MaterialTheme.colorScheme.outline
-                    )
-                ) {}
-            }
         }
     }
 
     // Color picker dialog
-    if (showColorPicker) {
+    if (showColorPicker.value) {
         ColorPickerDialog(
             title = stringResource(R.string.adaptive_icon_background_color),
             currentColor = backgroundColor,
             onColorSelected = { color ->
                 backgroundColor = color
-                showColorPicker = false
+                showColorPicker.value = false
             },
-            onDismiss = { showColorPicker = false }
+            onDismiss = { showColorPicker.value = false }
         )
     }
 }
@@ -348,7 +384,8 @@ private fun AdaptiveIconPreview(
     offsetX: Float,
     offsetY: Float,
     onScaleChange: (Float) -> Unit,
-    onOffsetChange: (Float, Float) -> Unit
+    onOffsetChange: (Float, Float) -> Unit,
+    onBackgroundColorClick: () -> Unit
 ) {
     // Color for guides and safe zones inside the preview canvas
     val previewGuideColor = remember(backgroundColor) {
@@ -374,6 +411,13 @@ private fun AdaptiveIconPreview(
             style = MaterialTheme.typography.titleSmall,
             fontWeight = FontWeight.Bold,
             color = LocalDialogTextColor.current
+        )
+        Text(
+            text = stringResource(R.string.adaptive_icon_preview_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 8.dp)
         )
 
         Box(
@@ -531,6 +575,30 @@ private fun AdaptiveIconPreview(
             }
         }
 
+        // Background color picker row
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(R.string.adaptive_icon_background_color),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Medium,
+                color = LocalDialogTextColor.current,
+                modifier = Modifier.weight(1f)
+            )
+            Surface(
+                onClick = onBackgroundColorClick,
+                modifier = Modifier.size(40.dp),
+                shape = CircleShape,
+                color = parseColorToRgb(backgroundColor).let { (r, g, b) -> Color(r, g, b) },
+                border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
+            ) {}
+        }
+
         // Safe zone legend
         Column(
             modifier = Modifier
@@ -551,6 +619,192 @@ private fun AdaptiveIconPreview(
                 text = stringResource(R.string.adaptive_icon_safe_zone_outer)
             )
         }
+
+        // Scale slider
+        if (foregroundBitmap != null) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Image,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Slider(
+                    value = scale,
+                    onValueChange = { onScaleChange(it) },
+                    valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
+                    modifier = Modifier.weight(1f)
+                )
+                Icon(
+                    imageVector = Icons.Outlined.Image,
+                    contentDescription = null,
+                    modifier = Modifier.size(22.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Preview for the notification icon - dark background simulating the status bar.
+ * The foreground is drawn white (alpha-preserving) to reflect how Android renders
+ * notification small icons.
+ */
+@Composable
+private fun NotificationIconPreview(
+    foregroundBitmap: Bitmap,
+    scale: Float,
+    offsetX: Float,
+    offsetY: Float,
+    onScaleChange: (Float) -> Unit,
+    onOffsetChange: (Float, Float) -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.notification_icon_preview),
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold,
+            color = LocalDialogTextColor.current
+        )
+
+        // Status-bar context strip
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(10.dp))
+                .background(Color(0xFF1A1A1A))
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // The notification icon canvas
+            Box(
+                modifier = Modifier
+                    .size(AdaptiveIconConfig.NOTIFICATION_PREVIEW_SIZE)
+                    .clip(CircleShape)
+                    .background(Color(0xFF1A1A1A))
+                    .border(1.dp, Color.White.copy(alpha = 0.15f), CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                var currentOffsetX by remember { mutableFloatStateOf(offsetX) }
+                var currentOffsetY by remember { mutableFloatStateOf(offsetY) }
+
+                LaunchedEffect(offsetX, offsetY) {
+                    currentOffsetX = offsetX
+                    currentOffsetY = offsetY
+                }
+
+                Canvas(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .pointerInput(Unit) {
+                            detectTransformGestures { _, pan, _, _ ->
+                                var newOffsetX = currentOffsetX + pan.x
+                                var newOffsetY = currentOffsetY + pan.y
+                                if (abs(newOffsetX) < AdaptiveIconConfig.SNAP_THRESHOLD) newOffsetX = 0f
+                                if (abs(newOffsetY) < AdaptiveIconConfig.SNAP_THRESHOLD) newOffsetY = 0f
+                                currentOffsetX = newOffsetX
+                                currentOffsetY = newOffsetY
+                                onOffsetChange(currentOffsetX, currentOffsetY)
+                            }
+                        }
+                ) {
+                    val centerX = size.width / 2
+                    val centerY = size.height / 2
+                    val imageBitmap = foregroundBitmap.asImageBitmap()
+                    val imageAspect = imageBitmap.width.toFloat() / imageBitmap.height.toFloat()
+
+                    val (baseWidth, baseHeight) = if (imageAspect > 1f)
+                        size.width to (size.width / imageAspect)
+                    else
+                        (size.height * imageAspect) to size.height
+
+                    val scaledWidth = baseWidth * scale
+                    val scaledHeight = baseHeight * scale
+                    val left = centerX - scaledWidth / 2 + currentOffsetX
+                    val top = centerY - scaledHeight / 2 + currentOffsetY
+
+                    drawImage(
+                        image = imageBitmap,
+                        dstOffset = IntOffset(left.toInt(), top.toInt()),
+                        dstSize = IntSize(scaledWidth.toInt(), scaledHeight.toInt()),
+                        colorFilter = colorMatrix(
+                            androidx.compose.ui.graphics.ColorMatrix(floatArrayOf(
+                                0f, 0f, 0f, 0f, 255f,
+                                0f, 0f, 0f, 0f, 255f,
+                                0f, 0f, 0f, 0f, 255f,
+                                0f, 0f, 0f, 1f, 0f
+                            ))
+                        )
+                    )
+                }
+            }
+
+            // Placeholder notification text to give context
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(8.dp)
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(Color.White.copy(alpha = 0.4f))
+                )
+                Box(
+                    modifier = Modifier
+                        .width(60.dp)
+                        .height(6.dp)
+                        .clip(RoundedCornerShape(3.dp))
+                        .background(Color.White.copy(alpha = 0.2f))
+                )
+            }
+        }
+
+        // Scale slider
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Image,
+                contentDescription = null,
+                modifier = Modifier.size(16.dp),
+                tint = LocalDialogSecondaryTextColor.current
+            )
+            Slider(
+                value = scale,
+                onValueChange = { onScaleChange(it) },
+                valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
+                modifier = Modifier.weight(1f)
+            )
+            Icon(
+                imageVector = Icons.Outlined.Image,
+                contentDescription = null,
+                modifier = Modifier.size(22.dp),
+                tint = LocalDialogSecondaryTextColor.current
+            )
+        }
+
+        Text(
+            text = stringResource(R.string.notification_icon_preview_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
     }
 }
 
@@ -602,7 +856,10 @@ private suspend fun createAdaptiveIcons(
     backgroundColor: String,
     scale: Float,
     offsetX: Float,
-    offsetY: Float
+    offsetY: Float,
+    notificationScale: Float,
+    notificationOffsetX: Float,
+    notificationOffsetY: Float
 ): String? = withContext(Dispatchers.IO) {
     try {
         // Convert URI to File path using existing utility
@@ -635,6 +892,21 @@ private suspend fun createAdaptiveIcons(
                 scale = scale,
                 offsetX = offsetX,
                 offsetY = offsetY,
+                previewDensity = previewDensity
+            )
+        }
+
+        // Create notification icons for all densities.
+        // The notification icon is the foreground with the same transforms applied,
+        // recolored to solid white to match Material Design guidelines for notification icons.
+        AdaptiveIconConfig.NOTIFICATION_DENSITY_CONFIGS.forEach { densityConfig ->
+            createNotificationIconForDensity(
+                iconsDir = iconsDir,
+                densityConfig = densityConfig,
+                foregroundBitmap = foregroundBitmap,
+                scale = notificationScale,
+                offsetX = notificationOffsetX,
+                offsetY = notificationOffsetY,
                 previewDensity = previewDensity
             )
         }
@@ -738,4 +1010,83 @@ private fun createIconsForDensity(
     // Clean up
     backgroundBitmap.recycle()
     foregroundScaled.recycle()
+}
+
+/**
+ * Create a notification icon for a specific density.
+ *
+ * Takes the foreground with the same scale/offset transforms applied and recolors
+ * all pixels to solid white (preserving alpha) to match Material Design guidelines
+ * for notification small icons.
+ */
+private fun createNotificationIconForDensity(
+    iconsDir: File,
+    densityConfig: AdaptiveIconConfig.DensityConfig,
+    foregroundBitmap: Bitmap,
+    scale: Float,
+    offsetX: Float,
+    offsetY: Float,
+    previewDensity: Float
+) {
+    val targetSize = densityConfig.size
+
+    // Create drawable-<dpi> directory inside the icons folder
+    val drawableDir = File(iconsDir, densityConfig.folderName)
+    if (!drawableDir.exists()) drawableDir.mkdirs()
+
+    val notificationBitmap = createBitmap(targetSize, targetSize)
+    val canvas = Canvas(notificationBitmap)
+
+    // The notification icon should fill its small canvas the same way the foreground
+    // fills the adaptive icon safe zone. We therefore express the user's transform
+    // relative to the safe zone size and then map it onto the full notification canvas
+    val previewCanvasSize = AdaptiveIconConfig.PREVIEW_SIZE.value * previewDensity
+    val imageAspect = foregroundBitmap.width.toFloat() / foregroundBitmap.height.toFloat()
+
+    // Size of the outer safe zone in preview canvas pixels
+    val safeZoneSize = previewCanvasSize * AdaptiveIconConfig.SAFE_ZONE_OUTER
+
+    // Base fitted size - fitted to safe zone, not the full canvas
+    val (baseWidth, baseHeight) = if (imageAspect > 1.0f) {
+        safeZoneSize to (safeZoneSize / imageAspect)
+    } else {
+        (safeZoneSize * imageAspect) to safeZoneSize
+    }
+
+    // Apply user scale, then map to target notification canvas size
+    val scaledWidth = baseWidth * scale
+    val scaledHeight = baseHeight * scale
+    val targetScaledWidth = scaledWidth * (targetSize / safeZoneSize)
+    val targetScaledHeight = scaledHeight * (targetSize / safeZoneSize)
+
+    // Offset is also relative to the safe zone so that the same visual shift
+    // the user sees in the preview is preserved in the notification icon
+    val targetOffsetX = offsetX * (targetSize / safeZoneSize)
+    val targetOffsetY = offsetY * (targetSize / safeZoneSize)
+    val left = (targetSize - targetScaledWidth) / 2 + targetOffsetX
+    val top = (targetSize - targetScaledHeight) / 2 + targetOffsetY
+
+    // ColorMatrix that turns every pixel white while keeping its alpha channel intact:
+    //   R = 1, G = 1, B = 1, A = original alpha
+    val whitePaint = Paint().apply {
+        isAntiAlias = true
+        isFilterBitmap = true
+        isDither = true
+        colorFilter = ColorMatrixColorFilter(ColorMatrix(floatArrayOf(
+            0f, 0f, 0f, 0f, 255f,  // R channel → always 255
+            0f, 0f, 0f, 0f, 255f,  // G channel → always 255
+            0f, 0f, 0f, 0f, 255f,  // B channel → always 255
+            0f, 0f, 0f, 1f, 0f     // A channel → keep original
+        )))
+    }
+
+    val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
+    canvas.drawBitmap(foregroundBitmap, null, destRect, whitePaint)
+
+    val notificationFile = File(drawableDir, AdaptiveIconConfig.NOTIFICATION_FILE_NAME)
+    FileOutputStream(notificationFile).use { out ->
+        notificationBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+    }
+
+    notificationBitmap.recycle()
 }
