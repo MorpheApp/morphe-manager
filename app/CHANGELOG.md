@@ -1,3 +1,10 @@
+# app [1.13.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.13.0-dev.1...v1.13.0-dev.2) (2026-03-24)
+
+
+### Features
+
+* Add notification icon creation ([#358](https://github.com/MorpheApp/morphe-manager/issues/358)) ([a096b85](https://github.com/MorpheApp/morphe-manager/commit/a096b85bd5ff7a6051f1cf0badaaaffddb95e572))
+
 # app [1.13.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.12.2...v1.13.0-dev.1) (2026-03-23)
 
 
