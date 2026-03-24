@@ -1170,7 +1170,7 @@ class HomeViewModel(
             // GET_SIGNING_CERTIFICATES (API 28+) is required for reliable archive signature reads.
             // On Android 8–10 the legacy GET_SIGNATURES path cannot read signatures from
             // archive files correctly, so we skip verification there to avoid false-blocking users.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
                 val expectedSignatures = bundleAppMetadataFlow.value[selectedApp.packageName]?.signatures
                 if (!expectedSignatures.isNullOrEmpty()) {
                     val signatureMatch = withContext(Dispatchers.IO) {
@@ -1723,7 +1723,7 @@ class HomeViewModel(
      * Returns true if at least one certificate fingerprint matches.
      * An empty [expectedSha256Signatures] is treated as "no verification required" → true.
      */
-    @RequiresApi(Build.VERSION_CODES.Q)
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun verifyApkSignature(apkPath: String, expectedSha256Signatures: Set<String>): Boolean {
         if (expectedSha256Signatures.isEmpty()) return true
         return try {
