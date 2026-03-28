@@ -275,6 +275,9 @@ class PatcherViewModel(
     var heapLimitMb: Int by mutableIntStateOf(0)
         private set
 
+    /** Bundle versions collected during preflight, forwarded to the worker for logging. */
+    private var bundleVersionsForLog: List<String> = emptyList()
+
     private val logger = object : Logger() {
         override fun log(level: LogLevel, message: String) {
             level.androidLog(message)
@@ -347,13 +350,13 @@ class PatcherViewModel(
             return
         }
 
+        bundleVersionsForLog = collectSelectedBundleMetadata().first
+
         // Validate any file-system paths supplied as patch options before handing off to the worker.
         val optionsToValidate = if (prefs.useExpertMode.getBlocking()) {
             input.options
         } else {
-            runBlocking {
-                patchOptionsPrefs.exportPatchOptions(packageName)
-            }
+            patchOptionsPrefs.exportPatchOptions(packageName)
         }
 
         val pathFailures = withContext(Dispatchers.IO) { validateOptionPaths(optionsToValidate) }
@@ -650,7 +653,8 @@ class PatcherViewModel(
                             steps[currentStepIndex].copy(state = State.RUNNING)
                     }
                 }
-            }
+            },
+            bundleVersions = bundleVersionsForLog,
         )
     }
 
@@ -829,7 +833,7 @@ class PatcherViewModel(
         options.forEach { (uid, patchOptions) ->
             val bundle = bundles[uid] ?: return@forEach
             val patches = bundle.patches.associateBy { it.name }
-            val filtered = buildMap<String, Map<String, Any?>> {
+            val filtered = buildMap {
                 patchOptions.forEach { (patchName, values) ->
                     val patch = patches[patchName] ?: return@forEach
                     val validKeys = patch.options?.map { it.key }?.toSet() ?: emptySet()

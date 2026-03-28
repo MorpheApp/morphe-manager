@@ -82,7 +82,7 @@
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Potřebujete pomoc při hledání původního neopraveného APK?</string>
     <string name="home_apk_availability_dialog_simple">Pro opravu &lt;b&gt;%s&lt;/b&gt; je potrben neopravený APK verzí:</string>
-    <string name="home_apk_availability_dialog_expert">Pro opravu &lt;b&gt;%s&lt;/b&gt; je potrben neopravený APK verzí:</string>
+    <string name="home_apk_availability_dialog_expert">Pro opravu &lt;b&gt;%s&lt;/b&gt; je potřebná neopravená APK verze:</string>
     <string name="home_apk_availability_recommended_label">Doporučené</string>
     <string name="home_apk_availability_unpatched_label">Neupravený</string>
     <string name="home_apk_availability_yes">Ano, pomozte mi najít APK</string>
@@ -125,9 +125,11 @@ Opravdu chcete pokračovat?"</string>
     <string name="home_invalid_signature_title">Neověřená APK</string>
     <string name="home_invalid_signature_message">APK, kterou jste vybrali pro &lt;b&gt;%s&lt;/b&gt;, neodpovídá očekávanému certifikátu podpisu. Může být modifikována nebo pocházet z nedůvěryhodného zdroje</string>
     <string name="home_invalid_signature_badge">Tato APK nemusí být originální</string>
-    <string name="home_split_apk_warning_title">Podpora pro rozdělenou APK není podporována</string>
-    <string name="home_split_apk_warning_message">Vybrali jste balíček rozdělené APK (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; vyžaduje &lt;b&gt;plnou APK&lt;/b&gt; – rozdělené balíčky nelze opravit pro tuto aplikaci</string>
-    <string name="home_split_apk_warning_badge">K pokračování je vyžadována plná APK</string>
+    <string name="home_split_apk_warning_title">Detekován rozdělený APK</string>
+    <string name="home_split_apk_warning_message">"Tento soubor je balíček APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Vyberte jinou APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimentální</string>
     <string name="home_dialog_unsupported_version_experimental_description">Tato verze má experimentální podporu a může být nestabilní nebo neúplná</string>
@@ -162,8 +164,9 @@ Opravdu chcete pokračovat?"</string>
     <string name="patch_option_list_empty_state">Ještě jste nepřidali žádné hodnoty</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Vytvořit adaptivní ikonu</string>
-    <string name="adaptive_icon_instructions">Vyberte přední obrázek, vyberte barvu pozadí a přizpůsobte náhled s gesty pinch-to-zoom</string>
-    <string name="adaptive_icon_preview">Náhled</string>
+    <string name="adaptive_icon_instructions">Vyberte obrázek popředí, vyberte barvu pozadí, poté použijte posuvník nebo gesta přiblížení a oddálení pro úpravu náhledu</string>
+    <string name="adaptive_icon_preview">Náhled adaptivního ikonu</string>
+    <string name="adaptive_icon_preview_hint">Pro nejlepší výsledek udržujte ikonu uvnitř pevného vnitřního kruhu</string>
     <string name="adaptive_icon_select_image">Vybrat obrázek</string>
     <string name="adaptive_icon_change_image">Změnit obrázek</string>
     <string name="adaptive_icon_background_color">Barva pozadí</string>
@@ -173,6 +176,8 @@ Opravdu chcete pokračovat?"</string>
     <string name="adaptive_icon_created_success">Adaptivní ikona vytvořena úspěšně</string>
     <string name="adaptive_icon_creation_failed">Nepodařilo se vytvořit adaptivní ikonu</string>
     <string name="adaptive_icon_folder_explanation">Vyberte, kde vytvořit složku \'%1$s/%2$s\' s generovanými ikonami</string>
+    <string name="notification_icon_preview">Tlačítko oznámení je skryté</string>
+    <string name="notification_icon_preview_hint">Použijte posuvník pro změnu velikosti. Táhněte pro přesunutí</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Vytvořit vlastní záhlaví</string>
     <string name="header_creator_instructions">Vyberte obrázky pro světlé a tmavé téma, potom přizpůsobte gesty pinch-to-zoom</string>
@@ -352,7 +357,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_updates_use_prereleases_description">Získejte předběžný přístup k novým funkcím Morphe. Pro získání předběžných verzí oprav povolte přepínač předběžné verze v každém zdroji oprav samostatně</string>
     <string name="settings_advanced_updates_allow_metered">Aktualizovat přes mobilní data</string>
     <string name="settings_advanced_updates_allow_metered_description">Povolit Morphe a aktualizace oprav ke stažení přes mobilní data</string>
-    <string name="settings_advanced_updates_background_notifications">Aktualizace pozadí</string>
+    <string name="settings_advanced_updates_background_notifications">Aktualizace na pozadí</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodicky ověřujte aktualizace v pozadí a upozorněte, když jsou k dispozici.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Přijímat okamžité notifikace pro nové vydání, dokonce i když je aplikace uzavřena</string>
     <string name="settings_advanced_update_interval">Častota kontroly</string>
@@ -382,7 +387,7 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_expert_mode_dialog_title">Povolit Expert mód?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert mód poskytuje více kontroly nad aplikací patchů, ale špatná konfigurace nastavení v expert módu může vést k nefunkční aplikaci</string>
     <string name="settings_advanced_strip_unused_libs">Odstranit nepoužívané nativní knihovny</string>
-    <string name="settings_advanced_strip_unused_libs_description">Smazat nativní knihovny pro nepodporované architektury CPU z patčovaných aplikací</string>
+    <string name="settings_advanced_strip_unused_libs_description">Smazat nativní knihovny pro nepodporované architektury CPU ze záplatovaných aplikací</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Požadováno pro zdroje pull requestů</string>
@@ -390,9 +395,9 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_github_pat_how_to_get">Jak získat token</string>
     <string name="settings_advanced_github_pat_dialog_title">Nastavit GitHub Personal Access Token</string>
     <string name="settings_advanced_github_pat_dialog_description">Nastavte GitHub Personal Access Token, abyste mohli přidávat žádosti jako externí zdroje. Vytvořte PAT s rozsahem public_repo github.com</string>
-    <string name="settings_advanced_github_pat_export_include_label">Zahrnout do nastavení vývozu</string>
+    <string name="settings_advanced_github_pat_export_include_label">Zahrnout do exportu nastavení</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Přidá toto PAT do exportovaných nastavení Morphe</string>
-    <string name="settings_advanced_github_pat_export_warning">Nezvejte svůj PAT. Pokud ho zahrnete do nastavení vývozu, držte tuto soubor soukromý, protože obsahuje token</string>
+    <string name="settings_advanced_github_pat_export_warning">Nesdílejte svůj PAT. Pokud ho zahrnete do exportu nastavení, uchovejte tento soubor v soukromí, protože obsahuje token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Nastavení záplaty</string>
     <string name="settings_advanced_patch_options_youtube_description">Téma, branding, záhlaví a možnosti</string>
@@ -414,16 +419,16 @@ Opravdu chcete pokračovat?"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Název aplikace</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Zadejte vlastní název</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Vlastní ikona</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Složka s obrázky pro použití jako vlastní ikonu.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Složka s obrázky, které se mají použít jako vlastní ikona.
 
-Složka musí obsahovat jednu nebo více z následujících složek, v závislosti na DPI zařízení:
+Tato složka musí obsahovat jednu nebo více z následujících složek, v závislosti na DPI zařízení:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Každá z těchto složek musí obsahovat všechny následující soubory:
+Každá ze složek musí obsahovat všechny následující soubory:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
@@ -434,9 +439,18 @@ Rozměry obrázků musí být následující:
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Volitelně, cesta může obsahovat složku 'drawable' s kterýmkoliv z následujících souborů pro monochromatické soubory ikon:
+Volitelně cesta obsahuje složku 'drawable' se souborem monochromatické ikony:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Volitelně cesta obsahuje ikonu oznámení v jednom z následujících formátů:
+- XML vektorová kresba ve složce 'drawable':
+  morphe_notification_icon_custom.xml
+- PNG rastrové obrázky ve složkách 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Vlastní logo v hlavičce</string>
     <string name="settings_advanced_patch_options_custom_header_description">Změnit logo v hlavičce</string>
@@ -470,7 +484,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_internal_description">Použít instalátor balíčků Android</string>
     <string name="installer_auto_saved_name">Instalátor s kořenovým připojením</string>
     <string name="installer_auto_saved_description">Nainstaluje upravený APK nad instalovanou aplikací</string>
-    <string name="installer_shizuku_description">Instalujte tichou pomocí Shizuku nebo Sui</string>
+    <string name="installer_shizuku_description">Instalovat potichu pomocí Shizuku nebo Sui</string>
     <string name="installer_option_none">Žádný záložní</string>
     <string name="installer_none_description">Není nakonfigurován žádný záložní instalátor</string>
     <string name="installer_status_requires_root">Vyžaduje přístup root</string>
@@ -513,20 +527,20 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_process_runtime_description_not_available">Tato funkce vyžaduje Android 11 nebo vyšší</string>
     <!-- Settings - System Tab - Import and export keystore -->
     <string name="settings_system_import_export">Import &amp; export</string>
-    <string name="settings_system_import_keystore">Importovat klíčový díl</string>
-    <string name="settings_system_import_keystore_description">Importovat vlastní klíčový díl</string>
+    <string name="settings_system_import_keystore">Importovat uložiště klíčů</string>
+    <string name="settings_system_import_keystore_description">Importovat vlastní úložiště klíčů</string>
     <string name="settings_system_import_keystore_dialog_title">Zadejte přihlašovací údaje klíčového dílu</string>
     <string name="settings_system_import_keystore_dialog_description">Pro import klíčenky budete muset zadat přihlašovací údaje ke klíčence</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Uživatelské jméno (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Heslo</string>
     <string name="settings_system_import_keystore_dialog_button">Importovat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Neplatné přihlašovací údaje klíčového dílu</string>
-    <string name="settings_system_import_keystore_success">Klíčový díl importován</string>
+    <string name="settings_system_import_keystore_success">Úložiště klíčů importováno</string>
     <string name="settings_system_import_keystore_failed">Selhalo importování klíčového dílu</string>
-    <string name="settings_system_export_keystore">Exportovat klíčový díl</string>
-    <string name="settings_system_export_keystore_description">Exportovat současný klíčový díl</string>
-    <string name="settings_system_export_keystore_unavailable">Není k dispozici žádný klíčový díl k exportu</string>
-    <string name="settings_system_export_keystore_success">Klíčový díl exportován</string>
+    <string name="settings_system_export_keystore">Exportovat úložiště klíčů</string>
+    <string name="settings_system_export_keystore_description">Exportovat současné úložiště klíčů </string>
+    <string name="settings_system_export_keystore_unavailable">Není k dispozici žádné úložiště klíčů k exportu</string>
+    <string name="settings_system_export_keystore_success">Úložiště klíčů exportováno</string>
     <string name="settings_system_show_password_field">Zobrazit heslo</string>
     <string name="settings_system_hide_password_field">Skrýt heslo</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -563,8 +577,8 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_original_apks_delete_title">Smazat původní APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Smazat originální soubor APK pro %s? Bez poskytnutí nového souboru APK nebude možné aplikaci opětovně záplatovat</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
-    <string name="settings_system_patch_selections_title">Výběry záplaty</string>
-    <string name="settings_system_patch_selections_description">Spravujte uložené výběry záplaty a nastavení. Tyto se udržují po odinstalaci aplikace.</string>
+    <string name="settings_system_patch_selections_title">Výběry záplat</string>
+    <string name="settings_system_patch_selections_description">Spravujte uložené výběry záplat a nastavení. Tyto zůstávají zachovány i po odinstalaci aplikace.</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Resetovat všechny výběry?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Resetovat výběry balíčku?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Resetovat výběr zdroje?</string>

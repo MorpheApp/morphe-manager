@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Home Screen -->
+    <!-- Home Screen - Update Notifications -->
+    <!-- Home Screen - Home Greetings -->
+    <!-- Humorous hype message with light nostalgia -->
+    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <!-- From mediocrity to amazing -->
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <!-- Home Screen - Sources Management -->
+    <!-- Home Screen - Sources Dialogs -->
+    <!-- Home Screen - Dialog 1: APK Availability -->
+    <!-- Home Screen - Dialog 2: Download Instructions -->
+    <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_split_apk_warning_title">APKێك دەبەشبووه‌</string>
+    <string name="home_split_apk_warning_message">"فایڵێكە پشكه‌ی APKە
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+بۆ باشترین ئەنجام، ئەم بەرنامەیە ڕێنمایی ده‌كات كه‌ پچۆخێك بۆ &lt;b&gt;APK‌ی پڕ&lt;/b&gt; سازدانیشێت"</string>
+    <!-- Patch Options -->
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_instructions">وێنەیەکی پیشەسازیی هەڵبژێرە، ڕەنگی پسەیەکی هەڵبژێرە، دواتر لە سڵایدەر یان ڕەقەکاندا بۆ ڕێکخستنی پێشوازێک بەکاردە</string>
+    <string name="adaptive_icon_preview">پێشوازیی دیمەنێک بۆ ئاوازی پێکدێت</string>
+    <string name="adaptive_icon_preview_hint">لەگەڵ باشترین ئەنجام، دەوێت ستەیەکەی پێشکەوتوو تێیەکەوتووی ناو خوارەوەی قوڕم</string>
+    <string name="notification_icon_preview">پێشوازیی دیمەنێک بۆ نیشاندانی پێگەی پێکهاتبوو</string>
+    <string name="notification_icon_preview_hint">لەگەڵ سڵایدەر ڕەوزە پێکهین. ڕاوە کە پێوەببێت</string>
+    <!-- Header Creator -->
+    <!-- Home Screen - App Info Screen -->
+    <!-- Home Screen - Root Mode -->
+    <!-- Patcher Screen -->
+    <!-- Patcher Screen - Patcher Steps -->
+    <!-- Patcher Screen - Patcher Worker -->
+    <!-- Patcher Screen - Patcher Messages -->
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <!-- "bytecode" can be translated from "the app code" -->
+    <!-- Space flight communications callout. -->
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <!-- Expert patcher Screen -->
+    <!-- Patcher Screen - Other hidden strings -->
+    <!-- Settings -->
+    <!-- Settings - Appearance Tab - Background animation -->
+    <!-- Settings - Appearance Tab - Theme -->
+    <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - App Icon Selector -->
+    <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- Notification content -->
+    <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <!-- Settings - Advanced Tab - Patch Options Section -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"فۆڵدەرێک لەگەڵ وێنەکانی کە دەبێت بە وێنەیەکی خۆشکردن. 
+
+ئەو فۆڵدەرە دەبێت لە یەکێکێک یاخود زیاتر لە خوارەوەیەکانی بێت، به‌گوێره‌ی DPIی دەستە: 
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+هرگەلێک دەبێت هەمووشيءەکى خوارەوەكانى تێدابێت: 
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+ئەو ابعادی وێنەی دەبێت بە میلان دەبت: 
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+زیاتر، ڕێیەکە دەتوانێت فۆڵدەرێکى 'drawable' یی هەبێت لەگەڵ فایشێک ڕێهە: 
+morphe_adaptive_monochrome_custom.xml
+
+زیاتر، ڕێیەکە دەتوانێت نیشانەیەکی پێگەی پێکهاتوە لە ڕێکخستەی خوارەوەیەکانی هەبێت: 
+- XML vector drawable in 'drawable':
+  morphe_notification_icon_custom.xml
+- PNG raster images in 'drawable-dpi' folders:
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
+    <!-- Settings - System Tab - Installer Section -->
+    <!-- Settings - System Tab - Performance Section -->
+    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Manager Settings -->
+    <!-- Settings - System Tab - Debug Section -->
+    <!-- Settings - System Tab - Storage Management Section -->
+    <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <!-- Settings - System Tab - About Section -->
+    <!-- Shared strings -->
+</resources>

@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">Μη επαληθευμένο APK</string>
     <string name="home_invalid_signature_message">Το APK που επιλέξατε για το &lt;b&gt;%s&lt;/b&gt; δεν ταιριάζει με το αναμενόμενο πιστοποιητικό υπογραφής. Μπορεί να έχει τροποποιηθεί ή να προέρχεται από μη αξιόπιστη πηγή</string>
     <string name="home_invalid_signature_badge">Αυτό το APK μπορεί να μην είναι το πρωτότυπο</string>
-    <string name="home_split_apk_warning_title">Δεν υποστηρίζονται Split APK</string>
-    <string name="home_split_apk_warning_message">Επιλέξατε ένα split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). Το &lt;b&gt;%s&lt;/b&gt; απαιτεί ένα &lt;b&gt;πλήρες APK&lt;/b&gt; - τα split bundles δεν μπορούν να επιδιορθωθούν για αυτήν την εφαρμογή</string>
-    <string name="home_split_apk_warning_badge">Απαιτείται ένα πλήρες APK για να συνεχίσετε</string>
+    <string name="home_split_apk_warning_title">Ανιχνεύθηκε διαχωρισμένο APK</string>
+    <string name="home_split_apk_warning_message">"Αυτό το αρχείο είναι ένα πακέτο APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Για καλύτερα αποτελέσματα, αυτή η εφαρμογή συνιστά την επιδιόρθωση ενός &lt;b&gt;πλήρους APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Επιλέξτε ένα άλλο APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Πειραματικό</string>
     <string name="home_dialog_unsupported_version_experimental_description">Αυτή η έκδοση έχει πειραματική υποστήριξη και μπορεί να είναι ασταθής ή ελλιπής</string>
@@ -162,8 +164,9 @@
     <string name="patch_option_list_empty_state">Δεν έχουν προστεθεί τιμές ακόμη</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Δημιουργία προσαρμοσμένου εικονιδίου</string>
-    <string name="adaptive_icon_instructions">Επιλέξτε μια εικόνα προσκηνίου, επιλέξτε χρώμα φόντου και προσαρμόστε την προεπισκόπηση με γέστες pinch-to-zoom</string>
-    <string name="adaptive_icon_preview">Προεπισκόπηση</string>
+    <string name="adaptive_icon_instructions">Επιλέξτε μια εικόνα φόντου, επιλέξτε ένα χρώμα φόντου, στη συνέχεια χρησιμοποιήστε τη ράβδο ή χειρονομίες τσιμπήματος για να προσαρμόσετε την προεπισκόπηση</string>
+    <string name="adaptive_icon_preview">Προεπισκόπηση εικονιδίου προσαρμογής</string>
+    <string name="adaptive_icon_preview_hint">Για καλύτερο αποτέλεσμα, κρατήστε το εικονίδιό σας μέσα στον στερεό εσωτερικό κύκλο</string>
     <string name="adaptive_icon_select_image">Επιλογή εικόνας</string>
     <string name="adaptive_icon_change_image">Αλλαγή εικόνας</string>
     <string name="adaptive_icon_background_color">Χρώμα φόντου</string>
@@ -173,6 +176,8 @@
     <string name="adaptive_icon_created_success">Δημιουργήθηκε επιτυχώς το εικονίδιο προσαρμογής</string>
     <string name="adaptive_icon_creation_failed">Ατυχήθηκε η δημιουργία του εικονιδίου προσαρμογής</string>
     <string name="adaptive_icon_folder_explanation">Επιλέξτε όπου να δημιουργήσετε την φάκελο \'%1$s/%2$s\' με τα δημιουργημένα αρχεία εικονίδων</string>
+    <string name="notification_icon_preview">Το εικονίδιο ειδοποίησης προεπισκόπησης</string>
+    <string name="notification_icon_preview_hint">Χρησιμοποιήστε τη ράβδο για να αλλάξετε το μέγεθος. Σύρετε για να επανατοποθετήσετε</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Δημιουργία προσαρμοσμένου κεφαλίδας</string>
     <string name="header_creator_instructions">Επιλέξτε εικόνες για φωτεινές και σκοτεινές θεματικές, στη συνέχεια προσαρμόστε με κινήσεις pinch-to-zoom</string>
@@ -434,9 +439,18 @@ morphe_adaptive_foreground_custom.png
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Προαιρετικά, η διαδρομή περιέχει έναν 'σχεδιαζόμενο' φάκελο με οποιοδήποτε από τα μονόχρωμα αρχεία εικονιδίων:
+Προαιρετικά, η διαδρομή περιέχει έναν φάκελο 'drawable' με ένα μονοχρωματικό αρχείο εικονιδίου:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Προαιρετικά, η διαδρομή περιέχει ένα εικονίδιο ειδοποίησης σε μία από τις ακόλουθες μορφές:
+- XML vector drawable στο 'drawable':
+  morphe_notification_icon_custom.xml
+- PNG raster images στους φακέλους 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Προσαρμοσμένο λογότυπο κεφαλίδας</string>
     <string name="settings_advanced_patch_options_custom_header_description">Αλλαγή λογότυπου κεφαλίδας</string>

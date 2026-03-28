@@ -35,7 +35,7 @@ import kotlinx.coroutines.delay
 /**
  * Simple mode patching screen.
  *
- * Shows a Animated message, circular progress indicator with percentage and patch count, and
+ * Shows an Animated message, circular progress indicator with percentage and patch count, and
  * progress message.
  */
 @Composable
@@ -86,21 +86,25 @@ fun SimplePatchingInProgress(
                     completed = completed,
                     total = total,
                     showLongStepWarning = showLongStepWarning,
-                    patcherViewModel = patcherViewModel
+                    patcherViewModel = patcherViewModel,
+                    onCancelClick = onCancelClick,
+                    onHomeClick = onHomeClick
                 )
             }
 
             // Bottom action bar
-            PatcherBottomActionBar(
-                showCancelButton = true,
-                showHomeButton = false,
-                showSaveButton = false,
-                showErrorButton = false,
-                onCancelClick = onCancelClick,
-                onHomeClick = onHomeClick,
-                onSaveClick = {},
-                onErrorClick = {}
-            )
+            if (!windowSize.useTwoColumnLayout) {
+                PatcherBottomActionBar(
+                    showCancelButton = true,
+                    showHomeButton = false,
+                    showSaveButton = false,
+                    showErrorButton = false,
+                    onCancelClick = onCancelClick,
+                    onHomeClick = onHomeClick,
+                    onSaveClick = {},
+                    onErrorClick = {}
+                )
+            }
         }
     }
 }
@@ -116,7 +120,9 @@ private fun AdaptiveProgressContent(
     completed: Int,
     total: Int,
     showLongStepWarning: Boolean,
-    patcherViewModel: PatcherViewModel
+    patcherViewModel: PatcherViewModel,
+    onCancelClick: () -> Unit = {},
+    onHomeClick: () -> Unit = {}
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
@@ -131,20 +137,38 @@ private fun AdaptiveProgressContent(
             horizontalArrangement = Arrangement.spacedBy(itemSpacing * 3),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Left column: Message and details
+            // Left column: Message, details + action bar
             Column(
                 modifier = Modifier
                     .weight(0.5f)
                     .fillMaxHeight(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                ProgressMessageSection(currentMessage)
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    ProgressMessageSection(currentMessage)
 
-                ProgressDetailsSection(
-                    showLongStepWarning = showLongStepWarning,
-                    patcherViewModel = patcherViewModel,
-                    windowSize = windowSize
+                    ProgressDetailsSection(
+                        showLongStepWarning = showLongStepWarning,
+                        patcherViewModel = patcherViewModel,
+                        windowSize = windowSize
+                    )
+                }
+
+                // Action bar
+                PatcherBottomActionBar(
+                    showCancelButton = true,
+                    showHomeButton = false,
+                    showSaveButton = false,
+                    showErrorButton = false,
+                    onCancelClick = onCancelClick,
+                    onHomeClick = onHomeClick,
+                    onSaveClick = {},
+                    onErrorClick = {},
+                    modifier = Modifier.padding(horizontal = 0.dp)
                 )
             }
 

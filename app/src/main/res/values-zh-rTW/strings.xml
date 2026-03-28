@@ -53,8 +53,8 @@
     <string name="sources_management_title">修補來源</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟連結</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
-    <string name="sources_management_prerelease_toggle">使用預先發布補丁</string>
-    <string name="sources_management_prerelease_toggle_description">提前接收新實驗性補丁版本</string>
+    <string name="sources_management_prerelease_toggle">使用預先發布修補</string>
+    <string name="sources_management_prerelease_toggle_description">提前接收新實驗性修補版本</string>
     <string name="sources_management_experimental_versions_toggle">使用實驗性應用程式版本</string>
     <string name="sources_management_experimental_versions_toggle_description">如果有的話，修補實驗性應用程式目標</string>
     <string name="sources_management_already_exists">此來源已新增</string>
@@ -78,7 +78,7 @@
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載來源：%s</string>
-    <string name="sources_download_endpoint_not_found">無法更新 \'%1$s\': 找不到配置的 URL 中的補丁 JSON 檔案</string>
+    <string name="sources_download_endpoint_not_found">無法更新「%1$s\'」：找不到配置 URL 中的修補 JSON 檔案</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">需要協助找到原始未修補的 APK 嗎？</string>
     <string name="home_apk_availability_dialog_simple">要修補&lt;b&gt;%s&lt;/b&gt;，你需要未修補的 APK，版本為：</string>
@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">未經驗證的 APK</string>
     <string name="home_invalid_signature_message">您選擇的 APK 對於 &lt;b&gt;%s&lt;/b&gt; 的簽署憑證不符。它可能已被修改或來自不受信任的來源</string>
     <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
-    <string name="home_split_apk_warning_title">不支援分割 APK</string>
-    <string name="home_split_apk_warning_message">您已選擇一個分割 APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;)。&lt;b&gt;%s&lt;/b&gt; 需要 &lt;b&gt;完整 APK&lt;/b&gt; – 分割 bundle 無法為此應用程式修補</string>
-    <string name="home_split_apk_warning_badge">需要完整 APK 才能繼續</string>
+    <string name="home_split_apk_warning_title">偵測到分割 APK</string>
+    <string name="home_split_apk_warning_message">"此檔案為 APK 組合
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+為獲得最佳效果，此應用程式建議修補 &lt;b&gt;完整 APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">選擇另一個 APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">實驗性</string>
     <string name="home_dialog_unsupported_version_experimental_description">此版本支援實驗性功能，可能不穩定或不完整</string>
@@ -142,13 +144,13 @@
     <string name="home_dialog_wrong_package_description">你選擇的 APK 不符合你想要修補的應用程式</string>
     <string name="home_dialog_expected_package">預期套件：</string>
     <string name="home_dialog_selected_package">選取套件：</string>
-    <string name="home_outdated_patches_dialog_title">補丁可能已過期</string>
-    <string name="home_outdated_patches_dialog_message">行動數據使用中，已停用補丁更新</string>
-    <string name="home_outdated_patches_dialog_warning">使用過期補丁可能會導致應用程式故障</string>
-    <string name="home_outdated_patches_dialog_update_and_patch">更新和補丁</string>
+    <string name="home_outdated_patches_dialog_title">修補可能已過時</string>
+    <string name="home_outdated_patches_dialog_message">行動數據使用中，已停用修補更新</string>
+    <string name="home_outdated_patches_dialog_warning">使用過時修補可能會造成應用程式故障</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">更新和修補</string>
     <string name="home_low_disk_space_dialog_title">磁碟空間不足</string>
     <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用儲存空間。修補程式需要至少 1 GB 的可用空間才能正常工作</string>
-    <string name="home_low_disk_space_dialog_warning">繼續進行可能會導致 \"找不到檔案\" 的錯誤或損毀的 APK 输出</string>
+    <string name="home_low_disk_space_dialog_warning">繼續進行可能會發生「找不到檔案」的錯誤或輸出損壞的 APK</string>
     <!-- Patch Options -->
     <string name="custom_color">自訂顏色</string>
     <string name="hex_color">十六進位顏色</string>
@@ -162,8 +164,9 @@
     <string name="patch_option_list_empty_state">尚未新增任何值</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">建立自動調整圖示</string>
-    <string name="adaptive_icon_instructions">選擇前景圖片、選取背景顏色，並透過雙指撥動縮放手勢調整預覽畫面</string>
-    <string name="adaptive_icon_preview">預覽</string>
+    <string name="adaptive_icon_instructions">選擇前景圖片、選取背景顏色，然後使用滑桿或捏合手勢調整預覽</string>
+    <string name="adaptive_icon_preview">Adaptive icon preview</string>
+    <string name="adaptive_icon_preview_hint">為了獲得最佳效果，請將圖示放在實心內圈內</string>
     <string name="adaptive_icon_select_image">選擇圖片</string>
     <string name="adaptive_icon_change_image">變更圖片</string>
     <string name="adaptive_icon_background_color">背景顏色</string>
@@ -173,6 +176,8 @@
     <string name="adaptive_icon_created_success">自動調整圖示已成功建立</string>
     <string name="adaptive_icon_creation_failed">無法建立自動調整圖示</string>
     <string name="adaptive_icon_folder_explanation">選擇建立\"%1$s/%2$s\"資料夾的位置，其中包含產生的圖示檔案</string>
+    <string name="notification_icon_preview">Notification icon preview</string>
+    <string name="notification_icon_preview_hint">Use the slider to resize. Drag to reposition</string>
     <!-- Header Creator -->
     <string name="header_creator_create">建立自訂標頭</string>
     <string name="header_creator_instructions">選擇淺色和深色主題的圖片，然後使用雙指撥動縮放手勢調整</string>
@@ -235,10 +240,10 @@
     <string name="patcher_ready_to_mount_subtitle">按下下方按鈕即可掛載</string>
     <string name="patcher_storage_permission_dialog_title">無法存取儲存路徑</string>
     <string name="patcher_storage_permission_description_api30">一個或多個修補程式選項指向 Morphe 無法讀取的路徑。請授予儲存空間存取權，然後輕觸按鈕，修補程式將自動開始。</string>
-    <string name="patcher_storage_permission_description_legacy">一或多個補丁選項指向無法存取的路徑。更新補丁選項中的路徑並重試</string>
+    <string name="patcher_storage_permission_description_legacy">一或多個修補選項指向無法存取的路徑。更新修補選項中的路徑並重試</string>
     <string name="patcher_storage_permission_grant">授予存取權限</string>
-    <string name="patcher_storage_permission_denied_warning">存儲權限已被拒絕。授予權限以使用此路徑，或將檔案移至應用程式的私有目錄</string>
-    <string name="patcher_storage_permission_open_settings">開啟存儲設定</string>
+    <string name="patcher_storage_permission_denied_warning">儲存權限已被拒絕。授予權限以使用此路徑，或將檔案移至應用程式的私有目錄</string>
+    <string name="patcher_storage_permission_open_settings">開啟儲存設定</string>
     <string name="patcher_storage_badge_denied">權限被拒絕</string>
     <string name="patcher_storage_badge_missing">找不到記錄</string>
     <string name="patcher_storage_permission_hint">提示：將檔案移至 /Android/data/app.morphe.manager/files/ - 不需要額外權限</string>
@@ -414,28 +419,38 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name">應用程式名稱</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">輸入自訂名稱</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">自訂圖示</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"欲作為自訂圖示使用的圖片資料夾。
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"資料夾內含要用來當自訂圖示的圖片。
 
-該資料夾必須根據裝置的 DPI 包含一至多個下列資料夾：
+此資料夾必須包含一個或多個子資料夾，取決於裝置的 DPI：
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-每個資料夾內都必須包含下列所有檔案：morphe_adaptive_background_custom.png
+每個資料夾都必須包含下列所有檔案：
+morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
-圖片尺寸規格必須如下：
-- mipmap-mdpi: 108x108 像素
-- mipmap-hdpi: 162x162 像素
-- mipmap-xhdpi: 216x216 像素
-- mipmap-xxhdpi: 324x324 像素
-- mipmap-xxxhdpi: 432x432 像素
+圖片尺寸必須如下所示：
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
 
-（選填）路徑可另外包含一個「drawable」資料夾，內含任一單色圖示檔案：
+選填：路徑內含有具有單色圖示檔案的 'drawable' 資料夾：
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+選填：路徑內含有其中一種格式的通知圖示：
+- 在 'drawable' 資料夾中的 XML 向量圖示：
+  morphe_notification_icon_custom.xml
+- 在 'drawable-dpi' 資料夾中的 PNG 點陣圖：
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">自訂標題圖示</string>
     <string name="settings_advanced_patch_options_custom_header_description">變更標題圖示</string>

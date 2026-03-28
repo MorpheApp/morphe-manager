@@ -36,17 +36,17 @@ fun ManagerUpdateDetailsDialog(
     val state = updateViewModel.state
     val releaseInfo = updateViewModel.releaseInfo
 
-    // Reset state when dialog is opened if installation was cancelled
-    // This handles the case when user cancelled the system install dialog
-    DisposableEffect(Unit) {
-        // When dialog opens, if we're in INSTALLING state but no actual install is running,
+    // Reset state when dialog is opened if installation was canceled
+    // This handles the case when user canceled the system install dialog
+    DisposableEffect(state) {
+        // When dialog opens, if we're in INSTALLING state but no actual installation is running,
         // reset to CAN_INSTALL (the file is already downloaded)
         if (state == UpdateViewModel.State.INSTALLING) {
             updateViewModel.resetIfInstallCancelled()
         }
 
         onDispose {
-            // When dialog closes during download, cancel it
+            // When dialog closes during download, notify dismiss
             if (state == UpdateViewModel.State.DOWNLOADING) {
                 onDismiss()
             }
@@ -124,7 +124,7 @@ fun ManagerUpdateDetailsDialog(
                 UpdateViewModel.State.FAILED -> {
                     MorpheDialogButtonColumn {
                         if (updateViewModel.canResumeDownload) {
-                            // Download failed/cancelled - offer to resume
+                            // Download failed/canceled - offer to resume
                             MorpheDialogButton(
                                 text = stringResource(R.string.resume_download),
                                 onClick = { updateViewModel.downloadUpdate() },

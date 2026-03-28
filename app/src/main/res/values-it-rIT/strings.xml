@@ -55,8 +55,8 @@
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
     <string name="sources_management_prerelease_toggle">Usa le patch di anteprima</string>
     <string name="sources_management_prerelease_toggle_description">Ottieni l\'accesso anticipato alle nuove versioni sperimentali delle patch.</string>
-    <string name="sources_management_experimental_versions_toggle">Utilizza versioni sperimentali dell\'app</string>
-    <string name="sources_management_experimental_versions_toggle_description">Applica patch alle versioni sperimentali dell\'app, se disponibili</string>
+    <string name="sources_management_experimental_versions_toggle">Utilizza le versioni sperimentali delle app</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patcha le versioni sperimentali delle app, se disponibili</string>
     <string name="sources_management_already_exists">Questa fonte è già stata aggiunta</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome visualizzato</string>
@@ -125,14 +125,16 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_invalid_signature_title">APK non verificato</string>
     <string name="home_invalid_signature_message">L\'APK selezionato per &lt;b&gt;%s&lt;/b&gt; non corrisponde al certificato di firma previsto. Potrebbe essere stato modificato o provenire da una fonte non attendibile</string>
     <string name="home_invalid_signature_badge">Questo APK potrebbe non essere l\'originale</string>
-    <string name="home_split_apk_warning_title">APK suddivisi non supportati</string>
-    <string name="home_split_apk_warning_message">Hai selezionato un bundle APK suddiviso (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; richiede un &lt;b&gt;APK completo&lt;/b&gt; - i bundle suddivisi non possono essere applicati a questa app</string>
-    <string name="home_split_apk_warning_badge">È richiesto un APK completo per continuare</string>
+    <string name="home_split_apk_warning_title">Rilevato file APK split</string>
+    <string name="home_split_apk_warning_message">"Questo file è un bundle APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Per ottenere i risultati migliori, questa app raccomanda di applicare una patch a un &lt;b&gt;APK completo&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Scegli un altro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Sperimentale</string>
     <string name="home_dialog_unsupported_version_experimental_description">Questa versione ha il supporto sperimentale e potrebbe essere instabile o incompleta</string>
     <string name="morphe_experimental_app_version_dialog_title">Vuoi sperimentare? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Questa versione di &lt;b&gt;%s&lt;/b&gt; ha un supporto sperimentale iniziale&lt;br/&gt;&lt;br/&gt;🔧 Aspettati un comportamento imprevisto dell\'app o bug non identificati man mano che le patch vengono perfezionate per questa versione dell\'app</string>
+    <string name="morphe_experimental_app_version_dialog_message">Questa versione di &lt;b&gt;%s&lt;/b&gt; ha un supporto sperimentale iniziale&lt;br/&gt;&lt;br/&gt;🔧 Aspettati un comportamento imprevisto dell\'app o bug non identificati man mano che le patch vengono perfezionate per questa versione della app</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versione APK non supportata</string>
     <string name="home_dialog_unsupported_version_dialog_description">Questo APK non è di una versione app raccomandata. Procedere potrebbe produrre un’app non funzionante</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Procedi comunque</string>
@@ -146,9 +148,9 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_outdated_patches_dialog_message">La connessione con i dati mobili è attiva e gli aggiornamenti delle patch sono disabilitati</string>
     <string name="home_outdated_patches_dialog_warning">Il patching con patch obsolete potrebbe risultare in un\'app non funzionante</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aggiorna &amp; patcha</string>
-    <string name="home_low_disk_space_dialog_title">Spazio su disco insufficiente</string>
+    <string name="home_low_disk_space_dialog_title">Spazio su disco in esaurimento</string>
     <string name="home_low_disk_space_dialog_message">Disponibili solo %1$.2f GB di spazio di archiviazione libero. L\'applicazione delle patch richiede almeno 1 GB di spazio di archiviazione libero per funzionare correttamente</string>
-    <string name="home_low_disk_space_dialog_warning">La prosecuzione potrebbe causare un errore \"file non trovato\" o un APK di output corrotto</string>
+    <string name="home_low_disk_space_dialog_warning">Procedere potrebbe causare l\'errore \"file non trovato\" o esitare in un APK di output corrotto</string>
     <!-- Patch Options -->
     <string name="custom_color">Colore personalizzato</string>
     <string name="hex_color">Colore esadecimale</string>
@@ -162,8 +164,9 @@ Sei sicuro di voler procedere?"</string>
     <string name="patch_option_list_empty_state">Nessun valore aggiunto ancora</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crea icona adattiva</string>
-    <string name="adaptive_icon_instructions">Scegli un\'immagine in primo piano, seleziona il colore dello sfondo e regola l\'anteprima con la gesture di pinch-to-zoom</string>
-    <string name="adaptive_icon_preview">Anteprima</string>
+    <string name="adaptive_icon_instructions">Scegli un\'immagine in primo piano, seleziona il colore dello sfondo, quindi usa il cursore o i gesti di pizzico per regolare l\'anteprima</string>
+    <string name="adaptive_icon_preview">Anteprima icona adattiva</string>
+    <string name="adaptive_icon_preview_hint">Per ottenere il miglior risultato, mantieni la tua icona all\'interno del cerchio interno pieno</string>
     <string name="adaptive_icon_select_image">Seleziona immagine</string>
     <string name="adaptive_icon_change_image">Cambia immagine</string>
     <string name="adaptive_icon_background_color">Colore dello sfondo</string>
@@ -173,6 +176,8 @@ Sei sicuro di voler procedere?"</string>
     <string name="adaptive_icon_created_success">Icona adattiva creata con successo</string>
     <string name="adaptive_icon_creation_failed">Impossibile creare l\'icona adattiva</string>
     <string name="adaptive_icon_folder_explanation">Seleziona dove creare la cartella \'%1$s/%2$s\' con i file dell\'icona generati</string>
+    <string name="notification_icon_preview">Anteprima icona di notifica</string>
+    <string name="notification_icon_preview_hint">Usa il cursore per ridimensionare. Trascina per riposizionare</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crea intestazione personalizzata</string>
     <string name="header_creator_instructions">Scegli le immagini per i temi chiaro e scuro, quindi regola con gesti di pinch-to-zoom</string>
@@ -414,29 +419,38 @@ Sei sicuro di voler procedere?"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nome dell\'app</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Inserisci il nome dell\'app personalizzato</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Icona personalizzata</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Cartella con le immagini da utilizzare come icona personalizzata.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Cartella con immagini da utilizzare come icona personalizzata.
 
-La cartella deve contenere una o più delle seguenti cartelle, a seconda dei DPI del dispositivo:
+La cartella deve contenere una o più delle seguenti cartelle, a seconda del DPI del dispositivo:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Ogni cartella deve contenere tutte le seguenti immagini:
+Ciascuna delle cartelle deve contenere tutti i seguenti file:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
-Le dimensioni dell’immagine devono essere le seguenti:
+Le dimensioni delle immagini devono essere le seguenti:
 - mipmap-mdpi: 108x108 px
 - mipmap-hdpi: 162x162 px
 - mipmap-xhdpi: 216x216 px
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Opzionalmente, il percorso contiene una cartella 'scrivibile' con uno o più dei seguenti file:
+Opzionalmente, il percorso contiene una cartella 'drawable' con un file icona monocromatica:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Opzionalmente, il percorso contiene un'icona di notifica in uno dei seguenti formati:
+- Disegno vettoriale XML in 'drawable':
+  morphe_notification_icon_custom.xml
+- Immagini raster PNG nelle cartelle 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Logo dell’intestazione personalizzato</string>
     <string name="settings_advanced_patch_options_custom_header_description">Cambia il logo dell’intestazione</string>

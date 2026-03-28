@@ -125,14 +125,16 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_invalid_signature_title">Təsdiqlənməyən APK</string>
     <string name="home_invalid_signature_message"> &lt;b&gt;%s&lt;/b&gt; üçün seçdiyiniz APK gözlənilən imza sertifikatına uyuşmur. O, dəyişdirilən və ya etibarsız mənbədən ola bilər.</string>
     <string name="home_invalid_signature_badge">Bu APK əsil olmaya bilər</string>
-    <string name="home_split_apk_warning_title">Bölünən APK dəstəklənmir</string>
-    <string name="home_split_apk_warning_message">Siz bölünən APK paketi seçdiniz (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; &lt;b&gt;tam APK&lt;/b&gt;  tələb edir - bölünən paketlər bu tətbiq üçün yamaqlana bilməz</string>
-    <string name="home_split_apk_warning_badge">Davam etmək üçün tam APK tələb olunur</string>
+    <string name="home_split_apk_warning_title">Bölünən APK aşkarlandı</string>
+    <string name="home_split_apk_warning_message">"Bu fayl APK paketidir
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Ən yaxşı nəticələr üçün bu tətbiq &lt;b&gt;tam APK&lt;/b&gt; yamaqlamağı tövsiyə edir"</string>
     <string name="home_split_apk_warning_pick_another">Başqa APK seç</string>
     <string name="home_dialog_unsupported_version_experimental_label">Təcrübi</string>
     <string name="home_dialog_unsupported_version_experimental_description">Bu versiya təcrübi dəstəyə sahibdir və dəyişkən yaxud qüsurlu ola bilər</string>
     <string name="morphe_experimental_app_version_dialog_title">Təcrübə üçün istəyirsiniz? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; nömrəsinin bu versiyası erkən təcrübi dəstəyə sahibdir&lt;br/&gt;&lt;br/&gt; 🔧Yamaqlar bu tətbiq versiyası üçün təkmilləşdirildikcə qəribə tətbiq davranışı və ya bilinməyən səhvlər gözləyin</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; tətbiqinin bu versiyası erkən təcrübi dəstəyə sahibdir&lt;br/&gt;&lt;br/&gt; 🔧Yamaqlar bu tətbiq versiyası üçün təkmilləşdirildikcə qəribə tətbiq davranışı və ya bilinməyən səhvlər gözləyin</string>
     <string name="home_dialog_unsupported_version_dialog_title">Dəstəklənməyən Versiya</string>
     <string name="home_dialog_unsupported_version_dialog_description">Bu APK tövsiyə olunan tətbiq versiyası deyil. Fəaliyyətdə qalmaq, tətbiqin işləməməsi ilə nəticələnə bilər</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Yenə də davam edilsin?</string>
@@ -162,8 +164,9 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patch_option_list_empty_state">Hələ dəyər əlavə edilməyib</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Uyğun simvol yarat</string>
-    <string name="adaptive_icon_instructions">Ön səhnə şəklin seçin, fon rəngini seçin və önizləməni böyütmək üçün çimdikləmə jestləri ilə nizamlayın</string>
-    <string name="adaptive_icon_preview">Önizləmə</string>
+    <string name="adaptive_icon_instructions">Ön cild şəklini seç, fon rəngini seç, sonra önizləməni nizamlamaq üçün sürüşdürmə yaxud çimdikləmə jestlərin istifadə et</string>
+    <string name="adaptive_icon_preview">Uyğun simvol önizləməsi</string>
+    <string name="adaptive_icon_preview_hint">Ən yaxşı nəticə üçün simvolunuzu, bütöv daxili çevrə içində saxlayın</string>
     <string name="adaptive_icon_select_image">Şəkil seçin</string>
     <string name="adaptive_icon_change_image">Şəkli dəyişdir</string>
     <string name="adaptive_icon_background_color">Fon rəngi</string>
@@ -173,6 +176,8 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="adaptive_icon_created_success">Uyğun simvol uğurla yaradıldı</string>
     <string name="adaptive_icon_creation_failed">Uyğun simvol yaratmaq olmadı</string>
     <string name="adaptive_icon_folder_explanation">Yaradılan simvol faylları ilə \'%1$s/%2$s\' qovluğunun harada yaradılacağını seç</string>
+    <string name="notification_icon_preview">Bildiriş simvolu önizləməsi</string>
+    <string name="notification_icon_preview_hint">Ölçüsün dəyişmək üçün sürüşdürmə istifadə et. Mövqeyini dəyişmək üçün sürüklə</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Xüsusi sərlövhə yarat</string>
     <string name="header_creator_instructions">İşıqlı və qaranlıq koloritlər üçün şəkillər seç, sonra böyütmək üçün çimdikləmə jestləri ilə nizamla</string>
@@ -414,17 +419,18 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Tətbiq adı</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Fərdi ad daxil et</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Fərdi simvol</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Fərdi simvol kimi istifadə ediləcək şəkillərlə qovluq.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Fərdi simvol kimi istifadə etməyə şəkillər olan qovluq.
 
-Cihazın DPI-dən asılı olaraq, qovluq aşağıdakı qovluqlardan birini və ya çoxunu ehtiva etməlidir:
+Cihazın DPI-dən asılı olaraq, qovluq aşağıdakı qovluqlardan birini və ya daha çoxunu ehtiva etməlidir:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Qovluqların hər birində aşağıdakı faylların hamısı olmalıdır:
-morphe_adaptive_background_custom.png morphe_adaptive_foreground_custom.png
+Qovluqlardan hər biri aşağıdakı faylların hamısın saxlamalıdır:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
 
 Şəkil ölçüləri aşağıdakı kimi olmalıdır:
 - mipmap-mdpi: 108x108 px
@@ -433,7 +439,18 @@ morphe_adaptive_background_custom.png morphe_adaptive_foreground_custom.png
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Əlavə olaraq, yol tək rəngli simvol fayllarından hansısa ilə \"drawable\" qovluq ehtiva edir: morphe_adaptive_monochrome_custom.xml morphe_notification_icon_custom.xml "</string>
+Əlavə olaraq, keçid saya simvol faylı olan \"drawable\" qovluq saxlayır:
+morphe_adaptive_monochrome_custom.xml
+
+Əlavə olaraq, keçid aşağıdakı formatlardan birində bildiriş simvolun saxlayır:
+- 'Drawable' daxilində drawable XML vektoru: 
+  morphe_notification_icon_custom.xml
+- 'drawable-dpi' qovluqlarında PNG raster şəkilləri:
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Xüsusi sərlövhə simvolu</string>
     <string name="settings_advanced_patch_options_custom_header_description">Sərlövhə simvolun dəyişdir</string>

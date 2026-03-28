@@ -1,3 +1,24 @@
+# app [1.13.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.13.0-dev.2...v1.13.0-dev.3) (2026-03-24)
+
+
+### Bug Fixes
+
+* Skip APK signature verification for Android 10 and below ([6b2b591](https://github.com/MorpheApp/morphe-manager/commit/6b2b5913aa253cd9739aa2f8038b3ab70b57a0e8))
+
+# app [1.13.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.13.0-dev.1...v1.13.0-dev.2) (2026-03-24)
+
+
+### Features
+
+* Add notification icon creation ([#358](https://github.com/MorpheApp/morphe-manager/issues/358)) ([a096b85](https://github.com/MorpheApp/morphe-manager/commit/a096b85bd5ff7a6051f1cf0badaaaffddb95e572))
+
+# app [1.13.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.12.2...v1.13.0-dev.1) (2026-03-23)
+
+
+### Features
+
+* Allow patching split APKs with a warning instead of blocking ([#353](https://github.com/MorpheApp/morphe-manager/issues/353)) ([2575368](https://github.com/MorpheApp/morphe-manager/commit/2575368e8054de9f63ce5e4bf0d005b4182e7a86))
+
 ## app [1.12.2](https://github.com/MorpheApp/morphe-manager/compare/v1.12.1...v1.12.2) (2026-03-22)
 
 

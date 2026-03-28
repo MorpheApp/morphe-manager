@@ -17,6 +17,7 @@ import android.os.StatFs
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -59,12 +60,8 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import java.io.File
 import java.io.FileNotFoundException
-import java.net.HttpURLConnection
-import java.net.SocketTimeoutException
-import java.net.URL
 import java.net.URLEncoder.encode
 import java.security.MessageDigest
-import javax.net.ssl.SSLException
 import kotlin.time.Clock
 
 /**
@@ -324,6 +321,118 @@ class HomeViewModel(
     fun dismissPrePatchInstallerDialog() {
         showPrePatchInstallerDialog = false
         pendingPatchApp = null
+    }
+
+    /**
+     * User chose to proceed with patching despite the split APK warning.
+     * Resumes [processSelectedApp] with the split check skipped.
+     */
+    fun proceedWithSplitApk() {
+        val app = pendingSelectedApp ?: return
+        showSplitApkWarningDialog = false
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            processSelectedApp(app, skipSplitCheck = true)
+        }
+    }
+
+    /**
+     * User dismissed the split APK warning without proceeding.
+     * Cleans up the temporary file if needed.
+     */
+    fun dismissSplitApkWarning() {
+        val app = pendingSelectedApp
+        showSplitApkWarningDialog = false
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User dismissed the unsupported version dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissUnsupportedVersionDialog() {
+        showUnsupportedVersionDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User chose to proceed patching with an unsupported app version.
+     * Starts patching with allowIncompatible=true so version-incompatible patches are included.
+     */
+    fun proceedWithUnsupportedVersion() {
+        showUnsupportedVersionDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            startPatchingWithApp(app, allowIncompatible = true)
+        }
+    }
+
+    /**
+     * User dismissed the experimental version warning dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissExperimentalVersionDialog() {
+        showExperimentalVersionDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User acknowledged the experimental version warning and chose to proceed.
+     * Starts patching with allowIncompatible=false — the version is supported,
+     * just flagged as experimental in the patch bundle.
+     */
+    fun proceedWithExperimentalVersion() {
+        showExperimentalVersionDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            startPatchingWithApp(app, allowIncompatible = false)
+        }
+    }
+
+    /**
+     * User dismissed the wrong package dialog.
+     */
+    fun dismissWrongPackageDialog() {
+        showWrongPackageDialog = null
+    }
+
+    /**
+     * User dismissed the invalid signature dialog.
+     * Discards the pending selection and cleans up the temporary file if needed.
+     */
+    fun dismissInvalidSignatureDialog() {
+        showInvalidSignatureDialog = null
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
+    /**
+     * User chose to proceed patching despite the signature mismatch warning.
+     * Skips signature verification and resumes the patching flow.
+     */
+    fun proceedIgnoringSignature() {
+        showInvalidSignatureDialog = null
+        val app = pendingSelectedApp ?: return
+        pendingSelectedApp = null
+        viewModelScope.launch {
+            processSelectedAppIgnoringSignature(app)
+        }
     }
 
     // Callback for starting patch
@@ -1020,7 +1129,10 @@ class HomeViewModel(
      * This function only answers: "do any patches EXIST for this APK?"
      * The include/selection logic is handled in [startPatchingWithApp].
      */
-    private suspend fun processSelectedApp(selectedApp: SelectedApp) {
+    private suspend fun processSelectedApp(
+        selectedApp: SelectedApp,
+        skipSplitCheck: Boolean = false
+    ) {
         // Validate package name if expected (known-app flow sets pendingPackageName)
         if (pendingPackageName != null && selectedApp.packageName != pendingPackageName) {
             showWrongPackageDialog = WrongPackageDialogState(
@@ -1034,11 +1146,11 @@ class HomeViewModel(
             return
         }
 
-        // Check if the selected file is a split APK while the bundle requires a full APK.
+        // Warn when the selected file is a split APK while the bundle requires a full APK.
         // This must happen BEFORE signature verification — split archives (.apkm/.apks/.xapk)
         // are not valid APKs so PackageManager cannot read their signature, which would cause
         // a false "invalid signature" dialog instead of the correct "split APK" warning.
-        if (selectedApp is SelectedApp.Local) {
+        if (selectedApp is SelectedApp.Local && !skipSplitCheck) {
             val requiredApkFileType = bundleAppMetadataFlow.value[selectedApp.packageName]?.apkFileType
 
             val isSplitFile = SplitApkPreparer.isSplitArchive(selectedApp.file)
@@ -1051,39 +1163,41 @@ class HomeViewModel(
             }
 
             // Verify APK signature against the expected signatures declared in the patch bundle.
-            // For split archives (.apkm/.apks/.xapk) PackageManager cannot read the signature
-            // from the zip container directly — extract the representative base APK first and
-            // verify against that. The extracted file is cleaned up immediately after.
-            val expectedSignatures = bundleAppMetadataFlow.value[selectedApp.packageName]?.signatures
-            if (!expectedSignatures.isNullOrEmpty()) {
-                val signatureMatch = withContext(Dispatchers.IO) {
-                    if (isSplitFile) {
-                        val extracted = SplitApkInspector.extractRepresentativeApk(
-                            source = selectedApp.file,
-                            workspace = filesystem.uiTempDir
-                        )
-                        if (extracted == null) {
-                            // Cannot extract base APK — skip verification rather than false-block
-                            true
-                        } else {
-                            try {
-                                verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
-                            } finally {
-                                extracted.cleanup()
+            // GET_SIGNING_CERTIFICATES (API 28+) is required for reliable archive signature reads.
+            // On Android 8–10 the legacy GET_SIGNATURES path cannot read signatures from
+            // archive files correctly, so we skip verification there to avoid false-blocking users.
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+                val expectedSignatures = bundleAppMetadataFlow.value[selectedApp.packageName]?.signatures
+                if (!expectedSignatures.isNullOrEmpty()) {
+                    val signatureMatch = withContext(Dispatchers.IO) {
+                        if (isSplitFile) {
+                            val extracted = SplitApkInspector.extractRepresentativeApk(
+                                source = selectedApp.file,
+                                workspace = filesystem.uiTempDir
+                            )
+                            if (extracted == null) {
+                                // Cannot extract base APK — skip verification rather than false-block
+                                true
+                            } else {
+                                try {
+                                    verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
+                                } finally {
+                                    extracted.cleanup()
+                                }
                             }
+                        } else {
+                            verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
                         }
-                    } else {
-                        verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
                     }
-                }
-                if (!signatureMatch) {
-                    pendingSelectedApp = selectedApp
-                    showInvalidSignatureDialog = InvalidSignatureDialogState(
-                        packageName = selectedApp.packageName,
-                        appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
-                    )
-                    cleanupPendingData(keepSelectedApp = true)
-                    return
+                    if (!signatureMatch) {
+                        pendingSelectedApp = selectedApp
+                        showInvalidSignatureDialog = InvalidSignatureDialogState(
+                            packageName = selectedApp.packageName,
+                            appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
+                        )
+                        cleanupPendingData(keepSelectedApp = true)
+                        return
+                    }
                 }
             }
         }
@@ -1442,47 +1556,17 @@ class HomeViewModel(
      * Resolve download redirect.
      */
     fun resolveDownloadRedirect() {
-        fun resolveUrlRedirect(url: String): String {
-            return try {
-                // TODO: Use HttpModule instead of simple URL connections.
-                val originalUrl = URL(url)
-                val connection = originalUrl.openConnection() as HttpURLConnection
-                connection.instanceFollowRedirects = false
-                connection.requestMethod = "HEAD"
-                connection.connectTimeout = 5_000
-                connection.readTimeout = 5_000
-
-                val responseCode = connection.responseCode
-                if (responseCode in 300..399) {
-                    val location = connection.getHeaderField("Location")
-
-                    if (location.isNullOrBlank()) {
-                        Log.i(tag, "Location tag is blank: ${connection.responseMessage}")
-                        getApiOfflineWebSearchUrl()
-                    } else {
-                        val resolved =
-                            if (location.startsWith("http://") || location.startsWith("https://")) {
-                                location
-                            } else {
-                                val prefix = "${originalUrl.protocol}://${originalUrl.host}"
-                                if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
-                            }
-                        Log.i(tag, "Result: $resolved")
-                        resolved
-                    }
-                } else {
-                    Log.w(tag, "Unexpected response code: $responseCode")
+        suspend fun resolveUrlRedirect(url: String): String {
+            val location = morpheAPI.resolveRedirect(url)
+            return when {
+                location == null -> {
+                    Log.w(tag, "No redirect location for: $url")
                     getApiOfflineWebSearchUrl()
                 }
-            } catch (ex: SocketTimeoutException) {
-                Log.w(tag, "Timeout while resolving search redirect: $ex")
-                url
-            } catch (ex: SSLException) {
-                Log.w(tag, "SSL exception while resolving search redirect: $ex")
-                getApiOfflineWebSearchUrl()
-            } catch (ex: Exception) {
-                Log.w(tag, "Exception while resolving search redirect: $ex")
-                getApiOfflineWebSearchUrl()
+                else -> {
+                    Log.i(tag, "Result: $location")
+                    location
+                }
             }
         }
 
@@ -1602,34 +1686,28 @@ class HomeViewModel(
     /**
      * Verify that the APK at [apkPath] is signed with one of the [expectedSha256Signatures].
      *
-     * Uses [PackageManager.GET_SIGNING_CERTIFICATES] (API 28+) with fallback to
-     * [PackageManager.GET_SIGNATURES] for older devices. Returns true if at least one
-     * certificate fingerprint matches, false if none match or the APK cannot be read.
-     *
-     * An empty / null [expectedSha256Signatures] is treated as "no verification required" → true.
+     * Returns true if at least one certificate fingerprint matches.
+     * An empty [expectedSha256Signatures] is treated as "no verification required" → true.
      */
-    @Suppress("DEPRECATION")
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun verifyApkSignature(apkPath: String, expectedSha256Signatures: Set<String>): Boolean {
         if (expectedSha256Signatures.isEmpty()) return true
         return try {
-            val signatures: Array<android.content.pm.Signature> =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    val flags = PackageManager.GET_SIGNING_CERTIFICATES
-                    val info = app.packageManager.getPackageArchiveInfo(apkPath, flags)
-                        ?: return false
-                    val signingInfo = info.signingInfo ?: return false
-                    if (signingInfo.hasMultipleSigners()) {
-                        signingInfo.apkContentsSigners
-                    } else {
-                        signingInfo.signingCertificateHistory
-                    }
-                } else {
-                    val flags = PackageManager.GET_SIGNATURES
-                    val info = app.packageManager.getPackageArchiveInfo(apkPath, flags)
-                        ?: return false
-                    @Suppress("DEPRECATION")
-                    info.signatures ?: return false
-                }
+            val info = app.packageManager.getPackageArchiveInfo(
+                apkPath,
+                PackageManager.GET_SIGNING_CERTIFICATES
+            ) ?: return false
+
+            info.applicationInfo?.apply {
+                sourceDir = apkPath
+                publicSourceDir = apkPath
+            }
+
+            val signingInfo = info.signingInfo ?: return false
+            val signatures = if (signingInfo.hasMultipleSigners())
+                signingInfo.apkContentsSigners
+            else
+                signingInfo.signingCertificateHistory
 
             val digest = MessageDigest.getInstance("SHA-256")
             signatures.any { sig ->
@@ -1682,21 +1760,13 @@ class HomeViewModel(
                     workspace = filesystem.uiTempDir
                 )
                 try {
-                    extracted?.let {
-                        context.packageManager.getPackageArchiveInfo(
-                            it.file.absolutePath,
-                            PackageManager.GET_META_DATA
-                        )
-                    }
+                    extracted?.let { pm.getPackageInfo(it.file) }
                 } finally {
                     extracted?.cleanup()
                 }
             } else {
                 // Regular APK - parse directly
-                context.packageManager.getPackageArchiveInfo(
-                    tempFile.absolutePath,
-                    PackageManager.GET_META_DATA
-                )
+                pm.getPackageInfo(tempFile)
             }
 
             if (packageInfo == null) {

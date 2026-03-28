@@ -6,22 +6,20 @@ import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.network.utils.getOrThrow
 import app.morphe.manager.util.ChangelogEntry
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
 import io.ktor.client.request.url
 import io.ktor.client.statement.bodyAsChannel
 import io.ktor.http.contentLength
+import io.ktor.http.contentType
 import io.ktor.utils.io.jvm.javaio.toInputStream
+import io.ktor.utils.io.readAvailable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
-import okhttp3.Protocol
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -450,77 +448,97 @@ class GitHubPullRequestBundle(
 
     override suspend fun download(info: MorpheAsset, onProgress: PatchBundleDownloadProgress?) = withContext(Dispatchers.IO) {
         val prefs: PreferencesManager by inject()
+        val http: HttpService by inject()
         val gitHubPat = prefs.gitHubPat.get().also {
             if (it.isBlank()) throw RuntimeException("PAT is required")
         }
 
-        val customHttpClient = HttpClient(OkHttp) {
-            engine {
-                config {
-                    // Force HTTP/1.1 to avoid HTTP/2 PROTOCOL_ERROR stream resets when fetching
-                    // PR artifacts from GitHub.
-                    protocols(listOf(Protocol.HTTP_1_1))
-                    followRedirects(true)
-                    followSslRedirects(true)
-                }
-            }
-            install(HttpTimeout) {
-                connectTimeoutMillis = 20_000L
-                socketTimeoutMillis  = 5 * 60_000L
-                requestTimeoutMillis = 10 * 60_000L
-            }
-        }
-
         try {
-            with(customHttpClient) {
+            with(http.http) {
                 prepareGet {
                     url(info.downloadUrl)
                     header("Authorization", "Bearer $gitHubPat")
                 }.execute { httpResponse ->
+                    val contentType = httpResponse.contentType()?.toString() ?: ""
                     val contentLength = httpResponse.contentLength()
                     val archiveSize = contentLength?.takeIf { it > 0 }
 
+                    // GitHub Actions artifacts can be either:
+                    //  - a zip archive (default): Content-Type application/zip or octet-stream with zip magic bytes
+                    //  - a raw .mpp file (when compression is disabled in the workflow)
+                    val isZip = contentType.contains("zip", ignoreCase = true)
+                            || info.downloadUrl.endsWith(".zip", ignoreCase = true)
+
                     patchBundleOutputStream().use { patchOutput ->
-                        ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
-                            // Use larger buffer for faster I/O (512 KB)
+                        if (isZip) {
+                            ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
+                                // Use larger buffer for faster I/O (512 KB)
+                                val buffer = ByteArray(512 * 1024)
+                                var copiedBytes = 0L
+                                var lastReportedBytes = 0L
+                                var lastReportedAt = 0L
+                                var extractedTotal: Long? = null
+
+                                var entry = zis.nextEntry
+                                while (entry != null) {
+                                    if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
+                                        extractedTotal = entry.size.takeIf { it > 0 }
+
+                                        while (true) {
+                                            val read = zis.read(buffer)
+                                            if (read == -1) break
+                                            patchOutput.write(buffer, 0, read)
+                                            copiedBytes += read.toLong()
+                                            val now = System.currentTimeMillis()
+                                            // Report progress less frequently: every 256KB or 500ms
+                                            if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
+                                                lastReportedBytes = copiedBytes
+                                                lastReportedAt = now
+                                                // Update total size if we now have extracted size
+                                                val currentTotal = extractedTotal ?: archiveSize
+                                                onProgress?.invoke(copiedBytes, currentTotal)
+                                            }
+                                        }
+                                        break
+                                    }
+                                    zis.closeEntry()
+                                    entry = zis.nextEntry
+                                }
+
+                                if (copiedBytes <= 0L) {
+                                    throw IOException("No .mpp file found in the PR artifact")
+                                }
+                                // Final progress - use actual copied bytes as total if we don't have size
+                                val finalTotal = extractedTotal ?: archiveSize ?: copiedBytes
+                                onProgress?.invoke(copiedBytes, finalTotal)
+                            }
+                        } else {
+                            // Raw .mpp artifact - stream directly without unzipping
                             val buffer = ByteArray(512 * 1024)
+                            val channel = httpResponse.bodyAsChannel()
                             var copiedBytes = 0L
                             var lastReportedBytes = 0L
                             var lastReportedAt = 0L
-                            var extractedTotal: Long? = null
 
-                            var entry = zis.nextEntry
-                            while (entry != null) {
-                                if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
-                                    extractedTotal = entry.size.takeIf { it > 0 }
-
-                                    while (true) {
-                                        val read = zis.read(buffer)
-                                        if (read == -1) break
-                                        patchOutput.write(buffer, 0, read)
-                                        copiedBytes += read.toLong()
-                                        val now = System.currentTimeMillis()
-                                        // Report progress less frequently: every 256KB or 500ms
-                                        if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
-                                            lastReportedBytes = copiedBytes
-                                            lastReportedAt = now
-                                            // Update total size if we now have extracted size
-                                            val currentTotal = extractedTotal ?: archiveSize
-                                            onProgress?.invoke(copiedBytes, currentTotal)
-                                        }
-                                    }
-                                    break
+                            while (!channel.isClosedForRead) {
+                                val read = channel.readAvailable(buffer)
+                                if (read <= 0) continue
+                                patchOutput.write(buffer, 0, read)
+                                copiedBytes += read.toLong()
+                                val now = System.currentTimeMillis()
+                                // Report progress less frequently: every 256KB or 500ms
+                                if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
+                                    lastReportedBytes = copiedBytes
+                                    lastReportedAt = now
+                                    // Update total size if we now have extracted size
+                                    onProgress?.invoke(copiedBytes, archiveSize)
                                 }
-                                zis.closeEntry()
-                                entry = zis.nextEntry
                             }
 
                             if (copiedBytes <= 0L) {
-                                throw IOException("No .mpp file found in the pull request artifact")
+                                throw IOException("Empty .mpp artifact received from PR")
                             }
-                            // Final progress - use actual copied bytes as total if we don't have size
-                            val finalTotal = extractedTotal ?: archiveSize ?: copiedBytes
-                            onProgress?.invoke(copiedBytes, finalTotal)
+                            onProgress?.invoke(copiedBytes, archiveSize ?: copiedBytes)
                         }
                     }
                 }
@@ -529,8 +547,6 @@ class GitHubPullRequestBundle(
         } catch (t: Throwable) {
             runCatching { patchesFile.delete() }
             throw t
-        } finally {
-            runCatching { customHttpClient.close() }
         }
 
         PatchBundleDownloadResult(

@@ -56,7 +56,7 @@
     <string name="sources_management_prerelease_toggle">Использовать пред релиз патчи</string>
     <string name="sources_management_prerelease_toggle_description">Получать ранний доступ к новым экспериментальным версиям патчей</string>
     <string name="sources_management_experimental_versions_toggle">Использовать экспериментальные версии приложения</string>
-    <string name="sources_management_experimental_versions_toggle_description">При необходимости, исправить экспериментальные цели приложения</string>
+    <string name="sources_management_experimental_versions_toggle_description">Патч экспериментальных целевых параметров программы, если доступны</string>
     <string name="sources_management_already_exists">Этот источник уже добавлен</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">Неподтвержденный APK</string>
     <string name="home_invalid_signature_message">APK, выбранный для &lt;b&gt;%s&lt;/b&gt;, не соответствует ожидаемому сертификату подписи. Он мог быть изменен или получен из ненадежного источника</string>
     <string name="home_invalid_signature_badge">Этот APK может быть не оригинальным</string>
-    <string name="home_split_apk_warning_title">Поддержка разделенных APK не поддерживается</string>
-    <string name="home_split_apk_warning_message">Вы выбрали пакет разделенного APK (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; требует &lt;b&gt;полный APK&lt;/b&gt; - разделенные пакеты не могут быть исправлены для этого приложения</string>
-    <string name="home_split_apk_warning_badge">Для продолжения требуется полный APK</string>
+    <string name="home_split_apk_warning_title">Обнаружено split APK</string>
+    <string name="home_split_apk_warning_message">"Этот файл является APK пакетом
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Для наилучших результатов рекомендуется патчить &lt;b&gt;полный APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Выберите другой APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Экспериментальный</string>
     <string name="home_dialog_unsupported_version_experimental_description">Эта версия имеет экспериментальную поддержку и может быть нестабильной или неполной</string>
@@ -162,8 +164,9 @@
     <string name="patch_option_list_empty_state">Значения еще не добавлены</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Создать адаптивную иконку</string>
-    <string name="adaptive_icon_instructions">Выберите изображение переднего плана, выберите цвет фона и отрегулируйте предварительный просмотр жестами \"приблизить для увеличения\"</string>
-    <string name="adaptive_icon_preview">Предпросмотр</string>
+    <string name="adaptive_icon_instructions">Выберите изображение переднего плана, выберите цвет фона, затем с помощью ползунка или щепок жестом, чтобы настроить предварительный просмотр</string>
+    <string name="adaptive_icon_preview">Предварительный просмотр адаптивного значка</string>
+    <string name="adaptive_icon_preview_hint">Для наилучшего результата сохраняйте свой значок внутри твердого внутреннего круга</string>
     <string name="adaptive_icon_select_image">Выбрать изображение</string>
     <string name="adaptive_icon_change_image">Изменить изображение</string>
     <string name="adaptive_icon_background_color">Цвет фона</string>
@@ -173,6 +176,8 @@
     <string name="adaptive_icon_created_success">Адаптивный значок создан успешно</string>
     <string name="adaptive_icon_creation_failed">Не удалось создать адаптивный значок</string>
     <string name="adaptive_icon_folder_explanation">Выберите, где создать папку \'%1$s/%2$s\' со сгенерированными файлами иконок</string>
+    <string name="notification_icon_preview">Кнопка уведомлений скрыта</string>
+    <string name="notification_icon_preview_hint">Используйте ползунок для изменения размера. Перетащите, чтобы переместить</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Создать собственный заголовок</string>
     <string name="header_creator_instructions">Выберите изображения для светлой и темной тем, затем отрегулируйте жестами \" pinch-to-zoom \"</string>
@@ -201,7 +206,7 @@
     <string name="home_app_info_install_type_system_installer">Системный установщик</string>
     <string name="home_app_info_patched_at">Пропатчен</string>
     <string name="home_app_info_patch_update_available">Доступно обновление патчей</string>
-    <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Перепатчайте свою программу, чтобы получить последние улучшения и исправления</string>
+    <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Перепатчите своё приложение, чтобы получить последние улучшения и исправления</string>
     <string name="home_app_info_app_deleted_warning">Приложение было деинсталировано</string>
     <string name="home_app_info_app_deleted_description">Это приложение было удалено за пределами Morphe. Пропатчите его снова, чтобы восстановить функциональность</string>
     <!-- Home Screen - Root Mode -->
@@ -414,29 +419,38 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name">Имя приложения</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Введите своё имя</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Своя иконка</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Папка с изображениями для использования в качестве своей иконки.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Папка с изображениями для использования в качестве пользовательского значка.
 
-Папка должна содержать один или несколько из следующих папок, в зависимости от DPI устройства:
+Папка должна содержать одну или несколько из следующих папок, в зависимости от DPI устройства:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-В каждой из папок должны присутствовать следующие файлы:
+Каждая из папок должна содержать все следующие файлы:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
-Размеры изображений должны соответствовать следующим требованиям:
-- mipmap-mdpi: 108x108 пикс.
-- mipmap-hdpi: 162x162 пикс.
-- mipmap-xhdpi: 216x216 пикс.
-- mipmap-xxhdpi: 324x324 пикс.
-- mipmap-xxxhdpi: 432x432 пикс.
+Размеры изображений должны быть следующими:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
 
-Опционально  путь может содержать папку 'drawable', содержащей один из файлов монотонных иконок:
+Необязательно, путь содержит папку 'drawable' с монохромным файлом значка:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Необязательно, путь содержит значок уведомления в одном из следующих форматов:
+- XML векторный значок в 'drawable':
+  morphe_notification_icon_custom.xml
+- PNG растровые изображения в папках 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Свой заголовок</string>
     <string name="settings_advanced_patch_options_custom_header_description">Изменить заголовок</string>

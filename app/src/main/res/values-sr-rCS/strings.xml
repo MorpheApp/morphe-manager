@@ -125,9 +125,11 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_invalid_signature_title">Nepoveren APK</string>
     <string name="home_invalid_signature_message">APK dat ste izabrali za &lt;b&gt;%s&lt;/b&gt; ne odgovara očekivanom sertifikatu za potpisivanje. Može biti izmenjen ili sa nepouzdanog izvora</string>
     <string name="home_invalid_signature_badge">Ovaj APK možda nije original</string>
-    <string name="home_split_apk_warning_title">Podržani su samo Split APK-ovi</string>
-    <string name="home_split_apk_warning_message">Izabrali ste Split APK bundle (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; zahteva &lt;b&gt;potpuni APK&lt;/b&gt; - split bundle-i se ne mogu popravljati za ovu aplikaciju</string>
-    <string name="home_split_apk_warning_badge">Potrebna je potpuna verzija APK-a da bi se nastavilo</string>
+    <string name="home_split_apk_warning_title">Детектован подељени APK</string>
+    <string name="home_split_apk_warning_message">"Ова датотека је APK пакета
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+За најбоље резултате, ова апликација препоручује исправљање &lt;b&gt;целог APK-а&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Izaberite neki drugi APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Eksperimentalno</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ova verzija ima eksperimentalnu podršku i može biti nestabilna ili nepotpuna</string>
@@ -162,8 +164,9 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patch_option_list_empty_state">Još nisu dodate vrednosti</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Napravi adaptivni ikon</string>
-    <string name="adaptive_icon_instructions">Odaberi prednji lik, odaberi boju pozadine i prilagodi preglédaj sa gestama za pritisak-prstom</string>
-    <string name="adaptive_icon_preview">Pregled</string>
+    <string name="adaptive_icon_instructions">Izaberite pozadinsku sliku, izaberite boju pozadine, a zatim koristite klizač ili potezom prsta za podešavanje 미리보기에 대한 설명</string>
+    <string name="adaptive_icon_preview"> 미리보기에 대한 설명</string>
+    <string name="adaptive_icon_preview_hint"> Za najbolje rezultate držite ikonu unutar čvrstog unutrašnjeg kruga</string>
     <string name="adaptive_icon_select_image">Izaberi sliku</string>
     <string name="adaptive_icon_change_image">Promeni sliku</string>
     <string name="adaptive_icon_background_color">Boja pozadine</string>
@@ -173,6 +176,8 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="adaptive_icon_created_success">Adaptivni ikona uspešno kreirana</string>
     <string name="adaptive_icon_creation_failed">Neuspešno kreiranje adaptivne ikone</string>
     <string name="adaptive_icon_folder_explanation">Odaberi lokaciju za stvaranje foldera \'%1$s/%2$s\' sa generisanim ikona datotekama</string>
+    <string name="notification_icon_preview">Dugme „Obaveštenje” je skriveno</string>
+    <string name="notification_icon_preview_hint">Koristite klizač za promenu veličine. Povucite da biste premestili</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Napravi personalizovanu zaglavlje</string>
     <string name="header_creator_instructions">Odaberite slike za svetle i tamne teme, a zatim prilagodite sa gestama za prstima za prstima</string>
@@ -414,7 +419,38 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Naziv aplikacije</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Unesi ime</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Promeni ikonu</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mapa sa slikama za korištenje kao prilagođena ikona"</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mapa sa slikama koje će se koristiti kao prilagođena ikona.
+
+Mapa mora da sadrži jednu ili više sledećih mapa, u zavisnosti od DPI uređaja:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Svaka od mapa mora da sadrži sve sledeće datoteke:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Dimenzije slike moraju biti sledeće:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Opciono, putanja sadrži mapu 'drawable' sa datotekom ikone u boji:
+morphe_adaptive_monochrome_custom.xml
+
+Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
+- XML vektorski crtež u 'drawable':
+  morphe_notification_icon_custom.xml
+- PNG rasturne slike u mape 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Promeni ikonu zaglavlja</string>
     <string name="settings_advanced_patch_options_custom_header_description">Mapa sa slikama za korištenje kao prilagođeno zaglavlje</string>

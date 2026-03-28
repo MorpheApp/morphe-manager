@@ -125,9 +125,11 @@
     <string name="home_invalid_signature_title">APK غير معتمد</string>
     <string name="home_invalid_signature_message">ملف APK الذي اخترته لـ &lt;b&gt;%s&lt;/b&gt; لا يتطابق مع شهادة التوقيع الأصلية. قد يكون معدلًا أو من مصدر غير موثوق به</string>
     <string name="home_invalid_signature_badge">قد لا يكون ملف APK هذا هو الأصلي</string>
-    <string name="home_split_apk_warning_title">تنسيق Split APK غير مدعوم</string>
-    <string name="home_split_apk_warning_message">لقد اخترت حزمة APK مقسمة (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; يتطلب &lt;b&gt;ملف APK كاملًا&lt;/b&gt; - لا يمكن تعديل الحزم المقسمة للتطبيق هذا</string>
-    <string name="home_split_apk_warning_badge">مطلوب ملف APK كاملًا للمتابعة</string>
+    <string name="home_split_apk_warning_title">تم اكتشاف ملف APK مُقسّم</string>
+    <string name="home_split_apk_warning_message">"هذا الملف عبارة عن حزمة APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+للحصول على أفضل النتائج، يوصي هذا التطبيق بتعديل &lt;b&gt;APK كامل&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">اختر ملف APK آخر</string>
     <string name="home_dialog_unsupported_version_experimental_label">تجريبي</string>
     <string name="home_dialog_unsupported_version_experimental_description">يوفر هذا الإصدار دعمًا تجريبيًا، وقد يكون غير مستقر أو غير مكتمل</string>
@@ -162,8 +164,9 @@
     <string name="patch_option_list_empty_state">لم يتم إضافة أي قيم حتى الآن</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">إنشاء أيقونة تكيفية</string>
-    <string name="adaptive_icon_instructions">اختر صورة أمامية، حدد لون الخلفية، واضبط المعاينة باستخدام إيماءات التكبير والتصغير.</string>
-    <string name="adaptive_icon_preview">معاينة</string>
+    <string name="adaptive_icon_instructions">اختر صورة أساسية، حدد لون الخلفية، ثم استخدم شريط التمرير أو الإيماءات لتعديل المعاينة حسب رغبتك</string>
+    <string name="adaptive_icon_preview">معاينة الأيقونة التكيّفية</string>
+    <string name="adaptive_icon_preview_hint">للحصول على أفضل نتيجة، احرص أن تكون الأيقونة داخل الدائرة الداخلية الممتلئة</string>
     <string name="adaptive_icon_select_image">تحديد صورة</string>
     <string name="adaptive_icon_change_image">تغيير الصورة</string>
     <string name="adaptive_icon_background_color">لون الخلفية</string>
@@ -173,6 +176,8 @@
     <string name="adaptive_icon_created_success">تم إنشاء أيقونة تكيفية بنجاح</string>
     <string name="adaptive_icon_creation_failed">فشل إنشاء أيقونة تكيفية</string>
     <string name="adaptive_icon_folder_explanation">حدد مكان إنشاء مجلد \'%1$s/%2$s\' مع ملفات الأيقونة المنشأة</string>
+    <string name="notification_icon_preview">معاينة رمز الإشعار</string>
+    <string name="notification_icon_preview_hint">استخدم شريط التمرير لتغيير الحجم. اسحب لتعديل الموضع</string>
     <!-- Header Creator -->
     <string name="header_creator_create">إنشاء علامة شعار مخصصة</string>
     <string name="header_creator_instructions">اختر صورًا للمظاهر الفاتحة والداكنة، ثم اضبطها باستخدام إيماءات التكبير والتصغير.</string>
@@ -245,7 +250,7 @@
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">جارٍ الإعداد</string>
     <string name="patcher_step_load_patches">جارٍ تحميل التعديلات</string>
-    <string name="patcher_step_prepare_split_apk">دمج APK منقسم</string>
+    <string name="patcher_step_prepare_split_apk">دمج APK مُقسّم</string>
     <string name="patcher_step_unpack">قراءة ملف APK</string>
     <string name="patcher_step_group_patching">التعديل</string>
     <string name="patcher_step_group_saving">الحفظ</string>
@@ -414,29 +419,38 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name">اسم التطبيق</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">أدخل اسمًا مخصصًا</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">أيقونة مخصصة</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"مجلد يحتوي على صور لاستخدامها كأيقونة مخصّصة.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"مجلد يحتوي على صور لاستخدامها كأيقونة مخصصة.
 
-يجب أن يحتوي المجلد على مجلد واحد أو أكثر من المجلدات التالية، حسب كثافة شاشة الجهاز (DPI):
-• mipmap-mdpi
-• mipmap-hdpi
-• mipmap-xhdpi
-• mipmap-xxhdpi
-• mipmap-xxxhdpi
+يجب أن يحتوي المجلد على واحد أو أكثر من المجلدات التالية، اعتمادًا على DPI الجهاز:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
 
-يجب أن يحتوي كل مجلد منها على جميع الملفات التالية:
-• morphe_adaptive_background_custom.png 
-• morphe_adaptive_foreground_custom.png
+يجب أن تحتوي كل من المجلدات على جميع الملفات التالية:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
 
 يجب أن تكون أبعاد الصورة كما يلي:
-• mipmap-mdpi: 108x108 px
-• mipmap-hdpi: 162x162 px
-• mipmap-xhdpi: 216x216 px
-• mipmap-xxhdpi: 324x324 px
-• mipmap-xxxhdpi: 432x432 px
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
 
-اختياريًا، يمكن أن يحتوي المسار على مجلد باسم drawable يضم أيًا من ملفات أيقونة 'أحادية اللون':
-• morphe_adaptive_monochrome_custom.xml
-• morphe_notification_icon_custom.xml"</string>
+اختياريًا، يحتوي المسار على مجلد 'drawable' مع ملف أيقونة أحادية اللون:
+morphe_adaptive_monochrome_custom.xml
+
+اختياريًا، يحتوي المسار على أيقونة إشعار بإحدى التنسيقات التالية:
+- XML vector drawable in 'drawable':
+  morphe_notification_icon_custom.xml
+- PNG raster images in 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">علامة شعار مخصصة</string>
     <string name="settings_advanced_patch_options_custom_header_description">تغيير علامة الشعار</string>

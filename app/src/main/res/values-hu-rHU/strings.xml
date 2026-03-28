@@ -14,7 +14,7 @@
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
     <string name="deep_link_add_source_title">Forrás hozzáadása</string>
-    <string name="deep_link_add_source_message">Szeretné hozzáadni ezt a patch forrást a Morphe-hez?</string>
+    <string name="deep_link_add_source_message">Hozzáadja ezt a módosításforrást a Morphe-hez?</string>
     <string name="deep_link_add_source_warning">Csak megbízható forrást adjon hozzá</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
@@ -22,7 +22,7 @@
     <string name="home_update_error">A frissítés sikertelen</string>
     <string name="home_update_error_subtitle">Ellenőrizze az internetkapcsolatát, és próbálja újra</string>
     <string name="home_update_skipped_metered">Frissítések kihagyva</string>
-    <string name="home_update_skipped_metered_subtitle">Mobil adat aktív</string>
+    <string name="home_update_skipped_metered_subtitle">A mobiladat-forgalom aktív</string>
     <string name="home_updating_sources">Források frissítése…</string>
     <string name="home_update_progress_format">%1$s feldolgozva</string>
     <string name="home_update_success">A források frissítése befejeződött</string>
@@ -55,8 +55,8 @@
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
     <string name="sources_management_prerelease_toggle">Előzetes kiadású módosítások használata</string>
     <string name="sources_management_prerelease_toggle_description">Korai hozzáférés az új, kísérleti módosítások verzióihoz</string>
-    <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazás verziók használata</string>
-    <string name="sources_management_experimental_versions_toggle_description">Ha elérhető, javítsa ki a kísérleti alkalmazás célpontjait</string>
+    <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazásverziók használata</string>
+    <string name="sources_management_experimental_versions_toggle_description">Kísérleti alkalmazások módosítása, ha elérhetők</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Megjelenítendő név</string>
@@ -122,15 +122,17 @@
 
 Biztosan folytatja?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">Ellenőrizetlen APK</string>
+    <string name="home_invalid_signature_title">Nem ellenőrzött APK</string>
     <string name="home_invalid_signature_message">Az &lt;b&gt;%s&lt;/b&gt; kiválasztott APK nem egyezik a várt aláírási tanúsítvánnyal. Lehetséges, hogy módosították vagy nem megbízható forrásból származik</string>
-    <string name="home_invalid_signature_badge">Ez az APK fájl nem lehet az eredeti.</string>
-    <string name="home_split_apk_warning_title">Nem támogatott a felosztott APK</string>
-    <string name="home_split_apk_warning_message">Egy felosztott APK csomagot választott (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). A &lt;b&gt;%s&lt;/b&gt; -nek &lt;b&gt;teljes APK&lt;/b&gt; fájlra van szüksége - a felosztott csomagokat nem lehet javítani ezen az alkalmazáshoz</string>
-    <string name="home_split_apk_warning_badge">Teljes APK fájl szükséges a folytatáshoz.</string>
-    <string name="home_split_apk_warning_pick_another">Válasszon egy másik APK fájlt.</string>
+    <string name="home_invalid_signature_badge">Lehet, hogy ez nem az eredeti APK.</string>
+    <string name="home_split_apk_warning_title">Osztott APK észlelve</string>
+    <string name="home_split_apk_warning_message">"Ez a fájl egy APK csomag
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&lt;/b&gt; javítását"</string>
+    <string name="home_split_apk_warning_pick_another">Válasszon másik APK-t</string>
     <string name="home_dialog_unsupported_version_experimental_label">Kísérleti</string>
-    <string name="home_dialog_unsupported_version_experimental_description">Ez a verzió kísérleti támogatással rendelkezik, és lehet, hogy instabil vagy hiányos.</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ez a verzió kísérleti támogatással rendelkezik, így instabil vagy hiányos lehet.</string>
     <string name="morphe_experimental_app_version_dialog_title">Kísérletezni szeretne? 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">A &lt;b&gt;%s&lt;/b&gt; verziója korai kísérleti támogatással rendelkezik&lt;br/&gt;&lt;br/&gt;🔧 Előfordulhat furcsa alkalmazásviselkedés vagy azonosítatlan hibák, amíg a javításokat ennek az alkalmazásverziójának megfelelő finomhangolás nem történik</string>
     <string name="home_dialog_unsupported_version_dialog_title">Nem támogatott verzió</string>
@@ -143,12 +145,12 @@ Biztosan folytatja?"</string>
     <string name="home_dialog_expected_package">Várt csomag:</string>
     <string name="home_dialog_selected_package">Kiválasztott csomag:</string>
     <string name="home_outdated_patches_dialog_title">A módosítások elavultak lehetnek</string>
-    <string name="home_outdated_patches_dialog_message">A mobil adat aktív és a módosítások frissítése le van tiltva</string>
+    <string name="home_outdated_patches_dialog_message">A mobiladat aktív és a módosítások frissítése le van tiltva</string>
     <string name="home_outdated_patches_dialog_warning">Az elavult módosítások használata hibás alkalmazást eredményezhet</string>
     <string name="home_outdated_patches_dialog_update_and_patch">&amp; módosítás frissítése</string>
-    <string name="home_low_disk_space_dialog_title">Alacsony tárhely</string>
+    <string name="home_low_disk_space_dialog_title">Kevés a szabad tárhely</string>
     <string name="home_low_disk_space_dialog_message">Csak %1$.2f GB szabad tárhely áll rendelkezésre. A javításhoz legalább 1 GB szabad tárhelyre van szükség a megfelelő működéshez.</string>
-    <string name="home_low_disk_space_dialog_warning">A folytatás \"fájl nem található\" hibát vagy egy hibás kimeneti APK fájlt eredményezhet.</string>
+    <string name="home_low_disk_space_dialog_warning">A folytatás \"fájl nem található\" hibához vagy sérült APK-hoz vezethet</string>
     <!-- Patch Options -->
     <string name="custom_color">Egyedi szín</string>
     <string name="hex_color">Hex szín</string>
@@ -161,18 +163,21 @@ Biztosan folytatja?"</string>
     <string name="patch_option_list_empty">Az érték nem lehet üres</string>
     <string name="patch_option_list_empty_state">Még nincsenek hozzáadott értékek</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_create">Adaptív ikon létrehozása</string>
-    <string name="adaptive_icon_instructions">Válasszon egy előtérképet, válassza ki a háttérszínt, és állítsa be az előnézetet a két ujjal történő nagyítás mozdulattal.</string>
-    <string name="adaptive_icon_preview">Előnézet</string>
+    <string name="adaptive_icon_create">Alkalmazkodó ikon létrehozása</string>
+    <string name="adaptive_icon_instructions">Válasszon egy előtérképet és egy háttérszínt, majd a csúszkával vagy kétujjas mozdulatok segítségével állítsa be az előnézetet</string>
+    <string name="adaptive_icon_preview">Alkalmazkodó ikon előnézete</string>
+    <string name="adaptive_icon_preview_hint">A legjobb eredmény érdekében tartsa az ikonját a szilárd belső körben</string>
     <string name="adaptive_icon_select_image">Kép kiválasztása</string>
     <string name="adaptive_icon_change_image">Kép megváltoztatása</string>
     <string name="adaptive_icon_background_color">Háttérszín</string>
     <string name="adaptive_icon_reset_transform">Pozíció és méret visszaállítása</string>
     <string name="adaptive_icon_safe_zone_inner">Biztonságos zóna (mindig látható)</string>
     <string name="adaptive_icon_safe_zone_outer">Maszkzóna (levágható)</string>
-    <string name="adaptive_icon_created_success">Az adaptív ikon sikeresen létrehozva</string>
-    <string name="adaptive_icon_creation_failed">Nem sikerült az adaptív ikon létrehozása</string>
+    <string name="adaptive_icon_created_success">Az alkalmazkodó ikon elkészült</string>
+    <string name="adaptive_icon_creation_failed">Nem sikerült az alkalmazkodó ikon létrehozása</string>
     <string name="adaptive_icon_folder_explanation">Válassza ki a \'%1$s/%2$s\' mappa helyét a létrehozott ikonfájlok számára</string>
+    <string name="notification_icon_preview">Értesítési ikon előnézete</string>
+    <string name="notification_icon_preview_hint">Méretezés a csúszkával, áthelyezés húzással</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Egyéni fejléc létrehozása</string>
     <string name="header_creator_instructions">Válasszon képeket a világos és sötét témákhoz, majd állítsa be két ujjal történő nagyítás mozdulattal.</string>
@@ -350,8 +355,8 @@ Biztosan folytatja?"</string>
     <string name="settings_advanced_updates">Frissítések</string>
     <string name="settings_advanced_updates_use_prereleases">A Morphe előzetes kiadásainak használata</string>
     <string name="settings_advanced_updates_use_prereleases_description">Korai hozzáférést biztosít az új Morphe funkciókhoz. A kiadás előtti módosítások használatához engedélyezze a korai hozzáférés kapcsolót minden egyes forrásnál külön-külön</string>
-    <string name="settings_advanced_updates_allow_metered">Frissítés mobil adaton</string>
-    <string name="settings_advanced_updates_allow_metered_description">Engedélyezze, hogy a Morphe és a módosítások frissítései mobiladat-kapcsolaton keresztül is letöltődjenek</string>
+    <string name="settings_advanced_updates_allow_metered">Frissítés mobiladattal</string>
+    <string name="settings_advanced_updates_allow_metered_description">A Morphe és a módosítások frissítéseinek letöltése mobiladattal</string>
     <string name="settings_advanced_updates_background_notifications">Háttérfrissítési értesítések</string>
     <string name="settings_advanced_updates_background_notifications_description">A háttérben periodikusan ellenőrizze a frissítéseket és értesítsen, ha elérhetőek.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Fogadjon azonnali push értesítéseket az új kiadásokról, még ha az alkalmazás be is van zárva</string>
@@ -414,29 +419,38 @@ Biztosan folytatja?"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Alkalmazásnév</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Adjon meg egy egyedi nevet</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Egyedi ikon</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mappa, mely tartalmazza az egyedi ikonok használata céljából szükséges képeket.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Képek mappája, amelyek egyedi ikonként használhatók.
 
-A mappa tartalmazhat egy vagy több könyvtárat a DPI alapján:
+A mappa egy vagy több alkönyvet tartalmaznia kell a készülék PPI-jétől függően:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Minden könyvtárnak tartalmaznia kell a következő fájlokat:
+Az egyes mappáknak tartalmaznia kell az alábbi fájlokat:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
-A képek méreteinek a következőknek kell lennie:
+A képek mérete a következőnek kell lennie:
 - mipmap-mdpi: 108x108 px
 - mipmap-hdpi: 162x162 px
 - mipmap-xhdpi: 216x216 px
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Az elérési út opcionálisan tartalmazhat egy \"drawable\" mappát monokróm ikonokkal:
+Opcionálisan, a mappa tartalmazhat egy 'drawable' mappát, amely egy monokrom ikon fájlját tartalmazza:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Opcionálisan, a mappa tartalmazhat egy értesítési ikont az alábbi formátumok egyikében:
+- XML vektoros rajz a 'drawable' mappában:
+  morphe_notification_icon_custom.xml
+- PNG raster képeket a 'drawable-dpi' mappákban:
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Egyedi fejléclogó</string>
     <string name="settings_advanced_patch_options_custom_header_description">Fejléclogó megváltoztatása</string>
@@ -578,7 +592,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_patch_selection_reset_source_warning">Ez véglegesen törli a mentett összeállításokat minden forrás számára ehhez: %1$s
 Forrás: #%2$s</string>
     <string name="settings_system_export_source_data_fail">Nem sikerült a forrásadatok exportálása</string>
-    <string name="settings_system_export_source_data_success">A forrásadatok sikeresen exportálva</string>
+    <string name="settings_system_export_source_data_success">Forrásadatok sikeresen exportálva</string>
     <string name="settings_system_import_source_data_fail">Nem sikerült a forrásadatok importálása</string>
     <string name="settings_system_import_source_data_success">A forrásadatok sikeresen importálva</string>
     <string name="settings_system_patch_details_title">Módosítás részletei</string>
@@ -592,9 +606,9 @@ Forrás: #%2$s</string>
     <string name="settings_system_manager_description">"Morphe egy kísérleti nyílt forráskódú projekt, amely a népszerű Android alkalmazások modern, egyszerűsített módosítására összpontosít.
 
 A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulásaira támaszkodik a jövőbeli innovációkhoz."</string>
-    <string name="credits">Köszönet</string>
-    <string name="credits_current_development">Jelenlegi fejlesztés</string>
-    <string name="credits_prior_development">Korábbi fejlesztés</string>
+    <string name="credits">Közreműködők</string>
+    <string name="credits_current_development">Jelenlegi fejlesztők</string>
+    <string name="credits_prior_development">Korábbi fejlesztők</string>
     <!-- Shared strings -->
     <string name="patches">Módosítások</string>
     <string name="home">Főoldal</string>

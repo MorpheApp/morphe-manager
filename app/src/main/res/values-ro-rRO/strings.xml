@@ -2,16 +2,16 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Alte aplicații</string>
-    <string name="home_not_patched_yet">Nu este actualizat încă</string>
-    <string name="home_no_patches_available">Nu există patch-uri disponibile</string>
-    <string name="home_app_hide_title">Ascunde această aplicație?</string>
-    <string name="home_app_hide_message">Această aplicație va fi ascunsă de ecranul principal. Poți restaura-o mai târziu folosind butonul \'%1$s\' de la fundul listei</string>
-    <string name="home_app_will_be_hidden">Această aplicație va fi ascunsă</string>
+    <string name="home_not_patched_yet">Nepatch-uit încă</string>
+    <string name="home_no_patches_available">Niciun patch disponibil</string>
+    <string name="home_app_hide_title">Ascunzi aplicația?</string>
+    <string name="home_app_hide_message">Aplicația va fi ascunsă de pe ecranul principal. O vei putea restaura mai târziu folosind butonul \'%1$s\' de la capătul listei.</string>
+    <string name="home_app_will_be_hidden">Aplicația va fi ascunsă</string>
     <string name="home_app_show_hidden">Arată aplicații ascunse</string>
-    <string name="home_app_no_hidden">Nu există aplicații ascunse</string>
+    <string name="home_app_no_hidden">Nicio aplicație ascunsă</string>
     <string name="home_app_hidden_apps_title">Aplicații ascunse</string>
-    <string name="home_app_hidden_apps_hint">Apasă pe o aplicație pentru a o arăta din nou în lista</string>
-    <string name="android_11_bug_dialog_title">Eroare Android 11</string>
+    <string name="home_app_hidden_apps_hint">Apasă pe o aplicație pentru a o arăta din nou în listă</string>
+    <string name="android_11_bug_dialog_title">Bug al Android 11</string>
     <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în avans pentru a evita o problemă în sistemul Android 11 care poate afecta negativ experiența utilizatorului</string>
     <string name="deep_link_add_source_title">Adaugă sursă</string>
     <string name="deep_link_add_source_message">Dorești să adaugi această sursă de patch la Morphe?</string>
@@ -21,123 +21,125 @@
     <string name="home_update_available_subtitle">Versiune nouă pregătită pentru instalare</string>
     <string name="home_update_error">Actualizarea a eșuat</string>
     <string name="home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
-    <string name="home_update_skipped_metered">Actualizări ignorate</string>
-    <string name="home_update_skipped_metered_subtitle">Date mobile active</string>
-    <string name="home_updating_sources">Se actualizează surse…</string>
+    <string name="home_update_skipped_metered">Actualizări sărite</string>
+    <string name="home_update_skipped_metered_subtitle">Date mobile sunt activate</string>
+    <string name="home_updating_sources">Se actualizează sursele…</string>
     <string name="home_update_progress_format">%1$s procesat</string>
     <string name="home_update_success">Actualizare surse finalizată</string>
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
-    <string name="home_sources_are_loading">Se încarcă sursele, așteptați…</string>
+    <string name="home_sources_are_loading">Se încarcă sursele…</string>
     <string name="home_please_wait">Vă rugăm așteptați…</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">Pentru ce aplicație doriți să aplicați patch-uri?</string>
+    <string name="home_greeting_1">Ce aplicație dorești să patch-uiești?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Gata să faceți aplicații legendare din nou?</string>
+    <string name="home_greeting_2">Ești gata să facem aplicațiile legendare din nou?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Prindeți-vă centurile, e timpul pentru a aplica patch-uri</string>
+    <string name="home_greeting_3">Pune-ți centura, e timpul să patch-uim</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">O altă zi, o altă capodoperă fără reclame</string>
+    <string name="home_greeting_4">O nouă zi, o altă capodoperă fără reclame</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Vrei să te uiţi la reclame? Nici eu</string>
+    <string name="home_greeting_5">Vrei să vezi reclame? Nici eu</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Să facem ca aplicaţiile tale să se comporte</string>
+    <string name="home_greeting_6">Hai să-ți educăm aplicațiile</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Vremea de astăzi: 100% șanse de remediere</string>
+    <string name="home_greeting_7">Prognoza de azi: 100% șanse de patch-uit</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Gata să transformi mediocritatea în ceva extraordinar?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Salvăm aplicaţiile de la ele însele din astăzi</string>
+    <string name="home_greeting_9">Salvăm aplicațiile de azi</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Alimentat de cafea şi patch-uri bune</string>
+    <string name="home_greeting_10">Oferit de cafea și patch-uri bune</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Sursă de remediere</string>
+    <string name="sources_management_title">Surse de patch-uri</string>
     <string name="sources_management_open_in_browser">Deschide în browser</string>
-    <string name="sources_management_failed_to_open_url">Eșec la deschiderea URL-ului</string>
+    <string name="sources_management_failed_to_open_url">Eroarea la deschiderea URL-ului</string>
     <string name="sources_management_prerelease_toggle">Folosiți patch-uri pre-lansare</string>
-    <string name="sources_management_prerelease_toggle_description">Primești acces precoț la noi versiuni experimentale de patch-uri</string>
-    <string name="sources_management_experimental_versions_toggle">Utilizați versiuni experimentale ale aplicației</string>
-    <string name="sources_management_experimental_versions_toggle_description">Aplicați versiuni experimentale ale țintelor aplicației, dacă sunt disponibile</string>
-    <string name="sources_management_already_exists">Această sursă a fost deja adăugată</string>
+    <string name="sources_management_prerelease_toggle_description">Primești acces anticipat la versiuni noi experimentale de patch-uri</string>
+    <string name="sources_management_experimental_versions_toggle">Utilizează versiuni experimentale</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patch-uiește aplicații experimentale dacă e disponibil</string>
+    <string name="sources_management_already_exists">Sursă deja adăugată</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nume afișat</string>
-    <string name="sources_dialog_rename">Renumează sursă de patach</string>
-    <string name="sources_dialog_duplicate_name_error">Există deja o sursă de patach cu acest nume</string>
-    <string name="sources_dialog_missing_error">Nu a fost posibil să se actualizeze sursa de patch</string>
-    <string name="sources_dialog_view_any_version">O orice versiune</string>
-    <string name="sources_dialog_view_any_package">O orice pachet</string>
-    <string name="sources_dialog_add_source">Adăugă sursă de patach</string>
+    <string name="sources_dialog_rename">Redenumire surse de patch-uri</string>
+    <string name="sources_dialog_duplicate_name_error">Există deja o sursă de patch-uri cu acest nume</string>
+    <string name="sources_dialog_missing_error">Nu s-a putut actualiza sursa aceasta de patch-uri</string>
+    <string name="sources_dialog_view_any_version">Orice versiune</string>
+    <string name="sources_dialog_view_any_package">Orice pachet</string>
+    <string name="sources_dialog_add_source">Adaugă sursă de patch-uri</string>
     <string name="sources_dialog_delete_confirm_message">Ștergeți sursa \"%s\"? Acest lucru nu poate fi anulat.</string>
     <string name="sources_dialog_remote">Distanță</string>
     <string name="sources_dialog_remote_url">URL-ul sursei</string>
     <string name="sources_dialog_remote_url_formats_title">Exemple:</string>
     <string name="sources_dialog_local">Local</string>
-    <string name="sources_dialog_local_file">Selectează fișierul sursei de patach</string>
-    <string name="sources_dialog_local_file_description">Selectați un fișier .mpp de sursă de patach din stocare</string>
+    <string name="sources_dialog_local_file">Selectează fișierul cu patch-uri</string>
+    <string name="sources_dialog_local_file_description">Selectați un fișier .mpp cu patch-uri din stocare</string>
     <string name="sources_dialog_local_change_file">Schimbă fișierul</string>
     <string name="sources_dialog_preinstalled">Preinstalate</string>
     <string name="sources_update_success">Actualizare reușită</string>
     <string name="sources_update_unavailable">Nu există actualizări disponibile</string>
-    <string name="sources_download_fail">Eșec la descărcarea surselor: %s</string>
+    <string name="sources_download_fail">Eroare la descărcarea surselor: %s</string>
     <string name="sources_download_endpoint_not_found">Nu s-a putut actualiza \'%1$s\': fișierul JSON al patch-ului nu a fost găsit la URL-ul configurat</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Nevoie de ajutor pentru a găsi un APK original neactualizat?</string>
-    <string name="home_apk_availability_dialog_simple">Pentru a aplica &lt;b&gt;%s&lt;/b&gt;, ai nevoie de versiunea APK neactualizată:</string>
-    <string name="home_apk_availability_dialog_expert">Pentru a aplica &lt;b&gt;%s&lt;/b&gt;, ai nevoie de un APK neaplicat de versiuni:</string>
+    <string name="home_apk_availability_dialog_title">Ai nevoie de ajutor să găsești un APK original nepatch-uit?</string>
+    <string name="home_apk_availability_dialog_simple">Pentru a patch-ui &lt;b&gt;%s&lt;/b&gt;, ai nevoie de o versiune APK nepatch-uită:</string>
+    <string name="home_apk_availability_dialog_expert">Pentru a patch-ui &lt;b&gt;%s&lt;/b&gt;, ai nevoie de un APK de versiuni nepatch-uit:</string>
     <string name="home_apk_availability_recommended_label">Recomandat</string>
-    <string name="home_apk_availability_unpatched_label">Neactualizat</string>
+    <string name="home_apk_availability_unpatched_label">Nepatch-uit</string>
     <string name="home_apk_availability_yes">Da, ajută-mă să găsesc un APK</string>
     <string name="home_apk_availability_no">Nu, deja am un APK</string>
     <string name="home_apk_use_saved_with_version">Folosește APK salvat (v%s)</string>
-    <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patching va necesita selectarea din nou a fișierului APK</string>
+    <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patch-uirea necesită selectarea APK-ului din nou</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descărcați APK-ul original</string>
     <string name="home_download_instructions_steps_title">Instrucțiuni:</string>
-    <string name="home_download_instructions_step1">Apașteți pe buton \'%1$s\' de mai jos</string>
-    <string name="home_download_instructions_step2_part1">Derulează în jos pagina web și apasă pe</string>
-    <string name="home_download_instructions_download_button_toast">Apăsați descărcarea pe site, și nu aici 😊</string>
-    <string name="home_download_instructions_step3">Așteptați ca descărcarea să se finalizeze, și &lt;b&gt;nu instalați&lt;/b&gt; APK-ul</string>
-    <string name="home_download_instructions_step3_mount">Așteptați ca descărcarea să se finalizeze, apoi &lt;b&gt;instalați APK-ul&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">După ce descărcarea se termină, întoarce-te la Morphe</string>
-    <string name="home_download_instructions_step4_mount">După instalarea APK-ului original, întoarce-te la Morphe</string>
+    <string name="home_download_instructions_step1">Apasă pe butonul \'%1$s\' de mai jos</string>
+    <string name="home_download_instructions_step2_part1">Derulează în josul paginii și apasă</string>
+    <string name="home_download_instructions_download_button_toast">Apasă butonul pe site, nu aici 😊</string>
+    <string name="home_download_instructions_step3">Așteaptă ca descărcarea să se finalizeze, și &lt;b&gt;nu instala&lt;/b&gt; APK-ul</string>
+    <string name="home_download_instructions_step3_mount">Așteaptă ca descărcarea să se finalizeze, și &lt;b&gt;instalează&lt;/b&gt; APK-ul</string>
+    <string name="home_download_instructions_step4">După ce descărcarea se termină, revino la Morphe</string>
+    <string name="home_download_instructions_step4_mount">După instalarea APK-ului original, revino la Morphe</string>
     <string name="home_download_instructions_continue">Continuați la APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Selectează fișierul APK descărcat</string>
-    <string name="home_file_picker_prompt_description">Selectează fișierul APK &lt;b&gt;%1$s&lt;/b&gt; pe care l-ai descărcat recent</string>
+    <string name="home_file_picker_prompt_title">Selectează APK-ul descărcat</string>
+    <string name="home_file_picker_prompt_description">Selectează fișierul APK &lt;b&gt;%1$s&lt;/b&gt; pe care tocmai l-ai descărcat</string>
     <string name="home_file_picker_prompt_open_apk">Deschide fișierul APK</string>
     <string name="home_recommended_version">Versiune recomandată</string>
     <string name="home_selected_version">Versiune selectată</string>
     <string name="home_select_apk_title">Selectează APK</string>
-    <string name="home_select_any_apk_description">Apasa butonul de mai jos pentru a selecta un fișier APK al oricărei aplicații pentru patchare</string>
+    <string name="home_select_any_apk_description">Apasă butonul de mai jos pentru a selecta un fișier APK al oricărei aplicații pentru patch-uire</string>
     <string name="home_invalid_apk">Fișier APK invalid</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
     <string name="expert_mode_search">Caută patch-uri</string>
-    <string name="expert_mode_proceed">Procedează la aplicarea</string>
+    <string name="expert_mode_proceed">Treci la patch-uire</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_universal_patches">Patch-uri universale</string>
-    <string name="expert_mode_multiple_sources_warning_title">Sursă de modificare multiplă selectată</string>
-    <string name="expert_mode_multiple_sources_warning_message">"Ați selectat modificări din surse de modificare multiple. Acest lucru poate cauza probleme de compatibilitate sau comportament neașteptat.
+    <string name="expert_mode_multiple_sources_warning_title">Mai multe surse de patch-uri selectate</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Ai selectat patch-uri din mai multe surse de patch-uri. Asta poate cauza probleme de compatibilitate sau comportamente neașteptate.
 
-Sunteți sigur că doriți să continuați?"</string>
+Sigur vrei să continui?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">APK netestat</string>
+    <string name="home_invalid_signature_title">APK neverificat</string>
     <string name="home_invalid_signature_message">Fișierul APK selectat pentru &lt;b&gt;%s&lt;/b&gt; nu corespunde certificatului de semnătură așteptat. Poate fi modificat sau provenit dintr-o sursă nesigură</string>
-    <string name="home_invalid_signature_badge">Această aplicație APK poate să nu fie originală</string>
-    <string name="home_split_apk_warning_title">APK-urile împărțite nu sunt acceptate</string>
-    <string name="home_split_apk_warning_message">Ați selectat un pachet APK împărțit (&lt;b&gt;.apks / .apkm / .xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; necesită un &lt;b&gt;APK complet&lt;/b&gt; - pachetele împărțite nu pot fi corectate pentru această aplicație</string>
-    <string name="home_split_apk_warning_badge">Este necesar un APK complet pentru a continua</string>
+    <string name="home_invalid_signature_badge">Acest APK poate să nu fie original</string>
+    <string name="home_split_apk_warning_title">APK split detectat</string>
+    <string name="home_split_apk_warning_message">"Acest fișier este un bundle APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui &lt;b&gt;APK complet&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Alegeți un alt APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Această versiune are suport experimental și poate fi instabilă sau incompletă</string>
     <string name="morphe_experimental_app_version_dialog_title">Vrei să experimentezi? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Această versiune a &lt;b&gt;%s&lt;/b&gt; are suport experimental timpuriu&lt;br/&gt;&lt;br/&gt;🔧 Așteptați-vă la un comportament ciudat al aplicației sau la erori nedetectate, deoarece corecturile sunt rafinate pentru această versiune a aplicației</string>
+    <string name="morphe_experimental_app_version_dialog_message">Această versiune a &lt;b&gt;%s&lt;/b&gt; are suport experimental timpuriu&lt;br/&gt;&lt;br/&gt;🔧 Așteptați-vă la un comportament ciudat al aplicației sau la erori nedetectate, deoarece patch-urile sunt rafinate pentru această versiune a aplicației</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versiune neacceptată</string>
     <string name="home_dialog_unsupported_version_dialog_description">Acest APK nu este o versiune recomandată a aplicației. Continuarea poate duce la o aplicație nefuncțională</string>
-    <string name="home_dialog_unsupported_version_dialog_proceed">Continuă în continuare</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">Continuă oricum</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versiuni compatibile:</string>
-    <string name="home_dialog_unsupported_version_unsupported_label">Necompatibil</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Incompatibil</string>
     <string name="home_dialog_wrong_package_title">Pachet greșit selectat</string>
     <string name="home_dialog_wrong_package_description">APK-ul selectat nu este pentru aplicația pe care doriți să o modificați</string>
     <string name="home_dialog_expected_package">Pachet așteptat:</string>
@@ -162,8 +164,9 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patch_option_list_empty_state">Nu au fost adăugate valori încă</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Creează iconiță adaptivă</string>
-    <string name="adaptive_icon_instructions">Alege o imagine de fundal, selectează culoarea de fundal și ajustează previzualizarea cu gesturi de zoom cu degetul</string>
-    <string name="adaptive_icon_preview">Previzualizare</string>
+    <string name="adaptive_icon_instructions">Alege o imagine de fundal, selectează o culoare de fundal, apoi folosește glisorul sau gesturile de ciupire pentru a ajusta previzualizarea</string>
+    <string name="adaptive_icon_preview">Previzualizare pictogramă adaptivă</string>
+    <string name="adaptive_icon_preview_hint">Pentru cel mai bun rezultat, păstrează pictograma în interiorul cercului interior solid</string>
     <string name="adaptive_icon_select_image">Selectează imagine</string>
     <string name="adaptive_icon_change_image">Schimbă imagine</string>
     <string name="adaptive_icon_background_color">Culoare de fundal</string>
@@ -173,6 +176,8 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="adaptive_icon_created_success">Icoana adaptivă creată cu succes</string>
     <string name="adaptive_icon_creation_failed">Eroare la crearea icoanei adaptive</string>
     <string name="adaptive_icon_folder_explanation">Selectează unde să creezi dosarul \'%1$s/%2$s\' cu fișiere de iconi generate</string>
+    <string name="notification_icon_preview">Butonul de notificare este ascuns</string>
+    <string name="notification_icon_preview_hint">Folosește glisorul pentru a redimensiona. Trage pentru a repoziționa</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Creează antet personalizat</string>
     <string name="header_creator_instructions">Alegeți imaginile pentru teme luminoase și întunecate, apoi ajustați cu gesturi de zoom cu pinț</string>
@@ -414,29 +419,38 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Numele aplicației</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Introduceți numele personalizat</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Icona personalizată</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder cu imagini pentru a fi utilizate ca o iconă personalizată.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder cu imagini care să fie utilizate ca pictogramă personalizată.
 
-Folderul trebuie să conțină unul sau mai multe dintre următoarele folderuri, în funcție de DPI-ul dispozitivului:
+Folderul trebuie să conțină unul sau mai multe dintre următoarele foldere, în funcție de DPI-ul dispozitivului:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Fiecare dintre folderurile trebuie să conțină toate următoarele fișiere:
+Fiecare dintre foldere trebuie să conțină toate următoarele fișiere:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
-Dimensiunile imaginilor trebuie să fie următoarele:
+Dimensiunile imaginii trebuie să fie următoarele:
 - mipmap-mdpi: 108x108 px
 - mipmap-hdpi: 162x162 px
 - mipmap-xhdpi: 216x216 px
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Opțional, calea path conține un folder 'drawable' cu uneori dintre următoarele fișiere monochrome:
+Opțional, calea conține un folder 'drawable' cu un fișier de pictogramă monocrom:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Opțional, calea conține o pictogramă de notificare în unul dintre următoarele formate:
+- Pictogramă vectorială XML în 'drawable':
+  morphe_notification_icon_custom.xml
+- Imagini raster PNG în folderele 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Schimbă logo antetă</string>
     <string name="settings_advanced_patch_options_custom_header_description">Schimbă logo antetă</string>

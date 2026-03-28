@@ -57,8 +57,8 @@ fun AppearanceTabContent(
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
 
-    var showLanguageDialog by remember { mutableStateOf(false) }
-    var showTranslationInfoDialog by remember { mutableStateOf(false) }
+    val showLanguageDialog = remember { mutableStateOf(false) }
+    val showTranslationInfoDialog = remember { mutableStateOf(false) }
 
     // Localized strings for accessibility
     val enabledState = stringResource(R.string.enabled)
@@ -74,7 +74,7 @@ fun AppearanceTabContent(
         // Language Section
         LanguageSection(
             appLanguage = appLanguage,
-            onLanguageClick = { showTranslationInfoDialog = true }
+            onLanguageClick = { showTranslationInfoDialog.value = true }
         )
 
         // Theme Mode Section
@@ -193,9 +193,9 @@ fun AppearanceTabContent(
 
     // Translation Info Dialog
     AnimatedVisibility(
-        visible = showTranslationInfoDialog,
+        visible = showTranslationInfoDialog.value,
         enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (showLanguageDialog) 0 else 200))
+        exit = fadeOut(animationSpec = tween(if (showLanguageDialog.value) 0 else 200))
     ) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.settings_appearance_translations_info_title),
@@ -205,10 +205,10 @@ fun AppearanceTabContent(
             ),
             urlLink = "https://morphe.software/translate",
             onDismiss = {
-                showTranslationInfoDialog = false
+                showTranslationInfoDialog.value = false
                 scope.launch {
                     delay(50)
-                    showLanguageDialog = true
+                    showLanguageDialog.value = true
                 }
             }
         )
@@ -216,7 +216,7 @@ fun AppearanceTabContent(
 
     // Language Picker Dialog
     AnimatedVisibility(
-        visible = showLanguageDialog,
+        visible = showLanguageDialog.value,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
@@ -227,9 +227,9 @@ fun AppearanceTabContent(
                     themeViewModel.setAppLanguage(languageCode)
                     (context as? Activity)?.recreate()
                 }
-                showLanguageDialog = false
+                showLanguageDialog.value = false
             },
-            onDismiss = { showLanguageDialog = false }
+            onDismiss = { showLanguageDialog.value = false }
         )
     }
 }

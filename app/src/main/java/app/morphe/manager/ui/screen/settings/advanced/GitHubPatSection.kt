@@ -34,11 +34,11 @@ fun GitHubPatSettingsItem(
     currentIncludeInExport: Boolean,
     onSave: (String, Boolean) -> Unit
 ) {
-    var showDialog by rememberSaveable { mutableStateOf(false) }
+    val showDialog = rememberSaveable { mutableStateOf(false) }
     val hasPat = currentPat.isNotBlank()
 
     RichSettingsItem(
-        onClick = { showDialog = true },
+        onClick = { showDialog.value = true },
         showBorder = true,
         leadingContent = {
             MorpheIcon(icon = Icons.Outlined.VpnKey)
@@ -65,15 +65,15 @@ fun GitHubPatSettingsItem(
         }
     )
 
-    if (showDialog) {
+    if (showDialog.value) {
         GitHubPatDialog(
             currentPat = currentPat,
             currentIncludeInExport = currentIncludeInExport,
             onSubmit = { pat, include ->
                 onSave(pat, include)
-                showDialog = false
+                showDialog.value = false
             },
-            onDismiss = { showDialog = false }
+            onDismiss = { showDialog.value = false }
         )
     }
 }
@@ -90,8 +90,8 @@ private fun GitHubPatDialog(
 ) {
     var pat by rememberSaveable(currentPat) { mutableStateOf(currentPat) }
     var includePatInExport by rememberSaveable(currentIncludeInExport) { mutableStateOf(currentIncludeInExport) }
-    var showIncludeWarning by rememberSaveable { mutableStateOf(false) }
-    var showInfoDialog by rememberSaveable { mutableStateOf(false) }
+    val showIncludeWarning = rememberSaveable { mutableStateOf(false) }
+    val showInfoDialog = rememberSaveable { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
     val generatePatLink = "https://github.com/settings/tokens/new?scopes=public_repo&description=morphe-manager-github-integration"
@@ -120,7 +120,7 @@ private fun GitHubPatDialog(
             // Info button section
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.settings_advanced_github_pat_how_to_get),
-                onClick = { showInfoDialog = true },
+                onClick = { showInfoDialog.value = true },
                 icon = Icons.Outlined.Info,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -157,7 +157,7 @@ private fun GitHubPatDialog(
                 RichSettingsItem(
                     onClick = {
                         if (!includePatInExport) {
-                            showIncludeWarning = true
+                            showIncludeWarning.value = true
                         } else {
                             includePatInExport = false
                         }
@@ -193,31 +193,31 @@ private fun GitHubPatDialog(
     }
 
     // Info dialog with link to GitHub token creation
-    if (showInfoDialog) {
+    if (showInfoDialog.value) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.settings_advanced_github_pat_how_to_get),
             message = stringResource(R.string.settings_advanced_github_pat_dialog_description),
             urlLink = generatePatLink,
-            onDismiss = { showInfoDialog = false }
+            onDismiss = { showInfoDialog.value = false }
         )
     }
 
     // Include warning confirmation dialog
-    if (showIncludeWarning) {
+    if (showIncludeWarning.value) {
         MorpheDialog(
-            onDismissRequest = { showIncludeWarning = false },
+            onDismissRequest = { showIncludeWarning.value = false },
             title = stringResource(R.string.warning),
             footer = {
                 MorpheDialogButtonRow(
                     primaryText = stringResource(R.string.confirm),
                     onPrimaryClick = {
                         includePatInExport = true
-                        showIncludeWarning = false
+                        showIncludeWarning.value = false
                     },
                     primaryIcon = Icons.Outlined.Warning,
                     isPrimaryDestructive = true,
                     secondaryText = stringResource(android.R.string.cancel),
-                    onSecondaryClick = { showIncludeWarning = false }
+                    onSecondaryClick = { showIncludeWarning.value = false }
                 )
             }
         ) {

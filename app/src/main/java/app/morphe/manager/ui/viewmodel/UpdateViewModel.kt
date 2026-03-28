@@ -101,58 +101,62 @@ class UpdateViewModel(
         uiSafe(app, R.string.failed_to_download_update, "Failed to download update") {
             val release = releaseInfo ?: return@uiSafe
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            withContext(Dispatchers.IO) {
-                if (!allowMeteredUpdates && !networkInfo.isMetered() && !ignoreInternetCheck) {
-                    showInternetCheckDialog = true
-                } else {
-                    if (currentDownloadVersion != release.version) {
-                        currentDownloadVersion = release.version
-                        if (location.exists()) {
-                            location.delete()
-                        }
-                        downloadedSize = 0L
-                        totalSize = 0L
-                        canResumeDownload = false
-                    }
 
-                    val resumeOffset = if (location.exists()) location.length() else 0L
-                    downloadedSize = resumeOffset
-                    totalSize = resumeOffset
-                    canResumeDownload = resumeOffset > 0L
+            if (!allowMeteredUpdates && networkInfo.isMetered() && !ignoreInternetCheck) {
+                showInternetCheckDialog = true
+                return@uiSafe
+            }
 
-                    state = State.DOWNLOADING
+            if (currentDownloadVersion != release.version) {
+                currentDownloadVersion = release.version
+                withContext(Dispatchers.IO) { location.delete() }
+                downloadedSize = 0L
+                totalSize = 0L
+                canResumeDownload = false
+            }
 
-                    try {
-                        if (resumeOffset == 0L) {
-                            http.downloadToFile(
-                                saveLocation = location,
-                                builder = { url(release.downloadUrl) },
-                                onProgress = { bytesRead, contentLength ->
-                                    downloadedSize = bytesRead
-                                    totalSize = contentLength ?: totalSize
-                                }
-                            )
-                        } else {
-                            http.download(location, resumeOffset) {
-                                url(release.downloadUrl)
-                                onDownload { bytesSentTotal, contentLength ->
-                                    downloadedSize = resumeOffset + bytesSentTotal
-                                    totalSize = resumeOffset + contentLength
-                                }
+            val resumeOffset = withContext(Dispatchers.IO) {
+                if (location.exists()) location.length() else 0L
+            }
+            downloadedSize = resumeOffset
+            // totalSize stays 0 until first progress callback — avoids false 100% on resume
+            totalSize = 0L
+            canResumeDownload = resumeOffset > 0L
+
+            state = State.DOWNLOADING
+
+            try {
+                withContext(Dispatchers.IO) {
+                    if (resumeOffset == 0L) {
+                        http.downloadToFile(
+                            saveLocation = location,
+                            builder = { url(release.downloadUrl) },
+                            onProgress = { bytesRead, contentLength ->
+                                downloadedSize = bytesRead
+                                totalSize = contentLength ?: totalSize
+                            }
+                        )
+                    } else {
+                        http.download(location, resumeOffset) {
+                            url(release.downloadUrl)
+                            onDownload { bytesSentTotal, contentLength ->
+                                downloadedSize = resumeOffset + bytesSentTotal
+                                totalSize = resumeOffset + contentLength
                             }
                         }
-                        canResumeDownload = false
-                        installUpdate()
-                    } catch (error: Exception) {
-                        downloadedSize = location.takeIf { it.exists() }?.length() ?: 0L
-                        if (totalSize < downloadedSize) {
-                            totalSize = downloadedSize
-                        }
-                        canResumeDownload = downloadedSize > 0L
-                        state = State.CAN_DOWNLOAD
-                        throw error
                     }
                 }
+                canResumeDownload = false
+                installUpdate().join()
+            } catch (error: Exception) {
+                val downloaded = withContext(Dispatchers.IO) {
+                    location.takeIf { it.exists() }?.length() ?: 0L
+                }
+                downloadedSize = downloaded
+                if (totalSize < downloadedSize) totalSize = downloadedSize
+                canResumeDownload = downloadedSize > 0L
+                state = State.CAN_DOWNLOAD
+                throw error
             }
         }
     }
@@ -181,6 +185,7 @@ class UpdateViewModel(
                 val hint = app.getString(R.string.installer_status_not_supported)
                 app.toast(app.getString(R.string.install_app_fail, hint))
                 installError = hint
+                canResumeDownload = false
                 state = State.FAILED
             }
 
@@ -194,11 +199,13 @@ class UpdateViewModel(
                 } catch (error: ShizukuInstaller.InstallerOperationException) {
                     val message = error.message ?: app.getString(R.string.installer_hint_generic)
                     installError = message
+                    canResumeDownload = false
                     app.toast(app.getString(R.string.install_app_fail, message))
                     state = State.FAILED
                 } catch (error: Exception) {
                     val message = error.simpleMessage().orEmpty()
                     installError = message
+                    canResumeDownload = false
                     app.toast(app.getString(R.string.install_app_fail, message))
                     state = State.FAILED
                 }
@@ -300,6 +307,7 @@ class UpdateViewModel(
                             externalInstallTimeoutJob = null
                             app.toast(message)
                             installError = hint ?: extra
+                            canResumeDownload = false
                             state = State.FAILED
                         }
                     }
@@ -331,11 +339,11 @@ class UpdateViewModel(
     }
 
     /**
-     * Reset state if installation was cancelled by user (dismissed system dialog)
+     * Reset state if installation was canceled by user (dismissed system dialog)
      * Called when dialog reopens to check if we need to reset
      */
     fun resetIfInstallCancelled() {
-        // If we're in INSTALLING state but the pending install was cancelled,
+        // If we're in INSTALLING state but the pending installation was canceled,
         // reset to CAN_INSTALL so user can try again
         if (state == State.INSTALLING && pendingExternalInstall == null) {
             // Check if the APK file still exists
@@ -377,7 +385,7 @@ class UpdateViewModel(
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
     }
 
-    enum class State(@StringRes val title: Int) {
+    enum class State(@param:StringRes val title: Int) {
         CAN_DOWNLOAD(R.string.update_available),
         DOWNLOADING(R.string.downloading_manager_update),
         CAN_INSTALL(R.string.ready_to_install_update),

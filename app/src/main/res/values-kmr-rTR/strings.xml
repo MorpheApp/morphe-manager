@@ -123,9 +123,11 @@
     <string name="home_invalid_signature_title">APK-ya pêşbîn nekirî</string>
     <string name="home_invalid_signature_message">APK-ya ku hîşyarîdê bo &lt;b&gt;%s&lt;/b&gt; hilbijart, bi gîrêdanî ya ceribandinê ya pêwist nayê. Ew dikare guherîye an ji çavê nedastî be</string>
     <string name="home_invalid_signature_badge">Ev APK nebûna orîjînal e.</string>
-    <string name="home_split_apk_warning_title">Piçûnbûna APK piştgirî nade</string>
-    <string name="home_split_apk_warning_message">Hûn paketek APK-ya qutî hilbijart ku (&lt;b&gt;.apks/.apkm/.xapk&lt;/b&gt;). &lt;b&gt;%s&lt;/b&gt; pêwisteya &lt;b&gt;APK-ya tam&lt;/b&gt; heye - pakketek qutî nikare ji bo wê sepanê çêkirinê were çêkirin</string>
-    <string name="home_split_apk_warning_badge">APK-ya tam pêwist e ku heta dawiyê were.</string>
+    <string name="home_split_apk_warning_title">APK-ê şikandî ye</string>
+    <string name="home_split_apk_warning_message">"Ev pel paketek APK ye
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt; çêbike."</string>
     <string name="home_split_apk_warning_pick_another">APK-ya din hilbijêre</string>
     <string name="home_dialog_unsupported_version_experimental_label">Sernişan</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ev guhertin piştgirîa ceribandiyê heye û dikare neyêbawer an jî bikêmam be</string>
@@ -160,8 +162,9 @@
     <string name="patch_option_list_empty_state">Heta niha tiştek zêde nabe</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Îkon adaptî çêkîn</string>
-    <string name="adaptive_icon_instructions">Hilbijarina wêne, hilbijartina reng a paşîn, û pêşbîniyê bi geştên pinch-to-zoom sererast bike</string>
-    <string name="adaptive_icon_preview">Pêşbîni</string>
+    <string name="adaptive_icon_instructions">Wekşîna wêneyek pêşîn hilbijêre, rûxana rengî hilbijêre, paşê ji bo danûşandina pêşbîniyê silser an gestên qutkirinê bikar bîne</string>
+    <string name="adaptive_icon_preview">Pêşbîniya ikona adaptîf</string>
+    <string name="adaptive_icon_preview_hint">Ji bo encamên çêtir, ikona xwe di nav devê hundir ê qelîv de bihêle</string>
     <string name="adaptive_icon_select_image">Wêne hilbijartin</string>
     <string name="adaptive_icon_change_image">Wêne biguherîn</string>
     <string name="adaptive_icon_background_color">Reng paşîn</string>
@@ -171,6 +174,8 @@
     <string name="adaptive_icon_created_success">Îkona adaptîv bi serketinê sererast dibe</string>
     <string name="adaptive_icon_creation_failed">Ji sererastkirina îkonaya adaptîv neçîbe</string>
     <string name="adaptive_icon_folder_explanation">Li wir bibînin ku pelê \'%1$s/%2$s\' bi pelên îkonên çêkirî were çêkirin</string>
+    <string name="notification_icon_preview">Pêşbîniya ikona ragihîner</string>
+    <string name="notification_icon_preview_hint">Silserê bikar bîne ku mezinahiyê zêde bike. Ji bo veşartinê kişandine bikar bîne</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Serdestin xwerû çêkîn</string>
     <string name="header_creator_instructions">Hilbijarina wêne ji bo temaên ronah û tarik, wê gavên rêzê pitandin-ji-dûra sererast bike</string>
@@ -412,29 +417,38 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name">Navê app</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Navê xwerûst dafîne</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Îkon xwerûst</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folderekî bi wêneyan re ku weke îkon xwerûst bikaribin.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder ku wêneyan hene ku wekî ikonê bikaribin serdest bikin.
 
-Folderek divê yek an zêdetir ji folderekê pêwist be, li gor DPI yê cûre cihazê:
+Folder divê yek an zêdetir ji folderên jêrîn bicive, li gorî DPI yê alavê:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Her folderek divê hemî pelgirtinên jêrîn pêwist be:
+Her du folderan divê hemû pelên jêrîn bicive:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
-Qasîyên wêneyan divê wiha bin:
+Mezinahiyên wêneyan divê wiha be:
 - mipmap-mdpi: 108x108 px
 - mipmap-hdpi: 162x162 px
 - mipmap-xhdpi: 216x216 px
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Bisêre, rêyê pispora 'drawable' pêwist e, bi her du pelên îkona monokrom:
+Bi taybetî, rêzê pêde dest wan folder kontrol e, folder ku pelê monochrome ikonê heye:
 morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml"</string>
+
+Bi taybetî, rêzê pêde dest wan folder kontrol e, ikonê ragihîner di yek ji formatên jêrîn de heye:
+- XML vector drawable di 'drawable':
+  morphe_notification_icon_custom.xml
+- PNG raster images di 'drawable-dpi' folders:
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Logo serê logo xwerûst</string>
     <string name="settings_advanced_patch_options_custom_header_description">Logo serê logo xwerûst biguhere</string>
