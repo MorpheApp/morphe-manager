@@ -91,7 +91,7 @@
     <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
-    <string name="home_download_instructions_steps_title">Kroki:</string>
+    <string name="home_download_instructions_steps_title">Instrukcja:</string>
     <string name="home_download_instructions_step1">Naciśnij przycisk \"%1$s\" poniżej</string>
     <string name="home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
     <string name="home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
@@ -129,7 +129,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="home_split_apk_warning_message">"Ten plik to pakiet APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-Dla uzyskania najlepszych wyników zaleca się zmodyfikowanie &lt;b&gt;pełnego pliku APK&lt;/b&gt;"</string>
+Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Wybierz inny plik APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Eksperymentalna</string>
     <string name="home_dialog_unsupported_version_experimental_description">Ta wersja ma wsparcie eksperymentalne i może działać niestabilnie lub być niekompletna</string>
@@ -164,6 +164,9 @@ Dla uzyskania najlepszych wyników zaleca się zmodyfikowanie &lt;b&gt;pełnego 
     <string name="patch_option_list_empty_state">Nie dodano jeszcze wartości</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Utwórz ikonę adaptacyjną</string>
+    <string name="adaptive_icon_instructions">Wybierz grafikę pierwszego planu i kolor tła, a następnie użyj suwaka lub uszczypnij ekran, aby dostosować podgląd</string>
+    <string name="adaptive_icon_preview">Podgląd ikony adaptacyjnej</string>
+    <string name="adaptive_icon_preview_hint">Aby uzyskać najlepszy efekt, umieść ikonę w obrębie wewnętrznego koła</string>
     <string name="adaptive_icon_select_image">Wybierz obraz</string>
     <string name="adaptive_icon_change_image">Zmień obraz</string>
     <string name="adaptive_icon_background_color">Kolor tła</string>
@@ -173,6 +176,8 @@ Dla uzyskania najlepszych wyników zaleca się zmodyfikowanie &lt;b&gt;pełnego 
     <string name="adaptive_icon_created_success">Ikona adaptacyjna utworzona pomyślnie</string>
     <string name="adaptive_icon_creation_failed">Nie udało się utworzyć ikony adaptacyjnej</string>
     <string name="adaptive_icon_folder_explanation">Wybierz, gdzie utworzyć folder \"%1$s/%2$s\" z wygenerowanymi ikonami</string>
+    <string name="notification_icon_preview">Podgląd ikony powiadomień</string>
+    <string name="notification_icon_preview_hint">Użyj suwaka, aby zmienić rozmiar. Przeciągnij, aby zmienić pozycję</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Utwórz własny nagłówek</string>
     <string name="header_creator_instructions">Wybierz obrazy dla jasnego i ciemnego motywu, a następnie dostosuj je gestem uszczypnięcia</string>
@@ -237,7 +242,7 @@ Dla uzyskania najlepszych wyników zaleca się zmodyfikowanie &lt;b&gt;pełnego 
     <string name="patcher_storage_permission_description_api30">Przynajmniej jedna opcja modyfikacji wskazuje na ścieżki, których Morphe nie może odczytać. Przyznaj dostęp do pamięci i stuknij przycisk, a modyfikowanie rozpocznie się automatycznie</string>
     <string name="patcher_storage_permission_description_legacy">Przynajmniej jedna opcji modyfikacji wskazuje na ścieżki, do których nie można uzyskać dostępu. Zaktualizuj ścieżki w opcjach i spróbuj ponownie</string>
     <string name="patcher_storage_permission_grant">Przyznaj uprawnienia dostępu do pamięci</string>
-    <string name="patcher_storage_permission_denied_warning">Odmówiono uprawnień do pamięci. Przyznaj uprawnienia, aby korzystać z tej ścieżki, lub przenieś pliki do prywatnego katalogu aplikacji</string>
+    <string name="patcher_storage_permission_denied_warning">Odmówiono uprawnień do pamięci. Przyznaj uprawnienia, aby korzystać z tej ścieżki, lub przenieś pliki do prywatnego folderu aplikacji</string>
     <string name="patcher_storage_permission_open_settings">Otwórz ustawienia pamięci</string>
     <string name="patcher_storage_badge_denied">Brak uprawnień</string>
     <string name="patcher_storage_badge_missing">Nie znaleziono</string>
@@ -333,7 +338,7 @@ Dla uzyskania najlepszych wyników zaleca się zmodyfikowanie &lt;b&gt;pełnego 
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Język aplikacji</string>
     <string name="settings_appearance_app_language_current">Bieżący język</string>
-    <string name="settings_appearance_translations_info_title">Tłumaczenia niektórych języków mogą być niekompletne lub niedostępne</string>
+    <string name="settings_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą być niekompletne lub może ich brakować</string>
     <string name="settings_appearance_translations_info_text">Aby przetłumaczyć aplikację na nowe języki lub poprawić istniejące tłumaczenia, odwiedź stronę %s</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacji</string>
@@ -414,18 +419,50 @@ Dla uzyskania najlepszych wyników zaleca się zmodyfikowanie &lt;b&gt;pełnego 
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nazwa aplikacji</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Wprowadź własną nazwę</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Własna ikona</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder z obrazami do użycia jako własna ikona.
+
+Folder musi zawierać jeden lub więcej z następujących folderów, w zależności od DPI urządzenia:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Każdy z folderów musi zawierać wszystkie następujące pliki:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Wymagane są następujące wymiary obrazów:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Ścieżka może zawierać folder \"drawable\" z monochromatycznym plikiem ikony:
+morphe_adaptive_monochrome_custom.xml
+
+Ścieżka może zawierać ikonę powiadomienia w jednym z następujących formatów:
+- Plik wektorowy XML w folderze \"drawable\":
+  morphe_notification_icon_custom.xml
+- Pliki rastrowe PNG w folderach \"drawable-dpi\":
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Własne logo w nagłówku</string>
     <string name="settings_advanced_patch_options_custom_header_description">Zmień logo w nagłówku</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"Katalog z obrazami do użycia jako własne logo w nagłówku.
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Folder z obrazami do użycia jako własne logo w nagłówku.
 
-Katalog musi zawierać jeden lub więcej z następujących katalogów, w zależności od DPI urządzenia:
+Folder musi zawierać jeden lub więcej z następujących folderów, w zależności od DPI urządzenia:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-Każdy z katalogów musi zawierać wszystkie następujące pliki:
+Każdy z folderów musi zawierać wszystkie następujące pliki:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
@@ -569,8 +606,8 @@ Wymagane są następujące wymiary obrazów:
 
 Jako projekt społecznościowy, Morphe opiera się na opiniach i wsparciu użytkowników, które napędzają dalszy rozwój i innowacje"</string>
     <string name="credits">Podziękowania</string>
-    <string name="credits_current_development">Obecny rozwój</string>
-    <string name="credits_prior_development">Wcześniejszy rozwój</string>
+    <string name="credits_current_development">Obecni twórcy</string>
+    <string name="credits_prior_development">Poprzedni twórcy</string>
     <!-- Shared strings -->
     <string name="patches">Modyfikacje</string>
     <string name="home">Strona główna</string>

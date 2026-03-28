@@ -2,10 +2,10 @@
 <resources>
     <plurals name="patch_count">
         <item quantity="one">%s Patch</item>
-        <item quantity="other">%s Patch</item>
+        <item quantity="other">%s Patches</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s Option</item>
+        <item quantity="one">%s Patch-Option</item>
         <item quantity="other">%s Patch-Optionen</item>
     </plurals>
     <plurals name="source_count">
@@ -25,7 +25,7 @@
         <item quantity="other">%s APK-Dateien</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Entfernt %s veraltetes Patch von der gespeicherten Auswahl</item>
+        <item quantity="one">Entfernt %s veralteten Patch von der gespeicherten Auswahl</item>
         <item quantity="other">Entfernt %s veraltete Patches von der gespeicherten Auswahl</item>
     </plurals>
     <plurals name="sources_management_subtitle">

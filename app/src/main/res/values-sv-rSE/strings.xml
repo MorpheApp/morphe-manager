@@ -162,6 +162,9 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="patch_option_list_empty_state">Inga värden har lagts till ännu</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Skapa adaptiv ikon</string>
+    <string name="adaptive_icon_instructions">Välj en förgrundsbild, välj bakgrundsfärg och justera förhandsgranskningen med skjutreglaget eller genom att nypa den.</string>
+    <string name="adaptive_icon_preview">Förhandsgranskning av adaptiv ikon</string>
+    <string name="adaptive_icon_preview_hint">För att få bästa resultat håller du din ikon inom den heldragna inre cirkeln</string>
     <string name="adaptive_icon_select_image">Välj bild</string>
     <string name="adaptive_icon_change_image">Ändra bild</string>
     <string name="adaptive_icon_background_color">Bakgrundsfärg</string>
@@ -171,6 +174,8 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="adaptive_icon_created_success">Adaptiv ikon har skapats</string>
     <string name="adaptive_icon_creation_failed">Det gick inte att skapa adaptiv ikon</string>
     <string name="adaptive_icon_folder_explanation">Välj var mappen \"%1$s/%2$s\" ska skapas med genererade ikonfiler</string>
+    <string name="notification_icon_preview">Förhandsgranskning av aviseringsikon</string>
+    <string name="notification_icon_preview_hint">Använd skjutreglaget för att ändra storlek. Dra för att flytta</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Skapa anpassat sidhuvud</string>
     <string name="header_creator_instructions">Välj bilder för ljust och mörkt tema, och justera sedan genom att nypa</string>
@@ -265,9 +270,9 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="patcher_message_8">Reder ut digital spaghetti … 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Åtgärdar fel i den okorrigerade appen … 🪲</string>
-    <string name="patcher_message_10">Bra korrigeringar är väl värda att vänta på … ⏳</string>
+    <string name="patcher_message_10">Bra korrigeringar är värda väntan … ⏳</string>
     <string name="patcher_message_11">Polerar pixlarna tills de glänser … 💎</string>
-    <string name="patcher_message_12">Vänligen sitt kvar tills kaptenen har släckt skylten \"Appkorrigering pågår\" … 💺✈️</string>
+    <string name="patcher_message_12">Vänligen sitt kvar tills kaptenen har släckt skylten Appkorrigering pågår … 💺✈️</string>
     <string name="patcher_message_13">Tillreder din korrigerade app, varm och färsk … 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Förhandlar artigt med bytekoden … 🤝</string>
@@ -412,6 +417,38 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_advanced_patch_options_custom_branding_app_name">Appnamn</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Ange anpassat namn</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Anpassad ikon</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mapp med bilder som ska användas som anpassad ikon.
+
+Mappen måste innehålla en eller flera av följande mappar beroende på enhetens DPI:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Varje mapp måste innehålla följande filer:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Bildernas mått ska vara följande:
+- mipmap-mdpi: 108 x 108 px
+- mipmap-hdpi: 162 x 162 px
+- mipmap-xhdpi: 216 x 216 px
+- mipmap-xxhdpi: 324 x 324 px
+- mipmap-xxxhdpi: 432 x 432 px
+
+Valfritt: Sökvägen innehåller en \"drawable\"-mapp med en monokrom ikonfil:
+morphe_adaptive_monochrome_custom.xml
+
+Valfritt: Sökvägen innehåller en aviseringsikon i ett av följande format:
+- XML-vektor-drawable i \"drawable\":
+  morphe_notification_icon_custom.xml
+- PNG-rasterbilder i \"drawable-dpi\"-mappar:
+  drawable-mdpi/morphe_notification_icon_custom.png (24 x 24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36 x 36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48 x 48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72 x 72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96 x 96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Anpassad logotyp i sidhuvudet</string>
     <string name="settings_advanced_patch_options_custom_header_description">Ändra logotyp i sidhuvudet</string>

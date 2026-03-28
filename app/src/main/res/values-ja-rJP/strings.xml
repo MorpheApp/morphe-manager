@@ -164,6 +164,9 @@
     <string name="patch_option_list_empty_state">まだ値が追加されていません</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">アダプティブ アイコンを作成</string>
+    <string name="adaptive_icon_instructions">前景画像を選択し、背景色を設定し、スライダーまたはピンチジェスチャーを使用してプレビューを調整します</string>
+    <string name="adaptive_icon_preview">適応型アイコンプレビュー</string>
+    <string name="adaptive_icon_preview_hint">最適な結果を得るには、アイコンを内側の正方形の枠内に保持してください</string>
     <string name="adaptive_icon_select_image">画像を選択</string>
     <string name="adaptive_icon_change_image">画像を変更</string>
     <string name="adaptive_icon_background_color">背景色</string>
@@ -173,6 +176,8 @@
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
     <string name="adaptive_icon_folder_explanation">生成したアイコンファイルを保存する 「%1$s/%2$s」 フォルダを作成する場所を選択します</string>
+    <string name="notification_icon_preview">通知アイコンプレビュー</string>
+    <string name="notification_icon_preview_hint">スライダーを使ってサイズを変更し、ドラッグして位置を調整します</string>
     <!-- Header Creator -->
     <string name="header_creator_create">カスタム ヘッダーを作成</string>
     <string name="header_creator_instructions">ライトテーマ用とダークテーマ用の画像を選び、プレビューをピンチで拡大・縮小して調整します</string>
@@ -414,6 +419,38 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name">アプリ名</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">カスタム名を入力</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">カスタム アイコン</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"カスタムアイコンとして使用する画像のフォルダ。
+
+このフォルダには、デバイスのDPIに応じて、次のフォルダの1つ以上が含まれている必要があります。
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+これらのフォルダのそれぞれには、次のファイルすべてが含まれている必要があります。
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+画像の寸法は次のとおりです。
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+オプションで、パスにモノクロアイコンファイルを含む 'drawable' フォルダが含まれています。
+morphe_adaptive_monochrome_custom.xml
+
+オプションで、パスに次のいずれかの形式の通知アイコンが含まれています。
+- 'drawable' に XML ベクター描画:
+  morphe_notification_icon_custom.xml
+- 'drawable-dpi' フォルダ内の PNG ラスタ画像:
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">カスタム ヘッダー ロゴ</string>
     <string name="settings_advanced_patch_options_custom_header_description">ヘッダーのロゴを変更します</string>

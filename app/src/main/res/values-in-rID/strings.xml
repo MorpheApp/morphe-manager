@@ -165,6 +165,9 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patch_option_list_empty_state">Belum ada nilai yang ditambahkan</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Buat ikon adaptif</string>
+    <string name="adaptive_icon_instructions">Pilih gambar latar depan, pilih warna latar belakang, lalu gunakan tombol geser atau gerakan mencubit untuk menyesuaikan pratinjau</string>
+    <string name="adaptive_icon_preview">Pratinjau ikon adaptif</string>
+    <string name="adaptive_icon_preview_hint">Untuk hasil terbaik, tempatkan ikon Anda di dalam lingkaran padat bagian dalam</string>
     <string name="adaptive_icon_select_image">Pilih gambar</string>
     <string name="adaptive_icon_change_image">Ubah gambar</string>
     <string name="adaptive_icon_background_color">Warna latar belakang</string>
@@ -174,6 +177,8 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="adaptive_icon_created_success">Ikon adaptif berhasil dibuat</string>
     <string name="adaptive_icon_creation_failed">Gagal membuat ikon adaptif</string>
     <string name="adaptive_icon_folder_explanation">Pilih lokasi untuk membuat folder \'%1$s/%2$s\' dengan berkas ikon yang sudah dibuat</string>
+    <string name="notification_icon_preview">Pratinjau ikon pemberitahuan</string>
+    <string name="notification_icon_preview_hint">Gunakan tombol geser untuk mengubah ukuran. Seret untuk memposisikan ulang</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Buat header khusus</string>
     <string name="header_creator_instructions">Pilih gambar untuk tema terang dan gelap, lalu sesuaikan dengan gerakan mencubit untuk memperbesar</string>
@@ -415,6 +420,38 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nama aplikasi</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Masukkan nama khusus</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ikon khusus</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder dengan gambar untuk digunakan sebagai ikon khusus.
+
+Folder harus berisi satu atau beberapa folder berikut, tergantung pada DPI perangkat:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Setiap folder harus berisi semua berkas berikut:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Dimensi gambar harus sebagai berikut:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Opsional, jalur berisi folder 'drawable' dengan file ikon monokrom:
+morphe_adaptive_monochrome_custom.xml
+
+Opsional, jalur berisi ikon pemberitahuan dalam salah satu format berikut:
+- Gambar vektor XML di 'drawable':
+  morphe_notification_icon_custom.xml
+- Gambar raster PNG di folder 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Logo header khusus</string>
     <string name="settings_advanced_patch_options_custom_header_description">Ubah header logo</string>

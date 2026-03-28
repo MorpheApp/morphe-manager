@@ -25,8 +25,8 @@
         <item quantity="other">%s APK fájl</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">%s elavult módosítás eltávolítva a mentett kijelölésből</item>
-        <item quantity="other">%s elavult módosítás eltávolítva a mentett kijelölésből</item>
+        <item quantity="one">%s elavult módosítás eltávolítva a mentett összeállításból</item>
+        <item quantity="other">%s elavult módosítás eltávolítva a mentett összeállításból</item>
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s forrás telepítve</item>

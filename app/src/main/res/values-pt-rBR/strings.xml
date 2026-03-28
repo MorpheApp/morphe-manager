@@ -164,6 +164,9 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="patch_option_list_empty_state">Nenhum valor adicionado ainda</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Criar ícone adaptável</string>
+    <string name="adaptive_icon_instructions">Escolha uma imagem de primeiro plano, selecione uma cor de fundo e, em seguida, use o controle deslizante ou os gestos de pinça para ajustar a visualização</string>
+    <string name="adaptive_icon_preview">Visualização do ícone adaptável</string>
+    <string name="adaptive_icon_preview_hint">Para obter o melhor resultado, mantenha seu ícone dentro do círculo interno sólido</string>
     <string name="adaptive_icon_select_image">Selecionar imagem</string>
     <string name="adaptive_icon_change_image">Alterar imagem</string>
     <string name="adaptive_icon_background_color">Cor de fundo</string>
@@ -173,6 +176,8 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="adaptive_icon_created_success">Ícone adaptável criado com sucesso</string>
     <string name="adaptive_icon_creation_failed">Falha ao criar ícone adaptável</string>
     <string name="adaptive_icon_folder_explanation">Selecione onde criar a pasta \'%1$s/%2$s\' com arquivos de ícone gerados</string>
+    <string name="notification_icon_preview">Botão de notificação está oculto</string>
+    <string name="notification_icon_preview_hint">Use o controle deslizante para redimensionar. Arraste para reposicionar</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Criar cabeçalho personalizado</string>
     <string name="header_creator_instructions">Escolha imagens para temas claro e escuro, depois ajuste com gestos de aproximação com dois dedos</string>
@@ -414,6 +419,38 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nome do aplicativo</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Informe o nome personalizado</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ícone personalizado</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Pasta com imagens para usar como um ícone personalizado.
+
+A pasta deve conter um ou mais dos seguintes diretórios, dependendo da DPI do dispositivo:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Cada um dos diretórios deve conter todos os seguintes arquivos:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+As dimensões da imagem devem ser as seguintes:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Opcionalmente, o caminho contém uma pasta 'drawable' com um arquivo de ícone monocromático:
+morphe_adaptive_monochrome_custom.xml
+
+Opcionalmente, o caminho contém um ícone de notificação em um dos seguintes formatos:
+- Drawable vetorial XML em 'drawable':
+  morphe_notification_icon_custom.xml
+- Imagens rasterizadas PNG em pastas 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Logotipo personalizado</string>
     <string name="settings_advanced_patch_options_custom_header_description">Alterar logotipo</string>
