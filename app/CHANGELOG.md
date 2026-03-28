@@ -1,3 +1,20 @@
+# app [1.13.0](https://github.com/MorpheApp/morphe-manager/compare/v1.12.2...v1.13.0) (2026-03-28)
+
+
+### Bug Fixes
+
+* Correct download/install flow and state handling ([e2025ce](https://github.com/MorpheApp/morphe-manager/commit/e2025ce10691b0952ecd9fabe1339179ce89ff4e))
+* Refactor `GitHubPullRequestBundle` to use our `HttpService`, allow using raw `.mpp` file from PR ([f50ae1d](https://github.com/MorpheApp/morphe-manager/commit/f50ae1d97c969ba20eee8ff2c539468f2f370820))
+* Refactor `HttpService` and `MorpheApi` ([e105f60](https://github.com/MorpheApp/morphe-manager/commit/e105f6021f82061b15708722ff086357c59249c4))
+* Replace `HttpURLConnection` with Ktor in `resolveRedirect` ([7470e6a](https://github.com/MorpheApp/morphe-manager/commit/7470e6a3d31792e63221f3ac7c0630d3344f3f5e))
+* Skip APK signature verification for Android 10 and below ([6b2b591](https://github.com/MorpheApp/morphe-manager/commit/6b2b5913aa253cd9739aa2f8038b3ab70b57a0e8))
+
+
+### Features
+
+* Add notification icon creation ([#358](https://github.com/MorpheApp/morphe-manager/issues/358)) ([a096b85](https://github.com/MorpheApp/morphe-manager/commit/a096b85bd5ff7a6051f1cf0badaaaffddb95e572))
+* Allow patching split APKs with a warning instead of blocking ([#353](https://github.com/MorpheApp/morphe-manager/issues/353)) ([2575368](https://github.com/MorpheApp/morphe-manager/commit/2575368e8054de9f63ce5e4bf0d005b4182e7a86))
+
 # app [1.13.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.13.0-dev.2...v1.13.0-dev.3) (2026-03-24)
 
 
