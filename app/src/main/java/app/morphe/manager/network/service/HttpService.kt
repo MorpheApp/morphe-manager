@@ -489,7 +489,12 @@ class HttpService(
      */
     suspend fun headRedirect(url: String): String? {
         return runCatching {
-            http.request {
+            // Ktor follows redirects by default, but we want to find the redirect.
+            val noRedirectClient = HttpClient {
+                followRedirects = false
+            }
+
+            noRedirectClient.request {
                 method = HttpMethod.Head
                 url(url)
             }.headers[HttpHeaders.Location]?.let { location ->
