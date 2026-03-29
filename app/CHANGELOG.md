@@ -1,3 +1,10 @@
+## app [1.13.1](https://github.com/MorpheApp/morphe-manager/compare/v1.13.0...v1.13.1) (2026-03-29)
+
+
+### Bug Fixes
+
+* Handle http redirects ([3026fb2](https://github.com/MorpheApp/morphe-manager/commit/3026fb2dd893d00034ce20074bdd93b848a11037))
+
 ## app [1.13.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.13.0...v1.13.1-dev.1) (2026-03-29)
 
 
