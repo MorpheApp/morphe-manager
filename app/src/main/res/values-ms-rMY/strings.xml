@@ -34,6 +34,11 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama paparan</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_recommended_label">Direkomendasi</string>
+    <string name="home_apk_availability_yes">Ya, bantu saya cari APK</string>
+    <string name="home_apk_availability_no">Tidak, saya ada APK</string>
+    <string name="home_apk_use_saved_with_version">Guna APK tersimpan (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Tiada APK tersimpan. Tampalan memerlukan fail APK dipilih semula</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Muat turun APK asal</string>
     <string name="home_download_instructions_steps_title">Arahan</string>
@@ -42,19 +47,71 @@
     <string name="home_download_instructions_download_button_toast">Tekan muat turun di laman web, dan bukan di sini 😊</string>
     <string name="home_download_instructions_step3">Tunggu untuk muat turun selesai, dan &lt;b&gt;jangan muat turun&lt;/b&gt; APK itu</string>
     <string name="home_download_instructions_step3_mount">Tunggu untuk mhat turun selesai, kemudian &lt;b&gt;instal APK itu&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">Selepas muat turun selesai, pulang ke Morphe</string>
+    <string name="home_download_instructions_step4_mount">Selepas pasang APK asal, pulang ke Morphe</string>
     <string name="home_download_instructions_continue">Teruskan ke APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_file_picker_prompt_title">Pilih APK yang telah dimuat turun</string>
+    <string name="home_file_picker_prompt_description">Pilih fail APK &lt;b&gt;%1$s&lt;/b&gt; yang baru anda muat turun</string>
+    <string name="home_file_picker_prompt_open_apk">Buka fail APK</string>
     <string name="home_recommended_version">Versi yang disyorkan</string>
     <string name="home_selected_version">Versi terpilih</string>
+    <string name="home_select_apk_title">Pilih APK</string>
+    <string name="home_select_any_apk_description">Tekan butang dibawah untuk pilih fail APK apa-apa aplikasi untuk ditampal</string>
+    <string name="home_invalid_apk">Fail APK tidak sah</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_title">Mod mahir</string>
+    <string name="expert_mode_search">Cari tampalan</string>
+    <string name="expert_mode_proceed">Teruskan kepada penampalan</string>
+    <string name="expert_mode_disable_all">Matikan semua</string>
+    <string name="expert_mode_enable_all">Hidupkan semua</string>
+    <string name="expert_mode_no_results">Tiada tampalan tersedia</string>
+    <string name="expert_mode_universal_patches">Tampalan universal</string>
+    <string name="expert_mode_multiple_sources_warning_title">Pelbagai sumber tampalan di pilih</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tampalan dari berbagai sumber tampalan. Ini mungkin boleh menyebabkan masalah kesesuaian atau tingkah laku yang tidak dijangka.
+
+Anda pasti untuk meneruskannya?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_title">APK tidak terverifikasi</string>
+    <string name="home_invalid_signature_message">APK yang anda pilih untuk &lt;b&gt;%s&lt;/b&gt; mempunyai tanda tangan yang tidak sama dengan sertifikasi tanda tangan. Ia berkemungkinan telah di ubah suai atau dari sumber tidak boleh dipercayai</string>
+    <string name="home_invalid_signature_badge">APK ini berkemungkinan adalah bukan yang asli</string>
+    <string name="home_split_apk_warning_title">APK terpisah dikesan</string>
+    <string name="home_split_apk_warning_message">"Ini ialah bundle APK
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Untuk hasil yang terbaik, aplikasi ini merekomenkan tampalan &lt;b&gt; APK penuh &lt;/b&gt;"</string>
+    <string name="home_split_apk_warning_pick_another">Pilih APK lain</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Uji kaji</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Versi ini ada sokongan uji kaji dan berkemungkinan tidak stabil atau selesai</string>
+    <string name="morphe_experimental_app_version_dialog_title">Anda mahu bereksperimen?  🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; versi ini mempunyai sokongan akses awal uji kaji &lt;br/&gt;&lt;br/&gt;🔧 Jangkakan aplikasi tidak sempurna atau ralat sementara tampalan di tambah baik untuk aplikasi versi ini</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versi tidak disokong</string>
+    <string name="home_dialog_unsupported_version_dialog_description">APK ini bukan versi aplikasi yang disyorkan.
+Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Teruskan juga</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Versi-versi bersesuaian:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Tidak disokong</string>
     <string name="home_dialog_wrong_package_title">Pakej yang dipilih salah</string>
     <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang anda ingin tampal</string>
     <string name="home_dialog_expected_package">Pakej yang dijangkakan:</string>
     <string name="home_dialog_selected_package">Pakej terpilih:</string>
+    <string name="home_outdated_patches_dialog_title">Tampalan mungkin telah ketinggalan zaman</string>
+    <string name="home_outdated_patches_dialog_message">Data mudah alih aktif dan kemas kini tampalan telah dimatikan</string>
+    <string name="home_outdated_patches_dialog_warning">Menampal dengan tampalan ketinggalan zaman mungkin boleh menyebabkan aplikasi rosak</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Kemas kini tampalan \'&amp;\'</string>
+    <string name="home_low_disk_space_dialog_title">Ruang storan sedikit</string>
+    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang tersedia. Tampalan memerlukan sekurang-kurangnya 1 GB ruang untuk bekerja dengan betul</string>
+    <string name="home_low_disk_space_dialog_warning">Teruskan mungkin boleh mengakibatkan ralat \"Fail tidak dijumpai\" atau memcemarkan keluaran APK</string>
     <!-- Patch Options -->
+    <string name="custom_color">Warna tersuai</string>
+    <string name="hex_color">Warna Hex</string>
+    <string name="patch_option_instructions">Panduan</string>
+    <string name="patch_option_enter_value">Masukkan nilai</string>
+    <string name="patch_option_enter_number">Masukkan nombor</string>
+    <string name="patch_option_enter_decimal">Masukkan perpuluhan</string>
+    <string name="patch_option_pick_folder">Pilih folder </string>
+    <string name="patch_option_list_duplicate">Nilai ini sudah wujud</string>
+    <string name="patch_option_list_empty">Nilai tidak boleh kosong</string>
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
@@ -116,6 +173,7 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <string name="settings_advanced_expert_mode">Mod mahir</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->

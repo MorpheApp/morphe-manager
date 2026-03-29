@@ -21,12 +21,12 @@
     <string name="home_update_available_subtitle">Sẵn sàng để cài đặt phiên bản mới</string>
     <string name="home_update_error">Cập nhật thất bại</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
-    <string name="home_update_skipped_metered">Cập nhật đã được bỏ qua</string>
-    <string name="home_update_skipped_metered_subtitle">Dữ liệu di động đang hoạt động</string>
+    <string name="home_update_skipped_metered">Đã bỏ qua cập nhật</string>
+    <string name="home_update_skipped_metered_subtitle">Đang bật dữ liệu di động</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
     <string name="home_update_progress_format">Đã xử lý %1$s</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
-    <string name="home_update_success_subtitle">Tất cả các nguồn đều là mới nhất</string>
+    <string name="home_update_success_subtitle">Đã cập nhật tất cả các nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_please_wait">Vui lòng chờ…</string>
     <!-- Home Screen - Home Greetings -->
@@ -36,37 +36,37 @@
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Hãy chuẩn bị sẵn sàng, đã đến lúc vá rồi</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Lại là một ngày mới cho một kiệt tác chặn quảng cáo mới</string>
+    <string name="home_greeting_4">Ngày mới, kiệt tác chặn quảng cáo mới</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Bạn thích xem quảng cáo không? Tôi thì không</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Hãy làm ứng dụng của bạn hoạt động theo cách bạn muốn</string>
+    <string name="home_greeting_6">Hãy làm ứng dụng hoạt động theo cách bạn muốn</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">Dự báo hôm nay: 100% tỉ lệ vá thành công</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Sẵn sàng thay đổi từ tầm thường lên đỉnh cao?</string>
+    <string name="home_greeting_8">Sẵn sàng thay đổi từ tầm thường lên đến đỉnh cao?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Đang cứu ứng dụng khỏi chính chúng từ hôm nay</string>
+    <string name="home_greeting_9">Cứu chúng khỏi chính chúng ngay từ hôm nay</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Được vận hành bởi caffein và những bản vá xịn</string>
+    <string name="home_greeting_10">Nạp caffein có ngay bản vá xịn</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_management_prerelease_toggle">Dùng bản vá thử nghiệm</string>
-    <string name="sources_management_prerelease_toggle_description">Nhận quyền truy cập sớm vào các bản vá thử nghiệm</string>
-    <string name="sources_management_experimental_versions_toggle">Dùng phiên bản ứng dụng thử nghiệm</string>
+    <string name="sources_management_prerelease_toggle_description">Trải nghiệm sớm các bản vá thử nghiệm mới</string>
+    <string name="sources_management_experimental_versions_toggle">Dùng phiên bản thử nghiệm</string>
     <string name="sources_management_experimental_versions_toggle_description">Vá phiên bản thử nghiệm của ứng dụng (nếu có)</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
-    <string name="sources_dialog_duplicate_name_error">Đã tồn tại nguồn vá có tên này</string>
+    <string name="sources_dialog_duplicate_name_error">Đã tồn tại nguồn vá có tên này rồi</string>
     <string name="sources_dialog_missing_error">Không thể cập nhật nguồn vá này</string>
     <string name="sources_dialog_view_any_version">Phiên bản bất kỳ</string>
     <string name="sources_dialog_view_any_package">Gói bất kỳ</string>
     <string name="sources_dialog_add_source">Thêm nguồn vá</string>
-    <string name="sources_dialog_delete_confirm_message">Bạn có muốn xóa nguồn \"%s\" không? Thao tác này không thể hoàn tác</string>
+    <string name="sources_dialog_delete_confirm_message">Bạn có muốn xóa nguồn \"%s\" không? Thao tác này không thể hoàn tác đâu</string>
     <string name="sources_dialog_remote">Từ URL</string>
     <string name="sources_dialog_remote_url">URL nguồn</string>
     <string name="sources_dialog_remote_url_formats_title">Ví dụ:</string>
@@ -108,10 +108,10 @@
     <string name="home_selected_version">Phiên bản đã chọn</string>
     <string name="home_select_apk_title">Chọn APK</string>
     <string name="home_select_any_apk_description">Bấm nút bên dưới để chọn tệp APK của bất kỳ ứng dụng nào để vá</string>
-    <string name="home_invalid_apk">Tệp APK không hợp lệ</string>
+    <string name="home_invalid_apk">Tệp APK không đúng</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
-    <string name="expert_mode_search">Tìm kiếm bản vá</string>
+    <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
@@ -234,7 +234,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_unknown_error">Đã xảy ra lỗi không xác định</string>
     <string name="patcher_conflict_title">Phát hiện xung đột</string>
     <string name="patcher_conflict_subtitle">Bạn cần gỡ cài đặt phiên bản hiện có</string>
-    <string name="patcher_install_error_title">Lỗi cài đặt</string>
+    <string name="patcher_install_error_title">Lỗi rồiii</string>
     <string name="patcher_install_error_subtitle">Hãy thử gỡ và cài đặt lại</string>
     <string name="patcher_ready_to_install_subtitle">Bấm nút bên dưới để cài đặt</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
@@ -252,7 +252,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_step_load_patches">Đang tải bản vá</string>
     <string name="patcher_step_prepare_split_apk">Đang gộp APK chia nhỏ</string>
     <string name="patcher_step_unpack">Đọc tệp APK</string>
-    <string name="patcher_step_group_patching">Vá</string>
+    <string name="patcher_step_group_patching">Đang vá</string>
     <string name="patcher_step_group_saving">Đang lưu</string>
     <string name="patcher_step_write_patched">Đang viết APK đã vá</string>
     <string name="patcher_step_sign_apk">Đang ký APK đã vá</string>
@@ -263,7 +263,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_stop_confirm_description">Bạn có chắc chắn muốn dừng tiến trình vá không?</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">Biến ứng dụng của bạn trở nên xịn hơn… 🏆</string>
-    <string name="patcher_message_2">Dạy ứng dụng cũ những chiêu mới… 🎩</string>
+    <string name="patcher_message_2">Dạy ứng dụng cũ chiêu mới… 🎩</string>
     <string name="patcher_message_3">Đang tinh chỉnh ứng dụng của bạn… 🔧</string>
     <string name="patcher_message_4">Đang pha chế phép màu kỹ thuật số… ☕</string>
     <string name="patcher_message_5">Làm tách cà phê chill chill… ☕</string>
@@ -308,7 +308,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="saved_app_launch_unavailable">Cài ứng dụng trước khi mở</string>
     <string name="package_name">Tên gói</string>
     <string name="failed_to_mount">Không thể gắn: %s</string>
-    <string name="failed_to_unmount">Không thể tháo: %s</string>
+    <string name="failed_to_unmount">Không thể gỡ gắn: %s</string>
     <!-- Settings -->
     <string name="appearance">Giao diện</string>
     <string name="advanced">Nâng cao</string>
@@ -367,7 +367,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_advanced_update_interval_weekly">Mỗi tuần</string>
     <string name="settings_advanced_update_interval_monthly">Mỗi tháng</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Tần suất kiểm tra trong nền</string>
-    <string name="settings_advanced_update_interval_battery_warning">Kiểm tra trong nền có thể không hoạt động trên một số thiết bị. Một số hãng như Xiaomi, Huawei, Samsung và OnePlus thường giới hạn ứng dụng chạy nền để tiết kiệm pin</string>
+    <string name="settings_advanced_update_interval_battery_warning">Tính năng này có thể không hoạt động trên một số thiết bị như Xiaomi, Huawei, Samsung và OnePlus, vì chúng thường giới hạn ứng dụng chạy nền để tiết kiệm pin</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Đã có bản cập nhật Morphe mới</string>
     <string name="notification_bundle_update_title">Đã có bản vá mới</string>
@@ -643,7 +643,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="export">Xuất</string>
     <string name="download">Tải về</string>
     <string name="less">Thu gọn</string>
-    <string name="expand">Mở rộng</string>
+    <string name="expand">Thêm</string>
     <string name="expanded">Đã mở rộng</string>
     <string name="collapse">Bớt</string>
     <string name="collapsed">Đã thu gọn</string>
@@ -672,7 +672,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="logs">Nhật ký</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>
     <string name="mounting_ellipsis">Đang gắn kết…</string>
-    <string name="unmounting_ellipsis">Đang tháo</string>
+    <string name="unmounting_ellipsis">Đang gỡ gắn…</string>
     <string name="importing_ellipsis">Đang nhập…</string>
     <string name="changelog">Lịch sử cập nhật</string>
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
@@ -681,7 +681,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="changelog_empty">Không có lịch sử cập nhật</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
-    <string name="ready_to_install_update">Sẵn sàng để cài đặt bản cập nhật</string>
+    <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>
     <string name="update_completed">Đã cài đặt bản cập nhật</string>
     <string name="install_update_manager_failed">Không thể cài đặt bản cập nhật</string>
     <string name="installing_manager_update">Đang cài đặt bản cập nhật…</string>
@@ -690,6 +690,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="failed_to_check_updates">Không thể kiểm tra cập nhật: %s</string>
     <string name="failed_to_download_update">Không tải được bản cập nhật: %s</string>
     <string name="resume_download">Tiếp tục tải</string>
+    <string name="download_confirmation_metered">"Bạn đang dùng 4G/5G, tiếp tục có thể phát sinh cước dữ liệu.\n\nBạn vẫn muốn tiếp tục?"</string>
     <string name="download_update_confirmation">Tải bản cập nhật?</string>
     <string name="just_now">Vừa mới đây</string>
     <string name="minutes_ago">%s phút trước</string>
