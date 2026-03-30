@@ -44,8 +44,8 @@ dependencyResolutionManagement {
                 val gprUser: String? = providers.gradleProperty("gpr.user").orNull
                 val gprKey: String? = providers.gradleProperty("gpr.key").orNull
 
-                username = (if (hardcodedUser.isNotBlank()) hardcodedUser else System.getenv("GITHUB_ACTOR") ?: gprUser)
-                password = (if (hardcodedToken.isNotBlank()) hardcodedToken else System.getenv("GITHUB_TOKEN") ?: gprKey)
+                username = (hardcodedUser.ifBlank { System.getenv("GITHUB_ACTOR") ?: gprUser })
+                password = (hardcodedToken.ifBlank { System.getenv("GITHUB_TOKEN") ?: gprKey })
             }
         }
     }

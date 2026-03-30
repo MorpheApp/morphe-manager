@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import app.morphe.manager.R
 import kotlinx.parcelize.Parcelize
 
-enum class StepCategory(@StringRes val displayName: Int) {
+enum class StepCategory(@param:StringRes val displayName: Int) {
     PREPARING(R.string.patcher_step_group_preparing),
     PATCHING(R.string.patcher_step_group_patching),
     SAVING(R.string.patcher_step_group_saving)

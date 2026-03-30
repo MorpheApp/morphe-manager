@@ -74,7 +74,7 @@ object LanguageRepository {
             flag = "🌐"
         )
 
-        val englishLocale = Locale("en")
+        val englishLocale = Locale.forLanguageTag("en")
         val englishOption = LanguageOption(
             code = "en",
             displayName = englishLocale.getDisplayLanguage(currentLocale).replaceFirstChar {

@@ -668,6 +668,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="credits">Credits</string>
     <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
+    <string name="opensource_licenses">Open-source licenses</string>
 
     <!-- Shared strings -->
     <string name="app_name" translatable="false">Morphe</string>

@@ -19,7 +19,7 @@ class AppIconManager(private val context: Context) {
     enum class AppIcon(
         val aliasName: String,
         val displayNameResId: Int,
-        @DrawableRes val previewIconResId: Int
+        @param:DrawableRes val previewIconResId: Int
     ) {
         DEFAULT(
             aliasName = "app.morphe.manager.MainActivity_Default",
