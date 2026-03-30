@@ -885,7 +885,8 @@ internal fun HideAppDialog(
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
-        }
+        },
+        compactPadding = true
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -894,39 +895,18 @@ internal fun HideAppDialog(
             // Original app card preview
             AppCardLayout(
                 gradientColors = item.gradientColors,
-                enabled = false,
+                enabled = true,
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
             ) {
-                AppIcon(
+                AppCardContent(
+                    packageName = item.packageName,
                     packageInfo = item.packageInfo,
-                    packageName = if (item.packageInfo == null) item.packageName else null,
-                    contentDescription = null,
-                    modifier = Modifier.size(60.dp),
-                    preferredSource = AppDataSource.PATCHED_APK,
-                    placeholderGradientColors = item.gradientColors,
-                    placeholderInnerPadding = 6.dp
+                    displayName = item.displayName,
+                    subtitle = stringResource(R.string.home_app_will_be_hidden),
+                    gradientColors = item.gradientColors,
+                    iconSource = AppDataSource.PATCHED_APK
                 )
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = item.displayName,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-
-                    Text(
-                        text = stringResource(R.string.home_app_will_be_hidden),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.White.copy(alpha = 0.75f)
-                    )
-                }
             }
 
             // Explanation text
@@ -962,7 +942,8 @@ internal fun HiddenAppsDialog(
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             )
-        }
+        },
+        compactPadding = true
     ) {
         if (hiddenAppItems.isEmpty()) {
             Box(
@@ -979,21 +960,22 @@ internal fun HiddenAppsDialog(
                 )
             }
         } else {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                InfoBadge(
-                    text = stringResource(R.string.home_app_hidden_apps_hint),
-                    icon = Icons.Outlined.TouchApp,
-                    isExpanded = true
-                )
-
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    hiddenAppItems.forEach { item ->
-                        HiddenAppRow(
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                hiddenAppItems.forEach { item ->
+                    // Original app card preview
+                    AppCardLayout(
+                        gradientColors = item.gradientColors,
+                        enabled = true,
+                        onClick = { onUnhide(item.packageName) },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        AppCardContent(
                             packageName = item.packageName,
-                            displayName = item.displayName,
-                            gradientColors = item.gradientColors,
                             packageInfo = item.packageInfo,
-                            onUnhide = { onUnhide(item.packageName) }
+                            displayName = item.displayName,
+                            subtitle = stringResource(R.string.home_app_hidden_apps_hint),
+                            gradientColors = item.gradientColors,
+                            iconSource = AppDataSource.PATCHED_APK
                         )
                     }
                 }
@@ -1003,74 +985,67 @@ internal fun HiddenAppsDialog(
 }
 
 /**
- * Single app row in [HiddenAppsDialog] rendered as a glassmorphism card.
+ * Shared icon + text content for [AppCardLayout] rows.
+ *
+ * @param packageName   Package name used for icon lookup when [packageInfo] is null.
+ * @param packageInfo   Resolved [PackageInfo]; when non-null [packageName] is ignored for the icon.
+ * @param displayName   Primary label shown in bold.
+ * @param subtitle      Secondary line shown below [displayName]; null → not rendered.
+ * @param gradientColors Gradient palette forwarded to [AppIcon] placeholder.
+ * @param iconSource    [AppDataSource] preference for [AppIcon].
  */
 @Composable
-private fun HiddenAppRow(
+private fun RowScope.AppCardContent(
     packageName: String,
-    displayName: String?,
-    gradientColors: List<Color>,
     packageInfo: PackageInfo?,
-    onUnhide: () -> Unit
+    displayName: String,
+    subtitle: String?,
+    gradientColors: List<Color>,
+    iconSource: AppDataSource
 ) {
-    val view = LocalView.current
-    val textColor = LocalDialogTextColor.current
-    val shape = RoundedCornerShape(16.dp)
+    val textColor = Color.White
+    val subtitleColor = Color.White.copy(alpha = 0.75f)
+    val titleShadow = Shadow(
+        color = Color.Black.copy(alpha = 0.4f),
+        offset = Offset(0f, 2f),
+        blurRadius = 4f
+    )
+    val subtitleShadow = Shadow(
+        color = Color.Black.copy(alpha = 0.4f),
+        offset = Offset(0f, 1f),
+        blurRadius = 2f
+    )
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .border(
-                width = 1.dp,
-                brush = Brush.linearGradient(
-                    colors = gradientColors.map { it.copy(alpha = 0.5f) }
-                ),
-                shape = shape
-            )
-            .background(
-                brush = Brush.linearGradient(
-                    colors = gradientColors.map { it.copy(alpha = 0.15f) }
-                )
-            )
-            .clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                onUnhide()
-            }
-            .padding(horizontal = 14.dp, vertical = 12.dp)
+    AppIcon(
+        packageInfo = packageInfo,
+        packageName = if (packageInfo == null) packageName else null,
+        contentDescription = null,
+        modifier = Modifier.size(60.dp),
+        preferredSource = iconSource,
+        placeholderGradientColors = gradientColors,
+        placeholderInnerPadding = 6.dp
+    )
+
+    Column(
+        modifier = Modifier.weight(1f),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // App icon
-            AppIcon(
-                packageInfo = packageInfo,
-                packageName = if (packageInfo == null) packageName else null,
-                contentDescription = null,
-                modifier = Modifier.size(48.dp),
-                preferredSource = AppDataSource.PATCHED_APK,
-                placeholderGradientColors = gradientColors,
-                placeholderInnerPadding = 4.dp
-            )
+        Text(
+            text = displayName,
+            style = MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.Bold,
+                shadow = titleShadow
+            ),
+            color = textColor,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
 
-            // App name
+        if (subtitle != null) {
             Text(
-                text = displayName ?: packageName,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    color = textColor
-                ),
-                modifier = Modifier.weight(1f),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            // Eye icon
-            MorpheIcon(
-                icon = Icons.Outlined.Visibility,
-                tint = textColor.copy(alpha = 0.45f),
-                size = 20.dp
+                text = subtitle,
+                style = MaterialTheme.typography.bodyMedium.copy(shadow = subtitleShadow),
+                color = subtitleColor
             )
         }
     }
@@ -1253,9 +1228,6 @@ fun AppButton(
     enabled: Boolean = true,
     onLongClick: (() -> Unit)? = null
 ) {
-    val textColor = Color.White
-    val finalTextColor = if (enabled) textColor else textColor.copy(alpha = 0.5f)
-
     val notPatchedText = stringResource(R.string.home_not_patched_yet)
     val disabledText = stringResource(R.string.disabled)
 
@@ -1285,51 +1257,14 @@ fun AppButton(
             }
         }
     ) {
-        // App icon
-        AppIcon(
+        AppCardContent(
+            packageName = packageName,
             packageInfo = packageInfo,
-            packageName = if (packageInfo == null) packageName else null,
-            contentDescription = null,
-            modifier = Modifier.size(60.dp),
-            preferredSource = AppDataSource.PATCHED_APK,
-            placeholderGradientColors = gradientColors,
-            placeholderInnerPadding = 6.dp
+            displayName = displayName,
+            subtitle = notPatchedText,
+            gradientColors = gradientColors,
+            iconSource = AppDataSource.PATCHED_APK
         )
-
-        // Text info
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            // Display name
-            Text(
-                text = displayName,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    color = finalTextColor,
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 2f),
-                        blurRadius = 4f
-                    )
-                ),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            // Status text
-            Text(
-                text = notPatchedText,
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 1f),
-                        blurRadius = 2f
-                    )
-                ),
-                color = finalTextColor.copy(alpha = 0.7f)
-            )
-        }
     }
 }
 

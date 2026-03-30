@@ -9,7 +9,7 @@
     <string name="home_app_show_hidden">Show hidden apps</string>
     <string name="home_app_no_hidden">No hidden apps</string>
     <string name="home_app_hidden_apps_title">Hidden apps</string>
-    <string name="home_app_hidden_apps_hint">Tap on an app to show it in the list again</string>
+    <string name="home_app_hidden_apps_hint">Tap to unhide</string>
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
 

@@ -95,13 +95,26 @@ fun GlassPlaceholderIcon(
                     cornerRadius = cr
                 )
 
+                // Layer 5: bottom-right dark edge
+                drawRoundRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black.copy(alpha = 0.12f)
+                        ),
+                        center = Offset(w, h),
+                        radius = w * 0.6f
+                    ),
+                    cornerRadius = cr
+                )
+
                 // Border
                 drawRoundRect(
                     brush = Brush.linearGradient(
                         colors = listOf(
                             Color.White.copy(alpha = 0.55f),
-                            midColor.copy(alpha = 0.25f),
-                            Color.White.copy(alpha = 0.15f)
+                            midColor.copy(alpha = 0.30f),
+                            Color.White.copy(alpha = 0.35f)
                         ),
                         start = Offset(0f, 0f),
                         end = Offset(w, h)
