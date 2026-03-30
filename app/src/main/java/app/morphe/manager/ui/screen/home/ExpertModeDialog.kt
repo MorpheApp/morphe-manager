@@ -785,6 +785,10 @@ private fun resolveOptionKind(option: Option<*>, value: Any?): OptionKind {
                         option.description.contains("drawable", ignoreCase = true)
                 ) -> OptionKind.Path
 
+        // Comma-separated string
+        isString && option.presets == null &&
+                (value is String && value.contains(",")) -> OptionKind.StringList
+
         // Plain string text field
         isString -> OptionKind.StringText
 
@@ -865,8 +869,15 @@ private fun PatchOptionsDialog(
                     OptionKind.StringList -> ListStringInputOption(
                         title = option.title,
                         description = option.description,
-                        value = (value as? List<*>)?.filterIsInstance<String>() ?: emptyList(),
-                        onValueChange = { onValueChange(key, it) }
+                        value = when (value) {
+                            is List<*> -> value.filterIsInstance<String>()
+                            is String  -> value.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                            else       -> emptyList()
+                        },
+                        onValueChange = { newList ->
+                            // Serialize back to comma-separated String — patcher expects kotlin.String
+                            onValueChange(key, newList.joinToString(", ").ifBlank { null })
+                        }
                     )
 
                     OptionKind.Color -> ColorOptionWithPresets(
