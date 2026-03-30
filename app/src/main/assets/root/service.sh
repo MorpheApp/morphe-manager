@@ -1,13 +1,21 @@
 #!/system/bin/sh
 package_name="__PKG_NAME__"
 version="__VERSION__"
-base_dir="/data/adb/modules/$package_name-morphe"
-log="$base_dir/log"
-base_path="$base_dir/$package_name.apk"
+module_dir="$(dirname "$0")"
+if [ "${module_dir#"/"}" = "$module_dir" ] && command -v readlink >/dev/null 2>&1; then
+  module_dir="$(dirname "$(readlink -f "$0")")"
+fi
+if [ "${module_dir#"/"}" = "$module_dir" ]; then
+  module_dir="/data/adb/modules/${package_name}-morphe"
+fi
 
+base_dir="$module_dir"
+mkdir -p "$module_dir"
+log="$module_dir/log.txt"
 rm -f "$log"
+exec >> "$log" 2>&1
 
-{
+base_path="$base_dir/$package_name.apk"
 
 until [ "$(getprop sys.boot_completed)" = 1 ]; do sleep 3; done
 until [ -d "/sdcard/Android" ]; do sleep 1; done
@@ -20,18 +28,30 @@ grep "$package_name" /proc/mounts | while read -r line; do
 done
 
 waited=0
-max_wait=60
+max_wait=180
 stock_path=""
 stock_versions=""
 while [ "$waited" -lt "$max_wait" ]; do
   stock_path_data="$(pm path "$package_name" | grep base | grep /data/app/ | head -n 1 | sed 's/package://g')"
   stock_path_fallback="$(pm path "$package_name" | grep base | head -n 1 | sed 's/package://g')"
-  stock_path="${stock_path_data:-$stock_path_fallback}"
+  if [ -z "$stock_path_data" ] && [ -z "$stock_path_fallback" ]; then
+    stock_path_cmd="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
+  else
+    stock_path_cmd=""
+  fi
+  stock_path="${stock_path_data:-${stock_path_fallback:-$stock_path_cmd}}"
   stock_versions="$(dumpsys package "$package_name" | awk -v pkg="$package_name" '
     $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
     $0 ~ /Hidden system package/ { in_pkg = 0 }
     in_pkg && /versionName=/ { sub(/.*versionName=/, ""); print }
   ' | tr -d '\r')"
+  if [ -n "$stock_versions" ] && [ -z "$stock_path" ]; then
+    stock_path="$(pm path "$package_name" | grep base | head -n 1 | sed 's/package://g')"
+    if [ -z "$stock_path" ]; then
+      stock_path="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
+    fi
+  fi
+
   if [ -n "$stock_path" ] && [ -f "$stock_path" ] && [ -n "$stock_versions" ]; then
     break
   fi
@@ -63,6 +83,5 @@ chcon u:object_r:apk_data_file:s0 "$base_path"
 mount -o bind "$base_path" "$stock_path"
 
 # Kill the app to force it to restart the mounted APK in case it is already running.
-am force-stop "$package_name"
-
-} >> "$log"
+sleep 10
+am force-stop "$package_name" || echo "force-stop failed (ignored)"

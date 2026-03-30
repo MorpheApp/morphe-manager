@@ -716,6 +716,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="open">Open</string>
     <string name="mount">Mount</string>
     <string name="mounted">Mounted</string>
+    <string name="unmount">Unmount</string>
     <string name="unmounted">Unmounted</string>
     <string name="remount">Remount</string>
     <string name="install">Install</string>
