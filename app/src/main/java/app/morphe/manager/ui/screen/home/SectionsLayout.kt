@@ -101,6 +101,8 @@ fun SectionsLayout(
     var searchVisible by remember { mutableStateOf(false) }
     val searchQuery = remember { mutableStateOf("") }
     LaunchedEffect(searchVisible) { if (!searchVisible) searchQuery.value = "" }
+    // Auto-close search if the button disappears
+    LaunchedEffect(showSearchButton) { if (!showSearchButton) searchVisible = false }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Main layout structure
