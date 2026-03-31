@@ -30,7 +30,10 @@
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
-    <string name="home_please_wait">Please wait…</string>
+    <string name="home_search_apps">Search apps</string>
+    <string name="home_no_apps_title">No apps available</string>
+    <string name="home_no_apps_subtitle">Add a patch source or enable an existing one in %s</string>
+    <string name="home_no_apps_search_subtitle">No apps match \"%1$s\"</string>
 
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>
