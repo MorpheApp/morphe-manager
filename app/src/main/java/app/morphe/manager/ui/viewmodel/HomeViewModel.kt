@@ -271,6 +271,12 @@ class HomeViewModel(
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
     val appUpdatesAvailable: StateFlow<Map<String, Boolean>> = _appUpdatesAvailable.asStateFlow()
 
+    // Track when at least one third-party source is enabled
+    val hasThirdPartySource: StateFlow<Boolean> =
+        patchBundleRepository.sources
+            .map { sources -> sources.any { it.enabled && it.uid != DEFAULT_SOURCE_UID } }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     // Track deleted apps
     var appsDeletedStatus by mutableStateOf<Map<String, Boolean>>(emptyMap())
         private set
@@ -440,6 +446,108 @@ class HomeViewModel(
 
     init {
         triggerUpdateCheck()
+        observeLoadingState()
+        observeInstalledAppUpdates()
+        observeDeletedAppsStatus()
+        observeSnackbarState()
+    }
+
+    /**
+     * Reactively updates [installedAppsLoading] based on bundle update progress and app list state.
+     */
+    private fun observeLoadingState() {
+        viewModelScope.launch {
+            combine(
+                patchBundleRepository.bundleUpdateProgress,
+                installedAppRepository.getAll()
+            ) { progress, installedApps ->
+                val isBundleUpdateInProgress =
+                    progress?.result == PatchBundleRepository.BundleUpdateResult.None
+                isBundleUpdateInProgress || installedApps.isEmpty()
+            }.collect { loading ->
+                installedAppsLoading = loading
+            }
+        }
+    }
+
+    /**
+     * Reactively checks installed apps for available bundle updates.
+     * Triggered on initial load and after each completed bundle update.
+     */
+    private fun observeInstalledAppUpdates() {
+        // Check on initial load and when sources or installed apps change
+        viewModelScope.launch {
+            combine(
+                installedAppRepository.getAll(),
+                patchBundleRepository.sources,
+                patchBundleRepository.bundleUpdateProgress
+            ) { installedApps, sources, _ ->
+                installedApps to sources
+            }
+                .filter { (installedApps, sources) ->
+                    installedApps.isNotEmpty() && sources.isNotEmpty()
+                }
+                .conflate() // drop intermediate emissions, process only the latest
+                .collect { (installedApps, _) ->
+                    checkInstalledAppsForUpdates(installedApps)
+                }
+        }
+    }
+
+    /**
+     * Reactively keeps [appsDeletedStatus] up to date when the installed apps list changes.
+     */
+    private fun observeDeletedAppsStatus() {
+        viewModelScope.launch {
+            installedAppRepository.getAll()
+                .filter { it.isNotEmpty() }
+                .collect { installedApps -> updateDeletedAppsStatus(installedApps) }
+        }
+    }
+
+    /**
+     * Reactively maps bundle update progress to snackbar visibility and status.
+     */
+    private fun observeSnackbarState() {
+        viewModelScope.launch {
+            patchBundleRepository.bundleUpdateProgress.collect { progress ->
+                if (progress == null) {
+                    showBundleUpdateSnackbar = false
+                    return@collect
+                }
+                showBundleUpdateSnackbar = true
+                snackbarStatus = when (progress.result) {
+                    PatchBundleRepository.BundleUpdateResult.Success,
+                    PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
+                    PatchBundleRepository.BundleUpdateResult.NoInternet,
+                    PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
+                    PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
+                    PatchBundleRepository.BundleUpdateResult.SkippedMetered -> BundleUpdateStatus.Warning
+                }
+            }
+        }
+    }
+
+    /** Pull-to-refresh state. */
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
+    /**
+     * Triggers a manual refresh: updates bundles and checks for manager updates.
+     * Guard against double-trigger if user swipes while refresh is in progress.
+     */
+    fun refresh() {
+        if (_isRefreshing.value) return
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            try {
+                patchBundleRepository.updateCheck()
+                checkForManagerUpdates()
+                delay(500)
+            } finally {
+                _isRefreshing.value = false
+            }
+        }
     }
 
     /**
@@ -921,11 +1029,30 @@ class HomeViewModel(
             ?: emptySet()
 
     /**
-     * Update loading state.
+     * Whether the "Other apps" button should be visible.
+     * Hidden while no apps are loaded; shown in expert mode or when a third-party source is active.
      */
-    fun updateLoadingState(bundleUpdateInProgress: Boolean, hasInstalledApps: Boolean) {
-        installedAppsLoading = bundleUpdateInProgress || !hasInstalledApps
-    }
+    val showOtherAppsButton: StateFlow<Boolean> =
+        combine(
+            homeAppItems,
+            hasThirdPartySource,
+            prefs.useExpertMode.flow
+        ) { items, thirdParty, expertMode ->
+            if (items.isEmpty()) false
+            else expertMode || thirdParty
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    /**
+     * Whether the search button should be visible.
+     * Shown when there are more than 4 app buttons or a third-party source is active.
+     */
+    val showSearchButton: StateFlow<Boolean> =
+        combine(
+            homeAppItems,
+            hasThirdPartySource
+        ) { items, thirdParty ->
+            items.size > 4 || thirdParty
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     /**
      * Update deleted apps status.

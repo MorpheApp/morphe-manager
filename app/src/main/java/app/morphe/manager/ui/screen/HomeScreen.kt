@@ -19,17 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -52,14 +48,14 @@ fun HomeScreen(
     onPatchTriggerHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val installedAppRepository: InstalledAppRepository = koinInject()
     val view = LocalView.current
 
-    // Dialog state for installed app info
-    var showInstalledAppDialog by remember { mutableStateOf<String?>(null) }
+    // Dialog states
+    val showInstalledAppDialog = remember { mutableStateOf<String?>(null) }
+    val showUpdateDetailsDialog = remember { mutableStateOf(false) }
 
     // Pull to refresh state
-    var isRefreshing by remember { mutableStateOf(false) }
+    val isRefreshing by homeViewModel.isRefreshing.collectAsStateWithLifecycle()
 
     // Get greeting message
     var greetingMessage by remember { mutableStateOf(context.getString(HomeAndPatcherMessages.getHomeMessage(context))) }
@@ -67,29 +63,20 @@ fun HomeScreen(
     // Handle refresh with haptic feedback
     val onRefresh: () -> Unit = {
         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-        isRefreshing = true
         HomeAndPatcherMessages.resetHomeMessage()
         greetingMessage = context.getString(HomeAndPatcherMessages.getHomeMessage(context))
-        homeViewModel.viewModelScope.launch {
-            try {
-                homeViewModel.patchBundleRepository.updateCheck()
-                homeViewModel.checkForManagerUpdates()
-                delay(500)
-            } finally {
-                isRefreshing = false
-            }
-        }
+        homeViewModel.refresh()
     }
 
     // Collect state flows
     val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
-    val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-
     // Dynamic app items from bundles
     val homeAppItems by homeViewModel.homeAppItems.collectAsStateWithLifecycle()
-
     // Hidden packages filtered to only active-bundle packages (reactive)
     val hiddenAppItems by homeViewModel.hiddenAppItems.collectAsStateWithLifecycle()
+    val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
+    val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
+    val useExpertMode by prefs.useExpertMode.getAsState()
 
     val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
     if (!isDeviceRooted) {
@@ -102,20 +89,10 @@ fun HomeScreen(
         usingMountInstallState.value = homeViewModel.usingMountInstall
     }
 
-    // Calculate if Other Apps button should be visible
-    val useExpertMode by prefs.useExpertMode.getAsState()
-    val showOtherAppsButton = remember(useExpertMode, sources) {
-        if (useExpertMode) true // Always show in expert mode
-        else sources.size > 1 // In simple mode, show only if there are multiple bundles
-    }
-
     // Set up HomeViewModel
     LaunchedEffect(Unit) {
         homeViewModel.onStartQuickPatch = onStartQuickPatch
     }
-
-    // Observe all installed apps
-    val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
 
     // Initialize launchers
     val openApkPicker = rememberLauncherForActivityResult(
@@ -137,37 +114,6 @@ fun HomeScreen(
         contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
 
-    // Update loading state
-    LaunchedEffect(bundleUpdateProgress, allInstalledApps, availablePatches) {
-        val hasLoadedApps = allInstalledApps.isNotEmpty() || availablePatches > 0
-        val isBundleUpdateInProgress = bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.None
-        homeViewModel.updateLoadingState(
-            bundleUpdateInProgress = isBundleUpdateInProgress,
-            hasInstalledApps = hasLoadedApps
-        )
-    }
-
-    // Check for app updates after bundle update completes
-    LaunchedEffect(bundleUpdateProgress, allInstalledApps, sources) {
-        // Only check when bundle update is complete (not in progress)
-        if (bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.Success ||
-            bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.NoUpdates) {
-
-            homeViewModel.checkInstalledAppsForUpdates(
-                installedApps = allInstalledApps,
-            )
-        }
-    }
-
-    // Also check on initial load
-    LaunchedEffect(allInstalledApps, sources) {
-        if (allInstalledApps.isNotEmpty() && sources.isNotEmpty()) {
-            homeViewModel.checkInstalledAppsForUpdates(
-                installedApps = allInstalledApps,
-            )
-        }
-    }
-
     // Handle patch trigger from dialog
     LaunchedEffect(patchTriggerPackage) {
         patchTriggerPackage?.let { packageName ->
@@ -176,23 +122,14 @@ fun HomeScreen(
         }
     }
 
-    // Update deleted status
-    LaunchedEffect(allInstalledApps) {
-        if (allInstalledApps.isNotEmpty()) {
-            homeViewModel.updateDeletedAppsStatus(allInstalledApps)
-        }
-    }
-
-    var showUpdateDetailsDialog by remember { mutableStateOf(false) }
-
     // Check for manager update
     val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
 
     // Manager update details dialog
-    if (showUpdateDetailsDialog) {
+    if (showUpdateDetailsDialog.value) {
         val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })
         ManagerUpdateDetailsDialog(
-            onDismiss = { showUpdateDetailsDialog = false },
+            onDismiss = { showUpdateDetailsDialog.value = false },
             updateViewModel = updateViewModel
         )
     }
@@ -206,38 +143,21 @@ fun HomeScreen(
     }
 
     // Installed App Info Dialog
-    showInstalledAppDialog?.let { packageName ->
+    showInstalledAppDialog.value?.let { packageName ->
         key(packageName) {
             InstalledAppInfoDialog(
                 packageName = packageName,
-                onDismiss = { showInstalledAppDialog = null },
+                onDismiss = { showInstalledAppDialog.value = null },
                 onNavigateToPatcher = { pkg, version, filePath, patches, options ->
-                    showInstalledAppDialog = null
+                    showInstalledAppDialog.value = null
                     onNavigateToPatcher(pkg, version, filePath, patches, options)
                 },
                 onTriggerPatchFlow = { originalPackageName ->
-                    showInstalledAppDialog = null
+                    showInstalledAppDialog.value = null
                     homeViewModel.showPatchDialog(originalPackageName)
                 },
                 homeViewModel = homeViewModel
             )
-        }
-    }
-
-    // Control snackbar visibility
-    LaunchedEffect(bundleUpdateProgress) {
-        if (bundleUpdateProgress == null) {
-            homeViewModel.showBundleUpdateSnackbar = false
-            return@LaunchedEffect
-        }
-        homeViewModel.showBundleUpdateSnackbar = true
-        homeViewModel.snackbarStatus = when (bundleUpdateProgress.result) {
-            PatchBundleRepository.BundleUpdateResult.Success,
-            PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
-            PatchBundleRepository.BundleUpdateResult.NoInternet,
-            PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
-            PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
-            PatchBundleRepository.BundleUpdateResult.SkippedMetered -> BundleUpdateStatus.Warning
         }
     }
 
@@ -276,7 +196,7 @@ fun HomeScreen(
                 snackbarStatus = homeViewModel.snackbarStatus,
                 bundleUpdateProgress = bundleUpdateProgress,
                 hasManagerUpdate = hasManagerUpdate,
-                onShowUpdateDetails = { showUpdateDetailsDialog = true },
+                onShowUpdateDetails = { showUpdateDetailsDialog.value = true },
 
                 // Greeting section
                 greetingMessage = greetingMessage,
@@ -291,13 +211,16 @@ fun HomeScreen(
                         android11BugActive = homeViewModel.android11BugActive,
                         installedApp = item.installedApp
                     )
-                    item.installedApp?.let { showInstalledAppDialog = it.currentPackageName }
+                    item.installedApp?.let { showInstalledAppDialog.value = it.currentPackageName }
                 },
-                onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
+                onInstalledAppClick = { app -> showInstalledAppDialog.value = app.currentPackageName },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                 hiddenAppItems = hiddenAppItems,
                 installedAppsLoading = homeViewModel.installedAppsLoading,
+
+                // Search
+                showSearchButton = showSearchButton,
 
                 // Other apps button
                 onOtherAppsClick = {

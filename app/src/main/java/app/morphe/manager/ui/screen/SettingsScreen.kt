@@ -107,10 +107,10 @@ fun SettingsScreen(
     val useManagerPrereleases = homeViewModel.prefs.useManagerPrereleases.getAsState()
 
     // Dialog states
-    var showAboutDialog by rememberSaveable { mutableStateOf(false) }
-    var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
-    var showInstallerDialog by remember { mutableStateOf(false) }
-    var showChangelogDialog by remember { mutableStateOf(false) }
+    val showAboutDialog = rememberSaveable { mutableStateOf(false) }
+    val showKeystoreCredentialsDialog = rememberSaveable { mutableStateOf(false) }
+    val showInstallerDialog = remember { mutableStateOf(false) }
+    val showChangelogDialog = remember { mutableStateOf(false) }
 
     // Import launchers
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -156,26 +156,26 @@ fun SettingsScreen(
 
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
-        showKeystoreCredentialsDialog = importExportViewModel.showCredentialsDialog
+        showKeystoreCredentialsDialog.value = importExportViewModel.showCredentialsDialog
     }
 
     // Show about dialog
-    if (showAboutDialog) {
-        AboutDialog(onDismiss = { showAboutDialog = false })
+    if (showAboutDialog.value) {
+        AboutDialog(onDismiss = { showAboutDialog.value = false })
     }
 
     // Show keystore credentials dialog
-    if (showKeystoreCredentialsDialog) {
+    if (showKeystoreCredentialsDialog.value) {
         KeystoreCredentialsDialog(
             onDismiss = {
                 importExportViewModel.cancelKeystoreImport()
-                showKeystoreCredentialsDialog = false
+                showKeystoreCredentialsDialog.value = false
             },
             onSubmit = { alias, pass ->
                 coroutineScope.launch {
                     val result = importExportViewModel.tryKeystoreImport(alias, pass)
                     if (result) {
-                        showKeystoreCredentialsDialog = false
+                        showKeystoreCredentialsDialog.value = false
                     } else {
                         context.toast(context.getString(R.string.settings_system_import_keystore_wrong_credentials))
                     }
@@ -185,19 +185,19 @@ fun SettingsScreen(
     }
 
     // Installer selection dialog
-    if (showInstallerDialog) {
+    if (showInstallerDialog.value) {
         InstallerSelectionDialogContainer(
             installerManager = installerManager,
             settingsViewModel = settingsViewModel,
             rootInstaller = rootInstaller,
-            onDismiss = { showInstallerDialog = false }
+            onDismiss = { showInstallerDialog.value = false }
         )
     }
 
     // Manager changelog dialog
-    if (showChangelogDialog) {
+    if (showChangelogDialog.value) {
         ChangelogDialog(
-            onDismiss = { showChangelogDialog = false },
+            onDismiss = { showChangelogDialog.value = false },
             updateViewModel = updateViewModel
         )
     }
@@ -233,15 +233,15 @@ fun SettingsScreen(
                 SettingsTab.SYSTEM -> SystemTabContent(
                     installerManager = installerManager,
                     settingsViewModel = settingsViewModel,
-                    onShowInstallerDialog = { showInstallerDialog = true },
+                    onShowInstallerDialog = { showInstallerDialog.value = true },
                     importExportViewModel = importExportViewModel,
                     onImportKeystore = { importKeystoreLauncher.launch("*/*") },
                     onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
                     onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
                     onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
                     onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
-                    onAboutClick = { showAboutDialog = true },
-                    onChangelogClick = { showChangelogDialog = true },
+                    onAboutClick = { showAboutDialog.value = true },
+                    onChangelogClick = { showChangelogDialog.value = true },
                     prefs = prefs
                 )
             }
@@ -274,18 +274,28 @@ private fun MorpheBottomNavigation(
         color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
         tonalElevation = 3.dp
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
-            SettingsTab.entries.forEach { tab ->
-                NavigationItem(
-                    tab = tab,
-                    isSelected = currentTab == tab,
-                    onClick = { onTabSelected(tab) }
-                )
+            Row(
+                modifier = Modifier
+                    .widthIn(max = 448.dp)
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .animateContentSize(),
+                horizontalArrangement = Arrangement.spacedBy(32.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SettingsTab.entries.forEach { tab ->
+                    val isSelected = currentTab == tab
+                    NavigationItem(
+                        tab = tab,
+                        isSelected = isSelected,
+                        onClick = { onTabSelected(tab) },
+                        modifier = if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp)
+                    )
+                }
             }
         }
     }
@@ -298,7 +308,8 @@ private fun MorpheBottomNavigation(
 private fun NavigationItem(
     tab: SettingsTab,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val containerColor = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer
@@ -316,16 +327,9 @@ private fun NavigationItem(
 
     Surface(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .height(48.dp)
             .clip(RoundedCornerShape(24.dp))
-            .then(
-                if (isSelected) {
-                    Modifier.widthIn(min = 64.dp, max = 140.dp)
-                } else {
-                    Modifier.width(64.dp)
-                }
-            )
             .semantics {
                 role = Role.Tab
                 selected = isSelected

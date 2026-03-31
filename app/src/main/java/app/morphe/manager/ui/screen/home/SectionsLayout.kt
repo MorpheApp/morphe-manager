@@ -81,6 +81,9 @@ fun SectionsLayout(
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
 
+    // Search
+    showSearchButton: Boolean = false,
+
     // Other apps button
     onOtherAppsClick: () -> Unit,
     showOtherAppsButton: Boolean = true,
@@ -93,6 +96,13 @@ fun SectionsLayout(
     isExpertModeEnabled: Boolean = false
 ) {
     val windowSize = rememberWindowSize()
+
+    // Search state hoisted here so both AdaptiveContent and HomeBottomActionBar share it
+    var searchVisible by remember { mutableStateOf(false) }
+    val searchQuery = remember { mutableStateOf("") }
+    LaunchedEffect(searchVisible) { if (!searchVisible) searchQuery.value = "" }
+    // Auto-close search if the button disappears
+    LaunchedEffect(showSearchButton) { if (!showSearchButton) searchVisible = false }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Main layout structure
@@ -117,6 +127,11 @@ fun SectionsLayout(
                     onUnhideApp = onUnhideApp,
                     hiddenAppItems = hiddenAppItems,
                     installedAppsLoading = installedAppsLoading,
+                    showSearchButton = showSearchButton,
+                    searchVisible = searchVisible,
+                    searchQuery = searchQuery.value,
+                    onSearchQueryChange = { searchQuery.value = it },
+                    onSearchToggle = { searchVisible = !searchVisible },
                     onOtherAppsClick = onOtherAppsClick,
                     showOtherAppsButton = showOtherAppsButton,
                     onBundlesClick = onBundlesClick,
@@ -130,7 +145,10 @@ fun SectionsLayout(
                 HomeBottomActionBar(
                     onBundlesClick = onBundlesClick,
                     onSettingsClick = onSettingsClick,
-                    isExpertModeEnabled = isExpertModeEnabled
+                    isExpertModeEnabled = isExpertModeEnabled,
+                    showSearchButton = showSearchButton,
+                    searchActive = searchVisible,
+                    onSearchClick = { searchVisible = !searchVisible }
                 )
             }
         }
@@ -164,6 +182,11 @@ private fun AdaptiveContent(
     onUnhideApp: (String) -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean,
+    showSearchButton: Boolean = false,
+    searchVisible: Boolean = false,
+    searchQuery: String = "",
+    onSearchQueryChange: (String) -> Unit = {},
+    onSearchToggle: () -> Unit = {},
     onOtherAppsClick: () -> Unit,
     showOtherAppsButton: Boolean = true,
     onBundlesClick: () -> Unit = {},
@@ -173,6 +196,11 @@ private fun AdaptiveContent(
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
     val useTwoColumns = windowSize.useTwoColumnLayout
+
+    // True empty state: loaded and no items from any bundle: all disabled or no sources
+    val isAppsEmpty by remember(homeAppItems, installedAppsLoading) {
+        derivedStateOf { !installedAppsLoading && homeAppItems.isEmpty() }
+    }
 
     Column(
         modifier = Modifier
@@ -206,6 +234,9 @@ private fun AdaptiveContent(
                         onBundlesClick = onBundlesClick,
                         onSettingsClick = onSettingsClick,
                         isExpertModeEnabled = isExpertModeEnabled,
+                        showSearchButton = showSearchButton && !isAppsEmpty,
+                        searchActive = searchVisible,
+                        onSearchClick = onSearchToggle,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
@@ -226,13 +257,19 @@ private fun AdaptiveContent(
                         onUnhideApp = onUnhideApp,
                         hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
+                        searchVisible = searchVisible,
+                        searchQuery = searchQuery,
+                        onSearchQueryChange = onSearchQueryChange,
+                        onBundlesClick = onBundlesClick,
                         modifier = Modifier.weight(1f)
                     )
 
-                    // Section 4: Other apps
-                    if (!showOtherAppsButton) {
-                        Spacer(modifier = Modifier.height(48.dp + itemSpacing))
-                    } else {
+                    // Section 4: Other apps - hidden when no apps available or bundles loading
+                    AnimatedVisibility(
+                        visible = !isAppsEmpty && showOtherAppsButton,
+                        enter = fadeIn(tween(300)) + expandVertically(tween(300)),
+                        exit = fadeOut(tween(200)) + shrinkVertically(tween(200))
+                    ) {
                         OtherAppsSection(
                             onClick = onOtherAppsClick,
                             modifier = Modifier.fillMaxWidth()
@@ -262,20 +299,27 @@ private fun AdaptiveContent(
                         onUnhideApp = onUnhideApp,
                         hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
+                        searchVisible = searchVisible,
+                        searchQuery = searchQuery,
+                        onSearchQueryChange = onSearchQueryChange,
+                        onBundlesClick = onBundlesClick,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
 
-                Spacer(modifier = Modifier.height(itemSpacing))
-
-                // Section 4: Other apps
-                if (!showOtherAppsButton) {
-                    Spacer(modifier = Modifier.height(48.dp + itemSpacing))
-                } else {
-                    OtherAppsSection(
-                        onClick = onOtherAppsClick,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                // Section 4: Other apps - hidden when no apps available or bundles loading
+                AnimatedVisibility(
+                    visible = !isAppsEmpty && showOtherAppsButton,
+                    enter = fadeIn(tween(300)) + expandVertically(tween(300)),
+                    exit = fadeOut(tween(200)) + shrinkVertically(tween(200))
+                ) {
+                    Column {
+                        Spacer(modifier = Modifier.height(itemSpacing))
+                        OtherAppsSection(
+                            onClick = onOtherAppsClick,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
             }
         }
@@ -673,6 +717,10 @@ fun MainAppsSection(
     onUnhideApp: (String) -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
+    searchVisible: Boolean = false,
+    searchQuery: String = "",
+    onSearchQueryChange: (String) -> Unit = {},
+    onBundlesClick: () -> Unit = {},
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -711,95 +759,251 @@ fun MainAppsSection(
         )
     }
 
+    // Filtered items based on search query
+    val filteredItems = remember(homeAppItems, searchQuery) {
+        if (searchQuery.isBlank()) homeAppItems
+        else homeAppItems.filter { item ->
+            item.displayName.contains(searchQuery, ignoreCase = true) ||
+                    item.packageName.contains(searchQuery, ignoreCase = true)
+        }
+    }
+
     val listState = rememberLazyListState()
     val fadeSize = 24.dp
+
+    // True empty state: loaded but no apps at all: all bundles disabled or no sources
+    val isEmptyState = !stableLoadingState && homeAppItems.isEmpty()
+    // Search empty state: items exist but nothing matches query
+    val isSearchEmpty = !stableLoadingState && homeAppItems.isNotEmpty() &&
+            searchQuery.isNotBlank() && filteredItems.isEmpty()
 
     Box(
         modifier = modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .widthIn(max = 500.dp)
-                .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
-                .drawWithContent {
-                    drawContent()
-                    val fadePx = fadeSize.toPx()
-                    val canScrollUp = listState.firstVisibleItemIndex > 0 ||
-                            listState.firstVisibleItemScrollOffset > 0
-                    if (canScrollUp) {
-                        drawRect(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(Color.Transparent, Color.Black),
-                                startY = 0f,
-                                endY = fadePx
-                            ),
-                            blendMode = BlendMode.DstIn
-                        )
-                    }
-                    val canScrollDown = listState.canScrollForward
-                    if (canScrollDown) {
-                        drawRect(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(Color.Black, Color.Transparent),
-                                startY = size.height - fadePx,
-                                endY = size.height
-                            ),
-                            blendMode = BlendMode.DstIn
-                        )
-                    }
-                },
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(itemSpacing),
-            contentPadding = PaddingValues(vertical = 8.dp)
-        ) {
-            // Cold start: homeAppItems still empty - show placeholder shimmer cards
-            if (stableLoadingState && homeAppItems.isEmpty()) {
-                items(3, key = { "placeholder_$it" }) { index ->
-                    AppLoadingCard(
-                        gradientColors = placeholderGradients[index % placeholderGradients.size],
-                        modifier = Modifier.animateItem()
-                    )
-                }
+        AnimatedContent(
+            targetState = isEmptyState,
+            transitionSpec = {
+                fadeIn(tween(300)) togetherWith fadeOut(tween(200))
+            },
+            label = "home_empty_state"
+        ) { empty ->
+            if (empty) {
+                HomeEmptyState(onBundlesClick = onBundlesClick)
             } else {
-                items(
-                    items = homeAppItems,
-                    key = { it.packageName }
-                ) { item ->
-                    DynamicAppCard(
-                        item = item,
-                        isLoading = stableLoadingState,
-                        hasUpdate = item.hasUpdate,
-                        onAppClick = { onAppClick(item) },
-                        onInstalledAppClick = onInstalledAppClick,
-                        onHide = { onHideApp(item.packageName) },
-                        modifier = Modifier.animateItem()
-                    )
-                }
+                Column(
+                    modifier = Modifier
+                        .widthIn(max = 500.dp)
+                        .fillMaxWidth()
+                ) {
+                    // Search bar
+                    AnimatedVisibility(
+                        visible = searchVisible,
+                        enter = expandVertically(tween(250)) + fadeIn(tween(250)),
+                        exit = shrinkVertically(tween(200)) + fadeOut(tween(200))
+                    ) {
+                        HomeSearchTextField(
+                            value = searchQuery,
+                            onValueChange = onSearchQueryChange,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                    }
 
-                // "Show hidden apps" button if there are hidden apps
-                if (hiddenAppItems.isNotEmpty()) {
-                    item(key = "show_hidden") {
-                        TextButton(
-                            onClick = { showHiddenAppsDialog.value = true },
-                            modifier = Modifier.padding(top = 4.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Visibility,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = stringResource(R.string.home_app_show_hidden),
-                                style = MaterialTheme.typography.bodyMedium
-                            )
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+                            .drawWithContent {
+                                drawContent()
+                                val fadePx = fadeSize.toPx()
+                                val canScrollUp = listState.firstVisibleItemIndex > 0 ||
+                                        listState.firstVisibleItemScrollOffset > 0
+                                if (canScrollUp) {
+                                    drawRect(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(Color.Transparent, Color.Black),
+                                            startY = 0f,
+                                            endY = fadePx
+                                        ),
+                                        blendMode = BlendMode.DstIn
+                                    )
+                                }
+                                val canScrollDown = listState.canScrollForward
+                                if (canScrollDown) {
+                                    drawRect(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(Color.Black, Color.Transparent),
+                                            startY = size.height - fadePx,
+                                            endY = size.height
+                                        ),
+                                        blendMode = BlendMode.DstIn
+                                    )
+                                }
+                            },
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(itemSpacing),
+                        contentPadding = PaddingValues(vertical = 8.dp)
+                    ) {
+                        // Cold start: homeAppItems still empty - show placeholder shimmer cards
+                        if (stableLoadingState && homeAppItems.isEmpty()) {
+                            items(3, key = { "placeholder_$it" }) { index ->
+                                AppLoadingCard(
+                                    gradientColors = placeholderGradients[index % placeholderGradients.size],
+                                    modifier = Modifier.animateItem()
+                                )
+                            }
+                        } else {
+                            items(
+                                items = filteredItems,
+                                key = { it.packageName }
+                            ) { item ->
+                                DynamicAppCard(
+                                    item = item,
+                                    isLoading = stableLoadingState,
+                                    hasUpdate = item.hasUpdate,
+                                    onAppClick = { onAppClick(item) },
+                                    onInstalledAppClick = onInstalledAppClick,
+                                    onHide = { onHideApp(item.packageName) },
+                                    modifier = Modifier.animateItem()
+                                )
+                            }
+
+                            // Search empty result
+                            if (isSearchEmpty) {
+                                item(key = "search_empty") {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 32.dp)
+                                            .animateItem(),
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.SearchOff,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(40.dp),
+                                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.search_no_results),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
+                                }
+                            }
+
+                            // "Show hidden apps" button if there are hidden apps
+                            if (hiddenAppItems.isNotEmpty()) {
+                                item(key = "show_hidden") {
+                                    TextButton(
+                                        onClick = { showHiddenAppsDialog.value = true },
+                                        modifier = Modifier.padding(top = 4.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Visibility,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Text(
+                                            text = stringResource(R.string.home_app_show_hidden),
+                                            style = MaterialTheme.typography.bodyMedium
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+    }
+}
+
+/**
+ * Empty state shown when no apps are available from any bundle.
+ * Typically, seen when all sources are disabled or none added yet.
+ */
+@Composable
+private fun HomeEmptyState(
+    onBundlesClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .widthIn(max = 500.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp, vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.Inbox,
+            contentDescription = null,
+            modifier = Modifier.size(56.dp),
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
+        )
+        Text(
+            text = stringResource(R.string.home_no_apps_title),
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = stringResource(R.string.home_no_apps_subtitle, stringResource(R.string.sources_management_title)),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        FilledTonalButton(onClick = onBundlesClick) {
+            Icon(
+                imageVector = Icons.Outlined.Source,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(stringResource(R.string.sources_management_title))
+        }
+    }
+}
+
+/**
+ * Standalone search field for the home screen.
+ * Wraps [MorpheDialogTextField] with [LocalDialogTextColor] set to onSurface
+ * so it renders correctly outside a dialog context.
+ */
+@Composable
+private fun HomeSearchTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CompositionLocalProvider(LocalDialogTextColor provides MaterialTheme.colorScheme.onSurface) {
+        MorpheDialogTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = { Text(stringResource(R.string.home_search_apps)) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Search,
+                    contentDescription = null
+                )
+            },
+            showClearButton = true,
+            modifier = modifier
+        )
     }
 }
 

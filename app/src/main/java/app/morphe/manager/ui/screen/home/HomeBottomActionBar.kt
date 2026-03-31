@@ -2,13 +2,14 @@ package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
+import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Engineering
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -27,13 +28,16 @@ import app.morphe.manager.R
 
 /**
  * Section 5: Bottom action bar
- * Bundles and Settings buttons positioned left and right
+ * Sources | Search (optional, center) | Settings
  */
 @Composable
 fun HomeBottomActionBar(
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,
     isExpertModeEnabled: Boolean = false,
+    showSearchButton: Boolean = false,
+    searchActive: Boolean = false,
+    onSearchClick: () -> Unit = {},
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -57,6 +61,23 @@ fun HomeBottomActionBar(
                 text = stringResource(R.string.sources_management_title),
                 modifier = Modifier.weight(1f)
             )
+
+            // Center: Search button
+            AnimatedVisibility(
+                visible = showSearchButton,
+                modifier = Modifier.weight(1f),
+                enter = fadeIn(animationSpec = tween(220)) +
+                        expandHorizontally(animationSpec = tween(280, easing = FastOutSlowInEasing)),
+                exit = fadeOut(animationSpec = tween(180)) +
+                        shrinkHorizontally(animationSpec = tween(240, easing = FastOutSlowInEasing))
+            ) {
+                BottomActionButton(
+                    onClick = onSearchClick,
+                    icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                    text = stringResource(R.string.home_search_apps),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
 
             // Right: Settings button with expert mode indicator
             BottomActionButton(
