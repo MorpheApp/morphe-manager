@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Näytä piilotetut sovellukset</string>
     <string name="home_app_no_hidden">Ei piilotettuja sovelluksia</string>
     <string name="home_app_hidden_apps_title">Piilotetut sovellukset</string>
-    <string name="home_app_hidden_apps_hint">Klikkaa sovellusta nähdäksesi sen listassa uudelleen</string>
+    <string name="home_app_hidden_apps_hint">Napauta paljastaaksesi</string>
     <string name="android_11_bug_dialog_title">Android 11 virhe</string>
     <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
     <string name="deep_link_add_source_title">Lisää lähde</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Lähteiden päivitys valmis</string>
     <string name="home_update_success_subtitle">Lähteetsinä päivitety</string>
     <string name="home_sources_are_loading">Lähteet ladassa, odota…</string>
-    <string name="home_please_wait">Odota hetki…</string>
+    <string name="home_search_apps">Sovellusten haku</string>
+    <string name="home_no_apps_title">Sovelluksia ei saatavilla</string>
+    <string name="home_no_apps_subtitle">Lisää päivityslähde tai ota olemassa oleva käyttöön %s</string>
+    <string name="home_no_apps_search_subtitle">Yhtään sovellusta ei löytynyt hakusanalla \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Minkä sovelluksen haluat korjata?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -601,12 +604,11 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_share_website">Jaa verkkosivusto</string>
     <string name="settings_system_share_website_description">Jaa Morphen virallinen verkkosivusto</string>
-    <string name="settings_system_manager_description">"Morphe on kokeellinen avoin lähdeprojekti, joka keskittyy luomaan modernin, nopean patchaamisen Android-sovellusten patchaamista
-
-Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, jotta tuottaa tulevaisuuden kehittämistä"</string>
+    <string name="settings_system_manager_description">"Kokeellinen avoimen lähdekoodin projekti suosittujen Android-sovellusten moderniin ja virtaviivaisen korjaamiseen, joka perustuu yhteisön palautteeseen ja panokseen"</string>
     <string name="credits">Tekijät</string>
     <string name="credits_current_development">Nykyinen kehitys</string>
     <string name="credits_prior_development">Aikaisempi kehitys</string>
+    <string name="opensource_licenses">Avoimen lähdekoodin lisenssit</string>
     <!-- Shared strings -->
     <string name="patches">Korjaustiedostot</string>
     <string name="home">Koti</string>

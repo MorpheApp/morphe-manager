@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">แสดงแอปที่ซ่อนอยู่</string>
     <string name="home_app_no_hidden">ไม่มีแอปที่ซ่อนอยู่</string>
     <string name="home_app_hidden_apps_title">แอปที่ซ่อนอยู่</string>
-    <string name="home_app_hidden_apps_hint">กดแอปเพื่อแสดงในรายการอีกครั้ง</string>
+    <string name="home_app_hidden_apps_hint">แตะเพื่อแสดง</string>
     <string name="android_11_bug_dialog_title">บัก Android 11</string>
     <string name="android_11_bug_dialog_description">ต้องอนุญาตเปิดสิทธิเข้าถึงการติดตั้งแอปพลิเคชันก่อน เพื่อหลีกเลี่ยงปัญหาจากระบบปฏิบัติการ Android 11 ที่มีผลกระทบต่อการใช้งานแอปพลิเคชันนี้</string>
     <string name="deep_link_add_source_title">เพิ่มแหล่งที่มา</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">การอัพเดทแหล่งข้อมูลเสร็จสมบูรณ์แล้ว</string>
     <string name="home_update_success_subtitle">แหล่งข้อมูลของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งข้อมูล กรุณารอสักครู่…</string>
-    <string name="home_please_wait">โปรดรอสักครู่…</string>
+    <string name="home_search_apps">ค้นหาแอป</string>
+    <string name="home_no_apps_title">ไม่มีแอปให้ใช้งาน</string>
+    <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
+    <string name="home_no_apps_search_subtitle">ไม่มีแอปที่ตรงกับ \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">คุณต้องการแพ็ตช์แอปใด</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -603,10 +606,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
     <string name="settings_system_share_website_description">เลือก</string>
-    <string name="settings_system_manager_description">"ไม่เลือก"</string>
+    <string name="settings_system_manager_description">"โครงการโอเพนซอร์สเชิงทดลองสำหรับการปรับปรุงแอป Android ยอดนิยมให้ทันสมัยและคล่องตัว โดยขับเคลื่อนด้วยข้อเสนอแนะและการมีส่วนร่วมของชุมชน"</string>
     <string name="credits">เครดิต</string>
     <string name="credits_current_development">การพัฒนาปัจจุบัน</string>
     <string name="credits_prior_development">การพัฒนาที่ผ่านมา</string>
+    <string name="opensource_licenses">สัญญาอนุญาตโอเพนซอร์ส</string>
     <!-- Shared strings -->
     <string name="patches">แพตช์</string>
     <string name="home">หน้าแรก</string>

@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Ipakita ang mga nakatagong aplikasyon</string>
     <string name="home_app_no_hidden">Walang mga nakatagong aplikasyon</string>
     <string name="home_app_hidden_apps_title">Mga nakatagong aplikasyon</string>
-    <string name="home_app_hidden_apps_hint">Pindutin ang isang aplikasyon upang ipakita muli sa listahan</string>
+    <string name="home_app_hidden_apps_hint">I-tap para ipakita</string>
     <string name="android_11_bug_dialog_title">Isang pagkakamali sa Android 11</string>
     <string name="android_11_bug_dialog_description">Dapat pahintulutan nang maaga ang pahintulot sa pag-install ng app para maiwasan ang isang pagkakamali sa sistema ng Android 11 na negatibong makakaapekto sa karanasan ng tagagamit</string>
     <string name="deep_link_add_source_title">Magdagdag ng mapagkukunan</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Nakumpleto ang mga mapagkukunan ng update</string>
     <string name="home_update_success_subtitle">Napapanahon ang iyong mga mapagkukunan</string>
     <string name="home_sources_are_loading">Naglo-load ang iyong mga mapagkukunan, mangyaring maghintay…</string>
-    <string name="home_please_wait">Mangyaring maghintay…</string>
+    <string name="home_search_apps">Maghanap ng mga app</string>
+    <string name="home_no_apps_title">Walang available na mga app</string>
+    <string name="home_no_apps_subtitle">Magdagdag ng pinagmulan ng patch o paganahin ang isang umiiral na isa sa %s</string>
+    <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Anong app ang gusto mong i-patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_about">Tungkol sa</string>
     <string name="settings_system_share_website">Ibahagi ang website</string>
     <string name="settings_system_share_website_description">Ibahagi ang opisyal na Morphe website</string>
-    <string name="settings_system_manager_description">"Ang Morphe ay isang pang-eksperimentong open-source na proyekto na nakatuon sa paggawa ng moderno, naka-streamline na pag-patch ng mga sikat na Android aplikasyon
-
-Open-source sa core nito, ang Morphe ay umuunlad sa katugunan ng komunidad at mga kontribusyon upang himukin ang pagbabago sa hinaharap"</string>
+    <string name="settings_system_manager_description">"Isang eksperimental na open-source project para sa moderno, pinasimpleng pag-patch ng mga sikat na Android app, na itinutulak ng feedback at kontribusyon mula sa komunidad"</string>
     <string name="credits">Kredito</string>
     <string name="credits_current_development">Kasalukuyang pag-unlad</string>
     <string name="credits_prior_development">Naunang pag-unlad</string>
+    <string name="opensource_licenses">Open-source licenses</string>
     <!-- Shared strings -->
     <string name="patches">Mga patch</string>
     <string name="home">Bahay</string>

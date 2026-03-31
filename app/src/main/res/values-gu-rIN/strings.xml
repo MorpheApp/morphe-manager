@@ -10,7 +10,6 @@
     <string name="home_app_show_hidden">છુપાવેલ એપ્લિકેશનો બતાવો</string>
     <string name="home_app_no_hidden">કોઈ છુપાવેલી એપ્લિકેશનો નથી</string>
     <string name="home_app_hidden_apps_title">છુપાવેલ એપ્લિકેશનો</string>
-    <string name="home_app_hidden_apps_hint">એપ્લિકેશનને ફરીથી સૂચિમાં બતાવવા માટે તેના પર ટેપ કરો</string>
     <string name="android_11_bug_dialog_title">એન્ડ્રોઇડ 11 બગ</string>
     <string name="android_11_bug_dialog_description">એપ ઇન્સ્ટોલેશનની પરવાનગી પહેલેથી જ આપવી જરૂરી છે, કારણ કે Android 11 સિસ્ટમમાં એક બગ છે જે યુઝર અનુભવને નકારાત્મક રીતે અસર કરી શકે છે</string>
     <string name="deep_link_add_source_title">સ્ત્રોત ઉમેરો</string>
@@ -27,7 +26,6 @@
     <string name="home_update_progress_format">%1$s પર પ્રક્રિયા થઈ</string>
     <string name="home_update_success">સ્ત્રોતો અધ્યતન કરવાનું પૂર્ણ થયું</string>
     <string name="home_update_success_subtitle">તમારા સ્ત્રોતો અધ્યતન જ છે</string>
-    <string name="home_please_wait">કૃપા કરીને રાહ જુઓ...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">તમે કઈ એપ્લિકેશનને પેચ કરવા માંગો છો?</string>
     <!-- Humorous hype message with light nostalgia -->

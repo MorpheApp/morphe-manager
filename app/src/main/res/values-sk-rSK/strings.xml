@@ -10,7 +10,6 @@
     <string name="home_app_show_hidden">Zobraziť skryté aplikácie</string>
     <string name="home_app_no_hidden">Žiadne skryté aplikácie</string>
     <string name="home_app_hidden_apps_title">Skryté aplikácie</string>
-    <string name="home_app_hidden_apps_hint">Ťuknite na aplikáciu, aby sa opäť zobrazila v zozname</string>
     <string name="android_11_bug_dialog_title">Chyba v Android 11</string>
     <string name="android_11_bug_dialog_description">Je potrebné vopred povoliť inštaláciu aplikácie, aby sa predišlo chybe v systéme Android 11, ktorá negatívne ovplyvní používateľskú skúsenosť</string>
     <string name="deep_link_add_source_title">Pridať zdroj</string>
@@ -28,7 +27,6 @@
     <string name="home_update_success">Aktualizácia zdrojov dokončená</string>
     <string name="home_update_success_subtitle">Vaše zdroje sú aktuálne</string>
     <string name="home_sources_are_loading">Zdroje sa načítavajú, prosím počkajte…</string>
-    <string name="home_please_wait">Čakajte prosím...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ktorú aplikáciu chcete zaplátať?</string>
     <!-- Humorous hype message with light nostalgia -->

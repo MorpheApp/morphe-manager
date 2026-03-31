@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">দেখুন গোপন অ্যাপস</string>
     <string name="home_app_no_hidden">কোনো গোপন অ্যাপ নেই</string>
     <string name="home_app_hidden_apps_title">গোপন অ্যাপস</string>
-    <string name="home_app_hidden_apps_hint">একটি অ্যাপে ট্যাপ করুন এটি আবার তালিকায় দেখানোর জন্য</string>
+    <string name="home_app_hidden_apps_hint">\"লুকানো অ্যাপ দেখতে ট্যাপ করুন\"</string>
     <string name="android_11_bug_dialog_title">অ্যান্ড্রয়েড ১১ বাগ</string>
     <string name="android_11_bug_dialog_description">এক্সপ্লোর 11 সিস্টেমের একটি বাগের কারণে অ্যাপ ইনস্টলেশন অনুমতি আগে দেওয়া উচিত। এটি ব্যবহারকারীর অভিজ্ঞতাকে নেতিবাচকভাবে প্রভাবিত করবে</string>
     <string name="deep_link_add_source_title">সোর্স যোগ করুন</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ হয়েছে</string>
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
-    <string name="home_please_wait">অনুগ্রহ করে অপেক্ষা করুন…</string>
+    <string name="home_search_apps">অ্যাপস অনুসন্ধান করুন</string>
+    <string name="home_no_apps_title">কোনো অ্যাপস পাওয়া যায়নি</string>
+    <string name="home_no_apps_subtitle">একটি প্যাচ উৎস যোগ করুন অথবা %s-এ বিদ্যমান একটি সক্ষম করুন</string>
+    <string name="home_no_apps_search_subtitle">কোনো অ্যাপস \"%1$s\"-এর সাথে মেলে না</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">আপনি কোন অ্যাপ প্যাচ করতে চান?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -594,12 +597,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>
     <string name="settings_system_share_website">ওয়েবসাইট শেয়ার করুন</string>
     <string name="settings_system_share_website_description">মরফে অফিসিয়াল ওয়েবসাইট শেয়ার করুন</string>
-    <string name="settings_system_manager_description">"মরফে একটি পরীক্ষামূল, খোল-উৎসাহা প্রকল্প যা আপনার ফিডব্যাকের ফিডব্যাক ও অবদানকে ভিত্ত করে ভবিষ্যতা ও উন্নতরনের জন্য সম্প্রদিত হয়।
-
-মরফে খোল-উৎসাহা প্রকল্পের ভিত্তে, এটি সম্প্রদিত সম্প্রদনের ও অবদানের উপর নির্ভরিত।"</string>
+    <string name="settings_system_manager_description">"একটি পরীক্ষামূলক ওপেন-সোর্স প্রকল্প, যা জনপ্রিয় অ্যান্ড্রয়েড অ্যাপগুলির আধুনিক, সরলীকৃত প্যাচিংয়ের জন্য তৈরি করা হয়েছে, এবং এটি কমিউনিটির মতামত ও অবদানের মাধ্যমে চালিত।"</string>
     <string name="credits">ক্রেডিট</string>
     <string name="credits_current_development">চলমান উন্নয়ন</string>
     <string name="credits_prior_development">পূর্ববর্তী উন্নয়ন</string>
+    <string name="opensource_licenses">ওপেন-সোর্স লাইসেন্স।</string>
     <!-- Shared strings -->
     <string name="patches">প্যাচ</string>
     <string name="home">হোম</string>

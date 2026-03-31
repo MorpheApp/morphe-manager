@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Afficher les applications masquées</string>
     <string name="home_app_no_hidden">Pas d\'applications masquées</string>
     <string name="home_app_hidden_apps_title">Applications masquées</string>
-    <string name="home_app_hidden_apps_hint">Appuyez sur une application pour l’afficher à nouveau dans la liste</string>
+    <string name="home_app_hidden_apps_hint">Appuyez pour afficher</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">L\'autorisation d\'installation de l\'application doit être accordée à l\'avance afin d\'éviter un bug dans le système Android 11 qui affectera négativement l\'expérience utilisateur</string>
     <string name="deep_link_add_source_title">Ajouter la source</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Mise à jour des sources complète</string>
     <string name="home_update_success_subtitle">Vos sources sont à jour</string>
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
-    <string name="home_please_wait">Veuillez patienter…</string>
+    <string name="home_search_apps">Rechercher des applications</string>
+    <string name="home_no_apps_title">Aucune application disponible</string>
+    <string name="home_no_apps_subtitle">Ajouter une source de patch ou activer une source existante dans %s</string>
+    <string name="home_no_apps_search_subtitle">Aucune application ne correspond à \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quelle application voulez-vous patcher ?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -604,12 +607,11 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_about">À propos</string>
     <string name="settings_system_share_website">Partager le site web</string>
     <string name="settings_system_share_website_description">Partagez le site web officiel de Morphe</string>
-    <string name="settings_system_manager_description">"Morphe est un projet open source expérimental axé sur la création d'un patchage moderne et rationalisé pour les applications Android populaires.
-
-Open source dans son essence même, Morphe s'appuie sur les commentaires et les contributions de la communauté pour stimuler l'innovation future."</string>
+    <string name="settings_system_manager_description">"Un projet open-source expérimental pour le patching moderne et rationalisé d'applications Android populaires, basé sur les commentaires et les contributions de la communauté"</string>
     <string name="credits">Crédits</string>
     <string name="credits_current_development">Développement en cours</string>
     <string name="credits_prior_development">Développements antérieurs</string>
+    <string name="opensource_licenses">Licences open-source</string>
     <!-- Shared strings -->
     <string name="patches">Patchs</string>
     <string name="home">Accueil</string>

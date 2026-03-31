@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Prikaži sakrivene aplikacije</string>
     <string name="home_app_no_hidden">Nema sakrivenih aplikacija</string>
     <string name="home_app_hidden_apps_title">Sakrivene aplikacije</string>
-    <string name="home_app_hidden_apps_hint">Dodirnite aplikaciju da bi je ponovo prikazali na listi</string>
+    <string name="home_app_hidden_apps_hint">Dodirnite da otkrijete</string>
     <string name="android_11_bug_dialog_title">Android 11 greška</string>
     <string name="android_11_bug_dialog_description">Dozvola za instalaciju aplikacije mora biti odobrena prethodno kako bi se izbjegla greška u Android 11 sistemu koja će negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Dodaj izvor</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Ažuriranje izvora završeno</string>
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo sačekajte…</string>
-    <string name="home_please_wait">Molimo sačekajte…</string>
+    <string name="home_search_apps">Pretraživanje aplikacija</string>
+    <string name="home_no_apps_title">Nema dostupnih aplikacija</string>
+    <string name="home_no_apps_subtitle">Dodajte izvor aplikacije ili omogućite postojeći u %s</string>
+    <string name="home_no_apps_search_subtitle">Nema aplikacija koje odgovaraju \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Koju aplikaciju želite da zakrpite?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -586,12 +589,11 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_about">O programu</string>
     <string name="settings_system_share_website">Podeli mrežni-sajt</string>
     <string name="settings_system_share_website_description">Dijeli službeni veb-sajt Morphea</string>
-    <string name="settings_system_manager_description">"Morphe je eksperimentalni otvoreni izvorni projekt fokusiran na stvaranje modernog, efikasnog patchiranja popularnih Android aplikacija
-
-Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i doprinosa za budu inovaciju"</string>
+    <string name="settings_system_manager_description">"Eksperimentalni open-source projekat za moderno, pojednostavljeno ispravljanje popularnih Android aplikacija, vođen povratnim informacijama i doprinosima zajednice"</string>
     <string name="credits">Заслуге</string>
     <string name="credits_current_development">Тренутни развој</string>
     <string name="credits_prior_development">Претходни развој</string>
+    <string name="opensource_licenses">Open-source licence</string>
     <!-- Shared strings -->
     <string name="patches">Zakrpe</string>
     <string name="home">Početna</string>

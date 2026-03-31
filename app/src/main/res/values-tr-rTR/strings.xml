@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Gizli uygulamaları göster</string>
     <string name="home_app_no_hidden">Gizli uygulama yok</string>
     <string name="home_app_hidden_apps_title">Gizli uygulamalar</string>
-    <string name="home_app_hidden_apps_hint">Uygulamaya dokunarak listeye geri getirin</string>
+    <string name="home_app_hidden_apps_hint">Gizliliği kaldırmak için dokunun</string>
     <string name="android_11_bug_dialog_title">Android 11 hatası</string>
     <string name="android_11_bug_dialog_description">Android 11 sistemindeki kullanıcı deneyimini olumsuz etkileyecek bir hatayı önlemek için uygulama yükleme izninin önceden verilmesi gerekmektedir</string>
     <string name="deep_link_add_source_title">Kaynak ekle</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Kaynak güncellemesi tamamlandı</string>
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
-    <string name="home_please_wait">Lütfen bekleyin…</string>
+    <string name="home_search_apps">Uygulamaları ara</string>
+    <string name="home_no_apps_title">Uygulama bulunamadı</string>
+    <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
+    <string name="home_no_apps_search_subtitle">\"%1$s\" ile eşleşen uygulama bulunamadı</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -80,7 +83,7 @@
     <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' güncellenemedi: yama JSON dosyası belirtilen URL\'de bulunamadı</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Orijinal, yamalanmamış bir APK bulmakta yardıma ihtiyacınız var mı?</string>
+    <string name="home_apk_availability_dialog_title">Orijinal, yamalanmamış APK bulmada yardıma ihtiyacınız var mı?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;\'i yamalamak için bu yamalanmamış APK sürümüne ihtiyacınız var:</string>
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt;\'i yamalamak için bu yamalanmamış APK sürümlerinden birine ihtiyacınız var:</string>
     <string name="home_apk_availability_recommended_label">Önerilen</string>
@@ -165,7 +168,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Adaptif simge oluştur</string>
     <string name="adaptive_icon_instructions">Bir ön plan görüntüsü seçin, arka plan rengini belirleyin, ardından kaydırıcıyı veya sıkıştırma hareketlerini kullanarak ön izlemeyi ayarlayın</string>
-    <string name="adaptive_icon_preview">Uyarlanabilir simge önizlemesi</string>
+    <string name="adaptive_icon_preview">Uyarlanabilir simge ön izlemesi</string>
     <string name="adaptive_icon_preview_hint">En iyi sonuç için simgenizi ortadaki katı iç çemberin içinde tutun</string>
     <string name="adaptive_icon_select_image">Resim seç</string>
     <string name="adaptive_icon_change_image">Resmi değiştir</string>
@@ -176,7 +179,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="adaptive_icon_created_success">Adaptif simge başarıyla oluşturuldu</string>
     <string name="adaptive_icon_creation_failed">Adaptif simge oluşturulamadı</string>
     <string name="adaptive_icon_folder_explanation">Oluşturulan simge dosyalarıyla \'%1$s/%2$s\' klasörünün nerede oluşturulacağını seçin</string>
-    <string name="notification_icon_preview">Bildirim simgesi önizlemesi</string>
+    <string name="notification_icon_preview">Bildirim simgesi ön izlemesi</string>
     <string name="notification_icon_preview_hint">Yeniden boyutlandırmak için kaydırıcıyı kullanın. Konumlandırmak için sürükleyin</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Özel başlık oluştur</string>
@@ -238,12 +241,12 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_install_error_subtitle">Kaldırıp tekrar yüklemeyi deneyin</string>
     <string name="patcher_ready_to_install_subtitle">Yüklemek için aşağıdaki düğmeye basın</string>
     <string name="patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
-    <string name="patcher_storage_permission_dialog_title">Depo yolu erişimine erişilemiyor</string>
+    <string name="patcher_storage_permission_dialog_title">Depolama yoluna erişilemiyor</string>
     <string name="patcher_storage_permission_description_api30">Bir veya daha fazla yama seçeneği, Morphe\'nin okuyamadığı yollara işaret ediyor. Depolama erişimini verin ve düğmeye dokunun, ardından yamalama otomatik olarak başlayacaktır</string>
-    <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla çözüm seçeneği erişime açıksız yollara işaret ediyor. Çözüm seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
-    <string name="patcher_storage_permission_grant">Depo erişimi izni verin</string>
+    <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla yama seçeneği, erişilemeyen yollara işaret ediyor. Yama seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
+    <string name="patcher_storage_permission_grant">Depolama izni verin</string>
     <string name="patcher_storage_permission_denied_warning">Depolama izni reddedildi. Bu yolu kullanmak için izni verin veya dosyaları uygulamaların özel dizinine taşıyın</string>
-    <string name="patcher_storage_permission_open_settings">Depo ayarlarını aç</string>
+    <string name="patcher_storage_permission_open_settings">Depolama ayarlarını aç</string>
     <string name="patcher_storage_badge_denied">İzin reddedildi</string>
     <string name="patcher_storage_badge_missing">Bulunamadı</string>
     <string name="patcher_storage_permission_hint">İpucu: Dosyaları /Android/data/app.morphe.manager/files/ dizinine taşıyın - ekstra izin gerektirmez</string>
@@ -501,7 +504,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_hint_conflict">Aynı paket adıyla başka bir uygulama zaten yüklü. Devam etmek için onu kaldırın.</string>
     <string name="installer_hint_incompatible">APK cihaz veya Android sürümü ile uyumlu değil.</string>
     <string name="installer_hint_invalid">APK geçersiz veya bozuk.</string>
-    <string name="installer_hint_storage">Yükleme için yeterli depolama alanı yok.</string>
+    <string name="installer_hint_storage">Yükleme için yeterli depolama alanı yok</string>
     <string name="installer_hint_timeout">Yükleme zaman aşımına uğradı. Tekrar deneyin.</string>
     <string name="installer_hint_aborted">Yükleme iptal edildi.</string>
     <string name="installer_external_launched">%1$s açılıyor…</string>
@@ -560,7 +563,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_export_debug_logs_export_failed">Kayıtlar dışa aktarılamadı</string>
     <string name="settings_system_export_debug_logs_export_success">Günlükler dışa aktarıldı</string>
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Depo yönetimi</string>
+    <string name="settings_system_storage_management">Depolama yönetimi</string>
     <string name="settings_system_apks_size">Toplam boyut: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamalanmış APK\'ler</string>
@@ -602,12 +605,11 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_share_website">Web sitesini paylaş</string>
     <string name="settings_system_share_website_description">Morphe resmi web sitesini paylaş</string>
-    <string name="settings_system_manager_description">"Morphe, popüler Android uygulamalarını modern ve akıllı bir şekilde değiştirmek amacıyla açık kaynaklı bir deneysel projedir
-
-Kullanıcı geri bildirimleri ve katkılarla gelecekteki yenilikler için çalışır."</string>
+    <string name="settings_system_manager_description">"Modern, geliştirilmiş ve topluluk geri bildirimi ve katkılarıyla şekillenen, popüler Android uygulamalarının modern, akıcı bir şekilde yamalanması için deneysel bir açık kaynak projesi"</string>
     <string name="credits">Takdir</string>
     <string name="credits_current_development">Mevcut geliştirme</string>
     <string name="credits_prior_development">Önceki geliştirme</string>
+    <string name="opensource_licenses">Açık kaynak lisansları</string>
     <!-- Shared strings -->
     <string name="patches">Yamalar</string>
     <string name="home">Ana Sayfa</string>

@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">숨겨진 앱 표시</string>
     <string name="home_app_no_hidden">숨겨진 앱이 없습니다</string>
     <string name="home_app_hidden_apps_title">숨겨진 앱</string>
-    <string name="home_app_hidden_apps_hint">앱을 탭하여 목록에 다시 표시할 수 있습니다</string>
+    <string name="home_app_hidden_apps_hint">숨기기를 해제하려면 탭하세요</string>
     <string name="android_11_bug_dialog_title">Android 11 버그</string>
     <string name="android_11_bug_dialog_description">사용자 환경에 부정적인 영향을 미치는 Android 11 시스템 버그를 방지하려면 앱 설치 권한을 미리 부여해야 합니다</string>
     <string name="deep_link_add_source_title">소스 추가</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">소스 업데이트 완료</string>
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
-    <string name="home_please_wait">잠시만 기다려 주세요…</string>
+    <string name="home_search_apps">앱 검색하기 </string>
+    <string name="home_no_apps_title">앱이 없습니다</string>
+    <string name="home_no_apps_subtitle">패치 소스를 추가하거나 %s에 기존 소스를 활성화하십시오.</string>
+    <string name="home_no_apps_search_subtitle">\"%1$s\"에 일치하는 앱이 없습니다.</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">어떤 앱을 패치하시겠습니까?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -603,12 +606,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">정보</string>
     <string name="settings_system_share_website">웹사이트 공유</string>
     <string name="settings_system_share_website_description">공식 Morphe 웹사이트를 공유해 보세요</string>
-    <string name="settings_system_manager_description">"Morphe는 인기 있는 안드로이드 앱을 현대적이고 간결한 방식으로 패치하는 데 초점을 둔 실험적인 오픈소스 프로젝트입니다
-
-핵심부터 오픈소스를 지향하며, 커뮤니티의 피드백과 기여를 바탕으로 앞으로의 혁신을 만들어갑니다"</string>
+    <string name="settings_system_manager_description">"실험적인 오픈 소스 프로젝트로, 커뮤니티 피드백 및 기여를 통해 인기 있는 Android 앱의 현대적이고 간편한 패치를 제공합니다."</string>
     <string name="credits">크레딧</string>
     <string name="credits_current_development">현재 개발</string>
     <string name="credits_prior_development">이전 개발</string>
+    <string name="opensource_licenses">오픈 소스 라이선스</string>
     <!-- Shared strings -->
     <string name="patches">패치</string>
     <string name="home">홈</string>

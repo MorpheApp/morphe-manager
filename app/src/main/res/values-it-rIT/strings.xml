@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Mostra le app nascoste</string>
     <string name="home_app_no_hidden">Nessuna app nascosta</string>
     <string name="home_app_hidden_apps_title">App nascoste</string>
-    <string name="home_app_hidden_apps_hint">Tocca un\'app per mostrarla di nuovo nella lista</string>
+    <string name="home_app_hidden_apps_hint">Tocca per rivelare</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso di installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
     <string name="deep_link_add_source_title">Aggiungi fonte</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Aggiornamento delle fonti completato</string>
     <string name="home_update_success_subtitle">Le tue fonti sono aggiornate</string>
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
-    <string name="home_please_wait">Attendere prego...</string>
+    <string name="home_search_apps">Cerca app</string>
+    <string name="home_no_apps_title">Nessuna app disponibile</string>
+    <string name="home_no_apps_subtitle">Aggiungi una sorgente di patch o abilita una esistente in %s</string>
+    <string name="home_no_apps_search_subtitle">Nessuna app corrisponde a \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quale app vuoi patchare?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -125,8 +128,8 @@ Sei sicuro di voler procedere?"</string>
     <string name="home_invalid_signature_title">APK non verificato</string>
     <string name="home_invalid_signature_message">L\'APK selezionato per &lt;b&gt;%s&lt;/b&gt; non corrisponde al certificato di firma previsto. Potrebbe essere stato modificato o provenire da una fonte non attendibile</string>
     <string name="home_invalid_signature_badge">Questo APK potrebbe non essere l\'originale</string>
-    <string name="home_split_apk_warning_title">Rilevato file APK split</string>
-    <string name="home_split_apk_warning_message">"Questo file è un bundle APK
+    <string name="home_split_apk_warning_title">Rilevato APK diviso</string>
+    <string name="home_split_apk_warning_message">"Questo file è un APK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
 Per ottenere i risultati migliori, questa app raccomanda di applicare una patch a un &lt;b&gt;APK completo&lt;/b&gt;"</string>
@@ -165,7 +168,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crea icona adattiva</string>
     <string name="adaptive_icon_instructions">Scegli un\'immagine in primo piano, seleziona il colore dello sfondo, quindi usa il cursore o i gesti di pizzico per regolare l\'anteprima</string>
-    <string name="adaptive_icon_preview">Anteprima icona adattiva</string>
+    <string name="adaptive_icon_preview">Anteprima dell\'icona adattiva</string>
     <string name="adaptive_icon_preview_hint">Per ottenere il miglior risultato, mantieni la tua icona all\'interno del cerchio interno pieno</string>
     <string name="adaptive_icon_select_image">Seleziona immagine</string>
     <string name="adaptive_icon_change_image">Cambia immagine</string>
@@ -176,7 +179,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="adaptive_icon_created_success">Icona adattiva creata con successo</string>
     <string name="adaptive_icon_creation_failed">Impossibile creare l\'icona adattiva</string>
     <string name="adaptive_icon_folder_explanation">Seleziona dove creare la cartella \'%1$s/%2$s\' con i file dell\'icona generati</string>
-    <string name="notification_icon_preview">Anteprima icona di notifica</string>
+    <string name="notification_icon_preview">Anteprima dell\'icona di notifica</string>
     <string name="notification_icon_preview_hint">Usa il cursore per ridimensionare. Trascina per riposizionare</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crea intestazione personalizzata</string>
@@ -602,12 +605,11 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_about">A proposito di</string>
     <string name="settings_system_share_website">Condividi il sito</string>
     <string name="settings_system_share_website_description">Condividi il sito ufficiale di Morphe</string>
-    <string name="settings_system_manager_description">"Morphe è un progetto sperimentale open-source incentrato sulla creazione di un patching moderno e semplificato delle apps Android popolari
-
-Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi della community per guidare l'innovazione futura"</string>
+    <string name="settings_system_manager_description">"Un progetto open-source sperimentale per la patch moderna e semplificata di app Android popolari, guidato dal feedback e dai contributi della community"</string>
     <string name="credits">Crediti</string>
     <string name="credits_current_development">Sviluppo attuale</string>
     <string name="credits_prior_development">Sviluppo precedente</string>
+    <string name="opensource_licenses">Licenze open-source</string>
     <!-- Shared strings -->
     <string name="patches">Patch</string>
     <string name="home">Home</string>

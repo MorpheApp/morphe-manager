@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Show hidden apps</string>
     <string name="home_app_no_hidden">No hay apps ocultas</string>
     <string name="home_app_hidden_apps_title">Apps ocultas</string>
-    <string name="home_app_hidden_apps_hint">Toca en una app para mostrarla en la lista de nuevo</string>
+    <string name="home_app_hidden_apps_hint">Tocar para mostrar</string>
     <string name="android_11_bug_dialog_title"> Error de Android 11</string>
     <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario</string>
     <string name="deep_link_add_source_title">Agregar fuente</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Actualización de fuentes completada</string>
     <string name="home_update_success_subtitle">Tus fuentes están al día</string>
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
-    <string name="home_please_wait">Por favor espera...</string>
+    <string name="home_search_apps">Buscar aplicaciones</string>
+    <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
+    <string name="home_no_apps_subtitle">Añadir una fuente de parche o habilitar una existente en %s</string>
+    <string name="home_no_apps_search_subtitle">No se encontraron aplicaciones que coincidan con \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">¿Qué aplicación quieres parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_about">Acerca de Morphe</string>
     <string name="settings_system_share_website">Compartir sitio web</string>
     <string name="settings_system_share_website_description">Compartir el sitio web oficial de Morphe</string>
-    <string name="settings_system_manager_description">"Morphe es un proyecto experimental de código abierto enfocado en crear un parcheo moderno y simplificado de aplicaciones Android populares
-
-Morphe se basa en la retroalimentación y las contribuciones de la comunidad para impulsar la innovación futura."</string>
+    <string name="settings_system_manager_description">"Un proyecto de código abierto experimental para la aplicación moderna y optimizada de parches en aplicaciones populares de Android, impulsado por los comentarios y las contribuciones de la comunidad"</string>
     <string name="credits">Créditos</string>
     <string name="credits_current_development">Desarrollo actual</string>
     <string name="credits_prior_development">Desarrollo anterior</string>
+    <string name="opensource_licenses">Licencias de código abierto</string>
     <!-- Shared strings -->
     <string name="patches">Parches</string>
     <string name="home">Inicio</string>

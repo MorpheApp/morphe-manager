@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Tampilkan aplikasi tersembunyi</string>
     <string name="home_app_no_hidden">Tidak ada aplikasi tersembunyi</string>
     <string name="home_app_hidden_apps_title">Aplikasi tersembunyi</string>
-    <string name="home_app_hidden_apps_hint">Ketuk pada aplikasi untuk menampilkannya lagi di daftar</string>
+    <string name="home_app_hidden_apps_hint">Ketuk untuk menampilkan kembali</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna</string>
     <string name="deep_link_add_source_title">Tambah sumber</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Pembaruan sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber Anda sudah terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
-    <string name="home_please_wait">Silakan tunggu…</string>
+    <string name="home_search_apps">Cari aplikasi</string>
+    <string name="home_no_apps_title">Tidak ada aplikasi yang tersedia</string>
+    <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau aktifkan yang sudah ada di %s</string>
+    <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok dengan \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang ingin Anda tambal?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -603,12 +606,11 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>
     <string name="settings_system_share_website_description">Bagikan situs web resmi Morphe</string>
-    <string name="settings_system_manager_description">"Morphe adalah proyek sumber terbuka eksperimental yang berfokus pada pembuatan tambalan modern, ringkas untuk aplikasi Android populer
-
-Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan kontribusi komunitas untuk mendorong inovasi di masa depan"</string>
+    <string name="settings_system_manager_description">"Sebuah proyek sumber terbuka eksperimental untuk penambalan aplikasi Android populer yang modern dan efisien, didorong oleh umpan balik dan kontribusi komunitas"</string>
     <string name="credits">Kredits</string>
     <string name="credits_current_development">Pengembangan saat ini</string>
     <string name="credits_prior_development">Pengembangan sebelumnya</string>
+    <string name="opensource_licenses">Lisensi sumber terbuka</string>
     <!-- Shared strings -->
     <string name="patches">Tambalan</string>
     <string name="home">Beranda</string>

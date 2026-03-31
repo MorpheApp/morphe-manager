@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Zobrazit skryté aplikace</string>
     <string name="home_app_no_hidden">Žádné skryté aplikace</string>
     <string name="home_app_hidden_apps_title">Skryté aplikace</string>
-    <string name="home_app_hidden_apps_hint">Klikněte na aplikaci, abyste ji zobrazili v seznamu znovu</string>
+    <string name="home_app_hidden_apps_hint">Ťukněte pro zobrazení</string>
     <string name="android_11_bug_dialog_title">Chyba Androidu 11</string>
     <string name="android_11_bug_dialog_description">Oprávnění k instalaci aplikací musí být uděleno předem, abyste se vyhnuli chybě v systému Android 11, která negativně ovlivňuje uživatelský zážitek</string>
     <string name="deep_link_add_source_title">Přidat zdroj</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Aktualizace zdrojů dokončena</string>
     <string name="home_update_success_subtitle">Vaše zdroje jsou aktuální</string>
     <string name="home_sources_are_loading">Zdroje se načítají, počkejte prosím…</string>
-    <string name="home_please_wait">Počkejte, prosím…</string>
+    <string name="home_search_apps">Hledat aplikace</string>
+    <string name="home_no_apps_title">Neznalezly se žádné aplikace</string>
+    <string name="home_no_apps_subtitle">Přidejte zdroj záplaty nebo povolte stávající v %s</string>
+    <string name="home_no_apps_search_subtitle">Žádné aplikace neodpovídají \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kterou aplikaci chcete záplatovat?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_about">O aplikaci</string>
     <string name="settings_system_share_website">Sdílet webovou stránku</string>
     <string name="settings_system_share_website_description">Sdílet oficiální stránky Morphe</string>
-    <string name="settings_system_manager_description">"Morphe je experimentální otevřený projekt zaměřený na vytvoření moderní, zjednodušené úpravy populárních aplikací pro Android
-
-Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a příspěvků komunity pro budoucí inovace"</string>
+    <string name="settings_system_manager_description">"Experimentální open-source projekt pro moderní, zjednodušené patchování populárních Android aplikací, poháněný zpětnou vazbou a příspěvky komunity"</string>
     <string name="credits">Kredity</string>
     <string name="credits_current_development">Současný vývoj</string>
     <string name="credits_prior_development">Předchozí vývoj</string>
+    <string name="opensource_licenses">Open-source licence</string>
     <!-- Shared strings -->
     <string name="patches">Záplaty</string>
     <string name="home">Domů</string>

@@ -4,38 +4,40 @@
     <string name="home_other_apps">אפליקציות אחרות</string>
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
-    <string name="home_app_hide_title">הסתר את האפליקציה הזו?</string>
-    <string name="home_app_hide_message">האפליקציה תהיה מוסתרת מהתפריט הראשי. תוכל להחזיר אותה מאוחר יותר באמצעות הכפתור \'%1$s\' שבתחתית הרשימה</string>
-    <string name="home_app_will_be_hidden">האפליקציה תהיה מוסתרת</string>
+    <string name="home_app_hide_title">להסתיר את האפליקציה הזאת?</string>
+    <string name="home_app_hide_message">האפליקציה הזאת תהיה מוסתרת מהתפריט הראשי. ניתן להחזיר אותה מאוחר יותר באמצעות הכפתור \'%1$s\' שבתחתית הרשימה</string>
+    <string name="home_app_will_be_hidden">האפליקציה הזאת תהיה מוסתרת</string>
     <string name="home_app_show_hidden">הצג אפליקציות מוסתרות</string>
     <string name="home_app_no_hidden">אין אפליקציות מוסתרות</string>
     <string name="home_app_hidden_apps_title">אפליקציות מוסתרות</string>
-    <string name="home_app_hidden_apps_hint">לחץ על אפליקציה כדי להציג אותה בשנית ברשימה</string>
+    <string name="home_app_hidden_apps_hint">הקישו כדי להציג</string>
     <string name="android_11_bug_dialog_title">באג ב-Android 11</string>
-    <string name="android_11_bug_dialog_description">הזכות להתקין את האפליקציה צריכה להיות מאושרת מראש כדי להימנע מבגה במערכת Android 11 שיפגע את חוויית המשתמש</string>
+    <string name="android_11_bug_dialog_description">ההרשאה להתקין את האפליקציה צריכה להיות מאושרת מראש כדי להימנע מבאג במערכת Android 11 שיפגע בחוויית המשתמש</string>
     <string name="deep_link_add_source_title">הוסף מקור</string>
-    <string name="deep_link_add_source_message">האם ברצונך להוסיף מקור תיקון זה ל-Morphe?</string>
+    <string name="deep_link_add_source_message">האם ברצונך להוסיף מקור תיקונים זה ל-Morphe?</string>
     <string name="deep_link_add_source_warning">הוסף מקור רק ממקורות שאתה סומך עליהם</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">עדכון Morphe זמין</string>
     <string name="home_update_available_subtitle">גרסה חדשה מוכנה להתקנה</string>
     <string name="home_update_error">העדכון נכשל</string>
     <string name="home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
-    <string name="home_update_skipped_metered">עדכונים שהופסקו</string>
-    <string name="home_update_skipped_metered_subtitle">דאטה מובייל פעיל</string>
+    <string name="home_update_skipped_metered">עדכונים שדולגו</string>
+    <string name="home_update_skipped_metered_subtitle">הנתונים הניידים פעילים</string>
     <string name="home_updating_sources">מעדכן מקורות…</string>
-    <string name="home_update_progress_format">%1$s בוצע</string>
-    <string name="home_update_success">עדכון מקורות הושלם</string>
+    <string name="home_update_progress_format">%1$s עובד</string>
+    <string name="home_update_success">עדכון המקורות הושלם</string>
     <string name="home_update_success_subtitle">המקורות שלך מעודכנים</string>
-    <string name="home_sources_are_loading">המקורות מתעדכנים, נא להמתין…</string>
-    <string name="home_please_wait">אנא המתן…</string>
+    <string name="home_sources_are_loading">המקורות נטענים, נא להמתין…</string>
+    <string name="home_search_apps">חיפוש אפליקציות</string>
+    <string name="home_no_apps_title">אין אפליקציות זמינות</string>
+    <string name="home_no_apps_subtitle">הוסף מקור לאפליקציה או הפעל מקור קיים ב-\"%s\"</string>
+    <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">אילו יישומון אתה רוצה לתקן?</string>
+    <string name="home_greeting_1">איזה אפליקציה אתה רוצה לתקן?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">מוכן לעשות אפליקציות גדולות שוב?
-(עם הומור וזיכרון קל שלי)</string>
+    <string name="home_greeting_2">מוכן להפוך אפליקציות לאגדיות שוב?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">הדק את חגורות, הגיע זמן התיקונים</string>
+    <string name="home_greeting_3">הדק את החגורות, הגיע הזמן לתיקונים</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">עוד יום, עוד יצירת מופת עם חסימת פרסומות</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -43,7 +45,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">בואו נגרום לאפליקציות שלך להתנהג</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">הסיכוי לתיקון היום: 100%</string>
+    <string name="home_greeting_7">התחזית להיום: 100% סיכויים לתיקון</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">מוכן להפוך את המאכזב לנפלא?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -53,18 +55,18 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">מקורות תיקונים</string>
     <string name="sources_management_open_in_browser">פתח בדפדפן</string>
-    <string name="sources_management_failed_to_open_url">שגגה להכזת אתר</string>
-    <string name="sources_management_prerelease_toggle">השתמש בתיקונים מוקדמים</string>
-    <string name="sources_management_prerelease_toggle_description">קבל גישה מוקדמת לגרסאות חדשות של תיקונים ניסיוניים</string>
-    <string name="sources_management_experimental_versions_toggle">שימוש בגרסאות אפליקציה ניסיוניות</string>
-    <string name="sources_management_experimental_versions_toggle_description">תיקון גרסאות אפליקציה ניסיוניות זמינות</string>
+    <string name="sources_management_failed_to_open_url">נכשל לפתוח כתובת אינטרנט</string>
+    <string name="sources_management_prerelease_toggle">השתמש בתיקונים לפני הפצתם המלאה</string>
+    <string name="sources_management_prerelease_toggle_description">קבל גישה מוקדמת לגרסה חדשה של תיקונים ניסיוניים</string>
+    <string name="sources_management_experimental_versions_toggle">השתמש בגרסאות אפליקציה ניסיוניות</string>
+    <string name="sources_management_experimental_versions_toggle_description">תקן גרסאות אפליקציה ניסיוניות זמינות</string>
     <string name="sources_management_already_exists">מקור זה כבר נוסף</string>
     <!-- Home Screen - Sources Dialogs -->
-    <string name="sources_dialog_display_name">שם תצוג</string>
-    <string name="sources_dialog_rename">שנה את שם התצוגה</string>
-    <string name="sources_dialog_duplicate_name_error">יש תצוג בשם זה כבר</string>
-    <string name="sources_dialog_missing_error">לא ניתן לעדכן את Sourse הזה</string>
-    <string name="sources_dialog_view_any_version">כל גרסיה</string>
+    <string name="sources_dialog_display_name">הצג שם</string>
+    <string name="sources_dialog_rename">שנה את שם מקור התיקונים</string>
+    <string name="sources_dialog_duplicate_name_error">יש כבר מקור תיקונים עם שם זה</string>
+    <string name="sources_dialog_missing_error">עדכון מקור התיקונים הזה נכשל</string>
+    <string name="sources_dialog_view_any_version">כל גרסה</string>
     <string name="sources_dialog_view_any_package">כל חבילה</string>
     <string name="sources_dialog_add_source">הוסף תצוג</string>
     <string name="sources_dialog_delete_confirm_message">מחק את מקור \"%s\"? זה לא ניתן לשחזר</string>
@@ -587,10 +589,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_about">אודות</string>
     <string name="settings_system_share_website">שתף אתר</string>
     <string name="settings_system_share_website_description">שתף אתר אתר רשמי</string>
-    <string name="settings_system_manager_description">"Morphe הוא פרויקט פתוח-מקורר, שמתמקדם על משובוים של הקהילה ותרומות כדי לנהוג את הפיתוח העתידי"</string>
+    <string name="settings_system_manager_description">"פרויקט קוד פתוח ניסיוני לתיקון יעיל ומודרני של אפליקציות אנדרואיד פופולריות, המונע על ידי משוב ותרומות של הקהילה"</string>
     <string name="credits">קרדיטים</string>
     <string name="credits_current_development">פיתוח נוכחי</string>
     <string name="credits_prior_development">פיתוח קודם</string>
+    <string name="opensource_licenses">רישיונות קוד פתוח</string>
     <!-- Shared strings -->
     <string name="patches">תיקונים</string>
     <string name="home">בית</string>

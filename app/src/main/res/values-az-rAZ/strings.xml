@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Gizlədilən tətbiqləri göstər</string>
     <string name="home_app_no_hidden">Gizlədilən tətbiqlər yoxdur</string>
     <string name="home_app_hidden_apps_title">Gizlədilən tətbiqlər</string>
-    <string name="home_app_hidden_apps_hint">Onu siyahıda təkrar göstərmək üçün tətbiq üzərinə toxun</string>
+    <string name="home_app_hidden_apps_hint">Göstərmək üçün toxun</string>
     <string name="android_11_bug_dialog_title">Android 11 səhvi</string>
     <string name="android_11_bug_dialog_description">Tətbiq quraşdırılması icazəsi istifadəçi təcrübəsinə mənfi təsir edəcək Android 11 sistemindəki səhvə mane olmaq üçün əvvəlcədən qəbul edilməlidir</string>
     <string name="deep_link_add_source_title">Mənbə əlavə et</string>
@@ -28,7 +28,6 @@
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
-    <string name="home_please_wait">Zəhmət olmasa, gözləyin...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -601,9 +600,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_about">Haqqında</string>
     <string name="settings_system_share_website">Veb saytı paylaş</string>
     <string name="settings_system_share_website_description">Xidməti Morphe veb saytını paylaşın</string>
-    <string name="settings_system_manager_description">"Morphe sevimli Android tətbiqlərinin müasir yaradılması, axarlı yamaqlanmasında cəmlənmiş təcrübi açıq mənbə layihədir
-
-Əsasında açıq mənbəli Morphe gələcək yeniliyi idarə etmək üçün icma rəyləri və töhfələri sayəsində inkişaf edir"</string>
     <string name="credits">Sərmayələr</string>
     <string name="credits_current_development">Hazırkı inkişaf</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>
