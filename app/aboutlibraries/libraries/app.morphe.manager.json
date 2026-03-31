@@ -1,0 +1,6 @@
+{
+  "uniqueId": "app.morphe.manager",
+  "name": "Morphe Manager",
+  "developers": [{"name": "Morphe"}],
+  "licenses": ["GPL-3.0-only"]
+}

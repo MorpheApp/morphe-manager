@@ -44,8 +44,8 @@ dependencyResolutionManagement {
                 val gprUser: String? = providers.gradleProperty("gpr.user").orNull
                 val gprKey: String? = providers.gradleProperty("gpr.key").orNull
 
-                username = (if (hardcodedUser.isNotBlank()) hardcodedUser else System.getenv("GITHUB_ACTOR") ?: gprUser)
-                password = (if (hardcodedToken.isNotBlank()) hardcodedToken else System.getenv("GITHUB_TOKEN") ?: gprKey)
+                username = (hardcodedUser.ifBlank { System.getenv("GITHUB_ACTOR") ?: gprUser })
+                password = (hardcodedToken.ifBlank { System.getenv("GITHUB_TOKEN") ?: gprKey })
             }
         }
     }
@@ -57,7 +57,7 @@ include(":app")
 // Include morphe-patcher and morphe-library as composite builds if they exist locally
 mapOf(
     "morphe-patcher" to "app.morphe:morphe-patcher",
-    "morphe-library" to "app.morphe:morphe-library",
+//    "morphe-library" to "app.morphe:morphe-library", // FIXME: Must upgrade library gradle to use this
     "ARSCLib" to "com.github.REAndroid:arsclib"
 ).forEach { (libraryPath, libraryName) ->
     val libDir = file("../$libraryPath")

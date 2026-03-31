@@ -36,6 +36,11 @@ jobs:
           chmod +x ./gradlew
           ./gradlew assembleRelease --stacktrace
 
+      - name: Rename APK
+        run: |
+          find app/build/outputs/apk/release -name "*-release.apk" \
+            -exec bash -c 'mv "$1" "${1/-release/}"' _ {} \;
+
       - name: Upload APK
         uses: actions/upload-artifact@v7
         with:

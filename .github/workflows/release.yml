@@ -71,6 +71,11 @@ jobs:
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 
+      - name: Rename APK
+        run: |
+          find app/build/outputs/apk/release -name "*-release.apk" \
+            -exec bash -c 'mv "$1" "${1/-release/}"' _ {} \;
+
       - name: Attest
         if: steps.release.outputs.NEW_TAG != ''
         uses: actions/attest-build-provenance@v2
