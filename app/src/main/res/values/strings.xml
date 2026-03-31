@@ -662,12 +662,11 @@ Details: %2$s"</string>
     <string name="settings_system_about">About</string>
     <string name="settings_system_share_website">Share website</string>
     <string name="settings_system_share_website_description">Share the official Morphe website</string>
-    <string name="settings_system_manager_description">"Morphe is an experimental open-source project focused on creating a modern, streamlined patching of popular Android apps
-
-Open-source at its core, Morphe thrives on community feedback and contributions to drive future innovation"</string>
+    <string name="settings_system_manager_description">"An experimental open-source project for modern, streamlined patching of popular Android apps, driven by community feedback and contributions"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
+    <string name="opensource_licenses">Open-source licenses</string>
 
     <!-- Shared strings -->
     <string name="app_name" translatable="false">Morphe</string>

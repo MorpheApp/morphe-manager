@@ -1,7 +1,7 @@
 package app.morphe.manager.di
 
 import app.morphe.manager.ui.viewmodel.*
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val viewModelModule = module {

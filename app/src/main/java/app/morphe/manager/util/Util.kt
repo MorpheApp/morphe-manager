@@ -32,16 +32,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format.MonthNames
+import kotlinx.datetime.format.Padding
 import kotlinx.datetime.format.char
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
+import kotlin.time.Clock
 
 typealias PatchSelection = Map<Int, Set<String>>
 typealias Options = Map<Int, Map<String, Map<String, Any?>>>
@@ -113,7 +114,7 @@ fun LocalDateTime.relativeTime(context: Context): String {
             else -> LocalDateTime.Format {
                 monthName(MonthNames.ENGLISH_ABBREVIATED)
                 char(' ')
-                dayOfMonth()
+                this@Format.day(padding = Padding.ZERO)
                 if (now.toLocalDateTime(TimeZone.UTC).year != this@relativeTime.year) {
                     chars(", ")
                     year()

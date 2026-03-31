@@ -141,7 +141,7 @@ class UpdateViewModel(
                             url(release.downloadUrl)
                             onDownload { bytesSentTotal, contentLength ->
                                 downloadedSize = resumeOffset + bytesSentTotal
-                                totalSize = resumeOffset + contentLength
+                                totalSize = resumeOffset + (contentLength ?: totalSize)
                             }
                         }
                     }
