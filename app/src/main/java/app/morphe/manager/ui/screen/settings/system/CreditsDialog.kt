@@ -7,8 +7,8 @@ package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Gavel
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -71,7 +71,7 @@ fun CreditsDialog(onDismiss: () -> Unit) {
                 MorpheDialogOutlinedButton(
                     text = stringResource(R.string.opensource_licenses),
                     onClick = { showLicensesDialog.value = true },
-                    icon = Icons.Outlined.Gavel,
+                    icon = Icons.AutoMirrored.Outlined.Article,
                     modifier = Modifier.fillMaxWidth()
                 )
                 MorpheDialogOutlinedButton(

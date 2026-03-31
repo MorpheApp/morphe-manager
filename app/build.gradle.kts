@@ -266,6 +266,9 @@ kotlin {
 }
 
 aboutLibraries {
+    collect {
+        configPath = file("aboutlibraries")
+    }
     library {
         duplicationMode = DuplicateMode.MERGE
         duplicationRule = DuplicateRule.EXACT

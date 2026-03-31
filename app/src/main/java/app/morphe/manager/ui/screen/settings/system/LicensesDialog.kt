@@ -26,7 +26,6 @@ import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
 import app.morphe.manager.ui.screen.shared.MorpheDialog
 import app.morphe.manager.ui.screen.shared.MorpheDialogOutlinedButton
 import com.mikepenz.aboutlibraries.entity.Library
-import com.mikepenz.aboutlibraries.entity.License
 import com.mikepenz.aboutlibraries.ui.compose.LibraryColors
 import com.mikepenz.aboutlibraries.ui.compose.LibraryDefaults
 import com.mikepenz.aboutlibraries.ui.compose.android.produceLibraries
@@ -34,7 +33,10 @@ import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 import com.mikepenz.aboutlibraries.ui.compose.m3.chipColors
 import com.mikepenz.aboutlibraries.ui.compose.m3.libraryColors
 import com.mikepenz.aboutlibraries.ui.compose.util.strippedLicenseContent
-import java.io.File.separator
+
+private const val NOTICE_UNIQUE_ID = "app.morphe.manager"
+// Copied verbatim from NOTICE in project root. Update manually if NOTICE changes.
+private const val NOTICE_TEXT = "https://raw.githubusercontent.com/MorpheApp/morphe-patches/refs/heads/main/NOTICE\n\nMorphe NOTICE\n\nhttps://morphe.software\n\n=============\n\nThis file contains Section 7 notices of the GNU General Public License v3\nas they apply to Morphe code. These notices apply to all code authored for\nMorphe, including any modifications of code that may have originated\noutside this repository, and do not change the terms of the GPLv3 license.\nFor the full license text, see the LICENSE file or:\nhttps://www.gnu.org/licenses/gpl-3.0.html\n\n7b. Attribution Requirement\n---------------------------\n\nAny application or derivative work that uses Morphe code must include\nan easily accessible, user-facing message with the exact wording:\n\n    This app uses code from Morphe. To learn more, visit https://morphe.software\n\nThe message must be presented in a way that allows the end user to easily\nvisit the URL (e.g., clickable link, UI button, or equivalent).\n\n7c. Project Name Restriction\n----------------------------\n\nThe project name \"Morphe\" may not be used for derivative works.\nDerivatives must adopt a completely different identity that is not related\nto or similar to the name \"Morphe\"."
 
 /**
  * Licenses dialog.
@@ -80,7 +82,19 @@ fun LicensesDialog(onDismiss: () -> Unit) {
                 lazyListState = lazyListState,
                 colors = colors,
                 licenseDialogBody = { library, modifier ->
-                    ClickableLicenseDialogBody(library = library, colors = colors, modifier = modifier)
+                    if (library.uniqueId == NOTICE_UNIQUE_ID) {
+                        AutoLinkText(
+                            text = NOTICE_TEXT,
+                            modifier = modifier,
+                            color = colors.dialogContentColor
+                        )
+                    } else {
+                        ClickableLicenseDialogBody(
+                            library = library,
+                            colors = colors,
+                            modifier = modifier
+                        )
+                    }
                 }
             )
         }
