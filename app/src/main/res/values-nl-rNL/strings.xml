@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Toon verborgen apps</string>
     <string name="home_app_no_hidden">Geen verborgen apps</string>
     <string name="home_app_hidden_apps_title">Verborgen apps</string>
-    <string name="home_app_hidden_apps_hint">Tik op een app om haar weer in de lijst te tonen</string>
+    <string name="home_app_hidden_apps_hint">Tik om te onthullen</string>
     <string name="android_11_bug_dialog_title">Android 11-bug</string>
     <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
     <string name="deep_link_add_source_title">Bron toevoegen</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Bronnen worden geüpdatet</string>
     <string name="home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
     <string name="home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
-    <string name="home_please_wait">Een ogenblik geduld...</string>
+    <string name="home_search_apps">Apps zoeken</string>
+    <string name="home_no_apps_title">Geen apps beschikbaar</string>
+    <string name="home_no_apps_subtitle">Voeg een patchbron toe of schakel een bestaande in %s</string>
+    <string name="home_no_apps_search_subtitle">Geen apps komen overeen met \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welke app wil je patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_about">Over</string>
     <string name="settings_system_share_website">Website delen</string>
     <string name="settings_system_share_website_description">Deel de officiële Morphe-website</string>
-    <string name="settings_system_manager_description">"Morphe is een experimentele open-source project gericht op het creëren van een moderne, gestroomde patching van populaire Android-apps
-
-Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen om toekomstige innovatie te drijven"</string>
+    <string name="settings_system_manager_description">"Een experimenteel open-source project voor modern, gestroomlijnd patchen van populaire Android-apps, aangedreven door community feedback en bijdragen"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Huidige ontwikkeling</string>
     <string name="credits_prior_development">Eerdere ontwikkeling</string>
+    <string name="opensource_licenses">Open-source licenties</string>
     <!-- Shared strings -->
     <string name="patches">Patches</string>
     <string name="home">Home</string>

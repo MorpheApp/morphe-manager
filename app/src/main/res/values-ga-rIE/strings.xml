@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Taispeáin aipeanna i bhfolach</string>
     <string name="home_app_no_hidden">Gan aon aipeanna i bhfolach</string>
     <string name="home_app_hidden_apps_title">Aipeanna i bhfolach</string>
-    <string name="home_app_hidden_apps_hint">Tapáil ar aip chun í a thaispeáint sa liosta arís</string>
+    <string name="home_app_hidden_apps_hint">Tap to dáil os cúairt</string>
     <string name="android_11_bug_dialog_title">Fabht Android 11</string>
     <string name="android_11_bug_dialog_description">Ní mór cead suiteála na haipe a ghéilleadh roimh ré chun seachaint ar earráid i gcóras Android 11 a dhéanfaidh dochar d\'eispéireas an úsáideora</string>
     <string name="deep_link_add_source_title">Add foinse</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Foinsí nuashonraithe críochnaithe</string>
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
-    <string name="home_please_wait">Fan le do thoil…</string>
+    <string name="home_search_apps">Cuardaigh appanna</string>
+    <string name="home_no_apps_title">Níl aon appanna ar fáil</string>
+    <string name="home_no_apps_subtitle">Cuir freagar foinse pátráin nó cruthnoigh ceann atá cheana fáil ann i %s</string>
+    <string name="home_no_apps_search_subtitle">Ní bhféachann aon appanna leis \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Cén aip ar mhaith leat paiste a chur leis?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_about">Maidir</string>
     <string name="settings_system_share_website">Comhroinn suíomh Gréasáin</string>
     <string name="settings_system_share_website_description">Comhroinn suíomh Gréasáin oifigiúil Morphe</string>
-    <string name="settings_system_manager_description">"Is tionscadal foinse oscailte turgnamhach é Morphe atá dírithe ar phaisteáil nua-aimseartha, sruthlínithe a chruthú d'aipeanna Android coitianta.
-
-Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníocaíochtaí ón bpobal chun nuálaíocht amach anseo a thiomáint."</string>
+    <string name="settings_system_manager_description">"Prójáct oòs-fóin tóirón, faoin, le haghaidh feabhaòrsaò ar aòdhair rialta Android, arò mheas a chur le feabhas ar fhaisòin agus le tuillòinòin ón gcomhdaonò."</string>
     <string name="credits">Crèidteacha</string>
     <string name="credits_current_development">Forbairt reatha</string>
     <string name="credits_prior_development">Forbairt roimh réidh</string>
+    <string name="opensource_licenses">Licùidóidóis oscair-fóin</string>
     <!-- Shared strings -->
     <string name="patches">Paistí</string>
     <string name="home">Baile</string>

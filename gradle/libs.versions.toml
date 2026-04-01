@@ -11,11 +11,12 @@ collection = "0.4.0"
 compose-bom = "2026.03.01"
 compose-icons = "1.2.4"
 datetime = "0.7.1"
-dev-tools-gradle-plugin = "2.3.5"
+dev-tools-gradle-plugin = "2.3.6"
 documentfile = "1.1.0"
 enumutil = "1.1.1"
 fading-edges = "1.0.4"
 firebase-bom = "34.11.0"
+google-services = "4.4.4"
 hidden-api-stub = "4.4.0"
 hiddenapibypass = "6.1"
 koin = "4.2.0"
@@ -159,4 +160,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 devtools = { id = "com.google.devtools.ksp", version.ref = "dev-tools-gradle-plugin" }
 about-libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "about-libraries" }
 about-libraries-android = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "about-libraries" }
-google-services = { id = "com.google.gms.google-services", version = "4.4.4" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }

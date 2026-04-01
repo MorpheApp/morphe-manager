@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">非表示アプリを表示する</string>
     <string name="home_app_no_hidden">非表示アプリはありません</string>
     <string name="home_app_hidden_apps_title">非表示アプリ</string>
-    <string name="home_app_hidden_apps_hint">アプリをタップして、リストに戻します</string>
+    <string name="home_app_hidden_apps_hint">非表示になっているアプリを表示するにはタップします</string>
     <string name="android_11_bug_dialog_title">Android 11 のバグ</string>
     <string name="android_11_bug_dialog_description">Android 11 では、ユーザー体験に悪影響を及ぼす不具合が確認されています。あらかじめアプリのインストール権限を許可しておいてください</string>
     <string name="deep_link_add_source_title">ソースを追加</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">ソースの更新が完了しました</string>
     <string name="home_update_success_subtitle">ソースは最新の状態です</string>
     <string name="home_sources_are_loading">ソースを読み込んでいます。しばらくお待ちください…</string>
-    <string name="home_please_wait">しばらくお待ちください…</string>
+    <string name="home_search_apps">アプリの検索</string>
+    <string name="home_no_apps_title">利用可能なアプリはありません</string>
+    <string name="home_no_apps_subtitle">パッチソースを追加するか、既存のものを有効にしてください。%s</string>
+    <string name="home_no_apps_search_subtitle">\"%1$s\" に一致するアプリはありません</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">どのアプリにパッチを適用しますか？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -324,7 +327,7 @@
     <string name="settings_appearance_background_grid">グリッド</string>
     <string name="settings_appearance_background_particles">パーティクル</string>
     <string name="settings_appearance_background_none">なし</string>
-    <string name="settings_appearance_parallax_effect">パララックス効果</string>
+    <string name="settings_appearance_parallax_effect">視差効果</string>
     <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">テーマ</string>
@@ -602,12 +605,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
     <string name="settings_system_share_website_description">Morphe の公式ウェブサイトを共有します</string>
-    <string name="settings_system_manager_description">"Morphe は、人気の Android アプリ向けにモダンでシンプルなパッチの適用を目指す、実験的なオープンソースプロジェクトです。
-
-オープンソースを基とし、コミュニティからのフィードバックや貢献によって発展しています"</string>
+    <string name="settings_system_manager_description">"実験的なオープンソースプロジェクトであり、コミュニティからのフィードバックと貢献によって推進され、人気のあるAndroidアプリの現代的で効率的なパッチ適用を目指しています。"</string>
     <string name="credits">クレジット</string>
     <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>
+    <string name="opensource_licenses">オープンソースライセンス</string>
     <!-- Shared strings -->
     <string name="patches">パッチ</string>
     <string name="home">ホーム</string>

@@ -15,9 +15,6 @@ plugins {
     signing
 }
 
-val archivesBase = "${rootProject.name}-$version"
-val outputApkFileName = "$archivesBase.apk"
-
 dependencies {
     // AndroidX Core
     implementation(libs.androidx.ktx)
@@ -136,14 +133,12 @@ dependencies {
 android {
     namespace = "app.morphe.manager"
     compileSdk = 36
-    compileSdkExtension = 1
 
     defaultConfig {
         applicationId = "app.morphe.manager"
         minSdk = 26
 
-        val versionStr = if (version == "unspecified") "1.0.0" else version.toString()
-        versionName = versionStr
+        versionName = version.toString()
 
         // VersionCode derived from current time (1-minute intervals) + offset.
         val nowMillis = System.currentTimeMillis()
@@ -248,7 +243,9 @@ android {
 }
 
 // APK output file name
-base.archivesName.set(archivesBase)
+base.archivesName.set(provider {
+    "${rootProject.name}-$version"
+})
 
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
@@ -279,28 +276,6 @@ tasks {
     whenTaskAdded {
         if (name.startsWith("lintVital")) {
             enabled = false
-        }
-    }
-
-    // Needed by gradle-semantic-release-plugin.
-    // Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435.
-    val publish by registering {
-        group = "publishing"
-        description = "Build the release APK"
-
-        dependsOn("assembleRelease")
-
-        val apk = project.layout.buildDirectory.file("outputs/apk/release/${outputApkFileName}")
-        val ascFile = apk.map { it.asFile.resolveSibling("${it.asFile.name}.asc") }
-
-        inputs.file(apk).withPropertyName("inputApk")
-        outputs.file(ascFile).withPropertyName("outputAsc")
-
-        doLast {
-            signing {
-                useGpgCmd()
-                sign(apk.get().asFile)
-            }
         }
     }
 }

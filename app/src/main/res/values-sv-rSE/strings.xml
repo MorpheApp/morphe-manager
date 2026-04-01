@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Visa dolda appar</string>
     <string name="home_app_no_hidden">Inga dolda appar</string>
     <string name="home_app_hidden_apps_title">Dolda appar</string>
-    <string name="home_app_hidden_apps_hint">Tryck på en app om du vill visa den i listan igen</string>
+    <string name="home_app_hidden_apps_hint">Tryck för att visa</string>
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <string name="deep_link_add_source_title">Lägg till källa</string>
@@ -28,7 +28,6 @@
     <string name="home_update_success">Källuppdateringen är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
-    <string name="home_please_wait">Vänta …</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Vilken app vill du korrigera?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -600,9 +599,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
     <string name="settings_system_share_website_description">Dela Morphes officiella webbplats</string>
-    <string name="settings_system_manager_description">"Morphe är ett experimentellt projekt med öppen källkod som fokuserar på att skapa ett modernt och smidigt sätt att korrigera populära Android-appar
-
-Morphe bygger på öppen källkod och utvecklas utifrån feedback och bidrag från gemenskapen för att driva framtida innovation"</string>
     <string name="credits">Medverkande</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>
@@ -687,7 +683,7 @@ Morphe bygger på öppen källkod och utvecklas utifrån feedback och bidrag fr�
     <string name="failed_to_check_updates">Det gick inte att söka efter uppdateringar: %s</string>
     <string name="failed_to_download_update">Det gick inte att ladda ned uppdateringen: %s</string>
     <string name="resume_download">Återuppta nedladdning</string>
-    <string name="download_confirmation_metered">"Du använder för närvarande en anslutning med datapriser och dataavgifter från din internetleverantör kan tillkomma.
+    <string name="download_confirmation_metered">"Du använder för närvarande en anslutning med datapriser, och dataavgifter från din internetleverantör kan tillkomma.
 
 Vill du fortsätta ändå?"</string>
     <string name="download_update_confirmation">Ladda ned uppdatering?</string>

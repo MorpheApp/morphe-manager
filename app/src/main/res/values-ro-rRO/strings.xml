@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Arată aplicațiile ascunse</string>
     <string name="home_app_no_hidden">Nicio aplicație ascunsă</string>
     <string name="home_app_hidden_apps_title">Aplicații ascunse</string>
-    <string name="home_app_hidden_apps_hint">Apasă pe o aplicație pentru a o arăta din nou în listă</string>
+    <string name="home_app_hidden_apps_hint">Apasă pentru a afișa</string>
     <string name="android_11_bug_dialog_title">Bug al Android 11</string>
     <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în avans pentru a evita o problemă în sistemul Android 11 care poate afecta negativ experiența utilizatorului</string>
     <string name="deep_link_add_source_title">Adaugă sursă</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Actualizare surse finalizată</string>
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele…</string>
-    <string name="home_please_wait">Te rog așteaptă…</string>
+    <string name="home_search_apps">Caută aplicații</string>
+    <string name="home_no_apps_title">Nicio aplicație disponibilă</string>
+    <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
+    <string name="home_no_apps_search_subtitle">Nicio aplicație nu se potrivește cu \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ce aplicație dorești să patch-uiești?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_share_website">Partajează website</string>
     <string name="settings_system_share_website_description">Partajează website-ul oficial Morphe</string>
-    <string name="settings_system_manager_description">"Morphe este un proiect experimental open-source focusat pe crearea unei modernizări, patche a aplicațiilor Android populare
-
-Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunității și contribuțiile pentru a driving viitorul inovație"</string>
+    <string name="settings_system_manager_description">"Un proiect open-source experimental pentru o actualizare modernă și simplificată a aplicațiilor Android populare, bazat pe feedback-ul și contribuțiile comunității"</string>
     <string name="credits">Credite</string>
     <string name="credits_current_development">Dezvoltare curentă</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
+    <string name="opensource_licenses">Licențe open-source</string>
     <!-- Shared strings -->
     <string name="patches">Patch-uri</string>
     <string name="home">Acasă</string>

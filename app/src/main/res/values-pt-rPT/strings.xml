@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Mostrar apps ocultas</string>
     <string name="home_app_no_hidden">Não há apps ocultas</string>
     <string name="home_app_hidden_apps_title">Apps ocultas</string>
-    <string name="home_app_hidden_apps_hint">Toque em um app para mostrá-lo na lista novamente</string>
+    <string name="home_app_hidden_apps_hint">Toque para exibir</string>
     <string name="android_11_bug_dialog_title">Erro do Android 11</string>
     <string name="android_11_bug_dialog_description">A permissÃ£o de instalaÃ§Ã£o do app deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetarÃ¡ negativamente a experiÃªncia do usuÃ¡rio.</string>
     <string name="deep_link_add_source_title">Adicionar fonte</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Atualização das fontes concluída</string>
     <string name="home_update_success_subtitle">Suas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">Carregando fontes, por favor aguarde…</string>
-    <string name="home_please_wait">Por favor aguarde…</string>
+    <string name="home_search_apps">Pesquisar aplicativos</string>
+    <string name="home_no_apps_title">Nenhum aplicativo disponível</string>
+    <string name="home_no_apps_subtitle">Adicionar uma fonte de patch ou habilitar uma existente em %s</string>
+    <string name="home_no_apps_search_subtitle">Nenhum aplicativo corresponde a \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Que aplicativo você quer corrigir?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
     <string name="settings_system_share_website_description">Compartilhar o site oficial do Morphe</string>
-    <string name="settings_system_manager_description">"Morphe é um projeto open-source experimental focado em criar um patching moderno e fluido de aplicativos Android populares
-
-O Morphe é open-source em sua essência, prosperando com feedback e contribuições da comunidade para impulsionar inovações futuras"</string>
+    <string name="settings_system_manager_description">"Um projeto experimental de código aberto para uma correção moderna e simplificada de aplicativos Android populares, impulsionado pelo feedback e contribuições da comunidade"</string>
     <string name="credits">Créditos</string>
     <string name="credits_current_development">Desenvolvimento atual</string>
     <string name="credits_prior_development">Desenvolvimento anterior</string>
+    <string name="opensource_licenses">Licenças de código aberto</string>
     <!-- Shared strings -->
     <string name="patches">Remendos</string>
     <string name="home">Início</string>

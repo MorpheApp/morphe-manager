@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_app_hidden_apps_hint">\"Tap to unhide\"</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_search_apps">ॲप्स शोधा</string>
+    <string name="home_no_apps_title">ॲप्स उपलब्ध नाहीत</string>
+    <string name="home_no_apps_subtitle">पॅच स्रोत जोडा किंवा %s मध्ये বিদ্যমান सक्षम करा</string>
+    <string name="home_no_apps_search_subtitle">\"%1$s\" शी जुळणारे कोणतेही ॲप(s) नाहीत</string>
     <!-- Home Screen - Home Greetings -->
     <!-- Humorous hype message with light nostalgia -->
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
@@ -59,5 +64,7 @@
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_manager_description">"हे आधुनिक, सुव्यवस्थित पॅचिंगसाठी लोकप्रिय Android ॲप्सचे प्रायोगिक, मुक्त-स्रोत प्रोजेक्ट आहे, जे समुदाय अभिप्राय आणि योगदानाने चालवले जाते."</string>
+    <string name="opensource_licenses">मुक्त-स्रोत परवाने</string>
     <!-- Shared strings -->
 </resources>

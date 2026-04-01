@@ -7,28 +7,31 @@
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
     <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi màn hình chính. Bạn có thể khôi phục lại bằng nút \'%1$s\' ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
-    <string name="home_app_show_hidden">Hiện ứng dụng ẩn</string>
+    <string name="home_app_show_hidden">Hiện ứng dụng đã ẩn</string>
     <string name="home_app_no_hidden">Không có ứng dụng nào đang ẩn</string>
     <string name="home_app_hidden_apps_title">Ứng dụng đã ẩn</string>
-    <string name="home_app_hidden_apps_hint">Bấm vào ứng dụng để đưa chúng trở lại danh sách</string>
-    <string name="android_11_bug_dialog_title">Lỗi Android 11</string>
-    <string name="android_11_bug_dialog_description">Cần cấp quyền cài đặt không rõ nguồn gốc cho ứng dụng trước để tránh phát sinh lỗi trên hệ thống Android 11 và gây ảnh hưởng tiêu cực đến trải nghiệm của người dùng</string>
+    <string name="home_app_hidden_apps_hint">Nhấn để hiện lại</string>
+    <string name="android_11_bug_dialog_title">Lỗi trên Android 11</string>
+    <string name="android_11_bug_dialog_description">Vui lòng cấp quyền cài đặt ứng dụng không rõ nguồn gốc để tránh lỗi trên Android 11 có thể ảnh hưởng đến trải nghiệm</string>
     <string name="deep_link_add_source_title">Thêm nguồn</string>
     <string name="deep_link_add_source_message">Bạn có muốn thêm nguồn vá này vào Morphe không?</string>
     <string name="deep_link_add_source_warning">Chỉ thêm nguồn mà bạn tin tưởng</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
-    <string name="home_update_available_subtitle">Sẵn sàng để cài đặt phiên bản mới</string>
+    <string name="home_update_available">Đã có bản cập nhật mới của Morphe</string>
+    <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
     <string name="home_update_error">Cập nhật thất bại</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
-    <string name="home_update_skipped_metered">Đã bỏ qua cập nhật</string>
+    <string name="home_update_skipped_metered">Đã bỏ qua bản cập nhật</string>
     <string name="home_update_skipped_metered_subtitle">Đang bật dữ liệu di động</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
     <string name="home_update_progress_format">Đã xử lý %1$s</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
     <string name="home_update_success_subtitle">Đã cập nhật tất cả các nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
-    <string name="home_please_wait">Vui lòng chờ…</string>
+    <string name="home_search_apps">Tìm ứng dụng</string>
+    <string name="home_no_apps_title">Không có ứng dụng nào khả dụng</string>
+    <string name="home_no_apps_subtitle">Thêm một nguồn bản vá hoặc bật một nguồn hiện có trong %s</string>
+    <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -603,12 +606,11 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
     <string name="settings_system_share_website_description">Chia sẻ trang web chính chủ của Morphe</string>
-    <string name="settings_system_manager_description">"Morphe là một dự án mã nguồn mở thử nghiệm, tập trung vào việc tạo ra một bản vá hiện đại, hợp lý hóa cho các ứng dụng Android phổ biến
-
-Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản hồi và đóng góp của cộng đồng nhằm thúc đẩy sự đổi mới trong tương lai"</string>
+    <string name="settings_system_manager_description">"Một dự án mã nguồn mở thử nghiệm để vá các ứng dụng Android phổ biến một cách hiện đại và hợp lý, được thúc đẩy bởi phản hồi và đóng góp của cộng đồng"</string>
     <string name="credits">Đóng góp</string>
     <string name="credits_current_development">Hiện tại</string>
     <string name="credits_prior_development">Trước đây</string>
+    <string name="opensource_licenses">Giấy phép mã nguồn mở</string>
     <!-- Shared strings -->
     <string name="patches">Bản vá</string>
     <string name="home">Trang chủ</string>

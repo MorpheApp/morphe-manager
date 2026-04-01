@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Показати приховані застосунки</string>
     <string name="home_app_no_hidden">Немає прихованих застосунків</string>
     <string name="home_app_hidden_apps_title">Приховані застосунки</string>
-    <string name="home_app_hidden_apps_hint">Натисніть на застосунок, щоб знову показати його у списку</string>
+    <string name="home_app_hidden_apps_hint">Натисніть, щоб показати</string>
     <string name="android_11_bug_dialog_title">Помилка Android 11</string>
     <string name="android_11_bug_dialog_description">Дозвіл на встановлення застосунку необхідно надати заздалегідь, щоб уникнути помилки в Android 11, яка негативно вплине на взаємодію з користувачем</string>
     <string name="deep_link_add_source_title">Додати джерело</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Оновлення джерел завершено</string>
     <string name="home_update_success_subtitle">Ваші джерела актуальні</string>
     <string name="home_sources_are_loading">Джерела завантажуються, будь ласка, зачекайте…</string>
-    <string name="home_please_wait">Будь ласка, зачекайте…</string>
+    <string name="home_search_apps">Пошук застосунків</string>
+    <string name="home_no_apps_title">Немає доступних застосунків</string>
+    <string name="home_no_apps_subtitle">Додайте джерело патчів або ввімкніть існуюче в %s</string>
+    <string name="home_no_apps_search_subtitle">Не знайдено застосунків, що відповідають запиту \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Який застосунок ви хочете пропатчити?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Про нас</string>
     <string name="settings_system_share_website">Поділитися вебсайтом</string>
     <string name="settings_system_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
-    <string name="settings_system_manager_description">"Morphe - це експериментальний проєкт із відкритим кодом, зосереджений на створенні сучасного та спрощеного механізму патчінгу популярних Android-застосунків.
-
-Маючи відкритий код, Morphe розвивається завдяки відгукам і внескам спільноти, що сприяють подальшим інноваціям"</string>
+    <string name="settings_system_manager_description">"Експериментальний проєкт із відкритим кодом для сучасного, спрощеного патчінгу популярних Android-застосунків, що розвивається завдяки відгукам та внесках спільноти"</string>
     <string name="credits">Подяки</string>
     <string name="credits_current_development">Поточна розробка</string>
     <string name="credits_prior_development">Попередня розробка</string>
+    <string name="opensource_licenses">Ліцензії відкритого коду</string>
     <!-- Shared strings -->
     <string name="patches">Патчі</string>
     <string name="home">Головна</string>

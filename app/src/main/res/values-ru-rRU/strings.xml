@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Показать скрытые приложения</string>
     <string name="home_app_no_hidden">Нет скрытых приложений</string>
     <string name="home_app_hidden_apps_title">Скрытые приложения</string>
-    <string name="home_app_hidden_apps_hint">Нажмите на приложение, чтобы снова показать его в списке</string>
+    <string name="home_app_hidden_apps_hint">Нажмите, чтобы показать</string>
     <string name="android_11_bug_dialog_title">Ошибка Android 11</string>
     <string name="android_11_bug_dialog_description">Для нормальной работы приложения необходимо предварительно предоставить разрешение на установку, чтобы избежать ошибки в системе Android 11, которая может негативно сказаться на пользовательском опыте</string>
     <string name="deep_link_add_source_title">Добавить источник</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Обновление источников завершено</string>
     <string name="home_update_success_subtitle">Ваши источники обновлены</string>
     <string name="home_sources_are_loading">Загрузка источников, пожалуйста, подождите…</string>
-    <string name="home_please_wait">Пожалуйста, подождите…</string>
+    <string name="home_search_apps">Поиск приложений</string>
+    <string name="home_no_apps_title">Приложения не найдены</string>
+    <string name="home_no_apps_subtitle">Добавить источник патча или включить существующий в %s</string>
+    <string name="home_no_apps_search_subtitle">Не найдено приложений, соответствующих \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Какое приложение вы хотите пропатчить?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,12 +605,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
     <string name="settings_system_share_website_description">Поделиться официальным сайтом Morphe</string>
-    <string name="settings_system_manager_description">"Morphe это экспериментальный проект с открытым кодом, ориентированный на современный и оптимизированный патчинг популярных Android приложений
-
-С открытым кодом в своей основе, Morphe процветает благодаря отзывам и вкладам сообщества, стимулирующим будущие инновации"</string>
+    <string name="settings_system_manager_description">"Экспериментальный проект с открытым исходным кодом для современного, упрощенного патчинга популярных Android-приложений, основанный на отзывах сообщества и вкладах"</string>
     <string name="credits">Благодарности</string>
     <string name="credits_current_development">Текущая разработка</string>
     <string name="credits_prior_development">Предыдущая разработка</string>
+    <string name="opensource_licenses">Лицензии с открытым исходным кодом</string>
     <!-- Shared strings -->
     <string name="patches">Патчи</string>
     <string name="home">Домашняя страница</string>

@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Zeige ausgeblendete Apps</string>
     <string name="home_app_no_hidden">Keine ausgeblendeten Apps</string>
     <string name="home_app_hidden_apps_title">Ausgeblendete Apps</string>
-    <string name="home_app_hidden_apps_hint">Tippen Sie auf eine App, um sie erneut in der Liste anzuzeigen</string>
+    <string name="home_app_hidden_apps_hint">Tippen, um anzuzeigen</string>
     <string name="android_11_bug_dialog_title">Android 11-Fehler</string>
     <string name="android_11_bug_dialog_description">Die App-Installationserlaubnis muss vorab erteilt werden, um einen Fehler im Android-11-System zu vermeiden, der die Benutzererfahrung negativ beeinflussen wird</string>
     <string name="deep_link_add_source_title">Quelle hinzufügen</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Aktualisierung der Quellen abgeschlossen</string>
     <string name="home_update_success_subtitle">Ihre Quellen sind auf dem neuesten Stand</string>
     <string name="home_sources_are_loading"> Quellen werden geladen, bitte warten…</string>
-    <string name="home_please_wait">Bitte warten…</string>
+    <string name="home_search_apps">Apps suchen</string>
+    <string name="home_no_apps_title">Keine Apps verfügbar</string>
+    <string name="home_no_apps_subtitle">Eine Patch-Quelle hinzufügen oder eine vorhandene in %s aktivieren</string>
+    <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welche App möchten Sie patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -248,14 +251,14 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="patcher_storage_badge_missing">Nicht gefunden</string>
     <string name="patcher_storage_permission_hint">Tipp: Verschieben Sie Dateien nach /Android/data/app.morphe.manager/files/ - keine zusätzlichen Berechtigungen erforderlich</string>
     <!-- Patcher Screen - Patcher Steps -->
-    <string name="patcher_step_group_preparing">Vorbereitung</string>
+    <string name="patcher_step_group_preparing">Wird vorbereitet</string>
     <string name="patcher_step_load_patches">Patches werden geladen</string>
-    <string name="patcher_step_prepare_split_apk">Split-APK zusammenführen</string>
-    <string name="patcher_step_unpack">APK-Datei lesen</string>
-    <string name="patcher_step_group_patching">Patche</string>
-    <string name="patcher_step_group_saving">Speichern</string>
-    <string name="patcher_step_write_patched">Gepatchte APK-Datei schreiben</string>
-    <string name="patcher_step_sign_apk">Gepatchte APK-Datei signieren</string>
+    <string name="patcher_step_prepare_split_apk">Split-APK wird zusammengeführt</string>
+    <string name="patcher_step_unpack">APK-Datei wird gelesen</string>
+    <string name="patcher_step_group_patching">Wird gepatcht</string>
+    <string name="patcher_step_group_saving">Wird gespeichert</string>
+    <string name="patcher_step_write_patched">Gepatchte APK-Datei wird geschrieben</string>
+    <string name="patcher_step_sign_apk">Gepatchte APK-Datei wird signiert</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patchen läuft…</string>
     <string name="patcher_notification_text">Zum Patcher zurückkehren</string>
@@ -602,12 +605,11 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_about">Über</string>
     <string name="settings_system_share_website">Website teilen</string>
     <string name="settings_system_share_website_description">Teilen Sie die offizielle Morphe-Website</string>
-    <string name="settings_system_manager_description">"Morphe ist ein experimentelles Open-Source-Projekt, das sich auf die Entwicklung eines modernen und effizienten Patch-Verfahrens für gängige Android-Apps konzentriert
-
-Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Community, um zukünftige Innovationen voranzutreiben"</string>
+    <string name="settings_system_manager_description">"Ein experimentelles Open-Source-Projekt für modernes, optimiertes Patchen beliebter Android-Apps, das von Community-Feedback und -beiträgen angetrieben wird"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Aktuelle Entwicklung</string>
     <string name="credits_prior_development">Frühere Entwicklung</string>
+    <string name="opensource_licenses">Open-Source-Lizenzen</string>
     <!-- Shared strings -->
     <string name="patches">Patches</string>
     <string name="home">Startseite</string>

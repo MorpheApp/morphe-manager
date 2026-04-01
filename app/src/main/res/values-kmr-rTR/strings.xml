@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Appên veşartiye werin bike.</string>
     <string name="home_app_no_hidden">Appên veşartiye tune</string>
     <string name="home_app_hidden_apps_title">Appên veşartiye</string>
-    <string name="home_app_hidden_apps_hint">Serlêsti appê bikar bike ku wê di qasêt dîsa dimeşîne</string>
+    <string name="home_app_hidden_apps_hint">İ kilavê rê bifikin</string>
     <string name="android_11_bug_dialog_title">Xetaya Android 11</string>
     <string name="android_11_bug_dialog_description">Semanka zetîn pêwist be pêşbaziyê pêş de bêtin da hêz be serir xendna Androida 11 zibu vê hilenkirinê yarde ji bo seranê her serxistine ye \'</string>
     <string name="deep_link_add_source_title">Kanîna çavkaniyê zêde bike</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Sazkirina kanalan temam bû</string>
     <string name="home_update_success_subtitle">Kanalan we nû kirin</string>
     <string name="home_sources_are_loading">Kanalan ketin, ji kerema xwe bibeku</string>
-    <string name="home_please_wait">Heke...</string>
+    <string name="home_search_apps">İlave avakurîn</string>
+    <string name="home_no_apps_title">Bername nîn in.</string>
+    <string name="home_no_apps_subtitle">Çavkanîyê zêde bike an yek jibo %s veşêre.</string>
+    <string name="home_no_apps_search_subtitle">Hewa bernameyên \"%1$s\" tune.</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kudu ezîtekora kodê ji xwerêzê we yê çawa îdeal bike?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -600,12 +603,11 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_about">Derbarê</string>
     <string name="settings_system_share_website">Malperê parve bike</string>
     <string name="settings_system_share_website_description">Malpera fermî ya Morphe parve bike</string>
-    <string name="settings_system_manager_description">"Morphe projeyek eksperîmental a vebûyî ya vebûyî ye ku li ser afûre darêk nûjen û pêşkeftî ya sepanên Android ên populer e.
-
-Di navê vebûyî de, Morphe li ser bersivên civakê û beşdarbûna civakê ji bo rêzgîhaniya nûjeniyê serdike."</string>
+    <string name="settings_system_manager_description">"Projeyekek eksperîmental, çavkanî vekirî ku ji bo nûjenkirin, pêşbazîkirina hirastina sepanên Android populer, bi bandora vegera civakê û bejên."</string>
     <string name="credits">Kredît</string>
     <string name="credits_current_development">Gelişîna heyî</string>
     <string name="credits_prior_development">Gelişîna berê</string>
+    <string name="opensource_licenses">Lîsansên çavkaniyê vekirî</string>
     <!-- Shared strings -->
     <string name="patches">Saxkirin</string>
     <string name="home">Mal</string>

@@ -2,16 +2,35 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Aplikasi lain</string>
-    <string name="home_not_patched_yet">Belum dipatch lagi</string>
+    <string name="home_not_patched_yet">Belum ditampal lagi</string>
+    <string name="home_no_patches_available">Tiada tampalan tersedia</string>
+    <string name="home_app_hide_title">Sorokkan aplikasi ini?</string>
+    <string name="home_app_hide_message">Aplikasi ini akan di sorokkan dari paparan utama. Anda boleh munculkan kembali menggunakan butang \'%1$s\' di akhir senarai</string>
+    <string name="home_app_will_be_hidden">Aplikasi ini akan disorokkan</string>
+    <string name="home_app_show_hidden">Tunjukkan aplikasi tersorok</string>
+    <string name="home_app_no_hidden">Tiada aplikasi tersorok</string>
+    <string name="home_app_hidden_apps_title">Aplikasi tersorok</string>
     <string name="android_11_bug_dialog_title">Pepijat Android 11</string>
     <string name="android_11_bug_dialog_description">Kebenaran pemasangan aplikasi mesti diberikan lebih awal untuk mengelakkan pepijat dalam sistem Android 11 yang akan menjejaskan pengalaman pengguna secara negatif</string>
+    <string name="deep_link_add_source_title">Tambah sumber</string>
+    <string name="deep_link_add_source_message">Adakah anda mahu tambahkan sumber tampalan ini ke Morphie</string>
+    <string name="deep_link_add_source_warning">Hanya tambahkan sumber yang anda percaya</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Kemas kini Morphie tersedia</string>
+    <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
     <string name="home_update_error">Kemas kini gagal</string>
     <string name="home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
-    <string name="home_please_wait">Sila tunggu…</string>
+    <string name="home_update_skipped_metered">Kemas kini taraf dilangkau</string>
+    <string name="home_update_skipped_metered_subtitle">Data mudah alih aktif</string>
+    <string name="home_updating_sources">Kemas kini sumber-sumber… </string>
+    <string name="home_update_progress_format">%1$s proses</string>
+    <string name="home_update_success">Kemas kini sumber selesai</string>
+    <string name="home_update_success_subtitle">Sumber-sumbee anda adalah yang terkini</string>
+    <string name="home_sources_are_loading">Sumber sedang di muat naik, sila tunggu… </string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang hendak kamu tampal? </string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="home_greeting_2">Sedia untuk wujudkan semula aplikasi lagenda?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Bersedia, waktunya untuk menampal</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -29,12 +48,41 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Dikuasakan oleh kafein dan tampalan yang bagus</string>
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">Tampalan sumber-sumber</string>
     <string name="sources_management_open_in_browser">Buka dalam pelayar web</string>
     <string name="sources_management_failed_to_open_url">Gagal untuk membuka URL</string>
+    <string name="sources_management_prerelease_toggle">Guna tampalan pra-keluaran</string>
+    <string name="sources_management_prerelease_toggle_description">Dapat akses awal kepada versi baharu tampalan uji kaji</string>
+    <string name="sources_management_experimental_versions_toggle">Guna aplikasi versi uji kaji</string>
+    <string name="sources_management_experimental_versions_toggle_description">Tampal aplikasi uji kaji jika tersedia</string>
+    <string name="sources_management_already_exists">Sumber ini sudah ditambah sebelumnya</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama paparan</string>
+    <string name="sources_dialog_rename">Namakan semula sumber tampalan</string>
+    <string name="sources_dialog_duplicate_name_error">Sumber tampalan dengan nama yang sama telah wujud</string>
+    <string name="sources_dialog_missing_error">Sumber tampalan ini tidak boleh di kemas kini</string>
+    <string name="sources_dialog_view_any_version">Mana-mana versi</string>
+    <string name="sources_dialog_view_any_package">Mana-mana pakej</string>
+    <string name="sources_dialog_add_source">Tambah sumber tampalan</string>
+    <string name="sources_dialog_delete_confirm_message">Padam sumber \"%s\"? Ia tidak boleh di undur</string>
+    <string name="sources_dialog_remote">Alat kawalan jauh</string>
+    <string name="sources_dialog_remote_url">URL sumber</string>
+    <string name="sources_dialog_remote_url_formats_title">Contoh:</string>
+    <string name="sources_dialog_local">Lokal</string>
+    <string name="sources_dialog_local_file">Pilih fail sumber tampalan</string>
+    <string name="sources_dialog_local_file_description">Pilih fail sumber tampalan .mpp dari storan</string>
+    <string name="sources_dialog_local_change_file">Tukar fail</string>
+    <string name="sources_dialog_preinstalled">Pra-pasang</string>
+    <string name="sources_update_success">Kemas kini berjaya</string>
+    <string name="sources_update_unavailable">Tiada kemas kini tersedia</string>
+    <string name="sources_download_fail">Gagal untuk muat turun sumber: %s</string>
+    <string name="sources_download_endpoint_not_found">Tidak dapat di kemas kini \'%1$s\': fail tampalan JSON tidak dijumpai pada URL yang dikonfigurasikan</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_dialog_title">Perlukan bantuan mencari APK asal yang belum ditampal?</string>
+    <string name="home_apk_availability_dialog_simple">Untuk tampal &lt;b&gt;%s&lt;/b&gt;, anda perlukan versi APK yang belum ditampal</string>
+    <string name="home_apk_availability_dialog_expert">Untuk tampal &lt;b&gt;%s&lt;/b&gt;, anda perlukan versi APK yang belum ditampal</string>
     <string name="home_apk_availability_recommended_label">Direkomendasi</string>
+    <string name="home_apk_availability_unpatched_label">Tidak ditampal</string>
     <string name="home_apk_availability_yes">Ya, bantu saya cari APK</string>
     <string name="home_apk_availability_no">Tidak, saya ada APK</string>
     <string name="home_apk_use_saved_with_version">Guna APK tersimpan (v%s)</string>
@@ -67,7 +115,7 @@
     <string name="expert_mode_enable_all">Hidupkan semua</string>
     <string name="expert_mode_no_results">Tiada tampalan tersedia</string>
     <string name="expert_mode_universal_patches">Tampalan universal</string>
-    <string name="expert_mode_multiple_sources_warning_title">Pelbagai sumber tampalan di pilih</string>
+    <string name="expert_mode_multiple_sources_warning_title">Pelbagai sumber tampalan dipilih</string>
     <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tampalan dari berbagai sumber tampalan. Ini mungkin boleh menyebabkan masalah kesesuaian atau tingkah laku yang tidak dijangka.
 
 Anda pasti untuk meneruskannya?"</string>
@@ -112,20 +160,72 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patch_option_pick_folder">Pilih folder </string>
     <string name="patch_option_list_duplicate">Nilai ini sudah wujud</string>
     <string name="patch_option_list_empty">Nilai tidak boleh kosong</string>
+    <string name="patch_option_list_empty_state">Tiada nilai ditambah lagi</string>
     <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_create">Cipta ikon adaptif</string>
+    <string name="adaptive_icon_instructions">Pilih imej latar depan, pilih warna latar belakang, kemudian gunakan gelangser atau isyarat ketuk untuk menyesuaikan pratonton</string>
+    <string name="adaptive_icon_preview">Pratonton ikon adaptif</string>
+    <string name="adaptive_icon_preview_hint">Untuk hasil yang terbaik, simpan ikon anda dalam bulatan dalam yang pepejal</string>
+    <string name="adaptive_icon_select_image">Pilih imej</string>
+    <string name="adaptive_icon_change_image">Tukar imej</string>
+    <string name="adaptive_icon_background_color">Warna latar belakang</string>
+    <string name="adaptive_icon_reset_transform">Balik ke kedudukan dan skala asal</string>
+    <string name="adaptive_icon_safe_zone_inner">Zon selamat (selalu dapat dilihat)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zon topeng (mungkin dipotong)</string>
+    <string name="adaptive_icon_created_success">Ikon adaptif telah dicipta dengan jayanya</string>
+    <string name="adaptive_icon_creation_failed">Gagal untuk mencipta ikon adaptif</string>
+    <string name="adaptive_icon_folder_explanation">Pilih tempat untuk mencipta folder \'%1$s/%2$s\' dengan fail ikon yang dijana</string>
+    <string name="notification_icon_preview">Pratonton ikon notifikasi</string>
+    <string name="notification_icon_preview_hint">Gunakan gelangser untuk menukar saiz. Seret untuk memposisikan semula</string>
     <!-- Header Creator -->
+    <string name="header_creator_create">Cipta tajuk khusus</string>
+    <string name="header_creator_instructions">Pilih imej untuk tema terang dan gelap, kemudian laraskan dengan isyarat cengkam-untuk-zum</string>
+    <string name="header_creator_light_theme">Tajuk tema terang</string>
+    <string name="header_creator_dark_theme">Tajuk tema gelap</string>
+    <string name="header_creator_no_image">Tiada imej dipilih</string>
+    <string name="header_creator_success">Tajuk telah dicipta dengan jayanya</string>
+    <string name="header_creator_failed">Gagal untuk mencipta tajuk</string>
+    <string name="header_creator_folder_explanation">Pilih tempat untuk mencipta folder \'%1$s/%2$s\' dengan fail kepala yang dijana</string>
     <!-- Home Screen - App Info Screen -->
+    <string name="home_app_info_uninstall_app_confirmation">Adakah anda pasti mahu menyahpasang aplikasi ini?</string>
+    <string name="home_app_info_remove_app_warning">Ini akan dipadam secara kekal:</string>
+    <string name="home_app_info_delete_item_database">Pendaftaran pangkalan data</string>
+    <string name="home_app_info_delete_item_patched_apk">Fail APK yang ditampal</string>
+    <string name="home_app_info_delete_item_original_apk">Fail APK asal</string>
+    <string name="home_app_info_delete_preservation_note">Pilihan patch anda dan pilihan akan kekal untuk patching masa depan</string>
     <string name="home_app_info_patches_name_default">Tampalan</string>
     <string name="home_app_info_patches_name_fallback">Tidak dinamakan</string>
+    <string name="home_app_info_patches_replace_fail">Gagal mengimport tampalan: %s</string>
+    <string name="home_app_info_repatch_no_original_apk">APK asal tidak ditemui. Tidak boleh menampal semula aplikasi ini</string>
+    <string name="home_app_info_original_package_name">Nama pakej asal</string>
+    <string name="home_app_info_applied_patches">Tampalan yang digunakan</string>
+    <string name="home_app_info_patch_source_used">Sumber tampalan digunakan</string>
+    <string name="home_app_info_install_type">Jenis pemasangan</string>
+    <string name="home_app_info_install_type_custom_installer">Pemasang tersuai</string>
+    <string name="home_app_info_install_type_system_installer">Pemasang sistem</string>
+    <string name="home_app_info_patched_at">Tertampal</string>
+    <string name="home_app_info_patch_update_available">Kemas kini tampalan tersedia</string>
+    <string name="home_app_info_patch_update_available_description">Versi patch yang lebih baru tersedia. Repatch aplikasi anda untuk mendapatkan penambahbaikan dan pembaikan terkini</string>
+    <string name="home_app_info_app_deleted_warning">Aplikasi telah dinyahpasangkan</string>
+    <string name="home_app_info_app_deleted_description">Aplikasi ini telah dinyahpasangkan di luar Morphe. Kembalikan ia untuk memulihkan fungsi</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mod root memerlukan APK asal diinstal pada peranti anda sebelum menampal</string>
     <string name="root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
+    <string name="root_pre_patch_installer_title">Pilih kaedah pemasangan</string>
+    <string name="root_pre_patch_installer_description">Peranti anda mempunyai akses root. Pilih cara anda ingin memasang aplikasi yang ditampal</string>
+    <string name="root_pre_patch_installer_mount_title">Mount Root</string>
+    <string name="root_pre_patch_installer_mount_description">Mount APK yang ditampal di atas aplikasi stok. GmsCore tidak diperlukan</string>
+    <string name="root_pre_patch_installer_standard_title">Pemasangan Standard</string>
+    <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi berasingan dengan sokongan GmsCore. Pilih pemasang (pemasang Sistem, Shizuku, dsb.) selepas tampalan</string>
+    <string name="root_pre_patch_installer_hint">Kaedah pemasangan menentukan tampalan mana yang disertakan dan tidak boleh diubah selepas tampalan</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
+    <string name="patcher_error_log">Log ralat</string>
+    <string name="patcher_error_technical">Perincian teknikal</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir bersedia untuk beraksi! 🎸</string>
     <string name="patcher_success_title">Semua Selesai! 🎉</string>
-    <string name="patcher_success_subtitle">Apl anda ditampal dan dipasang!</string>
+    <string name="patcher_success_subtitle">Aplikasi anda ditampal dan dipasang!</string>
     <string name="patcher_complete_title">Tampalan Selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Ada sesuatu yang tidak kena</string>
     <string name="patcher_failed_subtitle">Semak butiran ralat di bawah</string>
@@ -137,8 +237,29 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_install_error_subtitle">Cuba nyahpasang dan pasang semula</string>
     <string name="patcher_ready_to_install_subtitle">Tekan butang dibawah untung pasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan butang dibawah untuk memasang</string>
+    <string name="patcher_storage_permission_dialog_title">Laluan storan tidak dapat diakses</string>
+    <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tampalan menuju ke laluan yang Morphe tidak dapat baca. Benarkan akses storan dan tekan butang kemudian tampalan akan mula secara automatik</string>
+    <string name="patcher_storage_permission_description_legacy">Satu atau lebih pilihan tampalan menuju ke laluan yang tidak dapat diakses. Kemas kini laluan pada pilihan tampalan dan cuba semula</string>
+    <string name="patcher_storage_permission_grant">Berikan akses storan</string>
+    <string name="patcher_storage_permission_denied_warning">Akses storan ditolak. Berikan akses untuk gunakan laluan ini atau pindahkan fail-fail ke direktori peribadi aplikasi</string>
+    <string name="patcher_storage_permission_open_settings">Buka tetapan storan</string>
+    <string name="patcher_storage_badge_denied">Kebenaran ditolak</string>
+    <string name="patcher_storage_badge_missing">Tidak dijumpai</string>
+    <string name="patcher_storage_permission_hint">Perkongsian maklumat: Pindahkan fail-fail ke /Android/data/app.morphe.manager/files/ - tiada kebenaran tambahan diperlukan</string>
     <!-- Patcher Screen - Patcher Steps -->
+    <string name="patcher_step_group_preparing">Menyediakan</string>
+    <string name="patcher_step_load_patches">Memuatkan tampalan</string>
+    <string name="patcher_step_prepare_split_apk">Mencantumkan APK terpisah</string>
+    <string name="patcher_step_unpack">Baca fail APK</string>
+    <string name="patcher_step_group_patching">Menampal</string>
+    <string name="patcher_step_group_saving">Menyimpan</string>
+    <string name="patcher_step_write_patched">Menulis fail APK yang ditampal</string>
+    <string name="patcher_step_sign_apk">Menandatangani fail APK ditampal</string>
     <!-- Patcher Screen - Patcher Worker -->
+    <string name="patcher_notification_title">Tampalan sedang berjalan… </string>
+    <string name="patcher_notification_text">Tekan untuk kembali ke penampal</string>
+    <string name="patcher_stop_confirm_title">Berhenti menampal</string>
+    <string name="patcher_stop_confirm_description">Anda pasti untuk memberhentikan proses tampalan?</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">Mengubah aplikasi kamu kepada sesuatu yang menakjubkan… 🏆</string>
     <string name="patcher_message_2">Mengajar aplikasi lama helah baharu… 🎩</string>
@@ -163,42 +284,414 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Menukar superposisi aplikasi daripada tidak ditampal kepada ditampal… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="patcher_message_19">Aplikasi anda mengalami demam, dan salah satu rawatan ialah dengan lebih banyak tampalan…  🩺🔔</string>
+    <string name="patcher_message_20">Membuang hal tidak penting. Tolong bersedia… 🗑️</string>
     <!-- Expert patcher Screen -->
+    <string name="patching_app">Menampal aplikasi</string>
+    <string name="memory_usage">Penggunaan memori</string>
     <!-- Patcher Screen - Other hidden strings -->
+    <string name="applying_patches">Memasang tampalan</string>
+    <string name="failed_to_execute_patch">Gagal untuk memasang %s</string>
+    <string name="patched_app_saved_toast">Aplikasi telah ditampal disimpan untuk lain kali</string>
+    <string name="patched_app_save_failed_toast">Gagal untuk menyimpan aplikasi yang telah ditampal</string>
+    <string name="download_apk">Muat turun fail APK</string>
+    <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk meneruskan dengan pemalam ini</string>
+    <string name="patcher_process_exit_message">Proses penampalan keluar dengan kod %1$s</string>
+    <string name="install_app_success">Pemasangan berjaya</string>
+    <string name="install_app_fail">Gagal untuk dipasang: %s</string>
+    <string name="install_timeout_message">Pemasangan tidak selesai. Semak dialog sistem pemasang dan cuba semula</string>
+    <string name="save_apk_success">APK tersimpan</string>
+    <string name="saved_app_export_failed">Gagal untuk membawa keluar aplikasi yang tertampal</string>
+    <string name="saved_app_removed_toast">Aplikasi tertampal yang disimpan telah dibuang</string>
+    <string name="saved_app_copy_removed_toast">Salinan yang disimpan telah dibuang</string>
+    <string name="saved_app_launch_unavailable">Pasang aplikasi sebelum membukanya</string>
+    <string name="package_name">Nama pakej</string>
+    <string name="failed_to_mount">Gagal untuk ditunggang: %s</string>
+    <string name="failed_to_unmount">Gagal untuk nyah-tunggang %s</string>
     <!-- Settings -->
+    <string name="appearance">Penampilan</string>
+    <string name="advanced">Lebih mahir</string>
+    <string name="system">Sistem</string>
     <!-- Settings - Appearance Tab - Background animation -->
+    <string name="settings_appearance_background">Animasi latar belakang</string>
+    <string name="settings_appearance_background_circles">Bulatan</string>
+    <string name="settings_appearance_background_rings">Rings</string>
+    <string name="settings_appearance_background_mesh">Mesh</string>
+    <string name="settings_appearance_background_space">Ruang</string>
+    <string name="settings_appearance_background_shapes">Bentuk</string>
+    <string name="settings_appearance_background_snow">Salji</string>
+    <string name="settings_appearance_background_grid">Grid</string>
+    <string name="settings_appearance_background_particles">Zarah</string>
+    <string name="settings_appearance_background_none">Tiada</string>
+    <string name="settings_appearance_parallax_effect">Efek parallax</string>
+    <string name="settings_appearance_parallax_effect_description">Pengelasan latar belakang yang lancar apabila menundukkan peranti</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_system">Sistem</string>
+    <string name="settings_appearance_light">Cahaya</string>
+    <string name="settings_appearance_dark">Gelap</string>
+    <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_accent_color">Warna aksen</string>
+    <string name="settings_appearance_pure_black">Hitam Tulen</string>
+    <string name="settings_appearance_pure_black_description">Gunakan latar belakang hitam sejati</string>
     <!-- Settings - Appearance Tab - Language Selector -->
+    <string name="settings_appearance_app_language">Bahasa aplikasi</string>
+    <string name="settings_appearance_app_language_current">Bahasa semasa</string>
+    <string name="settings_appearance_translations_info_title">Terjemahan untuk sesetengah bahasa mungkin kurang atau tidak lengkap</string>
+    <string name="settings_appearance_translations_info_text">Untuk menterjemahkan bahasa baharu atau memperbaiki terjemahan yang sedia ada, lawati %s</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
+    <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
+    <string name="settings_appearance_app_icon_default">Lalai</string>
+    <string name="settings_appearance_app_icon_light_2">Langit</string>
+    <string name="settings_appearance_app_icon_light_3">Senja</string>
+    <string name="settings_appearance_app_icon_dark_1">Lautan</string>
+    <string name="settings_appearance_app_icon_dark_2">Sunyi</string>
+    <string name="settings_appearance_app_icon_dark_3">Ungu</string>
+    <string name="settings_appearance_app_icon_change_dialog_title">Tukar ikon aplikasi?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Tukar kepada \'%1$s\' dan mulakan semula?</string>
+    <string name="settings_appearance_app_icon_change_dialog_confirm">Tukar ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
+    <string name="settings_advanced_updates">Kemas kini</string>
+    <string name="settings_advanced_updates_use_prereleases">Gunakan Morphe pra-keluaran</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Dapatkan akses awal ke ciri-ciri Morphe baharu. Untuk mendapatkan tampalan pra-keluaran, aktifkan suis toggle pra-keluaran dalam setiap sumber tampalan secara berasingan</string>
+    <string name="settings_advanced_updates_allow_metered">Kemaskini melalui data mudah alih</string>
+    <string name="settings_advanced_updates_allow_metered_description">Benarkan Morphe dan kemas kini tampalan memuat turun melalui data mudah alih</string>
+    <string name="settings_advanced_updates_background_notifications">Pemberitahuan kemas kini latar belakang</string>
+    <string name="settings_advanced_updates_background_notifications_description">Semak kemas kini secara berkala di latar belakang dan beritahu apabila tersedia</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Terima pemberitahuan tolak pantas untuk keluaran baharu, walaupun aplikasi ditutup</string>
+    <string name="settings_advanced_update_interval">Semak kekerapan</string>
+    <string name="settings_advanced_update_interval_dialog_title">Semak kemas kini</string>
+    <string name="settings_advanced_update_interval_hourly">Sekali setiap jam</string>
+    <string name="settings_advanced_update_interval_daily">Sekali sehari</string>
+    <string name="settings_advanced_update_interval_weekly">Sekali seminggu</string>
+    <string name="settings_advanced_update_interval_monthly">Sebulan sekali</string>
+    <string name="settings_advanced_update_interval_chip_subtitle">Kekerapan pemeriksaan latar belakang</string>
+    <string name="settings_advanced_update_interval_battery_warning">Pemeriksaan latar belakang mungkin tidak berfungsi dengan boleh dipercayai pada beberapa peranti. Pengilang seperti Xiaomi, Huawei, Samsung, dan OnePlus sering kali mengehadkan proses latar belakang dengan agresif untuk menjimatkan bateri</string>
     <!-- Notification content -->
+    <string name="notification_manager_update_title">Kemas kini Morphie tersedia</string>
+    <string name="notification_bundle_update_title">Tampalan baharu tersedia</string>
+    <string name="notification_update_text">Versi %1$s sedia untuk dimuat turun</string>
+    <string name="notification_bundle_update_text_unversioned">Tekan untuk buka Morphe dan kemas kini</string>
+    <string name="notification_permission_dialog_title">Benarkan notifikasi</string>
+    <string name="notification_permission_dialog_description">Morphe memerlukan kebenaran notifikasi untuk memberitahu anda apabila kemas kini tersedia di latar belakang</string>
+    <string name="notification_post_patch_dialog_title">Sudikah anda untuk menerima notifikasi apabila kemas kini tersedia? </string>
+    <string name="notification_channel_fcm_updates">Kemas kini notifikasi</string>
+    <string name="notification_channel_fcm_updates_description">Notifikasi tentang Morphe baharu dan pelepasan tampalan</string>
+    <string name="notification_channel_patcher">Menampal</string>
+    <string name="notification_channel_patcher_description">Ditunjukkan semasa Morphe menampal aplikasi di latar belakang</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <string name="settings_advanced_expert">Tetapan pakar</string>
     <string name="settings_advanced_expert_mode">Mod mahir</string>
+    <string name="settings_advanced_expert_mode_description">Aktifkan tetapan dan pilihan penyesuaian Morphe yang kompleks</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
+    <string name="settings_advanced_strip_unused_libs">Buang pustaka asli yang tidak digunakan</string>
+    <string name="settings_advanced_strip_unused_libs_description">Padamkan pustaka asli untuk seni bina CPU yang tidak disokong dari aplikasi yang ditampal</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">GitHub PAT</string>
+    <string name="settings_advanced_github_pat_description">Diperlukan untuk sumber permintaan sedekah</string>
+    <string name="settings_advanced_github_pat_configured">Token dikonfigurasikan</string>
+    <string name="settings_advanced_github_pat_how_to_get">Cara mendapatkan token</string>
+    <string name="settings_advanced_github_pat_dialog_title">Tetapkan GitHub Personal Access Token</string>
+    <string name="settings_advanced_github_pat_dialog_description">Tetapkan Token Akses Peribadi GitHub untuk dapat menambah permintaan tarik sebagai sumber luaran. Buat PAT dengan skop awam_repo github.com</string>
+    <string name="settings_advanced_github_pat_export_include_label">Sertakan dalam eksport tetapan</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Tambahkan PAT ini ke tetapan Morphe dieksport</string>
+    <string name="settings_advanced_github_pat_export_warning">Jangan kongsi PAT anda. Jika anda menyertakannya dalam satu eksport tetapan, simpan fail tersebut sebagai sulit kerana ia mengandungi token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
+    <string name="settings_advanced_patch_options">Pilihan tampalan</string>
+    <string name="settings_advanced_patch_options_youtube_description">Pilihan tema, penjenamaan, dan kepala</string>
+    <string name="settings_advanced_patch_options_restart_message">Mengubah pilihan tampalan memerlukan aplikasi ditampal semula agar berkesan</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">Dalam mod Pakar pilihan tampalan akan tersedia semasa proses tampalan</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
+    <string name="settings_advanced_patch_options_theme_colors">Warna tema aplikasi</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">Tukar warna latar belakang</string>
+    <string name="settings_advanced_patch_options_dark_theme_color">Warna latar belakang tema gelap</string>
+    <string name="settings_advanced_patch_options_light_theme_color">Warna latar belakang tema terang</string>
+    <string name="settings_advanced_patch_options_theme_color_description">Boleh menjadi warna heks (#RRGGBB) atau rujukan sumber warna</string>
+    <string name="settings_advanced_patch_options_loading">Memuatkan pilihan tampalan…</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Tunggu sehingga sumber tampalan dikemas kini</string>
+    <string name="settings_advanced_patch_options_load_error">Gagal memuatkan pilihan tampalan</string>
+    <string name="settings_advanced_patch_options_no_available">Tiada pilihan yang tersedia untuk tampalan ini</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
+    <string name="settings_advanced_patch_options_custom_branding">Jenama tersuai</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Tukar nama paparan aplikasi</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_name">Nama aplikasi</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Masukkan nama tersuai</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ikon tersuai</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder dengan imej untuk digunakan sebagai ikon khusus.
+
+Folder tersebut mesti mengandungi satu atau lebih folder berikut, bergantung kepada DPI peranti:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Setiap folder mestilah mengandungi semua fail berikut:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Saiz dimensi imej mestilah seperti berikut:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Secara pilihan, laluan mengandungi folder 'drawable' dengan fail ikon monokrom:
+morphe_adaptive_monochrome_custom.xml
+
+Secara pilihan, laluan mengandungi ikon pemberitahuan dalam salah satu format berikut:
+- Lukisan vektor XML dalam 'drawable':
+  morphe_notification_icon_custom.xml
+- Imej raster PNG dalam folder 'drawable-dpi':
+  drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
+  drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
+  drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
+  drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
+  drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
+    <string name="settings_advanced_patch_options_custom_header">Logo kepala tersuai</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Tukar logo kepala</string>
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Folder dengan gambar untuk digunakan sebagai logo kepala tersuai.
+
+Folder mesti mengandungi satu atau lebih folder berikut, bergantung pada DPI peranti:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Setiap folder mesti mengandungi semua fail berikut:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Dimensi gambar mestilah seperti berikut:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
+    <string name="settings_advanced_patch_options_hide_shorts_features">Sembunyikan ciri Shorts</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Sembunyikan pintasan aplikasi Shorts</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Buang Shorts daripada menu tekan lama pelancar</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Sembunyikan widget Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Buang butang Shorts dari widget pelancar</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
+    <string name="installer_title">Pilih pemasang</string>
+    <string name="installer_internal_name">Pemasang sistem</string>
+    <string name="installer_internal_description">Gunakan pemasang pakej Android</string>
+    <string name="installer_auto_saved_name">Pemasang pemasang berakar</string>
+    <string name="installer_auto_saved_description">Memasang APK yang ditampal di atas aplikasi yang dipasang</string>
+    <string name="installer_shizuku_description">Pasang secara senyap menggunakan Shizuku atau Sui</string>
+    <string name="installer_option_none">Tiada kejatuhan</string>
+    <string name="installer_none_description">Tiada kejatuhan pemasang yang dikonfigurasi</string>
+    <string name="installer_status_requires_root">Memerlukan akses akar</string>
+    <string name="installer_status_not_supported">Tidak disokong untuk tindakan ini</string>
+    <string name="installer_status_shizuku_not_installed">Pasang Shizuku atau Sui untuk menggunakan pilihan ini</string>
+    <string name="installer_status_shizuku_not_running">Mula Shizuku atau Sui dan cuba lagi</string>
+    <string name="installer_status_shizuku_permission">Berikan kebenaran Shizuku kepada Morphe dari aplikasi Shizuku</string>
+    <string name="installer_mount_warning_install">Pemasang utama anda ditetapkan kepada pemasang mount berakar. Aplikasi yang disimpan ini tidak dipasang menggunakan mount</string>
+    <string name="mount_version_mismatch_message">Versi aplikasi Stok (%2$s) tidak serasi dengan versi aplikasi yang dipatch (%1$s). Pasang versi Stok yang serasi, kemudian cuba lagi</string>
+    <string name="installer_status_shizuku_unsupported">Pemasangan gagal. Cuba lagi atau tukar kepada pemasang yang berbeza</string>
+    <string name="installer_action_open_shizuku">Buka Shizuku</string>
+    <string name="installer_hint_generic">Pemasangan disekat oleh Android. Periksa Play Protect atau tetapan keselamatan</string>
+    <string name="installer_hint_blocked">Mula Shizuku atau Sui dan cuba lagi</string>
+    <string name="installer_hint_conflict">Satu lagi aplikasi dengan nama pakej ini sudah dipasang.</string>
+    <string name="installer_hint_incompatible">APK tidak serasi dengan peranti atau versi Android ini</string>
+    <string name="installer_hint_invalid">APK tidak sah atau rosak</string>
+    <string name="installer_hint_storage">Tiada ruang simpanan yang mencukupi untuk pemasangan</string>
+    <string name="installer_hint_timeout">Pemasangan telah tamat tempoh. Cuba lagi</string>
+    <string name="installer_hint_aborted">Pemasangan dibatalkan</string>
+    <string name="installer_external_launched">Membuka %1$s…</string>
+    <string name="installer_external_timeout">%1$s tidak mengesahkan pemasangan. Periksa aplikasi lain dan cuba lagi</string>
+    <string name="installer_external_success">%1$s melaporkan pemasangan berjaya</string>
+    <string name="installer_unavailable_title">%s tidak tersedia</string>
+    <string name="installer_unavailable_message">Pemasang pilihan anda (%s) tidak tersedia pada masa ini. Anda boleh memperbaiki isu itu dan cuba lagi, atau gunakan pemasang standard sebagai gantinya</string>
+    <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin telah diberikan kepada aplikasi ini</string>
+    <string name="installer_use_standard">Gunakan standard</string>
+    <string name="settings_prompt_installer_on_install">Prompt pemasang pada pemasangan</string>
+    <string name="settings_prompt_installer_on_install_description">Tunjukkan dialog pilihan pemasang setiap kali anda memasang aplikasi yang ditampal</string>
     <!-- Settings - System Tab - Performance Section -->
+    <string name="settings_system_performance">Prestasi</string>
+    <string name="settings_system_process_runtime">Masa runtime proses</string>
+    <string name="settings_system_process_runtime_description">Jalankan tampalan dalam proses berasingan untuk kestabilan yang lebih baik</string>
+    <string name="settings_system_process_runtime_memory_limit">Had memori</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Had memori yang lebih tinggi boleh mempercepatkan tampalan tetapi mungkin tidak berfungsi dengan peranti lama</string>
+    <string name="settings_system_process_runtime_enable">Aktifkan masa runtime proses</string>
+    <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk tampalan</string>
+    <string name="settings_system_memory_limit_warning">Had memori yang rendah mungkin menyebabkan kegagalan semasa menampal aplikasi yang lebih besar</string>
+    <string name="settings_system_process_runtime_enabled_description">%s hadkan MB</string>
+    <string name="settings_system_process_runtime_disabled_description">Klik untuk konfigurasi</string>
+    <string name="settings_system_process_runtime_description_not_available">Ciri ini memerlukan Android 11 atau lebih tinggi</string>
     <!-- Settings - System Tab - Import and export keystore -->
+    <string name="settings_system_import_export">Import &amp; eksport</string>
+    <string name="settings_system_import_keystore">Import kunci simpanan</string>
+    <string name="settings_system_import_keystore_description">Import kunci simpanan khusus</string>
+    <string name="settings_system_import_keystore_dialog_title">Masukkan kelayakan kunci simpanan</string>
+    <string name="settings_system_import_keystore_dialog_description">Anda perlu masukkan kelayakan kad pengaman untuk mengimportnya</string>
+    <string name="settings_system_import_keystore_dialog_alias_field">Nama pengguna (Alias)</string>
+    <string name="settings_system_import_keystore_dialog_password_field">Kata lalu</string>
     <string name="settings_system_import_keystore_dialog_button">Import</string>
+    <string name="settings_system_import_keystore_wrong_credentials">Kelayakan kunci simpanan tidak betul</string>
+    <string name="settings_system_import_keystore_success">Kunci simpanan diimport</string>
+    <string name="settings_system_import_keystore_failed">Gagal mengimport kunci simpanan</string>
+    <string name="settings_system_export_keystore">Eksport kunci simpanan</string>
+    <string name="settings_system_export_keystore_description">Eksport kunci simpanan semasa</string>
+    <string name="settings_system_export_keystore_unavailable">Tiada kunci simpanan yang tersedia untuk dieksport</string>
+    <string name="settings_system_export_keystore_success">Kunci simpanan dieksport</string>
+    <string name="settings_system_show_password_field">Tunjukkan kata lalu</string>
+    <string name="settings_system_hide_password_field">Sembunyikan kata lalu</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
+    <string name="settings_system_import_manager_settings">Import tetapan Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Pulihkan tetapan Morphe daripada fail JSON</string>
+    <string name="settings_system_import_manager_settings_fail">Gagal mengimport tetapan Morphe: %s</string>
+    <string name="settings_system_import_manager_settings_success">Tetapan Morphe telah diimport</string>
+    <string name="settings_system_export_manager_settings">Eksport tetapan Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Simpan tetapan Morphe ke fail JSON</string>
+    <string name="settings_system_export_manager_settings_fail">Gagal mengeksport tetapan Morphe: %s</string>
+    <string name="settings_system_export_manager_settings_success">Tetapan Morphe telah dieksport</string>
     <!-- Settings - System Tab - Debug Section -->
+    <string name="settings_system_debug">Debug</string>
+    <string name="settings_system_export_debug_logs">Eksport log debug</string>
+    <string name="settings_system_export_debug_logs_description">Simpan log sistem untuk penyelesaian masalah</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Gagal membaca log (kod keluar %s)</string>
+    <string name="settings_system_export_debug_logs_export_failed">Gagal mengeksport log</string>
+    <string name="settings_system_export_debug_logs_export_success">Log dieksport</string>
     <!-- Settings - System Tab - Storage Management Section -->
+    <string name="settings_system_storage_management">Pengurusan storan</string>
+    <string name="settings_system_apks_size">Saiz keseluruhan: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
+    <string name="settings_system_patched_apks_title">APK yang ditampal</string>
+    <string name="settings_system_patched_apks_description">Urus fail aplikasi yang ditampal yang disimpan</string>
+    <string name="settings_system_patched_apks_empty">Tiada APK yang ditampal disimpan lagi</string>
+    <string name="settings_system_patched_apks_delete_title">Padam APK yang ditampal?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Adakah anda pasti ingin memadam APK yang ditampal yang disimpan untuk %s?</string>
+    <string name="settings_system_patched_apks_deleted">APK yang ditampal telah dipadam dengan jayanya</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <string name="settings_system_original_apks_title">APK asal</string>
+    <string name="settings_system_original_apks_description">Fail APK asal disimpan untuk repatching. Hanya versi terkini yang disimpan untuk setiap aplikasi</string>
+    <string name="settings_system_original_apks_empty">Tiada APK asal disimpan</string>
+    <string name="settings_system_original_apks_deleted">APK asal telah dipadam dengan jayanya</string>
+    <string name="settings_system_original_apks_delete_title">Padam APK asal?</string>
+    <string name="settings_system_original_apks_delete_confirm">Padam APK asal untuk %s? Anda tidak dapat repatch tanpa memberikan APK baharu</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Pilihan patch</string>
+    <string name="settings_system_patch_selections_description">Urus pilihan patch dan pilihan yang disimpan. Ini kekal selepas aplikasi dinyahpasang</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Nyah semula semua pilihan?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Nyah semula pilihan pakej?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Nyah semula pilihan sumber?</string>
+    <string name="settings_system_patch_selection_no_saved">Tiada pilihan tampalan yang disimpan</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s merentasi %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dalam %2$s</string>
+    <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
+    <string name="settings_system_patch_selection_will_delete">Ini akan memadam:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk semua pakej dan sumber</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk %s merentasi semua sumber</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ini akan memadam secara kekal pilihan tampalan yang disimpan untuk %1$s dalam sumber #%2$s</string>
+    <string name="settings_system_export_source_data_fail">Gagal membaca log (kod keluar %s)</string>
+    <string name="settings_system_export_source_data_success">Data sumber dieksport dengan jayanya</string>
+    <string name="settings_system_import_source_data_fail">Gagal mengimport data sumber</string>
+    <string name="settings_system_import_source_data_success">Data sumber diimport dengan jayanya</string>
+    <string name="settings_system_patch_details_title">Butiran tampalan</string>
+    <string name="settings_system_selected_patches_title">Tampalan terpilih (%s)</string>
+    <string name="settings_system_patch_options_title">Pilihan tampalan (%s)</string>
+    <string name="settings_system_no_patches_or_options">Tiada tampalan atau pilihan yang disimpan</string>
     <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_about">Mengenai</string>
+    <string name="settings_system_share_website">Kongsi laman web</string>
+    <string name="settings_system_share_website_description">Kongsi laman web Morphe rasmi</string>
+    <string name="credits">Pengakuan</string>
+    <string name="credits_current_development">Pembangunan semasa</string>
+    <string name="credits_prior_development">Pembangunan sebelumnya</string>
     <!-- Shared strings -->
     <string name="patches">Tampalan</string>
+    <string name="home">Rumah</string>
     <string name="settings">Pengaturan</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="reset">Reset</string>
+    <string name="reset_all">Nyah Semula Semua</string>
+    <string name="confirm">Sahkan</string>
+    <string name="warning">Amaran</string>
     <string name="error_">Ralat</string>
+    <string name="retry">Cuba semula</string>
+    <string name="add">Tambah</string>
+    <string name="close">Tutup</string>
+    <string name="clear">Kosongkan</string>
+    <string name="delete">Padam</string>
+    <string name="remove">Buang</string>
+    <string name="disable">Lumpuhkan</string>
+    <string name="enable">Dayakan</string>
+    <string name="loading">Memuat…</string>
+    <string name="not_installed">Tidak dipasang</string>
+    <string name="view">Lihat</string>
+    <string name="search">Cari</string>
+    <string name="search_no_results">Tiada hasil ditemui</string>
+    <string name="any_version">Mana-mana</string>
+    <string name="enabled">Dayakan</string>
+    <string name="disabled">Dilumpuhkan</string>
+    <string name="selected">T dipilih</string>
     <string name="not_selected">Tidak dipilih</string>
+    <string name="rename">Tukar nama</string>
     <string name="import_">Import</string>
+    <string name="export">Eksport</string>
+    <string name="download">Mukim</string>
+    <string name="less">Kurang</string>
+    <string name="expand">Kembangkan</string>
+    <string name="expanded">Diperluaskan</string>
+    <string name="collapse">Lipat</string>
+    <string name="collapsed">Dikompreskan</string>
+    <string name="available">Tersedia</string>
+    <string name="continue_">Teruskan</string>
+    <string name="version">Versi</string>
+    <string name="patch">Tampalan</string>
+    <string name="repatch">Tampalkan semula</string>
+    <string name="open">Buka</string>
+    <string name="mount">Pasang</string>
+    <string name="mounted">Dipasang</string>
+    <string name="unmounted">Dibebaskan pemasangan</string>
+    <string name="remount">Pasang semula</string>
+    <string name="install">Pasang</string>
+    <string name="installed">Dipasang</string>
+    <string name="reinstall">Pasang semula</string>
+    <string name="uninstall">Tolak pemasangan</string>
+    <string name="uninstalled">Telah dinyahpasang</string>
+    <string name="save">Simpan</string>
+    <string name="saved">Disimpan</string>
+    <string name="update">Kemas kini</string>
+    <string name="allow">Benarkan</string>
+    <string name="details">Butiran</string>
+    <string name="hide">Sembunyikan</string>
+    <string name="default_">Laluan asal</string>
+    <string name="logs">Log</string>
+    <string name="installing_ellipsis">Memasang…</string>
+    <string name="mounting_ellipsis">Pemasangan…</string>
+    <string name="unmounting_ellipsis">Mencabut…</string>
+    <string name="importing_ellipsis">Mengimport…</string>
+    <string name="changelog">Lihat log perubahan</string>
+    <string name="changelog_description">Lihat perubahan terkini dalam kemas kini ini</string>
+    <string name="changelog_download_fail">Gagal untuk memuat turun log perubahan: %s</string>
+    <string name="changelog_retry">Cuba semula</string>
+    <string name="changelog_empty">Tiada log perubahan tersedia</string>
     <string name="no_network_toast">Tiada sambungan internet tersedia</string>
+    <string name="update_available">Kemas kini tersedia</string>
+    <string name="ready_to_install_update">Sedia untuk memasang kemas kini</string>
+    <string name="update_completed">Kemas kini dipasang</string>
+    <string name="install_update_manager_failed">Gagal memasang kemas kini</string>
+    <string name="installing_manager_update">Memasang kemas kini…</string>
+    <string name="downloading_manager_update">Memukim kemas kini…</string>
+    <string name="download_manager_failed">Gagal memukim kemas kini: %s</string>
+    <string name="failed_to_check_updates">Gagal menyemak kemas kini: %s</string>
+    <string name="failed_to_download_update">Gagal memukim kemas kini: %s</string>
+    <string name="resume_download">Lanjutkan mukim</string>
+    <string name="download_confirmation_metered">"Anda sedang disambungkan ke sambungan terukur, dan caj data daripada penyedia perkhidmatan anda mungkin terpakai.
+
+Adakah anda masih ingin meneruskan?"</string>
+    <string name="download_update_confirmation">Mukim kemas kini?</string>
+    <string name="just_now">Baru sahaja</string>
+    <string name="minutes_ago">%s yang lalu</string>
+    <string name="hours_ago">%s yang lalu</string>
+    <string name="days_ago">%s yang lalu</string>
+    <string name="invalid_date">Tarikh tidak sah</string>
 </resources>

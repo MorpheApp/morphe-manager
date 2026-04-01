@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">顯示隱藏應用程式</string>
     <string name="home_app_no_hidden">沒有隱藏應用程式</string>
     <string name="home_app_hidden_apps_title">隱藏應用程式</string>
-    <string name="home_app_hidden_apps_hint">輕觸應用程式以再次顯示在列表中</string>
+    <string name="home_app_hidden_apps_hint">點擊以取消隱藏</string>
     <string name="android_11_bug_dialog_title">Android 11 相關問題</string>
     <string name="android_11_bug_dialog_description">必須提前授予應用程式安裝權限，以避免 Android 11 系統中的錯誤影響使用者體驗</string>
     <string name="deep_link_add_source_title">新增來源</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">更新來源完成</string>
     <string name="home_update_success_subtitle">已更新你的來源</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候……</string>
-    <string name="home_please_wait">請稍候……</string>
+    <string name="home_search_apps">搜尋應用程式</string>
+    <string name="home_no_apps_title">沒有應用程式可用</string>
+    <string name="home_no_apps_subtitle">新增程式來源或啟用現有的來源於 %s</string>
+    <string name="home_no_apps_search_subtitle">沒有符合 \"%1$s\" 的應用程式</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">你想修補哪個應用程式？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -601,12 +604,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">關於</string>
     <string name="settings_system_share_website">分享網站</string>
     <string name="settings_system_share_website_description">分享官方 Morphe 網站</string>
-    <string name="settings_system_manager_description">"Morphe 是一個實驗性的開源專案，致力於為熱門 Android 應用程式打造現代且高效的修補體驗。
-
-Morphe 以開源為核心，仰賴社群的意見與貢獻來驅動未來的創新。"</string>
+    <string name="settings_system_manager_description">"一個用於現代化、簡化地修補熱門 Android 應用程式的實驗性開源專案，由社群回饋和貢獻驅動"</string>
     <string name="credits">信譽</string>
     <string name="credits_current_development">目前開發</string>
     <string name="credits_prior_development">先前開發</string>
+    <string name="opensource_licenses">開源授權</string>
     <!-- Shared strings -->
     <string name="patches">修補</string>
     <string name="home">首頁</string>

@@ -5,8 +5,9 @@
 
 package app.morphe.manager.util
 
-import android.content.Context
 import androidx.compose.ui.graphics.Color
+import app.morphe.manager.util.KnownApps.DEFAULT_COLORS
+import app.morphe.manager.util.KnownApps.getAppName
 
 const val tag = "Morphe Manager"
 
@@ -19,13 +20,13 @@ const val MORPHE_API_URL = "https://api.morphe.software"
  * Delay before showing a manager update notification to the user.
  * Gives time for the APK to be fully uploaded after app-release.json is published.
  */
-const val MANAGER_UPDATE_SHOW_DELAY_SECONDS = 300L
+const val MANAGER_UPDATE_SHOW_DELAY_SECONDS = 7 * 60
 
 /** Raw GitHub URL for the stable manager release JSON (main branch) */
-const val MANAGER_RELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/main/app/app-release.json"
+const val MANAGER_RELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/main/app-release.json"
 
 /** Raw GitHub URL for the pre-release manager release JSON (dev branch) */
-const val MANAGER_PRERELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/dev/app/app-release.json"
+const val MANAGER_PRERELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/dev/app-release.json"
 
 /** Controls whether manager updates are fetched directly from JSON files in the repository instead of using the GitHub API */
 const val USE_MANAGER_DIRECT_JSON = true
@@ -102,28 +103,6 @@ object KnownApps {
         YOUTUBE       to "YouTube",
         YOUTUBE_MUSIC to "YouTube Music",
         REDDIT        to "Reddit",
-        X_TWITTER     to "X",
-        "com.amazon.avod.thirdpartyclient" to "Amazon Prime Video",
-        "com.avocards"                     to "Avocards",
-        "me.mycake"                        to "Cake",
-        "com.crunchyroll.crunchyroid"      to "Crunchyroll",
-        "kr.co.yjteam.dailypay"            to "DAILY PAY",
-        "com.duolingo"                     to "Duolingo",
-        "kr.eggbun.eggconvo"               to "Eggbun",
-        "jp.ne.ibis.ibispaintx.app"        to "IbisPaint X2",
-        "org.languageapp.lingory"          to "Lingory2",
-        "com.merriamwebster"               to "Merriam-Webster",
-        "org.totschnig.myexpenses"         to "MyExpenses",
-        "com.myfitnesspal.android"         to "MyFitnessPal",
-        "com.pandora.android"              to "Pandora",
-        "com.bambuna.podcastaddict"        to "Podcast Addict",
-        "ch.protonvpn.android"             to "Proton VPN",
-        "ginlemon.flowerfree"              to "Smart Launcher",
-        "pl.solidexplorer2"                to "Solid Explorer",
-        "net.teuida.teuida"                to "Teuida",
-        "app.ttmikstories.android"         to "TTMIK Stories",
-        "com.qbis.guessthecountry"         to "World Map Quiz",
-        "cn.wps.moffice_eng"               to "WPS Office",
     )
 
     /**

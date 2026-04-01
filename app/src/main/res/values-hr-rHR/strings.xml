@@ -10,7 +10,6 @@
     <string name="home_app_show_hidden">Prikaži skrivene aplikacije</string>
     <string name="home_app_no_hidden">Nema skrivenih aplikacija</string>
     <string name="home_app_hidden_apps_title">Skrivene aplikacije</string>
-    <string name="home_app_hidden_apps_hint">Dodirnite aplikaciju da biste je ponovno prikazali na popisu</string>
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">Dopuštenje za instalaciju aplikacije mora se dati unaprijed kako bi se izbjegla greška u sustavu Android 11 koja će negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Dodajte izvor</string>
@@ -28,7 +27,6 @@
     <string name="home_update_success">Ažuriranje izvora dovršeno</string>
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo pričekajte…</string>
-    <string name="home_please_wait">Molimo pričekajte…</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Koju aplikaciju želite patchati?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -602,9 +600,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_about">O aplikaciji</string>
     <string name="settings_system_share_website">Dijeli web stranicu</string>
     <string name="settings_system_share_website_description">Podijeli službenu stranicu Morphe</string>
-    <string name="settings_system_manager_description">"Morphe je eksperimentalni projekt otvorenog koda usmjeren na stvaranje modernog, pojednostavljenog patchanja popularnih Android aplikacija.
-
-Otvorenog koda svoga izvora, Morphe napreduje na povratnim informacijama i doprinosima zajednice kako bi potaknuo buduće inovacije."</string>
     <string name="credits">Zasluge</string>
     <string name="credits_current_development">Trenutni razvoj</string>
     <string name="credits_prior_development">Prijašnji razvoj</string>
