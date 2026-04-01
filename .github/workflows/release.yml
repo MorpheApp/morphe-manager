@@ -60,32 +60,32 @@ jobs:
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 
+      - name: Copy release files to legacy path
+        # TODO: Eventually delete this logic
+        if: steps.release.outputs.new_release_published == 'true'
+        run: |
+          git config user.name "semantic-release-bot"
+          git config user.email "semantic-release-bot@martynus.net"
+
+          # Make sure we're rebasing onto the latest remote branch
+          git fetch origin
+          git rebase origin/${GITHUB_REF_NAME}
+
+          cp app-release.json app/app-release.json
+          cp CHANGELOG.md app/CHANGELOG.md
+          git add app/app-release.json
+          git add app/CHANGELOG.md
+          git commit -m "chore: Update legacy release files"
+
+          # Push explicitly to the branch that triggered the workflow
+          git push origin HEAD:${GITHUB_REF_NAME}
+
       - name: Attest
         if: steps.release.outputs.new_release_published == 'true'
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: 'Morphe Manager ${{ steps.release.outputs.new_release_git_tag }}'
           subject-path: app/build/outputs/apk/release/morphe-manager*.apk
-
-      # TODO: Eventually delete this logic
-      - name: Copy release files to legacy path
-        if: steps.release.outputs.new_release_published == 'true'
-        run: |
-          git config user.name "semantic-release-bot"
-          git config user.email "semantic-release-bot@martynus.net"
-          
-          # Make sure we're rebasing onto the latest remote branch
-          git fetch origin
-          git rebase origin/${GITHUB_REF_NAME}
-          
-          cp app-release.json app/app-release.json
-          cp CHANGELOG.md app/CHANGELOG.md
-          git add app/app-release.json
-          git add app/CHANGELOG.md
-          git commit -m "chore: Update legacy release files"
-          
-          # Push explicitly to the branch that triggered the workflow
-          git push origin HEAD:${GITHUB_REF_NAME}
 
       - name: Generate website deploy token
         if: steps.release.outputs.new_release_published == 'true'

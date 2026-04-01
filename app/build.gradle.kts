@@ -1,6 +1,5 @@
 import com.mikepenz.aboutlibraries.plugin.DuplicateMode
 import com.mikepenz.aboutlibraries.plugin.DuplicateRule
-import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import kotlin.random.Random
 
@@ -151,7 +150,6 @@ android {
         val versionCodeOffset = 10010100
         versionCode = timestampVersionCode + versionCodeOffset
 
-
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -278,48 +276,6 @@ tasks {
     whenTaskAdded {
         if (name.startsWith("lintVital")) {
             enabled = false
-        }
-    }
-
-    // Required by gradle-semantic-release-plugin to trigger the release build.
-    // Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435.
-    val publish by registering {
-        group = "publishing"
-        description = "Build the release APK"
-
-        dependsOn("assembleRelease")
-
-        val releaseDir = project.layout.buildDirectory.dir("outputs/apk/release")
-
-        doLast {
-            // Read version at execution time - gradle-semantic-release-plugin bumps
-            // gradle.properties during `prepare`, before `publish` runs, so $version
-            // would capture the stale configuration-time value.
-            val actualVersion: String = Properties().apply {
-                rootDir.resolve("gradle.properties").inputStream().use(::load)
-            }.getProperty("version")
-                ?: throw GradleException("Could not read version from gradle.properties")
-
-            val releaseDirFile = releaseDir.get().asFile
-
-            // base.archivesName is resolved at configuration time with the old version,
-            // so AGP names the APK with the old version. Find it by glob instead.
-            val src: File = releaseDirFile.listFiles()
-                ?.singleOrNull { it.name.endsWith("-release.apk") }
-                ?: throw GradleException(
-                    "Expected exactly one *-release.apk in ${releaseDirFile.absolutePath}, " +
-                            "found: ${releaseDirFile.listFiles()?.map { it.name }}"
-                )
-
-            val dst = releaseDirFile.resolve("${rootProject.name}-$actualVersion.apk")
-
-            src.copyTo(dst, overwrite = true)
-            src.delete()
-
-            signing {
-                useGpgCmd()
-                sign(dst)
-            }
         }
     }
 }
