@@ -203,6 +203,9 @@ class RootInstaller(
                 "chmod +x $modulePath/service.sh"
             ).assertSuccess("Failed to set file permissions")
         }
+
+        // Force-stop the app so it restarts with the newly mounted patched APK.
+        execute("am force-stop \"$packageName\"")
     }
 
     suspend fun uninstall(packageName: String) {
