@@ -101,13 +101,3 @@ fi
 # Set the correct SELinux context and bind-mount the patched APK over the stock one.
 chcon u:object_r:apk_data_file:s0 "$base_path"
 mount -o bind "$base_path" "$stock_path"
-
-# Kill the app to force it to restart with the mounted patched APK.
-# am force-stop always exits 0, so we log unconditionally rather than using ||.
-sleep 10
-am force-stop $package_name
-if [ $? -eq 0 ]; then
-  echo "force-stop sent to $package_name"
-else
-  echo "force-stop failed for $package_name (exit: $?)"
-fi
