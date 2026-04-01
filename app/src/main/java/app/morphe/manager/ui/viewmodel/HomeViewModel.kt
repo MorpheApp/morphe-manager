@@ -459,11 +459,13 @@ class HomeViewModel(
         viewModelScope.launch {
             combine(
                 patchBundleRepository.bundleUpdateProgress,
-                installedAppRepository.getAll()
-            ) { progress, installedApps ->
+                installedAppRepository.getAll(),
+                availablePatches
+            ) { progress, installedApps, patchCount ->
                 val isBundleUpdateInProgress =
                     progress?.result == PatchBundleRepository.BundleUpdateResult.None
-                isBundleUpdateInProgress || installedApps.isEmpty()
+                val hasLoadedData = installedApps.isNotEmpty() || patchCount > 0
+                isBundleUpdateInProgress || !hasLoadedData
             }.collect { loading ->
                 installedAppsLoading = loading
             }
@@ -481,14 +483,20 @@ class HomeViewModel(
                 installedAppRepository.getAll(),
                 patchBundleRepository.sources,
                 patchBundleRepository.bundleUpdateProgress
-            ) { installedApps, sources, _ ->
-                installedApps to sources
+            ) { installedApps, sources, progress ->
+                // Only trigger after a completed update (Success/NoUpdates) or on initial load
+                // (progress == null). Never trigger mid-update (None) to avoid checking against
+                // incomplete bundle data.
+                val updateCompleted = progress == null ||
+                        progress.result == PatchBundleRepository.BundleUpdateResult.Success ||
+                        progress.result == PatchBundleRepository.BundleUpdateResult.NoUpdates
+                Triple(installedApps, sources, updateCompleted)
             }
-                .filter { (installedApps, sources) ->
-                    installedApps.isNotEmpty() && sources.isNotEmpty()
+                .filter { (installedApps, sources, updateCompleted) ->
+                    installedApps.isNotEmpty() && sources.isNotEmpty() && updateCompleted
                 }
                 .conflate() // drop intermediate emissions, process only the latest
-                .collect { (installedApps, _) ->
+                .collect { (installedApps, _, _) ->
                     checkInstalledAppsForUpdates(installedApps)
                 }
         }
