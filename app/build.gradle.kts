@@ -1,5 +1,6 @@
 import com.mikepenz.aboutlibraries.plugin.DuplicateMode
 import com.mikepenz.aboutlibraries.plugin.DuplicateRule
+import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import kotlin.random.Random
 
@@ -14,9 +15,6 @@ plugins {
     alias(libs.plugins.google.services)
     signing
 }
-
-val archivesBase = "${rootProject.name}-$version"
-val outputApkFileName = "$archivesBase.apk"
 
 dependencies {
     // AndroidX Core
@@ -136,14 +134,12 @@ dependencies {
 android {
     namespace = "app.morphe.manager"
     compileSdk = 36
-    compileSdkExtension = 1
 
     defaultConfig {
         applicationId = "app.morphe.manager"
         minSdk = 26
 
-        val versionStr = if (version == "unspecified") "1.0.0" else version.toString()
-        versionName = versionStr
+        versionName = version.toString()
 
         // VersionCode derived from current time (1-minute intervals) + offset.
         val nowMillis = System.currentTimeMillis()
@@ -154,6 +150,7 @@ android {
         // and still fall into Play store max version code range.
         val versionCodeOffset = 10010100
         versionCode = timestampVersionCode + versionCodeOffset
+
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -248,7 +245,9 @@ android {
 }
 
 // APK output file name
-base.archivesName.set(archivesBase)
+base.archivesName.set(provider {
+    "${rootProject.name}-$version"
+})
 
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
@@ -282,7 +281,7 @@ tasks {
         }
     }
 
-    // Needed by gradle-semantic-release-plugin.
+    // Required by gradle-semantic-release-plugin to trigger the release build.
     // Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435.
     val publish by registering {
         group = "publishing"
@@ -290,16 +289,36 @@ tasks {
 
         dependsOn("assembleRelease")
 
-        val apk = project.layout.buildDirectory.file("outputs/apk/release/${outputApkFileName}")
-        val ascFile = apk.map { it.asFile.resolveSibling("${it.asFile.name}.asc") }
-
-        inputs.file(apk).withPropertyName("inputApk")
-        outputs.file(ascFile).withPropertyName("outputAsc")
+        val releaseDir = project.layout.buildDirectory.dir("outputs/apk/release")
 
         doLast {
+            // Read version at execution time - gradle-semantic-release-plugin bumps
+            // gradle.properties during `prepare`, before `publish` runs, so $version
+            // would capture the stale configuration-time value.
+            val actualVersion: String = Properties().apply {
+                rootDir.resolve("gradle.properties").inputStream().use(::load)
+            }.getProperty("version")
+                ?: throw GradleException("Could not read version from gradle.properties")
+
+            val releaseDirFile = releaseDir.get().asFile
+
+            // base.archivesName is resolved at configuration time with the old version,
+            // so AGP names the APK with the old version. Find it by glob instead.
+            val src: File = releaseDirFile.listFiles()
+                ?.singleOrNull { it.name.endsWith("-release.apk") }
+                ?: throw GradleException(
+                    "Expected exactly one *-release.apk in ${releaseDirFile.absolutePath}, " +
+                            "found: ${releaseDirFile.listFiles()?.map { it.name }}"
+                )
+
+            val dst = releaseDirFile.resolve("${rootProject.name}-$actualVersion.apk")
+
+            src.copyTo(dst, overwrite = true)
+            src.delete()
+
             signing {
                 useGpgCmd()
-                sign(apk.get().asFile)
+                sign(dst)
             }
         }
     }

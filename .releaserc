@@ -42,7 +42,7 @@
       {
         "assets": [
           {
-            "path": "build/outputs/apk/release/morphe-manager*.apk?(.asc)"
+            "path": "app/build/outputs/apk/release/*.apk?(.asc)"
           }
         ],
         "successComment": false
