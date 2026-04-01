@@ -66,17 +66,22 @@ jobs:
         run: |
           git config user.name "semantic-release-bot"
           git config user.email "semantic-release-bot@martynus.net"
-
+          
           # Make sure we're rebasing onto the latest remote branch
           git fetch origin
-          git rebase origin/${GITHUB_REF_NAME}
-
+          
+          # Hard reset to latest remote branch
+          git checkout ${GITHUB_REF_NAME}
+          git reset --hard origin/${GITHUB_REF_NAME}
+          
           cp app-release.json app/app-release.json
           cp CHANGELOG.md app/CHANGELOG.md
+          
           git add app/app-release.json
           git add app/CHANGELOG.md
+          
           git commit -m "chore: Update legacy release files"
-
+          
           # Push explicitly to the branch that triggered the workflow
           git push origin HEAD:${GITHUB_REF_NAME}
 
