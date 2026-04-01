@@ -105,7 +105,8 @@ mount -o bind "$base_path" "$stock_path"
 # Kill the app to force it to restart with the mounted patched APK.
 # am force-stop always exits 0, so we log unconditionally rather than using ||.
 sleep 10
-if am force-stop "$package_name"; then
+am force-stop $package_name
+if [ $? -eq 0 ]; then
   echo "force-stop sent to $package_name"
 else
   echo "force-stop failed for $package_name (exit: $?)"

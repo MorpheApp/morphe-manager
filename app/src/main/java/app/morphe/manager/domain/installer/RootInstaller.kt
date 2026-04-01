@@ -129,6 +129,9 @@ class RootInstaller(
                 ?: throw Exception("Failed to load application info")
 
             execute("umount -l \"$stockAPK\"").assertSuccess("Failed to unmount APK")
+
+            // Force-stop the app so it restarts clean without the unmounted patched APK.
+            execute("am force-stop \"$packageName\"")
         }
     }
 
