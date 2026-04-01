@@ -1,3 +1,10 @@
+# [1.14.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2026-04-01)
+
+
+### Bug Fixes
+
+* Home screen buttons always showed shimmer when fresh install ([bbfaab8](https://github.com/MorpheApp/morphe-manager/commit/bbfaab8b5fb71bba403377436177f4df3dc26b74))
+
 # [1.14.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.13.1...v1.14.0-dev.1) (2026-04-01)
 
 
