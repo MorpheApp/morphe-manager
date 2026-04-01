@@ -854,21 +854,25 @@ private fun ActionButtonsRow(
     actions: List<ActionItem>,
     isPrimary: Boolean
 ) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        actions.forEach { action ->
-            ActionButton(
-                text = action.text,
-                icon = action.icon,
-                onClick = action.onClick,
-                enabled = action.enabled,
-                isDestructive = action.isDestructive,
-                isPrimary = isPrimary && !action.isDestructive,
-                isLoading = action.isLoading,
-                modifier = Modifier.weight(1f)
-            )
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        actions.chunked(2).forEach { rowActions ->
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                rowActions.forEach { action ->
+                    ActionButton(
+                        text = action.text,
+                        icon = action.icon,
+                        onClick = action.onClick,
+                        enabled = action.enabled,
+                        isDestructive = action.isDestructive,
+                        isPrimary = isPrimary && !action.isDestructive,
+                        isLoading = action.isLoading,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
         }
     }
 }
