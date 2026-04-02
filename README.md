@@ -27,7 +27,7 @@
 
 > Want to watch ads? Us neither.
 
-Morphe Manager is an Android app that patches YouTube, YouTube Music, and Reddit - stripping ads and giving you back control over your experience. No root required.
+Morphe is an Android app that patches YouTube, YouTube Music, and Reddit - stripping ads and giving you back control over your experience. No root required.
 
 ## ✨ Why Morphe?
 
@@ -41,7 +41,7 @@ The website will guide you to the latest release for your device. No account nee
 
 ## 🚀 How it works
 
-1. **Install Morphe Manager** from [morphe.software](https://morphe.software).
+1. **Install Morphe** from [morphe.software](https://morphe.software).
 2. **Pick an app** - YouTube, YouTube Music, or Reddit are supported out of the box.
 3. **Choose your mode:**
   - **Simple mode** - designed for a one-tap experience. Just tap Patch and Morphe handles the rest with sensible defaults. No configuration needed.
@@ -108,11 +108,11 @@ For guides, FAQs, and troubleshooting, visit **[morphe.software](https://morphe.
 
 ## ❗ About
 
-Morphe Manager is built on the foundation of [ReVanced Manager](https://github.com/ReVanced/revanced-manager) and [URV](https://github.com/Jman-Github/Universal-ReVanced-Manager). All changes made by Morphe are documented in the Git history.
+Morphe is built on the foundation of [ReVanced Manager](https://github.com/ReVanced/revanced-manager) and [URV](https://github.com/Jman-Github/Universal-ReVanced-Manager). All changes made by Morphe are documented in the Git history.
 
 ## 📜 License
 
-Morphe Manager is licensed under the [GNU General Public License v3.0](LICENSE), with additional conditions under GPLv3 Section 7:
+Morphe is licensed under the [GNU General Public License v3.0](LICENSE), with additional conditions under GPLv3 Section 7:
 
 - **Attribution (7b):** Any use of this code, including derivatives, must display a visible notice:
 
