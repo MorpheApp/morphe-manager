@@ -1,3 +1,10 @@
+# [1.14.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2026-04-02)
+
+
+### Bug Fixes
+
+* Improve root mounting ([#381](https://github.com/MorpheApp/morphe-manager/issues/381)) ([257e433](https://github.com/MorpheApp/morphe-manager/commit/257e433a6a5a7aabebfa573081af17f6df7d9b7f))
+
 # [1.14.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2026-04-01)
 
 
