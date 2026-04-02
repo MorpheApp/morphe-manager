@@ -95,11 +95,11 @@ fun InstalledAppInfoDialog(
     val hasUpdate = appUpdates[packageName] == true
 
     // Dialog states
-    var showUninstallConfirm by remember { mutableStateOf(false) }
-    var showDeleteDialog by remember { mutableStateOf(false) }
-    var showAppliedPatchesDialog by remember { mutableStateOf(false) }
-    var showMountWarningDialog by remember { mutableStateOf(false) }
-    var pendingMountWarningAction by remember { mutableStateOf<(() -> Unit)?>(null) }
+    val showUninstallConfirm = remember { mutableStateOf(false) }
+    val showDeleteDialog = remember { mutableStateOf(false) }
+    val showAppliedPatchesDialog = remember { mutableStateOf(false) }
+    val showMountWarningDialog = remember { mutableStateOf(false) }
+    val pendingMountWarningAction = remember { mutableStateOf<(() -> Unit)?>(null) }
 
     // Bundle data
     val patchBundleRepository: PatchBundleRepository = koinInject()
@@ -116,8 +116,8 @@ fun InstalledAppInfoDialog(
     val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
 
     // Build applied bundles summary with stored versions
-    val appliedBundles by produceState<List<AppliedPatchBundleUi>>(
-        initialValue = emptyList(),
+    val appliedBundles by produceState(
+        emptyList(),
         appliedPatches,
         bundleInfo,
         bundleSources,
@@ -245,45 +245,45 @@ fun InstalledAppInfoDialog(
     }
 
     // Sub-dialogs
-    if (showAppliedPatchesDialog && appliedPatches != null) {
-        AppliedPatchesDialog(bundles = appliedBundles, onDismiss = { showAppliedPatchesDialog = false })
+    if (showAppliedPatchesDialog.value && appliedPatches != null) {
+        AppliedPatchesDialog(bundles = appliedBundles, onDismiss = { showAppliedPatchesDialog.value = false })
     }
 
     // Mount warning dialog
-    if (showMountWarningDialog) {
+    if (showMountWarningDialog.value) {
         MountWarningDialog(
             onConfirm = {
-                showMountWarningDialog = false
-                pendingMountWarningAction?.invoke()
-                pendingMountWarningAction = null
+                showMountWarningDialog.value = false
+                pendingMountWarningAction.value?.invoke()
+                pendingMountWarningAction.value = null
             },
             onDismiss = {
-                showMountWarningDialog = false
-                pendingMountWarningAction = null
+                showMountWarningDialog.value = false
+                pendingMountWarningAction.value = null
             }
         )
     }
 
     UninstallConfirmDialog(
-        show = showUninstallConfirm,
+        show = showUninstallConfirm.value,
         onConfirm = {
             viewModel.uninstall()
-            showUninstallConfirm = false
+            showUninstallConfirm.value = false
         },
-        onDismiss = { showUninstallConfirm = false }
+        onDismiss = { showUninstallConfirm.value = false }
     )
 
     DeleteConfirmDialog(
-        show = showDeleteDialog,
+        show = showDeleteDialog.value,
         isSavedOnly = installedApp?.installType == InstallType.SAVED,
         appInfo = viewModel.appInfo,
         appLabel = viewModel.appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
         onConfirm = {
             viewModel.removeAppCompletely()
-            showDeleteDialog = false
+            showDeleteDialog.value = false
         },
         onDismiss = {
-            showDeleteDialog = false
+            showDeleteDialog.value = false
         }
     )
 
@@ -391,7 +391,7 @@ fun InstalledAppInfoDialog(
                     installedApp = installedApp,
                     appliedPatches = appliedPatches,
                     bundlesUsedSummary = bundlesUsedSummary,
-                    onShowPatches = { showAppliedPatchesDialog = true }
+                    onShowPatches = { showAppliedPatchesDialog.value = true }
                 )
 
                 // Actions Section
@@ -407,12 +407,12 @@ fun InstalledAppInfoDialog(
                         onDismiss()
                         onTriggerPatchFlow(installedApp.originalPackageName)
                     },
-                    onUninstall = { showUninstallConfirm = true },
-                    onDelete = { showDeleteDialog = true },
+                    onUninstall = { showUninstallConfirm.value = true },
+                    onDelete = { showDeleteDialog.value = true },
                     onExport = { exportSavedLauncher.launch(exportFileName) },
                     onShowMountWarning = { action ->
-                        pendingMountWarningAction = action
-                        showMountWarningDialog = true
+                        pendingMountWarningAction.value = action
+                        showMountWarningDialog.value = true
                     }
                 )
 
@@ -725,9 +725,9 @@ private fun ActionsSection(
                                 installViewModel.install(
                                     outputFile = savedFile,
                                     originalPackageName = installedApp.originalPackageName,
-                                    onPersistApp = { pkg, type ->
+                                    onPersistApp = { _, _ ->
                                         // Callback will be called after successful installation
-                                        // The LaunchedEffect handler will update the install type
+                                        // The LaunchedEffect handler will update the installation type
                                         true
                                     }
                                 )
@@ -752,26 +752,50 @@ private fun ActionsSection(
         }
         installedApp.installType == InstallType.MOUNT -> {
             val isMountLoading = mountOperation != null
-            secondaryActions.add(
-                ActionItem(
-                    text = if (viewModel.isMounted) stringResource(R.string.remount) else stringResource(R.string.mount),
-                    icon = if (viewModel.isMounted) Icons.Outlined.Refresh else Icons.Outlined.Link,
-                    onClick = {
-                        if (viewModel.isMounted) {
+            if (viewModel.isMounted) {
+                // Remount button
+                secondaryActions.add(
+                    ActionItem(
+                        text = stringResource(R.string.remount),
+                        icon = Icons.Outlined.Refresh,
+                        onClick = {
                             installViewModel.remount(
                                 packageName = installedApp.currentPackageName,
                                 version = installedApp.version
                             )
-                        } else {
+                        },
+                        isLoading = isMountLoading
+                    )
+                )
+                // Unmount button
+                secondaryActions.add(
+                    ActionItem(
+                        text = stringResource(R.string.unmount),
+                        icon = Icons.Outlined.LinkOff,
+                        onClick = {
+                            installViewModel.unmount(
+                                packageName = installedApp.currentPackageName
+                            )
+                        },
+                        isLoading = isMountLoading
+                    )
+                )
+            } else {
+                // Mount button
+                secondaryActions.add(
+                    ActionItem(
+                        text = stringResource(R.string.mount),
+                        icon = Icons.Outlined.Link,
+                        onClick = {
                             installViewModel.mount(
                                 packageName = installedApp.currentPackageName,
                                 version = installedApp.version
                             )
-                        }
-                    },
-                    isLoading = isMountLoading
+                        },
+                        isLoading = isMountLoading
+                    )
                 )
-            )
+            }
         }
     }
 
@@ -830,21 +854,25 @@ private fun ActionButtonsRow(
     actions: List<ActionItem>,
     isPrimary: Boolean
 ) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        actions.forEach { action ->
-            ActionButton(
-                text = action.text,
-                icon = action.icon,
-                onClick = action.onClick,
-                enabled = action.enabled,
-                isDestructive = action.isDestructive,
-                isPrimary = isPrimary && !action.isDestructive,
-                isLoading = action.isLoading,
-                modifier = Modifier.weight(1f)
-            )
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        actions.chunked(2).forEach { rowActions ->
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                rowActions.forEach { action ->
+                    ActionButton(
+                        text = action.text,
+                        icon = action.icon,
+                        onClick = action.onClick,
+                        enabled = action.enabled,
+                        isDestructive = action.isDestructive,
+                        isPrimary = isPrimary && !action.isDestructive,
+                        isLoading = action.isLoading,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
         }
     }
 }
