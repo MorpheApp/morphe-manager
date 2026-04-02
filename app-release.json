@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-01T17:03:00.827Z",
-  "description": "# [1.14.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2026-04-01)\n\n\n### Bug Fixes\n\n* Home screen buttons always showed shimmer when fresh install ([bbfaab8](https://github.com/MorpheApp/morphe-manager/commit/bbfaab8b5fb71bba403377436177f4df3dc26b74))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.2/morphe-manager-1.14.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.2/morphe-manager-1.14.0-dev.2.apk.asc",
-  "version": "1.14.0-dev.2"
+  "created_at": "2026-04-02T06:36:44.160Z",
+  "description": "# [1.14.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2026-04-02)\n\n\n### Bug Fixes\n\n* Improve root mounting ([#381](https://github.com/MorpheApp/morphe-manager/issues/381)) ([257e433](https://github.com/MorpheApp/morphe-manager/commit/257e433a6a5a7aabebfa573081af17f6df7d9b7f))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.3/morphe-manager-1.14.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.3/morphe-manager-1.14.0-dev.3.apk.asc",
+  "version": "1.14.0-dev.3"
 }
