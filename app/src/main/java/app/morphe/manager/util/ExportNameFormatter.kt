@@ -24,34 +24,29 @@ object ExportNameFormatter {
         .withZone(ZoneId.systemDefault())
 
     fun format(template: String?, data: PatchedAppExportData): String {
-        val resolvedTemplate = template?.takeIf { it.isNotBlank() } ?: DEFAULT_TEMPLATE
-        val sanitizedTemplate = replaceVariables(resolvedTemplate, data)
-        val ensuredExtension = ensureExtension(sanitizedTemplate)
-        val clean = ensuredExtension.trim().ifEmpty { DEFAULT_TEMPLATE }
-        return FilenameUtils.sanitize(clean)
+        val resolved = replaceVariables(template?.takeIf { it.isNotBlank() } ?: DEFAULT_TEMPLATE, data)
+            .trim()
+            .ifEmpty { DEFAULT_TEMPLATE }
+            .let { if (it.endsWith(".apk", ignoreCase = true)) it else "$it.apk" }
+        return FilenameUtils.sanitize(resolved)
     }
 
     private fun replaceVariables(template: String, data: PatchedAppExportData): String {
-        val replacements: Map<String, String> = buildMap {
+        val replacements = buildMap<String, String> {
             put("{app name}", data.appName?.takeUnless { it.isBlank() } ?: data.packageName)
             put("{package name}", data.packageName)
             put("{app version}", formatVersion(data.appVersion) ?: "unknown")
             put(
                 "{patches version}",
                 joinValues(
-                    data.patchBundleVersions.mapNotNull(::formatVersion),
-                    fallback = "unknown",
+                    data.patchBundleVersions.mapNotNull(::formatPatchesVersion),
+                    fallback = "patches-unknown",
                     limit = 1
                 )
             )
             put(
                 "{patch bundle names}",
-                joinValues(
-                    data.patchBundleNames,
-                    fallback = "bundles",
-                    limit = 2,
-                    separator = "_"
-                )
+                joinValues(data.patchBundleNames, fallback = "bundles", limit = 2, separator = "_")
             )
             put("{manager version}", data.managerVersion.takeUnless { it.isBlank() } ?: "unknown")
             put("{timestamp}", timestampFormatter.format(data.generatedAt))
@@ -64,9 +59,13 @@ object ExportNameFormatter {
     }
 
     private fun formatVersion(raw: String?): String? {
-        val trimmed = raw?.trim()?.takeUnless { it.isEmpty() } ?: return null
-        val normalized = trimmed.removePrefix("v").removePrefix("V")
+        val normalized = raw?.trim()?.lowercase()?.removePrefix("v")?.takeUnless { it.isEmpty() } ?: return null
         return "v$normalized"
+    }
+
+    private fun formatPatchesVersion(raw: String?): String? {
+        val normalized = raw?.trim()?.lowercase()?.removePrefix("v")?.takeUnless { it.isEmpty() } ?: return null
+        return "patches-v$normalized"
     }
 
     private fun joinValues(
@@ -77,10 +76,6 @@ object ExportNameFormatter {
     ): String {
         val filtered = values.mapNotNull { it.trim().takeIf(String::isNotEmpty) }.distinct()
         if (filtered.isEmpty()) return fallback
-        val effective = if (limit > 0) filtered.take(limit) else filtered
-        return effective.joinToString(separator)
+        return (if (limit > 0) filtered.take(limit) else filtered).joinToString(separator)
     }
-
-    private fun ensureExtension(value: String): String =
-        if (value.endsWith(".apk", ignoreCase = true)) value else "$value.apk"
 }
