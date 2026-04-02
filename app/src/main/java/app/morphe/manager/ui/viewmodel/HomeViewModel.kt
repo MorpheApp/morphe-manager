@@ -201,6 +201,8 @@ class HomeViewModel(
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<AppTarget?>(null)
     var pendingCompatibleVersions by mutableStateOf<List<AppTarget>>(emptyList())
+    // Version selected by the user in Dialog 1 for the APK search query. Defaults to pendingRecommendedVersion
+    var pendingSelectedDownloadVersion by mutableStateOf<AppTarget?>(null)
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
     var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
@@ -1128,6 +1130,7 @@ class HomeViewModel(
         pendingAppName = KnownApps.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
+        pendingSelectedDownloadVersion = pendingRecommendedVersion
 
         // Guard: if there is a pending bundle update on metered data, show the outdated-patches
         // dialog before proceeding with the actual APK selection flow.
@@ -1644,6 +1647,7 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
+        pendingSelectedDownloadVersion = null
         resolvedDownloadUrl = null
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
@@ -1705,8 +1709,9 @@ class HomeViewModel(
             }
         }
 
-        // Handle null pendingRecommendedVersion
-        val escapedVersion = pendingRecommendedVersion?.let { encode(it.version, "UTF-8") } ?: "any"
+        // Use the version selected by the user in Dialog 1; fall back to recommended
+        val versionForSearch = pendingSelectedDownloadVersion ?: pendingRecommendedVersion
+        val escapedVersion = versionForSearch?.let { encode(it.version, "UTF-8") } ?: "any"
         val searchQuery = "$pendingPackageName~$escapedVersion~${Build.SUPPORTED_ABIS.first()}".encodeURLPath()
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
@@ -1734,8 +1739,9 @@ class HomeViewModel(
             "nodpi"
         }
 
-        // Handle null pendingRecommendedVersion
-        val versionPart = pendingRecommendedVersion?.version?.let { "\"$it\"" } ?: ""
+        // Use the version selected by the user in Dialog 1; fall back to recommended
+        val versionForSearch = pendingSelectedDownloadVersion ?: pendingRecommendedVersion
+        val versionPart = versionForSearch?.version?.let { "\"$it\"" } ?: ""
         val searchQuery = "\"$pendingPackageName\" $versionPart $architecture site:APKMirror.com"
         val searchUrl = "https://google.com/search?q=${encode(searchQuery, "UTF-8")}"
         Log.d(tag, "Using search query: $searchQuery")
@@ -1767,6 +1773,7 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
+        pendingSelectedDownloadVersion = null
         resolvedDownloadUrl = null
         pendingSavedApkInfo = null
         if (!keepSelectedApp) {
