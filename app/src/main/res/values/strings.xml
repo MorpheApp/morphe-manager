@@ -678,6 +678,8 @@ Details: %2$s"</string>
     <string name="settings">Settings</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="all">All</string>
+    <string name="filter">Filter</string>
     <string name="reset">Reset</string>
     <string name="reset_all">Reset All</string>
     <string name="confirm">Confirm</string>
