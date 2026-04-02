@@ -175,8 +175,8 @@ fun ProcessRuntimeDialog(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
                         onValueChangeFinished = { onLimitChange(sliderValue.toInt()) },
-                        valueRange = PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM.toFloat()..maxLimit.toFloat(),
-                        steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM)
+                        valueRange = PROCESS_RUNTIME_MEMORY_MINIMUM.toFloat()..maxLimit.toFloat(),
+                        steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_MINIMUM)
                                 / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
                         enabled = enabled,
                         modifier = Modifier.fillMaxWidth()
@@ -187,7 +187,7 @@ fun ProcessRuntimeDialog(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "$PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM MB",
+                            text = "$PROCESS_RUNTIME_MEMORY_MINIMUM MB",
                             style = MaterialTheme.typography.labelSmall,
                             color = LocalDialogSecondaryTextColor.current
                         )
