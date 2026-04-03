@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.autoSaver
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
@@ -237,6 +238,12 @@ class PatcherViewModel(
 
     private var currentStepIndex = 0
 
+    private val patchCount = input.selectedPatches.values.sumOf { it.size }
+    private var completedPatchCount by savedStateHandle.saveable {
+        // SavedStateHandle.saveable only supports the boxed version.
+        @Suppress("AutoboxingStateCreation") mutableStateOf(0)
+    }
+
     /**
      * [0, 1.0] progress value.
      */
@@ -314,6 +321,19 @@ class PatcherViewModel(
             }
         }
     }
+
+    /**
+     * Long-step warning: true when the current patching step has been running for >60 seconds.
+     */
+    private val _showLongStepWarning = MutableStateFlow(false)
+    val showLongStepWarning: StateFlow<Boolean> = _showLongStepWarning.asStateFlow()
+
+    /**
+     * Emits true once after a successful export or install to prompt the notification permission
+     * dialog. Resets to false after the UI acknowledges it via [consumeNotificationPrompt].
+     */
+    private val _shouldPromptNotification = MutableStateFlow(false)
+    val shouldPromptNotification: StateFlow<Boolean> = _shouldPromptNotification.asStateFlow()
 
     init {
         val existingId = patcherWorkerId?.uuid
@@ -527,13 +547,6 @@ class PatcherViewModel(
         true
     }
 
-    private val patchCount = input.selectedPatches.values.sumOf { it.size }
-    private var completedPatchCount by savedStateHandle.saveable {
-        // SavedStateHandle.saveable only supports the boxed version.
-        @Suppress("AutoboxingStateCreation") mutableStateOf(
-            0
-        )
-    }
     val patchesProgress get() = completedPatchCount to patchCount
     override var downloadProgress by savedStateHandle.saveable(
         key = "downloadProgress",
@@ -585,19 +598,6 @@ class PatcherViewModel(
     }
 
     /**
-     * Long-step warning: true when the current patching step has been running for >60 seconds.
-     */
-    private val _showLongStepWarning = MutableStateFlow(false)
-    val showLongStepWarning: StateFlow<Boolean> = _showLongStepWarning.asStateFlow()
-
-    /**
-     * Emits true once after a successful export or install to prompt the notification permission
-     * dialog. Resets to false after the UI acknowledges it via [consumeNotificationPrompt].
-     */
-    private val _shouldPromptNotification = MutableStateFlow(false)
-    val shouldPromptNotification: StateFlow<Boolean> = _shouldPromptNotification.asStateFlow()
-
-    /**
      * Checks prefs and triggers the notification prompt if conditions are met.
      * Called after a successful install so UI doesn't read prefs directly.
      */
@@ -647,12 +647,12 @@ class PatcherViewModel(
      */
     private fun observeLongStepWarning() {
         viewModelScope.launch {
-            var lastProgress = progress
+            var lastProgress = Snapshot.withoutReadObservation { progress }
             var stepStartTime = System.currentTimeMillis()
 
             while (patcherSucceeded.value == null) {
                 val now = System.currentTimeMillis()
-                val current = progress
+                val current = Snapshot.withoutReadObservation { progress }
                 if (current != lastProgress) {
                     lastProgress = current
                     stepStartTime = now

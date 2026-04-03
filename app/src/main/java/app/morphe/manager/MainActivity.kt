@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Handles deep links for adding patch sources.
-     * Format: https://morphe.software/add-source?github=owner/repo[&name=Display+Name]
+     * Format: https://morphe.software/add-source?github=owner/repo(&name=Display+Name)
      * Only GitHub URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
@@ -250,8 +250,8 @@ private fun MorpheManager(vm: MainViewModel) {
                 )
             }
 
-            composable<Patcher> {
-                val params = it.getComplexArg<Patcher.ViewModelParams>()
+            composable<Patcher> { it ->
+                val params = it.getComplexArg<Patcher.ViewModelParams>() ?: return@composable
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 PatcherScreen(
                     onBackClick = {
@@ -264,7 +264,6 @@ private fun MorpheManager(vm: MainViewModel) {
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
                     onPatchingCompleted = { patchingCompleted.value = true }
                 )
-                return@composable
             }
 
             composable<Settings> {
@@ -274,7 +273,8 @@ private fun MorpheManager(vm: MainViewModel) {
     }
 }
 
-// Androidx Navigation does not support storing complex types in route objects, so we have to store them inside the saved state handle of the back stack entry instead.
+// Androidx Navigation does not support storing complex types in route objects, so we have
+// to store them inside the saved state handle of the back stack entry instead
 private fun <T : Parcelable, R : ComplexParameter<T>> NavController.navigateComplex(
     route: R,
     data: T
@@ -283,4 +283,4 @@ private fun <T : Parcelable, R : ComplexParameter<T>> NavController.navigateComp
     getBackStackEntry(route).savedStateHandle["args"] = data
 }
 
-private fun <T : Parcelable> NavBackStackEntry.getComplexArg() = savedStateHandle.get<T>("args")!!
+private fun <T : Parcelable> NavBackStackEntry.getComplexArg(): T? = savedStateHandle["args"]
