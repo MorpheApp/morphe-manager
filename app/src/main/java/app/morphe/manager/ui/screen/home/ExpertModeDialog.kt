@@ -51,11 +51,11 @@ import kotlinx.coroutines.launch
  * Advanced patch selection and configuration dialog.
  * Shown before patching when expert mode is enabled.
  */
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ExpertModeDialog(
     bundles: List<PatchBundleInfo.Scoped>,
     selectedPatches: PatchSelection,
+    newPatches: Map<Int, Set<String>> = emptyMap(),
     options: Options,
     onPatchToggle: (bundleUid: Int, patchName: String) -> Unit,
     onOptionChange: (bundleUid: Int, patchName: String, optionKey: String, value: Any?) -> Unit,
@@ -291,6 +291,7 @@ fun ExpertModeDialog(
                     ) {
                         PatchListWithUniversalSection(
                             patches = filteredPatches,
+                            newPatchNames = newPatches[bundle.uid] ?: emptySet(),
                             onToggle = { togglePatch(bundle.uid, it) },
                             onConfigureOptions = {
                                 if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
@@ -407,6 +408,7 @@ fun ExpertModeDialog(
                             ) {
                                 PatchListWithUniversalSection(
                                     patches = patches,
+                                    newPatchNames = newPatches[bundle.uid] ?: emptySet(),
                                     onToggle = { togglePatch(bundle.uid, it) },
                                     onConfigureOptions = {
                                         if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
@@ -471,6 +473,7 @@ fun ExpertModeDialog(
 @Composable
 private fun PatchListWithUniversalSection(
     patches: List<Pair<PatchInfo, Boolean>>,
+    newPatchNames: Set<String> = emptySet(),
     onToggle: (String) -> Unit,
     onConfigureOptions: (PatchInfo) -> Unit,
 ) {
@@ -478,21 +481,36 @@ private fun PatchListWithUniversalSection(
         patches.partition { (patch, _) -> !patch.compatiblePackages.isNullOrEmpty() }
     }
 
-    regular.forEach { (patch, isEnabled) ->
+    // New patches float to the top; within each group order is alphabetical
+    val sortedRegular = remember(regular, newPatchNames) {
+        regular.sortedWith(
+            compareByDescending<Pair<PatchInfo, Boolean>> { (patch, _) -> patch.name in newPatchNames }
+                .thenBy { (patch, _) -> patch.name }
+        )
+    }
+    val sortedUniversal = remember(universal, newPatchNames) {
+        universal.sortedWith(
+            compareByDescending<Pair<PatchInfo, Boolean>> { (patch, _) -> patch.name in newPatchNames }
+                .thenBy { (patch, _) -> patch.name }
+        )
+    }
+
+    sortedRegular.forEach { (patch, isEnabled) ->
         PatchCard(
             patch = patch,
             isEnabled = isEnabled,
+            isNew = patch.name in newPatchNames,
             onToggle = { onToggle(patch.name) },
             onConfigureOptions = { onConfigureOptions(patch) },
             hasOptions = !patch.options.isNullOrEmpty()
         )
     }
 
-    if (universal.isNotEmpty()) {
+    if (sortedUniversal.isNotEmpty()) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = if (regular.isNotEmpty()) 8.dp else 0.dp, bottom = 4.dp),
+                .padding(top = if (sortedRegular.isNotEmpty()) 8.dp else 0.dp, bottom = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
@@ -514,10 +532,11 @@ private fun PatchListWithUniversalSection(
             )
         }
 
-        universal.forEach { (patch, isEnabled) ->
+        sortedUniversal.forEach { (patch, isEnabled) ->
             PatchCard(
                 patch = patch,
                 isEnabled = isEnabled,
+                isNew = patch.name in newPatchNames,
                 onToggle = { onToggle(patch.name) },
                 onConfigureOptions = { onConfigureOptions(patch) },
                 hasOptions = !patch.options.isNullOrEmpty()
@@ -587,6 +606,7 @@ private fun BundlePatchControls(
 private fun PatchCard(
     patch: PatchInfo,
     isEnabled: Boolean,
+    isNew: Boolean = false,
     onToggle: () -> Unit,
     onConfigureOptions: () -> Unit,
     hasOptions: Boolean
@@ -607,10 +627,11 @@ private fun PatchCard(
                 contentDescription = "${patch.name}, $patchState"
             },
         shape = RoundedCornerShape(14.dp),
-        color = if (isEnabled) {
-            MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
-        } else {
-            MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp).copy(alpha = 0.5f)
+        color = when {
+            isNew && isEnabled -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.55f)
+            isNew -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f)
+            isEnabled -> MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+            else -> MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp).copy(alpha = 0.5f)
         },
         contentColor = if (isEnabled) {
             MaterialTheme.colorScheme.onSurface
@@ -633,15 +654,29 @@ private fun PatchCard(
                     .padding(end = if (hasOptions) 8.dp else 0.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(
-                    text = patch.name,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color = if (isEnabled)
-                        LocalDialogTextColor.current
-                    else
-                        LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f)
-                )
+                // Name row: patch name + "New" badge inline
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Text(
+                        text = patch.name,
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold,
+                        color = if (isEnabled)
+                            LocalDialogTextColor.current
+                        else
+                            LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f),
+                        modifier = Modifier.weight(1f, fill = false)
+                    )
+                    if (isNew) {
+                        InfoBadge(
+                            text = stringResource(R.string.expert_mode_new_patches),
+                            style = InfoBadgeStyle.Primary,
+                            isCompact = true
+                        )
+                    }
+                }
 
                 if (!patch.description.isNullOrBlank()) {
                     Text(

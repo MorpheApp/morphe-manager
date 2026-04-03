@@ -294,6 +294,7 @@ fun HomeDialogs(
         ExpertModeDialog(
             bundles = homeViewModel.expertModeBundles,
             selectedPatches = homeViewModel.expertModePatches,
+            newPatches = homeViewModel.expertModeNewPatches,
             options = homeViewModel.expertModeOptions,
             onPatchToggle = { bundleUid, patchName ->
                 homeViewModel.togglePatchInExpertMode(bundleUid, patchName)

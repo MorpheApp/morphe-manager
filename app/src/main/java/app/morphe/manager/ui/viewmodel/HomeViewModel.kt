@@ -179,6 +179,8 @@ class HomeViewModel(
     var expertModeBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
     var expertModePatches by mutableStateOf<PatchSelection>(emptyMap())
     var expertModeOptions by mutableStateOf<Options>(emptyMap())
+    // Patches that are new in the current bundle version relative to the last saved selection
+    var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
 
     // Bundle file selection
     var selectedBundleUri by mutableStateOf<Uri?>(null)
@@ -227,7 +229,7 @@ class HomeViewModel(
     // Loading state for installed apps
     var installedAppsLoading by mutableStateOf(true)
 
-    // Bundle data — reactive StateFlows derived directly from bundleInfoFlow
+    // Bundle data - reactive StateFlows derived directly from bundleInfoFlow
     val compatibleVersionsFlow: StateFlow<Map<String, List<AppTarget>>> =
         patchBundleRepository.bundleInfoFlow
             .combine(patchBundleRepository.sources) { bundleInfo, sources ->
@@ -265,7 +267,7 @@ class HomeViewModel(
         }
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
-    // Convenience accessors — read current value synchronously for non-reactive call sites
+    // Convenience accessors - read current value synchronously for non-reactive call sites
     val recommendedVersions: Map<String, AppTarget> get() = recommendedVersionsFlow.value
     val compatibleVersions: Map<String, List<AppTarget>> get() = compatibleVersionsFlow.value
 
@@ -398,7 +400,7 @@ class HomeViewModel(
 
     /**
      * User acknowledged the experimental version warning and chose to proceed.
-     * Starts patching with allowIncompatible=false — the version is supported,
+     * Starts patching with allowIncompatible=false - the version is supported,
      * just flagged as experimental in the patch bundle.
      */
     fun proceedWithExperimentalVersion() {
@@ -576,7 +578,7 @@ class HomeViewModel(
      * Otherwise, launches [action] immediately.
      */
     fun guardPatching(action: suspend () -> Unit) {
-        // Check available storage first — low disk space is the most common cause of
+        // Check available storage first - low disk space is the most common cause of
         // cryptic "file not found" errors and corrupt output APKs during patching.
         val lowDiskSpaceThresholdGb = 1f // Minimum free storage in GB required before patching
         val freeBytes = StatFs(app.filesDir.absolutePath).availableBytes
@@ -725,7 +727,7 @@ class HomeViewModel(
                 val currentVersion = currentVersionByUid[bundleUid] ?: return@any false
                 if (!isNewerVersion(storedVersion, currentVersion)) return@any false
 
-                // Bundle is newer — refine with changelog if available.
+                // Bundle is newer - refine with changelog if available.
                 // No changelog (null) → show badge (network error or local bundle).
                 // Unknown app name (null) → show badge (can't match scopes).
                 // Known name, no matching scope → no badge.
@@ -746,8 +748,8 @@ class HomeViewModel(
 
     /**
      * Resolves the changelog scope name for [packageName].
-     * 1. [KnownApps.fallbackName] — static registry (offline, reliable).
-     * 2. [PM] label — system label for any installed app not in the registry.
+     * 1. [KnownApps.fallbackName] - static registry (offline, reliable).
+     * 2. [PM] label - system label for any installed app not in the registry.
      * Returns null when neither source yields a name.
      */
     private fun resolveChangelogName(packageName: String): String? =
@@ -882,7 +884,7 @@ class HomeViewModel(
 
     /**
      * Set of all unique package names that have patches across all enabled bundles.
-     * Derived from [bundleAppMetadataFlow] keys — no need to re-iterate all patches.
+     * Derived from [bundleAppMetadataFlow] keys - no need to re-iterate all patches.
      */
     val patchablePackagesFlow: StateFlow<Set<String>> =
         bundleAppMetadataFlow
@@ -1285,7 +1287,7 @@ class HomeViewModel(
         }
 
         // Warn when the selected file is a split APK while the bundle requires a full APK.
-        // This must happen BEFORE signature verification — split archives (.apkm/.apks/.xapk)
+        // This must happen BEFORE signature verification - split archives (.apkm/.apks/.xapk)
         // are not valid APKs so PackageManager cannot read their signature, which would cause
         // a false "invalid signature" dialog instead of the correct "split APK" warning.
         if (selectedApp is SelectedApp.Local && !skipSplitCheck) {
@@ -1314,7 +1316,7 @@ class HomeViewModel(
                                 workspace = filesystem.uiTempDir
                             )
                             if (extracted == null) {
-                                // Cannot extract base APK — skip verification rather than false-block
+                                // Cannot extract base APK - skip verification rather than false-block
                                 true
                             } else {
                                 try {
@@ -1375,12 +1377,12 @@ class HomeViewModel(
         //   - version-specific patches exist for this package (incompatible list is non-empty)
         //   - BUT none of them match this APK version (compatible list is empty)
         //   - AND the user has NOT disabled the version compat check
-        // Universal patches do not suppress this warning — the user should still be informed
+        // Universal patches do not suppress this warning - the user should still be informed
         // that the APK version is not officially supported.
         // Note: experimental versions are compatible (they pass the version check) but show an
         // additional "Experimental" badge in the warning dialog.
         val versionMismatch = !hasCompatible && hasIncompatible
-        // Experimental check is independent — a version can be experimental AND compatible
+        // Experimental check is independent - a version can be experimental AND compatible
         val isVersionExperimental = enabledBundles.any { it.isVersionExperimental }
 
         // Check if the user has enabled experimental-version mode for this package's bundle
@@ -1525,11 +1527,51 @@ class HomeViewModel(
                     }
                 }
 
-                validatedPatches
+                // Merge newly added patches (present in bundle but absent from saved selection)
+                // into the validated selection, respecting each patch's include=true default.
+                // This runs after validation so removed patches never sneak back in.
+                val mergedPatches = buildMap<Int, Set<String>> {
+                    // Start from the validated (post-removal) selection
+                    putAll(validatedPatches)
+                    allBundles.forEach { bundle ->
+                        val savedForBundle = savedSelections[bundle.uid] ?: return@forEach
+                        val currentPatchNames = bundle.patches.map { it.name }.toSet()
+                        val newPatchNames = currentPatchNames - savedForBundle
+                        if (newPatchNames.isEmpty()) return@forEach
+
+                        // Among the genuinely new patches, auto-select those with include=true
+                        val newDefaultEnabled = bundle.patches
+                            .filter { it.name in newPatchNames && it.include }
+                            .mapTo(mutableSetOf()) { it.name }
+
+                        if (newDefaultEnabled.isNotEmpty()) {
+                            val existing = getOrDefault(bundle.uid, emptySet())
+                            put(bundle.uid, existing + newDefaultEnabled)
+                        }
+                    }
+                }
+
+                mergedPatches
             } else {
                 // No saved selections - use default for all current bundles
                 allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
             }.applyGmsCoreFilter()
+
+            // Compute new patches map for the dialog to highlight.
+            // Only populated when a previous selection exists - on first run there is nothing
+            // to compare against so we keep it empty to avoid false "New" badges
+            val newPatchesMap: Map<Int, Set<String>> = if (savedSelections.isNotEmpty()) {
+                buildMap {
+                    allBundles.forEach { bundle ->
+                        val savedForBundle = savedSelections[bundle.uid] ?: return@forEach
+                        val currentPatchNames = bundle.patches.map { it.name }.toSet()
+                        val newForBundle = currentPatchNames - savedForBundle
+                        if (newForBundle.isNotEmpty()) put(bundle.uid, newForBundle)
+                    }
+                }
+            } else {
+                emptyMap()
+            }
 
             // Validate options
             val validatedOptions = validatePatchOptions(savedOptions, bundlesMap)
@@ -1545,12 +1587,13 @@ class HomeViewModel(
             expertModeBundles = allBundles
             expertModePatches = patches.toMutableMap()
             expertModeOptions = validatedOptions.toMutableMap()
+            expertModeNewPatches = newPatchesMap
             showExpertModeDialog = true
         } else {
             // Simple Mode: check if this is a main app or "other app"
             // Prefer the default bundle if it is enabled and has patches for this package.
             // If the default bundle is disabled or has no patches, fall through to use
-            // all enabled bundles — this allows third-party bundles to work for known apps too.
+            // all enabled bundles - this allows third-party bundles to work for known apps too.
             val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
             val defaultPatchNames = if (defaultBundle != null && defaultBundle.enabled) {
                 defaultBundle.patchSequence(allowIncompatible)
@@ -1689,6 +1732,7 @@ class HomeViewModel(
         expertModeBundles = emptyList()
         expertModePatches = emptyMap()
         expertModeOptions = emptyMap()
+        expertModeNewPatches = emptyMap()
     }
 
     /**
@@ -1790,9 +1834,9 @@ class HomeViewModel(
 
     /**
      * Extract compatible versions for each package from bundle info.
-     * Returns a map of package name to sorted list of AppTargets — newest first regardless
+     * Returns a map of package name to sorted list of AppTargets - newest first regardless
      * of experimental status. The [AppTarget.isExperimental] flag is preserved for badge display.
-     * Single pass per bundle — O(patches) instead of O(packages × patches).
+     * Single pass per bundle - O(patches) instead of O(packages × patches).
      */
     private fun extractCompatibleVersions(
         bundleInfo: Map<Int, PatchBundleInfo>,
@@ -1853,7 +1897,7 @@ class HomeViewModel(
 
             val digest = MessageDigest.getInstance("SHA-256")
             signatures.any { sig ->
-                // Reset before each use — MessageDigest is stateful
+                // Reset before each use - MessageDigest is stateful
                 digest.reset()
                 val fingerprint = digest.digest(sig.toByteArray())
                     .joinToString("") { b -> "%02x".format(b) }
