@@ -29,9 +29,9 @@
     <string name="home_update_success_subtitle">Ваши источники обновлены</string>
     <string name="home_sources_are_loading">Загрузка источников, пожалуйста, подождите…</string>
     <string name="home_search_apps">Поиск приложений</string>
-    <string name="home_no_apps_title">Приложения не найдены</string>
-    <string name="home_no_apps_subtitle">Добавить источник патча или включить существующий в %s</string>
-    <string name="home_no_apps_search_subtitle">Не найдено приложений, соответствующих \"%1$s\"</string>
+    <string name="home_no_apps_title">Нет доступных приложений</string>
+    <string name="home_no_apps_subtitle">Добавить источник патчей или включить существующий в %s</string>
+    <string name="home_no_apps_search_subtitle">Нет соответствующих приложений \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Какое приложение вы хотите пропатчить?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -605,17 +605,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
     <string name="settings_system_share_website_description">Поделиться официальным сайтом Morphe</string>
-    <string name="settings_system_manager_description">"Экспериментальный проект с открытым исходным кодом для современного, упрощенного патчинга популярных Android-приложений, основанный на отзывах сообщества и вкладах"</string>
+    <string name="settings_system_manager_description">"Экспериментальный проект с открытым кодом для регулярного, оптимизированного патчинга популярных дополнений для Android, который базируется на отзывах и внешности"</string>
     <string name="credits">Благодарности</string>
     <string name="credits_current_development">Текущая разработка</string>
     <string name="credits_prior_development">Предыдущая разработка</string>
-    <string name="opensource_licenses">Лицензии с открытым исходным кодом</string>
+    <string name="opensource_licenses">Лицензии открытого кода</string>
     <!-- Shared strings -->
     <string name="patches">Патчи</string>
     <string name="home">Домашняя страница</string>
     <string name="settings">Настройки</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="all">All</string>
+    <string name="filter">Filter</string>
     <string name="reset">Сбросить</string>
     <string name="reset_all">Сбросить все</string>
     <string name="confirm">Подтвердить</string>
@@ -656,6 +658,7 @@ morphe_header_custom_dark.png
     <string name="open">Открыть</string>
     <string name="mount">Смонтировано</string>
     <string name="mounted">Смонтировано</string>
+    <string name="unmount">Демонтировать</string>
     <string name="unmounted">Размонтировано</string>
     <string name="remount">Перемонтировать</string>
     <string name="install">Установить</string>

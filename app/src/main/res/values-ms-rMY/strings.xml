@@ -10,6 +10,7 @@
     <string name="home_app_show_hidden">Tunjukkan aplikasi tersorok</string>
     <string name="home_app_no_hidden">Tiada aplikasi tersorok</string>
     <string name="home_app_hidden_apps_title">Aplikasi tersorok</string>
+    <string name="home_app_hidden_apps_hint">Sentuh untuk munculkan semula</string>
     <string name="android_11_bug_dialog_title">Pepijat Android 11</string>
     <string name="android_11_bug_dialog_description">Kebenaran pemasangan aplikasi mesti diberikan lebih awal untuk mengelakkan pepijat dalam sistem Android 11 yang akan menjejaskan pengalaman pengguna secara negatif</string>
     <string name="deep_link_add_source_title">Tambah sumber</string>
@@ -27,6 +28,10 @@
     <string name="home_update_success">Kemas kini sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber-sumbee anda adalah yang terkini</string>
     <string name="home_sources_are_loading">Sumber sedang di muat naik, sila tunggu… </string>
+    <string name="home_search_apps">Cari aplikasi</string>
+    <string name="home_no_apps_title">Tiada aplikasi tersedia</string>
+    <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau benarkan yang sedia ada di %s</string>
+    <string name="home_no_apps_search_subtitle">Tiada aplikasi bersesuaian \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang hendak kamu tampal? </string>
     <!-- Humorous hype message with light nostalgia -->
@@ -601,9 +606,11 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_about">Mengenai</string>
     <string name="settings_system_share_website">Kongsi laman web</string>
     <string name="settings_system_share_website_description">Kongsi laman web Morphe rasmi</string>
+    <string name="settings_system_manager_description">"Sebuah projek eksperimen sumber terbuka untuk moden, saliran tambalan aplikasi Android terkemuka, dikuasakan oleh perkongsian dan kontribusi komuniti"</string>
     <string name="credits">Pengakuan</string>
     <string name="credits_current_development">Pembangunan semasa</string>
     <string name="credits_prior_development">Pembangunan sebelumnya</string>
+    <string name="opensource_licenses">Lesen sumber terbuka</string>
     <!-- Shared strings -->
     <string name="patches">Tampalan</string>
     <string name="home">Rumah</string>

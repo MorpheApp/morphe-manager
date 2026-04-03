@@ -614,6 +614,8 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings">Sazî</string>
     <string name="yes">Bêlî</string>
     <string name="no">Na</string>
+    <string name="all">Hemû</string>
+    <string name="filter">Filtir</string>
     <string name="reset">Sazerdin</string>
     <string name="reset_all">Hemû bejnan vebeje</string>
     <string name="confirm">Destûr</string>
@@ -654,6 +656,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="open">Veşêre</string>
     <string name="mount">Çêkirin</string>
     <string name="mounted">Çêkirî</string>
+    <string name="unmount">Dikeşîne</string>
     <string name="unmounted">Nebûyîne çêkirî</string>
     <string name="remount">Nûve bike</string>
     <string name="install">Bîne ser de</string>

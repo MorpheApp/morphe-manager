@@ -616,6 +616,8 @@ morphe_header_custom_dark.png
     <string name="settings">Поставке</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
+    <string name="all">Сви</string>
+    <string name="filter">Филтер</string>
     <string name="reset">Ресетуј</string>
     <string name="reset_all">Ресетуј све</string>
     <string name="confirm">Potvrdite</string>
@@ -656,6 +658,7 @@ morphe_header_custom_dark.png
     <string name="open">Отворити</string>
     <string name="mount">Монтирај</string>
     <string name="mounted">Монтирано</string>
+    <string name="unmount">Демонтирај</string>
     <string name="unmounted">Демонтирано</string>
     <string name="remount">Поново монтирати</string>
     <string name="install">Инсталирај</string>

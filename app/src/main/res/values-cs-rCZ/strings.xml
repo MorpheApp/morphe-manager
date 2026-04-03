@@ -616,6 +616,8 @@ Rozměry obrázků musí být následující:
     <string name="settings">Nastavení</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
+    <string name="all">Vše</string>
+    <string name="filter">Filtr</string>
     <string name="reset">Resetovat</string>
     <string name="reset_all">Resetovat vše</string>
     <string name="confirm">Potvrdit</string>
@@ -656,6 +658,7 @@ Rozměry obrázků musí být následující:
     <string name="open">Otevřeno</string>
     <string name="mount">Připojit</string>
     <string name="mounted">Připojeno</string>
+    <string name="unmount">Odpojit</string>
     <string name="unmounted">Odpojeno</string>
     <string name="remount">Přemontovat</string>
     <string name="install">Nainstalovat</string>

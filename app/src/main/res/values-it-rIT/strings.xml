@@ -616,6 +616,8 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings">Impostazioni</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
+    <string name="all">Tutto</string>
+    <string name="filter">Filtra</string>
     <string name="reset">Reimposta</string>
     <string name="reset_all">Ripristina Tutto</string>
     <string name="confirm">Conferma</string>
@@ -656,6 +658,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="open">Apri</string>
     <string name="mount">Monta</string>
     <string name="mounted">Montato</string>
+    <string name="unmount">Smontaggio</string>
     <string name="unmounted">Smontato</string>
     <string name="remount">Rimonta</string>
     <string name="install">Installa</string>

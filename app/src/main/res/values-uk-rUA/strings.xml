@@ -31,7 +31,7 @@
     <string name="home_search_apps">Пошук застосунків</string>
     <string name="home_no_apps_title">Немає доступних застосунків</string>
     <string name="home_no_apps_subtitle">Додайте джерело патчів або ввімкніть існуюче в %s</string>
-    <string name="home_no_apps_search_subtitle">Не знайдено застосунків, що відповідають запиту \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Не знайдено застосунків за запитом \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Який застосунок ви хочете пропатчити?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -616,6 +616,8 @@ morphe_header_custom_dark.png
     <string name="settings">Налаштування</string>
     <string name="yes">Так</string>
     <string name="no">Ні</string>
+    <string name="all">Всі</string>
+    <string name="filter">Фільтр</string>
     <string name="reset">Скинути</string>
     <string name="reset_all">Скинути все</string>
     <string name="confirm">Підтвердити</string>
@@ -656,6 +658,7 @@ morphe_header_custom_dark.png
     <string name="open">Відкрити</string>
     <string name="mount">Монтувати</string>
     <string name="mounted">Монтовано</string>
+    <string name="unmount">Демонтувати</string>
     <string name="unmounted">Демонтовано</string>
     <string name="remount">Перемонтувати</string>
     <string name="install">Встановити</string>

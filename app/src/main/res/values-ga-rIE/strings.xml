@@ -616,6 +616,8 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings">Socruithe</string>
     <string name="yes">Tá</string>
     <string name="no">Níl</string>
+    <string name="all">Uilig</string>
+    <string name="filter">Scagóir</string>
     <string name="reset">Athshocraigh</string>
     <string name="reset_all">Athshocraigh Gach Rud</string>
     <string name="confirm">Deimhnigh</string>
@@ -656,6 +658,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="open">Oscail</string>
     <string name="mount">Ceangail</string>
     <string name="mounted">Ceangailte</string>
+    <string name="unmount">Dícheangal</string>
     <string name="unmounted">Dícheangailte</string>
     <string name="remount">Athcheangail</string>
     <string name="install">Suiteáil</string>

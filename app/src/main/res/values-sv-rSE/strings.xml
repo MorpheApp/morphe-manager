@@ -25,9 +25,13 @@
     <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
     <string name="home_update_progress_format">%1$s har bearbetats</string>
-    <string name="home_update_success">Källuppdateringen är klar</string>
+    <string name="home_update_success">Uppdatering av källor är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
+    <string name="home_search_apps">Sök efter appar</string>
+    <string name="home_no_apps_title">Inga appar är tillgängliga</string>
+    <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
+    <string name="home_no_apps_search_subtitle">Inga appar matchar \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Vilken app vill du korrigera?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -397,7 +401,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Korrigeringsalternativ</string>
-    <string name="settings_advanced_patch_options_youtube_description">Alternativ för tema, varumärke och sidhuvud</string>
+    <string name="settings_advanced_patch_options_youtube_description">Alternativ för tema, varumärkesanpassning och sidhuvud</string>
     <string name="settings_advanced_patch_options_restart_message">Om du ändrar korrigeringsalternativen måste du korrigera appen igen för att ändringarna ska träda i kraft</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I expertläget blir korrigeringsalternativ tillgängliga under appkorrigeringsprocessen</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -599,9 +603,11 @@ Bildernas mått ska vara följande:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
     <string name="settings_system_share_website_description">Dela Morphes officiella webbplats</string>
+    <string name="settings_system_manager_description">"Ett experimentellt projekt med öppen källkod för modern, smidig korrigering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
     <string name="credits">Medverkande</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>
+    <string name="opensource_licenses">Licenser för öppen källkod</string>
     <!-- Shared strings -->
     <string name="patches">Korrigeringar</string>
     <string name="home">Hem</string>
@@ -648,6 +654,7 @@ Bildernas mått ska vara följande:
     <string name="open">Öppna</string>
     <string name="mount">Montera</string>
     <string name="mounted">Monterad</string>
+    <string name="unmount">Avmontera</string>
     <string name="unmounted">Avmonterad</string>
     <string name="remount">Montera igen</string>
     <string name="install">Installera</string>
@@ -674,7 +681,7 @@ Bildernas mått ska vara följande:
     <string name="changelog_empty">Ingen ändringslogg är tillgänglig</string>
     <string name="no_network_toast">Ingen internetanslutning är tillgänglig</string>
     <string name="update_available">En uppdatering är tillgänglig</string>
-    <string name="ready_to_install_update">Redo att installera uppdatering</string>
+    <string name="ready_to_install_update">Redo att installera uppdateringen</string>
     <string name="update_completed">Uppdatering installerad</string>
     <string name="install_update_manager_failed">Det gick inte att installera uppdateringen</string>
     <string name="installing_manager_update">Installerar uppdateringen …</string>

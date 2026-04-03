@@ -616,6 +616,8 @@ morphe_header_custom_dark.png
     <string name="settings">सेटिंग्स</string>
     <string name="yes">हां</string>
     <string name="no">नहीं</string>
+    <string name="all">सभी</string>
+    <string name="filter">फ़िल्टर</string>
     <string name="reset">रीसेट करें</string>
     <string name="reset_all">सभी रीसेट करें</string>
     <string name="confirm">पुष्टि करें</string>
@@ -656,6 +658,7 @@ morphe_header_custom_dark.png
     <string name="open">खुला</string>
     <string name="mount">माउंट करें</string>
     <string name="mounted">माउंटेड</string>
+    <string name="unmount">अनमाउंट</string>
     <string name="unmounted">अनमाउंटेड</string>
     <string name="remount">पुनःसंयोजित करें</string>
     <string name="install">स्थापित करें</string>

@@ -616,6 +616,8 @@ morphe_header_custom_dark.png
     <string name="settings">设置</string>
     <string name="yes">是</string>
     <string name="no">否</string>
+    <string name="all">全部</string>
+    <string name="filter">筛选</string>
     <string name="reset">重置</string>
     <string name="reset_all">重置所有</string>
     <string name="confirm">确认</string>
@@ -656,6 +658,7 @@ morphe_header_custom_dark.png
     <string name="open">打开</string>
     <string name="mount">挂载</string>
     <string name="mounted">已挂载</string>
+    <string name="unmount">取消挂载</string>
     <string name="unmounted">已取消挂载</string>
     <string name="remount">重新挂载</string>
     <string name="install">安装</string>

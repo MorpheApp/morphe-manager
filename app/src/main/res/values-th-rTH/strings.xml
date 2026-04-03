@@ -617,6 +617,8 @@ morphe_header_custom_dark.png
     <string name="settings">การตั้งค่า</string>
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
+    <string name="all">ทั้งหมด</string>
+    <string name="filter">ตัวกรอง</string>
     <string name="reset">รีเซ็ต</string>
     <string name="reset_all">รีเซ็ตทั้งหมด</string>
     <string name="confirm">ยืนยัน</string>
@@ -657,6 +659,7 @@ morphe_header_custom_dark.png
     <string name="open">ลองใหม่</string>
     <string name="mount">เมานต์</string>
     <string name="mounted">เมานต์แล้ว</string>
+    <string name="unmount">โงมธ่งล</string>
     <string name="unmounted">ไม่ได้เมานต์</string>
     <string name="remount">ไม่มีการเปลี่ยนล่าสุด</string>
     <string name="install">ติดตั้ง</string>

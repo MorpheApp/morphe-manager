@@ -616,6 +616,8 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings">Einstellungen</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
+    <string name="all">Alle</string>
+    <string name="filter">Filter</string>
     <string name="reset">Zurücksetzen</string>
     <string name="reset_all">Alles zurücksetzen</string>
     <string name="confirm">Bestätigen</string>
@@ -656,6 +658,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="open">Öffnen</string>
     <string name="mount">Mounten</string>
     <string name="mounted">Gemountet</string>
+    <string name="unmount">Unmount</string>
     <string name="unmounted">Geunmountet</string>
     <string name="remount">Erneut mounten</string>
     <string name="install">Installieren</string>

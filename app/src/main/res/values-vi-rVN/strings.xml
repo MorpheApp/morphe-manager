@@ -29,8 +29,8 @@
     <string name="home_update_success_subtitle">Đã cập nhật tất cả các nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
-    <string name="home_no_apps_title">Không có ứng dụng nào khả dụng</string>
-    <string name="home_no_apps_subtitle">Thêm một nguồn bản vá hoặc bật một nguồn hiện có trong %s</string>
+    <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
+    <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
     <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
@@ -606,7 +606,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
     <string name="settings_system_share_website_description">Chia sẻ trang web chính chủ của Morphe</string>
-    <string name="settings_system_manager_description">"Một dự án mã nguồn mở thử nghiệm để vá các ứng dụng Android phổ biến một cách hiện đại và hợp lý, được thúc đẩy bởi phản hồi và đóng góp của cộng đồng"</string>
+    <string name="settings_system_manager_description">"Một dự án mã nguồn mở thử nghiệm, mang đến trải nghiệm vá ứng dụng Android hiệu quả với giao diện hiện đại, được phát triển dựa trên phản hồi và đóng góp từ cộng đồng."</string>
     <string name="credits">Đóng góp</string>
     <string name="credits_current_development">Hiện tại</string>
     <string name="credits_prior_development">Trước đây</string>
@@ -617,6 +617,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings">Cài đặt</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
+    <string name="all">Tất cả</string>
+    <string name="filter">Bộ lọc</string>
     <string name="reset">Đặt lại</string>
     <string name="reset_all">Đặt lại tất cả</string>
     <string name="confirm">OK</string>
@@ -657,6 +659,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="open">Mở</string>
     <string name="mount">Gắn kết</string>
     <string name="mounted">Đã gắn kết</string>
+    <string name="unmount">Gỡ gắn kết</string>
     <string name="unmounted">Đã gỡ gắn kết</string>
     <string name="remount">Gắn kết lại</string>
     <string name="install">Cài đặt</string>

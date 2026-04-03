@@ -600,6 +600,8 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings">Podešavanja</string>
     <string name="yes">Da</string>
     <string name="no">Ne</string>
+    <string name="all">Sve</string>
+    <string name="filter">Filter</string>
     <string name="reset">Poništi</string>
     <string name="reset_all">Poništi sve</string>
     <string name="confirm">Potvrdi</string>
@@ -640,6 +642,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="open">Otvori</string>
     <string name="mount">Montiraj</string>
     <string name="mounted">Montirano</string>
+    <string name="unmount">Izbaci</string>
     <string name="unmounted">Demontirano</string>
     <string name="remount">Ponovo priključaj</string>
     <string name="install">Instaliraj</string>

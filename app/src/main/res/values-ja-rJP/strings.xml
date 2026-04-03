@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">非表示アプリを表示する</string>
     <string name="home_app_no_hidden">非表示アプリはありません</string>
     <string name="home_app_hidden_apps_title">非表示アプリ</string>
-    <string name="home_app_hidden_apps_hint">非表示になっているアプリを表示するにはタップします</string>
+    <string name="home_app_hidden_apps_hint">非表示のアプリを再表示するにはタップします</string>
     <string name="android_11_bug_dialog_title">Android 11 のバグ</string>
     <string name="android_11_bug_dialog_description">Android 11 では、ユーザー体験に悪影響を及ぼす不具合が確認されています。あらかじめアプリのインストール権限を許可しておいてください</string>
     <string name="deep_link_add_source_title">ソースを追加</string>
@@ -28,10 +28,10 @@
     <string name="home_update_success">ソースの更新が完了しました</string>
     <string name="home_update_success_subtitle">ソースは最新の状態です</string>
     <string name="home_sources_are_loading">ソースを読み込んでいます。しばらくお待ちください…</string>
-    <string name="home_search_apps">アプリの検索</string>
+    <string name="home_search_apps">アプリを検索</string>
     <string name="home_no_apps_title">利用可能なアプリはありません</string>
-    <string name="home_no_apps_subtitle">パッチソースを追加するか、既存のものを有効にしてください。%s</string>
-    <string name="home_no_apps_search_subtitle">\"%1$s\" に一致するアプリはありません</string>
+    <string name="home_no_apps_subtitle">%s でパッチソースを追加するか、既存のパッチソースを有効にしてください</string>
+    <string name="home_no_apps_search_subtitle">「%1$s」に一致するアプリはありません</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">どのアプリにパッチを適用しますか？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -605,7 +605,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
     <string name="settings_system_share_website_description">Morphe の公式ウェブサイトを共有します</string>
-    <string name="settings_system_manager_description">"実験的なオープンソースプロジェクトであり、コミュニティからのフィードバックと貢献によって推進され、人気のあるAndroidアプリの現代的で効率的なパッチ適用を目指しています。"</string>
+    <string name="settings_system_manager_description">"人気の Android アプリを現代的で効率的にパッチを適用するための、実験的なオープンソースプロジェクトです。コミュニティのフィードバックや貢献によって発展しています"</string>
     <string name="credits">クレジット</string>
     <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>
@@ -616,6 +616,8 @@ morphe_header_custom_dark.png
     <string name="settings">設定</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
+    <string name="all">すべて</string>
+    <string name="filter">フィルタ</string>
     <string name="reset">リセット</string>
     <string name="reset_all">すべてリセット</string>
     <string name="confirm">確認</string>
@@ -656,6 +658,7 @@ morphe_header_custom_dark.png
     <string name="open">開く</string>
     <string name="mount">マウント</string>
     <string name="mounted">マウント済み</string>
+    <string name="unmount">アンマウント</string>
     <string name="unmounted">マウント解除済み</string>
     <string name="remount">再マウント</string>
     <string name="install">インストール</string>

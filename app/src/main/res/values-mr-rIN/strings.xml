@@ -67,4 +67,7 @@
     <string name="settings_system_manager_description">"हे आधुनिक, सुव्यवस्थित पॅचिंगसाठी लोकप्रिय Android ॲप्सचे प्रायोगिक, मुक्त-स्रोत प्रोजेक्ट आहे, जे समुदाय अभिप्राय आणि योगदानाने चालवले जाते."</string>
     <string name="opensource_licenses">मुक्त-स्रोत परवाने</string>
     <!-- Shared strings -->
+    <string name="all">सर्व</string>
+    <string name="filter">गाळण</string>
+    <string name="unmount">डिमाउंट</string>
 </resources>

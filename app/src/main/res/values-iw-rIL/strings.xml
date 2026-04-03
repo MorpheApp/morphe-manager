@@ -600,6 +600,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings">הגדרות</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
+    <string name="all">כולם</string>
+    <string name="filter">סינון</string>
     <string name="reset">איפוס</string>
     <string name="reset_all">אפס הכל</string>
     <string name="confirm">אשר</string>
@@ -640,6 +642,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="open">פתוח</string>
     <string name="mount">הרכבה</string>
     <string name="mounted">מורכב</string>
+    <string name="unmount">\u0048\u0067\u006f\u006f\u006e\u0074</string>
     <string name="unmounted">לא מורכב</string>
     <string name="remount">התחיל</string>
     <string name="install">התקן</string>

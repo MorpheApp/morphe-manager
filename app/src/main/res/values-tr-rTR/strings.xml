@@ -605,7 +605,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_share_website">Web sitesini paylaş</string>
     <string name="settings_system_share_website_description">Morphe resmi web sitesini paylaş</string>
-    <string name="settings_system_manager_description">"Modern, geliştirilmiş ve topluluk geri bildirimi ve katkılarıyla şekillenen, popüler Android uygulamalarının modern, akıcı bir şekilde yamalanması için deneysel bir açık kaynak projesi"</string>
+    <string name="settings_system_manager_description">"Popüler Android uygulamalarının modern ve sadeleştirilmiş bir şekilde yamalanmasını sağlayan, topluluk geri bildirimleri ve katkılarıyla geliştirilen deneysel bir açık kaynak proje"</string>
     <string name="credits">Takdir</string>
     <string name="credits_current_development">Mevcut geliştirme</string>
     <string name="credits_prior_development">Önceki geliştirme</string>
@@ -616,6 +616,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings">Ayarlar</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
+    <string name="all">Hepsi</string>
+    <string name="filter">Filtre</string>
     <string name="reset">Sıfırla</string>
     <string name="reset_all">Tümünü Sıfırla</string>
     <string name="confirm">Onayla</string>
@@ -656,6 +658,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="open">Aç</string>
     <string name="mount">Bağla</string>
     <string name="mounted">Bağlandı</string>
+    <string name="unmount">Ayrımsal</string>
     <string name="unmounted">Bağlantı kaldırıldı</string>
     <string name="remount">Yeniden bağla</string>
     <string name="install">Yükle</string>

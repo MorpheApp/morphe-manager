@@ -616,6 +616,8 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings">Mga pagpipilian</string>
     <string name="yes">Oo</string>
     <string name="no">Hindi</string>
+    <string name="all">Lahat</string>
+    <string name="filter">Salain</string>
     <string name="reset">Ipawalang-bisa</string>
     <string name="reset_all">Ipawalang-bisa lahat</string>
     <string name="confirm">Kumpirmahin</string>
@@ -656,6 +658,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="open">Buksan</string>
     <string name="mount">I-mount</string>
     <string name="mounted">Na-mount</string>
+    <string name="unmount">Tanggalin</string>
     <string name="unmounted">Na-unmount</string>
     <string name="remount">Ire-mount</string>
     <string name="install">I-install</string>

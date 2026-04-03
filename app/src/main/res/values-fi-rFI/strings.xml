@@ -615,6 +615,8 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings">Asetukset</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
+    <string name="all">Kaikki</string>
+    <string name="filter">Suodatin</string>
     <string name="reset">Nollaa</string>
     <string name="reset_all">Nollaa kaikki</string>
     <string name="confirm">Vahvista</string>
@@ -655,6 +657,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="open">Avaa</string>
     <string name="mount">Liitä</string>
     <string name="mounted">Liitetty</string>
+    <string name="unmount">Irrotus</string>
     <string name="unmounted">Irrotettu</string>
     <string name="remount">Käynnistä</string>
     <string name="install">Asenna</string>

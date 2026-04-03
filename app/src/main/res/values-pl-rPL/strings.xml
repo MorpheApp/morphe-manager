@@ -30,7 +30,7 @@
     <string name="home_sources_are_loading">Wczytywanie źródeł, proszę czekać…</string>
     <string name="home_search_apps">Szukaj aplikacji</string>
     <string name="home_no_apps_title">Brak dostępnych aplikacji</string>
-    <string name="home_no_apps_subtitle">Dodaj źródło aktualizacji lub włącz istniejące w %s</string>
+    <string name="home_no_apps_subtitle">Dodaj źródło modyfikacji lub włącz istniejące w %s</string>
     <string name="home_no_apps_search_subtitle">Brak wyników dla \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Jaką aplikację chcesz zmodyfikować?</string>
@@ -118,7 +118,7 @@
     <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
-    <string name="expert_mode_no_results">Brak znalezionych modyfikacji</string>
+    <string name="expert_mode_no_results">Nie znaleziono modyfikacji</string>
     <string name="expert_mode_universal_patches">Uniwersalne modyfikacje</string>
     <string name="expert_mode_multiple_sources_warning_title">Wybrano wiele źródeł modyfikacji</string>
     <string name="expert_mode_multiple_sources_warning_message">"Wybrano modyfikacje z wielu źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane działanie aplikacji.
@@ -571,12 +571,12 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patched_apks_empty">Brak zapisanych plików APK</string>
     <string name="settings_system_patched_apks_delete_title">Usunąć zmodyfikowany plik APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Czy na pewno chcesz usunąć zapisany zmodyfikowany plik APK aplikacji %s?</string>
-    <string name="settings_system_patched_apks_deleted">Pomyślnie usunięto zmodyfikowany plik APK</string>
+    <string name="settings_system_patched_apks_deleted">Zmodyfikowany plik APK usunięty pomyślnie</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Oryginalne pliki APK</string>
     <string name="settings_system_original_apks_description">Oryginalne pliki APK są przechowywane na potrzeby ponownej modyfikacji. Dla każdej aplikacji zachowywana jest tylko najnowsza wersja</string>
     <string name="settings_system_original_apks_empty">Brak zapisanych oryginalnych plików APK</string>
-    <string name="settings_system_original_apks_deleted">Pomyślnie usunięto oryginalny plik APK</string>
+    <string name="settings_system_original_apks_deleted">Oryginalny plik APK usunięty pomyślnie</string>
     <string name="settings_system_original_apks_delete_title">Usunąć oryginalny plik APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Usunąć oryginalny plik APK dla aplikacji %s? Nie będzie można ponownie modyfikować aplikacji bez wybrania nowego pliku APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
@@ -605,17 +605,19 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_about">Informacje</string>
     <string name="settings_system_share_website">Udostępnij stronę</string>
     <string name="settings_system_share_website_description">Udostępnij oficjalną stronę Morphe</string>
-    <string name="settings_system_manager_description">"Eksperymentalny projekt open-source służący do nowoczesnego i usprawnionego patchowania popularnych aplikacji Android, napędzany przez opinie i wkład społeczności"</string>
+    <string name="settings_system_manager_description">"Eksperymentalny projekt otwartoźródłowy służący do nowoczesnego i sprawnego modyfikowania popularnych aplikacji na Androida, rozwijany dzięki opiniom i zaangażowaniu społeczności"</string>
     <string name="credits">Podziękowania</string>
     <string name="credits_current_development">Obecni twórcy</string>
     <string name="credits_prior_development">Poprzedni twórcy</string>
-    <string name="opensource_licenses">Licencje open-source</string>
+    <string name="opensource_licenses">Licencje otwartoźródłowe</string>
     <!-- Shared strings -->
     <string name="patches">Modyfikacje</string>
     <string name="home">Strona główna</string>
     <string name="settings">Ustawienia</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="all">Wszystkie</string>
+    <string name="filter">Filtr</string>
     <string name="reset">Resetuj</string>
     <string name="reset_all">Zresetuj wszystko</string>
     <string name="confirm">Potwierdź</string>
@@ -656,6 +658,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="open">Otwórz</string>
     <string name="mount">Zamontuj</string>
     <string name="mounted">Zamontowano</string>
+    <string name="unmount">Odmontuj</string>
     <string name="unmounted">Odmontowano</string>
     <string name="remount">Zamontuj ponownie</string>
     <string name="install">Zainstaluj</string>

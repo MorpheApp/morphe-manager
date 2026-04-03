@@ -30,8 +30,8 @@
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
-    <string name="home_no_apps_subtitle">أضِف مصدرًا للتصحيح أو قم بتمكين مصدر موجود في %s</string>
-    <string name="home_no_apps_search_subtitle">لا يوجد تطابقات لـ \"%1$s\"</string>
+    <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
+    <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -616,6 +616,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings">الإعدادات</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
+    <string name="all">\"الكل\"</string>
+    <string name="filter">تصفية</string>
     <string name="reset">إعادة التعيين</string>
     <string name="reset_all">إعادة تعيين الكل</string>
     <string name="confirm">تأكيد</string>
@@ -656,6 +658,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="open">فتح</string>
     <string name="mount">تركيب</string>
     <string name="mounted">مركّب</string>
+    <string name="unmount">فك التركيب</string>
     <string name="unmounted">غير مفكوك التركيب</string>
     <string name="remount">إعادة التركيب</string>
     <string name="install">تثبيت</string>

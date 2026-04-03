@@ -616,6 +616,8 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings">Setări</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
+    <string name="all">Toți</string>
+    <string name="filter">Filtru</string>
     <string name="reset">Resetează</string>
     <string name="reset_all">Resetează tot</string>
     <string name="confirm">Confirmă</string>
@@ -656,6 +658,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="open">Deschide</string>
     <string name="mount">Montează</string>
     <string name="mounted">Montat</string>
+    <string name="unmount">De-montare</string>
     <string name="unmounted">Demontat</string>
     <string name="remount">Remontează</string>
     <string name="install">Instalează</string>

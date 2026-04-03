@@ -616,6 +616,8 @@ Bildeformateringen må være som følger:
     <string name="settings">Indstillinger</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
+    <string name="all">Alle</string>
+    <string name="filter">Filtrer</string>
     <string name="reset">Nulstil</string>
     <string name="reset_all">Nulstil Alt</string>
     <string name="confirm">Bekræft</string>
@@ -656,6 +658,7 @@ Bildeformateringen må være som følger:
     <string name="open">Åpne</string>
     <string name="mount">Monter</string>
     <string name="mounted">Monteret</string>
+    <string name="unmount">Afmonter</string>
     <string name="unmounted">Afmonteret</string>
     <string name="remount">Forkaste</string>
     <string name="install">Installere</string>

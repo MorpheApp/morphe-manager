@@ -608,6 +608,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings">সেটিংস</string>
     <string name="yes">হ্যাঁ</string>
     <string name="no">না</string>
+    <string name="all">সব</string>
+    <string name="filter">ফিল্টার</string>
     <string name="reset">আবার সেট করুন</string>
     <string name="reset_all">সব রিসেট করুন</string>
     <string name="confirm">নিশ্চিত করুন</string>
@@ -648,6 +650,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="open">খুলুন</string>
     <string name="mount">মাউন্ট</string>
     <string name="mounted">মাউন্ট করা</string>
+    <string name="unmount">আনমাউন্ট</string>
     <string name="unmounted">আনমাউন্ট করা</string>
     <string name="remount">পুনঃস্থাপন</string>
     <string name="install">ইনস্টল করুন</string>

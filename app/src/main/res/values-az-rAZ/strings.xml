@@ -28,6 +28,10 @@
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
+    <string name="home_search_apps">Tətbiqləri axtar</string>
+    <string name="home_no_apps_title">Mövcud tətbiq yoxdur</string>
+    <string name="home_no_apps_subtitle">%s bölməsində yamaq mənbəyi əlavə edin və ya mövcud olanı aktivləşdir</string>
+    <string name="home_no_apps_search_subtitle">\"%1$s\" ilə uyuşan tətbiq yoxdur</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -600,9 +604,11 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_about">Haqqında</string>
     <string name="settings_system_share_website">Veb saytı paylaş</string>
     <string name="settings_system_share_website_description">Xidməti Morphe veb saytını paylaşın</string>
+    <string name="settings_system_manager_description">"İcma əlaqələri və töhfələri ilə idarə olunan məşhur Android tətbiqlərinin müasir, rəvan yamaqlanması üçün təcrübi açıq mənbəli layihə"</string>
     <string name="credits">Sərmayələr</string>
     <string name="credits_current_development">Hazırkı inkişaf</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>
+    <string name="opensource_licenses">Açıq mənbə lisenziyaları</string>
     <!-- Shared strings -->
     <string name="patches">Yamaqlar</string>
     <string name="home">Əsas səhifə</string>
@@ -649,6 +655,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="open">Aç</string>
     <string name="mount">Montajla</string>
     <string name="mounted">Montajlanıb</string>
+    <string name="unmount">Montajı sil</string>
     <string name="unmounted">Montaj silinib</string>
     <string name="remount">Təkrar montajla</string>
     <string name="install">Quraşdır</string>

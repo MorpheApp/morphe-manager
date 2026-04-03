@@ -37,7 +37,7 @@
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">Pronto para tornar os apps lendários novamente?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Aperte o cinto, é hora de corrigir</string>
+    <string name="home_greeting_3">Aperte o cinto, é hora de patchar</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">Mais um dia, mais uma obra-prima com anúncios bloqueados</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -63,7 +63,7 @@
     <string name="sources_management_already_exists">Esta fonte já foi adicionada</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome exibido</string>
-    <string name="sources_dialog_rename">Renomecer fonte de patch</string>
+    <string name="sources_dialog_rename">Renomear fonte de patch</string>
     <string name="sources_dialog_duplicate_name_error">Já existe uma fonte de patch com este nome</string>
     <string name="sources_dialog_missing_error">NÃ£o foi possÃ­vel atualizar esta fonte de patch.</string>
     <string name="sources_dialog_view_any_version">Qualquer versão</string>
@@ -616,6 +616,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings">Configurações</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="all">Todos</string>
+    <string name="filter">Filtrar</string>
     <string name="reset">Repor</string>
     <string name="reset_all">Redefinir Tudo</string>
     <string name="confirm">Confirmar</string>
@@ -656,6 +658,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="open">Abrir</string>
     <string name="mount">Montar</string>
     <string name="mounted">Montado</string>
+    <string name="unmount">Desmontar</string>
     <string name="unmounted">Desmontado</string>
     <string name="remount">Remontar</string>
     <string name="install">Instalar</string>

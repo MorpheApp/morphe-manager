@@ -617,6 +617,8 @@ Forrás: #%2$s</string>
     <string name="settings">Beállítások</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
+    <string name="all">Minden</string>
+    <string name="filter">Szűrő</string>
     <string name="reset">Visszaállítás</string>
     <string name="reset_all">Összes visszaállítása</string>
     <string name="confirm">Megerősítés</string>
@@ -657,6 +659,7 @@ Forrás: #%2$s</string>
     <string name="open">Megnyitás</string>
     <string name="mount">Csatlakoztatás</string>
     <string name="mounted">Csatlakoztatva</string>
+    <string name="unmount">Leválasztás</string>
     <string name="unmounted">Leválasztva</string>
     <string name="remount">Újracsatolás</string>
     <string name="install">Telepítés</string>

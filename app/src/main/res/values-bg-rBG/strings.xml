@@ -616,6 +616,8 @@ morphe_header_custom_dark.png
     <string name="settings">Настройки</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
+    <string name="all">Всички</string>
+    <string name="filter">Филтър</string>
     <string name="reset">Нулирай</string>
     <string name="reset_all">Възстановяване на всичко</string>
     <string name="confirm">Потвърдете</string>
@@ -656,6 +658,7 @@ morphe_header_custom_dark.png
     <string name="open">Отваряне</string>
     <string name="mount">Монтирай</string>
     <string name="mounted">Монтирано</string>
+    <string name="unmount">B342 M542</string>
     <string name="unmounted">Размонтирано</string>
     <string name="remount">Повторно монтиране</string>
     <string name="install">Инсталиране</string>

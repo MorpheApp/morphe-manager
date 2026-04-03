@@ -616,6 +616,8 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings">Instellingen</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
+    <string name="all">Alles</string>
+    <string name="filter">Filter</string>
     <string name="reset">Reset</string>
     <string name="reset_all">Alles resetten</string>
     <string name="confirm">Bevestigen</string>
@@ -656,6 +658,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="open">Openen</string>
     <string name="mount">Mount</string>
     <string name="mounted">Gemount</string>
+    <string name="unmount">Ontkoppelen</string>
     <string name="unmounted">Niet gemount</string>
     <string name="remount">Herinstalleren</string>
     <string name="install">Installeren</string>
