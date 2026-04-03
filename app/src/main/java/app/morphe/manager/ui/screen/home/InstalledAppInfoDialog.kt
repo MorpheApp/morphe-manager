@@ -39,7 +39,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
@@ -47,10 +46,7 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.util.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 data class AppliedPatchBundleUi(
@@ -102,76 +98,15 @@ fun InstalledAppInfoDialog(
     val pendingMountWarningAction = remember { mutableStateOf<(() -> Unit)?>(null) }
 
     // Bundle data
-    val patchBundleRepository: PatchBundleRepository = koinInject()
-    val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
-    val bundleSources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val availablePatches by patchBundleRepository.bundleInfoFlow
-        .collectAsStateWithLifecycle(emptyMap())
-        .let { remember(it.value) { derivedStateOf { it.value.values.sumOf { bundle -> bundle.patches.size } } } }
+    val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
+    val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
+    val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
 
-    // Extract strings to avoid LocalContext issues
-    val fallbackNameDefault = stringResource(R.string.home_app_info_patches_name_default)
-    val fallbackNameGeneric = stringResource(R.string.home_app_info_patches_name_fallback)
+    // Export strings
     val exportSuccessMessage = stringResource(R.string.save_apk_success)
     val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
 
-    // Build applied bundles summary with stored versions
-    val appliedBundles by produceState(
-        emptyList(),
-        appliedPatches,
-        bundleInfo,
-        bundleSources,
-        installedApp,
-        fallbackNameDefault,
-        fallbackNameGeneric
-    ) {
-        if (appliedPatches.isNullOrEmpty() || installedApp == null) {
-            value = emptyList()
-            return@produceState
-        }
-
-        // Get stored bundle versions from database
-        val storedVersions = withContext(Dispatchers.IO) {
-            viewModel.getStoredBundleVersions()
-        }
-
-        value = appliedPatches.entries.mapNotNull { (bundleUid, patches) ->
-            if (patches.isEmpty()) return@mapNotNull null
-            val info = bundleInfo[bundleUid]
-            val source = bundleSources.firstOrNull { it.uid == bundleUid }
-            val fallbackName = if (bundleUid == 0) {
-                fallbackNameDefault
-            } else {
-                fallbackNameGeneric
-            }
-            val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
-
-            // Use stored version from DB, fallback to current version
-            val version = storedVersions[bundleUid] ?: info?.version
-
-            val patchInfos = info?.patches?.filter { it.name in patches }?.distinctBy { it.name }?.sortedBy { it.name } ?: emptyList()
-            val missingNames = patches.toList().sorted().filterNot { name -> patchInfos.any { it.name == name } }.distinct()
-            AppliedPatchBundleUi(
-                uid = bundleUid,
-                title = title,
-                version = version,
-                patchInfos = patchInfos,
-                fallbackNames = missingNames,
-                bundleAvailable = info != null
-            )
-        }.sortedBy { it.title }
-    }
-
-    // Bundle summary text
-    val bundlesUsedSummary = remember(appliedBundles) {
-        if (appliedBundles.isEmpty()) ""
-        else appliedBundles.joinToString("\n") { bundle ->
-            val version = bundle.version?.takeIf { it.isNotBlank() }
-            if (version != null) "${bundle.title} ($version)" else bundle.title
-        }
-    }
-
-    // Export file name derived directly from installed app info
+    // Export file name
     val exportFileName = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles) {
         val app = installedApp ?: return@remember "morphe_export.apk"
         ExportNameFormatter.format(null, PatchedAppExportData(
