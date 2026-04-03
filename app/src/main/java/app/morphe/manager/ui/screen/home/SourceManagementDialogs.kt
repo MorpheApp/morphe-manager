@@ -343,8 +343,9 @@ fun RenameBundleDialog(
 }
 
 /**
- * Dialog displaying patches from a bundle
+ * Dialog displaying patches from a bundle with search field and chips.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundlePatchesDialog(
     onDismissRequest: () -> Unit,
@@ -355,7 +356,42 @@ fun BundlePatchesDialog(
         patchBundleRepository.bundleInfoFlow.mapNotNull { it[src.uid]?.patches }
     }.collectAsStateWithLifecycle(emptyList())
 
+    var searchQuery by remember { mutableStateOf("") }
+    var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
+    val showFilterSheet = remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+
     val isLoading = patches.isEmpty()
+
+    // packageName -> display label (displayName ?: packageName)
+    val appLabels: Map<String, String> = remember(patches) {
+        patches
+            .flatMap { it.compatiblePackages.orEmpty() }
+            .distinctBy { it.packageName }
+            .mapNotNull { pkg ->
+                val name = pkg.packageName ?: return@mapNotNull null
+                name to (pkg.displayName ?: name)
+            }
+            .toMap()
+    }
+
+    val hasMultiplePackages = appLabels.size > 1
+
+    val filteredPatches: List<PatchInfo> = remember(patches, searchQuery, selectedPackages) {
+        patches
+            .filter { patch ->
+                val packageMatch = selectedPackages.isEmpty() ||
+                        patch.compatiblePackages
+                            ?.any { it.packageName in selectedPackages } == true
+                val queryMatch = searchQuery.isBlank() ||
+                        patch.name.contains(searchQuery, ignoreCase = true) ||
+                        patch.description?.contains(searchQuery, ignoreCase = true) == true
+                packageMatch && queryMatch
+            }
+            .sortedBy { it.name }
+    }
+
+    val isFiltering = searchQuery.isNotBlank() || selectedPackages.isNotEmpty()
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
@@ -384,9 +420,9 @@ fun BundlePatchesDialog(
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Header as first item
+                // Bundle header
                 item {
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
@@ -438,8 +474,12 @@ fun BundlePatchesDialog(
                                         tint = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.size(16.dp)
                                     )
+                                    val countText = if (isFiltering)
+                                        "${filteredPatches.size}/${patches.size}"
+                                    else
+                                        "${patches.size}"
                                     Text(
-                                        text = "${patches.size} ${stringResource(R.string.patches).lowercase()}",
+                                        text = "$countText ${stringResource(R.string.patches).lowercase()}",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.primary,
                                         fontWeight = FontWeight.Medium
@@ -450,8 +490,119 @@ fun BundlePatchesDialog(
                     }
                 }
 
-                // Patches list sorted alphabetically
-                items(patches.sortedBy { it.name }) { patch ->
+                // Search + filter button row
+                stickyHeader {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.surface
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.Bottom
+                        ) {
+                            MorpheDialogTextField(
+                                value = searchQuery,
+                                onValueChange = { searchQuery = it },
+                                label = { Text(stringResource(R.string.expert_mode_search)) },
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Search,
+                                        contentDescription = null
+                                    )
+                                },
+                                showClearButton = true,
+                                modifier = Modifier.weight(1f)
+                            )
+
+                            if (hasMultiplePackages) {
+                                FilledTonalIconButton(
+                                    onClick = { showFilterSheet.value = true },
+                                    modifier = Modifier.padding(bottom = 4.dp),
+                                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                        containerColor = if (selectedPackages.isNotEmpty())
+                                            MaterialTheme.colorScheme.primaryContainer
+                                        else
+                                            MaterialTheme.colorScheme.surfaceVariant,
+                                        contentColor = if (selectedPackages.isNotEmpty())
+                                            MaterialTheme.colorScheme.onPrimaryContainer
+                                        else
+                                            MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.FilterList,
+                                        contentDescription = stringResource(R.string.filter),
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Active filter badges
+                if (selectedPackages.isNotEmpty()) {
+                    item {
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            selectedPackages.forEach { pkg ->
+                                val label = appLabels[pkg] ?: pkg
+                                InputChip(
+                                    selected = true,
+                                    onClick = { selectedPackages = selectedPackages - pkg },
+                                    label = { Text(label) },
+                                    trailingIcon = {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Close,
+                                            contentDescription = stringResource(R.string.remove),
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+
+                // Empty state
+                if (filteredPatches.isEmpty()) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillParentMaxHeight(0.5f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.SearchOff,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(48.dp),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = stringResource(R.string.expert_mode_no_results),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    }
+                }
+
+                // Filtered patches list
+                items(
+                    filteredPatches,
+                    key = { patch ->
+                        patch.name + (patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty())
+                    }
+                ) { patch ->
                     var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
                         mutableStateOf(false)
                     }
@@ -466,6 +617,60 @@ fun BundlePatchesDialog(
                         expandOptions = expandOptions,
                         onExpandOptions = { expandOptions = !expandOptions }
                     )
+                }
+            }
+        }
+    }
+
+    // App filter bottom sheet
+    if (showFilterSheet.value) {
+        ModalBottomSheet(
+            onDismissRequest = { showFilterSheet.value = false },
+            sheetState = sheetState
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 32.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.filter),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = LocalDialogTextColor.current
+                )
+
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    // "All" chip
+                    FilterChip(
+                        selected = selectedPackages.isEmpty(),
+                        onClick = { selectedPackages = emptySet() },
+                        label = { Text(stringResource(R.string.all)) },
+                        leadingIcon = if (selectedPackages.isEmpty()) {
+                            { Icon(Icons.Outlined.DoneAll, null, Modifier.size(16.dp)) }
+                        } else null
+                    )
+                    // Per-app chips
+                    appLabels.entries
+                        .sortedBy { it.value }
+                        .forEach { (pkg, label) ->
+                            val isSelected = pkg in selectedPackages
+                            FilterChip(
+                                selected = isSelected,
+                                onClick = {
+                                    selectedPackages = if (isSelected)
+                                        selectedPackages - pkg
+                                    else
+                                        selectedPackages + pkg
+                                },
+                                label = { Text(label) },
+                                leadingIcon = if (isSelected) {
+                                    { Icon(Icons.Outlined.Done, null, Modifier.size(16.dp)) }
+                                } else null
+                            )
+                        }
                 }
             }
         }
