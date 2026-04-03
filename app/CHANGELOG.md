@@ -1,3 +1,16 @@
+# [1.14.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2026-04-03)
+
+
+### Bug Fixes
+
+* Use card background as color preview, add transparency checkerboard ([#393](https://github.com/MorpheApp/morphe-manager/issues/393)) ([bb76510](https://github.com/MorpheApp/morphe-manager/commit/bb76510e9ad056e216ca5256659db72d4ea46cad))
+
+
+### Features
+
+* Add search and package filter chips to bundle patches dialog ([#392](https://github.com/MorpheApp/morphe-manager/issues/392)) ([14b08f9](https://github.com/MorpheApp/morphe-manager/commit/14b08f9638a48fcd947df10d1ce8d51bc6acfc0c))
+* Add selectable download version in APK availability expert dialog ([#391](https://github.com/MorpheApp/morphe-manager/issues/391)) ([9dc26c0](https://github.com/MorpheApp/morphe-manager/commit/9dc26c0346df68adee530a345a922a33fe3e6f74))
+
 # [1.14.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2026-04-02)
 
 
