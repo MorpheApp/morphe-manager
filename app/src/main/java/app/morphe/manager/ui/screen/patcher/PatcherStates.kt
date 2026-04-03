@@ -37,9 +37,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 
-/**
- * Enum for patcher states
- */
+/** Enum for patcher states. */
 enum class PatcherState {
     IN_PROGRESS,
     SUCCESS,
@@ -47,8 +45,8 @@ enum class PatcherState {
 }
 
 /**
- * State holder for Patcher Screen
- * Manages patching progress, dialogs, and installation flow
+ * State holder for Patcher Screen.
+ * Manages patching progress, dialogs, and installation flow.
  */
 @Stable
 class MorphePatcherState(
@@ -61,9 +59,6 @@ class MorphePatcherState(
 
     // Cancel dialog
     var showCancelDialog by mutableStateOf(false)
-
-    // Export state
-    var isSaving by mutableStateOf(false)
 
     // Computed states
     val patcherSucceeded: Boolean?
@@ -78,7 +73,7 @@ class MorphePatcherState(
 }
 
 /**
- * Remember patcher state with proper lifecycle
+ * Remember patcher state with proper lifecycle.
  */
 @Composable
 fun rememberMorphePatcherState(
@@ -90,7 +85,7 @@ fun rememberMorphePatcherState(
 }
 
 /**
- * Patching success screen
+ * Patching success screen.
  */
 @Composable
 fun PatchingSuccess(
@@ -200,7 +195,7 @@ fun PatchingSuccess(
 }
 
 /**
- * Adaptive content layout for success screen
+ * Adaptive content layout for success screen.
  */
 @Composable
 private fun AdaptiveSuccessContent(
@@ -348,7 +343,7 @@ private fun AdaptiveSuccessContent(
 }
 
 /**
- * Success screen icon
+ * Success screen icon.
  */
 @Composable
 private fun SuccessIcon(
@@ -378,7 +373,7 @@ private fun SuccessIcon(
 }
 
 /**
- * Success screen status text
+ * Success screen status text.
  */
 @Composable
 private fun SuccessStatusText(
@@ -416,7 +411,7 @@ private fun SuccessStatusText(
 }
 
 /**
- * Success screen instructions text
+ * Success screen instructions text.
  */
 @Composable
 private fun SuccessInstructionsText(
@@ -446,7 +441,7 @@ private fun SuccessInstructionsText(
 }
 
 /**
- * Success screen error message
+ * Success screen error message.
  */
 @Composable
 private fun SuccessErrorMessage(
@@ -477,7 +472,7 @@ private fun SuccessErrorMessage(
 }
 
 /**
- * Success screen root warning
+ * Success screen root warning.
  */
 @Composable
 private fun SuccessRootWarning(
@@ -499,7 +494,7 @@ private fun SuccessRootWarning(
 }
 
 /**
- * Styled install action button
+ * Styled installation action button.
  */
 @Composable
 private fun InstallActionButton(
@@ -592,7 +587,7 @@ private fun InstallActionButton(
 }
 
 /**
- * Get title resource based on state
+ * Get title resource based on state.
  */
 private fun getTitleForState(
     installState: InstallViewModel.InstallState,
@@ -607,7 +602,7 @@ private fun getTitleForState(
 }
 
 /**
- * Get subtitle resource based on state
+ * Get subtitle resource based on state.
  */
 private fun getSubtitleForState(
     installState: InstallViewModel.InstallState,
@@ -623,7 +618,7 @@ private fun getSubtitleForState(
 }
 
 /**
- * Patching failed screen
+ * Patching failed screen.
  */
 @Composable
 fun PatchingFailed(

@@ -21,6 +21,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
@@ -32,22 +33,15 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.State
-import app.morphe.manager.ui.model.Step
-import app.morphe.manager.ui.model.StepCategory
-import app.morphe.manager.ui.model.StepId
-import app.morphe.manager.ui.model.StepProgressProvider
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.util.*
 import app.morphe.manager.util.saver.snapshotStateListSaver
+import app.morphe.manager.worker.UpdateCheckWorker
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
@@ -70,7 +64,7 @@ class PatcherViewModel(
     private val patchSelectionRepository: PatchSelectionRepository by inject()
     private val patchOptionsRepository: PatchOptionsRepository by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
-    val prefs: PreferencesManager by inject()
+    private val prefs: PreferencesManager by inject()
     private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
     private val savedStateHandle: SavedStateHandle = get()
@@ -81,6 +75,16 @@ class PatcherViewModel(
 
     var exportMetadata by mutableStateOf<PatchedAppExportData?>(null)
         private set
+
+    /** Formatted export file name derived from [exportMetadata]. */
+    val exportFileName: String by derivedStateOf {
+        val data = exportMetadata ?: PatchedAppExportData(
+            appName = packageName,
+            packageName = packageName,
+            appVersion = version ?: "unspecified"
+        )
+        ExportNameFormatter.format(null, data)
+    }
     private var appliedSelection: PatchSelection = input.selectedPatches.mapValues { it.value.toSet() }
     private var appliedOptions: Options = input.options
     val currentSelectedApp: SelectedApp get() = selectedApp
@@ -333,6 +337,7 @@ class PatcherViewModel(
                 runPreflightCheck()
             }
         }
+        observeLongStepWarning()
     }
 
     private suspend fun runPreflightCheck() {
@@ -538,31 +543,128 @@ class PatcherViewModel(
     }
         private set
 
+    /**
+     * True while an APK export is in progress. Observed by UI to disable the save button.
+     */
+    private val _isSaving = MutableStateFlow(false)
+    val isSaving: StateFlow<Boolean> = _isSaving.asStateFlow()
+
     fun export(uri: Uri?) = viewModelScope.launch {
         uri?.let { targetUri ->
-            ensureExportMetadata()
-            val exportSucceeded = runCatching {
-                withContext(Dispatchers.IO) {
-                    app.contentResolver.openOutputStream(targetUri)
-                        ?.use { stream -> Files.copy(outputFile.toPath(), stream) }
-                        ?: throw IOException("Could not open output stream for export")
+            if (_isSaving.value) return@let
+            _isSaving.value = true
+            try {
+                ensureExportMetadata()
+                val exportSucceeded = runCatching {
+                    withContext(Dispatchers.IO) {
+                        app.contentResolver.openOutputStream(targetUri)
+                            ?.use { stream -> Files.copy(outputFile.toPath(), stream) }
+                            ?: throw IOException("Could not open output stream for export")
+                    }
+                }.isSuccess
+
+                if (!exportSucceeded) {
+                    app.toast(app.getString(R.string.saved_app_export_failed))
+                    return@let
                 }
-            }.isSuccess
 
-            if (!exportSucceeded) {
-                app.toast(app.getString(R.string.saved_app_export_failed))
-                return@launch
+                val saved = persistPatchedApp(null, InstallType.SAVED)
+
+                if (!saved) {
+                    app.toast(app.getString(R.string.patched_app_save_failed_toast))
+                } else {
+                    app.toast(app.getString(R.string.save_apk_success))
+                    delay(2000) // Delay before resetting save state
+                }
+
+                if (saved) _shouldPromptNotification.value = true
+            } finally {
+                _isSaving.value = false
             }
+        }
+    }
 
-            // Save metadata to database
-            val saved = persistPatchedApp(null, InstallType.SAVED)
+    /**
+     * Long-step warning: true when the current patching step has been running for >60 seconds.
+     */
+    private val _showLongStepWarning = MutableStateFlow(false)
+    val showLongStepWarning: StateFlow<Boolean> = _showLongStepWarning.asStateFlow()
 
-            // Show appropriate success message
-            if (!saved) {
-                app.toast(app.getString(R.string.patched_app_save_failed_toast))
-            } else {
-                app.toast(app.getString(R.string.save_apk_success))
+    /**
+     * Emits true once after a successful export or install to prompt the notification permission
+     * dialog. Resets to false after the UI acknowledges it via [consumeNotificationPrompt].
+     */
+    private val _shouldPromptNotification = MutableStateFlow(false)
+    val shouldPromptNotification: StateFlow<Boolean> = _shouldPromptNotification.asStateFlow()
+
+    /**
+     * Checks prefs and triggers the notification prompt if conditions are met.
+     * Called after a successful install so UI doesn't read prefs directly.
+     */
+    fun triggerNotificationPromptIfNeeded() {
+        viewModelScope.launch {
+            if (!prefs.notificationPermissionRequested.get() &&
+                !prefs.backgroundUpdateNotifications.get()
+            ) {
+                _shouldPromptNotification.value = true
             }
+        }
+    }
+
+    fun consumeNotificationPrompt() {
+        _shouldPromptNotification.value = false
+    }
+
+    /**
+     * Notifies ViewModel that the user responded to the notification permission dialog.
+     * Handles prefs writes and FCM/worker setup so UI doesn't need coroutine scope for prefs.
+     */
+    fun onNotificationPermissionResult(
+        granted: Boolean,
+        hasGms: Boolean
+    ) {
+        viewModelScope.launch {
+            prefs.notificationPermissionRequested.update(true)
+            if (granted) {
+                prefs.backgroundUpdateNotifications.update(true)
+                val useManagerPrereleases = prefs.useManagerPrereleases.get()
+                val usePatchesPrereleases = prefs.bundlePrereleasesEnabled.get()
+                    .contains(DEFAULT_SOURCE_UID.toString())
+                syncFcmTopics(
+                    notificationsEnabled = true,
+                    useManagerPrereleases = useManagerPrereleases,
+                    usePatchesPrereleases = usePatchesPrereleases
+                )
+                if (!hasGms) UpdateCheckWorker.schedule(app, prefs.updateCheckInterval.get())
+            }
+        }
+    }
+
+    /**
+     * Starts the long-step warning observer loop.
+     * Called once from init so the loop runs for the ViewModel's lifetime.
+     * Resets the warning whenever real progress advances and sets it after 60 s of no movement.
+     */
+    private fun observeLongStepWarning() {
+        viewModelScope.launch {
+            var lastProgress = progress
+            var stepStartTime = System.currentTimeMillis()
+
+            while (patcherSucceeded.value == null) {
+                val now = System.currentTimeMillis()
+                val current = progress
+                if (current != lastProgress) {
+                    lastProgress = current
+                    stepStartTime = now
+                    _showLongStepWarning.value = false
+                } else if (!_showLongStepWarning.value &&
+                    now - stepStartTime > 60_000L
+                ) {
+                    _showLongStepWarning.value = true
+                }
+                delay(250)
+            }
+            _showLongStepWarning.value = false
         }
     }
 

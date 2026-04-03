@@ -7,8 +7,8 @@ package app.morphe.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.view.HapticFeedbackConstants
 import android.util.Log
+import android.view.HapticFeedbackConstants
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -35,19 +35,20 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.InstallerManager
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.*
+import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.screen.settings.system.ensureValidEntries
 import app.morphe.manager.ui.screen.shared.InfoBadge
@@ -56,17 +57,14 @@ import app.morphe.manager.ui.screen.shared.MorpheCard
 import app.morphe.manager.ui.screen.shared.MorpheSettingsDivider
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
-import app.morphe.manager.ui.viewmodel.SettingsViewModel
-import app.morphe.manager.util.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
+import app.morphe.manager.util.APK_MIMETYPE
+import app.morphe.manager.util.EventEffect
+import app.morphe.manager.util.tag
+import app.morphe.manager.util.toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
-import app.morphe.manager.util.syncFcmTopics
-import app.morphe.manager.worker.UpdateCheckWorker
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import kotlin.math.exp
@@ -99,23 +97,18 @@ fun PatcherScreen(
     // Remember patcher state
     val state = rememberMorphePatcherState(patcherViewModel)
 
-    // Notification prompt: shown once after first successful install or save
-    var showNotificationPrompt by rememberSaveable { mutableStateOf(false) }
+    // Notification prompt: driven by ViewModel after successful export or install
+    val shouldPromptNotification by patcherViewModel.shouldPromptNotification.collectAsStateWithLifecycle()
+    val isSaving by patcherViewModel.isSaving.collectAsStateWithLifecycle()
 
-    val scope = rememberCoroutineScope()
     val hasGms = remember {
         GoogleApiAvailability.getInstance()
             .isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS
     }
 
-    // Prefs needed for the notification dialog
-    val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
-    val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
-    val updateCheckInterval by prefs.updateCheckInterval.getAsState()
-
     // Animated progress with dual-mode animation
     var displayProgress by rememberSaveable { mutableFloatStateOf(patcherViewModel.progress) }
-    var showLongStepWarning by rememberSaveable { mutableStateOf(false) }
+    val showLongStepWarning by patcherViewModel.showLongStepWarning.collectAsStateWithLifecycle()
     var showSuccessScreen by rememberSaveable { mutableStateOf(false) }
 
     val displayProgressAnimate by animateFloatAsState(
@@ -159,7 +152,7 @@ fun PatcherScreen(
     // Get output file from viewModel
     val outputFile = patcherViewModel.outputFile
 
-    // Progress animation logic
+    // Progress animation logic: drives displayProgress and showSuccessScreen.
     LaunchedEffect(patcherSucceeded) {
         var lastProgressUpdate = 0.0f
         var currentStepStartTime = System.currentTimeMillis()
@@ -169,19 +162,11 @@ fun PatcherScreen(
 
             val actualProgress = patcherViewModel.progress
             if (lastProgressUpdate != actualProgress) {
-                // Progress updated!
-                lastProgressUpdate = actualProgress
+                lastProgressUpdate = actualProgress // Progress updated
                 currentStepStartTime = now
-                showLongStepWarning = false
                 if (Log.isLoggable(tag, Log.DEBUG)) {
                     Log.d(tag, "Real progress update: ${(actualProgress * 1000).toInt() / 10.0f}%")
                 }
-            }
-
-            val timeUntilStepShowsBePatient = 60 * 1000 // 60 seconds
-            val timeSinceStepStarted = now - currentStepStartTime
-            if (!showLongStepWarning && timeSinceStepStarted > timeUntilStepShowsBePatient) {
-                showLongStepWarning = true
             }
 
             // When to stop using overcorrection of progress and always use the actual progress.
@@ -190,7 +175,7 @@ fun PatcherScreen(
             if (actualProgress >= maxOverCorrectPercentage) {
                 displayProgress = actualProgress
             } else {
-                // Over estimate the progress by about 1% per second, but decays to
+                // Overestimate the progress by about 1% per second, but decays to
                 // adding smaller adjustments each second until the current step completes
                 fun overEstimateProgressAdjustment(secondsElapsed: Double): Double {
                     // Sigmoid curve. Give larger correct soon after the step starts but then flattens off.
@@ -199,7 +184,7 @@ fun PatcherScreen(
                     return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
                 }
 
-                val secondsSinceStepStarted = timeSinceStepStarted / 1000.0
+                val secondsSinceStepStarted = (now - currentStepStartTime) / 1000.0
                 val overEstimatedProgress = min(
                     maxOverCorrectPercentage,
                     actualProgress + 0.01 * overEstimateProgressAdjustment(secondsSinceStepStarted)
@@ -261,78 +246,37 @@ fun PatcherScreen(
         }
     }
 
-    // Export APK setup
-    val exportFormat = remember { patcherViewModel.prefs.patchedAppExportFormat.getBlocking() }
-    val exportMetadata = patcherViewModel.exportMetadata
-    val fallbackMetadata = remember(patcherViewModel.packageName, patcherViewModel.version) {
-        PatchedAppExportData(
-            appName = patcherViewModel.packageName,
-            packageName = patcherViewModel.packageName,
-            appVersion = patcherViewModel.version ?: "unspecified"
-        )
-    }
-    val exportFileName = remember(exportFormat, exportMetadata, fallbackMetadata) {
-        ExportNameFormatter.format(exportFormat, exportMetadata ?: fallbackMetadata)
-    }
-
     val exportApkLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument(APK_MIMETYPE)
     ) { uri ->
-        if (uri != null && !state.isSaving) {
-            state.isSaving = true
-            // Use InstallViewModel for export
-            installViewModel.export(outputFile, uri) { success ->
-                patcherViewModel.viewModelScope.launch {
-                    if (success) {
-                        // Also save patched app metadata
-                        patcherViewModel.persistPatchedApp(null, InstallType.SAVED)
-
-                        // Offer notifications after first successful save (if not already asked)
-                        if (!prefs.notificationPermissionRequested.get() &&
-                            !prefs.backgroundUpdateNotifications.get()) {
-                            showNotificationPrompt = true
-                        }
-                    }
-                    delay(2000)
-                    state.isSaving = false
-                }
-            }
-        }
+        uri?.let { patcherViewModel.export(it) }
     }
 
     // Trigger notification prompt after first successful install
     val installState = installViewModel.installState
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
-            if (!prefs.notificationPermissionRequested.get() &&
-                !prefs.backgroundUpdateNotifications.get()) {
-                showNotificationPrompt = true
-            }
+            patcherViewModel.triggerNotificationPromptIfNeeded()
         }
     }
 
     // Notification prompt dialog
-    if (showNotificationPrompt) {
+    if (shouldPromptNotification) {
         NotificationPermissionDialog(
             title = stringResource(R.string.notification_post_patch_dialog_title),
             onDismissRequest = {
-                scope.launch { prefs.notificationPermissionRequested.update(true) }
-                showNotificationPrompt = false
+                patcherViewModel.onNotificationPermissionResult(
+                    granted = false,
+                    hasGms = hasGms
+                )
+                patcherViewModel.consumeNotificationPrompt()
             },
             onPermissionResult = { granted ->
-                scope.launch {
-                    prefs.notificationPermissionRequested.update(true)
-                    if (granted) {
-                        prefs.backgroundUpdateNotifications.update(true)
-                        syncFcmTopics(
-                            notificationsEnabled = true,
-                            useManagerPrereleases = useManagerPrereleases,
-                            usePatchesPrereleases = usePatchesPrereleases.contains("0")
-                        )
-                        if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
-                    }
-                }
-                showNotificationPrompt = false
+                patcherViewModel.onNotificationPermissionResult(
+                    granted = granted,
+                    hasGms = hasGms
+                )
+                patcherViewModel.consumeNotificationPrompt()
             }
         )
     }
@@ -557,9 +501,7 @@ fun PatcherScreen(
     // Installer selection dialog for patcher screen
     if (installViewModel.showInstallerSelectionDialog) {
         val installerManager: InstallerManager = koinInject()
-        val settingsViewModel: SettingsViewModel = koinViewModel()
-
-        val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
+        val primaryPreference by prefs.installerPrimary.getAsState()
         val primaryToken = remember(primaryPreference) {
             installerManager.parseToken(primaryPreference)
         }
@@ -665,7 +607,7 @@ fun PatcherScreen(
                                     }
                                 )
                             } else {
-                                // Regular install with pre-conflict check
+                                // Regular installation with pre-conflict check
                                 installViewModel.install(
                                     outputFile = outputFile,
                                     originalPackageName = patcherViewModel.packageName,
@@ -683,11 +625,11 @@ fun PatcherScreen(
                         },
                         onHomeClick = onBackClick,
                         onSaveClick = {
-                            if (!state.isSaving) {
-                                exportApkLauncher.launch(exportFileName)
+                            if (!isSaving) {
+                                exportApkLauncher.launch(patcherViewModel.exportFileName)
                             }
                         },
-                        isSaving = state.isSaving
+                        isSaving = isSaving
                     )
                 }
 
