@@ -117,7 +117,7 @@ private fun GitHubPatDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            // Info button section
+            // Info button
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.settings_advanced_github_pat_how_to_get),
                 onClick = { showInfoDialog.value = true },
@@ -125,7 +125,7 @@ private fun GitHubPatDialog(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            // PAT input field section
+            // PAT input
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -133,9 +133,7 @@ private fun GitHubPatDialog(
                 MorpheDialogTextField(
                     value = pat,
                     onValueChange = { pat = it },
-                    label = {
-                        Text(stringResource(R.string.settings_advanced_github_pat))
-                    },
+                    label = { Text(stringResource(R.string.settings_advanced_github_pat)) },
                     placeholder = { Text("ghp_xxxxxxxxxxxxxxx") },
                     leadingIcon = {
                         Icon(
@@ -149,18 +147,15 @@ private fun GitHubPatDialog(
                 )
             }
 
-            // Export settings section
+            // Export include toggle + warning
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 RichSettingsItem(
                     onClick = {
-                        if (!includePatInExport) {
-                            showIncludeWarning.value = true
-                        } else {
-                            includePatInExport = false
-                        }
+                        if (!includePatInExport) showIncludeWarning.value = true
+                        else includePatInExport = false
                     },
                     showBorder = true,
                     leadingContent = {
@@ -202,7 +197,7 @@ private fun GitHubPatDialog(
         )
     }
 
-    // Include warning confirmation dialog
+    // Include-in-export warning confirmation
     if (showIncludeWarning.value) {
         MorpheDialog(
             onDismissRequest = { showIncludeWarning.value = false },

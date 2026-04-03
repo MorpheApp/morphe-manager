@@ -10,6 +10,7 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.tag
@@ -92,7 +93,7 @@ class ManagerApplication : Application() {
             val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
             val useManagerPrereleases = prefs.useManagerPrereleases.get()
             // Patches FCM topic is determined by the default bundle (uid=0) prerelease toggle.
-            val usePatchesPrereleases = prefs.bundlePrereleasesEnabled.get().contains("0")
+            val usePatchesPrereleases = prefs.bundlePrereleasesEnabled.get().contains(DEFAULT_SOURCE_UID.toString())
 
             // On GMS devices FCM is the primary delivery channel - WorkManager is not needed.
             // Cancel any previously scheduled jobs on GMS devices.

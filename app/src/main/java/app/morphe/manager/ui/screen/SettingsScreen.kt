@@ -9,7 +9,6 @@ import android.annotation.SuppressLint
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -38,9 +37,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
@@ -53,12 +49,9 @@ import app.morphe.manager.util.JSON_MIMETYPE
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
-/**
- * Settings tabs for bottom navigation
- */
+/** Settings tabs for bottom navigation. */
 private enum class SettingsTab(
     val titleRes: Int,
     val icon: ImageVector
@@ -69,10 +62,9 @@ private enum class SettingsTab(
 }
 
 /**
- * Settings screen with bottom navigation and swipeable tabs
+ * Settings screen with bottom navigation and swipeable tabs.
  */
-@SuppressLint("BatteryLight", "LocalContextGetResourceValueCall")
-@OptIn(ExperimentalFoundationApi::class)
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun SettingsScreen(
     homeViewModel: HomeViewModel,
@@ -86,9 +78,6 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val prefs: PreferencesManager = koinInject()
-    val installerManager: InstallerManager = koinInject()
-    val rootInstaller: RootInstaller = koinInject()
 
     // Pager state for swipeable tabs
     val pagerState = rememberPagerState(
@@ -103,9 +92,6 @@ fun SettingsScreen(
     val dynamicColor by themeViewModel.prefs.dynamicColor.getAsState()
     val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
 
-    // Update
-    val useManagerPrereleases = homeViewModel.prefs.useManagerPrereleases.getAsState()
-
     // Dialog states
     val showAboutDialog = rememberSaveable { mutableStateOf(false) }
     val showKeystoreCredentialsDialog = rememberSaveable { mutableStateOf(false) }
@@ -115,44 +101,24 @@ fun SettingsScreen(
     // Import launchers
     val importKeystoreLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.startKeystoreImport(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
 
     val importSettingsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.importManagerSettings(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
 
     // Export launchers
     val exportKeystoreLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("*/*")
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.exportKeystore(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.exportKeystore(it) } }
 
     val exportSettingsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.exportManagerSettings(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.exportManagerSettings(it) } }
 
     val exportDebugLogsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("text/plain")
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.exportDebugLogs(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.exportDebugLogs(it) } }
 
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
@@ -187,9 +153,7 @@ fun SettingsScreen(
     // Installer selection dialog
     if (showInstallerDialog.value) {
         InstallerSelectionDialogContainer(
-            installerManager = installerManager,
             settingsViewModel = settingsViewModel,
-            rootInstaller = rootInstaller,
             onDismiss = { showInstallerDialog.value = false }
         )
     }
@@ -224,14 +188,12 @@ fun SettingsScreen(
                 )
 
                 SettingsTab.ADVANCED -> AdvancedTabContent(
-                    useManagerPrereleases = useManagerPrereleases,
                     patchOptionsViewModel = patchOptionsViewModel,
                     homeViewModel = homeViewModel,
-                    prefs = prefs
+                    settingsViewModel = settingsViewModel
                 )
 
                 SettingsTab.SYSTEM -> SystemTabContent(
-                    installerManager = installerManager,
                     settingsViewModel = settingsViewModel,
                     onShowInstallerDialog = { showInstallerDialog.value = true },
                     importExportViewModel = importExportViewModel,
@@ -241,8 +203,7 @@ fun SettingsScreen(
                     onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
                     onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
                     onAboutClick = { showAboutDialog.value = true },
-                    onChangelogClick = { showChangelogDialog.value = true },
-                    prefs = prefs
+                    onChangelogClick = { showChangelogDialog.value = true }
                 )
             }
         }
@@ -260,7 +221,7 @@ fun SettingsScreen(
 }
 
 /**
- * Bottom navigation bar
+ * Bottom navigation bar.
  */
 @Composable
 private fun MorpheBottomNavigation(
@@ -302,7 +263,7 @@ private fun MorpheBottomNavigation(
 }
 
 /**
- * Individual navigation item
+ * Individual navigation item.
  */
 @Composable
 private fun NavigationItem(

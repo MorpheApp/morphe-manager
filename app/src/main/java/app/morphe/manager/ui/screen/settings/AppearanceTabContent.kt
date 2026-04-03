@@ -34,7 +34,6 @@ import app.morphe.manager.ui.screen.settings.appearance.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
 import app.morphe.manager.ui.theme.Theme
-import app.morphe.manager.ui.viewmodel.ThemePreset
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -88,25 +87,14 @@ fun AppearanceTabContent(
             dynamicColor = dynamicColor,
             supportsDynamicColor = supportsDynamicColor,
             onThemeSelected = { selectedTheme ->
-                scope.launch {
-                    when (selectedTheme) {
-                        "SYSTEM" -> themeViewModel.applyThemePreset(ThemePreset.DEFAULT)
-                        "LIGHT" -> themeViewModel.applyThemePreset(ThemePreset.LIGHT)
-                        "DARK" -> themeViewModel.applyThemePreset(ThemePreset.DARK)
-                        "DYNAMIC" -> themeViewModel.applyThemePreset(ThemePreset.DYNAMIC)
-                    }
-                }
+                themeViewModel.applyThemePresetByKey(selectedTheme)
             }
         )
 
         // Pure Black Theme Toggle
         AnimatedVisibility(visible = theme != Theme.LIGHT) {
             RichSettingsItem(
-                onClick = {
-                    scope.launch {
-                        themeViewModel.prefs.pureBlackTheme.update(!pureBlackTheme)
-                    }
-                },
+                onClick = { themeViewModel.togglePureBlackTheme(pureBlackTheme) },
                 showBorder = true,
                 title = stringResource(R.string.settings_appearance_pure_black),
                 subtitle = stringResource(R.string.settings_appearance_pure_black_description),
@@ -150,20 +138,14 @@ fun AppearanceTabContent(
         BackgroundSelector(
             selectedBackground = backgroundType,
             onBackgroundSelected = { selectedType ->
-                scope.launch {
-                    themeViewModel.prefs.backgroundType.update(selectedType)
-                }
+                themeViewModel.setBackgroundType(selectedType)
             }
         )
 
         // Parallax Effect Toggle
         AnimatedVisibility(visible = backgroundType != BackgroundType.NONE) {
             RichSettingsItem(
-                onClick = {
-                    scope.launch {
-                        themeViewModel.prefs.enableBackgroundParallax.update(!enableParallax)
-                    }
-                },
+                onClick = { themeViewModel.toggleBackgroundParallax(enableParallax) },
                 showBorder = true,
                 title = stringResource(R.string.settings_appearance_parallax_effect),
                 subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
@@ -223,11 +205,9 @@ fun AppearanceTabContent(
         LanguagePickerDialog(
             currentLanguage = appLanguage,
             onLanguageSelected = { languageCode ->
-                scope.launch {
-                    themeViewModel.setAppLanguage(languageCode)
-                    (context as? Activity)?.recreate()
-                }
+                themeViewModel.setAppLanguage(languageCode)
                 showLanguageDialog.value = false
+                (context as? Activity)?.recreate()
             },
             onDismiss = { showLanguageDialog.value = false }
         )

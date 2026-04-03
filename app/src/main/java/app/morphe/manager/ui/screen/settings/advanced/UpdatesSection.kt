@@ -6,8 +6,6 @@
 package app.morphe.manager.ui.screen.settings.advanced
 
 import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,97 +17,56 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import app.morphe.manager.R
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.syncFcmTopics
+import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.worker.UpdateCheckInterval
-import app.morphe.manager.worker.UpdateCheckWorker
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
-import kotlinx.coroutines.launch
 
 /**
- * Returns true if Google Play Services is available and functional on this device.
- * When GMS is available, FCM is the primary notification channel and WorkManager
- * interval settings are not relevant to the user.
- */
-private fun isGmsAvailable(context: Context): Boolean =
-    GoogleApiAvailability.getInstance()
-        .isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS
-
-/**
- * Updates section settings item for the Advanced tab.
- *
- * @param useManagerPrereleases Current value of the manager prereleases preference.
- * @param onManagerPrereleasesToggle Called when the prereleases switch is flipped.
- * @param prefs Full [PreferencesManager] used to read and write notification / interval prefs.
+ * Updates section settings items for the Advanced tab.
  */
 @Composable
 fun UpdatesSettingsItem(
-    useManagerPrereleases: Boolean,
-    onManagerPrereleasesToggle: () -> Unit,
-    prefs: PreferencesManager
+    settingsViewModel: SettingsViewModel,
+    onManagerPrereleasesToggle: () -> Unit
 ) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-
+    val prefs = settingsViewModel.prefs
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
     val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
+    val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
     val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
-
-    // On GMS devices FCM handles all notification delivery.
-    val hasGms = remember { isGmsAvailable(context) }
 
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
-    // Dialog visibility state
-    val showNotificationPermissionDialog = rememberSaveable { mutableStateOf(false) }
-    val showIntervalDialog = rememberSaveable { mutableStateOf(false) }
+    // Dialog states
+    val showNotificationPermissionDialog = remember { mutableStateOf(false) }
+    val showIntervalDialog = remember { mutableStateOf(false) }
 
-    // Checks whether POST_NOTIFICATIONS is granted (Android 13+ only)
-    fun hasNotificationPermission(): Boolean =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED
-        } else {
-            true // Auto-granted on Android < 13
-        }
-
+    // Dialogs
     if (showNotificationPermissionDialog.value) {
         NotificationPermissionDialog(
             onDismissRequest = {
-                // User cancelled - revert the preference back to OFF
-                scope.launch { prefs.backgroundUpdateNotifications.update(false) }
+                settingsViewModel.onNotificationPermissionDismissed()
                 showNotificationPermissionDialog.value = false
             },
             onPermissionResult = { granted ->
+                settingsViewModel.onNotificationPermissionResult(
+                    granted = granted,
+                    useManagerPrereleases = useManagerPrereleases,
+                    patchesPrereleaseIds = usePatchesPrereleases,
+                    updateCheckInterval = updateCheckInterval
+                )
                 showNotificationPermissionDialog.value = false
-                if (granted) {
-                    syncFcmTopics(
-                        notificationsEnabled = true,
-                        useManagerPrereleases = useManagerPrereleases,
-                        usePatchesPrereleases = usePatchesPrereleases.contains("0")
-                    )
-                    if (!hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
-                } else {
-                    scope.launch { prefs.backgroundUpdateNotifications.update(false) }
-                }
             }
         )
     }
@@ -117,9 +74,8 @@ fun UpdatesSettingsItem(
     if (showIntervalDialog.value) {
         UpdateCheckIntervalDialog(
             currentInterval = updateCheckInterval,
-            onIntervalSelected = { selected ->
-                scope.launch { prefs.updateCheckInterval.update(selected) }
-                if (!hasGms) UpdateCheckWorker.schedule(context, selected)
+            onIntervalSelected = {
+                settingsViewModel.selectUpdateInterval(it)
                 showIntervalDialog.value = false
             },
             onDismiss = { showIntervalDialog.value = false }
@@ -129,15 +85,12 @@ fun UpdatesSettingsItem(
     // Use manager prereleases toggle
     RichSettingsItem(
         onClick = {
-            val newValue = !useManagerPrereleases
-            scope.launch {
-                syncFcmTopics(
-                    notificationsEnabled = backgroundUpdateNotifications,
-                    useManagerPrereleases = newValue,
-                    usePatchesPrereleases = usePatchesPrereleases.contains("0")
-                )
-            }
-            onManagerPrereleasesToggle()
+            settingsViewModel.toggleManagerPrereleases(
+                currentValue = useManagerPrereleases,
+                backgroundNotificationsEnabled = backgroundUpdateNotifications,
+                patchesPrereleaseIds = usePatchesPrereleases,
+                onCheckUpdate = onManagerPrereleasesToggle
+            )
         },
         showBorder = true,
         leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
@@ -157,30 +110,22 @@ fun UpdatesSettingsItem(
     // Background update notifications toggle
     RichSettingsItem(
         onClick = {
-            val newValue = !backgroundUpdateNotifications
-            if (newValue && !hasNotificationPermission()) {
-                // Save optimistically - dialog reverts if permission is denied
-                scope.launch { prefs.backgroundUpdateNotifications.update(true) }
-                showNotificationPermissionDialog.value = true
-            } else {
-                scope.launch {
-                    prefs.backgroundUpdateNotifications.update(newValue)
-                    syncFcmTopics(
-                        newValue,
-                        useManagerPrereleases = useManagerPrereleases,
-                        usePatchesPrereleases = usePatchesPrereleases.contains("0")
-                    )
-                    if (newValue && !hasGms) UpdateCheckWorker.schedule(context, updateCheckInterval)
-                    else UpdateCheckWorker.cancel(context)
-                }
-            }
+            settingsViewModel.toggleBackgroundNotifications(
+                currentValue = backgroundUpdateNotifications,
+                useManagerPrereleases = useManagerPrereleases,
+                patchesPrereleaseIds = usePatchesPrereleases,
+                updateCheckInterval = updateCheckInterval,
+                onShowPermissionDialog = { showNotificationPermissionDialog.value = true }
+            )
         },
         showBorder = true,
         leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) },
         title = stringResource(R.string.settings_advanced_updates_background_notifications),
         subtitle = stringResource(
-            if (hasGms) R.string.settings_advanced_updates_background_notifications_description_fcm
-            else R.string.settings_advanced_updates_background_notifications_description
+            if (settingsViewModel.hasGms)
+                R.string.settings_advanced_updates_background_notifications_description_fcm
+            else
+                R.string.settings_advanced_updates_background_notifications_description
         ),
         trailingContent = {
             Switch(
@@ -194,9 +139,9 @@ fun UpdatesSettingsItem(
         }
     )
 
-    // Check frequency interval selector
+    // Check frequency interval selector (non-GMS only)
     AnimatedVisibility(
-        visible = backgroundUpdateNotifications && !hasGms,
+        visible = backgroundUpdateNotifications && !settingsViewModel.hasGms,
         enter = expandVertically(animationSpec = tween(300)) + fadeIn(animationSpec = tween(300)),
         exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
     ) {
@@ -209,11 +154,9 @@ fun UpdatesSettingsItem(
         )
     }
 
-    // Allow updates on metered (mobile data) connections
+    // Allow updates on metered connections
     RichSettingsItem(
-        onClick = {
-            scope.launch { prefs.allowMeteredUpdates.update(!allowMeteredUpdates) }
-        },
+        onClick = { settingsViewModel.toggleAllowMeteredUpdates(allowMeteredUpdates) },
         showBorder = true,
         leadingContent = { MorpheIcon(icon = Icons.Outlined.SignalCellularAlt) },
         title = stringResource(R.string.settings_advanced_updates_allow_metered),
@@ -358,7 +301,7 @@ private fun UpdateCheckIntervalDialog(
                 }
             }
 
-            // Battery optimisation warning
+            // Battery optimization warning
             InfoBadge(
                 text = stringResource(R.string.settings_advanced_update_interval_battery_warning),
                 style = InfoBadgeStyle.Warning,

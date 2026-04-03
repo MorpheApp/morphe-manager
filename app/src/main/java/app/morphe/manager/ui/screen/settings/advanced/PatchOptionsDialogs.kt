@@ -65,17 +65,12 @@ fun ThemeColorDialog(
     // Get theme options from bundle
     val themeOptions = patchOptionsViewModel.getThemeOptions(packageName)
 
-    // Get dark theme option with its presets
+    // Get dark theme option
     val darkThemeOption = patchOptionsViewModel.getOption(themeOptions, PatchOptionKeys.DARK_THEME_COLOR)
     val darkPresets = darkThemeOption?.let { patchOptionsViewModel.getOptionPresetsMap(it) } ?: emptyMap()
-
     // Get light theme option (YouTube only)
     val lightThemeOption = patchOptionsViewModel.getOption(themeOptions, PatchOptionKeys.LIGHT_THEME_COLOR)
     val lightPresets = lightThemeOption?.let { patchOptionsViewModel.getOptionPresetsMap(it) } ?: emptyMap()
-
-    // Get default values from presets
-    val defaultDarkColor = darkPresets.entries.firstOrNull()?.value?.toString() ?: "@android:color/black"
-    val defaultLightColor = lightPresets.entries.firstOrNull()?.value?.toString() ?: "@android:color/white"
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -83,14 +78,12 @@ fun ThemeColorDialog(
         titleTrailingContent = {
             IconButton(
                 onClick = {
-                    scope.launch {
-                        patchOptionsPrefs.darkThemeColor(packageName).update(defaultDarkColor)
-                        // Light theme reset YouTube only
-                        if (packageName == KnownApps.YOUTUBE) {
-                            patchOptionsPrefs.lightThemeColor(packageName).update(defaultLightColor)
-                        }
-                    }
-                },
+                    patchOptionsViewModel.resetThemeColors(
+                        prefs = patchOptionsPrefs,
+                        packageName = packageName,
+                        isYouTube = packageName == KnownApps.YOUTUBE
+                    )
+                }
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Restore,
@@ -111,7 +104,7 @@ fun ThemeColorDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Dark Theme Section
+            // Dark theme section
             if (darkThemeOption != null) {
                 val localizedTitle = getLocalizedOrCustomText(
                     context,
@@ -127,14 +120,13 @@ fun ThemeColorDialog(
                 )
 
                 darkThemeOption.description.takeIf { it.isNotEmpty() }?.let { desc ->
-                    val localizedDesc = getLocalizedOrCustomText(
-                        context,
-                        desc,
-                        DARK_THEME_COLOR_DESC,
-                        R.string.settings_advanced_patch_options_theme_color_description
-                    )
                     Text(
-                        text = localizedDesc,
+                        text = getLocalizedOrCustomText(
+                            context,
+                            desc,
+                            DARK_THEME_COLOR_DESC,
+                            R.string.settings_advanced_patch_options_theme_color_description
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = LocalDialogSecondaryTextColor.current
                     )
@@ -165,32 +157,30 @@ fun ThemeColorDialog(
                 )
             }
 
-            // Light Theme Section (YouTube only, if available)
+            // Light theme section (YouTube only)
             if (packageName == KnownApps.YOUTUBE && lightThemeOption != null) {
                 Spacer(modifier = Modifier.height(8.dp))
 
-                val localizedTitle = getLocalizedOrCustomText(
-                    context,
-                    lightThemeOption.title,
-                    LIGHT_THEME_COLOR_TITLE,
-                    R.string.settings_advanced_patch_options_light_theme_color
-                )
                 Text(
-                    text = localizedTitle,
+                    text = getLocalizedOrCustomText(
+                        context,
+                        lightThemeOption.title,
+                        LIGHT_THEME_COLOR_TITLE,
+                        R.string.settings_advanced_patch_options_light_theme_color
+                    ),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current
                 )
 
                 lightThemeOption.description.takeIf { it.isNotEmpty() }?.let { desc ->
-                    val localizedDesc = getLocalizedOrCustomText(
-                        context,
-                        desc,
-                        LIGHT_THEME_COLOR_DESC,
-                        R.string.settings_advanced_patch_options_theme_color_description
-                    )
                     Text(
-                        text = localizedDesc,
+                        text = getLocalizedOrCustomText(
+                            context,
+                            desc,
+                            LIGHT_THEME_COLOR_DESC,
+                            R.string.settings_advanced_patch_options_theme_color_description
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = LocalDialogSecondaryTextColor.current
                     )
@@ -233,7 +223,7 @@ fun ThemeColorDialog(
         }
     }
 
-    // Dark Color Picker Dialog
+    // Dark color picker dialog
     if (showDarkColorPicker.value) {
         ColorPickerDialog(
             title = stringResource(R.string.settings_advanced_patch_options_dark_theme_color),
@@ -275,7 +265,6 @@ fun CustomBrandingDialog(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
     // Get current values from preferences
     var appName by remember { mutableStateOf(patchOptionsPrefs.customAppName(packageName).getBlocking()) }
@@ -304,13 +293,13 @@ fun CustomBrandingDialog(
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = {
-                    scope.launch {
-                        patchOptionsPrefs.edit {
-                            patchOptionsPrefs.customAppName(packageName).value = appName
-                            patchOptionsPrefs.customIconPath(packageName).value = iconPath
-                        }
-                        onDismiss()
-                    }
+                    patchOptionsViewModel.saveCustomBranding(
+                        prefs = patchOptionsPrefs,
+                        packageName = packageName,
+                        appName = appName,
+                        iconPath = iconPath,
+                        onDone = onDismiss
+                    )
                 },
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
@@ -321,39 +310,31 @@ fun CustomBrandingDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // App Name field
+            // App name field
             if (appNameOption != null) {
                 MorpheDialogTextField(
                     value = appName,
                     onValueChange = { appName = it },
-                    label = {
-                        Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name))
-                    },
-                    placeholder = {
-                        Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name_hint))
-                    },
-                    showClearButton = true,
+                    label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name)) },
+                    placeholder = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name_hint)) },
+                    showClearButton = true
                 )
             }
 
-            // Icon Path field with Folder Picker
+            // Icon path field with folder picker
             if (iconOption != null) {
                 MorpheDialogTextField(
                     value = iconPath,
                     onValueChange = { iconPath = it },
-                    label = {
-                        Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_custom_icon))
-                    },
-                    placeholder = {
-                        Text("/storage/emulated/0/icons")
-                    },
+                    label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_custom_icon)) },
+                    placeholder = { Text("/storage/emulated/0/icons") },
                     showClearButton = true,
                     onFolderPickerClick = { openFolderPicker() }
                 )
 
                 Spacer(modifier = Modifier.height(0.dp))
 
-                // Create Icon button
+                // Create icon button
                 MorpheDialogOutlinedButton(
                     text = stringResource(R.string.adaptive_icon_create),
                     onClick = { showIconCreator.value = true },
@@ -363,18 +344,20 @@ fun CustomBrandingDialog(
 
                 Spacer(modifier = Modifier.height(0.dp))
 
-                // Expandable Instructions Section
+                // Expandable instructions section
                 iconOption.description.let { description ->
-                    val localizedDescription = getLocalizedOrCustomText(
-                        context,
-                        description,
-                        CUSTOM_ICON_INSTRUCTION,
-                        R.string.settings_advanced_patch_options_custom_branding_custom_icon_instruction
-                    )
-
                     ExpandableSurface(
                         title = stringResource(R.string.patch_option_instructions),
-                        content = { ScrollableInstruction(description = localizedDescription) }
+                        content = {
+                            ScrollableInstruction(
+                                description = getLocalizedOrCustomText(
+                                    context,
+                                    description,
+                                    CUSTOM_ICON_INSTRUCTION,
+                                    R.string.settings_advanced_patch_options_custom_branding_custom_icon_instruction
+                                )
+                            )
+                        }
                     )
                 }
             }
@@ -415,10 +398,12 @@ fun CustomHeaderDialog(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath(packageName).getBlocking()) }
 
     // State for header creator dialog
+    var headerPath by remember {
+        mutableStateOf(patchOptionsPrefs.customHeaderPath(packageName).getBlocking())
+    }
+
     val showHeaderCreator = remember { mutableStateOf(false) }
 
     // Get header options from bundle
@@ -440,10 +425,12 @@ fun CustomHeaderDialog(
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = {
-                    scope.launch {
-                        patchOptionsPrefs.customHeaderPath(packageName).update(headerPath)
-                        onDismiss()
-                    }
+                    patchOptionsViewModel.saveCustomHeader(
+                        prefs = patchOptionsPrefs,
+                        packageName = packageName,
+                        headerPath = headerPath,
+                        onDone = onDismiss
+                    )
                 },
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
@@ -458,19 +445,15 @@ fun CustomHeaderDialog(
                 MorpheDialogTextField(
                     value = headerPath,
                     onValueChange = { headerPath = it },
-                    label = {
-                        Text(stringResource(R.string.settings_advanced_patch_options_custom_header))
-                    },
-                    placeholder = {
-                        Text("/storage/emulated/0/header")
-                    },
+                    label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_header)) },
+                    placeholder = { Text("/storage/emulated/0/header") },
                     showClearButton = true,
                     onFolderPickerClick = { openFolderPicker() }
                 )
 
                 Spacer(modifier = Modifier.height(0.dp))
 
-                // Create Header button
+                // Create header button
                 MorpheDialogOutlinedButton(
                     text = stringResource(R.string.header_creator_create),
                     onClick = { showHeaderCreator.value = true },
@@ -480,18 +463,20 @@ fun CustomHeaderDialog(
 
                 Spacer(modifier = Modifier.height(0.dp))
 
-                // Expandable Instructions Section
+                // Expandable instructions section
                 customOption.description.let { description ->
-                    val localizedDescription = getLocalizedOrCustomText(
-                        context,
-                        description,
-                        CUSTOM_HEADER_INSTRUCTION,
-                        R.string.settings_advanced_patch_options_custom_header_instruction
-                    )
-
                     ExpandableSurface(
                         title = stringResource(R.string.patch_option_instructions),
-                        content = { ScrollableInstruction(description = localizedDescription) }
+                        content = {
+                            ScrollableInstruction(
+                                description = getLocalizedOrCustomText(
+                                    context,
+                                    description,
+                                    CUSTOM_HEADER_INSTRUCTION,
+                                    R.string.settings_advanced_patch_options_custom_header_instruction
+                                )
+                            )
+                        }
                     )
                 }
             } else {
