@@ -242,7 +242,7 @@ fun PatchOptionsSection(
                             patchOptionsViewModel = patchOptionsViewModel,
                             onThemeClick = { patchOptionsViewModel.openThemeDialog(KnownApps.YOUTUBE_MUSIC) },
                             onBrandingClick = { patchOptionsViewModel.openBrandingDialog(KnownApps.YOUTUBE_MUSIC) },
-                            onHeaderClick = null
+                            onHeaderClick = { patchOptionsViewModel.openHeaderDialog(KnownApps.YOUTUBE_MUSIC) }
                         )
                     }
                 }
@@ -263,12 +263,12 @@ private fun AppPatchOptionsCard(
     patchOptionsViewModel: PatchOptionsViewModel,
     onThemeClick: () -> Unit,
     onBrandingClick: () -> Unit,
-    onHeaderClick: (() -> Unit)?
+    onHeaderClick: () -> Unit
 ) {
     // Get available patches for this app type
     val hasTheme = patchOptionsViewModel.getThemeOptions(packageName) != null
     val hasBranding = patchOptionsViewModel.getBrandingOptions(packageName) != null
-    val hasHeader = patchOptionsViewModel.getHeaderOptions() != null
+    val hasHeader = patchOptionsViewModel.getHeaderOptions(packageName) != null
 
     Column {
         // Header
@@ -302,8 +302,8 @@ private fun AppPatchOptionsCard(
                 )
             }
 
-            // Custom Header (YouTube only)
-            if (hasHeader && onHeaderClick != null) {
+            // Custom Header
+            if (hasHeader) {
                 MorpheSettingsDivider()
 
                 SettingsItem(

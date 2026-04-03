@@ -172,47 +172,35 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
         else -> emptyList()
     }
 
-    /**
-     * Get Theme patch options for a specific package
-     */
+    /** Get Theme patch options for a specific package. */
     fun getThemeOptions(packageName: String): PatchOptionInfo? =
         patchesForPackage(packageName).find { it.patchName == PATCH_THEME }
 
-    /**
-     * Get Custom branding patch options for a specific package
-     */
+    /** Get Custom branding patch options for a specific package. */
     fun getBrandingOptions(packageName: String): PatchOptionInfo? =
         patchesForPackage(packageName).find { it.patchName == PATCH_CUSTOM_BRANDING }
 
-    /**
-     * Get Change header patch options (YouTube only)
-     */
-    fun getHeaderOptions(): PatchOptionInfo? =
-        _youtubePatches.value.find { it.patchName == PATCH_CHANGE_HEADER }
+    /** Get Change header patch options. */
+    fun getHeaderOptions(packageName: String): PatchOptionInfo? =
+        patchesForPackage(packageName).find { it.patchName == PATCH_CHANGE_HEADER }
 
     /**
-     * Get Hide Shorts components patch options (YouTube only)
+     * Get Hide Shorts components patch options (YouTube only).
      */
     fun getHideShortsOptions(): PatchOptionInfo? =
         _youtubePatches.value.find { it.patchName == PATCH_HIDE_SHORTS }
 
-    /**
-     * Get presets map from patch option info
-     */
+    /** Get presets map from patch option info. */
     fun getOptionPresetsMap(option: OptionInfo): Map<String, Any?> {
         return option.presets ?: emptyMap()
     }
 
-    /**
-     * Check if a patch has specific option
-     */
+    /** Check if a patch has specific option. */
     fun hasOption(patchInfo: PatchOptionInfo?, optionKey: String): Boolean {
         return patchInfo?.options?.any { it.key == optionKey } == true
     }
 
-    /**
-     * Get specific option from patch
-     */
+    /** Get specific option from patch. */
     fun getOption(patchInfo: PatchOptionInfo?, optionKey: String): OptionInfo? {
         return patchInfo?.options?.find { it.key == optionKey }
     }
@@ -283,18 +271,14 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
         viewModelScope.launch { prefs.hideShortsWidget.update(!current) }
 }
 
-/**
- * Data class representing a patch with its options
- */
+/** Data class representing a patch with its options */
 data class PatchOptionInfo(
     val patchName: String,
     val description: String?,
     val options: List<OptionInfo>
 )
 
-/**
- * Data class representing a single option within a patch
- */
+/** Data class representing a single option within a patch. */
 data class OptionInfo(
     val key: String,
     val title: String,

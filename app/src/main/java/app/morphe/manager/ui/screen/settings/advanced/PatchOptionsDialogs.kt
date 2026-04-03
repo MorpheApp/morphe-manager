@@ -407,7 +407,7 @@ fun CustomHeaderDialog(
     val showHeaderCreator = remember { mutableStateOf(false) }
 
     // Get header options from bundle
-    val headerOptions = patchOptionsViewModel.getHeaderOptions()
+    val headerOptions = patchOptionsViewModel.getHeaderOptions(packageName)
     val customOption = patchOptionsViewModel.getOption(headerOptions, PatchOptionKeys.CUSTOM_HEADER)
 
     // Folder picker with permission handling (needs permissions for header creation)
