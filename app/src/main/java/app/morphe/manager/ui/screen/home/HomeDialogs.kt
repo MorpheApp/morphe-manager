@@ -284,13 +284,10 @@ fun HomeDialogs(
 
     // Expert Mode Dialog
     AnimatedVisibility(
-        visible = homeViewModel.showExpertModeDialog && homeViewModel.expertModeSelectedApp != null,
+        visible = homeViewModel.showExpertModeDialog && homeViewModel.expertModeAllPatchesInfo.isNotEmpty(),
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val selectedApp = homeViewModel.expertModeSelectedApp ?: return@AnimatedVisibility
-        val allowIncompatible = homeViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
-
         ExpertModeDialog(
             newPatches = homeViewModel.expertModeNewPatches,
             options = homeViewModel.expertModeOptions,
@@ -320,19 +317,7 @@ fun HomeDialogs(
                 homeViewModel.cleanupExpertModeData()
             },
             onProceed = {
-                val finalPatches = homeViewModel.expertModePatches
-                val finalOptions = homeViewModel.expertModeOptions
-
-                homeViewModel.showExpertModeDialog = false
-
-                scope.launch(Dispatchers.IO) {
-                    homeViewModel.saveOptions(selectedApp.packageName, finalOptions)
-
-                    withContext(Dispatchers.Main) {
-                        homeViewModel.proceedWithPatching(selectedApp, finalPatches, finalOptions)
-                        homeViewModel.cleanupExpertModeData()
-                    }
-                }
+                homeViewModel.proceedExpertMode()
             }
         )
     }

@@ -66,7 +66,6 @@ data class AppliedPatchBundleUi(
 fun InstalledAppInfoDialog(
     packageName: String,
     onDismiss: () -> Unit,
-    onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
     viewModel: InstalledAppInfoViewModel = koinViewModel(
@@ -215,34 +214,12 @@ fun InstalledAppInfoDialog(
         }
     )
 
-    // Expert Mode Repatch Dialog
-    if (viewModel.showRepatchDialog) {
-        ExpertModeDialog(
-            newPatches = emptyMap(),
-            options = viewModel.repatchOptions,
-            allPatchesInfo = viewModel.repatchAllPatchesInfo,
-            totalSelectedCount = viewModel.repatchTotalSelectedCount,
-            totalPatchesCount = viewModel.repatchTotalPatchesCount,
-            hasMultipleBundles = viewModel.repatchHasMultipleBundles,
-            onPatchToggle = { bundleUid, patchName -> viewModel.toggleRepatchPatch(bundleUid, patchName) },
-            onSelectAll = { bundleUid, patches -> viewModel.selectAllRepatchPatches(bundleUid, patches) },
-            onDeselectAll = { bundleUid, patches -> viewModel.deselectAllRepatchPatches(bundleUid, patches) },
-            onResetToDefault = { bundleUid, allPatches -> viewModel.resetRepatchToDefault(bundleUid, allPatches) },
-            onOptionChange = { bundleUid, patchName, optionKey, value -> viewModel.updateRepatchOption(bundleUid, patchName, optionKey, value) },
-            onResetOptions = { bundleUid, patchName -> viewModel.resetRepatchOptions(bundleUid, patchName) },
-            onDismiss = { viewModel.dismissRepatchDialog() },
-            onProceed = {
-                viewModel.proceedWithRepatch(viewModel.repatchPatches, viewModel.repatchOptions) { pkgName, originalFile, patches, options ->
-                    onNavigateToPatcher(
-                        pkgName,
-                        installedApp?.version ?: "unknown",
-                        originalFile.absolutePath,
-                        patches,
-                        options
-                    )
-                }
-            }
-        )
+    // Expert Mode Repatch Dialog is rendered by HomeDialogs via homeViewModel.showExpertModeDialog.
+    // Patch flow always starts with onTriggerPatchFlow → showPatchDialog → ApkAvailabilityDialog,
+    // where the user picks the APK source. Expert mode dialog opens after APK selection.
+    fun handlePatchClick() {
+        onDismiss()
+        onTriggerPatchFlow(viewModel.installedApp?.originalPackageName ?: return)
     }
 
     // Main Dialog
@@ -335,10 +312,7 @@ fun InstalledAppInfoDialog(
                     isInstalling = isInstalling,
                     mountOperation = mountOperation,
                     hasUpdate = hasUpdate,
-                    onPatchClick = {
-                        onDismiss()
-                        onTriggerPatchFlow(installedApp.originalPackageName)
-                    },
+                    onPatchClick = { handlePatchClick() },
                     onUninstall = { showUninstallConfirm.value = true },
                     onDelete = { showDeleteDialog.value = true },
                     onExport = { exportSavedLauncher.launch(exportFileName) },

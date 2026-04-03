@@ -168,6 +168,14 @@ class HomeViewModel(
     // Patches that are new in the current bundle version relative to the last saved selection
     var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
 
+    /**
+     * Set when ExpertModeDialog is opened from InstalledAppInfoDialog (repatch flow).
+     * Called with the final patches/options when the user confirms, so the info dialog
+     * can persist selections and navigate to the patcher without holding any patch state itself.
+     * Null when the dialog is opened from the normal home-screen patching flow.
+     */
+    var onRepatchProceed: ((patches: PatchSelection, options: Options) -> Unit)? = null
+
     // Bundle file selection
     var selectedBundleUri by mutableStateOf<Uri?>(null)
     var selectedBundlePath by mutableStateOf<String?>(null)
@@ -1550,8 +1558,15 @@ class HomeViewModel(
                 buildMap {
                     allBundles.forEach { bundle ->
                         val savedForBundle = savedSelections[bundle.uid] ?: return@forEach
-                        val currentPatchNames = bundle.patches.map { it.name }.toSet()
-                        val newForBundle = currentPatchNames - savedForBundle
+                        // A patch is genuinely "new" only if it was absent from the saved
+                        // selection AND it was not already in the bundle as a universal
+                        // opt-in patch (include=false + no compatiblePackages). Such patches
+                        // are never persisted to savedSelections by design, so their absence
+                        // there does not mean they were added in this bundle update.
+                        val knownPatchNames = bundle.patches
+                            .filter { it.include || it.compatiblePackages != null }
+                            .map { it.name }.toSet()
+                        val newForBundle = knownPatchNames - savedForBundle
                         if (newForBundle.isNotEmpty()) put(bundle.uid, newForBundle)
                     }
                 }
@@ -1786,6 +1801,150 @@ class HomeViewModel(
         expertModePatches = emptyMap()
         expertModeOptions = emptyMap()
         expertModeNewPatches = emptyMap()
+        onRepatchProceed = null
+    }
+
+    /**
+     * Called when the user confirms the ExpertModeDialog.
+     * Routes to the repatch flow (via [onRepatchProceed]) or the normal patching flow
+     * (via [proceedWithPatching]) depending on how the dialog was opened.
+     * Saving options and cleaning up state is handled here so HomeDialogs stays thin.
+     */
+    fun proceedExpertMode() {
+        val finalPatches = expertModePatches
+        val finalOptions = expertModeOptions
+        val repatchCallback = onRepatchProceed
+        val selectedApp = expertModeSelectedApp
+
+        showExpertModeDialog = false
+
+        viewModelScope.launch(Dispatchers.IO) {
+            if (repatchCallback != null) {
+                // Repatch flow: delegate fully to the callback set by InstalledAppInfoViewModel.
+                // Persisting selections/options is the callback's responsibility.
+                withContext(Dispatchers.Main) {
+                    repatchCallback(finalPatches, finalOptions)
+                    cleanupExpertModeData()
+                }
+            } else if (selectedApp != null) {
+                // Normal home-screen patching flow.
+                saveOptions(selectedApp.packageName, finalOptions)
+                withContext(Dispatchers.Main) {
+                    proceedWithPatching(selectedApp, finalPatches, finalOptions)
+                    cleanupExpertModeData()
+                }
+            }
+        }
+    }
+
+    /**
+     * Initialise ExpertModeDialog for a repatch from InstalledAppInfoDialog.
+     *
+     * Loads saved patch selections/options for [originalPackageName], merges in any newly
+     * added patches, and populates the shared [expertMode*] state so the dialog rendered
+     * by HomeDialogs can be reused without duplicating logic.
+     *
+     * [onProceed] receives the final (patches, options) after the user confirms and is
+     * responsible for persisting the selection and navigating to the patcher screen.
+     */
+    fun initRepatchExpertMode(
+        originalPackageName: String,
+        version: String,
+        allowIncompatible: Boolean,
+        onProceed: (patches: PatchSelection, options: Options) -> Unit
+    ) {
+        viewModelScope.launch {
+            val allBundles = withContext(Dispatchers.IO) {
+                patchBundleRepository
+                    .scopedBundleInfoFlow(originalPackageName, version)
+                    .first()
+            }
+
+            if (allBundles.isEmpty()) {
+                app.toast(app.getString(R.string.home_no_patches_available))
+                return@launch
+            }
+
+            val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+            val currentBundleUids = allBundles.map { it.uid }.toSet()
+
+            val savedSelections = withContext(Dispatchers.IO) {
+                patchSelectionRepository.getAllSelectionsForPackage(originalPackageName)
+                    .filterKeys { it in currentBundleUids }
+            }
+
+            val savedOptions = withContext(Dispatchers.IO) {
+                optionsRepository.getAllOptionsForPackage(originalPackageName, bundlesMap)
+                    .filterKeys { it in currentBundleUids }
+            }
+
+            val patches = if (savedSelections.isNotEmpty()) {
+                val patchesBeforeValidation = savedSelections.values.sumOf { it.size }
+                val validatedPatches = validatePatchSelection(savedSelections, bundlesMap)
+                val patchesAfterValidation = validatedPatches.values.sumOf { it.size }
+                val removedCount = patchesBeforeValidation - patchesAfterValidation
+                if (removedCount > 0) {
+                    app.toast(app.resources.getQuantityString(
+                        R.plurals.home_app_info_repatch_cleaned_invalid_data,
+                        removedCount,
+                        removedCount
+                    ))
+                    withContext(Dispatchers.IO) {
+                        patchSelectionRepository.updateSelection(
+                            packageName = originalPackageName,
+                            selection = validatedPatches
+                        )
+                    }
+                }
+                buildMap<Int, Set<String>> {
+                    putAll(validatedPatches)
+                    allBundles.forEach { bundle ->
+                        val savedForBundle = savedSelections[bundle.uid] ?: return@forEach
+                        val newPatchNames = bundle.patches.map { it.name }.toSet() - savedForBundle
+                        if (newPatchNames.isEmpty()) return@forEach
+                        val newDefaultEnabled = bundle.patches
+                            .filter { it.name in newPatchNames && it.include }
+                            .mapTo(mutableSetOf()) { it.name }
+                        if (newDefaultEnabled.isNotEmpty()) {
+                            val existing = getOrDefault(bundle.uid, emptySet())
+                            put(bundle.uid, existing + newDefaultEnabled)
+                        }
+                    }
+                }
+            } else {
+                allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+            }
+
+            val newPatchesMap: Map<Int, Set<String>> = if (savedSelections.isNotEmpty()) {
+                buildMap {
+                    allBundles.forEach { bundle ->
+                        val savedForBundle = savedSelections[bundle.uid] ?: return@forEach
+                        val knownPatchNames = bundle.patches
+                            .filter { it.include || it.compatiblePackages != null }
+                            .map { it.name }.toSet()
+                        val newForBundle = knownPatchNames - savedForBundle
+                        if (newForBundle.isNotEmpty()) put(bundle.uid, newForBundle)
+                    }
+                }
+            } else {
+                emptyMap()
+            }
+
+            val validatedOptions = validatePatchOptions(savedOptions, bundlesMap)
+            if (validatedOptions != savedOptions) {
+                withContext(Dispatchers.IO) {
+                    optionsRepository.saveOptions(originalPackageName, validatedOptions)
+                }
+            }
+
+            expertModeBundles = allBundles
+            expertModePatches = patches.toMutableMap()
+            expertModeOptions = validatedOptions.toMutableMap()
+            expertModeNewPatches = newPatchesMap
+            expertModeSelectedApp = null // repatch has no SelectedApp
+            onRepatchProceed = onProceed
+            showExpertModeDialog = true
+        }
     }
 
     /**

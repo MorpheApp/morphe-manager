@@ -164,8 +164,7 @@ fun ExpertModeDialog(
             val hasMultipleBundleLayout = allPatchesInfo.size > 1
 
             if (!hasMultipleBundleLayout) {
-                // Single bundle
-                val (bundle, allPatches) = allPatchesInfo.first()
+                val (bundle, allPatches) = allPatchesInfo.firstOrNull() ?: return@Column
                 val filteredPatches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
                 val displayPatches = filteredPatches ?: emptyList()
                 val enabledCount = displayPatches.count { it.second }
@@ -299,7 +298,7 @@ fun ExpertModeDialog(
 
                     // Controls fixed below the tab row
                     val currentIndex = pagerState.currentPage
-                    val (currentBundle, currentAllPatches) = allPatchesInfo[currentIndex]
+                    val (currentBundle, currentAllPatches) = allPatchesInfo.getOrNull(currentIndex) ?: return@Column
                     val currentFiltered = filteredPatchesInfo.firstOrNull { it.first.uid == currentBundle.uid }?.second
 
                     if (currentFiltered != null) {
@@ -323,7 +322,7 @@ fun ExpertModeDialog(
                             .fillMaxWidth()
                             .weight(1f)
                     ) { pageIndex ->
-                        val (bundle, _) = allPatchesInfo[pageIndex]
+                        val (bundle, _) = allPatchesInfo.getOrNull(pageIndex) ?: return@HorizontalPager
                         val patches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
 
                         if (patches == null) {
