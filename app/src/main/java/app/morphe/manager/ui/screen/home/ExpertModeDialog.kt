@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.home
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -13,7 +14,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -24,6 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -42,10 +44,7 @@ import app.morphe.manager.patcher.patch.Option
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.Options
-import app.morphe.manager.util.PatchSelection
-import app.morphe.manager.util.rememberFolderPickerWithPermission
-import app.morphe.manager.util.toFilePath
+import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
 
 /**
@@ -65,10 +64,10 @@ fun ExpertModeDialog(
     onProceed: () -> Unit,
     allowIncompatible: Boolean = false
 ) {
-    var selectedPatchForOptions by remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
+    val selectedPatchForOptions = remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
     var searchVisible by remember { mutableStateOf(false) }
-    var showMultipleSourcesWarning by remember { mutableStateOf(false) }
+    val showMultipleSourcesWarning = remember { mutableStateOf(false) }
 
     // Create local mutable state from incoming selectedPatches
     var localSelectedPatches by remember(selectedPatches) {
@@ -278,7 +277,6 @@ fun ExpertModeDialog(
                 if (filteredPatches == null) {
                     // No search results for this bundle
                     EmptyStateContent(
-                        hasSearch = true,
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
@@ -295,7 +293,7 @@ fun ExpertModeDialog(
                             patches = filteredPatches,
                             onToggle = { togglePatch(bundle.uid, it) },
                             onConfigureOptions = {
-                                if (!it.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to it
+                                if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
                             }
                         )
                     }
@@ -396,7 +394,6 @@ fun ExpertModeDialog(
                         if (patches == null) {
                             // No search results for this bundle
                             EmptyStateContent(
-                                hasSearch = true,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .fillMaxHeight()
@@ -412,7 +409,7 @@ fun ExpertModeDialog(
                                     patches = patches,
                                     onToggle = { togglePatch(bundle.uid, it) },
                                     onConfigureOptions = {
-                                        if (!it.options.isNullOrEmpty()) selectedPatchForOptions = bundle.uid to it
+                                        if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
                                     }
                                 )
                             }
@@ -427,7 +424,7 @@ fun ExpertModeDialog(
                 onClick = {
                     // Check if multiple bundles are selected
                     if (hasMultipleBundles) {
-                        showMultipleSourcesWarning = true
+                        showMultipleSourcesWarning.value = true
                     } else {
                         syncAndProceed()
                     }
@@ -440,18 +437,18 @@ fun ExpertModeDialog(
     }
 
     // Multiple bundles warning dialog
-    if (showMultipleSourcesWarning) {
+    if (showMultipleSourcesWarning.value) {
         MultipleSourcesWarningDialog(
-            onDismiss = { showMultipleSourcesWarning = false },
+            onDismiss = { showMultipleSourcesWarning.value = false },
             onProceed = {
-                showMultipleSourcesWarning = false
+                showMultipleSourcesWarning.value = false
                 syncAndProceed()
             }
         )
     }
 
     // Options dialog
-    selectedPatchForOptions?.let { (bundleUid, patch) ->
+    selectedPatchForOptions.value?.let { (bundleUid, patch) ->
         PatchOptionsDialog(
             patch = patch,
             isDefaultBundle = bundleUid == 0,
@@ -462,7 +459,7 @@ fun ExpertModeDialog(
             onReset = {
                 onResetOptions(bundleUid, patch.name)
             },
-            onDismiss = { selectedPatchForOptions = null }
+            onDismiss = { selectedPatchForOptions.value = null }
         )
     }
 }
@@ -694,7 +691,6 @@ private fun PatchCard(
  */
 @Composable
 private fun EmptyStateContent(
-    hasSearch: Boolean,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -707,18 +703,13 @@ private fun EmptyStateContent(
             modifier = Modifier.padding(32.dp)
         ) {
             Icon(
-                imageVector = if (hasSearch) Icons.Outlined.SearchOff else Icons.Outlined.Info,
+                imageVector = Icons.Outlined.SearchOff,
                 contentDescription = null,
                 modifier = Modifier.size(64.dp),
                 tint = LocalDialogSecondaryTextColor.current
             )
             Text(
-                text = stringResource(
-                    if (hasSearch)
-                        R.string.expert_mode_no_results
-                    else
-                        R.string.home_no_patches_available
-                ),
+                text = stringResource(R.string.expert_mode_no_results),
                 style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogSecondaryTextColor.current,
                 textAlign = TextAlign.Center
@@ -728,7 +719,7 @@ private fun EmptyStateContent(
 }
 
 /**
- * Represents the resolved UI kind of a patch option.
+ * Represents the resolved UI kind of patch option.
  * Used to drive an exhaustive when-expression in [PatchOptionsDialog].
  */
 private sealed interface OptionKind {
@@ -754,27 +745,27 @@ private fun resolveOptionKind(option: Option<*>, value: Any?): OptionKind {
     val isString = t.contains("String") && !isArray
 
     return when {
-        // List<String> — free-form comma-separated input
+        // List<String> free-form comma-separated input
         t.contains("List") && t.contains("String") -> OptionKind.StringList
 
-        // Color — string whose key/title hints "color" or value looks like a color literal
+        // Color: string whose key/title hints "color" or value looks like a color literal
         isString && (
                 option.title.contains("color", ignoreCase = true) ||
                         option.key.contains("color", ignoreCase = true) ||
                         (value is String && (value.startsWith("#") || value.startsWith("@android:color/")))
                 ) -> OptionKind.Color
 
-        // Path/folder string with presets — combined dropdown + path picker
+        // Path/folder string with presets: combined dropdown + path picker
         isString && option.presets?.isNotEmpty() == true && (
                 option.description.contains("folder",   ignoreCase = true) ||
                         option.description.contains("mipmap",   ignoreCase = true) ||
                         option.description.contains("drawable", ignoreCase = true)
                 ) -> OptionKind.PathWithPresets
 
-        // String with presets — pure dropdown
+        // String with presets: pure dropdown
         isString && option.presets?.isNotEmpty() == true -> OptionKind.StringDropdown
 
-        // Path/folder string without presets — file picker + optional creator buttons
+        // Path/folder string without presets: file picker + optional creator buttons
         isString && option.key != "customName" && (
                 option.key.contains("icon",   ignoreCase = true) ||
                         option.key.contains("header", ignoreCase = true) ||
@@ -801,7 +792,7 @@ private fun resolveOptionKind(option: Option<*>, value: Any?): OptionKind {
         // Float / Double decimal input
         (t.contains("Float") || t.contains("Double")) && !isArray -> OptionKind.FloatDouble
 
-        // Array — dropdown driven by presets
+        // Array: dropdown driven by presets
         isArray -> OptionKind.ArrayDropdown
 
         // Safe fallback
@@ -825,7 +816,7 @@ private fun PatchOptionsDialog(
     // Derive the target package from the patch's compatible packages list
     val packageName = patch.compatiblePackages?.firstOrNull()?.packageName.orEmpty()
 
-    var showColorPicker by remember { mutableStateOf<Pair<String, String>?>(null) }
+    val showColorPicker = remember { mutableStateOf<Pair<String, String>?>(null) }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -875,7 +866,7 @@ private fun PatchOptionsDialog(
                             else       -> emptyList()
                         },
                         onValueChange = { newList ->
-                            // Serialize back to comma-separated String — patcher expects kotlin.String
+                            // Serialize back to comma-separated String - patcher expects kotlin.String
                             onValueChange(key, newList.joinToString(", ").ifBlank { null })
                         }
                     )
@@ -887,7 +878,7 @@ private fun PatchOptionsDialog(
                         presets = option.presets,
                         onPresetSelect = { onValueChange(key, it) },
                         onCustomColorClick = {
-                            showColorPicker = key to (value as? String ?: "#000000")
+                            showColorPicker.value = key to (value as? String ?: "#000000")
                         }
                     )
 
@@ -972,15 +963,15 @@ private fun PatchOptionsDialog(
     }
 
     // Color picker dialog
-    showColorPicker?.let { (key, currentColor) ->
+    showColorPicker.value?.let { (key, currentColor) ->
         ColorPickerDialog(
             title = patch.options?.find { it.key == key }?.title ?: key,
             currentColor = currentColor,
             onColorSelected = { newColor ->
                 onValueChange(key, newColor)
-                showColorPicker = null
+                showColorPicker.value = null
             },
-            onDismiss = { showColorPicker = null }
+            onDismiss = { showColorPicker.value = null }
         )
     }
 }
@@ -1049,58 +1040,120 @@ fun ColorPresetItem(
     isSelected: Boolean,
     isCustom: Boolean = false,
     enabled: Boolean = true,
-    cornerRadius: Dp = 12.dp,
-    elevation: Dp = 0.dp,
-    borderWidth: Dp = 0.dp,
     onClick: (() -> Unit)? = null
 ) {
-    Surface(
+    val shape = RoundedCornerShape(12.dp)
+
+    val isMaterialYou = colorValue.contains("system_neutral", ignoreCase = true) ||
+            colorValue.contains("system_accent", ignoreCase = true) ||
+            colorValue.contains("material_you", ignoreCase = true)
+
+    val parsedColor = if (!isMaterialYou) {
+        when (colorValue) {
+            "@android:color/transparent" -> Color.Transparent
+            "@android:color/black", "#000000", "#FF000000" -> Color.Black
+            "@android:color/white", "#FFFFFF", "#ffffff", "#FFFFFFFF" -> Color.White
+            else -> colorValue.toColorOrNull()
+        }
+    } else null
+
+    val hasTransparency = parsedColor != null && parsedColor.alpha < 0.99f
+
+    val contentColor = parsedColor?.let {
+        val opaque = it.copy(alpha = 1f)
+        // For very transparent colors the checkerboard dominates (light background)
+        // For opaque/semi-opaque colors use effective luminance against dark background
+        val effectiveLuminance = if (it.alpha < 0.4f) {
+            // Blend against white checkerboard
+            opaque.luminance() * it.alpha + (1f - it.alpha)
+        } else {
+            opaque.luminance() * it.alpha
+        }
+        if (effectiveLuminance > 0.18f) Color.Black.copy(alpha = 0.85f)
+        else Color.White.copy(alpha = 0.9f)
+    } ?: MaterialTheme.colorScheme.onSurface
+
+    val borderColor = parsedColor?.let {
+        if (it.luminance() > 0.35f) Color.Black.copy(alpha = 0.15f) else Color.White.copy(alpha = 0.15f)
+    } ?: if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+    else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(cornerRadius))
+            .clip(shape)
             .then(
                 if (onClick != null) Modifier.clickable(enabled = enabled, onClick = onClick)
                 else Modifier
-            ),
-        shape = RoundedCornerShape(cornerRadius),
-        color = if (isSelected)
-            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-        else
-            MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        tonalElevation = elevation,
-        border = if (isSelected && borderWidth > 0.dp) {
-            BorderStroke(borderWidth, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
-        } else if (!isSelected && borderWidth > 0.dp) {
-            BorderStroke(borderWidth, MaterialTheme.colorScheme.outlineVariant)
-        } else null
+            )
+            .then(
+                when {
+                    isCustom -> if (parsedColor != null) Modifier.background(Color.Transparent, shape)
+                    else Modifier.background(
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
+                        shape
+                    )
+                    isMaterialYou -> Modifier.background(
+                        Brush.linearGradient(
+                            colors = listOf(
+                                Color(0xFF6650A4).copy(alpha = 0.25f),
+                                Color(0xFF4B86B4).copy(alpha = 0.25f),
+                                Color(0xFF2D9596).copy(alpha = 0.25f),
+                            )
+                        )
+                    )
+                    parsedColor != null -> Modifier.background(Color.Transparent, shape)
+                    else -> Modifier.background(
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
+                        shape
+                    )
+                }
+            )
+            .border(1.dp, borderColor, shape)
     ) {
+        // Checkerboard underlay for transparent/semi-transparent colors
+        if (parsedColor != null && hasTransparency) {
+            Canvas(modifier = Modifier.matchParentSize()) {
+                val cellSize = 12.dp.toPx()
+                val cols = (size.width / cellSize).toInt() + 1
+                val rows = (size.height / cellSize).toInt() + 1
+                for (row in 0..rows) {
+                    for (col in 0..cols) {
+                        val isLight = (row + col) % 2 == 0
+                        drawRect(
+                            color = if (isLight) Color.White else Color(0xFFCCCCCC),
+                            topLeft = Offset(col * cellSize, row * cellSize),
+                            size = Size(cellSize, cellSize)
+                        )
+                    }
+                }
+            }
+        }
+        // Color overlay
+        if (parsedColor != null) {
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .background(parsedColor)
+            )
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                .padding(20.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (isCustom && !isSelected) {
-                Box(
-                    modifier = Modifier
-                        .size(32.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Palette,
-                        contentDescription = null,
-                        tint = LocalDialogTextColor.current.copy(alpha = 0.6f),
-                        modifier = Modifier.size(18.dp)
-                    )
-                }
-            } else {
-                ColorPreviewDot(
-                    colorValue = colorValue,
-                    size = 32
+            if (isCustom || isMaterialYou || parsedColor != null) {
+                Icon(
+                    imageVector = when {
+                        isCustom -> Icons.Outlined.Palette
+                        isMaterialYou -> Icons.Outlined.AutoAwesome
+                        else -> Icons.Outlined.Palette
+                    },
+                    contentDescription = null,
+                    tint = contentColor.copy(alpha = 0.7f),
+                    modifier = Modifier.size(20.dp)
                 )
             }
 
@@ -1108,10 +1161,7 @@ fun ColorPresetItem(
                 text = if (isCustom) stringResource(R.string.custom_color) else label,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                color = if (isSelected)
-                    MaterialTheme.colorScheme.primary
-                else
-                    LocalDialogTextColor.current,
+                color = contentColor,
                 modifier = Modifier.weight(1f)
             )
 
@@ -1119,7 +1169,7 @@ fun ColorPresetItem(
                 Icon(
                     imageVector = Icons.Default.Check,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = contentColor,
                     modifier = Modifier.size(20.dp)
                 )
             }
@@ -1137,8 +1187,8 @@ private fun PathInputOption(
 //    required: Boolean,
     onValueChange: (String) -> Unit
 ) {
-    var showIconCreator by remember { mutableStateOf(false) }
-    var showHeaderCreator by remember { mutableStateOf(false) }
+    val showIconCreator = remember { mutableStateOf(false) }
+    val showHeaderCreator = remember { mutableStateOf(false) }
 
     // Detect if this is icon-related or header-related field
     // Check header first, then icon (header takes priority)
@@ -1184,7 +1234,7 @@ private fun PathInputOption(
         if (isIconField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create),
-                onClick = { showIconCreator = true },
+                onClick = { showIconCreator.value = true },
                 icon = Icons.Outlined.AutoAwesome,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -1194,7 +1244,7 @@ private fun PathInputOption(
         if (isHeaderField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.header_creator_create),
-                onClick = { showHeaderCreator = true },
+                onClick = { showHeaderCreator.value = true },
                 icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -1215,25 +1265,25 @@ private fun PathInputOption(
     }
 
     // Icon creator dialog
-    if (showIconCreator) {
+    if (showIconCreator.value) {
         AdaptiveIconCreatorDialog(
             packageName = packageName,
-            onDismiss = { showIconCreator = false },
+            onDismiss = { showIconCreator.value = false },
             onIconCreated = { path ->
                 onValueChange(path)
-                showIconCreator = false
+                showIconCreator.value = false
             }
         )
     }
 
     // Header creator dialog
-    if (showHeaderCreator) {
+    if (showHeaderCreator.value) {
         HeaderCreatorDialog(
             packageName = packageName,
-            onDismiss = { showHeaderCreator = false },
+            onDismiss = { showHeaderCreator.value = false },
             onHeaderCreated = { path ->
                 onValueChange(path)
-                showHeaderCreator = false
+                showHeaderCreator.value = false
             }
         )
     }
@@ -1253,8 +1303,8 @@ private fun PathWithPresetsOption(
     isDefaultBundle: Boolean,
     onValueChange: (String) -> Unit
 ) {
-    var showIconCreator by remember { mutableStateOf(false) }
-    var showHeaderCreator by remember { mutableStateOf(false) }
+    val showIconCreator = remember { mutableStateOf(false) }
+    val showHeaderCreator = remember { mutableStateOf(false) }
 
     // Detect if this is icon-related or header-related field
     // Check header first, then icon (header takes priority)
@@ -1310,7 +1360,7 @@ private fun PathWithPresetsOption(
         if (isIconField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create),
-                onClick = { showIconCreator = true },
+                onClick = { showIconCreator.value = true },
                 icon = Icons.Outlined.AutoAwesome,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -1320,7 +1370,7 @@ private fun PathWithPresetsOption(
         if (isHeaderField && isDefaultBundle) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.header_creator_create),
-                onClick = { showHeaderCreator = true },
+                onClick = { showHeaderCreator.value = true },
                 icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -1343,25 +1393,25 @@ private fun PathWithPresetsOption(
     }
 
     // Icon creator dialog
-    if (showIconCreator) {
+    if (showIconCreator.value) {
         AdaptiveIconCreatorDialog(
             packageName = packageName,
-            onDismiss = { showIconCreator = false },
+            onDismiss = { showIconCreator.value = false },
             onIconCreated = { path ->
                 onValueChange(path)
-                showIconCreator = false
+                showIconCreator.value = false
             }
         )
     }
 
     // Header creator dialog
-    if (showHeaderCreator) {
+    if (showHeaderCreator.value) {
         HeaderCreatorDialog(
             packageName = packageName,
-            onDismiss = { showHeaderCreator = false },
+            onDismiss = { showHeaderCreator.value = false },
             onHeaderCreated = { path ->
                 onValueChange(path)
-                showHeaderCreator = false
+                showHeaderCreator.value = false
             }
         )
     }
@@ -1430,9 +1480,9 @@ private fun BooleanOptionItem(
     val disabledState = stringResource(R.string.disabled)
 
     RichSettingsItem(
-        onClick = {},
+        onClick = { onValueChange(!value) },
         title = title,
-        subtitle = if (description.isNotBlank()) description else null,
+        subtitle = description.ifBlank { null },
         trailingContent = {
             Switch(
                 checked = value,
@@ -1455,7 +1505,7 @@ private fun ListStringInputOption(
     value: List<String>,
     onValueChange: (List<String>) -> Unit
 ) {
-    var showEditor by remember { mutableStateOf(false) }
+    val showEditor = remember { mutableStateOf(false) }
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
 
@@ -1463,7 +1513,7 @@ private fun ListStringInputOption(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
-            .clickable { showEditor = true },
+            .clickable { showEditor.value = true },
         shape = RoundedCornerShape(12.dp),
         color = textColor.copy(alpha = 0.05f)
     ) {
@@ -1518,15 +1568,15 @@ private fun ListStringInputOption(
         }
     }
 
-    if (showEditor) {
+    if (showEditor.value) {
         ListStringEditorDialog(
             title = title,
             description = description,
             initialItems = value,
-            onDismiss = { showEditor = false },
+            onDismiss = { showEditor.value = false },
             onConfirm = { newList ->
                 onValueChange(newList)
-                showEditor = false
+                showEditor.value = false
             }
         )
     }
@@ -1535,6 +1585,7 @@ private fun ListStringInputOption(
 /**
  * Dialog for managing a list of string values.
  */
+@SuppressLint("MutableCollectionMutableState")
 @Composable
 private fun ListStringEditorDialog(
     title: String,
