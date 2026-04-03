@@ -19,10 +19,11 @@ data class PatchInfo(
     val compatiblePackages: ImmutableList<CompatiblePackage>?,
     val options: ImmutableList<Option<*>>?
 ) {
+    @Suppress("DEPRECATION")
     constructor(patch: Patch<*>) : this(
         name = patch.name.orEmpty(),
         description = patch.description,
-        include = patch.use,
+        include = patch.default,
         compatiblePackages = patch.compatibility
             ?.map { compatibility ->
                 CompatiblePackage(
@@ -143,6 +144,7 @@ data class Option<T>(
     val presets: Map<String, T?>?,
     val validator: (T?) -> Boolean,
 ) {
+    @Suppress("DEPRECATION")
     constructor(option: PatchOption<T>) : this(
         option.title ?: option.key,
         option.key,
