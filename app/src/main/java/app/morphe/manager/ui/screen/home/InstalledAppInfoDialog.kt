@@ -171,23 +171,16 @@ fun InstalledAppInfoDialog(
         }
     }
 
-    // Export functionality
-    val exportFormat by viewModel.exportFormat.collectAsStateWithLifecycle()
-    val exportMetadata = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles, appInfo) {
-        if (installedApp == null) return@remember null
-        val label = appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString() ?: installedApp.currentPackageName
-        val bundleVersions = appliedBundles.mapNotNull { it.version?.takeIf(String::isNotBlank) }
-        val bundleNames = appliedBundles.map { it.title }.filter(String::isNotBlank)
-        PatchedAppExportData(
-            appName = label,
-            packageName = installedApp.currentPackageName,
-            appVersion = appInfo?.versionName ?: installedApp.version,
-            patchBundleVersions = bundleVersions,
-            patchBundleNames = bundleNames
-        )
-    }
-    val exportFileName = remember(exportMetadata, exportFormat) {
-        exportMetadata?.let { ExportNameFormatter.format(exportFormat, it) } ?: "morphe_export.apk"
+    // Export file name derived directly from installed app info
+    val exportFileName = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles) {
+        val app = installedApp ?: return@remember "morphe_export.apk"
+        ExportNameFormatter.format(null, PatchedAppExportData(
+            appName = appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
+            packageName = app.currentPackageName,
+            appVersion = appInfo?.versionName ?: app.version,
+            patchBundleVersions = appliedBundles.mapNotNull { it.version?.takeIf(String::isNotBlank) },
+            patchBundleNames = appliedBundles.map { it.title }.filter(String::isNotBlank)
+        ))
     }
 
     val exportSavedLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->

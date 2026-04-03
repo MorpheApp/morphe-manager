@@ -267,9 +267,6 @@ class InstalledAppInfoViewModel(
         }
     }
 
-    val exportFormat: StateFlow<String> = prefs.patchedAppExportFormat.flow
-        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.patchedAppExportFormat.getBlocking())
-
     val allowIncompatiblePatches: StateFlow<Boolean> = prefs.disablePatchVersionCompatCheck.flow
         .stateIn(viewModelScope, SharingStarted.Lazily, prefs.disablePatchVersionCompatCheck.getBlocking())
 
@@ -367,9 +364,5 @@ class InstalledAppInfoViewModel(
      */
     fun resetRepatchOptions(bundleUid: Int, patchName: String) {
         repatchOptions = repatchOptions.resetOptionsForPatch(bundleUid, patchName)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 }
