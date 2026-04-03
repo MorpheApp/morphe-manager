@@ -41,6 +41,7 @@ import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
+import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.HomeAppItem
@@ -64,19 +65,15 @@ import java.net.URLEncoder.encode
 import java.security.MessageDigest
 import kotlin.time.Clock
 
-/**
- * Bundle update status for snackbar display.
- */
+/** Bundle update status for snackbar display. */
 enum class BundleUpdateStatus {
-    Updating,    // Update in progress
-    Success,     // Update completed successfully
-    Warning,     // Patches may be outdated (on metered network, updates disabled)
-    Error        // Error occurred (including no internet)
+    Updating, // Update in progress
+    Success,  // Update completed successfully
+    Warning,  // Patches may be outdated (on metered network, updates disabled)
+    Error     // Error occurred (including no internet)
 }
 
-/**
- * Dialog state for unsupported version warning.
- */
+/** * Dialog state for unsupported version warning. */
 data class UnsupportedVersionDialogState(
     val packageName: String,
     val version: String,
@@ -86,9 +83,7 @@ data class UnsupportedVersionDialogState(
     val isExperimental: Boolean = false
 )
 
-/**
- * Dialog state for wrong package warning.
- */
+/** Dialog state for wrong package warning. */
 data class WrongPackageDialogState(
     val expectedPackage: String,
     val actualPackage: String
@@ -104,18 +99,14 @@ data class InvalidSignatureDialogState(
     val appName: String,
 )
 
-/**
- * Quick patch parameters.
- */
+/** Quick patch parameters. */
 data class QuickPatchParams(
     val selectedApp: SelectedApp,
     val patches: PatchSelection,
     val options: Options
 )
 
-/**
- * Saved APK information for display in APK selection dialog.
- */
+/** Saved APK information for display in APK selection dialog. */
 data class SavedApkInfo(
     val fileName: String,
     val filePath: String,
@@ -123,7 +114,6 @@ data class SavedApkInfo(
 )
 
 /**
- * Combined ViewModel for Home and Dashboard functionality.
  * Manages all dialogs, user interactions, APK processing, and bundle management.
  */
 class HomeViewModel(
@@ -141,9 +131,7 @@ class HomeViewModel(
     private val filesystem: Filesystem,
     val homeAppButtonPrefs: HomeAppButtonPreferences
 ) : ViewModel() {
-
-    val availablePatches =
-        patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
+    val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
     private val contentResolver: ContentResolver = app.contentResolver
 
@@ -152,9 +140,7 @@ class HomeViewModel(
         AppDataResolver(app, pm, originalApkRepository, installedAppRepository, filesystem)
     }
 
-    /**
-     * Android 11 kills the app process after granting the "install apps" permission.
-     */
+    /** Android 11 kills the app process after granting the "install apps" permission. */
     val android11BugActive get() = Build.VERSION.SDK_INT == Build.VERSION_CODES.R && !pm.canInstallPackages()
 
     var updatedManagerVersion: String? by mutableStateOf(null)
@@ -1697,11 +1683,78 @@ class HomeViewModel(
     }
 
     /**
+     * All patches per bundle with their enabled state, sorted for display.
+     * Recomputed whenever [expertModeBundles] or [expertModePatches] change.
+     * Each bundle entry contains (PatchInfo, isEnabled) pairs sorted alphabetically -
+     * the final per-section ordering (new patches first) is applied in the UI layer.
+     */
+    val expertModeAllPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
+        get() = expertModeBundles.map { bundle ->
+            val selected = expertModePatches[bundle.uid] ?: emptySet()
+            val patches = bundle.patchSequence(true)
+                .map { patch -> patch to (patch.name in selected) }
+                .sortedBy { (patch, _) -> patch.name }
+                .toList()
+            bundle to patches
+        }.filter { it.second.isNotEmpty() }
+            .sortedByDescending { (bundle, _) -> bundle.compatible.size }
+
+    /** Total number of currently selected patches across all bundles. */
+    val expertModeTotalSelectedCount: Int
+        get() = expertModePatches.values.sumOf { it.size }
+
+    /** Total number of available patches across all bundles. */
+    val expertModeTotalPatchesCount: Int
+        get() = expertModeAllPatchesInfo.sumOf { it.second.size }
+
+    /** True when patches from more than one bundle are selected (triggers warning on proceed). */
+    val expertModeHasMultipleBundles: Boolean
+        get() = expertModePatches.count { (_, patches) -> patches.isNotEmpty() } > 1
+
+    /**
      * Toggle patch in expert mode.
      * Supports adding patches from bundles not yet in the selection.
      */
     fun togglePatchInExpertMode(bundleUid: Int, patchName: String) {
         expertModePatches = expertModePatches.togglePatch(bundleUid, patchName)
+    }
+
+    /**
+     * Select all given patches for a bundle.
+     * Only adds patches that are not already selected.
+     */
+    fun expertModeSelectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
+        val current = expertModePatches.toMutableMap()
+        val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
+        patches.forEach { (patch, enabled) -> if (!enabled) set.add(patch.name) }
+        current[bundleUid] = set
+        expertModePatches = current
+    }
+
+    /**
+     * Deselect all given patches for a bundle.
+     * Removes the bundle entry entirely if nothing remains selected.
+     */
+    fun expertModeDeselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
+        val current = expertModePatches.toMutableMap()
+        val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
+        patches.forEach { (patch, enabled) -> if (enabled) set.remove(patch.name) }
+        if (set.isEmpty()) current.remove(bundleUid) else current[bundleUid] = set
+        expertModePatches = current
+    }
+
+    /**
+     * Reset a bundle's selection to the default (include=true) patches.
+     * [allPatches] is the full unfiltered list for that bundle so defaults
+     * are computed from the complete set, not just search results.
+     */
+    fun expertModeResetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) {
+        val defaults = allPatches
+            .filter { (patch, _) -> patch.include }
+            .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
+        val current = expertModePatches.toMutableMap()
+        if (defaults.isEmpty()) current.remove(bundleUid) else current[bundleUid] = defaults
+        expertModePatches = current
     }
 
     /**

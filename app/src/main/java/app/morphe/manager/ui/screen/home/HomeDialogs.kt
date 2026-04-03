@@ -292,12 +292,23 @@ fun HomeDialogs(
         val allowIncompatible = homeViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
 
         ExpertModeDialog(
-            bundles = homeViewModel.expertModeBundles,
-            selectedPatches = homeViewModel.expertModePatches,
             newPatches = homeViewModel.expertModeNewPatches,
             options = homeViewModel.expertModeOptions,
+            allPatchesInfo = homeViewModel.expertModeAllPatchesInfo,
+            totalSelectedCount = homeViewModel.expertModeTotalSelectedCount,
+            totalPatchesCount = homeViewModel.expertModeTotalPatchesCount,
+            hasMultipleBundles = homeViewModel.expertModeHasMultipleBundles,
             onPatchToggle = { bundleUid, patchName ->
                 homeViewModel.togglePatchInExpertMode(bundleUid, patchName)
+            },
+            onSelectAll = { bundleUid, patches ->
+                homeViewModel.expertModeSelectAll(bundleUid, patches)
+            },
+            onDeselectAll = { bundleUid, patches ->
+                homeViewModel.expertModeDeselectAll(bundleUid, patches)
+            },
+            onResetToDefault = { bundleUid, allPatches ->
+                homeViewModel.expertModeResetToDefault(bundleUid, allPatches)
             },
             onOptionChange = { bundleUid, patchName, optionKey, value ->
                 homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
@@ -322,8 +333,7 @@ fun HomeDialogs(
                         homeViewModel.cleanupExpertModeData()
                     }
                 }
-            },
-            allowIncompatible = allowIncompatible
+            }
         )
     }
 

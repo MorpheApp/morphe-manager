@@ -217,12 +217,17 @@ fun InstalledAppInfoDialog(
 
     // Expert Mode Repatch Dialog
     if (viewModel.showRepatchDialog) {
-        val allowIncompatible by viewModel.allowIncompatiblePatches.collectAsStateWithLifecycle()
         ExpertModeDialog(
-            bundles = viewModel.repatchBundles,
-            selectedPatches = viewModel.repatchPatches,
+            newPatches = emptyMap(),
             options = viewModel.repatchOptions,
+            allPatchesInfo = viewModel.repatchAllPatchesInfo,
+            totalSelectedCount = viewModel.repatchTotalSelectedCount,
+            totalPatchesCount = viewModel.repatchTotalPatchesCount,
+            hasMultipleBundles = viewModel.repatchHasMultipleBundles,
             onPatchToggle = { bundleUid, patchName -> viewModel.toggleRepatchPatch(bundleUid, patchName) },
+            onSelectAll = { bundleUid, patches -> viewModel.selectAllRepatchPatches(bundleUid, patches) },
+            onDeselectAll = { bundleUid, patches -> viewModel.deselectAllRepatchPatches(bundleUid, patches) },
+            onResetToDefault = { bundleUid, allPatches -> viewModel.resetRepatchToDefault(bundleUid, allPatches) },
             onOptionChange = { bundleUid, patchName, optionKey, value -> viewModel.updateRepatchOption(bundleUid, patchName, optionKey, value) },
             onResetOptions = { bundleUid, patchName -> viewModel.resetRepatchOptions(bundleUid, patchName) },
             onDismiss = { viewModel.dismissRepatchDialog() },
@@ -236,8 +241,7 @@ fun InstalledAppInfoDialog(
                         options
                     )
                 }
-            },
-            allowIncompatible = allowIncompatible
+            }
         )
     }
 

@@ -53,44 +53,28 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun ExpertModeDialog(
-    bundles: List<PatchBundleInfo.Scoped>,
-    selectedPatches: PatchSelection,
     newPatches: Map<Int, Set<String>> = emptyMap(),
     options: Options,
+    allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>,
+    totalSelectedCount: Int,
+    totalPatchesCount: Int,
+    hasMultipleBundles: Boolean,
     onPatchToggle: (bundleUid: Int, patchName: String) -> Unit,
+    onSelectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    onDeselectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    onResetToDefault: (bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) -> Unit,
     onOptionChange: (bundleUid: Int, patchName: String, optionKey: String, value: Any?) -> Unit,
     onResetOptions: (bundleUid: Int, patchName: String) -> Unit,
     onDismiss: () -> Unit,
-    onProceed: () -> Unit,
-    allowIncompatible: Boolean = false
+    onProceed: () -> Unit
 ) {
     val selectedPatchForOptions = remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
     var searchVisible by remember { mutableStateOf(false) }
     val showMultipleSourcesWarning = remember { mutableStateOf(false) }
 
-    // Create local mutable state from incoming selectedPatches
-    var localSelectedPatches by remember(selectedPatches) {
-        mutableStateOf(selectedPatches.toMap())
-    }
-
-    // Get all patches with their enabled state
-    val allPatchesInfo = remember(bundles, localSelectedPatches, allowIncompatible) {
-        bundles.map { bundle ->
-            val selected = localSelectedPatches[bundle.uid] ?: emptySet()
-            // In Expert mode, always show all patches (force allowIncompatible = true)
-            val patches = bundle.patchSequence(true)
-                .map { patch -> patch to (patch.name in selected) }
-                .sortedBy { (patch, _) -> patch.name } // Sort patches alphabetically
-                .toList()
-
-            bundle to patches
-        }.filter { it.second.isNotEmpty() }
-            .sortedByDescending { (bundle, _) -> bundle.compatible.size }
-    }
-
     // Filter patches based on search query
-    val filteredPatchesInfo = remember(allPatchesInfo, searchQuery, localSelectedPatches) {
+    val filteredPatchesInfo = remember(allPatchesInfo, searchQuery) {
         if (searchQuery.isBlank()) {
             allPatchesInfo
         } else {
@@ -102,56 +86,6 @@ fun ExpertModeDialog(
                 if (filtered.isEmpty()) null else bundle to filtered
             }
         }
-    }
-
-    val totalSelectedCount = localSelectedPatches.values.sumOf { it.size }
-    val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
-
-    // Check if multiple bundles are selected
-    val hasMultipleBundles = localSelectedPatches.count { (_, patches) -> patches.isNotEmpty() } > 1
-
-    // Patch manipulation helpers
-    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val map = localSelectedPatches.toMutableMap()
-        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (!enabled) set.add(patch.name) }
-        map[bundleUid] = set
-        localSelectedPatches = map
-    }
-
-    fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val map = localSelectedPatches.toMutableMap()
-        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (enabled) set.remove(patch.name) }
-        if (set.isEmpty()) map.remove(bundleUid) else map[bundleUid] = set
-        localSelectedPatches = map
-    }
-
-    fun resetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) {
-        val defaults = allPatches.filter { (patch, _) -> patch.include }.map { (patch, _) -> patch.name }.toSet()
-        val map = localSelectedPatches.toMutableMap()
-        if (defaults.isEmpty()) map.remove(bundleUid) else map[bundleUid] = defaults
-        localSelectedPatches = map
-    }
-
-    fun togglePatch(bundleUid: Int, patchName: String) {
-        val map = localSelectedPatches.toMutableMap()
-        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        if (patchName in set) set.remove(patchName) else set.add(patchName)
-        if (set.isEmpty()) map.remove(bundleUid) else map[bundleUid] = set
-        localSelectedPatches = map
-    }
-
-    fun syncAndProceed() {
-        localSelectedPatches.forEach { (bundleUid, patches) ->
-            val original = selectedPatches[bundleUid] ?: emptySet()
-            patches.forEach { if (it !in original) onPatchToggle(bundleUid, it) }
-            original.forEach { if (it !in patches) onPatchToggle(bundleUid, it) }
-        }
-        selectedPatches.forEach { (bundleUid, patches) ->
-            if (bundleUid !in localSelectedPatches) patches.forEach { onPatchToggle(bundleUid, it) }
-        }
-        onProceed()
     }
 
     MorpheDialog(
@@ -269,9 +203,9 @@ fun ExpertModeDialog(
                 BundlePatchControls(
                     enabledCount = enabledCount,
                     totalCount = totalCount,
-                    onSelectAll = { selectAll(bundle.uid, displayPatches) },
-                    onDeselectAll = { deselectAll(bundle.uid, displayPatches) },
-                    onResetToDefault = { resetToDefault(bundle.uid, allPatches) }
+                    onSelectAll = { onSelectAll(bundle.uid, displayPatches) },
+                    onDeselectAll = { onDeselectAll(bundle.uid, displayPatches) },
+                    onResetToDefault = { onResetToDefault(bundle.uid, allPatches) }
                 )
 
                 if (filteredPatches == null) {
@@ -292,7 +226,7 @@ fun ExpertModeDialog(
                         PatchListWithUniversalSection(
                             patches = filteredPatches,
                             newPatchNames = newPatches[bundle.uid] ?: emptySet(),
-                            onToggle = { togglePatch(bundle.uid, it) },
+                            onToggle = { onPatchToggle(bundle.uid, it) },
                             onConfigureOptions = {
                                 if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
                             }
@@ -372,9 +306,9 @@ fun ExpertModeDialog(
                         BundlePatchControls(
                             enabledCount = currentFiltered.count { it.second },
                             totalCount = currentFiltered.size,
-                            onSelectAll = { selectAll(currentBundle.uid, currentFiltered) },
-                            onDeselectAll = { deselectAll(currentBundle.uid, currentFiltered) },
-                            onResetToDefault = { resetToDefault(currentBundle.uid, currentAllPatches) },
+                            onSelectAll = { onSelectAll(currentBundle.uid, currentFiltered) },
+                            onDeselectAll = { onDeselectAll(currentBundle.uid, currentFiltered) },
+                            onResetToDefault = { onResetToDefault(currentBundle.uid, currentAllPatches) },
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
                     } else {
@@ -409,7 +343,7 @@ fun ExpertModeDialog(
                                 PatchListWithUniversalSection(
                                     patches = patches,
                                     newPatchNames = newPatches[bundle.uid] ?: emptySet(),
-                                    onToggle = { togglePatch(bundle.uid, it) },
+                                    onToggle = { onPatchToggle(bundle.uid, it) },
                                     onConfigureOptions = {
                                         if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
                                     }
@@ -428,7 +362,7 @@ fun ExpertModeDialog(
                     if (hasMultipleBundles) {
                         showMultipleSourcesWarning.value = true
                     } else {
-                        syncAndProceed()
+                        onProceed()
                     }
                 },
                 enabled = totalSelectedCount > 0,
@@ -444,7 +378,7 @@ fun ExpertModeDialog(
             onDismiss = { showMultipleSourcesWarning.value = false },
             onProceed = {
                 showMultipleSourcesWarning.value = false
-                syncAndProceed()
+                onProceed()
             }
         )
     }
