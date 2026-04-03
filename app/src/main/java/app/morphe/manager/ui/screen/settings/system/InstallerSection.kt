@@ -13,12 +13,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Android
-import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.InstallMobile
-import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -33,65 +28,48 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 
 /**
  * Installer section.
  */
 @Composable
 fun InstallerSection(
-    installerManager: InstallerManager,
     settingsViewModel: SettingsViewModel,
     onShowInstallerDialog: () -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
     val expertMode by settingsViewModel.prefs.useExpertMode.getAsState()
     val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
-        installerManager.parseToken(primaryPreference)
+        settingsViewModel.parseInstallerToken(primaryPreference)
     }
 
     val installTarget = InstallerManager.InstallTarget.PATCHER
 
     // Installer entries with periodic updates
     var primaryEntries by remember(primaryToken) {
-        mutableStateOf(
-            ensureValidEntries(
-                installerManager.listEntries(installTarget, includeNone = false),
-                primaryToken,
-                installerManager,
-                installTarget
-            )
-        )
+        mutableStateOf(settingsViewModel.getInstallerEntries(installTarget, primaryToken))
     }
 
     // Periodically update installer list
     LaunchedEffect(installTarget, primaryToken) {
         while (isActive) {
-            primaryEntries = ensureValidEntries(
-                installerManager.listEntries(installTarget, includeNone = false),
-                primaryToken,
-                installerManager,
-                installTarget
-            )
+            primaryEntries = settingsViewModel.getInstallerEntries(installTarget, primaryToken)
             delay(1_500)
         }
     }
 
     // Get current entry
     val primaryEntry = primaryEntries.find { it.token == primaryToken }
-        ?: installerManager.describeEntry(primaryToken, installTarget)
+        ?: settingsViewModel.describeInstallerEntry(primaryToken, installTarget)
         ?: primaryEntries.firstOrNull()
 
-    // Prompt installer on install preference
+    // Prompt installer on installation preference
     val promptInstallerOnInstall by settingsViewModel.prefs.promptInstallerOnInstall.getAsState()
 
     // Localized strings for accessibility
@@ -113,9 +91,7 @@ fun InstallerSection(
 
             RichSettingsItem(
                 onClick = {
-                    coroutineScope.launch {
-                        settingsViewModel.prefs.promptInstallerOnInstall.update(!promptInstallerOnInstall)
-                    }
+                    settingsViewModel.setPromptInstallerOnInstall(!promptInstallerOnInstall)
                 },
                 leadingContent = {
                     MorpheIcon(icon = Icons.Outlined.Android)
@@ -141,24 +117,18 @@ fun InstallerSection(
  */
 @Composable
 fun InstallerSelectionDialogContainer(
-    installerManager: InstallerManager,
     settingsViewModel: SettingsViewModel,
-    rootInstaller: RootInstaller,
     onDismiss: () -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
     val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
-        installerManager.parseToken(primaryPreference)
+        settingsViewModel.parseInstallerToken(primaryPreference)
     }
 
     val installTarget = InstallerManager.InstallTarget.PATCHER
-    val options = ensureValidEntries(
-        installerManager.listEntries(installTarget, includeNone = false),
-        primaryToken,
-        installerManager,
-        installTarget
-    )
+    val options = remember(primaryToken) {
+        settingsViewModel.getInstallerEntries(installTarget, primaryToken)
+    }
 
     InstallerSelectionDialog(
         title = stringResource(R.string.installer_title),
@@ -166,17 +136,10 @@ fun InstallerSelectionDialogContainer(
         selected = primaryToken,
         onDismiss = onDismiss,
         onConfirm = { selection ->
-            // Request root access only when 'Rooted mount installer' is selected
-            if (selection == InstallerManager.Token.AutoSaved) {
-                coroutineScope.launch(Dispatchers.IO) {
-                    runCatching { rootInstaller.hasRootAccess() }
-                }
-            }
-
-            settingsViewModel.setPrimaryInstaller(selection)
+            settingsViewModel.confirmInstallerSelection(selection)
             onDismiss()
         },
-        onOpenShizuku = installerManager::openShizukuApp
+        onOpenShizuku = settingsViewModel::openShizukuApp
     )
 }
 
@@ -458,53 +421,6 @@ fun InstallerIconPreview(
             )
         }
     }
-}
-
-/**
- * Helper function to ensure valid selection and remove duplicates.
- */
-fun ensureValidEntries(
-    entries: List<InstallerManager.Entry>,
-    token: InstallerManager.Token,
-    installerManager: InstallerManager,
-    installTarget: InstallerManager.InstallTarget
-): List<InstallerManager.Entry> {
-    // Remove duplicates based on component name for Component tokens
-    val normalized = buildList {
-        val seen = mutableSetOf<Any>()
-        entries.forEach { entry ->
-            val key = when (val entryToken = entry.token) {
-                is InstallerManager.Token.Component -> entryToken.componentName
-                else -> entryToken
-            }
-            if (seen.add(key)) add(entry)
-        }
-    }
-
-    // Check if current token is in the list
-    val tokenExists = token == InstallerManager.Token.Internal ||
-            token == InstallerManager.Token.AutoSaved ||
-            normalized.any { tokensEqual(it.token, token) }
-
-    // If token not in list, try to add its description
-    return if (tokenExists) {
-        normalized
-    } else {
-        installerManager.describeEntry(token, installTarget)
-            ?.let { normalized + it }
-            ?: normalized
-    }
-}
-
-/**
- * Helper function to compare installer tokens.
- */
-fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?): Boolean = when {
-    a === b -> true
-    a == null || b == null -> false
-    a is InstallerManager.Token.Component && b is InstallerManager.Token.Component ->
-        a.componentName == b.componentName
-    else -> false
 }
 
 /**

@@ -5,6 +5,7 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
+import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
@@ -107,7 +108,7 @@ class PreferencesManager(
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
                 edit {
                     useManagerPrereleases.value = true
-                    bundlePrereleasesEnabled += "0"
+                    bundlePrereleasesEnabled += DEFAULT_SOURCE_UID.toString()
                     prereleaseAutoEnabled.value = true
                 }
             }

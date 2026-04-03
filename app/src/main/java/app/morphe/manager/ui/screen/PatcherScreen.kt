@@ -50,13 +50,13 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
-import app.morphe.manager.ui.screen.settings.system.ensureValidEntries
 import app.morphe.manager.ui.screen.shared.InfoBadge
 import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
 import app.morphe.manager.ui.screen.shared.MorpheCard
 import app.morphe.manager.ui.screen.shared.MorpheSettingsDivider
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
+import app.morphe.manager.ui.viewmodel.SettingsViewModel.Companion.ensureValidEntries
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
 import app.morphe.manager.util.tag

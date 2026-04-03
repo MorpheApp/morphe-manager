@@ -14,7 +14,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -22,19 +25,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.InstalledAppRepository
-import app.morphe.manager.domain.repository.OriginalApkRepository
-import app.morphe.manager.domain.repository.PatchOptionsRepository
-import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.toast
-import kotlinx.coroutines.launch
-import org.koin.compose.koinInject
 
 /**
  * System tab content.
@@ -43,7 +38,6 @@ import org.koin.compose.koinInject
 @SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
 fun SystemTabContent(
-    installerManager: InstallerManager,
     settingsViewModel: SettingsViewModel,
     onShowInstallerDialog: () -> Unit,
     importExportViewModel: ImportExportViewModel,
@@ -53,11 +47,10 @@ fun SystemTabContent(
     onExportSettings: () -> Unit,
     onExportDebugLogs: () -> Unit,
     onAboutClick: () -> Unit,
-    onChangelogClick: () -> Unit,
-    prefs: PreferencesManager
+    onChangelogClick: () -> Unit
 ) {
-    val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
     val useProcessRuntime by prefs.useProcessRuntime.getAsState()
     val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
@@ -69,18 +62,18 @@ fun SystemTabContent(
     // Extract strings to avoid LocalContext issues
     val keystoreUnavailable = stringResource(R.string.settings_system_export_keystore_unavailable)
 
-    // Process runtime dialog
+    // Storage counts
+    val originalApkCount by settingsViewModel.originalApkCount.collectAsStateWithLifecycle()
+    val patchedApkCount by settingsViewModel.patchedApkCount.collectAsStateWithLifecycle()
+    val patchedPackagesCount by settingsViewModel.patchedPackagesCount.collectAsStateWithLifecycle()
+
     if (showProcessRuntimeDialog.value) {
         ProcessRuntimeDialog(
             currentEnabled = useProcessRuntime,
             currentLimit = memoryLimit,
             onDismiss = { showProcessRuntimeDialog.value = false },
-            onEnabledChange = { enabled ->
-                scope.launch { prefs.useProcessRuntime.update(enabled) }
-            },
-            onLimitChange = { limit ->
-                scope.launch { prefs.patcherProcessMemoryLimit.update(limit) }
-            }
+            onEnabledChange = { settingsViewModel.setProcessRuntime(it) },
+            onLimitChange = { settingsViewModel.setMemoryLimit(it) }
         )
     }
 
@@ -95,6 +88,7 @@ fun SystemTabContent(
     // Patch selection management dialog
     if (showPatchSelectionDialog.value) {
         PatchSelectionManagementDialog(
+            settingsViewModel = settingsViewModel,
             onDismiss = { showPatchSelectionDialog.value = false }
         )
     }
@@ -115,7 +109,6 @@ fun SystemTabContent(
 
         SectionCard {
             InstallerSection(
-                installerManager = installerManager,
                 settingsViewModel = settingsViewModel,
                 onShowInstallerDialog = onShowInstallerDialog
             )
@@ -252,10 +245,6 @@ fun SystemTabContent(
         SectionCard {
             Column {
                 // Original APKs management
-                val originalApkRepository: OriginalApkRepository = koinInject()
-                val allOriginalApks by originalApkRepository.getAll().collectAsStateWithLifecycle(emptyList())
-                val originalApkCount = allOriginalApks.size
-
                 RichSettingsItem(
                     onClick = { showApkManagementDialog.value = ApkManagementType.ORIGINAL },
                     title = stringResource(R.string.settings_system_original_apks_title),
@@ -283,10 +272,6 @@ fun SystemTabContent(
                 MorpheSettingsDivider()
 
                 // Patched APKs management
-                val installedAppRepository: InstalledAppRepository = koinInject()
-                val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
-                val patchedApkCount = allInstalledApps.size
-
                 RichSettingsItem(
                     onClick = { showApkManagementDialog.value = ApkManagementType.PATCHED },
                     title = stringResource(R.string.settings_system_patched_apks_title),
@@ -314,22 +299,6 @@ fun SystemTabContent(
                 // Patch Selections management (Expert mode only)
                 if (useExpertMode) {
                     MorpheSettingsDivider()
-
-                    val selectionRepository: PatchSelectionRepository = koinInject()
-                    val optionsRepository: PatchOptionsRepository = koinInject()
-
-                    val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
-                        .collectAsStateWithLifecycle(emptySet())
-                    val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
-                        .collectAsStateWithLifecycle(emptySet())
-
-                    // Filter to show only patched packages
-                    var patchedPackagesCount by remember { mutableIntStateOf(0) }
-
-                    LaunchedEffect(packagesWithSelection, packagesWithOptions) {
-                        val allPackages = packagesWithSelection + packagesWithOptions
-                        patchedPackagesCount = allPackages.size
-                    }
 
                     RichSettingsItem(
                         onClick = { showPatchSelectionDialog.value = true },
