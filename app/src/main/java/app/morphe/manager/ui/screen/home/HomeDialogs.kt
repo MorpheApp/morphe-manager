@@ -283,11 +283,7 @@ fun HomeDialogs(
     }
 
     // Expert Mode Dialog
-    AnimatedVisibility(
-        visible = homeViewModel.showExpertModeDialog && homeViewModel.expertModeAllPatchesInfo.isNotEmpty(),
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
-    ) {
+    if (homeViewModel.showExpertModeDialog) {
         ExpertModeDialog(
             newPatches = homeViewModel.expertModeNewPatches,
             options = homeViewModel.expertModeOptions,
