@@ -141,8 +141,8 @@ fun ExpertModeDialog(
             // Search bar
             AnimatedVisibility(
                 visible = searchVisible,
-                enter = expandVertically(animationSpec = tween(250)) + fadeIn(tween(250)),
-                exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(tween(200))
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 MorpheDialogTextField(
                     value = searchQuery,
@@ -1837,8 +1837,8 @@ fun ExpandableSurface(
             // Expandable content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
-                exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 content()
             }

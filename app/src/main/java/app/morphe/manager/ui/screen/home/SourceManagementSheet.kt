@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalOverscrollFactory
@@ -58,6 +59,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.ActionPillButton
 import app.morphe.manager.ui.screen.shared.InfoBadge
 import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
@@ -438,8 +440,8 @@ private fun BundleManagementCard(
             // Expanded content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(),
-                exit = shrinkVertically()
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 Column(
                     modifier = Modifier
@@ -534,8 +536,8 @@ private fun BundleManagementCard(
                     AnimatedVisibility(
                         visible = hasExperimentalVersions && onExperimentalVersionsToggle != null &&
                                 (onPrereleasesToggle == null || currentUsePrerelease),
-                        enter = expandVertically() + fadeIn(),
-                        exit = shrinkVertically() + fadeOut()
+                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
                     ) {
                         Row(
                             modifier = Modifier
@@ -712,8 +714,8 @@ private fun BundleCardHeader(
                 // Disabled badge
                 AnimatedVisibility(
                     visible = !enabled,
-                    enter = fadeIn() + expandHorizontally(),
-                    exit = fadeOut() + shrinkHorizontally()
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     InfoBadge(
                         text = stringResource(R.string.disabled),

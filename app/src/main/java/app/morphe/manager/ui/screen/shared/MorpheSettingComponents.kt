@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
 // Constants
-private object MorpheDefaults {
+object MorpheDefaults {
     val CardElevation = 2.dp
     val CardCornerRadius = 16.dp
     val SettingsCornerRadius = 14.dp
@@ -423,10 +423,8 @@ fun ExpandableSection(
             // Content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 Column(
                     modifier = Modifier

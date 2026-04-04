@@ -69,11 +69,11 @@ fun HomeDialogs(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    // Dialog 1: APK Availability
+    // Dialog 1: APK availability
     AnimatedVisibility(
         visible = homeViewModel.showApkAvailabilityDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else 200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val recommendedVersion = homeViewModel.pendingRecommendedVersion
@@ -114,11 +114,11 @@ fun HomeDialogs(
         )
     }
 
-    // Dialog 2: Download Instructions
+    // Dialog 2: Download instructions
     AnimatedVisibility(
         visible = homeViewModel.showDownloadInstructionsDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (homeViewModel.showFilePickerPromptDialog) 0 else 200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(if (homeViewModel.showFilePickerPromptDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
     ) {
         val usingMountInstall = homeViewModel.usingMountInstall
         // Remember packageName to prevent color flickering during exit animation
@@ -156,11 +156,11 @@ fun HomeDialogs(
         }
     }
 
-    // Dialog 3: File Picker Prompt
+    // Dialog 3: File picker prompt
     AnimatedVisibility(
         visible = homeViewModel.showFilePickerPromptDialog && homeViewModel.pendingAppName != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val isOtherApps = homeViewModel.pendingPackageName == null
@@ -179,11 +179,11 @@ fun HomeDialogs(
         )
     }
 
-    // Unsupported Version Dialog
+    // Unsupported version dialog
     AnimatedVisibility(
         visible = homeViewModel.showUnsupportedVersionDialog != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val dialogState = homeViewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
@@ -207,11 +207,11 @@ fun HomeDialogs(
         )
     }
 
-    // Experimental Version Warning Dialog
+    // Experimental version warning dialog
     AnimatedVisibility(
         visible = homeViewModel.showExperimentalVersionDialog != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val dialogState = homeViewModel.showExperimentalVersionDialog ?: return@AnimatedVisibility
 
@@ -222,11 +222,11 @@ fun HomeDialogs(
         )
     }
 
-    // Wrong Package Dialog
+    // Wrong package dialog
     AnimatedVisibility(
         visible = homeViewModel.showWrongPackageDialog != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val dialogState = homeViewModel.showWrongPackageDialog ?: return@AnimatedVisibility
 

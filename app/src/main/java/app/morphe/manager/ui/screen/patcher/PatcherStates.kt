@@ -450,8 +450,8 @@ private fun SuccessErrorMessage(
 ) {
     AnimatedVisibility(
         visible = errorMessage != null && installState is InstallViewModel.InstallState.Error,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(300))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         errorMessage?.let { message ->
             Surface(
@@ -481,8 +481,8 @@ private fun SuccessRootWarning(
 ) {
     AnimatedVisibility(
         visible = usingMountInstall && installState is InstallViewModel.InstallState.Ready,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(300))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         InfoBadge(
             text = stringResource(R.string.root_gmscore_excluded),

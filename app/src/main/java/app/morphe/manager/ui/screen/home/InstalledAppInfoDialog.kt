@@ -42,6 +42,7 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
@@ -251,13 +252,11 @@ fun InstalledAppInfoDialog(
                     installedApp = installedApp
                 )
 
-                // Deleted App Warning Banner
+                // Deleted app warning banner
                 AnimatedVisibility(
                     visible = viewModel.isAppDeleted,
-                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
-                            expandVertically(animationSpec = tween(durationMillis = 400)),
-                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
-                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     WarningBanner(
                         icon = Icons.Outlined.Warning,
@@ -273,13 +272,11 @@ fun InstalledAppInfoDialog(
                     )
                 }
 
-                // Update Available Banner
+                // Update available banner
                 AnimatedVisibility(
                     visible = hasUpdate && !viewModel.isAppDeleted,
-                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
-                            expandVertically(animationSpec = tween(durationMillis = 400)),
-                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
-                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     WarningBanner(
                         icon = Icons.Outlined.Update,

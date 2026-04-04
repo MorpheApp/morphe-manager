@@ -55,6 +55,7 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.State
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.screen.shared.contentPadding
 import app.morphe.manager.ui.screen.shared.itemSpacing
 import app.morphe.manager.ui.screen.shared.rememberWindowSize
@@ -472,7 +473,7 @@ private fun ExpertProgressHeader(
         val heapLimitMb = patcherViewModel.heapLimitMb
         AnimatedVisibility(
             visible = heapSamples.isNotEmpty(),
-            enter = fadeIn(tween(500)) + expandVertically(tween(500)),
+            enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
         ) {
             HeapUsageGraph(
                 samples = heapSamples,

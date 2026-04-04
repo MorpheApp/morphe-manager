@@ -176,8 +176,8 @@ fun AppearanceTabContent(
     // Translation Info Dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (showLanguageDialog.value) 0 else 200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(if (showLanguageDialog.value) 0 else MorpheDefaults.ANIMATION_DURATION))
     ) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.settings_appearance_translations_info_title),
@@ -199,8 +199,8 @@ fun AppearanceTabContent(
     // Language Picker Dialog
     AnimatedVisibility(
         visible = showLanguageDialog.value,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         LanguagePickerDialog(
             currentLanguage = appLanguage,
