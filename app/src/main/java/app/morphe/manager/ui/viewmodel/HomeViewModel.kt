@@ -1513,14 +1513,6 @@ class HomeViewModel(
                         removedCount,
                         removedCount
                     ))
-
-                    // Save validated selection
-                    withContext(Dispatchers.IO) {
-                        patchSelectionRepository.updateSelection(
-                            packageName = selectedApp.packageName,
-                            selection = validatedPatches
-                        )
-                    }
                 }
 
                 // Merge newly added patches (present in bundle but absent from saved selection)
@@ -1851,7 +1843,11 @@ class HomeViewModel(
                     cleanupExpertModeData()
                 }
             } else if (selectedApp != null) {
-                // Normal home-screen patching flow.
+                // Persist the final selection (already validated + merged with new patches)
+                patchSelectionRepository.updateSelection(
+                    packageName = selectedApp.packageName,
+                    selection = finalPatches
+                )
                 saveOptions(selectedApp.packageName, finalOptions)
                 // Snapshot all bundle patch names so next open can detect genuinely new patches.
                 expertModeBundles.forEach { bundle ->
@@ -1921,12 +1917,6 @@ class HomeViewModel(
                         removedCount,
                         removedCount
                     ))
-                    withContext(Dispatchers.IO) {
-                        patchSelectionRepository.updateSelection(
-                            packageName = originalPackageName,
-                            selection = validatedPatches
-                        )
-                    }
                 }
                 buildMap<Int, Set<String>> {
                     putAll(validatedPatches)
