@@ -346,6 +346,11 @@ fun HomeDialogs(
             onRename = { bundle ->
                 homeViewModel.bundleToRename = bundle
                 homeViewModel.showRenameBundleDialog = true
+            },
+            onReorder = { orderedUids ->
+                scope.launch {
+                    homeViewModel.patchBundleRepository.reorderBundles(orderedUids)
+                }
             }
         )
     }
