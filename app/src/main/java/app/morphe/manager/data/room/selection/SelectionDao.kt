@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.map
 @Dao
 abstract class SelectionDao {
     /**
-     * Get selected patches for a package across all bundles
-     * @deprecated Use getSelectedPatchesForBundle for specific bundle or getAllSelectionsForPackage for all bundles
+     * Get selected patches for a package across all bundles.
+     * @deprecated Use getSelectedPatchesForBundle for specific bundle or getAllSelectionsForPackage for all bundles.
      */
     @Transaction
     @Query(
@@ -26,8 +26,8 @@ abstract class SelectionDao {
     ) String>>
 
     /**
-     * Get selected patches for a specific package and bundle
-     * Returns List - convert to Set in repository if needed
+     * Get selected patches for a specific package and bundle.
+     * Returns List - convert to Set in repository if needed.
      */
     @Transaction
     @Query(
@@ -37,9 +37,7 @@ abstract class SelectionDao {
     )
     abstract suspend fun getSelectedPatchesForBundle(packageName: String, bundleUid: Int): List<String>
 
-    /**
-     * Get all selections for a package grouped by bundle
-     */
+    /** Get all selections for a package grouped by bundle. */
     @Transaction
     @Query(
         "SELECT patch_bundle, patch_name FROM patch_selections" +
@@ -51,8 +49,8 @@ abstract class SelectionDao {
     ) String>>
 
     /**
-     * Get summary of selections per package and bundle
-     * Returns: Map<PackageName, Map<BundleUid, PatchCount>>
+     * Get summary of selections per package and bundle.
+     * Returns: Map<PackageName, Map<BundleUid, PatchCount>>.
      */
     @Transaction
     @Query(
@@ -73,9 +71,7 @@ abstract class SelectionDao {
         }
     }
 
-    /**
-     * Export selection for a specific bundle
-     */
+    /** Export selection for a specific bundle. */
     @Transaction
     @Query(
         "SELECT package_name, patch_name FROM patch_selections" +
@@ -86,9 +82,7 @@ abstract class SelectionDao {
         "patch_name"
     ) String>>
 
-    /**
-     * Export selection for a specific package and bundle
-     */
+    /** Export selection for a specific package and bundle. */
     @Transaction
     @Query(
         "SELECT sp.patch_name FROM patch_selections ps" +
@@ -137,11 +131,25 @@ abstract class SelectionDao {
             clearSelection(selectionUid)
             selectPatches(patches.map { SelectedPatch(selectionUid, it) })
         }
+
+    // Seen patches (full bundle snapshot at patch time)
+    @Query("SELECT patch_name FROM seen_patches WHERE patch_bundle = :bundleUid AND package_name = :packageName")
+    abstract suspend fun getSeenPatches(packageName: String, bundleUid: Int): List<String>
+
+    @Query("DELETE FROM seen_patches WHERE patch_bundle = :bundleUid AND package_name = :packageName")
+    protected abstract suspend fun clearSeenPatches(packageName: String, bundleUid: Int)
+
+    @Insert
+    protected abstract suspend fun insertSeenPatches(patches: List<SeenPatch>)
+
+    @Transaction
+    open suspend fun updateSeenPatches(packageName: String, bundleUid: Int, patchNames: Set<String>) {
+        clearSeenPatches(packageName, bundleUid)
+        insertSeenPatches(patchNames.map { SeenPatch(bundleUid, packageName, it) })
+    }
 }
 
-/**
- * Data class for selection summary query result
- */
+/** Data class for selection summary query result. */
 data class SelectionSummaryItem(
     @ColumnInfo(name = "package_name") val packageName: String,
     @ColumnInfo(name = "patch_bundle") val patchBundle: Int,
