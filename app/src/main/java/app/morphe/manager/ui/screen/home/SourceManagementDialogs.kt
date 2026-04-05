@@ -653,51 +653,56 @@ fun BundlePatchesDialog(
     if (showFilterSheet.value) {
         ModalBottomSheet(
             onDismissRequest = { showFilterSheet.value = false },
-            sheetState = sheetState
+            sheetState = sheetState,
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .padding(bottom = 32.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
                     text = stringResource(R.string.filter),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    color = LocalDialogTextColor.current
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    // "All" chip
-                    FilterChip(
-                        selected = selectedPackages.isEmpty(),
-                        onClick = { selectedPackages = emptySet() },
-                        label = { Text(stringResource(R.string.all)) },
-                        leadingIcon = if (selectedPackages.isEmpty()) {
-                            { Icon(Icons.Outlined.DoneAll, null, Modifier.size(16.dp)) }
-                        } else null
-                    )
-                    // Per-app chips
-                    appLabels.entries
-                        .sortedBy { it.value }
-                        .forEach { (pkg, label) ->
-                            val isSelected = pkg in selectedPackages
+                Spacer(Modifier.height(8.dp))
+
+                LazyColumn() {
+                    item {
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            // "All" chip
                             FilterChip(
-                                selected = isSelected,
-                                onClick = {
-                                    selectedPackages = if (isSelected)
-                                        selectedPackages - pkg
-                                    else
-                                        selectedPackages + pkg
-                                },
-                                label = { Text(label) },
-                                leadingIcon = if (isSelected) {
-                                    { Icon(Icons.Outlined.Done, null, Modifier.size(16.dp)) }
+                                selected = selectedPackages.isEmpty(),
+                                onClick = { selectedPackages = emptySet() },
+                                label = { Text(stringResource(R.string.all)) },
+                                leadingIcon = if (selectedPackages.isEmpty()) {
+                                    { Icon(Icons.Outlined.DoneAll, null, Modifier.size(16.dp)) }
                                 } else null
                             )
+                            // Per-app chips
+                            appLabels.entries
+                                .sortedBy { it.value }
+                                .forEach { (pkg, label) ->
+                                    val isSelected = pkg in selectedPackages
+                                    FilterChip(
+                                        selected = isSelected,
+                                        onClick = {
+                                            selectedPackages = if (isSelected)
+                                                selectedPackages - pkg
+                                            else
+                                                selectedPackages + pkg
+                                        },
+                                        label = { Text(label) },
+                                        leadingIcon = if (isSelected) {
+                                            { Icon(Icons.Outlined.Done, null, Modifier.size(16.dp)) }
+                                        } else null
+                                    )
+                                }
                         }
+                    }
                 }
             }
         }

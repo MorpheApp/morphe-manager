@@ -152,21 +152,14 @@ fun BundleManagementSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
         scrimColor = Color.Transparent
     ) {
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-        ) {
+        Column(Modifier.fillMaxWidth()) {
             // Header - outside scrollable area
-            Column(
-                modifier = Modifier.padding(horizontal = 16.dp)
-            ) {
+            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -204,7 +197,7 @@ fun BundleManagementSheet(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(Modifier.height(8.dp))
             }
 
             // Bundle cards - scrollable area with disabled overscroll
