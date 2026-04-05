@@ -8,7 +8,9 @@ package app.morphe.manager.ui.screen.home
 import android.annotation.SuppressLint
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.*
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -36,8 +38,10 @@ import androidx.compose.ui.zIndex
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -113,6 +117,7 @@ fun BundleManagementSheet(
     val orderedSources = remember(localOrder, sources) {
         localOrder.mapNotNull { uid -> sources.find { it.uid == uid } }
     }
+    val haptic = LocalHapticFeedback.current
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
         val newOrder = localOrder.toMutableList()
         val moved = newOrder.removeAt(from.index)
@@ -283,14 +288,18 @@ fun BundleManagementSheet(
                                     }
                                 },
                                 forceExpanded = isSingleDefaultBundle,
-                                reorderModifier = Modifier.draggableHandle(
+                                isDragging = itemIsDragging,
+                                longPressModifier = Modifier.longPressDraggableHandle(
+                                    onDragStarted = {
+                                        isDragging = true
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    },
                                     onDragStopped = {
                                         isDragging = false
                                         onReorder(localOrder)
                                     }
                                 ),
-                                modifier = Modifier
-                                    .zIndex(if (itemIsDragging) 1f else 0f)
+                                modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
                             )
                         }
                     }
@@ -340,7 +349,8 @@ private fun BundleManagementCard(
     patchCount: Int,
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     isUpdating: Boolean = false,
-    reorderModifier: Modifier = Modifier,
+    isDragging: Boolean = false,
+    longPressModifier: Modifier = Modifier,
     expanded: Boolean,
     onToggleExpanded: () -> Unit,
     onDelete: () -> Unit,
@@ -384,10 +394,19 @@ private fun BundleManagementCard(
         label = "bundle_card_border_color"
     )
 
+    val scale by animateFloatAsState(
+        targetValue = if (isDragging) 1.03f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+        label = "bundle_card_scale"
+    )
+
     Surface(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .graphicsLayer { scaleX = scale; scaleY = scale }
+            .then(longPressModifier),
         shape = RoundedCornerShape(16.dp),
-        tonalElevation = 3.dp,
+        tonalElevation = if (isDragging) 8.dp else 3.dp,
         color = animatedColor,
         border = BorderStroke(1.dp, animatedBorderColor)
     ) {
@@ -430,7 +449,6 @@ private fun BundleManagementCard(
             // Header
             BundleCardHeader(
                 bundle = bundle,
-                modifier = reorderModifier,
                 updateInfo = updateInfo,
                 expanded = expanded,
                 showChevron = !forceExpanded,
@@ -646,7 +664,6 @@ private fun BundleManagementCard(
 @Composable
 private fun BundleCardHeader(
     bundle: PatchBundleSource,
-    modifier: Modifier = Modifier,
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     expanded: Boolean,
     showChevron: Boolean,
@@ -754,25 +771,14 @@ private fun BundleCardHeader(
             }
         }
 
-        // Drag handle + chevron
+        // Chevron
         if (showChevron) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(2.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.DragHandle,
-                    contentDescription = null,
-                    modifier = modifier.size(20.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
-                )
-                Icon(
-                    imageVector = Icons.Outlined.ExpandMore,
-                    contentDescription = null,
-                    modifier = Modifier.rotate(rotation),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
+            Icon(
+                imageVector = Icons.Outlined.ExpandMore,
+                contentDescription = null,
+                modifier = Modifier.rotate(rotation),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }
