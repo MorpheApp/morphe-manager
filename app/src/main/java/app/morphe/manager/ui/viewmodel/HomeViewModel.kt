@@ -378,7 +378,12 @@ class HomeViewModel(
         val app = pendingSelectedApp ?: return
         pendingSelectedApp = null
         viewModelScope.launch {
-            startPatchingWithApp(app, allowIncompatible = true)
+            if (rootInstaller.isDeviceRooted()) {
+                requestPrePatchInstallerSelection(app, allowIncompatible = true)
+            } else {
+                usingMountInstall = false
+                startPatchingWithApp(app, allowIncompatible = true)
+            }
         }
     }
 
@@ -405,7 +410,12 @@ class HomeViewModel(
         val app = pendingSelectedApp ?: return
         pendingSelectedApp = null
         viewModelScope.launch {
-            startPatchingWithApp(app, allowIncompatible = false)
+            if (rootInstaller.isDeviceRooted()) {
+                requestPrePatchInstallerSelection(app, allowIncompatible = false)
+            } else {
+                usingMountInstall = false
+                startPatchingWithApp(app, allowIncompatible = false)
+            }
         }
     }
 
