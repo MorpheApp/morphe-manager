@@ -249,6 +249,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
+    <string name="patcher_error_dialog_app_info">App info</string>
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%1$s%%</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>

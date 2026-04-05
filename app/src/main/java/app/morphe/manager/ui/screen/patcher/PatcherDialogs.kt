@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.patcher
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -13,25 +14,35 @@ import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.FolderOff
-import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.PathValidationResult
+import app.morphe.manager.util.toast
+
 
 /**
  * Cancel patching confirmation dialog
@@ -93,14 +104,14 @@ fun StoragePermissionDialog(
 
     // Only used on Android 10 and below where READ_EXTERNAL_STORAGE is a
     // standard runtime permission that can be requested inline
-    var permissionDenied by remember { mutableStateOf(false) }
+    val permissionDenied = remember { mutableStateOf(false) }
     val readStorageLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) {
             onRetryAfterPermission()
         } else {
-            permissionDenied = true
+            permissionDenied.value = true
         }
     }
 
@@ -136,7 +147,7 @@ fun StoragePermissionDialog(
                     MorpheDialogButton(
                         text = stringResource(R.string.patcher_storage_permission_grant),
                         onClick = {
-                            permissionDenied = false
+                            permissionDenied.value = false
                             readStorageLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                         },
                         icon = Icons.Outlined.Lock,
@@ -175,7 +186,7 @@ fun StoragePermissionDialog(
             // Shown on Android 10 and below after the user taps "Deny" on the
             // READ_EXTERNAL_STORAGE prompt. Explains they must either grant the
             // permission or move the files to the private app directory
-            if (permissionDenied) {
+            if (permissionDenied.value) {
                 InfoBadge(
                     text = stringResource(R.string.patcher_storage_permission_denied_warning),
                     style = InfoBadgeStyle.Error,
@@ -256,4 +267,152 @@ fun StoragePermissionDialog(
             )
         }
     }
+}
+
+/**
+ * Full-screen error dialog shown when patching fails.
+ */
+@SuppressLint("LocalContextGetResourceValueCall")
+@Composable
+fun PatcherErrorDialog(
+    errorMessage: String,
+    errorInfo: PatcherErrorInfo?,
+    onDismiss: () -> Unit
+) {
+    val context = LocalContext.current
+    @Suppress("DEPRECATION")
+    val clipboardManager = LocalClipboardManager.current
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.patcher_failed_dialog_title),
+        compactPadding = true,
+        scrollable = false,
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(android.R.string.copy),
+                onPrimaryClick = {
+                    clipboardManager.setText(AnnotatedString(errorMessage))
+                    context.toast(context.getString(R.string.patcher_error_copied))
+                },
+                primaryIcon = Icons.Default.ContentCopy,
+                secondaryText = stringResource(R.string.close),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // App info
+            if (errorInfo != null) {
+                ErrorInfoCard(
+                    label = stringResource(R.string.patcher_error_dialog_app_info),
+                    icon = Icons.Outlined.Info
+                ) {
+                    ErrorInfoRow(errorInfo.packageName)
+                    ErrorInfoRow(errorInfo.appVersion)
+
+                    if (errorInfo.bundles.isNotEmpty()) {
+                        errorInfo.bundles.forEach { bundle ->
+                            MorpheSettingsDivider()
+
+                            if (bundle.version != null) {
+                                ErrorInfoRow(bundle.name)
+                                ErrorInfoRow(bundle.version)
+                            }
+                            else
+                                ErrorInfoRow(bundle.name)
+                        }
+                    }
+                }
+            }
+
+            // Error log card
+            ErrorInfoCard(
+                label = stringResource(R.string.patcher_error_log),
+                icon = Icons.Outlined.BugReport,
+                errorBadge = stringResource(R.string.patcher_error_technical),
+                modifier = Modifier.weight(1f)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                ) {
+                    Text(
+                        text = errorMessage,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontFamily = FontFamily.Monospace,
+                        lineHeight = 18.sp
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ErrorInfoCard(
+    label: String,
+    icon: ImageVector,
+    errorBadge: String? = null,
+    @SuppressLint("ModifierParameter")
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    MorpheCard(
+        modifier = modifier.fillMaxWidth(),
+        elevation = 2.dp,
+        cornerRadius = 16.dp
+    ) {
+        Column {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                shape = RoundedCornerShape(topStart = MorpheDefaults.SectionCornerRadius, topEnd = MorpheDefaults.SectionCornerRadius)
+            ) {
+                IconTextRow(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    leadingContent = {
+                        MorpheIcon(
+                            icon = icon,
+                            size = 18.dp,
+                            tint = if (errorBadge != null) MaterialTheme.colorScheme.error
+                            else MaterialTheme.colorScheme.primary
+                        )
+                    },
+                    title = label,
+                    titleStyle = MaterialTheme.typography.labelLarge,
+                    titleWeight = FontWeight.SemiBold
+                )
+            }
+
+            MorpheSettingsDivider(fullWidth = true)
+
+            content()
+        }
+    }
+}
+
+@Composable
+private fun ErrorInfoRow(
+    value: String
+) {
+    Text(
+        text = value,
+        style = MaterialTheme.typography.bodySmall,
+        fontFamily = FontFamily.Monospace,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp),
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis
+    )
 }
