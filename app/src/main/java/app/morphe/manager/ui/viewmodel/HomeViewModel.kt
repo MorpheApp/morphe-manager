@@ -49,6 +49,7 @@ import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
+import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.manager.util.PatchSelectionUtils.togglePatch
 import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
@@ -1818,6 +1819,10 @@ class HomeViewModel(
     fun proceedExpertMode() {
         val finalPatches = expertModePatches
         val finalOptions = expertModeOptions
+        // Strip UI-only empty strings (fields cleared via ✕) so the patcher engine
+        // receives null / no key for those options and falls back to its own default,
+        // rather than receiving a literal empty string.
+        val patcherOptions = finalOptions.sanitizeForPatcher()
         val repatchCallback = onRepatchProceed
         val selectedApp = expertModeSelectedApp
 
@@ -1839,7 +1844,7 @@ class HomeViewModel(
                     }
                 }
                 withContext(Dispatchers.Main) {
-                    repatchCallback(finalPatches, finalOptions)
+                    repatchCallback(finalPatches, patcherOptions)
                     cleanupExpertModeData()
                 }
             } else if (selectedApp != null) {
@@ -1858,7 +1863,7 @@ class HomeViewModel(
                     )
                 }
                 withContext(Dispatchers.Main) {
-                    proceedWithPatching(selectedApp, finalPatches, finalOptions)
+                    proceedWithPatching(selectedApp, finalPatches, patcherOptions)
                     cleanupExpertModeData()
                 }
             }
