@@ -576,7 +576,7 @@ class HomeViewModel(
     fun guardPatching(action: suspend () -> Unit) {
         // Check available storage first - low disk space is the most common cause of
         // cryptic "file not found" errors and corrupt output APKs during patching.
-        val lowDiskSpaceThresholdGb = 1f // Minimum free storage in GB required before patching
+        val lowDiskSpaceThresholdGb = 2f // Minimum free storage in GB required before patching
         val freeBytes = StatFs(app.filesDir.absolutePath).availableBytes
         val freeGb = freeBytes / (1024f * 1024f * 1024f)
         if (freeGb < lowDiskSpaceThresholdGb) {
