@@ -147,8 +147,7 @@ fun BundleManagementSheet(
     MorpheBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-        scrimColor = Color.Transparent
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
     ) {
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
@@ -692,16 +691,49 @@ private fun BundleCardHeader(
                 )
             }
 
-            // Version
+            // Version • date
             if (showChevron) {
-                bundle.version?.let { version ->
-                    Text(
-                        text = version.removePrefix("v"),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                val timestamp = bundle.updatedAt ?: bundle.createdAt
+                val versionText = bundle.version?.removePrefix("v")
+                val dateText = timestamp?.let { getRelativeTimeString(it) }
+                val subtitleText = listOfNotNull(versionText, dateText).joinToString("  •  ")
+                if (subtitleText.isNotEmpty()) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        if (versionText != null) {
+                            Text(
+                                text = versionText,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                        if (versionText != null && dateText != null) {
+                            Text(
+                                text = "  •  ",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        if (timestamp != null && dateText != null) {
+                            Icon(
+                                imageVector = if (bundle.updatedAt != null) Icons.Outlined.Schedule else Icons.Outlined.CalendarToday,
+                                contentDescription = null,
+                                modifier = Modifier.size(11.dp),
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = dateText,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    }
                 }
             }
 
@@ -735,23 +767,6 @@ private fun BundleCardHeader(
                         text = stringResource(R.string.update),
                         style = InfoBadgeStyle.Warning,
                         icon = null,
-                        isCompact = true
-                    )
-                }
-
-                // Date badge
-                bundle.updatedAt?.let { timestamp ->
-                    InfoBadge(
-                        text = getRelativeTimeString(timestamp),
-                        style = InfoBadgeStyle.Default,
-                        icon = Icons.Outlined.Schedule,
-                        isCompact = true
-                    )
-                } ?: bundle.createdAt?.let { timestamp ->
-                    InfoBadge(
-                        text = getRelativeTimeString(timestamp),
-                        style = InfoBadgeStyle.Default,
-                        icon = Icons.Outlined.CalendarToday,
                         isCompact = true
                     )
                 }
