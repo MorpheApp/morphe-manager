@@ -76,7 +76,7 @@ fun MorpheBottomSheet(
                 }
             }
         } else null,
-        contentWindowInsets = { WindowInsets(0) },
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
         content = content
     )
 }

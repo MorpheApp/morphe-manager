@@ -200,6 +200,7 @@ fun BundleManagementSheet(
                 state = listState,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .navigationBarsPadding()
                     .weight(1f, fill = false),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 contentPadding = PaddingValues(

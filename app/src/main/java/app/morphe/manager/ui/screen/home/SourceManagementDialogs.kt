@@ -659,6 +659,7 @@ fun BundlePatchesDialog(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .navigationBarsPadding()
                     .padding(horizontal = 16.dp)
             ) {
                 Text(
@@ -670,7 +671,7 @@ fun BundlePatchesDialog(
 
                 Spacer(Modifier.height(8.dp))
 
-                LazyColumn() {
+                LazyColumn(Modifier.padding(bottom = 16.dp)) {
                     item {
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             // "All" chip
