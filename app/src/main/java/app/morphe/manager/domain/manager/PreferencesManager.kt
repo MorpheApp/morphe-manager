@@ -1,5 +1,6 @@
 package app.morphe.manager.domain.manager
 
+import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import android.util.Log
@@ -14,6 +15,7 @@ import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
+import app.morphe.patcher.dex.BytecodeMode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
@@ -56,6 +58,16 @@ class PreferencesManager(
     val useExpertMode = booleanPreference("use_expert_mode", false)
 
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
+
+    /**
+     * Bytecode processing mode for the patcher.
+     * Defaults to [BytecodeMode.STRIP_FAST] on devices that don't support the process runtime
+     * or have 2 GB or less of RAM, and [BytecodeMode.STRIP_SAFE] otherwise.
+     */
+    val bytecodeModePreference = enumPreference(
+        "bytecode_mode",
+        defaultBytecodeModeFor(context)
+    )
 
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
@@ -162,6 +174,7 @@ class PreferencesManager(
         val useExpertMode: Boolean? = null,
         val backgroundUpdateNotifications: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
+        val bytecodeModePreference: BytecodeMode? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -192,7 +205,8 @@ class PreferencesManager(
         backgroundType = backgroundType.get(),
         useExpertMode = useExpertMode.get(),
         backgroundUpdateNotifications = backgroundUpdateNotifications.get(),
-        updateCheckInterval = updateCheckInterval.get()
+        updateCheckInterval = updateCheckInterval.get(),
+        bytecodeModePreference = bytecodeModePreference.get(),
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -224,6 +238,7 @@ class PreferencesManager(
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.backgroundUpdateNotifications?.let { backgroundUpdateNotifications.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
+        snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
     }
 
     companion object {
@@ -232,6 +247,24 @@ class PreferencesManager(
          */
         fun isDevVersion(): Boolean {
             return BuildConfig.VERSION_NAME.contains("-dev", ignoreCase = true)
+        }
+
+        /**
+         * Calculates the default [BytecodeMode] for a device.
+         * Uses [BytecodeMode.STRIP_FAST] on devices that don't support the process runtime
+         * (Android 10 and below, or ARMv7) or have 2 GB or less of total RAM.
+         * Falls back to [BytecodeMode.STRIP_SAFE] on all other devices.
+         */
+        fun defaultBytecodeModeFor(context: Context): BytecodeMode {
+            val processRuntimeSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
+            if (!processRuntimeSupported) return BytecodeMode.STRIP_FAST
+
+            val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            val memInfo = ActivityManager.MemoryInfo()
+            activityManager.getMemoryInfo(memInfo)
+            val totalRamMb = memInfo.totalMem / (1024 * 1024)
+
+            return if (totalRamMb <= 2048) BytecodeMode.STRIP_FAST else BytecodeMode.STRIP_SAFE
         }
     }
 }

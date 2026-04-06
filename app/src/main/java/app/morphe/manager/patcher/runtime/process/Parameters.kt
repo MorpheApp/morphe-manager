@@ -2,6 +2,7 @@ package app.morphe.manager.patcher.runtime.process
 
 import android.os.Parcelable
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.patcher.dex.BytecodeMode
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
@@ -15,6 +16,7 @@ data class Parameters(
     val outputFile: String,
     val configurations: List<PatchConfiguration>,
     val stripNativeLibs: Boolean,
+    val bytecodeMode: BytecodeMode,
 ) : Parcelable
 
 @Parcelize

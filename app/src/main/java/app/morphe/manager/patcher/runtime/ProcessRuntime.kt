@@ -263,7 +263,8 @@ class ProcessRuntime(
                         options[uid].orEmpty()
                     )
                 },
-                stripNativeLibs = stripNativeLibs
+                stripNativeLibs = stripNativeLibs,
+                bytecodeMode = prefs.bytecodeModePreference.get(),
             )
 
             binder.start(parameters, eventHandler)

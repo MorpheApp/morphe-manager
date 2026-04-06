@@ -78,7 +78,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                 logger,
                 preparation.file,
                 onPatchCompleted = onPatchCompleted,
-                onProgress
+                onProgress,
+                bytecodeMode = prefs.bytecodeModePreference.get(),
             ).use { session ->
                 session.run(
                     File(outputFile),

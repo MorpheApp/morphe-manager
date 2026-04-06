@@ -11,6 +11,7 @@ import app.morphe.manager.patcher.Session.Companion.component1
 import app.morphe.manager.patcher.Session.Companion.component2
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.ui.model.State
+import app.morphe.patcher.dex.BytecodeMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.Closeable
@@ -28,7 +29,8 @@ class Session(
     private val logger: Logger,
     private val input: File,
     private val onPatchCompleted: suspend () -> Unit,
-    private val onProgress: (name: String?, state: State?, message: String?) -> Unit
+    private val onProgress: (name: String?, state: State?, message: String?) -> Unit,
+    bytecodeMode: BytecodeMode = BytecodeMode.STRIP_SAFE,
 ) : Closeable {
     private fun updateProgress(name: String? = null, state: State? = null, message: String? = null) =
         onProgress(name, state, message)
@@ -39,7 +41,8 @@ class Session(
             apkFile = input,
             temporaryFilesPath = tempDir,
             frameworkFileDirectory = frameworkDir,
-            aaptBinaryPath = aaptPath
+            aaptBinaryPath = aaptPath,
+            useBytecodeMode = bytecodeMode,
         )
     )
 

@@ -103,7 +103,8 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     onPatchCompleted = { events.patchSucceeded() },
                     onProgress = { name, state, message ->
                         events.progress(name, state?.name, message)
-                    }
+                    },
+                    bytecodeMode = parameters.bytecodeMode,
                 ).use {
                     it.run(File(parameters.outputFile), patchList)
                 }
