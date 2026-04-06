@@ -651,7 +651,7 @@ fun BundlePatchesDialog(
 
     // App filter bottom sheet
     if (showFilterSheet.value) {
-        ModalBottomSheet(
+        MorpheBottomSheet(
             onDismissRequest = { showFilterSheet.value = false },
             sheetState = sheetState,
             containerColor = MaterialTheme.colorScheme.surfaceContainerHigh

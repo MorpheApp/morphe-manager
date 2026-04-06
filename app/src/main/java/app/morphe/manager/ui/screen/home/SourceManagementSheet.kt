@@ -14,7 +14,6 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -34,9 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.zIndex
-import sh.calvin.reorderable.ReorderableItem
-import sh.calvin.reorderable.rememberReorderableLazyListState
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
@@ -49,6 +45,7 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.APIPatchBundle
@@ -58,12 +55,9 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvat
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
-import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.ui.screen.shared.ActionPillButton
-import app.morphe.manager.ui.screen.shared.InfoBadge
-import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
@@ -71,6 +65,8 @@ import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
+import sh.calvin.reorderable.ReorderableItem
+import sh.calvin.reorderable.rememberReorderableLazyListState
 
 /**
  * Bottom sheet for managing patch bundles.
@@ -148,7 +144,7 @@ fun BundleManagementSheet(
         }
     }
 
-    ModalBottomSheet(
+    MorpheBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
@@ -200,101 +196,99 @@ fun BundleManagementSheet(
                 Spacer(Modifier.height(8.dp))
             }
 
-            // Bundle cards - scrollable area with disabled overscroll
-            CompositionLocalProvider(LocalOverscrollFactory provides null) {
-                LazyColumn(
-                    state = listState,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f, fill = false),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = 16.dp
-                    )
-                ) {
-                    items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
-                        val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
-                            bundleInfo[bundle.uid]?.patches?.any { patch ->
-                                patch.compatiblePackages?.any { pkg ->
-                                    pkg.experimentalVersions?.isNotEmpty() == true
-                                } == true
+            // Bundle cards
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f, fill = false),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 16.dp
+                )
+            ) {
+                items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
+                    val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
+                        bundleInfo[bundle.uid]?.patches?.any { patch ->
+                            patch.compatiblePackages?.any { pkg ->
+                                pkg.experimentalVersions?.isNotEmpty() == true
                             } == true
-                        }
-                        val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
+                        } == true
+                    }
+                    val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
 
-                        ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
-                            BundleManagementCard(
-                                bundle = bundle,
-                                patchCount = patchCounts[bundle.uid] ?: 0,
-                                updateInfo = manualUpdateInfo[bundle.uid],
-                                isUpdating = bundle.uid in activeUpdateUids,
-                                expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids,
-                                onToggleExpanded = {
-                                    expandedBundleUids = if (bundle.uid in expandedBundleUids) {
-                                        expandedBundleUids - bundle.uid
-                                    } else {
-                                        expandedBundleUids + bundle.uid
+                    ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
+                        BundleManagementCard(
+                            bundle = bundle,
+                            patchCount = patchCounts[bundle.uid] ?: 0,
+                            updateInfo = manualUpdateInfo[bundle.uid],
+                            isUpdating = bundle.uid in activeUpdateUids,
+                            expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids,
+                            onToggleExpanded = {
+                                expandedBundleUids = if (bundle.uid in expandedBundleUids) {
+                                    expandedBundleUids - bundle.uid
+                                } else {
+                                    expandedBundleUids + bundle.uid
+                                }
+                            },
+                            onDelete = { bundleToDelete.value = bundle },
+                            onDisable = { onDisable(bundle) },
+                            onUpdate = { onUpdate(bundle) },
+                            onRename = { onRename(bundle) },
+                            onPrereleasesToggle = when {
+                                bundle is JsonPatchBundle && bundle.supportsPrerelease ||
+                                        bundle is APIPatchBundle -> { usePrerelease ->
+                                    if (bundle.uid == bundleToShowChangelogUid) {
+                                        bundleToShowChangelogUid = null
                                     }
+                                    bundle.clearChangelogCache()
+                                    scope.launch { patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease) }
+                                }
+                                else -> null
+                            },
+                            onExperimentalVersionsToggle = if (hasExperimentalVersions) {
+                                { useExperimental ->
+                                    scope.launch {
+                                        patchBundleRepository.setUseExperimentalVersions(bundle.uid, useExperimental)
+                                    }
+                                }
+                            } else null,
+                            hasExperimentalVersions = hasExperimentalVersions,
+                            useExperimentalVersions = useExperimentalVersions,
+                            onPatchesClick = { bundleToShowPatches.value = bundle },
+                            onVersionClick = {
+                                if (bundle is RemotePatchBundle) {
+                                    bundleToShowChangelogUid = bundle.uid
+                                }
+                            },
+                            onOpenInBrowser = {
+                                val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
+                                    ?: (bundle as? RemotePatchBundle)?.let { remote ->
+                                        RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
+                                    }
+                                    ?: SOURCE_REPO_URL
+                                try {
+                                    uriHandler.openUri(pageUrl)
+                                } catch (_: Exception) {
+                                    context.toast(context.getString(R.string.sources_management_failed_to_open_url))
+                                }
+                            },
+                            forceExpanded = isSingleDefaultBundle,
+                            isDragging = itemIsDragging,
+                            longPressModifier = Modifier.longPressDraggableHandle(
+                                onDragStarted = {
+                                    isDragging = true
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 },
-                                onDelete = { bundleToDelete.value = bundle },
-                                onDisable = { onDisable(bundle) },
-                                onUpdate = { onUpdate(bundle) },
-                                onRename = { onRename(bundle) },
-                                onPrereleasesToggle = when {
-                                    bundle is JsonPatchBundle && bundle.supportsPrerelease ||
-                                            bundle is APIPatchBundle -> { usePrerelease ->
-                                        if (bundle.uid == bundleToShowChangelogUid) {
-                                            bundleToShowChangelogUid = null
-                                        }
-                                        bundle.clearChangelogCache()
-                                        scope.launch { patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease) }
-                                    }
-                                    else -> null
-                                },
-                                onExperimentalVersionsToggle = if (hasExperimentalVersions) {
-                                    { useExperimental ->
-                                        scope.launch {
-                                            patchBundleRepository.setUseExperimentalVersions(bundle.uid, useExperimental)
-                                        }
-                                    }
-                                } else null,
-                                hasExperimentalVersions = hasExperimentalVersions,
-                                useExperimentalVersions = useExperimentalVersions,
-                                onPatchesClick = { bundleToShowPatches.value = bundle },
-                                onVersionClick = {
-                                    if (bundle is RemotePatchBundle) {
-                                        bundleToShowChangelogUid = bundle.uid
-                                    }
-                                },
-                                onOpenInBrowser = {
-                                    val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
-                                        ?: (bundle as? RemotePatchBundle)?.let { remote ->
-                                            RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
-                                        }
-                                        ?: SOURCE_REPO_URL
-                                    try {
-                                        uriHandler.openUri(pageUrl)
-                                    } catch (_: Exception) {
-                                        context.toast(context.getString(R.string.sources_management_failed_to_open_url))
-                                    }
-                                },
-                                forceExpanded = isSingleDefaultBundle,
-                                isDragging = itemIsDragging,
-                                longPressModifier = Modifier.longPressDraggableHandle(
-                                    onDragStarted = {
-                                        isDragging = true
-                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                    },
-                                    onDragStopped = {
-                                        isDragging = false
-                                        onReorder(localOrder)
-                                    }
-                                ),
-                                modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
-                            )
-                        }
+                                onDragStopped = {
+                                    isDragging = false
+                                    onReorder(localOrder)
+                                }
+                            ),
+                            modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
+                        )
                     }
                 }
             }
