@@ -142,8 +142,8 @@ fun UpdatesSettingsItem(
     // Check frequency interval selector (non-GMS only)
     AnimatedVisibility(
         visible = backgroundUpdateNotifications && !settingsViewModel.hasGms,
-        enter = expandVertically(animationSpec = tween(300)) + fadeIn(animationSpec = tween(300)),
-        exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
+        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         RichSettingsItem(
             onClick = { showIntervalDialog.value = true },

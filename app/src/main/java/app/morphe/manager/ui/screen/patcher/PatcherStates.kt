@@ -17,9 +17,9 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -37,6 +37,18 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 
+/**
+ * Snapshot of patched-app metadata shown in the error dialog.
+ */
+data class PatcherErrorInfo(
+    val appName: String,
+    val packageName: String,
+    val appVersion: String,
+    val bundles: List<BundleInfo>
+) {
+    data class BundleInfo(val name: String, val version: String?)
+}
+
 /** Enum for patcher states. */
 enum class PatcherState {
     IN_PROGRESS,
@@ -53,8 +65,9 @@ class MorphePatcherState(
     val viewModel: PatcherViewModel
 ) {
     // Error handling
-    var showErrorBottomSheet by mutableStateOf(false)
+    var showErrorDialog by mutableStateOf(false)
     var errorMessage by mutableStateOf("")
+    var errorInfo by mutableStateOf<PatcherErrorInfo?>(null)
     var hasPatchingError by mutableStateOf(false)
 
     // Cancel dialog
@@ -450,8 +463,8 @@ private fun SuccessErrorMessage(
 ) {
     AnimatedVisibility(
         visible = errorMessage != null && installState is InstallViewModel.InstallState.Error,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(300))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         errorMessage?.let { message ->
             Surface(
@@ -481,8 +494,8 @@ private fun SuccessRootWarning(
 ) {
     AnimatedVisibility(
         visible = usingMountInstall && installState is InstallViewModel.InstallState.Ready,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(300))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         InfoBadge(
             text = stringResource(R.string.root_gmscore_excluded),
@@ -622,8 +635,8 @@ private fun getSubtitleForState(
  */
 @Composable
 fun PatchingFailed(
-    state: MorphePatcherState,
-    onHomeClick: () -> Unit
+    onHomeClick: () -> Unit,
+    onErrorClick: () -> Unit
 ) {
     val windowSize = rememberWindowSize()
 
@@ -681,7 +694,7 @@ fun PatchingFailed(
                 onCancelClick = {},
                 onHomeClick = onHomeClick,
                 onSaveClick = {},
-                onErrorClick = { state.showErrorBottomSheet = true }
+                onErrorClick = onErrorClick
             )
         }
     }

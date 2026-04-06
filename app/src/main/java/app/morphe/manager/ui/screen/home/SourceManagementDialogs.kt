@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -478,12 +479,22 @@ fun BundlePatchesDialog(
                                         "${filteredPatches.size}/${patches.size}"
                                     else
                                         "${patches.size}"
-                                    Text(
-                                        text = "$countText ${stringResource(R.string.patches).lowercase()}",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.primary,
-                                        fontWeight = FontWeight.Medium
-                                    )
+                                    val patchesLabel = stringResource(R.string.patches).lowercase()
+                                    AnimatedContent(
+                                        targetState = countText,
+                                        transitionSpec = {
+                                            (fadeIn(tween(200)) + slideInVertically(tween(200)) { -it / 2 })
+                                                .togetherWith(fadeOut(tween(150)) + slideOutVertically(tween(150)) { it / 2 })
+                                        },
+                                        label = "patch_count"
+                                    ) { count ->
+                                        Text(
+                                            text = "$count $patchesLabel",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.primary,
+                                            fontWeight = FontWeight.Medium
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -544,9 +555,16 @@ fun BundlePatchesDialog(
                 }
 
                 // Active filter badges
-                if (selectedPackages.isNotEmpty()) {
-                    item {
-                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                item(key = "filter_badges") {
+                    AnimatedVisibility(
+                        visible = selectedPackages.isNotEmpty(),
+                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                    ) {
+                        FlowRow(
+                            modifier = Modifier.padding(bottom = 4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
                             selectedPackages.forEach { pkg ->
                                 val label = appLabels[pkg] ?: pkg
                                 InputChip(
@@ -567,8 +585,12 @@ fun BundlePatchesDialog(
                 }
 
                 // Empty state
-                if (filteredPatches.isEmpty()) {
-                    item {
+                item(key = "empty_state") {
+                    AnimatedVisibility(
+                        visible = filteredPatches.isEmpty(),
+                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(tween(MorpheDefaults.ANIMATION_DURATION), initialScale = 0.92f),
+                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(tween(MorpheDefaults.ANIMATION_DURATION), targetScale = 0.92f)
+                    ) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -615,7 +637,12 @@ fun BundlePatchesDialog(
                         expandVersions = expandVersions,
                         onExpandVersions = { expandVersions = !expandVersions },
                         expandOptions = expandOptions,
-                        onExpandOptions = { expandOptions = !expandOptions }
+                        onExpandOptions = { expandOptions = !expandOptions },
+                        modifier = Modifier.animateItem(
+                            fadeInSpec = tween(220),
+                            fadeOutSpec = tween(180),
+                            placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
+                        )
                     )
                 }
             }
@@ -626,51 +653,56 @@ fun BundlePatchesDialog(
     if (showFilterSheet.value) {
         ModalBottomSheet(
             onDismissRequest = { showFilterSheet.value = false },
-            sheetState = sheetState
+            sheetState = sheetState,
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .padding(bottom = 32.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
                     text = stringResource(R.string.filter),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    color = LocalDialogTextColor.current
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    // "All" chip
-                    FilterChip(
-                        selected = selectedPackages.isEmpty(),
-                        onClick = { selectedPackages = emptySet() },
-                        label = { Text(stringResource(R.string.all)) },
-                        leadingIcon = if (selectedPackages.isEmpty()) {
-                            { Icon(Icons.Outlined.DoneAll, null, Modifier.size(16.dp)) }
-                        } else null
-                    )
-                    // Per-app chips
-                    appLabels.entries
-                        .sortedBy { it.value }
-                        .forEach { (pkg, label) ->
-                            val isSelected = pkg in selectedPackages
+                Spacer(Modifier.height(8.dp))
+
+                LazyColumn() {
+                    item {
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            // "All" chip
                             FilterChip(
-                                selected = isSelected,
-                                onClick = {
-                                    selectedPackages = if (isSelected)
-                                        selectedPackages - pkg
-                                    else
-                                        selectedPackages + pkg
-                                },
-                                label = { Text(label) },
-                                leadingIcon = if (isSelected) {
-                                    { Icon(Icons.Outlined.Done, null, Modifier.size(16.dp)) }
+                                selected = selectedPackages.isEmpty(),
+                                onClick = { selectedPackages = emptySet() },
+                                label = { Text(stringResource(R.string.all)) },
+                                leadingIcon = if (selectedPackages.isEmpty()) {
+                                    { Icon(Icons.Outlined.DoneAll, null, Modifier.size(16.dp)) }
                                 } else null
                             )
+                            // Per-app chips
+                            appLabels.entries
+                                .sortedBy { it.value }
+                                .forEach { (pkg, label) ->
+                                    val isSelected = pkg in selectedPackages
+                                    FilterChip(
+                                        selected = isSelected,
+                                        onClick = {
+                                            selectedPackages = if (isSelected)
+                                                selectedPackages - pkg
+                                            else
+                                                selectedPackages + pkg
+                                        },
+                                        label = { Text(label) },
+                                        leadingIcon = if (isSelected) {
+                                            { Icon(Icons.Outlined.Done, null, Modifier.size(16.dp)) }
+                                        } else null
+                                    )
+                                }
                         }
+                    }
                 }
             }
         }
@@ -843,8 +875,8 @@ private fun PatchItemCard(
             if (!patch.options.isNullOrEmpty()) {
                 AnimatedVisibility(
                     visible = expandOptions,
-                    enter = expandVertically(tween(300)) + fadeIn(tween(300)),
-                    exit = shrinkVertically(tween(300)) + fadeOut(tween(300))
+                    enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     Column(
                         modifier = Modifier.padding(top = 4.dp),

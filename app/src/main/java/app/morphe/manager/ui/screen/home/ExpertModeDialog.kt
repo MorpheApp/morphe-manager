@@ -29,6 +29,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -51,46 +52,53 @@ import kotlinx.coroutines.launch
  * Advanced patch selection and configuration dialog.
  * Shown before patching when expert mode is enabled.
  */
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun ExpertModeDialog(
-    bundles: List<PatchBundleInfo.Scoped>,
-    selectedPatches: PatchSelection,
+    newPatches: Map<Int, Set<String>> = emptyMap(),
     options: Options,
+    allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>,
+    totalSelectedCount: Int,
+    totalPatchesCount: Int,
+    hasMultipleBundles: Boolean,
     onPatchToggle: (bundleUid: Int, patchName: String) -> Unit,
+    onSelectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    onDeselectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    onResetToDefault: (bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) -> Unit,
     onOptionChange: (bundleUid: Int, patchName: String, optionKey: String, value: Any?) -> Unit,
     onResetOptions: (bundleUid: Int, patchName: String) -> Unit,
     onDismiss: () -> Unit,
-    onProceed: () -> Unit,
-    allowIncompatible: Boolean = false
+    onProceed: () -> Unit
 ) {
     val selectedPatchForOptions = remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
     var searchVisible by remember { mutableStateOf(false) }
     val showMultipleSourcesWarning = remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
-    // Create local mutable state from incoming selectedPatches
-    var localSelectedPatches by remember(selectedPatches) {
-        mutableStateOf(selectedPatches.toMap())
-    }
-
-    // Get all patches with their enabled state
-    val allPatchesInfo = remember(bundles, localSelectedPatches, allowIncompatible) {
-        bundles.map { bundle ->
-            val selected = localSelectedPatches[bundle.uid] ?: emptySet()
-            // In Expert mode, always show all patches (force allowIncompatible = true)
-            val patches = bundle.patchSequence(true)
-                .map { patch -> patch to (patch.name in selected) }
-                .sortedBy { (patch, _) -> patch.name } // Sort patches alphabetically
-                .toList()
-
-            bundle to patches
-        }.filter { it.second.isNotEmpty() }
-            .sortedByDescending { (bundle, _) -> bundle.compatible.size }
+    // Compute set of enabled patch names that have at least one required option
+    // with no default (default == null) and no user-provided non-blank value.
+    // Recomputed whenever the selected patches or options change.
+    val patchesWithMissingRequired: Set<String> = remember(allPatchesInfo, options) {
+        buildSet {
+            allPatchesInfo.forEach { (bundle, patches) ->
+                patches.forEach { (patch, isEnabled) ->
+                    if (!isEnabled) return@forEach
+                    val patchValues = options[bundle.uid]?.get(patch.name)
+                    val hasMissing = patch.options?.any { option ->
+                        if (!option.required) return@any false
+                        val savedValue = patchValues?.get(option.key)
+                        val effectiveValue = savedValue ?: option.default
+                        effectiveValue == null || (effectiveValue is String && effectiveValue.isBlank())
+                    } == true
+                    if (hasMissing) add(patch.name)
+                }
+            }
+        }
     }
 
     // Filter patches based on search query
-    val filteredPatchesInfo = remember(allPatchesInfo, searchQuery, localSelectedPatches) {
+    val filteredPatchesInfo = remember(allPatchesInfo, searchQuery) {
         if (searchQuery.isBlank()) {
             allPatchesInfo
         } else {
@@ -102,56 +110,6 @@ fun ExpertModeDialog(
                 if (filtered.isEmpty()) null else bundle to filtered
             }
         }
-    }
-
-    val totalSelectedCount = localSelectedPatches.values.sumOf { it.size }
-    val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
-
-    // Check if multiple bundles are selected
-    val hasMultipleBundles = localSelectedPatches.count { (_, patches) -> patches.isNotEmpty() } > 1
-
-    // Patch manipulation helpers
-    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val map = localSelectedPatches.toMutableMap()
-        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (!enabled) set.add(patch.name) }
-        map[bundleUid] = set
-        localSelectedPatches = map
-    }
-
-    fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val map = localSelectedPatches.toMutableMap()
-        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (enabled) set.remove(patch.name) }
-        if (set.isEmpty()) map.remove(bundleUid) else map[bundleUid] = set
-        localSelectedPatches = map
-    }
-
-    fun resetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) {
-        val defaults = allPatches.filter { (patch, _) -> patch.include }.map { (patch, _) -> patch.name }.toSet()
-        val map = localSelectedPatches.toMutableMap()
-        if (defaults.isEmpty()) map.remove(bundleUid) else map[bundleUid] = defaults
-        localSelectedPatches = map
-    }
-
-    fun togglePatch(bundleUid: Int, patchName: String) {
-        val map = localSelectedPatches.toMutableMap()
-        val set = map[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        if (patchName in set) set.remove(patchName) else set.add(patchName)
-        if (set.isEmpty()) map.remove(bundleUid) else map[bundleUid] = set
-        localSelectedPatches = map
-    }
-
-    fun syncAndProceed() {
-        localSelectedPatches.forEach { (bundleUid, patches) ->
-            val original = selectedPatches[bundleUid] ?: emptySet()
-            patches.forEach { if (it !in original) onPatchToggle(bundleUid, it) }
-            original.forEach { if (it !in patches) onPatchToggle(bundleUid, it) }
-        }
-        selectedPatches.forEach { (bundleUid, patches) ->
-            if (bundleUid !in localSelectedPatches) patches.forEach { onPatchToggle(bundleUid, it) }
-        }
-        onProceed()
     }
 
     MorpheDialog(
@@ -207,8 +165,8 @@ fun ExpertModeDialog(
             // Search bar
             AnimatedVisibility(
                 visible = searchVisible,
-                enter = expandVertically(animationSpec = tween(250)) + fadeIn(tween(250)),
-                exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(tween(200))
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 MorpheDialogTextField(
                     value = searchQuery,
@@ -230,8 +188,7 @@ fun ExpertModeDialog(
             val hasMultipleBundleLayout = allPatchesInfo.size > 1
 
             if (!hasMultipleBundleLayout) {
-                // Single bundle
-                val (bundle, allPatches) = allPatchesInfo.first()
+                val (bundle, allPatches) = allPatchesInfo.firstOrNull() ?: return@Column
                 val filteredPatches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
                 val displayPatches = filteredPatches ?: emptyList()
                 val enabledCount = displayPatches.count { it.second }
@@ -269,9 +226,9 @@ fun ExpertModeDialog(
                 BundlePatchControls(
                     enabledCount = enabledCount,
                     totalCount = totalCount,
-                    onSelectAll = { selectAll(bundle.uid, displayPatches) },
-                    onDeselectAll = { deselectAll(bundle.uid, displayPatches) },
-                    onResetToDefault = { resetToDefault(bundle.uid, allPatches) }
+                    onSelectAll = { onSelectAll(bundle.uid, displayPatches) },
+                    onDeselectAll = { onDeselectAll(bundle.uid, displayPatches) },
+                    onResetToDefault = { onResetToDefault(bundle.uid, allPatches) }
                 )
 
                 if (filteredPatches == null) {
@@ -291,7 +248,9 @@ fun ExpertModeDialog(
                     ) {
                         PatchListWithUniversalSection(
                             patches = filteredPatches,
-                            onToggle = { togglePatch(bundle.uid, it) },
+                            newPatchNames = newPatches[bundle.uid] ?: emptySet(),
+                            missingRequiredOptions = patchesWithMissingRequired,
+                            onToggle = { onPatchToggle(bundle.uid, it) },
                             onConfigureOptions = {
                                 if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
                             }
@@ -364,16 +323,16 @@ fun ExpertModeDialog(
 
                     // Controls fixed below the tab row
                     val currentIndex = pagerState.currentPage
-                    val (currentBundle, currentAllPatches) = allPatchesInfo[currentIndex]
+                    val (currentBundle, currentAllPatches) = allPatchesInfo.getOrNull(currentIndex) ?: return@Column
                     val currentFiltered = filteredPatchesInfo.firstOrNull { it.first.uid == currentBundle.uid }?.second
 
                     if (currentFiltered != null) {
                         BundlePatchControls(
                             enabledCount = currentFiltered.count { it.second },
                             totalCount = currentFiltered.size,
-                            onSelectAll = { selectAll(currentBundle.uid, currentFiltered) },
-                            onDeselectAll = { deselectAll(currentBundle.uid, currentFiltered) },
-                            onResetToDefault = { resetToDefault(currentBundle.uid, currentAllPatches) },
+                            onSelectAll = { onSelectAll(currentBundle.uid, currentFiltered) },
+                            onDeselectAll = { onDeselectAll(currentBundle.uid, currentFiltered) },
+                            onResetToDefault = { onResetToDefault(currentBundle.uid, currentAllPatches) },
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
                     } else {
@@ -388,7 +347,7 @@ fun ExpertModeDialog(
                             .fillMaxWidth()
                             .weight(1f)
                     ) { pageIndex ->
-                        val (bundle, _) = allPatchesInfo[pageIndex]
+                        val (bundle, _) = allPatchesInfo.getOrNull(pageIndex) ?: return@HorizontalPager
                         val patches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
 
                         if (patches == null) {
@@ -407,7 +366,9 @@ fun ExpertModeDialog(
                             ) {
                                 PatchListWithUniversalSection(
                                     patches = patches,
-                                    onToggle = { togglePatch(bundle.uid, it) },
+                                    newPatchNames = newPatches[bundle.uid] ?: emptySet(),
+                                    missingRequiredOptions = patchesWithMissingRequired,
+                                    onToggle = { onPatchToggle(bundle.uid, it) },
                                     onConfigureOptions = {
                                         if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
                                     }
@@ -426,7 +387,7 @@ fun ExpertModeDialog(
                     if (hasMultipleBundles) {
                         showMultipleSourcesWarning.value = true
                     } else {
-                        syncAndProceed()
+                        onProceed()
                     }
                 },
                 enabled = totalSelectedCount > 0,
@@ -442,7 +403,7 @@ fun ExpertModeDialog(
             onDismiss = { showMultipleSourcesWarning.value = false },
             onProceed = {
                 showMultipleSourcesWarning.value = false
-                syncAndProceed()
+                onProceed()
             }
         )
     }
@@ -459,7 +420,13 @@ fun ExpertModeDialog(
             onReset = {
                 onResetOptions(bundleUid, patch.name)
             },
-            onDismiss = { selectedPatchForOptions.value = null }
+            onDismiss = {
+                // Show a toast if the patch still has unfilled required options
+                if (patch.name in patchesWithMissingRequired) {
+                    context.toast(context.getString(R.string.patch_option_required_missing, patch.name))
+                }
+                selectedPatchForOptions.value = null
+            }
         )
     }
 }
@@ -471,6 +438,8 @@ fun ExpertModeDialog(
 @Composable
 private fun PatchListWithUniversalSection(
     patches: List<Pair<PatchInfo, Boolean>>,
+    newPatchNames: Set<String> = emptySet(),
+    missingRequiredOptions: Set<String> = emptySet(),
     onToggle: (String) -> Unit,
     onConfigureOptions: (PatchInfo) -> Unit,
 ) {
@@ -478,21 +447,37 @@ private fun PatchListWithUniversalSection(
         patches.partition { (patch, _) -> !patch.compatiblePackages.isNullOrEmpty() }
     }
 
-    regular.forEach { (patch, isEnabled) ->
+    // New patches float to the top; within each group order is alphabetical
+    val sortedRegular = remember(regular, newPatchNames) {
+        regular.sortedWith(
+            compareByDescending<Pair<PatchInfo, Boolean>> { (patch, _) -> patch.name in newPatchNames }
+                .thenBy { (patch, _) -> patch.name }
+        )
+    }
+    val sortedUniversal = remember(universal, newPatchNames) {
+        universal.sortedWith(
+            compareByDescending<Pair<PatchInfo, Boolean>> { (patch, _) -> patch.name in newPatchNames }
+                .thenBy { (patch, _) -> patch.name }
+        )
+    }
+
+    sortedRegular.forEach { (patch, isEnabled) ->
         PatchCard(
             patch = patch,
             isEnabled = isEnabled,
+            isNew = patch.name in newPatchNames,
+            hasRequiredOptionsMissing = patch.name in missingRequiredOptions,
             onToggle = { onToggle(patch.name) },
             onConfigureOptions = { onConfigureOptions(patch) },
             hasOptions = !patch.options.isNullOrEmpty()
         )
     }
 
-    if (universal.isNotEmpty()) {
+    if (sortedUniversal.isNotEmpty()) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = if (regular.isNotEmpty()) 8.dp else 0.dp, bottom = 4.dp),
+                .padding(top = if (sortedRegular.isNotEmpty()) 8.dp else 0.dp, bottom = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
@@ -514,10 +499,12 @@ private fun PatchListWithUniversalSection(
             )
         }
 
-        universal.forEach { (patch, isEnabled) ->
+        sortedUniversal.forEach { (patch, isEnabled) ->
             PatchCard(
                 patch = patch,
                 isEnabled = isEnabled,
+                isNew = patch.name in newPatchNames,
+                hasRequiredOptionsMissing = patch.name in missingRequiredOptions,
                 onToggle = { onToggle(patch.name) },
                 onConfigureOptions = { onConfigureOptions(patch) },
                 hasOptions = !patch.options.isNullOrEmpty()
@@ -587,6 +574,8 @@ private fun BundlePatchControls(
 private fun PatchCard(
     patch: PatchInfo,
     isEnabled: Boolean,
+    isNew: Boolean = false,
+    hasRequiredOptionsMissing: Boolean = false,
     onToggle: () -> Unit,
     onConfigureOptions: () -> Unit,
     hasOptions: Boolean
@@ -600,6 +589,15 @@ private fun PatchCard(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
+            .then(
+                if (hasRequiredOptionsMissing && isEnabled)
+                    Modifier.border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.error.copy(alpha = 0.6f),
+                        shape = RoundedCornerShape(14.dp)
+                    )
+                else Modifier
+            )
             .clip(RoundedCornerShape(14.dp))
             .clickable(onClick = onToggle)
             .semantics {
@@ -607,10 +605,11 @@ private fun PatchCard(
                 contentDescription = "${patch.name}, $patchState"
             },
         shape = RoundedCornerShape(14.dp),
-        color = if (isEnabled) {
-            MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
-        } else {
-            MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp).copy(alpha = 0.5f)
+        color = when {
+            isNew && isEnabled -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.55f)
+            isNew -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f)
+            isEnabled -> MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+            else -> MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp).copy(alpha = 0.5f)
         },
         contentColor = if (isEnabled) {
             MaterialTheme.colorScheme.onSurface
@@ -633,15 +632,29 @@ private fun PatchCard(
                     .padding(end = if (hasOptions) 8.dp else 0.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(
-                    text = patch.name,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color = if (isEnabled)
-                        LocalDialogTextColor.current
-                    else
-                        LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f)
-                )
+                // Name row: patch name + "New" badge inline
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Text(
+                        text = patch.name,
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold,
+                        color = if (isEnabled)
+                            LocalDialogTextColor.current
+                        else
+                            LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f),
+                        modifier = Modifier.weight(1f, fill = false)
+                    )
+                    if (isNew) {
+                        InfoBadge(
+                            text = stringResource(R.string.expert_mode_new_patches),
+                            style = InfoBadgeStyle.Primary,
+                            isCompact = true
+                        )
+                    }
+                }
 
                 if (!patch.description.isNullOrBlank()) {
                     Text(
@@ -669,8 +682,14 @@ private fun PatchCard(
                         },
                     enabled = isEnabled,
                     colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
-                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        containerColor = if (hasRequiredOptionsMissing && isEnabled)
+                            MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.8f)
+                        else
+                            MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
+                        contentColor = if (hasRequiredOptionsMissing && isEnabled)
+                            MaterialTheme.colorScheme.error
+                        else
+                            MaterialTheme.colorScheme.onSecondaryContainer,
                         disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
                         disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
                     )
@@ -891,7 +910,8 @@ private fun PatchOptionsDialog(
                             presets = presets,
                             packageName = packageName,
                             isDefaultBundle = isDefaultBundle,
-                            onValueChange = { onValueChange(key, it.ifBlank { null }) }
+                            required = option.required,
+                            onValueChange = { onValueChange(key, it) }
                         )
                     }
 
@@ -912,17 +932,22 @@ private fun PatchOptionsDialog(
                         value = value?.toString() ?: "",
                         packageName = packageName,
                         isDefaultBundle = isDefaultBundle,
-//                        required = option.required,
-                        onValueChange = { onValueChange(key, it.ifBlank { null }) }
+                        required = option.required,
+                        onValueChange = { onValueChange(key, it) }
                     )
 
                     OptionKind.StringText -> TextInputOption(
                         title = option.title,
-//                        description = option.description,
                         value = value?.toString() ?: "",
-//                        required = option.required,
+                        required = option.required,
                         keyboardType = KeyboardType.Text,
-                        onValueChange = { onValueChange(key, it.ifBlank { null }) }
+                        // Pass "" explicitly so the field stays visually cleared after
+                        // the user taps ✕. updateOption stores "" as a valid value (key
+                        // is kept in the map), which prevents the repository from re-injecting
+                        // the bundled default on the next load.
+                        // "" is stripped back to null (→ patcher default) in
+                        // Options.sanitizeForPatcher() before being sent to the patcher.
+                        onValueChange = { onValueChange(key, it) }
                     )
 
                     OptionKind.BooleanToggle -> BooleanOptionItem(
@@ -934,18 +959,16 @@ private fun PatchOptionsDialog(
 
                     OptionKind.IntLong -> TextInputOption(
                         title = option.title,
-//                        description = option.description,
                         value = (value as? Number)?.toLong()?.toString() ?: "",
-//                        required = option.required,
+                        required = option.required,
                         keyboardType = KeyboardType.Number,
                         onValueChange = { it.toLongOrNull()?.let { num -> onValueChange(key, num) } }
                     )
 
                     OptionKind.FloatDouble -> TextInputOption(
                         title = option.title,
-//                        description = option.description,
                         value = (value as? Number)?.toFloat()?.toString() ?: "",
-//                        required = option.required,
+                        required = option.required,
                         keyboardType = KeyboardType.Decimal,
                         onValueChange = { it.toFloatOrNull()?.let { num -> onValueChange(key, num) } }
                     )
@@ -1184,11 +1207,12 @@ private fun PathInputOption(
     value: String,
     packageName: String,
     isDefaultBundle: Boolean,
-//    required: Boolean,
+    required: Boolean = false,
     onValueChange: (String) -> Unit
 ) {
     val showIconCreator = remember { mutableStateOf(false) }
     val showHeaderCreator = remember { mutableStateOf(false) }
+    val isInvalid = required && value.isBlank()
 
     // Detect if this is icon-related or header-related field
     // Check header first, then icon (header takes priority)
@@ -1204,13 +1228,6 @@ private fun PathInputOption(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-//        Text(
-//            text = title + if (required) " *" else "",
-//            style = MaterialTheme.typography.bodyMedium,
-//            fontWeight = FontWeight.Medium,
-//            color = LocalDialogTextColor.current
-//        )
-
         // Folder picker button (needs permissions for icon/header creation)
         val folderPicker = rememberFolderPickerWithPermission { uri ->
             // Convert URI to path for patch options compatibility
@@ -1221,11 +1238,12 @@ private fun PathInputOption(
             value = value,
             onValueChange = onValueChange,
             label = {
-                Text(title)
+                Text(if (required) "$title *" else title)
             },
             placeholder = {
                 Text("/storage/emulated/0/folder")
             },
+            isError = isInvalid,
             showClearButton = true,
             onFolderPickerClick = { folderPicker() }
         )
@@ -1301,6 +1319,7 @@ private fun PathWithPresetsOption(
     presets: Map<String, *>,
     packageName: String,
     isDefaultBundle: Boolean,
+    required: Boolean = false,
     onValueChange: (String) -> Unit
 ) {
     val showIconCreator = remember { mutableStateOf(false) }
@@ -1323,22 +1342,6 @@ private fun PathWithPresetsOption(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-//        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-//            Text(
-//                text = title,
-//                style = MaterialTheme.typography.bodyMedium,
-//                fontWeight = FontWeight.Medium,
-//                color = LocalDialogTextColor.current
-//            )
-//            if (description.isNotBlank()) {
-//                Text(
-//                    text = description,
-//                    style = MaterialTheme.typography.bodySmall,
-//                    color = LocalDialogSecondaryTextColor.current
-//                )
-//            }
-//        }
-
         // Folder picker
         val folderPicker = rememberFolderPickerWithPermission { uri ->
             onValueChange(uri.toFilePath())
@@ -1349,6 +1352,7 @@ private fun PathWithPresetsOption(
             value = value,
             onValueChange = onValueChange,
             dropdownItems = dropdownItems,
+            label = if (required) ({ Text("$title *") }) else null,
             placeholder = {
                 Text("/storage/emulated/0/folder")
             },
@@ -1420,37 +1424,22 @@ private fun PathWithPresetsOption(
 @Composable
 private fun TextInputOption(
     title: String,
-//    description: String,
     value: String,
-//    required: Boolean,
+    required: Boolean = false,
     keyboardType: KeyboardType,
     onValueChange: (String) -> Unit
 ) {
+    val isInvalid = required && value.isBlank()
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-//        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-//            Text(
-//                text = title + if (required) " *" else "",
-//                style = MaterialTheme.typography.bodyMedium,
-//                fontWeight = FontWeight.Medium,
-//                color = LocalDialogTextColor.current
-//            )
-//            if (description.isNotBlank()) {
-//                Text(
-//                    text = description,
-//                    style = MaterialTheme.typography.bodySmall,
-//                    color = LocalDialogSecondaryTextColor.current
-//                )
-//            }
-//        }
-
         MorpheDialogTextField(
             value = value,
             onValueChange = onValueChange,
             label = {
-                Text(title)
+                Text(if (required) "$title *" else title)
             },
             placeholder = {
                 Text(
@@ -1463,6 +1452,7 @@ private fun TextInputOption(
                     )
                 )
             },
+            isError = isInvalid,
             showClearButton = true,
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
         )
@@ -1813,7 +1803,7 @@ fun ExpandableSurface(
     var expanded by remember { mutableStateOf(initialExpanded) }
     val rotationAngle by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(300),
+        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
         label = "rotation"
     )
 
@@ -1869,8 +1859,8 @@ fun ExpandableSurface(
             // Expandable content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
-                exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
+                enter = expandVertically() + fadeIn(),
+                exit = shrinkVertically() + fadeOut()
             ) {
                 content()
             }

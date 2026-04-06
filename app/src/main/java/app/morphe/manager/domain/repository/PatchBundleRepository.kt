@@ -288,9 +288,9 @@ class PatchBundleRepository(
 
         // Fallbacks for common GitHub URL patterns.
         if (segments.isEmpty()) return host
-        return when {
-            host == "github.com" && segments.size >= 2 -> segments[1]
-            host == "api.github.com" && segments.size >= 3 && segments[0] == "repos" -> segments[2]
+        return when (host) {
+            "github.com" if segments.size >= 2 -> segments[1]
+            "api.github.com" if segments.size >= 3 && segments[0] == "repos" -> segments[2]
             else -> host
         }
     }
@@ -631,6 +631,18 @@ class PatchBundleRepository(
             mergeUpdateRequests(drained)
         }
     }
+
+    /**
+     * Persists a new display order for bundles.
+     * [orderedUids] is the full list of bundle UIDs in the desired order.
+     */
+    suspend fun reorderBundles(orderedUids: List<Int>) =
+        dispatchAction("Reorder (${orderedUids.joinToString(",")})") {
+            orderedUids.forEachIndexed { index, uid ->
+                updateDb(uid) { it.copy(sortOrder = index) }
+            }
+            doReload()
+        }
 
     suspend fun disable(vararg bundles: PatchBundleSource) {
         // Capture uids of bundles that are currently disabled and will be toggled ON

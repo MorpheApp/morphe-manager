@@ -20,28 +20,20 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.LocalOverscrollFactory
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
@@ -50,17 +42,12 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
-import app.morphe.manager.ui.screen.shared.InfoBadge
-import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
-import app.morphe.manager.ui.screen.shared.MorpheCard
-import app.morphe.manager.ui.screen.shared.MorpheSettingsDivider
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel.Companion.ensureValidEntries
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
 import app.morphe.manager.util.tag
-import app.morphe.manager.util.toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.delay
@@ -89,8 +76,6 @@ fun PatcherScreen(
 ) {
     val context = LocalContext.current
     val view = LocalView.current
-    @Suppress("DEPRECATION")
-    val clipboardManager = LocalClipboardManager.current
 
     val patcherSucceeded by patcherViewModel.patcherSucceeded.observeAsState(null)
 
@@ -221,7 +206,8 @@ fun PatcherScreen(
             val failedStep = steps.firstOrNull { it.state == State.FAILED }
             state.errorMessage = failedStep?.message
                 ?: context.getString(R.string.patcher_unknown_error)
-            state.showErrorBottomSheet = true
+            state.errorInfo = patcherViewModel.buildErrorInfo()
+            state.showErrorDialog = true
         }
     }
 
@@ -333,169 +319,13 @@ fun PatcherScreen(
         )
     }
 
-    // Error bottom sheet
-    if (state.showErrorBottomSheet) {
-        ModalBottomSheet(
-            onDismissRequest = { state.showErrorBottomSheet = false },
-            contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-            containerColor = MaterialTheme.colorScheme.surface
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .navigationBarsPadding()
-            ) {
-                // Header
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(top = 8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    // Error icon
-                    Surface(
-                        modifier = Modifier.size(80.dp),
-                        shape = RoundedCornerShape(24.dp),
-                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Error,
-                                contentDescription = null,
-                                modifier = Modifier.size(48.dp),
-                                tint = MaterialTheme.colorScheme.error
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    // Title
-                    Text(
-                        text = stringResource(R.string.patcher_failed_dialog_title),
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-
-                    Spacer(modifier = Modifier.height(24.dp))
-                }
-
-                // Error message card
-                CompositionLocalProvider(LocalOverscrollFactory provides null) {
-                    MorpheCard(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f, fill = false)
-                            .padding(horizontal = 24.dp),
-                        elevation = 2.dp,
-                        cornerRadius = 16.dp
-                    ) {
-                        Column {
-                            // Error log header
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = stringResource(R.string.patcher_error_log),
-                                    style = MaterialTheme.typography.labelLarge,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-
-                                InfoBadge(
-                                    text = stringResource(R.string.patcher_error_technical),
-                                    style = InfoBadgeStyle.Error,
-                                    isCompact = true
-                                )
-                            }
-
-                            MorpheSettingsDivider(fullWidth = true)
-
-                            // Scrollable error message
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .verticalScroll(rememberScrollState())
-                                    .padding(16.dp)
-                            ) {
-                                Text(
-                                    text = state.errorMessage,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
-                                    lineHeight = 20.sp
-                                )
-                            }
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Action buttons
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 24.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    // Copy button
-                    FilledTonalButton(
-                        onClick = {
-                            clipboardManager.setText(AnnotatedString(state.errorMessage))
-                            context.toast(context.getString(R.string.patcher_error_copied))
-                        },
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(52.dp),
-                        shape = RoundedCornerShape(14.dp),
-                        colors = ButtonDefaults.filledTonalButtonColors(
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                        )
-                    ) {
-                        Icon(
-                            Icons.Default.ContentCopy,
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(
-                            text = stringResource(android.R.string.copy),
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-
-                    // Close button
-                    Button(
-                        onClick = { state.showErrorBottomSheet = false },
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(52.dp),
-                        shape = RoundedCornerShape(14.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary
-                        )
-                    ) {
-                        Text(
-                            text = stringResource(R.string.close),
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                }
-            }
-        }
+    // Error dialog
+    if (state.showErrorDialog) {
+        PatcherErrorDialog(
+            errorMessage = state.errorMessage,
+            errorInfo = state.errorInfo,
+            onDismiss = { state.showErrorDialog = false }
+        )
     }
 
     // Installer selection dialog for patcher screen
@@ -635,8 +465,8 @@ fun PatcherScreen(
 
                 PatcherState.FAILED -> {
                     PatchingFailed(
-                        state = state,
-                        onHomeClick = onBackClick
+                        onHomeClick = onBackClick,
+                        onErrorClick = { state.showErrorDialog = true }
                     )
                 }
             }

@@ -42,6 +42,7 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
@@ -66,7 +67,6 @@ data class AppliedPatchBundleUi(
 fun InstalledAppInfoDialog(
     packageName: String,
     onDismiss: () -> Unit,
-    onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
     viewModel: InstalledAppInfoViewModel = koinViewModel(
@@ -215,30 +215,12 @@ fun InstalledAppInfoDialog(
         }
     )
 
-    // Expert Mode Repatch Dialog
-    if (viewModel.showRepatchDialog) {
-        val allowIncompatible by viewModel.allowIncompatiblePatches.collectAsStateWithLifecycle()
-        ExpertModeDialog(
-            bundles = viewModel.repatchBundles,
-            selectedPatches = viewModel.repatchPatches,
-            options = viewModel.repatchOptions,
-            onPatchToggle = { bundleUid, patchName -> viewModel.toggleRepatchPatch(bundleUid, patchName) },
-            onOptionChange = { bundleUid, patchName, optionKey, value -> viewModel.updateRepatchOption(bundleUid, patchName, optionKey, value) },
-            onResetOptions = { bundleUid, patchName -> viewModel.resetRepatchOptions(bundleUid, patchName) },
-            onDismiss = { viewModel.dismissRepatchDialog() },
-            onProceed = {
-                viewModel.proceedWithRepatch(viewModel.repatchPatches, viewModel.repatchOptions) { pkgName, originalFile, patches, options ->
-                    onNavigateToPatcher(
-                        pkgName,
-                        installedApp?.version ?: "unknown",
-                        originalFile.absolutePath,
-                        patches,
-                        options
-                    )
-                }
-            },
-            allowIncompatible = allowIncompatible
-        )
+    // Expert Mode Repatch Dialog is rendered by HomeDialogs via homeViewModel.showExpertModeDialog.
+    // Patch flow always starts with onTriggerPatchFlow → showPatchDialog → ApkAvailabilityDialog,
+    // where the user picks the APK source. Expert mode dialog opens after APK selection.
+    fun handlePatchClick() {
+        onDismiss()
+        onTriggerPatchFlow(viewModel.installedApp?.originalPackageName ?: return)
     }
 
     // Main Dialog
@@ -270,13 +252,11 @@ fun InstalledAppInfoDialog(
                     installedApp = installedApp
                 )
 
-                // Deleted App Warning Banner
+                // Deleted app warning banner
                 AnimatedVisibility(
                     visible = viewModel.isAppDeleted,
-                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
-                            expandVertically(animationSpec = tween(durationMillis = 400)),
-                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
-                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     WarningBanner(
                         icon = Icons.Outlined.Warning,
@@ -292,13 +272,11 @@ fun InstalledAppInfoDialog(
                     )
                 }
 
-                // Update Available Banner
+                // Update available banner
                 AnimatedVisibility(
                     visible = hasUpdate && !viewModel.isAppDeleted,
-                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
-                            expandVertically(animationSpec = tween(durationMillis = 400)),
-                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
-                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     WarningBanner(
                         icon = Icons.Outlined.Update,
@@ -331,10 +309,7 @@ fun InstalledAppInfoDialog(
                     isInstalling = isInstalling,
                     mountOperation = mountOperation,
                     hasUpdate = hasUpdate,
-                    onPatchClick = {
-                        onDismiss()
-                        onTriggerPatchFlow(installedApp.originalPackageName)
-                    },
+                    onPatchClick = { handlePatchClick() },
                     onUninstall = { showUninstallConfirm.value = true },
                     onDelete = { showDeleteDialog.value = true },
                     onExport = { exportSavedLauncher.launch(exportFileName) },

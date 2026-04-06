@@ -39,7 +39,6 @@ import org.koin.core.parameter.parametersOf
 fun HomeScreen(
     onSettingsClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
-    onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
@@ -148,10 +147,6 @@ fun HomeScreen(
             InstalledAppInfoDialog(
                 packageName = packageName,
                 onDismiss = { showInstalledAppDialog.value = null },
-                onNavigateToPatcher = { pkg, version, filePath, patches, options ->
-                    showInstalledAppDialog.value = null
-                    onNavigateToPatcher(pkg, version, filePath, patches, options)
-                },
                 onTriggerPatchFlow = { originalPackageName ->
                     showInstalledAppDialog.value = null
                     homeViewModel.showPatchDialog(originalPackageName)

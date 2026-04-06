@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 
 /**
  * Section 5: Bottom action bar
@@ -66,10 +67,8 @@ fun HomeBottomActionBar(
             AnimatedVisibility(
                 visible = showSearchButton,
                 modifier = Modifier.weight(1f),
-                enter = fadeIn(animationSpec = tween(220)) +
-                        expandHorizontally(animationSpec = tween(280, easing = FastOutSlowInEasing)),
-                exit = fadeOut(animationSpec = tween(180)) +
-                        shrinkHorizontally(animationSpec = tween(240, easing = FastOutSlowInEasing))
+                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing)),
+                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing))
             ) {
                 BottomActionButton(
                     onClick = onSearchClick,

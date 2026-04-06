@@ -133,6 +133,7 @@
     <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_universal_patches">Universal patches</string>
+    <string name="expert_mode_new_patches">New</string>
     <string name="expert_mode_multiple_sources_warning_title">Multiple patch sources selected</string>
     <string name="expert_mode_multiple_sources_warning_message">"You have selected patches from multiple patch sources. This may cause compatibility issues or unexpected behavior.
 
@@ -180,6 +181,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patch_option_list_duplicate">This value already exists</string>
     <string name="patch_option_list_empty">Value cannot be empty</string>
     <string name="patch_option_list_empty_state">No values added yet</string>
+    <string name="patch_option_required_missing">%s: fill in all required options</string>
 
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Create adaptive icon</string>
@@ -247,6 +249,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
+    <string name="patcher_error_dialog_app_info">App info</string>
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%1$s%%</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>

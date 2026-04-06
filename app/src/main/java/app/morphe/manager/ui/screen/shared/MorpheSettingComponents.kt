@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
 // Constants
-private object MorpheDefaults {
+object MorpheDefaults {
     val CardElevation = 2.dp
     val CardCornerRadius = 16.dp
     val SettingsCornerRadius = 14.dp
@@ -51,8 +51,8 @@ private object MorpheDefaults {
 }
 
 /**
- * Elevated card with proper Material 3 theming
- * Base card for all other card types
+ * Elevated card with proper Material 3 theming.
+ * Base card for all other card types.
  */
 @Composable
 fun MorpheCard(
@@ -86,7 +86,7 @@ fun MorpheCard(
 }
 
 /**
- * Horizontal divider for settings sections
+ * Horizontal divider for settings sections.
  */
 @Composable
 fun MorpheSettingsDivider(
@@ -104,7 +104,7 @@ fun MorpheSettingsDivider(
 }
 
 /**
- * Reusable icon component with standard styling
+ * Reusable icon component with standard styling.
  */
 @Composable
 fun MorpheIcon(
@@ -123,7 +123,7 @@ fun MorpheIcon(
 }
 
 /**
- * Circular icon with gradient background for section titles
+ * Circular icon with gradient background for section titles.
  */
 @Composable
 fun GradientCircleIcon(
@@ -151,7 +151,7 @@ fun GradientCircleIcon(
 }
 
 /**
- * Row with optional icon and text content
+ * Row with optional icon and text content.
  */
 @Composable
 fun IconTextRow(
@@ -193,8 +193,8 @@ fun IconTextRow(
 }
 
 /**
- * Settings item card wrapper
- * Private component used by settings item variants
+ * Settings item card wrapper.
+ * Private component used by settings item variants.
  */
 @Composable
 fun SettingsItemCard(
@@ -217,8 +217,8 @@ fun SettingsItemCard(
 }
 
 /**
- * Base settings item component
- * Shared implementation for SettingsItem and RichSettingsItem
+ * Base settings item component.
+ * Shared implementation for SettingsItem and RichSettingsItem.
  */
 @Composable
 fun BaseSettingsItem(
@@ -248,7 +248,7 @@ fun BaseSettingsItem(
 }
 
 /**
- * Simple settings item with icon, title, and action
+ * Simple settings item with icon, title, and action.
  */
 @Composable
 fun SettingsItem(
@@ -271,7 +271,7 @@ fun SettingsItem(
 }
 
 /**
- * Rich settings item with custom leading content
+ * Rich settings item with custom leading content.
  */
 @Composable
 fun RichSettingsItem(
@@ -297,7 +297,7 @@ fun RichSettingsItem(
 }
 
 /**
- * Section container card
+ * Section container card.
  */
 @Composable
 fun SectionCard(
@@ -317,7 +317,7 @@ fun SectionCard(
 }
 
 /**
- * Section title with gradient icon
+ * Section title with gradient icon.
  */
 @Composable
 fun SectionTitle(
@@ -345,7 +345,7 @@ fun SectionTitle(
 }
 
 /**
- * Card header with icon and text
+ * Card header with icon and text.
  */
 @Composable
 fun CardHeader(
@@ -374,7 +374,7 @@ fun CardHeader(
 }
 
 /**
- * Expandable section with animated header and content
+ * Expandable section with animated header and content.
  */
 @Composable
 fun ExpandableSection(
@@ -423,10 +423,8 @@ fun ExpandableSection(
             // Content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 Column(
                     modifier = Modifier
@@ -442,8 +440,8 @@ fun ExpandableSection(
 }
 
 /**
- * A single item in a deletion list with an icon and text
- * Used in confirmation dialogs to show what will be deleted
+ * A single item in a deletion list with an icon and text.
+ * Used in confirmation dialogs to show what will be deleted.
  */
 @Composable
 fun DeleteListItem(
@@ -471,8 +469,8 @@ fun DeleteListItem(
 }
 
 /**
- * A container showing what will be deleted in a destructive action
- * Displays a warning message followed by a list of items
+ * A container showing what will be deleted in a destructive action.
+ * Displays a warning message followed by a list of items.
  */
 @Composable
 fun DeletionWarningBox(
@@ -502,7 +500,7 @@ fun DeletionWarningBox(
 }
 
 /**
- * Info box component to display grouped information in a visually distinct container
+ * Info box component to display grouped information in a visually distinct container.
  */
 @Composable
 fun InfoBox(

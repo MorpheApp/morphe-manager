@@ -98,15 +98,15 @@ fun MorpheDialog(
 
             AnimatedVisibility(
                 visible = visible,
-                enter = fadeIn(animationSpec = tween(400)) +
+                enter = fadeIn(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) +
                         scaleIn(
                             initialScale = 0.95f,
-                            animationSpec = tween(400, easing = FastOutSlowInEasing)
+                            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing)
                         ),
-                exit = fadeOut(animationSpec = tween(200)) +
+                exit = fadeOut(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) +
                         scaleOut(
                             targetScale = 0.95f,
-                            animationSpec = tween(200)
+                            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)
                         ),
                 modifier = Modifier.fillMaxSize()
             ) {

@@ -13,14 +13,9 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
-import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
 import app.morphe.manager.util.*
-import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
-import app.morphe.manager.util.PatchSelectionUtils.togglePatch
-import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
@@ -38,12 +33,9 @@ class InstalledAppInfoViewModel(
     private val pm: PM by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
-    val rootInstaller: RootInstaller by inject()
+    private val rootInstaller: RootInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
-    private val patchSelectionRepository: PatchSelectionRepository by inject()
-    private val patchOptionsRepository: PatchOptionsRepository by inject()
-    private val prefs: PreferencesManager by inject()
     private val filesystem: Filesystem by inject()
 
     lateinit var onBackClick: () -> Unit
@@ -66,14 +58,6 @@ class InstalledAppInfoViewModel(
     var hasOriginalApk by mutableStateOf(false)
         private set
     var isAppDeleted by mutableStateOf(false)
-        private set
-    var showRepatchDialog by mutableStateOf(false)
-        private set
-    var repatchBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
-        private set
-    var repatchPatches by mutableStateOf<PatchSelection>(emptyMap())
-        private set
-    var repatchOptions by mutableStateOf<Options>(emptyMap())
         private set
     var isLoading by mutableStateOf(true)
         private set
@@ -250,9 +234,7 @@ class InstalledAppInfoViewModel(
         isMounted = rootInstaller.isAppMounted(app.currentPackageName)
     }
 
-    /**
-     * Manually refresh app state (e.g., after app installation/uninstallation)
-     */
+    /** Manually refresh app state (e.g., after app installation/uninstallation) */
     fun refreshCurrentAppState() {
         val app = installedApp ?: return
         viewModelScope.launch {
@@ -260,12 +242,7 @@ class InstalledAppInfoViewModel(
         }
     }
 
-    val allowIncompatiblePatches: StateFlow<Boolean> = prefs.disablePatchVersionCompatCheck.flow
-        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.disablePatchVersionCompatCheck.getBlocking())
-
-    /**
-     * Count of all patches across all enabled bundles.
-     */
+    /** Count of all patches across all enabled bundles. */
     val availablePatches: StateFlow<Int> = patchBundleRepository.bundleInfoFlow
         .map { it.values.sumOf { bundle -> bundle.patches.size } }
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
@@ -320,9 +297,7 @@ class InstalledAppInfoViewModel(
             .flowOn(Dispatchers.IO)
             .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    /**
-     * Human-readable summary of applied bundles with versions for display in the dialog.
-     */
+    /** Human-readable summary of applied bundles with versions for display in the dialog. */
     val bundlesUsedSummary: StateFlow<String> = appliedBundles
         .map { bundles ->
             bundles.joinToString("\n") { bundle ->
@@ -331,100 +306,4 @@ class InstalledAppInfoViewModel(
             }
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, "")
-
-    /**
-     * Proceed with repatch after Expert Mode dialog
-     */
-    fun proceedWithRepatch(
-        patches: PatchSelection,
-        options: Options,
-        onStartPatch: (String, File, PatchSelection, Options) -> Unit
-    ) = viewModelScope.launch {
-        val app = installedApp ?: return@launch
-
-        // Get original APK file
-        val originalApk = originalApkRepository.get(app.originalPackageName)
-        if (originalApk == null) {
-            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
-            return@launch
-        }
-
-        val originalFile = File(originalApk.filePath)
-        if (!originalFile.exists()) {
-            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
-            return@launch
-        }
-
-        // Update last used timestamp
-        originalApkRepository.markUsed(app.originalPackageName)
-
-        // Save updated selections per bundle
-        withContext(Dispatchers.IO) {
-            patches.forEach { (bundleUid, bundlePatches) ->
-                patchSelectionRepository.updateSelectionForBundle(
-                    packageName = app.originalPackageName,
-                    bundleUid = bundleUid,
-                    patches = bundlePatches
-                )
-            }
-        }
-
-        // Save updated options per bundle
-        withContext(Dispatchers.IO) {
-            options.forEach { (bundleUid, bundleOptions) ->
-                patchOptionsRepository.saveOptionsForBundle(
-                    packageName = app.originalPackageName,
-                    bundleUid = bundleUid,
-                    patchOptions = bundleOptions
-                )
-            }
-        }
-
-        // Start patching with original APK file
-        onStartPatch(app.originalPackageName, originalFile, patches, options)
-
-        // Close dialog
-        showRepatchDialog = false
-        cleanupRepatchDialog()
-    }
-
-    /**
-     * Close repatch dialog
-     */
-    fun dismissRepatchDialog() {
-        showRepatchDialog = false
-        cleanupRepatchDialog()
-    }
-
-    private fun cleanupRepatchDialog() {
-        repatchBundles = emptyList()
-        repatchPatches = emptyMap()
-        repatchOptions = emptyMap()
-    }
-
-    /**
-     * Toggle patch in repatch dialog
-     */
-    fun toggleRepatchPatch(bundleUid: Int, patchName: String) {
-        repatchPatches = repatchPatches.togglePatch(bundleUid, patchName)
-    }
-
-    /**
-     * Update option in repatch dialog
-     */
-    fun updateRepatchOption(
-        bundleUid: Int,
-        patchName: String,
-        optionKey: String,
-        value: Any?
-    ) {
-        repatchOptions = repatchOptions.updateOption(bundleUid, patchName, optionKey, value)
-    }
-
-    /**
-     * Reset options for patch in repatch dialog
-     */
-    fun resetRepatchOptions(bundleUid: Int, patchName: String) {
-        repatchOptions = repatchOptions.resetOptionsForPatch(bundleUid, patchName)
-    }
 }

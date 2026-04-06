@@ -31,7 +31,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.navigation.ComplexParameter
 import app.morphe.manager.ui.model.navigation.HomeScreen
 import app.morphe.manager.ui.model.navigation.Patcher
@@ -50,7 +49,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
-import java.io.File
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -219,23 +217,6 @@ private fun MorpheManager(vm: MainViewModel) {
                                     selectedApp = params.selectedApp,
                                     selectedPatches = params.patches,
                                     options = params.options
-                                )
-                            )
-                        }
-                    },
-                    onNavigateToPatcher = { packageName, version, filePath, patches, options ->
-                        entry.lifecycleScope.launch {
-                            navController.navigateComplex(
-                                Patcher,
-                                Patcher.ViewModelParams(
-                                    selectedApp = SelectedApp.Local(
-                                        packageName = packageName,
-                                        version = version,
-                                        file = File(filePath),
-                                        temporary = false
-                                    ),
-                                    selectedPatches = patches,
-                                    options = options
                                 )
                             )
                         }

@@ -35,6 +35,7 @@ import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.model.navigation.Patcher
+import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
 import app.morphe.manager.util.saver.snapshotStateListSaver
 import app.morphe.manager.worker.UpdateCheckWorker
@@ -151,7 +152,7 @@ class PatcherViewModel(
             input.selectedApp.version
         ).first().associateBy { it.uid }
 
-    private suspend fun collectSelectedBundleMetadata(): Pair<List<String>, List<String>> {
+    suspend fun collectSelectedBundleMetadata(): Pair<List<String>, List<String>> {
         val globalBundles = patchBundleRepository.bundleInfoFlow.first()
         val scopedBundles = gatherScopedBundles()
         val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
@@ -181,6 +182,29 @@ class PatcherViewModel(
             appVersion = versionName,
             patchBundleVersions = bundleVersions,
             patchBundleNames = bundleNames
+        )
+    }
+
+    /**
+     * Collects app and bundle metadata to populate [PatcherErrorInfo] in the error dialog.
+     * Called after patching fails so the dialog opens instantly without an extra async wait.
+     */
+    suspend fun buildErrorInfo(): PatcherErrorInfo {
+        val (bundleVersions, bundleNames) = collectSelectedBundleMetadata()
+        val label = runCatching {
+            pm.getPackageInfo(outputFile)?.let { with(pm) { it.label() } }
+        }.getOrNull()
+        val bundles = bundleNames.mapIndexed { i, name ->
+            PatcherErrorInfo.BundleInfo(
+                name = name,
+                version = bundleVersions.getOrNull(i)
+            )
+        }
+        return PatcherErrorInfo(
+            appName = label ?: packageName,
+            packageName = packageName,
+            appVersion = version ?: "unspecified",
+            bundles = bundles
         )
     }
 

@@ -267,8 +267,8 @@ private fun AdaptiveContent(
                     // Section 4: Other apps - hidden when no apps available or bundles loading
                     AnimatedVisibility(
                         visible = !isAppsEmpty && showOtherAppsButton,
-                        enter = fadeIn(tween(300)) + expandVertically(tween(300)),
-                        exit = fadeOut(tween(200)) + shrinkVertically(tween(200))
+                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                     ) {
                         OtherAppsSection(
                             onClick = onOtherAppsClick,
@@ -310,8 +310,8 @@ private fun AdaptiveContent(
                 // Section 4: Other apps - hidden when no apps available or bundles loading
                 AnimatedVisibility(
                     visible = !isAppsEmpty && showOtherAppsButton,
-                    enter = fadeIn(tween(300)) + expandVertically(tween(300)),
-                    exit = fadeOut(tween(200)) + shrinkVertically(tween(200))
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     Column {
                         Spacer(modifier = Modifier.height(itemSpacing))
@@ -401,12 +401,10 @@ fun ManagerUpdateSnackbar(
         visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
         exit = slideOutVertically(
             targetOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeOut(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)),
         modifier = modifier
     ) {
         SwipeToDismissBox(
@@ -492,12 +490,10 @@ fun BundleUpdateSnackbar(
         visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
         exit = slideOutVertically(
             targetOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeOut(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)),
         modifier = modifier
     ) {
         SwipeToDismissBox(
@@ -799,8 +795,8 @@ fun MainAppsSection(
                     // Search bar
                     AnimatedVisibility(
                         visible = searchVisible,
-                        enter = expandVertically(tween(250)) + fadeIn(tween(250)),
-                        exit = shrinkVertically(tween(200)) + fadeOut(tween(200))
+                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
                     ) {
                         HomeSearchTextField(
                             value = searchQuery,
@@ -998,7 +994,7 @@ private fun HomeSearchTextField(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Outlined.Search,
-                    contentDescription = null
+                    contentDescription = stringResource(R.string.home_search_apps)
                 )
             },
             showClearButton = true,
@@ -1373,10 +1369,8 @@ fun InstalledAppCard(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(top = 0.dp, end = 0.dp),
-                enter = fadeIn(animationSpec = tween(400)) +
-                        scaleIn(initialScale = 0.8f, animationSpec = tween(400)),
-                exit = fadeOut(animationSpec = tween(300)) +
-                        scaleOut(targetScale = 0.8f, animationSpec = tween(300))
+                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(initialScale = 0.8f, animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(targetScale = 0.8f, animationSpec = tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 UpdateBadge()
             }
