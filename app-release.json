@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-03T06:37:59.219Z",
-  "description": "# [1.14.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2026-04-03)\n\n\n### Bug Fixes\n\n* Use card background as color preview, add transparency checkerboard ([#393](https://github.com/MorpheApp/morphe-manager/issues/393)) ([bb76510](https://github.com/MorpheApp/morphe-manager/commit/bb76510e9ad056e216ca5256659db72d4ea46cad))\n\n\n### Features\n\n* Add search and package filter chips to bundle patches dialog ([#392](https://github.com/MorpheApp/morphe-manager/issues/392)) ([14b08f9](https://github.com/MorpheApp/morphe-manager/commit/14b08f9638a48fcd947df10d1ce8d51bc6acfc0c))\n* Add selectable download version in APK availability expert dialog ([#391](https://github.com/MorpheApp/morphe-manager/issues/391)) ([9dc26c0](https://github.com/MorpheApp/morphe-manager/commit/9dc26c0346df68adee530a345a922a33fe3e6f74))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.4/morphe-manager-1.14.0-dev.4.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.4/morphe-manager-1.14.0-dev.4.apk.asc",
-  "version": "1.14.0-dev.4"
+  "created_at": "2026-04-06T08:06:42.189Z",
+  "description": "# [1.14.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2026-04-06)\n\n\n### Features\n\n* Highlight new patches after bundle update in expert mode ([#394](https://github.com/MorpheApp/morphe-manager/issues/394)) ([90a315a](https://github.com/MorpheApp/morphe-manager/commit/90a315a914c4aed3e3713816a5cb8323782b063e))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.5/morphe-manager-1.14.0-dev.5.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.5/morphe-manager-1.14.0-dev.5.apk.asc",
+  "version": "1.14.0-dev.5"
 }

@@ -1,3 +1,10 @@
+# [1.14.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2026-04-06)
+
+
+### Features
+
+* Highlight new patches after bundle update in expert mode ([#394](https://github.com/MorpheApp/morphe-manager/issues/394)) ([90a315a](https://github.com/MorpheApp/morphe-manager/commit/90a315a914c4aed3e3713816a5cb8323782b063e))
+
 # [1.14.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2026-04-03)
 
 
