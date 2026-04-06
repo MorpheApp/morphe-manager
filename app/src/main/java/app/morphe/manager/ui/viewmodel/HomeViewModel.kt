@@ -2112,7 +2112,8 @@ class HomeViewModel(
                         val isExperimental = pkg.experimentalVersions?.contains(version) == true
                         // If a version appears in multiple patches, prefer stable over experimental
                         if (version !in map || isExperimental.not()) {
-                            map[version] = AppTarget(version = version, isExperimental = isExperimental)
+                            val description = pkg.versionDescriptions?.get(version)
+                            map[version] = AppTarget(version = version, isExperimental = isExperimental, description = description)
                         }
                     }
                 }
