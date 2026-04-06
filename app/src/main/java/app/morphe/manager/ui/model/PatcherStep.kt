@@ -12,7 +12,6 @@ enum class StepCategory(@param:StringRes val displayName: Int) {
 }
 
 enum class StepId {
-    DOWNLOAD_APK,
     LOAD_PATCHES,
     PREPARE_SPLIT_APK,
     READ_APK,

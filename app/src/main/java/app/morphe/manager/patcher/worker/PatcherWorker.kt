@@ -153,16 +153,6 @@ class PatcherWorker(
             }
 
             val inputFile = when (val selectedApp = args.input) {
-                is SelectedApp.Download -> {
-                    // Download type no longer supported after API module removal
-                    throw UnsupportedOperationException("Download type is no longer supported")
-                }
-
-                is SelectedApp.Search -> {
-                    // Search type no longer supported after API module removal
-                    throw UnsupportedOperationException("Search type is no longer supported")
-                }
-
                 is SelectedApp.Local -> {
                     val needsSplit = SplitApkPreparer.isSplitArchive(selectedApp.file)
                     args.setInputFile(selectedApp.file, needsSplit, false)

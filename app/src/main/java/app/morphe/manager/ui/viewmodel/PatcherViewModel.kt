@@ -250,7 +250,6 @@ class PatcherViewModel(
     val steps by savedStateHandle.saveable(saver = snapshotStateListSaver()) {
         val stepsList = generateSteps(
             app,
-            input.selectedApp,
             requiresSplitPreparation
         ).toMutableStateList()
 
@@ -996,26 +995,14 @@ class PatcherViewModel(
 
         fun generateSteps(
             context: Context,
-            selectedApp: SelectedApp,
             splitStepActive: Boolean
         ): List<Step> {
-            val needsDownload =
-                selectedApp is SelectedApp.Download || selectedApp is SelectedApp.Search
-
             return listOfNotNull(
-                Step(
-                    id = StepId.DOWNLOAD_APK,
-                    name = context.getString(R.string.download_apk),
-                    category = StepCategory.PREPARING,
-                    state = State.RUNNING,
-                    progressKey = ProgressKey.DOWNLOAD,
-                    progressPercentage = 0.1
-                ).takeIf { needsDownload },
                 Step(
                     id = StepId.LOAD_PATCHES,
                     name = context.getString(R.string.patcher_step_load_patches),
                     category = StepCategory.PREPARING,
-                    state = if (needsDownload) State.WAITING else State.RUNNING,
+                    state = State.RUNNING,
                     progressPercentage = 0.05
                 ),
                 buildSplitStep(context).takeIf { splitStepActive },
