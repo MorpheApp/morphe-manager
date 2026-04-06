@@ -613,7 +613,7 @@ class PatcherViewModel(
                     delay(2000) // Delay before resetting save state
                 }
 
-                if (saved) _shouldPromptNotification.value = true
+                if (saved) triggerNotificationPromptIfNeeded()
             } finally {
                 _isSaving.value = false
             }
@@ -622,7 +622,7 @@ class PatcherViewModel(
 
     /**
      * Checks prefs and triggers the notification prompt if conditions are met.
-     * Called after a successful install so UI doesn't read prefs directly.
+     * Called after a successful install or export so UI doesn't read prefs directly.
      */
     fun triggerNotificationPromptIfNeeded() {
         viewModelScope.launch {
@@ -1035,7 +1035,6 @@ class PatcherViewModel(
                 )
             )
         }
-
     }
 }
 
