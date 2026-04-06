@@ -1136,7 +1136,8 @@ class HomeViewModel(
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
-        pendingAppName = KnownApps.getAppName(packageName)
+        pendingAppName = bundleAppMetadataFlow.value[packageName]?.displayName
+            ?: KnownApps.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
         pendingSelectedDownloadVersion = pendingRecommendedVersion
