@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_universal_patches">Patch-uri universale</string>
+    <string name="expert_mode_new_patches">Nou</string>
     <string name="expert_mode_multiple_sources_warning_title">Mai multe surse de patch-uri selectate</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ai selectat patch-uri din mai multe surse de patch-uri. Asta poate cauza probleme de compatibilitate sau comportamente neașteptate.
 
@@ -165,6 +166,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patch_option_list_duplicate">Această valoare există deja</string>
     <string name="patch_option_list_empty">Valoarea nu poate fi goală</string>
     <string name="patch_option_list_empty_state">Nu au fost adăugate valori încă</string>
+    <string name="patch_option_required_missing">%s: completați toate opțiunile obligatorii</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Creează iconiță adaptivă</string>
     <string name="adaptive_icon_instructions">Alege o imagine de fundal, selectează o culoare de fundal, apoi folosește glisorul sau gesturile de ciupire pentru a ajusta previzualizarea</string>
@@ -226,6 +228,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="patcher_error_log">Jurnal erori</string>
     <string name="patcher_error_technical">Detalii tehnice</string>
+    <string name="patcher_error_dialog_app_info">Informații aplicație</string>
     <string name="patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
     <string name="patcher_installing_subtitle">Aproape gata de distracție! 🎸</string>
     <string name="patcher_success_title">Totul gata! 🎉</string>

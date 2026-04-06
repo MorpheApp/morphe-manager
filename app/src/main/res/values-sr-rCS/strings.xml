@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_no_results">Nema pronađenih zakrpa</string>
     <string name="expert_mode_universal_patches">Univerzalne zakrpe </string>
+    <string name="expert_mode_new_patches">Novo</string>
     <string name="expert_mode_multiple_sources_warning_title">Izabrali ste patch-ove izvišnje izvora</string>
     <string name="expert_mode_multiple_sources_warning_message">"Izabrali ste patch-ove izvišnje izvora. Ovo može uzrokovati kompatibilnost problema ili neočekivano ponašanje.
 
@@ -165,6 +166,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patch_option_list_duplicate">Ova vrednost već postoji</string>
     <string name="patch_option_list_empty">Vrednost ne može biti prazna</string>
     <string name="patch_option_list_empty_state">Još nisu dodate vrednosti</string>
+    <string name="patch_option_required_missing">%s: popunite sve obavezne opcije</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Napravi adaptivni ikon</string>
     <string name="adaptive_icon_instructions">Izaberite pozadinsku sliku, izaberite boju pozadine, a zatim koristite klizač ili potezom prsta za podešavanje 미리보기에 대한 설명</string>
@@ -226,6 +228,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patcher_error_copied">Greška kopirana u privremenu memoriju</string>
     <string name="patcher_error_log">Dnevnik grešaka</string>
     <string name="patcher_error_technical">Tehničke informacije</string>
+    <string name="patcher_error_dialog_app_info">Informacije o aplikaciji</string>
     <string name="patcher_long_step_warning">Ovaj korak može potrajati. Molimo sačekajte…</string>
     <string name="patcher_installing_subtitle">Skoro spremni za akciju! 🎸</string>
     <string name="patcher_success_title">Sve je završeno! 🎉</string>

@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Zapnout vše</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
     <string name="expert_mode_universal_patches">Univerzální záplaty</string>
+    <string name="expert_mode_new_patches">Nový</string>
     <string name="expert_mode_multiple_sources_warning_title">Vybráno více zdrojů pro aktualizace</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vybrali jste aktualizace z více zdrojů. To může způsobit problémy s kompatibilitou nebo neočekávané chování.
 
@@ -165,6 +166,7 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="patch_option_list_duplicate">Tato hodnota již existuje</string>
     <string name="patch_option_list_empty">Hodnota nesmí být prázdná</string>
     <string name="patch_option_list_empty_state">Ještě jste nepřidali žádné hodnoty</string>
+    <string name="patch_option_required_missing">%s: vyplňte všechny povinné možnosti</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Vytvořit adaptivní ikonu</string>
     <string name="adaptive_icon_instructions">Vyberte obrázek popředí, vyberte barvu pozadí, poté použijte posuvník nebo gesta přiblížení a oddálení pro úpravu náhledu</string>
@@ -226,6 +228,7 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="patcher_error_log">Protokol chyb</string>
     <string name="patcher_error_technical">Technické detaily</string>
+    <string name="patcher_error_dialog_app_info">Informace o aplikaci</string>
     <string name="patcher_long_step_warning">Tento krok může chvíli trvat. Počkejte prosím…</string>
     <string name="patcher_installing_subtitle">Skoro hotovo! Připrav se na pořádnou jízdu! 🏎️</string>
     <string name="patcher_success_title">Vše hotovo! 🎉</string>

@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_universal_patches">通用补丁</string>
+    <string name="expert_mode_new_patches">新</string>
     <string name="expert_mode_multiple_sources_warning_title">已选择多个补丁源</string>
     <string name="expert_mode_multiple_sources_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意想不到的行为。
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">此值已存在</string>
     <string name="patch_option_list_empty">值不能为空</string>
     <string name="patch_option_list_empty_state">尚未添加任何值</string>
+    <string name="patch_option_required_missing">%s: 填写所有必填选项</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">创建适配图标</string>
     <string name="adaptive_icon_instructions">选择一个前景图像，选择一个背景颜色，然后使用滑块或捏合手势调整预览</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
     <string name="patcher_error_technical">技术细节</string>
+    <string name="patcher_error_dialog_app_info">应用信息</string>
     <string name="patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
     <string name="patcher_installing_subtitle">准备摇滚！ 🎸</string>
     <string name="patcher_success_title">全部完成！ 🎉</string>

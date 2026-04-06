@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
     <string name="expert_mode_universal_patches">सार्वभौमिक पैच</string>
+    <string name="expert_mode_new_patches">नया</string>
     <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
     <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">यह मान पहले से मौजूद है</string>
     <string name="patch_option_list_empty">मान खाली नहीं हो सकता</string>
     <string name="patch_option_list_empty_state">अभी तक कोई मान नहीं जोड़ा गया है</string>
+    <string name="patch_option_required_missing">%s: सभी आवश्यक विकल्प भरें</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">अनुकूलित आइकॉन बनाएं</string>
     <string name="adaptive_icon_instructions">एक अग्रभूमि छवि चुनें, एक पृष्ठभूमि रंग चुनें, फिर पूर्वावलोकन को समायोजित करने के लिए स्लाइडर या पिंच इशारा का उपयोग करें</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
     <string name="patcher_error_technical">तकनीकी विवरण</string>
+    <string name="patcher_error_dialog_app_info">ऐप जानकारी</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">All Done! 🎉</string>

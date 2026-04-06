@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_universal_patches">সার্বজনীন প্যাচ</string>
+    <string name="expert_mode_new_patches">নতুন</string>
     <string name="expert_mode_multiple_sources_warning_title">বহু প্যাচ সোর্স নির্বাচিত</string>
     <string name="expert_mode_multiple_sources_warning_message">"আপনি একাধিক প্যাচ উৎস থেকে প্যাচ নির্বাচন করেছেন। এটি সামঞ্জस्यতা সমস্যা বা অপ্রত্যাশিত আচরণের কারণ হতে পারে।
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">এই মানটি ইতিমধ্যে বিদ্যমান</string>
     <string name="patch_option_list_empty">মানটি খালি হতে পারে না</string>
     <string name="patch_option_list_empty_state">এখনো কোনো মান যোগ করা হয়নি</string>
+    <string name="patch_option_required_missing">%s: প্রয়োজনীয় অপশনগুলো পূরণ করুন</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">অ্যাডাপ্টিভ আইকন তৈরি করুন</string>
     <string name="adaptive_icon_instructions">একটি foreground ছবি নির্বাচন করুন, একটি background রং নির্বাচন করুন, তারপর preview সামঞ্জস্য করতে slider অথবা pinch gesture ব্যবহার করুন</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
+    <string name="patcher_error_dialog_app_info">অ্যাপ তথ্য</string>
     <string name="patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="patcher_installing_subtitle">প্রায় রক-এর জন্য প্রস্তুত! 🎸</string>
     <string name="patcher_success_title">সব হয়ে গেছে! 🎉</string>

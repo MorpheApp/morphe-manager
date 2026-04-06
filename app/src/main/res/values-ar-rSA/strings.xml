@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
     <string name="expert_mode_universal_patches">التعديلات الشاملة</string>
+    <string name="expert_mode_new_patches">جديد</string>
     <string name="expert_mode_multiple_sources_warning_title">تم تحديد مصادر تعديل متعددة</string>
     <string name="expert_mode_multiple_sources_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">القيمة موجودة بالفعل</string>
     <string name="patch_option_list_empty">لا يمكن أن تكون القيمة فارغة</string>
     <string name="patch_option_list_empty_state">لم يتم إضافة أي قيم حتى الآن</string>
+    <string name="patch_option_required_missing">%s: املأ جميع الخيارات المطلوبة</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">إنشاء أيقونة تكيفية</string>
     <string name="adaptive_icon_instructions">اختر صورة أساسية، حدد لون الخلفية، ثم استخدم شريط التمرير أو الإيماءات لتعديل المعاينة حسب رغبتك</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="patcher_error_log">سجل الأخطاء</string>
     <string name="patcher_error_technical">التفاصيل التقنية</string>
+    <string name="patcher_error_dialog_app_info">معلومات التطبيق</string>
     <string name="patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
     <string name="patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
     <string name="patcher_success_title">تم الانتهاء! 🎉</string>
@@ -616,7 +619,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings">الإعدادات</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
-    <string name="all">\"الكل\"</string>
+    <string name="all">الكل</string>
     <string name="filter">تصفية</string>
     <string name="reset">إعادة التعيين</string>
     <string name="reset_all">إعادة تعيين الكل</string>

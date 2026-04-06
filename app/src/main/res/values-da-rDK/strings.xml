@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
+    <string name="expert_mode_new_patches">Ny</string>
     <string name="expert_mode_multiple_sources_warning_title">Flere patch-kilder valgt</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
 
@@ -165,6 +166,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patch_option_list_duplicate">Denne værdi eksisterer allerede</string>
     <string name="patch_option_list_empty">Værdien må ikke være tom</string>
     <string name="patch_option_list_empty_state">Ingen værdier tilføjet endnu</string>
+    <string name="patch_option_required_missing">%s: Udfyld alle nødvendige felter</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Opret adaptiv ikon</string>
     <string name="adaptive_icon_instructions">Vælg et forgrundsbillede, vælg en baggrundsfarve, og brug derefter skyderen eller knibbebevægelserne for at justere forhåndsvisningen</string>
@@ -226,6 +228,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="patcher_error_log">Fejlprotokol</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
+    <string name="patcher_error_dialog_app_info">App-oplysninger</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
     <string name="patcher_success_title">Alt færdigt! 🎉</string>

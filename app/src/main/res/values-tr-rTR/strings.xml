@@ -102,7 +102,7 @@
     <string name="home_download_instructions_step3_mount">İndirme tamamlanınca APK\'i &lt;b&gt;yükleyin&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">İndirme tamamlandıktan sonra Morphe\'ye geri dönün</string>
     <string name="home_download_instructions_step4_mount">Orijinal APK\'yi yükledikten sonra Morphe\'ye geri dönün</string>
-    <string name="home_download_instructions_continue">APKMirror.com\'a Devam Et</string>
+    <string name="home_download_instructions_continue">APKMirror.com\'a devam et</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">İndirilen APK\'yi seç</string>
     <string name="home_file_picker_prompt_description">İndirdiğiniz &lt;b&gt;%1$s&lt;/b&gt; APK dosyasını seçin</string>
@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_no_results">Yama bulunamadı</string>
     <string name="expert_mode_universal_patches">Evrensel yamalar</string>
+    <string name="expert_mode_new_patches">Yeni</string>
     <string name="expert_mode_multiple_sources_warning_title">Çoklu yama kaynağı seçildi</string>
     <string name="expert_mode_multiple_sources_warning_message">"Birden fazla yama kaynağından yama seçtiniz. Bu, uyumluluk sorunlarına veya beklenmedik davranışlara neden olabilir.
 
@@ -165,6 +166,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patch_option_list_duplicate">Bu değer zaten mevcut</string>
     <string name="patch_option_list_empty">Değer boş olamaz</string>
     <string name="patch_option_list_empty_state">Henüz hiçbir değer eklenmedi</string>
+    <string name="patch_option_required_missing">%s: tüm gerekli seçenekleri doldurun</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Adaptif simge oluştur</string>
     <string name="adaptive_icon_instructions">Bir ön plan görüntüsü seçin, arka plan rengini belirleyin, ardından kaydırıcıyı veya sıkıştırma hareketlerini kullanarak ön izlemeyi ayarlayın</string>
@@ -226,6 +228,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="patcher_error_log">Hata günlüğü</string>
     <string name="patcher_error_technical">Teknik ayrıntılar</string>
+    <string name="patcher_error_dialog_app_info">Uygulama bilgisi</string>
     <string name="patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
     <string name="patcher_installing_subtitle">Neredeyse hazırız! 🎸</string>
     <string name="patcher_success_title">Hepsi Bitti! 🎉</string>
@@ -524,7 +527,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek bellek limiti yamalamayı hızlandırabilir ancak eski cihazlarda çalışmayabilir</string>
     <string name="settings_system_process_runtime_enable">Çalışma sürecini etkinleştir</string>
     <string name="settings_system_memory_limit_subtitle">Yamalama için kullanılabilir bellek</string>
-    <string name="settings_system_memory_limit_warning">Düşük bellek sınırı, daha büyük uygulamaları yamalarken hatalara neden olabilir</string>
+    <string name="settings_system_memory_limit_warning">Düşük bellek limiti, daha büyük uygulamaları yamalarken hatalara neden olabilir</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Yapılandırmak için tıklayın</string>
     <string name="settings_system_process_runtime_description_not_available">Bu özellik Android 11 veya daha yüksek bir sürüm gerektirir</string>

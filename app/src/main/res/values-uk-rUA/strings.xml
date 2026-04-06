@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Увімкнути всі</string>
     <string name="expert_mode_no_results">Патчі не знайдено</string>
     <string name="expert_mode_universal_patches">Універсальні патчі</string>
+    <string name="expert_mode_new_patches">Новий</string>
     <string name="expert_mode_multiple_sources_warning_title">Вибрано декілька джерел патчів</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ви вибрали патчі з кількох джерел патчів. Це може спричинити проблеми сумісності або неочікувану поведінку.
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">Це значення вже існує</string>
     <string name="patch_option_list_empty">Значення не може бути порожнім</string>
     <string name="patch_option_list_empty_state">Значень ще не додано</string>
+    <string name="patch_option_required_missing">%s: заповніть усі обов\'язкові параметри</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Створити адаптивну іконку</string>
     <string name="adaptive_icon_instructions">Виберіть зображення переднього плану, виберіть колір фону, а потім за допомогою повзунка або жестів щипка налаштуйте попередній перегляд</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">Помилку скопійовано у буфер обміну</string>
     <string name="patcher_error_log">Журнал помилок</string>
     <string name="patcher_error_technical">Технічні деталі</string>
+    <string name="patcher_error_dialog_app_info">Інформація про застосунок</string>
     <string name="patcher_long_step_warning">Цей крок може тривати деякий час. Будь ласка, зачекайте…</string>
     <string name="patcher_installing_subtitle">Майже готово до драйву! 🎸</string>
     <string name="patcher_success_title">Все готово! 🎉</string>

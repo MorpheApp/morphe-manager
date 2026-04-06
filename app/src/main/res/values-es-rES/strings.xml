@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Activar todo</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
     <string name="expert_mode_universal_patches">Parches universales</string>
+    <string name="expert_mode_new_patches">Nuevo</string>
     <string name="expert_mode_multiple_sources_warning_title">Se han seleccionado varias fuentes de parches</string>
     <string name="expert_mode_multiple_sources_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
 
@@ -165,6 +166,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patch_option_list_duplicate">Este valor ya existe</string>
     <string name="patch_option_list_empty">El valor no puede estar vacío</string>
     <string name="patch_option_list_empty_state">No se han añadido valores todavía</string>
+    <string name="patch_option_required_missing">%s: complete todas las opciones requeridas</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crear icono adaptable</string>
     <string name="adaptive_icon_instructions">Elija una imagen de primer plano, seleccione un color de fondo y luego use el control deslizante o los gestos de pellizco para ajustar la vista previa</string>
@@ -226,6 +228,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patcher_error_copied">Error copiado en el portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>
     <string name="patcher_error_technical">Detalles técnicos</string>
+    <string name="patcher_error_dialog_app_info">Información de la aplicación</string>
     <string name="patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
     <string name="patcher_installing_subtitle">¡Casi listo para empezar! 🎸</string>
     <string name="patcher_success_title">¡Todo listo! 🎉</string>
@@ -616,8 +619,8 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings">Ajustes</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
-    <string name="all">All</string>
-    <string name="filter">Filter</string>
+    <string name="all">Todo</string>
+    <string name="filter">Filtro</string>
     <string name="reset">Restablecer</string>
     <string name="reset_all">Restablecer todo</string>
     <string name="confirm">Confirmar</string>

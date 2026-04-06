@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Ativar todos</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_universal_patches">Correções universais</string>
+    <string name="expert_mode_new_patches">Novo</string>
     <string name="expert_mode_multiple_sources_warning_title">Várias fontes de patch selecionadas</string>
     <string name="expert_mode_multiple_sources_warning_message">"Você selecionou patches de várias fontes de patch. Isso pode causar problemas de compatibilidade ou comportamento inesperado.
 
@@ -165,6 +166,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;
     <string name="patch_option_list_duplicate">Este valor já existe</string>
     <string name="patch_option_list_empty">Valor não pode estar vazio</string>
     <string name="patch_option_list_empty_state">Nenhum valor adicionado ainda</string>
+    <string name="patch_option_required_missing">%s: preencher todas as opções obrigatórias</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Criar ícone adaptável</string>
     <string name="adaptive_icon_instructions">Escolha uma imagem de fundo, selecione uma cor de fundo e, em seguida, use o controle deslizante ou os gestos de pinça para ajustar a visualização</string>
@@ -226,6 +228,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;
     <string name="patcher_error_copied">Erro copiado para a área de transferência</string>
     <string name="patcher_error_log">Log de erros</string>
     <string name="patcher_error_technical">Detalhes técnicos</string>
+    <string name="patcher_error_dialog_app_info">Informações do aplicativo</string>
     <string name="patcher_long_step_warning">Esta etapa pode levar um tempo. Por favor, aguarde…</string>
     <string name="patcher_installing_subtitle">Quase pronto para arrasar! 🎸</string>
     <string name="patcher_success_title">Tudo pronto! 🎉</string>

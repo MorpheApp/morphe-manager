@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Bật tất cả</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_universal_patches">Bản vá phổ quát</string>
+    <string name="expert_mode_new_patches">Mới</string>
     <string name="expert_mode_multiple_sources_warning_title">Đã chọn nhiều nguồn vá</string>
     <string name="expert_mode_multiple_sources_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
 
@@ -165,6 +166,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patch_option_list_duplicate">Giá trị này đã tồn tại rồi</string>
     <string name="patch_option_list_empty">Không được để trống</string>
     <string name="patch_option_list_empty_state">Chưa thêm giá trị nào</string>
+    <string name="patch_option_required_missing">%s: điền vào tất cả các tùy chọn bắt buộc</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Tạo biểu tượng thích ứng</string>
     <string name="adaptive_icon_instructions">Chọn ảnh tiền cảnh, chọn màu nền, sau đó kéo thanh trượt hoặc chụm hai ngón để xem trước biểu tượng</string>
@@ -226,6 +228,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="patcher_error_log">Nhật ký lỗi</string>
     <string name="patcher_error_technical">Chi tiết kỹ thuật</string>
+    <string name="patcher_error_dialog_app_info">Thông tin ứng dụng</string>
     <string name="patcher_long_step_warning">Bước này có thể hơi lâu một chút. Vui lòng chờ…</string>
     <string name="patcher_installing_subtitle">Gần xong rồi, chuẩn bị quẩy thôi! 🎸</string>
     <string name="patcher_success_title">Hoàn tất! 🎉</string>

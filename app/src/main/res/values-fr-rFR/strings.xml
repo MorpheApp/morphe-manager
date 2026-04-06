@@ -30,7 +30,7 @@
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
     <string name="home_search_apps">Rechercher des applications</string>
     <string name="home_no_apps_title">Aucune application disponible</string>
-    <string name="home_no_apps_subtitle">Ajoutez une source de correctifs ou activez-en une existante dans %s</string>
+    <string name="home_no_apps_subtitle">Ajoutez une source de patch ou activez-en une existante dans %s</string>
     <string name="home_no_apps_search_subtitle">Aucune application ne correspond à \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quelle application voulez-vous patcher ?</string>
@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_no_results">Aucun patch trouvé</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
+    <string name="expert_mode_new_patches">Nouveau</string>
     <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
 
@@ -164,6 +165,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patch_option_list_duplicate">Cette valeur existe déjà</string>
     <string name="patch_option_list_empty">La valeur ne peut pas être vide</string>
     <string name="patch_option_list_empty_state">Aucune valeur ajoutée pour le moment</string>
+    <string name="patch_option_required_missing">%s : renseignez toutes les options requises</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Créer une icône adaptative</string>
     <string name="adaptive_icon_instructions">Choisissez une image de premier plan, sélectionnez une couleur d’arrière-plan, puis utilisez le curseur ou les gestes de pincement pour ajuster l’aperçu</string>
@@ -225,6 +227,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="patcher_error_log">Journal d\'erreur</string>
     <string name="patcher_error_technical">Détails techniques</string>
+    <string name="patcher_error_dialog_app_info">Infos de l\'application</string>
     <string name="patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
     <string name="patcher_installing_subtitle">Bientôt prêt à mettre le feu  ! 🎸</string>
     <string name="patcher_success_title">Tout est prêt ! 🎉</string>
@@ -618,7 +621,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings">Paramètres</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
-    <string name="all">Toutes</string>
+    <string name="all">Tout</string>
     <string name="filter">Filtre</string>
     <string name="reset">Réinitialiser</string>
     <string name="reset_all">Tout réinitialiser</string>

@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Aktiviere alle</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
     <string name="expert_mode_universal_patches">Universelle Patches</string>
+    <string name="expert_mode_new_patches">Neu</string>
     <string name="expert_mode_multiple_sources_warning_title">Mehrere Patchquellen ausgewählt</string>
     <string name="expert_mode_multiple_sources_warning_message">"Sie haben Patches aus mehreren Patchquellen ausgewählt. Dies kann Kompatibilitätsprobleme oder unerwartetes Verhalten verursachen.
 
@@ -165,6 +166,7 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="patch_option_list_duplicate">Dieser Wert existiert bereits</string>
     <string name="patch_option_list_empty">Wert darf nicht leer sein</string>
     <string name="patch_option_list_empty_state">Noch keine Werte hinzugefügt</string>
+    <string name="patch_option_required_missing">%s: Bitte alle Pflichtfelder ausfüllen</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Adaptives Icon erstellen</string>
     <string name="adaptive_icon_instructions">Wählen Sie ein Hintergrundbild, wählen Sie eine Hintergrundfarbe und verwenden Sie dann den Schieberegler oder Zoom-Gesten, um die Vorschau anzupassen</string>
@@ -226,6 +228,7 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="patcher_error_copied">URL in Zwischenablage kopiert</string>
     <string name="patcher_error_log">Fehlerprotokoll</string>
     <string name="patcher_error_technical">Technische Details</string>
+    <string name="patcher_error_dialog_app_info">App-Informationen</string>
     <string name="patcher_long_step_warning">Dieser Schritt kann eine Weile dauern. Bitte warten…</string>
     <string name="patcher_installing_subtitle">Fast fertig zum Rocken! 🎸</string>
     <string name="patcher_success_title">Alles erledigt! 🎉</string>

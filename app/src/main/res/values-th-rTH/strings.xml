@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
     <string name="expert_mode_universal_patches">แพตช์สากล</string>
+    <string name="expert_mode_new_patches">ใหม่</string>
     <string name="expert_mode_multiple_sources_warning_title">หลายแหล่งปรับปรุงถูกเลือก</string>
     <string name="expert_mode_multiple_sources_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">ค่านี้มีอยู่แล้ว</string>
     <string name="patch_option_list_empty">ไม่สามารถเว้นว่างได้</string>
     <string name="patch_option_list_empty_state">ยังไม่ได้เพิ่มค่าใดๆ</string>
+    <string name="patch_option_required_missing">%s: กรอกตัวเลือกที่จำเป็นทั้งหมด</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">สร้างไอคอนปรับแต่ง</string>
     <string name="adaptive_icon_instructions">เลือกภาพพื้นหน้า, เลือกสีพื้นหลัง จากนั้นใช้แถบเลื่อนหรือท่าทางกริชชะเพื่อปรับตัวอย่าง</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
     <string name="patcher_error_technical">รายละเอียดทางเทคนิค</string>
+    <string name="patcher_error_dialog_app_info">ข้อมูลแอป</string>
     <string name="patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
     <string name="patcher_installing_subtitle">ใกล้พร้อมแล้ว! 🎸</string>
     <string name="patcher_success_title">เสร็จสิ้นแล้ว! 🎉</string>

@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
     <string name="expert_mode_universal_patches">Paistí uilíocha</string>
+    <string name="expert_mode_new_patches">Nua</string>
     <string name="expert_mode_multiple_sources_warning_title">Ilfhoinsí paiste roghnaithe</string>
     <string name="expert_mode_multiple_sources_warning_message">"Tá paistí roghnaithe agat ó fhoinsí éagsúla paistí. D’fhéadfadh fadhbanna comhoiriúnachta nó iompar gan choinne a bheith mar thoradh air seo.
 
@@ -165,6 +166,7 @@ Le haghaidh na dtorthaí is fearr, molann an app seo míniú &lt;b&gt;APK iomlá
     <string name="patch_option_list_duplicate">Tá an luach seo cheannasach cheana féin</string>
     <string name="patch_option_list_empty">Ná féidir luach a bheith folaithe</string>
     <string name="patch_option_list_empty_state">Níor cuireadh aon luachanna leis fós</string>
+    <string name="patch_option_required_missing">%s: líon isteach na roghanna uile atá de dhleathadh</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Cruthaigh deilbhín oiriúnaitheach</string>
     <string name="adaptive_icon_instructions">Roghnaigh íomhá sa tulra, roghnaigh dath an chúlra, ansin úsáid an sliothar nó gothaí pinch chun an réamhamharc a choigeartú</string>
@@ -226,6 +228,7 @@ Le haghaidh na dtorthaí is fearr, molann an app seo míniú &lt;b&gt;APK iomlá
     <string name="patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="patcher_error_log">Log earráide</string>
     <string name="patcher_error_technical">Sonraí teicniúla</string>
+    <string name="patcher_error_dialog_app_info">Eolas app</string>
     <string name="patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
     <string name="patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
     <string name="patcher_success_title">Gach rud déanta! 🎉</string>

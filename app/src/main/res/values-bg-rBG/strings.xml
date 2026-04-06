@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Включи всички</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
     <string name="expert_mode_universal_patches">Универсални пачове</string>
+    <string name="expert_mode_new_patches">Нов</string>
     <string name="expert_mode_multiple_sources_warning_title">Избрани са патове от различни източници</string>
     <string name="expert_mode_multiple_sources_warning_message">"Избрахте патове от различни източници. Това може да доведе до съвместимост проблеми или непредвидимо поведение.
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">Тази стойност вече съществува</string>
     <string name="patch_option_list_empty">Стойността не може да бъде празна</string>
     <string name="patch_option_list_empty_state">Още не са добавени стойности</string>
+    <string name="patch_option_required_missing">%s: попълнете всички необходими опции</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Създай адаптивен икон</string>
     <string name="adaptive_icon_instructions">Изберете начално изображение, изберете цвят на фона, след това използвайте плъзгача или жестове за стискане, за да настроите прегледа</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">Грешка е копирана в клипборда</string>
     <string name="patcher_error_log">Дневник на грешки</string>
     <string name="patcher_error_technical">Технически детайли</string>
+    <string name="patcher_error_dialog_app_info">Информация за приложението</string>
     <string name="patcher_long_step_warning">Този стъпка може да отнеме време. Моля, изчакайте…</string>
     <string name="patcher_installing_subtitle">Готворе се да рокне! 🎸</string>
     <string name="patcher_success_title">Всичко е готово! 🎉</string>

@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
     <string name="expert_mode_universal_patches">Yleismaailmalliset korjaukset</string>
+    <string name="expert_mode_new_patches">Uusi</string>
     <string name="expert_mode_multiple_sources_warning_title">Valittu useita päivitys lähteitä</string>
     <string name="expert_mode_multiple_sources_warning_message">"Olet valinnut päivitykset useista päivitys lähteistä. Tämä saattaa aiheuttaa yhteensopivuusongelmia tai odottamattomia toimintoja.
 
@@ -164,6 +165,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="patch_option_list_duplicate">Tämä arvo on jo olemassa</string>
     <string name="patch_option_list_empty">Arvo ei voi olla tyhjä</string>
     <string name="patch_option_list_empty_state">Ei arvoja lisätty vielä</string>
+    <string name="patch_option_required_missing">%s: täytä kaikki pakolliset vaihtoehdot</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Luo adaptiivinen kuvake</string>
     <string name="adaptive_icon_instructions">Valitse etukuva, valitse taustaväri ja säädä sitten esikatselua liukusäätimen tai puristusliikkeen avulla</string>
@@ -225,6 +227,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="patcher_error_copied">Virhe kopioitu leikepöydälle</string>
     <string name="patcher_error_log">Virhekirjoitus</string>
     <string name="patcher_error_technical">Teknisiä tietoja</string>
+    <string name="patcher_error_dialog_app_info">Sovellusinfo</string>
     <string name="patcher_long_step_warning">Tämä vaihe voi kestää jonkin aikaa. Odota…</string>
     <string name="patcher_installing_subtitle">Melkein valmista! 🎸</string>
     <string name="patcher_success_title">Valmis! 🎉</string>

@@ -614,6 +614,8 @@ Bildernas mått ska vara följande:
     <string name="settings">Inställningar</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
+    <string name="all">Alla</string>
+    <string name="filter">Filter</string>
     <string name="reset">Återställ</string>
     <string name="reset_all">Återställ alla</string>
     <string name="confirm">Bekräfta</string>

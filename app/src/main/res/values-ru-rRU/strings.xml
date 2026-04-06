@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
     <string name="expert_mode_universal_patches">Универсальные патчи</string>
+    <string name="expert_mode_new_patches">Новый</string>
     <string name="expert_mode_multiple_sources_warning_title">Выбрано несколько источников патчей</string>
     <string name="expert_mode_multiple_sources_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">Это значение уже существует</string>
     <string name="patch_option_list_empty">Значение не может быть пустым</string>
     <string name="patch_option_list_empty_state">Значения еще не добавлены</string>
+    <string name="patch_option_required_missing">%s: заполните все необходимые поля</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Создать адаптивную иконку</string>
     <string name="adaptive_icon_instructions">Выберите изображение переднего плана, выберите цвет фона, затем с помощью ползунка или щепок жестом, чтобы настроить предварительный просмотр</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">Ошибка скопирована в буфер обмена</string>
     <string name="patcher_error_log">Журнал ошибок</string>
     <string name="patcher_error_technical">Технические детали</string>
+    <string name="patcher_error_dialog_app_info">Информация о приложении</string>
     <string name="patcher_long_step_warning">Этот шаг может занять некоторое время. Пожалуйста, подождите…</string>
     <string name="patcher_installing_subtitle">Почти готово к работе! 🎸</string>
     <string name="patcher_success_title">Все готово! 🎉</string>
@@ -605,7 +608,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
     <string name="settings_system_share_website_description">Поделиться официальным сайтом Morphe</string>
-    <string name="settings_system_manager_description">"Экспериментальный проект с открытым кодом для регулярного, оптимизированного патчинга популярных дополнений для Android, который базируется на отзывах и внешности"</string>
+    <string name="settings_system_manager_description">"Экспериментальный проект с открытым исходным кодом для современного, упрощенного патчинга популярных Android-приложений, развиваемый на основе отзывов и вкладов сообщества"</string>
     <string name="credits">Благодарности</string>
     <string name="credits_current_development">Текущая разработка</string>
     <string name="credits_prior_development">Предыдущая разработка</string>
@@ -616,8 +619,8 @@ morphe_header_custom_dark.png
     <string name="settings">Настройки</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
-    <string name="all">All</string>
-    <string name="filter">Filter</string>
+    <string name="all">Все</string>
+    <string name="filter">Фильтр</string>
     <string name="reset">Сбросить</string>
     <string name="reset_all">Сбросить все</string>
     <string name="confirm">Подтвердить</string>

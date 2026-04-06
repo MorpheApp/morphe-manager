@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">啟用全部</string>
     <string name="expert_mode_no_results">找不到修補</string>
     <string name="expert_mode_universal_patches">通用修補程式</string>
+    <string name="expert_mode_new_patches">新</string>
     <string name="expert_mode_multiple_sources_warning_title">已選擇多個修補來源</string>
     <string name="expert_mode_multiple_sources_warning_message">"你已選擇來自多個修補來源的修補。這可能會導致相容性問題或未預期的行為。
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">此值已存在</string>
     <string name="patch_option_list_empty">值不能為空</string>
     <string name="patch_option_list_empty_state">尚未新增任何值</string>
+    <string name="patch_option_required_missing">%s：請填寫所有必填選項</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">建立自動調整圖示</string>
     <string name="adaptive_icon_instructions">選擇前景圖片、選取背景顏色，然後使用滑桿或捏合手勢調整預覽</string>
@@ -226,6 +228,7 @@
     <string name="patcher_error_copied">已將錯誤複製到剪貼簿</string>
     <string name="patcher_error_log">錯誤記錄檔</string>
     <string name="patcher_error_technical">技術細節</string>
+    <string name="patcher_error_dialog_app_info">應用程式資訊</string>
     <string name="patcher_long_step_warning">這項步驟可能需要一些時間。請稍候……</string>
     <string name="patcher_installing_subtitle">即將就緒，稍安勿躁！🎸</string>
     <string name="patcher_success_title">全部完成！🎉</string>

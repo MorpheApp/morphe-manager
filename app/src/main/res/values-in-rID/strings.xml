@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_universal_patches">Tambalan universal</string>
+    <string name="expert_mode_new_patches">Baru</string>
     <string name="expert_mode_multiple_sources_warning_title">Berbagai sumber tambalan telah dipilih</string>
     <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tambalan dari berbagai sumber. Hal ini dapat menyebabkan masalah kompatibilitas atau masalah yang tidak terduga.
 
@@ -166,6 +167,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patch_option_list_duplicate">Nilai ini sudah ada</string>
     <string name="patch_option_list_empty">Nilai tidak boleh kosong</string>
     <string name="patch_option_list_empty_state">Belum ada nilai yang ditambahkan</string>
+    <string name="patch_option_required_missing">%s: isi semua opsi yang diperlukan</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Buat ikon adaptif</string>
     <string name="adaptive_icon_instructions">Pilih gambar latar depan, pilih warna latar belakang, lalu gunakan tombol geser atau gerakan mencubit untuk menyesuaikan pratinjau</string>
@@ -227,6 +229,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patcher_error_copied">Kesalahan disalin ke papan klip</string>
     <string name="patcher_error_log">Catatan kesalahan</string>
     <string name="patcher_error_technical">Rincian teknis</string>
+    <string name="patcher_error_dialog_app_info">Info aplikasi</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir siap! 🎸</string>
     <string name="patcher_success_title">Semua Selesai! 🎉</string>
@@ -618,7 +621,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="all">Semua</string>
-    <string name="filter">Filter</string>
+    <string name="filter">Penyaring</string>
     <string name="reset">Setel ulang</string>
     <string name="reset_all">Atur ulang Semua</string>
     <string name="confirm">Konfirmasi</string>

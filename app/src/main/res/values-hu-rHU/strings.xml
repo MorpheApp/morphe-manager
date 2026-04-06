@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_universal_patches">Univerzális módosítások</string>
+    <string name="expert_mode_new_patches">Új</string>
     <string name="expert_mode_multiple_sources_warning_title">Több patchforrás van kiválasztva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
 
@@ -165,6 +166,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="patch_option_list_duplicate">Ez az érték már létezik</string>
     <string name="patch_option_list_empty">Az érték nem lehet üres</string>
     <string name="patch_option_list_empty_state">Még nincsenek hozzáadott értékek</string>
+    <string name="patch_option_required_missing">%s: Kitölteni minden kötelező opciót</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Alkalmazkodó ikon létrehozása</string>
     <string name="adaptive_icon_instructions">Válasszon egy előtérképet és egy háttérszínt, majd a csúszkával vagy kétujjas mozdulatok segítségével állítsa be az előnézetet</string>
@@ -226,6 +228,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="patcher_error_log">Hibanapló</string>
     <string name="patcher_error_technical">Technikai részletek</string>
+    <string name="patcher_error_dialog_app_info">Alkalmazásinformáció</string>
     <string name="patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük várjon…</string>
     <string name="patcher_installing_subtitle">Majdnem készen állunk! 🎸</string>
     <string name="patcher_success_title">Minden kész! 🎉</string>

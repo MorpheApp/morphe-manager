@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Abilita tutte</string>
     <string name="expert_mode_no_results">Nessuna patch trovata</string>
     <string name="expert_mode_universal_patches">Patch universali</string>
+    <string name="expert_mode_new_patches">Nuovo</string>
     <string name="expert_mode_multiple_sources_warning_title">Molteplici fonti delle patch selezionate</string>
     <string name="expert_mode_multiple_sources_warning_message">"Hai selezionato delle patch da molteplici fonti delle patch. Ciò potrebbe causare problemi di compatibilità o comportamenti imprevisti.
 
@@ -165,6 +166,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="patch_option_list_duplicate">Questo valore esiste già</string>
     <string name="patch_option_list_empty">Il valore non può essere vuoto</string>
     <string name="patch_option_list_empty_state">Nessun valore aggiunto ancora</string>
+    <string name="patch_option_required_missing">%s: compilare tutte le opzioni richieste</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crea icona adattiva</string>
     <string name="adaptive_icon_instructions">Scegli un\'immagine in primo piano, seleziona il colore dello sfondo, quindi usa il cursore o i gesti di pizzico per regolare l\'anteprima</string>
@@ -226,6 +228,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="patcher_error_copied">Errore copiato negli appunti</string>
     <string name="patcher_error_log">Log dell\'errore</string>
     <string name="patcher_error_technical">Dettagli tecnici</string>
+    <string name="patcher_error_dialog_app_info">Informazioni sull\'app</string>
     <string name="patcher_long_step_warning">Questo passaggio potrebbe richiedere un po\'  di tempo. Si prega di attendere…</string>
     <string name="patcher_installing_subtitle">Quasi pronti a partire! 🎸</string>
     <string name="patcher_success_title">Fatto! 🎉</string>

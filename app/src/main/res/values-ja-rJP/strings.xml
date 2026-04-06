@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">全て有効化する</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_universal_patches">ユニバーサルパッチ</string>
+    <string name="expert_mode_new_patches">新規</string>
     <string name="expert_mode_multiple_sources_warning_title">複数のパッチソースが選択されました</string>
     <string name="expert_mode_multiple_sources_warning_message">"複数のパッチソースからパッチを選択しました。これは互換性の問題や予期しない動作を引き起こす可能性があります。
 
@@ -165,6 +166,7 @@
     <string name="patch_option_list_duplicate">この値はすでに存在します</string>
     <string name="patch_option_list_empty">値は空にできません</string>
     <string name="patch_option_list_empty_state">まだ値が追加されていません</string>
+    <string name="patch_option_required_missing">%s: 必須オプションをすべて入力してください</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">アダプティブ アイコンを作成</string>
     <string name="adaptive_icon_instructions">前景画像を選択し、背景色を設定し、スライダーまたはピンチジェスチャーを使用してプレビューを調整します</string>
@@ -197,7 +199,7 @@
     <string name="home_app_info_delete_item_patched_apk">パッチ適用済み APK ファイル</string>
     <string name="home_app_info_delete_item_original_apk">オリジナルの APK ファイル</string>
     <string name="home_app_info_delete_preservation_note">パッチ セレクションとオプションは、今後のパッチ適用のために保持されます</string>
-    <string name="home_app_info_patches_name_default">パッチ</string>
+    <string name="home_app_info_patches_name_default">パッチ数</string>
     <string name="home_app_info_patches_name_fallback">無名</string>
     <string name="home_app_info_patches_replace_fail">パッチの適用に失敗しました: %s</string>
     <string name="home_app_info_repatch_no_original_apk">オリジナルの APK が見つからないため、このアプリを再パッチすることができません</string>
@@ -216,16 +218,17 @@
     <string name="root_install_apk_required">root 権限モードでは、パッチ適用前にオリジナルの APK がインストールされている必要があります</string>
     <string name="root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
     <string name="root_pre_patch_installer_title">インストール方法を選択してください</string>
-    <string name="root_pre_patch_installer_description">このデバイスには root 権限 があります。パッチ適用済みアプリのインストール方法を選択してください</string>
+    <string name="root_pre_patch_installer_description">このデバイスには root 権限 があります。パッチしたアプリのインストール方法を選択してください</string>
     <string name="root_pre_patch_installer_mount_title">root 権限マウント</string>
     <string name="root_pre_patch_installer_mount_description">オリジナルのアプリの上にパッチ適用済み APK をマウントします。GmsCore は必要ありません</string>
     <string name="root_pre_patch_installer_standard_title">標準インストール</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore のサポートを含めた状態で、オリジナルとは別アプリとしてインストールします。パッチ適用後にインストーラー (システムインストーラー、 Shizuku など) を選択してください</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore のサポートを含めた状態で、オリジナルとは別アプリとしてインストールします。パッチ適用後にインストーラー (システムインストーラー、Shizuku など) を選択してください</string>
     <string name="root_pre_patch_installer_hint">インストール方法によって適用されるパッチが決定され、パッチ適用後に変更することはできません</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
     <string name="patcher_error_technical">技術的な詳細</string>
+    <string name="patcher_error_dialog_app_info">アプリ情報</string>
     <string name="patcher_long_step_warning">この処理には時間がかかる場合があります。お待ちください…</string>
     <string name="patcher_installing_subtitle">もうすぐ準備完了！🎸</string>
     <string name="patcher_success_title">完了しました！🎉</string>
@@ -392,7 +395,7 @@
     <string name="settings_advanced_strip_unused_libs">未使用のネイティブライブラリの削除</string>
     <string name="settings_advanced_strip_unused_libs_description">パッチ適用済みアプリから、非対応の CPU アーキテクチャ向けネイティブ ライブラリを削除します</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
-    <string name="settings_advanced_github_pat">GitHub PAT</string>
+    <string name="settings_advanced_github_pat">GitHub PAT の設定</string>
     <string name="settings_advanced_github_pat_description">プルリクエスト ソースに必要です</string>
     <string name="settings_advanced_github_pat_configured">PAT が設定されました</string>
     <string name="settings_advanced_github_pat_how_to_get">PAT を取得するには</string>
@@ -525,7 +528,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">別プロセスでの実行を有効化</string>
     <string name="settings_system_memory_limit_subtitle">パッチに使用できるメモリ</string>
     <string name="settings_system_memory_limit_warning">メモリ制限が低い場合、大規模なアプリをパッチする際に失敗する可能性があります</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB 制限</string>
+    <string name="settings_system_process_runtime_enabled_description">上限 %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">タップして構成</string>
     <string name="settings_system_process_runtime_description_not_available">本機能は Android 11 以上で利用できます</string>
     <!-- Settings - System Tab - Import and export keystore -->
@@ -558,7 +561,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">デバッグ</string>
     <string name="settings_system_export_debug_logs">デバッグログのエクスポート</string>
-    <string name="settings_system_export_debug_logs_description">システムログを保存してトラブルシューティングに使用します</string>
+    <string name="settings_system_export_debug_logs_description">トラブルシューティングのためにシステムログを保存します</string>
     <string name="settings_system_export_debug_logs_export_read_failed">ログの読み取りに失敗しました (終了コード %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ログのエクスポートに失敗しました</string>
     <string name="settings_system_export_debug_logs_export_success">ログをエクスポートしました</string>

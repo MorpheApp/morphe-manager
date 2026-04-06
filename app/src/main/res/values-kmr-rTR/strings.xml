@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
     <string name="expert_mode_universal_patches">Pêtên hevpar.</string>
+    <string name="expert_mode_new_patches">Nû</string>
     <string name="expert_mode_multiple_sources_warning_title">Berî çend seyarên bejna tê</string>
     <string name="expert_mode_multiple_sources_warning_message">"Hûn bejna seyarê berî çendan bejna kirin. Gûma serdebaza pêşçuna bêgîri azre be."</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -163,6 +164,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="patch_option_list_duplicate">Evîna vê ber bi hezaran e</string>
     <string name="patch_option_list_empty">Qîymet nikare boçagî be</string>
     <string name="patch_option_list_empty_state">Heta niha tiştek zêde nabe</string>
+    <string name="patch_option_required_missing">%s: hemû rêzika pêwist tê dîtin</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Îkon adaptî çêkîn</string>
     <string name="adaptive_icon_instructions">Wekşîna wêneyek pêşîn hilbijêre, rûxana rengî hilbijêre, paşê ji bo danûşandina pêşbîniyê silser an gestên qutkirinê bikar bîne</string>
@@ -224,6 +226,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_error_copied">Xetalî bi mêjiyê kopî kirin</string>
     <string name="patcher_error_log">Log xistina</string>
     <string name="patcher_error_technical">Agahî teknîk</string>
+    <string name="patcher_error_dialog_app_info">Agahdariya sepanê</string>
     <string name="patcher_long_step_warning">Ev gav dikare hinekî dem bigire. Heke...</string>
     <string name="patcher_installing_subtitle">Nêzîk e ku hûn şêwaz bin! 🎸</string>
     <string name="patcher_success_title">Hemû tişt qediya! 🎉</string>

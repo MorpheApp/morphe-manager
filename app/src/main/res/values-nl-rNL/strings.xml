@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Alles inschakelen</string>
     <string name="expert_mode_no_results">Geen patches gevonden</string>
     <string name="expert_mode_universal_patches">Universele patches</string>
+    <string name="expert_mode_new_patches">Nieuw</string>
     <string name="expert_mode_multiple_sources_warning_title">Meerdere patch-bronnen geselecteerd</string>
     <string name="expert_mode_multiple_sources_warning_message">"U heeft patches geselecteerd van meerdere patch-bronnen. Dit kan compatibiliteitsproblemen of onverwachte gedrag veroorzaken.
 
@@ -165,6 +166,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="patch_option_list_duplicate">Deze waarde bestaat al</string>
     <string name="patch_option_list_empty">Waarde mag niet leeg zijn</string>
     <string name="patch_option_list_empty_state">Nog geen waarden toegevoegd</string>
+    <string name="patch_option_required_missing">%s: vul alle verplichte opties in</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Adaptieve icoon maken</string>
     <string name="adaptive_icon_instructions">Kies een voorgrondafbeelding, selecteer een achtergrondkleur en gebruik vervolgens de schuifregelaar of knijpbewerking om de voorbeeldweergave aan te passen</string>
@@ -226,6 +228,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="patcher_error_log">Foutlogboek</string>
     <string name="patcher_error_technical">Technische details</string>
+    <string name="patcher_error_dialog_app_info">App-info</string>
     <string name="patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>
     <string name="patcher_success_title">Klaar! 🎉</string>

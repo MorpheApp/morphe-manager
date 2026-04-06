@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
+    <string name="expert_mode_new_patches">Ново</string>
     <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
     <string name="expert_mode_multiple_sources_warning_message">"Одабрали сте патчеве из више извора. Може да дође до проблема са компатибилношћу или неочекиваног понашања.
 
@@ -226,6 +227,7 @@
     <string name="patcher_error_copied">Грешка је копирана у привремену меморију</string>
     <string name="patcher_error_log">Лог грешaka</string>
     <string name="patcher_error_technical">Техничке информације</string>
+    <string name="patcher_error_dialog_app_info">Информације о апликацији</string>
     <string name="patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
     <string name="patcher_installing_subtitle">Скоро спремно за рад! 🎸</string>
     <string name="patcher_success_title">Све готово! 🎉</string>

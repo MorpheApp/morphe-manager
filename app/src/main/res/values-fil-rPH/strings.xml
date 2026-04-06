@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Paganahin lahat</string>
     <string name="expert_mode_no_results">Walang nakita na patch</string>
     <string name="expert_mode_universal_patches">Mga unibersal na patch</string>
+    <string name="expert_mode_new_patches">Bago</string>
     <string name="expert_mode_multiple_sources_warning_title">Maramihang mga mapagkukunang patch ang napili</string>
     <string name="expert_mode_multiple_sources_warning_message">"Pinili mo ang mga patch mula sa maramihang mapagkukunang patch. Maaari itong magdulot ng isyu sa kompatibilidad o hindi inaasahang kilos.
 
@@ -165,6 +166,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="patch_option_list_duplicate">May umiiral na ang halagang ito</string>
     <string name="patch_option_list_empty">Hindi maaaring walang laman ang halaga</string>
     <string name="patch_option_list_empty_state">Walang idinagdag na halaga pa</string>
+    <string name="patch_option_required_missing">%s: punan ang lahat ng kinakailangang pagpipilian</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Gumawa ng iniangkop na icon</string>
     <string name="adaptive_icon_instructions">Piliin ang isang foreground na larawan, piliin ang likurang kulay, pagkatapos gamitin ang slider o pagpitil na mga galaw upang i-adjust ang preview</string>
@@ -226,6 +228,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="patcher_error_copied">Isang pagkakamali na nakopya sa clipboard</string>
     <string name="patcher_error_log">Tala ng pagkakamali</string>
     <string name="patcher_error_technical">Teknikal na detalye</string>
+    <string name="patcher_error_dialog_app_info">Impormasyon ng app</string>
     <string name="patcher_long_step_warning">Maaaring magtagal ang hakbang ito. Mangyaring maghintay…</string>
     <string name="patcher_installing_subtitle">Halos handa na sa rock! 🎸</string>
     <string name="patcher_success_title">Tapos na lahat! 🎉</string>
