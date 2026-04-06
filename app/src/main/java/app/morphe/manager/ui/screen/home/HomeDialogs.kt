@@ -12,6 +12,11 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -1173,25 +1178,26 @@ private fun SelectableVersionListCard(
         color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
         tonalElevation = 1.dp
     ) {
-        Column(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.fillMaxWidth().selectableGroup()) {
             versions.forEachIndexed { index, target ->
                 val versionString = target.version ?: anyString
-                val isSelected = target.version != null &&
-                        target.version == selectedVersion?.version
-                val isRecommended = target.version != null &&
-                        target.version == recommendedVersion?.version
+                val isSelected = target.version != null && target.version == selectedVersion?.version
+                val isRecommended = target.version != null && target.version == recommendedVersion?.version
+                val recommendedLabel = stringResource(R.string.home_apk_availability_recommended_label)
+                val experimentalLabel = stringResource(R.string.home_dialog_unsupported_version_experimental_label)
+                val selectedLabel = stringResource(R.string.home_selected_version)
 
                 val badge: @Composable (() -> Unit)? = when {
                     target.isExperimental -> ({
                         InfoBadge(
-                            text = stringResource(R.string.home_dialog_unsupported_version_experimental_label),
+                            text = experimentalLabel,
                             style = InfoBadgeStyle.Warning,
                             isCompact = true
                         )
                     })
                     isRecommended -> ({
                         InfoBadge(
-                            text = stringResource(R.string.home_apk_availability_recommended_label),
+                            text = recommendedLabel,
                             style = InfoBadgeStyle.Default,
                             isCompact = true
                         )
@@ -1199,10 +1205,25 @@ private fun SelectableVersionListCard(
                     else -> null
                 }
 
+                val rowContentDesc = buildString {
+                    append(versionString)
+                    when {
+                        target.isExperimental -> append(", $experimentalLabel")
+                        isRecommended -> append(", $recommendedLabel")
+                    }
+                    if (isSelected) append(", $selectedLabel")
+                    target.description?.let { append(", $it") }
+                }
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onVersionSelect(target) }
+                        .selectable(
+                            selected = isSelected,
+                            onClick = { onVersionSelect(target) },
+                            role = Role.RadioButton
+                        )
+                        .semantics { contentDescription = rowContentDesc }
                         .padding(horizontal = 16.dp, vertical = 12.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
