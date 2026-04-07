@@ -1,3 +1,10 @@
+# [1.14.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.6...v1.14.0-dev.7) (2026-04-07)
+
+
+### Bug Fixes
+
+* Use safe temp dir for APK, preserve input for root mount, and clean up temp files ([9353d65](https://github.com/MorpheApp/morphe-manager/commit/9353d6573294a6677abd1915c8f5d4df3076cd9d))
+
 # [1.14.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2026-04-07)
 
 
