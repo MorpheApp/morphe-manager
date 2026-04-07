@@ -10,10 +10,10 @@ import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.*import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -21,9 +21,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxValue
-import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +30,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -1252,6 +1250,42 @@ private fun RowScope.AppCardContent(
 }
 
 /**
+ * Frosted-glass chip for use on gradient card backgrounds.
+ * Uses white semi-transparent fill so it reads correctly regardless of
+ * the card's accent color or the user's dynamic theme.
+ */
+@Composable
+private fun GlassChip(
+    text: String,
+    icon: ImageVector,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(6.dp),
+        color = Color.White.copy(alpha = 0.20f)
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(12.dp)
+            )
+            Text(
+                text = text,
+                style = MaterialTheme.typography.labelSmall,
+                color = Color.White
+            )
+        }
+    }
+}
+
+/**
  * Installed app card with gradient background.
  */
 @Composable
@@ -1309,105 +1343,62 @@ fun InstalledAppCard(
             preferredSource = AppDataSource.INSTALLED
         )
 
-        // App info with update badge
-        Box(modifier = Modifier.weight(1f)) {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                // App name
+        // App info
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            // App name
+            Text(
+                text = displayName,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    shadow = Shadow(
+                        color = Color.Black.copy(alpha = 0.4f),
+                        offset = Offset(0f, 2f),
+                        blurRadius = 4f
+                    )
+                ),
+                color = textColor,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            // Version + deleted status + inline update chip
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
-                    text = displayName,
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold,
+                    text = version,
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         shadow = Shadow(
                             color = Color.Black.copy(alpha = 0.4f),
-                            offset = Offset(0f, 2f),
-                            blurRadius = 4f
+                            offset = Offset(0f, 1f),
+                            blurRadius = 2f
                         )
                     ),
-                    color = textColor,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    color = textColor.copy(alpha = 0.85f)
                 )
 
-                // Version + deleted status
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = version,
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.4f),
-                                offset = Offset(0f, 1f),
-                                blurRadius = 2f
-                            )
-                        ),
-                        color = textColor.copy(alpha = 0.85f)
+                if (isAppDeleted) {
+                    GlassChip(
+                        text = stringResource(R.string.uninstalled),
+                        icon = Icons.Outlined.DeleteOutline
                     )
+                }
 
-                    if (isAppDeleted) {
-                        Text(
-                            text = "• ${stringResource(R.string.uninstalled)}",
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                shadow = Shadow(
-                                    color = Color.Black.copy(alpha = 0.4f),
-                                    offset = Offset(0f, 1f),
-                                    blurRadius = 2f
-                                )
-                            ),
-                            color = Color(0xFFFF5252),
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                AnimatedVisibility(
+                    visible = hasUpdate && !isAppDeleted,
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
+                ) {
+                    GlassChip(
+                        text = stringResource(R.string.update),
+                        icon = Icons.Outlined.ArrowUpward
+                    )
                 }
             }
-
-            // Update badge
-            @Suppress("RemoveRedundantQualifierName")
-            androidx.compose.animation.AnimatedVisibility(
-                visible = hasUpdate && !isAppDeleted,
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 0.dp, end = 0.dp),
-                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(initialScale = 0.8f, animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)),
-                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(targetScale = 0.8f, animationSpec = tween(MorpheDefaults.ANIMATION_DURATION))
-            ) {
-                UpdateBadge()
-            }
-        }
-    }
-}
-
-/**
- * Update badge for app cards.
- */
-@Composable
-private fun UpdateBadge(
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.primaryContainer,
-        shadowElevation = 4.dp
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Update,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.size(14.dp)
-            )
-            Text(
-                text = stringResource(R.string.update),
-                style = MaterialTheme.typography.labelSmall,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
         }
     }
 }
