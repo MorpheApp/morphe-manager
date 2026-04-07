@@ -1,3 +1,17 @@
+# [1.14.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2026-04-07)
+
+
+### Bug Fixes
+
+* Add `stateDescription` to search button and Role.RadioButton to version list ([6daf288](https://github.com/MorpheApp/morphe-manager/commit/6daf2880453ee02545971b57176073877526dcd4))
+* Add custom ModalBottomSheet ([ef7449c](https://github.com/MorpheApp/morphe-manager/commit/ef7449c28f4f9cead47dd8505f3b91aff0d9e693))
+* Change the "default patches" icon in Expert dialog ([e929a14](https://github.com/MorpheApp/morphe-manager/commit/e929a1407c87241e96c5d81b73c24eb4deded451))
+* Move bundle update time to version line ([636e8cc](https://github.com/MorpheApp/morphe-manager/commit/636e8cceaf6cc05f337d0b36250c0609d610ee17))
+* Replace `UpdateBadge` overlay with inline chips in InstalledAppCard ([ce60eab](https://github.com/MorpheApp/morphe-manager/commit/ce60eab544b56c1ffa075a7e8c8d148d97b93daa))
+* Show compatibility version description if available ([5524c86](https://github.com/MorpheApp/morphe-manager/commit/5524c863c16059e87332cb803197bc8699fc4bd0))
+* Skip notification prompt in export if already requested ([59fca7e](https://github.com/MorpheApp/morphe-manager/commit/59fca7e19dac9ef79e8ad5f6d8f65901d62ae3ce))
+* Use bundle metadata display name in patch dialog ([12d57fa](https://github.com/MorpheApp/morphe-manager/commit/12d57fa9e213f98bed0faf13805b7b09eee4ba58))
+
 # [1.14.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2026-04-06)
 
 
