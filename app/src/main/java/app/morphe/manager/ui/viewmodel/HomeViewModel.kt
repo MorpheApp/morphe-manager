@@ -2168,15 +2168,34 @@ class HomeViewModel(
     }
 
     /**
+     * Clean up any pending temporary APK when the ViewModel is destroyed.
+     * This handles the edge case where the user navigates away or the system destroys
+     * the ViewModel while a temporary APK file is still held in pendingSelectedApp.
+     */
+    override fun onCleared() {
+        super.onCleared()
+        val pending = pendingSelectedApp
+        if (pending is SelectedApp.Local && pending.temporary) {
+            pending.file.delete()
+        }
+    }
+
+    /**
      * Load local APK and extract package info.
      * Supports both single APK and split APK archives (apkm, apks, xapk).
+     *
+     * The file is stored in [Filesystem.uiTempDir] (app_ui_ephemeral).
+     * CacheDir can be cleared by Android at any time - even while the app is running and
+     * patching is in progress - which would cause a FileNotFoundException mid-patch.
+     * uiTempDir uses getDir() which is part of the app's private files and is never
+     * cleared by the system automatically.
      */
     private suspend fun loadLocalApk(
         context: Context,
         uri: Uri
     ): SelectedApp.Local? = withContext(Dispatchers.IO) {
         try {
-            // Copy file to cache with original extension detection
+            // Copy file to uiTempDir with original extension detection
             val fileName = context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
                 val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                 cursor.moveToFirst()
@@ -2184,7 +2203,7 @@ class HomeViewModel(
             } ?: "temp_${System.currentTimeMillis()}"
 
             val extension = fileName.substringAfterLast('.', "apk").lowercase()
-            val tempFile = File(context.cacheDir, "temp_apk_${System.currentTimeMillis()}.$extension")
+            val tempFile = filesystem.uiTempDir.resolve("temp_apk_${System.currentTimeMillis()}.$extension")
 
             context.contentResolver.openInputStream(uri)?.use { input ->
                 tempFile.outputStream().use { output ->

@@ -1,6 +1,5 @@
 package app.morphe.manager.patcher.worker
 
-import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -25,13 +24,13 @@ import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
-import app.morphe.manager.patcher.runtime.MemoryMonitor
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
+import com.topjohnwu.superuser.Shell
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -118,17 +117,19 @@ class PatcherWorker(
                     Log.d(tag, "Acquired wakelock.")
                 }
 
-        val args = workerRepository.claimInput(this)
-
+        lateinit var args: Args
+        var patchingSucceeded = false
         val result = try {
-            runPatcher(args)
+            args = workerRepository.claimInput(this)
+            runPatcher(args).also { if (it == Result.success()) patchingSucceeded = true }
         } finally {
             wakeLock.release()
         }
 
-        @SuppressLint("RestrictedApi") // FIXME
-        if (result is Result.Success && args.input is SelectedApp.Local && args.input.temporary) {
-            args.input.file.delete()
+        // Only delete the temporary input APK after patching if not rooted, since root mount
+        // install still needs it - it will be deleted inside RootInstaller after pm install
+        if (patchingSucceeded && Shell.isAppGrantedRoot() == false) {
+            (args.input as? SelectedApp.Local)?.takeIf { it.temporary }?.file?.delete()
         }
 
         return result
@@ -201,15 +202,13 @@ class PatcherWorker(
                 val memLimit = prefs.patcherProcessMemoryLimit.get()
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
-                // Start memory polling for CoroutineRuntime
+                // CoroutineRuntime starts memory polling internally; only log the heap size here
                 args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
-                MemoryMonitor.startMemoryPolling(args.logger)
             }
 
             // Execute patching. ProcessRuntime has its own retry loop that reduces memory on OOM
             // If it still fails on Android <= Q, fall back to CoroutineRuntime
-            var usedCoroutineFallback = false
             val runtime = if (useProcessRuntime) {
                 ProcessRuntime(applicationContext)
             } else {
@@ -234,9 +233,6 @@ class PatcherWorker(
                 }
 
                 args.logger.warn("Process runtime OOM on Android ${Build.VERSION.RELEASE}, falling back to coroutine runtime")
-                usedCoroutineFallback = true
-
-                MemoryMonitor.startMemoryPolling(args.logger)
 
                 CoroutineRuntime(applicationContext).execute(
                     inputFile.absolutePath,
@@ -259,10 +255,6 @@ class PatcherWorker(
             updateProgress(state = State.COMPLETED) // Signing
 
             val elapsed = System.currentTimeMillis() - startTime
-
-            if (!useProcessRuntime || usedCoroutineFallback) {
-                MemoryMonitor.stopMemoryPolling(args.logger)
-            }
 
             args.logger.info(
                 "$LOG_WORKER_PREFIX_SUCCEEDED output=${args.output} " +
@@ -307,7 +299,9 @@ class PatcherWorker(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.stackTraceToString())
             )
         } finally {
-            patchedApk.delete()
+            if (!patchedApk.delete() && patchedApk.exists()) {
+                Log.w(tag, "Failed to delete temporary patched APK: ${patchedApk.absolutePath}".logFmt())
+            }
         }
     }
 
