@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Magpatuloy sa pagpa-patch</string>
     <string name="expert_mode_disable_all">Patayin lahat</string>
     <string name="expert_mode_enable_all">Paganahin lahat</string>
+    <string name="expert_mode_reset_to_default">Paganahin ang inirekumendang mga patch</string>
     <string name="expert_mode_no_results">Walang nakita na patch</string>
     <string name="expert_mode_universal_patches">Mga unibersal na patch</string>
     <string name="expert_mode_new_patches">Bago</string>

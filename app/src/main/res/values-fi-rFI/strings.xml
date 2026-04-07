@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Jatka pätkintä</string>
     <string name="expert_mode_disable_all">Poista kaikki</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
+    <string name="expert_mode_reset_to_default">Ota käyttöön suositellut korjaukset</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
     <string name="expert_mode_universal_patches">Yleismaailmalliset korjaukset</string>
     <string name="expert_mode_new_patches">Uusi</string>

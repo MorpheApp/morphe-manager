@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">繼續修補</string>
     <string name="expert_mode_disable_all">停用全部</string>
     <string name="expert_mode_enable_all">啟用全部</string>
+    <string name="expert_mode_reset_to_default">啟用建議的修補程式</string>
     <string name="expert_mode_no_results">找不到修補</string>
     <string name="expert_mode_universal_patches">通用修補程式</string>
     <string name="expert_mode_new_patches">新</string>

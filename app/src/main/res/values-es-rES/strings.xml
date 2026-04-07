@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Proceder al parcheado</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_enable_all">Activar todo</string>
+    <string name="expert_mode_reset_to_default">Activar parches recomendados</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
     <string name="expert_mode_universal_patches">Parches universales</string>
     <string name="expert_mode_new_patches">Nuevo</string>
@@ -228,7 +229,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patcher_error_copied">Error copiado en el portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>
     <string name="patcher_error_technical">Detalles técnicos</string>
-    <string name="patcher_error_dialog_app_info">Información de la aplicación</string>
+    <string name="patcher_error_dialog_app_info">Información de la app</string>
     <string name="patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
     <string name="patcher_installing_subtitle">¡Casi listo para empezar! 🎸</string>
     <string name="patcher_success_title">¡Todo listo! 🎉</string>

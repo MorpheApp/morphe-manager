@@ -120,6 +120,7 @@
     <string name="expert_mode_enable_all">Aktivera alla</string>
     <string name="expert_mode_no_results">Inga korrigeringar hittades</string>
     <string name="expert_mode_universal_patches">Universella korrigeringar</string>
+    <string name="expert_mode_new_patches">Ny</string>
     <string name="expert_mode_multiple_sources_warning_title">Flera korrigeringskällor har valts</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valt korrigeringar från flera korrigeringskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -163,6 +164,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="patch_option_list_duplicate">Det här värdet finns redan</string>
     <string name="patch_option_list_empty">Värdet kan inte vara tomt</string>
     <string name="patch_option_list_empty_state">Inga värden har lagts till ännu</string>
+    <string name="patch_option_required_missing">%s: fyll i alla obligatoriska alternativ</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Skapa adaptiv ikon</string>
     <string name="adaptive_icon_instructions">Välj en förgrundsbild, välj bakgrundsfärg och justera förhandsgranskningen med skjutreglaget eller genom att nypa den.</string>
@@ -224,6 +226,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="patcher_error_copied">Fel kopierat till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
     <string name="patcher_error_technical">Teknisk information</string>
+    <string name="patcher_error_dialog_app_info">Appinformation</string>
     <string name="patcher_long_step_warning">Det här steget kan ta en stund. Vänta …</string>
     <string name="patcher_installing_subtitle">Nästan redo att rocka loss! 🎸</string>
     <string name="patcher_success_title">Klart! 🎉</string>
@@ -350,7 +353,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_appearance_app_icon_dark_2">Tomrum</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ändra appikon?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Ändra till \"%1$s\" och starta om?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Ändra till %1$s och starta om?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ändra ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Uppdateringar</string>

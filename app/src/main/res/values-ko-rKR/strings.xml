@@ -118,9 +118,10 @@
     <string name="expert_mode_proceed">패치 진행</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
+    <string name="expert_mode_reset_to_default">권장 패치 활성화</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
     <string name="expert_mode_universal_patches">유니버셜 패치</string>
-    <string name="expert_mode_new_patches">새로운</string>
+    <string name="expert_mode_new_patches">신규</string>
     <string name="expert_mode_multiple_sources_warning_title">여러 패치 소스가 선택됨</string>
     <string name="expert_mode_multiple_sources_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
 
@@ -166,7 +167,7 @@
     <string name="patch_option_list_duplicate">이 값은 이미 존재합니다</string>
     <string name="patch_option_list_empty">값을 비워 둘 수 없습니다</string>
     <string name="patch_option_list_empty_state">아직 값이 추가되지 않았습니다</string>
-    <string name="patch_option_required_missing">%s: 모든 필수 옵션을 작성하세요.</string>
+    <string name="patch_option_required_missing">%s: 모든 필수 옵션을 입력하세요</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">적응형 아이콘 만들기</string>
     <string name="adaptive_icon_instructions">전경 이미지를 선택하고, 배경 색상을 선택한 다음 슬라이더 또는 핀치 제스처를 사용하여 미리보기를 조정하세요</string>

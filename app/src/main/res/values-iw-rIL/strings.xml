@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">התקדמו לתיקון</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_enable_all">הפעל את כולם</string>
+    <string name="expert_mode_reset_to_default">להפעיל תיקונים מומלצים</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
     <string name="expert_mode_universal_patches">עדכונים אוניברסליים</string>
     <string name="expert_mode_new_patches">חדש</string>
