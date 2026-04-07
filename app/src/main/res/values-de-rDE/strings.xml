@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Fortfahren zum Patchen</string>
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
     <string name="expert_mode_enable_all">Aktiviere alle</string>
+    <string name="expert_mode_reset_to_default">Empfohlene Patches aktivieren</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
     <string name="expert_mode_universal_patches">Universelle Patches</string>
     <string name="expert_mode_new_patches">Neu</string>
@@ -166,7 +167,7 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="patch_option_list_duplicate">Dieser Wert existiert bereits</string>
     <string name="patch_option_list_empty">Wert darf nicht leer sein</string>
     <string name="patch_option_list_empty_state">Noch keine Werte hinzugefügt</string>
-    <string name="patch_option_required_missing">%s: Bitte alle Pflichtfelder ausfüllen</string>
+    <string name="patch_option_required_missing">%s: Alle Pflichtfelder ausfüllen</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Adaptives Icon erstellen</string>
     <string name="adaptive_icon_instructions">Wählen Sie ein Hintergrundbild, wählen Sie eine Hintergrundfarbe und verwenden Sie dann den Schieberegler oder Zoom-Gesten, um die Vorschau anzupassen</string>

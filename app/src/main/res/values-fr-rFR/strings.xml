@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
+    <string name="expert_mode_reset_to_default">Activer les correctifs recommandés</string>
     <string name="expert_mode_no_results">Aucun patch trouvé</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
     <string name="expert_mode_new_patches">Nouveau</string>
@@ -165,7 +166,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patch_option_list_duplicate">Cette valeur existe déjà</string>
     <string name="patch_option_list_empty">La valeur ne peut pas être vide</string>
     <string name="patch_option_list_empty_state">Aucune valeur ajoutée pour le moment</string>
-    <string name="patch_option_required_missing">%s : renseignez toutes les options requises</string>
+    <string name="patch_option_required_missing">%s: remplissez toutes les options obligatoires</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Créer une icône adaptative</string>
     <string name="adaptive_icon_instructions">Choisissez une image de premier plan, sélectionnez une couleur d’arrière-plan, puis utilisez le curseur ou les gestes de pincement pour ajuster l’aperçu</string>
@@ -227,7 +228,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="patcher_error_log">Journal d\'erreur</string>
     <string name="patcher_error_technical">Détails techniques</string>
-    <string name="patcher_error_dialog_app_info">Infos de l\'application</string>
+    <string name="patcher_error_dialog_app_info">Informations sur l’application</string>
     <string name="patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
     <string name="patcher_installing_subtitle">Bientôt prêt à mettre le feu  ! 🎸</string>
     <string name="patcher_success_title">Tout est prêt ! 🎉</string>

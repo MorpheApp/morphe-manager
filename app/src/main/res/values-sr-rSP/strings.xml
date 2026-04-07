@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Продужи ка поправљању</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
+    <string name="expert_mode_reset_to_default">Омогући препоручене исправке</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
     <string name="expert_mode_new_patches">Ново</string>

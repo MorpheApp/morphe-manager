@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Продължете към поправянето</string>
     <string name="expert_mode_disable_all">Изключи всички</string>
     <string name="expert_mode_enable_all">Включи всички</string>
+    <string name="expert_mode_reset_to_default">Активиране на препоръчаните поправки</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
     <string name="expert_mode_universal_patches">Универсални пачове</string>
     <string name="expert_mode_new_patches">Нов</string>

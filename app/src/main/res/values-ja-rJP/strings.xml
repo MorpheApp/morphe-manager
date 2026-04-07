@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">パッチ処理に進む</string>
     <string name="expert_mode_disable_all">全て無効化する</string>
     <string name="expert_mode_enable_all">全て有効化する</string>
+    <string name="expert_mode_reset_to_default">推奨パッチを有効にする</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_universal_patches">ユニバーサルパッチ</string>
     <string name="expert_mode_new_patches">新規</string>
@@ -166,7 +167,7 @@
     <string name="patch_option_list_duplicate">この値はすでに存在します</string>
     <string name="patch_option_list_empty">値は空にできません</string>
     <string name="patch_option_list_empty_state">まだ値が追加されていません</string>
-    <string name="patch_option_required_missing">%s: 必須オプションをすべて入力してください</string>
+    <string name="patch_option_required_missing">%s: すべての必須項目を入力してください</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">アダプティブ アイコンを作成</string>
     <string name="adaptive_icon_instructions">前景画像を選択し、背景色を設定し、スライダーまたはピンチジェスチャーを使用してプレビューを調整します</string>
@@ -620,7 +621,7 @@ morphe_header_custom_dark.png
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
     <string name="all">すべて</string>
-    <string name="filter">フィルタ</string>
+    <string name="filter">フィルター</string>
     <string name="reset">リセット</string>
     <string name="reset_all">すべてリセット</string>
     <string name="confirm">確認</string>

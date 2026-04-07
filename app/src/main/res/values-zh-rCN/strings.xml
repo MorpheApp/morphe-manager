@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">开始打补丁</string>
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_enable_all">启用所有</string>
+    <string name="expert_mode_reset_to_default">启用推荐补丁</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_universal_patches">通用补丁</string>
     <string name="expert_mode_new_patches">新</string>

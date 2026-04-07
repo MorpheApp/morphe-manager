@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">প্যাচিং শুরু করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
+    <string name="expert_mode_reset_to_default">প্রস্তাবিত প্যাচগুলি সক্ষম করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_universal_patches">সার্বজনীন প্যাচ</string>
     <string name="expert_mode_new_patches">নতুন</string>

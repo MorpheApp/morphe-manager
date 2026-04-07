@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
+    <string name="expert_mode_reset_to_default">\u004e\u006b\u0062\u0061\u0074\u006e\u006f\u0075\u0069\u006e\u0064\u0064\u0061\u0061\u006e\u0068\u0020\u0064\u0075\u006f\u0063\u002d\u006e\u0065\u006e\u0020\u0064\u0075\u006f\u0063\u002d\u006e\u0065\u006e\u0020\u0064\u0075\u006f\u0063\u002d\u006e\u0065\u006e</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_universal_patches">Bản vá phổ quát</string>
     <string name="expert_mode_new_patches">Mới</string>

@@ -95,7 +95,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Κατεβάστε το πρωτότυπο APK</string>
     <string name="home_download_instructions_steps_title">Οδηγίες:</string>
-    <string name="home_download_instructions_step1">Κάντε κλικ στο κουμπί \'%1$s\' παρακάτω</string>
+    <string name="home_download_instructions_step1">Πατήστε το παρακάτω κουμπί\'%1$s\'</string>
     <string name="home_download_instructions_step2_part1">Κάντε κύλιση της ιστοσελίδας προς τα κάτω και πατήστε</string>
     <string name="home_download_instructions_download_button_toast">Πατήστε λήψη στην ιστοσελίδα, και όχι εδώ 😊</string>
     <string name="home_download_instructions_step3">Περιμένετε μέχρι να ολοκληρωθεί η λήψη, και &lt;b&gt;μην εγκαταστήσετε&lt;/b&gt; το APK</string>
@@ -110,7 +110,7 @@
     <string name="home_recommended_version">Προτεινόμενη έκδοση</string>
     <string name="home_selected_version">Επιλεγμένη έκδοση</string>
     <string name="home_select_apk_title">Επιλογή APK</string>
-    <string name="home_select_any_apk_description">Πατήστε το κουμπί παρακάτω για να επιλέξετε ένα αρχείο APK οποιασδήποτε εφαρμογής για τροποποίηση</string>
+    <string name="home_select_any_apk_description">Πατήστε το παρακάτω κουμπί για να επιλέξετε ένα αρχείο APK οποιασδήποτε εφαρμογής για τροποποίηση</string>
     <string name="home_invalid_apk">Μη έγκυρο APK αρχείο</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Εξειδικευμένη λειτουργία</string>
@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Προχωρήστε στην τροποποίηση</string>
     <string name="expert_mode_disable_all">Απενεργοποίηση όλων</string>
     <string name="expert_mode_enable_all">Ενεργοποίηση όλων</string>
+    <string name="expert_mode_reset_to_default">Ενεργοποίηση συνιστώμενων διορθώσεων</string>
     <string name="expert_mode_no_results">Δε βρέθηκαν τροποποιήσεις </string>
     <string name="expert_mode_universal_patches">Γενικές τροποποιήσεις </string>
     <string name="expert_mode_new_patches">Νέο</string>
@@ -489,7 +490,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">Εγκαταστάτης συστήματος</string>
     <string name="installer_internal_description">Χρήση του εγκαταστάτη πακέτων Android</string>
     <string name="installer_auto_saved_name">Εγκαταστάτης προσάρτησης με root</string>
-    <string name="installer_auto_saved_description">Προσαρτάει την τροποποιημένη APK πάνω από την εγκατεστημένη εφαρμογή</string>
+    <string name="installer_auto_saved_description">Προσαρτά την τροποποιημένη APK πάνω από την εγκατεστημένη εφαρμογή</string>
     <string name="installer_shizuku_description">Εγκαταστήστε τη σιωπηλώς χρησιμοποιώντας το Shizuku ή Sui.</string>
     <string name="installer_option_none">Χωρίς εφεδρεία</string>
     <string name="installer_none_description">Δεν έχει ρυθμιστεί εφεδρικός εγκαταστάτης</string>
