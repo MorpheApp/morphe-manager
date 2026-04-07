@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-06T08:06:42.189Z",
-  "description": "# [1.14.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2026-04-06)\n\n\n### Features\n\n* Highlight new patches after bundle update in expert mode ([#394](https://github.com/MorpheApp/morphe-manager/issues/394)) ([90a315a](https://github.com/MorpheApp/morphe-manager/commit/90a315a914c4aed3e3713816a5cb8323782b063e))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.5/morphe-manager-1.14.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.5/morphe-manager-1.14.0-dev.5.apk.asc",
-  "version": "1.14.0-dev.5"
+  "created_at": "2026-04-07T13:11:07.883Z",
+  "description": "# [1.14.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2026-04-07)\n\n\n### Bug Fixes\n\n* Add `stateDescription` to search button and Role.RadioButton to version list ([6daf288](https://github.com/MorpheApp/morphe-manager/commit/6daf2880453ee02545971b57176073877526dcd4))\n* Add custom ModalBottomSheet ([ef7449c](https://github.com/MorpheApp/morphe-manager/commit/ef7449c28f4f9cead47dd8505f3b91aff0d9e693))\n* Change the \"default patches\" icon in Expert dialog ([e929a14](https://github.com/MorpheApp/morphe-manager/commit/e929a1407c87241e96c5d81b73c24eb4deded451))\n* Move bundle update time to version line ([636e8cc](https://github.com/MorpheApp/morphe-manager/commit/636e8cceaf6cc05f337d0b36250c0609d610ee17))\n* Replace `UpdateBadge` overlay with inline chips in InstalledAppCard ([ce60eab](https://github.com/MorpheApp/morphe-manager/commit/ce60eab544b56c1ffa075a7e8c8d148d97b93daa))\n* Show compatibility version description if available ([5524c86](https://github.com/MorpheApp/morphe-manager/commit/5524c863c16059e87332cb803197bc8699fc4bd0))\n* Skip notification prompt in export if already requested ([59fca7e](https://github.com/MorpheApp/morphe-manager/commit/59fca7e19dac9ef79e8ad5f6d8f65901d62ae3ce))\n* Use bundle metadata display name in patch dialog ([12d57fa](https://github.com/MorpheApp/morphe-manager/commit/12d57fa9e213f98bed0faf13805b7b09eee4ba58))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.6/morphe-manager-1.14.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.14.0-dev.6/morphe-manager-1.14.0-dev.6.apk.asc",
+  "version": "1.14.0-dev.6"
 }
