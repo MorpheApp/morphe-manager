@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Bela serîyê berêşî bibe</string>
     <string name="expert_mode_disable_all">Hemû çêbake</string>
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
+    <string name="expert_mode_reset_to_default">Pêşdixeşinên pêşniyar kirî çêbêje</string>
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
     <string name="expert_mode_universal_patches">Pêtên hevpar.</string>
     <string name="expert_mode_new_patches">Nû</string>

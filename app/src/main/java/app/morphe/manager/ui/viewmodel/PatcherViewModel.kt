@@ -613,7 +613,7 @@ class PatcherViewModel(
                     delay(2000) // Delay before resetting save state
                 }
 
-                if (saved) _shouldPromptNotification.value = true
+                if (saved) triggerNotificationPromptIfNeeded()
             } finally {
                 _isSaving.value = false
             }
@@ -622,7 +622,7 @@ class PatcherViewModel(
 
     /**
      * Checks prefs and triggers the notification prompt if conditions are met.
-     * Called after a successful install so UI doesn't read prefs directly.
+     * Called after a successful install or export so UI doesn't read prefs directly.
      */
     fun triggerNotificationPromptIfNeeded() {
         viewModelScope.launch {
@@ -749,8 +749,16 @@ class PatcherViewModel(
                 val storedFile = if (shouldPreserveInput) {
                     val existing = inputFile
                     if (existing?.exists() == true) {
+                        // Reuse the already-copied file from a previous attempt (e.g. OOM retry).
+                        // Do NOT delete it here - it is still the valid input for this run
                         existing
                     } else withContext(Dispatchers.IO) {
+                        // Clean up a stale reference that no longer exists on disk before
+                        // creating a new copy, so we don't accumulate input-*.apk files in
+                        // tempDir across multiple OOM retries
+                        inputFile?.takeIf { !it.exists() }?.let {
+                            Log.d(TAG, "Stale inputFile reference cleared: ${it.name}")
+                        }
                         val destination = File(fs.tempDir, "input-${System.currentTimeMillis()}.apk")
                         file.copyTo(destination, overwrite = true)
                         destination
@@ -979,6 +987,12 @@ class PatcherViewModel(
             inputFile = null
             updateSplitStepRequirement(null)
         }
+
+        // Clean up the installer temp directory (contains output.apk and any intermediate files).
+        // This covers the case where the user navigates away before installing/exporting,
+        // or after a failed patch. The next PatcherViewModel creation will also deleteRecursively,
+        // but doing it here is more prompt and avoids holding ~XX MB until next launch.
+        tempDir.deleteRecursively()
     }
 
     private companion object {
@@ -1035,7 +1049,6 @@ class PatcherViewModel(
                 )
             )
         }
-
     }
 }
 

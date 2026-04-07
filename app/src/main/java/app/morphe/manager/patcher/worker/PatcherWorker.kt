@@ -30,6 +30,7 @@ import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
+import com.topjohnwu.superuser.Shell
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -125,7 +126,9 @@ class PatcherWorker(
             wakeLock.release()
         }
 
-        if (patchingSucceeded) {
+        // Only delete the temporary input APK after patching if not rooted, since root mount
+        // install still needs it - it will be deleted inside RootInstaller after pm install
+        if (patchingSucceeded && Shell.isAppGrantedRoot() == false) {
             (args.input as? SelectedApp.Local)?.takeIf { it.temporary }?.file?.delete()
         }
 
@@ -199,7 +202,7 @@ class PatcherWorker(
                 val memLimit = prefs.patcherProcessMemoryLimit.get()
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
-                // CoroutineRuntime starts memory polling internally; only log the heap size here.
+                // CoroutineRuntime starts memory polling internally; only log the heap size here
                 args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
             }

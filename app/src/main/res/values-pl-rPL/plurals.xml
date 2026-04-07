@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%s Modyfikacja</item>
-        <item quantity="few">%s modyfikacja</item>
+        <item quantity="one">%s modyfikacja</item>
+        <item quantity="few">%s modyfikacje</item>
         <item quantity="many">%s modyfikacji</item>
         <item quantity="other">%s modyfikacji</item>
     </plurals>

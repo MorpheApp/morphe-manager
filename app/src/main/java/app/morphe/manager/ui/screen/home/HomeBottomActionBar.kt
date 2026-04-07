@@ -70,10 +70,13 @@ fun HomeBottomActionBar(
                 enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing)),
                 exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing))
             ) {
+                val searchExpandedLabel = stringResource(R.string.expanded)
+                val searchCollapsedLabel = stringResource(R.string.collapsed)
                 BottomActionButton(
                     onClick = onSearchClick,
                     icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                     text = stringResource(R.string.home_search_apps),
+                    searchStateDescription = if (searchActive) searchExpandedLabel else searchCollapsedLabel,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
@@ -104,7 +107,8 @@ fun BottomActionButton(
     contentColor: Color? = null,
     enabled: Boolean = true,
     showProgress: Boolean = false,
-    isExpertMode: Boolean = false
+    isExpertMode: Boolean = false,
+    searchStateDescription: String? = null
 ) {
     val shape = RoundedCornerShape(16.dp)
     val view = LocalView.current
@@ -148,6 +152,9 @@ fun BottomActionButton(
             .semantics {
                 role = Role.Button
                 this.contentDescription = contentDesc
+                if (searchStateDescription != null) {
+                    stateDescription = searchStateDescription
+                }
                 if (showProgress) {
                     liveRegion = LiveRegionMode.Polite
                 }

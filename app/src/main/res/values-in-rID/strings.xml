@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Lanjutkan ke Penambalan</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
+    <string name="expert_mode_reset_to_default">Aktifkan tambalan yang direkomendasikan</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_universal_patches">Tambalan universal</string>
     <string name="expert_mode_new_patches">Baru</string>
@@ -167,7 +168,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patch_option_list_duplicate">Nilai ini sudah ada</string>
     <string name="patch_option_list_empty">Nilai tidak boleh kosong</string>
     <string name="patch_option_list_empty_state">Belum ada nilai yang ditambahkan</string>
-    <string name="patch_option_required_missing">%s: isi semua opsi yang diperlukan</string>
+    <string name="patch_option_required_missing">%s: isi semua pilihan yang diperlukan</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Buat ikon adaptif</string>
     <string name="adaptive_icon_instructions">Pilih gambar latar depan, pilih warna latar belakang, lalu gunakan tombol geser atau gerakan mencubit untuk menyesuaikan pratinjau</string>

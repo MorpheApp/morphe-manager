@@ -118,9 +118,10 @@
     <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
+    <string name="expert_mode_reset_to_default">Włącz zalecane modyfikacje</string>
     <string name="expert_mode_no_results">Nie znaleziono modyfikacji</string>
     <string name="expert_mode_universal_patches">Uniwersalne modyfikacje</string>
-    <string name="expert_mode_new_patches">Nowy</string>
+    <string name="expert_mode_new_patches">Nowe</string>
     <string name="expert_mode_multiple_sources_warning_title">Wybrano wiele źródeł modyfikacji</string>
     <string name="expert_mode_multiple_sources_warning_message">"Wybrano modyfikacje z wielu źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane działanie aplikacji.
 
@@ -166,7 +167,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="patch_option_list_duplicate">Ta wartość już istnieje</string>
     <string name="patch_option_list_empty">Wartość nie może być pusta</string>
     <string name="patch_option_list_empty_state">Nie dodano jeszcze wartości</string>
-    <string name="patch_option_required_missing">%s: wypełnij wszystkie wymagane opcje</string>
+    <string name="patch_option_required_missing">%s: uzupełnij wymagane opcje</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Utwórz ikonę adaptacyjną</string>
     <string name="adaptive_icon_instructions">Wybierz grafikę pierwszego planu i kolor tła, a następnie użyj suwaka lub uszczypnij ekran, aby dostosować podgląd</string>

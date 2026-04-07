@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
     <string name="expert_mode_enable_all">Zapnout vše</string>
+    <string name="expert_mode_reset_to_default">Povolit doporučené opravy</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
     <string name="expert_mode_universal_patches">Univerzální záplaty</string>
     <string name="expert_mode_new_patches">Nový</string>

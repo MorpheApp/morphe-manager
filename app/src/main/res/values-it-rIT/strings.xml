@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Mostra le app nascoste</string>
     <string name="home_app_no_hidden">Nessuna app nascosta</string>
     <string name="home_app_hidden_apps_title">App nascoste</string>
-    <string name="home_app_hidden_apps_hint">Tocca per rivelare</string>
+    <string name="home_app_hidden_apps_hint">Tocca per mostrare</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso di installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
     <string name="deep_link_add_source_title">Aggiungi fonte</string>
@@ -30,7 +30,7 @@
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
     <string name="home_search_apps">Cerca app</string>
     <string name="home_no_apps_title">Nessuna app disponibile</string>
-    <string name="home_no_apps_subtitle">Aggiungi una sorgente di patch o abilita una esistente in %s</string>
+    <string name="home_no_apps_subtitle">Aggiungi una sorgente delle patch o abilita una esistente in %s</string>
     <string name="home_no_apps_search_subtitle">Nessuna app corrisponde a \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quale app vuoi patchare?</string>
@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Procedi con il patching</string>
     <string name="expert_mode_disable_all">Disabilita tutte</string>
     <string name="expert_mode_enable_all">Abilita tutte</string>
+    <string name="expert_mode_reset_to_default">Abilitare patch consigliate</string>
     <string name="expert_mode_no_results">Nessuna patch trovata</string>
     <string name="expert_mode_universal_patches">Patch universali</string>
     <string name="expert_mode_new_patches">Nuovo</string>
@@ -608,7 +609,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_about">A proposito di</string>
     <string name="settings_system_share_website">Condividi il sito</string>
     <string name="settings_system_share_website_description">Condividi il sito ufficiale di Morphe</string>
-    <string name="settings_system_manager_description">"Un progetto open-source sperimentale per la patch moderna e semplificata di app Android popolari, guidato dal feedback e dai contributi della community"</string>
+    <string name="settings_system_manager_description">"Un progetto open-source sperimentale per un patching moderna e semplificata delle app Android popolari, guidato dal feedback e dai contributi della community"</string>
     <string name="credits">Crediti</string>
     <string name="credits_current_development">Sviluppo attuale</string>
     <string name="credits_prior_development">Sviluppo precedente</string>
@@ -661,7 +662,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="open">Apri</string>
     <string name="mount">Monta</string>
     <string name="mounted">Montato</string>
-    <string name="unmount">Smontaggio</string>
+    <string name="unmount">Smonta</string>
     <string name="unmounted">Smontato</string>
     <string name="remount">Rimonta</string>
     <string name="install">Installa</string>

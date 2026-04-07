@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Lean ar aghaidh leis an bpaisteáil</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
+    <string name="expert_mode_reset_to_default">Ná déan cinnte gur na patchanna molta atá á gcumadh</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
     <string name="expert_mode_universal_patches">Paistí uilíocha</string>
     <string name="expert_mode_new_patches">Nua</string>

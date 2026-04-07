@@ -118,9 +118,10 @@
     <string name="expert_mode_proceed">Перейти к патчингу</string>
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_enable_all">Включить все</string>
+    <string name="expert_mode_reset_to_default">Включить рекомендованные патчи</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
     <string name="expert_mode_universal_patches">Универсальные патчи</string>
-    <string name="expert_mode_new_patches">Новый</string>
+    <string name="expert_mode_new_patches">Новые</string>
     <string name="expert_mode_multiple_sources_warning_title">Выбрано несколько источников патчей</string>
     <string name="expert_mode_multiple_sources_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
 
@@ -166,7 +167,7 @@
     <string name="patch_option_list_duplicate">Это значение уже существует</string>
     <string name="patch_option_list_empty">Значение не может быть пустым</string>
     <string name="patch_option_list_empty_state">Значения еще не добавлены</string>
-    <string name="patch_option_required_missing">%s: заполните все необходимые поля</string>
+    <string name="patch_option_required_missing">%s: заполните все обязательные опции</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Создать адаптивную иконку</string>
     <string name="adaptive_icon_instructions">Выберите изображение переднего плана, выберите цвет фона, затем с помощью ползунка или щепок жестом, чтобы настроить предварительный просмотр</string>

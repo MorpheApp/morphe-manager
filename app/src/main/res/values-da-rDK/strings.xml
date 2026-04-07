@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Gå videre til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
+    <string name="expert_mode_reset_to_default">Aktivér anbefalede rettelser</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
     <string name="expert_mode_new_patches">Ny</string>

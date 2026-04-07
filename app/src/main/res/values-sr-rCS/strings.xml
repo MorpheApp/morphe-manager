@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Pokreni krpljenje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
+    <string name="expert_mode_reset_to_default">Омогући препоручене пакете</string>
     <string name="expert_mode_no_results">Nema pronađenih zakrpa</string>
     <string name="expert_mode_universal_patches">Univerzalne zakrpe </string>
     <string name="expert_mode_new_patches">Novo</string>

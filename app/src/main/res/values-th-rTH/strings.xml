@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
+    <string name="expert_mode_reset_to_default">เปิดใช้งานแพตช์ที่แนะนำ</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
     <string name="expert_mode_universal_patches">แพตช์สากล</string>
     <string name="expert_mode_new_patches">ใหม่</string>

@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Yamalamaya başla</string>
     <string name="expert_mode_disable_all">Hepsini devre dışı bırak</string>
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
+    <string name="expert_mode_reset_to_default">Önerilen yamaları etkinleştir</string>
     <string name="expert_mode_no_results">Yama bulunamadı</string>
     <string name="expert_mode_universal_patches">Evrensel yamalar</string>
     <string name="expert_mode_new_patches">Yeni</string>

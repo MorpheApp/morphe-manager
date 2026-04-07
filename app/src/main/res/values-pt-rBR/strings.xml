@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Iniciar a atualização</string>
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
+    <string name="expert_mode_reset_to_default">Habilitar patches recomendados</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_universal_patches">Patches universais</string>
     <string name="expert_mode_new_patches">Novo</string>

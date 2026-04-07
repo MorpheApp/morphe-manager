@@ -23,6 +23,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_reset_to_default">शिफारस केलेले पॅचेस सक्षम करा</string>
     <string name="expert_mode_new_patches">नवीन</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- Patch Options -->
