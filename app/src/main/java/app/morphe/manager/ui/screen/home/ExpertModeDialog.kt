@@ -130,8 +130,8 @@ fun ExpertModeDialog(
                 // Search toggle button
                 FilledTonalIconButton(
                     onClick = {
+                        if (searchVisible) searchQuery = ""
                         searchVisible = !searchVisible
-                        if (!searchVisible) searchQuery = ""
                     },
                     modifier = Modifier.size(36.dp),
                     colors = IconButtonDefaults.filledTonalIconButtonColors(
@@ -534,6 +534,7 @@ private fun BundlePatchControls(
             onClick = onSelectAll,
             icon = Icons.Outlined.DoneAll,
             contentDescription = stringResource(R.string.expert_mode_enable_all),
+            tooltip = stringResource(R.string.expert_mode_enable_all),
             enabled = enabledCount < totalCount,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
@@ -544,17 +545,19 @@ private fun BundlePatchControls(
         )
         ActionPillButton(
             onClick = onResetToDefault,
-            icon = Icons.Outlined.Restore,
+            icon = Icons.Outlined.Recommend,
             contentDescription = stringResource(R.string.default_),
+            tooltip = stringResource(R.string.expert_mode_reset_to_default),
             colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
-                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.6f),
+                contentColor = MaterialTheme.colorScheme.onTertiaryContainer
             )
         )
         ActionPillButton(
             onClick = onDeselectAll,
             icon = Icons.Outlined.ClearAll,
             contentDescription = stringResource(R.string.expert_mode_disable_all),
+            tooltip = stringResource(R.string.expert_mode_disable_all),
             enabled = enabledCount > 0,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f),
