@@ -4,8 +4,10 @@ import androidx.compose.runtime.Immutable
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.ApkFileType
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.collections.immutable.toImmutableSet
 import kotlin.reflect.KType
 import app.morphe.patcher.patch.Option as PatchOption
@@ -17,10 +19,11 @@ data class PatchInfo(
     val compatiblePackages: ImmutableList<CompatiblePackage>?,
     val options: ImmutableList<Option<*>>?
 ) {
+    @Suppress("DEPRECATION")
     constructor(patch: Patch<*>) : this(
         name = patch.name.orEmpty(),
         description = patch.description,
-        include = patch.use,
+        include = patch.default,
         compatiblePackages = patch.compatibility
             ?.map { compatibility ->
                 CompatiblePackage(
@@ -37,7 +40,16 @@ data class PatchInfo(
                         .mapNotNull { it.version }
                         .toImmutableSet()
                         .takeIf { it.isNotEmpty() },
-                    signatures = compatibility.signatures?.toImmutableSet()
+                    signatures = compatibility.signatures?.toImmutableSet(),
+                    versionDescriptions = compatibility.targets
+                        .mapNotNull { target ->
+                            val v = target.version ?: return@mapNotNull null
+                            val d = target.description ?: return@mapNotNull null
+                            v to d
+                        }
+                        .toMap()
+                        .toImmutableMap()
+                        .takeIf { it.isNotEmpty() }
                 )
             }
             ?.toImmutableList()
@@ -117,6 +129,8 @@ data class CompatiblePackage(
     val experimentalVersions: ImmutableSet<String>? = null,
     /** Valid SHA-256 signing certificate fingerprints of the original app APK. Null means no verification. */
     val signatures: ImmutableSet<String>? = null,
+    /** Per-version user-facing descriptions. */
+    val versionDescriptions: ImmutableMap<String, String>? = null,
 )
 
 @Immutable
@@ -130,6 +144,7 @@ data class Option<T>(
     val presets: Map<String, T?>?,
     val validator: (T?) -> Boolean,
 ) {
+    @Suppress("DEPRECATION")
     constructor(option: PatchOption<T>) : this(
         option.title ?: option.key,
         option.key,

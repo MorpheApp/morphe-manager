@@ -5,23 +5,16 @@ import android.app.Application
 import android.content.ClipData
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.ActivityInfo
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
-import android.content.pm.PackageInstaller
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
+import android.content.pm.*
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
 import android.util.Log
 import androidx.annotation.StringRes
-import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.InstallerPreferenceTokens
+import app.morphe.manager.domain.manager.PreferencesManager
 import java.io.File
 import java.io.IOException
-import java.util.LinkedHashMap
 import java.util.Locale
 import java.util.UUID
 
@@ -32,7 +25,6 @@ class InstallerManager(
     private val shizukuInstaller: ShizukuInstaller
 ) {
     private val packageManager: PackageManager = app.packageManager
-    private val authority = InstallerFileProvider.authority(app)
     private val shareDir: File = File(app.cacheDir, SHARE_DIR).apply { mkdirs() }
     private val dummyUri: Uri = InstallerFileProvider.buildUri(app, "dummy.apk")
     private val defaultInstallerComponent: ComponentName? by lazy { resolveDefaultInstallerComponent() }
@@ -122,153 +114,6 @@ class InstallerManager(
         prefs.installerPrimary.update(tokenToPreference(token))
     }
 
-    fun storedCustomInstallerTokens(): List<Token.Component> = readCustomInstallerTokens()
-
-    suspend fun addCustomInstaller(component: ComponentName): Boolean {
-        val flattened = component.flattenToString()
-        var added = false
-        prefs.edit {
-            val current = prefs.installerCustomComponents.value
-            if (flattened !in current) {
-                prefs.installerCustomComponents.value = current + flattened
-                added = true
-            }
-        }
-        return added
-    }
-
-    suspend fun removeCustomInstaller(component: ComponentName): Boolean {
-        val flattened = component.flattenToString()
-        var removed = false
-        prefs.edit {
-            val current = prefs.installerCustomComponents.value
-            if (flattened in current) {
-                prefs.installerCustomComponents.value = current - flattened
-                removed = true
-            }
-        }
-        return removed
-    }
-
-    fun suggestInstallerPackages(
-        query: String,
-        limit: Int = DEFAULT_PACKAGE_SUGGESTION_LIMIT
-    ): List<PackageSuggestion> {
-        val normalized = query.trim()
-        if (normalized.isEmpty()) return emptyList()
-        val lower = normalized.lowercase()
-        val packages = runCatching {
-            getInstalledPackagesCompat(PackageManager.GET_ACTIVITIES)
-        }.getOrElse { error ->
-            Log.w(TAG, "Failed to query installed packages for suggestions", error)
-            return emptyList()
-        }
-
-        val results = mutableListOf<PackageSuggestion>()
-        packages.forEach { info ->
-            val packageName = info.packageName
-            val applicationInfo = info.applicationInfo
-            val label = applicationInfo?.loadLabel(packageManager)?.toString().orEmpty()
-            val matches = packageName.contains(lower, ignoreCase = true) ||
-                    label.contains(lower, ignoreCase = true)
-            if (!matches) return@forEach
-
-            val activities = info.activities?.asSequence() ?: emptySequence()
-            val hasInstallerActivity = activities
-                .map { ComponentName(packageName, it.name) }
-                .any { isComponentAvailable(it) }
-
-            if (!hasInstallerActivity) return@forEach
-
-            results += PackageSuggestion(
-                packageName = packageName,
-                label = label.takeIf { it.isNotBlank() && it != packageName }
-            )
-            if (results.size >= limit) return@forEach
-        }
-
-        return results.sortedBy { it.packageName.lowercase() }.take(limit)
-    }
-
-    fun findInstallerEntriesForPackage(
-        packageName: String,
-        target: InstallTarget
-    ): List<Entry> {
-        val normalized = packageName.trim()
-        if (normalized.isEmpty()) return emptyList()
-
-        val resolveInfos = queryInstallerActivities()
-            .filter { it.activityInfo.packageName.equals(normalized, ignoreCase = true) }
-
-        val entries = resolveInfos
-            .mapNotNull { info ->
-                val component = ComponentName(info.activityInfo.packageName, info.activityInfo.name)
-                entryFor(Token.Component(component), target, checkRoot = false)
-            }
-            .sortedBy { it.label.lowercase() }
-
-        if (entries.isNotEmpty()) return entries
-
-        return readCustomInstallerTokens()
-            .filter { it.componentName.packageName.equals(normalized, ignoreCase = true) }
-            .mapNotNull { entryFor(it, target, checkRoot = false) }
-    }
-
-    fun searchInstallerEntries(
-        query: String,
-        target: InstallTarget
-    ): List<Entry> {
-        val normalized = query.trim()
-        val results = LinkedHashMap<ComponentName, Entry>()
-
-        fun add(entry: Entry) {
-            val component = (entry.token as? Token.Component)?.componentName ?: return
-            results.putIfAbsent(component, entry)
-        }
-
-        val customTokens = readCustomInstallerTokens()
-        if (normalized.isEmpty()) {
-            customTokens.forEach { token ->
-                entryFor(token, target, checkRoot = false)?.let(::add)
-            }
-            return results.values.sortedBy { it.label.lowercase() }
-        }
-
-        val lower = normalized.lowercase()
-
-        customTokens.forEach { token ->
-            val entry = entryFor(token, target, checkRoot = false) ?: return@forEach
-            val packageMatch = token.componentName.packageName.contains(lower, ignoreCase = true)
-            val classMatch = token.componentName.className.contains(lower, ignoreCase = true)
-            val labelMatch = entry.label.contains(lower, ignoreCase = true)
-            if (packageMatch || classMatch || labelMatch) add(entry)
-        }
-
-        queryInstallerActivities()
-            .filter(::isInstallerCandidate)
-            .forEach { info ->
-                val component = ComponentName(info.activityInfo.packageName, info.activityInfo.name)
-                val entry = entryFor(Token.Component(component), target, checkRoot = false) ?: return@forEach
-                val label = entry.label.lowercase()
-                val description = entry.description?.lowercase().orEmpty()
-                val packageMatch = component.packageName.contains(lower, ignoreCase = true)
-                val classMatch = component.className.contains(lower, ignoreCase = true)
-                val labelMatch = label.contains(lower)
-                val descriptionMatch = description.contains(lower)
-                if (packageMatch || classMatch || labelMatch || descriptionMatch) {
-                    add(entry)
-                }
-            }
-
-        suggestInstallerPackages(normalized, SEARCH_PACKAGE_SUGGESTION_LIMIT).forEach { suggestion ->
-            findInstallerEntriesForPackage(suggestion.packageName, target).forEach(::add)
-        }
-
-        findInstallerEntriesForPackage(normalized, target).forEach(::add)
-
-        return results.values.sortedBy { it.label.lowercase() }
-    }
-
     /**
      * Resolves the installation plan based on user's preferred installer.
      * Returns a [ResolvedPlan] which includes the plan and information about
@@ -342,20 +187,6 @@ class InstallerManager(
         sourceLabel: String?
     ): InstallPlan {
         return resolvePlanWithStatus(target, sourceFile, expectedPackage, sourceLabel).plan
-    }
-
-    /**
-     * Get current availability status for Shizuku installer.
-     */
-    fun getShizukuAvailability(target: InstallTarget): Availability {
-        return availabilityFor(Token.Shizuku, target, checkRoot = true)
-    }
-
-    /**
-     * Get current availability status for root/mount installer.
-     */
-    fun getRootAvailability(target: InstallTarget): Availability {
-        return availabilityFor(Token.AutoSaved, target, checkRoot = true)
     }
 
     fun cleanup(plan: InstallPlan.External) {
@@ -434,14 +265,6 @@ class InstallerManager(
         a is Token.Component && b is Token.Component -> a.componentName == b.componentName
         else -> false
     }
-
-    @Suppress("DEPRECATION")
-    private fun getInstalledPackagesCompat(flags: Int): List<PackageInfo> =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            packageManager.getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
-        } else {
-            packageManager.getInstalledPackages(flags)
-        }
 
     private fun resolveLabel(componentName: ComponentName): String =
         runCatching {
@@ -654,14 +477,9 @@ class InstallerManager(
         val icon: Drawable?
     )
 
-    data class PackageSuggestion(
-        val packageName: String,
-        val label: String?
-    )
-
     data class Availability(
         val available: Boolean,
-        @StringRes val reason: Int? = null
+        @param:StringRes val reason: Int? = null
     )
 
     /**
@@ -672,7 +490,7 @@ class InstallerManager(
         val plan: InstallPlan,
         val primaryUnavailable: Boolean,
         val primaryToken: Token,
-        @StringRes val unavailabilityReason: Int?
+        @param:StringRes val unavailabilityReason: Int?
     )
 
     sealed class Token {
@@ -701,7 +519,6 @@ class InstallerManager(
 
     enum class InstallTarget(val supportsRoot: Boolean) {
         PATCHER(true),
-        SAVED_APP(true),
         MANAGER_UPDATE(false)
     }
 
@@ -710,8 +527,6 @@ class InstallerManager(
         internal const val SHARE_DIR = "installer_share"
         private const val AOSP_INSTALLER_PACKAGE = "com.google.android.packageinstaller"
         private const val AOSP_INSTALLER_LABEL = "Package installer"
-        private const val SEARCH_PACKAGE_SUGGESTION_LIMIT = 24
-        private const val DEFAULT_PACKAGE_SUGGESTION_LIMIT = 8
         private const val TAG = "InstallerManager"
     }
 

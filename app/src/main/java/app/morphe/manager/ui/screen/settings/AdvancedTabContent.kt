@@ -23,44 +23,36 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.settings.advanced.GitHubPatSettingsItem
 import app.morphe.manager.ui.screen.settings.advanced.PatchOptionsSection
 import app.morphe.manager.ui.screen.settings.advanced.UpdatesSettingsItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
-import kotlinx.coroutines.launch
+import app.morphe.manager.ui.viewmodel.SettingsViewModel
 
 /**
  * Advanced tab content.
  */
 @Composable
 fun AdvancedTabContent(
-    useManagerPrereleases: State<Boolean>,
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel,
-    prefs: PreferencesManager
+    settingsViewModel: SettingsViewModel
 ) {
-    val scope = rememberCoroutineScope()
+    val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
     val stripUnusedNativeLibs by prefs.stripUnusedNativeLibs.getAsState()
 
-    // Dialog state for expert mode
-    var showExpertModeNotice by remember { mutableStateOf(false) }
+    // Notify VM on expert mode changes so it can derive showExpertModeNotice
+    LaunchedEffect(useExpertMode) {
+        settingsViewModel.onExpertModeChanged(useExpertMode)
+    }
+
+    val showExpertModeNotice = settingsViewModel.showExpertModeNotice
     val showExpertModeDialog = remember { mutableStateOf(false) }
-    var previousExpertMode by remember { mutableStateOf(useExpertMode) }
     val gitHubPat by prefs.gitHubPat.getAsState()
     val includeGitHubPatInExports by prefs.includeGitHubPatInExports.getAsState()
-
-    // Detect expert mode changes
-    LaunchedEffect(useExpertMode) {
-        if (useExpertMode && !previousExpertMode) {
-            // Expert mode was just enabled
-            showExpertModeNotice = true
-        }
-        previousExpertMode = useExpertMode
-    }
 
     // Localized strings for accessibility
     val enabledState = stringResource(R.string.enabled)
@@ -71,7 +63,7 @@ fun AdvancedTabContent(
         ExpertModeConfirmationDialog(
             onDismiss = { showExpertModeDialog.value = false },
             onConfirm = {
-                scope.launch { prefs.useExpertMode.update(true) }
+                settingsViewModel.setExpertMode(true)
                 showExpertModeDialog.value = false
             }
         )
@@ -92,15 +84,8 @@ fun AdvancedTabContent(
         )
 
         UpdatesSettingsItem(
-            useManagerPrereleases = useManagerPrereleases.value,
-            onManagerPrereleasesToggle = {
-                val newValue = !useManagerPrereleases.value
-                scope.launch {
-                    prefs.useManagerPrereleases.update(newValue)
-                }
-                homeViewModel.triggerUpdateCheck()
-            },
-            prefs = prefs
+            settingsViewModel = settingsViewModel,
+            onManagerPrereleasesToggle = { homeViewModel.triggerUpdateCheck() }
         )
 
         // Expert settings section
@@ -111,13 +96,8 @@ fun AdvancedTabContent(
 
         RichSettingsItem(
             onClick = {
-                if (!useExpertMode) {
-                    // Show confirmation dialog when enabling expert mode
-                    showExpertModeDialog.value = true
-                } else {
-                    // Disable without confirmation
-                    scope.launch { prefs.useExpertMode.update(false) }
-                }
+                if (!useExpertMode) showExpertModeDialog.value = true
+                else settingsViewModel.setExpertMode(false)
             },
             showBorder = true,
             leadingContent = {
@@ -147,19 +127,14 @@ fun AdvancedTabContent(
                         currentPat = gitHubPat,
                         currentIncludeInExport = includeGitHubPatInExports,
                         onSave = { pat, include ->
-                            scope.launch {
-                                prefs.gitHubPat.update(pat)
-                                prefs.includeGitHubPatInExports.update(include)
-                            }
+                            settingsViewModel.setGitHubPat(pat, include)
                         }
                     )
 
                     // Strip unused native libraries
                     RichSettingsItem(
                         onClick = {
-                            scope.launch {
-                                prefs.stripUnusedNativeLibs.update(!stripUnusedNativeLibs)
-                            }
+                            settingsViewModel.setStripUnusedNativeLibs(!stripUnusedNativeLibs)
                         },
                         showBorder = true,
                         leadingContent = {

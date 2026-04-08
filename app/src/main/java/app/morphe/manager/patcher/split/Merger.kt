@@ -258,7 +258,7 @@ internal object Merger {
         var largestSize = 0
         modules.forEach { module ->
             if (!module.hasTableBlock()) return@forEach
-            val header = module.tableBlock.headerBlock as? TableHeader ?: return@forEach
+            val header = module.tableBlock.headerBlock ?: return@forEach
             val size = header.chunkSize
             if (candidate == null || size > largestSize) {
                 largestSize = size

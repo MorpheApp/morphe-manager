@@ -36,11 +36,12 @@ import kotlin.math.max
 // but patching YT is the same time with both 1024 and 1600 memory.
 // If too much memory is requested then some devices become extremely slow
 // for unknown reason (using flash memory as swap file?).
+const val PROCESS_RUNTIME_MEMORY_MINIMUM = 512
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1280
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION = 1024
-const val PROCESS_RUNTIME_MEMORY_DEFAULT = 640
-const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 512
-const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 512
+private const val PROCESS_RUNTIME_MEMORY_DEFAULT = 640
+private const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 640
+const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 640
 const val PROCESS_RUNTIME_MEMORY_STEP = 128
 
 // Sentinel value indicating the memory limit has never been set
@@ -53,10 +54,10 @@ const val PROCESS_RUNTIME_MEMORY_NOT_SET = -1
  * clamped between [PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM] and [PROCESS_RUNTIME_MEMORY_MAX_LIMIT].
  *
  * Example results:
- *  2 GB RAM  → 512 MB
+ *  2 GB RAM  → 640 MB
  *  3 GB RAM  → 768 MB
  *  4 GB RAM  → 1024 MB
- *  6 GB+ RAM → 1536 MB (capped)
+ *  6 GB+ RAM → 1280 MB (capped)
  */
 fun calculateAdaptiveMemoryLimit(context: Context): Int {
     val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager

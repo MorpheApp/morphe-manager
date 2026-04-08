@@ -39,18 +39,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.util.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 data class AppliedPatchBundleUi(
@@ -70,7 +67,6 @@ data class AppliedPatchBundleUi(
 fun InstalledAppInfoDialog(
     packageName: String,
     onDismiss: () -> Unit,
-    onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
     viewModel: InstalledAppInfoViewModel = koinViewModel(
@@ -95,99 +91,31 @@ fun InstalledAppInfoDialog(
     val hasUpdate = appUpdates[packageName] == true
 
     // Dialog states
-    var showUninstallConfirm by remember { mutableStateOf(false) }
-    var showDeleteDialog by remember { mutableStateOf(false) }
-    var showAppliedPatchesDialog by remember { mutableStateOf(false) }
-    var showMountWarningDialog by remember { mutableStateOf(false) }
-    var pendingMountWarningAction by remember { mutableStateOf<(() -> Unit)?>(null) }
+    val showUninstallConfirm = remember { mutableStateOf(false) }
+    val showDeleteDialog = remember { mutableStateOf(false) }
+    val showAppliedPatchesDialog = remember { mutableStateOf(false) }
+    val showMountWarningDialog = remember { mutableStateOf(false) }
+    val pendingMountWarningAction = remember { mutableStateOf<(() -> Unit)?>(null) }
 
     // Bundle data
-    val patchBundleRepository: PatchBundleRepository = koinInject()
-    val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
-    val bundleSources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val availablePatches by patchBundleRepository.bundleInfoFlow
-        .collectAsStateWithLifecycle(emptyMap())
-        .let { remember(it.value) { derivedStateOf { it.value.values.sumOf { bundle -> bundle.patches.size } } } }
+    val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
+    val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
+    val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
 
-    // Extract strings to avoid LocalContext issues
-    val fallbackNameDefault = stringResource(R.string.home_app_info_patches_name_default)
-    val fallbackNameGeneric = stringResource(R.string.home_app_info_patches_name_fallback)
+    // Export strings
     val exportSuccessMessage = stringResource(R.string.save_apk_success)
     val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
 
-    // Build applied bundles summary with stored versions
-    val appliedBundles by produceState<List<AppliedPatchBundleUi>>(
-        initialValue = emptyList(),
-        appliedPatches,
-        bundleInfo,
-        bundleSources,
-        installedApp,
-        fallbackNameDefault,
-        fallbackNameGeneric
-    ) {
-        if (appliedPatches.isNullOrEmpty() || installedApp == null) {
-            value = emptyList()
-            return@produceState
-        }
-
-        // Get stored bundle versions from database
-        val storedVersions = withContext(Dispatchers.IO) {
-            viewModel.getStoredBundleVersions()
-        }
-
-        value = appliedPatches.entries.mapNotNull { (bundleUid, patches) ->
-            if (patches.isEmpty()) return@mapNotNull null
-            val info = bundleInfo[bundleUid]
-            val source = bundleSources.firstOrNull { it.uid == bundleUid }
-            val fallbackName = if (bundleUid == 0) {
-                fallbackNameDefault
-            } else {
-                fallbackNameGeneric
-            }
-            val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
-
-            // Use stored version from DB, fallback to current version
-            val version = storedVersions[bundleUid] ?: info?.version
-
-            val patchInfos = info?.patches?.filter { it.name in patches }?.distinctBy { it.name }?.sortedBy { it.name } ?: emptyList()
-            val missingNames = patches.toList().sorted().filterNot { name -> patchInfos.any { it.name == name } }.distinct()
-            AppliedPatchBundleUi(
-                uid = bundleUid,
-                title = title,
-                version = version,
-                patchInfos = patchInfos,
-                fallbackNames = missingNames,
-                bundleAvailable = info != null
-            )
-        }.sortedBy { it.title }
-    }
-
-    // Bundle summary text
-    val bundlesUsedSummary = remember(appliedBundles) {
-        if (appliedBundles.isEmpty()) ""
-        else appliedBundles.joinToString("\n") { bundle ->
-            val version = bundle.version?.takeIf { it.isNotBlank() }
-            if (version != null) "${bundle.title} ($version)" else bundle.title
-        }
-    }
-
-    // Export functionality
-    val exportFormat by viewModel.exportFormat.collectAsStateWithLifecycle()
-    val exportMetadata = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles, appInfo) {
-        if (installedApp == null) return@remember null
-        val label = appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString() ?: installedApp.currentPackageName
-        val bundleVersions = appliedBundles.mapNotNull { it.version?.takeIf(String::isNotBlank) }
-        val bundleNames = appliedBundles.map { it.title }.filter(String::isNotBlank)
-        PatchedAppExportData(
-            appName = label,
-            packageName = installedApp.currentPackageName,
-            appVersion = appInfo?.versionName ?: installedApp.version,
-            patchBundleVersions = bundleVersions,
-            patchBundleNames = bundleNames
-        )
-    }
-    val exportFileName = remember(exportMetadata, exportFormat) {
-        exportMetadata?.let { ExportNameFormatter.format(exportFormat, it) } ?: "morphe_export.apk"
+    // Export file name
+    val exportFileName = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles) {
+        val app = installedApp ?: return@remember "morphe_export.apk"
+        ExportNameFormatter.format(null, PatchedAppExportData(
+            appName = appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
+            packageName = app.currentPackageName,
+            appVersion = appInfo?.versionName ?: app.version,
+            patchBundleVersions = appliedBundles.mapNotNull { it.version?.takeIf(String::isNotBlank) },
+            patchBundleNames = appliedBundles.map { it.title }.filter(String::isNotBlank)
+        ))
     }
 
     val exportSavedLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->
@@ -245,72 +173,54 @@ fun InstalledAppInfoDialog(
     }
 
     // Sub-dialogs
-    if (showAppliedPatchesDialog && appliedPatches != null) {
-        AppliedPatchesDialog(bundles = appliedBundles, onDismiss = { showAppliedPatchesDialog = false })
+    if (showAppliedPatchesDialog.value && appliedPatches != null) {
+        AppliedPatchesDialog(bundles = appliedBundles, onDismiss = { showAppliedPatchesDialog.value = false })
     }
 
     // Mount warning dialog
-    if (showMountWarningDialog) {
+    if (showMountWarningDialog.value) {
         MountWarningDialog(
             onConfirm = {
-                showMountWarningDialog = false
-                pendingMountWarningAction?.invoke()
-                pendingMountWarningAction = null
+                showMountWarningDialog.value = false
+                pendingMountWarningAction.value?.invoke()
+                pendingMountWarningAction.value = null
             },
             onDismiss = {
-                showMountWarningDialog = false
-                pendingMountWarningAction = null
+                showMountWarningDialog.value = false
+                pendingMountWarningAction.value = null
             }
         )
     }
 
     UninstallConfirmDialog(
-        show = showUninstallConfirm,
+        show = showUninstallConfirm.value,
         onConfirm = {
             viewModel.uninstall()
-            showUninstallConfirm = false
+            showUninstallConfirm.value = false
         },
-        onDismiss = { showUninstallConfirm = false }
+        onDismiss = { showUninstallConfirm.value = false }
     )
 
     DeleteConfirmDialog(
-        show = showDeleteDialog,
+        show = showDeleteDialog.value,
         isSavedOnly = installedApp?.installType == InstallType.SAVED,
         appInfo = viewModel.appInfo,
         appLabel = viewModel.appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
         onConfirm = {
             viewModel.removeAppCompletely()
-            showDeleteDialog = false
+            showDeleteDialog.value = false
         },
         onDismiss = {
-            showDeleteDialog = false
+            showDeleteDialog.value = false
         }
     )
 
-    // Expert Mode Repatch Dialog
-    if (viewModel.showRepatchDialog) {
-        val allowIncompatible by viewModel.allowIncompatiblePatches.collectAsStateWithLifecycle()
-        ExpertModeDialog(
-            bundles = viewModel.repatchBundles,
-            selectedPatches = viewModel.repatchPatches,
-            options = viewModel.repatchOptions,
-            onPatchToggle = { bundleUid, patchName -> viewModel.toggleRepatchPatch(bundleUid, patchName) },
-            onOptionChange = { bundleUid, patchName, optionKey, value -> viewModel.updateRepatchOption(bundleUid, patchName, optionKey, value) },
-            onResetOptions = { bundleUid, patchName -> viewModel.resetRepatchOptions(bundleUid, patchName) },
-            onDismiss = { viewModel.dismissRepatchDialog() },
-            onProceed = {
-                viewModel.proceedWithRepatch(viewModel.repatchPatches, viewModel.repatchOptions) { pkgName, originalFile, patches, options ->
-                    onNavigateToPatcher(
-                        pkgName,
-                        installedApp?.version ?: "unknown",
-                        originalFile.absolutePath,
-                        patches,
-                        options
-                    )
-                }
-            },
-            allowIncompatible = allowIncompatible
-        )
+    // Expert Mode Repatch Dialog is rendered by HomeDialogs via homeViewModel.showExpertModeDialog.
+    // Patch flow always starts with onTriggerPatchFlow → showPatchDialog → ApkAvailabilityDialog,
+    // where the user picks the APK source. Expert mode dialog opens after APK selection.
+    fun handlePatchClick() {
+        onDismiss()
+        onTriggerPatchFlow(viewModel.installedApp?.originalPackageName ?: return)
     }
 
     // Main Dialog
@@ -342,13 +252,11 @@ fun InstalledAppInfoDialog(
                     installedApp = installedApp
                 )
 
-                // Deleted App Warning Banner
+                // Deleted app warning banner
                 AnimatedVisibility(
                     visible = viewModel.isAppDeleted,
-                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
-                            expandVertically(animationSpec = tween(durationMillis = 400)),
-                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
-                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     WarningBanner(
                         icon = Icons.Outlined.Warning,
@@ -364,13 +272,11 @@ fun InstalledAppInfoDialog(
                     )
                 }
 
-                // Update Available Banner
+                // Update available banner
                 AnimatedVisibility(
                     visible = hasUpdate && !viewModel.isAppDeleted,
-                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
-                            expandVertically(animationSpec = tween(durationMillis = 400)),
-                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
-                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     WarningBanner(
                         icon = Icons.Outlined.Update,
@@ -391,7 +297,7 @@ fun InstalledAppInfoDialog(
                     installedApp = installedApp,
                     appliedPatches = appliedPatches,
                     bundlesUsedSummary = bundlesUsedSummary,
-                    onShowPatches = { showAppliedPatchesDialog = true }
+                    onShowPatches = { showAppliedPatchesDialog.value = true }
                 )
 
                 // Actions Section
@@ -403,16 +309,13 @@ fun InstalledAppInfoDialog(
                     isInstalling = isInstalling,
                     mountOperation = mountOperation,
                     hasUpdate = hasUpdate,
-                    onPatchClick = {
-                        onDismiss()
-                        onTriggerPatchFlow(installedApp.originalPackageName)
-                    },
-                    onUninstall = { showUninstallConfirm = true },
-                    onDelete = { showDeleteDialog = true },
+                    onPatchClick = { handlePatchClick() },
+                    onUninstall = { showUninstallConfirm.value = true },
+                    onDelete = { showDeleteDialog.value = true },
                     onExport = { exportSavedLauncher.launch(exportFileName) },
                     onShowMountWarning = { action ->
-                        pendingMountWarningAction = action
-                        showMountWarningDialog = true
+                        pendingMountWarningAction.value = action
+                        showMountWarningDialog.value = true
                     }
                 )
 
@@ -725,9 +628,9 @@ private fun ActionsSection(
                                 installViewModel.install(
                                     outputFile = savedFile,
                                     originalPackageName = installedApp.originalPackageName,
-                                    onPersistApp = { pkg, type ->
+                                    onPersistApp = { _, _ ->
                                         // Callback will be called after successful installation
-                                        // The LaunchedEffect handler will update the install type
+                                        // The LaunchedEffect handler will update the installation type
                                         true
                                     }
                                 )
@@ -752,26 +655,50 @@ private fun ActionsSection(
         }
         installedApp.installType == InstallType.MOUNT -> {
             val isMountLoading = mountOperation != null
-            secondaryActions.add(
-                ActionItem(
-                    text = if (viewModel.isMounted) stringResource(R.string.remount) else stringResource(R.string.mount),
-                    icon = if (viewModel.isMounted) Icons.Outlined.Refresh else Icons.Outlined.Link,
-                    onClick = {
-                        if (viewModel.isMounted) {
+            if (viewModel.isMounted) {
+                // Remount button
+                secondaryActions.add(
+                    ActionItem(
+                        text = stringResource(R.string.remount),
+                        icon = Icons.Outlined.Refresh,
+                        onClick = {
                             installViewModel.remount(
                                 packageName = installedApp.currentPackageName,
                                 version = installedApp.version
                             )
-                        } else {
+                        },
+                        isLoading = isMountLoading
+                    )
+                )
+                // Unmount button
+                secondaryActions.add(
+                    ActionItem(
+                        text = stringResource(R.string.unmount),
+                        icon = Icons.Outlined.LinkOff,
+                        onClick = {
+                            installViewModel.unmount(
+                                packageName = installedApp.currentPackageName
+                            )
+                        },
+                        isLoading = isMountLoading
+                    )
+                )
+            } else {
+                // Mount button
+                secondaryActions.add(
+                    ActionItem(
+                        text = stringResource(R.string.mount),
+                        icon = Icons.Outlined.Link,
+                        onClick = {
                             installViewModel.mount(
                                 packageName = installedApp.currentPackageName,
                                 version = installedApp.version
                             )
-                        }
-                    },
-                    isLoading = isMountLoading
+                        },
+                        isLoading = isMountLoading
+                    )
                 )
-            )
+            }
         }
     }
 
@@ -830,21 +757,25 @@ private fun ActionButtonsRow(
     actions: List<ActionItem>,
     isPrimary: Boolean
 ) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        actions.forEach { action ->
-            ActionButton(
-                text = action.text,
-                icon = action.icon,
-                onClick = action.onClick,
-                enabled = action.enabled,
-                isDestructive = action.isDestructive,
-                isPrimary = isPrimary && !action.isDestructive,
-                isLoading = action.isLoading,
-                modifier = Modifier.weight(1f)
-            )
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        actions.chunked(2).forEach { rowActions ->
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                rowActions.forEach { action ->
+                    ActionButton(
+                        text = action.text,
+                        icon = action.icon,
+                        onClick = action.onClick,
+                        enabled = action.enabled,
+                        isDestructive = action.isDestructive,
+                        isPrimary = isPrimary && !action.isDestructive,
+                        isLoading = action.isLoading,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
         }
     }
 }

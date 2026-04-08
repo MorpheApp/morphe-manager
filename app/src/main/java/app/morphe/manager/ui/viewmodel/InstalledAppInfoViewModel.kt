@@ -13,23 +13,12 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.InstalledAppRepository
-import app.morphe.manager.domain.repository.OriginalApkRepository
-import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.domain.repository.PatchOptionsRepository
-import app.morphe.manager.domain.repository.PatchSelectionRepository
-import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.domain.repository.*
+import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
 import app.morphe.manager.util.*
-import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
-import app.morphe.manager.util.PatchSelectionUtils.togglePatch
-import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -44,12 +33,9 @@ class InstalledAppInfoViewModel(
     private val pm: PM by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
-    val rootInstaller: RootInstaller by inject()
+    private val rootInstaller: RootInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
-    private val patchSelectionRepository: PatchSelectionRepository by inject()
-    private val patchOptionsRepository: PatchOptionsRepository by inject()
-    private val prefs: PreferencesManager by inject()
     private val filesystem: Filesystem by inject()
 
     lateinit var onBackClick: () -> Unit
@@ -58,7 +44,11 @@ class InstalledAppInfoViewModel(
         private set
     var appInfo: PackageInfo? by mutableStateOf(null)
         private set
-    var appliedPatches: PatchSelection? by mutableStateOf(null)
+
+    private val _appliedPatches = MutableStateFlow<PatchSelection?>(null)
+    var appliedPatches: PatchSelection?
+        get() = _appliedPatches.value
+        set(value) { _appliedPatches.value = value }
     var isMounted by mutableStateOf(false)
         private set
     var isInstalledOnDevice by mutableStateOf(false)
@@ -68,14 +58,6 @@ class InstalledAppInfoViewModel(
     var hasOriginalApk by mutableStateOf(false)
         private set
     var isAppDeleted by mutableStateOf(false)
-        private set
-    var showRepatchDialog by mutableStateOf(false)
-        private set
-    var repatchBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
-        private set
-    var repatchPatches by mutableStateOf<PatchSelection>(emptyMap())
-        private set
-    var repatchOptions by mutableStateOf<Options>(emptyMap())
         private set
     var isLoading by mutableStateOf(true)
         private set
@@ -107,11 +89,6 @@ class InstalledAppInfoViewModel(
                 isLoading = false
             }
         }
-    }
-
-    suspend fun getStoredBundleVersions(): Map<Int, String?> {
-        val app = installedApp ?: return emptyMap()
-        return installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
     }
 
     private suspend fun resolveAppliedSelection(app: InstalledApp) = withContext(Dispatchers.IO) {
@@ -257,9 +234,7 @@ class InstalledAppInfoViewModel(
         isMounted = rootInstaller.isAppMounted(app.currentPackageName)
     }
 
-    /**
-     * Manually refresh app state (e.g., after app installation/uninstallation)
-     */
+    /** Manually refresh app state (e.g., after app installation/uninstallation) */
     fun refreshCurrentAppState() {
         val app = installedApp ?: return
         viewModelScope.launch {
@@ -267,109 +242,68 @@ class InstalledAppInfoViewModel(
         }
     }
 
-    val exportFormat: StateFlow<String> = prefs.patchedAppExportFormat.flow
-        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.patchedAppExportFormat.getBlocking())
-
-    val allowIncompatiblePatches: StateFlow<Boolean> = prefs.disablePatchVersionCompatCheck.flow
-        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.disablePatchVersionCompatCheck.getBlocking())
+    /** Count of all patches across all enabled bundles. */
+    val availablePatches: StateFlow<Int> = patchBundleRepository.bundleInfoFlow
+        .map { it.values.sumOf { bundle -> bundle.patches.size } }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
     /**
-     * Proceed with repatch after Expert Mode dialog
+     * UI model for each bundle that was used to patch the current app.
+     * Combines applied patches, bundle metadata and stored bundle versions from DB.
+     * Recomputed reactively when any input changes.
      */
-    fun proceedWithRepatch(
-        patches: PatchSelection,
-        options: Options,
-        onStartPatch: (String, File, PatchSelection, Options) -> Unit
-    ) = viewModelScope.launch {
-        val app = installedApp ?: return@launch
+    val appliedBundles: StateFlow<List<AppliedPatchBundleUi>> =
+        combine(
+            installedAppRepository.getAsFlow(packageName).filterNotNull(),
+            patchBundleRepository.allBundlesInfoFlow,
+            patchBundleRepository.sources,
+            _appliedPatches
+        ) { app, bundleInfo, sources, patches ->
+            if (patches.isNullOrEmpty()) return@combine emptyList()
 
-        // Get original APK file
-        val originalApk = originalApkRepository.get(app.originalPackageName)
-        if (originalApk == null) {
-            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
-            return@launch
-        }
+            val storedVersions = withContext(Dispatchers.IO) {
+                installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
+            }
 
-        val originalFile = File(originalApk.filePath)
-        if (!originalFile.exists()) {
-            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
-            return@launch
-        }
-
-        // Update last used timestamp
-        originalApkRepository.markUsed(app.originalPackageName)
-
-        // Save updated selections per bundle
-        withContext(Dispatchers.IO) {
-            patches.forEach { (bundleUid, bundlePatches) ->
-                patchSelectionRepository.updateSelectionForBundle(
-                    packageName = app.originalPackageName,
-                    bundleUid = bundleUid,
-                    patches = bundlePatches
+            patches.entries.mapNotNull { (bundleUid, bundlePatches) ->
+                if (bundlePatches.isEmpty()) return@mapNotNull null
+                val info = bundleInfo[bundleUid]
+                val source = sources.firstOrNull { it.uid == bundleUid }
+                val fallbackName = if (bundleUid == 0) {
+                    context.getString(R.string.home_app_info_patches_name_default)
+                } else {
+                    context.getString(R.string.home_app_info_patches_name_fallback)
+                }
+                val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
+                val version = storedVersions[bundleUid] ?: info?.version
+                val patchInfos = info?.patches
+                    ?.filter { it.name in bundlePatches }
+                    ?.distinctBy { it.name }
+                    ?.sortedBy { it.name }
+                    ?: emptyList()
+                val missingNames = bundlePatches.toList().sorted()
+                    .filterNot { name -> patchInfos.any { it.name == name } }
+                    .distinct()
+                AppliedPatchBundleUi(
+                    uid = bundleUid,
+                    title = title,
+                    version = version,
+                    patchInfos = patchInfos,
+                    fallbackNames = missingNames,
+                    bundleAvailable = info != null
                 )
+            }.sortedBy { it.title }
+        }
+            .flowOn(Dispatchers.IO)
+            .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
+    /** Human-readable summary of applied bundles with versions for display in the dialog. */
+    val bundlesUsedSummary: StateFlow<String> = appliedBundles
+        .map { bundles ->
+            bundles.joinToString("\n") { bundle ->
+                val version = bundle.version?.takeIf { it.isNotBlank() }
+                if (version != null) "${bundle.title} ($version)" else bundle.title
             }
         }
-
-        // Save updated options per bundle
-        withContext(Dispatchers.IO) {
-            options.forEach { (bundleUid, bundleOptions) ->
-                patchOptionsRepository.saveOptionsForBundle(
-                    packageName = app.originalPackageName,
-                    bundleUid = bundleUid,
-                    patchOptions = bundleOptions
-                )
-            }
-        }
-
-        // Start patching with original APK file
-        onStartPatch(app.originalPackageName, originalFile, patches, options)
-
-        // Close dialog
-        showRepatchDialog = false
-        cleanupRepatchDialog()
-    }
-
-    /**
-     * Close repatch dialog
-     */
-    fun dismissRepatchDialog() {
-        showRepatchDialog = false
-        cleanupRepatchDialog()
-    }
-
-    private fun cleanupRepatchDialog() {
-        repatchBundles = emptyList()
-        repatchPatches = emptyMap()
-        repatchOptions = emptyMap()
-    }
-
-    /**
-     * Toggle patch in repatch dialog
-     */
-    fun toggleRepatchPatch(bundleUid: Int, patchName: String) {
-        repatchPatches = repatchPatches.togglePatch(bundleUid, patchName)
-    }
-
-    /**
-     * Update option in repatch dialog
-     */
-    fun updateRepatchOption(
-        bundleUid: Int,
-        patchName: String,
-        optionKey: String,
-        value: Any?
-    ) {
-        repatchOptions = repatchOptions.updateOption(bundleUid, patchName, optionKey, value)
-    }
-
-    /**
-     * Reset options for patch in repatch dialog
-     */
-    fun resetRepatchOptions(bundleUid: Int, patchName: String) {
-        repatchOptions = repatchOptions.resetOptionsForPatch(bundleUid, patchName)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
+        .stateIn(viewModelScope, SharingStarted.Lazily, "")
 }

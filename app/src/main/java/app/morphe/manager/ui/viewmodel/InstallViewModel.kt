@@ -46,27 +46,27 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private val prefs: PreferencesManager by inject()
 
     /**
-     * Current install state
+     * Current installation state.
      */
     sealed class InstallState {
-        /** Ready to install - shows Install button */
+        /** Ready to install - shows Install button. */
         data object Ready : InstallState()
 
-        /** Currently installing - shows progress indicator */
+        /** Currently installing - shows progress indicator. */
         data object Installing : InstallState()
 
-        /** Successfully installed - shows Open button */
+        /** Successfully installed - shows Open button. */
         data class Installed(val packageName: String) : InstallState()
 
-        /** Signature conflict detected - shows Uninstall button */
+        /** Signature conflict detected - shows Uninstall button. */
         data class Conflict(val packageName: String) : InstallState()
 
-        /** Installation error - shows error message and retry */
+        /** Installation error - shows error message and retry. */
         data class Error(val message: String) : InstallState()
     }
 
     /**
-     * State for installer unavailability dialog
+     * State for installer unavailability dialog.
      */
     data class InstallerUnavailableState(
         val installerToken: InstallerManager.Token,
@@ -75,7 +75,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     )
 
     /**
-     * Mount operation state
+     * Mount operation state.
      */
     enum class MountOperation { UNMOUNTING, MOUNTING }
 
@@ -113,7 +113,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private var pendingOriginalPackageName: String? = null
     private var pendingPersistCallback: (suspend (String, InstallType) -> Boolean)? = null
 
-    // Track current install type for proper persistence
+    // Track current installation type for proper persistence
     var currentInstallType: InstallType = InstallType.DEFAULT
         private set
 
@@ -125,7 +125,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 Intent.ACTION_PACKAGE_REPLACED -> {
                     val pkg = intent.data?.schemeSpecificPart ?: return
 
-                    // Check external install first
+                    // Check external installation first
                     if (handleExternalInstallSuccess(pkg)) return
 
                     if (pkg == awaitingPackageName) {
@@ -366,7 +366,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Execute the resolved installation plan
+     * Execute the resolved installation plan.
      */
     private suspend fun executeInstallPlan(
         plan: InstallerManager.InstallPlan,
@@ -407,7 +407,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Standard PackageInstaller installation
+     * Standard PackageInstaller installation.
      */
     private suspend fun performStandardInstall(
         outputFile: File,
@@ -432,7 +432,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Shizuku installation
+     * Shizuku installation.
      */
     private suspend fun performShizukuInstall(
         outputFile: File,
@@ -487,7 +487,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Launch external installer app
+     * Launch external installer app.
      */
     private fun launchExternalInstaller(plan: InstallerManager.InstallPlan.External) {
         pendingExternalInstall?.let(installerManager::cleanup)
@@ -552,7 +552,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         val versionChanged = baseVc != null && vc != baseVc
         val timestampChanged = baseUpdated != null && updated > baseUpdated
-        val updatedSinceStart = updated >= startTime && startTime > 0L
+        val updatedSinceStart = startTime in 1..updated
 
         return versionChanged || timestampChanged || updatedSinceStart
     }
@@ -592,7 +592,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Install with root/mount
+     * Install with root/mount.
      */
     fun installMount(
         outputFile: File,
@@ -671,7 +671,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Mount app (for root installer)
+     * Mount app (for root installer).
      */
     fun mount(packageName: String, version: String) = viewModelScope.launch {
         val stockVersion = pm.getPackageInfo(packageName)?.versionName
@@ -700,9 +700,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Unmount app (for root installer)
+     * Unmount app (for root installer).
      */
-    @Suppress("unused")
     fun unmount(packageName: String) = viewModelScope.launch {
         try {
             mountOperation = MountOperation.UNMOUNTING
@@ -718,7 +717,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Remount app (unmount then mount)
+     * Remount app (unmount then mount).
      */
     fun remount(packageName: String, version: String) = viewModelScope.launch {
         val stockVersion = pm.getPackageInfo(packageName)?.versionName
@@ -752,7 +751,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Export patched app to URI
+     * Export patched app to URI.
      */
     fun export(outputFile: File, uri: Uri?, onComplete: (Boolean) -> Unit = {}) = viewModelScope.launch {
         if (uri == null) {
@@ -771,17 +770,15 @@ class InstallViewModel : ViewModel(), KoinComponent {
         onComplete(exportSucceeded)
     }
 
-    // ==================== Dialog handlers ====================
-
     /**
-     * Dismiss the installer unavailable dialog
+     * Dismiss the installer unavailable dialog.
      */
     fun dismissInstallerUnavailableDialog() {
         installerUnavailableDialog = null
     }
 
     /**
-     * Open the installer app (Shizuku)
+     * Open the installer app (Shizuku).
      */
     fun openInstallerApp() {
         val dialog = installerUnavailableDialog ?: return
@@ -797,7 +794,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Retry installation with preferred installer
+     * Retry installation with preferred installer.
      */
     fun retryWithPreferredInstaller() {
         installerUnavailableDialog = null
@@ -810,7 +807,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Proceed with standard installer instead
+     * Proceed with standard installer instead.
      */
     fun proceedWithFallbackInstaller() {
         installerUnavailableDialog = null
@@ -820,7 +817,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         viewModelScope.launch {
             installState = InstallState.Installing
-            currentInstallType = InstallType.DEFAULT  // Standard installer
+            currentInstallType = InstallType.DEFAULT // Standard installer
             try {
                 val packageInfo = pm.getPackageInfo(file)
                     ?: throw Exception("Failed to load application info")
@@ -840,7 +837,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Dismiss installer selection dialog
+     * Dismiss installer selection dialog.
      */
     fun dismissInstallerSelectionDialog() {
         showInstallerSelectionDialog = false
@@ -849,7 +846,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Proceed with selected installer from dialog
+     * Proceed with selected installer from dialog.
      */
     fun proceedWithSelectedInstaller(token: InstallerManager.Token) {
         oneTimeInstallerToken = token
@@ -861,8 +858,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         install(file, originalPkg, callback)
     }
-
-    // ==================== Signature checking ====================
 
     private suspend fun hasSignatureConflict(apkFile: File, packageName: String): Boolean =
         withContext(Dispatchers.IO) {
@@ -950,8 +945,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
             emptyList()
         }
     }
-
-    // ==================== Other actions ====================
 
     @SuppressLint("UseKtx")
     fun requestUninstall(packageName: String) {

@@ -7,9 +7,14 @@ package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,15 +58,28 @@ private val priorContributors = listOf(
 @Composable
 fun CreditsDialog(onDismiss: () -> Unit) {
     val uriHandler = LocalUriHandler.current
+    val showLicensesDialog = remember { mutableStateOf(false) }
+
+    if (showLicensesDialog.value) {
+        LicensesDialog(onDismiss = { showLicensesDialog.value = false })
+    }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
         footer = {
-            MorpheDialogOutlinedButton(
-                text = stringResource(R.string.close),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
+            MorpheDialogButtonColumn {
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.opensource_licenses),
+                    onClick = { showLicensesDialog.value = true },
+                    icon = Icons.AutoMirrored.Outlined.Article,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
         val textColor = LocalDialogTextColor.current

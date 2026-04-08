@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Näytä piilotetut sovellukset</string>
     <string name="home_app_no_hidden">Ei piilotettuja sovelluksia</string>
     <string name="home_app_hidden_apps_title">Piilotetut sovellukset</string>
-    <string name="home_app_hidden_apps_hint">Klikkaa sovellusta nähdäksesi sen listassa uudelleen</string>
+    <string name="home_app_hidden_apps_hint">Napauta paljastaaksesi</string>
     <string name="android_11_bug_dialog_title">Android 11 virhe</string>
     <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
     <string name="deep_link_add_source_title">Lisää lähde</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Lähteiden päivitys valmis</string>
     <string name="home_update_success_subtitle">Lähteetsinä päivitety</string>
     <string name="home_sources_are_loading">Lähteet ladassa, odota…</string>
-    <string name="home_please_wait">Odota hetki…</string>
+    <string name="home_search_apps">Sovellusten haku</string>
+    <string name="home_no_apps_title">Sovelluksia ei saatavilla</string>
+    <string name="home_no_apps_subtitle">Lisää päivityslähde tai ota olemassa oleva käyttöön %s</string>
+    <string name="home_no_apps_search_subtitle">Yhtään sovellusta ei löytynyt hakusanalla \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Minkä sovelluksen haluat korjata?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Jatka pätkintä</string>
     <string name="expert_mode_disable_all">Poista kaikki</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
+    <string name="expert_mode_reset_to_default">Ota käyttöön suositellut korjaukset</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
     <string name="expert_mode_universal_patches">Yleismaailmalliset korjaukset</string>
+    <string name="expert_mode_new_patches">Uusi</string>
     <string name="expert_mode_multiple_sources_warning_title">Valittu useita päivitys lähteitä</string>
     <string name="expert_mode_multiple_sources_warning_message">"Olet valinnut päivitykset useista päivitys lähteistä. Tämä saattaa aiheuttaa yhteensopivuusongelmia tai odottamattomia toimintoja.
 
@@ -161,6 +166,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="patch_option_list_duplicate">Tämä arvo on jo olemassa</string>
     <string name="patch_option_list_empty">Arvo ei voi olla tyhjä</string>
     <string name="patch_option_list_empty_state">Ei arvoja lisätty vielä</string>
+    <string name="patch_option_required_missing">%s: täytä kaikki pakolliset vaihtoehdot</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Luo adaptiivinen kuvake</string>
     <string name="adaptive_icon_instructions">Valitse etukuva, valitse taustaväri ja säädä sitten esikatselua liukusäätimen tai puristusliikkeen avulla</string>
@@ -222,6 +228,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="patcher_error_copied">Virhe kopioitu leikepöydälle</string>
     <string name="patcher_error_log">Virhekirjoitus</string>
     <string name="patcher_error_technical">Teknisiä tietoja</string>
+    <string name="patcher_error_dialog_app_info">Sovellusinfo</string>
     <string name="patcher_long_step_warning">Tämä vaihe voi kestää jonkin aikaa. Odota…</string>
     <string name="patcher_installing_subtitle">Melkein valmista! 🎸</string>
     <string name="patcher_success_title">Valmis! 🎉</string>
@@ -601,18 +608,19 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_share_website">Jaa verkkosivusto</string>
     <string name="settings_system_share_website_description">Jaa Morphen virallinen verkkosivusto</string>
-    <string name="settings_system_manager_description">"Morphe on kokeellinen avoin lähdeprojekti, joka keskittyy luomaan modernin, nopean patchaamisen Android-sovellusten patchaamista
-
-Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, jotta tuottaa tulevaisuuden kehittämistä"</string>
+    <string name="settings_system_manager_description">"Kokeellinen avoimen lähdekoodin projekti suosittujen Android-sovellusten moderniin ja virtaviivaisen korjaamiseen, joka perustuu yhteisön palautteeseen ja panokseen"</string>
     <string name="credits">Tekijät</string>
     <string name="credits_current_development">Nykyinen kehitys</string>
     <string name="credits_prior_development">Aikaisempi kehitys</string>
+    <string name="opensource_licenses">Avoimen lähdekoodin lisenssit</string>
     <!-- Shared strings -->
     <string name="patches">Korjaustiedostot</string>
     <string name="home">Koti</string>
     <string name="settings">Asetukset</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
+    <string name="all">Kaikki</string>
+    <string name="filter">Suodatin</string>
     <string name="reset">Nollaa</string>
     <string name="reset_all">Nollaa kaikki</string>
     <string name="confirm">Vahvista</string>
@@ -653,6 +661,7 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="open">Avaa</string>
     <string name="mount">Liitä</string>
     <string name="mounted">Liitetty</string>
+    <string name="unmount">Irrotus</string>
     <string name="unmounted">Irrotettu</string>
     <string name="remount">Käynnistä</string>
     <string name="install">Asenna</string>

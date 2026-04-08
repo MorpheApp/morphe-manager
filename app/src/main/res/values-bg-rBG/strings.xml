@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Покажи скритите приложения</string>
     <string name="home_app_no_hidden">Няма скрити приложения</string>
     <string name="home_app_hidden_apps_title">Скрити приложения</string>
-    <string name="home_app_hidden_apps_hint">Натиснете върху приложението, за да го покажете отново в списъка</string>
+    <string name="home_app_hidden_apps_hint">̅̅Натиснете, за да покажете</string>
     <string name="android_11_bug_dialog_title">Грешка на Android 11</string>
     <string name="android_11_bug_dialog_description">Предварително трябва да се предостави право за инсталиране на приложението, за да се избегне грешка в системата Android 11, която ще повлияе негативно на потребителския опит</string>
     <string name="deep_link_add_source_title">Добавяне на източник</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Обновяне на източниците завършено</string>
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
-    <string name="home_please_wait">Моля изчакайте…</string>
+    <string name="home_search_apps">Търсене на приложения</string>
+    <string name="home_no_apps_title">Няма налични приложения</string>
+    <string name="home_no_apps_subtitle">Добавете източник на корекция или активирайте съществуващ в %s</string>
+    <string name="home_no_apps_search_subtitle">Няма съвпадения за \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Кое приложение искате да пачнете?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Продължете към поправянето</string>
     <string name="expert_mode_disable_all">Изключи всички</string>
     <string name="expert_mode_enable_all">Включи всички</string>
+    <string name="expert_mode_reset_to_default">Активиране на препоръчаните поправки</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
     <string name="expert_mode_universal_patches">Универсални пачове</string>
+    <string name="expert_mode_new_patches">Нов</string>
     <string name="expert_mode_multiple_sources_warning_title">Избрани са патове от различни източници</string>
     <string name="expert_mode_multiple_sources_warning_message">"Избрахте патове от различни източници. Това може да доведе до съвместимост проблеми или непредвидимо поведение.
 
@@ -162,6 +167,7 @@
     <string name="patch_option_list_duplicate">Тази стойност вече съществува</string>
     <string name="patch_option_list_empty">Стойността не може да бъде празна</string>
     <string name="patch_option_list_empty_state">Още не са добавени стойности</string>
+    <string name="patch_option_required_missing">%s: попълнете всички необходими опции</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Създай адаптивен икон</string>
     <string name="adaptive_icon_instructions">Изберете начално изображение, изберете цвят на фона, след това използвайте плъзгача или жестове за стискане, за да настроите прегледа</string>
@@ -223,6 +229,7 @@
     <string name="patcher_error_copied">Грешка е копирана в клипборда</string>
     <string name="patcher_error_log">Дневник на грешки</string>
     <string name="patcher_error_technical">Технически детайли</string>
+    <string name="patcher_error_dialog_app_info">Информация за приложението</string>
     <string name="patcher_long_step_warning">Този стъпка може да отнеме време. Моля, изчакайте…</string>
     <string name="patcher_installing_subtitle">Готворе се да рокне! 🎸</string>
     <string name="patcher_success_title">Всичко е готово! 🎉</string>
@@ -602,18 +609,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Относно</string>
     <string name="settings_system_share_website">Споделяне на уебсайт</string>
     <string name="settings_system_share_website_description">Сподели официалния уебсайт на Morphe</string>
-    <string name="settings_system_manager_description">"Morphe е експериментален отворен източник проект, фокусиран върху създаването на модерно, елегантно залепуване на популярни Android приложения
-
-Отворен източник в своето ядро, Morphe процъфтява благодарение на общността и приносите за бъдещо иновации"</string>
+    <string name="settings_system_manager_description">"Експериментален, с отворен код проект за модерен, рационализиран коректор на популярни Android приложения, задвижван от обратна връзка и приноси на общността"</string>
     <string name="credits">Кредити</string>
     <string name="credits_current_development">Текущо развитие</string>
     <string name="credits_prior_development">Предишно развитие</string>
+    <string name="opensource_licenses">Лицензи с отворен код</string>
     <!-- Shared strings -->
     <string name="patches">Пачове</string>
     <string name="home">Начало</string>
     <string name="settings">Настройки</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
+    <string name="all">Всички</string>
+    <string name="filter">Филтър</string>
     <string name="reset">Нулирай</string>
     <string name="reset_all">Възстановяване на всичко</string>
     <string name="confirm">Потвърдете</string>
@@ -654,6 +662,7 @@ morphe_header_custom_dark.png
     <string name="open">Отваряне</string>
     <string name="mount">Монтирай</string>
     <string name="mounted">Монтирано</string>
+    <string name="unmount">B342 M542</string>
     <string name="unmounted">Размонтирано</string>
     <string name="remount">Повторно монтиране</string>
     <string name="install">Инсталиране</string>

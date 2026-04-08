@@ -25,14 +25,20 @@
         }
       }
     ],
-    "gradle-semantic-release-plugin",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "chmod +x .github/scripts/prepare-release.sh && .github/scripts/prepare-release.sh ${nextRelease.version}",
+        "publishCmd": "echo 'Build completed during prepare phase'"
+      }
+    ],
     [
       "@semantic-release/git",
       {
         "assets": [
           "CHANGELOG.md",
           "app-release.json",
-          "gradle.properties"
+          "app/gradle.properties"
         ],
         "message": "chore: Release v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
@@ -42,14 +48,14 @@
       {
         "assets": [
           {
-            "path": "build/outputs/apk/release/morphe-manager*.apk?(.asc)"
+            "path": "app/build/outputs/apk/release/*.apk?(.asc)"
           }
         ],
         "successComment": false
       }
     ],
     [
-      "@saithodev/semantic-release-backmerge",
+      "@cleyrop-org/semantic-release-backmerge",
       {
         "backmergeBranches": [{"from": "main", "to": "dev"}],
         "clearWorkspace": true

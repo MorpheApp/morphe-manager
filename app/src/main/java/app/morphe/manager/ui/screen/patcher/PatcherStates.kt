@@ -17,9 +17,9 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -38,8 +38,18 @@ import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 
 /**
- * Enum for patcher states
+ * Snapshot of patched-app metadata shown in the error dialog.
  */
+data class PatcherErrorInfo(
+    val appName: String,
+    val packageName: String,
+    val appVersion: String,
+    val bundles: List<BundleInfo>
+) {
+    data class BundleInfo(val name: String, val version: String?)
+}
+
+/** Enum for patcher states. */
 enum class PatcherState {
     IN_PROGRESS,
     SUCCESS,
@@ -47,23 +57,21 @@ enum class PatcherState {
 }
 
 /**
- * State holder for Patcher Screen
- * Manages patching progress, dialogs, and installation flow
+ * State holder for Patcher Screen.
+ * Manages patching progress, dialogs, and installation flow.
  */
 @Stable
 class MorphePatcherState(
     val viewModel: PatcherViewModel
 ) {
     // Error handling
-    var showErrorBottomSheet by mutableStateOf(false)
+    var showErrorDialog by mutableStateOf(false)
     var errorMessage by mutableStateOf("")
+    var errorInfo by mutableStateOf<PatcherErrorInfo?>(null)
     var hasPatchingError by mutableStateOf(false)
 
     // Cancel dialog
     var showCancelDialog by mutableStateOf(false)
-
-    // Export state
-    var isSaving by mutableStateOf(false)
 
     // Computed states
     val patcherSucceeded: Boolean?
@@ -78,7 +86,7 @@ class MorphePatcherState(
 }
 
 /**
- * Remember patcher state with proper lifecycle
+ * Remember patcher state with proper lifecycle.
  */
 @Composable
 fun rememberMorphePatcherState(
@@ -90,7 +98,7 @@ fun rememberMorphePatcherState(
 }
 
 /**
- * Patching success screen
+ * Patching success screen.
  */
 @Composable
 fun PatchingSuccess(
@@ -200,7 +208,7 @@ fun PatchingSuccess(
 }
 
 /**
- * Adaptive content layout for success screen
+ * Adaptive content layout for success screen.
  */
 @Composable
 private fun AdaptiveSuccessContent(
@@ -348,7 +356,7 @@ private fun AdaptiveSuccessContent(
 }
 
 /**
- * Success screen icon
+ * Success screen icon.
  */
 @Composable
 private fun SuccessIcon(
@@ -378,7 +386,7 @@ private fun SuccessIcon(
 }
 
 /**
- * Success screen status text
+ * Success screen status text.
  */
 @Composable
 private fun SuccessStatusText(
@@ -416,7 +424,7 @@ private fun SuccessStatusText(
 }
 
 /**
- * Success screen instructions text
+ * Success screen instructions text.
  */
 @Composable
 private fun SuccessInstructionsText(
@@ -446,7 +454,7 @@ private fun SuccessInstructionsText(
 }
 
 /**
- * Success screen error message
+ * Success screen error message.
  */
 @Composable
 private fun SuccessErrorMessage(
@@ -455,8 +463,8 @@ private fun SuccessErrorMessage(
 ) {
     AnimatedVisibility(
         visible = errorMessage != null && installState is InstallViewModel.InstallState.Error,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(300))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         errorMessage?.let { message ->
             Surface(
@@ -477,7 +485,7 @@ private fun SuccessErrorMessage(
 }
 
 /**
- * Success screen root warning
+ * Success screen root warning.
  */
 @Composable
 private fun SuccessRootWarning(
@@ -486,8 +494,8 @@ private fun SuccessRootWarning(
 ) {
     AnimatedVisibility(
         visible = usingMountInstall && installState is InstallViewModel.InstallState.Ready,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(300))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         InfoBadge(
             text = stringResource(R.string.root_gmscore_excluded),
@@ -499,7 +507,7 @@ private fun SuccessRootWarning(
 }
 
 /**
- * Styled install action button
+ * Styled installation action button.
  */
 @Composable
 private fun InstallActionButton(
@@ -592,7 +600,7 @@ private fun InstallActionButton(
 }
 
 /**
- * Get title resource based on state
+ * Get title resource based on state.
  */
 private fun getTitleForState(
     installState: InstallViewModel.InstallState,
@@ -607,7 +615,7 @@ private fun getTitleForState(
 }
 
 /**
- * Get subtitle resource based on state
+ * Get subtitle resource based on state.
  */
 private fun getSubtitleForState(
     installState: InstallViewModel.InstallState,
@@ -623,12 +631,12 @@ private fun getSubtitleForState(
 }
 
 /**
- * Patching failed screen
+ * Patching failed screen.
  */
 @Composable
 fun PatchingFailed(
-    state: MorphePatcherState,
-    onHomeClick: () -> Unit
+    onHomeClick: () -> Unit,
+    onErrorClick: () -> Unit
 ) {
     val windowSize = rememberWindowSize()
 
@@ -686,7 +694,7 @@ fun PatchingFailed(
                 onCancelClick = {},
                 onHomeClick = onHomeClick,
                 onSaveClick = {},
-                onErrorClick = { state.showErrorBottomSheet = true }
+                onErrorClick = onErrorClick
             )
         }
     }

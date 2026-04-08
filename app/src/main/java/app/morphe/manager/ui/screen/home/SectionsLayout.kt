@@ -10,10 +10,10 @@ import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.*import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -21,9 +21,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxValue
-import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +30,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -81,6 +79,9 @@ fun SectionsLayout(
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
 
+    // Search
+    showSearchButton: Boolean = false,
+
     // Other apps button
     onOtherAppsClick: () -> Unit,
     showOtherAppsButton: Boolean = true,
@@ -93,6 +94,13 @@ fun SectionsLayout(
     isExpertModeEnabled: Boolean = false
 ) {
     val windowSize = rememberWindowSize()
+
+    // Search state hoisted here so both AdaptiveContent and HomeBottomActionBar share it
+    var searchVisible by remember { mutableStateOf(false) }
+    val searchQuery = remember { mutableStateOf("") }
+    LaunchedEffect(searchVisible) { if (!searchVisible) searchQuery.value = "" }
+    // Auto-close search if the button disappears
+    LaunchedEffect(showSearchButton) { if (!showSearchButton) searchVisible = false }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Main layout structure
@@ -117,6 +125,11 @@ fun SectionsLayout(
                     onUnhideApp = onUnhideApp,
                     hiddenAppItems = hiddenAppItems,
                     installedAppsLoading = installedAppsLoading,
+                    showSearchButton = showSearchButton,
+                    searchVisible = searchVisible,
+                    searchQuery = searchQuery.value,
+                    onSearchQueryChange = { searchQuery.value = it },
+                    onSearchToggle = { searchVisible = !searchVisible },
                     onOtherAppsClick = onOtherAppsClick,
                     showOtherAppsButton = showOtherAppsButton,
                     onBundlesClick = onBundlesClick,
@@ -130,7 +143,10 @@ fun SectionsLayout(
                 HomeBottomActionBar(
                     onBundlesClick = onBundlesClick,
                     onSettingsClick = onSettingsClick,
-                    isExpertModeEnabled = isExpertModeEnabled
+                    isExpertModeEnabled = isExpertModeEnabled,
+                    showSearchButton = showSearchButton,
+                    searchActive = searchVisible,
+                    onSearchClick = { searchVisible = !searchVisible }
                 )
             }
         }
@@ -164,6 +180,11 @@ private fun AdaptiveContent(
     onUnhideApp: (String) -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean,
+    showSearchButton: Boolean = false,
+    searchVisible: Boolean = false,
+    searchQuery: String = "",
+    onSearchQueryChange: (String) -> Unit = {},
+    onSearchToggle: () -> Unit = {},
     onOtherAppsClick: () -> Unit,
     showOtherAppsButton: Boolean = true,
     onBundlesClick: () -> Unit = {},
@@ -173,6 +194,11 @@ private fun AdaptiveContent(
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
     val useTwoColumns = windowSize.useTwoColumnLayout
+
+    // True empty state: loaded and no items from any bundle: all disabled or no sources
+    val isAppsEmpty by remember(homeAppItems, installedAppsLoading) {
+        derivedStateOf { !installedAppsLoading && homeAppItems.isEmpty() }
+    }
 
     Column(
         modifier = Modifier
@@ -206,6 +232,9 @@ private fun AdaptiveContent(
                         onBundlesClick = onBundlesClick,
                         onSettingsClick = onSettingsClick,
                         isExpertModeEnabled = isExpertModeEnabled,
+                        showSearchButton = showSearchButton && !isAppsEmpty,
+                        searchActive = searchVisible,
+                        onSearchClick = onSearchToggle,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
@@ -226,13 +255,19 @@ private fun AdaptiveContent(
                         onUnhideApp = onUnhideApp,
                         hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
+                        searchVisible = searchVisible,
+                        searchQuery = searchQuery,
+                        onSearchQueryChange = onSearchQueryChange,
+                        onBundlesClick = onBundlesClick,
                         modifier = Modifier.weight(1f)
                     )
 
-                    // Section 4: Other apps
-                    if (!showOtherAppsButton) {
-                        Spacer(modifier = Modifier.height(48.dp + itemSpacing))
-                    } else {
+                    // Section 4: Other apps - hidden when no apps available or bundles loading
+                    AnimatedVisibility(
+                        visible = !isAppsEmpty && showOtherAppsButton,
+                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                    ) {
                         OtherAppsSection(
                             onClick = onOtherAppsClick,
                             modifier = Modifier.fillMaxWidth()
@@ -262,20 +297,27 @@ private fun AdaptiveContent(
                         onUnhideApp = onUnhideApp,
                         hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
+                        searchVisible = searchVisible,
+                        searchQuery = searchQuery,
+                        onSearchQueryChange = onSearchQueryChange,
+                        onBundlesClick = onBundlesClick,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
 
-                Spacer(modifier = Modifier.height(itemSpacing))
-
-                // Section 4: Other apps
-                if (!showOtherAppsButton) {
-                    Spacer(modifier = Modifier.height(48.dp + itemSpacing))
-                } else {
-                    OtherAppsSection(
-                        onClick = onOtherAppsClick,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                // Section 4: Other apps - hidden when no apps available or bundles loading
+                AnimatedVisibility(
+                    visible = !isAppsEmpty && showOtherAppsButton,
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                ) {
+                    Column {
+                        Spacer(modifier = Modifier.height(itemSpacing))
+                        OtherAppsSection(
+                            onClick = onOtherAppsClick,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
             }
         }
@@ -357,12 +399,10 @@ fun ManagerUpdateSnackbar(
         visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
         exit = slideOutVertically(
             targetOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeOut(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)),
         modifier = modifier
     ) {
         SwipeToDismissBox(
@@ -448,12 +488,10 @@ fun BundleUpdateSnackbar(
         visible = visible && !dismissed,
         enter = slideInVertically(
             initialOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
         exit = slideOutVertically(
             targetOffsetY = { -it },
-            animationSpec = tween(durationMillis = 500)
-        ) + fadeOut(animationSpec = tween(durationMillis = 500)),
+            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)),
         modifier = modifier
     ) {
         SwipeToDismissBox(
@@ -673,6 +711,10 @@ fun MainAppsSection(
     onUnhideApp: (String) -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
+    searchVisible: Boolean = false,
+    searchQuery: String = "",
+    onSearchQueryChange: (String) -> Unit = {},
+    onBundlesClick: () -> Unit = {},
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -711,95 +753,251 @@ fun MainAppsSection(
         )
     }
 
+    // Filtered items based on search query
+    val filteredItems = remember(homeAppItems, searchQuery) {
+        if (searchQuery.isBlank()) homeAppItems
+        else homeAppItems.filter { item ->
+            item.displayName.contains(searchQuery, ignoreCase = true) ||
+                    item.packageName.contains(searchQuery, ignoreCase = true)
+        }
+    }
+
     val listState = rememberLazyListState()
     val fadeSize = 24.dp
+
+    // True empty state: loaded but no apps at all: all bundles disabled or no sources
+    val isEmptyState = !stableLoadingState && homeAppItems.isEmpty()
+    // Search empty state: items exist but nothing matches query
+    val isSearchEmpty = !stableLoadingState && homeAppItems.isNotEmpty() &&
+            searchQuery.isNotBlank() && filteredItems.isEmpty()
 
     Box(
         modifier = modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .widthIn(max = 500.dp)
-                .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
-                .drawWithContent {
-                    drawContent()
-                    val fadePx = fadeSize.toPx()
-                    val canScrollUp = listState.firstVisibleItemIndex > 0 ||
-                            listState.firstVisibleItemScrollOffset > 0
-                    if (canScrollUp) {
-                        drawRect(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(Color.Transparent, Color.Black),
-                                startY = 0f,
-                                endY = fadePx
-                            ),
-                            blendMode = BlendMode.DstIn
-                        )
-                    }
-                    val canScrollDown = listState.canScrollForward
-                    if (canScrollDown) {
-                        drawRect(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(Color.Black, Color.Transparent),
-                                startY = size.height - fadePx,
-                                endY = size.height
-                            ),
-                            blendMode = BlendMode.DstIn
-                        )
-                    }
-                },
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(itemSpacing),
-            contentPadding = PaddingValues(vertical = 8.dp)
-        ) {
-            // Cold start: homeAppItems still empty - show placeholder shimmer cards
-            if (stableLoadingState && homeAppItems.isEmpty()) {
-                items(3, key = { "placeholder_$it" }) { index ->
-                    AppLoadingCard(
-                        gradientColors = placeholderGradients[index % placeholderGradients.size],
-                        modifier = Modifier.animateItem()
-                    )
-                }
+        AnimatedContent(
+            targetState = isEmptyState,
+            transitionSpec = {
+                fadeIn(tween(300)) togetherWith fadeOut(tween(200))
+            },
+            label = "home_empty_state"
+        ) { empty ->
+            if (empty) {
+                HomeEmptyState(onBundlesClick = onBundlesClick)
             } else {
-                items(
-                    items = homeAppItems,
-                    key = { it.packageName }
-                ) { item ->
-                    DynamicAppCard(
-                        item = item,
-                        isLoading = stableLoadingState,
-                        hasUpdate = item.hasUpdate,
-                        onAppClick = { onAppClick(item) },
-                        onInstalledAppClick = onInstalledAppClick,
-                        onHide = { onHideApp(item.packageName) },
-                        modifier = Modifier.animateItem()
-                    )
-                }
+                Column(
+                    modifier = Modifier
+                        .widthIn(max = 500.dp)
+                        .fillMaxWidth()
+                ) {
+                    // Search bar
+                    AnimatedVisibility(
+                        visible = searchVisible,
+                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                    ) {
+                        HomeSearchTextField(
+                            value = searchQuery,
+                            onValueChange = onSearchQueryChange,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                    }
 
-                // "Show hidden apps" button if there are hidden apps
-                if (hiddenAppItems.isNotEmpty()) {
-                    item(key = "show_hidden") {
-                        TextButton(
-                            onClick = { showHiddenAppsDialog.value = true },
-                            modifier = Modifier.padding(top = 4.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Visibility,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = stringResource(R.string.home_app_show_hidden),
-                                style = MaterialTheme.typography.bodyMedium
-                            )
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+                            .drawWithContent {
+                                drawContent()
+                                val fadePx = fadeSize.toPx()
+                                val canScrollUp = listState.firstVisibleItemIndex > 0 ||
+                                        listState.firstVisibleItemScrollOffset > 0
+                                if (canScrollUp) {
+                                    drawRect(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(Color.Transparent, Color.Black),
+                                            startY = 0f,
+                                            endY = fadePx
+                                        ),
+                                        blendMode = BlendMode.DstIn
+                                    )
+                                }
+                                val canScrollDown = listState.canScrollForward
+                                if (canScrollDown) {
+                                    drawRect(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(Color.Black, Color.Transparent),
+                                            startY = size.height - fadePx,
+                                            endY = size.height
+                                        ),
+                                        blendMode = BlendMode.DstIn
+                                    )
+                                }
+                            },
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(itemSpacing),
+                        contentPadding = PaddingValues(vertical = 8.dp)
+                    ) {
+                        // Cold start: homeAppItems still empty - show placeholder shimmer cards
+                        if (stableLoadingState && homeAppItems.isEmpty()) {
+                            items(3, key = { "placeholder_$it" }) { index ->
+                                AppLoadingCard(
+                                    gradientColors = placeholderGradients[index % placeholderGradients.size],
+                                    modifier = Modifier.animateItem()
+                                )
+                            }
+                        } else {
+                            items(
+                                items = filteredItems,
+                                key = { it.packageName }
+                            ) { item ->
+                                DynamicAppCard(
+                                    item = item,
+                                    isLoading = stableLoadingState,
+                                    hasUpdate = item.hasUpdate,
+                                    onAppClick = { onAppClick(item) },
+                                    onInstalledAppClick = onInstalledAppClick,
+                                    onHide = { onHideApp(item.packageName) },
+                                    modifier = Modifier.animateItem()
+                                )
+                            }
+
+                            // Search empty result
+                            if (isSearchEmpty) {
+                                item(key = "search_empty") {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 32.dp)
+                                            .animateItem(),
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.SearchOff,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(40.dp),
+                                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.search_no_results),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
+                                }
+                            }
+
+                            // "Show hidden apps" button if there are hidden apps
+                            if (hiddenAppItems.isNotEmpty()) {
+                                item(key = "show_hidden") {
+                                    TextButton(
+                                        onClick = { showHiddenAppsDialog.value = true },
+                                        modifier = Modifier.padding(top = 4.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Visibility,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Text(
+                                            text = stringResource(R.string.home_app_show_hidden),
+                                            style = MaterialTheme.typography.bodyMedium
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+    }
+}
+
+/**
+ * Empty state shown when no apps are available from any bundle.
+ * Typically, seen when all sources are disabled or none added yet.
+ */
+@Composable
+private fun HomeEmptyState(
+    onBundlesClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .widthIn(max = 500.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp, vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.Inbox,
+            contentDescription = null,
+            modifier = Modifier.size(56.dp),
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
+        )
+        Text(
+            text = stringResource(R.string.home_no_apps_title),
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = stringResource(R.string.home_no_apps_subtitle, stringResource(R.string.sources_management_title)),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        FilledTonalButton(onClick = onBundlesClick) {
+            Icon(
+                imageVector = Icons.Outlined.Source,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(stringResource(R.string.sources_management_title))
+        }
+    }
+}
+
+/**
+ * Standalone search field for the home screen.
+ * Wraps [MorpheDialogTextField] with [LocalDialogTextColor] set to onSurface
+ * so it renders correctly outside a dialog context.
+ */
+@Composable
+private fun HomeSearchTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CompositionLocalProvider(LocalDialogTextColor provides MaterialTheme.colorScheme.onSurface) {
+        MorpheDialogTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = { Text(stringResource(R.string.home_search_apps)) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Search,
+                    contentDescription = stringResource(R.string.home_search_apps)
+                )
+            },
+            showClearButton = true,
+            modifier = modifier
+        )
     }
 }
 
@@ -885,7 +1083,8 @@ internal fun HideAppDialog(
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
-        }
+        },
+        compactPadding = true
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -894,39 +1093,18 @@ internal fun HideAppDialog(
             // Original app card preview
             AppCardLayout(
                 gradientColors = item.gradientColors,
-                enabled = false,
+                enabled = true,
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
             ) {
-                AppIcon(
+                AppCardContent(
+                    packageName = item.packageName,
                     packageInfo = item.packageInfo,
-                    packageName = if (item.packageInfo == null) item.packageName else null,
-                    contentDescription = null,
-                    modifier = Modifier.size(60.dp),
-                    preferredSource = AppDataSource.PATCHED_APK,
-                    placeholderGradientColors = item.gradientColors,
-                    placeholderInnerPadding = 6.dp
+                    displayName = item.displayName,
+                    subtitle = stringResource(R.string.home_app_will_be_hidden),
+                    gradientColors = item.gradientColors,
+                    iconSource = AppDataSource.PATCHED_APK
                 )
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = item.displayName,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-
-                    Text(
-                        text = stringResource(R.string.home_app_will_be_hidden),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.White.copy(alpha = 0.75f)
-                    )
-                }
             }
 
             // Explanation text
@@ -962,7 +1140,8 @@ internal fun HiddenAppsDialog(
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             )
-        }
+        },
+        compactPadding = true
     ) {
         if (hiddenAppItems.isEmpty()) {
             Box(
@@ -979,21 +1158,22 @@ internal fun HiddenAppsDialog(
                 )
             }
         } else {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                InfoBadge(
-                    text = stringResource(R.string.home_app_hidden_apps_hint),
-                    icon = Icons.Outlined.TouchApp,
-                    isExpanded = true
-                )
-
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    hiddenAppItems.forEach { item ->
-                        HiddenAppRow(
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                hiddenAppItems.forEach { item ->
+                    // Original app card preview
+                    AppCardLayout(
+                        gradientColors = item.gradientColors,
+                        enabled = true,
+                        onClick = { onUnhide(item.packageName) },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        AppCardContent(
                             packageName = item.packageName,
-                            displayName = item.displayName,
-                            gradientColors = item.gradientColors,
                             packageInfo = item.packageInfo,
-                            onUnhide = { onUnhide(item.packageName) }
+                            displayName = item.displayName,
+                            subtitle = stringResource(R.string.home_app_hidden_apps_hint),
+                            gradientColors = item.gradientColors,
+                            iconSource = AppDataSource.PATCHED_APK
                         )
                     }
                 }
@@ -1003,74 +1183,103 @@ internal fun HiddenAppsDialog(
 }
 
 /**
- * Single app row in [HiddenAppsDialog] rendered as a glassmorphism card.
+ * Shared icon + text content for [AppCardLayout] rows.
+ *
+ * @param packageName   Package name used for icon lookup when [packageInfo] is null.
+ * @param packageInfo   Resolved [PackageInfo]; when non-null [packageName] is ignored for the icon.
+ * @param displayName   Primary label shown in bold.
+ * @param subtitle      Secondary line shown below [displayName]; null → not rendered.
+ * @param gradientColors Gradient palette forwarded to [AppIcon] placeholder.
+ * @param iconSource    [AppDataSource] preference for [AppIcon].
  */
 @Composable
-private fun HiddenAppRow(
+private fun RowScope.AppCardContent(
     packageName: String,
-    displayName: String?,
-    gradientColors: List<Color>,
     packageInfo: PackageInfo?,
-    onUnhide: () -> Unit
+    displayName: String,
+    subtitle: String?,
+    gradientColors: List<Color>,
+    iconSource: AppDataSource
 ) {
-    val view = LocalView.current
-    val textColor = LocalDialogTextColor.current
-    val shape = RoundedCornerShape(16.dp)
+    val textColor = Color.White
+    val subtitleColor = Color.White.copy(alpha = 0.75f)
+    val titleShadow = Shadow(
+        color = Color.Black.copy(alpha = 0.4f),
+        offset = Offset(0f, 2f),
+        blurRadius = 4f
+    )
+    val subtitleShadow = Shadow(
+        color = Color.Black.copy(alpha = 0.4f),
+        offset = Offset(0f, 1f),
+        blurRadius = 2f
+    )
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .border(
-                width = 1.dp,
-                brush = Brush.linearGradient(
-                    colors = gradientColors.map { it.copy(alpha = 0.5f) }
-                ),
-                shape = shape
+    AppIcon(
+        packageInfo = packageInfo,
+        packageName = if (packageInfo == null) packageName else null,
+        contentDescription = null,
+        modifier = Modifier.size(60.dp),
+        preferredSource = iconSource,
+        placeholderGradientColors = gradientColors,
+        placeholderInnerPadding = 6.dp
+    )
+
+    Column(
+        modifier = Modifier.weight(1f),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(
+            text = displayName,
+            style = MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.Bold,
+                shadow = titleShadow
+            ),
+            color = textColor,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+
+        if (subtitle != null) {
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodyMedium.copy(shadow = subtitleShadow),
+                color = subtitleColor
             )
-            .background(
-                brush = Brush.linearGradient(
-                    colors = gradientColors.map { it.copy(alpha = 0.15f) }
-                )
-            )
-            .clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                onUnhide()
-            }
-            .padding(horizontal = 14.dp, vertical = 12.dp)
+        }
+    }
+}
+
+/**
+ * Frosted-glass chip for use on gradient card backgrounds.
+ * Uses white semi-transparent fill so it reads correctly regardless of
+ * the card's accent color or the user's dynamic theme.
+ */
+@Composable
+private fun GlassChip(
+    text: String,
+    icon: ImageVector,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(6.dp),
+        color = Color.White.copy(alpha = 0.20f)
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // App icon
-            AppIcon(
-                packageInfo = packageInfo,
-                packageName = if (packageInfo == null) packageName else null,
+            Icon(
+                imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(48.dp),
-                preferredSource = AppDataSource.PATCHED_APK,
-                placeholderGradientColors = gradientColors,
-                placeholderInnerPadding = 4.dp
+                tint = Color.White,
+                modifier = Modifier.size(12.dp)
             )
-
-            // App name
             Text(
-                text = displayName ?: packageName,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    color = textColor
-                ),
-                modifier = Modifier.weight(1f),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            // Eye icon
-            MorpheIcon(
-                icon = Icons.Outlined.Visibility,
-                tint = textColor.copy(alpha = 0.45f),
-                size = 20.dp
+                text = text,
+                style = MaterialTheme.typography.labelSmall,
+                color = Color.White
             )
         }
     }
@@ -1134,107 +1343,62 @@ fun InstalledAppCard(
             preferredSource = AppDataSource.INSTALLED
         )
 
-        // App info with update badge
-        Box(modifier = Modifier.weight(1f)) {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                // App name
+        // App info
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            // App name
+            Text(
+                text = displayName,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    shadow = Shadow(
+                        color = Color.Black.copy(alpha = 0.4f),
+                        offset = Offset(0f, 2f),
+                        blurRadius = 4f
+                    )
+                ),
+                color = textColor,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            // Version + deleted status + inline update chip
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
-                    text = displayName,
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold,
+                    text = version,
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         shadow = Shadow(
                             color = Color.Black.copy(alpha = 0.4f),
-                            offset = Offset(0f, 2f),
-                            blurRadius = 4f
+                            offset = Offset(0f, 1f),
+                            blurRadius = 2f
                         )
                     ),
-                    color = textColor,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    color = textColor.copy(alpha = 0.85f)
                 )
 
-                // Version + deleted status
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = version,
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.4f),
-                                offset = Offset(0f, 1f),
-                                blurRadius = 2f
-                            )
-                        ),
-                        color = textColor.copy(alpha = 0.85f)
+                if (isAppDeleted) {
+                    GlassChip(
+                        text = stringResource(R.string.uninstalled),
+                        icon = Icons.Outlined.DeleteOutline
                     )
+                }
 
-                    if (isAppDeleted) {
-                        Text(
-                            text = "• ${stringResource(R.string.uninstalled)}",
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                shadow = Shadow(
-                                    color = Color.Black.copy(alpha = 0.4f),
-                                    offset = Offset(0f, 1f),
-                                    blurRadius = 2f
-                                )
-                            ),
-                            color = Color(0xFFFF5252),
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                AnimatedVisibility(
+                    visible = hasUpdate && !isAppDeleted,
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
+                ) {
+                    GlassChip(
+                        text = stringResource(R.string.update),
+                        icon = Icons.Outlined.ArrowUpward
+                    )
                 }
             }
-
-            // Update badge
-            @Suppress("RemoveRedundantQualifierName")
-            androidx.compose.animation.AnimatedVisibility(
-                visible = hasUpdate && !isAppDeleted,
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 0.dp, end = 0.dp),
-                enter = fadeIn(animationSpec = tween(400)) +
-                        scaleIn(initialScale = 0.8f, animationSpec = tween(400)),
-                exit = fadeOut(animationSpec = tween(300)) +
-                        scaleOut(targetScale = 0.8f, animationSpec = tween(300))
-            ) {
-                UpdateBadge()
-            }
-        }
-    }
-}
-
-/**
- * Update badge for app cards.
- */
-@Composable
-private fun UpdateBadge(
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.primaryContainer,
-        shadowElevation = 4.dp
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Update,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.size(14.dp)
-            )
-            Text(
-                text = stringResource(R.string.update),
-                style = MaterialTheme.typography.labelSmall,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
         }
     }
 }
@@ -1253,9 +1417,6 @@ fun AppButton(
     enabled: Boolean = true,
     onLongClick: (() -> Unit)? = null
 ) {
-    val textColor = Color.White
-    val finalTextColor = if (enabled) textColor else textColor.copy(alpha = 0.5f)
-
     val notPatchedText = stringResource(R.string.home_not_patched_yet)
     val disabledText = stringResource(R.string.disabled)
 
@@ -1285,51 +1446,14 @@ fun AppButton(
             }
         }
     ) {
-        // App icon
-        AppIcon(
+        AppCardContent(
+            packageName = packageName,
             packageInfo = packageInfo,
-            packageName = if (packageInfo == null) packageName else null,
-            contentDescription = null,
-            modifier = Modifier.size(60.dp),
-            preferredSource = AppDataSource.PATCHED_APK,
-            placeholderGradientColors = gradientColors,
-            placeholderInnerPadding = 6.dp
+            displayName = displayName,
+            subtitle = notPatchedText,
+            gradientColors = gradientColors,
+            iconSource = AppDataSource.PATCHED_APK
         )
-
-        // Text info
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            // Display name
-            Text(
-                text = displayName,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    color = finalTextColor,
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 2f),
-                        blurRadius = 4f
-                    )
-                ),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            // Status text
-            Text(
-                text = notPatchedText,
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 1f),
-                        blurRadius = 2f
-                    )
-                ),
-                color = finalTextColor.copy(alpha = 0.7f)
-            )
-        }
     }
 }
 

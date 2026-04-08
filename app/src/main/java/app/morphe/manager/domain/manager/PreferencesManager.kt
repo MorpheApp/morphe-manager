@@ -5,12 +5,12 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
+import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
-import app.morphe.manager.util.ExportNameFormatter
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
@@ -78,10 +78,6 @@ class PreferencesManager(
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
-    val patchedAppExportFormat = stringPreference(
-        "patched_app_export_format",
-        ExportNameFormatter.DEFAULT_TEMPLATE
-    )
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
     val installationTime = longPreference("manager_installation_time", 0)
@@ -112,7 +108,7 @@ class PreferencesManager(
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
                 edit {
                     useManagerPrereleases.value = true
-                    bundlePrereleasesEnabled += "0"
+                    bundlePrereleasesEnabled += DEFAULT_SOURCE_UID.toString()
                     prereleaseAutoEnabled.value = true
                 }
             }
@@ -136,7 +132,6 @@ class PreferencesManager(
         val useProcessRuntime: Boolean? = null,
         val patcherProcessMemoryLimit: Int? = null,
         val autoCollapsePatcherSteps: Boolean? = null,
-        val patchedAppExportFormat: String? = null,
         val officialBundleRemoved: Boolean? = null,
         val officialBundleCustomDisplayName: String? = null,
         val allowMeteredUpdates: Boolean? = null,
@@ -183,7 +178,6 @@ class PreferencesManager(
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
         useProcessRuntime = useProcessRuntime.get(),
         patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
-        patchedAppExportFormat = patchedAppExportFormat.get(),
         allowMeteredUpdates = allowMeteredUpdates.get(),
         installerPrimary = installerPrimary.get(),
         installerCustomComponents = installerCustomComponents.get(),
@@ -215,7 +209,6 @@ class PreferencesManager(
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
         snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
-        snapshot.patchedAppExportFormat?.let { patchedAppExportFormat.value = it }
         snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
         snapshot.installerPrimary?.let { installerPrimary.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }

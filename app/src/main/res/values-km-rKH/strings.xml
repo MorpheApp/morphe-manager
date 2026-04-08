@@ -11,7 +11,6 @@
     <string name="home_update_success">អាប់ដេតប្រភពបានបញ្ចប់</string>
     <string name="home_update_success_subtitle">ប្រភពរបស់អ្នកទាន់សម័យហើយ</string>
     <string name="home_sources_are_loading">ប្រភពកំពុងផ្ទុក សូមរង់ចាំ…</string>
-    <string name="home_please_wait">សូមរង់ចាំ…</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">តើកម្មវិធីណាមួយដែលអ្នកចង់ធ្វើបំណេះ?</string>
     <!-- Humorous hype message with light nostalgia -->

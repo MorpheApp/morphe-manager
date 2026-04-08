@@ -8,8 +8,8 @@ import java.util.Locale
  * Parse a BCP 47 locale code into a [Locale].
  *
  * Expected format:
- *  - `"uk-UA"` → `Locale("uk", "UA")`
- *  - `"en"`    → `Locale("en")`
+ *  - `"uk-UA"` → `Locale.forLanguageTag("uk-UA")`
+ *  - `"en"`    → `Locale.forLanguageTag("en")`
  *  - `"system"` / blank → `null` (caller should use empty LocaleList)
  */
 fun parseLocaleCode(code: String): Locale? {
@@ -18,9 +18,9 @@ fun parseLocaleCode(code: String): Locale? {
 
     return if (normalized.contains("-")) {
         val parts = normalized.split("-", limit = 2)
-        Locale(parts[0], parts[1])
+        Locale.forLanguageTag("${parts[0]}-${parts[1]}")
     } else {
-        Locale(normalized)
+        Locale.forLanguageTag(normalized)
     }
 }
 

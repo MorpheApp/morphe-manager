@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">छिपे हुए ऐप दिखाएं</string>
     <string name="home_app_no_hidden">कोई छिपा ऐप नहीं</string>
     <string name="home_app_hidden_apps_title">छिपे हुए ऐप्स</string>
-    <string name="home_app_hidden_apps_hint">टैप करें किसी ऐप पर उसे सूची में दिखाने के लिए</string>
+    <string name="home_app_hidden_apps_hint">छुपाने के लिए टैप करें</string>
     <string name="android_11_bug_dialog_title">एंड्रॉइड 11 बग</string>
     <string name="android_11_bug_dialog_description">एंड्रॉइड 11 सिस्टम में एक बग से बचने के लिए ऐप इंस्टॉलेशन की अनुमति समय से पहले दी जानी चाहिए जो उपयोगकर्ता अनुभव को नकारात्मक रूप से प्रभावित करेगी।</string>
     <string name="deep_link_add_source_title">स्रोत जोड़ें</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">स्रोत अपडेट पूर्ण हुआ</string>
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
-    <string name="home_please_wait">कृपया प्रतीक्षा करें…</string>
+    <string name="home_search_apps">ऐप्स खोजें</string>
+    <string name="home_no_apps_title">कोई ऐप्स उपलब्ध नहीं हैं</string>
+    <string name="home_no_apps_subtitle">पैच स्रोत जोड़ें या %s में मौजूदा स्रोत सक्षम करें</string>
+    <string name="home_no_apps_search_subtitle">कोई ऐप्स \"%1$s\" से मेल नहीं खाते हैं</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">पैचिंग के लिए आगे बढ़ें</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
+    <string name="expert_mode_reset_to_default">अनुशंसित पैच सक्षम करें</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
     <string name="expert_mode_universal_patches">सार्वभौमिक पैच</string>
+    <string name="expert_mode_new_patches">नया</string>
     <string name="expert_mode_multiple_sources_warning_title">अनुमतियों के कई स्रोत चुने गए हैं</string>
     <string name="expert_mode_multiple_sources_warning_message">"आपने विभिन्न पचड़ियों के स्रोतों से पचड़ियाँ चुनी हैं। यह संगतता की समस्याएं या अपेक्षित व्यवहार का कारण हो सकता है।
 
@@ -162,6 +167,7 @@
     <string name="patch_option_list_duplicate">यह मान पहले से मौजूद है</string>
     <string name="patch_option_list_empty">मान खाली नहीं हो सकता</string>
     <string name="patch_option_list_empty_state">अभी तक कोई मान नहीं जोड़ा गया है</string>
+    <string name="patch_option_required_missing">%s: सभी आवश्यक विकल्प भरें</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">अनुकूलित आइकॉन बनाएं</string>
     <string name="adaptive_icon_instructions">एक अग्रभूमि छवि चुनें, एक पृष्ठभूमि रंग चुनें, फिर पूर्वावलोकन को समायोजित करने के लिए स्लाइडर या पिंच इशारा का उपयोग करें</string>
@@ -223,6 +229,7 @@
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
     <string name="patcher_error_technical">तकनीकी विवरण</string>
+    <string name="patcher_error_dialog_app_info">ऐप जानकारी</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">All Done! 🎉</string>
@@ -602,18 +609,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">मorphe के बारे में</string>
     <string name="settings_system_share_website">वेबसाइट शेयर करें</string>
     <string name="settings_system_share_website_description">साझा अधिकृत मॉर्फ वेबसाइट</string>
-    <string name="settings_system_manager_description">"मोरफे एक प्रयोगशाला आधारित खुले स्रोत प्रोजेक्ट है जो लोकप्रिय एंड्रॉइड एप्लिकेशन के आधुनिक, व्यवस्थित पैचिंग के लिए ध्यान केंद्रित करता है
-
-खुले स्रोत के मूल में, मोरफे समुदाय के फीडबैक और योगदान को प्रोत्साहित करता है ताकि भविष्य के नवीनता को प्रेरित किया जाए"</string>
+    <string name="settings_system_manager_description">"एक प्रायोगिक ओपन-सोर्स परियोजना जो लोकप्रिय एंड्रॉइड ऐप्स के आधुनिक, सुव्यवस्थित पैचिंग के लिए है, जो समुदाय की प्रतिक्रिया और योगदान से प्रेरित है"</string>
     <string name="credits">क्रेडिट</string>
     <string name="credits_current_development">वर्तमान विकास</string>
     <string name="credits_prior_development">पिछला विकास</string>
+    <string name="opensource_licenses">ओपन-सोर्स लाइसेंस</string>
     <!-- Shared strings -->
     <string name="patches">पैच</string>
     <string name="home">घर</string>
     <string name="settings">सेटिंग्स</string>
     <string name="yes">हां</string>
     <string name="no">नहीं</string>
+    <string name="all">सभी</string>
+    <string name="filter">फ़िल्टर</string>
     <string name="reset">रीसेट करें</string>
     <string name="reset_all">सभी रीसेट करें</string>
     <string name="confirm">पुष्टि करें</string>
@@ -654,6 +662,7 @@ morphe_header_custom_dark.png
     <string name="open">खुला</string>
     <string name="mount">माउंट करें</string>
     <string name="mounted">माउंटेड</string>
+    <string name="unmount">अनमाउंट</string>
     <string name="unmounted">अनमाउंटेड</string>
     <string name="remount">पुनःसंयोजित करें</string>
     <string name="install">स्थापित करें</string>

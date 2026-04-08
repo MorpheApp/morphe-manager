@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Prikaži skrivene aplikacije</string>
     <string name="home_app_no_hidden">Nema skrivених aplikacija</string>
     <string name="home_app_hidden_apps_title">Skrivene aplikacije</string>
-    <string name="home_app_hidden_apps_hint">Dodirnite aplikaciju da bi je ponovo prikazali u listi</string>
+    <string name="home_app_hidden_apps_hint">Dотраните за приказивање</string>
     <string name="android_11_bug_dialog_title">Грешка на Android 11</string>
     <string name="android_11_bug_dialog_description">Dozvola za instalaciju aplikacije mora biti data unapred kako bi se izbjegao greška u sistemu Android 11 koja može negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Додај извор</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Ажурирање извора завршено</string>
     <string name="home_update_success_subtitle">Ваши извори су ажурни</string>
     <string name="home_sources_are_loading">Извори се учитавају, молимо сачекајте…</string>
-    <string name="home_please_wait">Молимо сачекајте…</string>
+    <string name="home_search_apps">Претрага апликација</string>
+    <string name="home_no_apps_title">Нисe доступни апликације</string>
+    <string name="home_no_apps_subtitle">Додај извор пача или омогући постојећи у %s</string>
+    <string name="home_no_apps_search_subtitle">Нисe пронађени апликације које одговарају \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Коју апликацију желите да печујете?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Продужи ка поправљању</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
+    <string name="expert_mode_reset_to_default">Омогући препоручене исправке</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
+    <string name="expert_mode_new_patches">Ново</string>
     <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
     <string name="expert_mode_multiple_sources_warning_message">"Одабрали сте патчеве из више извора. Може да дође до проблема са компатибилношћу или неочекиваног понашања.
 
@@ -223,6 +228,7 @@
     <string name="patcher_error_copied">Грешка је копирана у привремену меморију</string>
     <string name="patcher_error_log">Лог грешaka</string>
     <string name="patcher_error_technical">Техничке информације</string>
+    <string name="patcher_error_dialog_app_info">Информације о апликацији</string>
     <string name="patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
     <string name="patcher_installing_subtitle">Скоро спремно за рад! 🎸</string>
     <string name="patcher_success_title">Све готово! 🎉</string>
@@ -602,18 +608,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">О програму</string>
     <string name="settings_system_share_website">Дели веб-сајт</string>
     <string name="settings_system_share_website_description">Делите званични веб-сајт Morphe</string>
-    <string name="settings_system_manager_description">"Morphe је експериментални отворени изворни пројекат фокусиран на креирање модернег, ефикасног патчирања популарних Андроид апликација.
-
-Отворен за заједничку употребу, Morphe процвата на корисничким поврат и доприносе од заједнице да би будући будући иновације и побољшаке."</string>
+    <string name="settings_system_manager_description">"Експериментални отворени изворни пројекат за модерно, оптимизовано поправљање популарних Андроид апликација, покренут од стране повратних информација и доприноса заједнице"</string>
     <string name="credits">Послужности</string>
     <string name="credits_current_development">Тренутни развој</string>
     <string name="credits_prior_development">Претходни развој</string>
+    <string name="opensource_licenses">Лиценце отвореног кода</string>
     <!-- Shared strings -->
     <string name="patches">Флатери</string>
     <string name="home">Почетак</string>
     <string name="settings">Поставке</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
+    <string name="all">Сви</string>
+    <string name="filter">Филтер</string>
     <string name="reset">Ресетуј</string>
     <string name="reset_all">Ресетуј све</string>
     <string name="confirm">Potvrdite</string>
@@ -654,6 +661,7 @@ morphe_header_custom_dark.png
     <string name="open">Отворити</string>
     <string name="mount">Монтирај</string>
     <string name="mounted">Монтирано</string>
+    <string name="unmount">Демонтирај</string>
     <string name="unmounted">Демонтирано</string>
     <string name="remount">Поново монтирати</string>
     <string name="install">Инсталирај</string>

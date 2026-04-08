@@ -4,13 +4,13 @@
     <string name="home_other_apps">Andere apps</string>
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
-    <string name="home_app_hide_title">Verberg deze app?</string>
+    <string name="home_app_hide_title">Deze app verbergen?</string>
     <string name="home_app_hide_message">Deze app wordt verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop \'%1$s\' onderaan de lijst.</string>
     <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
     <string name="home_app_show_hidden">Toon verborgen apps</string>
     <string name="home_app_no_hidden">Geen verborgen apps</string>
     <string name="home_app_hidden_apps_title">Verborgen apps</string>
-    <string name="home_app_hidden_apps_hint">Tik op een app om haar weer in de lijst te tonen</string>
+    <string name="home_app_hidden_apps_hint">Tik om te tonen</string>
     <string name="android_11_bug_dialog_title">Android 11-bug</string>
     <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
     <string name="deep_link_add_source_title">Bron toevoegen</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Bronnen worden geüpdatet</string>
     <string name="home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
     <string name="home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
-    <string name="home_please_wait">Een ogenblik geduld...</string>
+    <string name="home_search_apps">Apps zoeken</string>
+    <string name="home_no_apps_title">Geen apps beschikbaar</string>
+    <string name="home_no_apps_subtitle">Voeg een patchbron toe of schakel een bestaande in %s</string>
+    <string name="home_no_apps_search_subtitle">Geen apps komen overeen met \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welke app wil je patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -42,7 +45,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Laten we ervoor zorgen dat uw apps zich goed gedragen</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Vandaag\'s voorspelling: 100% kans op patching</string>
+    <string name="home_greeting_7">De voorspelling voor vandaag: 100% kans op reparaties</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Ben je klaar om van een teleurstellende ervaring iets geweldigs te maken?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Doorgaan met patchen</string>
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
     <string name="expert_mode_enable_all">Alles inschakelen</string>
+    <string name="expert_mode_reset_to_default">Aanbevolen patches inschakelen</string>
     <string name="expert_mode_no_results">Geen patches gevonden</string>
     <string name="expert_mode_universal_patches">Universele patches</string>
+    <string name="expert_mode_new_patches">Nieuw</string>
     <string name="expert_mode_multiple_sources_warning_title">Meerdere patch-bronnen geselecteerd</string>
     <string name="expert_mode_multiple_sources_warning_message">"U heeft patches geselecteerd van meerdere patch-bronnen. Dit kan compatibiliteitsproblemen of onverwachte gedrag veroorzaken.
 
@@ -162,6 +167,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="patch_option_list_duplicate">Deze waarde bestaat al</string>
     <string name="patch_option_list_empty">Waarde mag niet leeg zijn</string>
     <string name="patch_option_list_empty_state">Nog geen waarden toegevoegd</string>
+    <string name="patch_option_required_missing">%s: vul alle verplichte opties in</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Adaptieve icoon maken</string>
     <string name="adaptive_icon_instructions">Kies een voorgrondafbeelding, selecteer een achtergrondkleur en gebruik vervolgens de schuifregelaar of knijpbewerking om de voorbeeldweergave aan te passen</string>
@@ -223,6 +229,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="patcher_error_log">Foutlogboek</string>
     <string name="patcher_error_technical">Technische details</string>
+    <string name="patcher_error_dialog_app_info">App-info</string>
     <string name="patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>
     <string name="patcher_success_title">Klaar! 🎉</string>
@@ -602,18 +609,19 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_about">Over</string>
     <string name="settings_system_share_website">Website delen</string>
     <string name="settings_system_share_website_description">Deel de officiële Morphe-website</string>
-    <string name="settings_system_manager_description">"Morphe is een experimentele open-source project gericht op het creëren van een moderne, gestroomde patching van populaire Android-apps
-
-Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen om toekomstige innovatie te drijven"</string>
+    <string name="settings_system_manager_description">"Een experimenteel open-source project voor modern, gestroomlijnd patchen van populaire Android-apps, aangedreven door community feedback en bijdragen"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Huidige ontwikkeling</string>
     <string name="credits_prior_development">Eerdere ontwikkeling</string>
+    <string name="opensource_licenses">Open-source licenties</string>
     <!-- Shared strings -->
     <string name="patches">Patches</string>
     <string name="home">Home</string>
     <string name="settings">Instellingen</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
+    <string name="all">Alles</string>
+    <string name="filter">Filter</string>
     <string name="reset">Reset</string>
     <string name="reset_all">Alles resetten</string>
     <string name="confirm">Bevestigen</string>
@@ -654,6 +662,7 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="open">Openen</string>
     <string name="mount">Mount</string>
     <string name="mounted">Gemount</string>
+    <string name="unmount">Ontkoppelen</string>
     <string name="unmounted">Niet gemount</string>
     <string name="remount">Herinstalleren</string>
     <string name="install">Installeren</string>

@@ -52,10 +52,6 @@ fun PatchOptionsSection(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    val showThemeDialog = remember { mutableStateOf<String?>(null) }
-    val showBrandingDialog = remember { mutableStateOf<String?>(null) }
-    val showHeaderDialog = remember { mutableStateOf<String?>(null) }
-
     // Collect patch options from ViewModel
     val youtubePatches by patchOptionsViewModel.youtubePatches.collectAsState()
     val youtubeMusicPatches by patchOptionsViewModel.youtubeMusicPatches.collectAsState()
@@ -65,199 +61,193 @@ fun PatchOptionsSection(
     val bundleUpdateProgress by homeViewModel.patchBundleRepository.bundleUpdateProgress.collectAsStateWithLifecycle(null)
     val isBundleUpdating = bundleUpdateProgress != null && bundleUpdateProgress!!.result == PatchBundleRepository.BundleUpdateResult.None
 
-    // Collect bundle info to detect changes
-    val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
-
-    // Refresh patch options when bundle info changes
-    LaunchedEffect(bundleInfo) {
-        if (bundleInfo.isNotEmpty()) {
-            patchOptionsViewModel.refresh()
-        }
+    // Keep VM in sync with bundle-updating state
+    LaunchedEffect(isBundleUpdating) {
+        patchOptionsViewModel.onBundleUpdatingChanged(isBundleUpdating)
     }
 
-    // Check if patches are completely unavailable
-    val noPatchesAvailable = !isBundleUpdating && loadError == null &&
-            youtubePatches.isEmpty() && youtubeMusicPatches.isEmpty()
+    val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow
+        .collectAsStateWithLifecycle(emptyMap())
 
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        // Loading state - show when bundle is updating
-        if (isBundleUpdating) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(24.dp),
-                    strokeWidth = 2.dp
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = stringResource(R.string.settings_advanced_patch_options_loading),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        } else if (noPatchesAvailable) {
-            // No patches available (bundle not loaded yet) - show waiting message
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
-            ) {
+    LaunchedEffect(bundleInfo) {
+        if (bundleInfo.isNotEmpty()) patchOptionsViewModel.refresh()
+    }
+
+    val noPatchesAvailable = patchOptionsViewModel.noPatchesAvailable
+
+    patchOptionsViewModel.showThemeDialogFor?.let { packageName ->
+        ThemeColorDialog(
+            patchOptionsPrefs = patchOptionsPrefs,
+            patchOptionsViewModel = patchOptionsViewModel,
+            packageName = packageName,
+            onDismiss = { patchOptionsViewModel.dismissThemeDialog() }
+        )
+    }
+
+    patchOptionsViewModel.showBrandingDialogFor?.let { packageName ->
+        CustomBrandingDialog(
+            patchOptionsPrefs = patchOptionsPrefs,
+            patchOptionsViewModel = patchOptionsViewModel,
+            packageName = packageName,
+            onDismiss = { patchOptionsViewModel.dismissBrandingDialog() }
+        )
+    }
+
+    patchOptionsViewModel.showHeaderDialogFor?.let { packageName ->
+        CustomHeaderDialog(
+            patchOptionsPrefs = patchOptionsPrefs,
+            patchOptionsViewModel = patchOptionsViewModel,
+            packageName = packageName,
+            onDismiss = { patchOptionsViewModel.dismissHeaderDialog() }
+        )
+    }
+
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        when {
+            isBundleUpdating -> {
                 Row(
-                    modifier = Modifier.padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                    horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Info,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.tertiary,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = stringResource(R.string.settings_advanced_patch_options_waiting_for_source),
+                        text = stringResource(R.string.settings_advanced_patch_options_loading),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
-        } else if (loadError != null) {
-            // Actual error state (network issue, parsing error, etc.)
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-            ) {
-                Row(
-                    modifier = Modifier.padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
+
+            noPatchesAvailable -> {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Error,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.settings_advanced_patch_options_load_error),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.error
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.size(20.dp)
                         )
                         Text(
-                            text = loadError,
-                            style = MaterialTheme.typography.bodySmall,
+                            text = stringResource(R.string.settings_advanced_patch_options_waiting_for_source),
+                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    IconButton(onClick = {
-                        scope.launch {
-                            homeViewModel.updateMorpheBundleWithChangelogClear()
-                            patchOptionsViewModel.refresh()
-                            context.toast(context.getString(R.string.home_updating_sources))
-                        }
-                    }) {
+                }
+            }
+
+            loadError != null -> {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Icon(
-                            imageVector = Icons.Outlined.Refresh,
-                            contentDescription = "Retry",
-                            tint = MaterialTheme.colorScheme.primary
+                            imageVector = Icons.Outlined.Error,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.size(20.dp)
                         )
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = stringResource(R.string.settings_advanced_patch_options_load_error),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.error
+                            )
+                            Text(
+                                text = loadError,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        IconButton(onClick = {
+                            scope.launch {
+                                homeViewModel.updateMorpheBundleWithChangelogClear()
+                                patchOptionsViewModel.refresh()
+                                context.toast(context.getString(R.string.home_updating_sources))
+                            }
+                        }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Refresh,
+                                contentDescription = stringResource(R.string.retry),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
                     }
                 }
             }
-        } else {
-            // Info message
-            InfoBadge(
-                icon = Icons.Outlined.Info,
-                text = stringResource(R.string.settings_advanced_patch_options_restart_message),
-                style = InfoBadgeStyle.Success
-            )
 
-            // YouTube Card
-            if (youtubePatches.isNotEmpty()) {
-                SectionCard {
-                    AppPatchOptionsCard(
-                        packageName = KnownApps.YOUTUBE,
-                        icon = Icons.Outlined.VideoLibrary,
-                        title = KnownApps.getAppName(KnownApps.YOUTUBE),
-                        description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
-                        patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog.value = KnownApps.YOUTUBE },
-                        onBrandingClick = { showBrandingDialog.value = KnownApps.YOUTUBE },
-                        onHeaderClick = { showHeaderDialog.value = KnownApps.YOUTUBE }
-                    )
-                }
+            else -> {
+                InfoBadge(
+                    icon = Icons.Outlined.Info,
+                    text = stringResource(R.string.settings_advanced_patch_options_restart_message),
+                    style = InfoBadgeStyle.Success
+                )
 
-                // Hide Shorts Features
-                val hideShortsOptions = patchOptionsViewModel.getHideShortsOptions()
-                val hasHideShorts = hideShortsOptions != null && (
-                        patchOptionsViewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT) ||
-                                patchOptionsViewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
-                        )
-
-                if (hasHideShorts) {
+                // YouTube
+                if (youtubePatches.isNotEmpty()) {
                     SectionCard {
-                        HideShortsSection(
-                            patchOptionsPrefs = patchOptionsPrefs,
-                            viewModel = patchOptionsViewModel
+                        AppPatchOptionsCard(
+                            packageName = KnownApps.YOUTUBE,
+                            icon = Icons.Outlined.VideoLibrary,
+                            title = KnownApps.getAppName(KnownApps.YOUTUBE),
+                            description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
+                            patchOptionsViewModel = patchOptionsViewModel,
+                            onThemeClick = { patchOptionsViewModel.openThemeDialog(KnownApps.YOUTUBE) },
+                            onBrandingClick = { patchOptionsViewModel.openBrandingDialog(KnownApps.YOUTUBE) },
+                            onHeaderClick = { patchOptionsViewModel.openHeaderDialog(KnownApps.YOUTUBE) }
                         )
                     }
-                }
-            }
 
-            // YouTube Music Card
-            if (youtubeMusicPatches.isNotEmpty()) {
-                SectionCard {
-                    AppPatchOptionsCard(
-                        packageName = KnownApps.YOUTUBE_MUSIC,
-                        icon = Icons.Outlined.LibraryMusic,
-                        title = KnownApps.getAppName(KnownApps.YOUTUBE_MUSIC),
-                        description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
-                        patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog.value = KnownApps.YOUTUBE_MUSIC },
-                        onBrandingClick = { showBrandingDialog.value = KnownApps.YOUTUBE_MUSIC },
-                        onHeaderClick = { showHeaderDialog.value = KnownApps.YOUTUBE_MUSIC }
-                    )
+                    // Hide Shorts features
+                    val hideShortsOptions = patchOptionsViewModel.getHideShortsOptions()
+                    val hasHideShorts = hideShortsOptions != null && (
+                            patchOptionsViewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT) ||
+                                    patchOptionsViewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
+                            )
+
+                    if (hasHideShorts) {
+                        SectionCard {
+                            HideShortsSection(
+                                patchOptionsPrefs = patchOptionsPrefs,
+                                viewModel = patchOptionsViewModel
+                            )
+                        }
+                    }
+                }
+
+                // YouTube Music
+                if (youtubeMusicPatches.isNotEmpty()) {
+                    SectionCard {
+                        AppPatchOptionsCard(
+                            packageName = KnownApps.YOUTUBE_MUSIC,
+                            icon = Icons.Outlined.LibraryMusic,
+                            title = KnownApps.getAppName(KnownApps.YOUTUBE_MUSIC),
+                            description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
+                            patchOptionsViewModel = patchOptionsViewModel,
+                            onThemeClick = { patchOptionsViewModel.openThemeDialog(KnownApps.YOUTUBE_MUSIC) },
+                            onBrandingClick = { patchOptionsViewModel.openBrandingDialog(KnownApps.YOUTUBE_MUSIC) },
+                            onHeaderClick = { patchOptionsViewModel.openHeaderDialog(KnownApps.YOUTUBE_MUSIC) }
+                        )
+                    }
                 }
             }
         }
-    }
-
-    // Theme Dialog
-    showThemeDialog.value?.let { packageName ->
-        ThemeColorDialog(
-            patchOptionsPrefs = patchOptionsPrefs,
-            patchOptionsViewModel = patchOptionsViewModel,
-            packageName = packageName,
-            onDismiss = { showThemeDialog.value = null }
-        )
-    }
-
-    // Branding Dialog
-    showBrandingDialog.value?.let { packageName ->
-        CustomBrandingDialog(
-            patchOptionsPrefs = patchOptionsPrefs,
-            patchOptionsViewModel = patchOptionsViewModel,
-            packageName = packageName,
-            onDismiss = { showBrandingDialog.value = null }
-        )
-    }
-
-    // Header Dialog
-    showHeaderDialog.value?.let { packageName ->
-        CustomHeaderDialog(
-            patchOptionsPrefs = patchOptionsPrefs,
-            patchOptionsViewModel = patchOptionsViewModel,
-            packageName = packageName,
-            onDismiss = { showHeaderDialog.value = null }
-        )
     }
 }
 
@@ -273,12 +263,12 @@ private fun AppPatchOptionsCard(
     patchOptionsViewModel: PatchOptionsViewModel,
     onThemeClick: () -> Unit,
     onBrandingClick: () -> Unit,
-    onHeaderClick: (() -> Unit)?
+    onHeaderClick: () -> Unit
 ) {
     // Get available patches for this app type
     val hasTheme = patchOptionsViewModel.getThemeOptions(packageName) != null
     val hasBranding = patchOptionsViewModel.getBrandingOptions(packageName) != null
-    val hasHeader = patchOptionsViewModel.getHeaderOptions() != null
+    val hasHeader = patchOptionsViewModel.getHeaderOptions(packageName) != null
 
     Column {
         // Header
@@ -312,8 +302,8 @@ private fun AppPatchOptionsCard(
                 )
             }
 
-            // Custom Header (YouTube only)
-            if (hasHeader && onHeaderClick != null) {
+            // Custom Header
+            if (hasHeader) {
                 MorpheSettingsDivider()
 
                 SettingsItem(
@@ -346,7 +336,6 @@ private fun HideShortsSection(
     viewModel: PatchOptionsViewModel
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     val hideShortsOptions = viewModel.getHideShortsOptions()
 
     val hasAppShortcutOption = viewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT)
@@ -388,11 +377,7 @@ private fun HideShortsSection(
                 )
 
                 RichSettingsItem(
-                    onClick = {
-                        scope.launch {
-                            patchOptionsPrefs.hideShortsAppShortcut.update(!hideShortsAppShortcut)
-                        }
-                    },
+                    onClick = { viewModel.toggleHideShortsAppShortcut(patchOptionsPrefs, hideShortsAppShortcut) },
                     title = title,
                     subtitle = description,
                     trailingContent = {
@@ -426,11 +411,7 @@ private fun HideShortsSection(
                 )
 
                 RichSettingsItem(
-                    onClick = {
-                        scope.launch {
-                            patchOptionsPrefs.hideShortsWidget.update(!hideShortsWidget)
-                        }
-                    },
+                    onClick = { viewModel.toggleHideShortsWidget(patchOptionsPrefs, hideShortsWidget) },
                     title = title,
                     subtitle = description,
                     trailingContent = {

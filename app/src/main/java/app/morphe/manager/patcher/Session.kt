@@ -44,8 +44,6 @@ class Session(
     )
 
     private suspend fun Patcher.applyPatchesVerbose(selectedPatches: PatchList) {
-        var nextPatchIndex = 0
-
         updateProgress(
             name = androidContext.getString(R.string.applying_patches),
             state = State.RUNNING
@@ -65,8 +63,6 @@ class Session(
                 logger.error(exception.stackTraceToString())
                 throw exception
             }
-
-            nextPatchIndex++
 
             onPatchCompleted()
 

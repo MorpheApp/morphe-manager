@@ -14,6 +14,7 @@ import app.morphe.manager.data.room.options.Option
 import app.morphe.manager.data.room.options.OptionDao
 import app.morphe.manager.data.room.options.OptionGroup
 import app.morphe.manager.data.room.selection.PatchSelection
+import app.morphe.manager.data.room.selection.SeenPatch
 import app.morphe.manager.data.room.selection.SelectedPatch
 import app.morphe.manager.data.room.selection.SelectionDao
 import kotlin.random.Random
@@ -23,13 +24,14 @@ import kotlin.random.Random
         PatchBundleEntity::class,
         PatchSelection::class,
         SelectedPatch::class,
+        SeenPatch::class,
         InstalledApp::class,
         AppliedPatch::class,
         OptionGroup::class,
         Option::class,
         OriginalApk::class
     ],
-    version = 11
+    version = 12
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

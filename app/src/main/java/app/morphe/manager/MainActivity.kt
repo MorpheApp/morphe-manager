@@ -31,7 +31,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.navigation.ComplexParameter
 import app.morphe.manager.ui.model.navigation.HomeScreen
 import app.morphe.manager.ui.model.navigation.Patcher
@@ -50,7 +49,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
-import java.io.File
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -97,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Handles deep links for adding patch sources.
-     * Format: https://morphe.software/add-source?github=owner/repo[&name=Display+Name]
+     * Format: https://morphe.software/add-source?github=owner/repo(&name=Display+Name)
      * Only GitHub URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
@@ -223,23 +221,6 @@ private fun MorpheManager(vm: MainViewModel) {
                             )
                         }
                     },
-                    onNavigateToPatcher = { packageName, version, filePath, patches, options ->
-                        entry.lifecycleScope.launch {
-                            navController.navigateComplex(
-                                Patcher,
-                                Patcher.ViewModelParams(
-                                    selectedApp = SelectedApp.Local(
-                                        packageName = packageName,
-                                        version = version,
-                                        file = File(filePath),
-                                        temporary = false
-                                    ),
-                                    selectedPatches = patches,
-                                    options = options
-                                )
-                            )
-                        }
-                    },
                     homeViewModel = homeViewModel,
                     usingMountInstallState = usingMountInstallState,
                     bundleUpdateProgress = bundleUpdateProgress,
@@ -250,8 +231,8 @@ private fun MorpheManager(vm: MainViewModel) {
                 )
             }
 
-            composable<Patcher> {
-                val params = it.getComplexArg<Patcher.ViewModelParams>()
+            composable<Patcher> { it ->
+                val params = it.getComplexArg<Patcher.ViewModelParams>() ?: return@composable
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 PatcherScreen(
                     onBackClick = {
@@ -264,7 +245,6 @@ private fun MorpheManager(vm: MainViewModel) {
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
                     onPatchingCompleted = { patchingCompleted.value = true }
                 )
-                return@composable
             }
 
             composable<Settings> {
@@ -274,7 +254,8 @@ private fun MorpheManager(vm: MainViewModel) {
     }
 }
 
-// Androidx Navigation does not support storing complex types in route objects, so we have to store them inside the saved state handle of the back stack entry instead.
+// Androidx Navigation does not support storing complex types in route objects, so we have
+// to store them inside the saved state handle of the back stack entry instead
 private fun <T : Parcelable, R : ComplexParameter<T>> NavController.navigateComplex(
     route: R,
     data: T
@@ -283,4 +264,4 @@ private fun <T : Parcelable, R : ComplexParameter<T>> NavController.navigateComp
     getBackStackEntry(route).savedStateHandle["args"] = data
 }
 
-private fun <T : Parcelable> NavBackStackEntry.getComplexArg() = savedStateHandle.get<T>("args")!!
+private fun <T : Parcelable> NavBackStackEntry.getComplexArg(): T? = savedStateHandle["args"]

@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Tampilkan aplikasi tersembunyi</string>
     <string name="home_app_no_hidden">Tidak ada aplikasi tersembunyi</string>
     <string name="home_app_hidden_apps_title">Aplikasi tersembunyi</string>
-    <string name="home_app_hidden_apps_hint">Ketuk pada aplikasi untuk menampilkannya lagi di daftar</string>
+    <string name="home_app_hidden_apps_hint">Ketuk untuk menampilkan kembali</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna</string>
     <string name="deep_link_add_source_title">Tambah sumber</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Pembaruan sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber Anda sudah terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
-    <string name="home_please_wait">Silakan tunggu…</string>
+    <string name="home_search_apps">Cari aplikasi</string>
+    <string name="home_no_apps_title">Tidak ada aplikasi yang tersedia</string>
+    <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau aktifkan yang sudah ada di %s</string>
+    <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang ingin Anda tambal?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Lanjutkan ke Penambalan</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
+    <string name="expert_mode_reset_to_default">Aktifkan tambalan yang direkomendasikan</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_universal_patches">Tambalan universal</string>
+    <string name="expert_mode_new_patches">Baru</string>
     <string name="expert_mode_multiple_sources_warning_title">Berbagai sumber tambalan telah dipilih</string>
     <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tambalan dari berbagai sumber. Hal ini dapat menyebabkan masalah kompatibilitas atau masalah yang tidak terduga.
 
@@ -163,6 +168,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patch_option_list_duplicate">Nilai ini sudah ada</string>
     <string name="patch_option_list_empty">Nilai tidak boleh kosong</string>
     <string name="patch_option_list_empty_state">Belum ada nilai yang ditambahkan</string>
+    <string name="patch_option_required_missing">%s: isi semua pilihan yang diperlukan</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Buat ikon adaptif</string>
     <string name="adaptive_icon_instructions">Pilih gambar latar depan, pilih warna latar belakang, lalu gunakan tombol geser atau gerakan mencubit untuk menyesuaikan pratinjau</string>
@@ -224,6 +230,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patcher_error_copied">Kesalahan disalin ke papan klip</string>
     <string name="patcher_error_log">Catatan kesalahan</string>
     <string name="patcher_error_technical">Rincian teknis</string>
+    <string name="patcher_error_dialog_app_info">Info aplikasi</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir siap! 🎸</string>
     <string name="patcher_success_title">Semua Selesai! 🎉</string>
@@ -440,12 +447,12 @@ Dimensi gambar harus sebagai berikut:
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Opsional, jalur berisi folder 'drawable' dengan file ikon monokrom:
+Sebagai pilihan, jalur yang berisi folder 'drawable' dengan berkas ikon monokrom:
 morphe_adaptive_monochrome_custom.xml
 
-Opsional, jalur berisi ikon pemberitahuan dalam salah satu format berikut:
+Sebagai pilihan, jalur yang berisi ikon pemberitahuan dalam salah satu format berikut:
 - Gambar vektor XML di 'drawable':
-  morphe_notification_icon_custom.xml
+    morphe_notification_icon_custom.xml
 - Gambar raster PNG di folder 'drawable-dpi':
   drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
   drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
@@ -603,18 +610,19 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>
     <string name="settings_system_share_website_description">Bagikan situs web resmi Morphe</string>
-    <string name="settings_system_manager_description">"Morphe adalah proyek sumber terbuka eksperimental yang berfokus pada pembuatan tambalan modern, ringkas untuk aplikasi Android populer
-
-Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan kontribusi komunitas untuk mendorong inovasi di masa depan"</string>
+    <string name="settings_system_manager_description">"Sebuah proyek eksperimental sumber terbuka untuk penambalan yang modern dan efisien pada aplikasi Android populer, dikembangkan berdasarkan masukan dan kontribusi dari komunitas"</string>
     <string name="credits">Kredits</string>
     <string name="credits_current_development">Pengembangan saat ini</string>
     <string name="credits_prior_development">Pengembangan sebelumnya</string>
+    <string name="opensource_licenses">Lisensi sumber terbuka</string>
     <!-- Shared strings -->
     <string name="patches">Tambalan</string>
     <string name="home">Beranda</string>
     <string name="settings">Pengaturan</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
+    <string name="all">Semua</string>
+    <string name="filter">Penyaring</string>
     <string name="reset">Setel ulang</string>
     <string name="reset_all">Atur ulang Semua</string>
     <string name="confirm">Konfirmasi</string>
@@ -655,6 +663,7 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="open">Buka</string>
     <string name="mount">Mount</string>
     <string name="mounted">Di-mount</string>
+    <string name="unmount">Unmount</string>
     <string name="unmounted">Belum di-mount</string>
     <string name="remount">Remount</string>
     <string name="install">Pasang</string>

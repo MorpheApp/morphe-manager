@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Vis skjulte apps</string>
     <string name="home_app_no_hidden">Ingen skjulte apps</string>
     <string name="home_app_hidden_apps_title">Skjulte apps</string>
-    <string name="home_app_hidden_apps_hint">Tryk på en app for at vise den igen i listen</string>
+    <string name="home_app_hidden_apps_hint">Tryk for at vise</string>
     <string name="android_11_bug_dialog_title">Android 11-fejl</string>
     <string name="android_11_bug_dialog_description">App-installationsrettighed skal give i forvejen for at undgå en fejl i Android 11-systemet, der vil have en negativ indflydelse på brugeroplevelsen</string>
     <string name="deep_link_add_source_title">Tilføj kilde</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Ophav kilder fuldført</string>
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
-    <string name="home_please_wait">Vent venligst…</string>
+    <string name="home_search_apps">Søg apps</string>
+    <string name="home_no_apps_title">Ingen apps tilgængelige</string>
+    <string name="home_no_apps_subtitle">Tilføj en patch-kilde eller aktiver en eksisterende i %s</string>
+    <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hvilken app vil du have til at blive opgraderet?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Gå videre til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
+    <string name="expert_mode_reset_to_default">Aktivér anbefalede rettelser</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
+    <string name="expert_mode_new_patches">Ny</string>
     <string name="expert_mode_multiple_sources_warning_title">Flere patch-kilder valgt</string>
     <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
 
@@ -162,6 +167,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patch_option_list_duplicate">Denne værdi eksisterer allerede</string>
     <string name="patch_option_list_empty">Værdien må ikke være tom</string>
     <string name="patch_option_list_empty_state">Ingen værdier tilføjet endnu</string>
+    <string name="patch_option_required_missing">%s: Udfyld alle nødvendige felter</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Opret adaptiv ikon</string>
     <string name="adaptive_icon_instructions">Vælg et forgrundsbillede, vælg en baggrundsfarve, og brug derefter skyderen eller knibbebevægelserne for at justere forhåndsvisningen</string>
@@ -223,6 +229,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="patcher_error_log">Fejlprotokol</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
+    <string name="patcher_error_dialog_app_info">App-oplysninger</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
     <string name="patcher_success_title">Alt færdigt! 🎉</string>
@@ -602,18 +609,19 @@ Bildeformateringen må være som følger:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Del app fra hjemmesiden</string>
     <string name="settings_system_share_website_description">Del app fra hjemmeside</string>
-    <string name="settings_system_manager_description">"Morphe er et eksperimentelt, åpent kildeprosjekt fokuser på å skape en moderne, strømlinet patching av populære Android-apper
-
-Åpent kilde på sin kjerne, Morphe trives på brukerfeedback og bidrag for å drive fremtidens innovasjon"</string>
+    <string name="settings_system_manager_description">"Et eksperimentelt open-source projekt til moderne, strømlinet patching af populære Android-apps, drevet af community feedback og bidrag"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
+    <string name="opensource_licenses">Open-source licenser</string>
     <!-- Shared strings -->
     <string name="patches">Pletter</string>
     <string name="home">Hjem</string>
     <string name="settings">Indstillinger</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
+    <string name="all">Alle</string>
+    <string name="filter">Filtrer</string>
     <string name="reset">Nulstil</string>
     <string name="reset_all">Nulstil Alt</string>
     <string name="confirm">Bekræft</string>
@@ -654,6 +662,7 @@ Bildeformateringen må være som følger:
     <string name="open">Åpne</string>
     <string name="mount">Monter</string>
     <string name="mounted">Monteret</string>
+    <string name="unmount">Afmonter</string>
     <string name="unmounted">Afmonteret</string>
     <string name="remount">Forkaste</string>
     <string name="install">Installere</string>
