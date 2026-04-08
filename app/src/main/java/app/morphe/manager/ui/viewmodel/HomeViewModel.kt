@@ -214,7 +214,8 @@ class HomeViewModel(
     var showMeteredPatchingDialog by mutableStateOf(false)
         private set
 
-    // Low disk space warning dialog: shown when < 1 GB free before patching starts
+    // Low disk space warning dialog: shown when free storage is below the threshold before patching starts
+    val lowDiskSpaceThresholdGb = 1f // Minimum free storage in GB required before patching
     var showLowDiskSpaceDialog by mutableStateOf(false)
         private set
     var lowDiskSpaceFreeGb by mutableFloatStateOf(0f)
@@ -587,7 +588,6 @@ class HomeViewModel(
     fun guardPatching(action: suspend () -> Unit) {
         // Check available storage first - low disk space is the most common cause of
         // cryptic "file not found" errors and corrupt output APKs during patching.
-        val lowDiskSpaceThresholdGb = 2f // Minimum free storage in GB required before patching
         val freeBytes = StatFs(app.filesDir.absolutePath).availableBytes
         val freeGb = freeBytes / (1024f * 1024f * 1024f)
         if (freeGb < lowDiskSpaceThresholdGb) {
