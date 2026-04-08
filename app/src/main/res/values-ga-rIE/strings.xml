@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Taispeáin aipeanna i bhfolach</string>
     <string name="home_app_no_hidden">Gan aon aipeanna i bhfolach</string>
     <string name="home_app_hidden_apps_title">Aipeanna i bhfolach</string>
-    <string name="home_app_hidden_apps_hint">Tapáil ar aip chun í a thaispeáint sa liosta arís</string>
+    <string name="home_app_hidden_apps_hint">Tap to dáil os cúairt</string>
     <string name="android_11_bug_dialog_title">Fabht Android 11</string>
     <string name="android_11_bug_dialog_description">Ní mór cead suiteála na haipe a ghéilleadh roimh ré chun seachaint ar earráid i gcóras Android 11 a dhéanfaidh dochar d\'eispéireas an úsáideora</string>
     <string name="deep_link_add_source_title">Add foinse</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Foinsí nuashonraithe críochnaithe</string>
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
-    <string name="home_please_wait">Fan le do thoil…</string>
+    <string name="home_search_apps">Cuardaigh appanna</string>
+    <string name="home_no_apps_title">Níl aon appanna ar fáil</string>
+    <string name="home_no_apps_subtitle">Cuir freagar foinse pátráin nó cruthnoigh ceann atá cheana fáil ann i %s</string>
+    <string name="home_no_apps_search_subtitle">Ní bhféachann aon appanna leis \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Cén aip ar mhaith leat paiste a chur leis?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Lean ar aghaidh leis an bpaisteáil</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
+    <string name="expert_mode_reset_to_default">Ná déan cinnte gur na patchanna molta atá á gcumadh</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
     <string name="expert_mode_universal_patches">Paistí uilíocha</string>
+    <string name="expert_mode_new_patches">Nua</string>
     <string name="expert_mode_multiple_sources_warning_title">Ilfhoinsí paiste roghnaithe</string>
     <string name="expert_mode_multiple_sources_warning_message">"Tá paistí roghnaithe agat ó fhoinsí éagsúla paistí. D’fhéadfadh fadhbanna comhoiriúnachta nó iompar gan choinne a bheith mar thoradh air seo.
 
@@ -162,6 +167,7 @@ Le haghaidh na dtorthaí is fearr, molann an app seo míniú &lt;b&gt;APK iomlá
     <string name="patch_option_list_duplicate">Tá an luach seo cheannasach cheana féin</string>
     <string name="patch_option_list_empty">Ná féidir luach a bheith folaithe</string>
     <string name="patch_option_list_empty_state">Níor cuireadh aon luachanna leis fós</string>
+    <string name="patch_option_required_missing">%s: líon isteach na roghanna uile atá de dhleathadh</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Cruthaigh deilbhín oiriúnaitheach</string>
     <string name="adaptive_icon_instructions">Roghnaigh íomhá sa tulra, roghnaigh dath an chúlra, ansin úsáid an sliothar nó gothaí pinch chun an réamhamharc a choigeartú</string>
@@ -223,6 +229,7 @@ Le haghaidh na dtorthaí is fearr, molann an app seo míniú &lt;b&gt;APK iomlá
     <string name="patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="patcher_error_log">Log earráide</string>
     <string name="patcher_error_technical">Sonraí teicniúla</string>
+    <string name="patcher_error_dialog_app_info">Eolas app</string>
     <string name="patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
     <string name="patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
     <string name="patcher_success_title">Gach rud déanta! 🎉</string>
@@ -602,18 +609,19 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_about">Maidir</string>
     <string name="settings_system_share_website">Comhroinn suíomh Gréasáin</string>
     <string name="settings_system_share_website_description">Comhroinn suíomh Gréasáin oifigiúil Morphe</string>
-    <string name="settings_system_manager_description">"Is tionscadal foinse oscailte turgnamhach é Morphe atá dírithe ar phaisteáil nua-aimseartha, sruthlínithe a chruthú d'aipeanna Android coitianta.
-
-Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníocaíochtaí ón bpobal chun nuálaíocht amach anseo a thiomáint."</string>
+    <string name="settings_system_manager_description">"Prójáct oòs-fóin tóirón, faoin, le haghaidh feabhaòrsaò ar aòdhair rialta Android, arò mheas a chur le feabhas ar fhaisòin agus le tuillòinòin ón gcomhdaonò."</string>
     <string name="credits">Crèidteacha</string>
     <string name="credits_current_development">Forbairt reatha</string>
     <string name="credits_prior_development">Forbairt roimh réidh</string>
+    <string name="opensource_licenses">Licùidóidóis oscair-fóin</string>
     <!-- Shared strings -->
     <string name="patches">Paistí</string>
     <string name="home">Baile</string>
     <string name="settings">Socruithe</string>
     <string name="yes">Tá</string>
     <string name="no">Níl</string>
+    <string name="all">Uilig</string>
+    <string name="filter">Scagóir</string>
     <string name="reset">Athshocraigh</string>
     <string name="reset_all">Athshocraigh Gach Rud</string>
     <string name="confirm">Deimhnigh</string>
@@ -654,6 +662,7 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="open">Oscail</string>
     <string name="mount">Ceangail</string>
     <string name="mounted">Ceangailte</string>
+    <string name="unmount">Dícheangal</string>
     <string name="unmounted">Dícheangailte</string>
     <string name="remount">Athcheangail</string>
     <string name="install">Suiteáil</string>

@@ -3,14 +3,14 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Autres applications</string>
     <string name="home_not_patched_yet">Pas encore patchée</string>
-    <string name="home_no_patches_available">Aucuns patchs disponibles</string>
+    <string name="home_no_patches_available">Aucun patch disponible</string>
     <string name="home_app_hide_title">Masquer cette application ?</string>
     <string name="home_app_hide_message">Cette application sera masquée de l’écran d’accueil. Vous pourrez la restaurer plus tard en utilisant le bouton \'%1$s\' en bas de la liste</string>
     <string name="home_app_will_be_hidden">Cette application sera masquée</string>
     <string name="home_app_show_hidden">Afficher les applications masquées</string>
-    <string name="home_app_no_hidden">Pas d\'applications masquées</string>
+    <string name="home_app_no_hidden">Aucune application masquée</string>
     <string name="home_app_hidden_apps_title">Applications masquées</string>
-    <string name="home_app_hidden_apps_hint">Appuyez sur une application pour l’afficher à nouveau dans la liste</string>
+    <string name="home_app_hidden_apps_hint">Appuyez pour afficher</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">L\'autorisation d\'installation de l\'application doit être accordée à l\'avance afin d\'éviter un bug dans le système Android 11 qui affectera négativement l\'expérience utilisateur</string>
     <string name="deep_link_add_source_title">Ajouter la source</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Mise à jour des sources complète</string>
     <string name="home_update_success_subtitle">Vos sources sont à jour</string>
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
-    <string name="home_please_wait">Veuillez patienter…</string>
+    <string name="home_search_apps">Rechercher des applications</string>
+    <string name="home_no_apps_title">Aucune application disponible</string>
+    <string name="home_no_apps_subtitle">Ajoutez une source de patch ou activez-en une existante dans %s</string>
+    <string name="home_no_apps_search_subtitle">Aucune application ne correspond à \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quelle application voulez-vous patcher ?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -67,7 +70,7 @@
     <string name="sources_dialog_view_any_package">N\'importe quel package</string>
     <string name="sources_dialog_add_source">Ajouter une source de patch</string>
     <string name="sources_dialog_delete_confirm_message">Supprimer la source \"%s\" ? Cela ne peut pas être réversible</string>
-    <string name="sources_dialog_remote">À distance</string>
+    <string name="sources_dialog_remote">Distant</string>
     <string name="sources_dialog_remote_url">URL de la source</string>
     <string name="sources_dialog_remote_url_formats_title">Exemples :</string>
     <string name="sources_dialog_local">Local</string>
@@ -76,7 +79,7 @@
     <string name="sources_dialog_local_change_file">Changer de fichier</string>
     <string name="sources_dialog_preinstalled">Préinstallé</string>
     <string name="sources_update_success">Mise à jour réussie</string>
-    <string name="sources_update_unavailable">Pas de mise à jour disponible</string>
+    <string name="sources_update_unavailable">Aucune mise à jour disponible</string>
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
     <string name="sources_download_endpoint_not_found">Impossible de mettre à jour \'%1$s\' : le fichier JSON du patch est introuvable à l’URL configurée</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
-    <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
+    <string name="expert_mode_reset_to_default">Activer les patchs recommandés</string>
+    <string name="expert_mode_no_results">Aucun patch trouvé</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
+    <string name="expert_mode_new_patches">Nouveau</string>
     <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
 
@@ -160,7 +165,8 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patch_option_pick_folder">Choisir un dossier</string>
     <string name="patch_option_list_duplicate">Cette valeur existe déjà</string>
     <string name="patch_option_list_empty">La valeur ne peut pas être vide</string>
-    <string name="patch_option_list_empty_state">Pas de valeur ajoutée pour le moment</string>
+    <string name="patch_option_list_empty_state">Aucune valeur ajoutée pour le moment</string>
+    <string name="patch_option_required_missing">%s: remplissez toutes les options obligatoires</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Créer une icône adaptative</string>
     <string name="adaptive_icon_instructions">Choisissez une image de premier plan, sélectionnez une couleur d’arrière-plan, puis utilisez le curseur ou les gestes de pincement pour ajuster l’aperçu</string>
@@ -182,7 +188,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="header_creator_instructions">Choisissez des images pour les thèmes clair et sombre, puis ajustez-les avec des gestes de pincement pour zoomer</string>
     <string name="header_creator_light_theme">En-tête du thème clair</string>
     <string name="header_creator_dark_theme">En-tête du thème sombre</string>
-    <string name="header_creator_no_image">Pas d\'image sélectionnée</string>
+    <string name="header_creator_no_image">Aucune image sélectionnée</string>
     <string name="header_creator_success">En-tête créé avec succès</string>
     <string name="header_creator_failed">Échec de la création de l\'en-tête</string>
     <string name="header_creator_folder_explanation">Sélectionnez l\'emplacement pour créer le dossier \'%1$s/%2$s\' avec les fichiers d\'en-tête générés</string>
@@ -209,7 +215,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="home_app_info_app_deleted_warning">L’application a été désinstallée</string>
     <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Repatchez-la pour restaurer les fonctionnalités</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Le mode Root nécessite que l\'APK original soit installé sur votre appareil avant le patchage</string>
+    <string name="root_install_apk_required">Le mode root nécessite que l\'APK original soit installé sur votre appareil avant le patchage</string>
     <string name="root_gmscore_excluded">Le patch de support GmsCore est exclu en mode root</string>
     <string name="root_pre_patch_installer_title">Choisir la méthode d\'installation</string>
     <string name="root_pre_patch_installer_description">Votre appareil dispose d\'un accès root. Choisissez comment vous souhaitez installer l\'application patchée</string>
@@ -222,6 +228,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="patcher_error_log">Journal d\'erreur</string>
     <string name="patcher_error_technical">Détails techniques</string>
+    <string name="patcher_error_dialog_app_info">Informations sur l’application</string>
     <string name="patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
     <string name="patcher_installing_subtitle">Bientôt prêt à mettre le feu  ! 🎸</string>
     <string name="patcher_success_title">Tout est prêt ! 🎉</string>
@@ -244,7 +251,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patcher_storage_permission_denied_warning">L’autorisation d’accès au stockage a été refusée. Accordez l’autorisation pour utiliser ce chemin ou déplacez les fichiers vers le répertoire privé de l’application</string>
     <string name="patcher_storage_permission_open_settings">Ouvrir les paramètres de stockage</string>
     <string name="patcher_storage_badge_denied">Autorisation refusée</string>
-    <string name="patcher_storage_badge_missing">Non trouvé</string>
+    <string name="patcher_storage_badge_missing">Introuvable</string>
     <string name="patcher_storage_permission_hint">Astuce : Déplacez les fichiers vers /Android/data/app.morphe.manager/files/ - pas d\'autorisations supplémentaires nécessaires</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Préparation</string>
@@ -487,7 +494,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_auto_saved_name">Installateur par montage root</string>
     <string name="installer_auto_saved_description">Monte l\'APK patché par-dessus l\'application installée</string>
     <string name="installer_shizuku_description">Installer silencieusement via Shizuku ou Sui</string>
-    <string name="installer_option_none">Pas d\'installateur de secours</string>
+    <string name="installer_option_none">Aucun installateur de secours</string>
     <string name="installer_none_description">Aucun installateur de secours configuré</string>
     <string name="installer_status_requires_root">Nécessite l\'accès root</string>
     <string name="installer_status_not_supported">Non pris en charge pour cette action</string>
@@ -567,7 +574,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs patchés</string>
     <string name="settings_system_patched_apks_description">Gérer les fichiers d’application patchés enregistrés</string>
-    <string name="settings_system_patched_apks_empty">Pas d\'APKs patchés enregistrés pour l’instant</string>
+    <string name="settings_system_patched_apks_empty">Aucun APKs patchés enregistrés pour l’instant</string>
     <string name="settings_system_patched_apks_delete_title">Supprimer l’APK patché ?</string>
     <string name="settings_system_patched_apks_delete_confirm">Êtes-vous sûr de vouloir supprimer l\'APK patché enregistré pour %s ?</string>
     <string name="settings_system_patched_apks_deleted">APK patché supprimé avec succès</string>
@@ -584,7 +591,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_patch_selection_reset_all_confirm_title">Réinitialiser toutes les sélections ?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections de package ?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de source ?</string>
-    <string name="settings_system_patch_selection_no_saved">Pas de sélections de patch enregistrées</string>
+    <string name="settings_system_patch_selection_no_saved">Aucune sélection de patch enregistrées</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s dans %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dans %2$s</string>
     <string name="settings_system_patch_selection_source_format">Source #%s</string>
@@ -599,23 +606,24 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_patch_details_title">Détails du patch</string>
     <string name="settings_system_selected_patches_title">Patchs sélectionnés (%s)</string>
     <string name="settings_system_patch_options_title">Options de patch (%s)</string>
-    <string name="settings_system_no_patches_or_options">Pas de patch ni options enregistrés</string>
+    <string name="settings_system_no_patches_or_options">Aucun patch ou option enregistré</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">À propos</string>
     <string name="settings_system_share_website">Partager le site web</string>
     <string name="settings_system_share_website_description">Partagez le site web officiel de Morphe</string>
-    <string name="settings_system_manager_description">"Morphe est un projet open source expérimental axé sur la création d'un patchage moderne et rationalisé pour les applications Android populaires.
-
-Open source dans son essence même, Morphe s'appuie sur les commentaires et les contributions de la communauté pour stimuler l'innovation future."</string>
+    <string name="settings_system_manager_description">"Un projet expérimental open source pour le patchage moderne et simplifié des applications Android populaires, guidé par les retours et les contributions de la communauté"</string>
     <string name="credits">Crédits</string>
     <string name="credits_current_development">Développement en cours</string>
     <string name="credits_prior_development">Développements antérieurs</string>
+    <string name="opensource_licenses">Licences open-source</string>
     <!-- Shared strings -->
     <string name="patches">Patchs</string>
     <string name="home">Accueil</string>
     <string name="settings">Paramètres</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="all">Tout</string>
+    <string name="filter">Filtre</string>
     <string name="reset">Réinitialiser</string>
     <string name="reset_all">Tout réinitialiser</string>
     <string name="confirm">Confirmer</string>
@@ -632,8 +640,8 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="loading">Chargement…</string>
     <string name="not_installed">Non installé</string>
     <string name="view">Voir</string>
-    <string name="search">Recherche</string>
-    <string name="search_no_results">Pas de résultat trouvé</string>
+    <string name="search">Rechercher</string>
+    <string name="search_no_results">Aucun résultat trouvé</string>
     <string name="any_version">N\'importe laquelle</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
@@ -656,6 +664,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="open">Ouvrir</string>
     <string name="mount">Monté</string>
     <string name="mounted">Monté</string>
+    <string name="unmount">Démonter</string>
     <string name="unmounted">Démonté</string>
     <string name="remount">Remonter</string>
     <string name="install">Installer</string>
@@ -679,8 +688,8 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="changelog_description">Découvrez les dernières modifications de cette mise à jour</string>
     <string name="changelog_download_fail">Échec du téléchargement du journal des modifications : %s</string>
     <string name="changelog_retry">Réessayer</string>
-    <string name="changelog_empty">Pas de journal des modifications disponible</string>
-    <string name="no_network_toast">Pas de connexion internet disponible</string>
+    <string name="changelog_empty">Aucun journal des modifications disponible</string>
+    <string name="no_network_toast">Aucune connexion Internet disponible</string>
     <string name="update_available">Une mise à jour est disponible</string>
     <string name="ready_to_install_update">Prêt à installer la mise à jour</string>
     <string name="update_completed">Mise à jour installée</string>

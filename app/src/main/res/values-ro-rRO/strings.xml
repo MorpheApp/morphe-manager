@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Arată aplicațiile ascunse</string>
     <string name="home_app_no_hidden">Nicio aplicație ascunsă</string>
     <string name="home_app_hidden_apps_title">Aplicații ascunse</string>
-    <string name="home_app_hidden_apps_hint">Apasă pe o aplicație pentru a o arăta din nou în listă</string>
+    <string name="home_app_hidden_apps_hint">Apasă pentru a afișa</string>
     <string name="android_11_bug_dialog_title">Bug al Android 11</string>
     <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în avans pentru a evita o problemă în sistemul Android 11 care poate afecta negativ experiența utilizatorului</string>
     <string name="deep_link_add_source_title">Adaugă sursă</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Actualizare surse finalizată</string>
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele…</string>
-    <string name="home_please_wait">Te rog așteaptă…</string>
+    <string name="home_search_apps">Caută aplicații</string>
+    <string name="home_no_apps_title">Nicio aplicație disponibilă</string>
+    <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
+    <string name="home_no_apps_search_subtitle">Nicio aplicație nu se potrivește cu \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ce aplicație dorești să patch-uiești?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Treci la patch-uire</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
+    <string name="expert_mode_reset_to_default">Activează patch-urile recomandate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_universal_patches">Patch-uri universale</string>
+    <string name="expert_mode_new_patches">Nou</string>
     <string name="expert_mode_multiple_sources_warning_title">Mai multe surse de patch-uri selectate</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ai selectat patch-uri din mai multe surse de patch-uri. Asta poate cauza probleme de compatibilitate sau comportamente neașteptate.
 
@@ -162,6 +167,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patch_option_list_duplicate">Această valoare există deja</string>
     <string name="patch_option_list_empty">Valoarea nu poate fi goală</string>
     <string name="patch_option_list_empty_state">Nu au fost adăugate valori încă</string>
+    <string name="patch_option_required_missing">%s: completați toate opțiunile obligatorii</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Creează iconiță adaptivă</string>
     <string name="adaptive_icon_instructions">Alege o imagine de fundal, selectează o culoare de fundal, apoi folosește glisorul sau gesturile de ciupire pentru a ajusta previzualizarea</string>
@@ -223,6 +229,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="patcher_error_log">Jurnal erori</string>
     <string name="patcher_error_technical">Detalii tehnice</string>
+    <string name="patcher_error_dialog_app_info">Informații aplicație</string>
     <string name="patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
     <string name="patcher_installing_subtitle">Aproape gata de distracție! 🎸</string>
     <string name="patcher_success_title">Totul gata! 🎉</string>
@@ -602,18 +609,19 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_share_website">Partajează website</string>
     <string name="settings_system_share_website_description">Partajează website-ul oficial Morphe</string>
-    <string name="settings_system_manager_description">"Morphe este un proiect experimental open-source focusat pe crearea unei modernizări, patche a aplicațiilor Android populare
-
-Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunității și contribuțiile pentru a driving viitorul inovație"</string>
+    <string name="settings_system_manager_description">"Un proiect open-source experimental pentru o actualizare modernă și simplificată a aplicațiilor Android populare, bazat pe feedback-ul și contribuțiile comunității"</string>
     <string name="credits">Credite</string>
     <string name="credits_current_development">Dezvoltare curentă</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
+    <string name="opensource_licenses">Licențe open-source</string>
     <!-- Shared strings -->
     <string name="patches">Patch-uri</string>
     <string name="home">Acasă</string>
     <string name="settings">Setări</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
+    <string name="all">Toți</string>
+    <string name="filter">Filtru</string>
     <string name="reset">Resetează</string>
     <string name="reset_all">Resetează tot</string>
     <string name="confirm">Confirmă</string>
@@ -654,6 +662,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="open">Deschide</string>
     <string name="mount">Montează</string>
     <string name="mounted">Montat</string>
+    <string name="unmount">De-montare</string>
     <string name="unmounted">Demontat</string>
     <string name="remount">Remontează</string>
     <string name="install">Instalează</string>

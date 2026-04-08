@@ -2,9 +2,7 @@ package app.morphe.manager
 
 import android.app.Activity
 import android.app.Application
-import android.content.ComponentName
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +10,9 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.applyAppLanguage
-import app.morphe.manager.util.migrateLegacyLocaleCode
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckWorker
 import app.morphe.manager.util.syncFcmTopics
@@ -35,7 +33,6 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
-import androidx.core.content.edit
 
 class ManagerApplication : Application() {
     private val scope = MainScope()
@@ -46,14 +43,6 @@ class ManagerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        // ============================================================================
-        // TEMPORARY MIGRATION CODE - Remove after sufficient adoption period (e.g., 3-6 months)
-        // TODO: Remove this migration after most users have migrated
-        // ============================================================================
-        // Migrate app icons BEFORE Koin initialization
-        migrateAppIcons()
-        // ============================================================================
 
         startKoin {
             androidContext(this@ManagerApplication)
@@ -104,7 +93,7 @@ class ManagerApplication : Application() {
             val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
             val useManagerPrereleases = prefs.useManagerPrereleases.get()
             // Patches FCM topic is determined by the default bundle (uid=0) prerelease toggle.
-            val usePatchesPrereleases = prefs.bundlePrereleasesEnabled.get().contains("0")
+            val usePatchesPrereleases = prefs.bundlePrereleasesEnabled.get().contains(DEFAULT_SOURCE_UID.toString())
 
             // On GMS devices FCM is the primary delivery channel - WorkManager is not needed.
             // Cancel any previously scheduled jobs on GMS devices.
@@ -163,31 +152,11 @@ class ManagerApplication : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
 
-        // ============================================================================
-        // TEMPORARY MIGRATION: Legacy locale code format (e.g. "uk-rUA") → BCP 47 ("uk-UA").
-        // TODO: Remove migration block and uncomment the simple version below
-        //  after most users have migrated (recommended: 3-6 months after release)
-        // ============================================================================
         val storedLang = runCatching {
             base?.let {
-                val pm = PreferencesManager(it)
-                val raw = runBlocking { pm.appLanguage.get() }.ifBlank { "system" }
-                val migrated = migrateLegacyLocaleCode(raw)
-                if (migrated != raw) {
-                    runBlocking { pm.appLanguage.update(migrated) }
-                }
-                migrated
+                runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "system" }
             }
         }.getOrNull() ?: "system"
-        // ============================================================================
-        // Simple version (uncomment after removing migration above):
-        //
-        // val storedLang = runCatching {
-        //     base?.let {
-        //         runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "system" }
-        //     }
-        // }.getOrNull() ?: "system"
-        // ============================================================================
 
         applyAppLanguage(storedLang)
 
@@ -202,66 +171,4 @@ class ManagerApplication : Application() {
             mkdirs()
         }
     }
-
-    // ============================================================================
-    // TEMPORARY MIGRATION CODE - Remove after sufficient adoption period (e.g., 3-6 months)
-    // ============================================================================
-
-    /**
-     * Disable old icon components from previous package name.
-     * This prevents the app from having duplicate launcher icons.
-     *
-     * TODO: Remove this entire function after most users have migrated (recommended: 3-6 months after release)
-     */
-    private fun migrateAppIcons() {
-        val pm = packageManager
-        val oldPackage = "app.revanced.manager"
-
-        // Check if migration is needed
-        val migrationKey = "app_icon_components_disabled"
-        val prefs = getSharedPreferences("migration", MODE_PRIVATE)
-        if (prefs.getBoolean(migrationKey, false)) {
-            return // Migration already done
-        }
-
-        try {
-            // List of old icon component names
-            val oldIcons = listOf(
-                "MainActivity_Default",
-                "MainActivity_Light_2",
-                "MainActivity_Light_3",
-                "MainActivity_Dark_1",
-                "MainActivity_Dark_2",
-                "MainActivity_Dark_3"
-            )
-
-            // Disable all old components to prevent duplicate icons
-            for (iconName in oldIcons) {
-                val oldComponent = ComponentName(oldPackage, "$oldPackage.$iconName")
-                try {
-                    pm.setComponentEnabledSetting(
-                        oldComponent,
-                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                        PackageManager.DONT_KILL_APP
-                    )
-                    Log.d(tag, "Disabled old icon component: $oldComponent")
-                } catch (_: Exception) {
-                    // Component doesn't exist or already disabled, continue
-                    Log.d(tag, "Old icon component not found or already disabled: $oldComponent")
-                }
-            }
-
-            // Mark migration as complete
-            prefs.edit { putBoolean(migrationKey, true) }
-            Log.d(tag, "Old app icon components migration completed")
-
-        } catch (e: Exception) {
-            Log.e(tag, "Failed to disable old icon components", e)
-            // Don't crash the app, just log the error
-        }
-    }
-
-    // ============================================================================
-    // END OF TEMPORARY MIGRATION CODE
-    // ============================================================================
 }

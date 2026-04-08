@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">显示隐藏的应用</string>
     <string name="home_app_no_hidden">没有隐藏的应用</string>
     <string name="home_app_hidden_apps_title">隐藏的应用</string>
-    <string name="home_app_hidden_apps_hint">点击应用以重新显示其在列表中的位置</string>
+    <string name="home_app_hidden_apps_hint">点一下以取消隐藏</string>
     <string name="android_11_bug_dialog_title">Android 11 错误</string>
     <string name="android_11_bug_dialog_description">必须提前授予应用安装权限，以避免 Android 11 系统中的某个错误对用户体验造成负面影响。</string>
     <string name="deep_link_add_source_title">添加来源</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">源更新完成</string>
     <string name="home_update_success_subtitle">您的源已是最新的</string>
     <string name="home_sources_are_loading">源正在加载，请稍等…</string>
-    <string name="home_please_wait">请稍候…</string>
+    <string name="home_search_apps">搜索应用</string>
+    <string name="home_no_apps_title">没有可用的应用</string>
+    <string name="home_no_apps_subtitle">添加一个补丁源或在 %s 中启用现有补丁源</string>
+    <string name="home_no_apps_search_subtitle">没有应用匹配 \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">您想要修补哪个应用程序？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">开始打补丁</string>
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_enable_all">启用所有</string>
+    <string name="expert_mode_reset_to_default">启用推荐补丁</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_universal_patches">通用补丁</string>
+    <string name="expert_mode_new_patches">新</string>
     <string name="expert_mode_multiple_sources_warning_title">已选择多个补丁源</string>
     <string name="expert_mode_multiple_sources_warning_message">"您已选择来自多个补丁源的补丁。这可能会导致兼容性问题或意想不到的行为。
 
@@ -162,6 +167,7 @@
     <string name="patch_option_list_duplicate">此值已存在</string>
     <string name="patch_option_list_empty">值不能为空</string>
     <string name="patch_option_list_empty_state">尚未添加任何值</string>
+    <string name="patch_option_required_missing">%s: 填写所有必填选项</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">创建适配图标</string>
     <string name="adaptive_icon_instructions">选择一个前景图像，选择一个背景颜色，然后使用滑块或捏合手势调整预览</string>
@@ -223,6 +229,7 @@
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
     <string name="patcher_error_technical">技术细节</string>
+    <string name="patcher_error_dialog_app_info">应用信息</string>
     <string name="patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
     <string name="patcher_installing_subtitle">准备摇滚！ 🎸</string>
     <string name="patcher_success_title">全部完成！ 🎉</string>
@@ -602,16 +609,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">关于</string>
     <string name="settings_system_share_website">分享网站</string>
     <string name="settings_system_share_website_description">分享官方 Morphe 网站</string>
-    <string name="settings_system_manager_description">"Universal ReVanced Manager (URV Manager) 是官方 ReVanced Manager 的一个分支。这两个应用程序都使用 ReVanced Patcher，允许您下载和使用自定义补丁修补应用，并管理修补过程。Universal ReVanced Manager 包含的独特功能有：补丁包显示名称、支持导入任何第三方补丁包等等。查看 Universal ReVanced Manager 提供的完整独特功能列表"</string>
+    <string name="settings_system_manager_description">"一个用于现代、精简地修补受欢迎的 Android 应用的实验开源项目，由社区反馈和贡献驱动"</string>
     <string name="credits">积分</string>
     <string name="credits_current_development">当前开发</string>
     <string name="credits_prior_development">先前开发</string>
+    <string name="opensource_licenses">开源许可证</string>
     <!-- Shared strings -->
     <string name="patches">补丁</string>
     <string name="home">主页</string>
     <string name="settings">设置</string>
     <string name="yes">是</string>
     <string name="no">否</string>
+    <string name="all">全部</string>
+    <string name="filter">筛选</string>
     <string name="reset">重置</string>
     <string name="reset_all">重置所有</string>
     <string name="confirm">确认</string>
@@ -652,6 +662,7 @@ morphe_header_custom_dark.png
     <string name="open">打开</string>
     <string name="mount">挂载</string>
     <string name="mounted">已挂载</string>
+    <string name="unmount">取消挂载</string>
     <string name="unmounted">已取消挂载</string>
     <string name="remount">重新挂载</string>
     <string name="install">安装</string>

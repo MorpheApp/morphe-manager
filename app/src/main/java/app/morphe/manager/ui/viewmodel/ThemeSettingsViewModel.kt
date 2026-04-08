@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.resetListItemColorsCached
@@ -50,6 +51,29 @@ class ThemeSettingsViewModel(
         applyAppLanguage(languageCode)
     }
 
+    fun togglePureBlackTheme(current: Boolean) = viewModelScope.launch {
+        prefs.pureBlackTheme.update(!current)
+    }
+
+    fun setBackgroundType(type: BackgroundType) = viewModelScope.launch {
+        prefs.backgroundType.update(type)
+    }
+
+    fun toggleBackgroundParallax(current: Boolean) = viewModelScope.launch {
+        prefs.enableBackgroundParallax.update(!current)
+    }
+
+    fun applyThemePresetByKey(key: String) {
+        val preset = when (key) {
+            "SYSTEM"  -> ThemePreset.DEFAULT
+            "LIGHT"   -> ThemePreset.LIGHT
+            "DARK"    -> ThemePreset.DARK
+            "DYNAMIC" -> ThemePreset.DYNAMIC
+            else      -> ThemePreset.DEFAULT
+        }
+        applyThemePreset(preset)
+    }
+
     fun applyThemePreset(preset: ThemePreset) = viewModelScope.launch {
         val config = presetConfigs[preset] ?: return@launch
         prefs.themePresetSelectionEnabled.update(true)
@@ -66,7 +90,6 @@ class ThemeSettingsViewModel(
             prefs.customAccentColor.update("")
             prefs.customThemeColor.update("")
         }
-        // For other presets, keep existing custom colors
 
         prefs.themePresetSelectionName.update(preset.name)
         resetListItemColorsCached()

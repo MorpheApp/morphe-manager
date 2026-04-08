@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Mostrar aplicativos ocultos</string>
     <string name="home_app_no_hidden">Não há aplicativos ocultos</string>
     <string name="home_app_hidden_apps_title">Aplicativos ocultos</string>
-    <string name="home_app_hidden_apps_hint">Toque em um app para mostrá-lo na lista novamente</string>
+    <string name="home_app_hidden_apps_hint">Toque para exibir</string>
     <string name="android_11_bug_dialog_title">Bug do Android 11</string>
     <string name="android_11_bug_dialog_description">A permissão de instalação do aplicativo deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetará negativamente a experiência do usuário.</string>
     <string name="deep_link_add_source_title">Adicionar fonte</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Atualização de fontes concluída</string>
     <string name="home_update_success_subtitle">Suas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">Carregando fontes, por favor aguarde…</string>
-    <string name="home_please_wait">Por favor, aguarde…</string>
+    <string name="home_search_apps">Pesquisar aplicativos</string>
+    <string name="home_no_apps_title">Nenhum aplicativo disponível</string>
+    <string name="home_no_apps_subtitle">Adicione uma fonte de patch ou habilite uma existente em %s</string>
+    <string name="home_no_apps_search_subtitle">Nenhum aplicativo corresponde a \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Em qual app você quer aplicar os patches?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Iniciar a atualização</string>
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
+    <string name="expert_mode_reset_to_default">Habilitar patches recomendados</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_universal_patches">Patches universais</string>
+    <string name="expert_mode_new_patches">Novo</string>
     <string name="expert_mode_multiple_sources_warning_title">Várias fontes de patch selecionadas</string>
     <string name="expert_mode_multiple_sources_warning_message">"Você selecionou patches de várias fontes de patch. Isso pode causar problemas de compatibilidade ou comportamento inesperado.
 
@@ -162,6 +167,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="patch_option_list_duplicate">Este valor já existe</string>
     <string name="patch_option_list_empty">Valor não pode estar vazio</string>
     <string name="patch_option_list_empty_state">Nenhum valor adicionado ainda</string>
+    <string name="patch_option_required_missing">%s: preencha todas as opções obrigatórias</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Criar ícone adaptável</string>
     <string name="adaptive_icon_instructions">Escolha uma imagem de primeiro plano, selecione uma cor de fundo e, em seguida, use o controle deslizante ou os gestos de pinça para ajustar a visualização</string>
@@ -223,6 +229,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="patcher_error_copied">Erro copiado para a área de transferência</string>
     <string name="patcher_error_log">Log de erros</string>
     <string name="patcher_error_technical">Detalhes técnicos</string>
+    <string name="patcher_error_dialog_app_info">Informações do app</string>
     <string name="patcher_long_step_warning">Esta etapa pode demorar um pouco. Por favor, aguarde…</string>
     <string name="patcher_installing_subtitle">Quase pronto para arrasar! 🎸</string>
     <string name="patcher_success_title">Tudo pronto! 🎉</string>
@@ -602,18 +609,19 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
     <string name="settings_system_share_website_description">Compartilhar o site oficial de Morphe</string>
-    <string name="settings_system_manager_description">"Morphe é um projeto experimental de código aberto focado em criar um patch moderno e enxuto de aplicativos populares do Android
-
-Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovações futuras"</string>
+    <string name="settings_system_manager_description">"Um projeto experimental de código aberto para patching moderno e simplificado de aplicativos Android populares, impulsionado pelo feedback e contribuições da comunidade"</string>
     <string name="credits">Créditos</string>
     <string name="credits_current_development">Desenvolvimento atual</string>
     <string name="credits_prior_development">Desenvolvimento anterior</string>
+    <string name="opensource_licenses">Licenças de código aberto</string>
     <!-- Shared strings -->
     <string name="patches">Remendos</string>
     <string name="home">Início</string>
     <string name="settings">Configurações</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="all">Todos</string>
+    <string name="filter">Filtrar</string>
     <string name="reset">Resetar</string>
     <string name="reset_all">Redefinir tudo</string>
     <string name="confirm">Confirmar</string>
@@ -654,6 +662,7 @@ Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovaç�
     <string name="open">Abrir</string>
     <string name="mount">Montar</string>
     <string name="mounted">Montado</string>
+    <string name="unmount">Desmontar</string>
     <string name="unmounted">Desmontado</string>
     <string name="remount">Remontar</string>
     <string name="install">Instalar</string>

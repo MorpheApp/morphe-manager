@@ -10,7 +10,6 @@
     <string name="home_app_show_hidden">Mostrar aplicacións ocultas</string>
     <string name="home_app_no_hidden">Non hai aplicacións ocultas</string>
     <string name="home_app_hidden_apps_title">Aplicacións ocultas</string>
-    <string name="home_app_hidden_apps_hint">Toque nunha aplicación para mostrala de novo na listaxe</string>
     <string name="android_11_bug_dialog_title">Erro de Android 11</string>
     <string name="android_11_bug_dialog_description">O permiso de instalación da aplicación debe concederse con antelación para evitar un erro no sistema Android 11 que afectará negativamente á experiencia do usuario</string>
     <string name="deep_link_add_source_title">Engadir fonte</string>
@@ -28,7 +27,6 @@
     <string name="home_update_success">Actualización de fontes completa</string>
     <string name="home_update_success_subtitle">As súas fontes están ao día</string>
     <string name="home_sources_are_loading">As fontes están a cargar, por favor agarde...</string>
-    <string name="home_please_wait">Por favor agarde...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Qué aplicación desexa parchear?</string>
     <!-- Humorous hype message with light nostalgia -->

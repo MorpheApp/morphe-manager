@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">দেখুন গোপন অ্যাপস</string>
     <string name="home_app_no_hidden">কোনো গোপন অ্যাপ নেই</string>
     <string name="home_app_hidden_apps_title">গোপন অ্যাপস</string>
-    <string name="home_app_hidden_apps_hint">একটি অ্যাপে ট্যাপ করুন এটি আবার তালিকায় দেখানোর জন্য</string>
+    <string name="home_app_hidden_apps_hint">\"লুকানো অ্যাপ দেখতে ট্যাপ করুন\"</string>
     <string name="android_11_bug_dialog_title">অ্যান্ড্রয়েড ১১ বাগ</string>
     <string name="android_11_bug_dialog_description">এক্সপ্লোর 11 সিস্টেমের একটি বাগের কারণে অ্যাপ ইনস্টলেশন অনুমতি আগে দেওয়া উচিত। এটি ব্যবহারকারীর অভিজ্ঞতাকে নেতিবাচকভাবে প্রভাবিত করবে</string>
     <string name="deep_link_add_source_title">সোর্স যোগ করুন</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ হয়েছে</string>
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
-    <string name="home_please_wait">অনুগ্রহ করে অপেক্ষা করুন…</string>
+    <string name="home_search_apps">অ্যাপস অনুসন্ধান করুন</string>
+    <string name="home_no_apps_title">কোনো অ্যাপস পাওয়া যায়নি</string>
+    <string name="home_no_apps_subtitle">একটি প্যাচ উৎস যোগ করুন অথবা %s-এ বিদ্যমান একটি সক্ষম করুন</string>
+    <string name="home_no_apps_search_subtitle">কোনো অ্যাপস \"%1$s\"-এর সাথে মেলে না</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">আপনি কোন অ্যাপ প্যাচ করতে চান?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">প্যাচিং শুরু করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
+    <string name="expert_mode_reset_to_default">প্রস্তাবিত প্যাচগুলি সক্ষম করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_universal_patches">সার্বজনীন প্যাচ</string>
+    <string name="expert_mode_new_patches">নতুন</string>
     <string name="expert_mode_multiple_sources_warning_title">বহু প্যাচ সোর্স নির্বাচিত</string>
     <string name="expert_mode_multiple_sources_warning_message">"আপনি একাধিক প্যাচ উৎস থেকে প্যাচ নির্বাচন করেছেন। এটি সামঞ্জस्यতা সমস্যা বা অপ্রত্যাশিত আচরণের কারণ হতে পারে।
 
@@ -162,6 +167,7 @@
     <string name="patch_option_list_duplicate">এই মানটি ইতিমধ্যে বিদ্যমান</string>
     <string name="patch_option_list_empty">মানটি খালি হতে পারে না</string>
     <string name="patch_option_list_empty_state">এখনো কোনো মান যোগ করা হয়নি</string>
+    <string name="patch_option_required_missing">%s: প্রয়োজনীয় অপশনগুলো পূরণ করুন</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">অ্যাডাপ্টিভ আইকন তৈরি করুন</string>
     <string name="adaptive_icon_instructions">একটি foreground ছবি নির্বাচন করুন, একটি background রং নির্বাচন করুন, তারপর preview সামঞ্জস্য করতে slider অথবা pinch gesture ব্যবহার করুন</string>
@@ -223,6 +229,7 @@
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
+    <string name="patcher_error_dialog_app_info">অ্যাপ তথ্য</string>
     <string name="patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="patcher_installing_subtitle">প্রায় রক-এর জন্য প্রস্তুত! 🎸</string>
     <string name="patcher_success_title">সব হয়ে গেছে! 🎉</string>
@@ -594,18 +601,19 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>
     <string name="settings_system_share_website">ওয়েবসাইট শেয়ার করুন</string>
     <string name="settings_system_share_website_description">মরফে অফিসিয়াল ওয়েবসাইট শেয়ার করুন</string>
-    <string name="settings_system_manager_description">"মরফে একটি পরীক্ষামূল, খোল-উৎসাহা প্রকল্প যা আপনার ফিডব্যাকের ফিডব্যাক ও অবদানকে ভিত্ত করে ভবিষ্যতা ও উন্নতরনের জন্য সম্প্রদিত হয়।
-
-মরফে খোল-উৎসাহা প্রকল্পের ভিত্তে, এটি সম্প্রদিত সম্প্রদনের ও অবদানের উপর নির্ভরিত।"</string>
+    <string name="settings_system_manager_description">"একটি পরীক্ষামূলক ওপেন-সোর্স প্রকল্প, যা জনপ্রিয় অ্যান্ড্রয়েড অ্যাপগুলির আধুনিক, সরলীকৃত প্যাচিংয়ের জন্য তৈরি করা হয়েছে, এবং এটি কমিউনিটির মতামত ও অবদানের মাধ্যমে চালিত।"</string>
     <string name="credits">ক্রেডিট</string>
     <string name="credits_current_development">চলমান উন্নয়ন</string>
     <string name="credits_prior_development">পূর্ববর্তী উন্নয়ন</string>
+    <string name="opensource_licenses">ওপেন-সোর্স লাইসেন্স।</string>
     <!-- Shared strings -->
     <string name="patches">প্যাচ</string>
     <string name="home">হোম</string>
     <string name="settings">সেটিংস</string>
     <string name="yes">হ্যাঁ</string>
     <string name="no">না</string>
+    <string name="all">সব</string>
+    <string name="filter">ফিল্টার</string>
     <string name="reset">আবার সেট করুন</string>
     <string name="reset_all">সব রিসেট করুন</string>
     <string name="confirm">নিশ্চিত করুন</string>
@@ -646,6 +654,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="open">খুলুন</string>
     <string name="mount">মাউন্ট</string>
     <string name="mounted">মাউন্ট করা</string>
+    <string name="unmount">আনমাউন্ট</string>
     <string name="unmounted">আনমাউন্ট করা</string>
     <string name="remount">পুনঃস্থাপন</string>
     <string name="install">ইনস্টল করুন</string>

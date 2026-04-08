@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">إظهار التطبيقات المخفية</string>
     <string name="home_app_no_hidden">لا تطبيقات مخفية</string>
     <string name="home_app_hidden_apps_title">التطبيقات المخفية</string>
-    <string name="home_app_hidden_apps_hint">انقر على تطبيق لإظهاره في القائمة مرة أخرى</string>
+    <string name="home_app_hidden_apps_hint">انقر لإظهارها</string>
     <string name="android_11_bug_dialog_title">خطأ Android 11</string>
     <string name="android_11_bug_dialog_description">يجب منح إذن تثبيت التطبيق مسبقًا لتجنب خطأ في نظام Android 11 سيؤثر سلبًا على تجربة المستخدم</string>
     <string name="deep_link_add_source_title">إضافة مصدر</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">اكتمل تحديث المصادر</string>
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
-    <string name="home_please_wait">يرجى الانتظار…</string>
+    <string name="home_search_apps">البحث عن التطبيقات</string>
+    <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
+    <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
+    <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">المضي قدمًا إلى التعديل</string>
     <string name="expert_mode_disable_all">تعطيل الكل</string>
     <string name="expert_mode_enable_all">تمكين الكل</string>
+    <string name="expert_mode_reset_to_default">تمكين التعديلات الموصى بها</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
     <string name="expert_mode_universal_patches">التعديلات الشاملة</string>
+    <string name="expert_mode_new_patches">جديد</string>
     <string name="expert_mode_multiple_sources_warning_title">تم تحديد مصادر تعديل متعددة</string>
     <string name="expert_mode_multiple_sources_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
 
@@ -162,6 +167,7 @@
     <string name="patch_option_list_duplicate">القيمة موجودة بالفعل</string>
     <string name="patch_option_list_empty">لا يمكن أن تكون القيمة فارغة</string>
     <string name="patch_option_list_empty_state">لم يتم إضافة أي قيم حتى الآن</string>
+    <string name="patch_option_required_missing">%s: املأ جميع الخيارات المطلوبة</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">إنشاء أيقونة تكيفية</string>
     <string name="adaptive_icon_instructions">اختر صورة أساسية، حدد لون الخلفية، ثم استخدم شريط التمرير أو الإيماءات لتعديل المعاينة حسب رغبتك</string>
@@ -223,6 +229,7 @@
     <string name="patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="patcher_error_log">سجل الأخطاء</string>
     <string name="patcher_error_technical">التفاصيل التقنية</string>
+    <string name="patcher_error_dialog_app_info">معلومات التطبيق</string>
     <string name="patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
     <string name="patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
     <string name="patcher_success_title">تم الانتهاء! 🎉</string>
@@ -602,18 +609,19 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_about">لمحة</string>
     <string name="settings_system_share_website">مشاركة الموقع الإلكتروني</string>
     <string name="settings_system_share_website_description">شارك موقع Morphe الرسمي</string>
-    <string name="settings_system_manager_description">"Morphe هو مشروع تجريبي مفتوح المصدر يركز على إنشاء تعديل حديث ومبسط لتطبيقات Android الشهيرة
-
-مشروع مفتوح المصدر في جوهره، يزدهر Morphe على ملاحظات المجتمع ومساهماته لدفع الابتكار المستقبلي"</string>
+    <string name="settings_system_manager_description">"مشروع تجريبي مفتوح المصدر لتعديل تطبيقات Android الشائعة بطريقة حديثة ومبسطة، مدفوعًا بتعليقات ومساهمات المجتمع"</string>
     <string name="credits">حقوق الملكية</string>
     <string name="credits_current_development">التطوير الحالي</string>
     <string name="credits_prior_development">التطوير المسبق</string>
+    <string name="opensource_licenses">تراخيص مفتوحة المصدر</string>
     <!-- Shared strings -->
     <string name="patches">التعديلات</string>
     <string name="home">الصفحة الرئيسية</string>
     <string name="settings">الإعدادات</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
+    <string name="all">الكل</string>
+    <string name="filter">تصفية</string>
     <string name="reset">إعادة التعيين</string>
     <string name="reset_all">إعادة تعيين الكل</string>
     <string name="confirm">تأكيد</string>
@@ -654,6 +662,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="open">فتح</string>
     <string name="mount">تركيب</string>
     <string name="mounted">مركّب</string>
+    <string name="unmount">فك التركيب</string>
     <string name="unmounted">غير مفكوك التركيب</string>
     <string name="remount">إعادة التركيب</string>
     <string name="install">تثبيت</string>

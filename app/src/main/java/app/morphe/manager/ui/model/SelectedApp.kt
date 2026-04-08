@@ -9,15 +9,6 @@ sealed interface SelectedApp : Parcelable {
     val version: String?
 
     @Parcelize
-    data class Download(
-        override val packageName: String,
-        override val version: String?
-    ) : SelectedApp
-
-    @Parcelize
-    data class Search(override val packageName: String, override val version: String?) : SelectedApp
-
-    @Parcelize
     data class Local(
         override val packageName: String,
         override val version: String,

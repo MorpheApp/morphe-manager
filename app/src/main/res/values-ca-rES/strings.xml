@@ -10,7 +10,6 @@
     <string name="home_app_show_hidden">Mostrar aplicacions ocultes</string>
     <string name="home_app_no_hidden">No hi ha aplicacions ocultes</string>
     <string name="home_app_hidden_apps_title">Aplicacions ocultes</string>
-    <string name="home_app_hidden_apps_hint">Toca a una app per mostrar-la a la llista de nou</string>
     <string name="android_11_bug_dialog_title">Error de l\'Android 11</string>
     <string name="android_11_bug_dialog_description">El permís d\'instal·lació de l\'aplicació s\'ha d\'atorgar amb anterioritat per evitar un error en el sistema Android 11 que afectarà negativament l\'experiència de l\'usuari</string>
     <!-- Home Screen - Update Notifications -->
@@ -24,7 +23,6 @@
     <string name="home_update_success">Actualització completada</string>
     <string name="home_update_success_subtitle">Les teves fonts estan actualitzades</string>
     <string name="home_sources_are_loading">S\'estan carregant les fonts, si us plau espereu…</string>
-    <string name="home_please_wait">Espereu...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
     <!-- Humorous hype message with light nostalgia -->

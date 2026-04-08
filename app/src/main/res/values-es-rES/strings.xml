@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">Show hidden apps</string>
     <string name="home_app_no_hidden">No hay apps ocultas</string>
     <string name="home_app_hidden_apps_title">Apps ocultas</string>
-    <string name="home_app_hidden_apps_hint">Toca en una app para mostrarla en la lista de nuevo</string>
+    <string name="home_app_hidden_apps_hint">Tocar para mostrar</string>
     <string name="android_11_bug_dialog_title"> Error de Android 11</string>
     <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario</string>
     <string name="deep_link_add_source_title">Agregar fuente</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">Actualización de fuentes completada</string>
     <string name="home_update_success_subtitle">Tus fuentes están al día</string>
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
-    <string name="home_please_wait">Por favor espera...</string>
+    <string name="home_search_apps">Buscar aplicaciones</string>
+    <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
+    <string name="home_no_apps_subtitle">Añadir una fuente de parche o habilitar una existente en %s</string>
+    <string name="home_no_apps_search_subtitle">No se encontraron aplicaciones que coincidan con \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">¿Qué aplicación quieres parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">Proceder al parcheado</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_enable_all">Activar todo</string>
+    <string name="expert_mode_reset_to_default">Activar parches recomendados</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
     <string name="expert_mode_universal_patches">Parches universales</string>
+    <string name="expert_mode_new_patches">Nuevo</string>
     <string name="expert_mode_multiple_sources_warning_title">Se han seleccionado varias fuentes de parches</string>
     <string name="expert_mode_multiple_sources_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
 
@@ -162,6 +167,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patch_option_list_duplicate">Este valor ya existe</string>
     <string name="patch_option_list_empty">El valor no puede estar vacío</string>
     <string name="patch_option_list_empty_state">No se han añadido valores todavía</string>
+    <string name="patch_option_required_missing">%s: complete todas las opciones requeridas</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crear icono adaptable</string>
     <string name="adaptive_icon_instructions">Elija una imagen de primer plano, seleccione un color de fondo y luego use el control deslizante o los gestos de pellizco para ajustar la vista previa</string>
@@ -223,6 +229,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patcher_error_copied">Error copiado en el portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>
     <string name="patcher_error_technical">Detalles técnicos</string>
+    <string name="patcher_error_dialog_app_info">Información de la app</string>
     <string name="patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
     <string name="patcher_installing_subtitle">¡Casi listo para empezar! 🎸</string>
     <string name="patcher_success_title">¡Todo listo! 🎉</string>
@@ -602,18 +609,19 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_about">Acerca de Morphe</string>
     <string name="settings_system_share_website">Compartir sitio web</string>
     <string name="settings_system_share_website_description">Compartir el sitio web oficial de Morphe</string>
-    <string name="settings_system_manager_description">"Morphe es un proyecto experimental de código abierto enfocado en crear un parcheo moderno y simplificado de aplicaciones Android populares
-
-Morphe se basa en la retroalimentación y las contribuciones de la comunidad para impulsar la innovación futura."</string>
+    <string name="settings_system_manager_description">"Un proyecto de código abierto experimental para la aplicación moderna y optimizada de parches en aplicaciones populares de Android, impulsado por los comentarios y las contribuciones de la comunidad"</string>
     <string name="credits">Créditos</string>
     <string name="credits_current_development">Desarrollo actual</string>
     <string name="credits_prior_development">Desarrollo anterior</string>
+    <string name="opensource_licenses">Licencias de código abierto</string>
     <!-- Shared strings -->
     <string name="patches">Parches</string>
     <string name="home">Inicio</string>
     <string name="settings">Ajustes</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
+    <string name="all">Todo</string>
+    <string name="filter">Filtro</string>
     <string name="reset">Restablecer</string>
     <string name="reset_all">Restablecer todo</string>
     <string name="confirm">Confirmar</string>
@@ -654,6 +662,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="open">Abrir</string>
     <string name="mount">Montar</string>
     <string name="mounted">Montado</string>
+    <string name="unmount">Desmontar</string>
     <string name="unmounted">Desmontado</string>
     <string name="remount">Montar</string>
     <string name="install">Instalar</string>

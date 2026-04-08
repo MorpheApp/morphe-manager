@@ -3,6 +3,7 @@ package app.morphe.manager.util
 import app.morphe.manager.data.room.apps.installed.SelectionPayload
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 
 /**
  * Converts SelectionPayload back to PatchSelection for runtime use.
@@ -17,7 +18,7 @@ fun SelectionPayload.toPatchSelection(): PatchSelection {
  * Remaps bundle UIDs in SelectionPayload and extracts selection.
  * Used when loading saved selections that may reference old/renamed bundles.
  *
- * Returns: Pair of (remapped payload, extracted selection)
+ * Returns: A Pair of (remapped payload, extracted selection).
  */
 fun SelectionPayload.remapAndExtractSelection(
     sources: List<PatchBundleSource>
@@ -49,9 +50,9 @@ fun SelectionPayload.remapAndExtractSelection(
 object PatchSelectionUtils {
 
     /**
-     * Toggle a patch in a selection map
-     * If the patch is selected, it will be deselected and vice versa
-     * Allows adding patches from bundles not yet in the selection (creates new entry)
+     * Toggle a patch in a selection map.
+     * If the patch is selected, it will be deselected and vice versa.
+     * Allows adding patches from bundles not yet in the selection (creates new entry).
      */
     fun PatchSelection.togglePatch(bundleUid: Int, patchName: String): PatchSelection {
         val current = this.toMutableMap()
@@ -73,8 +74,17 @@ object PatchSelectionUtils {
     }
 
     /**
-     * Update a single option value in an options map
-     * Creates intermediate maps as needed
+     * Update a single option value in an options map.
+     * Creates intermediate maps as needed.
+     *
+     * Value semantics:
+     *  - null  → remove the key entirely; used only by "Reset options" so the repository
+     *            will re-inject the bundled default on the next load.
+     *  - ""    → keep the key with an empty string; the user explicitly cleared the field
+     *            via the ✕ button. The key stays in the map so the repository does NOT
+     *            re-inject the bundled default. The empty string is stripped to null
+     *            by [sanitizeForPatcher] before options reach the patcher engine.
+     *  - other → store as-is.
      */
     fun Options.updateOption(
         bundleUid: Int,
@@ -87,8 +97,10 @@ object PatchSelectionUtils {
         val patchOptions = bundleOptions[patchName]?.toMutableMap() ?: mutableMapOf()
 
         if (value == null) {
+            // null = explicit reset → remove key so the repository can re-inject the default
             patchOptions.remove(optionKey)
         } else {
+            // "" or any real value → store explicitly
             patchOptions[optionKey] = value
         }
 
@@ -108,7 +120,27 @@ object PatchSelectionUtils {
     }
 
     /**
-     * Reset all options for a specific patch in an options map
+     * Strips UI-only empty strings from options before they are handed to the patcher engine.
+     *
+     * When the user clears a text field via the ✕ button, we store "" in [Options] so the
+     * repository does not re-inject the bundled default on the next dialog open.
+     * However, the patcher itself should receive null / no key for such fields
+     * so it falls back to its own default instead of receiving a literal empty string.
+     */
+    fun Options.sanitizeForPatcher(): Options =
+        mapNotNull { (bundleUid, bundlePatchOptions) ->
+            val cleanedBundle = bundlePatchOptions.mapNotNull { (patchName, patchOptions) ->
+                val cleanedPatch = patchOptions.filterValues { v ->
+                    // Drop blank strings - they are UI placeholders, not real values
+                    !(v is String && v.isBlank())
+                }
+                if (cleanedPatch.isEmpty()) null else patchName to cleanedPatch
+            }.toMap()
+            if (cleanedBundle.isEmpty()) null else bundleUid to cleanedBundle
+        }.toMap()
+
+    /**
+     * Reset all options for a specific patch in an options map.
      */
     fun Options.resetOptionsForPatch(bundleUid: Int, patchName: String): Options {
         val currentOptions = this.toMutableMap()
@@ -126,8 +158,8 @@ object PatchSelectionUtils {
     }
 
     /**
-     * Validate patch selection against current bundle info
-     * - Removes patches that no longer exist in the current bundles
+     * Validate patch selection against current bundle info.
+     * Removes patches that no longer exist in the current bundles.
      *
      * Uses [allBundlePatches] (including disabled bundles) to avoid falsely removing
      * patches from bundles that are merely disabled rather than deleted.
@@ -151,11 +183,11 @@ object PatchSelectionUtils {
     }
 
     /**
-     * Validate patch options against current bundle info
-     * Removes options for patches that no longer exist or options that are no longer valid
+     * Validate patch options against current bundle info.
+     * Removes options for patches that no longer exist or options that are no longer valid.
      *
      * Uses [allBundlePatches] (including disabled bundles) to avoid falsely removing
-     * options from bundles that are merely disabled
+     * options from bundles that are merely disabled.
      */
     fun validatePatchOptions(
         savedOptions: Options,
@@ -179,7 +211,7 @@ object PatchSelectionUtils {
     }
 
     /**
-     * Filter out GmsCore support patch from selection (for mount installs)
+     * Filter out GmsCore support patch from selection (for mount installs).
      */
     fun PatchSelection.filterGmsCore(): PatchSelection {
         return mapValues { (_, patches) ->

@@ -19,13 +19,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Java
-        id: setup-java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: '17'
 
       - name: Cache Gradle
@@ -35,17 +34,8 @@ jobs:
         run: |
           echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > app/keystore.jks
 
-      - name: Build
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
-          KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
-        run: ./gradlew assembleRelease
-
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "lts/*"
           cache: npm
@@ -61,9 +51,8 @@ jobs:
           fingerprint: ${{ vars.GPG_FINGERPRINT }}
 
       - name: Release
+        uses: cycjimmy/semantic-release-action@v5
         id: release
-        run: |
-          echo "NEW_TAG=$(npx multi-semantic-release --tag-format 'v${version}' | tee | grep 'Created tag ' | sed -E 's/.*Created tag ([^ ]+).*/\1/')" >> $GITHUB_OUTPUT
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -71,15 +60,40 @@ jobs:
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 
+      - name: Copy release files to legacy path
+        # TODO: Eventually delete this logic
+        if: steps.release.outputs.new_release_published == 'true'
+        run: |
+          git config user.name "semantic-release-bot"
+          git config user.email "semantic-release-bot@martynus.net"
+          
+          # Make sure we're rebasing onto the latest remote branch
+          git fetch origin
+          
+          # Hard reset to latest remote branch
+          git checkout ${GITHUB_REF_NAME}
+          git reset --hard origin/${GITHUB_REF_NAME}
+          
+          cp app-release.json app/app-release.json
+          cp CHANGELOG.md app/CHANGELOG.md
+          
+          git add app/app-release.json
+          git add app/CHANGELOG.md
+          
+          git commit -m "chore: Update legacy release files"
+          
+          # Push explicitly to the branch that triggered the workflow
+          git push origin HEAD:${GITHUB_REF_NAME}
+
       - name: Attest
-        if: steps.release.outputs.NEW_TAG != ''
+        if: steps.release.outputs.new_release_published == 'true'
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: 'Morphe Manager ${{ steps.release.outputs.NEW_TAG }}'
+          subject-name: 'Morphe Manager ${{ steps.release.outputs.new_release_git_tag }}'
           subject-path: app/build/outputs/apk/release/morphe-manager*.apk
 
       - name: Generate website deploy token
-        if: steps.release.outputs.NEW_TAG != ''
+        if: steps.release.outputs.new_release_published == 'true'
         id: app-token
         uses: actions/create-github-app-token@v1
         with:
@@ -88,7 +102,7 @@ jobs:
           owner: MorpheApp
 
       - name: Trigger website deploy
-        if: steps.release.outputs.NEW_TAG != ''
+        if: steps.release.outputs.new_release_published == 'true'
         uses: actions/github-script@v7
         with:
           github-token: ${{ steps.app-token.outputs.token }}
@@ -99,92 +113,22 @@ jobs:
               event_type: 'trigger-deploy'
             })
 
-      - name: Purge jsDelivr Cache
-        if: steps.release.outputs.NEW_TAG != ''
-        run: |
-          set -e
-          
-          # ------------------------------
-          # Build the list of paths to purge
-          # ------------------------------
-          PATHS=(
-            "/gh/${GITHUB_REPOSITORY}@${GITHUB_REF_NAME}/app/app-release.json"
-          )
-          
-          # Include dev path if main branch
-          if [ "${GITHUB_REF_NAME}" = "main" ]; then
-            PATHS+=("/gh/${GITHUB_REPOSITORY}@dev/app/app-release.json")
-          fi
-          
-          # Convert PATHS array to JSON array string
-          JSON_PATHS=$(printf '%s\n' "${PATHS[@]}" | jq -R . | jq -s .)
-          
-          echo "Purging jsDelivr cache for paths: ${PATHS[*]}"
-          
-          # ------------------------------
-          # Send initial purge request
-          # ------------------------------
-          RESPONSE=$(curl -s -X POST https://purge.jsdelivr.net/ \
-            -H 'Content-Type: application/json' \
-            -d "{\"path\": $JSON_PATHS}")
-          
-          PURGE_ID=$(echo "$RESPONSE" | jq -r '.id')
-          if [ -z "$PURGE_ID" ] || [ "$PURGE_ID" = "null" ]; then
-            echo "❌ Failed to create purge request: $RESPONSE"
-            exit 1
-          fi
-          echo "Purge ID: $PURGE_ID"
-          
-          # ------------------------------
-          # Poll until finished or failed
-          # ------------------------------
-          while true; do
-            STATUS=$(curl -s "https://purge.jsdelivr.net/status/$PURGE_ID")
-            STATE=$(echo "$STATUS" | jq -r '.status')
-            echo "Current purge status: $STATE"
-          
-            if [ "$STATE" = "finished" ]; then
-              # Check if any paths were throttled
-              THROTTLED_RESET=$(echo "$STATUS" | jq '[.paths[] | select(.throttled==true) | .throttlingReset] | max // 0')
-              if [ "$THROTTLED_RESET" -gt 0 ]; then
-                echo "⚠️ Some paths were throttled. Waiting $THROTTLED_RESET seconds before retry..."
-                sleep $((THROTTLED_RESET + 1))
-                # Resend purge request for throttled paths
-                THROTTLED_PATHS=$(echo "$STATUS" | jq -r '[.paths | to_entries[] | select(.value.throttled==true) | .key] | @json')
-                echo "Retrying purge for paths: $THROTTLED_PATHS"
-                RESPONSE=$(curl -s -X POST https://purge.jsdelivr.net/ \
-                  -H 'Content-Type: application/json' \
-                  -d "{\"path\": $THROTTLED_PATHS}")
-                PURGE_ID=$(echo "$RESPONSE" | jq -r '.id')
-                continue
-              fi
-              echo "✅ Purge finished successfully for all paths"
-              break
-            elif [ "$STATE" = "failed" ]; then
-              echo "❌ Purge failed: $STATUS"
-              exit 1
-            else
-              # Still pending
-              sleep 2
-            fi
-          done
-
       - name: Wait before sending FCM
-        if: steps.release.outputs.NEW_TAG != ''
-        run: sleep 300
+        if: steps.release.outputs.new_release_published == 'true'
+        run: sleep 480
 
       - name: Setup Python for FCM
-        if: steps.release.outputs.NEW_TAG != ''
+        if: steps.release.outputs.new_release_published == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Send FCM push notification
-        if: steps.release.outputs.NEW_TAG != ''
+        if: steps.release.outputs.new_release_published == 'true'
         env:
           FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
           FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}
-          NEW_TAG: ${{ steps.release.outputs.NEW_TAG }}
+          NEW_TAG: ${{ steps.release.outputs.new_release_git_tag }}
           BRANCH: ${{ github.ref_name }}
         run: |
           pip install cryptography

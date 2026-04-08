@@ -10,7 +10,7 @@
     <string name="home_app_show_hidden">แสดงแอปที่ซ่อนอยู่</string>
     <string name="home_app_no_hidden">ไม่มีแอปที่ซ่อนอยู่</string>
     <string name="home_app_hidden_apps_title">แอปที่ซ่อนอยู่</string>
-    <string name="home_app_hidden_apps_hint">กดแอปเพื่อแสดงในรายการอีกครั้ง</string>
+    <string name="home_app_hidden_apps_hint">แตะเพื่อแสดง</string>
     <string name="android_11_bug_dialog_title">บัก Android 11</string>
     <string name="android_11_bug_dialog_description">ต้องอนุญาตเปิดสิทธิเข้าถึงการติดตั้งแอปพลิเคชันก่อน เพื่อหลีกเลี่ยงปัญหาจากระบบปฏิบัติการ Android 11 ที่มีผลกระทบต่อการใช้งานแอปพลิเคชันนี้</string>
     <string name="deep_link_add_source_title">เพิ่มแหล่งที่มา</string>
@@ -28,7 +28,10 @@
     <string name="home_update_success">การอัพเดทแหล่งข้อมูลเสร็จสมบูรณ์แล้ว</string>
     <string name="home_update_success_subtitle">แหล่งข้อมูลของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งข้อมูล กรุณารอสักครู่…</string>
-    <string name="home_please_wait">โปรดรอสักครู่…</string>
+    <string name="home_search_apps">ค้นหาแอป</string>
+    <string name="home_no_apps_title">ไม่มีแอปให้ใช้งาน</string>
+    <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
+    <string name="home_no_apps_search_subtitle">ไม่มีแอปที่ตรงกับ \"%1$s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">คุณต้องการแพ็ตช์แอปใด</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -115,8 +118,10 @@
     <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
+    <string name="expert_mode_reset_to_default">เปิดใช้งานแพตช์ที่แนะนำ</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
     <string name="expert_mode_universal_patches">แพตช์สากล</string>
+    <string name="expert_mode_new_patches">ใหม่</string>
     <string name="expert_mode_multiple_sources_warning_title">หลายแหล่งปรับปรุงถูกเลือก</string>
     <string name="expert_mode_multiple_sources_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลกๆ
 
@@ -162,6 +167,7 @@
     <string name="patch_option_list_duplicate">ค่านี้มีอยู่แล้ว</string>
     <string name="patch_option_list_empty">ไม่สามารถเว้นว่างได้</string>
     <string name="patch_option_list_empty_state">ยังไม่ได้เพิ่มค่าใดๆ</string>
+    <string name="patch_option_required_missing">%s: กรอกตัวเลือกที่จำเป็นทั้งหมด</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">สร้างไอคอนปรับแต่ง</string>
     <string name="adaptive_icon_instructions">เลือกภาพพื้นหน้า, เลือกสีพื้นหลัง จากนั้นใช้แถบเลื่อนหรือท่าทางกริชชะเพื่อปรับตัวอย่าง</string>
@@ -223,6 +229,7 @@
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
     <string name="patcher_error_technical">รายละเอียดทางเทคนิค</string>
+    <string name="patcher_error_dialog_app_info">ข้อมูลแอป</string>
     <string name="patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
     <string name="patcher_installing_subtitle">ใกล้พร้อมแล้ว! 🎸</string>
     <string name="patcher_success_title">เสร็จสิ้นแล้ว! 🎉</string>
@@ -603,16 +610,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
     <string name="settings_system_share_website_description">เลือก</string>
-    <string name="settings_system_manager_description">"ไม่เลือก"</string>
+    <string name="settings_system_manager_description">"โครงการโอเพนซอร์สเชิงทดลองสำหรับการปรับปรุงแอป Android ยอดนิยมให้ทันสมัยและคล่องตัว โดยขับเคลื่อนด้วยข้อเสนอแนะและการมีส่วนร่วมของชุมชน"</string>
     <string name="credits">เครดิต</string>
     <string name="credits_current_development">การพัฒนาปัจจุบัน</string>
     <string name="credits_prior_development">การพัฒนาที่ผ่านมา</string>
+    <string name="opensource_licenses">สัญญาอนุญาตโอเพนซอร์ส</string>
     <!-- Shared strings -->
     <string name="patches">แพตช์</string>
     <string name="home">หน้าแรก</string>
     <string name="settings">การตั้งค่า</string>
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
+    <string name="all">ทั้งหมด</string>
+    <string name="filter">ตัวกรอง</string>
     <string name="reset">รีเซ็ต</string>
     <string name="reset_all">รีเซ็ตทั้งหมด</string>
     <string name="confirm">ยืนยัน</string>
@@ -653,6 +663,7 @@ morphe_header_custom_dark.png
     <string name="open">ลองใหม่</string>
     <string name="mount">เมานต์</string>
     <string name="mounted">เมานต์แล้ว</string>
+    <string name="unmount">โงมธ่งล</string>
     <string name="unmounted">ไม่ได้เมานต์</string>
     <string name="remount">ไม่มีการเปลี่ยนล่าสุด</string>
     <string name="install">ติดตั้ง</string>

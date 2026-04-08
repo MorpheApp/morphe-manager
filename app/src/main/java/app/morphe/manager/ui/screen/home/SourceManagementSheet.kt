@@ -8,10 +8,12 @@ package app.morphe.manager.ui.screen.home
 import android.annotation.SuppressLint
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.*
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -32,8 +34,10 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -41,6 +45,7 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.APIPatchBundle
@@ -50,11 +55,9 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvat
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
-import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.ui.screen.shared.ActionPillButton
-import app.morphe.manager.ui.screen.shared.InfoBadge
-import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
+import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
@@ -62,6 +65,8 @@ import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
+import sh.calvin.reorderable.ReorderableItem
+import sh.calvin.reorderable.rememberReorderableLazyListState
 
 /**
  * Bottom sheet for managing patch bundles.
@@ -75,7 +80,8 @@ fun BundleManagementSheet(
     onDelete: (PatchBundleSource) -> Unit,
     onDisable: (PatchBundleSource) -> Unit,
     onUpdate: (PatchBundleSource) -> Unit,
-    onRename: (PatchBundleSource) -> Unit
+    onRename: (PatchBundleSource) -> Unit,
+    onReorder: (List<Int>) -> Unit
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val prefs: PreferencesManager = koinInject()
@@ -89,6 +95,32 @@ fun BundleManagementSheet(
     val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
+    // Expanded state lifted out of LazyColumn so it survives scroll-off-screen recomposition
+    var expandedBundleUids by remember { mutableStateOf<Set<Int>>(emptySet()) }
+
+    // Drag-and-drop state
+    val listState = rememberLazyListState()
+    var localOrder by remember { mutableStateOf(sources.map { it.uid }) }
+    var isDragging by remember { mutableStateOf(false) }
+    LaunchedEffect(sources) {
+        if (isDragging) return@LaunchedEffect
+        val sourceUids = sources.map { it.uid }
+        val existing = localOrder.filter { uid -> uid in sourceUids }
+        val added = sourceUids.filter { it !in existing }
+        val merged = existing + added
+        if (merged != localOrder) localOrder = merged
+    }
+    val orderedSources = remember(localOrder, sources) {
+        localOrder.mapNotNull { uid -> sources.find { it.uid == uid } }
+    }
+    val haptic = LocalHapticFeedback.current
+    val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
+        val newOrder = localOrder.toMutableList()
+        val moved = newOrder.removeAt(from.index)
+        newOrder.add(to.index, moved)
+        localOrder = newOrder
+    }
+
     val bundleToShowPatches = remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
     val bundleToShowChangelog = bundleToShowChangelogUid
@@ -112,25 +144,17 @@ fun BundleManagementSheet(
         }
     }
 
-    ModalBottomSheet(
+    MorpheBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
-        scrimColor = Color.Transparent
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
     ) {
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-        ) {
+        Column(Modifier.fillMaxWidth()) {
             // Header - outside scrollable area
-            Column(
-                modifier = Modifier.padding(horizontal = 16.dp)
-            ) {
+            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -168,38 +192,47 @@ fun BundleManagementSheet(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(Modifier.height(8.dp))
             }
 
-            // Bundle cards - scrollable area with disabled overscroll
-            CompositionLocalProvider(LocalOverscrollFactory provides null) {
-                LazyColumn(
-                    state = rememberLazyListState(),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f, fill = false),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = 16.dp
-                    )
-                ) {
-                    items(sources, key = { bundle -> bundle.uid }) { bundle ->
-                        val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
-                            bundleInfo[bundle.uid]?.patches?.any { patch ->
-                                patch.compatiblePackages?.any { pkg ->
-                                    pkg.experimentalVersions?.isNotEmpty() == true
-                                } == true
+            // Bundle cards
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding()
+                    .weight(1f, fill = false),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 16.dp
+                )
+            ) {
+                items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
+                    val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
+                        bundleInfo[bundle.uid]?.patches?.any { patch ->
+                            patch.compatiblePackages?.any { pkg ->
+                                pkg.experimentalVersions?.isNotEmpty() == true
                             } == true
-                        }
-                        val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
+                        } == true
+                    }
+                    val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
 
+                    ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
                         BundleManagementCard(
                             bundle = bundle,
                             patchCount = patchCounts[bundle.uid] ?: 0,
                             updateInfo = manualUpdateInfo[bundle.uid],
                             isUpdating = bundle.uid in activeUpdateUids,
+                            expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids,
+                            onToggleExpanded = {
+                                expandedBundleUids = if (bundle.uid in expandedBundleUids) {
+                                    expandedBundleUids - bundle.uid
+                                } else {
+                                    expandedBundleUids + bundle.uid
+                                }
+                            },
                             onDelete = { bundleToDelete.value = bundle },
                             onDisable = { onDisable(bundle) },
                             onUpdate = { onUpdate(bundle) },
@@ -242,7 +275,19 @@ fun BundleManagementSheet(
                                     context.toast(context.getString(R.string.sources_management_failed_to_open_url))
                                 }
                             },
-                            forceExpanded = isSingleDefaultBundle
+                            forceExpanded = isSingleDefaultBundle,
+                            isDragging = itemIsDragging,
+                            longPressModifier = Modifier.longPressDraggableHandle(
+                                onDragStarted = {
+                                    isDragging = true
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                },
+                                onDragStopped = {
+                                    isDragging = false
+                                    onReorder(localOrder)
+                                }
+                            ),
+                            modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
                         )
                     }
                 }
@@ -287,9 +332,14 @@ fun BundleManagementSheet(
 @Composable
 private fun BundleManagementCard(
     bundle: PatchBundleSource,
+    modifier: Modifier = Modifier,
     patchCount: Int,
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     isUpdating: Boolean = false,
+    isDragging: Boolean = false,
+    longPressModifier: Modifier = Modifier,
+    expanded: Boolean,
+    onToggleExpanded: () -> Unit,
     onDelete: () -> Unit,
     onDisable: () -> Unit,
     onUpdate: () -> Unit,
@@ -303,13 +353,6 @@ private fun BundleManagementCard(
     onOpenInBrowser: () -> Unit,
     forceExpanded: Boolean = false
 ) {
-    var expanded by remember { mutableStateOf(forceExpanded) }
-
-    // Update expanded state when forceExpanded changes
-    LaunchedEffect(forceExpanded) {
-        if (forceExpanded) expanded = true
-    }
-
     // Localized strings for accessibility
     val expandedState = stringResource(R.string.expanded)
     val collapsedState = stringResource(R.string.collapsed)
@@ -338,10 +381,19 @@ private fun BundleManagementCard(
         label = "bundle_card_border_color"
     )
 
+    val scale by animateFloatAsState(
+        targetValue = if (isDragging) 1.03f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+        label = "bundle_card_scale"
+    )
+
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .graphicsLayer { scaleX = scale; scaleY = scale }
+            .then(longPressModifier),
         shape = RoundedCornerShape(16.dp),
-        tonalElevation = 3.dp,
+        tonalElevation = if (isDragging) 8.dp else 3.dp,
         color = animatedColor,
         border = BorderStroke(1.dp, animatedBorderColor)
     ) {
@@ -371,7 +423,7 @@ private fun BundleManagementCard(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
             ) {
-                if (!forceExpanded) expanded = !expanded
+                if (!forceExpanded) onToggleExpanded()
             }
             .semantics {
                 if (!forceExpanded) {
@@ -393,8 +445,8 @@ private fun BundleManagementCard(
             // Expanded content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(),
-                exit = shrinkVertically()
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 Column(
                     modifier = Modifier
@@ -489,8 +541,8 @@ private fun BundleManagementCard(
                     AnimatedVisibility(
                         visible = hasExperimentalVersions && onExperimentalVersionsToggle != null &&
                                 (onPrereleasesToggle == null || currentUsePrerelease),
-                        enter = expandVertically() + fadeIn(),
-                        exit = shrinkVertically() + fadeOut()
+                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
                     ) {
                         Row(
                             modifier = Modifier
@@ -640,16 +692,49 @@ private fun BundleCardHeader(
                 )
             }
 
-            // Version
+            // Version • date
             if (showChevron) {
-                bundle.version?.let { version ->
-                    Text(
-                        text = version.removePrefix("v"),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                val timestamp = bundle.updatedAt ?: bundle.createdAt
+                val versionText = bundle.version?.removePrefix("v")
+                val dateText = timestamp?.let { getRelativeTimeString(it) }
+                val subtitleText = listOfNotNull(versionText, dateText).joinToString("  •  ")
+                if (subtitleText.isNotEmpty()) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        if (versionText != null) {
+                            Text(
+                                text = versionText,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                        if (versionText != null && dateText != null) {
+                            Text(
+                                text = "  •  ",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        if (timestamp != null && dateText != null) {
+                            Icon(
+                                imageVector = if (bundle.updatedAt != null) Icons.Outlined.Schedule else Icons.Outlined.CalendarToday,
+                                contentDescription = null,
+                                modifier = Modifier.size(11.dp),
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = dateText,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    }
                 }
             }
 
@@ -666,8 +751,8 @@ private fun BundleCardHeader(
                 // Disabled badge
                 AnimatedVisibility(
                     visible = !enabled,
-                    enter = fadeIn() + expandHorizontally(),
-                    exit = fadeOut() + shrinkHorizontally()
+                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
+                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
                 ) {
                     InfoBadge(
                         text = stringResource(R.string.disabled),
@@ -683,23 +768,6 @@ private fun BundleCardHeader(
                         text = stringResource(R.string.update),
                         style = InfoBadgeStyle.Warning,
                         icon = null,
-                        isCompact = true
-                    )
-                }
-
-                // Date badge
-                bundle.updatedAt?.let { timestamp ->
-                    InfoBadge(
-                        text = getRelativeTimeString(timestamp),
-                        style = InfoBadgeStyle.Default,
-                        icon = Icons.Outlined.Schedule,
-                        isCompact = true
-                    )
-                } ?: bundle.createdAt?.let { timestamp ->
-                    InfoBadge(
-                        text = getRelativeTimeString(timestamp),
-                        style = InfoBadgeStyle.Default,
-                        icon = Icons.Outlined.CalendarToday,
                         isCompact = true
                     )
                 }

@@ -2,13 +2,14 @@ package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
+import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Engineering
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,16 +25,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 
 /**
  * Section 5: Bottom action bar
- * Bundles and Settings buttons positioned left and right
+ * Sources | Search (optional, center) | Settings
  */
 @Composable
 fun HomeBottomActionBar(
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,
     isExpertModeEnabled: Boolean = false,
+    showSearchButton: Boolean = false,
+    searchActive: Boolean = false,
+    onSearchClick: () -> Unit = {},
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -57,6 +62,24 @@ fun HomeBottomActionBar(
                 text = stringResource(R.string.sources_management_title),
                 modifier = Modifier.weight(1f)
             )
+
+            // Center: Search button
+            AnimatedVisibility(
+                visible = showSearchButton,
+                modifier = Modifier.weight(1f),
+                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing)),
+                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing))
+            ) {
+                val searchExpandedLabel = stringResource(R.string.expanded)
+                val searchCollapsedLabel = stringResource(R.string.collapsed)
+                BottomActionButton(
+                    onClick = onSearchClick,
+                    icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                    text = stringResource(R.string.home_search_apps),
+                    searchStateDescription = if (searchActive) searchExpandedLabel else searchCollapsedLabel,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
 
             // Right: Settings button with expert mode indicator
             BottomActionButton(
@@ -84,7 +107,8 @@ fun BottomActionButton(
     contentColor: Color? = null,
     enabled: Boolean = true,
     showProgress: Boolean = false,
-    isExpertMode: Boolean = false
+    isExpertMode: Boolean = false,
+    searchStateDescription: String? = null
 ) {
     val shape = RoundedCornerShape(16.dp)
     val view = LocalView.current
@@ -128,6 +152,9 @@ fun BottomActionButton(
             .semantics {
                 role = Role.Button
                 this.contentDescription = contentDesc
+                if (searchStateDescription != null) {
+                    stateDescription = searchStateDescription
+                }
                 if (showProgress) {
                     liveRegion = LiveRegionMode.Polite
                 }

@@ -57,9 +57,10 @@ jobs:
       - name: Compile Android app to check resources
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          _JAVA_OPTIONS: "-Djava.awt.headless=true"
         run: |
           chmod +x ./gradlew
-          ./gradlew :app:assembleDebug
+          ./gradlew :app:assembleDebug -PnoProguard -PsignAsDebug
 
       # Step 3: Checkout dev branch to prepare for merging
       - name: Checkout dev branch for merge

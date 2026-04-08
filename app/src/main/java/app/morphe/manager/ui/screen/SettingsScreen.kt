@@ -9,7 +9,7 @@ import android.annotation.SuppressLint
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -38,9 +38,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
@@ -48,17 +45,15 @@ import app.morphe.manager.ui.screen.settings.system.AboutDialog
 import app.morphe.manager.ui.screen.settings.system.ChangelogDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
 import app.morphe.manager.ui.screen.settings.system.KeystoreCredentialsDialog
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.JSON_MIMETYPE
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
-/**
- * Settings tabs for bottom navigation
- */
+/** Settings tabs for bottom navigation. */
 private enum class SettingsTab(
     val titleRes: Int,
     val icon: ImageVector
@@ -69,10 +64,9 @@ private enum class SettingsTab(
 }
 
 /**
- * Settings screen with bottom navigation and swipeable tabs
+ * Settings screen with bottom navigation and swipeable tabs.
  */
-@SuppressLint("BatteryLight", "LocalContextGetResourceValueCall")
-@OptIn(ExperimentalFoundationApi::class)
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun SettingsScreen(
     homeViewModel: HomeViewModel,
@@ -86,9 +80,6 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val prefs: PreferencesManager = koinInject()
-    val installerManager: InstallerManager = koinInject()
-    val rootInstaller: RootInstaller = koinInject()
 
     // Pager state for swipeable tabs
     val pagerState = rememberPagerState(
@@ -103,79 +94,56 @@ fun SettingsScreen(
     val dynamicColor by themeViewModel.prefs.dynamicColor.getAsState()
     val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
 
-    // Update
-    val useManagerPrereleases = homeViewModel.prefs.useManagerPrereleases.getAsState()
-
     // Dialog states
-    var showAboutDialog by rememberSaveable { mutableStateOf(false) }
-    var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
-    var showInstallerDialog by remember { mutableStateOf(false) }
-    var showChangelogDialog by remember { mutableStateOf(false) }
+    val showAboutDialog = rememberSaveable { mutableStateOf(false) }
+    val showKeystoreCredentialsDialog = rememberSaveable { mutableStateOf(false) }
+    val showInstallerDialog = remember { mutableStateOf(false) }
+    val showChangelogDialog = remember { mutableStateOf(false) }
 
     // Import launchers
     val importKeystoreLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.startKeystoreImport(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
 
     val importSettingsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.importManagerSettings(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
 
     // Export launchers
     val exportKeystoreLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("*/*")
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.exportKeystore(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.exportKeystore(it) } }
 
     val exportSettingsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.exportManagerSettings(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.exportManagerSettings(it) } }
 
     val exportDebugLogsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("text/plain")
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.exportDebugLogs(it)
-        }
-    }
+    ) { uri -> uri?.let { importExportViewModel.exportDebugLogs(it) } }
 
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
-        showKeystoreCredentialsDialog = importExportViewModel.showCredentialsDialog
+        showKeystoreCredentialsDialog.value = importExportViewModel.showCredentialsDialog
     }
 
     // Show about dialog
-    if (showAboutDialog) {
-        AboutDialog(onDismiss = { showAboutDialog = false })
+    if (showAboutDialog.value) {
+        AboutDialog(onDismiss = { showAboutDialog.value = false })
     }
 
     // Show keystore credentials dialog
-    if (showKeystoreCredentialsDialog) {
+    if (showKeystoreCredentialsDialog.value) {
         KeystoreCredentialsDialog(
             onDismiss = {
                 importExportViewModel.cancelKeystoreImport()
-                showKeystoreCredentialsDialog = false
+                showKeystoreCredentialsDialog.value = false
             },
             onSubmit = { alias, pass ->
                 coroutineScope.launch {
                     val result = importExportViewModel.tryKeystoreImport(alias, pass)
                     if (result) {
-                        showKeystoreCredentialsDialog = false
+                        showKeystoreCredentialsDialog.value = false
                     } else {
                         context.toast(context.getString(R.string.settings_system_import_keystore_wrong_credentials))
                     }
@@ -185,19 +153,17 @@ fun SettingsScreen(
     }
 
     // Installer selection dialog
-    if (showInstallerDialog) {
+    if (showInstallerDialog.value) {
         InstallerSelectionDialogContainer(
-            installerManager = installerManager,
             settingsViewModel = settingsViewModel,
-            rootInstaller = rootInstaller,
-            onDismiss = { showInstallerDialog = false }
+            onDismiss = { showInstallerDialog.value = false }
         )
     }
 
     // Manager changelog dialog
-    if (showChangelogDialog) {
+    if (showChangelogDialog.value) {
         ChangelogDialog(
-            onDismiss = { showChangelogDialog = false },
+            onDismiss = { showChangelogDialog.value = false },
             updateViewModel = updateViewModel
         )
     }
@@ -224,25 +190,22 @@ fun SettingsScreen(
                 )
 
                 SettingsTab.ADVANCED -> AdvancedTabContent(
-                    useManagerPrereleases = useManagerPrereleases,
                     patchOptionsViewModel = patchOptionsViewModel,
                     homeViewModel = homeViewModel,
-                    prefs = prefs
+                    settingsViewModel = settingsViewModel
                 )
 
                 SettingsTab.SYSTEM -> SystemTabContent(
-                    installerManager = installerManager,
                     settingsViewModel = settingsViewModel,
-                    onShowInstallerDialog = { showInstallerDialog = true },
+                    onShowInstallerDialog = { showInstallerDialog.value = true },
                     importExportViewModel = importExportViewModel,
                     onImportKeystore = { importKeystoreLauncher.launch("*/*") },
                     onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
                     onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
                     onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
                     onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
-                    onAboutClick = { showAboutDialog = true },
-                    onChangelogClick = { showChangelogDialog = true },
-                    prefs = prefs
+                    onAboutClick = { showAboutDialog.value = true },
+                    onChangelogClick = { showChangelogDialog.value = true }
                 )
             }
         }
@@ -260,7 +223,7 @@ fun SettingsScreen(
 }
 
 /**
- * Bottom navigation bar
+ * Bottom navigation bar.
  */
 @Composable
 private fun MorpheBottomNavigation(
@@ -274,31 +237,42 @@ private fun MorpheBottomNavigation(
         color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
         tonalElevation = 3.dp
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
-            SettingsTab.entries.forEach { tab ->
-                NavigationItem(
-                    tab = tab,
-                    isSelected = currentTab == tab,
-                    onClick = { onTabSelected(tab) }
-                )
+            Row(
+                modifier = Modifier
+                    .widthIn(max = 448.dp)
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .animateContentSize(),
+                horizontalArrangement = Arrangement.spacedBy(32.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SettingsTab.entries.forEach { tab ->
+                    val isSelected = currentTab == tab
+                    NavigationItem(
+                        tab = tab,
+                        isSelected = isSelected,
+                        onClick = { onTabSelected(tab) },
+                        modifier = if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp)
+                    )
+                }
             }
         }
     }
 }
 
 /**
- * Individual navigation item
+ * Individual navigation item.
  */
 @Composable
 private fun NavigationItem(
     tab: SettingsTab,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val containerColor = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer
@@ -316,16 +290,9 @@ private fun NavigationItem(
 
     Surface(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .height(48.dp)
             .clip(RoundedCornerShape(24.dp))
-            .then(
-                if (isSelected) {
-                    Modifier.widthIn(min = 64.dp, max = 140.dp)
-                } else {
-                    Modifier.width(64.dp)
-                }
-            )
             .semantics {
                 role = Role.Tab
                 selected = isSelected
@@ -349,8 +316,8 @@ private fun NavigationItem(
 
             AnimatedVisibility(
                 visible = isSelected,
-                enter = fadeIn() + expandHorizontally(),
-                exit = fadeOut() + shrinkHorizontally()
+                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 Row {
                     Spacer(modifier = Modifier.width(8.dp))

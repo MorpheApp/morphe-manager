@@ -11,11 +11,18 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -33,6 +40,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
@@ -46,7 +54,10 @@ import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 import app.morphe.patcher.patch.AppTarget
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.net.URI
 
 /**
@@ -63,15 +74,16 @@ fun HomeDialogs(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    // Dialog 1: APK Availability
+    // Dialog 1: APK availability
     AnimatedVisibility(
         visible = homeViewModel.showApkAvailabilityDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else 200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val recommendedVersion = homeViewModel.pendingRecommendedVersion
         val compatibleVersions = homeViewModel.pendingCompatibleVersions
+        val selectedDownloadVersion = homeViewModel.pendingSelectedDownloadVersion
         val usingMountInstall = homeViewModel.usingMountInstall
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
         val savedApkInfo = homeViewModel.pendingSavedApkInfo
@@ -80,6 +92,8 @@ fun HomeDialogs(
             appName = appName,
             recommendedVersion = recommendedVersion,
             compatibleVersions = compatibleVersions,
+            selectedDownloadVersion = selectedDownloadVersion,
+            onVersionSelect = { homeViewModel.pendingSelectedDownloadVersion = it },
             usingMountInstall = usingMountInstall,
             isExpertMode = isExpertMode,
             savedApkInfo = savedApkInfo,
@@ -105,11 +119,11 @@ fun HomeDialogs(
         )
     }
 
-    // Dialog 2: Download Instructions
+    // Dialog 2: Download instructions
     AnimatedVisibility(
         visible = homeViewModel.showDownloadInstructionsDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (homeViewModel.showFilePickerPromptDialog) 0 else 200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(if (homeViewModel.showFilePickerPromptDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
     ) {
         val usingMountInstall = homeViewModel.usingMountInstall
         // Remember packageName to prevent color flickering during exit animation
@@ -147,11 +161,11 @@ fun HomeDialogs(
         }
     }
 
-    // Dialog 3: File Picker Prompt
+    // Dialog 3: File picker prompt
     AnimatedVisibility(
         visible = homeViewModel.showFilePickerPromptDialog && homeViewModel.pendingAppName != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val isOtherApps = homeViewModel.pendingPackageName == null
@@ -170,11 +184,11 @@ fun HomeDialogs(
         )
     }
 
-    // Unsupported Version Dialog
+    // Unsupported version dialog
     AnimatedVisibility(
         visible = homeViewModel.showUnsupportedVersionDialog != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val dialogState = homeViewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
@@ -183,6 +197,13 @@ fun HomeDialogs(
             version = dialogState.version,
             recommendedVersion = dialogState.recommendedVersion?.version,
             allCompatibleVersions = dialogState.allCompatibleVersions.map { it.version ?: "" }.filter { it.isNotEmpty() },
+            versionDescriptions = dialogState.allCompatibleVersions
+                .mapNotNull { target ->
+                    val v = target.version ?: return@mapNotNull null
+                    val d = target.description ?: return@mapNotNull null
+                    v to d
+                }
+                .toMap(),
             experimentalVersions = homeViewModel.getExperimentalVersionsForPackage(dialogState.packageName),
             isExperimental = dialogState.isExperimental,
             isExpertMode = isExpertMode,
@@ -191,11 +212,11 @@ fun HomeDialogs(
         )
     }
 
-    // Experimental Version Warning Dialog
+    // Experimental version warning dialog
     AnimatedVisibility(
         visible = homeViewModel.showExperimentalVersionDialog != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val dialogState = homeViewModel.showExperimentalVersionDialog ?: return@AnimatedVisibility
 
@@ -206,11 +227,11 @@ fun HomeDialogs(
         )
     }
 
-    // Wrong Package Dialog
+    // Wrong package dialog
     AnimatedVisibility(
         visible = homeViewModel.showWrongPackageDialog != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
     ) {
         val dialogState = homeViewModel.showWrongPackageDialog ?: return@AnimatedVisibility
 
@@ -267,20 +288,25 @@ fun HomeDialogs(
     }
 
     // Expert Mode Dialog
-    AnimatedVisibility(
-        visible = homeViewModel.showExpertModeDialog && homeViewModel.expertModeSelectedApp != null,
-        enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(200))
-    ) {
-        val selectedApp = homeViewModel.expertModeSelectedApp ?: return@AnimatedVisibility
-        val allowIncompatible = homeViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
-
+    if (homeViewModel.showExpertModeDialog) {
         ExpertModeDialog(
-            bundles = homeViewModel.expertModeBundles,
-            selectedPatches = homeViewModel.expertModePatches,
+            newPatches = homeViewModel.expertModeNewPatches,
             options = homeViewModel.expertModeOptions,
+            allPatchesInfo = homeViewModel.expertModeAllPatchesInfo,
+            totalSelectedCount = homeViewModel.expertModeTotalSelectedCount,
+            totalPatchesCount = homeViewModel.expertModeTotalPatchesCount,
+            hasMultipleBundles = homeViewModel.expertModeHasMultipleBundles,
             onPatchToggle = { bundleUid, patchName ->
                 homeViewModel.togglePatchInExpertMode(bundleUid, patchName)
+            },
+            onSelectAll = { bundleUid, patches ->
+                homeViewModel.expertModeSelectAll(bundleUid, patches)
+            },
+            onDeselectAll = { bundleUid, patches ->
+                homeViewModel.expertModeDeselectAll(bundleUid, patches)
+            },
+            onResetToDefault = { bundleUid, allPatches ->
+                homeViewModel.expertModeResetToDefault(bundleUid, allPatches)
             },
             onOptionChange = { bundleUid, patchName, optionKey, value ->
                 homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
@@ -292,21 +318,8 @@ fun HomeDialogs(
                 homeViewModel.cleanupExpertModeData()
             },
             onProceed = {
-                val finalPatches = homeViewModel.expertModePatches
-                val finalOptions = homeViewModel.expertModeOptions
-
-                homeViewModel.showExpertModeDialog = false
-
-                scope.launch(Dispatchers.IO) {
-                    homeViewModel.saveOptions(selectedApp.packageName, finalOptions)
-
-                    withContext(Dispatchers.Main) {
-                        homeViewModel.proceedWithPatching(selectedApp, finalPatches, finalOptions)
-                        homeViewModel.cleanupExpertModeData()
-                    }
-                }
-            },
-            allowIncompatible = allowIncompatible
+                homeViewModel.proceedExpertMode()
+            }
         )
     }
 
@@ -338,6 +351,11 @@ fun HomeDialogs(
             onRename = { bundle ->
                 homeViewModel.bundleToRename = bundle
                 homeViewModel.showRenameBundleDialog = true
+            },
+            onReorder = { orderedUids ->
+                scope.launch {
+                    homeViewModel.patchBundleRepository.reorderBundles(orderedUids)
+                }
             }
         )
     }
@@ -416,12 +434,19 @@ fun HomeDialogs(
 
 /**
  * Dialog 1: Initial "Do you have the APK?" dialog.
+ *
+ * In expert mode the version list is selectable: the user can tap any version to set it as the
+ * download target. [selectedDownloadVersion] reflects the current selection (defaults to
+ * [recommendedVersion]); [onVersionSelect] propagates the change to the ViewModel.
+ * In simple mode there is only one version and no selection UI is shown.
  */
 @Composable
 private fun ApkAvailabilityDialog(
     appName: String,
     recommendedVersion: AppTarget?,
     compatibleVersions: List<AppTarget>,
+    selectedDownloadVersion: AppTarget?,
+    onVersionSelect: (AppTarget) -> Unit,
     usingMountInstall: Boolean,
     isExpertMode: Boolean,
     savedApkInfo: SavedApkInfo?,
@@ -472,9 +497,8 @@ private fun ApkAvailabilityDialog(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Description text
             if (isExpertMode && compatibleVersions.isNotEmpty()) {
-                // Expert mode with versions: show list of versions
+                // Expert mode: selectable version list
                 Text(
                     text = htmlAnnotatedString(stringResource(
                         R.string.home_apk_availability_dialog_expert,
@@ -485,19 +509,28 @@ private fun ApkAvailabilityDialog(
                     textAlign = TextAlign.Center
                 )
 
-                // Unified version list card
-                VersionListCard(
-                    versions = compatibleVersions.map { it.version ?: anyString },
-                    experimentalVersions = compatibleVersions
-                        .filter { it.isExperimental }
-                        .mapNotNull { it.version }
-                        .toSet(),
-                    recommendedIndex = compatibleVersions
-                        .indexOfFirst { it.version == recommendedVersion?.version }
-                        .takeIf { it >= 0 } ?: 0
-                )
+                if (compatibleVersions.size > 1) {
+                    SelectableVersionListCard(
+                        versions = compatibleVersions,
+                        selectedVersion = selectedDownloadVersion,
+                        recommendedVersion = recommendedVersion,
+                        onVersionSelect = onVersionSelect,
+                        anyString = anyString
+                    )
+                } else {
+                    VersionListCard(
+                        versions = compatibleVersions.map { it.version ?: anyString },
+                        experimentalVersions = compatibleVersions
+                            .filter { it.isExperimental }
+                            .mapNotNull { it.version }
+                            .toSet(),
+                        descriptions = compatibleVersions
+                            .mapNotNull { t -> t.version?.let { v -> t.description?.let { d -> v to d } } }
+                            .toMap()
+                    )
+                }
             } else {
-                // Simple mode or single version: show card with unpatched badge
+                // Simple mode: single static version, no selection
                 Text(
                     text = htmlAnnotatedString(stringResource(
                         R.string.home_apk_availability_dialog_simple,
@@ -508,9 +541,8 @@ private fun ApkAvailabilityDialog(
                     textAlign = TextAlign.Center
                 )
 
-                val versionToShow = recommendedVersion?.version ?: anyString
                 VersionListCard(
-                    versions = listOf(versionToShow),
+                    versions = listOf(recommendedVersion?.version ?: anyString),
                     showUnpatchedBadge = true
                 )
             }
@@ -750,6 +782,7 @@ private fun UnsupportedVersionWarningDialog(
     version: String,
     recommendedVersion: String?,
     allCompatibleVersions: List<String>,
+    versionDescriptions: Map<String, String> = emptyMap(),
     experimentalVersions: Set<String> = emptySet(),
     isExperimental: Boolean = false,
     isExpertMode: Boolean,
@@ -860,7 +893,8 @@ private fun UnsupportedVersionWarningDialog(
                                 .indexOfFirst { it !in experimentalVersions }
                                 .takeIf { it >= 0 } ?: 0,
                             isCompatible = true,
-                            experimentalVersions = experimentalVersions
+                            experimentalVersions = experimentalVersions,
+                            descriptions = versionDescriptions
                         )
                     }
                 } else if (recommendedVersion != null) {
@@ -1123,8 +1157,139 @@ fun WrongPackageDialog(
 }
 
 /**
- * Unified version list card component.
+ * Version list card where each row is tappable.
+ * The selected version gets a checkmark; the recommended version is labelled when not selected.
+ * Experimental versions are always labelled regardless of selection state.
  */
+@Composable
+private fun SelectableVersionListCard(
+    versions: List<AppTarget>,
+    selectedVersion: AppTarget?,
+    recommendedVersion: AppTarget?,
+    onVersionSelect: (AppTarget) -> Unit,
+    anyString: String,
+    modifier: Modifier = Modifier
+) {
+    if (versions.isEmpty()) return
+
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(14.dp),
+        color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
+        tonalElevation = 1.dp
+    ) {
+        Column(modifier = Modifier.fillMaxWidth().selectableGroup()) {
+            versions.forEachIndexed { index, target ->
+                val versionString = target.version ?: anyString
+                val isSelected = target.version != null && target.version == selectedVersion?.version
+                val isRecommended = target.version != null && target.version == recommendedVersion?.version
+                val recommendedLabel = stringResource(R.string.home_apk_availability_recommended_label)
+                val experimentalLabel = stringResource(R.string.home_dialog_unsupported_version_experimental_label)
+                val selectedLabel = stringResource(R.string.home_selected_version)
+
+                val badge: @Composable (() -> Unit)? = when {
+                    target.isExperimental -> ({
+                        InfoBadge(
+                            text = experimentalLabel,
+                            style = InfoBadgeStyle.Warning,
+                            isCompact = true
+                        )
+                    })
+                    isRecommended -> ({
+                        InfoBadge(
+                            text = recommendedLabel,
+                            style = InfoBadgeStyle.Default,
+                            isCompact = true
+                        )
+                    })
+                    else -> null
+                }
+
+                val rowContentDesc = buildString {
+                    append(versionString)
+                    when {
+                        target.isExperimental -> append(", $experimentalLabel")
+                        isRecommended -> append(", $recommendedLabel")
+                    }
+                    if (isSelected) append(", $selectedLabel")
+                    target.description?.let { append(", $it") }
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = isSelected,
+                            onClick = { onVersionSelect(target) },
+                            role = Role.RadioButton
+                        )
+                        .semantics { contentDescription = rowContentDesc }
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Checkmark column - fixed width so text aligns across all rows
+                    Box(
+                        modifier = Modifier.size(18.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (isSelected) {
+                            Icon(
+                                imageVector = Icons.Filled.Check,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    }
+
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = versionString,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                                color = when {
+                                    isSelected -> MaterialTheme.colorScheme.primary
+                                    target.isExperimental -> MaterialTheme.colorScheme.tertiary
+                                    else -> LocalDialogTextColor.current
+                                },
+                                modifier = Modifier.weight(1f),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            badge?.invoke()
+                        }
+                        val description = target.description
+                        if (description != null) {
+                            Text(
+                                text = description,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    }
+                }
+
+                if (index < versions.lastIndex) {
+                    HorizontalDivider(
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
+                    )
+                }
+            }
+        }
+    }
+}
+
+
 @Composable
 private fun VersionListCard(
     versions: List<String>,
@@ -1132,6 +1297,7 @@ private fun VersionListCard(
     isCompatible: Boolean = false,
     showUnpatchedBadge: Boolean = false,
     experimentalVersions: Set<String> = emptySet(),
+    descriptions: Map<String, String> = emptyMap(),
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -1163,40 +1329,65 @@ private fun VersionListCard(
         ) {
             versions.forEachIndexed { index, version ->
                 val isExperimentalVersion = version in experimentalVersions
+                val versionDescription = descriptions[version]
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Version number
-                    Text(
-                        text = version,
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontFamily = FontFamily.Monospace,
-                        fontWeight = if (index == recommendedIndex) FontWeight.Bold else FontWeight.Normal,
-                        color = if (isExperimentalVersion)
-                            MaterialTheme.colorScheme.tertiary
-                        else
-                            textColor
-                    )
-
-                    // Badges
-                    when {
-                        isExperimentalVersion -> InfoBadge(
+                // Resolve badge once - drives both the badge composable and version text color
+                val badge: @Composable (() -> Unit)? = when {
+                    isExperimentalVersion -> ({
+                        InfoBadge(
                             text = stringResource(R.string.home_dialog_unsupported_version_experimental_label),
                             style = InfoBadgeStyle.Warning,
                             isCompact = true
                         )
-                        index == recommendedIndex && !showUnpatchedBadge -> InfoBadge(
+                    })
+                    index == recommendedIndex && !showUnpatchedBadge -> ({
+                        InfoBadge(
                             text = stringResource(R.string.home_apk_availability_recommended_label),
                             style = InfoBadgeStyle.Primary,
                             isCompact = true
                         )
-                        showUnpatchedBadge && versions.size == 1 -> InfoBadge(
+                    })
+                    showUnpatchedBadge && versions.size == 1 -> ({
+                        InfoBadge(
                             text = stringResource(R.string.home_apk_availability_unpatched_label),
                             style = InfoBadgeStyle.Warning,
                             isCompact = true
+                        )
+                    })
+                    else -> null
+                }
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(3.dp)
+                ) {
+                    // Version + optional badge inline
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = version,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = if (index == recommendedIndex) FontWeight.Bold else FontWeight.Normal,
+                            color = if (isExperimentalVersion)
+                                MaterialTheme.colorScheme.tertiary
+                            else
+                                textColor,
+                            modifier = Modifier.weight(1f),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        badge?.invoke()
+                    }
+
+                    // Optional per-version description
+                    if (versionDescription != null) {
+                        Text(
+                            text = versionDescription,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalDialogSecondaryTextColor.current
                         )
                     }
                 }

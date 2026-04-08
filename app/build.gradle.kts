@@ -1,20 +1,19 @@
+import com.mikepenz.aboutlibraries.plugin.DuplicateMode
+import com.mikepenz.aboutlibraries.plugin.DuplicateRule
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import kotlin.random.Random
-import org.gradle.api.file.DuplicatesStrategy
-import org.gradle.jvm.tasks.Jar
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.devtools)
     alias(libs.plugins.about.libraries)
+    alias(libs.plugins.about.libraries.android)
     alias(libs.plugins.google.services)
     signing
 }
-
-val outputApkFileName = "${rootProject.name}-$version.apk"
 
 dependencies {
     // AndroidX Core
@@ -93,7 +92,8 @@ dependencies {
     implementation(libs.koin.workmanager)
 
     // Licenses
-    implementation(libs.about.libraries)
+    implementation(libs.about.libraries.core)
+    implementation(libs.about.libraries.m3)
 
     // Ktor
     implementation(libs.ktor.core)
@@ -125,36 +125,25 @@ dependencies {
 
     // Compose Icons
     implementation(libs.compose.icons.fontawesome)
-}
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        // Semantic versioning string parser
-        classpath(libs.semver.parser)
-    }
+    // Semantic versioning parser
+    implementation(libs.semver.parser)
 }
 
 android {
     namespace = "app.morphe.manager"
-    compileSdk = 35
-    buildToolsVersion = "35.0.1"
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "app.morphe.manager"
-
         minSdk = 26
-        targetSdk = 35
 
-        val versionStr = if (version == "unspecified") "1.0.0" else version.toString()
-        versionName = versionStr
+        versionName = version.toString()
 
         // VersionCode derived from current time (1-minute intervals) + offset.
         val nowMillis = System.currentTimeMillis()
         val timestampVersionCode = (nowMillis / (60 * 1000)).toInt()
-        // Offset of the prior v1.1.1 version code to ensure the code is always newer for old installs.
+        // Offset of the prior v1.1.1 version code to ensure the code is always newer for old installations.
         // If a new app is used this offset should be changed to zero.
         // 1 minute rounding and this offset still gives ~4,000 years of valid version codes
         // and still fall into Play store max version code range.
@@ -190,14 +179,6 @@ android {
             }
 
             buildConfigField("long", "BUILD_ID", "0L")
-        }
-    }
-
-    applicationVariants.all {
-        outputs.all {
-            this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
-
-            outputFileName = outputApkFileName
         }
     }
 
@@ -242,14 +223,6 @@ android {
         }
     }
 
-    ksp {
-        arg("room.schemaLocation", "$projectDir/schemas")
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
         compose = true
         aidl = true
@@ -269,36 +242,40 @@ android {
     }
 }
 
+// APK output file name
+base.archivesName.set(provider {
+    "${rootProject.name}-$version"
+})
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 kotlin {
     jvmToolchain(17)
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
+        freeCompilerArgs.addAll(
+            "-Xexplicit-backing-fields",
+            "-Xcontext-parameters",
+        )
+    }
+}
+
+aboutLibraries {
+    collect {
+        configPath = file("aboutlibraries")
+    }
+    library {
+        duplicationMode = DuplicateMode.MERGE
+        duplicationRule = DuplicateRule.EXACT
+    }
 }
 
 tasks {
     whenTaskAdded {
         if (name.startsWith("lintVital")) {
             enabled = false
-        }
-    }
-
-    // Needed by gradle-semantic-release-plugin.
-    // Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435.
-    val publish by registering {
-        group = "publishing"
-        description = "Build the release APK"
-
-        dependsOn("assembleRelease")
-
-        val apk = project.layout.buildDirectory.file("outputs/apk/release/${outputApkFileName}")
-        val ascFile = apk.map { it.asFile.resolveSibling("${it.asFile.name}.asc") }
-
-        inputs.file(apk).withPropertyName("inputApk")
-        outputs.file(ascFile).withPropertyName("outputAsc")
-
-        doLast {
-            signing {
-                useGpgCmd()
-                sign(apk.get().asFile)
-            }
         }
     }
 }

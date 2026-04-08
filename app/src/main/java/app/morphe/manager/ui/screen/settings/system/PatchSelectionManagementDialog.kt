@@ -28,19 +28,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.domain.repository.PatchOptionsRepository
-import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
-import app.morphe.manager.util.AppDataResolver
+import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.*
 import org.koin.compose.koinInject
 
 /**
@@ -48,6 +41,7 @@ import org.koin.compose.koinInject
  */
 @Composable
 fun PatchSelectionManagementDialog(
+    settingsViewModel: SettingsViewModel,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -55,19 +49,12 @@ fun PatchSelectionManagementDialog(
     val resetTarget = remember { mutableStateOf<ResetTarget?>(null) }
     val showPatchDetailsTarget = remember { mutableStateOf<PatchDetailsTarget?>(null) }
 
-    val appDataResolver: AppDataResolver = koinInject()
-    val patchBundleRepository: PatchBundleRepository = koinInject()
-    val selectionRepository: PatchSelectionRepository = koinInject()
-    val optionsRepository: PatchOptionsRepository = koinInject()
+    val selections by settingsViewModel.selectionsSummary.collectAsStateWithLifecycle()
+    val bundleNames by settingsViewModel.bundleNames.collectAsStateWithLifecycle()
 
-    // Get bundle names for display
-    val bundles by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val bundleNames = remember(bundles) { bundles.associate { it.uid to it.name } }
-
-    val selections by selectionRepository.getSelectionsSummaryFlow().collectAsStateWithLifecycle(emptyMap())
-
-    // Calculate total selections from filtered data
-    val totalSelections = remember(selections) { selections.values.sumOf { bundleMap -> bundleMap.values.sum() } }
+    val totalSelections = remember(selections) {
+        selections.values.sumOf { bundleMap -> bundleMap.values.sum() }
+    }
 
     PatchSelectionManagementDialogContent(
         selections = selections,
@@ -76,28 +63,22 @@ fun PatchSelectionManagementDialog(
         onDismiss = onDismiss,
         onShowResetAllConfirmation = { showResetAllConfirmation.value = true },
         onSetResetTarget = { resetTarget.value = it },
-        onShowPatchDetails = { showPatchDetailsTarget.value = it },
-        appDataResolver = appDataResolver
+        onShowPatchDetails = { showPatchDetailsTarget.value = it }
     )
 
     // Reset all confirmation dialog
     if (showResetAllConfirmation.value) {
-        val confirmAction: () -> Unit = {
-            scope.launch {
-                withContext(Dispatchers.IO) {
-                    selectionRepository.reset()
-                    optionsRepository.reset()
-                }
-                showResetAllConfirmation.value = false
-            }
-        }
-        val dismissAction: () -> Unit = { showResetAllConfirmation.value = false }
-
         ConfirmResetAllDialog(
             totalSelections = totalSelections,
             packageCount = selections.size,
-            onConfirm = confirmAction,
-            onDismiss = dismissAction
+            settingsViewModel = settingsViewModel,
+            onConfirm = {
+                scope.launch {
+                    settingsViewModel.resetAllSelections()
+                    showResetAllConfirmation.value = false
+                }
+            },
+            onDismiss = { showResetAllConfirmation.value = false }
         )
     }
 
@@ -108,47 +89,39 @@ fun PatchSelectionManagementDialog(
                 val bundleMap = selections[target.packageName] ?: emptyMap()
                 val patchCount = bundleMap.values.sum()
 
-                val confirmAction: () -> Unit = {
-                    scope.launch {
-                        withContext(Dispatchers.IO) {
-                            selectionRepository.resetSelectionForPackage(target.packageName)
-                            optionsRepository.resetOptionsForPackage(target.packageName)
-                        }
-                        resetTarget.value = null
-                    }
-                }
-                val dismissAction: () -> Unit = { resetTarget.value = null }
-
                 ConfirmResetPackageDialog(
                     packageName = target.packageName,
                     patchCount = patchCount,
                     bundleCount = bundleMap.size,
-                    appDataResolver = appDataResolver,
-                    onConfirm = confirmAction,
-                    onDismiss = dismissAction
+                    settingsViewModel = settingsViewModel,
+                    onConfirm = {
+                        scope.launch {
+                            settingsViewModel.resetSelectionsForPackage(target.packageName)
+                            resetTarget.value = null
+                        }
+                    },
+                    onDismiss = { resetTarget.value = null }
                 )
             }
+
             is ResetTarget.PackageBundle -> {
                 val patchCount = selections[target.packageName]?.get(target.bundleUid) ?: 0
-
-                val confirmAction: () -> Unit = {
-                    scope.launch {
-                        withContext(Dispatchers.IO) {
-                            selectionRepository.resetSelectionForPackageAndBundle(target.packageName, target.bundleUid)
-                            optionsRepository.resetOptionsForPackageAndBundle(target.packageName, target.bundleUid)
-                        }
-                        resetTarget.value = null
-                    }
-                }
-                val dismissAction: () -> Unit = { resetTarget.value = null }
 
                 ConfirmResetPackageBundleDialog(
                     packageName = target.packageName,
                     bundleUid = target.bundleUid,
                     patchCount = patchCount,
-                    appDataResolver = appDataResolver,
-                    onConfirm = confirmAction,
-                    onDismiss = dismissAction
+                    settingsViewModel = settingsViewModel,
+                    onConfirm = {
+                        scope.launch {
+                            settingsViewModel.resetSelectionsForPackageBundle(
+                                target.packageName,
+                                target.bundleUid
+                            )
+                            resetTarget.value = null
+                        }
+                    },
+                    onDismiss = { resetTarget.value = null }
                 )
             }
         }
@@ -160,7 +133,7 @@ fun PatchSelectionManagementDialog(
             packageName = target.packageName,
             bundleUid = target.bundleUid,
             bundleName = bundleNames[target.bundleUid],
-            appDataResolver = appDataResolver,
+            settingsViewModel = settingsViewModel,
             onDismiss = { showPatchDetailsTarget.value = null }
         )
     }
@@ -177,8 +150,7 @@ private fun PatchSelectionManagementDialogContent(
     onDismiss: () -> Unit,
     onShowResetAllConfirmation: () -> Unit,
     onSetResetTarget: (ResetTarget) -> Unit,
-    onShowPatchDetails: (PatchDetailsTarget) -> Unit,
-    appDataResolver: AppDataResolver
+    onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -213,7 +185,6 @@ private fun PatchSelectionManagementDialogContent(
                 selections = selections,
                 totalSelections = totalSelections,
                 bundleNames = bundleNames,
-                appDataResolver = appDataResolver,
                 onSetResetTarget = onSetResetTarget,
                 onShowPatchDetails = onShowPatchDetails
             )
@@ -229,7 +200,6 @@ private fun SelectionList(
     selections: Map<String, Map<Int, Int>>,
     totalSelections: Int,
     bundleNames: Map<Int, String>,
-    appDataResolver: AppDataResolver,
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
@@ -267,20 +237,16 @@ private fun SelectionList(
                 items = selections.entries.toList(),
                 key = { it.key }
             ) { (packageName, bundleMap) ->
-                val resetPackageAction: () -> Unit = {
-                    onSetResetTarget(ResetTarget.Package(packageName))
-                }
-                val resetBundleAction: (Int) -> Unit = { bundleUid ->
-                    onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
-                }
-
                 PackageSelectionItem(
                     packageName = packageName,
                     bundleMap = bundleMap,
                     bundleNames = bundleNames,
-                    appDataResolver = appDataResolver,
-                    onResetPackage = resetPackageAction,
-                    onResetPackageBundle = resetBundleAction,
+                    onResetPackage = {
+                        onSetResetTarget(ResetTarget.Package(packageName))
+                    },
+                    onResetPackageBundle = { bundleUid ->
+                        onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
+                    },
                     onShowPatchDetails = onShowPatchDetails
                 )
             }
@@ -296,20 +262,24 @@ private fun PackageSelectionItem(
     packageName: String,
     bundleMap: Map<Int, Int>,
     bundleNames: Map<Int, String>,
-    appDataResolver: AppDataResolver,
     onResetPackage: () -> Unit,
     onResetPackageBundle: (Int) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
+    // App-name resolution is pure display logic driven by packageName.
+    // We keep a local coroutine here because this item is self-contained and
+    // the name is specific to each list item
     var expanded by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(packageName) }
     var appDataSource by remember { mutableStateOf(AppDataSource.INSTALLED) }
 
+    val settingsViewModel: SettingsViewModel = koinInject()
+
     // Resolve app name and source
     LaunchedEffect(packageName) {
-        val appData = appDataResolver.resolveAppData(packageName)
-        displayName = appData.displayName
-        appDataSource = appData.source
+        val (name, source) = settingsViewModel.resolveAppDisplayName(packageName)
+        displayName = name
+        appDataSource = source
     }
 
     val totalPatches = remember(bundleMap) { bundleMap.values.sum() }
@@ -391,16 +361,15 @@ private fun PackageSelectionItem(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     bundleMap.forEach { (bundleUid, patchCount) ->
-                        val resetAction: () -> Unit = { onResetPackageBundle(bundleUid) }
-                        val bundleName = bundleNames[bundleUid]
-
                         BundleSelectionItem(
                             packageName = packageName,
                             bundleUid = bundleUid,
-                            bundleName = bundleName,
+                            bundleName = bundleNames[bundleUid],
                             patchCount = patchCount,
-                            onReset = resetAction,
-                            onShowDetails = { onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid)) }
+                            onReset = { onResetPackageBundle(bundleUid) },
+                            onShowDetails = {
+                                onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid))
+                            }
                         )
                     }
 
@@ -434,12 +403,9 @@ private fun BundleSelectionItem(
     val importExportViewModel: ImportExportViewModel = koinInject()
 
     // Display bundle name or fallback to "Bundle #N"
-    val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
-    val patchCountText = pluralStringResource(
-        R.plurals.patch_count,
-        patchCount,
-        patchCount
-    )
+    val displayName = bundleName
+        ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
+    val patchCountText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
     val contentDesc = "$displayName: $patchCountText"
 
     // Export launcher
@@ -534,7 +500,9 @@ private fun BundleSelectionItem(
             // Export button
             ActionPillButton(
                 onClick = {
-                    val fileName = importExportViewModel.getPackageBundleDataExportFileName(packageName, bundleUid, bundleName)
+                    val fileName = importExportViewModel.getPackageBundleDataExportFileName(
+                        packageName, bundleUid, bundleName
+                    )
                     exportLauncher.launch(fileName)
                 },
                 icon = Icons.Outlined.Upload,
@@ -557,28 +525,21 @@ private fun BundleSelectionItem(
 
 /**
  * Confirmation dialog for resetting all selections.
+ * Options count is loaded via [SettingsViewModel].
  */
 @Composable
 private fun ConfirmResetAllDialog(
     totalSelections: Int,
     packageCount: Int,
+    settingsViewModel: SettingsViewModel,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val optionsRepository: PatchOptionsRepository = koinInject()
     var totalOptions by remember { mutableIntStateOf(0) }
 
     // Load total options count
     LaunchedEffect(Unit) {
-        withContext(Dispatchers.IO) {
-            // Get all packages with options
-            val packagesWithOptions = optionsRepository.getPackagesWithSavedOptions().first()
-
-            // Count options
-            totalOptions = packagesWithOptions.sumOf { packageName ->
-                optionsRepository.getOptionsCountForPackage(packageName)
-            }
-        }
+        totalOptions = settingsViewModel.loadTotalOptionsCount()
     }
 
     MorpheDialog(
@@ -594,9 +555,7 @@ private fun ConfirmResetAllDialog(
             )
         }
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Text(
                 text = stringResource(R.string.settings_system_patch_selection_reset_all_warning),
                 style = MaterialTheme.typography.bodyMedium,
@@ -650,22 +609,18 @@ private fun ConfirmResetPackageDialog(
     packageName: String,
     patchCount: Int,
     bundleCount: Int,
-    appDataResolver: AppDataResolver,
+    settingsViewModel: SettingsViewModel,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val optionsRepository: PatchOptionsRepository = koinInject()
     var displayName by remember { mutableStateOf(packageName) }
     var optionsCount by remember { mutableIntStateOf(0) }
 
+    // Load options count for this package
     LaunchedEffect(packageName) {
-        val appData = appDataResolver.resolveAppData(packageName)
-        displayName = appData.displayName
-
-        // Load options count for this package
-        withContext(Dispatchers.IO) {
-            optionsCount = optionsRepository.getOptionsCountForPackage(packageName)
-        }
+        val (name, _) = settingsViewModel.resolveAppDisplayName(packageName)
+        displayName = name
+        optionsCount = settingsViewModel.loadOptionsCountForPackage(packageName)
     }
 
     MorpheDialog(
@@ -681,9 +636,7 @@ private fun ConfirmResetPackageDialog(
             )
         }
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Text(
                 text = stringResource(
                     R.string.settings_system_patch_selection_reset_package_warning,
@@ -740,22 +693,17 @@ private fun ConfirmResetPackageBundleDialog(
     packageName: String,
     bundleUid: Int,
     patchCount: Int,
-    appDataResolver: AppDataResolver,
+    settingsViewModel: SettingsViewModel,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val optionsRepository: PatchOptionsRepository = koinInject()
     var displayName by remember { mutableStateOf(packageName) }
     var optionsCount by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(packageName, bundleUid) {
-        val appData = appDataResolver.resolveAppData(packageName)
-        displayName = appData.displayName
-
-        // Load options count for this package+bundle
-        withContext(Dispatchers.IO) {
-            optionsCount = optionsRepository.getOptionsCountForBundle(packageName, bundleUid)
-        }
+        val (name, _) = settingsViewModel.resolveAppDisplayName(packageName)
+        displayName = name
+        optionsCount = settingsViewModel.loadOptionsCountForBundle(packageName, bundleUid)
     }
 
     MorpheDialog(
@@ -771,9 +719,7 @@ private fun ConfirmResetPackageBundleDialog(
             )
         }
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Text(
                 text = stringResource(
                     R.string.settings_system_patch_selection_reset_source_warning,
@@ -812,72 +758,23 @@ private fun ConfirmResetPackageBundleDialog(
 }
 
 /**
- * Reset target sealed class for dialog state.
- */
-private sealed interface ResetTarget {
-    data class Package(val packageName: String) : ResetTarget
-    data class PackageBundle(val packageName: String, val bundleUid: Int) : ResetTarget
-}
-
-/**
- * Target for showing patch details
- */
-private data class PatchDetailsTarget(
-    val packageName: String,
-    val bundleUid: Int
-)
-
-/**
- * Dialog showing detailed patch selections and options.
- *
- * @param packageName Original package name for loading data from database
- * @param bundleUid Bundle identifier
- * @param bundleName Bundle display name
- * @param appDataResolver Resolver for app data
- * @param onDismiss Callback when dialog is dismissed
+ * Dialog showing detailed patch selections and options for one package+bundle.
  */
 @Composable
 private fun PatchDetailsDialog(
     packageName: String,
     bundleUid: Int,
     bundleName: String?,
-    appDataResolver: AppDataResolver,
+    settingsViewModel: SettingsViewModel,
     onDismiss: () -> Unit
 ) {
-    val selectionRepository: PatchSelectionRepository = koinInject()
-    val optionsRepository: PatchOptionsRepository = koinInject()
-
-    var displayName by remember { mutableStateOf(packageName) }
-    var patchList by remember { mutableStateOf<List<String>>(emptyList()) }
-    var optionsMap by remember { mutableStateOf<Map<String, Map<String, Any?>>>(emptyMap()) }
+    var details by remember { mutableStateOf<SettingsViewModel.PatchDetails?>(null) }
     var isLoading by remember { mutableStateOf(true) }
-
-    // Resolve app name using display package name
-    LaunchedEffect(packageName) {
-        val appData = appDataResolver.resolveAppData(packageName)
-        displayName = appData.displayName
-    }
 
     // Load patch selections and options
     LaunchedEffect(packageName, bundleUid) {
         isLoading = true
-        withContext(Dispatchers.IO) {
-            // Load selections
-            patchList = selectionRepository.exportForPackageAndBundle(packageName, bundleUid)
-
-            // Get raw serialized options
-            val rawOptions = optionsRepository.exportOptionsForBundle(
-                packageName = packageName,
-                bundleUid = bundleUid
-            )
-
-            // Convert JSON strings to display values
-            optionsMap = rawOptions.mapValues { (_, patchOptions) ->
-                patchOptions.mapValues { (_, jsonString) ->
-                    parseJsonValue(jsonString)
-                }
-            }
-        }
+        details = settingsViewModel.loadPatchDetails(packageName, bundleUid)
         isLoading = false
     }
 
@@ -901,7 +798,7 @@ private fun PatchDetailsDialog(
             // Header info
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(
-                    text = displayName,
+                    text = details?.displayName ?: packageName,
                     style = MaterialTheme.typography.titleMedium,
                     color = LocalDialogTextColor.current
                 )
@@ -923,6 +820,9 @@ private fun PatchDetailsDialog(
                     CircularProgressIndicator()
                 }
             } else {
+                val patchList = details?.patchList ?: emptyList()
+                val optionsMap = details?.optionsMap ?: emptyMap()
+
                 // Patches section
                 if (patchList.isNotEmpty()) {
                     InfoBox(
@@ -949,9 +849,7 @@ private fun PatchDetailsDialog(
                         titleColor = MaterialTheme.colorScheme.secondary
                     ) {
                         optionsMap.forEach { (patchName, options) ->
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
+                            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                 Text(
                                     text = patchName,
                                     style = MaterialTheme.typography.bodyMedium,
@@ -960,7 +858,7 @@ private fun PatchDetailsDialog(
                                 )
 
                                 options.forEach { (key, value) ->
-                                    val formattedValue = formatOptionValue(value)
+                                    val formattedValue = SettingsViewModel.formatOptionValue(value)
 
                                     Column(
                                         modifier = Modifier
@@ -1004,70 +902,12 @@ private fun PatchDetailsDialog(
     }
 }
 
-/**
- * Parse JSON string value to actual value type.
- */
-private fun parseJsonValue(jsonString: String): Any? {
-    return try {
-        // Use kotlinx.serialization to parse JSON properly
-        val json = Json {
-            ignoreUnknownKeys = true
-        }
-        when (val element = json.parseToJsonElement(jsonString)) {
-            is JsonNull -> null
-            is JsonPrimitive -> {
-                when {
-                    element.isString -> element.content
-                    element.booleanOrNull != null -> element.boolean
-                    element.intOrNull != null -> element.int
-                    element.longOrNull != null -> element.long
-                    element.floatOrNull != null -> element.float
-                    element.doubleOrNull != null -> element.double
-                    else -> element.content
-                }
-            }
-
-            is JsonArray -> {
-                element.map { item ->
-                    when (item) {
-                        is JsonPrimitive -> {
-                            when {
-                                item.isString -> item.content
-                                item.booleanOrNull != null -> item.boolean
-                                item.intOrNull != null -> item.int
-                                item.longOrNull != null -> item.long
-                                item.floatOrNull != null -> item.float
-                                else -> item.content
-                            }
-                        }
-
-                        else -> item.toString()
-                    }
-                }
-            }
-
-            else -> jsonString
-        }
-    } catch (_: Exception) {
-        jsonString // Return raw string if parsing fails
-    }
+private sealed interface ResetTarget {
+    data class Package(val packageName: String) : ResetTarget
+    data class PackageBundle(val packageName: String, val bundleUid: Int) : ResetTarget
 }
-/**
- * Format option value for display.
- */
-private fun formatOptionValue(value: Any?): String {
-    return when (value) {
-        null -> "null"
-        is String -> value
-        is Boolean -> value.toString()
-        is Number -> value.toString()
-        is List<*> -> {
-            if (value.isEmpty()) {
-                "[]"
-            } else {
-                value.joinToString(", ")
-            }
-        }
-        else -> value.toString()
-    }
-}
+
+private data class PatchDetailsTarget(
+    val packageName: String,
+    val bundleUid: Int
+)

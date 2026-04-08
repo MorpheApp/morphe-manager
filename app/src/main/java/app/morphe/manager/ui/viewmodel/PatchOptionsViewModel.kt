@@ -20,12 +20,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-/**
- * Option keys used in patch configurations
- */
+/** Option keys used in patch configurations */
 object PatchOptionKeys {
     const val DARK_THEME_COLOR = "darkThemeBackgroundColor"
     const val LIGHT_THEME_COLOR = "lightThemeBackgroundColor"
+    const val DEFAULT_COLOR_BLACK = "@android:color/black"
+    const val DEFAULT_COLOR_LIGHT = "@android:color/white"
     const val CUSTOM_NAME = "customName"
     const val CUSTOM_ICON = "customIcon"
     const val CUSTOM_HEADER = "custom"
@@ -34,7 +34,7 @@ object PatchOptionKeys {
 }
 
 /**
- * ViewModel for managing patch options dynamically loaded from bundle repository.
+ * Managing patch options dynamically loaded from bundle repository.
  */
 class PatchOptionsViewModel : ViewModel(), KoinComponent {
     private val bundleRepository: PatchBundleRepository by inject()
@@ -49,6 +49,36 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
             PATCH_HIDE_SHORTS
         )
     }
+
+    /** Package name for which the Theme Color dialog is open, or null when closed. */
+    var showThemeDialogFor: String? by mutableStateOf(null)
+        private set
+
+    /** Package name for which the Custom Branding dialog is open, or null when closed. */
+    var showBrandingDialogFor: String? by mutableStateOf(null)
+        private set
+
+    /** Package name for which the Custom Header dialog is open, or null when closed. */
+    var showHeaderDialogFor: String? by mutableStateOf(null)
+        private set
+
+    fun openThemeDialog(packageName: String) { showThemeDialogFor = packageName }
+    fun openBrandingDialog(packageName: String) { showBrandingDialogFor = packageName }
+    fun openHeaderDialog(packageName: String) { showHeaderDialogFor = packageName }
+    fun dismissThemeDialog() { showThemeDialogFor = null }
+    fun dismissBrandingDialog() { showBrandingDialogFor = null }
+    fun dismissHeaderDialog() { showHeaderDialogFor = null }
+
+    /** True when the bundle is still fetching - kept in sync by PatchOptionsSection via [onBundleUpdatingChanged]. */
+    var isBundleUpdating: Boolean by mutableStateOf(false)
+        private set
+
+    fun onBundleUpdatingChanged(updating: Boolean) { isBundleUpdating = updating }
+
+    /** True when the bundle has loaded but contains no relevant patches. */
+    val noPatchesAvailable: Boolean
+        get() = !isBundleUpdating && loadError == null &&
+                _youtubePatches.value.isEmpty() && _youtubeMusicPatches.value.isEmpty()
 
     // State for loading
     var isLoading by mutableStateOf(true)
@@ -142,64 +172,113 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
         else -> emptyList()
     }
 
-    /**
-     * Get Theme patch options for a specific package
-     */
+    /** Get Theme patch options for a specific package. */
     fun getThemeOptions(packageName: String): PatchOptionInfo? =
         patchesForPackage(packageName).find { it.patchName == PATCH_THEME }
 
-    /**
-     * Get Custom branding patch options for a specific package
-     */
+    /** Get Custom branding patch options for a specific package. */
     fun getBrandingOptions(packageName: String): PatchOptionInfo? =
         patchesForPackage(packageName).find { it.patchName == PATCH_CUSTOM_BRANDING }
 
-    /**
-     * Get Change header patch options (YouTube only)
-     */
-    fun getHeaderOptions(): PatchOptionInfo? =
-        _youtubePatches.value.find { it.patchName == PATCH_CHANGE_HEADER }
+    /** Get Change header patch options. */
+    fun getHeaderOptions(packageName: String): PatchOptionInfo? =
+        patchesForPackage(packageName).find { it.patchName == PATCH_CHANGE_HEADER }
 
     /**
-     * Get Hide Shorts components patch options (YouTube only)
+     * Get Hide Shorts components patch options (YouTube only).
      */
     fun getHideShortsOptions(): PatchOptionInfo? =
         _youtubePatches.value.find { it.patchName == PATCH_HIDE_SHORTS }
 
-    /**
-     * Get presets map from patch option info
-     */
+    /** Get presets map from patch option info. */
     fun getOptionPresetsMap(option: OptionInfo): Map<String, Any?> {
         return option.presets ?: emptyMap()
     }
 
-    /**
-     * Check if a patch has specific option
-     */
+    /** Check if a patch has specific option. */
     fun hasOption(patchInfo: PatchOptionInfo?, optionKey: String): Boolean {
         return patchInfo?.options?.any { it.key == optionKey } == true
     }
 
-    /**
-     * Get specific option from patch
-     */
+    /** Get specific option from patch. */
     fun getOption(patchInfo: PatchOptionInfo?, optionKey: String): OptionInfo? {
         return patchInfo?.options?.find { it.key == optionKey }
     }
+
+    /**
+     * Returns the default dark theme color from the preset list for [packageName],
+     * falling back to the Android system black resource string.
+     */
+    fun defaultDarkColor(packageName: String): String {
+        val option = getOption(getThemeOptions(packageName), PatchOptionKeys.DARK_THEME_COLOR)
+        return option?.let { getOptionPresetsMap(it).values.firstOrNull()?.toString() }
+            ?: PatchOptionKeys.DEFAULT_COLOR_BLACK
+    }
+
+    /**
+     * Returns the default light theme color from the preset list for [packageName],
+     * falling back to the Android system white resource string.
+     */
+    fun defaultLightColor(packageName: String): String {
+        val option = getOption(getThemeOptions(packageName), PatchOptionKeys.LIGHT_THEME_COLOR)
+        return option?.let { getOptionPresetsMap(it).values.firstOrNull()?.toString() }
+            ?: PatchOptionKeys.DEFAULT_COLOR_LIGHT
+    }
+
+    /**
+     * Resets both theme colors to their bundle defaults for [packageName].
+     * Light color reset is performed only for YouTube.
+     */
+    fun resetThemeColors(
+        prefs: PatchOptionsPreferencesManager,
+        packageName: String,
+        isYouTube: Boolean
+    ) = viewModelScope.launch {
+        prefs.darkThemeColor(packageName).update(defaultDarkColor(packageName))
+        if (isYouTube) prefs.lightThemeColor(packageName).update(defaultLightColor(packageName))
+    }
+
+    /** Persists custom branding values atomically and calls [onDone] when finished. */
+    fun saveCustomBranding(
+        prefs: PatchOptionsPreferencesManager,
+        packageName: String,
+        appName: String,
+        iconPath: String,
+        onDone: () -> Unit
+    ) = viewModelScope.launch {
+        prefs.edit {
+            prefs.customAppName(packageName).value  = appName
+            prefs.customIconPath(packageName).value = iconPath
+        }
+        onDone()
+    }
+
+    /** Persists the custom header path and calls [onDone] when finished. */
+    fun saveCustomHeader(
+        prefs: PatchOptionsPreferencesManager,
+        packageName: String,
+        headerPath: String,
+        onDone: () -> Unit
+    ) = viewModelScope.launch {
+        prefs.customHeaderPath(packageName).update(headerPath)
+        onDone()
+    }
+
+    fun toggleHideShortsAppShortcut(prefs: PatchOptionsPreferencesManager, current: Boolean) =
+        viewModelScope.launch { prefs.hideShortsAppShortcut.update(!current) }
+
+    fun toggleHideShortsWidget(prefs: PatchOptionsPreferencesManager, current: Boolean) =
+        viewModelScope.launch { prefs.hideShortsWidget.update(!current) }
 }
 
-/**
- * Data class representing a patch with its options
- */
+/** Data class representing a patch with its options */
 data class PatchOptionInfo(
     val patchName: String,
     val description: String?,
     val options: List<OptionInfo>
 )
 
-/**
- * Data class representing a single option within a patch
- */
+/** Data class representing a single option within a patch. */
 data class OptionInfo(
     val key: String,
     val title: String,

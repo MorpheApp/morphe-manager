@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -42,6 +44,8 @@ fun ProcessRuntimeDialog(
     val maxLimit: Int = calculateAdaptiveMemoryLimit(context).coerceIn(
         PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION, PROCESS_RUNTIME_MEMORY_MAX_LIMIT
     )
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
     var enabled by remember { mutableStateOf(currentEnabled) }
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
 
@@ -63,57 +67,29 @@ fun ProcessRuntimeDialog(
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             // Enable/Disable toggle
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Memory,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Text(
-                                text = stringResource(R.string.settings_system_process_runtime_enable),
-                                style = MaterialTheme.typography.titleSmall,
-                                fontWeight = FontWeight.SemiBold,
-                                color = LocalDialogTextColor.current
-                            )
-                        }
-                        Text(
-                            text = stringResource(R.string.settings_system_process_runtime_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    }
-
-                    Spacer(Modifier.width(4.dp))
-
+            RichSettingsItem(
+                onClick = {
+                    enabled = !enabled
+                    onEnabledChange(enabled)
+                },
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Memory)
+                },
+                title = stringResource(R.string.settings_system_process_runtime_enable),
+                subtitle = stringResource(R.string.settings_system_process_runtime_description),
+                trailingContent = {
                     Switch(
                         checked = enabled,
                         onCheckedChange = {
                             enabled = it
                             onEnabledChange(it)
+                        },
+                        modifier = Modifier.semantics {
+                            stateDescription = if (enabled) enabledState else disabledState
                         }
                     )
                 }
-            }
+            )
 
             // Memory limit section
             Column(
@@ -175,8 +151,8 @@ fun ProcessRuntimeDialog(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
                         onValueChangeFinished = { onLimitChange(sliderValue.toInt()) },
-                        valueRange = PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM.toFloat()..maxLimit.toFloat(),
-                        steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM)
+                        valueRange = PROCESS_RUNTIME_MEMORY_MINIMUM.toFloat()..maxLimit.toFloat(),
+                        steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_MINIMUM)
                                 / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
                         enabled = enabled,
                         modifier = Modifier.fillMaxWidth()
@@ -187,7 +163,7 @@ fun ProcessRuntimeDialog(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "$PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM MB",
+                            text = "$PROCESS_RUNTIME_MEMORY_MINIMUM MB",
                             style = MaterialTheme.typography.labelSmall,
                             color = LocalDialogSecondaryTextColor.current
                         )

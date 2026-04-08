@@ -214,11 +214,11 @@ fun Changelog(
 ) {
     Markdown(
         content = markdown.trimIndent(),
+        retainState = true,
         colors = markdownColor(
             text = MaterialTheme.colorScheme.onSurface,
             codeBackground = MaterialTheme.colorScheme.surfaceContainerHighest,
-            codeText = MaterialTheme.colorScheme.onSurface,
-            linkText = MaterialTheme.colorScheme.primary,
+            inlineCodeBackground = MaterialTheme.colorScheme.surfaceContainerHighest,
             dividerColor = MaterialTheme.colorScheme.outlineVariant
         ),
         typography = markdownTypography(

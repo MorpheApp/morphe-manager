@@ -3,7 +3,6 @@
     <!-- Home Screen -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_error">Nepavyko atnaujinti</string>
-    <string name="home_please_wait">Palaukite</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kokią programėlę norėtumėte pataisyti?</string>
     <!-- Humorous hype message with light nostalgia -->

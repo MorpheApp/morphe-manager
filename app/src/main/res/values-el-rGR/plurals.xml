@@ -25,15 +25,15 @@
         <item quantity="other">%s APK αρχεία</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">Αφαιρέθηκε %s παλιά τροποποίηση από τις αποθηκευμένες επιλογές</item>
+        <item quantity="one">Αφαιρέθηκε %s παλιά τροποποίηση από την αποθηκευμένη επιλογή</item>
         <item quantity="other">Αφαιρέθηκαν %s παλιές τροποποιήσεις από τις αποθηκευμένες επιλογές</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%s πηγή εγκατεστημένη</item>
-        <item quantity="other">%s πηγές εγκατεστημένες</item>
+        <item quantity="one">%s εγκατεστημένη πηγή</item>
+        <item quantity="other">%s εγκατεστημένες πηγές</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s ανακύκλωση επιλεγμένη</item>
-        <item quantity="other">%s ανακύκλωση επιλεγμένες</item>
+        <item quantity="one">%s επιλεγμένη τροποποίηση</item>
+        <item quantity="other">%s επιλεγμένες τροποποιήσεις </item>
     </plurals>
 </resources>
