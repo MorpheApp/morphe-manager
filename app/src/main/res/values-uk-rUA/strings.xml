@@ -121,7 +121,7 @@
     <string name="expert_mode_reset_to_default">Увімкнути рекомендовані патчі</string>
     <string name="expert_mode_no_results">Патчі не знайдено</string>
     <string name="expert_mode_universal_patches">Універсальні патчі</string>
-    <string name="expert_mode_new_patches">Нові</string>
+    <string name="expert_mode_new_patches">Новий</string>
     <string name="expert_mode_multiple_sources_warning_title">Вибрано декілька джерел патчів</string>
     <string name="expert_mode_multiple_sources_warning_message">"Ви вибрали патчі з кількох джерел патчів. Це може спричинити проблеми сумісності або неочікувану поведінку.
 

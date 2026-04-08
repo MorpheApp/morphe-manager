@@ -118,6 +118,7 @@
     <string name="expert_mode_proceed">Fortsätt till appkorrigering</string>
     <string name="expert_mode_disable_all">Inaktivera alla</string>
     <string name="expert_mode_enable_all">Aktivera alla</string>
+    <string name="expert_mode_reset_to_default">Aktivera rekommenderade korrigeringar</string>
     <string name="expert_mode_no_results">Inga korrigeringar hittades</string>
     <string name="expert_mode_universal_patches">Universella korrigeringar</string>
     <string name="expert_mode_new_patches">Ny</string>
@@ -276,7 +277,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="patcher_message_8">Reder ut digital spaghetti … 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Åtgärdar fel i den okorrigerade appen … 🪲</string>
-    <string name="patcher_message_10">Bra korrigeringar är värda väntan … ⏳</string>
+    <string name="patcher_message_10">Bra korrigeringar är värda att vänta på … ⏳</string>
     <string name="patcher_message_11">Polerar pixlarna tills de glänser … 💎</string>
     <string name="patcher_message_12">Vänligen sitt kvar tills kaptenen har släckt skylten Appkorrigering pågår … 💺✈️</string>
     <string name="patcher_message_13">Tillreder din korrigerade app, varm och färsk … 🍳</string>

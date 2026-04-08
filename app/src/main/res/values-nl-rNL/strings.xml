@@ -4,13 +4,13 @@
     <string name="home_other_apps">Andere apps</string>
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
-    <string name="home_app_hide_title">Verberg deze app?</string>
+    <string name="home_app_hide_title">Deze app verbergen?</string>
     <string name="home_app_hide_message">Deze app wordt verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop \'%1$s\' onderaan de lijst.</string>
     <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
     <string name="home_app_show_hidden">Toon verborgen apps</string>
     <string name="home_app_no_hidden">Geen verborgen apps</string>
     <string name="home_app_hidden_apps_title">Verborgen apps</string>
-    <string name="home_app_hidden_apps_hint">Tik om te onthullen</string>
+    <string name="home_app_hidden_apps_hint">Tik om te tonen</string>
     <string name="android_11_bug_dialog_title">Android 11-bug</string>
     <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
     <string name="deep_link_add_source_title">Bron toevoegen</string>
@@ -45,7 +45,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Laten we ervoor zorgen dat uw apps zich goed gedragen</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Vandaag\'s voorspelling: 100% kans op patching</string>
+    <string name="home_greeting_7">De voorspelling voor vandaag: 100% kans op reparaties</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Ben je klaar om van een teleurstellende ervaring iets geweldigs te maken?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
