@@ -118,7 +118,7 @@
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
-    <string name="expert_mode_reset_to_default">Activer les correctifs recommandés</string>
+    <string name="expert_mode_reset_to_default">Activer les patchs recommandés</string>
     <string name="expert_mode_no_results">Aucun patch trouvé</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
     <string name="expert_mode_new_patches">Nouveau</string>

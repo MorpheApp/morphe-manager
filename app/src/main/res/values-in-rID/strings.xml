@@ -447,12 +447,12 @@ Dimensi gambar harus sebagai berikut:
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Opsional, jalur berisi folder 'drawable' dengan file ikon monokrom:
+Sebagai pilihan, jalur yang berisi folder 'drawable' dengan berkas ikon monokrom:
 morphe_adaptive_monochrome_custom.xml
 
-Opsional, jalur berisi ikon pemberitahuan dalam salah satu format berikut:
+Sebagai pilihan, jalur yang berisi ikon pemberitahuan dalam salah satu format berikut:
 - Gambar vektor XML di 'drawable':
-  morphe_notification_icon_custom.xml
+    morphe_notification_icon_custom.xml
 - Gambar raster PNG di folder 'drawable-dpi':
   drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
   drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
