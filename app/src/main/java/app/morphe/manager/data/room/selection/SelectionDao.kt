@@ -103,6 +103,9 @@ abstract class SelectionDao {
     @Query("SELECT DISTINCT package_name FROM patch_selections WHERE patch_bundle = :bundleUid")
     abstract fun getPackagesWithSelectionForBundle(bundleUid: Int): Flow<List<String>>
 
+    @Query("SELECT DISTINCT patch_bundle FROM patch_selections")
+    abstract suspend fun getAllBundleUids(): List<Int>
+
     @Transaction
     @Query("DELETE FROM patch_selections WHERE patch_bundle = :uid")
     abstract suspend fun resetForPatchBundle(uid: Int)

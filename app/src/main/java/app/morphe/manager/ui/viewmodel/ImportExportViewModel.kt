@@ -62,6 +62,17 @@ data class PatchBundleDataExportFile(
     val options: Map<String, Map<String, Map<String, String>>>?
 )
 
+/**
+ * Export file format for all selections across all bundles.
+ * Wraps a list of [PatchBundleDataExportFile] entries - one per bundle.
+ */
+@Serializable
+data class AllSelectionsExportFile(
+    val version: Int = 1,
+    val exportDate: String,
+    val bundles: List<PatchBundleDataExportFile>
+)
+
 @OptIn(ExperimentalSerializationApi::class)
 class ImportExportViewModel(
     private val app: Application,
@@ -206,34 +217,98 @@ class ImportExportViewModel(
     }
 
     /**
-     * Import patch selections and options for a specific package into a target bundle
+     * Export all patch selections and options across all bundles into a single file.
      */
-    fun importPackageBundleData(
-        targetBundleUid: Int,
-        source: Uri,
-    ) = viewModelScope.launch {
-        uiSafe(app, R.string.settings_system_import_source_data_fail, "Failed to import source data") {
-            val exportFile = withContext(Dispatchers.IO) {
-                contentResolver.openInputStream(source)!!.use {
-                    json.decodeFromStream<PatchBundleDataExportFile>(it)
+    fun exportAllSelections(target: Uri) = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_source_data_fail, "Failed to export selections") {
+            val exportDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
+
+            val bundles = withContext(Dispatchers.IO) {
+                val packagesByBundle = patchSelectionRepository.getAllBundleUids()
+
+                packagesByBundle.map { bundleUid ->
+                    val selections = patchSelectionRepository.exportAllForBundle(bundleUid)
+                    val options = buildMap {
+                        selections.keys.forEach { packageName ->
+                            val rawOptions = patchOptionsRepository.exportOptionsForBundle(packageName, bundleUid)
+                            if (rawOptions.isNotEmpty()) put(packageName, rawOptions)
+                        }
+                    }
+                    PatchBundleDataExportFile(
+                        bundleUid = bundleUid,
+                        exportDate = exportDate,
+                        selections = selections,
+                        options = options.ifEmpty { null }
+                    )
+                }.filter { it.selections.isNotEmpty() }
+            }
+
+            val exportFile = AllSelectionsExportFile(
+                exportDate = exportDate,
+                bundles = bundles
+            )
+
+            withContext(Dispatchers.IO) {
+                contentResolver.openOutputStream(target, "wt")!!.use { output ->
+                    json.encodeToStream(exportFile, output)
+                }
+            }
+
+            app.toast(app.getString(R.string.settings_system_export_source_data_success))
+        }
+    }
+
+    /**
+     * Filename for the all-selections export file.
+     */
+    fun getAllSelectionsExportFileName(): String {
+        val time = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now())
+        return "morphe_all_selections_$time.json"
+    }
+
+    /**
+     * Import patch selections and options from a file.
+     * Supports both [PatchBundleDataExportFile] (single bundle) and
+     * [AllSelectionsExportFile] (all bundles) formats, detected automatically.
+     * Merges into existing selections without clearing them first.
+     */
+    fun importAllSelections(source: Uri) = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_import_source_data_fail, "Failed to import selections") {
+            val bytes = withContext(Dispatchers.IO) {
+                contentResolver.openInputStream(source)!!.use { it.readBytes() }
+            }
+
+            // Detect format by checking for "bundles" key
+            val isAllSelections = withContext(Dispatchers.IO) {
+                val element = json.decodeFromString<kotlinx.serialization.json.JsonObject>(bytes.decodeToString())
+                element.containsKey("bundles")
+            }
+
+            val bundleFiles: List<PatchBundleDataExportFile> = withContext(Dispatchers.IO) {
+                if (isAllSelections) {
+                    json.decodeFromString<AllSelectionsExportFile>(bytes.decodeToString()).bundles
+                } else {
+                    listOf(json.decodeFromString<PatchBundleDataExportFile>(bytes.decodeToString()))
                 }
             }
 
             withContext(Dispatchers.IO) {
-                exportFile.selections.forEach { (packageName, patchList) ->
-                    patchSelectionRepository.importForPackageAndBundle(
-                        packageName = packageName,
-                        bundleUid = targetBundleUid,
-                        patches = patchList
-                    )
-                }
-
-                exportFile.options?.forEach { (packageName, packageOptions) ->
-                    patchOptionsRepository.importOptionsForBundle(
-                        packageName = packageName,
-                        bundleUid = targetBundleUid,
-                        options = packageOptions
-                    )
+                bundleFiles.forEach { exportFile ->
+                    val bundleUid = exportFile.bundleUid
+                    exportFile.selections.forEach { (packageName, patchList) ->
+                        patchSelectionRepository.importForPackageAndBundle(
+                            packageName = packageName,
+                            bundleUid = bundleUid,
+                            patches = patchList
+                        )
+                    }
+                    exportFile.options?.forEach { (packageName, packageOptions) ->
+                        patchOptionsRepository.importOptionsForBundle(
+                            packageName = packageName,
+                            bundleUid = bundleUid,
+                            options = packageOptions
+                        )
+                    }
                 }
             }
 
@@ -333,7 +408,7 @@ class ImportExportViewModel(
     }
 
     private companion object {
-        // Reusable Json instances to avoid redundant creation
+        // Reusable JSON instances to avoid redundant creation
         private val json = Json {
             ignoreUnknownKeys = true
             prettyPrint = true // Make exports human-readable

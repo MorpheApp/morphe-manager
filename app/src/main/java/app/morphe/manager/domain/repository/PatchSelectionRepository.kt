@@ -77,6 +77,14 @@ class PatchSelectionRepository(db: AppDatabase) {
     suspend fun exportForPackageAndBundle(packageName: String, bundleUid: Int): List<String> =
         dao.exportSelectionForPackageAndBundle(packageName, bundleUid)
 
+    /** Export all selections for a bundle. Returns Map<PackageName, List<PatchName>>. */
+    suspend fun exportAllForBundle(bundleUid: Int): Map<String, List<String>> =
+        dao.exportSelection(bundleUid)
+
+    /** Get all bundle uids that have at least one saved selection. */
+    suspend fun getAllBundleUids(): List<Int> =
+        dao.getAllBundleUids()
+
     /** Export all selections for a bundle. */
     suspend fun export(bundleUid: Int): SerializedSelection = dao.exportSelection(bundleUid)
 
