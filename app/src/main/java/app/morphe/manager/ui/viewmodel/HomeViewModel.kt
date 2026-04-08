@@ -2012,7 +2012,7 @@ class HomeViewModel(
 
         // Use the version selected by the user in Dialog 1; fall back to recommended
         val versionForSearch = pendingSelectedDownloadVersion ?: pendingRecommendedVersion
-        val escapedVersion = versionForSearch?.let { encode(it.version, "UTF-8") } ?: "any"
+        val escapedVersion = versionForSearch?.version ?: "any"
         val searchQuery = "$pendingPackageName~$escapedVersion~${Build.SUPPORTED_ABIS.first()}".encodeURLPath()
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
