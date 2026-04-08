@@ -1,3 +1,32 @@
+# [1.14.0](https://github.com/MorpheApp/morphe-manager/compare/v1.13.1...v1.14.0) (2026-04-08)
+
+
+### Bug Fixes
+
+* Add `stateDescription` to search button and Role.RadioButton to version list ([6daf288](https://github.com/MorpheApp/morphe-manager/commit/6daf2880453ee02545971b57176073877526dcd4))
+* Add custom ModalBottomSheet ([ef7449c](https://github.com/MorpheApp/morphe-manager/commit/ef7449c28f4f9cead47dd8505f3b91aff0d9e693))
+* Change the "default patches" icon in Expert dialog ([e929a14](https://github.com/MorpheApp/morphe-manager/commit/e929a1407c87241e96c5d81b73c24eb4deded451))
+* Home screen buttons always showed shimmer when fresh install ([bbfaab8](https://github.com/MorpheApp/morphe-manager/commit/bbfaab8b5fb71bba403377436177f4df3dc26b74))
+* Improve root mounting ([#381](https://github.com/MorpheApp/morphe-manager/issues/381)) ([257e433](https://github.com/MorpheApp/morphe-manager/commit/257e433a6a5a7aabebfa573081af17f6df7d9b7f))
+* Increase delay before sending push notification ([6c393bc](https://github.com/MorpheApp/morphe-manager/commit/6c393bcc02bfd33f3bc34f8de535d2a6c3781d98))
+* Move bundle update time to version line ([636e8cc](https://github.com/MorpheApp/morphe-manager/commit/636e8cceaf6cc05f337d0b36250c0609d610ee17))
+* Parse comma-separated string options as editable lists ([b9a01d5](https://github.com/MorpheApp/morphe-manager/commit/b9a01d5f56220466b80dd5740a2a7a02930f19aa))
+* Replace `UpdateBadge` overlay with inline chips in InstalledAppCard ([ce60eab](https://github.com/MorpheApp/morphe-manager/commit/ce60eab544b56c1ffa075a7e8c8d148d97b93daa))
+* Show compatibility version description if available ([5524c86](https://github.com/MorpheApp/morphe-manager/commit/5524c863c16059e87332cb803197bc8699fc4bd0))
+* Skip notification prompt in export if already requested ([59fca7e](https://github.com/MorpheApp/morphe-manager/commit/59fca7e19dac9ef79e8ad5f6d8f65901d62ae3ce))
+* Use bundle metadata display name in patch dialog ([12d57fa](https://github.com/MorpheApp/morphe-manager/commit/12d57fa9e213f98bed0faf13805b7b09eee4ba58))
+* Use card background as color preview, add transparency checkerboard ([#393](https://github.com/MorpheApp/morphe-manager/issues/393)) ([bb76510](https://github.com/MorpheApp/morphe-manager/commit/bb76510e9ad056e216ca5256659db72d4ea46cad))
+* Use safe temp dir for APK, preserve input for root mount, and clean up temp files ([9353d65](https://github.com/MorpheApp/morphe-manager/commit/9353d6573294a6677abd1915c8f5d4df3076cd9d))
+
+
+### Features
+
+* Add home app search functionality ([#385](https://github.com/MorpheApp/morphe-manager/issues/385)) ([74b10be](https://github.com/MorpheApp/morphe-manager/commit/74b10be8c157b6d3cde637680496cb6dc95d4fa5))
+* Add open-source library licenses dialog ([#383](https://github.com/MorpheApp/morphe-manager/issues/383)) ([2341678](https://github.com/MorpheApp/morphe-manager/commit/2341678e28e1cfc24018ea2f75c435eef27c7f79))
+* Add search and package filter chips to bundle patches dialog ([#392](https://github.com/MorpheApp/morphe-manager/issues/392)) ([14b08f9](https://github.com/MorpheApp/morphe-manager/commit/14b08f9638a48fcd947df10d1ce8d51bc6acfc0c))
+* Add selectable download version in APK availability expert dialog ([#391](https://github.com/MorpheApp/morphe-manager/issues/391)) ([9dc26c0](https://github.com/MorpheApp/morphe-manager/commit/9dc26c0346df68adee530a345a922a33fe3e6f74))
+* Highlight new patches after bundle update in expert mode ([#394](https://github.com/MorpheApp/morphe-manager/issues/394)) ([90a315a](https://github.com/MorpheApp/morphe-manager/commit/90a315a914c4aed3e3713816a5cb8323782b063e))
+
 # [1.14.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0-dev.6...v1.14.0-dev.7) (2026-04-07)
 
 
