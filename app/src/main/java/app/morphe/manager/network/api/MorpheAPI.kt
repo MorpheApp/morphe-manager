@@ -418,7 +418,7 @@ class MorpheAPI(
     /** Fetches and parses the manager's CHANGELOG.md from the appropriate branch. */
     suspend fun fetchManagerChangelog(): List<ChangelogEntry> {
         val branch = if (isDevBuild) "dev" else "main"
-        return fetchChangelogFromRepo(managerConfig, branch, "app/CHANGELOG.md")
+        return fetchChangelogFromRepo(managerConfig, branch, "CHANGELOG.md")
     }
 
     /** Fetches and parses CHANGELOG.md from the first-party patches repository. */
