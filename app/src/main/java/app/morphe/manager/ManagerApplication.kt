@@ -24,7 +24,6 @@ import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import me.zhanghai.android.appiconloader.coil.AppIconFetcher
 import me.zhanghai.android.appiconloader.coil.AppIconKeyer
 import org.koin.android.ext.android.inject
@@ -73,7 +72,7 @@ class ManagerApplication : Application() {
         )
 
         // LibSuperuser: always use mount master mode
-        Shell.enableVerboseLogging = BuildConfig.DEBUG
+        Shell.enableVerboseLogging = false
         Shell.setDefaultBuilder(
             Shell.Builder.create()
                 .setFlags(Shell.FLAG_MOUNT_MASTER)
@@ -152,11 +151,9 @@ class ManagerApplication : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
 
-        val storedLang = runCatching {
-            base?.let {
-                runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "system" }
-            }
-        }.getOrNull() ?: "system"
+        val storedLang = base?.let {
+            PreferencesManager.readStoredLanguage(it)
+        } ?: "system"
 
         applyAppLanguage(storedLang)
 

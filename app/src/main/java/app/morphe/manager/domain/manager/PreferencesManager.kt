@@ -233,6 +233,18 @@ class PreferencesManager(
         fun isDevVersion(): Boolean {
             return BuildConfig.VERSION_NAME.contains("-dev", ignoreCase = true)
         }
+
+        /**
+         * Read the stored app language directly from SharedPreferences without
+         * instantiating [PreferencesManager] (which runs heavy init{} logic).
+         * Used in [app.morphe.manager.ManagerApplication.attachBaseContext] before
+         * Koin is available.
+         */
+        fun readStoredLanguage(context: Context): String =
+            context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+                .getString("app_language", "system")
+                ?.ifBlank { "system" }
+                ?: "system"
     }
 }
 
