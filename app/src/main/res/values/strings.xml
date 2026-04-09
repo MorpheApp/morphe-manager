@@ -91,6 +91,8 @@
     <string name="sources_update_unavailable">No update available</string>
     <string name="sources_download_fail">Failed to download sources: %s</string>
     <string name="sources_download_endpoint_not_found">Could not update \'%1$s\': the patch JSON file was not found at the configured URL</string>
+    <string name="sources_patch_expert_badge">Expert</string>
+    <string name="sources_patch_expert_badge_tooltip">Enable Expert mode in Settings to include this patch manually</string>
 
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Need help finding an original unpatched APK?</string>
