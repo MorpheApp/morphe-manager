@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -554,65 +555,64 @@ fun BundlePatchesDialog(
                     }
                 }
 
-                // Active filter badges
-                item(key = "filter_badges") {
-                    AnimatedVisibility(
-                        visible = selectedPackages.isNotEmpty(),
-                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
-                    ) {
-                        FlowRow(
-                            modifier = Modifier.padding(bottom = 4.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                // Active filter badges + empty state
+                item(key = "filter_badges_and_empty_state") {
+                    Column {
+                        AnimatedVisibility(
+                            visible = selectedPackages.isNotEmpty(),
+                            enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                            exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
                         ) {
-                            selectedPackages.forEach { pkg ->
-                                val label = appLabels[pkg] ?: pkg
-                                InputChip(
-                                    selected = true,
-                                    onClick = { selectedPackages = selectedPackages - pkg },
-                                    label = { Text(label) },
-                                    trailingIcon = {
-                                        Icon(
-                                            imageVector = Icons.Outlined.Close,
-                                            contentDescription = stringResource(R.string.remove),
-                                            modifier = Modifier.size(16.dp)
-                                        )
-                                    }
-                                )
+                            FlowRow(
+                                modifier = Modifier.padding(bottom = 4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                selectedPackages.forEach { pkg ->
+                                    val label = appLabels[pkg] ?: pkg
+                                    InputChip(
+                                        selected = true,
+                                        onClick = { selectedPackages = selectedPackages - pkg },
+                                        label = { Text(label) },
+                                        trailingIcon = {
+                                            Icon(
+                                                imageVector = Icons.Outlined.Close,
+                                                contentDescription = stringResource(R.string.remove),
+                                                modifier = Modifier.size(16.dp)
+                                            )
+                                        }
+                                    )
+                                }
                             }
                         }
-                    }
-                }
 
-                // Empty state
-                item(key = "empty_state") {
-                    AnimatedVisibility(
-                        visible = filteredPatches.isEmpty(),
-                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(tween(MorpheDefaults.ANIMATION_DURATION), initialScale = 0.92f),
-                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(tween(MorpheDefaults.ANIMATION_DURATION), targetScale = 0.92f)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillParentMaxHeight(0.5f),
-                            contentAlignment = Alignment.Center
+                        AnimatedVisibility(
+                            visible = filteredPatches.isEmpty(),
+                            enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(tween(MorpheDefaults.ANIMATION_DURATION), initialScale = 0.92f),
+                            exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(tween(MorpheDefaults.ANIMATION_DURATION), targetScale = 0.92f)
                         ) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillParentMaxHeight(0.5f),
+                                contentAlignment = Alignment.Center
                             ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.SearchOff,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(48.dp),
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                Text(
-                                    text = stringResource(R.string.expert_mode_no_results),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    textAlign = TextAlign.Center
-                                )
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.SearchOff,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(48.dp),
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.expert_mode_no_results),
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
                             }
                         }
                     }
@@ -625,6 +625,7 @@ fun BundlePatchesDialog(
                         patch.name + (patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty())
                     }
                 ) { patch ->
+                    val context = LocalContext.current
                     var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
                         mutableStateOf(false)
                     }
@@ -638,6 +639,9 @@ fun BundlePatchesDialog(
                         onExpandVersions = { expandVersions = !expandVersions },
                         expandOptions = expandOptions,
                         onExpandOptions = { expandOptions = !expandOptions },
+                        onExpertBadgeClick = if (!patch.include) {
+                            { context.toast(context.getString(R.string.sources_patch_expert_badge_tooltip)) }
+                        } else null,
                         modifier = Modifier.animateItem(
                             fadeInSpec = tween(220),
                             fadeOutSpec = tween(180),
@@ -721,6 +725,7 @@ private fun PatchItemCard(
     onExpandVersions: () -> Unit,
     expandOptions: Boolean,
     onExpandOptions: () -> Unit,
+    onExpertBadgeClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val textColor = LocalDialogTextColor.current
@@ -870,6 +875,17 @@ private fun PatchItemCard(
                         }
                     }
                 }
+            }
+
+            // Expert badge - shown only for patches that are disabled by default
+            if (!patch.include && onExpertBadgeClick != null) {
+                InfoBadge(
+                    text = stringResource(R.string.sources_patch_expert_badge),
+                    icon = Icons.Outlined.Lock,
+                    style = InfoBadgeStyle.Warning,
+                    isCompact = true,
+                    modifier = Modifier.clickable(onClick = onExpertBadgeClick)
+                )
             }
 
             // Options
