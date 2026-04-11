@@ -1,3 +1,18 @@
+# [1.15.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0...v1.15.0-dev.1) (2026-04-11)
+
+
+### Bug Fixes
+
+* Cancel patcher worker immediately on user cancellation ([4f0b312](https://github.com/MorpheApp/morphe-manager/commit/4f0b3124052a0975a94a38f0a519ab8e340ec318))
+* Refresh patch options only once on bundle load ([bf04846](https://github.com/MorpheApp/morphe-manager/commit/bf0484648ea76dfedbd778716fd75c65f1538f4f))
+* Show full patching log in error dialog when no specific error is captured ([f18d826](https://github.com/MorpheApp/morphe-manager/commit/f18d8267cc0b356139ce4a9299548d45097624d5))
+
+
+### Features
+
+* Add Expert badge to patch bundle viewer ([169ff75](https://github.com/MorpheApp/morphe-manager/commit/169ff751ba839b50aeebb03c07801688a8dd2cbe))
+* Add import/export selection buttons in patch selection dialog ([c5b4ef6](https://github.com/MorpheApp/morphe-manager/commit/c5b4ef658e05a34198233ffe897e05499454ca18))
+
 # [1.14.0](https://github.com/MorpheApp/morphe-manager/compare/v1.13.1...v1.14.0) (2026-04-08)
 
 
