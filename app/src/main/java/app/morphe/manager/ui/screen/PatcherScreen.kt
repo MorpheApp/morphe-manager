@@ -322,7 +322,7 @@ fun PatcherScreen(
     // Error dialog
     if (state.showErrorDialog) {
         PatcherErrorDialog(
-            errorMessage = state.errorMessage,
+            errorMessage = state.effectiveErrorMessage,
             errorInfo = state.errorInfo,
             onDismiss = { state.showErrorDialog = false }
         )
