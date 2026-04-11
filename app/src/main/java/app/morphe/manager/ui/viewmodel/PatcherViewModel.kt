@@ -978,6 +978,15 @@ class PatcherViewModel(
         }
     }
 
+    /**
+     * Immediately cancels the patcher worker.
+     * Called when the user confirms cancellation so the worker stops before
+     * the ViewModel is cleared, preventing background CPU/RAM usage that causes UI jank.
+     */
+    fun cancelPatching() {
+        patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
+    }
+
     override fun onCleared() {
         super.onCleared()
         patcherWorkerId?.uuid?.let(workManager::cancelWorkById)

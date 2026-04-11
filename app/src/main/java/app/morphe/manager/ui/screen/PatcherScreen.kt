@@ -301,6 +301,7 @@ fun PatcherScreen(
             onDismiss = { state.showCancelDialog = false },
             onConfirm = {
                 state.showCancelDialog = false
+                patcherViewModel.cancelPatching()
                 onBackClick()
             }
         )
