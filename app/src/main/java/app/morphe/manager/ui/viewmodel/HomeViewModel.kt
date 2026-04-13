@@ -166,6 +166,9 @@ class HomeViewModel(
     var expertModeSelectedApp by mutableStateOf<SelectedApp?>(null)
     var expertModeBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
     var expertModePatches by mutableStateOf<PatchSelection>(emptyMap())
+    /** Snapshot of the selection at the moment the ExpertMode dialog was opened. Used by "Restore saved". */
+    var expertModeInitialPatches by mutableStateOf<PatchSelection>(emptyMap())
+        private set
     var expertModeOptions by mutableStateOf<Options>(emptyMap())
     // Patches that are new in the current bundle version relative to the last saved selection
     var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
@@ -1605,7 +1608,7 @@ class HomeViewModel(
 
             expertModeSelectedApp = selectedApp
             expertModeBundles = allBundles
-            expertModePatches = patches.toMutableMap()
+            patches.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
             expertModeOptions = validatedOptions.toMutableMap()
             expertModeNewPatches = newPatchesMap
             showExpertModeDialog = true
@@ -1664,7 +1667,7 @@ class HomeViewModel(
 
                     expertModeSelectedApp = selectedApp
                     expertModeBundles = allBundles
-                    expertModePatches = savedSelections.toMutableMap()
+                    savedSelections.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
                     expertModeOptions = savedOptions.toMutableMap()
                     showExpertModeDialog = true
                     return
@@ -1796,16 +1799,10 @@ class HomeViewModel(
      * No-op if there is no saved selection for the given bundle.
      */
     fun expertModeRestoreSaved(bundleUid: Int) {
-        viewModelScope.launch {
-            val packageName = expertModeSelectedApp?.packageName ?: return@launch
-            val saved = withContext(Dispatchers.IO) {
-                patchSelectionRepository.getAllSelectionsForPackage(packageName)
-            }
-            val savedForBundle = saved[bundleUid] ?: return@launch
-            val current = expertModePatches.toMutableMap()
-            if (savedForBundle.isEmpty()) current.remove(bundleUid) else current[bundleUid] = savedForBundle
-            expertModePatches = current
-        }
+        val savedForBundle = expertModeInitialPatches[bundleUid] ?: return
+        val current = expertModePatches.toMutableMap()
+        if (savedForBundle.isEmpty()) current.remove(bundleUid) else current[bundleUid] = savedForBundle
+        expertModePatches = current
     }
 
     /**
@@ -1835,6 +1832,7 @@ class HomeViewModel(
         expertModeSelectedApp = null
         expertModeBundles = emptyList()
         expertModePatches = emptyMap()
+        expertModeInitialPatches = emptyMap()
         expertModeOptions = emptyMap()
         expertModeNewPatches = emptyMap()
         onRepatchProceed = null
@@ -2002,7 +2000,7 @@ class HomeViewModel(
             }
 
             expertModeBundles = allBundles
-            expertModePatches = patches.toMutableMap()
+            patches.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
             expertModeOptions = validatedOptions.toMutableMap()
             expertModeNewPatches = newPatchesMap
             expertModeSelectedApp = null // repatch has no SelectedApp
