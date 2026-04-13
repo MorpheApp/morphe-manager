@@ -309,6 +309,10 @@ fun HomeDialogs(
             onResetToDefault = { bundleUid, allPatches ->
                 homeViewModel.expertModeResetToDefault(bundleUid, allPatches)
             },
+            onRestoreSaved = { bundleUid ->
+                homeViewModel.expertModeRestoreSaved(bundleUid)
+            },
+            savedPatches = homeViewModel.expertModePatches,
             onOptionChange = { bundleUid, patchName, optionKey, value ->
                 homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
             },
