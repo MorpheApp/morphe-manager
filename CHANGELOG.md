@@ -1,3 +1,16 @@
+# [1.15.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.1...v1.15.0-dev.2) (2026-04-13)
+
+
+### Bug Fixes
+
+* Adjust wording ([482c1d1](https://github.com/MorpheApp/morphe-manager/commit/482c1d18945cfdc63bb54d7d112b0ec7ce4f58ba))
+* Interrupt split APK merger immediately on cancellation ([0f7feca](https://github.com/MorpheApp/morphe-manager/commit/0f7fecabfd24ea588755c2ddfc2a4661c0783b83))
+
+
+### Features
+
+* Add saved selection button in expert mode dialog ([ee336d8](https://github.com/MorpheApp/morphe-manager/commit/ee336d865e71e4a597924a302326ef2d5c638805))
+
 # [1.15.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0...v1.15.0-dev.1) (2026-04-11)
 
 
