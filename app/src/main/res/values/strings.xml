@@ -125,7 +125,9 @@
     <string name="home_selected_version">Selected version</string>
     <string name="home_select_apk_title">Select APK</string>
     <string name="home_select_any_apk_description">Tap the button below to select an APK file of any app for patching</string>
-    <string name="home_invalid_apk">Invalid APK file</string>
+    <string name="home_invalid_apk_unreadable">Could not read the file. Check that \'External Storage\' is not battery restricted</string>
+    <string name="home_invalid_apk_not_an_apk">The selected file is not a valid APK</string>
+    <string name="home_invalid_apk_io_error">Failed to open the file. Please try again</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>

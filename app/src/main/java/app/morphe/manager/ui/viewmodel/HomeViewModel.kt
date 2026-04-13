@@ -1217,14 +1217,15 @@ class HomeViewModel(
         }
 
         viewModelScope.launch {
-            val selectedApp = withContext(Dispatchers.IO) {
+            val result = withContext(Dispatchers.IO) {
                 loadLocalApk(app, uri)
             }
 
-            if (selectedApp != null) {
-                processSelectedApp(selectedApp)
-            } else {
-                app.toast(app.getString(R.string.home_invalid_apk))
+            when (result) {
+                is ApkLoadResult.Success -> processSelectedApp(result.app)
+                is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
+                is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
+                is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
             }
         }
     }
@@ -2211,22 +2212,25 @@ class HomeViewModel(
     private suspend fun loadLocalApk(
         context: Context,
         uri: Uri
-    ): SelectedApp.Local? = withContext(Dispatchers.IO) {
+    ): ApkLoadResult = withContext(Dispatchers.IO) {
         try {
             // Copy file to uiTempDir with original extension detection
             val fileName = context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
                 val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                cursor.moveToFirst()
-                cursor.getString(nameIndex)
+                if (cursor.moveToFirst() && nameIndex != -1) cursor.getString(nameIndex) else null
             } ?: "temp_${System.currentTimeMillis()}"
 
             val extension = fileName.substringAfterLast('.', "apk").lowercase()
             val tempFile = filesystem.uiTempDir.resolve("temp_apk_${System.currentTimeMillis()}.$extension")
 
-            context.contentResolver.openInputStream(uri)?.use { input ->
-                tempFile.outputStream().use { output ->
-                    input.copyTo(output)
-                }
+            // openInputStream can return null when the provider is unavailable
+            // e.g. Samsung External Storage restricted by Battery Optimization
+            val bytesCopied = context.contentResolver.openInputStream(uri)?.use { input ->
+                tempFile.outputStream().use { output -> input.copyTo(output) }
+            }
+            if (bytesCopied == null || bytesCopied == 0L) {
+                tempFile.delete()
+                return@withContext ApkLoadResult.Unreadable
             }
 
             // Check if it's a split APK archive
@@ -2252,18 +2256,32 @@ class HomeViewModel(
 
             if (packageInfo == null) {
                 tempFile.delete()
-                return@withContext null
+                return@withContext ApkLoadResult.NotAnApk
             }
 
-            SelectedApp.Local(
-                packageName = packageInfo.packageName,
-                version = packageInfo.versionName ?: "unknown",
-                file = tempFile,
-                temporary = true
+            ApkLoadResult.Success(
+                SelectedApp.Local(
+                    packageName = packageInfo.packageName,
+                    version = packageInfo.versionName ?: "unknown",
+                    file = tempFile,
+                    temporary = true
+                )
             )
         } catch (e: Exception) {
             Log.e(tag, "Failed to load APK", e)
-            null
+            ApkLoadResult.IoError
         }
     }
+}
+
+/** Result of attempting to load a local APK file. */
+private sealed interface ApkLoadResult {
+    /** File was read and parsed successfully. */
+    data class Success(val app: SelectedApp.Local) : ApkLoadResult
+    /** File could not be read - provider returned null stream or zero bytes. */
+    data object Unreadable : ApkLoadResult
+    /** File was read but is not a valid APK/split archive. */
+    data object NotAnApk : ApkLoadResult
+    /** An unexpected IO or system exception occurred while copying or parsing. */
+    data object IoError : ApkLoadResult
 }
