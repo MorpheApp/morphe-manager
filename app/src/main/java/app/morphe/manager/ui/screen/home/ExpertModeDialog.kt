@@ -65,6 +65,8 @@ fun ExpertModeDialog(
     onSelectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
     onDeselectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
     onResetToDefault: (bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    onRestoreSaved: (bundleUid: Int) -> Unit = {},
+    savedPatches: PatchSelection = emptyMap(),
     onOptionChange: (bundleUid: Int, patchName: String, optionKey: String, value: Any?) -> Unit,
     onResetOptions: (bundleUid: Int, patchName: String) -> Unit,
     onDismiss: () -> Unit,
@@ -228,7 +230,9 @@ fun ExpertModeDialog(
                     totalCount = totalCount,
                     onSelectAll = { onSelectAll(bundle.uid, displayPatches) },
                     onDeselectAll = { onDeselectAll(bundle.uid, displayPatches) },
-                    onResetToDefault = { onResetToDefault(bundle.uid, allPatches) }
+                    onResetToDefault = { onResetToDefault(bundle.uid, allPatches) },
+                    onRestoreSaved = { onRestoreSaved(bundle.uid) },
+                    hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true
                 )
 
                 if (filteredPatches == null) {
@@ -333,6 +337,8 @@ fun ExpertModeDialog(
                             onSelectAll = { onSelectAll(currentBundle.uid, currentFiltered) },
                             onDeselectAll = { onDeselectAll(currentBundle.uid, currentFiltered) },
                             onResetToDefault = { onResetToDefault(currentBundle.uid, currentAllPatches) },
+                            onRestoreSaved = { onRestoreSaved(currentBundle.uid) },
+                            hasSavedSelection = savedPatches[currentBundle.uid]?.isNotEmpty() == true,
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
                     } else {
@@ -523,18 +529,32 @@ private fun BundlePatchControls(
     onSelectAll: () -> Unit,
     onDeselectAll: () -> Unit,
     onResetToDefault: () -> Unit,
+    onRestoreSaved: () -> Unit,
+    hasSavedSelection: Boolean,
     modifier: Modifier = Modifier
 ) {
-    // Action buttons
+    val context = LocalContext.current
+
+    // Returns a lambda that shows a toast with [label] and then executes [action].
+    fun withToast(label: String, action: () -> Unit): () -> Unit = {
+        context.toast(label)
+        action()
+    }
+
+    val selectAllLabel = stringResource(R.string.expert_mode_enable_all)
+    val defaultLabel = stringResource(R.string.expert_mode_reset_to_default)
+    val restoreLabel = stringResource(R.string.expert_mode_restore_saved)
+    val deselectAllLabel = stringResource(R.string.expert_mode_disable_all)
+
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
     ) {
         ActionPillButton(
-            onClick = onSelectAll,
+            onClick = withToast(selectAllLabel, onSelectAll),
             icon = Icons.Outlined.DoneAll,
-            contentDescription = stringResource(R.string.expert_mode_enable_all),
-            tooltip = stringResource(R.string.expert_mode_enable_all),
+            contentDescription = selectAllLabel,
+            tooltip = selectAllLabel,
             enabled = enabledCount < totalCount,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
@@ -544,20 +564,35 @@ private fun BundlePatchControls(
             )
         )
         ActionPillButton(
-            onClick = onResetToDefault,
+            onClick = withToast(defaultLabel, onResetToDefault),
             icon = Icons.Outlined.Recommend,
-            contentDescription = stringResource(R.string.default_),
-            tooltip = stringResource(R.string.expert_mode_reset_to_default),
+            contentDescription = defaultLabel,
+            tooltip = defaultLabel,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.6f),
-                contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
             )
         )
         ActionPillButton(
-            onClick = onDeselectAll,
+            onClick = withToast(restoreLabel, onRestoreSaved),
+            icon = Icons.Outlined.History,
+            contentDescription = restoreLabel,
+            tooltip = restoreLabel,
+            enabled = hasSavedSelection,
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            )
+        )
+        ActionPillButton(
+            onClick = withToast(deselectAllLabel, onDeselectAll),
             icon = Icons.Outlined.ClearAll,
-            contentDescription = stringResource(R.string.expert_mode_disable_all),
-            tooltip = stringResource(R.string.expert_mode_disable_all),
+            contentDescription = deselectAllLabel,
+            tooltip = deselectAllLabel,
             enabled = enabledCount > 0,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f),

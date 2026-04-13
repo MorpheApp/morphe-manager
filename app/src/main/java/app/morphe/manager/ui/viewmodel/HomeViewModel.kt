@@ -64,6 +64,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.net.URLEncoder.encode
 import java.security.MessageDigest
+import kotlin.collections.emptyList
 import kotlin.time.Clock
 
 /** Bundle update status for snackbar display. */
@@ -168,6 +169,8 @@ class HomeViewModel(
     var expertModeOptions by mutableStateOf<Options>(emptyMap())
     // Patches that are new in the current bundle version relative to the last saved selection
     var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
+    // Bundle UIDs that have a non-empty saved selection in the DB for the current app
+    var expertModeSavedSelectionBundleUids by mutableStateOf<Set<Int>>(emptySet())
 
     /**
      * Set when ExpertModeDialog is opened from InstalledAppInfoDialog (repatch flow).
@@ -1786,6 +1789,23 @@ class HomeViewModel(
         val current = expertModePatches.toMutableMap()
         if (defaults.isEmpty()) current.remove(bundleUid) else current[bundleUid] = defaults
         expertModePatches = current
+    }
+
+    /**
+     * Restores the DB-persisted patch selection for a bundle in expert mode.
+     * No-op if there is no saved selection for the given bundle.
+     */
+    fun expertModeRestoreSaved(bundleUid: Int) {
+        viewModelScope.launch {
+            val packageName = expertModeSelectedApp?.packageName ?: return@launch
+            val saved = withContext(Dispatchers.IO) {
+                patchSelectionRepository.getAllSelectionsForPackage(packageName)
+            }
+            val savedForBundle = saved[bundleUid] ?: return@launch
+            val current = expertModePatches.toMutableMap()
+            if (savedForBundle.isEmpty()) current.remove(bundleUid) else current[bundleUid] = savedForBundle
+            expertModePatches = current
+        }
     }
 
     /**
