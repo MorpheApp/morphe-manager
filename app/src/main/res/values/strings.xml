@@ -672,7 +672,7 @@ Details: %2$s"</string>
     <string name="settings_system_about">About</string>
     <string name="settings_system_share_website">Share website</string>
     <string name="settings_system_share_website_description">Share the official Morphe website</string>
-    <string name="settings_system_manager_description">"An experimental open-source project for modern, streamlined patching of popular Android apps, driven by community feedback and contributions"</string>
+    <string name="settings_system_manager_description">"An open-source project for modern, streamlined patching of popular Android apps, driven by community feedback and contributions"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
