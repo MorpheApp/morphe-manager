@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-13T14:32:35.151Z",
-  "description": "# [1.15.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.1...v1.15.0-dev.2) (2026-04-13)\n\n\n### Bug Fixes\n\n* Adjust wording ([482c1d1](https://github.com/MorpheApp/morphe-manager/commit/482c1d18945cfdc63bb54d7d112b0ec7ce4f58ba))\n* Interrupt split APK merger immediately on cancellation ([0f7feca](https://github.com/MorpheApp/morphe-manager/commit/0f7fecabfd24ea588755c2ddfc2a4661c0783b83))\n\n\n### Features\n\n* Add saved selection button in expert mode dialog ([ee336d8](https://github.com/MorpheApp/morphe-manager/commit/ee336d865e71e4a597924a302326ef2d5c638805))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.2/morphe-manager-1.15.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.2/morphe-manager-1.15.0-dev.2.apk.asc",
-  "version": "1.15.0-dev.2"
+  "created_at": "2026-04-14T06:31:38.474Z",
+  "description": "# [1.15.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.2...v1.15.0-dev.3) (2026-04-14)\n\n\n### Bug Fixes\n\n* Improve APK load error messages with distinct failure reasons ([3174f28](https://github.com/MorpheApp/morphe-manager/commit/3174f28480e1857ae689dee26806ed513ad980f9))\n* Use `GetContent` instead of `OpenDocument` for APK/bundle pickers ([cb3551d](https://github.com/MorpheApp/morphe-manager/commit/cb3551d13ac490b2e74eb7ec111369e278e32efe))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.3/morphe-manager-1.15.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.3/morphe-manager-1.15.0-dev.3.apk.asc",
+  "version": "1.15.0-dev.3"
 }
