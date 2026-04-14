@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Nema dostupnih ažuriranja</string>
     <string name="sources_download_fail">Neuspešno preuzimanje izvora: %s</string>
     <string name="sources_download_endpoint_not_found">Nije moguće ažurirati \'%1$s\': ispravka JSON datoteka nije pronađena na konfigurisanom URL-u</string>
+    <string name="sources_patch_expert_badge">Експерт</string>
+    <string name="sources_patch_expert_badge_tooltip">Омогућите Експерт режим у Подешавањима да бисте ручно укључили овај патч</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Potrebna je pomoć u traženju originalnog neispravljenog APK-a</string>
     <string name="home_apk_availability_dialog_simple">Da biste patchovali &lt;b&gt;%s&lt;/b&gt;, potrebna je nepatirana APK verzija:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Izabrana verzija</string>
     <string name="home_select_apk_title">Izaberi APK</string>
     <string name="home_select_any_apk_description">Kliknite dugme ispod da odaberete APK datoteku bilo koje aplikacije za patchiranje</string>
-    <string name="home_invalid_apk">Nevažeća APK datoteka</string>
+    <string name="home_invalid_apk_unreadable">Nije moguće pročitati datoteku. Proverite da \'Eksternu memoriju\' ne ograničava baterija</string>
+    <string name="home_invalid_apk_not_an_apk">Odabrana datoteka nije validan APK</string>
+    <string name="home_invalid_apk_io_error">Nije uspelo otvaranje datoteke. Molimo pokušajte ponovo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Režim eksperta</string>
     <string name="expert_mode_search">Pretraži patchove</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_reset_to_default">Омогући препоручене пакете</string>
+    <string name="expert_mode_restore_saved">Ponovi poslednji izbor</string>
     <string name="expert_mode_no_results">Nema pronađenih zakrpa</string>
     <string name="expert_mode_universal_patches">Univerzalne zakrpe </string>
     <string name="expert_mode_new_patches">Novo</string>
@@ -154,7 +159,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_outdated_patches_dialog_warning">Ažuriranje sa zastarelima patch-ovima može dovesti do pokvarenog aplikacije</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ažuriraj &amp; patchiraj</string>
     <string name="home_low_disk_space_dialog_title">Nedostatak prostora na disku</string>
-    <string name="home_low_disk_space_dialog_message">Dostupno samo %1$.2f GB slobodne memorije. Zakrpavanje zahteva najmanje 1 GB slobodne memorije da bi pravilno funkcionisalo</string>
+    <string name="home_low_disk_space_dialog_message">Samo %1$.2f GB besplatne memorije je dostupno. Popravljanje zahteva najmanje %2$.2f GB besplatnog prostora da bi ispravno radilo</string>
     <string name="home_low_disk_space_dialog_warning">Nastavak može dovesti do greške „datoteka nije pronađena“ ili oštećenog APK-a za izlaz</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
@@ -593,7 +598,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_about">O programu</string>
     <string name="settings_system_share_website">Podeli mrežni-sajt</string>
     <string name="settings_system_share_website_description">Dijeli službeni veb-sajt Morphea</string>
-    <string name="settings_system_manager_description">"Eksperimentalni open-source projekat za moderno, pojednostavljeno ispravljanje popularnih Android aplikacija, vođen povratnim informacijama i doprinosima zajednice"</string>
+    <string name="settings_system_manager_description">"Otvoreni projekat za moderno, pojednostavljeno ispravljanje popularnih Android aplikacija, pokretan povratnim odzivom i doprinosima zajednice"</string>
     <string name="credits">Заслуге</string>
     <string name="credits_current_development">Тренутни развој</string>
     <string name="credits_prior_development">Претходни развој</string>

@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Ingen uppdatering är tillgänglig</string>
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
     <string name="sources_download_endpoint_not_found">Det gick inte att uppdatera \"%1$s\": JSON-filen för korrigeringarna hittades inte på den konfigurerade webbadressen</string>
+    <string name="sources_patch_expert_badge">Expert</string>
+    <string name="sources_patch_expert_badge_tooltip">Aktivera Expertläge i inställningarna för att inkludera den här korrigeringen manuellt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Behöver du hjälp att hitta en ursprunglig okorrigerad APK-fil?</string>
     <string name="home_apk_availability_dialog_simple">Om du vill korrigera &lt;b&gt;%s&lt;/b&gt; behöver du en okorrigerad APK-fil med följande version:</string>
@@ -111,7 +113,6 @@
     <string name="home_selected_version">Vald version</string>
     <string name="home_select_apk_title">Välj en APK-fil</string>
     <string name="home_select_any_apk_description">Tryck på knappen nedan för att välja en APK-fil för valfri app som du vill korrigera</string>
-    <string name="home_invalid_apk">Ogiltig APK-fil</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertläge</string>
     <string name="expert_mode_search">Sök efter korrigeringar</string>
@@ -152,7 +153,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="home_outdated_patches_dialog_warning">Om du korrigerar med inaktuella korrigeringar kan det leda till en trasig app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Uppdatera och korrigera</string>
     <string name="home_low_disk_space_dialog_title">Lågt diskutrymme</string>
-    <string name="home_low_disk_space_dialog_message">Endast %1$.2f GB ledigt lagringsutrymme är tillgängligt. Appkorrigering kräver minst 1 GB ledigt utrymme för att fungera korrekt</string>
+    <string name="home_low_disk_space_dialog_message">Endast %1$.2f GB ledigt utrymme är tillgängligt. Appkorrigeringen kräver minst %2$.2f GB ledigt utrymme för att fungera korrekt</string>
     <string name="home_low_disk_space_dialog_warning">Om du fortsätter kan det leda till att du får ett felmeddelande om att filen inte hittades eller en skadad APK-fil</string>
     <!-- Patch Options -->
     <string name="custom_color">Anpassad färg</string>
@@ -607,7 +608,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
     <string name="settings_system_share_website_description">Dela Morphes officiella webbplats</string>
-    <string name="settings_system_manager_description">"Ett experimentellt projekt med öppen källkod för modern, smidig korrigering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
     <string name="credits">Medverkande</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>

@@ -107,7 +107,6 @@
     <string name="home_selected_version">نسخه منتخب</string>
     <string name="home_select_apk_title">انتخاب APK</string>
     <string name="home_select_any_apk_description">دکمه زیر را لمس کنید تا فایل APK هر برنامه ای را برای وصله انتخاب کنید</string>
-    <string name="home_invalid_apk">فایل APK نامعتبر</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">حالت متخصص</string>
     <string name="expert_mode_search">جستجوی پچ ها</string>
@@ -149,7 +148,6 @@
     <string name="home_outdated_patches_dialog_warning">استفاده از پچ‌های قدیمی ممکن است باعث خراب شدن برنامه شود</string>
     <string name="home_outdated_patches_dialog_update_and_patch">به‌روزرسانی &amp; پچ</string>
     <string name="home_low_disk_space_dialog_title">فضای دیسک کم است</string>
-    <string name="home_low_disk_space_dialog_message">فقط %1$.2f گیگابایت فضای خالی موجود است. اعمال پچ نیاز به حداقل ۱ گیگابایت فضای خالی برای عملکرد صحیح دارد</string>
     <string name="home_low_disk_space_dialog_warning">ادامه ممکن است باعث ایجاد خطای «فایل پیدا نشد» یا تولید APK خراب شود</string>
     <!-- Patch Options -->
     <string name="custom_color">رنگ سفارشی</string>

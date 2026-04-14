@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Geen bijwerken beschikbaar</string>
     <string name="sources_download_fail">Kan bronnen niet downloaden: %s</string>
     <string name="sources_download_endpoint_not_found">Kon \'%1$s\' niet updaten: het patch JSON-bestand werd niet gevonden op de geconfigureerde URL</string>
+    <string name="sources_patch_expert_badge">Expert</string>
+    <string name="sources_patch_expert_badge_tooltip">Schakel Expertmodus in Instellingen in om deze patch handmatig toe te voegen</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Heb je hulp nodig bij het vinden van een originele, ongepatchte APK?</string>
     <string name="home_apk_availability_dialog_simple">Om &lt;b&gt;%s&lt;/b&gt; te patchen, heb je de ongepatchte APK nodig:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Geselecteerde versie</string>
     <string name="home_select_apk_title">Selecteer APK</string>
     <string name="home_select_any_apk_description">Tik op de knop hieronder om een APK-bestand van een app te selecteren voor het patchen.</string>
-    <string name="home_invalid_apk">Ongeldig APK-bestand</string>
+    <string name="home_invalid_apk_unreadable">Kon het bestand niet lezen. Controleer of \'Opslag\' niet beperkt is qua batterijgebruik</string>
+    <string name="home_invalid_apk_not_an_apk">Het geselecteerde bestand is geen geldig APK-bestand</string>
+    <string name="home_invalid_apk_io_error">Het bestand kon niet worden geopend. Probeer het opnieuw</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert-modus</string>
     <string name="expert_mode_search">Zoek patches</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
     <string name="expert_mode_enable_all">Alles inschakelen</string>
     <string name="expert_mode_reset_to_default">Aanbevolen patches inschakelen</string>
+    <string name="expert_mode_restore_saved">Selectie opslaan herstellen</string>
     <string name="expert_mode_no_results">Geen patches gevonden</string>
     <string name="expert_mode_universal_patches">Universele patches</string>
     <string name="expert_mode_new_patches">Nieuw</string>
@@ -154,7 +159,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="home_outdated_patches_dialog_warning">Het installeren van verouderde patches kan ertoe leiden dat de app niet meer werkt</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Weinig schijfruimte</string>
-    <string name="home_low_disk_space_dialog_message">Slechts %1$.2f GB vrije opslagruimte beschikbaar. Patching vereist minimaal 1 GB vrije ruimte om correct te werken</string>
+    <string name="home_low_disk_space_dialog_message">Slechts %1$.2f GB vrije opslagruimte beschikbaar. Patching vereist minimaal %2$.2f GB vrije ruimte om correct te werken</string>
     <string name="home_low_disk_space_dialog_warning">Doorgaan kan resulteren in een foutmelding \'bestand niet gevonden\' of een beschadigd output APK-bestand</string>
     <!-- Patch Options -->
     <string name="custom_color">Aangepaste kleur</string>
@@ -609,7 +614,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_about">Over</string>
     <string name="settings_system_share_website">Website delen</string>
     <string name="settings_system_share_website_description">Deel de officiële Morphe-website</string>
-    <string name="settings_system_manager_description">"Een experimenteel open-source project voor modern, gestroomlijnd patchen van populaire Android-apps, aangedreven door community feedback en bijdragen"</string>
+    <string name="settings_system_manager_description">"Een open-source project voor het modern, gestroomlijnd patchen van populaire Android-apps, aangedreven door communityfeedback en -bijdragen"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Huidige ontwikkeling</string>
     <string name="credits_prior_development">Eerdere ontwikkeling</string>

@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Tidak ada pembaruan tersedia</string>
     <string name="sources_download_fail">Gagal mengunduh sumber: %s</string>
     <string name="sources_download_endpoint_not_found">Tidak dapat memperbarui \'%1$s\': berkas tambalan JSON tidak ditemukan di URL yang dikonfigurasi</string>
+    <string name="sources_patch_expert_badge">Ahli</string>
+    <string name="sources_patch_expert_badge_tooltip">Aktifkan mode Ahli di Pengaturan untuk menyertakan tambalan ini secara manual</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Butuh bantuan mencari APK asli yang belum ditambal?</string>
     <string name="home_apk_availability_dialog_simple">Untuk menambal &lt;b&gt;%s&lt;/b&gt;, Anda membutuhkan versi APK yang belum ditambal:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Versi terpilih</string>
     <string name="home_select_apk_title">Pilih APK</string>
     <string name="home_select_any_apk_description">Ketuk tombol di bawah untuk memilih berkas APK apapun untuk ditambal</string>
-    <string name="home_invalid_apk">Berkas APK tidak sah</string>
+    <string name="home_invalid_apk_unreadable">Tidak dapat membaca berkas. Periksa apakah \'Penyimpanan Eksternal\' tidak dibatasi baterai</string>
+    <string name="home_invalid_apk_not_an_apk">Berkas yang dipilih bukan APK yang valid</string>
+    <string name="home_invalid_apk_io_error">Gagal membuka berkas. Silakan coba lagi</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode ahli</string>
     <string name="expert_mode_search">Cari tambalan</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_reset_to_default">Aktifkan tambalan yang direkomendasikan</string>
+    <string name="expert_mode_restore_saved">Pulihkan pemilihan yang disimpan</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_universal_patches">Tambalan universal</string>
     <string name="expert_mode_new_patches">Baru</string>
@@ -155,7 +160,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="home_outdated_patches_dialog_warning">Menambal dengan tambalan yang sudah usang mungkin menghasilkan aplikasi yang rusak</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Perbarui &amp; tambalan</string>
     <string name="home_low_disk_space_dialog_title">Ruang penyimpanan sedikit</string>
-    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang penyimpanan yang tersedia. Penambalan memerlukan setidaknya 1 GB ruang kosong untuk berfungsi dengan baik</string>
+    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang penyimpanan yang tersedia. Penambalan memerlukan setidaknya %2$.2f GB ruang kosong untuk berfungsi dengan baik</string>
     <string name="home_low_disk_space_dialog_warning">Melanjutkan dapat mengakibatkan kesalahan \"berkas tidak ditemukan\" atau menghasilkan APK yang rusak</string>
     <!-- Patch Options -->
     <string name="custom_color">Warna Khusus</string>
@@ -610,7 +615,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>
     <string name="settings_system_share_website_description">Bagikan situs web resmi Morphe</string>
-    <string name="settings_system_manager_description">"Sebuah proyek eksperimental sumber terbuka untuk penambalan yang modern dan efisien pada aplikasi Android populer, dikembangkan berdasarkan masukan dan kontribusi dari komunitas"</string>
+    <string name="settings_system_manager_description">"Sebuah proyek sumber terbuka untuk penambalan yang modern dan efisien pada aplikasi Android populer, dikembangkan berdasarkan masukan dan kontribusi dari komunitas"</string>
     <string name="credits">Kredits</string>
     <string name="credits_current_development">Pengembangan saat ini</string>
     <string name="credits_prior_development">Pengembangan sebelumnya</string>

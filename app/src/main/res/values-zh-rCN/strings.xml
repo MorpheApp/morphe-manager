@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">无可用更新</string>
     <string name="sources_download_fail">下载补丁失败：%s</string>
     <string name="sources_download_endpoint_not_found">无法更新\'%1$s\': 未找到配置的补丁 JSON 文件</string>
+    <string name="sources_patch_expert_badge">专家</string>
+    <string name="sources_patch_expert_badge_tooltip">在设置中启用专家模式以手动包含此补丁</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">需要帮助找到原始未打补丁的APK吗？</string>
     <string name="home_apk_availability_dialog_simple">要修补&lt;b&gt;%s&lt;/b&gt;，需要未修补的 APK 版本：</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">已选版本</string>
     <string name="home_select_apk_title">选择APK</string>
     <string name="home_select_any_apk_description">点击下方按钮选择任何应用的APK文件进行修补</string>
-    <string name="home_invalid_apk">无效的APK文件</string>
+    <string name="home_invalid_apk_unreadable">无法读取文件。请检查“外部存储”是否被限制电池使用</string>
+    <string name="home_invalid_apk_not_an_apk">所选文件不是有效的 APK</string>
+    <string name="home_invalid_apk_io_error">无法打开文件。请重试</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">高级模式</string>
     <string name="expert_mode_search">搜索补丁</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_reset_to_default">启用推荐补丁</string>
+    <string name="expert_mode_restore_saved">还原已保存的选择</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_universal_patches">通用补丁</string>
     <string name="expert_mode_new_patches">新</string>
@@ -154,7 +159,7 @@
     <string name="home_outdated_patches_dialog_warning">使用过期补丁可能会导致应用程序无法使用</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新并补丁</string>
     <string name="home_low_disk_space_dialog_title">磁盘空间不足</string>
-    <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用存储空间。修补程序至少需要 1 GB 的可用空间才能正常工作</string>
+    <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用存储空间。修复至少需要 %2$.2f GB 的可用空间才能正常工作</string>
     <string name="home_low_disk_space_dialog_warning">继续可能会导致“文件未找到”错误或损坏的输出 APK</string>
     <!-- Patch Options -->
     <string name="custom_color">自定义颜色</string>
@@ -609,7 +614,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">关于</string>
     <string name="settings_system_share_website">分享网站</string>
     <string name="settings_system_share_website_description">分享官方 Morphe 网站</string>
-    <string name="settings_system_manager_description">"一个用于现代、精简地修补受欢迎的 Android 应用的实验开源项目，由社区反馈和贡献驱动"</string>
+    <string name="settings_system_manager_description">"一个开源项目，用于现代化的、流线型的流行 Android 应用补丁，由社区反馈和贡献驱动"</string>
     <string name="credits">积分</string>
     <string name="credits_current_development">当前开发</string>
     <string name="credits_prior_development">先前开发</string>

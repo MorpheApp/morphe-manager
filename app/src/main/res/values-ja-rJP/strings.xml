@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">利用可能な更新はありません</string>
     <string name="sources_download_fail">ソースのダウンロードに失敗しました: %s</string>
     <string name="sources_download_endpoint_not_found">「%1$s」 を更新できませんでした: パッチ JSON ファイルが指定した URL に存在しません</string>
+    <string name="sources_patch_expert_badge">エキスパート</string>
+    <string name="sources_patch_expert_badge_tooltip">このパッチを手動で追加するには、設定でエキスパートモードを有効にしてください</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">オリジナルの APK を探すのにお困りですか？</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; にパッチを適用するには、以下のバージョンの APK (未パッチ) が必要です</string>
@@ -111,14 +113,17 @@
     <string name="home_selected_version">選択したバージョン</string>
     <string name="home_select_apk_title">APK を選択</string>
     <string name="home_select_any_apk_description">以下のボタンをタップして、パッチを当てたいアプリの APK ファイルを選択してください</string>
-    <string name="home_invalid_apk">無効な APK ファイル</string>
+    <string name="home_invalid_apk_unreadable">ファイルを読み込めませんでした。\'外部ストレージ\'がバッテリー制限されていないか確認してください</string>
+    <string name="home_invalid_apk_not_an_apk">選択されたファイルは有効なAPKではありません</string>
+    <string name="home_invalid_apk_io_error">ファイルを開けませんでした。もう一度お試しください</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">エキスパートモード</string>
     <string name="expert_mode_search">パッチを検索</string>
     <string name="expert_mode_proceed">パッチ処理に進む</string>
     <string name="expert_mode_disable_all">全て無効化する</string>
     <string name="expert_mode_enable_all">全て有効化する</string>
-    <string name="expert_mode_reset_to_default">推奨パッチを有効にする</string>
+    <string name="expert_mode_reset_to_default">推奨されるパッチを有効にする</string>
+    <string name="expert_mode_restore_saved">保存済みセレクションを復元</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_universal_patches">ユニバーサルパッチ</string>
     <string name="expert_mode_new_patches">新規</string>
@@ -138,7 +143,7 @@
     <string name="home_split_apk_warning_pick_another">別の APK を選択してください</string>
     <string name="home_dialog_unsupported_version_experimental_label">実験的</string>
     <string name="home_dialog_unsupported_version_experimental_description">このバージョンは実験的な機能を含んでおり、不安定または不完全である可能性があります</string>
-    <string name="morphe_experimental_app_version_dialog_title">実験してみますか？ 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_title">試してみますか？ 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">このバージョンの &lt;b&gt;%s&lt;/b&gt; は、初期段階の実験的なサポートのみとなっています&lt;br/&gt;&lt;br/&gt;🔧 パッチはまだ最適化中のため、アプリの動作が不安定になったり、予期しない不具合が発生する可能性があります</string>
     <string name="home_dialog_unsupported_version_dialog_title">非対応のバージョン</string>
     <string name="home_dialog_unsupported_version_dialog_description">この APK は推奨されているバージョンではありません。続行すると、アプリが正常に機能しない可能性があります</string>
@@ -154,7 +159,7 @@
     <string name="home_outdated_patches_dialog_warning">古いパッチを適用すると、アプリが壊れる可能性があります</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新してパッチを適用</string>
     <string name="home_low_disk_space_dialog_title">ストレージの空き容量が不足しています</string>
-    <string name="home_low_disk_space_dialog_message">利用可能なストレージの空き容量は %1$.2f GB です。正常なパッチ処理には少なくとも 1 GB の空き容量が必要です</string>
+    <string name="home_low_disk_space_dialog_message">利用可能なストレージの空き容量は %1$.2f GB です。正常なパッチ処理には少なくとも %2$.2f GB の空き容量が必要です</string>
     <string name="home_low_disk_space_dialog_warning">このまま続行すると、「ファイルが見つかりません」のエラーが発生したり、出力した APK が破損する可能性があります</string>
     <!-- Patch Options -->
     <string name="custom_color">カスタムカラー</string>
@@ -609,7 +614,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
     <string name="settings_system_share_website_description">Morphe の公式ウェブサイトを共有します</string>
-    <string name="settings_system_manager_description">"人気の Android アプリを現代的で効率的にパッチを適用するための、実験的なオープンソースプロジェクトです。コミュニティのフィードバックや貢献によって発展しています"</string>
+    <string name="settings_system_manager_description">"コミュニティからのフィードバックと貢献によって推進される、人気の Android アプリの最新かつ効率的なパッチを適用するためのオープンソースプロジェクトです"</string>
     <string name="credits">クレジット</string>
     <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>

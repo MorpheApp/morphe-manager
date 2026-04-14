@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Níl aon nuashonrú ar fáil</string>
     <string name="sources_download_fail">Theip ar an pacáiste a íoslódáil: %s</string>
     <string name="sources_download_endpoint_not_found">Níorbh fhéidir \'%1$s\' a nuashonrú: níor aimsíodh an comhad paiste JSON ag an URL cumraithe</string>
+    <string name="sources_patch_expert_badge">Eolas</string>
+    <string name="sources_patch_expert_badge_tooltip">Cumas an modh Eolas i Suitearachta chun an leas seo a chur isteach go láimhe</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">An bhfuil cabhair uait chun APK bunaidh neamhphaisteáilte a aimsiú?</string>
     <string name="home_apk_availability_dialog_simple">Chun &lt;b&gt;%s&lt;/b&gt;, a phaisteáil, beidh an leagan APK neamhphaisteáilte ag teastáil uait:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Leagan roghnaithe</string>
     <string name="home_select_apk_title">Roghnaigh APK</string>
     <string name="home_select_any_apk_description">Beartaigh an cnaipe thíos chun comhad APK d\'aon aip a roghnú le haghaidh paisteála.</string>
-    <string name="home_invalid_apk">Comhad APK neamhbhailí</string>
+    <string name="home_invalid_apk_unreadable">́Nó ́ćnód ́ćanéarén an comhad. Seiceán gur ́ćann ar ́ćann ́ćómhad neamhréidhte an ́ćann ́ćonn tobaró.</string>
+    <string name="home_invalid_apk_not_an_apk">́Nó ́ćearéar an comhad roghñénéar nach bhfuil ́ćo APK bhailidó.</string>
+    <string name="home_invalid_apk_io_error"></string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mód saineolaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
     <string name="expert_mode_reset_to_default">Ná déan cinnte gur na patchanna molta atá á gcumadh</string>
+    <string name="expert_mode_restore_saved"></string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
     <string name="expert_mode_universal_patches">Paistí uilíocha</string>
     <string name="expert_mode_new_patches">Nua</string>
@@ -154,7 +159,7 @@ Le haghaidh na dtorthaí is fearr, molann an app seo míniú &lt;b&gt;APK iomlá
     <string name="home_outdated_patches_dialog_warning">D’fhéadfadh go mbeadh aip briste mar thoradh ar phaistí le paistí atá as dáta</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Nuashonrú &amp; Paiste</string>
     <string name="home_low_disk_space_dialog_title">Spás disco ísl</string>
-    <string name="home_low_disk_space_dialog_message">Ach %1$.2f GB de spás fágtha atá ar fáil. Éilíonn feistear ar a laghad 1 GB de spás fágtha chun obair go ceart</string>
+    <string name="home_low_disk_space_dialog_message">Achainn %1$.2f GB de spás saor ann. Éilíonn péinteáil ar a laghad %2$.2f GB de spás saor chun obair a dhéanamh go ceart</string>
     <string name="home_low_disk_space_dialog_warning">Éadh go bhféadfadh ‘file not found’ a bhraoibh, nó APK aschuir cora</string>
     <!-- Patch Options -->
     <string name="custom_color">Dath saincheaptha</string>
@@ -609,7 +614,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_about">Maidir</string>
     <string name="settings_system_share_website">Comhroinn suíomh Gréasáin</string>
     <string name="settings_system_share_website_description">Comhroinn suíomh Gréasáin oifigiúil Morphe</string>
-    <string name="settings_system_manager_description">"Prójáct oòs-fóin tóirón, faoin, le haghaidh feabhaòrsaò ar aòdhair rialta Android, arò mheas a chur le feabhas ar fhaisòin agus le tuillòinòin ón gcomhdaonò."</string>
+    <string name="settings_system_manager_description">"Práisteán samhail ar an’ foinse oscair, le haghaidh leasuithe’ straimlíneacha ar’ a’ ri’ app’anna Android co’ coitianta, ar’ mhian le hamharas’ an phobail agus le learíonna’"</string>
     <string name="credits">Crèidteacha</string>
     <string name="credits_current_development">Forbairt reatha</string>
     <string name="credits_prior_development">Forbairt roimh réidh</string>

@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Não há atualização disponível</string>
     <string name="sources_download_fail">Falha ao baixar fontes: %s</string>
     <string name="sources_download_endpoint_not_found">Não foi possível atualizar \'%1$s\': o arquivo JSON do patch não foi encontrado no URL configurado</string>
+    <string name="sources_patch_expert_badge">Especialista</string>
+    <string name="sources_patch_expert_badge_tooltip">Ative o modo Especialista em Configurações para incluir este patch manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Precisa de ajuda para encontrar um APK original e sem patches?</string>
     <string name="home_apk_availability_dialog_simple">Para corrigir &lt;b&gt;%s&lt;/b&gt;, vocã precisa da versão não corrigida do APK:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Versão selecionada</string>
     <string name="home_select_apk_title">Selecionar APK</string>
     <string name="home_select_any_apk_description">Toque no botão abaixo para selecionar um arquivo APK de qualquer aplicativo para patchar</string>
-    <string name="home_invalid_apk">Arquivo APK inválido</string>
+    <string name="home_invalid_apk_unreadable">Não foi possível ler o arquivo. Verifique se o \'Armazenamento Externo\' não está restrito pela bateria</string>
+    <string name="home_invalid_apk_not_an_apk">O arquivo selecionado não é um APK válido</string>
+    <string name="home_invalid_apk_io_error">Falha ao abrir o arquivo. Por favor, tente novamente</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo avançado</string>
     <string name="expert_mode_search">Pesquisar patches</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
     <string name="expert_mode_reset_to_default">Ativar patches recomendados</string>
+    <string name="expert_mode_restore_saved">Restaurar seleção guardada</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_universal_patches">Correções universais</string>
     <string name="expert_mode_new_patches">Novo</string>
@@ -154,7 +159,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;
     <string name="home_outdated_patches_dialog_warning">Patching com patches desatualizados pode resultar em um aplicativo quebrado</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Atualizar &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Pouco espaço em disco</string>
-    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento livre disponível. A correção requer pelo menos 1 GB de espaço livre para funcionar corretamente</string>
+    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento disponível. Para corrigir, são necessários pelo menos %2$.2f GB de espaço livre para funcionar corretamente</string>
     <string name="home_low_disk_space_dialog_warning">Prosseguir pode resultar em um erro \"arquivo não encontrado\" ou um APK de saída corrompido</string>
     <!-- Patch Options -->
     <string name="custom_color">Cor personalizada</string>
@@ -609,7 +614,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
     <string name="settings_system_share_website_description">Compartilhar o site oficial do Morphe</string>
-    <string name="settings_system_manager_description">"Um projeto experimental de código aberto para uma correção moderna e simplificada de aplicativos Android populares, impulsionado pelo feedback e contribuições da comunidade"</string>
+    <string name="settings_system_manager_description">"Um projeto de código aberto para patching moderno e otimizado de aplicativos Android populares, impulsionado pelo feedback e contribuições da comunidade"</string>
     <string name="credits">Créditos</string>
     <string name="credits_current_development">Desenvolvimento atual</string>
     <string name="credits_prior_development">Desenvolvimento anterior</string>

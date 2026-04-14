@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">새 업데이트가 없습니다</string>
     <string name="sources_download_fail">소스를 다운로드할 수 없습니다: %s</string>
     <string name="sources_download_endpoint_not_found">‘%1$s’를 업데이트할 수 없습니다: 설정된 URL에서 패치 JSON 파일을 찾을 수 없습니다</string>
+    <string name="sources_patch_expert_badge">전문가</string>
+    <string name="sources_patch_expert_badge_tooltip">설정에서 전문가 모드를 활성화하여 이 패치를 수동으로 포함할 수 있습니다</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">원본 APK를 찾는데 도움이 필요하시나요?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;를 패치하려면 패치되지 않은 APK가 필요합니다:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">선택된 버전</string>
     <string name="home_select_apk_title">APK 선택</string>
     <string name="home_select_any_apk_description">아래 버튼을 탭하여 패치할 앱의 APK 파일을 선택하세요</string>
-    <string name="home_invalid_apk">APK 파일이 잘못되었습니다</string>
+    <string name="home_invalid_apk_unreadable">파일을 읽을 수 없습니다. \'외부 저장소\'가 배터리 제한되어 있는지 확인하세요</string>
+    <string name="home_invalid_apk_not_an_apk">선택된 파일이 유효한 APK가 아닙니다</string>
+    <string name="home_invalid_apk_io_error">파일을 열 수 없습니다. 다시 시도하세요</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_reset_to_default">권장 패치 활성화</string>
+    <string name="expert_mode_restore_saved">저장된 선택 목록 복원</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
     <string name="expert_mode_universal_patches">유니버셜 패치</string>
     <string name="expert_mode_new_patches">신규</string>
@@ -154,7 +159,7 @@
     <string name="home_outdated_patches_dialog_warning">오래된 패치를 사용하면 앱이 손상될 수 있습니다</string>
     <string name="home_outdated_patches_dialog_update_and_patch">업데이트 &amp; 패치</string>
     <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
-    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치가 정상적으로 작동하려면 최소 1GB 이상의 공간이 필요합니다</string>
+    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치가 정상적으로 작동하려면 최소 %2$.2f GB이상의 여유 공간이 필요합니다</string>
     <string name="home_low_disk_space_dialog_warning">계속 진행하면 “파일을 찾을 수 없습니다” 오류가 발생하거나 손상된 APK 파일이 생성될 수 있습니다</string>
     <!-- Patch Options -->
     <string name="custom_color">커스텀 색상</string>
@@ -610,7 +615,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">정보</string>
     <string name="settings_system_share_website">웹사이트 공유</string>
     <string name="settings_system_share_website_description">공식 Morphe 웹사이트를 공유해 보세요</string>
-    <string name="settings_system_manager_description">"커뮤니티 피드백과 기여를 기반으로 인기 있는 Android 앱을 현대적이고 간소화된 방식으로 패치하기 위한 실험적인 오픈소스 프로젝트입니다"</string>
+    <string name="settings_system_manager_description">"커뮤니티 피드백과 기여를 기반으로 인기 있는 Android 앱을 현대적이고 간소화된 방식으로 패치하기 위한 오픈소스 프로젝트입니다"</string>
     <string name="credits">크레딧</string>
     <string name="credits_current_development">현재 개발</string>
     <string name="credits_prior_development">이전 개발</string>

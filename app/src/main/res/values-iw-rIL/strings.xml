@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">אין עדכון זמין</string>
     <string name="sources_download_fail">שגגה להוריד תצוגים: %s</string>
     <string name="sources_download_endpoint_not_found">לא ניתן לעדכן \'%1$s\': הקובץ JSON של התיקון לא נמצא באדרס המוגדר</string>
+    <string name="sources_patch_expert_badge">מומחה</string>
+    <string name="sources_patch_expert_badge_tooltip">הפעל מצב מומחה בהגדרות כדי לכלול תיקון זה באופן ידני</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">נזקק לעזרה במציאת APK מקורי ללא תיקונים?</string>
     <string name="home_apk_availability_dialog_simple">להתקן &lt;b&gt;%s&lt;/b&gt;, צריך את הגרסה הלא מתוקנת של APK:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">נבחר</string>
     <string name="home_select_apk_title">בחר APK</string>
     <string name="home_select_any_apk_description">לחץ על הכפתור למטה כדי לבחור קובץ APK של כל אפליקציה לתיקון</string>
-    <string name="home_invalid_apk">קובץ APK לא חוקי</string>
+    <string name="home_invalid_apk_unreadable">לא ניתן לקרוא את הקובץ. בדוק ש\'אחסון חיצוני\' אינו מוגבל על ידי הסוללה</string>
+    <string name="home_invalid_apk_not_an_apk">הקובץ שנבחר אינו קובץ APK תקין</string>
+    <string name="home_invalid_apk_io_error">נכשל בפתיחת הקובץ. אנא נסה שוב</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">מצב מומחה</string>
     <string name="expert_mode_search">חפש תיקונים</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_enable_all">הפעל את כולם</string>
     <string name="expert_mode_reset_to_default">להפעיל תיקונים מומלצים</string>
+    <string name="expert_mode_restore_saved">שחזור בחירה שמורה</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
     <string name="expert_mode_universal_patches">עדכונים אוניברסליים</string>
     <string name="expert_mode_new_patches">חדש</string>
@@ -154,7 +159,6 @@
     <string name="home_outdated_patches_dialog_warning">התקנה עם טיקים מיושנים עשויה להוביל לאפליקציה שבורה</string>
     <string name="home_outdated_patches_dialog_update_and_patch">עדכן &amp; טקן</string>
     <string name="home_low_disk_space_dialog_title">מחסור בשטח דיסק</string>
-    <string name="home_low_disk_space_dialog_message">ישנם %1$.2f GB של שטח אחסון פנוי בלבד. תיקון דורש לפחות 1 GB של שטח פנוי כדי לעבוד כראוי</string>
     <string name="home_low_disk_space_dialog_warning">המשך עלול לגרום לשגיאת \"קובץ לא נמצא\" או APK פלט פגום</string>
     <!-- Patch Options -->
     <string name="custom_color">Цвет \"изготовителя\"</string>
@@ -593,7 +597,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_about">אודות</string>
     <string name="settings_system_share_website">שתף אתר</string>
     <string name="settings_system_share_website_description">שתף אתר אתר רשמי</string>
-    <string name="settings_system_manager_description">"פרויקט קוד פתוח ניסיוני לתיקון יעיל ומודרני של אפליקציות אנדרואיד פופולריות, המונע על ידי משוב ותרומות של הקהילה"</string>
+    <string name="settings_system_manager_description">"פרויקט קוד פתוח לתיקון יעיל ומודרני של אפליקציות אנדרואיד פופולריות, המונע על ידי משוב ותרומות של הקהילה"</string>
     <string name="credits">קרדיטים</string>
     <string name="credits_current_development">פיתוח נוכחי</string>
     <string name="credits_prior_development">פיתוח קודם</string>

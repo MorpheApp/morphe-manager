@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">আপডেট উপলব্ধ নেই</string>
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' এর জন্য আপডেট করতে পারেনি: কনফিগার করা URL-তে প্যাচ JSON ফাইলটি পাওয়া যায়নি</string>
+    <string name="sources_patch_expert_badge">বিশেষজ্ঞ</string>
+    <string name="sources_patch_expert_badge_tooltip">এই প্যাচটি ম্যানুয়ালি অন্তর্ভুক্ত করতে সেটিংস-এ বিশেষজ্ঞ মোড সক্রিয় করুন</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">অপেক্ষা করছেন কোথায় একটি মূল অপছন্দিত APK?</string>
     <string name="home_apk_availability_dialog_simple">প্যাচ করতে &lt;b&gt;%s&lt;/b&gt; এর জন্য, অ-প্যাচড এপিকি (APK) সংস্করণ দরকার:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">নির্বাচিত সংস্করণ</string>
     <string name="home_select_apk_title">APK নির্বাচন করুন</string>
     <string name="home_select_any_apk_description">কোনো অ্যাপের APK ফাইল নির্বাচন করতে চান</string>
-    <string name="home_invalid_apk">বৈধ APK ফাইল নেই</string>
+    <string name="home_invalid_apk_unreadable">ফাইলটি পড়া যায়নি। \'এক্সটার্নাল স্টোরেজ\' ব্যাটারি দ্বারা সীমাবদ্ধ কিনা তা পরীক্ষা করুন</string>
+    <string name="home_invalid_apk_not_an_apk">নির্বাচিত ফাইলটি একটি বৈধ APK নয়</string>
+    <string name="home_invalid_apk_io_error">ফাইলটি খুলতে ব্যর্থ। অনুগ্রহ করে আবার চেষ্টা করুন</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">এক্সপার্ট মোড</string>
     <string name="expert_mode_search">প্যাচ খুঁজুন</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
     <string name="expert_mode_reset_to_default">প্রস্তাবিত প্যাচগুলি সক্ষম করুন</string>
+    <string name="expert_mode_restore_saved">সংরক্ষিত নির্বাচন পুনরুদ্ধার করুন</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_universal_patches">সার্বজনীন প্যাচ</string>
     <string name="expert_mode_new_patches">নতুন</string>
@@ -154,7 +159,7 @@
     <string name="home_outdated_patches_dialog_warning">পুরানো প্যাচগুলি ব্যবহার করে অ্যাপটি ভেঙে যেতে পারে</string>
     <string name="home_outdated_patches_dialog_update_and_patch">আপডেট ও প্যাচ করুন</string>
     <string name="home_low_disk_space_dialog_title">কম ডিস্ক স্পেস</string>
-    <string name="home_low_disk_space_dialog_message">কার্যকরী স্টোরেজ মাত্র %1$.2f GB উপলব্ধ। সঠিকভাবে কাজ করার জন্য প্যাচিংয়ের জন্য কমপক্ষে 1 GB মুক্ত স্থান প্রয়োজন</string>
+    <string name="home_low_disk_space_dialog_message">উপलब्ধ মুক্ত স্থান %1$.2f GB। প্যাচিং করার জন্য সঠিকভাবে কাজ করার জন্য কমপক্ষে %2$.2f GB মুক্ত স্থান প্রয়োজন।</string>
     <string name="home_low_disk_space_dialog_warning">जारी করলে \"ফাইল খুঁজে পাওয়া যায়নি\" ত্রুটি বা একটি भ्रष्ट আউটপুট APK হতে পারে</string>
     <!-- Patch Options -->
     <string name="custom_color">కస్టమ్‌ క్రోమ్‌</string>
@@ -601,7 +606,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>
     <string name="settings_system_share_website">ওয়েবসাইট শেয়ার করুন</string>
     <string name="settings_system_share_website_description">মরফে অফিসিয়াল ওয়েবসাইট শেয়ার করুন</string>
-    <string name="settings_system_manager_description">"একটি পরীক্ষামূলক ওপেন-সোর্স প্রকল্প, যা জনপ্রিয় অ্যান্ড্রয়েড অ্যাপগুলির আধুনিক, সরলীকৃত প্যাচিংয়ের জন্য তৈরি করা হয়েছে, এবং এটি কমিউনিটির মতামত ও অবদানের মাধ্যমে চালিত।"</string>
+    <string name="settings_system_manager_description">"এটি একটি ওপেন-সোর্স প্রকল্প, যা জনপ্রিয় অ্যান্ড্রয়েড অ্যাপগুলির আধুনিক, সরলীকৃত প্যাচিংয়ের জন্য তৈরি করা হয়েছে, এবং এটি কমিউনিটির প্রতিক্রিয়া ও অবদানের মাধ্যমে পরিচালিত।"</string>
     <string name="credits">ক্রেডিট</string>
     <string name="credits_current_development">চলমান উন্নয়ন</string>
     <string name="credits_prior_development">পূর্ববর্তী উন্নয়ন</string>

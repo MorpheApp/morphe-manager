@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Нema ажурирање</string>
     <string name="sources_download_fail">Неуспешно преузимање извора: %s</string>
     <string name="sources_download_endpoint_not_found">Није могуће ажурирати \'%1$s\': пре-издавачки JSON фајл није пронађен на конфигурисаном URL-ју</string>
+    <string name="sources_patch_expert_badge">Експерт</string>
+    <string name="sources_patch_expert_badge_tooltip">Омогућите Експерт режим у Подешавањима да бисте ручно укључили ову исправку</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Треба вам помоћ у пронађивању оригиналног непоправљеног АПК?</string>
     <string name="home_apk_availability_dialog_simple">Da bi popravili &lt;b&gt;%s&lt;/b&gt;, potrebno je nepopravljenu verziju APK-a:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Одабрана верзија</string>
     <string name="home_select_apk_title">Изаберите APK</string>
     <string name="home_select_any_apk_description">Кликните на дугме испод да изаберете APK фајл било ког апликација за печеве</string>
-    <string name="home_invalid_apk">Невалидан APK фајл</string>
+    <string name="home_invalid_apk_unreadable">Није могуће прочитати датотеку. Проверите да \'Екстерна складишта\' није ограничено од стране батерије</string>
+    <string name="home_invalid_apk_not_an_apk">Избрана датотека није валидан APK.</string>
+    <string name="home_invalid_apk_io_error">Није успело отварање датотеке. Поново покушајте.</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експерт мод</string>
     <string name="expert_mode_search">Претражи печеве</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_reset_to_default">Омогући препоручене исправке</string>
+    <string name="expert_mode_restore_saved">Поврати сачувани избор</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
     <string name="expert_mode_new_patches">Ново</string>
@@ -154,7 +159,7 @@
     <string name="home_outdated_patches_dialog_warning">Patching sa zastarelima ispravkama može rezultirati slomljenim aplikacijama</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ažuriraj &amp; patchiraj</string>
     <string name="home_low_disk_space_dialog_title">Мало дисковног простора</string>
-    <string name="home_low_disk_space_dialog_message">Доступно је само %1$.2f GB слободне меморије. Поправка захтева најмање 1 GB слободне меморије да би исправно радила</string>
+    <string name="home_low_disk_space_dialog_message">Samo %1$.2f GB слободне меморије је доступно. Пачинг захтева најмање %2$.2f GB слободне меморије да би исправно функционисао</string>
     <string name="home_low_disk_space_dialog_warning">Настављање може довести до грешке \"фајл није пронађен\" или до неисправног APK излаза</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
@@ -608,7 +613,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">О програму</string>
     <string name="settings_system_share_website">Дели веб-сајт</string>
     <string name="settings_system_share_website_description">Делите званични веб-сајт Morphe</string>
-    <string name="settings_system_manager_description">"Експериментални отворени изворни пројекат за модерно, оптимизовано поправљање популарних Андроид апликација, покренут од стране повратних информација и доприноса заједнице"</string>
+    <string name="settings_system_manager_description">"Отворени изворни пројекат за модерно, поједностављено \"пачирање\" популарних Android апликација, вођен повратним давањем и доприносом заједнице"</string>
     <string name="credits">Послужности</string>
     <string name="credits_current_development">Тренутни развој</string>
     <string name="credits_prior_development">Претходни развој</string>

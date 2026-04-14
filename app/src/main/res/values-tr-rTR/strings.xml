@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Güncelleme mevcut değil</string>
     <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' güncellenemedi: yama JSON dosyası belirtilen URL\'de bulunamadı</string>
+    <string name="sources_patch_expert_badge">Uzman</string>
+    <string name="sources_patch_expert_badge_tooltip">Bu yamayı manuel olarak eklemek için Ayarlar\'da Uzman modunu etkinleştirin</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Orijinal, yamalanmamış APK bulmada yardıma ihtiyacınız var mı?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;\'i yamalamak için bu yamalanmamış APK sürümüne ihtiyacınız var:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Seçilen sürüm</string>
     <string name="home_select_apk_title">APK seç</string>
     <string name="home_select_any_apk_description">Herhangi bir uygulamanın APK dosyasını seçmek için aşağıdaki düğmeye tıklayın</string>
-    <string name="home_invalid_apk">Geçersiz APK dosyası</string>
+    <string name="home_invalid_apk_unreadable">Dosya okunamadı. \'Harici Depolama\'nın pil kısıtlaması olmadığından emin olun</string>
+    <string name="home_invalid_apk_not_an_apk">Seçilen dosya geçerli bir APK değil</string>
+    <string name="home_invalid_apk_io_error">Dosya açılamadı. Lütfen tekrar deneyin</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Uzman modu</string>
     <string name="expert_mode_search">Yamaları ara</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Hepsini devre dışı bırak</string>
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_reset_to_default">Önerilen yamaları etkinleştir</string>
+    <string name="expert_mode_restore_saved">Kaydedilen seçimi geri yükle</string>
     <string name="expert_mode_no_results">Yama bulunamadı</string>
     <string name="expert_mode_universal_patches">Evrensel yamalar</string>
     <string name="expert_mode_new_patches">Yeni</string>
@@ -154,7 +159,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="home_outdated_patches_dialog_warning">Eskimiş yamaları kullanmak uygulamanın bozulmasına neden olabilir</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Güncelle &amp; yamala</string>
     <string name="home_low_disk_space_dialog_title">Düşük disk alanı</string>
-    <string name="home_low_disk_space_dialog_message">Yalnızca %1$.2f GB boş depolama alanı mevcut. Yama işleminin düzgün çalışması için en az 1 GB boş alan gereklidir</string>
+    <string name="home_low_disk_space_dialog_message">Yalnızca %1$.2f GB boş depolama alanı mevcut. Yama işleminin düzgün çalışması için en az %2$.2f GB boş alan gereklidir</string>
     <string name="home_low_disk_space_dialog_warning">İşleme devam etmek, bir \"dosya bulunamadı\" hatası veya bozuk bir çıktı APK\'si ile sonuçlanabilir</string>
     <!-- Patch Options -->
     <string name="custom_color">Özel renk</string>
@@ -609,7 +614,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_share_website">Web sitesini paylaş</string>
     <string name="settings_system_share_website_description">Morphe resmi web sitesini paylaş</string>
-    <string name="settings_system_manager_description">"Popüler Android uygulamalarının modern ve sadeleştirilmiş bir şekilde yamalanmasını sağlayan, topluluk geri bildirimleri ve katkılarıyla geliştirilen deneysel bir açık kaynak proje"</string>
+    <string name="settings_system_manager_description">"Popüler Android uygulamalarının modern ve verimli şekilde yamalanmasını sağlayan, topluluk geri bildirimleri ve katkılarıyla geliştirilen açık kaynaklı bir proje"</string>
     <string name="credits">Takdir</string>
     <string name="credits_current_development">Mevcut geliştirme</string>
     <string name="credits_prior_development">Önceki geliştirme</string>

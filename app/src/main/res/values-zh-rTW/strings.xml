@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載來源：%s</string>
     <string name="sources_download_endpoint_not_found">無法更新「%1$s\'」：找不到配置 URL 中的修補 JSON 檔案</string>
+    <string name="sources_patch_expert_badge">專家</string>
+    <string name="sources_patch_expert_badge_tooltip">在設定中啟用專家模式以手動包含此修補程式</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">需要協助找到原始未修補的 APK 嗎？</string>
     <string name="home_apk_availability_dialog_simple">要修補&lt;b&gt;%s&lt;/b&gt;，你需要未修補的 APK，版本為：</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">所選版本</string>
     <string name="home_select_apk_title">選擇 APK</string>
     <string name="home_select_any_apk_description">輕觸下方按鈕選擇任何應用程式的 APK 檔案進行修補</string>
-    <string name="home_invalid_apk">無效的 APK 檔案</string>
+    <string name="home_invalid_apk_unreadable">無法讀取檔案。請確認 \'外部儲存空間\' 是否未被限制耗電</string>
+    <string name="home_invalid_apk_not_an_apk">您選擇的檔案不是有效的 APK</string>
+    <string name="home_invalid_apk_io_error">開啟檔案失敗。請再試一次</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
     <string name="expert_mode_search">搜尋修補</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">停用全部</string>
     <string name="expert_mode_enable_all">啟用全部</string>
     <string name="expert_mode_reset_to_default">啟用建議的修補程式</string>
+    <string name="expert_mode_restore_saved">還原已儲存的選取</string>
     <string name="expert_mode_no_results">找不到修補</string>
     <string name="expert_mode_universal_patches">通用修補程式</string>
     <string name="expert_mode_new_patches">新</string>
@@ -154,7 +159,7 @@
     <string name="home_outdated_patches_dialog_warning">使用過時修補可能會造成應用程式故障</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新和修補</string>
     <string name="home_low_disk_space_dialog_title">磁碟空間不足</string>
-    <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用儲存空間。修補程式需要至少 1 GB 的可用空間才能正常工作</string>
+    <string name="home_low_disk_space_dialog_message">僅剩 %1$.2f GB 可用儲存空間。修補程式至少需要 %2$.2f GB 的可用空間才能正常運作</string>
     <string name="home_low_disk_space_dialog_warning">繼續進行可能會發生「找不到檔案」的錯誤或輸出損壞的 APK</string>
     <!-- Patch Options -->
     <string name="custom_color">自訂顏色</string>
@@ -608,7 +613,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">關於</string>
     <string name="settings_system_share_website">分享網站</string>
     <string name="settings_system_share_website_description">分享官方 Morphe 網站</string>
-    <string name="settings_system_manager_description">"一個用於現代化、簡化地修補熱門 Android 應用程式的實驗性開源專案，由社群回饋和貢獻驅動"</string>
+    <string name="settings_system_manager_description">"這是一個開源專案，用於現代化、簡化地修補熱門的 Android 應用程式，並由社群的回饋和貢獻驅動"</string>
     <string name="credits">信譽</string>
     <string name="credits_current_development">目前開發</string>
     <string name="credits_prior_development">先前開發</string>

@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Hiện không có bản cập nhật nào</string>
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
     <string name="sources_download_endpoint_not_found">Không thể cập nhật \'%1$s\': không tìm thấy tệp JSON bản vá tại URL đã cấu hình</string>
+    <string name="sources_patch_expert_badge">Chuyên gia</string>
+    <string name="sources_patch_expert_badge_tooltip">Bật chế độ Chuyên gia trong Cài đặt để có thể tự thêm bản vá này</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Chưa tìm được APK gốc chứ gì? Cần giúp không?</string>
     <string name="home_apk_availability_dialog_simple">Để vá &lt;b&gt;%s&lt;/b&gt;, bạn cần APK chưa vá với phiên bản:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Phiên bản đã chọn</string>
     <string name="home_select_apk_title">Chọn APK</string>
     <string name="home_select_any_apk_description">Bấm nút bên dưới để chọn tệp APK của bất kỳ ứng dụng nào để vá</string>
-    <string name="home_invalid_apk">Tệp APK không đúng</string>
+    <string name="home_invalid_apk_unreadable">Không thể đọc tệp. Hãy kiểm tra xem \'Bộ nhớ ngoài\' có bị hạn chế pin hay không</string>
+    <string name="home_invalid_apk_not_an_apk">Tệp đã chọn không phải là tệp APK hợp lệ</string>
+    <string name="home_invalid_apk_io_error">Không thể mở tệp. Vui lòng thử lại</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
     <string name="expert_mode_search">Tìm kiếm</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
     <string name="expert_mode_reset_to_default">Bật các bản vá đề xuất</string>
+    <string name="expert_mode_restore_saved">Khôi phục lựa chọn đã lưu</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_universal_patches">Bản vá phổ quát</string>
     <string name="expert_mode_new_patches">Mới</string>
@@ -154,7 +159,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_outdated_patches_dialog_warning">Sử dụng các bản vá cũ có thể khiến ứng dụng bị hỏng</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Cập nhật &amp; vá</string>
     <string name="home_low_disk_space_dialog_title">Hết dung lượng lưu trữ</string>
-    <string name="home_low_disk_space_dialog_message">Chỉ còn %1$.2f GB dung lượng trống. Trong khi đó bạn cần tối thiểu 1GB để quá trình vá ổn định</string>
+    <string name="home_low_disk_space_dialog_message">Chỉ còn %1$.2f GB dung lượng trống. Trong khi đó bạn cần tối thiểu %2$.2f GB để quá trình vá ổn định</string>
     <string name="home_low_disk_space_dialog_warning">Tiếp tục có thể dẫn đến lỗi \"không tìm thấy tệp\" hoặc vá ra apk bị hỏng</string>
     <!-- Patch Options -->
     <string name="custom_color">Tùy chỉnh màu</string>
@@ -610,7 +615,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
     <string name="settings_system_share_website_description">Chia sẻ trang web chính chủ của Morphe</string>
-    <string name="settings_system_manager_description">"Một dự án mã nguồn mở thử nghiệm, mang đến trải nghiệm vá ứng dụng Android hiệu quả với giao diện hiện đại, được phát triển dựa trên phản hồi và đóng góp từ cộng đồng."</string>
+    <string name="settings_system_manager_description">"Một dự án mã nguồn mở, mang đến trải nghiệm vá ứng dụng Android hiệu quả với giao diện hiện đại, được phát triển dựa trên phản hồi và đóng góp từ cộng đồng"</string>
     <string name="credits">Đóng góp</string>
     <string name="credits_current_development">Hiện tại</string>
     <string name="credits_prior_development">Trước đây</string>

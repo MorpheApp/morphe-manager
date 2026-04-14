@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Нет доступных обновлений</string>
     <string name="sources_download_fail">Не удалось загрузить источники: %s</string>
     <string name="sources_download_endpoint_not_found">Не удалось обновить \'%1$s\': файл JSON патча не найден по указанному URL</string>
+    <string name="sources_patch_expert_badge">Эксперт</string>
+    <string name="sources_patch_expert_badge_tooltip">Включите режим Эксперта в Настройках для добавления этого патча вручную</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Нужна помощь в поиске оригинального непатченого APK?</string>
     <string name="home_apk_availability_dialog_simple">Чтобы патчить &lt;b&gt;%s&lt;/b&gt;, вам нужен непатченый APK с версией:</string>
@@ -111,7 +113,9 @@
     <string name="home_selected_version">Выбранная версия</string>
     <string name="home_select_apk_title">Выбрать APK</string>
     <string name="home_select_any_apk_description">Нажмите кнопку ниже, чтобы выбрать APK файл любого приложения для патчинга</string>
-    <string name="home_invalid_apk">Недопустимый файл APK</string>
+    <string name="home_invalid_apk_unreadable">Не удалось прочитать файл. Убедитесь, что \'Внешнее хранилище\' не ограничено по энергопотреблению</string>
+    <string name="home_invalid_apk_not_an_apk">Выбранный файл не является допустимым APK</string>
+    <string name="home_invalid_apk_io_error">Не удалось открыть файл. Пожалуйста, попробуйте еще раз</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим эксперта</string>
     <string name="expert_mode_search">Поиск патчей</string>
@@ -119,6 +123,7 @@
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_reset_to_default">Включить рекомендованные патчи</string>
+    <string name="expert_mode_restore_saved">Восстановить сохраненный выбор</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
     <string name="expert_mode_universal_patches">Универсальные патчи</string>
     <string name="expert_mode_new_patches">Новые</string>
@@ -154,7 +159,7 @@
     <string name="home_outdated_patches_dialog_warning">Патчинг устаревшими патчами может привести к неисправности программы</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Обновить и патчить</string>
     <string name="home_low_disk_space_dialog_title">Недостаточно места на диске</string>
-    <string name="home_low_disk_space_dialog_message">Доступно всего %1$.2f ГБ свободного места. Для правильной работы исправлений требуется не менее 1 ГБ свободного места</string>
+    <string name="home_low_disk_space_dialog_message">Доступно только %1$.2f GB свободного хранилища. Для патчинга требуется как минимум %2$.2f GB свободного места для корректной работы</string>
     <string name="home_low_disk_space_dialog_warning">Продолжение может привести к ошибке \"файл не найден\" или поврежденному выходному APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Свой цвет</string>
@@ -609,7 +614,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
     <string name="settings_system_share_website_description">Поделиться официальным сайтом Morphe</string>
-    <string name="settings_system_manager_description">"Экспериментальный проект с открытым исходным кодом для современного, упрощенного патчинга популярных Android-приложений, развиваемый на основе отзывов и вкладов сообщества"</string>
+    <string name="settings_system_manager_description">"Проект с открытым исходным кодом для современного, упрощенного патчинга популярных Android-приложений, развиваемый на основе отзывов и вкладов сообщества"</string>
     <string name="credits">Благодарности</string>
     <string name="credits_current_development">Текущая разработка</string>
     <string name="credits_prior_development">Предыдущая разработка</string>
