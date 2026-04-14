@@ -1,3 +1,11 @@
+# [1.15.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.2...v1.15.0-dev.3) (2026-04-14)
+
+
+### Bug Fixes
+
+* Improve APK load error messages with distinct failure reasons ([3174f28](https://github.com/MorpheApp/morphe-manager/commit/3174f28480e1857ae689dee26806ed513ad980f9))
+* Use `GetContent` instead of `OpenDocument` for APK/bundle pickers ([cb3551d](https://github.com/MorpheApp/morphe-manager/commit/cb3551d13ac490b2e74eb7ec111369e278e32efe))
+
 # [1.15.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.1...v1.15.0-dev.2) (2026-04-13)
 
 
