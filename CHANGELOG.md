@@ -1,3 +1,18 @@
+# [1.15.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.3...v1.15.0-dev.4) (2026-04-15)
+
+
+### Bug Fixes
+
+* Don't count empty patch selections in package badge ([e073ecf](https://github.com/MorpheApp/morphe-manager/commit/e073ecf279d5d605198a039b6325226f1d3feec2))
+* Show success toast after bundle import completes ([74d05cb](https://github.com/MorpheApp/morphe-manager/commit/74d05cb46d74ea489ad2c454706a9c0a4cf4a1c5))
+* Skip disabled installed apps in AppDataResolver ([8eaa88b](https://github.com/MorpheApp/morphe-manager/commit/8eaa88bda6e4fe657924355eaed1b3fe87f045b1))
+
+
+### Features
+
+* Add Android TV launcher support ([38f2703](https://github.com/MorpheApp/morphe-manager/commit/38f27030d4c80b1873af37c21454206fc86ec372))
+* Show update date for single default bundle in management sheet ([16e81bb](https://github.com/MorpheApp/morphe-manager/commit/16e81bbde5eff647742eee5414033a4bcce4c98d))
+
 # [1.15.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.2...v1.15.0-dev.3) (2026-04-14)
 
 

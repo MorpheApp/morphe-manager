@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-14T06:31:38.474Z",
-  "description": "# [1.15.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.2...v1.15.0-dev.3) (2026-04-14)\n\n\n### Bug Fixes\n\n* Improve APK load error messages with distinct failure reasons ([3174f28](https://github.com/MorpheApp/morphe-manager/commit/3174f28480e1857ae689dee26806ed513ad980f9))\n* Use `GetContent` instead of `OpenDocument` for APK/bundle pickers ([cb3551d](https://github.com/MorpheApp/morphe-manager/commit/cb3551d13ac490b2e74eb7ec111369e278e32efe))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.3/morphe-manager-1.15.0-dev.3.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.3/morphe-manager-1.15.0-dev.3.apk.asc",
-  "version": "1.15.0-dev.3"
+  "created_at": "2026-04-15T12:55:04.666Z",
+  "description": "# [1.15.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.3...v1.15.0-dev.4) (2026-04-15)\n\n\n### Bug Fixes\n\n* Don't count empty patch selections in package badge ([e073ecf](https://github.com/MorpheApp/morphe-manager/commit/e073ecf279d5d605198a039b6325226f1d3feec2))\n* Show success toast after bundle import completes ([74d05cb](https://github.com/MorpheApp/morphe-manager/commit/74d05cb46d74ea489ad2c454706a9c0a4cf4a1c5))\n* Skip disabled installed apps in AppDataResolver ([8eaa88b](https://github.com/MorpheApp/morphe-manager/commit/8eaa88bda6e4fe657924355eaed1b3fe87f045b1))\n\n\n### Features\n\n* Add Android TV launcher support ([38f2703](https://github.com/MorpheApp/morphe-manager/commit/38f27030d4c80b1873af37c21454206fc86ec372))\n* Show update date for single default bundle in management sheet ([16e81bb](https://github.com/MorpheApp/morphe-manager/commit/16e81bbde5eff647742eee5414033a4bcce4c98d))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.4/morphe-manager-1.15.0-dev.4.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.4/morphe-manager-1.15.0-dev.4.apk.asc",
+  "version": "1.15.0-dev.4"
 }
