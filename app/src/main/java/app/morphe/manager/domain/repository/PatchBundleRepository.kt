@@ -1103,7 +1103,7 @@ class PatchBundleRepository(
         ) {
             toast(R.string.sources_download_endpoint_not_found, bundle.displayTitle)
         } else {
-            toast(R.string.sources_download_fail, e.message ?: e.toString())
+            toast(R.string.sources_download_fail_named, bundle.displayTitle, e.message ?: e.toString())
         }
     }
 
@@ -1527,6 +1527,16 @@ class PatchBundleRepository(
                         continue
                     } catch (e: Exception) {
                         handleBundleDownloadError(e, bundle)
+                        // Auto-disable bundles that have never been downloaded successfully.
+                        // Bundles that already have a local copy are left enabled so the user
+                        // can still patch with the cached version despite the network error
+                        if (!bundle.patchesJarFile.exists()) {
+                            Log.w(tag, "Bundle ${bundle.name} has no local copy after failure; disabling automatically")
+                            dispatchAction("Auto-disable failed uninstalled bundle (${bundle.uid})") { _ ->
+                                updateDb(bundle.uid) { it.copy(enabled = false) }
+                                doReload()
+                            }
+                        }
                         continue
                     }
 
