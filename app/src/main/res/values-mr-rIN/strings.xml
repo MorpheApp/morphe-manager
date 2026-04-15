@@ -81,4 +81,5 @@
     <string name="all">सर्व</string>
     <string name="filter">गाळण</string>
     <string name="unmount">डिमाउंट</string>
+    <string name="imported_successfully">यशस्वीरित्या आयात केले</string>
 </resources>

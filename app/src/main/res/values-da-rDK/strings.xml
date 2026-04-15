@@ -687,6 +687,7 @@ Bildeformateringen må være som følger:
     <string name="mounting_ellipsis">Montering…</string>
     <string name="unmounting_ellipsis">Afmontere…</string>
     <string name="importing_ellipsis">Importerer…</string>
+    <string name="imported_successfully">Importeret med succes</string>
     <string name="changelog">Se ændringslogfiler</string>
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslogfil: %s</string>

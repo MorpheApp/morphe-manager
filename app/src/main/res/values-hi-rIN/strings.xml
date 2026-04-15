@@ -687,6 +687,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">माउंटिंग…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>
     <string name="importing_ellipsis">आयम…</string>
+    <string name="imported_successfully">सफलतापूर्वक आयात किया गया</string>
     <string name="changelog">चंगेलॉग्स देखें</string>
     <string name="changelog_description">इस अपडेट में नवीनतम बदलाव देखें</string>
     <string name="changelog_download_fail">परिवर्तन लॉग डाउनलोड करने में विफल: %s</string>

@@ -687,6 +687,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>
     <string name="importing_ellipsis">Importando…</string>
+    <string name="imported_successfully">Importados correctamente</string>
     <string name="changelog">Ver registros de cambios</string>
     <string name="changelog_description">Revisa los últimos cambios en esta actualización</string>
     <string name="changelog_download_fail">Error al descargar el registro de cambios: %s</string>

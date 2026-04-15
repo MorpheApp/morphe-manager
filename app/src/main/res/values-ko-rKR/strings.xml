@@ -120,10 +120,10 @@
     <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
     <string name="expert_mode_proceed">패치 진행</string>
-    <string name="expert_mode_disable_all">모두 비활성화</string>
-    <string name="expert_mode_enable_all">모두 활성화</string>
-    <string name="expert_mode_reset_to_default">권장 패치 활성화</string>
-    <string name="expert_mode_restore_saved">저장된 선택 목록 복원</string>
+    <string name="expert_mode_disable_all">모두 비활성화하였습니다</string>
+    <string name="expert_mode_enable_all">모두 활성화하였습니다</string>
+    <string name="expert_mode_reset_to_default">패치 기본값으로 초기화하였습니다</string>
+    <string name="expert_mode_restore_saved">저장된 선택 목록으로 복원하였습니다</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
     <string name="expert_mode_universal_patches">유니버셜 패치</string>
     <string name="expert_mode_new_patches">신규</string>
@@ -688,6 +688,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">마운트하는 중…</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중…</string>
     <string name="importing_ellipsis">가져오는 중…</string>
+    <string name="imported_successfully">성공적으로 가져왔습니다</string>
     <string name="changelog">변경 사항 보기</string>
     <string name="changelog_description">이 업데이트의 최신 변경 사항을 확인해 보세요</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>

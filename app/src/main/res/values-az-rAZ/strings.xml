@@ -113,6 +113,9 @@
     <string name="home_selected_version">Seçilən versiya</string>
     <string name="home_select_apk_title">APK Seçin</string>
     <string name="home_select_any_apk_description">Hər hansı tətbiqin APK faylını yamaqlama məqsədilə seçmək üçün aşağıda düyməyə toxun</string>
+    <string name="home_invalid_apk_unreadable">Faylı oxumaq mümkün olmadı. \'Xarici Yaddaş\'ın batareya məhdudiyyətli olmadığını yoxlayın</string>
+    <string name="home_invalid_apk_not_an_apk">Seçilən fayl yararlı APK deyil</string>
+    <string name="home_invalid_apk_io_error">Faylı açmaq olmadı. Xahiş olunur, təkrar cəhd et</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mütəxəssis rejimi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
@@ -120,6 +123,7 @@
     <string name="expert_mode_disable_all">Hamısını qapat</string>
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
     <string name="expert_mode_reset_to_default">Tövsiyə olunan yamaqları aktivləşdir</string>
+    <string name="expert_mode_restore_saved">Saxlanılan seçimi bərpa et</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
     <string name="expert_mode_universal_patches">Ümumi yamaqlar</string>
     <string name="expert_mode_new_patches">Yeni</string>
@@ -609,6 +613,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_about">Haqqında</string>
     <string name="settings_system_share_website">Veb saytı paylaş</string>
     <string name="settings_system_share_website_description">Xidməti Morphe veb saytını paylaşın</string>
+    <string name="settings_system_manager_description">"İcma əlaqələri və töhfələri ilə idarə olunan məşhur Android tətbiqlərinin müasir, rəvan yamaqlanması üçün açıq mənbəli layihə"</string>
     <string name="credits">Sərmayələr</string>
     <string name="credits_current_development">Hazırkı inkişaf</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>

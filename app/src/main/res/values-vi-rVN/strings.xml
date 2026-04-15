@@ -688,6 +688,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="mounting_ellipsis">Đang gắn kết…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn…</string>
     <string name="importing_ellipsis">Đang nhập…</string>
+    <string name="imported_successfully">Đã nhập thành công</string>
     <string name="changelog">Lịch sử cập nhật</string>
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
     <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>

@@ -687,6 +687,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="mounting_ellipsis">Koppelen…</string>
     <string name="unmounting_ellipsis">Verwijderen…</string>
     <string name="importing_ellipsis">Importeren…</string>
+    <string name="imported_successfully">Geïmporteerd succesvol</string>
     <string name="changelog">Wijzigingslogboeken bekijken</string>
     <string name="changelog_description">Bekijk de laatste wijzigingen in deze update</string>
     <string name="changelog_download_fail">Fout bij het downloaden van de wijzigingslogboek: %s</string>

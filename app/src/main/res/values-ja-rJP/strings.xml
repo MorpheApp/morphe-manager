@@ -687,6 +687,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">マウント中…</string>
     <string name="unmounting_ellipsis">アンマウント中…</string>
     <string name="importing_ellipsis">インポート中…</string>
+    <string name="imported_successfully">設定のインポートに成功しました</string>
     <string name="changelog">変更履歴を表示</string>
     <string name="changelog_description">最新のアップデートでの変更点を確認します</string>
     <string name="changelog_download_fail">変更履歴のダウンロードに失敗しました: %s</string>

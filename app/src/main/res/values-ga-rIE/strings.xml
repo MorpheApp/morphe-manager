@@ -687,6 +687,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="mounting_ellipsis">Ag ceangal…</string>
     <string name="unmounting_ellipsis">Ag dícheangal…</string>
     <string name="importing_ellipsis">Ag iompórtáil…</string>
+    <string name="imported_successfully">Importáil go rathúil</string>
     <string name="changelog">Féach ar logaí athruithe</string>
     <string name="changelog_description">Féach ar na hathruithe is déanaí sa nuashonrú seo</string>
     <string name="changelog_download_fail">Theip ar an logála hathruithe a íoslódáil: %s</string>

@@ -114,7 +114,7 @@
     <string name="home_select_apk_title">Pilih APK</string>
     <string name="home_select_any_apk_description">Ketuk tombol di bawah untuk memilih berkas APK apapun untuk ditambal</string>
     <string name="home_invalid_apk_unreadable">Tidak dapat membaca berkas. Periksa apakah \'Penyimpanan Eksternal\' tidak dibatasi baterai</string>
-    <string name="home_invalid_apk_not_an_apk">Berkas yang dipilih bukan APK yang valid</string>
+    <string name="home_invalid_apk_not_an_apk">Berkas yang dipilih bukan APK yang sah</string>
     <string name="home_invalid_apk_io_error">Gagal membuka berkas. Silakan coba lagi</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mode ahli</string>
@@ -688,6 +688,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Mengimpor…</string>
+    <string name="imported_successfully">Berhasil diimpor</string>
     <string name="changelog">Lihat catatan perubahan</string>
     <string name="changelog_description">Lihat perubahan terbaru dalam pembaruan ini</string>
     <string name="changelog_download_fail">Gagal mengunduh catatan perubahan: %s</string>

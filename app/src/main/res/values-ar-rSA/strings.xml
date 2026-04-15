@@ -687,6 +687,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>
     <string name="importing_ellipsis">جارٍ استيراد…</string>
+    <string name="imported_successfully">تم الاستيراد بنجاح</string>
     <string name="changelog">عرض سجل التغييرات</string>
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>

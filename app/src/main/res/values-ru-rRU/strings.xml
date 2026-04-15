@@ -687,6 +687,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">Монтаж…</string>
     <string name="unmounting_ellipsis">Размонтирование…</string>
     <string name="importing_ellipsis">Импортирование…</string>
+    <string name="imported_successfully">Импортировано успешно</string>
     <string name="changelog">Просмотр истории изменений</string>
     <string name="changelog_description">Просмотрите последние изменения в этом обновлении</string>
     <string name="changelog_download_fail">Не удалось загрузить историю изменений: %s</string>

@@ -679,6 +679,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>
     <string name="importing_ellipsis">আমদানি করছেন…</string>
+    <string name="imported_successfully">সফলভাবে আমদানি করা হয়েছে</string>
     <string name="changelog">পরিবর্তনলগ দেখুন</string>
     <string name="changelog_description">এই আপডেটে সর্বশেষ পরিবর্তনের জন্য চেক করুন</string>
     <string name="changelog_download_fail">চেঞ্জলগ ডাউনলোড করা যায়নি: %s</string>

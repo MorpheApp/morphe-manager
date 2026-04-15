@@ -689,6 +689,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="mounting_ellipsis">Montage…</string>
     <string name="unmounting_ellipsis">Démontage…</string>
     <string name="importing_ellipsis">Importation…</string>
+    <string name="imported_successfully">Importé avec succès</string>
     <string name="changelog">Voir le journal des modifications</string>
     <string name="changelog_description">Découvrez les dernières modifications de cette mise à jour</string>
     <string name="changelog_download_fail">Échec du téléchargement du journal des modifications : %s</string>

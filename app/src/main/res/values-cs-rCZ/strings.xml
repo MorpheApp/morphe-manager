@@ -687,6 +687,7 @@ Rozměry obrázků musí být následující:
     <string name="mounting_ellipsis">Připojování…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>
     <string name="importing_ellipsis">Importování…</string>
+    <string name="imported_successfully">Importováno úspěšně</string>
     <string name="changelog">Zobrazit poznámky k vydání</string>
     <string name="changelog_description">Zjistěte nejaktuálnější změny v této aktualizaci</string>
     <string name="changelog_download_fail">Selhání stažení poznámek k vydání: %s</string>
