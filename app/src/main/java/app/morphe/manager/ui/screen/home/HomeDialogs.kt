@@ -47,6 +47,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.viewmodel.BundledAppTarget
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.KnownApps
@@ -83,6 +84,7 @@ fun HomeDialogs(
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val recommendedVersion = homeViewModel.pendingRecommendedVersion
         val compatibleVersions = homeViewModel.pendingCompatibleVersions
+        val recommendedBundleVersions = homeViewModel.pendingRecommendedBundleVersions
         val selectedDownloadVersion = homeViewModel.pendingSelectedDownloadVersion
         val usingMountInstall = homeViewModel.usingMountInstall
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
@@ -92,6 +94,7 @@ fun HomeDialogs(
             appName = appName,
             recommendedVersion = recommendedVersion,
             compatibleVersions = compatibleVersions,
+            recommendedBundleVersions = recommendedBundleVersions,
             selectedDownloadVersion = selectedDownloadVersion,
             onVersionSelect = { homeViewModel.pendingSelectedDownloadVersion = it },
             usingMountInstall = usingMountInstall,
@@ -449,7 +452,8 @@ fun HomeDialogs(
 private fun ApkAvailabilityDialog(
     appName: String,
     recommendedVersion: AppTarget?,
-    compatibleVersions: List<AppTarget>,
+    compatibleVersions: List<BundledAppTarget>,
+    recommendedBundleVersions: Map<Int, AppTarget>,
     selectedDownloadVersion: AppTarget?,
     onVersionSelect: (AppTarget) -> Unit,
     usingMountInstall: Boolean,
@@ -463,6 +467,7 @@ private fun ApkAvailabilityDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_apk_availability_dialog_title),
+        compactPadding = true,
         footer = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -518,19 +523,20 @@ private fun ApkAvailabilityDialog(
                     SelectableVersionListCard(
                         versions = compatibleVersions,
                         selectedVersion = selectedDownloadVersion,
-                        recommendedVersion = recommendedVersion,
+                        recommendedBundleVersions = recommendedBundleVersions,
                         onVersionSelect = onVersionSelect,
-                        anyString = anyString
+                        anyString = anyString,
+                        hasMultipleBundles = compatibleVersions.map { it.bundleUid }.distinct().size > 1
                     )
                 } else {
                     VersionListCard(
-                        versions = compatibleVersions.map { it.version ?: anyString },
+                        versions = compatibleVersions.map { it.target.version ?: anyString },
                         experimentalVersions = compatibleVersions
-                            .filter { it.isExperimental }
-                            .mapNotNull { it.version }
+                            .filter { it.target.isExperimental }
+                            .mapNotNull { it.target.version }
                             .toSet(),
                         descriptions = compatibleVersions
-                            .mapNotNull { t -> t.version?.let { v -> t.description?.let { d -> v to d } } }
+                            .mapNotNull { b -> b.target.version?.let { v -> b.target.description?.let { d -> v to d } } }
                             .toMap()
                     )
                 }
@@ -797,6 +803,7 @@ private fun UnsupportedVersionWarningDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_dialog_unsupported_version_dialog_title),
+        compactPadding = true,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
@@ -1081,6 +1088,7 @@ fun WrongPackageDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_dialog_wrong_package_title),
+        compactPadding = true,
         footer = {
             MorpheDialogButton(
                 text = stringResource(android.R.string.ok),
@@ -1168,11 +1176,12 @@ fun WrongPackageDialog(
  */
 @Composable
 private fun SelectableVersionListCard(
-    versions: List<AppTarget>,
+    versions: List<BundledAppTarget>,
     selectedVersion: AppTarget?,
-    recommendedVersion: AppTarget?,
+    recommendedBundleVersions: Map<Int, AppTarget>,
     onVersionSelect: (AppTarget) -> Unit,
     anyString: String,
+    hasMultipleBundles: Boolean,
     modifier: Modifier = Modifier
 ) {
     if (versions.isEmpty()) return
@@ -1184,13 +1193,49 @@ private fun SelectableVersionListCard(
         tonalElevation = 1.dp
     ) {
         Column(modifier = Modifier.fillMaxWidth().selectableGroup()) {
-            versions.forEachIndexed { index, target ->
+            var lastBundleUid = -1
+
+            versions.forEachIndexed { index, bundled ->
+                val target = bundled.target
                 val versionString = target.version ?: anyString
                 val isSelected = target.version != null && target.version == selectedVersion?.version
-                val isRecommended = target.version != null && target.version == recommendedVersion?.version
+                val isRecommended = target.version != null &&
+                        target.version == recommendedBundleVersions[bundled.bundleUid]?.version
                 val recommendedLabel = stringResource(R.string.home_apk_availability_recommended_label)
                 val experimentalLabel = stringResource(R.string.home_dialog_unsupported_version_experimental_label)
                 val selectedLabel = stringResource(R.string.home_selected_version)
+
+                // Bundle section header - only when multiple bundles are present and uid changes
+                if (hasMultipleBundles && bundled.bundleUid != lastBundleUid) {
+                    if (lastBundleUid != -1) {
+                        HorizontalDivider(
+                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 7.dp),
+                        horizontalArrangement = Arrangement.spacedBy(5.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Extension,
+                            contentDescription = null,
+                            modifier = Modifier.size(12.dp),
+                            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.65f)
+                        )
+                        Text(
+                            text = bundled.bundleName,
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.65f),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    lastBundleUid = bundled.bundleUid
+                }
 
                 val badge: @Composable (() -> Unit)? = when {
                     target.isExperimental -> ({
@@ -1218,6 +1263,7 @@ private fun SelectableVersionListCard(
                     }
                     if (isSelected) append(", $selectedLabel")
                     target.description?.let { append(", $it") }
+                    if (hasMultipleBundles) append(", ${bundled.bundleName}")
                 }
 
                 Row(
@@ -1283,7 +1329,10 @@ private fun SelectableVersionListCard(
                     }
                 }
 
-                if (index < versions.lastIndex) {
+                // Row divider - skip after last row in a bundle group (section divider handles it)
+                val isLastInBundle = index == versions.lastIndex ||
+                        (hasMultipleBundles && versions[index + 1].bundleUid != bundled.bundleUid)
+                if (index < versions.lastIndex && !isLastInBundle) {
                     HorizontalDivider(
                         modifier = Modifier.padding(horizontal = 16.dp),
                         color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
@@ -1293,6 +1342,7 @@ private fun SelectableVersionListCard(
         }
     }
 }
+
 
 
 @Composable
@@ -1539,6 +1589,7 @@ fun DeepLinkAddSourceDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.deep_link_add_source_title),
+        compactPadding = true,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.add),
