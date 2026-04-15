@@ -787,12 +787,16 @@ class HomeViewModel(
                     progressToast.show()
                 }
             } catch (_: CancellationException) {
-                // Ignore cancellation.
+                // Ignore cancellation
             }
         }
 
         try {
-            block()
+            val result = block()
+            withContext(Dispatchers.Main) {
+                app.toast(app.getString(R.string.imported_successfully))
+            }
+            result
         } finally {
             toastRepeater.cancel()
             withContext(Dispatchers.Main) { progressToast.cancel() }
@@ -824,7 +828,7 @@ class HomeViewModel(
                     contentResolver.takePersistableUriPermission(patchBundle, permissionFlags)
                     persistedPermission = true
                 } catch (_: SecurityException) {
-                    // Provider may not support persistable permissions; fall back to transient grant.
+                    // Provider may not support persistable permissions; fall back to transient grant
                 }
 
                 try {
@@ -840,7 +844,7 @@ class HomeViewModel(
                                 permissionFlags
                             )
                         } catch (_: SecurityException) {
-                            // Ignore if provider revoked or already released.
+                            // Ignore if provider revoked or already released
                         }
                     }
                 }
