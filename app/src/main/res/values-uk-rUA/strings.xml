@@ -113,7 +113,7 @@
     <string name="home_selected_version">Вибрана версія</string>
     <string name="home_select_apk_title">Вибрати APK файл</string>
     <string name="home_select_any_apk_description">Натисніть кнопку нижче, щоб вибрати APK файл будь-якого застосунку для патчінгу</string>
-    <string name="home_invalid_apk_unreadable">Не вдалося прочитати файл. Перевірте, чи не обмежено живленням зовнішній накопичувач</string>
+    <string name="home_invalid_apk_unreadable">Не вдалося прочитати файл. Перевірте, чи не обмежено використання батареї для \"Зовнішньої пам’яті\"</string>
     <string name="home_invalid_apk_not_an_apk">Вибраний файл не є дійсним APK</string>
     <string name="home_invalid_apk_io_error">Не вдалося відкрити файл. Будь ласка, спробуйте ще раз</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -687,6 +687,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">Монтування…</string>
     <string name="unmounting_ellipsis">Демонтування…</string>
     <string name="importing_ellipsis">Імпортування…</string>
+    <string name="imported_successfully">Імпортовано успішно</string>
     <string name="changelog">Переглянути списки змін</string>
     <string name="changelog_description">Перегляньте останні зміни цього оновлення</string>
     <string name="changelog_download_fail">Не вдалося завантажити список змін: %s</string>

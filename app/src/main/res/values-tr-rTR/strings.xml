@@ -687,6 +687,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="mounting_ellipsis">Bağlanıyor…</string>
     <string name="unmounting_ellipsis">Çıkartılıyor…</string>
     <string name="importing_ellipsis">İçe aktarılıyor…</string>
+    <string name="imported_successfully">Başarıyla aktarıldı</string>
     <string name="changelog">Değişiklik günlüklerini görüntüle</string>
     <string name="changelog_description">Bu güncellemede yapılmış son değişiklikleri inceleyin</string>
     <string name="changelog_download_fail">Değişiklik günlüğü indirilemedi: %s</string>

@@ -688,6 +688,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>
     <string name="importing_ellipsis">กำลังนำเข้า…</string>
+    <string name="imported_successfully">การนำเข้าสำเร็จ</string>
     <string name="changelog">ดูบันทึกการเปลี่ยนแปลง</string>
     <string name="changelog_description">ดูการเปลี่ยนแปลงล่าสุดในอัปเดตนี้</string>
     <string name="changelog_download_fail">ดาวน์โหลดบันทึกการเปลี่ยนแปลงไม่สำเร็จ: %s</string>

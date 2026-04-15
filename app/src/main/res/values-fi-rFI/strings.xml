@@ -686,6 +686,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="mounting_ellipsis">Liitetään…</string>
     <string name="unmounting_ellipsis">Poistetaan…</string>
     <string name="importing_ellipsis">Tuotaan…</string>
+    <string name="imported_successfully">Tuotu onnistuneesti</string>
     <string name="changelog">Näytä muutoshistoriat</string>
     <string name="changelog_description">Katso tämän päivityksen uusimmat muutokset</string>
     <string name="changelog_download_fail">Muutostietojen lataus epäonnistui: %s</string>

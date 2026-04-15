@@ -113,6 +113,9 @@
     <string name="home_selected_version">Vald version</string>
     <string name="home_select_apk_title">Välj en APK-fil</string>
     <string name="home_select_any_apk_description">Tryck på knappen nedan för att välja en APK-fil för valfri app som du vill korrigera</string>
+    <string name="home_invalid_apk_unreadable">Det gick inte att läsa filen. Kontrollera att Extern lagring inte har batteribegränsningar</string>
+    <string name="home_invalid_apk_not_an_apk">Den valda filen är inte en giltig APK-fil</string>
+    <string name="home_invalid_apk_io_error">Det gick inte att öppna filen. Försök igen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expertläge</string>
     <string name="expert_mode_search">Sök efter korrigeringar</string>
@@ -120,6 +123,7 @@
     <string name="expert_mode_disable_all">Inaktivera alla</string>
     <string name="expert_mode_enable_all">Aktivera alla</string>
     <string name="expert_mode_reset_to_default">Aktivera rekommenderade korrigeringar</string>
+    <string name="expert_mode_restore_saved">Återställ sparat urval</string>
     <string name="expert_mode_no_results">Inga korrigeringar hittades</string>
     <string name="expert_mode_universal_patches">Universella korrigeringar</string>
     <string name="expert_mode_new_patches">Ny</string>
@@ -608,6 +612,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
     <string name="settings_system_share_website_description">Dela Morphes officiella webbplats</string>
+    <string name="settings_system_manager_description">"Ett projekt med öppen källkod för modern, smidig korrigering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
     <string name="credits">Medverkande</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>

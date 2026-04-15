@@ -670,6 +670,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="mounting_ellipsis">מצרף…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>
     <string name="importing_ellipsis">מוצא... </string>
+    <string name="imported_successfully">היובא בהצלחה</string>
     <string name="changelog">הצג יומני שינויים</string>
     <string name="changelog_description">בדוק את השינויים האחרונים בסוג זה של עדכון</string>
     <string name="changelog_download_fail">שגיאה בהורדת היסטוריית שינויים: %s</string>

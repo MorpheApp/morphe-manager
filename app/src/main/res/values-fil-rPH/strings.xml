@@ -687,6 +687,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="mounting_ellipsis">Nagma-mount…</string>
     <string name="unmounting_ellipsis">Ina-unmount…</string>
     <string name="importing_ellipsis">Ini-import…</string>
+    <string name="imported_successfully">Matagumpay na na-import</string>
     <string name="changelog">Tingnan ang mga changelog</string>
     <string name="changelog_description">Tingnan ang mga pinakabagong pagbabago sa update na ito</string>
     <string name="changelog_download_fail">Nabigong mag-download ang changelog: %s</string>

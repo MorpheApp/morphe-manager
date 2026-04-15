@@ -687,6 +687,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Wird geunmountet…</string>
     <string name="importing_ellipsis">Importiere…</string>
+    <string name="imported_successfully">Einstellungen erfolgreich importiert</string>
     <string name="changelog">Changelogs anzeigen</string>
     <string name="changelog_description">Entdecken Sie die neuesten Änderungen in diesem Update</string>
     <string name="changelog_download_fail">Download des Changelogs fehlgeschlagen: %s</string>

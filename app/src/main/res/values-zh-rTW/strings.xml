@@ -686,6 +686,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">掛載中……</string>
     <string name="unmounting_ellipsis">正在解除掛載……</string>
     <string name="importing_ellipsis">匯入……</string>
+    <string name="imported_successfully">設定匯入成功</string>
     <string name="changelog">查看變更紀錄</string>
     <string name="changelog_description">查看本次更新的最新變更</string>
     <string name="changelog_download_fail">無法下載變更紀錄：%s</string>

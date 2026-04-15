@@ -685,6 +685,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="mounting_ellipsis">Çêkirin…</string>
     <string name="unmounting_ellipsis">Sererastkirin…</string>
     <string name="importing_ellipsis">Gihîştin…</string>
+    <string name="imported_successfully">Sergûha xweş</string>
     <string name="changelog">Bixweyne guhezgarîyan</string>
     <string name="changelog_description">Guherînên dawî ti vê nûvekirinê binêrin</string>
     <string name="changelog_download_fail">Degerandina guhezgarîyan ji destûr ve çû: %s</string>

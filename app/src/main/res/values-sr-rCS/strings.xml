@@ -671,6 +671,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="mounting_ellipsis">Montiranje…</string>
     <string name="unmounting_ellipsis">Ponovo priključaj…</string>
     <string name="importing_ellipsis">Uvozi…</string>
+    <string name="imported_successfully">Uspelo uveženo</string>
     <string name="changelog">Prikaži zapise o promenama</string>
     <string name="changelog_description">Pogledaj najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Preuzimanje zapisa o promenama nije uspelo: %s</string>

@@ -686,6 +686,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">Монтирање…</string>
     <string name="unmounting_ellipsis">Демонтирање…</string>
     <string name="importing_ellipsis">Увоз…</string>
+    <string name="imported_successfully">Успјешно импортирано</string>
     <string name="changelog">Прегледајте дневнике промена</string>
     <string name="changelog_description">Pogledajte najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Није успело преузимање дневника промена: %s</string>

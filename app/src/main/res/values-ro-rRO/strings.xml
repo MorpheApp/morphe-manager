@@ -687,6 +687,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
+    <string name="imported_successfully">Importate cu succes</string>
     <string name="changelog">Vizualizați jurnalele modificărilor</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>

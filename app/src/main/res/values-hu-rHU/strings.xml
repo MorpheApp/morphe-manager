@@ -688,6 +688,7 @@ Forrás: #%2$s</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>
     <string name="importing_ellipsis">Importálás…</string>
+    <string name="imported_successfully">Sikeresen importálva</string>
     <string name="changelog">Változásnaplók megtekintése</string>
     <string name="changelog_description">Tekintse meg a legújabb módosításokat ebben a frissítésben</string>
     <string name="changelog_download_fail">Nem sikerült letölteni a változásnaplót: %s</string>

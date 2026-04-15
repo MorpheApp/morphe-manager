@@ -687,6 +687,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting_ellipsis">正在卸载…</string>
     <string name="importing_ellipsis">正在导入…</string>
+    <string name="imported_successfully">设置导入成功</string>
     <string name="changelog">查看更新日志</string>
     <string name="changelog_description">查看此更新中的最新更改</string>
     <string name="changelog_download_fail">下载更新日志失败：%s</string>

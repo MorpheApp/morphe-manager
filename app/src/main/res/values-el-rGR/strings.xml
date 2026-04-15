@@ -687,6 +687,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">Προσάρτηση…</string>
     <string name="unmounting_ellipsis">Αποπροσάρτηση...</string>
     <string name="importing_ellipsis">Εισαγωγή…</string>
+    <string name="imported_successfully">Εισαγωγές επιτυχώς</string>
     <string name="changelog">Προβολή αρχείων καταγραφής αλλαγών</string>
     <string name="changelog_description">Έλεγξε τις τελευταίες αλλαγές σε αυτή την ενημέρωση</string>
     <string name="changelog_download_fail">Αποτυχία λήψης αρχείου καταγραφής αλλαγών: %s</string>
