@@ -749,6 +749,7 @@ Details: %2$s"</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Importing…</string>
+    <string name="imported_successfully">Imported successfully</string>
 
     <string name="changelog">View changelogs</string>
     <string name="changelog_description">Check out the latest changes in this update</string>
