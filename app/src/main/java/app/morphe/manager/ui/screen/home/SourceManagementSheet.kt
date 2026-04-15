@@ -693,47 +693,47 @@ private fun BundleCardHeader(
             }
 
             // Version • date
-            if (showChevron) {
-                val timestamp = bundle.updatedAt ?: bundle.createdAt
-                val versionText = bundle.version?.removePrefix("v")
-                val dateText = timestamp?.let { getRelativeTimeString(it) }
-                val subtitleText = listOfNotNull(versionText, dateText).joinToString("  •  ")
-                if (subtitleText.isNotEmpty()) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        if (versionText != null) {
-                            Text(
-                                text = versionText,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                        if (versionText != null && dateText != null) {
-                            Text(
-                                text = "  •  ",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                        if (timestamp != null && dateText != null) {
-                            Icon(
-                                imageVector = if (bundle.updatedAt != null) Icons.Outlined.Schedule else Icons.Outlined.CalendarToday,
-                                contentDescription = null,
-                                modifier = Modifier.size(11.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Text(
-                                text = dateText,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
+            // When showChevron=false (single bundle): show only date, no version.
+            // When showChevron=true (multiple bundles): show version • date.
+            val timestamp = bundle.updatedAt ?: bundle.createdAt
+            val versionText = if (showChevron) bundle.version?.removePrefix("v") else null
+            val dateText = timestamp?.let { getRelativeTimeString(it) }
+
+            if (versionText != null || dateText != null) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    if (versionText != null) {
+                        Text(
+                            text = versionText,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    if (versionText != null && dateText != null) {
+                        Text(
+                            text = "  •  ",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    if (dateText != null) {
+                        Icon(
+                            imageVector = if (bundle.updatedAt != null) Icons.Outlined.Schedule else Icons.Outlined.CalendarToday,
+                            contentDescription = null,
+                            modifier = Modifier.size(11.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = dateText,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
                 }
             }
