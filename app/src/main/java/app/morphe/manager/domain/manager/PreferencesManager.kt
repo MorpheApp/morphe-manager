@@ -11,6 +11,7 @@ import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
@@ -162,6 +163,7 @@ class PreferencesManager(
         val useExpertMode: Boolean? = null,
         val backgroundUpdateNotifications: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
+        val customBundles: List<BundleSnapshot>? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(

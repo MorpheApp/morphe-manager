@@ -41,6 +41,7 @@ import java.security.MessageDigest
 import java.util.Locale
 import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.network.utils.APIError
+import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import io.ktor.client.plugins.ResponseException
 import app.morphe.manager.data.room.bundles.Source as SourceInfo
 
@@ -1774,6 +1775,83 @@ class PatchBundleRepository(
         val latestVersion: String?,
         val pageUrl: String?,
     )
+
+    /**
+     * Export all third-party remote bundles as a list of snapshots.
+     */
+    suspend fun exportCustomBundles(): List<BundleSnapshot> {
+        return dao.all()
+            .filter { it.uid != DEFAULT_SOURCE_UID && it.source !is Source.Local }
+            .map { entity ->
+                BundleSnapshot(
+                    name = entity.name,
+                    displayName = entity.displayName,
+                    source = entity.source.toString(),
+                    autoUpdate = entity.autoUpdate,
+                    enabled = entity.enabled,
+                    sortOrder = entity.sortOrder,
+                    createdAt = entity.createdAt,
+                    updatedAt = entity.updatedAt,
+                )
+            }
+    }
+
+    /**
+     * Import a list of [BundleSnapshot] entries produced by [exportCustomBundles].
+     * Skips bundles whose source URL already exists, so this is safe to call on repeated imports.
+     * Triggers a full reload and starts a download job for newly added bundles.
+     */
+    suspend fun importCustomBundles(snapshots: List<BundleSnapshot>) {
+        if (snapshots.isEmpty()) return
+        dispatchAction("Import custom bundles") { state ->
+            val existingEndpoints = state.sources.values
+                .filterIsInstance<RemotePatchBundle>()
+                .map { it.endpoint.lowercase(Locale.US) }
+                .toSet()
+
+            var addedAny = false
+            snapshots.forEach { snapshot ->
+                val normalizedUrl = runCatching {
+                    normalizeRemoteBundleUrl(snapshot.source)
+                }.getOrNull() ?: return@forEach
+
+                if (normalizedUrl.lowercase(Locale.US) in existingEndpoints) return@forEach
+
+                createEntity(
+                    name = snapshot.name,
+                    source = Source.from(normalizedUrl),
+                    autoUpdate = snapshot.autoUpdate,
+                    displayName = snapshot.displayName,
+                    sortOrder = snapshot.sortOrder,
+                    createdAt = snapshot.createdAt,
+                    updatedAt = snapshot.updatedAt,
+                )
+                addedAny = true
+            }
+
+            if (!addedAny) return@dispatchAction state
+
+            val newState = doReload()
+
+            startRemoteUpdateJob(
+                force = false,
+                showToast = false,
+                allowUnsafeNetwork = prefs.allowMeteredUpdates.get(),
+                onPerBundleProgress = null,
+                predicate = { bundle ->
+                    bundle.uid != DEFAULT_SOURCE_UID &&
+                            snapshots.any { s ->
+                                bundle.endpoint.equals(
+                                    runCatching { normalizeRemoteBundleUrl(s.source) }.getOrNull(),
+                                    ignoreCase = true
+                                )
+                            }
+                }
+            )
+
+            newState
+        }
+    }
 
     internal companion object {
         const val DEFAULT_SOURCE_UID = 0

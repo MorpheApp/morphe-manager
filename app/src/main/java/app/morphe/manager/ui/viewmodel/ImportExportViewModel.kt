@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.util.tag
@@ -47,8 +48,8 @@ data class ManagerSettingsExportFile(
 )
 
 /**
- * Export file format for patch selections and options
- * This format stores selections (which patches are enabled) and their options (patch configuration)
+ * Export file format for patch selections and options.
+ * This format stores selections (which patches are enabled) and their options (patch configuration).
  */
 @Serializable
 data class PatchBundleDataExportFile(
@@ -73,13 +74,30 @@ data class AllSelectionsExportFile(
     val bundles: List<PatchBundleDataExportFile>
 )
 
+/**
+ * Serializable snapshot of remote patch bundle, used for export/import
+ * as part of the manager settings file [ManagerSettingsExportFile].
+ */
+@Serializable
+data class BundleSnapshot(
+    val name: String,
+    val displayName: String? = null,
+    val source: String,
+    val autoUpdate: Boolean,
+    val enabled: Boolean = true,
+    val sortOrder: Int,
+    val createdAt: Long? = null,
+    val updatedAt: Long? = null,
+)
+
 @OptIn(ExperimentalSerializationApi::class)
 class ImportExportViewModel(
     private val app: Application,
     private val keystoreManager: KeystoreManager,
     private val preferencesManager: PreferencesManager,
     private val patchSelectionRepository: PatchSelectionRepository,
-    private val patchOptionsRepository: PatchOptionsRepository
+    private val patchOptionsRepository: PatchOptionsRepository,
+    private val patchBundleRepository: PatchBundleRepository
 ) : ViewModel() {
     private val contentResolver = app.contentResolver
 
@@ -147,6 +165,12 @@ class ImportExportViewModel(
             }
 
             preferencesManager.importSettings(exportFile.settings)
+
+            val bundles = exportFile.settings.customBundles
+            if (!bundles.isNullOrEmpty()) {
+                patchBundleRepository.importCustomBundles(bundles)
+            }
+
             app.toast(app.getString(R.string.settings_system_import_manager_settings_success))
         }
     }
@@ -154,11 +178,14 @@ class ImportExportViewModel(
     fun exportManagerSettings(target: Uri) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_export_manager_settings_fail, "Failed to export manager settings") {
             val snapshot = preferencesManager.exportSettings()
+            val bundles = withContext(Dispatchers.IO) { patchBundleRepository.exportCustomBundles() }
 
             withContext(Dispatchers.IO) {
                 contentResolver.openOutputStream(target, "wt")!!.use { output ->
                     json.encodeToStream(
-                        ManagerSettingsExportFile(settings = snapshot),
+                        ManagerSettingsExportFile(
+                            settings = snapshot.copy(customBundles = bundles.ifEmpty { null })
+                        ),
                         output
                     )
                 }
@@ -169,7 +196,7 @@ class ImportExportViewModel(
     }
 
     /**
-     * Export patch selections and options for a specific package+bundle combination
+     * Export patch selections and options for a specific package+bundle combination.
      */
     fun exportPackageBundleData(
         packageName: String,
@@ -317,7 +344,7 @@ class ImportExportViewModel(
     }
 
     /**
-     * Get filename for package+bundle data export
+     * Get filename for package+bundle data export.
      */
     fun getPackageBundleDataExportFileName(packageName: String, bundleUid: Int, bundleName: String?): String {
         val time = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now())
