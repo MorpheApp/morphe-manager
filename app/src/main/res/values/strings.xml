@@ -102,6 +102,13 @@
     <string name="home_apk_availability_no">No, I already have an APK</string>
     <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
+    <string name="home_patch_overview_title">Available patches</string>
+    <string name="home_patch_overview_description">%1$d source(s) found with %2$d patch(es) for this app</string>
+    <string name="home_patch_overview_available_patches">Patches available</string>
+    <string name="home_patch_overview_compatible_count">%1$d compatible</string>
+    <string name="home_patch_overview_universal_count">%1$d universal</string>
+    <string name="home_patch_overview_other_versions_count">%1$d other versions</string>
+    <string name="home_patch_overview_continue">Continue to patching</string>
 
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>

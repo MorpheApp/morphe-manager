@@ -12,12 +12,15 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -48,6 +51,7 @@ import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
+import app.morphe.manager.ui.viewmodel.PatchOverviewBundleUi
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.RemoteAvatar
@@ -73,6 +77,20 @@ fun HomeDialogs(
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+
+    if (homeViewModel.showPatchOverviewDialog && homeViewModel.patchOverviewPackageName != null) {
+        val packageName = homeViewModel.patchOverviewPackageName!!
+        val appName = homeViewModel.bundleAppMetadataFlow.value[packageName]?.displayName
+            ?: KnownApps.getAppName(packageName)
+
+        PatchOverviewDialog(
+            appName = appName,
+            packageName = packageName,
+            bundles = homeViewModel.patchOverviewBundles,
+            onDismiss = { homeViewModel.dismissPatchOverview() },
+            onContinue = { homeViewModel.continueFromPatchOverview() }
+        )
+    }
 
     // Dialog 1: APK availability
     AnimatedVisibility(
@@ -429,6 +447,187 @@ fun HomeDialogs(
                 }
             }
         )
+    }
+}
+
+@Composable
+private fun PatchOverviewDialog(
+    appName: String,
+    packageName: String,
+    bundles: List<PatchOverviewBundleUi>,
+    onDismiss: () -> Unit,
+    onContinue: () -> Unit
+) {
+    val uriHandler = LocalUriHandler.current
+    val secondaryColor = LocalDialogSecondaryTextColor.current
+    val totalPatches = bundles.sumOf { it.patchNames.size }
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_patch_overview_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.home_patch_overview_continue),
+                onPrimaryClick = onContinue,
+                primaryIcon = Icons.Outlined.ArrowForward,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss,
+                layout = DialogButtonLayout.Vertical
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = appName,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = LocalDialogTextColor.current
+                )
+                Text(
+                    text = packageName,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontFamily = FontFamily.Monospace,
+                    color = secondaryColor
+                )
+                Text(
+                    text = stringResource(
+                        R.string.home_patch_overview_description,
+                        bundles.size,
+                        totalPatches
+                    ),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = secondaryColor
+                )
+            }
+
+            bundles.forEachIndexed { index, bundle ->
+                PatchOverviewBundleCard(
+                    bundle = bundle,
+                    onOpenSource = {
+                        bundle.sourceUrl?.let(uriHandler::openUri)
+                    }
+                )
+
+                if (index < bundles.lastIndex) {
+                    MorpheSettingsDivider()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun PatchOverviewBundleCard(
+    bundle: PatchOverviewBundleUi,
+    onOpenSource: () -> Unit
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
+        tonalElevation = 1.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = bundle.title,
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold,
+                        color = LocalDialogTextColor.current
+                    )
+                    bundle.version?.takeIf { it.isNotBlank() }?.let { version ->
+                        Text(
+                            text = stringResource(R.string.version) + " $version",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
+                }
+
+                if (bundle.sourceUrl != null) {
+                    ActionPillButton(
+                        onClick = onOpenSource,
+                        icon = Icons.AutoMirrored.Outlined.OpenInNew,
+                        contentDescription = stringResource(R.string.sources_management_open_in_browser)
+                    )
+                }
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                InfoBadge(
+                    text = stringResource(R.string.home_patch_overview_compatible_count, bundle.compatiblePatchCount),
+                    style = InfoBadgeStyle.Primary,
+                    isCompact = true
+                )
+                if (bundle.universalPatchCount > 0) {
+                    InfoBadge(
+                        text = stringResource(R.string.home_patch_overview_universal_count, bundle.universalPatchCount),
+                        style = InfoBadgeStyle.Default,
+                        isCompact = true
+                    )
+                }
+                if (bundle.incompatiblePatchCount > 0) {
+                    InfoBadge(
+                        text = stringResource(R.string.home_patch_overview_other_versions_count, bundle.incompatiblePatchCount),
+                        style = InfoBadgeStyle.Warning,
+                        isCompact = true
+                    )
+                }
+            }
+
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.home_patch_overview_available_patches),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = LocalDialogSecondaryTextColor.current
+                )
+
+                bundle.patchNames.forEach { patchName ->
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+                    ) {
+                        Text(
+                            text = patchName,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogTextColor.current,
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 

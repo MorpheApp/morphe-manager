@@ -114,6 +114,17 @@ data class SavedApkInfo(
     val version: String
 )
 
+data class PatchOverviewBundleUi(
+    val uid: Int,
+    val title: String,
+    val version: String?,
+    val sourceUrl: String?,
+    val patchNames: List<String>,
+    val compatiblePatchCount: Int,
+    val incompatiblePatchCount: Int,
+    val universalPatchCount: Int
+)
+
 /**
  * Manages all dialogs, user interactions, APK processing, and bundle management.
  */
@@ -205,6 +216,11 @@ class HomeViewModel(
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
     var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
+
+    // Patch overview dialog (per-app patch sources and patch list)
+    var showPatchOverviewDialog by mutableStateOf(false)
+    var patchOverviewPackageName by mutableStateOf<String?>(null)
+    var patchOverviewBundles by mutableStateOf<List<PatchOverviewBundleUi>>(emptyList())
 
     // Bundle update snackbar state
     var showBundleUpdateSnackbar by mutableStateOf(false)
@@ -1118,7 +1134,63 @@ class HomeViewModel(
             return
         }
 
+        showPatchOverview(packageName)
+    }
+
+    fun dismissPatchOverview() {
+        showPatchOverviewDialog = false
+        patchOverviewPackageName = null
+        patchOverviewBundles = emptyList()
+    }
+
+    fun continueFromPatchOverview() {
+        val packageName = patchOverviewPackageName ?: return
+        dismissPatchOverview()
         showPatchDialog(packageName)
+    }
+
+    private fun showPatchOverview(packageName: String) {
+        val allBundleInfo = patchBundleRepository.bundleInfoFlow.value
+        val sourcesByUid = patchBundleRepository.sources.value
+            .filter { it.enabled }
+            .associateBy { it.uid }
+
+        val overviewBundles = allBundleInfo.values
+            .map { it.forPackage(packageName, recommendedVersions[packageName]?.version) }
+            .filter { scoped ->
+                scoped.enabled && scoped.patchSequence(allowIncompatible = true).any()
+            }
+            .map { scoped ->
+                val source = sourcesByUid[scoped.uid]
+                val title = source?.displayTitle?.takeIf { it.isNotBlank() }
+                    ?: scoped.name
+
+                PatchOverviewBundleUi(
+                    uid = scoped.uid,
+                    title = title,
+                    version = scoped.version,
+                    sourceUrl = source?.asRemoteOrNull()?.url,
+                    patchNames = scoped.patchSequence(allowIncompatible = true)
+                        .map { it.name }
+                        .distinct()
+                        .sorted(),
+                    compatiblePatchCount = scoped.compatible.size,
+                    incompatiblePatchCount = scoped.incompatible.size,
+                    universalPatchCount = scoped.universal.size
+                )
+            }
+            .sortedWith(
+                compareByDescending<PatchOverviewBundleUi> { it.compatiblePatchCount + it.universalPatchCount }
+                    .thenBy { it.title.lowercase() }
+            )
+
+        patchOverviewPackageName = packageName
+        patchOverviewBundles = overviewBundles
+        showPatchOverviewDialog = overviewBundles.isNotEmpty()
+
+        if (overviewBundles.isEmpty()) {
+            showPatchDialog(packageName)
+        }
     }
 
     /**
