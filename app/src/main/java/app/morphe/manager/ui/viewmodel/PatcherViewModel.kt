@@ -425,31 +425,22 @@ class PatcherViewModel(
     /**
      * Save original APK file for future repatching.
      * Called after successful patching, independent of installation method.
-     * For split APK archives (apkm, apks, xapk), saves the original archive.
+     * For split APK archives: inputFile points to the merged mono-APK already saved to
+     * originalApksDir by the worker via onMergedApkReady - this call will detect the
+     * existing record and skip re-saving.
      * For regular APK files, saves the APK itself.
      *
      * Thread-safe: uses mutex to prevent concurrent saves from observeWorker and persistPatchedApp.
      */
     private suspend fun saveOriginalApkIfNeeded() = saveOriginalApkMutex.withLock {
         try {
-            // Determine which file to save:
-            // - For SelectedApp.Local with split archives: save the original user file
-            // - For other cases: save the inputFile (which might be a downloaded/extracted APK)
+            // Determine which file to save.
+            // For SelectedApp.Local with a split archive: inputFile is updated to the merged
+            // mono-APK via setInputFile(merged=true) after prepareIfNeeded() completes, so
+            // we always use inputFile here - it already points to the correct file.
             val fileToSave = when (val selected = input.selectedApp) {
-                is SelectedApp.Local -> {
-                    // Check if original file is a split archive
-                    if (SplitApkPreparer.isSplitArchive(selected.file)) {
-                        // Save the original split archive, not the merged APK
-                        selected.file
-                    } else {
-                        // For regular APK, use inputFile (might be same as selected.file)
-                        inputFile ?: selected.file
-                    }
-                }
-                else -> {
-                    // For non-local apps (Download, Search, Installed), use inputFile
-                    inputFile
-                }
+                is SelectedApp.Local -> inputFile ?: selected.file
+                else -> inputFile
             }
 
             if (fileToSave == null || !fileToSave.exists()) {
@@ -806,7 +797,7 @@ class PatcherViewModel(
                             saveOriginalApkIfNeeded()
                         } finally {
                             withContext(Dispatchers.Main) {
-                                // Delete temporary file after saving
+                                // Delete temporary input file after saving
                                 if (input.selectedApp is SelectedApp.Local && input.selectedApp.temporary) {
                                     inputFile?.takeIf { it.exists() }?.delete()
                                     inputFile = null

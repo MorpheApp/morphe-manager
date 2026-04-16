@@ -91,6 +91,12 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             try {
                 if (preparation.merged) {
                     events.progress(null, State.COMPLETED.name, null)
+
+                    // Copy merged APK to the agreed path so ProcessRuntime can read it back
+                    // in the main process after this process finishes
+                    parameters.mergedInputFile?.let { dest ->
+                        preparation.file.copyTo(File(dest), overwrite = true)
+                    }
                 }
 
                 Session(

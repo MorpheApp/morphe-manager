@@ -15,6 +15,7 @@ import app.morphe.manager.patcher.runtime.process.IPatcherProcess
 import app.morphe.manager.patcher.runtime.process.Parameters
 import app.morphe.manager.patcher.runtime.process.PatchConfiguration
 import app.morphe.manager.patcher.runtime.process.PatcherProcess
+import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.ProgressEventHandler
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.Options
@@ -114,6 +115,7 @@ class ProcessRuntime(
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
         stripNativeLibs: Boolean,
+        onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
         val minMemoryLimit = 200
         var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
@@ -131,7 +133,8 @@ class ProcessRuntime(
                     stripNativeLibs,
                     logger,
                     onPatchCompleted,
-                    onProgress
+                    onProgress,
+                    onMergedApkReady
                 )
                 // Success - update preference and return.
                 if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
@@ -174,6 +177,7 @@ class ProcessRuntime(
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
+        onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
@@ -194,6 +198,14 @@ class ProcessRuntime(
             }
 
         val appProcessBin = resolveAppProcessBin(context)
+
+        // Determine merged APK path before launching the process so it is accessible
+        // after patching.await() to invoke onMergedApkReady in the coroutineScope.
+        val mergedInputPath = if (SplitApkPreparer.isSplitArchive(File(inputFile))) {
+            File(cacheDir).resolve("merged-process-input-${System.currentTimeMillis()}.apk").absolutePath
+        } else {
+            null
+        }
 
         launch(Dispatchers.IO) {
             val result = process(
@@ -263,14 +275,26 @@ class ProcessRuntime(
                         options[uid].orEmpty()
                     )
                 },
-                stripNativeLibs = stripNativeLibs
+                stripNativeLibs = stripNativeLibs,
+                mergedInputFile = mergedInputPath
             )
 
             binder.start(parameters, eventHandler)
         }
 
-        // Wait until patching finishes.
-        patching.await()
+        // Wait until patching finishes
+        val mergedFile = mergedInputPath?.let { File(it) }
+        try {
+            patching.await()
+            // If PatcherProcess merged a split archive, notify the caller so the merged APK
+            // can be saved to originalApksDir for future repatching
+            if (mergedFile?.exists() == true) {
+                onMergedApkReady?.invoke(mergedFile)
+            }
+        } finally {
+            // Always clean up the temporary merged file regardless of success or failure
+            mergedFile?.takeIf { it.exists() }?.delete()
+        }
     }
 
     companion object : LibraryResolver() {

@@ -20,6 +20,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
@@ -47,6 +48,7 @@ class PatcherWorker(
     private val pm: PM by inject()
     private val fs: Filesystem by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
+    private val originalApkRepository: OriginalApkRepository by inject()
     private val rootInstaller: RootInstaller by inject()
 
     class Args(
@@ -215,6 +217,21 @@ class PatcherWorker(
                 CoroutineRuntime(applicationContext)
             }
 
+            // After merging a split archive (in either runtime), save the resulting mono-APK
+            // directly to originalApksDir so it is used for repatching instead of the archive
+            val onMergedApkReady: suspend (File) -> Unit = { mergedFile ->
+                val version = pm.getPackageInfo(mergedFile)?.versionName
+                    ?.takeUnless { it.isBlank() }
+                    ?: args.input.version
+                    ?: "unknown"
+                val savedFile = originalApkRepository.saveOriginalApk(
+                    packageName = args.packageName,
+                    version = version,
+                    sourceFile = mergedFile
+                )
+                args.setInputFile(savedFile ?: mergedFile, true, true)
+            }
+
             try {
                 runtime.execute(
                     inputFile.absolutePath,
@@ -225,7 +242,8 @@ class PatcherWorker(
                     args.logger,
                     args.onPatchCompleted,
                     args.onProgress,
-                    stripNativeLibs
+                    stripNativeLibs,
+                    onMergedApkReady
                 )
             } catch (e: Exception) {
                 if (!useProcessRuntime || Build.VERSION.SDK_INT > Build.VERSION_CODES.Q || !isOomRelated(e)) {
@@ -243,7 +261,8 @@ class PatcherWorker(
                     args.logger,
                     args.onPatchCompleted,
                     args.onProgress,
-                    stripNativeLibs
+                    stripNativeLibs,
+                    onMergedApkReady
                 )
             }
 
