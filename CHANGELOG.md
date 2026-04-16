@@ -1,3 +1,17 @@
+# [1.15.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.4...v1.15.0-dev.5) (2026-04-16)
+
+
+### Bug Fixes
+
+* Re-download bundle if version matches but createdAt differs ([2e77833](https://github.com/MorpheApp/morphe-manager/commit/2e77833cca08fb1c5c52bebe11dd032269099f9c))
+* Show failing bundle name in error toast and auto-disable bundles on fetch failure ([1c3a384](https://github.com/MorpheApp/morphe-manager/commit/1c3a3843f3989621764dfb8582e926170e686fa9))
+
+
+### Features
+
+* Export/import third-party bundles with manager settings ([e5c826f](https://github.com/MorpheApp/morphe-manager/commit/e5c826fb81c725cb6ea3b614f2a04a924350f05a))
+* Group compatible versions by bundle in APK availability dialog ([#432](https://github.com/MorpheApp/morphe-manager/issues/432)) ([362d097](https://github.com/MorpheApp/morphe-manager/commit/362d09744c51844774c1e9555580e0ed7fcdbfa1))
+
 # [1.15.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.3...v1.15.0-dev.4) (2026-04-15)
 
 
