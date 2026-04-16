@@ -746,6 +746,7 @@ Details: %2$s"</string>
     <string name="hide">Hide</string>
     <string name="default_">Default</string>
     <string name="logs">Logs</string>
+    <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
