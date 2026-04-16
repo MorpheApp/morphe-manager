@@ -1242,10 +1242,48 @@ class HomeViewModel(
             // Create SelectedApp from saved APK file
             val selectedApp = withContext(Dispatchers.IO) {
                 try {
-                    val file = File(savedInfo.filePath)
-                    if (!file.exists()) {
+                    val originalFile = File(savedInfo.filePath)
+                    if (!originalFile.exists()) {
                         app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
                         return@withContext null
+                    }
+
+                    // If the saved "original" file is a split archive, always reuse a previously
+                    // merged single APK (cached alongside the original) instead of re-merging.
+                    val selectedFile = if (SplitApkPreparer.isSplitArchive(originalFile)) {
+                        val mergedCacheFile = run {
+                            val name = originalFile.name
+                            val mergedName = if (name.endsWith("_original.apk", ignoreCase = true)) {
+                                name.replace(Regex("_original\\.apk$", RegexOption.IGNORE_CASE), "_merged.apk")
+                            } else {
+                                // Fallback: deterministic sibling name
+                                "${originalFile.nameWithoutExtension}_merged.apk"
+                            }
+                            originalFile.parentFile?.resolve(mergedName) ?: File(mergedName)
+                        }
+
+                        if (mergedCacheFile.exists() && !SplitApkPreparer.isSplitArchive(mergedCacheFile)) {
+                            mergedCacheFile
+                        } else {
+                            val preparation = SplitApkPreparer.prepareIfNeeded(
+                                source = originalFile,
+                                workspace = filesystem.originalApksDir,
+                                stripNativeLibs = false
+                            )
+                            try {
+                                if (preparation.merged) {
+                                    preparation.file.copyTo(mergedCacheFile, overwrite = true)
+                                    mergedCacheFile
+                                } else {
+                                    // Defensive: treat as already-single APK
+                                    originalFile
+                                }
+                            } finally {
+                                preparation.cleanup()
+                            }
+                        }
+                    } else {
+                        originalFile
                     }
 
                     // Mark as used
@@ -1254,7 +1292,7 @@ class HomeViewModel(
                     SelectedApp.Local(
                         packageName = packageName,
                         version = savedInfo.version,
-                        file = file,
+                        file = selectedFile,
                         temporary = false // Don't delete saved APK files
                     )
                 } catch (e: Exception) {
