@@ -14,6 +14,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,13 +24,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.MorpheDefaults
 
 /**
- * Section 5: Bottom action bar
- * Sources | Search (optional, center) | Settings
+ * Section 5: Bottom action bar.
+ * Sources | Search (optional, center) | Settings.
  */
 @Composable
 fun HomeBottomActionBar(
@@ -42,6 +44,9 @@ fun HomeBottomActionBar(
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
+    // Show labels only when there are 2 buttons, buttons are wider so there's space
+    val showLabels = !showSearchButton
+
     Box(
         modifier = modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
@@ -59,7 +64,8 @@ fun HomeBottomActionBar(
             BottomActionButton(
                 onClick = onBundlesClick,
                 icon = Icons.Outlined.Source,
-                text = stringResource(R.string.sources_management_title),
+                text = stringResource(R.string.sources),
+                showLabel = showLabels,
                 modifier = Modifier.weight(1f)
             )
 
@@ -76,6 +82,7 @@ fun HomeBottomActionBar(
                     onClick = onSearchClick,
                     icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                     text = stringResource(R.string.home_search_apps),
+                    showLabel = false,
                     searchStateDescription = if (searchActive) searchExpandedLabel else searchCollapsedLabel,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -86,6 +93,7 @@ fun HomeBottomActionBar(
                 onClick = onSettingsClick,
                 icon = if (isExpertModeEnabled) Icons.Outlined.Engineering else Icons.Outlined.Settings,
                 text = stringResource(R.string.settings),
+                showLabel = showLabels,
                 isExpertMode = isExpertModeEnabled,
                 modifier = Modifier.weight(1f)
             )
@@ -94,8 +102,8 @@ fun HomeBottomActionBar(
 }
 
 /**
- * Individual bottom action button
- * Rectangular shape with rounded corners
+ * Individual bottom action button.
+ * Rectangular shape with rounded corners.
  */
 @Composable
 fun BottomActionButton(
@@ -103,6 +111,7 @@ fun BottomActionButton(
     icon: ImageVector,
     modifier: Modifier = Modifier,
     text: String? = null,
+    showLabel: Boolean = false,
     containerColor: Color? = null,
     contentColor: Color? = null,
     enabled: Boolean = true,
@@ -193,6 +202,16 @@ fun BottomActionButton(
                     tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
                     modifier = Modifier.size(24.dp)
                 )
+                if (showLabel && text != null) {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.labelLarge,
+                        color = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
     }
