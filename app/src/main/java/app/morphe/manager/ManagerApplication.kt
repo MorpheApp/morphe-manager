@@ -170,5 +170,9 @@ class ManagerApplication : Application() {
             deleteRecursively()
             mkdirs()
         }
+        // Logs all app-private directories and their contents with file sizes on fresh start
+        scope.launch(Dispatchers.IO) {
+            fs.logStorageContents()
+        }
     }
 }

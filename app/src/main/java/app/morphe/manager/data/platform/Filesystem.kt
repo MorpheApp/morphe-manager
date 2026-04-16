@@ -6,11 +6,15 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import app.morphe.manager.util.FilenameUtils
 import app.morphe.manager.util.RequestManageStorageContract
+import app.morphe.manager.util.formatBytes
 import java.io.File
+
+private const val TAG = "Filesystem"
 
 class Filesystem(private val app: Application) {
     /**
@@ -56,5 +60,32 @@ class Filesystem(private val app: Application) {
         val safePackage = FilenameUtils.sanitize(packageName)
         val safeVersion = FilenameUtils.sanitize(version.ifBlank { "unspecified" })
         return patchedAppsDir.resolve("${safePackage}_${safeVersion}.apk")
+    }
+
+    /**
+     * Logs all app-private directories and their contents with file sizes.
+     * Useful for diagnosing storage issues on startup.
+     */
+    fun logStorageContents() {
+        Log.i(TAG, "=== Storage contents ===")
+        for (dir in listOf(tempDir, uiTempDir, patchedAppsDir, originalApksDir)) {
+            logDir(dir.name, dir)
+        }
+        Log.i(TAG, "=== End of storage contents ===")
+    }
+
+    private fun logDir(label: String, dir: File, indent: String = "") {
+        val totalSize = dir.walkBottomUp().filter { it.isFile }.sumOf { it.length() }
+        Log.i(TAG, "$indent[$label] ${dir.absolutePath} (total: ${formatBytes(totalSize)})")
+        dir.listFiles()
+            ?.sortedWith(compareBy({ it.isFile }, { it.name }))
+            ?.forEach { entry ->
+                if (entry.isDirectory) {
+                    logDir(entry.name, entry, "$indent  ")
+                } else {
+                    Log.i(TAG, "$indent  ${entry.name} (${formatBytes(entry.length())})")
+                }
+            }
+            ?: Log.i(TAG, "$indent  (empty or unreadable)")
     }
 }
