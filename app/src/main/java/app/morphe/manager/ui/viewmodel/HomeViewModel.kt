@@ -85,6 +85,16 @@ data class UnsupportedVersionDialogState(
     val isExperimental: Boolean = false
 )
 
+/**
+ * An [AppTarget] annotated with the bundle it originates from.
+ * Used to group versions by bundle in the APK availability dialog.
+ */
+data class BundledAppTarget(
+    val target: AppTarget,
+    val bundleUid: Int,
+    val bundleName: String
+)
+
 /** Dialog state for wrong package warning. */
 data class WrongPackageDialogState(
     val expectedPackage: String,
@@ -205,7 +215,9 @@ class HomeViewModel(
     var pendingPackageName by mutableStateOf<String?>(null)
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<AppTarget?>(null)
-    var pendingCompatibleVersions by mutableStateOf<List<AppTarget>>(emptyList())
+    var pendingCompatibleVersions by mutableStateOf<List<BundledAppTarget>>(emptyList())
+    // Per-bundle recommended versions for multi-bundle display in ApkAvailabilityDialog
+    var pendingRecommendedBundleVersions by mutableStateOf<Map<Int, AppTarget>>(emptyMap())
     // Version selected by the user in Dialog 1 for the APK search query. Defaults to pendingRecommendedVersion
     var pendingSelectedDownloadVersion by mutableStateOf<AppTarget?>(null)
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
@@ -234,11 +246,13 @@ class HomeViewModel(
     var installedAppsLoading by mutableStateOf(true)
 
     // Bundle data - reactive StateFlows derived directly from bundleInfoFlow
-    val compatibleVersionsFlow: StateFlow<Map<String, List<AppTarget>>> =
+    val compatibleVersionsFlow: StateFlow<Map<String, List<BundledAppTarget>>> =
         patchBundleRepository.bundleInfoFlow
             .combine(patchBundleRepository.sources) { bundleInfo, sources ->
-                val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
-                extractCompatibleVersions(bundleInfo, enabledUids)
+                val enabledSources = sources.filter { it.enabled }
+                val enabledUids = enabledSources.map { it.uid }.toSet()
+                val bundleNames = enabledSources.associate { it.uid to it.displayTitle }
+                extractCompatibleVersions(bundleInfo, bundleNames, enabledUids)
             }
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
@@ -259,7 +273,8 @@ class HomeViewModel(
                 .mapNotNull { it.packageName }
                 .toSet()
 
-            versionData.mapValues { (packageName, targets) ->
+            versionData.mapValues { (packageName, bundledTargets) ->
+                val targets = bundledTargets.map { it.target }
                 if (packageName in experimentalEnabledPackages) {
                     // Experimental mode: prefer the highest experimental version, fallback to first
                     targets.firstOrNull { it.isExperimental } ?: targets.first()
@@ -273,7 +288,50 @@ class HomeViewModel(
 
     // Convenience accessors - read current value synchronously for non-reactive call sites
     val recommendedVersions: Map<String, AppTarget> get() = recommendedVersionsFlow.value
-    val compatibleVersions: Map<String, List<AppTarget>> get() = compatibleVersionsFlow.value
+    val compatibleVersions: Map<String, List<BundledAppTarget>> get() = compatibleVersionsFlow.value
+
+    /**
+     * Per-bundle recommended version for each package.
+     * Returns Map<PackageName, Map<BundleUid, AppTarget>> so the APK availability dialog
+     * can show the correct "Recommended" badge independently for each bundle section.
+     */
+    val recommendedBundleVersionsFlow: StateFlow<Map<String, Map<Int, AppTarget>>> =
+        combine(
+            compatibleVersionsFlow,
+            prefs.bundleExperimentalVersionsEnabled.flow,
+            patchBundleRepository.bundleInfoFlow,
+            patchBundleRepository.sources
+        ) { versionData, experimentalEnabledUids, bundleInfo, sources ->
+            val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
+            // Per-bundle set of packages that have experimental mode enabled.
+            // Key: bundleUid, Value: set of packageNames with experimental toggle on for that bundle
+            val experimentalPackagesByBundle: Map<Int, Set<String>> = bundleInfo
+                .filterKeys { it in enabledUids && it.toString() in experimentalEnabledUids }
+                .mapValues { (_, info) ->
+                    info.patches
+                        .flatMap { it.compatiblePackages.orEmpty() }
+                        .mapNotNull { it.packageName }
+                        .toSet()
+                }
+
+            versionData.mapValues { (packageName, bundledTargets) ->
+                bundledTargets
+                    .groupBy { it.bundleUid }
+                    .mapValues { (bundleUid, targets) ->
+                        val appTargets = targets.map { it.target }
+                        val preferExperimental = experimentalPackagesByBundle[bundleUid]
+                            ?.contains(packageName) == true
+                        if (preferExperimental) {
+                            appTargets.firstOrNull { it.isExperimental } ?: appTargets.first()
+                        } else {
+                            appTargets.firstOrNull { !it.isExperimental } ?: appTargets.first()
+                        }
+                    }
+            }
+        }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    val recommendedBundleVersions: Map<String, Map<Int, AppTarget>> get() = recommendedBundleVersionsFlow.value
 
     // Track available updates for installed apps
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
@@ -1052,8 +1110,8 @@ class HomeViewModel(
      */
     fun getExperimentalVersionsForPackage(packageName: String): Set<String> =
         compatibleVersions[packageName]
-            ?.filter { it.isExperimental }
-            ?.mapNotNull { it.version }
+            ?.filter { it.target.isExperimental }
+            ?.mapNotNull { it.target.version }
             ?.toSet()
             ?: emptySet()
 
@@ -1150,6 +1208,7 @@ class HomeViewModel(
             ?: KnownApps.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
+        pendingRecommendedBundleVersions = recommendedBundleVersions[packageName] ?: emptyMap()
         pendingSelectedDownloadVersion = pendingRecommendedVersion
 
         // Guard: if there is a pending bundle update on metered data, show the outdated-patches
@@ -1412,7 +1471,7 @@ class HomeViewModel(
 
         if (versionMismatch && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
+            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
             pendingSelectedApp = selectedApp
             showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
@@ -1430,7 +1489,7 @@ class HomeViewModel(
         // - Experimental mode OFF → UnsupportedVersionWarningDialog
         if (isVersionExperimental && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
+            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
             pendingSelectedApp = selectedApp
             val state = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
@@ -1718,6 +1777,7 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
+        pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
         resolvedDownloadUrl = null
         showDownloadInstructionsDialog = false
@@ -2097,6 +2157,7 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
+        pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
         resolvedDownloadUrl = null
         pendingSavedApkInfo = null
@@ -2114,15 +2175,17 @@ class HomeViewModel(
 
     /**
      * Extract compatible versions for each package from bundle info.
-     * Returns a map of package name to sorted list of AppTargets - newest first regardless
-     * of experimental status. The [AppTarget.isExperimental] flag is preserved for badge display.
-     * Single pass per bundle - O(patches) instead of O(packages × patches).
+     * Returns a map of package name to a list of [BundledAppTarget] - versions are grouped by
+     * bundle (ordered by bundle display name) and sorted newest→oldest within each bundle.
+     * Versions are NOT deduplicated across bundles so the UI can show per-bundle sections.
      */
     private fun extractCompatibleVersions(
         bundleInfo: Map<Int, PatchBundleInfo>,
+        bundleNames: Map<Int, String>,
         enabledBundleUids: Set<Int> = emptySet()
-    ): Map<String, List<AppTarget>> {
-        val targetsByPackage = mutableMapOf<String, MutableMap<String, AppTarget>>()
+    ): Map<String, List<BundledAppTarget>> {
+        // packageName → bundleUid → version → AppTarget
+        val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
 
         bundleInfo.forEach { (bundleUid, info) ->
             if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) return@forEach
@@ -2130,23 +2193,43 @@ class HomeViewModel(
             info.patches.forEach { patch ->
                 patch.compatiblePackages?.forEach { pkg ->
                     val packageName = pkg.packageName ?: return@forEach
-                    val map = targetsByPackage.getOrPut(packageName) { mutableMapOf() }
+                    val bundleMap = targetsByPackage
+                        .getOrPut(packageName) { mutableMapOf() }
+                        .getOrPut(bundleUid) { mutableMapOf() }
 
                     pkg.versions?.forEach { version ->
                         val isExperimental = pkg.experimentalVersions?.contains(version) == true
-                        // If a version appears in multiple patches, prefer stable over experimental
-                        if (version !in map || isExperimental.not()) {
+                        // If a version appears in multiple patches of the same bundle, prefer stable
+                        if (version !in bundleMap || !isExperimental) {
                             val description = pkg.versionDescriptions?.get(version)
-                            map[version] = AppTarget(version = version, isExperimental = isExperimental, description = description)
+                            bundleMap[version] = AppTarget(
+                                version = version,
+                                isExperimental = isExperimental,
+                                description = description
+                            )
                         }
                     }
                 }
             }
         }
 
-        // Sort all versions together newest→oldest regardless of experimental flag
+        // Flatten: bundles ordered by display name, versions newest→oldest within each bundle
         return targetsByPackage
-            .mapValues { (_, map) -> map.values.sortedDescending() }
+            .mapValues { (_, byBundle) ->
+                byBundle.entries
+                    .sortedBy { (uid, _) -> bundleNames[uid] ?: "" }
+                    .flatMap { (uid, versionMap) ->
+                        versionMap.values
+                            .sortedDescending()
+                            .map { target ->
+                                BundledAppTarget(
+                                    target = target,
+                                    bundleUid = uid,
+                                    bundleName = bundleNames[uid] ?: "Bundle $uid"
+                                )
+                            }
+                    }
+            }
             .filterValues { it.isNotEmpty() }
     }
 
