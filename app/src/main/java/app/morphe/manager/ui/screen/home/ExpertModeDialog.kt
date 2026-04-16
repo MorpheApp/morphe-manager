@@ -923,8 +923,13 @@ private fun PatchOptionsDialog(
                             else       -> emptyList()
                         },
                         onValueChange = { newList ->
-                            // Serialize back to comma-separated String - patcher expects kotlin.String
-                            onValueChange(key, newList.joinToString(", ").ifBlank { null })
+                            // Check the KType classifier to determine how the patcher expects the value.
+                            // List<String> options need a real List<String>, while plain String options expect a comma-separated String.
+                            if (option.type.classifier == List::class) {
+                                onValueChange(key, newList.ifEmpty { null })
+                            } else {
+                                onValueChange(key, newList.joinToString(", ").ifBlank { null })
+                            }
                         }
                     )
 
