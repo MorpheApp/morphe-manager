@@ -81,6 +81,7 @@
     <string name="sources_update_success">Actualización correcta</string>
     <string name="sources_update_unavailable">No hay actualización disponible</string>
     <string name="sources_download_fail">No se pudo descargar las fuentes: %s</string>
+    <string name="sources_download_fail_named">Error al descargar \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">No se pudo actualizar \'%1$s\': no se encontró el archivo JSON de parches en la URL configurada</string>
     <string name="sources_patch_expert_badge">Experto</string>
     <string name="sources_patch_expert_badge_tooltip">Habilite el modo Experto en la configuración para incluir este parche manualmente</string>

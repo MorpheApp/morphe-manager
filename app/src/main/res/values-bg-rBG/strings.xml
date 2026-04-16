@@ -81,6 +81,7 @@
     <string name="sources_update_success">Успешно обновяване</string>
     <string name="sources_update_unavailable">Няма достъпно обновление</string>
     <string name="sources_download_fail">Неуспешно сваляне на източника: %s</string>
+    <string name="sources_download_fail_named">Неуспешно сваляне на \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Не може да се обнови \'%1$s\': предварителният JSON файл на пакета не е намерен на конфигурирания URL</string>
     <string name="sources_patch_expert_badge">Експерт</string>
     <string name="sources_patch_expert_badge_tooltip">Активиране на Експертен режим в Настройки, за да включите ръчно тази поправка.</string>

@@ -686,6 +686,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>
     <string name="importing_ellipsis">İdxal olunur…</string>
+    <string name="imported_successfully">Uğurla idxal olundu</string>
     <string name="changelog">Dəyişiklik jurnallarına bax</string>
     <string name="changelog_description">Bu yeniləmədəki ən son dəyişikliklərə nəzər sal</string>
     <string name="changelog_download_fail">Dəyişiklik jurnalın yükləmək olmadı: %s</string>

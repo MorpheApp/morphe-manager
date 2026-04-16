@@ -81,6 +81,7 @@
     <string name="sources_update_success">อัปเดตเสร็จสมบูรณ์</string>
     <string name="sources_update_unavailable">ยังไม่มีการอัปเดต</string>
     <string name="sources_download_fail">ล้มข้อมูลแหล่งข้อมูลไม่สำเร็จ: %s</string>
+    <string name="sources_download_fail_named">การดาวน์โหลด \'%1$s\' ไม่สำเร็จ: %2$s</string>
     <string name="sources_download_endpoint_not_found">ไม่สามารถอัปเดต \'%1$s\': ไม่พบไฟล์ JSON ของแพทช์ที่ URL ที่กำหนด</string>
     <string name="sources_patch_expert_badge">ผู้เชี่ยวชาญ</string>
     <string name="sources_patch_expert_badge_tooltip">เปิดใช้งานโหมดผู้เชี่ยวชาญในการตั้งค่าเพื่อรวมแพตช์นี้ด้วยตนเอง</string>

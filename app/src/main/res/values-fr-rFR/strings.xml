@@ -81,6 +81,7 @@
     <string name="sources_update_success">Mise à jour réussie</string>
     <string name="sources_update_unavailable">Aucune mise à jour disponible</string>
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
+    <string name="sources_download_fail_named">Échec du téléchargement de \'%1$s\' : %2$s</string>
     <string name="sources_download_endpoint_not_found">Impossible de mettre à jour \'%1$s\' : le fichier JSON du patch est introuvable à l’URL configurée</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Activer le mode Expert dans les Paramètres pour inclure ce patch manuellement</string>

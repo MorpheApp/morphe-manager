@@ -81,6 +81,7 @@
     <string name="sources_update_success">A frissítés sikeres</string>
     <string name="sources_update_unavailable">Nincs elérhető frissítés</string>
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
+    <string name="sources_download_fail_named">A \'%1$s\' letöltése sikertelen: %2$s</string>
     <string name="sources_download_endpoint_not_found">Nem sikerült frissíteni ezt: \'%1$s\' - A módosítás JSON fájlja nem található a beállított URL-n</string>
     <string name="sources_patch_expert_badge">Szakértő</string>
     <string name="sources_patch_expert_badge_tooltip">Engedélyezze a szakértői módot a Beállításokban a javítás manuális hozzáadásához</string>

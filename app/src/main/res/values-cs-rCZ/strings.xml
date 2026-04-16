@@ -81,6 +81,7 @@
     <string name="sources_update_success">Aktualizace úspěšná</string>
     <string name="sources_update_unavailable">Nejsou dostupné žádné aktualizace</string>
     <string name="sources_download_fail">Selhalo stahování zdrojů: %s</string>
+    <string name="sources_download_fail_named">Nepodařilo se stáhnout \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Nebylo možné aktualizovat \'%1$s\': soubor JSON s patchem nebyl nalezen na nakonfigurované URL</string>
     <string name="sources_patch_expert_badge">Odborník</string>
     <string name="sources_patch_expert_badge_tooltip">Povolte Expert režim v Nastavení, abyste mohli tento záplát ručně zahrnout</string>

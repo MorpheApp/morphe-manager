@@ -81,6 +81,7 @@
     <string name="sources_update_success">Επιτυχία ενημέρωσης</string>
     <string name="sources_update_unavailable">Δεν υπάρχει διαθέσιμη ενημέρωση</string>
     <string name="sources_download_fail">Αποτυχία λήψης πηγών: %s</string>
+    <string name="sources_download_fail_named">Απέτυχε η λήψη του \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Δεν ήταν δυνατή η ενημέρωση του \'%1$s\': το τροποποιημένο αρχείο JSON δε βρέθηκε στη διαμορφωμένη URL</string>
     <string name="sources_patch_expert_badge">Ειδικός</string>
     <string name="sources_patch_expert_badge_tooltip">Ενεργοποιήστε τη λειτουργία Ειδικού στις Ρυθμίσεις για να συμπεριλάβετε αυτήν την ενημέρωση χειροκίνητα</string>

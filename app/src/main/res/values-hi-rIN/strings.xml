@@ -81,6 +81,7 @@
     <string name="sources_update_success">अपडेट सफल रहा</string>
     <string name="sources_update_unavailable">अपडेट उपलब्ध नहीं है</string>
     <string name="sources_download_fail">स्रोत डाउनलोड करने में विफल हो गया: %s</string>
+    <string name="sources_download_fail_named">\'%1$s\' डाउनलोड करने में विफल: %2$s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' को अपडेट नहीं किया जा सका: कॉन्फ़िगर किए गए URL पर पथच जेएसओन फ़ाइल नहीं मिली</string>
     <string name="sources_patch_expert_badge">विशेषज्ञ</string>
     <string name="sources_patch_expert_badge_tooltip">इस पैच को मैन्युअल रूप से शामिल करने के लिए सेटिंग्स में विशेषज्ञ मोड सक्षम करें</string>

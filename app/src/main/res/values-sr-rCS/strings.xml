@@ -81,6 +81,7 @@
     <string name="sources_update_success">Uspešno ažurirano</string>
     <string name="sources_update_unavailable">Nema dostupnih ažuriranja</string>
     <string name="sources_download_fail">Neuspešno preuzimanje izvora: %s</string>
+    <string name="sources_download_fail_named">Neuspešno preuzimanje \"%1$s\": %2$s</string>
     <string name="sources_download_endpoint_not_found">Nije moguće ažurirati \'%1$s\': ispravka JSON datoteka nije pronađena na konfigurisanom URL-u</string>
     <string name="sources_patch_expert_badge">Експерт</string>
     <string name="sources_patch_expert_badge_tooltip">Омогућите Експерт режим у Подешавањима да бисте ручно укључили овај патч</string>

@@ -81,6 +81,7 @@
     <string name="sources_update_success">Güncelleme başarılı</string>
     <string name="sources_update_unavailable">Güncelleme mevcut değil</string>
     <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
+    <string name="sources_download_fail_named">\'%1$s\' indirmesi başarısız oldu: %2$s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' güncellenemedi: yama JSON dosyası belirtilen URL\'de bulunamadı</string>
     <string name="sources_patch_expert_badge">Uzman</string>
     <string name="sources_patch_expert_badge_tooltip">Bu yamayı manuel olarak eklemek için Ayarlar\'da Uzman modunu etkinleştirin</string>
@@ -101,7 +102,7 @@
     <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'i &lt;b&gt;yüklemeyin&lt;/b&gt;</string>
-    <string name="home_download_instructions_step3_mount">İndirme tamamlanınca APK\'i &lt;b&gt;yükleyin&lt;/b&gt;</string>
+    <string name="home_download_instructions_step3_mount">İndirme işleminin tamamlanmasını bekleyin, ardından &lt;b&gt;APK\'yi yükleyin&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">İndirme tamamlandıktan sonra Morphe\'ye geri dönün</string>
     <string name="home_download_instructions_step4_mount">Orijinal APK\'yi yükledikten sonra Morphe\'ye geri dönün</string>
     <string name="home_download_instructions_continue">APKMirror.com\'a devam et</string>
@@ -224,12 +225,12 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'in cihazınızda yüklü olmasını gerektirir</string>
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
     <string name="root_pre_patch_installer_title">Yükleme yöntemini seçin</string>
-    <string name="root_pre_patch_installer_description">Cihazınınızın kök erişimi var. Yamalanmış uygulamayı nasıl yüklemek istediğinizi seçin</string>
-    <string name="root_pre_patch_installer_mount_title">Kök Dağıtım</string>
-    <string name="root_pre_patch_installer_mount_description">Yamalı APK\'yi stok uygulamaya bağlayın. GmsCore gerektirmez</string>
-    <string name="root_pre_patch_installer_standard_title">Standart Kurulum</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore desteği olan ayrı bir uygulama olarak kurun. Yedekleme sonra kurucuyu seçin (Sistem kurucusu, Shizuku vb.)</string>
-    <string name="root_pre_patch_installer_hint">Kurulum yöntemi, hangi yedekler dahil edildiğini ve yedekleme sonrasında değiştirilememesi gerektiğini belirler</string>
+    <string name="root_pre_patch_installer_description">Cihazınızın root erişimi var. Yamalanmış uygulamayı nasıl yüklemek istediğinizi seçin</string>
+    <string name="root_pre_patch_installer_mount_title">Root ile Bağlama</string>
+    <string name="root_pre_patch_installer_mount_description">Yamalanmış APK\'yi stok uygulamaya bağlayın. GmsCore gerektirmez</string>
+    <string name="root_pre_patch_installer_standard_title">Standart Yükleme</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore desteğiyle ayrı bir uygulama olarak yükleyin. Yama işleminden sonra yükleyiciyi seçin (Sistem yükleyicisi, Shizuku, vb.)</string>
+    <string name="root_pre_patch_installer_hint">Yükleme yöntemi, hangi yamaların dahil edileceğini belirler ve yama uygulandıktan sonra bunlar değiştirilemez</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="patcher_error_log">Hata günlüğü</string>
@@ -249,7 +250,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_install_error_title">Yükleme hatası</string>
     <string name="patcher_install_error_subtitle">Kaldırıp tekrar yüklemeyi deneyin</string>
     <string name="patcher_ready_to_install_subtitle">Yüklemek için aşağıdaki düğmeye basın</string>
-    <string name="patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
+    <string name="patcher_ready_to_mount_subtitle">Bağlamak için aşağıdaki düğmeye basın</string>
     <string name="patcher_storage_permission_dialog_title">Depolama yoluna erişilemiyor</string>
     <string name="patcher_storage_permission_description_api30">Bir veya daha fazla yama seçeneği, Morphe\'nin okuyamadığı yollara işaret ediyor. Depolama erişimini verin ve düğmeye dokunun, ardından yamalama otomatik olarak başlayacaktır</string>
     <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla yama seçeneği, erişilemeyen yollara işaret ediyor. Yama seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
@@ -320,7 +321,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="saved_app_launch_unavailable">Uygulamayı açmadan önce yükleyin.</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Bağlanamadı: %s</string>
-    <string name="failed_to_unmount">Kaldırılamadı: %s</string>
+    <string name="failed_to_unmount">Bağlama kaldırılamadı: %s</string>
     <!-- Settings -->
     <string name="appearance">Görünüm</string>
     <string name="advanced">Gelişmiş</string>
@@ -495,7 +496,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_internal_name">Sistem yükleyicisi</string>
     <string name="installer_internal_description">Android paket yükleyicisini kullanın</string>
     <string name="installer_auto_saved_name">Rootlu bağlama yükleyicisi</string>
-    <string name="installer_auto_saved_description">Yamalanmış APK\'yi kurulu uygulamaya yerleştirir</string>
+    <string name="installer_auto_saved_description">Yamalanmış APK\'yi yüklü uygulamaya bağlar</string>
     <string name="installer_shizuku_description">Shizuku veya Sui kullanarak sessiz modda yükleyin</string>
     <string name="installer_option_none">Yedekleme yok</string>
     <string name="installer_none_description">Yedek yükleyici yapılandırılmamış</string>
@@ -504,8 +505,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_status_shizuku_not_installed">Bu seçenek kullanmak için Shizuku veya Sui\'yi yükleyin.</string>
     <string name="installer_status_shizuku_not_running">Shizuku veya Sui\'yi başlatın ve tekrar deneyin.</string>
     <string name="installer_status_shizuku_permission">Shizuku uygulamasından Morphe için izin verin.</string>
-    <string name="installer_mount_warning_install">İlk yükleyiciniz kök montaj yükleyicisidir. Bu kaydedilmiş uygulama montaj kullanılarak yüklenmedi.</string>
-    <string name="mount_version_mismatch_message">Stok uygulama sürümü (%2$s) yamalanmış uygulama sürümü (%1$s) ile eşleşmiyor. Eşleşen stok sürümünü montaj yapın, sonra tekrar deneyin.</string>
+    <string name="installer_mount_warning_install">Birincil yükleyiciniz, rootlu bağlama yükleyicisi olarak ayarlanmış. Bu kaydedilmiş uygulama bağlama kullanılarak yüklenmedi</string>
+    <string name="mount_version_mismatch_message">Stok uygulama sürümü (%2$s), yamalanmış uygulama sürümü (%1$s) ile eşleşmiyor. Eşleşen stok sürümü bağlayın, sonra tekrar deneyin</string>
     <string name="installer_status_shizuku_unsupported">Yüklenen Shizuku sürümü desteklenmiyor.</string>
     <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
     <string name="installer_hint_generic">Yükleme başarısız oldu. Tekrar deneyin veya farklı bir yükleyiciye geçin.</string>
@@ -667,8 +668,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="open">Aç</string>
     <string name="mount">Bağla</string>
     <string name="mounted">Bağlandı</string>
-    <string name="unmount">Ayrımsal</string>
-    <string name="unmounted">Bağlantı kaldırıldı</string>
+    <string name="unmount">Bağlamayı kaldır</string>
+    <string name="unmounted">Bağlama kaldırıldı</string>
     <string name="remount">Yeniden bağla</string>
     <string name="install">Yükle</string>
     <string name="installed">Yüklü</string>
@@ -685,7 +686,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="logs">Günlükler</string>
     <string name="installing_ellipsis">Yükleniyor…</string>
     <string name="mounting_ellipsis">Bağlanıyor…</string>
-    <string name="unmounting_ellipsis">Çıkartılıyor…</string>
+    <string name="unmounting_ellipsis">Bağlama kaldırılıyor…</string>
     <string name="importing_ellipsis">İçe aktarılıyor…</string>
     <string name="imported_successfully">Başarıyla aktarıldı</string>
     <string name="changelog">Değişiklik günlüklerini görüntüle</string>

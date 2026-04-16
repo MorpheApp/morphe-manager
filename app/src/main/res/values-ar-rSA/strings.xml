@@ -81,6 +81,7 @@
     <string name="sources_update_success">تم التحديث بنجاح</string>
     <string name="sources_update_unavailable">لا يوجد تحديث متاح</string>
     <string name="sources_download_fail">فشل تنزيل مصادر التعديل: %s.</string>
+    <string name="sources_download_fail_named">فشل تنزيل \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">تعذر تحديث \'%1$s\': لم يتم العثور على ملف JSON الخاص بالتعديل في عنوان URL المكون</string>
     <string name="sources_patch_expert_badge">وضع الخبير</string>
     <string name="sources_patch_expert_badge_tooltip">تمكين وضع الخبير في الإعدادات لتضمين هذا التعديل يدويًا</string>

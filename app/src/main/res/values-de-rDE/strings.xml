@@ -81,6 +81,7 @@
     <string name="sources_update_success">Update erfolgreich</string>
     <string name="sources_update_unavailable">Kein Update verfügbar</string>
     <string name="sources_download_fail">Herunterladen der Quellen fehlgeschlagen: %s</string>
+    <string name="sources_download_fail_named">Fehler beim Herunterladen von \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Konnte \'%1$s\' nicht aktualisieren: Die Patch-JSON-Datei wurde nicht über die konfigurierte URL gefunden</string>
     <string name="sources_patch_expert_badge">Experte</string>
     <string name="sources_patch_expert_badge_tooltip">Expertenmodus in den Einstellungen aktivieren, um diesen Patch manuell einzuschließen</string>
@@ -687,7 +688,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Wird geunmountet…</string>
     <string name="importing_ellipsis">Importiere…</string>
-    <string name="imported_successfully">Einstellungen erfolgreich importiert</string>
+    <string name="imported_successfully">Erfolgreich importiert</string>
     <string name="changelog">Changelogs anzeigen</string>
     <string name="changelog_description">Entdecken Sie die neuesten Änderungen in diesem Update</string>
     <string name="changelog_download_fail">Download des Changelogs fehlgeschlagen: %s</string>

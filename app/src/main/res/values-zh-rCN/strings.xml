@@ -81,6 +81,7 @@
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">无可用更新</string>
     <string name="sources_download_fail">下载补丁失败：%s</string>
+    <string name="sources_download_fail_named">下载失败：%1$s：%2$s</string>
     <string name="sources_download_endpoint_not_found">无法更新\'%1$s\': 未找到配置的补丁 JSON 文件</string>
     <string name="sources_patch_expert_badge">专家</string>
     <string name="sources_patch_expert_badge_tooltip">在设置中启用专家模式以手动包含此补丁</string>

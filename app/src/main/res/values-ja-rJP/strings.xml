@@ -81,6 +81,7 @@
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">利用可能な更新はありません</string>
     <string name="sources_download_fail">ソースのダウンロードに失敗しました: %s</string>
+    <string name="sources_download_fail_named">\"%1$s\"のダウンロードに失敗しました: %2$s</string>
     <string name="sources_download_endpoint_not_found">「%1$s」 を更新できませんでした: パッチ JSON ファイルが指定した URL に存在しません</string>
     <string name="sources_patch_expert_badge">エキスパート</string>
     <string name="sources_patch_expert_badge_tooltip">このパッチを手動で追加するには、設定でエキスパートモードを有効にしてください</string>

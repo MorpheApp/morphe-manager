@@ -81,6 +81,7 @@
     <string name="sources_update_success">Matagumpay ang pag-update</string>
     <string name="sources_update_unavailable">Walang update na magagamit</string>
     <string name="sources_download_fail">Nabigong mag-download ang mga mapagkukunan: %s</string>
+    <string name="sources_download_fail_named">Nabigong ma-download ang \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Hindi napagana ang pag-update \'%1$s\': ang patch JSON file ay hindi natagpuan sa itinakdang URL</string>
     <string name="sources_patch_expert_badge">Eksperto</string>
     <string name="sources_patch_expert_badge_tooltip">I-enable ang Expert mode sa Settings upang isama ang patch na ito nang manu-mano</string>

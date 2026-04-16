@@ -81,6 +81,7 @@
     <string name="sources_update_success">Nuashonrú rathúil</string>
     <string name="sources_update_unavailable">Níl aon nuashonrú ar fáil</string>
     <string name="sources_download_fail">Theip ar an pacáiste a íoslódáil: %s</string>
+    <string name="sources_download_fail_named">Theip ar an íoslódáil \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Níorbh fhéidir \'%1$s\' a nuashonrú: níor aimsíodh an comhad paiste JSON ag an URL cumraithe</string>
     <string name="sources_patch_expert_badge">Eolas</string>
     <string name="sources_patch_expert_badge_tooltip">Cumas an modh Eolas i Suitearachta chun an leas seo a chur isteach go láimhe</string>

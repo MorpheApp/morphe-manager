@@ -81,6 +81,7 @@
     <string name="sources_update_success">আপডেট সফল হয়েছে</string>
     <string name="sources_update_unavailable">আপডেট উপলব্ধ নেই</string>
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
+    <string name="sources_download_fail_named">\"%1$s\" ডাউনলোড করতে ব্যর্থ: %2$s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' এর জন্য আপডেট করতে পারেনি: কনফিগার করা URL-তে প্যাচ JSON ফাইলটি পাওয়া যায়নি</string>
     <string name="sources_patch_expert_badge">বিশেষজ্ঞ</string>
     <string name="sources_patch_expert_badge_tooltip">এই প্যাচটি ম্যানুয়ালি অন্তর্ভুক্ত করতে সেটিংস-এ বিশেষজ্ঞ মোড সক্রিয় করুন</string>

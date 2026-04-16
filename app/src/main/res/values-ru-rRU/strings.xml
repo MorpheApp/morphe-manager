@@ -81,6 +81,7 @@
     <string name="sources_update_success">Обновление успешно</string>
     <string name="sources_update_unavailable">Нет доступных обновлений</string>
     <string name="sources_download_fail">Не удалось загрузить источники: %s</string>
+    <string name="sources_download_fail_named">Не удалось загрузить \"%1$s\": %2$s</string>
     <string name="sources_download_endpoint_not_found">Не удалось обновить \'%1$s\': файл JSON патча не найден по указанному URL</string>
     <string name="sources_patch_expert_badge">Эксперт</string>
     <string name="sources_patch_expert_badge_tooltip">Включите режим Эксперта в Настройках для добавления этого патча вручную</string>

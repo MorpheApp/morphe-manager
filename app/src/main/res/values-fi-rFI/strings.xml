@@ -81,6 +81,7 @@
     <string name="sources_update_success">Muokitus onnistui</string>
     <string name="sources_update_unavailable">Ei ole muokkaa saatavilla</string>
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
+    <string name="sources_download_fail_named">Virhe ladatessa \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Ei voitu päivittää \'%1$s\': ennakkopäivitys JSON-tiedostoa ei löytynyt määritetystä URL-osoitteesta.</string>
     <string name="sources_patch_expert_badge">Asiantuntija</string>
     <string name="sources_patch_expert_badge_tooltip">Ota Asiantuntijatila käyttöön Asetuksista, jotta voit sisällyttää tämän korjauksen manuaalisesti</string>

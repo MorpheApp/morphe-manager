@@ -19,6 +19,7 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <!-- Home Screen - Sources Management -->
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_download_fail_named">\'%1$s\' डाउनलोड करण्यात अयशस्वी: %2$s</string>
     <string name="sources_patch_expert_badge">तज्ञ</string>
     <string name="sources_patch_expert_badge_tooltip">हा पॅच मॅन्युअली समाविष्ट करण्यासाठी सेटिंग्जमध्ये तज्ञ मोड सक्षम करा</string>
     <!-- Home Screen - Dialog 1: APK Availability -->

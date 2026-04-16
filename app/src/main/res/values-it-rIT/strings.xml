@@ -81,6 +81,7 @@
     <string name="sources_update_success">Aggiornamento riuscito</string>
     <string name="sources_update_unavailable">Nessun aggiornamento disponibile</string>
     <string name="sources_download_fail">Impossibile scaricare le fonti: %s</string>
+    <string name="sources_download_fail_named">Impossibile scaricare \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Impossibile aggiornare \'%1$s\': il file JSON delle patch non è stato trovato all\'URL configurato.</string>
     <string name="sources_patch_expert_badge">Esperto</string>
     <string name="sources_patch_expert_badge_tooltip">Abilita la modalità Esperto in Impostazioni per includere questa patch manualmente</string>

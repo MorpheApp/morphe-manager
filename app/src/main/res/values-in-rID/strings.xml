@@ -81,6 +81,7 @@
     <string name="sources_update_success">Pembaruan berhasil</string>
     <string name="sources_update_unavailable">Tidak ada pembaruan tersedia</string>
     <string name="sources_download_fail">Gagal mengunduh sumber: %s</string>
+    <string name="sources_download_fail_named">Gagal mengunduh \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Tidak dapat memperbarui \'%1$s\': berkas tambalan JSON tidak ditemukan di URL yang dikonfigurasi</string>
     <string name="sources_patch_expert_badge">Ahli</string>
     <string name="sources_patch_expert_badge_tooltip">Aktifkan mode Ahli di Pengaturan untuk menyertakan tambalan ini secara manual</string>

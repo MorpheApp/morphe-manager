@@ -81,6 +81,7 @@
     <string name="sources_update_success">עדכון הצליח</string>
     <string name="sources_update_unavailable">אין עדכון זמין</string>
     <string name="sources_download_fail">שגגה להוריד תצוגים: %s</string>
+    <string name="sources_download_fail_named">נכשל טעינת \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">לא ניתן לעדכן \'%1$s\': הקובץ JSON של התיקון לא נמצא באדרס המוגדר</string>
     <string name="sources_patch_expert_badge">מומחה</string>
     <string name="sources_patch_expert_badge_tooltip">הפעל מצב מומחה בהגדרות כדי לכלול תיקון זה באופן ידני</string>

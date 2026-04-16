@@ -81,6 +81,7 @@
     <string name="sources_update_success">Actualizare reușită</string>
     <string name="sources_update_unavailable">Nu există actualizări disponibile</string>
     <string name="sources_download_fail">Eroare la descărcarea surselor: %s</string>
+    <string name="sources_download_fail_named">Eroare la descărcarea lui \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Nu s-a putut actualiza \'%1$s\': fișierul JSON al patch-ului nu a fost găsit la URL-ul configurat</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Activează modul Expert în Setări pentru a include manual acest patch</string>

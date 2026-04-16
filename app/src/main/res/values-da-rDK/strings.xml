@@ -81,6 +81,7 @@
     <string name="sources_update_success">Opdatering vellykket</string>
     <string name="sources_update_unavailable">Ingen opdatering tilgængelig</string>
     <string name="sources_download_fail">Kunne ikke hente patch kilder: %s</string>
+    <string name="sources_download_fail_named">Kunne ikke hente patch kilder: %1$s: %2$s</string>
     <string name="sources_download_endpoint_not_found">Kunne ikke opdatere \'%1$s\': patchens JSON-fil blev ikke fundet på den konfigurerede URL</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <string name="sources_patch_expert_badge_tooltip">Aktivér Ekspert-tilstand i Indstillinger for at inkludere denne patch manuelt</string>

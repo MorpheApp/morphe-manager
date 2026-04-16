@@ -81,6 +81,7 @@
     <string name="sources_update_success">Sucesso na atualização</string>
     <string name="sources_update_unavailable">Não há atualizações disponíveis</string>
     <string name="sources_download_fail">Falha ao baixar as origens: %s</string>
+    <string name="sources_download_fail_named">Falha ao baixar \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Não foi possível atualizar \'%1$s\': o arquivo JSON do patch não foi encontrado no URL configurado</string>
     <string name="sources_patch_expert_badge">Especialista</string>
     <string name="sources_patch_expert_badge_tooltip">Ative o Modo Especialista em Configurações para incluir este patch manualmente</string>

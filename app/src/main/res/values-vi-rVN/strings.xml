@@ -81,6 +81,7 @@
     <string name="sources_update_success">Cập nhật thành công</string>
     <string name="sources_update_unavailable">Hiện không có bản cập nhật nào</string>
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
+    <string name="sources_download_fail_named">Không tải được \"%1$s\": %2$s</string>
     <string name="sources_download_endpoint_not_found">Không thể cập nhật \'%1$s\': không tìm thấy tệp JSON bản vá tại URL đã cấu hình</string>
     <string name="sources_patch_expert_badge">Chuyên gia</string>
     <string name="sources_patch_expert_badge_tooltip">Bật chế độ Chuyên gia trong Cài đặt để có thể tự thêm bản vá này</string>

@@ -81,6 +81,7 @@
     <string name="sources_update_success">Bijwerken geslaagd</string>
     <string name="sources_update_unavailable">Geen bijwerken beschikbaar</string>
     <string name="sources_download_fail">Kan bronnen niet downloaden: %s</string>
+    <string name="sources_download_fail_named">Mislukt bij het downloaden van \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Kon \'%1$s\' niet updaten: het patch JSON-bestand werd niet gevonden op de geconfigureerde URL</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Schakel Expertmodus in Instellingen in om deze patch handmatig toe te voegen</string>

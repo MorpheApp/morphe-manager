@@ -81,6 +81,7 @@
     <string name="sources_update_success">Успешно ажурирано</string>
     <string name="sources_update_unavailable">Нema ажурирање</string>
     <string name="sources_download_fail">Неуспешно преузимање извора: %s</string>
+    <string name="sources_download_fail_named">Није успело преузимање \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Није могуће ажурирати \'%1$s\': пре-издавачки JSON фајл није пронађен на конфигурисаном URL-ју</string>
     <string name="sources_patch_expert_badge">Експерт</string>
     <string name="sources_patch_expert_badge_tooltip">Омогућите Експерт режим у Подешавањима да бисте ручно укључили ову исправку</string>

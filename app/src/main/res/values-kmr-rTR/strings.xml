@@ -81,6 +81,7 @@
     <string name="sources_update_success">Nûvekirin serketî</string>
     <string name="sources_update_unavailable">Nûvekirin peyda nebûye</string>
     <string name="sources_download_fail">Nêzîk davêtin: %s</string>
+    <string name="sources_download_fail_named">Şûrande nedikir: \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Nefotayî nûvekirin \'%1$s\': pelê JSON-a dirûtinê li ser navnîşê tê dane danîn</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <string name="sources_patch_expert_badge_tooltip">Ji bo kuşandina vê patch\'ê bi destê, moda Ekspertê di Nastîran de çêbike</string>
