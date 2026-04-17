@@ -31,7 +31,7 @@ fun BytecodeModeDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_bytecode_mode),
         footer = {
-            MorpheDialogButton(
+            MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
