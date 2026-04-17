@@ -155,6 +155,7 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix = ".debug"
             buildConfigField("long", "BUILD_ID", "${Random.nextLong()}L")
         }
 
@@ -216,11 +217,6 @@ android {
                 "/org/bouncycastle/x509/**.properties"
             )
         )
-
-        jniLibs {
-            excludes += "/lib/x86/*.so"
-            useLegacyPackaging = true
-        }
     }
 
     buildFeatures {
@@ -258,6 +254,7 @@ kotlin {
         freeCompilerArgs.addAll(
             "-Xexplicit-backing-fields",
             "-Xcontext-parameters",
+            "-opt-in=kotlin.time.ExperimentalTime"
         )
     }
 }
