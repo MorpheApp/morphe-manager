@@ -1,3 +1,10 @@
+# [1.16.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0...v1.16.0-dev.1) (2026-04-17)
+
+
+### Features
+
+* Store merged APK from split archives as original for repatching ([#438](https://github.com/MorpheApp/morphe-manager/issues/438)) ([be0b868](https://github.com/MorpheApp/morphe-manager/commit/be0b86866f5e9f5e8aad4b596158084d03189fa3))
+
 # [1.15.0](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0...v1.15.0) (2026-04-17)
 
 
