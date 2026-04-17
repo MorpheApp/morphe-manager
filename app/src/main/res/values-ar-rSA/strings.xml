@@ -684,6 +684,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">إخفاء</string>
     <string name="default_">الافتراضي</string>
     <string name="logs">السجلات</string>
+    <string name="sources">المصادر</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>

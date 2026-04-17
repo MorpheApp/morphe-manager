@@ -685,6 +685,7 @@ morphe_header_custom_dark.png
     <string name="hide">ซ่อน</string>
     <string name="default_">ค่าเริ่มต้น</string>
     <string name="logs">บันทึก</string>
+    <string name="sources">แหล่งที่มา</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>

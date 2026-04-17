@@ -684,6 +684,7 @@ morphe_header_custom_dark.png
     <string name="hide">Приховати</string>
     <string name="default_">За замовчуванням</string>
     <string name="logs">Журнали</string>
+    <string name="sources">Джерела</string>
     <string name="installing_ellipsis">Інсталяція…</string>
     <string name="mounting_ellipsis">Монтування…</string>
     <string name="unmounting_ellipsis">Демонтування…</string>

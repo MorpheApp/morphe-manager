@@ -684,6 +684,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="hide">Ocultar</string>
     <string name="default_">Padrão</string>
     <string name="logs">Registros</string>
+    <string name="sources">Fontes</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando...</string>

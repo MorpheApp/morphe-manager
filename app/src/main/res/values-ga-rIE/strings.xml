@@ -684,6 +684,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="hide">Folaigh</string>
     <string name="default_">Réamhshocrú</string>
     <string name="logs">Logaí</string>
+    <string name="sources">Foinsí</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
     <string name="mounting_ellipsis">Ag ceangal…</string>
     <string name="unmounting_ellipsis">Ag dícheangal…</string>

@@ -684,6 +684,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="hide">Verbergen</string>
     <string name="default_">Standaard</string>
     <string name="logs">Logboeken</string>
+    <string name="sources">Bron-URL</string>
     <string name="installing_ellipsis">Installeren…</string>
     <string name="mounting_ellipsis">Koppelen…</string>
     <string name="unmounting_ellipsis">Verwijderen…</string>

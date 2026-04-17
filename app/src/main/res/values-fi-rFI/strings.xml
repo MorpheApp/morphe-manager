@@ -683,6 +683,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="hide">Piilota</string>
     <string name="default_">Oletus</string>
     <string name="logs">Päiväkirjat</string>
+    <string name="sources">Lähteet</string>
     <string name="installing_ellipsis">Asennetaan…</string>
     <string name="mounting_ellipsis">Liitetään…</string>
     <string name="unmounting_ellipsis">Poistetaan…</string>

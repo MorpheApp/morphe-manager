@@ -686,6 +686,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="hide">Masquer</string>
     <string name="default_">Par défaut</string>
     <string name="logs">Journaux</string>
+    <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installation…</string>
     <string name="mounting_ellipsis">Montage…</string>
     <string name="unmounting_ellipsis">Démontage…</string>

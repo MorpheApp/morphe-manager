@@ -683,6 +683,7 @@ morphe_header_custom_dark.png
     <string name="hide">Sakrij</string>
     <string name="default_">Подразумеван</string>
     <string name="logs">Дневници</string>
+    <string name="sources">Извори</string>
     <string name="installing_ellipsis">Инсталирање…</string>
     <string name="mounting_ellipsis">Монтирање…</string>
     <string name="unmounting_ellipsis">Демонтирање…</string>

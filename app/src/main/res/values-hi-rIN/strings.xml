@@ -684,6 +684,7 @@ morphe_header_custom_dark.png
     <string name="hide">छुपायें</string>
     <string name="default_">डिफ़ॉल्ट</string>
     <string name="logs">लॉग्स</string>
+    <string name="sources">स्रोत</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>
     <string name="mounting_ellipsis">माउंटिंग…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>

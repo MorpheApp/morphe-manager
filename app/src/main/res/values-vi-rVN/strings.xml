@@ -685,6 +685,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="hide">Ẩn</string>
     <string name="default_">Mặc định</string>
     <string name="logs">Nhật ký</string>
+    <string name="sources">Nguồn</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>
     <string name="mounting_ellipsis">Đang gắn kết…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn…</string>

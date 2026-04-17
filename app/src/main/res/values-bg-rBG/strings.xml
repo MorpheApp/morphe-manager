@@ -684,6 +684,7 @@ morphe_header_custom_dark.png
     <string name="hide">Скриване</string>
     <string name="default_">По подразбиране</string>
     <string name="logs">Дневници</string>
+    <string name="sources">Източници</string>
     <string name="installing_ellipsis">Инсталиране…</string>
     <string name="mounting_ellipsis">Монтиране…</string>
     <string name="unmounting_ellipsis">Извличане…</string>

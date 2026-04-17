@@ -667,6 +667,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">הסתר</string>
     <string name="default_">ברירת מחדל</string>
     <string name="logs">יומן</string>
+    <string name="sources">מקורות</string>
     <string name="installing_ellipsis">מתקין…</string>
     <string name="mounting_ellipsis">מצרף…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>

@@ -684,6 +684,7 @@ morphe_header_custom_dark.png
     <string name="hide">非表示にする</string>
     <string name="default_">デフォルト</string>
     <string name="logs">ログ</string>
+    <string name="sources">ソース</string>
     <string name="installing_ellipsis">インストール中…</string>
     <string name="mounting_ellipsis">マウント中…</string>
     <string name="unmounting_ellipsis">アンマウント中…</string>

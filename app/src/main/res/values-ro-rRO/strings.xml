@@ -684,6 +684,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="hide">Ascunde</string>
     <string name="default_">Implicit</string>
     <string name="logs">Jurnale</string>
+    <string name="sources">De surse</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>

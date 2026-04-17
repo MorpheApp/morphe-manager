@@ -684,6 +684,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="hide">Ukryj</string>
     <string name="default_">Domyślne</string>
     <string name="logs">Logi</string>
+    <string name="sources">Źródła</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Montowanie…</string>
     <string name="unmounting_ellipsis">Odmontowywanie…</string>

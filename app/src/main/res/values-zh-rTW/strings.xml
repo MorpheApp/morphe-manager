@@ -683,6 +683,7 @@ morphe_header_custom_dark.png
     <string name="hide">隱藏</string>
     <string name="default_">預設</string>
     <string name="logs">日誌</string>
+    <string name="sources">個修補來源</string>
     <string name="installing_ellipsis">安裝中……</string>
     <string name="mounting_ellipsis">掛載中……</string>
     <string name="unmounting_ellipsis">正在解除掛載……</string>

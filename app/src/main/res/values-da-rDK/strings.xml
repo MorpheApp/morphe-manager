@@ -684,6 +684,7 @@ Bildeformateringen må være som følger:
     <string name="hide">Skjul</string>
     <string name="default_">Standard</string>
     <string name="logs">Logfiler</string>
+    <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>
     <string name="mounting_ellipsis">Montering…</string>
     <string name="unmounting_ellipsis">Afmontere…</string>

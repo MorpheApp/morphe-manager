@@ -684,6 +684,7 @@ Rozměry obrázků musí být následující:
     <string name="hide">Skrýt</string>
     <string name="default_">Výchozí</string>
     <string name="logs">Protokoly</string>
+    <string name="sources">Zdroje</string>
     <string name="installing_ellipsis">Instaluje se…</string>
     <string name="mounting_ellipsis">Připojování…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>

@@ -684,6 +684,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="hide">Verbergen</string>
     <string name="default_">Standard</string>
     <string name="logs">Protokolle</string>
+    <string name="sources">Quellen</string>
     <string name="installing_ellipsis">Wird installiert…</string>
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Wird geunmountet…</string>

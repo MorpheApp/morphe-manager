@@ -685,6 +685,7 @@ morphe_header_custom_dark.png
     <string name="hide">숨기기</string>
     <string name="default_">기본값</string>
     <string name="logs">로그</string>
+    <string name="sources">소스</string>
     <string name="installing_ellipsis">설치하는 중…</string>
     <string name="mounting_ellipsis">마운트하는 중…</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중…</string>

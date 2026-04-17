@@ -684,6 +684,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="hide">Nascondi</string>
     <string name="default_">Predefinita</string>
     <string name="logs">Tracciati</string>
+    <string name="sources">Fonti</string>
     <string name="installing_ellipsis">Installazione in corso…</string>
     <string name="mounting_ellipsis">Montaggio in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>

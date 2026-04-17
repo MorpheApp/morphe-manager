@@ -668,6 +668,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="hide">Sakrij</string>
     <string name="default_">Podrazumevana</string>
     <string name="logs">Dnevnici</string>
+    <string name="sources">Izvori</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Montiranje…</string>
     <string name="unmounting_ellipsis">Ponovo priključaj…</string>

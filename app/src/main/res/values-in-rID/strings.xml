@@ -685,6 +685,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="hide">Sembunyikan</string>
     <string name="default_">Bawaan</string>
     <string name="logs">Catatan</string>
+    <string name="sources">Sumber</string>
     <string name="installing_ellipsis">Memasang…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>

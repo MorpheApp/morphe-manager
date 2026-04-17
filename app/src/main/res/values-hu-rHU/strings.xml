@@ -685,6 +685,7 @@ Forrás: #%2$s</string>
     <string name="hide">Elrejtés</string>
     <string name="default_">Alapértelmezett</string>
     <string name="logs">Naplók</string>
+    <string name="sources">Forrás</string>
     <string name="installing_ellipsis">Telepítés…</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>

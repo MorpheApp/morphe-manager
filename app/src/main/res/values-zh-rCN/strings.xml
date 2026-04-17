@@ -684,6 +684,7 @@ morphe_header_custom_dark.png
     <string name="hide">隐藏</string>
     <string name="default_">默认</string>
     <string name="logs">日志</string>
+    <string name="sources">来源</string>
     <string name="installing_ellipsis">正在安装…</string>
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting_ellipsis">正在卸载…</string>

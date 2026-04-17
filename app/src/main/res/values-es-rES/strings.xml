@@ -684,6 +684,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="hide">Ocultar</string>
     <string name="default_">Predeterminado</string>
     <string name="logs">Registros</string>
+    <string name="sources">Fuentes</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>

@@ -676,6 +676,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">গোপন রাখুন</string>
     <string name="default_">ডিফল্ট</string>
     <string name="logs">লগসমূহ</string>
+    <string name="sources">\"সোর্স\"</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>
