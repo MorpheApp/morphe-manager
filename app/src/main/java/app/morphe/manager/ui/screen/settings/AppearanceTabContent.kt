@@ -53,6 +53,7 @@ fun AppearanceTabContent(
     val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
+    val showPatchingPhrases by themeViewModel.prefs.showPatchingPhrases.getAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
 
@@ -74,6 +75,28 @@ fun AppearanceTabContent(
         LanguageSection(
             appLanguage = appLanguage,
             onLanguageClick = { showTranslationInfoDialog.value = true }
+        )
+
+        // Home Screen Header Section
+        SectionTitle(
+            text = androidx.compose.ui.res.stringResource(app.morphe.manager.R.string.settings_appearance_home_screen_header),
+            icon = androidx.compose.material.icons.Icons.Outlined.Dashboard
+        )
+
+        RichSettingsItem(
+            onClick = { themeViewModel.toggleShowPatchingPhrases(showPatchingPhrases) },
+            showBorder = true,
+            title = androidx.compose.ui.res.stringResource(app.morphe.manager.R.string.settings_appearance_patching_phrases),
+            subtitle = androidx.compose.ui.res.stringResource(app.morphe.manager.R.string.settings_appearance_patching_phrases_subtitle),
+            leadingContent = {
+                MorpheIcon(icon = androidx.compose.material.icons.Icons.Outlined.ChatBubbleOutline)
+            },
+            trailingContent = {
+                androidx.compose.material3.Switch(
+                    checked = showPatchingPhrases,
+                    onCheckedChange = null
+                )
+            }
         )
 
         // Theme Mode Section

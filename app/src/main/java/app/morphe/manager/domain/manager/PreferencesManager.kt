@@ -28,6 +28,7 @@ class PreferencesManager(
 
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
+    val showPatchingPhrases = booleanPreference("show_patching_phrases", true)
     val themePresetSelectionEnabled = booleanPreference("theme_preset_selection_enabled", true)
     val themePresetSelectionName = stringPreference("theme_preset_selection_name", "DEFAULT")
     val customAccentColor = stringPreference("custom_accent_color", "")

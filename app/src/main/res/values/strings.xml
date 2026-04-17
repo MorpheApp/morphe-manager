@@ -781,4 +781,9 @@ Do you still want to continue?"</string>
     <string name="hours_ago">%sh ago</string>
     <string name="days_ago">%sd ago</string>
     <string name="invalid_date">Invalid date</string>
+    
+    <string name="settings_appearance_home_screen_header">Home screen header</string>
+    <string name="settings_appearance_patching_phrases">Patching phrases</string>
+    <string name="settings_appearance_patching_phrases_subtitle">Show fun messages on the home screen</string>
+
 </resources>
