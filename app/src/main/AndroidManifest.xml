@@ -222,6 +222,10 @@
                 android:name="androidx.work.WorkManagerInitializer"
                 android:value="androidx.startup"
                 tools:node="remove" />
+            <!-- Disable Ackpine's notification channel -->
+            <meta-data
+                android:name="ru.solrudev.ackpine.AckpineInitializer"
+                tools:node="remove" />
         </provider>
 
         <!-- Firebase Cloud Messaging — receives push notifications bypassing Doze mode -->
