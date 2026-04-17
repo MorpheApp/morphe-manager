@@ -90,7 +90,6 @@ object SplitApkPreparer {
             }
 
             onProgress?.invoke("Finalizing merged APK")
-            persistMergedIfDownloaded(source, mergedApk, logger)
 
             logger.info(
                 "Split APK merged to ${mergedApk.absolutePath} " +
@@ -334,20 +333,6 @@ object SplitApkPreparer {
         val merged: Boolean,
         val cleanup: () -> Unit = {}
     )
-
-    private fun persistMergedIfDownloaded(source: File, merged: File, logger: Logger) {
-        // Only persist back to the downloads cache when the original input lives in our downloaded-apps dir.
-        val downloadsRoot = source.parentFile?.parentFile
-        val isDownloadedApp = downloadsRoot?.name?.startsWith("app_downloaded-apps") == true
-        if (!isDownloadedApp) return
-
-        runCatching {
-            merged.copyTo(source, overwrite = true)
-            logger.info("Persisted merged split APK back to downloads cache: ${source.absolutePath}")
-        }.onFailure { error ->
-            logger.warn("Failed to persist merged split APK to downloads cache: ${error.message}")
-        }
-    }
 
     private object DefaultLogger : Logger() {
         override fun log(level: LogLevel, message: String) {
