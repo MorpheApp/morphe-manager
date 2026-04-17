@@ -217,6 +217,10 @@ android {
                 "/org/bouncycastle/x509/**.properties"
             )
         )
+
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
 
     buildFeatures {
