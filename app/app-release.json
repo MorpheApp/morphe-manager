@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-16T07:17:13.061Z",
-  "description": "# [1.15.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.4...v1.15.0-dev.5) (2026-04-16)\n\n\n### Bug Fixes\n\n* Re-download bundle if version matches but createdAt differs ([2e77833](https://github.com/MorpheApp/morphe-manager/commit/2e77833cca08fb1c5c52bebe11dd032269099f9c))\n* Show failing bundle name in error toast and auto-disable bundles on fetch failure ([1c3a384](https://github.com/MorpheApp/morphe-manager/commit/1c3a3843f3989621764dfb8582e926170e686fa9))\n\n\n### Features\n\n* Export/import third-party bundles with manager settings ([e5c826f](https://github.com/MorpheApp/morphe-manager/commit/e5c826fb81c725cb6ea3b614f2a04a924350f05a))\n* Group compatible versions by bundle in APK availability dialog ([#432](https://github.com/MorpheApp/morphe-manager/issues/432)) ([362d097](https://github.com/MorpheApp/morphe-manager/commit/362d09744c51844774c1e9555580e0ed7fcdbfa1))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.5/morphe-manager-1.15.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.15.0-dev.5/morphe-manager-1.15.0-dev.5.apk.asc",
-  "version": "1.15.0-dev.5"
+  "created_at": "2026-04-17T06:57:46.009Z",
+  "description": "# [1.16.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0...v1.16.0-dev.1) (2026-04-17)\n\n\n### Features\n\n* Store merged APK from split archives as original for repatching ([#438](https://github.com/MorpheApp/morphe-manager/issues/438)) ([be0b868](https://github.com/MorpheApp/morphe-manager/commit/be0b86866f5e9f5e8aad4b596158084d03189fa3))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.1/morphe-manager-1.16.0-dev.1.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.1/morphe-manager-1.16.0-dev.1.apk.asc",
+  "version": "1.16.0-dev.1"
 }
