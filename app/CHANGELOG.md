@@ -1,3 +1,34 @@
+# [1.15.0](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0...v1.15.0) (2026-04-17)
+
+
+### Bug Fixes
+
+* Adjust wording ([482c1d1](https://github.com/MorpheApp/morphe-manager/commit/482c1d18945cfdc63bb54d7d112b0ec7ce4f58ba))
+* Cancel patcher worker immediately on user cancellation ([4f0b312](https://github.com/MorpheApp/morphe-manager/commit/4f0b3124052a0975a94a38f0a519ab8e340ec318))
+* Don't count empty patch selections in package badge ([e073ecf](https://github.com/MorpheApp/morphe-manager/commit/e073ecf279d5d605198a039b6325226f1d3feec2))
+* Improve APK load error messages with distinct failure reasons ([3174f28](https://github.com/MorpheApp/morphe-manager/commit/3174f28480e1857ae689dee26806ed513ad980f9))
+* Interrupt split APK merger immediately on cancellation ([0f7feca](https://github.com/MorpheApp/morphe-manager/commit/0f7fecabfd24ea588755c2ddfc2a4661c0783b83))
+* Re-download bundle if version matches but createdAt differs ([2e77833](https://github.com/MorpheApp/morphe-manager/commit/2e77833cca08fb1c5c52bebe11dd032269099f9c))
+* Refresh patch options only once on bundle load ([bf04846](https://github.com/MorpheApp/morphe-manager/commit/bf0484648ea76dfedbd778716fd75c65f1538f4f))
+* Serialize `StringList` options based on patcher type ([8464f34](https://github.com/MorpheApp/morphe-manager/commit/8464f34f280b02beab4965dd62f3d9cfc3653979))
+* Show failing bundle name in error toast and auto-disable bundles on fetch failure ([1c3a384](https://github.com/MorpheApp/morphe-manager/commit/1c3a3843f3989621764dfb8582e926170e686fa9))
+* Show full patching log in error dialog when no specific error is captured ([f18d826](https://github.com/MorpheApp/morphe-manager/commit/f18d8267cc0b356139ce4a9299548d45097624d5))
+* Show success toast after bundle import completes ([74d05cb](https://github.com/MorpheApp/morphe-manager/commit/74d05cb46d74ea489ad2c454706a9c0a4cf4a1c5))
+* Skip disabled installed apps in AppDataResolver ([8eaa88b](https://github.com/MorpheApp/morphe-manager/commit/8eaa88bda6e4fe657924355eaed1b3fe87f045b1))
+* Use `GetContent` instead of `OpenDocument` for APK/bundle pickers ([cb3551d](https://github.com/MorpheApp/morphe-manager/commit/cb3551d13ac490b2e74eb7ec111369e278e32efe))
+
+
+### Features
+
+* Add Android TV launcher support ([38f2703](https://github.com/MorpheApp/morphe-manager/commit/38f27030d4c80b1873af37c21454206fc86ec372))
+* Add Expert badge to patch bundle viewer ([169ff75](https://github.com/MorpheApp/morphe-manager/commit/169ff751ba839b50aeebb03c07801688a8dd2cbe))
+* Add import/export selection buttons in patch selection dialog ([c5b4ef6](https://github.com/MorpheApp/morphe-manager/commit/c5b4ef658e05a34198233ffe897e05499454ca18))
+* Add saved selection button in expert mode dialog ([ee336d8](https://github.com/MorpheApp/morphe-manager/commit/ee336d865e71e4a597924a302326ef2d5c638805))
+* Export/import third-party bundles with manager settings ([e5c826f](https://github.com/MorpheApp/morphe-manager/commit/e5c826fb81c725cb6ea3b614f2a04a924350f05a))
+* Group compatible versions by bundle in APK availability dialog ([#432](https://github.com/MorpheApp/morphe-manager/issues/432)) ([362d097](https://github.com/MorpheApp/morphe-manager/commit/362d09744c51844774c1e9555580e0ed7fcdbfa1))
+* Show bottom bar labels in main screen ([2d4fd8d](https://github.com/MorpheApp/morphe-manager/commit/2d4fd8d3c2180c9443e65c8d0a9c23bcb2586e13))
+* Show update date for single default bundle in management sheet ([16e81bb](https://github.com/MorpheApp/morphe-manager/commit/16e81bbde5eff647742eee5414033a4bcce4c98d))
+
 # [1.15.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0-dev.4...v1.15.0-dev.5) (2026-04-16)
 
 
