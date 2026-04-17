@@ -1,10 +1,8 @@
 package app.morphe.manager.ui.viewmodel
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.*
 import android.content.pm.PackageInfo
-import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -13,16 +11,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
-import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.installer.ShizukuInstaller
+import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.service.InstallService
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.simpleMessage
 import app.morphe.manager.util.toast
@@ -41,7 +35,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private val app: Application by inject()
     private val pm: PM by inject()
     private val rootInstaller: RootInstaller by inject()
-    private val shizukuInstaller: ShizukuInstaller by inject()
+    private val ackpineInstaller: AckpineInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val prefs: PreferencesManager by inject()
 
@@ -97,10 +91,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
     var mountOperation: MountOperation? by mutableStateOf(null)
         private set
 
-    private var awaitingPackageName: String? = null
-    private var installTimeoutJob: Job? = null
-    private var isWaitingForUninstall = false
-
     // For external installer monitoring
     private var pendingExternalInstall: InstallerManager.InstallPlan.External? = null
     private var externalInstallTimeoutJob: Job? = null
@@ -117,65 +107,16 @@ class InstallViewModel : ViewModel(), KoinComponent {
     var currentInstallType: InstallType = InstallType.DEFAULT
         private set
 
-    // Broadcast receiver for install results
-    private val installReceiver = object : BroadcastReceiver() {
+    // Broadcast receiver - only needed for external (third-party installer app) install monitoring.
+    // Internal/Shizuku results come directly from Ackpine's session.await().
+    // Uninstall is also handled via Ackpine.
+    private val packageReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
                 Intent.ACTION_PACKAGE_ADDED,
                 Intent.ACTION_PACKAGE_REPLACED -> {
                     val pkg = intent.data?.schemeSpecificPart ?: return
-
-                    // Check external installation first
-                    if (handleExternalInstallSuccess(pkg)) return
-
-                    if (pkg == awaitingPackageName) {
-                        handleInstallSuccess(pkg)
-                    }
-                }
-
-                Intent.ACTION_PACKAGE_REMOVED -> {
-                    val pkg = intent.data?.schemeSpecificPart ?: return
-                    if (isWaitingForUninstall && pkg == awaitingPackageName) {
-                        handleUninstallComplete()
-                    }
-                }
-
-                InstallService.APP_INSTALL_ACTION -> {
-                    val pmStatus = intent.getIntExtra(
-                        InstallService.EXTRA_INSTALL_STATUS,
-                        PackageInstaller.STATUS_FAILURE
-                    )
-
-                    when (pmStatus) {
-                        PackageInstaller.STATUS_PENDING_USER_ACTION -> {
-                            // User needs to confirm - keep installing state
-                        }
-                        PackageInstaller.STATUS_SUCCESS -> {
-                            val packageName = intent.getStringExtra(InstallService.EXTRA_PACKAGE_NAME)
-                            if (packageName != null) {
-                                handleInstallSuccess(packageName)
-                            } else {
-                                awaitingPackageName?.let { handleInstallSuccess(it) }
-                            }
-                        }
-                        else -> {
-                            val message = intent.getStringExtra(InstallService.EXTRA_INSTALL_STATUS_MESSAGE)
-                                ?.takeIf { it.isNotBlank() }
-
-                            // Check for signature mismatch
-                            if (installerManager.isSignatureMismatch(message)) {
-                                awaitingPackageName?.let { pkg ->
-                                    installState = InstallState.Conflict(pkg)
-                                }
-                                return
-                            }
-
-                            val formatted = installerManager.formatFailureHint(pmStatus, message)
-                            handleInstallError(
-                                formatted ?: message ?: app.getString(R.string.install_app_fail, pmStatus.toString())
-                            )
-                        }
-                    }
+                    handleExternalInstallSuccess(pkg)
                 }
             }
         }
@@ -184,12 +125,10 @@ class InstallViewModel : ViewModel(), KoinComponent {
     init {
         ContextCompat.registerReceiver(
             app,
-            installReceiver,
+            packageReceiver,
             IntentFilter().apply {
-                addAction(InstallService.APP_INSTALL_ACTION)
                 addAction(Intent.ACTION_PACKAGE_ADDED)
                 addAction(Intent.ACTION_PACKAGE_REPLACED)
-                addAction(Intent.ACTION_PACKAGE_REMOVED)
                 addDataScheme("package")
             },
             ContextCompat.RECEIVER_NOT_EXPORTED
@@ -199,11 +138,10 @@ class InstallViewModel : ViewModel(), KoinComponent {
     override fun onCleared() {
         super.onCleared()
         try {
-            app.unregisterReceiver(installReceiver)
+            app.unregisterReceiver(packageReceiver)
         } catch (e: Exception) {
             Log.e(TAG, "Failed to unregister receiver", e)
         }
-        installTimeoutJob?.cancel()
         externalInstallTimeoutJob?.cancel()
         pendingExternalInstall?.let(installerManager::cleanup)
     }
@@ -240,7 +178,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     ?: throw Exception("Failed to load application info")
 
                 val targetPackageName = packageInfo.packageName
-                awaitingPackageName = targetPackageName
 
                 // Check if app is already installed
                 val existingInfo = pm.getPackageInfo(targetPackageName)
@@ -378,7 +315,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             is InstallerManager.InstallPlan.Internal -> {
                 Log.d(TAG, "Using internal (standard) installer")
                 currentInstallType = InstallType.DEFAULT
-                performStandardInstall(outputFile, originalPackageName)
+                performStandardInstall(outputFile, originalPackageName, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.Shizuku -> {
@@ -407,83 +344,65 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Standard PackageInstaller installation.
+     * Internal (standard PackageInstaller) installation via Ackpine.
+     * Suspends until the user confirms or cancels the system dialog.
      */
     private suspend fun performStandardInstall(
         outputFile: File,
-        originalPackageName: String
+        originalPackageName: String,
+        onPersistApp: suspend (String, InstallType) -> Boolean
     ) {
+        val packageInfo = pm.getPackageInfo(outputFile)
+            ?: throw Exception("Failed to load application info")
+        val targetPackageName = packageInfo.packageName
+
         // Unmount if mounted as root
         if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(originalPackageName)) {
             rootInstaller.unmount(originalPackageName)
         }
 
-        // Start system installation
-        pm.installApp(listOf(outputFile))
-
-        // Set timeout
-        installTimeoutJob?.cancel()
-        installTimeoutJob = viewModelScope.launch {
-            delay(INSTALL_TIMEOUT_MS)
-            if (installState is InstallState.Installing) {
-                handleInstallError(app.getString(R.string.install_timeout_message))
-            }
+        try {
+            ackpineInstaller.installInternal(outputFile)
+        } catch (_: InstallCancelledException) {
+            // User dismissed the dialog - go back to Ready immediately, no error shown
+            installState = InstallState.Ready
+            return
         }
+
+        onPersistApp(targetPackageName, InstallType.DEFAULT)
+        handleInstallSuccess(targetPackageName)
     }
 
     /**
-     * Shizuku installation.
+     * Shizuku installation via Ackpine's ShizukuPlugin.
+     * Suspends until the system confirms or cancels.
      */
     private suspend fun performShizukuInstall(
         outputFile: File,
         onPersistApp: suspend (String, InstallType) -> Boolean
     ) {
-        try {
-            val packageInfo = pm.getPackageInfo(outputFile)
-                ?: throw Exception("Failed to load application info")
+        val packageInfo = pm.getPackageInfo(outputFile)
+            ?: throw Exception("Failed to load application info")
+        val targetPackageName = packageInfo.packageName
 
-            val targetPackageName = packageInfo.packageName
-
-            // Unmount if mounted as root
-            if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(targetPackageName)) {
-                rootInstaller.unmount(targetPackageName)
-            }
-
-            Log.d(TAG, "Starting Shizuku install for $targetPackageName")
-            val result = shizukuInstaller.install(outputFile, targetPackageName)
-
-            if (result.status == PackageInstaller.STATUS_SUCCESS) {
-                Log.d(TAG, "Shizuku install successful")
-
-                // Persist app data with SHIZUKU type
-                try {
-                    onPersistApp(targetPackageName, InstallType.SHIZUKU)
-                    Log.d(TAG, "Persisted app with InstallType: SHIZUKU")
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed to persist app data", e)
-                }
-
-                installedPackageName = targetPackageName
-                installState = InstallState.Installed(targetPackageName)
-                app.toast(app.getString(R.string.install_app_success))
-            } else {
-                val message = result.message ?: app.getString(R.string.installer_hint_generic)
-                Log.e(TAG, "Shizuku install failed: $message")
-                handleInstallError(app.getString(R.string.install_app_fail, message))
-            }
-        } catch (e: ShizukuInstaller.InstallerOperationException) {
-            val message = e.message ?: app.getString(R.string.installer_hint_generic)
-            Log.e(TAG, "Shizuku install exception", e)
-            handleInstallError(app.getString(R.string.install_app_fail, message))
-        } catch (e: Exception) {
-            Log.e(TAG, "Shizuku install failed", e)
-            handleInstallError(
-                app.getString(
-                    R.string.install_app_fail,
-                    e.simpleMessage() ?: e.javaClass.simpleName
-                )
-            )
+        if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(targetPackageName)) {
+            rootInstaller.unmount(targetPackageName)
         }
+
+        Log.d(TAG, "Starting Shizuku install for $targetPackageName")
+
+        try {
+            ackpineInstaller.installShizuku(outputFile)
+        } catch (_: InstallCancelledException) {
+            installState = InstallState.Ready
+            return
+        }
+
+        Log.d(TAG, "Shizuku install successful")
+        onPersistApp(targetPackageName, InstallType.SHIZUKU)
+        installedPackageName = targetPackageName
+        installState = InstallState.Installed(targetPackageName)
+        app.toast(app.getString(R.string.install_app_success))
     }
 
     /**
@@ -814,16 +733,13 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         val file = pendingInstallFile ?: return
         val originalPkg = pendingOriginalPackageName ?: return
+        val callback = pendingPersistCallback ?: return
 
         viewModelScope.launch {
             installState = InstallState.Installing
-            currentInstallType = InstallType.DEFAULT // Standard installer
+            currentInstallType = InstallType.DEFAULT
             try {
-                val packageInfo = pm.getPackageInfo(file)
-                    ?: throw Exception("Failed to load application info")
-
-                awaitingPackageName = packageInfo.packageName
-                performStandardInstall(file, originalPkg)
+                performStandardInstall(file, originalPkg, callback)
             } catch (e: Exception) {
                 Log.e(TAG, "Fallback install failed", e)
                 handleInstallError(
@@ -946,16 +862,25 @@ class InstallViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    @SuppressLint("UseKtx")
+    /**
+     * Uninstalls a package via Ackpine. Shows the system confirmation dialog and
+     * suspends until the user confirms or cancels.
+     */
     fun requestUninstall(packageName: String) {
-        isWaitingForUninstall = true
-        awaitingPackageName = packageName
-
-        val intent = Intent(Intent.ACTION_DELETE).apply {
-            data = "package:$packageName".toUri()
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        viewModelScope.launch {
+            try {
+                ackpineInstaller.uninstall(packageName)
+                // After successful uninstall, reset install state
+                delay(300)
+                installState = InstallState.Ready
+                installedPackageName = null
+            } catch (_: UninstallCancelledException) {
+                // User dismissed - stay in current state silently
+            } catch (e: Exception) {
+                Log.e(TAG, "Uninstall failed", e)
+                app.toast(app.getString(R.string.install_app_fail, e.simpleMessage()))
+            }
         }
-        app.startActivity(intent)
     }
 
     fun openApp() {
@@ -963,46 +888,20 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     private fun handleInstallSuccess(packageName: String) {
-        installTimeoutJob?.cancel()
         externalInstallTimeoutJob?.cancel()
-        awaitingPackageName = null
-        isWaitingForUninstall = false
         selectedInstallerToken = null
         installedPackageName = packageName
         installState = InstallState.Installed(packageName)
-
-        pendingPersistCallback?.let { callback ->
-            val installType = currentInstallType
-            viewModelScope.launch {
-                try {
-                    callback(packageName, installType)
-                    Log.d(TAG, "Persisted app with InstallType: $installType")
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed to persist app data", e)
-                }
-            }
-        }
     }
 
     private fun handleInstallError(message: String) {
-        installTimeoutJob?.cancel()
         externalInstallTimeoutJob?.cancel()
-        awaitingPackageName = null
         selectedInstallerToken = null
         installState = InstallState.Error(message)
     }
 
-    private fun handleUninstallComplete() {
-        viewModelScope.launch {
-            delay(500)
-            isWaitingForUninstall = false
-            installState = InstallState.Ready
-        }
-    }
-
     companion object {
         private const val TAG = "Morphe Install"
-        private const val INSTALL_TIMEOUT_MS = 240_000L
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
         private const val INSTALL_MONITOR_POLL_MS = 1000L
     }
