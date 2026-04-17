@@ -62,12 +62,11 @@ class PreferencesManager(
 
     /**
      * Bytecode processing mode for the patcher.
-     * Defaults to [BytecodeMode.STRIP_FAST] on devices that don't support the process runtime
-     * or have 2 GB or less of RAM, and [BytecodeMode.STRIP_SAFE] otherwise.
+     * Defaults to [BytecodeMode.STRIP_FAST].
      */
     val bytecodeModePreference = enumPreference(
         "bytecode_mode",
-        defaultBytecodeModeFor(context)
+        BytecodeMode.STRIP_FAST
     )
 
     // System tab
@@ -249,24 +248,6 @@ class PreferencesManager(
          */
         fun isDevVersion(): Boolean {
             return BuildConfig.VERSION_NAME.contains("-dev", ignoreCase = true)
-        }
-
-        /**
-         * Calculates the default [BytecodeMode] for a device.
-         * Uses [BytecodeMode.STRIP_FAST] on devices that don't support the process runtime
-         * (Android 10 and below, or ARMv7) or have 2 GB or less of total RAM.
-         * Falls back to [BytecodeMode.STRIP_SAFE] on all other devices.
-         */
-        fun defaultBytecodeModeFor(context: Context): BytecodeMode {
-            val processRuntimeSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
-            if (!processRuntimeSupported) return BytecodeMode.STRIP_FAST
-
-            val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-            val memInfo = ActivityManager.MemoryInfo()
-            activityManager.getMemoryInfo(memInfo)
-            val totalRamMb = memInfo.totalMem / (1024 * 1024)
-
-            return if (totalRamMb <= 2048) BytecodeMode.STRIP_FAST else BytecodeMode.STRIP_SAFE
         }
     }
 }

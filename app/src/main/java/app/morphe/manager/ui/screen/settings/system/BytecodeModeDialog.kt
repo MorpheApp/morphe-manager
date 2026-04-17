@@ -51,14 +51,7 @@ fun BytecodeModeDialog(
             )
 
             BytecodeModeOption(
-                titleRes = R.string.settings_advanced_bytecode_mode_strip_safe,
-                subtitleRes = R.string.settings_advanced_bytecode_mode_strip_safe_description,
-                isSelected = current == BytecodeMode.STRIP_SAFE,
-                onSelect = { onSelect(BytecodeMode.STRIP_SAFE) },
-            )
-
-            BytecodeModeOption(
-                titleRes = R.string.settings_advanced_bytecode_mode_strip_fast,
+                titleRes = R.string.settings_advanced_bytecode_mode_strip_fast_label,
                 subtitleRes = R.string.settings_advanced_bytecode_mode_strip_fast_description,
                 isSelected = current == BytecodeMode.STRIP_FAST,
                 onSelect = { onSelect(BytecodeMode.STRIP_FAST) },
