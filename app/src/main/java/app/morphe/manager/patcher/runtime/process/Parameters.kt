@@ -15,6 +15,9 @@ data class Parameters(
     val outputFile: String,
     val configurations: List<PatchConfiguration>,
     val stripNativeLibs: Boolean,
+    // If non-null, PatcherProcess writes the merged mono-APK to this path after prepareIfNeeded.
+    // ProcessRuntime reads it back so the main process knows the merged file location.
+    val mergedInputFile: String? = null,
 ) : Parcelable
 
 @Parcelize

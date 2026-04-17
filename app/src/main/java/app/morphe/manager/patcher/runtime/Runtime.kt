@@ -12,6 +12,7 @@ import app.morphe.manager.util.PatchSelection
 import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.io.File
 import java.io.FileNotFoundException
 
 sealed class Runtime(context: Context) : KoinComponent {
@@ -37,5 +38,6 @@ sealed class Runtime(context: Context) : KoinComponent {
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
         stripNativeLibs: Boolean,
+        onMergedApkReady: (suspend (File) -> Unit)? = null,
     )
 }
