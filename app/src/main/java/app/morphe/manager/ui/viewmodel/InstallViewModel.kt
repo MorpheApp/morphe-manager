@@ -3,9 +3,7 @@ package app.morphe.manager.ui.viewmodel
 import android.app.Application
 import android.content.*
 import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +21,7 @@ import app.morphe.manager.util.toast
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ru.solrudev.ackpine.installer.InstallFailure
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
@@ -186,14 +185,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     // Check version - can't downgrade
                     if (pm.getVersionCode(packageInfo) < pm.getVersionCode(existingInfo)) {
                         Log.i(TAG, "Version downgrade detected - showing conflict")
-                        installState = InstallState.Conflict(targetPackageName)
-                        return@launch
-                    }
-
-                    // Check for signature conflict
-                    val hasConflict = hasSignatureConflict(outputFile, targetPackageName)
-                    if (hasConflict) {
-                        Log.i(TAG, "Signature conflict detected for $targetPackageName")
                         installState = InstallState.Conflict(targetPackageName)
                         return@launch
                     }
@@ -361,7 +352,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             rootInstaller.unmount(originalPackageName)
         }
 
-        try {
+        val failure = try {
             ackpineInstaller.installInternal(outputFile)
         } catch (_: InstallCancelledException) {
             // User dismissed the dialog - go back to Ready immediately, no error shown
@@ -369,8 +360,19 @@ class InstallViewModel : ViewModel(), KoinComponent {
             return
         }
 
-        onPersistApp(targetPackageName, InstallType.DEFAULT)
-        handleInstallSuccess(targetPackageName)
+        when (failure) {
+            null -> {
+                onPersistApp(targetPackageName, InstallType.DEFAULT)
+                handleInstallSuccess(targetPackageName)
+            }
+            is InstallFailure.Conflict -> {
+                Log.i(TAG, "Signature conflict detected for $targetPackageName by Ackpine")
+                installState = InstallState.Conflict(targetPackageName)
+            }
+            else -> handleInstallError(
+                app.getString(R.string.install_app_fail, failure.message ?: failure.javaClass.simpleName)
+            )
+        }
     }
 
     /**
@@ -391,18 +393,29 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         Log.d(TAG, "Starting Shizuku install for $targetPackageName")
 
-        try {
+        val failure = try {
             ackpineInstaller.installShizuku(outputFile)
         } catch (_: InstallCancelledException) {
             installState = InstallState.Ready
             return
         }
 
-        Log.d(TAG, "Shizuku install successful")
-        onPersistApp(targetPackageName, InstallType.SHIZUKU)
-        installedPackageName = targetPackageName
-        installState = InstallState.Installed(targetPackageName)
-        app.toast(app.getString(R.string.install_app_success))
+        when (failure) {
+            null -> {
+                Log.d(TAG, "Shizuku install successful")
+                onPersistApp(targetPackageName, InstallType.SHIZUKU)
+                installedPackageName = targetPackageName
+                installState = InstallState.Installed(targetPackageName)
+                app.toast(app.getString(R.string.install_app_success))
+            }
+            is InstallFailure.Conflict -> {
+                Log.i(TAG, "Signature conflict detected for $targetPackageName by Ackpine")
+                installState = InstallState.Conflict(targetPackageName)
+            }
+            else -> handleInstallError(
+                app.getString(R.string.install_app_fail, failure.message ?: failure.javaClass.simpleName)
+            )
+        }
     }
 
     /**
@@ -773,93 +786,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
         val callback = pendingPersistCallback ?: return
 
         install(file, originalPkg, callback)
-    }
-
-    private suspend fun hasSignatureConflict(apkFile: File, packageName: String): Boolean =
-        withContext(Dispatchers.IO) {
-            try {
-                if (pm.getPackageInfo(packageName) == null) {
-                    return@withContext false
-                }
-
-                val installedSignatures = getInstalledPackageSignatures(packageName)
-                val apkSignatures = getApkFileSignatures(apkFile)
-
-                if (installedSignatures.isEmpty() || apkSignatures.isEmpty()) {
-                    return@withContext false
-                }
-
-                val signaturesMatch = installedSignatures.any { installed ->
-                    apkSignatures.any { apk -> installed.contentEquals(apk) }
-                }
-
-                !signaturesMatch
-            } catch (e: Exception) {
-                Log.e(TAG, "Error checking signature conflict", e)
-                false
-            }
-        }
-
-    @Suppress("DEPRECATION")
-    private fun getInstalledPackageSignatures(packageName: String): List<ByteArray> {
-        return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                val packageInfo = app.packageManager.getPackageInfo(
-                    packageName,
-                    PackageManager.GET_SIGNING_CERTIFICATES
-                )
-                val signingInfo = packageInfo.signingInfo
-                if (signingInfo != null) {
-                    if (signingInfo.hasMultipleSigners()) {
-                        signingInfo.apkContentsSigners.map { it.toByteArray() }
-                    } else {
-                        signingInfo.signingCertificateHistory?.map { it.toByteArray() } ?: emptyList()
-                    }
-                } else emptyList()
-            } else {
-                val packageInfo = app.packageManager.getPackageInfo(
-                    packageName,
-                    PackageManager.GET_SIGNATURES
-                )
-                packageInfo.signatures?.map { it.toByteArray() } ?: emptyList()
-            }
-        } catch (_: PackageManager.NameNotFoundException) {
-            emptyList()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error getting installed package signatures", e)
-            emptyList()
-        }
-    }
-
-    @Suppress("DEPRECATION")
-    private fun getApkFileSignatures(apkFile: File): List<ByteArray> {
-        return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                val packageInfo = app.packageManager.getPackageArchiveInfo(
-                    apkFile.absolutePath,
-                    PackageManager.GET_SIGNING_CERTIFICATES
-                )
-                if (packageInfo != null) {
-                    val signingInfo = packageInfo.signingInfo
-                    if (signingInfo != null) {
-                        if (signingInfo.hasMultipleSigners()) {
-                            signingInfo.apkContentsSigners.map { it.toByteArray() }
-                        } else {
-                            signingInfo.signingCertificateHistory?.map { it.toByteArray() } ?: emptyList()
-                        }
-                    } else emptyList()
-                } else emptyList()
-            } else {
-                val packageInfo = app.packageManager.getPackageArchiveInfo(
-                    apkFile.absolutePath,
-                    PackageManager.GET_SIGNATURES
-                )
-                packageInfo?.signatures?.map { it.toByteArray() } ?: emptyList()
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Error getting APK signatures", e)
-            emptyList()
-        }
     }
 
     /**

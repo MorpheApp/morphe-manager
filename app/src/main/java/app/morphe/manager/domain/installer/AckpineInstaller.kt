@@ -13,6 +13,7 @@ import ru.solrudev.ackpine.installer.parameters.InstallParameters
 import ru.solrudev.ackpine.installer.parameters.InstallerType
 import ru.solrudev.ackpine.session.await
 import ru.solrudev.ackpine.session.Session
+import ru.solrudev.ackpine.session.parameters.Confirmation
 import ru.solrudev.ackpine.uninstaller.PackageUninstaller
 import ru.solrudev.ackpine.uninstaller.parameters.UninstallParameters
 import java.io.File
@@ -38,19 +39,20 @@ class AckpineInstaller(private val app: Application) {
      * Installs an APK using the standard Android PackageInstaller API via Ackpine.
      * Suspends until the user confirms or cancels the system dialog — no timeout needed.
      *
+     * @return null on success, or a typed [InstallFailure] the caller can pattern-match on.
      * @throws InstallCancelledException when the user dismisses the system install dialog.
-     * @throws InstallFailedException on any other failure.
      */
-    suspend fun installInternal(apkFile: File) {
+    suspend fun installInternal(apkFile: File): InstallFailure? {
         val uri = InstallerFileProvider.getUriForFile(app, apkFile)
         val session = packageInstaller.createSession(
             InstallParameters.Builder(uri)
                 .setInstallerType(InstallerType.SESSION_BASED)
+                .setConfirmation(Confirmation.IMMEDIATE)
                 .setName(apkFile.name)
                 .build()
         )
-        try {
-            handleResult(session.await())
+        return try {
+            extractFailure(session.await())
         } catch (_: CancellationException) {
             throw InstallCancelledException()
         }
@@ -59,14 +61,15 @@ class AckpineInstaller(private val app: Application) {
     /**
      * Installs an APK silently via Shizuku/Sui using Ackpine's ShizukuPlugin.
      *
+     * @return null on success, or a typed [InstallFailure] the caller can pattern-match on.
      * @throws InstallCancelledException when aborted.
-     * @throws InstallFailedException on any other failure.
      */
-    suspend fun installShizuku(apkFile: File) {
+    suspend fun installShizuku(apkFile: File): InstallFailure? {
         val uri = InstallerFileProvider.getUriForFile(app, apkFile)
         val session = packageInstaller.createSession(
             InstallParameters.Builder(uri)
                 .setInstallerType(InstallerType.SESSION_BASED)
+                .setConfirmation(Confirmation.IMMEDIATE)
                 .setName(apkFile.name)
                 .registerPlugin(
                     ru.solrudev.ackpine.shizuku.ShizukuPlugin::class.java,
@@ -74,8 +77,8 @@ class AckpineInstaller(private val app: Application) {
                 )
                 .build()
         )
-        try {
-            handleResult(session.await())
+        return try {
+            extractFailure(session.await())
         } catch (_: CancellationException) {
             throw InstallCancelledException()
         }
@@ -90,7 +93,9 @@ class AckpineInstaller(private val app: Application) {
      */
     suspend fun uninstall(packageName: String) {
         val session = packageUninstaller.createSession(
-            UninstallParameters.Builder(packageName).build()
+            UninstallParameters.Builder(packageName)
+                .setConfirmation(Confirmation.IMMEDIATE)
+                .build()
         )
         try {
             when (val result = session.await()) {
@@ -104,14 +109,11 @@ class AckpineInstaller(private val app: Application) {
         }
     }
 
-    private fun handleResult(result: Session.State.Completed<InstallFailure>) {
+    private fun extractFailure(result: Session.State.Completed<InstallFailure>): InstallFailure? =
         when (result) {
-            is Session.State.Succeeded -> return
-            is Session.State.Failed -> {
-                throw InstallFailedException(result.failure.message ?: result.failure.javaClass.simpleName)
-            }
+            is Session.State.Succeeded -> null
+            is Session.State.Failed -> result.failure
         }
-    }
 
     fun isShizukuInstalled(): Boolean {
         if (Sui.isSui()) return true
@@ -150,11 +152,8 @@ class AckpineInstaller(private val app: Application) {
     }
 }
 
-/** Thrown when the user dismissed the system install dialog (InstallFailure.Aborted). */
+/** Thrown when the user dismissed the system install dialog. */
 class InstallCancelledException : Exception("Installation cancelled by user")
-
-/** Thrown when Ackpine reports a non-abort install failure. */
-class InstallFailedException(reason: String) : Exception(reason)
 
 /** Thrown when the user dismissed the system uninstall dialog. */
 class UninstallCancelledException : Exception("Uninstall cancelled by user")
