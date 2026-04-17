@@ -262,7 +262,6 @@ class ProcessRuntime(
             }
 
             val parameters = Parameters(
-                aaptPath = aaptPath,
                 frameworkDir = frameworkPath,
                 cacheDir = cacheDir,
                 packageName = packageName,

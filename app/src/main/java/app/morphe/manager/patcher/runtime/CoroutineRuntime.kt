@@ -76,7 +76,6 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                 Session(
                     cacheDir,
                     frameworkPath,
-                    aaptPath,
                     context,
                     logger,
                     preparation.file,

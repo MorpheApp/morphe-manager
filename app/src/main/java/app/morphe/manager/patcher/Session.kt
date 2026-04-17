@@ -24,13 +24,12 @@ internal typealias PatchList = List<Patch<*>>
 class Session(
     cacheDir: String,
     frameworkDir: String,
-    aaptPath: String,
     private val androidContext: Context,
     private val logger: Logger,
     private val input: File,
     private val onPatchCompleted: suspend () -> Unit,
     private val onProgress: (name: String?, state: State?, message: String?) -> Unit,
-    bytecodeMode: BytecodeMode = BytecodeMode.STRIP_SAFE,
+    bytecodeMode: BytecodeMode = BytecodeMode.STRIP_FAST,
 ) : Closeable {
     private fun updateProgress(name: String? = null, state: State? = null, message: String? = null) =
         onProgress(name, state, message)
@@ -41,7 +40,6 @@ class Session(
             apkFile = input,
             temporaryFilesPath = tempDir,
             frameworkFileDirectory = frameworkDir,
-            aaptBinaryPath = aaptPath,
             useBytecodeMode = bytecodeMode,
         )
     )
