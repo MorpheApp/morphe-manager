@@ -81,7 +81,10 @@
     <string name="sources_update_success">Успешно обновяване</string>
     <string name="sources_update_unavailable">Няма достъпно обновление</string>
     <string name="sources_download_fail">Неуспешно сваляне на източника: %s</string>
+    <string name="sources_download_fail_named">Неуспешно сваляне на \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Не може да се обнови \'%1$s\': предварителният JSON файл на пакета не е намерен на конфигурирания URL</string>
+    <string name="sources_patch_expert_badge">Експерт</string>
+    <string name="sources_patch_expert_badge_tooltip">Активиране на Експертен режим в Настройки, за да включите ръчно тази поправка.</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Трябва ви помощ за намиране на оригинален непатчен APK?</string>
     <string name="home_apk_availability_dialog_simple">За да оновяваш &lt;b&gt;%s&lt;/b&gt;, ти трябва непрошатата версия на APK:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Избрана версия</string>
     <string name="home_select_apk_title">Избор на APK</string>
     <string name="home_select_any_apk_description">Натиснете бутона отдолу, за да изберете APK файл на всякакви приложения за пачове</string>
-    <string name="home_invalid_apk">Невалиден APK файл</string>
+    <string name="home_invalid_apk_unreadable">Не успях да прочета файла. Проверете дали \'Външно хранилище\' не е ограничено от батерията</string>
+    <string name="home_invalid_apk_not_an_apk">Избраният файл не е валиден APK</string>
+    <string name="home_invalid_apk_io_error">Не успях да отворя файла. Моля, опитайте отново</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Режим на експерт</string>
     <string name="expert_mode_search">Търсене на пачове</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Изключи всички</string>
     <string name="expert_mode_enable_all">Включи всички</string>
     <string name="expert_mode_reset_to_default">Активиране на препоръчаните поправки</string>
+    <string name="expert_mode_restore_saved">Възстановяване на запазения избор</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
     <string name="expert_mode_universal_patches">Универсални пачове</string>
     <string name="expert_mode_new_patches">Нов</string>
@@ -154,7 +160,7 @@
     <string name="home_outdated_patches_dialog_warning">Патчване с остарели патчове може да доведе до счупване на приложението</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Обновяване и патчване</string>
     <string name="home_low_disk_space_dialog_title">Малко място на диска</string>
-    <string name="home_low_disk_space_dialog_message">Само %1$.2f GB свободно място за съхранение. Коригирането изисква поне 1 GB свободно място, за да работи правилно</string>
+    <string name="home_low_disk_space_dialog_message">Само %1$.2f GB свободно място за съхранение. За да работи правилно, обновяването изисква поне %2$.2f GB свободно място</string>
     <string name="home_low_disk_space_dialog_warning">Продължаването може да доведе до грешка \"файлът не е намерен\" или повреден изходен APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Навикнат цвят</string>
@@ -609,7 +615,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Относно</string>
     <string name="settings_system_share_website">Споделяне на уебсайт</string>
     <string name="settings_system_share_website_description">Сподели официалния уебсайт на Morphe</string>
-    <string name="settings_system_manager_description">"Експериментален, с отворен код проект за модерен, рационализиран коректор на популярни Android приложения, задвижван от обратна връзка и приноси на общността"</string>
+    <string name="settings_system_manager_description">"Отворен проект с изходен код за модерен, оптимизиран процес на поправяне на популярни Android приложения, поддържан от обратна връзка и приноси от общността"</string>
     <string name="credits">Кредити</string>
     <string name="credits_current_development">Текущо развитие</string>
     <string name="credits_prior_development">Предишно развитие</string>
@@ -678,10 +684,12 @@ morphe_header_custom_dark.png
     <string name="hide">Скриване</string>
     <string name="default_">По подразбиране</string>
     <string name="logs">Дневници</string>
+    <string name="sources">Източници</string>
     <string name="installing_ellipsis">Инсталиране…</string>
     <string name="mounting_ellipsis">Монтиране…</string>
     <string name="unmounting_ellipsis">Извличане…</string>
     <string name="importing_ellipsis">Импортиране…</string>
+    <string name="imported_successfully">Успешно импортирано</string>
     <string name="changelog">Вижте дневниците на промените</string>
     <string name="changelog_description">Погледете последното обновяване</string>
     <string name="changelog_download_fail">Неуспешно сваляне на дневника на промените: %s</string>

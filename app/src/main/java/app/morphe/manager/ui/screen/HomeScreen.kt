@@ -94,14 +94,16 @@ fun HomeScreen(
     }
 
     // Initialize launchers
+    // GetContent is used instead of OpenDocument so that third-party file managers
+    // appear as available options in Android's picker
     val openApkPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument()
+        contract = ActivityResultContracts.GetContent()
     ) { uri ->
         uri?.let { homeViewModel.handleApkSelection(it) }
     }
 
     val openBundlePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument()
+        contract = ActivityResultContracts.GetContent()
     ) { uri ->
         uri?.let {
             homeViewModel.selectedBundleUri = it
@@ -159,8 +161,8 @@ fun HomeScreen(
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
-        storagePickerLauncher = { openApkPicker.launch(APK_FILE_MIME_TYPES) },
-        openBundlePicker = { openBundlePicker.launch(MPP_FILE_MIME_TYPES) }
+        storagePickerLauncher = { openApkPicker.launch("*/*") },
+        openBundlePicker = { openBundlePicker.launch("*/*") }
     )
 
     // Pre-patching installer selection dialog for root-capable devices.

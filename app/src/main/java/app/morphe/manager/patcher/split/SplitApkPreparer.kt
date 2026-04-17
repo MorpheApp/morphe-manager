@@ -32,7 +32,7 @@ object SplitApkPreparer {
     suspend fun prepareIfNeeded(
         source: File,
         workspace: File,
-        logger: Logger = defaultLogger,
+        logger: Logger = DefaultLogger,
         stripNativeLibs: Boolean = false,
         skipUnneededSplits: Boolean = false,
         onProgress: ((String) -> Unit)? = null,
@@ -257,13 +257,8 @@ object SplitApkPreparer {
     }
 
     private fun deviceLocaleTokens(): Set<String> {
-        val locales = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val list = Resources.getSystem().configuration.locales
-            (0 until list.size()).map { index -> list[index] }
-        } else {
-            listOf(Locale.getDefault())
-        }
-
+        val list = Resources.getSystem().configuration.locales
+        val locales = (0 until list.size()).map { index -> list[index] }
         return locales.flatMap { locale ->
             buildLocaleTokens(locale)
         }.map { it.lowercase(Locale.ROOT) }.toSet()
@@ -354,7 +349,7 @@ object SplitApkPreparer {
         }
     }
 
-    private object defaultLogger : Logger() {
+    private object DefaultLogger : Logger() {
         override fun log(level: LogLevel, message: String) {
             Log.d("SplitApkPreparer", "[${level.name}] $message")
         }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">အခြားအက်ပ်များ</string>
+    <string name="home_not_patched_yet">ပီကေ မပြင်ရသေးပါ</string>
+    <string name="home_no_patches_available">Patch များ မရနိုင်ပါ </string>
+    <string name="home_app_hide_title">ဤအက်ပ်ကို ဝှက်ထားလိုပါသလား။</string>
+    <string name="home_app_hide_message">ဤအက်ပ်ကို ပင်မမျက်နှာပြင်မှ ဝှက်ထားပါမည်။ စာရင်းအောက်ခြေရှိ \'%1$s\' ခလုတ်ကို အသုံးပြု၍ နောက်မှ ပြန်လည်ရယူနိုင်ပါသည်။</string>
+    <string name="home_app_will_be_hidden">ဤအက်ပ်ကို ဝှက်ထားပါမည်</string>
+    <string name="home_app_show_hidden">ဝှက်ထားသော အက်ပ်များကို ပြပါ</string>
     <!-- Home Screen - Update Notifications -->
     <!-- Home Screen - Home Greetings -->
     <!-- Humorous hype message with light nostalgia -->

@@ -111,7 +111,6 @@
     <string name="home_selected_version">Versi terpilih</string>
     <string name="home_select_apk_title">Pilih APK</string>
     <string name="home_select_any_apk_description">Tekan butang dibawah untuk pilih fail APK apa-apa aplikasi untuk ditampal</string>
-    <string name="home_invalid_apk">Fail APK tidak sah</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod mahir</string>
     <string name="expert_mode_search">Cari tampalan</string>
@@ -153,7 +152,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_outdated_patches_dialog_warning">Menampal dengan tampalan ketinggalan zaman mungkin boleh menyebabkan aplikasi rosak</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Kemas kini tampalan \'&amp;\'</string>
     <string name="home_low_disk_space_dialog_title">Ruang storan sedikit</string>
-    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang tersedia. Tampalan memerlukan sekurang-kurangnya 1 GB ruang untuk bekerja dengan betul</string>
     <string name="home_low_disk_space_dialog_warning">Teruskan mungkin boleh mengakibatkan ralat \"Fail tidak dijumpai\" atau memcemarkan keluaran APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Warna tersuai</string>
@@ -606,7 +604,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_about">Mengenai</string>
     <string name="settings_system_share_website">Kongsi laman web</string>
     <string name="settings_system_share_website_description">Kongsi laman web Morphe rasmi</string>
-    <string name="settings_system_manager_description">"Sebuah projek eksperimen sumber terbuka untuk moden, saliran tambalan aplikasi Android terkemuka, dikuasakan oleh perkongsian dan kontribusi komuniti"</string>
     <string name="credits">Pengakuan</string>
     <string name="credits_current_development">Pembangunan semasa</string>
     <string name="credits_prior_development">Pembangunan sebelumnya</string>

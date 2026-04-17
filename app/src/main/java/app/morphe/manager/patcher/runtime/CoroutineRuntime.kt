@@ -25,6 +25,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
         stripNativeLibs: Boolean,
+        onMergedApkReady: (suspend (File) -> Unit)?,
     ) {
         MemoryMonitor.startMemoryPolling(logger)
 
@@ -69,7 +70,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
             try {
                 if (preparation.merged) {
                     onProgress(null, State.COMPLETED, null)
-                }
+                onMergedApkReady?.invoke(preparation.file)
+            }
 
                 Session(
                     cacheDir,

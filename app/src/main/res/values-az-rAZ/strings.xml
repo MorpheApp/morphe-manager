@@ -82,6 +82,8 @@
     <string name="sources_update_unavailable">Yenilənmə əlçatan deyil</string>
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' yenilənə bilmədi: yamaq JSON faylı qurulan URL-də tapılmadı</string>
+    <string name="sources_patch_expert_badge">Mütəxəssis</string>
+    <string name="sources_patch_expert_badge_tooltip">Bu yamağı əl ilə yerləşdirmək üçün Tənzimləmələrdə Mütəxəssis rejimin aktivləşdir</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Əsil yamaqlanmayan APK-nı tapmağa kömək lazımdır?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;, yamaqlamaq üçün yamaqlanmayan APK versiyasına ehtiyacınız var:</string>
@@ -111,15 +113,20 @@
     <string name="home_selected_version">Seçilən versiya</string>
     <string name="home_select_apk_title">APK Seçin</string>
     <string name="home_select_any_apk_description">Hər hansı tətbiqin APK faylını yamaqlama məqsədilə seçmək üçün aşağıda düyməyə toxun</string>
-    <string name="home_invalid_apk">Etibarsız APK faylı</string>
+    <string name="home_invalid_apk_unreadable">Faylı oxumaq mümkün olmadı. \'Xarici Yaddaş\'ın batareya məhdudiyyətli olmadığını yoxlayın</string>
+    <string name="home_invalid_apk_not_an_apk">Seçilən fayl yararlı APK deyil</string>
+    <string name="home_invalid_apk_io_error">Faylı açmaq olmadı. Xahiş olunur, təkrar cəhd et</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mütəxəssis rejimi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
     <string name="expert_mode_proceed">Yamaqlamağa davam et</string>
     <string name="expert_mode_disable_all">Hamısını qapat</string>
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
+    <string name="expert_mode_reset_to_default">Tövsiyə olunan yamaqları aktivləşdir</string>
+    <string name="expert_mode_restore_saved">Saxlanılan seçimi bərpa et</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
     <string name="expert_mode_universal_patches">Ümumi yamaqlar</string>
+    <string name="expert_mode_new_patches">Yeni</string>
     <string name="expert_mode_multiple_sources_warning_title">Çoxlu yamaq mənbəyi seçilib</string>
     <string name="expert_mode_multiple_sources_warning_message">"Çoxlu yamaq mənbəyindən yamaqlar seçmisiniz. Bu, uyuşma problemlərinə və ya gözlənilməz fəaliyyətə səbəb ola bilər.
 
@@ -152,7 +159,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_outdated_patches_dialog_warning">Köhnə yamaqlarla yamaqlanma tətbiq pozulmasına səbəb ola bilər</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Yenilənmə &amp; yamaq</string>
     <string name="home_low_disk_space_dialog_title">Az disk yaddaşı</string>
-    <string name="home_low_disk_space_dialog_message">Yalnız %1$.2f GB boş yaddaş var. Yamaqlanmanın düzgün işləməsinə ən azı 1 GB boş yaddaş tələb olunur</string>
+    <string name="home_low_disk_space_dialog_message">Yalnız %1$.2f GB boş yaddaş var. Yamaqlanmanın düzgün işləməsinə ən azı %2$.2f GB boş yaddaş tələb olunur</string>
     <string name="home_low_disk_space_dialog_warning">Əməl edilməsi \"fayl tapılmadı\" xətasına və ya hasilat APK korlanmasına səbəb ola bilər</string>
     <!-- Patch Options -->
     <string name="custom_color">Xüsusi rəng</string>
@@ -165,6 +172,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patch_option_list_duplicate">Bu dəyər artıq var</string>
     <string name="patch_option_list_empty">Dəyər boş ola bilməz</string>
     <string name="patch_option_list_empty_state">Hələ dəyər əlavə edilməyib</string>
+    <string name="patch_option_required_missing">%s: bütün tələb olunan seçimləri doldur</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Uyğun simvol yarat</string>
     <string name="adaptive_icon_instructions">Ön cild şəklini seç, fon rəngini seç, sonra önizləməni nizamlamaq üçün sürüşdürmə yaxud çimdikləmə jestlərin istifadə et</string>
@@ -226,6 +234,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patcher_error_copied">Xəta buferə köçürüldü</string>
     <string name="patcher_error_log">Xəta jurnalı</string>
     <string name="patcher_error_technical">Texniki təfsilatlar</string>
+    <string name="patcher_error_dialog_app_info">Tətbiq məlumatı</string>
     <string name="patcher_long_step_warning">Bu keçid bir müddət çəkə bilər. Zəhmət olmasa, gözləyin...</string>
     <string name="patcher_installing_subtitle">Təqribən coşdurmağa hazırdır! 🎸</string>
     <string name="patcher_success_title">Hamısı Bitdi! 🎉</string>
@@ -604,7 +613,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_about">Haqqında</string>
     <string name="settings_system_share_website">Veb saytı paylaş</string>
     <string name="settings_system_share_website_description">Xidməti Morphe veb saytını paylaşın</string>
-    <string name="settings_system_manager_description">"İcma əlaqələri və töhfələri ilə idarə olunan məşhur Android tətbiqlərinin müasir, rəvan yamaqlanması üçün təcrübi açıq mənbəli layihə"</string>
+    <string name="settings_system_manager_description">"İcma əlaqələri və töhfələri ilə idarə olunan məşhur Android tətbiqlərinin müasir, rəvan yamaqlanması üçün açıq mənbəli layihə"</string>
     <string name="credits">Sərmayələr</string>
     <string name="credits_current_development">Hazırkı inkişaf</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>
@@ -615,6 +624,8 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings">Tənzimləmələr</string>
     <string name="yes">Bəli</string>
     <string name="no">Xeyr</string>
+    <string name="all">Hamısı</string>
+    <string name="filter">Filtr</string>
     <string name="reset">Qaytar</string>
     <string name="reset_all">Hamısını Sıfırla</string>
     <string name="confirm">Təsdiqlə</string>
@@ -675,6 +686,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>
     <string name="importing_ellipsis">İdxal olunur…</string>
+    <string name="imported_successfully">Uğurla idxal olundu</string>
     <string name="changelog">Dəyişiklik jurnallarına bax</string>
     <string name="changelog_description">Bu yeniləmədəki ən son dəyişikliklərə nəzər sal</string>
     <string name="changelog_download_fail">Dəyişiklik jurnalın yükləmək olmadı: %s</string>

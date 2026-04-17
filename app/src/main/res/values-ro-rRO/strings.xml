@@ -81,7 +81,10 @@
     <string name="sources_update_success">Actualizare reușită</string>
     <string name="sources_update_unavailable">Nu există actualizări disponibile</string>
     <string name="sources_download_fail">Eroare la descărcarea surselor: %s</string>
+    <string name="sources_download_fail_named">Eroare la descărcarea lui \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Nu s-a putut actualiza \'%1$s\': fișierul JSON al patch-ului nu a fost găsit la URL-ul configurat</string>
+    <string name="sources_patch_expert_badge">Expert</string>
+    <string name="sources_patch_expert_badge_tooltip">Activează modul Expert în Setări pentru a include manual acest patch</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Ai nevoie de ajutor să găsești un APK original nepatch-uit?</string>
     <string name="home_apk_availability_dialog_simple">Pentru a patch-ui &lt;b&gt;%s&lt;/b&gt;, ai nevoie de o versiune APK nepatch-uită:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Versiune selectată</string>
     <string name="home_select_apk_title">Selectează APK</string>
     <string name="home_select_any_apk_description">Apasă butonul de mai jos pentru a selecta un fișier APK al oricărei aplicații pentru patch-uire</string>
-    <string name="home_invalid_apk">Fișier APK invalid</string>
+    <string name="home_invalid_apk_unreadable">Nu s-a putut citi fișierul. Verificați dacă \'Stocare Externă\' nu este restricționată de baterie</string>
+    <string name="home_invalid_apk_not_an_apk">Fișierul selectat nu este un APK valid</string>
+    <string name="home_invalid_apk_io_error">Nu s-a putut deschide fișierul. Vă rugăm încercați din nou</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Mod expert</string>
     <string name="expert_mode_search">Caută patch-uri</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_reset_to_default">Activează patch-urile recomandate</string>
+    <string name="expert_mode_restore_saved">Restaurarea selecției salvate</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_universal_patches">Patch-uri universale</string>
     <string name="expert_mode_new_patches">Nou</string>
@@ -154,7 +160,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_outdated_patches_dialog_warning">Folosirea patch-urilor învechite poate duce la o aplicație defectuoasă</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Actualizează și patch-uiește</string>
     <string name="home_low_disk_space_dialog_title">Spațiu pe disc insuficient</string>
-    <string name="home_low_disk_space_dialog_message">Sunt disponibili doar %1$.2f GB spațiu de stocare liber. Corectarea necesită cel puțin 1 GB spațiu de stocare liber pentru a funcționa corect</string>
+    <string name="home_low_disk_space_dialog_message">Doar %1$.2f GB spațiu de stocare liber disponibil. Repararea necesită cel puțin %2$.2f GB spațiu liber pentru a funcționa corect</string>
     <string name="home_low_disk_space_dialog_warning">Continuarea ar putea duce la o eroare \"fișierul nu a fost găsit\" sau la un APK de ieșire corupt</string>
     <!-- Patch Options -->
     <string name="custom_color">Culoare personalizată</string>
@@ -609,7 +615,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_share_website">Partajează website</string>
     <string name="settings_system_share_website_description">Partajează website-ul oficial Morphe</string>
-    <string name="settings_system_manager_description">"Un proiect open-source experimental pentru o actualizare modernă și simplificată a aplicațiilor Android populare, bazat pe feedback-ul și contribuțiile comunității"</string>
+    <string name="settings_system_manager_description">"Un proiect open-source pentru patch-uri moderne și simplificate ale aplicațiilor Android populare, ghidat de feedback-ul și contribuțiile comunității"</string>
     <string name="credits">Credite</string>
     <string name="credits_current_development">Dezvoltare curentă</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
@@ -678,10 +684,12 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="hide">Ascunde</string>
     <string name="default_">Implicit</string>
     <string name="logs">Jurnale</string>
+    <string name="sources">De surse</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
+    <string name="imported_successfully">Importate cu succes</string>
     <string name="changelog">Vizualizați jurnalele modificărilor</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>

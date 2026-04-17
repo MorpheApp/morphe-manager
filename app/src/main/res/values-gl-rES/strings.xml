@@ -97,7 +97,6 @@
     <string name="home_recommended_version">Versión recomendada</string>
     <string name="home_selected_version">Versión seleccionada</string>
     <string name="home_select_apk_title">Seleccionar APK</string>
-    <string name="home_invalid_apk">Arquivo APK non válido</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo Experto</string>
     <string name="expert_mode_search">Buscar parches</string>

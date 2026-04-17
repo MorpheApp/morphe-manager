@@ -24,17 +24,95 @@
 &nbsp;
 
 # 💊 Morphe
-Morphe app patcher for Android
 
-## ❓ About
+> Want to watch ads? Us neither.
 
-Morphe Manager is based off the work of [URV](https://github.com/Jman-Github/Universal-ReVanced-Manager)
-and [ReVanced](https://github.com/ReVanced/revanced-manager).
-All modifications made by Morphe, along with their dates, can be found in the Git history.
+Morphe is an Android app that patches YouTube, YouTube Music, and Reddit - stripping ads and giving you back control over your experience. No root required.
+
+## ✨ Why Morphe?
+
+Modern apps are full of ads and dark patterns designed to grab your attention. Morphe patches them at the bytecode level - modifying the app directly on your device, without any of your data leaving it. The result is a cleaner version of the app you already know, exactly the way you want it.
+
+## 📲 Download
+
+**[→ Download at morphe.software](https://morphe.software)**
+
+The website will guide you to the latest release for your device. No account needed.
+
+## 🚀 How it works
+
+1. **Install Morphe** from [morphe.software](https://morphe.software).
+2. **Pick an app** - YouTube, YouTube Music, or Reddit are supported out of the box.
+3. **Choose your mode:**
+  - **Simple mode** - designed for a one-tap experience. Just tap Patch and Morphe handles the rest with sensible defaults. No configuration needed.
+  - **Expert mode** - gives you full control. Choose exactly which of the 100+ patches to apply, configure per-patch options (colors, toggles, and more), and fine-tune everything before patching.
+4. **Provide the APK** - Morphe guides you through obtaining the original app file via step-by-step dialogs. The patching itself happens entirely on your device.
+5. **Install and enjoy** - once patching is complete, install the result like any normal APK.
+
+Everything happens locally. Morphe never uploads your APKs or personal data anywhere.
+
+## 🔧 Features
+
+**Patching**
+- Simple mode for one-tap patching with curated defaults
+- Expert mode for full patch selection, per-patch configuration, and experimental version support
+- Expert mode also shows an expanded patching screen with real-time logs and live RAM usage monitoring during patching
+- 100+ patches for YouTube, YouTube Music, and Reddit
+- Support for split APKs
+
+**Patch options** *(Simple mode: available in the Advanced tab; Expert mode: available on the patch selection screen)*
+- Custom app display name and header logo per app
+- App theme colors (background color presets)
+- Hide Shorts app shortcut and widget (YouTube)
+- And more, depending on installed patch bundles
+
+**Patch sources**
+- Add any compatible patch bundle via GitHub URL or deep link
+- Per-source pre-release toggle to get early patch access
+- Automatic background update notifications (even when the app is closed)
+
+**Installer**
+- Standard Android installer
+- Root installer with Magisk module support (mount-based, no data loss on update)
+- Any third-party installer apps detected on the system are also available as an option
+- Prompt-on-install option to choose per session
+
+**Appearance**
+- System / Light / Dark / Material You themes
+- Pure Black mode for OLED screens
+- Accent color selection
+- Animated background selection
+- App icon selection
+
+**Advanced**
+- Import/export your Morphe settings as JSON
+- Import/export your signing keystore
+- Manage saved original APKs and patched APKs
+- Manage saved patch selections per app
+- GitHub Personal Access Token support for higher API rate limits
+- Process runtime - run patching in a separate process for better stability, with configurable memory limit
+- Export debug logs for troubleshooting
+
+## ❓ New to GitHub?
+
+If you ended up here but aren't sure what to do next - no worries. Here's the short version:
+
+1. Go to the **[Releases page](https://github.com/MorpheApp/morphe-manager/releases/latest)**.
+2. Under **Assets**, tap the file ending in `.apk` to download it.
+3. Open the downloaded file on your Android device and tap **Install**.
+4. If Android asks you to allow installs from unknown sources, follow the prompt to enable it - this is required for any app not from the Play Store.
+
+That's it. Once Morphe is installed, everything else happens inside the app.
+
+For guides, FAQs, and troubleshooting, visit **[morphe.software](https://morphe.software)** or join the community on **[Reddit](https://www.reddit.com/r/MorpheApp)**.
+
+## ❗ About
+
+Morphe is built on the foundation of [ReVanced Manager](https://github.com/ReVanced/revanced-manager) and [URV](https://github.com/Jman-Github/Universal-ReVanced-Manager). All changes made by Morphe are documented in the Git history.
 
 ## 📜 License
 
-Morphe Patches are licensed under the [GNU General Public License v3.0](LICENSE), with additional conditions under GPLv3 Section 7:
+Morphe is licensed under the [GNU General Public License v3.0](LICENSE), with additional conditions under GPLv3 Section 7:
 
 - **Attribution (7b):** Any use of this code, including derivatives, must display a visible notice:
 

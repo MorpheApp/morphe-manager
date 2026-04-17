@@ -81,7 +81,10 @@
     <string name="sources_update_success">Matagumpay ang pag-update</string>
     <string name="sources_update_unavailable">Walang update na magagamit</string>
     <string name="sources_download_fail">Nabigong mag-download ang mga mapagkukunan: %s</string>
+    <string name="sources_download_fail_named">Nabigong ma-download ang \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Hindi napagana ang pag-update \'%1$s\': ang patch JSON file ay hindi natagpuan sa itinakdang URL</string>
+    <string name="sources_patch_expert_badge">Eksperto</string>
+    <string name="sources_patch_expert_badge_tooltip">I-enable ang Expert mode sa Settings upang isama ang patch na ito nang manu-mano</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Kailangan mo ba ng tulong sa paghahanap sa orihinal na hindi pa na-patch na APK?</string>
     <string name="home_apk_availability_dialog_simple">Upang ma-patch ang &lt;b&gt;%s&lt;/b&gt;, kailangan mo ng hindi pa napa-patch na APK na may bersyong:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Piniling bersyon</string>
     <string name="home_select_apk_title">Piliin ang APK</string>
     <string name="home_select_any_apk_description">Pindutin ang button sa ibaba upang pillin ang APK file ng anumang aplikasyon para sa pagpa-patch</string>
-    <string name="home_invalid_apk">Imbalido na APK file</string>
+    <string name="home_invalid_apk_unreadable">Hindi mabasa ang file. Siguraduhing hindi pinagbabawalan ng baterya ang \'External Storage\'</string>
+    <string name="home_invalid_apk_not_an_apk">Ang napiling file ay hindi isang valid na APK</string>
+    <string name="home_invalid_apk_io_error">Hindi mabuksan ang file. Pakisubukan muli</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_search">Maghanap ng mga patch</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Patayin lahat</string>
     <string name="expert_mode_enable_all">Paganahin lahat</string>
     <string name="expert_mode_reset_to_default">Paganahin ang inirekumendang mga patch</string>
+    <string name="expert_mode_restore_saved">Ibalik ang nakaimbak na pagpili</string>
     <string name="expert_mode_no_results">Walang nakita na patch</string>
     <string name="expert_mode_universal_patches">Mga unibersal na patch</string>
     <string name="expert_mode_new_patches">Bago</string>
@@ -154,7 +160,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="home_outdated_patches_dialog_warning">Ang pag-patch gamit ang mga luma na patch ay maaaring magresulta sa isang nasirang app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Mababang espasyo sa disk</string>
-    <string name="home_low_disk_space_dialog_message">Mayroon lamang %1$.2f GB ng libreng imbakan na available. Ang pag-patch ay nangangailangan ng hindi bababa sa 1 GB ng libreng espasyo upang gumana nang tama</string>
+    <string name="home_low_disk_space_dialog_message">Tanging %1$.2f GB ng libreng imbakan ang available. Ang pag-aayos ay nangangailangan ng hindi bababa sa %2$.2f GB ng malayang espasyo upang gumana nang tama</string>
     <string name="home_low_disk_space_dialog_warning">Ang pagpapatuloy ay maaaring magresulta sa isang error na \"file not found\" o isang corrupt na output APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Pasadyang kulay</string>
@@ -609,7 +615,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_about">Tungkol sa</string>
     <string name="settings_system_share_website">Ibahagi ang website</string>
     <string name="settings_system_share_website_description">Ibahagi ang opisyal na Morphe website</string>
-    <string name="settings_system_manager_description">"Isang eksperimental na open-source project para sa moderno, pinasimpleng pag-patch ng mga sikat na Android app, na itinutulak ng feedback at kontribusyon mula sa komunidad"</string>
+    <string name="settings_system_manager_description">"Isang open-source na proyekto para sa moderno, pinasimpleng pag-aayos ng mga sikat na app ng Android, na pinapatakbo ng feedback at kontribusyon ng komunidad"</string>
     <string name="credits">Kredito</string>
     <string name="credits_current_development">Kasalukuyang pag-unlad</string>
     <string name="credits_prior_development">Naunang pag-unlad</string>
@@ -678,10 +684,12 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="hide">Itago</string>
     <string name="default_">Panimula</string>
     <string name="logs">Mga log</string>
+    <string name="sources">Mga mapagkukunan</string>
     <string name="installing_ellipsis">Ini-install…</string>
     <string name="mounting_ellipsis">Nagma-mount…</string>
     <string name="unmounting_ellipsis">Ina-unmount…</string>
     <string name="importing_ellipsis">Ini-import…</string>
+    <string name="imported_successfully">Matagumpay na na-import</string>
     <string name="changelog">Tingnan ang mga changelog</string>
     <string name="changelog_description">Tingnan ang mga pinakabagong pagbabago sa update na ito</string>
     <string name="changelog_download_fail">Nabigong mag-download ang changelog: %s</string>

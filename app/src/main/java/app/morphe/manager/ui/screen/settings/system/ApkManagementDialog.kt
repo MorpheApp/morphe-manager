@@ -288,7 +288,7 @@ private fun ApkManagementDialogContent(
         onDismissRequest = onDismissRequest,
         title = title,
         footer = {
-            MorpheDialogButton(
+            MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismissRequest,
                 modifier = Modifier.fillMaxWidth()

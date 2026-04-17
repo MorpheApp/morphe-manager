@@ -81,7 +81,10 @@
     <string name="sources_update_success">Επιτυχία ενημέρωσης</string>
     <string name="sources_update_unavailable">Δεν υπάρχει διαθέσιμη ενημέρωση</string>
     <string name="sources_download_fail">Αποτυχία λήψης πηγών: %s</string>
+    <string name="sources_download_fail_named">Απέτυχε η λήψη του \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Δεν ήταν δυνατή η ενημέρωση του \'%1$s\': το τροποποιημένο αρχείο JSON δε βρέθηκε στη διαμορφωμένη URL</string>
+    <string name="sources_patch_expert_badge">Ειδικός</string>
+    <string name="sources_patch_expert_badge_tooltip">Ενεργοποιήστε τη λειτουργία Ειδικού στις Ρυθμίσεις για να συμπεριλάβετε αυτήν την ενημέρωση χειροκίνητα</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Χρειάζεστε βοήθεια για να βρείτε ένα πρωτότυπο μη τροποποιημένο APK;</string>
     <string name="home_apk_availability_dialog_simple">Για την τροποποίηση του &lt;b&gt;%s&lt;/b&gt;, χρειάζεστε τη μη τροποποιημένη έκδοση του APK:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Επιλεγμένη έκδοση</string>
     <string name="home_select_apk_title">Επιλογή APK</string>
     <string name="home_select_any_apk_description">Πατήστε το παρακάτω κουμπί για να επιλέξετε ένα αρχείο APK οποιασδήποτε εφαρμογής για τροποποίηση</string>
-    <string name="home_invalid_apk">Μη έγκυρο APK αρχείο</string>
+    <string name="home_invalid_apk_unreadable">Δεν ήταν δυνατή η ανάγνωση του αρχείου. Ελέγξτε ότι ο \'Εξωτερικός χώρος αποθήκευσης\' δεν περιορίζεται από την μπαταρία</string>
+    <string name="home_invalid_apk_not_an_apk">Το επιλεγμένο αρχείο δεν είναι ένα έγκυρο APK</string>
+    <string name="home_invalid_apk_io_error">Αποτυχία ανοίγματος του αρχείου. Παρακαλώ προσπαθήστε ξανά</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Εξειδικευμένη λειτουργία</string>
     <string name="expert_mode_search">Αναζήτηση τροποποιήσεων</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Απενεργοποίηση όλων</string>
     <string name="expert_mode_enable_all">Ενεργοποίηση όλων</string>
     <string name="expert_mode_reset_to_default">Ενεργοποίηση συνιστώμενων διορθώσεων</string>
+    <string name="expert_mode_restore_saved">Επαναφορά αποθηκευμένης επιλογής</string>
     <string name="expert_mode_no_results">Δε βρέθηκαν τροποποιήσεις </string>
     <string name="expert_mode_universal_patches">Γενικές τροποποιήσεις </string>
     <string name="expert_mode_new_patches">Νέο</string>
@@ -154,7 +160,7 @@
     <string name="home_outdated_patches_dialog_warning">Η τροποποίηση με απαρχαιωμένες εκδόσεις των τροποποιήσεων μπορεί να καταλήξει σε ένα κατεστραμμένο πρόγραμμα</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ενημέρωση &amp; τροποποίηση</string>
     <string name="home_low_disk_space_dialog_title">Λιγοστός εναπομείνων αποθηκευτικός χώρος</string>
-    <string name="home_low_disk_space_dialog_message">Έχει απομείνει μόνο%1$.2f GB ελεύθερος χώρος αποθήκευσης. Η τροποποίηση απαιτεί τουλάχιστον 1 GB ελεύθερου χώρου για να λειτουργήσει σωστά</string>
+    <string name="home_low_disk_space_dialog_message">Έχει απομείνει μόνο %1$.2f GB ελεύθερος χώρος αποθήκευσης. Η τροποποίηση απαιτεί τουλάχιστον %2$.2f GB ελεύθερου χώρου για να λειτουργήσει σωστά</string>
     <string name="home_low_disk_space_dialog_warning">Η συνέχιση μπορεί να οδηγήσει σε σφάλμα \"αρχείο δε βρέθηκε\" ή σε διεφθαρμένη APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Προσαρμοσμένο χρώμα</string>
@@ -609,7 +615,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Σχετικά με</string>
     <string name="settings_system_share_website">Διαμοίραση ιστότοπου</string>
     <string name="settings_system_share_website_description">Διαμοιράστε τον επίσημο ιστότοπο του Morphe</string>
-    <string name="settings_system_manager_description">"Ένα πειραματικό πρότζεκτ ανοικτού κώδικα για σύγχρονη, βελτιστοποιημένη ενημέρωση δημοφιλών εφαρμογών Android, οδηγημένο από την κοινωνική συνεισφορά"</string>
+    <string name="settings_system_manager_description">"Ένα έργο ανοικτού κώδικα για σύγχρονη, βελτιστοποιημένη ενημέρωση δημοφιλών εφαρμογών Android, που υποστηρίζεται από την κοινότητα και τις συνεισφορές της"</string>
     <string name="credits">Εύσημα</string>
     <string name="credits_current_development">Τρέχουσα ανάπτυξη</string>
     <string name="credits_prior_development">Προηγούμενη ανάπτυξη</string>
@@ -678,10 +684,12 @@ morphe_header_custom_dark.png
     <string name="hide">Απόκρυψη</string>
     <string name="default_">Προεπιλεγμένο</string>
     <string name="logs">Εγγραφές</string>
+    <string name="sources">Πηγές</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
     <string name="unmounting_ellipsis">Αποπροσάρτηση...</string>
     <string name="importing_ellipsis">Εισαγωγή…</string>
+    <string name="imported_successfully">Εισαγωγές επιτυχώς</string>
     <string name="changelog">Προβολή αρχείων καταγραφής αλλαγών</string>
     <string name="changelog_description">Έλεγξε τις τελευταίες αλλαγές σε αυτή την ενημέρωση</string>
     <string name="changelog_download_fail">Αποτυχία λήψης αρχείου καταγραφής αλλαγών: %s</string>

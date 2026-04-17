@@ -104,7 +104,6 @@
     <string name="home_selected_version">Vybraná verzia:</string>
     <string name="home_select_apk_title">Vybrať APK súbor</string>
     <string name="home_select_any_apk_description">Ťuknite na tlačidlo nižšie, aby ste vybrali APK súbor aplikácie, ktorú chcete zaplátať</string>
-    <string name="home_invalid_apk">Neplatný súbor APK</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Režim pre skúsených</string>
     <string name="expert_mode_search">Vyhľadať záplaty</string>

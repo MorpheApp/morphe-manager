@@ -59,7 +59,7 @@
     <string name="sources_management_prerelease_toggle">Usar patches pré-lançamento</string>
     <string name="sources_management_prerelease_toggle_description">Receber acesso antecipado a novas versões experimentais de patches</string>
     <string name="sources_management_experimental_versions_toggle">Utilizar versões experimentais do app</string>
-    <string name="sources_management_experimental_versions_toggle_description">Aplicar patches nas versões experimentais do app, se disponíveis</string>
+    <string name="sources_management_experimental_versions_toggle_description">Aplicar patches nas versões experimentais do aplicativo, se disponíveis</string>
     <string name="sources_management_already_exists">Esta fonte já foi adicionada</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome de exibição</string>
@@ -81,7 +81,10 @@
     <string name="sources_update_success">Sucesso na atualização</string>
     <string name="sources_update_unavailable">Não há atualizações disponíveis</string>
     <string name="sources_download_fail">Falha ao baixar as origens: %s</string>
+    <string name="sources_download_fail_named">Falha ao baixar \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Não foi possível atualizar \'%1$s\': o arquivo JSON do patch não foi encontrado no URL configurado</string>
+    <string name="sources_patch_expert_badge">Especialista</string>
+    <string name="sources_patch_expert_badge_tooltip">Ative o Modo Especialista em Configurações para incluir este patch manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Precisa de ajuda para encontrar um APK original e não corrigido?</string>
     <string name="home_apk_availability_dialog_simple">Para aplicar os patches em &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK não corrigido com a versão:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Versão selecionada</string>
     <string name="home_select_apk_title">Selecionar APK</string>
     <string name="home_select_any_apk_description">Toque no botão abaixo para selecionar um arquivo APK de qualquer app para aplicar os patches</string>
-    <string name="home_invalid_apk">Arquivo APK inválido</string>
+    <string name="home_invalid_apk_unreadable">Não foi possível ler o arquivo. Verifique se o \'Armazenamento Externo\' não está com o uso da bateria restrito</string>
+    <string name="home_invalid_apk_not_an_apk">O arquivo selecionado não é um APK válido</string>
+    <string name="home_invalid_apk_io_error">Falha ao abrir o arquivo. Tente novamente</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo expert</string>
     <string name="expert_mode_search">Procurar patches</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
     <string name="expert_mode_reset_to_default">Habilitar patches recomendados</string>
+    <string name="expert_mode_restore_saved">Restaurar seleção salva</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_universal_patches">Patches universais</string>
     <string name="expert_mode_new_patches">Novo</string>
@@ -154,7 +160,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="home_outdated_patches_dialog_warning">Usar patches desatualizados pode resultar em um aplicativo quebrado</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Atualizar &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Pouco espaço em disco</string>
-    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento livre disponível. A correção requer pelo menos 1 GB de espaço livre para funcionar corretamente</string>
+    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento livre disponível. Para que o reparo funcione corretamente, é necessário pelo menos %2$.2f GB de espaço livre</string>
     <string name="home_low_disk_space_dialog_warning">Prosseguir pode resultar em um erro de \"arquivo não encontrado\" ou um APK de saída corrompido</string>
     <!-- Patch Options -->
     <string name="custom_color">Cor Personalizada</string>
@@ -609,7 +615,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
     <string name="settings_system_share_website_description">Compartilhar o site oficial de Morphe</string>
-    <string name="settings_system_manager_description">"Um projeto experimental de código aberto para patching moderno e simplificado de aplicativos Android populares, impulsionado pelo feedback e contribuições da comunidade"</string>
+    <string name="settings_system_manager_description">"Um projeto de código aberto para correção moderna e simplificada de aplicativos Android populares, impulsionado pelo feedback e contribuições da comunidade"</string>
     <string name="credits">Créditos</string>
     <string name="credits_current_development">Desenvolvimento atual</string>
     <string name="credits_prior_development">Desenvolvimento anterior</string>
@@ -678,10 +684,12 @@ As dimensões das imagens devem ser as seguintes:
     <string name="hide">Ocultar</string>
     <string name="default_">Padrão</string>
     <string name="logs">Registros</string>
+    <string name="sources">Fontes</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando...</string>
     <string name="importing_ellipsis">Importando...</string>
+    <string name="imported_successfully">Importação realizada com sucesso</string>
     <string name="changelog">Ver changelogs</string>
     <string name="changelog_description">Veja as últimas alterações nesta atualização</string>
     <string name="changelog_download_fail">Falha ao baixar changelog: %s</string>

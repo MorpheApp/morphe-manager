@@ -7,6 +7,8 @@ package app.morphe.manager.ui.screen.settings.system
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.*
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,6 +20,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -34,7 +37,6 @@ import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
 import kotlinx.coroutines.launch
-import org.koin.compose.koinInject
 
 /**
  * Dialog for managing patch selections.
@@ -42,6 +44,7 @@ import org.koin.compose.koinInject
 @Composable
 fun PatchSelectionManagementDialog(
     settingsViewModel: SettingsViewModel,
+    importExportViewModel: ImportExportViewModel,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -60,6 +63,8 @@ fun PatchSelectionManagementDialog(
         selections = selections,
         totalSelections = totalSelections,
         bundleNames = bundleNames,
+        settingsViewModel = settingsViewModel,
+        importExportViewModel = importExportViewModel,
         onDismiss = onDismiss,
         onShowResetAllConfirmation = { showResetAllConfirmation.value = true },
         onSetResetTarget = { resetTarget.value = it },
@@ -147,11 +152,25 @@ private fun PatchSelectionManagementDialogContent(
     selections: Map<String, Map<Int, Int>>,
     totalSelections: Int,
     bundleNames: Map<Int, String>,
+    settingsViewModel: SettingsViewModel,
+    importExportViewModel: ImportExportViewModel,
     onDismiss: () -> Unit,
     onShowResetAllConfirmation: () -> Unit,
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
+    val importAllSelectionsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let { importExportViewModel.importAllSelections(it) }
+    }
+
+    val exportAllSelectionsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
+    ) { uri ->
+        uri?.let { importExportViewModel.exportAllSelections(it) }
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_patch_selections_title),
@@ -169,11 +188,36 @@ private fun PatchSelectionManagementDialogContent(
             null
         },
         footer = {
-            MorpheDialogButton(
-                text = stringResource(R.string.close),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
+            MorpheDialogButtonColumn {
+                if (selections.isNotEmpty()) {
+                    MorpheDialogButtonRow(
+                        primaryText = stringResource(R.string.export),
+                        onPrimaryClick = {
+                            exportAllSelectionsLauncher.launch(
+                                importExportViewModel.getAllSelectionsExportFileName()
+                            )
+                        },
+                        primaryIcon = Icons.Outlined.Upload,
+                        secondaryText = stringResource(R.string.import_),
+                        onSecondaryClick = { importAllSelectionsLauncher.launch(JSON_MIMETYPE) },
+                        secondaryIcon = Icons.Outlined.Download,
+                        isSecondaryPrimary = true,
+                        layout = DialogButtonLayout.Horizontal
+                    )
+                } else {
+                    MorpheDialogButton(
+                        text = stringResource(R.string.import_),
+                        onClick = { importAllSelectionsLauncher.launch(JSON_MIMETYPE) },
+                        icon = Icons.Outlined.Download,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         },
         scrollable = false,
         compactPadding = true
@@ -185,6 +229,8 @@ private fun PatchSelectionManagementDialogContent(
                 selections = selections,
                 totalSelections = totalSelections,
                 bundleNames = bundleNames,
+                settingsViewModel = settingsViewModel,
+                importExportViewModel = importExportViewModel,
                 onSetResetTarget = onSetResetTarget,
                 onShowPatchDetails = onShowPatchDetails
             )
@@ -200,6 +246,8 @@ private fun SelectionList(
     selections: Map<String, Map<Int, Int>>,
     totalSelections: Int,
     bundleNames: Map<Int, String>,
+    settingsViewModel: SettingsViewModel,
+    importExportViewModel: ImportExportViewModel,
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
@@ -241,6 +289,8 @@ private fun SelectionList(
                     packageName = packageName,
                     bundleMap = bundleMap,
                     bundleNames = bundleNames,
+                    settingsViewModel = settingsViewModel,
+                    importExportViewModel = importExportViewModel,
                     onResetPackage = {
                         onSetResetTarget(ResetTarget.Package(packageName))
                     },
@@ -262,18 +312,15 @@ private fun PackageSelectionItem(
     packageName: String,
     bundleMap: Map<Int, Int>,
     bundleNames: Map<Int, String>,
+    settingsViewModel: SettingsViewModel,
+    importExportViewModel: ImportExportViewModel,
     onResetPackage: () -> Unit,
     onResetPackageBundle: (Int) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
-    // App-name resolution is pure display logic driven by packageName.
-    // We keep a local coroutine here because this item is self-contained and
-    // the name is specific to each list item
     var expanded by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(packageName) }
     var appDataSource by remember { mutableStateOf(AppDataSource.INSTALLED) }
-
-    val settingsViewModel: SettingsViewModel = koinInject()
 
     // Resolve app name and source
     LaunchedEffect(packageName) {
@@ -283,6 +330,10 @@ private fun PackageSelectionItem(
     }
 
     val totalPatches = remember(bundleMap) { bundleMap.values.sum() }
+    val expandRotation by animateFloatAsState(
+        targetValue = if (expanded) 180f else 0f,
+        label = "expand_rotation"
+    )
 
     SectionCard {
         Column {
@@ -345,17 +396,22 @@ private fun PackageSelectionItem(
 
                 // Expand icon
                 Icon(
-                    imageVector = if (expanded) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
+                    imageVector = Icons.Outlined.ExpandMore,
                     contentDescription = if (expanded)
                         stringResource(R.string.collapse)
                     else
                         stringResource(R.string.expand),
-                    tint = LocalDialogSecondaryTextColor.current
+                    tint = LocalDialogSecondaryTextColor.current,
+                    modifier = Modifier.rotate(expandRotation)
                 )
             }
 
             // Expanded content
-            if (expanded) {
+            AnimatedVisibility(
+                visible = expanded,
+                enter = fadeIn() + expandVertically(expandFrom = Alignment.Top),
+                exit = fadeOut() + shrinkVertically(shrinkTowards = Alignment.Top)
+            ) {
                 Column(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -366,6 +422,7 @@ private fun PackageSelectionItem(
                             bundleUid = bundleUid,
                             bundleName = bundleNames[bundleUid],
                             patchCount = patchCount,
+                            importExportViewModel = importExportViewModel,
                             onReset = { onResetPackageBundle(bundleUid) },
                             onShowDetails = {
                                 onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid))
@@ -397,10 +454,10 @@ private fun BundleSelectionItem(
     bundleUid: Int,
     bundleName: String?,
     patchCount: Int,
+    importExportViewModel: ImportExportViewModel,
     onReset: () -> Unit,
     onShowDetails: () -> Unit
 ) {
-    val importExportViewModel: ImportExportViewModel = koinInject()
 
     // Display bundle name or fallback to "Bundle #N"
     val displayName = bundleName
@@ -414,18 +471,6 @@ private fun BundleSelectionItem(
     ) { uri ->
         uri?.let {
             importExportViewModel.exportPackageBundleData(packageName, bundleUid, bundleName, it)
-        }
-    }
-
-    // Import launcher
-    val importLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let {
-            importExportViewModel.importPackageBundleData(
-                targetBundleUid = bundleUid,
-                source = it
-            )
         }
     }
 
@@ -490,13 +535,6 @@ private fun BundleSelectionItem(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
         ) {
-            // Import button
-            ActionPillButton(
-                onClick = { importLauncher.launch(JSON_MIMETYPE) },
-                icon = Icons.Outlined.Download,
-                contentDescription = stringResource(R.string.import_)
-            )
-
             // Export button
             ActionPillButton(
                 onClick = {

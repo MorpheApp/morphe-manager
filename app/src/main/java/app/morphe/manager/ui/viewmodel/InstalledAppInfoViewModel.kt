@@ -73,7 +73,7 @@ class InstalledAppInfoViewModel(
 
                 if (app != null) {
                     // Run all checks in parallel
-                    val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
+                    val deferredMounted = async { rootInstaller.isDeviceRooted() && rootInstaller.isAppMounted(app.currentPackageName) }
                     val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
                     val deferredAppState = async { refreshAppState(app) }
                     val deferredPatches = async { resolveAppliedSelection(app) }
@@ -231,7 +231,7 @@ class InstalledAppInfoViewModel(
         }
 
         // Update mounted state
-        isMounted = rootInstaller.isAppMounted(app.currentPackageName)
+        isMounted = rootInstaller.isDeviceRooted() && rootInstaller.isAppMounted(app.currentPackageName)
     }
 
     /** Manually refresh app state (e.g., after app installation/uninstallation) */

@@ -81,7 +81,10 @@
     <string name="sources_update_success">Update erfolgreich</string>
     <string name="sources_update_unavailable">Kein Update verfügbar</string>
     <string name="sources_download_fail">Herunterladen der Quellen fehlgeschlagen: %s</string>
+    <string name="sources_download_fail_named">Fehler beim Herunterladen von \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Konnte \'%1$s\' nicht aktualisieren: Die Patch-JSON-Datei wurde nicht über die konfigurierte URL gefunden</string>
+    <string name="sources_patch_expert_badge">Experte</string>
+    <string name="sources_patch_expert_badge_tooltip">Expertenmodus in den Einstellungen aktivieren, um diesen Patch manuell einzuschließen</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Benötigen Sie Hilfe beim Finden einer originalen, ungepatchten APK?</string>
     <string name="home_apk_availability_dialog_simple">Um &lt;b&gt;%s&lt;/b&gt; zu patchen, benötigen Sie die ungepatchte APK-Version:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Ausgewählte Version</string>
     <string name="home_select_apk_title">APK auswählen</string>
     <string name="home_select_any_apk_description">Tippen Sie auf die Schaltfläche unten, um eine APK-Datei einer App zum Patchen auszuwählen</string>
-    <string name="home_invalid_apk">Ungültige APK-Datei</string>
+    <string name="home_invalid_apk_unreadable">Die Datei konnte nicht gelesen werden. Bitte überprüfen Sie, ob \'Externer Speicher\' nicht durch die Batterie eingeschränkt ist</string>
+    <string name="home_invalid_apk_not_an_apk">Die ausgewählte Datei ist keine gültige APK</string>
+    <string name="home_invalid_apk_io_error">Die Datei konnte nicht geöffnet werden. Bitte versuchen Sie es erneut</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Experten-Modus</string>
     <string name="expert_mode_search">Suche nach Patches</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
     <string name="expert_mode_enable_all">Aktiviere alle</string>
     <string name="expert_mode_reset_to_default">Empfohlene Patches aktivieren</string>
+    <string name="expert_mode_restore_saved">Gespeicherte Auswahl wiederherstellen</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
     <string name="expert_mode_universal_patches">Universelle Patches</string>
     <string name="expert_mode_new_patches">Neu</string>
@@ -154,7 +160,7 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="home_outdated_patches_dialog_warning">Das Patchen mit veralteten Patches kann zu einer defekten App führen</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Updaten &amp; patchen</string>
     <string name="home_low_disk_space_dialog_title">Wenig Speicherplatz</string>
-    <string name="home_low_disk_space_dialog_message">Nur %1$.2f GB freier Speicher verfügbar. Das Patchen erfordert mindestens 1 GB freien Speicher, um korrekt zu funktionieren</string>
+    <string name="home_low_disk_space_dialog_message">Nur %1$.2f GB freier Speicherplatz verfügbar. Das Anwenden der Patches erfordert mindestens %2$.2f GB freien Speicherplatz, um korrekt zu funktionieren</string>
     <string name="home_low_disk_space_dialog_warning">Das Fortfahren kann zu einem \"Datei nicht gefunden\"-Fehler oder einer beschädigten Ausgabe-APK führen</string>
     <!-- Patch Options -->
     <string name="custom_color">Eigener Farbton</string>
@@ -609,7 +615,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_about">Über</string>
     <string name="settings_system_share_website">Website teilen</string>
     <string name="settings_system_share_website_description">Teilen Sie die offizielle Morphe-Website</string>
-    <string name="settings_system_manager_description">"Ein experimentelles Open-Source-Projekt für modernes, optimiertes Patchen beliebter Android-Apps, das von Community-Feedback und -beiträgen angetrieben wird"</string>
+    <string name="settings_system_manager_description">"Ein Open-Source-Projekt für modernes, optimiertes Patchen beliebter Android-Apps, das von Community-Feedback und -beiträgen angetrieben wird"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Aktuelle Entwicklung</string>
     <string name="credits_prior_development">Frühere Entwicklung</string>
@@ -678,10 +684,12 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="hide">Verbergen</string>
     <string name="default_">Standard</string>
     <string name="logs">Protokolle</string>
+    <string name="sources">Quellen</string>
     <string name="installing_ellipsis">Wird installiert…</string>
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Wird geunmountet…</string>
     <string name="importing_ellipsis">Importiere…</string>
+    <string name="imported_successfully">Erfolgreich importiert</string>
     <string name="changelog">Changelogs anzeigen</string>
     <string name="changelog_description">Entdecken Sie die neuesten Änderungen in diesem Update</string>
     <string name="changelog_download_fail">Download des Changelogs fehlgeschlagen: %s</string>

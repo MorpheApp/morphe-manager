@@ -81,7 +81,10 @@
     <string name="sources_update_success">Оновлення успішне</string>
     <string name="sources_update_unavailable">Оновлення недоступне</string>
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
+    <string name="sources_download_fail_named">Помилка завантаження \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Не вдалося оновити \'%1$s\': файл JSON патчів не знайдено за налаштованою URL-адресою</string>
+    <string name="sources_patch_expert_badge">Експерт</string>
+    <string name="sources_patch_expert_badge_tooltip">Увімкніть Режим експерта в Налаштуваннях, щоб додати цей патч вручну</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Потрібна допомога у пошуку оригінального непатченого APK?</string>
     <string name="home_apk_availability_dialog_simple">Щоб патчити &lt;b&gt;%s&lt;/b&gt;, вам потрібний непатчений APK файл з версією:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Вибрана версія</string>
     <string name="home_select_apk_title">Вибрати APK файл</string>
     <string name="home_select_any_apk_description">Натисніть кнопку нижче, щоб вибрати APK файл будь-якого застосунку для патчінгу</string>
-    <string name="home_invalid_apk">Некоректний APK файл</string>
+    <string name="home_invalid_apk_unreadable">Не вдалося прочитати файл. Перевірте, чи не обмежено використання батареї для \"Зовнішньої пам’яті\"</string>
+    <string name="home_invalid_apk_not_an_apk">Вибраний файл не є дійсним APK</string>
+    <string name="home_invalid_apk_io_error">Не вдалося відкрити файл. Будь ласка, спробуйте ще раз</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Експертний режим</string>
     <string name="expert_mode_search">Пошук патчів</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Вимкнути всі</string>
     <string name="expert_mode_enable_all">Увімкнути всі</string>
     <string name="expert_mode_reset_to_default">Увімкнути рекомендовані патчі</string>
+    <string name="expert_mode_restore_saved">Відновити збережений вибір</string>
     <string name="expert_mode_no_results">Патчі не знайдено</string>
     <string name="expert_mode_universal_patches">Універсальні патчі</string>
     <string name="expert_mode_new_patches">Новий</string>
@@ -154,7 +160,7 @@
     <string name="home_outdated_patches_dialog_warning">Патчінг застарілими патчами може призвести до несправності застосунку</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Оновити та патчити</string>
     <string name="home_low_disk_space_dialog_title">Недостатньо місця на диску</string>
-    <string name="home_low_disk_space_dialog_message">Доступно лише %1$.2f GB вільного дискового простору. Для коректної роботи патчінгу потрібно щонайменше 1 ГБ вільного місця</string>
+    <string name="home_low_disk_space_dialog_message">Доступно лише %1$.2f ГБ вільного місця. Для коректної роботи патчінгу потрібно щонайменше %2$.2f ГБ вільного місця</string>
     <string name="home_low_disk_space_dialog_warning">Продовження може призвести до помилки \"файл не знайдено\" або пошкодження вихідного APK файлу</string>
     <!-- Patch Options -->
     <string name="custom_color">Користувацький колір</string>
@@ -609,7 +615,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Про нас</string>
     <string name="settings_system_share_website">Поділитися вебсайтом</string>
     <string name="settings_system_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
-    <string name="settings_system_manager_description">"Експериментальний проєкт із відкритим кодом для сучасного, спрощеного патчінгу популярних Android-застосунків, що розвивається завдяки відгукам та внесках спільноти"</string>
+    <string name="settings_system_manager_description">"Проєкт із відкритим кодом для сучасного, спрощеного патчінгу популярних Android-застосунків, що розвивається завдяки відгукам та внескам спільноти"</string>
     <string name="credits">Подяки</string>
     <string name="credits_current_development">Поточна розробка</string>
     <string name="credits_prior_development">Попередня розробка</string>
@@ -678,10 +684,12 @@ morphe_header_custom_dark.png
     <string name="hide">Приховати</string>
     <string name="default_">За замовчуванням</string>
     <string name="logs">Журнали</string>
+    <string name="sources">Джерела</string>
     <string name="installing_ellipsis">Інсталяція…</string>
     <string name="mounting_ellipsis">Монтування…</string>
     <string name="unmounting_ellipsis">Демонтування…</string>
     <string name="importing_ellipsis">Імпортування…</string>
+    <string name="imported_successfully">Імпортовано успішно</string>
     <string name="changelog">Переглянути списки змін</string>
     <string name="changelog_description">Перегляньте останні зміни цього оновлення</string>
     <string name="changelog_download_fail">Не вдалося завантажити список змін: %s</string>

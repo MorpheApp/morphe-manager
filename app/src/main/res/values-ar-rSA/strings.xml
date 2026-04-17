@@ -81,7 +81,10 @@
     <string name="sources_update_success">تم التحديث بنجاح</string>
     <string name="sources_update_unavailable">لا يوجد تحديث متاح</string>
     <string name="sources_download_fail">فشل تنزيل مصادر التعديل: %s.</string>
+    <string name="sources_download_fail_named">فشل تنزيل \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">تعذر تحديث \'%1$s\': لم يتم العثور على ملف JSON الخاص بالتعديل في عنوان URL المكون</string>
+    <string name="sources_patch_expert_badge">وضع الخبير</string>
+    <string name="sources_patch_expert_badge_tooltip">تمكين وضع الخبير في الإعدادات لتضمين هذا التعديل يدويًا</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">هل تحتاج إلى مساعدة في العثور على ملف APK أصلي غير معدل؟</string>
     <string name="home_apk_availability_dialog_simple">لتعديل &lt;b&gt;%s&lt;/b&gt;، تحتاج إلى ملف APK غير معدل بالإصدار:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">الإصدار المحدد</string>
     <string name="home_select_apk_title">تحديد ملف APK</string>
     <string name="home_select_any_apk_description">انقر على الزر أدناه لتحديد ملف APK لأي تطبيق لتعديله</string>
-    <string name="home_invalid_apk">ملف APK غير صالح</string>
+    <string name="home_invalid_apk_unreadable">⁯لا يمكن قراءة الملف. تحقق من أن \'وحدة التخزين الخارجية\' غير مقيدة بالبطارية</string>
+    <string name="home_invalid_apk_not_an_apk">الملف المحدد ليس ملف APK صالحًا</string>
+    <string name="home_invalid_apk_io_error">فشل فتح الملف. الرجاء المحاولة مرة أخرى</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">وضع الخبير</string>
     <string name="expert_mode_search">البحث عن التعديلات</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">تعطيل الكل</string>
     <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_reset_to_default">تمكين التعديلات الموصى بها</string>
+    <string name="expert_mode_restore_saved">استعادة التحديد المحفوظ</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
     <string name="expert_mode_universal_patches">التعديلات الشاملة</string>
     <string name="expert_mode_new_patches">جديد</string>
@@ -154,7 +160,7 @@
     <string name="home_outdated_patches_dialog_warning">قد يؤدي التعديل باستخدام تعديلات قديمة إلى حدوث عطل في التطبيق</string>
     <string name="home_outdated_patches_dialog_update_and_patch">تحديث &amp; تعديل</string>
     <string name="home_low_disk_space_dialog_title">مساحة تخزين منخفضة</string>
-    <string name="home_low_disk_space_dialog_message">يتوفر فقط %1$.2f جيجابايت من مساحة التخزين الخالية. تتطلب عملية التعديل مساحة فارغة لا تقل عن 1 جيجابايت لتعمل بشكل صحيح</string>
+    <string name="home_low_disk_space_dialog_message">يتوفر فقط %1$.2f جيجابايت من مساحة التخزين الخالية. تتطلب عملية التعديل مساحة فارغة لا تقل عن %2$.2f جيجابايت لتعمل بشكل صحيح</string>
     <string name="home_low_disk_space_dialog_warning">قد تؤدي المتابعة إلى حدوث خطأ \"ملف غير موجود\" أو ملف APK تالف</string>
     <!-- Patch Options -->
     <string name="custom_color">اللون المخصص</string>
@@ -609,7 +615,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_about">لمحة</string>
     <string name="settings_system_share_website">مشاركة الموقع الإلكتروني</string>
     <string name="settings_system_share_website_description">شارك موقع Morphe الرسمي</string>
-    <string name="settings_system_manager_description">"مشروع تجريبي مفتوح المصدر لتعديل تطبيقات Android الشائعة بطريقة حديثة ومبسطة، مدفوعًا بتعليقات ومساهمات المجتمع"</string>
+    <string name="settings_system_manager_description">"مشروع مفتوح المصدر يهدف إلى توفير طريقة حديثة ومبسطة لتعديل تطبيقات Android الشهيرة، مستندًا إلى ملاحظات المستخدمين ومساهمات المجتمع"</string>
     <string name="credits">حقوق الملكية</string>
     <string name="credits_current_development">التطوير الحالي</string>
     <string name="credits_prior_development">التطوير المسبق</string>
@@ -678,10 +684,12 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">إخفاء</string>
     <string name="default_">الافتراضي</string>
     <string name="logs">السجلات</string>
+    <string name="sources">المصادر</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>
     <string name="importing_ellipsis">جارٍ استيراد…</string>
+    <string name="imported_successfully">تم الاستيراد بنجاح</string>
     <string name="changelog">عرض سجل التغييرات</string>
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
