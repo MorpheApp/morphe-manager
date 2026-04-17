@@ -81,10 +81,11 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             events.progress(null, State.COMPLETED.name, null) // Loading patches
 
             val preparation = SplitApkPreparer.prepareIfNeeded(
-                File(parameters.inputFile),
-                File(parameters.cacheDir),
-                logger,
-                parameters.stripNativeLibs,
+                source = File(parameters.inputFile),
+                workspace = File(parameters.cacheDir),
+                logger = logger,
+                stripNativeLibs = parameters.stripNativeLibs,
+                skipUnneededSplits = parameters.skipUnneededSplits,
                 onProgress = { message -> logger.info(message) }
             )
 

@@ -193,6 +193,10 @@ class SettingsViewModel(
         prefs.stripUnusedNativeLibs.update(enabled)
     }
 
+    fun setSkipUnneededSplits(value: Boolean) = viewModelScope.launch {
+        prefs.skipUnneededSplits.update(value)
+    }
+
     fun setGitHubPat(pat: String, includeInExport: Boolean) = viewModelScope.launch {
         prefs.gitHubPat.update(pat)
         prefs.includeGitHubPatInExports.update(includeInExport)

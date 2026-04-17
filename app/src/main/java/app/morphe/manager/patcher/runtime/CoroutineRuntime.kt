@@ -25,6 +25,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
         stripNativeLibs: Boolean,
+        skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) {
         MemoryMonitor.startMemoryPolling(logger)
@@ -61,10 +62,11 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         onProgress(null, State.COMPLETED, null) // Loading patches
 
         val preparation = SplitApkPreparer.prepareIfNeeded(
-            File(inputFile),
-            File(cacheDir),
-            logger,
-            stripNativeLibs
+            source = File(inputFile),
+            workspace = File(cacheDir),
+            logger = logger,
+            stripNativeLibs = stripNativeLibs,
+            skipUnneededSplits = skipUnneededSplits
         )
         try {
             if (preparation.merged) {
