@@ -97,11 +97,21 @@ abstract class SelectionDao {
     @Insert
     abstract suspend fun createSelection(selection: PatchSelection)
 
-    @Query("SELECT DISTINCT package_name FROM patch_selections")
+    @Query(
+        "SELECT DISTINCT ps.package_name FROM patch_selections ps" +
+                " INNER JOIN selected_patches sp ON ps.uid = sp.selection"
+    )
     abstract fun getPackagesWithSelection(): Flow<List<String>>
 
-    @Query("SELECT DISTINCT package_name FROM patch_selections WHERE patch_bundle = :bundleUid")
+    @Query(
+        "SELECT DISTINCT ps.package_name FROM patch_selections ps" +
+                " INNER JOIN selected_patches sp ON ps.uid = sp.selection" +
+                " WHERE ps.patch_bundle = :bundleUid"
+    )
     abstract fun getPackagesWithSelectionForBundle(bundleUid: Int): Flow<List<String>>
+
+    @Query("SELECT DISTINCT patch_bundle FROM patch_selections")
+    abstract suspend fun getAllBundleUids(): List<Int>
 
     @Transaction
     @Query("DELETE FROM patch_selections WHERE patch_bundle = :uid")
@@ -125,12 +135,21 @@ abstract class SelectionDao {
     @Query("DELETE FROM selected_patches WHERE selection = :selectionId")
     protected abstract suspend fun clearSelection(selectionId: Int)
 
+    /** Delete patch_selection rows that have no selected patches (orphaned rows). */
+    @Query(
+        "DELETE FROM patch_selections WHERE uid NOT IN" +
+                " (SELECT DISTINCT selection FROM selected_patches)"
+    )
+    protected abstract suspend fun deleteEmptySelections()
+
     @Transaction
-    open suspend fun updateSelections(selections: Map<Int, Set<String>>) =
+    open suspend fun updateSelections(selections: Map<Int, Set<String>>) {
         selections.forEach { (selectionUid, patches) ->
             clearSelection(selectionUid)
             selectPatches(patches.map { SelectedPatch(selectionUid, it) })
         }
+        deleteEmptySelections()
+    }
 
     // Seen patches (full bundle snapshot at patch time)
     @Query("SELECT patch_name FROM seen_patches WHERE patch_bundle = :bundleUid AND package_name = :packageName")

@@ -89,6 +89,7 @@ fun SystemTabContent(
     if (showPatchSelectionDialog.value) {
         PatchSelectionManagementDialog(
             settingsViewModel = settingsViewModel,
+            importExportViewModel = importExportViewModel,
             onDismiss = { showPatchSelectionDialog.value = false }
         )
     }

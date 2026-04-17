@@ -4,17 +4,17 @@
     <string name="home_other_apps">其他應用程式</string>
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_no_patches_available">沒有可用的修補</string>
-    <string name="home_app_hide_title">隱藏此應用程式？</string>
-    <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您可以使用列表底部的\'%1$s\'按鈕稍後恢復它。</string>
-    <string name="home_app_will_be_hidden">此應用程式將被隱藏</string>
+    <string name="home_app_hide_title">要隱藏這個應用程式嗎？</string>
+    <string name="home_app_hide_message">這個應用程式將從主畫面隱藏。你稍後可以使用清單底部的「%1$s」按鈕將其還原。</string>
+    <string name="home_app_will_be_hidden">這個應用程式將被隱藏</string>
     <string name="home_app_show_hidden">顯示隱藏應用程式</string>
     <string name="home_app_no_hidden">沒有隱藏應用程式</string>
     <string name="home_app_hidden_apps_title">隱藏應用程式</string>
-    <string name="home_app_hidden_apps_hint">點擊以取消隱藏</string>
+    <string name="home_app_hidden_apps_hint">輕觸即可取消隱藏</string>
     <string name="android_11_bug_dialog_title">Android 11 相關問題</string>
     <string name="android_11_bug_dialog_description">必須提前授予應用程式安裝權限，以避免 Android 11 系統中的錯誤影響使用者體驗</string>
     <string name="deep_link_add_source_title">新增來源</string>
-    <string name="deep_link_add_source_message">您是否要將此修補程式來源新增至 Morphe？</string>
+    <string name="deep_link_add_source_message">確定要將這個修補來源新增至 Morphe 嗎？</string>
     <string name="deep_link_add_source_warning">僅從您信任的來源新增修補程式</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe 更新可用</string>
@@ -31,7 +31,7 @@
     <string name="home_search_apps">搜尋應用程式</string>
     <string name="home_no_apps_title">沒有應用程式可用</string>
     <string name="home_no_apps_subtitle">新增程式來源或啟用現有的來源於 %s</string>
-    <string name="home_no_apps_search_subtitle">沒有符合 \"%1$s\" 的應用程式</string>
+    <string name="home_no_apps_search_subtitle">找不到與「%1$s」相符的應用程式</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">你想修補哪個應用程式？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -59,8 +59,8 @@
     <string name="sources_management_prerelease_toggle">使用預先發布修補</string>
     <string name="sources_management_prerelease_toggle_description">提前接收新實驗性修補版本</string>
     <string name="sources_management_experimental_versions_toggle">使用實驗性應用程式版本</string>
-    <string name="sources_management_experimental_versions_toggle_description">如果有的話，修補實驗性應用程式目標</string>
-    <string name="sources_management_already_exists">此來源已新增</string>
+    <string name="sources_management_experimental_versions_toggle_description">如果可用，修補實驗性應用程式目標</string>
+    <string name="sources_management_already_exists">已經新增這個來源</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
@@ -81,15 +81,18 @@
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載來源：%s</string>
-    <string name="sources_download_endpoint_not_found">無法更新「%1$s\'」：找不到配置 URL 中的修補 JSON 檔案</string>
+    <string name="sources_download_fail_named">無法下載 \"%1$s\"：%2$s</string>
+    <string name="sources_download_endpoint_not_found">無法更新「%1$s」：找不到設定網址中的修補 JSON 檔案</string>
+    <string name="sources_patch_expert_badge">專家</string>
+    <string name="sources_patch_expert_badge_tooltip">在設定中啟用專家模式以手動包含此修補程式</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">需要協助找到原始未修補的 APK 嗎？</string>
+    <string name="home_apk_availability_dialog_title">需要協助尋找原始、未經修補的 APK 嗎？</string>
     <string name="home_apk_availability_dialog_simple">要修補&lt;b&gt;%s&lt;/b&gt;，你需要未修補的 APK，版本為：</string>
     <string name="home_apk_availability_dialog_expert">修補 &lt;b&gt;%s&lt;/b&gt; 需要未修補的 APK，版本為：</string>
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
-    <string name="home_apk_availability_yes">是的，協助我找一個 APK</string>
-    <string name="home_apk_availability_no">不，我已經擁有 APK 了</string>
+    <string name="home_apk_availability_yes">是，請幫我尋找 APK</string>
+    <string name="home_apk_availability_no">否，我已經有 APK 了</string>
     <string name="home_apk_use_saved_with_version">使用已儲存的 APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補將需要再次選擇 APK 檔案</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -102,7 +105,7 @@
     <string name="home_download_instructions_step3_mount">等待下載完成後，&lt;b&gt;安裝&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step4">下載完成後，回到 Morphe</string>
     <string name="home_download_instructions_step4_mount">安裝原始 APK 後，回到 Morphe</string>
-    <string name="home_download_instructions_continue">前往 APKMirror.com 進行下一步</string>
+    <string name="home_download_instructions_continue">前往 APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">選擇下載的 APK</string>
     <string name="home_file_picker_prompt_description">選擇你剛剛下載的 <b>%1$s</b> APK 檔案</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">所選版本</string>
     <string name="home_select_apk_title">選擇 APK</string>
     <string name="home_select_any_apk_description">輕觸下方按鈕選擇任何應用程式的 APK 檔案進行修補</string>
-    <string name="home_invalid_apk">無效的 APK 檔案</string>
+    <string name="home_invalid_apk_unreadable">無法讀取檔案。請檢查「外部儲存空間」是否未受電池限制</string>
+    <string name="home_invalid_apk_not_an_apk">你選擇的檔案不是有效的 APK</string>
+    <string name="home_invalid_apk_io_error">無法開啟檔案。請再試一次</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
     <string name="expert_mode_search">搜尋修補</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">停用全部</string>
     <string name="expert_mode_enable_all">啟用全部</string>
     <string name="expert_mode_reset_to_default">啟用建議的修補程式</string>
+    <string name="expert_mode_restore_saved">還原已儲存的選取</string>
     <string name="expert_mode_no_results">找不到修補</string>
     <string name="expert_mode_universal_patches">通用修補程式</string>
     <string name="expert_mode_new_patches">新</string>
@@ -128,7 +134,7 @@
 你確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">未經驗證的 APK</string>
-    <string name="home_invalid_signature_message">您選擇的 APK 對於 &lt;b&gt;%s&lt;/b&gt; 的簽署憑證不符。它可能已被修改或來自不受信任的來源</string>
+    <string name="home_invalid_signature_message">你選擇的 APK 對於 &lt;b&gt;%s&lt;/b&gt; 的簽署憑證不符。它可能已被修改或來自不受信任的來源</string>
     <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
     <string name="home_split_apk_warning_title">偵測到分割 APK</string>
     <string name="home_split_apk_warning_message">"此檔案為 APK 組合
@@ -138,7 +144,7 @@
     <string name="home_split_apk_warning_pick_another">選擇另一個 APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">實驗性</string>
     <string name="home_dialog_unsupported_version_experimental_description">此版本支援實驗性功能，可能不穩定或不完整</string>
-    <string name="morphe_experimental_app_version_dialog_title">您是否要嘗試使用？ 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_title">你想試試實驗版嗎？🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; 的此版本具有早期的實驗性支援&lt;br/&gt;&lt;br/&gt;🔧 預期此應用程式版本修補程式完善時出現古怪的應用程式行為或未確定的錯誤</string>
     <string name="home_dialog_unsupported_version_dialog_title">不支援的版本</string>
     <string name="home_dialog_unsupported_version_dialog_description">這個 APK 不是建議的應用程式版本。繼續使用可能會導致功能在應用程式內無法使用</string>
@@ -152,9 +158,9 @@
     <string name="home_outdated_patches_dialog_title">修補可能已過時</string>
     <string name="home_outdated_patches_dialog_message">行動數據使用中，已停用修補更新</string>
     <string name="home_outdated_patches_dialog_warning">使用過時修補可能會造成應用程式故障</string>
-    <string name="home_outdated_patches_dialog_update_and_patch">更新和修補</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">更新與修補</string>
     <string name="home_low_disk_space_dialog_title">磁碟空間不足</string>
-    <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用儲存空間。修補程式需要至少 1 GB 的可用空間才能正常工作</string>
+    <string name="home_low_disk_space_dialog_message">僅剩 %1$.2f GB 可用儲存空間。修補程式至少需要 %2$.2f GB 的可用空間才能正常運作</string>
     <string name="home_low_disk_space_dialog_warning">繼續進行可能會發生「找不到檔案」的錯誤或輸出損壞的 APK</string>
     <!-- Patch Options -->
     <string name="custom_color">自訂顏色</string>
@@ -181,9 +187,9 @@
     <string name="adaptive_icon_safe_zone_outer">遮罩區域（可能會被剪切）</string>
     <string name="adaptive_icon_created_success">自動調整圖示已成功建立</string>
     <string name="adaptive_icon_creation_failed">無法建立自動調整圖示</string>
-    <string name="adaptive_icon_folder_explanation">選擇建立\"%1$s/%2$s\"資料夾的位置，其中包含產生的圖示檔案</string>
-    <string name="notification_icon_preview">Notification icon preview</string>
-    <string name="notification_icon_preview_hint">Use the slider to resize. Drag to reposition</string>
+    <string name="adaptive_icon_folder_explanation">選擇建立「%1$s/%2$s資料夾的位置，其中包含產生的圖示檔案</string>
+    <string name="notification_icon_preview">通知圖示預覽</string>
+    <string name="notification_icon_preview_hint">使用滑桿調整大小。拖曳以重新定位</string>
     <!-- Header Creator -->
     <string name="header_creator_create">建立自訂標頭</string>
     <string name="header_creator_instructions">選擇淺色和深色主題的圖片，然後使用雙指撥動縮放手勢調整</string>
@@ -210,11 +216,11 @@
     <string name="home_app_info_install_type">安裝類型</string>
     <string name="home_app_info_install_type_custom_installer">自訂安裝程式</string>
     <string name="home_app_info_install_type_system_installer">系統安裝程式</string>
-    <string name="home_app_info_patched_at">已修補</string>
+    <string name="home_app_info_patched_at">修補時間</string>
     <string name="home_app_info_patch_update_available">有新的修補可用</string>
     <string name="home_app_info_patch_update_available_description">有更新的修補版本。重新修補你的應用程式以獲得最新的改進和修正</string>
     <string name="home_app_info_app_deleted_warning">應用程式已卸載</string>
-    <string name="home_app_info_app_deleted_description">這個應用程式已在管理工具外移除。重新修補以復原功能</string>
+    <string name="home_app_info_app_deleted_description">這個應用程式已在 Morphe 外移除。重新修補以復原功能</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要在修補之前將原始 APK 安裝在您的裝置上</string>
     <string name="root_gmscore_excluded">GmsCore 支援性修補在 root 模式中已排除</string>
@@ -251,8 +257,8 @@
     <string name="patcher_storage_permission_grant">授予存取權限</string>
     <string name="patcher_storage_permission_denied_warning">儲存權限已被拒絕。授予權限以使用此路徑，或將檔案移至應用程式的私有目錄</string>
     <string name="patcher_storage_permission_open_settings">開啟儲存設定</string>
-    <string name="patcher_storage_badge_denied">權限被拒絕</string>
-    <string name="patcher_storage_badge_missing">找不到記錄</string>
+    <string name="patcher_storage_badge_denied">存取權限不足</string>
+    <string name="patcher_storage_badge_missing">找不到</string>
     <string name="patcher_storage_permission_hint">提示：將檔案移至 /Android/data/app.morphe.manager/files/ - 不需要額外權限</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">準備中</string>
@@ -498,7 +504,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">安裝 Shizuku 或 Sui 以使用此選項</string>
     <string name="installer_status_shizuku_not_running">啟動 Shizuku 或 Sui 並重試</string>
     <string name="installer_status_shizuku_permission">從 Shizuku 應用程式中授予 Morphe 權限</string>
-    <string name="installer_mount_warning_install">你的主要安裝程式已設定為 Root 掛載安裝器。這個儲存的應用程式並非透過掛載方式安裝。</string>
+    <string name="installer_mount_warning_install">你的主要安裝程式已設定為 Root 掛載安裝程式。這個儲存的應用程式並非透過掛載方式安裝。</string>
     <string name="mount_version_mismatch_message">原始版本 (%2$s) 與修補後的版本 (%1$s) 不符。請掛載相符的原始版本後，然後再試一次。</string>
     <string name="installer_status_shizuku_unsupported">安裝的 Shizuku 版本不受支援</string>
     <string name="installer_action_open_shizuku">開啟 Shizuku</string>
@@ -608,8 +614,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">關於</string>
     <string name="settings_system_share_website">分享網站</string>
     <string name="settings_system_share_website_description">分享官方 Morphe 網站</string>
-    <string name="settings_system_manager_description">"一個用於現代化、簡化地修補熱門 Android 應用程式的實驗性開源專案，由社群回饋和貢獻驅動"</string>
-    <string name="credits">信譽</string>
+    <string name="settings_system_manager_description">"這是一個開源專案，用於現代化、簡化地修補熱門的 Android 應用程式，並由社群的回饋和貢獻驅動"</string>
+    <string name="credits">鳴謝</string>
     <string name="credits_current_development">目前開發</string>
     <string name="credits_prior_development">先前開發</string>
     <string name="opensource_licenses">開源授權</string>
@@ -677,10 +683,12 @@ morphe_header_custom_dark.png
     <string name="hide">隱藏</string>
     <string name="default_">預設</string>
     <string name="logs">日誌</string>
+    <string name="sources">個修補來源</string>
     <string name="installing_ellipsis">安裝中……</string>
     <string name="mounting_ellipsis">掛載中……</string>
     <string name="unmounting_ellipsis">正在解除掛載……</string>
     <string name="importing_ellipsis">匯入……</string>
+    <string name="imported_successfully">設定匯入成功</string>
     <string name="changelog">查看變更紀錄</string>
     <string name="changelog_description">查看本次更新的最新變更</string>
     <string name="changelog_download_fail">無法下載變更紀錄：%s</string>

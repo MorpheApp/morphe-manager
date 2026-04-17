@@ -103,8 +103,14 @@ sealed class RemotePatchBundle(
     suspend fun update(onProgress: PatchBundleDownloadProgress? = null): PatchBundleDownloadResult? =
         withContext(Dispatchers.IO) {
             val info = getLatestInfo()
-            if (hasInstalled() && info.version == installedVersionSignatureInternal)
-                return@withContext null
+            val remoteCreatedAt = runCatching {
+                info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
+            }.getOrNull()
+
+            if (hasInstalled()
+                && info.version == installedVersionSignatureInternal
+                && (remoteCreatedAt == null || remoteCreatedAt == createdAt)
+            ) return@withContext null
 
             download(info, onProgress)
         }

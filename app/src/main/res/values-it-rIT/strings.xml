@@ -81,7 +81,10 @@
     <string name="sources_update_success">Aggiornamento riuscito</string>
     <string name="sources_update_unavailable">Nessun aggiornamento disponibile</string>
     <string name="sources_download_fail">Impossibile scaricare le fonti: %s</string>
+    <string name="sources_download_fail_named">Impossibile scaricare \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Impossibile aggiornare \'%1$s\': il file JSON delle patch non è stato trovato all\'URL configurato.</string>
+    <string name="sources_patch_expert_badge">Esperto</string>
+    <string name="sources_patch_expert_badge_tooltip">Abilita la modalità Esperto in Impostazioni per includere questa patch manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Hai bisogno di aiuto per trovare un APK originale non patchato?</string>
     <string name="home_apk_availability_dialog_simple">Per patchare &lt;b&gt;%s&lt;/b&gt;, è necessario un APK non patchato con la versione:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Versione selezionata</string>
     <string name="home_select_apk_title">Seleziona l\'APK</string>
     <string name="home_select_any_apk_description">Premi il pulsante qui sotto per selezionare un file APK di qualsiasi app per il patching</string>
-    <string name="home_invalid_apk">File APK non valido</string>
+    <string name="home_invalid_apk_unreadable">Impossibile leggere il file. Controlla che \'Archiviazione esterna\' non sia limitata dalla batteria</string>
+    <string name="home_invalid_apk_not_an_apk">Il file selezionato non è un APK valido</string>
+    <string name="home_invalid_apk_io_error">Impossibile aprire il file. Riprova</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modalità esperto</string>
     <string name="expert_mode_search">Cerca patch</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Disabilita tutte</string>
     <string name="expert_mode_enable_all">Abilita tutte</string>
     <string name="expert_mode_reset_to_default">Abilitare patch consigliate</string>
+    <string name="expert_mode_restore_saved">Ripristinare la selezione salvata</string>
     <string name="expert_mode_no_results">Nessuna patch trovata</string>
     <string name="expert_mode_universal_patches">Patch universali</string>
     <string name="expert_mode_new_patches">Nuovo</string>
@@ -154,7 +160,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="home_outdated_patches_dialog_warning">Il patching con patch obsolete potrebbe risultare in un\'app non funzionante</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aggiorna &amp; patcha</string>
     <string name="home_low_disk_space_dialog_title">Spazio su disco in esaurimento</string>
-    <string name="home_low_disk_space_dialog_message">Disponibili solo %1$.2f GB di spazio di archiviazione libero. L\'applicazione delle patch richiede almeno 1 GB di spazio di archiviazione libero per funzionare correttamente</string>
+    <string name="home_low_disk_space_dialog_message">Solo %1$.2f GB di spazio di archiviazione libero disponibile. Per applicare le patch è necessario almeno %2$.2f GB di spazio libero per funzionare correttamente</string>
     <string name="home_low_disk_space_dialog_warning">Procedere potrebbe causare l\'errore \"file non trovato\" o esitare in un APK di output corrotto</string>
     <!-- Patch Options -->
     <string name="custom_color">Colore personalizzato</string>
@@ -609,7 +615,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_about">A proposito di</string>
     <string name="settings_system_share_website">Condividi il sito</string>
     <string name="settings_system_share_website_description">Condividi il sito ufficiale di Morphe</string>
-    <string name="settings_system_manager_description">"Un progetto open-source sperimentale per un patching moderna e semplificata delle app Android popolari, guidato dal feedback e dai contributi della community"</string>
+    <string name="settings_system_manager_description">"Un progetto open-source per un patching moderna e semplificata delle app Android popolari, guidato dal feedback e dai contributi della community"</string>
     <string name="credits">Crediti</string>
     <string name="credits_current_development">Sviluppo attuale</string>
     <string name="credits_prior_development">Sviluppo precedente</string>
@@ -678,10 +684,12 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="hide">Nascondi</string>
     <string name="default_">Predefinita</string>
     <string name="logs">Tracciati</string>
+    <string name="sources">Fonti</string>
     <string name="installing_ellipsis">Installazione in corso…</string>
     <string name="mounting_ellipsis">Montaggio in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>
     <string name="importing_ellipsis">Riprova</string>
+    <string name="imported_successfully">Importati con successo</string>
     <string name="changelog">Visualizza registri delle modifiche</string>
     <string name="changelog_description">Scopri le ultime modifiche in questo aggiornamento</string>
     <string name="changelog_download_fail">Download del registro delle modifiche non riuscito: %s</string>

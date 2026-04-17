@@ -147,12 +147,10 @@ class SettingsViewModel(
         .map { it.size }
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
-    val patchedPackagesCount: StateFlow<Int> = combine(
-        selectionRepository.getPackagesWithSavedSelection(),
-        optionsRepository.getPackagesWithSavedOptions()
-    ) { withSelection, withOptions ->
-        (withSelection + withOptions).size
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, 0)
+    val patchedPackagesCount: StateFlow<Int> =
+        selectionRepository.getPackagesWithSavedSelection()
+            .map { it.size }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
     /**
      * True for the duration of the current settings session after the user enables expert mode for the first time.

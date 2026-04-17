@@ -64,6 +64,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.net.URLEncoder.encode
 import java.security.MessageDigest
+import kotlin.collections.emptyList
 import kotlin.time.Clock
 
 /** Bundle update status for snackbar display. */
@@ -82,6 +83,16 @@ data class UnsupportedVersionDialogState(
     val allCompatibleVersions: List<AppTarget> = emptyList(),
     /** True if the selected version is marked as experimental in the patch bundle. */
     val isExperimental: Boolean = false
+)
+
+/**
+ * An [AppTarget] annotated with the bundle it originates from.
+ * Used to group versions by bundle in the APK availability dialog.
+ */
+data class BundledAppTarget(
+    val target: AppTarget,
+    val bundleUid: Int,
+    val bundleName: String
 )
 
 /** Dialog state for wrong package warning. */
@@ -165,9 +176,14 @@ class HomeViewModel(
     var expertModeSelectedApp by mutableStateOf<SelectedApp?>(null)
     var expertModeBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
     var expertModePatches by mutableStateOf<PatchSelection>(emptyMap())
+    /** Snapshot of the selection at the moment the ExpertMode dialog was opened. Used by "Restore saved". */
+    var expertModeInitialPatches by mutableStateOf<PatchSelection>(emptyMap())
+        private set
     var expertModeOptions by mutableStateOf<Options>(emptyMap())
     // Patches that are new in the current bundle version relative to the last saved selection
     var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
+    // Bundle UIDs that have a non-empty saved selection in the DB for the current app
+    var expertModeSavedSelectionBundleUids by mutableStateOf<Set<Int>>(emptySet())
 
     /**
      * Set when ExpertModeDialog is opened from InstalledAppInfoDialog (repatch flow).
@@ -199,7 +215,9 @@ class HomeViewModel(
     var pendingPackageName by mutableStateOf<String?>(null)
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<AppTarget?>(null)
-    var pendingCompatibleVersions by mutableStateOf<List<AppTarget>>(emptyList())
+    var pendingCompatibleVersions by mutableStateOf<List<BundledAppTarget>>(emptyList())
+    // Per-bundle recommended versions for multi-bundle display in ApkAvailabilityDialog
+    var pendingRecommendedBundleVersions by mutableStateOf<Map<Int, AppTarget>>(emptyMap())
     // Version selected by the user in Dialog 1 for the APK search query. Defaults to pendingRecommendedVersion
     var pendingSelectedDownloadVersion by mutableStateOf<AppTarget?>(null)
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
@@ -214,7 +232,8 @@ class HomeViewModel(
     var showMeteredPatchingDialog by mutableStateOf(false)
         private set
 
-    // Low disk space warning dialog: shown when < 1 GB free before patching starts
+    // Low disk space warning dialog: shown when free storage is below the threshold before patching starts
+    val lowDiskSpaceThresholdGb = 1f // Minimum free storage in GB required before patching
     var showLowDiskSpaceDialog by mutableStateOf(false)
         private set
     var lowDiskSpaceFreeGb by mutableFloatStateOf(0f)
@@ -227,11 +246,13 @@ class HomeViewModel(
     var installedAppsLoading by mutableStateOf(true)
 
     // Bundle data - reactive StateFlows derived directly from bundleInfoFlow
-    val compatibleVersionsFlow: StateFlow<Map<String, List<AppTarget>>> =
+    val compatibleVersionsFlow: StateFlow<Map<String, List<BundledAppTarget>>> =
         patchBundleRepository.bundleInfoFlow
             .combine(patchBundleRepository.sources) { bundleInfo, sources ->
-                val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
-                extractCompatibleVersions(bundleInfo, enabledUids)
+                val enabledSources = sources.filter { it.enabled }
+                val enabledUids = enabledSources.map { it.uid }.toSet()
+                val bundleNames = enabledSources.associate { it.uid to it.displayTitle }
+                extractCompatibleVersions(bundleInfo, bundleNames, enabledUids)
             }
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
@@ -252,7 +273,8 @@ class HomeViewModel(
                 .mapNotNull { it.packageName }
                 .toSet()
 
-            versionData.mapValues { (packageName, targets) ->
+            versionData.mapValues { (packageName, bundledTargets) ->
+                val targets = bundledTargets.map { it.target }
                 if (packageName in experimentalEnabledPackages) {
                     // Experimental mode: prefer the highest experimental version, fallback to first
                     targets.firstOrNull { it.isExperimental } ?: targets.first()
@@ -266,7 +288,50 @@ class HomeViewModel(
 
     // Convenience accessors - read current value synchronously for non-reactive call sites
     val recommendedVersions: Map<String, AppTarget> get() = recommendedVersionsFlow.value
-    val compatibleVersions: Map<String, List<AppTarget>> get() = compatibleVersionsFlow.value
+    val compatibleVersions: Map<String, List<BundledAppTarget>> get() = compatibleVersionsFlow.value
+
+    /**
+     * Per-bundle recommended version for each package.
+     * Returns Map<PackageName, Map<BundleUid, AppTarget>> so the APK availability dialog
+     * can show the correct "Recommended" badge independently for each bundle section.
+     */
+    val recommendedBundleVersionsFlow: StateFlow<Map<String, Map<Int, AppTarget>>> =
+        combine(
+            compatibleVersionsFlow,
+            prefs.bundleExperimentalVersionsEnabled.flow,
+            patchBundleRepository.bundleInfoFlow,
+            patchBundleRepository.sources
+        ) { versionData, experimentalEnabledUids, bundleInfo, sources ->
+            val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
+            // Per-bundle set of packages that have experimental mode enabled.
+            // Key: bundleUid, Value: set of packageNames with experimental toggle on for that bundle
+            val experimentalPackagesByBundle: Map<Int, Set<String>> = bundleInfo
+                .filterKeys { it in enabledUids && it.toString() in experimentalEnabledUids }
+                .mapValues { (_, info) ->
+                    info.patches
+                        .flatMap { it.compatiblePackages.orEmpty() }
+                        .mapNotNull { it.packageName }
+                        .toSet()
+                }
+
+            versionData.mapValues { (packageName, bundledTargets) ->
+                bundledTargets
+                    .groupBy { it.bundleUid }
+                    .mapValues { (bundleUid, targets) ->
+                        val appTargets = targets.map { it.target }
+                        val preferExperimental = experimentalPackagesByBundle[bundleUid]
+                            ?.contains(packageName) == true
+                        if (preferExperimental) {
+                            appTargets.firstOrNull { it.isExperimental } ?: appTargets.first()
+                        } else {
+                            appTargets.firstOrNull { !it.isExperimental } ?: appTargets.first()
+                        }
+                    }
+            }
+        }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    val recommendedBundleVersions: Map<String, Map<Int, AppTarget>> get() = recommendedBundleVersionsFlow.value
 
     // Track available updates for installed apps
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
@@ -587,7 +652,6 @@ class HomeViewModel(
     fun guardPatching(action: suspend () -> Unit) {
         // Check available storage first - low disk space is the most common cause of
         // cryptic "file not found" errors and corrupt output APKs during patching.
-        val lowDiskSpaceThresholdGb = 2f // Minimum free storage in GB required before patching
         val freeBytes = StatFs(app.filesDir.absolutePath).availableBytes
         val freeGb = freeBytes / (1024f * 1024f * 1024f)
         if (freeGb < lowDiskSpaceThresholdGb) {
@@ -781,12 +845,16 @@ class HomeViewModel(
                     progressToast.show()
                 }
             } catch (_: CancellationException) {
-                // Ignore cancellation.
+                // Ignore cancellation
             }
         }
 
         try {
-            block()
+            val result = block()
+            withContext(Dispatchers.Main) {
+                app.toast(app.getString(R.string.imported_successfully))
+            }
+            result
         } finally {
             toastRepeater.cancel()
             withContext(Dispatchers.Main) { progressToast.cancel() }
@@ -818,7 +886,7 @@ class HomeViewModel(
                     contentResolver.takePersistableUriPermission(patchBundle, permissionFlags)
                     persistedPermission = true
                 } catch (_: SecurityException) {
-                    // Provider may not support persistable permissions; fall back to transient grant.
+                    // Provider may not support persistable permissions; fall back to transient grant
                 }
 
                 try {
@@ -834,7 +902,7 @@ class HomeViewModel(
                                 permissionFlags
                             )
                         } catch (_: SecurityException) {
-                            // Ignore if provider revoked or already released.
+                            // Ignore if provider revoked or already released
                         }
                     }
                 }
@@ -1042,8 +1110,8 @@ class HomeViewModel(
      */
     fun getExperimentalVersionsForPackage(packageName: String): Set<String> =
         compatibleVersions[packageName]
-            ?.filter { it.isExperimental }
-            ?.mapNotNull { it.version }
+            ?.filter { it.target.isExperimental }
+            ?.mapNotNull { it.target.version }
             ?.toSet()
             ?: emptySet()
 
@@ -1140,6 +1208,7 @@ class HomeViewModel(
             ?: KnownApps.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
+        pendingRecommendedBundleVersions = recommendedBundleVersions[packageName] ?: emptyMap()
         pendingSelectedDownloadVersion = pendingRecommendedVersion
 
         // Guard: if there is a pending bundle update on metered data, show the outdated-patches
@@ -1211,14 +1280,15 @@ class HomeViewModel(
         }
 
         viewModelScope.launch {
-            val selectedApp = withContext(Dispatchers.IO) {
+            val result = withContext(Dispatchers.IO) {
                 loadLocalApk(app, uri)
             }
 
-            if (selectedApp != null) {
-                processSelectedApp(selectedApp)
-            } else {
-                app.toast(app.getString(R.string.home_invalid_apk))
+            when (result) {
+                is ApkLoadResult.Success -> processSelectedApp(result.app)
+                is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
+                is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
+                is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
             }
         }
     }
@@ -1401,7 +1471,7 @@ class HomeViewModel(
 
         if (versionMismatch && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
+            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
             pendingSelectedApp = selectedApp
             showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
@@ -1419,7 +1489,7 @@ class HomeViewModel(
         // - Experimental mode OFF → UnsupportedVersionWarningDialog
         if (isVersionExperimental && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
+            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
             pendingSelectedApp = selectedApp
             val state = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
@@ -1602,7 +1672,7 @@ class HomeViewModel(
 
             expertModeSelectedApp = selectedApp
             expertModeBundles = allBundles
-            expertModePatches = patches.toMutableMap()
+            patches.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
             expertModeOptions = validatedOptions.toMutableMap()
             expertModeNewPatches = newPatchesMap
             showExpertModeDialog = true
@@ -1661,7 +1731,7 @@ class HomeViewModel(
 
                     expertModeSelectedApp = selectedApp
                     expertModeBundles = allBundles
-                    expertModePatches = savedSelections.toMutableMap()
+                    savedSelections.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
                     expertModeOptions = savedOptions.toMutableMap()
                     showExpertModeDialog = true
                     return
@@ -1707,6 +1777,7 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
+        pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
         resolvedDownloadUrl = null
         showDownloadInstructionsDialog = false
@@ -1789,6 +1860,17 @@ class HomeViewModel(
     }
 
     /**
+     * Restores the DB-persisted patch selection for a bundle in expert mode.
+     * No-op if there is no saved selection for the given bundle.
+     */
+    fun expertModeRestoreSaved(bundleUid: Int) {
+        val savedForBundle = expertModeInitialPatches[bundleUid] ?: return
+        val current = expertModePatches.toMutableMap()
+        if (savedForBundle.isEmpty()) current.remove(bundleUid) else current[bundleUid] = savedForBundle
+        expertModePatches = current
+    }
+
+    /**
      * Update option in expert mode.
      */
     fun updateOptionInExpertMode(
@@ -1815,6 +1897,7 @@ class HomeViewModel(
         expertModeSelectedApp = null
         expertModeBundles = emptyList()
         expertModePatches = emptyMap()
+        expertModeInitialPatches = emptyMap()
         expertModeOptions = emptyMap()
         expertModeNewPatches = emptyMap()
         onRepatchProceed = null
@@ -1982,7 +2065,7 @@ class HomeViewModel(
             }
 
             expertModeBundles = allBundles
-            expertModePatches = patches.toMutableMap()
+            patches.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
             expertModeOptions = validatedOptions.toMutableMap()
             expertModeNewPatches = newPatchesMap
             expertModeSelectedApp = null // repatch has no SelectedApp
@@ -2012,7 +2095,7 @@ class HomeViewModel(
 
         // Use the version selected by the user in Dialog 1; fall back to recommended
         val versionForSearch = pendingSelectedDownloadVersion ?: pendingRecommendedVersion
-        val escapedVersion = versionForSearch?.let { encode(it.version, "UTF-8") } ?: "any"
+        val escapedVersion = versionForSearch?.version ?: "any"
         val searchQuery = "$pendingPackageName~$escapedVersion~${Build.SUPPORTED_ABIS.first()}".encodeURLPath()
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
@@ -2074,6 +2157,7 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
+        pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
         resolvedDownloadUrl = null
         pendingSavedApkInfo = null
@@ -2091,15 +2175,17 @@ class HomeViewModel(
 
     /**
      * Extract compatible versions for each package from bundle info.
-     * Returns a map of package name to sorted list of AppTargets - newest first regardless
-     * of experimental status. The [AppTarget.isExperimental] flag is preserved for badge display.
-     * Single pass per bundle - O(patches) instead of O(packages × patches).
+     * Returns a map of package name to a list of [BundledAppTarget] - versions are grouped by
+     * bundle (ordered by bundle display name) and sorted newest→oldest within each bundle.
+     * Versions are NOT deduplicated across bundles so the UI can show per-bundle sections.
      */
     private fun extractCompatibleVersions(
         bundleInfo: Map<Int, PatchBundleInfo>,
+        bundleNames: Map<Int, String>,
         enabledBundleUids: Set<Int> = emptySet()
-    ): Map<String, List<AppTarget>> {
-        val targetsByPackage = mutableMapOf<String, MutableMap<String, AppTarget>>()
+    ): Map<String, List<BundledAppTarget>> {
+        // packageName → bundleUid → version → AppTarget
+        val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
 
         bundleInfo.forEach { (bundleUid, info) ->
             if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) return@forEach
@@ -2107,23 +2193,43 @@ class HomeViewModel(
             info.patches.forEach { patch ->
                 patch.compatiblePackages?.forEach { pkg ->
                     val packageName = pkg.packageName ?: return@forEach
-                    val map = targetsByPackage.getOrPut(packageName) { mutableMapOf() }
+                    val bundleMap = targetsByPackage
+                        .getOrPut(packageName) { mutableMapOf() }
+                        .getOrPut(bundleUid) { mutableMapOf() }
 
                     pkg.versions?.forEach { version ->
                         val isExperimental = pkg.experimentalVersions?.contains(version) == true
-                        // If a version appears in multiple patches, prefer stable over experimental
-                        if (version !in map || isExperimental.not()) {
+                        // If a version appears in multiple patches of the same bundle, prefer stable
+                        if (version !in bundleMap || !isExperimental) {
                             val description = pkg.versionDescriptions?.get(version)
-                            map[version] = AppTarget(version = version, isExperimental = isExperimental, description = description)
+                            bundleMap[version] = AppTarget(
+                                version = version,
+                                isExperimental = isExperimental,
+                                description = description
+                            )
                         }
                     }
                 }
             }
         }
 
-        // Sort all versions together newest→oldest regardless of experimental flag
+        // Flatten: bundles ordered by display name, versions newest→oldest within each bundle
         return targetsByPackage
-            .mapValues { (_, map) -> map.values.sortedDescending() }
+            .mapValues { (_, byBundle) ->
+                byBundle.entries
+                    .sortedBy { (uid, _) -> bundleNames[uid] ?: "" }
+                    .flatMap { (uid, versionMap) ->
+                        versionMap.values
+                            .sortedDescending()
+                            .map { target ->
+                                BundledAppTarget(
+                                    target = target,
+                                    bundleUid = uid,
+                                    bundleName = bundleNames[uid] ?: "Bundle $uid"
+                                )
+                            }
+                    }
+            }
             .filterValues { it.isNotEmpty() }
     }
 
@@ -2193,22 +2299,25 @@ class HomeViewModel(
     private suspend fun loadLocalApk(
         context: Context,
         uri: Uri
-    ): SelectedApp.Local? = withContext(Dispatchers.IO) {
+    ): ApkLoadResult = withContext(Dispatchers.IO) {
         try {
             // Copy file to uiTempDir with original extension detection
             val fileName = context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
                 val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                cursor.moveToFirst()
-                cursor.getString(nameIndex)
+                if (cursor.moveToFirst() && nameIndex != -1) cursor.getString(nameIndex) else null
             } ?: "temp_${System.currentTimeMillis()}"
 
             val extension = fileName.substringAfterLast('.', "apk").lowercase()
             val tempFile = filesystem.uiTempDir.resolve("temp_apk_${System.currentTimeMillis()}.$extension")
 
-            context.contentResolver.openInputStream(uri)?.use { input ->
-                tempFile.outputStream().use { output ->
-                    input.copyTo(output)
-                }
+            // openInputStream can return null when the provider is unavailable
+            // e.g. Samsung External Storage restricted by Battery Optimization
+            val bytesCopied = context.contentResolver.openInputStream(uri)?.use { input ->
+                tempFile.outputStream().use { output -> input.copyTo(output) }
+            }
+            if (bytesCopied == null || bytesCopied == 0L) {
+                tempFile.delete()
+                return@withContext ApkLoadResult.Unreadable
             }
 
             // Check if it's a split APK archive
@@ -2234,18 +2343,32 @@ class HomeViewModel(
 
             if (packageInfo == null) {
                 tempFile.delete()
-                return@withContext null
+                return@withContext ApkLoadResult.NotAnApk
             }
 
-            SelectedApp.Local(
-                packageName = packageInfo.packageName,
-                version = packageInfo.versionName ?: "unknown",
-                file = tempFile,
-                temporary = true
+            ApkLoadResult.Success(
+                SelectedApp.Local(
+                    packageName = packageInfo.packageName,
+                    version = packageInfo.versionName ?: "unknown",
+                    file = tempFile,
+                    temporary = true
+                )
             )
         } catch (e: Exception) {
             Log.e(tag, "Failed to load APK", e)
-            null
+            ApkLoadResult.IoError
         }
     }
+}
+
+/** Result of attempting to load a local APK file. */
+private sealed interface ApkLoadResult {
+    /** File was read and parsed successfully. */
+    data class Success(val app: SelectedApp.Local) : ApkLoadResult
+    /** File could not be read - provider returned null stream or zero bytes. */
+    data object Unreadable : ApkLoadResult
+    /** File was read but is not a valid APK/split archive. */
+    data object NotAnApk : ApkLoadResult
+    /** An unexpected IO or system exception occurred while copying or parsing. */
+    data object IoError : ApkLoadResult
 }

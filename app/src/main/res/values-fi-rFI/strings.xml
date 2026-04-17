@@ -81,7 +81,10 @@
     <string name="sources_update_success">Muokitus onnistui</string>
     <string name="sources_update_unavailable">Ei ole muokkaa saatavilla</string>
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
+    <string name="sources_download_fail_named">Virhe ladatessa \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Ei voitu päivittää \'%1$s\': ennakkopäivitys JSON-tiedostoa ei löytynyt määritetystä URL-osoitteesta.</string>
+    <string name="sources_patch_expert_badge">Asiantuntija</string>
+    <string name="sources_patch_expert_badge_tooltip">Ota Asiantuntijatila käyttöön Asetuksista, jotta voit sisällyttää tämän korjauksen manuaalisesti</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Tarvitsetko apua etsimään alkuperäistä, paikkaamatonta APK:tä?</string>
     <string name="home_apk_availability_dialog_simple">Paikataksesi &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, paikkamattoman APK-version:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Valitettu versio</string>
     <string name="home_select_apk_title">Valitse APK</string>
     <string name="home_select_any_apk_description">Klikkaa alla olevaa painiketta valitaksesi minkä tahansa sovelluksen APK-tiedoston patchaamiseen</string>
-    <string name="home_invalid_apk">Virheellinen APK-tiedosto</string>
+    <string name="home_invalid_apk_unreadable">Ei lukenut tiedostoa. Tarkista, ettei \'Ulkoista tallennustilaa\' ole rajoitettu akun käytössä</string>
+    <string name="home_invalid_apk_not_an_apk">Valittu tiedosto ei ole kelvollinen APK</string>
+    <string name="home_invalid_apk_io_error">Tiedoston avaaminen epäonnistui. Yritä uudelleen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Asiantuntijan tila</string>
     <string name="expert_mode_search">Etsi patcheja</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Poista kaikki</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_reset_to_default">Ota käyttöön suositellut korjaukset</string>
+    <string name="expert_mode_restore_saved">Palauta tallennettu valinta</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
     <string name="expert_mode_universal_patches">Yleismaailmalliset korjaukset</string>
     <string name="expert_mode_new_patches">Uusi</string>
@@ -153,7 +159,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="home_outdated_patches_dialog_warning">Päivityksen teko vanhentuneilla päivityksillä saattaa johtaa rikkoutuneeseen sovellukseen</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Päivitä &amp; päivitä</string>
     <string name="home_low_disk_space_dialog_title">Vähän levytilaa</string>
-    <string name="home_low_disk_space_dialog_message">Vapaata tallennustilaa on vain %1$.2f GB. Paikkaus vaatii vähintään 1 GB vapaata tilaa toimiakseen oikein</string>
+    <string name="home_low_disk_space_dialog_message">Vain %1$.2f GB vapaata tallennustilaa. Korjausohjelman toimiakseen oikein tarvitaan vähintään %2$.2f GB vapaata tilaa</string>
     <string name="home_low_disk_space_dialog_warning">Jatkamisesta voi seurata tiedostotonnettua virhettä tai vioittunutta ulostulo-APK:ta</string>
     <!-- Patch Options -->
     <string name="custom_color">Mukautettu väri</string>
@@ -608,7 +614,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_share_website">Jaa verkkosivusto</string>
     <string name="settings_system_share_website_description">Jaa Morphen virallinen verkkosivusto</string>
-    <string name="settings_system_manager_description">"Kokeellinen avoimen lähdekoodin projekti suosittujen Android-sovellusten moderniin ja virtaviivaisen korjaamiseen, joka perustuu yhteisön palautteeseen ja panokseen"</string>
+    <string name="settings_system_manager_description">"Avoin lähdekoodin projekti, jonka tavoitteena on moderni ja tehokas Android-sovellusten korjaus, yhteisön palautteen ja panosten ohjaamana"</string>
     <string name="credits">Tekijät</string>
     <string name="credits_current_development">Nykyinen kehitys</string>
     <string name="credits_prior_development">Aikaisempi kehitys</string>
@@ -677,10 +683,12 @@ Kuvien mitat on oltava seuraavasti:
     <string name="hide">Piilota</string>
     <string name="default_">Oletus</string>
     <string name="logs">Päiväkirjat</string>
+    <string name="sources">Lähteet</string>
     <string name="installing_ellipsis">Asennetaan…</string>
     <string name="mounting_ellipsis">Liitetään…</string>
     <string name="unmounting_ellipsis">Poistetaan…</string>
     <string name="importing_ellipsis">Tuotaan…</string>
+    <string name="imported_successfully">Tuotu onnistuneesti</string>
     <string name="changelog">Näytä muutoshistoriat</string>
     <string name="changelog_description">Katso tämän päivityksen uusimmat muutokset</string>
     <string name="changelog_download_fail">Muutostietojen lataus epäonnistui: %s</string>

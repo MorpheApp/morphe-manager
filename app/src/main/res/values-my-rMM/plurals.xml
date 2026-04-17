@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="option_count">
+        <item quantity="other">%s%s</item>
+    </plurals>
+</resources>

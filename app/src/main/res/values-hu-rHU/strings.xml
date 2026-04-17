@@ -81,7 +81,10 @@
     <string name="sources_update_success">A frissítés sikeres</string>
     <string name="sources_update_unavailable">Nincs elérhető frissítés</string>
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
+    <string name="sources_download_fail_named">A \'%1$s\' letöltése sikertelen: %2$s</string>
     <string name="sources_download_endpoint_not_found">Nem sikerült frissíteni ezt: \'%1$s\' - A módosítás JSON fájlja nem található a beállított URL-n</string>
+    <string name="sources_patch_expert_badge">Szakértő</string>
+    <string name="sources_patch_expert_badge_tooltip">Engedélyezze a szakértői módot a Beállításokban a javítás manuális hozzáadásához</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Szükséged van segítségre az eredeti, módosítások nélküli APK megtalálásához?</string>
     <string name="home_apk_availability_dialog_simple">A(z) &lt;b&gt;%s&lt;/b&gt; módosításához szükséges egy módosítás nélküli APK, amely verziója:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Kiválasztott verzió</string>
     <string name="home_select_apk_title">APK kiválasztása</string>
     <string name="home_select_any_apk_description">Koppints az alábbi gombra a módosítani kívánt APK-fájl kiválasztásához.</string>
-    <string name="home_invalid_apk">Érvénytelen APK fájl</string>
+    <string name="home_invalid_apk_unreadable">Nem sikerült a fájlt olvasni. Ellenőrizze, hogy a \'Külső tároló\' nincs-e akkumulátorkorlátozás alatt</string>
+    <string name="home_invalid_apk_not_an_apk">A kiválasztott fájl nem egy érvényes APK</string>
+    <string name="home_invalid_apk_io_error">Nem sikerült megnyitni a fájlt. Kérjük, próbálja meg újra</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Szakértői mód</string>
     <string name="expert_mode_search">Patchek keresése</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_reset_to_default">Engedélyezze az ajánlott javításokat</string>
+    <string name="expert_mode_restore_saved">Restore saved selection</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_universal_patches">Univerzális módosítások</string>
     <string name="expert_mode_new_patches">Új</string>
@@ -154,7 +160,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_outdated_patches_dialog_warning">Az elavult módosítások használata hibás alkalmazást eredményezhet</string>
     <string name="home_outdated_patches_dialog_update_and_patch">&amp; módosítás frissítése</string>
     <string name="home_low_disk_space_dialog_title">Kevés a szabad tárhely</string>
-    <string name="home_low_disk_space_dialog_message">Csak %1$.2f GB szabad tárhely áll rendelkezésre. A javításhoz legalább 1 GB szabad tárhelyre van szükség a megfelelő működéshez.</string>
+    <string name="home_low_disk_space_dialog_message">Csak %1$.2f GB szabad tárhely áll rendelkezésre. A javítás helyes működéséhez legalább %2$.2f GB szabad helyre van szükség</string>
     <string name="home_low_disk_space_dialog_warning">A folytatás \"fájl nem található\" hibához vagy sérült APK-hoz vezethet</string>
     <!-- Patch Options -->
     <string name="custom_color">Egyedi szín</string>
@@ -610,7 +616,7 @@ Forrás: #%2$s</string>
     <string name="settings_system_about">Névjegy</string>
     <string name="settings_system_share_website">Webhely megosztása</string>
     <string name="settings_system_share_website_description">Ossza meg a Morphe hivatalos weboldalát</string>
-    <string name="settings_system_manager_description">"Egy kísérleti, nyílt forráskódú projekt a népszerű Android alkalmazások modern, gördülékeny javításához, a közösség visszajelzései és hozzájárulásai által vezérelve"</string>
+    <string name="settings_system_manager_description">"Egy nyílt forráskódú projekt, amely a népszerű Android alkalmazások modern, átgondolt patch-elését valósítja meg, a közösség visszajelzései és hozzájárulásai által vezérelve"</string>
     <string name="credits">Közreműködők</string>
     <string name="credits_current_development">Jelenlegi fejlesztők</string>
     <string name="credits_prior_development">Korábbi fejlesztők</string>
@@ -679,10 +685,12 @@ Forrás: #%2$s</string>
     <string name="hide">Elrejtés</string>
     <string name="default_">Alapértelmezett</string>
     <string name="logs">Naplók</string>
+    <string name="sources">Forrás</string>
     <string name="installing_ellipsis">Telepítés…</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>
     <string name="importing_ellipsis">Importálás…</string>
+    <string name="imported_successfully">Sikeresen importálva</string>
     <string name="changelog">Változásnaplók megtekintése</string>
     <string name="changelog_description">Tekintse meg a legújabb módosításokat ebben a frissítésben</string>
     <string name="changelog_download_fail">Nem sikerült letölteni a változásnaplót: %s</string>

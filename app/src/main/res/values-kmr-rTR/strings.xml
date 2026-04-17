@@ -81,7 +81,10 @@
     <string name="sources_update_success">Nûvekirin serketî</string>
     <string name="sources_update_unavailable">Nûvekirin peyda nebûye</string>
     <string name="sources_download_fail">Nêzîk davêtin: %s</string>
+    <string name="sources_download_fail_named">Şûrande nedikir: \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Nefotayî nûvekirin \'%1$s\': pelê JSON-a dirûtinê li ser navnîşê tê dane danîn</string>
+    <string name="sources_patch_expert_badge">Ekspert</string>
+    <string name="sources_patch_expert_badge_tooltip">Ji bo kuşandina vê patch\'ê bi destê, moda Ekspertê di Nastîran de çêbike</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Alîkarê dîtina APK-ya orîjînal, nebixwe ji nû ve?</string>
     <string name="home_apk_availability_dialog_simple">Ji bo dirûtîna &lt;b&gt;%s&lt;/b&gt;, hûn pêdiviya APK-ya nebixwe hebin:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Versiyona hilbijartî</string>
     <string name="home_select_apk_title">APK safînak</string>
     <string name="home_select_any_apk_description">Seroki pêşniyar be ku APK entê antî ek şêwaziyê sazkirinê ji her aplikasyonê pêş andazeşîne</string>
-    <string name="home_invalid_apk">Dosya APK ne sazbûne</string>
+    <string name="home_invalid_apk_unreadable">İspasara xwêndik nebîn. Çavkanîya \'External Storage\'ê ji bateriyê qedexe nebîn</string>
+    <string name="home_invalid_apk_not_an_apk">Pelê ku hilbijartin, APK-ya rast nîne</string>
+    <string name="home_invalid_apk_io_error">Rast nakin ku pel vebîn. Ji kerema xwe dîcare biceribîne</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Ferman ekspertê</string>
     <string name="expert_mode_search">Paqejî bîne lêgeran</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Hemû çêbake</string>
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
     <string name="expert_mode_reset_to_default">Pêşdixeşinên pêşniyar kirî çêbêje</string>
+    <string name="expert_mode_restore_saved">Şêvikî serdest vegerîne</string>
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
     <string name="expert_mode_universal_patches">Pêtên hevpar.</string>
     <string name="expert_mode_new_patches">Nû</string>
@@ -152,7 +158,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_outdated_patches_dialog_warning">Dirûtîna bi dirûtinên kevn dibe sedî sepanê tê birçîbûn</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Nûve bike &amp; dirûtîne</string>
     <string name="home_low_disk_space_dialog_title">Cihê nadîtî</string>
-    <string name="home_low_disk_space_dialog_message">Tenê %1$.2f GB ji cîhê gavûdarê azad e. Çêkirina pêwisteya kêfa 1 GB cîhê gavûdarê bo ku bi rastî xebite</string>
+    <string name="home_low_disk_space_dialog_message">Ten %1$.2f GB ajala weşanê azad heye. Sazûdekirin ji bo ku bi rastî bixebite, tişta kêmtir %2$.2f GB ajala fermangeşiyê hewce ye</string>
     <string name="home_low_disk_space_dialog_warning">Li pêşveçûn dikare di xeberê de çewisika \"pel nêzike\" an APK-ya derketî ya qels bibe.</string>
     <!-- Patch Options -->
     <string name="custom_color">Rengê standard</string>
@@ -607,7 +613,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_about">Derbarê</string>
     <string name="settings_system_share_website">Malperê parve bike</string>
     <string name="settings_system_share_website_description">Malpera fermî ya Morphe parve bike</string>
-    <string name="settings_system_manager_description">"Projeyekek eksperîmental, çavkanî vekirî ku ji bo nûjenkirin, pêşbazîkirina hirastina sepanên Android populer, bi bandora vegera civakê û bejên."</string>
+    <string name="settings_system_manager_description">"Projektek ferman-çavkanî ji bo nûjenkirin, sazkirina bingeş an sepanên popûler ên Android, bi bandora vegerandinên dîmen û ji bo beşdarîyên civakê ve girêdayî ye."</string>
     <string name="credits">Kredît</string>
     <string name="credits_current_development">Gelişîna heyî</string>
     <string name="credits_prior_development">Gelişîna berê</string>
@@ -676,10 +682,12 @@ Qasîyên wêneyan divê wiha bin:
     <string name="hide">Vêşêrîn</string>
     <string name="default_">Standard</string>
     <string name="logs">Log</string>
+    <string name="sources">Çavkanî</string>
     <string name="installing_ellipsis">Dikuştin…</string>
     <string name="mounting_ellipsis">Çêkirin…</string>
     <string name="unmounting_ellipsis">Sererastkirin…</string>
     <string name="importing_ellipsis">Gihîştin…</string>
+    <string name="imported_successfully">Sergûha xweş</string>
     <string name="changelog">Bixweyne guhezgarîyan</string>
     <string name="changelog_description">Guherînên dawî ti vê nûvekirinê binêrin</string>
     <string name="changelog_download_fail">Degerandina guhezgarîyan ji destûr ve çû: %s</string>

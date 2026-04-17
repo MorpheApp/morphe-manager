@@ -118,6 +118,9 @@ class AppDataResolver(
             val packageInfo = pm.getPackageInfo(packageName, 0) ?: return null
             val appInfo = packageInfo.applicationInfo ?: return null
 
+            // Skip disabled apps - they should not take priority over saved APKs
+            if (!appInfo.enabled) return null
+
             ResolvedAppData(
                 packageName = packageName,
                 displayName = appInfo.loadLabel(packageManager).toString(),

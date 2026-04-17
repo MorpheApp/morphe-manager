@@ -70,6 +70,17 @@ class MorphePatcherState(
     var errorInfo by mutableStateOf<PatcherErrorInfo?>(null)
     var hasPatchingError by mutableStateOf(false)
 
+    /**
+     * The message shown in the error dialog. If [errorMessage] is blank or generic,
+     * falls back to the full patching log so the user always sees actionable information.
+     */
+    val effectiveErrorMessage: String
+        get() {
+            if (errorMessage.isNotBlank()) return errorMessage
+            val logText = viewModel.logs.joinToString("\n") { (level, msg) -> "[$level] $msg" }
+            return logText.ifBlank { errorMessage }
+        }
+
     // Cancel dialog
     var showCancelDialog by mutableStateOf(false)
 

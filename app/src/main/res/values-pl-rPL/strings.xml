@@ -81,7 +81,10 @@
     <string name="sources_update_success">Aktualizacja zakończona pomyślnie</string>
     <string name="sources_update_unavailable">Brak dostępnych aktualizacji</string>
     <string name="sources_download_fail">Nie udało się pobrać źródeł: %s</string>
+    <string name="sources_download_fail_named">Nie udało się pobrać \"%1$s\": %2$s</string>
     <string name="sources_download_endpoint_not_found">Nie można zaktualizować \"%1$s\": nie znaleziono pliku JSON z modyfikacjami pod skonfigurowanym adresem URL</string>
+    <string name="sources_patch_expert_badge">Ekspert</string>
+    <string name="sources_patch_expert_badge_tooltip">Włącz tryb ekspercki w Ustawieniach, aby ręcznie dodać tę modyfikację</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Potrzebujesz pomocy w znalezieniu oryginalnego pliku APK?</string>
     <string name="home_apk_availability_dialog_simple">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
@@ -111,7 +114,9 @@
     <string name="home_selected_version">Wybrana wersja</string>
     <string name="home_select_apk_title">Wybierz plik APK</string>
     <string name="home_select_any_apk_description">Stuknij przycisk poniżej, aby wybrać plik APK dowolnej aplikacji do modyfikacji</string>
-    <string name="home_invalid_apk">Nieprawidłowy plik APK</string>
+    <string name="home_invalid_apk_unreadable">Nie udało się odczytać pliku. Sprawdź, czy \"Pamięć zewnętrzna\" nie ma włączonych ograniczeń baterii</string>
+    <string name="home_invalid_apk_not_an_apk">Wybrany plik nie jest prawidłowym plikiem APK</string>
+    <string name="home_invalid_apk_io_error">Nie udało się otworzyć pliku. Spróbuj ponownie</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Tryb ekspercki</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
@@ -119,6 +124,7 @@
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
     <string name="expert_mode_reset_to_default">Włącz zalecane modyfikacje</string>
+    <string name="expert_mode_restore_saved">Przywróć zapisany wybór</string>
     <string name="expert_mode_no_results">Nie znaleziono modyfikacji</string>
     <string name="expert_mode_universal_patches">Uniwersalne modyfikacje</string>
     <string name="expert_mode_new_patches">Nowe</string>
@@ -154,7 +160,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_outdated_patches_dialog_warning">Modyfikowanie za pomocą przestarzałych modyfikacji może zepsuć aplikację</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aktualizuj i modyfikuj</string>
     <string name="home_low_disk_space_dialog_title">Mało miejsca na dysku</string>
-    <string name="home_low_disk_space_dialog_message">Dostępne tylko %1$.2f GB wolnego miejsca. Modyfikowanie wymaga co najmniej 1 GB do poprawnego działania</string>
+    <string name="home_low_disk_space_dialog_message">Dostępne tylko %1$.2f GB wolnego miejsca. Modyfikowanie wymaga co najmniej %2$.2f GB do poprawnego działania</string>
     <string name="home_low_disk_space_dialog_warning">Kontynuowanie może skutkować błędem \"Nie znaleziono pliku\" lub uszkodzeniem wyjściowego pliku APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Kolor niestandardowy</string>
@@ -609,7 +615,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_about">Informacje</string>
     <string name="settings_system_share_website">Udostępnij stronę</string>
     <string name="settings_system_share_website_description">Udostępnij oficjalną stronę Morphe</string>
-    <string name="settings_system_manager_description">"Eksperymentalny projekt otwartoźródłowy służący do nowoczesnego i sprawnego modyfikowania popularnych aplikacji na Androida, rozwijany dzięki opiniom i zaangażowaniu społeczności"</string>
+    <string name="settings_system_manager_description">"Projekt otwartoźródłowy służący do nowoczesnego i sprawnego modyfikowania popularnych aplikacji na Androida, rozwijany dzięki opiniom i zaangażowaniu społeczności"</string>
     <string name="credits">Podziękowania</string>
     <string name="credits_current_development">Obecni twórcy</string>
     <string name="credits_prior_development">Poprzedni twórcy</string>
@@ -678,10 +684,12 @@ Wymagane są następujące wymiary obrazów:
     <string name="hide">Ukryj</string>
     <string name="default_">Domyślne</string>
     <string name="logs">Logi</string>
+    <string name="sources">Źródła</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Montowanie…</string>
     <string name="unmounting_ellipsis">Odmontowywanie…</string>
     <string name="importing_ellipsis">Importowanie…</string>
+    <string name="imported_successfully">Zaimportowano pomyślnie</string>
     <string name="changelog">Przeglądaj historię zmian</string>
     <string name="changelog_description">Sprawdź ostatnie zmiany w tej aktualizacji</string>
     <string name="changelog_download_fail">Nie udało się pobrać historii zmian: %s</string>

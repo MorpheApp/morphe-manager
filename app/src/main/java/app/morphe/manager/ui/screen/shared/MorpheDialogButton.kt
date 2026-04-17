@@ -171,6 +171,7 @@ fun MorpheDialogButtonRow(
     primaryIcon: ImageVector? = null,
     secondaryIcon: ImageVector? = null,
     isPrimaryDestructive: Boolean = false,
+    isSecondaryPrimary: Boolean = false,
     primaryEnabled: Boolean = true,
     layout: DialogButtonLayout = DialogButtonLayout.Auto
 ) {
@@ -201,12 +202,21 @@ fun MorpheDialogButtonRow(
             )
 
             if (secondaryText != null && onSecondaryClick != null) {
-                MorpheDialogOutlinedButton(
-                    text = secondaryText,
-                    onClick = onSecondaryClick,
-                    icon = secondaryIcon,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                if (isSecondaryPrimary) {
+                    MorpheDialogButton(
+                        text = secondaryText,
+                        onClick = onSecondaryClick,
+                        icon = secondaryIcon,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                } else {
+                    MorpheDialogOutlinedButton(
+                        text = secondaryText,
+                        onClick = onSecondaryClick,
+                        icon = secondaryIcon,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
         }
     } else {
@@ -216,12 +226,21 @@ fun MorpheDialogButtonRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             if (secondaryText != null && onSecondaryClick != null) {
-                MorpheDialogOutlinedButton(
-                    text = secondaryText,
-                    onClick = onSecondaryClick,
-                    icon = secondaryIcon,
-                    modifier = Modifier.weight(1f)
-                )
+                if (isSecondaryPrimary) {
+                    MorpheDialogButton(
+                        text = secondaryText,
+                        onClick = onSecondaryClick,
+                        icon = secondaryIcon,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else {
+                    MorpheDialogOutlinedButton(
+                        text = secondaryText,
+                        onClick = onSecondaryClick,
+                        icon = secondaryIcon,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
 
             MorpheDialogButton(

@@ -19,13 +19,21 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <!-- Home Screen - Sources Management -->
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_download_fail_named">\'%1$s\' डाउनलोड करण्यात अयशस्वी: %2$s</string>
+    <string name="sources_patch_expert_badge">तज्ञ</string>
+    <string name="sources_patch_expert_badge_tooltip">हा पॅच मॅन्युअली समाविष्ट करण्यासाठी सेटिंग्जमध्ये तज्ञ मोड सक्षम करा</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_invalid_apk_unreadable">फाईल वाचण्यात अयशस्वी. \'External Storage\' बॅटरी निर्बंधीत नसल्याची खात्री करा</string>
+    <string name="home_invalid_apk_not_an_apk"> निवडलेली फाइल वैध APK नाही.</string>
+    <string name="home_invalid_apk_io_error">फाईल उघडण्यात अयशस्वी. कृपया पुन्हा प्रयत्न करा</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_reset_to_default">शिफारस केलेले पॅचेस सक्षम करा</string>
+    <string name="expert_mode_restore_saved">निवडलेला डेटा पुनर्संचयित करा</string>
     <string name="expert_mode_new_patches">नवीन</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_low_disk_space_dialog_message">फक्त %1$.2f GB मोफत स्टोरेज उपलब्ध आहे. पॅचिंगसाठी योग्यरित्या कार्य करण्यासाठी किमान %2$.2f GB मोफत जागा आवश्यक आहे.</string>
     <!-- Patch Options -->
     <string name="patch_option_required_missing">%s: आवश्यक पर्याय भरा</string>
     <!-- Adaptive Icon Creator -->
@@ -68,10 +76,12 @@
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
-    <string name="settings_system_manager_description">"हे आधुनिक, सुव्यवस्थित पॅचिंगसाठी लोकप्रिय Android ॲप्सचे प्रायोगिक, मुक्त-स्रोत प्रोजेक्ट आहे, जे समुदाय अभिप्राय आणि योगदानाने चालवले जाते."</string>
+    <string name="settings_system_manager_description">"हे लोकप्रिय Android ॲप्सच्या आधुनिक, सुव्यवस्थित पॅचिंगसाठी एक मुक्त-स्रोत प्रकल्प आहे, जो समुदाय अभिप्राय आणि योगदानातून चालतो."</string>
     <string name="opensource_licenses">मुक्त-स्रोत परवाने</string>
     <!-- Shared strings -->
     <string name="all">सर्व</string>
     <string name="filter">गाळण</string>
     <string name="unmount">डिमाउंट</string>
+    <string name="sources">स्त्रोत</string>
+    <string name="imported_successfully">यशस्वीरित्या आयात केले</string>
 </resources>

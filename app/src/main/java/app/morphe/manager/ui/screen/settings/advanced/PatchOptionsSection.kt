@@ -36,7 +36,6 @@ import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
 import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
 
 /**
  * Advanced patch options section.
@@ -46,8 +45,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PatchOptionsSection(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
-    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
-    homeViewModel: HomeViewModel = koinViewModel()
+    patchOptionsViewModel: PatchOptionsViewModel,
+    homeViewModel: HomeViewModel
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -69,8 +68,14 @@ fun PatchOptionsSection(
     val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow
         .collectAsStateWithLifecycle(emptyMap())
 
+    // Refresh only once when bundle info first becomes available.
+    // Using a flag avoids re-triggering refresh on every recomposition or tab switch
+    var hasRefreshed by remember { mutableStateOf(false) }
     LaunchedEffect(bundleInfo) {
-        if (bundleInfo.isNotEmpty()) patchOptionsViewModel.refresh()
+        if (bundleInfo.isNotEmpty() && !hasRefreshed) {
+            hasRefreshed = true
+            patchOptionsViewModel.refresh()
+        }
     }
 
     val noPatchesAvailable = patchOptionsViewModel.noPatchesAvailable

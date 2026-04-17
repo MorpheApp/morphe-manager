@@ -8,11 +8,10 @@ import com.reandroid.app.AndroidManifest
 import com.reandroid.archive.ZipEntryMap
 import com.reandroid.arsc.chunk.xml.ResXmlElement
 import com.reandroid.arsc.container.SpecTypePair
-import com.reandroid.arsc.header.TableHeader
 import com.reandroid.arsc.model.ResourceEntry
 import com.reandroid.arsc.value.ValueType
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runInterruptible
 import java.io.Closeable
 import java.io.File
 import java.io.FileNotFoundException
@@ -21,11 +20,12 @@ import java.nio.charset.CoderMalfunctionError
 import java.nio.file.Path
 import java.util.Locale
 
+const val TAG = "APKEditor"
+
 private class ApkEditorLogger(
     private val onProgress: ((String) -> Unit)? = null
 ) : APKLogger {
     private companion object {
-        const val TAG = "APKEditor"
         val MERGE_PATTERN = Regex("Merging\\s*:?\\s*(.+)", RegexOption.IGNORE_CASE)
     }
 
@@ -72,7 +72,7 @@ internal object Merger {
     ) {
         val closeables = mutableSetOf<Closeable>()
         try {
-            val merged = withContext(Dispatchers.Default) {
+            val merged = runInterruptible(Dispatchers.Default) {
                 try {
                     val logger = ApkEditorLogger(onProgress)
                     val bundle = ApkBundle().apply {
@@ -196,7 +196,7 @@ internal object Merger {
             applyExtractNativeLibs(merged)
 
             outputApk.parentFile?.mkdirs()
-            withContext(Dispatchers.IO) {
+            runInterruptible(Dispatchers.IO) {
                 onProgress?.invoke("Writing merged APK")
                 merged.writeApk(outputApk)
             }
@@ -225,18 +225,6 @@ internal object Merger {
         } finally {
             closeables.forEach(Closeable::close)
         }
-    }
-
-    private fun generateMergedModuleName(bundle: ApkBundle): String {
-        val moduleNames = bundle.listModuleNames().toSet()
-        val baseName = "merged"
-        var candidate = baseName
-        var index = 1
-        while (moduleNames.contains(candidate)) {
-            candidate = "${baseName}_$index"
-            index += 1
-        }
-        return candidate
     }
 
     private fun buildMergeOrder(
@@ -309,9 +297,9 @@ internal object Merger {
             val path = resValue.valueAsString
             if (!path.isNullOrBlank()) {
                 zipEntryMap.remove(path)
-                Log.i("APKEditor", "Removed table entry $path")
+                Log.i(TAG, "Removed table entry $path")
             }
-            resEntry.setNull(true)
+            resEntry.isNull = true
             val specTypePair: SpecTypePair = resEntry.typeBlock.parentSpecTypePair
             specTypePair.removeNullEntries(resEntry.id)
         }
@@ -323,7 +311,7 @@ internal object Merger {
         } else {
             null
         }
-        Log.i("APKEditor", "Applying: extractNativeLibs=$value")
+        Log.i(TAG, "Applying: extractNativeLibs=$value")
         module.setExtractNativeLibs(value)
     }
 }
