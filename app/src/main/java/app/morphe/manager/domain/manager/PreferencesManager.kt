@@ -1,5 +1,6 @@
 package app.morphe.manager.domain.manager
 
+import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import android.util.Log
@@ -15,6 +16,7 @@ import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
+import app.morphe.patcher.dex.BytecodeMode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
@@ -57,6 +59,15 @@ class PreferencesManager(
     val useExpertMode = booleanPreference("use_expert_mode", false)
 
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
+
+    /**
+     * Bytecode processing mode for the patcher.
+     * Defaults to [BytecodeMode.STRIP_FAST].
+     */
+    val bytecodeModePreference = enumPreference(
+        "bytecode_mode",
+        BytecodeMode.STRIP_FAST
+    )
 
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
@@ -164,6 +175,7 @@ class PreferencesManager(
         val backgroundUpdateNotifications: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
         val customBundles: List<BundleSnapshot>? = null,
+        val bytecodeModePreference: BytecodeMode? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -194,7 +206,8 @@ class PreferencesManager(
         backgroundType = backgroundType.get(),
         useExpertMode = useExpertMode.get(),
         backgroundUpdateNotifications = backgroundUpdateNotifications.get(),
-        updateCheckInterval = updateCheckInterval.get()
+        updateCheckInterval = updateCheckInterval.get(),
+        bytecodeModePreference = bytecodeModePreference.get(),
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -226,6 +239,7 @@ class PreferencesManager(
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.backgroundUpdateNotifications?.let { backgroundUpdateNotifications.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
+        snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
     }
 
     companion object {

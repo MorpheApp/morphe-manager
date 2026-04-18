@@ -441,6 +441,15 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_advanced_strip_unused_libs">Remove unused native libraries</string>
     <string name="settings_advanced_strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
 
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytecode processing mode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Controls how bytecode is processed during patching. Affects patching speed, memory usage, and output APK size</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Fast (Recommended)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Fast</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Faster patching and lower memory usage, at the cost of a larger APK. Recommended for low-RAM or older devices</string>
+    <string name="settings_advanced_bytecode_mode_full">Full</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Slower patching, replicates legacy behavior. Use only if fast mode causes issues</string>
+
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Required for pull request sources</string>
