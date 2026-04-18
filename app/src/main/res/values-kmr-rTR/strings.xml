@@ -399,6 +399,16 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_advanced_expert_mode_dialog_message">Moda pispor kontrola zêdetir ser bernameyên ku meriv pêdike, lê çêkirina bêreng di moda pispor de dikare bibe sedem ku sepan bibe nekar.</string>
     <string name="settings_advanced_strip_unused_libs">Kîle pêwist nakin ji rayaka orîjînalan derxîne</string>
     <string name="settings_advanced_strip_unused_libs_description">Rayakên orîjînal ên ji bo arîtekî têrxaniyê nedesînar, ji app vêjaer bikin</string>
+    <string name="settings_advanced_skip_unneeded_splits">дебере опосешини акексите лезу жайисесеси</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Пиюсериданиеяйемержеы, оточите локал, згелените и аби не необходимыся лезу аватоса припираедения. Качиствения мержение акксителинами акпикел</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Fêrqa pêşdaraziyê kodê</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kontrol dike ka kod çawa di dema guhertinê de pêşdarêzê. Bandor li ser leza guhertinê, karanîna bîr û mezinahiya APK ya derveyî dike.</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Lez (Pêşnebîr)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Çav</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Bitşik pêşandan û mêjiyê kêmtir, lê APK mezintir e. Ji bo alavên RAM kêm an kevnar tê pêşniyar.</string>
+    <string name="settings_advanced_bytecode_mode_full">Tam</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Bitşik hêzika hevpar, rewşa kevnar vejînê. Tenê bikarîne heke moda bilez xeletî çêbike.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT GitHub</string>
     <string name="settings_advanced_github_pat_description">Ragrapha qebul, pêvir be jibo seyarê ber dom</string>

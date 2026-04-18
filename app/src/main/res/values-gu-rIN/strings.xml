@@ -162,6 +162,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">પેચ વિકલ્પો</string>

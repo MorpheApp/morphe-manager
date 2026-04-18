@@ -400,6 +400,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">mode מומחה מספק יותר שליטה על איך התיקונים מופעלים, אך תצורתה של הגדרות ב-mode מומחה יכולה לגרום לאפליקציה שאינה פונקציונלית</string>
     <string name="settings_advanced_strip_unused_libs">הסר את קבצים נטוים</string>
     <string name="settings_advanced_strip_unused_libs_description">הסרת קבצים נטוים תאפשר מהיר יותר את הפיצ\'ח, אך ייתכן שלא תעבוד על מכשירים ישנים</string>
+    <string name="settings_advanced_skip_unneeded_splits">סנן APK מפוצלים עבור מכשיר</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">במהלך מיזוג, פסול גרסאות מקומיות, צפיפות ו-ABI שאינן נחוצות עבור מכשיר זה. מקטין את גודל ה-APK הממוזג</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">מצב עיבוד bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">שולט באופן עיבוד ה-bytecode במהלך תיקון. משפיע על מהירות התיקון, השימוש בזיכרון וגודל ה-APK הפלט.</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">מהיר (מומלץ)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">מהיר</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">תיקון מהיר יותר ושימוש בזיכרון נמוך יותר, על חשבון קובץ APK גדול יותר. מומלץ עבור מכשירים עם זיכרון RAM נמוך או ישנים יותר</string>
+    <string name="settings_advanced_bytecode_mode_full">מלא</string>
+    <string name="settings_advanced_bytecode_mode_full_description">תיקון איטי יותר, משכפל התנהגות ישנה. השתמש רק אם מצב מהיר גורם לבעיות</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">נדרש עבור מקורות בקשה רכש</string>

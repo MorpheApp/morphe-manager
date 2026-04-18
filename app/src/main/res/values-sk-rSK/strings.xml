@@ -353,6 +353,7 @@ Naozaj chcete pokračovať?"</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim pre skúsených poskytuje rozsiahlejšiu kontrolu nad tým, ako sa aplikujú záplaty, no nesprávna konfigurácia nastavení v tomto režime môže viesť k nefunkčnej aplikácii</string>
     <string name="settings_advanced_strip_unused_libs">Odstrániť nepoužívané natívne knižnice</string>
     <string name="settings_advanced_strip_unused_libs_description">Odstráňte natívne knižnice pre nepodporované CPU architektúry zo zaplátaných aplikácií</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Vyžadované pre pull request zdroje</string>

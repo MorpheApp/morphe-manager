@@ -401,6 +401,16 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="settings_advanced_expert_mode_dialog_message">O modo expert oferece mais controle sobre como os patches são aplicados, mas a má configuração de settings no modo expert pode resultar em um aplicativo não funcional</string>
     <string name="settings_advanced_strip_unused_libs">Remover bibliotecas nativas desnecessárias</string>
     <string name="settings_advanced_strip_unused_libs_description">Excluir bibliotecas nativas para arquiteturas de CPU não suportadas a partir de aplicativos patcheados</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtrar APKs divididos para o dispositivo</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Durante a mesclagem, pular as divisões de localidade, densidade e ABI que não são necessárias para este dispositivo. Reduz o tamanho do APK mesclado</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Modo de processamento de bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Controla como o bytecode é processado durante o patching. Afeta a velocidade do patching, o uso de memória e o tamanho do APK de saída</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Rápido (Recomendado)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Rápido</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Correção mais rápida e menor uso de memória, à custa de um APK maior. Recomendado para dispositivos com pouca RAM ou mais antigos</string>
+    <string name="settings_advanced_bytecode_mode_full">Completo</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Correção mais lenta, replica o comportamento legado. Use apenas se o modo rápido causar problemas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token de Acesso Pessoal da GitHub (PAT)</string>
     <string name="settings_advanced_github_pat_description">Exigido para fontes de solicitação pull</string>

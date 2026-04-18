@@ -401,6 +401,16 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_advanced_expert_mode_dialog_message">Chế độ chuyên gia cho phép bạn tùy chỉnh sâu hơn về cách các bản vá được áp dụng, nhưng nếu bạn chỉnh không đúng có thể khiến ứng dụng không hoạt động</string>
     <string name="settings_advanced_strip_unused_libs">Xóa thư viện gốc không cần</string>
     <string name="settings_advanced_strip_unused_libs_description">Xóa thư viện gốc cho kiến trúc CPU không được hỗ trợ từ ứng dụng đã vá</string>
+    <string name="settings_advanced_skip_unneeded_splits">Lọc APK tách nhỏ cho thiết bị</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Trong quá trình hợp nhất, bỏ qua các bản dựng theo định vị, mật độ và ABI không cần thiết cho thiết bị này. Giảm kích thước APK hợp nhất</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Chế độ xử lý bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Quy định cách xử lý bytecode trong quá trình vá. Ảnh hưởng đến tốc độ vá, mức dùng bộ nhớ và kích thước APK đầu ra</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Nhanh (khuyên dùng)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Nhanh</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Vá nhanh hơn và dùng ít bộ nhớ hơn, đổi lại APK sẽ lớn hơn. Khuyến nghị cho thiết bị RAM thấp hoặc đời cũ</string>
+    <string name="settings_advanced_bytecode_mode_full">Đầy đủ</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Vá chậm hơn, mô phỏng lại cơ chế cũ. Chỉ dùng nếu chế độ nhanh bị lỗi</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Mã PAT GitHub</string>
     <string name="settings_advanced_github_pat_description">Bắt buộc đối với các nguồn pull request</string>

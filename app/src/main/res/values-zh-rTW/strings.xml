@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">專家模式可以更精細地控制修補的套用方式，但如果專家模式下的設定設定錯誤，可能會造成應用程式無法正常運作</string>
     <string name="settings_advanced_strip_unused_libs">刪除未使用的原生函式庫</string>
     <string name="settings_advanced_strip_unused_libs_description">刪除不支援的 CPU 架構原生函式庫修補的應用程式</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filter APK 拆分資源，以供設備使用</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">合併時，跳過此設備不需要的地區設定、密度及 ABI 拆分。減少合併後的 APK 尺寸</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">位元組程式碼處理模式</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">控制修補程式處理位元組程式碼的方式。影響修補速度、記憶體使用量和輸出 APK 檔案大小</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">快速（建議）</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">快速</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">更快且佔用更少的記憶體，但 APK 檔案會更大。建議用於低記憶體或舊裝置</string>
+    <string name="settings_advanced_bytecode_mode_full">完整</string>
+    <string name="settings_advanced_bytecode_mode_full_description">修補速度較慢，呈現遺留行為。僅當快速模式出現問題時才使用</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub 權杖</string>
     <string name="settings_advanced_github_pat_description">用於合併請求捆綁包</string>

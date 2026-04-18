@@ -400,6 +400,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta omogućava veću kontrolu nad primenom patchova, ali pogrešno podešavanje postavki u režimu eksperta može da rezultuje nefunkcionalnom aplikacijom</string>
     <string name="settings_advanced_strip_unused_libs">Уклонити ненужне оригиналне библиотеке</string>
     <string name="settings_advanced_strip_unused_libs_description">Брисање ненужних оригиналних библиотека може повећати патчирање, али може бити недовољно за старије уређаје</string>
+    <string name="settings_advanced_skip_unneeded_splits">Филтрирајте подељене APK-ове за уређај</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Током спајања, прескочите језичке, густине и ABI поделе које нису потребне за овај уређај. Смањује величину спојеног APK-а</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Начин рада обраде байткода</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Контролише како се обрађује байткод током поправке. Утиче на брзину поправке, коришћење меморије и величину излазне APK датотеке</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Брзо (Препоручено)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Брзо</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Брже патчинг и мање коришћења меморије, на рачун веће APK величине. Препоручиво за уређаје са малом количином RAM или старије уређаје</string>
+    <string name="settings_advanced_bytecode_mode_full">Потпуно</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Полако пачирање, реплицира понашање старије верзије. Користите само ако брзи режим изазове проблеме</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Неопходно за изворе из GitHub pull request</string>

@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">এক্সপার্ট মোড অ্যাপ্লিকেশনগুলিতে প্যাচগুলি কীভাবে প্রয়োগ করা হবে তার উপর বেশি নিয়ন্ত্রণ প্রদান করে, কিন্তু এক্সপার্ট মোডে সেটিংস মিসকনফিগার করলে অ্যাপ্লিকেশনটি কাজ না করবে এমন অবস্থা হতে পারে</string>
     <string name="settings_advanced_strip_unused_libs">ব্যন্ত-নেটিভ লাইব্রেরিস মুছে ফেলুন</string>
     <string name="settings_advanced_strip_unused_libs_description">অনুসুশিত নয় এমন সিপ-আর্কিত লাইব্রেরিসগুলি প্যাচড অ্যাপ থেকে মুছে ফেলুন</string>
+    <string name="settings_advanced_skip_unneeded_splits">ডিভাইসের জন্য ফিল্টার করা APK</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">মার্জ করার সময়, এই ডিভাইসের জন্য ആവശ്യമ নেই এমন লোকেল, ডেনসিটি এবং ABI স্প্লিটগুলি বাদ দিন। মার্জ করা APK-এর আকার হ্রাস করে</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">বাইটকোর্ট প্রক্রিয়াকরণ মোড</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">প্যাচিং করার সময় বাইটকোর্ট কীভাবে প্রক্রিয়া করা হবে তা নিয়ন্ত্রণ করে। এটি প্যাচিং গতি, মেমরি ব্যবহার এবং আউটপুট APK আকারের উপর প্রভাব ফেলে</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">দ্রুত (সুপারিশ করা)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">দ্রুত</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">ধীর প্যাচিং এবং কম মেমরি ব্যবহার, তবে APK-এর আকার বড় হবে। কম RAM বা পুরোনো ডিভাইসের জন্য এটি উপযুক্ত</string>
+    <string name="settings_advanced_bytecode_mode_full">সম্পূর্ণ</string>
+    <string name="settings_advanced_bytecode_mode_full_description">ধীর প্যাচিং, আগের সংস্করণের আচরণ প্রতিলিপি করে। দ্রুত মোড সমস্যা সৃষ্টি করলে এটি ব্যবহার করুন</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">গিটহাব PAT</string>
     <string name="settings_advanced_github_pat_description">পুল অনুরোধ উৎসের জন্য প্রয়োজনীয়</string>

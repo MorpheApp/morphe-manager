@@ -394,6 +394,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="settings_advanced_expert_mode_dialog_message">Napredni način omogućuje više kontrole nad primjenom ispravljava, ali pogrešno konfiguriranje postavki u naprednom načinu može rezultirati nefunkcionalnom aplikacijom</string>
     <string name="settings_advanced_strip_unused_libs">Uklonite nekorištene izvorne biblioteke</string>
     <string name="settings_advanced_strip_unused_libs_description">Izbrišite izvorne biblioteke za nepodržane arhitekture procesora iz patchanih aplikacija</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Potrebno za izvlačenje zahtjeva</string>
