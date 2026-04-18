@@ -401,6 +401,16 @@ Le haghaidh na dtorthaí is fearr, molann an app seo míniú &lt;b&gt;APK iomlá
     <string name="settings_advanced_expert_mode_dialog_message">Tugann mód saineolaithe níos mó smachta ar an gcaoi a gcuirtear paistí i bhfeidhm, ach is féidir le socruithe míchumraithe i mód saineolaithe aip neamhfheidhmiúil a bheith mar thoradh air.</string>
     <string name="settings_advanced_strip_unused_libs">Bain leabharlanna dúchasacha neamhúsáidte</string>
     <string name="settings_advanced_strip_unused_libs_description">Scrios leabharlanna dúchasacha le haghaidh ailtireachtaí LAP neamhthacaithe ó aipeanna paisteáilte</string>
+    <string name="settings_advanced_skip_unneeded_splits">Scag APKanna le haghaidh rannadóir</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Le linn leascadh, scaga suíomh, dlúthdomacht agus scanna ABI nach bhfuil dearthaí ag teastáil don rannadóir seo. Laghdaíonn an APK leascáilte méid</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Modh comhshaoil bytecóid</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Rialach leis an modh comhshaoil bytecóid á úsáid le linn péintithe. Éifeacht ar luas péintithe, úsáid cuimhne, agus méid APK táirgeadh</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Tap (Molta)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Táirg</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Díbreach níos tapa agus úsáid cuimhne níos lú, ag costas APK mhoránaí. Moltar do ranna RAM íslithe nó seanchúrsaí</string>
+    <string name="settings_advanced_bytecode_mode_full">Iomlán</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Díbreach mall, áitíonn imreoir gníomhaíocht sheanacha. Úsáid ach más rud é go dtabharfaidh mod tapa fadhbanna</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT GitHub</string>
     <string name="settings_advanced_github_pat_description">Riachtanach le haghaidh foinsí iarratais tarraingthe</string>

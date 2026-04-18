@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">وضع الخبير يوفر مزيدًا من التحكم في كيفية تطبيق التعديلات، ولكن الإعداد الخاطئ لوضع الخبير يمكن أن يوقف التطبيق عن العمل</string>
     <string name="settings_advanced_strip_unused_libs">إزالة المكتبات الأصلية غير المستخدمة</string>
     <string name="settings_advanced_strip_unused_libs_description">حذف المكتبات الأصلية لبنى المعالجات غير المدعومة من التطبيقات المعدلة</string>
+    <string name="settings_advanced_skip_unneeded_splits">تصفية ملفات APK المقسمة للجهاز</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">أثناء الدمج، تخطي اللغات والكثافات وواجهات برمجة التطبيقات التي لا تحتاجها هذه الجهاز. يقلل من حجم ملف APK المدمج</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">وضع المعالجة Bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">يتحكم في كيفية معالجة Bytecode أثناء التعديل. يؤثر على سرعة التعديل، استخدام الذاكرة، وحجم APK الناتج</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">السريع (موصى به)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">السريع</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">تعديل أسرع واستخدام أقل للذاكرة، على حساب حجم APK أكبر. موصى به للأجهزة ذات ذاكرة الوصول العشوائي المنخفضة أو الأجهزة القديمة</string>
+    <string name="settings_advanced_bytecode_mode_full">الكامل</string>
+    <string name="settings_advanced_bytecode_mode_full_description">تعديل أبطأ، يكرر السلوك القديم. استخدمه فقط إذا تسبب الوضع السريع في حدوث مشكلات</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">رمز GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">مطلوب لمصادر طلب السحب</string>

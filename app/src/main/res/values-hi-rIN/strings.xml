@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">एक्सपर्ट मोड पट्चों को लागू करने के तरीके पर अधिक नियंत्रण देता है, लेकिन एक्सपर्ट मोड में सेटिंग्स गलत करने से अप्लिकेशन में काम नहीं करने का खतरा हो सकता है</string>
     <string name="settings_advanced_strip_unused_libs">अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
     <string name="settings_advanced_strip_unused_libs_description">पुराने डिवाइस आर्किटेक्चर के लिए अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
+    <string name="settings_advanced_skip_unneeded_splits">डिवाइस के लिए स्प्लिट APK फ़िल्टर करें</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">मर्ज के दौरान, इस डिवाइस के लिए आवश्यक न होने वाले लोकल, डेनसिटी और ABI स्प्लिट को छोड़ दें। मर्ज किए गए APK का आकार कम हो जाता है।</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">बाइटकोड प्रोसेसिंग मोड</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">पैचिंग के दौरान बाइटकोड कैसे प्रोसेस किया जाता है, यह नियंत्रित करता है। पैचिंग की गति, मेमोरी उपयोग और आउटपुट APK आकार को प्रभावित करता है</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">तेज़ (अनुशंसित)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">तेज़</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">तेज़ पैचिंग और कम मेमोरी का उपयोग, लेकिन APK का आकार बड़ा होगा। कम RAM या पुराने उपकरणों के लिए अनुशंसित</string>
+    <string name="settings_advanced_bytecode_mode_full">पूर्ण</string>
+    <string name="settings_advanced_bytecode_mode_full_description">धीमी पैचिंग, विरासत व्यवहार को दोहराती है। केवल तभी उपयोग करें जब तेज़ मोड में समस्या हो</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">प्रकाशन अनुरोध स्रोतों के लिए आवश्यक</string>

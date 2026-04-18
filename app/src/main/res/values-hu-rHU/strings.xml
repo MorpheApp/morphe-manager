@@ -401,6 +401,16 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="settings_advanced_expert_mode_dialog_message">A szakértői mód nagyobb ellenőrzést biztosít a módosítások alkalmazása felett, de ebben a módban a beállítások helytelen konfigurálása az alkalmazás működésképtelenségét eredményezheti</string>
     <string name="settings_advanced_strip_unused_libs">Távolítsa el a nem használt natív könyvtárakat</string>
     <string name="settings_advanced_strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a módosított alkalmazásokból</string>
+    <string name="settings_advanced_skip_unneeded_splits">Szűrj ki a készülékhez nem szükséges APK-kat</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Összeolvasztás során, hagyja ki a készülékhez nem szükséges nyelvi, sűrűségi és ABI bontásokat. Ez csökkenti az összeolvasztott APK méretét</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bájtkód feldolgozási mód</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Szabályozza, hogy a bájtkódot hogyan dolgozzák fel a javítás során. Hatással van a javítás sebességére, a memória használatára és a kimeneti APK méretére</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Gyors (Ajánlott)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Gyors</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Gyorsabb javítás és alacsonyabb memóriahasználat, nagyobb APK méret árán. Ajánlott alacsony RAM-mal vagy régebbi eszközök esetén</string>
+    <string name="settings_advanced_bytecode_mode_full">Teljes</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Lassabb javítás, a régi viselkedést tükrözi. Csak akkor használja, ha a gyors mód problémákat okoz</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Kötelező a pull request forrásokhoz</string>

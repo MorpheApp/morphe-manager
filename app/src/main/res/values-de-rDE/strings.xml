@@ -401,6 +401,16 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="settings_advanced_expert_mode_dialog_message">Der Experten-Modus gewährt mehr Kontrolle darüber, wie Patches angewendet werden, kann aber bei falscher Konfiguration zu einer nicht funktionsfähigen App führen</string>
     <string name="settings_advanced_strip_unused_libs">Entferne nicht verwendete, native Bibliotheken</string>
     <string name="settings_advanced_strip_unused_libs_description">Lösche native Bibliotheken für nicht unterstützte CPU-Architekturen aus gepatchten Apps</string>
+    <string name="settings_advanced_skip_unneeded_splits">Geräte-spezifische APKs filtern</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Beim Zusammenführen Lokalisierungs-, Dichte- und ABI-Splits überspringen, die für dieses Gerät nicht benötigt werden. Reduziert die Größe der zusammengeführten APK</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytecode-Verarbeitungsmodus</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Steuert, wie Bytecode während des Patch-Vorgangs verarbeitet wird. Beeinflusst Patch-Geschwindigkeit, Speichernutzung und Größe der Ausgabedatei APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Schnell (Empfohlen)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Schnell</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Schnelleres Patchen und geringerer Speicherverbrauch, jedoch bei größerer APK-Größe. Für Geräte mit wenig RAM oder älteren Geräten empfohlen</string>
+    <string name="settings_advanced_bytecode_mode_full">Vollständig</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Langsameres Patchen, repliziert das Legacy-Verhalten. Nur verwenden, wenn der Schnellmodus Probleme verursacht</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub-PAT</string>
     <string name="settings_advanced_github_pat_description">Erforderlich für Pull-Request-Quellen</string>

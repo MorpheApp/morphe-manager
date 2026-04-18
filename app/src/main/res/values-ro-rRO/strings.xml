@@ -401,6 +401,16 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="settings_advanced_expert_mode_dialog_message">Modul expert oferâ mai mult control asupra modului cum pateâturile sunt aplicaâ, dar o configurare greşită a setârilor poate duce la o aplicaâ nefuncțională</string>
     <string name="settings_advanced_strip_unused_libs">Elimină bibliotecile native nefolosite</string>
     <string name="settings_advanced_strip_unused_libs_description">Șterge bibliotecile native pentru arhitecturile CPU nesuportate din aplicațiile patch-uite</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtrează APK-uri divizate pentru dispozitiv</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">În timpul fuziunii, omite diviziunile pentru locație, densitate și ABI care nu sunt necesare pentru acest dispozitiv. Reduce dimensiunea APK-ului fuzionat</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Mod de procesare bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Controlează modul în care bytecode-ul este procesat în timpul patch-ului. Afectează viteza de patch, utilizarea memoriei și dimensiunea APK-ului de ieșire</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Rapid (Recomandat)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Rapid</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Reparare mai rapidă și utilizare mai mică a memoriei, în detrimentul unui APK mai mare. Recomandat pentru dispozitive cu memorie RAM redusă sau mai vechi</string>
+    <string name="settings_advanced_bytecode_mode_full">Complet</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Reparare mai lentă, reproduce comportamentul legacy. Utilizați numai dacă modul rapid cauzează probleme</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Jeton GitHub</string>
     <string name="settings_advanced_github_pat_description">Nevoie pentru surse de cerere de preluare</string>

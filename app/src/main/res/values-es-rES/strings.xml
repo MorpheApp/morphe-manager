@@ -39,7 +39,7 @@
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Abróchate el cinturón, es hora de parchear</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Otro día, otra obra maestra bloqueada por anuncios</string>
+    <string name="home_greeting_4">Otro día, otra obra maestra con anuncios bloqueados</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">¿Quieres ver anuncios? Yo tampoco</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
@@ -401,6 +401,16 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_advanced_expert_mode_dialog_message">El modo experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente los ajustes en modo experto puede resultar en una aplicación no funcional</string>
     <string name="settings_advanced_strip_unused_libs">Eliminar bibliotecas nativas no utilizadas</string>
     <string name="settings_advanced_strip_unused_libs_description">Eliminar bibliotecas nativas para arquitecturas de CPU no compatibles de las aplicaciones parcheadas</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtrar APKs divididos para dispositivo</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Durante la fusión, omitir las divisiones de idioma, densidad y ABI que no son necesarias para este dispositivo. Reduce el tamaño del APK fusionado</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Modo de procesamiento de bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Controla cómo se procesa el bytecode durante el parcheo. Afecta a la velocidad de parcheo, el uso de memoria y el tamaño del APK de salida</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Rápido (Recomendado)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Rápido</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Parcheo más rápido y menor uso de memoria, a costa de un APK más grande. Recomendado para dispositivos con poca memoria RAM o más antiguos.</string>
+    <string name="settings_advanced_bytecode_mode_full">Completo</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Parcheo más lento, replica el comportamiento heredado. Utilizar solo si el modo rápido causa problemas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token de acceso personal de GitHub</string>
     <string name="settings_advanced_github_pat_description">Requerido para fuentes de solicitud de extracción</string>

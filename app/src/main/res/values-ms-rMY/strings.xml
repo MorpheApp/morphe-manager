@@ -390,6 +390,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
     <string name="settings_advanced_strip_unused_libs">Buang pustaka asli yang tidak digunakan</string>
     <string name="settings_advanced_strip_unused_libs_description">Padamkan pustaka asli untuk seni bina CPU yang tidak disokong dari aplikasi yang ditampal</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Diperlukan untuk sumber permintaan sedekah</string>

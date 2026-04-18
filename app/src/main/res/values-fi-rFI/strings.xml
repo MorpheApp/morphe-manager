@@ -400,6 +400,16 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_advanced_expert_mode_dialog_message">Expert-moodi antaa enemmän valtaa päivitysten sovittamisesta, mutta väärin asetettu expert-moodi voi johtaa sovelluksen toimimattomuuteen</string>
     <string name="settings_advanced_strip_unused_libs">Poista käyttämättömät natiivikirjastot</string>
     <string name="settings_advanced_strip_unused_libs_description">Poista tukemattomien suoritinarkkitehtuurien natiivikirjastot paikatuista sovelluksista</string>
+    <string name="settings_advanced_skip_unneeded_splits">Suodata laitekohtaiset APK:t</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Yhdistäminen aikana ohita kieliversio-, tiheys- ja ABI-erottelut, joita tämä laite ei tarvitse. Vähentää yhdistetyn APK:n kokoa</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytekoodin käsittelytila</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Määrittää, miten bytecode käsitellään paikkatessa. Vaikuttaa paikkatuksen nopeuteen, muistin käyttöön ja ulostulon APK:n kokoon</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Nopea (Suositeltu)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Nopea</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Nopeampi korjaus ja pienempi muistin käyttö, mutta APK-tiedoston koko kasvaa. Suositellaan laiteille, joissa on vähän RAM-muistia tai vanhoille laitteille</string>
+    <string name="settings_advanced_bytecode_mode_full">Koko</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Hitaampi korjaus, toistaa vanhaa toimintaa. Käytä vain, jos pika-moodi aiheuttaa ongelmia</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Vaatimus pull request lähteille</string>

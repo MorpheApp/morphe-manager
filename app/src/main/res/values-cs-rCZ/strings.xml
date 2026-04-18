@@ -401,6 +401,16 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="settings_advanced_expert_mode_dialog_message">Expert mód poskytuje více kontroly nad aplikací patchů, ale špatná konfigurace nastavení v expert módu může vést k nefunkční aplikaci</string>
     <string name="settings_advanced_strip_unused_libs">Odstranit nepoužívané nativní knihovny</string>
     <string name="settings_advanced_strip_unused_libs_description">Smazat nativní knihovny pro nepodporované architektury CPU ze záplatovaných aplikací</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtrovat rozdělené APK pro zařízení</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Během slučování přeskočit jazykové verze, hustoty a ABI, které zařízení nepotřebuje. Snižuje velikost sloučeného APK</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Režim zpracování bajtkódu</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Určuje, jak je bajtkód zpracováván během záplatování. Ovlivňuje rychlost záplatování, využití paměti a velikost výstupní APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Rychlé (Doporučeno)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Rychle</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Rychlejší opravy a nižší využití paměti, na úkor větší velikosti APK. Doporučeno pro zařízení s nízkou RAM nebo starší zařízení</string>
+    <string name="settings_advanced_bytecode_mode_full">Kompletní</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Pomalé opravy, replikuje chování starších verzí. Používejte pouze v případě, že rychlý režim způsobuje problémy</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Požadováno pro zdroje pull requestů</string>

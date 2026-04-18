@@ -400,6 +400,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mütəxəssis rejimi yamaqların necə tətbiq olunduğuna daha çox nəzarət verir, lakin mütəxəssis rejimindəki tənzimləmələri səhv qurma tətbiqi funksional pozuntuya sala bilər</string>
     <string name="settings_advanced_strip_unused_libs">İşlədilməyən yerli kitabxanaları təmizlə</string>
     <string name="settings_advanced_strip_unused_libs_description">Yamalanan tətbiqlərdən dəstəklənməyən CPU quruluşları üçün yerli kitabxanaları silin</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Pull request mənbələri üçün tələb olunur</string>

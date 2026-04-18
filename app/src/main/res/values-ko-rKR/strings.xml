@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">전문가 모드에서는 패치를 적용하는 방식을 더 세밀하게 조절할 수 있지만, 설정을 잘못 건드리면 앱이 정상적으로 작동하지 않을 수 있습니다</string>
     <string name="settings_advanced_strip_unused_libs">사용되지 않는 라이브러리 제거</string>
     <string name="settings_advanced_strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
+    <string name="settings_advanced_skip_unneeded_splits">장치용 분할 APK 필터</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">병합하는 동안 이 장치에 필요하지 않은 로케일, 밀도 및 ABI 분할을 건너니다. 병합된 APK 크기를 줄입니다.</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">바이트코드 처리 모드</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">패치 과정에서 바이트코드를 처리하는 방식을 제어합니다. 패치 속도, 메모리 사용량 및 출력 APK 크기에 영향을 줍니다</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">빠름 (권장)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">빠름</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">더 빠른 패치 속도와 낮은 메모리 사용량을 제공하지만, APK 크기가 커집니다. 저사양 또는 RAM이 적은 기기에 권장됩니다</string>
+    <string name="settings_advanced_bytecode_mode_full">최대</string>
+    <string name="settings_advanced_bytecode_mode_full_description">느린 패치 속도로 기존 동작 방식과 동일하게 작동합니다. 빠른 모드에서 문제가 발생할 때만 사용하세요</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub 개인 액세스 토큰</string>
     <string name="settings_advanced_github_pat_description">풀 리퀘스트 소스에 필요합니다</string>
@@ -532,7 +542,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime">프로세스 런타임</string>
     <string name="settings_system_process_runtime_description">안정성 향상을 위해 패치를 별도의 프로세스에서 실행합니다</string>
     <string name="settings_system_process_runtime_memory_limit">메모리 제한</string>
-    <string name="settings_system_process_runtime_memory_limit_description">메모리 제한을 높이면 패치 속도가 빨라질 수 있지만 구형 기기에서는 작동되지 않을 수 있습니다</string>
+    <string name="settings_system_process_runtime_memory_limit_description">메모리 제한을 높이면 패치 속도가 빨라질 수 있지만 저사양 기기에서는 작동되지 않을 수 있습니다</string>
     <string name="settings_system_process_runtime_enable">프로세스 런타임 활성화</string>
     <string name="settings_system_memory_limit_subtitle">패치에 사용 가능한 메모리</string>
     <string name="settings_system_memory_limit_warning">메모리 제한이 낮으면 대용랑 앱을 패치할 경우에 오류가 발생할 수 있습니다</string>

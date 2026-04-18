@@ -401,6 +401,16 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_advanced_expert_mode_dialog_message">Nagbibigay ng higit na kontrol ang Expert mode sa kung paano inilalapat ang mga patch, ngunit ang maling pagkompigura ng mga pagpipilian sa expert mode ay maaaring magresulta sa isang hindi gumaganang aplikasyon</string>
     <string name="settings_advanced_strip_unused_libs">Alisin ang mga hindi nagamit na mga native library</string>
     <string name="settings_advanced_strip_unused_libs_description">Burahin ang mga native library para sa mga hindi suportadong arkitektura ng CPU mula sa mga na-patch na aplikasyon</string>
+    <string name="settings_advanced_skip_unneeded_splits">Salain ang mga split APK para sa device</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Sa panahon ng pagsasama, laktawan ang mga locale, density, at ABI split na hindi kailangan para sa device na ito. Binabawasan ang laki ng merged APK</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Paraan ng pagproseso ng bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kinokontrol kung paano ipinoproseso ang bytecode sa panahon ng pag-patch. Nakakaapekto sa bilis ng pag-patch, paggamit ng memorya, at sukat ng output na APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Mabilis (Inirerekomenda)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Mabilis</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Mas mabilis na pag-patch at mas mababang paggamit ng memorya, sa kapinsalaan ng mas malaking APK. Inirerekomenda para sa mga low-RAM o mas lumang device</string>
+    <string name="settings_advanced_bytecode_mode_full">Buo</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Mas mabagal na pag-patch, gumagaya sa legacy na pag-uugali. Gamitin lamang kung nagiging sanhi ng isyu ang fast mode</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Kailangan para sa mga pull request sources</string>

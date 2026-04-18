@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%s stik</item>
-        <item quantity="other">%s stikkeplads</item>
+        <item quantity="one">%s patch</item>
+        <item quantity="other">%s patches</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s valgmulighed</item>
-        <item quantity="other">%s valgmuligheder</item>
+        <item quantity="one">%s patch valgmulighed</item>
+        <item quantity="other">%s patch valgmuligheder</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s kilde</item>

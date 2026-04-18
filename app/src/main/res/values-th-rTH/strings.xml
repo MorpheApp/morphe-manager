@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมการนำเข้าแปลงมากขึ้น แต่การตั้งค่าค่าไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปพลิเคชันไม่สามารถใช้งานได้</string>
     <string name="settings_advanced_strip_unused_libs">ลบเนทิฟไลบรารีที่ไม่ได้ใช้</string>
     <string name="settings_advanced_strip_unused_libs_description">ลบเนทิฟไลบรารีที่ไม่รองรับสถาปัตยกรรมของ CPU บนอุปกรณ์ของคุณ จากแอปที่ถูกแพตซ์</string>
+    <string name="settings_advanced_skip_unneeded_splits">กรอง APK แบบแยกตามอุปกรณ์</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">ระหว่างการรวมไฟล์ ให้ข้ามการแยกตามภาษา, ความหนาแน่นหน้าจอ และสถาปัตยกรรม (ABI) ที่ไม่จำเป็นสำหรับอุปกรณ์นี้ ลดขนาด APK ที่รวมไฟล์</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">โหมดการประมวลผลไบต์โค้ด</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">ควบคุมวิธีการประมวลผลไบต์โค้ดในระหว่างการแก้ไขแพตช์ มีผลต่อความเร็วในการแก้ไข การใช้หน่วยความจำ และขนาด APK ที่ได้</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">รวดเร็ว (แนะนำ)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">เร็ว</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">การปรับปรุงแพตช์ที่เร็วขึ้นและการใช้หน่วยความจำน้อยลง แต่มีขนาด APK ที่ใหญ่ขึ้น แนะนำสำหรับอุปกรณ์ที่มี RAM ต่ำหรือเก่า</string>
+    <string name="settings_advanced_bytecode_mode_full">เต็ม</string>
+    <string name="settings_advanced_bytecode_mode_full_description">การปรับแพตช์ที่ช้าลง ทำซ้ำพฤติกรรมเดิม ใช้เฉพาะเมื่อโหมดที่เร็วทำให้เกิดปัญหา</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">โทเคน GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแหล่งขอร้องข้อมูล</string>
