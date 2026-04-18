@@ -401,6 +401,16 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_advanced_expert_mode_dialog_message">De expertmodus biedt meer controle over hoe patches worden toegepast, maar een verkeerde configuratie in de expertmodus kan ertoe leiden dat de app niet meer werkt</string>
     <string name="settings_advanced_strip_unused_libs">Verwijder ongebruikte native bibliotheken</string>
     <string name="settings_advanced_strip_unused_libs_description">Verwijder native library\'s voor niet-ondersteunde CPU-architecturen uit gepatchte apps</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filter split APKs voor apparaat</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Tijdens het samenvoegen, negeer locale, dichtheid en ABI splits die niet nodig zijn voor dit apparaat. Vermindert de grootte van het samengevoegde APK-bestand</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytecode-verwerkingsmodus</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Regelt hoe bytecode wordt verwerkt tijdens patchen. Beïnvloedt patchesnelheid, geheugengebruik en APK-grootte</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Snel (Aanbevolen)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Snel</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Sneller patchen en minder geheugen gebruiken, ten koste van een grotere APK. Aanbevolen voor apparaten met weinig RAM of oudere apparaten</string>
+    <string name="settings_advanced_bytecode_mode_full">Volledig</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Langzamer patchen, repliceert eerder gedrag. Alleen gebruiken als de snelle modus problemen veroorzaakt</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Vereist voor pull request-bronnen</string>

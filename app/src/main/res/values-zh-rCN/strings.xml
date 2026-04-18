@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">专家模式提供了更多控制如何应用补丁的选项，但如果错误配置专家模式设置，可能会导致应用程序无法使用</string>
     <string name="settings_advanced_strip_unused_libs">移除未使用的原生库</string>
     <string name="settings_advanced_strip_unused_libs_description">从修补的应用中删除不支持 CPU 架构的原生库</string>
+    <string name="settings_advanced_skip_unneeded_splits">筛选设备所需的拆分 APK</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">合并时，跳过当前设备不需要的区域设置、密度和 ABI 拆分。减少合并后的 APK 大小</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">字节码处理模式</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">控制打补丁期间字节码的处理方式。影响打补丁的速度、内存使用情况和输出 APK 大小</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">快速（推荐）</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">快速</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">更快地进行补丁，且内存占用更低，但 APK 文件会更大。 推荐用于内存较低或较旧的设备</string>
+    <string name="settings_advanced_bytecode_mode_full">完整</string>
+    <string name="settings_advanced_bytecode_mode_full_description">补丁速度较慢，复制了旧行为。 仅当快速模式出现问题时才使用</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">用于拉取请求源所需</string>

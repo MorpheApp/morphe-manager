@@ -402,6 +402,16 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_advanced_expert_mode_dialog_message">Mode ahli memberikan kontrol yang lebih banyak terhadap bagaimana penambalan diterapkan, tetapi pengaturan yang salah dalam mode ahli dapat menyebabkan aplikasi tidak berfungsi</string>
     <string name="settings_advanced_strip_unused_libs">Hapus pustaka bawaan yang tidak digunakan</string>
     <string name="settings_advanced_strip_unused_libs_description">Hapus pustaka bawaan untuk arsitektur CPU yang tidak didukung dari aplikasi yang ditambal</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filter APK split untuk perangkat</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Saat penggabungan, lewati split lokal, kepadatan, dan ABI yang tidak diperlukan untuk perangkat ini. Mengurangi ukuran APK gabungan</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Mode pemrosesan bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Mengontrol bagaimana bytecode diproses selama penambalan. Memengaruhi kecepatan penambalan, penggunaan memori, dan ukuran APK yang dihasilkan</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Cepat (Direkomendasikan)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Cepat</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Penambalan lebih cepat dan penggunaan memori lebih rendah, namun dengan ukuran APK yang lebih besar. Direkomendasikan untuk perangkat dengan RAM rendah atau perangkat lama</string>
+    <string name="settings_advanced_bytecode_mode_full">Lengkap</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Penambalan yang lebih lambat, meniru perilaku versi lama. Gunakan hanya jika mode cepat menimbulkan masalah</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT GitHub</string>
     <string name="settings_advanced_github_pat_description">Dibutuhkan untuk permintaan tarik sumber</string>

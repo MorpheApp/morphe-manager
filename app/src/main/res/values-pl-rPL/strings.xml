@@ -401,6 +401,16 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
     <string name="settings_advanced_strip_unused_libs">Usuń nieużywane biblioteki natywne</string>
     <string name="settings_advanced_strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtruj podzielone pliki APK dla urządzenia</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Podczas łączenia, pomijaj lokalizacje, gęstości i ABI, które nie są potrzebne dla tego urządzenia. Zmniejsza to rozmiar połączonego pliku APK</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Tryb przetwarzania kodu bajtowego</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Określa sposób przetwarzania kodu bajtowego podczas modyfikowania. Wpływa to na szybkość procesu, zużycie pamięci i końcowy rozmiar pliku APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Szybki (Zalecane)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Szybki</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Szybsze modyfikowanie i mniejsze zużycie pamięci kosztem większego pliku APK. Zalecane dla starszych urządzeń z małą ilością RAM-u</string>
+    <string name="settings_advanced_bytecode_mode_full">Pełny</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Wolniejsze modyfikowanie klasyczną metodą. Używaj tylko wtedy, gdy tryb szybki powoduje problemy</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token GitHub</string>
     <string name="settings_advanced_github_pat_description">Wymagany dla źródeł z Pull Requestów</string>

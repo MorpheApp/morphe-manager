@@ -20,6 +20,7 @@ import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.manager.worker.UpdateCheckWorker
+import app.morphe.patcher.dex.BytecodeMode
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.Dispatchers
@@ -189,8 +190,13 @@ class SettingsViewModel(
         prefs.patcherProcessMemoryLimit.update(limit)
     }
 
+    /** Enables/disables native library stripping for plain APKs, and simultaneously split APK filtering for split bundles. */
     fun setStripUnusedNativeLibs(enabled: Boolean) = viewModelScope.launch {
         prefs.stripUnusedNativeLibs.update(enabled)
+    }
+
+    fun setBytecodeMode(mode: BytecodeMode) = viewModelScope.launch {
+        prefs.bytecodeModePreference.update(mode)
     }
 
     fun setGitHubPat(pat: String, includeInExport: Boolean) = viewModelScope.launch {

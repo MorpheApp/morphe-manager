@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">Экспертный режим предоставляет больше контроля над применением патчей, но неправильная настройка параметров в экспертном режиме может привести к нетрудоспособности программы.</string>
     <string name="settings_advanced_strip_unused_libs">Удалить неиспользуемые нативные библиотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Удалить нативные библиотеки для неподдерживаемых архитектур CPU из пропатченных приложений</string>
+    <string name="settings_advanced_skip_unneeded_splits">Фильтр разделенных APK для устройства</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">При слиянии пропускать локали, плотность и ABI, не необходимые для этого устройства. Уменьшает размер объединенного APK</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Режим обработки байт-кода</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Управление процессом обработки байт-кода при установке патчей. Влияет на скорость установки патчей, использование памяти и размер исходного APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Быстро (Рекомендовано)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Быстро</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Быстрее патчинг и меньшее использование памяти, но размер APK будет больше. Рекомендовано для устройств с малым объемом оперативной памяти или старых устройств</string>
+    <string name="settings_advanced_bytecode_mode_full">Полный</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Более медленный патчинг, воспроизводит устаревшее поведение. Используйте только если быстрый режим вызывает проблемы</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub Токен</string>
     <string name="settings_advanced_github_pat_description">Обязательно для источников запросов на слияние</string>
@@ -684,7 +694,7 @@ morphe_header_custom_dark.png
     <string name="hide">Скрыть</string>
     <string name="default_">По умолчанию</string>
     <string name="logs">Журналы</string>
-    <string name="sources">Источника</string>
+    <string name="sources">Источники</string>
     <string name="installing_ellipsis">Установка…</string>
     <string name="mounting_ellipsis">Монтаж…</string>
     <string name="unmounting_ellipsis">Размонтирование…</string>

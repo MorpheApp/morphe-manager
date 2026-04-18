@@ -401,6 +401,16 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta daje više kontrole nad primenom patchova, ali pogrešno podešavanje u režimu eksperta može da rezultuje u nefunkcionalnoj aplikaciji</string>
     <string name="settings_advanced_strip_unused_libs">Ukloni neiskoristane native biblioteka</string>
     <string name="settings_advanced_strip_unused_libs_description">Brisanje neiskoristane native biblioteka može usporedati patchiranje ali možda neće funkcionisati na stariji uređenicima</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtirajte podeljene APK-ove za uređaj</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Tokom spajanja, preskočite lokalizacije, gustine i ABI podeljene verzije koje nisu potrebne za ovaj uređaj. Smanjuje veličinu spojenog APK-a</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Način obrade bajtkoda</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kontroliše kako se bajtkod obrađuje tokom popravki. Utiče na brzinu popravki, korišćenje memorije i veličinu izlaznog APK fajla</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Brzo (Preporučeno)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Brzo</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Brže ispravljanje i manja upotreba memorije, uz veći APK. Preporučeno za uređaje sa malo RAM-a ili starije uređaje</string>
+    <string name="settings_advanced_bytecode_mode_full">Puno</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Sporije ispravljanje, replicira staro ponašanje. Koristiti samo ako brzi režim izaziva probleme</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Potrebno za izvore zahtjeva za povlačenje</string>

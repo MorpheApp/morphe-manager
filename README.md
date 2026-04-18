@@ -106,6 +106,11 @@ That's it. Once Morphe is installed, everything else happens inside the app.
 
 For guides, FAQs, and troubleshooting, visit **[morphe.software](https://morphe.software)** or join the community on **[Reddit](https://www.reddit.com/r/MorpheApp)**.
 
+## 📙 Contributing
+
+Thank you for considering contributing to Morphe Manager.
+You can find the contribution guidelines [here](CONTRIBUTING.md).
+
 ## ❗ About
 
 Morphe is built on the foundation of [ReVanced Manager](https://github.com/ReVanced/revanced-manager) and [URV](https://github.com/Jman-Github/Universal-ReVanced-Manager). All changes made by Morphe are documented in the Git history.

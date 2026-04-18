@@ -188,16 +188,6 @@
             </intent-filter>
         </activity-alias>
 
-        <service android:name="app.morphe.manager.service.InstallService" />
-        <service android:name="app.morphe.manager.service.UninstallService" />
-
-        <receiver
-            android:name="app.morphe.manager.receiver.InstallReceiver"
-            android:exported="false" />
-        <receiver
-            android:name="app.morphe.manager.receiver.UninstallReceiver"
-            android:exported="false" />
-
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType="specialUse"
@@ -231,6 +221,10 @@
             <meta-data
                 android:name="androidx.work.WorkManagerInitializer"
                 android:value="androidx.startup"
+                tools:node="remove" />
+            <!-- Disable Ackpine's notification channel -->
+            <meta-data
+                android:name="ru.solrudev.ackpine.AckpineInitializer"
                 tools:node="remove" />
         </provider>
 

@@ -1,3 +1,29 @@
+# [1.16.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.2...v1.16.0-dev.3) (2026-04-18)
+
+
+### Bug Fixes
+
+* Handle `InstallFailure` result when installing manager update ([a4d1eb8](https://github.com/MorpheApp/morphe-manager/commit/a4d1eb8a99dc53d59f23df3d7bb8ad3725edd1c4))
+
+
+### Features
+
+* Migrate to `Ackpine` for package installation/uninstallation ([#444](https://github.com/MorpheApp/morphe-manager/issues/444)) ([aa7207d](https://github.com/MorpheApp/morphe-manager/commit/aa7207d486427753eb56c18ddd29d481f1a3605e))
+
+# [1.16.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.1...v1.16.0-dev.2) (2026-04-18)
+
+
+### Features
+
+* Add fast bytecode mode setting to expert mode ([#403](https://github.com/MorpheApp/morphe-manager/issues/403)) ([e73c63c](https://github.com/MorpheApp/morphe-manager/commit/e73c63c7fcce14d5d38ce8b8cde26feed4a6e5e4))
+
+# [1.16.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0...v1.16.0-dev.1) (2026-04-17)
+
+
+### Features
+
+* Store merged APK from split archives as original for repatching ([#438](https://github.com/MorpheApp/morphe-manager/issues/438)) ([be0b868](https://github.com/MorpheApp/morphe-manager/commit/be0b86866f5e9f5e8aad4b596158084d03189fa3))
+
 # [1.15.0](https://github.com/MorpheApp/morphe-manager/compare/v1.14.0...v1.15.0) (2026-04-17)
 
 

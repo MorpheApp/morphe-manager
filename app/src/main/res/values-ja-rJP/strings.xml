@@ -81,7 +81,7 @@
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">利用可能な更新はありません</string>
     <string name="sources_download_fail">ソースのダウンロードに失敗しました: %s</string>
-    <string name="sources_download_fail_named">\"%1$s\"のダウンロードに失敗しました: %2$s</string>
+    <string name="sources_download_fail_named">「%1$s」のダウンロードに失敗しました: %2$s</string>
     <string name="sources_download_endpoint_not_found">「%1$s」 を更新できませんでした: パッチ JSON ファイルが指定した URL に存在しません</string>
     <string name="sources_patch_expert_badge">エキスパート</string>
     <string name="sources_patch_expert_badge_tooltip">このパッチを手動で追加するには、設定でエキスパートモードを有効にしてください</string>
@@ -114,8 +114,8 @@
     <string name="home_selected_version">選択したバージョン</string>
     <string name="home_select_apk_title">APK を選択</string>
     <string name="home_select_any_apk_description">以下のボタンをタップして、パッチを当てたいアプリの APK ファイルを選択してください</string>
-    <string name="home_invalid_apk_unreadable">ファイルを読み込めませんでした。\'外部ストレージ\'がバッテリー制限されていないか確認してください</string>
-    <string name="home_invalid_apk_not_an_apk">選択されたファイルは有効なAPKではありません</string>
+    <string name="home_invalid_apk_unreadable">ファイルを読み込めませんでした。「外部ストレージ」がバッテリー制限の対象になっていないか確認してください</string>
+    <string name="home_invalid_apk_not_an_apk">選択されたファイルは有効な APK ではありません</string>
     <string name="home_invalid_apk_io_error">ファイルを開けませんでした。もう一度お試しください</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">エキスパートモード</string>
@@ -124,7 +124,7 @@
     <string name="expert_mode_disable_all">全て無効化する</string>
     <string name="expert_mode_enable_all">全て有効化する</string>
     <string name="expert_mode_reset_to_default">推奨されるパッチを有効にする</string>
-    <string name="expert_mode_restore_saved">保存済みセレクションを復元</string>
+    <string name="expert_mode_restore_saved">保存済みのパッチセレクションを復元する</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_universal_patches">ユニバーサルパッチ</string>
     <string name="expert_mode_new_patches">新規</string>
@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">エキスパートモードではパッチ適用の詳細設定が可能ですが、設定を誤るとアプリが正常に動作しなくなる可能性があります</string>
     <string name="settings_advanced_strip_unused_libs">未使用のネイティブライブラリの削除</string>
     <string name="settings_advanced_strip_unused_libs_description">パッチ適用済みアプリから、非対応の CPU アーキテクチャ向けネイティブ ライブラリを削除します</string>
+    <string name="settings_advanced_skip_unneeded_splits">デバイス向けにAPKスプリットをフィルタリングする</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">マージ中に、このデバイスに必要なロケール、密度、およびABIのスプリットをスキップします。マージされたAPKのサイズを削減します</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">バイトコード処理モード</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">パッチ適用時のバイトコードの処理方法を設定します。処理速度、メモリ使用量、出力 APK のサイズに影響します</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">高速 (推奨)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">高速</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">パッチ処理を高速化し、メモリ使用量を抑えますが、出力 APK のサイズが大きくなります。低 RAM 環境や古い端末におすすめです</string>
+    <string name="settings_advanced_bytecode_mode_full">フル</string>
+    <string name="settings_advanced_bytecode_mode_full_description">パッチ処理は遅くなりますが、従来の動作を再現します。高速モードで問題が発生する場合のみ使用してください</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT の設定</string>
     <string name="settings_advanced_github_pat_description">プルリクエスト ソースに必要です</string>
@@ -615,7 +625,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
     <string name="settings_system_share_website_description">Morphe の公式ウェブサイトを共有します</string>
-    <string name="settings_system_manager_description">"コミュニティからのフィードバックと貢献によって推進される、人気の Android アプリの最新かつ効率的なパッチを適用するためのオープンソースプロジェクトです"</string>
+    <string name="settings_system_manager_description">"人気の Android アプリを現代的で効率的にパッチを適用するためのオープンソースプロジェクトです。コミュニティのフィードバックや貢献によって発展しています"</string>
     <string name="credits">クレジット</string>
     <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>
@@ -689,7 +699,7 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">マウント中…</string>
     <string name="unmounting_ellipsis">アンマウント中…</string>
     <string name="importing_ellipsis">インポート中…</string>
-    <string name="imported_successfully">設定のインポートに成功しました</string>
+    <string name="imported_successfully">インポートに成功しました</string>
     <string name="changelog">変更履歴を表示</string>
     <string name="changelog_description">最新のアップデートでの変更点を確認します</string>
     <string name="changelog_download_fail">変更履歴のダウンロードに失敗しました: %s</string>

@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності застосунку</string>
     <string name="settings_advanced_strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
     <string name="settings_advanced_strip_unused_libs_description">Видаляти нативні бібліотеки для непідтримуваних архітектур процесора з патчених застосунків</string>
+    <string name="settings_advanced_skip_unneeded_splits">Фільтрувати розділені APK для пристрою</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Під час об\'єднання пропускати локалі, щільність та ABI розділів, які не потрібні для цього пристрою. Зменшує розмір об\'єднаного APK</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Режим обробки байт-коду</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Керує процесом обробки байт-коду під час встановлення патчів. Впливає на швидкість встановлення патчів, використання пам\'яті та розмір вихідного APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Швидко (Рекомендовано)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Швидко</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Швидше патчінг та менше використання пам\'яті, але розмір APK буде більшим. Рекомендовано для пристроїв з малим обсягом оперативної пам\'яті або старих пристроїв</string>
+    <string name="settings_advanced_bytecode_mode_full">Повний</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Повільніший патчінг, відтворює застарілу поведінку. Використовуйте лише якщо швидкий режим викликає проблеми</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Потрібно для використання pull request як джерела</string>
@@ -487,7 +497,7 @@ morphe_header_custom_dark.png
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Приховати функціонал Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Приховати ярлик Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Прибрати Shorts з меню довгого натискання у лаунчері</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Прибрати Shorts з меню тривалого натискання у лаунчері</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Приховати віджет Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Прибрати кнопку Shorts з віджета лаунчера</string>
     <!-- Settings - System Tab - Installer Section -->

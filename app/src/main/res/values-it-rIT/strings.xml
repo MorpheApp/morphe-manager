@@ -401,6 +401,16 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="settings_advanced_expert_mode_dialog_message">La modalità esperto fornisce un maggiore controllo su come vengono applicate le patch, ma la configurazione errata delle impostazioni in modalità esperto può produrre un\'app non funzionante</string>
     <string name="settings_advanced_strip_unused_libs">Elimina le librerie native non utilizzate</string>
     <string name="settings_advanced_strip_unused_libs_description">Elimina i file delle librerie native dalle app patchate per le architetture CPU non supportate</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtra gli APK split per dispositivo</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Durante la fusione, salta le localizzazioni, le densità e le suddivisioni ABI non necessarie per questo dispositivo. Riduce le dimensioni dell\'APK unito</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Modalità di elaborazione bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Controlla come il bytecode viene elaborato durante l\'applicazione delle patch. Influisce sulla velocità di patching, sull\'utilizzo della memoria e sulla dimensione APK di output</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Veloce (Consigliata)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Veloce</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Patching più veloce e minore utilizzo della memoria, a costo di un APK più grande. Consigliato per dispositivi con poca RAM o più vecchi</string>
+    <string name="settings_advanced_bytecode_mode_full">Completo</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Patching più lento, replica il comportamento precedente. Utilizzare solo se la modalità rapida causa problemi</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token di accesso personale di GitHub</string>
     <string name="settings_advanced_github_pat_description">Richiesto per le sorgenti delle richieste di pull</string>

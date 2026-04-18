@@ -398,6 +398,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur korrigeringarna tillämpas, men om du felaktigt konfigurerar inställningarna i expertläget kan det leda till att appen inte fungerar</string>
     <string name="settings_advanced_strip_unused_libs">Ta bort oanvända plattformsspecifika bibliotek</string>
     <string name="settings_advanced_strip_unused_libs_description">Ta bort plattformsspecifika bibliotek för CPU-arkitekturer som inte stöds från korrigerade appar.</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT för GitHub</string>
     <string name="settings_advanced_github_pat_description">Krävs för att använda hämtningsbegäranden som källor</string>

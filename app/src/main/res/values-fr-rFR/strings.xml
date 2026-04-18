@@ -401,6 +401,16 @@ Pour obtenir les patchs en pré-version, activez l’option pré-versions sépar
     <string name="settings_advanced_expert_mode_dialog_message">Le mode Expert offre plus de contrôle sur la manière dont les patchs sont appliqués, mais une mauvaise configuration des paramètres en mode expert peut rendre l’application inutilisable</string>
     <string name="settings_advanced_strip_unused_libs">Supprimer les bibliothèques natives inutilisées</string>
     <string name="settings_advanced_strip_unused_libs_description">Supprimer les bibliothèques natives pour les architectures CPU non prises en charge des applications patchées</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filtrer les APK fractionnés pour appareil</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Pendant la fusion, ignorer les variantes de langue, de densité et d\'ABI qui ne sont pas nécessaires pour cet appareil. Réduit la taille de l\'APK fusionné.</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Mode de traitement du bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Définit la manière dont le bytecode est traité lors du patchage. Impacte la vitesse de patchage, l’utilisation mémoire et la taille de l’APK généré</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Rapide (Recommandé)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Rapide</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Patchage plus rapide et utilisation mémoire réduite, au prix d’un APK plus volumineux. Recommandé pour les appareils à faible RAM ou anciens</string>
+    <string name="settings_advanced_bytecode_mode_full">Complet</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Patchage plus lent, reproduisant le comportement précédent. À utiliser uniquement si le mode rapide pose problème</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Jeton d\'accès personnel GitHub</string>
     <string name="settings_advanced_github_pat_description">Nécessaire pour les pull requests de sources</string>

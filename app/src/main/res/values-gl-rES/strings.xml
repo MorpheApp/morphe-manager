@@ -210,6 +210,7 @@
     <string name="notification_channel_patcher">Parcheando</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Modo Experto</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opcións de parche</string>

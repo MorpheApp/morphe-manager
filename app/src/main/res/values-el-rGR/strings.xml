@@ -401,6 +401,16 @@
     <string name="settings_advanced_expert_mode_dialog_message">Η λειτουργία εξειδικευμένου χρήστη δίνει περισσότερο έλεγχο για την εφαρμογή των τροποποιήσεων, αλλά η λάθος ρύθμιση στη λειτουργία αυτή μπορεί να προκαλέσει τη δυσλειτουργικότητα της εφαρμογής</string>
     <string name="settings_advanced_strip_unused_libs">Εκκαθάριση μη χρησιμοποιούμενων εγγενών βιβλιοθηκών</string>
     <string name="settings_advanced_strip_unused_libs_description">Διαγραφή των εγγενών βιβλιοθηκών για ανυποστήρικτες αρχιτεκτονικές επεξεργαστών από τροποποιημένες εφαρμογές</string>
+    <string name="settings_advanced_skip_unneeded_splits">Φιλτράρισμα των split APK για συσκευή</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">Κατά τη συγχώνευση, παραλείψτε τις χωριστές για τοπικότητα, πυκνότητα και ABI που δεν είναι απαραίτητες για αυτήν τη συσκευή. Μειώνει το μέγεθος του συγχωνευμένου APK</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Λειτουργία επεξεργασίας bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Ελέγχει τον τρόπο επεξεργασίας του bytecode κατά τη διάρκεια της επιδιόρθωσης. Επηρεάζει την ταχύτητα επιδιόρθωσης, τη χρήση μνήμης και το μέγεθος του APK εξόδου</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Γρήγορος (Συνιστάται)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Γρήγορα</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Ταχύτερη επιδιόρθωση και χαμηλότερη χρήση μνήμης, με αντάλλαγμα ένα μεγαλύτερο APK. Συνιστάται για συσκευές με χαμηλή μνήμη RAM ή παλαιότερες</string>
+    <string name="settings_advanced_bytecode_mode_full">Πλήρες</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Αργότερη επιδιόρθωση, αναπαράγει τη συμπεριφορά legacy. Χρησιμοποιήστε το μόνο εάν ο γρήγορος τρόπος προκαλεί προβλήματα</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Απαιτείται για πηγές pull request</string>

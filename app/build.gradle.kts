@@ -65,6 +65,9 @@ dependencies {
     // Exclude xmlpull as it's included in Android already
     configurations.configureEach {
         exclude(group = "xmlpull", module = "xmlpull")
+        // Ackpine uses android-stubs as compileOnly internally — exclude the transitive
+        // dependency since the project already provides hidden API stubs via hidden-api-stub
+        exclude(group = "ru.solrudev.ackpine", module = "android-stubs")
     }
 
     implementation(libs.androidx.documentfile)
@@ -79,6 +82,12 @@ dependencies {
     // Shizuku / Sui
     implementation(libs.shizuku.api)
     implementation(libs.shizuku.provider)
+
+    // Ackpine
+    implementation(libs.ackpine.core)
+    implementation(libs.ackpine.ktx)
+    implementation(libs.ackpine.shizuku)
+    implementation(libs.ackpine.shizuku.ktx)
 
     // LibSU
     implementation(libs.libsu.core)
@@ -155,6 +164,7 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix = ".debug"
             buildConfigField("long", "BUILD_ID", "${Random.nextLong()}L")
         }
 
@@ -218,7 +228,6 @@ android {
         )
 
         jniLibs {
-            excludes += "/lib/x86/*.so"
             useLegacyPackaging = true
         }
     }
@@ -258,6 +267,7 @@ kotlin {
         freeCompilerArgs.addAll(
             "-Xexplicit-backing-fields",
             "-Xcontext-parameters",
+            "-opt-in=kotlin.time.ExperimentalTime"
         )
     }
 }
