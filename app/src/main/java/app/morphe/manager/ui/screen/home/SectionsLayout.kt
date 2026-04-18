@@ -763,15 +763,26 @@ fun MainAppsSection(
         }.toSet()
     }
 
-    // Track if data was ever loaded, never show shimmer again on resume
-    var hasEverLoaded by remember { mutableStateOf(homeAppItems.isNotEmpty()) }
+    // Track if data was ever loaded, never show shimmer again on resume.
+    // Only set to true when actual items arrive (visible or hidden), OR when
+    // installedAppsLoading explicitly transitions to false (meaning the ViewModel
+    // has determined there is nothing to show — e.g. all bundles disabled).
+    var hasEverLoaded by remember {
+        mutableStateOf(homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty())
+    }
 
     // Stable loading state with debounce to prevent flickering.
     // Only shows shimmer on genuine cold start (data never arrived).
     var stableLoadingState by remember { mutableStateOf(!hasEverLoaded) }
 
-    LaunchedEffect(installedAppsLoading, homeAppItems.isEmpty()) {
-        if (homeAppItems.isNotEmpty()) {
+    LaunchedEffect(installedAppsLoading, homeAppItems.size, hiddenAppItems.size) {
+        if (homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty()) {
+            hasEverLoaded = true
+        }
+        // When the ViewModel signals loading=false it means it has definitively resolved
+        // the state (either items loaded, or no enabled sources). Mark as loaded so the
+        // shimmer never gets stuck in the "all bundles disabled" case.
+        if (!installedAppsLoading) {
             hasEverLoaded = true
         }
         // Once hasEverLoaded is true, never re-trigger shimmer regardless of list state
@@ -994,7 +1005,7 @@ fun MainAppsSection(
                                         ShowHiddenAppsButton(
                                             count = hiddenAppItems.size,
                                             onClick = { showHiddenAppsDialog.value = true },
-                                            modifier = Modifier.padding(top = 4.dp)
+                                            modifier = Modifier.padding(top = itemSpacing)
                                         )
                                     }
                                 }

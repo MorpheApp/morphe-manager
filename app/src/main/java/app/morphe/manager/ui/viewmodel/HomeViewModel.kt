@@ -535,16 +535,27 @@ class HomeViewModel(
         viewModelScope.launch {
             combine(
                 patchBundleRepository.bundleUpdateProgress,
+                patchBundleRepository.sources,
                 installedAppRepository.getAll(),
                 availablePatches
-            ) { progress, installedApps, patchCount ->
+            ) { progress, sources, installedApps, patchCount ->
                 val isBundleUpdateInProgress =
                     progress?.result == PatchBundleRepository.BundleUpdateResult.None
-                val hasLoadedData = installedApps.isNotEmpty() || patchCount > 0
+                val hasEnabledSources = sources.any { it.enabled }
+                // Guard: sources list is empty on the very first emission before the DB is read.
+                // Treat that transient state as "still loading" so we never flash the empty-state
+                // UI before the real bundle configuration is known.
+                val sourcesInitialized = sources.isNotEmpty() || patchCount > 0
+                // If no sources are enabled (and we know the DB has been read), there is nothing
+                // to load - this is a valid terminal state, not a loading state.
+                val hasLoadedData = sourcesInitialized &&
+                        (!hasEnabledSources || installedApps.isNotEmpty() || patchCount > 0)
                 isBundleUpdateInProgress || !hasLoadedData
-            }.collect { loading ->
-                installedAppsLoading = loading
             }
+                .distinctUntilChanged()
+                .collect { loading ->
+                    installedAppsLoading = loading
+                }
         }
     }
 
