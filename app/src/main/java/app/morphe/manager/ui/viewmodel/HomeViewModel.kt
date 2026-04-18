@@ -1090,6 +1090,48 @@ class HomeViewModel(
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     /**
+     * Marks the swipe gesture hint as shown so it is never replayed.
+     */
+    fun markSwipeGestureHintShown() {
+        viewModelScope.launch {
+            prefs.swipeGestureHintShown.update(true)
+        }
+    }
+
+    /**
+     * Snapshot of all bundle info (including disabled) as a [StateFlow] for synchronous reads.
+     * Used by [getPatchesForPackage] which is called from Compose (non-suspend context).
+     */
+    private val allBundlesInfoState: StateFlow<Map<Int, PatchBundleInfo.Global>> =
+        patchBundleRepository.allBundlesInfoFlow
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    /**
+     * Returns all patches available for [packageName] across all enabled bundles.
+     * Groups them as Map<BundleUid, List<PatchInfo>> for the swipe-right patches dialog.
+     */
+    fun getPatchesForPackage(packageName: String): Map<Int, List<PatchInfo>> {
+        val bundleInfo = allBundlesInfoState.value
+        return buildMap {
+            bundleInfo
+                .filter { (_, info) -> info.enabled }
+                .forEach { (uid, info) ->
+                    val patches = info.patches.filter { patch ->
+                        patch.compatiblePackages == null ||
+                                patch.compatiblePackages.any { it.packageName == packageName }
+                    }
+                    if (patches.isNotEmpty()) put(uid, patches)
+                }
+        }
+    }
+
+    /**
+     * Returns the display name of the bundle with [uid], or null.
+     */
+    fun getBundleDisplayName(uid: Int): String? =
+        allBundlesInfoState.value[uid]?.name
+
+    /**
      * Hide an app from the home screen.
      */
     fun hideApp(packageName: String) {

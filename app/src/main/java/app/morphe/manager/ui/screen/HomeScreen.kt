@@ -22,6 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.*
@@ -53,6 +54,9 @@ fun HomeScreen(
     val showInstalledAppDialog = remember { mutableStateOf<String?>(null) }
     val showUpdateDetailsDialog = remember { mutableStateOf(false) }
 
+    // Patches dialog state (swipe-right on app card)
+    val patchesSheetItem = remember { mutableStateOf<HomeAppItem?>(null) }
+
     // Pull to refresh state
     val isRefreshing by homeViewModel.isRefreshing.collectAsStateWithLifecycle()
 
@@ -76,6 +80,12 @@ fun HomeScreen(
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
+
+    // Gesture hint: shown once on first launch, after cards have loaded
+    val swipeHintShown by prefs.swipeGestureHintShown.getAsState()
+    val showGestureHint by remember(swipeHintShown, homeAppItems) {
+        derivedStateOf { !swipeHintShown && homeAppItems.isNotEmpty() }
+    }
 
     val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
     if (!isDeviceRooted) {
@@ -176,6 +186,24 @@ fun HomeScreen(
         )
     }
 
+    // Patches dialog (swipe-right)
+    patchesSheetItem.value?.let { item ->
+        val patchesByBundle = remember(item.packageName) {
+            homeViewModel.getPatchesForPackage(item.packageName)
+        }
+        val bundleNames = remember(patchesByBundle) {
+            patchesByBundle.keys.associateWith { uid ->
+                homeViewModel.getBundleDisplayName(uid) ?: uid.toString()
+            }
+        }
+        AppPatchesDialog(
+            item = item,
+            patchesByBundle = patchesByBundle,
+            bundleNames = bundleNames,
+            onDismiss = { patchesSheetItem.value = null }
+        )
+    }
+
     // Main content with pull-to-refresh
     PullToRefreshBox(
         isRefreshing = isRefreshing,
@@ -213,6 +241,9 @@ fun HomeScreen(
                 onInstalledAppClick = { app -> showInstalledAppDialog.value = app.currentPackageName },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
+                onShowPatches = { item -> patchesSheetItem.value = item },
+                showGestureHint = showGestureHint,
+                onGestureHintShown = { homeViewModel.markSwipeGestureHintShown() },
                 hiddenAppItems = hiddenAppItems,
                 installedAppsLoading = homeViewModel.installedAppsLoading,
 

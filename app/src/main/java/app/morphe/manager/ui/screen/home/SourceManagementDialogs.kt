@@ -271,7 +271,7 @@ fun BundleDeleteConfirmDialog(
 }
 
 /**
- * Dialog for renaming a bundle
+ * Dialog for renaming a bundle.
  */
 @Composable
 fun RenameBundleDialog(
@@ -715,11 +715,11 @@ fun BundlePatchesDialog(
 }
 
 /**
- * Patch item card
+ * Patch item card.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun PatchItemCard(
+internal fun PatchItemCard(
     patch: PatchInfo,
     expandVersions: Boolean,
     onExpandVersions: () -> Unit,
@@ -1129,7 +1129,7 @@ private fun String.sanitizePatchChangelogMarkdown(): String =
     }
 
 /**
- * Normalizes a URL by adding https:// if no protocol is specified
+ * Normalizes a URL by adding https:// if no protocol is specified.
  */
 private fun normalizeUrl(url: String): String {
     val trimmed = url.trim()

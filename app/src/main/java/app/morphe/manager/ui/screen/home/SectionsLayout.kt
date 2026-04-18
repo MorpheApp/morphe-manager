@@ -11,13 +11,16 @@ import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -31,6 +34,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -38,17 +43,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.KnownApps
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 /**
  * Home screen layout with dynamic app buttons:
@@ -76,6 +85,9 @@ fun SectionsLayout(
     onInstalledAppClick: (InstalledApp) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
+    onShowPatches: (HomeAppItem) -> Unit,
+    showGestureHint: Boolean,
+    onGestureHintShown: () -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
 
@@ -123,6 +135,9 @@ fun SectionsLayout(
                     onInstalledAppClick = onInstalledAppClick,
                     onHideApp = onHideApp,
                     onUnhideApp = onUnhideApp,
+                    onShowPatches = onShowPatches,
+                    showGestureHint = showGestureHint,
+                    onGestureHintShown = onGestureHintShown,
                     hiddenAppItems = hiddenAppItems,
                     installedAppsLoading = installedAppsLoading,
                     showSearchButton = showSearchButton,
@@ -138,7 +153,7 @@ fun SectionsLayout(
                 )
             }
 
-            // Section 5: Bottom action bar — тільки для одноколонкового (portrait) режиму
+            // Section 5: Bottom action bar - тільки для одноколонкового (portrait) режиму
             if (!windowSize.useTwoColumnLayout) {
                 HomeBottomActionBar(
                     onBundlesClick = onBundlesClick,
@@ -178,6 +193,9 @@ private fun AdaptiveContent(
     onInstalledAppClick: (InstalledApp) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
+    onShowPatches: (HomeAppItem) -> Unit,
+    showGestureHint: Boolean,
+    onGestureHintShown: () -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean,
     showSearchButton: Boolean = false,
@@ -253,6 +271,9 @@ private fun AdaptiveContent(
                         onInstalledAppClick = onInstalledAppClick,
                         onHideApp = onHideApp,
                         onUnhideApp = onUnhideApp,
+                        onShowPatches = onShowPatches,
+                        showGestureHint = showGestureHint,
+                        onGestureHintShown = onGestureHintShown,
                         hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
                         searchVisible = searchVisible,
@@ -295,6 +316,9 @@ private fun AdaptiveContent(
                         onInstalledAppClick = onInstalledAppClick,
                         onHideApp = onHideApp,
                         onUnhideApp = onUnhideApp,
+                        onShowPatches = onShowPatches,
+                        showGestureHint = showGestureHint,
+                        onGestureHintShown = onGestureHintShown,
                         hiddenAppItems = hiddenAppItems,
                         installedAppsLoading = installedAppsLoading,
                         searchVisible = searchVisible,
@@ -709,6 +733,9 @@ fun MainAppsSection(
     onInstalledAppClick: (InstalledApp) -> Unit,
     onHideApp: (String) -> Unit,
     onUnhideApp: (String) -> Unit,
+    onShowPatches: (HomeAppItem) -> Unit,
+    showGestureHint: Boolean,
+    onGestureHintShown: () -> Unit,
     hiddenAppItems: List<HomeAppItem> = emptyList(),
     installedAppsLoading: Boolean = false,
     searchVisible: Boolean = false,
@@ -859,6 +886,9 @@ fun MainAppsSection(
                                     onAppClick = { onAppClick(item) },
                                     onInstalledAppClick = onInstalledAppClick,
                                     onHide = { onHideApp(item.packageName) },
+                                    onShowPatches = { onShowPatches(item) },
+                                    showGestureHint = showGestureHint && item == filteredItems.firstOrNull(),
+                                    onGestureHintShown = onGestureHintShown,
                                     modifier = Modifier.animateItem()
                                 )
                             }
@@ -1002,7 +1032,11 @@ private fun HomeSearchTextField(
 }
 
 /**
- * Single dynamic app card with long-press action.
+ * Single dynamic app card with horizontal swipe gestures:
+ * - Swipe LEFT  → reveal hide action
+ * - Swipe RIGHT → reveal patches dialog
+ *
+ * On first appearance plays a one-time nudge hint animation.
  */
 @Composable
 private fun DynamicAppCard(
@@ -1012,53 +1046,579 @@ private fun DynamicAppCard(
     onAppClick: () -> Unit,
     onInstalledAppClick: (InstalledApp) -> Unit,
     onHide: () -> Unit,
+    onShowPatches: () -> Unit,
+    showGestureHint: Boolean,
+    onGestureHintShown: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var showContextMenu by remember { mutableStateOf(false) }
+    var showHideDialog by remember { mutableStateOf(false) }
+    val density = LocalDensity.current
+    val view = LocalView.current
+    val scope = rememberCoroutineScope()
+
+    // Threshold in px - card snaps to action when dragged past this
+    val actionThresholdPx = with(density) { 90.dp.toPx() }
+
+    // Animatable offset drives the card position
+    val offsetX = remember { Animatable(0f) }
+
+    // Derived progress values for background reveal [0..1]
+    val hideProgress by remember { derivedStateOf { (-offsetX.value / actionThresholdPx).coerceIn(0f, 1f) } }
+    val patchesProgress by remember { derivedStateOf { (offsetX.value / actionThresholdPx).coerceIn(0f, 1f) } }
+
+    // Hint animation: nudge right then left, once (only first card)
+    LaunchedEffect(showGestureHint, isLoading) {
+        if (!showGestureHint || isLoading) return@LaunchedEffect
+        delay(800)
+        val nudge = with(density) { 72.dp.toPx() }
+        offsetX.animateTo(nudge,  tween(500, easing = FastOutSlowInEasing))
+        offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
+        delay(180)
+        offsetX.animateTo(-nudge, tween(500, easing = FastOutSlowInEasing))
+        offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
+        onGestureHintShown()
+    }
 
     Box(modifier = modifier.fillMaxWidth()) {
-        Crossfade(
-            targetState = isLoading,
-            animationSpec = tween(300),
-            label = "app_card_crossfade_${item.packageName}"
-        ) { loading ->
-            if (loading) {
-                AppLoadingCard(gradientColors = item.gradientColors)
-            } else {
-                if (item.installedApp != null) {
-                    InstalledAppCard(
-                        installedApp = item.installedApp,
-                        packageInfo = item.packageInfo,
-                        displayName = item.displayName,
-                        gradientColors = item.gradientColors,
-                        onClick = { onInstalledAppClick(item.installedApp) },
-                        hasUpdate = hasUpdate,
-                        isAppDeleted = item.isDeleted,
-                        onLongClick = { showContextMenu = true }
+        // Background layer - action icons behind the card
+        SwipeBackground(
+            hideProgress = hideProgress,
+            patchesProgress = patchesProgress,
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(24.dp))
+        )
+
+        // Foreground card - draggable
+        Box(
+            modifier = Modifier
+                .offset { IntOffset(offsetX.value.roundToInt(), 0) }
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures(
+                        onDragEnd = {
+                            scope.launch {
+                                when {
+                                    offsetX.value < -actionThresholdPx -> {
+                                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                                        offsetX.animateTo(0f, tween(200))
+                                        showHideDialog = true
+                                    }
+                                    offsetX.value > actionThresholdPx -> {
+                                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                                        offsetX.animateTo(0f, tween(200))
+                                        onShowPatches()
+                                    }
+                                    else -> offsetX.animateTo(0f, spring(
+                                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                                        stiffness = Spring.StiffnessMedium
+                                    ))
+                                }
+                            }
+                        },
+                        onDragCancel = {
+                            scope.launch {
+                                offsetX.animateTo(0f, spring(
+                                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                                    stiffness = Spring.StiffnessMedium
+                                ))
+                            }
+                        },
+                        onHorizontalDrag = { change, dragAmount ->
+                            change.consume()
+                            scope.launch {
+                                // Clamp to 1.5x threshold so card doesn't fly off-screen
+                                val clamped = (offsetX.value + dragAmount)
+                                    .coerceIn(-actionThresholdPx * 1.5f, actionThresholdPx * 1.5f)
+                                offsetX.snapTo(clamped)
+                            }
+                        }
                     )
+                }
+        ) {
+            Crossfade(
+                targetState = isLoading,
+                animationSpec = tween(300),
+                label = "app_card_crossfade_${item.packageName}"
+            ) { loading ->
+                if (loading) {
+                    AppLoadingCard(gradientColors = item.gradientColors)
                 } else {
-                    AppButton(
-                        packageName = item.packageName,
-                        displayName = item.displayName,
-                        packageInfo = item.packageInfo,
-                        gradientColors = item.gradientColors,
-                        onClick = onAppClick,
-                        onLongClick = { showContextMenu = true }
+                    if (item.installedApp != null) {
+                        InstalledAppCard(
+                            installedApp = item.installedApp,
+                            packageInfo = item.packageInfo,
+                            displayName = item.displayName,
+                            gradientColors = item.gradientColors,
+                            onClick = { onInstalledAppClick(item.installedApp) },
+                            hasUpdate = hasUpdate,
+                            isAppDeleted = item.isDeleted,
+                            onLongClick = { showHideDialog = true }
+                        )
+                    } else {
+                        AppButton(
+                            packageName = item.packageName,
+                            displayName = item.displayName,
+                            packageInfo = item.packageInfo,
+                            gradientColors = item.gradientColors,
+                            onClick = onAppClick,
+                            onLongClick = { showHideDialog = true }
+                        )
+                    }
+                }
+            }
+        }
+
+        if (showHideDialog) {
+            HideAppDialog(
+                item = item,
+                onDismiss = { showHideDialog = false },
+                onHide = {
+                    onHide()
+                    showHideDialog = false
+                }
+            )
+        }
+    }
+}
+
+/**
+ * Semi-transparent background that reveals contextual action icons as the user drags the card.
+ */
+@Composable
+private fun SwipeBackground(
+    hideProgress: Float,
+    patchesProgress: Float,
+    modifier: Modifier = Modifier
+) {
+    Box(modifier = modifier) {
+        // Right side background
+        if (hideProgress > 0.01f) {
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                    .align(Alignment.CenterEnd)
+                    .background(
+                        Brush.horizontalGradient(
+                            0f to MaterialTheme.colorScheme.errorContainer.copy(alpha = 0f),
+                            1f to MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.85f * hideProgress)
+                        )
+                    ),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(end = 20.dp)
+                        .graphicsLayer { alpha = hideProgress },
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.VisibilityOff,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onErrorContainer,
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Text(
+                        text = stringResource(R.string.hide),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }
         }
 
-        // Hide confirmation dialog
-        if (showContextMenu) {
-            HideAppDialog(
-                item = item,
-                onDismiss = { showContextMenu = false },
-                onHide = {
-                    onHide()
-                    showContextMenu = false
+        // Left side background
+        if (patchesProgress > 0.01f) {
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                    .align(Alignment.CenterStart)
+                    .background(
+                        Brush.horizontalGradient(
+                            0f to MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.85f * patchesProgress),
+                            1f to MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0f)
+                        )
+                    ),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(start = 20.dp)
+                        .graphicsLayer { alpha = patchesProgress },
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Extension,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Text(
+                        text = stringResource(R.string.patches),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
+            }
+        }
+    }
+}
+
+/**
+ * Dialog that shows available patches for a specific app.
+ * Shown when the user swipes right on a home app card.
+ * Uses the shared [PatchItemCard] component from [BundlePatchesDialog]
+ * to display rich patch info with search and (multi-bundle) filter support.
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppPatchesDialog(
+    item: HomeAppItem,
+    patchesByBundle: Map<Int, List<PatchInfo>>,
+    bundleNames: Map<Int, String>,
+    onDismiss: () -> Unit
+) {
+    // Flatten to a list of (bundleUid, patch) sorted by bundle name
+    val allPatches = remember(patchesByBundle, bundleNames) {
+        patchesByBundle.entries
+            .sortedBy { (uid, _) -> bundleNames[uid] ?: uid.toString() }
+            .flatMap { (uid, patches) -> patches.map { patch -> uid to patch } }
+    }
+
+    val isMultiBundle = patchesByBundle.size > 1
+    var searchQuery by remember { mutableStateOf("") }
+    var selectedBundle by remember { mutableStateOf<Int?>(null) }
+    val showFilterSheet = remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+
+    val filteredPatches = remember(allPatches, searchQuery, selectedBundle) {
+        allPatches.filter { (uid, patch) ->
+            val bundleMatch = selectedBundle == null || uid == selectedBundle
+            val queryMatch = searchQuery.isBlank() ||
+                    patch.name.contains(searchQuery, ignoreCase = true) ||
+                    patch.description?.contains(searchQuery, ignoreCase = true) == true
+            bundleMatch && queryMatch
+        }
+    }
+
+    val isFiltering = searchQuery.isNotBlank() || selectedBundle != null
+    val totalCount = allPatches.size
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        dismissOnClickOutside = true,
+        title = null,
+        compactPadding = true,
+        scrollable = false,
+        footer = {
+            MorpheDialogButton(
+                text = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
             )
+        }
+    ) {
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // App header
+            item {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Surface(
+                            shape = CircleShape,
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                            modifier = Modifier.size(56.dp)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Extension,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(28.dp)
+                                )
+                            }
+                        }
+
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = item.displayName,
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = LocalDialogTextColor.current,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Widgets,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                val countText = if (isFiltering)
+                                    "${filteredPatches.size}/$totalCount"
+                                else
+                                    "$totalCount"
+                                val patchesLabel = stringResource(R.string.patches).lowercase()
+                                AnimatedContent(
+                                    targetState = countText,
+                                    transitionSpec = {
+                                        (fadeIn(tween(200)) + slideInVertically(tween(200)) { -it / 2 })
+                                            .togetherWith(fadeOut(tween(150)) + slideOutVertically(tween(150)) { it / 2 })
+                                    },
+                                    label = "app_patch_count"
+                                ) { count ->
+                                    Text(
+                                        text = "$count $patchesLabel",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.primary,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Search + filter row (filter button visible only for multi-bundle)
+            stickyHeader {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.surface
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.Bottom
+                    ) {
+                        MorpheDialogTextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            label = { Text(stringResource(R.string.expert_mode_search)) },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Outlined.Search,
+                                    contentDescription = null
+                                )
+                            },
+                            showClearButton = true,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        if (isMultiBundle) {
+                            FilledTonalIconButton(
+                                onClick = { showFilterSheet.value = true },
+                                modifier = Modifier.padding(bottom = 4.dp),
+                                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                    containerColor = if (selectedBundle != null)
+                                        MaterialTheme.colorScheme.primaryContainer
+                                    else
+                                        MaterialTheme.colorScheme.surfaceVariant,
+                                    contentColor = if (selectedBundle != null)
+                                        MaterialTheme.colorScheme.onPrimaryContainer
+                                    else
+                                        MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.FilterList,
+                                    contentDescription = stringResource(R.string.filter),
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Active bundle filter badge + empty state
+            item(key = "filter_badges_and_empty") {
+                Column {
+                    AnimatedVisibility(
+                        visible = selectedBundle != null,
+                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                    ) {
+                        selectedBundle?.let { uid ->
+                            FlowRow(
+                                modifier = Modifier.padding(bottom = 4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                InputChip(
+                                    selected = true,
+                                    onClick = { selectedBundle = null },
+                                    label = { Text(bundleNames[uid] ?: uid.toString()) },
+                                    trailingIcon = {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Close,
+                                            contentDescription = stringResource(R.string.remove),
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                    AnimatedVisibility(
+                        visible = filteredPatches.isEmpty(),
+                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(tween(MorpheDefaults.ANIMATION_DURATION), initialScale = 0.92f),
+                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(tween(MorpheDefaults.ANIMATION_DURATION), targetScale = 0.92f)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 48.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.SearchOff,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(48.dp),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = stringResource(R.string.expert_mode_no_results),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Patch cards
+            items(
+                filteredPatches,
+                key = { (uid, patch) ->
+                    "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
+                }
+            ) { (uid, patch) ->
+                var expandVersions by rememberSaveable(uid, patch.name, "versions") {
+                    mutableStateOf(false)
+                }
+                var expandOptions by rememberSaveable(uid, patch.name, "options") {
+                    mutableStateOf(false)
+                }
+
+                Column {
+                    // Bundle name label between sections (multi-bundle only, shown at first patch of each bundle)
+                    if (isMultiBundle) {
+                        val isFirstOfBundle = remember(filteredPatches, uid, patch) {
+                            filteredPatches.firstOrNull { it.first == uid }?.second == patch
+                        }
+                        if (isFirstOfBundle) {
+                            Text(
+                                text = bundleNames[uid] ?: uid.toString(),
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(bottom = 4.dp, top = 4.dp)
+                            )
+                        }
+                    }
+
+                    PatchItemCard(
+                        patch = patch,
+                        expandVersions = expandVersions,
+                        onExpandVersions = { expandVersions = !expandVersions },
+                        expandOptions = expandOptions,
+                        onExpandOptions = { expandOptions = !expandOptions },
+                        modifier = Modifier.animateItem(
+                            fadeInSpec = tween(220),
+                            fadeOutSpec = tween(180),
+                            placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    // Bundle filter bottom sheet (multi-bundle only)
+    if (showFilterSheet.value && isMultiBundle) {
+        MorpheBottomSheet(
+            onDismissRequest = { showFilterSheet.value = false },
+            sheetState = sheetState,
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding()
+                    .padding(horizontal = 16.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.filter),
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.height(8.dp))
+                FlowRow(
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // "All" chip
+                    FilterChip(
+                        selected = selectedBundle == null,
+                        onClick = { selectedBundle = null },
+                        label = { Text(stringResource(R.string.all)) },
+                        leadingIcon = if (selectedBundle == null) {
+                            { Icon(Icons.Outlined.DoneAll, null, Modifier.size(16.dp)) }
+                        } else null
+                    )
+                    // Per-bundle chips
+                    bundleNames.entries
+                        .sortedBy { it.value }
+                        .forEach { (uid, name) ->
+                            val isSelected = uid == selectedBundle
+                            FilterChip(
+                                selected = isSelected,
+                                onClick = {
+                                    selectedBundle = if (isSelected) null else uid
+                                    showFilterSheet.value = false
+                                },
+                                label = { Text(name) },
+                                leadingIcon = if (isSelected) {
+                                    { Icon(Icons.Outlined.Done, null, Modifier.size(16.dp)) }
+                                } else null
+                            )
+                        }
+                }
+            }
         }
     }
 }
