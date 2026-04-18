@@ -238,8 +238,8 @@ fun HomeScreen(
                     )
                     item.installedApp?.let { showInstalledAppDialog.value = it.currentPackageName }
                 },
-                onInstalledAppClick = { app -> showInstalledAppDialog.value = app.currentPackageName },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
+                onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                 onShowPatches = { item -> patchesSheetItem.value = item },
                 showGestureHint = showGestureHint,
