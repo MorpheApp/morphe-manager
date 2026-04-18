@@ -24,7 +24,6 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
-        stripNativeLibs: Boolean,
         skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) {
@@ -66,7 +65,6 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                 source = File(inputFile),
                 workspace = File(cacheDir),
                 logger = logger,
-                stripNativeLibs = stripNativeLibs,
                 skipUnneededSplits = skipUnneededSplits
             )
 

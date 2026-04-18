@@ -6,7 +6,6 @@ import android.util.DisplayMetrics
 import android.util.Log
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
-import app.morphe.manager.patcher.util.NativeLibStripper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import java.io.File
@@ -53,7 +52,6 @@ object SplitApkPreparer {
         source: File,
         workspace: File,
         logger: Logger = DefaultLogger,
-        stripNativeLibs: Boolean = false,
         skipUnneededSplits: Boolean = false,
         onProgress: ((String) -> Unit)? = null,
         onSubSteps: ((List<String>) -> Unit)? = null,
@@ -77,10 +75,8 @@ object SplitApkPreparer {
             val mergeOrder = Merger.listMergeOrder(modulesDir.toPath())
             val supportedTokens = supportedAbiTokens()
             val skippedModules = buildSet {
-                if (stripNativeLibs) {
-                    addAll(mergeOrder.filter { shouldSkipModule(it, supportedTokens) })
-                }
                 if (skipUnneededSplits) {
+                    addAll(mergeOrder.filter { shouldSkipModule(it, supportedTokens) })
                     val localeTokens = deviceLocaleTokens()
                     val densityQualifier = deviceDensityQualifier()
                     addAll(
@@ -94,7 +90,7 @@ object SplitApkPreparer {
                     )
                 }
             }
-            onSubSteps?.invoke(buildSplitSubSteps(mergeOrder, skippedModules, stripNativeLibs))
+            onSubSteps?.invoke(buildSplitSubSteps(mergeOrder, skippedModules))
 
             Merger.merge(
                 apkDir = modulesDir.toPath(),
@@ -103,11 +99,6 @@ object SplitApkPreparer {
                 onProgress = onProgress,
                 sortApkEntries = sortMergedApkEntries
             )
-
-            if (stripNativeLibs) {
-                onProgress?.invoke("Stripping native libraries")
-                NativeLibStripper.strip(mergedApk)
-            }
 
             onProgress?.invoke("Finalizing merged APK")
 
@@ -141,8 +132,7 @@ object SplitApkPreparer {
 
     private fun buildSplitSubSteps(
         mergeOrder: List<String>,
-        skippedModules: Set<String>,
-        stripNativeLibs: Boolean
+        skippedModules: Set<String>
     ): List<String> {
         val steps = mutableListOf<String>()
         steps.add("Extracting split APKs")
@@ -155,9 +145,6 @@ object SplitApkPreparer {
         skipped.forEach { steps.add("$SKIPPED_STEP_PREFIX Merging $it") }
         remaining.forEach { steps.add("Merging $it") }
         steps.add("Writing merged APK")
-        if (stripNativeLibs) {
-            steps.add("Stripping native libraries")
-        }
         steps.add("Finalizing merged APK")
         return steps
     }
@@ -193,7 +180,7 @@ object SplitApkPreparer {
 
     // Returns true if [moduleName] is a locale or density config split that does not match the
     // current device. ABI splits are intentionally excluded here - they are handled separately
-    // by [shouldSkipModule] / [stripNativeLibs].
+    // by [shouldSkipModule]
     private fun shouldSkipModuleForDevice(
         moduleName: String,
         localeTokens: Set<String>,

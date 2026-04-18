@@ -84,7 +84,6 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 source = File(parameters.inputFile),
                 workspace = File(parameters.cacheDir),
                 logger = logger,
-                stripNativeLibs = parameters.stripNativeLibs,
                 skipUnneededSplits = parameters.skipUnneededSplits,
                 onProgress = { message -> logger.info(message) }
             )

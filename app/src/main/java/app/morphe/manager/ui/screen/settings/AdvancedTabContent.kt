@@ -43,7 +43,6 @@ fun AdvancedTabContent(
     val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
     val stripUnusedNativeLibs by prefs.stripUnusedNativeLibs.getAsState()
-    val skipUnneededSplits by prefs.skipUnneededSplits.getAsState()
 
     // Notify VM on expert mode changes so it can derive showExpertModeNotice
     LaunchedEffect(useExpertMode) {
@@ -132,7 +131,7 @@ fun AdvancedTabContent(
                         }
                     )
 
-                    // Strip unused native libraries
+                    // Strip unused native libraries + filter split APKs for device
                     RichSettingsItem(
                         onClick = {
                             settingsViewModel.setStripUnusedNativeLibs(!stripUnusedNativeLibs)
@@ -150,29 +149,6 @@ fun AdvancedTabContent(
                                 modifier = Modifier.semantics {
                                     stateDescription =
                                         if (stripUnusedNativeLibs) enabledState else disabledState
-                                }
-                            )
-                        }
-                    )
-
-                    // Skip unneeded splits for device
-                    RichSettingsItem(
-                        onClick = {
-                            settingsViewModel.setSkipUnneededSplits(!skipUnneededSplits)
-                        },
-                        showBorder = true,
-                        leadingContent = {
-                            MorpheIcon(icon = Icons.Outlined.FilterList)
-                        },
-                        title = stringResource(R.string.settings_advanced_skip_unneeded_splits),
-                        subtitle = stringResource(R.string.settings_advanced_skip_unneeded_splits_description),
-                        trailingContent = {
-                            Switch(
-                                checked = skipUnneededSplits,
-                                onCheckedChange = null,
-                                modifier = Modifier.semantics {
-                                    stateDescription =
-                                        if (skipUnneededSplits) enabledState else disabledState
                                 }
                             )
                         }

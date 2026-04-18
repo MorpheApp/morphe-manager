@@ -171,7 +171,6 @@ class PatcherWorker(
 
             val useProcessRuntime = prefs.useProcessRuntime.get()
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
-            val skipUnneededSplits = prefs.skipUnneededSplits.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             val selectedCount = args.selectedPatches.values.sumOf { it.size }
 
@@ -244,7 +243,6 @@ class PatcherWorker(
                     args.onPatchCompleted,
                     args.onProgress,
                     stripNativeLibs,
-                    skipUnneededSplits,
                     onMergedApkReady
                 )
             } catch (e: Exception) {
@@ -264,13 +262,12 @@ class PatcherWorker(
                     args.onPatchCompleted,
                     args.onProgress,
                     stripNativeLibs,
-                    skipUnneededSplits,
                     onMergedApkReady
                 )
             }
 
             if (stripNativeLibs && !inputIsSplitArchive) {
-                NativeLibStripper.strip(patchedApk)
+                NativeLibStripper.strip(patchedApk, args.logger)
             }
 
             keystoreManager.sign(patchedApk, File(args.output))

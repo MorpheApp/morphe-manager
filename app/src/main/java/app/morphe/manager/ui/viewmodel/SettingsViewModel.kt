@@ -190,16 +190,13 @@ class SettingsViewModel(
         prefs.patcherProcessMemoryLimit.update(limit)
     }
 
+    /** Enables/disables native library stripping for plain APKs, and simultaneously split APK filtering for split bundles. */
     fun setStripUnusedNativeLibs(enabled: Boolean) = viewModelScope.launch {
         prefs.stripUnusedNativeLibs.update(enabled)
     }
 
     fun setBytecodeMode(mode: BytecodeMode) = viewModelScope.launch {
         prefs.bytecodeModePreference.update(mode)
-    }
-
-    fun setSkipUnneededSplits(value: Boolean) = viewModelScope.launch {
-        prefs.skipUnneededSplits.update(value)
     }
 
     fun setGitHubPat(pat: String, includeInExport: Boolean) = viewModelScope.launch {

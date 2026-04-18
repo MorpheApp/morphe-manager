@@ -114,7 +114,6 @@ class ProcessRuntime(
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
-        stripNativeLibs: Boolean,
         skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
@@ -131,7 +130,6 @@ class ProcessRuntime(
                     packageName,
                     selectedPatches,
                     options,
-                    stripNativeLibs,
                     skipUnneededSplits,
                     logger,
                     onPatchCompleted,
@@ -175,7 +173,6 @@ class ProcessRuntime(
         packageName: String,
         selectedPatches: PatchSelection,
         options: Options,
-        stripNativeLibs: Boolean,
         skipUnneededSplits: Boolean,
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
@@ -277,7 +274,6 @@ class ProcessRuntime(
                         options[uid].orEmpty()
                     )
                 },
-                stripNativeLibs = stripNativeLibs,
                 skipUnneededSplits = skipUnneededSplits,
                 mergedInputFile = mergedInputPath,
                 bytecodeMode = prefs.bytecodeModePreference.get(),
