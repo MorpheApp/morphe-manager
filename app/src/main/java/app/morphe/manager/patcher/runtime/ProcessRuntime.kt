@@ -265,7 +265,6 @@ class ProcessRuntime(
             }
 
             val parameters = Parameters(
-                aaptPath = aaptPath,
                 frameworkDir = frameworkPath,
                 cacheDir = cacheDir,
                 packageName = packageName,
@@ -280,7 +279,8 @@ class ProcessRuntime(
                 },
                 stripNativeLibs = stripNativeLibs,
                 skipUnneededSplits = skipUnneededSplits,
-                mergedInputFile = mergedInputPath
+                mergedInputFile = mergedInputPath,
+                bytecodeMode = prefs.bytecodeModePreference.get(),
             )
 
             binder.start(parameters, eventHandler)

@@ -164,6 +164,7 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix = ".debug"
             buildConfigField("long", "BUILD_ID", "${Random.nextLong()}L")
         }
 
@@ -227,7 +228,6 @@ android {
         )
 
         jniLibs {
-            excludes += "/lib/x86/*.so"
             useLegacyPackaging = true
         }
     }
@@ -267,6 +267,7 @@ kotlin {
         freeCompilerArgs.addAll(
             "-Xexplicit-backing-fields",
             "-Xcontext-parameters",
+            "-opt-in=kotlin.time.ExperimentalTime"
         )
     }
 }
