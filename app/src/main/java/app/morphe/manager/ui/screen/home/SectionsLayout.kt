@@ -788,6 +788,9 @@ fun MainAppsSection(
         HiddenAppsDialog(
             hiddenAppItems = hiddenAppItems,
             onUnhide = onUnhideApp,
+            onUnhideMultiple = { packages ->
+                packages.forEach { onUnhideApp(it) }
+            },
             onDismiss = { showHiddenAppsDialog.value = false }
         )
     }
@@ -1082,6 +1085,75 @@ private fun HomeSearchTextField(
 }
 
 /**
+ * App card with optional selection overlay - shared between [DynamicAppCard] and [HiddenAppsDialog].
+ *
+ * Renders [AppCardLayout] with the given [content], and overlays an animated checkmark badge
+ * when [isSelected] is true. Dims the card when [isMultiSelectMode] is active but this card
+ * is not selected.
+ */
+@Composable
+private fun SelectableAppCard(
+    item: HomeAppItem,
+    isSelected: Boolean,
+    isMultiSelectMode: Boolean,
+    onClick: () -> Unit,
+    onLongClick: (() -> Unit)? = null,
+    @SuppressLint("ModifierParameter")
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit
+) {
+    val checkScale by animateFloatAsState(
+        targetValue = if (isSelected) 1f else 0f,
+        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium),
+        label = "check_scale"
+    )
+    val cardAlpha by animateFloatAsState(
+        targetValue = if (isMultiSelectMode && !isSelected) 0.55f else 1f,
+        animationSpec = tween(200),
+        label = "card_alpha"
+    )
+
+    Box(modifier = modifier.fillMaxWidth()) {
+        AppCardLayout(
+            gradientColors = item.gradientColors,
+            enabled = true,
+            onClick = onClick,
+            onLongClick = onLongClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .graphicsLayer { alpha = cardAlpha }
+        ) {
+            content()
+        }
+
+        // Animated checkmark badge - top-right corner
+        if (checkScale > 0f) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(top = 8.dp, end = 8.dp)
+                    .graphicsLayer { scaleX = checkScale; scaleY = checkScale }
+            ) {
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(28.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Check,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
  * Single dynamic app card with horizontal swipe gestures:
  * - Swipe LEFT  → reveal hide action
  * - Swipe RIGHT → reveal patches dialog
@@ -1137,19 +1209,6 @@ private fun DynamicAppCard(
         onGestureHintShown()
     }
 
-    // Selection overlay scale animation
-    val checkScale by animateFloatAsState(
-        targetValue = if (isSelected) 1f else 0f,
-        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium),
-        label = "check_scale"
-    )
-    // Dim non-selected cards in multi-select mode
-    val cardAlpha by animateFloatAsState(
-        targetValue = if (isMultiSelectMode && !isSelected) 0.55f else 1f,
-        animationSpec = tween(200),
-        label = "card_alpha"
-    )
-
     Box(modifier = modifier.fillMaxWidth()) {
         // Background layer - action icons behind the card (hidden in multi-select)
         if (!isMultiSelectMode) {
@@ -1162,11 +1221,18 @@ private fun DynamicAppCard(
             )
         }
 
-        // Foreground card - draggable (swipe disabled in multi-select mode)
-        Box(
+        // Draggable foreground with selection overlay
+        SelectableAppCard(
+            item = item,
+            isSelected = isSelected,
+            isMultiSelectMode = isMultiSelectMode,
+            onClick = onAppClick,
+            onLongClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                onLongPress()
+            },
             modifier = Modifier
                 .offset { IntOffset(offsetX.value.roundToInt(), 0) }
-                .graphicsLayer { alpha = cardAlpha }
                 .then(
                     if (!isMultiSelectMode) {
                         Modifier.pointerInput(Unit) {
@@ -1245,34 +1311,6 @@ private fun DynamicAppCard(
                                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                                 onLongPress()
                             }
-                        )
-                    }
-                }
-            }
-        }
-
-        // Animated check badge - appears on top-right corner when selected
-        if (checkScale > 0f) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 8.dp, end = 8.dp)
-                    .graphicsLayer {
-                        scaleX = checkScale
-                        scaleY = checkScale
-                    }
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(28.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Check,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                            modifier = Modifier.size(16.dp)
                         )
                     }
                 }
@@ -1740,7 +1778,7 @@ fun AppPatchesDialog(
                 }
             ) { (uid, patch) ->
                 Column {
-                    // Bundle section label — only for multi-bundle, at first patch of each bundle
+                    // Bundle section label - only for multi-bundle, at first patch of each bundle
                     if (isMultiBundle) {
                         val isFirstOfBundle = remember(filteredPatches, uid, patch) {
                             filteredPatches.firstOrNull { it.first == uid }?.second == patch
@@ -1885,24 +1923,63 @@ internal fun HideAppDialog(
 }
 
 /**
- * Card dialog that lists hidden apps.
+ * Dialog that lists hidden apps with multi-select support.
+ *
+ * - Tap a card → unhide immediately
+ * - Long-press a card → enter multi-select mode
+ * - In multi-select: tap toggles selection; "Show selected" unhides all at once
+ *
+ * Uses [SelectableAppCard] - same selection overlay as the home screen list.
  */
 @Composable
 internal fun HiddenAppsDialog(
     hiddenAppItems: List<HomeAppItem>,
     onUnhide: (String) -> Unit,
+    onUnhideMultiple: (Set<String>) -> Unit = {},
     onDismiss: () -> Unit
 ) {
+    var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
+    val isMultiSelectMode = selectedPackages.isNotEmpty()
+
+    // Clear selection when items change
+    LaunchedEffect(hiddenAppItems) {
+        selectedPackages = selectedPackages.filter { pkg ->
+            hiddenAppItems.any { it.packageName == pkg }
+        }.toSet()
+    }
+
+    val view = LocalView.current
+
     MorpheDialog(
-        onDismissRequest = onDismiss,
-        dismissOnClickOutside = true,
+        onDismissRequest = {
+            if (isMultiSelectMode) selectedPackages = emptySet()
+            else onDismiss()
+        },
+        dismissOnClickOutside = !isMultiSelectMode,
         title = stringResource(R.string.home_app_hidden_apps_title),
         footer = {
-            MorpheDialogButton(
-                text = stringResource(R.string.close),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
+            if (isMultiSelectMode) {
+                MorpheDialogButtonRow(
+                    primaryText = pluralStringResource(
+                        R.plurals.home_app_show_selected,
+                        selectedPackages.size,
+                        selectedPackages.size.toString()
+                    ),
+                    primaryIcon = Icons.Outlined.Visibility,
+                    onPrimaryClick = {
+                        onUnhideMultiple(selectedPackages)
+                        selectedPackages = emptySet()
+                    },
+                    secondaryText = stringResource(android.R.string.cancel),
+                    onSecondaryClick = { selectedPackages = emptySet() }
+                )
+            } else {
+                MorpheDialogButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         },
         compactPadding = true
     ) {
@@ -1923,18 +2000,35 @@ internal fun HiddenAppsDialog(
         } else {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 hiddenAppItems.forEach { item ->
-                    // Original app card preview
-                    AppCardLayout(
-                        gradientColors = item.gradientColors,
-                        enabled = true,
-                        onClick = { onUnhide(item.packageName) },
-                        modifier = Modifier.fillMaxWidth()
+                    val isSelected = item.packageName in selectedPackages
+                    SelectableAppCard(
+                        item = item,
+                        isSelected = isSelected,
+                        isMultiSelectMode = isMultiSelectMode,
+                        onClick = {
+                            if (isMultiSelectMode) {
+                                selectedPackages = if (isSelected)
+                                    selectedPackages - item.packageName
+                                else
+                                    selectedPackages + item.packageName
+                            } else {
+                                onUnhide(item.packageName)
+                            }
+                        },
+                        onLongClick = {
+                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                            selectedPackages = if (isSelected)
+                                selectedPackages - item.packageName
+                            else
+                                selectedPackages + item.packageName
+                        }
                     ) {
                         AppCardContent(
                             packageName = item.packageName,
                             packageInfo = item.packageInfo,
                             displayName = item.displayName,
-                            subtitle = stringResource(R.string.home_app_hidden_apps_hint),
+                            subtitle = if (isMultiSelectMode) null
+                            else stringResource(R.string.home_app_hidden_apps_hint),
                             gradientColors = item.gradientColors,
                             iconSource = AppDataSource.PATCHED_APK
                         )

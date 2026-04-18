@@ -40,4 +40,8 @@
         <item quantity="one">%s selected</item>
         <item quantity="other">%s selected</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Show %s app</item>
+        <item quantity="other">Show %s apps</item>
+    </plurals>
 </resources>
