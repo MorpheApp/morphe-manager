@@ -70,8 +70,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
             try {
                 if (preparation.merged) {
                     onProgress(null, State.COMPLETED, null)
-                onMergedApkReady?.invoke(preparation.file)
-            }
+                    onMergedApkReady?.invoke(preparation.file)
+                }
 
                 Session(
                     cacheDir,
