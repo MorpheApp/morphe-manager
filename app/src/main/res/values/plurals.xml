@@ -44,4 +44,8 @@
         <item quantity="one">Show %s app</item>
         <item quantity="other">Show %s apps</item>
     </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s hidden app</item>
+        <item quantity="other">%s hidden apps</item>
+    </plurals>
 </resources>

@@ -34,6 +34,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.activity.compose.BackHandler
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
@@ -46,7 +48,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -750,6 +751,11 @@ fun MainAppsSection(
     var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
     val isMultiSelectMode = selectedPackages.isNotEmpty()
 
+    // Back gesture/button cancels multi-select instead of navigating back
+    BackHandler(enabled = isMultiSelectMode) {
+        selectedPackages = emptySet()
+    }
+
     // Exit multi-select when items list changes
     LaunchedEffect(homeAppItems) {
         selectedPackages = selectedPackages.filter { pkg ->
@@ -966,24 +972,14 @@ fun MainAppsSection(
                                     }
                                 }
 
-                                // "Show hidden apps" button if there are hidden apps
+                                // "Show hidden apps" chip if there are hidden apps
                                 if (hiddenAppItems.isNotEmpty()) {
                                     item(key = "show_hidden") {
-                                        TextButton(
+                                        ShowHiddenAppsButton(
+                                            count = hiddenAppItems.size,
                                             onClick = { showHiddenAppsDialog.value = true },
                                             modifier = Modifier.padding(top = 4.dp)
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Outlined.Visibility,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(18.dp)
-                                            )
-                                            Spacer(modifier = Modifier.width(8.dp))
-                                            Text(
-                                                text = stringResource(R.string.home_app_show_hidden),
-                                                style = MaterialTheme.typography.bodyMedium
-                                            )
-                                        }
+                                        )
                                     }
                                 }
                             }
@@ -1005,6 +1001,24 @@ fun MainAppsSection(
             }
         }
     }
+}
+
+/**
+ * Pill-shaped button that appears at the bottom of the app list when hidden apps exist.
+ * Styled consistently with [OtherAppsSection] - frosted glass surface with border.
+ */
+@Composable
+private fun ShowHiddenAppsButton(
+    count: Int,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    HomeGlassPillButton(
+        onClick = onClick,
+        modifier = modifier,
+        icon = Icons.Outlined.Visibility,
+        text = pluralStringResource(R.plurals.home_app_show_hidden_count, count, count.toString())
+    )
 }
 
 /**
@@ -1093,14 +1107,11 @@ private fun HomeSearchTextField(
  */
 @Composable
 private fun SelectableAppCard(
-    item: HomeAppItem,
     isSelected: Boolean,
     isMultiSelectMode: Boolean,
-    onClick: () -> Unit,
-    onLongClick: (() -> Unit)? = null,
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     val checkScale by animateFloatAsState(
         targetValue = if (isSelected) 1f else 0f,
@@ -1113,16 +1124,8 @@ private fun SelectableAppCard(
         label = "card_alpha"
     )
 
-    Box(modifier = modifier.fillMaxWidth()) {
-        AppCardLayout(
-            gradientColors = item.gradientColors,
-            enabled = true,
-            onClick = onClick,
-            onLongClick = onLongClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .graphicsLayer { alpha = cardAlpha }
-        ) {
+    Box(modifier = modifier) {
+        Box(modifier = Modifier.graphicsLayer { alpha = cardAlpha }) {
             content()
         }
 
@@ -1209,7 +1212,11 @@ private fun DynamicAppCard(
         onGestureHintShown()
     }
 
-    Box(modifier = modifier.fillMaxWidth()) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clipToBounds()
+    ) {
         // Background layer - action icons behind the card (hidden in multi-select)
         if (!isMultiSelectMode) {
             SwipeBackground(
@@ -1223,14 +1230,8 @@ private fun DynamicAppCard(
 
         // Draggable foreground with selection overlay
         SelectableAppCard(
-            item = item,
             isSelected = isSelected,
             isMultiSelectMode = isMultiSelectMode,
-            onClick = onAppClick,
-            onLongClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                onLongPress()
-            },
             modifier = Modifier
                 .offset { IntOffset(offsetX.value.roundToInt(), 0) }
                 .then(
@@ -1359,7 +1360,7 @@ private fun MultiSelectBar(
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 4.dp, vertical = 8.dp),
+                .padding(vertical = 8.dp),
             shape = RoundedCornerShape(24.dp),
             color = MaterialTheme.colorScheme.surfaceContainerHigh,
             shadowElevation = 8.dp,
@@ -2002,36 +2003,41 @@ internal fun HiddenAppsDialog(
                 hiddenAppItems.forEach { item ->
                     val isSelected = item.packageName in selectedPackages
                     SelectableAppCard(
-                        item = item,
                         isSelected = isSelected,
-                        isMultiSelectMode = isMultiSelectMode,
-                        onClick = {
-                            if (isMultiSelectMode) {
+                        isMultiSelectMode = isMultiSelectMode
+                    ) {
+                        AppCardLayout(
+                            gradientColors = item.gradientColors,
+                            enabled = true,
+                            onClick = {
+                                if (isMultiSelectMode) {
+                                    selectedPackages = if (isSelected)
+                                        selectedPackages - item.packageName
+                                    else
+                                        selectedPackages + item.packageName
+                                } else {
+                                    onUnhide(item.packageName)
+                                }
+                            },
+                            onLongClick = {
+                                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                                 selectedPackages = if (isSelected)
                                     selectedPackages - item.packageName
                                 else
                                     selectedPackages + item.packageName
-                            } else {
-                                onUnhide(item.packageName)
-                            }
-                        },
-                        onLongClick = {
-                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                            selectedPackages = if (isSelected)
-                                selectedPackages - item.packageName
-                            else
-                                selectedPackages + item.packageName
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            AppCardContent(
+                                packageName = item.packageName,
+                                packageInfo = item.packageInfo,
+                                displayName = item.displayName,
+                                subtitle = if (isMultiSelectMode) null
+                                else stringResource(R.string.home_app_hidden_apps_hint),
+                                gradientColors = item.gradientColors,
+                                iconSource = AppDataSource.PATCHED_APK
+                            )
                         }
-                    ) {
-                        AppCardContent(
-                            packageName = item.packageName,
-                            packageInfo = item.packageInfo,
-                            displayName = item.displayName,
-                            subtitle = if (isMultiSelectMode) null
-                            else stringResource(R.string.home_app_hidden_apps_hint),
-                            gradientColors = item.gradientColors,
-                            iconSource = AppDataSource.PATCHED_APK
-                        )
                     }
                 }
             }
@@ -2322,10 +2328,29 @@ fun OtherAppsSection(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    HomeGlassPillButton(
+        onClick = onClick,
+        modifier = modifier.padding(bottom = 12.dp),
+        text = stringResource(R.string.home_other_apps)
+    )
+}
+
+/**
+ * Shared frosted-glass pill button used by [OtherAppsSection] and [ShowHiddenAppsButton].
+ *
+ * Renders a rounded pill with semi-transparent surface background, border, press-scale
+ * animation, and haptic feedback. Content is either icon+text or text-only.
+ */
+@Composable
+private fun HomeGlassPillButton(
+    onClick: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null
+) {
     val view = LocalView.current
     val shape = RoundedCornerShape(20.dp)
     val isDark = isSystemInDarkTheme()
-
     val backgroundAlpha = if (isDark) 0.35f else 0.6f
     val borderAlpha = if (isDark) 0.4f else 0.6f
 
@@ -2335,26 +2360,20 @@ fun OtherAppsSection(
         targetValue = if (isPressed) 0.97f else 1f,
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness    = Spring.StiffnessMedium
+            stiffness = Spring.StiffnessMedium
         ),
-        label = "other_apps_press_scale"
+        label = "pill_press_scale"
     )
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 12.dp)
             .height(48.dp)
-            .graphicsLayer { scaleX = scale; scaleY = scale }
+            .graphicsLayer { scaleX = scale; scaleY = scale; clip = true }
             .clip(shape)
-            .background(
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
-            )
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha))
             .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
-                ),
+                BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)),
                 shape = shape
             )
             .clickable(
@@ -2366,13 +2385,25 @@ fun OtherAppsSection(
             },
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = stringResource(R.string.home_other_apps),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            Text(
+                text = text,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
     }
 }
 
