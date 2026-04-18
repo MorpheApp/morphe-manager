@@ -966,20 +966,17 @@ fun MainAppsSection(
                                     }
 
                                     // "Show hidden apps" button
-                                    item(key = "show_hidden") {
-                                        Column {
-                                            AnimatedVisibility(
-                                                visible = hiddenAppItems.isNotEmpty(),
-                                                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                                                        expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                                                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                                                        shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
-                                            ) {
-                                                ShowHiddenAppsButton(
-                                                    count = hiddenAppItems.size,
-                                                    onClick = { showHiddenAppsDialog.value = true }
+                                    if (hiddenAppItems.isNotEmpty()) {
+                                        item(key = "show_hidden") {
+                                            ShowHiddenAppsButton(
+                                                count = hiddenAppItems.size,
+                                                onClick = { showHiddenAppsDialog.value = true },
+                                                modifier = Modifier.animateItem(
+                                                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                                                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                                                    placementSpec = spring(stiffness = Spring.StiffnessMediumLow)
                                                 )
-                                            }
+                                            )
                                         }
                                     }
                                 }
@@ -1486,30 +1483,28 @@ private fun MultiSelectBar(
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f)
                 )
 
                 // Cancel
-                TextButton(onClick = onCancel) {
-                    Text(stringResource(android.R.string.cancel))
-                }
+                ActionPillButton(
+                    onClick = onCancel,
+                    icon = Icons.Outlined.Close,
+                    contentDescription = stringResource(android.R.string.cancel)
+                )
 
                 // Hide action
-                FilledTonalButton(
+                ActionPillButton(
                     onClick = onHide,
-                    colors = ButtonDefaults.filledTonalButtonColors(
+                    icon = Icons.Outlined.VisibilityOff,
+                    contentDescription = stringResource(R.string.hide),
+                    colors = IconButtonDefaults.filledTonalIconButtonColors(
                         containerColor = MaterialTheme.colorScheme.errorContainer,
                         contentColor = MaterialTheme.colorScheme.onErrorContainer
                     )
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.VisibilityOff,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(Modifier.width(6.dp))
-                    Text(stringResource(R.string.hide))
-                }
+                )
             }
         }
     }
