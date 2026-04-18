@@ -115,6 +115,7 @@ class ProcessRuntime(
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
         stripNativeLibs: Boolean,
+        skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
         val minMemoryLimit = 200
@@ -131,6 +132,7 @@ class ProcessRuntime(
                     selectedPatches,
                     options,
                     stripNativeLibs,
+                    skipUnneededSplits,
                     logger,
                     onPatchCompleted,
                     onProgress,
@@ -174,6 +176,7 @@ class ProcessRuntime(
         selectedPatches: PatchSelection,
         options: Options,
         stripNativeLibs: Boolean,
+        skipUnneededSplits: Boolean,
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
@@ -275,6 +278,7 @@ class ProcessRuntime(
                     )
                 },
                 stripNativeLibs = stripNativeLibs,
+                skipUnneededSplits = skipUnneededSplits,
                 mergedInputFile = mergedInputPath,
                 bytecodeMode = prefs.bytecodeModePreference.get(),
             )

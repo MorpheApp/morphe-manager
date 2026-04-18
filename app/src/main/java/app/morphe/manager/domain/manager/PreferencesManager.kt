@@ -59,6 +59,7 @@ class PreferencesManager(
     val useExpertMode = booleanPreference("use_expert_mode", false)
 
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
+    val skipUnneededSplits = booleanPreference("skip_unneeded_splits", false)
 
     /**
      * Bytecode processing mode for the patcher.
@@ -136,6 +137,7 @@ class PreferencesManager(
         val themePresetSelectionName: String? = null,
         val themePresetSelectionEnabled: Boolean? = null,
         val stripUnusedNativeLibs: Boolean? = null,
+        val skipUnneededSplits: Boolean? = null,
         val theme: Theme? = null,
         val appLanguage: String? = null,
         val api: String? = null,
@@ -186,6 +188,7 @@ class PreferencesManager(
         themePresetSelectionName = themePresetSelectionName.get(),
         themePresetSelectionEnabled = themePresetSelectionEnabled.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
+        skipUnneededSplits = skipUnneededSplits.get(),
         theme = theme.get(),
         appLanguage = appLanguage.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
@@ -218,6 +221,7 @@ class PreferencesManager(
         snapshot.themePresetSelectionName?.let { themePresetSelectionName.value = it }
         snapshot.themePresetSelectionEnabled?.let { themePresetSelectionEnabled.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
+        snapshot.skipUnneededSplits?.let { skipUnneededSplits.value = it }
         snapshot.theme?.let { theme.value = it }
         snapshot.appLanguage?.let { appLanguage.value = it }
         snapshot.gitHubPat?.let { gitHubPat.value = it }

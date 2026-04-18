@@ -5,7 +5,10 @@ import android.app.Application
 import android.content.ClipData
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.*
+import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.Log
@@ -14,18 +17,14 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
 import java.io.File
-import java.io.IOException
-import java.util.Locale
-import java.util.UUID
 
 class InstallerManager(
     private val app: Application,
     private val prefs: PreferencesManager,
     private val rootInstaller: RootInstaller,
-    private val shizukuInstaller: ShizukuInstaller
+    private val ackpineInstaller: AckpineInstaller
 ) {
     private val packageManager: PackageManager = app.packageManager
-    private val shareDir: File = File(app.cacheDir, SHARE_DIR).apply { mkdirs() }
     private val dummyUri: Uri = InstallerFileProvider.buildUri(app, "dummy.apk")
     private val defaultInstallerComponent: ComponentName? by lazy { resolveDefaultInstallerComponent() }
     private val defaultInstallerPackage: String? get() = defaultInstallerComponent?.packageName
@@ -223,8 +222,7 @@ class InstallerManager(
                 if (!availabilityFor(token, target).available) {
                     null
                 } else {
-                    val shared = copyToShareDir(sourceFile)
-                    val uri = InstallerFileProvider.buildUri(app, shared)
+                    val uri = InstallerFileProvider.getUriForFile(app, sourceFile)
                     val intent = Intent(Intent.ACTION_VIEW).apply {
                         setDataAndType(uri, APK_MIME)
                         addFlags(
@@ -248,7 +246,7 @@ class InstallerManager(
                     InstallPlan.External(
                         target = target,
                         intent = intent,
-                        sharedFile = shared,
+                        sharedFile = File(app.cacheDir, "${InstallerFileProvider.SHARE_DIR}/${sourceFile.name}"),
                         uri = uri,
                         expectedPackage = expectedPackage,
                         installerLabel = resolveLabel(token.componentName),
@@ -302,7 +300,7 @@ class InstallerManager(
             label = app.getString(R.string.installer_shizuku_name),
             description = app.getString(R.string.installer_shizuku_description),
             availability = availabilityFor(Token.Shizuku, target, checkRoot),
-            icon = if (shizukuInstaller.isInstalled()) loadInstallerIcon(ShizukuInstaller.PACKAGE_NAME) else null
+            icon = if (ackpineInstaller.isShizukuInstalled()) loadInstallerIcon(AckpineInstaller.SHIZUKU_PACKAGE) else null
         )
 
         is Token.Component -> {
@@ -315,21 +313,6 @@ class InstallerManager(
                 icon = loadInstallerIcon(token.componentName)
             )
         }
-    }
-
-    private fun copyToShareDir(source: File): File {
-        val target = File(shareDir, "${UUID.randomUUID()}.apk")
-        try {
-            source.inputStream().use { input ->
-                target.outputStream().use { output ->
-                    input.copyTo(output)
-                }
-            }
-        } catch (error: IOException) {
-            target.delete()
-            throw error
-        }
-        return target
     }
 
     private fun buildSequence(target: InstallTarget): List<Token> {
@@ -358,14 +341,14 @@ class InstallerManager(
         Token.AutoSaved -> if (!target.supportsRoot) {
             Availability(false, R.string.installer_status_not_supported)
         } else if (checkRoot) {
-            // Expert mode: check root access
+            // Check root access
             if (!rootInstaller.hasRootAccess()) {
                 Availability(false, R.string.installer_status_requires_root)
             } else {
                 Availability(true)
             }
         } else {
-            // Morphe mode: check if device is rooted without requesting access
+            // Check if device is rooted without requesting access.
             // This prevents showing root installer on non-rooted devices
             if (!rootInstaller.isDeviceRooted()) {
                 Availability(false, R.string.installer_status_requires_root)
@@ -376,11 +359,11 @@ class InstallerManager(
         }
 
         Token.Shizuku -> {
-            if (!shizukuInstaller.isInstalled()) {
+            if (!ackpineInstaller.isShizukuInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
             } else if (checkRoot) {
                 // Full availability check
-                shizukuInstaller.availability(target)
+                ackpineInstaller.shizukuAvailability(target)
             } else {
                 // Just verify Shizuku is installed (for UI display)
                 Availability(true)
@@ -524,43 +507,12 @@ class InstallerManager(
 
     companion object {
         private const val APK_MIME = "application/vnd.android.package-archive"
-        internal const val SHARE_DIR = "installer_share"
         private const val AOSP_INSTALLER_PACKAGE = "com.google.android.packageinstaller"
         private const val AOSP_INSTALLER_LABEL = "Package installer"
         private const val TAG = "InstallerManager"
     }
 
-    fun openShizukuApp(): Boolean = shizukuInstaller.launchApp()
-
-    fun formatFailureHint(status: Int, extraMessage: String?): String? {
-        val normalizedExtra = extraMessage?.takeIf { it.isNotBlank() }
-        val base = when (status) {
-            PackageInstaller.STATUS_FAILURE -> app.getString(R.string.installer_hint_generic)
-            PackageInstaller.STATUS_FAILURE_ABORTED -> app.getString(R.string.installer_hint_aborted)
-            PackageInstaller.STATUS_FAILURE_BLOCKED -> app.getString(R.string.installer_hint_blocked)
-            PackageInstaller.STATUS_FAILURE_CONFLICT -> app.getString(R.string.installer_hint_conflict)
-            PackageInstaller.STATUS_FAILURE_INCOMPATIBLE -> app.getString(R.string.installer_hint_incompatible)
-            PackageInstaller.STATUS_FAILURE_INVALID -> app.getString(R.string.installer_hint_invalid)
-            PackageInstaller.STATUS_FAILURE_STORAGE -> app.getString(R.string.installer_hint_storage)
-            PackageInstaller.STATUS_FAILURE_TIMEOUT -> app.getString(R.string.installer_hint_timeout)
-            else -> null
-        }
-
-        return when {
-            base == null -> normalizedExtra
-            normalizedExtra == null -> base
-            else -> app.getString(R.string.installer_hint_with_reason, base, normalizedExtra)
-        }
-    }
-
-    fun isSignatureMismatch(message: String?): Boolean {
-        val normalized = message?.lowercase(Locale.ROOT)?.trim().orEmpty()
-        if (normalized.isEmpty()) return false
-        return normalized.contains("install_failed_update_incompatible") ||
-                normalized.contains("install_failed_signature_inconsistent") ||
-                normalized.contains("signatures do not match") ||
-                normalized.contains("signature mismatch")
-    }
+    fun openShizukuApp(): Boolean = ackpineInstaller.launchShizukuApp()
 }
 
 private fun InstallerManager.Token.describe(): String = when (this) {
