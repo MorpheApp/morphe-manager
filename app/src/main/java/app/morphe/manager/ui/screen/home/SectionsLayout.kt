@@ -35,7 +35,6 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.activity.compose.BackHandler
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
@@ -46,7 +45,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
@@ -59,7 +57,6 @@ import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.KnownApps
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
 
 /**
  * Home screen layout with dynamic app buttons:
@@ -727,6 +724,7 @@ fun GreetingSection(
 /**
  * Section 3: Dynamic scrollable app buttons list.
  */
+@SuppressLint("FrequentlyChangingValue")
 @Composable
 fun MainAppsSection(
     homeAppItems: List<HomeAppItem>,
@@ -873,142 +871,154 @@ fun MainAppsSection(
                             )
                         }
 
-                        LazyColumn(
-                            state = listState,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
-                                .drawWithContent {
-                                    drawContent()
-                                    val fadePx = fadeSize.toPx()
-                                    val canScrollUp = listState.firstVisibleItemIndex > 0 ||
-                                            listState.firstVisibleItemScrollOffset > 0
-                                    if (canScrollUp) {
-                                        drawRect(
-                                            brush = Brush.verticalGradient(
-                                                colors = listOf(Color.Transparent, Color.Black),
-                                                startY = 0f,
-                                                endY = fadePx
-                                            ),
-                                            blendMode = BlendMode.DstIn
+                        // LazyColumn has no Offscreen compositing so graphicsLayer { translationX }
+                        // on individual cards is not clipped during swipe.
+                        // The vertical fade is drawn as a pointer-transparent overlay on top.
+                        Box(modifier = Modifier.fillMaxWidth()) {
+                            LazyColumn(
+                                state = listState,
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(itemSpacing),
+                                contentPadding = PaddingValues(
+                                    // Extra bottom padding so cards aren't hidden behind the multi-select bar
+                                    bottom = if (isMultiSelectMode) 96.dp else 0.dp
+                                )
+                            ) {
+                                // Cold start: homeAppItems still empty - show placeholder shimmer cards
+                                if (stableLoadingState && homeAppItems.isEmpty()) {
+                                    items(3, key = { "placeholder_$it" }) { index ->
+                                        AppLoadingCard(
+                                            gradientColors = placeholderGradients[index % placeholderGradients.size],
+                                            modifier = Modifier.animateItem()
                                         )
                                     }
-                                    val canScrollDown = listState.canScrollForward
-                                    if (canScrollDown) {
-                                        drawRect(
-                                            brush = Brush.verticalGradient(
-                                                colors = listOf(Color.Black, Color.Transparent),
-                                                startY = size.height - fadePx,
-                                                endY = size.height
-                                            ),
-                                            blendMode = BlendMode.DstIn
-                                        )
-                                    }
-                                },
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(itemSpacing),
-                            contentPadding = PaddingValues(
-                                top = 8.dp,
-                                // Extra bottom padding so cards aren't hidden behind the multi-select bar
-                                bottom = if (isMultiSelectMode) 96.dp else 8.dp
-                            )
-                        ) {
-                            // Cold start: homeAppItems still empty - show placeholder shimmer cards
-                            if (stableLoadingState && homeAppItems.isEmpty()) {
-                                items(3, key = { "placeholder_$it" }) { index ->
-                                    AppLoadingCard(
-                                        gradientColors = placeholderGradients[index % placeholderGradients.size],
-                                        modifier = Modifier.animateItem()
-                                    )
-                                }
-                            } else {
-                                itemsIndexed(
-                                    items = filteredItems,
-                                    key = { _, item -> item.packageName }
-                                ) { index, item ->
-                                    val isSelected = item.packageName in selectedPackages
-                                    DynamicAppCard(
-                                        item = item,
-                                        isLoading = stableLoadingState,
-                                        hasUpdate = item.hasUpdate,
-                                        onAppClick = {
-                                            if (isMultiSelectMode) {
-                                                // In multi-select mode taps toggle selection
+                                } else {
+                                    itemsIndexed(
+                                        items = filteredItems,
+                                        key = { _, item -> item.packageName }
+                                    ) { index, item ->
+                                        val isSelected = item.packageName in selectedPackages
+                                        DynamicAppCard(
+                                            item = item,
+                                            isLoading = stableLoadingState,
+                                            hasUpdate = item.hasUpdate,
+                                            onAppClick = {
+                                                if (isMultiSelectMode) {
+                                                    // In multi-select mode taps toggle selection
+                                                    selectedPackages = if (isSelected)
+                                                        selectedPackages - item.packageName
+                                                    else
+                                                        selectedPackages + item.packageName
+                                                } else {
+                                                    onAppClick(item)
+                                                }
+                                            },
+                                            onHide = { onHideApp(item.packageName) },
+                                            onShowPatches = { onShowPatches(item) },
+                                            // Hint plays only on the first card
+                                            showGestureHint = index == 0 && showGestureHint,
+                                            onGestureHintShown = onGestureHintShown,
+                                            isSelected = isSelected,
+                                            isMultiSelectMode = isMultiSelectMode,
+                                            onLongPress = {
+                                                // Long-press enters multi-select and toggles this card
                                                 selectedPackages = if (isSelected)
                                                     selectedPackages - item.packageName
                                                 else
                                                     selectedPackages + item.packageName
-                                            } else {
-                                                onAppClick(item)
-                                            }
-                                        },
-                                        onHide = { onHideApp(item.packageName) },
-                                        onShowPatches = { onShowPatches(item) },
-                                        // Hint plays only on the first card
-                                        showGestureHint = index == 0 && showGestureHint,
-                                        onGestureHintShown = onGestureHintShown,
-                                        isSelected = isSelected,
-                                        isMultiSelectMode = isMultiSelectMode,
-                                        onLongPress = {
-                                            // Long-press enters multi-select and toggles this card
-                                            selectedPackages = if (isSelected)
-                                                selectedPackages - item.packageName
-                                            else
-                                                selectedPackages + item.packageName
-                                        },
-                                        modifier = Modifier.animateItem()
-                                    )
-                                }
+                                            },
+                                            modifier = Modifier.animateItem()
+                                        )
+                                    }
 
-                                // Search empty result
-                                if (isSearchEmpty) {
-                                    item(key = "search_empty") {
-                                        Column(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(vertical = 32.dp)
-                                                .animateItem(),
-                                            horizontalAlignment = Alignment.CenterHorizontally,
-                                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Outlined.SearchOff,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(40.dp),
-                                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
-                                            )
-                                            Text(
-                                                text = stringResource(R.string.search_no_results),
-                                                style = MaterialTheme.typography.titleMedium,
-                                                fontWeight = FontWeight.SemiBold,
-                                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                                            )
-                                            Text(
-                                                text = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
-                                                style = MaterialTheme.typography.bodyMedium,
-                                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
-                                                textAlign = TextAlign.Center
-                                            )
+                                    // Search empty result
+                                    if (isSearchEmpty) {
+                                        item(key = "search_empty") {
+                                            Column(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(vertical = 32.dp)
+                                                    .animateItem(),
+                                                horizontalAlignment = Alignment.CenterHorizontally,
+                                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                                            ) {
+                                                Icon(
+                                                    imageVector = Icons.Outlined.SearchOff,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(40.dp),
+                                                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+                                                )
+                                                Text(
+                                                    text = stringResource(R.string.search_no_results),
+                                                    style = MaterialTheme.typography.titleMedium,
+                                                    fontWeight = FontWeight.SemiBold,
+                                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                                                )
+                                                Text(
+                                                    text = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
+                                                    style = MaterialTheme.typography.bodyMedium,
+                                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+                                                    textAlign = TextAlign.Center
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                    // "Show hidden apps" button
+                                    item(key = "show_hidden") {
+                                        Column {
+                                            AnimatedVisibility(
+                                                visible = hiddenAppItems.isNotEmpty(),
+                                                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) +
+                                                        expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                                                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) +
+                                                        shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                                            ) {
+                                                ShowHiddenAppsButton(
+                                                    count = hiddenAppItems.size,
+                                                    onClick = { showHiddenAppsDialog.value = true }
+                                                )
+                                            }
                                         }
                                     }
                                 }
+                            }
 
-                                // "Show hidden apps" button
-                                item(key = "show_hidden") {
-                                    AnimatedVisibility(
-                                        visible = hiddenAppItems.isNotEmpty(),
-                                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                                                expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                                                shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
-                                    ) {
-                                        ShowHiddenAppsButton(
-                                            count = hiddenAppItems.size,
-                                            onClick = { showHiddenAppsDialog.value = true },
-                                            modifier = Modifier.padding(top = itemSpacing)
-                                        )
-                                    }
-                                }
+                            // Vertical fade overlay drawn on top of LazyColumn.
+                            // Does NOT use Offscreen compositing so the LazyColumn items
+                            // (translated via graphicsLayer) are never clipped horizontally.
+                            val canScrollUp = listState.firstVisibleItemIndex > 0 ||
+                                    listState.firstVisibleItemScrollOffset > 0
+                            val canScrollDown = listState.canScrollForward
+                            if (canScrollUp || canScrollDown) {
+                                val bgColor = MaterialTheme.colorScheme.background
+                                val fadePx = with(LocalDensity.current) { fadeSize.toPx() }
+                                Box(
+                                    modifier = Modifier
+                                        .matchParentSize()
+                                        .drawWithContent {
+                                            drawContent()
+                                            if (canScrollUp) {
+                                                drawRect(
+                                                    brush = Brush.verticalGradient(
+                                                        colors = listOf(bgColor, Color.Transparent),
+                                                        startY = 0f,
+                                                        endY = fadePx
+                                                    )
+                                                )
+                                            }
+                                            if (canScrollDown) {
+                                                drawRect(
+                                                    brush = Brush.verticalGradient(
+                                                        colors = listOf(Color.Transparent, bgColor),
+                                                        startY = size.height - fadePx,
+                                                        endY = size.height
+                                                    )
+                                                )
+                                            }
+                                        }
+                                )
                             }
                         }
                     }
@@ -1288,11 +1298,7 @@ private fun DynamicAppCard(
         onGestureHintShown()
     }
 
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clipToBounds()
-    ) {
+    Box(modifier = modifier.fillMaxWidth()) {
         // Background layer - action icons behind the card (hidden in multi-select)
         if (!isMultiSelectMode) {
             SwipeBackground(
@@ -1309,7 +1315,7 @@ private fun DynamicAppCard(
             isSelected = isSelected,
             isMultiSelectMode = isMultiSelectMode,
             modifier = Modifier
-                .offset { IntOffset(offsetX.value.roundToInt(), 0) }
+                .graphicsLayer { translationX = offsetX.value }
                 .then(
                     if (!isMultiSelectMode) {
                         Modifier.pointerInput(Unit) {
@@ -1476,7 +1482,7 @@ private fun MultiSelectBar(
 
                 // Label
                 Text(
-                    text = pluralStringResource(R.plurals.home_app_selected, selectedCount, selectedCount.toString()),
+                    text = stringResource(R.string.selected),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurface,
@@ -1644,7 +1650,7 @@ fun AppPatchesDialog(
         compactPadding = true,
         scrollable = false,
         footer = {
-            MorpheDialogButton(
+            MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -2051,7 +2057,7 @@ internal fun HiddenAppsDialog(
                     onSecondaryClick = { selectedPackages = emptySet() }
                 )
             } else {
-                MorpheDialogButton(
+                MorpheDialogOutlinedButton(
                     text = stringResource(R.string.close),
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth()
@@ -2075,7 +2081,7 @@ internal fun HiddenAppsDialog(
                 )
             }
         } else {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 hiddenAppItems.forEach { item ->
                     val isSelected = item.packageName in selectedPackages
                     SelectableAppCard(

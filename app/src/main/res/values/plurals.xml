@@ -36,10 +36,6 @@
         <item quantity="one">%s patch selected</item>
         <item quantity="other">%s patches selected</item>
     </plurals>
-    <plurals name="home_app_selected">
-        <item quantity="one">%s selected</item>
-        <item quantity="other">%s selected</item>
-    </plurals>
     <plurals name="home_app_show_selected">
         <item quantity="one">Show %s app</item>
         <item quantity="other">Show %s apps</item>
