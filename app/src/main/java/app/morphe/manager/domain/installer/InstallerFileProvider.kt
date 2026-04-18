@@ -98,7 +98,7 @@ class InstallerFileProvider : ContentProvider() {
         fun getUriForFile(context: Context, file: File): Uri {
             val shareDir = File(context.cacheDir, SHARE_DIR).also { it.mkdirs() }
             val dest = File(shareDir, file.name)
-            if (!dest.exists() || dest.length() != file.length()) {
+            if (!dest.exists() || dest.length() != file.length() || dest.lastModified() < file.lastModified()) {
                 file.copyTo(dest, overwrite = true)
             }
             return buildUri(context, dest.name)
