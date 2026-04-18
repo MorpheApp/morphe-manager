@@ -844,12 +844,23 @@ fun MainAppsSection(
         ) { empty ->
             if (empty) {
                 if (isAllHiddenState) {
-                    HomeAllHiddenState(
-                        hiddenCount = hiddenAppItems.size,
-                        onShowHidden = { showHiddenAppsDialog.value = true }
+                    MorpheEmptyState(
+                        icon = Icons.Outlined.VisibilityOff,
+                        title = stringResource(R.string.home_all_apps_hidden_title),
+                        subtitle = stringResource(R.string.home_all_apps_hidden_subtitle),
+                        actionIcon = Icons.Outlined.Visibility,
+                        actionLabel = pluralStringResource(R.plurals.home_app_show_hidden_count, hiddenAppItems.size, hiddenAppItems.size.toString()),
+                        onAction = { showHiddenAppsDialog.value = true }
                     )
                 } else {
-                    HomeEmptyState(onBundlesClick = onBundlesClick)
+                    MorpheEmptyState(
+                        icon = Icons.Outlined.Inbox,
+                        title = stringResource(R.string.home_no_apps_title),
+                        subtitle = stringResource(R.string.home_no_apps_subtitle, stringResource(R.string.sources_management_title)),
+                        actionIcon = Icons.Outlined.Source,
+                        actionLabel = stringResource(R.string.sources_management_title),
+                        onAction = onBundlesClick
+                    )
                 }
             } else {
                 Box(
@@ -1056,13 +1067,17 @@ private fun ShowHiddenAppsButton(
 }
 
 /**
- * Empty state shown when no apps are available from any bundle.
- * Typically, seen when all sources are disabled or none added yet.
+ * Generic empty state with icon, title, optional subtitle and optional action button.
  */
 @Composable
-private fun HomeEmptyState(
-    onBundlesClick: () -> Unit,
-    modifier: Modifier = Modifier
+internal fun MorpheEmptyState(
+    icon: ImageVector,
+    title: String,
+    subtitle: String? = null,
+    actionIcon: ImageVector? = null,
+    actionLabel: String? = null,
+    onAction: (() -> Unit)? = null,
+    @SuppressLint("ModifierParameter") modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
@@ -1073,83 +1088,39 @@ private fun HomeEmptyState(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Icon(
-            imageVector = Icons.Outlined.Inbox,
+            imageVector = icon,
             contentDescription = null,
             modifier = Modifier.size(56.dp),
             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
         )
         Text(
-            text = stringResource(R.string.home_no_apps_title),
+            text = title,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             textAlign = TextAlign.Center
         )
-        Text(
-            text = stringResource(R.string.home_no_apps_subtitle, stringResource(R.string.sources_management_title)),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        FilledTonalButton(onClick = onBundlesClick) {
-            Icon(
-                imageVector = Icons.Outlined.Source,
-                contentDescription = null,
-                modifier = Modifier.size(18.dp)
+        if (subtitle != null) {
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+                textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(stringResource(R.string.sources_management_title))
         }
-    }
-}
-
-/**
- * Empty state shown when all apps have been manually hidden by the user.
- * Unlike [HomeEmptyState], this provides a direct path to unhide them.
- */
-@Composable
-private fun HomeAllHiddenState(
-    hiddenCount: Int,
-    onShowHidden: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .widthIn(max = 500.dp)
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp, vertical = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.VisibilityOff,
-            contentDescription = null,
-            modifier = Modifier.size(56.dp),
-            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
-        )
-        Text(
-            text = stringResource(R.string.home_all_apps_hidden_title),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = stringResource(R.string.home_all_apps_hidden_subtitle),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        FilledTonalButton(onClick = onShowHidden) {
-            Icon(
-                imageVector = Icons.Outlined.Visibility,
-                contentDescription = null,
-                modifier = Modifier.size(18.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(pluralStringResource(R.plurals.home_app_show_hidden_count, hiddenCount, hiddenCount.toString()))
+        if (onAction != null && actionLabel != null) {
+            Spacer(modifier = Modifier.height(4.dp))
+            FilledTonalButton(onClick = onAction) {
+                if (actionIcon != null) {
+                    Icon(
+                        imageVector = actionIcon,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                Text(actionLabel)
+            }
         }
     }
 }
@@ -2062,19 +2033,10 @@ internal fun HiddenAppsDialog(
         compactPadding = true
     ) {
         if (hiddenAppItems.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 24.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(R.string.home_app_no_hidden),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current,
-                    textAlign = TextAlign.Center
-                )
-            }
+            MorpheEmptyState(
+                icon = Icons.Outlined.Visibility,
+                title = stringResource(R.string.home_app_no_hidden)
+            )
         } else {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 hiddenAppItems.forEach { item ->
