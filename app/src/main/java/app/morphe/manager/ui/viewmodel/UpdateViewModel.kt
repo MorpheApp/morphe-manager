@@ -14,6 +14,7 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.domain.installer.AckpineInstaller
 import app.morphe.manager.domain.installer.InstallCancelledException
 import app.morphe.manager.domain.installer.InstallerManager
+import ru.solrudev.ackpine.installer.InstallFailure
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
@@ -177,10 +178,10 @@ class UpdateViewModel(
             is InstallerManager.InstallPlan.Internal -> {
                 state = State.INSTALLING
                 try {
-                    ackpineInstaller.installInternal(location)
-                    installError = ""
-                    state = State.SUCCESS
-                    app.toast(app.getString(R.string.install_app_success))
+                    handleInstallFailure(
+                        failure = ackpineInstaller.installInternal(location),
+                        successToast = R.string.install_app_success
+                    )
                 } catch (_: InstallCancelledException) {
                     // User dismissed dialog — go back to CAN_INSTALL so they can retry
                     state = State.CAN_INSTALL
@@ -204,10 +205,10 @@ class UpdateViewModel(
             is InstallerManager.InstallPlan.Shizuku -> {
                 state = State.INSTALLING
                 try {
-                    ackpineInstaller.installShizuku(location)
-                    installError = ""
-                    state = State.SUCCESS
-                    app.toast(app.getString(R.string.update_completed))
+                    handleInstallFailure(
+                        failure = ackpineInstaller.installShizuku(location),
+                        successToast = R.string.update_completed
+                    )
                 } catch (_: InstallCancelledException) {
                     state = State.CAN_INSTALL
                 } catch (e: Exception) {
@@ -220,6 +221,29 @@ class UpdateViewModel(
             }
 
             is InstallerManager.InstallPlan.External -> launchExternalInstaller(plan)
+        }
+    }
+
+    private fun handleInstallFailure(failure: InstallFailure?, @StringRes successToast: Int) {
+        when (failure) {
+            null -> {
+                installError = ""
+                state = State.SUCCESS
+                app.toast(app.getString(successToast))
+            }
+            is InstallFailure.Conflict -> {
+                installError = app.getString(R.string.installer_hint_conflict)
+                canResumeDownload = false
+                app.toast(installError)
+                state = State.FAILED
+            }
+            else -> {
+                val message = failure.message ?: failure.javaClass.simpleName
+                installError = message
+                canResumeDownload = false
+                app.toast(app.getString(R.string.install_app_fail, message))
+                state = State.FAILED
+            }
         }
     }
 
