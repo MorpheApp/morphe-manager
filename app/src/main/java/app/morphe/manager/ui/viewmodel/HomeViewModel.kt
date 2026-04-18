@@ -2272,7 +2272,7 @@ class HomeViewModel(
         return targetsByPackage
             .mapValues { (_, byBundle) ->
                 byBundle.entries
-                    .sortedBy { (uid, _) -> bundleNames[uid] ?: "" }
+                    .sortedWith(compareBy({ it.key != DEFAULT_SOURCE_UID }, { bundleNames[it.key] ?: "" }))
                     .flatMap { (uid, versionMap) ->
                         versionMap.values
                             .sortedDescending()
