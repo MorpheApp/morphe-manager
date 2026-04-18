@@ -34,6 +34,8 @@
     <string name="home_no_apps_title">No apps available</string>
     <string name="home_no_apps_subtitle">Add a patch source or enable an existing one in %s</string>
     <string name="home_no_apps_search_subtitle">No apps match \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">All apps are hidden</string>
+    <string name="home_all_apps_hidden_subtitle">You\'ve hidden all apps from the home screen</string>
 
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>

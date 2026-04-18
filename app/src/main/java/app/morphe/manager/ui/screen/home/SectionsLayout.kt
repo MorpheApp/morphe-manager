@@ -813,8 +813,11 @@ fun MainAppsSection(
     val listState = rememberLazyListState()
     val fadeSize = 24.dp
 
-    // True empty state: loaded but no apps at all: all bundles disabled or no sources
-    val isEmptyState = !stableLoadingState && homeAppItems.isEmpty()
+    // True empty state: loaded, no apps from any bundle (no sources / all disabled)
+    val isNoSourcesState = !stableLoadingState && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
+    // All-hidden state: apps exist but all are hidden
+    val isAllHiddenState = !stableLoadingState && homeAppItems.isEmpty() && hiddenAppItems.isNotEmpty()
+    val isEmptyState = isNoSourcesState || isAllHiddenState
     // Search empty state: items exist but nothing matches query
     val isSearchEmpty = !stableLoadingState && homeAppItems.isNotEmpty() &&
             searchQuery.isNotBlank() && filteredItems.isEmpty()
@@ -831,7 +834,14 @@ fun MainAppsSection(
             label = "home_empty_state"
         ) { empty ->
             if (empty) {
-                HomeEmptyState(onBundlesClick = onBundlesClick)
+                if (isAllHiddenState) {
+                    HomeAllHiddenState(
+                        hiddenCount = hiddenAppItems.size,
+                        onShowHidden = { showHiddenAppsDialog.value = true }
+                    )
+                } else {
+                    HomeEmptyState(onBundlesClick = onBundlesClick)
+                }
             } else {
                 Box(
                     modifier = Modifier
@@ -972,19 +982,19 @@ fun MainAppsSection(
                                     }
                                 }
 
-                                // "Show hidden apps" chip if there are hidden apps
-                                if (hiddenAppItems.isNotEmpty()) {
-                                    item(key = "show_hidden") {
+                                // "Show hidden apps" button
+                                item(key = "show_hidden") {
+                                    AnimatedVisibility(
+                                        visible = hiddenAppItems.isNotEmpty(),
+                                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) +
+                                                expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) +
+                                                shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                                    ) {
                                         ShowHiddenAppsButton(
                                             count = hiddenAppItems.size,
                                             onClick = { showHiddenAppsDialog.value = true },
-                                            modifier = Modifier
-                                                .animateItem(
-                                                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                                    placementSpec = tween(MorpheDefaults.ANIMATION_DURATION)
-                                                )
-                                                .padding(top = 4.dp)
+                                            modifier = Modifier.padding(top = 4.dp)
                                         )
                                     }
                                 }
@@ -1077,7 +1087,56 @@ private fun HomeEmptyState(
 }
 
 /**
- * Standalone search field for the home screen.
+ * Empty state shown when all apps have been manually hidden by the user.
+ * Unlike [HomeEmptyState], this provides a direct path to unhide them.
+ */
+@Composable
+private fun HomeAllHiddenState(
+    hiddenCount: Int,
+    onShowHidden: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .widthIn(max = 500.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp, vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.VisibilityOff,
+            contentDescription = null,
+            modifier = Modifier.size(56.dp),
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
+        )
+        Text(
+            text = stringResource(R.string.home_all_apps_hidden_title),
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = stringResource(R.string.home_all_apps_hidden_subtitle),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        FilledTonalButton(onClick = onShowHidden) {
+            Icon(
+                imageVector = Icons.Outlined.Visibility,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(pluralStringResource(R.plurals.home_app_show_hidden_count, hiddenCount, hiddenCount.toString()))
+        }
+    }
+}
+
+/**
  * Wraps [MorpheDialogTextField] with [LocalDialogTextColor] set to onSurface
  * so it renders correctly outside a dialog context.
  */
