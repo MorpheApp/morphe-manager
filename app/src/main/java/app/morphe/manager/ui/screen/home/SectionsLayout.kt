@@ -978,7 +978,13 @@ fun MainAppsSection(
                                         ShowHiddenAppsButton(
                                             count = hiddenAppItems.size,
                                             onClick = { showHiddenAppsDialog.value = true },
-                                            modifier = Modifier.padding(top = 4.dp)
+                                            modifier = Modifier
+                                                .animateItem(
+                                                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                                                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                                                    placementSpec = tween(MorpheDefaults.ANIMATION_DURATION)
+                                                )
+                                                .padding(top = 4.dp)
                                         )
                                     }
                                 }
