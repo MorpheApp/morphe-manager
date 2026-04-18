@@ -17,10 +17,10 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
@@ -891,10 +892,10 @@ fun MainAppsSection(
                                     )
                                 }
                             } else {
-                                items(
+                                itemsIndexed(
                                     items = filteredItems,
-                                    key = { it.packageName }
-                                ) { item ->
+                                    key = { _, item -> item.packageName }
+                                ) { index, item ->
                                     val isSelected = item.packageName in selectedPackages
                                     DynamicAppCard(
                                         item = item,
@@ -913,7 +914,8 @@ fun MainAppsSection(
                                         },
                                         onHide = { onHideApp(item.packageName) },
                                         onShowPatches = { onShowPatches(item) },
-                                        showGestureHint = showGestureHint && item == filteredItems.firstOrNull(),
+                                        // Hint plays only on the first card
+                                        showGestureHint = index == 0 && showGestureHint,
                                         onGestureHintShown = onGestureHintShown,
                                         isSelected = isSelected,
                                         isMultiSelectMode = isMultiSelectMode,
@@ -1129,7 +1131,7 @@ private fun DynamicAppCard(
         val nudge = with(density) { 72.dp.toPx() }
         offsetX.animateTo(nudge,  tween(500, easing = FastOutSlowInEasing))
         offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
-        delay(180)
+        delay(250)
         offsetX.animateTo(-nudge, tween(500, easing = FastOutSlowInEasing))
         offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
         onGestureHintShown()
@@ -1229,7 +1231,7 @@ private fun DynamicAppCard(
                             isAppDeleted = item.isDeleted,
                             onLongClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                if (!isMultiSelectMode) onLongPress() else onLongPress()
+                                onLongPress()
                             }
                         )
                     } else {
@@ -1359,10 +1361,7 @@ private fun MultiSelectBar(
 
                 // Label
                 Text(
-                    text = if (selectedCount == 1)
-                        stringResource(R.string.home_app_selected_one)
-                    else
-                        stringResource(R.string.home_app_selected_multiple, selectedCount),
+                    text = pluralStringResource(R.plurals.home_app_selected, selectedCount, selectedCount.toString()),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurface,
@@ -1740,15 +1739,8 @@ fun AppPatchesDialog(
                     "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
                 }
             ) { (uid, patch) ->
-                var expandVersions by rememberSaveable(uid, patch.name, "versions") {
-                    mutableStateOf(false)
-                }
-                var expandOptions by rememberSaveable(uid, patch.name, "options") {
-                    mutableStateOf(false)
-                }
-
                 Column {
-                    // Bundle name label between sections (multi-bundle only, shown at first patch of each bundle)
+                    // Bundle section label — only for multi-bundle, at first patch of each bundle
                     if (isMultiBundle) {
                         val isFirstOfBundle = remember(filteredPatches, uid, patch) {
                             filteredPatches.firstOrNull { it.first == uid }?.second == patch
@@ -1766,10 +1758,7 @@ fun AppPatchesDialog(
 
                     PatchItemCard(
                         patch = patch,
-                        expandVersions = expandVersions,
-                        onExpandVersions = { expandVersions = !expandVersions },
-                        expandOptions = expandOptions,
-                        onExpandOptions = { expandOptions = !expandOptions },
+                        saveStateKey = "app_patches_${item.packageName}_$uid",
                         modifier = Modifier.animateItem(
                             fadeInSpec = tween(220),
                             fadeOutSpec = tween(180),

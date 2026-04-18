@@ -626,19 +626,9 @@ fun BundlePatchesDialog(
                     }
                 ) { patch ->
                     val context = LocalContext.current
-                    var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
-                        mutableStateOf(false)
-                    }
-                    var expandOptions by rememberSaveable(src.uid, patch.name, "options") {
-                        mutableStateOf(false)
-                    }
-
                     PatchItemCard(
                         patch = patch,
-                        expandVersions = expandVersions,
-                        onExpandVersions = { expandVersions = !expandVersions },
-                        expandOptions = expandOptions,
-                        onExpandOptions = { expandOptions = !expandOptions },
+                        saveStateKey = "bundle_${src.uid}",
                         onExpertBadgeClick = if (!patch.include) {
                             { context.toast(context.getString(R.string.sources_patch_expert_badge_tooltip)) }
                         } else null,
@@ -719,17 +709,21 @@ fun BundlePatchesDialog(
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun PatchItemCard(
+fun PatchItemCard(
     patch: PatchInfo,
-    expandVersions: Boolean,
-    onExpandVersions: () -> Unit,
-    expandOptions: Boolean,
-    onExpandOptions: () -> Unit,
+    saveStateKey: String,
     onExpertBadgeClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
+
+    var expandVersions by rememberSaveable(saveStateKey, patch.name, "versions") {
+        mutableStateOf(false)
+    }
+    var expandOptions by rememberSaveable(saveStateKey, patch.name, "options") {
+        mutableStateOf(false)
+    }
 
     val rotationAngle by animateFloatAsState(
         targetValue = if (expandOptions) 180f else 0f,
@@ -743,7 +737,7 @@ internal fun PatchItemCard(
             .clip(RoundedCornerShape(14.dp))
             .then(
                 if (!patch.options.isNullOrEmpty()) {
-                    Modifier.clickable(onClick = onExpandOptions)
+                    Modifier.clickable { expandOptions = !expandOptions }
                 } else Modifier
             ),
         shape = RoundedCornerShape(14.dp),
@@ -868,7 +862,7 @@ internal fun PatchItemCard(
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .clip(RoundedCornerShape(6.dp))
-                                            .clickable(onClick = onExpandVersions)
+                                            .clickable { expandVersions = !expandVersions }
                                     )
                                 }
                             }

@@ -172,7 +172,8 @@ fun HomeScreen(
     HomeDialogs(
         homeViewModel = homeViewModel,
         storagePickerLauncher = { openApkPicker.launch("*/*") },
-        openBundlePicker = { openBundlePicker.launch("*/*") }
+        openBundlePicker = { openBundlePicker.launch("*/*") },
+        patchesItem = patchesSheetItem
     )
 
     // Pre-patching installer selection dialog for root-capable devices.
@@ -183,24 +184,6 @@ fun HomeScreen(
             onSelectMount = { homeViewModel.resolvePrePatchInstallerChoice(useMount = true) },
             onSelectStandard = { homeViewModel.resolvePrePatchInstallerChoice(useMount = false) },
             onDismiss = homeViewModel::dismissPrePatchInstallerDialog
-        )
-    }
-
-    // Patches dialog (swipe-right)
-    patchesSheetItem.value?.let { item ->
-        val patchesByBundle = remember(item.packageName) {
-            homeViewModel.getPatchesForPackage(item.packageName)
-        }
-        val bundleNames = remember(patchesByBundle) {
-            patchesByBundle.keys.associateWith { uid ->
-                homeViewModel.getBundleDisplayName(uid) ?: uid.toString()
-            }
-        }
-        AppPatchesDialog(
-            item = item,
-            patchesByBundle = patchesByBundle,
-            bundleNames = bundleNames,
-            onDismiss = { patchesSheetItem.value = null }
         )
     }
 
