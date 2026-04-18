@@ -64,11 +64,12 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
 
             val preparation = SplitApkPreparer.prepareIfNeeded(
                 source = File(inputFile),
-            workspace = File(cacheDir),
-            logger = logger,
-            stripNativeLibs = stripNativeLibs,
-            skipUnneededSplits = skipUnneededSplits
+                workspace = File(cacheDir),
+                logger = logger,
+                stripNativeLibs = stripNativeLibs,
+                skipUnneededSplits = skipUnneededSplits
             )
+
             try {
                 if (preparation.merged) {
                     onProgress(null, State.COMPLETED, null)
@@ -76,13 +77,13 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                 }
 
                 Session(
-                    cacheDir,
-                    frameworkPath,
-                    context,
-                    logger,
-                    preparation.file,
+                    cacheDir = cacheDir,
+                    frameworkDir = frameworkPath,
+                    androidContext = context,
+                    logger = logger,
+                    input = preparation.file,
                     onPatchCompleted = onPatchCompleted,
-                    onProgress,
+                    onProgress = onProgress,
                     bytecodeMode = prefs.bytecodeModePreference.get(),
                 ).use { session ->
                     session.run(
