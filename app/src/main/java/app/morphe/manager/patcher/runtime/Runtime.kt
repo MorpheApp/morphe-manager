@@ -34,6 +34,7 @@ sealed class Runtime(context: Context) : KoinComponent {
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
         stripNativeLibs: Boolean,
+        skipUnneededSplits: Boolean = false,
         onMergedApkReady: (suspend (File) -> Unit)? = null,
     )
 }

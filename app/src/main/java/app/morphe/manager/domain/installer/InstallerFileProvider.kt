@@ -14,7 +14,7 @@ import java.io.FileNotFoundException
 /**
  * Lightweight content provider used to expose APK files to external installers.
  *
- * It mirrors the behaviour we relied on from [androidx.core.content.FileProvider] while avoiding
+ * It mirrors the behavior we relied on from [androidx.core.content.FileProvider] while avoiding
  * the XML parsing crash that occurred on some devices when launching third-party installers.
  */
 class InstallerFileProvider : ContentProvider() {
@@ -26,7 +26,7 @@ class InstallerFileProvider : ContentProvider() {
         selection: String?,
         selectionArgs: Array<out String>?,
         sortOrder: String?
-    ): Cursor? {
+    ): Cursor {
         val columns = projection?.takeIf { it.isNotEmpty() }
             ?: arrayOf(OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE)
         val file = buildFile(contextOrThrow(), uri)
@@ -79,10 +79,9 @@ class InstallerFileProvider : ContentProvider() {
 
     companion object {
         private const val APK_MIME = "application/vnd.android.package-archive"
+        const val SHARE_DIR = "installer_share"
 
         fun authority(context: Context): String = "${context.packageName}.installerfileprovider"
-
-        fun buildUri(context: Context, file: File): Uri = buildUri(context, file.name)
 
         fun buildUri(context: Context, fileName: String): Uri =
             Uri.Builder()
@@ -90,6 +89,20 @@ class InstallerFileProvider : ContentProvider() {
                 .authority(authority(context))
                 .appendPath(fileName)
                 .build()
+
+        /**
+         * Copies [file] into the share directory under its original name (overwriting if size
+         * differs) and returns a content URI for it. Used by [AckpineInstaller] for internal
+         * and Shizuku installs, and by [InstallerManager] for external installer intents.
+         */
+        fun getUriForFile(context: Context, file: File): Uri {
+            val shareDir = File(context.cacheDir, SHARE_DIR).also { it.mkdirs() }
+            val dest = File(shareDir, file.name)
+            if (!dest.exists() || dest.length() != file.length()) {
+                file.copyTo(dest, overwrite = true)
+            }
+            return buildUri(context, dest.name)
+        }
 
         private fun buildFile(context: Context, uri: Uri): File {
             if (uri.authority != authority(context)) {
@@ -102,7 +115,7 @@ class InstallerFileProvider : ContentProvider() {
             val fileName = segments.first()
             require(".." !in fileName) { "Path traversal is not allowed." }
 
-            val dir = File(context.cacheDir, InstallerManager.SHARE_DIR)
+            val dir = File(context.cacheDir, SHARE_DIR)
             val target = File(dir, fileName)
             val canonicalDir = dir.canonicalFile
             val canonicalTarget = target.canonicalFile

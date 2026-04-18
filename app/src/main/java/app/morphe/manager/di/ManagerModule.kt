@@ -1,8 +1,8 @@
 package app.morphe.manager.di
 
+import app.morphe.manager.domain.installer.AckpineInstaller
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.installer.ShizukuInstaller
 import app.morphe.manager.domain.manager.AppIconManager
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.KeystoreManager
@@ -16,7 +16,7 @@ val managerModule = module {
     singleOf(::KeystoreManager)
     singleOf(::PM)
     singleOf(::RootInstaller)
-    singleOf(::ShizukuInstaller)
+    singleOf(::AckpineInstaller)
     singleOf(::InstallerManager)
     singleOf(::PatchOptionsPreferencesManager)
     singleOf(::AppIconManager)

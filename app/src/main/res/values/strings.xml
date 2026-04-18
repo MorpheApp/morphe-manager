@@ -440,6 +440,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_advanced_expert_mode_dialog_message">Expert mode gives more control over how patches are applied, but misconfiguring settings in expert mode can result in a non-functional app</string>
     <string name="settings_advanced_strip_unused_libs">Remove unused native libraries</string>
     <string name="settings_advanced_strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
+    <string name="settings_advanced_skip_unneeded_splits">Filter split APKs for device</string>
+    <string name="settings_advanced_skip_unneeded_splits_description">During merge, skip locale, density and ABI splits not needed for this device. Reduces merged APK size</string>
 
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bytecode processing mode</string>
