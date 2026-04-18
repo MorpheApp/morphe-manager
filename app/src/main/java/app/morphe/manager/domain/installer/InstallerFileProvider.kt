@@ -100,6 +100,11 @@ class InstallerFileProvider : ContentProvider() {
             val dest = File(shareDir, file.name)
             if (!dest.exists() || dest.length() != file.length() || dest.lastModified() < file.lastModified()) {
                 file.copyTo(dest, overwrite = true)
+                // Stamp dest with the source's own mtime so the next comparison is accurate.
+                // Without this, dest gets the current wall-clock time after copyTo(), which is
+                // always newer than the source — causing the stale cache to be served on the
+                // next install of the same package (update), leading to INSTALL_FAILED_DUPLICATE_PACKAGE.
+                dest.setLastModified(file.lastModified())
             }
             return buildUri(context, dest.name)
         }
