@@ -1,3 +1,15 @@
+# [1.16.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.2...v1.16.0-dev.3) (2026-04-18)
+
+
+### Bug Fixes
+
+* Handle `InstallFailure` result when installing manager update ([a4d1eb8](https://github.com/MorpheApp/morphe-manager/commit/a4d1eb8a99dc53d59f23df3d7bb8ad3725edd1c4))
+
+
+### Features
+
+* Migrate to `Ackpine` for package installation/uninstallation ([#444](https://github.com/MorpheApp/morphe-manager/issues/444)) ([aa7207d](https://github.com/MorpheApp/morphe-manager/commit/aa7207d486427753eb56c18ddd29d481f1a3605e))
+
 # [1.16.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.1...v1.16.0-dev.2) (2026-04-18)
 
 

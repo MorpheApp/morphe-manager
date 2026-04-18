@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-18T01:45:26.560Z",
-  "description": "# [1.16.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.1...v1.16.0-dev.2) (2026-04-18)\n\n\n### Features\n\n* Add fast bytecode mode setting to expert mode ([#403](https://github.com/MorpheApp/morphe-manager/issues/403)) ([e73c63c](https://github.com/MorpheApp/morphe-manager/commit/e73c63c7fcce14d5d38ce8b8cde26feed4a6e5e4))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.2/morphe-manager-1.16.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.2/morphe-manager-1.16.0-dev.2.apk.asc",
-  "version": "1.16.0-dev.2"
+  "created_at": "2026-04-18T06:58:15.344Z",
+  "description": "# [1.16.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.2...v1.16.0-dev.3) (2026-04-18)\n\n\n### Bug Fixes\n\n* Handle `InstallFailure` result when installing manager update ([a4d1eb8](https://github.com/MorpheApp/morphe-manager/commit/a4d1eb8a99dc53d59f23df3d7bb8ad3725edd1c4))\n\n\n### Features\n\n* Migrate to `Ackpine` for package installation/uninstallation ([#444](https://github.com/MorpheApp/morphe-manager/issues/444)) ([aa7207d](https://github.com/MorpheApp/morphe-manager/commit/aa7207d486427753eb56c18ddd29d481f1a3605e))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.3/morphe-manager-1.16.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.3/morphe-manager-1.16.0-dev.3.apk.asc",
+  "version": "1.16.0-dev.3"
 }
