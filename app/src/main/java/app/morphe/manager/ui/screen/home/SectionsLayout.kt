@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.home
 import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
@@ -29,14 +30,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.activity.compose.BackHandler
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -878,6 +884,7 @@ fun MainAppsSection(
                             HomeSearchTextField(
                                 value = searchQuery,
                                 onValueChange = onSearchQueryChange,
+                                requestFocus = searchVisible,
                                 modifier = Modifier.padding(bottom = 8.dp)
                             )
                         }
@@ -1077,7 +1084,8 @@ internal fun MorpheEmptyState(
     actionIcon: ImageVector? = null,
     actionLabel: String? = null,
     onAction: (() -> Unit)? = null,
-    @SuppressLint("ModifierParameter") modifier: Modifier = Modifier
+    @SuppressLint("ModifierParameter")
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
@@ -1133,8 +1141,20 @@ internal fun MorpheEmptyState(
 private fun HomeSearchTextField(
     value: String,
     onValueChange: (String) -> Unit,
+    requestFocus: Boolean = false,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(requestFocus) {
+        if (requestFocus) {
+            focusRequester.requestFocus()
+            keyboardController?.show()
+        }
+    }
+
     CompositionLocalProvider(LocalDialogTextColor provides MaterialTheme.colorScheme.onSurface) {
         MorpheDialogTextField(
             value = value,
@@ -1147,7 +1167,7 @@ private fun HomeSearchTextField(
                 )
             },
             showClearButton = true,
-            modifier = modifier
+            modifier = modifier.focusRequester(focusRequester)
         )
     }
 }
