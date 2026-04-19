@@ -1,3 +1,17 @@
+# [1.16.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.3...v1.16.0-dev.4) (2026-04-19)
+
+
+### Bug Fixes
+
+* Add logging and fix stale installer cache ([78b5aee](https://github.com/MorpheApp/morphe-manager/commit/78b5aee8dca5f1f51fb6bb46c9d9cab8bd1f7c0a))
+* Merge 'Filter split APKs' and `Remove unused native libraries` into 'Optimize for device architecture' setting ([2edb15f](https://github.com/MorpheApp/morphe-manager/commit/2edb15fcfb0fd018ffcafc0f7203930a203ab4d4))
+
+
+### Features
+
+* Add swipe gestures and multi-select to app buttons on main screen ([#446](https://github.com/MorpheApp/morphe-manager/issues/446)) ([0330699](https://github.com/MorpheApp/morphe-manager/commit/033069989d24c437798bb5a7bf248afe9f30ae89))
+* Add toggle to disable home screen patching phrases ([#443](https://github.com/MorpheApp/morphe-manager/issues/443)) ([f53ad64](https://github.com/MorpheApp/morphe-manager/commit/f53ad646c90700af17b3d58b0a2651cdfb87aab9))
+
 # [1.16.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.2...v1.16.0-dev.3) (2026-04-18)
 
 
