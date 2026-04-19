@@ -69,6 +69,9 @@ class PatchBundleRepository(
     }
     val bundleInfoFlow = enabledBundlesInfoFlow
 
+    /** True once [doReload] has completed at least once (even if all bundles are disabled). */
+    val isBundlePipelineLoaded: Flow<Boolean> = store.state.map { it.isLoaded }
+
     fun scopedBundleInfoFlow(packageName: String, version: String?) = enabledBundlesInfoFlow.map {
         it.map { (_, bundleInfo) ->
             bundleInfo.forPackage(
@@ -363,7 +366,7 @@ class PatchBundleRepository(
             }
         }
 
-        return State(sources.toPersistentMap(), info.toPersistentMap())
+        return State(sources.toPersistentMap(), info.toPersistentMap(), isLoaded = true)
     }
 
     suspend fun reload() = dispatchAction("Full reload") {
@@ -692,7 +695,7 @@ class PatchBundleRepository(
             val (affectedCount, remaining) = cancelRemoteUpdates(bundles.map { it.uid }.toSet())
             updateProgressAfterRemoval(affectedCount, remaining)
 
-            State(sources.toPersistentMap(), info.toPersistentMap())
+            State(sources.toPersistentMap(), info.toPersistentMap(), isLoaded = state.isLoaded)
         }
 
     enum class DisplayNameUpdateResult {
@@ -1727,7 +1730,9 @@ class PatchBundleRepository(
 
     data class State(
         val sources: PersistentMap<Int, PatchBundleSource> = persistentMapOf(),
-        val info: PersistentMap<Int, PatchBundleInfo.Global> = persistentMapOf()
+        val info: PersistentMap<Int, PatchBundleInfo.Global> = persistentMapOf(),
+        /** True once the initial DB load has completed (even if all bundles are disabled). */
+        val isLoaded: Boolean = false
     )
 
     enum class BundleUpdateResult {

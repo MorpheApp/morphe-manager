@@ -126,6 +126,15 @@ data class SavedApkInfo(
 )
 
 /**
+ * Combined home screen app state — emitted atomically so visible and hidden lists
+ * are always in sync and never cause a transient empty-state flash.
+ */
+data class HomeAppState(
+    val visible: List<HomeAppItem>,
+    val hidden: List<HomeAppItem>
+)
+
+/**
  * Manages all dialogs, user interactions, APK processing, and bundle management.
  */
 class HomeViewModel(
@@ -146,6 +155,11 @@ class HomeViewModel(
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
     private val contentResolver: ContentResolver = app.contentResolver
+
+    /** Becomes true once the bundle repository has finished its initial DB load. */
+    private val isBundlePipelineLoaded: StateFlow<Boolean> =
+        patchBundleRepository.isBundlePipelineLoaded
+            .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     // App data resolver for getting app info from APK files
     private val appDataResolver by lazy {
@@ -978,51 +992,6 @@ class HomeViewModel(
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 
     /**
-     * Hidden packages filtered to only those present in currently active bundles.
-     * When a bundle is disabled/removed, its packages disappear from this flow automatically.
-     */
-    val filteredHiddenPackages: StateFlow<Set<String>> = combine(
-        homeAppButtonPrefs.hiddenPackages,
-        patchablePackagesFlow
-    ) { hidden, active ->
-        hidden.filter { it in active }.toSet()
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
-
-    /**
-     * Hidden app items with resolved display names and package info.
-     */
-    val hiddenAppItems: StateFlow<List<HomeAppItem>> = combine(
-        filteredHiddenPackages,
-        bundleAppMetadataFlow
-    ) { hiddenPackages, metadata ->
-        hiddenPackages.map { packageName ->
-            val bundleMeta = metadata[packageName]
-            val knownApp = KnownApps.fromPackage(packageName)
-            val resolvedData = appDataResolver.resolveAppData(
-                packageName = packageName,
-                preferredSource = AppDataSource.PATCHED_APK
-            )
-            val displayName = resolvedData.displayName.takeIf {
-                resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
-            } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
-            val gradientColors = bundleMeta?.gradientColors ?: KnownApps.DEFAULT_COLORS
-            HomeAppItem(
-                packageName = packageName,
-                displayName = displayName,
-                gradientColors = gradientColors,
-                installedApp = null,
-                packageInfo = resolvedData.packageInfo,
-                isPinnedByDefault = knownApp?.isPinnedByDefault == true,
-                isDeleted = false,
-                hasUpdate = false,
-                patchCount = 0
-            )
-        }
-    }
-        .flowOn(Dispatchers.IO)
-        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
-
-    /**
      * Combined flow that produces the sorted list of home app items.
      *
      * Sorting order by display name:
@@ -1030,75 +999,77 @@ class HomeViewModel(
      * 2. Non-patched apps
      * Hidden apps are excluded.
      */
-    val homeAppItems: StateFlow<List<HomeAppItem>> = combine(
+    val homeAppState: StateFlow<HomeAppState?> = combine(
         patchablePackagesFlow,
         homeAppButtonPrefs.hiddenPackages,
         installedAppRepository.getAll(),
         _appUpdatesAvailable,
         bundleAppMetadataFlow
-    ) { packages, hidden, installedApps, updatesMap, metadata ->
+    ) { packages, hiddenPackages, installedApps, updatesMap, metadata ->
+        if (!isBundlePipelineLoaded.value) return@combine null
+
         val installedMap = installedApps.associateBy { it.originalPackageName }
 
-        packages
-            .filter { it !in hidden }
-            .map { packageName ->
-                val installedApp = installedMap[packageName]
-                val bundleMeta = metadata[packageName]
-                val knownApp = KnownApps.fromPackage(packageName)
-
-                // Gradient colors: bundle declared → default (colors come from patch bundle)
-                val gradientColors = bundleMeta?.gradientColors ?: KnownApps.DEFAULT_COLORS
-
-                // Priority: PATCHED_APK → ORIGINAL_APK → INSTALLED → CONSTANTS
-                val resolvedData = appDataResolver.resolveAppData(
-                    packageName = packageName,
-                    preferredSource = AppDataSource.PATCHED_APK
-                )
-
-                // Display name priority: installed/patched APK label → bundle declared → KnownApps fallback
-                val displayName = resolvedData.displayName.takeIf {
-                    resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
-                } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
-
-                // Determine deleted status
-                val isDeleted = installedApp?.let { installed ->
-                    val hasSavedCopy = listOf(
-                        filesystem.getPatchedAppFile(installed.currentPackageName, installed.version),
-                        filesystem.getPatchedAppFile(installed.originalPackageName, installed.version)
-                    ).distinctBy { it.absolutePath }.any { it.exists() }
-                    pm.isAppDeleted(
-                        packageName = installed.currentPackageName,
-                        hasSavedCopy = hasSavedCopy,
-                        wasInstalledOnDevice = installed.installType != InstallType.SAVED
-                    )
-                } == true
-
-                // Determine update status
-                val hasUpdate = installedApp?.let {
-                    updatesMap[it.currentPackageName] == true
-                } == true
-
-                HomeAppItem(
-                    packageName = packageName,
-                    displayName = displayName,
-                    gradientColors = gradientColors,
-                    installedApp = installedApp,
-                    packageInfo = resolvedData.packageInfo,
-                    isPinnedByDefault = knownApp?.isPinnedByDefault == true,
-                    isDeleted = isDeleted,
-                    hasUpdate = hasUpdate,
-                    patchCount = 0
-                )
-            }
-            .sortedWith(
-                compareByDescending<HomeAppItem> { it.installedApp != null }
-                    .thenByDescending { it.isPinnedByDefault }
-                    .thenByDescending { it.packageInfo != null }
-                    .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+        suspend fun buildItem(packageName: String): HomeAppItem {
+            val installedApp = installedMap[packageName]
+            val bundleMeta = metadata[packageName]
+            val knownApp = KnownApps.fromPackage(packageName)
+            val gradientColors = bundleMeta?.gradientColors ?: KnownApps.DEFAULT_COLORS
+            val resolvedData = appDataResolver.resolveAppData(
+                packageName = packageName,
+                preferredSource = AppDataSource.PATCHED_APK
             )
+            val displayName = resolvedData.displayName.takeIf {
+                resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
+            } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
+            val isDeleted = installedApp?.let { installed ->
+                val hasSavedCopy = listOf(
+                    filesystem.getPatchedAppFile(installed.currentPackageName, installed.version),
+                    filesystem.getPatchedAppFile(installed.originalPackageName, installed.version)
+                ).distinctBy { it.absolutePath }.any { it.exists() }
+                pm.isAppDeleted(
+                    packageName = installed.currentPackageName,
+                    hasSavedCopy = hasSavedCopy,
+                    wasInstalledOnDevice = installed.installType != InstallType.SAVED
+                )
+            } == true
+            val hasUpdate = installedApp?.let {
+                updatesMap[it.currentPackageName] == true
+            } == true
+            return HomeAppItem(
+                packageName = packageName,
+                displayName = displayName,
+                gradientColors = gradientColors,
+                installedApp = installedApp,
+                packageInfo = resolvedData.packageInfo,
+                isPinnedByDefault = knownApp?.isPinnedByDefault == true,
+                isDeleted = isDeleted,
+                hasUpdate = hasUpdate,
+                patchCount = 0
+            )
+        }
+
+        // Active bundle packages filtered to those in patchablePackages
+        val activeHidden = hiddenPackages.filter { it in packages }
+
+        val visiblePackages = packages.filter { it !in hiddenPackages }
+        val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
+        for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
+        val visible = visibleItems.sortedWith(
+            compareByDescending<HomeAppItem> { it.installedApp != null }
+                .thenByDescending { it.isPinnedByDefault }
+                .thenByDescending { it.packageInfo != null }
+                .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+        )
+
+        val hiddenItems = ArrayList<HomeAppItem>(activeHidden.size)
+        for (pkg in activeHidden) hiddenItems.add(buildItem(pkg))
+        val hidden = hiddenItems
+
+        HomeAppState(visible = visible, hidden = hidden)
     }
         .flowOn(Dispatchers.IO)
-        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
     /**
      * Marks the swipe gesture hint as shown so it is never replayed.
@@ -1174,11 +1145,11 @@ class HomeViewModel(
      */
     val showOtherAppsButton: StateFlow<Boolean> =
         combine(
-            homeAppItems,
+            homeAppState,
             hasThirdPartySource,
             prefs.useExpertMode.flow
-        ) { items, thirdParty, expertMode ->
-            if (items.isEmpty()) false
+        ) { state, thirdParty, expertMode ->
+            if (state?.visible.isNullOrEmpty()) false
             else expertMode || thirdParty
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
@@ -1188,10 +1159,10 @@ class HomeViewModel(
      */
     val showSearchButton: StateFlow<Boolean> =
         combine(
-            homeAppItems,
+            homeAppState,
             hasThirdPartySource
-        ) { items, thirdParty ->
-            items.size > 4 || thirdParty
+        ) { state, thirdParty ->
+            (state?.visible?.size ?: 0) > 4 || thirdParty
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     /**

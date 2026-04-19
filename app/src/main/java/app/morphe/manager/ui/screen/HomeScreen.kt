@@ -73,10 +73,11 @@ fun HomeScreen(
 
     // Collect state flows
     val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
-    // Dynamic app items from bundles
-    val homeAppItems by homeViewModel.homeAppItems.collectAsStateWithLifecycle()
-    // Hidden packages filtered to only active-bundle packages (reactive)
-    val hiddenAppItems by homeViewModel.hiddenAppItems.collectAsStateWithLifecycle()
+    // Atomic home state - null means pipeline is still initializing (shimmer)
+    val homeAppState by homeViewModel.homeAppState.collectAsStateWithLifecycle()
+    val homeAppItems = homeAppState?.visible ?: emptyList()
+    val hiddenAppItems = homeAppState?.hidden ?: emptyList()
+    val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
@@ -228,7 +229,7 @@ fun HomeScreen(
                 showGestureHint = showGestureHint,
                 onGestureHintShown = { homeViewModel.markSwipeGestureHintShown() },
                 hiddenAppItems = hiddenAppItems,
-                installedAppsLoading = homeViewModel.installedAppsLoading,
+                installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
 
                 // Search
                 showSearchButton = showSearchButton,

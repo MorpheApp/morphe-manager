@@ -767,34 +767,27 @@ fun MainAppsSection(
         }.toSet()
     }
 
-    // Track if data was ever loaded, never show shimmer again on resume.
-    // Only set to true when actual items arrive (visible or hidden), OR when
-    // installedAppsLoading explicitly transitions to false (meaning the ViewModel
-    // has determined there is nothing to show — e.g. all bundles disabled).
+    // Track if real content has ever arrived so we never re-show the shimmer on resume
     var hasEverLoaded by remember {
         mutableStateOf(homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty())
     }
 
-    // Stable loading state with debounce to prevent flickering.
-    // Only shows shimmer on genuine cold start (data never arrived).
+    // Stable loading state - drives shimmer visibility.
+    // Starts as true when there is nothing to show yet; once content arrives it latches to false
+    // and never goes back to true (we don't want shimmer on every recomposition).
     var stableLoadingState by remember { mutableStateOf(!hasEverLoaded) }
 
     LaunchedEffect(installedAppsLoading, homeAppItems.size, hiddenAppItems.size) {
-        if (homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty()) {
-            hasEverLoaded = true
-        }
-        // When the ViewModel signals loading=false it means it has definitively resolved
-        // the state (either items loaded, or no enabled sources). Mark as loaded so the
-        // shimmer never gets stuck in the "all bundles disabled" case.
-        if (!installedAppsLoading) {
-            hasEverLoaded = true
-        }
-        // Once hasEverLoaded is true, never re-trigger shimmer regardless of list state
-        val shouldLoad = !hasEverLoaded || installedAppsLoading
-        if (shouldLoad) {
+        val hasItems = homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty()
+        if (hasItems) hasEverLoaded = true
+
+        val shouldShowShimmer = !hasEverLoaded && installedAppsLoading
+        if (shouldShowShimmer) {
             stableLoadingState = true
         } else {
-            delay(300)
+            // Small delay so Compose has one frame to lay out the real cards before the
+            // shimmer fades out - prevents a single-frame empty gap.
+            if (stableLoadingState) delay(50)
             stableLoadingState = false
         }
     }
