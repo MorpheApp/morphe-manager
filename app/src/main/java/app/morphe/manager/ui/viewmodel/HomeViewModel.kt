@@ -520,9 +520,6 @@ class HomeViewModel(
     // Callback for starting patch
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
-    val showPatchingPhrases: Boolean
-        get() = prefs.showPatchingPhrases.getBlocking()
-
     init {
         triggerUpdateCheck()
         observeLoadingState()

@@ -389,6 +389,11 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_appearance_translations_info_text">To translate new languages or improve the existing translations, visit %s</string>
     <string name="settings_appearance_translations_info_url" translatable="false">morphe.software/translate</string>
 
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Home screen</string>
+    <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Show fun greeting messages on the home screen</string>
+
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App icon</string>
     <string name="settings_appearance_app_icon_default">Default</string>
@@ -791,9 +796,4 @@ Do you still want to continue?"</string>
     <string name="hours_ago">%sh ago</string>
     <string name="days_ago">%sd ago</string>
     <string name="invalid_date">Invalid date</string>
-    
-    <string name="settings_appearance_home_screen_header">Home screen header</string>
-    <string name="settings_appearance_patching_phrases">Patching phrases</string>
-    <string name="settings_appearance_patching_phrases_subtitle">Show fun messages on the home screen</string>
-
 </resources>

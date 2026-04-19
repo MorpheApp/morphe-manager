@@ -53,7 +53,7 @@ fun AppearanceTabContent(
     val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
-    val showPatchingPhrases by themeViewModel.prefs.showPatchingPhrases.getAsState()
+    val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
 
@@ -77,24 +77,27 @@ fun AppearanceTabContent(
             onLanguageClick = { showTranslationInfoDialog.value = true }
         )
 
-        // Home Screen Header Section
+        // Home Screen Section
         SectionTitle(
-            text = androidx.compose.ui.res.stringResource(app.morphe.manager.R.string.settings_appearance_home_screen_header),
-            icon = androidx.compose.material.icons.Icons.Outlined.Dashboard
+            text = stringResource(R.string.settings_appearance_home_screen),
+            icon = Icons.Outlined.Dashboard
         )
 
         RichSettingsItem(
-            onClick = { themeViewModel.toggleShowPatchingPhrases(showPatchingPhrases) },
+            onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
             showBorder = true,
-            title = androidx.compose.ui.res.stringResource(app.morphe.manager.R.string.settings_appearance_patching_phrases),
-            subtitle = androidx.compose.ui.res.stringResource(app.morphe.manager.R.string.settings_appearance_patching_phrases_subtitle),
+            title = stringResource(R.string.settings_appearance_greeting_phrases),
+            subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
             leadingContent = {
-                MorpheIcon(icon = androidx.compose.material.icons.Icons.Outlined.ChatBubbleOutline)
+                MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
             },
             trailingContent = {
-                androidx.compose.material3.Switch(
-                    checked = showPatchingPhrases,
-                    onCheckedChange = null
+                Switch(
+                    checked = showGreetingPhrases,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (showGreetingPhrases) enabledState else disabledState
+                    }
                 )
             }
         )

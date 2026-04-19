@@ -51,8 +51,8 @@ class ThemeSettingsViewModel(
         applyAppLanguage(languageCode)
     }
 
-    fun toggleShowPatchingPhrases(current: Boolean) = viewModelScope.launch {
-        prefs.showPatchingPhrases.update(!current)
+    fun toggleShowGreetingPhrases(current: Boolean) = viewModelScope.launch {
+        prefs.showGreetingPhrases.update(!current)
     }
 
     fun togglePureBlackTheme(current: Boolean) = viewModelScope.launch {
