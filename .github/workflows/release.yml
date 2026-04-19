@@ -2,6 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      send_fcm:
+        description: 'Send FCM push notification'
+        type: boolean
+        default: true
   push:
     branches:
       - main
@@ -89,17 +94,17 @@ jobs:
             })
 
       - name: Wait before sending FCM
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
         run: sleep 480
 
       - name: Setup Python for FCM
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Send FCM push notification
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
         env:
           FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
           FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}
