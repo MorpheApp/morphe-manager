@@ -82,7 +82,7 @@ fun SectionsLayout(
     onShowUpdateDetails: () -> Unit,
 
     // Greeting section
-    greetingMessage: String,
+    greetingMessage: String?,
 
     // Dynamic app items
     homeAppItems: List<HomeAppItem>,
@@ -192,7 +192,7 @@ fun SectionsLayout(
 @Composable
 private fun AdaptiveContent(
     windowSize: WindowSize,
-    greetingMessage: String,
+    greetingMessage: String?,
     homeAppItems: List<HomeAppItem>,
     onAppClick: (HomeAppItem) -> Unit,
     onHideApp: (String) -> Unit,
@@ -700,8 +700,9 @@ private fun BundleUpdateSnackbarContent(
  */
 @Composable
 fun GreetingSection(
-    message: String
+    message: String?
 ) {
+    if (message.isNullOrEmpty()) return
     Box(contentAlignment = Alignment.Center) {
         AnimatedContent(
             targetState = message,

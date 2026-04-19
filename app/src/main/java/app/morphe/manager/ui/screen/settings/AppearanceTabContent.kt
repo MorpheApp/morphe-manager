@@ -53,6 +53,7 @@ fun AppearanceTabContent(
     val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
+    val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
 
@@ -74,6 +75,31 @@ fun AppearanceTabContent(
         LanguageSection(
             appLanguage = appLanguage,
             onLanguageClick = { showTranslationInfoDialog.value = true }
+        )
+
+        // Home Screen Section
+        SectionTitle(
+            text = stringResource(R.string.settings_appearance_home_screen),
+            icon = Icons.Outlined.Dashboard
+        )
+
+        RichSettingsItem(
+            onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
+            showBorder = true,
+            title = stringResource(R.string.settings_appearance_greeting_phrases),
+            subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
+            },
+            trailingContent = {
+                Switch(
+                    checked = showGreetingPhrases,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (showGreetingPhrases) enabledState else disabledState
+                    }
+                )
+            }
         )
 
         // Theme Mode Section

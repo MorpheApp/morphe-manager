@@ -29,6 +29,7 @@ class PreferencesManager(
 
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
+    val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
     val themePresetSelectionEnabled = booleanPreference("theme_preset_selection_enabled", true)
     val themePresetSelectionName = stringPreference("theme_preset_selection_name", "DEFAULT")
     val customAccentColor = stringPreference("custom_accent_color", "")
@@ -172,6 +173,7 @@ class PreferencesManager(
         val patchSelectionHiddenActions: Set<String>? = null,
         val acknowledgedDownloaderPlugins: Set<String>? = null,
         val autoSaveDownloaderApks: Boolean? = null,
+        val showGreetingPhrases: Boolean? = null,
         val backgroundType: BackgroundType? = null,
         val useExpertMode: Boolean? = null,
         val backgroundUpdateNotifications: Boolean? = null,
@@ -205,6 +207,7 @@ class PreferencesManager(
         bundlePrereleasesEnabled = bundlePrereleasesEnabled.get(),
         bundleExperimentalVersionsEnabled = bundleExperimentalVersionsEnabled.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
+        showGreetingPhrases = showGreetingPhrases.get(),
         backgroundType = backgroundType.get(),
         useExpertMode = useExpertMode.get(),
         backgroundUpdateNotifications = backgroundUpdateNotifications.get(),
@@ -237,6 +240,7 @@ class PreferencesManager(
         snapshot.bundlePrereleasesEnabled?.let { bundlePrereleasesEnabled.value = it }
         snapshot.bundleExperimentalVersionsEnabled?.let { bundleExperimentalVersionsEnabled.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
+        snapshot.showGreetingPhrases?.let { showGreetingPhrases.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.backgroundUpdateNotifications?.let { backgroundUpdateNotifications.value = it }
