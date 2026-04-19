@@ -392,7 +392,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
     <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Show fun greeting messages on the home screen</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
 
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App icon</string>
