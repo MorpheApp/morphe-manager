@@ -15,6 +15,7 @@ import ru.solrudev.ackpine.installer.parameters.InstallerType
 import ru.solrudev.ackpine.session.await
 import ru.solrudev.ackpine.session.Session
 import ru.solrudev.ackpine.session.parameters.Confirmation
+import ru.solrudev.ackpine.shizuku.ShizukuPlugin
 import ru.solrudev.ackpine.uninstaller.PackageUninstaller
 import ru.solrudev.ackpine.uninstaller.parameters.UninstallParameters
 import java.io.File
@@ -105,8 +106,10 @@ class AckpineInstaller(private val app: Application) {
                     .setConfirmation(Confirmation.IMMEDIATE)
                     .setName(apkFile.name)
                     .registerPlugin(
-                        ru.solrudev.ackpine.shizuku.ShizukuPlugin::class.java,
-                        ru.solrudev.ackpine.shizuku.ShizukuPlugin.InstallParameters.DEFAULT
+                        ShizukuPlugin::class.java,
+                        ShizukuPlugin.InstallParameters.Builder()
+                            .setReplaceExisting(true)
+                            .build()
                     )
                     .build()
             )
