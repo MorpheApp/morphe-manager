@@ -1,3 +1,10 @@
+# [1.16.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.4...v1.16.0-dev.5) (2026-04-19)
+
+
+### Bug Fixes
+
+* Shizuku installer couldn't update an already installed app ([#454](https://github.com/MorpheApp/morphe-manager/issues/454)) ([d4e74e3](https://github.com/MorpheApp/morphe-manager/commit/d4e74e3a84ca34529f8d20005c19b2b0e7c9136f))
+
 # [1.16.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.3...v1.16.0-dev.4) (2026-04-19)
 
 
