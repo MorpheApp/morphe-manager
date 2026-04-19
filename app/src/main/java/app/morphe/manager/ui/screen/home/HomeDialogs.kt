@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -46,6 +47,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundledAppTarget
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -69,7 +71,8 @@ import java.net.URI
 fun HomeDialogs(
     homeViewModel: HomeViewModel,
     storagePickerLauncher: () -> Unit,
-    openBundlePicker: () -> Unit
+    openBundlePicker: () -> Unit,
+    patchesItem: MutableState<HomeAppItem?>
 ) {
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
@@ -436,6 +439,24 @@ fun HomeDialogs(
                     }
                 }
             }
+        )
+    }
+
+    // Patches preview dialog (swipe-right on home app card)
+    patchesItem.value?.let { item ->
+        val patchesByBundle = remember(item.packageName) {
+            homeViewModel.getPatchesForPackage(item.packageName)
+        }
+        val bundleNames = remember(patchesByBundle) {
+            patchesByBundle.keys.associateWith { uid ->
+                homeViewModel.getBundleDisplayName(uid) ?: uid.toString()
+            }
+        }
+        AppPatchesDialog(
+            item = item,
+            patchesByBundle = patchesByBundle,
+            bundleNames = bundleNames,
+            onDismiss = { patchesItem.value = null }
         )
     }
 }

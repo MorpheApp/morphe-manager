@@ -91,10 +91,13 @@ class PreferencesManager(
 
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
+
+    /** Whether the swipe gesture hint animation on home app cards has been shown at least once. */
+    val swipeGestureHintShown = booleanPreference("swipe_gesture_hint_shown", false)
     val installationTime = longPreference("manager_installation_time", 0)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
-    // Hidden preference to track if prerelease was auto-enabled
+    /**  Hidden preference to track if prerelease was auto-enabled. */
     private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
 
     init {

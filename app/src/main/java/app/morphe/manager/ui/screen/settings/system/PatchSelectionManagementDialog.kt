@@ -822,7 +822,7 @@ private fun PatchDetailsDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_patch_details_title),
         footer = {
-            MorpheDialogButton(
+            MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()

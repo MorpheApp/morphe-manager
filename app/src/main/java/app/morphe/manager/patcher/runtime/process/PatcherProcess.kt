@@ -113,12 +113,13 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 ).use {
                     it.run(File(parameters.outputFile), patchList)
                 }
+                MemoryMonitor.stopMemoryPolling(logger)
                 events.finished(null)
             } catch (e: Exception) {
+                MemoryMonitor.stopMemoryPolling(logger)
                 events.finished(e.stackTraceToString())
             } finally {
                 preparation.cleanup()
-                MemoryMonitor.stopMemoryPolling(logger)
             }
         }
     }
