@@ -36,4 +36,12 @@
         <item quantity="one">%s yamaq seçildi</item>
         <item quantity="other">%s yamaq seçildi</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s tətbiqini göstər</item>
+        <item quantity="other">%s tətbiqlərin göstər</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s gizli tətbiq</item>
+        <item quantity="other">%s gizli tətbiq</item>
+    </plurals>
 </resources>

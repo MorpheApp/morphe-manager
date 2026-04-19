@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Δεν υπάρχουν διαθέσιμες εφαρμογές</string>
     <string name="home_no_apps_subtitle">Προσθέστε μια πηγή τροποποίησης ή ενεργοποιήστε ήδη μια υπάρχουσα στο %s</string>
     <string name="home_no_apps_search_subtitle">Καμία εφαρμογή δεν ταιριάζει με το \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Όλες οι εφαρμογές είναι κρυφές</string>
+    <string name="home_all_apps_hidden_subtitle">Έχετε κρύψει όλες τις εφαρμογές από την αρχική οθόνη</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ποια εφαρμογή θέλετε να τροποποιήσετε;</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@
     <string name="settings_appearance_app_language_current">Τρέχουσα γλώσσα</string>
     <string name="settings_appearance_translations_info_title">Οι μεταφράσεις για ορισμένες γλώσσες μπορεί να λείπουν ή να μην είναι ολοκληρωμένες</string>
     <string name="settings_appearance_translations_info_text">Για να μεταφράσετε νέες γλώσσες ή να βελτιώσετε τις υπάρχουσες μεταφράσεις, επισκεφτείτε %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Αρχική οθόνη</string>
+    <string name="settings_appearance_greeting_phrases">Φράσεις υποδοχής</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Εικονίδιο εφαρμογής</string>
     <string name="settings_appearance_app_icon_default">Προεπιλεγμένο</string>
@@ -399,10 +405,9 @@
     <string name="settings_advanced_expert_mode_description">Ενεργοποιήστε περίπλοκες ρυθμίσεις τροποποιήσεων του Morphe και προσαρμοσμένες επιλογές</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ενεργοποίηση της λειτουργίας εξειδικευμένου χρήστη;</string>
     <string name="settings_advanced_expert_mode_dialog_message">Η λειτουργία εξειδικευμένου χρήστη δίνει περισσότερο έλεγχο για την εφαρμογή των τροποποιήσεων, αλλά η λάθος ρύθμιση στη λειτουργία αυτή μπορεί να προκαλέσει τη δυσλειτουργικότητα της εφαρμογής</string>
-    <string name="settings_advanced_strip_unused_libs">Εκκαθάριση μη χρησιμοποιούμενων εγγενών βιβλιοθηκών</string>
-    <string name="settings_advanced_strip_unused_libs_description">Διαγραφή των εγγενών βιβλιοθηκών για ανυποστήρικτες αρχιτεκτονικές επεξεργαστών από τροποποιημένες εφαρμογές</string>
-    <string name="settings_advanced_skip_unneeded_splits">Φιλτράρισμα των split APK για συσκευή</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Κατά τη συγχώνευση, παραλείψτε τις χωριστές για τοπικότητα, πυκνότητα και ABI που δεν είναι απαραίτητες για αυτήν τη συσκευή. Μειώνει το μέγεθος του συγχωνευμένου APK</string>
+    <string name="settings_advanced_strip_unused_libs">Βελτιστοποίηση για αρχιτεκτονική συσκευής</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Παράλειψη split APK modules για μη υποστηριζόμενες αρχιτεκτονικές CPU, τοποθεσίες και πυκνότητες οθόνης κατά τη συγχώνευση.
+Για απλά APK, αφαιρεί τις αρχικές βιβλιοθήκες για μη υποστηριζόμενες αρχιτεκτονικές μετά την επιδιόρθωση"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Λειτουργία επεξεργασίας bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Ελέγχει τον τρόπο επεξεργασίας του bytecode κατά τη διάρκεια της επιδιόρθωσης. Επηρεάζει την ταχύτητα επιδιόρθωσης, τη χρήση μνήμης και το μέγεθος του APK εξόδου</string>

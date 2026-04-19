@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Nenhum aplicativo disponível</string>
     <string name="home_no_apps_subtitle">Adicionar uma fonte de patch ou habilitar uma existente em %s</string>
     <string name="home_no_apps_search_subtitle">Nenhum aplicativo corresponde a \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Todos os aplicativos estão ocultos</string>
+    <string name="home_all_apps_hidden_subtitle">Você ocultou todos os aplicativos da tela inicial</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Que aplicativo você quer corrigir?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;
     <string name="settings_appearance_app_language_current">Língua atual</string>
     <string name="settings_appearance_translations_info_title">As traduções para alguns idiomas podem estar ausentes ou incompletas</string>
     <string name="settings_appearance_translations_info_text">Para traduzir novos idiomas ou melhorar as traduções existentes, visite %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Tela inicial</string>
+    <string name="settings_appearance_greeting_phrases">Frases de saudação</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Exibir uma mensagem de saudação na tela inicial</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ícone da aplicação</string>
     <string name="settings_appearance_app_icon_default">Padrão</string>
@@ -399,10 +405,9 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;
     <string name="settings_advanced_expert_mode_description">Habilitar configurações avançadas de patch e opções de personalização do Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Habilitar o modo Expert?</string>
     <string name="settings_advanced_expert_mode_dialog_message">O modo Expert concede mais controle sobre como os patches são aplicados, mas a má configuração de ajustes no modo Expert pode resultar em um aplicativo não funcional</string>
-    <string name="settings_advanced_strip_unused_libs">Remover bibliotecas nativas desnecessárias</string>
-    <string name="settings_advanced_strip_unused_libs_description">Excluir bibliotecas nativas para arquiteturas de CPU não suportadas dos aplicativos patched</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtrar APKs divididos para dispositivo</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Durante a mesclagem, pular divisões de idioma, densidade e ABI que não são necessárias para este dispositivo. Reduz o tamanho do APK mesclado</string>
+    <string name="settings_advanced_strip_unused_libs">Otimizar para a arquitetura do dispositivo</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Ignorar módulos APK divididos para arquiteturas de CPU, locais e densidades de tela não suportados durante a mesclagem.
+Para APKs simples, remove bibliotecas nativas para arquiteturas não suportadas após o patching"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Modo de processamento de bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Controla como o bytecode é processado durante o patching. Afeta a velocidade do patching, o uso de memória e o tamanho do APK de saída</string>

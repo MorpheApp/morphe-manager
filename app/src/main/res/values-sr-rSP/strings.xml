@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Нисe доступни апликације</string>
     <string name="home_no_apps_subtitle">Додај извор пача или омогући постојећи у %s</string>
     <string name="home_no_apps_search_subtitle">Нисe пронађени апликације које одговарају \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Све апликације су скривене</string>
+    <string name="home_all_apps_hidden_subtitle">Скрио/Скриле сте све апликације са почетног екрана</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Коју апликацију желите да печујете?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -352,6 +354,10 @@
     <string name="settings_appearance_app_language_current">Тренутна језика</string>
     <string name="settings_appearance_translations_info_title">Недостаје превода за неке језике</string>
     <string name="settings_appearance_translations_info_text">Да бисте додали нове језике или побољшали постоје преводе, посетите %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Почетни екран</string>
+    <string name="settings_appearance_greeting_phrases">Почетне фразе</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Иконица апликације</string>
     <string name="settings_appearance_app_icon_default">Подразумеван</string>
@@ -398,10 +404,9 @@
     <string name="settings_advanced_expert_mode_description">Omogući kompleksno podešavanje Morphe i personalizacija opcija</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogući režim eksperta?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta omogućava veću kontrolu nad primenom patchova, ali pogrešno podešavanje postavki u režimu eksperta može da rezultuje nefunkcionalnom aplikacijom</string>
-    <string name="settings_advanced_strip_unused_libs">Уклонити ненужне оригиналне библиотеке</string>
-    <string name="settings_advanced_strip_unused_libs_description">Брисање ненужних оригиналних библиотека може повећати патчирање, али може бити недовољно за старије уређаје</string>
-    <string name="settings_advanced_skip_unneeded_splits">Филтрирајте подељене APK-ове за уређај</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Током спајања, прескочите језичке, густине и ABI поделе које нису потребне за овај уређај. Смањује величину спојеног APK-а</string>
+    <string name="settings_advanced_strip_unused_libs">Optimizujte za arhitekturu uređaja</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Preskoči SPLIT APK module za nepoznate CPU arhitekture, lokale i rezolucije ekrana tokom objedinjavanja.
+Za obične APK-ove, uklanja nativne biblioteke za nepoznate arhitekture nakon 'patch'ovanja"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Начин рада обраде байткода</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Контролише како се обрађује байткод током поправке. Утиче на брзину поправке, коришћење меморије и величину излазне APK датотеке</string>

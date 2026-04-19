@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Brak dostępnych aplikacji</string>
     <string name="home_no_apps_subtitle">Dodaj źródło modyfikacji lub włącz istniejące w %s</string>
     <string name="home_no_apps_search_subtitle">Brak wyników dla \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Wszystkie aplikacje ukryte</string>
+    <string name="home_all_apps_hidden_subtitle">Ukryto wszystkie aplikacje na ekranie głównym</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Jaką aplikację chcesz zmodyfikować?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_appearance_app_language_current">Bieżący język</string>
     <string name="settings_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą być niekompletne lub może ich brakować</string>
     <string name="settings_appearance_translations_info_text">Aby przetłumaczyć aplikację na nowe języki lub poprawić istniejące tłumaczenia, odwiedź stronę %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Ekran główny</string>
+    <string name="settings_appearance_greeting_phrases">Frazy powitalne</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Wyświetlaj komunikat powitalny na ekranie głównym</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacji</string>
     <string name="settings_appearance_app_icon_default">Domyślna</string>
@@ -399,10 +405,9 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_advanced_expert_mode_description">Włącz zaawansowane ustawienia modyfikacji oraz opcje personalizacji Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
-    <string name="settings_advanced_strip_unused_libs">Usuń nieużywane biblioteki natywne</string>
-    <string name="settings_advanced_strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtruj podzielone pliki APK dla urządzenia</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Podczas łączenia, pomijaj lokalizacje, gęstości i ABI, które nie są potrzebne dla tego urządzenia. Zmniejsza to rozmiar połączonego pliku APK</string>
+    <string name="settings_advanced_strip_unused_libs">Optymalizacja pod architekturę</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Podczas scalania podzielonych plików APK pomija zbędne architektury, wersje językowe i gęstości ekranu.
+W przypadku zwykłych plików APK, po zmodyfikowaniu usuwa nieobsługiwane biblioteki natywne"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Tryb przetwarzania kodu bajtowego</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Określa sposób przetwarzania kodu bajtowego podczas modyfikowania. Wpływa to na szybkość procesu, zużycie pamięci i końcowy rozmiar pliku APK</string>

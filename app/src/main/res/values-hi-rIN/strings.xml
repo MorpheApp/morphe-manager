@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">कोई ऐप्स उपलब्ध नहीं हैं</string>
     <string name="home_no_apps_subtitle">पैच स्रोत जोड़ें या %s में मौजूदा स्रोत सक्षम करें</string>
     <string name="home_no_apps_search_subtitle">कोई ऐप्स \"%1$s\" से मेल नहीं खाते हैं</string>
+    <string name="home_all_apps_hidden_title">सभी ऐप्स छिपे हुए हैं</string>
+    <string name="home_all_apps_hidden_subtitle">आपने होम स्क्रीन से सभी ऐप्स छिपा दिए हैं</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@
     <string name="settings_appearance_app_language_current">वर्तमान भाषा</string>
     <string name="settings_appearance_translations_info_title">कुछ भाषाओं के लिए अनुवाद या अपूर्ण अनुवाद उपलब्ध हो सकते हैं</string>
     <string name="settings_appearance_translations_info_text">नई भाषाओं को अनुवाद करने के लिए या मौजूदा अनुवाद को सुधारने के लिए, %s पर जाएं</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">मुखपृष्ठ</string>
+    <string name="settings_appearance_greeting_phrases">अभिवादन वाक्यांश</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">एप्लिकेशन आइकॉन</string>
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>
@@ -399,10 +405,9 @@
     <string name="settings_advanced_expert_mode_description">अनुमोदित करना जटिल मॉर्फ पट्टी सेटिंग्स और कस्टमाइजेशन विकल्प</string>
     <string name="settings_advanced_expert_mode_dialog_title">एक्सपर्ट मोड को अनुमोदित करना?</string>
     <string name="settings_advanced_expert_mode_dialog_message">एक्सपर्ट मोड पट्चों को लागू करने के तरीके पर अधिक नियंत्रण देता है, लेकिन एक्सपर्ट मोड में सेटिंग्स गलत करने से अप्लिकेशन में काम नहीं करने का खतरा हो सकता है</string>
-    <string name="settings_advanced_strip_unused_libs">अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
-    <string name="settings_advanced_strip_unused_libs_description">पुराने डिवाइस आर्किटेक्चर के लिए अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
-    <string name="settings_advanced_skip_unneeded_splits">डिवाइस के लिए स्प्लिट APK फ़िल्टर करें</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">मर्ज के दौरान, इस डिवाइस के लिए आवश्यक न होने वाले लोकल, डेनसिटी और ABI स्प्लिट को छोड़ दें। मर्ज किए गए APK का आकार कम हो जाता है।</string>
+    <string name="settings_advanced_strip_unused_libs">डिवाइस आर्किटेक्चर के लिए अनुकूलित करें</string>
+    <string name="settings_advanced_strip_unused_libs_description">"सादे APK के लिए, पैचिंग के बाद असमर्थित आर्किटेक्चर के लिए मूल लाइब्रेरीज़ को हटा देता है।
+असमर्थित CPU आर्किटेक्चर, लोकेल और स्क्रीन घनत्व के लिए स्प्लिट APK मॉड्यूल को मर्ज करते समय छोड़ दें।"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">बाइटकोड प्रोसेसिंग मोड</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">पैचिंग के दौरान बाइटकोड कैसे प्रोसेस किया जाता है, यह नियंत्रित करता है। पैचिंग की गति, मेमोरी उपयोग और आउटपुट APK आकार को प्रभावित करता है</string>

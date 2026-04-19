@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Walang available na mga app</string>
     <string name="home_no_apps_subtitle">Magdagdag ng pinagmulan ng patch o paganahin ang isang umiiral na isa sa %s</string>
     <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Nakatago ang lahat ng apps</string>
+    <string name="home_all_apps_hidden_subtitle">Nakatago mo ang lahat ng apps sa home screen</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Anong app ang gusto mong i-patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_appearance_app_language_current">Kasalukuyang wika</string>
     <string name="settings_appearance_translations_info_title">Maaaring nawawala o hindi kumpleto ang pagsasalin-wika para sa ibang wika</string>
     <string name="settings_appearance_translations_info_text">Upang isalin ang mga bagong wika o pagbutihin ang mga umiiral na pagsasalin-wika, bisitahin ang %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Pangunahing iskrin</string>
+    <string name="settings_appearance_greeting_phrases">Mga pagbati</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icon ng aplikasyon</string>
     <string name="settings_appearance_app_icon_default">Panimula</string>
@@ -399,10 +405,9 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_advanced_expert_mode_description">Paganahin ang masalimuot na Morphe patch settings at mga pasadyang pagpipilian</string>
     <string name="settings_advanced_expert_mode_dialog_title">Paganahin ang Expert mode?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Nagbibigay ng higit na kontrol ang Expert mode sa kung paano inilalapat ang mga patch, ngunit ang maling pagkompigura ng mga pagpipilian sa expert mode ay maaaring magresulta sa isang hindi gumaganang aplikasyon</string>
-    <string name="settings_advanced_strip_unused_libs">Alisin ang mga hindi nagamit na mga native library</string>
-    <string name="settings_advanced_strip_unused_libs_description">Burahin ang mga native library para sa mga hindi suportadong arkitektura ng CPU mula sa mga na-patch na aplikasyon</string>
-    <string name="settings_advanced_skip_unneeded_splits">Salain ang mga split APK para sa device</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Sa panahon ng pagsasama, laktawan ang mga locale, density, at ABI split na hindi kailangan para sa device na ito. Binabawasan ang laki ng merged APK</string>
+    <string name="settings_advanced_strip_unused_libs">I-optimize para sa arkitektura ng device</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Laktawan ang mga split APK module para sa mga hindi sinusuportahang CPU architecture, locales, at screen densities sa panahon ng merge.
+Para sa plain APKs, tinatanggal ang mga native library para sa mga hindi sinusuportahang architecture pagkatapos mag-patch"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Paraan ng pagproseso ng bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Kinokontrol kung paano ipinoproseso ang bytecode sa panahon ng pag-patch. Nakakaapekto sa bilis ng pag-patch, paggamit ng memorya, at sukat ng output na APK</string>

@@ -54,4 +54,10 @@
         <item quantity="many">%s патчей выбрано</item>
         <item quantity="other">%s патчей выбрано</item>
     </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s скрытое приложение</item>
+        <item quantity="few">%s скрытых приложения</item>
+        <item quantity="many">%s скрытых приложений</item>
+        <item quantity="other">%s скрытых приложений</item>
+    </plurals>
 </resources>

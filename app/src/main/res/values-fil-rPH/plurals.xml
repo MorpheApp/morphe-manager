@@ -36,4 +36,12 @@
         <item quantity="one">%s napili na patch</item>
         <item quantity="other">%s napili na mga patch</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Ipakita ang %s app</item>
+        <item quantity="other">Ipakita ang %s apps</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s nakatagong app</item>
+        <item quantity="other">%s nakatagong apps</item>
+    </plurals>
 </resources>

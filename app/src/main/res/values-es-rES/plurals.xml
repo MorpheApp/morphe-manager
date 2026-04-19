@@ -36,4 +36,12 @@
         <item quantity="one">%s parche seleccionado</item>
         <item quantity="other">%s parches seleccionados</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Mostrar aplicación %s</item>
+        <item quantity="other">Mostrar aplicaciones %s</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s aplicación oculta</item>
+        <item quantity="other">%s aplicaciones ocultas</item>
+    </plurals>
 </resources>

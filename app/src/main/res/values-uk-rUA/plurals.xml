@@ -54,4 +54,16 @@
         <item quantity="many">%s патчів вибрано</item>
         <item quantity="other">%s патчів вибрано</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Показати %s застосунок</item>
+        <item quantity="few">Показати %s застосунки</item>
+        <item quantity="many">Показати %s застосунків</item>
+        <item quantity="other">Показати %s застосунків</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s прихований застосунок</item>
+        <item quantity="few">%s приховані застосунки</item>
+        <item quantity="many">%s прихованих застосунків</item>
+        <item quantity="other">%s прихованих застосунків</item>
+    </plurals>
 </resources>

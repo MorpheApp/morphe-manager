@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Sovelluksia ei saatavilla</string>
     <string name="home_no_apps_subtitle">Lisää päivityslähde tai ota olemassa oleva käyttöön %s</string>
     <string name="home_no_apps_search_subtitle">Yhtään sovellusta ei löytynyt hakusanalla \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Kaikki sovellukset on piilotettu</string>
+    <string name="home_all_apps_hidden_subtitle">Olet piilottanut kaikki sovellukset aloitusnäytöltä</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Minkä sovelluksen haluat korjata?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -352,6 +354,10 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_appearance_app_language_current">Nykyinen kieli</string>
     <string name="settings_appearance_translations_info_title">Käännyt käännöt ovat puuttomia tai epätäydellisiä</string>
     <string name="settings_appearance_translations_info_text">Muokkaa uusia kieliä tai parantaa vanhoja käännöitä, käytti sivustamme: %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Etusivu</string>
+    <string name="settings_appearance_greeting_phrases">Tervehdysviestit</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti etusivulla</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Sovelluskuvake</string>
     <string name="settings_appearance_app_icon_default">Oletus</string>
@@ -398,10 +404,8 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_advanced_expert_mode_description">Ota käyttöön Morphe-päivityksen asetukset ja mukautusvaihtoehdot</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ota Expert-moodi käyttöön?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert-moodi antaa enemmän valtaa päivitysten sovittamisesta, mutta väärin asetettu expert-moodi voi johtaa sovelluksen toimimattomuuteen</string>
-    <string name="settings_advanced_strip_unused_libs">Poista käyttämättömät natiivikirjastot</string>
-    <string name="settings_advanced_strip_unused_libs_description">Poista tukemattomien suoritinarkkitehtuurien natiivikirjastot paikatuista sovelluksista</string>
-    <string name="settings_advanced_skip_unneeded_splits">Suodata laitekohtaiset APK:t</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Yhdistäminen aikana ohita kieliversio-, tiheys- ja ABI-erottelut, joita tämä laite ei tarvitse. Vähentää yhdistetyn APK:n kokoa</string>
+    <string name="settings_advanced_strip_unused_libs">Optimoi laitteen arkkitehtuuri</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Ohita jaetut APK-moduulit tuettujen CPU-arkkitehtuurien, kieliasetusten ja näytön resoluutioiden osalta yhdistämisen aikana.\nPlain APK -tiedostoissa poistetaan natiivikirjastot tuettujen arkkitehtuurien osalta korjaamisen jälkeen"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bytekoodin käsittelytila</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Määrittää, miten bytecode käsitellään paikkatessa. Vaikuttaa paikkatuksen nopeuteen, muistin käyttöön ja ulostulon APK:n kokoon</string>

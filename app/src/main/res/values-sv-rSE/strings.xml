@@ -350,6 +350,7 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
     <string name="settings_appearance_translations_info_title">Översättningar kan saknas eller vara ofullständiga för vissa språk</string>
     <string name="settings_appearance_translations_info_text">Om du vill översätta till nya språk eller förbättra de befintliga översättningarna, besök %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Appikon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -396,8 +397,6 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_advanced_expert_mode_description">Aktivera komplexa appkorrigeringsinställningar och anpassningsalternativ för Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläge?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur korrigeringarna tillämpas, men om du felaktigt konfigurerar inställningarna i expertläget kan det leda till att appen inte fungerar</string>
-    <string name="settings_advanced_strip_unused_libs">Ta bort oanvända plattformsspecifika bibliotek</string>
-    <string name="settings_advanced_strip_unused_libs_description">Ta bort plattformsspecifika bibliotek för CPU-arkitekturer som inte stöds från korrigerade appar.</string>
     <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT för GitHub</string>

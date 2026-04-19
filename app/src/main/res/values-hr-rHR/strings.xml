@@ -346,6 +346,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="settings_appearance_app_language_current">Trenutni jezik</string>
     <string name="settings_appearance_translations_info_title">Prijevodi za neke jezike mogu nedostajati ili biti nepotpuni</string>
     <string name="settings_appearance_translations_info_text">Da biste preveli nove jezike ili poboljšali postojeće prijevode, posjetite %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacije</string>
     <string name="settings_appearance_app_icon_default">Zadano</string>
@@ -392,8 +393,6 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="settings_advanced_expert_mode_description">Omogući napredne postavke i opcije za prilagodbu za složeno Morphe ispravljanje i prilagodbe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Napredni način?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Napredni način omogućuje više kontrole nad primjenom ispravljava, ali pogrešno konfiguriranje postavki u naprednom načinu može rezultirati nefunkcionalnom aplikacijom</string>
-    <string name="settings_advanced_strip_unused_libs">Uklonite nekorištene izvorne biblioteke</string>
-    <string name="settings_advanced_strip_unused_libs_description">Izbrišite izvorne biblioteke za nepodržane arhitekture procesora iz patchanih aplikacija</string>
     <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>

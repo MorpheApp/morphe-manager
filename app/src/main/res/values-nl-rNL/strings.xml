@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Geen apps beschikbaar</string>
     <string name="home_no_apps_subtitle">Voeg een patchbron toe of schakel een bestaande in %s</string>
     <string name="home_no_apps_search_subtitle">Geen apps komen overeen met \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Alle apps zijn verborgen</string>
+    <string name="home_all_apps_hidden_subtitle">U heeft alle apps van het startscherm verborgen</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welke app wil je patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_appearance_app_language_current">Huidige taal</string>
     <string name="settings_appearance_translations_info_title">Vertalingen voor sommige talen kunnen ontbreken of onvolledig zijn</string>
     <string name="settings_appearance_translations_info_text">Om nieuwe talen te vertalen of bestaande vertalingen te verbeteren, bezoek %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Startscherm</string>
+    <string name="settings_appearance_greeting_phrases">Begroetingszinnen</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Toon een begroetingsbericht op de startscherm</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App-pictogram</string>
     <string name="settings_appearance_app_icon_default">Standaard</string>
@@ -399,10 +405,9 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_advanced_expert_mode_description">Inschakelen complexe Morphe-patchinstellingen en aanpassingsopties</string>
     <string name="settings_advanced_expert_mode_dialog_title">Expertmodus inschakelen?</string>
     <string name="settings_advanced_expert_mode_dialog_message">De expertmodus biedt meer controle over hoe patches worden toegepast, maar een verkeerde configuratie in de expertmodus kan ertoe leiden dat de app niet meer werkt</string>
-    <string name="settings_advanced_strip_unused_libs">Verwijder ongebruikte native bibliotheken</string>
-    <string name="settings_advanced_strip_unused_libs_description">Verwijder native library\'s voor niet-ondersteunde CPU-architecturen uit gepatchte apps</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filter split APKs voor apparaat</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Tijdens het samenvoegen, negeer locale, dichtheid en ABI splits die niet nodig zijn voor dit apparaat. Vermindert de grootte van het samengevoegde APK-bestand</string>
+    <string name="settings_advanced_strip_unused_libs">Optimaliseer voor apparaatarchitectuur</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Sla split APK-modules voor niet-ondersteunde CPU-architecturen, talen en schermresoluties over tijdens het samenvoegen.
+Voor gewone APK's worden native bibliotheken voor niet-ondersteunde architecturen verwijderd na het patchen"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bytecode-verwerkingsmodus</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Regelt hoe bytecode wordt verwerkt tijdens patchen. Beïnvloedt patchesnelheid, geheugengebruik en APK-grootte</string>

@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Neznalezly se žádné aplikace</string>
     <string name="home_no_apps_subtitle">Přidejte zdroj záplaty nebo povolte stávající v %s</string>
     <string name="home_no_apps_search_subtitle">Žádné aplikace neodpovídají \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Všechny aplikace jsou skryté</string>
+    <string name="home_all_apps_hidden_subtitle">Všechny aplikace jste schovali z domovské obrazovky</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kterou aplikaci chcete záplatovat?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="settings_appearance_app_language_current">Aktuální jazyk</string>
     <string name="settings_appearance_translations_info_title">Pro některé jazyky mohou chybět nebo být neúplné.</string>
     <string name="settings_appearance_translations_info_text">Chcete přidat nový jazyk nebo vylepšit existující překlady? Navštivte %s.</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Domovská obrazovka</string>
+    <string name="settings_appearance_greeting_phrases">Pozdravné fráze</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Zobrazit pozdravný vzkaz na domovské obrazovce</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikace</string>
     <string name="settings_appearance_app_icon_default">Výchozí</string>
@@ -399,10 +405,9 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="settings_advanced_expert_mode_description">Povolit pokročilé nastavení a možnosti personalizace pro Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Povolit Expert mód?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert mód poskytuje více kontroly nad aplikací patchů, ale špatná konfigurace nastavení v expert módu může vést k nefunkční aplikaci</string>
-    <string name="settings_advanced_strip_unused_libs">Odstranit nepoužívané nativní knihovny</string>
-    <string name="settings_advanced_strip_unused_libs_description">Smazat nativní knihovny pro nepodporované architektury CPU ze záplatovaných aplikací</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtrovat rozdělené APK pro zařízení</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Během slučování přeskočit jazykové verze, hustoty a ABI, které zařízení nepotřebuje. Snižuje velikost sloučeného APK</string>
+    <string name="settings_advanced_strip_unused_libs">Optimalizovat pro architekturu zařízení</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Přeskočit split APK moduly pro nepodporované CPU architektury, jazykové oblasti a hustoty obrazovky během slučování.
+Pro plain APK, odstraní nativní knihovny pro nepodporované architektury po opravování"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Režim zpracování bajtkódu</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Určuje, jak je bajtkód zpracováván během záplatování. Ovlivňuje rychlost záplatování, využití paměti a velikost výstupní APK</string>

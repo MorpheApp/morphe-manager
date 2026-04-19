@@ -72,4 +72,20 @@
         <item quantity="many">%s تعديل محدد</item>
         <item quantity="other">%s تعديل محدد</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="zero">إظهار %s تطبيقات</item>
+        <item quantity="one">إظهار %s تطبيق</item>
+        <item quantity="two">إظهار %s تطبيقات</item>
+        <item quantity="few">إظهار %s تطبيقات</item>
+        <item quantity="many">إظهار %s تطبيقات</item>
+        <item quantity="other">إظهار %s تطبيقات</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="zero">%s تطبيقات مخفية</item>
+        <item quantity="one">%s تطبيق مخفي</item>
+        <item quantity="two">%s تطبيقات مخفية</item>
+        <item quantity="few">%s تطبيقات مخفية</item>
+        <item quantity="many">%s تطبيقات مخفية</item>
+        <item quantity="other">%s تطبيقات مخفية</item>
+    </plurals>
 </resources>

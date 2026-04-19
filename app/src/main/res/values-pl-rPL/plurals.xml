@@ -54,4 +54,16 @@
         <item quantity="many">%s wybranych modyfikacji</item>
         <item quantity="other">%s wybranych modyfikacji</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Pokaż %s aplikację</item>
+        <item quantity="few">Pokaż %s aplikacje</item>
+        <item quantity="many">Pokaż %s aplikacji</item>
+        <item quantity="other">Pokaż %s aplikacji</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s ukryta aplikacja</item>
+        <item quantity="few">%s ukryte aplikacje</item>
+        <item quantity="many">%s ukrytych aplikacji</item>
+        <item quantity="other">%s ukrytych aplikacji</item>
+    </plurals>
 </resources>

@@ -202,6 +202,7 @@
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_system">Sistema</string>
     <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_default">Predefinido</string>
     <!-- Settings - Advanced Tab - Updates Section -->

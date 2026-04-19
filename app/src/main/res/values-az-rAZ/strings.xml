@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Mövcud tətbiq yoxdur</string>
     <string name="home_no_apps_subtitle">%s bölməsində yamaq mənbəyi əlavə edin və ya mövcud olanı aktivləşdir</string>
     <string name="home_no_apps_search_subtitle">\"%1$s\" ilə uyuşan tətbiq yoxdur</string>
+    <string name="home_all_apps_hidden_title">Bütün tətbiqlər gizlidir</string>
+    <string name="home_all_apps_hidden_subtitle">Bütün tətbiqləri əsas ekrandan gizlətmisiniz</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -81,6 +83,7 @@
     <string name="sources_update_success">Uğurlu yeniləmə</string>
     <string name="sources_update_unavailable">Yenilənmə əlçatan deyil</string>
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
+    <string name="sources_download_fail_named">\'%1$s\' yükləmək olmadı: %2$s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' yenilənə bilmədi: yamaq JSON faylı qurulan URL-də tapılmadı</string>
     <string name="sources_patch_expert_badge">Mütəxəssis</string>
     <string name="sources_patch_expert_badge_tooltip">Bu yamağı əl ilə yerləşdirmək üçün Tənzimləmələrdə Mütəxəssis rejimin aktivləşdir</string>
@@ -352,6 +355,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_app_language_current">Gündəlik dil</string>
     <string name="settings_appearance_translations_info_title">Bəzi dillər üçün tərcümələr yarımçıq və ya qüsurlu ola bilər</string>
     <string name="settings_appearance_translations_info_text">Yeni dilləri tərcümə etmək və ya mövcud tərcümələri təkmilləşdirmək üçün %s -i ziyarət et</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Tətbiq simvolu</string>
     <string name="settings_appearance_app_icon_default">İlkin</string>
@@ -398,9 +402,17 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_expert_mode_description">Qəliz Morphe yamaqlanma tənzimləmələrin və fərdiləşdirmə seçimlərin aktivləşdir</string>
     <string name="settings_advanced_expert_mode_dialog_title">Mütəxəssis rejimi aktivləşdirilsin?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mütəxəssis rejimi yamaqların necə tətbiq olunduğuna daha çox nəzarət verir, lakin mütəxəssis rejimindəki tənzimləmələri səhv qurma tətbiqi funksional pozuntuya sala bilər</string>
-    <string name="settings_advanced_strip_unused_libs">İşlədilməyən yerli kitabxanaları təmizlə</string>
-    <string name="settings_advanced_strip_unused_libs_description">Yamalanan tətbiqlərdən dəstəklənməyən CPU quruluşları üçün yerli kitabxanaları silin</string>
+    <string name="settings_advanced_strip_unused_libs">Cihaz quruluşu üçün optimallaşdır</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Birləşdirmə əsnasında dəstəklənməyən CPU quruluşları, yerləşmələr və ekran sıxlıqları üçün bölünən APK modullarını ötür.
+Adi APK-lar üçün, yamaqlanmadan sonra dəstəklənməyən quruluşlar üçün yerli kitabxanaları sil"</string>
     <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Baytkod emalı rejimi</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Yamaqlanma əsnasında baytkodun necə irəlilədiyinə nəzarət edir. Yamaqlanma sürətinə, yaddaş istifadəsinə və hasilat APK həcminə təsir edir</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Sürətli (Tövsiyə olunur)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Sürətli</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Daha həcmli APK dəyərində daha sürətli yamaqlanma və daha az yaddaş istifadəsi. Aşağı RAM və ya köhnə cihazlar üçün tövsiyə olunur.</string>
+    <string name="settings_advanced_bytecode_mode_full">Tam</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Daha yavaş yamaqlanma, köhnə davranışı təkrarlayır. Yalnız sürətli rejim problemlərə səbəb olursa istifadə edin.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Pull request mənbələri üçün tələb olunur</string>
@@ -683,6 +695,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="hide">Gizlət</string>
     <string name="default_">İlkin</string>
     <string name="logs">Jurnallar</string>
+    <string name="sources">Mənbələr</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>

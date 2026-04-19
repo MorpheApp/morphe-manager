@@ -45,4 +45,9 @@
         <item quantity="few">%s patch-uri selectate</item>
         <item quantity="other">%s de patch-uri selectate</item>
     </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s aplicație ascunsă</item>
+        <item quantity="few">%s aplicații ascunse</item>
+        <item quantity="other">%s aplicații ascunse</item>
+    </plurals>
 </resources>

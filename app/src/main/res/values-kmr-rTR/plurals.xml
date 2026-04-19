@@ -36,4 +36,12 @@
         <item quantity="one">%s çareser hatin hilbijartin</item>
         <item quantity="other">%s çareserên hatin hilbijartin</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s sepanê</item>
+        <item quantity="other">%s sepanan</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s sepanêyê veşartî</item>
+        <item quantity="other">%s sepanên veşartî</item>
+    </plurals>
 </resources>

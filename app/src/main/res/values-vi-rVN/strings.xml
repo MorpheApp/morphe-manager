@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
-    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi màn hình chính. Bạn có thể khôi phục lại bằng nút \'%1$s\' ở cuối danh sách</string>
+    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi màn hình chính. Bạn có thể khôi phục lại bằng nút \"%1$s\" ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
     <string name="home_app_show_hidden">Hiện ứng dụng đã ẩn</string>
     <string name="home_app_no_hidden">Không có ứng dụng nào đang ẩn</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
     <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Tất cả ứng dụng đã bị ẩn</string>
+    <string name="home_all_apps_hidden_subtitle">Bạn đã ẩn tất cả ứng dụng khỏi màn hình chính</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -82,7 +84,7 @@
     <string name="sources_update_unavailable">Hiện không có bản cập nhật nào</string>
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
     <string name="sources_download_fail_named">Không tải được \"%1$s\": %2$s</string>
-    <string name="sources_download_endpoint_not_found">Không thể cập nhật \'%1$s\': không tìm thấy tệp JSON bản vá tại URL đã cấu hình</string>
+    <string name="sources_download_endpoint_not_found">Không thể cập nhật \"%1$s\": không tìm thấy tệp JSON bản vá tại URL đã cấu hình</string>
     <string name="sources_patch_expert_badge">Chuyên gia</string>
     <string name="sources_patch_expert_badge_tooltip">Bật chế độ Chuyên gia trong Cài đặt để có thể tự thêm bản vá này</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,7 +100,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Tải APK gốc</string>
     <string name="home_download_instructions_steps_title">Hướng dẫn:</string>
-    <string name="home_download_instructions_step1">Bấm nút \'%1$s\' ở bên dưới</string>
+    <string name="home_download_instructions_step1">Bấm nút \"%1$s\" ở bên dưới</string>
     <string name="home_download_instructions_step2_part1">Cuộn xuống trang web và bấm</string>
     <string name="home_download_instructions_download_button_toast">Bấm tải xuống trên trang web ấy, chứ không phải ở đây 😊</string>
     <string name="home_download_instructions_step3">Đợi tải xong, nhưng &lt;b&gt;không cài&lt;/b&gt; APK</string>
@@ -114,7 +116,7 @@
     <string name="home_selected_version">Phiên bản đã chọn</string>
     <string name="home_select_apk_title">Chọn APK</string>
     <string name="home_select_any_apk_description">Bấm nút bên dưới để chọn tệp APK của bất kỳ ứng dụng nào để vá</string>
-    <string name="home_invalid_apk_unreadable">Không thể đọc tệp. Hãy kiểm tra xem \'Bộ nhớ ngoài\' có bị hạn chế pin hay không</string>
+    <string name="home_invalid_apk_unreadable">Không thể đọc tệp. Hãy kiểm tra xem \"Bộ nhớ ngoài\" có bị hạn chế pin hay không</string>
     <string name="home_invalid_apk_not_an_apk">Tệp đã chọn không phải là tệp APK hợp lệ</string>
     <string name="home_invalid_apk_io_error">Không thể mở tệp. Vui lòng thử lại</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -187,7 +189,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="adaptive_icon_safe_zone_outer">Vùng mặt nạ (có thể bị cắt)</string>
     <string name="adaptive_icon_created_success">Đã tạo biểu tượng thích ứng thành công</string>
     <string name="adaptive_icon_creation_failed">Không thể tạo biểu tượng thích ứng</string>
-    <string name="adaptive_icon_folder_explanation">Chọn vị trí để tạo thư mục \'%1$s/%2$s\' chứa các tệp biểu tượng đã tạo</string>
+    <string name="adaptive_icon_folder_explanation">Chọn vị trí để tạo thư mục \"%1$s/%2$s\" chứa các tệp biểu tượng đã tạo</string>
     <string name="notification_icon_preview">Xem trước biểu tượng trên thông báo</string>
     <string name="notification_icon_preview_hint">Dùng thanh trượt để thay đổi kích thước. Kéo để điều chỉnh vị trí</string>
     <!-- Header Creator -->
@@ -198,7 +200,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="header_creator_no_image">Không có hình ảnh nào được chọn</string>
     <string name="header_creator_success">Đã tạo logo thành công</string>
     <string name="header_creator_failed">Không thể tạo logo</string>
-    <string name="header_creator_folder_explanation">Chọn vị trí để tạo thư mục \'%1$s/%2$s\' chứa các tệp logo đã tạo</string>
+    <string name="header_creator_folder_explanation">Chọn vị trí để tạo thư mục \"%1$s/%2$s\" chứa các tệp logo đã tạo</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bạn có chắc muốn gỡ ứng dụng này không?</string>
     <string name="home_app_info_remove_app_warning">Thao tác này sẽ xóa vĩnh viễn:</string>
@@ -223,7 +225,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_app_info_app_deleted_description">Ứng dụng này đã bị gỡ bên ngoài Morphe. Hãy vá lại để khôi phục chức năng</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Chế độ root yêu cầu APK gốc phải được cài đặt trên thiết bị trước khi vá</string>
-    <string name="root_gmscore_excluded">Chế độ root không cần bản vá \'GmsCore support\'</string>
+    <string name="root_gmscore_excluded">Chế độ root không cần bản vá \"GmsCore support\"</string>
     <string name="root_pre_patch_installer_title">Chọn phương thức cài đặt</string>
     <string name="root_pre_patch_installer_description">Thiết bị của bạn đã có quyền root. Hãy chọn cách bạn muốn cài đặt ứng dụng đã vá</string>
     <string name="root_pre_patch_installer_mount_title">Gắn kết bằng root</string>
@@ -353,6 +355,10 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_appearance_app_language_current">Ngôn ngữ hiện tại</string>
     <string name="settings_appearance_translations_info_title">Một số ngôn ngữ có thể bị thiếu hoặc chưa hoàn thiện</string>
     <string name="settings_appearance_translations_info_text">Bạn có thể yêu cầu thêm ngôn ngữ hoặc cải thiện bản dịch hiện tại bằng cách truy cập %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Trang chủ</string>
+    <string name="settings_appearance_greeting_phrases">Lời chào</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Hiển thị thông báo chào trên trang chủ</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Biểu tượng</string>
     <string name="settings_appearance_app_icon_default">Mặc định</string>
@@ -362,7 +368,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_appearance_app_icon_dark_2">Hư không</string>
     <string name="settings_appearance_app_icon_dark_3">Màu chàm</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Đổi biểu tượng?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Bạn có muốn đổi sang \'%1$s\' và khởi động lại?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Bạn có muốn đổi sang \"%1$s\" và khởi động lại?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Chốt</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Cập nhật</string>
@@ -399,10 +405,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_advanced_expert_mode_description">Mở khoá các tuỳ chỉnh vá nâng cao của Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Bật chế độ Chuyên gia?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Chế độ chuyên gia cho phép bạn tùy chỉnh sâu hơn về cách các bản vá được áp dụng, nhưng nếu bạn chỉnh không đúng có thể khiến ứng dụng không hoạt động</string>
-    <string name="settings_advanced_strip_unused_libs">Xóa thư viện gốc không cần</string>
-    <string name="settings_advanced_strip_unused_libs_description">Xóa thư viện gốc cho kiến trúc CPU không được hỗ trợ từ ứng dụng đã vá</string>
-    <string name="settings_advanced_skip_unneeded_splits">Lọc APK tách nhỏ cho thiết bị</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Trong quá trình hợp nhất, bỏ qua các bản dựng theo định vị, mật độ và ABI không cần thiết cho thiết bị này. Giảm kích thước APK hợp nhất</string>
+    <string name="settings_advanced_strip_unused_libs">Tối ưu theo kiến trúc thiết bị</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Khi gộp, sẽ bỏ qua các mô-đun APK chia nhỏ không phù hợp với kiến trúc CPU, ngôn ngữ hoặc mật độ màn hình.
+Với APK thường, các thư viện gốc của kiến trúc không được hỗ trợ sẽ bị loại bỏ sau khi vá."</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Chế độ xử lý bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Quy định cách xử lý bytecode trong quá trình vá. Ảnh hưởng đến tốc độ vá, mức dùng bộ nhớ và kích thước APK đầu ra</string>

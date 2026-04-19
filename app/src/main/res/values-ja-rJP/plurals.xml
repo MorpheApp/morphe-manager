@@ -27,4 +27,10 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="other">選択中のパッチ %s 個</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="other">标夕 %s マドウ</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="other">%s マドウの這天マドウ</item>
+    </plurals>
 </resources>

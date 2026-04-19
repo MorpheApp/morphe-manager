@@ -27,4 +27,10 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="other">%s 개의 패치 선택됨</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="other">%s 개의 앱 보기</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="other">%s개의 숨겨진 앱</item>
+    </plurals>
 </resources>

@@ -45,4 +45,9 @@
         <item quantity="few">%s пакета изабрано</item>
         <item quantity="other">%s пакета изабрано</item>
     </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s скривена апликација</item>
+        <item quantity="few">%s скривене апликације</item>
+        <item quantity="other">%s скривене апликације</item>
+    </plurals>
 </resources>

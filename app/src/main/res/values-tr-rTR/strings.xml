@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Uygulama bulunamadı</string>
     <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
     <string name="home_no_apps_search_subtitle">\"%1$s\" ile eşleşen uygulama bulunamadı</string>
+    <string name="home_all_apps_hidden_title">Tüm uygulamalar gizlendi</string>
+    <string name="home_all_apps_hidden_subtitle">Ana ekranınızdan tüm uygulamaları gizlediniz</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="settings_appearance_app_language_current">Mevcut dil</string>
     <string name="settings_appearance_translations_info_title">Çeviriler bazı diller için eksik veya tamamlanmamış olabilir</string>
     <string name="settings_appearance_translations_info_text">Yeni diller eklemek veya mevcut çevirileri iyileştirmek için %s adresini ziyaret edin</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Ana ekran</string>
+    <string name="settings_appearance_greeting_phrases">Selamlaşma ifadeleri</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlaşma mesajı göster</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Uygulama simgesi</string>
     <string name="settings_appearance_app_icon_default">Varsayılan</string>
@@ -399,18 +405,17 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="settings_advanced_expert_mode_description">Gelişmiş Morphe yama ayarlarını ve özelleştirme seçeneklerini etkinleştirin</string>
     <string name="settings_advanced_expert_mode_dialog_title">Uzman modu etkinleştirilsin mi?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Uzman modu yamaların nasıl uygulanacağı konusunda daha fazla kontrol sağlar, ancak uzman modunda ayarların yanlış yapılandırılması işlevsiz bir uygulamayla sonuçlanabilir</string>
-    <string name="settings_advanced_strip_unused_libs">Kullanılmayan yerel kütüphaneleri kaldır</string>
-    <string name="settings_advanced_strip_unused_libs_description">APK\'yi yamalarken desteklenmeyen CPU mimarileri için kullanılan yerel kütüphaneleri silin</string>
-    <string name="settings_advanced_skip_unneeded_splits">Cihaz için bölüntülenmiş APK\'ları filtrele</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Birleştirme sırasında, bu cihaz için gerekli olmayan dil, yoğunluk ve ABI bölümlerini atla. Birleştirilmiş APK boyutunu azaltır</string>
+    <string name="settings_advanced_strip_unused_libs">Cihaz mimarisi için optimize et</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Birleştirme sırasında desteklenmeyen CPU mimarileri, diller ve ekran yoğunluklarının bölünmüş APK modüllerini atla.
+Basit APK'ler için, yamalamadan sonra desteklenmeyen mimarilere ait yerel kütüphaneleri temizler"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bayt kodu işleme modu</string>
-    <string name="settings_advanced_bytecode_mode_dialog_description">Yama sırasında bayt kodunun nasıl işleneceğini kontrol eder. Yama hızını, bellek kullanımını ve çıktı APK boyutunu etkiler</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Yamalama sırasında bayt kodunun nasıl işleneceğini kontrol eder. Yama hızını, bellek kullanımını ve çıktı APK boyutunu etkiler</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">Hızlı (Önerilen)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">Hızlı</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_description">Daha hızlı yama ve daha düşük bellek kullanımı, ancak daha büyük bir APK\'nın maliyetine. Düşük RAM\'li veya eski cihazlar için önerilir</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Daha büyük bir APK pahasına daha hızlı yamalama ve daha düşük bellek kullanımı. Düşük RAM\'li veya eski cihazlar için önerilir</string>
     <string name="settings_advanced_bytecode_mode_full">Tam</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Daha yavaş yama, eski davranışları çoğaltır. Hızlı mod sorunlara neden olursa yalnızca kullanın</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Daha yavaş yamalama, eski davranışı tekrarlar. Yalnızca hızlı mod sorunlara neden oluyorsa kullanın</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Çekme isteği kaynakları için gereklidir</string>

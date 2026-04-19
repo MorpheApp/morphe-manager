@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">利用可能なアプリはありません</string>
     <string name="home_no_apps_subtitle">%s でパッチソースを追加するか、既存のパッチソースを有効にしてください</string>
     <string name="home_no_apps_search_subtitle">「%1$s」に一致するアプリはありません</string>
+    <string name="home_all_apps_hidden_title">すべてのアプリが非表示</string>
+    <string name="home_all_apps_hidden_subtitle">ホーム画面からすべてのアプリを非表示にしました</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">どのアプリにパッチを適用しますか？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -121,10 +123,10 @@
     <string name="expert_mode_title">エキスパートモード</string>
     <string name="expert_mode_search">パッチを検索</string>
     <string name="expert_mode_proceed">パッチ処理に進む</string>
-    <string name="expert_mode_disable_all">全て無効化する</string>
-    <string name="expert_mode_enable_all">全て有効化する</string>
-    <string name="expert_mode_reset_to_default">推奨されるパッチを有効にする</string>
-    <string name="expert_mode_restore_saved">保存済みのパッチセレクションを復元する</string>
+    <string name="expert_mode_disable_all">全て無効化</string>
+    <string name="expert_mode_enable_all">全て有効化</string>
+    <string name="expert_mode_reset_to_default">推奨パッチの有効化</string>
+    <string name="expert_mode_restore_saved">保存済みのパッチセレクションの復元</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_universal_patches">ユニバーサルパッチ</string>
     <string name="expert_mode_new_patches">新規</string>
@@ -137,10 +139,10 @@
     <string name="home_invalid_signature_message">選択した &lt;b&gt;%s&lt;/b&gt; の APK の署名証明書が想定と一致しません。改ざんされているか、信頼できないソースからのものである可能性があります</string>
     <string name="home_invalid_signature_badge">これはオリジナルの APK ではない可能性があります</string>
     <string name="home_split_apk_warning_title">分割 APK が検出されました</string>
-    <string name="home_split_apk_warning_message">"このファイルは APK バンドルです。
-(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)
+    <string name="home_split_apk_warning_message">"このファイルは APK バンドルです
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)。
 
-このアプリのパッチには、&lt;b&gt;フル APK &lt;/b&gt;を使用することをお勧めします"</string>
+このアプリのパッチには、&lt;b&gt;フル APK&lt;/b&gt; を使用することをお勧めします"</string>
     <string name="home_split_apk_warning_pick_another">別の APK を選択してください</string>
     <string name="home_dialog_unsupported_version_experimental_label">実験的</string>
     <string name="home_dialog_unsupported_version_experimental_description">このバージョンは実験的な機能を含んでおり、不安定または不完全である可能性があります</string>
@@ -353,6 +355,10 @@
     <string name="settings_appearance_app_language_current">現在の言語</string>
     <string name="settings_appearance_translations_info_title">一部の言語では、翻訳が存在しない、または不完全である可能性があります</string>
     <string name="settings_appearance_translations_info_text">新しい言語の翻訳や既存の翻訳の改善には、%s にアクセスしてください</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">ホーム画面</string>
+    <string name="settings_appearance_greeting_phrases">挨拶フレーズ</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示する</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">アプリアイコン</string>
     <string name="settings_appearance_app_icon_default">デフォルト</string>
@@ -399,16 +405,15 @@
     <string name="settings_advanced_expert_mode_description">Morphe の高度なパッチ設定とカスタマイズオプションを有効にします</string>
     <string name="settings_advanced_expert_mode_dialog_title">エキスパート モードを有効にしますか？</string>
     <string name="settings_advanced_expert_mode_dialog_message">エキスパートモードではパッチ適用の詳細設定が可能ですが、設定を誤るとアプリが正常に動作しなくなる可能性があります</string>
-    <string name="settings_advanced_strip_unused_libs">未使用のネイティブライブラリの削除</string>
-    <string name="settings_advanced_strip_unused_libs_description">パッチ適用済みアプリから、非対応の CPU アーキテクチャ向けネイティブ ライブラリを削除します</string>
-    <string name="settings_advanced_skip_unneeded_splits">デバイス向けにAPKスプリットをフィルタリングする</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">マージ中に、このデバイスに必要なロケール、密度、およびABIのスプリットをスキップします。マージされたAPKのサイズを削減します</string>
+    <string name="settings_advanced_strip_unused_libs">デバイスのアーキテクチャに最適化する</string>
+    <string name="settings_advanced_strip_unused_libs_description">"マージ時に、未対応の CPU アーキテクチャ、ロケール、画面密度の 分割 APK モジュールをスキップします。
+通常の APK の場合、パッチ適用後に未対応のアーキテクチャのネイティブライブラリを削除します"</string>
     <!-- Bytecode mode -->
-    <string name="settings_advanced_bytecode_mode">バイトコード処理モード</string>
+    <string name="settings_advanced_bytecode_mode">バイトコードの処理モード</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">パッチ適用時のバイトコードの処理方法を設定します。処理速度、メモリ使用量、出力 APK のサイズに影響します</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">高速 (推奨)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">高速</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_description">パッチ処理を高速化し、メモリ使用量を抑えますが、出力 APK のサイズが大きくなります。低 RAM 環境や古い端末におすすめです</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">パッチ処理を高速化し、メモリ使用量を抑えますが、出力 APK のサイズが大きくなります。低 RAM 環境や古いデバイスにおすすめです</string>
     <string name="settings_advanced_bytecode_mode_full">フル</string>
     <string name="settings_advanced_bytecode_mode_full_description">パッチ処理は遅くなりますが、従来の動作を再現します。高速モードで問題が発生する場合のみ使用してください</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -610,9 +615,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_patches_in_sources_format">%2$s 内の %1$s</string>
     <string name="settings_system_patch_selection_source_format">ソース #%s</string>
     <string name="settings_system_patch_selection_will_delete">以下を削除します</string>
-    <string name="settings_system_patch_selection_reset_all_warning">すべてのパッケージとソースに保存されたパッチ選択を完全に削除します</string>
-    <string name="settings_system_patch_selection_reset_package_warning">%s に保存されたパッチ選択を、すべてのソースから完全に削除します</string>
-    <string name="settings_system_patch_selection_reset_source_warning">ソース #%2$s にある %1$s の保存されたパッチ選択を完全に削除します</string>
+    <string name="settings_system_patch_selection_reset_all_warning">すべてのパッケージとソースの保存済みパッチ セレクションを完全に削除します</string>
+    <string name="settings_system_patch_selection_reset_package_warning">%s のすべてのソースの保存済みパッチ セレクションを完全に削除します</string>
+    <string name="settings_system_patch_selection_reset_source_warning">%1$s のソース #%2$s の保存済みパッチ セレクションを完全に削除します</string>
     <string name="settings_system_export_source_data_fail">ソースデータのエクスポートに失敗しました</string>
     <string name="settings_system_export_source_data_success">ソースデータのエクスポートに成功しました</string>
     <string name="settings_system_import_source_data_fail">ソースデータのインポートに失敗しました</string>
@@ -625,7 +630,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>
     <string name="settings_system_share_website_description">Morphe の公式ウェブサイトを共有します</string>
-    <string name="settings_system_manager_description">"人気の Android アプリを現代的で効率的にパッチを適用するためのオープンソースプロジェクトです。コミュニティのフィードバックや貢献によって発展しています"</string>
+    <string name="settings_system_manager_description">"人気の Android アプリにモダンで効率的にパッチを適用するためのオープンソースプロジェクトです。コミュニティからのフィードバックや貢献によって発展しています"</string>
     <string name="credits">クレジット</string>
     <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>

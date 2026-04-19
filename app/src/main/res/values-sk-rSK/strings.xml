@@ -305,6 +305,7 @@ Naozaj chcete pokračovať?"</string>
     <string name="settings_appearance_app_language_current">Aktuálny jazyk</string>
     <string name="settings_appearance_translations_info_title">Preklady pre niektoré jazyky sa môžu byť neúplné</string>
     <string name="settings_appearance_translations_info_text">Pre preklad nových jazykov alebo zlepšenie existujúcich prekladov navštívte %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikácie</string>
     <string name="settings_appearance_app_icon_default">Predvolená</string>
@@ -351,8 +352,6 @@ Naozaj chcete pokračovať?"</string>
     <string name="settings_advanced_expert_mode_description">Zapnúť rozšírené nastavenia Morphe pre plátanie a personalizáciu</string>
     <string name="settings_advanced_expert_mode_dialog_title">Povoliť režim pre skúsených?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim pre skúsených poskytuje rozsiahlejšiu kontrolu nad tým, ako sa aplikujú záplaty, no nesprávna konfigurácia nastavení v tomto režime môže viesť k nefunkčnej aplikácii</string>
-    <string name="settings_advanced_strip_unused_libs">Odstrániť nepoužívané natívne knižnice</string>
-    <string name="settings_advanced_strip_unused_libs_description">Odstráňte natívne knižnice pre nepodporované CPU architektúry zo zaplátaných aplikácií</string>
     <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>

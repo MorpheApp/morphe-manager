@@ -36,4 +36,12 @@
         <item quantity="one">%s módosítás kiválasztva</item>
         <item quantity="other">%s módosítás kiválasztva</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Mutassa a(z) %s alkalmazást</item>
+        <item quantity="other">Mutassa a(z) %s alkalmazásokat</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s rejtett alkalmazás</item>
+        <item quantity="other">%s rejtett alkalmazások</item>
+    </plurals>
 </resources>

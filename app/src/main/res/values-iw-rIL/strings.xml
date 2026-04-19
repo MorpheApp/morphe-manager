@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">אין אפליקציות זמינות</string>
     <string name="home_no_apps_subtitle">הוסף מקור לאפליקציה או הפעל מקור קיים ב-\"%s\"</string>
     <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">כל האפליקציות מוסתרות</string>
+    <string name="home_all_apps_hidden_subtitle">הסתרת את כל האפליקציות מהמסך הראשי</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">איזה אפליקציה אתה רוצה לתקן?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -352,6 +354,10 @@
     <string name="settings_appearance_app_language_current">שפה נוכח</string>
     <string name="settings_appearance_translations_info_title">תרגומים עבור חלק מהשצות עשויים או לא מושלמים</string>
     <string name="settings_appearance_translations_info_text">לתרגם שפות חדשות או לשפר את התרגומים הקיימים, עלי לבקר %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">מסך הבית</string>
+    <string name="settings_appearance_greeting_phrases">משפטי פתיחה</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">הצגת הודעת פתיחה על מסך הבית</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">אייקון האפליקציה</string>
     <string name="settings_appearance_app_icon_default">ברירת מחדל</string>
@@ -398,10 +404,9 @@
     <string name="settings_advanced_expert_mode_description">אפשר הגדרות תיקון מורפמה מורכבות וoptions אישוריות מותאמות אישית</string>
     <string name="settings_advanced_expert_mode_dialog_title">אפשר את режим מומחה?</string>
     <string name="settings_advanced_expert_mode_dialog_message">mode מומחה מספק יותר שליטה על איך התיקונים מופעלים, אך תצורתה של הגדרות ב-mode מומחה יכולה לגרום לאפליקציה שאינה פונקציונלית</string>
-    <string name="settings_advanced_strip_unused_libs">הסר את קבצים נטוים</string>
-    <string name="settings_advanced_strip_unused_libs_description">הסרת קבצים נטוים תאפשר מהיר יותר את הפיצ\'ח, אך ייתכן שלא תעבוד על מכשירים ישנים</string>
-    <string name="settings_advanced_skip_unneeded_splits">סנן APK מפוצלים עבור מכשיר</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">במהלך מיזוג, פסול גרסאות מקומיות, צפיפות ו-ABI שאינן נחוצות עבור מכשיר זה. מקטין את גודל ה-APK הממוזג</string>
+    <string name="settings_advanced_strip_unused_libs">לייעל עבור ארכיטקטורת ההתקן</string>
+    <string name="settings_advanced_strip_unused_libs_description">"לדלג על מודולי APK מפולחים עבור ארכיטקטורות, שפות ואזורי מסך לא נתמכים במהלך האיחוד.
+עבור APK רגילים, מסיר ספריות מקומיות עבור ארכיטקטורות לא נתמכות לאחר תיקון"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">מצב עיבוד bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">שולט באופן עיבוד ה-bytecode במהלך תיקון. משפיע על מהירות התיקון, השימוש בזיכרון וגודל ה-APK הפלט.</string>

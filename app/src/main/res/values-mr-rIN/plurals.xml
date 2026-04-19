@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s ॲप दाखवा</item>
+        <item quantity="other">%s ॲप्स दाखवा</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s लपवलेले ॲप</item>
+        <item quantity="other">%s लपवलेले ॲप्स</item>
+    </plurals>
+</resources>

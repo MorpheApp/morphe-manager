@@ -36,4 +36,12 @@
         <item quantity="one">%s patch geselecteerd</item>
         <item quantity="other">%s patches geselecteerd</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Laat %s app zien</item>
+        <item quantity="other">Laat %s apps zien</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s verborgen app</item>
+        <item quantity="other">%s verborgen apps</item>
+    </plurals>
 </resources>

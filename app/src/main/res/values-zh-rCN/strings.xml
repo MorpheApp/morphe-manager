@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">没有可用的应用</string>
     <string name="home_no_apps_subtitle">添加一个补丁源或在 %s 中启用现有补丁源</string>
     <string name="home_no_apps_search_subtitle">没有应用匹配 \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">所有应用已隐藏</string>
+    <string name="home_all_apps_hidden_subtitle">您已将所有应用从主屏幕隐藏</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">您想要修补哪个应用程序？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@
     <string name="settings_appearance_app_language_current">当前语言</string>
     <string name="settings_appearance_translations_info_title">某些语言的翻译可能缺失或不完整</string>
     <string name="settings_appearance_translations_info_text">访问 %s 以翻译新语言或改进现有翻译。</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">主屏幕</string>
+    <string name="settings_appearance_greeting_phrases">问候语</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">应用图标</string>
     <string name="settings_appearance_app_icon_default">默认</string>
@@ -399,10 +405,9 @@
     <string name="settings_advanced_expert_mode_description">启用复杂的 Morphe 补丁设置和自定义选项</string>
     <string name="settings_advanced_expert_mode_dialog_title">启用专家模式？</string>
     <string name="settings_advanced_expert_mode_dialog_message">专家模式提供了更多控制如何应用补丁的选项，但如果错误配置专家模式设置，可能会导致应用程序无法使用</string>
-    <string name="settings_advanced_strip_unused_libs">移除未使用的原生库</string>
-    <string name="settings_advanced_strip_unused_libs_description">从修补的应用中删除不支持 CPU 架构的原生库</string>
-    <string name="settings_advanced_skip_unneeded_splits">筛选设备所需的拆分 APK</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">合并时，跳过当前设备不需要的区域设置、密度和 ABI 拆分。减少合并后的 APK 大小</string>
+    <string name="settings_advanced_strip_unused_libs">为设备架构优化</string>
+    <string name="settings_advanced_strip_unused_libs_description">"在合并过程中，跳过不支持的 CPU 架构、语言环境和屏幕密度的拆分 APK 模块。
+对于纯 APK，在打补丁后会删除不受支持的架构的本机库"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">字节码处理模式</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">控制打补丁期间字节码的处理方式。影响打补丁的速度、内存使用情况和输出 APK 大小</string>

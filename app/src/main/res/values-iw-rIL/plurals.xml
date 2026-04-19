@@ -54,4 +54,10 @@
         <item quantity="many">%s תיקונים נבחרו</item>
         <item quantity="other">%s תיקונים נבחרו</item>
     </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s אפליקציה מוסתרת</item>
+        <item quantity="two">%s אפליקציות מוסתרות</item>
+        <item quantity="many">%s אפליקציות מוסתרות</item>
+        <item quantity="other">%s אפליקציות מוסתרות</item>
+    </plurals>
 </resources>

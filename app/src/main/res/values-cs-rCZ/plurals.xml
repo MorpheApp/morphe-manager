@@ -54,4 +54,10 @@
         <item quantity="many">%s záplat vybráno</item>
         <item quantity="other">%s záplat vybráno</item>
     </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s skrytá aplikace</item>
+        <item quantity="few">%s skryté aplikace</item>
+        <item quantity="many">%s skryté aplikace</item>
+        <item quantity="other">%s skryté aplikace</item>
+    </plurals>
 </resources>

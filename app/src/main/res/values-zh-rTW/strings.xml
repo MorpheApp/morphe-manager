@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">沒有應用程式可用</string>
     <string name="home_no_apps_subtitle">新增程式來源或啟用現有的來源於 %s</string>
     <string name="home_no_apps_search_subtitle">找不到與「%1$s」相符的應用程式</string>
+    <string name="home_all_apps_hidden_title">所有應用程式已隱藏</string>
+    <string name="home_all_apps_hidden_subtitle">您已將所有應用程式從主畫面隱藏</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">你想修補哪個應用程式？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@
     <string name="settings_appearance_app_language_current">目前語言</string>
     <string name="settings_appearance_translations_info_title">某些語言的翻譯可能缺少或不完整</string>
     <string name="settings_appearance_translations_info_text">若要翻譯新語言或改進現有翻譯，請前往 %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">首頁</string>
+    <string name="settings_appearance_greeting_phrases">問候語</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">在首頁顯示問候語</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">應用程式圖示</string>
     <string name="settings_appearance_app_icon_default">預設</string>
@@ -399,10 +405,9 @@
     <string name="settings_advanced_expert_mode_description">啟用複雜 Morphe 修補設定和自訂選項</string>
     <string name="settings_advanced_expert_mode_dialog_title">要啟用專家模式嗎？</string>
     <string name="settings_advanced_expert_mode_dialog_message">專家模式可以更精細地控制修補的套用方式，但如果專家模式下的設定設定錯誤，可能會造成應用程式無法正常運作</string>
-    <string name="settings_advanced_strip_unused_libs">刪除未使用的原生函式庫</string>
-    <string name="settings_advanced_strip_unused_libs_description">刪除不支援的 CPU 架構原生函式庫修補的應用程式</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filter APK 拆分資源，以供設備使用</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">合併時，跳過此設備不需要的地區設定、密度及 ABI 拆分。減少合併後的 APK 尺寸</string>
+    <string name="settings_advanced_strip_unused_libs">針對裝置架構進行優化</string>
+    <string name="settings_advanced_strip_unused_libs_description">"在合併時，跳過對不受支援的 CPU 架構、語言環境和螢幕密度分割 APK 模組。
+對於純 APK，在修補後會移除不受支援架構的原始函式庫"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">位元組程式碼處理模式</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">控制修補程式處理位元組程式碼的方式。影響修補速度、記憶體使用量和輸出 APK 檔案大小</string>
@@ -607,7 +612,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_no_saved">沒有已儲存的修補選擇</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s 至 %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s 至 %2$s</string>
-    <string name="settings_system_patch_selection_source_format">修補來源格式</string>
+    <string name="settings_system_patch_selection_source_format">修補來源 %s</string>
     <string name="settings_system_patch_selection_will_delete">這將刪除：</string>
     <string name="settings_system_patch_selection_reset_all_warning">這將永久刪除所有儲存的修補選項，包括所有套件和來源</string>
     <string name="settings_system_patch_selection_reset_package_warning">這將永久刪除 %s 的所有修補選項，跨越所有來源</string>
@@ -693,7 +698,7 @@ morphe_header_custom_dark.png
     <string name="hide">隱藏</string>
     <string name="default_">預設</string>
     <string name="logs">日誌</string>
-    <string name="sources">個修補來源</string>
+    <string name="sources">修補來源</string>
     <string name="installing_ellipsis">安裝中……</string>
     <string name="mounting_ellipsis">掛載中……</string>
     <string name="unmounting_ellipsis">正在解除掛載……</string>

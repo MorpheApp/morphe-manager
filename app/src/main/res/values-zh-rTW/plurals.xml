@@ -27,4 +27,10 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="other">已選擇 %s 個修補</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="other">顯示 %s 個應用程序</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="other">%s 個隱藏的應用程序</item>
+    </plurals>
 </resources>

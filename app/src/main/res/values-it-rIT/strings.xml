@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Nessuna app disponibile</string>
     <string name="home_no_apps_subtitle">Aggiungi una sorgente delle patch o abilita una esistente in %s</string>
     <string name="home_no_apps_search_subtitle">Nessuna app corrisponde a \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Tutte le app sono nascoste</string>
+    <string name="home_all_apps_hidden_subtitle">Hai nascosto tutte le app dalla schermata Home</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quale app vuoi patchare?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="settings_appearance_app_language_current">Lingua attuale</string>
     <string name="settings_appearance_translations_info_title">Le traduzioni per alcune lingue potrebbero essere incomplete o mancanti</string>
     <string name="settings_appearance_translations_info_text">Per tradurre nuove lingue o migliorare le traduzioni esistenti, visita %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Schermata principale</string>
+    <string name="settings_appearance_greeting_phrases">Frasi di saluto</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Mostra un messaggio di saluto nella schermata principale</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icona dell\'app</string>
     <string name="settings_appearance_app_icon_default">Predefinita</string>
@@ -399,10 +405,9 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="settings_advanced_expert_mode_description">Abilita le impostazioni avanzate e le opzioni di personalizzazione del patching di Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Attivare la modalità Esperto?</string>
     <string name="settings_advanced_expert_mode_dialog_message">La modalità esperto fornisce un maggiore controllo su come vengono applicate le patch, ma la configurazione errata delle impostazioni in modalità esperto può produrre un\'app non funzionante</string>
-    <string name="settings_advanced_strip_unused_libs">Elimina le librerie native non utilizzate</string>
-    <string name="settings_advanced_strip_unused_libs_description">Elimina i file delle librerie native dalle app patchate per le architetture CPU non supportate</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtra gli APK split per dispositivo</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Durante la fusione, salta le localizzazioni, le densità e le suddivisioni ABI non necessarie per questo dispositivo. Riduce le dimensioni dell\'APK unito</string>
+    <string name="settings_advanced_strip_unused_libs">Ottimizza per l\'architettura del dispositivo</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Salta i moduli APK divisi per architetture CPU, lingue e densità dello schermo non supportate durante la merge.
+Per gli APK standard, rimuove le librerie native per le architetture non supportate dopo l'applicazione delle patch"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Modalità di elaborazione bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Controlla come il bytecode viene elaborato durante l\'applicazione delle patch. Influisce sulla velocità di patching, sull\'utilizzo della memoria e sulla dimensione APK di output</string>

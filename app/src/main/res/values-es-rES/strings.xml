@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
     <string name="home_no_apps_subtitle">Añadir una fuente de parche o habilitar una existente en %s</string>
     <string name="home_no_apps_search_subtitle">No se encontraron aplicaciones que coincidan con \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Todas las aplicaciones están ocultas</string>
+    <string name="home_all_apps_hidden_subtitle">Ha ocultado todas las aplicaciones de la pantalla de inicio</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">¿Qué aplicación quieres parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_appearance_app_language_current">Idioma actual</string>
     <string name="settings_appearance_translations_info_title">Las traducciones para algunos idiomas pueden faltar o estar incompletas</string>
     <string name="settings_appearance_translations_info_text">Para traducir nuevos idiomas o mejorar las traducciones existentes, visite %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Pantalla de inicio</string>
+    <string name="settings_appearance_greeting_phrases">Frases de saludo</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Mostrar un mensaje de saludo en la pantalla de inicio</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icono de la aplicación</string>
     <string name="settings_appearance_app_icon_default">Predeterminado</string>
@@ -399,10 +405,9 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_advanced_expert_mode_description">Activa ajustes complejos de parcheo de Morphe y opciones de personalización</string>
     <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo experto?</string>
     <string name="settings_advanced_expert_mode_dialog_message">El modo experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente los ajustes en modo experto puede resultar en una aplicación no funcional</string>
-    <string name="settings_advanced_strip_unused_libs">Eliminar bibliotecas nativas no utilizadas</string>
-    <string name="settings_advanced_strip_unused_libs_description">Eliminar bibliotecas nativas para arquitecturas de CPU no compatibles de las aplicaciones parcheadas</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtrar APKs divididos para dispositivo</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Durante la fusión, omitir las divisiones de idioma, densidad y ABI que no son necesarias para este dispositivo. Reduce el tamaño del APK fusionado</string>
+    <string name="settings_advanced_strip_unused_libs">Optimizar para la arquitectura del dispositivo</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Omite los módulos APK divididos para arquitecturas de CPU, idiomas y densidades de pantalla no compatibles durante la fusión.
+Para APK sencillos, elimina las bibliotecas nativas para arquitecturas no compatibles después de parchear"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Modo de procesamiento de bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Controla cómo se procesa el bytecode durante el parcheo. Afecta a la velocidad de parcheo, el uso de memoria y el tamaño del APK de salida</string>

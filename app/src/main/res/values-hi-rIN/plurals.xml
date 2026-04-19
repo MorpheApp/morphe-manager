@@ -36,4 +36,12 @@
         <item quantity="one">%s पटच चुना गया</item>
         <item quantity="other">%s पटच चुने गए</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s ऐप दिखाएं</item>
+        <item quantity="other">%s ऐप्स दिखाएं</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s छिपा ऐप</item>
+        <item quantity="other">%s छिपे हुए ऐप</item>
+    </plurals>
 </resources>

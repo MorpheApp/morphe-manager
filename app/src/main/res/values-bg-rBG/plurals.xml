@@ -36,4 +36,12 @@
         <item quantity="one">%s избран пач</item>
         <item quantity="other">%s избрани пачове</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Покажи %s приложение</item>
+        <item quantity="other">Покажи %s приложения</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s скрито приложение</item>
+        <item quantity="other">%s скрити приложения</item>
+    </plurals>
 </resources>

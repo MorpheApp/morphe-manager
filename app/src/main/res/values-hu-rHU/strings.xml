@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Nincsenek elérhető alkalmazások</string>
     <string name="home_no_apps_subtitle">Add patch forrását adhatja hozzá, vagy engedélyezhet egy meglévő forrást a(z) %s alatt</string>
     <string name="home_no_apps_search_subtitle">Nincsenek egyező alkalmazások a(z) \"%1$s\" kifejezésre</string>
+    <string name="home_all_apps_hidden_title">Minden alkalmazás el van rejtve</string>
+    <string name="home_all_apps_hidden_subtitle">Összes alkalmazást elrejtett a kezdőképernyőről</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Melyik alkalmazást szeretnéd módosítani?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="settings_appearance_app_language_current">Jelenlegi nyelv</string>
     <string name="settings_appearance_translations_info_title">Egyes nyelvek fordításai hiányozhatnak vagy hiányosak lehetnek</string>
     <string name="settings_appearance_translations_info_text">Új nyelvek fordításához vagy a meglévő fordítások javításához látogasson el a következő oldalra: %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Kezdőképernyő</string>
+    <string name="settings_appearance_greeting_phrases">Üdvözlő mondatok</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Alkalmazásikon</string>
     <string name="settings_appearance_app_icon_default">Alapértelmezett</string>
@@ -399,10 +405,9 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="settings_advanced_expert_mode_description">Engedélyezi a Morphe komplex módosítási beállításait és a testreszabási lehetőségeket</string>
     <string name="settings_advanced_expert_mode_dialog_title">Engedélyezi a szakértői módot?</string>
     <string name="settings_advanced_expert_mode_dialog_message">A szakértői mód nagyobb ellenőrzést biztosít a módosítások alkalmazása felett, de ebben a módban a beállítások helytelen konfigurálása az alkalmazás működésképtelenségét eredményezheti</string>
-    <string name="settings_advanced_strip_unused_libs">Távolítsa el a nem használt natív könyvtárakat</string>
-    <string name="settings_advanced_strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a módosított alkalmazásokból</string>
-    <string name="settings_advanced_skip_unneeded_splits">Szűrj ki a készülékhez nem szükséges APK-kat</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Összeolvasztás során, hagyja ki a készülékhez nem szükséges nyelvi, sűrűségi és ABI bontásokat. Ez csökkenti az összeolvasztott APK méretét</string>
+    <string name="settings_advanced_strip_unused_libs">Optimalizálj a készülék architektúrájához</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Hagyja ki a felosztott APK modulokat a nem támogatott CPU architektúrák, nyelvek és képernyőfelbontások számára az egyesítés során.
+Plain APK-k esetén a javítást követően eltávolítja a nem támogatott architektúrákhoz tartozó natív könyvtárakat"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bájtkód feldolgozási mód</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Szabályozza, hogy a bájtkódot hogyan dolgozzák fel a javítás során. Hatással van a javítás sebességére, a memória használatára és a kimeneti APK méretére</string>

@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Nicio aplicație disponibilă</string>
     <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
     <string name="home_no_apps_search_subtitle">Nicio aplicație nu se potrivește cu \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Toate aplicațiile sunt ascunse</string>
+    <string name="home_all_apps_hidden_subtitle">Ați ascuns toate aplicațiile de pe ecranul principal</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ce aplicație dorești să patch-uiești?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="settings_appearance_app_language_current">Limbajul curent</string>
     <string name="settings_appearance_translations_info_title">Traduțiile pentru unele limbi pot lipsi sau să fie incomplet</string>
     <string name="settings_appearance_translations_info_text">Pentru a traduce în noi limbi sau să îmbunătățești traducerile existente, vizitează %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Ecranul principal</string>
+    <string name="settings_appearance_greeting_phrases">Fraze de salut</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut pe ecranul principal</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Pictogramă aplicație</string>
     <string name="settings_appearance_app_icon_default">Implicit</string>
@@ -399,10 +405,9 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="settings_advanced_expert_mode_description">Activează setările complexe de pateâturi Morphe si opârii de personalizare</string>
     <string name="settings_advanced_expert_mode_dialog_title">Vrei sâ activezi modul expert?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Modul expert oferâ mai mult control asupra modului cum pateâturile sunt aplicaâ, dar o configurare greşită a setârilor poate duce la o aplicaâ nefuncțională</string>
-    <string name="settings_advanced_strip_unused_libs">Elimină bibliotecile native nefolosite</string>
-    <string name="settings_advanced_strip_unused_libs_description">Șterge bibliotecile native pentru arhitecturile CPU nesuportate din aplicațiile patch-uite</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtrează APK-uri divizate pentru dispozitiv</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">În timpul fuziunii, omite diviziunile pentru locație, densitate și ABI care nu sunt necesare pentru acest dispozitiv. Reduce dimensiunea APK-ului fuzionat</string>
+    <string name="settings_advanced_strip_unused_libs">Optimize pentru arhitectura dispozitivului</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Omite modulele APK split pentru arhitecturi CPU, locale și densități de ecran nesuportate în timpul îmbinării.
+Pentru APK-urile plain, elimină bibliotecile native pentru arhitecturi nesuportate după patch"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Mod de procesare bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Controlează modul în care bytecode-ul este procesat în timpul patch-ului. Afectează viteza de patch, utilizarea memoriei și dimensiunea APK-ului de ieșire</string>

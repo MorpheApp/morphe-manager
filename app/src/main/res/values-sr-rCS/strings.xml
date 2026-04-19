@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Nema dostupnih aplikacija</string>
     <string name="home_no_apps_subtitle">Dodajte izvor aplikacije ili omogućite postojeći u %s</string>
     <string name="home_no_apps_search_subtitle">Nema aplikacija koje odgovaraju \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Sve su aplikacije sakrivene</string>
+    <string name="home_all_apps_hidden_subtitle">Sve ste aplikacije sakrili sa početnog ekrana</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Koju aplikaciju želite da zakrpite?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_app_language_current">Trenutni jezik</string>
     <string name="settings_appearance_translations_info_title">Prevodi za neke jezike mogu biti nepotpuni ili nedostajati</string>
     <string name="settings_appearance_translations_info_text">Da biste preveli novi jezike ili poboljšali postojeće prevode, posetite %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Početni ekran</string>
+    <string name="settings_appearance_greeting_phrases">Pozdravne poruke</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Prikaži poruku dobrodošlice na početnom ekranu</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikonica aplikacije</string>
     <string name="settings_appearance_app_icon_default">Podrazumevana</string>
@@ -399,10 +405,9 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_advanced_expert_mode_description">Omogući složeno podešavanje Morphe i opcije za prilagođavanje</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogućiti režim eksperta?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta daje više kontrole nad primenom patchova, ali pogrešno podešavanje u režimu eksperta može da rezultuje u nefunkcionalnoj aplikaciji</string>
-    <string name="settings_advanced_strip_unused_libs">Ukloni neiskoristane native biblioteka</string>
-    <string name="settings_advanced_strip_unused_libs_description">Brisanje neiskoristane native biblioteka može usporedati patchiranje ali možda neće funkcionisati na stariji uređenicima</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtirajte podeljene APK-ove za uređaj</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Tokom spajanja, preskočite lokalizacije, gustine i ABI podeljene verzije koje nisu potrebne za ovaj uređaj. Smanjuje veličinu spojenog APK-a</string>
+    <string name="settings_advanced_strip_unused_libs">Optimizujte za arhitekturu uređaja</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Preskoči split APK module za neproverene CPU arhitekture, lokale i rezolucije ekrana tokom spajanja.
+Za obične APK-ove, uklanja nativne biblioteke za neproverene arhitekture nakon zakrpavanja"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Način obrade bajtkoda</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Kontroliše kako se bajtkod obrađuje tokom popravki. Utiče na brzinu popravki, korišćenje memorije i veličinu izlaznog APK fajla</string>

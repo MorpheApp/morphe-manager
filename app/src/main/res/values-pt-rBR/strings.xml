@@ -7,22 +7,22 @@
     <string name="home_app_hide_title">Esconder este aplicativo?</string>
     <string name="home_app_hide_message">Este aplicativo será escondido da tela inicial. Você pode restaurá-lo mais tarde usando o botão \'%1$s\' no final da lista</string>
     <string name="home_app_will_be_hidden">Este aplicativo será escondido</string>
-    <string name="home_app_show_hidden">Mostrar aplicativos ocultos</string>
-    <string name="home_app_no_hidden">Não há aplicativos ocultos</string>
+    <string name="home_app_show_hidden">Mostrar aplicativos escondidos</string>
+    <string name="home_app_no_hidden">Não há aplicativos escondidos</string>
     <string name="home_app_hidden_apps_title">Aplicativos ocultos</string>
     <string name="home_app_hidden_apps_hint">Toque para exibir</string>
     <string name="android_11_bug_dialog_title">Bug do Android 11</string>
     <string name="android_11_bug_dialog_description">A permissão de instalação do aplicativo deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetará negativamente a experiência do usuário.</string>
     <string name="deep_link_add_source_title">Adicionar fonte</string>
-    <string name="deep_link_add_source_message">Você deseja adicionar esta fonte de patch ao Morphe?</string>
-    <string name="deep_link_add_source_warning">Adicione fonte apenas de fontes confiáveis</string>
+    <string name="deep_link_add_source_message">Deseja adicionar esta fonte de correção ao Morphe?</string>
+    <string name="deep_link_add_source_warning">Adicione uma fonte apenas de fontes em que você confia</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Atualização do Morphe disponível</string>
     <string name="home_update_available_subtitle">Nova versão pronta para instalação</string>
     <string name="home_update_error">Falha na importação</string>
     <string name="home_update_error_subtitle">Verifique sua conexão com a internet e tente novamente</string>
     <string name="home_update_skipped_metered">Atualizações ignoradas</string>
-    <string name="home_update_skipped_metered_subtitle">Dados móveis ativos</string>
+    <string name="home_update_skipped_metered_subtitle">Dados móveis estão ativos</string>
     <string name="home_updating_sources">Atualizando fontes…</string>
     <string name="home_update_progress_format">%1$s processado</string>
     <string name="home_update_success">Atualização de fontes concluída</string>
@@ -30,40 +30,42 @@
     <string name="home_sources_are_loading">Carregando fontes, por favor aguarde…</string>
     <string name="home_search_apps">Pesquisar aplicativos</string>
     <string name="home_no_apps_title">Nenhum aplicativo disponível</string>
-    <string name="home_no_apps_subtitle">Adicione uma fonte de patch ou habilite uma existente em %s</string>
+    <string name="home_no_apps_subtitle">Adicione uma fonte de correção ou habilite uma existente em %s</string>
     <string name="home_no_apps_search_subtitle">Nenhum aplicativo corresponde a \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Todos os aplicativos estão ocultos</string>
+    <string name="home_all_apps_hidden_subtitle">Você ocultou todos os aplicativos da tela inicial</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">Em qual app você quer aplicar os patches?</string>
+    <string name="home_greeting_1">Qual aplicativo você gostaria de corrigir?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Pronto para tornar os apps lendários novamente?</string>
+    <string name="home_greeting_2">Pronto para tornar aplicativos lendários novamente?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Aperte os cintos, é hora de corrigir</string>
+    <string name="home_greeting_3">Aperte os cintos, é hora da correção</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Mais um dia, mais uma obra-prima com bloqueio de anúncios</string>
+    <string name="home_greeting_4">Mais um dia, mais uma obra-prima com anúncios bloqueados</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Quer assistir a anúncios? Eu também não</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Vamos fazer seus apps se comportarem</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Previsão de hoje: 100% de chance de patch</string>
+    <string name="home_greeting_7">Previsão de hoje: 100% de chance de correção</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Pronto para transformar o medíocre em incrível?</string>
+    <string name="home_greeting_8">Pronto para transformar o frustrante em sensacional?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="home_greeting_9">Salvando apps de si mesmos desde hoje</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Impulsionado por cafeína e bons remendos</string>
+    <string name="home_greeting_10">Movido a cafeína e boas correções</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Fontes de emenda</string>
+    <string name="sources_management_title">Fontes de correção</string>
     <string name="sources_management_open_in_browser">Abrir links no navegador</string>
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
-    <string name="sources_management_prerelease_toggle">Usar patches pré-lançamento</string>
-    <string name="sources_management_prerelease_toggle_description">Receber acesso antecipado a novas versões experimentais de patches</string>
-    <string name="sources_management_experimental_versions_toggle">Utilizar versões experimentais do app</string>
-    <string name="sources_management_experimental_versions_toggle_description">Aplicar patches nas versões experimentais do aplicativo, se disponíveis</string>
+    <string name="sources_management_prerelease_toggle">Usar correções de pré-lançamento</string>
+    <string name="sources_management_prerelease_toggle_description">Receber acesso antecipado a novas versões experimentais de correções</string>
+    <string name="sources_management_experimental_versions_toggle">Usar versões experimentais de aplicativos</string>
+    <string name="sources_management_experimental_versions_toggle_description">Corrigir alvos de aplicativo experimentais, se disponível </string>
     <string name="sources_management_already_exists">Esta fonte já foi adicionada</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome de exibição</string>
-    <string name="sources_dialog_rename">Renomear origem de patch</string>
+    <string name="sources_dialog_rename">Renomear origem de correção</string>
     <string name="sources_dialog_duplicate_name_error">Já existe uma origem de patch com esse nome</string>
     <string name="sources_dialog_missing_error">Não foi possível atualizar esta fonte de patch.</string>
     <string name="sources_dialog_view_any_version">Qualquer versão</string>
@@ -353,6 +355,10 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="settings_appearance_app_language_current">Idioma atual</string>
     <string name="settings_appearance_translations_info_title">As traduções para alguns idiomas podem estar ausentes ou incompletas</string>
     <string name="settings_appearance_translations_info_text">Para traduzir novos idiomas ou aperfeiçoar as traduções existentes, visite %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Tela inicial</string>
+    <string name="settings_appearance_greeting_phrases">Frases de saudação</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de saudação na tela inicial</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ícone do app</string>
     <string name="settings_appearance_app_icon_default">Padrão</string>
@@ -399,10 +405,9 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="settings_advanced_expert_mode_description">Habilitar configurações avançadas de patch e opções de personalização</string>
     <string name="settings_advanced_expert_mode_dialog_title">Habilitar o modo expert?</string>
     <string name="settings_advanced_expert_mode_dialog_message">O modo expert oferece mais controle sobre como os patches são aplicados, mas a má configuração de settings no modo expert pode resultar em um aplicativo não funcional</string>
-    <string name="settings_advanced_strip_unused_libs">Remover bibliotecas nativas desnecessárias</string>
-    <string name="settings_advanced_strip_unused_libs_description">Excluir bibliotecas nativas para arquiteturas de CPU não suportadas a partir de aplicativos patcheados</string>
-    <string name="settings_advanced_skip_unneeded_splits">Filtrar APKs divididos para o dispositivo</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Durante a mesclagem, pular as divisões de localidade, densidade e ABI que não são necessárias para este dispositivo. Reduz o tamanho do APK mesclado</string>
+    <string name="settings_advanced_strip_unused_libs">Otimizar para a arquitetura do dispositivo</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Ignorar módulos APK divididos para arquiteturas de CPU, localidades e densidades de tela não suportadas durante a mesclagem.
+Para APKs simples, remove bibliotecas nativas para arquiteturas não suportadas após o patching"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Modo de processamento de bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Controla como o bytecode é processado durante o patching. Afeta a velocidade do patching, o uso de memória e o tamanho do APK de saída</string>

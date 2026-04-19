@@ -59,6 +59,7 @@
     <string name="settings_appearance_system">ប្រព័ន្ធ</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">ភាសាកម្មវិធី</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">អាយខនកម្មវិធី</string>
     <!-- Settings - Advanced Tab - Updates Section -->

@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Немає доступних застосунків</string>
     <string name="home_no_apps_subtitle">Додайте джерело патчів або ввімкніть існуюче в %s</string>
     <string name="home_no_apps_search_subtitle">Не знайдено застосунків за запитом \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Усі застосунки приховані</string>
+    <string name="home_all_apps_hidden_subtitle">Ви приховали всі застосунки з головного екрану</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Який застосунок ви хочете пропатчити?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@
     <string name="settings_appearance_app_language_current">Поточна мова</string>
     <string name="settings_appearance_translations_info_title">Переклади деяких мов можуть бути відсутніми або неповними</string>
     <string name="settings_appearance_translations_info_text">Щоб перекласти нові мови або покращити наявні переклади, відвідайте %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Головний екран</string>
+    <string name="settings_appearance_greeting_phrases">Вітальні фрази</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Показувати вітальне повідомлення на головному екрані</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Іконка застосунку</string>
     <string name="settings_appearance_app_icon_default">Стандартна</string>
@@ -399,16 +405,15 @@
     <string name="settings_advanced_expert_mode_description">Увімкнути розширенні налаштування патчінгу Morphe та параметри кастомізації</string>
     <string name="settings_advanced_expert_mode_dialog_title">Увімкнути режим експерта?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності застосунку</string>
-    <string name="settings_advanced_strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
-    <string name="settings_advanced_strip_unused_libs_description">Видаляти нативні бібліотеки для непідтримуваних архітектур процесора з патчених застосунків</string>
-    <string name="settings_advanced_skip_unneeded_splits">Фільтрувати розділені APK для пристрою</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Під час об\'єднання пропускати локалі, щільність та ABI розділів, які не потрібні для цього пристрою. Зменшує розмір об\'єднаного APK</string>
+    <string name="settings_advanced_strip_unused_libs">Оптимізація для архітектури пристрою</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Пропускати split модулі APK для непідтримуваних архітектур процесора, локалізацій та щільностей екрана під час об'єднання.
+Для звичайних APK видаляє нативні бібліотеки для непідтримуваних архітектур після патчінгу"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Режим обробки байт-коду</string>
-    <string name="settings_advanced_bytecode_mode_dialog_description">Керує процесом обробки байт-коду під час встановлення патчів. Впливає на швидкість встановлення патчів, використання пам\'яті та розмір вихідного APK</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_label">Швидко (Рекомендовано)</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast">Швидко</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_description">Швидше патчінг та менше використання пам\'яті, але розмір APK буде більшим. Рекомендовано для пристроїв з малим обсягом оперативної пам\'яті або старих пристроїв</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Керує процесом обробки байт-коду під час встановлення патчів. Впливає на швидкість встановлення патчів, використання пам\'яті та розмір вихідного APK файлу</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Швидкий (Рекомендовано)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Швидкий</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Швидший патчінг та менше використання пам\'яті, але розмір APK файлу буде більшим. Рекомендовано для пристроїв з малим обсягом оперативної пам\'яті або старих пристроїв</string>
     <string name="settings_advanced_bytecode_mode_full">Повний</string>
     <string name="settings_advanced_bytecode_mode_full_description">Повільніший патчінг, відтворює застарілу поведінку. Використовуйте лише якщо швидкий режим викликає проблеми</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

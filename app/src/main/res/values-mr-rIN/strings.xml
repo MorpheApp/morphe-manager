@@ -7,6 +7,8 @@
     <string name="home_no_apps_title">ॲप्स उपलब्ध नाहीत</string>
     <string name="home_no_apps_subtitle">पॅच स्रोत जोडा किंवा %s मध्ये বিদ্যমান सक्षम करा</string>
     <string name="home_no_apps_search_subtitle">\"%1$s\" शी जुळणारे कोणतेही ॲप(s) नाहीत</string>
+    <string name="home_all_apps_hidden_title">सर्व ॲप्स लपवले आहेत</string>
+    <string name="home_all_apps_hidden_subtitle">तुम्ही होम स्क्रीनवरून सर्व ॲप्स लपवले आहेत</string>
     <!-- Home Screen - Home Greetings -->
     <!-- Humorous hype message with light nostalgia -->
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
@@ -56,12 +58,16 @@
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">मुख्य स्क्रीन</string>
+    <string name="settings_appearance_greeting_phrases">शुभेच्छा संदेश</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_skip_unneeded_splits">डिव्हाइससाठी फिल्टर स्प्लिट APK</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">मर्ज करताना, या डिव्हाइससाठी आवश्यक नसलेले लोकल, डेन्सिटी आणि ABI स्प्लिट्स वगळा. मर्ज केलेल्या APK चा आकार कमी होतो</string>
+    <string name="settings_advanced_strip_unused_libs">उपकरणाच्या आर्किटेक्चरसाठी अनुकूल करा</string>
+    <string name="settings_advanced_strip_unused_libs_description">"साध्या APK साठी, पॅचिंगनंतर असमर्थित आर्किटेक्चरसाठी नेटिव्ह लायब्ररी काढल्या जातात."</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">बाईटकोड प्रक्रिया मोड</string>
     <string name="settings_advanced_bytecode_mode_dialog_description"> patching दरम्यान बाईटकोड कसा process केला जातो हे नियंत्रित करते. patching गती, मेमरी वापर आणि आउटपुट APK आकार यावर परिणाम होतो</string>

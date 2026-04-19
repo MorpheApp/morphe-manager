@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Keine Apps verfügbar</string>
     <string name="home_no_apps_subtitle">Eine Patch-Quelle hinzufügen oder eine vorhandene in %s aktivieren</string>
     <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Alle Apps sind ausgeblendet</string>
+    <string name="home_all_apps_hidden_subtitle">Sie haben alle Apps vom Startbildschirm ausgeblendet</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welche App möchten Sie patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -353,6 +355,10 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="settings_appearance_app_language_current">Aktuelle Sprache</string>
     <string name="settings_appearance_translations_info_title">Für einige Sprachen können Übersetzungen fehlen oder unvollständig sein</string>
     <string name="settings_appearance_translations_info_text">Um neue Sprachen zu übersetzen oder existierende Übersetzungen zu verbessern, besuchen Sie %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Startbildschirm</string>
+    <string name="settings_appearance_greeting_phrases">Begrüßungsformeln</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Auf dem Startbildschirm eine Begrüßungsnachricht anzeigen</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App-Icon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -399,16 +405,15 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="settings_advanced_expert_mode_description">Aktiviere komplexe Morphe-Patch-Einstellungen und Anpassungsoptionen</string>
     <string name="settings_advanced_expert_mode_dialog_title">Experten-Modus aktivieren?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Der Experten-Modus gewährt mehr Kontrolle darüber, wie Patches angewendet werden, kann aber bei falscher Konfiguration zu einer nicht funktionsfähigen App führen</string>
-    <string name="settings_advanced_strip_unused_libs">Entferne nicht verwendete, native Bibliotheken</string>
-    <string name="settings_advanced_strip_unused_libs_description">Lösche native Bibliotheken für nicht unterstützte CPU-Architekturen aus gepatchten Apps</string>
-    <string name="settings_advanced_skip_unneeded_splits">Geräte-spezifische APKs filtern</string>
-    <string name="settings_advanced_skip_unneeded_splits_description">Beim Zusammenführen Lokalisierungs-, Dichte- und ABI-Splits überspringen, die für dieses Gerät nicht benötigt werden. Reduziert die Größe der zusammengeführten APK</string>
+    <string name="settings_advanced_strip_unused_libs">Für die Gerätearchitektur optimieren</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Split-APK-Module für nicht unterstützte CPU-Architekturen, Regionaleinstellungen und Bildschirmdichten während des Zusammenführens auslassen.
+Für einfache APKs werden nach dem Patchen native Bibliotheken für nicht unterstützte Architekturen entfernt"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bytecode-Verarbeitungsmodus</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Steuert, wie Bytecode während des Patch-Vorgangs verarbeitet wird. Beeinflusst Patch-Geschwindigkeit, Speichernutzung und Größe der Ausgabedatei APK</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">Schnell (Empfohlen)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">Schnell</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_description">Schnelleres Patchen und geringerer Speicherverbrauch, jedoch bei größerer APK-Größe. Für Geräte mit wenig RAM oder älteren Geräten empfohlen</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Schnelleres Patchen und geringerer Speicherverbrauch, jedoch bei größerer APK-Größe. Für Geräte mit wenig RAM oder ältere Geräte empfohlen</string>
     <string name="settings_advanced_bytecode_mode_full">Vollständig</string>
     <string name="settings_advanced_bytecode_mode_full_description">Langsameres Patchen, repliziert das Legacy-Verhalten. Nur verwenden, wenn der Schnellmodus Probleme verursacht</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

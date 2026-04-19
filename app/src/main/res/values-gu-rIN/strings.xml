@@ -150,6 +150,7 @@
     <string name="settings_appearance_app_language_current">વર્તમાન ભાષા</string>
     <string name="settings_appearance_translations_info_title">કેટલીક ભાષાઓ માટે અનુવાદો ખૂટતા અથવા અપૂર્ણ હોઈ શકે છે.</string>
     <string name="settings_appearance_translations_info_text">નવી ભાષાઓનો અનુવાદ કરવા અથવા હાલના અનુવાદોને સુધારવા માટે, %s ની મુલાકાત લો.</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_default">ડિફૉલ્ટ</string>
     <string name="settings_appearance_app_icon_light_2">આકાશ</string>

@@ -36,4 +36,12 @@
         <item quantity="one">%s paikkaus valittu</item>
         <item quantity="other">%s korjausa valittu</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Näytä %s sovellus</item>
+        <item quantity="other">Näytä %s sovellusta</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s piilotettu sovellus</item>
+        <item quantity="other">%s piilotettua sovellusta</item>
+    </plurals>
 </resources>
