@@ -12,7 +12,7 @@ import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
 
 object NativeLibStripper {
-    private const val TAG = "NativeLibStripper"
+    private const val TAG = "Morphe NativeLibStripper"
 
     suspend fun strip(apkFile: File, logger: Logger? = null): Boolean =
         strip(apkFile, Build.SUPPORTED_ABIS.filter { it.isNotBlank() }, logger)

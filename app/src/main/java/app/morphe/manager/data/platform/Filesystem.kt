@@ -14,7 +14,7 @@ import app.morphe.manager.util.RequestManageStorageContract
 import app.morphe.manager.util.formatBytes
 import java.io.File
 
-private const val TAG = "Filesystem"
+private const val TAG = "Morphe Filesystem"
 
 class Filesystem(private val app: Application) {
     /**

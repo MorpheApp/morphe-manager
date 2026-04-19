@@ -3,6 +3,7 @@ package app.morphe.manager.domain.installer
 import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.util.Log
 import app.morphe.manager.R
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
@@ -18,6 +19,8 @@ import ru.solrudev.ackpine.uninstaller.PackageUninstaller
 import ru.solrudev.ackpine.uninstaller.parameters.UninstallParameters
 import java.io.File
 import kotlin.coroutines.cancellation.CancellationException
+
+private const val TAG = "Morphe AckpineInstaller"
 
 /**
  * Wraps Ackpine for internal (PackageInstaller API) and Shizuku installs.
@@ -47,9 +50,11 @@ class AckpineInstaller(private val app: Application) {
      */
     suspend fun installInternal(apkFile: File): InstallFailure? {
         require(apkFile.exists()) { "APK file does not exist: ${apkFile.path}" }
+        Log.d(TAG, "installInternal: ${apkFile.name} (${apkFile.length()} bytes)")
         var lastException: Exception? = null
         repeat(2) { attempt ->
             val uri = InstallerFileProvider.getUriForFile(app, apkFile)
+            Log.d(TAG, "installInternal attempt $attempt: uri=$uri")
             val session = packageInstaller.createSession(
                 InstallParameters.Builder(uri)
                     .setInstallerType(InstallerType.SESSION_BASED)
@@ -58,10 +63,17 @@ class AckpineInstaller(private val app: Application) {
                     .build()
             )
             try {
-                return extractFailure(session.await())
+                return extractFailure(session.await()).also { failure ->
+                    if (failure != null) {
+                        Log.w(TAG, "installInternal failed: ${failure.javaClass.simpleName} - ${failure.message}")
+                    } else {
+                        Log.i(TAG, "installInternal succeeded: ${apkFile.name}")
+                    }
+                }
             } catch (_: CancellationException) {
                 throw InstallCancelledException()
             } catch (e: Exception) {
+                Log.w(TAG, "installInternal attempt $attempt exception: ${e.message}", e)
                 if (attempt == 0 && e.message?.contains("dead", ignoreCase = true) == true) {
                     lastException = e
                     return@repeat // retry
@@ -82,9 +94,11 @@ class AckpineInstaller(private val app: Application) {
      */
     suspend fun installShizuku(apkFile: File): InstallFailure? {
         require(apkFile.exists()) { "APK file does not exist: ${apkFile.path}" }
+        Log.d(TAG, "installShizuku: ${apkFile.name} (${apkFile.length()} bytes)")
         var lastException: Exception? = null
         repeat(2) { attempt ->
             val uri = InstallerFileProvider.getUriForFile(app, apkFile)
+            Log.d(TAG, "installShizuku attempt $attempt: uri=$uri")
             val session = packageInstaller.createSession(
                 InstallParameters.Builder(uri)
                     .setInstallerType(InstallerType.SESSION_BASED)
@@ -97,10 +111,17 @@ class AckpineInstaller(private val app: Application) {
                     .build()
             )
             try {
-                return extractFailure(session.await())
+                return extractFailure(session.await()).also { failure ->
+                    if (failure != null) {
+                        Log.w(TAG, "installShizuku failed: ${failure.javaClass.simpleName} - ${failure.message}")
+                    } else {
+                        Log.i(TAG, "installShizuku succeeded: ${apkFile.name}")
+                    }
+                }
             } catch (_: CancellationException) {
                 throw InstallCancelledException()
             } catch (e: Exception) {
+                Log.w(TAG, "installShizuku attempt $attempt exception: ${e.message}", e)
                 if (attempt == 0 && e.message?.contains("dead", ignoreCase = true) == true) {
                     lastException = e
                     return@repeat // retry

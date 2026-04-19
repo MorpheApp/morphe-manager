@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import java.io.File
 
-private const val TAG = "OriginalApkRepository"
+private const val TAG = "Morphe OriginalApkRepository"
 
 class OriginalApkRepository(
     db: AppDatabase,

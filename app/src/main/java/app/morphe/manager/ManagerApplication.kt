@@ -33,6 +33,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
+import ru.solrudev.ackpine.Ackpine
 
 class ManagerApplication : Application() {
     private val scope = MainScope()
@@ -60,6 +61,9 @@ class ManagerApplication : Application() {
                 rootModule
             )
         }
+
+        // Enable Ackpine logging so install failures (session-dead, conflict codes, etc.)
+        Ackpine.enableLogcatLogger()
 
         // App icon loader (Coil)
         val pixels = 512

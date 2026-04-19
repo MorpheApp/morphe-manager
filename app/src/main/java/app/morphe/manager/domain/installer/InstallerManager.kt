@@ -509,7 +509,7 @@ class InstallerManager(
         private const val APK_MIME = "application/vnd.android.package-archive"
         private const val AOSP_INSTALLER_PACKAGE = "com.google.android.packageinstaller"
         private const val AOSP_INSTALLER_LABEL = "Package installer"
-        private const val TAG = "InstallerManager"
+        private const val TAG = "Morphe InstallerManager"
     }
 
     fun openShizukuApp(): Boolean = ackpineInstaller.launchShizukuApp()

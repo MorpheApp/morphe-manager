@@ -77,7 +77,7 @@ fun syncFcmTopics(
  * Subscribes to or unsubscribes from a single FCM topic and logs the result.
  */
 private fun FirebaseMessaging.syncTopic(topic: String, subscribe: Boolean) {
-    val tag = "FcmTopicSync"
+    val tag = "Morphe FcmTopicSync"
     if (subscribe) {
         subscribeToTopic(topic).addOnCompleteListener { task ->
             Log.d(tag, if (task.isSuccessful) "Subscribed to $topic" else "Failed to subscribe to $topic")
