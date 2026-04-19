@@ -39,49 +39,76 @@ class AckpineInstaller(private val app: Application) {
      * Installs an APK using the standard Android PackageInstaller API via Ackpine.
      * Suspends until the user confirms or cancels the system dialog — no timeout needed.
      *
+     * Retries once if the session dies immediately (e.g. stale cached file was overwritten
+     * between copy and session creation, or OOM on large merged APKs).
+     *
      * @return null on success, or a typed [InstallFailure] the caller can pattern-match on.
      * @throws InstallCancelledException when the user dismisses the system install dialog.
      */
     suspend fun installInternal(apkFile: File): InstallFailure? {
-        val uri = InstallerFileProvider.getUriForFile(app, apkFile)
-        val session = packageInstaller.createSession(
-            InstallParameters.Builder(uri)
-                .setInstallerType(InstallerType.SESSION_BASED)
-                .setConfirmation(Confirmation.IMMEDIATE)
-                .setName(apkFile.name)
-                .build()
-        )
-        return try {
-            extractFailure(session.await())
-        } catch (_: CancellationException) {
-            throw InstallCancelledException()
+        require(apkFile.exists()) { "APK file does not exist: ${apkFile.path}" }
+        var lastException: Exception? = null
+        repeat(2) { attempt ->
+            val uri = InstallerFileProvider.getUriForFile(app, apkFile)
+            val session = packageInstaller.createSession(
+                InstallParameters.Builder(uri)
+                    .setInstallerType(InstallerType.SESSION_BASED)
+                    .setConfirmation(Confirmation.IMMEDIATE)
+                    .setName(apkFile.name)
+                    .build()
+            )
+            try {
+                return extractFailure(session.await())
+            } catch (_: CancellationException) {
+                throw InstallCancelledException()
+            } catch (e: Exception) {
+                if (attempt == 0 && e.message?.contains("dead", ignoreCase = true) == true) {
+                    lastException = e
+                    return@repeat // retry
+                }
+                throw e
+            }
         }
+        throw lastException ?: Exception("Install session died unexpectedly")
     }
 
     /**
      * Installs an APK silently via Shizuku/Sui using Ackpine's ShizukuPlugin.
      *
+     * Retries once if the session dies immediately (same reasons as [installInternal]).
+     *
      * @return null on success, or a typed [InstallFailure] the caller can pattern-match on.
      * @throws InstallCancelledException when aborted.
      */
     suspend fun installShizuku(apkFile: File): InstallFailure? {
-        val uri = InstallerFileProvider.getUriForFile(app, apkFile)
-        val session = packageInstaller.createSession(
-            InstallParameters.Builder(uri)
-                .setInstallerType(InstallerType.SESSION_BASED)
-                .setConfirmation(Confirmation.IMMEDIATE)
-                .setName(apkFile.name)
-                .registerPlugin(
-                    ru.solrudev.ackpine.shizuku.ShizukuPlugin::class.java,
-                    ru.solrudev.ackpine.shizuku.ShizukuPlugin.InstallParameters.DEFAULT
-                )
-                .build()
-        )
-        return try {
-            extractFailure(session.await())
-        } catch (_: CancellationException) {
-            throw InstallCancelledException()
+        require(apkFile.exists()) { "APK file does not exist: ${apkFile.path}" }
+        var lastException: Exception? = null
+        repeat(2) { attempt ->
+            val uri = InstallerFileProvider.getUriForFile(app, apkFile)
+            val session = packageInstaller.createSession(
+                InstallParameters.Builder(uri)
+                    .setInstallerType(InstallerType.SESSION_BASED)
+                    .setConfirmation(Confirmation.IMMEDIATE)
+                    .setName(apkFile.name)
+                    .registerPlugin(
+                        ru.solrudev.ackpine.shizuku.ShizukuPlugin::class.java,
+                        ru.solrudev.ackpine.shizuku.ShizukuPlugin.InstallParameters.DEFAULT
+                    )
+                    .build()
+            )
+            try {
+                return extractFailure(session.await())
+            } catch (_: CancellationException) {
+                throw InstallCancelledException()
+            } catch (e: Exception) {
+                if (attempt == 0 && e.message?.contains("dead", ignoreCase = true) == true) {
+                    lastException = e
+                    return@repeat // retry
+                }
+                throw e
+            }
         }
+        throw lastException ?: Exception("Install session died unexpectedly")
     }
 
     /**

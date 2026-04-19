@@ -22,6 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.*
@@ -53,6 +54,9 @@ fun HomeScreen(
     val showInstalledAppDialog = remember { mutableStateOf<String?>(null) }
     val showUpdateDetailsDialog = remember { mutableStateOf(false) }
 
+    // Patches dialog state (swipe-right on app card)
+    val patchesSheetItem = remember { mutableStateOf<HomeAppItem?>(null) }
+
     // Pull to refresh state
     val isRefreshing by homeViewModel.isRefreshing.collectAsStateWithLifecycle()
 
@@ -69,13 +73,20 @@ fun HomeScreen(
 
     // Collect state flows
     val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
-    // Dynamic app items from bundles
-    val homeAppItems by homeViewModel.homeAppItems.collectAsStateWithLifecycle()
-    // Hidden packages filtered to only active-bundle packages (reactive)
-    val hiddenAppItems by homeViewModel.hiddenAppItems.collectAsStateWithLifecycle()
+    // Atomic home state - null means pipeline is still initializing (shimmer)
+    val homeAppState by homeViewModel.homeAppState.collectAsStateWithLifecycle()
+    val homeAppItems = homeAppState?.visible ?: emptyList()
+    val hiddenAppItems = homeAppState?.hidden ?: emptyList()
+    val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
+
+    // Gesture hint: shown once on first launch, after cards have loaded
+    val swipeHintShown by prefs.swipeGestureHintShown.getAsState()
+    val showGestureHint by remember(swipeHintShown, homeAppItems) {
+        derivedStateOf { !swipeHintShown && homeAppItems.isNotEmpty() }
+    }
 
     val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
     if (!isDeviceRooted) {
@@ -162,7 +173,8 @@ fun HomeScreen(
     HomeDialogs(
         homeViewModel = homeViewModel,
         storagePickerLauncher = { openApkPicker.launch("*/*") },
-        openBundlePicker = { openBundlePicker.launch("*/*") }
+        openBundlePicker = { openBundlePicker.launch("*/*") },
+        patchesItem = patchesSheetItem
     )
 
     // Pre-patching installer selection dialog for root-capable devices.
@@ -210,11 +222,14 @@ fun HomeScreen(
                     )
                     item.installedApp?.let { showInstalledAppDialog.value = it.currentPackageName }
                 },
-                onInstalledAppClick = { app -> showInstalledAppDialog.value = app.currentPackageName },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
+                onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
+                onShowPatches = { item -> patchesSheetItem.value = item },
+                showGestureHint = showGestureHint,
+                onGestureHintShown = { homeViewModel.markSwipeGestureHintShown() },
                 hiddenAppItems = hiddenAppItems,
-                installedAppsLoading = homeViewModel.installedAppsLoading,
+                installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
 
                 // Search
                 showSearchButton = showSearchButton,
