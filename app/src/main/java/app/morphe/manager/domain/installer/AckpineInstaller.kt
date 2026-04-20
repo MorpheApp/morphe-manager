@@ -52,7 +52,7 @@ class AckpineInstaller(private val app: Application) {
         Log.d(TAG, "installInternal: ${apkFile.name} (${apkFile.length()} bytes)")
         val session = packageInstaller.createSession(
             InstallParameters.Builder(Uri.fromFile(apkFile))
-                .setInstallerType(InstallerType.SESSION_BASED)
+                .setInstallerType(InstallerType.INTENT_BASED)
                 .setConfirmation(Confirmation.IMMEDIATE)
                 .setName(apkFile.name)
                 .build()
@@ -84,7 +84,7 @@ class AckpineInstaller(private val app: Application) {
         Log.d(TAG, "installShizuku: ${apkFile.name} (${apkFile.length()} bytes)")
         val session = packageInstaller.createSession(
             InstallParameters.Builder(Uri.fromFile(apkFile))
-                .setInstallerType(InstallerType.SESSION_BASED)
+                .setInstallerType(InstallerType.INTENT_BASED)
                 .setConfirmation(Confirmation.IMMEDIATE)
                 .setName(apkFile.name)
                 .registerPlugin(
