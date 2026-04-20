@@ -1,3 +1,16 @@
+# [1.16.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.5...v1.16.0-dev.6) (2026-04-20)
+
+
+### Bug Fixes
+
+* System installer couldn't update an already installed app ([#455](https://github.com/MorpheApp/morphe-manager/issues/455)) ([adc93e4](https://github.com/MorpheApp/morphe-manager/commit/adc93e4bab2d9b153b2aecd9f0671b393e42d309))
+* When greeting message is disabled, show a small top spacer so the app cards don't sit flush against the top of the screen ([6900cc2](https://github.com/MorpheApp/morphe-manager/commit/6900cc226e189b97c747d6d53f5fba98ade6ccf0))
+
+
+### Features
+
+* Sort universal patches to bottom of each bundle in patches dialog ([eac672e](https://github.com/MorpheApp/morphe-manager/commit/eac672e51f1fe3007bba46af6321d833ac20fb4b))
+
 # [1.16.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.4...v1.16.0-dev.5) (2026-04-19)
 
 

@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-19T16:44:56.838Z",
-  "description": "# [1.16.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.4...v1.16.0-dev.5) (2026-04-19)\n\n\n### Bug Fixes\n\n* Shizuku installer couldn't update an already installed app ([#454](https://github.com/MorpheApp/morphe-manager/issues/454)) ([d4e74e3](https://github.com/MorpheApp/morphe-manager/commit/d4e74e3a84ca34529f8d20005c19b2b0e7c9136f))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.5/morphe-manager-1.16.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.5/morphe-manager-1.16.0-dev.5.apk.asc",
-  "version": "1.16.0-dev.5"
+  "created_at": "2026-04-20T07:55:47.744Z",
+  "description": "# [1.16.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.5...v1.16.0-dev.6) (2026-04-20)\n\n\n### Bug Fixes\n\n* System installer couldn't update an already installed app ([#455](https://github.com/MorpheApp/morphe-manager/issues/455)) ([adc93e4](https://github.com/MorpheApp/morphe-manager/commit/adc93e4bab2d9b153b2aecd9f0671b393e42d309))\n* When greeting message is disabled, show a small top spacer so the app cards don't sit flush against the top of the screen ([6900cc2](https://github.com/MorpheApp/morphe-manager/commit/6900cc226e189b97c747d6d53f5fba98ade6ccf0))\n\n\n### Features\n\n* Sort universal patches to bottom of each bundle in patches dialog ([eac672e](https://github.com/MorpheApp/morphe-manager/commit/eac672e51f1fe3007bba46af6321d833ac20fb4b))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.6/morphe-manager-1.16.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.6/morphe-manager-1.16.0-dev.6.apk.asc",
+  "version": "1.16.0-dev.6"
 }
