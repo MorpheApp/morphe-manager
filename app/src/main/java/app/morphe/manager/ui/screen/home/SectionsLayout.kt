@@ -1601,11 +1601,23 @@ fun AppPatchesDialog(
     bundleNames: Map<Int, String>,
     onDismiss: () -> Unit
 ) {
-    // Flatten to a list of (bundleUid, patch) sorted by bundle name
+    // Flatten to a list of (bundleUid, patch).
+    // Bundle ordering: bundles with at least one specific patch come first (alphabetically),
+    // then bundles with only universal patches.
+    // Within each bundle: specific patches first, universal patches last.
     val allPatches = remember(patchesByBundle, bundleNames) {
         patchesByBundle.entries
-            .sortedBy { (uid, _) -> bundleNames[uid] ?: uid.toString() }
-            .flatMap { (uid, patches) -> patches.map { patch -> uid to patch } }
+            .sortedWith(
+                compareBy(
+                    { (_, patches) -> patches.all { it.compatiblePackages == null } },
+                    { (uid, _) -> bundleNames[uid] ?: uid.toString() }
+                )
+            )
+            .flatMap { (uid, patches) ->
+                val (universal, specific) = patches.partition { it.compatiblePackages == null }
+                (specific.sortedBy { it.name } + universal.sortedBy { it.name })
+                    .map { patch -> uid to patch }
+            }
     }
 
     val isMultiBundle = patchesByBundle.size > 1
@@ -1844,6 +1856,7 @@ fun AppPatchesDialog(
                     "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
                 }
             ) { (uid, patch) ->
+                val isUniversal = patch.compatiblePackages == null
                 Column {
                     // Bundle section label - only for multi-bundle, at first patch of each bundle
                     if (isMultiBundle) {
@@ -1857,6 +1870,41 @@ fun AppPatchesDialog(
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.padding(bottom = 6.dp, top = 8.dp)
+                            )
+                        }
+                    }
+
+                    // Universal patches divider - shown before the first universal patch of each bundle
+                    val isFirstUniversalOfBundle = remember(filteredPatches, uid, patch) {
+                        if (!isUniversal) return@remember false
+                        filteredPatches.firstOrNull { (u, p) -> u == uid && p.compatiblePackages == null }?.second == patch
+                    }
+                    if (isFirstUniversalOfBundle) {
+                        val hasSpecificAbove = remember(filteredPatches, uid) {
+                            filteredPatches.any { (u, p) -> u == uid && p.compatiblePackages != null }
+                        }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = if (hasSpecificAbove) 8.dp else 0.dp, bottom = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Public,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(14.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.expert_mode_universal_patches),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            HorizontalDivider(
+                                modifier = Modifier.weight(1f),
+                                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                                thickness = 0.5.dp
                             )
                         }
                     }
