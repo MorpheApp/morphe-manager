@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
 import android.content.pm.PackageManager.PackageInfoFlags
+import android.content.pm.Signature
 import android.os.Build
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
@@ -65,6 +66,54 @@ class PM(
     }
 
     fun canInstallPackages() = app.packageManager.canRequestPackageInstalls()
+
+    /**
+     * Returns the first signing certificate of an installed package, or null if not found.
+     */
+    @Suppress("DEPRECATION")
+    fun getSignature(packageName: String): Signature? {
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            PackageManager.GET_SIGNING_CERTIFICATES
+        } else {
+            PackageManager.GET_SIGNATURES
+        }
+        val info = getPackageInfo(packageName, flags) ?: return null
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            info.signingInfo?.apkContentsSigners?.firstOrNull()
+                ?: info.signatures?.firstOrNull()
+        } else {
+            info.signatures?.firstOrNull()
+        }
+    }
+
+    /**
+     * Returns the first signing certificate of an APK file, or null if not found.
+     */
+    @Suppress("DEPRECATION")
+    fun getArchiveSignature(file: File): Signature? {
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
+        } else {
+            PackageManager.GET_SIGNATURES
+        }
+        val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, flags) ?: return null
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            info.signingInfo?.apkContentsSigners?.firstOrNull()
+                ?: info.signatures?.firstOrNull()
+        } else {
+            info.signatures?.firstOrNull()
+        }
+    }
+
+    /**
+     * Returns true if the signing certificate of [file] differs from the installed package.
+     * Returns false if either signature cannot be read (install proceeds normally).
+     */
+    fun hasSignatureMismatch(packageName: String, file: File): Boolean {
+        val installed = getSignature(packageName)?.toByteArray() ?: return false
+        val archive = getArchiveSignature(file)?.toByteArray() ?: return false
+        return !installed.contentEquals(archive)
+    }
 
     fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {
         val currentlyInstalled = getPackageInfo(packageName) != null

@@ -188,6 +188,13 @@ class InstallViewModel : ViewModel(), KoinComponent {
                         installState = InstallState.Conflict(targetPackageName)
                         return@launch
                     }
+                    // Check signature mismatch before launching the installer - avoids
+                    // INSTALL_FAILED_UPDATE_INCOMPATIBLE from the system PackageInstaller
+                    if (pm.hasSignatureMismatch(targetPackageName, outputFile)) {
+                        Log.i(TAG, "Signature mismatch detected for $targetPackageName - showing conflict")
+                        installState = InstallState.Conflict(targetPackageName)
+                        return@launch
+                    }
                 }
 
                 // Resolve installation plan - use one-time token if available
