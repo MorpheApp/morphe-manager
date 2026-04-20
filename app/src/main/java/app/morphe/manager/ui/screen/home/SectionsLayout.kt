@@ -1866,7 +1866,13 @@ fun AppPatchesDialog(
                 val uid: Int = entry.first
                 val patch: PatchInfo = entry.second
                 val isUniversal = patch.compatiblePackages == null
-                Column {
+                Column(
+                    modifier = Modifier.animateItem(
+                        fadeInSpec = tween(220),
+                        fadeOutSpec = tween(180),
+                        placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
+                    )
+                ) {
                     // Bundle section label - only for multi-bundle, at first patch of each bundle
                     if (isMultiBundle) {
                         val isFirstOfBundle = remember(filteredPatches, uid, patch) {
@@ -1922,11 +1928,6 @@ fun AppPatchesDialog(
                         patch = patch,
                         saveStateKey = "app_patches_${item.packageName}_$uid",
                         accentColor = bundleAccentColors[uid],
-                        modifier = Modifier.animateItem(
-                            fadeInSpec = tween(220),
-                            fadeOutSpec = tween(180),
-                            placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
-                        )
                     )
                 }
             }
