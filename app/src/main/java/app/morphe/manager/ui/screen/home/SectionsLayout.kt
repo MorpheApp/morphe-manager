@@ -1597,9 +1597,9 @@ fun AppPatchesDialog(
     onDismiss: () -> Unit
 ) {
     // Flatten to a list of (bundleUid, patch).
-    // Bundle ordering: bundles with at least one specific patch come first (alphabetically),
-    // then bundles with only universal patches.
-    // Within each bundle: specific patches first, universal patches last.
+    // Bundle ordering: bundles with at least one specific patch come first (by name),
+    // then bundles with only universal patches (by name).
+    // Within each bundle: specific patches first (alphabetically), universal patches last (alphabetically).
     val allPatches = remember(patchesByBundle, bundleNames) {
         patchesByBundle.entries
             .sortedWith(
@@ -1616,6 +1616,18 @@ fun AppPatchesDialog(
     }
 
     val isMultiBundle = patchesByBundle.size > 1
+
+    // Per-bundle accent color for multi-bundle mode only.
+    // Generated deterministically from uid via multiplicative hash → HSL,
+    // so the same uid always produces the same color.
+    // Returns null for single-bundle (no coloring needed).
+    val bundleAccentColors: Map<Int, Color> = remember(patchesByBundle, isMultiBundle) {
+        if (!isMultiBundle) return@remember emptyMap()
+        patchesByBundle.keys.associateWith { uid ->
+            val hue = ((uid.hashCode() * 2654435761L) and 0xFFFFFFFFL).toFloat() % 360f
+            Color.hsl(hue = hue, saturation = 0.55f, lightness = 0.60f)
+        }
+    }
     var searchQuery by remember { mutableStateOf("") }
     var selectedBundle by remember { mutableStateOf<Int?>(null) }
     val showFilterSheet = remember { mutableStateOf(false) }
@@ -1850,7 +1862,9 @@ fun AppPatchesDialog(
                 key = { (uid, patch) ->
                     "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
                 }
-            ) { (uid, patch) ->
+            ) { entry ->
+                val uid: Int = entry.first
+                val patch: PatchInfo = entry.second
                 val isUniversal = patch.compatiblePackages == null
                 Column {
                     // Bundle section label - only for multi-bundle, at first patch of each bundle
@@ -1859,11 +1873,11 @@ fun AppPatchesDialog(
                             filteredPatches.firstOrNull { it.first == uid }?.second == patch
                         }
                         if (isFirstOfBundle) {
-                            Text(
+                            InfoBadge(
                                 text = bundleNames[uid] ?: uid.toString(),
-                                style = MaterialTheme.typography.titleSmall,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary,
+                                style = InfoBadgeStyle.Primary,
+                                icon = Icons.Outlined.Layers,
+                                isExpanded = true,
                                 modifier = Modifier.padding(bottom = 6.dp, top = 8.dp)
                             )
                         }
@@ -1872,11 +1886,11 @@ fun AppPatchesDialog(
                     // Universal patches divider - shown before the first universal patch of each bundle
                     val isFirstUniversalOfBundle = remember(filteredPatches, uid, patch) {
                         if (!isUniversal) return@remember false
-                        filteredPatches.firstOrNull { (u, p) -> u == uid && p.compatiblePackages == null }?.second == patch
+                        filteredPatches.firstOrNull { it.first == uid && it.second.compatiblePackages == null }?.second == patch
                     }
                     if (isFirstUniversalOfBundle) {
                         val hasSpecificAbove = remember(filteredPatches, uid) {
-                            filteredPatches.any { (u, p) -> u == uid && p.compatiblePackages != null }
+                            filteredPatches.any { it.first == uid && it.second.compatiblePackages != null }
                         }
                         Row(
                             modifier = Modifier
@@ -1907,6 +1921,7 @@ fun AppPatchesDialog(
                     PatchItemCard(
                         patch = patch,
                         saveStateKey = "app_patches_${item.packageName}_$uid",
+                        accentColor = bundleAccentColors[uid],
                         modifier = Modifier.animateItem(
                             fadeInSpec = tween(220),
                             fadeOutSpec = tween(180),

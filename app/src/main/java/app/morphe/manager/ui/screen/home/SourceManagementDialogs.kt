@@ -395,6 +395,16 @@ fun BundlePatchesDialog(
             .sortedBy { it.name }
     }
 
+    // Per-patch accent color: first non-null appIconColor across all compatible packages,
+    // converted from 0xRRGGBB to a full-opacity Compose Color. Null falls back to surfaceVariant.
+    val patchAccentColors: Map<String, Color> = remember(patches) {
+        patches.associate { patch ->
+            val rgb = patch.compatiblePackages
+                ?.firstNotNullOfOrNull { it.appIconColor }
+            patch.name to if (rgb != null) Color(rgb or (0xFF shl 24)) else Color.Unspecified
+        }
+    }
+
     val isFiltering = searchQuery.isNotBlank() || selectedPackages.isNotEmpty()
 
     MorpheDialog(
@@ -628,12 +638,15 @@ fun BundlePatchesDialog(
                     }
                 ) { patch ->
                     val context = LocalContext.current
+                    val accentColor = patchAccentColors[patch.name]
+                        ?.takeIf { it != Color.Unspecified }
                     PatchItemCard(
                         patch = patch,
                         saveStateKey = "bundle_${src.uid}",
                         onExpertBadgeClick = if (!patch.include) {
                             { context.toast(context.getString(R.string.sources_patch_expert_badge_tooltip)) }
                         } else null,
+                        accentColor = accentColor,
                         modifier = Modifier.animateItem(
                             fadeInSpec = tween(220),
                             fadeOutSpec = tween(180),
@@ -715,7 +728,8 @@ fun PatchItemCard(
     modifier: Modifier = Modifier,
     patch: PatchInfo,
     saveStateKey: String,
-    onExpertBadgeClick: (() -> Unit)? = null
+    onExpertBadgeClick: (() -> Unit)? = null,
+    accentColor: Color? = null
 ) {
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
@@ -743,7 +757,7 @@ fun PatchItemCard(
                 } else Modifier
             ),
         shape = RoundedCornerShape(14.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        color = accentColor?.copy(alpha = 0.13f) ?: MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
