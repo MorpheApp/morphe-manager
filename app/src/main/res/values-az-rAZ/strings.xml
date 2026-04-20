@@ -356,6 +356,9 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_translations_info_title">Bəzi dillər üçün tərcümələr yarımçıq və ya qüsurlu ola bilər</string>
     <string name="settings_appearance_translations_info_text">Yeni dilləri tərcümə etmək və ya mövcud tərcümələri təkmilləşdirmək üçün %s -i ziyarət et</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Əsas ekran</string>
+    <string name="settings_appearance_greeting_phrases">Salamlaşma ifadələri</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Əsas ekranda salamlaşma mesajı göstər</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Tətbiq simvolu</string>
     <string name="settings_appearance_app_icon_default">İlkin</string>

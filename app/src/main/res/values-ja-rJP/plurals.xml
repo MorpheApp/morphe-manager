@@ -28,9 +28,9 @@
         <item quantity="other">選択中のパッチ %s 個</item>
     </plurals>
     <plurals name="home_app_show_selected">
-        <item quantity="other">标夕 %s マドウ</item>
+        <item quantity="other">%s 個のアプリを表示</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
-        <item quantity="other">%s マドウの這天マドウ</item>
+        <item quantity="other">%s 個のアプリが非表示</item>
     </plurals>
 </resources>

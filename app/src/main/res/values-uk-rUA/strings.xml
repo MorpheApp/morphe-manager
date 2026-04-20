@@ -407,7 +407,7 @@
     <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності застосунку</string>
     <string name="settings_advanced_strip_unused_libs">Оптимізація для архітектури пристрою</string>
     <string name="settings_advanced_strip_unused_libs_description">"Пропускати split модулі APK для непідтримуваних архітектур процесора, локалізацій та щільностей екрана під час об'єднання.
-Для звичайних APK видаляє нативні бібліотеки для непідтримуваних архітектур після патчінгу"</string>
+Для звичайних APK видаляти нативні бібліотеки для непідтримуваних архітектур після патчінгу"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Режим обробки байт-коду</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Керує процесом обробки байт-коду під час встановлення патчів. Впливає на швидкість встановлення патчів, використання пам\'яті та розмір вихідного APK файлу</string>

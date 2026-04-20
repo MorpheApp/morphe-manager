@@ -37,8 +37,8 @@
         <item quantity="other">%s patchs sélectionnés</item>
     </plurals>
     <plurals name="home_app_show_selected">
-        <item quantity="one">Afficher l\'application %s</item>
-        <item quantity="other">Afficher les applications %s</item>
+        <item quantity="one">Afficher %s application</item>
+        <item quantity="other">Afficher les %s applications</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s application masquée</item>

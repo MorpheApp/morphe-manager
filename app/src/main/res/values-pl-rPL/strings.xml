@@ -357,8 +357,8 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_appearance_translations_info_text">Aby przetłumaczyć aplikację na nowe języki lub poprawić istniejące tłumaczenia, odwiedź stronę %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ekran główny</string>
-    <string name="settings_appearance_greeting_phrases">Frazy powitalne</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Wyświetlaj komunikat powitalny na ekranie głównym</string>
+    <string name="settings_appearance_greeting_phrases">Powitania</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Wyświetlaj powitanie na ekranie głównym</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacji</string>
     <string name="settings_appearance_app_icon_default">Domyślna</string>

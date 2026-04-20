@@ -5,12 +5,12 @@
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
-    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi màn hình chính. Bạn có thể khôi phục lại bằng nút \"%1$s\" ở cuối danh sách</string>
+    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi trang chủ. Bạn có thể khôi phục lại bằng nút \"%1$s\" ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
     <string name="home_app_show_hidden">Hiện ứng dụng đã ẩn</string>
     <string name="home_app_no_hidden">Không có ứng dụng nào đang ẩn</string>
     <string name="home_app_hidden_apps_title">Ứng dụng đã ẩn</string>
-    <string name="home_app_hidden_apps_hint">Nhấn để hiện lại</string>
+    <string name="home_app_hidden_apps_hint">Bấm để hiện lại</string>
     <string name="android_11_bug_dialog_title">Lỗi trên Android 11</string>
     <string name="android_11_bug_dialog_description">Vui lòng cấp quyền cài đặt ứng dụng không rõ nguồn gốc để tránh lỗi trên Android 11 có thể ảnh hưởng đến trải nghiệm</string>
     <string name="deep_link_add_source_title">Thêm nguồn</string>
@@ -19,7 +19,7 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Đã có bản cập nhật mới của Morphe</string>
     <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
-    <string name="home_update_error">Cập nhật thất bại</string>
+    <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
     <string name="home_update_skipped_metered">Đã bỏ qua bản cập nhật</string>
     <string name="home_update_skipped_metered_subtitle">Đang bật dữ liệu di động</string>
@@ -33,7 +33,7 @@
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
     <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%1$s\"</string>
     <string name="home_all_apps_hidden_title">Tất cả ứng dụng đã bị ẩn</string>
-    <string name="home_all_apps_hidden_subtitle">Bạn đã ẩn tất cả ứng dụng khỏi màn hình chính</string>
+    <string name="home_all_apps_hidden_subtitle">Bạn đã ẩn tất cả ứng dụng khỏi trang chủ</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -93,7 +93,7 @@
     <string name="home_apk_availability_dialog_expert">Để vá &lt;b&gt;%s&lt;/b&gt;, bạn cần APK chưa vá thuộc một trong các phiên bản:</string>
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
-    <string name="home_apk_availability_yes">Có, giúp tôi với</string>
+    <string name="home_apk_availability_yes">Có, giúp tôi vs</string>
     <string name="home_apk_availability_no">Không, tôi có APK rồi</string>
     <string name="home_apk_use_saved_with_version">Dùng APK đã lưu (v%s)</string>
     <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
@@ -147,7 +147,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_dialog_unsupported_version_experimental_label">Thử nghiệm</string>
     <string name="home_dialog_unsupported_version_experimental_description">Phiên bản này vẫn đang thử nghiệm và có thể không ổn định hoặc chưa hoàn thiện</string>
     <string name="morphe_experimental_app_version_dialog_title">Muốn thử không? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Phiên bản &lt;b&gt;%s&lt;/b&gt; này hiện mới được hỗ trợ thử nghiệm&lt;br/&gt;&lt;br/&gt;🔧 Ứng dụng có thể hoạt động chưa ổn định hoặc còn lỗi trong quá trình hoàn thiện bản vá</string>
+    <string name="morphe_experimental_app_version_dialog_message">Phiên bản &lt;b&gt;%s&lt;/b&gt; hiện mới được hỗ trợ thử nghiệm&lt;br/&gt;&lt;br/&gt;🔧 Ứng dụng có thể hoạt động chưa ổn định hoặc còn lỗi trong quá trình hoàn thiện bản vá</string>
     <string name="home_dialog_unsupported_version_dialog_title">Phiên bản không hỗ trợ</string>
     <string name="home_dialog_unsupported_version_dialog_description">Phiên bản APK này không được đề xuất. Tiếp tục có thể dẫn đến ứng dụng không hoạt động</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Vẫn tiếp tục</string>
@@ -181,8 +181,8 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="adaptive_icon_instructions">Chọn ảnh tiền cảnh, chọn màu nền, sau đó kéo thanh trượt hoặc chụm hai ngón để xem trước biểu tượng</string>
     <string name="adaptive_icon_preview">Xem trước biểu tượng thích ứng</string>
     <string name="adaptive_icon_preview_hint">Để biểu tượng trông đẹp hơn, hãy giữ nó trong vòng tròn nét liền nhé</string>
-    <string name="adaptive_icon_select_image">Chọn hình ảnh</string>
-    <string name="adaptive_icon_change_image">Đổi hình ảnh</string>
+    <string name="adaptive_icon_select_image">Chọn ảnh</string>
+    <string name="adaptive_icon_change_image">Đổi ảnh</string>
     <string name="adaptive_icon_background_color">Màu nền</string>
     <string name="adaptive_icon_reset_transform">Đặt lại vị trí và tỷ lệ</string>
     <string name="adaptive_icon_safe_zone_inner">Vùng an toàn (luôn hiển thị)</string>
@@ -273,7 +273,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_step_sign_apk">Đang ký APK đã vá</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Đang vá…</string>
-    <string name="patcher_notification_text">Chạm để quay trở lại trình vá</string>
+    <string name="patcher_notification_text">Bấm để quay trở lại trình vá</string>
     <string name="patcher_stop_confirm_title">Dừng vá</string>
     <string name="patcher_stop_confirm_description">Bạn có chắc chắn muốn dừng tiến trình vá không?</string>
     <!-- Patcher Screen - Patcher Messages -->
@@ -357,8 +357,8 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_appearance_translations_info_text">Bạn có thể yêu cầu thêm ngôn ngữ hoặc cải thiện bản dịch hiện tại bằng cách truy cập %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Trang chủ</string>
-    <string name="settings_appearance_greeting_phrases">Lời chào</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Hiển thị thông báo chào trên trang chủ</string>
+    <string name="settings_appearance_greeting_phrases">Thông điệp</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Hiện thông điệp trên trang chủ</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Biểu tượng</string>
     <string name="settings_appearance_app_icon_default">Mặc định</string>
@@ -381,10 +381,10 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_advanced_updates_background_notifications_description_fcm">Nhận thông báo ngay khi có phiên bản mới, kể cả khi ứng dụng đang tắt</string>
     <string name="settings_advanced_update_interval">Tần suất kiểm tra</string>
     <string name="settings_advanced_update_interval_dialog_title">Kiểm tra cập nhật</string>
-    <string name="settings_advanced_update_interval_hourly">Mỗi giờ</string>
-    <string name="settings_advanced_update_interval_daily">Mỗi ngày</string>
-    <string name="settings_advanced_update_interval_weekly">Mỗi tuần</string>
-    <string name="settings_advanced_update_interval_monthly">Mỗi tháng</string>
+    <string name="settings_advanced_update_interval_hourly">1 giờ/lần</string>
+    <string name="settings_advanced_update_interval_daily">1 ngày/lần</string>
+    <string name="settings_advanced_update_interval_weekly">1 tuần/lần</string>
+    <string name="settings_advanced_update_interval_monthly">1 tháng/lần</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Tần suất kiểm tra trong nền</string>
     <string name="settings_advanced_update_interval_battery_warning">Tính năng này có thể không hoạt động trên một số thiết bị như Xiaomi, Huawei, Samsung và OnePlus, vì chúng thường giới hạn ứng dụng chạy nền để tiết kiệm pin</string>
     <!-- Notification content -->
@@ -637,7 +637,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="credits_prior_development">Trước đây</string>
     <string name="opensource_licenses">Giấy phép mã nguồn mở</string>
     <!-- Shared strings -->
-    <string name="patches">Bản vá</string>
+    <string name="patches">Số bản vá</string>
     <string name="home">Trang chủ</string>
     <string name="settings">Cài đặt</string>
     <string name="yes">Có</string>
@@ -672,9 +672,9 @@ Kích thước hình ảnh yêu cầu:
     <string name="export">Xuất</string>
     <string name="download">Tải về</string>
     <string name="less">Thu gọn</string>
-    <string name="expand">Thêm</string>
+    <string name="expand">Mở rộng</string>
     <string name="expanded">Đã mở rộng</string>
-    <string name="collapse">Bớt</string>
+    <string name="collapse">Thu gọn</string>
     <string name="collapsed">Đã thu gọn</string>
     <string name="available">Khả dụng</string>
     <string name="continue_">Tiếp</string>

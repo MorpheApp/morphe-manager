@@ -37,11 +37,11 @@
         <item quantity="other">%s yama seçildi</item>
     </plurals>
     <plurals name="home_app_show_selected">
-        <item quantity="one">%s uygulamasını göster</item>
-        <item quantity="other">%s uygulamalarını göster</item>
+        <item quantity="one">%s uygulamayı göster</item>
+        <item quantity="other">%s uygulamayı göster</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s gizli uygulama</item>
-        <item quantity="other">%s gizli uygulamalar</item>
+        <item quantity="other">%s gizli uygulama</item>
     </plurals>
 </resources>

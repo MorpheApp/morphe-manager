@@ -33,7 +33,7 @@
     <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
     <string name="home_no_apps_search_subtitle">\"%1$s\" ile eşleşen uygulama bulunamadı</string>
     <string name="home_all_apps_hidden_title">Tüm uygulamalar gizlendi</string>
-    <string name="home_all_apps_hidden_subtitle">Ana ekranınızdan tüm uygulamaları gizlediniz</string>
+    <string name="home_all_apps_hidden_subtitle">Ana ekrandaki tüm uygulamaları gizlediniz</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -130,7 +130,7 @@
     <string name="expert_mode_no_results">Yama bulunamadı</string>
     <string name="expert_mode_universal_patches">Evrensel yamalar</string>
     <string name="expert_mode_new_patches">Yeni</string>
-    <string name="expert_mode_multiple_sources_warning_title">Çoklu yama kaynağı seçildi</string>
+    <string name="expert_mode_multiple_sources_warning_title">Birden fazla yama kaynağı seçildi</string>
     <string name="expert_mode_multiple_sources_warning_message">"Birden fazla yama kaynağından yama seçtiniz. Bu, uyumluluk sorunlarına veya beklenmedik davranışlara neden olabilir.
 
 Devam etmek istediğinizden emin misiniz?"</string>
@@ -357,7 +357,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="settings_appearance_translations_info_text">Yeni diller eklemek veya mevcut çevirileri iyileştirmek için %s adresini ziyaret edin</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ana ekran</string>
-    <string name="settings_appearance_greeting_phrases">Selamlaşma ifadeleri</string>
+    <string name="settings_appearance_greeting_phrases">Selamlama cümleleri</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlaşma mesajı göster</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Uygulama simgesi</string>
@@ -406,7 +406,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="settings_advanced_expert_mode_dialog_title">Uzman modu etkinleştirilsin mi?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Uzman modu yamaların nasıl uygulanacağı konusunda daha fazla kontrol sağlar, ancak uzman modunda ayarların yanlış yapılandırılması işlevsiz bir uygulamayla sonuçlanabilir</string>
     <string name="settings_advanced_strip_unused_libs">Cihaz mimarisi için optimize et</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Birleştirme sırasında desteklenmeyen CPU mimarileri, diller ve ekran yoğunluklarının bölünmüş APK modüllerini atla.
+    <string name="settings_advanced_strip_unused_libs_description">"Birleştirme sırasında desteklenmeyen CPU mimarileri, diller ve ekran yoğunluklarının bölünmüş APK modüllerini atlar.
 Basit APK'ler için, yamalamadan sonra desteklenmeyen mimarilere ait yerel kütüphaneleri temizler"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bayt kodu işleme modu</string>

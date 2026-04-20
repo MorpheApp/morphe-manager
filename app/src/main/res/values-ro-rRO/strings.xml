@@ -344,15 +344,15 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Temă</string>
     <string name="settings_appearance_system">Sistem</string>
-    <string name="settings_appearance_light">Luminos</string>
-    <string name="settings_appearance_dark">Întunecat</string>
-    <string name="settings_appearance_dynamic">Design material</string>
+    <string name="settings_appearance_light">Luminoasă</string>
+    <string name="settings_appearance_dark">Întunecată</string>
+    <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Culoare accent</string>
     <string name="settings_appearance_pure_black">Negru pur</string>
-    <string name="settings_appearance_pure_black_description">Folosește fonduri negre adevărate</string>
+    <string name="settings_appearance_pure_black_description">Folosește fundaluri negre pure</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Limbă aplicație</string>
-    <string name="settings_appearance_app_language_current">Limbajul curent</string>
+    <string name="settings_appearance_app_language_current">Limba curentă</string>
     <string name="settings_appearance_translations_info_title">Traduțiile pentru unele limbi pot lipsi sau să fie incomplet</string>
     <string name="settings_appearance_translations_info_text">Pentru a traduce în noi limbi sau să îmbunătățești traducerile existente, vizitează %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
@@ -434,7 +434,7 @@ Pentru APK-urile plain, elimină bibliotecile native pentru arhitecturi nesuport
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Culori tema aplicației</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Schimbă culoarea de fund</string>
-    <string name="settings_advanced_patch_options_dark_theme_color">Culoarea temă de fund dark</string>
+    <string name="settings_advanced_patch_options_dark_theme_color">Culoare de fundal temă întunecată</string>
     <string name="settings_advanced_patch_options_light_theme_color">Culoarea temă de fund light</string>
     <string name="settings_advanced_patch_options_theme_color_description">Poate fi un culoare hexadecimal (#RRGGBB) sau o referință la resursa culoare</string>
     <string name="settings_advanced_patch_options_loading">Se încarcă opțiunile de patach…</string>
@@ -543,19 +543,19 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_prompt_installer_on_install_description">Afișează dialogul de selecție a instalatorului fiecare dată când instalați o aplicație patată</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performanță</string>
-    <string name="settings_system_process_runtime">Timp de rulare</string>
-    <string name="settings_system_process_runtime_description">Folosește patachizare în proces separat pentru o stabilitate mai bună</string>
+    <string name="settings_system_process_runtime">Runtime proces</string>
+    <string name="settings_system_process_runtime_description">Rulează patch-uirea în proces separat pentru o stabilitate mai bună</string>
     <string name="settings_system_process_runtime_memory_limit">Limita memorie</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Limite memorie mai înalte pot accelera patachizarea dar pot nu funcționa cu dispozitive mai vechi</string>
-    <string name="settings_system_process_runtime_enable">Activează rulare proces</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Limite de memorie mai mari pot accelera patch-uirea, dar pot să nu funcționeze pe dispozitive mai vechi</string>
+    <string name="settings_system_process_runtime_enable">Activează proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
     <string name="settings_system_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când patachizați aplicații mai mari</string>
     <string name="settings_system_process_runtime_enabled_description">Limită %s MO</string>
     <string name="settings_system_process_runtime_disabled_description">Clic pentru a configura</string>
     <string name="settings_system_process_runtime_description_not_available">Această funcție necesită Android 11 sau o versiune mai recentă</string>
     <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_export">Importă și exportă</string>
-    <string name="settings_system_import_keystore">Importă cheia de semnă</string>
+    <string name="settings_system_import_export">Importare și exportare</string>
+    <string name="settings_system_import_keystore">Importă keystore</string>
     <string name="settings_system_import_keystore_description">Importă o cheie de semnă personalizată</string>
     <string name="settings_system_import_keystore_dialog_title">Introduceți datele cheii</string>
     <string name="settings_system_import_keystore_dialog_description">Vă veți trebi să introduceți credențialele keystore-ului pentru a-l importa</string>
@@ -563,12 +563,12 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_import_keystore_dialog_password_field">Parolă</string>
     <string name="settings_system_import_keystore_dialog_button">Importă</string>
     <string name="settings_system_import_keystore_wrong_credentials">Datele cheii incorecte</string>
-    <string name="settings_system_import_keystore_success">Cheia de semnă importată</string>
-    <string name="settings_system_import_keystore_failed">Nu s-a putut importa cheia de semnă</string>
-    <string name="settings_system_export_keystore">Exportă cheia de semnă</string>
-    <string name="settings_system_export_keystore_description">Exportă cheia de semnă curentă</string>
+    <string name="settings_system_import_keystore_success">Keystore importat</string>
+    <string name="settings_system_import_keystore_failed">A eșuat importarea keystore-ului</string>
+    <string name="settings_system_export_keystore">Exportă keystore</string>
+    <string name="settings_system_export_keystore_description">Exportă keystore-ul curent</string>
     <string name="settings_system_export_keystore_unavailable">Nu există cheie de semnă disponibilă pentru export</string>
-    <string name="settings_system_export_keystore_success">Cheia de semnă exportată</string>
+    <string name="settings_system_export_keystore_success">Keystore exportat</string>
     <string name="settings_system_show_password_field">Arată parolă</string>
     <string name="settings_system_hide_password_field">Ascunde parolă</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -699,13 +699,13 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="hide">Ascunde</string>
     <string name="default_">Implicit</string>
     <string name="logs">Jurnale</string>
-    <string name="sources">De surse</string>
+    <string name="sources">Surse</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
     <string name="imported_successfully">Importate cu succes</string>
-    <string name="changelog">Vizualizați jurnalele modificărilor</string>
+    <string name="changelog">Vizualizează jurnalele modificărilor</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_retry">Reîncearcă</string>
