@@ -307,10 +307,14 @@ private fun AdaptiveContent(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center
             ) {
-                // Section 2: Greeting
-                GreetingSection(message = greetingMessage)
-
-                Spacer(modifier = Modifier.height(itemSpacing))
+                // Section 2: Greeting - when disabled, show a small top spacer so
+                // the app cards don't sit flush against the top of the screen
+                if (!greetingMessage.isNullOrEmpty()) {
+                    GreetingSection(message = greetingMessage)
+                    Spacer(modifier = Modifier.height(itemSpacing))
+                } else {
+                    Spacer(modifier = Modifier.height(24.dp))
+                }
 
                 // Section 3: Scrollable app buttons
                 Box(modifier = Modifier.weight(1f, fill = false)) {
