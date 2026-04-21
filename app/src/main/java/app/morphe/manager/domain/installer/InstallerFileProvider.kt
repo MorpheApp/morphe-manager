@@ -1,5 +1,6 @@
 package app.morphe.manager.domain.installer
 
+import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -7,14 +8,16 @@ import android.database.MatrixCursor
 import android.net.Uri
 import android.os.ParcelFileDescriptor
 import android.provider.OpenableColumns
-import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileNotFoundException
 
 /**
  * Lightweight content provider used to expose APK files to external installers.
+ *
+ * It mirrors the behavior we relied on from [androidx.core.content.FileProvider] while avoiding
+ * the XML parsing crash that occurred on some devices when launching third-party installers.
  */
-class InstallerFileProvider : FileProvider() {
+class InstallerFileProvider : ContentProvider() {
     override fun onCreate(): Boolean = true
 
     override fun query(

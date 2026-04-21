@@ -14,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.*
+import app.morphe.manager.domain.installer.PlayProtectDeadSessionException
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.simpleMessage
@@ -364,6 +365,13 @@ class InstallViewModel : ViewModel(), KoinComponent {
         } catch (_: InstallCancelledException) {
             // User dismissed the dialog - go back to Ready immediately, no error shown
             installState = InstallState.Ready
+            return
+        } catch (e: PlayProtectDeadSessionException) {
+            // Play Protect killed every retry attempt - show a clear, actionable error
+            Log.w(TAG, "Play Protect exhausted all retries: ${e.message}")
+            handleInstallError(
+                app.getString(R.string.install_play_protect_failed_message)
+            )
             return
         }
 

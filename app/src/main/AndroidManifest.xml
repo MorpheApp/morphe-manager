@@ -211,11 +211,7 @@
             android:name="app.morphe.manager.domain.installer.InstallerFileProvider"
             android:authorities="${applicationId}.installerfileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider_paths" />
-        </provider>
+            android:grantUriPermissions="true" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
