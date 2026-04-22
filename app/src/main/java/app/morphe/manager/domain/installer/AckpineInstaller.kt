@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
 import app.morphe.manager.R
+import kotlinx.coroutines.delay
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 import rikka.sui.Sui
@@ -83,8 +84,13 @@ class AckpineInstaller(private val app: Application) {
                             "installInternal attempt $attempt/$MAX_DEAD_SESSION_RETRIES: " +
                                     "dead session (likely Play Protect JIT scan), retrying…"
                         )
-                        // Small delay so PackageManager cleans up the abandoned session
-                        kotlinx.coroutines.delay(DEAD_SESSION_RETRY_DELAY_MS)
+                        // Cancel the dead session explicitly so Ackpine removes it from its
+                        // database before we create the next one. Without this, the old session
+                        // persists alongside the new one and both fight for the system's single
+                        // confirmation dialog slot - causing "finished by user" on every other
+                        // attempt.
+                        runCatching { session.cancel() }
+                        delay(DEAD_SESSION_RETRY_DELAY_MS)
                         continue
                     }
                     Log.w(TAG, "installInternal failed: ${failure.javaClass.simpleName} - ${failure.message}")
