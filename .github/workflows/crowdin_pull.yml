@@ -33,10 +33,6 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      - name: Push crowdin branch
-        run: |
-          git checkout -B crowdin
-          git push --force origin crowdin
   merge:
     name: Squash merge Crowdin into Dev
     if: github.event_name == 'workflow_dispatch'
