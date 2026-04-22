@@ -1,5 +1,5 @@
 [versions]
-ackpine = "0.22.5" # Before upgrading, verify that the 'android-tools' version matches the patcher
+ackpine = "0.22.6" # Before upgrading, verify that the 'android-tools' version matches the patcher
 about-libraries = "14.0.1"
 accompanist = "0.37.3"
 activity = "1.13.0"
@@ -35,7 +35,7 @@ navigation = "2.9.7"
 placeholder = "2.0.0"
 play-services-base = "18.10.0"
 preferences-datastore = "1.2.1"
-reorderable = "3.0.0"
+reorderable = "3.1.0"
 room-version = "2.8.4"
 scrollbars = "1.0.4"
 semver-parser = "3.0.0"

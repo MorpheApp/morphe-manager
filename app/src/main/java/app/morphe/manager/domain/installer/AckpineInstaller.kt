@@ -18,6 +18,12 @@ import ru.solrudev.ackpine.installer.parameters.PackageSource
 import ru.solrudev.ackpine.session.await
 import ru.solrudev.ackpine.session.Session
 import ru.solrudev.ackpine.session.parameters.Confirmation
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.CoroutineScope
+import ru.solrudev.ackpine.session.progress
 import ru.solrudev.ackpine.shizuku.ShizukuPlugin
 import ru.solrudev.ackpine.uninstaller.PackageUninstaller
 import ru.solrudev.ackpine.uninstaller.parameters.UninstallParameters
@@ -74,8 +80,16 @@ class AckpineInstaller(private val app: Application) {
                     .setPackageSource(PackageSource.LocalFile)
                     .build()
             )
+            // Collect session progress into logcat
+            val progressJob: Job = session.progress
+                .onEach { p ->
+                    Log.d(TAG, "session ${session.id} progress: ${p.progress}/${p.max}")
+                }
+                .launchIn(CoroutineScope(currentCoroutineContext()))
+
             return try {
                 val result = session.await()
+                progressJob.cancel()
                 val failure = extractFailure(result)
                 if (failure != null) {
                     if (failure.isDeadSession() && attempt <= MAX_DEAD_SESSION_RETRIES) {
@@ -89,6 +103,7 @@ class AckpineInstaller(private val app: Application) {
                         // persists alongside the new one and both fight for the system's single
                         // confirmation dialog slot - causing "finished by user" on every other
                         // attempt.
+                        progressJob.cancel()
                         runCatching { session.cancel() }
                         delay(DEAD_SESSION_RETRY_DELAY_MS)
                         continue
@@ -103,8 +118,10 @@ class AckpineInstaller(private val app: Application) {
                 }
                 failure
             } catch (_: CancellationException) {
+                progressJob.cancel()
                 throw InstallCancelledException()
             } catch (e: Exception) {
+                progressJob.cancel()
                 Log.w(TAG, "installInternal exception: ${e.message}", e)
                 throw e
             }
