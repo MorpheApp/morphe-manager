@@ -6,6 +6,8 @@
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
+import android.graphics.Color.argb
+import android.graphics.Color.colorToHSV
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -28,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -758,12 +759,19 @@ fun PatchItemCard(
                 } else Modifier
             ),
         shape = RoundedCornerShape(14.dp),
+        // Extract hue from accentColor, rebuild with fixed saturation/lightness
+        // so all cards share the same base tone but are distinguishable by hue only
         color = if (accentColor != null) {
-            lerp(
-                start = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                stop = accentColor.copy(alpha = 0.3f),
-                fraction = 0.25f
+            val hsv = FloatArray(3)
+            colorToHSV(
+                argb(255,
+                    (accentColor.red * 255).toInt(),
+                    (accentColor.green * 255).toInt(),
+                    (accentColor.blue * 255).toInt()
+                ),
+                hsv
             )
+            Color.hsl(hue = hsv[0], saturation = 0.35f, lightness = 0.55f, alpha = 0.2f)
         } else {
             MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
         }
