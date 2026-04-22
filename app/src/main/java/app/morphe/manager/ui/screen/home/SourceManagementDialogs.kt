@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -757,7 +758,15 @@ fun PatchItemCard(
                 } else Modifier
             ),
         shape = RoundedCornerShape(14.dp),
-        color = accentColor?.copy(alpha = 0.13f) ?: MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        color = if (accentColor != null) {
+            lerp(
+                start = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                stop = accentColor.copy(alpha = 0.3f),
+                fraction = 0.25f
+            )
+        } else {
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        }
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
