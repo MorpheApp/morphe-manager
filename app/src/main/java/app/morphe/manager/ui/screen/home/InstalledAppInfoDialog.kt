@@ -569,7 +569,7 @@ private fun StaggeredItem(
     val alpha by animateFloatAsState(
         targetValue = if (entered) 1f else 0f,
         animationSpec = tween(
-            durationMillis = 200,
+            durationMillis = 100,
             delayMillis = index * 60,
             easing = FastOutSlowInEasing
         ),
@@ -578,7 +578,7 @@ private fun StaggeredItem(
     val offsetY by animateFloatAsState(
         targetValue = if (entered) 0f else 28f,
         animationSpec = tween(
-            durationMillis = 200,
+            durationMillis = 100,
             delayMillis = index * 60,
             easing = FastOutSlowInEasing
         ),
