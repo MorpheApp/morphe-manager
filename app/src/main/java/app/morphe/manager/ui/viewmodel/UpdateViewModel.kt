@@ -14,7 +14,6 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.domain.installer.AckpineInstaller
 import app.morphe.manager.domain.installer.InstallCancelledException
 import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.PlayProtectDeadSessionException
 import ru.solrudev.ackpine.installer.InstallFailure
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
@@ -186,12 +185,6 @@ class UpdateViewModel(
                 } catch (_: InstallCancelledException) {
                     // User dismissed dialog — go back to CAN_INSTALL so they can retry
                     state = State.CAN_INSTALL
-                } catch (_: PlayProtectDeadSessionException) {
-                    // Play Protect killed every retry attempt
-                    installError = app.getString(R.string.install_play_protect_failed_message)
-                    canResumeDownload = false
-                    app.toast(installError)
-                    state = State.FAILED
                 } catch (e: Exception) {
                     val message = e.simpleMessage().orEmpty()
                     installError = message

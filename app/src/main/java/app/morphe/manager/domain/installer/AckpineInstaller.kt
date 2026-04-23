@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
 import app.morphe.manager.R
-import kotlinx.coroutines.delay
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 import rikka.sui.Sui
@@ -15,15 +14,9 @@ import ru.solrudev.ackpine.installer.PackageInstaller
 import ru.solrudev.ackpine.installer.parameters.InstallParameters
 import ru.solrudev.ackpine.installer.parameters.InstallerType
 import ru.solrudev.ackpine.installer.parameters.PackageSource
-import ru.solrudev.ackpine.session.await
 import ru.solrudev.ackpine.session.Session
+import ru.solrudev.ackpine.session.await
 import ru.solrudev.ackpine.session.parameters.Confirmation
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.CoroutineScope
-import ru.solrudev.ackpine.session.progress
 import ru.solrudev.ackpine.shizuku.ShizukuPlugin
 import ru.solrudev.ackpine.uninstaller.PackageUninstaller
 import ru.solrudev.ackpine.uninstaller.parameters.UninstallParameters
@@ -52,79 +45,34 @@ class AckpineInstaller(private val app: Application) {
      * Installs an APK using the standard Android PackageInstaller API via Ackpine.
      * Suspends until the user confirms or cancels the system dialog.
      *
-     * On Pixel devices, Play Protect may kill the installation session while running its JIT scan.
-     * This method automatically retries up to [MAX_DEAD_SESSION_RETRIES] times when that
-     * happens. On subsequent attempts Play Protect uses its cached scan result and no longer
-     * interrupts the session.
-     *
      * @return null on success, or a typed [InstallFailure] the caller can pattern-match on.
      * @throws InstallCancelledException when the user dismisses the system install dialog.
-     * @throws PlayProtectDeadSessionException after exhausting all retries due to Play Protect
-     *   killing the session every time (extremely unlikely in practice).
      */
     suspend fun installInternal(apkFile: File): InstallFailure? {
         require(apkFile.exists()) { "APK file does not exist: ${apkFile.path}" }
         Log.d(TAG, "installInternal: ${apkFile.name} (${apkFile.length()} bytes)")
-
-        var attempt = 0
-        while (true) {
-            attempt++
-            val session = packageInstaller.createSession(
-                InstallParameters.Builder(Uri.fromFile(apkFile))
-                    .setInstallerType(InstallerType.SESSION_BASED)
-                    .setConfirmation(Confirmation.IMMEDIATE)
-                    .setName(apkFile.name)
-                    // On API 33+, marking the APK as a local file disables "restricted settings"
-                    // which reduces Play Protect's JIT-scan interference on Pixel devices.
-                    // Silently ignored on API < 33.
-                    .setPackageSource(PackageSource.LocalFile)
-                    .build()
-            )
-            // Collect session progress into logcat
-            val progressJob: Job = session.progress
-                .onEach { p ->
-                    Log.d(TAG, "session ${session.id} progress: ${p.progress}/${p.max}")
-                }
-                .launchIn(CoroutineScope(currentCoroutineContext()))
-
-            return try {
-                val result = session.await()
-                progressJob.cancel()
-                val failure = extractFailure(result)
+        val session = packageInstaller.createSession(
+            InstallParameters.Builder(Uri.fromFile(apkFile))
+                .setInstallerType(InstallerType.SESSION_BASED)
+                .setConfirmation(Confirmation.IMMEDIATE)
+                .setName(apkFile.name)
+                // PackageSource.LocalFile disables "restricted settings" enforcement on API 33+
+                .setPackageSource(PackageSource.LocalFile)
+                .build()
+        )
+        return try {
+            extractFailure(session.await()).also { failure ->
                 if (failure != null) {
-                    if (failure.isDeadSession() && attempt <= MAX_DEAD_SESSION_RETRIES) {
-                        Log.w(
-                            TAG,
-                            "installInternal attempt $attempt/$MAX_DEAD_SESSION_RETRIES: " +
-                                    "dead session (likely Play Protect JIT scan), retrying…"
-                        )
-                        // Cancel the dead session explicitly so Ackpine removes it from its
-                        // database before we create the next one. Without this, the old session
-                        // persists alongside the new one and both fight for the system's single
-                        // confirmation dialog slot - causing "finished by user" on every other
-                        // attempt.
-                        progressJob.cancel()
-                        runCatching { session.cancel() }
-                        delay(DEAD_SESSION_RETRY_DELAY_MS)
-                        continue
-                    }
                     Log.w(TAG, "installInternal failed: ${failure.javaClass.simpleName} - ${failure.message}")
                 } else {
-                    if (attempt > 1) {
-                        Log.i(TAG, "installInternal succeeded on attempt $attempt: ${apkFile.name}")
-                    } else {
-                        Log.i(TAG, "installInternal succeeded: ${apkFile.name}")
-                    }
+                    Log.i(TAG, "installInternal succeeded: ${apkFile.name}")
                 }
-                failure
-            } catch (_: CancellationException) {
-                progressJob.cancel()
-                throw InstallCancelledException()
-            } catch (e: Exception) {
-                progressJob.cancel()
-                Log.w(TAG, "installInternal exception: ${e.message}", e)
-                throw e
             }
+        } catch (_: CancellationException) {
+            throw InstallCancelledException()
+        } catch (e: Exception) {
+            Log.w(TAG, "installInternal exception: ${e.message}", e)
+            throw e
         }
     }
 
@@ -231,30 +179,8 @@ class AckpineInstaller(private val app: Application) {
 
     companion object {
         internal const val SHIZUKU_PACKAGE = "moe.shizuku.privileged.api"
-
-        /**
-         * How many times to retry after a Play Protect dead-session kill before giving up.
-         * In practice the 2nd attempt almost always succeeds because Play Protect caches
-         * its scan result and no longer kills the session.
-         */
-        private const val MAX_DEAD_SESSION_RETRIES = 3
-
-        /** Delay between dead-session retries to let PackageManager clean up the old session. */
-        private const val DEAD_SESSION_RETRY_DELAY_MS = 500L
     }
 }
-
-/**
- * Returns true when this [InstallFailure] represents a "session is dead" error caused by
- * Play Protect killing the PackageInstaller session during its JIT scan on Pixel devices.
- *
- * Play Protect sends `STATUS_FAILURE_INVALID` with a message that contains "is dead" when it
- * abandons the session to take control of the installation flow itself. The check is intentionally
- * lenient (case-insensitive substring) to survive minor wording changes across Android versions.
- */
-fun InstallFailure.isDeadSession(): Boolean =
-    this is InstallFailure.Generic &&
-            message?.contains("is dead", ignoreCase = true) == true
 
 /** Thrown when the user dismissed the system install dialog. */
 class InstallCancelledException : Exception("Installation cancelled by user")
@@ -264,13 +190,3 @@ class UninstallCancelledException : Exception("Uninstall cancelled by user")
 
 /** Thrown when Ackpine reports a non-abort uninstall failure. */
 class UninstallFailedException(reason: String) : Exception(reason)
-
-/**
- * Thrown when Play Protect killed every install session and all retries were exhausted.
- * This is extremely unlikely in normal usage - after 1-2 retries Play Protect uses its
- * cached scan result and stops killing sessions.
- */
-class PlayProtectDeadSessionException(attempts: Int) : Exception(
-    "Play Protect killed the install session $attempts time(s). " +
-            "Try disabling Play Protect temporarily or use Shizuku."
-)

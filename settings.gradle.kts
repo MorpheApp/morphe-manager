@@ -31,7 +31,6 @@ dependencyResolutionManagement {
         mavenLocal()
         mavenCentral()
         google()
-        maven("https://central.sonatype.com/repository/maven-snapshots/")
         maven("https://jitpack.io") {
             metadataSources {
                 mavenPom()
