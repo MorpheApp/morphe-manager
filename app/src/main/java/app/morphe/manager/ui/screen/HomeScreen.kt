@@ -52,6 +52,9 @@ fun HomeScreen(
 
     // Dialog states
     val showInstalledAppDialog = remember { mutableStateOf<String?>(null) }
+    // Increments on every open - ensures key(packageName, openToken) forces fresh
+    // composition even when the same package is opened twice in a row
+    val installedAppDialogToken = remember { mutableIntStateOf(0) }
     val showUpdateDetailsDialog = remember { mutableStateOf(false) }
 
     // Patches dialog state (swipe-right on app card)
@@ -165,7 +168,7 @@ fun HomeScreen(
 
     // Installed App Info Dialog
     showInstalledAppDialog.value?.let { packageName ->
-        key(packageName) {
+        key(packageName, installedAppDialogToken.intValue) {
             InstalledAppInfoDialog(
                 packageName = packageName,
                 onDismiss = { showInstalledAppDialog.value = null },
@@ -229,7 +232,10 @@ fun HomeScreen(
                         android11BugActive = homeViewModel.android11BugActive,
                         installedApp = item.installedApp
                     )
-                    item.installedApp?.let { showInstalledAppDialog.value = it.currentPackageName }
+                    item.installedApp?.let {
+                        showInstalledAppDialog.value = it.currentPackageName
+                        installedAppDialogToken.intValue++
+                    }
                 },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                 onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },

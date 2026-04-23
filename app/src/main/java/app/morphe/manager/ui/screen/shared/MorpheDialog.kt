@@ -45,6 +45,7 @@ val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha 
  * @param dismissOnClickOutside Whether clicking outside dismisses the dialog
  * @param scrollable Whether to wrap content in verticalScroll. Set to false for LazyColumn. Default is true.
  * @param compactPadding Whether to use compact padding. Default is false.
+ * @param noPadding Whether to remove all padding and system bar insets. Default is false.
  * @param content Dialog content
  */
 @Composable
@@ -56,6 +57,8 @@ fun MorpheDialog(
     dismissOnClickOutside: Boolean = false,
     scrollable: Boolean = true,
     compactPadding: Boolean = false,
+    noPadding: Boolean = false,
+    onEntered: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val isDarkTheme = MaterialTheme.colorScheme.background.isDarkBackground()
@@ -63,6 +66,11 @@ fun MorpheDialog(
 
     LaunchedEffect(Unit) {
         visible = true
+        // Notify caller once the enter animation has completed
+        if (onEntered != null) {
+            kotlinx.coroutines.delay(MorpheDefaults.ANIMATION_DURATION.toLong())
+            onEntered()
+        }
     }
 
     Dialog(
@@ -118,6 +126,7 @@ fun MorpheDialog(
                         isDarkTheme = isDarkTheme,
                         scrollable = scrollable,
                         compactPadding = compactPadding,
+                        noPadding = noPadding,
                         content = content
                     )
                 }
@@ -137,6 +146,7 @@ private fun DialogContent(
     isDarkTheme: Boolean,
     scrollable: Boolean,
     compactPadding: Boolean,
+    noPadding: Boolean,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val isLandscape = isLandscape()
@@ -145,6 +155,23 @@ private fun DialogContent(
     val textColor = if (isDarkTheme) Color.White else Color.Black
     val secondaryTextColor =
         if (isDarkTheme) Color.White.copy(alpha = 0.7f) else Color.Black.copy(alpha = 0.7f)
+
+    // noPadding mode: fill entire screen, no insets, caller handles layout
+    if (noPadding) {
+        CompositionLocalProvider(
+            LocalDialogTextColor provides textColor,
+            LocalDialogSecondaryTextColor provides secondaryTextColor
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .pointerInput(Unit) { detectTapGestures { /* Consume clicks */ } }
+            ) {
+                content()
+            }
+        }
+        return
+    }
 
     Box(
         modifier = Modifier
