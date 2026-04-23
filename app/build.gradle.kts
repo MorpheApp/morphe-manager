@@ -62,11 +62,6 @@ dependencies {
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
 
-    // Exclude xmlpull as it's included in Android already
-    configurations.configureEach {
-        exclude(group = "xmlpull", module = "xmlpull")
-    }
-
     implementation(libs.androidx.documentfile)
 
     // Native processes
