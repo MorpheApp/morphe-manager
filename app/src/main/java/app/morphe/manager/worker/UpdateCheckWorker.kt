@@ -15,7 +15,6 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.tag
-import app.morphe.manager.worker.UpdateCheckInterval.HOURLY
 import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

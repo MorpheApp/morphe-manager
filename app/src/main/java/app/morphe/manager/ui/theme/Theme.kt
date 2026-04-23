@@ -150,15 +150,14 @@ private fun applyCustomAccent(
     accent: Color,
     darkTheme: Boolean
 ): ColorScheme {
-    val primary = accent
     val primaryContainer = accent.adjustLightness(if (darkTheme) 0.25f else -0.25f)
     val secondary = accent.adjustLightness(if (darkTheme) 0.15f else -0.15f)
     val secondaryContainer = accent.adjustLightness(if (darkTheme) 0.35f else -0.35f)
     val tertiary = accent.adjustLightness(if (darkTheme) -0.1f else 0.1f)
     val tertiaryContainer = accent.adjustLightness(if (darkTheme) 0.4f else -0.4f)
     return colorScheme.copy(
-        primary = primary,
-        onPrimary = primary.contrastingForeground(),
+        primary = accent,
+        onPrimary = accent.contrastingForeground(),
         primaryContainer = primaryContainer,
         onPrimaryContainer = primaryContainer.contrastingForeground(),
         secondary = secondary,
@@ -169,8 +168,8 @@ private fun applyCustomAccent(
         onTertiary = tertiary.contrastingForeground(),
         tertiaryContainer = tertiaryContainer,
         onTertiaryContainer = tertiaryContainer.contrastingForeground(),
-        surfaceTint = primary,
-        inversePrimary = primary.adjustLightness(if (darkTheme) -0.4f else 0.4f)
+        surfaceTint = accent,
+        inversePrimary = accent.adjustLightness(if (darkTheme) -0.4f else 0.4f)
     )
 }
 
