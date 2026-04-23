@@ -41,7 +41,7 @@ jobs:
           _JAVA_OPTIONS: "-Djava.awt.headless=true"
         run: |
           chmod +x ./gradlew
-          ./gradlew clean assembleRelease --stacktrace
+          ./gradlew assembleRelease --stacktrace
 
       - name: Rename APK
         run: |
