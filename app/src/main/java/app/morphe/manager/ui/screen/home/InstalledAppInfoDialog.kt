@@ -569,7 +569,7 @@ private fun StaggeredItem(
     val alpha by animateFloatAsState(
         targetValue = if (entered) 1f else 0f,
         animationSpec = tween(
-            durationMillis = 100,
+            durationMillis = 60,
             delayMillis = index * 60,
             easing = FastOutSlowInEasing
         ),
@@ -578,7 +578,7 @@ private fun StaggeredItem(
     val offsetY by animateFloatAsState(
         targetValue = if (entered) 0f else 28f,
         animationSpec = tween(
-            durationMillis = 100,
+            durationMillis = 60,
             delayMillis = index * 60,
             easing = FastOutSlowInEasing
         ),
@@ -1041,13 +1041,13 @@ private fun TileActionButton(
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
-        modifier = modifier.height(72.dp),
+        modifier = modifier.height(64.dp),
         shape = RoundedCornerShape(16.dp),
         color = containerColor,
         contentColor = contentColor
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(vertical = 12.dp, horizontal = 8.dp),
+            modifier = Modifier.fillMaxSize().padding(vertical = 8.dp, horizontal = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
