@@ -738,6 +738,7 @@ fun GreetingSection(
 @SuppressLint("FrequentlyChangingValue")
 @Composable
 fun MainAppsSection(
+    modifier: Modifier = Modifier,
     homeAppItems: List<HomeAppItem>,
     itemSpacing: Dp = 16.dp,
     onAppClick: (HomeAppItem) -> Unit,
@@ -752,9 +753,7 @@ fun MainAppsSection(
     searchVisible: Boolean = false,
     searchQuery: String = "",
     onSearchQueryChange: (String) -> Unit = {},
-    onBundlesClick: () -> Unit = {},
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    onBundlesClick: () -> Unit = {}
 ) {
     // Multi-select state - set of packageNames chosen for bulk hide
     var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
@@ -1076,14 +1075,13 @@ private fun ShowHiddenAppsButton(
  */
 @Composable
 internal fun MorpheEmptyState(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     title: String,
     subtitle: String? = null,
     actionIcon: ImageVector? = null,
     actionLabel: String? = null,
-    onAction: (() -> Unit)? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    onAction: (() -> Unit)? = null
 ) {
     Column(
         modifier = modifier
@@ -1137,11 +1135,10 @@ internal fun MorpheEmptyState(
  */
 @Composable
 private fun HomeSearchTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    requestFocus: Boolean = false,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    requestFocus: Boolean = false
 ) {
     val focusRequester = remember { FocusRequester() }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -1179,10 +1176,9 @@ private fun HomeSearchTextField(
  */
 @Composable
 private fun SelectableAppCard(
+    modifier: Modifier = Modifier,
     isSelected: Boolean,
     isMultiSelectMode: Boolean,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     val checkScale by animateFloatAsState(
@@ -1237,6 +1233,7 @@ private fun SelectableAppCard(
  */
 @Composable
 private fun DynamicAppCard(
+    modifier: Modifier = Modifier,
     item: HomeAppItem,
     isLoading: Boolean,
     hasUpdate: Boolean,
@@ -1247,9 +1244,7 @@ private fun DynamicAppCard(
     onGestureHintShown: () -> Unit,
     isSelected: Boolean = false,
     isMultiSelectMode: Boolean = false,
-    onLongPress: () -> Unit = {},
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    onLongPress: () -> Unit = {}
 ) {
     var showHideDialog by remember { mutableStateOf(false) }
     val density = LocalDensity.current
@@ -2526,12 +2521,11 @@ private fun HomeGlassPillButton(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun AppCardLayout(
+    modifier: Modifier = Modifier,
     gradientColors: List<Color>,
     enabled: Boolean,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit
 ) {
     val shape = RoundedCornerShape(24.dp)

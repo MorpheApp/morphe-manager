@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -252,12 +251,11 @@ fun BaseSettingsItem(
  */
 @Composable
 fun SettingsItem(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     title: String,
     description: String? = null,
     onClick: () -> Unit,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     showBorder: Boolean = false
 ) {
     BaseSettingsItem(
@@ -349,11 +347,10 @@ fun SectionTitle(
  */
 @Composable
 fun CardHeader(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     title: String,
-    description: String? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    description: String? = null
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Surface(
@@ -378,13 +375,12 @@ fun CardHeader(
  */
 @Composable
 fun ExpandableSection(
+    modifier: Modifier = Modifier,
     icon: ImageVector? = null,
     title: String,
     description: String,
     expanded: Boolean,
     onExpandChange: (Boolean) -> Unit,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     val rotationAngle by animateFloatAsState(

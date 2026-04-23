@@ -1,6 +1,5 @@
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalTextStyle
@@ -31,10 +30,9 @@ import org.koin.compose.koinInject
  */
 @Composable
 fun AppLabel(
+    modifier: Modifier = Modifier,
     packageInfo: PackageInfo? = null,
     packageName: String? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     defaultText: String? = stringResource(R.string.not_installed),
     preferredSource: AppDataSource = AppDataSource.INSTALLED,
@@ -143,7 +141,7 @@ private fun ResolvedAppLabel(
     LaunchedEffect(packageName, preferredSource) {
         // Use resolveAppData to get complete data in one call
         val resolvedData = appDataResolver.resolveAppData(packageName, preferredSource)
-        // If resolved name is same as package name and we have a default, use default
+        // If resolved name is same as package name, and we have a default, use default
         label = if (resolvedData.displayName == packageName && defaultText != null) {
             defaultText
         } else {

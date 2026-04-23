@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.home
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -347,6 +348,7 @@ fun RenameBundleDialog(
 /**
  * Dialog displaying patches from a bundle with search field and chips.
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundlePatchesDialog(
@@ -710,10 +712,10 @@ fun BundlePatchesDialog(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun PatchItemCard(
+    modifier: Modifier = Modifier,
     patch: PatchInfo,
     saveStateKey: String,
-    onExpertBadgeClick: (() -> Unit)? = null,
-    modifier: Modifier = Modifier
+    onExpertBadgeClick: (() -> Unit)? = null
 ) {
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
