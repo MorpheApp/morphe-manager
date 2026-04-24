@@ -1,3 +1,11 @@
+# [1.16.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.8...v1.16.0-dev.9) (2026-04-24)
+
+
+### Bug Fixes
+
+* Check primary ABI only in `isArmV7` to avoid false positives on `ArmV8` devices ([14729c2](https://github.com/MorpheApp/morphe-manager/commit/14729c28a73c0294152c3df1aabffdfb79974215))
+* Fall back to `Downloads` export on devices without `DocumentsUI` (Android TV) ([1e21c39](https://github.com/MorpheApp/morphe-manager/commit/1e21c3957e37351d1498b9894d2e4c3ee8154608))
+
 # [1.16.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.7...v1.16.0-dev.8) (2026-04-24)
 
 
