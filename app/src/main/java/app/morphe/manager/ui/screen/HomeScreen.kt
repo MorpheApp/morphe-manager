@@ -51,7 +51,6 @@ fun HomeScreen(
     val view = LocalView.current
 
     // Dialog states
-    val showInstalledAppDialog = remember { mutableStateOf<String?>(null) }
     val showUpdateDetailsDialog = remember { mutableStateOf(false) }
 
     // Patches dialog state (swipe-right on app card)
@@ -163,21 +162,6 @@ fun HomeScreen(
         )
     }
 
-    // Installed App Info Dialog
-    showInstalledAppDialog.value?.let { packageName ->
-        key(packageName) {
-            InstalledAppInfoDialog(
-                packageName = packageName,
-                onDismiss = { showInstalledAppDialog.value = null },
-                onTriggerPatchFlow = { originalPackageName ->
-                    showInstalledAppDialog.value = null
-                    homeViewModel.showPatchDialog(originalPackageName)
-                },
-                homeViewModel = homeViewModel
-            )
-        }
-    }
-
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
@@ -229,7 +213,9 @@ fun HomeScreen(
                         android11BugActive = homeViewModel.android11BugActive,
                         installedApp = item.installedApp
                     )
-                    item.installedApp?.let { showInstalledAppDialog.value = it.currentPackageName }
+                    item.installedApp?.let {
+                        homeViewModel.openInstalledAppInfo(it.currentPackageName)
+                    }
                 },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                 onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },

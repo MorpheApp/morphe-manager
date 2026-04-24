@@ -6,6 +6,8 @@
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
+import android.graphics.Color.argb
+import android.graphics.Color.colorToHSV
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -395,6 +397,16 @@ fun BundlePatchesDialog(
             .sortedBy { it.name }
     }
 
+    // Per-patch accent color: first non-null appIconColor across all compatible packages,
+    // converted from 0xRRGGBB to a full-opacity Compose Color. Null falls back to surfaceVariant.
+    val patchAccentColors: Map<String, Color> = remember(patches) {
+        patches.associate { patch ->
+            val rgb = patch.compatiblePackages
+                ?.firstNotNullOfOrNull { it.appIconColor }
+            patch.name to if (rgb != null) Color(rgb or (0xFF shl 24)) else Color.Unspecified
+        }
+    }
+
     val isFiltering = searchQuery.isNotBlank() || selectedPackages.isNotEmpty()
 
     MorpheDialog(
@@ -628,12 +640,15 @@ fun BundlePatchesDialog(
                     }
                 ) { patch ->
                     val context = LocalContext.current
+                    val accentColor = patchAccentColors[patch.name]
+                        ?.takeIf { it != Color.Unspecified }
                     PatchItemCard(
                         patch = patch,
                         saveStateKey = "bundle_${src.uid}",
                         onExpertBadgeClick = if (!patch.include) {
                             { context.toast(context.getString(R.string.sources_patch_expert_badge_tooltip)) }
                         } else null,
+                        accentColor = accentColor,
                         modifier = Modifier.animateItem(
                             fadeInSpec = tween(220),
                             fadeOutSpec = tween(180),
@@ -715,7 +730,8 @@ fun PatchItemCard(
     modifier: Modifier = Modifier,
     patch: PatchInfo,
     saveStateKey: String,
-    onExpertBadgeClick: (() -> Unit)? = null
+    onExpertBadgeClick: (() -> Unit)? = null,
+    accentColor: Color? = null
 ) {
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
@@ -733,6 +749,23 @@ fun PatchItemCard(
         label = "expand_rotation"
     )
 
+    // Cache the card background color: colorToHSV is a native call that allocates a FloatArray
+    val cardColor = remember(accentColor) {
+        if (accentColor != null) {
+            val hsv = FloatArray(3)
+            colorToHSV(
+                argb(
+                    255,
+                    (accentColor.red * 255).toInt(),
+                    (accentColor.green * 255).toInt(),
+                    (accentColor.blue * 255).toInt()
+                ),
+                hsv
+            )
+            Color.hsl(hue = hsv[0], saturation = 0.35f, lightness = 0.55f, alpha = 0.2f)
+        } else null
+    }
+
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -743,7 +776,7 @@ fun PatchItemCard(
                 } else Modifier
             ),
         shape = RoundedCornerShape(14.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        color = cardColor ?: MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),

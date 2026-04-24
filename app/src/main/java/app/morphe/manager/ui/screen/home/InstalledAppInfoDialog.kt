@@ -9,10 +9,10 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Launch
@@ -27,6 +27,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
@@ -35,6 +39,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.lerp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
@@ -42,13 +48,13 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.util.*
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import java.io.File
 
 data class AppliedPatchBundleUi(
     val uid: Int,
@@ -90,12 +96,27 @@ fun InstalledAppInfoDialog(
     val appUpdates by homeViewModel.appUpdatesAvailable.collectAsStateWithLifecycle()
     val hasUpdate = appUpdates[packageName] == true
 
+    // Accent color resolution order: bundle metadata (appIconColor) -> KnownApps.brandColor -> default.
+    // originalPackageName needed because metadata is keyed by original pkg, not patched.
+    val bundleAppMetadata by homeViewModel.bundleAppMetadataFlow.collectAsStateWithLifecycle()
+    val appAccentColor: Color by remember(packageName) {
+        derivedStateOf {
+            val orig = viewModel.installedApp?.originalPackageName ?: packageName
+            bundleAppMetadata[orig]?.downloadColor
+                ?: KnownApps.fromPackage(orig)?.brandColor
+                ?: KnownApps.DEFAULT_DOWNLOAD_COLOR
+        }
+    }
+
     // Dialog states
     val showUninstallConfirm = remember { mutableStateOf(false) }
     val showDeleteDialog = remember { mutableStateOf(false) }
     val showAppliedPatchesDialog = remember { mutableStateOf(false) }
     val showMountWarningDialog = remember { mutableStateOf(false) }
     val pendingMountWarningAction = remember { mutableStateOf<(() -> Unit)?>(null) }
+
+    // Content entrance animation
+    val entered = remember { mutableStateOf(false) }
 
     // Bundle data
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
@@ -228,107 +249,141 @@ fun InstalledAppInfoDialog(
         onDismissRequest = onDismiss,
         title = null,
         dismissOnClickOutside = true,
-        compactPadding = true,
-        footer = null
+        noPadding = true,
+        footer = null,
+        onEntered = { entered.value = true }
     ) {
         if (isLoading || installedApp == null) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
+                modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 LoadingIndicator()
             }
         } else {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(bottom = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // App Header Card
-                AppHeaderCard(
-                    appInfo = appInfo,
-                    packageName = packageName,
-                    installedApp = installedApp
-                )
+                // Hero header
+                item(contentType = "hero") {
+                    AppHeroHeader(
+                        appInfo = appInfo,
+                        packageName = packageName,
+                        installedApp = installedApp,
+                        accentColor = appAccentColor,
+                    )
+                }
+
+                // Stagger index counter: hero header is index 0 (animated independently),
+                // each subsequent visible item increments so the delay chain is always correct
+                // regardless of which optional banners are shown.
+                var staggerIndex = 1
 
                 // Deleted app warning banner
-                AnimatedVisibility(
-                    visible = viewModel.isAppDeleted,
-                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
-                ) {
-                    WarningBanner(
-                        icon = Icons.Outlined.Warning,
-                        title = stringResource(R.string.home_app_info_app_deleted_warning),
-                        description = stringResource(R.string.home_app_info_app_deleted_description),
-                        buttonText = stringResource(R.string.patch),
-                        buttonIcon = Icons.Outlined.AutoFixHigh,
-                        onClick = {
-                            onDismiss()
-                            onTriggerPatchFlow(installedApp.originalPackageName)
-                        },
-                        isError = true
-                    )
+                if (viewModel.isAppDeleted) {
+                    val idx = staggerIndex++
+                    item {
+                        StaggeredItem(entered = entered.value, index = idx) {
+                            WarningBanner(
+                                icon = Icons.Outlined.Warning,
+                                title = stringResource(R.string.home_app_info_app_deleted_warning),
+                                description = stringResource(R.string.home_app_info_app_deleted_description),
+                                buttonText = stringResource(R.string.patch),
+                                buttonIcon = Icons.Outlined.AutoFixHigh,
+                                onClick = {
+                                    onDismiss()
+                                    onTriggerPatchFlow(installedApp.originalPackageName)
+                                },
+                                isError = true,
+                                modifier = Modifier.padding(horizontal = 20.dp)
+                            )
+                        }
+                    }
                 }
 
                 // Update available banner
-                AnimatedVisibility(
-                    visible = hasUpdate && !viewModel.isAppDeleted,
-                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
-                ) {
-                    WarningBanner(
-                        icon = Icons.Outlined.Update,
-                        title = stringResource(R.string.home_app_info_patch_update_available),
-                        description = stringResource(R.string.home_app_info_patch_update_available_description),
-                        buttonText = stringResource(R.string.patch),
-                        buttonIcon = Icons.Outlined.AutoFixHigh,
-                        onClick = {
-                            onDismiss()
-                            onTriggerPatchFlow(installedApp.originalPackageName)
-                        },
-                        isError = false
-                    )
+                if (hasUpdate && !viewModel.isAppDeleted) {
+                    val idx = staggerIndex++
+                    item {
+                        StaggeredItem(entered = entered.value, index = idx) {
+                            WarningBanner(
+                                icon = Icons.Outlined.Update,
+                                title = stringResource(R.string.home_app_info_patch_update_available),
+                                description = stringResource(R.string.home_app_info_patch_update_available_description),
+                                buttonText = stringResource(R.string.patch),
+                                buttonIcon = Icons.Outlined.AutoFixHigh,
+                                onClick = {
+                                    onDismiss()
+                                    onTriggerPatchFlow(installedApp.originalPackageName)
+                                },
+                                isError = false,
+                                modifier = Modifier.padding(horizontal = 20.dp)
+                            )
+                        }
+                    }
                 }
 
                 // Info Section
-                InfoSection(
-                    installedApp = installedApp,
-                    appliedPatches = appliedPatches,
-                    bundlesUsedSummary = bundlesUsedSummary,
-                    onShowPatches = { showAppliedPatchesDialog.value = true }
-                )
+                val infoIdx = staggerIndex++
+                item {
+                    StaggeredItem(entered = entered.value, index = infoIdx) {
+                        InfoSection(
+                            installedApp = installedApp,
+                            appliedPatches = appliedPatches,
+                            bundlesUsedSummary = bundlesUsedSummary,
+                            onShowPatches = { showAppliedPatchesDialog.value = true },
+                        )
+                    }
+                }
 
                 // Actions Section
-                ActionsSection(
-                    viewModel = viewModel,
-                    installViewModel = installViewModel,
-                    installedApp = installedApp,
-                    availablePatches = availablePatches,
-                    isInstalling = isInstalling,
-                    mountOperation = mountOperation,
-                    hasUpdate = hasUpdate,
-                    onPatchClick = { handlePatchClick() },
-                    onUninstall = { showUninstallConfirm.value = true },
-                    onDelete = { showDeleteDialog.value = true },
-                    onExport = { exportSavedLauncher.launch(exportFileName) },
-                    onShowMountWarning = { action ->
-                        pendingMountWarningAction.value = action
-                        showMountWarningDialog.value = true
+                val actionsIdx = staggerIndex++
+                item {
+                    StaggeredItem(entered = entered.value, index = actionsIdx) {
+                        ActionsSection(
+                            viewModel = viewModel,
+                            installViewModel = installViewModel,
+                            installedApp = installedApp,
+                            availablePatches = availablePatches,
+                            isInstalling = isInstalling,
+                            mountOperation = mountOperation,
+                            hasUpdate = hasUpdate,
+                            accentColor = appAccentColor,
+                            onPatchClick = { handlePatchClick() },
+                            onUninstall = { showUninstallConfirm.value = true },
+                            onDelete = { showDeleteDialog.value = true },
+                            onExport = { exportSavedLauncher.launch(exportFileName) },
+                            onShowMountWarning = { action ->
+                                pendingMountWarningAction.value = action
+                                showMountWarningDialog.value = true
+                            },
+                            modifier = Modifier.padding(horizontal = 20.dp)
+                        )
                     }
-                )
+                }
 
                 // Info about saved APK availability
                 if (!viewModel.hasOriginalApk) {
-                    InfoBadge(
-                        text = stringResource(R.string.home_app_info_no_saved_apk),
-                        style = InfoBadgeStyle.Warning,
-                        icon = Icons.Outlined.Info,
-                        isExpanded = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    val idx = staggerIndex++
+                    item {
+                        StaggeredItem(entered = entered.value, index = idx) {
+                            InfoBadge(
+                                text = stringResource(R.string.home_app_info_no_saved_apk),
+                                style = InfoBadgeStyle.Warning,
+                                icon = Icons.Outlined.Info,
+                                isExpanded = true,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 20.dp)
+                            )
+                        }
+                    }
                 }
+
+                // Bottom nav bar padding
+                item { Spacer(Modifier.navigationBarsPadding()) }
             }
         }
     }
@@ -345,6 +400,7 @@ private fun WarningBanner(
     buttonText: String,
     buttonIcon: ImageVector,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     isError: Boolean = false
 ) {
     val containerColor = if (isError) {
@@ -359,102 +415,273 @@ private fun WarningBanner(
         MaterialTheme.colorScheme.onPrimaryContainer
     }
 
-    MorpheCard(
-        cornerRadius = 12.dp,
-        elevation = 2.dp
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(containerColor)
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Header with icon
+        Row(
+            modifier = Modifier.wrapContentWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = contentColor,
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                color = contentColor,
+                textAlign = TextAlign.Center
+            )
+        }
+
+        // Description
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodySmall,
+            color = contentColor.copy(alpha = 0.9f),
+            textAlign = TextAlign.Center
+        )
+
+        // Action button
+        PrimaryActionButton(
+            action = ActionItem(text = buttonText, icon = buttonIcon, onClick = onClick),
+            accentColor = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+/**
+ * Hero header for the app info dialog.
+ */
+@Composable
+private fun AppHeroHeader(
+    appInfo: PackageInfo?,
+    packageName: String,
+    installedApp: InstalledApp,
+    accentColor: Color,
+    modifier: Modifier = Modifier,
+) {
+    val onHero = MaterialTheme.colorScheme.onBackground
+    val chipBg = accentColor.copy(alpha = 0.18f)
+
+    // Entrance animations (progress-based: 0f -> 1f).
+    // One Float per visual group; alpha, offset and scale are derived via lerp
+    // to avoid redundant Recomposition subscribers.
+    var entered by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { entered = true }
+
+    // Icon: spring with overshoot (first thing the eye sees, no delay needed).
+    val iconProgress by animateFloatAsState(
+        targetValue = if (entered) 1f else 0f,
+        animationSpec = spring(dampingRatio = 0.55f, stiffness = 320f),
+        label = "heroIconProgress"
+    )
+
+    // Name + version share one clock; stagger handled inside graphicsLayer via lerp
+    val textProgress by animateFloatAsState(
+        targetValue = if (entered) 1f else 0f,
+        animationSpec = tween(durationMillis = 260, delayMillis = 60, easing = EaseOutCubic),
+        label = "heroTextProgress"
+    )
+
+    // Both chips share one clock; chip 2 uses a clamped sub-range for its offset
+    val chipsProgress by animateFloatAsState(
+        targetValue = if (entered) 1f else 0f,
+        animationSpec = tween(durationMillis = 240, delayMillis = 160, easing = EaseOutBack),
+        label = "heroChipsProgress"
+    )
+
+    Box(modifier = modifier.fillMaxWidth()) {
+        // Simple tinted background
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .matchParentSize()
+                .background(accentColor.copy(alpha = 0.12f))
+        )
+        // Radial glow from center-top for depth
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .matchParentSize()
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            accentColor.copy(alpha = 0.18f),
+                            Color.Transparent
+                        ),
+                        radius = 700f
+                    )
+                )
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(containerColor)
-                .padding(12.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .statusBarsPadding()
+                .padding(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 16.dp)
         ) {
-            // Header with icon
             Row(
-                modifier = Modifier.wrapContentWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Icon(
-                    imageVector = icon,
+                // Animated app icon
+                AppIcon(
+                    packageInfo = appInfo,
                     contentDescription = null,
-                    tint = contentColor,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier
+                        .size(88.dp)
+                        .clip(RoundedCornerShape(22.dp))
+                        .graphicsLayer {
+                            val s = lerp(0.6f, 1f, iconProgress)
+                            scaleX = s
+                            scaleY = s
+                            alpha = iconProgress.coerceIn(0f, 1f)
+                        }
                 )
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = contentColor,
-                    textAlign = TextAlign.Center
-                )
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    // Animated app name (leads textProgress)
+                    Box(
+                        modifier = Modifier.graphicsLayer {
+                            translationX = lerp(40f, 0f, textProgress)
+                            alpha = textProgress.coerceIn(0f, 1f)
+                        }
+                    ) {
+                        AppLabel(
+                            packageInfo = appInfo,
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 22.sp,
+                                color = onHero
+                            ),
+                            defaultText = packageName
+                        )
+                    }
+                    // Animated version (slightly behind name via sub-range)
+                    Text(
+                        text = appInfo?.versionName?.let { "v$it" } ?: installedApp.version,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = onHero.copy(alpha = 0.50f),
+                        modifier = Modifier.graphicsLayer {
+                            val p = ((textProgress - 0.15f) / 0.85f).coerceIn(0f, 1f)
+                            translationX = lerp(40f, 0f, p)
+                            alpha = p
+                        }
+                    )
+                }
             }
 
-            // Description
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = contentColor.copy(alpha = 0.9f),
-                textAlign = TextAlign.Center
-            )
+            Spacer(Modifier.height(14.dp))
 
-            // Action button
-            ActionButton(
-                text = buttonText,
-                icon = buttonIcon,
-                onClick = onClick,
-                isPrimary = true,
-                isHighlighted = true,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                val (chipIcon, chipLabel) = when (installedApp.installType) {
+                    InstallType.MOUNT   -> Icons.Outlined.Link to R.string.mount
+                    InstallType.SHIZUKU -> Icons.Outlined.Terminal to R.string.home_app_info_install_type_shizuku
+                    InstallType.CUSTOM  -> Icons.Outlined.Build to R.string.home_app_info_install_type_custom_installer
+                    InstallType.SAVED   -> Icons.Outlined.Save to R.string.saved
+                    InstallType.DEFAULT -> Icons.Outlined.InstallMobile to R.string.home_app_info_install_type_system_installer
+                }
+                // Animated chip 1
+                Box(
+                    modifier = Modifier.graphicsLayer {
+                        translationY = lerp(20f, 0f, chipsProgress)
+                        alpha = chipsProgress.coerceIn(0f, 1f)
+                    }
+                ) {
+                    InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
+                }
+                // Animated chip 2 (sub-range: starts when chip1 is 30% done)
+                installedApp.patchedAt?.let { ts ->
+                    Box(
+                        modifier = Modifier.graphicsLayer {
+                            val p = ((chipsProgress - 0.3f) / 0.7f).coerceIn(0f, 1f)
+                            translationY = lerp(20f, 0f, p)
+                            alpha = p
+                        }
+                    ) {
+                        InfoChip(
+                            icon = Icons.Outlined.Schedule,
+                            text = getRelativeTimeString(ts),
+                            bg = chipBg,
+                            fg = onHero
+                        )
+                    }
+                }
+            }
         }
     }
 }
 
+/**
+ * Wraps content with a staggered entrance animation.
+ * Uses a single progress float (0 to 1); alpha, offsetY and scale are
+ * derived via lerp - one Recomposition subscriber instead of three.
+ * Each item appears [index] * 60ms after [entered] becomes true.
+ */
 @Composable
-private fun AppHeaderCard(
-    appInfo: PackageInfo?,
-    packageName: String,
-    installedApp: InstalledApp,
+private fun StaggeredItem(
+    entered: Boolean,
+    index: Int,
+    content: @Composable () -> Unit
 ) {
-    MorpheCard(
-        cornerRadius = 16.dp,
-        elevation = 2.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // App icon
-            AppIcon(
-                packageInfo = appInfo,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp)
-            )
-
-            // App details
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                AppLabel(
-                    packageInfo = appInfo,
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                    defaultText = packageName
-                )
-
-                Text(
-                    text = appInfo?.versionName?.let { "v$it" } ?: installedApp.version,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current
-                )
-            }
+    val progress by animateFloatAsState(
+        targetValue = if (entered) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 280,
+            delayMillis = index * 60,
+            easing = EaseOutCubic
+        ),
+        label = "itemProgress$index"
+    )
+    Box(
+        modifier = Modifier.graphicsLayer {
+            alpha = progress
+            translationY = lerp(28f, 0f, progress)
+            val s = lerp(0.97f, 1f, progress)
+            scaleX = s
+            scaleY = s
         }
+    ) {
+        content()
+    }
+}
+
+@Composable
+private fun InfoChip(icon: ImageVector, text: String, bg: Color, fg: Color) {
+    Row(
+        modifier = Modifier
+            .clip(RoundedCornerShape(50))
+            .background(bg)
+            .padding(horizontal = 10.dp, vertical = 5.dp),
+        horizontalArrangement = Arrangement.spacedBy(5.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(icon, null, tint = fg, modifier = Modifier.size(13.dp))
+        Text(
+            text,
+            style = MaterialTheme.typography.labelSmall,
+            color = fg,
+            fontWeight = FontWeight.Medium,
+            maxLines = 1
+        )
     }
 }
 
@@ -463,96 +690,152 @@ private fun InfoSection(
     installedApp: InstalledApp,
     appliedPatches: Map<Int, Set<String>>?,
     bundlesUsedSummary: String,
-    onShowPatches: () -> Unit
+    onShowPatches: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val totalPatches = appliedPatches?.values?.sumOf { it.size } ?: 0
+    val context = LocalContext.current
 
-    MorpheCard(
-        cornerRadius = 16.dp,
-        elevation = 2.dp
+    // APK size from sourceDir
+    val apkSize = remember(installedApp.currentPackageName) {
+        try {
+            val pm = context.packageManager
+            val info = pm.getPackageInfo(installedApp.currentPackageName, 0)
+
+            val bytes = File(
+                info.applicationInfo?.sourceDir ?: return@remember null
+            ).length()
+
+            formatBytes(bytes)
+        } catch (_: Exception) { null }
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            // Package name
+        InfoRow(
+            icon = Icons.Outlined.Inventory2,
+            label = stringResource(R.string.package_name),
+            value = installedApp.currentPackageName
+        )
+
+        if (installedApp.originalPackageName != installedApp.currentPackageName) {
             InfoRow(
-                label = stringResource(R.string.package_name),
-                value = installedApp.currentPackageName
+                icon = Icons.Outlined.Category,
+                label = stringResource(R.string.home_app_info_original_package_name),
+                value = installedApp.originalPackageName
             )
-
-            // Original package (if different)
-            if (installedApp.originalPackageName != installedApp.currentPackageName) {
-                MorpheSettingsDivider(fullWidth = true)
-                InfoRow(
-                    label = stringResource(R.string.home_app_info_original_package_name),
-                    value = installedApp.originalPackageName
-                )
-            }
-
-            MorpheSettingsDivider(fullWidth = true)
-
-            // Install type
-            InfoRow(
-                label = stringResource(R.string.home_app_info_install_type),
-                value = stringResource(installedApp.installType.stringResource)
-            )
-
-            // Patched date (if available)
-            installedApp.patchedAt?.let { timestamp ->
-                MorpheSettingsDivider(fullWidth = true)
-                InfoRow(
-                    label = stringResource(R.string.home_app_info_patched_at),
-                    value = getRelativeTimeString(timestamp)
-                )
-            }
-
-            // Applied patches with icon button
-            if (totalPatches > 0) {
-                MorpheSettingsDivider(fullWidth = true)
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.home_app_info_applied_patches),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = pluralStringResource(
-                                R.plurals.patch_count,
-                                totalPatches,
-                                totalPatches
-                            ),
-                            style = MaterialTheme.typography.bodySmall,
-                            fontWeight = FontWeight.Medium,
-                        )
-                    }
-                    ActionPillButton(
-                        onClick = onShowPatches,
-                        icon = Icons.AutoMirrored.Outlined.List,
-                        contentDescription = stringResource(R.string.view)
-                    )
-                }
-            }
-
-            // Bundles used
-            if (bundlesUsedSummary.isNotBlank()) {
-                MorpheSettingsDivider(fullWidth = true)
-                InfoRow(
-                    label = stringResource(R.string.home_app_info_patch_source_used),
-                    value = bundlesUsedSummary
-                )
-            }
         }
+
+        if (apkSize != null) {
+            InfoRow(
+                icon = Icons.Outlined.SdCard,
+                label = stringResource(R.string.home_app_info_apk_size),
+                value = apkSize
+            )
+        }
+
+        if (totalPatches > 0) {
+            InfoRowWithAction(
+                icon = Icons.Outlined.DoneAll,
+                label = stringResource(R.string.home_app_info_applied_patches),
+                value = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
+                onAction = onShowPatches
+            )
+        }
+
+        if (bundlesUsedSummary.isNotBlank()) {
+            InfoRow(
+                icon = Icons.Outlined.Source,
+                label = stringResource(R.string.home_app_info_patch_source_used),
+                value = bundlesUsedSummary
+            )
+        }
+    }
+}
+
+@Composable
+private fun InfoRow(
+    icon: ImageVector,
+    label: String,
+    value: String,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(14.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(18.dp),
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+        )
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(1.dp)
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f),
+                fontWeight = FontWeight.Medium
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+    }
+}
+
+@Composable
+private fun InfoRowWithAction(
+    icon: ImageVector,
+    label: String,
+    value: String,
+    onAction: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(14.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(18.dp),
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+        )
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(1.dp)
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f),
+                fontWeight = FontWeight.Medium
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+        ActionPillButton(
+            onClick = onAction,
+            icon = Icons.AutoMirrored.Outlined.List,
+            contentDescription = stringResource(R.string.view)
+        )
     }
 }
 
@@ -565,11 +848,13 @@ private fun ActionsSection(
     isInstalling: Boolean,
     mountOperation: InstallViewModel.MountOperation?,
     hasUpdate: Boolean,
+    accentColor: Color,
     onPatchClick: () -> Unit,
     onUninstall: () -> Unit,
     onDelete: () -> Unit,
     onExport: () -> Unit,
-    onShowMountWarning: (action: () -> Unit) -> Unit
+    onShowMountWarning: (action: () -> Unit) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     // Collect all available actions
     val primaryActions = mutableListOf<ActionItem>()
@@ -610,8 +895,8 @@ private fun ActionsSection(
         )
     }
 
-    when {
-        installedApp.installType == InstallType.SAVED && viewModel.hasSavedCopy -> {
+    when (installedApp.installType) {
+        InstallType.SAVED -> if (viewModel.hasSavedCopy) {
             val installText = if (viewModel.isInstalledOnDevice) {
                 stringResource(R.string.reinstall)
             } else {
@@ -653,7 +938,7 @@ private fun ActionsSection(
                 )
             )
         }
-        installedApp.installType == InstallType.MOUNT -> {
+        InstallType.MOUNT -> {
             val isMountLoading = mountOperation != null
             if (viewModel.isMounted) {
                 // Remount button
@@ -700,6 +985,7 @@ private fun ActionsSection(
                 )
             }
         }
+        else -> Unit
     }
 
     // Destructive actions
@@ -725,20 +1011,36 @@ private fun ActionsSection(
         )
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
         // Primary actions row
         if (primaryActions.isNotEmpty()) {
-            ActionButtonsRow(actions = primaryActions, isPrimary = true)
+            primaryActions.forEach { action ->
+                PrimaryActionButton(
+                    action = action,
+                    accentColor = accentColor,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
 
-        // Secondary actions row
-        if (secondaryActions.isNotEmpty()) {
-            ActionButtonsRow(actions = secondaryActions, isPrimary = false)
-        }
-
-        // Destructive actions row
-        if (destructiveActions.isNotEmpty()) {
-            ActionButtonsRow(actions = destructiveActions, isPrimary = false)
+        // Secondary + destructive - compact tile grid (2 per row)
+        val tileActions = secondaryActions + destructiveActions
+        if (tileActions.isNotEmpty()) {
+            tileActions.chunked(2).forEach { rowActions ->
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    rowActions.forEach { action ->
+                        TileActionButton(
+                            action = action,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    // Fill empty slot if odd count
+                    if (rowActions.size == 1) Spacer(Modifier.weight(1f))
+                }
+            }
         }
     }
 }
@@ -752,92 +1054,89 @@ private data class ActionItem(
     val isLoading: Boolean = false
 )
 
+/** Shared loading/icon content used by action buttons. */
 @Composable
-private fun ActionButtonsRow(
-    actions: List<ActionItem>,
-    isPrimary: Boolean
+private fun LoadingOrIcon(isLoading: Boolean, action: ActionItem, tint: Color) {
+    if (isLoading) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(22.dp),
+            strokeWidth = 2.dp,
+            color = tint
+        )
+    } else {
+        Icon(action.icon, null, modifier = Modifier.size(22.dp))
+    }
+}
+
+/** Full-width primary button. */
+@Composable
+private fun PrimaryActionButton(
+    action: ActionItem,
+    accentColor: Color,
+    modifier: Modifier = Modifier
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        actions.chunked(2).forEach { rowActions ->
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                rowActions.forEach { action ->
-                    ActionButton(
-                        text = action.text,
-                        icon = action.icon,
-                        onClick = action.onClick,
-                        enabled = action.enabled,
-                        isDestructive = action.isDestructive,
-                        isPrimary = isPrimary && !action.isDestructive,
-                        isLoading = action.isLoading,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-            }
+    val onAccent = if (accentColor.luminance() > 0.35f) Color(0xFF1A1A1A) else Color.White
+    Surface(
+        onClick = action.onClick,
+        enabled = action.enabled && !action.isLoading,
+        modifier = modifier.height(56.dp),
+        shape = RoundedCornerShape(16.dp),
+        color = accentColor,
+        contentColor = onAccent
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            LoadingOrIcon(action.isLoading, action, onAccent)
+            Spacer(Modifier.width(10.dp))
+            Text(
+                text = action.text,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }
 
+/** Square-ish tile button - icon on top, label below. Used for secondary/destructive actions. */
 @Composable
-private fun ActionButton(
-    text: String,
-    icon: ImageVector,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    isDestructive: Boolean = false,
-    isPrimary: Boolean = false,
-    isLoading: Boolean = false,
-    isHighlighted: Boolean = false
+private fun TileActionButton(
+    action: ActionItem,
+    modifier: Modifier = Modifier
 ) {
     val containerColor = when {
-        isHighlighted -> MaterialTheme.colorScheme.primary
-        isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
-        isPrimary -> MaterialTheme.colorScheme.primaryContainer
-        !enabled -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-        else -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.7f)
+        action.isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.45f)
+        !action.enabled -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+        else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
     }
-
     val contentColor = when {
-        isHighlighted -> MaterialTheme.colorScheme.onPrimary
-        isDestructive -> MaterialTheme.colorScheme.error
-        isPrimary -> MaterialTheme.colorScheme.onPrimaryContainer
-        !enabled -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
-        else -> MaterialTheme.colorScheme.onSecondaryContainer
+        action.isDestructive -> MaterialTheme.colorScheme.error
+        !action.enabled -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
+        else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f)
     }
 
     Surface(
-        onClick = onClick,
-        enabled = enabled && !isLoading,
-        modifier = modifier.height(52.dp),
-        shape = RoundedCornerShape(14.dp),
+        onClick = action.onClick,
+        enabled = action.enabled && !action.isLoading,
+        modifier = modifier.height(56.dp),
+        shape = RoundedCornerShape(16.dp),
         color = containerColor,
         contentColor = contentColor
     ) {
-        Row(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.fillMaxSize().padding(vertical = 6.dp, horizontal = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            if (isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(20.dp),
-                    strokeWidth = 2.dp,
-                    color = contentColor
-                )
-            } else {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    modifier = Modifier.size(20.dp)
-                )
-            }
-            Spacer(modifier = Modifier.width(6.dp))
+            LoadingOrIcon(action.isLoading, action, contentColor)
+            Spacer(Modifier.height(5.dp))
             Text(
-                text = text,
-                style = MaterialTheme.typography.labelLarge,
+                text = action.text,
+                style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis

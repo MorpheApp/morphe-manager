@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -178,6 +179,21 @@ class HomeViewModel(
     var showAddSourceDialog by mutableStateOf(false)
     var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
     var showRenameBundleDialog by mutableStateOf(false)
+
+    // Installed App Info dialog state
+    var showInstalledAppInfoDialog: String? by mutableStateOf(null)
+        private set
+    var installedAppDialogToken by mutableIntStateOf(0)
+        private set
+
+    fun openInstalledAppInfo(packageName: String) {
+        showInstalledAppInfoDialog = packageName
+        installedAppDialogToken++
+    }
+
+    fun dismissInstalledAppInfo() {
+        showInstalledAppInfoDialog = null
+    }
 
     // Deep link: pending bundle to add via confirmation dialog
     var deepLinkPendingBundle by mutableStateOf<DeepLinkBundle?>(null)

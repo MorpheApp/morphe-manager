@@ -242,6 +242,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
+    <string name="home_app_info_apk_size">APK size</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
