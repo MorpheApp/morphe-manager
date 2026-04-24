@@ -985,6 +985,7 @@ fun MainAppsSection(
                                             HiddenSearchAppCard(
                                                 item = item,
                                                 onUnhide = { onUnhideApp(item.packageName) },
+                                                onAppClick = { onAppClick(item) },
                                                 onShowPatches = { onShowPatches(item) },
                                                 modifier = Modifier.animateItem()
                                             )
@@ -1701,6 +1702,7 @@ private fun HiddenSearchAppCard(
     modifier: Modifier = Modifier,
     item: HomeAppItem,
     onUnhide: () -> Unit,
+    onAppClick: () -> Unit,
     onShowPatches: () -> Unit
 ) {
     val density = LocalDensity.current
@@ -1761,7 +1763,7 @@ private fun HiddenSearchAppCard(
                     packageInfo = item.packageInfo,
                     displayName = item.displayName,
                     gradientColors = item.gradientColors,
-                    onClick = {},
+                    onClick = onAppClick,
                     hasUpdate = item.hasUpdate,
                     isAppDeleted = item.isDeleted,
                     onLongClick = {}
@@ -1772,7 +1774,7 @@ private fun HiddenSearchAppCard(
                     displayName = item.displayName,
                     packageInfo = item.packageInfo,
                     gradientColors = item.gradientColors,
-                    onClick = {},
+                    onClick = onAppClick,
                     onLongClick = {}
                 )
             }
