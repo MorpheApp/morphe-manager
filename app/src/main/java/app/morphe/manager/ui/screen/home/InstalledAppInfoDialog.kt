@@ -261,129 +261,241 @@ fun InstalledAppInfoDialog(
                 LoadingIndicator()
             }
         } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                // Hero header
-                item(contentType = "hero") {
-                    AppHeroHeader(
-                        appInfo = appInfo,
-                        packageName = packageName,
-                        installedApp = installedApp,
-                        accentColor = appAccentColor,
-                    )
-                }
-
-                // Stagger index counter: hero header is index 0 (animated independently),
-                // each subsequent visible item increments so the delay chain is always correct
-                // regardless of which optional banners are shown.
-                var staggerIndex = 1
-
-                // Deleted app warning banner
-                if (viewModel.isAppDeleted) {
-                    val idx = staggerIndex++
-                    item {
-                        StaggeredItem(entered = entered.value, index = idx) {
-                            WarningBanner(
-                                icon = Icons.Outlined.Warning,
-                                title = stringResource(R.string.home_app_info_app_deleted_warning),
-                                description = stringResource(R.string.home_app_info_app_deleted_description),
-                                buttonText = stringResource(R.string.patch),
-                                buttonIcon = Icons.Outlined.AutoFixHigh,
-                                onClick = {
-                                    onDismiss()
-                                    onTriggerPatchFlow(installedApp.originalPackageName)
-                                },
-                                isError = true,
-                                modifier = Modifier.padding(horizontal = 20.dp)
+            val windowSize = rememberWindowSize()
+            if (windowSize.useTwoColumnLayout) {
+                // Tablet layout: left column has header + info, right column has actions
+                Row(modifier = Modifier.fillMaxSize()) {
+                    // Left column: header + info section
+                    LazyColumn(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight(),
+                        contentPadding = PaddingValues(bottom = 24.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        item(contentType = "hero") {
+                            AppHeroHeader(
+                                appInfo = appInfo,
+                                packageName = packageName,
+                                installedApp = installedApp,
+                                accentColor = appAccentColor,
+                                compact = true,
                             )
+                        }
+                        item {
+                            StaggeredItem(entered = entered.value, index = 1) {
+                                InfoSection(
+                                    installedApp = installedApp,
+                                    appliedPatches = appliedPatches,
+                                    bundlesUsedSummary = bundlesUsedSummary,
+                                    onShowPatches = { showAppliedPatchesDialog.value = true },
+                                )
+                            }
+                        }
+                        item { Spacer(Modifier.navigationBarsPadding()) }
+                    }
+
+                    // Right column: banners + actions centered vertically
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .padding(horizontal = 20.dp)
+                            .navigationBarsPadding(),
+                        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        if (viewModel.isAppDeleted) {
+                            StaggeredItem(entered = entered.value, index = 1) {
+                                WarningBanner(
+                                    icon = Icons.Outlined.Warning,
+                                    title = stringResource(R.string.home_app_info_app_deleted_warning),
+                                    description = stringResource(R.string.home_app_info_app_deleted_description),
+                                    buttonText = stringResource(R.string.patch),
+                                    buttonIcon = Icons.Outlined.AutoFixHigh,
+                                    onClick = {
+                                        onDismiss()
+                                        onTriggerPatchFlow(installedApp.originalPackageName)
+                                    },
+                                    isError = true
+                                )
+                            }
+                        }
+                        if (hasUpdate && !viewModel.isAppDeleted) {
+                            StaggeredItem(entered = entered.value, index = 2) {
+                                WarningBanner(
+                                    icon = Icons.Outlined.Update,
+                                    title = stringResource(R.string.home_app_info_patch_update_available),
+                                    description = stringResource(R.string.home_app_info_patch_update_available_description),
+                                    buttonText = stringResource(R.string.patch),
+                                    buttonIcon = Icons.Outlined.AutoFixHigh,
+                                    onClick = {
+                                        onDismiss()
+                                        onTriggerPatchFlow(installedApp.originalPackageName)
+                                    },
+                                    isError = false
+                                )
+                            }
+                        }
+                        StaggeredItem(entered = entered.value, index = 3) {
+                            ActionsSection(
+                                viewModel = viewModel,
+                                installViewModel = installViewModel,
+                                installedApp = installedApp,
+                                availablePatches = availablePatches,
+                                isInstalling = isInstalling,
+                                mountOperation = mountOperation,
+                                hasUpdate = hasUpdate,
+                                accentColor = appAccentColor,
+                                onPatchClick = { handlePatchClick() },
+                                onUninstall = { showUninstallConfirm.value = true },
+                                onDelete = { showDeleteDialog.value = true },
+                                onExport = { exportSavedLauncher.launch(exportFileName) },
+                                onShowMountWarning = { action ->
+                                    pendingMountWarningAction.value = action
+                                    showMountWarningDialog.value = true
+                                }
+                            )
+                        }
+                        if (!viewModel.hasOriginalApk) {
+                            StaggeredItem(entered = entered.value, index = 4) {
+                                InfoBadge(
+                                    text = stringResource(R.string.home_app_info_no_saved_apk),
+                                    style = InfoBadgeStyle.Warning,
+                                    icon = Icons.Outlined.Info,
+                                    isExpanded = true,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            }
                         }
                     }
                 }
-
-                // Update available banner
-                if (hasUpdate && !viewModel.isAppDeleted) {
-                    val idx = staggerIndex++
-                    item {
-                        StaggeredItem(entered = entered.value, index = idx) {
-                            WarningBanner(
-                                icon = Icons.Outlined.Update,
-                                title = stringResource(R.string.home_app_info_patch_update_available),
-                                description = stringResource(R.string.home_app_info_patch_update_available_description),
-                                buttonText = stringResource(R.string.patch),
-                                buttonIcon = Icons.Outlined.AutoFixHigh,
-                                onClick = {
-                                    onDismiss()
-                                    onTriggerPatchFlow(installedApp.originalPackageName)
-                                },
-                                isError = false,
-                                modifier = Modifier.padding(horizontal = 20.dp)
-                            )
-                        }
-                    }
-                }
-
-                // Info Section
-                val infoIdx = staggerIndex++
-                item {
-                    StaggeredItem(entered = entered.value, index = infoIdx) {
-                        InfoSection(
+            } else {
+                // Single-column layout for phones
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(bottom = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    // Hero header
+                    item(contentType = "hero") {
+                        AppHeroHeader(
+                            appInfo = appInfo,
+                            packageName = packageName,
                             installedApp = installedApp,
-                            appliedPatches = appliedPatches,
-                            bundlesUsedSummary = bundlesUsedSummary,
-                            onShowPatches = { showAppliedPatchesDialog.value = true },
-                        )
-                    }
-                }
-
-                // Actions Section
-                val actionsIdx = staggerIndex++
-                item {
-                    StaggeredItem(entered = entered.value, index = actionsIdx) {
-                        ActionsSection(
-                            viewModel = viewModel,
-                            installViewModel = installViewModel,
-                            installedApp = installedApp,
-                            availablePatches = availablePatches,
-                            isInstalling = isInstalling,
-                            mountOperation = mountOperation,
-                            hasUpdate = hasUpdate,
                             accentColor = appAccentColor,
-                            onPatchClick = { handlePatchClick() },
-                            onUninstall = { showUninstallConfirm.value = true },
-                            onDelete = { showDeleteDialog.value = true },
-                            onExport = { exportSavedLauncher.launch(exportFileName) },
-                            onShowMountWarning = { action ->
-                                pendingMountWarningAction.value = action
-                                showMountWarningDialog.value = true
-                            },
-                            modifier = Modifier.padding(horizontal = 20.dp)
                         )
                     }
-                }
 
-                // Info about saved APK availability
-                if (!viewModel.hasOriginalApk) {
-                    val idx = staggerIndex++
+                    // Stagger index counter: hero header is index 0 (animated independently),
+                    // each subsequent visible item increments so the delay chain is always correct
+                    // regardless of which optional banners are shown.
+                    var staggerIndex = 1
+
+                    // Deleted app warning banner
+                    if (viewModel.isAppDeleted) {
+                        val idx = staggerIndex++
+                        item {
+                            StaggeredItem(entered = entered.value, index = idx) {
+                                WarningBanner(
+                                    icon = Icons.Outlined.Warning,
+                                    title = stringResource(R.string.home_app_info_app_deleted_warning),
+                                    description = stringResource(R.string.home_app_info_app_deleted_description),
+                                    buttonText = stringResource(R.string.patch),
+                                    buttonIcon = Icons.Outlined.AutoFixHigh,
+                                    onClick = {
+                                        onDismiss()
+                                        onTriggerPatchFlow(installedApp.originalPackageName)
+                                    },
+                                    isError = true,
+                                    modifier = Modifier.padding(horizontal = 20.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    // Update available banner
+                    if (hasUpdate && !viewModel.isAppDeleted) {
+                        val idx = staggerIndex++
+                        item {
+                            StaggeredItem(entered = entered.value, index = idx) {
+                                WarningBanner(
+                                    icon = Icons.Outlined.Update,
+                                    title = stringResource(R.string.home_app_info_patch_update_available),
+                                    description = stringResource(R.string.home_app_info_patch_update_available_description),
+                                    buttonText = stringResource(R.string.patch),
+                                    buttonIcon = Icons.Outlined.AutoFixHigh,
+                                    onClick = {
+                                        onDismiss()
+                                        onTriggerPatchFlow(installedApp.originalPackageName)
+                                    },
+                                    isError = false,
+                                    modifier = Modifier.padding(horizontal = 20.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    // Info Section
+                    val infoIdx = staggerIndex++
                     item {
-                        StaggeredItem(entered = entered.value, index = idx) {
-                            InfoBadge(
-                                text = stringResource(R.string.home_app_info_no_saved_apk),
-                                style = InfoBadgeStyle.Warning,
-                                icon = Icons.Outlined.Info,
-                                isExpanded = true,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 20.dp)
+                        StaggeredItem(entered = entered.value, index = infoIdx) {
+                            InfoSection(
+                                installedApp = installedApp,
+                                appliedPatches = appliedPatches,
+                                bundlesUsedSummary = bundlesUsedSummary,
+                                onShowPatches = { showAppliedPatchesDialog.value = true },
                             )
                         }
                     }
-                }
 
-                // Bottom nav bar padding
-                item { Spacer(Modifier.navigationBarsPadding()) }
+                    // Actions Section
+                    val actionsIdx = staggerIndex++
+                    item {
+                        StaggeredItem(entered = entered.value, index = actionsIdx) {
+                            ActionsSection(
+                                viewModel = viewModel,
+                                installViewModel = installViewModel,
+                                installedApp = installedApp,
+                                availablePatches = availablePatches,
+                                isInstalling = isInstalling,
+                                mountOperation = mountOperation,
+                                hasUpdate = hasUpdate,
+                                accentColor = appAccentColor,
+                                onPatchClick = { handlePatchClick() },
+                                onUninstall = { showUninstallConfirm.value = true },
+                                onDelete = { showDeleteDialog.value = true },
+                                onExport = { exportSavedLauncher.launch(exportFileName) },
+                                onShowMountWarning = { action ->
+                                    pendingMountWarningAction.value = action
+                                    showMountWarningDialog.value = true
+                                },
+                                modifier = Modifier.padding(horizontal = 20.dp)
+                            )
+                        }
+                    }
+
+                    // Info about saved APK availability
+                    if (!viewModel.hasOriginalApk) {
+                        val idx = staggerIndex++
+                        item {
+                            StaggeredItem(entered = entered.value, index = idx) {
+                                InfoBadge(
+                                    text = stringResource(R.string.home_app_info_no_saved_apk),
+                                    style = InfoBadgeStyle.Warning,
+                                    icon = Icons.Outlined.Info,
+                                    isExpanded = true,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 20.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    // Bottom nav bar padding
+                    item { Spacer(Modifier.navigationBarsPadding()) }
+                }
             }
         }
     }
@@ -472,10 +584,17 @@ private fun AppHeroHeader(
     installedApp: InstalledApp,
     accentColor: Color,
     modifier: Modifier = Modifier,
+    compact: Boolean = false
 ) {
     val onHero = MaterialTheme.colorScheme.onBackground
     val isExtremeAccent = accentColor.luminance() !in 0.04f..0.92f
     val chipBg = if (isExtremeAccent) onHero.copy(alpha = 0.12f) else accentColor.copy(alpha = 0.18f)
+
+    val iconSize = if (compact) 56.dp else 88.dp
+    val iconCorner = if (compact) 14.dp else 22.dp
+    val topPadding = if (compact) 8.dp else 12.dp
+    val bottomPadding = if (compact) 10.dp else 16.dp
+    val chipSpacerHeight = if (compact) 8.dp else 14.dp
 
     // Entrance animations (progress-based: 0f -> 1f).
     // One Float per visual group; alpha, offset and scale are derived via lerp
@@ -532,8 +651,16 @@ private fun AppHeroHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 16.dp)
+                .padding(start = 20.dp, end = 20.dp, top = topPadding, bottom = bottomPadding)
         ) {
+            val (chipIcon, chipLabel) = when (installedApp.installType) {
+                InstallType.MOUNT   -> Icons.Outlined.Link to R.string.mount
+                InstallType.SHIZUKU -> Icons.Outlined.Terminal to R.string.home_app_info_install_type_shizuku
+                InstallType.CUSTOM  -> Icons.Outlined.Build to R.string.home_app_info_install_type_custom_installer
+                InstallType.SAVED   -> Icons.Outlined.Save to R.string.saved
+                InstallType.DEFAULT -> Icons.Outlined.InstallMobile to R.string.home_app_info_install_type_system_installer
+            }
+
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -544,8 +671,8 @@ private fun AppHeroHeader(
                     packageInfo = appInfo,
                     contentDescription = null,
                     modifier = Modifier
-                        .size(88.dp)
-                        .clip(RoundedCornerShape(22.dp))
+                        .size(iconSize)
+                        .clip(RoundedCornerShape(iconCorner))
                         .graphicsLayer {
                             val s = lerp(0.6f, 1f, iconProgress)
                             scaleX = s
@@ -571,6 +698,8 @@ private fun AppHeroHeader(
                                 fontSize = 22.sp,
                                 color = onHero
                             ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                             defaultText = packageName
                         )
                     }
@@ -585,45 +714,64 @@ private fun AppHeroHeader(
                             alpha = p
                         }
                     )
+
+
+                }
+                // Compact mode: chips column on the right
+                if (compact) {
+                    Column(
+                        modifier = Modifier.graphicsLayer {
+                            translationY = lerp(20f, 0f, chipsProgress)
+                            alpha = chipsProgress.coerceIn(0f, 1f)
+                        },
+                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                        horizontalAlignment = Alignment.End
+                    ) {
+                        InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
+                        installedApp.patchedAt?.let { ts ->
+                            InfoChip(
+                                icon = Icons.Outlined.Schedule,
+                                text = getRelativeTimeString(ts),
+                                bg = chipBg,
+                                fg = onHero
+                            )
+                        }
+                    }
                 }
             }
 
-            Spacer(Modifier.height(14.dp))
+            // Normal mode: chips on separate row below
+            if (!compact) {
+                Spacer(Modifier.height(chipSpacerHeight))
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                val (chipIcon, chipLabel) = when (installedApp.installType) {
-                    InstallType.MOUNT   -> Icons.Outlined.Link to R.string.mount
-                    InstallType.SHIZUKU -> Icons.Outlined.Terminal to R.string.home_app_info_install_type_shizuku
-                    InstallType.CUSTOM  -> Icons.Outlined.Build to R.string.home_app_info_install_type_custom_installer
-                    InstallType.SAVED   -> Icons.Outlined.Save to R.string.saved
-                    InstallType.DEFAULT -> Icons.Outlined.InstallMobile to R.string.home_app_info_install_type_system_installer
-                }
-                // Animated chip 1
-                Box(
-                    modifier = Modifier.graphicsLayer {
-                        translationY = lerp(20f, 0f, chipsProgress)
-                        alpha = chipsProgress.coerceIn(0f, 1f)
-                    }
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
-                }
-                // Animated chip 2 (sub-range: starts when chip1 is 30% done)
-                installedApp.patchedAt?.let { ts ->
+                    // Animated chip 1
                     Box(
                         modifier = Modifier.graphicsLayer {
-                            val p = ((chipsProgress - 0.3f) / 0.7f).coerceIn(0f, 1f)
-                            translationY = lerp(20f, 0f, p)
-                            alpha = p
+                            translationY = lerp(20f, 0f, chipsProgress)
+                            alpha = chipsProgress.coerceIn(0f, 1f)
                         }
                     ) {
-                        InfoChip(
-                            icon = Icons.Outlined.Schedule,
-                            text = getRelativeTimeString(ts),
-                            bg = chipBg,
-                            fg = onHero
-                        )
+                        InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
+                    }
+                    // Animated chip 2 (sub-range: starts when chip1 is 30% done)
+                    installedApp.patchedAt?.let { ts ->
+                        Box(
+                            modifier = Modifier.graphicsLayer {
+                                val p = ((chipsProgress - 0.3f) / 0.7f).coerceIn(0f, 1f)
+                                translationY = lerp(20f, 0f, p)
+                                alpha = p
+                            }
+                        ) {
+                            InfoChip(
+                                icon = Icons.Outlined.Schedule,
+                                text = getRelativeTimeString(ts),
+                                bg = chipBg,
+                                fg = onHero
+                            )
+                        }
                     }
                 }
             }
