@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-24T16:15:44.184Z",
-  "description": "# [1.16.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.9...v1.16.0-dev.10) (2026-04-24)\n\n\n### Bug Fixes\n\n* Resolve app icon from saved APK when app is not installed ([fe3ef6c](https://github.com/MorpheApp/morphe-manager/commit/fe3ef6cfaea6bb68c11bd89a127a1122d3cdb943))\n\n\n### Features\n\n* Add `BundleAppMetadata` as a data source for `AppDataResolver` ([3bdc1f5](https://github.com/MorpheApp/morphe-manager/commit/3bdc1f5299b7429444c7266559806aa1ad6aa8d1))\n* Open patches dialog on hidden app tap in search ([1898e74](https://github.com/MorpheApp/morphe-manager/commit/1898e74fe8240961ddda118c2f7fac7f48bacb76))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.10/morphe-manager-1.16.0-dev.10.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.10/morphe-manager-1.16.0-dev.10.apk.asc",
-  "version": "1.16.0-dev.10"
+  "created_at": "2026-04-24T22:14:44.407Z",
+  "description": "# [1.16.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.10...v1.16.0-dev.11) (2026-04-24)\n\n\n### Bug Fixes\n\n* Patch bundles do not load on Android 8.0 devices ([3116619](https://github.com/MorpheApp/morphe-manager/commit/3116619cee63697dd71d1c22b95be11cec78384e))\n* Resolve display name from bundle metadata over patched APK label ([6c6e065](https://github.com/MorpheApp/morphe-manager/commit/6c6e0658d4d4e2a415db1342764de45bd5595c04))\n\n\n### Features\n\n* Live patching progress in foreground notification ([c25af8f](https://github.com/MorpheApp/morphe-manager/commit/c25af8f28e7f33d90f8db62b74f5eb1128680e95))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.11/morphe-manager-1.16.0-dev.11.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.11/morphe-manager-1.16.0-dev.11.apk.asc",
+  "version": "1.16.0-dev.11"
 }

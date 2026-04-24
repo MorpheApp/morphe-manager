@@ -1,3 +1,16 @@
+# [1.16.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.10...v1.16.0-dev.11) (2026-04-24)
+
+
+### Bug Fixes
+
+* Patch bundles do not load on Android 8.0 devices ([3116619](https://github.com/MorpheApp/morphe-manager/commit/3116619cee63697dd71d1c22b95be11cec78384e))
+* Resolve display name from bundle metadata over patched APK label ([6c6e065](https://github.com/MorpheApp/morphe-manager/commit/6c6e0658d4d4e2a415db1342764de45bd5595c04))
+
+
+### Features
+
+* Live patching progress in foreground notification ([c25af8f](https://github.com/MorpheApp/morphe-manager/commit/c25af8f28e7f33d90f8db62b74f5eb1128680e95))
+
 # [1.16.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.9...v1.16.0-dev.10) (2026-04-24)
 
 
