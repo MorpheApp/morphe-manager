@@ -474,7 +474,8 @@ private fun AppHeroHeader(
     modifier: Modifier = Modifier,
 ) {
     val onHero = MaterialTheme.colorScheme.onBackground
-    val chipBg = accentColor.copy(alpha = 0.18f)
+    val isExtremeAccent = accentColor.luminance() !in 0.04f..0.92f
+    val chipBg = if (isExtremeAccent) onHero.copy(alpha = 0.12f) else accentColor.copy(alpha = 0.18f)
 
     // Entrance animations (progress-based: 0f -> 1f).
     // One Float per visual group; alpha, offset and scale are derived via lerp
@@ -1031,14 +1032,13 @@ private fun ActionsSection(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    rowActions.forEach { action ->
+                    rowActions.forEachIndexed { _, action ->
                         TileActionButton(
                             action = action,
-                            modifier = Modifier.weight(1f)
+                            modifier = if (rowActions.size == 1) Modifier.fillMaxWidth()
+                            else Modifier.weight(1f)
                         )
                     }
-                    // Fill empty slot if odd count
-                    if (rowActions.size == 1) Spacer(Modifier.weight(1f))
                 }
             }
         }
@@ -1075,13 +1075,15 @@ private fun PrimaryActionButton(
     accentColor: Color,
     modifier: Modifier = Modifier
 ) {
-    val onAccent = if (accentColor.luminance() > 0.35f) Color(0xFF1A1A1A) else Color.White
+    val dialogBg = MaterialTheme.colorScheme.surface
+    val safeAccent = accentColor.ensureContrast(dialogBg)
+    val onAccent = if (safeAccent.luminance() > 0.35f) Color(0xFF1A1A1A) else Color.White
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
         modifier = modifier.height(56.dp),
         shape = RoundedCornerShape(16.dp),
-        color = accentColor,
+        color = safeAccent,
         contentColor = onAccent
     ) {
         Row(
