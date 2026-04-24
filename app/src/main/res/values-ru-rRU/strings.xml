@@ -223,6 +223,7 @@
     <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Обновите приложение, чтобы получить последние улучшения и исправления.</string>
     <string name="home_app_info_app_deleted_warning">Приложение было удалено.</string>
     <string name="home_app_info_app_deleted_description">Это приложение было удалено вне устройства Morphe. Переустановите его, чтобы восстановить работоспособность.</string>
+    <string name="home_app_info_apk_size">Размер APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Для использования режима root требуется предварительная установка оригинального APK-файла на ваше устройство перед применением патча.</string>
     <string name="root_gmscore_excluded">Поддержка GmsCore отключена в режиме root</string>

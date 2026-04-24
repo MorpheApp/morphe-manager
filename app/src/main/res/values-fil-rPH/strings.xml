@@ -223,6 +223,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="home_app_info_patch_update_available_description">Magagamit sa bagong bersyon ang mga patch. Ire-patch ang aplikasyon upang makuha ang mga pinakabagong pagpapabuti at mga pag-aayos</string>
     <string name="home_app_info_app_deleted_warning">Binura ang aplikasyon </string>
     <string name="home_app_info_app_deleted_description">Binura ang aplikasyong ito sa labas ng Morphe. Ire-patch ito upang maibalik ang kanyang punksyonalidad</string>
+    <string name="home_app_info_apk_size">Laki ng APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Kinakailangan ng root mode ang orihinal na APK upang mag-install ito sa iyong device bago ito i-patch</string>
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>

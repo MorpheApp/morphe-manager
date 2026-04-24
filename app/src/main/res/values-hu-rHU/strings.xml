@@ -223,6 +223,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_app_info_patch_update_available_description">Egy újabb módosításverzió elérhető. Módosítsa újra az alkalmazását, hogy megkapja a legújabb fejlesztéseket és javításokat</string>
     <string name="home_app_info_app_deleted_warning">Az alkalmazást eltávolították</string>
     <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a Morphe-n kívül törölték. Módosítsa újra a funkcionalitás helyreállításához</string>
+    <string name="home_app_info_apk_size">APK méret</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a módosítás előtt</string>
     <string name="root_gmscore_excluded">A GmsCore támogatási patch nem elérhető root módban</string>

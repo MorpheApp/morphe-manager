@@ -41,6 +41,7 @@
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
+    <string name="home_app_info_apk_size">APK आकार</string>
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
     <string name="patcher_error_dialog_app_info">ॲप माहिती</string>

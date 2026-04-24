@@ -223,6 +223,7 @@
     <string name="home_app_info_patch_update_available_description">Μια καινούρια έκδοση τροποποιήσεων είναι διαθέσιμη. Τροποποιήσετε ξανά την εφαρμογή για να λάβετε τις τελευταίες βελτιώσεις και διορθώσεις</string>
     <string name="home_app_info_app_deleted_warning">Η εφαρμογή έχει απεγκατασταθεί</string>
     <string name="home_app_info_app_deleted_description">Η εφαρμογή αυτή απεγκαταστάθηκε εκτός του Morphe. Τροποποιήστε την ξανά για την επαναφορά λειτουργικότητά της</string>
+    <string name="home_app_info_apk_size">Μέγεθος APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Η λειτουργία root απαιτεί το πρωτότυπο APK να είναι εγκατεστημένο στη συσκευή πριν τροποποιηθεί</string>
     <string name="root_gmscore_excluded">Η υποστήριξη της τροποποίησης GmsCore εξαιρείται στη λειτουργία root</string>

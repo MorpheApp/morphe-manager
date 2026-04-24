@@ -223,6 +223,7 @@
     <string name="home_app_info_patch_update_available_description">有新的修补版本可用。重新修补您的应用以获取最新改进和修复</string>
     <string name="home_app_info_app_deleted_warning">应用已卸载</string>
     <string name="home_app_info_app_deleted_description">此应用已在 Morphe 外卸载。重新安装以恢复功能</string>
+    <string name="home_app_info_apk_size">APK大小</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">根模式需要在修补前将原始 APK 安装在设备上</string>
     <string name="root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
