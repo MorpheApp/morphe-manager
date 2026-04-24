@@ -64,6 +64,14 @@ import app.morphe.manager.util.KnownApps
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/** Data describing one side of a swipe action - icon, label, and colors. */
+private data class SwipeActionConfig(
+    val icon: ImageVector,
+    val label: String,
+    val containerColor: Color,
+    val contentColor: Color
+)
+
 /**
  * Home screen layout with dynamic app buttons:
  * 1. Notifications section
@@ -809,14 +817,24 @@ fun MainAppsSection(
             onUnhideMultiple = { packages ->
                 packages.forEach { onUnhideApp(it) }
             },
+            onShowPatches = onShowPatches,
             onDismiss = { showHiddenAppsDialog.value = false }
         )
     }
 
-    // Filtered items based on search query
+    // Filtered visible items based on search query
     val filteredItems = remember(homeAppItems, searchQuery) {
         if (searchQuery.isBlank()) homeAppItems
         else homeAppItems.filter { item ->
+            item.displayName.contains(searchQuery, ignoreCase = true) ||
+                    item.packageName.contains(searchQuery, ignoreCase = true)
+        }
+    }
+
+    // Hidden items that match the search query
+    val filteredHiddenItems = remember(hiddenAppItems, searchQuery) {
+        if (searchQuery.isBlank()) emptyList()
+        else hiddenAppItems.filter { item ->
             item.displayName.contains(searchQuery, ignoreCase = true) ||
                     item.packageName.contains(searchQuery, ignoreCase = true)
         }
@@ -830,9 +848,9 @@ fun MainAppsSection(
     // All-hidden state: apps exist but all are hidden
     val isAllHiddenState = !stableLoadingState && homeAppItems.isEmpty() && hiddenAppItems.isNotEmpty()
     val isEmptyState = isNoSourcesState || isAllHiddenState
-    // Search empty state: items exist but nothing matches query
+    // Search empty state: items exist but nothing matches query (including hidden)
     val isSearchEmpty = !stableLoadingState && homeAppItems.isNotEmpty() &&
-            searchQuery.isNotBlank() && filteredItems.isEmpty()
+            searchQuery.isNotBlank() && filteredItems.isEmpty() && filteredHiddenItems.isEmpty()
 
     Box(
         modifier = modifier.fillMaxWidth(),
@@ -947,6 +965,32 @@ fun MainAppsSection(
                                         )
                                     }
 
+                                    // Hidden apps that match the search query
+                                    if (filteredHiddenItems.isNotEmpty()) {
+                                        item(key = "search_hidden_header") {
+                                            Text(
+                                                text = stringResource(R.string.hidden),
+                                                style = MaterialTheme.typography.labelMedium,
+                                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(top = 8.dp, bottom = 4.dp)
+                                                    .animateItem()
+                                            )
+                                        }
+                                        itemsIndexed(
+                                            items = filteredHiddenItems,
+                                            key = { _, item -> "hidden_${item.packageName}" }
+                                        ) { _, item ->
+                                            HiddenSearchAppCard(
+                                                item = item,
+                                                onUnhide = { onUnhideApp(item.packageName) },
+                                                onShowPatches = { onShowPatches(item) },
+                                                modifier = Modifier.animateItem()
+                                            )
+                                        }
+                                    }
+
                                     // Search empty result
                                     if (isSearchEmpty) {
                                         item(key = "search_empty") {
@@ -981,7 +1025,7 @@ fun MainAppsSection(
                                     }
 
                                     // "Show hidden apps" button
-                                    if (hiddenAppItems.isNotEmpty()) {
+                                    if (hiddenAppItems.isNotEmpty() && searchQuery.isBlank()) {
                                         item(key = "show_hidden") {
                                             ShowHiddenAppsButton(
                                                 count = hiddenAppItems.size,
@@ -1249,17 +1293,9 @@ private fun DynamicAppCard(
     var showHideDialog by remember { mutableStateOf(false) }
     val density = LocalDensity.current
     val view = LocalView.current
-    val scope = rememberCoroutineScope()
 
-    // Threshold in px - card snaps to action when dragged past this
     val actionThresholdPx = with(density) { 90.dp.toPx() }
-
-    // Animatable offset drives the card position
     val offsetX = remember { Animatable(0f) }
-
-    // Derived progress values for background reveal [0..1]
-    val hideProgress by remember { derivedStateOf { (-offsetX.value / actionThresholdPx).coerceIn(0f, 1f) } }
-    val patchesProgress by remember { derivedStateOf { (offsetX.value / actionThresholdPx).coerceIn(0f, 1f) } }
 
     // When entering multi-select mode snap card back to center (no swipe visible)
     LaunchedEffect(isMultiSelectMode) {
@@ -1279,103 +1315,88 @@ private fun DynamicAppCard(
         onGestureHintShown()
     }
 
-    Box(modifier = modifier.fillMaxWidth()) {
-        // Background layer - action icons behind the card (hidden in multi-select)
-        if (!isMultiSelectMode) {
-            SwipeBackground(
-                hideProgress = hideProgress,
-                patchesProgress = patchesProgress,
-                modifier = Modifier
-                    .matchParentSize()
-                    .clip(RoundedCornerShape(24.dp))
-            )
-        }
+    val hideLabel = stringResource(R.string.hide)
+    val patchesLabel = stringResource(R.string.patches)
+    val errorContainer = MaterialTheme.colorScheme.errorContainer
+    val onErrorContainer = MaterialTheme.colorScheme.onErrorContainer
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val onPrimaryContainer = MaterialTheme.colorScheme.onPrimaryContainer
 
-        // Draggable foreground with selection overlay
-        SelectableAppCard(
-            isSelected = isSelected,
-            isMultiSelectMode = isMultiSelectMode,
-            modifier = Modifier
-                .graphicsLayer { translationX = offsetX.value }
-                .then(
-                    if (!isMultiSelectMode) {
-                        Modifier.pointerInput(Unit) {
-                            detectHorizontalDragGestures(
-                                onDragEnd = {
-                                    scope.launch {
-                                        when {
-                                            offsetX.value < -actionThresholdPx -> {
-                                                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                                offsetX.animateTo(0f, tween(200))
-                                                showHideDialog = true
-                                            }
-                                            offsetX.value > actionThresholdPx -> {
-                                                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                                                offsetX.animateTo(0f, tween(200))
-                                                onShowPatches()
-                                            }
-                                            else -> offsetX.animateTo(0f, spring(
-                                                dampingRatio = Spring.DampingRatioMediumBouncy,
-                                                stiffness = Spring.StiffnessMedium
-                                            ))
-                                        }
-                                    }
-                                },
-                                onDragCancel = {
-                                    scope.launch {
-                                        offsetX.animateTo(0f, spring(
-                                            dampingRatio = Spring.DampingRatioMediumBouncy,
-                                            stiffness = Spring.StiffnessMedium
-                                        ))
-                                    }
-                                },
-                                onHorizontalDrag = { change, dragAmount ->
-                                    change.consume()
-                                    scope.launch {
-                                        val clamped = (offsetX.value + dragAmount)
-                                            .coerceIn(-actionThresholdPx * 1.5f, actionThresholdPx * 1.5f)
-                                        offsetX.snapTo(clamped)
-                                    }
+    val leftConfig = remember(hideLabel, errorContainer, onErrorContainer) {
+        SwipeActionConfig(
+            icon = Icons.Outlined.VisibilityOff,
+            label = hideLabel,
+            containerColor = errorContainer,
+            contentColor = onErrorContainer
+        )
+    }
+    val rightConfig = remember(patchesLabel, primaryContainer, onPrimaryContainer) {
+        SwipeActionConfig(
+            icon = Icons.Outlined.Extension,
+            label = patchesLabel,
+            containerColor = primaryContainer,
+            contentColor = onPrimaryContainer
+        )
+    }
+
+    Box(modifier = modifier.fillMaxWidth()) {
+        SwipeableCardContainer(
+            offsetX = offsetX,
+            actionThresholdPx = actionThresholdPx,
+            onLeftSwipe = { showHideDialog = true },
+            onRightSwipe = onShowPatches,
+            enabled = !isMultiSelectMode,
+            background = { leftProgress, rightProgress ->
+                SwipeBackground(
+                    leftProgress = leftProgress,
+                    rightProgress = rightProgress,
+                    leftConfig = leftConfig,
+                    rightConfig = rightConfig,
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clip(RoundedCornerShape(24.dp))
+                )
+            }
+        ) {
+            SelectableAppCard(
+                isSelected = isSelected,
+                isMultiSelectMode = isMultiSelectMode
+            ) {
+                Crossfade(
+                    targetState = isLoading,
+                    animationSpec = tween(300),
+                    label = "app_card_crossfade_${item.packageName}"
+                ) { loading ->
+                    if (loading) {
+                        AppLoadingCard(gradientColors = item.gradientColors)
+                    } else {
+                        if (item.installedApp != null) {
+                            InstalledAppCard(
+                                installedApp = item.installedApp,
+                                packageInfo = item.packageInfo,
+                                displayName = item.displayName,
+                                gradientColors = item.gradientColors,
+                                onClick = onAppClick,
+                                hasUpdate = hasUpdate,
+                                isAppDeleted = item.isDeleted,
+                                onLongClick = {
+                                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                                    onLongPress()
+                                }
+                            )
+                        } else {
+                            AppButton(
+                                packageName = item.packageName,
+                                displayName = item.displayName,
+                                packageInfo = item.packageInfo,
+                                gradientColors = item.gradientColors,
+                                onClick = onAppClick,
+                                onLongClick = {
+                                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                                    onLongPress()
                                 }
                             )
                         }
-                    } else Modifier
-                )
-        ) {
-            Crossfade(
-                targetState = isLoading,
-                animationSpec = tween(300),
-                label = "app_card_crossfade_${item.packageName}"
-            ) { loading ->
-                if (loading) {
-                    AppLoadingCard(gradientColors = item.gradientColors)
-                } else {
-                    if (item.installedApp != null) {
-                        InstalledAppCard(
-                            installedApp = item.installedApp,
-                            packageInfo = item.packageInfo,
-                            displayName = item.displayName,
-                            gradientColors = item.gradientColors,
-                            onClick = onAppClick,
-                            hasUpdate = hasUpdate,
-                            isAppDeleted = item.isDeleted,
-                            onLongClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                onLongPress()
-                            }
-                        )
-                    } else {
-                        AppButton(
-                            packageName = item.packageName,
-                            displayName = item.displayName,
-                            packageInfo = item.packageInfo,
-                            gradientColors = item.gradientColors,
-                            onClick = onAppClick,
-                            onLongClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                onLongPress()
-                            }
-                        )
                     }
                 }
             }
@@ -1499,13 +1520,15 @@ private fun MultiSelectBar(
  */
 @Composable
 private fun SwipeBackground(
-    hideProgress: Float,
-    patchesProgress: Float,
+    leftProgress: Float,
+    rightProgress: Float,
+    leftConfig: SwipeActionConfig?,
+    rightConfig: SwipeActionConfig?,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier) {
-        // Right side background
-        if (hideProgress > 0.01f) {
+        // Left edge
+        if (leftConfig != null && leftProgress > 0.01f) {
             Box(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -1513,8 +1536,8 @@ private fun SwipeBackground(
                     .align(Alignment.CenterEnd)
                     .background(
                         Brush.horizontalGradient(
-                            0f to MaterialTheme.colorScheme.errorContainer.copy(alpha = 0f),
-                            1f to MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.85f * hideProgress)
+                            0f to leftConfig.containerColor.copy(alpha = 0f),
+                            1f to leftConfig.containerColor.copy(alpha = 0.85f * leftProgress)
                         )
                     ),
                 contentAlignment = Alignment.CenterEnd
@@ -1522,28 +1545,28 @@ private fun SwipeBackground(
                 Column(
                     modifier = Modifier
                         .padding(end = 20.dp)
-                        .graphicsLayer { alpha = hideProgress },
+                        .graphicsLayer { alpha = leftProgress },
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.VisibilityOff,
+                        imageVector = leftConfig.icon,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onErrorContainer,
+                        tint = leftConfig.contentColor,
                         modifier = Modifier.size(22.dp)
                     )
                     Text(
-                        text = stringResource(R.string.hide),
+                        text = leftConfig.label,
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        color = leftConfig.contentColor,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
             }
         }
 
-        // Left side background
-        if (patchesProgress > 0.01f) {
+        // Right edge
+        if (rightConfig != null && rightProgress > 0.01f) {
             Box(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -1551,8 +1574,8 @@ private fun SwipeBackground(
                     .align(Alignment.CenterStart)
                     .background(
                         Brush.horizontalGradient(
-                            0f to MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.85f * patchesProgress),
-                            1f to MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0f)
+                            0f to rightConfig.containerColor.copy(alpha = 0.85f * rightProgress),
+                            1f to rightConfig.containerColor.copy(alpha = 0f)
                         )
                     ),
                 contentAlignment = Alignment.CenterStart
@@ -1560,23 +1583,198 @@ private fun SwipeBackground(
                 Column(
                     modifier = Modifier
                         .padding(start = 20.dp)
-                        .graphicsLayer { alpha = patchesProgress },
+                        .graphicsLayer { alpha = rightProgress },
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.Extension,
+                        imageVector = rightConfig.icon,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        tint = rightConfig.contentColor,
                         modifier = Modifier.size(22.dp)
                     )
                     Text(
-                        text = stringResource(R.string.patches),
+                        text = rightConfig.label,
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = rightConfig.contentColor,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
+            }
+        }
+    }
+}
+
+/**
+ * Shared container that handles horizontal swipe gestures and drives the
+ * [SwipeBackground] reveal animation.
+ */
+@Composable
+private fun SwipeableCardContainer(
+    modifier: Modifier = Modifier,
+    offsetX: Animatable<Float, AnimationVector1D>,
+    actionThresholdPx: Float,
+    onLeftSwipe: () -> Unit,
+    onRightSwipe: () -> Unit,
+    leftHaptic: Int = HapticFeedbackConstants.LONG_PRESS,
+    rightHaptic: Int = HapticFeedbackConstants.VIRTUAL_KEY,
+    enabled: Boolean = true,
+    background: @Composable BoxScope.(leftProgress: Float, rightProgress: Float) -> Unit,
+    content: @Composable () -> Unit
+) {
+    val view = LocalView.current
+    val scope = rememberCoroutineScope()
+
+    // Progress values for background reveal [0..1]
+    val leftProgress by remember { derivedStateOf { (-offsetX.value / actionThresholdPx).coerceIn(0f, 1f) } }
+    val rightProgress by remember { derivedStateOf { (offsetX.value / actionThresholdPx).coerceIn(0f, 1f) } }
+
+    Box(modifier = modifier.fillMaxWidth()) {
+        background(leftProgress, rightProgress)
+
+        Box(
+            modifier = Modifier
+                .graphicsLayer { translationX = offsetX.value }
+                .then(
+                    if (enabled) Modifier.pointerInput(Unit) {
+                        detectHorizontalDragGestures(
+                            onDragEnd = {
+                                scope.launch {
+                                    when {
+                                        offsetX.value < -actionThresholdPx -> {
+                                            view.performHapticFeedback(leftHaptic)
+                                            offsetX.animateTo(0f, tween(200))
+                                            onLeftSwipe()
+                                        }
+                                        offsetX.value > actionThresholdPx -> {
+                                            view.performHapticFeedback(rightHaptic)
+                                            offsetX.animateTo(0f, tween(200))
+                                            onRightSwipe()
+                                        }
+                                        else -> offsetX.animateTo(
+                                            0f,
+                                            spring(
+                                                dampingRatio = Spring.DampingRatioMediumBouncy,
+                                                stiffness = Spring.StiffnessMedium
+                                            )
+                                        )
+                                    }
+                                }
+                            },
+                            onDragCancel = {
+                                scope.launch {
+                                    offsetX.animateTo(
+                                        0f,
+                                        spring(
+                                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                                            stiffness = Spring.StiffnessMedium
+                                        )
+                                    )
+                                }
+                            },
+                            onHorizontalDrag = { change, dragAmount ->
+                                change.consume()
+                                scope.launch {
+                                    val clamped = (offsetX.value + dragAmount)
+                                        .coerceIn(-actionThresholdPx * 1.5f, actionThresholdPx * 1.5f)
+                                    offsetX.snapTo(clamped)
+                                }
+                            }
+                        )
+                    } else Modifier
+                )
+        ) {
+            content()
+        }
+    }
+}
+
+/**
+ * App card for hidden apps shown in search results.
+ * - Swipe LEFT  → Patches dialog
+ * - Swipe RIGHT → Unhide
+ *
+ * Rendered at reduced opacity to signal the hidden state.
+ */
+@Composable
+private fun HiddenSearchAppCard(
+    modifier: Modifier = Modifier,
+    item: HomeAppItem,
+    onUnhide: () -> Unit,
+    onShowPatches: () -> Unit
+) {
+    val density = LocalDensity.current
+    val actionThresholdPx = with(density) { 90.dp.toPx() }
+    val offsetX = remember { Animatable(0f) }
+
+    val patchesLabel = stringResource(R.string.patches)
+    val unhideLabel = stringResource(R.string.unhide)
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val onPrimaryContainer = MaterialTheme.colorScheme.onPrimaryContainer
+    val tertiaryContainer = MaterialTheme.colorScheme.tertiaryContainer
+    val onTertiaryContainer = MaterialTheme.colorScheme.onTertiaryContainer
+
+    val leftConfig = remember(unhideLabel, tertiaryContainer, onTertiaryContainer) {
+        SwipeActionConfig(
+            icon = Icons.Outlined.Visibility,
+            label = unhideLabel,
+            containerColor = tertiaryContainer,
+            contentColor = onTertiaryContainer
+        )
+    }
+    val rightConfig = remember(patchesLabel, primaryContainer, onPrimaryContainer) {
+        SwipeActionConfig(
+            icon = Icons.Outlined.Extension,
+            label = patchesLabel,
+            containerColor = primaryContainer,
+            contentColor = onPrimaryContainer
+        )
+    }
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .graphicsLayer { alpha = 0.6f }
+    ) {
+        SwipeableCardContainer(
+            offsetX = offsetX,
+            actionThresholdPx = actionThresholdPx,
+            onLeftSwipe = onUnhide,
+            onRightSwipe = onShowPatches,
+            leftHaptic = HapticFeedbackConstants.LONG_PRESS,
+            rightHaptic = HapticFeedbackConstants.VIRTUAL_KEY,
+            background = { leftProgress, rightProgress ->
+                SwipeBackground(
+                    leftProgress = leftProgress,
+                    rightProgress = rightProgress,
+                    leftConfig = leftConfig,
+                    rightConfig = rightConfig,
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clip(RoundedCornerShape(24.dp))
+                )
+            }
+        ) {
+            if (item.installedApp != null) {
+                InstalledAppCard(
+                    installedApp = item.installedApp,
+                    packageInfo = item.packageInfo,
+                    displayName = item.displayName,
+                    gradientColors = item.gradientColors,
+                    onClick = {},
+                    hasUpdate = item.hasUpdate,
+                    isAppDeleted = item.isDeleted,
+                    onLongClick = {}
+                )
+            } else {
+                AppButton(
+                    packageName = item.packageName,
+                    displayName = item.displayName,
+                    packageInfo = item.packageInfo,
+                    gradientColors = item.gradientColors,
+                    onClick = {},
+                    onLongClick = {}
+                )
             }
         }
     }
@@ -2062,19 +2260,20 @@ internal fun HideAppDialog(
 }
 
 /**
- * Dialog that lists hidden apps with multi-select support.
+ * Dialog listing all hidden apps.
  *
- * - Tap a card → unhide immediately
- * - Long-press a card → enter multi-select mode
- * - In multi-select: tap toggles selection; "Show selected" unhides all at once
+ * Swipe gestures (disabled in multi-select mode):
+ * - Swipe LEFT  → Patches dialog
+ * - Swipe RIGHT → Unhide
  *
- * Uses [SelectableAppCard] - same selection overlay as the home screen list.
+ * Long-press enters multi-select; bulk unhide via footer button.
  */
 @Composable
 internal fun HiddenAppsDialog(
     hiddenAppItems: List<HomeAppItem>,
     onUnhide: (String) -> Unit,
     onUnhideMultiple: (Set<String>) -> Unit = {},
+    onShowPatches: (HomeAppItem) -> Unit,
     onDismiss: () -> Unit
 ) {
     var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
@@ -2088,6 +2287,32 @@ internal fun HiddenAppsDialog(
     }
 
     val view = LocalView.current
+    val density = LocalDensity.current
+    val actionThresholdPx = with(density) { 90.dp.toPx() }
+
+    val patchesLabel = stringResource(R.string.patches)
+    val unhideLabel = stringResource(R.string.unhide)
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val onPrimaryContainer = MaterialTheme.colorScheme.onPrimaryContainer
+    val tertiaryContainer = MaterialTheme.colorScheme.tertiaryContainer
+    val onTertiaryContainer = MaterialTheme.colorScheme.onTertiaryContainer
+
+    val leftConfig = remember(unhideLabel, tertiaryContainer, onTertiaryContainer) {
+        SwipeActionConfig(
+            icon = Icons.Outlined.Visibility,
+            label = unhideLabel,
+            containerColor = tertiaryContainer,
+            contentColor = onTertiaryContainer
+        )
+    }
+    val rightConfig = remember(patchesLabel, primaryContainer, onPrimaryContainer) {
+        SwipeActionConfig(
+            icon = Icons.Outlined.Extension,
+            label = patchesLabel,
+            containerColor = primaryContainer,
+            contentColor = onPrimaryContainer
+        )
+    }
 
     MorpheDialog(
         onDismissRequest = {
@@ -2120,7 +2345,8 @@ internal fun HiddenAppsDialog(
                 )
             }
         },
-        compactPadding = true
+        compactPadding = true,
+        scrollable = false
     ) {
         if (hiddenAppItems.isEmpty()) {
             MorpheEmptyState(
@@ -2128,44 +2354,83 @@ internal fun HiddenAppsDialog(
                 title = stringResource(R.string.home_app_no_hidden)
             )
         } else {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                hiddenAppItems.forEach { item ->
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(
+                    items = hiddenAppItems,
+                    key = { it.packageName }
+                ) { item ->
                     val isSelected = item.packageName in selectedPackages
+                    val offsetX = remember(item.packageName) { Animatable(0f) }
+
+                    // Snap card back when entering multi-select
+                    LaunchedEffect(isMultiSelectMode) {
+                        if (isMultiSelectMode) offsetX.animateTo(0f, tween(200))
+                    }
+
                     SelectableAppCard(
+                        modifier = Modifier.animateItem(
+                            fadeInSpec = tween(220),
+                            fadeOutSpec = tween(180),
+                            placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
+                        ),
                         isSelected = isSelected,
                         isMultiSelectMode = isMultiSelectMode
                     ) {
-                        AppCardLayout(
-                            gradientColors = item.gradientColors,
-                            enabled = true,
-                            onClick = {
-                                if (isMultiSelectMode) {
+                        SwipeableCardContainer(
+                            offsetX = offsetX,
+                            actionThresholdPx = actionThresholdPx,
+                            onLeftSwipe = { onUnhide(item.packageName) },
+                            onRightSwipe = { onShowPatches(item) },
+                            leftHaptic = HapticFeedbackConstants.LONG_PRESS,
+                            rightHaptic = HapticFeedbackConstants.VIRTUAL_KEY,
+                            enabled = !isMultiSelectMode,
+                            background = { leftProgress, rightProgress ->
+                                SwipeBackground(
+                                    leftProgress = leftProgress,
+                                    rightProgress = rightProgress,
+                                    leftConfig = leftConfig,
+                                    rightConfig = rightConfig,
+                                    modifier = Modifier
+                                        .matchParentSize()
+                                        .clip(RoundedCornerShape(24.dp))
+                                )
+                            }
+                        ) {
+                            AppCardLayout(
+                                gradientColors = item.gradientColors,
+                                enabled = true,
+                                onClick = {
+                                    if (isMultiSelectMode) {
+                                        selectedPackages = if (isSelected)
+                                            selectedPackages - item.packageName
+                                        else
+                                            selectedPackages + item.packageName
+                                    } else {
+                                        onUnhide(item.packageName)
+                                    }
+                                },
+                                onLongClick = {
+                                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                                     selectedPackages = if (isSelected)
                                         selectedPackages - item.packageName
                                     else
                                         selectedPackages + item.packageName
-                                } else {
-                                    onUnhide(item.packageName)
-                                }
-                            },
-                            onLongClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                selectedPackages = if (isSelected)
-                                    selectedPackages - item.packageName
-                                else
-                                    selectedPackages + item.packageName
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            AppCardContent(
-                                packageName = item.packageName,
-                                packageInfo = item.packageInfo,
-                                displayName = item.displayName,
-                                subtitle = if (isMultiSelectMode) null
-                                else stringResource(R.string.home_app_hidden_apps_hint),
-                                gradientColors = item.gradientColors,
-                                iconSource = AppDataSource.PATCHED_APK
-                            )
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                AppCardContent(
+                                    packageName = item.packageName,
+                                    packageInfo = item.packageInfo,
+                                    displayName = item.displayName,
+                                    subtitle = if (isMultiSelectMode) null
+                                    else stringResource(R.string.home_app_hidden_apps_hint),
+                                    gradientColors = item.gradientColors,
+                                    iconSource = AppDataSource.PATCHED_APK
+                                )
+                            }
                         }
                     }
                 }

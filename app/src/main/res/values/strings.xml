@@ -750,6 +750,8 @@ The image dimensions must be as follows:
     <string name="allow">Allow</string>
     <string name="details">Details</string>
     <string name="hide">Hide</string>
+    <string name="hidden">Hidden</string>
+    <string name="unhide">Unhide</string>
     <string name="logs">Logs</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installing…</string>
