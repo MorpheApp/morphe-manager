@@ -264,7 +264,7 @@ fun InstalledAppInfoDialog(
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 // Hero header
                 item(contentType = "hero") {
@@ -531,7 +531,7 @@ private fun AppHeroHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 24.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 16.dp)
         ) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -766,7 +766,7 @@ private fun InfoRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 10.dp),
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -805,7 +805,7 @@ private fun InfoRowWithAction(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 10.dp),
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -1122,13 +1122,13 @@ private fun TileActionButton(
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
-        modifier = modifier.height(64.dp),
+        modifier = modifier.height(56.dp),
         shape = RoundedCornerShape(16.dp),
         color = containerColor,
         contentColor = contentColor
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(vertical = 8.dp, horizontal = 8.dp),
+            modifier = Modifier.fillMaxSize().padding(vertical = 6.dp, horizontal = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
