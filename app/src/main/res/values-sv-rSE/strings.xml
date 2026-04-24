@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Inga appar är tillgängliga</string>
     <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
     <string name="home_no_apps_search_subtitle">Inga appar matchar \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Alla appar är dolda</string>
+    <string name="home_all_apps_hidden_subtitle">Du har dolt alla appar från startsidan</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Vilken app vill du korrigera?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -81,6 +83,7 @@
     <string name="sources_update_success">Uppdateringen lyckades</string>
     <string name="sources_update_unavailable">Ingen uppdatering är tillgänglig</string>
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
+    <string name="sources_download_fail_named">Det gick inte att ladda ned \"%1$s\": %2$s</string>
     <string name="sources_download_endpoint_not_found">Det gick inte att uppdatera \"%1$s\": JSON-filen för korrigeringarna hittades inte på den konfigurerade webbadressen</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Aktivera Expertläge i inställningarna för att inkludera den här korrigeringen manuellt</string>
@@ -111,7 +114,7 @@
     <string name="home_file_picker_prompt_open_apk">Öppna APK-fil</string>
     <string name="home_recommended_version">Rekommenderad version</string>
     <string name="home_selected_version">Vald version</string>
-    <string name="home_select_apk_title">Välj en APK-fil</string>
+    <string name="home_select_apk_title">Välj APK-fil</string>
     <string name="home_select_any_apk_description">Tryck på knappen nedan för att välja en APK-fil för valfri app som du vill korrigera</string>
     <string name="home_invalid_apk_unreadable">Det gick inte att läsa filen. Kontrollera att Extern lagring inte har batteribegränsningar</string>
     <string name="home_invalid_apk_not_an_apk">Den valda filen är inte en giltig APK-fil</string>
@@ -305,16 +308,13 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="failed_to_execute_patch">Det gick inte att tillämpa %s</string>
     <string name="patched_app_saved_toast">Den korrigerade appen sparades till senare</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den korrigerade appen</string>
-    <string name="download_apk">Ladda ned APK-fil</string>
     <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med det här plugin-programmet</string>
     <string name="patcher_process_exit_message">Appkorrigeringsprocessen avslutades med koden %1$s</string>
     <string name="install_app_success">Installationen lyckades</string>
     <string name="install_app_fail">Det gick inte att installera appen: %s</string>
-    <string name="install_timeout_message">Installationen slutfördes inte. Kontrollera systemets installationsdialogruta och försök igen</string>
     <string name="save_apk_success">APK-fil sparad</string>
     <string name="saved_app_export_failed">Det gick inte att exportera den korrigerade appen</string>
     <string name="saved_app_removed_toast">Tog bort den sparade korrigerade appen</string>
-    <string name="saved_app_copy_removed_toast">Tog bort den sparade kopian</string>
     <string name="saved_app_launch_unavailable">Installera appen innan du öppnar den</string>
     <string name="package_name">Paketnamn</string>
     <string name="failed_to_mount">Det gick inte att montera: %s</string>
@@ -351,6 +351,9 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_appearance_translations_info_title">Översättningar kan saknas eller vara ofullständiga för vissa språk</string>
     <string name="settings_appearance_translations_info_text">Om du vill översätta till nya språk eller förbättra de befintliga översättningarna, besök %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Startsida</string>
+    <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Visa ett hälsningsmeddelande på startsidan</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Appikon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -397,7 +400,17 @@ För bästa resultat rekommenderar den här appen att du korrigerar en &lt;b&gt;
     <string name="settings_advanced_expert_mode_description">Aktivera komplexa appkorrigeringsinställningar och anpassningsalternativ för Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläge?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur korrigeringarna tillämpas, men om du felaktigt konfigurerar inställningarna i expertläget kan det leda till att appen inte fungerar</string>
+    <string name="settings_advanced_strip_unused_libs">Optimera för enhetens arkitektur</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Hoppa över delade APK-moduler för CPU-arkitekturer, språk och skärmupplösningar som inte stöds vid sammanslagning.
+Vanliga APK-filer rensas från inbyggda bibliotek för arkitekturer som inte stöds efter att appen har korrigerats"</string>
     <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Läget för bytekodbearbetning</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kontrollerar hur bytekod bearbetas när appar korrigeras. Detta påverkar appkorrigeringshastighet, minnesanvändning och den slutliga APK-filens storlek</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Snabbt (Rekommenderas)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Snabbt</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Snabbare appkorrigering och lägre minnesanvändning, på bekostnad av en större APK-fil. Rekommenderas för enheter med lågt RAM-minne eller äldre enheter</string>
+    <string name="settings_advanced_bytecode_mode_full">Fullt</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Långsammare appkorrigering, replikerar gammalt beteende. Använd endast om läget Snabbt orsakar problem</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT för GitHub</string>
     <string name="settings_advanced_github_pat_description">Krävs för att använda hämtningsbegäranden som källor</string>
@@ -507,13 +520,7 @@ Bildernas mått ska vara följande:
     <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
     <string name="installer_action_open_shizuku">Öppna Shizuku</string>
     <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till en annan installerare</string>
-    <string name="installer_hint_blocked">Installationen blockerades av Android. Kontrollera Play Protect eller säkerhetsinställningarna</string>
     <string name="installer_hint_conflict">En annan app med det här paketnamnet är redan installerad. Avinstallera den innan du fortsätter</string>
-    <string name="installer_hint_incompatible">APK-filen är inte kompatibel med den här enheten eller Android-versionen</string>
-    <string name="installer_hint_invalid">APK-filen är ogiltig eller skadad</string>
-    <string name="installer_hint_storage">Det finns inte tillräckligt med lagringsutrymme för installationen</string>
-    <string name="installer_hint_timeout">Tidsgränsen överskreds för installationen. Försök igen</string>
-    <string name="installer_hint_aborted">Installationen avbröts</string>
     <string name="installer_external_launched">Öppnar %1$s …</string>
     <string name="installer_external_timeout">%1$s bekräftade inte installationen. Kontrollera den andra appen och försök igen</string>
     <string name="installer_external_success">%1$s meddelade om en lyckad installation</string>
@@ -679,12 +686,13 @@ Bildernas mått ska vara följande:
     <string name="allow">Tillåt</string>
     <string name="details">Information</string>
     <string name="hide">Dölj</string>
-    <string name="default_">Standard</string>
     <string name="logs">Loggar</string>
+    <string name="sources">Källor</string>
     <string name="installing_ellipsis">Installerar …</string>
     <string name="mounting_ellipsis">Monterar …</string>
     <string name="unmounting_ellipsis">Avmonterar …</string>
     <string name="importing_ellipsis">Importerar …</string>
+    <string name="imported_successfully">Importen lyckades</string>
     <string name="changelog">Visa ändringsloggar</string>
     <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
     <string name="changelog_download_fail">Det gick inte att ladda ned ändringsloggen: %s</string>

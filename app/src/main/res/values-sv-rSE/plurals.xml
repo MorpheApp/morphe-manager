@@ -36,4 +36,12 @@
         <item quantity="one">%s vald korrigering</item>
         <item quantity="other">%s valda korrigeringar</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Visa %s app</item>
+        <item quantity="other">Visa %s appar</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s dold app</item>
+        <item quantity="other">%s dolda appar</item>
+    </plurals>
 </resources>

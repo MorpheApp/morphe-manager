@@ -63,4 +63,18 @@
         <item quantity="many">%s paistí roghnaithe</item>
         <item quantity="other">%s paistí roghnaithe</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Taispeáin %s aip</item>
+        <item quantity="two">Taispeáin %s aipeanna</item>
+        <item quantity="few">Taispeáin %s aipeanna</item>
+        <item quantity="many">Taispeáin %s aipeanna</item>
+        <item quantity="other">Taispeáin %s aipeanna</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s aip i bhfolach</item>
+        <item quantity="two">%s aipeanna i bhfolach</item>
+        <item quantity="few">%s aipeanna i bhfolach</item>
+        <item quantity="many">%s aipeanna i bhfolach</item>
+        <item quantity="other">%s aipeanna i bhfolach</item>
+    </plurals>
 </resources>

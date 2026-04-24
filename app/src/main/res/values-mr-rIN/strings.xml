@@ -73,7 +73,7 @@
     <string name="settings_advanced_bytecode_mode_dialog_description"> patching दरम्यान बाईटकोड कसा process केला जातो हे नियंत्रित करते. patching गती, मेमरी वापर आणि आउटपुट APK आकार यावर परिणाम होतो</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">जलद (शिफारस केलेले)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">जलद</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_description">धीमे पॅचिंग आणि कमी मेमरी वापर, मोठ्या APK चा खर्च येतो. कमी रॅम किंवा जुन्या उपकरणांसाठी शिफारस केलेले</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">मोठा APK आकार या बदल्यात, जलद पॅचिंग आणि कमी मेमरी वापर. कमी RAM किंवा जुन्या उपकरणांसाठी शिफारसित</string>
     <string name="settings_advanced_bytecode_mode_full">पूर्ण</string>
     <string name="settings_advanced_bytecode_mode_full_description">धीमे पॅचिंग, जुन्या वर्तणुकीची नक्कल करते. जलद मोड समस्या निर्माण करत असल्यास फक्त ते वापरा</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

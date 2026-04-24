@@ -32,8 +32,8 @@
     <string name="home_no_apps_title">Níl aon aipeanna ar fáil</string>
     <string name="home_no_apps_subtitle">Cuir foinse paiste leis nó cumasaigh ceann atá ann cheana féin i %s</string>
     <string name="home_no_apps_search_subtitle">Níl aon aipeanna a mheaitseálann \"%1$s\"</string>
-    <string name="home_all_apps_hidden_title">Tá na gciaptáin go léir faoi chríocha</string>
-    <string name="home_all_apps_hidden_subtitle">Chaill tú go léir na gciaptáin ón scáinn tithíochta</string>
+    <string name="home_all_apps_hidden_title">Tá gach aipeanna i bhfolach</string>
+    <string name="home_all_apps_hidden_subtitle">Tá na haipeanna go léir i bhfolach agat ón scáileán baile</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Cén aip ar mhaith leat paiste a chur leis?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -310,16 +310,13 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="failed_to_execute_patch">Theip ar %s a chur i bhfeidhm</string>
     <string name="patched_app_saved_toast">Comhadaithe aip sábháilte le haghaidh níos déanaí</string>
     <string name="patched_app_save_failed_toast">Theip ar aip chomhfhiosach a shábháil</string>
-    <string name="download_apk">Íoslódáil comhad APK</string>
     <string name="plugin_activity_dialog_body">Tá idirghníomhaíocht úsáideora ag teastáil chun dul ar aghaidh leis an mbreiseán seo</string>
     <string name="patcher_process_exit_message">Cuireadh deireadh leis an bpróiseas paisteála le cód %1$s</string>
     <string name="install_app_success">Suiteáilte go rathúil</string>
     <string name="install_app_fail">Theip ar aip a shuiteáil: %s</string>
-    <string name="install_timeout_message">Níor críochnaíodh an suiteáil. Seiceáil an dialóg suiteálaí córais agus déan iarracht arís.</string>
     <string name="save_apk_success">APK Sábháilte</string>
     <string name="saved_app_export_failed">Theip ar aip paisteáilte a easpórtáil</string>
     <string name="saved_app_removed_toast">Baineadh an aip phaisteáilte sábháilte</string>
-    <string name="saved_app_copy_removed_toast">Baineadh an chóip shábháilte</string>
     <string name="saved_app_launch_unavailable">Suiteáil an aip sula n-osclaíonn tú é</string>
     <string name="package_name">Ainm an phacáiste</string>
     <string name="failed_to_mount">Theip ar fheistiú: %s</string>
@@ -356,9 +353,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="settings_appearance_translations_info_title">D’fhéadfadh aistriúcháin do roinnt teangacha a bheith ar iarraidh nó neamhiomlán</string>
     <string name="settings_appearance_translations_info_text">Chun teangacha nua a aistriú nó na haistriúcháin atá ann cheana a fheabhsú, tabhair cuairt ar %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
-    <string name="settings_appearance_home_screen">Scáinn Home</string>
-    <string name="settings_appearance_greeting_phrases">Frásaí fáilte</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Seas rogha fáilte ar an scáinn bhaile</string>
+    <string name="settings_appearance_home_screen">Home screen</string>
+    <string name="settings_appearance_greeting_phrases">Frásaí beannachta</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Taispeáin teachtaireacht beannachta ar an scáileán baile</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Deilbhín aip</string>
     <string name="settings_appearance_app_icon_default">Réamhshocrú</string>
@@ -523,13 +520,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
     <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile</string>
-    <string name="installer_hint_blocked">Cuireadh bac ar an suiteáil ag Android. Seiceáil Play Protect nó socruithe slándála</string>
     <string name="installer_hint_conflict">Tá aip eile leis an ainm pacáiste seo suiteáilte cheana féin. Díchumasaigh é sula leanann tú ar aghaidh</string>
-    <string name="installer_hint_incompatible">Níl an APK comhoiriúnach leis an bhfeiste seo nó leis an leagan Android seo</string>
-    <string name="installer_hint_invalid">Tá an APK neamhbhailí nó truaillithe</string>
-    <string name="installer_hint_storage">Níl dóthain spáis stórála ann don suiteáil</string>
-    <string name="installer_hint_timeout">Chuaigh an t-am suiteála isteach. Déan iarracht arís</string>
-    <string name="installer_hint_aborted">Cuireadh an suiteáil ar ceal</string>
     <string name="installer_external_launched">Ag oscailt %1$s…</string>
     <string name="installer_external_timeout">%1$s ní chugainn an instealladh. Glaoigh ar an gcló eile agus tairgfidh tú arís</string>
     <string name="installer_external_success">Thuairisc %1$s suiteáil rathúil</string>
@@ -695,7 +686,6 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="allow">Ceadaigh</string>
     <string name="details">Sonraí</string>
     <string name="hide">Folaigh</string>
-    <string name="default_">Réamhshocrú</string>
     <string name="logs">Logaí</string>
     <string name="sources">Foinsí</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>

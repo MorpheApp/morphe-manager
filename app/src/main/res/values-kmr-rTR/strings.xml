@@ -103,13 +103,13 @@
     <string name="home_download_instructions_step1">Li jêr çapa \'%1$s\' biketine</string>
     <string name="home_download_instructions_step2_part1">Li ser rûbera malperê biqewime û bikşîne</string>
     <string name="home_download_instructions_download_button_toast">Li ser malpera çapa serdest bike, ne ku xwer li vir 😊</string>
-    <string name="home_download_instructions_step3">Heke barkevtin temamm bike, û &lt;b&gt;newestîne&lt;/b&gt; APK</string>
-    <string name="home_download_instructions_step3_mount">Heke barkevtin temamm bike, paştrê &lt;b&gt;APK-ê saz bike&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Piştî ku server heta qedandina dewam bike, ji Morphe desteke be.</string>
-    <string name="home_download_instructions_step4_mount">Piştî ku APK-ya asayî bin deçên, ji Morphe desteke be.</string>
+    <string name="home_download_instructions_step3">Li benda qedembûna daxistinê bibe, û &lt;b&gt;APK-ê nas neke&lt;/b&gt;</string>
+    <string name="home_download_instructions_step3_mount">Binevin destpêkirina daxistnê biqedîne, paşê &lt;b&gt;APKê nas bike&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">Pi serîdana daxistinê bi dawî bû, vegerin ser Morphe</string>
+    <string name="home_download_instructions_step4_mount">Pi naskindina APK\'ya bilavkirinê, vegerin Morphe</string>
     <string name="home_download_instructions_continue">Bibe APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">APK-ya danîyê bikê</string>
+    <string name="home_file_picker_prompt_title">APKê daxistî hilbijêre</string>
     <string name="home_file_picker_prompt_description">Sêw  %1$s  ê têbîrijayî ku  bi pêştirî daxistine</string>
     <string name="home_file_picker_prompt_open_apk">Dosya APK veqêşin</string>
     <string name="home_recommended_version">Versyona ku tê pêşniyar kirin</string>
@@ -170,7 +170,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="patch_option_enter_number">Hejmar biqîze</string>
     <string name="patch_option_enter_decimal">Desîmal biqîze</string>
     <string name="patch_option_pick_folder">Folder safînak</string>
-    <string name="patch_option_list_duplicate">Evîna vê ber bi hezaran e</string>
+    <string name="patch_option_list_duplicate">Ev nirx e jixye heye</string>
     <string name="patch_option_list_empty">Qîymet nikare boçagî be</string>
     <string name="patch_option_list_empty_state">Heta niha tiştek zêde nabe</string>
     <string name="patch_option_required_missing">%s: hemû rêzika pêwist tê dîtin</string>
@@ -308,16 +308,13 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="failed_to_execute_patch">Şeva pek dabeşin %s</string>
     <string name="patched_app_saved_toast">Sepeya patch kirî ji bo paşê hatiye parastin</string>
     <string name="patched_app_save_failed_toast">Hate parastina sepeya patch kirî</string>
-    <string name="download_apk">Dosye APK-yê dakavêje</string>
     <string name="plugin_activity_dialog_body">Bixweştana mêz rêk û pê dei bilinge da pêşbaziyê bi zaniye vê plugin you bo lazmî bîye se</string>
     <string name="patcher_process_exit_message">Prosesa pêlavînê bi koda %1$s qedand.</string>
     <string name="install_app_success">Bi ser ketin</string>
     <string name="install_app_fail">Serketina kuştina sepanê: %s</string>
-    <string name="install_timeout_message">Giraistî ber hem dawıkirin ne. Hayiyan dialogê pêşbazî sistema be dîtin Û xemm biçike</string>
     <string name="save_apk_success">APK-yê hatiye parastin</string>
     <string name="saved_app_export_failed">Serketina paşerojê ya sepanê</string>
     <string name="saved_app_removed_toast">Hateyên parastinê hatin jêbirin</string>
-    <string name="saved_app_copy_removed_toast">Hateyên veşartinê hatin jêbirin</string>
     <string name="saved_app_launch_unavailable">Bernameyê saz bike berê li hevê pê bixe</string>
     <string name="package_name">Navê pakêtê</string>
     <string name="failed_to_mount">Serketina çêkirinê: %s</string>
@@ -523,13 +520,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_status_shizuku_unsupported">Versiyona sazkirî ya Şizuku piştgirî nadê</string>
     <string name="installer_action_open_shizuku">Veşêre Shizuku</string>
     <string name="installer_hint_generic">Îstikrar kirin jêvir kirin. Dibe, dîsa hewil bide an li îstalatorek din zivirînê hebin</string>
-    <string name="installer_hint_blocked">Îstikrar kirin ji aliyê Android ve hat astebijartin. Guma Play Protect an setingên ewletiyê kontrol bike</string>
     <string name="installer_hint_conflict">Sep ne ku bi navê pakêtê ya viya berê hatî saz kirin.  Berî pêşxistina hevalan, ew jêbirin be</string>
-    <string name="installer_hint_incompatible">APK bi vê cihaz an versiyona Androida nestên fêr</string>
-    <string name="installer_hint_invalid">APK ne cudne an xeranbûne</string>
-    <string name="installer_hint_storage">Jibo îstikrar kirin, asta glazî heye</string>
-    <string name="installer_hint_timeout">Îstikrar kirin heta demê pêxistine xistê. Dibe, dîsa hewil bide</string>
-    <string name="installer_hint_aborted">Îstikrar kirin astebijartin kirin</string>
     <string name="installer_external_launched">%1$s vekirine…</string>
     <string name="installer_external_timeout">%1$s îstikrar kirin gef ne kir. Sepa din kontrol bike û dîsa hewil bide</string>
     <string name="installer_external_success">%1$s îstikrar kirin serketin ragihand</string>
@@ -695,7 +686,6 @@ Qasîyên wêneyan divê wiha bin:
     <string name="allow">Îznaye</string>
     <string name="details">Agahdarî</string>
     <string name="hide">Vêşêrîn</string>
-    <string name="default_">Standard</string>
     <string name="logs">Log</string>
     <string name="sources">Çavkanî</string>
     <string name="installing_ellipsis">Dikuştin…</string>

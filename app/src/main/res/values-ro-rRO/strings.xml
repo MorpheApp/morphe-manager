@@ -273,7 +273,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patcher_step_sign_apk">Se semnează fișierul APK modificat</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Se aplică modificările…</string>
-    <string name="patcher_notification_text">Atingeți pentru a reveni la instrumentul de modificare</string>
+    <string name="patcher_notification_text">Atinge pentru a reveni la patcher</string>
     <string name="patcher_stop_confirm_title">Opriți instrumentul de modificare</string>
     <string name="patcher_stop_confirm_description">Sigur doriți să opriți procesul de modificare?</string>
     <!-- Patcher Screen - Patcher Messages -->
@@ -306,20 +306,17 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patching_app">Se patch-uiește aplicația</string>
     <string name="memory_usage">Utilizare memorie</string>
     <!-- Patcher Screen - Other hidden strings -->
-    <string name="applying_patches">Aplicarea modificărilor</string>
+    <string name="applying_patches">Se aplică patch-urile</string>
     <string name="failed_to_execute_patch">Nu s-a putut aplica %s</string>
     <string name="patched_app_saved_toast">Aplicație modificată salvată pentru mai târziu</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
-    <string name="download_apk">Descarcă fișierul APK</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
     <string name="patcher_process_exit_message">Procesul de patch a ieșit cu codul %1$s</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
-    <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul instalatorului sistemului și reîncercați</string>
     <string name="save_apk_success">APK salvat</string>
     <string name="saved_app_export_failed">Nu s-a putut exporta aplicația modificată</string>
     <string name="saved_app_removed_toast">Aplicație modificată salvată eliminată</string>
-    <string name="saved_app_copy_removed_toast">Copie salvată eliminată</string>
     <string name="saved_app_launch_unavailable">Instalează aplicația înainte de deschiderea ei</string>
     <string name="package_name">Nume pachet</string>
     <string name="failed_to_mount">Montare eșuată: %s</string>
@@ -525,13 +522,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
     <string name="installer_action_open_shizuku">Deschide Shizuku</string>
     <string name="installer_hint_generic">Instalarea a eșuat. Reîncercați sau schimbați la un instalator diferit</string>
-    <string name="installer_hint_blocked">Instalarea a fost blocată de Android. Verificați Play Protect sau setările de securitate</string>
     <string name="installer_hint_conflict">Altă aplicație cu acest nume de pachet este deja instalată. Dezinstalați-o înainte de continuare</string>
-    <string name="installer_hint_incompatible">APK-ul nu este compatibil cu acest dispozitiv sau versiunea Android</string>
-    <string name="installer_hint_invalid">APK-ul este invalid sau corupt</string>
-    <string name="installer_hint_storage">Nu există suficient spațiu de stocare pentru instalarea</string>
-    <string name="installer_hint_timeout">Instalarea a expirat. Încearcă din nou</string>
-    <string name="installer_hint_aborted">Instalarea a fost anulată</string>
     <string name="installer_external_launched">Se deschide %1$s…</string>
     <string name="installer_external_timeout">%1$s nu a confirmat instalarea. Verificați altă aplicație și reîncercați</string>
     <string name="installer_external_success">%1$s a raportat o instalare reușită</string>
@@ -697,7 +688,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="allow">Permite</string>
     <string name="details">Detalii</string>
     <string name="hide">Ascunde</string>
-    <string name="default_">Implicit</string>
     <string name="logs">Jurnale</string>
     <string name="sources">Surse</string>
     <string name="installing_ellipsis">Se instalează…</string>

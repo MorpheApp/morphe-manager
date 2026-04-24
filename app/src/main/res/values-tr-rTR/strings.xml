@@ -310,16 +310,13 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="failed_to_execute_patch">%s uygulanamadı</string>
     <string name="patched_app_saved_toast">Yamalanmış uygulama daha sonrası için kaydedildi</string>
     <string name="patched_app_save_failed_toast">Yamalanmış uygulama kaydedilemedi</string>
-    <string name="download_apk">APK dosyasını indir</string>
     <string name="plugin_activity_dialog_body">Bu eklentinin çalışmaya devam edebilmesi için kullanıcı etkileşimi gereklidir</string>
     <string name="patcher_process_exit_message">Yamalama işlemi %1$s kodu ile sonlandı</string>
     <string name="install_app_success">Başarıyla yüklendi</string>
     <string name="install_app_fail">Uygulama yüklenemedi: %s</string>
-    <string name="install_timeout_message">Yükleme tamamlanmadı. Sistem yükleyici iletişim kutusunu kontrol edin ve tekrar deneyin</string>
     <string name="save_apk_success">APK Kaydedildi</string>
     <string name="saved_app_export_failed">Yamalanmış uygulama dışa aktarılamadı</string>
     <string name="saved_app_removed_toast">Kayıtlı yamalanmış uygulama kaldırıldı</string>
-    <string name="saved_app_copy_removed_toast">Kaydedilen kopya kaldırıldı</string>
     <string name="saved_app_launch_unavailable">Uygulamayı açmadan önce yükleyin</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Bağlanamadı: %s</string>
@@ -358,7 +355,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ana ekran</string>
     <string name="settings_appearance_greeting_phrases">Selamlama cümleleri</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlaşma mesajı göster</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Uygulama simgesi</string>
     <string name="settings_appearance_app_icon_default">Varsayılan</string>
@@ -415,7 +412,7 @@ Basit APK'ler için, yamalamadan sonra desteklenmeyen mimarilere ait yerel küt�
     <string name="settings_advanced_bytecode_mode_strip_fast">Hızlı</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Daha büyük bir APK pahasına daha hızlı yamalama ve daha düşük bellek kullanımı. Düşük RAM\'li veya eski cihazlar için önerilir</string>
     <string name="settings_advanced_bytecode_mode_full">Tam</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Daha yavaş yamalama, eski davranışı tekrarlar. Yalnızca hızlı mod sorunlara neden oluyorsa kullanın</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Daha yavaş yamalama, eski davranışı tekrarlar. Yalnızca hızlı mod sorunlara neden olursa kullanın</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Çekme isteği kaynakları için gereklidir</string>
@@ -525,13 +522,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_status_shizuku_unsupported">Yüklü Shizuku sürümü desteklenmiyor</string>
     <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
     <string name="installer_hint_generic">Yükleme başarısız oldu. Tekrar deneyin veya farklı bir yükleyiciye geçin</string>
-    <string name="installer_hint_blocked">Yükleme Android tarafından engellendi. Play Protect veya güvenlik ayarlarını kontrol edin</string>
     <string name="installer_hint_conflict">Bu paket adıyla başka bir uygulama zaten yüklü. Devam etmeden önce onu kaldırın</string>
-    <string name="installer_hint_incompatible">APK, bu cihaz veya Android sürümüyle uyumlu değil</string>
-    <string name="installer_hint_invalid">APK, geçersiz veya bozuk</string>
-    <string name="installer_hint_storage">Yükleme için yeterli depolama alanı yok</string>
-    <string name="installer_hint_timeout">Yükleme zaman aşımına uğradı. Tekrar deneyin</string>
-    <string name="installer_hint_aborted">Yükleme iptal edildi</string>
     <string name="installer_external_launched">%1$s açılıyor…</string>
     <string name="installer_external_timeout">%1$s yüklemeyi onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin</string>
     <string name="installer_external_success">%1$s başarılı bir şekilde yüklediğini bildirdi</string>
@@ -697,7 +688,6 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="allow">İzin ver</string>
     <string name="details">Detaylar</string>
     <string name="hide">Gizle</string>
-    <string name="default_">Varsayılan</string>
     <string name="logs">Günlükler</string>
     <string name="sources">Kaynaklar</string>
     <string name="installing_ellipsis">Yükleniyor…</string>

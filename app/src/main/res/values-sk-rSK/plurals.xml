@@ -1,2 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s záplata</item>
+        <item quantity="few">%s záplaty</item>
+        <item quantity="many">%s záplat</item>
+        <item quantity="other">%s záplat</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s nastavenie záplaty</item>
+        <item quantity="few">%s nastavenia záplaty</item>
+        <item quantity="many">%s nastavení záplaty</item>
+        <item quantity="other">%s nastavení záplaty</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s zdroj</item>
+        <item quantity="few">%s zdroje</item>
+        <item quantity="many">%s zdrojov</item>
+        <item quantity="other">%s zdrojov</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s balík</item>
+        <item quantity="few">%s balíky</item>
+        <item quantity="many">%s balíkov</item>
+        <item quantity="other">%s balíkov</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Vykonaj %s záplatu</item>
+        <item quantity="few">Vykonaj %s záplaty</item>
+        <item quantity="many">Vykonaj %s záplat</item>
+        <item quantity="other">Vykonaj %s záplat</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s APK súbor</item>
+        <item quantity="few">%s APK súbory</item>
+        <item quantity="many">%s APK súborov</item>
+        <item quantity="other">%s APK súborov</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Odstránená %s zastaralá záplata z uloženého výberu</item>
+        <item quantity="few">Odstránené %s zastaralé záplaty z uloženého výberu</item>
+        <item quantity="many">Odstránených %s zastaralých záplat z uloženého výberu</item>
+        <item quantity="other">Odstránených %s zastaralých záplat z uloženého výberu</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%s zdroj nainštalovaný</item>
+        <item quantity="few">%s zdroje nainštalované</item>
+        <item quantity="many">%s zdrojov nainštalovaných</item>
+        <item quantity="other">%s zdrojov nainštalovaných</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%s zvolená záplata</item>
+        <item quantity="few">%s zvolené záplaty</item>
+        <item quantity="many">%s zvolených záplat</item>
+        <item quantity="other">%s zvolených záplat</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Zobraziť %s aplikáciu</item>
+        <item quantity="few">Zobraziť %s aplikácie</item>
+        <item quantity="many">Zobraziť %s aplikácie</item>
+        <item quantity="other">Zobraziť %s aplikácie</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s skrytá aplikácia</item>
+        <item quantity="few">%s skryté aplikácie</item>
+        <item quantity="many">%s skryté aplikácie</item>
+        <item quantity="other">%s skryté aplikácie</item>
+    </plurals>
+</resources>
