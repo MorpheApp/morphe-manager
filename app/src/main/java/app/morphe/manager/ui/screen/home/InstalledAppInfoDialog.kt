@@ -9,9 +9,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -42,6 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.lerp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
@@ -97,7 +96,7 @@ fun InstalledAppInfoDialog(
     val appUpdates by homeViewModel.appUpdatesAvailable.collectAsStateWithLifecycle()
     val hasUpdate = appUpdates[packageName] == true
 
-    // Accent color from bundle metadata (appIconColor) → KnownApps.brandColor → default.
+    // Accent color resolution order: bundle metadata (appIconColor) -> KnownApps.brandColor -> default.
     // originalPackageName needed because metadata is keyed by original pkg, not patched.
     val bundleAppMetadata by homeViewModel.bundleAppMetadataFlow.collectAsStateWithLifecycle()
     val appAccentColor: Color by remember(packageName) {
@@ -467,6 +466,33 @@ private fun AppHeroHeader(
     val onHero = MaterialTheme.colorScheme.onBackground
     val chipBg = accentColor.copy(alpha = 0.18f)
 
+    // Entrance animations (progress-based: 0f -> 1f).
+    // One Float per visual group; alpha, offset and scale are derived via lerp
+    // to avoid redundant Recomposition subscribers.
+    var entered by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { entered = true }
+
+    // Icon: spring with overshoot (first thing the eye sees, no delay needed).
+    val iconProgress by animateFloatAsState(
+        targetValue = if (entered) 1f else 0f,
+        animationSpec = spring(dampingRatio = 0.55f, stiffness = 320f),
+        label = "heroIconProgress"
+    )
+
+    // Name + version share one clock; stagger handled inside graphicsLayer via lerp
+    val textProgress by animateFloatAsState(
+        targetValue = if (entered) 1f else 0f,
+        animationSpec = tween(durationMillis = 260, delayMillis = 60, easing = EaseOutCubic),
+        label = "heroTextProgress"
+    )
+
+    // Both chips share one clock; chip 2 uses a clamped sub-range for its offset
+    val chipsProgress by animateFloatAsState(
+        targetValue = if (entered) 1f else 0f,
+        animationSpec = tween(durationMillis = 240, delayMillis = 160, easing = EaseOutBack),
+        label = "heroChipsProgress"
+    )
+
     Box(modifier = modifier.fillMaxWidth()) {
         // Simple tinted background
         Box(
@@ -502,30 +528,51 @@ private fun AppHeroHeader(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                // Animated app icon
                 AppIcon(
                     packageInfo = appInfo,
                     contentDescription = null,
                     modifier = Modifier
                         .size(88.dp)
                         .clip(RoundedCornerShape(22.dp))
+                        .graphicsLayer {
+                            val s = lerp(0.6f, 1f, iconProgress)
+                            scaleX = s
+                            scaleY = s
+                            alpha = iconProgress.coerceIn(0f, 1f)
+                        }
                 )
                 Column(
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    AppLabel(
-                        packageInfo = appInfo,
-                        style = MaterialTheme.typography.headlineSmall.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 22.sp,
-                            color = onHero
-                        ),
-                        defaultText = packageName
-                    )
+                    // Animated app name (leads textProgress)
+                    Box(
+                        modifier = Modifier.graphicsLayer {
+                            translationX = lerp(40f, 0f, textProgress)
+                            alpha = textProgress.coerceIn(0f, 1f)
+                        }
+                    ) {
+                        AppLabel(
+                            packageInfo = appInfo,
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 22.sp,
+                                color = onHero
+                            ),
+                            defaultText = packageName
+                        )
+                    }
+                    // Animated version (slightly behind name via sub-range)
                     Text(
                         text = appInfo?.versionName?.let { "v$it" } ?: installedApp.version,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = onHero.copy(alpha = 0.50f)
+                        color = onHero.copy(alpha = 0.50f),
+                        modifier = Modifier.graphicsLayer {
+                            val p = ((textProgress - 0.15f) / 0.85f).coerceIn(0f, 1f)
+                            translationX = lerp(40f, 0f, p)
+                            alpha = p
+                        }
                     )
                 }
             }
@@ -542,14 +589,31 @@ private fun AppHeroHeader(
                     InstallType.SAVED   -> Icons.Outlined.Save to R.string.saved
                     InstallType.DEFAULT -> Icons.Outlined.InstallMobile to R.string.home_app_info_install_type_system_installer
                 }
-                InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
+                // Animated chip 1
+                Box(
+                    modifier = Modifier.graphicsLayer {
+                        translationY = lerp(20f, 0f, chipsProgress)
+                        alpha = chipsProgress.coerceIn(0f, 1f)
+                    }
+                ) {
+                    InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
+                }
+                // Animated chip 2 (sub-range: starts when chip1 is 30% done)
                 installedApp.patchedAt?.let { ts ->
-                    InfoChip(
-                        icon = Icons.Outlined.Schedule,
-                        text = getRelativeTimeString(ts),
-                        bg = chipBg,
-                        fg = onHero
-                    )
+                    Box(
+                        modifier = Modifier.graphicsLayer {
+                            val p = ((chipsProgress - 0.3f) / 0.7f).coerceIn(0f, 1f)
+                            translationY = lerp(20f, 0f, p)
+                            alpha = p
+                        }
+                    ) {
+                        InfoChip(
+                            icon = Icons.Outlined.Schedule,
+                            text = getRelativeTimeString(ts),
+                            bg = chipBg,
+                            fg = onHero
+                        )
+                    }
                 }
             }
         }
@@ -557,7 +621,9 @@ private fun AppHeroHeader(
 }
 
 /**
- * Wraps content with a staggered fade+slide entrance animation.
+ * Wraps content with a staggered entrance animation.
+ * Uses a single progress float (0 to 1); alpha, offsetY and scale are
+ * derived via lerp - one Recomposition subscriber instead of three.
  * Each item appears [index] * 60ms after [entered] becomes true.
  */
 @Composable
@@ -566,25 +632,24 @@ private fun StaggeredItem(
     index: Int,
     content: @Composable () -> Unit
 ) {
-    val alpha by animateFloatAsState(
+    val progress by animateFloatAsState(
         targetValue = if (entered) 1f else 0f,
         animationSpec = tween(
-            durationMillis = 60,
+            durationMillis = 280,
             delayMillis = index * 60,
-            easing = FastOutSlowInEasing
+            easing = EaseOutCubic
         ),
-        label = "itemAlpha$index"
+        label = "itemProgress$index"
     )
-    val offsetY by animateFloatAsState(
-        targetValue = if (entered) 0f else 28f,
-        animationSpec = tween(
-            durationMillis = 60,
-            delayMillis = index * 60,
-            easing = FastOutSlowInEasing
-        ),
-        label = "itemOffsetY$index"
-    )
-    Box(modifier = Modifier.graphicsLayer { this.alpha = alpha; translationY = offsetY }) {
+    Box(
+        modifier = Modifier.graphicsLayer {
+            alpha = progress
+            translationY = lerp(28f, 0f, progress)
+            val s = lerp(0.97f, 1f, progress)
+            scaleX = s
+            scaleY = s
+        }
+    ) {
         content()
     }
 }
