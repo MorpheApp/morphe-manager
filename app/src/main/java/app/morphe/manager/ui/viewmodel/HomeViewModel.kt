@@ -2104,6 +2104,7 @@ class HomeViewModel(
             }
             pendingSelectedApp = null
         }
+        showApkAvailabilityDialog = false
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
     }

@@ -612,6 +612,7 @@ The image dimensions must be as follows:
     <string name="settings_system_export_keystore_description">Export the current keystore</string>
     <string name="settings_system_export_keystore_unavailable">No keystore available to export</string>
     <string name="settings_system_export_keystore_success">Keystore exported</string>
+    <string name="settings_system_export_keystore_failed">Failed to export keystore</string>
     <string name="settings_system_show_password_field">Show password</string>
     <string name="settings_system_hide_password_field">Hide password</string>
 
