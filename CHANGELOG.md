@@ -1,3 +1,15 @@
+# [1.16.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.6...v1.16.0-dev.7) (2026-04-24)
+
+
+### Bug Fixes
+
+* `Session is dead` error on Pixels devices when installing apps ([#458](https://github.com/MorpheApp/morphe-manager/issues/458)) ([ce1ce6e](https://github.com/MorpheApp/morphe-manager/commit/ce1ce6e195a4138c7ca18f5a9dd018db8591fddc))
+
+
+### Features
+
+* Improve patch visibility in bundle and app patch dialogs ([#457](https://github.com/MorpheApp/morphe-manager/issues/457)) ([1881991](https://github.com/MorpheApp/morphe-manager/commit/188199176dba9fe41115e2376fe7ade3138c8068))
+
 # [1.16.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.5...v1.16.0-dev.6) (2026-04-20)
 
 

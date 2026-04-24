@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-20T07:55:47.744Z",
-  "description": "# [1.16.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.5...v1.16.0-dev.6) (2026-04-20)\n\n\n### Bug Fixes\n\n* System installer couldn't update an already installed app ([#455](https://github.com/MorpheApp/morphe-manager/issues/455)) ([adc93e4](https://github.com/MorpheApp/morphe-manager/commit/adc93e4bab2d9b153b2aecd9f0671b393e42d309))\n* When greeting message is disabled, show a small top spacer so the app cards don't sit flush against the top of the screen ([6900cc2](https://github.com/MorpheApp/morphe-manager/commit/6900cc226e189b97c747d6d53f5fba98ade6ccf0))\n\n\n### Features\n\n* Sort universal patches to bottom of each bundle in patches dialog ([eac672e](https://github.com/MorpheApp/morphe-manager/commit/eac672e51f1fe3007bba46af6321d833ac20fb4b))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.6/morphe-manager-1.16.0-dev.6.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.6/morphe-manager-1.16.0-dev.6.apk.asc",
-  "version": "1.16.0-dev.6"
+  "created_at": "2026-04-24T07:51:09.367Z",
+  "description": "# [1.16.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.6...v1.16.0-dev.7) (2026-04-24)\n\n\n### Bug Fixes\n\n* `Session is dead` error on Pixels devices when installing apps ([#458](https://github.com/MorpheApp/morphe-manager/issues/458)) ([ce1ce6e](https://github.com/MorpheApp/morphe-manager/commit/ce1ce6e195a4138c7ca18f5a9dd018db8591fddc))\n\n\n### Features\n\n* Improve patch visibility in bundle and app patch dialogs ([#457](https://github.com/MorpheApp/morphe-manager/issues/457)) ([1881991](https://github.com/MorpheApp/morphe-manager/commit/188199176dba9fe41115e2376fe7ade3138c8068))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.7/morphe-manager-1.16.0-dev.7.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.7/morphe-manager-1.16.0-dev.7.apk.asc",
+  "version": "1.16.0-dev.7"
 }
