@@ -1646,6 +1646,26 @@ fun AppPatchesDialog(
     val isFiltering = searchQuery.isNotBlank() || selectedBundle != null
     val totalCount = allPatches.size
 
+    // Pre-compute per-bundle markers once so items{} can do O(1) lookups instead of O(n) scans
+    val firstPatchPerBundle: Map<Int, PatchInfo> = remember(filteredPatches) {
+        buildMap {
+            filteredPatches.forEach { (uid, patch) -> putIfAbsent(uid, patch) }
+        }
+    }
+    val firstUniversalPerBundle: Map<Int, PatchInfo> = remember(filteredPatches) {
+        buildMap {
+            filteredPatches.forEach { (uid, patch) ->
+                if (patch.compatiblePackages == null) putIfAbsent(uid, patch)
+            }
+        }
+    }
+    val bundlesWithSpecificPatches: Set<Int> = remember(filteredPatches) {
+        filteredPatches
+            .filter { (_, patch) -> patch.compatiblePackages != null }
+            .map { it.first }
+            .toSet()
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         dismissOnClickOutside = true,
@@ -1875,9 +1895,7 @@ fun AppPatchesDialog(
                 ) {
                     // Bundle section label - only for multi-bundle, at first patch of each bundle
                     if (isMultiBundle) {
-                        val isFirstOfBundle = remember(filteredPatches, uid, patch) {
-                            filteredPatches.firstOrNull { it.first == uid }?.second == patch
-                        }
+                        val isFirstOfBundle = firstPatchPerBundle[uid] == patch
                         if (isFirstOfBundle) {
                             InfoBadge(
                                 text = bundleNames[uid] ?: uid.toString(),
@@ -1890,14 +1908,9 @@ fun AppPatchesDialog(
                     }
 
                     // Universal patches divider - shown before the first universal patch of each bundle
-                    val isFirstUniversalOfBundle = remember(filteredPatches, uid, patch) {
-                        if (!isUniversal) return@remember false
-                        filteredPatches.firstOrNull { it.first == uid && it.second.compatiblePackages == null }?.second == patch
-                    }
+                    val isFirstUniversalOfBundle = isUniversal && firstUniversalPerBundle[uid] == patch
                     if (isFirstUniversalOfBundle) {
-                        val hasSpecificAbove = remember(filteredPatches, uid) {
-                            filteredPatches.any { it.first == uid && it.second.compatiblePackages != null }
-                        }
+                        val hasSpecificAbove = uid in bundlesWithSpecificPatches
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
