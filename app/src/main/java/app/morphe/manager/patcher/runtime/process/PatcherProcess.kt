@@ -85,7 +85,10 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 workspace = File(parameters.cacheDir),
                 logger = logger,
                 skipUnneededSplits = parameters.skipUnneededSplits,
-                onProgress = { message -> logger.info(message) }
+                onProgress = { message ->
+                    logger.info(message)
+                    events.progress(message, State.RUNNING.name, null)
+                }
             )
 
             try {

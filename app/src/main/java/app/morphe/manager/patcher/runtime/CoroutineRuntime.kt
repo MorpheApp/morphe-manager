@@ -65,7 +65,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                 source = File(inputFile),
                 workspace = File(cacheDir),
                 logger = logger,
-                skipUnneededSplits = skipUnneededSplits
+                skipUnneededSplits = skipUnneededSplits,
+                onProgress = { message -> onProgress(message, State.RUNNING, null) }
             )
 
             try {
