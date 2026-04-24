@@ -1,6 +1,7 @@
 package app.morphe.manager.ui.screen.shared
 
 import android.content.pm.PackageInfo
+import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -116,12 +117,15 @@ private fun ResolvedAppIcon(
     val appDataResolver: AppDataResolver = koinInject()
 
     var resolvedPackageInfo by remember(packageName) { mutableStateOf<PackageInfo?>(null) }
+    var resolvedDrawable by remember(packageName) { mutableStateOf<Drawable?>(null) }
     var isLoading by remember(packageName) { mutableStateOf(true) }
 
     LaunchedEffect(packageName, preferredSource) {
         // Use resolveAppData to get complete data in one call
         val resolvedData = appDataResolver.resolveAppData(packageName, preferredSource)
         resolvedPackageInfo = resolvedData.packageInfo
+        // Fall back to raw Drawable when packageInfo is unavailable
+        resolvedDrawable = resolvedData.icon.takeIf { resolvedData.packageInfo == null }
         isLoading = false
     }
 
@@ -148,6 +152,14 @@ private fun ResolvedAppIcon(
                 modifier = modifier
             )
         }
+        resolvedDrawable != null -> {
+            // packageInfo unavailable but raw Drawable was resolved (rare path)
+            DrawableAppIcon(
+                drawable = resolvedDrawable!!,
+                contentDescription = contentDescription,
+                modifier = modifier
+            )
+        }
         placeholderGradientColors != null -> {
             // No icon found - show glass placeholder tinted to card colors
             GlassPlaceholderIcon(
@@ -163,6 +175,24 @@ private fun ResolvedAppIcon(
             )
         }
     }
+}
+
+/**
+ * Icon display from a raw [Drawable] - used when packageInfo is unavailable but
+ * the resolver produced a Drawable directly.
+ */
+@Composable
+private fun DrawableAppIcon(
+    drawable: Drawable,
+    contentDescription: String?,
+    modifier: Modifier = Modifier
+) {
+    // Coil can load Drawable directly without needing PackageInfo
+    AsyncImage(
+        model = drawable,
+        contentDescription = contentDescription,
+        modifier = modifier
+    )
 }
 
 /**

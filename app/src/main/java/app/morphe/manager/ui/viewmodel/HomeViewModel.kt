@@ -989,14 +989,11 @@ class HomeViewModel(
     }
 
     /**
-     * Per-package metadata aggregated from all enabled patch bundles.
-     * Provides display names, accent colors, APK type requirements, and valid signatures
-     * without relying on hardcoded constants for non-KnownApps packages.
+     * Metadata for all apps across enabled bundles - display names, icon colors, signatures, etc.
+     * Delegates to [PatchBundleRepository.appMetadata] as the single source of truth.
      */
     val bundleAppMetadataFlow: StateFlow<Map<String, BundleAppMetadata>> =
-        patchBundleRepository.allBundlesInfoFlow
-            .map { bundleInfoMap -> BundleAppMetadata.buildFrom(bundleInfoMap) }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+        patchBundleRepository.appMetadata
 
     /**
      * Set of all unique package names that have patches across all enabled bundles.
