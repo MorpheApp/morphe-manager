@@ -32,7 +32,15 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
+import android.content.ContentValues
+import android.os.Build
+import java.io.BufferedWriter
+import java.util.Locale
+import android.os.Environment
+import android.provider.MediaStore
 import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
@@ -359,60 +367,66 @@ class ImportExportViewModel(
             return "morphe_logcat_$time.log"
         }
 
+    /**
+     * Writes the debug log content to [writer]. Returns the logcat exit code.
+     * Must be called from within a [Dispatchers.IO] context.
+     * Shared by [exportDebugLogs] (SAF target) and [exportDebugLogsToDownloads] (MediaStore target).
+     */
+    private suspend fun writeDebugLogContent(writer: BufferedWriter): Int = withContext(Dispatchers.IO) {
+        val versionName = runCatching {
+            app.packageManager.getPackageInfo(app.packageName, 0).versionName
+        }.getOrDefault("unknown")
+
+        writer.write("=== Morphe Manager Debug Log ===\n")
+        writer.write("Date       : ${LocalDateTime.now()}\n")
+        writer.write("Version    : $versionName\n")
+
+        writer.write("\n--- Device ---\n")
+        writer.write("Model      : ${Build.MANUFACTURER} ${Build.MODEL}\n")
+        writer.write("Android    : ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT})\n")
+        writer.write("ABI        : ${Build.SUPPORTED_ABIS.joinToString()}\n")
+        writer.write("Locale     : ${Locale.getDefault().toLanguageTag()}\n")
+
+        writer.write("\n--- Memory ---\n")
+        val activityManager = app.getSystemService(ActivityManager::class.java)
+        val memInfo = ActivityManager.MemoryInfo().also { activityManager.getMemoryInfo(it) }
+        val toMb = { bytes: Long -> bytes / 1024 / 1024 }
+        writer.write("RAM avail  : ${toMb(memInfo.availMem)} MB / ${toMb(memInfo.totalMem)} MB\n")
+        writer.write("Low memory : ${memInfo.lowMemory}\n")
+        writer.write("Low mem thr: ${toMb(memInfo.threshold)} MB\n")
+
+        writer.write("\n--- Storage ---\n")
+        val internalDir = app.filesDir
+        val toMbL = { bytes: Long -> bytes / 1024 / 1024 }
+        writer.write("Internal   : ${toMbL(internalDir.freeSpace)} MB free / ${toMbL(internalDir.totalSpace)} MB total\n")
+        val externalDir = app.getExternalFilesDir(null)
+        if (externalDir != null) {
+            writer.write("External   : ${toMbL(externalDir.freeSpace)} MB free / ${toMbL(externalDir.totalSpace)} MB total\n")
+        }
+
+        writer.write("\n--- Environment ---\n")
+        val hasRoot = runCatching {
+            Runtime.getRuntime().exec(arrayOf("su", "-c", "id")).waitFor() == 0
+        }.getOrDefault(false)
+        writer.write("Root access: $hasRoot\n")
+
+        writer.write("\n=== Logcat ===\n\n")
+
+        val consumer = Redirect.Consume { flow ->
+            flow
+                .onEach { line -> writer.write("$line\n") }
+                .flowOn(Dispatchers.IO)
+                .collect { }
+        }
+
+        // Filter logs by current process UID to include only Morphe Manager logs
+        process("logcat", "-d", "--uid=${app.applicationInfo.uid}", stdout = consumer).resultCode
+    }
+
     fun exportDebugLogs(target: Uri) = viewModelScope.launch {
         val exitCode = try {
-            withContext(Dispatchers.IO) {
-                contentResolver.openOutputStream(target)!!.bufferedWriter().use { writer ->
-
-                    val versionName = runCatching {
-                        app.packageManager.getPackageInfo(app.packageName, 0).versionName
-                    }.getOrDefault("unknown")
-
-                    writer.write("=== Morphe Manager Debug Log ===\n")
-                    writer.write("Date       : ${LocalDateTime.now()}\n")
-                    writer.write("Version    : $versionName\n")
-
-                    writer.write("\n--- Device ---\n")
-                    writer.write("Model      : ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}\n")
-                    writer.write("Android    : ${android.os.Build.VERSION.RELEASE} (SDK ${android.os.Build.VERSION.SDK_INT})\n")
-                    writer.write("ABI        : ${android.os.Build.SUPPORTED_ABIS.joinToString()}\n")
-                    writer.write("Locale     : ${java.util.Locale.getDefault().toLanguageTag()}\n")
-
-                    writer.write("\n--- Memory ---\n")
-                    val activityManager = app.getSystemService(ActivityManager::class.java)
-                    val memInfo = ActivityManager.MemoryInfo().also { activityManager.getMemoryInfo(it) }
-                    val toMb = { bytes: Long -> bytes / 1024 / 1024 }
-                    writer.write("RAM avail  : ${toMb(memInfo.availMem)} MB / ${toMb(memInfo.totalMem)} MB\n")
-                    writer.write("Low memory : ${memInfo.lowMemory}\n")
-                    writer.write("Low mem thr: ${toMb(memInfo.threshold)} MB\n")
-
-                    writer.write("\n--- Storage ---\n")
-                    val internalDir = app.filesDir
-                    val toMbL = { bytes: Long -> bytes / 1024 / 1024 }
-                    writer.write("Internal   : ${toMbL(internalDir.freeSpace)} MB free / ${toMbL(internalDir.totalSpace)} MB total\n")
-                    val externalDir = app.getExternalFilesDir(null)
-                    if (externalDir != null) {
-                        writer.write("External   : ${toMbL(externalDir.freeSpace)} MB free / ${toMbL(externalDir.totalSpace)} MB total\n")
-                    }
-
-                    writer.write("\n--- Environment ---\n")
-                    val hasRoot = runCatching {
-                        Runtime.getRuntime().exec(arrayOf("su", "-c", "id")).waitFor() == 0
-                    }.getOrDefault(false)
-                    writer.write("Root access: $hasRoot\n")
-
-                    writer.write("\n=== Logcat ===\n\n")
-
-                    val consumer = Redirect.Consume { flow ->
-                        flow
-                            .onEach { line -> writer.write("$line\n") }
-                            .flowOn(Dispatchers.IO)
-                            .collect { }
-                    }
-
-                    // Filter logs by current process UID to include only Morphe Manager logs
-                    process("logcat", "-d", "--uid=${app.applicationInfo.uid}", stdout = consumer).resultCode
-                }
+            contentResolver.openOutputStream(target)!!.bufferedWriter().use { writer ->
+                writeDebugLogContent(writer)
             }
         } catch (e: CancellationException) {
             throw e
@@ -426,6 +440,86 @@ class ImportExportViewModel(
             app.toast(app.getString(R.string.settings_system_export_debug_logs_export_success))
         else {
             app.toast(app.getString(R.string.settings_system_export_debug_logs_export_read_failed).format(exitCode))
+        }
+    }
+
+    /**
+     * Opens a writable [OutputStream] to a new file in the public Downloads folder.
+     *
+     * On API 29+ uses [MediaStore] (no storage permission required).
+     * On older versions falls back to [Environment.getExternalStoragePublicDirectory].
+     *
+     * Returns null if the Downloads directory is unavailable.
+     */
+    private fun openDownloadsOutputStream(fileName: String, mimeType: String): OutputStream? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val values = ContentValues().apply {
+                put(MediaStore.Downloads.DISPLAY_NAME, fileName)
+                put(MediaStore.Downloads.MIME_TYPE, mimeType)
+                put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+            }
+            val uri = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
+                ?: return null
+            contentResolver.openOutputStream(uri)
+        } else {
+            @Suppress("DEPRECATION")
+            val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            dir.mkdirs()
+            FileOutputStream(File(dir, fileName))
+        }
+    }
+
+    /**
+     * Exports the keystore to the Downloads folder.
+     * Used as a fallback on devices without DocumentsUI.
+     */
+    fun exportKeystoreToDownloads() = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_keystore_failed, "Failed to export keystore to Downloads") {
+            withContext(Dispatchers.IO) {
+                val stream = openDownloadsOutputStream("Morphe.keystore", "application/octet-stream")
+                    ?: throw IllegalStateException("Cannot open Downloads output stream")
+                stream.use { keystoreManager.export(it) }
+            }
+            app.toast(app.getString(R.string.settings_system_export_keystore_success))
+        }
+    }
+
+    /**
+     * Exports manager settings to the Downloads folder.
+     * Used as a fallback on devices without DocumentsUI.
+     */
+    fun exportManagerSettingsToDownloads() = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_manager_settings_fail, "Failed to export settings to Downloads") {
+            val snapshot = preferencesManager.exportSettings()
+            val bundles = withContext(Dispatchers.IO) { patchBundleRepository.exportCustomBundles() }
+            withContext(Dispatchers.IO) {
+                val stream = openDownloadsOutputStream("morphe_manager_settings.json", "application/json")
+                    ?: throw IllegalStateException("Cannot open Downloads output stream")
+                stream.use {
+                    json.encodeToStream(
+                        ManagerSettingsExportFile(
+                            settings = snapshot.copy(customBundles = bundles.ifEmpty { null })
+                        ),
+                        it
+                    )
+                }
+            }
+            app.toast(app.getString(R.string.settings_system_export_manager_settings_success))
+        }
+    }
+
+    /**
+     * Exports debug logs to the Downloads folder.
+     * Used as a fallback on devices without DocumentsUI).
+     */
+    fun exportDebugLogsToDownloads() = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_debug_logs_export_failed, "Failed to export debug logs to Downloads") {
+            val stream = openDownloadsOutputStream(debugLogFileName, "text/plain")
+                ?: throw IllegalStateException("Cannot open Downloads output stream")
+            stream.bufferedWriter().use { writer ->
+                writeDebugLogContent(writer)
+            }
+            app.toast(app.getString(R.string.settings_system_export_debug_logs_export_success))
         }
     }
 

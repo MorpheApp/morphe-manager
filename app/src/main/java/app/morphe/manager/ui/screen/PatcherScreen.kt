@@ -47,6 +47,7 @@ import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel.Companion.ensureValidEntries
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
+import app.morphe.manager.util.canHandleCreateDocument
 import app.morphe.manager.util.tag
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -457,7 +458,10 @@ fun PatcherScreen(
                         onHomeClick = onBackClick,
                         onSaveClick = {
                             if (!isSaving) {
-                                exportApkLauncher.launch(patcherViewModel.exportFileName)
+                                if (context.canHandleCreateDocument())
+                                    exportApkLauncher.launch(patcherViewModel.exportFileName)
+                                else
+                                    patcherViewModel.exportToDownloads()
                             }
                         },
                         isSaving = isSaving

@@ -47,7 +47,12 @@ import kotlinx.coroutines.sync.withLock
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
+import android.content.ContentValues
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.file.Files
 import java.util.UUID
@@ -589,27 +594,73 @@ class PatcherViewModel(
                             ?: throw IOException("Could not open output stream for export")
                     }
                 }.isSuccess
-
-                if (!exportSucceeded) {
-                    app.toast(app.getString(R.string.saved_app_export_failed))
-                    return@let
-                }
-
-                val saved = persistPatchedApp(null, InstallType.SAVED)
-
-                if (!saved) {
-                    app.toast(app.getString(R.string.patched_app_save_failed_toast))
-                } else {
-                    app.toast(app.getString(R.string.save_apk_success))
-                    delay(2000) // Delay before resetting save state
-                }
-
-                if (saved) triggerNotificationPromptIfNeeded()
+                finishExport(exportSucceeded)
             } finally {
                 _isSaving.value = false
             }
         }
     }
+
+    /**
+     * Exports the patched APK to the public Downloads folder.
+     * Used as a fallback on devices without DocumentsUI.
+     */
+    fun exportToDownloads() = viewModelScope.launch {
+        if (_isSaving.value) return@launch
+        _isSaving.value = true
+        try {
+            ensureExportMetadata()
+            val fileName = exportFileName
+            val exportSucceeded = runCatching {
+                withContext(Dispatchers.IO) {
+                    val stream = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        val values = ContentValues().apply {
+                            put(MediaStore.Downloads.DISPLAY_NAME, fileName)
+                            put(MediaStore.Downloads.MIME_TYPE, APK_MIMETYPE)
+                            put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                        }
+                        val uri = app.contentResolver.insert(
+                            MediaStore.Downloads.EXTERNAL_CONTENT_URI, values
+                        ) ?: throw IOException("Could not create Downloads entry")
+                        app.contentResolver.openOutputStream(uri)
+                            ?: throw IOException("Could not open Downloads output stream")
+                    } else {
+                        @Suppress("DEPRECATION")
+                        val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                        dir.mkdirs()
+                        FileOutputStream(File(dir, fileName))
+                    }
+                    stream.use { Files.copy(outputFile.toPath(), it) }
+                }
+            }.isSuccess
+            finishExport(exportSucceeded)
+        } finally {
+            _isSaving.value = false
+        }
+    }
+
+    /**
+     * Shared post-export logic: persists the patched app record, shows a toast,
+     * and triggers the notification prompt on success.
+     */
+    private suspend fun finishExport(exportSucceeded: Boolean) {
+        if (!exportSucceeded) {
+            app.toast(app.getString(R.string.saved_app_export_failed))
+            return
+        }
+
+        val saved = persistPatchedApp(null, InstallType.SAVED)
+
+        if (!saved) {
+            app.toast(app.getString(R.string.patched_app_save_failed_toast))
+        } else {
+            app.toast(app.getString(R.string.save_apk_success))
+            delay(2000)
+        }
+
+        if (saved) triggerNotificationPromptIfNeeded()
+    }
+
 
     /**
      * Checks prefs and triggers the notification prompt if conditions are met.

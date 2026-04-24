@@ -1,13 +1,14 @@
 package app.morphe.manager.util
 
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.data.room.apps.installed.InstalledApp
 import org.koin.compose.koinInject
 import java.io.File
 
@@ -35,6 +36,16 @@ fun Uri.toFilePath(): String {
         // Fallback to original URI string
         else -> Uri.decode(this.toString())
     }
+}
+
+/**
+ * Returns true if the device has an activity that can handle ACTION_CREATE_DOCUMENT.
+ * Android TV and some stripped Android builds ship without DocumentsUI,
+ * so CreateDocument contracts silently fail on them.
+ */
+fun Context.canHandleCreateDocument(): Boolean {
+    val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply { type = "*/*" }
+    return packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null
 }
 
 /**
@@ -74,16 +85,6 @@ fun rememberFolderPickerWithPermission(
             }
         }
     }
-}
-
-/**
- * Helper function to get APK path for installed app
- */
-fun getApkPath(context: Context, app: InstalledApp): String? {
-    return runCatching {
-        context.packageManager.getPackageInfo(app.currentPackageName, 0)
-            .applicationInfo?.sourceDir
-    }.getOrNull()
 }
 
 /**

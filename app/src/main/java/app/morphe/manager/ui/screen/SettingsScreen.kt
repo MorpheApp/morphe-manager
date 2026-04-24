@@ -48,6 +48,7 @@ import app.morphe.manager.ui.screen.settings.system.KeystoreCredentialsDialog
 import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.JSON_MIMETYPE
+import app.morphe.manager.util.canHandleCreateDocument
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -200,10 +201,19 @@ fun SettingsScreen(
                     onShowInstallerDialog = { showInstallerDialog.value = true },
                     importExportViewModel = importExportViewModel,
                     onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                    onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
+                    onExportKeystore = {
+                        if (context.canHandleCreateDocument()) exportKeystoreLauncher.launch("Morphe.keystore")
+                        else importExportViewModel.exportKeystoreToDownloads()
+                    },
                     onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
-                    onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
-                    onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
+                    onExportSettings = {
+                        if (context.canHandleCreateDocument()) exportSettingsLauncher.launch("morphe_manager_settings.json")
+                        else importExportViewModel.exportManagerSettingsToDownloads()
+                    },
+                    onExportDebugLogs = {
+                        if (context.canHandleCreateDocument()) exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName)
+                        else importExportViewModel.exportDebugLogsToDownloads()
+                    },
                     onAboutClick = { showAboutDialog.value = true },
                     onChangelogClick = { showChangelogDialog.value = true }
                 )
