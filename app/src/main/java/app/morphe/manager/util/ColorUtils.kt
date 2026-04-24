@@ -49,6 +49,23 @@ fun Color.toHexString(includeAlpha: Boolean = false): String {
     }
 }
 
+/**
+ * Adjusts the color so it has sufficient contrast against [background].
+ * If the accent is too close to the background (same lightness zone),
+ * it is lightened or darkened until it passes the [minLuminanceDiff] threshold.
+ */
+fun Color.ensureContrast(
+    background: Color,
+    minLuminanceDiff: Float = 0.05f
+): Color {
+    val bgLum = background.luminance()
+    val fgLum = this.luminance()
+    val diff = kotlin.math.abs(bgLum - fgLum)
+    if (diff >= minLuminanceDiff) return this
+    return if (bgLum > 0.5f) darken((minLuminanceDiff - diff + 0.05f).coerceIn(0f, 0.8f))
+    else lighten((minLuminanceDiff - diff + 0.05f).coerceIn(0f, 0.8f))
+}
+
 fun String?.toColorOrNull(): Color? {
     val value = this?.trim().orEmpty()
     if (value.isEmpty()) return null
