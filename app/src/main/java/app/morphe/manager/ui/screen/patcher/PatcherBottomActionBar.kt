@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.patcher
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Article
@@ -32,6 +31,8 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun PatcherBottomActionBar(
+    modifier: Modifier = Modifier,
+
     // Visibility control
     showCancelButton: Boolean = true,
     showHomeButton: Boolean = true,
@@ -51,9 +52,7 @@ fun PatcherBottomActionBar(
     onInstallClick: () -> Unit = {},
 
     // State
-    isSaving: Boolean = false,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    isSaving: Boolean = false
 ) {
     // Tracks the brief "Copied!" feedback state on the copy button
     var copied by remember { mutableStateOf(false) }

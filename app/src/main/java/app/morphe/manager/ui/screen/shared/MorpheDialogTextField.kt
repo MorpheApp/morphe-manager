@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -37,6 +36,7 @@ import app.morphe.manager.R
  */
 @Composable
 fun MorpheDialogTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
@@ -50,9 +50,7 @@ fun MorpheDialogTextField(
     showClearButton: Boolean = false,
     onFolderPickerClick: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val textColor = LocalDialogTextColor.current
@@ -155,6 +153,7 @@ fun MorpheDialogTextField(
  */
 @Composable
 fun MorpheDialogDropdownTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     dropdownItems: Map<String, String>, // Display name -> Value
@@ -166,9 +165,7 @@ fun MorpheDialogDropdownTextField(
     enabled: Boolean = true,
     singleLine: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     var dropdownExpanded by remember { mutableStateOf(false) }
     // true = first tap opens dropdown; false = second tap opens keyboard

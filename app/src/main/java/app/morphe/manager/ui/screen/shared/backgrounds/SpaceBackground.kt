@@ -101,7 +101,7 @@ fun SpaceBackground(
                 // Regenerate stars that have passed the camera (adjustedProgress wraps to 0..1)
                 stars.forEachIndexed { index, star ->
                     val adjustedProgress = ((baseProgress * star.speed) + star.initialOffset) % 1f
-                    if (adjustedProgress > 0.98f || adjustedProgress < 0.01f) {
+                    if (adjustedProgress !in 0.01f..0.98f) {
                         if (star.lastRegen != baseProgress.toInt()) {
                             // Pick a new random position outside the centre exclusion zone
                             var newX: Float; var newY: Float; var newDistance: Float
@@ -158,7 +158,7 @@ fun SpaceBackground(
         stars.forEach { star ->
             val adjustedProgress = ((baseProgress * star.speed) + star.initialOffset) % 1f
             val z = (1f - adjustedProgress).coerceAtLeast(0.01f)
-            if (z < 0.05f || z > 1.5f) return@forEach
+            if (z !in 0.05f..1.5f) return@forEach
 
             val perspectiveFactor = 1f / z
             val baseX = star.x * width  * 0.5f

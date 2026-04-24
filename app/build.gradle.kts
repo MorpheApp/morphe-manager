@@ -62,14 +62,6 @@ dependencies {
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
 
-    // Exclude xmlpull as it's included in Android already
-    configurations.configureEach {
-        exclude(group = "xmlpull", module = "xmlpull")
-        // Ackpine uses android-stubs as compileOnly internally — exclude the transitive
-        // dependency since the project already provides hidden API stubs via hidden-api-stub
-        exclude(group = "ru.solrudev.ackpine", module = "android-stubs")
-    }
-
     implementation(libs.androidx.documentfile)
 
     // Native processes

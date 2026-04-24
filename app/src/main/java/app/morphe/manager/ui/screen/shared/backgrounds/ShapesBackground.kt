@@ -182,13 +182,11 @@ private fun rotateVertex(v: Vec3, cosX: Float, sinX: Float,
     val z1 = v.y * sinX + v.z * cosX
     // Y axis (yaw)
     val x2 =  x1 * cosY + z1 * sinY
-    val y2 =  y1
     val z2 = -x1 * sinY + z1 * cosY
     // Z axis (roll)
-    val x3 = x2 * cosZ - y2 * sinZ
-    val y3 = x2 * sinZ + y2 * cosZ
-    val z3 = z2
-    return Vec3(x3, y3, z3)
+    val x3 = x2 * cosZ - y1 * sinZ
+    val y3 = x2 * sinZ + y1 * cosZ
+    return Vec3(x3, y3, z2)
 }
 
 /** Perspective-projects a rotated vertex to screen space. */
@@ -361,12 +359,12 @@ private enum class SolidType {
         ICOSAHEDRON -> {
             val phi = (1f + sqrt(5f)) / 2f
             val n   = 1f / sqrt(1f + phi * phi)
-            val a   = n; val b = n * phi
+            val b = n * phi
             SolidDef.build(
                 vertices = listOf(
-                    Vec3( 0f,  a,  b), Vec3( 0f, -a,  b), Vec3( 0f,  a, -b), Vec3( 0f, -a, -b),
-                    Vec3( a,  b,  0f), Vec3(-a,  b,  0f), Vec3( a, -b,  0f), Vec3(-a, -b,  0f),
-                    Vec3( b,  0f,  a), Vec3(-b,  0f,  a), Vec3( b,  0f, -a), Vec3(-b,  0f, -a)
+                    Vec3( 0f, n,  b), Vec3( 0f, -n,  b), Vec3( 0f, n, -b), Vec3( 0f, -n, -b),
+                    Vec3(n,  b,  0f), Vec3(-n,  b,  0f), Vec3(n, -b,  0f), Vec3(-n, -b,  0f),
+                    Vec3( b,  0f, n), Vec3(-b,  0f, n), Vec3( b,  0f, -n), Vec3(-b,  0f, -n)
                 ),
                 faces = listOf(
                     // Top cap (5 faces around vertex 4)

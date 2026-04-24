@@ -40,10 +40,9 @@ import kotlin.math.max
 const val PROCESS_RUNTIME_MEMORY_MINIMUM = 512
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1280
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION = 1024
-private const val PROCESS_RUNTIME_MEMORY_DEFAULT = 640
 private const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 640
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 640
-const val PROCESS_RUNTIME_MEMORY_STEP = 128
+const val PROCESS_RUNTIME_MEMORY_STEP = 64
 
 // Sentinel value indicating the memory limit has never been set
 // triggers adaptive calculation on first use
@@ -117,9 +116,8 @@ class ProcessRuntime(
         skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
-        val minMemoryLimit = 200
+        val minMemoryLimit = 256
         var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
-        var retried = false
 
         while (true) {
             try {
@@ -136,16 +134,6 @@ class ProcessRuntime(
                     onProgress,
                     onMergedApkReady
                 )
-                // Success - update preference and return.
-                if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
-                    if (memoryMB < PROCESS_RUNTIME_MEMORY_DEFAULT) {
-                        // Don't save a value lower than the expected minimum.
-                        // Instead, allow discovering the actual memory limit again next time.
-                        memoryMB = PROCESS_RUNTIME_MEMORY_DEFAULT
-                    }
-                    Log.i(tag, "Updating process memory limit setting to: $memoryMB")
-                    prefs.patcherProcessMemoryLimit.update(memoryMB)
-                }
 
                 return@coroutineScope
             } catch (e: Exception) {
@@ -156,7 +144,6 @@ class ProcessRuntime(
                 }
 
                 if (isMemoryFailure && !skipMemoryRetry && memoryMB > minMemoryLimit) {
-                    retried = true
                     memoryMB -= PROCESS_RUNTIME_MEMORY_STEP
                     Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")
                     continue

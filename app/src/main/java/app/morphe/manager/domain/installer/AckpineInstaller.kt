@@ -13,8 +13,9 @@ import ru.solrudev.ackpine.installer.InstallFailure
 import ru.solrudev.ackpine.installer.PackageInstaller
 import ru.solrudev.ackpine.installer.parameters.InstallParameters
 import ru.solrudev.ackpine.installer.parameters.InstallerType
-import ru.solrudev.ackpine.session.await
+import ru.solrudev.ackpine.installer.parameters.PackageSource
 import ru.solrudev.ackpine.session.Session
+import ru.solrudev.ackpine.session.await
 import ru.solrudev.ackpine.session.parameters.Confirmation
 import ru.solrudev.ackpine.shizuku.ShizukuPlugin
 import ru.solrudev.ackpine.uninstaller.PackageUninstaller
@@ -42,7 +43,7 @@ class AckpineInstaller(private val app: Application) {
 
     /**
      * Installs an APK using the standard Android PackageInstaller API via Ackpine.
-     * Suspends until the user confirms or cancels the system dialog - no timeout needed.
+     * Suspends until the user confirms or cancels the system dialog.
      *
      * @return null on success, or a typed [InstallFailure] the caller can pattern-match on.
      * @throws InstallCancelledException when the user dismisses the system install dialog.
@@ -55,6 +56,8 @@ class AckpineInstaller(private val app: Application) {
                 .setInstallerType(InstallerType.SESSION_BASED)
                 .setConfirmation(Confirmation.IMMEDIATE)
                 .setName(apkFile.name)
+                // PackageSource.LocalFile disables "restricted settings" enforcement on API 33+
+                .setPackageSource(PackageSource.LocalFile)
                 .build()
         )
         return try {
@@ -103,8 +106,8 @@ class AckpineInstaller(private val app: Application) {
                     Log.i(TAG, "installShizuku succeeded: ${apkFile.name}")
                 }
             }
-        } catch (_: CancellationException) {
-            throw InstallCancelledException()
+        } catch (e: CancellationException) {
+            throw InstallCancelledException().initCause(e)
         } catch (e: Exception) {
             Log.w(TAG, "installShizuku exception: ${e.message}", e)
             throw e
@@ -131,8 +134,8 @@ class AckpineInstaller(private val app: Application) {
                     throw UninstallFailedException(result.failure.message ?: result.failure.javaClass.simpleName)
                 }
             }
-        } catch (_: CancellationException) {
-            throw UninstallCancelledException()
+        } catch (e: CancellationException) {
+            throw UninstallCancelledException().initCause(e)
         }
     }
 

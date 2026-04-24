@@ -1,6 +1,5 @@
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,11 +31,10 @@ import org.koin.compose.koinInject
  */
 @Composable
 fun AppIcon(
+    modifier: Modifier = Modifier,
     packageInfo: PackageInfo? = null,
     packageName: String? = null,
     contentDescription: String?,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     preferredSource: AppDataSource = AppDataSource.INSTALLED,
     placeholderGradientColors: List<Color>? = null,
     placeholderInnerPadding: Dp = 0.dp

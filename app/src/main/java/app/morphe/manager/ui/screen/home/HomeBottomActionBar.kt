@@ -1,6 +1,5 @@
 package app.morphe.manager.ui.screen.home
 
-import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -35,14 +34,13 @@ import app.morphe.manager.ui.screen.shared.MorpheDefaults
  */
 @Composable
 fun HomeBottomActionBar(
+    modifier: Modifier = Modifier,
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,
     isExpertModeEnabled: Boolean = false,
     showSearchButton: Boolean = false,
     searchActive: Boolean = false,
-    onSearchClick: () -> Unit = {},
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    onSearchClick: () -> Unit = {}
 ) {
     // Show labels only when there are 2 buttons, buttons are wider so there's space
     val showLabels = !showSearchButton

@@ -167,8 +167,6 @@ fun SnowBackground(
                 else -> baseX
             }
 
-            val centerY = baseY
-
             // Get bitmap for this layer
             val bitmap = snowflakeBitmaps[flake.layer]
             val drawSize = bitmap.width.toFloat() * flake.size
@@ -176,8 +174,8 @@ fun SnowBackground(
             // Calculate alpha with edge fade for seamless loop
             val depthAlpha = 0.35f + (flake.depth * 0.55f)
             val edgeFade = when {
-                centerY < 0f -> ((centerY + 50f) / 50f).coerceIn(0f, 1f)
-                centerY > height -> ((height + 50f - centerY) / 50f).coerceIn(0f, 1f)
+                baseY < 0f -> ((baseY + 50f) / 50f).coerceIn(0f, 1f)
+                baseY > height -> ((height + 50f - baseY) / 50f).coerceIn(0f, 1f)
                 else -> 1f
             }
 
@@ -186,10 +184,10 @@ fun SnowBackground(
             val finalAlpha = depthAlpha * (0.7f + flake.size * 0.3f) * edgeFade * cycleFade * burstFade
 
             // Only draw if visible
-            if (finalAlpha > 0.01f && centerY > -50f && centerY < height + 50f) {
+            if (finalAlpha > 0.01f && baseY > -50f && baseY < height + 50f) {
                 drawIntoCanvas { canvas ->
                     canvas.save()
-                    canvas.translate(centerX, centerY)
+                    canvas.translate(centerX, baseY)
                     canvas.rotate(rotation)
 
                     canvas.drawImageRect(
