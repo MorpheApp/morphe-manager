@@ -90,11 +90,8 @@ fun HomeScreen(
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
 
-    // Gesture hint: shown once on first launch, after cards have loaded
-    val swipeHintShown by prefs.swipeGestureHintShown.getAsState()
-    val showGestureHint by remember(swipeHintShown, homeAppItems) {
-        derivedStateOf { !swipeHintShown && homeAppItems.isNotEmpty() }
-    }
+    // Gesture hint: shown once per bundle addition, in-memory
+    val showGestureHint by homeViewModel.showSwipeGestureHint.collectAsStateWithLifecycle()
 
     val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
     if (!isDeviceRooted) {
