@@ -151,7 +151,8 @@ class HomeViewModel(
     private val pm: PM,
     val rootInstaller: RootInstaller,
     private val filesystem: Filesystem,
-    val homeAppButtonPrefs: HomeAppButtonPreferences
+    private val homeAppButtonPrefs: HomeAppButtonPreferences,
+    private val appDataResolver: AppDataResolver
 ) : ViewModel() {
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
@@ -161,11 +162,6 @@ class HomeViewModel(
     private val isBundlePipelineLoaded: StateFlow<Boolean> =
         patchBundleRepository.isBundlePipelineLoaded
             .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
-    // App data resolver for getting app info from APK files
-    private val appDataResolver by lazy {
-        AppDataResolver(app, pm, originalApkRepository, installedAppRepository, filesystem)
-    }
 
     /** Android 11 kills the app process after granting the "install apps" permission. */
     val android11BugActive get() = Build.VERSION.SDK_INT == Build.VERSION_CODES.R && !pm.canInstallPackages()

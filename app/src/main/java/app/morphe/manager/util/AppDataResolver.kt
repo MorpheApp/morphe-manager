@@ -12,6 +12,8 @@ import android.graphics.drawable.Drawable
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
+import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.patcher.patch.BundleAppMetadata
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -21,10 +23,11 @@ import java.io.File
  * Data source priority for app information.
  */
 enum class AppDataSource {
-    INSTALLED,     // Installed app via PackageManager
-    ORIGINAL_APK,  // Saved original APK file
-    PATCHED_APK,   // Saved patched APK file
-    CONSTANTS      // Fallback to hardcoded constants
+    INSTALLED,        // Installed app via PackageManager
+    ORIGINAL_APK,     // Saved original APK file
+    PATCHED_APK,      // Saved patched APK file
+    BUNDLE_METADATA,  // Display name declared in the patch bundle (BundleAppMetadata)
+    CONSTANTS         // Fallback to hardcoded constants
 }
 
 /**
@@ -51,7 +54,8 @@ class AppDataResolver(
     private val pm: PM,
     private val originalApkRepository: OriginalApkRepository,
     private val installedAppRepository: InstalledAppRepository,
-    private val filesystem: Filesystem
+    private val filesystem: Filesystem,
+    private val patchBundleRepository: PatchBundleRepository
 ) {
     private val packageManager: PackageManager = context.packageManager
 
@@ -71,21 +75,34 @@ class AppDataResolver(
                 AppDataSource.INSTALLED,
                 AppDataSource.ORIGINAL_APK,
                 AppDataSource.PATCHED_APK,
+                AppDataSource.BUNDLE_METADATA,
                 AppDataSource.CONSTANTS
             )
             AppDataSource.ORIGINAL_APK -> listOf(
                 AppDataSource.ORIGINAL_APK,
                 AppDataSource.INSTALLED,
                 AppDataSource.PATCHED_APK,
+                AppDataSource.BUNDLE_METADATA,
                 AppDataSource.CONSTANTS
             )
             AppDataSource.PATCHED_APK -> listOf(
                 AppDataSource.PATCHED_APK,
                 AppDataSource.ORIGINAL_APK,
                 AppDataSource.INSTALLED,
+                AppDataSource.BUNDLE_METADATA,
                 AppDataSource.CONSTANTS
             )
-            AppDataSource.CONSTANTS -> listOf(AppDataSource.CONSTANTS)
+            AppDataSource.BUNDLE_METADATA -> listOf(
+                AppDataSource.BUNDLE_METADATA,
+                AppDataSource.INSTALLED,
+                AppDataSource.ORIGINAL_APK,
+                AppDataSource.PATCHED_APK,
+                AppDataSource.CONSTANTS
+            )
+            AppDataSource.CONSTANTS -> listOf(
+                AppDataSource.BUNDLE_METADATA,
+                AppDataSource.CONSTANTS
+            )
         }
 
         // Try each source in order until we get data
@@ -94,6 +111,7 @@ class AppDataResolver(
                 AppDataSource.INSTALLED -> tryGetFromInstalled(packageName)
                 AppDataSource.ORIGINAL_APK -> tryGetFromOriginalApk(packageName)
                 AppDataSource.PATCHED_APK -> tryGetFromPatchedApk(packageName)
+                AppDataSource.BUNDLE_METADATA -> tryGetFromBundleMetadata(packageName)
                 AppDataSource.CONSTANTS -> getFromConstants(packageName)
             }
             if (result != null) return@withContext result
@@ -221,6 +239,25 @@ class AppDataResolver(
         } catch (_: Exception) {
             null
         }
+    }
+
+    /**
+     * Try to get app display name from patch bundle metadata.
+     * Returns null if no repository is configured or the package isn't in any loaded bundle.
+     */
+    private suspend fun tryGetFromBundleMetadata(packageName: String): ResolvedAppData? {
+        val bundleInfo = patchBundleRepository.bundleInfoFlow.first()
+        if (bundleInfo.isEmpty()) return null
+        val metadata = BundleAppMetadata.buildFrom(bundleInfo)
+        val displayName = metadata[packageName]?.displayName ?: return null
+        return ResolvedAppData(
+            packageName = packageName,
+            displayName = displayName,
+            version = null,
+            icon = null,
+            packageInfo = null,
+            source = AppDataSource.BUNDLE_METADATA
+        )
     }
 
     /**
