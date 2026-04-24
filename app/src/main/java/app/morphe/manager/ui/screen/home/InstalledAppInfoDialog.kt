@@ -979,6 +979,20 @@ private data class ActionItem(
     val isLoading: Boolean = false
 )
 
+/** Shared loading/icon content used by action buttons. */
+@Composable
+private fun LoadingOrIcon(isLoading: Boolean, action: ActionItem, tint: Color) {
+    if (isLoading) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(22.dp),
+            strokeWidth = 2.dp,
+            color = tint
+        )
+    } else {
+        Icon(action.icon, null, modifier = Modifier.size(22.dp))
+    }
+}
+
 /** Full-width primary button. */
 @Composable
 private fun PrimaryActionButton(
@@ -1000,15 +1014,7 @@ private fun PrimaryActionButton(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (action.isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(22.dp),
-                    strokeWidth = 2.dp,
-                    color = onAccent
-                )
-            } else {
-                Icon(action.icon, null, modifier = Modifier.size(22.dp))
-            }
+            LoadingOrIcon(action.isLoading, action, onAccent)
             Spacer(Modifier.width(10.dp))
             Text(
                 text = action.text,
@@ -1051,15 +1057,7 @@ private fun TileActionButton(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            if (action.isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(22.dp),
-                    strokeWidth = 2.dp,
-                    color = contentColor
-                )
-            } else {
-                Icon(action.icon, null, modifier = Modifier.size(22.dp))
-            }
+            LoadingOrIcon(action.isLoading, action, contentColor)
             Spacer(Modifier.height(5.dp))
             Text(
                 text = action.text,

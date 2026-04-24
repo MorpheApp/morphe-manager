@@ -287,6 +287,21 @@ fun HomeDialogs(
         )
     }
 
+    // Installed App Info Dialog
+    homeViewModel.showInstalledAppInfoDialog?.let { packageName ->
+        key(packageName, homeViewModel.installedAppDialogToken) {
+            InstalledAppInfoDialog(
+                packageName = packageName,
+                onDismiss = homeViewModel::dismissInstalledAppInfo,
+                onTriggerPatchFlow = { originalPackageName ->
+                    homeViewModel.dismissInstalledAppInfo()
+                    homeViewModel.showPatchDialog(originalPackageName)
+                },
+                homeViewModel = homeViewModel
+            )
+        }
+    }
+
     // Expert Mode Dialog
     if (homeViewModel.showExpertModeDialog) {
         ExpertModeDialog(
