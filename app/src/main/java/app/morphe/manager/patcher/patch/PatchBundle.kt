@@ -1,5 +1,6 @@
 package app.morphe.manager.patcher.patch
 
+import android.os.Build
 import android.os.Parcelable
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.loadPatchesFromDex
@@ -59,7 +60,18 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
         private fun loadBundle(bundle: PatchBundle): Collection<Patch<*>> {
             validateDexEntries(bundle.patchesJar)
             val patchFiles = runCatching {
-                loadPatchesFromDex(setOf(File(bundle.patchesJar))).byPatchesFile
+                val jarFile = File(bundle.patchesJar)
+                loadPatchesFromDex(
+                    setOf(jarFile),
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+                        null
+                    } else {
+                        // Must pass in any directory that exists.
+                        // Directory is ignored with Android 8.0+, but is required
+                        // for Android 8.0 otherwise NPE occurs.
+                        jarFile.parentFile
+                    }
+                ).byPatchesFile
             }.getOrElse { error ->
                 throw IllegalStateException("Patch bundle is corrupted or incomplete", error)
             }
