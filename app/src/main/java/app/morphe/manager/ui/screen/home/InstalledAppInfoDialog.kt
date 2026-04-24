@@ -276,10 +276,16 @@ fun InstalledAppInfoDialog(
                     )
                 }
 
+                // Stagger index counter: hero header is index 0 (animated independently),
+                // each subsequent visible item increments so the delay chain is always correct
+                // regardless of which optional banners are shown.
+                var staggerIndex = 1
+
                 // Deleted app warning banner
                 if (viewModel.isAppDeleted) {
+                    val idx = staggerIndex++
                     item {
-                        StaggeredItem(entered = entered.value, index = 1) {
+                        StaggeredItem(entered = entered.value, index = idx) {
                             WarningBanner(
                                 icon = Icons.Outlined.Warning,
                                 title = stringResource(R.string.home_app_info_app_deleted_warning),
@@ -299,8 +305,9 @@ fun InstalledAppInfoDialog(
 
                 // Update available banner
                 if (hasUpdate && !viewModel.isAppDeleted) {
+                    val idx = staggerIndex++
                     item {
-                        StaggeredItem(entered = entered.value, index = 1) {
+                        StaggeredItem(entered = entered.value, index = idx) {
                             WarningBanner(
                                 icon = Icons.Outlined.Update,
                                 title = stringResource(R.string.home_app_info_patch_update_available),
@@ -319,8 +326,9 @@ fun InstalledAppInfoDialog(
                 }
 
                 // Info Section
+                val infoIdx = staggerIndex++
                 item {
-                    StaggeredItem(entered = entered.value, index = 2) {
+                    StaggeredItem(entered = entered.value, index = infoIdx) {
                         InfoSection(
                             installedApp = installedApp,
                             appliedPatches = appliedPatches,
@@ -331,8 +339,9 @@ fun InstalledAppInfoDialog(
                 }
 
                 // Actions Section
+                val actionsIdx = staggerIndex++
                 item {
-                    StaggeredItem(entered = entered.value, index = 3) {
+                    StaggeredItem(entered = entered.value, index = actionsIdx) {
                         ActionsSection(
                             viewModel = viewModel,
                             installViewModel = installViewModel,
@@ -357,8 +366,9 @@ fun InstalledAppInfoDialog(
 
                 // Info about saved APK availability
                 if (!viewModel.hasOriginalApk) {
+                    val idx = staggerIndex++
                     item {
-                        StaggeredItem(entered = entered.value, index = 4) {
+                        StaggeredItem(entered = entered.value, index = idx) {
                             InfoBadge(
                                 text = stringResource(R.string.home_app_info_no_saved_apk),
                                 style = InfoBadgeStyle.Warning,
