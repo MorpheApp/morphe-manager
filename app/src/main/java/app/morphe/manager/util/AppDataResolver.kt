@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Data source priority for app information.
@@ -58,73 +59,79 @@ class AppDataResolver(
 ) {
     private val packageManager: PackageManager = context.packageManager
 
+    // In-memory cache - keyed by packageName + preferredSource.
+    // Avoids redundant IO when multiple composables resolve the same package simultaneously.
+    // Entries are never evicted: the resolver is a singleton and package data rarely changes
+    // during a single session.
+    private val cache = ConcurrentHashMap<Pair<String, AppDataSource>, ResolvedAppData>()
+
     /**
      * Resolve app data from any available source.
+     *
+     * Display name and icon are resolved **independently**:
+     * - Icon/packageInfo: best available APK source ordered by [preferredSource]
+     * - Name: [AppDataSource.BUNDLE_METADATA] always wins when available, because patched APK
+     *   labels may contain internal class names instead of the real product name.
+     *   Falls back to APK label → constants.
+     *
      * @param packageName Package name to resolve
-     * @param preferredSource Preferred data source (will still fallback if unavailable)
-     * @return ResolvedAppData with information from the best available source
+     * @param preferredSource Preferred data source for icon/packageInfo (will still fallback)
+     * @return [ResolvedAppData] with the best available name and icon, potentially from
+     *   different sources
      */
     suspend fun resolveAppData(
         packageName: String,
         preferredSource: AppDataSource = AppDataSource.INSTALLED
     ): ResolvedAppData = withContext(Dispatchers.IO) {
-        // Define source check order based on preference
-        val sourceOrder = when (preferredSource) {
-            AppDataSource.INSTALLED -> listOf(
-                AppDataSource.INSTALLED,
-                AppDataSource.ORIGINAL_APK,
-                AppDataSource.PATCHED_APK,
-                AppDataSource.BUNDLE_METADATA,
-                AppDataSource.CONSTANTS
-            )
+        cache[packageName to preferredSource]?.let { return@withContext it }
+
+        // APK sources ordered by preference - provide icon, packageInfo and raw label
+        val apkSources = when (preferredSource) {
             AppDataSource.ORIGINAL_APK -> listOf(
                 AppDataSource.ORIGINAL_APK,
                 AppDataSource.INSTALLED,
                 AppDataSource.PATCHED_APK,
-                AppDataSource.BUNDLE_METADATA,
-                AppDataSource.CONSTANTS
             )
             AppDataSource.PATCHED_APK -> listOf(
                 AppDataSource.PATCHED_APK,
                 AppDataSource.ORIGINAL_APK,
                 AppDataSource.INSTALLED,
-                AppDataSource.BUNDLE_METADATA,
-                AppDataSource.CONSTANTS
             )
-            AppDataSource.BUNDLE_METADATA -> listOf(
-                AppDataSource.BUNDLE_METADATA,
+            else -> listOf(
                 AppDataSource.INSTALLED,
                 AppDataSource.ORIGINAL_APK,
                 AppDataSource.PATCHED_APK,
-                AppDataSource.CONSTANTS
-            )
-            AppDataSource.CONSTANTS -> listOf(
-                AppDataSource.BUNDLE_METADATA,
-                AppDataSource.CONSTANTS
             )
         }
 
-        // Try each source in order until we get data
-        for (source in sourceOrder) {
-            val result = when (source) {
+        // Phase 1: find the best available icon + packageInfo from APK sources
+        val apkResult = apkSources.firstNotNullOfOrNull { source ->
+            when (source) {
                 AppDataSource.INSTALLED -> tryGetFromInstalled(packageName)
                 AppDataSource.ORIGINAL_APK -> tryGetFromOriginalApk(packageName)
                 AppDataSource.PATCHED_APK -> tryGetFromPatchedApk(packageName)
-                AppDataSource.BUNDLE_METADATA -> tryGetFromBundleMetadata(packageName)
-                AppDataSource.CONSTANTS -> getFromConstants(packageName)
+                else -> null
             }
-            if (result != null) return@withContext result
         }
 
-        // Ultimate fallback - return package name as display name
+        // Phase 2: display name - bundle metadata always wins when available
+        val bundleName = tryGetFromBundleMetadata(packageName)?.displayName
+        val displayName = bundleName
+            ?: apkResult?.displayName
+            ?: getFromConstants(packageName).displayName
+
         ResolvedAppData(
             packageName = packageName,
-            displayName = packageName,
-            version = null,
-            icon = null,
-            packageInfo = null,
-            source = AppDataSource.CONSTANTS
-        )
+            displayName = displayName,
+            version = apkResult?.version,
+            icon = apkResult?.icon,
+            packageInfo = apkResult?.packageInfo,
+            source = when {
+                bundleName != null -> AppDataSource.BUNDLE_METADATA
+                apkResult != null -> apkResult.source
+                else -> AppDataSource.CONSTANTS
+            }
+        ).also { cache[packageName to preferredSource] = it }
     }
 
     /**
