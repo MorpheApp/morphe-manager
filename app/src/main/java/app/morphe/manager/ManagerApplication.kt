@@ -62,7 +62,7 @@ class ManagerApplication : Application() {
             )
         }
 
-        // Enable Ackpine logging so install failures (session-dead, conflict codes, etc.)
+        // Enable Ackpine logging
         Ackpine.enableLogcatLogger()
 
         // App icon loader (Coil)

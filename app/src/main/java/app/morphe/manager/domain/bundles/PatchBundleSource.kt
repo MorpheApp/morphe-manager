@@ -115,13 +115,12 @@ sealed class PatchBundleSource(
                 val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
                 val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
 
-                when {
+                when (host) {
                     // raw.githubusercontent.com/owner/repo/...
-                    host == "raw.githubusercontent.com" && segments.isNotEmpty() -> segments[0]
+                    "raw.githubusercontent.com" if segments.isNotEmpty() -> segments[0]
 
                     // github.com/owner/repo/...
-                    host == "github.com" && segments.isNotEmpty() -> segments[0]
-
+                    "github.com" if segments.isNotEmpty() -> segments[0]
                     else -> null
                 }
             } catch (_: Exception) {

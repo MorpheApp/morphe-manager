@@ -338,17 +338,14 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="failed_to_execute_patch">Failed to apply %s</string>
     <string name="patched_app_saved_toast">Patched app saved for later</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
-    <string name="download_apk">Download APK file</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
     <string name="patcher_process_exit_message">Patcher process exited with code %1$s</string>
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
-    <string name="install_timeout_message">Installation did not finish. Check the system installer dialog and try again</string>
     <string name="save_apk_success">APK Saved</string>
     <string name="saved_app_export_failed">Failed to export patched app</string>
     <string name="saved_app_removed_toast">Removed saved patched app</string>
-    <string name="saved_app_copy_removed_toast">Removed saved copy</string>
     <string name="saved_app_launch_unavailable">Install the app before opening it</string>
 
     <string name="package_name">Package name</string>
@@ -574,16 +571,7 @@ The image dimensions must be as follows:
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer</string>
-    <string name="installer_hint_blocked">The installation was blocked by Android. Check Play Protect or security settings</string>
     <string name="installer_hint_conflict">Another app with this package name is already installed. Uninstall it before continuing</string>
-    <string name="installer_hint_incompatible">The APK is not compatible with this device or Android version</string>
-    <string name="installer_hint_invalid">The APK is invalid or corrupted</string>
-    <string name="installer_hint_storage">There is not enough storage space for the installation</string>
-    <string name="installer_hint_timeout">The installation timed out. Try again</string>
-    <string name="installer_hint_aborted">The installation was cancelled</string>
-    <string name="installer_hint_with_reason" translatable="false">"%1$s
-
-Details: %2$s"</string>
     <string name="installer_external_launched">Opening %1$s…</string>
     <string name="installer_external_timeout">%1$s did not confirm the installation. Check the other app and try again</string>
     <string name="installer_external_success">%1$s reported a successful installation</string>
@@ -761,7 +749,6 @@ Details: %2$s"</string>
     <string name="allow">Allow</string>
     <string name="details">Details</string>
     <string name="hide">Hide</string>
-    <string name="default_">Default</string>
     <string name="logs">Logs</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installing…</string>

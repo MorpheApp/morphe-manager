@@ -25,36 +25,6 @@ fun parseLocaleCode(code: String): Locale? {
 }
 
 /**
- * Convert a legacy Android resource locale code to BCP 47 format.
- *
- * Examples:
- *  - `"uk-rUA"` → `"uk-UA"`
- *  - `"in-rID"` → `"id-ID"`
- *  - `"iw-rIL"` → `"he-IL"`
- *  - `"uk-UA"`  → `"uk-UA"` (already BCP 47 — no change)
- *  - `"system"` → `"system"`
- */
-fun migrateLegacyLocaleCode(code: String): String {
-    if (code.isBlank() || code == "system") return code
-
-    // Legacy Android resource format: "uk-rUA" → "uk-UA"
-    val normalized = if (code.contains("-r")) {
-        code.replace("-r", "-")
-    } else {
-        code
-    }
-
-    // Legacy language codes: in → id, iw → he
-    return when {
-        normalized.startsWith("in-") -> normalized.replaceFirst("in-", "id-")
-        normalized.startsWith("iw-") -> normalized.replaceFirst("iw-", "he-")
-        normalized == "in" -> "id"
-        normalized == "iw" -> "he"
-        else -> normalized
-    }
-}
-
-/**
  * Returns the list of supported locale codes, excluding "en" which is
  * handled separately as the default language.
  *

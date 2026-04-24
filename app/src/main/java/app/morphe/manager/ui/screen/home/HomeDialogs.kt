@@ -11,13 +11,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,17 +22,16 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -57,10 +52,8 @@ import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 import app.morphe.patcher.patch.AppTarget
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.net.URI
 
 /**
@@ -1192,8 +1185,8 @@ fun WrongPackageDialog(
 
 /**
  * Version list card where each row is tappable.
- * The selected version gets a checkmark; the recommended version is labelled when not selected.
- * Experimental versions are always labelled regardless of selection state.
+ * The selected version gets a checkmark; the recommended version is labeled when not selected.
+ * Experimental versions are always labeled regardless of selection state.
  */
 @Composable
 private fun SelectableVersionListCard(
@@ -1368,14 +1361,13 @@ private fun SelectableVersionListCard(
 
 @Composable
 private fun VersionListCard(
+    modifier: Modifier = Modifier,
     versions: List<String>,
     recommendedIndex: Int = 0,
     isCompatible: Boolean = false,
     showUnpatchedBadge: Boolean = false,
     experimentalVersions: Set<String> = emptySet(),
-    descriptions: Map<String, String> = emptyMap(),
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    descriptions: Map<String, String> = emptyMap()
 ) {
     if (versions.isEmpty()) return
 
