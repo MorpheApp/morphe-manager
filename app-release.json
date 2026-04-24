@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-24T07:51:09.367Z",
-  "description": "# [1.16.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.6...v1.16.0-dev.7) (2026-04-24)\n\n\n### Bug Fixes\n\n* `Session is dead` error on Pixels devices when installing apps ([#458](https://github.com/MorpheApp/morphe-manager/issues/458)) ([ce1ce6e](https://github.com/MorpheApp/morphe-manager/commit/ce1ce6e195a4138c7ca18f5a9dd018db8591fddc))\n\n\n### Features\n\n* Improve patch visibility in bundle and app patch dialogs ([#457](https://github.com/MorpheApp/morphe-manager/issues/457)) ([1881991](https://github.com/MorpheApp/morphe-manager/commit/188199176dba9fe41115e2376fe7ade3138c8068))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.7/morphe-manager-1.16.0-dev.7.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.7/morphe-manager-1.16.0-dev.7.apk.asc",
-  "version": "1.16.0-dev.7"
+  "created_at": "2026-04-24T12:04:03.764Z",
+  "description": "# [1.16.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.7...v1.16.0-dev.8) (2026-04-24)\n\n\n### Bug Fixes\n\n* Adapt accent color contrast for extreme black/white values in app info dialog ([c4f883f](https://github.com/MorpheApp/morphe-manager/commit/c4f883ffbdbb1bd3e7b2085939cb050fa747a11b))\n* Always respect manager prerelease preference for update channel ([090ee0c](https://github.com/MorpheApp/morphe-manager/commit/090ee0ca1ed8d076b58dd3abe4ffa8f8f2062203))\n* Show swipe gesture hint on every custom bundle addition ([0c66503](https://github.com/MorpheApp/morphe-manager/commit/0c665038ed00234ed13b5df32b180382ecfa2f12))\n\n\n### Features\n\n* Adaptive two-column layout for `InstalledAppInfoDialog` on tablets ([40a29a9](https://github.com/MorpheApp/morphe-manager/commit/40a29a96967ef06eca27cb5f62db8d821f93c4aa))\n* Add swipe gestures to hidden apps dialog and search results ([8cf1f13](https://github.com/MorpheApp/morphe-manager/commit/8cf1f137e8cf346a5628c80098e04aecf86f2441))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.8/morphe-manager-1.16.0-dev.8.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.8/morphe-manager-1.16.0-dev.8.apk.asc",
+  "version": "1.16.0-dev.8"
 }

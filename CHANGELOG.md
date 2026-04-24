@@ -1,3 +1,18 @@
+# [1.16.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.7...v1.16.0-dev.8) (2026-04-24)
+
+
+### Bug Fixes
+
+* Adapt accent color contrast for extreme black/white values in app info dialog ([c4f883f](https://github.com/MorpheApp/morphe-manager/commit/c4f883ffbdbb1bd3e7b2085939cb050fa747a11b))
+* Always respect manager prerelease preference for update channel ([090ee0c](https://github.com/MorpheApp/morphe-manager/commit/090ee0ca1ed8d076b58dd3abe4ffa8f8f2062203))
+* Show swipe gesture hint on every custom bundle addition ([0c66503](https://github.com/MorpheApp/morphe-manager/commit/0c665038ed00234ed13b5df32b180382ecfa2f12))
+
+
+### Features
+
+* Adaptive two-column layout for `InstalledAppInfoDialog` on tablets ([40a29a9](https://github.com/MorpheApp/morphe-manager/commit/40a29a96967ef06eca27cb5f62db8d821f93c4aa))
+* Add swipe gestures to hidden apps dialog and search results ([8cf1f13](https://github.com/MorpheApp/morphe-manager/commit/8cf1f137e8cf346a5628c80098e04aecf86f2441))
+
 # [1.16.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.6...v1.16.0-dev.7) (2026-04-24)
 
 
