@@ -48,8 +48,8 @@ typealias PatchSelection = Map<Int, Set<String>>
 typealias Options = Map<Int, Map<String, Map<String, Any?>>>
 
 fun isArmV7(): Boolean {
-    val abis = Build.SUPPORTED_ABIS.map { it.lowercase() }
-    return abis.any { it.contains("armeabi-v7a") }
+    // Only check the primary ABI - ArmV8 devices also list armeabi-v7a as a secondary ABI
+    return Build.SUPPORTED_ABIS.firstOrNull()?.lowercase()?.contains("armeabi-v7a") == true
 }
 
 fun Context.toastHandle(string: String, duration: Int = Toast.LENGTH_SHORT): Toast =
