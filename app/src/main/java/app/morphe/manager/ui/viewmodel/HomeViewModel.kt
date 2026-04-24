@@ -953,6 +953,12 @@ class HomeViewModel(
         withContext(NonCancellable) {
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
         }
+        patchBundleRepository.bundleUpdateProgress
+            .dropWhile { it == null }
+            .filter { it == null }
+            .first()
+        delay(1_500)
+        showSwipeGestureHint.value = true
     }
 
     /**
@@ -1085,12 +1091,10 @@ class HomeViewModel(
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
     /**
-     * Marks the swipe gesture hint as shown so it is never replayed.
+     * Resets the swipe gesture hint after it has been shown.
      */
     fun markSwipeGestureHintShown() {
-        viewModelScope.launch {
-            prefs.swipeGestureHintShown.update(true)
-        }
+        showSwipeGestureHint.value = false
     }
 
     /**
@@ -1151,6 +1155,9 @@ class HomeViewModel(
             ?.mapNotNull { it.target.version }
             ?.toSet()
             ?: emptySet()
+
+    /** Triggers the swipe gesture hint whenever a custom bundle is added. */
+    val showSwipeGestureHint = MutableStateFlow(false)
 
     /**
      * Whether the "Other apps" button should be visible.
