@@ -1,3 +1,16 @@
+# [1.16.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.9...v1.16.0-dev.10) (2026-04-24)
+
+
+### Bug Fixes
+
+* Resolve app icon from saved APK when app is not installed ([fe3ef6c](https://github.com/MorpheApp/morphe-manager/commit/fe3ef6cfaea6bb68c11bd89a127a1122d3cdb943))
+
+
+### Features
+
+* Add `BundleAppMetadata` as a data source for `AppDataResolver` ([3bdc1f5](https://github.com/MorpheApp/morphe-manager/commit/3bdc1f5299b7429444c7266559806aa1ad6aa8d1))
+* Open patches dialog on hidden app tap in search ([1898e74](https://github.com/MorpheApp/morphe-manager/commit/1898e74fe8240961ddda118c2f7fac7f48bacb76))
+
 # [1.16.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.8...v1.16.0-dev.9) (2026-04-24)
 
 

@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-04-24T12:50:35.914Z",
-  "description": "# [1.16.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.8...v1.16.0-dev.9) (2026-04-24)\n\n\n### Bug Fixes\n\n* Check primary ABI only in `isArmV7` to avoid false positives on `ArmV8` devices ([14729c2](https://github.com/MorpheApp/morphe-manager/commit/14729c28a73c0294152c3df1aabffdfb79974215))\n* Fall back to `Downloads` export on devices without `DocumentsUI` (Android TV) ([1e21c39](https://github.com/MorpheApp/morphe-manager/commit/1e21c3957e37351d1498b9894d2e4c3ee8154608))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.9/morphe-manager-1.16.0-dev.9.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.9/morphe-manager-1.16.0-dev.9.apk.asc",
-  "version": "1.16.0-dev.9"
+  "created_at": "2026-04-24T16:15:44.184Z",
+  "description": "# [1.16.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.9...v1.16.0-dev.10) (2026-04-24)\n\n\n### Bug Fixes\n\n* Resolve app icon from saved APK when app is not installed ([fe3ef6c](https://github.com/MorpheApp/morphe-manager/commit/fe3ef6cfaea6bb68c11bd89a127a1122d3cdb943))\n\n\n### Features\n\n* Add `BundleAppMetadata` as a data source for `AppDataResolver` ([3bdc1f5](https://github.com/MorpheApp/morphe-manager/commit/3bdc1f5299b7429444c7266559806aa1ad6aa8d1))\n* Open patches dialog on hidden app tap in search ([1898e74](https://github.com/MorpheApp/morphe-manager/commit/1898e74fe8240961ddda118c2f7fac7f48bacb76))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.10/morphe-manager-1.16.0-dev.10.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.10/morphe-manager-1.16.0-dev.10.apk.asc",
+  "version": "1.16.0-dev.10"
 }
