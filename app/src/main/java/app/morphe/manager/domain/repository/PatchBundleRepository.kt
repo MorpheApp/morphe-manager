@@ -18,6 +18,7 @@ import app.morphe.manager.data.room.bundles.Source
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.util.*
 import io.ktor.http.Url
@@ -68,6 +69,16 @@ class PatchBundleRepository(
         info.filter { (_, bundleInfo) -> bundleInfo.enabled }
     }
     val bundleInfoFlow = enabledBundlesInfoFlow
+
+    /**
+     * Pre-built [BundleAppMetadata] map, updated whenever enabled bundles change.
+     * Shared across all consumers so [BundleAppMetadata.buildFrom] is never called more
+     * than once per bundle reload.
+     */
+    val appMetadata: StateFlow<Map<String, BundleAppMetadata>> =
+        bundleInfoFlow
+            .map { BundleAppMetadata.buildFrom(it) }
+            .stateIn(scope, SharingStarted.Eagerly, emptyMap())
 
     /** True once [doReload] has completed at least once (even if all bundles are disabled). */
     val isBundlePipelineLoaded: Flow<Boolean> = store.state.map { it.isLoaded }

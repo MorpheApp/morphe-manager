@@ -13,7 +13,6 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.patcher.patch.BundleAppMetadata
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -243,13 +242,12 @@ class AppDataResolver(
 
     /**
      * Try to get app display name from patch bundle metadata.
-     * Returns null if no repository is configured or the package isn't in any loaded bundle.
+     * Uses [PatchBundleRepository.appMetadata] snapshot, no allocations.
+     * Returns null if bundles are not yet loaded or package isn't in any bundle.
      */
-    private suspend fun tryGetFromBundleMetadata(packageName: String): ResolvedAppData? {
-        val bundleInfo = patchBundleRepository.bundleInfoFlow.first()
-        if (bundleInfo.isEmpty()) return null
-        val metadata = BundleAppMetadata.buildFrom(bundleInfo)
-        val displayName = metadata[packageName]?.displayName ?: return null
+    private fun tryGetFromBundleMetadata(packageName: String): ResolvedAppData? {
+        val displayName = patchBundleRepository.appMetadata.value[packageName]?.displayName
+            ?: return null
         return ResolvedAppData(
             packageName = packageName,
             displayName = displayName,
