@@ -42,7 +42,7 @@ const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1280
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION = 1024
 private const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 640
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 640
-const val PROCESS_RUNTIME_MEMORY_STEP = 64
+const val PROCESS_RUNTIME_MEMORY_STEP = 128
 
 // Sentinel value indicating the memory limit has never been set
 // triggers adaptive calculation on first use
