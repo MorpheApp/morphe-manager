@@ -48,6 +48,7 @@ import app.morphe.manager.ui.viewmodel.BundledAppTarget
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.MppManifest
 import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
@@ -413,6 +414,16 @@ fun HomeDialogs(
             name = bundle.name,
             onConfirm = { homeViewModel.confirmDeepLinkBundle() },
             onDismiss = { homeViewModel.dismissDeepLinkBundle() }
+        )
+    }
+
+    // .mpp file opened from file manager: Add bundle confirmation dialog
+    homeViewModel.pendingMppUri?.let {
+        MppImportDialog(
+            manifest = homeViewModel.pendingMppManifest,
+            fileName = homeViewModel.pendingMppFileName,
+            onConfirm = { homeViewModel.confirmMppImport() },
+            onDismiss = { homeViewModel.dismissMppImport() }
         )
     }
 
@@ -1690,6 +1701,166 @@ fun DeepLinkAddSourceDialog(
                         fontFamily = FontFamily.Monospace,
                         color = LocalDialogSecondaryTextColor.current
                     )
+                }
+            }
+
+            InfoBadge(
+                text = stringResource(R.string.deep_link_add_source_warning),
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
+            )
+        }
+    }
+}
+
+/**
+ * Confirmation dialog shown when a .mpp file is opened from a file manager.
+ */
+@Composable
+fun MppImportDialog(
+    manifest: MppManifest?,
+    fileName: String?,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.deep_link_add_source_title),
+        compactPadding = true,
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.add),
+                onPrimaryClick = onConfirm,
+                primaryIcon = Icons.Outlined.Extension,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            // Icon
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primaryContainer,
+                modifier = Modifier.size(56.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Outlined.FolderZip,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+            }
+
+            // Message
+            Text(
+                text = stringResource(R.string.deep_link_add_source_message),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Bundle details card
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    // Name (bold title)
+                    val displayName = manifest?.name ?: fileName
+                    if (displayName != null) {
+                        Text(
+                            text = displayName,
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.SemiBold,
+                            color = LocalDialogTextColor.current,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
+                    // Description
+                    manifest?.description?.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalDialogSecondaryTextColor.current,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
+                    // Metadata row: version, author
+                    if (manifest?.version != null || manifest?.author != null) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            manifest.version?.let { version ->
+                                InfoBadge(
+                                    text = "v$version",
+                                    icon = Icons.Outlined.NewReleases,
+                                    style = InfoBadgeStyle.Primary,
+                                    isCompact = true
+                                )
+                            }
+                            manifest.author?.let { author ->
+                                InfoBadge(
+                                    text = author,
+                                    icon = Icons.Outlined.Person,
+                                    style = InfoBadgeStyle.Default,
+                                    isCompact = true
+                                )
+                            }
+                        }
+                    }
+
+                    // Source URL
+                    manifest?.source?.let { source ->
+                        Text(
+                            text = source,
+                            style = MaterialTheme.typography.bodySmall,
+                            fontFamily = FontFamily.Monospace,
+                            color = LocalDialogSecondaryTextColor.current,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
+                    // Filename (always shown as secondary info)
+                    if (fileName != null && manifest?.name != null) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Description,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(12.dp)
+                            )
+                            Text(
+                                text = fileName,
+                                style = MaterialTheme.typography.bodySmall,
+                                fontFamily = FontFamily.Monospace,
+                                color = LocalDialogSecondaryTextColor.current,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    }
                 }
             }
 

@@ -41,7 +41,7 @@ object KnownApps {
     const val YOUTUBE       = "com.google.android.youtube"
     const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
     const val REDDIT        = "com.reddit.frontpage"
-    const val X_TWITTER     = "com.twitter.android"
+    // const val X_TWITTER     = "com.twitter.android"
 
     // Shared Morphe brand gradient tail
     val GRADIENT_MID = Color(0xFF1E5AA8)

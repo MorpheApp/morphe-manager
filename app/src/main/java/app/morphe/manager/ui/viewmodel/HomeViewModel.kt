@@ -197,6 +197,34 @@ class HomeViewModel(
 
     data class DeepLinkBundle(val url: String, val name: String?)
 
+    // .mpp file opened from file manager: pending confirmation dialog
+    var pendingMppUri by mutableStateOf<Uri?>(null)
+    var pendingMppFileName by mutableStateOf<String?>(null)
+    var pendingMppManifest by mutableStateOf<MppManifest?>(null)
+
+    fun setPendingMpp(uri: Uri) {
+        pendingMppUri = uri
+        pendingMppFileName = uri.displayName(contentResolver)
+        pendingMppManifest = null
+        viewModelScope.launch(Dispatchers.IO) {
+            pendingMppManifest = uri.readMppManifest(contentResolver)
+        }
+    }
+
+    fun confirmMppImport() {
+        val uri = pendingMppUri ?: return
+        pendingMppUri = null
+        pendingMppFileName = null
+        pendingMppManifest = null
+        createLocalSource(uri)
+    }
+
+    fun dismissMppImport() {
+        pendingMppUri = null
+        pendingMppFileName = null
+        pendingMppManifest = null
+    }
+
     // Expert mode state
     var showExpertModeDialog by mutableStateOf(false)
     var expertModeSelectedApp by mutableStateOf<SelectedApp?>(null)
