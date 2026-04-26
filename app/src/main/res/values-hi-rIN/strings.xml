@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">पैच करने के लिए &lt;b&gt;%s&lt;/b&gt;, अपatched एपीके की आवश्यकता है:</string>
     <string name="home_apk_availability_recommended_label">सुझाया गया</string>
     <string name="home_apk_availability_unpatched_label">अपडेट किए बिना</string>
+    <string name="home_apk_availability_incompatible_label">असंगत</string>
     <string name="home_apk_availability_yes">हाँ, मुझे APK ढूंढने में मदद करें</string>
     <string name="home_apk_availability_no">नहीं, मेरे पास पहले से ही एक एपीके है</string>
     <string name="home_apk_use_saved_with_version">प्रतिलिपि APK (v%s) का उपयोग करें</string>
     <string name="home_app_info_no_saved_apk">कोई प्रतिलिपि APK नहीं है। पट्च करना पुनः APK फ़ाइल का चयन करना आवश्यक होगा</string>
+    <string name="home_version_requires_android">Android %1$s+ की आवश्यकता है</string>
+    <string name="home_apk_no_compatible_versions_title">इस डिवाइस पर समर्थित नहीं है</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; के पास Android %2$d (API %3$d) के लिए कोई समर्थित संस्करण नहीं है। सभी घोषित संस्करणों के लिए उच्च Android संस्करण की आवश्यकता है।</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ओरिजनल APK डाउनलोड करें</string>
     <string name="home_download_instructions_steps_title">निर्देश:</string>

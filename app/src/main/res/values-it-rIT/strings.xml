@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Per patchare &lt;b&gt;%s&lt;/b&gt;, è necessario un APK non patchato con le versioni:</string>
     <string name="home_apk_availability_recommended_label">Consigliata</string>
     <string name="home_apk_availability_unpatched_label">Non patchato</string>
+    <string name="home_apk_availability_incompatible_label">Incompatibile</string>
     <string name="home_apk_availability_yes">Sì, aiutami a trovare un APK</string>
     <string name="home_apk_availability_no">No, ho già un APK</string>
     <string name="home_apk_use_saved_with_version">Usa l\'APK salvato (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patching richiederà la selezione del file APK</string>
+    <string name="home_version_requires_android">Richiede Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Non supportato su questo dispositivo</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; non ha versioni supportate per Android %2$d (API %3$d). Tutte le versioni dichiarate richiedono una versione Android superiore</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Scarica l\'APK originale</string>
     <string name="home_download_instructions_steps_title">Istruzioni:</string>

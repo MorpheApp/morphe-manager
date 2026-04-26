@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Để vá &lt;b&gt;%s&lt;/b&gt;, bạn cần APK chưa vá thuộc một trong các phiên bản:</string>
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
+    <string name="home_apk_availability_incompatible_label">Không tương thích</string>
     <string name="home_apk_availability_yes">Có, giúp tôi vs</string>
     <string name="home_apk_availability_no">Không, tôi có APK rồi</string>
     <string name="home_apk_use_saved_with_version">Dùng APK đã lưu (v%s)</string>
     <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
+    <string name="home_version_requires_android">Yêu cầu Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Không được hỗ trợ trên thiết bị này</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; không có phiên bản nào được hỗ trợ cho Android %2$d (API %3$d). Tất cả các phiên bản đã khai báo đều yêu cầu phiên bản Android cao hơn</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Tải APK gốc</string>
     <string name="home_download_instructions_steps_title">Hướng dẫn:</string>

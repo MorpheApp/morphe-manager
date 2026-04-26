@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Para parchear &lt;b&gt;%s&lt;/b&gt;, necesitas un APK sin parchear de las versiones:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">No parcheado</string>
+    <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Sí, ayúdame a encontrar un APK</string>
     <string name="home_apk_availability_no">No, ya tengo un APK</string>
     <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
+    <string name="home_version_requires_android">Requiere Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">No compatible en este dispositivo</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; no tiene versiones compatibles para Android %2$d (API %3$d). Todas las versiones declaradas requieren una versión de Android superior</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descargar el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>

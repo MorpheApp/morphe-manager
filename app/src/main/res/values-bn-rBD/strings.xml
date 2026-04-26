@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">প্যাচ করতে &lt;b&gt;%s&lt;/b&gt; এর জন্য, অ-প্যাচড এপিকি (APK) সংস্করণ দরকার:</string>
     <string name="home_apk_availability_recommended_label">প্রশংসিত</string>
     <string name="home_apk_availability_unpatched_label">অনুশিষ্টিত</string>
+    <string name="home_apk_availability_incompatible_label">অসঙ্গতিপূর্ণ</string>
     <string name="home_apk_availability_yes">হ্যাঁ, আমাকে একটি APK খুঁজতে সাহায্য করুন</string>
     <string name="home_apk_availability_no">না, আমি ইতিমধ্যে একটি APK পেয়েছি</string>
     <string name="home_apk_use_saved_with_version">বর্তমান সংরক্ষিত APK (v%s) ব্যবহার করুন</string>
     <string name="home_app_info_no_saved_apk">কোন সংরক্ষিত APK নেই। প্যাচিংয়ের জন্য আবার APK ফাইল নির্বাচন করতে হবে</string>
+    <string name="home_version_requires_android">Android %1$s+ প্রয়োজন</string>
+    <string name="home_apk_no_compatible_versions_title">এই ডিভাইসে সমর্থিত নয়</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;-এর Android %2$d (API %3$d)-এর জন্য কোনো সমর্থিত সংস্করণ নেই। ঘোষিত সমস্ত সংস্করণের জন্য উচ্চতর Android সংস্করণ প্রয়োজন</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">মূল APK ডাউনলোড করুন</string>
     <string name="home_download_instructions_steps_title">নির্দেশাবলী:</string>

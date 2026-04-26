@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">For at patche &lt;b&gt;%s&lt;/b&gt;, skal du have en upatchet APK af versioner:</string>
     <string name="home_apk_availability_recommended_label">Anbefalet</string>
     <string name="home_apk_availability_unpatched_label">Upatchet</string>
+    <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
     <string name="home_apk_availability_yes">Ja, hjælp med at finde en APK</string>
     <string name="home_apk_availability_no">Nej, jeg har allerede en APK</string>
     <string name="home_apk_use_saved_with_version">Brug gemt APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning kræver at du vælger APK-filen igen</string>
+    <string name="home_version_requires_android">Kræver Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Ikke understøttet på denne enhed</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har ingen understøttede versioner til Android %2$d (API %3$d). Alle erklærede versioner kræver en højere Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download den originale APK</string>
     <string name="home_download_instructions_steps_title">Instruktioner:</string>

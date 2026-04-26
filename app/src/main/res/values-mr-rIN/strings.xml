@@ -25,6 +25,10 @@
     <string name="sources_patch_expert_badge">तज्ञ</string>
     <string name="sources_patch_expert_badge_tooltip">हा पॅच मॅन्युअली समाविष्ट करण्यासाठी सेटिंग्जमध्ये तज्ञ मोड सक्षम करा</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_incompatible_label">असंगत</string>
+    <string name="home_version_requires_android">Android %1$s+ आवश्यक आहे</string>
+    <string name="home_apk_no_compatible_versions_title">या डिव्हाइसवर समर्थित नाही</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) साठी समर्थित आवृत्त्या नाहीत. घोषित केलेल्या सर्व आवृत्त्यांसाठी उच्च Android आवृत्ती आवश्यक आहे.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_invalid_apk_unreadable">फाईल वाचण्यात अयशस्वी. \'External Storage\' बॅटरी निर्बंधीत नसल्याची खात्री करा</string>

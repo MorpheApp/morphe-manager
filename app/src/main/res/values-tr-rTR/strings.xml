@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt;\'i yamalamak için bu yamalanmamış APK sürümlerinden birine ihtiyacınız var:</string>
     <string name="home_apk_availability_recommended_label">Önerilen</string>
     <string name="home_apk_availability_unpatched_label">Yamalanmamış</string>
+    <string name="home_apk_availability_incompatible_label">Uyumsuz</string>
     <string name="home_apk_availability_yes">Evet, APK bulmama yardım et</string>
     <string name="home_apk_availability_no">Hayır, bende APK var</string>
     <string name="home_apk_use_saved_with_version">Kaydedilmiş APK (v%s) kullan</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Yamayı uygulayabilmek için tekrar APK dosyasını seçmeniz gerekiyor</string>
+    <string name="home_version_requires_android">Android %1$s+ gerekiyor</string>
+    <string name="home_apk_no_compatible_versions_title">Bu cihazda desteklenmiyor</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) için desteklenen sürümlere sahip değil. Bildirilen tüm sürümler daha yüksek bir Android sürümü gerektiriyor</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>

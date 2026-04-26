@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">За да прилагате &lt;b&gt;%s&lt;/b&gt;, нужна е непренагласена APK от версиите:</string>
     <string name="home_apk_availability_recommended_label">Рекомендовано</string>
     <string name="home_apk_availability_unpatched_label">Необновен</string>
+    <string name="home_apk_availability_incompatible_label">Несъвместим</string>
     <string name="home_apk_availability_yes">Да, помогнете ми да намира APK</string>
     <string name="home_apk_availability_no">Не, вече имам APK</string>
     <string name="home_apk_use_saved_with_version">Използвайте запазеното APK (в%с)</string>
     <string name="home_app_info_no_saved_apk">Няма запазено APK. Пatching ще изисква отново да изберете APK файл.</string>
+    <string name="home_version_requires_android">Изисква Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Не се поддържа на това устройство</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; няма поддържани версии за Android %2$d (API %3$d). Всички декларирани версии изискват по-нова версия на Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Изтеглете оригинален APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>

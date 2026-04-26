@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Da bi popravili &lt;b&gt;%s&lt;/b&gt;, potrebno je nepokvarenog APK verzija:</string>
     <string name="home_apk_availability_recommended_label">Preporučeno</string>
     <string name="home_apk_availability_unpatched_label">Neopterećeno</string>
+    <string name="home_apk_availability_incompatible_label">Nekompatibilan</string>
     <string name="home_apk_availability_yes">Da, pomozi mi da pronađem APK</string>
     <string name="home_apk_availability_no">Ne, već imam APK</string>
     <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema sačuvanog APK-a. Krpljenje će zahtevati ponovni odabir APK datoteke</string>
+    <string name="home_version_requires_android">Zahteva Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Nije podržano na ovom uređaju</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nema podržanih verzija za Android %2$d (API %3$d). Sve deklarisane verzije zahtevaju višu verziju Androida</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Preuzmi originalnu APK</string>
     <string name="home_download_instructions_steps_title">Uputstva:</string>

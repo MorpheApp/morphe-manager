@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Upang ma-patch ang &lt;b&gt;%s&lt;/b&gt;, kailangan mo ng hindi pa napa-patch na APK na may mga bersyong:</string>
     <string name="home_apk_availability_recommended_label">Inirerekomenda</string>
     <string name="home_apk_availability_unpatched_label">Hindi na-patch</string>
+    <string name="home_apk_availability_incompatible_label">Hindi tugma</string>
     <string name="home_apk_availability_yes">Oo, tulungan mo akong hanapin ang APK</string>
     <string name="home_apk_availability_no">Hindi, mayroon na akong APK</string>
     <string name="home_apk_use_saved_with_version">Gamitin ang nakaimbak na APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Walang nakaimbak na APK. Ang pag-patch na ito ay mangangailangan ng muling pagpili ng APK file</string>
+    <string name="home_version_requires_android">Nangangailangan ng Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Hindi suportado sa aparatong ito</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ay walang sinusuportahang bersyon para sa Android %2$d (API %3$d). Lahat ng idineklarang bersyon ay nangangailangan ng mas mataas na bersyon ng Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">I-download ang orihinal na APK</string>
     <string name="home_download_instructions_steps_title">Mga Tagubilin:</string>
