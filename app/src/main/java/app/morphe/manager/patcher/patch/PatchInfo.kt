@@ -49,7 +49,16 @@ data class PatchInfo(
                         }
                         .toMap()
                         .toImmutableMap()
-                        .takeIf { it.isNotEmpty() }
+                        .takeIf { it.isNotEmpty() },
+                    versionMinSdks = compatibility.targets
+                        .mapNotNull { target ->
+                            val v = target.version ?: return@mapNotNull null
+                            val sdk = target.minSdk ?: return@mapNotNull null
+                            v to sdk
+                        }
+                        .toMap()
+                        .toImmutableMap()
+                        .takeIf { it.isNotEmpty() },
                 )
             }
             ?.toImmutableList()
@@ -131,6 +140,8 @@ data class CompatiblePackage(
     val signatures: ImmutableSet<String>? = null,
     /** Per-version user-facing descriptions. */
     val versionDescriptions: ImmutableMap<String, String>? = null,
+    /** Minimum Android SDK version required per app version. */
+    val versionMinSdks: ImmutableMap<String, Int>? = null,
 )
 
 @Immutable

@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -25,6 +26,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -50,6 +52,7 @@ import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.MppManifest
 import app.morphe.manager.util.RemoteAvatar
+import app.morphe.manager.util.androidVersionName
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 import app.morphe.patcher.patch.AppTarget
@@ -239,6 +242,21 @@ fun HomeDialogs(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
             onDismiss = { homeViewModel.dismissWrongPackageDialog() }
+        )
+    }
+
+    // No compatible versions dialog - shown when every declared version requires a higher SDK
+    AnimatedVisibility(
+        visible = homeViewModel.showNoCompatibleVersionsDialog != null,
+        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+    ) {
+        val packageName = homeViewModel.showNoCompatibleVersionsDialog ?: return@AnimatedVisibility
+        val appName = homeViewModel.bundleAppMetadataFlow.value[packageName]?.displayName
+            ?: KnownApps.getAppName(packageName)
+        NoCompatibleVersionsDialog(
+            appName = appName,
+            onDismiss = { homeViewModel.showNoCompatibleVersionsDialog = null }
         )
     }
 
@@ -504,6 +522,18 @@ private fun ApkAvailabilityDialog(
     onNeedApk: () -> Unit,
     onUseSaved: () -> Unit
 ) {
+    val deviceSdk = Build.VERSION.SDK_INT
+
+    // Versions whose minSdk exceeds the current device - shown greyed-out and non-selectable
+    val incompatibleSdkVersions: Set<String> = remember(compatibleVersions, deviceSdk) {
+        compatibleVersions
+            .mapNotNull { b ->
+                val v = b.target.version ?: return@mapNotNull null
+                val minSdk = b.target.minSdk ?: return@mapNotNull null
+                if (deviceSdk < minSdk) v else null
+            }
+            .toSet()
+    }
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_apk_availability_dialog_title),
@@ -566,7 +596,8 @@ private fun ApkAvailabilityDialog(
                         recommendedBundleVersions = recommendedBundleVersions,
                         onVersionSelect = onVersionSelect,
                         anyString = anyString,
-                        hasMultipleBundles = compatibleVersions.map { it.bundleUid }.distinct().size > 1
+                        hasMultipleBundles = compatibleVersions.map { it.bundleUid }.distinct().size > 1,
+                        incompatibleSdkVersions = incompatibleSdkVersions,
                     )
                 } else {
                     VersionListCard(
@@ -577,7 +608,8 @@ private fun ApkAvailabilityDialog(
                             .toSet(),
                         descriptions = compatibleVersions
                             .mapNotNull { b -> b.target.version?.let { v -> b.target.description?.let { d -> v to d } } }
-                            .toMap()
+                            .toMap(),
+                        incompatibleSdkVersions = incompatibleSdkVersions,
                     )
                 }
             } else {
@@ -1210,19 +1242,72 @@ fun WrongPackageDialog(
 }
 
 /**
- * Version list card where each row is tappable.
- * The selected version gets a checkmark; the recommended version is labeled when not selected.
- * Experimental versions are always labeled regardless of selection state.
+ * Shown when the device SDK is lower than the minSdk of every declared AppTarget for this app.
+ * Informs the user that their device does not meet the requirements for any supported version.
  */
 @Composable
+private fun NoCompatibleVersionsDialog(
+    appName: String,
+    onDismiss: () -> Unit
+) {
+    val deviceSdk = Build.VERSION.SDK_INT
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_apk_no_compatible_versions_title),
+        footer = {
+            MorpheDialogButton(
+                text = stringResource(android.R.string.ok),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.PhoneAndroid,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.error,
+                modifier = Modifier.size(48.dp)
+            )
+            Text(
+                text = htmlAnnotatedString(
+                    stringResource(
+                        R.string.home_apk_no_compatible_versions_message,
+                        appName,
+                        deviceSdk.androidVersionName(),
+                        deviceSdk
+                    )
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+/**
+* The selected version gets a checkmark; the recommended version is labeled when not selected.
+* Experimental versions are always labeled regardless of selection state.
+* Versions whose [AppTarget.minSdk] exceeds the current device SDK are shown greyed-out
+* and cannot be selected.
+*/
+@Composable
 private fun SelectableVersionListCard(
+    modifier: Modifier = Modifier,
     versions: List<BundledAppTarget>,
     selectedVersion: AppTarget?,
     recommendedBundleVersions: Map<Int, AppTarget>,
     onVersionSelect: (AppTarget) -> Unit,
     anyString: String,
     hasMultipleBundles: Boolean,
-    modifier: Modifier = Modifier
+    incompatibleSdkVersions: Set<String> = emptySet()
 ) {
     if (versions.isEmpty()) return
 
@@ -1238,12 +1323,16 @@ private fun SelectableVersionListCard(
             versions.forEachIndexed { index, bundled ->
                 val target = bundled.target
                 val versionString = target.version ?: anyString
-                val isSelected = target.version != null && target.version == selectedVersion?.version
-                val isRecommended = target.version != null &&
+                val isIncompatibleSdk = target.version != null && target.version in incompatibleSdkVersions
+                val isSelected = !isIncompatibleSdk && target.version != null && target.version == selectedVersion?.version
+                val isRecommended = !isIncompatibleSdk && target.version != null &&
                         target.version == recommendedBundleVersions[bundled.bundleUid]?.version
                 val recommendedLabel = stringResource(R.string.home_apk_availability_recommended_label)
                 val experimentalLabel = stringResource(R.string.home_dialog_unsupported_version_experimental_label)
                 val selectedLabel = stringResource(R.string.home_selected_version)
+                val requiresAndroidLabel = target.minSdk?.let { sdk ->
+                    stringResource(R.string.home_version_requires_android, sdk.androidVersionName())
+                }
 
                 // Bundle section header - only when multiple bundles are present and uid changes
                 if (hasMultipleBundles && bundled.bundleUid != lastBundleUid) {
@@ -1278,6 +1367,13 @@ private fun SelectableVersionListCard(
                 }
 
                 val badge: @Composable (() -> Unit)? = when {
+                    isIncompatibleSdk -> ({
+                        InfoBadge(
+                            text = requiresAndroidLabel ?: "API ${target.minSdk ?: "?"}+",
+                            style = InfoBadgeStyle.Error,
+                            isCompact = true
+                        )
+                    })
                     target.isExperimental -> ({
                         InfoBadge(
                             text = experimentalLabel,
@@ -1298,6 +1394,7 @@ private fun SelectableVersionListCard(
                 val rowContentDesc = buildString {
                     append(versionString)
                     when {
+                        isIncompatibleSdk -> requiresAndroidLabel?.let { append(", $it") }
                         target.isExperimental -> append(", $experimentalLabel")
                         isRecommended -> append(", $recommendedLabel")
                     }
@@ -1309,10 +1406,13 @@ private fun SelectableVersionListCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .selectable(
-                            selected = isSelected,
-                            onClick = { onVersionSelect(target) },
-                            role = Role.RadioButton
+                        .then(
+                            if (isIncompatibleSdk) Modifier
+                            else Modifier.selectable(
+                                selected = isSelected,
+                                onClick = { onVersionSelect(target) },
+                                role = Role.RadioButton
+                            )
                         )
                         .semantics { contentDescription = rowContentDesc }
                         .padding(horizontal = 16.dp, vertical = 12.dp),
@@ -1335,7 +1435,9 @@ private fun SelectableVersionListCard(
                     }
 
                     Column(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .then(if (isIncompatibleSdk) Modifier.alpha(0.4f) else Modifier),
                         verticalArrangement = Arrangement.spacedBy(2.dp)
                     ) {
                         Row(
@@ -1348,6 +1450,7 @@ private fun SelectableVersionListCard(
                                 fontFamily = FontFamily.Monospace,
                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                                 color = when {
+                                    isIncompatibleSdk -> LocalDialogTextColor.current
                                     isSelected -> MaterialTheme.colorScheme.primary
                                     target.isExperimental -> MaterialTheme.colorScheme.tertiary
                                     else -> LocalDialogTextColor.current
@@ -1393,7 +1496,8 @@ private fun VersionListCard(
     isCompatible: Boolean = false,
     showUnpatchedBadge: Boolean = false,
     experimentalVersions: Set<String> = emptySet(),
-    descriptions: Map<String, String> = emptyMap()
+    descriptions: Map<String, String> = emptyMap(),
+    incompatibleSdkVersions: Set<String> = emptySet(),
 ) {
     if (versions.isEmpty()) return
 
@@ -1423,10 +1527,18 @@ private fun VersionListCard(
         ) {
             versions.forEachIndexed { index, version ->
                 val isExperimentalVersion = version in experimentalVersions
+                val isIncompatibleSdk = version in incompatibleSdkVersions
                 val versionDescription = descriptions[version]
 
                 // Resolve badge once - drives both the badge composable and version text color
                 val badge: @Composable (() -> Unit)? = when {
+                    isIncompatibleSdk -> ({
+                        InfoBadge(
+                            text = stringResource(R.string.home_apk_availability_incompatible_label),
+                            style = InfoBadgeStyle.Error,
+                            isCompact = true
+                        )
+                    })
                     isExperimentalVersion -> ({
                         InfoBadge(
                             text = stringResource(R.string.home_dialog_unsupported_version_experimental_label),
@@ -1452,7 +1564,9 @@ private fun VersionListCard(
                 }
 
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .then(if (isIncompatibleSdk) Modifier.alpha(0.4f) else Modifier),
                     verticalArrangement = Arrangement.spacedBy(3.dp)
                 ) {
                     // Version + optional badge inline

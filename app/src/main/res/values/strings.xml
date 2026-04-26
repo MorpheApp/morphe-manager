@@ -103,10 +103,14 @@
     <string name="home_apk_availability_dialog_expert">To patch &lt;b&gt;%s&lt;/b&gt;, you need an unpatched APK of versions:</string>
     <string name="home_apk_availability_recommended_label">Recommended</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
+    <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Yes, help me find an APK</string>
     <string name="home_apk_availability_no">No, I already have an APK</string>
     <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
+    <string name="home_version_requires_android">Requires Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Not supported on this device</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; has no supported versions for Android %2$d (API %3$d). All declared versions require a higher Android version</string>
 
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>

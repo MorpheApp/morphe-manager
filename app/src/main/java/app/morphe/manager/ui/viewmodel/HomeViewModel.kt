@@ -262,6 +262,7 @@ class HomeViewModel(
     var showWrongPackageDialog by mutableStateOf<WrongPackageDialogState?>(null)
     var showSplitApkWarningDialog by mutableStateOf(false)
     var showInvalidSignatureDialog by mutableStateOf<InvalidSignatureDialogState?>(null)
+    var showNoCompatibleVersionsDialog by mutableStateOf<String?>(null) // packageName
 
     // Pending data during APK selection
     var pendingPackageName by mutableStateOf<String?>(null)
@@ -325,8 +326,17 @@ class HomeViewModel(
                 .mapNotNull { it.packageName }
                 .toSet()
 
+            val deviceSdk = Build.VERSION.SDK_INT
             versionData.mapValues { (packageName, bundledTargets) ->
-                val targets = bundledTargets.map { it.target }
+                // Only consider versions whose minSdk is satisfied by the current device.
+                // Versions with no declared minSdk are always eligible
+                val compatibleTargets = bundledTargets
+                    .map { it.target }
+                    .filter { it.minSdk == null || deviceSdk >= it.minSdk!! }
+
+                // Fall back to all targets if every version requires a higher SDK than this device
+                val targets = compatibleTargets.ifEmpty { bundledTargets.map { it.target } }
+
                 if (packageName in experimentalEnabledPackages) {
                     // Experimental mode: prefer the highest experimental version, fallback to first
                     targets.firstOrNull { it.isExperimental } ?: targets.first()
@@ -366,17 +376,23 @@ class HomeViewModel(
                         .toSet()
                 }
 
+            val deviceSdk = Build.VERSION.SDK_INT
             versionData.mapValues { (packageName, bundledTargets) ->
                 bundledTargets
                     .groupBy { it.bundleUid }
                     .mapValues { (bundleUid, targets) ->
                         val appTargets = targets.map { it.target }
+                        // Only consider versions compatible with the current device SDK
+                        val compatibleTargets = appTargets
+                            .filter { it.minSdk == null || deviceSdk >= it.minSdk!! }
+                        // Fallback to all targets if none are SDK-compatible
+                        val candidates = compatibleTargets.ifEmpty { appTargets }
                         val preferExperimental = experimentalPackagesByBundle[bundleUid]
                             ?.contains(packageName) == true
                         if (preferExperimental) {
-                            appTargets.firstOrNull { it.isExperimental } ?: appTargets.first()
+                            candidates.firstOrNull { it.isExperimental } ?: candidates.first()
                         } else {
-                            appTargets.firstOrNull { !it.isExperimental } ?: appTargets.first()
+                            candidates.firstOrNull { !it.isExperimental } ?: candidates.first()
                         }
                     }
             }
@@ -1287,6 +1303,19 @@ class HomeViewModel(
         }
         pendingSavedApkInfo = savedInfo
 
+        // Check if every declared version is incompatible with the current device SDK
+        val versions = compatibleVersions[packageName] ?: emptyList()
+        val deviceSdk = Build.VERSION.SDK_INT
+        val allIncompatible = versions.isNotEmpty() &&
+                versions.all { b ->
+                    val minSdk = b.target.minSdk
+                    minSdk != null && deviceSdk < minSdk
+                }
+        if (allIncompatible) {
+            showNoCompatibleVersionsDialog = packageName
+            return
+        }
+
         // Check if we should auto-use saved APK in simple mode
         val isExpertMode = prefs.useExpertMode.getBlocking()
         val recommendedVersion = recommendedVersions[packageName]
@@ -2135,11 +2164,16 @@ class HomeViewModel(
      * Returns a map of package name to a list of [BundledAppTarget] - versions are grouped by
      * bundle (ordered by bundle display name) and sorted newest→oldest within each bundle.
      * Versions are NOT deduplicated across bundles so the UI can show per-bundle sections.
+     *
+     * All declared versions are included regardless of [AppTarget.minSdk]. The minSdk value is
+     * preserved in [AppTarget.minSdk] so that:
+     * - [recommendedVersionsFlow] skips versions incompatible with the current device SDK.
+     * - The UI can render incompatible versions as greyed-out / non-selectable with a badge.
      */
     private fun extractCompatibleVersions(
         bundleInfo: Map<Int, PatchBundleInfo>,
         bundleNames: Map<Int, String>,
-        enabledBundleUids: Set<Int> = emptySet()
+        enabledBundleUids: Set<Int> = emptySet(),
     ): Map<String, List<BundledAppTarget>> {
         // packageName → bundleUid → version → AppTarget
         val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
@@ -2159,10 +2193,12 @@ class HomeViewModel(
                         // If a version appears in multiple patches of the same bundle, prefer stable
                         if (version !in bundleMap || !isExperimental) {
                             val description = pkg.versionDescriptions?.get(version)
+                            val minSdk = pkg.versionMinSdks?.get(version)
                             bundleMap[version] = AppTarget(
                                 version = version,
                                 isExperimental = isExperimental,
-                                description = description
+                                description = description,
+                                minSdk = minSdk,
                             )
                         }
                     }

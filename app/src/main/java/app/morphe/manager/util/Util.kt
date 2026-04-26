@@ -186,6 +186,25 @@ fun htmlAnnotatedString(html: String): AnnotatedString {
 
 fun Modifier.enabled(condition: Boolean) = if (condition) this else alpha(0.5f)
 
+/**
+ * Returns a human-readable Android version name for this SDK integer.
+ */
+fun Int.androidVersionName(): String = when (this) {
+    37 -> "17"
+    36 -> "16"
+    35 -> "15"
+    34 -> "14"
+    33 -> "13"
+    32 -> "12L"
+    31 -> "12"
+    30 -> "11"
+    29 -> "10"
+    28 -> "9"
+    27 -> "8.1"
+    26 -> "8.0"
+    else -> "$this" // future or very old SDK - just use the number
+}
+
 @MainThread
 fun <T : Any> SavedStateHandle.saveableVar(init: () -> T): PropertyDelegateProvider<Any?, ReadWriteProperty<Any?, T>> =
     PropertyDelegateProvider { _: Any?, property ->
