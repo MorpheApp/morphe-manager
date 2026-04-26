@@ -1,5 +1,6 @@
 package app.morphe.manager.ui.viewmodel
 
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -23,6 +24,13 @@ class MainViewModel(
      * shows a confirmation dialog, then resets the flag to null.
      */
     var pendingDeepLinkSource: DeepLinkSource? by mutableStateOf(null)
+
+    /**
+     * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the app is opened
+     * by tapping a .mpp file in a file manager. HomeScreen observes this via LaunchedEffect,
+     * shows a confirmation dialog, then resets the flag to null.
+     */
+    var pendingMppUri: Uri? by mutableStateOf(null)
 
     data class DeepLinkSource(val url: String, val name: String?)
 }

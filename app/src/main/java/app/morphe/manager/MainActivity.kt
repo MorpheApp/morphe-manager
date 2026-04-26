@@ -45,6 +45,7 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.UpdateNotificationManager
+import app.morphe.manager.util.hasMppExtension
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -100,6 +101,16 @@ class MainActivity : AppCompatActivity() {
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
         val data = intent?.data ?: return
+
+        // Handle .mpp file open from file manager
+        if (intent.action == Intent.ACTION_VIEW && data.scheme in listOf("file", "content")) {
+            if (data.hasMppExtension(contentResolver)) {
+                vm.pendingMppUri = data
+            }
+            // Not .mpp - don't process further regardless
+            return
+        }
+
         val isAddSource = data.scheme == "https" &&
                 data.host == "morphe.software" &&
                 data.path?.startsWith("/add-source") == true
@@ -204,6 +215,14 @@ private fun MorpheManager(vm: MainViewModel) {
                     vm.pendingDeepLinkSource?.let { bundle ->
                         homeViewModel.handleDeepLinkAddSource(bundle.url, bundle.name)
                         vm.pendingDeepLinkSource = null
+                    }
+                }
+
+                // Handle .mpp file opened from file manager
+                LaunchedEffect(vm.pendingMppUri) {
+                    vm.pendingMppUri?.let { uri ->
+                        homeViewModel.setPendingMpp(uri)
+                        vm.pendingMppUri = null
                     }
                 }
 
