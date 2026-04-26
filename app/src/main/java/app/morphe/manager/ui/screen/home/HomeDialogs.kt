@@ -1293,10 +1293,11 @@ private fun NoCompatibleVersionsDialog(
 }
 
 /**
-* The selected version gets a checkmark; the recommended version is labeled when not selected.
-* Experimental versions are always labeled regardless of selection state.
-* Versions whose [AppTarget.minSdk] exceeds the current device SDK are shown greyed-out
-* and cannot be selected.
+ * Version list card where each row is tappable.
+ * The selected version gets a checkmark; the recommended version is labeled when not selected.
+ * Experimental versions are always labeled regardless of selection state.
+ * Versions whose [AppTarget.minSdk] exceeds the current device SDK are shown greyed-out
+ * and cannot be selected.
 */
 @Composable
 private fun SelectableVersionListCard(
@@ -1485,7 +1486,6 @@ private fun SelectableVersionListCard(
         }
     }
 }
-
 
 
 @Composable
