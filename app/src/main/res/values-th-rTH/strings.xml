@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">เพื่อที่จะแพตซ์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแก้ไขเวอร์ชัน:</string>
     <string name="home_apk_availability_recommended_label">แนะนำ</string>
     <string name="home_apk_availability_unpatched_label">ไม่ได้แพตซ์</string>
+    <string name="home_apk_availability_incompatible_label">ไม่รองรับ</string>
     <string name="home_apk_availability_yes">ใช่, ช่วยฉันค้นหา APK</string>
     <string name="home_apk_availability_no">ไม่, ฉันมี APK แล้ว</string>
     <string name="home_apk_use_saved_with_version">ใช้ APK ที่ถูกบันทึก (เวอร์ชัน %s)</string>
     <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก การแพตซ์จะต้องเลือกไฟล์ APK อีกครั้ง</string>
+    <string name="home_version_requires_android">ต้องใช้ Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">ไม่รองรับบนอุปกรณ์นี้</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ไม่มีเวอร์ชันที่รองรับสำหรับ Android %2$d (API %3$d) ทุกเวอร์ชันที่ประกาศต้องการ Android เวอร์ชันที่สูงกว่า</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
     <string name="home_download_instructions_steps_title">คำแนะนำ:</string>

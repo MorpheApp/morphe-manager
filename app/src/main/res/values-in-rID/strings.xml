@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Untuk menambal &lt;b&gt;%s&lt;/b&gt;, Anda membutuhkan APK yang belum ditambal dengan versi:</string>
     <string name="home_apk_availability_recommended_label">Direkomendasikan</string>
     <string name="home_apk_availability_unpatched_label">Tidak ditambal</string>
+    <string name="home_apk_availability_incompatible_label">Tidak kompatibel</string>
     <string name="home_apk_availability_yes">Ya, bantu saya mencari APK</string>
     <string name="home_apk_availability_no">Tidak, saya sudah memiliki APK</string>
     <string name="home_apk_use_saved_with_version">Gunakan APK yang disimpan (v%s)</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
+    <string name="home_version_requires_android">Memerlukan Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Tidak didukung di perangkat ini</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tidak memiliki versi yang didukung untuk Android %2$d (API %3$d). Semua versi yang dideklarasikan memerlukan versi Android yang lebih tinggi</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Unduh APK asli</string>
     <string name="home_download_instructions_steps_title">Petunjuk:</string>

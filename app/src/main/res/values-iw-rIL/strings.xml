@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">לעדכן &lt;b&gt;%s&lt;/b&gt;, צריך APK לא מעודכן של הגרסאות:</string>
     <string name="home_apk_availability_recommended_label">מומלץ</string>
     <string name="home_apk_availability_unpatched_label">לא מתקן</string>
+    <string name="home_apk_availability_incompatible_label">לא תואם</string>
     <string name="home_apk_availability_yes">כן, עזור לי למצוא APK</string>
     <string name="home_apk_availability_no">לא, אני כבר מחזיק APK</string>
     <string name="home_apk_use_saved_with_version">השתמש באפאק שמור (גרסה %s)</string>
     <string name="home_app_info_no_saved_apk">אין אפאק שמור. תיקון ידרש לבחור את קובץ האפאק שוב</string>
+    <string name="home_version_requires_android">דורש Android %1$s+‎</string>
+    <string name="home_apk_no_compatible_versions_title">לא נתמך במכשיר זה</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; אין לו גרסאות נתמכות עבור Android %2$d (API %3$d). כל הגרסאות המוצהרות דורשות גרסת Android גבוהה יותר</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">הורד את ה-APK המקורי</string>
     <string name="home_download_instructions_steps_title">הוראות:</string>

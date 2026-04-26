@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Chun &lt;b&gt;%s&lt;/b&gt;, a phaisteáil, beidh APK neamhphaisteáilte de na leaganacha seo a leanas ag teastáil uait:</string>
     <string name="home_apk_availability_recommended_label">Molta</string>
     <string name="home_apk_availability_unpatched_label">Díphaisteáilte</string>
+    <string name="home_apk_availability_incompatible_label">Comhroinnte</string>
     <string name="home_apk_availability_yes">Sea, cabhraigh liom APK a aimsiú</string>
     <string name="home_apk_availability_no">Níl, tá APK agam cheana féin</string>
     <string name="home_apk_use_saved_with_version">Úsáid an APK sábháilte (v%s)</string>
     <string name="home_app_info_no_saved_apk">Níl aon APK sábháilte. Beidh ort an comhad APK a roghnú arís le haghaidh paisteála.</string>
+    <string name="home_version_requires_android">Tá Android %1$s+ de dhian</string>
+    <string name="home_apk_no_compatible_versions_title">Ní thacaítear leis an ngníomh seo</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; níl aonta le foighneamhacha do Android %2$d (API %3$d). Teastaíonn leagan níos airde Android óna leaganacha a dearbhú</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Íoslódáil an APK bunaidh</string>
     <string name="home_download_instructions_steps_title">Treoracha:</string>

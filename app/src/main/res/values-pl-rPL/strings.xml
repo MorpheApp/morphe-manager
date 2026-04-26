@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w jednej z poniższych wersji:</string>
     <string name="home_apk_availability_recommended_label">Zalecana</string>
     <string name="home_apk_availability_unpatched_label">Niezmodyfikowana</string>
+    <string name="home_apk_availability_incompatible_label">Niezgodny</string>
     <string name="home_apk_availability_yes">Tak, pomóż mi znaleźć plik APK</string>
     <string name="home_apk_availability_no">Nie, mam już plik APK</string>
     <string name="home_apk_use_saved_with_version">Użyj zapisanego pliku APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
+    <string name="home_version_requires_android">Wymaga Androida %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Niewspierane na tym urządzeniu</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nie ma obsługiwanych wersji dla systemu Android %2$d (API %3$d). Wszystkie zadeklarowane wersje wymagają wyższej wersji systemu Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
     <string name="home_download_instructions_steps_title">Instrukcja:</string>

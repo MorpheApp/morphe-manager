@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">لتعديل &lt;b&gt;%s&lt;/b&gt;، تحتاج إلى ملف APK غير معدل من الإصدارات:</string>
     <string name="home_apk_availability_recommended_label">موصى به</string>
     <string name="home_apk_availability_unpatched_label">غير معدل</string>
+    <string name="home_apk_availability_incompatible_label">غير متوافق</string>
     <string name="home_apk_availability_yes">نعم، ساعدني في العثور على ملف APK</string>
     <string name="home_apk_availability_no">لا، لدي ملف APK بالفعل</string>
     <string name="home_apk_use_saved_with_version">استخدام ملف APK المحفوظ (v%s)</string>
     <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
+    <string name="home_version_requires_android">يتطلب Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">غير مدعوم على هذا الجهاز</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; لا يحتوي على إصدارات مدعومة لنظام Android %2$d (واجهة برمجة التطبيقات %3$d). جميع الإصدارات المعلنة تتطلب إصدار Android أعلى</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">تنزيل ملف APK الأصلي</string>
     <string name="home_download_instructions_steps_title">التعليمات:</string>

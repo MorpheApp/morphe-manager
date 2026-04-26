@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Pro záplatu &lt;b&gt;%s&lt;/b&gt; je potřeba některá nezáplatovaná APK z verzí:</string>
     <string name="home_apk_availability_recommended_label">Doporučené</string>
     <string name="home_apk_availability_unpatched_label">Nezáplatované</string>
+    <string name="home_apk_availability_incompatible_label">Nekompatibilní</string>
     <string name="home_apk_availability_yes">Ano, pomozte mi najít APK</string>
     <string name="home_apk_availability_no">Ne, už mám APK</string>
     <string name="home_apk_use_saved_with_version">Použít uložené APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Není uložené žádné APK. Pro záplatování bude potřeba vybrat soubor APK znovu</string>
+    <string name="home_version_requires_android">Vyžaduje Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Není podporováno na tomto zařízení</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nemá podporované verze pro Android %2$d (API %3$d). Všechny deklarované verze vyžadují vyšší verzi Androidu</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Stáhnout původní APK</string>
     <string name="home_download_instructions_steps_title">Postup:</string>

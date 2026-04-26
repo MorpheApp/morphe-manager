@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Щоб патчити &lt;b&gt;%s&lt;/b&gt;, вам потрібні непатчені APK файли з версіями:</string>
     <string name="home_apk_availability_recommended_label">Рекомендована</string>
     <string name="home_apk_availability_unpatched_label">Непатчена</string>
+    <string name="home_apk_availability_incompatible_label">Несумісна</string>
     <string name="home_apk_availability_yes">Так, допоможіть мені знайти APK</string>
     <string name="home_apk_availability_no">Ні, я вже маю APK</string>
     <string name="home_apk_use_saved_with_version">Збережений APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Немає збереженого APK файлу. Для патчінгу потрібно буде знову вибрати APK файл</string>
+    <string name="home_version_requires_android">Потрібен Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Не підтримується на цьому пристрої</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; не має підтримуваних версій для Android %2$d (API %3$d). Усі заявлені версії вимагають вищу версію Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Завантажити оригінальний APK файл</string>
     <string name="home_download_instructions_steps_title">Інструкції:</string>

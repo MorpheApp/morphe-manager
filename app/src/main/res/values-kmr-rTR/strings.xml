@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Ji bo dirûtîna &lt;b&gt;%s&lt;/b&gt;, hûn pêdiviya APK-yên nebixwe hebin:</string>
     <string name="home_apk_availability_recommended_label">Pisporîn</string>
     <string name="home_apk_availability_unpatched_label">Neçapandî</string>
+    <string name="home_apk_availability_incompatible_label">Nakamkirê</string>
     <string name="home_apk_availability_yes">Ew, min alîkarê dîtina APK-yê bikîn</string>
     <string name="home_apk_availability_no">Na, ez APK-yek heznikim</string>
     <string name="home_apk_use_saved_with_version">APK a vekirî te (v%s) bejin</string>
     <string name="home_app_info_no_saved_apk">APK kume ne. Berî ev, wê APK ava beke</string>
+    <string name="home_version_requires_android">Android %1$s+ hewê ne</string>
+    <string name="home_apk_no_compatible_versions_title">Li vê cihazê de ne piştgirîkirî</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) ji bo piştgirîkirina guhertoyên heye. Hemû guhertoyên hatine diyarkirin ji bo Android guhertoyek bilindtir hewce dike</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">APK-a orîjinalê dakêşîne</string>
     <string name="home_download_instructions_steps_title">Rêberî:</string>

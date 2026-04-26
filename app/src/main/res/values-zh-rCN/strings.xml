@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">补丁&lt;b&gt;%s&lt;/b&gt;需要未补丁的APK版本</string>
     <string name="home_apk_availability_recommended_label">推荐</string>
     <string name="home_apk_availability_unpatched_label">未修补</string>
+    <string name="home_apk_availability_incompatible_label">不兼容</string>
     <string name="home_apk_availability_yes">是的，帮我找个 APK</string>
     <string name="home_apk_availability_no">不，我已经有APK了</string>
     <string name="home_apk_use_saved_with_version">使用保存的APK（v%s）</string>
     <string name="home_app_info_no_saved_apk">没有保存的APK。修补需要重新选择APK文件</string>
+    <string name="home_version_requires_android">需要 Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">不支持此设备</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; 没有适用于 Android %2$d (API %3$d) 的支持版本。所有声明的版本都需要更高版本的 Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下载原始 APK</string>
     <string name="home_download_instructions_steps_title">说明：</string>

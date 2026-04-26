@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Για την τροποποίηση του &lt;b&gt;%s&lt;/b&gt;, χρειάζεστε τις μη τροποποιημένες εκδόσεις του APK:</string>
     <string name="home_apk_availability_recommended_label">Προτεινόμενη</string>
     <string name="home_apk_availability_unpatched_label">Μη τροποποιημένο</string>
+    <string name="home_apk_availability_incompatible_label">Ασύμβατο</string>
     <string name="home_apk_availability_yes">Ναι, βοήθησέ με να βρω ένα APK</string>
     <string name="home_apk_availability_no">Όχι, ήδη έχω ένα APK</string>
     <string name="home_apk_use_saved_with_version">Χρήση αποθηκευμένου APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Δεν υπάρχει αποθηκευμένο APK. Η τροποποίηση κώδικα θα απαιτήσει την επιλογή του αρχείου APK ξανά</string>
+    <string name="home_version_requires_android">Απαιτεί Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Δεν υποστηρίζεται σε αυτή τη συσκευή</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; δεν έχει υποστηριζόμενες εκδόσεις για το Android %2$d (API %3$d). Όλες οι δηλωμένες εκδόσεις απαιτούν μια υψηλότερη έκδοση Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Κατεβάστε το πρωτότυπο APK</string>
     <string name="home_download_instructions_steps_title">Οδηγίες:</string>

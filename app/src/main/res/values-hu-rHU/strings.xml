@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő módosítatlan APK-verziók egyikére van szükséged:</string>
     <string name="home_apk_availability_recommended_label">Javasolt</string>
     <string name="home_apk_availability_unpatched_label">Nem módosított</string>
+    <string name="home_apk_availability_incompatible_label">Nem kompatibilis</string>
     <string name="home_apk_availability_yes">Igen, segíts megtalálni az APK-t</string>
     <string name="home_apk_availability_no">Nem, már megvan az APK</string>
     <string name="home_apk_use_saved_with_version">Mentett APK használata (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választanod az APK-fájlt.</string>
+    <string name="home_version_requires_android">Android %1$s+ verziót igényel</string>
+    <string name="home_apk_no_compatible_versions_title">Nem támogatott ezen az eszközen</string>
+    <string name="home_apk_no_compatible_versions_message">A(z) &lt;b&gt;%1$s&lt;/b&gt; nem rendelkezik az Android %2$d (API %3$d) verziójával kompatibilis verziókkal. A megadott összes verzió magasabb Android verziót igényel</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Az eredeti APK letöltése</string>
     <string name="home_download_instructions_steps_title">Útmutató:</string>

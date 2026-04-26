@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Paikataksesi &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, paikkaamattoman APK:n versioista:</string>
     <string name="home_apk_availability_recommended_label">Suositeltu</string>
     <string name="home_apk_availability_unpatched_label">Ei korjattuja</string>
+    <string name="home_apk_availability_incompatible_label">Yhteensopimaton</string>
     <string name="home_apk_availability_yes">Kyllä, auta minua etsimään APK</string>
     <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
     <string name="home_apk_use_saved_with_version">Käytä tallennettua APK:tä (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:tä. Patching vaatii APK-tiedoston uudelleenvalinnan</string>
+    <string name="home_version_requires_android">Vaatii Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Ei tueta tällä laitteella</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ei sisällä tuettuja versioita Androidille %2$d (API %3$d). Kaikki ilmoitetut versiot vaativat korkeamman Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Lataa alkuperäinen APK</string>
     <string name="home_download_instructions_steps_title">Ohjeet:</string>
