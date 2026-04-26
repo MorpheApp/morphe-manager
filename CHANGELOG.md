@@ -1,3 +1,15 @@
+# [1.16.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.11...v1.16.0-dev.12) (2026-04-26)
+
+
+### Bug Fixes
+
+* Show SDK-incompatible versions as disabled, block patching when no versions are compatible with device SDK ([f90d5ba](https://github.com/MorpheApp/morphe-manager/commit/f90d5bacc7198f2c0a3c7cf48c7745415d89e141))
+
+
+### Features
+
+* Open `.mpp` patch sources directly from file manager ([#483](https://github.com/MorpheApp/morphe-manager/issues/483)) ([f46a11f](https://github.com/MorpheApp/morphe-manager/commit/f46a11f91e88d948ecbab8e71200cec543ce48ec))
+
 # [1.16.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.10...v1.16.0-dev.11) (2026-04-24)
 
 
