@@ -13,7 +13,7 @@
         <item quantity="other">%s แพ็คเกจ</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">ดำเนินการ %s แพตช์</item>
+        <item quantity="other">ดำเนินการแพตช์ %s รายการแล้ว</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s ไฟล์ APK</item>

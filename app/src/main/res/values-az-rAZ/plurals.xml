@@ -17,8 +17,8 @@
         <item quantity="other">%s paket</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">%s yamaq icra edildi</item>
-        <item quantity="other">%s yamaq icra edildi</item>
+        <item quantity="one">%s yamaq icra olundu</item>
+        <item quantity="other">%s yamaq icra olundu</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK faylı</item>

@@ -561,6 +561,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_export_keystore_description">Izvozi trenutno ključavnico</string>
     <string name="settings_system_export_keystore_unavailable">Ni na voljo ključavnica za izvoz</string>
     <string name="settings_system_export_keystore_success">Ključavnica izvožena</string>
+    <string name="settings_system_export_keystore_failed">Izvoz shranjevalnika ključev je spodletel</string>
     <string name="settings_system_show_password_field">Pokaži geslo</string>
     <string name="settings_system_hide_password_field">Skrij geslo</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ Dimenzije slike morajo biti naslednje:
     <string name="allow">Omogoči</string>
     <string name="details">Podrobnosti</string>
     <string name="hide">Skrij</string>
+    <string name="hidden">Skrit</string>
+    <string name="unhide">Pokaži</string>
     <string name="logs">Beležke</string>
     <string name="sources">Viri</string>
     <string name="installing_ellipsis">Nameščanje…</string>

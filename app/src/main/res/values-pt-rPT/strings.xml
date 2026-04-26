@@ -561,6 +561,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_export_keystore_description">Exportar o keystore atual</string>
     <string name="settings_system_export_keystore_unavailable">Não há keystore disponível para exportar</string>
     <string name="settings_system_export_keystore_success">Keystore exportado</string>
+    <string name="settings_system_export_keystore_failed">Falha ao exportar o armazenamento de chaves</string>
     <string name="settings_system_show_password_field">Mostrar senha</string>
     <string name="settings_system_hide_password_field">Esconder senha</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="allow">Permitir</string>
     <string name="details">Detalhes</string>
     <string name="hide">Ocultar</string>
+    <string name="hidden">Oculto</string>
+    <string name="unhide">Exibir</string>
     <string name="logs">Registros</string>
     <string name="sources">Fontes</string>
     <string name="installing_ellipsis">Instalando…</string>

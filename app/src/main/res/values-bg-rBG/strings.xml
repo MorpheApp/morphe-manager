@@ -561,6 +561,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Износ на текущата ключова запазна книга</string>
     <string name="settings_system_export_keystore_unavailable">Няма налична ключова запазна книга за износ</string>
     <string name="settings_system_export_keystore_success">Ключовата запазна книга е изнесена</string>
+    <string name="settings_system_export_keystore_failed">Неуспешен експорт на хранилище на ключове</string>
     <string name="settings_system_show_password_field">Показване на парола</string>
     <string name="settings_system_hide_password_field">Скриване на парола</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ morphe_header_custom_dark.png
     <string name="allow">Разреши</string>
     <string name="details">Детайли</string>
     <string name="hide">Скриване</string>
+    <string name="hidden">Скрито</string>
+    <string name="unhide">Покажи</string>
     <string name="logs">Дневници</string>
     <string name="sources">Източници</string>
     <string name="installing_ellipsis">Инсталиране…</string>

@@ -561,6 +561,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">ส่งออกไฟล์ตัวเลือกสำเร็จ</string>
     <string name="settings_system_export_keystore_unavailable">แสดงรหัส</string>
     <string name="settings_system_export_keystore_success">ซ่อนรหัส</string>
+    <string name="settings_system_export_keystore_failed">ไม่สามารถส่งออกคีย์สโตร์ได้</string>
     <string name="settings_system_show_password_field">นำเข้าและส่งออกการตั้งค่า</string>
     <string name="settings_system_hide_password_field">นำเข้าและส่งออกการตั้งค่า</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -690,6 +691,8 @@ morphe_header_custom_dark.png
     <string name="allow">อนุญาต</string>
     <string name="details">รายละเอียด</string>
     <string name="hide">ซ่อน</string>
+    <string name="hidden">ซ่อน</string>
+    <string name="unhide">แสดง</string>
     <string name="logs">บันทึก</string>
     <string name="sources">แหล่งที่มา</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>

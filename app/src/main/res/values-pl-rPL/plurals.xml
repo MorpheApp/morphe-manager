@@ -25,10 +25,10 @@
         <item quantity="other">%s pakietów</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Wykonaj %s modyfikację</item>
-        <item quantity="few">Wykonaj %s modyfikacje</item>
-        <item quantity="many">Wykonaj %s modyfikacji</item>
-        <item quantity="other">Wykonaj %s modyfikacji</item>
+        <item quantity="one">Zastosowano %s modyfikację</item>
+        <item quantity="few">Zastosowano %s modyfikacje</item>
+        <item quantity="many">Zastosowano %s modyfikacji</item>
+        <item quantity="other">Zastosowano %s modyfikacji</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s plik APK</item>

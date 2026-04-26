@@ -29,11 +29,11 @@
         <item quantity="other">%s pacáistí</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Cuir %s paiste i gcrích</item>
-        <item quantity="two">Cuir %s paistí i gcrích</item>
-        <item quantity="few">Cuir %s paistí i gcrích</item>
-        <item quantity="many">Cuir %s paistí i gcrích</item>
-        <item quantity="other">Cuir %s paistí i gcrích</item>
+        <item quantity="one">Paiste %s curtha i gcrích</item>
+        <item quantity="two">%s paistí curtha i gcrích</item>
+        <item quantity="few">%s paistí curtha i gcrích</item>
+        <item quantity="many">%s paistí curtha i gcrích</item>
+        <item quantity="other">%s paistí curtha i gcrích</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s comhad APK</item>

@@ -28,7 +28,7 @@
         <item quantity="other">%s 개의 패치 선택됨</item>
     </plurals>
     <plurals name="home_app_show_selected">
-        <item quantity="other">%s 개의 앱 표시</item>
+        <item quantity="other">%s 개의 앱 보이기</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s 개의 숨겨진 앱</item>

@@ -25,10 +25,10 @@
         <item quantity="other">%s balíkov</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Vykonaj %s záplatu</item>
-        <item quantity="few">Vykonaj %s záplaty</item>
-        <item quantity="many">Vykonaj %s záplat</item>
-        <item quantity="other">Vykonaj %s záplat</item>
+        <item quantity="one">Vykonaná záplata %s</item>
+        <item quantity="few">Vykonané záplaty %s</item>
+        <item quantity="many">Vykonané záplaty %s</item>
+        <item quantity="other">Vykonané záplaty %s</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK súbor</item>

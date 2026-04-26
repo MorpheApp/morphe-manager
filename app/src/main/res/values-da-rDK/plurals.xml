@@ -17,8 +17,8 @@
         <item quantity="other">%s pakker</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Udfør %s patch</item>
-        <item quantity="other">Udfør %s patches</item>
+        <item quantity="one">Udført %s patch</item>
+        <item quantity="other">Udført %s patches</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK-fil</item>

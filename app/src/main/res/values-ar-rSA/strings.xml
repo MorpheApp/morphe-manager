@@ -561,6 +561,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_keystore_description">تصدير مخزن المفاتيح الحالي</string>
     <string name="settings_system_export_keystore_unavailable">لا يوجد مخزن مفاتيح للتصدير</string>
     <string name="settings_system_export_keystore_success">تم تصدير مخزن المفاتيح</string>
+    <string name="settings_system_export_keystore_failed">فشل تصدير مخزن المفاتيح</string>
     <string name="settings_system_show_password_field">عرض كلمة المرور</string>
     <string name="settings_system_hide_password_field">إخفاء كلمة المرور</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="allow">السماح</string>
     <string name="details">التفاصيل</string>
     <string name="hide">إخفاء</string>
+    <string name="hidden">مخفي</string>
+    <string name="unhide">إظهار</string>
     <string name="logs">السجلات</string>
     <string name="sources">المصادر</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>

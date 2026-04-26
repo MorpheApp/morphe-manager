@@ -13,7 +13,7 @@
         <item quantity="other">%s 個套件</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">執行 %s 項修補</item>
+        <item quantity="other">已執行 %s 項修補程式</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s 個 APK 檔案</item>

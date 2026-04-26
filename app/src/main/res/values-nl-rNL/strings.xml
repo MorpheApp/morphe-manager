@@ -561,6 +561,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_export_keystore_description">Exporteer de huidige keystore</string>
     <string name="settings_system_export_keystore_unavailable">Geen keystore beschikbaar om te exporteren</string>
     <string name="settings_system_export_keystore_success">Keystore geëxporteerd</string>
+    <string name="settings_system_export_keystore_failed">Kon de keystore niet exporteren</string>
     <string name="settings_system_show_password_field">Toon wachtwoord</string>
     <string name="settings_system_hide_password_field">Wachtwoord verbergen</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="allow">Toestaan</string>
     <string name="details">Details</string>
     <string name="hide">Verbergen</string>
+    <string name="hidden">Verborgen</string>
+    <string name="unhide">Toon</string>
     <string name="logs">Logboeken</string>
     <string name="sources">Bron-URL</string>
     <string name="installing_ellipsis">Installeren…</string>

@@ -16,9 +16,9 @@
         <item quantity="other">%s paketi</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Izvrši %s patch</item>
-        <item quantity="few">Izvrši %s patches</item>
-        <item quantity="other">Izvrši %s patches</item>
+        <item quantity="one">Izvršen %s patch</item>
+        <item quantity="few">Izvršena %s patcha</item>
+        <item quantity="other">Izvršeno %s patch-eva</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK datoteka</item>

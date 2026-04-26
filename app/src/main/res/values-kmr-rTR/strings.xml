@@ -24,7 +24,7 @@
     <string name="home_update_skipped_metered">Nûvekirin çêhatin</string>
     <string name="home_update_skipped_metered_subtitle">Daneya mobîl aktîv e</string>
     <string name="home_updating_sources">Kanalkan sazkirinê…</string>
-    <string name="home_update_progress_format">%1$s pêşqesm kirin</string>
+    <string name="home_update_progress_format">%1$s vekiraye</string>
     <string name="home_update_success">Sazkirina kanalan temam bû</string>
     <string name="home_update_success_subtitle">Kanalan we nû kirin</string>
     <string name="home_sources_are_loading">Kanalan ketin, ji kerema xwe bibeku</string>
@@ -352,9 +352,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_appearance_translations_info_title">Wergerandin ji bo hin zimanên kêmtir an jî ne tamkirin</string>
     <string name="settings_appearance_translations_info_text">Ji bo wergerandina zimanên nû an jî pêşxistina wergerandinên hebin, serdana %s bikin</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
-    <string name="settings_appearance_home_screen">قٍولو سرفط</string>
-    <string name="settings_appearance_greeting_phrases">الوارطال</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">نظر رسادة لرفطو لي موداح</string>
+    <string name="settings_appearance_greeting_phrases">Frazey şahê</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Îkonê sepanê</string>
     <string name="settings_appearance_app_icon_default">Serekî</string>
@@ -559,6 +557,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_export_keystore_description">Parçehuyê niha derxîne</string>
     <string name="settings_system_export_keystore_unavailable">Parçehuyek ku were derxistin tune</string>
     <string name="settings_system_export_keystore_success">Parçehuy derxist</string>
+    <string name="settings_system_export_keystore_failed">Destûr neda exportkirina keystore\'ê</string>
     <string name="settings_system_show_password_field">Şifreyê nîşana bîne</string>
     <string name="settings_system_hide_password_field">Şifreyê veşêre</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -687,6 +686,8 @@ Qasîyên wêneyan divê wiha bin:
     <string name="allow">Îznaye</string>
     <string name="details">Agahdarî</string>
     <string name="hide">Vêşêrîn</string>
+    <string name="hidden">Veşartî</string>
+    <string name="unhide">Neveşartîne</string>
     <string name="logs">Log</string>
     <string name="sources">Çavkanî</string>
     <string name="installing_ellipsis">Dikuştin…</string>

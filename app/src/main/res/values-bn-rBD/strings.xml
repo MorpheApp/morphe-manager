@@ -552,6 +552,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_keystore_description">বর্তমান কী-স্টোর এক্সপোর্ট করুন</string>
     <string name="settings_system_export_keystore_unavailable">এক্সপোর্ট করার জন্য কী-স্টোর পাওয়া যায়নি</string>
     <string name="settings_system_export_keystore_success">কী-স্টোর এক্সপোর্ট হয়েছে</string>
+    <string name="settings_system_export_keystore_failed">কীস্টোর এক্সপোর্ট করা যায়নি</string>
     <string name="settings_system_show_password_field">পাসওয়ার্ড দেখান</string>
     <string name="settings_system_hide_password_field">পাসওয়ার্ড লুকান</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -680,6 +681,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="allow">অনুমতি দিন</string>
     <string name="details">বিস্তারিত</string>
     <string name="hide">গোপন রাখুন</string>
+    <string name="hidden">লুকানো</string>
+    <string name="unhide">আনলুকানো</string>
     <string name="logs">লগসমূহ</string>
     <string name="sources">\"সোর্স\"</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>

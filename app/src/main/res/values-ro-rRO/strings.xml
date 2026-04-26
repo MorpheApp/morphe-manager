@@ -561,6 +561,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_export_keystore_description">Exportă keystore-ul curent</string>
     <string name="settings_system_export_keystore_unavailable">Nu există cheie de semnă disponibilă pentru export</string>
     <string name="settings_system_export_keystore_success">Keystore exportat</string>
+    <string name="settings_system_export_keystore_failed">A eșuat exportul keystore-ului</string>
     <string name="settings_system_show_password_field">Arată parolă</string>
     <string name="settings_system_hide_password_field">Ascunde parolă</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="allow">Permite</string>
     <string name="details">Detalii</string>
     <string name="hide">Ascunde</string>
+    <string name="hidden">Ascuns</string>
+    <string name="unhide">Dezascunde</string>
     <string name="logs">Jurnale</string>
     <string name="sources">Surse</string>
     <string name="installing_ellipsis">Se instalează…</string>

@@ -17,8 +17,8 @@
         <item quantity="other">%s paquetes</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Ejecutar %s parche</item>
-        <item quantity="other">Ejecutar %s parches</item>
+        <item quantity="one">%s parche ejecutado</item>
+        <item quantity="other">%s parches ejecutados</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s archivo APK</item>

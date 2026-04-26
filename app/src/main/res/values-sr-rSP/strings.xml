@@ -560,6 +560,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Извезите тренутни кластерски кључ</string>
     <string name="settings_system_export_keystore_unavailable">Нема доступног кластерског кључа за извоз</string>
     <string name="settings_system_export_keystore_success">Кластерски кључ успешно извезен</string>
+    <string name="settings_system_export_keystore_failed">Неуспешно извезена keystore</string>
     <string name="settings_system_show_password_field">Прикажите лозинку</string>
     <string name="settings_system_hide_password_field">Сакрити лозинку</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -688,6 +689,8 @@ morphe_header_custom_dark.png
     <string name="allow">Дозволи</string>
     <string name="details">Detalji</string>
     <string name="hide">Sakrij</string>
+    <string name="hidden">Сакривено</string>
+    <string name="unhide">Покажи</string>
     <string name="logs">Дневници</string>
     <string name="sources">Извори</string>
     <string name="installing_ellipsis">Инсталирање…</string>

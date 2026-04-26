@@ -17,8 +17,8 @@
         <item quantity="other">%s mga pakete</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Magsagawa ng %s patch</item>
-        <item quantity="other">Magsagawa ng %s mga patch</item>
+        <item quantity="one">Isinagawa ang %s patch</item>
+        <item quantity="other">Isinagawa ang %s mga patch</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK file</item>

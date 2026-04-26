@@ -17,8 +17,8 @@
         <item quantity="other">%s pakêtan</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Ji bo %s çareser vekînin</item>
-        <item quantity="other">Ji bo %s çareserên vekînin</item>
+        <item quantity="one">%s yamê hat kirin</item>
+        <item quantity="other">%s yamên hatin kirin</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s pelê APK</item>

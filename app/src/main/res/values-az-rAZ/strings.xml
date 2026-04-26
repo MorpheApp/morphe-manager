@@ -223,6 +223,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_app_info_patch_update_available_description">Yamaqların daha yeni versiyası var. Ən son təkmilləşdirmələr və düzəlişlər üçün tətbiqinizi təkrar yamaqlayın</string>
     <string name="home_app_info_app_deleted_warning">Tətbiq quraşdırması silindi</string>
     <string name="home_app_info_app_deleted_description">Bu tətbiq Morphe xarici silindi. Funksionallığı qaytarmaq üçün onu təkrar quraşdır</string>
+    <string name="home_app_info_apk_size">APK həcmi</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root rejimi yamaqdan əvvəl orijinal APK-nın cihazınızda quraşdırılmasını tələb edir</string>
     <string name="root_gmscore_excluded">GmsCore dəstək yamağı root rejimində çıxarılır</string>
@@ -559,6 +560,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Hazırkı keystore-u ixrac et</string>
     <string name="settings_system_export_keystore_unavailable">İxrac etmək üçün keystore mövcud deyil</string>
     <string name="settings_system_export_keystore_success">Keystore ixrac edildi</string>
+    <string name="settings_system_export_keystore_failed">Keystore-u ixrac etmək olmadı</string>
     <string name="settings_system_show_password_field">Parolu göstər</string>
     <string name="settings_system_hide_password_field">Parolu gizlət</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -687,6 +689,8 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="allow">İcazə verin</string>
     <string name="details">Təfərrüatlar</string>
     <string name="hide">Gizlət</string>
+    <string name="hidden">Gizlədilən</string>
+    <string name="unhide">Göstər</string>
     <string name="logs">Jurnallar</string>
     <string name="sources">Mənbələr</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>

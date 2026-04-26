@@ -561,6 +561,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_export_keystore_description">Az aktuális kulcstároló exportálása</string>
     <string name="settings_system_export_keystore_unavailable">Nincs exportálható kulcstároló</string>
     <string name="settings_system_export_keystore_success">Kulcstároló sikeresen exportálva</string>
+    <string name="settings_system_export_keystore_failed">Sikertelen kulcstár export</string>
     <string name="settings_system_show_password_field">Jelszó megjelenítése</string>
     <string name="settings_system_hide_password_field">Jelszó elrejtése</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -690,6 +691,8 @@ Forrás: #%2$s</string>
     <string name="allow">Engedélyezés</string>
     <string name="details">Részletek</string>
     <string name="hide">Elrejtés</string>
+    <string name="hidden">Rejtett</string>
+    <string name="unhide">Feloldás</string>
     <string name="logs">Naplók</string>
     <string name="sources">Forrás</string>
     <string name="installing_ellipsis">Telepítés…</string>

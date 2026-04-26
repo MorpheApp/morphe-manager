@@ -561,6 +561,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_system_export_keystore_description">Exportovať aktuálny keystore</string>
     <string name="settings_system_export_keystore_unavailable">Žiadny dostupný keystore na export</string>
     <string name="settings_system_export_keystore_success">Keystore bol exportovaný</string>
+    <string name="settings_system_export_keystore_failed">Nepodarilo sa exportovať keystore</string>
     <string name="settings_system_show_password_field">Zobraziť heslo</string>
     <string name="settings_system_hide_password_field">Skryť heslo</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ Rozmery obrázka musia byť nasledovné:
     <string name="allow">Povoliť</string>
     <string name="details">Podrobnosti</string>
     <string name="hide">Skryť</string>
+    <string name="hidden">Skrytý</string>
+    <string name="unhide">Zobraziť</string>
     <string name="logs">Záznamy</string>
     <string name="sources">Zdroje</string>
     <string name="installing_ellipsis">Inštaluje sa…</string>

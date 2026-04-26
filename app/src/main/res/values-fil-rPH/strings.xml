@@ -561,6 +561,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_export_keystore_description">I-export ang kasalukuyang keystore</string>
     <string name="settings_system_export_keystore_unavailable">Walang magagamit na keystore para sa pag-export</string>
     <string name="settings_system_export_keystore_success">Na-export ang keystore </string>
+    <string name="settings_system_export_keystore_failed">Nabigo ang pag-export ng keystore</string>
     <string name="settings_system_show_password_field">Ipakita ang password</string>
     <string name="settings_system_hide_password_field">Itago ang password</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="allow">Payagan</string>
     <string name="details">Mga Detalye</string>
     <string name="hide">Itago</string>
+    <string name="hidden">Nakatago</string>
+    <string name="unhide">Ipakita</string>
     <string name="logs">Mga log</string>
     <string name="sources">Mga mapagkukunan</string>
     <string name="installing_ellipsis">Ini-install…</string>

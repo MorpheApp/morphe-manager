@@ -17,8 +17,8 @@
         <item quantity="other">%s पैकेज</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">अनुप्रयोग %s पटच को चलाएं</item>
-        <item quantity="other">अनुप्रयोग %s पटच को चलाएं</item>
+        <item quantity="one">%s पैच निष्पादित किया गया</item>
+        <item quantity="other">%s पैच निष्पादित किए गए</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s एपीके फाइल</item>

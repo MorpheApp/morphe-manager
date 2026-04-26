@@ -561,6 +561,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Экспортировать текущее хранилище ключей</string>
     <string name="settings_system_export_keystore_unavailable">Нет доступного хранилища ключей для экспорта</string>
     <string name="settings_system_export_keystore_success">Хранилище ключей экспортировано</string>
+    <string name="settings_system_export_keystore_failed">Не удалось экспортировать хранилище ключей</string>
     <string name="settings_system_show_password_field">Показать пароль</string>
     <string name="settings_system_hide_password_field">Скрыть пароль</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ morphe_header_custom_dark.png
     <string name="allow">Разрешить</string>
     <string name="details">Детали</string>
     <string name="hide">Скрыть</string>
+    <string name="hidden">Скрыто</string>
+    <string name="unhide">Показать</string>
     <string name="logs">Журналы</string>
     <string name="sources">Источники</string>
     <string name="installing_ellipsis">Установка…</string>

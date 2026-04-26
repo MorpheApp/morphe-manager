@@ -562,6 +562,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_export_keystore_description">Xuất kho khoá hiện tại</string>
     <string name="settings_system_export_keystore_unavailable">Không có kho khóa nào để xuất</string>
     <string name="settings_system_export_keystore_success">Đã xuất kho khóa</string>
+    <string name="settings_system_export_keystore_failed">Không thể xuất kho khóa</string>
     <string name="settings_system_show_password_field">Hiện mật khẩu</string>
     <string name="settings_system_hide_password_field">Ẩn mật khẩu</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -690,6 +691,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="allow">Cho phép</string>
     <string name="details">Chi tiết</string>
     <string name="hide">Ẩn</string>
+    <string name="hidden">Ẩn</string>
+    <string name="unhide">Hiện</string>
     <string name="logs">Nhật ký</string>
     <string name="sources">Nguồn</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>

@@ -86,6 +86,7 @@
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
     <!-- Settings - System Tab - Import and export keystore -->
+    <string name="settings_system_export_keystore_failed">कीस्टोअर निर्यात करण्यात अयशस्वी</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
     <!-- Settings - System Tab - Debug Section -->
     <!-- Settings - System Tab - Storage Management Section -->
@@ -99,6 +100,8 @@
     <string name="all">सर्व</string>
     <string name="filter">गाळण</string>
     <string name="unmount">डिमाउंट</string>
+    <string name="hidden">लपलेले</string>
+    <string name="unhide">उघड करा</string>
     <string name="sources">स्त्रोत</string>
     <string name="imported_successfully">यशस्वीरित्या आयात केले</string>
 </resources>

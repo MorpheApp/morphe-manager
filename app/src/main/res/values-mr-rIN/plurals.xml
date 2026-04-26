@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <plurals name="patches_executed">
+        <item quantity="one">%s पॅच कार्यान्वित केले</item>
+        <item quantity="other">%s पॅच कार्यान्वित केले</item>
+    </plurals>
     <plurals name="home_app_show_selected">
         <item quantity="one">%s ॲप दाखवा</item>
         <item quantity="other">%s ॲप्स दाखवा</item>

@@ -5,11 +5,11 @@
     <string name="home_not_patched_yet">まだパッチを適用していません</string>
     <string name="home_no_patches_available">利用可能なパッチはありません</string>
     <string name="home_app_hide_title">このアプリを非表示にしますか？</string>
-    <string name="home_app_hide_message">このアプリはホーム画面から非表示になります。後でリスト下部の 「%1$s」 ボタンから復元できます</string>
+    <string name="home_app_hide_message">このアプリはホーム画面から非表示になります。リスト下部の 「%1$s」 ボタンから再表示できます</string>
     <string name="home_app_will_be_hidden">このアプリは非表示になります</string>
-    <string name="home_app_show_hidden">非表示アプリを表示する</string>
-    <string name="home_app_no_hidden">非表示アプリはありません</string>
-    <string name="home_app_hidden_apps_title">非表示アプリ</string>
+    <string name="home_app_show_hidden">非表示のアプリを表示する</string>
+    <string name="home_app_no_hidden">非表示のアプリはありません</string>
+    <string name="home_app_hidden_apps_title">非表示のアプリ</string>
     <string name="home_app_hidden_apps_hint">非表示のアプリを再表示するにはタップします</string>
     <string name="android_11_bug_dialog_title">Android 11 のバグ</string>
     <string name="android_11_bug_dialog_description">Android 11 では、ユーザー体験に悪影響を及ぼす不具合が確認されています。あらかじめアプリのインストール権限を許可しておいてください</string>
@@ -223,7 +223,7 @@
     <string name="home_app_info_patch_update_available_description">新しいバージョンのパッチが利用可能です。最新の変更を反映するには、アプリを再パッチしてください</string>
     <string name="home_app_info_app_deleted_warning">アプリがアンインストールされました</string>
     <string name="home_app_info_app_deleted_description">Morphe 外でアプリがアンインストールされました。機能を復元するには、再パッチしてください</string>
-    <string name="home_app_info_apk_size">APKサイズ</string>
+    <string name="home_app_info_apk_size">APK サイズ</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">root 権限モードでは、パッチ適用前にオリジナルの APK がインストールされている必要があります</string>
     <string name="root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
@@ -398,13 +398,13 @@
     <string name="notification_channel_patcher">パッチ処理</string>
     <string name="notification_channel_patcher_description">バックグラウンドで Morphe がアプリにパッチを適用しているときに表示されます</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">エキスパート設定</string>
+    <string name="settings_advanced_expert">上級者向け設定</string>
     <string name="settings_advanced_expert_mode">エキスパートモード</string>
     <string name="settings_advanced_expert_mode_description">Morphe の高度なパッチ設定とカスタマイズオプションを有効にします</string>
     <string name="settings_advanced_expert_mode_dialog_title">エキスパート モードを有効にしますか？</string>
     <string name="settings_advanced_expert_mode_dialog_message">エキスパートモードではパッチ適用の詳細設定が可能ですが、設定を誤るとアプリが正常に動作しなくなる可能性があります</string>
     <string name="settings_advanced_strip_unused_libs">デバイスのアーキテクチャに最適化する</string>
-    <string name="settings_advanced_strip_unused_libs_description">"マージ時に未対応の CPU アーキテクチャ、ロケール、画面密度の 分割 APK モジュールをスキップします。
+    <string name="settings_advanced_strip_unused_libs_description">"マージ時に未対応の CPU アーキテクチャ、ロケール、画面密度の分割 APK モジュールをスキップします。
 通常の APK の場合、パッチ適用後に未対応のアーキテクチャのネイティブライブラリを削除します"</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">バイトコードの処理モード</string>
@@ -561,6 +561,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">現在のキーストアをエクスポートします</string>
     <string name="settings_system_export_keystore_unavailable">エクスポート可能なキーストアはありません</string>
     <string name="settings_system_export_keystore_success">キーストアをエクスポートしました</string>
+    <string name="settings_system_export_keystore_failed">キーストアのエクスポートに失敗しました</string>
     <string name="settings_system_show_password_field">パスワードを表示</string>
     <string name="settings_system_hide_password_field">パスワードを非表示</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -599,9 +600,9 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">パッチ セレクション</string>
     <string name="settings_system_patch_selections_description">保存されたパッチ セレクションとオプションを管理します。これらはアプリのアンインストール後も保持されます</string>
-    <string name="settings_system_patch_selection_reset_all_confirm_title">すべての選択をリセットしますか？</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">パッケージ選択をリセットしますか？</string>
-    <string name="settings_system_patch_selection_reset_source_confirm_title">ソースの選択をリセットしますか？</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">すべてのセレクションをリセットしますか？</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">パッケージ セレクションをリセットしますか？</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">ソース セレクションをリセットしますか？</string>
     <string name="settings_system_patch_selection_no_saved">保存済みパッチ セレクションなし</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s ～ %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%2$s 内の %1$s</string>
@@ -689,6 +690,8 @@ morphe_header_custom_dark.png
     <string name="allow">許可</string>
     <string name="details">詳細</string>
     <string name="hide">非表示にする</string>
+    <string name="hidden">非表示</string>
+    <string name="unhide">再表示</string>
     <string name="logs">ログ</string>
     <string name="sources">ソース</string>
     <string name="installing_ellipsis">インストール中…</string>

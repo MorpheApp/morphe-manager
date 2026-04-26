@@ -21,9 +21,9 @@
         <item quantity="other">%s пакета</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Изведи %s пакет</item>
-        <item quantity="few">Изведи %s пакета</item>
-        <item quantity="other">Изведи %s пакета</item>
+        <item quantity="one">Извршена %s закрпа</item>
+        <item quantity="few">Извршене %s закрпе</item>
+        <item quantity="other">Извршене %s закрпе</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s АПК датотека</item>

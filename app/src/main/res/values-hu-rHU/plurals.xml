@@ -18,7 +18,7 @@
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">%s módosítás végrehajtása</item>
-        <item quantity="other">%s módosítás végrehajtása</item>
+        <item quantity="other">%s módosítások végrehajtása</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK fájl</item>

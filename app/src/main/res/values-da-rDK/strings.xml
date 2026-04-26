@@ -561,6 +561,7 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_export_keystore_description">Eksportér den nuværende keystore</string>
     <string name="settings_system_export_keystore_unavailable">Ingen keystore tilgængelig til eksportering</string>
     <string name="settings_system_export_keystore_success">Keystore blev eksporteret</string>
+    <string name="settings_system_export_keystore_failed">Fejl under eksport af nøglelager</string>
     <string name="settings_system_show_password_field">Vis adgangskode</string>
     <string name="settings_system_hide_password_field">Skjul adgangskode</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ Størrelsesformatet skal være som følger:
     <string name="allow">Tillad</string>
     <string name="details">Detaljer</string>
     <string name="hide">Skjul</string>
+    <string name="hidden">Skjult</string>
+    <string name="unhide">Vis</string>
     <string name="logs">Logge</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>

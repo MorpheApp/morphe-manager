@@ -562,6 +562,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_export_keystore_description">Ekspor keystore saat ini</string>
     <string name="settings_system_export_keystore_unavailable">Tidak ada keystore yang tersedia untuk diekspor</string>
     <string name="settings_system_export_keystore_success">Keystore diekspor</string>
+    <string name="settings_system_export_keystore_failed">Gagal mengekspor keystore</string>
     <string name="settings_system_show_password_field">Tampilkan kata sandi</string>
     <string name="settings_system_hide_password_field">Sembunyikan kata sandi</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -690,6 +691,8 @@ Dimensi gambar harus sebagai berikut:
     <string name="allow">Izinkan</string>
     <string name="details">Rincian</string>
     <string name="hide">Sembunyikan</string>
+    <string name="hidden">Disembunyikan</string>
+    <string name="unhide">Tampilkan</string>
     <string name="logs">Catatan</string>
     <string name="sources">Sumber</string>
     <string name="installing_ellipsis">Memasang…</string>

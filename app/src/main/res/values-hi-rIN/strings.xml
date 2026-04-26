@@ -561,6 +561,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">वर्तमान कीस्टोर एक्सपोर्ट करें</string>
     <string name="settings_system_export_keystore_unavailable">एक्सपोर्ट करने के लिए कीस्टोर उपलब्ध नहीं है</string>
     <string name="settings_system_export_keystore_success">कीस्टोर एक्सपोर्ट किया गया</string>
+    <string name="settings_system_export_keystore_failed">कीस्टोर एक्सपोर्ट करने में विफल।</string>
     <string name="settings_system_show_password_field">पासवर्ड दिखाएं</string>
     <string name="settings_system_hide_password_field">पासवर्ड छिपाएं</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ morphe_header_custom_dark.png
     <string name="allow">अनुमति दें</string>
     <string name="details">विवरण</string>
     <string name="hide">छुपायें</string>
+    <string name="hidden">छिपा हुआ</string>
+    <string name="unhide">अनहाइड करें</string>
     <string name="logs">लॉग्स</string>
     <string name="sources">स्रोत</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>

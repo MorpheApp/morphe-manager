@@ -33,12 +33,12 @@
         <item quantity="other">%s حزمة</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="zero">تنفيذ %s تعديل</item>
-        <item quantity="one">تنفيذ %s تعديل</item>
-        <item quantity="two">تنفيذ %s تعديلان</item>
-        <item quantity="few">تنفيذ %s تعديلات</item>
-        <item quantity="many">تنفيذ %s تعديلًا</item>
-        <item quantity="other">تنفيذ %s تعديلًا</item>
+        <item quantity="zero">تم تنفيذ %s تعديل</item>
+        <item quantity="one">تم تنفيذ %s تعديل</item>
+        <item quantity="two">تم تنفيذ %s تعديلين</item>
+        <item quantity="few">تم تنفيذ %s تعديلات</item>
+        <item quantity="many">تم تنفيذ %s تعديل</item>
+        <item quantity="other">تم تنفيذ %s تعديل</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="zero">%s ملف APK</item>

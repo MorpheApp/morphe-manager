@@ -559,6 +559,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_export_keystore_description">Easpórtáil an stór eochrach reatha</string>
     <string name="settings_system_export_keystore_unavailable">Níl aon stór eochrach ar fáil le honnmhairiú</string>
     <string name="settings_system_export_keystore_success">Easpórtáladh an stór eochrach</string>
+    <string name="settings_system_export_keystore_failed">Theip ar easpórtáil an stór eochrach</string>
     <string name="settings_system_show_password_field">Taispeáin an focal faire</string>
     <string name="settings_system_hide_password_field">Folaigh an focal faire</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -687,6 +688,8 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="allow">Ceadaigh</string>
     <string name="details">Sonraí</string>
     <string name="hide">Folaigh</string>
+    <string name="hidden">I bhfolach</string>
+    <string name="unhide">Nochtadh</string>
     <string name="logs">Logaí</string>
     <string name="sources">Foinsí</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>

@@ -560,6 +560,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">匯出目前金鑰庫</string>
     <string name="settings_system_export_keystore_unavailable">沒有可匯出的金鑰庫</string>
     <string name="settings_system_export_keystore_success">已匯出金鑰庫</string>
+    <string name="settings_system_export_keystore_failed">匯出金鑰庫失敗</string>
     <string name="settings_system_show_password_field">顯示密碼</string>
     <string name="settings_system_hide_password_field">隱藏密碼</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -688,6 +689,8 @@ morphe_header_custom_dark.png
     <string name="allow">允許</string>
     <string name="details">詳細資訊</string>
     <string name="hide">隱藏</string>
+    <string name="hidden">隱藏</string>
+    <string name="unhide">取消隱藏</string>
     <string name="logs">日誌</string>
     <string name="sources">修補來源</string>
     <string name="installing_ellipsis">安裝中……</string>

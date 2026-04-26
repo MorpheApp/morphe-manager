@@ -545,6 +545,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_export_keystore_description">Izvezi trenutni kejtore</string>
     <string name="settings_system_export_keystore_unavailable">Nema dostupnih kejtora za izvoz</string>
     <string name="settings_system_export_keystore_success">Kejtore izvezeno</string>
+    <string name="settings_system_export_keystore_failed">Nije uspelo izvozivanje skladišta ključeva</string>
     <string name="settings_system_show_password_field">Prikaži lozinku</string>
     <string name="settings_system_hide_password_field">Sakrij lozinku</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -673,6 +674,8 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="allow">Dozvoli</string>
     <string name="details">Detalji</string>
     <string name="hide">Sakrij</string>
+    <string name="hidden">Skriven</string>
+    <string name="unhide">Pokaži</string>
     <string name="logs">Dnevnici</string>
     <string name="sources">Izvori</string>
     <string name="installing_ellipsis">Instaliranje…</string>

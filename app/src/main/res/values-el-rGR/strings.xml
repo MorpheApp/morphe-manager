@@ -561,6 +561,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Εξαγωγή τρέχοντος αποθήκης κλειδιών</string>
     <string name="settings_system_export_keystore_unavailable">Δεν υπάρχει διαθέσιμη αποθήκη κλειδιών για εξαγωγή</string>
     <string name="settings_system_export_keystore_success">Επιτυχής εξαγωγή της αποθήκης κλειδιών</string>
+    <string name="settings_system_export_keystore_failed">Αποτυχία εξαγωγής αποθήκης κλειδιών</string>
     <string name="settings_system_show_password_field">Εμφάνιση κωδικού</string>
     <string name="settings_system_hide_password_field">Απόκρυψη κωδικού</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -689,6 +690,8 @@ morphe_header_custom_dark.png
     <string name="allow">Επιτρέψτε</string>
     <string name="details">Λεπτομέρειες</string>
     <string name="hide">Απόκρυψη</string>
+    <string name="hidden">Κρυφό</string>
+    <string name="unhide">Εμφάνιση</string>
     <string name="logs">Εγγραφές</string>
     <string name="sources">Πηγές</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>

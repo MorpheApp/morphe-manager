@@ -21,9 +21,9 @@
         <item quantity="other">%s de pachete</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Execută %s patch</item>
-        <item quantity="few">Execute %s patches</item>
-        <item quantity="other">Execută %s de patch-uri</item>
+        <item quantity="one">A executat patch-ul %s</item>
+        <item quantity="few">A executat %s de patch-uri</item>
+        <item quantity="other">A executat %s de patch-uri</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s fișier APK</item>

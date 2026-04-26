@@ -24,12 +24,6 @@
         <item quantity="many">%s חבילות</item>
         <item quantity="other">%s חבילות</item>
     </plurals>
-    <plurals name="patches_executed">
-        <item quantity="one">התבצע תיקון אחד</item>
-        <item quantity="two">התבצעו שני תיקונים</item>
-        <item quantity="many">התבצעו %s תיקונים</item>
-        <item quantity="other">התבצעו %s תיקונים</item>
-    </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">קובץ APK אחד</item>
         <item quantity="two">שני קבצי APK</item>

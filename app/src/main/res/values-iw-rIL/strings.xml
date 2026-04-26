@@ -545,6 +545,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_keystore_description">ייצא את התיקון הנוכח</string>
     <string name="settings_system_export_keystore_unavailable">אין תיקון מותאם זמין זמין</string>
     <string name="settings_system_export_keystore_success">תיקון מותאם יוצא</string>
+    <string name="settings_system_export_keystore_failed">נכשל לייצא מאגר מפתחות</string>
     <string name="settings_system_show_password_field">שגגה להרוס תיקון: %s</string>
     <string name="settings_system_hide_password_field">ייבוא הגדרות של הפיצ\'ח</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -673,6 +674,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="allow">אשר</string>
     <string name="details">פרטים</string>
     <string name="hide">הסתר</string>
+    <string name="hidden">מוסתר</string>
+    <string name="unhide">הסתר</string>
     <string name="logs">יומן</string>
     <string name="sources">מקורות</string>
     <string name="installing_ellipsis">מתקין…</string>
