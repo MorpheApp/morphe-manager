@@ -340,6 +340,10 @@
     <string name="settings_appearance_background_grid">Мрежа</string>
     <string name="settings_appearance_background_particles">Партикле</string>
     <string name="settings_appearance_background_none">Ништа</string>
+    <string name="settings_appearance_background_random">Насумично</string>
+    <string name="settings_appearance_background_random_interval_launch">При покретању</string>
+    <string name="settings_appearance_background_random_interval_daily">Дневно</string>
+    <string name="settings_appearance_background_random_interval_3days">Свака 3 дана</string>
     <string name="settings_appearance_parallax_effect">Efekt paralaksa</string>
     <string name="settings_appearance_parallax_effect_description">Umiranje pozadine pri kretanju ugao naprijed nazad</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -557,6 +561,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">Корисник (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Лозинка</string>
     <string name="settings_system_import_keystore_dialog_button">Увоз</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Формат кејстора</string>
     <string name="settings_system_import_keystore_wrong_credentials">Погрешно унете податке кластерског кључа</string>
     <string name="settings_system_import_keystore_success">Кластерски кључ успешно увезен</string>
     <string name="settings_system_import_keystore_failed">Неуспешно увоз кластерског кључа</string>

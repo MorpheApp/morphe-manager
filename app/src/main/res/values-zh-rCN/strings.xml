@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">网格</string>
     <string name="settings_appearance_background_particles">粒子</string>
     <string name="settings_appearance_background_none">无</string>
+    <string name="settings_appearance_background_random">随机</string>
+    <string name="settings_appearance_background_random_interval_launch">启动时</string>
+    <string name="settings_appearance_background_random_interval_daily">每日</string>
+    <string name="settings_appearance_background_random_interval_3days">每3天</string>
     <string name="settings_appearance_parallax_effect">视差效果</string>
     <string name="settings_appearance_parallax_effect_description">倾斜设备时平滑背景过渡</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">用户名 (别名)</string>
     <string name="settings_system_import_keystore_dialog_password_field">密码</string>
     <string name="settings_system_import_keystore_dialog_button">导入</string>
+    <string name="settings_system_import_keystore_dialog_format_field">密钥库格式</string>
     <string name="settings_system_import_keystore_wrong_credentials">密钥库凭据错误</string>
     <string name="settings_system_import_keystore_success">密钥库已导入</string>
     <string name="settings_system_import_keystore_failed">导入密钥库失败</string>

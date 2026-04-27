@@ -341,6 +341,10 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_appearance_background_grid">Griyá</string>
     <string name="settings_appearance_background_particles">Partikulo</string>
     <string name="settings_appearance_background_none">Wala</string>
+    <string name="settings_appearance_background_random">Random</string>
+    <string name="settings_appearance_background_random_interval_launch">Sa paglunsad</string>
+    <string name="settings_appearance_background_random_interval_daily">Araw-araw</string>
+    <string name="settings_appearance_background_random_interval_3days">Bawat 3 araw</string>
     <string name="settings_appearance_parallax_effect">Epekto ng parallax</string>
     <string name="settings_appearance_parallax_effect_description">Maayos na paglilipat ng background kapag tinatagilid ang device</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_import_keystore_dialog_alias_field">Pangalan ng tagagamit (Bansag)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
     <string name="settings_system_import_keystore_dialog_button">I-import</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format ng Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Mali ang keystore credentials</string>
     <string name="settings_system_import_keystore_success">Na-import ang keystore</string>
     <string name="settings_system_import_keystore_failed">Nabigong ma-import ang keystore</string>

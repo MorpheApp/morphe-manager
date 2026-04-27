@@ -98,9 +98,9 @@
     <string name="home_apk_availability_no">Non, j\'ai déjà un APK</string>
     <string name="home_apk_use_saved_with_version">Utiliser l’APK enregistré (v%s)</string>
     <string name="home_app_info_no_saved_apk">Aucun APK enregistré. Le patchage nécessitera de sélectionner à nouveau le fichier APK</string>
-    <string name="home_version_requires_android">Requiert Android %1$s+</string>
+    <string name="home_version_requires_android">Nécessite Android %1$s+</string>
     <string name="home_apk_no_compatible_versions_title">Non pris en charge sur cet appareil</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; n\'a aucune version compatible avec Android %2$d (API %3$d). Toutes les versions déclarées nécessitent une version Android supérieure</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; n\'a pas de versions compatibles pour Android %2$d (API %3$d). Toutes les versions déclarées nécessitent une version Android plus récente</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Télécharger l\'APK original</string>
     <string name="home_download_instructions_steps_title">Instructions :</string>
@@ -340,6 +340,10 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="settings_appearance_background_grid">Grille</string>
     <string name="settings_appearance_background_particles">Particules</string>
     <string name="settings_appearance_background_none">Aucun</string>
+    <string name="settings_appearance_background_random">Aléatoire</string>
+    <string name="settings_appearance_background_random_interval_launch">Au lancement</string>
+    <string name="settings_appearance_background_random_interval_daily">Quotidien</string>
+    <string name="settings_appearance_background_random_interval_3days">Tous les 3 jours</string>
     <string name="settings_appearance_parallax_effect">Effet de parallaxe</string>
     <string name="settings_appearance_parallax_effect_description">Déplacement d\'arrière-plan fluide lors de l\'inclinaison de l\'appareil</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -560,6 +564,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_import_keystore_dialog_alias_field">Nom d\'utilisateur (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Mot de passe</string>
     <string name="settings_system_import_keystore_dialog_button">Importer</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format de keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Identifiants de keystore incorrects</string>
     <string name="settings_system_import_keystore_success">Keystore importé</string>
     <string name="settings_system_import_keystore_failed">Échec de l\'importation du keystore</string>

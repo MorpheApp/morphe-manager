@@ -341,6 +341,10 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="settings_appearance_background_grid">Griglia</string>
     <string name="settings_appearance_background_particles">Particelle</string>
     <string name="settings_appearance_background_none">Nessuna</string>
+    <string name="settings_appearance_background_random">Casuale</string>
+    <string name="settings_appearance_background_random_interval_launch">All\'avvio</string>
+    <string name="settings_appearance_background_random_interval_daily">Giornaliero</string>
+    <string name="settings_appearance_background_random_interval_3days">Ogni 3 giorni</string>
     <string name="settings_appearance_parallax_effect">Effetto parallasse</string>
     <string name="settings_appearance_parallax_effect_description">Sfondo regolare che si sposta quando si inclina il dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_import_keystore_dialog_alias_field">Nome utente (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
     <string name="settings_system_import_keystore_dialog_button">Importa</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formato Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Credenziali del keystore errate</string>
     <string name="settings_system_import_keystore_success">Keystore importato</string>
     <string name="settings_system_import_keystore_failed">Importazione del keystore non riuscita</string>

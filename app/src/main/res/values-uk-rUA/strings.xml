@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">Сітка</string>
     <string name="settings_appearance_background_particles">Частинки</string>
     <string name="settings_appearance_background_none">Немає</string>
+    <string name="settings_appearance_background_random">Випадково</string>
+    <string name="settings_appearance_background_random_interval_launch">При запуску</string>
+    <string name="settings_appearance_background_random_interval_daily">Щодня</string>
+    <string name="settings_appearance_background_random_interval_3days">Кожні 3 дні</string>
     <string name="settings_appearance_parallax_effect">Ефект паралакса</string>
     <string name="settings_appearance_parallax_effect_description">Плавне зміщення фону при нахилі пристрою</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">Ім\'я користувача (псевдонім)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Пароль</string>
     <string name="settings_system_import_keystore_dialog_button">Імпортувати</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Формат сховища ключів</string>
     <string name="settings_system_import_keystore_wrong_credentials">Невірні облікові дані сховища ключів</string>
     <string name="settings_system_import_keystore_success">Сховище ключів імпортовано</string>
     <string name="settings_system_import_keystore_failed">Не вдалося імпортувати сховище ключів</string>

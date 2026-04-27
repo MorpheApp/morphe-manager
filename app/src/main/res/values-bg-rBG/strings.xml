@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">Решетка</string>
     <string name="settings_appearance_background_particles">Частици</string>
     <string name="settings_appearance_background_none">Без</string>
+    <string name="settings_appearance_background_random">Случайно</string>
+    <string name="settings_appearance_background_random_interval_launch">При стартиране</string>
+    <string name="settings_appearance_background_random_interval_daily">Всеки ден</string>
+    <string name="settings_appearance_background_random_interval_3days">На всеки 3 дни</string>
     <string name="settings_appearance_parallax_effect">Ефект на паралакса</string>
     <string name="settings_appearance_parallax_effect_description">Сгладко преместване на фона при накланяне на устройството</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">Име на потребител (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Парола</string>
     <string name="settings_system_import_keystore_dialog_button">Импортиране</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Формат на хранилището</string>
     <string name="settings_system_import_keystore_wrong_credentials">Невалидни данни за ключовата запазна книга</string>
     <string name="settings_system_import_keystore_success">Ключовата запазна книга е импортирана</string>
     <string name="settings_system_import_keystore_failed">Неуспешно импортиране на ключовата запазна книга</string>

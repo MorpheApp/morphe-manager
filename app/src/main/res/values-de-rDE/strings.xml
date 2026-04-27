@@ -341,6 +341,10 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="settings_appearance_background_grid">Gitter</string>
     <string name="settings_appearance_background_particles">Partikel</string>
     <string name="settings_appearance_background_none">Keine</string>
+    <string name="settings_appearance_background_random">Zufällig</string>
+    <string name="settings_appearance_background_random_interval_launch">Beim Start</string>
+    <string name="settings_appearance_background_random_interval_daily">Täglich</string>
+    <string name="settings_appearance_background_random_interval_3days">Alle 3 Tage</string>
     <string name="settings_appearance_parallax_effect">Parallax-Effekt</string>
     <string name="settings_appearance_parallax_effect_description">Glatte Hintergrundverschiebung beim Neigen des Geräts</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_import_keystore_dialog_alias_field">Benutzername (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Passwort</string>
     <string name="settings_system_import_keystore_dialog_button">Importieren</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore-Format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Falsche Keystore-Anmeldeinformationen</string>
     <string name="settings_system_import_keystore_success">Keystore importiert</string>
     <string name="settings_system_import_keystore_failed">Fehler beim Importieren des Keystores</string>
@@ -565,7 +570,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_export_keystore_description">Den aktuellen Keystore exportieren</string>
     <string name="settings_system_export_keystore_unavailable">Kein Keystore zum Exportieren verfügbar</string>
     <string name="settings_system_export_keystore_success">Keystore exportiert</string>
-    <string name="settings_system_export_keystore_failed">Fehler beim Exportieren des Keystores</string>
+    <string name="settings_system_export_keystore_failed">Exportieren des Keystores fehlgeschlagen</string>
     <string name="settings_system_show_password_field">Passwort anzeigen</string>
     <string name="settings_system_hide_password_field">Passwort ausblenden</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->

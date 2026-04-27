@@ -341,6 +341,10 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="settings_appearance_background_grid">Rács</string>
     <string name="settings_appearance_background_particles">Részecskék</string>
     <string name="settings_appearance_background_none">Egyik sem</string>
+    <string name="settings_appearance_background_random">Véletlenszerű</string>
+    <string name="settings_appearance_background_random_interval_launch">Indításkor</string>
+    <string name="settings_appearance_background_random_interval_daily">Napi</string>
+    <string name="settings_appearance_background_random_interval_3days">Minden 3. napon</string>
     <string name="settings_appearance_parallax_effect">Parallax effektus</string>
     <string name="settings_appearance_parallax_effect_description">Sima háttérváltás a készülék döntésekor</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_import_keystore_dialog_alias_field">Felhasználónév (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Jelszó</string>
     <string name="settings_system_import_keystore_dialog_button">Importálás</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Kulcstároló formátum</string>
     <string name="settings_system_import_keystore_wrong_credentials">Hibás kulcstároló hitelesítőadatok</string>
     <string name="settings_system_import_keystore_success">Kulcstároló importálva</string>
     <string name="settings_system_import_keystore_failed">Nem sikerült importálni a kulcstárolót</string>

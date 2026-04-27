@@ -342,6 +342,10 @@ Nastavitve</string>
     <string name="settings_appearance_background_grid">Mreža</string>
     <string name="settings_appearance_background_particles">Delci</string>
     <string name="settings_appearance_background_none">Brez</string>
+    <string name="settings_appearance_background_random">Naključno</string>
+    <string name="settings_appearance_background_random_interval_launch">Ob zagonu</string>
+    <string name="settings_appearance_background_random_interval_daily">Dnevno</string>
+    <string name="settings_appearance_background_random_interval_3days">Vsakih 3 dni</string>
     <string name="settings_appearance_parallax_effect">Paralaksni učinek</string>
     <string name="settings_appearance_parallax_effect_description">Gladko premikanje ozadja med nagibanjem naprave.</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_import_keystore_dialog_alias_field">Uporabniško ime (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Geslo</string>
     <string name="settings_system_import_keystore_dialog_button">Uvozi</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format datoteke PKCS#12</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nepravilni podatki ključavnice</string>
     <string name="settings_system_import_keystore_success">Ključavnica uvožena</string>
     <string name="settings_system_import_keystore_failed">Uvoz ključavnice je spodletel</string>

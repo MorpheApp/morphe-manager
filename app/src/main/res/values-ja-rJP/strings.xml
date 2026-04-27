@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">グリッド</string>
     <string name="settings_appearance_background_particles">パーティクル</string>
     <string name="settings_appearance_background_none">なし</string>
+    <string name="settings_appearance_background_random">ランダム</string>
+    <string name="settings_appearance_background_random_interval_launch">起動時</string>
+    <string name="settings_appearance_background_random_interval_daily">毎日</string>
+    <string name="settings_appearance_background_random_interval_3days">3日に1回</string>
     <string name="settings_appearance_parallax_effect">視差効果</string>
     <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">ユーザー名（エイリアス）</string>
     <string name="settings_system_import_keystore_dialog_password_field">パスワード</string>
     <string name="settings_system_import_keystore_dialog_button">インポート</string>
+    <string name="settings_system_import_keystore_dialog_format_field">キーストア形式</string>
     <string name="settings_system_import_keystore_wrong_credentials">キーストアの資格情報が正しくありません</string>
     <string name="settings_system_import_keystore_success">キーストアをインポートしました</string>
     <string name="settings_system_import_keystore_failed">キーストアのインポートに失敗しました</string>

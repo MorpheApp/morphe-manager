@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">গ্রিড</string>
     <string name="settings_appearance_background_particles">কণা</string>
     <string name="settings_appearance_background_none">থিম</string>
+    <string name="settings_appearance_background_random">র্যান্ডম</string>
+    <string name="settings_appearance_background_random_interval_launch">চালু করার সময়</string>
+    <string name="settings_appearance_background_random_interval_daily">দৈনিক</string>
+    <string name="settings_appearance_background_random_interval_3days">প্রতি ৩ দিনে</string>
     <string name="settings_appearance_parallax_effect">প্যারাল্যাক্স ইফেক্ট</string>
     <string name="settings_appearance_parallax_effect_description">ডিভাইসকে কাঁটিলে পটভূমি পরিবর্তনের সাবলীলতা</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -549,6 +553,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_alias_field">কাস্টম কী-স্টোর আমদানি করুন</string>
     <string name="settings_system_import_keystore_dialog_password_field">কী-স্টোর নাম (এলিয়াস)</string>
     <string name="settings_system_import_keystore_dialog_button">আমদানি করুন</string>
+    <string name="settings_system_import_keystore_dialog_format_field">কী-স্টোর ফর্ম্যাট</string>
     <string name="settings_system_import_keystore_wrong_credentials">কী-স্টোর নাম (এলিয়াস) ভুলে</string>
     <string name="settings_system_import_keystore_success">কী-স্টোর নাম (এলিয়াস) ভুলে</string>
     <string name="settings_system_import_keystore_failed">কী-স্টোর আমদানি ব্যর্থ হয়েছে</string>

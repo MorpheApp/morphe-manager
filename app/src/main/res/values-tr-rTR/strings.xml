@@ -98,7 +98,7 @@
     <string name="home_apk_availability_no">Hayır, bende APK var</string>
     <string name="home_apk_use_saved_with_version">Kaydedilmiş APK (v%s) kullan</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Yamayı uygulayabilmek için tekrar APK dosyasını seçmeniz gerekiyor</string>
-    <string name="home_version_requires_android">Android %1$s+ gerekiyor</string>
+    <string name="home_version_requires_android">Android %1$s+ gerektiriyor</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda desteklenmiyor</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) için desteklenen sürümlere sahip değil. Bildirilen tüm sürümler daha yüksek bir Android sürümü gerektiriyor</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -341,6 +341,10 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="settings_appearance_background_grid">Izgara</string>
     <string name="settings_appearance_background_particles">Parçacıklar</string>
     <string name="settings_appearance_background_none">Yok</string>
+    <string name="settings_appearance_background_random">Rastgele</string>
+    <string name="settings_appearance_background_random_interval_launch">Başlangıçta</string>
+    <string name="settings_appearance_background_random_interval_daily">Günlük</string>
+    <string name="settings_appearance_background_random_interval_3days">Her 3 günde bir</string>
     <string name="settings_appearance_parallax_effect">Paralaks etkisi</string>
     <string name="settings_appearance_parallax_effect_description">Cihaz eğildiğinde arka planın yumuşak bir şekilde kayması</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_import_keystore_dialog_alias_field">Kullanıcı Adı (Takma Ad)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parola</string>
     <string name="settings_system_import_keystore_dialog_button">İçe aktar</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Anahtar deposu formatı</string>
     <string name="settings_system_import_keystore_wrong_credentials">Yanlış anahtar deposu kimlik bilgileri</string>
     <string name="settings_system_import_keystore_success">Anahtar deposu içe aktarıldı</string>
     <string name="settings_system_import_keystore_failed">Anahtar deposu içe aktarılamadı</string>

@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">רשת</string>
     <string name="settings_appearance_background_particles">חלקיקים</string>
     <string name="settings_appearance_background_none">אין</string>
+    <string name="settings_appearance_background_random">אקראי</string>
+    <string name="settings_appearance_background_random_interval_launch">בפתיחה</string>
+    <string name="settings_appearance_background_random_interval_daily">יומיומי</string>
+    <string name="settings_appearance_background_random_interval_3days">כל 3 ימים</string>
     <string name="settings_appearance_parallax_effect">אפקט פארלקס</string>
     <string name="settings_appearance_parallax_effect_description">הדגמה חלקה של רקע בעת טיפוס של המכשיר</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -542,6 +546,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_alias_field">שם משתמש (אלטרנטיב)</string>
     <string name="settings_system_import_keystore_dialog_password_field">סיסמא</string>
     <string name="settings_system_import_keystore_dialog_button">ייבוא</string>
+    <string name="settings_system_import_keystore_dialog_format_field">פורמט מאגר מפתחות</string>
     <string name="settings_system_import_keystore_wrong_credentials">סיסמא לא תקינה</string>
     <string name="settings_system_import_keystore_success">תיקון מותאם יובא</string>
     <string name="settings_system_import_keystore_failed">שגגה להרוס תיקון: %s</string>

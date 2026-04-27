@@ -100,7 +100,7 @@
     <string name="home_app_info_no_saved_apk">저장된 APK가 없습니다. 패치하려면 APK 파일을 다시 선택하세요</string>
     <string name="home_version_requires_android">Android %1$s+ 필요</string>
     <string name="home_apk_no_compatible_versions_title">이 기기에서는 지원되지 않음</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;은(는) Android %2$d (API %3$d)를 지원하지 않습니다. 선언된 모든 버전은 더 높은 Android 버전을 필요로 합니다.</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;는 Android %2$d (API %3$d)에서 지원되는 버전이 없습니다. 선언된 모든 앱 버전은 더 높은 Android 버전을 요구합니다</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">원본 APK 다운로드</string>
     <string name="home_download_instructions_steps_title">설명서:</string>
@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">격자</string>
     <string name="settings_appearance_background_particles">입자</string>
     <string name="settings_appearance_background_none">없음</string>
+    <string name="settings_appearance_background_random">임의</string>
+    <string name="settings_appearance_background_random_interval_launch">앱 실행 시</string>
+    <string name="settings_appearance_background_random_interval_daily">매일</string>
+    <string name="settings_appearance_background_random_interval_3days">3일마다</string>
     <string name="settings_appearance_parallax_effect">페럴랙스 효과</string>
     <string name="settings_appearance_parallax_effect_description">기기를 기울이면 배경이 부드럽게 이동합니다</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -559,6 +563,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">사용자 이름 (별칭)</string>
     <string name="settings_system_import_keystore_dialog_password_field">비밀번호</string>
     <string name="settings_system_import_keystore_dialog_button">가져오기</string>
+    <string name="settings_system_import_keystore_dialog_format_field">키스토어 형식</string>
     <string name="settings_system_import_keystore_wrong_credentials">키스토어 자격 증명이 잘못되었습니다</string>
     <string name="settings_system_import_keystore_success">키스토어를 가져왔습니다</string>
     <string name="settings_system_import_keystore_failed">키스토어를 가져올 수 없습니다</string>

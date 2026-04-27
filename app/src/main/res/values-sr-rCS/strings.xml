@@ -341,6 +341,10 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_appearance_background_grid">Rešetka</string>
     <string name="settings_appearance_background_particles">Čestice</string>
     <string name="settings_appearance_background_none">Bez</string>
+    <string name="settings_appearance_background_random">Nasumično</string>
+    <string name="settings_appearance_background_random_interval_launch">Pokretanje</string>
+    <string name="settings_appearance_background_random_interval_daily">Dnevno</string>
+    <string name="settings_appearance_background_random_interval_3days">Svaki 3 dana</string>
     <string name="settings_appearance_parallax_effect">Paralaksni efekat</string>
     <string name="settings_appearance_parallax_effect_description">Glatko pomeranje pozadine pri naginjanju uređaja</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -542,6 +546,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_import_keystore_dialog_alias_field">Pogrešni izvor</string>
     <string name="settings_system_import_keystore_dialog_password_field">Lozinka </string>
     <string name="settings_system_import_keystore_dialog_button">Uvoz</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format kejstora</string>
     <string name="settings_system_import_keystore_wrong_credentials">Pogrešni izvor</string>
     <string name="settings_system_import_keystore_success">Kejtore uvezeno</string>
     <string name="settings_system_import_keystore_failed">Nijeleženo uvoz kejtora</string>

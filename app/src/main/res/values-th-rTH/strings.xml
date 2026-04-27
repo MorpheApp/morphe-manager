@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">ตาราง</string>
     <string name="settings_appearance_background_particles">อนุภาค</string>
     <string name="settings_appearance_background_none">ธง</string>
+    <string name="settings_appearance_background_random">สุ่ม</string>
+    <string name="settings_appearance_background_random_interval_launch">เมื่อเปิดแอป</string>
+    <string name="settings_appearance_background_random_interval_daily">รายวัน</string>
+    <string name="settings_appearance_background_random_interval_3days">ทุกๆ 3 วัน</string>
     <string name="settings_appearance_parallax_effect">เอฟเฟ็กต์พารัลแล็กซ์</string>
     <string name="settings_appearance_parallax_effect_description">การเปลี่ยนแปลงพื้นหลังที่เรียบร้อยเมื่อลดทอนอุปกรณ์</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">รหัส</string>
     <string name="settings_system_import_keystore_dialog_password_field">รหัสไฟล์ตัวเลือกไม่ถูกต้อง</string>
     <string name="settings_system_import_keystore_dialog_button">นำเข้า</string>
+    <string name="settings_system_import_keystore_dialog_format_field">รูปแบบคีย์สโตร์</string>
     <string name="settings_system_import_keystore_wrong_credentials">ล้มการนำเข้าไฟล์ตัวเลือก</string>
     <string name="settings_system_import_keystore_success">ส่งออกไฟล์ตัวเลือก</string>
     <string name="settings_system_import_keystore_failed">ส่งออกไฟล์ตัวเลือก</string>

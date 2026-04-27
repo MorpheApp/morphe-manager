@@ -341,6 +341,10 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="settings_appearance_background_grid">Linjer</string>
     <string name="settings_appearance_background_particles">Partikler</string>
     <string name="settings_appearance_background_none">Ingen</string>
+    <string name="settings_appearance_background_random">Tilfældig</string>
+    <string name="settings_appearance_background_random_interval_launch">Ved opstart</string>
+    <string name="settings_appearance_background_random_interval_daily">Dagligt</string>
+    <string name="settings_appearance_background_random_interval_3days">Hver 3. dag</string>
     <string name="settings_appearance_parallax_effect">Parallakse-effekt</string>
     <string name="settings_appearance_parallax_effect_description">Flydende baggrundsbevægelse ved tiltning af enheden</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_import_keystore_dialog_alias_field">Brugernavn (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Adgangskode</string>
     <string name="settings_system_import_keystore_dialog_button">Importér</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Forkerte keystore legitimationsoplysninger</string>
     <string name="settings_system_import_keystore_success">Keystone importeret</string>
     <string name="settings_system_import_keystore_failed">Importering af Keystone mislykkedes</string>

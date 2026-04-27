@@ -99,8 +99,8 @@
     <string name="home_apk_use_saved_with_version">Dùng APK đã lưu (v%s)</string>
     <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
     <string name="home_version_requires_android">Yêu cầu Android %1$s+</string>
-    <string name="home_apk_no_compatible_versions_title">Không được hỗ trợ trên thiết bị này</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; không có phiên bản nào được hỗ trợ cho Android %2$d (API %3$d). Tất cả các phiên bản đã khai báo đều yêu cầu phiên bản Android cao hơn</string>
+    <string name="home_apk_no_compatible_versions_title">Không hỗ trợ trên thiết bị này</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; không có phiên bản nào hỗ trợ cho Android %2$d (API %3$d). Tất cả các phiên bản đã khai báo đều yêu cầu phiên bản Android cao hơn</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Tải APK gốc</string>
     <string name="home_download_instructions_steps_title">Hướng dẫn:</string>
@@ -341,6 +341,10 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_appearance_background_grid">Lưới ô</string>
     <string name="settings_appearance_background_particles">Hạt</string>
     <string name="settings_appearance_background_none">Không</string>
+    <string name="settings_appearance_background_random">Ngẫu nhiên</string>
+    <string name="settings_appearance_background_random_interval_launch">Khi khởi động</string>
+    <string name="settings_appearance_background_random_interval_daily">Hàng ngày</string>
+    <string name="settings_appearance_background_random_interval_3days">Cứ 3 ngày một lần</string>
     <string name="settings_appearance_parallax_effect">Hiệu ứng thị sai</string>
     <string name="settings_appearance_parallax_effect_description">Nền chuyển động nhẹ nhàng khi nghiêng thiết bị</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -559,6 +563,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_import_keystore_dialog_alias_field">Tên người dùng (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Mật khẩu</string>
     <string name="settings_system_import_keystore_dialog_button">Nhập</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Định dạng Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Thông tin xác thực kho khóa không đúng</string>
     <string name="settings_system_import_keystore_success">Đã nhập kho khóa</string>
     <string name="settings_system_import_keystore_failed">Khổng thể nhập kho khóa</string>

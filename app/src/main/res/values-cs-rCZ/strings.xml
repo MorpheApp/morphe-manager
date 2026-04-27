@@ -129,31 +129,31 @@
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
     <string name="expert_mode_enable_all">Zapnout vše</string>
-    <string name="expert_mode_reset_to_default">Povolit doporučené opravy</string>
+    <string name="expert_mode_reset_to_default">Povolit doporučené záplaty</string>
     <string name="expert_mode_restore_saved">Obnovit uloženou hodnotu</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
     <string name="expert_mode_universal_patches">Univerzální záplaty</string>
     <string name="expert_mode_new_patches">Nový</string>
-    <string name="expert_mode_multiple_sources_warning_title">Vybráno více zdrojů pro aktualizace</string>
-    <string name="expert_mode_multiple_sources_warning_message">"Vybrali jste aktualizace z více zdrojů. To může způsobit problémy s kompatibilitou nebo neočekávané chování.
+    <string name="expert_mode_multiple_sources_warning_title">Vybráno více zdrojů záplat</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Vybrali jste záplaty z více zdrojů. To může způsobit problémy s kompatibilitou nebo neočekávané chování.
 
 Opravdu chcete pokračovat?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">Neověřená APK</string>
-    <string name="home_invalid_signature_message">APK, kterou jste vybrali pro &lt;b&gt;%s&lt;/b&gt;, neodpovídá očekávanému certifikátu podpisu. Může být modifikována nebo pocházet z nedůvěryhodného zdroje</string>
-    <string name="home_invalid_signature_badge">Tato APK nemusí být originální</string>
-    <string name="home_split_apk_warning_title">Detekován rozdělený APK</string>
-    <string name="home_split_apk_warning_message">"Tento soubor je balíček APK
+    <string name="home_invalid_signature_title">Neověřené APK</string>
+    <string name="home_invalid_signature_message">APK, který jste vybrali pro &lt;b&gt;%s&lt;/b&gt;, neodpovídá očekávanému podpisovému certifikátu. Může být upravený nebo z nedůvěryhodného zdroje</string>
+    <string name="home_invalid_signature_badge">Toto APK nemusí být originální</string>
+    <string name="home_split_apk_warning_title">Rozdělené APK detekováno</string>
+    <string name="home_split_apk_warning_message">"Tento soubor je APK balíček
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&lt;/b&gt;"</string>
+Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Vyberte jinou APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimentální</string>
     <string name="home_dialog_unsupported_version_experimental_description">Tato verze má experimentální podporu a může být nestabilní nebo neúplná</string>
     <string name="morphe_experimental_app_version_dialog_title">Chcete experimentovat? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Tato verze &lt;b&gt;%s&lt;/b&gt; má brzkou experimentální podporu&lt;br/&gt;&lt;br/&gt;🔧 Očekávejte zvláštní chování aplikace nebo neidentifikované chyby, jak jsou opravy vylepšovány pro tuto verzi aplikace</string>
+    <string name="morphe_experimental_app_version_dialog_message">Tato verze &lt;b&gt;%s&lt;/b&gt; má předběžnou experimentální podporu&lt;br/&gt;&lt;br/&gt;🔧 Očekávejte neobvyklé chování aplikace nebo neidentifikované chyby, záplaty pro tuto verzi aplikace jsou ještě ve vývoji</string>
     <string name="home_dialog_unsupported_version_dialog_title">Nepodporovaná verze</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Tato APK není doporučenou verzí aplikace. Pokračování může vést k nefunkčnosti aplikace</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Tato APK není doporučená verze aplikace. Pokračování může vést k nefunkčnosti aplikace</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Pokračovat i tak</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibilní verze:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nekompatibilní</string>
@@ -161,13 +161,13 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="home_dialog_wrong_package_description">Vybrané APK není pro aplikaci, kterou jste chtěli záplatovat</string>
     <string name="home_dialog_expected_package">Očekávaný balíček:</string>
     <string name="home_dialog_selected_package">Vybraný balíček:</string>
-    <string name="home_outdated_patches_dialog_title">Patče mohou být zastaralé</string>
-    <string name="home_outdated_patches_dialog_message">Mobilní data jsou aktivní a aktualizace patčů jsou zakázány</string>
-    <string name="home_outdated_patches_dialog_warning">Používání zastaralých patčů může způsobit poškození aplikace</string>
-    <string name="home_outdated_patches_dialog_update_and_patch">Aktualizovat &amp; patčit</string>
+    <string name="home_outdated_patches_dialog_title">Záplaty mohou být zastaralé</string>
+    <string name="home_outdated_patches_dialog_message">Mobilní data jsou zapnuta a aktualizace záplat je zakázáno</string>
+    <string name="home_outdated_patches_dialog_warning">Záplatování pomocí zastaralých záplat může vést k nefunkčnosti aplikace</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Aktualizovat &amp;; záplatovat</string>
     <string name="home_low_disk_space_dialog_title">Nedostatek místa na disku</string>
-    <string name="home_low_disk_space_dialog_message">Dostupných je pouze %1$.2f GB volného místa. Oprava vyžaduje alespoň %2$.2f GB volného místa, aby fungovala správně</string>
-    <string name="home_low_disk_space_dialog_warning">Pokračování může vést k chybě \"soubor nenalezen\" nebo poškozené výstupní APK</string>
+    <string name="home_low_disk_space_dialog_message">Dostupných je pouze %1$.2f GB volného místa. Záplatování vyžaduje alespoň %2$.2f GB volného místa, aby fungovalo správně</string>
+    <string name="home_low_disk_space_dialog_warning">Pokračování může vést k chybě \"soubor nenalezen\" nebo poškodit výslednou APK</string>
     <!-- Patch Options -->
     <string name="custom_color">Vlastní barva</string>
     <string name="hex_color">Barva ve formátu Hex</string>
@@ -179,20 +179,20 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="patch_option_list_duplicate">Tato hodnota již existuje</string>
     <string name="patch_option_list_empty">Hodnota nesmí být prázdná</string>
     <string name="patch_option_list_empty_state">Ještě jste nepřidali žádné hodnoty</string>
-    <string name="patch_option_required_missing">%s: vyplňte všechny povinné možnosti</string>
+    <string name="patch_option_required_missing">%s: vyplňte všechna povinná pole</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Vytvořit adaptivní ikonu</string>
     <string name="adaptive_icon_instructions">Vyberte obrázek popředí, vyberte barvu pozadí, poté použijte posuvník nebo gesta přiblížení a oddálení pro úpravu náhledu</string>
-    <string name="adaptive_icon_preview">Náhled adaptivního ikonu</string>
-    <string name="adaptive_icon_preview_hint">Pro nejlepší výsledek udržujte ikonu uvnitř pevného vnitřního kruhu</string>
+    <string name="adaptive_icon_preview">Náhled adaptivní ikony</string>
+    <string name="adaptive_icon_preview_hint">Pro nejlepší výsledek nechte ikonu uvnitř vnitřního kruhu</string>
     <string name="adaptive_icon_select_image">Vybrat obrázek</string>
     <string name="adaptive_icon_change_image">Změnit obrázek</string>
     <string name="adaptive_icon_background_color">Barva pozadí</string>
     <string name="adaptive_icon_reset_transform">Resetovat pozici a měřítko</string>
-    <string name="adaptive_icon_safe_zone_inner">Zóna bezpečí (vždy viditelná)</string>
+    <string name="adaptive_icon_safe_zone_inner">Bezpečná zóna (vždy viditelná)</string>
     <string name="adaptive_icon_safe_zone_outer">Maskovací zóna (může být skryta)</string>
-    <string name="adaptive_icon_created_success">Adaptivní ikona vytvořena úspěšně</string>
-    <string name="adaptive_icon_creation_failed">Nepodařilo se vytvořit adaptivní ikonu</string>
+    <string name="adaptive_icon_created_success">Adaptivní ikona byla úspěšně vytvořena</string>
+    <string name="adaptive_icon_creation_failed">Adaptivní ikona se nepodařila vytvořit</string>
     <string name="adaptive_icon_folder_explanation">Vyberte, kde vytvořit složku \'%1$s/%2$s\' s generovanými ikonami</string>
     <string name="notification_icon_preview">Tlačítko oznámení je skryté</string>
     <string name="notification_icon_preview_hint">Použijte posuvník pro změnu velikosti. Táhněte pro přesunutí</string>
@@ -341,6 +341,10 @@ Pro nejlepší výsledky doporučuje tato aplikace opravit &lt;b&gt;úplný APK&
     <string name="settings_appearance_background_grid">Mřížka</string>
     <string name="settings_appearance_background_particles">Částice</string>
     <string name="settings_appearance_background_none">Žádné</string>
+    <string name="settings_appearance_background_random">Náhodné</string>
+    <string name="settings_appearance_background_random_interval_launch">Při spuštění</string>
+    <string name="settings_appearance_background_random_interval_daily">Denně</string>
+    <string name="settings_appearance_background_random_interval_3days">Ob tři dny</string>
     <string name="settings_appearance_parallax_effect">Paralaxový efekt</string>
     <string name="settings_appearance_parallax_effect_description">Plynulé posunování pozadí při naklánění zařízení</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_import_keystore_dialog_alias_field">Uživatelské jméno (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Heslo</string>
     <string name="settings_system_import_keystore_dialog_button">Importovat</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formát úložiště klíčů</string>
     <string name="settings_system_import_keystore_wrong_credentials">Neplatné přihlašovací údaje klíčového dílu</string>
     <string name="settings_system_import_keystore_success">Úložiště klíčů importováno</string>
     <string name="settings_system_import_keystore_failed">Selhalo importování klíčového dílu</string>

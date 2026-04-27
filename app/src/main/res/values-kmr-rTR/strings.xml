@@ -339,6 +339,10 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_appearance_background_grid">Şebek</string>
     <string name="settings_appearance_background_particles">Partîkel</string>
     <string name="settings_appearance_background_none">Tîya</string>
+    <string name="settings_appearance_background_random">Têkildar</string>
+    <string name="settings_appearance_background_random_interval_launch">Dema destpêkirinê</string>
+    <string name="settings_appearance_background_random_interval_daily">Rojane</string>
+    <string name="settings_appearance_background_random_interval_3days">Her 3 roj</string>
     <string name="settings_appearance_parallax_effect">Bandora Parallax</string>
     <string name="settings_appearance_parallax_effect_description">Serdestinê pêşbazinê de girtinê tê guherandin de hîrdikê alik bê yê ew zibu âniye</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -554,6 +558,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_import_keystore_dialog_alias_field">Karanbera (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Nexweş</string>
     <string name="settings_system_import_keystore_dialog_button">Importê</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formata kilîdparêzê</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nivîsandina parçehuyê xeṭî ye</string>
     <string name="settings_system_import_keystore_success">Parçehuyê zafortir hate kirin</string>
     <string name="settings_system_import_keystore_failed">Ji kirina parçehuyê neçîbe</string>

@@ -341,6 +341,10 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="settings_appearance_background_grid">Eangach</string>
     <string name="settings_appearance_background_particles">Cáithníní</string>
     <string name="settings_appearance_background_none">Dada</string>
+    <string name="settings_appearance_background_random">Randam</string>
+    <string name="settings_appearance_background_random_interval_launch">Ar thosú</string>
+    <string name="settings_appearance_background_random_interval_daily">Laethúil</string>
+    <string name="settings_appearance_background_random_interval_3days">Gach 3 lae</string>
     <string name="settings_appearance_parallax_effect">Effeact parallax</string>
     <string name="settings_appearance_parallax_effect_description">Bogadh réidh an chúlra agus an gléas á chlaonadh</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -556,6 +560,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_import_keystore_dialog_alias_field">Ainm úsáideora (Ainm eile)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Pasfhocal</string>
     <string name="settings_system_import_keystore_dialog_button">Iompórtáil</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formáid stóir eochrach</string>
     <string name="settings_system_import_keystore_wrong_credentials">Dintiúir mhíchearta stórais eochrach</string>
     <string name="settings_system_import_keystore_success">Eochairstóras allmhairithe</string>
     <string name="settings_system_import_keystore_failed">Theip ar an stór eochrach a iompórtáil</string>

@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">Сетка</string>
     <string name="settings_appearance_background_particles">Частицы</string>
     <string name="settings_appearance_background_none">Нет</string>
+    <string name="settings_appearance_background_random">Случайный</string>
+    <string name="settings_appearance_background_random_interval_launch">При запуске</string>
+    <string name="settings_appearance_background_random_interval_daily">Ежедневно</string>
+    <string name="settings_appearance_background_random_interval_3days">Каждые 3 дня</string>
     <string name="settings_appearance_parallax_effect">Эффект параллакса</string>
     <string name="settings_appearance_parallax_effect_description">Плавное смещение фона при наклоне устройства</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">Имя пользователя (псевдоним)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Пароль</string>
     <string name="settings_system_import_keystore_dialog_button">Импортировать</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Формат хранилища ключей</string>
     <string name="settings_system_import_keystore_wrong_credentials">Неверные учетные данные хранилища</string>
     <string name="settings_system_import_keystore_success">Хранилище ключей импортировано</string>
     <string name="settings_system_import_keystore_failed">Не удалось импортировать хранилище ключей</string>

@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">شبكة</string>
     <string name="settings_appearance_background_particles">جسيمات</string>
     <string name="settings_appearance_background_none">بدون</string>
+    <string name="settings_appearance_background_random">عشوائي</string>
+    <string name="settings_appearance_background_random_interval_launch">عند التشغيل</string>
+    <string name="settings_appearance_background_random_interval_daily">يوميًا</string>
+    <string name="settings_appearance_background_random_interval_3days">كل 3 أيام</string>
     <string name="settings_appearance_parallax_effect">تأثير المنظر البانورامي</string>
     <string name="settings_appearance_parallax_effect_description">تغيير سلس للخلفية عند إمالة الجهاز</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_alias_field">اسم المستخدم (الاسم المستعار)</string>
     <string name="settings_system_import_keystore_dialog_password_field">كلمة المرور</string>
     <string name="settings_system_import_keystore_dialog_button">استيراد</string>
+    <string name="settings_system_import_keystore_dialog_format_field">تنسيق مخزن المفاتيح</string>
     <string name="settings_system_import_keystore_wrong_credentials">بيانات مخزن المفاتيح غير صحيحة</string>
     <string name="settings_system_import_keystore_success">تم استيراد مخزن المفاتيح</string>
     <string name="settings_system_import_keystore_failed">فشل استيراد مخزن المفاتيح</string>

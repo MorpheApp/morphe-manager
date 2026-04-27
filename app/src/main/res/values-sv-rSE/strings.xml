@@ -19,7 +19,7 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
-    <string name="home_update_error">Uppdateringen misslyckades</string>
+    <string name="home_update_error">Uppdatering misslyckades</string>
     <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_update_skipped_metered">Uppdateringar hoppas över</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
@@ -68,8 +68,8 @@
     <string name="sources_dialog_rename">Byt namn på tilläggskällan</string>
     <string name="sources_dialog_duplicate_name_error">Det finns redan en tilläggskälla med det här namnet</string>
     <string name="sources_dialog_missing_error">Det gick inte att uppdatera den här tilläggskällan</string>
-    <string name="sources_dialog_view_any_version">Valfri version</string>
-    <string name="sources_dialog_view_any_package">Valfritt paket</string>
+    <string name="sources_dialog_view_any_version">Alla versioner</string>
+    <string name="sources_dialog_view_any_package">Alla paket</string>
     <string name="sources_dialog_add_source">Lägg till tilläggskälla</string>
     <string name="sources_dialog_delete_confirm_message">Ta bort källan \"%s\"? Det går inte att ångra den här åtgärden</string>
     <string name="sources_dialog_remote">Fjärrkälla</string>
@@ -93,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med en av följande versioner:</string>
     <string name="home_apk_availability_recommended_label">Rekommenderad</string>
     <string name="home_apk_availability_unpatched_label">Omodifierad</string>
+    <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
     <string name="home_apk_availability_yes">Ja, hjälp mig att hitta en APK-fil</string>
     <string name="home_apk_availability_no">Nej, jag har redan en APK-fil</string>
     <string name="home_apk_use_saved_with_version">Använd den sparade APK-filen (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ingen sparad APK-fil. Modifieringen kräver att du väljer APK-filen igen</string>
+    <string name="home_version_requires_android">Kräver Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Stöds inte på den här enheten</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har inga versioner som stöds för Android %2$d (API %3$d). Alla deklarerade versioner kräver en senare Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Ladda ned den ursprungliga APK-filen</string>
     <string name="home_download_instructions_steps_title">Anvisningar:</string>
@@ -401,11 +405,11 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_advanced_expert_mode_description">Aktivera komplexa modifieringsinställningar och anpassningsalternativ för Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläge?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur tilläggen tillämpas, men om du felaktigt konfigurerar inställningarna i expertläget kan det leda till att appen inte fungerar</string>
-    <string name="settings_advanced_strip_unused_libs">Optimera för enhetens arkitektur</string>
+    <string name="settings_advanced_strip_unused_libs">Optimera för enhetsarkitektur</string>
     <string name="settings_advanced_strip_unused_libs_description">"Hoppa över delade APK-moduler för CPU-arkitekturer, språk och skärmupplösningar som inte stöds vid sammanslagning.
 Vanliga APK-filer rensas från inbyggda bibliotek för arkitekturer som inte stöds efter att appen har modifierats"</string>
     <!-- Bytecode mode -->
-    <string name="settings_advanced_bytecode_mode">Läget för bytekodbearbetning</string>
+    <string name="settings_advanced_bytecode_mode">Läge för bytekodbearbetning</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Kontrollerar hur bytekod bearbetas när appar modifieras. Detta påverkar modifieringshastighet, minnesanvändning och den slutliga APK-filens storlek</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">Snabbt (Rekommenderas)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">Snabbt</string>
@@ -621,7 +625,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
     <string name="settings_system_share_website_description">Dela Morphes officiella webbplats</string>
-    <string name="settings_system_manager_description">"Ett projekt med öppen källkod för modern, smidig modifiering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
+    <string name="settings_system_manager_description">"Ett projekt med öppen källkod för modern och smidig modifiering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
     <string name="credits">Medverkande</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>

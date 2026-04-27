@@ -341,6 +341,10 @@
     <string name="settings_appearance_background_grid">ग्रिड</string>
     <string name="settings_appearance_background_particles">कण</string>
     <string name="settings_appearance_background_none">कुछ</string>
+    <string name="settings_appearance_background_random">यादृच्छिक</string>
+    <string name="settings_appearance_background_random_interval_launch">लॉन्च पर</string>
+    <string name="settings_appearance_background_random_interval_daily">दैनिक</string>
+    <string name="settings_appearance_background_random_interval_3days">हर 3 दिन में</string>
     <string name="settings_appearance_parallax_effect">परालैक्स प्रभाव</string>
     <string name="settings_appearance_parallax_effect_description">डिवाइस को झुकाने पर पृष्ठभूमि को मधयम गति से बदलना</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">यूज़रनेम (एलियास)</string>
     <string name="settings_system_import_keystore_dialog_password_field">पासवर्ड</string>
     <string name="settings_system_import_keystore_dialog_button">आयम</string>
+    <string name="settings_system_import_keystore_dialog_format_field">कीस्टोर प्रारूप</string>
     <string name="settings_system_import_keystore_wrong_credentials">गलत कीस्टोर क्रेडेंशियल</string>
     <string name="settings_system_import_keystore_success">कीस्टोर आयम किया गया</string>
     <string name="settings_system_import_keystore_failed">कीस्टोर आयम करने में विफल</string>

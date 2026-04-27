@@ -342,6 +342,10 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_appearance_background_grid">Jaring</string>
     <string name="settings_appearance_background_particles">Partikel</string>
     <string name="settings_appearance_background_none">Tidak ada</string>
+    <string name="settings_appearance_background_random">Acak</string>
+    <string name="settings_appearance_background_random_interval_launch">Saat diluncurkan</string>
+    <string name="settings_appearance_background_random_interval_daily">Harian</string>
+    <string name="settings_appearance_background_random_interval_3days">Setiap 3 hari</string>
     <string name="settings_appearance_parallax_effect">Efek Paralaks</string>
     <string name="settings_appearance_parallax_effect_description">Perpindahan latar belakang yang halus saat menggeser perangkat</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -559,6 +563,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_import_keystore_dialog_alias_field">Nama pengguna (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Kata sandi</string>
     <string name="settings_system_import_keystore_dialog_button">Impor</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Kredensial keystore tidak sah</string>
     <string name="settings_system_import_keystore_success">Keystore diimpor</string>
     <string name="settings_system_import_keystore_failed">Gagal mengimpor keystore</string>

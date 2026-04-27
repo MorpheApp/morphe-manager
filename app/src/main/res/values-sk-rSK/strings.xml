@@ -341,6 +341,10 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="settings_appearance_background_grid">Mriežka</string>
     <string name="settings_appearance_background_particles">Častice</string>
     <string name="settings_appearance_background_none">Žiadna</string>
+    <string name="settings_appearance_background_random">Náhodné</string>
+    <string name="settings_appearance_background_random_interval_launch">Pri spustení</string>
+    <string name="settings_appearance_background_random_interval_daily">Dennev</string>
+    <string name="settings_appearance_background_random_interval_3days">Každé 3 dni</string>
     <string name="settings_appearance_parallax_effect">Paralaxový efekt</string>
     <string name="settings_appearance_parallax_effect_description">Plynulé posúvanie pozadia pri nakláňaní zariadenia</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_system_import_keystore_dialog_alias_field">Používateľské meno (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Heslo</string>
     <string name="settings_system_import_keystore_dialog_button">Importovať</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formát keystoru</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nesprávne údaje pre prístup ku keystoru</string>
     <string name="settings_system_import_keystore_success">Keystore bol importovaný</string>
     <string name="settings_system_import_keystore_failed">Nepodarilo sa importovať keystore</string>

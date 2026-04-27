@@ -98,7 +98,7 @@
     <string name="home_apk_availability_no">No, ya tengo un APK</string>
     <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
-    <string name="home_version_requires_android">Requiere Android %1$s+</string>
+    <string name="home_version_requires_android">Requiere Android %1$s o superior</string>
     <string name="home_apk_no_compatible_versions_title">No compatible en este dispositivo</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; no tiene versiones compatibles para Android %2$d (API %3$d). Todas las versiones declaradas requieren una versión de Android superior</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -341,6 +341,10 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_appearance_background_grid">Cuadrícula</string>
     <string name="settings_appearance_background_particles">Partículas</string>
     <string name="settings_appearance_background_none">Ninguna</string>
+    <string name="settings_appearance_background_random">Aleatorio</string>
+    <string name="settings_appearance_background_random_interval_launch">Al inicio</string>
+    <string name="settings_appearance_background_random_interval_daily">Diario</string>
+    <string name="settings_appearance_background_random_interval_3days">Cada 3 días</string>
     <string name="settings_appearance_parallax_effect">Efecto de paralaje</string>
     <string name="settings_appearance_parallax_effect_description">Desplazamiento suave del fondo al inclinar el dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_import_keystore_dialog_alias_field">Nombre de usuario (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Contraseña</string>
     <string name="settings_system_import_keystore_dialog_button">Importar</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formato de almacén de claves</string>
     <string name="settings_system_import_keystore_wrong_credentials">Credenciales de almacén de claves incorrectas</string>
     <string name="settings_system_import_keystore_success">Almacén de claves importado</string>
     <string name="settings_system_import_keystore_failed">No se pudo importar el almacén de claves</string>

@@ -341,6 +341,10 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="settings_appearance_background_grid">Grilã</string>
     <string name="settings_appearance_background_particles">Particule</string>
     <string name="settings_appearance_background_none">Fără</string>
+    <string name="settings_appearance_background_random">Aleatoriu</string>
+    <string name="settings_appearance_background_random_interval_launch">La lansare</string>
+    <string name="settings_appearance_background_random_interval_daily">Zilnic</string>
+    <string name="settings_appearance_background_random_interval_3days">La fiecare 3 zile</string>
     <string name="settings_appearance_parallax_effect">Efect parallax</string>
     <string name="settings_appearance_parallax_effect_description">Schimbare suedea a fundalului când se înclina dispozitivul</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_import_keystore_dialog_alias_field">Nume (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parolă</string>
     <string name="settings_system_import_keystore_dialog_button">Importă</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Datele cheii incorecte</string>
     <string name="settings_system_import_keystore_success">Keystore importat</string>
     <string name="settings_system_import_keystore_failed">A eșuat importarea keystore-ului</string>

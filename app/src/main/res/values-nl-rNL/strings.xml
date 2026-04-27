@@ -341,6 +341,10 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_appearance_background_grid">Raster</string>
     <string name="settings_appearance_background_particles">Deeltjes</string>
     <string name="settings_appearance_background_none">Geen</string>
+    <string name="settings_appearance_background_random">Willekeurig</string>
+    <string name="settings_appearance_background_random_interval_launch">Bij het opstarten</string>
+    <string name="settings_appearance_background_random_interval_daily">Dagelijks</string>
+    <string name="settings_appearance_background_random_interval_3days">Om de 3 dagen</string>
     <string name="settings_appearance_parallax_effect">Parallax-effect</string>
     <string name="settings_appearance_parallax_effect_description">Vloeiende achtergrondverschuiving bij het kantelen van het apparaat</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -558,6 +562,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_import_keystore_dialog_alias_field">Gebruikersnaam (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Wachtwoord</string>
     <string name="settings_system_import_keystore_dialog_button">Importeren</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore-formaat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Verkeerde keystore-gegevens</string>
     <string name="settings_system_import_keystore_success">Keystore geïmporteerd</string>
     <string name="settings_system_import_keystore_failed">Kan keystore niet importeren</string>

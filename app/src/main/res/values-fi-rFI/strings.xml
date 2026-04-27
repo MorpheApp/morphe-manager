@@ -340,6 +340,10 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_appearance_background_grid">Ruudukko</string>
     <string name="settings_appearance_background_particles">Hiukkaset</string>
     <string name="settings_appearance_background_none">Muokka appin ulkon</string>
+    <string name="settings_appearance_background_random">Satunnainen</string>
+    <string name="settings_appearance_background_random_interval_launch">Käynnistyksen yhteydessä</string>
+    <string name="settings_appearance_background_random_interval_daily">Päivittäin</string>
+    <string name="settings_appearance_background_random_interval_3days">Joka 3. päivä</string>
     <string name="settings_appearance_parallax_effect">Parallaksi-efekti</string>
     <string name="settings_appearance_parallax_effect_description">Smooth background shifting when tilting the device</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -556,6 +560,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_import_keystore_dialog_alias_field">Väärin keystore-tunnus (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Väärin keystore-tunnus (alias)</string>
     <string name="settings_system_import_keystore_dialog_button">Tuo</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore-muoto</string>
     <string name="settings_system_import_keystore_wrong_credentials">Väärin keystore-tunnus</string>
     <string name="settings_system_import_keystore_success">Väärin keystore-tunnus</string>
     <string name="settings_system_import_keystore_failed">Keystore tuotu onnistui</string>
