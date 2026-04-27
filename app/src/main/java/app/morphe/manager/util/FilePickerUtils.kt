@@ -6,15 +6,18 @@
 package app.morphe.manager.util
 
 import android.content.ContentResolver
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.OpenableColumns
+import android.app.UiModeManager
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.data.platform.Filesystem
 import org.koin.compose.koinInject
 import java.io.File
@@ -117,16 +120,6 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
     }.getOrNull()
 
 /**
- * Returns true if the device has an activity that can handle ACTION_CREATE_DOCUMENT.
- * Android TV and some stripped Android builds ship without DocumentsUI,
- * so CreateDocument contracts silently fail on them.
- */
-fun Context.canHandleCreateDocument(): Boolean {
-    val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply { type = "*/*" }
-    return packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null
-}
-
-/**
  * Folder picker launcher with automatic permission handling
  * Only use this for operations that create multiple files/folders
  *
@@ -208,4 +201,64 @@ fun validateOptionPaths(options: Map<Int, Map<String, Map<String, Any?>>>): List
         }
     }
     return failures
+}
+
+/**
+ * [ActivityResultContract] that wraps ACTION_GET_CONTENT in a chooser so that
+ * all installed file managers appear as options - bypassing DocumentsUI which
+ * is the default (and often absent) handler on Android TV.
+ */
+class GetContentWithChooser(private val chooserTitle: String) : ActivityResultContract<Array<String>, Uri?>() {
+    override fun createIntent(context: Context, input: Array<String>): Intent {
+        val getContent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = if (input.size == 1) input[0] else "*/*"
+            if (input.size > 1) putExtra(Intent.EXTRA_MIME_TYPES, input)
+            addCategory(Intent.CATEGORY_OPENABLE)
+        }
+        return Intent.createChooser(getContent, chooserTitle)
+    }
+
+    override fun parseResult(resultCode: Int, intent: Intent?): Uri? =
+        if (resultCode == android.app.Activity.RESULT_OK) intent?.data else null
+}
+
+/**
+ * Returns true if the device is an Android TV or Google TV.
+ */
+fun Context.isAndroidTv(): Boolean {
+    val uiModeManager = getSystemService(UiModeManager::class.java)
+    return uiModeManager?.currentModeType == Configuration.UI_MODE_TYPE_TELEVISION
+}
+
+/**
+ * On Android TV uses [ActivityResultContracts.OpenDocument] which routes through
+ * DocumentsUI and shows registered storage providers (file managers).
+ * On phones/tablets uses [GetContentWithChooser] to show all compatible apps.
+ *
+ * @param mimeTypes MIME types passed to the picker. OpenDocument supports multiple types
+ *   natively; GetContentWithChooser uses the first entry as the ACTION_GET_CONTENT type.
+ */
+@Composable
+fun rememberAdaptiveFilePicker(
+    mimeTypes: Array<String>,
+    chooserTitle: String,
+    onResult: (Uri?) -> Unit,
+): () -> Unit {
+    val context = LocalContext.current
+    val isTV = remember { context.isAndroidTv() }
+
+    val tvLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri -> onResult(uri) }
+
+    val phoneLauncher = rememberLauncherForActivityResult(
+        contract = GetContentWithChooser(chooserTitle)
+    ) { uri -> onResult(uri) }
+
+    return remember(isTV) {
+        {
+            if (isTV) tvLauncher.launch(mimeTypes)
+            else phoneLauncher.launch(mimeTypes)
+        }
+    }
 }

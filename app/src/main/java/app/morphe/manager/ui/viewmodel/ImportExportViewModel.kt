@@ -194,8 +194,12 @@ class ImportExportViewModel(
     fun canExport() = keystoreManager.hasKeystore()
 
     fun exportKeystore(target: Uri) = viewModelScope.launch {
-        keystoreManager.export(contentResolver.openOutputStream(target)!!)
-        app.toast(app.getString(R.string.settings_system_export_keystore_success))
+        uiSafe(app, R.string.settings_system_export_keystore_failed, "Failed to export keystore") {
+            withContext(Dispatchers.IO) {
+                keystoreManager.export(contentResolver.openOutputStream(target)!!)
+            }
+            app.toast(app.getString(R.string.settings_system_export_keystore_success))
+        }
     }
 
     fun importManagerSettings(source: Uri) = viewModelScope.launch {
@@ -404,7 +408,7 @@ class ImportExportViewModel(
     /**
      * Writes the debug log content to [writer]. Returns the logcat exit code.
      * Must be called from within a [Dispatchers.IO] context.
-     * Shared by [exportDebugLogs] (SAF target) and [exportDebugLogsToDownloads] (MediaStore target).
+     * Shared by [exportDebugLogs].
      */
     private suspend fun writeDebugLogContent(writer: BufferedWriter): Int = withContext(Dispatchers.IO) {
         val versionName = runCatching {
@@ -459,8 +463,10 @@ class ImportExportViewModel(
 
     fun exportDebugLogs(target: Uri) = viewModelScope.launch {
         val exitCode = try {
-            contentResolver.openOutputStream(target)!!.bufferedWriter().use { writer ->
-                writeDebugLogContent(writer)
+            withContext(Dispatchers.IO) {
+                contentResolver.openOutputStream(target)!!.bufferedWriter().use { writer ->
+                    writeDebugLogContent(writer)
+                }
             }
         } catch (e: CancellationException) {
             throw e
@@ -479,11 +485,9 @@ class ImportExportViewModel(
 
     /**
      * Opens a writable [OutputStream] to a new file in the public Downloads folder.
-     *
+     * Used as a fallback on Android TV where [android.content.Intent.ACTION_CREATE_DOCUMENT] is unavailable.
      * On API 29+ uses [MediaStore] (no storage permission required).
      * On older versions falls back to [Environment.getExternalStoragePublicDirectory].
-     *
-     * Returns null if the Downloads directory is unavailable.
      */
     private fun openDownloadsOutputStream(fileName: String, mimeType: String): OutputStream? {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -505,12 +509,11 @@ class ImportExportViewModel(
 
     /**
      * Exports the keystore to the Downloads folder.
-     * Used as a fallback on devices without DocumentsUI.
      */
     fun exportKeystoreToDownloads() = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_export_keystore_failed, "Failed to export keystore to Downloads") {
             withContext(Dispatchers.IO) {
-                val stream = openDownloadsOutputStream("Morphe.keystore", "application/octet-stream")
+                val stream = openDownloadsOutputStream("Morphe.keystore", BIN_MIMETYPE)
                     ?: throw IllegalStateException("Cannot open Downloads output stream")
                 stream.use { keystoreManager.export(it) }
             }
@@ -520,14 +523,13 @@ class ImportExportViewModel(
 
     /**
      * Exports manager settings to the Downloads folder.
-     * Used as a fallback on devices without DocumentsUI.
      */
     fun exportManagerSettingsToDownloads() = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_export_manager_settings_fail, "Failed to export settings to Downloads") {
             val snapshot = preferencesManager.exportSettings()
             val bundles = withContext(Dispatchers.IO) { patchBundleRepository.exportCustomBundles() }
             withContext(Dispatchers.IO) {
-                val stream = openDownloadsOutputStream("morphe_manager_settings.json", "application/json")
+                val stream = openDownloadsOutputStream("morphe_manager_settings.json", JSON_MIMETYPE)
                     ?: throw IllegalStateException("Cannot open Downloads output stream")
                 stream.use {
                     json.encodeToStream(
@@ -544,15 +546,12 @@ class ImportExportViewModel(
 
     /**
      * Exports debug logs to the Downloads folder.
-     * Used as a fallback on devices without DocumentsUI.
      */
     fun exportDebugLogsToDownloads() = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_export_debug_logs_export_failed, "Failed to export debug logs to Downloads") {
-            val stream = openDownloadsOutputStream(debugLogFileName, "text/plain")
+            val stream = openDownloadsOutputStream(debugLogFileName, TEXT_MIMETYPE)
                 ?: throw IllegalStateException("Cannot open Downloads output stream")
-            stream.bufferedWriter().use { writer ->
-                writeDebugLogContent(writer)
-            }
+            stream.bufferedWriter().use { writer -> writeDebugLogContent(writer) }
             app.toast(app.getString(R.string.settings_system_export_debug_logs_export_success))
         }
     }

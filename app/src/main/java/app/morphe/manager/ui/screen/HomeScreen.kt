@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -18,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -109,17 +109,14 @@ fun HomeScreen(
         homeViewModel.onStartQuickPatch = onStartQuickPatch
     }
 
-    // Initialize launchers
-    // GetContent is used instead of OpenDocument so that third-party file managers
-    // appear as available options in Android's picker
-    val openApkPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let { homeViewModel.handleApkSelection(it) }
-    }
+    val openApkPicker = rememberAdaptiveFilePicker(
+        mimeTypes = APK_FILE_MIME_TYPES,
+        chooserTitle = stringResource(R.string.home_select_apk_title)
+    ) { uri -> uri?.let { homeViewModel.handleApkSelection(it) } }
 
-    val openBundlePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val openBundlePicker = rememberAdaptiveFilePicker(
+        mimeTypes = MPP_FILE_MIME_TYPES,
+        chooserTitle = stringResource(R.string.sources_dialog_local_file)
     ) { uri ->
         uri?.let {
             homeViewModel.selectedBundleUri = it
@@ -162,8 +159,8 @@ fun HomeScreen(
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
-        storagePickerLauncher = { openApkPicker.launch("*/*") },
-        openBundlePicker = { openBundlePicker.launch("*/*") },
+        storagePickerLauncher = { openApkPicker() },
+        openBundlePicker = { openBundlePicker() },
         patchesItem = patchesSheetItem
     )
 
