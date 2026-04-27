@@ -12,6 +12,7 @@ import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
+import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
@@ -26,6 +27,7 @@ class PreferencesManager(
     // Appearance tab
     val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
     val enableBackgroundParallax = booleanPreference("enable_background_parallax", true)
+    val randomBackgroundInterval = enumPreference("random_background_interval", RandomInterval.ON_LAUNCH)
 
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
@@ -173,6 +175,7 @@ class PreferencesManager(
         val autoSaveDownloaderApks: Boolean? = null,
         val showGreetingPhrases: Boolean? = null,
         val backgroundType: BackgroundType? = null,
+        val randomBackgroundInterval: RandomInterval? = null,
         val useExpertMode: Boolean? = null,
         val backgroundUpdateNotifications: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
@@ -207,6 +210,7 @@ class PreferencesManager(
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         showGreetingPhrases = showGreetingPhrases.get(),
         backgroundType = backgroundType.get(),
+        randomBackgroundInterval = randomBackgroundInterval.get(),
         useExpertMode = useExpertMode.get(),
         backgroundUpdateNotifications = backgroundUpdateNotifications.get(),
         updateCheckInterval = updateCheckInterval.get(),
@@ -240,6 +244,7 @@ class PreferencesManager(
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.showGreetingPhrases?.let { showGreetingPhrases.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
+        snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.backgroundUpdateNotifications?.let { backgroundUpdateNotifications.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }

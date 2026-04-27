@@ -39,11 +39,13 @@ import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
+import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
+import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.hasMppExtension
 import kotlinx.coroutines.launch
@@ -127,11 +129,21 @@ class MainActivity : AppCompatActivity() {
 private fun MorpheManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
+    val themeViewModel: ThemeSettingsViewModel = koinViewModel()
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
+    val randomInterval by prefs.randomBackgroundInterval.getAsState()
+    val resolvedRandomBackground by themeViewModel.resolvedRandomBackground.collectAsStateWithLifecycle()
 
-    // Patcher background speed — driven by PatcherViewModel when on patcher screen.
-    // Exposed as a top-level mutable state so PatcherScreen can write into it.
+    // Resolve which background to show whenever RANDOM mode is active or the interval changes
+    LaunchedEffect(backgroundType, randomInterval) {
+        if (backgroundType == BackgroundType.RANDOM) {
+            themeViewModel.resolveRandomBackground(randomInterval)
+        }
+    }
+
+    // Patcher background speed - driven by PatcherViewModel when on patcher screen.
+    // Exposed as top-level mutable state so PatcherScreen can write into it
     val patcherBackgroundSpeed = androidx.compose.runtime.remember { androidx.compose.runtime.mutableFloatStateOf(1f) }
     val patchingCompleted = androidx.compose.runtime.remember { mutableStateOf(false) }
 
@@ -149,6 +161,7 @@ private fun MorpheManager(vm: MainViewModel) {
         // Show animated background
         AnimatedBackground(
             type = backgroundType,
+            resolvedType = resolvedRandomBackground,
             enableParallax = enableParallax,
             speedMultiplier = patcherBackgroundSpeed.floatValue,
             patchingCompleted = patchingCompleted.value

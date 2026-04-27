@@ -373,6 +373,10 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_appearance_background_grid">Grid</string>
     <string name="settings_appearance_background_particles">Particles</string>
     <string name="settings_appearance_background_none">None</string>
+    <string name="settings_appearance_background_random">Random</string>
+    <string name="settings_appearance_background_random_interval_launch">On launch</string>
+    <string name="settings_appearance_background_random_interval_daily">Daily</string>
+    <string name="settings_appearance_background_random_interval_3days">Every 3 days</string>
     <string name="settings_appearance_parallax_effect">Parallax effect</string>
     <string name="settings_appearance_parallax_effect_description">Smooth background shifting when tilting the device</string>
 

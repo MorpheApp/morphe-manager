@@ -56,6 +56,7 @@ fun AppearanceTabContent(
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
+    val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
 
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
@@ -165,6 +166,10 @@ fun AppearanceTabContent(
             selectedBackground = backgroundType,
             onBackgroundSelected = { selectedType ->
                 themeViewModel.setBackgroundType(selectedType)
+            },
+            selectedInterval = randomInterval,
+            onIntervalSelected = { interval ->
+                themeViewModel.setRandomInterval(interval)
             }
         )
 

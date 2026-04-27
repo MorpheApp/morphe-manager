@@ -28,25 +28,40 @@ enum class BackgroundType(val displayNameResId: Int) {
     SNOW(R.string.settings_appearance_background_snow),
     GRID(R.string.settings_appearance_background_grid),
     PARTICLES(R.string.settings_appearance_background_particles),
-    NONE(R.string.settings_appearance_background_none);
+    NONE(R.string.settings_appearance_background_none),
+    RANDOM(R.string.settings_appearance_background_random);
 
     companion object {
         val DEFAULT = CIRCLES
+
+        /** All types that can be picked when RANDOM is active (excludes NONE and RANDOM itself). */
+        val RANDOMIZABLE: List<BackgroundType> = entries.filter { it != NONE && it != RANDOM }
     }
 }
 
 /**
  * Animated background with multiple visual styles.
  * Creates subtle floating effects that can be used across all screens.
+ *
+ * When [type] is [BackgroundType.RANDOM], [resolvedType] must be provided —
+ * it holds the already-resolved random type from the ViewModel so the choice
+ * stays stable for the current session/interval.
  */
 @Composable
 @SuppressLint("ModifierParameter")
 fun AnimatedBackground(
     type: BackgroundType = BackgroundType.CIRCLES,
+    resolvedType: BackgroundType? = null,
     enableParallax: Boolean = true,
     speedMultiplier: Float = 1f,
     patchingCompleted: Boolean = false
 ) {
+    val effectiveType = if (type == BackgroundType.RANDOM) {
+        resolvedType ?: BackgroundType.CIRCLES
+    } else {
+        type
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -55,7 +70,7 @@ fun AnimatedBackground(
                 compositingStrategy = CompositingStrategy.Offscreen
             }
     ) {
-        when (type) {
+        when (effectiveType) {
             BackgroundType.CIRCLES -> CirclesBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
@@ -105,6 +120,8 @@ fun AnimatedBackground(
                 patchingCompleted = patchingCompleted
             )
             BackgroundType.NONE -> Unit
+            // effectiveType is never RANDOM (resolved above), but the branch is required for exhaustiveness
+            BackgroundType.RANDOM -> Unit
         }
     }
 }
