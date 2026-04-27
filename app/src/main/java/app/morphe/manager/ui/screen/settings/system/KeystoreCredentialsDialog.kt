@@ -10,16 +10,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FolderZip
 import androidx.compose.material.icons.outlined.Key
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -27,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.util.KeystoreInputFormat
 
 /**
  * Keystore Credentials Dialog.
@@ -35,10 +34,12 @@ import app.morphe.manager.ui.screen.shared.*
 @Composable
 fun KeystoreCredentialsDialog(
     onDismiss: () -> Unit,
-    onSubmit: (String, String) -> Unit
+    initialFormat: KeystoreInputFormat = KeystoreInputFormat.KEYSTORE,
+    onSubmit: (alias: String, password: String, format: KeystoreInputFormat) -> Unit
 ) {
     var alias by rememberSaveable { mutableStateOf("") }
     var pass by rememberSaveable { mutableStateOf("") }
+    var format by rememberSaveable(initialFormat) { mutableStateOf(initialFormat) }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -46,7 +47,7 @@ fun KeystoreCredentialsDialog(
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.settings_system_import_keystore_dialog_button),
-                onPrimaryClick = { onSubmit(alias, pass) },
+                onPrimaryClick = { onSubmit(alias, pass, format) },
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
@@ -64,6 +65,26 @@ fun KeystoreCredentialsDialog(
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center
+            )
+
+            // Format selector
+            val formatItems = remember {
+                KeystoreInputFormat.entries.associate { it.displayName to it.name }
+            }
+            MorpheDialogDropdownTextField(
+                value = format.name,
+                onValueChange = { name ->
+                    format = KeystoreInputFormat.entries.firstOrNull { it.name == name } ?: format
+                },
+                dropdownItems = formatItems,
+                label = { Text(stringResource(R.string.settings_system_import_keystore_dialog_format_field)) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.FolderZip,
+                        contentDescription = null,
+                        tint = textColor.copy(alpha = 0.7f)
+                    )
+                }
             )
 
             // Alias Input

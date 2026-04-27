@@ -2,7 +2,11 @@ package app.morphe.manager.ui.viewmodel
 
 import android.app.ActivityManager
 import android.app.Application
+import android.content.ContentValues
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -16,9 +20,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
-import app.morphe.manager.util.tag
-import app.morphe.manager.util.toast
-import app.morphe.manager.util.uiSafe
+import app.morphe.manager.util.*
 import com.github.pgreze.process.Redirect
 import com.github.pgreze.process.process
 import kotlinx.coroutines.CancellationException
@@ -27,17 +29,13 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.io.IOException
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
-import android.content.ContentValues
-import android.os.Build
 import java.io.BufferedWriter
-import java.util.Locale
-import android.os.Environment
-import android.provider.MediaStore
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -46,6 +44,7 @@ import java.nio.file.Path
 import java.nio.file.StandardCopyOption
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 import kotlin.io.path.deleteExisting
 import kotlin.io.path.inputStream
 
@@ -110,7 +109,9 @@ class ImportExportViewModel(
     private val contentResolver = app.contentResolver
 
     private var keystoreImportPath by mutableStateOf<Path?>(null)
+    private var keystoreImportFormat by mutableStateOf(KeystoreInputFormat.KEYSTORE)
     val showCredentialsDialog by derivedStateOf { keystoreImportPath != null }
+    val detectedKeystoreFormat: KeystoreInputFormat get() = keystoreImportFormat
 
     fun startKeystoreImport(content: Uri) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_import_keystore_failed, "Failed to import keystore") {
@@ -124,16 +125,33 @@ class ImportExportViewModel(
                 }
             }
 
-            // Try known aliases and passwords first
-            aliases.forEach { alias ->
-                knownPasswords.forEach { pass ->
-                    if (tryKeystoreImport(alias, pass, path)) {
-                        return@launch
+            // Detect format: magic bytes first (reliable), extension as fallback
+            val detectedFormat = withContext(Dispatchers.IO) {
+                val header = path.inputStream().use { stream ->
+                    val buf = ByteArray(4)
+                    stream.read(buf)
+                    buf
+                }
+                KeystoreInputFormat.detectFromBytes(header)
+            } ?: run {
+                val ext = content.lastPathSegment?.substringAfterLast('.')?.lowercase() ?: ""
+                KeystoreInputFormat.fromExtension(ext) ?: KeystoreInputFormat.PKCS12
+            }
+            keystoreImportFormat = detectedFormat
+
+            // Auto-detect failed to import - try all formats starting with the detected one.
+            // JKS is excluded: Android has no JKS security provider
+            val autoFormats = (listOf(detectedFormat) + (KeystoreInputFormat.entries - detectedFormat))
+                .filter { it != KeystoreInputFormat.JKS }
+            for (format in autoFormats) {
+                for (alias in aliases) {
+                    for (pass in knownPasswords) {
+                        if (tryKeystoreImport(alias, pass, format, path)) return@launch
                     }
                 }
             }
 
-            // If automatic import fails, prompt user for credentials
+            // Auto-import failed - ask the user for credentials
             keystoreImportPath = path
         }
     }
@@ -143,18 +161,34 @@ class ImportExportViewModel(
         keystoreImportPath = null
     }
 
-    suspend fun tryKeystoreImport(alias: String, pass: String): Boolean =
-        tryKeystoreImport(alias, pass, keystoreImportPath!!)
+    suspend fun tryKeystoreImport(alias: String, pass: String, format: KeystoreInputFormat): Boolean =
+        tryKeystoreImport(alias, pass, format, keystoreImportPath!!)
 
-    private suspend fun tryKeystoreImport(alias: String, pass: String, path: Path): Boolean {
-        path.inputStream().use { stream ->
-            if (keystoreManager.import(alias, pass, stream)) {
-                app.toast(app.getString(R.string.settings_system_import_keystore_success))
-                cancelKeystoreImport()
-                return true
+    private suspend fun tryKeystoreImport(alias: String, pass: String, format: KeystoreInputFormat, path: Path): Boolean {
+        // BKS is passed through as-is; converting it would re-encrypt the private key
+        // in a way that ApkSigner cannot read back
+        val bksBytes = if (format == KeystoreInputFormat.BKS || format == KeystoreInputFormat.KEYSTORE) {
+            withContext(Dispatchers.IO) { path.toFile().readBytes() }
+        } else {
+            val result = withContext(Dispatchers.IO) {
+                path.inputStream().use { KeystoreConversionUtils.convert(it, format, alias, pass) }
+            }
+            when (result) {
+                is KeystoreConversionResult.Error -> return false
+                is KeystoreConversionResult.Success -> result.data.toByteArray()
             }
         }
-        return false
+
+        return try {
+            val imported = keystoreManager.import(alias, pass, bksBytes.inputStream())
+            if (imported) {
+                app.toast(app.getString(R.string.settings_system_import_keystore_success))
+                cancelKeystoreImport()
+            }
+            imported
+        } catch (_: IOException) {
+            false
+        }
     }
 
     fun canExport() = keystoreManager.hasKeystore()
@@ -510,7 +544,7 @@ class ImportExportViewModel(
 
     /**
      * Exports debug logs to the Downloads folder.
-     * Used as a fallback on devices without DocumentsUI).
+     * Used as a fallback on devices without DocumentsUI.
      */
     fun exportDebugLogsToDownloads() = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_export_debug_logs_export_failed, "Failed to export debug logs to Downloads") {

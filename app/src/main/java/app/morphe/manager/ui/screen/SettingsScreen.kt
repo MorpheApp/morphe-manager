@@ -97,7 +97,6 @@ fun SettingsScreen(
 
     // Dialog states
     val showAboutDialog = rememberSaveable { mutableStateOf(false) }
-    val showKeystoreCredentialsDialog = rememberSaveable { mutableStateOf(false) }
     val showInstallerDialog = remember { mutableStateOf(false) }
     val showChangelogDialog = remember { mutableStateOf(false) }
 
@@ -123,29 +122,22 @@ fun SettingsScreen(
         contract = ActivityResultContracts.CreateDocument("text/plain")
     ) { uri -> uri?.let { importExportViewModel.exportDebugLogs(it) } }
 
-    // Show keystore credentials dialog when needed
-    LaunchedEffect(importExportViewModel.showCredentialsDialog) {
-        showKeystoreCredentialsDialog.value = importExportViewModel.showCredentialsDialog
-    }
-
     // Show about dialog
     if (showAboutDialog.value) {
         AboutDialog(onDismiss = { showAboutDialog.value = false })
     }
 
     // Show keystore credentials dialog
-    if (showKeystoreCredentialsDialog.value) {
+    if (importExportViewModel.showCredentialsDialog) {
         KeystoreCredentialsDialog(
             onDismiss = {
                 importExportViewModel.cancelKeystoreImport()
-                showKeystoreCredentialsDialog.value = false
             },
-            onSubmit = { alias, pass ->
+            initialFormat = importExportViewModel.detectedKeystoreFormat,
+            onSubmit = { alias, pass, format ->
                 coroutineScope.launch {
-                    val result = importExportViewModel.tryKeystoreImport(alias, pass)
-                    if (result) {
-                        showKeystoreCredentialsDialog.value = false
-                    } else {
+                    val result = importExportViewModel.tryKeystoreImport(alias, pass, format)
+                    if (!result) {
                         context.toast(context.getString(R.string.settings_system_import_keystore_wrong_credentials))
                     }
                 }
