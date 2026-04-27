@@ -18,11 +18,7 @@ import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
@@ -65,7 +61,6 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.net.URLEncoder.encode
 import java.security.MessageDigest
-import kotlin.collections.emptyList
 import kotlin.time.Clock
 
 /** Bundle update status for snackbar display. */
@@ -159,10 +154,6 @@ class HomeViewModel(
     private val contentResolver: ContentResolver = app.contentResolver
 
     /** Becomes true once the bundle repository has finished its initial DB load. */
-    private val isBundlePipelineLoaded: StateFlow<Boolean> =
-        patchBundleRepository.isBundlePipelineLoaded
-            .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
     /** Android 11 kills the app process after granting the "install apps" permission. */
     val android11BugActive get() = Build.VERSION.SDK_INT == Build.VERSION_CODES.R && !pm.canInstallPackages()
 
@@ -1040,15 +1031,6 @@ class HomeViewModel(
         patchBundleRepository.appMetadata
 
     /**
-     * Set of all unique package names that have patches across all enabled bundles.
-     * Derived from [bundleAppMetadataFlow] keys - no need to re-iterate all patches.
-     */
-    val patchablePackagesFlow: StateFlow<Set<String>> =
-        bundleAppMetadataFlow
-            .map { it.keys }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
-
-    /**
      * Combined flow that produces the sorted list of home app items.
      *
      * Sorting order by display name:
@@ -1057,13 +1039,17 @@ class HomeViewModel(
      * Hidden apps are excluded.
      */
     val homeAppState: StateFlow<HomeAppState?> = combine(
-        patchablePackagesFlow,
+        patchBundleRepository.bundleState,
         homeAppButtonPrefs.hiddenPackages,
         installedAppRepository.getAll(),
         _appUpdatesAvailable,
-        bundleAppMetadataFlow
-    ) { packages, hiddenPackages, installedApps, updatesMap, metadata ->
-        if (!isBundlePipelineLoaded.value) return@combine null
+    ) { bundleState, hiddenPackages, installedApps, updatesMap ->
+        val ready = bundleState as? PatchBundleRepository.BundleState.Ready
+            ?: return@combine null
+
+        val enabledInfo = ready.info.filter { (_, info) -> info.enabled }
+        val metadata = BundleAppMetadata.buildFrom(enabledInfo)
+        val packages = metadata.keys
 
         val installedMap = installedApps.associateBy { it.originalPackageName }
 
