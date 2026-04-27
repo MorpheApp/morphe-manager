@@ -1,3 +1,16 @@
+# [1.16.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.12...v1.16.0-dev.13) (2026-04-27)
+
+
+### Bug Fixes
+
+* Replace `isLoaded` flag with `BundleState` sealed class and simplify `homeAppState` ([72976d3](https://github.com/MorpheApp/morphe-manager/commit/72976d33aea02e3aad6639fe7ff1ec1f4d330a0c))
+
+
+### Features
+
+* Add random background mode with rotation interval ([2d12fbb](https://github.com/MorpheApp/morphe-manager/commit/2d12fbbb052c3fe1fae979db7ad1d13b83918da9))
+* Import keystore from `PKCS12`, `BKS` and `JKS` formats ([3f38387](https://github.com/MorpheApp/morphe-manager/commit/3f38387f515c351b5c4c248a9f682b46af03de85))
+
 # [1.16.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.11...v1.16.0-dev.12) (2026-04-26)
 
 
