@@ -1,3 +1,15 @@
+# [1.16.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.13...v1.16.0-dev.14) (2026-04-28)
+
+
+### Bug Fixes
+
+* File picker and export for Android TV ([#491](https://github.com/MorpheApp/morphe-manager/issues/491)) ([7c1cfba](https://github.com/MorpheApp/morphe-manager/commit/7c1cfba98ff4b2eb39aa0e8a6f14e028978f1f60))
+
+
+### Features
+
+* Add manual `JKS` parser for keystore import without BC provider dependency ([#494](https://github.com/MorpheApp/morphe-manager/issues/494)) ([ccc99a2](https://github.com/MorpheApp/morphe-manager/commit/ccc99a24b410dff2f04d8c74b8d0916b64d7d762))
+
 # [1.16.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.12...v1.16.0-dev.13) (2026-04-27)
 
 
