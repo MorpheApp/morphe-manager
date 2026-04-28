@@ -59,6 +59,8 @@ Everything happens locally. Morphe never uploads your APKs or personal data anyw
 - Expert mode also shows an expanded patching screen with real-time logs and live RAM usage monitoring during patching
 - 100+ patches for YouTube, YouTube Music, and Reddit
 - Support for split APKs
+- Skips split APK modules for unsupported CPU architectures, locales, and screen densities during merge
+- Strips native libraries for unsupported architectures from plain APKs after patching
 
 **Patch options** *(Simple mode: available in the Advanced tab; Expert mode: available on the patch selection screen)*
 - Custom app display name and header logo per app
@@ -91,6 +93,7 @@ Everything happens locally. Morphe never uploads your APKs or personal data anyw
 - Manage saved patch selections per app
 - GitHub Personal Access Token support for higher API rate limits
 - Process runtime - run patching in a separate process for better stability, with configurable memory limit
+- Bytecode processing mode - controls how bytecode is processed during patching, affecting patching speed, memory usage, and output APK size
 - Export debug logs for troubleshooting
 
 ## ❓ New to GitHub?
