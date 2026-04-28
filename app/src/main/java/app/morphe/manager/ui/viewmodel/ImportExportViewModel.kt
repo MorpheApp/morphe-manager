@@ -139,10 +139,8 @@ class ImportExportViewModel(
             }
             keystoreImportFormat = detectedFormat
 
-            // Auto-detect failed to import - try all formats starting with the detected one.
-            // JKS is excluded: Android has no JKS security provider
-            val autoFormats = (listOf(detectedFormat) + (KeystoreInputFormat.entries - detectedFormat))
-                .filter { it != KeystoreInputFormat.JKS }
+            // Try known aliases/passwords with all supported formats (detected format first)
+            val autoFormats = listOf(detectedFormat) + (KeystoreInputFormat.entries - detectedFormat)
             for (format in autoFormats) {
                 for (alias in aliases) {
                     for (pass in knownPasswords) {

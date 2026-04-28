@@ -7,7 +7,10 @@ package app.morphe.manager.util
 
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
+import java.security.KeyFactory
 import java.security.KeyStore
+import java.security.cert.CertificateFactory
+import java.security.spec.PKCS8EncodedKeySpec
 
 enum class KeystoreInputFormat(
     val displayName: String,
@@ -17,8 +20,6 @@ enum class KeystoreInputFormat(
     KEYSTORE(".keystore (BKS)", listOf("keystore"), "BKS"),
     BKS(".bks (BKS)", listOf("bks"), "BKS"),
     PKCS12(".p12 / .pfx (PKCS12)", listOf("p12", "pfx"), "PKCS12"),
-    // JKS is available in the manual dialog only - Android has no JKS security provider,
-    // so it cannot be used in the automatic import loop
     JKS(".jks (JKS)", listOf("jks"), "JKS");
 
     companion object {
@@ -76,6 +77,34 @@ object KeystoreConversionUtils {
     ): KeystoreConversionResult = runCatching {
         val pass = password.toCharArray()
 
+        // JKS requires manual parsing - Android's BC does not include JKSKeyStoreSpi.
+        // JksKeyStoreParser decrypts the key using Sun's proprietary XOR/SHA1 scheme
+        if (format == KeystoreInputFormat.JKS) {
+            val entries = JksKeyStoreParser.parse(inputStream, password)
+            check(entries.isNotEmpty()) { "No entries found in JKS keystore" }
+
+            val jksTarget = KeyStore.getInstance("BKS").apply { load(null, pass) }
+            val cf = CertificateFactory.getInstance("X.509")
+            val kf = KeyFactory.getInstance("RSA")
+
+            val filtered = if (alias.isBlank()) entries
+            else entries.filter { it.alias.equals(alias, ignoreCase = true) }
+                .ifEmpty { entries }
+
+            filtered.forEach { entry ->
+                val privateKey = kf.generatePrivate(PKCS8EncodedKeySpec(entry.privateKeyDer.toByteArray()))
+                val certs = entry.certificatesDer.map {
+                    cf.generateCertificate(it.toByteArray().inputStream())
+                }.toTypedArray()
+                jksTarget.setKeyEntry(entry.alias, privateKey, pass, certs)
+            }
+
+            val out = ByteArrayOutputStream()
+            jksTarget.store(out, pass)
+            return@runCatching KeystoreConversionResult.Success(out.toByteArray().toList())
+        }
+
+        // PKCS12 uses Android's default provider which handles it natively
         val source = KeyStore.getInstance(format.jcaType).apply { load(inputStream, pass) }
 
         val entriesToMigrate = if (alias.isBlank()) {
@@ -88,6 +117,7 @@ object KeystoreConversionUtils {
 
         check(entriesToMigrate.isNotEmpty()) { "No entries found in keystore" }
 
+        // Target BKS keystore using Android's default provider
         val target = KeyStore.getInstance("BKS").apply { load(null, pass) }
 
         for (entryAlias in entriesToMigrate) {
