@@ -124,6 +124,7 @@ object KnownApps {
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"
 const val JSON_MIMETYPE = "application/json"
 const val BIN_MIMETYPE  = "application/octet-stream"
+const val TEXT_MIMETYPE = "text/plain"
 const val MPP_MIMETYPE  = "application/vnd.ms-project"
 
 val APK_FILE_MIME_TYPES = arrayOf(
@@ -147,16 +148,10 @@ val APK_FILE_MIME_TYPES = arrayOf(
 //    "application/vnd.android.apks",
 //    "application/apks",
 )
-val APK_FILE_EXTENSIONS = setOf(
-    "apk",
-    "apkm",
-    "apks",
-    "xapk",
-    "zip"
-)
 
 val MPP_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
+    MPP_MIMETYPE,
 //    "application/x-zip-compressed"
     "*/*"
 )

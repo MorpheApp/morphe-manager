@@ -47,9 +47,7 @@ import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialogCont
 import app.morphe.manager.ui.screen.settings.system.KeystoreCredentialsDialog
 import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.viewmodel.*
-import app.morphe.manager.util.JSON_MIMETYPE
-import app.morphe.manager.util.canHandleCreateDocument
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -81,6 +79,7 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    val isTV = remember { context.isAndroidTv() }
 
     // Pager state for swipeable tabs
     val pagerState = rememberPagerState(
@@ -100,13 +99,15 @@ fun SettingsScreen(
     val showInstallerDialog = remember { mutableStateOf(false) }
     val showChangelogDialog = remember { mutableStateOf(false) }
 
-    // Import launchers
-    val importKeystoreLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    // Import pickers - GetContentWithChooser on phones, OpenDocument on Android TV
+    val importKeystoreLauncher = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf("*/*"),
+        chooserTitle = stringResource(R.string.settings_system_import_keystore)
     ) { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
 
-    val importSettingsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val importSettingsLauncher = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
+        chooserTitle = stringResource(R.string.settings_system_import_manager_settings)
     ) { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
 
     // Export launchers
@@ -119,7 +120,7 @@ fun SettingsScreen(
     ) { uri -> uri?.let { importExportViewModel.exportManagerSettings(it) } }
 
     val exportDebugLogsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("text/plain")
+        contract = ActivityResultContracts.CreateDocument(TEXT_MIMETYPE)
     ) { uri -> uri?.let { importExportViewModel.exportDebugLogs(it) } }
 
     // Show about dialog
@@ -192,19 +193,19 @@ fun SettingsScreen(
                     settingsViewModel = settingsViewModel,
                     onShowInstallerDialog = { showInstallerDialog.value = true },
                     importExportViewModel = importExportViewModel,
-                    onImportKeystore = { importKeystoreLauncher.launch("*/*") },
+                    onImportKeystore = { importKeystoreLauncher() },
                     onExportKeystore = {
-                        if (context.canHandleCreateDocument()) exportKeystoreLauncher.launch("Morphe.keystore")
-                        else importExportViewModel.exportKeystoreToDownloads()
+                        if (isTV) importExportViewModel.exportKeystoreToDownloads()
+                        else exportKeystoreLauncher.launch("Morphe.keystore")
                     },
-                    onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
+                    onImportSettings = { importSettingsLauncher() },
                     onExportSettings = {
-                        if (context.canHandleCreateDocument()) exportSettingsLauncher.launch("morphe_manager_settings.json")
-                        else importExportViewModel.exportManagerSettingsToDownloads()
+                        if (isTV) importExportViewModel.exportManagerSettingsToDownloads()
+                        else exportSettingsLauncher.launch("morphe_manager_settings.json")
                     },
                     onExportDebugLogs = {
-                        if (context.canHandleCreateDocument()) exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName)
-                        else importExportViewModel.exportDebugLogsToDownloads()
+                        if (isTV) importExportViewModel.exportDebugLogsToDownloads()
+                        else exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName)
                     },
                     onAboutClick = { showAboutDialog.value = true },
                     onChangelogClick = { showChangelogDialog.value = true }
