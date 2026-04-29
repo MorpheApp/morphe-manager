@@ -42,6 +42,7 @@ class InstalledAppInfoViewModel(
     private val filesystem: Filesystem by inject()
 
     lateinit var onBackClick: () -> Unit
+    var onAppStateChanged: ((packageName: String) -> Unit)? = null
 
     var installedApp: InstalledApp? by mutableStateOf(null)
         private set
@@ -135,10 +136,11 @@ class InstalledAppInfoViewModel(
                 viewModelScope.launch {
                     try {
                         ackpineInstaller.uninstall(app.currentPackageName)
-                        // Ackpine suspends until confirmed — refresh state after success
+                        // Ackpine suspends until confirmed - refresh state after success
                         refreshCurrentAppState()
+                        onAppStateChanged?.invoke(app.currentPackageName)
                     } catch (_: UninstallCancelledException) {
-                        // User dismissed dialog — do nothing
+                        // User dismissed dialog - do nothing
                     } catch (e: Exception) {
                         context.toast(context.getString(R.string.install_app_fail, e.simpleMessage()))
                     }
@@ -192,8 +194,8 @@ class InstalledAppInfoViewModel(
         hasSavedCopy = false
     }
 
-    fun updateInstallType(packageName: String, newInstallType: InstallType) = viewModelScope.launch {
-        val app = installedApp ?: return@launch
+    suspend fun updateInstallType(packageName: String, newInstallType: InstallType) {
+        val app = installedApp ?: return
         // Update in database
         withContext(Dispatchers.IO) {
             installedAppRepository.addOrUpdate(

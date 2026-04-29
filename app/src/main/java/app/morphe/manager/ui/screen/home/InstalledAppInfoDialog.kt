@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -46,9 +47,9 @@ import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
@@ -159,7 +160,10 @@ fun InstalledAppInfoDialog(
     }
 
     // Set back click handler
-    SideEffect { viewModel.onBackClick = onDismiss }
+    SideEffect {
+        viewModel.onBackClick = onDismiss
+        viewModel.onAppStateChanged = { pkg -> homeViewModel.notifyAppStateChanged(pkg) }
+    }
 
     // Handle install result
     LaunchedEffect(installState) {
@@ -174,6 +178,7 @@ fun InstalledAppInfoDialog(
                     else -> InstallType.DEFAULT
                 }
                 viewModel.updateInstallType(finalPackageName, newInstallType)
+                homeViewModel.notifyAppStateChanged(finalPackageName)
             }
             is InstallViewModel.InstallState.Error -> {
                 // Show error toast
@@ -322,7 +327,11 @@ fun InstalledAppInfoDialog(
                         verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        if (viewModel.isAppDeleted) {
+                        AnimatedVisibility(
+                            visible = viewModel.isAppDeleted,
+                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
+                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                        ) {
                             StaggeredItem(entered = entered.value, index = 1) {
                                 WarningBanner(
                                     icon = Icons.Outlined.Warning,
@@ -338,7 +347,11 @@ fun InstalledAppInfoDialog(
                                 )
                             }
                         }
-                        if (hasUpdate && !viewModel.isAppDeleted) {
+                        AnimatedVisibility(
+                            visible = hasUpdate && !viewModel.isAppDeleted,
+                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
+                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                        ) {
                             StaggeredItem(entered = entered.value, index = 2) {
                                 WarningBanner(
                                     icon = Icons.Outlined.Update,
@@ -371,7 +384,8 @@ fun InstalledAppInfoDialog(
                                 onShowMountWarning = { action ->
                                     pendingMountWarningAction.value = action
                                     showMountWarningDialog.value = true
-                                }
+                                },
+                                modifier = Modifier.animateContentSize(animationSpec = tween(220))
                             )
                         }
                         if (!viewModel.hasOriginalApk) {
@@ -410,10 +424,13 @@ fun InstalledAppInfoDialog(
                     var staggerIndex = 1
 
                     // Deleted app warning banner
-                    if (viewModel.isAppDeleted) {
-                        val idx = staggerIndex++
-                        item {
-                            StaggeredItem(entered = entered.value, index = idx) {
+                    item {
+                        AnimatedVisibility(
+                            visible = viewModel.isAppDeleted,
+                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
+                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                        ) {
+                            StaggeredItem(entered = entered.value, index = staggerIndex) {
                                 WarningBanner(
                                     icon = Icons.Outlined.Warning,
                                     title = stringResource(R.string.home_app_info_app_deleted_warning),
@@ -430,12 +447,16 @@ fun InstalledAppInfoDialog(
                             }
                         }
                     }
+                    if (viewModel.isAppDeleted) staggerIndex++
 
                     // Update available banner
-                    if (hasUpdate && !viewModel.isAppDeleted) {
-                        val idx = staggerIndex++
-                        item {
-                            StaggeredItem(entered = entered.value, index = idx) {
+                    item {
+                        AnimatedVisibility(
+                            visible = hasUpdate && !viewModel.isAppDeleted,
+                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
+                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                        ) {
+                            StaggeredItem(entered = entered.value, index = staggerIndex) {
                                 WarningBanner(
                                     icon = Icons.Outlined.Update,
                                     title = stringResource(R.string.home_app_info_patch_update_available),
@@ -452,6 +473,7 @@ fun InstalledAppInfoDialog(
                             }
                         }
                     }
+                    if (hasUpdate && !viewModel.isAppDeleted) staggerIndex++
 
                     // Info Section
                     val infoIdx = staggerIndex++
@@ -487,7 +509,9 @@ fun InstalledAppInfoDialog(
                                     pendingMountWarningAction.value = action
                                     showMountWarningDialog.value = true
                                 },
-                                modifier = Modifier.padding(horizontal = 20.dp)
+                                modifier = Modifier
+                                    .padding(horizontal = 20.dp)
+                                    .animateContentSize(animationSpec = tween(220))
                             )
                         }
                     }
@@ -1188,7 +1212,7 @@ private fun ActionsSection(
         )
     }
 
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Column(modifier = modifier.animateContentSize(animationSpec = tween(220)), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         // Primary actions row
         if (primaryActions.isNotEmpty()) {
             primaryActions.forEach { action ->

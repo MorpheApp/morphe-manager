@@ -15,6 +15,7 @@ import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.simpleMessage
 import app.morphe.manager.util.toast
@@ -37,6 +38,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private val ackpineInstaller: AckpineInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val prefs: PreferencesManager by inject()
+    private val appDataResolver: AppDataResolver by inject()
 
     /**
      * Current installation state.
@@ -839,6 +841,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         externalInstallTimeoutJob?.cancel()
         selectedInstallerToken = null
         installedPackageName = packageName
+        appDataResolver.invalidate(packageName)
         installState = InstallState.Installed(packageName)
     }
 

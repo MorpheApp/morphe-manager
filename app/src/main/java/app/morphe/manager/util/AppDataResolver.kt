@@ -66,6 +66,15 @@ class AppDataResolver(
     private val cache = ConcurrentHashMap<Pair<String, AppDataSource>, ResolvedAppData>()
 
     /**
+     * Invalidate cached data for a specific package.
+     * Call this after installation, uninstallation, or any state change
+     * that affects what source the package data comes from.
+     */
+    fun invalidate(packageName: String) {
+        cache.keys.removeAll { it.first == packageName }
+    }
+
+    /**
      * Resolve app data from any available source.
      *
      * Display name and icon are resolved **independently**:

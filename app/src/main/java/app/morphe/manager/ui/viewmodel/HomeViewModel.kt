@@ -396,6 +396,9 @@ class HomeViewModel(
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
     val appUpdatesAvailable: StateFlow<Map<String, Boolean>> = _appUpdatesAvailable.asStateFlow()
 
+    // Ticker to force homeAppState recomputation after install/uninstall without changing DB state
+    private val _appStateTicker = MutableStateFlow(0L)
+
     // Track when at least one third-party source is enabled
     val hasThirdPartySource: StateFlow<Boolean> =
         patchBundleRepository.sources
@@ -1043,7 +1046,8 @@ class HomeViewModel(
         homeAppButtonPrefs.hiddenPackages,
         installedAppRepository.getAll(),
         _appUpdatesAvailable,
-    ) { bundleState, hiddenPackages, installedApps, updatesMap ->
+        _appStateTicker,
+    ) { bundleState, hiddenPackages, installedApps, updatesMap, _ ->
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return@combine null
 
@@ -1118,6 +1122,15 @@ class HomeViewModel(
      */
     fun markSwipeGestureHintShown() {
         showSwipeGestureHint.value = false
+    }
+
+    /**
+     * Invalidates AppDataResolver cache for [packageName] and forces homeAppState recomputation.
+     * Call this after any install/uninstall operation that doesn't change the DB record.
+     */
+    fun notifyAppStateChanged(packageName: String) {
+        appDataResolver.invalidate(packageName)
+        _appStateTicker.value = System.currentTimeMillis()
     }
 
     /**
