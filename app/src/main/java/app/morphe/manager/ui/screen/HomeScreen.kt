@@ -40,6 +40,7 @@ import org.koin.core.parameter.parametersOf
 fun HomeScreen(
     onSettingsClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
+    onNavigateToAppInfo: (packageName: String) -> Unit,
     homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
@@ -113,6 +114,10 @@ fun HomeScreen(
         mimeTypes = APK_FILE_MIME_TYPES,
         chooserTitle = stringResource(R.string.home_select_apk_title)
     ) { uri -> uri?.let { homeViewModel.handleApkSelection(it) } }
+
+    SideEffect {
+        homeViewModel.storagePickerLauncher = { openApkPicker() }
+    }
 
     val openBundlePicker = rememberAdaptiveFilePicker(
         mimeTypes = MPP_FILE_MIME_TYPES,
@@ -208,7 +213,7 @@ fun HomeScreen(
                         installedApp = item.installedApp
                     )
                     item.installedApp?.let {
-                        homeViewModel.openInstalledAppInfo(it.currentPackageName)
+                        onNavigateToAppInfo(it.currentPackageName)
                     }
                 },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },

@@ -28,25 +28,24 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
 import app.morphe.manager.util.isDarkBackground
+import kotlinx.coroutines.delay
 
-/**
- * CompositionLocal for dialog text colors
- */
+/** * CompositionLocal for dialog text colors. */
 val LocalDialogTextColor = compositionLocalOf { Color.White }
 val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }
 
 /**
- * Unified fullscreen dialog component for Morphe UI
+ * Unified fullscreen dialog component for Morphe UI.
  *
- * @param onDismissRequest Called when user dismisses the dialog
- * @param title Optional title displayed at the top
- * @param titleTrailingContent Optional content displayed after the title (e.g., reset button)
- * @param footer Optional footer content (typically buttons)
- * @param dismissOnClickOutside Whether clicking outside dismisses the dialog
+ * @param onDismissRequest Called when user dismisses the dialog.
+ * @param title Optional title displayed at the top.
+ * @param titleTrailingContent Optional content displayed after the title.
+ * @param footer Optional footer content (typically buttons).
+ * @param dismissOnClickOutside Whether clicking outside dismisses the dialog.
  * @param scrollable Whether to wrap content in verticalScroll. Set to false for LazyColumn. Default is true.
  * @param compactPadding Whether to use compact padding. Default is false.
  * @param noPadding Whether to remove all padding and system bar insets. Default is false.
- * @param content Dialog content
+ * @param content Dialog content.
  */
 @Composable
 fun MorpheDialog(
@@ -65,10 +64,14 @@ fun MorpheDialog(
     var visible by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
+        // Wait one frame so Compose completes the initial layout pass of the dialog
+        // content before the animation starts. Without this, the Dialog() window
+        // creation and first composition happen in the same frame as the animation,
+        // causing a visible freeze/jank on the first frame
+        withFrameNanos { }
         visible = true
-        // Notify caller once the enter animation has completed
         if (onEntered != null) {
-            kotlinx.coroutines.delay(MorpheDefaults.ANIMATION_DURATION.toLong())
+            delay(MorpheDefaults.ANIMATION_DURATION.toLong())
             onEntered()
         }
     }
@@ -136,7 +139,7 @@ fun MorpheDialog(
 }
 
 /**
- * Main dialog content area
+ * Main dialog content area.
  */
 @Composable
 private fun DialogContent(

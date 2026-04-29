@@ -17,6 +17,9 @@ object HomeScreen
 object Settings
 
 @Serializable
+data class InstalledAppInfo(val packageName: String)
+
+@Serializable
 data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
     @Parcelize
     data class ViewModelParams(

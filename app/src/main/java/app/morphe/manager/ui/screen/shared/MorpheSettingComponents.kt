@@ -44,7 +44,7 @@ object MorpheDefaults {
     val SettingsCornerRadius = 14.dp
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
-    const val ANIMATION_DURATION = 300
+    const val ANIMATION_DURATION = 220
     val ContentPadding = 16.dp
     val ItemSpacing = 12.dp
 }

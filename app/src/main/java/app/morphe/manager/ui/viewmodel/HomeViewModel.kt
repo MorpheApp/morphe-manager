@@ -167,21 +167,6 @@ class HomeViewModel(
     var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
     var showRenameBundleDialog by mutableStateOf(false)
 
-    // Installed App Info dialog state
-    var showInstalledAppInfoDialog: String? by mutableStateOf(null)
-        private set
-    var installedAppDialogToken by mutableIntStateOf(0)
-        private set
-
-    fun openInstalledAppInfo(packageName: String) {
-        showInstalledAppInfoDialog = packageName
-        installedAppDialogToken++
-    }
-
-    fun dismissInstalledAppInfo() {
-        showInstalledAppInfoDialog = null
-    }
-
     // Deep link: pending bundle to add via confirmation dialog
     var deepLinkPendingBundle by mutableStateOf<DeepLinkBundle?>(null)
         private set
@@ -396,7 +381,8 @@ class HomeViewModel(
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, Boolean>>(emptyMap())
     val appUpdatesAvailable: StateFlow<Map<String, Boolean>> = _appUpdatesAvailable.asStateFlow()
 
-    // Ticker to force homeAppState recomputation after install/uninstall without changing DB state
+    // Ticker to force homeAppState recomputation after install/uninstall
+    // without changing DB state (e.g. app removed from device but record remains)
     private val _appStateTicker = MutableStateFlow(0L)
 
     // Track when at least one third-party source is enabled
@@ -581,6 +567,7 @@ class HomeViewModel(
 
     // Callback for starting patch
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
+    var storagePickerLauncher: (() -> Unit)? = null
 
     init {
         triggerUpdateCheck()
@@ -1126,7 +1113,8 @@ class HomeViewModel(
 
     /**
      * Invalidates AppDataResolver cache for [packageName] and forces homeAppState recomputation.
-     * Call this after any install/uninstall operation that doesn't change the DB record.
+     * Call this after any install/uninstall operation that doesn't change the DB record
+     * (e.g. system uninstall where the InstalledApp row remains but the app is no longer present).
      */
     fun notifyAppStateChanged(packageName: String) {
         appDataResolver.invalidate(packageName)
