@@ -15,7 +15,7 @@
 
     <string name="deep_link_add_source_title">Add source</string>
     <string name="deep_link_add_source_message">Do you want to add this patch source to Morphe?</string>
-    <string name="deep_link_add_source_warning">Only add source from sources you trust</string>
+    <string name="deep_link_add_source_warning">Only add sources you trust</string>
 
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe update available</string>
