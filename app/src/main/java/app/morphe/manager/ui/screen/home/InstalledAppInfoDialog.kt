@@ -48,6 +48,7 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
@@ -190,6 +191,22 @@ fun InstalledAppInfoDialog(
             onRetry = installViewModel::retryWithPreferredInstaller,
             onUseFallback = installViewModel::proceedWithFallbackInstaller,
             onDismiss = installViewModel::dismissInstallerUnavailableDialog
+        )
+    }
+
+    // Installer selection dialog (shown when promptInstallerOnInstall is enabled)
+    if (installViewModel.showInstallerSelectionDialog) {
+        val options = remember { installViewModel.getInstallerOptions() }
+        val primaryToken = remember { installViewModel.getPrimaryInstallerToken() }
+        InstallerSelectionDialog(
+            title = stringResource(R.string.installer_title),
+            options = options,
+            selected = primaryToken,
+            onDismiss = installViewModel::dismissInstallerSelectionDialog,
+            onConfirm = { token ->
+                installViewModel.proceedWithSelectedInstaller(token)
+            },
+            onOpenShizuku = installViewModel::openShizukuApp
         )
     }
 
@@ -1044,8 +1061,14 @@ private fun ActionsSection(
         )
     }
 
-    when (installedApp.installType) {
-        InstallType.SAVED -> if (viewModel.hasSavedCopy) {
+    // Show install/reinstall from saved copy when:
+    // - installType is SAVED (normal saved app flow), or
+    // - app was deleted from device but a saved patched APK still exists
+    val showInstallFromSaved = viewModel.hasSavedCopy &&
+            (installedApp.installType == InstallType.SAVED || viewModel.isAppDeleted)
+
+    when {
+        showInstallFromSaved -> {
             val installText = if (viewModel.isInstalledOnDevice) {
                 stringResource(R.string.reinstall)
             } else {
@@ -1087,6 +1110,11 @@ private fun ActionsSection(
                 )
             )
         }
+        installedApp.installType == InstallType.SAVED -> Unit // hasSavedCopy is false, nothing to show
+        else -> Unit
+    }
+
+    when (installedApp.installType) {
         InstallType.MOUNT -> {
             val isMountLoading = mountOperation != null
             if (viewModel.isMounted) {

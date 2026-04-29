@@ -229,7 +229,7 @@ class SettingsViewModel(
         token: InstallerManager.Token,
     ): List<InstallerManager.Entry> {
         val raw = installerManager.listEntries(installTarget, includeNone = false)
-        return ensureValidEntries(raw, token, installerManager, installTarget)
+        return installerManager.ensureValidEntries(raw, token, installTarget)
     }
 
     fun parseInstallerToken(preference: String): InstallerManager.Token =
@@ -316,46 +316,6 @@ class SettingsViewModel(
         }
 
     companion object {
-        /**
-         * Builds a deduplicated list of [InstallerManager.Entry] objects, guaranteeing
-         * that the currently-preferred [token] is always included even if the live
-         * [installerManager] does not enumerate it.
-         */
-        fun ensureValidEntries(
-            entries: List<InstallerManager.Entry>,
-            token: InstallerManager.Token,
-            installerManager: InstallerManager,
-            installTarget: InstallerManager.InstallTarget,
-        ): List<InstallerManager.Entry> {
-            // Remove duplicates based on component name for Component tokens
-            val normalized = buildList {
-                val seen = mutableSetOf<Any>()
-                entries.forEach { entry ->
-                    val key = when (val entryToken = entry.token) {
-                        is InstallerManager.Token.Component -> entryToken.componentName
-                        else -> entryToken
-                    }
-                    if (seen.add(key)) add(entry)
-                }
-            }
-
-            val tokenExists = token == InstallerManager.Token.Internal ||
-                    token == InstallerManager.Token.AutoSaved ||
-                    normalized.any { tokensEqual(it.token, token) }
-
-            return if (tokenExists) normalized
-            else installerManager.describeEntry(token, installTarget)
-                ?.let { normalized + it } ?: normalized
-        }
-
-        fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?): Boolean = when {
-            a === b -> true
-            a == null || b == null -> false
-            a is InstallerManager.Token.Component && b is InstallerManager.Token.Component ->
-                a.componentName == b.componentName
-            else -> false
-        }
-
         fun parseJsonValue(jsonString: String): Any? = try {
             val json = Json { ignoreUnknownKeys = true }
             when (val element = json.parseToJsonElement(jsonString)) {

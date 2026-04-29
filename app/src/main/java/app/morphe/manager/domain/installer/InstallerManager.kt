@@ -1,6 +1,7 @@
 package app.morphe.manager.domain.installer
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.ClipData
 import android.content.ComponentName
@@ -225,6 +226,7 @@ class InstallerManager(
                     val uri = InstallerFileProvider.getUriForFile(app, sourceFile)
                     val intent = Intent(Intent.ACTION_VIEW).apply {
                         setDataAndType(uri, APK_MIME)
+                        @SuppressLint("WrongConstant")
                         addFlags(
                             Intent.FLAG_GRANT_READ_URI_PERMISSION or
                                     Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
@@ -236,6 +238,7 @@ class InstallerManager(
                         putExtra(Intent.EXTRA_INSTALLER_PACKAGE_NAME, app.packageName)
                         component = token.componentName
                     }
+                    @SuppressLint("WrongConstant")
                     app.grantUriPermission(
                         token.componentName.packageName,
                         uri,
@@ -513,6 +516,32 @@ class InstallerManager(
     }
 
     fun openShizukuApp(): Boolean = ackpineInstaller.launchShizukuApp()
+
+    /**
+     * Returns a deduplicated list of entries for [target], ensuring [token] is always present
+     * even if it's not in the raw list (e.g. a previously selected external installer).
+     */
+    fun ensureValidEntries(
+        entries: List<Entry>,
+        token: Token,
+        target: InstallTarget
+    ): List<Entry> {
+        val normalized = buildList {
+            val seen = mutableSetOf<Any>()
+            entries.forEach { entry ->
+                val key = when (val t = entry.token) {
+                    is Token.Component -> t.componentName
+                    else -> t
+                }
+                if (seen.add(key)) add(entry)
+            }
+        }
+        val tokenExists = token == Token.Internal ||
+                token == Token.AutoSaved ||
+                normalized.any { tokensEqual(it.token, token) }
+        return if (tokenExists) normalized
+        else describeEntry(token, target)?.let { normalized + it } ?: normalized
+    }
 }
 
 private fun InstallerManager.Token.describe(): String = when (this) {

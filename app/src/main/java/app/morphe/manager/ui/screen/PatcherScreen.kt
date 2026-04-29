@@ -44,7 +44,6 @@ import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDial
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
-import app.morphe.manager.ui.viewmodel.SettingsViewModel.Companion.ensureValidEntries
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
 import app.morphe.manager.util.tag
@@ -342,10 +341,9 @@ fun PatcherScreen(
         // Installer entries with periodic updates
         var options by remember(primaryToken) {
             mutableStateOf(
-                ensureValidEntries(
+                installerManager.ensureValidEntries(
                     installerManager.listEntries(installTarget, includeNone = false),
                     primaryToken,
-                    installerManager,
                     installTarget
                 )
             )
@@ -354,10 +352,9 @@ fun PatcherScreen(
         // Periodically update installer list for availability changes
         LaunchedEffect(installTarget, primaryToken) {
             while (isActive) {
-                options = ensureValidEntries(
+                options = installerManager.ensureValidEntries(
                     installerManager.listEntries(installTarget, includeNone = false),
                     primaryToken,
-                    installerManager,
                     installTarget
                 )
                 delay(1_500)

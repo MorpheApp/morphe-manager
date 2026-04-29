@@ -820,6 +820,21 @@ class InstallViewModel : ViewModel(), KoinComponent {
         installedPackageName?.let { pm.launch(it) }
     }
 
+    /**
+     * Returns installer entries for the one-time selection dialog shown during install.
+     * Mirrors the logic in SettingsViewModel but scoped to PATCHER target only.
+     */
+    fun getInstallerOptions(): List<InstallerManager.Entry> {
+        val token = installerManager.getPrimaryToken()
+        val raw = installerManager.listEntries(InstallerManager.InstallTarget.PATCHER, includeNone = false)
+        return installerManager.ensureValidEntries(raw, token, InstallerManager.InstallTarget.PATCHER)
+    }
+
+    fun getPrimaryInstallerToken(): InstallerManager.Token =
+        installerManager.getPrimaryToken()
+
+    fun openShizukuApp(): Boolean = installerManager.openShizukuApp()
+
     private fun handleInstallSuccess(packageName: String) {
         externalInstallTimeoutJob?.cancel()
         selectedInstallerToken = null
