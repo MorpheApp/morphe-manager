@@ -78,9 +78,9 @@ class PreferencesManager(
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
     val useProcessRuntime = booleanPreference(
-        "use_process_runtime",
-        // Use process runtime fails for Android 10 and lower.
-        // Armv7 silently fails and nobody has researched why yet.
+        "process_runtime", // Old key was 'use_process_runtime' and may have the wrong default for some devices.
+        // Process runtime fails for Android 10 and lower.
+        // Armv7 silently fails and nobody has researched why.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
