@@ -28,7 +28,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.luminance
@@ -291,7 +290,8 @@ fun InstalledAppInfoDialog(
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
-                            .fillMaxHeight(),
+                            .fillMaxHeight()
+                            .padding(start = 20.dp),
                         contentPadding = PaddingValues(bottom = 24.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
@@ -302,6 +302,7 @@ fun InstalledAppInfoDialog(
                                 installedApp = installedApp,
                                 accentColor = appAccentColor,
                                 compact = true,
+                                modifier = Modifier.clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
                             )
                         }
                         item {
@@ -406,7 +407,7 @@ fun InstalledAppInfoDialog(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(bottom = 24.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     // Hero header
                     item(contentType = "hero") {
@@ -415,6 +416,7 @@ fun InstalledAppInfoDialog(
                             packageName = packageName,
                             installedApp = installedApp,
                             accentColor = appAccentColor,
+                            modifier = Modifier.clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
                         )
                     }
 
@@ -634,8 +636,8 @@ private fun AppHeroHeader(
     val iconSize = if (compact) 56.dp else 88.dp
     val iconCorner = if (compact) 14.dp else 22.dp
     val topPadding = if (compact) 8.dp else 12.dp
-    val bottomPadding = if (compact) 10.dp else 16.dp
-    val chipSpacerHeight = if (compact) 8.dp else 14.dp
+    val bottomPadding = 10.dp
+    val chipSpacerHeight = 8.dp
 
     // Entrance animations (progress-based: 0f -> 1f).
     // One Float per visual group; alpha, offset and scale are derived via lerp
@@ -665,27 +667,12 @@ private fun AppHeroHeader(
     )
 
     Box(modifier = modifier.fillMaxWidth()) {
-        // Simple tinted background
+        // Flat tinted background
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .matchParentSize()
-                .background(accentColor.copy(alpha = 0.12f))
-        )
-        // Radial glow from center-top for depth
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .matchParentSize()
-                .background(
-                    Brush.radialGradient(
-                        colors = listOf(
-                            accentColor.copy(alpha = 0.18f),
-                            Color.Transparent
-                        ),
-                        radius = 700f
-                    )
-                )
+                .background(accentColor.copy(alpha = 0.15f))
         )
 
         Column(
@@ -903,7 +890,8 @@ private fun InfoSection(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = 20.dp)
+            .padding(bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         InfoRow(
@@ -1275,23 +1263,28 @@ private fun PrimaryActionButton(
     accentColor: Color,
     modifier: Modifier = Modifier
 ) {
-    val dialogBg = MaterialTheme.colorScheme.surface
-    val safeAccent = accentColor.ensureContrast(dialogBg)
-    val onAccent = if (safeAccent.luminance() > 0.35f) Color(0xFF1A1A1A) else Color.White
+    // Match the header background level: tinted surface instead of full accent
+    val isExtremeAccent = accentColor.luminance() !in 0.04f..0.92f
+    val buttonColor = if (isExtremeAccent) {
+        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f)
+    } else {
+        accentColor.copy(alpha = 0.18f)
+    }
+    val contentColor = MaterialTheme.colorScheme.onSurface
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
         modifier = modifier.height(56.dp),
         shape = RoundedCornerShape(16.dp),
-        color = safeAccent,
-        contentColor = onAccent
+        color = buttonColor,
+        contentColor = contentColor
     ) {
         Row(
             modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            LoadingOrIcon(action.isLoading, action, onAccent)
+            LoadingOrIcon(action.isLoading, action, contentColor)
             Spacer(Modifier.width(10.dp))
             Text(
                 text = action.text,
