@@ -76,8 +76,12 @@ fun InstalledAppInfoDialog(
     onDismiss: () -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
+    // Token is included in the koin key so that each new opening of the dialog
+    // creates a fresh ViewModel instance - preventing stale state from a previously
+    // uninstalled app from leaking into a subsequent dialog for a different app.
+    dialogToken: Int = 0,
     viewModel: InstalledAppInfoViewModel = koinViewModel(
-        key = packageName,
+        key = "$packageName:$dialogToken",
         parameters = { parametersOf(packageName) }
     ),
     installViewModel: InstallViewModel = koinViewModel()
@@ -422,7 +426,7 @@ fun InstalledAppInfoDialog(
                     // Stagger index counter: hero header is index 0 (animated independently).
                     // Banner item always occupies index 1 (permanent item, AnimatedVisibility
                     // controls visibility) so subsequent indices are stable regardless of
-                    // banner state — avoiding LazyColumn position-key conflicts
+                    // banner state - avoiding LazyColumn position-key conflicts
                     var staggerIndex = 2
 
                     // Warning banners (deleted / update)

@@ -316,7 +316,8 @@ fun HomeDialogs(
                     homeViewModel.dismissInstalledAppInfo()
                     homeViewModel.showPatchDialog(originalPackageName)
                 },
-                homeViewModel = homeViewModel
+                homeViewModel = homeViewModel,
+                dialogToken = homeViewModel.installedAppDialogToken
             )
         }
     }
@@ -1298,7 +1299,7 @@ private fun NoCompatibleVersionsDialog(
  * Experimental versions are always labeled regardless of selection state.
  * Versions whose [AppTarget.minSdk] exceeds the current device SDK are shown greyed-out
  * and cannot be selected.
-*/
+ */
 @Composable
 private fun SelectableVersionListCard(
     modifier: Modifier = Modifier,
