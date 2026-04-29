@@ -1,3 +1,11 @@
+# [1.16.0-dev.15](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.14...v1.16.0-dev.15) (2026-04-29)
+
+
+### Bug Fixes
+
+* Show reinstall button and installer dialog for deleted apps ([472d046](https://github.com/MorpheApp/morphe-manager/commit/472d0462959235a90c0033129f87dd22a7af621d))
+* Update home screen cards immediately after install/uninstall ([8f671bd](https://github.com/MorpheApp/morphe-manager/commit/8f671bdc350e1daa576640e13bbd778d78382f73))
+
 # [1.16.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.13...v1.16.0-dev.14) (2026-04-28)
 
 
