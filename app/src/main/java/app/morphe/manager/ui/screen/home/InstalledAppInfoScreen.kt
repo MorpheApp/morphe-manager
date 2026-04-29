@@ -50,6 +50,7 @@ import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import java.io.File
@@ -114,8 +115,25 @@ fun InstalledAppInfoScreen(
 
     // Content entrance animation
     val entered = remember { mutableStateOf(false) }
-    var visible by remember { mutableStateOf(false) }
-    val animatedOnDismiss: () -> Unit = { visible = false }
+    var targetVisibility by remember { mutableFloatStateOf(0f) }
+    // When transitioning to ApkAvailabilityDialog, keep the screen fully opaque until
+    // the dialog has faded in, then remove it - prevents a flash of the background
+    var isPatchTransition by remember { mutableStateOf(false) }
+
+    val screenAlpha by animateFloatAsState(
+        targetValue = targetVisibility,
+        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION, easing = LinearOutSlowInEasing),
+        label = "screenAlpha"
+    )
+    val screenScale by animateFloatAsState(
+        targetValue = if (targetVisibility == 1f) 1f else MorpheDefaults.DIALOG_SCALE,
+        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing),
+        label = "screenScale"
+    )
+
+    val animatedOnDismiss: () -> Unit = {
+        if (!isPatchTransition) targetVisibility = 0f
+    }
 
     // Bundle data
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
@@ -255,18 +273,17 @@ fun InstalledAppInfoScreen(
         }
     )
 
-    // Patch flow: close this screen immediately (exit animation as visual feedback),
-    // ApkAvailabilityDialog fades in from MorpheManager level once data is ready
+    // Patch flow: close this screen immediately, ApkAvailabilityDialog fades in from main level once data is ready
     fun handlePatchClick() {
         val originalPackageName = viewModel.installedApp?.originalPackageName ?: return
+        isPatchTransition = true
         animatedOnDismiss()
         onTriggerPatchFlow(originalPackageName)
     }
 
     // Trigger enter animation on first composition
     LaunchedEffect(Unit) {
-        visible = true
-        // entered is triggered separately once content is loaded (see below)
+        targetVisibility = 1f
     }
 
     // Wait one frame after content enters composition before triggering stagger,
@@ -278,27 +295,33 @@ fun InstalledAppInfoScreen(
         }
     }
 
-    // Dismiss: wait for exit animation then call onDismiss
-    LaunchedEffect(visible) {
-        if (!visible) {
-            if (homeViewModel.showApkAvailabilityDialog) {
-                // Wait until the dialog overlay has had at least one frame to render
-                withFrameNanos { }
-                withFrameNanos { }
-            } else {
-                delay(220)
-            }
+    // For normal back-dismiss: wait for the exit animation, then remove the overlay.
+    // For patch transition: showPatchDialogInternal is async (IO), so we wait for
+    // showApkAvailabilityDialog to become true, then wait for its fadeIn to finish
+    // before removing this screen - ensuring the background never shows through
+    LaunchedEffect(isPatchTransition, targetVisibility) {
+        if (isPatchTransition) {
+            snapshotFlow { homeViewModel.showApkAvailabilityDialog }.first { it }
+            delay(MorpheDefaults.ANIMATION_DURATION.toLong())
+            onDismiss()
+        } else if (targetVisibility == 0f) {
+            delay(MorpheDefaults.ANIMATION_DURATION.toLong())
             onDismiss()
         }
     }
 
-    // Main Screen content with slide-down dismiss animation
-    AnimatedVisibility(
-        visible = visible,
-        enter = fadeIn(animationSpec = tween(320)) +
-                scaleIn(initialScale = 0.95f, animationSpec = tween(320, easing = FastOutSlowInEasing)),
-        exit = fadeOut(animationSpec = tween(220)) +
-                scaleOut(targetScale = 0.95f, animationSpec = tween(220, easing = FastOutSlowInEasing))
+    // Screen content. Visibility is driven by graphicsLayer alpha/scale so we retain
+    // full control over when the composable leaves the tree (via onDismiss), regardless
+    // of animation state. This is critical for the patch transition where the screen must
+    // stay in the tree - fully opaque - until ApkAvailabilityDialog covers it
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .graphicsLayer {
+                alpha = screenAlpha
+                scaleX = screenScale
+                scaleY = screenScale
+            }
     ) {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -355,8 +378,10 @@ fun InstalledAppInfoScreen(
                         ) {
                             AnimatedVisibility(
                                 visible = viewModel.isAppDeleted,
-                                enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                                exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION))
+                                        + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
+                                        + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
                             ) {
                                 StaggeredItem(entered = entered.value, index = 1) {
                                     WarningBanner(
@@ -374,8 +399,10 @@ fun InstalledAppInfoScreen(
                             }
                             AnimatedVisibility(
                                 visible = hasUpdate && !viewModel.isAppDeleted,
-                                enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                                exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION))
+                                        + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
+                                        + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
                             ) {
                                 StaggeredItem(entered = entered.value, index = 2) {
                                     WarningBanner(
@@ -409,7 +436,7 @@ fun InstalledAppInfoScreen(
                                         pendingMountWarningAction.value = action
                                         showMountWarningDialog.value = true
                                     },
-                                    modifier = Modifier.animateContentSize(animationSpec = tween(220))
+                                    modifier = Modifier.animateContentSize(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION))
                                 )
                             }
                             if (!viewModel.hasOriginalApk) {
@@ -453,8 +480,10 @@ fun InstalledAppInfoScreen(
                             Column {
                                 androidx.compose.animation.AnimatedVisibility(
                                     visible = viewModel.isAppDeleted,
-                                    enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                                    exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION))
+                                            + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
+                                            + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
                                 ) {
                                     Column {
                                         Spacer(Modifier.height(12.dp))
@@ -476,8 +505,10 @@ fun InstalledAppInfoScreen(
                                 }
                                 androidx.compose.animation.AnimatedVisibility(
                                     visible = hasUpdate && !viewModel.isAppDeleted,
-                                    enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                                    exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION))
+                                            + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+                                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
+                                            + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
                                 ) {
                                     Column {
                                         Spacer(Modifier.height(12.dp))
@@ -539,7 +570,7 @@ fun InstalledAppInfoScreen(
                                     modifier = Modifier
                                         .padding(horizontal = 20.dp)
                                         .padding(top = 12.dp)
-                                        .animateContentSize(animationSpec = tween(220))
+                                        .animateContentSize(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION))
                                 )
                             }
                         }
@@ -568,8 +599,8 @@ fun InstalledAppInfoScreen(
                     }
                 }
             }
-        } // Surface
-    } // AnimatedVisibility
+        }
+    }
 }
 
 /**
@@ -1226,7 +1257,10 @@ private fun ActionsSection(
         )
     }
 
-    Column(modifier = modifier.animateContentSize(animationSpec = tween(220)), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Column(modifier = modifier.animateContentSize(
+        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
         // Primary actions row
         if (primaryActions.isNotEmpty()) {
             primaryActions.forEach { action ->

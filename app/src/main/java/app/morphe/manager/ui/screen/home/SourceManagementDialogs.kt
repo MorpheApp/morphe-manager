@@ -574,8 +574,8 @@ fun BundlePatchesDialog(
                     Column {
                         AnimatedVisibility(
                             visible = selectedPackages.isNotEmpty(),
-                            enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                            exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
                         ) {
                             FlowRow(
                                 modifier = Modifier.padding(bottom = 4.dp),
@@ -601,8 +601,8 @@ fun BundlePatchesDialog(
 
                         AnimatedVisibility(
                             visible = filteredPatches.isEmpty(),
-                            enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(tween(MorpheDefaults.ANIMATION_DURATION), initialScale = 0.92f),
-                            exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(tween(MorpheDefaults.ANIMATION_DURATION), targetScale = 0.92f)
+                            enter = MorpheAnimations.fadeScaleIn,
+                            exit = MorpheAnimations.fadeScaleOut
                         ) {
                             Box(
                                 modifier = Modifier
@@ -921,8 +921,8 @@ fun PatchItemCard(
             if (!patch.options.isNullOrEmpty()) {
                 AnimatedVisibility(
                     visible = expandOptions,
-                    enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                    exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                    enter = MorpheAnimations.expandFadeEnter,
+                    exit = MorpheAnimations.shrinkFadeExit
                 ) {
                     Column(
                         modifier = Modifier.padding(top = 4.dp),

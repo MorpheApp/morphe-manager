@@ -10,7 +10,6 @@ import android.os.Build
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
@@ -72,7 +71,7 @@ fun HomeDialogs(
     // Dialog 2: Download instructions
     AnimatedVisibility(
         visible = homeViewModel.showDownloadInstructionsDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+        enter = MorpheAnimations.overlayEnter,
         exit = fadeOut(tween(if (homeViewModel.showFilePickerPromptDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
     ) {
         val usingMountInstall = homeViewModel.usingMountInstall
@@ -114,8 +113,8 @@ fun HomeDialogs(
     // Dialog 3: File picker prompt
     AnimatedVisibility(
         visible = homeViewModel.showFilePickerPromptDialog && homeViewModel.pendingAppName != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val isOtherApps = homeViewModel.pendingPackageName == null
@@ -137,8 +136,8 @@ fun HomeDialogs(
     // Unsupported version dialog
     AnimatedVisibility(
         visible = homeViewModel.showUnsupportedVersionDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val dialogState = homeViewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
@@ -165,8 +164,8 @@ fun HomeDialogs(
     // Experimental version warning dialog
     AnimatedVisibility(
         visible = homeViewModel.showExperimentalVersionDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val dialogState = homeViewModel.showExperimentalVersionDialog ?: return@AnimatedVisibility
 
@@ -180,8 +179,8 @@ fun HomeDialogs(
     // Wrong package dialog
     AnimatedVisibility(
         visible = homeViewModel.showWrongPackageDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val dialogState = homeViewModel.showWrongPackageDialog ?: return@AnimatedVisibility
 
@@ -195,8 +194,8 @@ fun HomeDialogs(
     // No compatible versions dialog - shown when every declared version requires a higher SDK
     AnimatedVisibility(
         visible = homeViewModel.showNoCompatibleVersionsDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val packageName = homeViewModel.showNoCompatibleVersionsDialog ?: return@AnimatedVisibility
         val appName = homeViewModel.bundleAppMetadataFlow.value[packageName]?.displayName

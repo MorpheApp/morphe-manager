@@ -6,7 +6,12 @@
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -44,9 +49,101 @@ object MorpheDefaults {
     val SettingsCornerRadius = 14.dp
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
-    const val ANIMATION_DURATION = 220
     val ContentPadding = 16.dp
     val ItemSpacing = 12.dp
+
+    // Animation durations
+    /** Duration used for dialog enter/exit and overlay transitions. */
+    const val ANIMATION_DURATION = 220
+    /** Duration used for screen-level enter transitions (navigation push). */
+    const val SCREEN_ENTER_DURATION = 320
+    /** Shorter duration for collapse/shrink exit animations. */
+    const val ANIMATION_DURATION_SHORT = 180
+
+    // Dialog animation scale
+    /** Initial/target scale for dialog enter/exit scale animation. */
+    const val DIALOG_SCALE = 0.95f
+}
+
+/**
+ * Shared [EnterTransition] and [ExitTransition] for all MorpheDialog instances and
+ * dialog-level AnimatedVisibility wrappers. Changing these values updates every dialog
+ * animation in the app at once.
+ */
+object MorpheAnimations {
+    // Private helper to avoid repeating tween specifications
+    private fun <T> defaultTween(
+        duration: Int = MorpheDefaults.ANIMATION_DURATION,
+        easing: Easing = LinearOutSlowInEasing
+    ) = tween<T>(duration, easing = easing)
+
+    // Base animations used for composition
+    val fadeIn = fadeIn(defaultTween())
+    val fadeOut = fadeOut(defaultTween())
+
+    // Dialog Transitions
+    val dialogEnter = fadeIn + scaleIn(
+        initialScale = MorpheDefaults.DIALOG_SCALE,
+        animationSpec = defaultTween(easing = FastOutSlowInEasing)
+    )
+
+    val dialogExit = fadeOut + scaleOut(
+        targetScale = MorpheDefaults.DIALOG_SCALE,
+        animationSpec = defaultTween()
+    )
+
+    // Overlays (no scale needed)
+    val overlayEnter = fadeIn
+    val overlayExit = fadeOut
+
+    // Screen Transitions
+    val screenEnter = fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION)) +
+            scaleIn(
+                initialScale = MorpheDefaults.DIALOG_SCALE,
+                animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
+            )
+
+    val screenExit = fadeOut + scaleOut(
+        targetScale = MorpheDefaults.DIALOG_SCALE,
+        animationSpec = defaultTween()
+    )
+
+    // Vertical Expand/Shrink
+    val expandFadeEnter = expandVertically(defaultTween()) + fadeIn
+    val shrinkFadeExit = shrinkVertically(defaultTween()) + fadeOut
+
+    val expandVertEnter = expandVertically(defaultTween())
+    val shrinkVertExit = shrinkVertically(defaultTween())
+
+    // Horizontal Expand/Shrink
+    val expandHorizFadeIn = expandHorizontally(defaultTween()) + fadeIn
+    val shrinkHorizFadeOut = shrinkHorizontally(defaultTween()) + fadeOut
+
+    // Slide Transitions
+    val slideUpFadeEnter = slideInVertically(defaultTween()) { -it } + fadeIn
+    val slideUpFadeExit = slideOutVertically(defaultTween()) { -it } + fadeOut
+
+    // Spring & Custom Transitions
+    val springSlideUpEnter = slideInVertically(
+        animationSpec = spring(Spring.DampingRatioMediumBouncy, Spring.StiffnessMedium),
+        initialOffsetY = { it }
+    ) + fadeIn(tween(200))
+
+    val springSlideDownExit = slideOutVertically(
+        animationSpec = defaultTween(220, FastOutSlowInEasing),
+        targetOffsetY = { it }
+    ) + fadeOut(tween(180))
+
+    // Scale Transitions
+    val fadeScaleIn = fadeIn + scaleIn(defaultTween(), initialScale = 0.92f)
+    val fadeScaleOut = fadeOut + scaleOut(defaultTween(), targetScale = 0.92f)
+
+    // Alignment-based Transitions
+    val expandTopFadeIn = fadeIn + expandVertically(defaultTween(), expandFrom = Alignment.Top)
+    val shrinkTopFadeOut = fadeOut + shrinkVertically(defaultTween(), shrinkTowards = Alignment.Top)
+
+    // Functional Helpers
+    fun fadeOut(duration: Int): ExitTransition = fadeOut(tween(duration))
 }
 
 /**

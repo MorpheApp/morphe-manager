@@ -9,18 +9,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -34,18 +29,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.ui.model.navigation.ComplexParameter
-import app.morphe.manager.ui.model.navigation.HomeScreen
-import app.morphe.manager.ui.model.navigation.InstalledAppInfo
-import app.morphe.manager.ui.model.navigation.Patcher
-import app.morphe.manager.ui.model.navigation.Settings
-import app.morphe.manager.ui.screen.home.ApkAvailabilityDialog
-import app.morphe.manager.ui.screen.home.InstalledAppInfoScreen
+import app.morphe.manager.ui.model.navigation.*
 import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
+import app.morphe.manager.ui.screen.home.ApkAvailabilityDialog
+import app.morphe.manager.ui.screen.home.InstalledAppInfoScreen
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
 import app.morphe.manager.ui.screen.shared.BackgroundType
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -151,8 +144,8 @@ private fun MorpheManager(vm: MainViewModel) {
 
     // Patcher background speed - driven by PatcherViewModel when on patcher screen.
     // Exposed as top-level mutable state so PatcherScreen can write into it
-    val patcherBackgroundSpeed = androidx.compose.runtime.remember { androidx.compose.runtime.mutableFloatStateOf(1f) }
-    val patchingCompleted = androidx.compose.runtime.remember { mutableStateOf(false) }
+    val patcherBackgroundSpeed = remember { mutableFloatStateOf(1f) }
+    val patchingCompleted = remember { mutableStateOf(false) }
 
     // HomeViewModel must be scoped to the Activity, not to a NavBackStackEntry
     val homeViewModel: HomeViewModel = koinViewModel(
@@ -182,22 +175,10 @@ private fun MorpheManager(vm: MainViewModel) {
         NavHost(
             navController = navController,
             startDestination = HomeScreen,
-            enterTransition = {
-                fadeIn(animationSpec = tween(320)) +
-                        scaleIn(initialScale = 0.95f, animationSpec = tween(320, easing = FastOutSlowInEasing))
-            },
-            exitTransition = {
-                fadeOut(animationSpec = tween(220)) +
-                        scaleOut(targetScale = 0.95f, animationSpec = tween(220, easing = FastOutSlowInEasing))
-            },
-            popEnterTransition = {
-                fadeIn(animationSpec = tween(320)) +
-                        scaleIn(initialScale = 0.95f, animationSpec = tween(320, easing = FastOutSlowInEasing))
-            },
-            popExitTransition = {
-                fadeOut(animationSpec = tween(220)) +
-                        scaleOut(targetScale = 0.95f, animationSpec = tween(220, easing = FastOutSlowInEasing))
-            },
+            enterTransition = { MorpheAnimations.screenEnter },
+            exitTransition = { MorpheAnimations.screenExit },
+            popEnterTransition = { MorpheAnimations.screenEnter },
+            popExitTransition = { MorpheAnimations.screenExit },
         ) {
             // Shared state between HomeScreen and PatcherScreen for mount install mode.
             // Set by HomeViewModel.resolvePrePatchInstallerChoice()
@@ -209,16 +190,14 @@ private fun MorpheManager(vm: MainViewModel) {
                         targetState.destination.hasRoute<Patcher>()) {
                         ExitTransition.None
                     } else {
-                        fadeOut(animationSpec = tween(220)) +
-                                scaleOut(targetScale = 0.95f, animationSpec = tween(220, easing = FastOutSlowInEasing))
+                        MorpheAnimations.screenExit
                     }
                 },
                 popEnterTransition = {
                     if (initialState.destination.hasRoute<InstalledAppInfo>()) {
                         EnterTransition.None
                     } else {
-                        fadeIn(animationSpec = tween(320)) +
-                                scaleIn(initialScale = 0.95f, animationSpec = tween(320, easing = FastOutSlowInEasing))
+                        MorpheAnimations.screenEnter
                     }
                 }
             ) { entry ->
@@ -326,8 +305,8 @@ private fun MorpheManager(vm: MainViewModel) {
             visible = homeViewModel.showApkAvailabilityDialog &&
                     homeViewModel.pendingPackageName != null &&
                     homeViewModel.pendingAppName != null,
-            enter = fadeIn(animationSpec = tween(220)),
-            exit = fadeOut(animationSpec = tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else 220))
+            enter = MorpheAnimations.overlayEnter,
+            exit = fadeOut(animationSpec = tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
         ) {
             val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
             ApkAvailabilityDialog(
