@@ -407,7 +407,6 @@ fun InstalledAppInfoDialog(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(bottom = 24.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     // Hero header
                     item(contentType = "hero") {
@@ -420,73 +419,78 @@ fun InstalledAppInfoDialog(
                         )
                     }
 
-                    // Stagger index counter: hero header is index 0 (animated independently),
-                    // each subsequent visible item increments so the delay chain is always correct
-                    // regardless of which optional banners are shown.
-                    var staggerIndex = 1
+                    // Stagger index counter: hero header is index 0 (animated independently).
+                    // Banner item always occupies index 1 (permanent item, AnimatedVisibility
+                    // controls visibility) so subsequent indices are stable regardless of
+                    // banner state — avoiding LazyColumn position-key conflicts
+                    var staggerIndex = 2
 
-                    // Deleted app warning banner
-                    item {
-                        AnimatedVisibility(
-                            visible = viewModel.isAppDeleted,
-                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
-                        ) {
-                            StaggeredItem(entered = entered.value, index = staggerIndex) {
-                                WarningBanner(
-                                    icon = Icons.Outlined.Warning,
-                                    title = stringResource(R.string.home_app_info_app_deleted_warning),
-                                    description = stringResource(R.string.home_app_info_app_deleted_description),
-                                    buttonText = stringResource(R.string.patch),
-                                    buttonIcon = Icons.Outlined.AutoFixHigh,
-                                    onClick = {
-                                        onDismiss()
-                                        onTriggerPatchFlow(installedApp.originalPackageName)
-                                    },
-                                    isError = true,
-                                    modifier = Modifier.padding(horizontal = 20.dp)
-                                )
+                    // Warning banners (deleted / update)
+                    item(key = "banner") {
+                        Column {
+                            androidx.compose.animation.AnimatedVisibility(
+                                visible = viewModel.isAppDeleted,
+                                enter = fadeIn(tween(220)) + expandVertically(tween(220)),
+                                exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                            ) {
+                                Column {
+                                    Spacer(Modifier.height(12.dp))
+                                    StaggeredItem(entered = entered.value, index = 1) {
+                                        WarningBanner(
+                                            icon = Icons.Outlined.Warning,
+                                            title = stringResource(R.string.home_app_info_app_deleted_warning),
+                                            description = stringResource(R.string.home_app_info_app_deleted_description),
+                                            buttonText = stringResource(R.string.patch),
+                                            buttonIcon = Icons.Outlined.AutoFixHigh,
+                                            onClick = {
+                                                onDismiss()
+                                                onTriggerPatchFlow(installedApp.originalPackageName)
+                                            },
+                                            isError = true,
+                                            modifier = Modifier.padding(horizontal = 20.dp)
+                                        )
+                                    }
+                                }
+                            }
+                            androidx.compose.animation.AnimatedVisibility(
+                                visible = hasUpdate && !viewModel.isAppDeleted,
+                                enter = fadeIn(tween(220)) + expandVertically(tween(220)),
+                                exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                            ) {
+                                Column {
+                                    Spacer(Modifier.height(12.dp))
+                                    StaggeredItem(entered = entered.value, index = 1) {
+                                        WarningBanner(
+                                            icon = Icons.Outlined.Update,
+                                            title = stringResource(R.string.home_app_info_patch_update_available),
+                                            description = stringResource(R.string.home_app_info_patch_update_available_description),
+                                            buttonText = stringResource(R.string.patch),
+                                            buttonIcon = Icons.Outlined.AutoFixHigh,
+                                            onClick = {
+                                                onDismiss()
+                                                onTriggerPatchFlow(installedApp.originalPackageName)
+                                            },
+                                            isError = false,
+                                            modifier = Modifier.padding(horizontal = 20.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
-                    if (viewModel.isAppDeleted) staggerIndex++
-
-                    // Update available banner
-                    item {
-                        AnimatedVisibility(
-                            visible = hasUpdate && !viewModel.isAppDeleted,
-                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
-                        ) {
-                            StaggeredItem(entered = entered.value, index = staggerIndex) {
-                                WarningBanner(
-                                    icon = Icons.Outlined.Update,
-                                    title = stringResource(R.string.home_app_info_patch_update_available),
-                                    description = stringResource(R.string.home_app_info_patch_update_available_description),
-                                    buttonText = stringResource(R.string.patch),
-                                    buttonIcon = Icons.Outlined.AutoFixHigh,
-                                    onClick = {
-                                        onDismiss()
-                                        onTriggerPatchFlow(installedApp.originalPackageName)
-                                    },
-                                    isError = false,
-                                    modifier = Modifier.padding(horizontal = 20.dp)
-                                )
-                            }
-                        }
-                    }
-                    if (hasUpdate && !viewModel.isAppDeleted) staggerIndex++
 
                     // Info Section
                     val infoIdx = staggerIndex++
                     item {
-                        StaggeredItem(entered = entered.value, index = infoIdx) {
-                            InfoSection(
-                                installedApp = installedApp,
-                                appliedPatches = appliedPatches,
-                                bundlesUsedSummary = bundlesUsedSummary,
-                                onShowPatches = { showAppliedPatchesDialog.value = true },
-                            )
+                        Box(modifier = Modifier.padding(top = 12.dp)) {
+                            StaggeredItem(entered = entered.value, index = infoIdx) {
+                                InfoSection(
+                                    installedApp = installedApp,
+                                    appliedPatches = appliedPatches,
+                                    bundlesUsedSummary = bundlesUsedSummary,
+                                    onShowPatches = { showAppliedPatchesDialog.value = true },
+                                )
+                            }
                         }
                     }
 
@@ -513,6 +517,7 @@ fun InstalledAppInfoDialog(
                                 },
                                 modifier = Modifier
                                     .padding(horizontal = 20.dp)
+                                    .padding(top = 12.dp)
                                     .animateContentSize(animationSpec = tween(220))
                             )
                         }
@@ -531,6 +536,7 @@ fun InstalledAppInfoDialog(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(horizontal = 20.dp)
+                                        .padding(top = 12.dp)
                                 )
                             }
                         }
@@ -890,8 +896,7 @@ private fun InfoSection(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-            .padding(bottom = 10.dp),
+            .padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         InfoRow(
