@@ -1,3 +1,11 @@
+# [1.16.0-dev.16](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.15...v1.16.0-dev.16) (2026-04-30)
+
+
+### Bug Fixes
+
+* "SessionBasedInstallConfirmationActivity was finished by user" install error on some devices ([3e74857](https://github.com/MorpheApp/morphe-manager/commit/3e74857bdb6fab5815f04c52b137024188a60dc3))
+* Scope `InstalledAppInfoViewModel` to dialog instance via dialog token ([0cf2f6a](https://github.com/MorpheApp/morphe-manager/commit/0cf2f6a7c451fe1bd79538684babc3e1376b7f41))
+
 # [1.16.0-dev.15](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.14...v1.16.0-dev.15) (2026-04-29)
 
 
