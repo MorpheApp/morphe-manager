@@ -9,9 +9,6 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
@@ -49,12 +46,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundledAppTarget
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
-import app.morphe.manager.util.KnownApps
-import app.morphe.manager.util.MppManifest
-import app.morphe.manager.util.RemoteAvatar
-import app.morphe.manager.util.androidVersionName
-import app.morphe.manager.util.htmlAnnotatedString
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -77,9 +69,11 @@ fun HomeDialogs(
 
     // Dialog 1: APK availability
     AnimatedVisibility(
-        visible = homeViewModel.showApkAvailabilityDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
+        visible = homeViewModel.showApkAvailabilityDialog &&
+                homeViewModel.pendingPackageName != null &&
+                homeViewModel.pendingAppName != null,
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut(if (homeViewModel.showDownloadInstructionsDialog) 0 else MorpheDefaults.ANIMATION_DURATION)
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val recommendedVersion = homeViewModel.pendingRecommendedVersion
@@ -124,9 +118,11 @@ fun HomeDialogs(
 
     // Dialog 2: Download instructions
     AnimatedVisibility(
-        visible = homeViewModel.showDownloadInstructionsDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(if (homeViewModel.showFilePickerPromptDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
+        visible = homeViewModel.showDownloadInstructionsDialog &&
+                homeViewModel.pendingPackageName != null &&
+                homeViewModel.pendingAppName != null,
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.fadeOut(if (homeViewModel.showFilePickerPromptDialog) 0 else MorpheDefaults.ANIMATION_DURATION)
     ) {
         val usingMountInstall = homeViewModel.usingMountInstall
         // Remember packageName to prevent color flickering during exit animation
@@ -167,8 +163,8 @@ fun HomeDialogs(
     // Dialog 3: File picker prompt
     AnimatedVisibility(
         visible = homeViewModel.showFilePickerPromptDialog && homeViewModel.pendingAppName != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val isOtherApps = homeViewModel.pendingPackageName == null
@@ -190,8 +186,8 @@ fun HomeDialogs(
     // Unsupported version dialog
     AnimatedVisibility(
         visible = homeViewModel.showUnsupportedVersionDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val dialogState = homeViewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
@@ -218,8 +214,8 @@ fun HomeDialogs(
     // Experimental version warning dialog
     AnimatedVisibility(
         visible = homeViewModel.showExperimentalVersionDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val dialogState = homeViewModel.showExperimentalVersionDialog ?: return@AnimatedVisibility
 
@@ -233,8 +229,8 @@ fun HomeDialogs(
     // Wrong package dialog
     AnimatedVisibility(
         visible = homeViewModel.showWrongPackageDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val dialogState = homeViewModel.showWrongPackageDialog ?: return@AnimatedVisibility
 
@@ -248,8 +244,8 @@ fun HomeDialogs(
     // No compatible versions dialog - shown when every declared version requires a higher SDK
     AnimatedVisibility(
         visible = homeViewModel.showNoCompatibleVersionsDialog != null,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
     ) {
         val packageName = homeViewModel.showNoCompatibleVersionsDialog ?: return@AnimatedVisibility
         val appName = homeViewModel.bundleAppMetadataFlow.value[packageName]?.displayName
@@ -316,8 +312,7 @@ fun HomeDialogs(
                     homeViewModel.dismissInstalledAppInfo()
                     homeViewModel.showPatchDialog(originalPackageName)
                 },
-                homeViewModel = homeViewModel,
-                dialogToken = homeViewModel.installedAppDialogToken
+                homeViewModel = homeViewModel
             )
         }
     }

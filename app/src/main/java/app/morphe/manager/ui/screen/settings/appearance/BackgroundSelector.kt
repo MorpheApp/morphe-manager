@@ -6,11 +6,6 @@
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -20,11 +15,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.BackgroundType
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
-import app.morphe.manager.ui.screen.shared.SectionCard
-import app.morphe.manager.ui.screen.shared.WindowWidthSizeClass
-import app.morphe.manager.ui.screen.shared.rememberWindowSize
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.RandomInterval
 
 /**
@@ -86,10 +77,8 @@ fun BackgroundSelector(
             // Interval selector — visible only when RANDOM is active
             AnimatedVisibility(
                 visible = selectedBackground == BackgroundType.RANDOM,
-                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                enter = MorpheAnimations.expandFadeEnter,
+                exit = MorpheAnimations.shrinkFadeExit
             ) {
                 RandomIntervalSelector(
                     selectedInterval = selectedInterval,

@@ -76,12 +76,8 @@ fun InstalledAppInfoDialog(
     onDismiss: () -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
-    // Token is included in the koin key so that each new opening of the dialog
-    // creates a fresh ViewModel instance - preventing stale state from a previously
-    // uninstalled app from leaking into a subsequent dialog for a different app.
-    dialogToken: Int = 0,
     viewModel: InstalledAppInfoViewModel = koinViewModel(
-        key = "$packageName:$dialogToken",
+        key = packageName,
         parameters = { parametersOf(packageName) }
     ),
     installViewModel: InstallViewModel = koinViewModel()
@@ -334,8 +330,8 @@ fun InstalledAppInfoDialog(
                     ) {
                         AnimatedVisibility(
                             visible = viewModel.isAppDeleted,
-                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
                         ) {
                             StaggeredItem(entered = entered.value, index = 1) {
                                 WarningBanner(
@@ -354,8 +350,8 @@ fun InstalledAppInfoDialog(
                         }
                         AnimatedVisibility(
                             visible = hasUpdate && !viewModel.isAppDeleted,
-                            enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                            exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
                         ) {
                             StaggeredItem(entered = entered.value, index = 2) {
                                 WarningBanner(
@@ -434,8 +430,8 @@ fun InstalledAppInfoDialog(
                         Column {
                             androidx.compose.animation.AnimatedVisibility(
                                 visible = viewModel.isAppDeleted,
-                                enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                                exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                                enter = MorpheAnimations.expandFadeEnter,
+                                exit = MorpheAnimations.shrinkFadeExit
                             ) {
                                 Column {
                                     Spacer(Modifier.height(12.dp))
@@ -458,8 +454,8 @@ fun InstalledAppInfoDialog(
                             }
                             androidx.compose.animation.AnimatedVisibility(
                                 visible = hasUpdate && !viewModel.isAppDeleted,
-                                enter = fadeIn(tween(220)) + expandVertically(tween(220)),
-                                exit = fadeOut(tween(180)) + shrinkVertically(tween(180))
+                                enter = MorpheAnimations.expandFadeEnter,
+                                exit = MorpheAnimations.shrinkFadeExit
                             ) {
                                 Column {
                                     Spacer(Modifier.height(12.dp))

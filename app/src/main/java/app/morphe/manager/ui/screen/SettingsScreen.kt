@@ -8,8 +8,8 @@ package app.morphe.manager.ui.screen
 import android.annotation.SuppressLint
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -45,7 +45,7 @@ import app.morphe.manager.ui.screen.settings.system.AboutDialog
 import app.morphe.manager.ui.screen.settings.system.ChangelogDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
 import app.morphe.manager.ui.screen.settings.system.KeystoreCredentialsDialog
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
@@ -319,8 +319,8 @@ private fun NavigationItem(
 
             AnimatedVisibility(
                 visible = isSelected,
-                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
-                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
+                enter = MorpheAnimations.expandHorizFadeIn,
+                exit = MorpheAnimations.shrinkHorizFadeOut
             ) {
                 Row {
                     Spacer(modifier = Modifier.width(8.dp))

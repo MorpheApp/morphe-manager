@@ -409,8 +409,8 @@ private fun PackageSelectionItem(
             // Expanded content
             AnimatedVisibility(
                 visible = expanded,
-                enter = fadeIn() + expandVertically(expandFrom = Alignment.Top),
-                exit = fadeOut() + shrinkVertically(shrinkTowards = Alignment.Top)
+                enter = MorpheAnimations.expandTopFadeIn,
+                exit = MorpheAnimations.shrinkTopFadeOut
             ) {
                 Column(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),

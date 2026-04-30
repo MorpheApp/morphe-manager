@@ -6,8 +6,6 @@
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -106,16 +104,8 @@ fun MorpheDialog(
 
             AnimatedVisibility(
                 visible = visible,
-                enter = fadeIn(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        scaleIn(
-                            initialScale = 0.95f,
-                            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing)
-                        ),
-                exit = fadeOut(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) +
-                        scaleOut(
-                            targetScale = 0.95f,
-                            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)
-                        ),
+                enter = MorpheAnimations.dialogEnter,
+                exit = MorpheAnimations.dialogExit,
                 modifier = Modifier.fillMaxSize()
             ) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

@@ -8,9 +8,6 @@ package app.morphe.manager.ui.screen.settings
 import android.app.Activity
 import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -207,8 +204,8 @@ fun AppearanceTabContent(
     // Translation Info Dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(if (showLanguageDialog.value) 0 else MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut(if (showLanguageDialog.value) 0 else MorpheDefaults.ANIMATION_DURATION)
     ) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.settings_appearance_translations_info_title),
@@ -230,8 +227,8 @@ fun AppearanceTabContent(
     // Language Picker Dialog
     AnimatedVisibility(
         visible = showLanguageDialog.value,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut
     ) {
         LanguagePickerDialog(
             currentLanguage = appLanguage,

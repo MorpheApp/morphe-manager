@@ -9,8 +9,7 @@ import android.Manifest
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -142,8 +141,8 @@ fun UpdatesSettingsItem(
     // Check frequency interval selector (non-GMS only)
     AnimatedVisibility(
         visible = backgroundUpdateNotifications && !settingsViewModel.hasGms,
-        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.expandFadeEnter,
+        exit = MorpheAnimations.shrinkFadeExit
     ) {
         RichSettingsItem(
             onClick = { showIntervalDialog.value = true },

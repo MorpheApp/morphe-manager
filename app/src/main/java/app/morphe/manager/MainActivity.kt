@@ -8,9 +8,7 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -40,6 +38,7 @@ import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
 import app.morphe.manager.ui.screen.shared.BackgroundType
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -171,38 +170,10 @@ private fun MorpheManager(vm: MainViewModel) {
         NavHost(
             navController = navController,
             startDestination = HomeScreen,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { it },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(
-                    animationSpec = tween(400, delayMillis = 100)
-                )
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -it / 3 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(
-                    animationSpec = tween(300)
-                )
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -it / 3 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(
-                    animationSpec = tween(400, delayMillis = 100)
-                )
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { it },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(
-                    animationSpec = tween(300)
-                )
-            },
+            enterTransition = { MorpheAnimations.screenEnter },
+            exitTransition = { MorpheAnimations.screenExit },
+            popEnterTransition = { MorpheAnimations.screenEnter },
+            popExitTransition = { MorpheAnimations.screenExit }
         ) {
             // Shared state between HomeScreen and PatcherScreen for mount install mode.
             // Set by HomeViewModel.resolvePrePatchInstallerChoice()

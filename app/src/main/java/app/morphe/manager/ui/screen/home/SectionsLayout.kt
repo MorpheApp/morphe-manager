@@ -299,8 +299,8 @@ private fun AdaptiveContent(
                     // Section 4: Other apps - hidden when no apps available or bundles loading
                     AnimatedVisibility(
                         visible = !isAppsEmpty && showOtherAppsButton,
-                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
                     ) {
                         OtherAppsSection(
                             onClick = onOtherAppsClick,
@@ -349,8 +349,8 @@ private fun AdaptiveContent(
                 // Section 4: Other apps - hidden when no apps available or bundles loading
                 AnimatedVisibility(
                     visible = !isAppsEmpty && showOtherAppsButton,
-                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                    enter = MorpheAnimations.expandFadeEnter,
+                    exit = MorpheAnimations.shrinkFadeExit
                 ) {
                     Column {
                         Spacer(modifier = Modifier.height(itemSpacing))
@@ -438,12 +438,8 @@ fun ManagerUpdateSnackbar(
 
     AnimatedVisibility(
         visible = visible && !dismissed,
-        enter = slideInVertically(
-            initialOffsetY = { -it },
-            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = slideOutVertically(
-            targetOffsetY = { -it },
-            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)),
+        enter = MorpheAnimations.slideUpFadeEnter,
+        exit = MorpheAnimations.slideUpFadeExit,
         modifier = modifier
     ) {
         SwipeToDismissBox(
@@ -527,12 +523,8 @@ fun BundleUpdateSnackbar(
 
     AnimatedVisibility(
         visible = visible && !dismissed,
-        enter = slideInVertically(
-            initialOffsetY = { -it },
-            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = slideOutVertically(
-            targetOffsetY = { -it },
-            animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)),
+        enter = MorpheAnimations.slideUpFadeEnter,
+        exit = MorpheAnimations.slideUpFadeExit,
         modifier = modifier
     ) {
         SwipeToDismissBox(
@@ -893,8 +885,8 @@ fun MainAppsSection(
                         // Search bar
                         AnimatedVisibility(
                             visible = searchVisible,
-                            enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                            exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
                         ) {
                             HomeSearchTextField(
                                 value = searchQuery,
@@ -1432,14 +1424,8 @@ private fun MultiSelectBar(
 ) {
     AnimatedVisibility(
         visible = visible,
-        enter = slideInVertically(
-            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium),
-            initialOffsetY = { it }
-        ) + fadeIn(tween(200)),
-        exit = slideOutVertically(
-            animationSpec = tween(220, easing = FastOutSlowInEasing),
-            targetOffsetY = { it }
-        ) + fadeOut(tween(180)),
+        enter = MorpheAnimations.springSlideUpEnter,
+        exit = MorpheAnimations.springSlideDownExit,
         modifier = modifier
     ) {
         Surface(
@@ -2019,8 +2005,8 @@ fun AppPatchesDialog(
                 Column {
                     AnimatedVisibility(
                         visible = selectedBundle != null,
-                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
                     ) {
                         selectedBundle?.let { uid ->
                             FlowRow(
@@ -2045,8 +2031,8 @@ fun AppPatchesDialog(
 
                     AnimatedVisibility(
                         visible = filteredPatches.isEmpty(),
-                        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(tween(MorpheDefaults.ANIMATION_DURATION), initialScale = 0.92f),
-                        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(tween(MorpheDefaults.ANIMATION_DURATION), targetScale = 0.92f)
+                        enter = MorpheAnimations.fadeScaleIn,
+                        exit = MorpheAnimations.fadeScaleOut
                     ) {
                         Box(
                             modifier = Modifier
@@ -2649,8 +2635,8 @@ fun InstalledAppCard(
 
                 AnimatedVisibility(
                     visible = hasUpdate && !isAppDeleted,
-                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
-                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
+                    enter = MorpheAnimations.expandHorizFadeIn,
+                    exit = MorpheAnimations.shrinkHorizFadeOut
                 ) {
                     GlassChip(
                         text = stringResource(R.string.update),
