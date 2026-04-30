@@ -8,8 +8,9 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -33,12 +34,10 @@ import app.morphe.manager.ui.model.navigation.*
 import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
-import app.morphe.manager.ui.screen.home.ApkAvailabilityDialog
 import app.morphe.manager.ui.screen.home.InstalledAppInfoScreen
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -47,7 +46,6 @@ import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.hasMppExtension
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -151,10 +149,6 @@ private fun MorpheManager(vm: MainViewModel) {
     val homeViewModel: HomeViewModel = koinViewModel(
         viewModelStoreOwner = LocalActivity.current as ComponentActivity
     )
-
-    // Coroutine scope for top-level dialog interactions
-    val managerScope = rememberCoroutineScope()
-    val isExpertModeForDialog by homeViewModel.prefs.useExpertMode.getAsState()
 
     // Box with background at the highest level
     Box(
@@ -296,53 +290,6 @@ private fun MorpheManager(vm: MainViewModel) {
             composable<Settings> {
                 SettingsScreen(homeViewModel = homeViewModel)
             }
-        }
-
-        // ApkAvailabilityDialog rendered above NavHost so it overlays all screens seamlessly.
-        // When triggered from InstalledAppInfoScreen, this fades in on top while that screen
-        // is still visible, then InstalledAppInfoScreen closes behind it once fully covered.
-        AnimatedVisibility(
-            visible = homeViewModel.showApkAvailabilityDialog &&
-                    homeViewModel.pendingPackageName != null &&
-                    homeViewModel.pendingAppName != null,
-            enter = MorpheAnimations.overlayEnter,
-            exit = fadeOut(animationSpec = tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
-        ) {
-            val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
-            ApkAvailabilityDialog(
-                appName = appName,
-                recommendedVersion = homeViewModel.pendingRecommendedVersion,
-                compatibleVersions = homeViewModel.pendingCompatibleVersions,
-                recommendedBundleVersions = homeViewModel.pendingRecommendedBundleVersions,
-                selectedDownloadVersion = homeViewModel.pendingSelectedDownloadVersion,
-                onVersionSelect = { homeViewModel.pendingSelectedDownloadVersion = it },
-                usingMountInstall = homeViewModel.usingMountInstall,
-                isExpertMode = isExpertModeForDialog,
-                savedApkInfo = homeViewModel.pendingSavedApkInfo,
-                onDismiss = {
-                    homeViewModel.showApkAvailabilityDialog = false
-                    homeViewModel.cleanupPendingData()
-                },
-                onHaveApk = {
-                    homeViewModel.showApkAvailabilityDialog = false
-                    val launcher = homeViewModel.storagePickerLauncher
-                    check(launcher != null) {
-                        "storagePickerLauncher is null - HomeScreen must be in composition to register the file picker"
-                    }
-                    launcher()
-                },
-                onNeedApk = {
-                    homeViewModel.showApkAvailabilityDialog = false
-                    managerScope.launch {
-                        delay(50)
-                        homeViewModel.showDownloadInstructionsDialog = true
-                        homeViewModel.resolveDownloadRedirect()
-                    }
-                },
-                onUseSaved = {
-                    homeViewModel.handleSavedApkSelection()
-                }
-            )
         }
     }
 }

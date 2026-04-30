@@ -50,6 +50,7 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.*
 import app.morphe.patcher.patch.AppTarget
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.net.URI
 
@@ -67,6 +68,53 @@ fun HomeDialogs(
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+
+    // Dialog 1: APK availability
+    AnimatedVisibility(
+        visible = homeViewModel.showApkAvailabilityDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
+        enter = MorpheAnimations.overlayEnter,
+        exit = fadeOut(tween(if (homeViewModel.showFilePickerPromptDialog) 0 else MorpheDefaults.ANIMATION_DURATION))
+    ) {
+        val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
+        val recommendedVersion = homeViewModel.pendingRecommendedVersion
+        val compatibleVersions = homeViewModel.pendingCompatibleVersions
+        val recommendedBundleVersions = homeViewModel.pendingRecommendedBundleVersions
+        val selectedDownloadVersion = homeViewModel.pendingSelectedDownloadVersion
+        val usingMountInstall = homeViewModel.usingMountInstall
+        val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
+        val savedApkInfo = homeViewModel.pendingSavedApkInfo
+
+        ApkAvailabilityDialog(
+            appName = appName,
+            recommendedVersion = recommendedVersion,
+            compatibleVersions = compatibleVersions,
+            recommendedBundleVersions = recommendedBundleVersions,
+            selectedDownloadVersion = selectedDownloadVersion,
+            onVersionSelect = { homeViewModel.pendingSelectedDownloadVersion = it },
+            usingMountInstall = usingMountInstall,
+            isExpertMode = isExpertMode,
+            savedApkInfo = savedApkInfo,
+            onDismiss = {
+                homeViewModel.showApkAvailabilityDialog = false
+                homeViewModel.cleanupPendingData()
+            },
+            onHaveApk = {
+                homeViewModel.showApkAvailabilityDialog = false
+                storagePickerLauncher()
+            },
+            onNeedApk = {
+                homeViewModel.showApkAvailabilityDialog = false
+                scope.launch {
+                    delay(50)
+                    homeViewModel.showDownloadInstructionsDialog = true
+                    homeViewModel.resolveDownloadRedirect()
+                }
+            },
+            onUseSaved = {
+                homeViewModel.handleSavedApkSelection()
+            }
+        )
+    }
 
     // Dialog 2: Download instructions
     AnimatedVisibility(

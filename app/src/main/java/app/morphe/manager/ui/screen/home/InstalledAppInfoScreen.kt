@@ -50,7 +50,6 @@ import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import java.io.File
@@ -115,25 +114,8 @@ fun InstalledAppInfoScreen(
 
     // Content entrance animation
     val entered = remember { mutableStateOf(false) }
-    var targetVisibility by remember { mutableFloatStateOf(0f) }
-    // When transitioning to ApkAvailabilityDialog, keep the screen fully opaque until
-    // the dialog has faded in, then remove it - prevents a flash of the background
-    var isPatchTransition by remember { mutableStateOf(false) }
-
-    val screenAlpha by animateFloatAsState(
-        targetValue = targetVisibility,
-        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION, easing = LinearOutSlowInEasing),
-        label = "screenAlpha"
-    )
-    val screenScale by animateFloatAsState(
-        targetValue = if (targetVisibility == 1f) 1f else MorpheDefaults.DIALOG_SCALE,
-        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing),
-        label = "screenScale"
-    )
-
-    val animatedOnDismiss: () -> Unit = {
-        if (!isPatchTransition) targetVisibility = 0f
-    }
+    var visible by remember { mutableStateOf(false) }
+    val animatedOnDismiss: () -> Unit = { visible = false }
 
     // Bundle data
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
@@ -276,14 +258,13 @@ fun InstalledAppInfoScreen(
     // Patch flow: close this screen immediately, ApkAvailabilityDialog fades in from main level once data is ready
     fun handlePatchClick() {
         val originalPackageName = viewModel.installedApp?.originalPackageName ?: return
-        isPatchTransition = true
         animatedOnDismiss()
         onTriggerPatchFlow(originalPackageName)
     }
 
     // Trigger enter animation on first composition
     LaunchedEffect(Unit) {
-        targetVisibility = 1f
+        visible = true
     }
 
     // Wait one frame after content enters composition before triggering stagger,
@@ -295,33 +276,23 @@ fun InstalledAppInfoScreen(
         }
     }
 
-    // For normal back-dismiss: wait for the exit animation, then remove the overlay.
-    // For patch transition: showPatchDialogInternal is async (IO), so we wait for
-    // showApkAvailabilityDialog to become true, then wait for its fadeIn to finish
-    // before removing this screen - ensuring the background never shows through
-    LaunchedEffect(isPatchTransition, targetVisibility) {
-        if (isPatchTransition) {
-            snapshotFlow { homeViewModel.showApkAvailabilityDialog }.first { it }
-            delay(MorpheDefaults.ANIMATION_DURATION.toLong())
-            onDismiss()
-        } else if (targetVisibility == 0f) {
-            delay(MorpheDefaults.ANIMATION_DURATION.toLong())
+    // Dismiss: wait for exit animation then call onDismiss
+    LaunchedEffect(visible) {
+        if (!visible) {
+            if (homeViewModel.showApkAvailabilityDialog) {
+                // Wait until the dialog overlay has had at least one frame to render
+                withFrameNanos { }
+            } else {
+                delay(MorpheDefaults.ANIMATION_DURATION.toLong())
+            }
             onDismiss()
         }
     }
 
-    // Screen content. Visibility is driven by graphicsLayer alpha/scale so we retain
-    // full control over when the composable leaves the tree (via onDismiss), regardless
-    // of animation state. This is critical for the patch transition where the screen must
-    // stay in the tree - fully opaque - until ApkAvailabilityDialog covers it
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .graphicsLayer {
-                alpha = screenAlpha
-                scaleX = screenScale
-                scaleY = screenScale
-            }
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Surface(
             modifier = Modifier.fillMaxSize(),
