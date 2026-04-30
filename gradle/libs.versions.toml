@@ -1,5 +1,5 @@
 [versions]
-ackpine = "0.22.7" # Before upgrading, verify that the 'android-tools' version matches the patcher
+ackpine = "0.22.8" # Before upgrading, verify that the 'android-tools' version matches the patcher
 about-libraries = "14.0.1"
 accompanist = "0.37.3"
 activity = "1.13.0"
