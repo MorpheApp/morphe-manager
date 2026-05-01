@@ -122,7 +122,7 @@ data class SavedApkInfo(
 )
 
 /**
- * Combined home screen app state — emitted atomically so visible and hidden lists
+ * Combined home screen app state - emitted atomically so visible and hidden lists
  * are always in sync and never cause a transient empty-state flash.
  */
 data class HomeAppState(
@@ -1859,6 +1859,10 @@ class HomeViewModel(
         patches: PatchSelection,
         options: Options
     ) {
+        // Dismiss InstalledAppInfoDialog here, right before navigating to PatcherScreen.
+        // This ensures there is never a gap between the info dialog closing and the next screen appearing
+        dismissInstalledAppInfo()
+
         onStartQuickPatch?.invoke(
             QuickPatchParams(
                 selectedApp = selectedApp,
