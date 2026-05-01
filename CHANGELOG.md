@@ -1,3 +1,11 @@
+# [1.16.0-dev.17](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.16...v1.16.0-dev.17) (2026-05-01)
+
+
+### Bug Fixes
+
+* Eliminate background flash on `InstalledAppInfo` → patch flow transition ([b246a4b](https://github.com/MorpheApp/morphe-manager/commit/b246a4bf0322537f22add689c4f7054f612d37d4))
+* Prevent `InstalledAppInfoViewModel` collision on dialog reopen ([15ae79a](https://github.com/MorpheApp/morphe-manager/commit/15ae79a18614ea0287a2fd0c467cf14f7a7401e1))
+
 # [1.16.0-dev.16](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.15...v1.16.0-dev.16) (2026-04-30)
 
 
