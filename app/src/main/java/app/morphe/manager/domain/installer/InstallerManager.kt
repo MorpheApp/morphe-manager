@@ -17,13 +17,19 @@ import androidx.annotation.StringRes
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.util.AOSP_INSTALLER_LABEL
+import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE
+import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE_LEGACY
+import app.morphe.manager.util.APK_MIMETYPE
 import java.io.File
+
+private const val TAG = "Morphe InstallerManager"
 
 class InstallerManager(
     private val app: Application,
     private val prefs: PreferencesManager,
     private val rootInstaller: RootInstaller,
-    private val ackpineInstaller: AckpineInstaller
+    private val sessionInstaller: SessionInstaller
 ) {
     private val packageManager: PackageManager = app.packageManager
     private val dummyUri: Uri = InstallerFileProvider.buildUri(app, "dummy.apk")
@@ -225,7 +231,7 @@ class InstallerManager(
                 } else {
                     val uri = InstallerFileProvider.getUriForFile(app, sourceFile)
                     val intent = Intent(Intent.ACTION_VIEW).apply {
-                        setDataAndType(uri, APK_MIME)
+                        setDataAndType(uri, APK_MIMETYPE)
                         @SuppressLint("WrongConstant")
                         addFlags(
                             Intent.FLAG_GRANT_READ_URI_PERMISSION or
@@ -303,7 +309,7 @@ class InstallerManager(
             label = app.getString(R.string.installer_shizuku_name),
             description = app.getString(R.string.installer_shizuku_description),
             availability = availabilityFor(Token.Shizuku, target, checkRoot),
-            icon = if (ackpineInstaller.isShizukuInstalled()) loadInstallerIcon(AckpineInstaller.SHIZUKU_PACKAGE) else null
+            icon = if (sessionInstaller.isShizukuInstalled()) loadInstallerIcon(ShizukuInstaller.PACKAGE_NAME) else null
         )
 
         is Token.Component -> {
@@ -362,11 +368,11 @@ class InstallerManager(
         }
 
         Token.Shizuku -> {
-            if (!ackpineInstaller.isShizukuInstalled()) {
+            if (!sessionInstaller.isShizukuInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
             } else if (checkRoot) {
                 // Full availability check
-                ackpineInstaller.shizukuAvailability(target)
+                sessionInstaller.shizukuAvailability(target)
             } else {
                 // Just verify Shizuku is installed (for UI display)
                 Availability(true)
@@ -381,7 +387,7 @@ class InstallerManager(
 
     fun isComponentAvailable(componentName: ComponentName): Boolean {
         val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(dummyUri, APK_MIME)
+            setDataAndType(dummyUri, APK_MIMETYPE)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             component = componentName
         }
@@ -391,7 +397,7 @@ class InstallerManager(
     private fun queryInstallerActivities() =
         packageManager.queryIntentActivities(
             Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(dummyUri, APK_MIME)
+                setDataAndType(dummyUri, APK_MIMETYPE)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             },
             PackageManager.MATCH_DEFAULT_ONLY
@@ -412,8 +418,8 @@ class InstallerManager(
         if (candidates.isEmpty()) return null
 
         val preferredPackages = listOf(
-            "com.google.android.packageinstaller",
-            "com.android.packageinstaller"
+            AOSP_INSTALLER_PACKAGE,
+            AOSP_INSTALLER_PACKAGE_LEGACY
         )
 
         val chosen = preferredPackages.firstNotNullOfOrNull { pkg ->
@@ -508,14 +514,7 @@ class InstallerManager(
         MANAGER_UPDATE(false)
     }
 
-    companion object {
-        private const val APK_MIME = "application/vnd.android.package-archive"
-        private const val AOSP_INSTALLER_PACKAGE = "com.google.android.packageinstaller"
-        private const val AOSP_INSTALLER_LABEL = "Package installer"
-        private const val TAG = "Morphe InstallerManager"
-    }
-
-    fun openShizukuApp(): Boolean = ackpineInstaller.launchShizukuApp()
+    fun openShizukuApp(): Boolean = sessionInstaller.launchShizukuApp()
 
     /**
      * Returns a deduplicated list of entries for [target], ensuring [token] is always present

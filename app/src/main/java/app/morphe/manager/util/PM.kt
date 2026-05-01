@@ -107,7 +107,7 @@ class PM(
 
     /**
      * Returns true if the signing certificate of [file] differs from the installed package.
-     * Returns false if either signature cannot be read (install proceeds normally).
+     * Returns false if either signature cannot be read.
      */
     fun hasSignatureMismatch(packageName: String, file: File): Boolean {
         val installed = getSignature(packageName)?.toByteArray() ?: return false

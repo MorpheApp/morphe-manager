@@ -2,6 +2,7 @@ package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
 import android.content.*
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat
@@ -11,10 +12,7 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
-import app.morphe.manager.domain.installer.AckpineInstaller
-import app.morphe.manager.domain.installer.InstallCancelledException
-import app.morphe.manager.domain.installer.InstallerManager
-import ru.solrudev.ackpine.installer.InstallFailure
+import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
@@ -33,7 +31,7 @@ class UpdateViewModel(
     private val app: Application by inject()
     private val morpheAPI: MorpheAPI by inject()
     private val http: HttpService by inject()
-    private val ackpineInstaller: AckpineInstaller by inject()
+    private val sessionInstaller: SessionInstaller by inject()
     private val networkInfo: NetworkInfo by inject()
     private val fs: Filesystem by inject()
     private val prefs: PreferencesManager by inject()
@@ -118,7 +116,7 @@ class UpdateViewModel(
                 if (location.exists()) location.length() else 0L
             }
             downloadedSize = resumeOffset
-            // totalSize stays 0 until first progress callback — avoids false 100% on resume
+            // totalSize stays 0 until first progress callback - avoids false 100% on resume
             totalSize = 0L
             canResumeDownload = resumeOffset > 0L
 
@@ -178,13 +176,11 @@ class UpdateViewModel(
             is InstallerManager.InstallPlan.Internal -> {
                 state = State.INSTALLING
                 try {
-                    handleInstallFailure(
-                        failure = ackpineInstaller.installInternal(location),
-                        successToast = R.string.install_app_success
-                    )
+                    handleInstallResult(sessionInstaller.installInternal(location))
                 } catch (_: InstallCancelledException) {
-                    // User dismissed dialog — go back to CAN_INSTALL so they can retry
                     state = State.CAN_INSTALL
+                } catch (_: SessionDeadException) {
+                    launchIntentFallback()
                 } catch (e: Exception) {
                     val message = e.simpleMessage().orEmpty()
                     installError = message
@@ -205,10 +201,7 @@ class UpdateViewModel(
             is InstallerManager.InstallPlan.Shizuku -> {
                 state = State.INSTALLING
                 try {
-                    handleInstallFailure(
-                        failure = ackpineInstaller.installShizuku(location),
-                        successToast = R.string.update_completed
-                    )
+                    handleInstallResult(sessionInstaller.installShizuku(location, app.packageName))
                 } catch (_: InstallCancelledException) {
                     state = State.CAN_INSTALL
                 } catch (e: Exception) {
@@ -224,21 +217,31 @@ class UpdateViewModel(
         }
     }
 
-    private fun handleInstallFailure(failure: InstallFailure?, @StringRes successToast: Int) {
-        when (failure) {
-            null -> {
+    /**
+     * Fallback when the PackageInstaller session is killed by an OEM system component.
+     * Launches [Intent.ACTION_INSTALL_PACKAGE] and monitors for completion via broadcast.
+     */
+    private fun launchIntentFallback() {
+        Log.w("UpdateViewModel", "Session dead, launching intent-based fallback")
+        sessionInstaller.launchIntentInstall(location)
+        // Completion is handled by installBroadcastReceiver
+    }
+
+    private fun handleInstallResult(result: InstallResult) {
+        when (result) {
+            InstallResult.Success -> {
                 installError = ""
                 state = State.SUCCESS
-                app.toast(app.getString(successToast))
+                app.toast(app.getString(R.string.install_app_success))
             }
-            is InstallFailure.Conflict -> {
+            is InstallResult.Conflict -> {
                 installError = app.getString(R.string.installer_hint_conflict)
                 canResumeDownload = false
                 app.toast(installError)
                 state = State.FAILED
             }
-            else -> {
-                val message = failure.message ?: failure.javaClass.simpleName
+            is InstallResult.Failure -> {
+                val message = result.message ?: "Unknown error"
                 installError = message
                 canResumeDownload = false
                 app.toast(app.getString(R.string.install_app_fail, message))
@@ -283,21 +286,22 @@ class UpdateViewModel(
     }
 
     private fun handleExternalInstallSuccess(packageName: String) {
-        val plan = pendingExternalInstall ?: return
-        if (plan.expectedPackage != packageName) return
-
-        pendingExternalInstall = null
-        externalInstallTimeoutJob?.cancel()
-        externalInstallTimeoutJob = null
-        installerManager.cleanup(plan)
-
+        val plan = pendingExternalInstall
+        if (plan != null) {
+            if (plan.expectedPackage != packageName) return
+            pendingExternalInstall = null
+            externalInstallTimeoutJob?.cancel()
+            externalInstallTimeoutJob = null
+            installerManager.cleanup(plan)
+            app.toast(app.getString(R.string.installer_external_success, plan.installerLabel))
+        } else {
+            // Intent-based fallback — only care about our own package
+            if (packageName != app.packageName) return
+        }
         installError = ""
-        app.toast(app.getString(R.string.installer_external_success, plan.installerLabel))
         state = State.SUCCESS
     }
 
-    // Broadcast receiver — only needed for external (third-party installer) monitoring.
-    // Internal/Shizuku results come directly from Ackpine's session.await().
     private val installBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
@@ -333,7 +337,6 @@ class UpdateViewModel(
 
     /**
      * Reset state if an external installation timed out or was abandoned.
-     * Internal/Shizuku cancellations are handled automatically via Ackpine's await().
      */
     fun resetIfInstallCancelled() {
         // If we're in INSTALLING state but the pending installation was canceled,
