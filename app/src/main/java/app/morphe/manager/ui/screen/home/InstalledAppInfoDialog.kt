@@ -254,11 +254,13 @@ fun InstalledAppInfoDialog(
         }
     )
 
-    // Expert Mode Repatch Dialog is rendered by HomeDialogs via homeViewModel.showExpertModeDialog.
     // Patch flow always starts with onTriggerPatchFlow → showPatchDialog → ApkAvailabilityDialog,
     // where the user picks the APK source. Expert mode dialog opens after APK selection.
+    // We do NOT call onDismiss() here. InstalledAppInfoDialog stays open (hidden behind
+    // ApkAvailabilityDialog) and is dismissed in HomeViewModel.proceedWithPatching() right
+    // before navigating to PatcherScreen. This eliminates the flash of background that would
+    // appear between closing this dialog and opening the next one
     fun handlePatchClick() {
-        onDismiss()
         onTriggerPatchFlow(viewModel.installedApp?.originalPackageName ?: return)
     }
 
@@ -338,7 +340,6 @@ fun InstalledAppInfoDialog(
                                     buttonText = stringResource(R.string.patch),
                                     buttonIcon = Icons.Outlined.AutoFixHigh,
                                     onClick = {
-                                        onDismiss()
                                         onTriggerPatchFlow(installedApp.originalPackageName)
                                     },
                                     isError = true
@@ -358,7 +359,6 @@ fun InstalledAppInfoDialog(
                                     buttonText = stringResource(R.string.patch),
                                     buttonIcon = Icons.Outlined.AutoFixHigh,
                                     onClick = {
-                                        onDismiss()
                                         onTriggerPatchFlow(installedApp.originalPackageName)
                                     },
                                     isError = false
@@ -440,7 +440,6 @@ fun InstalledAppInfoDialog(
                                             buttonText = stringResource(R.string.patch),
                                             buttonIcon = Icons.Outlined.AutoFixHigh,
                                             onClick = {
-                                                onDismiss()
                                                 onTriggerPatchFlow(installedApp.originalPackageName)
                                             },
                                             isError = true,
@@ -464,7 +463,6 @@ fun InstalledAppInfoDialog(
                                             buttonText = stringResource(R.string.patch),
                                             buttonIcon = Icons.Outlined.AutoFixHigh,
                                             onClick = {
-                                                onDismiss()
                                                 onTriggerPatchFlow(installedApp.originalPackageName)
                                             },
                                             isError = false,

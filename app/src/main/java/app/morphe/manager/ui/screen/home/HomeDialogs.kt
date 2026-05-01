@@ -316,7 +316,6 @@ fun HomeDialogs(
                 packageName = packageName,
                 onDismiss = homeViewModel::dismissInstalledAppInfo,
                 onTriggerPatchFlow = { originalPackageName ->
-                    homeViewModel.dismissInstalledAppInfo()
                     homeViewModel.showPatchDialog(originalPackageName)
                 },
                 homeViewModel = homeViewModel,
