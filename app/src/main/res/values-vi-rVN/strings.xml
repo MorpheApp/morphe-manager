@@ -563,7 +563,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_import_keystore_dialog_alias_field">Tên người dùng (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Mật khẩu</string>
     <string name="settings_system_import_keystore_dialog_button">Nhập</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Định dạng Keystore</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Định dạng kho khoá</string>
     <string name="settings_system_import_keystore_wrong_credentials">Thông tin xác thực kho khóa không đúng</string>
     <string name="settings_system_import_keystore_success">Đã nhập kho khóa</string>
     <string name="settings_system_import_keystore_failed">Khổng thể nhập kho khóa</string>

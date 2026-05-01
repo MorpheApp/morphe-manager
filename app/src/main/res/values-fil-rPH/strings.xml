@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Dapat pahintulutan nang maaga ang pahintulot sa pag-install ng app para maiwasan ang isang pagkakamali sa sistema ng Android 11 na negatibong makakaapekto sa karanasan ng tagagamit</string>
     <string name="deep_link_add_source_title">Magdagdag ng mapagkukunan</string>
     <string name="deep_link_add_source_message">Gusto mo bang idagdag ang patch source na ito sa Morphe?</string>
-    <string name="deep_link_add_source_warning">Magdagdag lamang ng mapagkukunan mula sa mga mapagkukunan na pinagkakatiwalaan mo</string>
+    <string name="deep_link_add_source_warning">Magdagdag lamang ng mga mapagkukunan na pinagkakatiwalaan mo</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Magagamit ang update para sa Morphe</string>
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>

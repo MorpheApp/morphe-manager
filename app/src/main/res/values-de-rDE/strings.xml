@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Die App-Installationserlaubnis muss vorab erteilt werden, um einen Fehler im Android-11-System zu vermeiden, der die Benutzererfahrung negativ beeinflussen wird</string>
     <string name="deep_link_add_source_title">Quelle hinzufügen</string>
     <string name="deep_link_add_source_message">Möchten Sie diese Patch-Quelle zu Morphe hinzufügen?</string>
-    <string name="deep_link_add_source_warning">Fügen Sie nur Quellen von vertrauenswürdigen Quellen hinzu</string>
+    <string name="deep_link_add_source_warning">Fügen Sie nur Quellen hinzu, denen Sie vertrauen</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-Update verfügbar</string>
     <string name="home_update_available_subtitle">Neue Version bereit zur Installation</string>

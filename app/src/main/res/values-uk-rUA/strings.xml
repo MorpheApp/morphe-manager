@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Дозвіл на встановлення застосунку необхідно надати заздалегідь, щоб уникнути помилки в Android 11, яка негативно вплине на взаємодію з користувачем</string>
     <string name="deep_link_add_source_title">Додати джерело</string>
     <string name="deep_link_add_source_message">Ви хочете додати це джерело патчів в Morphe?</string>
-    <string name="deep_link_add_source_warning">Додавайте лише джерела, яким ви довіряєте.</string>
+    <string name="deep_link_add_source_warning">Додавайте лише джерела, яким ви довіряєте</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступне оновлення Morphe</string>
     <string name="home_update_available_subtitle">Нова версія готова до встановлення</string>

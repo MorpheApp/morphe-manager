@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso per l\'installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
     <string name="deep_link_add_source_title">Aggiungi fonte</string>
     <string name="deep_link_add_source_message">Vuoi aggiungere questa fonte delle patch a Morphe?</string>
-    <string name="deep_link_add_source_warning">Aggiungi solo fonti da fonti di cui ti fidi</string>
+    <string name="deep_link_add_source_warning">Aggiungi solo fonti di cui ti fidi</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Aggiornamento di Morphe disponibile</string>
     <string name="home_update_available_subtitle">Nuova versione pronta per l\'installazione</string>

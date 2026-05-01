@@ -341,7 +341,7 @@
     <string name="settings_appearance_background_grid">격자</string>
     <string name="settings_appearance_background_particles">입자</string>
     <string name="settings_appearance_background_none">없음</string>
-    <string name="settings_appearance_background_random">임의</string>
+    <string name="settings_appearance_background_random">무작의</string>
     <string name="settings_appearance_background_random_interval_launch">앱 실행 시</string>
     <string name="settings_appearance_background_random_interval_daily">매일</string>
     <string name="settings_appearance_background_random_interval_3days">3일마다</string>
@@ -715,7 +715,7 @@ morphe_header_custom_dark.png
     <string name="changelog_retry">다시 시도</string>
     <string name="changelog_empty">변경 사항이 없습니다</string>
     <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
-    <string name="update_available">업데이트를 할 수 있음</string>
+    <string name="update_available">업데이트 사용 가능</string>
     <string name="ready_to_install_update">업데이트 설치 준비 완료</string>
     <string name="update_completed">업데이트하였습니다</string>
     <string name="install_update_manager_failed">업데이트를 할 수 없습니다</string>

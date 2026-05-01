@@ -14,7 +14,6 @@
     <string name="android_11_bug_dialog_description">એપ ઇન્સ્ટોલેશનની પરવાનગી પહેલેથી જ આપવી જરૂરી છે, કારણ કે Android 11 સિસ્ટમમાં એક બગ છે જે યુઝર અનુભવને નકારાત્મક રીતે અસર કરી શકે છે</string>
     <string name="deep_link_add_source_title">સ્ત્રોત ઉમેરો</string>
     <string name="deep_link_add_source_message">શું તમે આ પેચ સ્ત્રોતને મોર્ફેમાં ઉમેરવા માંગો છો?</string>
-    <string name="deep_link_add_source_warning">તમને વિશ્વાસ હોય તેવા સ્ત્રોતોમાંથી જ સ્ત્રોત ઉમેરો</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <string name="home_update_available_subtitle">નવું સંસ્કરણ ઇન્સ્ટોલ કરવા માટે તૈયાર છે</string>

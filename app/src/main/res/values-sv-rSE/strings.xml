@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <string name="deep_link_add_source_title">Lägg till källa</string>
     <string name="deep_link_add_source_message">Vill du lägga till den här tilläggskällan i Morphe?</string>
-    <string name="deep_link_add_source_warning">Lägg bara till källor från källor du litar på</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
@@ -221,7 +220,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_install_type_custom_installer">Anpassad installerare</string>
     <string name="home_app_info_install_type_system_installer">Systemets installerare</string>
     <string name="home_app_info_patched_at">Modifierades</string>
-    <string name="home_app_info_patch_update_available">Uppdatering för tillägg är tillgänglig</string>
+    <string name="home_app_info_patch_update_available">Tilläggsuppdatering är tillgänglig</string>
     <string name="home_app_info_patch_update_available_description">En nyare version av tilläggen är tillgänglig. Modifiera din app igen för att få de senaste förbättringarna och felkorrigeringarna</string>
     <string name="home_app_info_app_deleted_warning">Appen har avinstallerats</string>
     <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Modifiera den igen för att återställa funktionaliteten</string>
@@ -339,6 +338,10 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_appearance_background_grid">Rutnät</string>
     <string name="settings_appearance_background_particles">Partiklar</string>
     <string name="settings_appearance_background_none">Ingen</string>
+    <string name="settings_appearance_background_random">Slumpmässig</string>
+    <string name="settings_appearance_background_random_interval_launch">Vid start</string>
+    <string name="settings_appearance_background_random_interval_daily">Varje dag</string>
+    <string name="settings_appearance_background_random_interval_3days">Var tredje dag</string>
     <string name="settings_appearance_parallax_effect">Parallaxeffekt</string>
     <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när enheten lutas</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -417,15 +420,15 @@ Vanliga APK-filer rensas från inbyggda bibliotek för arkitekturer som inte st�
     <string name="settings_advanced_bytecode_mode_full">Fullt</string>
     <string name="settings_advanced_bytecode_mode_full_description">Långsammare modifiering, replikerar gammalt beteende. Använd endast om läget Snabbt orsakar problem</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
-    <string name="settings_advanced_github_pat">PAT för GitHub</string>
+    <string name="settings_advanced_github_pat">Personlig åtkomsttoken för GitHub</string>
     <string name="settings_advanced_github_pat_description">Krävs för att använda hämtningsbegäranden som källor</string>
     <string name="settings_advanced_github_pat_configured">Token konfigurerad</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken (PAT) för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en PAT med omfattningen public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en personlig åtkomsttoken med omfattningen public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till denna PAT i exporterade Morphe-inställningar</string>
-    <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till denna personliga åtkomsttoken i exporterade Morphe-inställningar</string>
+    <string name="settings_advanced_github_pat_export_warning">Dela inte din personliga åtkomsttoken. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Tilläggsalternativ</string>
     <string name="settings_advanced_patch_options_youtube_description">Alternativ för tema, varumärkesanpassning och sidhuvud</string>
@@ -556,6 +559,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_import_keystore_dialog_alias_field">Användarnamn (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Lösenord</string>
     <string name="settings_system_import_keystore_dialog_button">Importera</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Nyckellagerformat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Felaktiga nyckellageruppgifter</string>
     <string name="settings_system_import_keystore_success">Nyckellager importerat</string>
     <string name="settings_system_import_keystore_failed">Det gick inte att importera nyckellager</string>
@@ -608,11 +612,11 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patch_selection_no_saved">Inga sparade tilläggsurval</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
-    <string name="settings_system_patch_selection_source_format">Källa %s</string>
+    <string name="settings_system_patch_selection_source_format">Källa nr %s</string>
     <string name="settings_system_patch_selection_will_delete">Detta tar bort:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Detta tar bort alla sparade tilläggsurval för alla paket och källor permanent</string>
     <string name="settings_system_patch_selection_reset_package_warning">Detta tar bort alla sparade tilläggsurval för %s i alla källor permanent</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Detta tar bort det sparade tilläggsurvalet för %1$s i källa %2$s permanent</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Detta tar bort det sparade tilläggsurvalet för %1$s i källa nr %2$s permanent</string>
     <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
     <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
     <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
@@ -625,7 +629,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
     <string name="settings_system_share_website_description">Dela Morphes officiella webbplats</string>
-    <string name="settings_system_manager_description">"Ett projekt med öppen källkod för modern och smidig modifiering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
+    <string name="settings_system_manager_description">"Ett projekt med öppen källkod för modern, smidig modifiering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
     <string name="credits">Medverkande</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>

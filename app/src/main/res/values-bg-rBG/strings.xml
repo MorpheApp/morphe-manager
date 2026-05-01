@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Предварително трябва да се предостави право за инсталиране на приложението, за да се избегне грешка в системата Android 11, която ще повлияе негативно на потребителския опит</string>
     <string name="deep_link_add_source_title">Добавяне на източник</string>
     <string name="deep_link_add_source_message">Искате ли да добавите този източник на корекции към Morphe?</string>
-    <string name="deep_link_add_source_warning">Добавяйте източници само от източници, на които имате доверие</string>
+    <string name="deep_link_add_source_warning">Добавяйте само източници, на които имате доверие</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Налично е ново обновление за Morphe</string>
     <string name="home_update_available_subtitle">Готово за инсталиране</string>

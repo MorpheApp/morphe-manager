@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">अँड्रॉइड 11 सिस्टिममधील एक दोष टाळण्यासाठी, ॲप स्थापनेची परवानगी आधीच देणे आवश्यक आहे; अन्यथा त्याचा वापरकर्त्याच्या अनुभवावर वाईट परिणाम होईल.</string>
     <string name="deep_link_add_source_title">मूळ जोडा</string>
     <string name="deep_link_add_source_message">तुम्हाला \'Morphe\' मध्ये ही सुधारणा मूळ जोडायची आहे का?</string>
-    <string name="deep_link_add_source_warning">फक्त तुमच्या विश्वासार्ह मुळांमधूनच मूळ जोडा.</string>
+    <string name="deep_link_add_source_warning">फक्त तुम्ही विश्वास ठेवता अशा स्त्रोतांनाच जोडा</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe नवीन सुधारणा उपलब्ध आहे</string>
     <string name="home_update_available_subtitle">नवीन सुधारणा स्थापनेसाठी तयार आहे</string>

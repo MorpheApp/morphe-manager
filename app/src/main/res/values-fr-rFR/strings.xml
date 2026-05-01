@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">L\'autorisation d\'installation de l\'application doit être accordée à l\'avance afin d\'éviter un bug dans le système Android 11 qui affectera négativement l\'expérience utilisateur</string>
     <string name="deep_link_add_source_title">Ajouter la source</string>
     <string name="deep_link_add_source_message">Voulez-vous ajouter cette source de patch à Morphe ?</string>
-    <string name="deep_link_add_source_warning">Ajoutez uniquement des sources provenant de sources auxquelles vous faites confiance</string>
+    <string name="deep_link_add_source_warning">Ajoutez uniquement des sources auxquelles vous faites confiance</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Mise à jour de Morphe disponible</string>
     <string name="home_update_available_subtitle">Nouvelle version prête à installer</string>
@@ -341,8 +341,8 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="settings_appearance_background_particles">Particules</string>
     <string name="settings_appearance_background_none">Aucun</string>
     <string name="settings_appearance_background_random">Aléatoire</string>
-    <string name="settings_appearance_background_random_interval_launch">Au lancement</string>
-    <string name="settings_appearance_background_random_interval_daily">Quotidien</string>
+    <string name="settings_appearance_background_random_interval_launch">Au démarrage</string>
+    <string name="settings_appearance_background_random_interval_daily">Quotidiennement</string>
     <string name="settings_appearance_background_random_interval_3days">Tous les 3 jours</string>
     <string name="settings_appearance_parallax_effect">Effet de parallaxe</string>
     <string name="settings_appearance_parallax_effect_description">Déplacement d\'arrière-plan fluide lors de l\'inclinaison de l\'appareil</string>

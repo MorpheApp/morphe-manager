@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Dozvola za instalaciju aplikacije mora biti odobrena prethodno kako bi se izbjegla greška u Android 11 sistemu koja će negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Dodaj izvor</string>
     <string name="deep_link_add_source_message">Da li želite da dodate ovaj izvor patch-a u Morphe?</string>
-    <string name="deep_link_add_source_warning">Dodaj izvor samo iz izvora kojima verujete</string>
+    <string name="deep_link_add_source_warning">Dodajte samo izvore kojima verujete</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupno ažuriranje za Morphe</string>
     <string name="home_update_available_subtitle">Nova verzija sprema za instalaciju</string>

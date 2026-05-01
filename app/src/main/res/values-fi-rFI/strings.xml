@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
     <string name="deep_link_add_source_title">Lisää lähde</string>
     <string name="deep_link_add_source_message">Haluatko lisätä tämän korjauslähteen Morpheen?</string>
-    <string name="deep_link_add_source_warning">Lisää lähde vain luotettavista lähteistä</string>
+    <string name="deep_link_add_source_warning">Lisää vain lähteitä, joihin luotat</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-päivitys saatavilla</string>
     <string name="home_update_available_subtitle">Uusi versio valmis asennukseen</string>

@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">必须提前授予应用安装权限，以避免 Android 11 系统中的某个错误对用户体验造成负面影响。</string>
     <string name="deep_link_add_source_title">添加来源</string>
     <string name="deep_link_add_source_message">您想将此补丁源添加到Morphe吗？</string>
-    <string name="deep_link_add_source_warning">仅从您信任的来源添加来源</string>
+    <string name="deep_link_add_source_warning">仅添加您信任的来源</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe更新可用</string>
     <string name="home_update_available_subtitle">新版本已准备好安装</string>

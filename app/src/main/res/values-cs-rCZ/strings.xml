@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Oprávnění k instalaci aplikací musí být uděleno předem, abyste se vyhnuli chybě v systému Android 11, která negativně ovlivňuje uživatelský zážitek</string>
     <string name="deep_link_add_source_title">Přidat zdroj</string>
     <string name="deep_link_add_source_message">Chcete přidat tento zdroj záplaty do Morphe?</string>
-    <string name="deep_link_add_source_warning">Přidávejte zdroje pouze z důvěryhodných zdrojů</string>
+    <string name="deep_link_add_source_warning">Přidávejte pouze zdroje, kterým důvěřujete</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupná aktualizace Morphe</string>
     <string name="home_update_available_subtitle">Připravena nová verze k instalaci</string>
@@ -344,7 +344,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="settings_appearance_background_random">Náhodné</string>
     <string name="settings_appearance_background_random_interval_launch">Při spuštění</string>
     <string name="settings_appearance_background_random_interval_daily">Denně</string>
-    <string name="settings_appearance_background_random_interval_3days">Ob tři dny</string>
+    <string name="settings_appearance_background_random_interval_3days">Každé 3 dny</string>
     <string name="settings_appearance_parallax_effect">Paralaxový efekt</string>
     <string name="settings_appearance_parallax_effect_description">Plynulé posunování pozadí při naklánění zařízení</string>
     <!-- Settings - Appearance Tab - Theme -->

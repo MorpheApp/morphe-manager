@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Android 11 では、ユーザー体験に悪影響を及ぼす不具合が確認されています。あらかじめアプリのインストール権限を許可しておいてください</string>
     <string name="deep_link_add_source_title">ソースを追加</string>
     <string name="deep_link_add_source_message">このパッチソースを Morphe に追加しますか？</string>
-    <string name="deep_link_add_source_warning">信頼できる配布元からのソースだけを追加してください</string>
+    <string name="deep_link_add_source_warning">信頼できるソースのみを追加してください</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe の更新が利用可能です</string>
     <string name="home_update_available_subtitle">新しいバージョンがインストール可能です</string>
@@ -93,14 +93,14 @@
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt; にパッチを適用するには、以下のバージョンの APK (未パッチ) が必要です</string>
     <string name="home_apk_availability_recommended_label">推奨</string>
     <string name="home_apk_availability_unpatched_label">未パッチ</string>
-    <string name="home_apk_availability_incompatible_label">非互換</string>
+    <string name="home_apk_availability_incompatible_label">非対応</string>
     <string name="home_apk_availability_yes">はい、 APK を探すのを手伝ってください</string>
     <string name="home_apk_availability_no">いいえ、既に APK を持っています</string>
     <string name="home_apk_use_saved_with_version">保存済みの APK (v%s) を使用する</string>
     <string name="home_app_info_no_saved_apk">保存済みの APK がありません。パッチを適用するには、 APK ファイルを再度選択してください</string>
-    <string name="home_version_requires_android">Android %1$s+が必要です</string>
+    <string name="home_version_requires_android">Android %1$s 以降が必要です</string>
     <string name="home_apk_no_compatible_versions_title">このデバイスではサポートされていません</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; は、Android %2$d (API %3$d) でサポートされているバージョンがありません。宣言されているすべてのバージョンは、より高いAndroidバージョンを必要とします。</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; は Android %2$d (API %3$d) に対応したバージョンがありません。すべての対応バージョンは、より新しい Android バージョンが必要です</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">オリジナルの APK をダウンロード</string>
     <string name="home_download_instructions_steps_title">操作手順:</string>
@@ -344,7 +344,7 @@
     <string name="settings_appearance_background_random">ランダム</string>
     <string name="settings_appearance_background_random_interval_launch">起動時</string>
     <string name="settings_appearance_background_random_interval_daily">毎日</string>
-    <string name="settings_appearance_background_random_interval_3days">3日に1回</string>
+    <string name="settings_appearance_background_random_interval_3days">3日ごと</string>
     <string name="settings_appearance_parallax_effect">視差効果</string>
     <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
     <!-- Settings - Appearance Tab - Theme -->

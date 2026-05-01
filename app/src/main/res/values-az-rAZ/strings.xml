@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_description">Tətbiq quraşdırılması icazəsi istifadəçi təcrübəsinə mənfi təsir edəcək Android 11 sistemindəki səhvə mane olmaq üçün əvvəlcədən qəbul edilməlidir</string>
     <string name="deep_link_add_source_title">Mənbə əlavə et</string>
     <string name="deep_link_add_source_message">Bu yamaq mənbəyin Morphe-yə əlavə etmək istəyirsiniz?</string>
-    <string name="deep_link_add_source_warning">Yalnız güvəndiyiniz mənbələrdən mənbə əlavə edin</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Əlçatan Morphe yenilənməsi</string>
     <string name="home_update_available_subtitle">Yeni versiya quraşdırmaq üçün hazır</string>
@@ -93,10 +92,14 @@
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt; yamaqlamaq üçün versiyaların yamaqlanmayan APK-sına ehtiyacınız var:</string>
     <string name="home_apk_availability_recommended_label">Tövsiyə olunan</string>
     <string name="home_apk_availability_unpatched_label">Yamaqlanmayan</string>
+    <string name="home_apk_availability_incompatible_label">Uyuşmaz</string>
     <string name="home_apk_availability_yes">Bəli, APK tapmağa mənə kömək et</string>
     <string name="home_apk_availability_no">Xeyr, Mənim artıq APK-m var</string>
     <string name="home_apk_use_saved_with_version">Saxlanılan APK-nı istifadə et (v%s)</string>
     <string name="home_app_info_no_saved_apk">Saxlanılan APK yoxdur. Yamaqlanma APK faylını təkrar seçmək istəyəcək</string>
+    <string name="home_version_requires_android">Android %1$s+ tələb olunur</string>
+    <string name="home_apk_no_compatible_versions_title">Bu cihazda dəstəklənmir</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tətbiqinin Android %2$d (API %3$d) üçün dəstəklənən versiyaları yoxdur. Bütün elan olunan versiyalar daha yüksək Android versiyası tələb edir</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Əsil APK-nı Yüklə</string>
     <string name="home_download_instructions_steps_title">Təlimatlar:</string>
@@ -337,6 +340,10 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_background_grid">Şəbəkə</string>
     <string name="settings_appearance_background_particles">Zərrəciklər</string>
     <string name="settings_appearance_background_none">Heç biri</string>
+    <string name="settings_appearance_background_random">Təsadüfi</string>
+    <string name="settings_appearance_background_random_interval_launch">Buraxılışda</string>
+    <string name="settings_appearance_background_random_interval_daily">Gündəlik</string>
+    <string name="settings_appearance_background_random_interval_3days">Hər 3 gündən bir</string>
     <string name="settings_appearance_parallax_effect">Parallaks effekti</string>
     <string name="settings_appearance_parallax_effect_description">Cihazı çevirərkən fonu rəvan şəkildə tərpətmək</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -553,6 +560,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">İstifadəçi adı (Ləqəb)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parol</string>
     <string name="settings_system_import_keystore_dialog_button">İdxal et</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore formatı</string>
     <string name="settings_system_import_keystore_wrong_credentials">Səhv keystore etimadnaməsi</string>
     <string name="settings_system_import_keystore_success">Keystore idxal edildi</string>
     <string name="settings_system_import_keystore_failed">Keystore-u idxal etmək olmadı</string>

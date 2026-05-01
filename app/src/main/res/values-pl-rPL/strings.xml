@@ -341,7 +341,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_appearance_background_grid">Kratka</string>
     <string name="settings_appearance_background_particles">Cząsteczki</string>
     <string name="settings_appearance_background_none">Brak</string>
-    <string name="settings_appearance_background_random">Losowy</string>
+    <string name="settings_appearance_background_random">Losowa</string>
     <string name="settings_appearance_background_random_interval_launch">Przy uruchomieniu</string>
     <string name="settings_appearance_background_random_interval_daily">Codziennie</string>
     <string name="settings_appearance_background_random_interval_3days">Co 3 dni</string>

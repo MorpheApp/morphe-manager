@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
     <string name="deep_link_add_source_title">Bron toevoegen</string>
     <string name="deep_link_add_source_message">Wilt u deze patchbron toevoegen aan Morphe?</string>
-    <string name="deep_link_add_source_warning">Voeg alleen bronnen toe van bronnen waarvan u vertrouwt.</string>
+    <string name="deep_link_add_source_warning">Voeg alleen bronnen toe die u vertrouwt</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-update beschikbaar</string>
     <string name="home_update_available_subtitle">Nieuwe versie gereed voor installatie</string>

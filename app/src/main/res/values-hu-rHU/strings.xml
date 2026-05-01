@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
     <string name="deep_link_add_source_title">Forrás hozzáadása</string>
     <string name="deep_link_add_source_message">Hozzáadod ezt a módosításforrást a Morphe-hez?</string>
-    <string name="deep_link_add_source_warning">Csak megbízható forrást adj hozzá</string>
+    <string name="deep_link_add_source_warning">Csak megbízható forrásból adj hozzá forrásokat</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>

@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_description">Dopuštenje za instalaciju aplikacije mora se dati unaprijed kako bi se izbjegla greška u sustavu Android 11 koja će negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Dodajte izvor</string>
     <string name="deep_link_add_source_message">Želite li dodati ovaj izvor patcha u Morphe?</string>
-    <string name="deep_link_add_source_warning">Dodajte samo izvore iz izvora kojima vjerujete</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
@@ -32,6 +31,8 @@
     <string name="home_no_apps_title">Nema dostupnih aplikacija</string>
     <string name="home_no_apps_subtitle">Dodaj izvor patcha ili uključi postojeći u %s</string>
     <string name="home_no_apps_search_subtitle">Nijedna aplikacija ne odgovara \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Sve su aplikacije sakrivene</string>
+    <string name="home_all_apps_hidden_subtitle">Sakrili ste sve aplikacije s početnog zaslona</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Koju aplikaciju želite patchati?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -81,17 +82,24 @@
     <string name="sources_update_success">Uspješno ažurirano</string>
     <string name="sources_update_unavailable">Nema dostupnih ažuriranja</string>
     <string name="sources_download_fail">Preuzimanje izvora nije uspjelo: %s</string>
+    <string name="sources_download_fail_named">Nije uspjelo preuzimanje \'%1$s\': %2$s</string>
     <string name="sources_download_endpoint_not_found">Nije moguće ažurirati \'%1$s\': JSON datoteka patcha nije pronađena na konfiguriranoj poveznici</string>
+    <string name="sources_patch_expert_badge">Ekspert</string>
+    <string name="sources_patch_expert_badge_tooltip">Omogućite Ekspert način rada u Postavkama da biste ručno uključili ovaj patch</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Trebate li pomoć u pronalaženju izvorne nepatchane aplikacije?</string>
     <string name="home_apk_availability_dialog_simple">Za patchanje &lt;b&gt;%s&lt;/b&gt;, potrebna vam je nepatchana aplikacija verzije:</string>
     <string name="home_apk_availability_dialog_expert">Za patchanje &lt;b&gt;%s&lt;/b&gt;, potrebna vam je nepatchana aplikacija verzije:</string>
     <string name="home_apk_availability_recommended_label">Preporučeno</string>
     <string name="home_apk_availability_unpatched_label">Nepatchano</string>
+    <string name="home_apk_availability_incompatible_label">Nekompatibilno</string>
     <string name="home_apk_availability_yes">Da, pomozi mi pronaći aplikaciju</string>
     <string name="home_apk_availability_no">Ne, već imam aplikaciju</string>
     <string name="home_apk_use_saved_with_version">Koristi spremljenu aplikaciju(v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema spremljene aplikacije. Patchanje će zahtijevati ponovni odabir aplikacije</string>
+    <string name="home_version_requires_android">Zahtijeva Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Nije podržano na ovom uređaju</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nema podržane verzije za Android %2$d (API %3$d). Sve deklarirane verzije zahtijevaju višu verziju Androida</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Preuzmite originalnu aplikaciju</string>
     <string name="home_download_instructions_steps_title">Upute:</string>
@@ -111,6 +119,9 @@
     <string name="home_selected_version">Odabrana verzija</string>
     <string name="home_select_apk_title">Odaberite aplikaciju</string>
     <string name="home_select_any_apk_description">Dodirnite tipku ispod za odabir aplikacije bilo koje aplikacije za umetanje patcha</string>
+    <string name="home_invalid_apk_unreadable">Nije moguće pročitati datoteku. Provjerite je li \'Vanjska pohrana\' ograničena baterijom</string>
+    <string name="home_invalid_apk_not_an_apk">Odabrana datoteka nije valjani APK</string>
+    <string name="home_invalid_apk_io_error">Nije moguće otvoriti datoteku. Molimo pokušajte ponovo</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Napredni način</string>
     <string name="expert_mode_search">Pretraživanje patcheva</string>
@@ -118,6 +129,7 @@
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_reset_to_default">Omogući preporučene patcheve</string>
+    <string name="expert_mode_restore_saved">Vrati spremljeni odabir</string>
     <string name="expert_mode_no_results">Nema pronađenih patcheva</string>
     <string name="expert_mode_universal_patches">Univerzalni patchevi</string>
     <string name="expert_mode_new_patches">Novi</string>
@@ -214,6 +226,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="home_app_info_patch_update_available_description">Dostupna je novija verzija patcheva. Ponovno instalirajte patch za aplikaciju kako biste dobili najnovija poboljšanja i ispravke.</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
     <string name="home_app_info_app_deleted_description">Ova je aplikacija deinstalirana izvan Morphea. Ponovno je patchajte kako biste vratili funkcionalnost</string>
+    <string name="home_app_info_apk_size">Veličina APK datoteke</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root način zahtijeva da je originalna aplikacija instalirana na vašem uređaju prije patchanja</string>
     <string name="root_gmscore_excluded">Podrška patchanja za GmsCore je isključena u root načinu</string>
@@ -327,6 +340,10 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="settings_appearance_background_grid">Mreža</string>
     <string name="settings_appearance_background_particles">Čestice</string>
     <string name="settings_appearance_background_none">Ništa</string>
+    <string name="settings_appearance_background_random">Nasumično</string>
+    <string name="settings_appearance_background_random_interval_launch">Kod pokretanja</string>
+    <string name="settings_appearance_background_random_interval_daily">Dnevno</string>
+    <string name="settings_appearance_background_random_interval_3days">Svakih 3 dana</string>
     <string name="settings_appearance_parallax_effect">Efekt paralakse</string>
     <string name="settings_appearance_parallax_effect_description"> Glatko pomicanje pozadine pri naginjanju uređaja</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -344,6 +361,9 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="settings_appearance_translations_info_title">Prijevodi za neke jezike mogu nedostajati ili biti nepotpuni</string>
     <string name="settings_appearance_translations_info_text">Da biste preveli nove jezike ili poboljšali postojeće prijevode, posjetite %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Početni zaslon</string>
+    <string name="settings_appearance_greeting_phrases">Pozdravne fraze</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Pokaži poruku dobrodošlice na početnom zaslonu</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacije</string>
     <string name="settings_appearance_app_icon_default">Zadano</string>
@@ -390,7 +410,17 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="settings_advanced_expert_mode_description">Omogući napredne postavke i opcije za prilagodbu za složeno Morphe ispravljanje i prilagodbe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Napredni način?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Napredni način omogućuje više kontrole nad primjenom ispravljava, ali pogrešno konfiguriranje postavki u naprednom načinu može rezultirati nefunkcionalnom aplikacijom</string>
+    <string name="settings_advanced_strip_unused_libs">Optimiziraj za arhitekturu uređaja</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Preskoči podijeljene APK module za nepodržane CPU arhitekture, lokalizacije i gustoće zaslona tijekom spajanja.
+Za obične APK-ove, uklanja izvorne biblioteke za nepodržane arhitekture nakon patchanja"</string>
     <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Način obrade bajtkoda</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kontrolira kako se bajt kod obrađuje tijekom patchanja. Utječe na brzinu patchanja, korištenje memorije i veličinu izlaznog APK-a</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Brzo (Preporučeno)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Brzo</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Brže patchanje i manja upotreba memorije, uz cijenu većeg APK-a. Preporučuje se za uređaje s malo RAM-a ili starije uređaje.</string>
+    <string name="settings_advanced_bytecode_mode_full">Potpuno</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Sporije patchanje, oponaša staro ponašanje. Koristite samo ako brzi način uzrokuje probleme</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Potrebno za izvlačenje zahtjeva</string>
@@ -531,6 +561,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_import_keystore_dialog_alias_field">Korisničko ime (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Lozinka</string>
     <string name="settings_system_import_keystore_dialog_button">Uvezi</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format pohrane ključeva</string>
     <string name="settings_system_import_keystore_wrong_credentials">Netočne vjerodajnice za pohranu ključeva</string>
     <string name="settings_system_import_keystore_success">Uvezeno spremište ključeva</string>
     <string name="settings_system_import_keystore_failed">Uvoz spremišta ključeva nije uspio</string>
@@ -538,6 +569,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_export_keystore_description">Izvezi trenutno spremište ključeva</string>
     <string name="settings_system_export_keystore_unavailable">Nema dostupnog spremišta ključeva za izvoz</string>
     <string name="settings_system_export_keystore_success">Spremište ključeva je izvezeno</string>
+    <string name="settings_system_export_keystore_failed">Uvoz spremišta ključeva nije uspio</string>
     <string name="settings_system_show_password_field">Pokaži lozinku</string>
     <string name="settings_system_hide_password_field">Sakrij lozinku</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -599,6 +631,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_about">O aplikaciji</string>
     <string name="settings_system_share_website">Dijeli web stranicu</string>
     <string name="settings_system_share_website_description">Podijeli službenu stranicu Morphe</string>
+    <string name="settings_system_manager_description">"Projekt otvorenog koda za moderno, pojednostavljeno ažuriranje popularnih Android aplikacija, potaknut povratnim informacijama i doprinosima zajednice"</string>
     <string name="credits">Zasluge</string>
     <string name="credits_current_development">Trenutni razvoj</string>
     <string name="credits_prior_development">Prijašnji razvoj</string>
@@ -665,11 +698,15 @@ Dimenzije slike moraju biti sljedeće:
     <string name="allow">Dopusti</string>
     <string name="details">Detalji</string>
     <string name="hide">Sakrij</string>
+    <string name="hidden">Skriveno</string>
+    <string name="unhide">Otkrij</string>
     <string name="logs">Zapisnici</string>
+    <string name="sources">Izvori</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Učitavanje…</string>
     <string name="unmounting_ellipsis">Isključivanje…</string>
     <string name="importing_ellipsis">Uvoz…</string>
+    <string name="imported_successfully">Uspješno uvezeno.</string>
     <string name="changelog">Prikaži popis promjena</string>
     <string name="changelog_description">Pogledajte najnovije promjene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Neuspjelo preuzimanje zapisa promjena: %s</string>

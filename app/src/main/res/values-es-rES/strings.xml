@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario</string>
     <string name="deep_link_add_source_title">Agregar fuente</string>
     <string name="deep_link_add_source_message">¿Quieres agregar esta fuente de parches a Morphe?</string>
-    <string name="deep_link_add_source_warning">Solo agregue fuentes de fuentes en las que confíe</string>
+    <string name="deep_link_add_source_warning">Solo agrega fuentes en las que confíes</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización de Morphe disponible</string>
     <string name="home_update_available_subtitle"></string>

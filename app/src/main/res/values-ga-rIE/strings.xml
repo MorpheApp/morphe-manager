@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Ní mór cead suiteála na haipe a ghéilleadh roimh ré chun seachaint ar earráid i gcóras Android 11 a dhéanfaidh dochar d\'eispéireas an úsáideora</string>
     <string name="deep_link_add_source_title">Add foinse</string>
     <string name="deep_link_add_source_message">Ar mhaith leat an foinse paiste seo a chur le Morphe?</string>
-    <string name="deep_link_add_source_warning">Cuir foinse ó fhoinsí iontaofa amháin leis</string>
+    <string name="deep_link_add_source_warning">Ná cuir ach foinsí a bhfuil muinín agat astu</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nuashonrú Morphe ar fáil</string>
     <string name="home_update_available_subtitle">Tá nuashonrú nua ar fáil</string>
@@ -93,14 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Chun &lt;b&gt;%s&lt;/b&gt;, a phaisteáil, beidh APK neamhphaisteáilte de na leaganacha seo a leanas ag teastáil uait:</string>
     <string name="home_apk_availability_recommended_label">Molta</string>
     <string name="home_apk_availability_unpatched_label">Díphaisteáilte</string>
-    <string name="home_apk_availability_incompatible_label">Comhroinnte</string>
+    <string name="home_apk_availability_incompatible_label">Neamh-chomhoiriúnach</string>
     <string name="home_apk_availability_yes">Sea, cabhraigh liom APK a aimsiú</string>
     <string name="home_apk_availability_no">Níl, tá APK agam cheana féin</string>
     <string name="home_apk_use_saved_with_version">Úsáid an APK sábháilte (v%s)</string>
     <string name="home_app_info_no_saved_apk">Níl aon APK sábháilte. Beidh ort an comhad APK a roghnú arís le haghaidh paisteála.</string>
-    <string name="home_version_requires_android">Tá Android %1$s+ de dhian</string>
-    <string name="home_apk_no_compatible_versions_title">Ní thacaítear leis an ngníomh seo</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; níl aonta le foighneamhacha do Android %2$d (API %3$d). Teastaíonn leagan níos airde Android óna leaganacha a dearbhú</string>
+    <string name="home_version_requires_android">Éilíonn sé Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Ní thacaítear leis ar an ngléas seo</string>
+    <string name="home_apk_no_compatible_versions_message">Níl aon leaganacha tacaithe ag &lt;b&gt;%1$s&lt;/b&gt; le haghaidh Android %2$d (API %3$d). Éilíonn gach leagan dearbhaithe leagan níos airde de Android.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Íoslódáil an APK bunaidh</string>
     <string name="home_download_instructions_steps_title">Treoracha:</string>
@@ -341,10 +341,10 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="settings_appearance_background_grid">Eangach</string>
     <string name="settings_appearance_background_particles">Cáithníní</string>
     <string name="settings_appearance_background_none">Dada</string>
-    <string name="settings_appearance_background_random">Randam</string>
-    <string name="settings_appearance_background_random_interval_launch">Ar thosú</string>
+    <string name="settings_appearance_background_random">Randamach</string>
+    <string name="settings_appearance_background_random_interval_launch">Ar an seoladh</string>
     <string name="settings_appearance_background_random_interval_daily">Laethúil</string>
-    <string name="settings_appearance_background_random_interval_3days">Gach 3 lae</string>
+    <string name="settings_appearance_background_random_interval_3days">Gach 3 lá</string>
     <string name="settings_appearance_parallax_effect">Effeact parallax</string>
     <string name="settings_appearance_parallax_effect_description">Bogadh réidh an chúlra agus an gléas á chlaonadh</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -560,7 +560,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_import_keystore_dialog_alias_field">Ainm úsáideora (Ainm eile)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Pasfhocal</string>
     <string name="settings_system_import_keystore_dialog_button">Iompórtáil</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Formáid stóir eochrach</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formáid stórais eochrach</string>
     <string name="settings_system_import_keystore_wrong_credentials">Dintiúir mhíchearta stórais eochrach</string>
     <string name="settings_system_import_keystore_success">Eochairstóras allmhairithe</string>
     <string name="settings_system_import_keystore_failed">Theip ar an stór eochrach a iompórtáil</string>

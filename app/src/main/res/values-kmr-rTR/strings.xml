@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Semanka zetîn pêwist be pêşbaziyê pêş de bêtin da hêz be serir xendna Androida 11 zibu vê hilenkirinê yarde ji bo seranê her serxistine ye \'</string>
     <string name="deep_link_add_source_title">Kanîna çavkaniyê zêde bike</string>
     <string name="deep_link_add_source_message">Ma tu wê çavkaniya vê pakê ji Morphe zêde bike?</string>
-    <string name="deep_link_add_source_warning">Tenê çavkaniyek ji çavkaniyên ku wanê pê baweriyê bike, zêde bike</string>
+    <string name="deep_link_add_source_warning">Têkilîyên ku bawerî li wan hebin zêde bike</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nûvekirina Morphe heye</string>
     <string name="home_update_available_subtitle">Nûvekirin amade ye ku were sazkirin</string>

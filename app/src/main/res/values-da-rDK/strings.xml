@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">App-installationsrettighed skal gives i forvejen for at undgå en fejl i Android 11-systemet, der vil have en negativ indflydelse på brugeroplevelsen</string>
     <string name="deep_link_add_source_title">Tilføj kilde</string>
     <string name="deep_link_add_source_message">Vil du tilføje denne patchkilde til Morphe?</string>
-    <string name="deep_link_add_source_warning">Tilføj kun kilder fra kilder, du stoler på</string>
+    <string name="deep_link_add_source_warning">Tilføj kun kilder, du stoler på</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering tilgængelig</string>
     <string name="home_update_available_subtitle">Ny version klar til installation</string>
