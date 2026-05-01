@@ -9,7 +9,8 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -54,7 +55,6 @@ import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.util.*
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 import java.io.File
 
 data class AppliedPatchBundleUi(
@@ -76,10 +76,7 @@ fun InstalledAppInfoDialog(
     onDismiss: () -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
-    viewModel: InstalledAppInfoViewModel = koinViewModel(
-        key = packageName,
-        parameters = { parametersOf(packageName) }
-    ),
+    viewModel: InstalledAppInfoViewModel,
     installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current

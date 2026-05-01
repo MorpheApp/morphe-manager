@@ -45,11 +45,14 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundledAppTarget
 import app.morphe.manager.ui.viewmodel.HomeViewModel
+import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.*
 import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import java.net.URI
 
 /**
@@ -305,6 +308,10 @@ fun HomeDialogs(
     // Installed App Info Dialog
     homeViewModel.showInstalledAppInfoDialog?.let { packageName ->
         key(packageName, homeViewModel.installedAppDialogToken) {
+            val installedAppInfoViewModel: InstalledAppInfoViewModel = koinViewModel(
+                key = "${packageName}_${homeViewModel.installedAppDialogToken}",
+                parameters = { parametersOf(packageName) }
+            )
             InstalledAppInfoDialog(
                 packageName = packageName,
                 onDismiss = homeViewModel::dismissInstalledAppInfo,
@@ -312,7 +319,8 @@ fun HomeDialogs(
                     homeViewModel.dismissInstalledAppInfo()
                     homeViewModel.showPatchDialog(originalPackageName)
                 },
-                homeViewModel = homeViewModel
+                homeViewModel = homeViewModel,
+                viewModel = installedAppInfoViewModel
             )
         }
     }
