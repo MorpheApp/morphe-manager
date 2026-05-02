@@ -1551,7 +1551,7 @@ class HomeViewModel(
             if (isSplitFile && requiredApkFileType?.isApk == true && requiredApkFileType.isRequired) {
                 pendingSelectedApp = selectedApp
                 showSplitApkWarningDialog = true
-                cleanupPendingData(keepSelectedApp = true)
+                cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
                 return
             }
 
@@ -1588,7 +1588,7 @@ class HomeViewModel(
                             packageName = selectedApp.packageName,
                             appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
                         )
-                        cleanupPendingData(keepSelectedApp = true)
+                        cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
                         return
                     }
                 }
@@ -1655,7 +1655,7 @@ class HomeViewModel(
                 allCompatibleVersions = allVersions,
                 isExperimental = isVersionExperimental
             )
-            cleanupPendingData(keepSelectedApp = true)
+            cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
             return
         }
 
@@ -1678,7 +1678,7 @@ class HomeViewModel(
             } else {
                 showUnsupportedVersionDialog = state
             }
-            cleanupPendingData(keepSelectedApp = true)
+            cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
             return
         }
 
@@ -1889,17 +1889,25 @@ class HomeViewModel(
                 return
             }
 
-            // If the user pre-selected a bundle via SimpleBundleSelectDialog, use it directly
+            // If the user pre-selected a bundle via SimpleBundleSelectDialog, use it directly.
+            // Use allowIncompatible=true unconditionally: the user explicitly picked this bundle
+            // AND explicitly picked the APK version, so we must respect both choices regardless
+            // of whether the version is in the bundle's supported list
             val preSelectedUid = pendingSelectedBundleUid
             if (preSelectedUid != null) {
                 pendingSelectedBundleUid = null
-                val chosen = bundleWithPatches.find { (bundle, _) -> bundle.uid == preSelectedUid }
-                if (chosen != null) {
-                    val patches = mapOf(chosen.first.uid to chosen.second).applyGmsCoreFilter()
-                    proceedWithPatching(selectedApp, patches, emptyMap())
-                    return
+                val bundle = allBundles.find { it.uid == preSelectedUid }
+                if (bundle != null) {
+                    val patchNames = bundle.patchSequence(allowIncompatible = true)
+                        .filter { it.include }
+                        .mapTo(mutableSetOf()) { it.name }
+                    if (patchNames.isNotEmpty()) {
+                        val patches = mapOf(bundle.uid to patchNames).applyGmsCoreFilter()
+                        proceedWithPatching(selectedApp, patches, emptyMap())
+                        return
+                    }
                 }
-                // Pre-selected bundle no longer has patches - fall through to normal logic below
+                // Pre-selected bundle has no patches at all - fall through
             }
 
             // Simple mode: if more than one bundle has applicable patches, ask the user which single bundle to use
@@ -1910,7 +1918,7 @@ class HomeViewModel(
                 return
             }
 
-            // Only one bundle has patches - use it directly (no prompt needed).
+            // Only one bundle has patches - use it directly (no prompt needed)
             val patches = bundleWithPatches
                 .associate { (bundle, patches) -> bundle.uid to patches }
                 .applyGmsCoreFilter()
@@ -2218,14 +2226,14 @@ class HomeViewModel(
     /**
      * Clean up pending data.
      */
-    fun cleanupPendingData(keepSelectedApp: Boolean = false) {
+    fun cleanupPendingData(keepSelectedApp: Boolean = false, keepBundleUid: Boolean = false) {
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
         pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
-        pendingSelectedBundleUid = null
+        if (!keepBundleUid) pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
         pendingSavedApkInfo = null
         if (!keepSelectedApp) {
