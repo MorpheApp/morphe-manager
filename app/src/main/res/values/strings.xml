@@ -182,6 +182,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_low_disk_space_dialog_title">Low disk space</string>
     <string name="home_low_disk_space_dialog_message">Only %1$.2f GB of free storage available. Patching requires at least %2$.2f GB of free space to work correctly</string>
     <string name="home_low_disk_space_dialog_warning">Proceeding may result in a \"file not found\" error or a corrupt output APK</string>
+    <string name="home_simple_bundle_select_title">Select patch source</string>
 
     <!-- Patch Options -->
     <string name="custom_color">Custom color</string>
