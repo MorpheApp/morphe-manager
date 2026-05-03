@@ -239,13 +239,13 @@ fun PatcherScreen(
 
     // Trigger notification prompt after first successful install
     val installState = installViewModel.installState
-    val isInstalling = installState is InstallViewModel.InstallState.Installing
-    val isInstalled = installState is InstallViewModel.InstallState.Installed
-    val isError = installState is InstallViewModel.InstallState.Error
-    val isConflict = installState is InstallViewModel.InstallState.Conflict
-    val installedPackageName = installViewModel.installedPackageName
-    val conflictPackageName = (installState as? InstallViewModel.InstallState.Conflict)?.packageName
-    val errorMessage = (installState as? InstallViewModel.InstallState.Error)?.message
+    val isInstalling by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installing } }
+    val isInstalled by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installed } }
+    val isError by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Error } }
+    val isConflict by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Conflict } }
+    val installedPackageName by remember { derivedStateOf { installViewModel.installedPackageName } }
+    val conflictPackageName by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Conflict)?.packageName } }
+    val errorMessage by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Error)?.message } }
 
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
