@@ -8,6 +8,7 @@ import android.database.MatrixCursor
 import android.net.Uri
 import android.os.ParcelFileDescriptor
 import android.provider.OpenableColumns
+import app.morphe.manager.util.APK_MIMETYPE
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -43,7 +44,7 @@ class InstallerFileProvider : ContentProvider() {
         return cursor
     }
 
-    override fun getType(uri: Uri): String = APK_MIME
+    override fun getType(uri: Uri): String = APK_MIMETYPE
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         throw UnsupportedOperationException("Read-only provider")
@@ -78,7 +79,6 @@ class InstallerFileProvider : ContentProvider() {
         ?: throw IllegalStateException("Context unavailable for InstallerFileProvider")
 
     companion object {
-        private const val APK_MIME = "application/vnd.android.package-archive"
         const val SHARE_DIR = "installer_share"
 
         fun authority(context: Context): String = "${context.packageName}.installerfileprovider"
@@ -92,8 +92,7 @@ class InstallerFileProvider : ContentProvider() {
 
         /**
          * Copies [file] into the share directory under its original name (overwriting if size
-         * differs) and returns a content URI for it. Used by [AckpineInstaller] for internal
-         * and Shizuku installs, and by [InstallerManager] for external installer intents.
+         * differs) and returns a content URI for it.
          */
         fun getUriForFile(context: Context, file: File): Uri {
             val shareDir = File(context.cacheDir, SHARE_DIR).also { it.mkdirs() }

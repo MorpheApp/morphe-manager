@@ -11,9 +11,9 @@ import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.domain.installer.AckpineInstaller
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
@@ -36,7 +36,7 @@ class InstalledAppInfoViewModel(
     private val installedAppRepository: InstalledAppRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val rootInstaller: RootInstaller by inject()
-    private val ackpineInstaller: AckpineInstaller by inject()
+    private val sessionInstaller: SessionInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
     private val filesystem: Filesystem by inject()
@@ -135,8 +135,7 @@ class InstalledAppInfoViewModel(
             InstallType.DEFAULT, InstallType.CUSTOM, InstallType.SHIZUKU, InstallType.SAVED -> {
                 viewModelScope.launch {
                     try {
-                        ackpineInstaller.uninstall(app.currentPackageName)
-                        // Ackpine suspends until confirmed - refresh state after success
+                        sessionInstaller.uninstall(app.currentPackageName)
                         refreshCurrentAppState()
                         onAppStateChanged?.invoke(app.currentPackageName)
                     } catch (_: UninstallCancelledException) {

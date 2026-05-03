@@ -75,12 +75,6 @@ dependencies {
     implementation(libs.shizuku.api)
     implementation(libs.shizuku.provider)
 
-    // Ackpine
-    implementation(libs.ackpine.core)
-    implementation(libs.ackpine.ktx)
-    implementation(libs.ackpine.shizuku)
-    implementation(libs.ackpine.shizuku.ktx)
-
     // LibSU
     implementation(libs.libsu.core)
     implementation(libs.libsu.service)

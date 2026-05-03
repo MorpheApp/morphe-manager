@@ -231,13 +231,9 @@
                 android:name="androidx.work.WorkManagerInitializer"
                 android:value="androidx.startup"
                 tools:node="remove" />
-            <!-- Disable Ackpine's notification channel -->
-            <meta-data
-                android:name="ru.solrudev.ackpine.AckpineInitializer"
-                tools:node="remove" />
         </provider>
 
-        <!-- Firebase Cloud Messaging — receives push notifications bypassing Doze mode -->
+        <!-- Firebase Cloud Messaging - receives push notifications bypassing Doze mode -->
         <service
             android:name="app.morphe.manager.service.MorpheFcmService"
             android:exported="false">
@@ -250,6 +246,13 @@
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
+
+        <!-- Root service for privileged file system operations via libsu -->
+        <service
+            android:name="app.morphe.manager.service.ManagerRootService"
+            android:exported="false"
+            android:process=":root"
+            tools:ignore="Instantiatable" />
 
     </application>
 </manifest>

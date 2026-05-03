@@ -22,7 +22,6 @@ import app.morphe.manager.util.toast
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import ru.solrudev.ackpine.installer.InstallFailure
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
@@ -35,7 +34,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private val app: Application by inject()
     private val pm: PM by inject()
     private val rootInstaller: RootInstaller by inject()
-    private val ackpineInstaller: AckpineInstaller by inject()
+    private val sessionInstaller: SessionInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val prefs: PreferencesManager by inject()
     private val appDataResolver: AppDataResolver by inject()
@@ -99,6 +98,9 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private var externalInstallStartTime: Long? = null
     private var externalPackageWasPresentAtStart: Boolean = false
 
+    // For intent-based fallback monitoring (when session dies on OEM devices)
+    private var pendingIntentFallbackPackage: String? = null
+
     // Store pending install params for retry
     private var pendingInstallFile: File? = null
     private var pendingOriginalPackageName: String? = null
@@ -108,15 +110,21 @@ class InstallViewModel : ViewModel(), KoinComponent {
     var currentInstallType: InstallType = InstallType.DEFAULT
         private set
 
-    // Broadcast receiver - only needed for external (third-party installer app) install monitoring.
-    // Internal/Shizuku results come directly from Ackpine's session.await().
-    // Uninstall is also handled via Ackpine.
     private val packageReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
                 Intent.ACTION_PACKAGE_ADDED,
                 Intent.ACTION_PACKAGE_REPLACED -> {
                     val pkg = intent.data?.schemeSpecificPart ?: return
+                    // Intent-based fallback monitor
+                    if (pkg == pendingIntentFallbackPackage) {
+                        val info = pm.getPackageInfo(pkg) ?: return
+                        if (isUpdatedSinceBaseline(info)) {
+                            handleIntentFallbackSuccess(pkg)
+                            return
+                        }
+                    }
+                    // External installer monitor
                     handleExternalInstallSuccess(pkg)
                 }
             }
@@ -344,8 +352,10 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Internal (standard PackageInstaller) installation via Ackpine.
-     * Suspends until the user confirms or cancels the system dialog.
+     * Internal (native PackageInstaller session) installation.
+     * Suspends until the user confirms or cancels.
+     * If the OEM kills the session, falls back to [Intent.ACTION_INSTALL_PACKAGE] via
+     * the existing external installation monitor.
      */
     private suspend fun performStandardInstall(
         outputFile: File,
@@ -356,37 +366,38 @@ class InstallViewModel : ViewModel(), KoinComponent {
             ?: throw Exception("Failed to load application info")
         val targetPackageName = packageInfo.packageName
 
-        // Unmount if mounted as root
         if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(originalPackageName)) {
             rootInstaller.unmount(originalPackageName)
         }
 
-        val failure = try {
-            ackpineInstaller.installInternal(outputFile)
+        val result = try {
+            sessionInstaller.installInternal(outputFile)
         } catch (_: InstallCancelledException) {
-            // User dismissed the dialog - go back to Ready immediately, no error shown
             installState = InstallState.Ready
+            return
+        } catch (_: SessionDeadException) {
+            Log.w(TAG, "Session dead, falling back to intent-based install")
+            launchIntentBasedFallback(outputFile, targetPackageName, onPersistApp)
             return
         }
 
-        when (failure) {
-            null -> {
+        when (result) {
+            InstallResult.Success -> {
                 onPersistApp(targetPackageName, InstallType.DEFAULT)
                 handleInstallSuccess(targetPackageName)
             }
-            is InstallFailure.Conflict -> {
-                Log.i(TAG, "Signature conflict detected for $targetPackageName by Ackpine")
+            is InstallResult.Conflict -> {
+                Log.i(TAG, "Signature conflict for $targetPackageName")
                 installState = InstallState.Conflict(targetPackageName)
             }
-            else -> handleInstallError(
-                app.getString(R.string.install_app_fail, failure.message ?: failure.javaClass.simpleName)
+            is InstallResult.Failure -> handleInstallError(
+                app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
             )
         }
     }
 
     /**
-     * Shizuku installation via Ackpine's ShizukuPlugin.
-     * Suspends until the system confirms or cancels.
+     * Silent install via Shizuku/Sui.
      */
     private suspend fun performShizukuInstall(
         outputFile: File,
@@ -402,27 +413,27 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         Log.d(TAG, "Starting Shizuku install for $targetPackageName")
 
-        val failure = try {
-            ackpineInstaller.installShizuku(outputFile)
+        val result = try {
+            sessionInstaller.installShizuku(outputFile, targetPackageName)
         } catch (_: InstallCancelledException) {
             installState = InstallState.Ready
             return
         }
 
-        when (failure) {
-            null -> {
+        when (result) {
+            InstallResult.Success -> {
                 Log.d(TAG, "Shizuku install successful")
                 onPersistApp(targetPackageName, InstallType.SHIZUKU)
                 installedPackageName = targetPackageName
                 installState = InstallState.Installed(targetPackageName)
                 app.toast(app.getString(R.string.install_app_success))
             }
-            is InstallFailure.Conflict -> {
-                Log.i(TAG, "Signature conflict detected for $targetPackageName by Ackpine")
+            is InstallResult.Conflict -> {
+                Log.i(TAG, "Signature conflict for $targetPackageName")
                 installState = InstallState.Conflict(targetPackageName)
             }
-            else -> handleInstallError(
-                app.getString(R.string.install_app_fail, failure.message ?: failure.javaClass.simpleName)
+            is InstallResult.Failure -> handleInstallError(
+                app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
             )
         }
     }
@@ -479,6 +490,64 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 )
             }
         }
+    }
+
+    /**
+     * Fallback when [SessionDeadException] is caught from [performStandardInstall].
+     * Launches [Intent.ACTION_INSTALL_PACKAGE] and monitors for completion via the
+     * existing package broadcast receiver + timeout mechanism.
+     */
+    private fun launchIntentBasedFallback(
+        outputFile: File,
+        targetPackageName: String,
+        onPersistApp: suspend (String, InstallType) -> Boolean
+    ) {
+        pendingPersistCallback = onPersistApp
+        currentInstallType = InstallType.DEFAULT
+
+        val baselineInfo = pm.getPackageInfo(targetPackageName)
+        externalPackageWasPresentAtStart = baselineInfo != null
+        externalInstallBaseline = baselineInfo?.let { pm.getVersionCode(it) to it.lastUpdateTime }
+        externalInstallStartTime = System.currentTimeMillis()
+
+        // Use a lightweight sentinel so handleExternalInstallSuccess can match the package
+        // without a full External plan — we repurpose pendingExternalInstall's expectedPackage
+        // by creating a minimal sentinel object just for the package name check.
+        pendingIntentFallbackPackage = targetPackageName
+
+        sessionInstaller.launchIntentInstall(outputFile)
+
+        externalInstallTimeoutJob = viewModelScope.launch {
+            val timeoutAt = System.currentTimeMillis() + EXTERNAL_INSTALL_TIMEOUT_MS
+            while (true) {
+                if (pendingIntentFallbackPackage == null) return@launch
+                val info = pm.getPackageInfo(targetPackageName)
+                if (info != null && isUpdatedSinceBaseline(info)) {
+                    handleIntentFallbackSuccess(targetPackageName)
+                    return@launch
+                }
+                if (System.currentTimeMillis() >= timeoutAt) break
+                delay(INSTALL_MONITOR_POLL_MS)
+            }
+            if (pendingIntentFallbackPackage != null) {
+                pendingIntentFallbackPackage = null
+                handleInstallError(app.getString(R.string.installer_external_timeout, app.getString(R.string.installer_internal_name)))
+            }
+        }
+    }
+
+    private fun handleIntentFallbackSuccess(packageName: String) {
+        pendingIntentFallbackPackage = null
+        externalInstallTimeoutJob?.cancel()
+        externalInstallBaseline = null
+        externalInstallStartTime = null
+        externalPackageWasPresentAtStart = false
+        pendingPersistCallback?.let { callback ->
+            viewModelScope.launch {
+                runCatching { callback(packageName, InstallType.DEFAULT) }
+            }
+        }
+        handleInstallSuccess(packageName)
     }
 
     private fun isUpdatedSinceBaseline(info: PackageInfo): Boolean {
@@ -798,24 +867,27 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Uninstalls a package via Ackpine. Shows the system confirmation dialog and
-     * suspends until the user confirms or cancels.
+     * Launches system uninstall UI for [packageName] and suspends until the user confirms.
+     * Resets [installState] to [InstallState.Ready] after successful uninstall so the user
+     * can immediately retry installation.
      */
     fun requestUninstall(packageName: String) {
         viewModelScope.launch {
             try {
-                ackpineInstaller.uninstall(packageName)
-                // After successful uninstall, reset install state
-                delay(300)
+                sessionInstaller.uninstall(packageName)
                 installState = InstallState.Ready
-                installedPackageName = null
             } catch (_: UninstallCancelledException) {
-                // User dismissed - stay in current state silently
-            } catch (e: Exception) {
-                Log.e(TAG, "Uninstall failed", e)
-                app.toast(app.getString(R.string.install_app_fail, e.simpleMessage()))
+                // User dismissed the dialog - keep current state
             }
         }
+    }
+
+    /**
+     * Resets install state back to [InstallState.Ready].
+     * Used when the user dismisses a conflict or error dialog without taking action.
+     */
+    fun resetInstallState() {
+        installState = InstallState.Ready
     }
 
     fun openApp() {

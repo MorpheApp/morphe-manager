@@ -1,5 +1,4 @@
 [versions]
-ackpine = "0.22.8" # Before upgrading, verify that the 'android-tools' version matches the patcher
 about-libraries = "14.0.1"
 accompanist = "0.37.3"
 activity = "1.13.0"
@@ -99,12 +98,6 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 koin-compose-navigation = { group = "io.insert-koin", name = "koin-androidx-compose-navigation", version.ref = "koin" }
 koin-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
-
-# Ackpine
-ackpine-core = { module = "ru.solrudev.ackpine:ackpine-core", version.ref = "ackpine" }
-ackpine-ktx = { module = "ru.solrudev.ackpine:ackpine-ktx", version.ref = "ackpine" }
-ackpine-shizuku = { module = "ru.solrudev.ackpine:ackpine-shizuku", version.ref = "ackpine" }
-ackpine-shizuku-ktx = { module = "ru.solrudev.ackpine:ackpine-shizuku-ktx", version.ref = "ackpine" }
 
 # About Libraries
 about-libraries-core = { group = "com.mikepenz", name = "aboutlibraries-compose-core", version.ref = "about-libraries" }
