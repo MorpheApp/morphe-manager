@@ -1,6 +1,8 @@
 package app.morphe.manager
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.activity.ComponentActivity
@@ -14,11 +16,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -48,13 +46,39 @@ import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.hasMppExtension
+import app.morphe.manager.util.parseLocaleCode
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    /**
+     * On Android < 13, AppCompatDelegate.setApplicationLocales() is unreliable on some
+     * devices and OEMs - the locale is saved correctly but never applied on cold start.
+     * Wrap the base context manually to guarantee the correct locale is always applied.
+     */
+    override fun attachBaseContext(newBase: Context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            val storedLang = runCatching {
+                runBlocking { PreferencesManager(newBase).appLanguage.get() }.ifBlank { "system" }
+            }.getOrNull() ?: "system"
+
+            val locale = parseLocaleCode(storedLang)
+            if (locale != null) {
+                val config = newBase.resources.configuration
+                config.setLocale(locale)
+                val localeContext = newBase.createConfigurationContext(config)
+                super.attachBaseContext(localeContext)
+                return
+            }
+        }
+        super.attachBaseContext(newBase)
+    }
+
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,8 +168,8 @@ private fun MorpheManager(vm: MainViewModel) {
 
     // Patcher background speed - driven by PatcherViewModel when on patcher screen.
     // Exposed as top-level mutable state so PatcherScreen can write into it
-    val patcherBackgroundSpeed = androidx.compose.runtime.remember { androidx.compose.runtime.mutableFloatStateOf(1f) }
-    val patchingCompleted = androidx.compose.runtime.remember { mutableStateOf(false) }
+    val patcherBackgroundSpeed = remember { mutableFloatStateOf(1f) }
+    val patchingCompleted = remember { mutableStateOf(false) }
 
     // HomeViewModel must be scoped to the Activity, not to a NavBackStackEntry
     val homeViewModel: HomeViewModel = koinViewModel(
