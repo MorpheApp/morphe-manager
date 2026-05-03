@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-05-03T11:23:13",
-  "description": "# [1.16.0-dev.18](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.17...v1.16.0-dev.18) (2026-05-03)\n\n\n### Bug Fixes\n\n* Replace `Ackpine` with native `SessionInstaller` ([#508](https://github.com/MorpheApp/morphe-manager/issues/508)) ([cf0f4db](https://github.com/MorpheApp/morphe-manager/commit/cf0f4dbe69a2c71114b828875bcfbe2ef6efd739))\n\n\n### Features\n\n* Prompt bundle selection before APK selection in simple mode ([#511](https://github.com/MorpheApp/morphe-manager/issues/511)) ([8161d9b](https://github.com/MorpheApp/morphe-manager/commit/8161d9b305aaab82285eccffaf89d42c786ea5f6))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.18/morphe-manager-1.16.0-dev.18.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.18/morphe-manager-1.16.0-dev.18.apk.asc",
-  "version": "1.16.0-dev.18"
+  "created_at": "2026-05-03T16:16:21",
+  "description": "# [1.16.0-dev.19](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.18...v1.16.0-dev.19) (2026-05-03)\n\n\n### Bug Fixes\n\n* Apply locale via context wrap on Android < 13 ([ce193ee](https://github.com/MorpheApp/morphe-manager/commit/ce193ee7a4d9307aec876d1c6fae1c830fbf7612))\n* Hoist install state reads to prevent recomposition on install ([9b82048](https://github.com/MorpheApp/morphe-manager/commit/9b82048bbb86ba4db954161dbb4df047e5485cad))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.19/morphe-manager-1.16.0-dev.19.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.16.0-dev.19/morphe-manager-1.16.0-dev.19.apk.asc",
+  "version": "1.16.0-dev.19"
 }

@@ -1,3 +1,11 @@
+# [1.16.0-dev.19](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.18...v1.16.0-dev.19) (2026-05-03)
+
+
+### Bug Fixes
+
+* Apply locale via context wrap on Android < 13 ([ce193ee](https://github.com/MorpheApp/morphe-manager/commit/ce193ee7a4d9307aec876d1c6fae1c830fbf7612))
+* Hoist install state reads to prevent recomposition on install ([9b82048](https://github.com/MorpheApp/morphe-manager/commit/9b82048bbb86ba4db954161dbb4df047e5485cad))
+
 # [1.16.0-dev.18](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.17...v1.16.0-dev.18) (2026-05-03)
 
 
