@@ -32,6 +32,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
+import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -233,6 +234,7 @@ fun AppearanceTabContent(
         LanguagePickerDialog(
             currentLanguage = appLanguage,
             onLanguageSelected = { languageCode ->
+                saveLanguageToPrefs(context, languageCode)
                 themeViewModel.setAppLanguage(languageCode)
                 showLanguageDialog.value = false
                 (context as? Activity)?.recreate()

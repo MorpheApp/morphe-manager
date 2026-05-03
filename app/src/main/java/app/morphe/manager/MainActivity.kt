@@ -47,8 +47,8 @@ import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.hasMppExtension
 import app.morphe.manager.util.parseLocaleCode
+import app.morphe.manager.util.readLanguageFromPrefs
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -63,16 +63,12 @@ class MainActivity : AppCompatActivity() {
      */
     override fun attachBaseContext(newBase: Context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            val storedLang = runCatching {
-                runBlocking { PreferencesManager(newBase).appLanguage.get() }.ifBlank { "system" }
-            }.getOrNull() ?: "system"
-
+            val storedLang = readLanguageFromPrefs(newBase)
             val locale = parseLocaleCode(storedLang)
             if (locale != null) {
                 val config = newBase.resources.configuration
                 config.setLocale(locale)
-                val localeContext = newBase.createConfigurationContext(config)
-                super.attachBaseContext(localeContext)
+                super.attachBaseContext(newBase.createConfigurationContext(config))
                 return
             }
         }

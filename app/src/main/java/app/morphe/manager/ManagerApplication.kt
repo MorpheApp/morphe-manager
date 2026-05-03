@@ -13,9 +13,11 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.applyAppLanguage
+import app.morphe.manager.util.readLanguageFromPrefs
+import app.morphe.manager.util.saveLanguageToPrefs
+import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckWorker
-import app.morphe.manager.util.syncFcmTopics
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import coil.Coil
@@ -24,7 +26,6 @@ import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import me.zhanghai.android.appiconloader.coil.AppIconFetcher
 import me.zhanghai.android.appiconloader.coil.AppIconKeyer
 import org.koin.android.ext.android.inject
@@ -82,9 +83,13 @@ class ManagerApplication : Application() {
         // Create notification channels before any notification can be posted (required on API 26+)
         updateNotificationManager.createNotificationChannels()
 
-        // Preload preferences and kick off background worker/FCM sync.
+        // Preload preferences and kick off background worker/FCM sync
         scope.launch {
             prefs.preload()
+
+            // Keep SharedPreferences in sync with DataStore so that attachBaseContext
+            // (Application + Activity) can read the language without touching DataStore
+            saveLanguageToPrefs(this@ManagerApplication, prefs.appLanguage.get().ifBlank { "system" })
 
             // Schedule/cancel WorkManager fallback AND sync FCM topic subscriptions.
             // FCM is the primary delivery path (bypasses Doze); WorkManager is the fallback
@@ -92,11 +97,11 @@ class ManagerApplication : Application() {
             // topics based on user preferences, or unsubscribes from all when disabled.
             val notificationsEnabled = prefs.backgroundUpdateNotifications.get()
             val useManagerPrereleases = prefs.useManagerPrereleases.get()
-            // Patches FCM topic is determined by the default bundle (uid=0) prerelease toggle.
+            // Patches FCM topic is determined by the default bundle (uid=0) prerelease toggle
             val usePatchesPrereleases = prefs.bundlePrereleasesEnabled.get().contains(DEFAULT_SOURCE_UID.toString())
 
             // On GMS devices FCM is the primary delivery channel - WorkManager is not needed.
-            // Cancel any previously scheduled jobs on GMS devices.
+            // Cancel any previously scheduled jobs on GMS devices
             val hasGms = GoogleApiAvailability.getInstance()
                 .isGooglePlayServicesAvailable(this@ManagerApplication) == ConnectionResult.SUCCESS
 
@@ -128,7 +133,7 @@ class ManagerApplication : Application() {
                 firstActivityCreated = true
 
                 // We do not want to call onFreshProcessStart() if there is state to restore.
-                // This can happen on system-initiated process death.
+                // This can happen on system-initiated process death
                 if (savedInstanceState == null) {
                     Log.d(tag, "Fresh process created")
                     onFreshProcessStart()
@@ -152,17 +157,12 @@ class ManagerApplication : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
 
-        val storedLang = runCatching {
-            base?.let {
-                runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "system" }
-            }
-        }.getOrNull() ?: "system"
-
-        applyAppLanguage(storedLang)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             HiddenApiBypass.addHiddenApiExemptions("L")
         }
+
+        val storedLang = base?.let { readLanguageFromPrefs(it) } ?: return
+        applyAppLanguage(storedLang)
     }
 
     private fun onFreshProcessStart() {
