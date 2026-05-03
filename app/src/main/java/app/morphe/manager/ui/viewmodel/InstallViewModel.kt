@@ -882,6 +882,14 @@ class InstallViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    /**
+     * Resets install state back to [InstallState.Ready].
+     * Used when the user dismisses a conflict or error dialog without taking action.
+     */
+    fun resetInstallState() {
+        installState = InstallState.Ready
+    }
+
     fun openApp() {
         installedPackageName?.let { pm.launch(it) }
     }

@@ -111,6 +111,8 @@ fun InstalledAppInfoDialog(
     val showDeleteDialog = remember { mutableStateOf(false) }
     val showAppliedPatchesDialog = remember { mutableStateOf(false) }
     val showMountWarningDialog = remember { mutableStateOf(false) }
+    val showSignatureConflictDialog = remember { mutableStateOf(false) }
+    val conflictPackageName = remember { mutableStateOf<String?>(null) }
     val pendingMountWarningAction = remember { mutableStateOf<(() -> Unit)?>(null) }
 
     // Content entrance animation
@@ -176,6 +178,10 @@ fun InstalledAppInfoDialog(
                 viewModel.updateInstallType(finalPackageName, newInstallType)
                 homeViewModel.notifyAppStateChanged(finalPackageName)
             }
+            is InstallViewModel.InstallState.Conflict -> {
+                conflictPackageName.value = installState.packageName
+                showSignatureConflictDialog.value = true
+            }
             is InstallViewModel.InstallState.Error -> {
                 // Show error toast
                 context.toast(installState.message)
@@ -238,6 +244,18 @@ fun InstalledAppInfoDialog(
             showUninstallConfirm.value = false
         },
         onDismiss = { showUninstallConfirm.value = false }
+    )
+
+    SignatureConflictDialog(
+        show = showSignatureConflictDialog.value,
+        onUninstall = {
+            showSignatureConflictDialog.value = false
+            conflictPackageName.value?.let { installViewModel.requestUninstall(it) }
+        },
+        onDismiss = {
+            showSignatureConflictDialog.value = false
+            installViewModel.resetInstallState()
+        }
     )
 
     DeleteConfirmDialog(
@@ -1478,6 +1496,35 @@ private fun DeleteConfirmDialog(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun SignatureConflictDialog(
+    show: Boolean,
+    onUninstall: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    if (!show) return
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.patcher_conflict_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.uninstall),
+                onPrimaryClick = onUninstall,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Text(
+            text = stringResource(R.string.patcher_conflict_subtitle),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current
+        )
     }
 }
 
