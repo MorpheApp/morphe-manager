@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.CompositingStrategy
@@ -53,14 +54,17 @@ fun AnimatedBackground(
     type: BackgroundType = BackgroundType.CIRCLES,
     resolvedType: BackgroundType? = null,
     enableParallax: Boolean = true,
-    speedMultiplier: Float = 1f,
-    patchingCompleted: Boolean = false
+    speedMultiplier: () -> Float = { 1f },
+    patchingCompleted: () -> Boolean = { false }
 ) {
     val effectiveType = if (type == BackgroundType.RANDOM) {
         resolvedType ?: BackgroundType.CIRCLES
     } else {
         type
     }
+
+    val resolvedSpeed = speedMultiplier()
+    val resolvedPatchingCompleted = patchingCompleted()
 
     Box(
         modifier = Modifier
@@ -74,50 +78,50 @@ fun AnimatedBackground(
             BackgroundType.CIRCLES -> CirclesBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.RINGS -> RingsBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.MESH -> MeshBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.SPACE -> SpaceBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.SHAPES -> ShapesBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.SNOW -> SnowBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.GRID -> GridBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.PARTICLES -> ParticlesBackground(
                 modifier = Modifier.fillMaxSize(),
                 enableParallax = enableParallax,
-                speedMultiplier = speedMultiplier,
-                patchingCompleted = patchingCompleted
+                speedMultiplier = resolvedSpeed,
+                patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.NONE -> Unit
             // effectiveType is never RANDOM (resolved above), but the branch is required for exhaustiveness

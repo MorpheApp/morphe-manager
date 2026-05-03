@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -151,6 +152,10 @@ private fun MorpheManager(vm: MainViewModel) {
         viewModelStoreOwner = LocalActivity.current as ComponentActivity
     )
 
+    // Shared state between HomeScreen and PatcherScreen for mount install mode.
+    // Set by HomeViewModel.resolvePrePatchInstallerChoice()
+    val usingMountInstallState = remember { mutableStateOf(false) }
+
     // Box with background at the highest level
     Box(
         modifier = Modifier
@@ -162,8 +167,8 @@ private fun MorpheManager(vm: MainViewModel) {
             type = backgroundType,
             resolvedType = resolvedRandomBackground,
             enableParallax = enableParallax,
-            speedMultiplier = patcherBackgroundSpeed.floatValue,
-            patchingCompleted = patchingCompleted.value
+            speedMultiplier = { patcherBackgroundSpeed.floatValue },
+            patchingCompleted = { patchingCompleted.value }
         )
 
         // All content on top of background
@@ -175,10 +180,6 @@ private fun MorpheManager(vm: MainViewModel) {
             popEnterTransition = { MorpheAnimations.screenEnter },
             popExitTransition = { MorpheAnimations.screenExit }
         ) {
-            // Shared state between HomeScreen and PatcherScreen for mount install mode.
-            // Set by HomeViewModel.resolvePrePatchInstallerChoice()
-            val usingMountInstallState = mutableStateOf(false)
-
             composable<HomeScreen> { entry ->
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
