@@ -168,6 +168,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="home_low_disk_space_dialog_title">Nedostatek místa na disku</string>
     <string name="home_low_disk_space_dialog_message">Dostupných je pouze %1$.2f GB volného místa. Záplatování vyžaduje alespoň %2$.2f GB volného místa, aby fungovalo správně</string>
     <string name="home_low_disk_space_dialog_warning">Pokračování může vést k chybě \"soubor nenalezen\" nebo poškodit výslednou APK</string>
+    <string name="home_simple_bundle_select_title">Vybrat zdroj záplaty</string>
     <!-- Patch Options -->
     <string name="custom_color">Vlastní barva</string>
     <string name="hex_color">Barva ve formátu Hex</string>

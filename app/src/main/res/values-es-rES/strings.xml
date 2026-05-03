@@ -168,6 +168,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="home_low_disk_space_dialog_title">Poco espacio en disco</string>
     <string name="home_low_disk_space_dialog_message">Solo hay %1$.2f GB de almacenamiento libre disponible. El parcheo requiere al menos %2$.2f GB de espacio libre para funcionar correctamente</string>
     <string name="home_low_disk_space_dialog_warning">Continuar puede provocar un error de \"archivo no encontrado\" o un APK de salida corrupto</string>
+    <string name="home_simple_bundle_select_title">Seleccionar fuente de parche</string>
     <!-- Patch Options -->
     <string name="custom_color">Color personalizado</string>
     <string name="hex_color">Color HEX</string>

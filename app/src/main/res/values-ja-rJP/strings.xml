@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">ストレージの空き容量が不足しています</string>
     <string name="home_low_disk_space_dialog_message">利用可能なストレージの空き容量は %1$.2f GB です。正常なパッチ処理には少なくとも %2$.2f GB の空き容量が必要です</string>
     <string name="home_low_disk_space_dialog_warning">このまま続行すると、「ファイルが見つかりません」のエラーが発生したり、出力した APK が破損する可能性があります</string>
+    <string name="home_simple_bundle_select_title">パッチソースを選択</string>
     <!-- Patch Options -->
     <string name="custom_color">カスタムカラー</string>
     <string name="hex_color">16進数カラー</string>

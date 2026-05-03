@@ -168,6 +168,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="home_low_disk_space_dialog_title">Weinig schijfruimte</string>
     <string name="home_low_disk_space_dialog_message">Slechts %1$.2f GB vrije opslagruimte beschikbaar. Patching vereist minimaal %2$.2f GB vrije ruimte om correct te werken</string>
     <string name="home_low_disk_space_dialog_warning">Doorgaan kan resulteren in een foutmelding \'bestand niet gevonden\' of een beschadigd output APK-bestand</string>
+    <string name="home_simple_bundle_select_title">Selecteer een .mpp-bronbestand van de opslag</string>
     <!-- Patch Options -->
     <string name="custom_color">Aangepaste kleur</string>
     <string name="hex_color">Hex-kleur</string>

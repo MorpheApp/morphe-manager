@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
     <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치가 정상적으로 작동하려면 최소 %2$.2f GB이상의 여유 공간이 필요합니다</string>
     <string name="home_low_disk_space_dialog_warning">계속 진행하면 “파일을 찾을 수 없습니다” 오류가 발생하거나 손상된 APK 파일이 생성될 수 있습니다</string>
+    <string name="home_simple_bundle_select_title">패치 소스 선택</string>
     <!-- Patch Options -->
     <string name="custom_color">커스텀 색상</string>
     <string name="hex_color">헥스 색상 코드</string>

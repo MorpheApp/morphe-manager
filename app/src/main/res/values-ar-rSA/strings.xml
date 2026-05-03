@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">مساحة تخزين منخفضة</string>
     <string name="home_low_disk_space_dialog_message">يتوفر فقط %1$.2f جيجابايت من مساحة التخزين الخالية. تتطلب عملية التعديل مساحة فارغة لا تقل عن %2$.2f جيجابايت لتعمل بشكل صحيح</string>
     <string name="home_low_disk_space_dialog_warning">قد تؤدي المتابعة إلى حدوث خطأ \"ملف غير موجود\" أو ملف APK تالف</string>
+    <string name="home_simple_bundle_select_title">تحديد مصدر التعديل</string>
     <!-- Patch Options -->
     <string name="custom_color">اللون المخصص</string>
     <string name="hex_color">صيغة اللون</string>

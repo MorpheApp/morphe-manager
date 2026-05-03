@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">Малко място на диска</string>
     <string name="home_low_disk_space_dialog_message">Само %1$.2f GB свободно място за съхранение. За да работи правилно, обновяването изисква поне %2$.2f GB свободно място</string>
     <string name="home_low_disk_space_dialog_warning">Продължаването може да доведе до грешка \"файлът не е намерен\" или повреден изходен APK</string>
+    <string name="home_simple_bundle_select_title">Изберете източник на пач</string>
     <!-- Patch Options -->
     <string name="custom_color">Навикнат цвят</string>
     <string name="hex_color">Хекс цвят</string>

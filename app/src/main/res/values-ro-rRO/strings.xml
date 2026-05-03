@@ -168,6 +168,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_low_disk_space_dialog_title">Spațiu pe disc insuficient</string>
     <string name="home_low_disk_space_dialog_message">Doar %1$.2f GB spațiu de stocare liber disponibil. Repararea necesită cel puțin %2$.2f GB spațiu liber pentru a funcționa corect</string>
     <string name="home_low_disk_space_dialog_warning">Continuarea ar putea duce la o eroare \"fișierul nu a fost găsit\" sau la un APK de ieșire corupt</string>
+    <string name="home_simple_bundle_select_title">Selectează fișierul cu patch-uri</string>
     <!-- Patch Options -->
     <string name="custom_color">Culoare personalizată</string>
     <string name="hex_color">Culoare hexazecimală</string>

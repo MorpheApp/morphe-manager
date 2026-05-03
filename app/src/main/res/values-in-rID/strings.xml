@@ -169,6 +169,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="home_low_disk_space_dialog_title">Ruang penyimpanan sedikit</string>
     <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang penyimpanan yang tersedia. Penambalan memerlukan setidaknya %2$.2f GB ruang kosong untuk berfungsi dengan baik</string>
     <string name="home_low_disk_space_dialog_warning">Melanjutkan dapat mengakibatkan kesalahan \"berkas tidak ditemukan\" atau menghasilkan APK yang rusak</string>
+    <string name="home_simple_bundle_select_title">Pilih berkas sumber tambalan</string>
     <!-- Patch Options -->
     <string name="custom_color">Warna Khusus</string>
     <string name="hex_color">Warna hex</string>

@@ -168,6 +168,7 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polne APK
     <string name="home_low_disk_space_dialog_title">Nizko prosto mesto na disku</string>
     <string name="home_low_disk_space_dialog_message">Na voljo je samo %1$.2f GB prostega prostora. Za delovanje popravkov je potrebnih najmanj %2$.2f GB prostega prostora</string>
     <string name="home_low_disk_space_dialog_warning">Napredek lahko povzroči napako \"datoteka ni najdena\" ali pa okvarjeno izhodno APK</string>
+    <string name="home_simple_bundle_select_title">Izberite vir popravka</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagojena barva</string>
     <string name="hex_color">Šestnajstična barva</string>

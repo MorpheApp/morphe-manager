@@ -168,6 +168,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="home_low_disk_space_dialog_title">Lav diskplads</string>
     <string name="home_low_disk_space_dialog_message">Kun %1$.2f GB ledig lagerplads. Patching kræver mindst %2$.2f GB ledig plads for at fungere korrekt</string>
     <string name="home_low_disk_space_dialog_warning">Fortsættelse kan resultere i en \"fil ikke fundet\"-fejl eller en korrupt output APK</string>
+    <string name="home_simple_bundle_select_title">Vælg patch kildefil</string>
     <!-- Patch Options -->
     <string name="custom_color">Brugerdefineret farve</string>
     <string name="hex_color">Hex farve</string>

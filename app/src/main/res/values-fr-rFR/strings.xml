@@ -167,6 +167,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="home_low_disk_space_dialog_title">Espace libre faible</string>
     <string name="home_low_disk_space_dialog_message">Seulement %1$.2f Go d’espace de stockage libre disponible. Le patchage nécessite au moins %2$.2f Go d’espace libre pour fonctionner correctement</string>
     <string name="home_low_disk_space_dialog_warning">Continuer peut entraîner une erreur \"fichier introuvable\" ou un APK corrompu</string>
+    <string name="home_simple_bundle_select_title">Sélectionner une source de patch</string>
     <!-- Patch Options -->
     <string name="custom_color">Couleur personnalisée</string>
     <string name="hex_color">Couleur hexadécimale</string>

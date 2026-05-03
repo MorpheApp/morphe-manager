@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">Мало дисковног простора</string>
     <string name="home_low_disk_space_dialog_message">Samo %1$.2f GB слободне меморије је доступно. Пачинг захтева најмање %2$.2f GB слободне меморије да би исправно функционисао</string>
     <string name="home_low_disk_space_dialog_warning">Настављање може довести до грешке \"фајл није пронађен\" или до неисправног APK излаза</string>
+    <string name="home_simple_bundle_select_title">Изаберите извор закрпе</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Boja u heksadecimalnom formatu</string>

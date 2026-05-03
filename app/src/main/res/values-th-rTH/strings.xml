@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">พื้นที่ดิสก์เหลือน้อย</string>
     <string name="home_low_disk_space_dialog_message">มีพื้นที่ว่างเหลือเพียง %1$.2f GB โปรแกรม Patching ต้องการพื้นที่ว่างอย่างน้อย %2$.2f GB จึงจะทำงานได้อย่างถูกต้อง</string>
     <string name="home_low_disk_space_dialog_warning">การดำเนินการนี้อาจส่งผลให้เกิดข้อผิดพลาด \"ไม่พบไฟล์\" หรือ APK ที่สร้างขึ้นอาจเสียหาย</string>
+    <string name="home_simple_bundle_select_title">เลือกไฟล์แหล่งที่มา</string>
     <!-- Patch Options -->
     <string name="custom_color">สีแบบกำหนดเอง</string>
     <string name="hex_color">สี hexadecimal</string>

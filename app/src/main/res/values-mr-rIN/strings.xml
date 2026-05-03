@@ -127,6 +127,7 @@
     <string name="expert_mode_new_patches">नवीन</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_low_disk_space_dialog_message">फक्त %1$.2f GB मोफत स्टोरेज उपलब्ध आहे. पॅचिंगसाठी योग्यरित्या कार्य करण्यासाठी किमान %2$.2f GB मोफत जागा आवश्यक आहे.</string>
+    <string name="home_simple_bundle_select_title">सुधारणा मूळ स्त्रोत निवडा</string>
     <!-- Patch Options -->
     <string name="patch_option_required_missing">%s: आवश्यक पर्याय भरा</string>
     <!-- Adaptive Icon Creator -->

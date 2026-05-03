@@ -15,6 +15,7 @@
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <string name="deep_link_add_source_title">Lägg till källa</string>
     <string name="deep_link_add_source_message">Vill du lägga till den här tilläggskällan i Morphe?</string>
+    <string name="deep_link_add_source_warning">Lägg bara till källor du litar på</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
@@ -67,10 +68,10 @@
     <string name="sources_dialog_rename">Byt namn på tilläggskällan</string>
     <string name="sources_dialog_duplicate_name_error">Det finns redan en tilläggskälla med det här namnet</string>
     <string name="sources_dialog_missing_error">Det gick inte att uppdatera den här tilläggskällan</string>
-    <string name="sources_dialog_view_any_version">Alla versioner</string>
+    <string name="sources_dialog_view_any_version">Valfri version</string>
     <string name="sources_dialog_view_any_package">Alla paket</string>
     <string name="sources_dialog_add_source">Lägg till tilläggskälla</string>
-    <string name="sources_dialog_delete_confirm_message">Ta bort källan \"%s\"? Det går inte att ångra den här åtgärden</string>
+    <string name="sources_dialog_delete_confirm_message">Radera källan %s? Det går inte att ångra den här åtgärden</string>
     <string name="sources_dialog_remote">Fjärrkälla</string>
     <string name="sources_dialog_remote_url">Webbadress för källan</string>
     <string name="sources_dialog_remote_url_formats_title">Exempel:</string>
@@ -87,7 +88,7 @@
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Aktivera Expertläge i inställningarna för att inkludera det här tillägget manuellt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Behöver du hjälp att hitta en ursprunglig omodifierad APK-fil?</string>
+    <string name="home_apk_availability_dialog_title">Behöver du hjälp att hitta en omodifierad original-APK-fil?</string>
     <string name="home_apk_availability_dialog_simple">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med följande version:</string>
     <string name="home_apk_availability_dialog_expert">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med en av följande versioner:</string>
     <string name="home_apk_availability_recommended_label">Rekommenderad</string>
@@ -101,7 +102,7 @@
     <string name="home_apk_no_compatible_versions_title">Stöds inte på den här enheten</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har inga versioner som stöds för Android %2$d (API %3$d). Alla deklarerade versioner kräver en senare Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">Ladda ned den ursprungliga APK-filen</string>
+    <string name="home_download_instructions_title">Ladda ned original-APK-filen</string>
     <string name="home_download_instructions_steps_title">Anvisningar:</string>
     <string name="home_download_instructions_step1">Tryck på knappen %1$s nedan</string>
     <string name="home_download_instructions_step2_part1">Skrolla ned på webbsidan och tryck på</string>
@@ -109,7 +110,7 @@
     <string name="home_download_instructions_step3">Vänta tills nedladdningen är klar och &lt;b&gt;installera inte&lt;/b&gt; APK-filen</string>
     <string name="home_download_instructions_step3_mount">Vänta tills nedladdningen är klar och &lt;b&gt;installera sedan APK-filen&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Öppna Morphe igen när nedladdningen har slutförts</string>
-    <string name="home_download_instructions_step4_mount"> Öppna Morphe igen när du har installerat den ursprungliga APK-filen</string>
+    <string name="home_download_instructions_step4_mount"> Öppna Morphe igen när du har installerat original-APK-filen</string>
     <string name="home_download_instructions_continue">Fortsätt till APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Välj den nedladdade APK-filen</string>
@@ -165,6 +166,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_low_disk_space_dialog_title">Lågt diskutrymme</string>
     <string name="home_low_disk_space_dialog_message">Endast %1$.2f GB ledigt utrymme är tillgängligt. Modifieringen kräver minst %2$.2f GB ledigt utrymme för att fungera korrekt</string>
     <string name="home_low_disk_space_dialog_warning">Om du fortsätter kan det leda till att du får ett felmeddelande om att filen inte hittades eller en skadad APK-fil</string>
+    <string name="home_simple_bundle_select_title">Välj tilläggskälla</string>
     <!-- Patch Options -->
     <string name="custom_color">Anpassad färg</string>
     <string name="hex_color">Hexfärg</string>
@@ -204,15 +206,15 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="header_creator_folder_explanation">Välj var mappen \"%1$s/%2$s\" ska skapas med genererade sidhuvudfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
-    <string name="home_app_info_remove_app_warning">Detta tar bort följande permanent:</string>
+    <string name="home_app_info_remove_app_warning">Detta raderar följande permanent:</string>
     <string name="home_app_info_delete_item_database">Databaspost</string>
     <string name="home_app_info_delete_item_patched_apk">Modifierad APK-fil</string>
-    <string name="home_app_info_delete_item_original_apk">Ursprunglig APK-fil</string>
+    <string name="home_app_info_delete_item_original_apk">Original-APK-fil</string>
     <string name="home_app_info_delete_preservation_note">Ditt tilläggsurval och dess inställningar sparas för framtida modifiering</string>
     <string name="home_app_info_patches_name_default">Tillägg</string>
     <string name="home_app_info_patches_name_fallback">Namnlös</string>
     <string name="home_app_info_patches_replace_fail">Det gick inte att importera tillägg: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Den ursprungliga APK-filen hittades inte. Det går inte att modifiera den här appen igen</string>
+    <string name="home_app_info_repatch_no_original_apk">Original-APK-filen hittades inte. Det går inte att modifiera den här appen igen</string>
     <string name="home_app_info_original_package_name">Ursprungligt paketnamn</string>
     <string name="home_app_info_applied_patches">Tillämpade tillägg</string>
     <string name="home_app_info_patch_source_used">Tilläggskälla som används</string>
@@ -226,7 +228,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Modifiera den igen för att återställa funktionaliteten</string>
     <string name="home_app_info_apk_size">Storlek på APK-fil</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan du modifierar appen</string>
+    <string name="root_install_apk_required">Rotläget kräver att original-APK-filen är installerad på din enhet innan du modifierar appen</string>
     <string name="root_gmscore_excluded">Tillägget för GmsCore-stöd exkluderas i rotläge</string>
     <string name="root_pre_patch_installer_title">Välj installationsmetod</string>
     <string name="root_pre_patch_installer_description">Din enhet har rotåtkomst. Välj hur du vill installera den modifierade appen</string>
@@ -410,7 +412,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur tilläggen tillämpas, men om du felaktigt konfigurerar inställningarna i expertläget kan det leda till att appen inte fungerar</string>
     <string name="settings_advanced_strip_unused_libs">Optimera för enhetsarkitektur</string>
     <string name="settings_advanced_strip_unused_libs_description">"Hoppa över delade APK-moduler för CPU-arkitekturer, språk och skärmupplösningar som inte stöds vid sammanslagning.
-Vanliga APK-filer rensas från inbyggda bibliotek för arkitekturer som inte stöds efter att appen har modifierats"</string>
+Tar bort inbyggda bibliotek för arkitekturer som inte stöds från vanliga APK-filer efter att appen har modifierats "</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Läge för bytekodbearbetning</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Kontrollerar hur bytekod bearbetas när appar modifieras. Detta påverkar modifieringshastighet, minnesanvändning och den slutliga APK-filens storlek</string>
@@ -593,16 +595,16 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patched_apks_title">Modifierade APK-filer</string>
     <string name="settings_system_patched_apks_description">Hantera sparade modifierade appfiler</string>
     <string name="settings_system_patched_apks_empty">Inga modifierade APK-filer har sparats än</string>
-    <string name="settings_system_patched_apks_delete_title">Ta bort modifierad APK-fil?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Är du säker på att du vill ta bort den sparade modifierade APK-filen för %s?</string>
-    <string name="settings_system_patched_apks_deleted">Modifierad APK-fil har tagits bort</string>
+    <string name="settings_system_patched_apks_delete_title">Radera modifierad APK-fil?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Är du säker på att du vill radera den sparade modifierade APK-filen för %s?</string>
+    <string name="settings_system_patched_apks_deleted">Modifierad APK-fil har raderats</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
-    <string name="settings_system_original_apks_title">Ursprungliga APK-filer</string>
-    <string name="settings_system_original_apks_description">Ursprungliga APK-filer sparas för att kunna modifieras igen. Endast den senaste versionen sparas för varje app</string>
-    <string name="settings_system_original_apks_empty">Inga ursprungliga APK-filer lagras</string>
-    <string name="settings_system_original_apks_deleted">Ursprunglig APK-fil har tagits bort</string>
-    <string name="settings_system_original_apks_delete_title">Ta bort ursprunglig APK-fil?</string>
-    <string name="settings_system_original_apks_delete_confirm">Ta bort den ursprungliga APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
+    <string name="settings_system_original_apks_title">Original-APK-filer</string>
+    <string name="settings_system_original_apks_description">Original-APK-filer sparas för att kunna modifieras igen. Endast den senaste versionen sparas för varje app</string>
+    <string name="settings_system_original_apks_empty">Inga original-APK-filer lagras</string>
+    <string name="settings_system_original_apks_deleted">Original-APK-fil har raderats</string>
+    <string name="settings_system_original_apks_delete_title">Radera original-APK-fil?</string>
+    <string name="settings_system_original_apks_delete_confirm">Radera original-APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tilläggsurval</string>
     <string name="settings_system_patch_selections_description">Hantera sparade tilläggsurval och tilläggsalternativ. Dessa blir kvar om appar avinstalleras</string>
@@ -613,10 +615,10 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patch_selection_total_summary_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Källa nr %s</string>
-    <string name="settings_system_patch_selection_will_delete">Detta tar bort:</string>
-    <string name="settings_system_patch_selection_reset_all_warning">Detta tar bort alla sparade tilläggsurval för alla paket och källor permanent</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Detta tar bort alla sparade tilläggsurval för %s i alla källor permanent</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Detta tar bort det sparade tilläggsurvalet för %1$s i källa nr %2$s permanent</string>
+    <string name="settings_system_patch_selection_will_delete">Detta raderar:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Det här raderar alla sparade tilläggsurval för alla paket och källor permanent</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Det här raderar alla sparade tilläggsurval för %s i alla källor permanent</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Det här raderar det sparade tilläggsurvalet för %1$s i källa nr %2$s permanent</string>
     <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
     <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
     <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
@@ -651,7 +653,7 @@ Bildernas mått ska vara följande:
     <string name="add">Lägg till</string>
     <string name="close">Stäng</string>
     <string name="clear">Rensa</string>
-    <string name="delete">Ta bort</string>
+    <string name="delete">Radera</string>
     <string name="remove">Ta bort</string>
     <string name="disable">Inaktivera</string>
     <string name="enable">Aktivera</string>

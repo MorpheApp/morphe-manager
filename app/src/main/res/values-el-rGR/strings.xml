@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">Λιγοστός εναπομείνων αποθηκευτικός χώρος</string>
     <string name="home_low_disk_space_dialog_message">Έχει απομείνει μόνο %1$.2f GB ελεύθερος χώρος αποθήκευσης. Η τροποποίηση απαιτεί τουλάχιστον %2$.2f GB ελεύθερου χώρου για να λειτουργήσει σωστά</string>
     <string name="home_low_disk_space_dialog_warning">Η συνέχιση μπορεί να οδηγήσει σε σφάλμα \"αρχείο δε βρέθηκε\" ή σε διεφθαρμένη APK</string>
+    <string name="home_simple_bundle_select_title">Επιλογή αρχείου πηγής τροποποιήσεων</string>
     <!-- Patch Options -->
     <string name="custom_color">Προσαρμοσμένο χρώμα</string>
     <string name="hex_color">Δεκαεξαδικό χρώμα</string>

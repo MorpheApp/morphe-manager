@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">磁碟空間不足</string>
     <string name="home_low_disk_space_dialog_message">僅剩 %1$.2f GB 可用儲存空間。修補程式至少需要 %2$.2f GB 的可用空間才能正常運作</string>
     <string name="home_low_disk_space_dialog_warning">繼續進行可能會發生「找不到檔案」的錯誤或輸出損壞的 APK</string>
+    <string name="home_simple_bundle_select_title">選擇修補程式來源</string>
     <!-- Patch Options -->
     <string name="custom_color">自訂顏色</string>
     <string name="hex_color">十六進位顏色</string>

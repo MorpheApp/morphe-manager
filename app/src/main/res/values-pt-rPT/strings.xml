@@ -168,6 +168,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;
     <string name="home_low_disk_space_dialog_title">Pouco espaço em disco</string>
     <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento disponível. Para corrigir, são necessários pelo menos %2$.2f GB de espaço livre para funcionar corretamente</string>
     <string name="home_low_disk_space_dialog_warning">Prosseguir pode resultar em um erro \"arquivo não encontrado\" ou um APK de saída corrompido</string>
+    <string name="home_simple_bundle_select_title">Selecionar fonte do patch</string>
     <!-- Patch Options -->
     <string name="custom_color">Cor personalizada</string>
     <string name="hex_color">Cor hexadecimal</string>

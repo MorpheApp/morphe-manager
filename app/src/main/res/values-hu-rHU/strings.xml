@@ -168,6 +168,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_low_disk_space_dialog_title">Kevés a szabad tárhely</string>
     <string name="home_low_disk_space_dialog_message">Csak %1$.2f GB szabad tárhely áll rendelkezésre. A javítás helyes működéséhez legalább %2$.2f GB szabad helyre van szükség</string>
     <string name="home_low_disk_space_dialog_warning">A folytatás \"fájl nem található\" hibához vagy sérült APK-hoz vezethet</string>
+    <string name="home_simple_bundle_select_title">Javítási forrás kiválasztása</string>
     <!-- Patch Options -->
     <string name="custom_color">Egyedi szín</string>
     <string name="hex_color">Hex szín</string>

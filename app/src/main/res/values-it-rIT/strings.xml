@@ -168,6 +168,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="home_low_disk_space_dialog_title">Spazio su disco in esaurimento</string>
     <string name="home_low_disk_space_dialog_message">Solo %1$.2f GB di spazio di archiviazione libero disponibile. Per applicare le patch è necessario almeno %2$.2f GB di spazio libero per funzionare correttamente</string>
     <string name="home_low_disk_space_dialog_warning">Procedere potrebbe causare l\'errore \"file non trovato\" o esitare in un APK di output corrotto</string>
+    <string name="home_simple_bundle_select_title">Seleziona il file come fonte delle patch</string>
     <!-- Patch Options -->
     <string name="custom_color">Colore personalizzato</string>
     <string name="hex_color">Colore esadecimale</string>

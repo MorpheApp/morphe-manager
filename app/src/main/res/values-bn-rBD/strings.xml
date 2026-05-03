@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">কম ডিস্ক স্পেস</string>
     <string name="home_low_disk_space_dialog_message">উপलब्ধ মুক্ত স্থান %1$.2f GB। প্যাচিং করার জন্য সঠিকভাবে কাজ করার জন্য কমপক্ষে %2$.2f GB মুক্ত স্থান প্রয়োজন।</string>
     <string name="home_low_disk_space_dialog_warning">जारी করলে \"ফাইল খুঁজে পাওয়া যায়নি\" ত্রুটি বা একটি भ्रष्ट আউটপুট APK হতে পারে</string>
+    <string name="home_simple_bundle_select_title">প্যাচ উৎস নির্বাচন করুন</string>
     <!-- Patch Options -->
     <string name="custom_color">కస్టమ్‌ క్రోమ్‌</string>
     <string name="hex_color">డిస్‌క్‌వర్‌ కోడ్ రంగు</string>

@@ -168,6 +168,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_low_disk_space_dialog_title">Nedostatak prostora na disku</string>
     <string name="home_low_disk_space_dialog_message">Samo %1$.2f GB besplatne memorije je dostupno. Popravljanje zahteva najmanje %2$.2f GB besplatnog prostora da bi ispravno radilo</string>
     <string name="home_low_disk_space_dialog_warning">Nastavak može dovesti do greške „datoteka nije pronađena“ ili oštećenog APK-a za izlaz</string>
+    <string name="home_simple_bundle_select_title">Izaberi izvor zakrpe</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Boja u heksadecimalnom formatu</string>

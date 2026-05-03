@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">磁盘空间不足</string>
     <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用存储空间。修复至少需要 %2$.2f GB 的可用空间才能正常工作</string>
     <string name="home_low_disk_space_dialog_warning">继续可能会导致“文件未找到”错误或损坏的输出 APK</string>
+    <string name="home_simple_bundle_select_title">选择补丁来源</string>
     <!-- Patch Options -->
     <string name="custom_color">自定义颜色</string>
     <string name="hex_color">十六进制颜色</string>

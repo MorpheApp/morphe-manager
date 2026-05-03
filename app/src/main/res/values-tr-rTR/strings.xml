@@ -168,6 +168,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="home_low_disk_space_dialog_title">Düşük disk alanı</string>
     <string name="home_low_disk_space_dialog_message">Yalnızca %1$.2f GB boş depolama alanı mevcut. Yama işleminin düzgün çalışması için en az %2$.2f GB boş alan gereklidir</string>
     <string name="home_low_disk_space_dialog_warning">İşleme devam etmek, bir \"dosya bulunamadı\" hatası veya bozuk bir çıktı APK\'si ile sonuçlanabilir</string>
+    <string name="home_simple_bundle_select_title">Yama kaynağı seç</string>
     <!-- Patch Options -->
     <string name="custom_color">Özel renk</string>
     <string name="hex_color">Hex rengi</string>

@@ -168,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">מחסור בשטח דיסק</string>
     <string name="home_low_disk_space_dialog_message">רק %1$.2f GB של שטח אחסון פנוי זמין. התקנת עדכונים דורשת לפחות %2$.2f GB של שטח פנוי כדי לעבוד כראוי.</string>
     <string name="home_low_disk_space_dialog_warning">המשך עלול לגרום לשגיאת \"קובץ לא נמצא\" או APK פלט פגום</string>
+    <string name="home_simple_bundle_select_title">בחר מקור תיקון</string>
     <!-- Patch Options -->
     <string name="custom_color">Цвет \"изготовителя\"</string>
     <string name="hex_color">Цвет в формате HEX</string>

@@ -168,6 +168,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_low_disk_space_dialog_title">Spás diosca íseal</string>
     <string name="home_low_disk_space_dialog_message">Níl ach %1$.2f GB de spás saor in aisce ar fáil. Éilíonn paisteáil ar a laghad %2$.2f GB de spás saor in aisce le go n-oibreoidh sé i gceart.</string>
     <string name="home_low_disk_space_dialog_warning">D’fhéadfadh earráid \"comhad gan aimsiú\" nó APK aschuir truaillithe a bheith mar thoradh ar dhul ar aghaidh.</string>
+    <string name="home_simple_bundle_select_title">Roghnaigh comhad foinse paiste</string>
     <!-- Patch Options -->
     <string name="custom_color">Dath saincheaptha</string>
     <string name="hex_color">Dath heicsidheachúlach</string>

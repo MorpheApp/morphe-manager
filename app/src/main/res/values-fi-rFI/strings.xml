@@ -167,6 +167,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="home_low_disk_space_dialog_title">Vähän levytilaa</string>
     <string name="home_low_disk_space_dialog_message">Vain %1$.2f GB vapaata tallennustilaa. Korjausohjelman toimiakseen oikein tarvitaan vähintään %2$.2f GB vapaata tilaa</string>
     <string name="home_low_disk_space_dialog_warning">Jatkamisesta voi seurata tiedostotonnettua virhettä tai vioittunutta ulostulo-APK:ta</string>
+    <string name="home_simple_bundle_select_title">Valitse korjaustiedoston lähde</string>
     <!-- Patch Options -->
     <string name="custom_color">Mukautettu väri</string>
     <string name="hex_color">HEX-väri</string>
