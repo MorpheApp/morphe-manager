@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.domain.installer
 
 import android.annotation.SuppressLint
@@ -235,13 +240,6 @@ class SessionInstaller(private val app: Application) {
             runCatching { app.unregisterReceiver(receiver) }
         }
 
-        app.startActivity(buildUninstallIntent(packageName))
-    }
-
-    /**
-     * Launches the system uninstall UI for [packageName] without waiting for the result.
-     */
-    fun launchUninstall(packageName: String) {
         app.startActivity(buildUninstallIntent(packageName))
     }
 
