@@ -1,3 +1,15 @@
+# [1.16.0-dev.18](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.17...v1.16.0-dev.18) (2026-05-03)
+
+
+### Bug Fixes
+
+* Replace `Ackpine` with native `SessionInstaller` ([#508](https://github.com/MorpheApp/morphe-manager/issues/508)) ([cf0f4db](https://github.com/MorpheApp/morphe-manager/commit/cf0f4dbe69a2c71114b828875bcfbe2ef6efd739))
+
+
+### Features
+
+* Prompt bundle selection before APK selection in simple mode ([#511](https://github.com/MorpheApp/morphe-manager/issues/511)) ([8161d9b](https://github.com/MorpheApp/morphe-manager/commit/8161d9b305aaab82285eccffaf89d42c786ea5f6))
+
 # [1.16.0-dev.17](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.16...v1.16.0-dev.17) (2026-05-01)
 
 
