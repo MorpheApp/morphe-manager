@@ -1,3 +1,10 @@
+# [1.16.0-dev.20](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.19...v1.16.0-dev.20) (2026-05-03)
+
+
+### Bug Fixes
+
+* Use `SharedPreferences` as locale side-channel on Android < 13 ([a5f91bd](https://github.com/MorpheApp/morphe-manager/commit/a5f91bd02e5d26780a3119b7f73c762b27b02403))
+
 # [1.16.0-dev.19](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.18...v1.16.0-dev.19) (2026-05-03)
 
 
