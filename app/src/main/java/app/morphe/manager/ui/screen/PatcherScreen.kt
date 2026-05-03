@@ -239,6 +239,14 @@ fun PatcherScreen(
 
     // Trigger notification prompt after first successful install
     val installState = installViewModel.installState
+    val isInstalling = installState is InstallViewModel.InstallState.Installing
+    val isInstalled = installState is InstallViewModel.InstallState.Installed
+    val isError = installState is InstallViewModel.InstallState.Error
+    val isConflict = installState is InstallViewModel.InstallState.Conflict
+    val installedPackageName = installViewModel.installedPackageName
+    val conflictPackageName = (installState as? InstallViewModel.InstallState.Conflict)?.packageName
+    val errorMessage = (installState as? InstallViewModel.InstallState.Error)?.message
+
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
             patcherViewModel.triggerNotificationPromptIfNeeded()
@@ -415,7 +423,18 @@ fun PatcherScreen(
 
                 PatcherState.SUCCESS -> {
                     PatchingSuccess(
-                        installViewModel = installViewModel,
+                        isInstalling = isInstalling,
+                        isInstalled = isInstalled,
+                        isError = isError,
+                        isConflict = isConflict,
+                        installedPackageName = installedPackageName,
+                        conflictPackageName = conflictPackageName,
+                        errorMessage = errorMessage,
+                        installerUnavailableDialog = installViewModel.installerUnavailableDialog,
+                        onOpenInstallerApp = installViewModel::openInstallerApp,
+                        onRetryInstaller = installViewModel::retryWithPreferredInstaller,
+                        onUseFallbackInstaller = installViewModel::proceedWithFallbackInstaller,
+                        onDismissInstallerDialog = installViewModel::dismissInstallerUnavailableDialog,
                         usingMountInstall = usingMountInstall,
                         isExpertMode = useExpertMode,
                         onLogsClick = { showSuccessScreen = false },

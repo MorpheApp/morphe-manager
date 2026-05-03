@@ -113,7 +113,18 @@ fun rememberMorphePatcherState(
  */
 @Composable
 fun PatchingSuccess(
-    installViewModel: InstallViewModel,
+    isInstalling: Boolean,
+    isInstalled: Boolean,
+    isError: Boolean,
+    isConflict: Boolean,
+    installedPackageName: String?,
+    conflictPackageName: String?,
+    errorMessage: String?,
+    installerUnavailableDialog: InstallViewModel.InstallerUnavailableState?,
+    onOpenInstallerApp: () -> Unit,
+    onRetryInstaller: () -> Unit,
+    onUseFallbackInstaller: () -> Unit,
+    onDismissInstallerDialog: () -> Unit,
     usingMountInstall: Boolean,
     isExpertMode: Boolean = false,
     onInstall: () -> Unit,
@@ -125,48 +136,28 @@ fun PatchingSuccess(
     isSaving: Boolean
 ) {
     val windowSize = rememberWindowSize()
-    val installState = installViewModel.installState
-    val installedPackageName = installViewModel.installedPackageName
 
     // Installer unavailable dialog
-    installViewModel.installerUnavailableDialog?.let { dialogState ->
+    if (installerUnavailableDialog != null) {
         InstallerUnavailableDialog(
-            state = dialogState,
-            onOpenApp = installViewModel::openInstallerApp,
-            onRetry = installViewModel::retryWithPreferredInstaller,
-            onUseFallback = installViewModel::proceedWithFallbackInstaller,
-            onDismiss = installViewModel::dismissInstallerUnavailableDialog
+            state = installerUnavailableDialog,
+            onOpenApp = onOpenInstallerApp,
+            onRetry = onRetryInstaller,
+            onUseFallback = onUseFallbackInstaller,
+            onDismiss = onDismissInstallerDialog
         )
     }
 
-    // Determine visual state
-    val isError = installState is InstallViewModel.InstallState.Error ||
-            installState is InstallViewModel.InstallState.Conflict
-    val isInstalling = installState is InstallViewModel.InstallState.Installing
-    val isInstalled = installState is InstallViewModel.InstallState.Installed
-
-    val iconTint = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
-    val iconBackgroundColor = if (isError) {
+    val iconTint = if (isError || isConflict) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+    val iconBackgroundColor = if (isError || isConflict) {
         MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
     } else {
         MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
     }
     val icon = when {
         isInstalled -> Icons.Default.Check
-        isError -> Icons.Default.Close
+        isError || isConflict -> Icons.Default.Close
         else -> Icons.Default.Check
-    }
-
-    // Get error message if any
-    val errorMessage = when (installState) {
-        is InstallViewModel.InstallState.Error -> installState.message
-        else -> null
-    }
-
-    // Get conflict package name
-    val conflictPackageName = when (installState) {
-        is InstallViewModel.InstallState.Conflict -> installState.packageName
-        else -> null
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -188,9 +179,11 @@ fun PatchingSuccess(
                     icon = icon,
                     iconTint = iconTint,
                     iconBackgroundColor = iconBackgroundColor,
-                    installState = installState,
-                    installedPackageName = installedPackageName,
                     isInstalling = isInstalling,
+                    isInstalled = isInstalled,
+                    isError = isError,
+                    isConflict = isConflict,
+                    installedPackageName = installedPackageName,
                     usingMountInstall = usingMountInstall,
                     errorMessage = errorMessage,
                     conflictPackageName = conflictPackageName,
@@ -227,9 +220,11 @@ private fun AdaptiveSuccessContent(
     icon: ImageVector,
     iconTint: Color,
     iconBackgroundColor: Color,
-    installState: InstallViewModel.InstallState,
-    installedPackageName: String?,
     isInstalling: Boolean,
+    isInstalled: Boolean,
+    isError: Boolean,
+    isConflict: Boolean,
+    installedPackageName: String?,
     usingMountInstall: Boolean,
     errorMessage: String?,
     conflictPackageName: String?,
@@ -268,9 +263,11 @@ private fun AdaptiveSuccessContent(
                 Spacer(Modifier.height(itemSpacing))
 
                 SuccessStatusText(
-                    installState = installState,
-                    installedPackageName = installedPackageName,
                     isInstalling = isInstalling,
+                    isInstalled = isInstalled,
+                    isError = isError,
+                    isConflict = isConflict,
+                    installedPackageName = installedPackageName,
                     windowSize = windowSize
                 )
             }
@@ -284,27 +281,31 @@ private fun AdaptiveSuccessContent(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 SuccessInstructionsText(
-                    installState = installState,
-                    installedPackageName = installedPackageName,
                     isInstalling = isInstalling,
+                    isInstalled = isInstalled,
+                    isError = isError,
+                    isConflict = isConflict,
+                    installedPackageName = installedPackageName,
                     usingMountInstall = usingMountInstall
                 )
 
                 SuccessErrorMessage(
                     errorMessage = errorMessage,
-                    installState = installState
+                    isError = isError
                 )
 
                 SuccessRootWarning(
                     usingMountInstall = usingMountInstall,
-                    installState = installState
+                    isReady = !isInstalling && !isInstalled && !isError && !isConflict
                 )
 
                 Spacer(Modifier.height(itemSpacing))
 
                 InstallActionButton(
-                    installState = installState,
                     isInstalling = isInstalling,
+                    isInstalled = isInstalled,
+                    isError = isError,
+                    isConflict = isConflict,
                     conflictPackageName = conflictPackageName,
                     usingMountInstall = usingMountInstall,
                     onInstall = onInstall,
@@ -330,32 +331,38 @@ private fun AdaptiveSuccessContent(
             )
 
             SuccessStatusText(
-                installState = installState,
-                installedPackageName = installedPackageName,
                 isInstalling = isInstalling,
+                isInstalled = isInstalled,
+                isError = isError,
+                isConflict = isConflict,
+                installedPackageName = installedPackageName,
                 windowSize = windowSize
             )
 
             SuccessInstructionsText(
-                installState = installState,
-                installedPackageName = installedPackageName,
                 isInstalling = isInstalling,
+                isInstalled = isInstalled,
+                isError = isError,
+                isConflict = isConflict,
+                installedPackageName = installedPackageName,
                 usingMountInstall = usingMountInstall
             )
 
             SuccessErrorMessage(
                 errorMessage = errorMessage,
-                installState = installState
+                isError = isError
             )
 
             SuccessRootWarning(
                 usingMountInstall = usingMountInstall,
-                installState = installState
+                isReady = !isInstalling && !isInstalled && !isError && !isConflict
             )
 
             InstallActionButton(
-                installState = installState,
                 isInstalling = isInstalling,
+                isInstalled = isInstalled,
+                isError = isError,
+                isConflict = isConflict,
                 conflictPackageName = conflictPackageName,
                 usingMountInstall = usingMountInstall,
                 onInstall = onInstall,
@@ -401,13 +408,15 @@ private fun SuccessIcon(
  */
 @Composable
 private fun SuccessStatusText(
-    installState: InstallViewModel.InstallState,
-    installedPackageName: String?,
     isInstalling: Boolean,
+    isInstalled: Boolean,
+    isError: Boolean,
+    isConflict: Boolean,
+    installedPackageName: String?,
     windowSize: WindowSize
 ) {
     AnimatedContent(
-        targetState = getTitleForState(installState, installedPackageName, isInstalling),
+        targetState = getTitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName),
         transitionSpec = {
             fadeIn(animationSpec = tween(500)) togetherWith
                     fadeOut(animationSpec = tween(500))
@@ -422,8 +431,7 @@ private fun SuccessStatusText(
                 MaterialTheme.typography.headlineMedium
             },
             fontWeight = FontWeight.Bold,
-            color = if (installState is InstallViewModel.InstallState.Error ||
-                installState is InstallViewModel.InstallState.Conflict) {
+            color = if (isError || isConflict) {
                 MaterialTheme.colorScheme.error
             } else {
                 MaterialTheme.colorScheme.onBackground
@@ -439,13 +447,15 @@ private fun SuccessStatusText(
  */
 @Composable
 private fun SuccessInstructionsText(
-    installState: InstallViewModel.InstallState,
-    installedPackageName: String?,
     isInstalling: Boolean,
+    isInstalled: Boolean,
+    isError: Boolean,
+    isConflict: Boolean,
+    installedPackageName: String?,
     usingMountInstall: Boolean
 ) {
     AnimatedContent(
-        targetState = getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall),
+        targetState = getSubtitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName, usingMountInstall),
         transitionSpec = {
             fadeIn(animationSpec = tween(500)) togetherWith
                     fadeOut(animationSpec = tween(500))
@@ -470,10 +480,10 @@ private fun SuccessInstructionsText(
 @Composable
 private fun SuccessErrorMessage(
     errorMessage: String?,
-    installState: InstallViewModel.InstallState
+    isError: Boolean
 ) {
     AnimatedVisibility(
-        visible = errorMessage != null && installState is InstallViewModel.InstallState.Error,
+        visible = errorMessage != null && isError,
         enter = MorpheAnimations.fadeIn,
         exit = MorpheAnimations.fadeOut
     ) {
@@ -501,10 +511,10 @@ private fun SuccessErrorMessage(
 @Composable
 private fun SuccessRootWarning(
     usingMountInstall: Boolean,
-    installState: InstallViewModel.InstallState
+    isReady: Boolean
 ) {
     AnimatedVisibility(
-        visible = usingMountInstall && installState is InstallViewModel.InstallState.Ready,
+        visible = usingMountInstall && isReady,
         enter = MorpheAnimations.fadeIn,
         exit = MorpheAnimations.fadeOut
     ) {
@@ -522,8 +532,10 @@ private fun SuccessRootWarning(
  */
 @Composable
 private fun InstallActionButton(
-    installState: InstallViewModel.InstallState,
     isInstalling: Boolean,
+    isInstalled: Boolean,
+    isError: Boolean,
+    isConflict: Boolean,
     conflictPackageName: String?,
     usingMountInstall: Boolean,
     onInstall: () -> Unit,
@@ -531,10 +543,6 @@ private fun InstallActionButton(
     onOpen: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isConflict = installState is InstallViewModel.InstallState.Conflict
-    val isError = installState is InstallViewModel.InstallState.Error
-    val isInstalled = installState is InstallViewModel.InstallState.Installed
-
     val buttonColors = when {
         isInstalled -> ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -614,14 +622,16 @@ private fun InstallActionButton(
  * Get title resource based on state.
  */
 private fun getTitleForState(
-    installState: InstallViewModel.InstallState,
-    installedPackageName: String?,
-    isInstalling: Boolean
+    isInstalling: Boolean,
+    isInstalled: Boolean,
+    isError: Boolean,
+    isConflict: Boolean,
+    installedPackageName: String?
 ): Int = when {
     isInstalling -> R.string.installing_ellipsis
-    installedPackageName != null || installState is InstallViewModel.InstallState.Installed -> R.string.patcher_success_title
-    installState is InstallViewModel.InstallState.Conflict -> R.string.patcher_conflict_title
-    installState is InstallViewModel.InstallState.Error -> R.string.patcher_install_error_title
+    installedPackageName != null || isInstalled -> R.string.patcher_success_title
+    isConflict -> R.string.patcher_conflict_title
+    isError -> R.string.patcher_install_error_title
     else -> R.string.patcher_complete_title
 }
 
@@ -629,15 +639,17 @@ private fun getTitleForState(
  * Get subtitle resource based on state.
  */
 private fun getSubtitleForState(
-    installState: InstallViewModel.InstallState,
-    installedPackageName: String?,
     isInstalling: Boolean,
+    isInstalled: Boolean,
+    isError: Boolean,
+    isConflict: Boolean,
+    installedPackageName: String?,
     usingMountInstall: Boolean
 ): Int = when {
     isInstalling -> R.string.patcher_installing_subtitle
-    installedPackageName != null || installState is InstallViewModel.InstallState.Installed -> R.string.patcher_success_subtitle
-    installState is InstallViewModel.InstallState.Conflict -> R.string.patcher_conflict_subtitle
-    installState is InstallViewModel.InstallState.Error -> R.string.patcher_install_error_subtitle
+    installedPackageName != null || isInstalled -> R.string.patcher_success_subtitle
+    isConflict -> R.string.patcher_conflict_subtitle
+    isError -> R.string.patcher_install_error_subtitle
     else -> if (usingMountInstall) R.string.patcher_ready_to_mount_subtitle else R.string.patcher_ready_to_install_subtitle
 }
 

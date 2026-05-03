@@ -366,6 +366,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             ?: throw Exception("Failed to load application info")
         val targetPackageName = packageInfo.packageName
 
+        // Unmount if mounted as root
         if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(originalPackageName)) {
             rootInstaller.unmount(originalPackageName)
         }
@@ -373,6 +374,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         val result = try {
             sessionInstaller.installInternal(outputFile)
         } catch (_: InstallCancelledException) {
+            // User dismissed the dialog - go back to Ready immediately, no error shown
             installState = InstallState.Ready
             return
         } catch (_: SessionDeadException) {

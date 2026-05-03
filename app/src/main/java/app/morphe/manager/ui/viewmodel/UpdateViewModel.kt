@@ -178,6 +178,7 @@ class UpdateViewModel(
                 try {
                     handleInstallResult(sessionInstaller.installInternal(location))
                 } catch (_: InstallCancelledException) {
+                    // User dismissed dialog - go back to CAN_INSTALL so they can retry
                     state = State.CAN_INSTALL
                 } catch (_: SessionDeadException) {
                     launchIntentFallback()
