@@ -867,10 +867,19 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Launches system uninstall UI for [packageName].
+     * Launches system uninstall UI for [packageName] and suspends until the user confirms.
+     * Resets [installState] to [InstallState.Ready] after successful uninstall so the user
+     * can immediately retry installation.
      */
     fun requestUninstall(packageName: String) {
-        sessionInstaller.launchUninstall(packageName)
+        viewModelScope.launch {
+            try {
+                sessionInstaller.uninstall(packageName)
+                installState = InstallState.Ready
+            } catch (_: UninstallCancelledException) {
+                // User dismissed the dialog - keep current state
+            }
+        }
     }
 
     fun openApp() {
