@@ -272,6 +272,46 @@ class HomeViewModel(
     var showBundleUpdateSnackbar by mutableStateOf(false)
     var snackbarStatus by mutableStateOf(BundleUpdateStatus.Updating)
 
+    // Simple mode bundle selection dialog: shown when 2+ bundles have patches for the same app
+    var showSimpleBundleSelectDialog by mutableStateOf(false)
+    var simpleBundleSelectApp by mutableStateOf<SelectedApp?>(null)
+    var simpleBundleSelectCandidates by mutableStateOf<List<Pair<PatchBundleInfo.Scoped, Set<String>>>>(emptyList())
+    // Bundle pre-selected by the user before the APK selection flow (simple mode)
+    var pendingSelectedBundleUid by mutableStateOf<Int?>(null)
+        private set
+
+    fun dismissSimpleBundleSelectDialog() {
+        showSimpleBundleSelectDialog = false
+        simpleBundleSelectApp = null
+        simpleBundleSelectCandidates = emptyList()
+        cleanupPendingData()
+    }
+
+    /**
+     * Called when the user picks a bundle in [app.morphe.manager.ui.screen.home.SimpleBundleSelectDialog].
+     * Instead of patching immediately, stores the chosen bundle uid and continues
+     * to the APK selection flow so the correct recommended version is shown.
+     */
+    fun proceedWithSelectedBundle(bundleUid: Int) {
+        val packageName = pendingPackageName ?: return
+        showSimpleBundleSelectDialog = false
+        simpleBundleSelectApp = null
+        simpleBundleSelectCandidates = emptyList()
+
+        pendingSelectedBundleUid = bundleUid
+
+        // Update recommended version to the one declared by the chosen bundle
+        val bundleRecommended = recommendedBundleVersions[packageName]?.get(bundleUid)
+        if (bundleRecommended != null) {
+            pendingRecommendedVersion = bundleRecommended
+            pendingSelectedDownloadVersion = bundleRecommended
+        }
+
+        viewModelScope.launch {
+            continueApkSelectionFlow(packageName)
+        }
+    }
+
     // Metered network dialog: shown when user tries to patch on mobile data with updates disabled
     var showMeteredPatchingDialog by mutableStateOf(false)
         private set
@@ -342,6 +382,9 @@ class HomeViewModel(
     // Convenience accessors - read current value synchronously for non-reactive call sites
     val recommendedVersions: Map<String, AppTarget> get() = recommendedVersionsFlow.value
     val compatibleVersions: Map<String, List<BundledAppTarget>> get() = compatibleVersionsFlow.value
+
+    /** Convenience accessor - reads expert mode preference without blocking. */
+    private suspend fun isExpertMode() = prefs.useExpertMode.get()
 
     /**
      * Per-bundle recommended version for each package.
@@ -1315,14 +1358,51 @@ class HomeViewModel(
             return
         }
 
-        // Check if we should auto-use saved APK in simple mode
-        val isExpertMode = prefs.useExpertMode.getBlocking()
-        val recommendedVersion = recommendedVersions[packageName]
+        // In simple mode: if multiple bundles cover this package, ask the user to pick one
+        // before showing the APK selection dialog so the correct recommended version is used
+        if (!isExpertMode() && pendingSelectedBundleUid == null) {
+            val allBundlesForCheck = withContext(Dispatchers.IO) {
+                patchBundleRepository
+                    .scopedBundleInfoFlow(packageName, version = null)
+                    .first()
+            }
+            val candidates = allBundlesForCheck
+                .filter { it.enabled }
+                .map { bundle ->
+                    val patchNames = bundle.patchSequence(allowIncompatible = true)
+                        .filter { it.include }
+                        .mapTo(mutableSetOf()) { it.name }
+                    bundle to patchNames
+                }
+                .filter { (_, patches) -> patches.isNotEmpty() }
 
-        val shouldAutoUseSaved = !isExpertMode &&
-                savedInfo != null &&
+            if (candidates.size > 1) {
+                simpleBundleSelectCandidates = candidates
+                showSimpleBundleSelectDialog = true
+                return
+            }
+        }
+
+        continueApkSelectionFlow(packageName)
+    }
+
+    /**
+     * Second half of the patch-dialog flow: runs after bundle selection (or immediately when
+     * no bundle disambiguation is needed). Decides whether to auto-use the saved APK or to
+     * open the APK availability dialog.
+     */
+    private suspend fun continueApkSelectionFlow(packageName: String) {
+        // Reload saved APK info in case it wasn't loaded yet (called from proceedWithSelectedBundle)
+        if (pendingSavedApkInfo == null) {
+            pendingSavedApkInfo = withContext(Dispatchers.IO) { loadSavedApkInfo(packageName) }
+        }
+
+        val recommendedVersion = pendingRecommendedVersion
+
+        val shouldAutoUseSaved = !isExpertMode() &&
+                pendingSavedApkInfo != null &&
                 recommendedVersion != null &&
-                savedInfo.version == recommendedVersion.version
+                pendingSavedApkInfo!!.version == recommendedVersion.version
 
         if (shouldAutoUseSaved) {
             // Skip dialog and use saved APK directly
@@ -1471,7 +1551,7 @@ class HomeViewModel(
             if (isSplitFile && requiredApkFileType?.isApk == true && requiredApkFileType.isRequired) {
                 pendingSelectedApp = selectedApp
                 showSplitApkWarningDialog = true
-                cleanupPendingData(keepSelectedApp = true)
+                cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
                 return
             }
 
@@ -1508,7 +1588,7 @@ class HomeViewModel(
                             packageName = selectedApp.packageName,
                             appName = pendingAppName ?: KnownApps.getAppName(selectedApp.packageName)
                         )
-                        cleanupPendingData(keepSelectedApp = true)
+                        cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
                         return
                     }
                 }
@@ -1575,7 +1655,7 @@ class HomeViewModel(
                 allCompatibleVersions = allVersions,
                 isExperimental = isVersionExperimental
             )
-            cleanupPendingData(keepSelectedApp = true)
+            cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
             return
         }
 
@@ -1598,7 +1678,7 @@ class HomeViewModel(
             } else {
                 showUnsupportedVersionDialog = state
             }
-            cleanupPendingData(keepSelectedApp = true)
+            cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
             return
         }
 
@@ -1636,8 +1716,6 @@ class HomeViewModel(
         selectedApp: SelectedApp,
         allowIncompatible: Boolean
     ) {
-        val expertModeEnabled = prefs.useExpertMode.getBlocking()
-
         val allBundles = patchBundleRepository
             .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
             .first()
@@ -1655,7 +1733,7 @@ class HomeViewModel(
         fun PatchSelection.applyGmsCoreFilter(): PatchSelection =
             if (usingMountInstall) this.filterGmsCore() else this
 
-        if (expertModeEnabled) {
+        if (isExpertMode()) {
             // Expert Mode: Load saved selections and options only for current bundles
             val currentBundleUids = allBundles.map { it.uid }.toSet()
 
@@ -1772,73 +1850,80 @@ class HomeViewModel(
             expertModeNewPatches = newPatchesMap
             showExpertModeDialog = true
         } else {
-            // Simple Mode: check if this is a main app or "other app"
-            // Prefer the default bundle if it is enabled and has patches for this package.
-            // If the default bundle is disabled or has no patches, fall through to use
-            // all enabled bundles - this allows third-party bundles to work for known apps too.
-            val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
-            val defaultPatchNames = if (defaultBundle != null && defaultBundle.enabled) {
-                defaultBundle.patchSequence(allowIncompatible)
-                    .filter { it.include }
-                    .mapTo(mutableSetOf()) { it.name }
-            } else {
-                emptySet()
-            }
+            // Simple Mode: collect patches from all enabled bundles, then either use the sole result directly
+            // or ask the user to pick one if multiple bundles have applicable patches.
+            // A patch is applicable if:
+            //   - compatiblePackages == null (universal), OR
+            //   - compatiblePackages contains this packageName
+            val bundleWithPatches = allBundles
+                .filter { it.enabled }
+                .map { bundle ->
+                    val patchNames = bundle.patchSequence(allowIncompatible)
+                        .filter { it.include }
+                        .mapTo(mutableSetOf()) { it.name }
+                    bundle to patchNames
+                }
+                .filter { (_, patches) -> patches.isNotEmpty() }
 
-            if (defaultPatchNames.isNotEmpty()) {
-                // Default bundle is active and has patches → use it (simple mode behavior)
-                val patches = mapOf(defaultBundle!!.uid to defaultPatchNames).applyGmsCoreFilter()
-                proceedWithPatching(selectedApp, patches, emptyMap())
-            } else {
-                // For "Other Apps": collect patches from all enabled bundles.
-                // A patch is applicable if:
-                //   - compatiblePackages == null (universal), OR
-                //   - compatiblePackages contains this packageName
-                // We use allowIncompatible=true here because the user explicitly chose
-                // this APK file, so version mismatches should not block patching.
-                val bundleWithPatches = allBundles
-                    .filter { it.enabled }
-                    .map { bundle ->
-                        // patchSequence(true) = all patches in Scoped.patches
-                        // which already contains only compatible+incompatible+universal for this pkg.
-                        val patchNames = bundle.patchSequence(allowIncompatible = true)
-                            .filter { it.include }
-                            .mapTo(mutableSetOf()) { it.name }
-                        bundle to patchNames
-                    }
-                    .filter { (_, patches) -> patches.isNotEmpty() }
+            if (bundleWithPatches.isEmpty()) {
+                // No patches have include=true (use=true in the bundle JSON).
+                // This is the case for third-party bundles where all universal patches
+                // ship with use=false and require explicit user configuration.
+                // Fall through to expert mode so the user can select and configure patches.
+                val currentBundleUids = allBundles.map { it.uid }.toSet()
 
-                if (bundleWithPatches.isEmpty()) {
-                    // No patches have include=true (use=true in the bundle JSON).
-                    // This is the case for third-party bundles where all universal patches
-                    // ship with use=false and require explicit user configuration.
-                    // Fall through to expert mode so the user can select and configure patches.
-                    val currentBundleUids = allBundles.map { it.uid }.toSet()
-
-                    val savedSelections = withContext(Dispatchers.IO) {
-                        patchSelectionRepository.getAllSelectionsForPackage(selectedApp.packageName)
-                            .filterKeys { it in currentBundleUids }
-                    }
-                    val savedOptions = withContext(Dispatchers.IO) {
-                        optionsRepository.getAllOptionsForPackage(selectedApp.packageName, bundlesMap)
-                            .filterKeys { it in currentBundleUids }
-                    }
-
-                    expertModeSelectedApp = selectedApp
-                    expertModeBundles = allBundles
-                    savedSelections.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
-                    expertModeOptions = savedOptions.toMutableMap()
-                    showExpertModeDialog = true
-                    return
+                val savedSelections = withContext(Dispatchers.IO) {
+                    patchSelectionRepository.getAllSelectionsForPackage(selectedApp.packageName)
+                        .filterKeys { it in currentBundleUids }
+                }
+                val savedOptions = withContext(Dispatchers.IO) {
+                    optionsRepository.getAllOptionsForPackage(selectedApp.packageName, bundlesMap)
+                        .filterKeys { it in currentBundleUids }
                 }
 
-                // Use all include=true patches from all bundles
-                val patches = bundleWithPatches
-                    .associate { (bundle, patches) -> bundle.uid to patches }
-                    .applyGmsCoreFilter()
-
-                proceedWithPatching(selectedApp, patches, emptyMap())
+                expertModeSelectedApp = selectedApp
+                expertModeBundles = allBundles
+                savedSelections.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
+                expertModeOptions = savedOptions.toMutableMap()
+                showExpertModeDialog = true
+                return
             }
+
+            // If the user pre-selected a bundle via SimpleBundleSelectDialog, use it directly.
+            // Use allowIncompatible=true unconditionally: the user explicitly picked this bundle
+            // AND explicitly picked the APK version, so we must respect both choices regardless
+            // of whether the version is in the bundle's supported list
+            val preSelectedUid = pendingSelectedBundleUid
+            if (preSelectedUid != null) {
+                pendingSelectedBundleUid = null
+                val bundle = allBundles.find { it.uid == preSelectedUid }
+                if (bundle != null) {
+                    val patchNames = bundle.patchSequence(allowIncompatible = true)
+                        .filter { it.include }
+                        .mapTo(mutableSetOf()) { it.name }
+                    if (patchNames.isNotEmpty()) {
+                        val patches = mapOf(bundle.uid to patchNames).applyGmsCoreFilter()
+                        proceedWithPatching(selectedApp, patches, emptyMap())
+                        return
+                    }
+                }
+                // Pre-selected bundle has no patches at all - fall through
+            }
+
+            // Simple mode: if more than one bundle has applicable patches, ask the user which single bundle to use
+            if (bundleWithPatches.size > 1) {
+                simpleBundleSelectApp = selectedApp
+                simpleBundleSelectCandidates = bundleWithPatches
+                showSimpleBundleSelectDialog = true
+                return
+            }
+
+            // Only one bundle has patches - use it directly (no prompt needed)
+            val patches = bundleWithPatches
+                .associate { (bundle, patches) -> bundle.uid to patches }
+                .applyGmsCoreFilter()
+
+            proceedWithPatching(selectedApp, patches, emptyMap())
         }
     }
 
@@ -1878,6 +1963,7 @@ class HomeViewModel(
         pendingCompatibleVersions = emptyList()
         pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
+        pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
@@ -2140,13 +2226,14 @@ class HomeViewModel(
     /**
      * Clean up pending data.
      */
-    fun cleanupPendingData(keepSelectedApp: Boolean = false) {
+    fun cleanupPendingData(keepSelectedApp: Boolean = false, keepBundleUid: Boolean = false) {
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
         pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
+        if (!keepBundleUid) pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
         pendingSavedApkInfo = null
         if (!keepSelectedApp) {

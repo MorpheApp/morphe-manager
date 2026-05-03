@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
@@ -322,6 +323,26 @@ fun HomeDialogs(
                 viewModel = installedAppInfoViewModel
             )
         }
+    }
+
+    // Simple mode bundle selection dialog - shown when 2+ bundles have patches for the same app
+    if (homeViewModel.showSimpleBundleSelectDialog) {
+        val candidates = homeViewModel.simpleBundleSelectCandidates
+        val bundleRecommendedVersions = homeViewModel.pendingPackageName?.let {
+            homeViewModel.recommendedBundleVersions[it]
+        } ?: emptyMap()
+        SimpleBundleSelectDialog(
+            candidates = candidates.map { (bundle, patches) ->
+                SimpleBundleCandidate(
+                    uid = bundle.uid,
+                    displayTitle = homeViewModel.getBundleDisplayName(bundle.uid) ?: bundle.name,
+                    patchCount = patches.size,
+                    recommendedVersion = bundleRecommendedVersions[bundle.uid]?.version
+                )
+            },
+            onSelect = { uid -> homeViewModel.proceedWithSelectedBundle(uid) },
+            onDismiss = { homeViewModel.dismissSimpleBundleSelectDialog() }
+        )
     }
 
     // Expert Mode Dialog
@@ -1987,6 +2008,139 @@ fun MppImportDialog(
                 icon = Icons.Outlined.Warning,
                 isExpanded = true
             )
+        }
+    }
+}
+
+/** A single selectable bundle entry for [SimpleBundleSelectDialog]. */
+data class SimpleBundleCandidate(
+    val uid: Int,
+    val displayTitle: String,
+    val patchCount: Int,
+    val recommendedVersion: String? = null
+)
+
+/**
+ * Dialog shown in Simple mode when 2+ patch sources have patches for the selected app.
+ * Lets the user pick exactly one source to apply.
+ */
+@SuppressLint("LocalContextResourcesRead")
+@Composable
+fun SimpleBundleSelectDialog(
+    candidates: List<SimpleBundleCandidate>,
+    onSelect: (uid: Int) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val context = LocalContext.current
+    var selected by remember { mutableStateOf(candidates.firstOrNull()?.uid) }
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_simple_bundle_select_title),
+        compactPadding = true,
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.continue_),
+                onPrimaryClick = { selected?.let { onSelect(it) } },
+                primaryEnabled = selected != null,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .selectableGroup()
+        ) {
+            candidates.forEach { candidate ->
+                val isSelected = selected == candidate.uid
+                val selectedLabel = stringResource(R.string.selected)
+                val borderColor = if (isSelected)
+                    MaterialTheme.colorScheme.primary
+                else
+                    MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = isSelected,
+                            onClick = { selected = candidate.uid },
+                            role = Role.RadioButton
+                        )
+                        .semantics {
+                            contentDescription = buildString {
+                                append(candidate.displayTitle)
+                                if (isSelected) append(", $selectedLabel")
+                            }
+                        },
+                    shape = RoundedCornerShape(14.dp),
+                    color = if (isSelected)
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
+                    else
+                        MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
+                    border = BorderStroke(
+                        width = if (isSelected) 1.5.dp else 1.dp,
+                        color = borderColor
+                    ),
+                    tonalElevation = if (isSelected) 0.dp else 1.dp
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 14.dp, vertical = 12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // Checkmark - fixed width so text aligns across all rows
+                        Box(
+                            modifier = Modifier.size(20.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (isSelected) {
+                                Icon(
+                                    imageVector = Icons.Filled.Check,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
+                        }
+
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = candidate.displayTitle,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                                color = if (isSelected) MaterialTheme.colorScheme.primary
+                                else LocalDialogTextColor.current,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            val subtitle = buildString {
+                                append(context.resources.getQuantityString(
+                                    R.plurals.patch_count,
+                                    candidate.patchCount,
+                                    candidate.patchCount
+                                ))
+                                if (candidate.recommendedVersion != null) {
+                                    append(" · v${candidate.recommendedVersion}")
+                                }
+                            }
+                            Text(
+                                text = subtitle,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = if (isSelected)
+                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                                else
+                                    LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
