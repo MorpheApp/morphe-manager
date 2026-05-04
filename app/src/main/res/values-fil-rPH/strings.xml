@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Dapat pahintulutan nang maaga ang pahintulot sa pag-install ng app para maiwasan ang isang pagkakamali sa sistema ng Android 11 na negatibong makakaapekto sa karanasan ng tagagamit</string>
     <string name="deep_link_add_source_title">Magdagdag ng mapagkukunan</string>
     <string name="deep_link_add_source_message">Gusto mo bang idagdag ang patch source na ito sa Morphe?</string>
-    <string name="deep_link_add_source_warning">Magdagdag lamang ng mapagkukunan mula sa mga mapagkukunan na pinagkakatiwalaan mo</string>
+    <string name="deep_link_add_source_warning">Magdagdag lamang ng mga mapagkukunan na pinagkakatiwalaan mo</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Magagamit ang update para sa Morphe</string>
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Walang available na mga app</string>
     <string name="home_no_apps_subtitle">Magdagdag ng pinagmulan ng patch o paganahin ang isang umiiral na isa sa %s</string>
     <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Nakatago ang lahat ng apps</string>
+    <string name="home_all_apps_hidden_subtitle">Nakatago mo ang lahat ng apps sa home screen</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Anong app ang gusto mong i-patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Upang ma-patch ang &lt;b&gt;%s&lt;/b&gt;, kailangan mo ng hindi pa napa-patch na APK na may mga bersyong:</string>
     <string name="home_apk_availability_recommended_label">Inirerekomenda</string>
     <string name="home_apk_availability_unpatched_label">Hindi na-patch</string>
+    <string name="home_apk_availability_incompatible_label">Hindi tugma</string>
     <string name="home_apk_availability_yes">Oo, tulungan mo akong hanapin ang APK</string>
     <string name="home_apk_availability_no">Hindi, mayroon na akong APK</string>
     <string name="home_apk_use_saved_with_version">Gamitin ang nakaimbak na APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Walang nakaimbak na APK. Ang pag-patch na ito ay mangangailangan ng muling pagpili ng APK file</string>
+    <string name="home_version_requires_android">Nangangailangan ng Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Hindi suportado sa aparatong ito</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ay walang sinusuportahang bersyon para sa Android %2$d (API %3$d). Lahat ng idineklarang bersyon ay nangangailangan ng mas mataas na bersyon ng Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">I-download ang orihinal na APK</string>
     <string name="home_download_instructions_steps_title">Mga Tagubilin:</string>
@@ -162,6 +168,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="home_low_disk_space_dialog_title">Mababang espasyo sa disk</string>
     <string name="home_low_disk_space_dialog_message">Tanging %1$.2f GB ng libreng imbakan ang available. Ang pag-aayos ay nangangailangan ng hindi bababa sa %2$.2f GB ng malayang espasyo upang gumana nang tama</string>
     <string name="home_low_disk_space_dialog_warning">Ang pagpapatuloy ay maaaring magresulta sa isang error na \"file not found\" o isang corrupt na output APK</string>
+    <string name="home_simple_bundle_select_title">Piliin ang file ng mapagkukunang patch</string>
     <!-- Patch Options -->
     <string name="custom_color">Pasadyang kulay</string>
     <string name="hex_color">Kulay ng Hex</string>
@@ -221,6 +228,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="home_app_info_patch_update_available_description">Magagamit sa bagong bersyon ang mga patch. Ire-patch ang aplikasyon upang makuha ang mga pinakabagong pagpapabuti at mga pag-aayos</string>
     <string name="home_app_info_app_deleted_warning">Binura ang aplikasyon </string>
     <string name="home_app_info_app_deleted_description">Binura ang aplikasyong ito sa labas ng Morphe. Ire-patch ito upang maibalik ang kanyang punksyonalidad</string>
+    <string name="home_app_info_apk_size">Laki ng APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Kinakailangan ng root mode ang orihinal na APK upang mag-install ito sa iyong device bago ito i-patch</string>
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>
@@ -308,16 +316,13 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="failed_to_execute_patch">Nabigong ilapat %s</string>
     <string name="patched_app_saved_toast">Na-save ang na-patch na aplikasyon para sa ibang pagkakataon</string>
     <string name="patched_app_save_failed_toast">Nabigong ma-save ang na-patch na aplikasyon</string>
-    <string name="download_apk">I-download ang APK file</string>
     <string name="plugin_activity_dialog_body">Kinakailangan ng pakikipag-ugnayan sa tagagamit upang magpatuloy sa plugin na ito</string>
     <string name="patcher_process_exit_message">Lumabas ang proseso ng patcher na may code %1$s</string>
     <string name="install_app_success">Matagumpay na na-install</string>
     <string name="install_app_fail">Nabigong ma-install ang aplikasyon: %s</string>
-    <string name="install_timeout_message">Hindi natapos ang pag-install. Suriin ang diyalogo ng system installer at subukan muli</string>
     <string name="save_apk_success">Na-save ang APK</string>
     <string name="saved_app_export_failed">Nabigong mag-export ang na-patch na aplikasyon</string>
     <string name="saved_app_removed_toast">Inalis ang naka-save na na-patch na aplikasyon</string>
-    <string name="saved_app_copy_removed_toast">Inalis ang naka-save na kopya</string>
     <string name="saved_app_launch_unavailable">I-install muna ang aplikasyon bago mo ito buksan</string>
     <string name="package_name">Pangalan ng pakete</string>
     <string name="failed_to_mount">Nabigong i-mount: %s</string>
@@ -337,6 +342,10 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_appearance_background_grid">Griyá</string>
     <string name="settings_appearance_background_particles">Partikulo</string>
     <string name="settings_appearance_background_none">Wala</string>
+    <string name="settings_appearance_background_random">Random</string>
+    <string name="settings_appearance_background_random_interval_launch">Sa paglunsad</string>
+    <string name="settings_appearance_background_random_interval_daily">Araw-araw</string>
+    <string name="settings_appearance_background_random_interval_3days">Bawat 3 araw</string>
     <string name="settings_appearance_parallax_effect">Epekto ng parallax</string>
     <string name="settings_appearance_parallax_effect_description">Maayos na paglilipat ng background kapag tinatagilid ang device</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_appearance_app_language_current">Kasalukuyang wika</string>
     <string name="settings_appearance_translations_info_title">Maaaring nawawala o hindi kumpleto ang pagsasalin-wika para sa ibang wika</string>
     <string name="settings_appearance_translations_info_text">Upang isalin ang mga bagong wika o pagbutihin ang mga umiiral na pagsasalin-wika, bisitahin ang %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Pangunahing iskrin</string>
+    <string name="settings_appearance_greeting_phrases">Mga pagbati</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icon ng aplikasyon</string>
     <string name="settings_appearance_app_icon_default">Panimula</string>
@@ -399,8 +412,17 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_advanced_expert_mode_description">Paganahin ang masalimuot na Morphe patch settings at mga pasadyang pagpipilian</string>
     <string name="settings_advanced_expert_mode_dialog_title">Paganahin ang Expert mode?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Nagbibigay ng higit na kontrol ang Expert mode sa kung paano inilalapat ang mga patch, ngunit ang maling pagkompigura ng mga pagpipilian sa expert mode ay maaaring magresulta sa isang hindi gumaganang aplikasyon</string>
-    <string name="settings_advanced_strip_unused_libs">Alisin ang mga hindi nagamit na mga native library</string>
-    <string name="settings_advanced_strip_unused_libs_description">Burahin ang mga native library para sa mga hindi suportadong arkitektura ng CPU mula sa mga na-patch na aplikasyon</string>
+    <string name="settings_advanced_strip_unused_libs">I-optimize para sa arkitektura ng device</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Laktawan ang mga split APK module para sa mga hindi sinusuportahang CPU architecture, locales, at screen densities sa panahon ng merge.
+Para sa plain APKs, tinatanggal ang mga native library para sa mga hindi sinusuportahang architecture pagkatapos mag-patch"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Paraan ng pagproseso ng bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kinokontrol kung paano ipinoproseso ang bytecode sa panahon ng pag-patch. Nakakaapekto sa bilis ng pag-patch, paggamit ng memorya, at sukat ng output na APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Mabilis (Inirerekomenda)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Mabilis</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Mas mabilis na pag-patch at mas mababang paggamit ng memorya, sa kapinsalaan ng mas malaking APK. Inirerekomenda para sa mga low-RAM o mas lumang device</string>
+    <string name="settings_advanced_bytecode_mode_full">Buo</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Mas mabagal na pag-patch, gumagaya sa legacy na pag-uugali. Gamitin lamang kung nagiging sanhi ng isyu ang fast mode</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Kailangan para sa mga pull request sources</string>
@@ -510,13 +532,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_status_shizuku_unsupported">Hindi suportado ang naka-install na bersyon ng Shizuku</string>
     <string name="installer_action_open_shizuku">Buksan ang Shizuku</string>
     <string name="installer_hint_generic">Nabigo ang pag-install. Subukan muli o lumipat sa ibang installer</string>
-    <string name="installer_hint_blocked">Hinarang ng Android ang pag-install. Suriin ang Play Protect o security settings</string>
     <string name="installer_hint_conflict">Naka-install na ang isa pang aplikasyon na may ganitong pangalan ng pakete. Burahin muna bago magpatuloy</string>
-    <string name="installer_hint_incompatible">Hindi tugma ang APK sa device na ito o bersyon ng Android</string>
-    <string name="installer_hint_invalid">Imbalido o sira ang APK</string>
-    <string name="installer_hint_storage">Walang sapat na espasyo sa imbakan para sa pag-install</string>
-    <string name="installer_hint_timeout">Nag-time out ang pag-install. Subukan muli</string>
-    <string name="installer_hint_aborted">Kinansela ang pag-install</string>
     <string name="installer_external_launched">Binubuksan ang %1$s…</string>
     <string name="installer_external_timeout">Hindi nakumpirma ng %1$s ang pag-install. Tingnan ang ibang aplikasyon at subukan muli</string>
     <string name="installer_external_success">Iniulat ng %1$s ang matagumpay na pag-install</string>
@@ -547,6 +563,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_import_keystore_dialog_alias_field">Pangalan ng tagagamit (Bansag)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
     <string name="settings_system_import_keystore_dialog_button">I-import</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format ng Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Mali ang keystore credentials</string>
     <string name="settings_system_import_keystore_success">Na-import ang keystore</string>
     <string name="settings_system_import_keystore_failed">Nabigong ma-import ang keystore</string>
@@ -554,6 +571,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_export_keystore_description">I-export ang kasalukuyang keystore</string>
     <string name="settings_system_export_keystore_unavailable">Walang magagamit na keystore para sa pag-export</string>
     <string name="settings_system_export_keystore_success">Na-export ang keystore </string>
+    <string name="settings_system_export_keystore_failed">Nabigo ang pag-export ng keystore</string>
     <string name="settings_system_show_password_field">Ipakita ang password</string>
     <string name="settings_system_hide_password_field">Itago ang password</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="allow">Payagan</string>
     <string name="details">Mga Detalye</string>
     <string name="hide">Itago</string>
-    <string name="default_">Panimula</string>
+    <string name="hidden">Nakatago</string>
+    <string name="unhide">Ipakita</string>
     <string name="logs">Mga log</string>
     <string name="sources">Mga mapagkukunan</string>
     <string name="installing_ellipsis">Ini-install…</string>

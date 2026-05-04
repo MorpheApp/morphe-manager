@@ -47,7 +47,12 @@ import kotlinx.coroutines.sync.withLock
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
+import android.content.ContentValues
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.file.Files
 import java.util.UUID
@@ -425,31 +430,22 @@ class PatcherViewModel(
     /**
      * Save original APK file for future repatching.
      * Called after successful patching, independent of installation method.
-     * For split APK archives (apkm, apks, xapk), saves the original archive.
+     * For split APK archives: inputFile points to the merged mono-APK already saved to
+     * originalApksDir by the worker via onMergedApkReady - this call will detect the
+     * existing record and skip re-saving.
      * For regular APK files, saves the APK itself.
      *
      * Thread-safe: uses mutex to prevent concurrent saves from observeWorker and persistPatchedApp.
      */
     private suspend fun saveOriginalApkIfNeeded() = saveOriginalApkMutex.withLock {
         try {
-            // Determine which file to save:
-            // - For SelectedApp.Local with split archives: save the original user file
-            // - For other cases: save the inputFile (which might be a downloaded/extracted APK)
+            // Determine which file to save.
+            // For SelectedApp.Local with a split archive: inputFile is updated to the merged
+            // mono-APK via setInputFile(merged=true) after prepareIfNeeded() completes, so
+            // we always use inputFile here - it already points to the correct file.
             val fileToSave = when (val selected = input.selectedApp) {
-                is SelectedApp.Local -> {
-                    // Check if original file is a split archive
-                    if (SplitApkPreparer.isSplitArchive(selected.file)) {
-                        // Save the original split archive, not the merged APK
-                        selected.file
-                    } else {
-                        // For regular APK, use inputFile (might be same as selected.file)
-                        inputFile ?: selected.file
-                    }
-                }
-                else -> {
-                    // For non-local apps (Download, Search, Installed), use inputFile
-                    inputFile
-                }
+                is SelectedApp.Local -> inputFile ?: selected.file
+                else -> inputFile
             }
 
             if (fileToSave == null || !fileToSave.exists()) {
@@ -598,27 +594,73 @@ class PatcherViewModel(
                             ?: throw IOException("Could not open output stream for export")
                     }
                 }.isSuccess
-
-                if (!exportSucceeded) {
-                    app.toast(app.getString(R.string.saved_app_export_failed))
-                    return@let
-                }
-
-                val saved = persistPatchedApp(null, InstallType.SAVED)
-
-                if (!saved) {
-                    app.toast(app.getString(R.string.patched_app_save_failed_toast))
-                } else {
-                    app.toast(app.getString(R.string.save_apk_success))
-                    delay(2000) // Delay before resetting save state
-                }
-
-                if (saved) triggerNotificationPromptIfNeeded()
+                finishExport(exportSucceeded)
             } finally {
                 _isSaving.value = false
             }
         }
     }
+
+    /**
+     * Exports the patched APK to the public Downloads folder.
+     * Used as a fallback on devices without DocumentsUI.
+     */
+    fun exportToDownloads() = viewModelScope.launch {
+        if (_isSaving.value) return@launch
+        _isSaving.value = true
+        try {
+            ensureExportMetadata()
+            val fileName = exportFileName
+            val exportSucceeded = runCatching {
+                withContext(Dispatchers.IO) {
+                    val stream = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        val values = ContentValues().apply {
+                            put(MediaStore.Downloads.DISPLAY_NAME, fileName)
+                            put(MediaStore.Downloads.MIME_TYPE, APK_MIMETYPE)
+                            put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                        }
+                        val uri = app.contentResolver.insert(
+                            MediaStore.Downloads.EXTERNAL_CONTENT_URI, values
+                        ) ?: throw IOException("Could not create Downloads entry")
+                        app.contentResolver.openOutputStream(uri)
+                            ?: throw IOException("Could not open Downloads output stream")
+                    } else {
+                        @Suppress("DEPRECATION")
+                        val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                        dir.mkdirs()
+                        FileOutputStream(File(dir, fileName))
+                    }
+                    stream.use { Files.copy(outputFile.toPath(), it) }
+                }
+            }.isSuccess
+            finishExport(exportSucceeded)
+        } finally {
+            _isSaving.value = false
+        }
+    }
+
+    /**
+     * Shared post-export logic: persists the patched app record, shows a toast,
+     * and triggers the notification prompt on success.
+     */
+    private suspend fun finishExport(exportSucceeded: Boolean) {
+        if (!exportSucceeded) {
+            app.toast(app.getString(R.string.saved_app_export_failed))
+            return
+        }
+
+        val saved = persistPatchedApp(null, InstallType.SAVED)
+
+        if (!saved) {
+            app.toast(app.getString(R.string.patched_app_save_failed_toast))
+        } else {
+            app.toast(app.getString(R.string.save_apk_success))
+            delay(2000)
+        }
+
+        if (saved) triggerNotificationPromptIfNeeded()
+    }
+
 
     /**
      * Checks prefs and triggers the notification prompt if conditions are met.
@@ -806,7 +848,7 @@ class PatcherViewModel(
                             saveOriginalApkIfNeeded()
                         } finally {
                             withContext(Dispatchers.Main) {
-                                // Delete temporary file after saving
+                                // Delete temporary input file after saving
                                 if (input.selectedApp is SelectedApp.Local && input.selectedApp.temporary) {
                                     inputFile?.takeIf { it.exists() }?.delete()
                                     inputFile = null

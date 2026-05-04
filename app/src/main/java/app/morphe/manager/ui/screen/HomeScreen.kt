@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -18,10 +17,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.*
@@ -50,32 +51,47 @@ fun HomeScreen(
     val view = LocalView.current
 
     // Dialog states
-    val showInstalledAppDialog = remember { mutableStateOf<String?>(null) }
     val showUpdateDetailsDialog = remember { mutableStateOf(false) }
+
+    // Patches dialog state (swipe-right on app card)
+    val patchesSheetItem = remember { mutableStateOf<HomeAppItem?>(null) }
 
     // Pull to refresh state
     val isRefreshing by homeViewModel.isRefreshing.collectAsStateWithLifecycle()
 
-    // Get greeting message
-    var greetingMessage by remember { mutableStateOf(context.getString(HomeAndPatcherMessages.getHomeMessage(context))) }
+    // Reactively observe the preference so the greeting updates immediately
+    val showGreetingPhrases by prefs.showGreetingPhrases.getAsState()
 
-    // Handle refresh with haptic feedback
+    // Re-evaluated whenever showPatchingPhrases changes
+    var greetingMessage by remember(showGreetingPhrases) {
+        mutableStateOf(
+            if (showGreetingPhrases) context.getString(HomeAndPatcherMessages.getHomeMessage(context)) else null
+        )
+    }
+
+    // Handle refresh with haptic feedback.
+    // showPatchingPhrases is read from the reactive state captured in the
+    // outer scope so the lambda always uses the current value at invocation.
     val onRefresh: () -> Unit = {
         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
         HomeAndPatcherMessages.resetHomeMessage()
-        greetingMessage = context.getString(HomeAndPatcherMessages.getHomeMessage(context))
+        greetingMessage = if (showGreetingPhrases) context.getString(HomeAndPatcherMessages.getHomeMessage(context)) else null
         homeViewModel.refresh()
     }
 
     // Collect state flows
     val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
-    // Dynamic app items from bundles
-    val homeAppItems by homeViewModel.homeAppItems.collectAsStateWithLifecycle()
-    // Hidden packages filtered to only active-bundle packages (reactive)
-    val hiddenAppItems by homeViewModel.hiddenAppItems.collectAsStateWithLifecycle()
+    // Atomic home state - null means pipeline is still initializing (shimmer)
+    val homeAppState by homeViewModel.homeAppState.collectAsStateWithLifecycle()
+    val homeAppItems = homeAppState?.visible ?: emptyList()
+    val hiddenAppItems = homeAppState?.hidden ?: emptyList()
+    val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
+
+    // Gesture hint: shown once per bundle addition, in-memory
+    val showGestureHint by homeViewModel.showSwipeGestureHint.collectAsStateWithLifecycle()
 
     val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
     if (!isDeviceRooted) {
@@ -93,17 +109,14 @@ fun HomeScreen(
         homeViewModel.onStartQuickPatch = onStartQuickPatch
     }
 
-    // Initialize launchers
-    // GetContent is used instead of OpenDocument so that third-party file managers
-    // appear as available options in Android's picker
-    val openApkPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let { homeViewModel.handleApkSelection(it) }
-    }
+    val openApkPicker = rememberAdaptiveFilePicker(
+        mimeTypes = APK_FILE_MIME_TYPES,
+        chooserTitle = stringResource(R.string.home_select_apk_title)
+    ) { uri -> uri?.let { homeViewModel.handleApkSelection(it) } }
 
-    val openBundlePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val openBundlePicker = rememberAdaptiveFilePicker(
+        mimeTypes = MPP_FILE_MIME_TYPES,
+        chooserTitle = stringResource(R.string.sources_dialog_local_file)
     ) { uri ->
         uri?.let {
             homeViewModel.selectedBundleUri = it
@@ -143,26 +156,12 @@ fun HomeScreen(
         )
     }
 
-    // Installed App Info Dialog
-    showInstalledAppDialog.value?.let { packageName ->
-        key(packageName) {
-            InstalledAppInfoDialog(
-                packageName = packageName,
-                onDismiss = { showInstalledAppDialog.value = null },
-                onTriggerPatchFlow = { originalPackageName ->
-                    showInstalledAppDialog.value = null
-                    homeViewModel.showPatchDialog(originalPackageName)
-                },
-                homeViewModel = homeViewModel
-            )
-        }
-    }
-
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
-        storagePickerLauncher = { openApkPicker.launch("*/*") },
-        openBundlePicker = { openBundlePicker.launch("*/*") }
+        storagePickerLauncher = { openApkPicker() },
+        openBundlePicker = { openBundlePicker() },
+        patchesItem = patchesSheetItem
     )
 
     // Pre-patching installer selection dialog for root-capable devices.
@@ -208,13 +207,18 @@ fun HomeScreen(
                         android11BugActive = homeViewModel.android11BugActive,
                         installedApp = item.installedApp
                     )
-                    item.installedApp?.let { showInstalledAppDialog.value = it.currentPackageName }
+                    item.installedApp?.let {
+                        homeViewModel.openInstalledAppInfo(it.currentPackageName)
+                    }
                 },
-                onInstalledAppClick = { app -> showInstalledAppDialog.value = app.currentPackageName },
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
+                onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
+                onShowPatches = { item -> patchesSheetItem.value = item },
+                showGestureHint = showGestureHint,
+                onGestureHintShown = { homeViewModel.markSwipeGestureHintShown() },
                 hiddenAppItems = hiddenAppItems,
-                installedAppsLoading = homeViewModel.installedAppsLoading,
+                installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
 
                 // Search
                 showSearchButton = showSearchButton,

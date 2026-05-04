@@ -15,25 +15,27 @@
     <string name="android_11_bug_dialog_description">ต้องอนุญาตเปิดสิทธิเข้าถึงการติดตั้งแอปพลิเคชันก่อน เพื่อหลีกเลี่ยงปัญหาจากระบบปฏิบัติการ Android 11 ที่มีผลกระทบต่อการใช้งานแอปพลิเคชันนี้</string>
     <string name="deep_link_add_source_title">เพิ่มแหล่งที่มา</string>
     <string name="deep_link_add_source_message">คุณต้องการเพิ่มแหล่งที่มาแพตช์นี้ไปยัง Morphe หรือไม่?</string>
-    <string name="deep_link_add_source_warning">เพิ่มแหล่งที่มาเฉพาะจากแหล่งที่คุณเชื่อถือเท่านั้น</string>
+    <string name="deep_link_add_source_warning">เพิ่มแหล่งข้อมูลที่คุณเชื่อถือเท่านั้น</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
     <string name="home_update_available_subtitle">เวอร์ชันใหม่พร้อมถูกติดตั้งแล้ว</string>
     <string name="home_update_error">อัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
-    <string name="home_update_skipped_metered">อัปเดตข้าม</string>
-    <string name="home_update_skipped_metered_subtitle">ข้อมูลมือถือใช้งานอยู่</string>
+    <string name="home_update_skipped_metered">อัปเดตถูกข้าม</string>
+    <string name="home_update_skipped_metered_subtitle">กำลังใช้งานข้อมูลมือถือ</string>
     <string name="home_updating_sources">กำลังอัพเดทข้อมูล…</string>
     <string name="home_update_progress_format">%1$s ถูกประมวลผลแล้ว</string>
-    <string name="home_update_success">การอัพเดทแหล่งข้อมูลเสร็จสมบูรณ์แล้ว</string>
-    <string name="home_update_success_subtitle">แหล่งข้อมูลของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
-    <string name="home_sources_are_loading">กำลังโหลดแหล่งข้อมูล กรุณารอสักครู่…</string>
+    <string name="home_update_success">อัพเดทแหล่งที่มาเสร็จสมบูรณ์</string>
+    <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
+    <string name="home_sources_are_loading">กำลังโหลดแหล่งที่มา กรุณารอสักครู่…</string>
     <string name="home_search_apps">ค้นหาแอป</string>
-    <string name="home_no_apps_title">ไม่มีแอปให้ใช้งาน</string>
+    <string name="home_no_apps_title">ไม่มีแอปที่ใช้ได้</string>
     <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
     <string name="home_no_apps_search_subtitle">ไม่มีแอปที่ตรงกับ \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">แอปทั้งหมดถูกซ่อน</string>
+    <string name="home_all_apps_hidden_subtitle">คุณซ่อนแอปทั้งหมดออกจากหน้าจอหลัก</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">คุณต้องการแพ็ตช์แอปใด</string>
+    <string name="home_greeting_1">คุณต้องการแพตช์แอปอะไร?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">พร้อมหรือยังที่จะทำให้แอปของคุณกลับมาเป็นตำนานอีกครั้ง</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
@@ -53,62 +55,66 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">สนับสนุนโดยกาแฟหนึ่งแก้วกับแพตซ์ที่มีคุณภาพ</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">จัดการแหล่งข้อมูล</string>
+    <string name="sources_management_title">จัดการแหล่งที่มา</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_prerelease_toggle">ใช้แพทช์ก่อนปล่อยอย่างทางการ</string>
-    <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงเวอร์ชันใหม่ของแพทช์ทดลองก่อนอื่น</string>
-    <string name="sources_management_experimental_versions_toggle">ใช้เวอร์ชันทดลองของแอป</string>
-    <string name="sources_management_experimental_versions_toggle_description">แก้ไขเป้าหมายแอปเวอร์ชันทดลองหากมี</string>
+    <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงแพทช์ใหม่เวอร์ชันทดลองแต่เนิ่นๆ</string>
+    <string name="sources_management_experimental_versions_toggle">ใช้แอปเวอร์ชันทดลอง</string>
+    <string name="sources_management_experimental_versions_toggle_description">แพตซ์แอปเวอร์ชันทดลองของเป้าหมาย ถ้ามี</string>
     <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
-    <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
-    <string name="sources_dialog_duplicate_name_error">แหล่งข้อมูลที่มีชื่อนี้อยู่แล้ว</string>
+    <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งที่มา</string>
+    <string name="sources_dialog_duplicate_name_error">มีแหล่งที่มาที่ชื่อนี้อยู่แล้ว</string>
     <string name="sources_dialog_missing_error">ไม่สามารถอัปเดตแหล่งที่มาแล้ว</string>
     <string name="sources_dialog_view_any_version">เวอร์ชันใด ๆ</string>
     <string name="sources_dialog_view_any_package">แพ็คเกจใด ๆ</string>
-    <string name="sources_dialog_add_source">เพิ่มแหล่งข้อมูล</string>
-    <string name="sources_dialog_delete_confirm_message">ลบแหล่งข้อมูล “%s” ? นี้ ขั้นตอนนี้ไม่สามารถยกเลิกได้</string>
+    <string name="sources_dialog_add_source">เพิ่มแหล่งที่มา</string>
+    <string name="sources_dialog_delete_confirm_message">ลบแหล่งที่มา “%s”? ขั้นตอนนี้ไม่สามารถย้อนกลับได้</string>
     <string name="sources_dialog_remote">รีโมต</string>
-    <string name="sources_dialog_remote_url">URL แหล่งข้อมูล</string>
+    <string name="sources_dialog_remote_url">URL แหล่งที่มา</string>
     <string name="sources_dialog_remote_url_formats_title">ตัวอย่าง:</string>
     <string name="sources_dialog_local">อุปกรณ์</string>
-    <string name="sources_dialog_local_file">เลือกไฟล์แหล่งข้อมูล</string>
+    <string name="sources_dialog_local_file">เลือกไฟล์แหล่งที่มา</string>
     <string name="sources_dialog_local_file_description">เลือกไฟล์ .mpp จากแหล่งข้อมูลอยู่บนที่เก็บข้อมูลภายใน</string>
     <string name="sources_dialog_local_change_file">เปลี่ยนไฟล์</string>
     <string name="sources_dialog_preinstalled">ติดตั้งล่วงหน้าแล้ว</string>
     <string name="sources_update_success">อัปเดตเสร็จสมบูรณ์</string>
     <string name="sources_update_unavailable">ยังไม่มีการอัปเดต</string>
-    <string name="sources_download_fail">ล้มข้อมูลแหล่งข้อมูลไม่สำเร็จ: %s</string>
+    <string name="sources_download_fail">ดาวน์โหลดแหล่งที่มาไม่สำเร็จ: %s</string>
     <string name="sources_download_fail_named">การดาวน์โหลด \'%1$s\' ไม่สำเร็จ: %2$s</string>
     <string name="sources_download_endpoint_not_found">ไม่สามารถอัปเดต \'%1$s\': ไม่พบไฟล์ JSON ของแพทช์ที่ URL ที่กำหนด</string>
     <string name="sources_patch_expert_badge">ผู้เชี่ยวชาญ</string>
-    <string name="sources_patch_expert_badge_tooltip">เปิดใช้งานโหมดผู้เชี่ยวชาญในการตั้งค่าเพื่อรวมแพตช์นี้ด้วยตนเอง</string>
+    <string name="sources_patch_expert_badge_tooltip">เปิดใช้งานโหมดผู้เชี่ยวชาญในการตั้งค่าเพื่อเลือกแพตช์นี้ด้วยตนเอง</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">ต้องการความช่วยเหลือในการค้นหา APK รุ่นต้นฉบับที่ยังไม่ถูกปรับปรุง?</string>
-    <string name="home_apk_availability_dialog_simple">เพื่อปรับปรุง &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK รุ่นต้นฉบับ:</string>
-    <string name="home_apk_availability_dialog_expert">เพื่อปรับปรุง &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK รุ่นต้นฉบับของเวอร์ชัน:</string>
+    <string name="home_apk_availability_dialog_title">ต้องการความช่วยเหลือในการค้นหา APK เวอร์ชันที่ยังไม่ถูกแก้ไข?</string>
+    <string name="home_apk_availability_dialog_simple">เพื่อที่จะแพตซ์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแก้ไขเวอร์ชัน:</string>
+    <string name="home_apk_availability_dialog_expert">เพื่อที่จะแพตซ์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแก้ไขเวอร์ชัน:</string>
     <string name="home_apk_availability_recommended_label">แนะนำ</string>
     <string name="home_apk_availability_unpatched_label">ไม่ได้แพตซ์</string>
+    <string name="home_apk_availability_incompatible_label">ไม่รองรับ</string>
     <string name="home_apk_availability_yes">ใช่, ช่วยฉันค้นหา APK</string>
     <string name="home_apk_availability_no">ไม่, ฉันมี APK แล้ว</string>
     <string name="home_apk_use_saved_with_version">ใช้ APK ที่ถูกบันทึก (เวอร์ชัน %s)</string>
-    <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก. การปรับปรุงจะต้องเลือกไฟล์ APK อีกครั้ง</string>
+    <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก การแพตซ์จะต้องเลือกไฟล์ APK อีกครั้ง</string>
+    <string name="home_version_requires_android">ต้องใช้ Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">ไม่รองรับบนอุปกรณ์นี้</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ไม่มีเวอร์ชันที่รองรับสำหรับ Android %2$d (API %3$d) ทุกเวอร์ชันที่ประกาศต้องการ Android เวอร์ชันที่สูงกว่า</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">ดาวน์โหลด APK ดังเดิม</string>
+    <string name="home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
     <string name="home_download_instructions_steps_title">คำแนะนำ:</string>
     <string name="home_download_instructions_step1">กดปุ่ม \'%1$s\' ด้านล่าง</string>
     <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่ม</string>
     <string name="home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
     <string name="home_download_instructions_step3">รอการดาวน์โหลดให้เรียบร้อย และ &lt;b&gt;อย่าไปติดตั้งไฟล์ &lt;/b&gt; ไปล่วงหน้าก่อน</string>
     <string name="home_download_instructions_step3_mount">รอให้การดาวน์โหลดเสร็จสิ้น แล้ว &lt;b&gt;ติดตั้ง APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">หลังจากดาวน์โหลดเสร็จแล้ว คุณจะกลับไปยัง Morphe</string>
-    <string name="home_download_instructions_step4_mount">หลังจากติดตั้ง APK รeturn to Morphe</string>
+    <string name="home_download_instructions_step4">หลังจากที่การดาวน์โหลดเสร็จสิ้น ให้กลับมาที่ Morphe</string>
+    <string name="home_download_instructions_step4_mount">หลังจากติดตั้ง APK ต้นฉบับเสร็จสิ้น กลับมาที่ Morphe</string>
     <string name="home_download_instructions_continue">ไปที่ APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">เลือก APK ที่ถูกดาวน์โหลด</string>
-    <string name="home_file_picker_prompt_description">เลือกไฟล์ APK <b>%1$s</b> ที่คุณดาวน์โหลดมาแล้ว</string>
+    <string name="home_file_picker_prompt_title">เลือก APK ที่ดาวน์โหลด</string>
+    <string name="home_file_picker_prompt_description">เลือกไฟล์ APK &lt;b&gt;%1$s&lt;/b&gt; ที่คุณดาวน์โหลด</string>
     <string name="home_file_picker_prompt_open_apk">เปิดไฟล์ APK</string>
     <string name="home_recommended_version">เวอร์ชันแนะนำ</string>
     <string name="home_selected_version">เลือกเวอร์ชัน</string>
@@ -162,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">พื้นที่ดิสก์เหลือน้อย</string>
     <string name="home_low_disk_space_dialog_message">มีพื้นที่ว่างเหลือเพียง %1$.2f GB โปรแกรม Patching ต้องการพื้นที่ว่างอย่างน้อย %2$.2f GB จึงจะทำงานได้อย่างถูกต้อง</string>
     <string name="home_low_disk_space_dialog_warning">การดำเนินการนี้อาจส่งผลให้เกิดข้อผิดพลาด \"ไม่พบไฟล์\" หรือ APK ที่สร้างขึ้นอาจเสียหาย</string>
+    <string name="home_simple_bundle_select_title">เลือกไฟล์แหล่งที่มา</string>
     <!-- Patch Options -->
     <string name="custom_color">สีแบบกำหนดเอง</string>
     <string name="hex_color">สี hexadecimal</string>
@@ -221,6 +228,7 @@
     <string name="home_app_info_patch_update_available_description">มีแพตซ์เวอร์ชันใหม่พร้อมใช้งานแล้ว ให้แพตซ์อีกครั้งเพื่อรับการปรับปรุงและการแก้ไขสำหรับเวอร์ชันล่าสุด</string>
     <string name="home_app_info_app_deleted_warning">แอปถูกลบออก</string>
     <string name="home_app_info_app_deleted_description">แอปนี้ถูกลบออกนอก Morphe. แพตซ์อีกครั้งเพื่อฟื้นฟูฟังก์ชัน</string>
+    <string name="home_app_info_apk_size">ขนาด APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">โหมดรากรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนปรับแก้</string>
     <string name="root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
@@ -308,16 +316,13 @@
     <string name="failed_to_execute_patch">ไม่สามารถใช้ %s ได้</string>
     <string name="patched_app_saved_toast">บันทึกแอปที่แก้ไขแล้วสำหรับภายหลัง</string>
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แก้ไขได้</string>
-    <string name="download_apk">ดาวน์โหลดไฟล์ APK</string>
     <string name="plugin_activity_dialog_body">ต้องมีการติดต่อผู้ใช้เพื่อดำเนินการต่อไปนี้</string>
     <string name="patcher_process_exit_message">กระบวนการแพทช์ออกไปแล้วด้วยรหัส %1$s</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
-    <string name="install_timeout_message">การติดตั้งไม่สำเร็จ. ตรวจสอบการติดตั้งของตัวติดตั้งระบบและลองอีกครั้ง</string>
     <string name="save_apk_success">บันทึก APK สำเร็จ</string>
     <string name="saved_app_export_failed">ส่งออกแอปที่แก้ไขแล้วไม่สำเร็จ</string>
     <string name="saved_app_removed_toast">ลบแอปที่บันทึกไว้แล้ว</string>
-    <string name="saved_app_copy_removed_toast">ลบคู่มือที่บันทึกไว้</string>
     <string name="saved_app_launch_unavailable">ติดตั้งแอปพลิเคชันก่อนเปิดใช้งาน</string>
     <string name="package_name">ชื่อแพ็กเกจ</string>
     <string name="failed_to_mount">ไม่สามารถติดตั้งใช้งานได้: %s</string>
@@ -337,6 +342,10 @@
     <string name="settings_appearance_background_grid">ตาราง</string>
     <string name="settings_appearance_background_particles">อนุภาค</string>
     <string name="settings_appearance_background_none">ธง</string>
+    <string name="settings_appearance_background_random">สุ่ม</string>
+    <string name="settings_appearance_background_random_interval_launch">เมื่อเปิดแอป</string>
+    <string name="settings_appearance_background_random_interval_daily">รายวัน</string>
+    <string name="settings_appearance_background_random_interval_3days">ทุกๆ 3 วัน</string>
     <string name="settings_appearance_parallax_effect">เอฟเฟ็กต์พารัลแล็กซ์</string>
     <string name="settings_appearance_parallax_effect_description">การเปลี่ยนแปลงพื้นหลังที่เรียบร้อยเมื่อลดทอนอุปกรณ์</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@
     <string name="settings_appearance_app_language_current">ภาษาที่ใช้อยู่</string>
     <string name="settings_appearance_translations_info_title">ข้อมูลภาษาบางค์บางค์อาจไม่ครบถูกต้องหรือไม่ครบ</string>
     <string name="settings_appearance_translations_info_text">เพื่อนำให้มีภาษาใหม่หรือปรับปรุงภาษาที่มีอยู่แล้ว ให้ไปที่ %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">หน้าจอหลัก</string>
+    <string name="settings_appearance_greeting_phrases">วลีทักทาย</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">ไอคอนแอป</string>
     <string name="settings_appearance_app_icon_default">ค่าเริ่มต้น</string>
@@ -399,8 +412,17 @@
     <string name="settings_advanced_expert_mode_description">เปิดใช้งานการปรับแต่งตัวเลือกและการตั้งค่าความละเอียดสูงสำหรับการปรับปรุง Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
     <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมการนำเข้าแปลงมากขึ้น แต่การตั้งค่าค่าไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปพลิเคชันไม่สามารถใช้งานได้</string>
-    <string name="settings_advanced_strip_unused_libs">ลบเนทิฟไลบรารีที่ไม่ได้ใช้</string>
-    <string name="settings_advanced_strip_unused_libs_description">ลบเนทิฟไลบรารีที่ไม่รองรับสถาปัตยกรรมของ CPU บนอุปกรณ์ของคุณ จากแอปที่ถูกแพตซ์</string>
+    <string name="settings_advanced_strip_unused_libs">ปรับประสิทธิภาพสำหรับสถาปัตยกรรมของอุปกรณ์</string>
+    <string name="settings_advanced_strip_unused_libs_description">"ข้ามโมดูล APK แบบแยกส่วนสำหรับสถาปัตยกรรม, ภาษา และความหนาแน่นของหน้าจอที่ไม่รองรับในระหว่างการรวม
+สำหรับ APK แบบปกติ ให้ลบไลบรารีเนทีฟสำหรับสถาปัตยกรรมที่ไม่รองรับหลังจากแก้ไข"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">โหมดการประมวลผลไบต์โค้ด</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">ควบคุมวิธีการประมวลผลไบต์โค้ดในระหว่างการแก้ไขแพตช์ มีผลต่อความเร็วในการแก้ไข การใช้หน่วยความจำ และขนาด APK ที่ได้</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">รวดเร็ว (แนะนำ)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">เร็ว</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">การปรับปรุงแพตช์ที่เร็วขึ้นและการใช้หน่วยความจำน้อยลง แต่มีขนาด APK ที่ใหญ่ขึ้น แนะนำสำหรับอุปกรณ์ที่มี RAM ต่ำหรือเก่า</string>
+    <string name="settings_advanced_bytecode_mode_full">เต็ม</string>
+    <string name="settings_advanced_bytecode_mode_full_description">การปรับแพตช์ที่ช้าลง ทำซ้ำพฤติกรรมเดิม ใช้เฉพาะเมื่อโหมดที่เร็วทำให้เกิดปัญหา</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">โทเคน GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแหล่งขอร้องข้อมูล</string>
@@ -510,13 +532,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">รุ่น Shizuku ที่ติดตั้งไม่ได้รับการรองรับ</string>
     <string name="installer_action_open_shizuku">เปิด Shizuku</string>
     <string name="installer_hint_generic">การติดตั้งล้มเหลว. ลองอีกครั้งหรือเปลี่ยนไปใช้ตัวติดตั้งอื่น</string>
-    <string name="installer_hint_blocked">การติดตั้งถูกบล็อกโดย Android. ตรวจสอบ Play Protect หรือการตั้งค่าความปลอดภัย</string>
     <string name="installer_hint_conflict">มีแอปที่มีชื่อแพ็คเกจเดียวกันติดตั้งอยู่แล้ว. ลบแอปนั้นก่อนดำเนินการต่อไป</string>
-    <string name="installer_hint_incompatible">APK ไม่เข้ากับอุปกรณ์หรือเวอร์ชัน Android นี้</string>
-    <string name="installer_hint_invalid">APK ไม่ถูกต้องหรือเสียหาย</string>
-    <string name="installer_hint_storage">มีพื้นที่เก็บข้อมูลไม่เพียงพอสำหรับการติดตั้ง</string>
-    <string name="installer_hint_timeout">การติดตั้งหมดเวลา. ลองอีกครั้ง</string>
-    <string name="installer_hint_aborted">การติดตั้งถูกยกเลิก</string>
     <string name="installer_external_launched">กำลังเปิด %1$s…</string>
     <string name="installer_external_timeout">%1$s ไม่ยืนยันการติดตั้ง. ตรวจสอบแอปอื่นและลองอีกครั้ง</string>
     <string name="installer_external_success">%1$s รายงานการติดตั้งสำเร็จ</string>
@@ -547,6 +563,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">รหัส</string>
     <string name="settings_system_import_keystore_dialog_password_field">รหัสไฟล์ตัวเลือกไม่ถูกต้อง</string>
     <string name="settings_system_import_keystore_dialog_button">นำเข้า</string>
+    <string name="settings_system_import_keystore_dialog_format_field">รูปแบบคีย์สโตร์</string>
     <string name="settings_system_import_keystore_wrong_credentials">ล้มการนำเข้าไฟล์ตัวเลือก</string>
     <string name="settings_system_import_keystore_success">ส่งออกไฟล์ตัวเลือก</string>
     <string name="settings_system_import_keystore_failed">ส่งออกไฟล์ตัวเลือก</string>
@@ -554,6 +571,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">ส่งออกไฟล์ตัวเลือกสำเร็จ</string>
     <string name="settings_system_export_keystore_unavailable">แสดงรหัส</string>
     <string name="settings_system_export_keystore_success">ซ่อนรหัส</string>
+    <string name="settings_system_export_keystore_failed">ไม่สามารถส่งออกคีย์สโตร์ได้</string>
     <string name="settings_system_show_password_field">นำเข้าและส่งออกการตั้งค่า</string>
     <string name="settings_system_hide_password_field">นำเข้าและส่งออกการตั้งค่า</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -683,7 +701,8 @@ morphe_header_custom_dark.png
     <string name="allow">อนุญาต</string>
     <string name="details">รายละเอียด</string>
     <string name="hide">ซ่อน</string>
-    <string name="default_">ค่าเริ่มต้น</string>
+    <string name="hidden">ซ่อน</string>
+    <string name="unhide">แสดง</string>
     <string name="logs">บันทึก</string>
     <string name="sources">แหล่งที่มา</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>

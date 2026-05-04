@@ -16,10 +16,6 @@
         <item quantity="one">%s પેકેજ</item>
         <item quantity="other">%s પેકેજો</item>
     </plurals>
-    <plurals name="patches_executed">
-        <item quantity="one">%s પેચ એક્ઝિક્યુટ કરો</item>
-        <item quantity="other">%s પેચો એક્ઝિક્યુટ કરો</item>
-    </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK ફાઇલ</item>
         <item quantity="other">%s APK ફાઇલો</item>

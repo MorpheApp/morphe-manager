@@ -29,11 +29,11 @@
         <item quantity="other">%s pacáistí</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Cuir %s paiste i gcrích</item>
-        <item quantity="two">Cuir %s paistí i gcrích</item>
-        <item quantity="few">Cuir %s paistí i gcrích</item>
-        <item quantity="many">Cuir %s paistí i gcrích</item>
-        <item quantity="other">Cuir %s paistí i gcrích</item>
+        <item quantity="one">Paiste %s curtha i gcrích</item>
+        <item quantity="two">%s paistí curtha i gcrích</item>
+        <item quantity="few">%s paistí curtha i gcrích</item>
+        <item quantity="many">%s paistí curtha i gcrích</item>
+        <item quantity="other">%s paistí curtha i gcrích</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s comhad APK</item>
@@ -62,5 +62,19 @@
         <item quantity="few">%s paistí roghnaithe</item>
         <item quantity="many">%s paistí roghnaithe</item>
         <item quantity="other">%s paistí roghnaithe</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Taispeáin %s aip</item>
+        <item quantity="two">Taispeáin %s aipeanna</item>
+        <item quantity="few">Taispeáin %s aipeanna</item>
+        <item quantity="many">Taispeáin %s aipeanna</item>
+        <item quantity="other">Taispeáin %s aipeanna</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s aip i bhfolach</item>
+        <item quantity="two">%s aipeanna i bhfolach</item>
+        <item quantity="few">%s aipeanna i bhfolach</item>
+        <item quantity="many">%s aipeanna i bhfolach</item>
+        <item quantity="other">%s aipeanna i bhfolach</item>
     </plurals>
 </resources>

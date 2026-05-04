@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Die App-Installationserlaubnis muss vorab erteilt werden, um einen Fehler im Android-11-System zu vermeiden, der die Benutzererfahrung negativ beeinflussen wird</string>
     <string name="deep_link_add_source_title">Quelle hinzufügen</string>
     <string name="deep_link_add_source_message">Möchten Sie diese Patch-Quelle zu Morphe hinzufügen?</string>
-    <string name="deep_link_add_source_warning">Fügen Sie nur Quellen von vertrauenswürdigen Quellen hinzu</string>
+    <string name="deep_link_add_source_warning">Fügen Sie nur Quellen hinzu, denen Sie vertrauen</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-Update verfügbar</string>
     <string name="home_update_available_subtitle">Neue Version bereit zur Installation</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Keine Apps verfügbar</string>
     <string name="home_no_apps_subtitle">Eine Patch-Quelle hinzufügen oder eine vorhandene in %s aktivieren</string>
     <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Alle Apps sind ausgeblendet</string>
+    <string name="home_all_apps_hidden_subtitle">Sie haben alle Apps vom Startbildschirm ausgeblendet</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welche App möchten Sie patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Um &lt;b&gt;%s&lt;/b&gt; zu patchen, benötigen Sie eine ungepatchte APK der Versionen:</string>
     <string name="home_apk_availability_recommended_label">Empfohlen</string>
     <string name="home_apk_availability_unpatched_label">Ungepatcht</string>
+    <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
     <string name="home_apk_availability_yes">Ja, hilf mir eine APK zu finden</string>
     <string name="home_apk_availability_no">Nein, ich habe bereits eine APK</string>
     <string name="home_apk_use_saved_with_version">Verwende die gespeicherte APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Keine gespeicherte APK. Das Patching erfordert die erneute Auswahl der APK-Datei</string>
+    <string name="home_version_requires_android">Benötigt Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Wird auf diesem Gerät nicht unterstützt</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; hat keine unterstützten Versionen für Android %2$d (API %3$d). Alle deklarierten Versionen erfordern eine höhere Android-Version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laden Sie die originale APK herunter </string>
     <string name="home_download_instructions_steps_title">Anleitung:</string>
@@ -162,6 +168,7 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="home_low_disk_space_dialog_title">Wenig Speicherplatz</string>
     <string name="home_low_disk_space_dialog_message">Nur %1$.2f GB freier Speicherplatz verfügbar. Das Anwenden der Patches erfordert mindestens %2$.2f GB freien Speicherplatz, um korrekt zu funktionieren</string>
     <string name="home_low_disk_space_dialog_warning">Das Fortfahren kann zu einem \"Datei nicht gefunden\"-Fehler oder einer beschädigten Ausgabe-APK führen</string>
+    <string name="home_simple_bundle_select_title">Wählen Sie die Patch-Quelldatei aus</string>
     <!-- Patch Options -->
     <string name="custom_color">Eigener Farbton</string>
     <string name="hex_color">Hex-Farbcode</string>
@@ -221,6 +228,7 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="home_app_info_patch_update_available_description">Eine neuere Version von Patches ist verfügbar. Repatchen Sie Ihre App, um die neuesten Verbesserungen und Fehlerbehebungen zu erhalten</string>
     <string name="home_app_info_app_deleted_warning">App wurde deinstalliert</string>
     <string name="home_app_info_app_deleted_description">Diese App wurde außerhalb von Morphe deinstalliert. Repatchen Sie sie, um die Funktionalität wiederherzustellen</string>
+    <string name="home_app_info_apk_size">APK-Größe</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-Modus erfordert, dass die originale APK-Datei auf Ihrem Gerät installiert ist, bevor Sie mit dem Patchen beginnen</string>
     <string name="root_gmscore_excluded">GmsCore-Unterstützungspatch ist im Root-Modus ausgeschlossen</string>
@@ -308,16 +316,13 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="failed_to_execute_patch">%s konnte nicht angewendet werden</string>
     <string name="patched_app_saved_toast">Gepatchte App für später gespeichert</string>
     <string name="patched_app_save_failed_toast">Speichern der gepatchten App fehlgeschlagen</string>
-    <string name="download_apk">APK-Datei herunterladen</string>
     <string name="plugin_activity_dialog_body">Benutzerinteraktion ist erforderlich, um dieses Plugin fortzusetzen</string>
     <string name="patcher_process_exit_message">Der Patcher-Prozess ist mit dem Code %1$s beendet worden</string>
     <string name="install_app_success">Erfolgreich installiert</string>
     <string name="install_app_fail">Installation der App fehlgeschlagen: %s</string>
-    <string name="install_timeout_message">Die Installation wurde nicht abgeschlossen. Überprüfen Sie den Systeminstallationsdialog und versuchen Sie es erneut</string>
     <string name="save_apk_success">APK gespeichert</string>
     <string name="saved_app_export_failed">Export der gepatchten App fehlgeschlagen</string>
     <string name="saved_app_removed_toast">Gespeicherte gepatchte App entfernt</string>
-    <string name="saved_app_copy_removed_toast">Gespeicherte Kopie entfernt</string>
     <string name="saved_app_launch_unavailable">Installieren Sie die App vor dem Öffnen</string>
     <string name="package_name">Paketname</string>
     <string name="failed_to_mount">Mounten fehlgeschlagen: %s</string>
@@ -337,6 +342,10 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="settings_appearance_background_grid">Gitter</string>
     <string name="settings_appearance_background_particles">Partikel</string>
     <string name="settings_appearance_background_none">Keine</string>
+    <string name="settings_appearance_background_random">Zufällig</string>
+    <string name="settings_appearance_background_random_interval_launch">Beim Start</string>
+    <string name="settings_appearance_background_random_interval_daily">Täglich</string>
+    <string name="settings_appearance_background_random_interval_3days">Alle 3 Tage</string>
     <string name="settings_appearance_parallax_effect">Parallax-Effekt</string>
     <string name="settings_appearance_parallax_effect_description">Glatte Hintergrundverschiebung beim Neigen des Geräts</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="settings_appearance_app_language_current">Aktuelle Sprache</string>
     <string name="settings_appearance_translations_info_title">Für einige Sprachen können Übersetzungen fehlen oder unvollständig sein</string>
     <string name="settings_appearance_translations_info_text">Um neue Sprachen zu übersetzen oder existierende Übersetzungen zu verbessern, besuchen Sie %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Startbildschirm</string>
+    <string name="settings_appearance_greeting_phrases">Begrüßungsformeln</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Auf dem Startbildschirm eine Begrüßungsnachricht anzeigen</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App-Icon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -399,8 +412,17 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="settings_advanced_expert_mode_description">Aktiviere komplexe Morphe-Patch-Einstellungen und Anpassungsoptionen</string>
     <string name="settings_advanced_expert_mode_dialog_title">Experten-Modus aktivieren?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Der Experten-Modus gewährt mehr Kontrolle darüber, wie Patches angewendet werden, kann aber bei falscher Konfiguration zu einer nicht funktionsfähigen App führen</string>
-    <string name="settings_advanced_strip_unused_libs">Entferne nicht verwendete, native Bibliotheken</string>
-    <string name="settings_advanced_strip_unused_libs_description">Lösche native Bibliotheken für nicht unterstützte CPU-Architekturen aus gepatchten Apps</string>
+    <string name="settings_advanced_strip_unused_libs">Für die Gerätearchitektur optimieren</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Split-APK-Module für nicht unterstützte CPU-Architekturen, Regionaleinstellungen und Bildschirmdichten während des Zusammenführens auslassen.
+Für einfache APKs werden nach dem Patchen native Bibliotheken für nicht unterstützte Architekturen entfernt"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytecode-Verarbeitungsmodus</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Steuert, wie Bytecode während des Patch-Vorgangs verarbeitet wird. Beeinflusst Patch-Geschwindigkeit, Speichernutzung und Größe der Ausgabedatei APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Schnell (Empfohlen)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Schnell</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Schnelleres Patchen und geringerer Speicherverbrauch, jedoch bei größerer APK-Größe. Für Geräte mit wenig RAM oder ältere Geräte empfohlen</string>
+    <string name="settings_advanced_bytecode_mode_full">Vollständig</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Langsameres Patchen, repliziert das Legacy-Verhalten. Nur verwenden, wenn der Schnellmodus Probleme verursacht</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub-PAT</string>
     <string name="settings_advanced_github_pat_description">Erforderlich für Pull-Request-Quellen</string>
@@ -510,13 +532,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_status_shizuku_unsupported">Die installierte Shizuku-Version wird nicht unterstützt</string>
     <string name="installer_action_open_shizuku">Shizuku öffnen</string>
     <string name="installer_hint_generic">Die Installation ist fehlgeschlagen. Versuchen Sie es erneut oder wechslen Sie zu einem anderen Installer</string>
-    <string name="installer_hint_blocked">Die Installation wurde von Android blockiert. Überprüfen Sie Play Protect oder die Sicherheitseinstellungen</string>
     <string name="installer_hint_conflict">Eine andere App mit diesem Paketnamen ist bereits installiert. Deinstalliere Sie sie bevor Sie fortfahren</string>
-    <string name="installer_hint_incompatible">Die APK ist nicht mit diesem Gerät oder Android-Version kompatibel</string>
-    <string name="installer_hint_invalid">Die APK ist ungültig oder beschädigt</string>
-    <string name="installer_hint_storage">Es ist nicht genug Speicherplatz für die Installation vorhanden</string>
-    <string name="installer_hint_timeout">Die Installation hat ein Zeitlimit überschritten. Versuchen Sie es erneut</string>
-    <string name="installer_hint_aborted">Die Installation wurde abgebrochen</string>
     <string name="installer_external_launched">Öffne %1$s…</string>
     <string name="installer_external_timeout">%1$s hat die Installation nicht bestätigt. Überprüfen Sie die andere App und versuchen Sie es erneut</string>
     <string name="installer_external_success">%1$s meldete eine erfolgreiche Installation</string>
@@ -547,6 +563,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_import_keystore_dialog_alias_field">Benutzername (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Passwort</string>
     <string name="settings_system_import_keystore_dialog_button">Importieren</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore-Format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Falsche Keystore-Anmeldeinformationen</string>
     <string name="settings_system_import_keystore_success">Keystore importiert</string>
     <string name="settings_system_import_keystore_failed">Fehler beim Importieren des Keystores</string>
@@ -554,6 +571,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_export_keystore_description">Den aktuellen Keystore exportieren</string>
     <string name="settings_system_export_keystore_unavailable">Kein Keystore zum Exportieren verfügbar</string>
     <string name="settings_system_export_keystore_success">Keystore exportiert</string>
+    <string name="settings_system_export_keystore_failed">Exportieren des Keystores fehlgeschlagen</string>
     <string name="settings_system_show_password_field">Passwort anzeigen</string>
     <string name="settings_system_hide_password_field">Passwort ausblenden</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="allow">Erlauben</string>
     <string name="details">Details</string>
     <string name="hide">Verbergen</string>
-    <string name="default_">Standard</string>
+    <string name="hidden">Ausgeblendet</string>
+    <string name="unhide">Anzeigen</string>
     <string name="logs">Protokolle</string>
     <string name="sources">Quellen</string>
     <string name="installing_ellipsis">Wird installiert…</string>

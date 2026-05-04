@@ -20,6 +20,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
@@ -47,6 +48,7 @@ class PatcherWorker(
     private val pm: PM by inject()
     private val fs: Filesystem by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
+    private val originalApkRepository: OriginalApkRepository by inject()
     private val rootInstaller: RootInstaller by inject()
 
     class Args(
@@ -65,12 +67,15 @@ class PatcherWorker(
 
     override suspend fun getForegroundInfo() =
         ForegroundInfo(
-            1,
+            NOTIFICATION_ID,
             createNotification(),
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE else 0
         )
 
-    private fun createNotification(): Notification {
+    private fun createNotification(
+        stepName: String? = null,
+        patchProgress: Pair<Int, Int>? = null,  // completed to total patches
+    ): Notification {
         val notificationIntent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
@@ -88,12 +93,34 @@ class PatcherWorker(
             applicationContext.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
         return Notification.Builder(applicationContext, channel.id)
-            .setContentTitle(applicationContext.getText(R.string.patcher_notification_title))
+            .setContentTitle(
+                stepName ?: applicationContext.getString(R.string.patcher_notification_title)
+            )
             .setContentText(applicationContext.getText(R.string.patcher_notification_text))
+            .apply {
+                if (patchProgress != null) {
+                    val (completed, total) = patchProgress
+                    setSubText("$completed / $total")
+                    setProgress(total, completed, false)
+                }
+            }
             .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
             .setContentIntent(pendingIntent)
             .setCategory(Notification.CATEGORY_SERVICE)
+            .setOngoing(true)
             .build()
+    }
+
+    private fun updatePatcherNotification(
+        stepName: String?,
+        patchProgress: Pair<Int, Int>? = null,
+    ) {
+        val notificationManager =
+            applicationContext.getSystemService(NotificationManager::class.java)
+        // Android won't visually switch from indeterminate → determinate on the same notification
+        // ID unless we first post a brief non-indeterminate update. Post the real notification
+        // directly — the determinate bar replaces the spinning one cleanly this way
+        notificationManager.notify(NOTIFICATION_ID, createNotification(stepName, patchProgress))
     }
 
     override suspend fun doWork(): Result {
@@ -137,8 +164,32 @@ class PatcherWorker(
 
     private suspend fun runPatcher(args: Args): Result {
 
-        fun updateProgress(name: String? = null, state: State? = null, message: String? = null) =
+        val totalPatches = args.selectedPatches.values.sumOf { it.size }
+        var completedPatches = 0
+        // Cached so onPatchCompleted can update the title without a string lookup race
+        val applyingPatchesLabel = applicationContext.getString(R.string.applying_patches)
+
+        fun updateProgress(name: String? = null, state: State? = null, message: String? = null) {
+            if (name != null && state == State.RUNNING) {
+                // When entering the patch execution phase start with 0/N
+                val progress = if (totalPatches > 0 && name == applyingPatchesLabel)
+                    completedPatches to totalPatches
+                else
+                    null
+                updatePatcherNotification(stepName = name, patchProgress = progress)
+            }
             args.onProgress(name, state, message)
+        }
+
+        val onPatchCompleted: suspend () -> Unit = {
+            completedPatches++
+            // Update both title and progress bar together on every completed patch
+            updatePatcherNotification(
+                stepName = applyingPatchesLabel,
+                patchProgress = completedPatches to totalPatches
+            )
+            args.onPatchCompleted()
+        }
 
         val patchedApk = fs.tempDir.resolve("patched.apk")
 
@@ -215,6 +266,21 @@ class PatcherWorker(
                 CoroutineRuntime(applicationContext)
             }
 
+            // After merging a split archive (in either runtime), save the resulting mono-APK
+            // directly to originalApksDir so it is used for repatching instead of the archive
+            val onMergedApkReady: suspend (File) -> Unit = { mergedFile ->
+                val version = pm.getPackageInfo(mergedFile)?.versionName
+                    ?.takeUnless { it.isBlank() }
+                    ?: args.input.version
+                    ?: "unknown"
+                val savedFile = originalApkRepository.saveOriginalApk(
+                    packageName = args.packageName,
+                    version = version,
+                    sourceFile = mergedFile
+                )
+                args.setInputFile(savedFile ?: mergedFile, true, true)
+            }
+
             try {
                 runtime.execute(
                     inputFile.absolutePath,
@@ -223,9 +289,10 @@ class PatcherWorker(
                     args.selectedPatches,
                     args.options,
                     args.logger,
-                    args.onPatchCompleted,
-                    args.onProgress,
-                    stripNativeLibs
+                    onPatchCompleted,
+                    ::updateProgress,
+                    stripNativeLibs,
+                    onMergedApkReady
                 )
             } catch (e: Exception) {
                 if (!useProcessRuntime || Build.VERSION.SDK_INT > Build.VERSION_CODES.Q || !isOomRelated(e)) {
@@ -241,14 +308,15 @@ class PatcherWorker(
                     args.selectedPatches,
                     args.options,
                     args.logger,
-                    args.onPatchCompleted,
-                    args.onProgress,
-                    stripNativeLibs
+                    onPatchCompleted,
+                    ::updateProgress,
+                    stripNativeLibs,
+                    onMergedApkReady
                 )
             }
 
             if (stripNativeLibs && !inputIsSplitArchive) {
-                NativeLibStripper.strip(patchedApk)
+                NativeLibStripper.strip(patchedApk, args.logger)
             }
 
             keystoreManager.sign(patchedApk, File(args.output))
@@ -316,6 +384,8 @@ class PatcherWorker(
     companion object {
         private const val LOG_PREFIX = "[Worker]"
         private fun String.logFmt() = "$LOG_PREFIX $this"
+
+        const val NOTIFICATION_ID = 1
 
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"

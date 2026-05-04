@@ -12,9 +12,11 @@ import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
+import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
+import app.morphe.patcher.dex.BytecodeMode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
@@ -25,9 +27,11 @@ class PreferencesManager(
     // Appearance tab
     val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
     val enableBackgroundParallax = booleanPreference("enable_background_parallax", true)
+    val randomBackgroundInterval = enumPreference("random_background_interval", RandomInterval.ON_LAUNCH)
 
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
+    val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
     val themePresetSelectionEnabled = booleanPreference("theme_preset_selection_enabled", true)
     val themePresetSelectionName = stringPreference("theme_preset_selection_name", "DEFAULT")
     val customAccentColor = stringPreference("custom_accent_color", "")
@@ -58,6 +62,15 @@ class PreferencesManager(
 
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
 
+    /**
+     * Bytecode processing mode for the patcher.
+     * Defaults to [BytecodeMode.STRIP_FAST].
+     */
+    val bytecodeModePreference = enumPreference(
+        "bytecode_mode",
+        BytecodeMode.STRIP_FAST
+    )
+
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
     val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install", false)
@@ -65,9 +78,9 @@ class PreferencesManager(
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
     val useProcessRuntime = booleanPreference(
-        "use_process_runtime",
-        // Use process runtime fails for Android 10 and lower.
-        // Armv7 silently fails and nobody has researched why yet.
+        "process_runtime", // Old key was 'use_process_runtime' and may have the wrong default for some devices.
+        // Process runtime fails for Android 10 and lower.
+        // Armv7 silently fails and nobody has researched why.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
@@ -81,10 +94,11 @@ class PreferencesManager(
 
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
+
     val installationTime = longPreference("manager_installation_time", 0)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
-    // Hidden preference to track if prerelease was auto-enabled
+    /**  Hidden preference to track if prerelease was auto-enabled. */
     private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
 
     init {
@@ -159,11 +173,14 @@ class PreferencesManager(
         val patchSelectionHiddenActions: Set<String>? = null,
         val acknowledgedDownloaderPlugins: Set<String>? = null,
         val autoSaveDownloaderApks: Boolean? = null,
+        val showGreetingPhrases: Boolean? = null,
         val backgroundType: BackgroundType? = null,
+        val randomBackgroundInterval: RandomInterval? = null,
         val useExpertMode: Boolean? = null,
         val backgroundUpdateNotifications: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
         val customBundles: List<BundleSnapshot>? = null,
+        val bytecodeModePreference: BytecodeMode? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -191,10 +208,13 @@ class PreferencesManager(
         bundlePrereleasesEnabled = bundlePrereleasesEnabled.get(),
         bundleExperimentalVersionsEnabled = bundleExperimentalVersionsEnabled.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
+        showGreetingPhrases = showGreetingPhrases.get(),
         backgroundType = backgroundType.get(),
+        randomBackgroundInterval = randomBackgroundInterval.get(),
         useExpertMode = useExpertMode.get(),
         backgroundUpdateNotifications = backgroundUpdateNotifications.get(),
-        updateCheckInterval = updateCheckInterval.get()
+        updateCheckInterval = updateCheckInterval.get(),
+        bytecodeModePreference = bytecodeModePreference.get(),
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -222,10 +242,13 @@ class PreferencesManager(
         snapshot.bundlePrereleasesEnabled?.let { bundlePrereleasesEnabled.value = it }
         snapshot.bundleExperimentalVersionsEnabled?.let { bundleExperimentalVersionsEnabled.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
+        snapshot.showGreetingPhrases?.let { showGreetingPhrases.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
+        snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.backgroundUpdateNotifications?.let { backgroundUpdateNotifications.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
+        snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
     }
 
     companion object {

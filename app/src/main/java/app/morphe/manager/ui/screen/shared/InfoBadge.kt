@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -55,14 +54,13 @@ enum class InfoBadgeStyle {
  */
 @Composable
 fun InfoBadge(
+    modifier: Modifier = Modifier,
     text: String,
     style: InfoBadgeStyle = InfoBadgeStyle.Default,
     icon: ImageVector? = null,
     isCompact: Boolean = false,
     isExpanded: Boolean = false,
-    isCentered: Boolean = false,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    isCentered: Boolean = false
 ) {
     val (containerColor, contentColor) = style.colors()
 

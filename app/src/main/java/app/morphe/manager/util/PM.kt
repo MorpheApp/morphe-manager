@@ -2,11 +2,8 @@ package app.morphe.manager.util
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
-import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
 import android.content.pm.PackageManager.PackageInfoFlags
@@ -15,19 +12,8 @@ import android.os.Build
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
 import androidx.core.content.pm.PackageInfoCompat
-import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.receiver.InstallReceiver
-import app.morphe.manager.receiver.UninstallReceiver
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import kotlinx.parcelize.Parcelize
 import java.io.File
-
-private const val byteArraySize = 1024 * 1024 // Because 1,048,576 is not readable
 
 @Immutable
 @Parcelize
@@ -39,69 +25,9 @@ data class AppInfo(
 
 @SuppressLint("QueryPermissionsNeeded")
 class PM(
-    private val app: Application,
-    patchBundleRepository: PatchBundleRepository
+    private val app: Application
 ) {
-    private val scope = CoroutineScope(Dispatchers.IO)
     val application: Application get() = app
-
-    val appList = patchBundleRepository.enabledBundlesInfoFlow.map { bundles ->
-        val compatibleApps = scope.async {
-            val compatiblePackages = bundles
-                .flatMap { (_, bundle) -> bundle.patches }
-                .flatMap { it.compatiblePackages.orEmpty() }
-                .mapNotNull { pkg -> pkg.packageName }
-                .groupingBy { it }
-                .eachCount()
-
-            compatiblePackages.keys.map { pkg ->
-                AppInfo(
-                    pkg,
-                    compatiblePackages[pkg],
-                    getPackageInfo(pkg)
-                )
-            }
-        }
-
-        val installedApps = scope.async {
-            getInstalledPackages().map { packageInfo ->
-                AppInfo(
-                    packageInfo.packageName,
-                    0,
-                    packageInfo
-                )
-            }
-        }
-
-        val compatibleList = compatibleApps.await()
-        if (compatibleList.isNotEmpty()) {
-            (compatibleList + installedApps.await())
-                .distinctBy { it.packageName }
-                .sortedWith(
-                    compareByDescending<AppInfo> {
-                        it.packageInfo != null && (it.patches ?: 0) > 0
-                    }.thenByDescending {
-                        it.patches
-                    }.thenBy {
-                        it.packageInfo?.label()
-                    }.thenBy { it.packageName }
-                )
-        } else {
-            emptyList()
-        }
-    }.flowOn(Dispatchers.IO)
-
-    private fun getInstalledPackages(flags: Int = 0): List<PackageInfo> =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            app.packageManager.getInstalledPackages(PackageInfoFlags.of(flags.toLong()))
-        else
-            app.packageManager.getInstalledPackages(flags)
-
-    fun getPackagesWithFeature(feature: String) =
-        getInstalledPackages(PackageManager.GET_CONFIGURATIONS)
-            .filter { pkg ->
-                pkg.reqFeatures?.any { it.name == feature } == true
-            }
 
     fun getPackageInfo(packageName: String, flags: Int = 0): PackageInfo? =
         try {
@@ -134,31 +60,6 @@ class PM(
 
     fun getVersionCode(packageInfo: PackageInfo) = PackageInfoCompat.getLongVersionCode(packageInfo)
 
-    fun getSignature(packageName: String): Signature =
-        // Get the last signature from the list because we want the newest one if SigningInfo.getSigningCertificateHistory() was used.
-        PackageInfoCompat.getSignatures(app.packageManager, packageName).last()
-
-    @SuppressLint("InlinedApi")
-    fun hasSignature(packageName: String, signature: ByteArray) = PackageInfoCompat.hasSignatures(
-        app.packageManager,
-        packageName,
-        mapOf(signature to PackageManager.CERT_INPUT_RAW_X509),
-        false
-    )
-
-    suspend fun installApp(apks: List<File>) = withContext(Dispatchers.IO) {
-        val packageInstaller = app.packageManager.packageInstaller
-        packageInstaller.openSession(packageInstaller.createSession(sessionParams)).use { session ->
-            apks.forEach { apk -> session.writeApk(apk) }
-            session.commit(app.installIntentSender)
-        }
-    }
-
-    fun uninstallPackage(pkg: String) {
-        val packageInstaller = app.packageManager.packageInstaller
-        packageInstaller.uninstall(pkg, app.uninstallIntentSender)
-    }
-
     fun launch(pkg: String) = app.packageManager.getLaunchIntentForPackage(pkg)?.let {
         it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         app.startActivity(it)
@@ -166,35 +67,58 @@ class PM(
 
     fun canInstallPackages() = app.packageManager.canRequestPackageInstalls()
 
+    /**
+     * Returns the first signing certificate of an installed package, or null if not found.
+     */
+    @Suppress("DEPRECATION")
+    fun getSignature(packageName: String): Signature? {
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            PackageManager.GET_SIGNING_CERTIFICATES
+        } else {
+            PackageManager.GET_SIGNATURES
+        }
+        val info = getPackageInfo(packageName, flags) ?: return null
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            info.signingInfo?.apkContentsSigners?.firstOrNull()
+                ?: info.signatures?.firstOrNull()
+        } else {
+            info.signatures?.firstOrNull()
+        }
+    }
+
+    /**
+     * Returns the first signing certificate of an APK file, or null if not found.
+     */
+    @Suppress("DEPRECATION")
+    fun getArchiveSignature(file: File): Signature? {
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
+        } else {
+            PackageManager.GET_SIGNATURES
+        }
+        val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, flags) ?: return null
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            info.signingInfo?.apkContentsSigners?.firstOrNull()
+                ?: info.signatures?.firstOrNull()
+        } else {
+            info.signatures?.firstOrNull()
+        }
+    }
+
+    /**
+     * Returns true if the signing certificate of [file] differs from the installed package.
+     * Returns false if either signature cannot be read.
+     */
+    fun hasSignatureMismatch(packageName: String, file: File): Boolean {
+        val installed = getSignature(packageName)?.toByteArray() ?: return false
+        val archive = getArchiveSignature(file)?.toByteArray() ?: return false
+        return !installed.contentEquals(archive)
+    }
+
     fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {
         val currentlyInstalled = getPackageInfo(packageName) != null
         return !currentlyInstalled && wasInstalledOnDevice && hasSavedCopy
     }
-
-    private fun PackageInstaller.Session.writeApk(apk: File) {
-        apk.inputStream().use { inputStream ->
-            openWrite(apk.name, 0, apk.length()).use { outputStream ->
-                inputStream.copyTo(outputStream, byteArraySize)
-                fsync(outputStream)
-            }
-        }
-    }
-
-    private val intentFlags
-        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-            PendingIntent.FLAG_MUTABLE
-        else
-            0
-
-    private val sessionParams
-        get() = PackageInstaller.SessionParams(
-            PackageInstaller.SessionParams.MODE_FULL_INSTALL
-        ).apply {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-                setRequestUpdateOwnership(true)
-            @SuppressLint("WrongConstant")
-            setInstallReason(PackageManager.INSTALL_REASON_USER)
-        }
 
     private fun cleanLabel(raw: String, packageName: String): String {
         val trimmed = raw.trim()
@@ -207,20 +131,4 @@ class PM(
         val candidate = withoutSuffix.ifBlank { base }
         return candidate.ifBlank { trimmed }
     }
-
-    private val Context.installIntentSender
-        get() = PendingIntent.getBroadcast(
-            this,
-            0,
-            Intent(this, InstallReceiver::class.java),
-            intentFlags or PendingIntent.FLAG_UPDATE_CURRENT
-        ).intentSender
-
-    private val Context.uninstallIntentSender
-        get() = PendingIntent.getBroadcast(
-            this,
-            0,
-            Intent(this, UninstallReceiver::class.java),
-            intentFlags or PendingIntent.FLAG_UPDATE_CURRENT
-        ).intentSender
 }

@@ -7,7 +7,7 @@
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
     <string name="home_app_hide_message">이 앱이 홈 화면에서 숨겨집니다. 나중에 목록 하단에 있는 \'%1$s\' 버튼을 사용하여 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
-    <string name="home_app_show_hidden">숨겨진 앱 보기</string>
+    <string name="home_app_show_hidden">숨겨진 앱 보이기</string>
     <string name="home_app_no_hidden">숨겨진 앱이 없습니다</string>
     <string name="home_app_hidden_apps_title">숨겨진 앱</string>
     <string name="home_app_hidden_apps_hint">숨기기를 해제하려면 탭하세요</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">사용 가능한 앱이 없습니다</string>
     <string name="home_no_apps_subtitle">%s에 패치 소스를 추가하거나 기존 패치 소스를 활성화하세요</string>
     <string name="home_no_apps_search_subtitle">\'%1$s\'와 일치하는 앱이 없습니다</string>
+    <string name="home_all_apps_hidden_title">모든 앱이 숨겨집니다</string>
+    <string name="home_all_apps_hidden_subtitle">홈 화면에서 모든 앱이 숨겨집니다</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">어떤 앱을 패치하시겠습니까?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt;를 패치하려면 패치되지 않은 APK가 필요합니다:</string>
     <string name="home_apk_availability_recommended_label">권장 버전</string>
     <string name="home_apk_availability_unpatched_label">패치되지 않음</string>
+    <string name="home_apk_availability_incompatible_label">호환되지 않음</string>
     <string name="home_apk_availability_yes">네, APK를 찾는데 도움을 주세요</string>
     <string name="home_apk_availability_no">아니요, 이미 APK를 가지고 있습니다</string>
     <string name="home_apk_use_saved_with_version">저장된 APK 사용 (v%s)</string>
     <string name="home_app_info_no_saved_apk">저장된 APK가 없습니다. 패치하려면 APK 파일을 다시 선택하세요</string>
+    <string name="home_version_requires_android">Android %1$s+ 필요</string>
+    <string name="home_apk_no_compatible_versions_title">이 기기에서는 지원되지 않음</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;는 Android %2$d (API %3$d)에서 지원되는 버전이 없습니다. 선언된 모든 앱 버전은 더 높은 Android 버전을 요구합니다</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">원본 APK 다운로드</string>
     <string name="home_download_instructions_steps_title">설명서:</string>
@@ -162,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
     <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치가 정상적으로 작동하려면 최소 %2$.2f GB이상의 여유 공간이 필요합니다</string>
     <string name="home_low_disk_space_dialog_warning">계속 진행하면 “파일을 찾을 수 없습니다” 오류가 발생하거나 손상된 APK 파일이 생성될 수 있습니다</string>
+    <string name="home_simple_bundle_select_title">패치 소스 선택</string>
     <!-- Patch Options -->
     <string name="custom_color">커스텀 색상</string>
     <string name="hex_color">헥스 색상 코드</string>
@@ -221,6 +228,7 @@
     <string name="home_app_info_patch_update_available_description">새 버전의 패치가 있습니다. 최신 개선 사항 및 수정 사항을 적용하려면 앱을 다시 패치하세요</string>
     <string name="home_app_info_app_deleted_warning">앱이 제거되었습니다</string>
     <string name="home_app_info_app_deleted_description">이 앱은 Morphe 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
+    <string name="home_app_info_apk_size">APK 크기</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">루트 모드에서는 패치 전에 원본 APK가 기기에 설치되어 있어야 합니다</string>
     <string name="root_gmscore_excluded">루트 모드에서는 \'GmsCore support\' 패치가 제외됩니다</string>
@@ -308,16 +316,13 @@
     <string name="failed_to_execute_patch">\'%s\'을 적용할 수 없습니다</string>
     <string name="patched_app_saved_toast">패치된 앱을 나중을 위해 저장하였습니다</string>
     <string name="patched_app_save_failed_toast">패치된 앱을 저장할 수 없습니다</string>
-    <string name="download_apk">APK 파일을 다운로드하는 중</string>
     <string name="plugin_activity_dialog_body">이 플러그인을 사용하려면 사용자 상호작용이 필요합니다</string>
     <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$s\'로 종료하였습니다</string>
     <string name="install_app_success">성공적으로 설치하였습니다</string>
     <string name="install_app_fail">앱을 설치할 수 없습니다: %s</string>
-    <string name="install_timeout_message">설치가 완료되지 않았습니다. 시스템 설치 프로그램 다이얼로그를 확인하고 다시 시도하세요</string>
     <string name="save_apk_success">APK를 저장하였습니다</string>
     <string name="saved_app_export_failed">패치된 앱을 내보낼 수 없습니다</string>
     <string name="saved_app_removed_toast">저장된 패치된 앱을 제거하였습니다</string>
-    <string name="saved_app_copy_removed_toast">저장된 사본을 제거하였습니다</string>
     <string name="saved_app_launch_unavailable">열기 전에 앱을 설치하세요</string>
     <string name="package_name">패키지 이름</string>
     <string name="failed_to_mount">마운트할 수 없습니다: %s</string>
@@ -337,6 +342,10 @@
     <string name="settings_appearance_background_grid">격자</string>
     <string name="settings_appearance_background_particles">입자</string>
     <string name="settings_appearance_background_none">없음</string>
+    <string name="settings_appearance_background_random">무작의</string>
+    <string name="settings_appearance_background_random_interval_launch">앱 실행 시</string>
+    <string name="settings_appearance_background_random_interval_daily">매일</string>
+    <string name="settings_appearance_background_random_interval_3days">3일마다</string>
     <string name="settings_appearance_parallax_effect">페럴랙스 효과</string>
     <string name="settings_appearance_parallax_effect_description">기기를 기울이면 배경이 부드럽게 이동합니다</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@
     <string name="settings_appearance_app_language_current">현재 언어</string>
     <string name="settings_appearance_translations_info_title">일부 언어의 번역이 누락되거나 불완전할 수 있습니다</string>
     <string name="settings_appearance_translations_info_text">새 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">홈 화면</string>
+    <string name="settings_appearance_greeting_phrases">인사말</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">앱 아이콘</string>
     <string name="settings_appearance_app_icon_default">기본값</string>
@@ -399,8 +412,17 @@
     <string name="settings_advanced_expert_mode_description">고급 Morphe 패치 설정과 커스텀 옵션을 활성화합니다</string>
     <string name="settings_advanced_expert_mode_dialog_title">전문가 모드 활성화</string>
     <string name="settings_advanced_expert_mode_dialog_message">전문가 모드에서는 패치를 적용하는 방식을 더 세밀하게 조절할 수 있지만, 설정을 잘못 건드리면 앱이 정상적으로 작동하지 않을 수 있습니다</string>
-    <string name="settings_advanced_strip_unused_libs">사용되지 않는 라이브러리 제거</string>
-    <string name="settings_advanced_strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
+    <string name="settings_advanced_strip_unused_libs">기기 아키텍처에 맞게 최적화</string>
+    <string name="settings_advanced_strip_unused_libs_description">"병합 과정에서 이 기기에서 지원되지 않는 CPU 아키텍처, 언어 및 화면 밀도에 대한 분할 APK 모듈을 건너뜁니다.
+일반 APK의 경우에는 패치 후에 지원되지 않는 아키텍처에 대한 네이티브 라이브러리를 제거합니다"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">바이트코드 처리 모드</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">패치 과정에서 바이트코드를 처리하는 방식을 제어합니다. 패치 속도, 메모리 사용량 및 출력 APK 크기에 영향을 줍니다</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">빠름 (권장)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">빠름</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">빠른 패치 속도와 낮은 메모리 사용량을 제공하지만, APK 크기가 커집니다. 저사양 또는 RAM이 적은 기기에 권장됩니다</string>
+    <string name="settings_advanced_bytecode_mode_full">최대</string>
+    <string name="settings_advanced_bytecode_mode_full_description">느린 패치 속도로 기존 동작 방식과 동일하게 작동합니다. 빠른 모드에서 문제가 발생할 경우만 사용하세요</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub 개인 액세스 토큰</string>
     <string name="settings_advanced_github_pat_description">풀 리퀘스트 소스에 필요합니다</string>
@@ -511,13 +533,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
     <string name="installer_action_open_shizuku">Shizuku 열기</string>
     <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요</string>
-    <string name="installer_hint_blocked">Android에서 설치가 차단되었습니다. Play Protect 또는 보안 설정을 확인하세요</string>
     <string name="installer_hint_conflict">이 패키지 이름을 가진 다른 앱이 이미 설치되어 있습니다. 계속하기 전에 제거하세요</string>
-    <string name="installer_hint_incompatible">APK가 이 기기 또는 Android 버전과 호환되지 않습니다</string>
-    <string name="installer_hint_invalid">APK가 잘못되었거나 손상되어 있습니다</string>
-    <string name="installer_hint_storage">설치에 필요한 저장소 공간이 충분하지 않습니다</string>
-    <string name="installer_hint_timeout">설치 시간이 초과되었습니다. 다시 시도하세요</string>
-    <string name="installer_hint_aborted">설치가 취소되었습니다</string>
     <string name="installer_external_launched">\'%1$s\'을 여는 중…</string>
     <string name="installer_external_timeout">\'%1$s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요</string>
     <string name="installer_external_success">\'%1$s\'이 설치 성공을 보고하였습니다</string>
@@ -532,7 +548,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime">프로세스 런타임</string>
     <string name="settings_system_process_runtime_description">안정성 향상을 위해 패치를 별도의 프로세스에서 실행합니다</string>
     <string name="settings_system_process_runtime_memory_limit">메모리 제한</string>
-    <string name="settings_system_process_runtime_memory_limit_description">메모리 제한을 높이면 패치 속도가 빨라질 수 있지만 구형 기기에서는 작동되지 않을 수 있습니다</string>
+    <string name="settings_system_process_runtime_memory_limit_description">메모리 제한을 높이면 패치 속도가 빨라질 수 있지만 저사양 기기에서는 작동되지 않을 수 있습니다</string>
     <string name="settings_system_process_runtime_enable">프로세스 런타임 활성화</string>
     <string name="settings_system_memory_limit_subtitle">패치에 사용 가능한 메모리</string>
     <string name="settings_system_memory_limit_warning">메모리 제한이 낮으면 대용랑 앱을 패치할 경우에 오류가 발생할 수 있습니다</string>
@@ -548,6 +564,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">사용자 이름 (별칭)</string>
     <string name="settings_system_import_keystore_dialog_password_field">비밀번호</string>
     <string name="settings_system_import_keystore_dialog_button">가져오기</string>
+    <string name="settings_system_import_keystore_dialog_format_field">키스토어 형식</string>
     <string name="settings_system_import_keystore_wrong_credentials">키스토어 자격 증명이 잘못되었습니다</string>
     <string name="settings_system_import_keystore_success">키스토어를 가져왔습니다</string>
     <string name="settings_system_import_keystore_failed">키스토어를 가져올 수 없습니다</string>
@@ -555,6 +572,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">현재 사용되는 키스토어를 내보냅니다</string>
     <string name="settings_system_export_keystore_unavailable">내보낼 키스토어가 없습니다</string>
     <string name="settings_system_export_keystore_success">키스토어를 내보냈습니다</string>
+    <string name="settings_system_export_keystore_failed">키스토어를 내보낼 수 없습니다</string>
     <string name="settings_system_show_password_field">비밀번호 표시</string>
     <string name="settings_system_hide_password_field">비밀번호 숨기기</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -683,7 +701,8 @@ morphe_header_custom_dark.png
     <string name="allow">허용</string>
     <string name="details">세부 정보</string>
     <string name="hide">숨기기</string>
-    <string name="default_">기본값</string>
+    <string name="hidden">숨겨짐</string>
+    <string name="unhide">숨기기 해제</string>
     <string name="logs">로그</string>
     <string name="sources">소스</string>
     <string name="installing_ellipsis">설치하는 중…</string>
@@ -697,7 +716,7 @@ morphe_header_custom_dark.png
     <string name="changelog_retry">다시 시도</string>
     <string name="changelog_empty">변경 사항이 없습니다</string>
     <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
-    <string name="update_available">업데이트를 할 수 있음</string>
+    <string name="update_available">업데이트 사용 가능</string>
     <string name="ready_to_install_update">업데이트 설치 준비 완료</string>
     <string name="update_completed">업데이트하였습니다</string>
     <string name="install_update_manager_failed">업데이트를 할 수 없습니다</string>

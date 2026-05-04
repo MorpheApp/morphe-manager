@@ -27,4 +27,10 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="other">Đã chọn %s bản vá</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="other">Hiện %s ứng dụng</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="other">%s ứng dụng đang ẩn</item>
+    </plurals>
 </resources>

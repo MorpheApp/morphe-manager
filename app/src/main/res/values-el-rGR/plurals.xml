@@ -36,4 +36,12 @@
         <item quantity="one">%s επιλεγμένη τροποποίηση</item>
         <item quantity="other">%s επιλεγμένες τροποποιήσεις </item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Εμφάνιση %s εφαρμογής</item>
+        <item quantity="other">Εμφάνιση %s εφαρμογών</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s κρυφή εφαρμογή</item>
+        <item quantity="other">%s κρυφές εφαρμογές</item>
+    </plurals>
 </resources>

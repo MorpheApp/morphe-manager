@@ -8,8 +8,8 @@ package app.morphe.manager.ui.screen
 import android.annotation.SuppressLint
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -45,10 +45,9 @@ import app.morphe.manager.ui.screen.settings.system.AboutDialog
 import app.morphe.manager.ui.screen.settings.system.ChangelogDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
 import app.morphe.manager.ui.screen.settings.system.KeystoreCredentialsDialog
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.viewmodel.*
-import app.morphe.manager.util.JSON_MIMETYPE
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -80,6 +79,7 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    val isTV = remember { context.isAndroidTv() }
 
     // Pager state for swipeable tabs
     val pagerState = rememberPagerState(
@@ -96,17 +96,18 @@ fun SettingsScreen(
 
     // Dialog states
     val showAboutDialog = rememberSaveable { mutableStateOf(false) }
-    val showKeystoreCredentialsDialog = rememberSaveable { mutableStateOf(false) }
     val showInstallerDialog = remember { mutableStateOf(false) }
     val showChangelogDialog = remember { mutableStateOf(false) }
 
-    // Import launchers
-    val importKeystoreLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    // Import pickers - GetContentWithChooser on phones, OpenDocument on Android TV
+    val importKeystoreLauncher = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf("*/*"),
+        chooserTitle = stringResource(R.string.settings_system_import_keystore)
     ) { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
 
-    val importSettingsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val importSettingsLauncher = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
+        chooserTitle = stringResource(R.string.settings_system_import_manager_settings)
     ) { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
 
     // Export launchers
@@ -119,13 +120,8 @@ fun SettingsScreen(
     ) { uri -> uri?.let { importExportViewModel.exportManagerSettings(it) } }
 
     val exportDebugLogsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("text/plain")
+        contract = ActivityResultContracts.CreateDocument(TEXT_MIMETYPE)
     ) { uri -> uri?.let { importExportViewModel.exportDebugLogs(it) } }
-
-    // Show keystore credentials dialog when needed
-    LaunchedEffect(importExportViewModel.showCredentialsDialog) {
-        showKeystoreCredentialsDialog.value = importExportViewModel.showCredentialsDialog
-    }
 
     // Show about dialog
     if (showAboutDialog.value) {
@@ -133,18 +129,16 @@ fun SettingsScreen(
     }
 
     // Show keystore credentials dialog
-    if (showKeystoreCredentialsDialog.value) {
+    if (importExportViewModel.showCredentialsDialog) {
         KeystoreCredentialsDialog(
             onDismiss = {
                 importExportViewModel.cancelKeystoreImport()
-                showKeystoreCredentialsDialog.value = false
             },
-            onSubmit = { alias, pass ->
+            initialFormat = importExportViewModel.detectedKeystoreFormat,
+            onSubmit = { alias, pass, format ->
                 coroutineScope.launch {
-                    val result = importExportViewModel.tryKeystoreImport(alias, pass)
-                    if (result) {
-                        showKeystoreCredentialsDialog.value = false
-                    } else {
+                    val result = importExportViewModel.tryKeystoreImport(alias, pass, format)
+                    if (!result) {
                         context.toast(context.getString(R.string.settings_system_import_keystore_wrong_credentials))
                     }
                 }
@@ -199,11 +193,20 @@ fun SettingsScreen(
                     settingsViewModel = settingsViewModel,
                     onShowInstallerDialog = { showInstallerDialog.value = true },
                     importExportViewModel = importExportViewModel,
-                    onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                    onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
-                    onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
-                    onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
-                    onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
+                    onImportKeystore = { importKeystoreLauncher() },
+                    onExportKeystore = {
+                        if (isTV) importExportViewModel.exportKeystoreToDownloads()
+                        else exportKeystoreLauncher.launch("Morphe.keystore")
+                    },
+                    onImportSettings = { importSettingsLauncher() },
+                    onExportSettings = {
+                        if (isTV) importExportViewModel.exportManagerSettingsToDownloads()
+                        else exportSettingsLauncher.launch("morphe_manager_settings.json")
+                    },
+                    onExportDebugLogs = {
+                        if (isTV) importExportViewModel.exportDebugLogsToDownloads()
+                        else exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName)
+                    },
                     onAboutClick = { showAboutDialog.value = true },
                     onChangelogClick = { showChangelogDialog.value = true }
                 )
@@ -316,8 +319,8 @@ private fun NavigationItem(
 
             AnimatedVisibility(
                 visible = isSelected,
-                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
-                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
+                enter = MorpheAnimations.expandHorizFadeIn,
+                exit = MorpheAnimations.shrinkHorizFadeOut
             ) {
                 Row {
                     Spacer(modifier = Modifier.width(8.dp))

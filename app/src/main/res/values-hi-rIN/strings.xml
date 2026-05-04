@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">एंड्रॉइड 11 सिस्टम में एक बग से बचने के लिए ऐप इंस्टॉलेशन की अनुमति समय से पहले दी जानी चाहिए जो उपयोगकर्ता अनुभव को नकारात्मक रूप से प्रभावित करेगी।</string>
     <string name="deep_link_add_source_title">स्रोत जोड़ें</string>
     <string name="deep_link_add_source_message">क्या आप इस पैच स्रोत को मोर्फे में जोड़ना चाहेंगे?</string>
-    <string name="deep_link_add_source_warning">केवल उन स्रोतों से स्रोत जोड़ें जिन पर आप भरोसा करते हैं</string>
+    <string name="deep_link_add_source_warning">सिर्फ़ उन स्रोतों को जोड़ें जिन पर आप भरोसा करते हैं</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">मोर्फे अपडेट उपलब्ध है</string>
     <string name="home_update_available_subtitle">नई संस्करण तैयार है</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">कोई ऐप्स उपलब्ध नहीं हैं</string>
     <string name="home_no_apps_subtitle">पैच स्रोत जोड़ें या %s में मौजूदा स्रोत सक्षम करें</string>
     <string name="home_no_apps_search_subtitle">कोई ऐप्स \"%1$s\" से मेल नहीं खाते हैं</string>
+    <string name="home_all_apps_hidden_title">सभी ऐप्स छिपे हुए हैं</string>
+    <string name="home_all_apps_hidden_subtitle">आपने होम स्क्रीन से सभी ऐप्स छिपा दिए हैं</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">पैच करने के लिए &lt;b&gt;%s&lt;/b&gt;, अपatched एपीके की आवश्यकता है:</string>
     <string name="home_apk_availability_recommended_label">सुझाया गया</string>
     <string name="home_apk_availability_unpatched_label">अपडेट किए बिना</string>
+    <string name="home_apk_availability_incompatible_label">असंगत</string>
     <string name="home_apk_availability_yes">हाँ, मुझे APK ढूंढने में मदद करें</string>
     <string name="home_apk_availability_no">नहीं, मेरे पास पहले से ही एक एपीके है</string>
     <string name="home_apk_use_saved_with_version">प्रतिलिपि APK (v%s) का उपयोग करें</string>
     <string name="home_app_info_no_saved_apk">कोई प्रतिलिपि APK नहीं है। पट्च करना पुनः APK फ़ाइल का चयन करना आवश्यक होगा</string>
+    <string name="home_version_requires_android">Android %1$s+ की आवश्यकता है</string>
+    <string name="home_apk_no_compatible_versions_title">इस डिवाइस पर समर्थित नहीं है</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; के पास Android %2$d (API %3$d) के लिए कोई समर्थित संस्करण नहीं है। सभी घोषित संस्करणों के लिए उच्च Android संस्करण की आवश्यकता है।</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ओरिजनल APK डाउनलोड करें</string>
     <string name="home_download_instructions_steps_title">निर्देश:</string>
@@ -162,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">कम डिस्क स्थान</string>
     <string name="home_low_disk_space_dialog_message">केवल %1$.2f GB खाली भंडारण उपलब्ध है। पैचिंग के लिए ठीक से काम करने के लिए कम से कम %2$.2f GB खाली जगह की आवश्यकता होती है</string>
     <string name="home_low_disk_space_dialog_warning">आगे बढ़ने पर \"फ़ाइल नहीं मिली\" त्रुटि या करप्ट आउटपुट APK हो सकता है</string>
+    <string name="home_simple_bundle_select_title">पैच स्रोत चुनें</string>
     <!-- Patch Options -->
     <string name="custom_color">कस्टम रंग</string>
     <string name="hex_color">हेक्स रंग</string>
@@ -221,6 +228,7 @@
     <string name="home_app_info_patch_update_available_description">पथचों की नई संस्करण उपलब्ध है। अपने एप्लिकेशन को पुनः पथच करें नई सुधार और त्रुटि प्राप्त करने के लिए।</string>
     <string name="home_app_info_app_deleted_warning">एप्लिकेशन उन्मोदन किया गया</string>
     <string name="home_app_info_app_deleted_description">इस ऐप को बाहर से उन्मोदन किया गया था। मॉर्फी में पुनः स्थापित करें कार्यक्षमता पुनः प्राप्त करने के लिए</string>
+    <string name="home_app_info_apk_size">APK आकार</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोड के लिए, पैचिंग शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
     <string name="root_gmscore_excluded">श्ळ लेरे सेप्नि साधार्य लैि लुन्यिानि ला</string>
@@ -308,16 +316,13 @@
     <string name="failed_to_execute_patch">Failed to execute %s</string>
     <string name="patched_app_saved_toast">Patched app saved for later</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
-    <string name="download_apk">एपीके फाइल डाउनलोड करें</string>
     <string name="plugin_activity_dialog_body">इस प्लगइन के लिए आगे बढ़ने के लिए उपयोगकर्ता इंटरैक्शन आवश्यक है।</string>
     <string name="patcher_process_exit_message">पैचर प्रक्रिया कोड %1$s के साथ समाप्त हुई</string>
     <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
     <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
-    <string name="install_timeout_message">इंस्टॉलेशन पूर्ण नहीं हुई. सिस्टम इंस्टॉलर डायलॉग को जाँचें और पुन: प्रयास करें।</string>
     <string name="save_apk_success">एपीके सहेजा गया</string>
     <string name="saved_app_export_failed">\"पैच किया गया ऐप एक्सपोर्ट करने में विफल।\"</string>
     <string name="saved_app_removed_toast">हटाया गया सहेजा गया पैच किया हुआ ऐप</string>
-    <string name="saved_app_copy_removed_toast">हटाया गया सहेजा गया कॉपी</string>
     <string name="saved_app_launch_unavailable">ऐप को खोलने से पहले इंस्टॉल करें।</string>
     <string name="package_name">Package name</string>
     <string name="failed_to_mount">%s को माउंट करने में विफल</string>
@@ -337,6 +342,10 @@
     <string name="settings_appearance_background_grid">ग्रिड</string>
     <string name="settings_appearance_background_particles">कण</string>
     <string name="settings_appearance_background_none">कुछ</string>
+    <string name="settings_appearance_background_random">यादृच्छिक</string>
+    <string name="settings_appearance_background_random_interval_launch">लॉन्च पर</string>
+    <string name="settings_appearance_background_random_interval_daily">दैनिक</string>
+    <string name="settings_appearance_background_random_interval_3days">हर 3 दिन में</string>
     <string name="settings_appearance_parallax_effect">परालैक्स प्रभाव</string>
     <string name="settings_appearance_parallax_effect_description">डिवाइस को झुकाने पर पृष्ठभूमि को मधयम गति से बदलना</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@
     <string name="settings_appearance_app_language_current">वर्तमान भाषा</string>
     <string name="settings_appearance_translations_info_title">कुछ भाषाओं के लिए अनुवाद या अपूर्ण अनुवाद उपलब्ध हो सकते हैं</string>
     <string name="settings_appearance_translations_info_text">नई भाषाओं को अनुवाद करने के लिए या मौजूदा अनुवाद को सुधारने के लिए, %s पर जाएं</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">मुखपृष्ठ</string>
+    <string name="settings_appearance_greeting_phrases">अभिवादन वाक्यांश</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">एप्लिकेशन आइकॉन</string>
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>
@@ -399,8 +412,17 @@
     <string name="settings_advanced_expert_mode_description">अनुमोदित करना जटिल मॉर्फ पट्टी सेटिंग्स और कस्टमाइजेशन विकल्प</string>
     <string name="settings_advanced_expert_mode_dialog_title">एक्सपर्ट मोड को अनुमोदित करना?</string>
     <string name="settings_advanced_expert_mode_dialog_message">एक्सपर्ट मोड पट्चों को लागू करने के तरीके पर अधिक नियंत्रण देता है, लेकिन एक्सपर्ट मोड में सेटिंग्स गलत करने से अप्लिकेशन में काम नहीं करने का खतरा हो सकता है</string>
-    <string name="settings_advanced_strip_unused_libs">अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
-    <string name="settings_advanced_strip_unused_libs_description">पुराने डिवाइस आर्किटेक्चर के लिए अनदरसरी नेटिव लाइब्रेरीज हटाएं</string>
+    <string name="settings_advanced_strip_unused_libs">डिवाइस आर्किटेक्चर के लिए अनुकूलित करें</string>
+    <string name="settings_advanced_strip_unused_libs_description">"सादे APK के लिए, पैचिंग के बाद असमर्थित आर्किटेक्चर के लिए मूल लाइब्रेरीज़ को हटा देता है।
+असमर्थित CPU आर्किटेक्चर, लोकेल और स्क्रीन घनत्व के लिए स्प्लिट APK मॉड्यूल को मर्ज करते समय छोड़ दें।"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">बाइटकोड प्रोसेसिंग मोड</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">पैचिंग के दौरान बाइटकोड कैसे प्रोसेस किया जाता है, यह नियंत्रित करता है। पैचिंग की गति, मेमोरी उपयोग और आउटपुट APK आकार को प्रभावित करता है</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">तेज़ (अनुशंसित)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">तेज़</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">तेज़ पैचिंग और कम मेमोरी का उपयोग, लेकिन APK का आकार बड़ा होगा। कम RAM या पुराने उपकरणों के लिए अनुशंसित</string>
+    <string name="settings_advanced_bytecode_mode_full">पूर्ण</string>
+    <string name="settings_advanced_bytecode_mode_full_description">धीमी पैचिंग, विरासत व्यवहार को दोहराती है। केवल तभी उपयोग करें जब तेज़ मोड में समस्या हो</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">प्रकाशन अनुरोध स्रोतों के लिए आवश्यक</string>
@@ -510,13 +532,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">इंस्टॉल किया गया शिज़ुकू वर्जन समर्थित नहीं है</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">इंस्टॉलेशन विफल रही. पुन: प्रयास करें या अलग इंस्टॉलर का उपयोग करें।</string>
-    <string name="installer_hint_blocked">एंड्रॉइड द्वारा इंस्टॉलेशन ब्लॉक की गई. प्ले प्रोटेक्ट या सुरक्षा सेटिंग्स को जाँचें।</string>
     <string name="installer_hint_conflict">इस पैकेज नाम के साथ अन्य ऐप पहले से ही इंस्टॉल किया गया है. आगे बढ़ने से पहले इसे अनइंस्टॉल करें।</string>
-    <string name="installer_hint_incompatible">एपीके इस डिवाइस या एंड्रॉइड वर्जन के साथ संगत नहीं है</string>
-    <string name="installer_hint_invalid">एपीके अमान्य या क्षतिग्रस्त है</string>
-    <string name="installer_hint_storage">इंस्टॉलेशन के लिए पर्याप्त स्टोरेज स्पेस नहीं है</string>
-    <string name="installer_hint_timeout">इंस्टॉलेशन टाइमआउट हुई. पुन: प्रयास करें</string>
-    <string name="installer_hint_aborted">इंस्टॉलेशन रद्द की गई</string>
     <string name="installer_external_launched">%1$s खोला जा रहा है</string>
     <string name="installer_external_timeout">%1$s ने इंस्टॉलेशन की पुष्टि नहीं की. अन्य ऐप को जाँचें और पुन: प्रयास करें</string>
     <string name="installer_external_success">%1$s ने सफल इंस्टॉलेशन रिपोर्ट की</string>
@@ -547,6 +563,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">यूज़रनेम (एलियास)</string>
     <string name="settings_system_import_keystore_dialog_password_field">पासवर्ड</string>
     <string name="settings_system_import_keystore_dialog_button">आयम</string>
+    <string name="settings_system_import_keystore_dialog_format_field">कीस्टोर प्रारूप</string>
     <string name="settings_system_import_keystore_wrong_credentials">गलत कीस्टोर क्रेडेंशियल</string>
     <string name="settings_system_import_keystore_success">कीस्टोर आयम किया गया</string>
     <string name="settings_system_import_keystore_failed">कीस्टोर आयम करने में विफल</string>
@@ -554,6 +571,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">वर्तमान कीस्टोर एक्सपोर्ट करें</string>
     <string name="settings_system_export_keystore_unavailable">एक्सपोर्ट करने के लिए कीस्टोर उपलब्ध नहीं है</string>
     <string name="settings_system_export_keystore_success">कीस्टोर एक्सपोर्ट किया गया</string>
+    <string name="settings_system_export_keystore_failed">कीस्टोर एक्सपोर्ट करने में विफल।</string>
     <string name="settings_system_show_password_field">पासवर्ड दिखाएं</string>
     <string name="settings_system_hide_password_field">पासवर्ड छिपाएं</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ morphe_header_custom_dark.png
     <string name="allow">अनुमति दें</string>
     <string name="details">विवरण</string>
     <string name="hide">छुपायें</string>
-    <string name="default_">डिफ़ॉल्ट</string>
+    <string name="hidden">छिपा हुआ</string>
+    <string name="unhide">अनहाइड करें</string>
     <string name="logs">लॉग्स</string>
     <string name="sources">स्रोत</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>

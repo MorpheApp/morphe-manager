@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
     <string name="deep_link_add_source_title">Bron toevoegen</string>
     <string name="deep_link_add_source_message">Wilt u deze patchbron toevoegen aan Morphe?</string>
-    <string name="deep_link_add_source_warning">Voeg alleen bronnen toe van bronnen waarvan u vertrouwt.</string>
+    <string name="deep_link_add_source_warning">Voeg alleen bronnen toe die u vertrouwt</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-update beschikbaar</string>
     <string name="home_update_available_subtitle">Nieuwe versie gereed voor installatie</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Geen apps beschikbaar</string>
     <string name="home_no_apps_subtitle">Voeg een patchbron toe of schakel een bestaande in %s</string>
     <string name="home_no_apps_search_subtitle">Geen apps komen overeen met \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Alle apps zijn verborgen</string>
+    <string name="home_all_apps_hidden_subtitle">U heeft alle apps van het startscherm verborgen</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welke app wil je patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Om &lt;b&gt;%s&lt;/b&gt; te patchen, heb je een ongepatchte APK nodig van de volgende versies:</string>
     <string name="home_apk_availability_recommended_label">Aanbevolen</string>
     <string name="home_apk_availability_unpatched_label">Ongepatcht</string>
+    <string name="home_apk_availability_incompatible_label">Incompatibel</string>
     <string name="home_apk_availability_yes">Ja, help me een APK te vinden</string>
     <string name="home_apk_availability_no">Nee, ik heb al een .APK</string>
     <string name="home_apk_use_saved_with_version">Gebruik opgeslagen .APK-bestand (v%s)</string>
     <string name="home_app_info_no_saved_apk">Er is geen APK opgeslagen. Om de patch uit te voeren, moet u het APK opnieuw selecteren</string>
+    <string name="home_version_requires_android">Vereist Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Niet ondersteund voor dit apparaat</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; heeft geen ondersteunde versies voor Android %2$d (API %3$d). Alle vermelde versies vereisen een hogere Android-versie</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download de originele .APK-bestand</string>
     <string name="home_download_instructions_steps_title">Instructies:</string>
@@ -162,6 +168,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="home_low_disk_space_dialog_title">Weinig schijfruimte</string>
     <string name="home_low_disk_space_dialog_message">Slechts %1$.2f GB vrije opslagruimte beschikbaar. Patching vereist minimaal %2$.2f GB vrije ruimte om correct te werken</string>
     <string name="home_low_disk_space_dialog_warning">Doorgaan kan resulteren in een foutmelding \'bestand niet gevonden\' of een beschadigd output APK-bestand</string>
+    <string name="home_simple_bundle_select_title">Selecteer een .mpp-bronbestand van de opslag</string>
     <!-- Patch Options -->
     <string name="custom_color">Aangepaste kleur</string>
     <string name="hex_color">Hex-kleur</string>
@@ -221,6 +228,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="home_app_info_patch_update_available_description">Er is een nieuwere versie van patches beschikbaar. Repatch uw app om de laatste verbeteringen en correcties te krijgen</string>
     <string name="home_app_info_app_deleted_warning">App was verwijderd</string>
     <string name="home_app_info_app_deleted_description">Deze app is buiten Morphe verwijderd. Installeer de patch om de functionaliteit te herstellen</string>
+    <string name="home_app_info_apk_size">APK-grootte</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus vereist dat de oorspronkelijke APK op uw apparaat geïnstalleerd is voordat gepatcht wordt</string>
     <string name="root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
@@ -308,16 +316,13 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="failed_to_execute_patch">Kon %s niet toepassen</string>
     <string name="patched_app_saved_toast">Gepatchte app opgeslagen voor later</string>
     <string name="patched_app_save_failed_toast">Kon gepatchte app niet opslaan</string>
-    <string name="download_apk">APK-bestand downloaden</string>
     <string name="plugin_activity_dialog_body">Gebruikersinteractie is vereist om te kunnen doorgaan met deze plugin</string>
     <string name="patcher_process_exit_message">Patcher-process is afgelopen met code %1$s</string>
     <string name="install_app_success">Succesvol geïnstalleerd</string>
     <string name="install_app_fail">Kon app niet installeren: %s</string>
-    <string name="install_timeout_message">De installatie is niet voltooid. Controleer het installatiedialoogvenster en probeer het opnieuw</string>
     <string name="save_apk_success">APK opgeslagen</string>
     <string name="saved_app_export_failed">Kan gepatchte app niet exporteren</string>
     <string name="saved_app_removed_toast">Opgeslagen gepatchte app verwijderd</string>
-    <string name="saved_app_copy_removed_toast">Opgeslagen kopie verwijderd</string>
     <string name="saved_app_launch_unavailable">Installeer de app voordat u deze opent</string>
     <string name="package_name">Pakketnaam</string>
     <string name="failed_to_mount">Kon %s niet koppelen</string>
@@ -337,6 +342,10 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_appearance_background_grid">Raster</string>
     <string name="settings_appearance_background_particles">Deeltjes</string>
     <string name="settings_appearance_background_none">Geen</string>
+    <string name="settings_appearance_background_random">Willekeurig</string>
+    <string name="settings_appearance_background_random_interval_launch">Bij het opstarten</string>
+    <string name="settings_appearance_background_random_interval_daily">Dagelijks</string>
+    <string name="settings_appearance_background_random_interval_3days">Om de 3 dagen</string>
     <string name="settings_appearance_parallax_effect">Parallax-effect</string>
     <string name="settings_appearance_parallax_effect_description">Vloeiende achtergrondverschuiving bij het kantelen van het apparaat</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_appearance_app_language_current">Huidige taal</string>
     <string name="settings_appearance_translations_info_title">Vertalingen voor sommige talen kunnen ontbreken of onvolledig zijn</string>
     <string name="settings_appearance_translations_info_text">Om nieuwe talen te vertalen of bestaande vertalingen te verbeteren, bezoek %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Startscherm</string>
+    <string name="settings_appearance_greeting_phrases">Begroetingszinnen</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Toon een begroetingsbericht op de startscherm</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App-pictogram</string>
     <string name="settings_appearance_app_icon_default">Standaard</string>
@@ -399,8 +412,17 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_advanced_expert_mode_description">Inschakelen complexe Morphe-patchinstellingen en aanpassingsopties</string>
     <string name="settings_advanced_expert_mode_dialog_title">Expertmodus inschakelen?</string>
     <string name="settings_advanced_expert_mode_dialog_message">De expertmodus biedt meer controle over hoe patches worden toegepast, maar een verkeerde configuratie in de expertmodus kan ertoe leiden dat de app niet meer werkt</string>
-    <string name="settings_advanced_strip_unused_libs">Verwijder ongebruikte native bibliotheken</string>
-    <string name="settings_advanced_strip_unused_libs_description">Verwijder native library\'s voor niet-ondersteunde CPU-architecturen uit gepatchte apps</string>
+    <string name="settings_advanced_strip_unused_libs">Optimaliseer voor apparaatarchitectuur</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Sla split APK-modules voor niet-ondersteunde CPU-architecturen, talen en schermresoluties over tijdens het samenvoegen.
+Voor gewone APK's worden native bibliotheken voor niet-ondersteunde architecturen verwijderd na het patchen"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytecode-verwerkingsmodus</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Regelt hoe bytecode wordt verwerkt tijdens patchen. Beïnvloedt patchesnelheid, geheugengebruik en APK-grootte</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Snel (Aanbevolen)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Snel</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Sneller patchen en minder geheugen gebruiken, ten koste van een grotere APK. Aanbevolen voor apparaten met weinig RAM of oudere apparaten</string>
+    <string name="settings_advanced_bytecode_mode_full">Volledig</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Langzamer patchen, repliceert eerder gedrag. Alleen gebruiken als de snelle modus problemen veroorzaakt</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Vereist voor pull request-bronnen</string>
@@ -510,13 +532,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_status_shizuku_unsupported">De geïnstalleerde Shizuku-versie wordt niet ondersteund</string>
     <string name="installer_action_open_shizuku">Shizuku openen</string>
     <string name="installer_hint_generic">De installatie is mislukt. Probeer het opnieuw of schakel over naar een ander installatieprogramma</string>
-    <string name="installer_hint_blocked">De installatie is geblokkeerd door Android. Controleer Play Protect of beveiligingsinstellingen</string>
     <string name="installer_hint_conflict">Een andere app met hetzelfde pakketnaam is al geïnstalleerd. Verwijder deze voordat u doorgaat</string>
-    <string name="installer_hint_incompatible">De APK is niet compatibel met dit apparaat of Android-versie</string>
-    <string name="installer_hint_invalid">De APK is niet geldig of beschadigd</string>
-    <string name="installer_hint_storage">Er is niet genoeg opslagruimte voor de installatie</string>
-    <string name="installer_hint_timeout">De installatie is mislukt. Probeer het opnieuw</string>
-    <string name="installer_hint_aborted">De installatie is geannuleerd</string>
     <string name="installer_external_launched">%1$s wordt geopend…</string>
     <string name="installer_external_timeout">%1$s heeft de installatie niet bevestigd. Controleer de andere app en probeer het opnieuw</string>
     <string name="installer_external_success">%1$s heeft een geslaagde installatie gemeld</string>
@@ -547,6 +563,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_import_keystore_dialog_alias_field">Gebruikersnaam (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Wachtwoord</string>
     <string name="settings_system_import_keystore_dialog_button">Importeren</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore-formaat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Verkeerde keystore-gegevens</string>
     <string name="settings_system_import_keystore_success">Keystore geïmporteerd</string>
     <string name="settings_system_import_keystore_failed">Kan keystore niet importeren</string>
@@ -554,6 +571,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_export_keystore_description">Exporteer de huidige keystore</string>
     <string name="settings_system_export_keystore_unavailable">Geen keystore beschikbaar om te exporteren</string>
     <string name="settings_system_export_keystore_success">Keystore geëxporteerd</string>
+    <string name="settings_system_export_keystore_failed">Kon de keystore niet exporteren</string>
     <string name="settings_system_show_password_field">Toon wachtwoord</string>
     <string name="settings_system_hide_password_field">Wachtwoord verbergen</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="allow">Toestaan</string>
     <string name="details">Details</string>
     <string name="hide">Verbergen</string>
-    <string name="default_">Standaard</string>
+    <string name="hidden">Verborgen</string>
+    <string name="unhide">Toon</string>
     <string name="logs">Logboeken</string>
     <string name="sources">Bron-URL</string>
     <string name="installing_ellipsis">Installeren…</string>

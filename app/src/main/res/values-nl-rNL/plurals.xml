@@ -17,8 +17,8 @@
         <item quantity="other">%s pakketten</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Execute %s patch</item>
-        <item quantity="other">Execute %s patches</item>
+        <item quantity="one">%s patch uitgevoerd</item>
+        <item quantity="other">%s patches uitgevoerd</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK-bestand</item>
@@ -35,5 +35,13 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%s patch geselecteerd</item>
         <item quantity="other">%s patches geselecteerd</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Laat %s app zien</item>
+        <item quantity="other">Laat %s apps zien</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s verborgen app</item>
+        <item quantity="other">%s verborgen apps</item>
     </plurals>
 </resources>

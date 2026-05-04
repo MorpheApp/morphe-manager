@@ -25,10 +25,10 @@
         <item quantity="other">%s pakietów</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Wykonaj %s modyfikację</item>
-        <item quantity="few">Wykonaj %s modyfikacje</item>
-        <item quantity="many">Wykonaj %s modyfikacji</item>
-        <item quantity="other">Wykonaj %s modyfikacji</item>
+        <item quantity="one">Zastosowano %s modyfikację</item>
+        <item quantity="few">Zastosowano %s modyfikacje</item>
+        <item quantity="many">Zastosowano %s modyfikacji</item>
+        <item quantity="other">Zastosowano %s modyfikacji</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s plik APK</item>
@@ -53,5 +53,17 @@
         <item quantity="few">%s wybrane modyfikacje</item>
         <item quantity="many">%s wybranych modyfikacji</item>
         <item quantity="other">%s wybranych modyfikacji</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Pokaż %s aplikację</item>
+        <item quantity="few">Pokaż %s aplikacje</item>
+        <item quantity="many">Pokaż %s aplikacji</item>
+        <item quantity="other">Pokaż %s aplikacji</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s ukryta aplikacja</item>
+        <item quantity="few">%s ukryte aplikacje</item>
+        <item quantity="many">%s ukrytych aplikacji</item>
+        <item quantity="other">%s ukrytych aplikacji</item>
     </plurals>
 </resources>

@@ -2,6 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      send_fcm:
+        description: 'Send FCM push notification'
+        type: boolean
+        default: true
   push:
     branches:
       - main
@@ -25,7 +30,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Cache Gradle
         uses: burrunan/gradle-cache-action@v3
@@ -60,31 +65,6 @@ jobs:
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 
-      - name: Copy release files to legacy path
-        # TODO: Eventually delete this logic
-        if: steps.release.outputs.new_release_published == 'true'
-        run: |
-          git config user.name "semantic-release-bot"
-          git config user.email "semantic-release-bot@martynus.net"
-          
-          # Make sure we're rebasing onto the latest remote branch
-          git fetch origin
-          
-          # Hard reset to latest remote branch
-          git checkout ${GITHUB_REF_NAME}
-          git reset --hard origin/${GITHUB_REF_NAME}
-          
-          cp app-release.json app/app-release.json
-          cp CHANGELOG.md app/CHANGELOG.md
-          
-          git add app/app-release.json
-          git add app/CHANGELOG.md
-          
-          git commit -m "chore: Update legacy release files"
-          
-          # Push explicitly to the branch that triggered the workflow
-          git push origin HEAD:${GITHUB_REF_NAME}
-
       - name: Attest
         if: steps.release.outputs.new_release_published == 'true'
         uses: actions/attest-build-provenance@v2
@@ -114,17 +94,17 @@ jobs:
             })
 
       - name: Wait before sending FCM
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
         run: sleep 480
 
       - name: Setup Python for FCM
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Send FCM push notification
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
         env:
           FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
           FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}

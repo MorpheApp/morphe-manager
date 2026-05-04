@@ -15,6 +15,7 @@ import app.morphe.manager.patcher.runtime.process.IPatcherProcess
 import app.morphe.manager.patcher.runtime.process.Parameters
 import app.morphe.manager.patcher.runtime.process.PatchConfiguration
 import app.morphe.manager.patcher.runtime.process.PatcherProcess
+import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.ProgressEventHandler
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.Options
@@ -39,7 +40,6 @@ import kotlin.math.max
 const val PROCESS_RUNTIME_MEMORY_MINIMUM = 512
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1280
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION = 1024
-private const val PROCESS_RUNTIME_MEMORY_DEFAULT = 640
 private const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 640
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 640
 const val PROCESS_RUNTIME_MEMORY_STEP = 128
@@ -113,11 +113,11 @@ class ProcessRuntime(
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
-        stripNativeLibs: Boolean,
+        skipUnneededSplits: Boolean,
+        onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
-        val minMemoryLimit = 200
+        val minMemoryLimit = 256
         var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
-        var retried = false
 
         while (true) {
             try {
@@ -128,21 +128,12 @@ class ProcessRuntime(
                     packageName,
                     selectedPatches,
                     options,
-                    stripNativeLibs,
+                    skipUnneededSplits,
                     logger,
                     onPatchCompleted,
-                    onProgress
+                    onProgress,
+                    onMergedApkReady
                 )
-                // Success - update preference and return.
-                if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
-                    if (memoryMB < PROCESS_RUNTIME_MEMORY_DEFAULT) {
-                        // Don't save a value lower than the expected minimum.
-                        // Instead, allow discovering the actual memory limit again next time.
-                        memoryMB = PROCESS_RUNTIME_MEMORY_DEFAULT
-                    }
-                    Log.i(tag, "Updating process memory limit setting to: $memoryMB")
-                    prefs.patcherProcessMemoryLimit.update(memoryMB)
-                }
 
                 return@coroutineScope
             } catch (e: Exception) {
@@ -153,7 +144,6 @@ class ProcessRuntime(
                 }
 
                 if (isMemoryFailure && !skipMemoryRetry && memoryMB > minMemoryLimit) {
-                    retried = true
                     memoryMB -= PROCESS_RUNTIME_MEMORY_STEP
                     Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")
                     continue
@@ -170,10 +160,11 @@ class ProcessRuntime(
         packageName: String,
         selectedPatches: PatchSelection,
         options: Options,
-        stripNativeLibs: Boolean,
+        skipUnneededSplits: Boolean,
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
+        onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
@@ -194,6 +185,14 @@ class ProcessRuntime(
             }
 
         val appProcessBin = resolveAppProcessBin(context)
+
+        // Determine merged APK path before launching the process so it is accessible
+        // after patching.await() to invoke onMergedApkReady in the coroutineScope.
+        val mergedInputPath = if (SplitApkPreparer.isSplitArchive(File(inputFile))) {
+            File(cacheDir).resolve("merged-process-input-${System.currentTimeMillis()}.apk").absolutePath
+        } else {
+            null
+        }
 
         launch(Dispatchers.IO) {
             val result = process(
@@ -250,7 +249,6 @@ class ProcessRuntime(
             }
 
             val parameters = Parameters(
-                aaptPath = aaptPath,
                 frameworkDir = frameworkPath,
                 cacheDir = cacheDir,
                 packageName = packageName,
@@ -263,14 +261,27 @@ class ProcessRuntime(
                         options[uid].orEmpty()
                     )
                 },
-                stripNativeLibs = stripNativeLibs
+                skipUnneededSplits = skipUnneededSplits,
+                mergedInputFile = mergedInputPath,
+                bytecodeMode = prefs.bytecodeModePreference.get(),
             )
 
             binder.start(parameters, eventHandler)
         }
 
-        // Wait until patching finishes.
-        patching.await()
+        // Wait until patching finishes
+        val mergedFile = mergedInputPath?.let { File(it) }
+        try {
+            patching.await()
+            // If PatcherProcess merged a split archive, notify the caller so the merged APK
+            // can be saved to originalApksDir for future repatching
+            if (mergedFile?.exists() == true) {
+                onMergedApkReady?.invoke(mergedFile)
+            }
+        } finally {
+            // Always clean up the temporary merged file regardless of success or failure
+            mergedFile?.takeIf { it.exists() }?.delete()
+        }
     }
 
     companion object : LibraryResolver() {

@@ -4,7 +4,6 @@ import android.content.Context
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.patcher.aapt.Aapt
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.worker.ProgressEventHandler
 import app.morphe.manager.util.Options
@@ -12,7 +11,7 @@ import app.morphe.manager.util.PatchSelection
 import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.io.FileNotFoundException
+import java.io.File
 
 sealed class Runtime(context: Context) : KoinComponent {
     private val fs: Filesystem by inject()
@@ -20,8 +19,6 @@ sealed class Runtime(context: Context) : KoinComponent {
     protected val prefs: PreferencesManager by inject()
 
     protected val cacheDir: String = fs.tempDir.absolutePath
-    protected val aaptPath = Aapt.binary(context)?.absolutePath
-        ?: throw FileNotFoundException("Could not resolve aapt.")
     protected val frameworkPath: String =
         context.cacheDir.resolve("framework").also { it.mkdirs() }.absolutePath
 
@@ -36,6 +33,7 @@ sealed class Runtime(context: Context) : KoinComponent {
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
-        stripNativeLibs: Boolean,
+        skipUnneededSplits: Boolean,
+        onMergedApkReady: (suspend (File) -> Unit)? = null,
     )
 }

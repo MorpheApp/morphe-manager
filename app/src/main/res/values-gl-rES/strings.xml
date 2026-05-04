@@ -14,7 +14,6 @@
     <string name="android_11_bug_dialog_description">O permiso de instalación da aplicación debe concederse con antelación para evitar un erro no sistema Android 11 que afectará negativamente á experiencia do usuario</string>
     <string name="deep_link_add_source_title">Engadir fonte</string>
     <string name="deep_link_add_source_message">Desexa engadir esta fonte de parches a Morphe?</string>
-    <string name="deep_link_add_source_warning">Únicamente engada fontes de orixe fiable</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización de Morphe dispoñible</string>
     <string name="home_update_available_subtitle">Nova versión lista para instalar</string>
@@ -202,6 +201,7 @@
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_system">Sistema</string>
     <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_default">Predefinido</string>
     <!-- Settings - Advanced Tab - Updates Section -->
@@ -210,6 +210,7 @@
     <string name="notification_channel_patcher">Parcheando</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Modo Experto</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opcións de parche</string>
@@ -242,5 +243,4 @@
     <string name="import_">Importar</string>
     <string name="allow">Permitir</string>
     <string name="details">Detalles</string>
-    <string name="default_">Predefinido</string>
 </resources>

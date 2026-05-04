@@ -41,7 +41,7 @@ object KnownApps {
     const val YOUTUBE       = "com.google.android.youtube"
     const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
     const val REDDIT        = "com.reddit.frontpage"
-    const val X_TWITTER     = "com.twitter.android"
+    // const val X_TWITTER     = "com.twitter.android"
 
     // Shared Morphe brand gradient tail
     val GRADIENT_MID = Color(0xFF1E5AA8)
@@ -122,8 +122,14 @@ object KnownApps {
 }
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"
+
+const val AOSP_INSTALLER_PACKAGE        = "com.google.android.packageinstaller"
+const val AOSP_INSTALLER_PACKAGE_LEGACY = "com.android.packageinstaller"
+const val AOSP_INSTALLER_LABEL          = "Package installer"
 const val JSON_MIMETYPE = "application/json"
 const val BIN_MIMETYPE  = "application/octet-stream"
+const val TEXT_MIMETYPE = "text/plain"
+const val MPP_MIMETYPE  = "application/vnd.ms-project"
 
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
@@ -146,16 +152,10 @@ val APK_FILE_MIME_TYPES = arrayOf(
 //    "application/vnd.android.apks",
 //    "application/apks",
 )
-val APK_FILE_EXTENSIONS = setOf(
-    "apk",
-    "apkm",
-    "apks",
-    "xapk",
-    "zip"
-)
 
 val MPP_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
+    MPP_MIMETYPE,
 //    "application/x-zip-compressed"
     "*/*"
 )

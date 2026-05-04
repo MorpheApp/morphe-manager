@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
     <string name="deep_link_add_source_title">Forrás hozzáadása</string>
     <string name="deep_link_add_source_message">Hozzáadod ezt a módosításforrást a Morphe-hez?</string>
-    <string name="deep_link_add_source_warning">Csak megbízható forrást adj hozzá</string>
+    <string name="deep_link_add_source_warning">Csak megbízható forrásból adj hozzá forrásokat</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
@@ -30,8 +30,10 @@
     <string name="home_sources_are_loading">Források betöltése...</string>
     <string name="home_search_apps">Alkalmazások keresése</string>
     <string name="home_no_apps_title">Nincsenek elérhető alkalmazások</string>
-    <string name="home_no_apps_subtitle">Add patch forrását adhatja hozzá, vagy engedélyezhet egy meglévő forrást a(z) %s alatt</string>
-    <string name="home_no_apps_search_subtitle">Nincsenek egyező alkalmazások a(z) \"%1$s\" kifejezésre</string>
+    <string name="home_no_apps_subtitle">Adj hozzá egy módosításforrást, vagy kapcsolj be egyet itt: %s</string>
+    <string name="home_no_apps_search_subtitle">Nincs találat erre: „%1$s”</string>
+    <string name="home_all_apps_hidden_title">Minden alkalmazás el van rejtve</string>
+    <string name="home_all_apps_hidden_subtitle">Minden alkalmazást elrejtettél a kezdőképernyőről</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Melyik alkalmazást szeretnéd módosítani?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -53,63 +55,67 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Koffein és jó módosítások hajtják</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Módosítások forrásai</string>
+    <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
-    <string name="sources_management_prerelease_toggle">Előzetes kiadású módosítások használata</string>
-    <string name="sources_management_prerelease_toggle_description">Korai hozzáférés az új, kísérleti módosítások verzióihoz</string>
+    <string name="sources_management_prerelease_toggle">Kiadás előtti módosítások használata</string>
+    <string name="sources_management_prerelease_toggle_description">Kísérleti módosítások korai elérése</string>
     <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazásverziók használata</string>
     <string name="sources_management_experimental_versions_toggle_description">Kísérleti alkalmazások módosítása, ha elérhetők</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Megjelenítendő név</string>
-    <string name="sources_dialog_rename">Patchforrás átnevezése</string>
-    <string name="sources_dialog_duplicate_name_error">Ezzel a névvel már létezik patchforrás</string>
-    <string name="sources_dialog_missing_error">Nem sikerült frissíteni ezt a patchforrást</string>
+    <string name="sources_dialog_rename">Módosításforrás átnevezése</string>
+    <string name="sources_dialog_duplicate_name_error">Ezzel a névvel már létezik módosításforrás</string>
+    <string name="sources_dialog_missing_error">A módosításforrás frissítése sikertelen</string>
     <string name="sources_dialog_view_any_version">Bármelyik verzió</string>
     <string name="sources_dialog_view_any_package">Bármelyik csomag</string>
-    <string name="sources_dialog_add_source">Patchforrás hozzáadása</string>
+    <string name="sources_dialog_add_source">Módosításforrás hozzáadása</string>
     <string name="sources_dialog_delete_confirm_message">Törlöd a forrást: \"%s\"? Ez nem visszavonható</string>
     <string name="sources_dialog_remote">Távoli</string>
     <string name="sources_dialog_remote_url">Forrás URL</string>
     <string name="sources_dialog_remote_url_formats_title">Példák:</string>
     <string name="sources_dialog_local">Helyi</string>
-    <string name="sources_dialog_local_file">Válaszd ki a patchforrás fájlját</string>
-    <string name="sources_dialog_local_file_description">Válassz ki egy .mpp patchforrásfájlt a tárhelyről</string>
+    <string name="sources_dialog_local_file">Forrásfájl kiválasztása</string>
+    <string name="sources_dialog_local_file_description">Válassz ki egy .mpp módosításforrást a tárhelyről</string>
     <string name="sources_dialog_local_change_file">Fájl megváltoztatása</string>
     <string name="sources_dialog_preinstalled">Előretelepített</string>
-    <string name="sources_update_success">A frissítés sikeres</string>
+    <string name="sources_update_success">Sikeres frissítés</string>
     <string name="sources_update_unavailable">Nincs elérhető frissítés</string>
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
     <string name="sources_download_fail_named">A \'%1$s\' letöltése sikertelen: %2$s</string>
-    <string name="sources_download_endpoint_not_found">Nem sikerült frissíteni ezt: \'%1$s\' - A módosítás JSON fájlja nem található a beállított URL-n</string>
+    <string name="sources_download_endpoint_not_found">Nem sikerült frissíteni: „%1$s”. A módosításokat tartalmazó JSON-fájl nem található a megadott URL-címen.</string>
     <string name="sources_patch_expert_badge">Szakértő</string>
-    <string name="sources_patch_expert_badge_tooltip">Engedélyezze a szakértői módot a Beállításokban a javítás manuális hozzáadásához</string>
+    <string name="sources_patch_expert_badge_tooltip">A módosítás manuális hozzáadásához engedélyezd a szakértői módot a beállításokban.</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Szükséged van segítségre az eredeti, módosítások nélküli APK megtalálásához?</string>
-    <string name="home_apk_availability_dialog_simple">A(z) &lt;b&gt;%s&lt;/b&gt; módosításához szükséges egy módosítás nélküli APK, amely verziója:</string>
-    <string name="home_apk_availability_dialog_expert">A(z) &lt;b&gt;%s&lt;/b&gt; módosításához szükséges egy módosítás nélküli APK, amelyek verziói:</string>
+    <string name="home_apk_availability_dialog_title">Segítségre van szükséged az eredeti, módosítatlan APK megtalálásához?</string>
+    <string name="home_apk_availability_dialog_simple">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő módosítatlan APK-verzióra van szükséged:</string>
+    <string name="home_apk_availability_dialog_expert">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő módosítatlan APK-verziók egyikére van szükséged:</string>
     <string name="home_apk_availability_recommended_label">Javasolt</string>
     <string name="home_apk_availability_unpatched_label">Nem módosított</string>
+    <string name="home_apk_availability_incompatible_label">Nem kompatibilis</string>
     <string name="home_apk_availability_yes">Igen, segíts megtalálni az APK-t</string>
     <string name="home_apk_availability_no">Nem, már megvan az APK</string>
-    <string name="home_apk_use_saved_with_version">Használjon mentett APK-t (v%s)</string>
-    <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választani az APK fájlt.</string>
+    <string name="home_apk_use_saved_with_version">Mentett APK használata (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választanod az APK-fájlt.</string>
+    <string name="home_version_requires_android">Android %1$s+ verziót igényel</string>
+    <string name="home_apk_no_compatible_versions_title">Nem támogatott ezen az eszközen</string>
+    <string name="home_apk_no_compatible_versions_message">A(z) &lt;b&gt;%1$s&lt;/b&gt; nem rendelkezik az Android %2$d (API %3$d) verziójával kompatibilis verziókkal. A megadott összes verzió magasabb Android verziót igényel</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">Az eredeti APK fájl letöltése</string>
+    <string name="home_download_instructions_title">Az eredeti APK letöltése</string>
     <string name="home_download_instructions_steps_title">Útmutató:</string>
-    <string name="home_download_instructions_step1">Nyomd meg a(z) \'%1$s\' gombot alul</string>
-    <string name="home_download_instructions_step2_part1">Görgess lefelé a weblapon, és nyomd meg a</string>
-    <string name="home_download_instructions_download_button_toast">A weblapon nyomd meg a letöltést, és ne itt 😊</string>
+    <string name="home_download_instructions_step1">Koppints az alábbi „%1$s” gombra</string>
+    <string name="home_download_instructions_step2_part1">Görgess le a weboldalon, majd nyomd meg:</string>
+    <string name="home_download_instructions_download_button_toast">​A weboldalon nyomj a letöltésre, ne itt 😊</string>
     <string name="home_download_instructions_step3">Várd meg, amíg a letöltés befejeződik, és &lt;b&gt;ne telepítsd&lt;/b&gt; az APK-t</string>
     <string name="home_download_instructions_step3_mount">Várd meg, amíg a letöltés befejeződik, majd &lt;b&gt;telepítsd az APK-t&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">​A letöltés után térj vissza a Morphe alkalmazásba.</string>
+    <string name="home_download_instructions_step4">A letöltés után térj vissza a Morphe alkalmazásba</string>
     <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után térj vissza Morphe alkalmazásba</string>
-    <string name="home_download_instructions_continue">Ugrás az APKMirror.com oldalra</string>
+    <string name="home_download_instructions_continue">Tovább az APKMirror.com oldalra</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Válaszd ki a letöltött APK-t</string>
     <string name="home_file_picker_prompt_description">Válaszd ki a most letöltött &lt;b&gt;%1$s&lt;/b&gt; APK fájlt</string>
-    <string name="home_file_picker_prompt_open_apk">APK fájl megnyitása</string>
+    <string name="home_file_picker_prompt_open_apk">APK megnyitása</string>
     <string name="home_recommended_version">Ajánlott verzió</string>
     <string name="home_selected_version">Kiválasztott verzió</string>
     <string name="home_select_apk_title">APK kiválasztása</string>
@@ -162,6 +168,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_low_disk_space_dialog_title">Kevés a szabad tárhely</string>
     <string name="home_low_disk_space_dialog_message">Csak %1$.2f GB szabad tárhely áll rendelkezésre. A javítás helyes működéséhez legalább %2$.2f GB szabad helyre van szükség</string>
     <string name="home_low_disk_space_dialog_warning">A folytatás \"fájl nem található\" hibához vagy sérült APK-hoz vezethet</string>
+    <string name="home_simple_bundle_select_title">Javítási forrás kiválasztása</string>
     <!-- Patch Options -->
     <string name="custom_color">Egyedi szín</string>
     <string name="hex_color">Hex szín</string>
@@ -221,6 +228,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_app_info_patch_update_available_description">Egy újabb módosításverzió elérhető. Módosítsa újra az alkalmazását, hogy megkapja a legújabb fejlesztéseket és javításokat</string>
     <string name="home_app_info_app_deleted_warning">Az alkalmazást eltávolították</string>
     <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a Morphe-n kívül törölték. Módosítsa újra a funkcionalitás helyreállításához</string>
+    <string name="home_app_info_apk_size">APK méret</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a módosítás előtt</string>
     <string name="root_gmscore_excluded">A GmsCore támogatási patch nem elérhető root módban</string>
@@ -308,16 +316,13 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="failed_to_execute_patch">Nem sikerült alkalmazni: %s</string>
     <string name="patched_app_saved_toast">A módosított alkalmazás mentve későbbre</string>
     <string name="patched_app_save_failed_toast">A módosított alkalmazás mentése sikertelen</string>
-    <string name="download_apk">APK fájl letöltése</string>
     <string name="plugin_activity_dialog_body">A bővítmény használatához felhasználói beavatkozásra van szükség</string>
     <string name="patcher_process_exit_message">A módosítási folyamat %1$s kóddal kilépett</string>
     <string name="install_app_success">Sikeresen telepítve</string>
     <string name="install_app_fail">Nem sikerült telepíteni az alkalmazást: %s</string>
-    <string name="install_timeout_message">A telepítés nem fejeződött be. Ellenőrizze a rendszertelepítő párbeszédpaneljét, majd próbálkozzon újra</string>
     <string name="save_apk_success">APK mentve</string>
     <string name="saved_app_export_failed">Nem sikerült exportálni a módosított alkalmazást</string>
     <string name="saved_app_removed_toast">A módosított alkalmazás mentése eltávolítva</string>
-    <string name="saved_app_copy_removed_toast">Mentett másolat eltávolítva</string>
     <string name="saved_app_launch_unavailable">Telepítse az alkalmazást, mielőtt megnyitná</string>
     <string name="package_name">Csomagnév</string>
     <string name="failed_to_mount">Nem sikerült csatlakoztatni: %s</string>
@@ -337,6 +342,10 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="settings_appearance_background_grid">Rács</string>
     <string name="settings_appearance_background_particles">Részecskék</string>
     <string name="settings_appearance_background_none">Egyik sem</string>
+    <string name="settings_appearance_background_random">Véletlenszerű</string>
+    <string name="settings_appearance_background_random_interval_launch">Indításkor</string>
+    <string name="settings_appearance_background_random_interval_daily">Napi</string>
+    <string name="settings_appearance_background_random_interval_3days">Minden 3. napon</string>
     <string name="settings_appearance_parallax_effect">Parallax effektus</string>
     <string name="settings_appearance_parallax_effect_description">Sima háttérváltás a készülék döntésekor</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="settings_appearance_app_language_current">Jelenlegi nyelv</string>
     <string name="settings_appearance_translations_info_title">Egyes nyelvek fordításai hiányozhatnak vagy hiányosak lehetnek</string>
     <string name="settings_appearance_translations_info_text">Új nyelvek fordításához vagy a meglévő fordítások javításához látogasson el a következő oldalra: %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Kezdőképernyő</string>
+    <string name="settings_appearance_greeting_phrases">Üdvözlő mondatok</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Alkalmazásikon</string>
     <string name="settings_appearance_app_icon_default">Alapértelmezett</string>
@@ -399,8 +412,17 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="settings_advanced_expert_mode_description">Engedélyezi a Morphe komplex módosítási beállításait és a testreszabási lehetőségeket</string>
     <string name="settings_advanced_expert_mode_dialog_title">Engedélyezi a szakértői módot?</string>
     <string name="settings_advanced_expert_mode_dialog_message">A szakértői mód nagyobb ellenőrzést biztosít a módosítások alkalmazása felett, de ebben a módban a beállítások helytelen konfigurálása az alkalmazás működésképtelenségét eredményezheti</string>
-    <string name="settings_advanced_strip_unused_libs">Távolítsa el a nem használt natív könyvtárakat</string>
-    <string name="settings_advanced_strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a módosított alkalmazásokból</string>
+    <string name="settings_advanced_strip_unused_libs">Optimalizálj a készülék architektúrájához</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Hagyja ki a felosztott APK modulokat a nem támogatott CPU architektúrák, nyelvek és képernyőfelbontások számára az egyesítés során.
+Plain APK-k esetén a javítást követően eltávolítja a nem támogatott architektúrákhoz tartozó natív könyvtárakat"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bájtkód feldolgozási mód</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Szabályozza, hogy a bájtkódot hogyan dolgozzák fel a javítás során. Hatással van a javítás sebességére, a memória használatára és a kimeneti APK méretére</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Gyors (Ajánlott)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Gyors</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Gyorsabb javítás és alacsonyabb memóriahasználat, nagyobb APK méret árán. Ajánlott alacsony RAM-mal vagy régebbi eszközök esetén</string>
+    <string name="settings_advanced_bytecode_mode_full">Teljes</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Lassabb javítás, a régi viselkedést tükrözi. Csak akkor használja, ha a gyors mód problémákat okoz</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Kötelező a pull request forrásokhoz</string>
@@ -510,13 +532,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_status_shizuku_unsupported">A telepített Shizuku verzió nem támogatott</string>
     <string name="installer_action_open_shizuku">Shizuku megnyitása</string>
     <string name="installer_hint_generic">A telepítés sikertelen volt. Próbálja újra, vagy váltson másik telepítőre</string>
-    <string name="installer_hint_blocked">A telepítést az Android blokkolta. Ellenőrizze a Play Protectet vagy a biztonsági beállításokat</string>
     <string name="installer_hint_conflict">Ezzel a csomagnévvel már telepítve van egy másik alkalmazás. Távolítsa el, mielőtt folytatná</string>
-    <string name="installer_hint_incompatible">Az APK nem kompatibilis ezzel az eszközzel vagy Android-verzióval</string>
-    <string name="installer_hint_invalid">Az APK érvénytelen vagy sérült</string>
-    <string name="installer_hint_storage">Nincs elegendő tárhely a telepítéshez</string>
-    <string name="installer_hint_timeout">A telepítés időtúllépés miatt megszakadt. Próbálja újra</string>
-    <string name="installer_hint_aborted">Telepítés megszakítva</string>
     <string name="installer_external_launched">%1$s megnyitása…</string>
     <string name="installer_external_timeout">%1$s nem erősítette meg a telepítést. Ellenőrizze a másik alkalmazást, és próbálja újra</string>
     <string name="installer_external_success">%1$s sikeres telepítést jelentett</string>
@@ -547,6 +563,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_import_keystore_dialog_alias_field">Felhasználónév (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Jelszó</string>
     <string name="settings_system_import_keystore_dialog_button">Importálás</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Kulcstároló formátum</string>
     <string name="settings_system_import_keystore_wrong_credentials">Hibás kulcstároló hitelesítőadatok</string>
     <string name="settings_system_import_keystore_success">Kulcstároló importálva</string>
     <string name="settings_system_import_keystore_failed">Nem sikerült importálni a kulcstárolót</string>
@@ -554,6 +571,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_export_keystore_description">Az aktuális kulcstároló exportálása</string>
     <string name="settings_system_export_keystore_unavailable">Nincs exportálható kulcstároló</string>
     <string name="settings_system_export_keystore_success">Kulcstároló sikeresen exportálva</string>
+    <string name="settings_system_export_keystore_failed">Sikertelen kulcstár export</string>
     <string name="settings_system_show_password_field">Jelszó megjelenítése</string>
     <string name="settings_system_hide_password_field">Jelszó elrejtése</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -683,7 +701,8 @@ Forrás: #%2$s</string>
     <string name="allow">Engedélyezés</string>
     <string name="details">Részletek</string>
     <string name="hide">Elrejtés</string>
-    <string name="default_">Alapértelmezett</string>
+    <string name="hidden">Rejtett</string>
+    <string name="unhide">Feloldás</string>
     <string name="logs">Naplók</string>
     <string name="sources">Forrás</string>
     <string name="installing_ellipsis">Telepítés…</string>

@@ -25,10 +25,10 @@
         <item quantity="other">%s пакетов</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Выполнить %s патч</item>
-        <item quantity="few">Выполнить %s патчи</item>
-        <item quantity="many">Выполнить %s патчей</item>
-        <item quantity="other">Выполнить %s патчей</item>
+        <item quantity="one">Выполнен %s патч</item>
+        <item quantity="few">Выполнены %s патча</item>
+        <item quantity="many">Выполнены %s патчи</item>
+        <item quantity="other">Выполнены %s патчи</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK файл</item>
@@ -53,5 +53,17 @@
         <item quantity="few">%s патчи выбрано</item>
         <item quantity="many">%s патчей выбрано</item>
         <item quantity="other">%s патчей выбрано</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Показать %s приложение</item>
+        <item quantity="few">Показать %s приложения</item>
+        <item quantity="many">Показать %s приложений</item>
+        <item quantity="other">Показать %s приложений</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s скрытое приложение</item>
+        <item quantity="few">%s скрытые приложения</item>
+        <item quantity="many">%s скрытых приложений</item>
+        <item quantity="other">%s скрытых приложений</item>
     </plurals>
 </resources>

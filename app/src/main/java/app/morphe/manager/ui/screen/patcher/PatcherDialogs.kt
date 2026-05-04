@@ -359,11 +359,10 @@ fun PatcherErrorDialog(
 
 @Composable
 private fun ErrorInfoCard(
+    modifier: Modifier = Modifier,
     label: String,
     icon: ImageVector,
     errorBadge: String? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
     MorpheCard(

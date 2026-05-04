@@ -18,7 +18,7 @@ data class SocialLink(
     val preferred: Boolean = false,
 )
 
-class AboutViewModel() : ViewModel() {
+class AboutViewModel : ViewModel() {
     companion object {
         val socials: List<SocialLink> = listOf(
             SocialLink(

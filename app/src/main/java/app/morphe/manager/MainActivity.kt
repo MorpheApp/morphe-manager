@@ -1,6 +1,8 @@
 package app.morphe.manager
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.activity.ComponentActivity
@@ -8,18 +10,13 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -39,12 +36,18 @@ import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
+import app.morphe.manager.ui.screen.shared.BackgroundType
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
+import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.UpdateNotificationManager
+import app.morphe.manager.util.hasMppExtension
+import app.morphe.manager.util.parseLocaleCode
+import app.morphe.manager.util.readLanguageFromPrefs
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -52,6 +55,26 @@ import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    /**
+     * On Android < 13, AppCompatDelegate.setApplicationLocales() is unreliable on some
+     * devices and OEMs - the locale is saved correctly but never applied on cold start.
+     * Wrap the base context manually to guarantee the correct locale is always applied.
+     */
+    override fun attachBaseContext(newBase: Context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            val storedLang = readLanguageFromPrefs(newBase)
+            val locale = parseLocaleCode(storedLang)
+            if (locale != null) {
+                val config = newBase.resources.configuration
+                config.setLocale(locale)
+                super.attachBaseContext(newBase.createConfigurationContext(config))
+                return
+            }
+        }
+        super.attachBaseContext(newBase)
+    }
+
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,6 +123,16 @@ class MainActivity : AppCompatActivity() {
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
         val data = intent?.data ?: return
+
+        // Handle .mpp file open from file manager
+        if (intent.action == Intent.ACTION_VIEW && data.scheme in listOf("file", "content")) {
+            if (data.hasMppExtension(contentResolver)) {
+                vm.pendingMppUri = data
+            }
+            // Not .mpp - don't process further regardless
+            return
+        }
+
         val isAddSource = data.scheme == "https" &&
                 data.host == "morphe.software" &&
                 data.path?.startsWith("/add-source") == true
@@ -116,18 +149,32 @@ class MainActivity : AppCompatActivity() {
 private fun MorpheManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
+    val themeViewModel: ThemeSettingsViewModel = koinViewModel()
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
+    val randomInterval by prefs.randomBackgroundInterval.getAsState()
+    val resolvedRandomBackground by themeViewModel.resolvedRandomBackground.collectAsStateWithLifecycle()
 
-    // Patcher background speed — driven by PatcherViewModel when on patcher screen.
-    // Exposed as a top-level mutable state so PatcherScreen can write into it.
-    val patcherBackgroundSpeed = androidx.compose.runtime.remember { androidx.compose.runtime.mutableFloatStateOf(1f) }
-    val patchingCompleted = androidx.compose.runtime.remember { mutableStateOf(false) }
+    // Resolve which background to show whenever RANDOM mode is active or the interval changes
+    LaunchedEffect(backgroundType, randomInterval) {
+        if (backgroundType == BackgroundType.RANDOM) {
+            themeViewModel.resolveRandomBackground(randomInterval)
+        }
+    }
+
+    // Patcher background speed - driven by PatcherViewModel when on patcher screen.
+    // Exposed as top-level mutable state so PatcherScreen can write into it
+    val patcherBackgroundSpeed = remember { mutableFloatStateOf(1f) }
+    val patchingCompleted = remember { mutableStateOf(false) }
 
     // HomeViewModel must be scoped to the Activity, not to a NavBackStackEntry
     val homeViewModel: HomeViewModel = koinViewModel(
         viewModelStoreOwner = LocalActivity.current as ComponentActivity
     )
+
+    // Shared state between HomeScreen and PatcherScreen for mount install mode.
+    // Set by HomeViewModel.resolvePrePatchInstallerChoice()
+    val usingMountInstallState = remember { mutableStateOf(false) }
 
     // Box with background at the highest level
     Box(
@@ -138,52 +185,21 @@ private fun MorpheManager(vm: MainViewModel) {
         // Show animated background
         AnimatedBackground(
             type = backgroundType,
+            resolvedType = resolvedRandomBackground,
             enableParallax = enableParallax,
-            speedMultiplier = patcherBackgroundSpeed.floatValue,
-            patchingCompleted = patchingCompleted.value
+            speedMultiplier = { patcherBackgroundSpeed.floatValue },
+            patchingCompleted = { patchingCompleted.value }
         )
 
         // All content on top of background
         NavHost(
             navController = navController,
             startDestination = HomeScreen,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { it },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(
-                    animationSpec = tween(400, delayMillis = 100)
-                )
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -it / 3 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(
-                    animationSpec = tween(300)
-                )
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -it / 3 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(
-                    animationSpec = tween(400, delayMillis = 100)
-                )
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { it },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(
-                    animationSpec = tween(300)
-                )
-            },
+            enterTransition = { MorpheAnimations.screenEnter },
+            exitTransition = { MorpheAnimations.screenExit },
+            popEnterTransition = { MorpheAnimations.screenEnter },
+            popExitTransition = { MorpheAnimations.screenExit }
         ) {
-            // Shared state between HomeScreen and PatcherScreen for mount install mode.
-            // Set by HomeViewModel.resolvePrePatchInstallerChoice()
-            val usingMountInstallState = mutableStateOf(false)
-
             composable<HomeScreen> { entry ->
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
@@ -204,6 +220,14 @@ private fun MorpheManager(vm: MainViewModel) {
                     vm.pendingDeepLinkSource?.let { bundle ->
                         homeViewModel.handleDeepLinkAddSource(bundle.url, bundle.name)
                         vm.pendingDeepLinkSource = null
+                    }
+                }
+
+                // Handle .mpp file opened from file manager
+                LaunchedEffect(vm.pendingMppUri) {
+                    vm.pendingMppUri?.let { uri ->
+                        homeViewModel.setPendingMpp(uri)
+                        vm.pendingMppUri = null
                     }
                 }
 

@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Δεν υπάρχουν διαθέσιμες εφαρμογές</string>
     <string name="home_no_apps_subtitle">Προσθέστε μια πηγή τροποποίησης ή ενεργοποιήστε ήδη μια υπάρχουσα στο %s</string>
     <string name="home_no_apps_search_subtitle">Καμία εφαρμογή δεν ταιριάζει με το \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Όλες οι εφαρμογές είναι κρυφές</string>
+    <string name="home_all_apps_hidden_subtitle">Έχετε κρύψει όλες τις εφαρμογές από την αρχική οθόνη</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ποια εφαρμογή θέλετε να τροποποιήσετε;</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Για την τροποποίηση του &lt;b&gt;%s&lt;/b&gt;, χρειάζεστε τις μη τροποποιημένες εκδόσεις του APK:</string>
     <string name="home_apk_availability_recommended_label">Προτεινόμενη</string>
     <string name="home_apk_availability_unpatched_label">Μη τροποποιημένο</string>
+    <string name="home_apk_availability_incompatible_label">Ασύμβατο</string>
     <string name="home_apk_availability_yes">Ναι, βοήθησέ με να βρω ένα APK</string>
     <string name="home_apk_availability_no">Όχι, ήδη έχω ένα APK</string>
     <string name="home_apk_use_saved_with_version">Χρήση αποθηκευμένου APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Δεν υπάρχει αποθηκευμένο APK. Η τροποποίηση κώδικα θα απαιτήσει την επιλογή του αρχείου APK ξανά</string>
+    <string name="home_version_requires_android">Απαιτεί Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Δεν υποστηρίζεται σε αυτή τη συσκευή</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; δεν έχει υποστηριζόμενες εκδόσεις για το Android %2$d (API %3$d). Όλες οι δηλωμένες εκδόσεις απαιτούν μια υψηλότερη έκδοση Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Κατεβάστε το πρωτότυπο APK</string>
     <string name="home_download_instructions_steps_title">Οδηγίες:</string>
@@ -162,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">Λιγοστός εναπομείνων αποθηκευτικός χώρος</string>
     <string name="home_low_disk_space_dialog_message">Έχει απομείνει μόνο %1$.2f GB ελεύθερος χώρος αποθήκευσης. Η τροποποίηση απαιτεί τουλάχιστον %2$.2f GB ελεύθερου χώρου για να λειτουργήσει σωστά</string>
     <string name="home_low_disk_space_dialog_warning">Η συνέχιση μπορεί να οδηγήσει σε σφάλμα \"αρχείο δε βρέθηκε\" ή σε διεφθαρμένη APK</string>
+    <string name="home_simple_bundle_select_title">Επιλογή αρχείου πηγής τροποποιήσεων</string>
     <!-- Patch Options -->
     <string name="custom_color">Προσαρμοσμένο χρώμα</string>
     <string name="hex_color">Δεκαεξαδικό χρώμα</string>
@@ -221,6 +228,7 @@
     <string name="home_app_info_patch_update_available_description">Μια καινούρια έκδοση τροποποιήσεων είναι διαθέσιμη. Τροποποιήσετε ξανά την εφαρμογή για να λάβετε τις τελευταίες βελτιώσεις και διορθώσεις</string>
     <string name="home_app_info_app_deleted_warning">Η εφαρμογή έχει απεγκατασταθεί</string>
     <string name="home_app_info_app_deleted_description">Η εφαρμογή αυτή απεγκαταστάθηκε εκτός του Morphe. Τροποποιήστε την ξανά για την επαναφορά λειτουργικότητά της</string>
+    <string name="home_app_info_apk_size">Μέγεθος APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Η λειτουργία root απαιτεί το πρωτότυπο APK να είναι εγκατεστημένο στη συσκευή πριν τροποποιηθεί</string>
     <string name="root_gmscore_excluded">Η υποστήριξη της τροποποίησης GmsCore εξαιρείται στη λειτουργία root</string>
@@ -308,16 +316,13 @@
     <string name="failed_to_execute_patch">Αποτυχία εφαρμογής %s</string>
     <string name="patched_app_saved_toast">Η τροποποιημένη εφαρμογή αποθηκεύτηκε για αργότερα</string>
     <string name="patched_app_save_failed_toast">Αποτυχία αποθήκευσης της τροποποιημένης εφαρμογής</string>
-    <string name="download_apk">Λήψη αρχείου APK</string>
     <string name="plugin_activity_dialog_body">Απαιτείται αλληλεπίδραση χρήστη για να συνεχίσετε με αυτό το πρόσθετο.</string>
     <string name="patcher_process_exit_message">Η διαδικασία του τροποποιητή σταμάτησε με κωδικό %1$s</string>
     <string name="install_app_success">Επιτυχής εγκατάσταση</string>
     <string name="install_app_fail">Αποτυχία εγκατάστασης εφαρμογής: %s</string>
-    <string name="install_timeout_message">Η εγκατάσταση δεν ολοκληρώθηκε. Ελέγξτε το παράθυρο διαλόγου του εγκαταστάτη συστήματος και προσπαθήστε ξανά</string>
     <string name="save_apk_success">Το APK αποθηκεύτηκε</string>
     <string name="saved_app_export_failed">Η εξαγωγή της τροποποιημένης εφαρμογής απέτυχε</string>
     <string name="saved_app_removed_toast">Η αποθηκευμένη τροποποιημένη εφαρμογή αφαιρέθηκε</string>
-    <string name="saved_app_copy_removed_toast">Το αποθηκευμένο αντίγραφο αφαιρέθηκε</string>
     <string name="saved_app_launch_unavailable">Εγκαταστήστε την εφαρμογή πριν την ανοίξετε</string>
     <string name="package_name">Όνομα πακέτου</string>
     <string name="failed_to_mount">Αδυναμία προσάρτησης: %s</string>
@@ -337,6 +342,10 @@
     <string name="settings_appearance_background_grid">Στίγματα</string>
     <string name="settings_appearance_background_particles">Σωματίδια</string>
     <string name="settings_appearance_background_none">Κανένα</string>
+    <string name="settings_appearance_background_random">Τυχαίο</string>
+    <string name="settings_appearance_background_random_interval_launch">Κατά την εκκίνηση</string>
+    <string name="settings_appearance_background_random_interval_daily">Καθημερινά</string>
+    <string name="settings_appearance_background_random_interval_3days">Κάθε 3 ημέρες</string>
     <string name="settings_appearance_parallax_effect">Εφέ παράλλαξης</string>
     <string name="settings_appearance_parallax_effect_description">Ομαλή μετατόπιση φόντου όταν αλλάξει κλίση η συσκευή</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@
     <string name="settings_appearance_app_language_current">Τρέχουσα γλώσσα</string>
     <string name="settings_appearance_translations_info_title">Οι μεταφράσεις για ορισμένες γλώσσες μπορεί να λείπουν ή να μην είναι ολοκληρωμένες</string>
     <string name="settings_appearance_translations_info_text">Για να μεταφράσετε νέες γλώσσες ή να βελτιώσετε τις υπάρχουσες μεταφράσεις, επισκεφτείτε %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Αρχική οθόνη</string>
+    <string name="settings_appearance_greeting_phrases">Φράσεις υποδοχής</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Εικονίδιο εφαρμογής</string>
     <string name="settings_appearance_app_icon_default">Προεπιλεγμένο</string>
@@ -399,8 +412,17 @@
     <string name="settings_advanced_expert_mode_description">Ενεργοποιήστε περίπλοκες ρυθμίσεις τροποποιήσεων του Morphe και προσαρμοσμένες επιλογές</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ενεργοποίηση της λειτουργίας εξειδικευμένου χρήστη;</string>
     <string name="settings_advanced_expert_mode_dialog_message">Η λειτουργία εξειδικευμένου χρήστη δίνει περισσότερο έλεγχο για την εφαρμογή των τροποποιήσεων, αλλά η λάθος ρύθμιση στη λειτουργία αυτή μπορεί να προκαλέσει τη δυσλειτουργικότητα της εφαρμογής</string>
-    <string name="settings_advanced_strip_unused_libs">Εκκαθάριση μη χρησιμοποιούμενων εγγενών βιβλιοθηκών</string>
-    <string name="settings_advanced_strip_unused_libs_description">Διαγραφή των εγγενών βιβλιοθηκών για ανυποστήρικτες αρχιτεκτονικές επεξεργαστών από τροποποιημένες εφαρμογές</string>
+    <string name="settings_advanced_strip_unused_libs">Βελτιστοποίηση για αρχιτεκτονική συσκευής</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Παράλειψη split APK modules για μη υποστηριζόμενες αρχιτεκτονικές CPU, τοποθεσίες και πυκνότητες οθόνης κατά τη συγχώνευση.
+Για απλά APK, αφαιρεί τις αρχικές βιβλιοθήκες για μη υποστηριζόμενες αρχιτεκτονικές μετά την επιδιόρθωση"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Λειτουργία επεξεργασίας bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Ελέγχει τον τρόπο επεξεργασίας του bytecode κατά τη διάρκεια της επιδιόρθωσης. Επηρεάζει την ταχύτητα επιδιόρθωσης, τη χρήση μνήμης και το μέγεθος του APK εξόδου</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Γρήγορος (Συνιστάται)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Γρήγορα</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Ταχύτερη επιδιόρθωση και χαμηλότερη χρήση μνήμης, με αντάλλαγμα ένα μεγαλύτερο APK. Συνιστάται για συσκευές με χαμηλή μνήμη RAM ή παλαιότερες</string>
+    <string name="settings_advanced_bytecode_mode_full">Πλήρες</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Αργότερη επιδιόρθωση, αναπαράγει τη συμπεριφορά legacy. Χρησιμοποιήστε το μόνο εάν ο γρήγορος τρόπος προκαλεί προβλήματα</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Απαιτείται για πηγές pull request</string>
@@ -510,13 +532,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">Η εγκατεστημένη έκδοση του Shizuku δεν υποστηρίζεται.</string>
     <string name="installer_action_open_shizuku">Άνοιγμα Shizuku</string>
     <string name="installer_hint_generic">Η εγκατάσταση απέτυχε. Προσπαθήστε ξανά ή χρησιμοποιήστε διαφορετικό εγκαταστάτη.</string>
-    <string name="installer_hint_blocked">Η εγκατάσταση αποκλείστηκε από το Android. Ελέγξτε το Play Protect ή τις ρυθμίσεις ασφαλείας.</string>
     <string name="installer_hint_conflict">Άλλη εφαρμογή με το ίδιο όνομα πακέτου είναι ήδη εγκατεστημένη. Απεγκαταστήσετε την πριν συνεχίσετε.</string>
-    <string name="installer_hint_incompatible">Το APK δεν είναι συμβατό με αυτήν τη συσκευή ή έκδοση Android.</string>
-    <string name="installer_hint_invalid">Το APK είναι λανθασμένο ή διεφθαρμένο.</string>
-    <string name="installer_hint_storage">Δεν υπάρχει αρκετός χώρος αποθήκευσης για την εγκατάσταση.</string>
-    <string name="installer_hint_timeout">Η εγκατάσταση σταμάτησε λόγω λήξης χρονικού ορίου. Προσπαθήστε ξανά.</string>
-    <string name="installer_hint_aborted">Η εγκατάσταση ακυρώθηκε.</string>
     <string name="installer_external_launched">Άνοιγμα του %1$s…</string>
     <string name="installer_external_timeout">%1$s δεν επιβεβαίωσε την εγκατάσταση. Ελέγξτε την άλλη εφαρμογή και προσπαθήστε ξανά.</string>
     <string name="installer_external_success">%1$s αναφέρει επιτυχή εγκατάσταση.</string>
@@ -547,6 +563,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">Όνομα χρήστη(Ψευδώνυμο)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Κωδικός</string>
     <string name="settings_system_import_keystore_dialog_button">Εισαγωγή</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Μορφή καταστήματος κλειδιών</string>
     <string name="settings_system_import_keystore_wrong_credentials">Λανθασμένα διαπιστευτήρια αποθήκης κλειδιών</string>
     <string name="settings_system_import_keystore_success">Επιτυχής εισαγωγή αποθήκης κλειδιών </string>
     <string name="settings_system_import_keystore_failed">Αποτυχία εισαγωγής αποθήκης κλειδιών</string>
@@ -554,6 +571,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Εξαγωγή τρέχοντος αποθήκης κλειδιών</string>
     <string name="settings_system_export_keystore_unavailable">Δεν υπάρχει διαθέσιμη αποθήκη κλειδιών για εξαγωγή</string>
     <string name="settings_system_export_keystore_success">Επιτυχής εξαγωγή της αποθήκης κλειδιών</string>
+    <string name="settings_system_export_keystore_failed">Αποτυχία εξαγωγής αποθήκης κλειδιών</string>
     <string name="settings_system_show_password_field">Εμφάνιση κωδικού</string>
     <string name="settings_system_hide_password_field">Απόκρυψη κωδικού</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ morphe_header_custom_dark.png
     <string name="allow">Επιτρέψτε</string>
     <string name="details">Λεπτομέρειες</string>
     <string name="hide">Απόκρυψη</string>
-    <string name="default_">Προεπιλεγμένο</string>
+    <string name="hidden">Κρυφό</string>
+    <string name="unhide">Εμφάνιση</string>
     <string name="logs">Εγγραφές</string>
     <string name="sources">Πηγές</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>

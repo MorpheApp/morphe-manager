@@ -36,4 +36,12 @@
         <item quantity="one">%s টি প্যাচ নির্বাচন করা হয়েছে</item>
         <item quantity="other">%s টি প্যাচ নির্বাচন করা হয়েছে</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s অ্যাপ্লিকেশন দেখান</item>
+        <item quantity="other">%s অ্যাপ্লিকেশনগুলি দেখান</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s লুকানো অ্যাপ্লিকেশন</item>
+        <item quantity="other">%s লুকানো অ্যাপ্লিকেশনগুলি</item>
+    </plurals>
 </resources>

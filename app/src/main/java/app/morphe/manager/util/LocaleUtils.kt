@@ -1,8 +1,33 @@
 package app.morphe.manager.util
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.core.os.LocaleListCompat
 import java.util.Locale
+
+// SharedPreferences used as a side-channel for the app language so that
+// attachBaseContext (Application + Activity) can read it without creating a
+// duplicate DataStore instance (DataStore enforces a single active instance per file)
+private const val LOCALE_PREFS_NAME = "morphe_locale"
+private const val LOCALE_PREF_KEY = "app_language"
+
+/**
+ * Persist [code] to SharedPreferences so it is readable from attachBaseContext
+ * before the Koin DataStore singleton is available.
+ */
+fun saveLanguageToPrefs(context: Context, code: String) {
+    context.getSharedPreferences(LOCALE_PREFS_NAME, Context.MODE_PRIVATE)
+        .edit { putString(LOCALE_PREF_KEY, code) }
+}
+
+/**
+ * Read the stored language code from SharedPreferences.
+ * Returns `"system"` if nothing has been saved yet.
+ */
+fun readLanguageFromPrefs(context: Context): String =
+    context.getSharedPreferences(LOCALE_PREFS_NAME, Context.MODE_PRIVATE)
+        .getString(LOCALE_PREF_KEY, null) ?: "system"
 
 /**
  * Parse a BCP 47 locale code into a [Locale].
@@ -21,36 +46,6 @@ fun parseLocaleCode(code: String): Locale? {
         Locale.forLanguageTag("${parts[0]}-${parts[1]}")
     } else {
         Locale.forLanguageTag(normalized)
-    }
-}
-
-/**
- * Convert a legacy Android resource locale code to BCP 47 format.
- *
- * Examples:
- *  - `"uk-rUA"` → `"uk-UA"`
- *  - `"in-rID"` → `"id-ID"`
- *  - `"iw-rIL"` → `"he-IL"`
- *  - `"uk-UA"`  → `"uk-UA"` (already BCP 47 — no change)
- *  - `"system"` → `"system"`
- */
-fun migrateLegacyLocaleCode(code: String): String {
-    if (code.isBlank() || code == "system") return code
-
-    // Legacy Android resource format: "uk-rUA" → "uk-UA"
-    val normalized = if (code.contains("-r")) {
-        code.replace("-r", "-")
-    } else {
-        code
-    }
-
-    // Legacy language codes: in → id, iw → he
-    return when {
-        normalized.startsWith("in-") -> normalized.replaceFirst("in-", "id-")
-        normalized.startsWith("iw-") -> normalized.replaceFirst("iw-", "he-")
-        normalized == "in" -> "id"
-        normalized == "iw" -> "he"
-        else -> normalized
     }
 }
 

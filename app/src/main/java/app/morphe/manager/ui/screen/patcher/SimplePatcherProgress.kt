@@ -248,8 +248,8 @@ private fun ProgressDetailsSection(
         // Long step warning
         AnimatedVisibility(
             visible = showLongStepWarning,
-            enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-            exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+            enter = MorpheAnimations.expandFadeEnter,
+            exit = MorpheAnimations.shrinkFadeExit
         ) {
             InfoBadge(
                 text = stringResource(R.string.patcher_long_step_warning),

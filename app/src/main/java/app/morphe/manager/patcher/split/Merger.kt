@@ -20,7 +20,7 @@ import java.nio.charset.CoderMalfunctionError
 import java.nio.file.Path
 import java.util.Locale
 
-const val TAG = "APKEditor"
+const val TAG = "Morphe APKEditor"
 
 private class ApkEditorLogger(
     private val onProgress: ((String) -> Unit)? = null

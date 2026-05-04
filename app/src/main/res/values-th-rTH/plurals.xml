@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="other">%s ปัทช์</item>
+        <item quantity="other">%s แพตซ์</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="other">%s ตัวเลือกปัทช์</item>
+        <item quantity="other">%s ตัวเลือกแพตซ์</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="other">%s แหล่งข้อมูล</item>
+        <item quantity="other">%s แหล่งที่มา</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="other">%s แพ็คเกจ</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">ดำเนินการ %s แพตช์</item>
+        <item quantity="other">ดำเนินการแพตช์ %s รายการแล้ว</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s ไฟล์ APK</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="other">ถอด %s แพตช์เก่าไปจากการเลือกที่ถูกบันทึกไว้</item>
+        <item quantity="other">ลบ %s แพตช์เก่าไปจากตัวเลือกที่ถูกบันทึกไว้</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="other">%s ที่อยู่ที่ติดตั้งแล้ว</item>
+        <item quantity="other">%s ที่มาที่ติดตั้งแล้ว</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="other">%s แพตช์ที่ถูกเลือก</item>
+        <item quantity="other">%s แพตช์ถูกเลือก</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="other">แสดงแอป %s</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="other">แอปที่ซ่อนอยู่ %s</item>
     </plurals>
 </resources>

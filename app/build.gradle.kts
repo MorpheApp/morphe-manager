@@ -62,11 +62,6 @@ dependencies {
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
 
-    // Exclude xmlpull as it's included in Android already
-    configurations.configureEach {
-        exclude(group = "xmlpull", module = "xmlpull")
-    }
-
     implementation(libs.androidx.documentfile)
 
     // Native processes
@@ -155,6 +150,7 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix = ".debug"
             buildConfigField("long", "BUILD_ID", "${Random.nextLong()}L")
         }
 
@@ -218,7 +214,6 @@ android {
         )
 
         jniLibs {
-            excludes += "/lib/x86/*.so"
             useLegacyPackaging = true
         }
     }
@@ -258,6 +253,7 @@ kotlin {
         freeCompilerArgs.addAll(
             "-Xexplicit-backing-fields",
             "-Xcontext-parameters",
+            "-opt-in=kotlin.time.ExperimentalTime"
         )
     }
 }

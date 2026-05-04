@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%s záplat</item>
-        <item quantity="few">%s záplat</item>
+        <item quantity="one">%s záplata</item>
+        <item quantity="few">%s záplaty</item>
         <item quantity="many">%s záplat</item>
         <item quantity="other">%s záplat</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s nastavení záplaty</item>
-        <item quantity="few">%s nastavení záplaty</item>
-        <item quantity="many">%s nastavení záplaty</item>
-        <item quantity="other">%s nastavení záplaty</item>
+        <item quantity="one">%s možnost záplaty</item>
+        <item quantity="few">%s možnosti záplaty</item>
+        <item quantity="many">%s možností záplaty</item>
+        <item quantity="other">%s možností záplaty</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%s zdroj záplaty</item>
-        <item quantity="few">%s zdroje záplaty</item>
-        <item quantity="many">%s zdroje záplaty</item>
-        <item quantity="other">%s zdrojů záplaty</item>
+        <item quantity="one">%s zdroj</item>
+        <item quantity="few">%s zdroje</item>
+        <item quantity="many">%s zdrojů</item>
+        <item quantity="other">%s zdrojů</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="one">%s balíček</item>
@@ -25,10 +25,10 @@
         <item quantity="other">%s balíčků</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Vykonat %s záplatu</item>
-        <item quantity="few">Vykonat %s záplaty</item>
-        <item quantity="many">Vykonat %s záplat</item>
-        <item quantity="other">Vykonat %s opatření</item>
+        <item quantity="one">Aplikována %s záplata</item>
+        <item quantity="few">Aplikovány %s záplaty</item>
+        <item quantity="many">Aplikováno %s záplat</item>
+        <item quantity="other">Aplikováno %s záplat</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK soubor</item>
@@ -49,9 +49,21 @@
         <item quantity="other">%s zdrojů nainstalováno</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s záplat vybráno</item>
-        <item quantity="few">%s záplat vybráno</item>
+        <item quantity="one">%s záplata vybrána</item>
+        <item quantity="few">%s záplaty vybrány</item>
         <item quantity="many">%s záplat vybráno</item>
         <item quantity="other">%s záplat vybráno</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Zobrazit %s aplikaci</item>
+        <item quantity="few">Zobrazit %s aplikace</item>
+        <item quantity="many">Zobrazit %s aplikací</item>
+        <item quantity="other">Zobrazit %s aplikací</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s skrytá aplikace</item>
+        <item quantity="few">%s skryté aplikace</item>
+        <item quantity="many">%s skrytých aplikací</item>
+        <item quantity="other">%s skrytých aplikací</item>
     </plurals>
 </resources>

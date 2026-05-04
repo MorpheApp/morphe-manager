@@ -17,8 +17,8 @@
         <item quantity="other">%s पैकेज</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">अनुप्रयोग %s पटच को चलाएं</item>
-        <item quantity="other">अनुप्रयोग %s पटच को चलाएं</item>
+        <item quantity="one">%s पैच निष्पादित किया गया</item>
+        <item quantity="other">%s पैच निष्पादित किए गए</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s एपीके फाइल</item>
@@ -35,5 +35,13 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%s पटच चुना गया</item>
         <item quantity="other">%s पटच चुने गए</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s ऐप दिखाएं</item>
+        <item quantity="other">%s ऐप्स दिखाएं</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s छिपा ऐप</item>
+        <item quantity="other">%s छिपे हुए ऐप</item>
     </plurals>
 </resources>

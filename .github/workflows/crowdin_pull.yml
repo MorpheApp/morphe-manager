@@ -49,6 +49,9 @@ jobs:
           fetch-depth: 0
           clean: true
 
+      - name: Cache Gradle
+        uses: burrunan/gradle-cache-action@v3
+
       # Step 2: Compile Android app to check string resources
       - name: Compile Android app to check resources
         env:

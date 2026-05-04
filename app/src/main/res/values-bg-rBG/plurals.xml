@@ -17,8 +17,8 @@
         <item quantity="other">%s пакети</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Приложи %s пач</item>
-        <item quantity="other">Приложи %s пачове</item>
+        <item quantity="one">Изпълнен %s пач</item>
+        <item quantity="other">Изпълнени %s пачове</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK файл</item>
@@ -35,5 +35,13 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%s избран пач</item>
         <item quantity="other">%s избрани пачове</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Покажи %s приложение</item>
+        <item quantity="other">Покажи %s приложения</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s скрито приложение</item>
+        <item quantity="other">%s скрити приложения</item>
     </plurals>
 </resources>

@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna</string>
     <string name="deep_link_add_source_title">Tambah sumber</string>
     <string name="deep_link_add_source_message">Apakah Anda ingin menambahkan sumber tambalan ini ke Morphe?</string>
-    <string name="deep_link_add_source_warning">Hanya tambahkan sumber dari sumber-sumber yang Anda percayai</string>
+    <string name="deep_link_add_source_warning">Hanya tambahkan sumber yang Anda percayai</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Pembaruan Morphe tersedia</string>
     <string name="home_update_available_subtitle">Versi baru siap dipasang</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Tidak ada aplikasi yang tersedia</string>
     <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau aktifkan yang sudah ada di %s</string>
     <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Semua aplikasi disembunyikan</string>
+    <string name="home_all_apps_hidden_subtitle">Anda telah menyembunyikan semua aplikasi dari layar utama</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang ingin Anda tambal?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Untuk menambal &lt;b&gt;%s&lt;/b&gt;, Anda membutuhkan APK yang belum ditambal dengan versi:</string>
     <string name="home_apk_availability_recommended_label">Direkomendasikan</string>
     <string name="home_apk_availability_unpatched_label">Tidak ditambal</string>
+    <string name="home_apk_availability_incompatible_label">Tidak kompatibel</string>
     <string name="home_apk_availability_yes">Ya, bantu saya mencari APK</string>
     <string name="home_apk_availability_no">Tidak, saya sudah memiliki APK</string>
     <string name="home_apk_use_saved_with_version">Gunakan APK yang disimpan (v%s)</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
+    <string name="home_version_requires_android">Memerlukan Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Tidak didukung di perangkat ini</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tidak memiliki versi yang didukung untuk Android %2$d (API %3$d). Semua versi yang dideklarasikan memerlukan versi Android yang lebih tinggi</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Unduh APK asli</string>
     <string name="home_download_instructions_steps_title">Petunjuk:</string>
@@ -163,6 +169,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="home_low_disk_space_dialog_title">Ruang penyimpanan sedikit</string>
     <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang penyimpanan yang tersedia. Penambalan memerlukan setidaknya %2$.2f GB ruang kosong untuk berfungsi dengan baik</string>
     <string name="home_low_disk_space_dialog_warning">Melanjutkan dapat mengakibatkan kesalahan \"berkas tidak ditemukan\" atau menghasilkan APK yang rusak</string>
+    <string name="home_simple_bundle_select_title">Pilih berkas sumber tambalan</string>
     <!-- Patch Options -->
     <string name="custom_color">Warna Khusus</string>
     <string name="hex_color">Warna hex</string>
@@ -222,6 +229,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="home_app_info_patch_update_available_description">Versi tambalan lebih baru tersedia. Tambal ulang aplikasi Anda untuk mendapatkan pembaruan terbaru dan perbaikan</string>
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dihapus</string>
     <string name="home_app_info_app_deleted_description">Aplikasi ini telah dihapus di luar Morphe. Tambal ulang untuk memulihkan fungsinya</string>
+    <string name="home_app_info_apk_size">Ukuran APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal</string>
     <string name="root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
@@ -309,16 +317,13 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="failed_to_execute_patch">Gagal menerapkan %s</string>
     <string name="patched_app_saved_toast">Aplikasi yang ditambal disimpan untuk nanti</string>
     <string name="patched_app_save_failed_toast">Gagal menyimpan aplikasi yang ditambal</string>
-    <string name="download_apk">Unduh berkas APK</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk melanjutkan plugin ini</string>
     <string name="patcher_process_exit_message">Proses Penambal dihentikan dengan kode %1$s</string>
     <string name="install_app_success">Berhasil dipasang</string>
     <string name="install_app_fail">Gagal memasang aplikasi: %s</string>
-    <string name="install_timeout_message">Pemasangan tidak selesai. Periksa dialog pembatalan dan coba lagi</string>
     <string name="save_apk_success">APK Tersimpan</string>
     <string name="saved_app_export_failed">Gagal mengekspor aplikasi hasil patch</string>
     <string name="saved_app_removed_toast">Entri aplikasi patch tersimpan dihapus</string>
-    <string name="saved_app_copy_removed_toast">Salinan tersimpan dihapus</string>
     <string name="saved_app_launch_unavailable">Pasang aplikasi sebelum membukanya</string>
     <string name="package_name">Nama paket</string>
     <string name="failed_to_mount">Gagal mount: %s</string>
@@ -338,6 +343,10 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_appearance_background_grid">Jaring</string>
     <string name="settings_appearance_background_particles">Partikel</string>
     <string name="settings_appearance_background_none">Tidak ada</string>
+    <string name="settings_appearance_background_random">Acak</string>
+    <string name="settings_appearance_background_random_interval_launch">Saat diluncurkan</string>
+    <string name="settings_appearance_background_random_interval_daily">Harian</string>
+    <string name="settings_appearance_background_random_interval_3days">Setiap 3 hari</string>
     <string name="settings_appearance_parallax_effect">Efek Paralaks</string>
     <string name="settings_appearance_parallax_effect_description">Perpindahan latar belakang yang halus saat menggeser perangkat</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -354,6 +363,10 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_appearance_app_language_current">Bahasa saat ini</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk beberapa bahasa mungkin belum tersedia atau belum lengkap.</string>
     <string name="settings_appearance_translations_info_text">Untuk menerjemahkan bahasa baru atau meningkatkan terjemahan yang ada, kunjungi %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Layar beranda</string>
+    <string name="settings_appearance_greeting_phrases">Frasa sapaan</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
     <string name="settings_appearance_app_icon_default">Bawaan</string>
@@ -400,8 +413,17 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_advanced_expert_mode_description">Aktifkan pengaturan penambalan Morphe yang kompleks dan pilihan kustomisasi</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan mode Ahli?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mode ahli memberikan kontrol yang lebih banyak terhadap bagaimana penambalan diterapkan, tetapi pengaturan yang salah dalam mode ahli dapat menyebabkan aplikasi tidak berfungsi</string>
-    <string name="settings_advanced_strip_unused_libs">Hapus pustaka bawaan yang tidak digunakan</string>
-    <string name="settings_advanced_strip_unused_libs_description">Hapus pustaka bawaan untuk arsitektur CPU yang tidak didukung dari aplikasi yang ditambal</string>
+    <string name="settings_advanced_strip_unused_libs">Optimalkan untuk arsitektur perangkat</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Lewati modul APK terpisah untuk arsitektur CPU, lokal, dan kerapatan layar yang tidak didukung selama penggabungan.
+Untuk APK biasa, hapus pustaka asli untuk arsitektur yang tidak didukung setelah menambal"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Mode pemrosesan bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Mengontrol bagaimana bytecode diproses selama penambalan. Memengaruhi kecepatan penambalan, penggunaan memori, dan ukuran APK yang dihasilkan</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Cepat (Direkomendasikan)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Cepat</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Penambalan lebih cepat dan penggunaan memori lebih rendah, namun dengan ukuran APK yang lebih besar. Direkomendasikan untuk perangkat dengan RAM rendah atau perangkat lama</string>
+    <string name="settings_advanced_bytecode_mode_full">Lengkap</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Penambalan yang lebih lambat, meniru perilaku versi lama. Gunakan hanya jika mode cepat menimbulkan masalah</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT GitHub</string>
     <string name="settings_advanced_github_pat_description">Dibutuhkan untuk permintaan tarik sumber</string>
@@ -433,16 +455,16 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nama aplikasi</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Masukkan nama khusus</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ikon khusus</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder dengan gambar untuk digunakan sebagai ikon khusus.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder yang berisi gambar untuk digunakan sebagai ikon khusus.
 
-Folder harus berisi satu atau beberapa folder berikut, tergantung pada DPI perangkat:
+Folder harus berisi satu atau lebih folder berikut, tergantung pada DPI perangkat:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Setiap folder harus berisi semua berkas berikut:
+Setiap folder harus berisi semua file berikut:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
@@ -451,15 +473,15 @@ Dimensi gambar harus sebagai berikut:
 - mipmap-hdpi: 162x162 px
 - mipmap-xhdpi: 216x216 px
 - mipmap-xxhdpi: 324x324 px
-- mipmap-xxxhdpi: 432x432 px
+- mipmap-xxxhdpi: 432x432 piksel
 
-Sebagai pilihan, jalur yang berisi folder 'drawable' dengan berkas ikon monokrom:
+Opsional, jalur tersebut berisi folder ‘drawable’ dengan file ikon monokrom:
 morphe_adaptive_monochrome_custom.xml
 
-Sebagai pilihan, jalur yang berisi ikon pemberitahuan dalam salah satu format berikut:
-- Gambar vektor XML di 'drawable':
-    morphe_notification_icon_custom.xml
-- Gambar raster PNG di folder 'drawable-dpi':
+Opsional, jalur yang berisi ikon notifikasi dalam salah satu format berikut:
+- Gambar vektor XML di dalam ‘drawable’:
+  morphe_notification_icon_custom.xml
+- Gambar raster PNG di folder ‘drawable-dpi’:
   drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
   drawable-hdpi/morphe_notification_icon_custom.png (36x36 px)
   drawable-xhdpi/morphe_notification_icon_custom.png (48x48 px)
@@ -468,23 +490,23 @@ Sebagai pilihan, jalur yang berisi ikon pemberitahuan dalam salah satu format be
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Logo header khusus</string>
     <string name="settings_advanced_patch_options_custom_header_description">Ubah header logo</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"Folder berisi gambar yang akan digunakan sebagai logo header khusus.
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Folder yang berisi gambar untuk digunakan sebagai logo header khusus.
 
-Folder tersebut harus berisi satu atau lebih dari folder berikut, tergantung pada DPI perangkat:
+Folder tersebut harus berisi satu atau lebih folder berikut, tergantung pada DPI perangkat:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-Setiap folder harus berisi semua berkas berikut:
+Setiap folder harus berisi semua file berikut:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
-Ukuran gambar harus sebagai berikut:
-- drawable-hdpi: 194x72 piksel
-- drawable-xhdpi: 258x96 piksel
-- drawable-xxhdpi: 387x144 piksel
-- drawable-xxxhdpi: 512x192 piksel"</string>
+Dimensi gambar harus sebagai berikut:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Sembunyikan fitur Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Sembunyikan pintasan aplikasi Shorts</string>
@@ -511,13 +533,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="installer_status_shizuku_unsupported">Versi Shizuku yang terpasang tidak didukung</string>
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan gagal. Coba lagi atau ganti pemasang</string>
-    <string name="installer_hint_blocked">Pemasangan diblokir oleh Android. Periksa Play Protect atau pengaturan keamanan</string>
     <string name="installer_hint_conflict">Aplikasi lain dengan nama paket ini sudah terpasang. Copot pemasangannya terlebih dahulu sebelum melanjutkan</string>
-    <string name="installer_hint_incompatible">APK tidak kompatibel dengan perangkat ini atau versi Android</string>
-    <string name="installer_hint_invalid">APK tidak sah atau rusak</string>
-    <string name="installer_hint_storage">Ruang penyimpanan tidak cukup untuk pemasangan</string>
-    <string name="installer_hint_timeout">Waktu pemasangan habis. Coba lagi</string>
-    <string name="installer_hint_aborted">Pemasangan dibatalkan</string>
     <string name="installer_external_launched">Membuka %1$s…</string>
     <string name="installer_external_timeout">%1$s tidak mengonfirmasi pemasangan. Periksa aplikasi lain dan coba lagi</string>
     <string name="installer_external_success">%1$s melaporkan pemasangan berhasil</string>
@@ -548,6 +564,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_import_keystore_dialog_alias_field">Nama pengguna (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Kata sandi</string>
     <string name="settings_system_import_keystore_dialog_button">Impor</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Kredensial keystore tidak sah</string>
     <string name="settings_system_import_keystore_success">Keystore diimpor</string>
     <string name="settings_system_import_keystore_failed">Gagal mengimpor keystore</string>
@@ -555,6 +572,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_export_keystore_description">Ekspor keystore saat ini</string>
     <string name="settings_system_export_keystore_unavailable">Tidak ada keystore yang tersedia untuk diekspor</string>
     <string name="settings_system_export_keystore_success">Keystore diekspor</string>
+    <string name="settings_system_export_keystore_failed">Gagal mengekspor keystore</string>
     <string name="settings_system_show_password_field">Tampilkan kata sandi</string>
     <string name="settings_system_hide_password_field">Sembunyikan kata sandi</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -683,7 +701,8 @@ Ukuran gambar harus sebagai berikut:
     <string name="allow">Izinkan</string>
     <string name="details">Rincian</string>
     <string name="hide">Sembunyikan</string>
-    <string name="default_">Bawaan</string>
+    <string name="hidden">Disembunyikan</string>
+    <string name="unhide">Tampilkan</string>
     <string name="logs">Catatan</string>
     <string name="sources">Sumber</string>
     <string name="installing_ellipsis">Memasang…</string>
