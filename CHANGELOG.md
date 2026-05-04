@@ -1,3 +1,58 @@
+# [1.16.0](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0...v1.16.0) (2026-05-04)
+
+
+### Bug Fixes
+
+* "SessionBasedInstallConfirmationActivity was finished by user" install error on some devices ([3e74857](https://github.com/MorpheApp/morphe-manager/commit/3e74857bdb6fab5815f04c52b137024188a60dc3))
+* `Session is dead` error on Pixels devices when installing apps ([#458](https://github.com/MorpheApp/morphe-manager/issues/458)) ([ce1ce6e](https://github.com/MorpheApp/morphe-manager/commit/ce1ce6e195a4138c7ca18f5a9dd018db8591fddc))
+* Adapt accent color contrast for extreme black/white values in app info dialog ([c4f883f](https://github.com/MorpheApp/morphe-manager/commit/c4f883ffbdbb1bd3e7b2085939cb050fa747a11b))
+* Add logging and fix stale installer cache ([78b5aee](https://github.com/MorpheApp/morphe-manager/commit/78b5aee8dca5f1f51fb6bb46c9d9cab8bd1f7c0a))
+* Always respect manager prerelease preference for update channel ([090ee0c](https://github.com/MorpheApp/morphe-manager/commit/090ee0ca1ed8d076b58dd3abe4ffa8f8f2062203))
+* Apply locale via context wrap on Android < 13 ([ce193ee](https://github.com/MorpheApp/morphe-manager/commit/ce193ee7a4d9307aec876d1c6fae1c830fbf7612))
+* Check primary ABI only in `isArmV7` to avoid false positives on `ArmV8` devices ([14729c2](https://github.com/MorpheApp/morphe-manager/commit/14729c28a73c0294152c3df1aabffdfb79974215))
+* Eliminate background flash on `InstalledAppInfo` → patch flow transition ([b246a4b](https://github.com/MorpheApp/morphe-manager/commit/b246a4bf0322537f22add689c4f7054f612d37d4))
+* Fall back to `Downloads` export on devices without `DocumentsUI` (Android TV) ([1e21c39](https://github.com/MorpheApp/morphe-manager/commit/1e21c3957e37351d1498b9894d2e4c3ee8154608))
+* File picker and export for Android TV ([#491](https://github.com/MorpheApp/morphe-manager/issues/491)) ([7c1cfba](https://github.com/MorpheApp/morphe-manager/commit/7c1cfba98ff4b2eb39aa0e8a6f14e028978f1f60))
+* Handle `InstallFailure` result when installing manager update ([a4d1eb8](https://github.com/MorpheApp/morphe-manager/commit/a4d1eb8a99dc53d59f23df3d7bb8ad3725edd1c4))
+* Hoist install state reads to prevent recomposition on install ([9b82048](https://github.com/MorpheApp/morphe-manager/commit/9b82048bbb86ba4db954161dbb4df047e5485cad))
+* Merge 'Filter split APKs' and `Remove unused native libraries` into 'Optimize for device architecture' setting ([2edb15f](https://github.com/MorpheApp/morphe-manager/commit/2edb15fcfb0fd018ffcafc0f7203930a203ab4d4))
+* Patch bundles do not load on Android 8.0 devices ([3116619](https://github.com/MorpheApp/morphe-manager/commit/3116619cee63697dd71d1c22b95be11cec78384e))
+* Prevent `InstalledAppInfoViewModel` collision on dialog reopen ([15ae79a](https://github.com/MorpheApp/morphe-manager/commit/15ae79a18614ea0287a2fd0c467cf14f7a7401e1))
+* Replace `Ackpine` with native `SessionInstaller` ([#508](https://github.com/MorpheApp/morphe-manager/issues/508)) ([cf0f4db](https://github.com/MorpheApp/morphe-manager/commit/cf0f4dbe69a2c71114b828875bcfbe2ef6efd739))
+* Replace `isLoaded` flag with `BundleState` sealed class and simplify `homeAppState` ([72976d3](https://github.com/MorpheApp/morphe-manager/commit/72976d33aea02e3aad6639fe7ff1ec1f4d330a0c))
+* Resolve app icon from saved APK when app is not installed ([fe3ef6c](https://github.com/MorpheApp/morphe-manager/commit/fe3ef6cfaea6bb68c11bd89a127a1122d3cdb943))
+* Resolve display name from bundle metadata over patched APK label ([6c6e065](https://github.com/MorpheApp/morphe-manager/commit/6c6e0658d4d4e2a415db1342764de45bd5595c04))
+* Scope `InstalledAppInfoViewModel` to dialog instance via dialog token ([0cf2f6a](https://github.com/MorpheApp/morphe-manager/commit/0cf2f6a7c451fe1bd79538684babc3e1376b7f41))
+* Shizuku installer couldn't update an already installed app ([#454](https://github.com/MorpheApp/morphe-manager/issues/454)) ([d4e74e3](https://github.com/MorpheApp/morphe-manager/commit/d4e74e3a84ca34529f8d20005c19b2b0e7c9136f))
+* Show reinstall button and installer dialog for deleted apps ([472d046](https://github.com/MorpheApp/morphe-manager/commit/472d0462959235a90c0033129f87dd22a7af621d))
+* Show SDK-incompatible versions as disabled, block patching when no versions are compatible with device SDK ([f90d5ba](https://github.com/MorpheApp/morphe-manager/commit/f90d5bacc7198f2c0a3c7cf48c7745415d89e141))
+* Show swipe gesture hint on every custom bundle addition ([0c66503](https://github.com/MorpheApp/morphe-manager/commit/0c665038ed00234ed13b5df32b180382ecfa2f12))
+* System installer couldn't update an already installed app ([#455](https://github.com/MorpheApp/morphe-manager/issues/455)) ([adc93e4](https://github.com/MorpheApp/morphe-manager/commit/adc93e4bab2d9b153b2aecd9f0671b393e42d309))
+* Update home screen cards immediately after install/uninstall ([8f671bd](https://github.com/MorpheApp/morphe-manager/commit/8f671bdc350e1daa576640e13bbd778d78382f73))
+* Use `SharedPreferences` as locale side-channel on Android < 13 ([a5f91bd](https://github.com/MorpheApp/morphe-manager/commit/a5f91bd02e5d26780a3119b7f73c762b27b02403))
+* When greeting message is disabled, show a small top spacer so the app cards don't sit flush against the top of the screen ([6900cc2](https://github.com/MorpheApp/morphe-manager/commit/6900cc226e189b97c747d6d53f5fba98ade6ccf0))
+
+
+### Features
+
+* Adaptive two-column layout for `InstalledAppInfoDialog` on tablets ([40a29a9](https://github.com/MorpheApp/morphe-manager/commit/40a29a96967ef06eca27cb5f62db8d821f93c4aa))
+* Add `BundleAppMetadata` as a data source for `AppDataResolver` ([3bdc1f5](https://github.com/MorpheApp/morphe-manager/commit/3bdc1f5299b7429444c7266559806aa1ad6aa8d1))
+* Add fast bytecode mode setting to expert mode ([#403](https://github.com/MorpheApp/morphe-manager/issues/403)) ([e73c63c](https://github.com/MorpheApp/morphe-manager/commit/e73c63c7fcce14d5d38ce8b8cde26feed4a6e5e4))
+* Add manual `JKS` parser for keystore import without BC provider dependency ([#494](https://github.com/MorpheApp/morphe-manager/issues/494)) ([ccc99a2](https://github.com/MorpheApp/morphe-manager/commit/ccc99a24b410dff2f04d8c74b8d0916b64d7d762))
+* Add random background mode with rotation interval ([2d12fbb](https://github.com/MorpheApp/morphe-manager/commit/2d12fbbb052c3fe1fae979db7ad1d13b83918da9))
+* Add swipe gestures and multi-select to app buttons on main screen ([#446](https://github.com/MorpheApp/morphe-manager/issues/446)) ([0330699](https://github.com/MorpheApp/morphe-manager/commit/033069989d24c437798bb5a7bf248afe9f30ae89))
+* Add swipe gestures to hidden apps dialog and search results ([8cf1f13](https://github.com/MorpheApp/morphe-manager/commit/8cf1f137e8cf346a5628c80098e04aecf86f2441))
+* Add toggle to disable home screen patching phrases ([#443](https://github.com/MorpheApp/morphe-manager/issues/443)) ([f53ad64](https://github.com/MorpheApp/morphe-manager/commit/f53ad646c90700af17b3d58b0a2651cdfb87aab9))
+* Import keystore from `PKCS12`, `BKS` and `JKS` formats ([3f38387](https://github.com/MorpheApp/morphe-manager/commit/3f38387f515c351b5c4c248a9f682b46af03de85))
+* Improve patch visibility in bundle and app patch dialogs ([#457](https://github.com/MorpheApp/morphe-manager/issues/457)) ([1881991](https://github.com/MorpheApp/morphe-manager/commit/188199176dba9fe41115e2376fe7ade3138c8068))
+* Live patching progress in foreground notification ([c25af8f](https://github.com/MorpheApp/morphe-manager/commit/c25af8f28e7f33d90f8db62b74f5eb1128680e95))
+* Migrate to `Ackpine` for package installation/uninstallation ([#444](https://github.com/MorpheApp/morphe-manager/issues/444)) ([aa7207d](https://github.com/MorpheApp/morphe-manager/commit/aa7207d486427753eb56c18ddd29d481f1a3605e))
+* Open `.mpp` patch sources directly from file manager ([#483](https://github.com/MorpheApp/morphe-manager/issues/483)) ([f46a11f](https://github.com/MorpheApp/morphe-manager/commit/f46a11f91e88d948ecbab8e71200cec543ce48ec))
+* Open patches dialog on hidden app tap in search ([1898e74](https://github.com/MorpheApp/morphe-manager/commit/1898e74fe8240961ddda118c2f7fac7f48bacb76))
+* Prompt bundle selection before APK selection in simple mode ([#511](https://github.com/MorpheApp/morphe-manager/issues/511)) ([8161d9b](https://github.com/MorpheApp/morphe-manager/commit/8161d9b305aaab82285eccffaf89d42c786ea5f6))
+* Sort universal patches to bottom of each bundle in patches dialog ([eac672e](https://github.com/MorpheApp/morphe-manager/commit/eac672e51f1fe3007bba46af6321d833ac20fb4b))
+* Store merged APK from split archives as original for repatching ([#438](https://github.com/MorpheApp/morphe-manager/issues/438)) ([be0b868](https://github.com/MorpheApp/morphe-manager/commit/be0b86866f5e9f5e8aad4b596158084d03189fa3))
+
 # [1.16.0-dev.20](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0-dev.19...v1.16.0-dev.20) (2026-05-03)
 
 
