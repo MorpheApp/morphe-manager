@@ -1,6 +1,5 @@
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalTextStyle
@@ -24,17 +23,16 @@ import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
 /**
- * Universal app label component
+ * Universal app label component.
  *
  * Automatically resolves label from available sources:
- * installed app → original APK → patched APK → constants → package name fallback
+ * installed app → original APK → patched APK → constants → package name fallback.
  */
 @Composable
 fun AppLabel(
+    modifier: Modifier = Modifier,
     packageInfo: PackageInfo? = null,
     packageName: String? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     defaultText: String? = stringResource(R.string.not_installed),
     preferredSource: AppDataSource = AppDataSource.INSTALLED,
@@ -79,7 +77,7 @@ fun AppLabel(
 }
 
 /**
- * Simple label display when PackageInfo is already available
+ * Simple label display when PackageInfo is already available.
  */
 @Composable
 private fun SimpleAppLabel(
@@ -91,10 +89,11 @@ private fun SimpleAppLabel(
     overflow: TextOverflow = TextOverflow.Clip
 ) {
     val context = LocalContext.current
-    var label: String? by rememberSaveable { mutableStateOf(null) }
 
-    LaunchedEffect(packageInfo) {
-        label = withContext(Dispatchers.IO) {
+    // Attempt a cheap synchronous resolution first so we never show a shimmer
+    // when the label is already available in memory
+    val initialLabel = remember(packageInfo.packageName) {
+        runCatching {
             packageInfo.applicationInfo?.loadLabel(context.packageManager)
                 ?.toString()
                 ?.let { raw ->
@@ -103,12 +102,32 @@ private fun SimpleAppLabel(
                 }
                 ?: packageInfo.applicationInfo?.nonLocalizedLabel?.toString()
                     ?.takeIf { it.isNotBlank() }
-                ?: defaultText
+        }.getOrNull()
+    }
+
+    var label: String? by rememberSaveable(packageInfo.packageName) {
+        mutableStateOf(initialLabel)
+    }
+
+    // Only dispatch to IO when the synchronous attempt didn't produce a result
+    if (label == null) {
+        LaunchedEffect(packageInfo.packageName) {
+            label = withContext(Dispatchers.IO) {
+                packageInfo.applicationInfo?.loadLabel(context.packageManager)
+                    ?.toString()
+                    ?.let { raw ->
+                        val cleaned = cleanWeirdLabel(raw, packageInfo.packageName)
+                        cleaned.takeIf { it.isNotBlank() && cleaned != packageInfo.packageName }
+                    }
+                    ?: packageInfo.applicationInfo?.nonLocalizedLabel?.toString()
+                        ?.takeIf { it.isNotBlank() }
+                    ?: defaultText
+            }
         }
     }
 
     Text(
-        label ?: stringResource(R.string.loading),
+        label ?: defaultText ?: stringResource(R.string.loading),
         modifier = Modifier
             .placeholder(
                 visible = label == null,
@@ -123,7 +142,7 @@ private fun SimpleAppLabel(
 }
 
 /**
- * Resolved label from any available source when only package name is known
+ * Resolved label from any available source when only package name is known.
  */
 @Composable
 private fun ResolvedAppLabel(
@@ -143,7 +162,7 @@ private fun ResolvedAppLabel(
     LaunchedEffect(packageName, preferredSource) {
         // Use resolveAppData to get complete data in one call
         val resolvedData = appDataResolver.resolveAppData(packageName, preferredSource)
-        // If resolved name is same as package name and we have a default, use default
+        // If resolved name is same as package name, and we have a default, use default
         label = if (resolvedData.displayName == packageName && defaultText != null) {
             defaultText
         } else {
@@ -173,7 +192,7 @@ private fun ResolvedAppLabel(
 }
 
 /**
- * Clean weird labels that contain package name or other artifacts
+ * Clean weird labels that contain package name or other artifacts.
  */
 private fun cleanWeirdLabel(raw: String, packageName: String?): String {
     val trimmed = raw.trim()

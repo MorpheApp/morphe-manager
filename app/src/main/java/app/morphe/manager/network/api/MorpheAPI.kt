@@ -294,7 +294,7 @@ class MorpheAPI(
     suspend fun getAppUpdate(): MorpheAsset? {
         val usePrereleases = prefs.useManagerPrereleases.get()
         val currentWeight = versionWeight(BuildConfig.VERSION_NAME.removePrefix("v"))
-        val branch = if (usePrereleases || isDevBuild) "dev" else "main"
+        val branch = if (usePrereleases) "dev" else "main"
 
         val candidate = if (USE_MANAGER_DIRECT_JSON) {
             getManagerFromJson(branch).fallbackTo {

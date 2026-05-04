@@ -44,7 +44,6 @@ import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDial
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
-import app.morphe.manager.ui.viewmodel.SettingsViewModel.Companion.ensureValidEntries
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
 import app.morphe.manager.util.tag
@@ -240,6 +239,14 @@ fun PatcherScreen(
 
     // Trigger notification prompt after first successful install
     val installState = installViewModel.installState
+    val isInstalling by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installing } }
+    val isInstalled by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installed } }
+    val isError by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Error } }
+    val isConflict by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Conflict } }
+    val installedPackageName by remember { derivedStateOf { installViewModel.installedPackageName } }
+    val conflictPackageName by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Conflict)?.packageName } }
+    val errorMessage by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Error)?.message } }
+
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
             patcherViewModel.triggerNotificationPromptIfNeeded()
@@ -342,10 +349,9 @@ fun PatcherScreen(
         // Installer entries with periodic updates
         var options by remember(primaryToken) {
             mutableStateOf(
-                ensureValidEntries(
+                installerManager.ensureValidEntries(
                     installerManager.listEntries(installTarget, includeNone = false),
                     primaryToken,
-                    installerManager,
                     installTarget
                 )
             )
@@ -354,10 +360,9 @@ fun PatcherScreen(
         // Periodically update installer list for availability changes
         LaunchedEffect(installTarget, primaryToken) {
             while (isActive) {
-                options = ensureValidEntries(
+                options = installerManager.ensureValidEntries(
                     installerManager.listEntries(installTarget, includeNone = false),
                     primaryToken,
-                    installerManager,
                     installTarget
                 )
                 delay(1_500)
@@ -418,7 +423,18 @@ fun PatcherScreen(
 
                 PatcherState.SUCCESS -> {
                     PatchingSuccess(
-                        installViewModel = installViewModel,
+                        isInstalling = isInstalling,
+                        isInstalled = isInstalled,
+                        isError = isError,
+                        isConflict = isConflict,
+                        installedPackageName = installedPackageName,
+                        conflictPackageName = conflictPackageName,
+                        errorMessage = errorMessage,
+                        installerUnavailableDialog = installViewModel.installerUnavailableDialog,
+                        onOpenInstallerApp = installViewModel::openInstallerApp,
+                        onRetryInstaller = installViewModel::retryWithPreferredInstaller,
+                        onUseFallbackInstaller = installViewModel::proceedWithFallbackInstaller,
+                        onDismissInstallerDialog = installViewModel::dismissInstallerUnavailableDialog,
                         usingMountInstall = usingMountInstall,
                         isExpertMode = useExpertMode,
                         onLogsClick = { showSuccessScreen = false },

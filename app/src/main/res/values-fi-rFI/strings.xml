@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
     <string name="deep_link_add_source_title">Lisää lähde</string>
     <string name="deep_link_add_source_message">Haluatko lisätä tämän korjauslähteen Morpheen?</string>
-    <string name="deep_link_add_source_warning">Lisää lähde vain luotettavista lähteistä</string>
+    <string name="deep_link_add_source_warning">Lisää vain lähteitä, joihin luotat</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-päivitys saatavilla</string>
     <string name="home_update_available_subtitle">Uusi versio valmis asennukseen</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Sovelluksia ei saatavilla</string>
     <string name="home_no_apps_subtitle">Lisää päivityslähde tai ota olemassa oleva käyttöön %s</string>
     <string name="home_no_apps_search_subtitle">Yhtään sovellusta ei löytynyt hakusanalla \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Kaikki sovellukset on piilotettu</string>
+    <string name="home_all_apps_hidden_subtitle">Olet piilottanut kaikki sovellukset aloitusnäytöltä</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Minkä sovelluksen haluat korjata?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Paikataksesi &lt;b&gt;%s&lt;/b&gt; tarvitset alkuperäisen, paikkaamattoman APK:n versioista:</string>
     <string name="home_apk_availability_recommended_label">Suositeltu</string>
     <string name="home_apk_availability_unpatched_label">Ei korjattuja</string>
+    <string name="home_apk_availability_incompatible_label">Yhteensopimaton</string>
     <string name="home_apk_availability_yes">Kyllä, auta minua etsimään APK</string>
     <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
     <string name="home_apk_use_saved_with_version">Käytä tallennettua APK:tä (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:tä. Patching vaatii APK-tiedoston uudelleenvalinnan</string>
+    <string name="home_version_requires_android">Vaatii Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Ei tueta tällä laitteella</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ei sisällä tuettuja versioita Androidille %2$d (API %3$d). Kaikki ilmoitetut versiot vaativat korkeamman Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Lataa alkuperäinen APK</string>
     <string name="home_download_instructions_steps_title">Ohjeet:</string>
@@ -161,6 +167,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="home_low_disk_space_dialog_title">Vähän levytilaa</string>
     <string name="home_low_disk_space_dialog_message">Vain %1$.2f GB vapaata tallennustilaa. Korjausohjelman toimiakseen oikein tarvitaan vähintään %2$.2f GB vapaata tilaa</string>
     <string name="home_low_disk_space_dialog_warning">Jatkamisesta voi seurata tiedostotonnettua virhettä tai vioittunutta ulostulo-APK:ta</string>
+    <string name="home_simple_bundle_select_title">Valitse korjaustiedoston lähde</string>
     <!-- Patch Options -->
     <string name="custom_color">Mukautettu väri</string>
     <string name="hex_color">HEX-väri</string>
@@ -220,6 +227,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="home_app_info_patch_update_available_description">Uudempi korjausversio on saatavilla. Korjaa sovelluksesi uudelleen saadaksesi uusimmat parannukset ja korjaukset</string>
     <string name="home_app_info_app_deleted_warning">Sovellus poistettiin</string>
     <string name="home_app_info_app_deleted_description">Tämä sovellus poistettiin Morphen ulkopuolelta. Pätkä se uudelleen palauttamaan toiminnallisuuden</string>
+    <string name="home_app_info_apk_size">APK:n koko</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Juurtimemoodi vaatii alkuperäisen APK-tiedoston asennuksen laitteellesi ennen korjausta.</string>
     <string name="root_gmscore_excluded">GmsCore-tukikorjaus on poissuljettu juuritilassa</string>
@@ -307,16 +315,13 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="failed_to_execute_patch">Virhe %s:n suorittamisessa</string>
     <string name="patched_app_saved_toast">Muokattu sovellus tallennettu myöhempää käyttöä varten</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
-    <string name="download_apk">Lataa APK-tiedosto</string>
     <string name="plugin_activity_dialog_body">Tätä liitännöä varten tarvitaan käyttäjän interaktiivisuutta.</string>
     <string name="patcher_process_exit_message">Patcher-prosessi poistui koodilla %1$s</string>
     <string name="install_app_success">Asennettu onnistuneesti</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
-    <string name="install_timeout_message">Asennus ei päätytty. Tarkista järjestelmän asennusdialogi ja yritä uudelleen.</string>
     <string name="save_apk_success">APK tallennettu</string>
     <string name="saved_app_export_failed">Muokattujen sovellusten vieminen epäonnistui</string>
     <string name="saved_app_removed_toast">Tallennettu sovellus poistettu</string>
-    <string name="saved_app_copy_removed_toast">Tallennuskopio poistettu</string>
     <string name="saved_app_launch_unavailable">Asenna sovellus ennen avaamista.</string>
     <string name="package_name">Paketin nimi</string>
     <string name="failed_to_mount">Liitoksen muodostaminen epäonnistui: %s</string>
@@ -336,6 +341,10 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_appearance_background_grid">Ruudukko</string>
     <string name="settings_appearance_background_particles">Hiukkaset</string>
     <string name="settings_appearance_background_none">Muokka appin ulkon</string>
+    <string name="settings_appearance_background_random">Satunnainen</string>
+    <string name="settings_appearance_background_random_interval_launch">Käynnistyksen yhteydessä</string>
+    <string name="settings_appearance_background_random_interval_daily">Päivittäin</string>
+    <string name="settings_appearance_background_random_interval_3days">Joka 3. päivä</string>
     <string name="settings_appearance_parallax_effect">Parallaksi-efekti</string>
     <string name="settings_appearance_parallax_effect_description">Smooth background shifting when tilting the device</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -352,6 +361,10 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_appearance_app_language_current">Nykyinen kieli</string>
     <string name="settings_appearance_translations_info_title">Käännyt käännöt ovat puuttomia tai epätäydellisiä</string>
     <string name="settings_appearance_translations_info_text">Muokkaa uusia kieliä tai parantaa vanhoja käännöitä, käytti sivustamme: %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Etusivu</string>
+    <string name="settings_appearance_greeting_phrases">Tervehdysviestit</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti etusivulla</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Sovelluskuvake</string>
     <string name="settings_appearance_app_icon_default">Oletus</string>
@@ -398,8 +411,16 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_advanced_expert_mode_description">Ota käyttöön Morphe-päivityksen asetukset ja mukautusvaihtoehdot</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ota Expert-moodi käyttöön?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert-moodi antaa enemmän valtaa päivitysten sovittamisesta, mutta väärin asetettu expert-moodi voi johtaa sovelluksen toimimattomuuteen</string>
-    <string name="settings_advanced_strip_unused_libs">Poista käyttämättömät natiivikirjastot</string>
-    <string name="settings_advanced_strip_unused_libs_description">Poista tukemattomien suoritinarkkitehtuurien natiivikirjastot paikatuista sovelluksista</string>
+    <string name="settings_advanced_strip_unused_libs">Optimoi laitteen arkkitehtuuri</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Ohita jaetut APK-moduulit tuettujen CPU-arkkitehtuurien, kieliasetusten ja näytön resoluutioiden osalta yhdistämisen aikana.\nPlain APK -tiedostoissa poistetaan natiivikirjastot tuettujen arkkitehtuurien osalta korjaamisen jälkeen"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytekoodin käsittelytila</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Määrittää, miten bytecode käsitellään paikkatessa. Vaikuttaa paikkatuksen nopeuteen, muistin käyttöön ja ulostulon APK:n kokoon</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Nopea (Suositeltu)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Nopea</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Nopeampi korjaus ja pienempi muistin käyttö, mutta APK-tiedoston koko kasvaa. Suositellaan laiteille, joissa on vähän RAM-muistia tai vanhoille laitteille</string>
+    <string name="settings_advanced_bytecode_mode_full">Koko</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Hitaampi korjaus, toistaa vanhaa toimintaa. Käytä vain, jos pika-moodi aiheuttaa ongelmia</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Vaatimus pull request lähteille</string>
@@ -509,13 +530,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="installer_status_shizuku_unsupported">Asennettu Shizuku-versio ei ole tuettu.</string>
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
     <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennukseen.</string>
-    <string name="installer_hint_blocked">Android esti asennuksen. Tarkista Play Protect tai turvaympäristöasetukset.</string>
     <string name="installer_hint_conflict">Toinen sovellus samalla pakettinimellä on jo asennettu. Poista se ennen jatkamista.</string>
-    <string name="installer_hint_incompatible">APK ei ole yhteensopiva tällä laitteella tai Android-versiolla.</string>
-    <string name="installer_hint_invalid">APK on epäkelpoa tai vikaista.</string>
-    <string name="installer_hint_storage">Tilaa ei riitä asennukseen.</string>
-    <string name="installer_hint_timeout">Asennus aikakatkosi. Yritä uudelleen.</string>
-    <string name="installer_hint_aborted">Asennus peruutettiin.</string>
     <string name="installer_external_launched">Avataan kohdetta %1$s…</string>
     <string name="installer_external_timeout">%1$s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen.</string>
     <string name="installer_external_success">%1$s raportoi onnistuneen asennuksen.</string>
@@ -546,6 +561,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_import_keystore_dialog_alias_field">Väärin keystore-tunnus (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Väärin keystore-tunnus (alias)</string>
     <string name="settings_system_import_keystore_dialog_button">Tuo</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore-muoto</string>
     <string name="settings_system_import_keystore_wrong_credentials">Väärin keystore-tunnus</string>
     <string name="settings_system_import_keystore_success">Väärin keystore-tunnus</string>
     <string name="settings_system_import_keystore_failed">Keystore tuotu onnistui</string>
@@ -553,6 +569,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_export_keystore_description">Vie nykyinen keystore</string>
     <string name="settings_system_export_keystore_unavailable">Ei keystorea saatavilla vientiin</string>
     <string name="settings_system_export_keystore_success">Keystore vietyty onnistui</string>
+    <string name="settings_system_export_keystore_failed">Keystoren vienti epäonnistui</string>
     <string name="settings_system_show_password_field">Näytä salasana</string>
     <string name="settings_system_hide_password_field">Piilota salasana</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -681,7 +698,8 @@ Kuvien mitat on oltava seuraavasti:
     <string name="allow">Salli</string>
     <string name="details">Tiedot</string>
     <string name="hide">Piilota</string>
-    <string name="default_">Oletus</string>
+    <string name="hidden">Piilotettu</string>
+    <string name="unhide">Näytä</string>
     <string name="logs">Päiväkirjat</string>
     <string name="sources">Lähteet</string>
     <string name="installing_ellipsis">Asennetaan…</string>

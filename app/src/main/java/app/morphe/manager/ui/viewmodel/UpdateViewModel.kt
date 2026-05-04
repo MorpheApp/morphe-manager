@@ -2,7 +2,7 @@ package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
 import android.content.*
-import android.content.pm.PackageInstaller
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat
@@ -12,13 +12,11 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
-import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.ShizukuInstaller
+import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.network.service.HttpService
-import app.morphe.manager.service.InstallService
 import app.morphe.manager.util.*
 import io.ktor.client.plugins.onDownload
 import io.ktor.client.request.url
@@ -33,8 +31,7 @@ class UpdateViewModel(
     private val app: Application by inject()
     private val morpheAPI: MorpheAPI by inject()
     private val http: HttpService by inject()
-    private val pm: PM by inject()
-    private val shizukuInstaller: ShizukuInstaller by inject()
+    private val sessionInstaller: SessionInstaller by inject()
     private val networkInfo: NetworkInfo by inject()
     private val fs: Filesystem by inject()
     private val prefs: PreferencesManager by inject()
@@ -119,7 +116,7 @@ class UpdateViewModel(
                 if (location.exists()) location.length() else 0L
             }
             downloadedSize = resumeOffset
-            // totalSize stays 0 until first progress callback — avoids false 100% on resume
+            // totalSize stays 0 until first progress callback - avoids false 100% on resume
             totalSize = 0L
             canResumeDownload = resumeOffset > 0L
 
@@ -178,7 +175,20 @@ class UpdateViewModel(
         when (plan) {
             is InstallerManager.InstallPlan.Internal -> {
                 state = State.INSTALLING
-                pm.installApp(listOf(location))
+                try {
+                    handleInstallResult(sessionInstaller.installInternal(location))
+                } catch (_: InstallCancelledException) {
+                    // User dismissed dialog - go back to CAN_INSTALL so they can retry
+                    state = State.CAN_INSTALL
+                } catch (_: SessionDeadException) {
+                    launchIntentFallback()
+                } catch (e: Exception) {
+                    val message = e.simpleMessage().orEmpty()
+                    installError = message
+                    canResumeDownload = false
+                    app.toast(app.getString(R.string.install_app_fail, message))
+                    state = State.FAILED
+                }
             }
 
             is InstallerManager.InstallPlan.Mount -> {
@@ -192,18 +202,11 @@ class UpdateViewModel(
             is InstallerManager.InstallPlan.Shizuku -> {
                 state = State.INSTALLING
                 try {
-                    shizukuInstaller.install(location, app.packageName)
-                    installError = ""
-                    state = State.SUCCESS
-                    app.toast(app.getString(R.string.update_completed))
-                } catch (error: ShizukuInstaller.InstallerOperationException) {
-                    val message = error.message ?: app.getString(R.string.installer_hint_generic)
-                    installError = message
-                    canResumeDownload = false
-                    app.toast(app.getString(R.string.install_app_fail, message))
-                    state = State.FAILED
-                } catch (error: Exception) {
-                    val message = error.simpleMessage().orEmpty()
+                    handleInstallResult(sessionInstaller.installShizuku(location, app.packageName))
+                } catch (_: InstallCancelledException) {
+                    state = State.CAN_INSTALL
+                } catch (e: Exception) {
+                    val message = e.simpleMessage().orEmpty()
                     installError = message
                     canResumeDownload = false
                     app.toast(app.getString(R.string.install_app_fail, message))
@@ -212,6 +215,39 @@ class UpdateViewModel(
             }
 
             is InstallerManager.InstallPlan.External -> launchExternalInstaller(plan)
+        }
+    }
+
+    /**
+     * Fallback when the PackageInstaller session is killed by an OEM system component.
+     * Launches [Intent.ACTION_INSTALL_PACKAGE] and monitors for completion via broadcast.
+     */
+    private fun launchIntentFallback() {
+        Log.w("UpdateViewModel", "Session dead, launching intent-based fallback")
+        sessionInstaller.launchIntentInstall(location)
+        // Completion is handled by installBroadcastReceiver
+    }
+
+    private fun handleInstallResult(result: InstallResult) {
+        when (result) {
+            InstallResult.Success -> {
+                installError = ""
+                state = State.SUCCESS
+                app.toast(app.getString(R.string.install_app_success))
+            }
+            is InstallResult.Conflict -> {
+                installError = app.getString(R.string.installer_hint_conflict)
+                canResumeDownload = false
+                app.toast(installError)
+                state = State.FAILED
+            }
+            is InstallResult.Failure -> {
+                val message = result.message ?: "Unknown error"
+                installError = message
+                canResumeDownload = false
+                app.toast(app.getString(R.string.install_app_fail, message))
+                state = State.FAILED
+            }
         }
     }
 
@@ -251,16 +287,19 @@ class UpdateViewModel(
     }
 
     private fun handleExternalInstallSuccess(packageName: String) {
-        val plan = pendingExternalInstall ?: return
-        if (plan.expectedPackage != packageName) return
-
-        pendingExternalInstall = null
-        externalInstallTimeoutJob?.cancel()
-        externalInstallTimeoutJob = null
-        installerManager.cleanup(plan)
-
+        val plan = pendingExternalInstall
+        if (plan != null) {
+            if (plan.expectedPackage != packageName) return
+            pendingExternalInstall = null
+            externalInstallTimeoutJob?.cancel()
+            externalInstallTimeoutJob = null
+            installerManager.cleanup(plan)
+            app.toast(app.getString(R.string.installer_external_success, plan.installerLabel))
+        } else {
+            // Intent-based fallback — only care about our own package
+            if (packageName != app.packageName) return
+        }
         installError = ""
-        app.toast(app.getString(R.string.installer_external_success, plan.installerLabel))
         state = State.SUCCESS
     }
 
@@ -272,53 +311,12 @@ class UpdateViewModel(
                     val pkg = intent.data?.schemeSpecificPart ?: return
                     handleExternalInstallSuccess(pkg)
                 }
-
-                InstallService.APP_INSTALL_ACTION -> {
-                    val pmStatus = intent.getIntExtra(InstallService.EXTRA_INSTALL_STATUS, -999)
-                    val extra =
-                        intent.getStringExtra(InstallService.EXTRA_INSTALL_STATUS_MESSAGE) ?: ""
-
-                    when (pmStatus) {
-                        PackageInstaller.STATUS_SUCCESS -> {
-                            pendingExternalInstall?.let(installerManager::cleanup)
-                            pendingExternalInstall = null
-                            externalInstallTimeoutJob?.cancel()
-                            externalInstallTimeoutJob = null
-                            installError = ""
-                            app.toast(app.getString(R.string.install_app_success))
-                            state = State.SUCCESS
-                        }
-                        PackageInstaller.STATUS_FAILURE_ABORTED -> {
-                            pendingExternalInstall?.let(installerManager::cleanup)
-                            pendingExternalInstall = null
-                            externalInstallTimeoutJob?.cancel()
-                            externalInstallTimeoutJob = null
-                            state = State.CAN_INSTALL
-                        }
-                        else -> {
-                            val hint = installerManager.formatFailureHint(pmStatus, extra)
-                            val message = app.getString(
-                                R.string.install_app_fail,
-                                hint ?: extra.ifBlank { pmStatus.toString() }
-                            )
-                            pendingExternalInstall?.let(installerManager::cleanup)
-                            pendingExternalInstall = null
-                            externalInstallTimeoutJob?.cancel()
-                            externalInstallTimeoutJob = null
-                            app.toast(message)
-                            installError = hint ?: extra
-                            canResumeDownload = false
-                            state = State.FAILED
-                        }
-                    }
-                }
             }
         }
     }
 
     init {
         ContextCompat.registerReceiver(app, installBroadcastReceiver, IntentFilter().apply {
-            addAction(InstallService.APP_INSTALL_ACTION)
             addAction(Intent.ACTION_PACKAGE_ADDED)
             addAction(Intent.ACTION_PACKAGE_REPLACED)
             addDataScheme("package")
@@ -339,20 +337,17 @@ class UpdateViewModel(
     }
 
     /**
-     * Reset state if installation was canceled by user (dismissed system dialog)
-     * Called when dialog reopens to check if we need to reset
+     * Reset state if an external installation timed out or was abandoned.
      */
     fun resetIfInstallCancelled() {
         // If we're in INSTALLING state but the pending installation was canceled,
         // reset to CAN_INSTALL so user can try again
         if (state == State.INSTALLING && pendingExternalInstall == null) {
-            // Check if the APK file still exists
-            if (location.exists() && location.length() > 0) {
-                state = State.CAN_INSTALL
+            state = if (location.exists() && location.length() > 0) {
+                State.CAN_INSTALL
             } else {
-                // File was deleted somehow, need to download again
-                state = State.CAN_DOWNLOAD
                 canResumeDownload = false
+                State.CAN_DOWNLOAD
             }
         }
     }

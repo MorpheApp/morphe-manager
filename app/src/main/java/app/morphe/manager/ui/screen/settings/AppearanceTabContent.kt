@@ -8,9 +8,6 @@ package app.morphe.manager.ui.screen.settings
 import android.app.Activity
 import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,6 +32,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
+import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -53,8 +51,10 @@ fun AppearanceTabContent(
     val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
+    val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
+    val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
 
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
@@ -74,6 +74,31 @@ fun AppearanceTabContent(
         LanguageSection(
             appLanguage = appLanguage,
             onLanguageClick = { showTranslationInfoDialog.value = true }
+        )
+
+        // Home Screen Section
+        SectionTitle(
+            text = stringResource(R.string.settings_appearance_home_screen),
+            icon = Icons.Outlined.Dashboard
+        )
+
+        RichSettingsItem(
+            onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
+            showBorder = true,
+            title = stringResource(R.string.settings_appearance_greeting_phrases),
+            subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
+            },
+            trailingContent = {
+                Switch(
+                    checked = showGreetingPhrases,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (showGreetingPhrases) enabledState else disabledState
+                    }
+                )
+            }
         )
 
         // Theme Mode Section
@@ -139,6 +164,10 @@ fun AppearanceTabContent(
             selectedBackground = backgroundType,
             onBackgroundSelected = { selectedType ->
                 themeViewModel.setBackgroundType(selectedType)
+            },
+            selectedInterval = randomInterval,
+            onIntervalSelected = { interval ->
+                themeViewModel.setRandomInterval(interval)
             }
         )
 
@@ -176,8 +205,8 @@ fun AppearanceTabContent(
     // Translation Info Dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(if (showLanguageDialog.value) 0 else MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut(if (showLanguageDialog.value) 0 else MorpheDefaults.ANIMATION_DURATION)
     ) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.settings_appearance_translations_info_title),
@@ -199,12 +228,13 @@ fun AppearanceTabContent(
     // Language Picker Dialog
     AnimatedVisibility(
         visible = showLanguageDialog.value,
-        enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-        exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut
     ) {
         LanguagePickerDialog(
             currentLanguage = appLanguage,
             onLanguageSelected = { languageCode ->
+                saveLanguageToPrefs(context, languageCode)
                 themeViewModel.setAppLanguage(languageCode)
                 showLanguageDialog.value = false
                 (context as? Activity)?.recreate()

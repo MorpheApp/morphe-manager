@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Tətbiq quraşdırılması icazəsi istifadəçi təcrübəsinə mənfi təsir edəcək Android 11 sistemindəki səhvə mane olmaq üçün əvvəlcədən qəbul edilməlidir</string>
     <string name="deep_link_add_source_title">Mənbə əlavə et</string>
     <string name="deep_link_add_source_message">Bu yamaq mənbəyin Morphe-yə əlavə etmək istəyirsiniz?</string>
-    <string name="deep_link_add_source_warning">Yalnız güvəndiyiniz mənbələrdən mənbə əlavə edin</string>
+    <string name="deep_link_add_source_warning">Yalnız etibar etdiyiniz mənbələri əlavə edin</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Əlçatan Morphe yenilənməsi</string>
     <string name="home_update_available_subtitle">Yeni versiya quraşdırmaq üçün hazır</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Mövcud tətbiq yoxdur</string>
     <string name="home_no_apps_subtitle">%s bölməsində yamaq mənbəyi əlavə edin və ya mövcud olanı aktivləşdir</string>
     <string name="home_no_apps_search_subtitle">\"%1$s\" ilə uyuşan tətbiq yoxdur</string>
+    <string name="home_all_apps_hidden_title">Bütün tətbiqlər gizlidir</string>
+    <string name="home_all_apps_hidden_subtitle">Bütün tətbiqləri əsas ekrandan gizlətmisiniz</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -81,6 +83,7 @@
     <string name="sources_update_success">Uğurlu yeniləmə</string>
     <string name="sources_update_unavailable">Yenilənmə əlçatan deyil</string>
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
+    <string name="sources_download_fail_named">\'%1$s\' yükləmək olmadı: %2$s</string>
     <string name="sources_download_endpoint_not_found">\'%1$s\' yenilənə bilmədi: yamaq JSON faylı qurulan URL-də tapılmadı</string>
     <string name="sources_patch_expert_badge">Mütəxəssis</string>
     <string name="sources_patch_expert_badge_tooltip">Bu yamağı əl ilə yerləşdirmək üçün Tənzimləmələrdə Mütəxəssis rejimin aktivləşdir</string>
@@ -90,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt; yamaqlamaq üçün versiyaların yamaqlanmayan APK-sına ehtiyacınız var:</string>
     <string name="home_apk_availability_recommended_label">Tövsiyə olunan</string>
     <string name="home_apk_availability_unpatched_label">Yamaqlanmayan</string>
+    <string name="home_apk_availability_incompatible_label">Uyuşmaz</string>
     <string name="home_apk_availability_yes">Bəli, APK tapmağa mənə kömək et</string>
     <string name="home_apk_availability_no">Xeyr, Mənim artıq APK-m var</string>
     <string name="home_apk_use_saved_with_version">Saxlanılan APK-nı istifadə et (v%s)</string>
     <string name="home_app_info_no_saved_apk">Saxlanılan APK yoxdur. Yamaqlanma APK faylını təkrar seçmək istəyəcək</string>
+    <string name="home_version_requires_android">Android %1$s+ tələb olunur</string>
+    <string name="home_apk_no_compatible_versions_title">Bu cihazda dəstəklənmir</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tətbiqinin Android %2$d (API %3$d) üçün dəstəklənən versiyaları yoxdur. Bütün elan olunan versiyalar daha yüksək Android versiyası tələb edir</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Əsil APK-nı Yüklə</string>
     <string name="home_download_instructions_steps_title">Təlimatlar:</string>
@@ -161,6 +168,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_low_disk_space_dialog_title">Az disk yaddaşı</string>
     <string name="home_low_disk_space_dialog_message">Yalnız %1$.2f GB boş yaddaş var. Yamaqlanmanın düzgün işləməsinə ən azı %2$.2f GB boş yaddaş tələb olunur</string>
     <string name="home_low_disk_space_dialog_warning">Əməl edilməsi \"fayl tapılmadı\" xətasına və ya hasilat APK korlanmasına səbəb ola bilər</string>
+    <string name="home_simple_bundle_select_title">Yamaq mənbəsi seç</string>
     <!-- Patch Options -->
     <string name="custom_color">Xüsusi rəng</string>
     <string name="hex_color">Altı dəyərli rəng</string>
@@ -220,6 +228,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_app_info_patch_update_available_description">Yamaqların daha yeni versiyası var. Ən son təkmilləşdirmələr və düzəlişlər üçün tətbiqinizi təkrar yamaqlayın</string>
     <string name="home_app_info_app_deleted_warning">Tətbiq quraşdırması silindi</string>
     <string name="home_app_info_app_deleted_description">Bu tətbiq Morphe xarici silindi. Funksionallığı qaytarmaq üçün onu təkrar quraşdır</string>
+    <string name="home_app_info_apk_size">APK həcmi</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root rejimi yamaqdan əvvəl orijinal APK-nın cihazınızda quraşdırılmasını tələb edir</string>
     <string name="root_gmscore_excluded">GmsCore dəstək yamağı root rejimində çıxarılır</string>
@@ -307,16 +316,13 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="failed_to_execute_patch">%s tətbiq etmək uğursuz oldu</string>
     <string name="patched_app_saved_toast">Yamaqlanan tətbiq sonra üçün saxlanıldı</string>
     <string name="patched_app_save_failed_toast">Yamaqlanan tətbiqi saxlamaq olmadı</string>
-    <string name="download_apk">APK faylını yüklə</string>
     <string name="plugin_activity_dialog_body">Bu qoşmayla davam etmək üçün istifadəçi reaksiyası tələb olunur</string>
     <string name="patcher_process_exit_message">Yamaqlayıcı emalı %1$s şifrəsi ilə tamamlandı</string>
     <string name="install_app_success">Uğurla quraşdırıldı</string>
     <string name="install_app_fail">Tətbiqi quraşdırmaq olmadı: %s</string>
-    <string name="install_timeout_message">Quraşdırma bitmədi. Sistem quraşdırıcısı dialoqunu yoxla və təkrar sına</string>
     <string name="save_apk_success">APK Saxlanıldı</string>
     <string name="saved_app_export_failed">Yamaqlanan tətbiqi ixrac etmək olmadı</string>
     <string name="saved_app_removed_toast">Yamaqlanıb saxlanılan tətbiq silindi</string>
-    <string name="saved_app_copy_removed_toast">Saxlanılan nüsxə silindi</string>
     <string name="saved_app_launch_unavailable">Açmazdan əvvəl tətbiqi quraşdır</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Montajlama uğursuzdu: %s</string>
@@ -336,6 +342,10 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_background_grid">Şəbəkə</string>
     <string name="settings_appearance_background_particles">Zərrəciklər</string>
     <string name="settings_appearance_background_none">Heç biri</string>
+    <string name="settings_appearance_background_random">Təsadüfi</string>
+    <string name="settings_appearance_background_random_interval_launch">Buraxılışda</string>
+    <string name="settings_appearance_background_random_interval_daily">Gündəlik</string>
+    <string name="settings_appearance_background_random_interval_3days">Hər 3 gündən bir</string>
     <string name="settings_appearance_parallax_effect">Parallaks effekti</string>
     <string name="settings_appearance_parallax_effect_description">Cihazı çevirərkən fonu rəvan şəkildə tərpətmək</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -352,6 +362,10 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_app_language_current">Gündəlik dil</string>
     <string name="settings_appearance_translations_info_title">Bəzi dillər üçün tərcümələr yarımçıq və ya qüsurlu ola bilər</string>
     <string name="settings_appearance_translations_info_text">Yeni dilləri tərcümə etmək və ya mövcud tərcümələri təkmilləşdirmək üçün %s -i ziyarət et</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Əsas ekran</string>
+    <string name="settings_appearance_greeting_phrases">Salamlaşma ifadələri</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Əsas ekranda salamlaşma mesajı göstər</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Tətbiq simvolu</string>
     <string name="settings_appearance_app_icon_default">İlkin</string>
@@ -398,8 +412,17 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_advanced_expert_mode_description">Qəliz Morphe yamaqlanma tənzimləmələrin və fərdiləşdirmə seçimlərin aktivləşdir</string>
     <string name="settings_advanced_expert_mode_dialog_title">Mütəxəssis rejimi aktivləşdirilsin?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mütəxəssis rejimi yamaqların necə tətbiq olunduğuna daha çox nəzarət verir, lakin mütəxəssis rejimindəki tənzimləmələri səhv qurma tətbiqi funksional pozuntuya sala bilər</string>
-    <string name="settings_advanced_strip_unused_libs">İşlədilməyən yerli kitabxanaları təmizlə</string>
-    <string name="settings_advanced_strip_unused_libs_description">Yamalanan tətbiqlərdən dəstəklənməyən CPU quruluşları üçün yerli kitabxanaları silin</string>
+    <string name="settings_advanced_strip_unused_libs">Cihaz quruluşu üçün optimallaşdır</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Birləşdirmə əsnasında dəstəklənməyən CPU quruluşları, yerləşmələr və ekran sıxlıqları üçün bölünən APK modullarını ötür.
+Adi APK-lar üçün, yamaqlanmadan sonra dəstəklənməyən quruluşlar üçün yerli kitabxanaları sil"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Baytkod emalı rejimi</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Yamaqlanma əsnasında baytkodun necə irəlilədiyinə nəzarət edir. Yamaqlanma sürətinə, yaddaş istifadəsinə və hasilat APK həcminə təsir edir</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Sürətli (Tövsiyə olunur)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Sürətli</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Daha həcmli APK dəyərində daha sürətli yamaqlanma və daha az yaddaş istifadəsi. Aşağı RAM və ya köhnə cihazlar üçün tövsiyə olunur.</string>
+    <string name="settings_advanced_bytecode_mode_full">Tam</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Daha yavaş yamaqlanma, köhnə davranışı təkrarlayır. Yalnız sürətli rejim problemlərə səbəb olursa istifadə edin.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Pull request mənbələri üçün tələb olunur</string>
@@ -508,13 +531,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">Quraşdırılan Shizuku versiyası dəstəklənmir</string>
     <string name="installer_action_open_shizuku">Shizuku-nu Aç</string>
     <string name="installer_hint_generic">Quraşdırma uğursuz oldu. Təkrar sına yaxud fərqli quraşdırıcıya keç</string>
-    <string name="installer_hint_blocked">Quraşdırma Android tərəfindən əngəlləndi. Play Protect yaxud təhlükəsizlik tənzimləmələrin yoxla</string>
     <string name="installer_hint_conflict">Başqa tətbiq bu paket adıyla artıq quraşdırılıb. Davam etməzdən əvvəl onu sil</string>
-    <string name="installer_hint_incompatible">APK bu cihaz yaxud Android versiyası ilə uyuşan deyil</string>
-    <string name="installer_hint_invalid">APK etibarsız və ya qüsurludur</string>
-    <string name="installer_hint_storage">Quraşdırma üçün yaddaş yeri kifayət deyildir</string>
-    <string name="installer_hint_timeout">Quraşdırma vaxtı bitdi. Təkrar sına</string>
-    <string name="installer_hint_aborted">Quraşdırma ləğv edildi</string>
     <string name="installer_external_launched">%1$s açılır…</string>
     <string name="installer_external_timeout">%1$s quraşdırmanı təsdiqləmədi. Digər tətbiqi yoxla və təkrar sına</string>
     <string name="installer_external_success">%1$s uğurlu quraşdırmanı bildirdi</string>
@@ -545,6 +562,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">İstifadəçi adı (Ləqəb)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parol</string>
     <string name="settings_system_import_keystore_dialog_button">İdxal et</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore formatı</string>
     <string name="settings_system_import_keystore_wrong_credentials">Səhv keystore etimadnaməsi</string>
     <string name="settings_system_import_keystore_success">Keystore idxal edildi</string>
     <string name="settings_system_import_keystore_failed">Keystore-u idxal etmək olmadı</string>
@@ -552,6 +570,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Hazırkı keystore-u ixrac et</string>
     <string name="settings_system_export_keystore_unavailable">İxrac etmək üçün keystore mövcud deyil</string>
     <string name="settings_system_export_keystore_success">Keystore ixrac edildi</string>
+    <string name="settings_system_export_keystore_failed">Keystore-u ixrac etmək olmadı</string>
     <string name="settings_system_show_password_field">Parolu göstər</string>
     <string name="settings_system_hide_password_field">Parolu gizlət</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -680,8 +699,10 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="allow">İcazə verin</string>
     <string name="details">Təfərrüatlar</string>
     <string name="hide">Gizlət</string>
-    <string name="default_">İlkin</string>
+    <string name="hidden">Gizlədilən</string>
+    <string name="unhide">Göstər</string>
     <string name="logs">Jurnallar</string>
+    <string name="sources">Mənbələr</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
     <string name="mounting_ellipsis">Montajlanır...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>

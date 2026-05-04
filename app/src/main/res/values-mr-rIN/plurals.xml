@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s सुधारणा</item>
+        <item quantity="other">%s अनेक सुधारणा</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s  सुधारणा पर्याय</item>
+        <item quantity="other">%s  अनेक सुधारणा पर्याय</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s मूळ</item>
+        <item quantity="other">%s मुळे</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s संच</item>
+        <item quantity="other">%s अनेक संच</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">%s सुधारणा पूर्ण केली</item>
+        <item quantity="other">%s सुधारणा पूर्ण केल्या</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s अँड्रॉइड संच संचिका </item>
+        <item quantity="other">%s अनेक अँड्रॉइड संच संचिका</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">जतन केलेल्या निवडीमधून %s जुन्या सुधारणा काढल्या आहेत.</item>
+        <item quantity="other">जतन केलेल्या निवडीमधून %s जुन्या अनेक सुधारणा काढल्या आहेत.</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%s  मूळ यशस्वीरित्या स्थापित केले</item>
+        <item quantity="other">%s अनेक  मूळ यशस्वीरित्या स्थापित केले</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%s  सुधारणा निवडली</item>
+        <item quantity="other">%s  सुधारणा निवडल्या</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s ॲप दाखवा</item>
+        <item quantity="other">%s ॲप्स दाखवा</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s लपवलेले ॲप</item>
+        <item quantity="other">%s लपवलेले ॲप्स</item>
+    </plurals>
+</resources>

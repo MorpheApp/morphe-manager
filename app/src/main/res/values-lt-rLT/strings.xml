@@ -57,10 +57,12 @@
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Pataisų nustatymai</string>

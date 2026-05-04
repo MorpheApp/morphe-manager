@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Дозвіл на встановлення застосунку необхідно надати заздалегідь, щоб уникнути помилки в Android 11, яка негативно вплине на взаємодію з користувачем</string>
     <string name="deep_link_add_source_title">Додати джерело</string>
     <string name="deep_link_add_source_message">Ви хочете додати це джерело патчів в Morphe?</string>
-    <string name="deep_link_add_source_warning">Додавайте лише джерела, яким ви довіряєте.</string>
+    <string name="deep_link_add_source_warning">Додавайте лише джерела, яким ви довіряєте</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступне оновлення Morphe</string>
     <string name="home_update_available_subtitle">Нова версія готова до встановлення</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Немає доступних застосунків</string>
     <string name="home_no_apps_subtitle">Додайте джерело патчів або ввімкніть існуюче в %s</string>
     <string name="home_no_apps_search_subtitle">Не знайдено застосунків за запитом \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Усі застосунки приховані</string>
+    <string name="home_all_apps_hidden_subtitle">Ви приховали всі застосунки з головного екрану</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Який застосунок ви хочете пропатчити?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Щоб патчити &lt;b&gt;%s&lt;/b&gt;, вам потрібні непатчені APK файли з версіями:</string>
     <string name="home_apk_availability_recommended_label">Рекомендована</string>
     <string name="home_apk_availability_unpatched_label">Непатчена</string>
+    <string name="home_apk_availability_incompatible_label">Несумісна</string>
     <string name="home_apk_availability_yes">Так, допоможіть мені знайти APK</string>
     <string name="home_apk_availability_no">Ні, я вже маю APK</string>
     <string name="home_apk_use_saved_with_version">Збережений APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Немає збереженого APK файлу. Для патчінгу потрібно буде знову вибрати APK файл</string>
+    <string name="home_version_requires_android">Потрібен Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Не підтримується на цьому пристрої</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; не має підтримуваних версій для Android %2$d (API %3$d). Усі заявлені версії вимагають вищу версію Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Завантажити оригінальний APK файл</string>
     <string name="home_download_instructions_steps_title">Інструкції:</string>
@@ -162,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">Недостатньо місця на диску</string>
     <string name="home_low_disk_space_dialog_message">Доступно лише %1$.2f ГБ вільного місця. Для коректної роботи патчінгу потрібно щонайменше %2$.2f ГБ вільного місця</string>
     <string name="home_low_disk_space_dialog_warning">Продовження може призвести до помилки \"файл не знайдено\" або пошкодження вихідного APK файлу</string>
+    <string name="home_simple_bundle_select_title">Виберіть джерело патчів</string>
     <!-- Patch Options -->
     <string name="custom_color">Користувацький колір</string>
     <string name="hex_color">Шістнадцятковий колір</string>
@@ -221,6 +228,7 @@
     <string name="home_app_info_patch_update_available_description">Доступна новіша версія патчів. Перепатчіть застосунок, щоб отримати останні покращення та виправлення</string>
     <string name="home_app_info_app_deleted_warning">Застосунок було видалено</string>
     <string name="home_app_info_app_deleted_description">Це застосунок було видалено поза менеджером Morphe. Перепатчіть його, щоб відновити функціональність</string>
+    <string name="home_app_info_apk_size">Розмір APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Режим root вимагає, щоб оригінальний APK файл був встановлений на вашому пристрої перед патчінгом</string>
     <string name="root_gmscore_excluded">Патч підтримки GmsCore виключено у режимі root</string>
@@ -308,16 +316,13 @@
     <string name="failed_to_execute_patch">Не вдалося застосувати %s</string>
     <string name="patched_app_saved_toast">Патчений застосунок збережено для подальшого використання</string>
     <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений застосунок</string>
-    <string name="download_apk">Завантажити APK файл</string>
     <string name="plugin_activity_dialog_body">Для продовження потрібна взаємодія користувача з цим плагіном</string>
     <string name="patcher_process_exit_message">Процес патчера завершився з кодом %1$s</string>
     <string name="install_app_success">Встановлено успішно</string>
     <string name="install_app_fail">Неможливо встановити застосунок: %s</string>
-    <string name="install_timeout_message">Встановлення не завершено. Перевірте діалог системного інсталятора та спробуйте ще раз</string>
     <string name="save_apk_success">APK файл збережено</string>
     <string name="saved_app_export_failed">Не вдалося експортувати патчений застосунок</string>
     <string name="saved_app_removed_toast">Видалено збережений патчений застосунок</string>
-    <string name="saved_app_copy_removed_toast">Видалено збережену копію</string>
     <string name="saved_app_launch_unavailable">Встановіть застосунок, перш ніж відкрити його</string>
     <string name="package_name">Назва пакета</string>
     <string name="failed_to_mount">Не вдалося змонтувати: %s</string>
@@ -337,6 +342,10 @@
     <string name="settings_appearance_background_grid">Сітка</string>
     <string name="settings_appearance_background_particles">Частинки</string>
     <string name="settings_appearance_background_none">Немає</string>
+    <string name="settings_appearance_background_random">Випадково</string>
+    <string name="settings_appearance_background_random_interval_launch">При запуску</string>
+    <string name="settings_appearance_background_random_interval_daily">Щодня</string>
+    <string name="settings_appearance_background_random_interval_3days">Кожні 3 дні</string>
     <string name="settings_appearance_parallax_effect">Ефект паралакса</string>
     <string name="settings_appearance_parallax_effect_description">Плавне зміщення фону при нахилі пристрою</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@
     <string name="settings_appearance_app_language_current">Поточна мова</string>
     <string name="settings_appearance_translations_info_title">Переклади деяких мов можуть бути відсутніми або неповними</string>
     <string name="settings_appearance_translations_info_text">Щоб перекласти нові мови або покращити наявні переклади, відвідайте %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Головний екран</string>
+    <string name="settings_appearance_greeting_phrases">Вітальні фрази</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Показувати вітальне повідомлення на головному екрані</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Іконка застосунку</string>
     <string name="settings_appearance_app_icon_default">Стандартна</string>
@@ -399,8 +412,17 @@
     <string name="settings_advanced_expert_mode_description">Увімкнути розширенні налаштування патчінгу Morphe та параметри кастомізації</string>
     <string name="settings_advanced_expert_mode_dialog_title">Увімкнути режим експерта?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Експертний режим надає більше контролю над застосуванням патчів, але неправильне налаштування параметрів у експертному режимі може призвести до непрацездатності застосунку</string>
-    <string name="settings_advanced_strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
-    <string name="settings_advanced_strip_unused_libs_description">Видаляти нативні бібліотеки для непідтримуваних архітектур процесора з патчених застосунків</string>
+    <string name="settings_advanced_strip_unused_libs">Оптимізація для архітектури пристрою</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Пропускати split модулі APK для непідтримуваних архітектур процесора, локалізацій та щільностей екрана під час об'єднання.
+Для звичайних APK видаляти нативні бібліотеки для непідтримуваних архітектур після патчінгу"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Режим обробки байт-коду</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Керує процесом обробки байт-коду під час встановлення патчів. Впливає на швидкість встановлення патчів, використання пам\'яті та розмір вихідного APK файлу</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Швидкий (Рекомендовано)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Швидкий</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Швидший патчінг та менше використання пам\'яті, але розмір APK файлу буде більшим. Рекомендовано для пристроїв з малим обсягом оперативної пам\'яті або старих пристроїв</string>
+    <string name="settings_advanced_bytecode_mode_full">Повний</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Повільніший патчінг, відтворює застарілу поведінку. Використовуйте лише якщо швидкий режим викликає проблеми</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Потрібно для використання pull request як джерела</string>
@@ -487,7 +509,7 @@ morphe_header_custom_dark.png
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Приховати функціонал Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Приховати ярлик Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Прибрати Shorts з меню довгого натискання у лаунчері</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Прибрати Shorts з меню тривалого натискання у лаунчері</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Приховати віджет Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Прибрати кнопку Shorts з віджета лаунчера</string>
     <!-- Settings - System Tab - Installer Section -->
@@ -510,13 +532,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">Версія встановленого Shizuku не підтримується</string>
     <string name="installer_action_open_shizuku">Відкрити Shizuku</string>
     <string name="installer_hint_generic">Не вдалося встановити. Спробуйте ще раз або перемкніть на інший інсталятор</string>
-    <string name="installer_hint_blocked">Інсталяція була заблокована Android. Перевірте Play Protect чи налаштування безпеки</string>
     <string name="installer_hint_conflict">Інший застосунок із цим іменем пакета вже встановлений. Видаліть його, перш ніж продовжити</string>
-    <string name="installer_hint_incompatible">APK файл не сумісний з цим пристроєм або версією Android</string>
-    <string name="installer_hint_invalid">APK файл недійсний або пошкоджений</string>
-    <string name="installer_hint_storage">Недостатньо місця для встановлення</string>
-    <string name="installer_hint_timeout">Встановлення зайняло багато часу. Спробуйте ще раз</string>
-    <string name="installer_hint_aborted">Встановлення скасовано</string>
     <string name="installer_external_launched">Відкривається %1$s…</string>
     <string name="installer_external_timeout">%1$s не підтвердив встановлення. Перевірте інший застосунок і спробуйте знову</string>
     <string name="installer_external_success">%1$s повідомив про успішне встановлення</string>
@@ -547,6 +563,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">Ім\'я користувача (псевдонім)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Пароль</string>
     <string name="settings_system_import_keystore_dialog_button">Імпортувати</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Формат сховища ключів</string>
     <string name="settings_system_import_keystore_wrong_credentials">Невірні облікові дані сховища ключів</string>
     <string name="settings_system_import_keystore_success">Сховище ключів імпортовано</string>
     <string name="settings_system_import_keystore_failed">Не вдалося імпортувати сховище ключів</string>
@@ -554,6 +571,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Експортувати поточне сховище ключів</string>
     <string name="settings_system_export_keystore_unavailable">Немає доступного сховища ключів для експорту</string>
     <string name="settings_system_export_keystore_success">Сховище ключів експортовано</string>
+    <string name="settings_system_export_keystore_failed">Не вдалося експортувати сховище ключів</string>
     <string name="settings_system_show_password_field">Показати пароль</string>
     <string name="settings_system_hide_password_field">Приховати пароль</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ morphe_header_custom_dark.png
     <string name="allow">Дозволити</string>
     <string name="details">Деталі</string>
     <string name="hide">Приховати</string>
-    <string name="default_">За замовчуванням</string>
+    <string name="hidden">Приховані</string>
+    <string name="unhide">Показати</string>
     <string name="logs">Журнали</string>
     <string name="sources">Джерела</string>
     <string name="installing_ellipsis">Інсталяція…</string>

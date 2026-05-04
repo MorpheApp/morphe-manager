@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.patcher
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -55,11 +54,7 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.State
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
-import app.morphe.manager.ui.screen.shared.contentPadding
-import app.morphe.manager.ui.screen.shared.itemSpacing
-import app.morphe.manager.ui.screen.shared.rememberWindowSize
-import app.morphe.manager.ui.screen.shared.useTwoColumnLayout
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
@@ -473,7 +468,7 @@ private fun ExpertProgressHeader(
         val heapLimitMb = patcherViewModel.heapLimitMb
         AnimatedVisibility(
             visible = heapSamples.isNotEmpty(),
-            enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
+            enter = MorpheAnimations.expandFadeEnter
         ) {
             HeapUsageGraph(
                 samples = heapSamples,
@@ -736,11 +731,10 @@ private fun ExpertStepPipeline(patcherViewModel: PatcherViewModel) {
  */
 @Composable
 private fun ExpertLogPanel(
+    modifier: Modifier = Modifier,
     patcherViewModel: PatcherViewModel,
     listState: LazyListState,
-    patcherSucceeded: Boolean? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    patcherSucceeded: Boolean? = null
 ) {
     val rawLogs = patcherViewModel.logs
     // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines
@@ -915,14 +909,24 @@ private fun PatcherInfoCard(
 @Composable
 private fun StartBannerCard(item: LogItem.StartBanner) {
     PatcherInfoCard(title = "Patching started", variant = CardVariant.Start) {
-        BannerFieldCell("Package", item.packageName, Modifier.fillMaxWidth())
+        BannerFieldCell(
+            label = "Package",
+            value = item.packageName,
+            modifier = Modifier.weight(1f)
+        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            BannerFieldCell("App version", item.version, Modifier.weight(1f))
-            BannerFieldCell("Patches version", item.bundleVersion ?: "?", Modifier.weight(1f))
+            BannerFieldCell(
+                label = "App version",
+                value = item.version,
+                modifier = Modifier.weight(1f))
+            BannerFieldCell(
+                label = "Patches version",
+                value = item.bundleVersion ?: "?",
+                modifier = Modifier.weight(1f))
         }
 
         HorizontalDivider(
@@ -934,8 +938,14 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            BannerFieldCell("APK size", item.apkSizeMb, Modifier.weight(1f))
-            BannerFieldCell("Patches", item.patchCount.toString(), Modifier.weight(1f))
+            BannerFieldCell(
+                label = "APK size",
+                value = item.apkSizeMb,
+                modifier = Modifier.weight(1f))
+            BannerFieldCell(
+                label = "Patches",
+                value = item.patchCount.toString(),
+                modifier = Modifier.weight(1f))
             BannerFieldCell(
                 label = "Split APK",
                 value = if (item.isSplit) "yes" else "no",
@@ -950,7 +960,10 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            BannerFieldCell("Runtime", runtimeLabel, Modifier.weight(1f))
+            BannerFieldCell(
+                label = "Runtime",
+                value = runtimeLabel,
+                modifier = Modifier.weight(1f))
             if (item.runtimeMemoryLimitMb != null) {
                 BannerFieldCell(
                     label = "Heap limit",
@@ -973,12 +986,18 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 item.androidVersion?.let {
-                    BannerFieldCell("Android", it, Modifier.weight(1f))
+                    BannerFieldCell(
+                        label = "Android",
+                        value = it,
+                        modifier = Modifier.weight(1f))
                 }
                 if (item.deviceManufacturer != null || item.deviceModel != null) {
                     val deviceLabel = listOfNotNull(item.deviceManufacturer, item.deviceModel)
                         .joinToString(" ")
-                    BannerFieldCell("Device", deviceLabel, Modifier.weight(1f))
+                    BannerFieldCell(
+                        label = "Device",
+                        value = deviceLabel,
+                        modifier = Modifier.weight(1f))
                 }
             }
 
@@ -1015,8 +1034,14 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            BannerFieldCell("Output size", item.outputSizeMb, Modifier.weight(1f))
-            BannerFieldCell("Time", item.elapsedSec, Modifier.weight(1f))
+            BannerFieldCell(
+                label = "Output size",
+                value = item.outputSizeMb,
+                modifier = Modifier.weight(1f))
+            BannerFieldCell(
+                label = "Time",
+                value = item.elapsedSec,
+                modifier = Modifier.weight(1f))
         }
 
         if (item.processHeapAverageMb != null) {
@@ -1024,8 +1049,14 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                BannerFieldCell("Memory average", item.processHeapAverageMb, Modifier.weight(1f))
-                BannerFieldCell("Memory max", item.processHeapMaxMb ?: "?", Modifier.weight(1f))
+                BannerFieldCell(
+                    label = "Memory average",
+                    value = item.processHeapAverageMb,
+                    modifier = Modifier.weight(1f))
+                BannerFieldCell(
+                    label = "Memory max",
+                    value = item.processHeapMaxMb ?: "?",
+                    modifier = Modifier.weight(1f))
             }
         }
     }
@@ -1036,10 +1067,9 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
  */
 @Composable
 private fun BannerFieldCell(
+    modifier: Modifier = Modifier,
     label: String,
     value: String,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier,
     valueColor: Color? = null
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(2.dp)) {

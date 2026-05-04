@@ -81,21 +81,29 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             events.progress(null, State.COMPLETED.name, null) // Loading patches
 
             val preparation = SplitApkPreparer.prepareIfNeeded(
-                File(parameters.inputFile),
-                File(parameters.cacheDir),
-                logger,
-                parameters.stripNativeLibs,
-                onProgress = { message -> logger.info(message) }
+                source = File(parameters.inputFile),
+                workspace = File(parameters.cacheDir),
+                logger = logger,
+                skipUnneededSplits = parameters.skipUnneededSplits,
+                onProgress = { message ->
+                    logger.info(message)
+                    events.progress(message, State.RUNNING.name, null)
+                }
             )
 
             try {
                 if (preparation.merged) {
                     events.progress(null, State.COMPLETED.name, null)
+
+                    // Copy merged APK to the agreed path so ProcessRuntime can read it back
+                    // in the main process after this process finishes
+                    parameters.mergedInputFile?.let { dest ->
+                        preparation.file.copyTo(File(dest), overwrite = true)
+                    }
                 }
 
                 Session(
                     cacheDir = parameters.cacheDir,
-                    aaptPath = parameters.aaptPath,
                     frameworkDir = parameters.frameworkDir,
                     androidContext = context,
                     logger = logger,
@@ -103,16 +111,18 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     onPatchCompleted = { events.patchSucceeded() },
                     onProgress = { name, state, message ->
                         events.progress(name, state?.name, message)
-                    }
+                    },
+                    bytecodeMode = parameters.bytecodeMode,
                 ).use {
                     it.run(File(parameters.outputFile), patchList)
                 }
+                MemoryMonitor.stopMemoryPolling(logger)
                 events.finished(null)
             } catch (e: Exception) {
+                MemoryMonitor.stopMemoryPolling(logger)
                 events.finished(e.stackTraceToString())
             } finally {
                 preparation.cleanup()
-                MemoryMonitor.stopMemoryPolling(logger)
             }
         }
     }

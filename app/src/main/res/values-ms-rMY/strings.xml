@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_description">Kebenaran pemasangan aplikasi mesti diberikan lebih awal untuk mengelakkan pepijat dalam sistem Android 11 yang akan menjejaskan pengalaman pengguna secara negatif</string>
     <string name="deep_link_add_source_title">Tambah sumber</string>
     <string name="deep_link_add_source_message">Adakah anda mahu tambahkan sumber tampalan ini ke Morphie</string>
-    <string name="deep_link_add_source_warning">Hanya tambahkan sumber yang anda percaya</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Kemas kini Morphie tersedia</string>
     <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
@@ -297,16 +296,13 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="failed_to_execute_patch">Gagal untuk memasang %s</string>
     <string name="patched_app_saved_toast">Aplikasi telah ditampal disimpan untuk lain kali</string>
     <string name="patched_app_save_failed_toast">Gagal untuk menyimpan aplikasi yang telah ditampal</string>
-    <string name="download_apk">Muat turun fail APK</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk meneruskan dengan pemalam ini</string>
     <string name="patcher_process_exit_message">Proses penampalan keluar dengan kod %1$s</string>
     <string name="install_app_success">Pemasangan berjaya</string>
     <string name="install_app_fail">Gagal untuk dipasang: %s</string>
-    <string name="install_timeout_message">Pemasangan tidak selesai. Semak dialog sistem pemasang dan cuba semula</string>
     <string name="save_apk_success">APK tersimpan</string>
     <string name="saved_app_export_failed">Gagal untuk membawa keluar aplikasi yang tertampal</string>
     <string name="saved_app_removed_toast">Aplikasi tertampal yang disimpan telah dibuang</string>
-    <string name="saved_app_copy_removed_toast">Salinan yang disimpan telah dibuang</string>
     <string name="saved_app_launch_unavailable">Pasang aplikasi sebelum membukanya</string>
     <string name="package_name">Nama pakej</string>
     <string name="failed_to_mount">Gagal untuk ditunggang: %s</string>
@@ -342,6 +338,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_appearance_app_language_current">Bahasa semasa</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk sesetengah bahasa mungkin kurang atau tidak lengkap</string>
     <string name="settings_appearance_translations_info_text">Untuk menterjemahkan bahasa baharu atau memperbaiki terjemahan yang sedia ada, lawati %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
     <string name="settings_appearance_app_icon_default">Lalai</string>
@@ -388,8 +385,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_advanced_expert_mode_description">Aktifkan tetapan dan pilihan penyesuaian Morphe yang kompleks</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
-    <string name="settings_advanced_strip_unused_libs">Buang pustaka asli yang tidak digunakan</string>
-    <string name="settings_advanced_strip_unused_libs_description">Padamkan pustaka asli untuk seni bina CPU yang tidak disokong dari aplikasi yang ditampal</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Diperlukan untuk sumber permintaan sedekah</string>
@@ -499,13 +495,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_status_shizuku_unsupported">Pemasangan gagal. Cuba lagi atau tukar kepada pemasang yang berbeza</string>
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan disekat oleh Android. Periksa Play Protect atau tetapan keselamatan</string>
-    <string name="installer_hint_blocked">Mula Shizuku atau Sui dan cuba lagi</string>
     <string name="installer_hint_conflict">Satu lagi aplikasi dengan nama pakej ini sudah dipasang.</string>
-    <string name="installer_hint_incompatible">APK tidak serasi dengan peranti atau versi Android ini</string>
-    <string name="installer_hint_invalid">APK tidak sah atau rosak</string>
-    <string name="installer_hint_storage">Tiada ruang simpanan yang mencukupi untuk pemasangan</string>
-    <string name="installer_hint_timeout">Pemasangan telah tamat tempoh. Cuba lagi</string>
-    <string name="installer_hint_aborted">Pemasangan dibatalkan</string>
     <string name="installer_external_launched">Membuka %1$s…</string>
     <string name="installer_external_timeout">%1$s tidak mengesahkan pemasangan. Periksa aplikasi lain dan cuba lagi</string>
     <string name="installer_external_success">%1$s melaporkan pemasangan berjaya</string>
@@ -667,7 +657,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="allow">Benarkan</string>
     <string name="details">Butiran</string>
     <string name="hide">Sembunyikan</string>
-    <string name="default_">Laluan asal</string>
     <string name="logs">Log</string>
     <string name="installing_ellipsis">Memasang…</string>
     <string name="mounting_ellipsis">Pemasangan…</string>

@@ -131,7 +131,7 @@ fun AdvancedTabContent(
                         }
                     )
 
-                    // Strip unused native libraries
+                    // Strip unused native libraries + filter split APKs for device
                     RichSettingsItem(
                         onClick = {
                             settingsViewModel.setStripUnusedNativeLibs(!stripUnusedNativeLibs)

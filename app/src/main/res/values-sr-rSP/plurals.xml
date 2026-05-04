@@ -2,28 +2,28 @@
 <resources>
     <plurals name="patch_count">
         <item quantity="one">%s патч</item>
-        <item quantity="few">%s патича</item>
+        <item quantity="few">%s исправка</item>
         <item quantity="other">%s патича</item>
     </plurals>
     <plurals name="option_count">
         <item quantity="one">%s опција патича</item>
-        <item quantity="few">%s опције патича</item>
+        <item quantity="few">%s опција поправке</item>
         <item quantity="other">%s опција патича</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s извор</item>
-        <item quantity="few">%s извора</item>
+        <item quantity="few">%s извор</item>
         <item quantity="other">%s извора</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="one">%s пакет</item>
-        <item quantity="few">%s пакета</item>
+        <item quantity="few">%s пакет</item>
         <item quantity="other">%s пакета</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Изведи %s пакет</item>
-        <item quantity="few">Изведи %s пакета</item>
-        <item quantity="other">Изведи %s пакета</item>
+        <item quantity="one">Извршена %s закрпа</item>
+        <item quantity="few">Извршене %s закрпе</item>
+        <item quantity="other">Извршене %s закрпе</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s АПК датотека</item>
@@ -44,5 +44,15 @@
         <item quantity="one">%s пакет изабран</item>
         <item quantity="few">%s пакета изабрано</item>
         <item quantity="other">%s пакета изабрано</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Покажите %s апликацију</item>
+        <item quantity="few">Покажите %s апликацију</item>
+        <item quantity="other">Покажите %s апликација</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s скривена апликација</item>
+        <item quantity="few">%s скривене апликације</item>
+        <item quantity="other">%s скривене апликације</item>
     </plurals>
 </resources>

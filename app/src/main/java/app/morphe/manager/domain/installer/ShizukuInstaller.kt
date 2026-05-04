@@ -1,5 +1,6 @@
 package app.morphe.manager.domain.installer
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Intent
 import android.content.IntentSender
@@ -13,7 +14,6 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.Process
 import android.os.RemoteException
-import app.morphe.manager.R
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -26,6 +26,12 @@ import java.io.File
 import java.io.IOException
 import java.lang.reflect.Constructor
 
+/**
+ * Performs silent APK installation via the Shizuku/Sui privileged service.
+ *
+ * Communicates directly with the system [IPackageInstaller] through Shizuku binder IPC,
+ * bypassing the user confirmation dialog required by the standard PackageInstaller API.
+ */
 class ShizukuInstaller(private val app: Application) {
 
     init {
@@ -35,38 +41,17 @@ class ShizukuInstaller(private val app: Application) {
         }
     }
 
+    /** Result of a silent installation attempt. */
     data class InstallResult(val status: Int, val message: String?)
 
-    fun availability(target: InstallerManager.InstallTarget): InstallerManager.Availability {
-        if (Shizuku.isPreV11()) {
-            return InstallerManager.Availability(false, R.string.installer_status_shizuku_unsupported)
-        }
-        val binderReady = runCatching { Shizuku.pingBinder() }.getOrElse { false }
-        if (!binderReady) {
-            return InstallerManager.Availability(false, R.string.installer_status_shizuku_not_running)
-        }
-        val permissionGranted = runCatching { Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED }.getOrElse { false }
-        if (!permissionGranted) {
-            return InstallerManager.Availability(false, R.string.installer_status_shizuku_permission)
-        }
-        return InstallerManager.Availability(true)
-    }
-
-    fun isInstalled(): Boolean {
-        if (Sui.isSui()) return true
-        return runCatching {
-            app.packageManager.getPackageInfo(PACKAGE_NAME, 0)
-        }.isSuccess
-    }
-
-    fun launchApp(): Boolean {
-        val intent = app.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
-            ?: return false
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        app.startActivity(intent)
-        return true
-    }
-
+    /**
+     * Silently installs [sourceFile] via Shizuku/Sui. Suspends until the installation completes.
+     *
+     * @param sourceFile The APK file to install.
+     * @param expectedPackage The expected package name of the APK, used to configure the session.
+     * @throws InstallerOperationException if the installation fails or is aborted.
+     */
+    @SuppressLint("RequestInstallPackagesPolicy")
     suspend fun install(sourceFile: File, expectedPackage: String): InstallResult = withContext(Dispatchers.IO) {
         val packageInstaller = obtainPackageInstaller()
         val isRoot = runCatching { Shizuku.getUid() }.getOrDefault(-1) == 0
@@ -78,8 +63,7 @@ class ShizukuInstaller(private val app: Application) {
             packageInstaller,
             installerPackageName,
             installerAttributionTag,
-            userId,
-            app
+            userId
         )
         val params = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL).apply {
             runCatching { setAppPackageName(expectedPackage) }
@@ -89,7 +73,6 @@ class ShizukuInstaller(private val app: Application) {
             }
         }
         PackageInstallerCompat.applyFlags(params)
-
         val sessionId = packageInstallerWrapper.createSession(params)
         val sessionBinder = IPackageInstallerSession.Stub.asInterface(
             ShizukuBinderWrapper(packageInstaller.openSession(sessionId).asBinder())
@@ -122,6 +105,7 @@ class ShizukuInstaller(private val app: Application) {
         }
     }
 
+    /** Resolves [IPackageInstaller] via the Shizuku binder IPC. */
     private fun obtainPackageInstaller(): IPackageInstaller {
         val binder = SystemServiceHelper.getSystemService("package")
             ?: throw IOException("Package service unavailable")
@@ -134,8 +118,10 @@ class ShizukuInstaller(private val app: Application) {
         }
     }
 
+    /** Returns the user ID derived from the current process UID. */
     private fun currentUserId(): Int = Process.myUid() / 100000
 
+    /** Thrown when the installation fails or is aborted by the system. */
     class InstallerOperationException(val status: Int, override val message: String?) : Exception(message)
 
     companion object {
@@ -145,58 +131,53 @@ class ShizukuInstaller(private val app: Application) {
     }
 }
 
+/**
+ * Reflection-based compatibility helpers for constructing [PackageInstaller] and
+ * [PackageInstaller.Session] instances from raw Shizuku binder objects.
+ *
+ * Required because the public API does not expose constructors that accept an [IPackageInstaller]
+ * directly - these are internal to the system and accessed via reflection.
+ */
 private object PackageInstallerCompat {
     private const val INSTALL_REPLACE_EXISTING = 0x00000002
-    private const val INSTALL_ALLOW_TEST = 0x00000004
 
+    /**
+     * Constructs a [PackageInstaller] wrapping the given [remote] binder.
+     * Uses the appropriate constructor signature for the running API level.
+     */
     fun createPackageInstaller(
         remote: IPackageInstaller,
         installerPackageName: String,
         installerAttributionTag: String?,
-        userId: Int,
-        app: Application
+        userId: Int
     ): PackageInstaller {
         return try {
-            when {
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-                    PackageInstaller::class.java
-                        .getDeclaredConstructor(
-                            IPackageInstaller::class.java,
-                            String::class.java,
-                            String::class.java,
-                            Int::class.javaPrimitiveType
-                        )
-                        .apply { isAccessible = true }
-                        .newInstance(remote, installerPackageName, installerAttributionTag, userId)
-                }
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
-                    PackageInstaller::class.java
-                        .getDeclaredConstructor(
-                            IPackageInstaller::class.java,
-                            String::class.java,
-                            Int::class.javaPrimitiveType
-                        )
-                        .apply { isAccessible = true }
-                        .newInstance(remote, installerPackageName, userId)
-                }
-                else -> {
-                    PackageInstaller::class.java
-                        .getDeclaredConstructor(
-                            android.content.Context::class.java,
-                            PackageManager::class.java,
-                            IPackageInstaller::class.java,
-                            String::class.java,
-                            Int::class.javaPrimitiveType
-                        )
-                        .apply { isAccessible = true }
-                        .newInstance(app, app.packageManager, remote, installerPackageName, userId)
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PackageInstaller::class.java
+                    .getDeclaredConstructor(
+                        IPackageInstaller::class.java,
+                        String::class.java,
+                        String::class.java,
+                        Int::class.javaPrimitiveType
+                    )
+                    .apply { isAccessible = true }
+                    .newInstance(remote, installerPackageName, installerAttributionTag, userId)
+            } else {
+                PackageInstaller::class.java
+                    .getDeclaredConstructor(
+                        IPackageInstaller::class.java,
+                        String::class.java,
+                        Int::class.javaPrimitiveType
+                    )
+                    .apply { isAccessible = true }
+                    .newInstance(remote, installerPackageName, userId)
             }
         } catch (error: ReflectiveOperationException) {
             throw RuntimeException(error)
         }
     }
 
+    /** Constructs a [PackageInstaller.Session] wrapping the given [remote] session binder. */
     fun createSession(remote: IPackageInstallerSession): PackageInstaller.Session {
         return try {
             PackageInstaller.Session::class.java
@@ -208,17 +189,34 @@ private object PackageInstallerCompat {
         }
     }
 
+    /**
+     * Sets [INSTALL_REPLACE_EXISTING] on the internal installFlags field of
+     * [PackageInstaller.SessionParams] via reflection. Required for Shizuku installs to correctly
+     * replace an existing package - without this flag the system may return
+     * [PackageInstaller.STATUS_FAILURE_CONFLICT] even when signatures match.
+     */
+    @SuppressLint("DiscouragedPrivateApi")
+    @Suppress("SoonBlockedPrivateApi", "PrivateApi")
     fun applyFlags(params: PackageInstaller.SessionParams) {
         runCatching {
             val field = PackageInstaller.SessionParams::class.java.getDeclaredField("installFlags")
             field.isAccessible = true
-            val current = field.getInt(params)
-            field.setInt(params, current or INSTALL_REPLACE_EXISTING or INSTALL_ALLOW_TEST)
+            field.setInt(params, field.getInt(params) or INSTALL_REPLACE_EXISTING)
         }
     }
+
 }
 
+/**
+ * Creates an [IntentSender] backed by a custom [android.content.IIntentSender] stub.
+ *
+ * Required because Shizuku sessions deliver their result intent through an [IntentSender],
+ * but the standard [android.app.PendingIntent]-based approach is unavailable in the Shizuku context.
+ */
 private object IntentSenderCompat {
+    /**
+     * Returns an [IntentSender] that invokes [callback] with the delivered [Intent].
+     */
     fun create(callback: (Intent) -> Unit): IntentSender {
         val binder = object : android.content.IIntentSender.Stub() {
             override fun send(

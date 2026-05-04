@@ -5,7 +5,6 @@
 
 package app.morphe.manager.util
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
@@ -53,10 +52,9 @@ suspend fun loadRemoteAvatar(url: String): Bitmap? = withContext(Dispatchers.IO)
  */
 @Composable
 fun RemoteAvatar(
+    modifier: Modifier = Modifier,
     url: String,
-    fallbackUrl: String? = null,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    fallbackUrl: String? = null
 ) {
     var bitmap by remember(url) {
         mutableStateOf(AvatarCache[url] ?: fallbackUrl?.let { AvatarCache[it] })

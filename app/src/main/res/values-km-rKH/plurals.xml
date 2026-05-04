@@ -3,9 +3,6 @@
     <plurals name="patch_count">
         <item quantity="other">បំណះ %s</item>
     </plurals>
-    <plurals name="patches_executed">
-        <item quantity="other">ប្រតិបត្តិបំណះ %s</item>
-    </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="other">%s ប្រភពដែលបានដំឡើង</item>
     </plurals>

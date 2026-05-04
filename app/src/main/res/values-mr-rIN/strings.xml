@@ -1,30 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">इतर ॲप्स</string>
+    <string name="home_not_patched_yet">अजून सुधारणा केलेली नाही</string>
+    <string name="home_no_patches_available">सुधारणा उपलब्ध नाहीत</string>
+    <string name="home_app_hide_title">हे ॲप लपवायचे का</string>
+    <string name="home_app_hide_message">हे ॲप मुख्य पानावरून लपवले जाईल. तुम्ही नंतर यादीच्या तळाशी असलेल्या  \'%1$s\' बटणाचा वापर करून ते पुन्हा मिळवू शकता.</string>
+    <string name="home_app_will_be_hidden">हे ॲप लपवले जाईल.</string>
+    <string name="home_app_show_hidden">लपवलेली ॲप्स दाखवा</string>
+    <string name="home_app_no_hidden">कोणतेही लपवलेले ॲप नाही</string>
+    <string name="home_app_hidden_apps_title">लपवलेली ॲप्स</string>
     <string name="home_app_hidden_apps_hint">\"Tap to unhide\"</string>
+    <string name="android_11_bug_dialog_title">अँड्रॉइड 11 दोष</string>
+    <string name="android_11_bug_dialog_description">अँड्रॉइड 11 सिस्टिममधील एक दोष टाळण्यासाठी, ॲप स्थापनेची परवानगी आधीच देणे आवश्यक आहे; अन्यथा त्याचा वापरकर्त्याच्या अनुभवावर वाईट परिणाम होईल.</string>
+    <string name="deep_link_add_source_title">मूळ जोडा</string>
+    <string name="deep_link_add_source_message">तुम्हाला \'Morphe\' मध्ये ही सुधारणा मूळ जोडायची आहे का?</string>
+    <string name="deep_link_add_source_warning">फक्त तुम्ही विश्वास ठेवता अशा स्त्रोतांनाच जोडा</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Morphe नवीन सुधारणा उपलब्ध आहे</string>
+    <string name="home_update_available_subtitle">नवीन सुधारणा स्थापनेसाठी तयार आहे</string>
+    <string name="home_update_error">सुधारणा अयशस्वी झाली</string>
+    <string name="home_update_error_subtitle">तुमचे नेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा.</string>
+    <string name="home_update_skipped_metered">सुधारणा वगळल्या</string>
+    <string name="home_update_skipped_metered_subtitle">मोबाईल डेटा/नेट चालू आहे</string>
+    <string name="home_updating_sources">मुळांमध्ये सुधारणा करत आहे</string>
+    <string name="home_update_progress_format">%1$s प्रक्रिया पूर्ण झाली</string>
+    <string name="home_update_success">मुळांमधील सुधारणा पूर्ण झाली</string>
+    <string name="home_update_success_subtitle">तुमची मुळे आधीच नवीन आहेत.</string>
+    <string name="home_sources_are_loading">मुळे लोड होत आहेत, कृपया वाट पहा</string>
     <string name="home_search_apps">ॲप्स शोधा</string>
     <string name="home_no_apps_title">ॲप्स उपलब्ध नाहीत</string>
     <string name="home_no_apps_subtitle">पॅच स्रोत जोडा किंवा %s मध्ये বিদ্যমান सक्षम करा</string>
     <string name="home_no_apps_search_subtitle">\"%1$s\" शी जुळणारे कोणतेही ॲप(s) नाहीत</string>
+    <string name="home_all_apps_hidden_title">सर्व ॲप्स लपवले आहेत</string>
+    <string name="home_all_apps_hidden_subtitle">तुम्ही होम स्क्रीनवरून सर्व ॲप्स लपवले आहेत</string>
     <!-- Home Screen - Home Greetings -->
+    <string name="home_greeting_1">तुम्हाला कोणत्या ॲपमध्ये सुधारणा करायची आहे?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="home_greeting_2">ॲप्सचा नाद घुमवायला तयार आहात का?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <string name="home_greeting_3">कंबर कसा, सुधारणेची वेळ आली आहे!</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="home_greeting_4">नवा दिवस, जाहिरात-मुक्त आणखी एक महाकलाकृती!</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="home_greeting_5">जाहिराती बघायची इच्छा आहे? माझी पण नाही!</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="home_greeting_6">चला, आता तुमच्या ॲप्सना सरळ करण्याची वेळ आलीये!</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="home_greeting_7">आजचा अंदाज: 100% खात्री फक्त \'सुधारणा\' होण्याचीच!</string>
     <!-- From mediocrity to amazing -->
+    <string name="home_greeting_8">साध्या सुध्या गोष्टींना जबरदस्त बनवायला तयार आहात का?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="home_greeting_9">आजपासून ॲप्सना त्यांच्याच दोषांपासून वाचवत आहे</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="home_greeting_10">कॉफी आणि उत्तम सुधारणांच्या जोरावर काम सुरू</string>
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">सुधारणांची मुळे</string>
+    <string name="sources_management_open_in_browser">लिंक बाहेर नेटवर उघडा</string>
+    <string name="sources_management_failed_to_open_url">लिंक उघडता आली नाही</string>
+    <string name="sources_management_prerelease_toggle">नवीन प्रायोगिक सुधारणा वापरा</string>
+    <string name="sources_management_prerelease_toggle_description">नवीन प्रायोगिक सुधारणा सर्वांच्या आधी वापरा</string>
+    <string name="sources_management_experimental_versions_toggle">चाचणीसाठी असलेल्या ॲप आवृत्त्या वापरा</string>
+    <string name="sources_management_experimental_versions_toggle_description">शक्य असल्यास प्रायोगिक ॲप्सवर पॅच लागू करा</string>
+    <string name="sources_management_already_exists">हे मूळ आधीच जोडले गेले आहे</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">दिसणारे नाव</string>
+    <string name="sources_dialog_rename">सुधारणांच्या मुळाचे नाव बदला</string>
+    <string name="sources_dialog_duplicate_name_error">या नावाचे सुधारणा मूळ आधीपासून उपलब्ध आहे</string>
+    <string name="sources_dialog_missing_error">हे सुधारणा मूळ अपडेट करता आले नाही</string>
+    <string name="sources_dialog_view_any_version">कोणतीही आवृत्ती</string>
+    <string name="sources_dialog_view_any_package">कोणताही संच</string>
+    <string name="sources_dialog_add_source">सुधारणा मूळ जोडा</string>
+    <string name="sources_dialog_delete_confirm_message">\"%s\" हे मूळ हटवायचे का? ही कृती पुन्हा बदलता येणार नाही</string>
+    <string name="sources_dialog_remote">बाहेरून</string>
+    <string name="sources_dialog_remote_url">मुळाची लिंक</string>
+    <string name="sources_dialog_remote_url_formats_title">येथे काही उदाहरणे दिली आहेत:</string>
+    <string name="sources_dialog_local">याच फोनमधील</string>
+    <string name="sources_dialog_local_file">सुधारणा मूळ फाईल निवडा</string>
+    <string name="sources_dialog_local_file_description">स्टोरेजमधून .mpp सुधारणा मूळ फाईल निवडा</string>
+    <string name="sources_dialog_local_change_file">फाईल बदला</string>
+    <string name="sources_dialog_preinstalled">पूर्व-स्थापित</string>
+    <string name="sources_update_success">अपडेट यशस्वी</string>
+    <string name="sources_update_unavailable">कोणतेही अपडेट उपलब्ध नाही</string>
+    <string name="sources_download_fail"> मुळ डाउनलोड होऊ शकली नाहीत: %s</string>
     <string name="sources_download_fail_named">\'%1$s\' डाउनलोड करण्यात अयशस्वी: %2$s</string>
+    <string name="sources_download_endpoint_not_found"> \'%1$s\' अपडेट होऊ शकले नाही: दिलेल्या लिंकवर सुधारणा JSON फाईल उपलब्ध नाही.</string>
     <string name="sources_patch_expert_badge">तज्ञ</string>
     <string name="sources_patch_expert_badge_tooltip">हा पॅच मॅन्युअली समाविष्ट करण्यासाठी सेटिंग्जमध्ये तज्ञ मोड सक्षम करा</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_dialog_title">मूळ APK शोधण्यासाठी मदत हवी आहे का?</string>
+    <string name="home_apk_availability_dialog_simple"> &lt;b&gt;%s&lt;/b&gt;, मध्ये बदल करण्यासाठी, तुमच्याकडे  बदल न केलेले APK आवृत्ती असणे आवश्यक आहे:</string>
+    <string name="home_apk_availability_dialog_expert"> &lt;b&gt;%s&lt;/b&gt;, मध्ये बदल करण्यासाठी, तुमच्याकडे  बदल न केलेले APK आवृत्ती असणे आवश्यक आहे:</string>
+    <string name="home_apk_availability_recommended_label">सुचवलेले</string>
+    <string name="home_apk_availability_unpatched_label"> बदल न केलेले</string>
+    <string name="home_apk_availability_incompatible_label">असंगत</string>
+    <string name="home_apk_availability_yes">हो, मला APK शोधण्यात मदत करा.</string>
+    <string name="home_apk_availability_no">नाही, माझ्याकडे आधीपासूनच APK आहे.</string>
+    <string name="home_apk_use_saved_with_version">आधीच साठवलेली APK (v%s) वापरा</string>
+    <string name="home_app_info_no_saved_apk">कोणतीही साठवलेली APK नाही. तुम्हाला पुन्हा एकदा APK फाईल निवडावी लागेल.</string>
+    <string name="home_version_requires_android">Android %1$s+ आवश्यक आहे</string>
+    <string name="home_apk_no_compatible_versions_title">या डिव्हाइसवर समर्थित नाही</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) साठी समर्थित आवृत्त्या नाहीत. घोषित केलेल्या सर्व आवृत्त्यांसाठी उच्च Android आवृत्ती आवश्यक आहे.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
+    <string name="home_download_instructions_title">मूळ APK डाउनलोड करा</string>
+    <string name="home_download_instructions_steps_title">सूचना</string>
+    <string name="home_download_instructions_step1">खालील \'%1$s\' बटण दाबा</string>
+    <string name="home_download_instructions_step2_part1">वेबपेजवर खाली स्क्रोल करा आणि दाबा</string>
+    <string name="home_download_instructions_download_button_toast">वेबसाइटवर असलेल्या डाउनलोड बटणावर दाबा, येथे नाही. 😊</string>
+    <string name="home_download_instructions_step3">डाउनलोड पूर्ण होऊ द्या, पण APK  &lt;b&gt;इन्स्टॉल करू नका.&lt;b&gt;</string>
+    <string name="home_download_instructions_step3_mount">डाउनलोड पूर्ण होण्याची प्रतीक्षा करा, त्यानंतर  &lt;b&gt;APK इन्स्टॉल करा&lt;b&gt;</string>
+    <string name="home_download_instructions_step4">डाउनलोड झाल्यावर पुन्हा Morphe उघडा.</string>
+    <string name="home_download_instructions_step4_mount">इन्स्टॉलेशन पूर्ण झाल्यावर Morphe कडे परत वळा.</string>
+    <string name="home_download_instructions_continue">APKMirror.com उघडा</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_file_picker_prompt_title">डाउनलोड केलेली APK निवडा</string>
+    <string name="home_file_picker_prompt_description">तुम्ही आत्ताच डाउनलोड केलेली &lt;b&gt;%1$s&lt;/b&gt; APK फाईल निवडा</string>
+    <string name="home_file_picker_prompt_open_apk">APK फाईल उघडा</string>
+    <string name="home_recommended_version">सुचवलेली आवृत्ती</string>
+    <string name="home_selected_version">निवडलेली आवृत्ती</string>
     <string name="home_invalid_apk_unreadable">फाईल वाचण्यात अयशस्वी. \'External Storage\' बॅटरी निर्बंधीत नसल्याची खात्री करा</string>
     <string name="home_invalid_apk_not_an_apk"> निवडलेली फाइल वैध APK नाही.</string>
     <string name="home_invalid_apk_io_error">फाईल उघडण्यात अयशस्वी. कृपया पुन्हा प्रयत्न करा</string>
@@ -34,11 +127,13 @@
     <string name="expert_mode_new_patches">नवीन</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_low_disk_space_dialog_message">फक्त %1$.2f GB मोफत स्टोरेज उपलब्ध आहे. पॅचिंगसाठी योग्यरित्या कार्य करण्यासाठी किमान %2$.2f GB मोफत जागा आवश्यक आहे.</string>
+    <string name="home_simple_bundle_select_title">सुधारणा मूळ स्त्रोत निवडा</string>
     <!-- Patch Options -->
     <string name="patch_option_required_missing">%s: आवश्यक पर्याय भरा</string>
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
+    <string name="home_app_info_apk_size">APK आकार</string>
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
     <string name="patcher_error_dialog_app_info">ॲप माहिती</string>
@@ -54,12 +149,30 @@
     <!-- Patcher Screen - Other hidden strings -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
+    <string name="settings_appearance_background_random"> randomly </string>
+    <string name="settings_appearance_background_random_interval_launch"> चालू केल्यावर </string>
+    <string name="settings_appearance_background_random_interval_daily">दैनिक</string>
+    <string name="settings_appearance_background_random_interval_3days">प्रत्येक 3 दिवसांनी</string>
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">मुख्य स्क्रीन</string>
+    <string name="settings_appearance_greeting_phrases">शुभेच्छा संदेश</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <string name="settings_advanced_strip_unused_libs">उपकरणाच्या आर्किटेक्चरसाठी अनुकूल करा</string>
+    <string name="settings_advanced_strip_unused_libs_description">"साध्या APK साठी, पॅचिंगनंतर असमर्थित आर्किटेक्चरसाठी नेटिव्ह लायब्ररी काढल्या जातात."</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">बाईटकोड प्रक्रिया मोड</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description"> patching दरम्यान बाईटकोड कसा process केला जातो हे नियंत्रित करते. patching गती, मेमरी वापर आणि आउटपुट APK आकार यावर परिणाम होतो</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">जलद (शिफारस केलेले)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">जलद</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">मोठा APK आकार या बदल्यात, जलद पॅचिंग आणि कमी मेमरी वापर. कमी RAM किंवा जुन्या उपकरणांसाठी शिफारसित</string>
+    <string name="settings_advanced_bytecode_mode_full">पूर्ण</string>
+    <string name="settings_advanced_bytecode_mode_full_description">धीमे पॅचिंग, जुन्या वर्तणुकीची नक्कल करते. जलद मोड समस्या निर्माण करत असल्यास फक्त ते वापरा</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -69,6 +182,8 @@
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
     <!-- Settings - System Tab - Import and export keystore -->
+    <string name="settings_system_import_keystore_dialog_format_field">कीस्टोअर स्वरूप</string>
+    <string name="settings_system_export_keystore_failed">कीस्टोअर निर्यात करण्यात अयशस्वी</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
     <!-- Settings - System Tab - Debug Section -->
     <!-- Settings - System Tab - Storage Management Section -->
@@ -82,6 +197,8 @@
     <string name="all">सर्व</string>
     <string name="filter">गाळण</string>
     <string name="unmount">डिमाउंट</string>
+    <string name="hidden">लपलेले</string>
+    <string name="unhide">उघड करा</string>
     <string name="sources">स्त्रोत</string>
     <string name="imported_successfully">यशस्वीरित्या आयात केले</string>
 </resources>

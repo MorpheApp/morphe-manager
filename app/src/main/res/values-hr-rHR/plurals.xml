@@ -21,9 +21,9 @@
         <item quantity="other">%s paketa</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Izvrši %s patch</item>
-        <item quantity="few">Izvrši %s patcheva </item>
-        <item quantity="other">Izvrši %s popravke</item>
+        <item quantity="one">Izvršen %s patch</item>
+        <item quantity="few">Executed %s patcheva</item>
+        <item quantity="other">Executed  %s patcheva</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s aplikacija</item>
@@ -44,5 +44,15 @@
         <item quantity="one">Odabrano je %s od  patcheva</item>
         <item quantity="few">Odabrano je %s od  patcheva</item>
         <item quantity="other">Odabrano je %s od  patcheva</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Prikaži %s aplikaciju</item>
+        <item quantity="few">Prikaži %s apliakcija</item>
+        <item quantity="other">Prikaži %s apliakcija</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s skrivena aplikacija</item>
+        <item quantity="few">%s skrivenih aplikacija</item>
+        <item quantity="other">%s skrivenih aplikacija</item>
     </plurals>
 </resources>

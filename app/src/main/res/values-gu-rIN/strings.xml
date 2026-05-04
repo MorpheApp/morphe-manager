@@ -14,7 +14,6 @@
     <string name="android_11_bug_dialog_description">એપ ઇન્સ્ટોલેશનની પરવાનગી પહેલેથી જ આપવી જરૂરી છે, કારણ કે Android 11 સિસ્ટમમાં એક બગ છે જે યુઝર અનુભવને નકારાત્મક રીતે અસર કરી શકે છે</string>
     <string name="deep_link_add_source_title">સ્ત્રોત ઉમેરો</string>
     <string name="deep_link_add_source_message">શું તમે આ પેચ સ્ત્રોતને મોર્ફેમાં ઉમેરવા માંગો છો?</string>
-    <string name="deep_link_add_source_warning">તમને વિશ્વાસ હોય તેવા સ્ત્રોતોમાંથી જ સ્ત્રોત ઉમેરો</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <string name="home_update_available_subtitle">નવું સંસ્કરણ ઇન્સ્ટોલ કરવા માટે તૈયાર છે</string>
@@ -150,6 +149,7 @@
     <string name="settings_appearance_app_language_current">વર્તમાન ભાષા</string>
     <string name="settings_appearance_translations_info_title">કેટલીક ભાષાઓ માટે અનુવાદો ખૂટતા અથવા અપૂર્ણ હોઈ શકે છે.</string>
     <string name="settings_appearance_translations_info_text">નવી ભાષાઓનો અનુવાદ કરવા અથવા હાલના અનુવાદોને સુધારવા માટે, %s ની મુલાકાત લો.</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_default">ડિફૉલ્ટ</string>
     <string name="settings_appearance_app_icon_light_2">આકાશ</string>
@@ -162,6 +162,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">પેચ વિકલ્પો</string>
@@ -227,5 +228,4 @@ morphe_header_custom_dark.png
     <string name="settings">સેટિંગ્સ</string>
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
-    <string name="default_">ડિફૉલ્ટ</string>
 </resources>

@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Dozvola za instalaciju aplikacije mora biti data unapred kako bi se izbjegao greška u sistemu Android 11 koja može negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Додај извор</string>
     <string name="deep_link_add_source_message">Да ли желите да додати овај извор исправки у Morphe?</string>
-    <string name="deep_link_add_source_warning">Додајте извор само са извора које поуздајете</string>
+    <string name="deep_link_add_source_warning">Додајте само изворе којима верујете</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступно је ажурирање за Morphe</string>
     <string name="home_update_available_subtitle">Нова верзија спремна за инсталирање</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Нисe доступни апликације</string>
     <string name="home_no_apps_subtitle">Додај извор пача или омогући постојећи у %s</string>
     <string name="home_no_apps_search_subtitle">Нисe пронађени апликације које одговарају \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Све апликације су скривене</string>
+    <string name="home_all_apps_hidden_subtitle">Скрио/Скриле сте све апликације са почетног екрана</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Коју апликацију желите да печујете?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Da bi popravili &lt;b&gt;%s&lt;/b&gt;, potrebno je nepatchovani APK verzija:</string>
     <string name="home_apk_availability_recommended_label">Preporučeno</string>
     <string name="home_apk_availability_unpatched_label">Необрађен</string>
+    <string name="home_apk_availability_incompatible_label">Некомпатибилан</string>
     <string name="home_apk_availability_yes">Да, помози ми да нађем АПК</string>
     <string name="home_apk_availability_no">Ne, već imam APK</string>
     <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema saćuvanog APK-a. Patching zahtijeva ponovno odabir APK datoteke</string>
+    <string name="home_version_requires_android">Захтева Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Није подржано на овом уређају</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; нема подржаних верзија за Android %2$d (API %3$d). Све декларисане верзије захтевају вишу верзију Android-а</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Преузмите оригинални APK</string>
     <string name="home_download_instructions_steps_title">Упутства:</string>
@@ -162,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">Мало дисковног простора</string>
     <string name="home_low_disk_space_dialog_message">Samo %1$.2f GB слободне меморије је доступно. Пачинг захтева најмање %2$.2f GB слободне меморије да би исправно функционисао</string>
     <string name="home_low_disk_space_dialog_warning">Настављање може довести до грешке \"фајл није пронађен\" или до неисправног APK излаза</string>
+    <string name="home_simple_bundle_select_title">Изаберите извор закрпе</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Boja u heksadecimalnom formatu</string>
@@ -220,6 +227,7 @@
     <string name="home_app_info_patch_update_available_description">Доступна је нова верзија патчева. Репатујте своју апликацију да добијете најновије побољшања и исправке</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
     <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan Morphe. Ponovo je instalirajte da bi obnovili funkcionalnost</string>
+    <string name="home_app_info_apk_size">Величина APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root режим захтева да оригинални APK буде инсталиран на вашем уређају пре печовања</string>
     <string name="root_gmscore_excluded">Печ подршке GmsCore је искључен у root режиму</string>
@@ -307,16 +315,13 @@
     <string name="failed_to_execute_patch">Није успело да се примени %s</string>
     <string name="patched_app_saved_toast">Крпељом потписана апликација сачувана за касније</string>
     <string name="patched_app_save_failed_toast">Није успело чување крпељом потписане апликације</string>
-    <string name="download_apk">Преузми APK фајл</string>
     <string name="plugin_activity_dialog_body">Неопходна је корисничка интеракција да бисте наставили са овом додатком.</string>
     <string name="patcher_process_exit_message">Процес пачера изашао са кодом %1$s</string>
     <string name="install_app_success">Успешно инсталирано</string>
     <string name="install_app_fail">Није успело инсталирање апликације: %s</string>
-    <string name="install_timeout_message">Инсталација није завршена. Проверите дијалог система за инсталацију и покушајте поново.</string>
     <string name="save_apk_success">АПК је сачуван</string>
     <string name="saved_app_export_failed">Није успео извоз покрпљене апликације</string>
     <string name="saved_app_removed_toast">Уклоњена сачувана покрпљена апликација</string>
-    <string name="saved_app_copy_removed_toast">Уклоњена сачувана копија</string>
     <string name="saved_app_launch_unavailable">Инсталирајте апликацију пре отварања.</string>
     <string name="package_name">Име пакета</string>
     <string name="failed_to_mount">Није успело монтирање: %s</string>
@@ -336,6 +341,10 @@
     <string name="settings_appearance_background_grid">Мрежа</string>
     <string name="settings_appearance_background_particles">Партикле</string>
     <string name="settings_appearance_background_none">Ништа</string>
+    <string name="settings_appearance_background_random">Насумично</string>
+    <string name="settings_appearance_background_random_interval_launch">При покретању</string>
+    <string name="settings_appearance_background_random_interval_daily">Дневно</string>
+    <string name="settings_appearance_background_random_interval_3days">Свака 3 дана</string>
     <string name="settings_appearance_parallax_effect">Efekt paralaksa</string>
     <string name="settings_appearance_parallax_effect_description">Umiranje pozadine pri kretanju ugao naprijed nazad</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -352,6 +361,10 @@
     <string name="settings_appearance_app_language_current">Тренутна језика</string>
     <string name="settings_appearance_translations_info_title">Недостаје превода за неке језике</string>
     <string name="settings_appearance_translations_info_text">Да бисте додали нове језике или побољшали постоје преводе, посетите %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Почетни екран</string>
+    <string name="settings_appearance_greeting_phrases">Почетне фразе</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Иконица апликације</string>
     <string name="settings_appearance_app_icon_default">Подразумеван</string>
@@ -398,8 +411,17 @@
     <string name="settings_advanced_expert_mode_description">Omogući kompleksno podešavanje Morphe i personalizacija opcija</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogući režim eksperta?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta omogućava veću kontrolu nad primenom patchova, ali pogrešno podešavanje postavki u režimu eksperta može da rezultuje nefunkcionalnom aplikacijom</string>
-    <string name="settings_advanced_strip_unused_libs">Уклонити ненужне оригиналне библиотеке</string>
-    <string name="settings_advanced_strip_unused_libs_description">Брисање ненужних оригиналних библиотека може повећати патчирање, али може бити недовољно за старије уређаје</string>
+    <string name="settings_advanced_strip_unused_libs">Optimizujte za arhitekturu uređaja</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Preskoči SPLIT APK module za nepoznate CPU arhitekture, lokale i rezolucije ekrana tokom objedinjavanja.
+Za obične APK-ove, uklanja nativne biblioteke za nepoznate arhitekture nakon 'patch'ovanja"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Начин рада обраде байткода</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Контролише како се обрађује байткод током поправке. Утиче на брзину поправке, коришћење меморије и величину излазне APK датотеке</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Брзо (Препоручено)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Брзо</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Брже патчинг и мање коришћења меморије, на рачун веће APK величине. Препоручиво за уређаје са малом количином RAM или старије уређаје</string>
+    <string name="settings_advanced_bytecode_mode_full">Потпуно</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Полако пачирање, реплицира понашање старије верзије. Користите само ако брзи режим изазове проблеме</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Неопходно за изворе из GitHub pull request</string>
@@ -509,13 +531,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">Верзија Шизуку која је инсталирана није подржана.</string>
     <string name="installer_action_open_shizuku">Отвори Схизуку</string>
     <string name="installer_hint_generic">Инсталација је неуспела. Покушајте поново или пребаците на други инсталатор.</string>
-    <string name="installer_hint_blocked">Инсталација је блокирана од стране Андроида. Проверите Play Protect или подешавање безбедности.</string>
     <string name="installer_hint_conflict">Друга апликација са истим именом пакета је већ инсталирана. Деинсталирајте је пре наставка.</string>
-    <string name="installer_hint_incompatible">АПК није компатибилан са овом уређајем или верзијом Андроида.</string>
-    <string name="installer_hint_invalid">АПК је неважећи или оштећен.</string>
-    <string name="installer_hint_storage">Нема довољно места за инсталацију.</string>
-    <string name="installer_hint_timeout">Време за инсталацију је истекло. Покушајте поново.</string>
-    <string name="installer_hint_aborted">Инсталација је отказана.</string>
     <string name="installer_external_launched">Отварање %1$s…</string>
     <string name="installer_external_timeout">%1$s није потврдио инсталацију. Проверите другу апликацију и покушајте поново.</string>
     <string name="installer_external_success">%1$s известио је о успешној инсталацији.</string>
@@ -546,6 +562,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">Корисник (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Лозинка</string>
     <string name="settings_system_import_keystore_dialog_button">Увоз</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Формат кејстора</string>
     <string name="settings_system_import_keystore_wrong_credentials">Погрешно унете податке кластерског кључа</string>
     <string name="settings_system_import_keystore_success">Кластерски кључ успешно увезен</string>
     <string name="settings_system_import_keystore_failed">Неуспешно увоз кластерског кључа</string>
@@ -553,6 +570,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_keystore_description">Извезите тренутни кластерски кључ</string>
     <string name="settings_system_export_keystore_unavailable">Нема доступног кластерског кључа за извоз</string>
     <string name="settings_system_export_keystore_success">Кластерски кључ успешно извезен</string>
+    <string name="settings_system_export_keystore_failed">Неуспешно извезена keystore</string>
     <string name="settings_system_show_password_field">Прикажите лозинку</string>
     <string name="settings_system_hide_password_field">Сакрити лозинку</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -681,7 +699,8 @@ morphe_header_custom_dark.png
     <string name="allow">Дозволи</string>
     <string name="details">Detalji</string>
     <string name="hide">Sakrij</string>
-    <string name="default_">Подразумеван</string>
+    <string name="hidden">Сакривено</string>
+    <string name="unhide">Покажи</string>
     <string name="logs">Дневници</string>
     <string name="sources">Извори</string>
     <string name="installing_ellipsis">Инсталирање…</string>

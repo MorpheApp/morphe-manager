@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">ההרשאה להתקין את האפליקציה צריכה להיות מאושרת מראש כדי להימנע מבאג במערכת Android 11 שיפגע בחוויית המשתמש</string>
     <string name="deep_link_add_source_title">הוסף מקור</string>
     <string name="deep_link_add_source_message">האם ברצונך להוסיף מקור תיקונים זה ל-Morphe?</string>
-    <string name="deep_link_add_source_warning">הוסף מקור רק ממקורות שאתה סומך עליהם</string>
+    <string name="deep_link_add_source_warning">הוסף מקורות שאתה סומך עליהם בלבד</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">עדכון Morphe זמין</string>
     <string name="home_update_available_subtitle">גרסה חדשה מוכנה להתקנה</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">אין אפליקציות זמינות</string>
     <string name="home_no_apps_subtitle">הוסף מקור לאפליקציה או הפעל מקור קיים ב-\"%s\"</string>
     <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">כל האפליקציות מוסתרות</string>
+    <string name="home_all_apps_hidden_subtitle">הסתרת את כל האפליקציות מהמסך הראשי</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">איזה אפליקציה אתה רוצה לתקן?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">לעדכן &lt;b&gt;%s&lt;/b&gt;, צריך APK לא מעודכן של הגרסאות:</string>
     <string name="home_apk_availability_recommended_label">מומלץ</string>
     <string name="home_apk_availability_unpatched_label">לא מתקן</string>
+    <string name="home_apk_availability_incompatible_label">לא תואם</string>
     <string name="home_apk_availability_yes">כן, עזור לי למצוא APK</string>
     <string name="home_apk_availability_no">לא, אני כבר מחזיק APK</string>
     <string name="home_apk_use_saved_with_version">השתמש באפאק שמור (גרסה %s)</string>
     <string name="home_app_info_no_saved_apk">אין אפאק שמור. תיקון ידרש לבחור את קובץ האפאק שוב</string>
+    <string name="home_version_requires_android">דורש Android %1$s+‎</string>
+    <string name="home_apk_no_compatible_versions_title">לא נתמך במכשיר זה</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; אין לו גרסאות נתמכות עבור Android %2$d (API %3$d). כל הגרסאות המוצהרות דורשות גרסת Android גבוהה יותר</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">הורד את ה-APK המקורי</string>
     <string name="home_download_instructions_steps_title">הוראות:</string>
@@ -160,7 +166,9 @@
     <string name="home_outdated_patches_dialog_warning">התקנה עם טיקים מיושנים עשויה להוביל לאפליקציה שבורה</string>
     <string name="home_outdated_patches_dialog_update_and_patch">עדכן &amp; טקן</string>
     <string name="home_low_disk_space_dialog_title">מחסור בשטח דיסק</string>
+    <string name="home_low_disk_space_dialog_message">רק %1$.2f GB של שטח אחסון פנוי זמין. התקנת עדכונים דורשת לפחות %2$.2f GB של שטח פנוי כדי לעבוד כראוי.</string>
     <string name="home_low_disk_space_dialog_warning">המשך עלול לגרום לשגיאת \"קובץ לא נמצא\" או APK פלט פגום</string>
+    <string name="home_simple_bundle_select_title">בחר מקור תיקון</string>
     <!-- Patch Options -->
     <string name="custom_color">Цвет \"изготовителя\"</string>
     <string name="hex_color">Цвет в формате HEX</string>
@@ -220,6 +228,7 @@
     <string name="home_app_info_patch_update_available_description">גרסה חדשה של תיקונים זמינה. תיקן את האפליקציה שלך כדי לקבל את התיקונים וההערות החדשים</string>
     <string name="home_app_info_app_deleted_warning">האפליקציה הוסרה</string>
     <string name="home_app_info_app_deleted_description">האפליקציה הוסרה מחוץ למורפ. תיקנה כדי לשחזר את הפונקציונליות</string>
+    <string name="home_app_info_apk_size">גודל APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">מוד רוט דורש את APK המקורי להתקין על מכשיר שלך לפני השחזור</string>
     <string name="root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
@@ -307,16 +316,13 @@
     <string name="failed_to_execute_patch">נכשל להחיל %s</string>
     <string name="patched_app_saved_toast">אפליקציה מתוקנת נשמרה למועד מאוחר יותר</string>
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
-    <string name="download_apk">הורד קובץ APK</string>
     <string name="plugin_activity_dialog_body">נדרש אינטראקציה של המשתמש כדי להמשיך עם תוסף זה</string>
     <string name="patcher_process_exit_message">פועל הפייסר יצא עם קוד %1$s</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
-    <string name="install_timeout_message">ההתקנה לא הסתיימה. בדוק את דיאלוג ההתקנה של המערכת ונסה שוב</string>
     <string name="save_apk_success">APK נשמר</string>
     <string name="saved_app_export_failed">כשל בייצוא האפליקציה המתוקנת</string>
     <string name="saved_app_removed_toast">אפליקציה מתוקנת שנשמרה הוסרה</string>
-    <string name="saved_app_copy_removed_toast">עותק שמור הוסר</string>
     <string name="saved_app_launch_unavailable">התקן את האפליקציה לפני פתיחתה</string>
     <string name="package_name">שם חבילה</string>
     <string name="failed_to_mount">כשל בהרכבה: %s</string>
@@ -336,6 +342,10 @@
     <string name="settings_appearance_background_grid">רשת</string>
     <string name="settings_appearance_background_particles">חלקיקים</string>
     <string name="settings_appearance_background_none">אין</string>
+    <string name="settings_appearance_background_random">אקראי</string>
+    <string name="settings_appearance_background_random_interval_launch">בפתיחה</string>
+    <string name="settings_appearance_background_random_interval_daily">יומיומי</string>
+    <string name="settings_appearance_background_random_interval_3days">כל 3 ימים</string>
     <string name="settings_appearance_parallax_effect">אפקט פארלקס</string>
     <string name="settings_appearance_parallax_effect_description">הדגמה חלקה של רקע בעת טיפוס של המכשיר</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -352,6 +362,10 @@
     <string name="settings_appearance_app_language_current">שפה נוכח</string>
     <string name="settings_appearance_translations_info_title">תרגומים עבור חלק מהשצות עשויים או לא מושלמים</string>
     <string name="settings_appearance_translations_info_text">לתרגם שפות חדשות או לשפר את התרגומים הקיימים, עלי לבקר %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">מסך הבית</string>
+    <string name="settings_appearance_greeting_phrases">משפטי פתיחה</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">הצגת הודעת פתיחה על מסך הבית</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">אייקון האפליקציה</string>
     <string name="settings_appearance_app_icon_default">ברירת מחדל</string>
@@ -398,8 +412,17 @@
     <string name="settings_advanced_expert_mode_description">אפשר הגדרות תיקון מורפמה מורכבות וoptions אישוריות מותאמות אישית</string>
     <string name="settings_advanced_expert_mode_dialog_title">אפשר את режим מומחה?</string>
     <string name="settings_advanced_expert_mode_dialog_message">mode מומחה מספק יותר שליטה על איך התיקונים מופעלים, אך תצורתה של הגדרות ב-mode מומחה יכולה לגרום לאפליקציה שאינה פונקציונלית</string>
-    <string name="settings_advanced_strip_unused_libs">הסר את קבצים נטוים</string>
-    <string name="settings_advanced_strip_unused_libs_description">הסרת קבצים נטוים תאפשר מהיר יותר את הפיצ\'ח, אך ייתכן שלא תעבוד על מכשירים ישנים</string>
+    <string name="settings_advanced_strip_unused_libs">לייעל עבור ארכיטקטורת ההתקן</string>
+    <string name="settings_advanced_strip_unused_libs_description">"לדלג על מודולי APK מפולחים עבור ארכיטקטורות, שפות ואזורי מסך לא נתמכים במהלך האיחוד.
+עבור APK רגילים, מסיר ספריות מקומיות עבור ארכיטקטורות לא נתמכות לאחר תיקון"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">מצב עיבוד bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">שולט באופן עיבוד ה-bytecode במהלך תיקון. משפיע על מהירות התיקון, השימוש בזיכרון וגודל ה-APK הפלט.</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">מהיר (מומלץ)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">מהיר</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">תיקון מהיר יותר ושימוש בזיכרון נמוך יותר, על חשבון קובץ APK גדול יותר. מומלץ עבור מכשירים עם זיכרון RAM נמוך או ישנים יותר</string>
+    <string name="settings_advanced_bytecode_mode_full">מלא</string>
+    <string name="settings_advanced_bytecode_mode_full_description">תיקון איטי יותר, משכפל התנהגות ישנה. השתמש רק אם מצב מהיר גורם לבעיות</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">נדרש עבור מקורות בקשה רכש</string>
@@ -493,13 +516,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_shizuku_unsupported">גרסת שיזוקה המותקנת אינה נתמכת</string>
     <string name="installer_action_open_shizuku">פתח את Shizuku</string>
     <string name="installer_hint_generic">ההתקנה נכשלה. נסה שוב או שנה להתקן אחר</string>
-    <string name="installer_hint_blocked">ההתקנה חסומה על ידי אנדרואיד. בדוק Play Protect או הגדרות ביטחון</string>
     <string name="installer_hint_conflict">אפליקציה אחרת עם שם חבילה זה כבר מותקנת. הסר אותה לפני המשך</string>
-    <string name="installer_hint_incompatible">APK אינו תואם למכשיר או לגרסת אנדרואיד זו</string>
-    <string name="installer_hint_invalid">APK אינו תקין או ניזוק</string>
-    <string name="installer_hint_storage">אין מספיק מקום אחסון להתקנה</string>
-    <string name="installer_hint_timeout">ההתקנה ארכה יותר מדי. נסה שוב</string>
-    <string name="installer_hint_aborted">ההתקנה בוטלה</string>
     <string name="installer_external_launched">פענוח %1$s…</string>
     <string name="installer_external_timeout">%1$s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב</string>
     <string name="installer_external_success">%1$s דיווח על התקנה מוצלחת</string>
@@ -530,6 +547,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_alias_field">שם משתמש (אלטרנטיב)</string>
     <string name="settings_system_import_keystore_dialog_password_field">סיסמא</string>
     <string name="settings_system_import_keystore_dialog_button">ייבוא</string>
+    <string name="settings_system_import_keystore_dialog_format_field">פורמט מאגר מפתחות</string>
     <string name="settings_system_import_keystore_wrong_credentials">סיסמא לא תקינה</string>
     <string name="settings_system_import_keystore_success">תיקון מותאם יובא</string>
     <string name="settings_system_import_keystore_failed">שגגה להרוס תיקון: %s</string>
@@ -537,6 +555,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_keystore_description">ייצא את התיקון הנוכח</string>
     <string name="settings_system_export_keystore_unavailable">אין תיקון מותאם זמין זמין</string>
     <string name="settings_system_export_keystore_success">תיקון מותאם יוצא</string>
+    <string name="settings_system_export_keystore_failed">נכשל לייצא מאגר מפתחות</string>
     <string name="settings_system_show_password_field">שגגה להרוס תיקון: %s</string>
     <string name="settings_system_hide_password_field">ייבוא הגדרות של הפיצ\'ח</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -665,7 +684,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="allow">אשר</string>
     <string name="details">פרטים</string>
     <string name="hide">הסתר</string>
-    <string name="default_">ברירת מחדל</string>
+    <string name="hidden">מוסתר</string>
+    <string name="unhide">הסתר</string>
     <string name="logs">יומן</string>
     <string name="sources">מקורות</string>
     <string name="installing_ellipsis">מתקין…</string>

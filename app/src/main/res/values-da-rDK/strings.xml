@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Andet</string>
+    <string name="home_other_apps">Andre apps</string>
     <string name="home_not_patched_yet">Ikke patchet endnu</string>
     <string name="home_no_patches_available">Ingen patches tilgængelige</string>
     <string name="home_app_hide_title">Skjul denne app?</string>
@@ -14,8 +14,8 @@
     <string name="android_11_bug_dialog_title">Android 11-fejl</string>
     <string name="android_11_bug_dialog_description">App-installationsrettighed skal gives i forvejen for at undgå en fejl i Android 11-systemet, der vil have en negativ indflydelse på brugeroplevelsen</string>
     <string name="deep_link_add_source_title">Tilføj kilde</string>
-    <string name="deep_link_add_source_message">Vil du tilføje denne patch-kilde til Morphe?</string>
-    <string name="deep_link_add_source_warning">Tilføj kun kilder fra kilder, du stoler på</string>
+    <string name="deep_link_add_source_message">Vil du tilføje denne patchkilde til Morphe?</string>
+    <string name="deep_link_add_source_warning">Tilføj kun kilder, du stoler på</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering tilgængelig</string>
     <string name="home_update_available_subtitle">Ny version klar til installation</string>
@@ -30,8 +30,10 @@
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
     <string name="home_search_apps">Søg apps</string>
     <string name="home_no_apps_title">Ingen apps tilgængelige</string>
-    <string name="home_no_apps_subtitle">Tilføj en patch-kilde eller aktiver en eksisterende i %s</string>
+    <string name="home_no_apps_subtitle">Tilføj en patchkilde eller aktiver en eksisterende i %s</string>
     <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Alle apps er skjult</string>
+    <string name="home_all_apps_hidden_subtitle">Du har skjult alle apps fra startskærmen</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hvilken app vil du have til at blive opgraderet?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -53,24 +55,24 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Drevet af koffein og gode patches</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Patch kilder</string>
+    <string name="sources_management_title">Patchkilder</string>
     <string name="sources_management_open_in_browser">Åbn links i browser</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åbne URL</string>
     <string name="sources_management_prerelease_toggle">Brug pre-release patches</string>
-    <string name="sources_management_prerelease_toggle_description">Få tidligt adgang til nye eksperimentelle patches versioner</string>
+    <string name="sources_management_prerelease_toggle_description">Få tidligt adgang til nye eksperimentelle patch versioner</string>
     <string name="sources_management_experimental_versions_toggle">Brug eksperimentelle app-versioner</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patche eksperimentelle app-targets, hvis de er tilgængelige</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patch eksperimentelle app-targets, hvis de er tilgængelige</string>
     <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnavn</string>
-    <string name="sources_dialog_rename">Ændre navnet på patch kilde</string>
-    <string name="sources_dialog_duplicate_name_error">En patch kilde med dette navn findes allerede</string>
+    <string name="sources_dialog_rename">Omdøb navnet på patchkilde</string>
+    <string name="sources_dialog_duplicate_name_error">En patchkilde med dette navn findes allerede</string>
     <string name="sources_dialog_missing_error">Kunne ikke opdatere denne patchkilde</string>
     <string name="sources_dialog_view_any_version">Alle versioner</string>
     <string name="sources_dialog_view_any_package">Alle pakker</string>
-    <string name="sources_dialog_add_source">Tilføj patch kilde</string>
+    <string name="sources_dialog_add_source">Tilføj patchkilde</string>
     <string name="sources_dialog_delete_confirm_message">Slet kilde \"%s\"? Dette kan ikke fortrydes</string>
-    <string name="sources_dialog_remote">Remote</string>
+    <string name="sources_dialog_remote">Fjernt</string>
     <string name="sources_dialog_remote_url">Kilde-URL</string>
     <string name="sources_dialog_remote_url_formats_title">Eksempler:</string>
     <string name="sources_dialog_local">Lokalt</string>
@@ -80,21 +82,25 @@
     <string name="sources_dialog_preinstalled">Forhåndsinstalleret</string>
     <string name="sources_update_success">Opdatering vellykket</string>
     <string name="sources_update_unavailable">Ingen opdatering tilgængelig</string>
-    <string name="sources_download_fail">Kunne ikke hente patch kilder: %s</string>
-    <string name="sources_download_fail_named">Kunne ikke hente patch kilder: %1$s: %2$s</string>
+    <string name="sources_download_fail">Kunne ikke hente patchkilder: %s</string>
+    <string name="sources_download_fail_named">Kunne ikke hente patchkilder: %1$s: %2$s</string>
     <string name="sources_download_endpoint_not_found">Kunne ikke opdatere \'%1$s\': patchens JSON-fil blev ikke fundet på den konfigurerede URL</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
-    <string name="sources_patch_expert_badge_tooltip">Aktivér Ekspert-tilstand i Indstillinger for at inkludere denne patch manuelt</string>
+    <string name="sources_patch_expert_badge_tooltip">Aktivér Eksperttilstand i Indstillinger for at inkludere denne patch manuelt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Har du brug for hjælp til at finde en original upatchet APK?</string>
     <string name="home_apk_availability_dialog_simple">For at patche &lt;b&gt;%s&lt;/b&gt;, skal du have den upatchede APK-version:</string>
-    <string name="home_apk_availability_dialog_expert">For at patchere &lt;b&gt;%s&lt;/b&gt;, skal du have et upatchtet APK af versioner:</string>
+    <string name="home_apk_availability_dialog_expert">For at patche &lt;b&gt;%s&lt;/b&gt;, skal du have en upatchet APK af versioner:</string>
     <string name="home_apk_availability_recommended_label">Anbefalet</string>
-    <string name="home_apk_availability_unpatched_label">Ubehandlet</string>
-    <string name="home_apk_availability_yes">Ja, hjælp mig finde et APK</string>
-    <string name="home_apk_availability_no">Nej, jeg har allerede et APK</string>
+    <string name="home_apk_availability_unpatched_label">Upatchet</string>
+    <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
+    <string name="home_apk_availability_yes">Ja, hjælp med at finde en APK</string>
+    <string name="home_apk_availability_no">Nej, jeg har allerede en APK</string>
     <string name="home_apk_use_saved_with_version">Brug gemt APK (v%s)</string>
-    <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning vil kræve at vælge APK-filen igen</string>
+    <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning kræver at du vælger APK-filen igen</string>
+    <string name="home_version_requires_android">Kræver Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Ikke understøttet på denne enhed</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har ingen understøttede versioner til Android %2$d (API %3$d). Alle erklærede versioner kræver en højere Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download den originale APK</string>
     <string name="home_download_instructions_steps_title">Instruktioner:</string>
@@ -103,11 +109,11 @@
     <string name="home_download_instructions_download_button_toast">Tryk på download på hjemmesiden, og ikke her 😊</string>
     <string name="home_download_instructions_step3">Vent på at downloaden er færdig, og &lt;b&gt;installer ikke&lt;/b&gt; APK\'en</string>
     <string name="home_download_instructions_step3_mount">Vent på at downloaden er færdig, og &lt;b&gt;installer APK\'en&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Når downloadet er færdigt, vend tilbage til Morphe</string>
+    <string name="home_download_instructions_step4">Når downloaden er færdigt, vend tilbage til Morphe</string>
     <string name="home_download_instructions_step4_mount">Når det originale APK er installeret, vend tilbage til Morphe</string>
     <string name="home_download_instructions_continue">Fortsæt til APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Vælg det downloadede APK</string>
+    <string name="home_file_picker_prompt_title">Vælg den downloadede APK</string>
     <string name="home_file_picker_prompt_description">Vælg det &lt;b&gt;%1$s&lt;/b&gt; APK-fil du lige har downloadet</string>
     <string name="home_file_picker_prompt_open_apk">Åbn APK-fil</string>
     <string name="home_recommended_version">Anbefalet version</string>
@@ -116,24 +122,24 @@
     <string name="home_select_any_apk_description">Tryk på knappen nedenfor for at vælge en APK-fil for en hvilket som helst app for at patche</string>
     <string name="home_invalid_apk_unreadable">Kunne ikke læse filen. Tjek at \'Ekstern lagerplads\' ikke er batteribegrænset</string>
     <string name="home_invalid_apk_not_an_apk">Den valgte fil er ikke en gyldig APK</string>
-    <string name="home_invalid_apk_io_error">Mislykkedes at åbne filen. Prøv igen</string>
+    <string name="home_invalid_apk_io_error">Kunne ikke åbne filen. Prøv igen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Expert-modus</string>
+    <string name="expert_mode_title">Experttilstand</string>
     <string name="expert_mode_search">Søg patches</string>
     <string name="expert_mode_proceed">Gå videre til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
-    <string name="expert_mode_reset_to_default">Aktivér anbefalede rettelser</string>
+    <string name="expert_mode_reset_to_default">Aktivér anbefalede patches</string>
     <string name="expert_mode_restore_saved">Gendan gemt valg</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
     <string name="expert_mode_new_patches">Ny</string>
-    <string name="expert_mode_multiple_sources_warning_title">Flere patch-kilder valgt</string>
-    <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
+    <string name="expert_mode_multiple_sources_warning_title">Flere patchkilder valgt</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Du har valgt patches fra flere patchkilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
 
 Er du sikker på, at du vil fortsætte?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">Ubekræftet APK</string>
+    <string name="home_invalid_signature_title">Uverificeret APK</string>
     <string name="home_invalid_signature_message">Den APK du valgte for &lt;b&gt;%s&lt;/b&gt;, stemmer ikke overens med det forventede signeringscertifikat. Den kan være ændret eller fra en utroværdig kilde</string>
     <string name="home_invalid_signature_badge">Denne APK er muligvis ikke den originale</string>
     <string name="home_split_apk_warning_title">Opdelt APK opdaget</string>
@@ -143,7 +149,7 @@ Er du sikker på, at du vil fortsætte?"</string>
 For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Vælg en anden APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Eksperimentel</string>
-    <string name="home_dialog_unsupported_version_experimental_description">Denne version har eksperimentel support og kan være ustabil eller ufærdig</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Denne version har eksperimentel understøttelse og kan være ustabil eller ufærdig</string>
     <string name="morphe_experimental_app_version_dialog_title">Vil du eksperimentere? 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">Denne version af &lt;b&gt;%s&lt;/b&gt; har tidlig eksperimentel understøttelse&lt;br/&gt;&lt;br/&gt;🔧 Forvent mærkelig app-adfærd eller uidentificerede fejl, mens patchesene bliver finpudset til denne appversion</string>
     <string name="home_dialog_unsupported_version_dialog_title">Ugyldig version</string>
@@ -152,16 +158,17 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatible versioner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Ikke understøttet</string>
     <string name="home_dialog_wrong_package_title">Forkert pakke valgt</string>
-    <string name="home_dialog_wrong_package_description">Den valgte APK er ikke for den app, du tilsigtede at patche</string>
+    <string name="home_dialog_wrong_package_description">Den valgte APK matcher ikke den app, du tilsigtede at patche</string>
     <string name="home_dialog_expected_package">Forventet pakke:</string>
     <string name="home_dialog_selected_package">Valgt pakke:</string>
     <string name="home_outdated_patches_dialog_title">Patches kan være forældede</string>
-    <string name="home_outdated_patches_dialog_message">Mobildata er aktiv og patch-opdateringer er deaktiveret</string>
+    <string name="home_outdated_patches_dialog_message">Mobildata er aktiv og patchopdateringer er deaktiveret</string>
     <string name="home_outdated_patches_dialog_warning">At patche med forældede patches kan resultere i en defekt app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Opdater &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Lav diskplads</string>
     <string name="home_low_disk_space_dialog_message">Kun %1$.2f GB ledig lagerplads. Patching kræver mindst %2$.2f GB ledig plads for at fungere korrekt</string>
     <string name="home_low_disk_space_dialog_warning">Fortsættelse kan resultere i en \"fil ikke fundet\"-fejl eller en korrupt output APK</string>
+    <string name="home_simple_bundle_select_title">Vælg patch kildefil</string>
     <!-- Patch Options -->
     <string name="custom_color">Brugerdefineret farve</string>
     <string name="hex_color">Hex farve</string>
@@ -188,52 +195,53 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="adaptive_icon_created_success">Adaptiv ikon oprettet med succes</string>
     <string name="adaptive_icon_creation_failed">Kunne ikke oprette adaptiv ikon</string>
     <string name="adaptive_icon_folder_explanation">Vælg hvor du vil oprette \'%1$s/%2$s\' mappe med genererede ikonfiler</string>
-    <string name="notification_icon_preview">Notifikations ikonforhåndsvisning</string>
+    <string name="notification_icon_preview">Notifikationsikon forhåndsvisning</string>
     <string name="notification_icon_preview_hint">Brug skyderen til at ændre størrelsen. Træk for at flytte</string>
     <!-- Header Creator -->
-    <string name="header_creator_create">Opret tilpasset header</string>
+    <string name="header_creator_create">Opret tilpasset sidehoved</string>
     <string name="header_creator_instructions">Vælg billeder for lys og mørketemaer, derefter juster med pinch-to-zoom bevægelser</string>
-    <string name="header_creator_light_theme">Lys tema overskrift</string>
-    <string name="header_creator_dark_theme">Mørke tema overskrift</string>
+    <string name="header_creator_light_theme">Lys tema sidehoved</string>
+    <string name="header_creator_dark_theme">Mørk tema sidehoved</string>
     <string name="header_creator_no_image">Intet billede valgt</string>
-    <string name="header_creator_success">Overskrift oprettet med succes</string>
-    <string name="header_creator_failed">Kunne ikke oprette overskrift</string>
-    <string name="header_creator_folder_explanation">Vælg hvor du vil oprette \'%1$s/%2$s\' mappe med genererede headerfiler</string>
+    <string name="header_creator_success">Sidehoved oprettet med succes</string>
+    <string name="header_creator_failed">Kunne ikke oprette sidehoved</string>
+    <string name="header_creator_folder_explanation">Vælg hvor du vil oprette \'%1$s/%2$s\' mappe med genererede sidehovedfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Er du sikker på at du vil fjerne denne app? </string>
     <string name="home_app_info_remove_app_warning">Dette vil permanent slette:</string>
     <string name="home_app_info_delete_item_database">Databaseindtastning</string>
     <string name="home_app_info_delete_item_patched_apk">Patchet APK-fil</string>
     <string name="home_app_info_delete_item_original_apk">Original APK-fil</string>
-    <string name="home_app_info_delete_preservation_note">Din patch-valg og indstillinger vil blive bevaret til fremtidig patching</string>
+    <string name="home_app_info_delete_preservation_note">Dine patchvalg og indstillinger vil blive bevaret til fremtidig patching</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unavngivet</string>
     <string name="home_app_info_patches_replace_fail">Kunne ikke importere patches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Original APK ikke fundet. Kan ikke genpatche denne app</string>
     <string name="home_app_info_original_package_name">Originalt pakkenavn</string>
     <string name="home_app_info_applied_patches">Anvendte patches</string>
-    <string name="home_app_info_patch_source_used">Patch kilde brugt</string>
+    <string name="home_app_info_patch_source_used">Patchkilde brugt</string>
     <string name="home_app_info_install_type">Installationstype</string>
-    <string name="home_app_info_install_type_custom_installer">Brukerdefinert installer</string>
+    <string name="home_app_info_install_type_custom_installer">Brugerdefineret installer</string>
     <string name="home_app_info_install_type_system_installer">Systeminstaller</string>
-    <string name="home_app_info_patched_at">Reparert</string>
-    <string name="home_app_info_patch_update_available">Patchoppdatering tilgjengelig</string>
-    <string name="home_app_info_patch_update_available_description">En nyere version af patches er tilgængelig. Repatch din app for at få de seneste forbedringer og fikser</string>
+    <string name="home_app_info_patched_at">Patchet</string>
+    <string name="home_app_info_patch_update_available">Patchopdatering tilgængelig</string>
+    <string name="home_app_info_patch_update_available_description">En nyere version af patches er tilgængelig. Repatch din app for at få de seneste forbedringer og rettelser</string>
     <string name="home_app_info_app_deleted_warning">Appen blev fjernet</string>
-    <string name="home_app_info_app_deleted_description">Denne app blev fjernet udenfor Morphe. Repatch den for at genoprette funktionalitet</string>
+    <string name="home_app_info_app_deleted_description">Denne app blev fjernet udenfor Morphe. Repatch den for at gendanne funktionalitet</string>
+    <string name="home_app_info_apk_size">APK-størrelse</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Root-modus kræver, at original APK er installeret på dit enhed før patching</string>
+    <string name="root_install_apk_required">Root-tilstand kræver at original APK er installeret på din enhed før patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
     <string name="root_pre_patch_installer_title">Vælg installationsmetode</string>
-    <string name="root_pre_patch_installer_description">Din enhed har root-adgang. Vælg, hvordan du vil installere den patcherede app</string>
+    <string name="root_pre_patch_installer_description">Din enhed har root-adgang. Vælg hvordan du vil installere den patchede app</string>
     <string name="root_pre_patch_installer_mount_title">Root Mount</string>
-    <string name="root_pre_patch_installer_mount_description">Mount patcheret APK over den originale app. Ingen GmsCore nødvendig</string>
+    <string name="root_pre_patch_installer_mount_description">Mount patchet APK over den originale app. Ingen GmsCore nødvendig</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
     <string name="root_pre_patch_installer_standard_description">Installer som en separat app med GmsCore support. Vælg installer (System installer, Shizuku, etc.) efter patching</string>
     <string name="root_pre_patch_installer_hint">Installationsmetoden bestemmer, hvilke patches der er inkluderet og kan ikke ændres efter patching</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fejl kopieret til udklipsholder</string>
-    <string name="patcher_error_log">Fejlprotokol</string>
+    <string name="patcher_error_log">Fejllog</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
     <string name="patcher_error_dialog_app_info">App-oplysninger</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
@@ -252,9 +260,9 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patcher_ready_to_install_subtitle">Tryk på knappen nedenfor for at installere</string>
     <string name="patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
     <string name="patcher_storage_permission_dialog_title">Kan ikke tilgå lagringssti</string>
-    <string name="patcher_storage_permission_description_api30">En eller flere patch-muligheder peger på stier, som Morphe ikke kan læse. Giv storage-adgang og tryk på knappen, så vil patching starte automatisk</string>
-    <string name="patcher_storage_permission_description_legacy">En eller flere patch-valg peger på stier, som ikke kan tilgås. Opdater stierne i patch-valg og prøv igen</string>
-    <string name="patcher_storage_permission_grant">Tillad lagringstilgang</string>
+    <string name="patcher_storage_permission_description_api30">En eller flere patchtilvalg peger på stier, som Morphe ikke kan læse. Giv adgang til lager og tryk på knappen, så vil patching starte automatisk</string>
+    <string name="patcher_storage_permission_description_legacy">En eller flere patchtilvalg peger på stier, som ikke kan tilgås. Opdater stierne i patchtilvalg og prøv igen</string>
+    <string name="patcher_storage_permission_grant">Tillad lagringstilladelse</string>
     <string name="patcher_storage_permission_denied_warning">Lagringstilladelse blev afvist. Giv tilladelse til at bruge denne sti, eller flyt filerne til appens private mappe</string>
     <string name="patcher_storage_permission_open_settings">Åbn lagerindstillinger </string>
     <string name="patcher_storage_badge_denied">Tilladelse afvist</string>
@@ -288,7 +296,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patcher_message_10">Store patches er ventetiden værd… ⏳</string>
     <string name="patcher_message_11">Pudser pixels, indtil de skinner… 💎</string>
     <string name="patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker for \"Udbedring i gang\" skiltet... 💺✈️</string>
-    <string name="patcher_message_13">Laver din patchede app, varm og frisk… 🍳</string>
+    <string name="patcher_message_13">Tilbereder din patchede app, varm og frisk… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Forhandler høfligt med bytekode… 🤝</string>
     <!-- Space flight communications callout. -->
@@ -308,16 +316,13 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="failed_to_execute_patch">Kunne ikke anvende %s</string>
     <string name="patched_app_saved_toast">Patchet app gemt til senere</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patchet app</string>
-    <string name="download_apk">Download APK-fil</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
     <string name="patcher_process_exit_message">Patcher-processen lukkede med koden %1$s</string>
     <string name="install_app_success">Installeret succesfuldt</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
-    <string name="install_timeout_message">Installationen blev ikke fuldført. Tjek systeminstalleringsdialogen og prøv igen</string>
     <string name="save_apk_success">APK gemt</string>
     <string name="saved_app_export_failed">Kunne ikke eksportere patchet app</string>
     <string name="saved_app_removed_toast">Gemt patchet app fjernet</string>
-    <string name="saved_app_copy_removed_toast">Gemt kopi fjernet</string>
     <string name="saved_app_launch_unavailable">Installer appen før du åbner den</string>
     <string name="package_name">Pakkenavn</string>
     <string name="failed_to_mount">Kunne ikke montere: %s</string>
@@ -337,6 +342,10 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="settings_appearance_background_grid">Linjer</string>
     <string name="settings_appearance_background_particles">Partikler</string>
     <string name="settings_appearance_background_none">Ingen</string>
+    <string name="settings_appearance_background_random">Tilfældig</string>
+    <string name="settings_appearance_background_random_interval_launch">Ved opstart</string>
+    <string name="settings_appearance_background_random_interval_daily">Dagligt</string>
+    <string name="settings_appearance_background_random_interval_3days">Hver 3. dag</string>
     <string name="settings_appearance_parallax_effect">Parallakse-effekt</string>
     <string name="settings_appearance_parallax_effect_description">Flydende baggrundsbevægelse ved tiltning af enheden</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -347,12 +356,16 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accentfarve</string>
     <string name="settings_appearance_pure_black">Ægte sort</string>
-    <string name="settings_appearance_pure_black_description">Brug ægte sorte baggrunde</string>
+    <string name="settings_appearance_pure_black_description">Brug ægte sort i baggrunde</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App-sprog</string>
     <string name="settings_appearance_app_language_current">Nuværende sprog</string>
     <string name="settings_appearance_translations_info_title">Oversættelser for visse sprog kan mangle eller være ufærdige</string>
     <string name="settings_appearance_translations_info_text">For at oversætte nye sprog eller forbedre eksisterende oversættelser, gå til %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Startskærm</string>
+    <string name="settings_appearance_greeting_phrases">Hilsenfraser</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenbesked på startskærmen</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Appikon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -367,9 +380,9 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdateringer</string>
     <string name="settings_advanced_updates_use_prereleases">Brug pre-release Morphe</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Modtag tidlig adgang til nye Morphe-funktioner. For at få pre-release patches, skal du aktivere pre-release-knappen i hver patch-kilde separat</string>
-    <string name="settings_advanced_updates_allow_metered">Opdater over mobilnet</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tillad Morphe og patch-opdateringer at downloade over mobildata</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Modtag tidlig adgang til nye Morphe-funktioner. For at få pre-release patches, skal du aktivere pre-release-knappen i hver patchkilde separat</string>
+    <string name="settings_advanced_updates_allow_metered">Opdater over mobildata</string>
+    <string name="settings_advanced_updates_allow_metered_description">Tillad Morphe og patchopdateringer downloader over mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Baggrundsopdateringsmeddelelser</string>
     <string name="settings_advanced_updates_background_notifications_description">Tjek periodisk for opdateringer i baggrunden og informér når de er tilgængelige.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Modtag push-beskeder om nye udgivelser, selvom appen er lukket</string>
@@ -387,20 +400,29 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="notification_update_text">Version %1$s er klar til download</string>
     <string name="notification_bundle_update_text_unversioned">Tryk for at åbne Morphe og opdatere</string>
     <string name="notification_permission_dialog_title">Tillad notifikationer</string>
-    <string name="notification_permission_dialog_description">Morphe har brug for notifikationsadgang for at advare dig, når opdateringer er tilgængelige i baggrunden</string>
+    <string name="notification_permission_dialog_description">Morphe skal bruge notifikationstilladelse for at advare dig når opdateringer er tilgængelige i baggrunden</string>
     <string name="notification_post_patch_dialog_title">Vil du gerne blive notificeret, når opdateringer er tilgængelige?</string>
     <string name="notification_channel_fcm_updates">Opdateringer af notifikationer</string>
-    <string name="notification_channel_fcm_updates_description">Notifikationer om nye Morphe- og patch-udgivelser</string>
+    <string name="notification_channel_fcm_updates_description">Notifikationer om nye Morphe- og patchudgivelser</string>
     <string name="notification_channel_patcher">Patching</string>
     <string name="notification_channel_patcher_description">Vises mens Morphe patcher en app i baggrunden</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Avancerede indstillinger</string>
     <string name="settings_advanced_expert_mode">Eksperttilstand</string>
-    <string name="settings_advanced_expert_mode_description">Aktiver komplicerede Morphe patch-indstillinger og tilpasningsmuligheder</string>
+    <string name="settings_advanced_expert_mode_description">Aktiver komplicerede Morphe patchindstillinger og tilpasningsmuligheder</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktiver Eksperttilstand?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Eksperttilstand giver mere kontrol over hvordan patches bliver anvendt, men en forkert konfiguration af indstillinger i eksperttilstand kan resultere i en ikke-funktionel app</string>
-    <string name="settings_advanced_strip_unused_libs">Fjern ubrugte native biblioteker</string>
-    <string name="settings_advanced_strip_unused_libs_description">Slet ubrugte native biblioteker for ikke-understøttede CPU-arkitekturer fra patchet apps</string>
+    <string name="settings_advanced_strip_unused_libs">Optimer for enhedens arkitektur</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Overspring split APK-moduler for understøttede CPU-arkitekturer, sprogområder og skærmdensiteter under sammensmeltning.
+For almindelige APK'er fjernes native biblioteker for understøttede arkitekturer efter patching"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Bytecodetilstand</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Styrer, hvordan bytecode behandles under patching. Påvirker patching-hastighed, hukommelsesforbrug og output APK-størrelse</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Hurtig (Anbefalet)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Hurtig</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Hurtigere patching og lavere hukommelsesforbrug, på bekostning af en større APK. Anbefales til enheder med lav RAM eller ældre enheder</string>
+    <string name="settings_advanced_bytecode_mode_full">Fuld</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Langsommere patching, genskaber ældre adfærd. Brug kun, hvis hurtig tilstand forårsager problemer</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Nødvendigt for pull request-kilder</string>
@@ -415,7 +437,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="settings_advanced_patch_options">Patchvalg</string>
     <string name="settings_advanced_patch_options_youtube_description">Tema, branding og sidehovedindstillinger</string>
     <string name="settings_advanced_patch_options_restart_message">Ændring af patch indstillinger kræver re-patching af appen for at træde i kraft</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">I eksperttilstand vil patchvalg være tilgængelige under patchprocessen</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">I Eksperttilstand vil patchvalg være tilgængelige under patchprocessen</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">App-temafarver</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Ændre baggrundsfarve</string>
@@ -465,21 +487,21 @@ Valgfrit indeholder stien et notifikationsikon i et af følgende formater:
   drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
-    <string name="settings_advanced_patch_options_custom_header">Brugerdefineret headerlogo</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Ændre headerlogo</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"Mapp med bilder til bruk som brukerdefinert headerlogo.
+    <string name="settings_advanced_patch_options_custom_header">Brugerdefineret sidehovedlogo</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Ændre sidehovedlogo</string>
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Mappe med billeder til brug som brugerdefineret sidehovedlogo.
 
-Mappen må inneholde en eller flere av følgende mapper, avhengig av DPI på enheten:
+Mappen skal indeholde en eller flere af følgende mapper, afhængigt af DPI på enheden:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-Hver av mappene må inneholde alle følgende filer:
+Hver af mapperne skal indeholde alle følgende filer:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
-Bildeformateringen må være som følger:
+Størrelsesformatet skal være som følger:
 - drawable-hdpi: 194x72 px
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
@@ -510,13 +532,7 @@ Bildeformateringen må være som følger:
     <string name="installer_status_shizuku_unsupported">Den installerede Shizuku-version er ikke understøttet</string>
     <string name="installer_action_open_shizuku">Åbn Shizuku</string>
     <string name="installer_hint_generic">Installationen mislykkedes. Prøv igen eller skift til en anden installer</string>
-    <string name="installer_hint_blocked">Installationen blev blokeret af Android. Tjek Play Protect eller sikkerhedsindstillinger</string>
     <string name="installer_hint_conflict">En anden app med dette pakkenavn er allerede installeret. Fjern den før du fortsætter</string>
-    <string name="installer_hint_incompatible">APK\'en er ikke kompatibel med denne enhed eller Android-version</string>
-    <string name="installer_hint_invalid">APK\'en er ugyldig eller korrumperet</string>
-    <string name="installer_hint_storage">Der er ikke nok lagringsplads til installationen</string>
-    <string name="installer_hint_timeout">Installationen tog for længe. Prøv igen</string>
-    <string name="installer_hint_aborted">Installationen blev afbrudt</string>
     <string name="installer_external_launched">Åbner %1$s…</string>
     <string name="installer_external_timeout">%1$s bekræftede ikke installationen. Tjek den anden app og prøv igen</string>
     <string name="installer_external_success">%1$s meldte om en succesfuld installation</string>
@@ -543,10 +559,11 @@ Bildeformateringen må være som følger:
     <string name="settings_system_import_keystore">Importér keystore</string>
     <string name="settings_system_import_keystore_description">Importér en brugerdefineret keystore</string>
     <string name="settings_system_import_keystore_dialog_title">Indtast keystore legitimationsoplysninger</string>
-    <string name="settings_system_import_keystore_dialog_description">Du vil skulle indtaste keystore\'ens legitimationsoplysninger for at importere den</string>
+    <string name="settings_system_import_keystore_dialog_description">Du skal indtaste keystore\'ens legitimationsoplysninger for at importere den</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Brugernavn (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Adgangskode</string>
     <string name="settings_system_import_keystore_dialog_button">Importér</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Keystore format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Forkerte keystore legitimationsoplysninger</string>
     <string name="settings_system_import_keystore_success">Keystone importeret</string>
     <string name="settings_system_import_keystore_failed">Importering af Keystone mislykkedes</string>
@@ -554,6 +571,7 @@ Bildeformateringen må være som følger:
     <string name="settings_system_export_keystore_description">Eksportér den nuværende keystore</string>
     <string name="settings_system_export_keystore_unavailable">Ingen keystore tilgængelig til eksportering</string>
     <string name="settings_system_export_keystore_success">Keystore blev eksporteret</string>
+    <string name="settings_system_export_keystore_failed">Fejl under eksport af nøglelager</string>
     <string name="settings_system_show_password_field">Vis adgangskode</string>
     <string name="settings_system_hide_password_field">Skjul adgangskode</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -567,11 +585,11 @@ Bildeformateringen må være som følger:
     <string name="settings_system_export_manager_settings_success">Morphe-indstillinger eksporteret</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Fejlfinding</string>
-    <string name="settings_system_export_debug_logs">Eksportér fejlsøgningslogfiler</string>
+    <string name="settings_system_export_debug_logs">Eksportér fejlsøgningslogge</string>
     <string name="settings_system_export_debug_logs_description">Gem systemlog for fejlfinding</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Kunne ikke læse log (udgangskode %s)</string>
-    <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logfiler</string>
-    <string name="settings_system_export_debug_logs_export_success">Logfiler blev eksporteret</string>
+    <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logge</string>
+    <string name="settings_system_export_debug_logs_export_success">Logge blev eksporteret</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Administration af lager</string>
     <string name="settings_system_apks_size">Samlet størrelse: %s</string>
@@ -588,28 +606,28 @@ Bildeformateringen må være som følger:
     <string name="settings_system_original_apks_empty">Ingen lagrede originale APK-er</string>
     <string name="settings_system_original_apks_deleted">Original APK slettet</string>
     <string name="settings_system_original_apks_delete_title">Slet original APK? </string>
-    <string name="settings_system_original_apks_delete_confirm">Slette original APK for %s? Du vil ikke kunne repatch uden at tilbyde en ny APK</string>
+    <string name="settings_system_original_apks_delete_confirm">Slet original APK for %s? Du vil ikke kunne repatche uden at tilbyde en ny APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
-    <string name="settings_system_patch_selections_title">Patch-valg</string>
-    <string name="settings_system_patch_selections_description">Håndter de gemte patch-valg og indstillinger. Disse bevares efter app-afinstallation</string>
+    <string name="settings_system_patch_selections_title">Patchvalg</string>
+    <string name="settings_system_patch_selections_description">Håndter de gemte patchvalg og indstillinger. Disse bevares efter app-afinstallation</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nulstil alle valg?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Nulstil pakkevalg?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nulstil kildevalg?</string>
-    <string name="settings_system_patch_selection_no_saved">Ingen gemte patch-valg</string>
+    <string name="settings_system_patch_selection_no_saved">Ingen gemte patchvalg</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s over %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Kilde #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dette vil slette:</string>
-    <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle gemte patch-valg for alle pakker og kilder</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle gemte patch-valg for %s over alle kilder</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette gemte patch-valg for %1$s i kilde #%2$s</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle gemte patchvalg for alle pakker og kilder</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle gemte patchvalg for %s over alle kilder</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette gemte patchvalg for %1$s i kilde #%2$s</string>
     <string name="settings_system_export_source_data_fail">Kunne ikke eksportere kilde-data</string>
     <string name="settings_system_export_source_data_success">Kilde-data eksporteret med succes</string>
     <string name="settings_system_import_source_data_fail">Kunne ikke importere kilde-data</string>
     <string name="settings_system_import_source_data_success">Kilde-data importeret med succes</string>
-    <string name="settings_system_patch_details_title">Patch-oplysninger</string>
+    <string name="settings_system_patch_details_title">Patchoplysninger</string>
     <string name="settings_system_selected_patches_title">Valgte patches (%s)</string>
-    <string name="settings_system_patch_options_title">Patch-valg (%s)</string>
+    <string name="settings_system_patch_options_title">Patchvalg (%s)</string>
     <string name="settings_system_no_patches_or_options">Ingen patches eller valg gemt</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
@@ -658,8 +676,8 @@ Bildeformateringen må være som følger:
     <string name="less">Mindre</string>
     <string name="expand">Udvid</string>
     <string name="expanded">Udvidet</string>
-    <string name="collapse">Fold op</string>
-    <string name="collapsed">Redusert</string>
+    <string name="collapse">Minimer</string>
+    <string name="collapsed">Minimeret</string>
     <string name="available">Tilgængelig</string>
     <string name="continue_">Fortsæt</string>
     <string name="version">Version</string>
@@ -682,19 +700,20 @@ Bildeformateringen må være som følger:
     <string name="allow">Tillad</string>
     <string name="details">Detaljer</string>
     <string name="hide">Skjul</string>
-    <string name="default_">Standard</string>
-    <string name="logs">Logfiler</string>
+    <string name="hidden">Skjult</string>
+    <string name="unhide">Vis</string>
+    <string name="logs">Logge</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>
     <string name="mounting_ellipsis">Montering…</string>
     <string name="unmounting_ellipsis">Afmontere…</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="imported_successfully">Importeret med succes</string>
-    <string name="changelog">Se ændringslogfiler</string>
+    <string name="changelog">Se ændringslogge</string>
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
-    <string name="changelog_download_fail">Kunne ikke downloade ændringslogfil: %s</string>
+    <string name="changelog_download_fail">Kunne ikke downloade ændringslog: %s</string>
     <string name="changelog_retry">Prøv igen</string>
-    <string name="changelog_empty">Ingen ændringslogfil tilgængelig</string>
+    <string name="changelog_empty">Ingen ændringslog tilgængelig</string>
     <string name="no_network_toast">Ingen internetforbindelse tilgængelig</string>
     <string name="update_available">En opdatering er tilgængelig</string>
     <string name="ready_to_install_update">Klar til at installere opdatering</string>

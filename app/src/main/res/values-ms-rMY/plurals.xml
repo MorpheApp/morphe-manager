@@ -12,9 +12,6 @@
     <plurals name="package_count">
         <item quantity="other">%s pakej</item>
     </plurals>
-    <plurals name="patches_executed">
-        <item quantity="other">Jalankan %s tampalan</item>
-    </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s fail APK</item>
     </plurals>

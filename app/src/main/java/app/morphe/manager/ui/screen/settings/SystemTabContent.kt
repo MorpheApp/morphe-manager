@@ -30,6 +30,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.toast
+import app.morphe.patcher.dex.BytecodeMode
 
 /**
  * System tab content.
@@ -54,8 +55,10 @@ fun SystemTabContent(
     val useExpertMode by prefs.useExpertMode.getAsState()
     val useProcessRuntime by prefs.useProcessRuntime.getAsState()
     val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
+    val bytecodeMode by prefs.bytecodeModePreference.getAsState()
 
     val showProcessRuntimeDialog = remember { mutableStateOf(false) }
+    val showBytecodeDialog = remember { mutableStateOf(false) }
     val showApkManagementDialog = remember { mutableStateOf<ApkManagementType?>(null) }
     val showPatchSelectionDialog = remember { mutableStateOf(false) }
 
@@ -74,6 +77,14 @@ fun SystemTabContent(
             onDismiss = { showProcessRuntimeDialog.value = false },
             onEnabledChange = { settingsViewModel.setProcessRuntime(it) },
             onLimitChange = { settingsViewModel.setMemoryLimit(it) }
+        )
+    }
+
+    if (showBytecodeDialog.value) {
+        BytecodeModeDialog(
+            current = bytecodeMode,
+            onDismiss = { showBytecodeDialog.value = false },
+            onSelect = { settingsViewModel.setBytecodeMode(it) }
         )
     }
 
@@ -122,42 +133,57 @@ fun SystemTabContent(
         )
 
         SectionCard {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                RichSettingsItem(
-                    onClick = { showProcessRuntimeDialog.value = true },
-                    title = stringResource(R.string.settings_system_process_runtime),
-                    subtitle = if (useProcessRuntime)
-                        stringResource(R.string.settings_system_process_runtime_enabled_description, memoryLimit)
-                    else stringResource(R.string.settings_system_process_runtime_disabled_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Memory)
-                    },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            InfoBadge(
-                                text = if (useProcessRuntime) stringResource(R.string.enabled)
-                                else stringResource(R.string.disabled),
-                                style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
-                                isCompact = true
+            Column {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    RichSettingsItem(
+                        onClick = { showProcessRuntimeDialog.value = true },
+                        title = stringResource(R.string.settings_system_process_runtime),
+                        subtitle = if (useProcessRuntime)
+                            stringResource(
+                                R.string.settings_system_process_runtime_enabled_description,
+                                memoryLimit
                             )
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                        else stringResource(R.string.settings_system_process_runtime_disabled_description),
+                        leadingContent = {
+                            MorpheIcon(icon = Icons.Outlined.Memory)
+                        },
+                        trailingContent = {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                InfoBadge(
+                                    text = if (useProcessRuntime) stringResource(R.string.enabled)
+                                    else stringResource(R.string.disabled),
+                                    style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
+                                    isCompact = true
+                                )
+                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                            }
                         }
-                    }
-                )
-            } else {
-                IconTextRow(
-                    modifier = Modifier.padding(16.dp),
-                    leadingContent = {
-                        MorpheIcon(
-                            icon = Icons.Outlined.Memory,
-                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
-                        )
-                    },
-                    title = stringResource(R.string.settings_system_process_runtime),
-                    description = stringResource(R.string.settings_system_process_runtime_description_not_available)
+                    )
+                } else {
+                    IconTextRow(
+                        modifier = Modifier.padding(16.dp),
+                        leadingContent = {
+                            MorpheIcon(
+                                icon = Icons.Outlined.Memory,
+                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            )
+                        },
+                        title = stringResource(R.string.settings_system_process_runtime),
+                        description = stringResource(R.string.settings_system_process_runtime_description_not_available)
+                    )
+                }
+
+                MorpheSettingsDivider()
+
+                RichSettingsItem(
+                    onClick = { showBytecodeDialog.value = true },
+                    title = stringResource(R.string.settings_advanced_bytecode_mode),
+                    subtitle = stringResource(bytecodeMode.labelRes()),
+                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) },
+                    trailingContent = { MorpheIcon(icon = Icons.Outlined.ChevronRight) }
                 )
             }
         }
@@ -341,4 +367,12 @@ fun SystemTabContent(
             )
         }
     }
+}
+
+/** Maps a [BytecodeMode] to its short display label string resource. */
+private fun BytecodeMode.labelRes(): Int = when (this) {
+    BytecodeMode.NONE -> R.string.settings_advanced_bytecode_mode_strip_fast
+    BytecodeMode.STRIP_SAFE -> R.string.settings_advanced_bytecode_mode_strip_fast
+    BytecodeMode.STRIP_FAST -> R.string.settings_advanced_bytecode_mode_strip_fast
+    BytecodeMode.FULL -> R.string.settings_advanced_bytecode_mode_full
 }

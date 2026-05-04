@@ -27,4 +27,10 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="other">%s tambalan dipilih</item>
     </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="other">Tampilkan %s aplikasi</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="other">%s aplikasi disembunyikan</item>
+    </plurals>
 </resources>

@@ -15,7 +15,6 @@
     <string name="android_11_bug_dialog_description">مجوز نصب برنامه باید از قبل صادر شود تا از بروز باگ در سیستم اندروید ۱۱ که تجربه کاربری را تحت تأثیر منفی قرار می دهد، جلوگیری شود </string>
     <string name="deep_link_add_source_title">افزودن منبع</string>
     <string name="deep_link_add_source_message">می‌خواهید این منبع پچ را به Morphe اضافه کنید؟</string>
-    <string name="deep_link_add_source_warning">فقط منابعی را اضافه کنید که به آن‌ها اعتماد دارید</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">به‌روزرسانی Morphe در دسترس است</string>
     <string name="home_update_available_subtitle">نسخه جدید آماده نصب است </string>
@@ -192,11 +191,13 @@
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">حالت متخصص</string>
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->

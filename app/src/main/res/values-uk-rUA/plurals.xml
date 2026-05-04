@@ -25,10 +25,10 @@
         <item quantity="other">%s пакетів</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Виконати %s патч</item>
-        <item quantity="few">Виконати %s патча</item>
-        <item quantity="many">Виконати %s патчів</item>
-        <item quantity="other">Виконати %s патчів</item>
+        <item quantity="one">Застосовано %s патч</item>
+        <item quantity="few">Застосовано %s патчі</item>
+        <item quantity="many">Застосовано %s патчів</item>
+        <item quantity="other">Застосовано %s патчів</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK файл</item>
@@ -53,5 +53,17 @@
         <item quantity="few">%s патчі вибрано</item>
         <item quantity="many">%s патчів вибрано</item>
         <item quantity="other">%s патчів вибрано</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Показати %s застосунок</item>
+        <item quantity="few">Показати %s застосунки</item>
+        <item quantity="many">Показати %s застосунків</item>
+        <item quantity="other">Показати %s застосунків</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s прихований застосунок</item>
+        <item quantity="few">%s приховані застосунки</item>
+        <item quantity="many">%s прихованих застосунків</item>
+        <item quantity="other">%s прихованих застосунків</item>
     </plurals>
 </resources>

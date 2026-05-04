@@ -17,8 +17,8 @@
         <item quantity="other">%s paket</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">%s yama uygula</item>
-        <item quantity="other">%s yama uygula</item>
+        <item quantity="one">%s yama uygulandı</item>
+        <item quantity="other">%s yama uygulandı</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s APK dosyası</item>
@@ -35,5 +35,13 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%s yama seçildi</item>
         <item quantity="other">%s yama seçildi</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">%s uygulamayı göster</item>
+        <item quantity="other">%s uygulamayı göster</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s gizli uygulama</item>
+        <item quantity="other">%s gizli uygulama</item>
     </plurals>
 </resources>

@@ -11,6 +11,7 @@
     <locale android:name="bn-BD" />
     <locale android:name="bs-BA" />
     <locale android:name="ca-ES" />
+    <locale android:name="ckb-IR" />
     <locale android:name="cs-CZ" />
     <locale android:name="da-DK" />
     <locale android:name="de-DE" />
@@ -48,6 +49,7 @@
     <locale android:name="mk-MK" />
     <locale android:name="mn-MN" />
     <locale android:name="ms-MY" />
+    <locale android:name="mr-IN" />
     <locale android:name="my-MM" />
     <locale android:name="nb-NO" />
     <locale android:name="ne-IN" />

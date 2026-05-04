@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%s hârtie</item>
-        <item quantity="few">%s hârtie</item>
+        <item quantity="one">%s patch</item>
+        <item quantity="few">%s patch-uri</item>
         <item quantity="other">%s de patch-uri</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s opțiune de hârtie</item>
-        <item quantity="few">%s opțiuni de hârtie</item>
+        <item quantity="one">%s opțiune de patch</item>
+        <item quantity="few">%s opțiuni de patch</item>
         <item quantity="other">%s de opțiuni de patch</item>
     </plurals>
     <plurals name="source_count">
@@ -21,9 +21,9 @@
         <item quantity="other">%s de pachete</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Execute %s patch</item>
-        <item quantity="few">Execute %s patches</item>
-        <item quantity="other">Execută %s de patch-uri</item>
+        <item quantity="one">A executat patch-ul %s</item>
+        <item quantity="few">A executat %s de patch-uri</item>
+        <item quantity="other">A executat %s de patch-uri</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s fișier APK</item>
@@ -33,7 +33,7 @@
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">A fost eliminat %s patch vechi din selecție salvată</item>
         <item quantity="few">Eliminat %s patch-uri vechi din selecție salvată</item>
-        <item quantity="other">Eliminat %s patch-uri vechi din selecție salvată</item>
+        <item quantity="other">Au fost eliminate %s de patch-uri vechi din selecție salvată</item>
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s sursă instalată</item>
@@ -44,5 +44,15 @@
         <item quantity="one">%s patch selectat</item>
         <item quantity="few">%s patch-uri selectate</item>
         <item quantity="other">%s de patch-uri selectate</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Arată %s aplicație</item>
+        <item quantity="few">Arată %s aplicații</item>
+        <item quantity="other">Arată %s de aplicații</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s aplicație ascunsă</item>
+        <item quantity="few">%s aplicații ascunse</item>
+        <item quantity="other">%s aplicații ascunse</item>
     </plurals>
 </resources>

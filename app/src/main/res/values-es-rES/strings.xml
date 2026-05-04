@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario</string>
     <string name="deep_link_add_source_title">Agregar fuente</string>
     <string name="deep_link_add_source_message">¿Quieres agregar esta fuente de parches a Morphe?</string>
-    <string name="deep_link_add_source_warning">Solo agregue fuentes de fuentes en las que confíe</string>
+    <string name="deep_link_add_source_warning">Solo agrega fuentes en las que confíes</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización de Morphe disponible</string>
     <string name="home_update_available_subtitle"></string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
     <string name="home_no_apps_subtitle">Añadir una fuente de parche o habilitar una existente en %s</string>
     <string name="home_no_apps_search_subtitle">No se encontraron aplicaciones que coincidan con \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Todas las aplicaciones están ocultas</string>
+    <string name="home_all_apps_hidden_subtitle">Ha ocultado todas las aplicaciones de la pantalla de inicio</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">¿Qué aplicación quieres parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -39,7 +41,7 @@
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Abróchate el cinturón, es hora de parchear</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Otro día, otra obra maestra bloqueada por anuncios</string>
+    <string name="home_greeting_4">Otro día, otra obra maestra con anuncios bloqueados</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">¿Quieres ver anuncios? Yo tampoco</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Para parchear &lt;b&gt;%s&lt;/b&gt;, necesitas un APK sin parchear de las versiones:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">No parcheado</string>
+    <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Sí, ayúdame a encontrar un APK</string>
     <string name="home_apk_availability_no">No, ya tengo un APK</string>
     <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
+    <string name="home_version_requires_android">Requiere Android %1$s o superior</string>
+    <string name="home_apk_no_compatible_versions_title">No compatible en este dispositivo</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; no tiene versiones compatibles para Android %2$d (API %3$d). Todas las versiones declaradas requieren una versión de Android superior</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descargar el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>
@@ -162,6 +168,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="home_low_disk_space_dialog_title">Poco espacio en disco</string>
     <string name="home_low_disk_space_dialog_message">Solo hay %1$.2f GB de almacenamiento libre disponible. El parcheo requiere al menos %2$.2f GB de espacio libre para funcionar correctamente</string>
     <string name="home_low_disk_space_dialog_warning">Continuar puede provocar un error de \"archivo no encontrado\" o un APK de salida corrupto</string>
+    <string name="home_simple_bundle_select_title">Seleccionar fuente de parche</string>
     <!-- Patch Options -->
     <string name="custom_color">Color personalizado</string>
     <string name="hex_color">Color HEX</string>
@@ -221,6 +228,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="home_app_info_patch_update_available_description">Hay disponible una versión más reciente de los parches. Vuelve a parchear tu aplicación para obtener las últimas mejoras y correcciones</string>
     <string name="home_app_info_app_deleted_warning">La app fue desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta app fue desinstalada fuera de Morphe. Vuelve a parchearla para restaurar la funcionalidad</string>
+    <string name="home_app_info_apk_size">Tamaño de la APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">El modo raíz requiere que el APK original esté instalado en tu dispositivo antes de aplicar parches.</string>
     <string name="root_gmscore_excluded">El parche de soporte de GmsCore está excluido en el modo raíz</string>
@@ -308,16 +316,13 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="failed_to_execute_patch">Error al aplicar %s</string>
     <string name="patched_app_saved_toast">App parcheada guardada para más tarde</string>
     <string name="patched_app_save_failed_toast">Error al guardar la app parcheada</string>
-    <string name="download_apk">Descargar archivo APK</string>
     <string name="plugin_activity_dialog_body">Se requiere interacción del usuario para continuar con este complemento.</string>
     <string name="patcher_process_exit_message">El proceso del parcheador terminó con el código %1$s</string>
     <string name="install_app_success">Instalado correctamente</string>
     <string name="install_app_fail">Error al instalar la aplicación: %s</string>
-    <string name="install_timeout_message">La instalación no se completó. Revisa el diálogo del instalador del sistema y vuelve a intentarlo.</string>
     <string name="save_apk_success">APK guardado</string>
     <string name="saved_app_export_failed">Error al exportar la aplicación parcheada</string>
     <string name="saved_app_removed_toast">Aplicación parcheada guardada eliminada</string>
-    <string name="saved_app_copy_removed_toast">Copia guardada eliminada</string>
     <string name="saved_app_launch_unavailable">Instala la aplicación antes de abrirla.</string>
     <string name="package_name">Nombre del paquete</string>
     <string name="failed_to_mount">Error al montar: %s</string>
@@ -337,6 +342,10 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_appearance_background_grid">Cuadrícula</string>
     <string name="settings_appearance_background_particles">Partículas</string>
     <string name="settings_appearance_background_none">Ninguna</string>
+    <string name="settings_appearance_background_random">Aleatorio</string>
+    <string name="settings_appearance_background_random_interval_launch">Al inicio</string>
+    <string name="settings_appearance_background_random_interval_daily">Diario</string>
+    <string name="settings_appearance_background_random_interval_3days">Cada 3 días</string>
     <string name="settings_appearance_parallax_effect">Efecto de paralaje</string>
     <string name="settings_appearance_parallax_effect_description">Desplazamiento suave del fondo al inclinar el dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_appearance_app_language_current">Idioma actual</string>
     <string name="settings_appearance_translations_info_title">Las traducciones para algunos idiomas pueden faltar o estar incompletas</string>
     <string name="settings_appearance_translations_info_text">Para traducir nuevos idiomas o mejorar las traducciones existentes, visite %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Pantalla de inicio</string>
+    <string name="settings_appearance_greeting_phrases">Frases de saludo</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Mostrar un mensaje de saludo en la pantalla de inicio</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icono de la aplicación</string>
     <string name="settings_appearance_app_icon_default">Predeterminado</string>
@@ -399,8 +412,17 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_advanced_expert_mode_description">Activa ajustes complejos de parcheo de Morphe y opciones de personalización</string>
     <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo experto?</string>
     <string name="settings_advanced_expert_mode_dialog_message">El modo experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente los ajustes en modo experto puede resultar en una aplicación no funcional</string>
-    <string name="settings_advanced_strip_unused_libs">Eliminar bibliotecas nativas no utilizadas</string>
-    <string name="settings_advanced_strip_unused_libs_description">Eliminar bibliotecas nativas para arquitecturas de CPU no compatibles de las aplicaciones parcheadas</string>
+    <string name="settings_advanced_strip_unused_libs">Optimizar para la arquitectura del dispositivo</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Omite los módulos APK divididos para arquitecturas de CPU, idiomas y densidades de pantalla no compatibles durante la fusión.
+Para APK sencillos, elimina las bibliotecas nativas para arquitecturas no compatibles después de parchear"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Modo de procesamiento de bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Controla cómo se procesa el bytecode durante el parcheo. Afecta a la velocidad de parcheo, el uso de memoria y el tamaño del APK de salida</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Rápido (Recomendado)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Rápido</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Parcheo más rápido y menor uso de memoria, a costa de un APK más grande. Recomendado para dispositivos con poca memoria RAM o más antiguos.</string>
+    <string name="settings_advanced_bytecode_mode_full">Completo</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Parcheo más lento, replica el comportamiento heredado. Utilizar solo si el modo rápido causa problemas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token de acceso personal de GitHub</string>
     <string name="settings_advanced_github_pat_description">Requerido para fuentes de solicitud de extracción</string>
@@ -510,13 +532,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_status_shizuku_unsupported">La versión de Shizuku instalada no es compatible.</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">La instalación falló. Vuelve a intentarlo o cambia a un instalador diferente.</string>
-    <string name="installer_hint_blocked">La instalación fue bloqueada por Android. Revisa Play Protect o las configuraciones de seguridad.</string>
     <string name="installer_hint_conflict">Otra aplicación con este nombre de paquete ya está instalada. Desinstálala antes de continuar.</string>
-    <string name="installer_hint_incompatible">El APK no es compatible con este dispositivo o versión de Android.</string>
-    <string name="installer_hint_invalid">El APK es inválido o corrupto.</string>
-    <string name="installer_hint_storage">No hay suficiente espacio de almacenamiento para la instalación.</string>
-    <string name="installer_hint_timeout">La instalación tardó demasiado. Vuelve a intentarlo.</string>
-    <string name="installer_hint_aborted">La instalación se canceló.</string>
     <string name="installer_external_launched">Abriendo %1$s…</string>
     <string name="installer_external_timeout">%1$s no confirmó la instalación. Revisa la otra aplicación y vuelve a intentarlo.</string>
     <string name="installer_external_success">%1$s informó una instalación exitosa.</string>
@@ -547,6 +563,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_import_keystore_dialog_alias_field">Nombre de usuario (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Contraseña</string>
     <string name="settings_system_import_keystore_dialog_button">Importar</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formato de almacén de claves</string>
     <string name="settings_system_import_keystore_wrong_credentials">Credenciales de almacén de claves incorrectas</string>
     <string name="settings_system_import_keystore_success">Almacén de claves importado</string>
     <string name="settings_system_import_keystore_failed">No se pudo importar el almacén de claves</string>
@@ -554,6 +571,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_export_keystore_description">Exportar el almacén de claves actual</string>
     <string name="settings_system_export_keystore_unavailable">No hay almacén de claves disponible para exportar</string>
     <string name="settings_system_export_keystore_success">Almacén de claves exportado</string>
+    <string name="settings_system_export_keystore_failed">Error al exportar el almacén de claves</string>
     <string name="settings_system_show_password_field">Mostrar contraseña</string>
     <string name="settings_system_hide_password_field">Ocultar contraseña</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="allow">Permitir</string>
     <string name="details">Detalles</string>
     <string name="hide">Ocultar</string>
-    <string name="default_">Predeterminado</string>
+    <string name="hidden">Oculto</string>
+    <string name="unhide">Mostrar</string>
     <string name="logs">Registros</string>
     <string name="sources">Fuentes</string>
     <string name="installing_ellipsis">Instalando…</string>

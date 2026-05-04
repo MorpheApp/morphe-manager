@@ -11,7 +11,6 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -445,8 +444,8 @@ private fun BundleManagementCard(
             // Expanded content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)),
-                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION))
+                enter = MorpheAnimations.expandVertEnter,
+                exit = MorpheAnimations.shrinkVertExit
             ) {
                 Column(
                     modifier = Modifier
@@ -541,8 +540,8 @@ private fun BundleManagementCard(
                     AnimatedVisibility(
                         visible = hasExperimentalVersions && onExperimentalVersionsToggle != null &&
                                 (onPrereleasesToggle == null || currentUsePrerelease),
-                        enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                        exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
                     ) {
                         Row(
                             modifier = Modifier
@@ -751,8 +750,8 @@ private fun BundleCardHeader(
                 // Disabled badge
                 AnimatedVisibility(
                     visible = !enabled,
-                    enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION)),
-                    exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION))
+                    enter = MorpheAnimations.expandHorizFadeIn,
+                    exit = MorpheAnimations.shrinkHorizFadeOut
                 ) {
                     InfoBadge(
                         text = stringResource(R.string.disabled),

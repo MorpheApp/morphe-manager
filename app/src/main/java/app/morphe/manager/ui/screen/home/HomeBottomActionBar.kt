@@ -1,20 +1,13 @@
 package app.morphe.manager.ui.screen.home
 
-import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
-import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +20,7 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 
 /**
  * Section 5: Bottom action bar.
@@ -35,14 +28,13 @@ import app.morphe.manager.ui.screen.shared.MorpheDefaults
  */
 @Composable
 fun HomeBottomActionBar(
+    modifier: Modifier = Modifier,
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,
     isExpertModeEnabled: Boolean = false,
     showSearchButton: Boolean = false,
     searchActive: Boolean = false,
-    onSearchClick: () -> Unit = {},
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    onSearchClick: () -> Unit = {}
 ) {
     // Show labels only when there are 2 buttons, buttons are wider so there's space
     val showLabels = !showSearchButton
@@ -57,7 +49,7 @@ fun HomeBottomActionBar(
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
                 .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(32.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Left: Sources button
@@ -73,8 +65,8 @@ fun HomeBottomActionBar(
             AnimatedVisibility(
                 visible = showSearchButton,
                 modifier = Modifier.weight(1f),
-                enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + expandHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing)),
-                exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + shrinkHorizontally(tween(MorpheDefaults.ANIMATION_DURATION, easing = FastOutSlowInEasing))
+                enter = MorpheAnimations.expandHorizFadeIn,
+                exit = MorpheAnimations.shrinkHorizFadeOut
             ) {
                 val searchExpandedLabel = stringResource(R.string.expanded)
                 val searchCollapsedLabel = stringResource(R.string.collapsed)

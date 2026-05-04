@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Brak dostępnych aplikacji</string>
     <string name="home_no_apps_subtitle">Dodaj źródło modyfikacji lub włącz istniejące w %s</string>
     <string name="home_no_apps_search_subtitle">Brak wyników dla \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Wszystkie aplikacje ukryte</string>
+    <string name="home_all_apps_hidden_subtitle">Ukryto wszystkie aplikacje na ekranie głównym</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Jaką aplikację chcesz zmodyfikować?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w jednej z poniższych wersji:</string>
     <string name="home_apk_availability_recommended_label">Zalecana</string>
     <string name="home_apk_availability_unpatched_label">Niezmodyfikowana</string>
+    <string name="home_apk_availability_incompatible_label">Niezgodna</string>
     <string name="home_apk_availability_yes">Tak, pomóż mi znaleźć plik APK</string>
     <string name="home_apk_availability_no">Nie, mam już plik APK</string>
     <string name="home_apk_use_saved_with_version">Użyj zapisanego pliku APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
+    <string name="home_version_requires_android">Wymaga Androida %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Niewspierane na tym urządzeniu</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nie ma wersji wspieranych z Androidem %2$d (API %3$d). Wszystkie zadeklarowane wersje wymagają nowszego systemu Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
     <string name="home_download_instructions_steps_title">Instrukcja:</string>
@@ -162,6 +168,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_low_disk_space_dialog_title">Mało miejsca na dysku</string>
     <string name="home_low_disk_space_dialog_message">Dostępne tylko %1$.2f GB wolnego miejsca. Modyfikowanie wymaga co najmniej %2$.2f GB do poprawnego działania</string>
     <string name="home_low_disk_space_dialog_warning">Kontynuowanie może skutkować błędem \"Nie znaleziono pliku\" lub uszkodzeniem wyjściowego pliku APK</string>
+    <string name="home_simple_bundle_select_title">Wybierz źródło modyfikacji</string>
     <!-- Patch Options -->
     <string name="custom_color">Kolor niestandardowy</string>
     <string name="hex_color">Kolor HEX</string>
@@ -221,6 +228,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_app_info_patch_update_available_description">Dostępna jest nowsza wersja modyfikacji. Zmodyfikuj aplikację ponownie, aby otrzymać najnowsze ulepszenia i poprawki</string>
     <string name="home_app_info_app_deleted_warning">Aplikacja została odinstalowana</string>
     <string name="home_app_info_app_deleted_description">Ta aplikacja została odinstalowana poza Morphe. Zmodyfikuj ją ponownie, aby przywrócić jej funkcjonalność</string>
+    <string name="home_app_info_apk_size">Rozmiar pliku APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem</string>
     <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
@@ -308,16 +316,13 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="failed_to_execute_patch">Nie udało się zastosować %s</string>
     <string name="patched_app_saved_toast">Zapisano zmodyfikowaną aplikację na później</string>
     <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
-    <string name="download_apk">Pobierz plik APK</string>
     <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
     <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %1$s</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>
     <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
-    <string name="install_timeout_message">Instalacja nie została zakończona. Sprawdź okno instalatora systemowego i spróbuj ponownie</string>
     <string name="save_apk_success">Zapisano plik APK</string>
     <string name="saved_app_export_failed">Nie udało się wyeksportować zmodyfikowanej aplikacji</string>
     <string name="saved_app_removed_toast">Usunięto zapisaną zmodyfikowaną aplikację</string>
-    <string name="saved_app_copy_removed_toast">Usunięto zapisaną kopię</string>
     <string name="saved_app_launch_unavailable">Zainstaluj aplikację, aby móc ją otworzyć</string>
     <string name="package_name">Nazwa pakietu</string>
     <string name="failed_to_mount">Nie udało się zamontować: %s</string>
@@ -337,6 +342,10 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_appearance_background_grid">Kratka</string>
     <string name="settings_appearance_background_particles">Cząsteczki</string>
     <string name="settings_appearance_background_none">Brak</string>
+    <string name="settings_appearance_background_random">Losowa</string>
+    <string name="settings_appearance_background_random_interval_launch">Przy uruchomieniu</string>
+    <string name="settings_appearance_background_random_interval_daily">Codziennie</string>
+    <string name="settings_appearance_background_random_interval_3days">Co 3 dni</string>
     <string name="settings_appearance_parallax_effect">Efekt paralaksy</string>
     <string name="settings_appearance_parallax_effect_description">Płynne przesuwanie tła przy nachyleniu urządzenia</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_appearance_app_language_current">Bieżący język</string>
     <string name="settings_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą być niekompletne lub może ich brakować</string>
     <string name="settings_appearance_translations_info_text">Aby przetłumaczyć aplikację na nowe języki lub poprawić istniejące tłumaczenia, odwiedź stronę %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Ekran główny</string>
+    <string name="settings_appearance_greeting_phrases">Powitania</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Wyświetlaj powitanie na ekranie głównym</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacji</string>
     <string name="settings_appearance_app_icon_default">Domyślna</string>
@@ -399,8 +412,17 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_advanced_expert_mode_description">Włącz zaawansowane ustawienia modyfikacji oraz opcje personalizacji Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
-    <string name="settings_advanced_strip_unused_libs">Usuń nieużywane biblioteki natywne</string>
-    <string name="settings_advanced_strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
+    <string name="settings_advanced_strip_unused_libs">Optymalizacja pod architekturę</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Podczas scalania podzielonych plików APK pomija zbędne architektury, wersje językowe i gęstości ekranu.
+W przypadku zwykłych plików APK, po zmodyfikowaniu usuwa nieobsługiwane biblioteki natywne"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Tryb przetwarzania kodu bajtowego</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Określa sposób przetwarzania kodu bajtowego podczas modyfikowania. Wpływa to na szybkość procesu, zużycie pamięci i końcowy rozmiar pliku APK</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Szybki (Zalecane)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Szybki</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Szybsze modyfikowanie i mniejsze zużycie pamięci kosztem większego pliku APK. Zalecane dla starszych urządzeń z małą ilością RAM-u</string>
+    <string name="settings_advanced_bytecode_mode_full">Pełny</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Wolniejsze modyfikowanie klasyczną metodą. Używaj tylko wtedy, gdy tryb szybki powoduje problemy</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token GitHub</string>
     <string name="settings_advanced_github_pat_description">Wymagany dla źródeł z Pull Requestów</string>
@@ -510,13 +532,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest wspierana</string>
     <string name="installer_action_open_shizuku">Otwórz Shizuku</string>
     <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>
-    <string name="installer_hint_blocked">Instalacja została zablokowana przez Androida. Sprawdź Play Protect lub ustawienia bezpieczeństwa</string>
     <string name="installer_hint_conflict">Inna aplikacja o tej samej nazwie pakietu jest już zainstalowana. Odinstaluj ją, aby kontynuować</string>
-    <string name="installer_hint_incompatible">Plik APK nie jest zgodny z tym urządzeniem lub wersją Androida</string>
-    <string name="installer_hint_invalid">Plik APK jest nieprawidłowy lub uszkodzony</string>
-    <string name="installer_hint_storage">Za mało miejsca w pamięci urządzenia, aby ukończyć instalację</string>
-    <string name="installer_hint_timeout">Przekroczono czas instalacji. Spróbuj ponownie</string>
-    <string name="installer_hint_aborted">Instalacja została anulowana</string>
     <string name="installer_external_launched">Otwieranie %1$s…</string>
     <string name="installer_external_timeout">%1$s nie potwierdził instalacji. Sprawdź inną aplikację i spróbuj ponownie</string>
     <string name="installer_external_success">%1$s potwierdził pomyślną instalację</string>
@@ -547,6 +563,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_import_keystore_dialog_alias_field">Nazwa użytkownika (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Hasło</string>
     <string name="settings_system_import_keystore_dialog_button">Importuj</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format magazynu kluczy</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nieprawidłowe dane magazynu kluczy</string>
     <string name="settings_system_import_keystore_success">Zaimportowano magazyn kluczy</string>
     <string name="settings_system_import_keystore_failed">Nie udało się zaimportować magazynu kluczy</string>
@@ -554,6 +571,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_export_keystore_description">Eksportuj bieżący magazyn kluczy</string>
     <string name="settings_system_export_keystore_unavailable">Brak magazynu kluczy do eksportu</string>
     <string name="settings_system_export_keystore_success">Wyeksportowano magazyn kluczy</string>
+    <string name="settings_system_export_keystore_failed">Nie udało się wyeksportować magazynu kluczy</string>
     <string name="settings_system_show_password_field">Pokaż hasło</string>
     <string name="settings_system_hide_password_field">Ukryj hasło</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="allow">Zezwól</string>
     <string name="details">Szczegóły</string>
     <string name="hide">Ukryj</string>
-    <string name="default_">Domyślne</string>
+    <string name="hidden">Ukryte</string>
+    <string name="unhide">Odkryj</string>
     <string name="logs">Logi</string>
     <string name="sources">Źródła</string>
     <string name="installing_ellipsis">Instalowanie…</string>

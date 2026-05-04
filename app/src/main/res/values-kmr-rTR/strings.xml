@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Semanka zetîn pêwist be pêşbaziyê pêş de bêtin da hêz be serir xendna Androida 11 zibu vê hilenkirinê yarde ji bo seranê her serxistine ye \'</string>
     <string name="deep_link_add_source_title">Kanîna çavkaniyê zêde bike</string>
     <string name="deep_link_add_source_message">Ma tu wê çavkaniya vê pakê ji Morphe zêde bike?</string>
-    <string name="deep_link_add_source_warning">Tenê çavkaniyek ji çavkaniyên ku wanê pê baweriyê bike, zêde bike</string>
+    <string name="deep_link_add_source_warning">Têkilîyên ku bawerî li wan hebin zêde bike</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nûvekirina Morphe heye</string>
     <string name="home_update_available_subtitle">Nûvekirin amade ye ku were sazkirin</string>
@@ -24,7 +24,7 @@
     <string name="home_update_skipped_metered">Nûvekirin çêhatin</string>
     <string name="home_update_skipped_metered_subtitle">Daneya mobîl aktîv e</string>
     <string name="home_updating_sources">Kanalkan sazkirinê…</string>
-    <string name="home_update_progress_format">%1$s pêşqesm kirin</string>
+    <string name="home_update_progress_format">%1$s vekiraye</string>
     <string name="home_update_success">Sazkirina kanalan temam bû</string>
     <string name="home_update_success_subtitle">Kanalan we nû kirin</string>
     <string name="home_sources_are_loading">Kanalan ketin, ji kerema xwe bibeku</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Bername nîn in.</string>
     <string name="home_no_apps_subtitle">Çavkanîyê zêde bike an yek jibo %s veşêre.</string>
     <string name="home_no_apps_search_subtitle">Hewa bernameyên \"%1$s\" tune.</string>
+    <string name="home_all_apps_hidden_title">Hemû serlêdanan veşartin</string>
+    <string name="home_all_apps_hidden_subtitle">Ez hemû serlêdanan ji ekranê pêşîn veşartim</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kudu ezîtekora kodê ji xwerêzê we yê çawa îdeal bike?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,23 +93,27 @@
     <string name="home_apk_availability_dialog_expert">Ji bo dirûtîna &lt;b&gt;%s&lt;/b&gt;, hûn pêdiviya APK-yên nebixwe hebin:</string>
     <string name="home_apk_availability_recommended_label">Pisporîn</string>
     <string name="home_apk_availability_unpatched_label">Neçapandî</string>
+    <string name="home_apk_availability_incompatible_label">Nakamkirê</string>
     <string name="home_apk_availability_yes">Ew, min alîkarê dîtina APK-yê bikîn</string>
     <string name="home_apk_availability_no">Na, ez APK-yek heznikim</string>
     <string name="home_apk_use_saved_with_version">APK a vekirî te (v%s) bejin</string>
     <string name="home_app_info_no_saved_apk">APK kume ne. Berî ev, wê APK ava beke</string>
+    <string name="home_version_requires_android">Android %1$s+ hewê ne</string>
+    <string name="home_apk_no_compatible_versions_title">Li vê cihazê de ne piştgirîkirî</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) ji bo piştgirîkirina guhertoyên heye. Hemû guhertoyên hatine diyarkirin ji bo Android guhertoyek bilindtir hewce dike</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">APK-a orîjinalê dakêşîne</string>
     <string name="home_download_instructions_steps_title">Rêberî:</string>
     <string name="home_download_instructions_step1">Li jêr çapa \'%1$s\' biketine</string>
     <string name="home_download_instructions_step2_part1">Li ser rûbera malperê biqewime û bikşîne</string>
     <string name="home_download_instructions_download_button_toast">Li ser malpera çapa serdest bike, ne ku xwer li vir 😊</string>
-    <string name="home_download_instructions_step3">Heke barkevtin temamm bike, û &lt;b&gt;newestîne&lt;/b&gt; APK</string>
-    <string name="home_download_instructions_step3_mount">Heke barkevtin temamm bike, paştrê &lt;b&gt;APK-ê saz bike&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Piştî ku server heta qedandina dewam bike, ji Morphe desteke be.</string>
-    <string name="home_download_instructions_step4_mount">Piştî ku APK-ya asayî bin deçên, ji Morphe desteke be.</string>
+    <string name="home_download_instructions_step3">Li benda qedembûna daxistinê bibe, û &lt;b&gt;APK-ê nas neke&lt;/b&gt;</string>
+    <string name="home_download_instructions_step3_mount">Binevin destpêkirina daxistnê biqedîne, paşê &lt;b&gt;APKê nas bike&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">Pi serîdana daxistinê bi dawî bû, vegerin ser Morphe</string>
+    <string name="home_download_instructions_step4_mount">Pi naskindina APK\'ya bilavkirinê, vegerin Morphe</string>
     <string name="home_download_instructions_continue">Bibe APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">APK-ya danîyê bikê</string>
+    <string name="home_file_picker_prompt_title">APKê daxistî hilbijêre</string>
     <string name="home_file_picker_prompt_description">Sêw  %1$s  ê têbîrijayî ku  bi pêştirî daxistine</string>
     <string name="home_file_picker_prompt_open_apk">Dosya APK veqêşin</string>
     <string name="home_recommended_version">Versyona ku tê pêşniyar kirin</string>
@@ -160,6 +166,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_low_disk_space_dialog_title">Cihê nadîtî</string>
     <string name="home_low_disk_space_dialog_message">Ten %1$.2f GB ajala weşanê azad heye. Sazûdekirin ji bo ku bi rastî bixebite, tişta kêmtir %2$.2f GB ajala fermangeşiyê hewce ye</string>
     <string name="home_low_disk_space_dialog_warning">Li pêşveçûn dikare di xeberê de çewisika \"pel nêzike\" an APK-ya derketî ya qels bibe.</string>
+    <string name="home_simple_bundle_select_title">Hilbijartina çavkaniya patchê</string>
     <!-- Patch Options -->
     <string name="custom_color">Rengê standard</string>
     <string name="hex_color">Rengê hex</string>
@@ -168,7 +175,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="patch_option_enter_number">Hejmar biqîze</string>
     <string name="patch_option_enter_decimal">Desîmal biqîze</string>
     <string name="patch_option_pick_folder">Folder safînak</string>
-    <string name="patch_option_list_duplicate">Evîna vê ber bi hezaran e</string>
+    <string name="patch_option_list_duplicate">Ev nirx e jixye heye</string>
     <string name="patch_option_list_empty">Qîymet nikare boçagî be</string>
     <string name="patch_option_list_empty_state">Heta niha tiştek zêde nabe</string>
     <string name="patch_option_required_missing">%s: hemû rêzika pêwist tê dîtin</string>
@@ -219,6 +226,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_app_info_patch_update_available_description">Versîyonê nû ya qelvaton ava bûye. Bo cîgirtinê sepanê bi qelbûna herî dawî, pêşbirîyên nûîn kirin û çareseriyê bibin</string>
     <string name="home_app_info_app_deleted_warning">App hate laşkirin</string>
     <string name="home_app_info_app_deleted_description">Epp li derve ji Morphe hate laşkirin. Serpêş pêlavînê da serê ku serê bi sist ki.</string>
+    <string name="home_app_info_apk_size">Mezinahiya APK\'yê</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tîrek xwestisê wî de qewımîr APK tê serê îzayê we ev pêwist be pêşbaziyê biqewmê pêş de bîtin da xestes numberê berıkirînda Android bi usayiastî bimezânê</string>
     <string name="root_gmscore_excluded">Pişta GmsCore di moda root de ji holê derdike</string>
@@ -306,16 +314,13 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="failed_to_execute_patch">Şeva pek dabeşin %s</string>
     <string name="patched_app_saved_toast">Sepeya patch kirî ji bo paşê hatiye parastin</string>
     <string name="patched_app_save_failed_toast">Hate parastina sepeya patch kirî</string>
-    <string name="download_apk">Dosye APK-yê dakavêje</string>
     <string name="plugin_activity_dialog_body">Bixweştana mêz rêk û pê dei bilinge da pêşbaziyê bi zaniye vê plugin you bo lazmî bîye se</string>
     <string name="patcher_process_exit_message">Prosesa pêlavînê bi koda %1$s qedand.</string>
     <string name="install_app_success">Bi ser ketin</string>
     <string name="install_app_fail">Serketina kuştina sepanê: %s</string>
-    <string name="install_timeout_message">Giraistî ber hem dawıkirin ne. Hayiyan dialogê pêşbazî sistema be dîtin Û xemm biçike</string>
     <string name="save_apk_success">APK-yê hatiye parastin</string>
     <string name="saved_app_export_failed">Serketina paşerojê ya sepanê</string>
     <string name="saved_app_removed_toast">Hateyên parastinê hatin jêbirin</string>
-    <string name="saved_app_copy_removed_toast">Hateyên veşartinê hatin jêbirin</string>
     <string name="saved_app_launch_unavailable">Bernameyê saz bike berê li hevê pê bixe</string>
     <string name="package_name">Navê pakêtê</string>
     <string name="failed_to_mount">Serketina çêkirinê: %s</string>
@@ -335,6 +340,10 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_appearance_background_grid">Şebek</string>
     <string name="settings_appearance_background_particles">Partîkel</string>
     <string name="settings_appearance_background_none">Tîya</string>
+    <string name="settings_appearance_background_random">Têkildar</string>
+    <string name="settings_appearance_background_random_interval_launch">Dema destpêkirinê</string>
+    <string name="settings_appearance_background_random_interval_daily">Rojane</string>
+    <string name="settings_appearance_background_random_interval_3days">Her 3 roj</string>
     <string name="settings_appearance_parallax_effect">Bandora Parallax</string>
     <string name="settings_appearance_parallax_effect_description">Serdestinê pêşbazinê de girtinê tê guherandin de hîrdikê alik bê yê ew zibu âniye</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -351,6 +360,8 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_appearance_app_language_current">Zimana niha</string>
     <string name="settings_appearance_translations_info_title">Wergerandin ji bo hin zimanên kêmtir an jî ne tamkirin</string>
     <string name="settings_appearance_translations_info_text">Ji bo wergerandina zimanên nû an jî pêşxistina wergerandinên hebin, serdana %s bikin</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_greeting_phrases">Frazey şahê</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Îkonê sepanê</string>
     <string name="settings_appearance_app_icon_default">Serekî</string>
@@ -397,8 +408,17 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_advanced_expert_mode_description">Sazgarê nêzîkên Morphe û ji bo vebijarkan nermalina xwe saz bike</string>
     <string name="settings_advanced_expert_mode_dialog_title">Modeka pispor çêbike?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Moda pispor kontrola zêdetir ser bernameyên ku meriv pêdike, lê çêkirina bêreng di moda pispor de dikare bibe sedem ku sepan bibe nekar.</string>
-    <string name="settings_advanced_strip_unused_libs">Kîle pêwist nakin ji rayaka orîjînalan derxîne</string>
-    <string name="settings_advanced_strip_unused_libs_description">Rayakên orîjînal ên ji bo arîtekî têrxaniyê nedesînar, ji app vêjaer bikin</string>
+    <string name="settings_advanced_strip_unused_libs">Ji arîkek cihazê ve saz bike</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Modûlên APK-yên parçabûn ji bo arîkên CPU, zimanên lokal û qasîyên ekranê nedastûrik bêgîrîk merivê.
+Ji bo APK-yên sazkare, fîlimên xwecihî ji bo arîkên nedastûrik piştî çêkirinê vedigere"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Fêrqa pêşdaraziyê kodê</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kontrol dike ka kod çawa di dema guhertinê de pêşdarêzê. Bandor li ser leza guhertinê, karanîna bîr û mezinahiya APK ya derveyî dike.</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Lez (Pêşnebîr)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Çav</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Bitşik pêşandan û mêjiyê kêmtir, lê APK mezintir e. Ji bo alavên RAM kêm an kevnar tê pêşniyar.</string>
+    <string name="settings_advanced_bytecode_mode_full">Tam</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Bitşik hêzika hevpar, rewşa kevnar vejînê. Tenê bikarîne heke moda bilez xeletî çêbike.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">PAT GitHub</string>
     <string name="settings_advanced_github_pat_description">Ragrapha qebul, pêvir be jibo seyarê ber dom</string>
@@ -508,13 +528,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_status_shizuku_unsupported">Versiyona sazkirî ya Şizuku piştgirî nadê</string>
     <string name="installer_action_open_shizuku">Veşêre Shizuku</string>
     <string name="installer_hint_generic">Îstikrar kirin jêvir kirin. Dibe, dîsa hewil bide an li îstalatorek din zivirînê hebin</string>
-    <string name="installer_hint_blocked">Îstikrar kirin ji aliyê Android ve hat astebijartin. Guma Play Protect an setingên ewletiyê kontrol bike</string>
     <string name="installer_hint_conflict">Sep ne ku bi navê pakêtê ya viya berê hatî saz kirin.  Berî pêşxistina hevalan, ew jêbirin be</string>
-    <string name="installer_hint_incompatible">APK bi vê cihaz an versiyona Androida nestên fêr</string>
-    <string name="installer_hint_invalid">APK ne cudne an xeranbûne</string>
-    <string name="installer_hint_storage">Jibo îstikrar kirin, asta glazî heye</string>
-    <string name="installer_hint_timeout">Îstikrar kirin heta demê pêxistine xistê. Dibe, dîsa hewil bide</string>
-    <string name="installer_hint_aborted">Îstikrar kirin astebijartin kirin</string>
     <string name="installer_external_launched">%1$s vekirine…</string>
     <string name="installer_external_timeout">%1$s îstikrar kirin gef ne kir. Sepa din kontrol bike û dîsa hewil bide</string>
     <string name="installer_external_success">%1$s îstikrar kirin serketin ragihand</string>
@@ -545,6 +559,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_import_keystore_dialog_alias_field">Karanbera (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Nexweş</string>
     <string name="settings_system_import_keystore_dialog_button">Importê</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Formata kilîdparêzê</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nivîsandina parçehuyê xeṭî ye</string>
     <string name="settings_system_import_keystore_success">Parçehuyê zafortir hate kirin</string>
     <string name="settings_system_import_keystore_failed">Ji kirina parçehuyê neçîbe</string>
@@ -552,6 +567,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_export_keystore_description">Parçehuyê niha derxîne</string>
     <string name="settings_system_export_keystore_unavailable">Parçehuyek ku were derxistin tune</string>
     <string name="settings_system_export_keystore_success">Parçehuy derxist</string>
+    <string name="settings_system_export_keystore_failed">Destûr neda exportkirina keystore\'ê</string>
     <string name="settings_system_show_password_field">Şifreyê nîşana bîne</string>
     <string name="settings_system_hide_password_field">Şifreyê veşêre</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -680,7 +696,8 @@ Qasîyên wêneyan divê wiha bin:
     <string name="allow">Îznaye</string>
     <string name="details">Agahdarî</string>
     <string name="hide">Vêşêrîn</string>
-    <string name="default_">Standard</string>
+    <string name="hidden">Veşartî</string>
+    <string name="unhide">Neveşartîne</string>
     <string name="logs">Log</string>
     <string name="sources">Çavkanî</string>
     <string name="installing_ellipsis">Dikuştin…</string>

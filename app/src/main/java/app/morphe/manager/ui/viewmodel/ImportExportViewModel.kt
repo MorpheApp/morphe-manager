@@ -2,7 +2,11 @@ package app.morphe.manager.ui.viewmodel
 
 import android.app.ActivityManager
 import android.app.Application
+import android.content.ContentValues
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -16,9 +20,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
-import app.morphe.manager.util.tag
-import app.morphe.manager.util.toast
-import app.morphe.manager.util.uiSafe
+import app.morphe.manager.util.*
 import com.github.pgreze.process.Redirect
 import com.github.pgreze.process.process
 import kotlinx.coroutines.CancellationException
@@ -27,17 +29,22 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.io.IOException
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
+import java.io.BufferedWriter
 import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 import kotlin.io.path.deleteExisting
 import kotlin.io.path.inputStream
 
@@ -102,7 +109,9 @@ class ImportExportViewModel(
     private val contentResolver = app.contentResolver
 
     private var keystoreImportPath by mutableStateOf<Path?>(null)
+    private var keystoreImportFormat by mutableStateOf(KeystoreInputFormat.KEYSTORE)
     val showCredentialsDialog by derivedStateOf { keystoreImportPath != null }
+    val detectedKeystoreFormat: KeystoreInputFormat get() = keystoreImportFormat
 
     fun startKeystoreImport(content: Uri) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_import_keystore_failed, "Failed to import keystore") {
@@ -116,16 +125,31 @@ class ImportExportViewModel(
                 }
             }
 
-            // Try known aliases and passwords first
-            aliases.forEach { alias ->
-                knownPasswords.forEach { pass ->
-                    if (tryKeystoreImport(alias, pass, path)) {
-                        return@launch
+            // Detect format: magic bytes first (reliable), extension as fallback
+            val detectedFormat = withContext(Dispatchers.IO) {
+                val header = path.inputStream().use { stream ->
+                    val buf = ByteArray(4)
+                    stream.read(buf)
+                    buf
+                }
+                KeystoreInputFormat.detectFromBytes(header)
+            } ?: run {
+                val ext = content.lastPathSegment?.substringAfterLast('.')?.lowercase() ?: ""
+                KeystoreInputFormat.fromExtension(ext) ?: KeystoreInputFormat.PKCS12
+            }
+            keystoreImportFormat = detectedFormat
+
+            // Try known aliases/passwords with all supported formats (detected format first)
+            val autoFormats = listOf(detectedFormat) + (KeystoreInputFormat.entries - detectedFormat)
+            for (format in autoFormats) {
+                for (alias in aliases) {
+                    for (pass in knownPasswords) {
+                        if (tryKeystoreImport(alias, pass, format, path)) return@launch
                     }
                 }
             }
 
-            // If automatic import fails, prompt user for credentials
+            // Auto-import failed - ask the user for credentials
             keystoreImportPath = path
         }
     }
@@ -135,25 +159,45 @@ class ImportExportViewModel(
         keystoreImportPath = null
     }
 
-    suspend fun tryKeystoreImport(alias: String, pass: String): Boolean =
-        tryKeystoreImport(alias, pass, keystoreImportPath!!)
+    suspend fun tryKeystoreImport(alias: String, pass: String, format: KeystoreInputFormat): Boolean =
+        tryKeystoreImport(alias, pass, format, keystoreImportPath!!)
 
-    private suspend fun tryKeystoreImport(alias: String, pass: String, path: Path): Boolean {
-        path.inputStream().use { stream ->
-            if (keystoreManager.import(alias, pass, stream)) {
-                app.toast(app.getString(R.string.settings_system_import_keystore_success))
-                cancelKeystoreImport()
-                return true
+    private suspend fun tryKeystoreImport(alias: String, pass: String, format: KeystoreInputFormat, path: Path): Boolean {
+        // BKS is passed through as-is; converting it would re-encrypt the private key
+        // in a way that ApkSigner cannot read back
+        val bksBytes = if (format == KeystoreInputFormat.BKS || format == KeystoreInputFormat.KEYSTORE) {
+            withContext(Dispatchers.IO) { path.toFile().readBytes() }
+        } else {
+            val result = withContext(Dispatchers.IO) {
+                path.inputStream().use { KeystoreConversionUtils.convert(it, format, alias, pass) }
+            }
+            when (result) {
+                is KeystoreConversionResult.Error -> return false
+                is KeystoreConversionResult.Success -> result.data.toByteArray()
             }
         }
-        return false
+
+        return try {
+            val imported = keystoreManager.import(alias, pass, bksBytes.inputStream())
+            if (imported) {
+                app.toast(app.getString(R.string.settings_system_import_keystore_success))
+                cancelKeystoreImport()
+            }
+            imported
+        } catch (_: IOException) {
+            false
+        }
     }
 
     fun canExport() = keystoreManager.hasKeystore()
 
     fun exportKeystore(target: Uri) = viewModelScope.launch {
-        keystoreManager.export(contentResolver.openOutputStream(target)!!)
-        app.toast(app.getString(R.string.settings_system_export_keystore_success))
+        uiSafe(app, R.string.settings_system_export_keystore_failed, "Failed to export keystore") {
+            withContext(Dispatchers.IO) {
+                keystoreManager.export(contentResolver.openOutputStream(target)!!)
+            }
+            app.toast(app.getString(R.string.settings_system_export_keystore_success))
+        }
     }
 
     fun importManagerSettings(source: Uri) = viewModelScope.launch {
@@ -165,6 +209,9 @@ class ImportExportViewModel(
             }
 
             preferencesManager.importSettings(exportFile.settings)
+
+            // Keep SharedPreferences in sync so the imported language applies on next cold start
+            exportFile.settings.appLanguage?.let { saveLanguageToPrefs(app, it) }
 
             val bundles = exportFile.settings.customBundles
             if (!bundles.isNullOrEmpty()) {
@@ -359,59 +406,67 @@ class ImportExportViewModel(
             return "morphe_logcat_$time.log"
         }
 
+    /**
+     * Writes the debug log content to [writer]. Returns the logcat exit code.
+     * Must be called from within a [Dispatchers.IO] context.
+     * Shared by [exportDebugLogs].
+     */
+    private suspend fun writeDebugLogContent(writer: BufferedWriter): Int = withContext(Dispatchers.IO) {
+        val versionName = runCatching {
+            app.packageManager.getPackageInfo(app.packageName, 0).versionName
+        }.getOrDefault("unknown")
+
+        writer.write("=== Morphe Manager Debug Log ===\n")
+        writer.write("Date       : ${LocalDateTime.now()}\n")
+        writer.write("Version    : $versionName\n")
+
+        writer.write("\n--- Device ---\n")
+        writer.write("Model      : ${Build.MANUFACTURER} ${Build.MODEL}\n")
+        writer.write("Android    : ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT})\n")
+        writer.write("ABI        : ${Build.SUPPORTED_ABIS.joinToString()}\n")
+        writer.write("Locale     : ${Locale.getDefault().toLanguageTag()}\n")
+
+        writer.write("\n--- Memory ---\n")
+        val activityManager = app.getSystemService(ActivityManager::class.java)
+        val memInfo = ActivityManager.MemoryInfo().also { activityManager.getMemoryInfo(it) }
+        val toMb = { bytes: Long -> bytes / 1024 / 1024 }
+        writer.write("RAM avail  : ${toMb(memInfo.availMem)} MB / ${toMb(memInfo.totalMem)} MB\n")
+        writer.write("Low memory : ${memInfo.lowMemory}\n")
+        writer.write("Low mem thr: ${toMb(memInfo.threshold)} MB\n")
+
+        writer.write("\n--- Storage ---\n")
+        val internalDir = app.filesDir
+        val toMbL = { bytes: Long -> bytes / 1024 / 1024 }
+        writer.write("Internal   : ${toMbL(internalDir.freeSpace)} MB free / ${toMbL(internalDir.totalSpace)} MB total\n")
+        val externalDir = app.getExternalFilesDir(null)
+        if (externalDir != null) {
+            writer.write("External   : ${toMbL(externalDir.freeSpace)} MB free / ${toMbL(externalDir.totalSpace)} MB total\n")
+        }
+
+        writer.write("\n--- Environment ---\n")
+        val hasRoot = runCatching {
+            Runtime.getRuntime().exec(arrayOf("su", "-c", "id")).waitFor() == 0
+        }.getOrDefault(false)
+        writer.write("Root access: $hasRoot\n")
+
+        writer.write("\n=== Logcat ===\n\n")
+
+        val consumer = Redirect.Consume { flow ->
+            flow
+                .onEach { line -> writer.write("$line\n") }
+                .flowOn(Dispatchers.IO)
+                .collect { }
+        }
+
+        // Filter logs by current process UID to include only Morphe Manager logs
+        process("logcat", "-d", "--uid=${app.applicationInfo.uid}", stdout = consumer).resultCode
+    }
+
     fun exportDebugLogs(target: Uri) = viewModelScope.launch {
         val exitCode = try {
             withContext(Dispatchers.IO) {
                 contentResolver.openOutputStream(target)!!.bufferedWriter().use { writer ->
-
-                    val versionName = runCatching {
-                        app.packageManager.getPackageInfo(app.packageName, 0).versionName
-                    }.getOrDefault("unknown")
-
-                    writer.write("=== Morphe Manager Debug Log ===\n")
-                    writer.write("Date       : ${LocalDateTime.now()}\n")
-                    writer.write("Version    : $versionName\n")
-
-                    writer.write("\n--- Device ---\n")
-                    writer.write("Model      : ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}\n")
-                    writer.write("Android    : ${android.os.Build.VERSION.RELEASE} (SDK ${android.os.Build.VERSION.SDK_INT})\n")
-                    writer.write("ABI        : ${android.os.Build.SUPPORTED_ABIS.joinToString()}\n")
-                    writer.write("Locale     : ${java.util.Locale.getDefault().toLanguageTag()}\n")
-
-                    writer.write("\n--- Memory ---\n")
-                    val activityManager = app.getSystemService(ActivityManager::class.java)
-                    val memInfo = ActivityManager.MemoryInfo().also { activityManager.getMemoryInfo(it) }
-                    val toMb = { bytes: Long -> bytes / 1024 / 1024 }
-                    writer.write("RAM avail  : ${toMb(memInfo.availMem)} MB / ${toMb(memInfo.totalMem)} MB\n")
-                    writer.write("Low memory : ${memInfo.lowMemory}\n")
-                    writer.write("Low mem thr: ${toMb(memInfo.threshold)} MB\n")
-
-                    writer.write("\n--- Storage ---\n")
-                    val internalDir = app.filesDir
-                    val toMbL = { bytes: Long -> bytes / 1024 / 1024 }
-                    writer.write("Internal   : ${toMbL(internalDir.freeSpace)} MB free / ${toMbL(internalDir.totalSpace)} MB total\n")
-                    val externalDir = app.getExternalFilesDir(null)
-                    if (externalDir != null) {
-                        writer.write("External   : ${toMbL(externalDir.freeSpace)} MB free / ${toMbL(externalDir.totalSpace)} MB total\n")
-                    }
-
-                    writer.write("\n--- Environment ---\n")
-                    val hasRoot = runCatching {
-                        Runtime.getRuntime().exec(arrayOf("su", "-c", "id")).waitFor() == 0
-                    }.getOrDefault(false)
-                    writer.write("Root access: $hasRoot\n")
-
-                    writer.write("\n=== Logcat ===\n\n")
-
-                    val consumer = Redirect.Consume { flow ->
-                        flow
-                            .onEach { line -> writer.write("$line\n") }
-                            .flowOn(Dispatchers.IO)
-                            .collect { }
-                    }
-
-                    // Filter logs by current process UID to include only Morphe Manager logs
-                    process("logcat", "-d", "--uid=${app.applicationInfo.uid}", stdout = consumer).resultCode
+                    writeDebugLogContent(writer)
                 }
             }
         } catch (e: CancellationException) {
@@ -426,6 +481,79 @@ class ImportExportViewModel(
             app.toast(app.getString(R.string.settings_system_export_debug_logs_export_success))
         else {
             app.toast(app.getString(R.string.settings_system_export_debug_logs_export_read_failed).format(exitCode))
+        }
+    }
+
+    /**
+     * Opens a writable [OutputStream] to a new file in the public Downloads folder.
+     * Used as a fallback on Android TV where [android.content.Intent.ACTION_CREATE_DOCUMENT] is unavailable.
+     * On API 29+ uses [MediaStore] (no storage permission required).
+     * On older versions falls back to [Environment.getExternalStoragePublicDirectory].
+     */
+    private fun openDownloadsOutputStream(fileName: String, mimeType: String): OutputStream? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val values = ContentValues().apply {
+                put(MediaStore.Downloads.DISPLAY_NAME, fileName)
+                put(MediaStore.Downloads.MIME_TYPE, mimeType)
+                put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+            }
+            val uri = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
+                ?: return null
+            contentResolver.openOutputStream(uri)
+        } else {
+            @Suppress("DEPRECATION")
+            val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            dir.mkdirs()
+            FileOutputStream(File(dir, fileName))
+        }
+    }
+
+    /**
+     * Exports the keystore to the Downloads folder.
+     */
+    fun exportKeystoreToDownloads() = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_keystore_failed, "Failed to export keystore to Downloads") {
+            withContext(Dispatchers.IO) {
+                val stream = openDownloadsOutputStream("Morphe.keystore", BIN_MIMETYPE)
+                    ?: throw IllegalStateException("Cannot open Downloads output stream")
+                stream.use { keystoreManager.export(it) }
+            }
+            app.toast(app.getString(R.string.settings_system_export_keystore_success))
+        }
+    }
+
+    /**
+     * Exports manager settings to the Downloads folder.
+     */
+    fun exportManagerSettingsToDownloads() = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_manager_settings_fail, "Failed to export settings to Downloads") {
+            val snapshot = preferencesManager.exportSettings()
+            val bundles = withContext(Dispatchers.IO) { patchBundleRepository.exportCustomBundles() }
+            withContext(Dispatchers.IO) {
+                val stream = openDownloadsOutputStream("morphe_manager_settings.json", JSON_MIMETYPE)
+                    ?: throw IllegalStateException("Cannot open Downloads output stream")
+                stream.use {
+                    json.encodeToStream(
+                        ManagerSettingsExportFile(
+                            settings = snapshot.copy(customBundles = bundles.ifEmpty { null })
+                        ),
+                        it
+                    )
+                }
+            }
+            app.toast(app.getString(R.string.settings_system_export_manager_settings_success))
+        }
+    }
+
+    /**
+     * Exports debug logs to the Downloads folder.
+     */
+    fun exportDebugLogsToDownloads() = viewModelScope.launch {
+        uiSafe(app, R.string.settings_system_export_debug_logs_export_failed, "Failed to export debug logs to Downloads") {
+            val stream = openDownloadsOutputStream(debugLogFileName, TEXT_MIMETYPE)
+                ?: throw IllegalStateException("Cannot open Downloads output stream")
+            stream.bufferedWriter().use { writer -> writeDebugLogContent(writer) }
+            app.toast(app.getString(R.string.settings_system_export_debug_logs_export_success))
         }
     }
 

@@ -5,6 +5,9 @@
 
 package app.morphe.manager.ui.screen.home
 
+import android.annotation.SuppressLint
+import android.graphics.Color.argb
+import android.graphics.Color.colorToHSV
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -271,7 +274,7 @@ fun BundleDeleteConfirmDialog(
 }
 
 /**
- * Dialog for renaming a bundle
+ * Dialog for renaming a bundle.
  */
 @Composable
 fun RenameBundleDialog(
@@ -347,6 +350,7 @@ fun RenameBundleDialog(
 /**
  * Dialog displaying patches from a bundle with search field and chips.
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundlePatchesDialog(
@@ -391,6 +395,16 @@ fun BundlePatchesDialog(
                 packageMatch && queryMatch
             }
             .sortedBy { it.name }
+    }
+
+    // Per-patch accent color: first non-null appIconColor across all compatible packages,
+    // converted from 0xRRGGBB to a full-opacity Compose Color. Null falls back to surfaceVariant.
+    val patchAccentColors: Map<String, Color> = remember(patches) {
+        patches.associate { patch ->
+            val rgb = patch.compatiblePackages
+                ?.firstNotNullOfOrNull { it.appIconColor }
+            patch.name to if (rgb != null) Color(rgb or (0xFF shl 24)) else Color.Unspecified
+        }
     }
 
     val isFiltering = searchQuery.isNotBlank() || selectedPackages.isNotEmpty()
@@ -560,8 +574,8 @@ fun BundlePatchesDialog(
                     Column {
                         AnimatedVisibility(
                             visible = selectedPackages.isNotEmpty(),
-                            enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                            exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
                         ) {
                             FlowRow(
                                 modifier = Modifier.padding(bottom = 4.dp),
@@ -587,8 +601,8 @@ fun BundlePatchesDialog(
 
                         AnimatedVisibility(
                             visible = filteredPatches.isEmpty(),
-                            enter = fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleIn(tween(MorpheDefaults.ANIMATION_DURATION), initialScale = 0.92f),
-                            exit = fadeOut(tween(MorpheDefaults.ANIMATION_DURATION)) + scaleOut(tween(MorpheDefaults.ANIMATION_DURATION), targetScale = 0.92f)
+                            enter = MorpheAnimations.fadeScaleIn,
+                            exit = MorpheAnimations.fadeScaleOut
                         ) {
                             Box(
                                 modifier = Modifier
@@ -626,22 +640,15 @@ fun BundlePatchesDialog(
                     }
                 ) { patch ->
                     val context = LocalContext.current
-                    var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
-                        mutableStateOf(false)
-                    }
-                    var expandOptions by rememberSaveable(src.uid, patch.name, "options") {
-                        mutableStateOf(false)
-                    }
-
+                    val accentColor = patchAccentColors[patch.name]
+                        ?.takeIf { it != Color.Unspecified }
                     PatchItemCard(
                         patch = patch,
-                        expandVersions = expandVersions,
-                        onExpandVersions = { expandVersions = !expandVersions },
-                        expandOptions = expandOptions,
-                        onExpandOptions = { expandOptions = !expandOptions },
+                        saveStateKey = "bundle_${src.uid}",
                         onExpertBadgeClick = if (!patch.include) {
                             { context.toast(context.getString(R.string.sources_patch_expert_badge_tooltip)) }
                         } else null,
+                        accentColor = accentColor,
                         modifier = Modifier.animateItem(
                             fadeInSpec = tween(220),
                             fadeOutSpec = tween(180),
@@ -715,21 +722,26 @@ fun BundlePatchesDialog(
 }
 
 /**
- * Patch item card
+ * Patch item card.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun PatchItemCard(
+fun PatchItemCard(
+    modifier: Modifier = Modifier,
     patch: PatchInfo,
-    expandVersions: Boolean,
-    onExpandVersions: () -> Unit,
-    expandOptions: Boolean,
-    onExpandOptions: () -> Unit,
+    saveStateKey: String,
     onExpertBadgeClick: (() -> Unit)? = null,
-    modifier: Modifier = Modifier
+    accentColor: Color? = null
 ) {
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
+
+    var expandVersions by rememberSaveable(saveStateKey, patch.name, "versions") {
+        mutableStateOf(false)
+    }
+    var expandOptions by rememberSaveable(saveStateKey, patch.name, "options") {
+        mutableStateOf(false)
+    }
 
     val rotationAngle by animateFloatAsState(
         targetValue = if (expandOptions) 180f else 0f,
@@ -737,17 +749,34 @@ private fun PatchItemCard(
         label = "expand_rotation"
     )
 
+    // Cache the card background color: colorToHSV is a native call that allocates a FloatArray
+    val cardColor = remember(accentColor) {
+        if (accentColor != null) {
+            val hsv = FloatArray(3)
+            colorToHSV(
+                argb(
+                    255,
+                    (accentColor.red * 255).toInt(),
+                    (accentColor.green * 255).toInt(),
+                    (accentColor.blue * 255).toInt()
+                ),
+                hsv
+            )
+            Color.hsl(hue = hsv[0], saturation = 0.35f, lightness = 0.55f, alpha = 0.2f)
+        } else null
+    }
+
     Surface(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
             .then(
                 if (!patch.options.isNullOrEmpty()) {
-                    Modifier.clickable(onClick = onExpandOptions)
+                    Modifier.clickable { expandOptions = !expandOptions }
                 } else Modifier
             ),
         shape = RoundedCornerShape(14.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        color = cardColor ?: MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -868,7 +897,7 @@ private fun PatchItemCard(
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .clip(RoundedCornerShape(6.dp))
-                                            .clickable(onClick = onExpandVersions)
+                                            .clickable { expandVersions = !expandVersions }
                                     )
                                 }
                             }
@@ -892,8 +921,8 @@ private fun PatchItemCard(
             if (!patch.options.isNullOrEmpty()) {
                 AnimatedVisibility(
                     visible = expandOptions,
-                    enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
-                    exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
+                    enter = MorpheAnimations.expandFadeEnter,
+                    exit = MorpheAnimations.shrinkFadeExit
                 ) {
                     Column(
                         modifier = Modifier.padding(top = 4.dp),
@@ -1129,7 +1158,7 @@ private fun String.sanitizePatchChangelogMarkdown(): String =
     }
 
 /**
- * Normalizes a URL by adding https:// if no protocol is specified
+ * Normalizes a URL by adding https:// if no protocol is specified.
  */
 private fun normalizeUrl(url: String): String {
     val trimmed = url.trim()

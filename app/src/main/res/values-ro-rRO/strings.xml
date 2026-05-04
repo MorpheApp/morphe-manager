@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în avans pentru a evita o problemă în sistemul Android 11 care poate afecta negativ experiența utilizatorului</string>
     <string name="deep_link_add_source_title">Adaugă sursă</string>
     <string name="deep_link_add_source_message">Dorești să adaugi această sursă de patch la Morphe?</string>
-    <string name="deep_link_add_source_warning">Adaugă surse doar din locații de încredere</string>
+    <string name="deep_link_add_source_warning">Adaugă numai surse în care ai încredere</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualizare Morphe disponibilă</string>
     <string name="home_update_available_subtitle">Versiune nouă pregătită pentru instalare</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">Nicio aplicație disponibilă</string>
     <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
     <string name="home_no_apps_search_subtitle">Nicio aplicație nu se potrivește cu \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">Toate aplicațiile sunt ascunse</string>
+    <string name="home_all_apps_hidden_subtitle">Ați ascuns toate aplicațiile de pe ecranul principal</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ce aplicație dorești să patch-uiești?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">Pentru a patch-ui &lt;b&gt;%s&lt;/b&gt;, ai nevoie de un APK de versiuni nepatch-uit:</string>
     <string name="home_apk_availability_recommended_label">Recomandat</string>
     <string name="home_apk_availability_unpatched_label">Nepatch-uit</string>
+    <string name="home_apk_availability_incompatible_label">Incompatibil</string>
     <string name="home_apk_availability_yes">Da, ajută-mă să găsesc un APK</string>
     <string name="home_apk_availability_no">Nu, am deja un APK</string>
     <string name="home_apk_use_saved_with_version">Folosește APK salvat (v%s)</string>
     <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patch-uirea necesită selectarea APK-ului din nou</string>
+    <string name="home_version_requires_android">Necesită Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">Nu este suportat pe acest dispozitiv</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nu are versiuni suportate pentru Android %2$d (API %3$d). Toate versiunile declarate necesită o versiune Android superioară</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarcă APK-ul original</string>
     <string name="home_download_instructions_steps_title">Instrucțiuni:</string>
@@ -162,6 +168,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_low_disk_space_dialog_title">Spațiu pe disc insuficient</string>
     <string name="home_low_disk_space_dialog_message">Doar %1$.2f GB spațiu de stocare liber disponibil. Repararea necesită cel puțin %2$.2f GB spațiu liber pentru a funcționa corect</string>
     <string name="home_low_disk_space_dialog_warning">Continuarea ar putea duce la o eroare \"fișierul nu a fost găsit\" sau la un APK de ieșire corupt</string>
+    <string name="home_simple_bundle_select_title">Selectează fișierul cu patch-uri</string>
     <!-- Patch Options -->
     <string name="custom_color">Culoare personalizată</string>
     <string name="hex_color">Culoare hexazecimală</string>
@@ -221,6 +228,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_app_info_patch_update_available_description">O versiune mai nouă a modificărilor este disponibilă. Repătați aplicația pentru a obține ultimele îmbunătățiri și corectări</string>
     <string name="home_app_info_app_deleted_warning">Aplicația a fost dezinstalată</string>
     <string name="home_app_info_app_deleted_description">Această aplicație a fost dezinstalată în afara Morphe. Aplica-o din nou pentru a restabili funcționalitatea</string>
+    <string name="home_app_info_apk_size">Dimensiunea APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
@@ -271,7 +279,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patcher_step_sign_apk">Se semnează fișierul APK modificat</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Se aplică modificările…</string>
-    <string name="patcher_notification_text">Atingeți pentru a reveni la instrumentul de modificare</string>
+    <string name="patcher_notification_text">Atinge pentru a reveni la patcher</string>
     <string name="patcher_stop_confirm_title">Opriți instrumentul de modificare</string>
     <string name="patcher_stop_confirm_description">Sigur doriți să opriți procesul de modificare?</string>
     <!-- Patcher Screen - Patcher Messages -->
@@ -304,20 +312,17 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patching_app">Se patch-uiește aplicația</string>
     <string name="memory_usage">Utilizare memorie</string>
     <!-- Patcher Screen - Other hidden strings -->
-    <string name="applying_patches">Aplicarea modificărilor</string>
+    <string name="applying_patches">Se aplică patch-urile</string>
     <string name="failed_to_execute_patch">Nu s-a putut aplica %s</string>
     <string name="patched_app_saved_toast">Aplicație modificată salvată pentru mai târziu</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
-    <string name="download_apk">Descarcă fișierul APK</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
     <string name="patcher_process_exit_message">Procesul de patch a ieșit cu codul %1$s</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
-    <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul instalatorului sistemului și reîncercați</string>
     <string name="save_apk_success">APK salvat</string>
     <string name="saved_app_export_failed">Nu s-a putut exporta aplicația modificată</string>
     <string name="saved_app_removed_toast">Aplicație modificată salvată eliminată</string>
-    <string name="saved_app_copy_removed_toast">Copie salvată eliminată</string>
     <string name="saved_app_launch_unavailable">Instalează aplicația înainte de deschiderea ei</string>
     <string name="package_name">Nume pachet</string>
     <string name="failed_to_mount">Montare eșuată: %s</string>
@@ -337,22 +342,30 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="settings_appearance_background_grid">Grilã</string>
     <string name="settings_appearance_background_particles">Particule</string>
     <string name="settings_appearance_background_none">Fără</string>
+    <string name="settings_appearance_background_random">Aleatoriu</string>
+    <string name="settings_appearance_background_random_interval_launch">La lansare</string>
+    <string name="settings_appearance_background_random_interval_daily">Zilnic</string>
+    <string name="settings_appearance_background_random_interval_3days">La fiecare 3 zile</string>
     <string name="settings_appearance_parallax_effect">Efect parallax</string>
     <string name="settings_appearance_parallax_effect_description">Schimbare suedea a fundalului când se înclina dispozitivul</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Temă</string>
     <string name="settings_appearance_system">Sistem</string>
-    <string name="settings_appearance_light">Luminos</string>
-    <string name="settings_appearance_dark">Întunecat</string>
-    <string name="settings_appearance_dynamic">Design material</string>
+    <string name="settings_appearance_light">Luminoasă</string>
+    <string name="settings_appearance_dark">Întunecată</string>
+    <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Culoare accent</string>
     <string name="settings_appearance_pure_black">Negru pur</string>
-    <string name="settings_appearance_pure_black_description">Folosește fonduri negre adevărate</string>
+    <string name="settings_appearance_pure_black_description">Folosește fundaluri negre pure</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Limbă aplicație</string>
-    <string name="settings_appearance_app_language_current">Limbajul curent</string>
+    <string name="settings_appearance_app_language_current">Limba curentă</string>
     <string name="settings_appearance_translations_info_title">Traduțiile pentru unele limbi pot lipsi sau să fie incomplet</string>
     <string name="settings_appearance_translations_info_text">Pentru a traduce în noi limbi sau să îmbunătățești traducerile existente, vizitează %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">Ecranul principal</string>
+    <string name="settings_appearance_greeting_phrases">Fraze de salut</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut pe ecranul principal</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Pictogramă aplicație</string>
     <string name="settings_appearance_app_icon_default">Implicit</string>
@@ -399,8 +412,17 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="settings_advanced_expert_mode_description">Activează setările complexe de pateâturi Morphe si opârii de personalizare</string>
     <string name="settings_advanced_expert_mode_dialog_title">Vrei sâ activezi modul expert?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Modul expert oferâ mai mult control asupra modului cum pateâturile sunt aplicaâ, dar o configurare greşită a setârilor poate duce la o aplicaâ nefuncțională</string>
-    <string name="settings_advanced_strip_unused_libs">Elimină bibliotecile native nefolosite</string>
-    <string name="settings_advanced_strip_unused_libs_description">Șterge bibliotecile native pentru arhitecturile CPU nesuportate din aplicațiile patch-uite</string>
+    <string name="settings_advanced_strip_unused_libs">Optimize pentru arhitectura dispozitivului</string>
+    <string name="settings_advanced_strip_unused_libs_description">"Omite modulele APK split pentru arhitecturi CPU, locale și densități de ecran nesuportate în timpul îmbinării.
+Pentru APK-urile plain, elimină bibliotecile native pentru arhitecturi nesuportate după patch"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">Mod de procesare bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Controlează modul în care bytecode-ul este procesat în timpul patch-ului. Afectează viteza de patch, utilizarea memoriei și dimensiunea APK-ului de ieșire</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">Rapid (Recomandat)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Rapid</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Reparare mai rapidă și utilizare mai mică a memoriei, în detrimentul unui APK mai mare. Recomandat pentru dispozitive cu memorie RAM redusă sau mai vechi</string>
+    <string name="settings_advanced_bytecode_mode_full">Complet</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Reparare mai lentă, reproduce comportamentul legacy. Utilizați numai dacă modul rapid cauzează probleme</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Jeton GitHub</string>
     <string name="settings_advanced_github_pat_description">Nevoie pentru surse de cerere de preluare</string>
@@ -419,7 +441,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Culori tema aplicației</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Schimbă culoarea de fund</string>
-    <string name="settings_advanced_patch_options_dark_theme_color">Culoarea temă de fund dark</string>
+    <string name="settings_advanced_patch_options_dark_theme_color">Culoare de fundal temă întunecată</string>
     <string name="settings_advanced_patch_options_light_theme_color">Culoarea temă de fund light</string>
     <string name="settings_advanced_patch_options_theme_color_description">Poate fi un culoare hexadecimal (#RRGGBB) sau o referință la resursa culoare</string>
     <string name="settings_advanced_patch_options_loading">Se încarcă opțiunile de patach…</string>
@@ -510,13 +532,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
     <string name="installer_action_open_shizuku">Deschide Shizuku</string>
     <string name="installer_hint_generic">Instalarea a eșuat. Reîncercați sau schimbați la un instalator diferit</string>
-    <string name="installer_hint_blocked">Instalarea a fost blocată de Android. Verificați Play Protect sau setările de securitate</string>
     <string name="installer_hint_conflict">Altă aplicație cu acest nume de pachet este deja instalată. Dezinstalați-o înainte de continuare</string>
-    <string name="installer_hint_incompatible">APK-ul nu este compatibil cu acest dispozitiv sau versiunea Android</string>
-    <string name="installer_hint_invalid">APK-ul este invalid sau corupt</string>
-    <string name="installer_hint_storage">Nu există suficient spațiu de stocare pentru instalarea</string>
-    <string name="installer_hint_timeout">Instalarea a expirat. Încearcă din nou</string>
-    <string name="installer_hint_aborted">Instalarea a fost anulată</string>
     <string name="installer_external_launched">Se deschide %1$s…</string>
     <string name="installer_external_timeout">%1$s nu a confirmat instalarea. Verificați altă aplicație și reîncercați</string>
     <string name="installer_external_success">%1$s a raportat o instalare reușită</string>
@@ -528,32 +544,34 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_prompt_installer_on_install_description">Afișează dialogul de selecție a instalatorului fiecare dată când instalați o aplicație patată</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performanță</string>
-    <string name="settings_system_process_runtime">Timp de rulare</string>
-    <string name="settings_system_process_runtime_description">Folosește patachizare în proces separat pentru o stabilitate mai bună</string>
+    <string name="settings_system_process_runtime">Runtime proces</string>
+    <string name="settings_system_process_runtime_description">Rulează patch-uirea în proces separat pentru o stabilitate mai bună</string>
     <string name="settings_system_process_runtime_memory_limit">Limita memorie</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Limite memorie mai înalte pot accelera patachizarea dar pot nu funcționa cu dispozitive mai vechi</string>
-    <string name="settings_system_process_runtime_enable">Activează rulare proces</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Limite de memorie mai mari pot accelera patch-uirea, dar pot să nu funcționeze pe dispozitive mai vechi</string>
+    <string name="settings_system_process_runtime_enable">Activează proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
     <string name="settings_system_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când patachizați aplicații mai mari</string>
     <string name="settings_system_process_runtime_enabled_description">Limită %s MO</string>
     <string name="settings_system_process_runtime_disabled_description">Clic pentru a configura</string>
     <string name="settings_system_process_runtime_description_not_available">Această funcție necesită Android 11 sau o versiune mai recentă</string>
     <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_export">Importă și exportă</string>
-    <string name="settings_system_import_keystore">Importă cheia de semnă</string>
+    <string name="settings_system_import_export">Importare și exportare</string>
+    <string name="settings_system_import_keystore">Importă keystore</string>
     <string name="settings_system_import_keystore_description">Importă o cheie de semnă personalizată</string>
     <string name="settings_system_import_keystore_dialog_title">Introduceți datele cheii</string>
     <string name="settings_system_import_keystore_dialog_description">Vă veți trebi să introduceți credențialele keystore-ului pentru a-l importa</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nume (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parolă</string>
     <string name="settings_system_import_keystore_dialog_button">Importă</string>
+    <string name="settings_system_import_keystore_dialog_format_field">Format Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Datele cheii incorecte</string>
-    <string name="settings_system_import_keystore_success">Cheia de semnă importată</string>
-    <string name="settings_system_import_keystore_failed">Nu s-a putut importa cheia de semnă</string>
-    <string name="settings_system_export_keystore">Exportă cheia de semnă</string>
-    <string name="settings_system_export_keystore_description">Exportă cheia de semnă curentă</string>
+    <string name="settings_system_import_keystore_success">Keystore importat</string>
+    <string name="settings_system_import_keystore_failed">A eșuat importarea keystore-ului</string>
+    <string name="settings_system_export_keystore">Exportă keystore</string>
+    <string name="settings_system_export_keystore_description">Exportă keystore-ul curent</string>
     <string name="settings_system_export_keystore_unavailable">Nu există cheie de semnă disponibilă pentru export</string>
-    <string name="settings_system_export_keystore_success">Cheia de semnă exportată</string>
+    <string name="settings_system_export_keystore_success">Keystore exportat</string>
+    <string name="settings_system_export_keystore_failed">A eșuat exportul keystore-ului</string>
     <string name="settings_system_show_password_field">Arată parolă</string>
     <string name="settings_system_hide_password_field">Ascunde parolă</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,15 +700,16 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="allow">Permite</string>
     <string name="details">Detalii</string>
     <string name="hide">Ascunde</string>
-    <string name="default_">Implicit</string>
+    <string name="hidden">Ascuns</string>
+    <string name="unhide">Dezascunde</string>
     <string name="logs">Jurnale</string>
-    <string name="sources">De surse</string>
+    <string name="sources">Surse</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
     <string name="imported_successfully">Importate cu succes</string>
-    <string name="changelog">Vizualizați jurnalele modificărilor</string>
+    <string name="changelog">Vizualizează jurnalele modificărilor</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_retry">Reîncearcă</string>

@@ -409,8 +409,8 @@ private fun PackageSelectionItem(
             // Expanded content
             AnimatedVisibility(
                 visible = expanded,
-                enter = fadeIn() + expandVertically(expandFrom = Alignment.Top),
-                exit = fadeOut() + shrinkVertically(shrinkTowards = Alignment.Top)
+                enter = MorpheAnimations.expandTopFadeIn,
+                exit = MorpheAnimations.shrinkTopFadeOut
             ) {
                 Column(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -822,7 +822,7 @@ private fun PatchDetailsDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_patch_details_title),
         footer = {
-            MorpheDialogButton(
+            MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()

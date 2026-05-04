@@ -1,11 +1,15 @@
 package app.morphe.manager.domain.installer
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.ClipData
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.*
+import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.Log
@@ -13,19 +17,21 @@ import androidx.annotation.StringRes
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.util.AOSP_INSTALLER_LABEL
+import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE
+import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE_LEGACY
+import app.morphe.manager.util.APK_MIMETYPE
 import java.io.File
-import java.io.IOException
-import java.util.Locale
-import java.util.UUID
+
+private const val TAG = "Morphe InstallerManager"
 
 class InstallerManager(
     private val app: Application,
     private val prefs: PreferencesManager,
     private val rootInstaller: RootInstaller,
-    private val shizukuInstaller: ShizukuInstaller
+    private val sessionInstaller: SessionInstaller
 ) {
     private val packageManager: PackageManager = app.packageManager
-    private val shareDir: File = File(app.cacheDir, SHARE_DIR).apply { mkdirs() }
     private val dummyUri: Uri = InstallerFileProvider.buildUri(app, "dummy.apk")
     private val defaultInstallerComponent: ComponentName? by lazy { resolveDefaultInstallerComponent() }
     private val defaultInstallerPackage: String? get() = defaultInstallerComponent?.packageName
@@ -223,10 +229,10 @@ class InstallerManager(
                 if (!availabilityFor(token, target).available) {
                     null
                 } else {
-                    val shared = copyToShareDir(sourceFile)
-                    val uri = InstallerFileProvider.buildUri(app, shared)
+                    val uri = InstallerFileProvider.getUriForFile(app, sourceFile)
                     val intent = Intent(Intent.ACTION_VIEW).apply {
-                        setDataAndType(uri, APK_MIME)
+                        setDataAndType(uri, APK_MIMETYPE)
+                        @SuppressLint("WrongConstant")
                         addFlags(
                             Intent.FLAG_GRANT_READ_URI_PERMISSION or
                                     Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
@@ -238,6 +244,7 @@ class InstallerManager(
                         putExtra(Intent.EXTRA_INSTALLER_PACKAGE_NAME, app.packageName)
                         component = token.componentName
                     }
+                    @SuppressLint("WrongConstant")
                     app.grantUriPermission(
                         token.componentName.packageName,
                         uri,
@@ -248,7 +255,7 @@ class InstallerManager(
                     InstallPlan.External(
                         target = target,
                         intent = intent,
-                        sharedFile = shared,
+                        sharedFile = File(app.cacheDir, "${InstallerFileProvider.SHARE_DIR}/${sourceFile.name}"),
                         uri = uri,
                         expectedPackage = expectedPackage,
                         installerLabel = resolveLabel(token.componentName),
@@ -302,7 +309,7 @@ class InstallerManager(
             label = app.getString(R.string.installer_shizuku_name),
             description = app.getString(R.string.installer_shizuku_description),
             availability = availabilityFor(Token.Shizuku, target, checkRoot),
-            icon = if (shizukuInstaller.isInstalled()) loadInstallerIcon(ShizukuInstaller.PACKAGE_NAME) else null
+            icon = if (sessionInstaller.isShizukuInstalled()) loadInstallerIcon(ShizukuInstaller.PACKAGE_NAME) else null
         )
 
         is Token.Component -> {
@@ -315,21 +322,6 @@ class InstallerManager(
                 icon = loadInstallerIcon(token.componentName)
             )
         }
-    }
-
-    private fun copyToShareDir(source: File): File {
-        val target = File(shareDir, "${UUID.randomUUID()}.apk")
-        try {
-            source.inputStream().use { input ->
-                target.outputStream().use { output ->
-                    input.copyTo(output)
-                }
-            }
-        } catch (error: IOException) {
-            target.delete()
-            throw error
-        }
-        return target
     }
 
     private fun buildSequence(target: InstallTarget): List<Token> {
@@ -358,14 +350,14 @@ class InstallerManager(
         Token.AutoSaved -> if (!target.supportsRoot) {
             Availability(false, R.string.installer_status_not_supported)
         } else if (checkRoot) {
-            // Expert mode: check root access
+            // Check root access
             if (!rootInstaller.hasRootAccess()) {
                 Availability(false, R.string.installer_status_requires_root)
             } else {
                 Availability(true)
             }
         } else {
-            // Morphe mode: check if device is rooted without requesting access
+            // Check if device is rooted without requesting access.
             // This prevents showing root installer on non-rooted devices
             if (!rootInstaller.isDeviceRooted()) {
                 Availability(false, R.string.installer_status_requires_root)
@@ -376,11 +368,11 @@ class InstallerManager(
         }
 
         Token.Shizuku -> {
-            if (!shizukuInstaller.isInstalled()) {
+            if (!sessionInstaller.isShizukuInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
             } else if (checkRoot) {
                 // Full availability check
-                shizukuInstaller.availability(target)
+                sessionInstaller.shizukuAvailability(target)
             } else {
                 // Just verify Shizuku is installed (for UI display)
                 Availability(true)
@@ -395,7 +387,7 @@ class InstallerManager(
 
     fun isComponentAvailable(componentName: ComponentName): Boolean {
         val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(dummyUri, APK_MIME)
+            setDataAndType(dummyUri, APK_MIMETYPE)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             component = componentName
         }
@@ -405,7 +397,7 @@ class InstallerManager(
     private fun queryInstallerActivities() =
         packageManager.queryIntentActivities(
             Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(dummyUri, APK_MIME)
+                setDataAndType(dummyUri, APK_MIMETYPE)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             },
             PackageManager.MATCH_DEFAULT_ONLY
@@ -426,8 +418,8 @@ class InstallerManager(
         if (candidates.isEmpty()) return null
 
         val preferredPackages = listOf(
-            "com.google.android.packageinstaller",
-            "com.android.packageinstaller"
+            AOSP_INSTALLER_PACKAGE,
+            AOSP_INSTALLER_PACKAGE_LEGACY
         )
 
         val chosen = preferredPackages.firstNotNullOfOrNull { pkg ->
@@ -522,44 +514,32 @@ class InstallerManager(
         MANAGER_UPDATE(false)
     }
 
-    companion object {
-        private const val APK_MIME = "application/vnd.android.package-archive"
-        internal const val SHARE_DIR = "installer_share"
-        private const val AOSP_INSTALLER_PACKAGE = "com.google.android.packageinstaller"
-        private const val AOSP_INSTALLER_LABEL = "Package installer"
-        private const val TAG = "InstallerManager"
-    }
+    fun openShizukuApp(): Boolean = sessionInstaller.launchShizukuApp()
 
-    fun openShizukuApp(): Boolean = shizukuInstaller.launchApp()
-
-    fun formatFailureHint(status: Int, extraMessage: String?): String? {
-        val normalizedExtra = extraMessage?.takeIf { it.isNotBlank() }
-        val base = when (status) {
-            PackageInstaller.STATUS_FAILURE -> app.getString(R.string.installer_hint_generic)
-            PackageInstaller.STATUS_FAILURE_ABORTED -> app.getString(R.string.installer_hint_aborted)
-            PackageInstaller.STATUS_FAILURE_BLOCKED -> app.getString(R.string.installer_hint_blocked)
-            PackageInstaller.STATUS_FAILURE_CONFLICT -> app.getString(R.string.installer_hint_conflict)
-            PackageInstaller.STATUS_FAILURE_INCOMPATIBLE -> app.getString(R.string.installer_hint_incompatible)
-            PackageInstaller.STATUS_FAILURE_INVALID -> app.getString(R.string.installer_hint_invalid)
-            PackageInstaller.STATUS_FAILURE_STORAGE -> app.getString(R.string.installer_hint_storage)
-            PackageInstaller.STATUS_FAILURE_TIMEOUT -> app.getString(R.string.installer_hint_timeout)
-            else -> null
+    /**
+     * Returns a deduplicated list of entries for [target], ensuring [token] is always present
+     * even if it's not in the raw list (e.g. a previously selected external installer).
+     */
+    fun ensureValidEntries(
+        entries: List<Entry>,
+        token: Token,
+        target: InstallTarget
+    ): List<Entry> {
+        val normalized = buildList {
+            val seen = mutableSetOf<Any>()
+            entries.forEach { entry ->
+                val key = when (val t = entry.token) {
+                    is Token.Component -> t.componentName
+                    else -> t
+                }
+                if (seen.add(key)) add(entry)
+            }
         }
-
-        return when {
-            base == null -> normalizedExtra
-            normalizedExtra == null -> base
-            else -> app.getString(R.string.installer_hint_with_reason, base, normalizedExtra)
-        }
-    }
-
-    fun isSignatureMismatch(message: String?): Boolean {
-        val normalized = message?.lowercase(Locale.ROOT)?.trim().orEmpty()
-        if (normalized.isEmpty()) return false
-        return normalized.contains("install_failed_update_incompatible") ||
-                normalized.contains("install_failed_signature_inconsistent") ||
-                normalized.contains("signatures do not match") ||
-                normalized.contains("signature mismatch")
+        val tokenExists = token == Token.Internal ||
+                token == Token.AutoSaved ||
+                normalized.any { tokensEqual(it.token, token) }
+        return if (tokenExists) normalized
+        else describeEntry(token, target)?.let { normalized + it } ?: normalized
     }
 }
 

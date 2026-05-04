@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 
-private const val TAG = "InstalledAppRepository"
+private const val TAG = "Morphe InstalledAppRepository"
 
 class InstalledAppRepository(
     db: AppDatabase,

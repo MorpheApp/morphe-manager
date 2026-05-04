@@ -2,21 +2,22 @@ package app.morphe.manager.patcher.util
 
 import android.os.Build
 import android.util.Log
+import app.morphe.manager.patcher.logger.Logger
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 object NativeLibStripper {
-    private const val TAG = "NativeLibStripper"
+    private const val TAG = "Morphe NativeLibStripper"
 
-    suspend fun strip(apkFile: File): Boolean =
-        strip(apkFile, Build.SUPPORTED_ABIS.filter { it.isNotBlank() })
+    suspend fun strip(apkFile: File, logger: Logger? = null): Boolean =
+        strip(apkFile, Build.SUPPORTED_ABIS.filter { it.isNotBlank() }, logger)
 
-    suspend fun strip(apkFile: File, supportedAbis: List<String>): Boolean =
+    suspend fun strip(apkFile: File, supportedAbis: List<String>, logger: Logger? = null): Boolean =
         withContext(Dispatchers.IO) {
             if (supportedAbis.isEmpty()) return@withContext false
 
@@ -65,7 +66,9 @@ object NativeLibStripper {
                 }
                 tempFile.copyTo(apkFile, overwrite = true)
                 tempFile.delete()
-                Log.i(TAG, "Removed $removedEntries native library entries for unsupported ABIs")
+                val message = "Stripped native libraries for unsupported ABIs (removed $removedEntries entries)"
+                Log.i(TAG, message)
+                logger?.info(message)
                 true
             } else {
                 tempFile.delete()

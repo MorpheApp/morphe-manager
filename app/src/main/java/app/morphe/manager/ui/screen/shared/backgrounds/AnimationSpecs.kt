@@ -109,11 +109,8 @@ fun rememberParallaxState(
 
         val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-
-        if (accelerometer == null) {
-            // No accelerometer available
+            ?: // No accelerometer available
             return@DisposableEffect onDispose { }
-        }
 
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent) {

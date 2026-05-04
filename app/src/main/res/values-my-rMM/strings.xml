@@ -10,6 +10,7 @@
     <string name="home_app_show_hidden">ဝှက်ထားသော အက်ပ်များကို ပြပါ</string>
     <!-- Home Screen - Update Notifications -->
     <!-- Home Screen - Home Greetings -->
+    <string name="home_greeting_1">သင့်ကိုဘယ်အက်‍ပလီကေးရှင်းကို patch ချင်လဲ။</string>
     <!-- Humorous hype message with light nostalgia -->
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -20,6 +21,7 @@
     <!-- Playful exaggeration, making patching feel heroic -->
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">ကိုင်းရှင်း။</string>
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -46,10 +48,12 @@
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Bytecode mode -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->

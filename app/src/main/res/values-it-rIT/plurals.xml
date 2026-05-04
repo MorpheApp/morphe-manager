@@ -17,8 +17,8 @@
         <item quantity="other">%s pacchetti</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Esegui %s patch</item>
-        <item quantity="other">Esegui %s patch</item>
+        <item quantity="one">Patch %s eseguito</item>
+        <item quantity="other">Patch %s eseguiti</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s file APK</item>
@@ -35,5 +35,13 @@
     <plurals name="patch_selection_total_patches">
         <item quantity="one">%s patch selezionata</item>
         <item quantity="other">%s patch selezionate</item>
+    </plurals>
+    <plurals name="home_app_show_selected">
+        <item quantity="one">Mostra %s app</item>
+        <item quantity="other">Mostra %s apps</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s app nascosta</item>
+        <item quantity="other">%s app nascoste</item>
     </plurals>
 </resources>

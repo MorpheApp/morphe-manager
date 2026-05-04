@@ -16,10 +16,6 @@
         <item quantity="one">%s প্যাকেজ</item>
         <item quantity="other">%s টা প্যাকেজ</item>
     </plurals>
-    <plurals name="patches_executed">
-        <item quantity="one">%s টা প্যাচ কাৰ্যান্বিত কৰক</item>
-        <item quantity="other">%s টা প্যাচ কাৰ্যান্বিত কৰক</item>
-    </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s টা APK ফাইল</item>
         <item quantity="other">%s টা APK ফাইল</item>

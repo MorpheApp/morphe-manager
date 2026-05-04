@@ -24,10 +24,6 @@ enum class State {
     WAITING, RUNNING, FAILED, COMPLETED
 }
 
-enum class ProgressKey {
-    DOWNLOAD
-}
-
 interface StepProgressProvider {
     val downloadProgress: Pair<Long, Long?>?
 }
@@ -40,6 +36,5 @@ data class Step(
     /** [0, 1] Percentage of the total operation */
     val progressPercentage : Double,
     val state: State = State.WAITING,
-    val message: String? = null,
-    val progressKey: ProgressKey? = null
+    val message: String? = null
 ) : Parcelable

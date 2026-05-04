@@ -5,8 +5,10 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,19 +16,14 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.outlined.Clear
-import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -34,11 +31,12 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
 /**
- * Styled OutlinedTextField for dialogs with proper theming
- * Supports password visibility toggle and clear button
+ * Styled OutlinedTextField for dialogs with proper theming.
+ * Supports password visibility toggle and clear button.
  */
 @Composable
 fun MorpheDialogTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
@@ -52,9 +50,7 @@ fun MorpheDialogTextField(
     showClearButton: Boolean = false,
     onFolderPickerClick: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val textColor = LocalDialogTextColor.current
@@ -147,12 +143,17 @@ fun MorpheDialogTextField(
 }
 
 /**
- * Styled OutlinedTextField with dropdown menu support for dialogs
- * Combines text input, folder picker, clear button, and dropdown selection
+ * Styled OutlinedTextField with dropdown menu support for dialogs.
+ * Combines text input, folder picker, clear button, and dropdown selection.
+ *
+ * Tap behavior:
+ *  - 1st tap: opens dropdown list (field stays read-only, no keyboard)
+ *  - 2nd tap (after closing dropdown without selecting): opens keyboard for manual input
+ *  - selecting an item or dismissing resets back to 1st-tap behavior
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorpheDialogDropdownTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     dropdownItems: Map<String, String>, // Display name -> Value
@@ -164,20 +165,26 @@ fun MorpheDialogDropdownTextField(
     enabled: Boolean = true,
     singleLine: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     var dropdownExpanded by remember { mutableStateOf(false) }
+    // true = first tap opens dropdown; false = second tap opens keyboard
+    var readOnly by remember { mutableStateOf(true) }
+    val focusRequester = remember { FocusRequester() }
     val textColor = LocalDialogTextColor.current
 
     // Show display name from map only if value exists in map, otherwise show raw value
     val displayValue = dropdownItems.entries.find { it.value == value }?.key ?: value
 
-    ExposedDropdownMenuBox(
-        expanded = dropdownExpanded,
-        onExpandedChange = { dropdownExpanded = it }
-    ) {
+    // When readOnly becomes false the field is now editable - request focus so
+    // the system knows to show the keyboard on the next tap (or immediately)
+    LaunchedEffect(readOnly) {
+        if (!readOnly) {
+            focusRequester.requestFocus()
+        }
+    }
+
+    Box(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = displayValue,
             onValueChange = { newDisplayValue ->
@@ -185,7 +192,7 @@ fun MorpheDialogDropdownTextField(
                 val newValue = dropdownItems[newDisplayValue] ?: newDisplayValue
                 onValueChange(newValue)
             },
-            readOnly = false,
+            readOnly = readOnly,
             label = label,
             placeholder = placeholder,
             leadingIcon = leadingIcon,
@@ -218,15 +225,27 @@ fun MorpheDialogDropdownTextField(
                     }
 
                     // Dropdown arrow
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded)
+                    IconButton(onClick = {
+                        dropdownExpanded = !dropdownExpanded
+                        if (!dropdownExpanded) readOnly = true
+                    }) {
+                        Icon(
+                            imageVector = if (dropdownExpanded)
+                                Icons.Outlined.ExpandLess
+                            else
+                                Icons.Outlined.ExpandMore,
+                            contentDescription = null,
+                            tint = textColor.copy(alpha = 0.7f)
+                        )
+                    }
                 }
             },
             enabled = enabled,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
+                .focusRequester(focusRequester),
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = textColor,
@@ -247,9 +266,27 @@ fun MorpheDialogDropdownTextField(
             )
         )
 
-        ExposedDropdownMenu(
+        // Invisible overlay that captures the first tap to open dropdown,
+        // then removes itself so the second tap reaches the real TextField.
+        if (readOnly) {
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        dropdownExpanded = true
+                    }
+            )
+        }
+
+        DropdownMenu(
             expanded = dropdownExpanded,
-            onDismissRequest = { dropdownExpanded = false }
+            onDismissRequest = {
+                dropdownExpanded = false
+                readOnly = false // dismissed without selecting -> unlock keyboard
+            }
         ) {
             dropdownItems.forEach { (displayName, itemValue) ->
                 DropdownMenuItem(
@@ -257,6 +294,7 @@ fun MorpheDialogDropdownTextField(
                     onClick = {
                         onValueChange(itemValue)
                         dropdownExpanded = false
+                        readOnly = true // selected -> reset to dropdown-first behavior
                     },
                     leadingIcon = if (itemValue == value) {
                         {

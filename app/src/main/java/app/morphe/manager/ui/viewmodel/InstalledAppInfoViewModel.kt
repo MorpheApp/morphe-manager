@@ -13,6 +13,8 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.installer.SessionInstaller
+import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
 import app.morphe.manager.util.*
@@ -34,11 +36,13 @@ class InstalledAppInfoViewModel(
     private val installedAppRepository: InstalledAppRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val rootInstaller: RootInstaller by inject()
+    private val sessionInstaller: SessionInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
     private val filesystem: Filesystem by inject()
 
     lateinit var onBackClick: () -> Unit
+    var onAppStateChanged: ((packageName: String) -> Unit)? = null
 
     var installedApp: InstalledApp? by mutableStateOf(null)
         private set
@@ -73,7 +77,7 @@ class InstalledAppInfoViewModel(
 
                 if (app != null) {
                     // Run all checks in parallel
-                    val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
+                    val deferredMounted = async { rootInstaller.isDeviceRooted() && rootInstaller.isAppMounted(app.currentPackageName) }
                     val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
                     val deferredAppState = async { refreshAppState(app) }
                     val deferredPatches = async { resolveAppliedSelection(app) }
@@ -128,8 +132,19 @@ class InstalledAppInfoViewModel(
     fun uninstall() {
         val app = installedApp ?: return
         when (app.installType) {
-            InstallType.DEFAULT, InstallType.CUSTOM -> pm.uninstallPackage(app.currentPackageName)
-            InstallType.SHIZUKU -> pm.uninstallPackage(app.currentPackageName)
+            InstallType.DEFAULT, InstallType.CUSTOM, InstallType.SHIZUKU, InstallType.SAVED -> {
+                viewModelScope.launch {
+                    try {
+                        sessionInstaller.uninstall(app.currentPackageName)
+                        refreshCurrentAppState()
+                        onAppStateChanged?.invoke(app.currentPackageName)
+                    } catch (_: UninstallCancelledException) {
+                        // User dismissed dialog - do nothing
+                    } catch (e: Exception) {
+                        context.toast(context.getString(R.string.install_app_fail, e.simpleMessage()))
+                    }
+                }
+            }
 
             InstallType.MOUNT -> viewModelScope.launch {
                 rootInstaller.uninstall(app.currentPackageName)
@@ -137,14 +152,12 @@ class InstalledAppInfoViewModel(
                 deleteRecordAndApk(app)
                 onBackClick()
             }
-
-            InstallType.SAVED -> pm.uninstallPackage(app.currentPackageName)
         }
     }
 
     /**
-     * Remove app completely: database record, patched APK and original APK
-     * Patch selection and options are preserved for future patching
+     * Remove app completely: database record, patched APK and original APK.
+     * Patch selection and options are preserved for future patching.
      */
     fun removeAppCompletely() = viewModelScope.launch {
         val app = installedApp ?: return@launch
@@ -166,8 +179,8 @@ class InstalledAppInfoViewModel(
     }
 
     /**
-     * Delete database record and patched APK file
-     * Note: Patch selection and options are NOT deleted - they remain for future patching
+     * Delete database record and patched APK file.
+     * Note: Patch selection and options are NOT deleted - they remain for future patching.
      */
     private suspend fun deleteRecordAndApk(app: InstalledApp) {
         // Delete database record
@@ -180,8 +193,8 @@ class InstalledAppInfoViewModel(
         hasSavedCopy = false
     }
 
-    fun updateInstallType(packageName: String, newInstallType: InstallType) = viewModelScope.launch {
-        val app = installedApp ?: return@launch
+    suspend fun updateInstallType(packageName: String, newInstallType: InstallType) {
+        val app = installedApp ?: return
         // Update in database
         withContext(Dispatchers.IO) {
             installedAppRepository.addOrUpdate(
@@ -231,7 +244,7 @@ class InstalledAppInfoViewModel(
         }
 
         // Update mounted state
-        isMounted = rootInstaller.isAppMounted(app.currentPackageName)
+        isMounted = rootInstaller.isDeviceRooted() && rootInstaller.isAppMounted(app.currentPackageName)
     }
 
     /** Manually refresh app state (e.g., after app installation/uninstallation) */

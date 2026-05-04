@@ -17,9 +17,13 @@ import app.morphe.manager.data.room.bundles.PatchBundleProperties
 import app.morphe.manager.data.room.bundles.Source
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.network.utils.APIError
+import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.util.*
+import io.ktor.client.plugins.ResponseException
 import io.ktor.http.Url
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.mutate
@@ -39,10 +43,6 @@ import java.nio.ByteOrder
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.Locale
-import app.morphe.manager.util.syncFcmTopics
-import app.morphe.manager.network.utils.APIError
-import app.morphe.manager.ui.viewmodel.BundleSnapshot
-import io.ktor.client.plugins.ResponseException
 import app.morphe.manager.data.room.bundles.Source as SourceInfo
 
 class PatchBundleRepository(
@@ -55,19 +55,32 @@ class PatchBundleRepository(
     private val bundlesDir = app.getDir("patch_bundles", Context.MODE_PRIVATE)
 
     private val scope = CoroutineScope(Dispatchers.Default)
-    private val store = Store(scope, State())
+    private val store = Store<BundleState>(scope, BundleState.Loading)
 
-    val sources = store.state.map { it.sources.values.toList() }
+    val bundleState: StateFlow<BundleState> = store.state
+        .stateIn(scope, SharingStarted.Eagerly, BundleState.Loading)
+
+    val sources = store.state.map { (it as? BundleState.Ready)?.sources?.values?.toList() ?: emptyList() }
     val bundles = store.state.map {
-        it.sources.mapNotNull { (uid, src) ->
+        (it as? BundleState.Ready)?.sources?.mapNotNull { (uid, src) ->
             uid to (src.patchBundle ?: return@mapNotNull null)
-        }.toMap()
+        }?.toMap() ?: emptyMap()
     }
-    val allBundlesInfoFlow = store.state.map { it.info }
+    val allBundlesInfoFlow = store.state.map { (it as? BundleState.Ready)?.info ?: persistentMapOf() }
     val enabledBundlesInfoFlow = allBundlesInfoFlow.map { info ->
         info.filter { (_, bundleInfo) -> bundleInfo.enabled }
     }
     val bundleInfoFlow = enabledBundlesInfoFlow
+
+    /**
+     * Pre-built [BundleAppMetadata] map, updated whenever enabled bundles change.
+     * Shared across all consumers so [BundleAppMetadata.buildFrom] is never called more
+     * than once per bundle reload.
+     */
+    val appMetadata: StateFlow<Map<String, BundleAppMetadata>> =
+        bundleInfoFlow
+            .map { BundleAppMetadata.buildFrom(it) }
+            .stateIn(scope, SharingStarted.Eagerly, emptyMap())
 
     fun scopedBundleInfoFlow(packageName: String, version: String?) = enabledBundlesInfoFlow.map {
         it.map { (_, bundleInfo) ->
@@ -310,10 +323,10 @@ class PatchBundleRepository(
 
     private suspend inline fun dispatchAction(
         name: String,
-        crossinline block: suspend ActionContext.(current: State) -> State
+        crossinline block: suspend ActionContext.(current: BundleState) -> BundleState
     ) {
-        store.dispatch(object : Action<State> {
-            override suspend fun ActionContext.execute(current: State) = block(current)
+        store.dispatch(object : Action<BundleState> {
+            override suspend fun ActionContext.execute(current: BundleState) = block(current)
             override fun toString() = name
         })
     }
@@ -321,7 +334,7 @@ class PatchBundleRepository(
     /**
      * Performs a reload. Do not call this outside of a store action.
      */
-    private suspend fun doReload(): State {
+    private suspend fun doReload(): BundleState.Ready {
         val entities = loadEntitiesEnforcingOfficialOrder()
 
         val sources = entities.associate { it.uid to it.load() }.toMutableMap()
@@ -330,22 +343,23 @@ class PatchBundleRepository(
         if (hasOutOfDateNames) dispatchAction(
             "Sync names"
         ) { state ->
-            val nameChanges = state.sources.mapNotNull { (_, src) ->
+            val ready = state as? BundleState.Ready ?: return@dispatchAction state
+            val nameChanges = ready.sources.mapNotNull { (_, src) ->
                 if (!src.isNameOutOfDate) return@mapNotNull null
                 val newName = src.patchBundle?.manifestAttributes?.name?.takeIf { it != src.name }
                     ?: return@mapNotNull null
 
                 src.uid to newName
             }
-            val sources = state.sources.toMutableMap()
-            val info = state.info.toMutableMap()
+            val sources = ready.sources.toMutableMap()
+            val info = ready.info.toMutableMap()
             nameChanges.forEach { (uid, name) ->
                 updateDb(uid) { it.copy(name = name) }
                 sources[uid] = sources[uid]!!.copy(name = name)
                 info[uid] = info[uid]?.copy(name = name) ?: return@forEach
             }
 
-            State(sources.toPersistentMap(), info.toPersistentMap())
+            ready.copy(sources = sources.toPersistentMap(), info = info.toPersistentMap())
         }
         val info = loadMetadata(sources).toMutableMap()
 
@@ -363,7 +377,7 @@ class PatchBundleRepository(
             }
         }
 
-        return State(sources.toPersistentMap(), info.toPersistentMap())
+        return BundleState.Ready(sources.toPersistentMap(), info.toPersistentMap())
     }
 
     suspend fun reload() = dispatchAction("Full reload") {
@@ -410,7 +424,8 @@ class PatchBundleRepository(
 
         if (failures.isNotEmpty()) {
             dispatchAction("Mark bundles as failed") { state ->
-                state.copy(sources = state.sources.mutate {
+                val ready = state as? BundleState.Ready ?: return@dispatchAction state
+                ready.copy(sources = ready.sources.mutate {
                     failures.forEach { (uid, throwable) ->
                         it[uid] = it[uid]?.copy(error = throwable) ?: return@forEach
                     }
@@ -587,7 +602,7 @@ class PatchBundleRepository(
 
     suspend fun reset() = dispatchAction("Reset") { state ->
         dao.reset()
-        state.sources.keys.forEach { directoryOf(it).deleteRecursively() }
+        (state as? BundleState.Ready)?.sources?.keys?.forEach { directoryOf(it).deleteRecursively() }
         doReload()
     }
 
@@ -680,8 +695,9 @@ class PatchBundleRepository(
 
     suspend fun remove(vararg bundles: PatchBundleSource) =
         dispatchAction("Remove (${bundles.map { it.uid }.joinToString(",")})") { state ->
-            val sources = state.sources.toMutableMap()
-            val info = state.info.toMutableMap()
+            val ready = state as? BundleState.Ready ?: return@dispatchAction state
+            val sources = ready.sources.toMutableMap()
+            val info = ready.info.toMutableMap()
             bundles.forEach {
                 dao.remove(it.uid)
                 directoryOf(it.uid).deleteRecursively()
@@ -692,7 +708,7 @@ class PatchBundleRepository(
             val (affectedCount, remaining) = cancelRemoteUpdates(bundles.map { it.uid }.toSet())
             updateProgressAfterRemoval(affectedCount, remaining)
 
-            State(sources.toPersistentMap(), info.toPersistentMap())
+            ready.copy(sources = sources.toPersistentMap(), info = info.toPersistentMap())
         }
 
     enum class DisplayNameUpdateResult {
@@ -739,9 +755,10 @@ class PatchBundleRepository(
 
         if (result == DisplayNameUpdateResult.SUCCESS || result == DisplayNameUpdateResult.NO_CHANGE) {
             dispatchAction("Sync display name ($uid)") { state ->
-                val src = state.sources[uid] ?: return@dispatchAction state
+                val ready = state as? BundleState.Ready ?: return@dispatchAction state
+                val src = ready.sources[uid] ?: return@dispatchAction state
                 val updated = src.copy(displayName = normalized)
-                state.copy(sources = state.sources.put(uid, updated))
+                ready.copy(sources = ready.sources.put(uid, updated))
             }
         }
 
@@ -759,13 +776,14 @@ class PatchBundleRepository(
         prefs.bundlePrereleasesEnabled.update(current)
 
         dispatchAction("Set prerelease ($uid=$usePrerelease)") { state ->
-            val src = state.sources[uid] ?: return@dispatchAction state
+            val ready = state as? BundleState.Ready ?: return@dispatchAction state
+            val src = ready.sources[uid] ?: return@dispatchAction state
             val updated = when (src) {
                 is APIPatchBundle -> src.copy(usePrerelease = usePrerelease)
                 is JsonPatchBundle -> src.copy(usePrerelease = usePrerelease)
                 else -> return@dispatchAction state
             }
-            state.copy(sources = state.sources.put(uid, updated))
+            ready.copy(sources = ready.sources.put(uid, updated))
         }
 
         // If this is the default Morphe Patches bundle, sync FCM patches topic
@@ -780,7 +798,7 @@ class PatchBundleRepository(
 
         // Skip download if the bundle is disabled - it will be downloaded when re-enabled
         // via disable() which triggers startRemoteUpdateJob for newly enabled bundles.
-        val isEnabled = store.state.value.sources[uid]?.enabled == true
+        val isEnabled = (store.state.value as? BundleState.Ready)?.sources?.get(uid)?.enabled == true
         if (!isEnabled) return
 
         // Trigger update so the new channel takes effect immediately.
@@ -1035,7 +1053,9 @@ class PatchBundleRepository(
 
 
             // Check for duplicate source
-            val isDuplicate = state.sources.values.any { src ->
+            val ready = state as? BundleState.Ready ?: return@dispatchAction state
+
+            val isDuplicate = ready.sources.values.any { src ->
                 src is RemotePatchBundle && src.endpoint.equals(normalizedUrl, ignoreCase = true)
             }
 
@@ -1070,7 +1090,7 @@ class PatchBundleRepository(
                     if (bundle.uid == src.uid) onProgress?.invoke(bytesRead, bytesTotal)
                 }
             )
-            state.copy(sources = state.sources.put(src.uid, src))
+            ready.copy(sources = ready.sources.put(src.uid, src))
         }
 
     /**
@@ -1301,7 +1321,8 @@ class PatchBundleRepository(
         if (!allowMeteredUpdates && networkInfo.isMetered()) return null
 
         return try {
-            val remoteBundles = store.state.value.sources.values
+            val remoteBundles = (store.state.value as? BundleState.Ready)?.sources?.values
+                .orEmpty()
                 .filterIsInstance<RemotePatchBundle>()
 
             if (remoteBundles.isEmpty()) return null
@@ -1346,12 +1367,12 @@ class PatchBundleRepository(
         private val allowUnsafeNetwork: Boolean = false,
         private val onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
-    ) : Action<State> {
+    ) : Action<BundleState> {
         override fun toString() = if (force) "Redownload remote bundles" else "Update check"
 
         override suspend fun ActionContext.execute(
-            current: State
-        ): State {
+            current: BundleState
+        ): BundleState {
             startRemoteUpdateJob(
                 force = force,
                 showToast = showToast,
@@ -1462,7 +1483,8 @@ class PatchBundleRepository(
                 return@coroutineScope
             }
 
-            val targets = store.state.value.sources.values
+            val targets = (store.state.value as? BundleState.Ready)?.sources?.values
+                .orEmpty()
                 .filterIsInstance<RemotePatchBundle>()
                 .filter { predicate(it) }
 
@@ -1528,16 +1550,6 @@ class PatchBundleRepository(
                         continue
                     } catch (e: Exception) {
                         handleBundleDownloadError(e, bundle)
-                        // Auto-disable bundles that have never been downloaded successfully.
-                        // Bundles that already have a local copy are left enabled so the user
-                        // can still patch with the cached version despite the network error
-                        if (!bundle.patchesJarFile.exists()) {
-                            Log.w(tag, "Bundle ${bundle.name} has no local copy after failure; disabling automatically")
-                            dispatchAction("Auto-disable failed uninstalled bundle (${bundle.uid})") { _ ->
-                                updateDb(bundle.uid) { it.copy(enabled = false) }
-                                doReload()
-                            }
-                        }
                         continue
                     }
 
@@ -1662,9 +1674,10 @@ class PatchBundleRepository(
 
     private inner class ManualUpdateCheck(
         private val targetUids: Set<Int>? = null
-    ) : Action<State> {
-        override suspend fun ActionContext.execute(current: State) = coroutineScope {
-            val manualBundles = current.sources.values
+    ) : Action<BundleState> {
+        override suspend fun ActionContext.execute(current: BundleState) = coroutineScope {
+            val ready = current as? BundleState.Ready ?: return@coroutineScope current
+            val manualBundles = ready.sources.values
                 .filterIsInstance<RemotePatchBundle>()
                 .filter {
                     targetUids?.contains(it.uid) ?: !it.autoUpdate
@@ -1676,7 +1689,7 @@ class PatchBundleRepository(
                 } else {
                     manualUpdateInfoFlow.update { map ->
                         map.filterKeys { uid ->
-                            val bundle = current.sources[uid] as? RemotePatchBundle
+                            val bundle = ready.sources[uid] as? RemotePatchBundle
                             bundle != null && !bundle.autoUpdate
                         }
                     }
@@ -1725,10 +1738,16 @@ class PatchBundleRepository(
         }
     }
 
-    data class State(
-        val sources: PersistentMap<Int, PatchBundleSource> = persistentMapOf(),
-        val info: PersistentMap<Int, PatchBundleInfo.Global> = persistentMapOf()
-    )
+    sealed class BundleState {
+        /** DB not yet read — UI shows shimmer */
+        data object Loading : BundleState()
+
+        /** Pipeline ready (even if sources list is empty) */
+        data class Ready(
+            val sources: PersistentMap<Int, PatchBundleSource> = persistentMapOf(),
+            val info: PersistentMap<Int, PatchBundleInfo.Global> = persistentMapOf(),
+        ) : BundleState()
+    }
 
     enum class BundleUpdateResult {
         None,           // Update in progress
@@ -1804,7 +1823,8 @@ class PatchBundleRepository(
     suspend fun importCustomBundles(snapshots: List<BundleSnapshot>) {
         if (snapshots.isEmpty()) return
         dispatchAction("Import custom bundles") { state ->
-            val existingEndpoints = state.sources.values
+            val ready = state as? BundleState.Ready ?: return@dispatchAction state
+            val existingEndpoints = ready.sources.values
                 .filterIsInstance<RemotePatchBundle>()
                 .map { it.endpoint.lowercase(Locale.US) }
                 .toSet()

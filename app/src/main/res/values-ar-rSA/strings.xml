@@ -15,7 +15,7 @@
     <string name="android_11_bug_dialog_description">يجب منح إذن تثبيت التطبيق مسبقًا لتجنب خطأ في نظام Android 11 سيؤثر سلبًا على تجربة المستخدم</string>
     <string name="deep_link_add_source_title">إضافة مصدر</string>
     <string name="deep_link_add_source_message">هل تريد إضافة مصدر التعديل هذا إلى Morphe؟</string>
-    <string name="deep_link_add_source_warning">أضف مصدر فقط من المصادر التي تثق بها</string>
+    <string name="deep_link_add_source_warning">أضف فقط المصادر التي تثق بها</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
@@ -32,6 +32,8 @@
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
     <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
     <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%1$s\"</string>
+    <string name="home_all_apps_hidden_title">تم إخفاء جميع التطبيقات</string>
+    <string name="home_all_apps_hidden_subtitle">لقد أخفيت جميع التطبيقات من الشاشة الرئيسية</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -91,10 +93,14 @@
     <string name="home_apk_availability_dialog_expert">لتعديل &lt;b&gt;%s&lt;/b&gt;، تحتاج إلى ملف APK غير معدل من الإصدارات:</string>
     <string name="home_apk_availability_recommended_label">موصى به</string>
     <string name="home_apk_availability_unpatched_label">غير معدل</string>
+    <string name="home_apk_availability_incompatible_label">غير متوافق</string>
     <string name="home_apk_availability_yes">نعم، ساعدني في العثور على ملف APK</string>
     <string name="home_apk_availability_no">لا، لدي ملف APK بالفعل</string>
     <string name="home_apk_use_saved_with_version">استخدام ملف APK المحفوظ (v%s)</string>
     <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
+    <string name="home_version_requires_android">يتطلب Android %1$s+</string>
+    <string name="home_apk_no_compatible_versions_title">غير مدعوم على هذا الجهاز</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; لا يحتوي على إصدارات مدعومة لنظام Android %2$d (واجهة برمجة التطبيقات %3$d). جميع الإصدارات المعلنة تتطلب إصدار Android أعلى</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">تنزيل ملف APK الأصلي</string>
     <string name="home_download_instructions_steps_title">التعليمات:</string>
@@ -162,6 +168,7 @@
     <string name="home_low_disk_space_dialog_title">مساحة تخزين منخفضة</string>
     <string name="home_low_disk_space_dialog_message">يتوفر فقط %1$.2f جيجابايت من مساحة التخزين الخالية. تتطلب عملية التعديل مساحة فارغة لا تقل عن %2$.2f جيجابايت لتعمل بشكل صحيح</string>
     <string name="home_low_disk_space_dialog_warning">قد تؤدي المتابعة إلى حدوث خطأ \"ملف غير موجود\" أو ملف APK تالف</string>
+    <string name="home_simple_bundle_select_title">تحديد مصدر التعديل</string>
     <!-- Patch Options -->
     <string name="custom_color">اللون المخصص</string>
     <string name="hex_color">صيغة اللون</string>
@@ -221,6 +228,7 @@
     <string name="home_app_info_patch_update_available_description">إصدار أحدث من التعديلات متاح. اعد تعديل التطبيق للحصول على آخر التحسينات و الإصلاحات</string>
     <string name="home_app_info_app_deleted_warning">التطبيق غير مثبت</string>
     <string name="home_app_info_app_deleted_description">تم إلغاء تثبيت هذا التطبيق من خارج Morphe. اعد تعديله لاستعادة الوظائف</string>
+    <string name="home_app_info_apk_size">حجم ملف APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل</string>
     <string name="root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
@@ -308,16 +316,13 @@
     <string name="failed_to_execute_patch">فشل تطبيق %s</string>
     <string name="patched_app_saved_toast">تم حفظ التطبيق المعدل لوقت لاحق</string>
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
-    <string name="download_apk">تنزيل ملف APK</string>
     <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي</string>
     <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$s</string>
     <string name="install_app_success">تم التثبيت بنجاح</string>
     <string name="install_app_fail">فشل تثبيت التطبيق: %s</string>
-    <string name="install_timeout_message">لم يكتمل التثبيت. تحقق من مربع حوار أداة التثبيت في النظام وحاول مرة أخرى</string>
     <string name="save_apk_success">تم حفظ APK</string>
     <string name="saved_app_export_failed">فشل تصدير التطبيق المعدل</string>
     <string name="saved_app_removed_toast">تمت إزالة التطبيق المعدل المحفوظ</string>
-    <string name="saved_app_copy_removed_toast">تمت إزالة النسخة المحفوظة</string>
     <string name="saved_app_launch_unavailable">قم بتثبيت التطبيق قبل فتحه</string>
     <string name="package_name">اسم الحزمة</string>
     <string name="failed_to_mount">فشل تركيب: %s</string>
@@ -337,6 +342,10 @@
     <string name="settings_appearance_background_grid">شبكة</string>
     <string name="settings_appearance_background_particles">جسيمات</string>
     <string name="settings_appearance_background_none">بدون</string>
+    <string name="settings_appearance_background_random">عشوائي</string>
+    <string name="settings_appearance_background_random_interval_launch">عند التشغيل</string>
+    <string name="settings_appearance_background_random_interval_daily">يوميًا</string>
+    <string name="settings_appearance_background_random_interval_3days">كل 3 أيام</string>
     <string name="settings_appearance_parallax_effect">تأثير المنظر البانورامي</string>
     <string name="settings_appearance_parallax_effect_description">تغيير سلس للخلفية عند إمالة الجهاز</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -353,6 +362,10 @@
     <string name="settings_appearance_app_language_current">اللغة الحالية</string>
     <string name="settings_appearance_translations_info_title">قد تكون ترجمات بعض اللغات مفقودة أو غير مكتملة</string>
     <string name="settings_appearance_translations_info_text">لترجمة لغات جديدة أو تحسين الترجمات الحالية، تفضل بزيارة %s</string>
+    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <string name="settings_appearance_home_screen">الشاشة الرئيسية</string>
+    <string name="settings_appearance_greeting_phrases">عبارات الترحيب</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">أيقونة التطبيق</string>
     <string name="settings_appearance_app_icon_default">الافتراضي</string>
@@ -399,8 +412,17 @@
     <string name="settings_advanced_expert_mode_description">تمكين إعدادات تعديل Morphe المتقدمة وخيارات التخصيص</string>
     <string name="settings_advanced_expert_mode_dialog_title">تمكين وضع الخبير؟</string>
     <string name="settings_advanced_expert_mode_dialog_message">وضع الخبير يوفر مزيدًا من التحكم في كيفية تطبيق التعديلات، ولكن الإعداد الخاطئ لوضع الخبير يمكن أن يوقف التطبيق عن العمل</string>
-    <string name="settings_advanced_strip_unused_libs">إزالة المكتبات الأصلية غير المستخدمة</string>
-    <string name="settings_advanced_strip_unused_libs_description">حذف المكتبات الأصلية لبنى المعالجات غير المدعومة من التطبيقات المعدلة</string>
+    <string name="settings_advanced_strip_unused_libs">تحسين وفق معمارية الجهاز</string>
+    <string name="settings_advanced_strip_unused_libs_description">"تخطي وحدات APK المقسمة الخاصة بمعماريات المعالج، اللغات وكثافات الشاشة غير المدعومة أثناء الدمج.
+بالنسبة لملفات APK العادية، يتم إزالة المكتبات الأصلية الخاصة بالمعماريات غير المدعومة بعد التعديل"</string>
+    <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode">وضع المعالجة Bytecode</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">يتحكم في كيفية معالجة Bytecode أثناء التعديل. يؤثر على سرعة التعديل، استخدام الذاكرة، وحجم APK الناتج</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">السريع (موصى به)</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">السريع</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">تعديل أسرع واستخدام أقل للذاكرة، على حساب حجم APK أكبر. موصى به للأجهزة ذات ذاكرة الوصول العشوائي المنخفضة أو الأجهزة القديمة</string>
+    <string name="settings_advanced_bytecode_mode_full">الكامل</string>
+    <string name="settings_advanced_bytecode_mode_full_description">تعديل أبطأ، يكرر السلوك القديم. استخدمه فقط إذا تسبب الوضع السريع في حدوث مشكلات</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">رمز GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">مطلوب لمصادر طلب السحب</string>
@@ -510,13 +532,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم</string>
     <string name="installer_action_open_shizuku">فتح Shizuku</string>
     <string name="installer_hint_generic">فشل التثبيت. حاول مرة أخرى أو قم بالتبديل إلى أداة تثبيت أخرى</string>
-    <string name="installer_hint_blocked">تم حظر التثبيت بواسطة Android. تحقق من إعدادات Play Protect أو الأمان</string>
     <string name="installer_hint_conflict">يوجد تطبيق آخر بنفس اسم الحزمة مثبت بالفعل. قم بإلغاء تثبيته قبل المتابعة</string>
-    <string name="installer_hint_incompatible">ملف APK غير متوافق مع هذا الجهاز أو إصدار Android</string>
-    <string name="installer_hint_invalid">ملف APK غير صالح أو تالف</string>
-    <string name="installer_hint_storage">لا توجد مساحة تخزين كافية للتثبيت</string>
-    <string name="installer_hint_timeout">انتهت مهلة التثبيت. حاول مرة أخرى</string>
-    <string name="installer_hint_aborted">تم إلغاء التثبيت</string>
     <string name="installer_external_launched">جارٍ فتح %1$s…</string>
     <string name="installer_external_timeout">لم يؤكد %1$s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى</string>
     <string name="installer_external_success">أفاد %1$s عن نجاح التثبيت</string>
@@ -547,6 +563,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_alias_field">اسم المستخدم (الاسم المستعار)</string>
     <string name="settings_system_import_keystore_dialog_password_field">كلمة المرور</string>
     <string name="settings_system_import_keystore_dialog_button">استيراد</string>
+    <string name="settings_system_import_keystore_dialog_format_field">تنسيق مخزن المفاتيح</string>
     <string name="settings_system_import_keystore_wrong_credentials">بيانات مخزن المفاتيح غير صحيحة</string>
     <string name="settings_system_import_keystore_success">تم استيراد مخزن المفاتيح</string>
     <string name="settings_system_import_keystore_failed">فشل استيراد مخزن المفاتيح</string>
@@ -554,6 +571,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_keystore_description">تصدير مخزن المفاتيح الحالي</string>
     <string name="settings_system_export_keystore_unavailable">لا يوجد مخزن مفاتيح للتصدير</string>
     <string name="settings_system_export_keystore_success">تم تصدير مخزن المفاتيح</string>
+    <string name="settings_system_export_keystore_failed">فشل تصدير مخزن المفاتيح</string>
     <string name="settings_system_show_password_field">عرض كلمة المرور</string>
     <string name="settings_system_hide_password_field">إخفاء كلمة المرور</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
@@ -682,7 +700,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="allow">السماح</string>
     <string name="details">التفاصيل</string>
     <string name="hide">إخفاء</string>
-    <string name="default_">الافتراضي</string>
+    <string name="hidden">مخفي</string>
+    <string name="unhide">إظهار</string>
     <string name="logs">السجلات</string>
     <string name="sources">المصادر</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
