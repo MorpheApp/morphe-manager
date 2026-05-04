@@ -168,6 +168,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_low_disk_space_dialog_title">Az disk yaddaşı</string>
     <string name="home_low_disk_space_dialog_message">Yalnız %1$.2f GB boş yaddaş var. Yamaqlanmanın düzgün işləməsinə ən azı %2$.2f GB boş yaddaş tələb olunur</string>
     <string name="home_low_disk_space_dialog_warning">Əməl edilməsi \"fayl tapılmadı\" xətasına və ya hasilat APK korlanmasına səbəb ola bilər</string>
+    <string name="home_simple_bundle_select_title">Yamaq mənbəsi seç</string>
     <!-- Patch Options -->
     <string name="custom_color">Xüsusi rəng</string>
     <string name="hex_color">Altı dəyərli rəng</string>
