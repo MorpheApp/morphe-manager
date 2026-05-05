@@ -260,6 +260,9 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(s) &lt;
     <string name="patcher_ready_to_install_subtitle">Pressione o botão abaixo para instalar</string>
     <string name="patcher_ready_to_mount_subtitle">Pressione o botão abaixo para montar</string>
     <string name="patcher_storage_permission_dialog_title">Não é possível acessar o caminho de armazenamento</string>
+    <string name="patcher_incompatible_patcher_title">Atualização necessária</string>
+    <string name="patcher_incompatible_patcher_description">O pacote \"%1$s\" requer a versão %2$s ou superior do patcher. Atualize o Morphe para aplicar este patch</string>
+    <string name="patcher_incompatible_patcher_update_button">Baixar e atualizar Morphe</string>
     <string name="patcher_storage_permission_description_api30">Uma ou mais opções de patch apontam para caminhos que o Morphe não consegue ler. Conceda acesso de armazenamento e toque no botão e o patching começará automaticamente</string>
     <string name="patcher_storage_permission_description_legacy">Uma ou mais opções de patch apontam para caminhos que não podem ser acessados. Atualize os caminhos nas opções de patch e tente novamente</string>
     <string name="patcher_storage_permission_grant">Conceder permissão de armazenamento</string>

@@ -260,6 +260,9 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
     <string name="patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zamontować</string>
     <string name="patcher_storage_permission_dialog_title">Brak dostępu do ścieżki pamięci</string>
+    <string name="patcher_incompatible_patcher_title">Wymagana aktualizacja</string>
+    <string name="patcher_incompatible_patcher_description">Pakiet \"%1$s\" wymaga wersji patchera %2$s lub nowszej. Zaktualizuj Morphe, aby zaaplikować poprawkę dla tej aplikacji</string>
+    <string name="patcher_incompatible_patcher_update_button">Pobierz i zaktualizuj Morphe</string>
     <string name="patcher_storage_permission_description_api30">Przynajmniej jedna opcja modyfikacji wskazuje na ścieżki, których Morphe nie może odczytać. Przyznaj dostęp do pamięci i stuknij przycisk, a modyfikowanie rozpocznie się automatycznie</string>
     <string name="patcher_storage_permission_description_legacy">Przynajmniej jedna opcji modyfikacji wskazuje na ścieżki, do których nie można uzyskać dostępu. Zaktualizuj ścieżki w opcjach i spróbuj ponownie</string>
     <string name="patcher_storage_permission_grant">Przyznaj uprawnienia dostępu do pamięci</string>

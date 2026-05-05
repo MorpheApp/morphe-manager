@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">Нажмите кнопку ниже, чтобы установить</string>
     <string name="patcher_ready_to_mount_subtitle">Нажмите кнопку ниже, чтобы смонтировать</string>
     <string name="patcher_storage_permission_dialog_title">Невозможно получить доступ к пути хранения</string>
+    <string name="patcher_incompatible_patcher_title">Требуется обновление</string>
+    <string name="patcher_incompatible_patcher_description">Пакет \"%1$s\" требует версию патчера %2$s или новее. Пожалуйста, обновите Morphe, чтобы пропатчить это приложение.</string>
+    <string name="patcher_incompatible_patcher_update_button">Скачать и обновить Morphe</string>
     <string name="patcher_storage_permission_description_api30">Один или несколько параметров патча указывают на пути, которые Morphe не может прочесть. Предоставьте доступ к хранилищу и нажмите кнопку, после чего патч начнется автоматически</string>
     <string name="patcher_storage_permission_description_legacy">Один или несколько параметров патча указывают на пути, к которым нельзя получить доступ. Обновите пути в параметрах патча и повторите попытку</string>
     <string name="patcher_storage_permission_grant">Предоставить доступ к хранилищу</string>

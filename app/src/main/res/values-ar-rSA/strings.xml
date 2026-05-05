@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">اضغط على الزر أدناه للتثبيت</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
     <string name="patcher_storage_permission_dialog_title">لا يمكن الوصول إلى مسار التخزين</string>
+    <string name="patcher_incompatible_patcher_title">تحديث مطلوب</string>
+    <string name="patcher_incompatible_patcher_description">يتطلب الحزمة \"%1$s\" إصدار برنامج التصحيح %2$s أو أحدث. يرجى تحديث Morphe لتصحيح هذا التطبيق</string>
+    <string name="patcher_incompatible_patcher_update_button">تنزيل وتحديث Morphe</string>
     <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
     <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى.</string>
     <string name="patcher_storage_permission_grant">منح إذن الوصول</string>

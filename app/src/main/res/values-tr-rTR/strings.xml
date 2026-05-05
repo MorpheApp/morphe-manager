@@ -260,6 +260,9 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_ready_to_install_subtitle">Yüklemek için aşağıdaki düğmeye basın</string>
     <string name="patcher_ready_to_mount_subtitle">Bağlamak için aşağıdaki düğmeye basın</string>
     <string name="patcher_storage_permission_dialog_title">Depolama yoluna erişilemiyor</string>
+    <string name="patcher_incompatible_patcher_title">Güncelleme gerekiyor</string>
+    <string name="patcher_incompatible_patcher_description">\"%1$s\" paketi, %2$s veya daha yeni bir Morphe sürümü gerektiriyor. Bu uygulamayı yamalamak için lütfen Morphe\'i güncelleyin.</string>
+    <string name="patcher_incompatible_patcher_update_button">Morphe\'yi indir ve güncelle</string>
     <string name="patcher_storage_permission_description_api30">Bir veya daha fazla yama seçeneği, Morphe\'nin okuyamadığı yollara işaret ediyor. Depolama erişimini verin ve düğmeye dokunun, ardından yamalama otomatik olarak başlayacaktır</string>
     <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla yama seçeneği, erişilemeyen yollara işaret ediyor. Yama seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
     <string name="patcher_storage_permission_grant">Depolama izni verin</string>

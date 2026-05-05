@@ -15,6 +15,7 @@
     <string name="android_11_bug_dialog_description">Dopuštenje za instalaciju aplikacije mora se dati unaprijed kako bi se izbjegla greška u sustavu Android 11 koja će negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Dodajte izvor</string>
     <string name="deep_link_add_source_message">Želite li dodati ovaj izvor patcha u Morphe?</string>
+    <string name="deep_link_add_source_warning">Dodajte samo izvore kojima vjerujete</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
@@ -167,6 +168,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="home_low_disk_space_dialog_title">Malo prostora na disku</string>
     <string name="home_low_disk_space_dialog_message">Dostupno je samo %1$.2f GB slobodnog prostora. Za ispravan rad patchanja potrebno je najmanje %2$.2f GB slobodnog prostora</string>
     <string name="home_low_disk_space_dialog_warning">Nastavak može rezultirati greškom \"datoteka nije pronađena\" ili oštećenom izlaznom aplikacijom</string>
+    <string name="home_simple_bundle_select_title">Odaberite izvor patcha</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Hex boja</string>

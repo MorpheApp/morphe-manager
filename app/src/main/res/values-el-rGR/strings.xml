@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">Πατήστε το παρακάτω κουμπί για εγκατάσταση</string>
     <string name="patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
     <string name="patcher_storage_permission_dialog_title">Δεν είναι δυνατή η πρόσβαση στη διαδρομή αποθηκευτικού χώρου</string>
+    <string name="patcher_incompatible_patcher_title">Απαιτείται ενημέρωση</string>
+    <string name="patcher_incompatible_patcher_description">Το πακέτο \"%1$s\" απαιτεί έκδοση patcher %2$s ή νεότερη. Παρακαλώ ενημερώστε το Morphe για να εφαρμόσετε patch σε αυτήν την εφαρμογή.</string>
+    <string name="patcher_incompatible_patcher_update_button">Λήψη και ενημέρωση του Morphe</string>
     <string name="patcher_storage_permission_description_api30">Μία ή περισσότερες επιλογές τροποποιήσεων πηγαίνουν σε διαδρομές που το Morphe δεν μπορεί να διαβάσει. Δώστε άδεια αποθήκευσης και πατήστε το κουμπί, στη συνέχεια η διαδικασία τροποποίησης θα ξεκινήσει αυτόματα</string>
     <string name="patcher_storage_permission_description_legacy">Μία ή περισσότερες επιλογές τροποποιήσεων πηγαίνουν σε διαδρομές που δεν είναι προσβάσιμες. Ενημερώστε τις διαδρομές στις επιλογές τροποποιήσεων και δοκιμάστε ξανά</string>
     <string name="patcher_storage_permission_grant">Επιτρέψτε την πρόσβαση στον αποθηκευτικό χώρο</string>

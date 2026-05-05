@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">按下方按钮安装</string>
     <string name="patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
     <string name="patcher_storage_permission_dialog_title">无法访问存储路径</string>
+    <string name="patcher_incompatible_patcher_title">更新要求</string>
+    <string name="patcher_incompatible_patcher_description">捆绑包 \"%1$s\" 要求补丁程序版本 %2$s 或更高。请更新 Morphe 以补丁此应用</string>
+    <string name="patcher_incompatible_patcher_update_button">下载并更新 Morphe</string>
     <string name="patcher_storage_permission_description_api30">一个或多个补丁选项指向Morphe无法读取的路径。授予存储访问权限并点击按钮，然后补丁将自动开始</string>
     <string name="patcher_storage_permission_description_legacy">一个或多个补丁选项指向无法访问的路径。更新补丁选项中的路径，然后重试</string>
     <string name="patcher_storage_permission_grant">授予存储权限</string>

@@ -260,6 +260,9 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="patcher_ready_to_install_subtitle">Stiskněte tlačítko níže pro instalaci</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
     <string name="patcher_storage_permission_dialog_title">Nelze přistupovat k cestě úložiště</string>
+    <string name="patcher_incompatible_patcher_title">Aktualizace požadována</string>
+    <string name="patcher_incompatible_patcher_description">Balíček \"%1$s\" vyžaduje verzi patcheru %2$s nebo novější. Aktualizujte Morphe pro opatchování této aplikace</string>
+    <string name="patcher_incompatible_patcher_update_button">Stáhnout a aktualizovat Morphe</string>
     <string name="patcher_storage_permission_description_api30">Jedna nebo více možností záplaty odkazuje na cesty, které Morphe nemůže číst. Udělte oprávnění ke úložišti a klepněte na tlačítko, poté se záplatování spustí automaticky</string>
     <string name="patcher_storage_permission_description_legacy">Jeden nebo více možnosti pro patchování ukazují na cesty, které nelze přistupovat. Upravte cesty v možnostech pro patchování a zkuste to znovu</string>
     <string name="patcher_storage_permission_grant">Povolte přístup k úložišti</string>

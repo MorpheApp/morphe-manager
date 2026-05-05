@@ -258,6 +258,9 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_ready_to_install_subtitle">Ji bo saz kirinê ser  duxwe bikşînin</string>
     <string name="patcher_ready_to_mount_subtitle">Ji bo avakirinê ser duxwe bikşînin</string>
     <string name="patcher_storage_permission_dialog_title">Nabe sererît rêyê wergirtina separe</string>
+    <string name="patcher_incompatible_patcher_title">Nûvekirin hewce ye</string>
+    <string name="patcher_incompatible_patcher_description">Pakêtê \"%1$s\" veşêriya %2$s an nûjen e hewce dike. Ji kerem Morphe nûve bike da ku vê sepanê patch bike</string>
+    <string name="patcher_incompatible_patcher_update_button">Dagir bike û nûvekirina Morphe</string>
     <string name="patcher_storage_permission_description_api30">Yek an zêde ji vebijarkên pakê destûrên ku Morphe nikare bixwîne, nîşan didin. Destûra separeyê daynin û ser bilêvê bikşînin û pêlê dûv re bibaşêre</string>
     <string name="patcher_storage_permission_description_legacy">Yek an zafîn ji Patch-an rêyên wergirtinê hene ku nabe xwendin. Rêyên di Patch-an de nûve bike û sererît hewildan bike</string>
     <string name="patcher_storage_permission_grant">Îznayê separe daye</string>

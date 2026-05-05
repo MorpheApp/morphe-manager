@@ -260,6 +260,9 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patcher_ready_to_install_subtitle">Tryk på knappen nedenfor for at installere</string>
     <string name="patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
     <string name="patcher_storage_permission_dialog_title">Kan ikke tilgå lagringssti</string>
+    <string name="patcher_incompatible_patcher_title">Opdatering påkrævet</string>
+    <string name="patcher_incompatible_patcher_description">Bundtet \"%1$s\" kræver patcher-version %2$s eller nyere. Opdater Morphe for at patche denne app</string>
+    <string name="patcher_incompatible_patcher_update_button">Download og opdater Morphe</string>
     <string name="patcher_storage_permission_description_api30">En eller flere patchtilvalg peger på stier, som Morphe ikke kan læse. Giv adgang til lager og tryk på knappen, så vil patching starte automatisk</string>
     <string name="patcher_storage_permission_description_legacy">En eller flere patchtilvalg peger på stier, som ikke kan tilgås. Opdater stierne i patchtilvalg og prøv igen</string>
     <string name="patcher_storage_permission_grant">Tillad lagringstilladelse</string>

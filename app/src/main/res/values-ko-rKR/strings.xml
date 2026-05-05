@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">설치하시려면 아래 버튼을 탭하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_storage_permission_dialog_title">저장소 경로에 접근할 수 없음</string>
+    <string name="patcher_incompatible_patcher_title">업데이트 필요</string>
+    <string name="patcher_incompatible_patcher_description">번들 \"%1$s\"은 패처 버전 %2$s 이상이 필요합니다. Morphe를 업데이트하여 이 앱을 패치하세요.</string>
+    <string name="patcher_incompatible_patcher_update_button">Morphe 다운로드 및 업데이트</string>
     <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 부여하고 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
     <string name="patcher_storage_permission_description_legacy">하나 이상의 패치 옵션이 접근할 수 없는 경로를 가리키고 있습니다. 패치 옵션에서 경로를 업데이트하고 다시 시도하세요</string>
     <string name="patcher_storage_permission_grant">저장소 권한 부여</string>

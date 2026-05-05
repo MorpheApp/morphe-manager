@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">按下下方按鈕即可安裝</string>
     <string name="patcher_ready_to_mount_subtitle">按下下方按鈕即可掛載</string>
     <string name="patcher_storage_permission_dialog_title">無法存取儲存路徑</string>
+    <string name="patcher_incompatible_patcher_title">需要更新</string>
+    <string name="patcher_incompatible_patcher_description">此套件 \"%1$s\" 需要修補程式版本 %2$s 或更新版本。請更新 Morphe 以修補此應用程式</string>
+    <string name="patcher_incompatible_patcher_update_button">下載並更新 Morphe</string>
     <string name="patcher_storage_permission_description_api30">一個或多個修補程式選項指向 Morphe 無法讀取的路徑。請授予儲存空間存取權，然後輕觸按鈕，修補程式將自動開始。</string>
     <string name="patcher_storage_permission_description_legacy">一或多個修補選項指向無法存取的路徑。更新修補選項中的路徑並重試</string>
     <string name="patcher_storage_permission_grant">授予存取權限</string>

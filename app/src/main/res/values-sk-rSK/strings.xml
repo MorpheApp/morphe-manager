@@ -260,6 +260,9 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="patcher_ready_to_install_subtitle">Stlačte tlačidlo nižšie pre inštaláciu</string>
     <string name="patcher_ready_to_mount_subtitle">Stlačte tlačidlo nižšie na pripojenie</string>
     <string name="patcher_storage_permission_dialog_title">Nedá sa získať prístup k ceste na úložisku</string>
+    <string name="patcher_incompatible_patcher_title">Aktualizácia je potrebná</string>
+    <string name="patcher_incompatible_patcher_description">Balíček \"%1$s\" vyžaduje verziu patcheru %2$s alebo novšiu. Aktualizujte Morphe, aby ste mohli aplikovať tento patch</string>
+    <string name="patcher_incompatible_patcher_update_button">Stiahnuť a aktualizovať Morphe</string>
     <string name="patcher_storage_permission_description_api30">Jedna alebo viacero možností záplat odkazuje na cesty, ktoré Morphe nemôže čítať. Udeľte prístup k úložisku a ťuknite na tlačidlo, opravy sa spustia automaticky</string>
     <string name="patcher_storage_permission_description_legacy">Jedna alebo viacero možností záplat odkazuje na cesty, ktoré nie sú prístupné. Aktualizujte cesty v možnostiach záplat a skúste to znova</string>
     <string name="patcher_storage_permission_grant">Udeľte povolenia na prístup k úložisku</string>

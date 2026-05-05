@@ -260,6 +260,9 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polne APK
     <string name="patcher_ready_to_install_subtitle">Pritisnite gumb spodaj za namestitev</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite gumb spodaj za montažo</string>
     <string name="patcher_storage_permission_dialog_title">Ne morem dostopati do poti shrambe</string>
+    <string name="patcher_incompatible_patcher_title">Posodobitev je zahtevana</string>
+    <string name="patcher_incompatible_patcher_description">Paket \"%1$s\" zahteva različico aplikacije Morphe %2$s ali novejšo. Posodabite Morphe, da lahko popravite to aplikacijo.</string>
+    <string name="patcher_incompatible_patcher_update_button">Prenesi in posodobi Morphe</string>
     <string name="patcher_storage_permission_description_api30">Ena ali več možnosti popravka se sklicujejo na poti, do katerih Morphe ne more brati. Daj dovoljenje za shrambo in nato pritisni gumb, nato se bo popravljanje začelo samodejno</string>
     <string name="patcher_storage_permission_description_legacy">Ena ali več možnosti popravka se sklicujejo na poti, do katerih ni mogoče dostopiti. Posodobi poti v možnostih popravka in poskusite znova</string>
     <string name="patcher_storage_permission_grant">Dovoli dostop do shrambe</string>

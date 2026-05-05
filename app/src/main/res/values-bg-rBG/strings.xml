@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">Натиснете бутона по-долу за инсталиране</string>
     <string name="patcher_ready_to_mount_subtitle">Натиснете бутона по-долу за монтиране</string>
     <string name="patcher_storage_permission_dialog_title">Не е възможно да се достъпи до пата за съхранение</string>
+    <string name="patcher_incompatible_patcher_title">Необходима е актуализация</string>
+    <string name="patcher_incompatible_patcher_description">Пакетът \"%1$s\" изисква версия на пачера %2$s или по-нова. Моля, актуализирайте Morphe, за да приложите този пакет.</string>
+    <string name="patcher_incompatible_patcher_update_button">Изтеглете и актуализирайте Morphe</string>
     <string name="patcher_storage_permission_description_api30">Една или повече опции за корекции сочат към пътища, които Morphe не може да прочете. Предоставете достъп до хранилището и натиснете бутона, след което корекциите ще започнат автоматично</string>
     <string name="patcher_storage_permission_description_legacy">Едно или повече опции за патч сочат към пътища, които не могат да бъдат достъпени. Актуализирайте пътищата в опциите за патч и опитайте отново</string>
     <string name="patcher_storage_permission_grant">Дайте разрешение за съхранение</string>

@@ -260,6 +260,9 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="patcher_ready_to_install_subtitle">Drücken Sie die Schaltfläche unten zum Installieren</string>
     <string name="patcher_ready_to_mount_subtitle">Drücke die Schaltfläche unten, um zu mounten</string>
     <string name="patcher_storage_permission_dialog_title">Speicherpfad kann nicht erreicht werden</string>
+    <string name="patcher_incompatible_patcher_title">Update erforderlich</string>
+    <string name="patcher_incompatible_patcher_description">Das Bundle \"%1$s\" benötigt Patcher-Version %2$s oder neuer. Bitte aktualisiere Morphe, um diese App zu patchen.</string>
+    <string name="patcher_incompatible_patcher_update_button">Morphe herunterladen und aktualisieren</string>
     <string name="patcher_storage_permission_description_api30">Eine oder mehrere Patch-Optionen verweisen auf Pfade, die Morphe nicht lesen kann. Gewähren Sie den Speicherzugriff und tippen Sie auf die Schaltfläche, dann beginnt das Patchen automatisch</string>
     <string name="patcher_storage_permission_description_legacy">Ein oder mehrere Patch-Optionen verweisen auf Pfade, auf die nicht zugegriffen werden kann. Aktualisieren Sie die Pfade in den Patch-Optionen und versuchen Sie es erneut</string>
     <string name="patcher_storage_permission_grant">Speicherberechtigung gewähren</string>

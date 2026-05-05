@@ -260,6 +260,9 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="patcher_ready_to_install_subtitle">Premi il pulsante qui sotto per installare</string>
     <string name="patcher_ready_to_mount_subtitle">Premi il pulsante qui sotto per montare</string>
     <string name="patcher_storage_permission_dialog_title">Non è possibile accedere alla cartella di archiviazione</string>
+    <string name="patcher_incompatible_patcher_title">Aggiornamento richiesto</string>
+    <string name="patcher_incompatible_patcher_description">Il bundle \"%1$s\" richiede la versione di Morphe %2$s o successiva. Si prega di aggiornare Morphe per applicare la patch a questa app</string>
+    <string name="patcher_incompatible_patcher_update_button">Scarica e aggiorna Morphe</string>
     <string name="patcher_storage_permission_description_api30">Una o più opzioni delle patch fanno riferimento a percorsi che Morphe non può leggere. Concedi l\'accesso alla memoria di archiviazione e tocca il pulsante, quindi il patching partirà automaticamente</string>
     <string name="patcher_storage_permission_description_legacy">Una o più opzioni delle patch fanno riferimento a percorsi non raggiungibili. Aggiorna i percorsi nelle opzioni delle patch e riprova</string>
     <string name="patcher_storage_permission_grant">Concedi l\'autorizzazione alla memoria di archiviazione</string>

@@ -260,6 +260,9 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="patcher_ready_to_install_subtitle">Druk op de onderstaande knop om te installeren</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op de onderstaande knop om te koppelen</string>
     <string name="patcher_storage_permission_dialog_title">Kan opslagpad niet openen</string>
+    <string name="patcher_incompatible_patcher_title">Update vereist</string>
+    <string name="patcher_incompatible_patcher_description">De bundel \"%1$s\" vereist patcher versie %2$s of hoger. Update Morphe om deze app te patchen</string>
+    <string name="patcher_incompatible_patcher_update_button">Download en update Morphe</string>
     <string name="patcher_storage_permission_description_api30">Een of meer patchopties verwijzen naar paden die Morphe niet kan lezen. Geef toegang tot de opslag en tik op de knop; het patchproces start dan automatisch</string>
     <string name="patcher_storage_permission_description_legacy">Een of meer patch-opties wijzen naar bestanden die niet kunnen worden geopend. Update de bestanden in patch-opties en probeer het nogmaals</string>
     <string name="patcher_storage_permission_grant">Geef opslagtoegang</string>

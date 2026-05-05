@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">לחץ על הכפתור למטה כדי להתקין</string>
     <string name="patcher_ready_to_mount_subtitle">לחץ על הכפתור למטה כדי לאתחל</string>
     <string name="patcher_storage_permission_dialog_title">לא ניתן לגשת לדרך אחסון</string>
+    <string name="patcher_incompatible_patcher_title">עדכון נדרש</string>
+    <string name="patcher_incompatible_patcher_description">החבילה \"%1$s\" דורשת גרסה %2$s ומעלה של הפאצ\'ר. נא לעדכן את Morphe כדי לפאצ\' את האפליקציה הזו</string>
+    <string name="patcher_incompatible_patcher_update_button">הורד ועדכן את Morphe</string>
     <string name="patcher_storage_permission_description_api30">אפשרות אחת או יותר של תיקונים מצביעה על נתיבים ש-Morphe לא יכול לקרוא. הענק גישה לאחסון ולחץ על הכפתור ואז התיקון יתחיל באופן אוטומטי</string>
     <string name="patcher_storage_permission_description_legacy">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות. עדכן את הדרכים באופציות התיקון ונסה שוב</string>
     <string name="patcher_storage_permission_grant">אשר אישור גישה לאחסון</string>
