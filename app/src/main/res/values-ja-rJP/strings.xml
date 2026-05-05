@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">インストールするには以下のボタンを押してください</string>
     <string name="patcher_ready_to_mount_subtitle">マウントするには以下のボタンを押してください</string>
     <string name="patcher_storage_permission_dialog_title">ストレージパスにアクセスできません</string>
+    <string name="patcher_incompatible_patcher_title">アップデートが必要です</string>
+    <string name="patcher_incompatible_patcher_description">バンドル \"%1$s\" には、パッチャーバージョン %2$s 以降が必要です。Morphe をアップデートしてこのアプリをパッチしてください。</string>
+    <string name="patcher_incompatible_patcher_update_button">Morpheをダウンロードしてアップデート</string>
     <string name="patcher_storage_permission_description_api30">一部のパッチ オプションが、Morphe が読み取れないパスを参照しています。ストレージへのアクセス権限を許可してボタンをタップすると、パッチ処理が自動的に開始されます。</string>
     <string name="patcher_storage_permission_description_legacy">一部のパッチ オプションが、アクセスできないパスを参照しています。パッチ オプション内のパスを修正して再度お試しください</string>
     <string name="patcher_storage_permission_grant">ストレージへのアクセス権限を許可する</string>

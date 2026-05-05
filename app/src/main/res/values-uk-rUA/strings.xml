@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">Натисніть кнопку нижче, щоб встановити</string>
     <string name="patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
     <string name="patcher_storage_permission_dialog_title">Не вдається отримати доступ до шляху зберігання</string>
+    <string name="patcher_incompatible_patcher_title">Потрібне оновлення</string>
+    <string name="patcher_incompatible_patcher_description">Для джерела \"%1$s\" потрібен патчер версії %2$s або новіший. Будь ласка, оновіть Morphe, щоб пропатчити цей застосунок</string>
+    <string name="patcher_incompatible_patcher_update_button">Завантажити та оновити Morphe</string>
     <string name="patcher_storage_permission_description_api30">Один або декілька параметрів патчів вказують на шляхи, які Morphe не може прочитати. Надайте доступ до сховища та натисніть кнопку, після чого патчінг розпочнеться автоматично</string>
     <string name="patcher_storage_permission_description_legacy">Одна або декілька опцій патчу вказують на шляхи, до яких немає доступу. Оновіть шляхи в опціях патчу та спробуйте знову</string>
     <string name="patcher_storage_permission_grant">Надати доступ до сховища</string>

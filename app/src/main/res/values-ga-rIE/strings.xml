@@ -168,7 +168,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_low_disk_space_dialog_title">Spás diosca íseal</string>
     <string name="home_low_disk_space_dialog_message">Níl ach %1$.2f GB de spás saor in aisce ar fáil. Éilíonn paisteáil ar a laghad %2$.2f GB de spás saor in aisce le go n-oibreoidh sé i gceart.</string>
     <string name="home_low_disk_space_dialog_warning">D’fhéadfadh earráid \"comhad gan aimsiú\" nó APK aschuir truaillithe a bheith mar thoradh ar dhul ar aghaidh.</string>
-    <string name="home_simple_bundle_select_title">Roghnaigh comhad foinse paiste</string>
+    <string name="home_simple_bundle_select_title">Roghnaigh foinse paiste</string>
     <!-- Patch Options -->
     <string name="custom_color">Dath saincheaptha</string>
     <string name="hex_color">Dath heicsidheachúlach</string>
@@ -260,6 +260,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="patcher_ready_to_install_subtitle">Brúigh an cnaipe thíos chun é a shuiteáil</string>
     <string name="patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
     <string name="patcher_storage_permission_dialog_title">Ní féidir rochtain a fháil ar an gcosán stórála</string>
+    <string name="patcher_incompatible_patcher_title">Nuashonrú ag teastáil</string>
+    <string name="patcher_incompatible_patcher_description">Teastaíonn leagan %2$s de Morphe ar a laghad ón mionphacáiste \"%1$s\".</string>
+    <string name="patcher_incompatible_patcher_update_button">Íoslódáil agus nuashonaigh Morphe</string>
     <string name="patcher_storage_permission_description_api30">Léiríonn rogha paiste amháin nó níos mó cosáin nach féidir le Morphe a léamh. Deonaigh rochtain stórála agus tapáil an cnaipe ansin tosóidh an paisteáil go huathoibríoch.</string>
     <string name="patcher_storage_permission_description_legacy">Léiríonn rogha paiste amháin nó níos mó cosáin nach féidir rochtain a fháil orthu. Nuashonraigh na cosáin sna roghanna paiste agus déan iarracht arís.</string>
     <string name="patcher_storage_permission_grant">Deonaigh cead stórála</string>

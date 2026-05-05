@@ -260,6 +260,9 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="patcher_ready_to_install_subtitle">Druk op die knoppie hieronder om te installeer</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op die knoppie hieronder om te monteer</string>
     <string name="patcher_storage_permission_dialog_title">Kan nie toegang tot stoorpad verkry nie</string>
+    <string name="patcher_incompatible_patcher_title">Opdatering vereis</string>
+    <string name="patcher_incompatible_patcher_description">Die bundel \"%1$s\" vereis Morphe weergawe %2$s of nuwer. Gebruik asseblief die nuutste Morphe om hierdie toepassing te wysig</string>
+    <string name="patcher_incompatible_patcher_update_button">Laai af en werk Morphe op</string>
     <string name="patcher_storage_permission_description_api30">Een of meer pleisteropsies wys na pad waartoe Morphe nie kan lees nie. Vergun bergingtoegang en tik dan op die knoppie waarna die pleister outomaties sal begin</string>
     <string name="patcher_storage_permission_description_legacy">Een of meer kolle opsies wys na paaie wat nie verkry kan word nie. Dateer die paaie in kolle opsies op en probeer weer</string>
     <string name="patcher_storage_permission_grant">Vergun toestingberging</string>

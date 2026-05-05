@@ -259,6 +259,9 @@
     <string name="patcher_ready_to_install_subtitle">Притисните дугме испод за инсталирање</string>
     <string name="patcher_ready_to_mount_subtitle">Притисните дугме испод за монтирање</string>
     <string name="patcher_storage_permission_dialog_title">Не могу приступити до пута складиштења</string>
+    <string name="patcher_incompatible_patcher_title">Захтевано је ажурирање</string>
+    <string name="patcher_incompatible_patcher_description">Пакетом \"%1$s\" је потребна верзија пачера %2$s или новија. Молимо вас да ажурирате Morphe како бисте применили ову апликацију.</string>
+    <string name="patcher_incompatible_patcher_update_button">Преузми и ажурирај Morphe</string>
     <string name="patcher_storage_permission_description_api30">Једна или више опција исправки указују на путеве које Morphe не може да чита. Доделите дозволу за складиште и додирните дугме, а затим ће почети аутоматско отклањање грешака</string>
     <string name="patcher_storage_permission_description_legacy">Један или више опција пачања указују на путеве које не могу да се приступе. Ажурирајте путеве у опцијама пачања и покушајте поново</string>
     <string name="patcher_storage_permission_grant">Дозволите приступ складишту</string>

@@ -260,6 +260,9 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patcher_ready_to_install_subtitle">Pulse el botón de abajo para instalar</string>
     <string name="patcher_ready_to_mount_subtitle">Pulse el botón de abajo para montar</string>
     <string name="patcher_storage_permission_dialog_title">No se puede acceder a la ruta de almacenamiento</string>
+    <string name="patcher_incompatible_patcher_title">Se requiere actualización</string>
+    <string name="patcher_incompatible_patcher_description">El paquete \"%1$s\" requiere la versión %2$s o posterior de Morphe. Actualice Morphe para aplicar este parche</string>
+    <string name="patcher_incompatible_patcher_update_button">Descargar y actualizar Morphe</string>
     <string name="patcher_storage_permission_description_api30">Una o más opciones de parcheo apuntan a rutas que Morphe no puede leer. Conceda acceso al almacenamiento y toque el botón para que el parcheo empiece automáticamente</string>
     <string name="patcher_storage_permission_description_legacy">Una o varias opciones de parcheo apuntan a rutas que no se pueden acceder. Actualice las rutas en las opciones de parcheo y vuelva a intentarlo</string>
     <string name="patcher_storage_permission_grant">Conceder permiso de almacenamiento</string>

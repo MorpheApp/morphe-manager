@@ -259,6 +259,9 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="patcher_ready_to_install_subtitle">Appuyez sur le bouton ci-dessous pour installer</string>
     <string name="patcher_ready_to_mount_subtitle">Appuyez sur le bouton ci-dessous pour monter</string>
     <string name="patcher_storage_permission_dialog_title">Impossible d\'accéder au chemin de stockage</string>
+    <string name="patcher_incompatible_patcher_title">Mise à jour requise</string>
+    <string name="patcher_incompatible_patcher_description">Le paquet \"%1$s\" nécessite la version %2$s ou ultérieure du patcher. Veuillez mettre à jour Morphe pour patcher cette application</string>
+    <string name="patcher_incompatible_patcher_update_button">Télécharger et mettre à jour Morphe</string>
     <string name="patcher_storage_permission_description_api30">Une ou plusieurs options de patch pointent vers des chemins que Morphe ne peut pas lire. Accordez l’accès au stockage puis appuyez sur le bouton le patchage commencera automatiquement</string>
     <string name="patcher_storage_permission_description_legacy">Une ou plusieurs options de patch pointent vers des chemins inaccessibles. Mettez à jour les chemins dans les options de patch puis réessayez</string>
     <string name="patcher_storage_permission_grant">Accorder l’autorisation d’accès au stockage</string>

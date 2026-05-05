@@ -260,6 +260,9 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite dugme ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite dugme ispod za postavljanje</string>
     <string name="patcher_storage_permission_dialog_title">Ne mogu pristupiti putu za pohranu</string>
+    <string name="patcher_incompatible_patcher_title">Ažuriranje je potrebno</string>
+    <string name="patcher_incompatible_patcher_description">Paket \"%1$s\" zahteva verziju patcher-a %2$s ili noviju. Molimo ažurirajte Morphe kako biste zakrpili ovu aplikaciju</string>
+    <string name="patcher_incompatible_patcher_update_button">Preuzmi i ažuriraj Morphe</string>
     <string name="patcher_storage_permission_description_api30">Jedna ili više opcija patch-a pokazuju na putanje koje Morphe ne može da čita. Dajte dozvolu za skladište i dodirnite dugme, a zatim će se patching automatski pokrenuti</string>
     <string name="patcher_storage_permission_description_legacy">Jedan ili više opcija za patching ukazuju na putove koje ne mogu biti pristupili. Ažurirajte putove u opcijama za patching i pokušajte ponovo</string>
     <string name="patcher_storage_permission_grant">Dajte dozvolu za pohranu</string>

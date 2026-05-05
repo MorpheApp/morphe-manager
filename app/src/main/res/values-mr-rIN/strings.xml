@@ -137,6 +137,9 @@
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
     <string name="patcher_error_dialog_app_info">ॲप माहिती</string>
+    <string name="patcher_incompatible_patcher_title">अद्यतन आवश्यक आहे</string>
+    <string name="patcher_incompatible_patcher_description">\"%1$s\" बंडलला पॅचर आवृत्ती %2$s किंवा त्यापेक्षा नवीन आवृत्तीची आवश्यकता आहे. कृपया हे ॲप पॅच करण्यासाठी मोर्फे अपडेट करा।</string>
+    <string name="patcher_incompatible_patcher_update_button">Morphe डाउनलोड आणि अपडेट करा</string>
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Patcher Screen - Patcher Worker -->
     <!-- Patcher Screen - Patcher Messages -->

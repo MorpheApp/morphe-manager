@@ -260,6 +260,9 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="patcher_ready_to_install_subtitle">Pindutin ang button sa ibaba upang ma-install</string>
     <string name="patcher_ready_to_mount_subtitle">Pindutin ang button sa ibaba upang i-mount</string>
     <string name="patcher_storage_permission_dialog_title">Hindi ma-access ang landas ng imbakan</string>
+    <string name="patcher_incompatible_patcher_title">Kinakailangan ang pag-update</string>
+    <string name="patcher_incompatible_patcher_description">Ang bundle na \"%1$s\" ay nangangailangan ng bersyon %2$s o mas bago ng patcher. Pakibagong-update ang Morphe upang i-patch ang app na ito</string>
+    <string name="patcher_incompatible_patcher_update_button">I-download at i-update ang Morphe</string>
     <string name="patcher_storage_permission_description_api30">Isa o higit pang mga pagpipilian sa patch ay tumuturo sa mga landas na hindi mabasa ng Morphe. Bigyan ng access sa imbakan at i-tap ang button at pagkatapos ay awtomatikong magsisimula ang pag-patch</string>
     <string name="patcher_storage_permission_description_legacy">Isa o higit pang mga pagpipilian sa patch ay tumuturo sa mga landas na hindi ma-access. I-update ang mga landas sa pagpipilian ng patch at subukan muli</string>
     <string name="patcher_storage_permission_grant">Pahintulutan ang pahintulot sa imbakan</string>

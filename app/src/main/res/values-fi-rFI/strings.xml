@@ -259,6 +259,9 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="patcher_ready_to_install_subtitle">Paina alla olevaa painiketta asentaaksesi</string>
     <string name="patcher_ready_to_mount_subtitle">Paina alla olevaa painiketta liittääksesi</string>
     <string name="patcher_storage_permission_dialog_title">Ei voi käsitellä tallennustietoa</string>
+    <string name="patcher_incompatible_patcher_title">Päivitys vaaditaan</string>
+    <string name="patcher_incompatible_patcher_description">Paketti \"%1$s\" vaatii korjausohjelman version %2$s tai uudemman. Päivitä Morphe korjataksesi tämän sovelluksen</string>
+    <string name="patcher_incompatible_patcher_update_button">Lataa ja päivitä Morphe</string>
     <string name="patcher_storage_permission_description_api30">Yksi tai useampi korjausvaihtoehto osoittaa polkuihin, joita Morphe ei voi lukea. Myönnä tallennustilan käyttöoikeus ja napauta painiketta, niin korjaus alkaa automaattisesti</string>
     <string name="patcher_storage_permission_description_legacy">Yksi tai useampi päivitysasetus osoittaa pääsyä ei voida käsitellä tiedostoja. Päivitä päivitysasetuksia ja yritä uudelleen</string>
     <string name="patcher_storage_permission_grant">Anta tallennuslupa</string>

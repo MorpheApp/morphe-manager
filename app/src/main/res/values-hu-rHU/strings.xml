@@ -260,6 +260,9 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="patcher_ready_to_install_subtitle">Nyomja meg az alábbi gombot a telepítéshez</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomja meg az alábbi gombot a csatlakoztatáshoz</string>
     <string name="patcher_storage_permission_dialog_title">Az elérési útvonal nem hozzáférhető</string>
+    <string name="patcher_incompatible_patcher_title">Frissítés szükséges</string>
+    <string name="patcher_incompatible_patcher_description">A \"%1$s\" csomag a Morphe %2$s-es vagy újabb verzióját igényli. Kérjük, frissítse a Morphét az alkalmazás javításához.</string>
+    <string name="patcher_incompatible_patcher_update_button">Töltse le és frissítse a Morphe alkalmazást</string>
     <string name="patcher_storage_permission_description_api30">Egy vagy több módosítási opció olyan elérési útra mutat, amelyeket a Morphe nem tud olvasni. Adja meg a tárhely hozzáférést, majd koppintson a gombra, és a módosítás automatikusan elindul</string>
     <string name="patcher_storage_permission_description_legacy">Egy vagy több módosítási opció olyan elérési útra mutat, amelyekhez nem lehet hozzáférni. Frissítse az útvonalakat a módosítási opciókban és próbálja újra</string>
     <string name="patcher_storage_permission_grant">Tárhelyhozzáférés engedélyezése</string>

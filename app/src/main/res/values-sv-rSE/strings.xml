@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Andra appar</string>
+    <string name="home_other_apps">Övriga appar</string>
     <string name="home_not_patched_yet">Inte modifierad än</string>
     <string name="home_no_patches_available">Inga tillägg är tillgängliga</string>
     <string name="home_app_hide_title">Dölj den här appen?</string>
-    <string name="home_app_hide_message">Den här appen döljs från startsidan. Du kan återställa den senare med knappen \"%1$s\" längst ned i listan</string>
+    <string name="home_app_hide_message">Den här appen döljs från startsidan. Du kan återställa den senare med knappen %1$s längst ned i listan</string>
     <string name="home_app_will_be_hidden">Den här appen döljs</string>
     <string name="home_app_show_hidden">Visa dolda appar</string>
     <string name="home_app_no_hidden">Inga dolda appar</string>
@@ -88,7 +88,7 @@
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Aktivera Expertläge i inställningarna för att inkludera det här tillägget manuellt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Behöver du hjälp att hitta en omodifierad original-APK-fil?</string>
+    <string name="home_apk_availability_dialog_title">Behöver du hjälp att hitta en ursprunglig omodifierad APK-fil?</string>
     <string name="home_apk_availability_dialog_simple">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med följande version:</string>
     <string name="home_apk_availability_dialog_expert">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med en av följande versioner:</string>
     <string name="home_apk_availability_recommended_label">Rekommenderad</string>
@@ -102,7 +102,7 @@
     <string name="home_apk_no_compatible_versions_title">Stöds inte på den här enheten</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har inga versioner som stöds för Android %2$d (API %3$d). Alla deklarerade versioner kräver en senare Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">Ladda ned original-APK-filen</string>
+    <string name="home_download_instructions_title">Ladda ned den ursprungliga APK-filen</string>
     <string name="home_download_instructions_steps_title">Anvisningar:</string>
     <string name="home_download_instructions_step1">Tryck på knappen %1$s nedan</string>
     <string name="home_download_instructions_step2_part1">Skrolla ned på webbsidan och tryck på</string>
@@ -110,7 +110,7 @@
     <string name="home_download_instructions_step3">Vänta tills nedladdningen är klar och &lt;b&gt;installera inte&lt;/b&gt; APK-filen</string>
     <string name="home_download_instructions_step3_mount">Vänta tills nedladdningen är klar och &lt;b&gt;installera sedan APK-filen&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Öppna Morphe igen när nedladdningen har slutförts</string>
-    <string name="home_download_instructions_step4_mount"> Öppna Morphe igen när du har installerat original-APK-filen</string>
+    <string name="home_download_instructions_step4_mount"> Öppna Morphe igen när du har installerat den ursprungliga APK-filen</string>
     <string name="home_download_instructions_continue">Fortsätt till APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Välj den nedladdade APK-filen</string>
@@ -209,12 +209,12 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_remove_app_warning">Detta raderar följande permanent:</string>
     <string name="home_app_info_delete_item_database">Databaspost</string>
     <string name="home_app_info_delete_item_patched_apk">Modifierad APK-fil</string>
-    <string name="home_app_info_delete_item_original_apk">Original-APK-fil</string>
+    <string name="home_app_info_delete_item_original_apk">Ursprunglig APK-fil</string>
     <string name="home_app_info_delete_preservation_note">Ditt tilläggsurval och dess inställningar sparas för framtida modifiering</string>
     <string name="home_app_info_patches_name_default">Tillägg</string>
     <string name="home_app_info_patches_name_fallback">Namnlös</string>
     <string name="home_app_info_patches_replace_fail">Det gick inte att importera tillägg: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Original-APK-filen hittades inte. Det går inte att modifiera den här appen igen</string>
+    <string name="home_app_info_repatch_no_original_apk">Den ursprungliga APK-filen hittades inte. Det går inte att modifiera den här appen igen</string>
     <string name="home_app_info_original_package_name">Ursprungligt paketnamn</string>
     <string name="home_app_info_applied_patches">Tillämpade tillägg</string>
     <string name="home_app_info_patch_source_used">Tilläggskälla som används</string>
@@ -228,7 +228,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Modifiera den igen för att återställa funktionaliteten</string>
     <string name="home_app_info_apk_size">Storlek på APK-fil</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Rotläget kräver att original-APK-filen är installerad på din enhet innan du modifierar appen</string>
+    <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan du modifierar appen</string>
     <string name="root_gmscore_excluded">Tillägget för GmsCore-stöd exkluderas i rotläge</string>
     <string name="root_pre_patch_installer_title">Välj installationsmetod</string>
     <string name="root_pre_patch_installer_description">Din enhet har rotåtkomst. Välj hur du vill installera den modifierade appen</string>
@@ -238,7 +238,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="root_pre_patch_installer_standard_description">Installera som en separat app med stöd för GmsCore. Välj en installerare (Systemets installerare, Shizuku med flera) efter modifieringen</string>
     <string name="root_pre_patch_installer_hint">Installationsmetoden bestämmer vilka tillägg som ingår och kan inte ändras efter modifieringen</string>
     <!-- Patcher Screen -->
-    <string name="patcher_error_copied">Fel kopierat till urklipp</string>
+    <string name="patcher_error_copied">Felmeddelande kopierat till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
     <string name="patcher_error_technical">Teknisk information</string>
     <string name="patcher_error_dialog_app_info">Appinformation</string>
@@ -599,12 +599,12 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patched_apks_delete_confirm">Är du säker på att du vill radera den sparade modifierade APK-filen för %s?</string>
     <string name="settings_system_patched_apks_deleted">Modifierad APK-fil har raderats</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
-    <string name="settings_system_original_apks_title">Original-APK-filer</string>
-    <string name="settings_system_original_apks_description">Original-APK-filer sparas för att kunna modifieras igen. Endast den senaste versionen sparas för varje app</string>
-    <string name="settings_system_original_apks_empty">Inga original-APK-filer lagras</string>
-    <string name="settings_system_original_apks_deleted">Original-APK-fil har raderats</string>
-    <string name="settings_system_original_apks_delete_title">Radera original-APK-fil?</string>
-    <string name="settings_system_original_apks_delete_confirm">Radera original-APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
+    <string name="settings_system_original_apks_title">Ursprungliga APK-filer</string>
+    <string name="settings_system_original_apks_description">Ursprungliga APK-filer sparas för att kunna modifieras igen. Endast den senaste versionen sparas för varje app</string>
+    <string name="settings_system_original_apks_empty">Inga ursprungliga APK-filer lagras</string>
+    <string name="settings_system_original_apks_deleted">Ursprunglig APK-fil har tagits bort</string>
+    <string name="settings_system_original_apks_delete_title">Radera ursprunglig APK-fil?</string>
+    <string name="settings_system_original_apks_delete_confirm">Radera den ursprungliga APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tilläggsurval</string>
     <string name="settings_system_patch_selections_description">Hantera sparade tilläggsurval och tilläggsalternativ. Dessa blir kvar om appar avinstalleras</string>

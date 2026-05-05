@@ -260,6 +260,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_ready_to_install_subtitle">Bấm nút bên dưới để cài đặt</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
     <string name="patcher_storage_permission_dialog_title">Không thể truy cập đường dẫn bộ nhớ</string>
+    <string name="patcher_incompatible_patcher_title">Cần cập nhật</string>
+    <string name="patcher_incompatible_patcher_description">Gói \"%1$s\" yêu cầu phiên bản trình vá Morphe %2$s trở lên. Vui lòng cập nhật Morphe để vá ứng dụng này</string>
+    <string name="patcher_incompatible_patcher_update_button">Tải xuống và cập nhật Morphe</string>
     <string name="patcher_storage_permission_description_api30">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến thư mục mà Morphe không thể truy cập. Hãy cấp quyền truy cập bộ nhớ, sau đó bấm nút và quá trình vá sẽ tự động bắt đầu</string>
     <string name="patcher_storage_permission_description_legacy">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến đường dẫn không thể truy cập. Hãy cập nhật lại đường dẫn trong phần tuỳ chỉnh bản vá và thử lại</string>
     <string name="patcher_storage_permission_grant">Cấp quyền truy cập bộ nhớ</string>

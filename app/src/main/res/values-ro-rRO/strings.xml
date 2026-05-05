@@ -260,6 +260,9 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patcher_ready_to_install_subtitle">Apasă butonul de mai jos pentru instalare</string>
     <string name="patcher_ready_to_mount_subtitle">Apăsați butonul de mai jos pentru a monta</string>
     <string name="patcher_storage_permission_dialog_title">Nu se poate accesa calea de stocare</string>
+    <string name="patcher_incompatible_patcher_title">Actualizare necesară</string>
+    <string name="patcher_incompatible_patcher_description">Pachetul \"%1$s\" necesită versiunea patcher-ului %2$s sau o versiune mai recentă. Vă rugăm să actualizați Morphe pentru a aplica patch acestui app</string>
+    <string name="patcher_incompatible_patcher_update_button">Descărcă și actualizează Morphe</string>
     <string name="patcher_storage_permission_description_api30">Una sau mai multe opțiuni de patch indică către căi pe care Morphe nu le poate citi. Acordă acces la stocare și atinge butonul, apoi patch-uirea va începe automat</string>
     <string name="patcher_storage_permission_description_legacy">Una sau mai multe opțiuni de patch indică căi de stocare care nu pot fi accesate. Actualizați căile în opțiunile de patch și încercați din nou</string>
     <string name="patcher_storage_permission_grant">Acordați permisiunea de stocare</string>

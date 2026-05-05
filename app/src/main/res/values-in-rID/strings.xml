@@ -261,6 +261,9 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patcher_ready_to_install_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
     <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
+    <string name="patcher_incompatible_patcher_title">Pembaruan diperlukan</string>
+    <string name="patcher_incompatible_patcher_description">Bundle \"%1$s\" memerlukan versi patcher %2$s atau lebih baru. Silakan perbarui Morphe untuk menambal aplikasi ini</string>
+    <string name="patcher_incompatible_patcher_update_button">Unduh dan perbarui Morphe</string>
     <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tambalan yang mengarah pada jalur Morphe tidak dapat dibaca. Beri akses penyimpanan dan ketuk tombol lalu penambalan akan dimulai secara otomatis</string>
     <string name="patcher_storage_permission_description_legacy">Satu atau lebih pilihan tambalan yang mengarah ke jalur yang tidak dapat diakses. Perbarui jalur dalam pilihan tambalan dan coba lagi</string>
     <string name="patcher_storage_permission_grant">Beri izin penyimpanan</string>

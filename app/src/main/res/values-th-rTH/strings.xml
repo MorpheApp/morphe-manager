@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">กดปุ่มด้านล่างเพื่อติดตั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
     <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
+    <string name="patcher_incompatible_patcher_title">จำเป็นต้องอัปเดต</string>
+    <string name="patcher_incompatible_patcher_description">ชุดข้อมูล \"%1$s\" จำเป็นต้องใช้แพตเชอร์เวอร์ชัน %2$s หรือใหม่กว่า โปรดอัปเดต Morphe เพื่อแพตช์แอปนี้</string>
+    <string name="patcher_incompatible_patcher_update_button">ดาวน์โหลดและอัปเดต Morphe</string>
     <string name="patcher_storage_permission_description_api30">ตัวเลือกแพตช์อย่างน้อยหนึ่งรายการชี้ไปยังพาธที่ Morphe ไม่สามารถอ่านได้ ให้สิทธิ์การเข้าถึงพื้นที่เก็บข้อมูลและแตะปุ่ม จากนั้นการแพตช์จะเริ่มทำงานโดยอัตโนมัติ</string>
     <string name="patcher_storage_permission_description_legacy">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ไม่สามารถเข้าถึงได้ อัปเดตเส้นทางในตัวเลือกการปรับปรุงและลองใหม่อีกครั้ง</string>
     <string name="patcher_storage_permission_grant">ยืนยันสิทธิ์การเข้าถึงเก็บข้อมูล</string>

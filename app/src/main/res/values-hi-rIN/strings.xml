@@ -260,6 +260,9 @@
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_storage_permission_dialog_title">स्तोरेज पथ तक पहुंच नहीं हो सकती है</string>
+    <string name="patcher_incompatible_patcher_title">अपडेट आवश्यक है</string>
+    <string name="patcher_incompatible_patcher_description">बंडल \"%1$s\" को पैचर संस्करण %2$s या उसके बाद के संस्करण की आवश्यकता है। कृपया इस ऐप को पैच करने के लिए मोर्फ़े को अपडेट करें।</string>
+    <string name="patcher_incompatible_patcher_update_button">डाउनलोड करें और मोर्फ़ अपडेट करें</string>
     <string name="patcher_storage_permission_description_api30">एक या अधिक पैच विकल्प ऐसे पथों की ओर इशारा करते हैं जिन्हें मोर्फे नहीं पढ़ सकता है। स्टोरेज एक्सेस प्रदान करें और बटन पर टैप करें, फिर पैचिंग स्वचालित रूप से शुरू हो जाएगी</string>
     <string name="patcher_storage_permission_description_legacy">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो पहुंच नहीं हो सकती है। पैच ऑप्शन में पथ्स को अद्यतन करें और पुन: प्रयास करें</string>
     <string name="patcher_storage_permission_grant">स्टोरेज अनुमति प्रदान करें</string>
