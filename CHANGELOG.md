@@ -1,3 +1,15 @@
+# [1.17.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.16.1-dev.1...v1.17.0-dev.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* Changelog sometimes missing in update dialog ([aca670c](https://github.com/MorpheApp/morphe-manager/commit/aca670c4293b5cae2d923ab1ea8c0789954249e1))
+
+
+### Features
+
+* Block patching when bundle requires newer patcher ([e136ec6](https://github.com/MorpheApp/morphe-manager/commit/e136ec663821ba660d9c184b007b29f3c7f5a946))
+
 ## [1.16.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0...v1.16.1-dev.1) (2026-05-05)
 
 
