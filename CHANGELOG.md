@@ -1,3 +1,10 @@
+## [1.16.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0...v1.16.1-dev.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* Show patch option descriptions in options dialog ([25a9916](https://github.com/MorpheApp/morphe-manager/commit/25a991690531e80c5ab8076edd8624bd2301ede4))
+
 # [1.16.0](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0...v1.16.0) (2026-05-04)
 
 
