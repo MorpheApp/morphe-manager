@@ -416,8 +416,8 @@ class MorpheAPI(
     }
 
     /** Fetches and parses the manager's CHANGELOG.md from the appropriate branch. */
-    suspend fun fetchManagerChangelog(): List<ChangelogEntry> {
-        val branch = if (isDevBuild) "dev" else "main"
+    suspend fun fetchManagerChangelog(forDevBranch: Boolean = isDevBuild): List<ChangelogEntry> {
+        val branch = if (forDevBranch) "dev" else "main"
         return fetchChangelogFromRepo(managerConfig, branch, "CHANGELOG.md")
     }
 
@@ -447,7 +447,10 @@ class MorpheAPI(
     ): List<ChangelogEntry> {
         val url = config.rawFileUrl(branch, path)
         Log.d(tag, "fetchChangelog: $url")
-        return when (val r = client.request<String> { url(url) }) {
+        return when (val r = client.request<String> {
+            url(url)
+            header("Cache-Control", "no-cache")
+        }) {
             is APIResponse.Success -> ChangelogParser.parse(r.data)
             is APIResponse.Error, is APIResponse.Failure -> {
                 Log.w(tag, "Failed to fetch $path for ${config.name}@$branch")
