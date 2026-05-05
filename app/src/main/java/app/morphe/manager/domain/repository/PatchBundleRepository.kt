@@ -409,11 +409,12 @@ class PatchBundleRepository(
         val metadata = map.mapNotNull { (bundle, src) ->
             try {
                 src.uid to PatchBundleInfo.Global(
-                    src.displayTitle,
-                    bundle.manifestAttributes?.version,
-                    src.uid,
-                    src.enabled,
-                    PatchBundle.Loader.metadata(bundle)
+                    name = src.displayTitle,
+                    version = bundle.manifestAttributes?.version,
+                    uid = src.uid,
+                    enabled = src.enabled,
+                    patches = PatchBundle.Loader.metadata(bundle),
+                    patcherVersion = bundle.manifestAttributes?.patcherVersion,
                 )
             } catch (error: Throwable) {
                 failures += src.uid to error

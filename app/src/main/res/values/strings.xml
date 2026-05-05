@@ -283,6 +283,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
+    <string name="patcher_incompatible_patcher_title">Update required</string>
+    <string name="patcher_incompatible_patcher_description">The bundle \"%1$s\" requires patcher version %2$s or newer. Please update Morphe to patch this app</string>
+    <string name="patcher_incompatible_patcher_update_button">Download and update Morphe</string>
     <string name="patcher_storage_permission_description_api30">One or more patch options point to paths Morphe cannot read. Grant storage access and tap the button then patching will start automatically</string>
     <string name="patcher_storage_permission_description_legacy">One or more patch options point to paths that cannot be accessed. Update the paths in patch options and try again</string>
     <string name="patcher_storage_permission_grant">Grant storage permission</string>

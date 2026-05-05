@@ -38,15 +38,75 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.util.MORPHE_WEBSITE_URL
 import app.morphe.manager.util.PathValidationResult
 import app.morphe.manager.util.toast
 
 
 /**
- * Cancel patching confirmation dialog
- * Warns user about stopping patching process
+ * Shown when a patch bundle requires a newer version of morphe-patcher than the one
+ * bundled in this version of the manager. Directs the user to the website to update.
+ */
+@Composable
+fun IncompatiblePatcherVersionDialog(
+    bundleName: String,
+    requiredVersion: String,
+    onDismiss: () -> Unit,
+) {
+    val context = LocalContext.current
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.patcher_incompatible_patcher_title),
+        footer = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                MorpheDialogButton(
+                    text = stringResource(R.string.patcher_incompatible_patcher_update_button),
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, MORPHE_WEBSITE_URL.toUri())
+                        context.startActivity(intent)
+                    },
+                    icon = Icons.Outlined.SystemUpdate,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+    ) {
+        val secondaryColor = LocalDialogSecondaryTextColor.current
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = stringResource(
+                    R.string.patcher_incompatible_patcher_description,
+                    bundleName,
+                    requiredVersion
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = secondaryColor,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+/**
+ * Cancel patching confirmation dialog.
+ * Warns user about stopping patching process.
  */
 @Composable
 fun CancelPatchingDialog(
