@@ -907,21 +907,46 @@ private fun PatchOptionsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(0.dp)
         ) {
+            // Patch description
             if (!patch.description.isNullOrBlank()) {
                 Text(
                     text = patch.description,
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current
                 )
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 12.dp),
+                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                    thickness = 0.5.dp
+                )
             }
 
             if (patch.options == null) return@Column
 
-            patch.options.forEach { option ->
+            // Patch options
+            patch.options.forEachIndexed { index, option ->
                 val key   = option.key
                 val value = if (values == null || key !in values) option.default else values[key]
+
+                if (index > 0) {
+                    val prevOption = patch.options[index - 1]
+                    val prevValue = if (values == null || prevOption.key !in values) prevOption.default else values[prevOption.key]
+                    val bothBooleans = resolveOptionKind(option, value) == OptionKind.BooleanToggle &&
+                            resolveOptionKind(prevOption, prevValue) == OptionKind.BooleanToggle
+                    // Consecutive boolean toggles get a small spacer instead of a divider.
+                    // Dividers between toggles look redundant since each toggle is already a distinct row
+                    if (bothBooleans) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                    } else {
+                        HorizontalDivider(
+                            modifier = Modifier.padding(vertical = 12.dp),
+                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                            thickness = 0.5.dp
+                        )
+                    }
+                }
 
                 when (resolveOptionKind(option, value)) {
                     OptionKind.StringList -> ListStringInputOption(
@@ -991,6 +1016,7 @@ private fun PatchOptionsDialog(
 
                     OptionKind.StringText -> TextInputOption(
                         title = option.title,
+                        description = option.description,
                         value = value?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Text,
@@ -1012,6 +1038,7 @@ private fun PatchOptionsDialog(
 
                     OptionKind.IntLong -> TextInputOption(
                         title = option.title,
+                        description = option.description,
                         value = (value as? Number)?.toLong()?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Number,
@@ -1020,6 +1047,7 @@ private fun PatchOptionsDialog(
 
                     OptionKind.FloatDouble -> TextInputOption(
                         title = option.title,
+                        description = option.description,
                         value = (value as? Number)?.toFloat()?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Decimal,
@@ -1477,6 +1505,7 @@ private fun PathWithPresetsOption(
 @Composable
 private fun TextInputOption(
     title: String,
+    description: String = "",
     value: String,
     required: Boolean = false,
     keyboardType: KeyboardType,
@@ -1509,6 +1538,15 @@ private fun TextInputOption(
             showClearButton = true,
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
         )
+
+        // Patch option description
+        if (description.isNotBlank()) {
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                color = LocalDialogSecondaryTextColor.current
+            )
+        }
     }
 }
 
