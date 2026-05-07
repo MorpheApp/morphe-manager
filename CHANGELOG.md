@@ -1,3 +1,10 @@
+# [1.17.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2026-05-07)
+
+
+### Bug Fixes
+
+* Detect `Shizuku` in stealth mode via permission lookup ([67d3ef4](https://github.com/MorpheApp/morphe-manager/commit/67d3ef4bb63a4382826187a35345a13302875783))
+
 # [1.17.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.16.1-dev.1...v1.17.0-dev.1) (2026-05-05)
 
 
