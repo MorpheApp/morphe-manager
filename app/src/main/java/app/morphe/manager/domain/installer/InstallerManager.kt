@@ -309,7 +309,7 @@ class InstallerManager(
             label = app.getString(R.string.installer_shizuku_name),
             description = app.getString(R.string.installer_shizuku_description),
             availability = availabilityFor(Token.Shizuku, target, checkRoot),
-            icon = if (sessionInstaller.isShizukuInstalled()) loadInstallerIcon(ShizukuInstaller.PACKAGE_NAME) else null
+            icon = sessionInstaller.shizukuPackageName()?.let { loadInstallerIcon(it) }
         )
 
         is Token.Component -> {
