@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -53,6 +54,8 @@ import app.morphe.manager.util.*
 import kotlinx.coroutines.flow.mapNotNull
 import org.koin.compose.koinInject
 
+private val ColorValid = Color(0xFF4CAF50)
+
 /**
  * Dialog for adding patch bundles.
  */
@@ -63,13 +66,16 @@ fun AddSourceDialog(
     onLocalSubmit: () -> Unit,
     onRemoteSubmit: (url: String) -> Unit,
     onLocalPick: () -> Unit,
-    selectedLocalPath: String?
+    selectedLocalPath: String?,
+    onValidateUrl: (String) -> Boolean
 ) {
     var remoteUrl by rememberSaveable { mutableStateOf("") }
     var selectedTab by rememberSaveable { mutableIntStateOf(0) } // 0 = Remote, 1 = Local
 
-    val isRemoteValid = remoteUrl.isNotBlank()
-    val isLocalValid = selectedLocalPath != null
+    val urlValidation = rememberUrlValidation(remoteUrl, onValidateUrl)
+    val isRemoteValid = remoteUrl.isNotBlank() && urlValidation != FieldValidation.Invalid
+    val localFileValidation = rememberLocalFileValidation(selectedLocalPath)
+    val isLocalValid = localFileValidation == FieldValidation.Valid
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -79,10 +85,7 @@ fun AddSourceDialog(
                 primaryText = stringResource(R.string.add),
                 onPrimaryClick = {
                     when (selectedTab) {
-                        0 -> if (isRemoteValid) {
-                            val normalizedUrl = normalizeUrl(remoteUrl)
-                            onRemoteSubmit(normalizedUrl)
-                        }
+                        0 -> if (isRemoteValid) onRemoteSubmit(normalizeUrl(remoteUrl))
                         1 -> if (isLocalValid) onLocalSubmit()
                     }
                 },
@@ -96,71 +99,79 @@ fun AddSourceDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Tabs
-            Surface(
-                shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+            // Type selector cards
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    listOf(
-                        stringResource(R.string.sources_dialog_remote),
-                        stringResource(R.string.sources_dialog_local)
-                    ).forEachIndexed { index, title ->
-                        val isSelected = selectedTab == index
-
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(48.dp)
-                                .clickable { selectedTab = index }
+                listOf(
+                    0 to (stringResource(R.string.sources_dialog_remote) to Icons.Outlined.Language),
+                    1 to (stringResource(R.string.sources_dialog_local) to Icons.AutoMirrored.Outlined.InsertDriveFile)
+                ).forEach { (index, pair) ->
+                    val (label, icon) = pair
+                    val isSelected = selectedTab == index
+                    Surface(
+                        modifier = Modifier
+                            .weight(1f)
+                            .clickable { selectedTab = index },
+                        shape = RoundedCornerShape(16.dp),
+                        color = if (isSelected)
+                            MaterialTheme.colorScheme.surfaceVariant
+                        else
+                            Color.Transparent,
+                        border = androidx.compose.foundation.BorderStroke(
+                            width = if (isSelected) 1.5.dp else 0.5.dp,
+                            color = if (isSelected)
+                                LocalDialogTextColor.current.copy(alpha = 0.5f)
+                            else
+                                LocalDialogTextColor.current.copy(alpha = 0.2f)
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(14.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Surface(
-                                shape = RoundedCornerShape(8.dp),
-                                color = if (isSelected)
-                                    MaterialTheme.colorScheme.primary
+                            Icon(
+                                imageVector = icon,
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp),
+                                tint = if (isSelected)
+                                    LocalDialogTextColor.current
                                 else
-                                    Color.Transparent,
-                                modifier = Modifier.fillMaxSize()
-                            ) {}
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier.fillMaxSize()
-                            ) {
-                                Text(
-                                    text = title,
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    fontWeight = if (isSelected)
-                                        FontWeight.Bold
-                                    else
-                                        FontWeight.Normal,
-                                    color = if (isSelected)
-                                        MaterialTheme.colorScheme.onPrimary
-                                    else
-                                        LocalDialogTextColor.current
-                                )
-                            }
+                                    LocalDialogTextColor.current.copy(alpha = 0.4f)
+                            )
+                            Text(
+                                text = label,
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                                color = if (isSelected)
+                                    LocalDialogTextColor.current
+                                else
+                                    LocalDialogTextColor.current.copy(alpha = 0.5f)
+                            )
                         }
                     }
                 }
             }
 
-            // Tabs content
+            // Tab content
             AnimatedContent(
                 targetState = selectedTab,
                 transitionSpec = {
-                    fadeIn(animationSpec = tween(200)).togetherWith(fadeOut(animationSpec = tween(200)))
+                    MorpheAnimations.fadeIn.togetherWith(MorpheAnimations.fadeOut)
                 }
             ) { tab ->
                 when (tab) {
                     0 -> RemoteTabContent(
                         remoteUrl = remoteUrl,
-                        onUrlChange = { remoteUrl = it }
+                        onUrlChange = { remoteUrl = it },
+                        urlValidation = urlValidation
                     )
                     1 -> LocalTabContent(
                         selectedPath = selectedLocalPath,
-                        onPickFile = onLocalPick
+                        onPickFile = onLocalPick,
+                        validation = localFileValidation
                     )
                 }
             }
@@ -168,31 +179,63 @@ fun AddSourceDialog(
     }
 }
 
+private enum class FieldValidation { Empty, Valid, Invalid }
+
+@Composable
+private fun rememberUrlValidation(url: String, validate: (String) -> Boolean): FieldValidation =
+    remember(url) {
+        when {
+            url.isBlank() -> FieldValidation.Empty
+            validate(url) -> FieldValidation.Valid
+            else -> FieldValidation.Invalid
+        }
+    }
+
 @Composable
 private fun RemoteTabContent(
     remoteUrl: String,
-    onUrlChange: (String) -> Unit
+    onUrlChange: (String) -> Unit,
+    urlValidation: FieldValidation,
 ) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        // URL input
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            MorpheDialogTextField(
-                value = remoteUrl,
-                onValueChange = onUrlChange,
-                label = {
-                    Text(stringResource(R.string.sources_dialog_remote_url))
-                },
-                placeholder = {
-                    Text(text = "https://github.com/owner/repo")
-                },
-                showClearButton = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri)
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        MorpheDialogTextField(
+            value = remoteUrl,
+            onValueChange = onUrlChange,
+            label = { Text(stringResource(R.string.sources_dialog_remote_url)) },
+            placeholder = { Text("https://github.com/owner/repo") },
+            showClearButton = true,
+            isError = urlValidation == FieldValidation.Invalid,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Uri,
+                imeAction = ImeAction.Done
             )
+        )
+
+        // Live validation feedback
+        AnimatedVisibility(visible = urlValidation != FieldValidation.Empty) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                val (icon, color, text) = when (urlValidation) {
+                    FieldValidation.Valid -> Triple(
+                        Icons.Outlined.CheckCircle,
+                        ColorValid,
+                        stringResource(R.string.sources_dialog_url_valid)
+                    )
+                    FieldValidation.Invalid -> Triple(
+                        Icons.Outlined.ErrorOutline,
+                        MaterialTheme.colorScheme.error,
+                        stringResource(R.string.sources_dialog_url_invalid)
+                    )
+                    FieldValidation.Empty -> Triple(Icons.Outlined.Info, Color.Transparent, "")
+                }
+                Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(15.dp))
+                Text(text, style = MaterialTheme.typography.bodySmall, color = color)
+            }
         }
 
-        // Description
+        // URL format hint
         InfoBadge(
             icon = Icons.Outlined.Info,
             text = stringResource(R.string.sources_dialog_remote_url_formats_title) +
@@ -203,39 +246,119 @@ private fun RemoteTabContent(
 }
 
 @Composable
+private fun rememberLocalFileValidation(path: String?): FieldValidation = remember(path) {
+    if (path == null) return@remember FieldValidation.Empty
+    val fileName = path.toUri().lastPathSegment ?: ""
+    if (!fileName.endsWith(".mpp", ignoreCase = true)) FieldValidation.Invalid
+    else FieldValidation.Valid
+}
+
+@Composable
 private fun LocalTabContent(
     selectedPath: String?,
-    onPickFile: () -> Unit
+    onPickFile: () -> Unit,
+    validation: FieldValidation
 ) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        // File picker button
-        MorpheDialogButton(
-            text = if (selectedPath == null) {
-                stringResource(R.string.sources_dialog_local_file)
-            } else {
-                stringResource(R.string.sources_dialog_local_change_file)
-            },
-            onClick = onPickFile,
-            icon = Icons.Outlined.FolderOpen,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        // Selected file path
-        if (selectedPath != null) {
-            InfoBadge(
-                icon = null,
-                text = selectedPath.toUri().toFilePath(),
-                style = InfoBadgeStyle.Default
-            )
+    val textColor = LocalDialogTextColor.current
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        if (selectedPath == null) {
+            // Drop zone
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onPickFile() },
+                shape = RoundedCornerShape(16.dp),
+                color = Color.Transparent,
+                border = androidx.compose.foundation.BorderStroke(
+                    1.dp, textColor.copy(alpha = 0.15f)
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(vertical = 28.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Upload,
+                        contentDescription = null,
+                        modifier = Modifier.size(28.dp),
+                        tint = textColor.copy(alpha = 0.4f)
+                    )
+                    Text(
+                        text = stringResource(R.string.sources_dialog_local_file),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                        color = textColor
+                    )
+                    Text(
+                        text = stringResource(R.string.sources_dialog_local_file_tap_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = textColor.copy(alpha = 0.4f)
+                    )
+                }
+            }
+        } else {
+            // Selected file
+            val isValid = validation == FieldValidation.Valid
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = if (isValid)
+                    MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+                else
+                    MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isValid) Icons.Outlined.CheckCircle else Icons.Outlined.ErrorOutline,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = if (isValid) ColorValid else MaterialTheme.colorScheme.error
+                    )
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = selectedPath.toUri().toFilePath().substringAfterLast("/"),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium,
+                            color = textColor,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = when (validation) {
+                                FieldValidation.Invalid -> stringResource(R.string.sources_dialog_local_invalid_extension)
+                                else -> selectedPath.toUri().toFilePath().substringBeforeLast("/")
+                            },
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (isValid) textColor.copy(alpha = 0.5f) else MaterialTheme.colorScheme.error,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    IconButton(
+                        onClick = onPickFile,
+                        modifier = Modifier.size(40.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Refresh,
+                            contentDescription = stringResource(R.string.sources_dialog_local_change_file),
+                            modifier = Modifier.size(24.dp),
+                            tint = textColor.copy(alpha = 0.5f)
+                        )
+                    }
+                }
+            }
         }
 
         // Description
         InfoBadge(
             icon = Icons.Outlined.Info,
             text = stringResource(R.string.sources_dialog_local_file_description),
-            style = InfoBadgeStyle.Success
+            style = InfoBadgeStyle.Default
         )
     }
 }

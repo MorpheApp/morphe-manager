@@ -1136,7 +1136,7 @@ class PatchBundleRepository(
         }
     }
 
-    private fun normalizeRemoteBundleUrl(input: String): String {
+    fun normalizeRemoteBundleUrl(input: String): String {
         val trimmed = input.trim()
         val parsed = try {
             Url(trimmed)
