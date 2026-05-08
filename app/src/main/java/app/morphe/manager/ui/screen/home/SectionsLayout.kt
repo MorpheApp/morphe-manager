@@ -2235,10 +2235,7 @@ internal fun HideAppDialog(
 
             // Explanation text
             Text(
-                text = stringResource(
-                    R.string.home_app_hide_message,
-                    stringResource(R.string.home_app_show_hidden)
-                ),
+                text = stringResource(R.string.home_app_hide_message),
                 style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogSecondaryTextColor.current,
                 textAlign = TextAlign.Center

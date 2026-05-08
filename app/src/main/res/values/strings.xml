@@ -4,7 +4,7 @@
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
     <string name="home_app_hide_title">Hide this app?</string>
-    <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later using the \'%s\' button at the bottom of the list</string>
+    <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later from the hidden apps using the button at the bottom of the list</string>
     <string name="home_app_will_be_hidden">This app will be hidden</string>
     <string name="home_app_show_hidden">Show hidden apps</string>
     <string name="home_app_no_hidden">No hidden apps</string>
