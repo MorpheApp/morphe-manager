@@ -1,3 +1,11 @@
+# [1.17.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2026-05-08)
+
+
+### Features
+
+* Improve patch bundle error handling and UI feedback ([262a2c6](https://github.com/MorpheApp/morphe-manager/commit/262a2c6fc5f2a596427200eb9c15c091e178f49e))
+* Redesign `Add source` dialog and improve bundle error handling ([8196578](https://github.com/MorpheApp/morphe-manager/commit/81965788109ecde8806e9113f1febac3deb3f040))
+
 # [1.17.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2026-05-07)
 
 
