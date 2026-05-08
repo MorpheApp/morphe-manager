@@ -96,6 +96,9 @@ class PatchBundleRepository(
     private val manualUpdateInfoFlow = MutableStateFlow<Map<Int, ManualBundleUpdateInfo>>(emptyMap())
     val manualUpdateInfo: StateFlow<Map<Int, ManualBundleUpdateInfo>> = manualUpdateInfoFlow.asStateFlow()
 
+    private val metadataFetchErrorsFlow = MutableStateFlow<Map<Int, Throwable>>(emptyMap())
+    val metadataFetchErrors: StateFlow<Map<Int, Throwable>> = metadataFetchErrorsFlow.asStateFlow()
+
     private val bundleUpdateProgressFlow = MutableStateFlow<BundleUpdateProgress?>(null)
     val bundleUpdateProgress: StateFlow<BundleUpdateProgress?> = bundleUpdateProgressFlow.asStateFlow()
 
@@ -706,7 +709,10 @@ class PatchBundleRepository(
                 info.remove(it.uid)
             }
 
-            val (affectedCount, remaining) = cancelRemoteUpdates(bundles.map { it.uid }.toSet())
+            val removedUids = bundles.map { it.uid }.toSet()
+            metadataFetchErrorsFlow.update { it - removedUids }
+
+            val (affectedCount, remaining) = cancelRemoteUpdates(removedUids)
             updateProgressAfterRemoval(affectedCount, remaining)
 
             ready.copy(sources = sources.toPersistentMap(), info = info.toPersistentMap())
@@ -1036,8 +1042,9 @@ class PatchBundleRepository(
             val normalizedUrl = try {
                 normalizeRemoteBundleUrl(url)
             } catch (e: IllegalArgumentException) {
+                Log.e(tag, "Invalid bundle URL: $url", e)
                 withContext(Dispatchers.Main) {
-                    app.toast(e.message ?: "Invalid bundle URL")
+                    app.toast(app.getString(R.string.sources_management_invalid_url))
                 }
                 return@dispatchAction state
             }
@@ -1125,7 +1132,7 @@ class PatchBundleRepository(
         ) {
             toast(R.string.sources_download_endpoint_not_found, bundle.displayTitle)
         } else {
-            toast(R.string.sources_download_fail_named, bundle.displayTitle, e.message ?: e.toString())
+            toast(R.string.sources_download_fail_named, bundle.displayTitle)
         }
     }
 
@@ -1546,10 +1553,14 @@ class PatchBundleRepository(
                     }
 
                     val result = try {
-                        if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
+                        val r = if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
+                        // Clear any previous metadata error on success
+                        metadataFetchErrorsFlow.update { it - bundle.uid }
+                        r
                     } catch (_: BundleUpdateCancelled) {
                         continue
                     } catch (e: Exception) {
+                        metadataFetchErrorsFlow.update { it + (bundle.uid to e) }
                         handleBundleDownloadError(e, bundle)
                         continue
                     }
