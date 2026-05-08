@@ -5,7 +5,6 @@
     <string name="home_not_patched_yet">Belum ditampal lagi</string>
     <string name="home_no_patches_available">Tiada tampalan tersedia</string>
     <string name="home_app_hide_title">Sorokkan aplikasi ini?</string>
-    <string name="home_app_hide_message">Aplikasi ini akan di sorokkan dari paparan utama. Anda boleh munculkan kembali menggunakan butang \'%1$s\' di akhir senarai</string>
     <string name="home_app_will_be_hidden">Aplikasi ini akan disorokkan</string>
     <string name="home_app_show_hidden">Tunjukkan aplikasi tersorok</string>
     <string name="home_app_no_hidden">Tiada aplikasi tersorok</string>
@@ -23,14 +22,14 @@
     <string name="home_update_skipped_metered">Kemas kini taraf dilangkau</string>
     <string name="home_update_skipped_metered_subtitle">Data mudah alih aktif</string>
     <string name="home_updating_sources">Kemas kini sumber-sumber… </string>
-    <string name="home_update_progress_format">%1$s proses</string>
+    <string name="home_update_progress_format">%s proses</string>
     <string name="home_update_success">Kemas kini sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber-sumbee anda adalah yang terkini</string>
     <string name="home_sources_are_loading">Sumber sedang di muat naik, sila tunggu… </string>
     <string name="home_search_apps">Cari aplikasi</string>
     <string name="home_no_apps_title">Tiada aplikasi tersedia</string>
     <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau benarkan yang sedia ada di %s</string>
-    <string name="home_no_apps_search_subtitle">Tiada aplikasi bersesuaian \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Tiada aplikasi bersesuaian \"%s\"</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang hendak kamu tampal? </string>
     <!-- Humorous hype message with light nostalgia -->
@@ -80,7 +79,6 @@
     <string name="sources_update_success">Kemas kini berjaya</string>
     <string name="sources_update_unavailable">Tiada kemas kini tersedia</string>
     <string name="sources_download_fail">Gagal untuk muat turun sumber: %s</string>
-    <string name="sources_download_endpoint_not_found">Tidak dapat di kemas kini \'%1$s\': fail tampalan JSON tidak dijumpai pada URL yang dikonfigurasikan</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Perlukan bantuan mencari APK asal yang belum ditampal?</string>
     <string name="home_apk_availability_dialog_simple">Untuk tampal &lt;b&gt;%s&lt;/b&gt;, anda perlukan versi APK yang belum ditampal</string>
@@ -94,7 +92,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Muat turun APK asal</string>
     <string name="home_download_instructions_steps_title">Arahan</string>
-    <string name="home_download_instructions_step1">Tekan butang \'%1$s\' dibawah</string>
+    <string name="home_download_instructions_step1">Tekan butang \'%s\' dibawah</string>
     <string name="home_download_instructions_step2_part1">Gerak ke bawah laman web dan tekan</string>
     <string name="home_download_instructions_download_button_toast">Tekan muat turun di laman web, dan bukan di sini 😊</string>
     <string name="home_download_instructions_step3">Tunggu untuk muat turun selesai, dan &lt;b&gt;jangan muat turun&lt;/b&gt; APK itu</string>
@@ -104,7 +102,7 @@
     <string name="home_download_instructions_continue">Teruskan ke APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Pilih APK yang telah dimuat turun</string>
-    <string name="home_file_picker_prompt_description">Pilih fail APK &lt;b&gt;%1$s&lt;/b&gt; yang baru anda muat turun</string>
+    <string name="home_file_picker_prompt_description">Pilih fail APK &lt;b&gt;%s&lt;/b&gt; yang baru anda muat turun</string>
     <string name="home_file_picker_prompt_open_apk">Buka fail APK</string>
     <string name="home_recommended_version">Versi yang disyorkan</string>
     <string name="home_selected_version">Versi terpilih</string>
@@ -297,7 +295,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patched_app_saved_toast">Aplikasi telah ditampal disimpan untuk lain kali</string>
     <string name="patched_app_save_failed_toast">Gagal untuk menyimpan aplikasi yang telah ditampal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk meneruskan dengan pemalam ini</string>
-    <string name="patcher_process_exit_message">Proses penampalan keluar dengan kod %1$s</string>
+    <string name="patcher_process_exit_message">Proses penampalan keluar dengan kod %s</string>
     <string name="install_app_success">Pemasangan berjaya</string>
     <string name="install_app_fail">Gagal untuk dipasang: %s</string>
     <string name="save_apk_success">APK tersimpan</string>
@@ -348,7 +346,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_appearance_app_icon_dark_2">Sunyi</string>
     <string name="settings_appearance_app_icon_dark_3">Ungu</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Tukar ikon aplikasi?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Tukar kepada \'%1$s\' dan mulakan semula?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Tukar ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Kemas kini</string>
@@ -370,7 +367,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Kemas kini Morphie tersedia</string>
     <string name="notification_bundle_update_title">Tampalan baharu tersedia</string>
-    <string name="notification_update_text">Versi %1$s sedia untuk dimuat turun</string>
+    <string name="notification_update_text">Versi %s sedia untuk dimuat turun</string>
     <string name="notification_bundle_update_text_unversioned">Tekan untuk buka Morphe dan kemas kini</string>
     <string name="notification_permission_dialog_title">Benarkan notifikasi</string>
     <string name="notification_permission_dialog_description">Morphe memerlukan kebenaran notifikasi untuk memberitahu anda apabila kemas kini tersedia di latar belakang</string>
@@ -496,9 +493,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan disekat oleh Android. Periksa Play Protect atau tetapan keselamatan</string>
     <string name="installer_hint_conflict">Satu lagi aplikasi dengan nama pakej ini sudah dipasang.</string>
-    <string name="installer_external_launched">Membuka %1$s…</string>
-    <string name="installer_external_timeout">%1$s tidak mengesahkan pemasangan. Periksa aplikasi lain dan cuba lagi</string>
-    <string name="installer_external_success">%1$s melaporkan pemasangan berjaya</string>
     <string name="installer_unavailable_title">%s tidak tersedia</string>
     <string name="installer_unavailable_message">Pemasang pilihan anda (%s) tidak tersedia pada masa ini. Anda boleh memperbaiki isu itu dan cuba lagi, atau gunakan pemasang standard sebagai gantinya</string>
     <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin telah diberikan kepada aplikasi ini</string>

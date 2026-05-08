@@ -5,7 +5,6 @@
     <string name="home_not_patched_yet">هنوز پچ نشده </string>
     <string name="home_no_patches_available">هیچ پچ ای موجود نیست </string>
     <string name="home_app_hide_title">برنامه پنهان شود؟ </string>
-    <string name="home_app_hide_message">این برنامه از صفحه اصلی مخفی خواهد بود. بعدا می توانید آن را با استفاده از دکمه %1$s در انتهای لیست بازیابی کنید</string>
     <string name="home_app_will_be_hidden">این برنامه پنهان میشود</string>
     <string name="home_app_show_hidden">نمایش برنامه های پنهان شده</string>
     <string name="home_app_no_hidden">برنامه‌ی پنهانی ندارید</string>
@@ -23,7 +22,7 @@
     <string name="home_update_skipped_metered">به روزرسانی ها رد شدند </string>
     <string name="home_update_skipped_metered_subtitle">داده های موبایل فعال است </string>
     <string name="home_updating_sources">به روزرسانی منابع…</string>
-    <string name="home_update_progress_format">%1$s پردازش شده</string>
+    <string name="home_update_progress_format">%s پردازش شده</string>
     <string name="home_update_success">به روزرسانی منابع کامل شد</string>
     <string name="home_update_success_subtitle">منابع شما به روز هستند </string>
     <string name="home_sources_are_loading">منابع در حال بارگذاری هستند، لطفا صبر کنید…</string>
@@ -76,7 +75,6 @@
     <string name="sources_update_success">به روزرسانی موفقیت آمیز</string>
     <string name="sources_update_unavailable">هیچ به روزرسانی ای در دسترس نیست</string>
     <string name="sources_download_fail">دانلود منابع شکست خورد: %s</string>
-    <string name="sources_download_endpoint_not_found">نتوانست \'%1$s\' را به روزرسانی کند: فایل JSON پچ در URL پیکربندی شده یافت نشد</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">نیاز به کمک برای پیدا کردن یک APK اصلی و بدون پچ دارید؟</string>
     <string name="home_apk_availability_dialog_simple">برای پچ &lt;b&gt;%s&lt;/b&gt;، به نسخه APK بدون پچ نیاز دارید:</string>
@@ -90,7 +88,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">دانلود فایل apk اصلی</string>
     <string name="home_download_instructions_steps_title">دستورالعمل‌ها:</string>
-    <string name="home_download_instructions_step1">دکمه \'%1$s\' رو در پایین فشار بده</string>
+    <string name="home_download_instructions_step1">دکمه \'%s\' رو در پایین فشار بده</string>
     <string name="home_download_instructions_step2_part1">به آخر صفحه برو و بزن</string>
     <string name="home_download_instructions_download_button_toast">دکمه دانلود رو توی وبسایتش بزن، نه اینجا ☺️</string>
     <string name="home_download_instructions_step3">منتظر بمانید تا دانلود کامل شود، و فایل APK را &lt;b&gt;نصب نکنید&lt;/b&gt;.</string>
@@ -100,7 +98,7 @@
     <string name="home_download_instructions_continue">ادامه در APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">انتخاب APK دانلود شده</string>
-    <string name="home_file_picker_prompt_description">انتخاب &lt;b&gt;%1$s&lt;/b&gt; فایل APK که همین الان دانلود کردی</string>
+    <string name="home_file_picker_prompt_description">انتخاب &lt;b&gt;%s&lt;/b&gt; فایل APK که همین الان دانلود کردی</string>
     <string name="home_file_picker_prompt_open_apk">فایل APK را باز کنید</string>
     <string name="home_recommended_version">نسخه پیشنهادی</string>
     <string name="home_selected_version">نسخه منتخب</string>

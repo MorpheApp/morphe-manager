@@ -5,7 +5,6 @@
     <string name="home_not_patched_yet">Aínda non parcheado</string>
     <string name="home_no_patches_available">Non hai parches dispoñibles</string>
     <string name="home_app_hide_title">Ocultar esta aplicación?</string>
-    <string name="home_app_hide_message">Esta aplicación ocultarase da pantalla de inicio. Pode restaurala máis tarde empregando o botón %1$s na parte inferior da lista</string>
     <string name="home_app_will_be_hidden">Ocultarase esta aplicación</string>
     <string name="home_app_show_hidden">Mostrar aplicacións ocultas</string>
     <string name="home_app_no_hidden">Non hai aplicacións ocultas</string>
@@ -22,7 +21,7 @@
     <string name="home_update_skipped_metered">Actualizacións omitidas</string>
     <string name="home_update_skipped_metered_subtitle">Os datos móbiles están activados</string>
     <string name="home_updating_sources">Actualizando fontes…</string>
-    <string name="home_update_progress_format">%1$s procesado</string>
+    <string name="home_update_progress_format">%s procesado</string>
     <string name="home_update_success">Actualización de fontes completa</string>
     <string name="home_update_success_subtitle">As súas fontes están ao día</string>
     <string name="home_sources_are_loading">As fontes están a cargar, por favor agarde...</string>
@@ -84,7 +83,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descargar o APK orixinal</string>
     <string name="home_download_instructions_steps_title">Instrucións:</string>
-    <string name="home_download_instructions_step1">Prema o botón \'%1$s\' de abaixo</string>
+    <string name="home_download_instructions_step1">Prema o botón \'%s\' de abaixo</string>
     <string name="home_download_instructions_step2_part1">Desprácese cara abaixo no sitio web e pulse</string>
     <string name="home_download_instructions_download_button_toast">Prema ao botón de descarga no sitio web, e non aquí 😊</string>
     <string name="home_download_instructions_step4">Cando remate a descarga, regrese a Morphe</string>

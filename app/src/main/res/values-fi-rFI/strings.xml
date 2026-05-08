@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Ei vielä päivitetty</string>
     <string name="home_no_patches_available">Ei patcheja saatavilla</string>
     <string name="home_app_hide_title">Piilota tämä sovellus?</string>
-    <string name="home_app_hide_message">Tämä sovellus piilotetaan kotinäyliköstä. Voit palauttaa sen myöhemmin painamalla alimman listan nappia \'%1$s\'.</string>
+    <string name="home_app_hide_message">Tämä sovellus piilotetaan kotinäytöltä. Voit palauttaa sen myöhemmin piilotettujen sovellusten luettelosta luettelon alareunassa olevan painikkeen avulla.</string>
     <string name="home_app_will_be_hidden">Tämä sovellus piilotetaan</string>
     <string name="home_app_show_hidden">Näytä piilotetut sovellukset</string>
     <string name="home_app_no_hidden">Ei piilotettuja sovelluksia</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Päivitykset ohitettu</string>
     <string name="home_update_skipped_metered_subtitle">Liikenneverkko on aktiivinen</string>
     <string name="home_updating_sources">Päivitetään lähteitä…</string>
-    <string name="home_update_progress_format">%1$s onnistuttiin</string>
+    <string name="home_update_progress_format">%s käsitelty</string>
     <string name="home_update_success">Lähteiden päivitys valmis</string>
     <string name="home_update_success_subtitle">Lähteetsinä päivitety</string>
     <string name="home_sources_are_loading">Lähteet ladassa, odota…</string>
     <string name="home_search_apps">Sovellusten haku</string>
     <string name="home_no_apps_title">Sovelluksia ei saatavilla</string>
     <string name="home_no_apps_subtitle">Lisää päivityslähde tai ota olemassa oleva käyttöön %s</string>
-    <string name="home_no_apps_search_subtitle">Yhtään sovellusta ei löytynyt hakusanalla \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Sovelluksia, jotka vastaavat hakua \"%s\", ei löytynyt.</string>
     <string name="home_all_apps_hidden_title">Kaikki sovellukset on piilotettu</string>
     <string name="home_all_apps_hidden_subtitle">Olet piilottanut kaikki sovellukset aloitusnäytöltä</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Käytä kokeellisia sovellusversioita</string>
     <string name="sources_management_experimental_versions_toggle_description">Paikkaa kokeellisia sovellustavoitteita, jos saatavilla</string>
     <string name="sources_management_already_exists">Tämä lähde on jo lisätty</string>
+    <string name="sources_management_invalid_url">Virheellinen lähdeosoite. Tarkista osoite ja yritä uudelleen</string>
+    <string name="sources_management_metadata_unavailable">Metatietoa ei ole saatavilla</string>
+    <string name="sources_management_metadata_unavailable_hint">Etämetatietotiedostoa ei ole saatavilla. Paikkaus asennetulla paketilla toimii edelleen, mutta automaattinen päivitys on poistettu käytöstä tässä lähteessä</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Paikkauspakettia ei voitu ladata. Lähdeosoite saattaa olla virheellinen tai tiedostoa ei ole olemassa</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Näytönimi</string>
     <string name="sources_dialog_rename">Nimeä patch uudelleen</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Esimerkkejä:</string>
     <string name="sources_dialog_local">Paikallinen</string>
     <string name="sources_dialog_local_file">Valitse patch-lähdetiedosto</string>
+    <string name="sources_dialog_local_file_tap_hint">Napauta selaaaksesi tallennustilaa</string>
     <string name="sources_dialog_local_file_description">Valitse .mpp-lähdetiedosto tallennustilasta</string>
+    <string name="sources_dialog_local_invalid_extension">Tiedoston pääte pitää olla .mpp</string>
+    <string name="sources_dialog_url_valid">Kelvollinen arkisto tai JSON-osoite</string>
+    <string name="sources_dialog_url_invalid">URL:n on osoitettava GitHub-repositorioon tai .json-tiedostoon</string>
     <string name="sources_dialog_local_change_file">Muokka tiedosto</string>
     <string name="sources_dialog_preinstalled">Esivalmis</string>
     <string name="sources_update_success">Muokitus onnistui</string>
     <string name="sources_update_unavailable">Ei ole muokkaa saatavilla</string>
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
-    <string name="sources_download_fail_named">Virhe ladatessa \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Ei voitu päivittää \'%1$s\': ennakkopäivitys JSON-tiedostoa ei löytynyt määritetystä URL-osoitteesta.</string>
+    <string name="sources_download_fail_named">\'%s\':ta päivittämisessä epäonnistuttiin. Tarkista internetyhteytesi ja yritä uudelleen</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': päivitystiedot eivät löytyneet</string>
     <string name="sources_patch_expert_badge">Asiantuntija</string>
     <string name="sources_patch_expert_badge_tooltip">Ota Asiantuntijatila käyttöön Asetuksista, jotta voit sisällyttää tämän korjauksen manuaalisesti</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
     <string name="home_apk_use_saved_with_version">Käytä tallennettua APK:tä (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:tä. Patching vaatii APK-tiedoston uudelleenvalinnan</string>
-    <string name="home_version_requires_android">Vaatii Android %1$s+</string>
+    <string name="home_version_requires_android">Vaatii Android-version %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ei tueta tällä laitteella</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ei sisällä tuettuja versioita Androidille %2$d (API %3$d). Kaikki ilmoitetut versiot vaativat korkeamman Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Lataa alkuperäinen APK</string>
     <string name="home_download_instructions_steps_title">Ohjeet:</string>
-    <string name="home_download_instructions_step1">Paina alla olevaa \'%1$s\'-näppäintä</string>
+    <string name="home_download_instructions_step1">Paina alla olevaa \'%s\' -painiketta</string>
     <string name="home_download_instructions_step2_part1">Vieritä verkkosivua alaspäin ja paina</string>
     <string name="home_download_instructions_download_button_toast">Paina lataa verkkosivulla, ei täällä 😊</string>
     <string name="home_download_instructions_step3">Odota latauksen valmistumista ja &lt;b&gt;älä asenna&lt;/b&gt; APK:ta</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Jatka APKMirror.com:iin</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Valitse ladattu APK</string>
-    <string name="home_file_picker_prompt_description">Valitse juuri ladattu &lt;b&gt;%1$s&lt;/b&gt; APK-tiedosto</string>
+    <string name="home_file_picker_prompt_description">Valitse juuri ladattu &lt;b&gt;%s&lt;/b&gt; APK-tiedosto</string>
     <string name="home_file_picker_prompt_open_apk">Avaa APK-tiedosto</string>
     <string name="home_recommended_version">Suositeltu versio</string>
     <string name="home_selected_version">Valitettu versio</string>
@@ -260,7 +268,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="patcher_ready_to_mount_subtitle">Paina alla olevaa painiketta liittääksesi</string>
     <string name="patcher_storage_permission_dialog_title">Ei voi käsitellä tallennustietoa</string>
     <string name="patcher_incompatible_patcher_title">Päivitys vaaditaan</string>
-    <string name="patcher_incompatible_patcher_description">Paketti \"%1$s\" vaatii korjausohjelman version %2$s tai uudemman. Päivitä Morphe korjataksesi tämän sovelluksen</string>
+    <string name="patcher_incompatible_patcher_description">Paketti &lt;b&gt;%1$s&lt;/b&gt; vaatii korjausohjelman version &lt;b&gt;%2$s&lt;/b&gt; tai uudemman. Päivitä Morphe päivityksen asentamiseksi</string>
     <string name="patcher_incompatible_patcher_update_button">Lataa ja päivitä Morphe</string>
     <string name="patcher_storage_permission_description_api30">Yksi tai useampi korjausvaihtoehto osoittaa polkuihin, joita Morphe ei voi lukea. Myönnä tallennustilan käyttöoikeus ja napauta painiketta, niin korjaus alkaa automaattisesti</string>
     <string name="patcher_storage_permission_description_legacy">Yksi tai useampi päivitysasetus osoittaa pääsyä ei voida käsitellä tiedostoja. Päivitä päivitysasetuksia ja yritä uudelleen</string>
@@ -319,7 +327,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="patched_app_saved_toast">Muokattu sovellus tallennettu myöhempää käyttöä varten</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
     <string name="plugin_activity_dialog_body">Tätä liitännöä varten tarvitaan käyttäjän interaktiivisuutta.</string>
-    <string name="patcher_process_exit_message">Patcher-prosessi poistui koodilla %1$s</string>
+    <string name="patcher_process_exit_message">Patcher-prosessi päättyi koodilla %s</string>
     <string name="install_app_success">Asennettu onnistuneesti</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
     <string name="save_apk_success">APK tallennettu</string>
@@ -377,7 +385,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_appearance_app_icon_dark_2">Tuhka</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Muokka appin ulkon? Muokkaa ja käynnistykset? </string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Muokkaa \'%1$s\' ja käynnistykset? </string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Vaihda &lt;b&gt;%s&lt;/b&gt; ja käynnistä uudelleen?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Muokka ulkon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Päivitykset</string>
@@ -399,7 +407,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe-päivitys saatavilla</string>
     <string name="notification_bundle_update_title">Uusia paikkauksia saatavilla</string>
-    <string name="notification_update_text">Versio %1$s on valmis ladattavaksi</string>
+    <string name="notification_update_text">Versio %s on valmis ladattavaksi</string>
     <string name="notification_bundle_update_text_unversioned">Avaa Morphe ja päivitä</string>
     <string name="notification_permission_dialog_title">Salli ilmoitukset</string>
     <string name="notification_permission_dialog_description">Morphe tarvitsee ilmoitusluvan, jotta voit saada ilmoituksen päivityksistä, kun sovellus on taustalla</string>
@@ -534,9 +542,9 @@ Kuvien mitat on oltava seuraavasti:
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
     <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennukseen.</string>
     <string name="installer_hint_conflict">Toinen sovellus samalla pakettinimellä on jo asennettu. Poista se ennen jatkamista.</string>
-    <string name="installer_external_launched">Avataan kohdetta %1$s…</string>
-    <string name="installer_external_timeout">%1$s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen.</string>
-    <string name="installer_external_success">%1$s raportoi onnistuneen asennuksen.</string>
+    <string name="installer_external_launched">Avataan %s…</string>
+    <string name="installer_external_timeout">%s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen</string>
+    <string name="installer_external_success">%s ilmoitti onnistuneesta asennuksesta</string>
     <string name="installer_unavailable_title">%s ei ole käytettävissä</string>
     <string name="installer_unavailable_message">Edullisin asennuksesi (%s) on tällä hetkellä käytöstä poissa. Voit korjata ongelman ja yrittää uudelleen tai käyttää standardiasennusta.</string>
     <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
