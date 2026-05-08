@@ -186,7 +186,7 @@ private fun rememberUrlValidation(url: String, validate: (String) -> Boolean): F
     remember(url) {
         when {
             url.isBlank() -> FieldValidation.Empty
-            validate(url) -> FieldValidation.Valid
+            validate(normalizeUrl(url)) -> FieldValidation.Valid
             else -> FieldValidation.Invalid
         }
     }
