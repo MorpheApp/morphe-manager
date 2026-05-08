@@ -423,7 +423,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="settings_appearance_app_icon_dark_2">Void</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Change app icon?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Change to \'%s\' and restart?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Change to &lt;b&gt;%s&lt;/b&gt; and restart?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Change icon</string>
 
     <!-- Settings - Advanced Tab - Updates Section -->
