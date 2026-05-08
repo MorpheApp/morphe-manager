@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Henüz yamalanmadı</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
     <string name="home_app_hide_title">Uygulama gizlensin mi?</string>
-    <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki \'%1$s\' düğmesini kullanarak geri getirebilirsiniz</string>
+    <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki \"düğmesini kullanarak geri getirebilirsiniz.</string>
     <string name="home_app_will_be_hidden">Bu uygulama gizlenecektir</string>
     <string name="home_app_show_hidden">Gizli uygulamaları göster</string>
     <string name="home_app_no_hidden">Gizli uygulama yok</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Güncellemeler atlandı</string>
     <string name="home_update_skipped_metered_subtitle">Mobil veri etkin</string>
     <string name="home_updating_sources">Kaynaklar güncelleniyor…</string>
-    <string name="home_update_progress_format">%1$s işlendi</string>
+    <string name="home_update_progress_format">%s işlendi</string>
     <string name="home_update_success">Kaynak güncellemesi tamamlandı</string>
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
     <string name="home_search_apps">Uygulamaları ara</string>
     <string name="home_no_apps_title">Uygulama bulunamadı</string>
     <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
-    <string name="home_no_apps_search_subtitle">\"%1$s\" ile eşleşen uygulama bulunamadı</string>
+    <string name="home_no_apps_search_subtitle">\"%s\" ile eşleşen uygulama yok</string>
     <string name="home_all_apps_hidden_title">Tüm uygulamalar gizlendi</string>
     <string name="home_all_apps_hidden_subtitle">Ana ekrandaki tüm uygulamaları gizlediniz</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Deneysel uygulama sürümlerini kullan</string>
     <string name="sources_management_experimental_versions_toggle_description">Mevcutsa deneysel uygulama hedeflerini yamala</string>
     <string name="sources_management_already_exists">Bu kaynak zaten eklenmiş</string>
+    <string name="sources_management_invalid_url">Geçersiz kaynak URL\'si. Lütfen adresi kontrol edin ve tekrar deneyin</string>
+    <string name="sources_management_metadata_unavailable">Meta Veri Yok</string>
+    <string name="sources_management_metadata_unavailable_hint">Uzak meta veri dosyası kullanılamıyor. Yüklü paketle yama yapmak hala çalışır, ancak bu kaynak için otomatik güncelleme devre dışı bırakılmıştır</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Yama paketi indirilemedi. Kaynak URL\'si yanlış olabilir veya dosya mevcut olmayabilir</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünen ad</string>
     <string name="sources_dialog_rename">Yama kaynağını yeniden adlandır</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Örnekler:</string>
     <string name="sources_dialog_local"> Yerel</string>
     <string name="sources_dialog_local_file">Yama kaynağı dosyası seç</string>
+    <string name="sources_dialog_local_file_tap_hint">Depolamayı göz atmak için dokunun</string>
     <string name="sources_dialog_local_file_description">Depolama alanından bir .mpp yama kaynağı dosyası seçin</string>
+    <string name="sources_dialog_local_invalid_extension">Dosyanın .mpp uzantısına sahip olması gerekiyor</string>
+    <string name="sources_dialog_url_valid">Geçerli depo veya JSON URL\'si</string>
+    <string name="sources_dialog_url_invalid">URL, bir GitHub deposuna veya .json dosyasına yönlendirmelidir</string>
     <string name="sources_dialog_local_change_file">Dosyayı değiştir</string>
     <string name="sources_dialog_preinstalled">Ön yüklü</string>
     <string name="sources_update_success">Güncelleme başarılı</string>
     <string name="sources_update_unavailable">Güncelleme mevcut değil</string>
     <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
-    <string name="sources_download_fail_named">\'%1$s\' indirmesi başarısız oldu: %2$s</string>
-    <string name="sources_download_endpoint_not_found">\'%1$s\' güncellenemedi: yama JSON dosyası belirtilen URL\'de bulunamadı</string>
+    <string name="sources_download_fail_named">\'%s\' güncellenemedi. İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': yama meta verisi bulunamadı</string>
     <string name="sources_patch_expert_badge">Uzman</string>
     <string name="sources_patch_expert_badge_tooltip">Bu yamayı manuel olarak eklemek için Ayarlar\'da Uzman modunu etkinleştirin</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Hayır, bende APK var</string>
     <string name="home_apk_use_saved_with_version">Kaydedilmiş APK (v%s) kullan</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Yamayı uygulayabilmek için tekrar APK dosyasını seçmeniz gerekiyor</string>
-    <string name="home_version_requires_android">Android %1$s+ gerektiriyor</string>
+    <string name="home_version_requires_android">Android %s+ gerektiriyor</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda desteklenmiyor</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) için desteklenen sürümlere sahip değil. Bildirilen tüm sürümler daha yüksek bir Android sürümü gerektiriyor</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>
-    <string name="home_download_instructions_step1">Aşağıdaki \"%1$s\" düğmesine tıklayın</string>
+    <string name="home_download_instructions_step1">Aşağıdaki \"%s\" düğmesine tıklayın</string>
     <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'i &lt;b&gt;yüklemeyin&lt;/b&gt;</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">APKMirror.com\'a devam et</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">İndirilen APK\'yi seç</string>
-    <string name="home_file_picker_prompt_description">İndirdiğiniz &lt;b&gt;%1$s&lt;/b&gt; APK dosyasını seçin</string>
+    <string name="home_file_picker_prompt_description">İndirdiğiniz &lt;b&gt;%s&lt;/b&gt; APK dosyasını seçin</string>
     <string name="home_file_picker_prompt_open_apk">APK dosyasını aç</string>
     <string name="home_recommended_version">Önerilen sürüm</string>
     <string name="home_selected_version">Seçilen sürüm</string>
@@ -261,7 +269,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_ready_to_mount_subtitle">Bağlamak için aşağıdaki düğmeye basın</string>
     <string name="patcher_storage_permission_dialog_title">Depolama yoluna erişilemiyor</string>
     <string name="patcher_incompatible_patcher_title">Güncelleme gerekiyor</string>
-    <string name="patcher_incompatible_patcher_description">\"%1$s\" paketi, %2$s veya daha yeni bir Morphe sürümü gerektiriyor. Bu uygulamayı yamalamak için lütfen Morphe\'i güncelleyin.</string>
+    <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; paketi, &lt;b&gt;%2$s&lt;/b&gt; veya daha yeni bir Morphe sürümü gerektiriyor. Bu uygulamayı yamalamak için lütfen Morphe\'yi güncelleyin</string>
     <string name="patcher_incompatible_patcher_update_button">Morphe\'yi indir ve güncelle</string>
     <string name="patcher_storage_permission_description_api30">Bir veya daha fazla yama seçeneği, Morphe\'nin okuyamadığı yollara işaret ediyor. Depolama erişimini verin ve düğmeye dokunun, ardından yamalama otomatik olarak başlayacaktır</string>
     <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla yama seçeneği, erişilemeyen yollara işaret ediyor. Yama seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
@@ -320,7 +328,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patched_app_saved_toast">Yamalanmış uygulama daha sonrası için kaydedildi</string>
     <string name="patched_app_save_failed_toast">Yamalanmış uygulama kaydedilemedi</string>
     <string name="plugin_activity_dialog_body">Bu eklentinin çalışmaya devam edebilmesi için kullanıcı etkileşimi gereklidir</string>
-    <string name="patcher_process_exit_message">Patcher işlemi %1$s kodu ile sonlandı</string>
+    <string name="patcher_process_exit_message">Patcher işlemi %s kodu ile sonlandı</string>
     <string name="install_app_success">Başarıyla yüklendi</string>
     <string name="install_app_fail">Uygulama yüklenemedi: %s</string>
     <string name="save_apk_success">APK Kaydedildi</string>
@@ -378,7 +386,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="settings_appearance_app_icon_dark_2">Boşluk</string>
     <string name="settings_appearance_app_icon_dark_3">Çivit</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Uygulama simgesi değiştirilsin mi?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\' simgesine değiştirilip yeniden başlatılsın mı?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; simgesine değiştirilip yeniden başlatılsın mı?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simgeyi değiştir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Güncellemeler</string>
@@ -400,7 +408,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe güncellemesi mevcut</string>
     <string name="notification_bundle_update_title">Yeni yamalar mevcut</string>
-    <string name="notification_update_text">Sürüm %1$s indirmeye hazır</string>
+    <string name="notification_update_text">%s sürümü indirilmeye hazır</string>
     <string name="notification_bundle_update_text_unversioned">Morphe\'yi açmak ve güncellemek için dokunun</string>
     <string name="notification_permission_dialog_title">Bildirimlere izin ver</string>
     <string name="notification_permission_dialog_description">Morphe, arka planda güncellemeler kullanılabilir olduğunda sizi uyarmak için bildirim izni gerektirir</string>
@@ -536,9 +544,9 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
     <string name="installer_hint_generic">Yükleme başarısız oldu. Tekrar deneyin veya farklı bir yükleyiciye geçin</string>
     <string name="installer_hint_conflict">Bu paket adıyla başka bir uygulama zaten yüklü. Devam etmeden önce onu kaldırın</string>
-    <string name="installer_external_launched">%1$s açılıyor…</string>
-    <string name="installer_external_timeout">%1$s yüklemeyi onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin</string>
-    <string name="installer_external_success">%1$s başarılı bir şekilde yüklediğini bildirdi</string>
+    <string name="installer_external_launched">%s açılıyor…</string>
+    <string name="installer_external_timeout">%s yüklemeyi onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin</string>
+    <string name="installer_external_success">%s başarılı bir şekilde yüklediğini bildirdi</string>
     <string name="installer_unavailable_title">%s kullanılamıyor</string>
     <string name="installer_unavailable_message">Tercih ettiğiniz yükleyici (%s) şu anda kullanılamıyor. Sorunu çözüp tekrar deneyebilir veya standart yükleyiciyi kullanabilirsiniz</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku\'nun çalıştığından ve ve bu uygulama için izin verildiğinden emin olun</string>

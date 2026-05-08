@@ -5,7 +5,6 @@
     <string name="home_not_patched_yet">હજુ પેચ કરેલ નથી </string>
     <string name="home_no_patches_available">કોઈ પેચો ઉપલબ્ધ નથી</string>
     <string name="home_app_hide_title">આ એપ્લિકેશનને છુપાવા માગો છો?</string>
-    <string name="home_app_hide_message">આ એપ મુખ્ય સ્ક્રીનમાંથી છુપાવવામાં આવશે. તમે સૂચિના તળિયે \'%1$s\' બટનનો ઉપયોગ કરીને ફરી પાછી તેને પુનઃસ્થાપિત કરી શકો છો</string>
     <string name="home_app_will_be_hidden">આ એપ છુપાવવામાં આવશે</string>
     <string name="home_app_show_hidden">છુપાવેલ એપ્લિકેશનો બતાવો</string>
     <string name="home_app_no_hidden">કોઈ છુપાવેલી એપ્લિકેશનો નથી</string>
@@ -22,7 +21,7 @@
     <string name="home_update_skipped_metered">અદ્યતન છોડ્યાં</string>
     <string name="home_update_skipped_metered_subtitle">મોબાઇલ ડેટા સક્રિય છે</string>
     <string name="home_updating_sources">સ્ત્રોતો અધ્યતન કરી રહ્યાં છીએ...</string>
-    <string name="home_update_progress_format">%1$s પર પ્રક્રિયા થઈ</string>
+    <string name="home_update_progress_format">%s પર પ્રક્રિયા થઈ</string>
     <string name="home_update_success">સ્ત્રોતો અધ્યતન કરવાનું પૂર્ણ થયું</string>
     <string name="home_update_success_subtitle">તમારા સ્ત્રોતો અધ્યતન જ છે</string>
     <!-- Home Screen - Home Greetings -->
@@ -62,7 +61,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">મૂળ APK ડાઉનલોડ કરો</string>
     <string name="home_download_instructions_steps_title">સૂચનાઓ:</string>
-    <string name="home_download_instructions_step1">નીચેનું \'%1$s\' બટન દબાવો</string>
+    <string name="home_download_instructions_step1">નીચેનું \'%s\' બટન દબાવો</string>
     <string name="home_download_instructions_step2_part1">વેબપેજ નીચે સ્ક્રોલ કરો અને દબાવો</string>
     <string name="home_download_instructions_download_button_toast">વેબસાઇટ પર ડાઉનલોડ દબાવો, અને અહીં નહીં 😊</string>
     <string name="home_download_instructions_step3">ડાઉનલોડ પૂર્ણ થાય ત્યાં સુધી રાહ જુઓ, અને APK &lt;b&gt;ઇન્સ્ટોલ કરશો નહીં&lt;b&gt;</string>
@@ -157,7 +156,6 @@
     <string name="settings_appearance_app_icon_dark_1">સમુદ્ર</string>
     <string name="settings_appearance_app_icon_dark_2">ખાલીપણું</string>
     <string name="settings_appearance_app_icon_dark_3">ઈન્ડિગો</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\' માં બદલીને ફરી શરૂ કરીએ?</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <string name="notification_manager_update_title">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
