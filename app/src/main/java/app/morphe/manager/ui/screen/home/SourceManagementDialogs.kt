@@ -335,7 +335,7 @@ private fun LocalTabContent(
                             },
                             style = MaterialTheme.typography.bodySmall,
                             color = if (isValid) textColor.copy(alpha = 0.5f) else MaterialTheme.colorScheme.error,
-                            maxLines = 1,
+                            maxLines = 2,
                             overflow = TextOverflow.Ellipsis
                         )
                     }
