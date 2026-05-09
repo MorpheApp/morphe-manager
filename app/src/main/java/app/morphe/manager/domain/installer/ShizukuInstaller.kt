@@ -72,9 +72,6 @@ class ShizukuInstaller(private val app: Application) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                 setRequestUpdateOwnership(true)
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                setPackageSource(PackageInstaller.PACKAGE_SOURCE_STORE)
-            }
         }
         PackageInstallerCompat.applyFlags(params)
         val sessionId = packageInstallerWrapper.createSession(params)

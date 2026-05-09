@@ -73,7 +73,7 @@ class SessionInstaller(private val app: Application) {
                     setRequestUpdateOwnership(true)
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    setPackageSource(PackageInstaller.PACKAGE_SOURCE_STORE)
+                    setPackageSource(PackageInstaller.PACKAGE_SOURCE_LOCAL_FILE)
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_REQUIRED)
