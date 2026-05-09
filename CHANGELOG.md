@@ -1,3 +1,15 @@
+# [1.17.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.5...v1.17.0-dev.6) (2026-05-09)
+
+
+### Bug Fixes
+
+* Refresh app version, name and icon on home screen after patching ([5e1b1f5](https://github.com/MorpheApp/morphe-manager/commit/5e1b1f59ec5be5f3acdad3c4e66096ff315768db))
+
+
+### Features
+
+* Preload bundle avatars on startup to eliminate first-open delay ([3ce8e36](https://github.com/MorpheApp/morphe-manager/commit/3ce8e362abcf3950dcbad73f59cc8d61272f9817))
+
 # [1.17.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.4...v1.17.0-dev.5) (2026-05-09)
 
 
