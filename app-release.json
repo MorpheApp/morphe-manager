@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-05-08T11:28:52",
-  "description": "# [1.17.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2026-05-08)\n\n\n### Features\n\n* Improve patch bundle error handling and UI feedback ([262a2c6](https://github.com/MorpheApp/morphe-manager/commit/262a2c6fc5f2a596427200eb9c15c091e178f49e))\n* Redesign `Add source` dialog and improve bundle error handling ([8196578](https://github.com/MorpheApp/morphe-manager/commit/81965788109ecde8806e9113f1febac3deb3f040))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.3/morphe-manager-1.17.0-dev.3.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.3/morphe-manager-1.17.0-dev.3.apk.asc",
-  "version": "1.17.0-dev.3"
+  "created_at": "2026-05-09T07:55:05",
+  "description": "# [1.17.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.3...v1.17.0-dev.4) (2026-05-09)\n\n\n### Features\n\n* Add `GitLab` bundle support ([33b276d](https://github.com/MorpheApp/morphe-manager/commit/33b276d91b45d4b09d5d231f7f6000881d82e93c))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.4/morphe-manager-1.17.0-dev.4.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.4/morphe-manager-1.17.0-dev.4.apk.asc",
+  "version": "1.17.0-dev.4"
 }

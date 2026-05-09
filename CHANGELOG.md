@@ -1,3 +1,10 @@
+# [1.17.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.3...v1.17.0-dev.4) (2026-05-09)
+
+
+### Features
+
+* Add `GitLab` bundle support ([33b276d](https://github.com/MorpheApp/morphe-manager/commit/33b276d91b45d4b09d5d231f7f6000881d82e93c))
+
 # [1.17.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2026-05-08)
 
 
