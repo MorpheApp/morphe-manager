@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 abstract class OptionDao {
     /**
-     * Get options for a package across all bundles
+     * Get options for a package across all bundles.
      */
     @Transaction
     @Query(
@@ -23,7 +23,7 @@ abstract class OptionDao {
     abstract suspend fun getOptions(packageName: String): Map<@MapColumn("patch_bundle") Int, List<Option>>
 
     /**
-     * Get options for a specific bundle and package
+     * Get options for a specific bundle and package.
      */
     @Query(
         "SELECT o.`group`, o.patch_name, o.`key`, o.value FROM option_groups og" +
@@ -33,8 +33,8 @@ abstract class OptionDao {
     abstract suspend fun getOptionsForBundle(packageName: String, bundleUid: Int): List<Option>
 
     /**
-     * Export raw option values for a specific package and bundle
-     * Returns: Map<PatchName, Map<OptionKey, SerializedValue>>
+     * Export raw option values for a specific package and bundle.
+     * Returns: Map<PatchName, Map<OptionKey, SerializedValue>>.
      */
     @Transaction
     @Query(
@@ -45,7 +45,7 @@ abstract class OptionDao {
     abstract suspend fun exportRawOptionsForBundle(packageName: String, bundleUid: Int): List<RawOption>
 
     /**
-     * Convert list of RawOption to nested map structure
+     * Convert list of RawOption to nested map structure.
      */
     suspend fun exportOptionsForBundle(packageName: String, bundleUid: Int): Map<String, Map<String, String>> {
         val rawOptions = exportRawOptionsForBundle(packageName, bundleUid)
@@ -56,8 +56,8 @@ abstract class OptionDao {
     }
 
     /**
-     * Import raw option values for a specific package and bundle
-     * Accepts serialized JSON strings and stores them directly
+     * Import raw option values for a specific package and bundle.
+     * Accepts serialized JSON strings and stores them directly.
      */
     @Transaction
     open suspend fun importOptionsForBundle(
@@ -97,8 +97,8 @@ abstract class OptionDao {
     }
 
     /**
-     * Get summary of options per package and bundle
-     * Returns raw data that will be processed in repository
+     * Get summary of options per package and bundle.
+     * Returns raw data that will be processed in repository.
      */
     @Query(
         "SELECT og.package_name, og.patch_bundle, COUNT(o.`key`) as option_count " +
@@ -110,8 +110,8 @@ abstract class OptionDao {
     abstract suspend fun getOptionsSummaryRaw(): List<OptionSummaryItem>
 
     /**
-     * Get summary of options per package and bundle
-     * Returns: Map<PackageName, Map<BundleUid, OptionCount>>
+     * Get summary of options per package and bundle.
+     * Returns: Map<PackageName, Map<BundleUid, OptionCount>>.
      */
     suspend fun getOptionsSummary(): Map<String, Map<Int, Int>> {
         val raw = getOptionsSummaryRaw()
@@ -128,7 +128,7 @@ abstract class OptionDao {
     abstract fun getPackagesWithOptions(): Flow<List<String>>
 
     /**
-     * Get all packages that have saved options for a specific bundle
+     * Get all packages that have saved options for a specific bundle.
      */
     @Query("SELECT DISTINCT package_name FROM option_groups WHERE patch_bundle = :bundleUid")
     abstract fun getPackagesWithOptionsForBundle(bundleUid: Int): Flow<List<String>>
@@ -145,7 +145,7 @@ abstract class OptionDao {
     abstract suspend fun resetOptionsForPackage(packageName: String)
 
     /**
-     * Reset options for a specific package and bundle combination
+     * Reset options for a specific package and bundle combination.
      */
     @Transaction
     @Query("DELETE FROM option_groups WHERE package_name = :packageName AND patch_bundle = :bundleUid")
@@ -171,7 +171,7 @@ abstract class OptionDao {
         }
 
     /**
-     * Update options for a specific group
+     * Update options for a specific group.
      */
     @Transaction
     open suspend fun updateOptionsForGroup(groupId: Int, options: List<Option>) {
@@ -183,7 +183,7 @@ abstract class OptionDao {
 }
 
 /**
- * Data class for options summary query result
+ * Data class for options summary query result.
  */
 data class OptionSummaryItem(
     @ColumnInfo(name = "package_name") val packageName: String,
@@ -192,7 +192,7 @@ data class OptionSummaryItem(
 )
 
 /**
- * Data class for raw option export (keeps serialized value)
+ * Data class for raw option export (keeps serialized value).
  */
 data class RawOption(
     @ColumnInfo(name = "patch_name") val patchName: String,

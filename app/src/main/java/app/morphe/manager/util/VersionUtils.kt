@@ -1,7 +1,7 @@
 package app.morphe.manager.util
 
 /**
- * Compare two version strings
+ * Compare two version strings.
  * Returns: -1 if v1 < v2, 0 if v1 == v2, 1 if v1 > v2
  */
 fun compareVersions(v1: String?, v2: String?): Int {
@@ -77,7 +77,7 @@ fun compareVersions(v1: String?, v2: String?): Int {
 }
 
 /**
- * Check if newVersion is newer than oldVersion
+ * Check if newVersion is newer than oldVersion.
  */
 fun isNewerVersion(oldVersion: String?, newVersion: String?): Boolean {
     return compareVersions(oldVersion, newVersion) < 0

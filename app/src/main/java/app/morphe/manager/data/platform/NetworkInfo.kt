@@ -8,7 +8,9 @@ import androidx.core.content.getSystemService
 class NetworkInfo(app: Application) {
     private val connectivityManager = app.getSystemService<ConnectivityManager>()!!
 
-    private fun getCapabilities() = connectivityManager.activeNetwork?.let { connectivityManager.getNetworkCapabilities(it) }
+    private fun getCapabilities() = connectivityManager.activeNetwork
+        ?.let { connectivityManager.getNetworkCapabilities(it) }
+
     fun isConnected() = connectivityManager.activeNetwork != null
     fun isUnmetered() = getCapabilities()?.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED) != false
 

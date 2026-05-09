@@ -2,17 +2,23 @@ package app.morphe.manager.util
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
 import android.content.pm.PackageManager.PackageInfoFlags
 import android.content.pm.Signature
+import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
+import android.provider.Settings
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.compose.runtime.Immutable
 import androidx.core.content.pm.PackageInfoCompat
 import kotlinx.parcelize.Parcelize
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.io.File
 
 @Immutable
@@ -130,5 +136,16 @@ class PM(
         val withoutSuffix = base.removeSuffix("Application")
         val candidate = withoutSuffix.ifBlank { base }
         return candidate.ifBlank { trimmed }
+    }
+}
+
+/** Opens the system screen that lets the user grant the "install unknown apps" permission. */
+object RequestInstallAppsContract : ActivityResultContract<String, Boolean>(), KoinComponent {
+    private val pm: PM by inject()
+    override fun createIntent(context: Context, input: String) =
+        Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.fromParts("package", input, null))
+
+    override fun parseResult(resultCode: Int, intent: Intent?): Boolean {
+        return pm.canInstallPackages()
     }
 }

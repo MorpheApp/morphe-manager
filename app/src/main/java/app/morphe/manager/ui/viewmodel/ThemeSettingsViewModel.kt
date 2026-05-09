@@ -8,7 +8,6 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.util.applyAppLanguage
-import app.morphe.manager.util.resetListItemColorsCached
 import app.morphe.manager.util.toHexString
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -90,7 +89,6 @@ class ThemeSettingsViewModel(
     fun setCustomAccentColor(color: Color?) = viewModelScope.launch {
         val value = color?.toHexString().orEmpty()
         prefs.customAccentColor.update(value)
-        resetListItemColorsCached()
     }
 
     /**
@@ -148,6 +146,5 @@ class ThemeSettingsViewModel(
         }
 
         prefs.themePresetSelectionName.update(preset.name)
-        resetListItemColorsCached()
     }
 }
