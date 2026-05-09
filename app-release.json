@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-05-09T17:40:10",
-  "description": "# [1.17.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.5...v1.17.0-dev.6) (2026-05-09)\n\n\n### Bug Fixes\n\n* Refresh app version, name and icon on home screen after patching ([5e1b1f5](https://github.com/MorpheApp/morphe-manager/commit/5e1b1f59ec5be5f3acdad3c4e66096ff315768db))\n\n\n### Features\n\n* Preload bundle avatars on startup to eliminate first-open delay ([3ce8e36](https://github.com/MorpheApp/morphe-manager/commit/3ce8e362abcf3950dcbad73f59cc8d61272f9817))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.6/morphe-manager-1.17.0-dev.6.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.6/morphe-manager-1.17.0-dev.6.apk.asc",
-  "version": "1.17.0-dev.6"
+  "created_at": "2026-05-09T23:06:14",
+  "description": "# [1.17.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.6...v1.17.0-dev.7) (2026-05-09)\n\n\n### Bug Fixes\n\n* Remap bundle UIDs on import to restore saved patch selections on fresh install ([22e8961](https://github.com/MorpheApp/morphe-manager/commit/22e8961ea9df29ecf5816604e397a079204cfa62))\n* Resolve file picker and path display issues for Downloads and SAF ([#531](https://github.com/MorpheApp/morphe-manager/issues/531)) ([5cfddd2](https://github.com/MorpheApp/morphe-manager/commit/5cfddd2ceca0ac744d535d232cabe7584ae1981e))\n* Skip import for unknown bundle UIDs to prevent FK constraint crash ([806582f](https://github.com/MorpheApp/morphe-manager/commit/806582f3503a59a08ede290e1bd6de10ac0de098))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.7/morphe-manager-1.17.0-dev.7.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.7/morphe-manager-1.17.0-dev.7.apk.asc",
+  "version": "1.17.0-dev.7"
 }
