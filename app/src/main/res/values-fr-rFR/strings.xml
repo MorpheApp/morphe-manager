@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Sélectionnez un fichier de source de patchs .mpp depuis le stockage</string>
     <string name="sources_dialog_local_invalid_extension">Le fichier doit avoir une extension .mpp</string>
     <string name="sources_dialog_url_valid">URL JSON ou dépôt valide</string>
-    <string name="sources_dialog_url_invalid">L\'URL doit pointer vers un dépôt GitHub ou un fichier .json</string>
+    <string name="sources_dialog_url_invalid">L\'URL doit pointer vers un dépôt GitHub/GitLab ou un fichier .json</string>
     <string name="sources_dialog_local_change_file">Changer de fichier</string>
     <string name="sources_dialog_preinstalled">Préinstallé</string>
     <string name="sources_update_success">Mise à jour réussie</string>
