@@ -35,8 +35,7 @@ data class Option(
     @ColumnInfo(name = "group") val group: Int,
     @ColumnInfo(name = "patch_name") val patchName: String,
     @ColumnInfo(name = "key") val key: String,
-    // Encoded as Json.
-    @ColumnInfo(name = "value") val value: SerializedValue,
+    @ColumnInfo(name = "value") val value: SerializedValue // Encoded as JSON
 ) {
     @Serializable
     data class SerializedValue(val raw: JsonElement) {
@@ -63,7 +62,7 @@ data class Option(
 
         companion object {
             private val json = Json {
-                // Patcher does not forbid the use of these values, so we should support them.
+                // Patcher does not forbid the use of these values, so we should support them
                 allowSpecialFloatingPointValues = true
             }
 
