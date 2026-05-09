@@ -11,32 +11,6 @@ import kotlinx.coroutines.flow.map
 
 @Dao
 abstract class SelectionDao {
-    /**
-     * Get selected patches for a package across all bundles.
-     * @deprecated Use getSelectedPatchesForBundle for specific bundle or getAllSelectionsForPackage for all bundles.
-     */
-    @Transaction
-    @Query(
-        "SELECT patch_bundle, patch_name FROM patch_selections" +
-                " LEFT JOIN selected_patches ON uid = selected_patches.selection" +
-                " WHERE package_name = :packageName"
-    )
-    abstract suspend fun getSelectedPatches(packageName: String): Map<@MapColumn("patch_bundle") Int, List<@MapColumn(
-        "patch_name"
-    ) String>>
-
-    /**
-     * Get selected patches for a specific package and bundle.
-     * Returns List - convert to Set in repository if needed.
-     */
-    @Transaction
-    @Query(
-        "SELECT sp.patch_name FROM patch_selections ps" +
-                " INNER JOIN selected_patches sp ON ps.uid = sp.selection" +
-                " WHERE ps.package_name = :packageName AND ps.patch_bundle = :bundleUid"
-    )
-    abstract suspend fun getSelectedPatchesForBundle(packageName: String, bundleUid: Int): List<String>
-
     /** Get all selections for a package grouped by bundle. */
     @Transaction
     @Query(
@@ -102,13 +76,6 @@ abstract class SelectionDao {
                 " INNER JOIN selected_patches sp ON ps.uid = sp.selection"
     )
     abstract fun getPackagesWithSelection(): Flow<List<String>>
-
-    @Query(
-        "SELECT DISTINCT ps.package_name FROM patch_selections ps" +
-                " INNER JOIN selected_patches sp ON ps.uid = sp.selection" +
-                " WHERE ps.patch_bundle = :bundleUid"
-    )
-    abstract fun getPackagesWithSelectionForBundle(bundleUid: Int): Flow<List<String>>
 
     @Query("SELECT DISTINCT patch_bundle FROM patch_selections")
     abstract suspend fun getAllBundleUids(): List<Int>

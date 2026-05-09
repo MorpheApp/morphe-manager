@@ -38,7 +38,7 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
-import app.morphe.manager.util.saver.snapshotStateListSaver
+import app.morphe.manager.util.snapshotStateListSaver
 import app.morphe.manager.worker.UpdateCheckWorker
 import io.github.z4kn4fein.semver.Version
 import kotlinx.coroutines.*

@@ -4,19 +4,14 @@ import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
 import android.text.Html
-import android.text.format.DateUtils
 import android.text.style.StyleSpan
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import androidx.compose.material3.ListItemColors
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -26,36 +21,31 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
-import app.morphe.manager.R
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.format.MonthNames
-import kotlinx.datetime.format.Padding
-import kotlinx.datetime.format.char
-import kotlinx.datetime.toInstant
-import kotlinx.datetime.toLocalDateTime
-import kotlin.coroutines.cancellation.CancellationException
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
-import kotlin.time.Clock
 
+/** bundleUid → set of selected patch names. */
 typealias PatchSelection = Map<Int, Set<String>>
+/** bundleUid → patchName → optionKey → value. */
 typealias Options = Map<Int, Map<String, Map<String, Any?>>>
 
+/** Returns true if the device's primary ABI is armeabi-v7a (32-bit ARM). */
 fun isArmV7(): Boolean {
     // Only check the primary ABI - ArmV8 devices also list armeabi-v7a as a secondary ABI
     return Build.SUPPORTED_ABIS.firstOrNull()?.lowercase()?.contains("armeabi-v7a") == true
 }
 
+/** Shows a toast and returns its handle, useful when the caller needs to cancel it later. */
 fun Context.toastHandle(string: String, duration: Int = Toast.LENGTH_SHORT): Toast =
     Toast.makeText(this, string, duration).apply { show() }
 
+/** Shows a toast message. */
 fun Context.toast(string: String, duration: Int = Toast.LENGTH_SHORT) {
     toastHandle(string, duration)
 }
@@ -88,60 +78,14 @@ inline fun uiSafe(context: Context, @StringRes toastMsg: Int, logMsg: String, bl
     }
 }
 
+/** Returns the most meaningful available message from this throwable. */
 fun Throwable.simpleMessage() = this.message ?: this.cause?.message ?: this::class.simpleName
 
-fun LocalDateTime.relativeTime(context: Context): String {
-    try {
-        val now = Clock.System.now()
-        val duration = now - this.toInstant(TimeZone.UTC)
-
-        return when {
-            duration.inWholeMinutes < 1 -> context.getString(R.string.just_now)
-            duration.inWholeMinutes < 60 -> context.getString(
-                R.string.minutes_ago,
-                duration.inWholeMinutes.toString()
-            )
-
-            duration.inWholeHours < 24 -> context.getString(
-                R.string.hours_ago,
-                duration.inWholeHours.toString()
-            )
-
-            duration.inWholeHours < 30 -> context.getString(
-                R.string.days_ago,
-                duration.inWholeDays.toString()
-            )
-
-            else -> LocalDateTime.Format {
-                monthName(MonthNames.ENGLISH_ABBREVIATED)
-                char(' ')
-                this@Format.day(padding = Padding.ZERO)
-                if (now.toLocalDateTime(TimeZone.UTC).year != this@relativeTime.year) {
-                    chars(", ")
-                    year()
-                }
-            }.format(this)
-        }
-    } catch (_: IllegalArgumentException) {
-        return context.getString(R.string.invalid_date)
-    }
-}
-
-fun Long.relativeTime(context: Context): String {
-    if (this <= 0L) return context.getString(R.string.invalid_date)
-    return DateUtils.getRelativeTimeSpanString(
-        this,
-        System.currentTimeMillis(),
-        DateUtils.MINUTE_IN_MILLIS
-    ).toString()
-}
-
-private var transparentListItemColorsCached: ListItemColors? = null
-
-fun resetListItemColorsCached() {
-    transparentListItemColorsCached = null
-}
-
+/**
+ * Collects [flow] as a one-shot event stream, respecting the [lifecycleOwner][LocalLifecycleOwner]
+ * and only collecting while the lifecycle is at least [state].
+ * Re-launches automatically if [flow] or [keys] change.
+ */
 @Composable
 fun <T> EventEffect(flow: Flow<T>, vararg keys: Any?, state: Lifecycle.State = Lifecycle.State.STARTED, block: suspend (T) -> Unit) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -157,7 +101,7 @@ fun <T> EventEffect(flow: Flow<T>, vararg keys: Any?, state: Lifecycle.State = L
 }
 
 /**
- * Supports bold and italic html tags. Can be improved as needed to support more html functions.
+ * Supports bold and italic HTML tags. Can be improved as needed to support more HTML functions.
  */
 fun htmlAnnotatedString(html: String): AnnotatedString {
     val prepared = html.replace("\n", "<br>")
@@ -185,8 +129,6 @@ fun htmlAnnotatedString(html: String): AnnotatedString {
 }
 
 
-fun Modifier.enabled(condition: Boolean) = if (condition) this else alpha(0.5f)
-
 /**
  * Returns a human-readable Android version name for this SDK integer.
  */
@@ -206,6 +148,16 @@ fun Int.androidVersionName(): String = when (this) {
     else -> "$this" // future or very old SDK - just use the number
 }
 
+/** Creates a [Saver] for [SnapshotStateList]s so they survive process death via [SavedStateHandle]. */
+fun <T> snapshotStateListSaver() = Saver<SnapshotStateList<T>, List<T>>(
+    save = { it.toMutableList() },
+    restore = { it.toMutableStateList() }
+)
+
+/**
+ * Property delegate that stores a non-null value of type [T] in [SavedStateHandle],
+ * initializing it with [init] on first access so it survives process death.
+ */
 @MainThread
 fun <T : Any> SavedStateHandle.saveableVar(init: () -> T): PropertyDelegateProvider<Any?, ReadWriteProperty<Any?, T>> =
     PropertyDelegateProvider { _: Any?, property ->
@@ -216,11 +168,4 @@ fun <T : Any> SavedStateHandle.saveableVar(init: () -> T): PropertyDelegateProvi
             override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) =
                 set(name, value)
         }
-    }
-
-fun <T : Any> SavedStateHandle.saveableVar(): ReadWriteProperty<Any?, T?> =
-    object : ReadWriteProperty<Any?, T?> {
-        override fun getValue(thisRef: Any?, property: KProperty<*>): T? = get(property.name)
-        override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) =
-            set(property.name, value)
     }

@@ -26,7 +26,4 @@ interface OriginalApkDao {
 
     @Query("UPDATE original_apks SET last_used = :timestamp WHERE package_name = :packageName")
     suspend fun updateLastUsed(packageName: String, timestamp: Long = System.currentTimeMillis())
-	
-	@Query("SELECT COUNT(*) FROM original_apks")
-    suspend fun getCount(): Int
 }
