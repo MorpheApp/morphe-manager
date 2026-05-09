@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.home
 import android.annotation.SuppressLint
 import android.graphics.Color.argb
 import android.graphics.Color.colorToHSV
+import android.net.Uri
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -41,7 +42,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.APIPatchBundle
@@ -72,6 +72,7 @@ fun AddSourceDialog(
     onRemoteSubmit: (url: String) -> Unit,
     onLocalPick: () -> Unit,
     selectedLocalPath: String?,
+    selectedLocalUri: Uri?,
     onValidateUrl: (String) -> Boolean
 ) {
     var remoteUrl by rememberSaveable { mutableStateOf("") }
@@ -175,6 +176,7 @@ fun AddSourceDialog(
                     )
                     1 -> LocalTabContent(
                         selectedPath = selectedLocalPath,
+                        selectedUri = selectedLocalUri,
                         onPickFile = onLocalPick,
                         validation = localFileValidation
                     )
@@ -293,14 +295,14 @@ private fun RemoteTabContent(
 @Composable
 private fun rememberLocalFileValidation(path: String?): FieldValidation = remember(path) {
     if (path == null) return@remember FieldValidation.Empty
-    val fileName = path.toUri().lastPathSegment ?: ""
-    if (!fileName.endsWith(".mpp", ignoreCase = true)) FieldValidation.Invalid
+    if (!path.endsWith(".mpp", ignoreCase = true)) FieldValidation.Invalid
     else FieldValidation.Valid
 }
 
 @Composable
 private fun LocalTabContent(
     selectedPath: String?,
+    selectedUri: Uri?,
     onPickFile: () -> Unit,
     validation: FieldValidation
 ) {
@@ -366,7 +368,7 @@ private fun LocalTabContent(
                     )
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = selectedPath.toUri().toFilePath().substringAfterLast("/"),
+                            text = selectedPath,
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium,
                             color = textColor,
@@ -376,7 +378,7 @@ private fun LocalTabContent(
                         Text(
                             text = when (validation) {
                                 FieldValidation.Invalid -> stringResource(R.string.sources_dialog_local_invalid_extension)
-                                else -> selectedPath.toUri().toFilePath().substringBeforeLast("/")
+                                else -> selectedUri?.toFilePath()?.takeIf { it.startsWith("/") }?.substringBeforeLast("/") ?: ""
                             },
                             style = MaterialTheme.typography.bodySmall,
                             color = if (isValid) textColor.copy(alpha = 0.5f) else MaterialTheme.colorScheme.error,
