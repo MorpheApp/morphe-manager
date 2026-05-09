@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -51,6 +52,10 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
+import compose.icons.FontAwesomeIcons
+import compose.icons.fontawesomeicons.Brands
+import compose.icons.fontawesomeicons.brands.Github
+import compose.icons.fontawesomeicons.brands.Gitlab
 import kotlinx.coroutines.flow.mapNotNull
 import org.koin.compose.koinInject
 
@@ -192,6 +197,32 @@ private fun rememberUrlValidation(url: String, validate: (String) -> Boolean): F
     }
 
 @Composable
+private fun UrlFormatRow(
+    icon: ImageVector,
+    text: String
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.padding(horizontal = 4.dp)
+    ) {
+        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(14.dp)
+            )
+        }
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace
+        )
+    }
+}
+
+@Composable
 private fun RemoteTabContent(
     remoteUrl: String,
     onUrlChange: (String) -> Unit,
@@ -238,10 +269,24 @@ private fun RemoteTabContent(
         // URL format hint
         InfoBadge(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.sources_dialog_remote_url_formats_title) +
-                    stringResource(R.string.sources_dialog_remote_url_formats_list),
-            style = InfoBadgeStyle.Default
+            text = stringResource(R.string.sources_dialog_remote_url_formats_title),
+            style = InfoBadgeStyle.Default,
+            isCompact = true
         )
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            UrlFormatRow(
+                icon = FontAwesomeIcons.Brands.Github,
+                text = "github.com/owner/repo"
+            )
+            UrlFormatRow(
+                icon = FontAwesomeIcons.Brands.Gitlab,
+                text = "gitlab.com/owner/repo"
+            )
+            UrlFormatRow(
+                icon = Icons.Outlined.Link,
+                text = "example.com/patches-bundle.json"
+            )
+        }
     }
 }
 
@@ -355,10 +400,9 @@ private fun LocalTabContent(
         }
 
         // Description
-        InfoBadge(
+        UrlFormatRow(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.sources_dialog_local_file_description),
-            style = InfoBadgeStyle.Default
+            text = stringResource(R.string.sources_dialog_local_file_description)
         )
     }
 }
