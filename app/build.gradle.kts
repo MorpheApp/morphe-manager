@@ -127,7 +127,7 @@ dependencies {
 
 android {
     namespace = "app.morphe.manager"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "app.morphe.manager"
