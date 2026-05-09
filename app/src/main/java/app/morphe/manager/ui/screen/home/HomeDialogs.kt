@@ -1785,17 +1785,25 @@ fun DeepLinkAddSourceDialog(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
-            val owner = remember(url) {
-                runCatching { URI(url).path.trim('/').split('/').firstOrNull() }.getOrNull()
+            val avatarUrl = remember(url) {
+                runCatching {
+                    val uri = URI(url)
+                    val owner = uri.path.trim('/').split('/').firstOrNull()
+                    val isGitLab = uri.host?.contains("gitlab.com", ignoreCase = true) == true
+                    if (owner != null) {
+                        if (isGitLab) "https://unavatar.io/gitlab/$owner"
+                        else "https://github.com/$owner.png"
+                    } else null
+                }.getOrNull()
             }
             Surface(
                 shape = CircleShape,
                 color = MaterialTheme.colorScheme.primaryContainer,
                 modifier = Modifier.size(56.dp)
             ) {
-                if (owner != null) {
+                if (avatarUrl != null) {
                     RemoteAvatar(
-                        url = "https://github.com/$owner.png",
+                        url = avatarUrl,
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
