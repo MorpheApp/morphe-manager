@@ -1,3 +1,12 @@
+# [1.17.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.6...v1.17.0-dev.7) (2026-05-09)
+
+
+### Bug Fixes
+
+* Remap bundle UIDs on import to restore saved patch selections on fresh install ([22e8961](https://github.com/MorpheApp/morphe-manager/commit/22e8961ea9df29ecf5816604e397a079204cfa62))
+* Resolve file picker and path display issues for Downloads and SAF ([#531](https://github.com/MorpheApp/morphe-manager/issues/531)) ([5cfddd2](https://github.com/MorpheApp/morphe-manager/commit/5cfddd2ceca0ac744d535d232cabe7584ae1981e))
+* Skip import for unknown bundle UIDs to prevent FK constraint crash ([806582f](https://github.com/MorpheApp/morphe-manager/commit/806582f3503a59a08ede290e1bd6de10ac0de098))
+
 # [1.17.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.5...v1.17.0-dev.6) (2026-05-09)
 
 
