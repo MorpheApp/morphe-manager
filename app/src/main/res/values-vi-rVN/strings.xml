@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
-    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi trang chủ. Bạn có thể khôi phục lại bằng nút \"\" ở cuối danh sách</string>
+    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi trang chủ. Bạn có thể khôi phục lại từ danh sách ứng dụng đang ẩn ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
     <string name="home_app_show_hidden">Hiện ứng dụng đã ẩn</string>
     <string name="home_app_no_hidden">Không có ứng dụng nào đang ẩn</string>
@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Chọn tệp nguồn vá .mpp từ bộ nhớ trong</string>
     <string name="sources_dialog_local_invalid_extension">Tệp phải có đuôi .mpp</string>
     <string name="sources_dialog_url_valid">URL repo hoặc JSON hợp lệ</string>
-    <string name="sources_dialog_url_invalid">URL phải trỏ đến repo GitHub hoặc tệp .json</string>
+    <string name="sources_dialog_url_invalid">URL phải trỏ đến kho lưu trữ GitHub/GitLab hoặc tệp .json</string>
     <string name="sources_dialog_local_change_file">Đổi tệp</string>
     <string name="sources_dialog_preinstalled">Được cài đặt sẵn</string>
     <string name="sources_update_success">Cập nhật thành công</string>

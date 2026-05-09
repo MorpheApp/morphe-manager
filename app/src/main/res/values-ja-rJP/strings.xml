@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">ストレージから .mpp パッチソースファイルを選択してください</string>
     <string name="sources_dialog_local_invalid_extension">ファイルは.mpp拡張子でなければなりません</string>
     <string name="sources_dialog_url_valid">有効なリポジトリまたはJSON URL</string>
-    <string name="sources_dialog_url_invalid">URLはGitHubリポジトリまたは.jsonファイルを指している必要があります</string>
+    <string name="sources_dialog_url_invalid">URLは、GitHub/GitLabリポジトリまたは.jsonファイルを指している必要があります。</string>
     <string name="sources_dialog_local_change_file">ファイルを変更</string>
     <string name="sources_dialog_preinstalled">プリインストール</string>
     <string name="sources_update_success">更新成功</string>

@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Vælg en .mpp patch kildefil fra lagring</string>
     <string name="sources_dialog_local_invalid_extension">Filen skal have en .mpp-udvidelse</string>
     <string name="sources_dialog_url_valid">Gyldigt repository eller JSON-URL</string>
-    <string name="sources_dialog_url_invalid">URL\'en skal pege på et GitHub-lager eller en .json-fil</string>
+    <string name="sources_dialog_url_invalid">URL\'en skal pege på et GitHub/GitLab-lager eller en .json-fil</string>
     <string name="sources_dialog_local_change_file">Ændre fil</string>
     <string name="sources_dialog_preinstalled">Forhåndsinstalleret</string>
     <string name="sources_update_success">Opdatering vellykket</string>

@@ -5,6 +5,7 @@
     <string name="home_not_patched_yet">Inte modifierad än</string>
     <string name="home_no_patches_available">Inga tillägg är tillgängliga</string>
     <string name="home_app_hide_title">Dölj den här appen?</string>
+    <string name="home_app_hide_message">Den här appen döljs från startsidan. Du kan återställa den senare från de dolda apparna med knappen längst ned i listan</string>
     <string name="home_app_will_be_hidden">Den här appen döljs</string>
     <string name="home_app_show_hidden">Visa dolda appar</string>
     <string name="home_app_no_hidden">Inga dolda appar</string>
@@ -84,7 +85,6 @@
     <string name="sources_dialog_local_file_description">Välj en källfil för tillägg i formatet .mpp från lagringen</string>
     <string name="sources_dialog_local_invalid_extension">Filen måste ha filändelsen .mpp</string>
     <string name="sources_dialog_url_valid">Giltig lagringsplats eller JSON-adress</string>
-    <string name="sources_dialog_url_invalid">Adressen måste peka på en GitHub-lagringsplats eller .json-fil</string>
     <string name="sources_dialog_local_change_file">Byt fil</string>
     <string name="sources_dialog_preinstalled">Förinstallerad</string>
     <string name="sources_update_success">Uppdateringen lyckades</string>
@@ -142,7 +142,9 @@
     <string name="expert_mode_universal_patches">Universella tillägg</string>
     <string name="expert_mode_new_patches">Nytt</string>
     <string name="expert_mode_multiple_sources_warning_title">Flera tilläggskällor har valts</string>
-    <string name="expert_mode_multiple_sources_warning_message">"Du har valt tillägg från flera tilläggskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Du har valt tillägg från flera tilläggskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. 
+
+Är du säker på att du vill fortsätta?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Overifierad APK-fil</string>
     <string name="home_invalid_signature_message">Den APK-fil du har valt för &lt;b&gt;%s&lt;/b&gt; matchar inte det förväntade signeringscertifikatet. Den kan ha modifierats eller vara från en opålitlig källa.</string>
@@ -355,7 +357,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_appearance_background_random_interval_daily">Varje dag</string>
     <string name="settings_appearance_background_random_interval_3days">Var tredje dag</string>
     <string name="settings_appearance_parallax_effect">Parallaxeffekt</string>
-    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när enheten lutas</string>
+    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när du lutar enheten</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_system">System</string>
@@ -383,6 +385,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_appearance_app_icon_dark_2">Tomrum</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ändra appikon?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Ändra till &lt;b&gt;%s&lt;/b&gt; och starta om?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ändra ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Uppdateringar</string>

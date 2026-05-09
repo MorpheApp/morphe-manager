@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">從儲存空間中選擇 .mpp 修補來源檔案</string>
     <string name="sources_dialog_local_invalid_extension">檔案必須具有 .mpp 副檔名</string>
     <string name="sources_dialog_url_valid">有效的儲存庫或 JSON 位址</string>
-    <string name="sources_dialog_url_invalid">URL 必須指向 GitHub 倉庫或 .json 檔案</string>
+    <string name="sources_dialog_url_invalid">URL 必須指向 GitHub/GitLab 倉庫或 .json 檔案</string>
     <string name="sources_dialog_local_change_file">變更檔案</string>
     <string name="sources_dialog_preinstalled">預先安裝</string>
     <string name="sources_update_success">更新成功</string>

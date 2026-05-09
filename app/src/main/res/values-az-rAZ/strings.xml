@@ -5,6 +5,7 @@
     <string name="home_not_patched_yet">Hələ yamaqlanmayıb</string>
     <string name="home_no_patches_available">Yamaqlar əlçatan deyil</string>
     <string name="home_app_hide_title">Bu tətbiq gizlədilsin?</string>
+    <string name="home_app_hide_message">Bu tətbiq əsas ekrandan gizlədiləcək. Siyahının aşağısındakı düyməni istifadə edərək onu daha sonra gizli tətbiqlərdən qaytara bilərsiniz</string>
     <string name="home_app_will_be_hidden">Bu tətbiq gizlədiləcək</string>
     <string name="home_app_show_hidden">Gizlədilən tətbiqləri göstər</string>
     <string name="home_app_no_hidden">Gizlədilən tətbiqlər yoxdur</string>
@@ -62,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Təcrübi tətbiq versiyaların istifadə et</string>
     <string name="sources_management_experimental_versions_toggle_description">Əlçatandırsa təcrübi tətbiq hədəflərin yamaqla</string>
     <string name="sources_management_already_exists">Bu mənbə artıq əlavə edilib</string>
+    <string name="sources_management_invalid_url">Etibarsız mənbə URL-si. Xahiş olunur, ünvanı yoxla və təkrar cəhd et</string>
+    <string name="sources_management_metadata_unavailable">Əlavə Məlumat Yoxdur</string>
+    <string name="sources_management_metadata_unavailable_hint">Uzaq üst məlumatı faylı mövcud deyil. Quraşdırılan paketlə yamaqlanma hələ də işləyir, lakin bu mənbə üçün birbaşa yenilənmə qapadılıb</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Yamaq paketin yükləmək olmadı. Mənbə URL-si səhv ola bilər və ya fayl mövcud deyil</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
@@ -76,12 +81,17 @@
     <string name="sources_dialog_remote_url_formats_title">Nümunələr:</string>
     <string name="sources_dialog_local">Yerli</string>
     <string name="sources_dialog_local_file">Yamaq mənbəsi faylını seçin</string>
+    <string name="sources_dialog_local_file_tap_hint">Yaddaşı araşdırmaq üçün toxun</string>
     <string name="sources_dialog_local_file_description">Yaddaşdan .mpp yamaq mənbə faylı seçin</string>
+    <string name="sources_dialog_local_invalid_extension">Faylın .mpp əlavəsi olmalıdır</string>
+    <string name="sources_dialog_url_valid">Etibarlı depo və ya JSON URL</string>
     <string name="sources_dialog_local_change_file">Faylı dəyişdir</string>
     <string name="sources_dialog_preinstalled">İlkin quraşdırılan</string>
     <string name="sources_update_success">Uğurlu yeniləmə</string>
     <string name="sources_update_unavailable">Yenilənmə əlçatan deyil</string>
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
+    <string name="sources_download_fail_named">\'%s\' yenilənə bilmədi. İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': yamaq üst məlumatı tapılmadı</string>
     <string name="sources_patch_expert_badge">Mütəxəssis</string>
     <string name="sources_patch_expert_badge_tooltip">Bu yamağı əl ilə yerləşdirmək üçün Tənzimləmələrdə Mütəxəssis rejimin aktivləşdir</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -258,6 +268,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_storage_permission_dialog_title">Yaddaş keçidinə keçmək olmur</string>
     <string name="patcher_incompatible_patcher_title">Yenilənmə tələb olundu</string>
+    <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; paketi &lt;b&gt;%2$s&lt;/b&gt; və ya daha yeni versiya yamaqlayıcı tələb edir. Xahiş olunur, bu tətbiqi yamaqlamaq üçün Morphe-ni yenilə</string>
     <string name="patcher_incompatible_patcher_update_button">Morphe-ni yüklə və yenilə</string>
     <string name="patcher_storage_permission_description_api30">Bir və ya daha çox yamaq seçimi Morphe-nin oxuya bilmədiyi yolları işarə edir. Yaddaş girişin qəbul et və düyməyə toxun, sonra yamaqlanma birbaşa başlayacaq</string>
     <string name="patcher_storage_permission_description_legacy">Bir və ya daha çox yamaq seçimi keçmək olmayan yolları göstərir. Yamaq seçimlərindəki yolları yeniləyin və təkrar cəhd edin</string>
@@ -374,6 +385,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_app_icon_dark_2">Boşluq</string>
     <string name="settings_appearance_app_icon_dark_3">Tünd göy</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Tətbiq simvolu dəyişdirilsin?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; olaraq dəyişdirilib yenidən başladılsın?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simvolu dəyişdir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Yenilənmələr</string>

@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Henüz yamalanmadı</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
     <string name="home_app_hide_title">Uygulama gizlensin mi?</string>
-    <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki \"düğmesini kullanarak geri getirebilirsiniz.</string>
+    <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki düğmeyi kullanarak gizli uygulamalardan geri getirebilirsiniz</string>
     <string name="home_app_will_be_hidden">Bu uygulama gizlenecektir</string>
     <string name="home_app_show_hidden">Gizli uygulamaları göster</string>
     <string name="home_app_no_hidden">Gizli uygulama yok</string>
@@ -64,8 +64,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Mevcutsa deneysel uygulama hedeflerini yamala</string>
     <string name="sources_management_already_exists">Bu kaynak zaten eklenmiş</string>
     <string name="sources_management_invalid_url">Geçersiz kaynak URL\'si. Lütfen adresi kontrol edin ve tekrar deneyin</string>
-    <string name="sources_management_metadata_unavailable">Meta Veri Yok</string>
-    <string name="sources_management_metadata_unavailable_hint">Uzak meta veri dosyası kullanılamıyor. Yüklü paketle yama yapmak hala çalışır, ancak bu kaynak için otomatik güncelleme devre dışı bırakılmıştır</string>
+    <string name="sources_management_metadata_unavailable">Metadata Yok</string>
+    <string name="sources_management_metadata_unavailable_hint">Uzak metadata dosyası kullanılamıyor. Yüklü paketle yamalama hala çalışır, ancak bu kaynak için otomatik güncelleme devre dışı bırakıldı</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Yama paketi indirilemedi. Kaynak URL\'si yanlış olabilir veya dosya mevcut olmayabilir</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünen ad</string>
@@ -81,18 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Örnekler:</string>
     <string name="sources_dialog_local"> Yerel</string>
     <string name="sources_dialog_local_file">Yama kaynağı dosyası seç</string>
-    <string name="sources_dialog_local_file_tap_hint">Depolamayı göz atmak için dokunun</string>
+    <string name="sources_dialog_local_file_tap_hint">Depolamaya göz atmak için dokunun</string>
     <string name="sources_dialog_local_file_description">Depolama alanından bir .mpp yama kaynağı dosyası seçin</string>
     <string name="sources_dialog_local_invalid_extension">Dosyanın .mpp uzantısına sahip olması gerekiyor</string>
     <string name="sources_dialog_url_valid">Geçerli depo veya JSON URL\'si</string>
-    <string name="sources_dialog_url_invalid">URL, bir GitHub deposuna veya .json dosyasına yönlendirmelidir</string>
+    <string name="sources_dialog_url_invalid">URL, bir GitHub deposu veya .json dosyasına işaret etmelidir</string>
     <string name="sources_dialog_local_change_file">Dosyayı değiştir</string>
     <string name="sources_dialog_preinstalled">Ön yüklü</string>
     <string name="sources_update_success">Güncelleme başarılı</string>
     <string name="sources_update_unavailable">Güncelleme mevcut değil</string>
     <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
     <string name="sources_download_fail_named">\'%s\' güncellenemedi. İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
-    <string name="sources_download_endpoint_not_found">\'%s\': yama meta verisi bulunamadı</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': yama metadatası bulunamadı</string>
     <string name="sources_patch_expert_badge">Uzman</string>
     <string name="sources_patch_expert_badge_tooltip">Bu yamayı manuel olarak eklemek için Ayarlar\'da Uzman modunu etkinleştirin</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -269,7 +269,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_ready_to_mount_subtitle">Bağlamak için aşağıdaki düğmeye basın</string>
     <string name="patcher_storage_permission_dialog_title">Depolama yoluna erişilemiyor</string>
     <string name="patcher_incompatible_patcher_title">Güncelleme gerekiyor</string>
-    <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; paketi, &lt;b&gt;%2$s&lt;/b&gt; veya daha yeni bir Morphe sürümü gerektiriyor. Bu uygulamayı yamalamak için lütfen Morphe\'yi güncelleyin</string>
+    <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; paketi, &lt;b&gt;%2$s&lt;/b&gt; veya daha yeni patcher sürümü gerektiriyor. Bu uygulamayı yamalamak için lütfen Morphe\'yi güncelleyin</string>
     <string name="patcher_incompatible_patcher_update_button">Morphe\'yi indir ve güncelle</string>
     <string name="patcher_storage_permission_description_api30">Bir veya daha fazla yama seçeneği, Morphe\'nin okuyamadığı yollara işaret ediyor. Depolama erişimini verin ve düğmeye dokunun, ardından yamalama otomatik olarak başlayacaktır</string>
     <string name="patcher_storage_permission_description_legacy">Bir veya daha fazla yama seçeneği, erişilemeyen yollara işaret ediyor. Yama seçeneklerindeki yolları güncelleyin ve tekrar deneyin</string>
@@ -546,7 +546,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_hint_conflict">Bu paket adıyla başka bir uygulama zaten yüklü. Devam etmeden önce onu kaldırın</string>
     <string name="installer_external_launched">%s açılıyor…</string>
     <string name="installer_external_timeout">%s yüklemeyi onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin</string>
-    <string name="installer_external_success">%s başarılı bir şekilde yüklediğini bildirdi</string>
+    <string name="installer_external_success">%s başarılı bir şekilde yüklendiğini bildirdi</string>
     <string name="installer_unavailable_title">%s kullanılamıyor</string>
     <string name="installer_unavailable_message">Tercih ettiğiniz yükleyici (%s) şu anda kullanılamıyor. Sorunu çözüp tekrar deneyebilir veya standart yükleyiciyi kullanabilirsiniz</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku\'nun çalıştığından ve ve bu uygulama için izin verildiğinden emin olun</string>

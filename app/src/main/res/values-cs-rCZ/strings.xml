@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Vyberte .mpp soubor se záplaty z uložiště</string>
     <string name="sources_dialog_local_invalid_extension">Soubor musí mít příponu .mpp</string>
     <string name="sources_dialog_url_valid">Platná adresa úložiště nebo URL JSON</string>
-    <string name="sources_dialog_url_invalid">URL musí ukazovat na repozitář GitHub nebo na soubor .json</string>
+    <string name="sources_dialog_url_invalid">URL musí odkazovat na repozitář GitHub/GitLab nebo na soubor .json</string>
     <string name="sources_dialog_local_change_file">Změnit soubor</string>
     <string name="sources_dialog_preinstalled">Předinstalované</string>
     <string name="sources_update_success">Aktualizace úspěšná</string>

@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Pilih berkas sumber tambalan .mpp dari penyimpanan</string>
     <string name="sources_dialog_local_invalid_extension">File harus memiliki ekstensi .mpp</string>
     <string name="sources_dialog_url_valid">Repositori atau URL JSON yang valid</string>
-    <string name="sources_dialog_url_invalid">URL harus mengarah ke repositori GitHub atau file .json</string>
+    <string name="sources_dialog_url_invalid">URL harus mengarah ke repositori GitHub/GitLab atau file .json</string>
     <string name="sources_dialog_local_change_file">Ganti berkas</string>
     <string name="sources_dialog_preinstalled">Sudah dipasang sebelumnya</string>
     <string name="sources_update_success">Pembaruan berhasil</string>

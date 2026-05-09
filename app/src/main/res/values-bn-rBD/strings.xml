@@ -82,7 +82,7 @@
     <string name="sources_dialog_local">লোকাল</string>
     <string name="sources_dialog_local_file">প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
     <string name="sources_dialog_local_file_description">স্টোর থেকে .mpp প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
-    <string name="sources_dialog_url_invalid">URL টি অবশ্যই একটি GitHub রিপো বা .json ফাইলের দিকে নির্দেশ করতে হবে</string>
+    <string name="sources_dialog_url_invalid">URL টি অবশ্যই একটি GitHub/GitLab রেপো অথবা .json ফাইল নির্দেশ করতে হবে।</string>
     <string name="sources_dialog_local_change_file">ফাইল পরিবর্তন করুন</string>
     <string name="sources_dialog_preinstalled">প্র-ইনস্টল করা হয়েছে</string>
     <string name="sources_update_success">আপডেট সফল হয়েছে</string>

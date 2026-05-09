@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Selectează un fișier .mpp cu patch-uri din stocare</string>
     <string name="sources_dialog_local_invalid_extension">Fișierul trebuie să aibă extensia .mpp</string>
     <string name="sources_dialog_url_valid">URL valid al depozitului sau JSON</string>
-    <string name="sources_dialog_url_invalid">URL-ul trebuie să indice un repo GitHub sau un fișier .json</string>
+    <string name="sources_dialog_url_invalid">URL-ul trebuie să indice un depozit GitHub/GitLab sau un fișier .json</string>
     <string name="sources_dialog_local_change_file">Schimbă fișierul</string>
     <string name="sources_dialog_preinstalled">Preinstalate</string>
     <string name="sources_update_success">Actualizare reușită</string>

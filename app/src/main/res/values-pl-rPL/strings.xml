@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Jeszcze niezmodyfikowana</string>
     <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
     <string name="home_app_hide_title">Ukryć tę aplikację?</string>
-    <string name="home_app_hide_message">Ta aplikacja zostanie ukryta na ekranie głównym. Możesz ją później przywrócić za pomocą przycisku \"\" na dole listy</string>
+    <string name="home_app_hide_message">Ta aplikacja zostanie ukryta na ekranie głównym. Możesz ją później przywrócić z ukrytych aplikacji za pomocą przycisku na dole listy</string>
     <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
     <string name="home_app_show_hidden">Pokaż ukryte aplikacje</string>
     <string name="home_app_no_hidden">Brak ukrytych aplikacji</string>
@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Wybierz plik źródłowy .mpp z pamięci urządzenia</string>
     <string name="sources_dialog_local_invalid_extension">Plik musi mieć rozszerzenie .mpp</string>
     <string name="sources_dialog_url_valid">Prawidłowe repozytorium lub adres URL pliku JSON</string>
-    <string name="sources_dialog_url_invalid">Adres URL musi wskazywać na repozytorium GitHub lub plik .json</string>
+    <string name="sources_dialog_url_invalid">Adres URL musi wskazywać na repozytorium GitHub/GitLab lub plik .json</string>
     <string name="sources_dialog_local_change_file">Zmień plik</string>
     <string name="sources_dialog_preinstalled">Wbudowane</string>
     <string name="sources_update_success">Aktualizacja zakończona pomyślnie</string>
@@ -545,8 +545,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>
     <string name="installer_hint_conflict">Inna aplikacja o tej samej nazwie pakietu jest już zainstalowana. Odinstaluj ją, aby kontynuować</string>
     <string name="installer_external_launched">Otwieranie %s…</string>
-    <string name="installer_external_timeout">%s nie potwierdził instalacji. Sprawdź drugą aplikację i spróbuj ponownie</string>
-    <string name="installer_external_success">%s zgłosił udaną instalację</string>
+    <string name="installer_external_timeout">Brak potwierdzenia instalacji ze strony %s. Sprawdź drugą aplikację i spróbuj ponownie</string>
+    <string name="installer_external_success">Instalacja przez %s zakończona pomyślnie</string>
     <string name="installer_unavailable_title">%s niedostępny</string>
     <string name="installer_unavailable_message">Twój preferowany instalator (%s) jest obecnie niedostępny. Możesz naprawić problem i spróbować ponownie lub po prostu użyć standardowego instalatora</string>
     <string name="installer_unavailable_shizuku_hint">Upewnij się, że Shizuku jest uruchomione, a tej aplikacji przyznano odpowiednie uprawnienia</string>

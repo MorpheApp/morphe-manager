@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Válassz ki egy .mpp módosításforrást a tárhelyről</string>
     <string name="sources_dialog_local_invalid_extension">A fájlnak .mpp kiterjesztéssel kell rendelkeznie</string>
     <string name="sources_dialog_url_valid">Érvényes tároló vagy JSON URL</string>
-    <string name="sources_dialog_url_invalid">Az URL-nek egy GitHub repozitóriumra vagy .json fájlra kell mutatnia</string>
+    <string name="sources_dialog_url_invalid">Az URL-nek GitHub/GitLab repóra vagy .json fájlra kell mutatnia</string>
     <string name="sources_dialog_local_change_file">Fájl megváltoztatása</string>
     <string name="sources_dialog_preinstalled">Előretelepített</string>
     <string name="sources_update_success">A frissítés sikeres</string>
@@ -128,17 +128,17 @@
     <string name="home_selected_version">Kiválasztott verzió</string>
     <string name="home_select_apk_title">APK kiválasztása</string>
     <string name="home_select_any_apk_description">Koppints az alábbi gombra a módosítani kívánt APK-fájl kiválasztásához.</string>
-    <string name="home_invalid_apk_unreadable">Nem sikerült a fájlt olvasni. Ellenőrizze, hogy a \'Külső tároló\' nincs-e akkumulátorkorlátozás alatt</string>
+    <string name="home_invalid_apk_unreadable">Nem sikerült olvasni a fájlt. Ellenőrizd, hogy a \'Külső tároló\' nincs-e akkumulátorkorlátozás alatt</string>
     <string name="home_invalid_apk_not_an_apk">A kiválasztott fájl nem egy érvényes APK</string>
-    <string name="home_invalid_apk_io_error">Nem sikerült megnyitni a fájlt. Kérjük, próbálja meg újra</string>
+    <string name="home_invalid_apk_io_error">Nem sikerült megnyitni a fájlt. Kérjük, próbáld meg újra</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Szakértői mód</string>
-    <string name="expert_mode_search">Patchek keresése</string>
+    <string name="expert_mode_search">Módosítások keresése</string>
     <string name="expert_mode_proceed">Módosítás indítása</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
-    <string name="expert_mode_reset_to_default">Engedélyezze az ajánlott javításokat</string>
-    <string name="expert_mode_restore_saved">Restore saved selection</string>
+    <string name="expert_mode_reset_to_default">Ajánlott módosítások engedélyezése</string>
+    <string name="expert_mode_restore_saved">Mentett összeállítás visszaállítása</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_universal_patches">Univerzális módosítások</string>
     <string name="expert_mode_new_patches">Új</string>

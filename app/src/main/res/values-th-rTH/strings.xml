@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">เลือกไฟล์ .mpp จากแหล่งข้อมูลอยู่บนที่เก็บข้อมูลภายใน</string>
     <string name="sources_dialog_local_invalid_extension">ไฟล์ต้องมีนามสกุล .mpp</string>
     <string name="sources_dialog_url_valid">ที่อยู่ URL หรือ JSON ที่ถูกต้อง</string>
-    <string name="sources_dialog_url_invalid">URL ต้องชี้ไปยัง GitHub repo หรือไฟล์ .json เท่านั้น</string>
+    <string name="sources_dialog_url_invalid">URL ต้องชี้ไปยัง GitHub/GitLab repo หรือไฟล์ .json</string>
     <string name="sources_dialog_local_change_file">เปลี่ยนไฟล์</string>
     <string name="sources_dialog_preinstalled">ติดตั้งล่วงหน้าแล้ว</string>
     <string name="sources_update_success">อัปเดตเสร็จสมบูรณ์</string>

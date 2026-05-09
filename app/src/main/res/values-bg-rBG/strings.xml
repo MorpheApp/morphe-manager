@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Изберете .mpp файл на източник от съхранението</string>
     <string name="sources_dialog_local_invalid_extension">Файлът трябва да има разширение .mpp</string>
     <string name="sources_dialog_url_valid">Валиден URL на хранилище или JSON</string>
-    <string name="sources_dialog_url_invalid">URL адресът трябва да сочи към GitHub хранилище или .json файл</string>
+    <string name="sources_dialog_url_invalid">URL адресът трябва да сочи към GitHub/GitLab хранилище или .json файл</string>
     <string name="sources_dialog_local_change_file">Промяна на файл</string>
     <string name="sources_dialog_preinstalled">Предварително инсталиран</string>
     <string name="sources_update_success">Успешно обновяване</string>

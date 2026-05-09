@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">בחר קובץ .mpp תצוג מותאם</string>
     <string name="sources_dialog_local_invalid_extension">הקובץ חייב להיות עם סיומת ‎.mpp</string>
     <string name="sources_dialog_url_valid">כתובת מאגר או URL חוקיים בפורמט JSON</string>
-    <string name="sources_dialog_url_invalid">הכתובת חייבת להפנות למאגר GitHub או לקובץ .json</string>
+    <string name="sources_dialog_url_invalid">הכתובת חייבת להפנות למאגר GitHub/GitLab או לקובץ ‎.json</string>
     <string name="sources_dialog_local_change_file">שנה קובץ</string>
     <string name="sources_dialog_preinstalled">מובן מראשון</string>
     <string name="sources_update_success">עדכון הצליח</string>
