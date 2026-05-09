@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">아직 패치되지 않음</string>
     <string name="home_no_patches_available">사용 가능한 패치 없음</string>
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
-    <string name="home_app_hide_message">이 앱은 홈 화면에서 숨겨집니다. 목록 하단에 있는 \'\' 버튼을 사용하여 나중에 복원할 수 있습니다.</string>
+    <string name="home_app_hide_message">이 앱은 홈 화면에서 숨겨집니다. 목록 하단에 있는 버튼을 사용하여 숨겨진 앱 목록에서 나중에 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
     <string name="home_app_show_hidden">숨겨진 앱 보이기</string>
     <string name="home_app_no_hidden">숨겨진 앱이 없습니다</string>
@@ -84,8 +84,8 @@
     <string name="sources_dialog_local_file_tap_hint">기기 저장소를 탐색하려면 탭하세요</string>
     <string name="sources_dialog_local_file_description">저장소에서 .mpp 패치 소스 파일을 선택하세요</string>
     <string name="sources_dialog_local_invalid_extension">파일은 .mpp 확장자를 가져야 합니다</string>
-    <string name="sources_dialog_url_valid">유효한 저장소 또는 JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL은 GitHub 저장소 또는 .json 파일을 가리켜야 합니다</string>
+    <string name="sources_dialog_url_valid">유효한 리포지토리 또는 JSON URL</string>
+    <string name="sources_dialog_url_invalid">URL은 GitHub/GitLab 리포지토리 또는 .json 파일을 가리켜야 합니다</string>
     <string name="sources_dialog_local_change_file">파일 변경</string>
     <string name="sources_dialog_preinstalled">미리 설치됨</string>
     <string name="sources_update_success">업데이트를 성공하였습니다</string>

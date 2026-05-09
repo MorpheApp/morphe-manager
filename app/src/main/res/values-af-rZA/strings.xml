@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Kies \'n .mpp verandering oorsprong vyl van berging</string>
     <string name="sources_dialog_local_invalid_extension">Die lêer moet \".mpp\" hê</string>
     <string name="sources_dialog_url_valid">Geldige bewaarplek of JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL moet na \'n GitHub-repo of \'.json\'-lêer wys</string>
+    <string name="sources_dialog_url_invalid">URL moet na \'n GitHub/GitLab repo of \'n .json-lêer wys</string>
     <string name="sources_dialog_local_change_file">Verander vyl</string>
     <string name="sources_dialog_preinstalled">Voor geïnstalleer</string>
     <string name="sources_update_success">Opdatering suksesvol</string>

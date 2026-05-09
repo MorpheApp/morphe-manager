@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">स्टोरेजमधून .mpp सुधारणा मूळ फाईल निवडा</string>
     <string name="sources_dialog_local_invalid_extension">फाईलमध्ये .mpp एक्स्टेंशन असणे आवश्यक आहे</string>
     <string name="sources_dialog_url_valid">वैध रिपॉजिटरी किंवा JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL GitHub रेपो किंवा .json फाइलकडे निर्देशित करत असणे आवश्यक आहे</string>
+    <string name="sources_dialog_url_invalid">URL GitHub/GitLab रेपॉ किंवा .json फाइलकडे निर्देशित करणे आवश्यक आहे</string>
     <string name="sources_dialog_local_change_file">फाईल बदला</string>
     <string name="sources_dialog_preinstalled">पूर्व-स्थापित</string>
     <string name="sources_update_success">अपडेट यशस्वी</string>

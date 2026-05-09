@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Izberi datoteko .mpp za vir popravka iz shrambe</string>
     <string name="sources_dialog_local_invalid_extension">Datoteka mora imeti priponko .mpp</string>
     <string name="sources_dialog_url_valid">Veljavna repozitorija ali URL naslov JSON</string>
-    <string name="sources_dialog_url_invalid">URL mora biti naslov do GitHub repozitorija ali .json datoteke</string>
+    <string name="sources_dialog_url_invalid">URL mora kazati na repozitorij GitHub/GitLab ali na .json datoteko</string>
     <string name="sources_dialog_local_change_file">Spremeni datoteko</string>
     <string name="sources_dialog_preinstalled">Prednameščen</string>
     <string name="sources_update_success">Posodobitev uspešna</string>

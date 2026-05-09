@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Pas encore patchée</string>
     <string name="home_no_patches_available">Aucun patch disponible</string>
     <string name="home_app_hide_title">Masquer cette application ?</string>
-    <string name="home_app_hide_message">Cette application sera masquée de l’écran d’accueil. Vous pourrez la restaurer plus tard en utilisant le bouton \"\" en bas de la liste</string>
+    <string name="home_app_hide_message">Cette application sera masquée de l’écran d’accueil. Vous pourrez la restaurer plus tard depuis les applications masquées en utilisant le bouton situé en bas de la liste</string>
     <string name="home_app_will_be_hidden">Cette application sera masquée</string>
     <string name="home_app_show_hidden">Afficher les applications masquées</string>
     <string name="home_app_no_hidden">Aucune application masquée</string>
@@ -14,7 +14,7 @@
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">L\'autorisation d\'installation de l\'application doit être accordée à l\'avance afin d\'éviter un bug dans le système Android 11 qui affectera négativement l\'expérience utilisateur</string>
     <string name="deep_link_add_source_title">Ajouter la source</string>
-    <string name="deep_link_add_source_message">Voulez-vous ajouter cette source de patch à Morphe ?</string>
+    <string name="deep_link_add_source_message">Voulez-vous ajouter cette source de patchs à Morphe ?</string>
     <string name="deep_link_add_source_warning">Ajoutez uniquement des sources auxquelles vous faites confiance</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Mise à jour de Morphe disponible</string>
@@ -30,7 +30,7 @@
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
     <string name="home_search_apps">Rechercher des applications</string>
     <string name="home_no_apps_title">Aucune application disponible</string>
-    <string name="home_no_apps_subtitle">Ajoutez une source de patch ou activez-en une existante dans %s</string>
+    <string name="home_no_apps_subtitle">Ajoutez une source de patchs ou activez-en une existante dans %s</string>
     <string name="home_no_apps_search_subtitle">Aucune application ne correspond à \"%s\"</string>
     <string name="home_all_apps_hidden_title">Toutes les applications sont masquées</string>
     <string name="home_all_apps_hidden_subtitle">Vous avez masqué toutes les applications de l’écran d’accueil</string>
@@ -55,7 +55,7 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Alimenté par la caféine et les bons patchs</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Sources de patch</string>
+    <string name="sources_management_title">Sources de patchs</string>
     <string name="sources_management_open_in_browser">Ouvrir dans le navigateur</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_management_prerelease_toggle">Utiliser les pré-versions des patchs</string>
@@ -69,29 +69,29 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Le bundle de patch n’a pas pu être téléchargé. L’URL de la source est peut-être incorrecte ou le fichier n’existe pas</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nom d\'affichage</string>
-    <string name="sources_dialog_rename">Renommer la source de patch</string>
-    <string name="sources_dialog_duplicate_name_error">Une source de patch portant ce nom existe déjà</string>
-    <string name="sources_dialog_missing_error">Impossible de mettre à jour cette source de patch</string>
+    <string name="sources_dialog_rename">Renommer la source de patchs</string>
+    <string name="sources_dialog_duplicate_name_error">Une source de patchs portant ce nom existe déjà</string>
+    <string name="sources_dialog_missing_error">Impossible de mettre à jour cette source de patchs</string>
     <string name="sources_dialog_view_any_version">N\'importe quelle version</string>
     <string name="sources_dialog_view_any_package">N\'importe quel package</string>
-    <string name="sources_dialog_add_source">Ajouter une source de patch</string>
+    <string name="sources_dialog_add_source">Ajouter une source de patchs</string>
     <string name="sources_dialog_delete_confirm_message">Supprimer la source \"%s\" ? Cela ne peut pas être réversible</string>
     <string name="sources_dialog_remote">Distant</string>
     <string name="sources_dialog_remote_url">URL de la source</string>
     <string name="sources_dialog_remote_url_formats_title">Exemples :</string>
     <string name="sources_dialog_local">Local</string>
-    <string name="sources_dialog_local_file">Sélectionner un fichier de source de patch</string>
-    <string name="sources_dialog_local_file_tap_hint">Touchez pour parcourir le stockage</string>
-    <string name="sources_dialog_local_file_description">Sélectionnez un fichier de source de patch .mpp depuis le stockage</string>
+    <string name="sources_dialog_local_file">Sélectionner un fichier de source de patchs</string>
+    <string name="sources_dialog_local_file_tap_hint">Appuyez pour parcourir le stockage</string>
+    <string name="sources_dialog_local_file_description">Sélectionnez un fichier de source de patchs .mpp depuis le stockage</string>
     <string name="sources_dialog_local_invalid_extension">Le fichier doit avoir une extension .mpp</string>
-    <string name="sources_dialog_url_valid">Dépôt ou URL JSON valide</string>
+    <string name="sources_dialog_url_valid">URL JSON ou dépôt valide</string>
     <string name="sources_dialog_url_invalid">L\'URL doit pointer vers un dépôt GitHub ou un fichier .json</string>
     <string name="sources_dialog_local_change_file">Changer de fichier</string>
     <string name="sources_dialog_preinstalled">Préinstallé</string>
     <string name="sources_update_success">Mise à jour réussie</string>
     <string name="sources_update_unavailable">Aucune mise à jour disponible</string>
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
-    <string name="sources_download_fail_named">\'%s\' n\'a pas pu être mis à jour. Vérifiez votre connexion Internet et réessayez</string>
+    <string name="sources_download_fail_named">\'%s\' n\'a pas pu être mis à jour. Vérifiez votre connexion internet et réessayez</string>
     <string name="sources_download_endpoint_not_found">\'%s\' : métadonnées de patch introuvables</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Activer le mode Expert dans les Paramètres pour inclure ce patch manuellement</string>
@@ -142,7 +142,7 @@
     <string name="expert_mode_no_results">Aucun patch trouvé</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
     <string name="expert_mode_new_patches">Nouveau</string>
-    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patch sélectionnées</string>
+    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patchs sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou des comportements inattendus. 
 
 Voulez-vous vraiment continuer ?"</string>
@@ -175,7 +175,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="home_low_disk_space_dialog_title">Espace libre faible</string>
     <string name="home_low_disk_space_dialog_message">Seulement %1$.2f Go d’espace de stockage libre disponible. Le patchage nécessite au moins %2$.2f Go d’espace libre pour fonctionner correctement</string>
     <string name="home_low_disk_space_dialog_warning">Continuer peut entraîner une erreur \"fichier introuvable\" ou un APK corrompu</string>
-    <string name="home_simple_bundle_select_title">Sélectionner une source de patch</string>
+    <string name="home_simple_bundle_select_title">Sélectionner une source de patchs</string>
     <!-- Patch Options -->
     <string name="custom_color">Couleur personnalisée</string>
     <string name="hex_color">Couleur hexadécimale</string>
@@ -226,7 +226,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="home_app_info_repatch_no_original_apk">APK original introuvable. Impossible de repatcher cette application</string>
     <string name="home_app_info_original_package_name">Nom de package original</string>
     <string name="home_app_info_applied_patches">Patchs appliqués</string>
-    <string name="home_app_info_patch_source_used">Source de patch utilisée</string>
+    <string name="home_app_info_patch_source_used">Source de patchs utilisée</string>
     <string name="home_app_info_install_type">Type d\'installation</string>
     <string name="home_app_info_install_type_custom_installer">Installateur personnalisé</string>
     <string name="home_app_info_install_type_system_installer">Installateur système</string>
@@ -391,7 +391,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="settings_advanced_updates">Mises à jour</string>
     <string name="settings_advanced_updates_use_prereleases">Utiliser les pré-versions de Morphe</string>
     <string name="settings_advanced_updates_use_prereleases_description">Recevez un accès anticipé aux nouvelles fonctionnalités de Morphe.
-Pour obtenir les patchs en pré-version, activez l’option pré-versions séparément dans chaque source de patch</string>
+Pour obtenir les patchs en pré-version, activez l’option pré-versions séparément dans chaque source de patchs</string>
     <string name="settings_advanced_updates_allow_metered">Mise à jour via les données mobiles</string>
     <string name="settings_advanced_updates_allow_metered_description">Autoriser Morphe et les mises à jour de patch à se télécharger via les données mobiles</string>
     <string name="settings_advanced_updates_background_notifications">Notifications de mise à jour en arrière-plan</string>
@@ -456,7 +456,7 @@ Pour les APK simples, supprime les bibliothèques natives pour les architectures
     <string name="settings_advanced_patch_options_light_theme_color">Couleur d\'arrière-plan du thème clair</string>
     <string name="settings_advanced_patch_options_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur</string>
     <string name="settings_advanced_patch_options_loading">Chargement des options de patch…</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">Attendez que la source de patch soit mise à jour</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Attendez que la source de patchs soit mise à jour</string>
     <string name="settings_advanced_patch_options_load_error">Échec du chargement des options de patch</string>
     <string name="settings_advanced_patch_options_no_available">Pas d\'options disponibles pour ce patch</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->

@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">لم يتم تعديله بعد</string>
     <string name="home_no_patches_available">لا يوجد تعديلات متاحة</string>
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
-    <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا باستخدام الزر \"\" في أسفل القائمة.</string>
+    <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا من قائمة التطبيقات المخفية باستخدام الزر الموجود أسفل القائمة.</string>
     <string name="home_app_will_be_hidden">سيتم إخفاء هذا التطبيق</string>
     <string name="home_app_show_hidden">إظهار التطبيقات المخفية</string>
     <string name="home_app_no_hidden">لا تطبيقات مخفية</string>

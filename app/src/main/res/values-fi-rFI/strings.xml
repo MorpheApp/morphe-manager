@@ -10,8 +10,8 @@
     <string name="home_app_show_hidden">Näytä piilotetut sovellukset</string>
     <string name="home_app_no_hidden">Ei piilotettuja sovelluksia</string>
     <string name="home_app_hidden_apps_title">Piilotetut sovellukset</string>
-    <string name="home_app_hidden_apps_hint">Napauta paljastaaksesi</string>
-    <string name="android_11_bug_dialog_title">Android 11 virhe</string>
+    <string name="home_app_hidden_apps_hint">Napauta näyttääksesi</string>
+    <string name="android_11_bug_dialog_title">Android 11 -virhe</string>
     <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
     <string name="deep_link_add_source_title">Lisää lähde</string>
     <string name="deep_link_add_source_message">Haluatko lisätä tämän korjauslähteen Morpheen?</string>
@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Valitse .mpp-lähdetiedosto tallennustilasta</string>
     <string name="sources_dialog_local_invalid_extension">Tiedoston pääte pitää olla .mpp</string>
     <string name="sources_dialog_url_valid">Kelvollinen arkisto tai JSON-osoite</string>
-    <string name="sources_dialog_url_invalid">URL:n on osoitettava GitHub-repositorioon tai .json-tiedostoon</string>
+    <string name="sources_dialog_url_invalid">URL-osoitteen on osoitettava GitHub/GitLab-repositorioon tai .json-tiedostoon</string>
     <string name="sources_dialog_local_change_file">Muokka tiedosto</string>
     <string name="sources_dialog_preinstalled">Esivalmis</string>
     <string name="sources_update_success">Muokitus onnistui</string>
@@ -132,10 +132,10 @@
     <string name="home_invalid_apk_not_an_apk">Valittu tiedosto ei ole kelvollinen APK</string>
     <string name="home_invalid_apk_io_error">Tiedoston avaaminen epäonnistui. Yritä uudelleen</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Asiantuntijan tila</string>
+    <string name="expert_mode_title">Asiantuntijatila</string>
     <string name="expert_mode_search">Etsi patcheja</string>
     <string name="expert_mode_proceed">Jatka pätkintä</string>
-    <string name="expert_mode_disable_all">Poista kaikki</string>
+    <string name="expert_mode_disable_all">Poista kaikki käytöstä</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_reset_to_default">Ota käyttöön suositellut korjaukset</string>
     <string name="expert_mode_restore_saved">Palauta tallennettu valinta</string>
@@ -205,14 +205,14 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="notification_icon_preview">Ilmoituskuvakkeen esikatselu</string>
     <string name="notification_icon_preview_hint">Säädä kokoa liukusäätimellä. Vedä siirtääksesi</string>
     <!-- Header Creator -->
-    <string name="header_creator_create">Luo mukautettu otsikko</string>
-    <string name="header_creator_instructions">Valitse kuvat valoiselle ja tummalle teemalle, sitten säädä pinch-to-zoom-puhkein</string>
-    <string name="header_creator_light_theme">Valoisan teeman otsikko</string>
-    <string name="header_creator_dark_theme">Tummalle teemalle otsikko</string>
-    <string name="header_creator_no_image">Ei kuvaa valittu</string>
-    <string name="header_creator_success">Otsikko luotu onnistuneesti</string>
-    <string name="header_creator_failed">Ei onnistu luoda otsikkoa</string>
-    <string name="header_creator_folder_explanation">Valitse, missää luoda \'%1$s/%2$s\' kansiota luotavaa päätiedostoa sisältäviä tiedostoja</string>
+    <string name="header_creator_create">Luo oma ylätunniste</string>
+    <string name="header_creator_instructions">Valitse kuvat vaalealle ja tummalle teemalle ja säädä niitä nipistämällä ja zoomaamalla</string>
+    <string name="header_creator_light_theme">Vaalean teeman ylätunniste</string>
+    <string name="header_creator_dark_theme">Tumman teeman ylätunniste</string>
+    <string name="header_creator_no_image">Ei valittua kuvaa</string>
+    <string name="header_creator_success">Ylätunniste on luotu</string>
+    <string name="header_creator_failed">Ylätunnisteen luominen epäonnistui</string>
+    <string name="header_creator_folder_explanation">Valitse, mihin \"%1$s/%2$s\"-kansio ja sen sisältämät ylätunnistetiedostot luodaan.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Oletko varmaasi poistaa tätä sovellusta? Tätä ei voi peruuttaa.</string>
     <string name="home_app_info_remove_app_warning">Tämä poistaa pysyvästi:</string>
@@ -417,10 +417,10 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="notification_channel_patcher">Paikkaaminen</string>
     <string name="notification_channel_patcher_description">Näytetään, kun Morphe paikkaa sovellusta taustalla</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Expert asetukset</string>
-    <string name="settings_advanced_expert_mode">Expert-tila</string>
+    <string name="settings_advanced_expert">Asiantuntijan asetukset</string>
+    <string name="settings_advanced_expert_mode">Asiantuntijatila</string>
     <string name="settings_advanced_expert_mode_description">Ota käyttöön Morphe-päivityksen asetukset ja mukautusvaihtoehdot</string>
-    <string name="settings_advanced_expert_mode_dialog_title">Ota Expert-moodi käyttöön?</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Ota asiantuntijatila käyttöön?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert-moodi antaa enemmän valtaa päivitysten sovittamisesta, mutta väärin asetettu expert-moodi voi johtaa sovelluksen toimimattomuuteen</string>
     <string name="settings_advanced_strip_unused_libs">Optimoi laitteen arkkitehtuuri</string>
     <string name="settings_advanced_strip_unused_libs_description">"Ohita jaetut APK-moduulit tuettujen CPU-arkkitehtuurien, kieliasetusten ja näytön resoluutioiden osalta yhdistämisen aikana.\nPlain APK -tiedostoissa poistetaan natiivikirjastot tuettujen arkkitehtuurien osalta korjaamisen jälkeen"</string>
@@ -444,7 +444,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee kokonaisen &lt;b&gt;APK-ti
     <string name="settings_advanced_github_pat_export_warning">Älä jaka tämä PAT. Jos sisällytät sen asetuksien viedossa, pidä tiedosto yksityisenä, koska se sisältää tokenin</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patch-asetukset</string>
-    <string name="settings_advanced_patch_options_youtube_description">Teema, brändäys ja otsikkokohdat</string>
+    <string name="settings_advanced_patch_options_youtube_description">Teeman, brändäyksen ja ylätunnisteen asetukset</string>
     <string name="settings_advanced_patch_options_restart_message">Muokkaustustimien tulostuminen onnistuminen uudelleen patchaamisen sovelluksen</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Appin teeman värit</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -496,25 +496,25 @@ Valinnaisesti, polku sisältää ilmoituskuvakkeen yhdessä seuraavista muodoist
   drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
-    <string name="settings_advanced_patch_options_custom_header">Muokka custom-header</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Muokka header-kuva</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"Kansio, joka sisältää kuvat, jotka käytetään custom-header-kuvana.
+    <string name="settings_advanced_patch_options_custom_header">Oma ylätunnistelogo</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Vaihda ylätunnistelogo</string>
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Kansio, joka sisältää omana ylätunnistelogona käytettävät kuvat.
 
-Kansio on oltava sisältä seuraavista kansioita, riippuen laitteiden DPI-kohtia:
+Kansiossa on oltava yksi tai useampi seuraavista kansioista laitteen DPI-arvon mukaan:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-Jokainen kansio on oltava sisältä kaikkia seuraavista tiedostoja:
+Jokaisessa kansiossa on oltava kaikki seuraavat tiedostot:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
-Kuvien mitat on oltava seuraavasti:
-- drawable-hdpi: 194x72 px
-- drawable-xhdpi: 258x96 px
-- drawable-xxhdpi: 387x144 px
-- drawable-xxxhdpi: 512x192 px"</string>
+Kuvien mittojen on oltava seuraavat:
+- drawable-hdpi: 194 x 72 px
+- drawable-xhdpi: 258 x 96 px
+- drawable-xxhdpi: 387 x 144 px
+- drawable-xxxhdpi: 512 x 192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Piilota Shorts-ominaisuudet</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Piilota Shorts-appikuvake</string>

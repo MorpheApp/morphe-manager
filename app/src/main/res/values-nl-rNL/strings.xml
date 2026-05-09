@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Selecteer een .mpp-bronbestand van de opslag</string>
     <string name="sources_dialog_local_invalid_extension">Bestand moet een .mpp-extensie hebben</string>
     <string name="sources_dialog_url_valid">Geldige repository of JSON-URL</string>
-    <string name="sources_dialog_url_invalid">De URL moet verwijzen naar een GitHub-repo of een .json-bestand</string>
+    <string name="sources_dialog_url_invalid">De URL moet verwijzen naar een GitHub/GitLab-repo of een .json-bestand</string>
     <string name="sources_dialog_local_change_file">Bestand wijzigen</string>
     <string name="sources_dialog_preinstalled">Voorgeïnstalleerd</string>
     <string name="sources_update_success">Bijwerken geslaagd</string>

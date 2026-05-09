@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Επιλογή αρχείου πηγής τροποποιήσεων .mpp από τον χώρο αποθήκευσης</string>
     <string name="sources_dialog_local_invalid_extension">Το αρχείο πρέπει να έχει επέκταση .mpp</string>
     <string name="sources_dialog_url_valid">Έγκυρο αποθετήριο ή διεύθυνση URL JSON</string>
-    <string name="sources_dialog_url_invalid">Η διεύθυνση URL πρέπει να δείχνει σε ένα αποθετήριο GitHub ή σε ένα αρχείο .json</string>
+    <string name="sources_dialog_url_invalid">Η διεύθυνση URL πρέπει να δείχνει σε ένα αποθετήριο GitHub/GitLab ή σε ένα αρχείο .json</string>
     <string name="sources_dialog_local_change_file">Αλλαγή αρχείου</string>
     <string name="sources_dialog_preinstalled">Προεγκατεστημένες</string>
     <string name="sources_update_success">Επιτυχία ενημέρωσης</string>

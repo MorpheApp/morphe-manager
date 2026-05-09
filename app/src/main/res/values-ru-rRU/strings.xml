@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Выберите исходный файл патча .mpp из хранилища</string>
     <string name="sources_dialog_local_invalid_extension">Файл должен иметь расширение .mpp</string>
     <string name="sources_dialog_url_valid">Корректный URL репозитория или JSON</string>
-    <string name="sources_dialog_url_invalid">URL должен указывать на репозиторий GitHub или .json файл</string>
+    <string name="sources_dialog_url_invalid">URL должен указывать на репозиторий GitHub/GitLab или на файл .json</string>
     <string name="sources_dialog_local_change_file">Изменить файл</string>
     <string name="sources_dialog_preinstalled">Предварительно установлено</string>
     <string name="sources_update_success">Успешно обновлено</string>

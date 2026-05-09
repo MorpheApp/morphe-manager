@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Izaberi .mpp datoteku izvora zakrpe iz skladišta</string>
     <string name="sources_dialog_local_invalid_extension">Datoteka mora imati .mpp ekstenziju</string>
     <string name="sources_dialog_url_valid">Važeći repozitorijum ili URL adresa</string>
-    <string name="sources_dialog_url_invalid">URL mora da pokazuje na GitHub repozitorijum ili .json fajl</string>
+    <string name="sources_dialog_url_invalid">URL mora da pokazuje na GitHub/GitLab repozitorijum ili .json fajl</string>
     <string name="sources_dialog_local_change_file">Promeni fajl</string>
     <string name="sources_dialog_preinstalled">Preinstalirano</string>
     <string name="sources_update_success">Uspešno ažurirano</string>

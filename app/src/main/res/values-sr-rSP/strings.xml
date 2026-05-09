@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Одаберите .mpp фајл извора са складишта</string>
     <string name="sources_dialog_local_invalid_extension">Датотека мора имати .mpp екстензију</string>
     <string name="sources_dialog_url_valid">Важећи репозиторијум или JSON URL</string>
-    <string name="sources_dialog_url_invalid">УРЛ мора да показује на GitHub репозиторијум или .json датотеку</string>
+    <string name="sources_dialog_url_invalid">УРЛ мора да указује на GitHub/GitLab репозиторијум или .json датотеку</string>
     <string name="sources_dialog_local_change_file">Промени фајл</string>
     <string name="sources_dialog_preinstalled">Предпостављени</string>
     <string name="sources_update_success">Успешно ажурирано</string>

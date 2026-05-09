@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Виберіть файл джерела патчів .mpp зі сховища</string>
     <string name="sources_dialog_local_invalid_extension">Файл повинен мати розширення .mpp</string>
     <string name="sources_dialog_url_valid">Дійсне посилання на репозиторій або JSON-файл</string>
-    <string name="sources_dialog_url_invalid">URL має вказувати на репозиторій GitHub або .json файл</string>
+    <string name="sources_dialog_url_invalid">URL має вказувати на репозиторій GitHub/GitLab або .json файл</string>
     <string name="sources_dialog_local_change_file">Змінити файл</string>
     <string name="sources_dialog_preinstalled">Вбудоване</string>
     <string name="sources_update_success">Оновлення успішне</string>

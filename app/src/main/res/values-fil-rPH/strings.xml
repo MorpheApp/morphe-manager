@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Piliin ang isang .mpp file ng mapagkukunang patch mula sa imbakan</string>
     <string name="sources_dialog_local_invalid_extension">Dapat may extension na .mpp ang file</string>
     <string name="sources_dialog_url_valid">Valid na repository o JSON URL</string>
-    <string name="sources_dialog_url_invalid">Dapat tumuro ang URL sa isang GitHub repo o .json file</string>
+    <string name="sources_dialog_url_invalid">Dapat tumuro ang URL sa isang GitHub/GitLab repo o .json file</string>
     <string name="sources_dialog_local_change_file">Baguhin ang file</string>
     <string name="sources_dialog_preinstalled">Naka-install</string>
     <string name="sources_update_success">Matagumpay ang pag-update</string>

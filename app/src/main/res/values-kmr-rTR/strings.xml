@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Dosyaya .mpp-ya çavkaniyê ji bo hilbijartinê ji storage</string>
     <string name="sources_dialog_local_invalid_extension">Pel divê pêveka .mpp hebe</string>
     <string name="sources_dialog_url_valid">Depo an URL-a JSON-ê yê derbasdar</string>
-    <string name="sources_dialog_url_invalid">URL yek depoyê GitHub an pelgeyê .jsonê pê ve girêdayî be</string>
+    <string name="sources_dialog_url_invalid">URL gihub/gitlab depoyê an pelê .json\'yê nîşan bide</string>
     <string name="sources_dialog_local_change_file">Guherîne dosya</string>
     <string name="sources_dialog_preinstalled">Destekî çêkirî</string>
     <string name="sources_update_success">Nûvekirin serketî</string>

@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">स्टोरेज से .mpp पैच स्रोत फ़ाइल का चयन करें</string>
     <string name="sources_dialog_local_invalid_extension">फ़ाइल में .mpp एक्सटेंशन होना चाहिए</string>
     <string name="sources_dialog_url_valid">मान्य रिपॉजिटरी या JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL एक GitHub रेपो या .json फ़ाइल की ओर इशारा करना चाहिए</string>
+    <string name="sources_dialog_url_invalid">URL GitHub/GitLab रिपो या .json फ़ाइल की ओर इंगित करना चाहिए</string>
     <string name="sources_dialog_local_change_file">फ़ाइल बदलें</string>
     <string name="sources_dialog_preinstalled">प्रिंस्टॉल किया गया</string>
     <string name="sources_update_success">अपडेट सफल रहा</string>
