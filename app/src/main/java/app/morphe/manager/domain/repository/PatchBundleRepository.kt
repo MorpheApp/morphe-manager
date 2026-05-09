@@ -1216,6 +1216,44 @@ class PatchBundleRepository(
             return "https://raw.githubusercontent.com$finalPath"
         }
 
+        // Handle GitLab repository URLs
+        // Accepts short form: gitlab.com/owner/repo
+        // Or full raw URL:    gitlab.com/owner/repo/-/raw/branch/patches-bundle.json
+        if (host.equals("gitlab.com", ignoreCase = true)) {
+            if (pathSegments.size < 2) {
+                throw IllegalArgumentException("Invalid GitLab repository URL")
+            }
+
+            val owner = pathSegments[0]
+            val repo = pathSegments[1]
+
+            // Check if this is already a raw URL: owner/repo/-/raw/branch/path
+            val rawIndex = pathSegments.indexOf("raw")
+            if (rawIndex >= 2 && pathSegments.getOrNull(rawIndex - 1) == "-") {
+                // Already a raw URL — normalize it
+                val normalizedPath = "/" + pathSegments.joinToString("/")
+                val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
+                if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
+                    throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
+                }
+                val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
+                return "https://gitlab.com$normalizedPath$query"
+            }
+
+            // Determine branch from GitLab UI URLs (/-/tree/branch or /-/blob/branch)
+            val treeIndex = pathSegments.indexOf("tree")
+            val blobIndex = pathSegments.indexOf("blob")
+            val branch = when {
+                treeIndex >= 2 && pathSegments.getOrNull(treeIndex - 1) == "-" ->
+                    pathSegments.getOrNull(treeIndex + 1) ?: "main"
+                blobIndex >= 2 && pathSegments.getOrNull(blobIndex - 1) == "-" ->
+                    pathSegments.getOrNull(blobIndex + 1) ?: "main"
+                else -> "main"
+            }
+
+            return "https://gitlab.com/$owner/$repo/-/raw/$branch/patches-bundle.json"
+        }
+
         // Handle raw.githubusercontent.com URLs (legacy support)
         if (host.equals("raw.githubusercontent.com", ignoreCase = true)) {
             if (pathSegments.size < 3) {

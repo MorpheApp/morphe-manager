@@ -55,6 +55,7 @@ import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -927,6 +928,7 @@ fun BundleIcon(
 ) {
     val bundleAvatarUrl = bundle.bundleAvatarUrl
     val githubAvatarUrl = bundle.githubAvatarUrl
+    val gitlabAvatarUrl = bundle.gitlabAvatarUrl
     val hasMetadataError = metadataFetchError != null
     val hasBundleError = bundle.state is PatchBundleSource.State.Failed
     val isMissing = bundle.state is PatchBundleSource.State.Missing
@@ -987,10 +989,14 @@ fun BundleIcon(
                 )
             }
 
-            bundleAvatarUrl != null || githubAvatarUrl != null -> {
+            bundleAvatarUrl != null || githubAvatarUrl != null || gitlabAvatarUrl != null -> {
                 RemoteAvatar(
-                    url = bundleAvatarUrl ?: githubAvatarUrl!!,
-                    fallbackUrl = if (bundleAvatarUrl != null) githubAvatarUrl else null,
+                    url = bundleAvatarUrl ?: githubAvatarUrl ?: gitlabAvatarUrl!!,
+                    fallbackUrl = when {
+                        bundleAvatarUrl != null -> githubAvatarUrl ?: gitlabAvatarUrl
+                        githubAvatarUrl != null -> gitlabAvatarUrl
+                        else -> null
+                    },
                     modifier = Modifier.fillMaxSize()
                 )
             }

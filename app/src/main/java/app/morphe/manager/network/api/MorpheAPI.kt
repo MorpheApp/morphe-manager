@@ -494,6 +494,16 @@ class MorpheAPI(
                     "https://raw.githubusercontent.com/${parts[0]}/${parts[1]}/$branch/CHANGELOG.md"
                 }
 
+                "gitlab.com" -> {
+                    // path: owner/repo/-/raw/branch/...
+                    if (parts.size < 2) return null
+                    val rawIndex = parts.indexOf("raw")
+                    val branch = if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
+                        parts.getOrNull(rawIndex + 1) ?: "main"
+                    } else "main"
+                    "https://gitlab.com/${parts[0]}/${parts[1]}/-/raw/$branch/CHANGELOG.md"
+                }
+
                 else -> null
             }
         } catch (_: Exception) {
