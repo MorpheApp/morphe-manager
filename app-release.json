@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-05-09T07:55:05",
-  "description": "# [1.17.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.3...v1.17.0-dev.4) (2026-05-09)\n\n\n### Features\n\n* Add `GitLab` bundle support ([33b276d](https://github.com/MorpheApp/morphe-manager/commit/33b276d91b45d4b09d5d231f7f6000881d82e93c))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.4/morphe-manager-1.17.0-dev.4.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.4/morphe-manager-1.17.0-dev.4.apk.asc",
-  "version": "1.17.0-dev.4"
+  "created_at": "2026-05-09T12:23:55",
+  "description": "# [1.17.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.4...v1.17.0-dev.5) (2026-05-09)\n\n\n### Bug Fixes\n\n* Rename deep link param 'gitlabs' → 'gitlab' ([a892b9a](https://github.com/MorpheApp/morphe-manager/commit/a892b9a68dacaefffb05407c4a55459cd85b3eeb))\n* Support GitLab avatar in deep link confirmation dialog ([1610104](https://github.com/MorpheApp/morphe-manager/commit/1610104688ac5dfd27413a4e745e6e83c76cd8b9))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.5/morphe-manager-1.17.0-dev.5.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.17.0-dev.5/morphe-manager-1.17.0-dev.5.apk.asc",
+  "version": "1.17.0-dev.5"
 }

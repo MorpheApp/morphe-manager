@@ -1,3 +1,11 @@
+# [1.17.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.4...v1.17.0-dev.5) (2026-05-09)
+
+
+### Bug Fixes
+
+* Rename deep link param 'gitlabs' → 'gitlab' ([a892b9a](https://github.com/MorpheApp/morphe-manager/commit/a892b9a68dacaefffb05407c4a55459cd85b3eeb))
+* Support GitLab avatar in deep link confirmation dialog ([1610104](https://github.com/MorpheApp/morphe-manager/commit/1610104688ac5dfd27413a4e745e6e83c76cd8b9))
+
 # [1.17.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.3...v1.17.0-dev.4) (2026-05-09)
 
 
