@@ -88,10 +88,11 @@ private fun SimpleAppIcon(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val request = remember(packageInfo.packageName) {
+    val cacheKey = "${packageInfo.packageName}:${packageInfo.versionName}"
+    val request = remember(cacheKey) {
         coil.request.ImageRequest.Builder(context)
             .data(packageInfo)
-            .memoryCacheKey(packageInfo.packageName)
+            .memoryCacheKey(cacheKey)
             .build()
     }
 

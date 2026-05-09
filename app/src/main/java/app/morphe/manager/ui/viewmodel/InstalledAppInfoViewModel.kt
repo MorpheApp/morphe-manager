@@ -150,6 +150,7 @@ class InstalledAppInfoViewModel(
                 rootInstaller.uninstall(app.currentPackageName)
                 // Delete record and APK but preserve selection and options
                 deleteRecordAndApk(app)
+                onAppStateChanged?.invoke(app.currentPackageName)
                 onBackClick()
             }
         }
@@ -175,6 +176,10 @@ class InstalledAppInfoViewModel(
         appliedPatches = null
         isInstalledOnDevice = false
         context.toast(context.getString(R.string.saved_app_removed_toast))
+        onAppStateChanged?.invoke(app.currentPackageName)
+        if (app.originalPackageName != app.currentPackageName) {
+            onAppStateChanged?.invoke(app.originalPackageName)
+        }
         onBackClick()
     }
 
