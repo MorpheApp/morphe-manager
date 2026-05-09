@@ -1283,6 +1283,10 @@ class PatchBundleRepository(
         return "https://$host$normalizedPath$query"
     }
 
+    /** Returns true if [uid] corresponds to a currently loaded bundle. */
+    fun isUidLoaded(uid: Int): Boolean =
+        (store.state.value as? BundleState.Ready)?.sources?.containsKey(uid) == true
+
     /** Returns the endpoint URL of [uid] if it is a remote bundle, or null otherwise. */
     fun getEndpointForUid(uid: Int): String? =
         ((store.state.value as? BundleState.Ready)?.sources?.get(uid) as? RemotePatchBundle)?.endpoint

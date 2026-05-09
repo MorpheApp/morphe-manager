@@ -63,7 +63,7 @@ data class PatchBundleDataExportFile(
     val version: Int = 1,
     val bundleUid: Int,
     val bundleName: String? = null,
-    // Normalized endpoint URL — used to remap bundleUid when importing on a different device
+    // Normalized endpoint URL - used to remap bundleUid when importing on a different device
     val bundleSource: String? = null,
     val exportDate: String,
     // Map<PackageName, List<PatchName>>
@@ -379,6 +379,9 @@ class ImportExportViewModel(
                     val bundleUid = exportFile.bundleSource
                         ?.let { patchBundleRepository.resolveUidForEndpoint(it) }
                         ?: exportFile.bundleUid
+                    // Skip if the bundle is not loaded - inserting with an unknown UID would
+                    // violate the patch_selections FK constraint on patch_bundles.uid.
+                    if (!patchBundleRepository.isUidLoaded(bundleUid)) return@forEach
                     exportFile.selections.forEach { (packageName, patchList) ->
                         patchSelectionRepository.importForPackageAndBundle(
                             packageName = packageName,
