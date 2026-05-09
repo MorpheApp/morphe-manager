@@ -74,6 +74,11 @@ class AppDataResolver(
         cache.keys.removeAll { it.first == packageName }
     }
 
+    /** Invalidate all cached data. Call this when a global refresh is needed. */
+    fun invalidateAll() {
+        cache.clear()
+    }
+
     /**
      * Resolve app data from any available source.
      *
@@ -123,10 +128,12 @@ class AppDataResolver(
             }
         }
 
-        // Phase 2: display name - bundle metadata always wins when available
+        // Phase 2: display name
+        // apkResult already reflects the preferred source order (PATCHED_APK → ORIGINAL_APK → INSTALLED),
+        // so its label is the best available. Bundle metadata is a fallback for when no APK is found
         val bundleName = tryGetFromBundleMetadata(packageName)?.displayName
-        val displayName = bundleName
-            ?: apkResult?.displayName
+        val displayName = apkResult?.displayName
+            ?: bundleName
             ?: getFromConstants(packageName).displayName
 
         ResolvedAppData(
@@ -135,11 +142,7 @@ class AppDataResolver(
             version = apkResult?.version,
             icon = apkResult?.icon,
             packageInfo = apkResult?.packageInfo,
-            source = when {
-                bundleName != null -> AppDataSource.BUNDLE_METADATA
-                apkResult != null -> apkResult.source
-                else -> AppDataSource.CONSTANTS
-            }
+            source = apkResult?.source ?: if (bundleName != null) AppDataSource.BUNDLE_METADATA else AppDataSource.CONSTANTS
         ).also { cache[packageName to preferredSource] = it }
     }
 
