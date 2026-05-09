@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">حدد ملف مصدر تعديل .mpp من وحدة التخزين</string>
     <string name="sources_dialog_local_invalid_extension">يجب أن يكون للملف امتداد .mpp</string>
     <string name="sources_dialog_url_valid">مستودع صالح أو عنوان URL بتنسيق JSON</string>
-    <string name="sources_dialog_url_invalid">يجب أن يشير عنوان URL إلى مستودع GitHub أو ملف ‎.json</string>
+    <string name="sources_dialog_url_invalid">يجب أن يشير عنوان URL إلى مستودع GitHub/GitLab أو ملف ‎.json</string>
     <string name="sources_dialog_local_change_file">تغيير الملف</string>
     <string name="sources_dialog_preinstalled">مثبتة مسبقًا</string>
     <string name="sources_update_success">تم التحديث بنجاح</string>
