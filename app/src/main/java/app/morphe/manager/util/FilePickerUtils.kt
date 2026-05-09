@@ -5,13 +5,14 @@
 
 package app.morphe.manager.util
 
-import android.content.ContentResolver
-import android.net.Uri
-import android.provider.OpenableColumns
 import android.app.UiModeManager
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
+import android.provider.DocumentsContract
+import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,27 +34,30 @@ data class MppManifest(
 )
 
 /**
- * Convert content:// URI to file path
- * This only works for some URIs and should be avoided when possible.
- * Prefer using Uri directly with ContentResolver.
+ * Convert content:// URI to file path.
+ * Uses [DocumentsContract] to extract the document ID, then maps known storage
+ * prefixes to real paths. Only works for primary internal storage URIs and raw-path
+ * Downloads URIs - returns the decoded URI string as a fallback for anything else.
+ * Prefer using Uri directly with ContentResolver where possible.
  */
 fun Uri.toFilePath(): String {
-    val path = this.path ?: return this.toString()
+    val docId: String? = when {
+        DocumentsContract.isTreeUri(this) ->
+            // Child document URI contains the full path; root tree URI contains only the root
+            runCatching { DocumentsContract.getDocumentId(this) }
+                .recoverCatching { DocumentsContract.getTreeDocumentId(this) }
+                .getOrNull()
+        else ->
+            runCatching { DocumentsContract.getDocumentId(this) }.getOrNull()
+    }
 
     return when {
-        // Handle tree URIs
-        path.startsWith("/tree/primary:") -> {
-            Uri.decode(path.replace("/tree/primary:", "/storage/emulated/0/"))
-        }
-        // Handle document URIs
-        path.startsWith("/document/primary:") -> {
-            Uri.decode(path.replace("/document/primary:", "/storage/emulated/0/"))
-        }
-        // Handle other primary storage paths
-        path.contains("primary:") -> {
-            Uri.decode(path.substringAfter("primary:").let { "/storage/emulated/0/$it" })
-        }
-        // Fallback to original URI string
+        // "primary:Download/subfolder" → "/storage/emulated/0/Download/subfolder"
+        docId?.startsWith("primary:") == true ->
+            "/storage/emulated/0/${docId.removePrefix("primary:")}"
+        // "raw:/storage/emulated/0/Download/file" → "/storage/emulated/0/Download/file"
+        docId?.startsWith("raw:") == true ->
+            docId.removePrefix("raw:")
         else -> Uri.decode(this.toString())
     }
 }
@@ -120,10 +124,21 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
     }.getOrNull()
 
 /**
- * Folder picker launcher with automatic permission handling
- * Only use this for operations that create multiple files/folders
- *
- * For simple file operations, use direct ActivityResultContracts instead.
+ * Plain SAF folder picker. Use this when writing files via [androidx.documentfile.provider.DocumentFile]/[ContentResolver].
+ * No storage permission is required because the system grants temporary URI access.
+ */
+@Composable
+fun rememberFolderPicker(onFolderPicked: (Uri) -> Unit): () -> Unit {
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocumentTree()
+    ) { uri: Uri? -> uri?.let { onFolderPicked(it) } }
+    return remember { { launcher.launch(null) } }
+}
+
+/**
+ * Folder picker launcher with automatic permission handling.
+ * Use this when storing the picked folder PATH as a patch option value (the patcher will
+ * later read files from it via the File API, which requires MANAGE_EXTERNAL_STORAGE).
  */
 @Composable
 fun rememberFolderPickerWithPermission(
