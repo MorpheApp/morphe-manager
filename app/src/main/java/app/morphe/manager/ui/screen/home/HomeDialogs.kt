@@ -446,6 +446,7 @@ fun HomeDialogs(
                 openBundlePicker()
             },
             selectedLocalPath = homeViewModel.selectedBundlePath,
+            selectedLocalUri = homeViewModel.selectedBundleUri,
             onValidateUrl = { url ->
                 runCatching { homeViewModel.patchBundleRepository.normalizeRemoteBundleUrl(url) }.isSuccess
             }

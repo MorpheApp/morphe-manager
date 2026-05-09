@@ -120,7 +120,9 @@ fun HomeScreen(
     ) { uri ->
         uri?.let {
             homeViewModel.selectedBundleUri = it
-            homeViewModel.selectedBundlePath = it.toString()
+            homeViewModel.selectedBundlePath = it.displayName(context.contentResolver)
+                ?: it.lastPathSegment
+                ?: it.toString()
         }
     }
 

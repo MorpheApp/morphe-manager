@@ -69,10 +69,13 @@ class SessionInstaller(private val app: Application) {
                 PackageInstaller.SessionParams.MODE_FULL_INSTALL
             ).apply {
                 setOriginatingUid(Process.myUid())
-                if (Build.VERSION.SDK_INT >= 33) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    setRequestUpdateOwnership(true)
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     setPackageSource(PackageInstaller.PACKAGE_SOURCE_LOCAL_FILE)
                 }
-                if (Build.VERSION.SDK_INT >= 31) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_REQUIRED)
                 }
             }
