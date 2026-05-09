@@ -15,12 +15,13 @@ import androidx.compose.ui.layout.ContentScale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URL
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * In-memory avatar cache scoped to the process lifetime.
  */
 object AvatarCache {
-    private val cache = mutableMapOf<String, Bitmap>()
+    private val cache = ConcurrentHashMap<String, Bitmap>()
 
     operator fun get(url: String): Bitmap? = cache[url]
     operator fun set(url: String, bitmap: Bitmap) { cache[url] = bitmap }
