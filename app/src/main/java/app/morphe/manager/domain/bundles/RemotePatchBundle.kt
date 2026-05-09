@@ -191,19 +191,23 @@ sealed class RemotePatchBundle(
         internal val entriesCache = mutableMapOf<String, Pair<Long, List<ChangelogEntry>>>()
 
         /**
-         * Infer GitHub page URL from various endpoint formats
+         * Infer GitHub page URL from various endpoint formats.
          */
         fun inferPageUrlFromEndpoint(endpoint: String): String? {
             return try {
                 val uri = java.net.URI(endpoint)
                 val host = uri.host?.lowercase(java.util.Locale.US)
+                val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() }
 
                 when (host) {
                     "raw.githubusercontent.com", "github.com" -> {
-                        uri.path?.trim('/')?.split('/')
-                            ?.filter { it.isNotBlank() }
-                            ?.takeIf { it.size >= 2 }
+                        segments?.takeIf { it.size >= 2 }
                             ?.let { "https://github.com/${it[0]}/${it[1]}" }
+                    }
+                    "gitlab.com" -> {
+                        // gitlab.com/owner/repo/-/raw/branch/... or gitlab.com/owner/repo
+                        segments?.takeIf { it.size >= 2 }
+                            ?.let { "https://gitlab.com/${it[0]}/${it[1]}" }
                     }
                     else -> null
                 }
@@ -245,16 +249,18 @@ class JsonPatchBundle(
     private val stableBranch: String get() = "main"
 
     /**
-     * Parse GitHub URL and convert to raw.githubusercontent.com format.
-     * If [usePrerelease] is true, uses "dev" branch; otherwise uses "main".
+     * Resolves the effective fetch URL, substituting the target branch when
+     * [supportsPrerelease] is true.
+     *
      * Only called when [supportsPrerelease] is true, i.e. the endpoint already
      * points to "main" or "dev" - so both branches are expected to exist.
+     *
      * Supports:
-     * - https://github.com/owner/repo/tree/branch/path/file.json
-     * - https://github.com/owner/repo/blob/branch/path/file.json
-     * - https://raw.githubusercontent.com/owner/repo/branch/path/file.json (passthrough)
+     * - https://raw.githubusercontent.com/owner/repo/branch/path/file.json
+     * - https://github.com/owner/repo/tree|blob/branch/path/file.json
+     * - https://gitlab.com/owner/repo/-/raw/branch/path/file.json
      */
-    private fun parseGitHubUrl(url: String): String {
+    private fun resolveBranchUrl(url: String): String {
         return try {
             val uri = java.net.URI(url)
             val host = uri.host?.lowercase(java.util.Locale.US)
@@ -272,18 +278,22 @@ class JsonPatchBundle(
                 "github.com" -> {
                     // Parse: /owner/repo/tree|blob/branch/path/to/file.json
                     val pathParts = uri.path?.trim('/')?.split('/') ?: return url
-
                     if (pathParts.size < 5) return url // Need at least: owner, repo, tree/blob, branch, file
-
+                    val type = pathParts[2] // "tree" or "blob"
+                    if (type !in listOf("tree", "blob")) return url
                     val owner = pathParts[0]
                     val repo = pathParts[1]
-                    val type = pathParts[2] // "tree" or "blob"
-
-                    if (type !in listOf("tree", "blob")) return url
-
                     val filePath = pathParts.drop(4).joinToString("/")
-
                     "https://raw.githubusercontent.com/$owner/$repo/$targetBranch/$filePath"
+                }
+                "gitlab.com" -> {
+                    // Format: owner/repo/-/raw/BRANCH/path/file.json
+                    val parts = uri.path.trim('/').split('/').toMutableList()
+                    val rawIndex = parts.indexOf("raw")
+                    if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
+                        parts[rawIndex + 1] = targetBranch
+                        "https://gitlab.com/${parts.joinToString("/")}"
+                    } else url
                 }
                 else -> url // Unknown host, return as-is
             }
@@ -302,10 +312,10 @@ class JsonPatchBundle(
     }
 
     override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
-        val normalizedEndpoint = parseGitHubUrl(endpoint)
+        val resolvedEndpoint = resolveBranchUrl(endpoint)
 
         val asset = http.request<MorpheAsset> {
-            url(normalizedEndpoint)
+            url(resolvedEndpoint)
         }.getOrThrow()
 
         // If pageUrl is not set, try to infer it from the endpoint and add version tag
@@ -313,13 +323,13 @@ class JsonPatchBundle(
             val repoUrl = inferPageUrlFromEndpoint(endpoint)
             val inferredPageUrl = if (repoUrl != null && asset.version.isNotBlank()) {
                 // Normalize version to ensure it starts with 'v'
-                val normalizedVersion = if (asset.version.startsWith("v")) {
-                    asset.version
-                } else {
-                    "v${asset.version}"
-                }
-                // Create proper release page URL: https://github.com/owner/repo/releases/tag/v1.0.0-dev.1
-                "$repoUrl/releases/tag/$normalizedVersion"
+                val normalizedVersion = if (asset.version.startsWith("v")) asset.version else "v${asset.version}"
+                // Create proper release page URL:
+                // GitHub: https://github.com/owner/repo/releases/tag/v1.0.0-dev.1
+                // GitLab: https://gitlab.com/owner/repo/-/releases/v1.0.0-dev.1
+                val isGitLab = endpoint.contains("gitlab.com", ignoreCase = true)
+                if (isGitLab) "$repoUrl/-/releases/$normalizedVersion"
+                else "$repoUrl/releases/tag/$normalizedVersion"
             } else {
                 // Fallback to repository URL if version is missing
                 repoUrl
@@ -333,7 +343,7 @@ class JsonPatchBundle(
     override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
         // endpoint stores the original branch - rebuild the URL for the active branch
         val api: MorpheAPI by inject()
-        val activeEndpoint = parseGitHubUrl(endpoint)
+        val activeEndpoint = resolveBranchUrl(endpoint)
         val changelogUrl = api.changelogUrlFromBundleEndpoint(activeEndpoint) ?: return emptyList()
         return fetchAndCacheEntries("$uid|$changelogUrl", sinceVersion) {
             api.fetchChangelogFromUrl(changelogUrl)
@@ -360,7 +370,12 @@ class JsonPatchBundle(
 
     companion object {
         /**
-         * Extracts the branch name from a GitHub URL.
+         * Extracts the branch name from a GitHub or GitLab URL.
+         *
+         * Supported formats:
+         * - raw.githubusercontent.com/owner/repo/BRANCH/path  (returns null for refs/heads/...)
+         * - github.com/owner/repo/tree|blob/BRANCH/path
+         * - gitlab.com/owner/repo/-/raw/BRANCH/path
          */
         internal fun extractBranch(url: String): String? {
             return try {
@@ -376,6 +391,13 @@ class JsonPatchBundle(
                     }
                     "github.com" -> {
                         if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
+                    }
+                    "gitlab.com" -> {
+                        // Format: owner/repo/-/raw/BRANCH/path...
+                        val rawIndex = parts.indexOf("raw")
+                        if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-")
+                            parts.getOrNull(rawIndex + 1)
+                        else null
                     }
                     else -> null
                 }

@@ -86,6 +86,7 @@
     <string name="sources_dialog_remote_url_formats_title">Examples:</string>
     <string name="sources_dialog_remote_url_formats_list" translatable="false">"
 • github.com/owner/repo
+• gitlab.com/owner/repo
 • raw.githubusercontent.com/owner/repo/patches-bundle.json
 • example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Local</string>
@@ -94,7 +95,7 @@
     <string name="sources_dialog_local_file_description">Select a .mpp patch source file from storage</string>
     <string name="sources_dialog_local_invalid_extension">File must have a .mpp extension</string>
     <string name="sources_dialog_url_valid">Valid repository or JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL must point to a GitHub repo or .json file</string>
+    <string name="sources_dialog_url_invalid">URL must point to a GitHub/GitLab repo or .json file</string>
     <string name="sources_dialog_local_change_file">Change file</string>
     <string name="sources_dialog_preinstalled">Pre-installed</string>
     <string name="sources_update_success">Update successful</string>
