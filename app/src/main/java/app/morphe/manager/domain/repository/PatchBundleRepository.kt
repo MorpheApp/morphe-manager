@@ -1283,6 +1283,31 @@ class PatchBundleRepository(
         return "https://$host$normalizedPath$query"
     }
 
+    /** Returns the endpoint URL of [uid] if it is a remote bundle, or null otherwise. */
+    fun getEndpointForUid(uid: Int): String? =
+        ((store.state.value as? BundleState.Ready)?.sources?.get(uid) as? RemotePatchBundle)?.endpoint
+
+    /** Returns the user-visible name of [uid], or null if the bundle is not currently loaded. */
+    fun getNameForUid(uid: Int): String? =
+        (store.state.value as? BundleState.Ready)?.sources?.get(uid)?.name
+
+    /**
+     * Returns the current UID of the loaded bundle whose endpoint matches [endpoint], or null
+     * if no such bundle is loaded. Uses [normalizeRemoteBundleUrl] for comparison so that
+     * GitHub shorthand and raw URLs for the same repo are treated as equal.
+     */
+    fun resolveUidForEndpoint(endpoint: String): Int? {
+        val normalizedInput = runCatching { normalizeRemoteBundleUrl(endpoint) }
+            .getOrElse { endpoint.lowercase(Locale.US) }
+        return (store.state.value as? BundleState.Ready)?.sources?.entries
+            ?.firstOrNull { (_, src) ->
+                (src as? RemotePatchBundle)?.let { bundle ->
+                    runCatching { normalizeRemoteBundleUrl(bundle.endpoint) }
+                        .getOrElse { bundle.endpoint.lowercase(Locale.US) } == normalizedInput
+                } == true
+            }?.key
+    }
+
     suspend fun update(
         vararg sources: RemotePatchBundle,
         showToast: Boolean = false,
