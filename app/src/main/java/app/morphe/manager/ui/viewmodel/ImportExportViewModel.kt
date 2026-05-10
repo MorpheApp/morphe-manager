@@ -63,6 +63,8 @@ data class PatchBundleDataExportFile(
     val version: Int = 1,
     val bundleUid: Int,
     val bundleName: String? = null,
+    // Normalized endpoint URL - used to remap bundleUid when importing on a different device
+    val bundleSource: String? = null,
     val exportDate: String,
     // Map<PackageName, List<PatchName>>
     val selections: Map<String, List<String>>,
@@ -275,6 +277,7 @@ class ImportExportViewModel(
             val exportFile = PatchBundleDataExportFile(
                 bundleUid = bundleUid,
                 bundleName = bundleName,
+                bundleSource = patchBundleRepository.getEndpointForUid(bundleUid),
                 exportDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now()),
                 selections = selections,
                 options = optionsData
@@ -310,6 +313,8 @@ class ImportExportViewModel(
                     }
                     PatchBundleDataExportFile(
                         bundleUid = bundleUid,
+                        bundleName = patchBundleRepository.getNameForUid(bundleUid),
+                        bundleSource = patchBundleRepository.getEndpointForUid(bundleUid),
                         exportDate = exportDate,
                         selections = selections,
                         options = options.ifEmpty { null }
@@ -368,7 +373,15 @@ class ImportExportViewModel(
 
             withContext(Dispatchers.IO) {
                 bundleFiles.forEach { exportFile ->
-                    val bundleUid = exportFile.bundleUid
+                    // Remap the exported UID to the current device's UID for the same bundle.
+                    // Without this, imported selections are silently discarded on fresh installs
+                    // because bundle UIDs are randomly generated and don't match across devices.
+                    val bundleUid = exportFile.bundleSource
+                        ?.let { patchBundleRepository.resolveUidForEndpoint(it) }
+                        ?: exportFile.bundleUid
+                    // Skip if the bundle is not loaded - inserting with an unknown UID would
+                    // violate the patch_selections FK constraint on patch_bundles.uid.
+                    if (!patchBundleRepository.isUidLoaded(bundleUid)) return@forEach
                     exportFile.selections.forEach { (packageName, patchList) ->
                         patchSelectionRepository.importForPackageAndBundle(
                             packageName = packageName,

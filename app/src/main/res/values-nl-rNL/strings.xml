@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
     <string name="home_app_hide_title">Deze app verbergen?</string>
-    <string name="home_app_hide_message">Deze app wordt verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop \'%1$s\' onderaan de lijst.</string>
+    <string name="home_app_hide_message">Deze app wordt verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop \'\' onderaan de lijst.</string>
     <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
     <string name="home_app_show_hidden">Toon verborgen apps</string>
     <string name="home_app_no_hidden">Geen verborgen apps</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Updates overgeslagen</string>
     <string name="home_update_skipped_metered_subtitle">Mobiele gegevens zijn actief</string>
     <string name="home_updating_sources">Bronnen worden geüpdatet…</string>
-    <string name="home_update_progress_format">%1$s verwerkt</string>
+    <string name="home_update_progress_format">%s verwerkt</string>
     <string name="home_update_success">Bronnen worden geüpdatet</string>
     <string name="home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
     <string name="home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
     <string name="home_search_apps">Apps zoeken</string>
     <string name="home_no_apps_title">Geen apps beschikbaar</string>
     <string name="home_no_apps_subtitle">Voeg een patchbron toe of schakel een bestaande in %s</string>
-    <string name="home_no_apps_search_subtitle">Geen apps komen overeen met \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Er zijn geen apps die overeenkomen met \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alle apps zijn verborgen</string>
     <string name="home_all_apps_hidden_subtitle">U heeft alle apps van het startscherm verborgen</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Experimentele app-versies gebruiken</string>
     <string name="sources_management_experimental_versions_toggle_description">Patch experimentele app-targets indien beschikbaar</string>
     <string name="sources_management_already_exists">Deze bron is al toegevoegd</string>
+    <string name="sources_management_invalid_url">Ongeldige bron-URL. Controleer het adres en probeer het opnieuw</string>
+    <string name="sources_management_metadata_unavailable">Metadata niet beschikbaar</string>
+    <string name="sources_management_metadata_unavailable_hint">Het externe metadabestand is niet beschikbaar. Patchen met het geïnstalleerde bundel werkt nog steeds, maar automatische update is uitgeschakeld voor deze bron</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">De patch-bundel kon niet worden gedownload. De bron-URL is mogelijk onjuist of het bestand bestaat niet</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Weergavenaam</string>
     <string name="sources_dialog_rename">Patchbron toevoegen</string>
@@ -77,14 +81,16 @@
     <string name="sources_dialog_remote_url_formats_title">Voorbeelden:</string>
     <string name="sources_dialog_local">Lokaal</string>
     <string name="sources_dialog_local_file">Selecteer een .mpp-bronbestand van de opslag</string>
+    <string name="sources_dialog_local_file_tap_hint">Tik om opslag te bekijken</string>
     <string name="sources_dialog_local_file_description">Selecteer een .mpp-bronbestand van de opslag</string>
+    <string name="sources_dialog_local_invalid_extension">Bestand moet een .mpp-extensie hebben</string>
+    <string name="sources_dialog_url_valid">Geldige repository of JSON-URL</string>
+    <string name="sources_dialog_url_invalid">De URL moet verwijzen naar een GitHub/GitLab-repo of een .json-bestand</string>
     <string name="sources_dialog_local_change_file">Bestand wijzigen</string>
     <string name="sources_dialog_preinstalled">Voorgeïnstalleerd</string>
     <string name="sources_update_success">Bijwerken geslaagd</string>
     <string name="sources_update_unavailable">Geen bijwerken beschikbaar</string>
     <string name="sources_download_fail">Kan bronnen niet downloaden: %s</string>
-    <string name="sources_download_fail_named">Mislukt bij het downloaden van \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Kon \'%1$s\' niet updaten: het patch JSON-bestand werd niet gevonden op de geconfigureerde URL</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Schakel Expertmodus in Instellingen in om deze patch handmatig toe te voegen</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +104,12 @@
     <string name="home_apk_availability_no">Nee, ik heb al een .APK</string>
     <string name="home_apk_use_saved_with_version">Gebruik opgeslagen .APK-bestand (v%s)</string>
     <string name="home_app_info_no_saved_apk">Er is geen APK opgeslagen. Om de patch uit te voeren, moet u het APK opnieuw selecteren</string>
-    <string name="home_version_requires_android">Vereist Android %1$s+</string>
+    <string name="home_version_requires_android">Vereist Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Niet ondersteund voor dit apparaat</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; heeft geen ondersteunde versies voor Android %2$d (API %3$d). Alle vermelde versies vereisen een hogere Android-versie</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download de originele .APK-bestand</string>
     <string name="home_download_instructions_steps_title">Instructies:</string>
-    <string name="home_download_instructions_step1">Druk op de \'%1$s\' knop hieronder</string>
     <string name="home_download_instructions_step2_part1">Scroll naar beneden op de webpagina en druk op</string>
     <string name="home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
     <string name="home_download_instructions_step3">Wacht tot de download is voltooid, en &lt;b&gt;installeer de APK niet&lt;/b&gt;</string>
@@ -114,7 +119,7 @@
     <string name="home_download_instructions_continue">Doorgaan naar APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selecteer gedownloade APK</string>
-    <string name="home_file_picker_prompt_description">Selecteer het &lt;b&gt;%1$s&lt;/b&gt; APK bestand dat u net gedownload hebt</string>
+    <string name="home_file_picker_prompt_description">Selecteer het &lt;b&gt;%s&lt;/b&gt; APK bestand dat u net gedownload hebt</string>
     <string name="home_file_picker_prompt_open_apk">APK-bestand openen</string>
     <string name="home_recommended_version">Aanbevolen versie</string>
     <string name="home_selected_version">Geselecteerde versie</string>
@@ -260,6 +265,9 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="patcher_ready_to_install_subtitle">Druk op de onderstaande knop om te installeren</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op de onderstaande knop om te koppelen</string>
     <string name="patcher_storage_permission_dialog_title">Kan opslagpad niet openen</string>
+    <string name="patcher_incompatible_patcher_title">Update vereist</string>
+    <string name="patcher_incompatible_patcher_description">Het bundel &lt;b&gt;%1$s&lt;/b&gt; vereist patcher versie &lt;b&gt;%2$s&lt;/b&gt; of hoger. Update Morphe om deze app te patchen</string>
+    <string name="patcher_incompatible_patcher_update_button">Download en update Morphe</string>
     <string name="patcher_storage_permission_description_api30">Een of meer patchopties verwijzen naar paden die Morphe niet kan lezen. Geef toegang tot de opslag en tik op de knop; het patchproces start dan automatisch</string>
     <string name="patcher_storage_permission_description_legacy">Een of meer patch-opties wijzen naar bestanden die niet kunnen worden geopend. Update de bestanden in patch-opties en probeer het nogmaals</string>
     <string name="patcher_storage_permission_grant">Geef opslagtoegang</string>
@@ -317,7 +325,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="patched_app_saved_toast">Gepatchte app opgeslagen voor later</string>
     <string name="patched_app_save_failed_toast">Kon gepatchte app niet opslaan</string>
     <string name="plugin_activity_dialog_body">Gebruikersinteractie is vereist om te kunnen doorgaan met deze plugin</string>
-    <string name="patcher_process_exit_message">Patcher-process is afgelopen met code %1$s</string>
+    <string name="patcher_process_exit_message">Patcher-proces is afgesloten met code %s</string>
     <string name="install_app_success">Succesvol geïnstalleerd</string>
     <string name="install_app_fail">Kon app niet installeren: %s</string>
     <string name="save_apk_success">APK opgeslagen</string>
@@ -375,7 +383,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="settings_appearance_app_icon_dark_2">Leegte</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">App-icoon wijzigen?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Wijzigen naar \'%1$s\' en herstarten?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Wijzigen naar &lt;b&gt;%s&lt;/b&gt; en herstarten?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Icoon wijzigen</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
@@ -397,7 +405,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe-update beschikbaar</string>
     <string name="notification_bundle_update_title">Nieuwe patches beschikbaar</string>
-    <string name="notification_update_text">Versie %1$s is klaar om te downloaden</string>
+    <string name="notification_update_text">Versie %s is klaar om te downloaden</string>
     <string name="notification_bundle_update_text_unversioned">Tik om Morphe te openen en bij te werken</string>
     <string name="notification_permission_dialog_title">Meldingen toestaan</string>
     <string name="notification_permission_dialog_description">Morphe heeft toestemming nodig voor meldingen om u te waarschuwen wanneer er updates op de achtergrond beschikbaar zijn</string>
@@ -533,9 +541,9 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_action_open_shizuku">Shizuku openen</string>
     <string name="installer_hint_generic">De installatie is mislukt. Probeer het opnieuw of schakel over naar een ander installatieprogramma</string>
     <string name="installer_hint_conflict">Een andere app met hetzelfde pakketnaam is al geïnstalleerd. Verwijder deze voordat u doorgaat</string>
-    <string name="installer_external_launched">%1$s wordt geopend…</string>
-    <string name="installer_external_timeout">%1$s heeft de installatie niet bevestigd. Controleer de andere app en probeer het opnieuw</string>
-    <string name="installer_external_success">%1$s heeft een geslaagde installatie gemeld</string>
+    <string name="installer_external_launched">%s wordt geopend…</string>
+    <string name="installer_external_timeout">%s heeft de installatie niet bevestigd. Controleer de andere app en probeer het opnieuw</string>
+    <string name="installer_external_success">%s heeft een succesvolle installatie gemeld</string>
     <string name="installer_unavailable_title">%s niet beschikbaar</string>
     <string name="installer_unavailable_message">Uw voorkeursinstallatieprogramma (%s) is momenteel niet beschikbaar. U kunt het probleem oplossen en opnieuw proberen of het standaardinstallatieprogramma gebruiken</string>
     <string name="installer_unavailable_shizuku_hint">Zorg ervoor dat Shizuku draait en dat toestemming is gegeven aan deze app</string>

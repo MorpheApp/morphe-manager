@@ -5,7 +5,6 @@
     <string name="home_not_patched_yet">Encara no s\'ha aplicat la correcció</string>
     <string name="home_no_patches_available">No hi ha pegats disponibles</string>
     <string name="home_app_hide_title">Amagar aquesta aplicació?</string>
-    <string name="home_app_hide_message">L\'aplicació s\'ocultarà de la pantalla d\'inici. Podeu restaurar-la més endavant utilitzant el botó \'%1$s\' a la part inferior de la llista</string>
     <string name="home_app_will_be_hidden">Aquesta aplicació s\'ocultarà</string>
     <string name="home_app_show_hidden">Mostrar aplicacions ocultes</string>
     <string name="home_app_no_hidden">No hi ha aplicacions ocultes</string>
@@ -19,7 +18,7 @@
     <string name="home_update_skipped_metered">Actualització ignorada</string>
     <string name="home_update_skipped_metered_subtitle">Les dades mòbils estan actives</string>
     <string name="home_updating_sources">Actualitzant fonts…</string>
-    <string name="home_update_progress_format">%1$s processat</string>
+    <string name="home_update_progress_format">%s processat</string>
     <string name="home_update_success">Actualització completada</string>
     <string name="home_update_success_subtitle">Les teves fonts estan actualitzades</string>
     <string name="home_sources_are_loading">S\'estan carregant les fonts, si us plau espereu…</string>
@@ -57,7 +56,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarrega l\'APK original</string>
     <string name="home_download_instructions_steps_title">Instruccions:</string>
-    <string name="home_download_instructions_step1">Premeu el botó \'%1$s\' de sota</string>
+    <string name="home_download_instructions_step1">Premeu el botó \'%s\' de sota</string>
     <string name="home_download_instructions_step2_part1">Desplaceu-vos per la pàgina web i premeu</string>
     <string name="home_download_instructions_download_button_toast">Premeu \'descarrega\' al lloc web, i no aquí 😊</string>
     <string name="home_download_instructions_step3">Espereu que la descàrrega s\'acabi, i &lt;b&gt;no instal·leu&lt;/b&gt; l\'APK</string>

@@ -416,8 +416,8 @@ class MorpheAPI(
     }
 
     /** Fetches and parses the manager's CHANGELOG.md from the appropriate branch. */
-    suspend fun fetchManagerChangelog(): List<ChangelogEntry> {
-        val branch = if (isDevBuild) "dev" else "main"
+    suspend fun fetchManagerChangelog(forDevBranch: Boolean = isDevBuild): List<ChangelogEntry> {
+        val branch = if (forDevBranch) "dev" else "main"
         return fetchChangelogFromRepo(managerConfig, branch, "CHANGELOG.md")
     }
 
@@ -447,7 +447,10 @@ class MorpheAPI(
     ): List<ChangelogEntry> {
         val url = config.rawFileUrl(branch, path)
         Log.d(tag, "fetchChangelog: $url")
-        return when (val r = client.request<String> { url(url) }) {
+        return when (val r = client.request<String> {
+            url(url)
+            header("Cache-Control", "no-cache")
+        }) {
             is APIResponse.Success -> ChangelogParser.parse(r.data)
             is APIResponse.Error, is APIResponse.Failure -> {
                 Log.w(tag, "Failed to fetch $path for ${config.name}@$branch")
@@ -489,6 +492,16 @@ class MorpheAPI(
                     if (parts.size < 2) return null
                     val branch = if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else "main"
                     "https://raw.githubusercontent.com/${parts[0]}/${parts[1]}/$branch/CHANGELOG.md"
+                }
+
+                "gitlab.com" -> {
+                    // path: owner/repo/-/raw/branch/...
+                    if (parts.size < 2) return null
+                    val rawIndex = parts.indexOf("raw")
+                    val branch = if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
+                        parts.getOrNull(rawIndex + 1) ?: "main"
+                    } else "main"
+                    "https://gitlab.com/${parts[0]}/${parts[1]}/-/raw/$branch/CHANGELOG.md"
                 }
 
                 else -> null

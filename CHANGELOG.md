@@ -1,3 +1,73 @@
+# [1.17.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.6...v1.17.0-dev.7) (2026-05-09)
+
+
+### Bug Fixes
+
+* Remap bundle UIDs on import to restore saved patch selections on fresh install ([22e8961](https://github.com/MorpheApp/morphe-manager/commit/22e8961ea9df29ecf5816604e397a079204cfa62))
+* Resolve file picker and path display issues for Downloads and SAF ([#531](https://github.com/MorpheApp/morphe-manager/issues/531)) ([5cfddd2](https://github.com/MorpheApp/morphe-manager/commit/5cfddd2ceca0ac744d535d232cabe7584ae1981e))
+* Skip import for unknown bundle UIDs to prevent FK constraint crash ([806582f](https://github.com/MorpheApp/morphe-manager/commit/806582f3503a59a08ede290e1bd6de10ac0de098))
+
+# [1.17.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.5...v1.17.0-dev.6) (2026-05-09)
+
+
+### Bug Fixes
+
+* Refresh app version, name and icon on home screen after patching ([5e1b1f5](https://github.com/MorpheApp/morphe-manager/commit/5e1b1f59ec5be5f3acdad3c4e66096ff315768db))
+
+
+### Features
+
+* Preload bundle avatars on startup to eliminate first-open delay ([3ce8e36](https://github.com/MorpheApp/morphe-manager/commit/3ce8e362abcf3950dcbad73f59cc8d61272f9817))
+
+# [1.17.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.4...v1.17.0-dev.5) (2026-05-09)
+
+
+### Bug Fixes
+
+* Rename deep link param 'gitlabs' → 'gitlab' ([a892b9a](https://github.com/MorpheApp/morphe-manager/commit/a892b9a68dacaefffb05407c4a55459cd85b3eeb))
+* Support GitLab avatar in deep link confirmation dialog ([1610104](https://github.com/MorpheApp/morphe-manager/commit/1610104688ac5dfd27413a4e745e6e83c76cd8b9))
+
+# [1.17.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.3...v1.17.0-dev.4) (2026-05-09)
+
+
+### Features
+
+* Add `GitLab` bundle support ([33b276d](https://github.com/MorpheApp/morphe-manager/commit/33b276d91b45d4b09d5d231f7f6000881d82e93c))
+
+# [1.17.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2026-05-08)
+
+
+### Features
+
+* Improve patch bundle error handling and UI feedback ([262a2c6](https://github.com/MorpheApp/morphe-manager/commit/262a2c6fc5f2a596427200eb9c15c091e178f49e))
+* Redesign `Add source` dialog and improve bundle error handling ([8196578](https://github.com/MorpheApp/morphe-manager/commit/81965788109ecde8806e9113f1febac3deb3f040))
+
+# [1.17.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2026-05-07)
+
+
+### Bug Fixes
+
+* Detect `Shizuku` in stealth mode via permission lookup ([67d3ef4](https://github.com/MorpheApp/morphe-manager/commit/67d3ef4bb63a4382826187a35345a13302875783))
+
+# [1.17.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.16.1-dev.1...v1.17.0-dev.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* Changelog sometimes missing in update dialog ([aca670c](https://github.com/MorpheApp/morphe-manager/commit/aca670c4293b5cae2d923ab1ea8c0789954249e1))
+
+
+### Features
+
+* Block patching when bundle requires newer patcher ([e136ec6](https://github.com/MorpheApp/morphe-manager/commit/e136ec663821ba660d9c184b007b29f3c7f5a946))
+
+## [1.16.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0...v1.16.1-dev.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* Show patch option descriptions in options dialog ([25a9916](https://github.com/MorpheApp/morphe-manager/commit/25a991690531e80c5ab8076edd8624bd2301ede4))
+
 # [1.16.0](https://github.com/MorpheApp/morphe-manager/compare/v1.15.0...v1.16.0) (2026-05-04)
 
 

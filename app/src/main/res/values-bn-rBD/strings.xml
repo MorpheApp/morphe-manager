@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">এখনো প্যাচ করা হয়নি</string>
     <string name="home_no_patches_available">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="home_app_hide_title">অ্যাপটি গোপন করবেন?</string>
-    <string name="home_app_hide_message">এই অ্যাপটি হোম স্ক্রীন থেকে লুকানো হবে। আপনি তালিকাটির নীচে থাকা \'%1$s\' বোতামটি ব্যবহার করে পরে এটি পুনরুদ্ধার করতে পারেন</string>
+    <string name="home_app_hide_message">এই অ্যাপটি হোম স্ক্রীন থেকে লুকানো হবে। আপনি তালিকাটির নীচে থাকা \'\' বোতামটি ব্যবহার করে পরে এটি পুনরুদ্ধার করতে পারেন</string>
     <string name="home_app_will_be_hidden">এই অ্যাপটি গোপন হবে</string>
     <string name="home_app_show_hidden">দেখুন গোপন অ্যাপস</string>
     <string name="home_app_no_hidden">কোনো গোপন অ্যাপ নেই</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">আপডেটগুলি ছাড়া রাখা হয়েছে</string>
     <string name="home_update_skipped_metered_subtitle">মোবাইল ডেটা সক্রিয়</string>
     <string name="home_updating_sources">সোর্স আপডেট হচ্ছে...</string>
-    <string name="home_update_progress_format">%1$s সম্পন্ন হয়েছে</string>
+    <string name="home_update_progress_format">%s সম্পন্ন হয়েছে</string>
     <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ হয়েছে</string>
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="home_search_apps">অ্যাপস অনুসন্ধান করুন</string>
     <string name="home_no_apps_title">কোনো অ্যাপস পাওয়া যায়নি</string>
     <string name="home_no_apps_subtitle">একটি প্যাচ উৎস যোগ করুন অথবা %s-এ বিদ্যমান একটি সক্ষম করুন</string>
-    <string name="home_no_apps_search_subtitle">কোনো অ্যাপস \"%1$s\"-এর সাথে মেলে না</string>
+    <string name="home_no_apps_search_subtitle">\"%s\" এর সাথে মেলে এমন কোনো অ্যাপ নেই</string>
     <string name="home_all_apps_hidden_title">সমস্ত অ্যাপ্লিকেশন লুকানো হয়েছে</string>
     <string name="home_all_apps_hidden_subtitle">আপনি হোম স্ক্রীন থেকে সমস্ত অ্যাপ্লিকেশন লুকিয়ে ফেলেছেন</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">\'\'</string>
     <string name="sources_management_experimental_versions_toggle_description">\'\'</string>
     <string name="sources_management_already_exists">এই উৎসটি ইতিমধ্যেই যোগ করা হয়েছে</string>
+    <string name="sources_management_invalid_url">অবৈধ উৎস URL। অনুগ্রহ করে ঠিকানাটি পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন</string>
+    <string name="sources_management_metadata_unavailable">মেটাডেটা উপলব্ধ নয়</string>
+    <string name="sources_management_metadata_unavailable_hint">রিমোট মেটাডেটা ফাইলটি পাওয়া যাচ্ছে না। ইনস্টল করা বান্ডেলের সাথে প্যাচিং এখনও কাজ করে, তবে এই উৎসের জন্য স্বয়ংক্রিয় আপডেট নিষ্ক্রিয় করা হয়েছে</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">প্যাচ বান্ডেল ডাউনলোড করা যায়নি। উৎস URL ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">প্রদর্শিত নাম</string>
     <string name="sources_dialog_rename">প্যাচের নাম পরিবর্তন করুন</string>
@@ -78,13 +82,14 @@
     <string name="sources_dialog_local">লোকাল</string>
     <string name="sources_dialog_local_file">প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
     <string name="sources_dialog_local_file_description">স্টোর থেকে .mpp প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
+    <string name="sources_dialog_url_invalid">URL টি অবশ্যই একটি GitHub/GitLab রেপো অথবা .json ফাইল নির্দেশ করতে হবে।</string>
     <string name="sources_dialog_local_change_file">ফাইল পরিবর্তন করুন</string>
     <string name="sources_dialog_preinstalled">প্র-ইনস্টল করা হয়েছে</string>
     <string name="sources_update_success">আপডেট সফল হয়েছে</string>
     <string name="sources_update_unavailable">আপডেট উপলব্ধ নেই</string>
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
-    <string name="sources_download_fail_named">\"%1$s\" ডাউনলোড করতে ব্যর্থ: %2$s</string>
-    <string name="sources_download_endpoint_not_found">\'%1$s\' এর জন্য আপডেট করতে পারেনি: কনফিগার করা URL-তে প্যাচ JSON ফাইলটি পাওয়া যায়নি</string>
+    <string name="sources_download_fail_named">\'%s\' আপডেট করা যায়নি। আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': প্যাচ মেটাডেটা পাওয়া যায়নি</string>
     <string name="sources_patch_expert_badge">বিশেষজ্ঞ</string>
     <string name="sources_patch_expert_badge_tooltip">এই প্যাচটি ম্যানুয়ালি অন্তর্ভুক্ত করতে সেটিংস-এ বিশেষজ্ঞ মোড সক্রিয় করুন</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +103,13 @@
     <string name="home_apk_availability_no">না, আমি ইতিমধ্যে একটি APK পেয়েছি</string>
     <string name="home_apk_use_saved_with_version">বর্তমান সংরক্ষিত APK (v%s) ব্যবহার করুন</string>
     <string name="home_app_info_no_saved_apk">কোন সংরক্ষিত APK নেই। প্যাচিংয়ের জন্য আবার APK ফাইল নির্বাচন করতে হবে</string>
-    <string name="home_version_requires_android">Android %1$s+ প্রয়োজন</string>
+    <string name="home_version_requires_android">Android %s+ প্রয়োজন</string>
     <string name="home_apk_no_compatible_versions_title">এই ডিভাইসে সমর্থিত নয়</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;-এর Android %2$d (API %3$d)-এর জন্য কোনো সমর্থিত সংস্করণ নেই। ঘোষিত সমস্ত সংস্করণের জন্য উচ্চতর Android সংস্করণ প্রয়োজন</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">মূল APK ডাউনলোড করুন</string>
     <string name="home_download_instructions_steps_title">নির্দেশাবলী:</string>
-    <string name="home_download_instructions_step1">\"Push the \'%1$s\' button below the text\"</string>
+    <string name="home_download_instructions_step1">নিচের \'%s\' বোতামটি চাপুন</string>
     <string name="home_download_instructions_step2_part1">ওয়েবপেজটি স্ক্রোল করুন এবং চাপুন</string>
     <string name="home_download_instructions_download_button_toast">এখানে নয়, ওয়েবসাইটে ডাউনলোড করুন 😊</string>
     <string name="home_download_instructions_step3">ডাউনলোড শেষ হওয়ার অপেক্ষা করুন, এবং &lt;b&gt;APK ইনস্টল করবেন না&lt;/b&gt;</string>
@@ -114,7 +119,7 @@
     <string name="home_download_instructions_continue">APKMirror.com-এ চালিয়ে যান</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">নির্বাচিত ডাউনলোডকৃত এপিকে</string>
-    <string name="home_file_picker_prompt_description">নির্বাচন করুন যুয়ুশি &lt;b&gt;%1$s&lt;/b&gt; APK ফাইল, যা তুমি জুয়ুশি ডাউনলোড করেছো</string>
+    <string name="home_file_picker_prompt_description">নির্বাচন করুন যুয়ুশি &lt;b&gt;%s&lt;/b&gt; APK ফাইল, যা তুমি জুয়ুশি ডাউনলোড করেছো</string>
     <string name="home_file_picker_prompt_open_apk">APK ফাইল খুলুন</string>
     <string name="home_recommended_version">社学牛​</string>
     <string name="home_selected_version">নির্বাচিত সংস্করণ</string>
@@ -260,6 +265,9 @@
     <string name="patcher_ready_to_install_subtitle">ইনস্টল করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_ready_to_mount_subtitle">মাউন্ট করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_storage_permission_dialog_title">স্টোরেজ পথে অ্যাক্সেস করতে পারেনি</string>
+    <string name="patcher_incompatible_patcher_title">আপডেট প্রয়োজন</string>
+    <string name="patcher_incompatible_patcher_description">বান্ডেল &lt;b&gt;%1$s&lt;/b&gt;-এর জন্য প্যাচার সংস্করণ &lt;b&gt;%2$s&lt;/b&gt; অথবা তার চেয়ে নতুন সংস্করণ প্রয়োজন। এই অ্যাপটি প্যাচ করার জন্য অনুগ্রহ করে Morphe আপডেট করুন</string>
+    <string name="patcher_incompatible_patcher_update_button">মর্ফে ডাউনলোড এবং আপডেট করুন</string>
     <string name="patcher_storage_permission_description_api30">একটি বা একাধিক প্যাচ অপশন এমন পথে নির্দেশ করে যা Morphe পড়তে পারে না। স্টোরেজ অ্যাক্সেস দিন এবং বোতামটি টিপুন, তাহলে প্যাচিং স্বয়ংক্রিয়ভাবে শুরু হবে।</string>
     <string name="patcher_storage_permission_description_legacy">এক বা একাধিক প্যাচ বিকল্প অ্যাক্সেস করতে পারে না। প্যাচ বিকল্পগুলিতে পথ আপডেট করুন এবং আবার চেষ্টা করুন</string>
     <string name="patcher_storage_permission_grant">স্টোরেজ অনুমতি দিন</string>
@@ -317,7 +325,7 @@
     <string name="patched_app_saved_toast">প্যাচ করা অ্যাপ পরে জন্য সংরক্ষণ করা হয়েছে</string>
     <string name="patched_app_save_failed_toast">প্যাচ করা অ্যাপ সংরক্ষণ করতে ব্যর্থ</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইন চালিয়ে যেতে জন্য ব্যবহারকারীর ইন্টারেকশন প্রয়োজন</string>
-    <string name="patcher_process_exit_message">প্যাচার প্রক্রিয়া কোড %1$s এর সাথে বের হয়েছে</string>
+    <string name="patcher_process_exit_message">প্যাচার প্রক্রিয়া %s কোড দিয়ে সম্পন্ন হয়েছে</string>
     <string name="install_app_success">সাফল্য়ের সাথে ইনস্টল করা হয়েছে</string>
     <string name="install_app_fail">অ্যাপ ইনস্টল করতে ব্যর্থ: %s</string>
     <string name="save_apk_success">APK সেভ করা হয়েছে</string>
@@ -375,7 +383,7 @@
     <string name="settings_appearance_app_icon_dark_2">ভয়েড</string>
     <string name="settings_appearance_app_icon_dark_3">ইন্ডিগো</string>
     <string name="settings_appearance_app_icon_change_dialog_title">অ্যাপ আইকন পরিবর্তন? </string>
-    <string name="settings_appearance_app_icon_change_dialog_message"> \'%1$s\' এ পরিবর্তন করে পুনরায় শুরু করবেন? </string>
+    <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt;-এ পরিবর্তন করুন এবং পুনরায় চালু করুন?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">আইকন পরিবর্তন করুন</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">আপডেটগুলি</string>
@@ -397,7 +405,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe আপডেট উপলব্ধ</string>
     <string name="notification_bundle_update_title">নতুন প্যাচ পাওয়া গেছে</string>
-    <string name="notification_update_text">%1$s সংস্করণ ডাউনলোডের জন্য প্রস্তুত</string>
+    <string name="notification_update_text">Version %s ডাউনলোড করার জন্য প্রস্তুত</string>
     <string name="notification_bundle_update_text_unversioned">Morphe খুলুন এবং আপডেট করুন</string>
     <string name="notification_permission_dialog_title">নোটিফিকেশন অনুমতি দিন</string>
     <string name="notification_permission_dialog_description">আপডেট উপলব্ধ হলে Morphe আপনাকে সতর্ক করার জন্য বিজ্ঞপ্তি অনুমতির প্রয়োজন</string>
@@ -522,9 +530,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_action_open_shizuku">Shizuku খুলুন</string>
     <string name="installer_hint_generic">ইনস্টলেশন ব্যর্থ হয়েছে. আবার চেষ্টা করুন বা ভিন্ন ইনস্টলার ব্যবহার করুন</string>
     <string name="installer_hint_conflict">এই প্যাকেজ নামের সাথে আরেকটি অ্যাপ ইতিমধ্যে ইনস্টল করা আছে. এটিকে বাতিল করুন এবং চলে যান</string>
-    <string name="installer_external_launched">%1$s খোলা হচ্ছে…</string>
-    <string name="installer_external_timeout">%1$s ইনস্টলেশন কনফার্ম করেননি. অন্যান্য অ্যাপ চেক করুন এবং আবার চেষ্টা করুন</string>
-    <string name="installer_external_success">%1$s একটি সফল ইনস্টলেশন রিপোর্ট করেছে</string>
+    <string name="installer_external_launched">%s খোলা হচ্ছে…</string>
+    <string name="installer_external_timeout">%s ইনস্টলেশন নিশ্চিত করেনি। অন্য অ্যাপটি পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন</string>
+    <string name="installer_external_success">%s সফল ইনস্টলেশনের খবর দিয়েছে</string>
     <string name="installer_unavailable_title">%s অকার্যকর</string>
     <string name="installer_unavailable_message">তোমার পছন্দের ইনস্টলার (%s) বর্তমানে অ্যাক্সেসযোগ্য নয়. সমস্যা সমাধান কর এবং আবার চেষ্টা করুন, বা স্ট্যান্ডার্ড ইনস্টলার ব্যবহার করুন</string>
     <string name="installer_unavailable_shizuku_hint">শিজুকু চালু আছে এবং এই অ্যাপের অনুমতি দেওয়া হয়েছে</string>

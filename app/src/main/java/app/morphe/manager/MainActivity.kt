@@ -119,7 +119,8 @@ class MainActivity : AppCompatActivity() {
     /**
      * Handles deep links for adding patch sources.
      * Format: https://morphe.software/add-source?github=owner/repo(&name=Display+Name)
-     * Only GitHub URLs are accepted for safety.
+     *         https://morphe.software/add-source?gitlab=owner/repo(&name=Display+Name)
+     * Only GitHub and GitLab URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
         val data = intent?.data ?: return
@@ -138,10 +139,21 @@ class MainActivity : AppCompatActivity() {
                 data.path?.startsWith("/add-source") == true
         if (!isAddSource) return
 
-        val repo = data.getQueryParameter("github")?.takeIf { it.isNotBlank() } ?: return
-        val url = "https://github.com/$repo"
         val name = data.getQueryParameter("name")?.takeIf { it.isNotBlank() }
-        vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(url = url, name = name)
+
+        val githubRepo = data.getQueryParameter("github")?.takeIf { it.isNotBlank() }
+        if (githubRepo != null) {
+            val url = "https://github.com/$githubRepo"
+            vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(url = url, name = name)
+            return
+        }
+
+        val gitlabRepo = data.getQueryParameter("gitlab")?.takeIf { it.isNotBlank() }
+        if (gitlabRepo != null) {
+            val url = "https://gitlab.com/$gitlabRepo"
+            vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(url = url, name = name)
+            return
+        }
     }
 }
 

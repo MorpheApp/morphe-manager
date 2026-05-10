@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Hindi pa na-patch</string>
     <string name="home_no_patches_available">Walang patch na magagamit</string>
     <string name="home_app_hide_title">Itago ang aplikasyong ito?</string>
-    <string name="home_app_hide_message">Itatago ang aplikasyong ito mula sa home screen. Maaari mong buksan mamaya gamit ang \'%1$s\' na button sa ibaba ng listahan</string>
+    <string name="home_app_hide_message">Itatago ang aplikasyong ito mula sa home screen. Maaari mo itong buksan muli mamaya gamit ang \"\" na button sa ibaba ng listahan</string>
     <string name="home_app_will_be_hidden">Itatago ang aplikasyong ito</string>
     <string name="home_app_show_hidden">Ipakita ang mga nakatagong aplikasyon</string>
     <string name="home_app_no_hidden">Walang mga nakatagong aplikasyon</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Nabigo ang pag-update</string>
     <string name="home_update_skipped_metered_subtitle">Mobile data ay aktibo</string>
     <string name="home_updating_sources">Ina-update ang mga mapagkukunan…</string>
-    <string name="home_update_progress_format">%1$s naproseso</string>
+    <string name="home_update_progress_format">%s naproseso</string>
     <string name="home_update_success">Nakumpleto ang mga mapagkukunan ng update</string>
     <string name="home_update_success_subtitle">Napapanahon ang iyong mga mapagkukunan</string>
     <string name="home_sources_are_loading">Naglo-load ang iyong mga mapagkukunan, mangyaring maghintay…</string>
     <string name="home_search_apps">Maghanap ng mga app</string>
     <string name="home_no_apps_title">Walang available na mga app</string>
     <string name="home_no_apps_subtitle">Magdagdag ng pinagmulan ng patch o paganahin ang isang umiiral na isa sa %s</string>
-    <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%s\"</string>
     <string name="home_all_apps_hidden_title">Nakatago ang lahat ng apps</string>
     <string name="home_all_apps_hidden_subtitle">Nakatago mo ang lahat ng apps sa home screen</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Gamitin ang mga eksperimental na bersyon ng app</string>
     <string name="sources_management_experimental_versions_toggle_description">Kumpunihin ang mga eksperimental na target ng app kung available</string>
     <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
+    <string name="sources_management_invalid_url">Hindi balido ang source URL. Pakisuri ang address at subukang muli.</string>
+    <string name="sources_management_metadata_unavailable">Hindi available ang Metadata</string>
+    <string name="sources_management_metadata_unavailable_hint">Hindi available ang remote metadata file. Gumagana pa rin ang pag-patch gamit ang naka-install na bundle, ngunit hindi pinagana ang auto-update para sa source na ito.</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Hindi ma-download ang patch bundle. Maaaring mali ang source URL o hindi umiiral ang file.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Pangalan na ipapakita</string>
     <string name="sources_dialog_rename">Baguhin ang mapagkukunan ng patch</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Mga Halimbawa:</string>
     <string name="sources_dialog_local">Lokal</string>
     <string name="sources_dialog_local_file">Piliin ang file ng mapagkukunang patch</string>
+    <string name="sources_dialog_local_file_tap_hint">I-tap para mag-browse ng storage</string>
     <string name="sources_dialog_local_file_description">Piliin ang isang .mpp file ng mapagkukunang patch mula sa imbakan</string>
+    <string name="sources_dialog_local_invalid_extension">Dapat may extension na .mpp ang file</string>
+    <string name="sources_dialog_url_valid">Valid na repository o JSON URL</string>
+    <string name="sources_dialog_url_invalid">Dapat tumuro ang URL sa isang GitHub/GitLab repo o .json file</string>
     <string name="sources_dialog_local_change_file">Baguhin ang file</string>
     <string name="sources_dialog_preinstalled">Naka-install</string>
     <string name="sources_update_success">Matagumpay ang pag-update</string>
     <string name="sources_update_unavailable">Walang update na magagamit</string>
     <string name="sources_download_fail">Nabigong mag-download ang mga mapagkukunan: %s</string>
-    <string name="sources_download_fail_named">Nabigong ma-download ang \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Hindi napagana ang pag-update \'%1$s\': ang patch JSON file ay hindi natagpuan sa itinakdang URL</string>
+    <string name="sources_download_fail_named">\"%s\" ay hindi na-update. Suriin ang iyong koneksyon sa internet at subukan muli</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": hindi natagpuan ang metadata ng patch</string>
     <string name="sources_patch_expert_badge">Eksperto</string>
     <string name="sources_patch_expert_badge_tooltip">I-enable ang Expert mode sa Settings upang isama ang patch na ito nang manu-mano</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Hindi, mayroon na akong APK</string>
     <string name="home_apk_use_saved_with_version">Gamitin ang nakaimbak na APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Walang nakaimbak na APK. Ang pag-patch na ito ay mangangailangan ng muling pagpili ng APK file</string>
-    <string name="home_version_requires_android">Nangangailangan ng Android %1$s+</string>
+    <string name="home_version_requires_android">Nangangailangan ng Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Hindi suportado sa aparatong ito</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ay walang sinusuportahang bersyon para sa Android %2$d (API %3$d). Lahat ng idineklarang bersyon ay nangangailangan ng mas mataas na bersyon ng Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">I-download ang orihinal na APK</string>
     <string name="home_download_instructions_steps_title">Mga Tagubilin:</string>
-    <string name="home_download_instructions_step1">Pindutin ang \'%1$s\' na button sa ibaba</string>
+    <string name="home_download_instructions_step1">Pindutin ang \'%s\' na button sa ibaba</string>
     <string name="home_download_instructions_step2_part1">I-scroll pababa ang webpage at pindutin</string>
     <string name="home_download_instructions_download_button_toast">Pindutin ang download sa website, at hindi dito 😊</string>
     <string name="home_download_instructions_step3">Hintaying makumpleto ang pag-download, at &lt;b&gt;huwag i-install&lt;/b&gt; ang APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Magpatuloy sa APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Piliin ang na-download na APK</string>
-    <string name="home_file_picker_prompt_description">Piliin ang &lt;b&gt;%1$s&lt;/b&gt; APK file na kakadownload mo lang</string>
+    <string name="home_file_picker_prompt_description">Piliin ang &lt;b&gt;%s&lt;/b&gt; APK file na kakadownload mo lang</string>
     <string name="home_file_picker_prompt_open_apk">Buksan ang APK file</string>
     <string name="home_recommended_version">Inirerekomendang bersyon</string>
     <string name="home_selected_version">Piniling bersyon</string>
@@ -260,6 +268,9 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="patcher_ready_to_install_subtitle">Pindutin ang button sa ibaba upang ma-install</string>
     <string name="patcher_ready_to_mount_subtitle">Pindutin ang button sa ibaba upang i-mount</string>
     <string name="patcher_storage_permission_dialog_title">Hindi ma-access ang landas ng imbakan</string>
+    <string name="patcher_incompatible_patcher_title">Kinakailangan ang pag-update</string>
+    <string name="patcher_incompatible_patcher_description">Ang bundle &lt;b&gt;%1$s&lt;/b&gt; ay nangangailangan ng bersyon ng patcher na &lt;b&gt;%2$s&lt;/b&gt; o mas bago. Pakisuyong i-update ang Morphe upang i-patch ang app na ito</string>
+    <string name="patcher_incompatible_patcher_update_button">I-download at i-update ang Morphe</string>
     <string name="patcher_storage_permission_description_api30">Isa o higit pang mga pagpipilian sa patch ay tumuturo sa mga landas na hindi mabasa ng Morphe. Bigyan ng access sa imbakan at i-tap ang button at pagkatapos ay awtomatikong magsisimula ang pag-patch</string>
     <string name="patcher_storage_permission_description_legacy">Isa o higit pang mga pagpipilian sa patch ay tumuturo sa mga landas na hindi ma-access. I-update ang mga landas sa pagpipilian ng patch at subukan muli</string>
     <string name="patcher_storage_permission_grant">Pahintulutan ang pahintulot sa imbakan</string>
@@ -317,7 +328,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="patched_app_saved_toast">Na-save ang na-patch na aplikasyon para sa ibang pagkakataon</string>
     <string name="patched_app_save_failed_toast">Nabigong ma-save ang na-patch na aplikasyon</string>
     <string name="plugin_activity_dialog_body">Kinakailangan ng pakikipag-ugnayan sa tagagamit upang magpatuloy sa plugin na ito</string>
-    <string name="patcher_process_exit_message">Lumabas ang proseso ng patcher na may code %1$s</string>
+    <string name="patcher_process_exit_message">Lumabas ang proseso ng patcher na may code %s</string>
     <string name="install_app_success">Matagumpay na na-install</string>
     <string name="install_app_fail">Nabigong ma-install ang aplikasyon: %s</string>
     <string name="save_apk_success">Na-save ang APK</string>
@@ -375,7 +386,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="settings_appearance_app_icon_dark_2">Void</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Baguhin ang icon ng aplikasyon?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Baguhin sa \'%1$s\' at i-restart?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Baguhin sa &lt;b&gt;%s&lt;/b&gt; at i-restart?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Baguhin ang icon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mga update</string>
@@ -397,7 +408,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <!-- Notification content -->
     <string name="notification_manager_update_title">Magagamit ang update ng Morphe</string>
     <string name="notification_bundle_update_title">Magagamit ang mga bagong patch</string>
-    <string name="notification_update_text">Handa mag-download ang bersyong %1$s</string>
+    <string name="notification_update_text">Handa mag-download ang bersyong %s</string>
     <string name="notification_bundle_update_text_unversioned">I-tap para buksan ang Morphe at i-update</string>
     <string name="notification_permission_dialog_title">Payagan ang mga notipikasyon</string>
     <string name="notification_permission_dialog_description">Kailangan ng Morphe ang pahintulot sa notipikasyon upang abisuhan ka kapag may mga update na magagamit sa background</string>
@@ -533,9 +544,9 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_action_open_shizuku">Buksan ang Shizuku</string>
     <string name="installer_hint_generic">Nabigo ang pag-install. Subukan muli o lumipat sa ibang installer</string>
     <string name="installer_hint_conflict">Naka-install na ang isa pang aplikasyon na may ganitong pangalan ng pakete. Burahin muna bago magpatuloy</string>
-    <string name="installer_external_launched">Binubuksan ang %1$s…</string>
-    <string name="installer_external_timeout">Hindi nakumpirma ng %1$s ang pag-install. Tingnan ang ibang aplikasyon at subukan muli</string>
-    <string name="installer_external_success">Iniulat ng %1$s ang matagumpay na pag-install</string>
+    <string name="installer_external_launched">Binubuksan ang %s…</string>
+    <string name="installer_external_timeout">Hindi nakumpirma ng %s ang pag-install. Tingnan ang ibang aplikasyon at subukan muli</string>
+    <string name="installer_external_success">Iniulat ng %s ang matagumpay na pag-install</string>
     <string name="installer_unavailable_title">Hindi magagamit ang %s </string>
     <string name="installer_unavailable_message">Kasalukuyang hindi magagamit ang iyong piniling installer (%s). Maaari mong ayusin ang isyu at subukan muli, o gamitin ang standard installer sa halip</string>
     <string name="installer_unavailable_shizuku_hint">Tiyaking tumatakbo ang Shizuku at binibigyan ng pahintulot ang aplikasyong ito</string>

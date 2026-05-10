@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
     <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
-    <string name="home_app_hide_message">यह ऐप होम स्क्रीन से छिपा दिया जाएगा। आप सूची के निचले भाग में मौजूद \'%1$s\' बटन का उपयोग करके बाद में इसे पुनर्स्थापित कर सकते हैं।</string>
+    <string name="home_app_hide_message">यह ऐप होम स्क्रीन से छिपा दिया जाएगा। आप सूची के नीचे दिए गए बटन का उपयोग करके छिपे हुए ऐप्स से इसे बाद में पुनर्स्थापित कर सकते हैं</string>
     <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
     <string name="home_app_show_hidden">छिपे हुए ऐप दिखाएं</string>
     <string name="home_app_no_hidden">कोई छिपा ऐप नहीं</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">अपडेट छोड़ दिए गए</string>
     <string name="home_update_skipped_metered_subtitle">मोबाइल डेटा सक्रिय है</string>
     <string name="home_updating_sources">स्रोतों को अपडेट कर रहा हूँ…</string>
-    <string name="home_update_progress_format">%1$s प्रोसेस्ड किया गया</string>
+    <string name="home_update_progress_format">%s संसाधित</string>
     <string name="home_update_success">स्रोत अपडेट पूर्ण हुआ</string>
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
     <string name="home_search_apps">ऐप्स खोजें</string>
     <string name="home_no_apps_title">कोई ऐप्स उपलब्ध नहीं हैं</string>
     <string name="home_no_apps_subtitle">पैच स्रोत जोड़ें या %s में मौजूदा स्रोत सक्षम करें</string>
-    <string name="home_no_apps_search_subtitle">कोई ऐप्स \"%1$s\" से मेल नहीं खाते हैं</string>
+    <string name="home_no_apps_search_subtitle">\"%s\" से मेल खाने वाला कोई ऐप नहीं है</string>
     <string name="home_all_apps_hidden_title">सभी ऐप्स छिपे हुए हैं</string>
     <string name="home_all_apps_hidden_subtitle">आपने होम स्क्रीन से सभी ऐप्स छिपा दिए हैं</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">प्रयोगशील ऐप संस्करणों का उपयोग करें</string>
     <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हो तो प्रयोगशील ऐप लक्ष्यों को पैच करें</string>
     <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
+    <string name="sources_management_invalid_url">अमान्य स्रोत URL। कृपया पता जांचें और फिर प्रयास करें</string>
+    <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नहीं है</string>
+    <string name="sources_management_metadata_unavailable_hint">रिमोट मेटाडेटा फ़ाइल अनुपलब्ध है। स्थापित बंडल के साथ पैचिंग अभी भी काम करती है, लेकिन इस स्रोत के लिए ऑटो-अपडेट अक्षम कर दिया गया है</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">नाम दर्जा करें</string>
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">उदाहरण:</string>
     <string name="sources_dialog_local">स्थानीय</string>
     <string name="sources_dialog_local_file">पैच स्रोत फ़ाइल का चयन करें</string>
+    <string name="sources_dialog_local_file_tap_hint">भंडारण ब्राउज़ करने के लिए टैप करें</string>
     <string name="sources_dialog_local_file_description">स्टोरेज से .mpp पैच स्रोत फ़ाइल का चयन करें</string>
+    <string name="sources_dialog_local_invalid_extension">फ़ाइल में .mpp एक्सटेंशन होना चाहिए</string>
+    <string name="sources_dialog_url_valid">मान्य रिपॉजिटरी या JSON URL</string>
+    <string name="sources_dialog_url_invalid">URL GitHub/GitLab रिपो या .json फ़ाइल की ओर इंगित करना चाहिए</string>
     <string name="sources_dialog_local_change_file">फ़ाइल बदलें</string>
     <string name="sources_dialog_preinstalled">प्रिंस्टॉल किया गया</string>
     <string name="sources_update_success">अपडेट सफल रहा</string>
     <string name="sources_update_unavailable">अपडेट उपलब्ध नहीं है</string>
     <string name="sources_download_fail">स्रोत डाउनलोड करने में विफल हो गया: %s</string>
-    <string name="sources_download_fail_named">\'%1$s\' डाउनलोड करने में विफल: %2$s</string>
-    <string name="sources_download_endpoint_not_found">\'%1$s\' को अपडेट नहीं किया जा सका: कॉन्फ़िगर किए गए URL पर पथच जेएसओन फ़ाइल नहीं मिली</string>
+    <string name="sources_download_fail_named">\'%s\' को अपडेट नहीं किया जा सका। अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': पैच मेटाडेटा नहीं मिला।</string>
     <string name="sources_patch_expert_badge">विशेषज्ञ</string>
     <string name="sources_patch_expert_badge_tooltip">इस पैच को मैन्युअल रूप से शामिल करने के लिए सेटिंग्स में विशेषज्ञ मोड सक्षम करें</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">नहीं, मेरे पास पहले से ही एक एपीके है</string>
     <string name="home_apk_use_saved_with_version">प्रतिलिपि APK (v%s) का उपयोग करें</string>
     <string name="home_app_info_no_saved_apk">कोई प्रतिलिपि APK नहीं है। पट्च करना पुनः APK फ़ाइल का चयन करना आवश्यक होगा</string>
-    <string name="home_version_requires_android">Android %1$s+ की आवश्यकता है</string>
+    <string name="home_version_requires_android">Android %s+ की आवश्यकता है</string>
     <string name="home_apk_no_compatible_versions_title">इस डिवाइस पर समर्थित नहीं है</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; के पास Android %2$d (API %3$d) के लिए कोई समर्थित संस्करण नहीं है। सभी घोषित संस्करणों के लिए उच्च Android संस्करण की आवश्यकता है।</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ओरिजनल APK डाउनलोड करें</string>
     <string name="home_download_instructions_steps_title">निर्देश:</string>
-    <string name="home_download_instructions_step1">नीचे दिया गया \'%1$s\' बटन दबाएं</string>
+    <string name="home_download_instructions_step1">नीचे दिया गया \'%s\' बटन दबाएं</string>
     <string name="home_download_instructions_step2_part1">वेबपेज पर नीचे की ओर स्क्रोल करें और दबाएं</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइट पर डाउनलोड बटन पर क्लिक करें, यहां नहीं 😊</string>
     <string name="home_download_instructions_step3">डाउनलोड पूरा होने का इंतज़ार करें और APK को &lt;b&gt;इंस्टाल न करें&lt;/b&gt;</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">APKMirror.com पर जाएं</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">चयनित डाउनलोड एपीके</string>
-    <string name="home_file_picker_prompt_description">अपना डाउनलोड की गई &lt;b&gt;b>%1$s&lt;b&gt;/b> APK फ़ाइल चुनें</string>
+    <string name="home_file_picker_prompt_description">अपना डाउनलोड की गई &lt;b&gt;b>%s&lt;b&gt;/b> APK फ़ाइल चुनें</string>
     <string name="home_file_picker_prompt_open_apk">APK फ़ाइल खोलें</string>
     <string name="home_recommended_version">सुझाई गई संस्करण</string>
     <string name="home_selected_version">चयन किया गया संस्करण</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_storage_permission_dialog_title">स्तोरेज पथ तक पहुंच नहीं हो सकती है</string>
+    <string name="patcher_incompatible_patcher_title">अपडेट आवश्यक है</string>
+    <string name="patcher_incompatible_patcher_description">बंडल &lt;b&gt;%1$s&lt;/b&gt; को पैचर संस्करण &lt;b&gt;%2$s&lt;/b&gt; या नया संस्करण की आवश्यकता है। कृपया इस ऐप को पैच करने के लिए Morphe को अपडेट करें।</string>
+    <string name="patcher_incompatible_patcher_update_button">डाउनलोड करें और मोर्फ़ अपडेट करें</string>
     <string name="patcher_storage_permission_description_api30">एक या अधिक पैच विकल्प ऐसे पथों की ओर इशारा करते हैं जिन्हें मोर्फे नहीं पढ़ सकता है। स्टोरेज एक्सेस प्रदान करें और बटन पर टैप करें, फिर पैचिंग स्वचालित रूप से शुरू हो जाएगी</string>
     <string name="patcher_storage_permission_description_legacy">एक या अधिक पैच ऑप्शन को पथ्स को पॉइंट करता है जो पहुंच नहीं हो सकती है। पैच ऑप्शन में पथ्स को अद्यतन करें और पुन: प्रयास करें</string>
     <string name="patcher_storage_permission_grant">स्टोरेज अनुमति प्रदान करें</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">Patched app saved for later</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="plugin_activity_dialog_body">इस प्लगइन के लिए आगे बढ़ने के लिए उपयोगकर्ता इंटरैक्शन आवश्यक है।</string>
-    <string name="patcher_process_exit_message">पैचर प्रक्रिया कोड %1$s के साथ समाप्त हुई</string>
+    <string name="patcher_process_exit_message">पैचर प्रक्रिया कोड %s के साथ समाप्त हो गई।</string>
     <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
     <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
     <string name="save_apk_success">एपीके सहेजा गया</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">वॉयड</string>
     <string name="settings_appearance_app_icon_dark_3">इंडिगो</string>
     <string name="settings_appearance_app_icon_change_dialog_title">एप्लिकेशन आइकॉन बदलें? फिर से स्टार्ट करना होगा।</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">%1$s में बदलें और फिर से स्टार्ट करना होगा?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; में बदलें और पुनरारंभ करें?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">आइकॉन बदलें</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">अपडेट</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">मोर्फ़ अपडेट उपलब्ध है</string>
     <string name="notification_bundle_update_title">नई पैच उपलब्ध हैं</string>
-    <string name="notification_update_text">वर्जन %1$s डाउनलोड के लिए तैयार है</string>
+    <string name="notification_update_text">संस्करण %s डाउनलोड करने के लिए तैयार है।</string>
     <string name="notification_bundle_update_text_unversioned">मोर्फ़ और अपडेट करने के लिए टैप करें</string>
     <string name="notification_permission_dialog_title">नोटिफिकेशन अनुमति दें</string>
     <string name="notification_permission_dialog_description">जब पृष्ठभूमि में अपडेट उपलब्ध हों तो आपको अलर्ट करने के लिए मोर्फ़ को अधिसूचना अनुमति की आवश्यकता है</string>
@@ -533,9 +544,9 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">इंस्टॉलेशन विफल रही. पुन: प्रयास करें या अलग इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_hint_conflict">इस पैकेज नाम के साथ अन्य ऐप पहले से ही इंस्टॉल किया गया है. आगे बढ़ने से पहले इसे अनइंस्टॉल करें।</string>
-    <string name="installer_external_launched">%1$s खोला जा रहा है</string>
-    <string name="installer_external_timeout">%1$s ने इंस्टॉलेशन की पुष्टि नहीं की. अन्य ऐप को जाँचें और पुन: प्रयास करें</string>
-    <string name="installer_external_success">%1$s ने सफल इंस्टॉलेशन रिपोर्ट की</string>
+    <string name="installer_external_launched">%s खोला जा रहा है</string>
+    <string name="installer_external_timeout">%s ने स्थापना की पुष्टि नहीं की। दूसरे ऐप की जांच करें और फिर से प्रयास करें।</string>
+    <string name="installer_external_success">%s ने सफल स्थापना की सूचना दी।</string>
     <string name="installer_unavailable_title">%s उपलब्ध नहीं है</string>
     <string name="installer_unavailable_message">आपका प्राथमिक इंस्टॉलर (%s) वर्तमान में उपलब्ध नहीं है. समस्या को ठीक करें और पुन: प्रयास करें, या मानक इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_unavailable_shizuku_hint">确保 शिज़ुकू चल रहा है और इस ऐप को अनुमति दी गई है।</string>

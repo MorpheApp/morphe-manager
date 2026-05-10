@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
     <string name="home_app_hide_title">להסתיר את האפליקציה הזאת?</string>
-    <string name="home_app_hide_message">האפליקציה הזאת תהיה מוסתרת מהתפריט הראשי. ניתן להחזיר אותה מאוחר יותר באמצעות הכפתור \'%1$s\' שבתחתית הרשימה</string>
+    <string name="home_app_hide_message">האפליקציה הזו תוסתר ממסך הבית. תוכל לשחזר אותה מאוחר יותר מהאפליקציות המוסתרות באמצעות הכפתור בתחתית הרשימה</string>
     <string name="home_app_will_be_hidden">האפליקציה הזאת תהיה מוסתרת</string>
     <string name="home_app_show_hidden">הצג אפליקציות מוסתרות</string>
     <string name="home_app_no_hidden">אין אפליקציות מוסתרות</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">עדכונים שדולגו</string>
     <string name="home_update_skipped_metered_subtitle">הנתונים הניידים פעילים</string>
     <string name="home_updating_sources">מעדכן מקורות…</string>
-    <string name="home_update_progress_format">%1$s עובד</string>
+    <string name="home_update_progress_format">%s עובד</string>
     <string name="home_update_success">עדכון המקורות הושלם</string>
     <string name="home_update_success_subtitle">המקורות שלך מעודכנים</string>
     <string name="home_sources_are_loading">המקורות נטענים, נא להמתין…</string>
     <string name="home_search_apps">חיפוש אפליקציות</string>
     <string name="home_no_apps_title">אין אפליקציות זמינות</string>
     <string name="home_no_apps_subtitle">הוסף מקור לאפליקציה או הפעל מקור קיים ב-\"%s\"</string>
-    <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%s\"</string>
     <string name="home_all_apps_hidden_title">כל האפליקציות מוסתרות</string>
     <string name="home_all_apps_hidden_subtitle">הסתרת את כל האפליקציות מהמסך הראשי</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">השתמש בגרסאות אפליקציה ניסיוניות</string>
     <string name="sources_management_experimental_versions_toggle_description">תקן גרסאות אפליקציה ניסיוניות זמינות</string>
     <string name="sources_management_already_exists">מקור זה כבר נוסף</string>
+    <string name="sources_management_invalid_url">כתובת URL מקור לא תקינה. אנא בדוק את הכתובת ונסה שוב</string>
+    <string name="sources_management_metadata_unavailable">מטא-נתונים לא זמינים</string>
+    <string name="sources_management_metadata_unavailable_hint">קובץ המטא-נתונים המרוחק לא זמין. תיקון באמצעות החבילה המותקנת עדיין עובד, אך עדכון אוטומטי מושבת עבור מקור זה</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">לא ניתן להוריד את חבילת התיקון. כתובת ה-URL של המקור עשויה להיות שגויה או שהקובץ אינו קיים</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">הצג שם</string>
     <string name="sources_dialog_rename">שנה את שם מקור התיקונים</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">דוגמאות:</string>
     <string name="sources_dialog_local">אנל</string>
     <string name="sources_dialog_local_file">בחר קובץ תצוג</string>
+    <string name="sources_dialog_local_file_tap_hint">הקש כדי לעיין באחסון</string>
     <string name="sources_dialog_local_file_description">בחר קובץ .mpp תצוג מותאם</string>
+    <string name="sources_dialog_local_invalid_extension">הקובץ חייב להיות עם סיומת ‎.mpp</string>
+    <string name="sources_dialog_url_valid">כתובת מאגר או URL חוקיים בפורמט JSON</string>
+    <string name="sources_dialog_url_invalid">הכתובת חייבת להפנות למאגר GitHub/GitLab או לקובץ ‎.json</string>
     <string name="sources_dialog_local_change_file">שנה קובץ</string>
     <string name="sources_dialog_preinstalled">מובן מראשון</string>
     <string name="sources_update_success">עדכון הצליח</string>
     <string name="sources_update_unavailable">אין עדכון זמין</string>
     <string name="sources_download_fail">שגגה להוריד תצוגים: %s</string>
-    <string name="sources_download_fail_named">נכשל טעינת \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">לא ניתן לעדכן \'%1$s\': הקובץ JSON של התיקון לא נמצא באדרס המוגדר</string>
+    <string name="sources_download_fail_named">\'\"%s\"\' לא ניתן לעדכון. בדוק את חיבור האינטרנט שלך ונסה שוב</string>
+    <string name="sources_download_endpoint_not_found">\'\"%s\"\': מטא-נתוני תיקון לא נמצאו</string>
     <string name="sources_patch_expert_badge">מומחה</string>
     <string name="sources_patch_expert_badge_tooltip">הפעל מצב מומחה בהגדרות כדי לכלול תיקון זה באופן ידני</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">לא, אני כבר מחזיק APK</string>
     <string name="home_apk_use_saved_with_version">השתמש באפאק שמור (גרסה %s)</string>
     <string name="home_app_info_no_saved_apk">אין אפאק שמור. תיקון ידרש לבחור את קובץ האפאק שוב</string>
-    <string name="home_version_requires_android">דורש Android %1$s+‎</string>
+    <string name="home_version_requires_android">דורש Android %s+‎</string>
     <string name="home_apk_no_compatible_versions_title">לא נתמך במכשיר זה</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; אין לו גרסאות נתמכות עבור Android %2$d (API %3$d). כל הגרסאות המוצהרות דורשות גרסת Android גבוהה יותר</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">הורד את ה-APK המקורי</string>
     <string name="home_download_instructions_steps_title">הוראות:</string>
-    <string name="home_download_instructions_step1">לחץ על הכפתור \'%1$s\' למטה כדי להוריד</string>
+    <string name="home_download_instructions_step1">לחץ על הכפתור \'%s\' למטה כדי להוריד</string>
     <string name="home_download_instructions_step2_part1">גלול מטה בדף האינטרנט ולחץ על</string>
     <string name="home_download_instructions_download_button_toast">לחץ הורד באתר, ולא כאן 😊</string>
     <string name="home_download_instructions_step3">המתן להשלמת ההורדה, ו&lt;b&gt;אל תתקין&lt;/b&gt; את ה-APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">המשך ל-APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">בחרו קובץ APK שהורד</string>
-    <string name="home_file_picker_prompt_description">בחרו את הקובץ &lt;b&gt;%1$s&lt;/b&gt; APK שהורדתם</string>
+    <string name="home_file_picker_prompt_description">בחר את קובץ ה-APK &lt;b&gt;%s&lt;/b&gt; שהורדת זה עתה</string>
     <string name="home_file_picker_prompt_open_apk">פתח קובץ APK</string>
     <string name="home_recommended_version">версия для рекомендации</string>
     <string name="home_selected_version">נבחר</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">לחץ על הכפתור למטה כדי להתקין</string>
     <string name="patcher_ready_to_mount_subtitle">לחץ על הכפתור למטה כדי לאתחל</string>
     <string name="patcher_storage_permission_dialog_title">לא ניתן לגשת לדרך אחסון</string>
+    <string name="patcher_incompatible_patcher_title">עדכון נדרש</string>
+    <string name="patcher_incompatible_patcher_description">החבילה &lt;b&gt;%1$s&lt;/b&gt; דורשת גרסת מתקן &lt;b&gt;%2$s&lt;/b&gt; ומעלה. אנא עדכן את Morphe כדי לתקן את האפליקציה הזו</string>
+    <string name="patcher_incompatible_patcher_update_button">הורד ועדכן את Morphe</string>
     <string name="patcher_storage_permission_description_api30">אפשרות אחת או יותר של תיקונים מצביעה על נתיבים ש-Morphe לא יכול לקרוא. הענק גישה לאחסון ולחץ על הכפתור ואז התיקון יתחיל באופן אוטומטי</string>
     <string name="patcher_storage_permission_description_legacy">אחד או יותר אופציות תיקון מצביעות על דרכים שאינן נגישות. עדכן את הדרכים באופציות התיקון ונסה שוב</string>
     <string name="patcher_storage_permission_grant">אשר אישור גישה לאחסון</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">אפליקציה מתוקנת נשמרה למועד מאוחר יותר</string>
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
     <string name="plugin_activity_dialog_body">נדרש אינטראקציה של המשתמש כדי להמשיך עם תוסף זה</string>
-    <string name="patcher_process_exit_message">פועל הפייסר יצא עם קוד %1$s</string>
+    <string name="patcher_process_exit_message">פועל הפייסר יצא עם קוד %s</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
     <string name="save_apk_success">APK נשמר</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">חלל</string>
     <string name="settings_appearance_app_icon_dark_3">אינדיגו</string>
     <string name="settings_appearance_app_icon_change_dialog_title">שנה את איקון האפליקציה? </string>
-    <string name="settings_appearance_app_icon_change_dialog_message">שנה ל\'%1$s\' ולהופש? </string>
+    <string name="settings_appearance_app_icon_change_dialog_message">שנה ל&lt;b&gt;%s&lt;/b&gt; והפעל מחדש?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">שנה איקון</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">עדכונים</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">עדכון Morphe זמין</string>
     <string name="notification_bundle_update_title">פיצ\'ים חדשים זמינים</string>
-    <string name="notification_update_text">גרסה %1$s מוכנה להורדה</string>
+    <string name="notification_update_text">גרסה %s מוכנה להורדה</string>
     <string name="notification_bundle_update_text_unversioned">לץ לפתוח את Morphe ולעדכן</string>
     <string name="notification_permission_dialog_title">אישור התראות</string>
     <string name="notification_permission_dialog_description">Morphe זקוקה לבקשת הרשאה להודעות כדי להודיע לך כאשר ישנם עדכונים זמינים ברקע</string>
@@ -517,9 +528,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_action_open_shizuku">פתח את Shizuku</string>
     <string name="installer_hint_generic">ההתקנה נכשלה. נסה שוב או שנה להתקן אחר</string>
     <string name="installer_hint_conflict">אפליקציה אחרת עם שם חבילה זה כבר מותקנת. הסר אותה לפני המשך</string>
-    <string name="installer_external_launched">פענוח %1$s…</string>
-    <string name="installer_external_timeout">%1$s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב</string>
-    <string name="installer_external_success">%1$s דיווח על התקנה מוצלחת</string>
+    <string name="installer_external_launched">פענוח %s…</string>
+    <string name="installer_external_timeout">%s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב</string>
+    <string name="installer_external_success">%s דיווח על התקנה מוצלחת</string>
     <string name="installer_unavailable_title">%s אינו זמין</string>
     <string name="installer_unavailable_message">התקן המועדף שלך (%s) אינו זמין כעת. תוכל לתקן את הבעיה ולתחל שוב, או להשתמש בהתקן סטנדרטי במקום זאת</string>
     <string name="installer_unavailable_shizuku_hint">אשר שיזוקה רץ ורשאות מובנות לאפליקציה זו</string>

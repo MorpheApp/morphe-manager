@@ -327,6 +327,19 @@ fun PatcherScreen(
         )
     }
 
+    // Patcher version incompatibility pre-flight dialog.
+    // Shown when a bundle's Patcher-Version is newer than what the manager ships.
+    patcherViewModel.incompatiblePatcherVersion?.let { state ->
+        IncompatiblePatcherVersionDialog(
+            bundleName = state.bundleName,
+            requiredVersion = state.requiredVersion,
+            onDismiss = {
+                patcherViewModel.dismissIncompatiblePatcherVersion()
+                onBackClick()
+            }
+        )
+    }
+
     // Error dialog
     if (state.showErrorDialog) {
         PatcherErrorDialog(

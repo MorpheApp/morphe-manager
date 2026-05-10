@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.AppIconManager
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.util.htmlAnnotatedString
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 
@@ -202,10 +203,10 @@ private fun AppIconChangeDialog(
         }
     ) {
         Text(
-            text = stringResource(
+            text = htmlAnnotatedString(stringResource(
                 R.string.settings_appearance_app_icon_change_dialog_message,
                 stringResource(icon.displayNameResId)
-            ),
+            )),
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogSecondaryTextColor.current,
             textAlign = TextAlign.Center,

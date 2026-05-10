@@ -16,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
@@ -37,8 +38,9 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
-import app.morphe.manager.util.saver.snapshotStateListSaver
+import app.morphe.manager.util.snapshotStateListSaver
 import app.morphe.manager.worker.UpdateCheckWorker
+import io.github.z4kn4fein.semver.Version
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -47,12 +49,7 @@ import kotlinx.coroutines.sync.withLock
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
-import android.content.ContentValues
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.file.Files
 import java.util.UUID
@@ -135,6 +132,24 @@ class PatcherViewModel(
 
     fun dismissInaccessibleOptionPathsError() {
         inaccessibleOptionPaths = null
+    }
+
+    /**
+     * Non-null when a bundle requires a newer morphe-patcher than the one bundled
+     * in this version of Morphe.
+     *
+     * @param requiredVersion  The minimum patcher version declared in the bundle.
+     * @param bundleName       The display name of the offending bundle.
+     */
+    data class IncompatiblePatcherVersionState(
+        val requiredVersion: String,
+        val bundleName: String,
+    )
+    var incompatiblePatcherVersion by mutableStateOf<IncompatiblePatcherVersionState?>(null)
+        private set
+
+    fun dismissIncompatiblePatcherVersion() {
+        incompatiblePatcherVersion = null
     }
 
     /**
@@ -405,7 +420,23 @@ class PatcherViewModel(
 
         bundleVersionsForLog = collectSelectedBundleMetadata().first
 
-        // Validate any file-system paths supplied as patch options before handing off to the worker.
+        // Check that all selected bundles are compatible with the patcher bundled in this
+        // version of the manager. If a bundle requires a newer patcher, block and show a dialog
+        // asking the user to update the manager app
+        val globalBundlesForCheck = patchBundleRepository.bundleInfoFlow.first()
+        appliedSelection.keys.forEach { uid ->
+            val bundle = globalBundlesForCheck[uid] ?: return@forEach
+            val required = bundle.patcherVersion ?: return@forEach
+            if (isPatcherOutdated(required, BuildConfig.PATCHER_VERSION)) {
+                incompatiblePatcherVersion = IncompatiblePatcherVersionState(
+                    requiredVersion = required,
+                    bundleName = bundle.name,
+                )
+                return
+            }
+        }
+
+        // Validate any file-system paths supplied as patch options before handing off to the worker
         val optionsToValidate = if (prefs.useExpertMode.getBlocking()) {
             input.options
         } else {
@@ -598,44 +629,6 @@ class PatcherViewModel(
             } finally {
                 _isSaving.value = false
             }
-        }
-    }
-
-    /**
-     * Exports the patched APK to the public Downloads folder.
-     * Used as a fallback on devices without DocumentsUI.
-     */
-    fun exportToDownloads() = viewModelScope.launch {
-        if (_isSaving.value) return@launch
-        _isSaving.value = true
-        try {
-            ensureExportMetadata()
-            val fileName = exportFileName
-            val exportSucceeded = runCatching {
-                withContext(Dispatchers.IO) {
-                    val stream = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        val values = ContentValues().apply {
-                            put(MediaStore.Downloads.DISPLAY_NAME, fileName)
-                            put(MediaStore.Downloads.MIME_TYPE, APK_MIMETYPE)
-                            put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
-                        }
-                        val uri = app.contentResolver.insert(
-                            MediaStore.Downloads.EXTERNAL_CONTENT_URI, values
-                        ) ?: throw IOException("Could not create Downloads entry")
-                        app.contentResolver.openOutputStream(uri)
-                            ?: throw IOException("Could not open Downloads output stream")
-                    } else {
-                        @Suppress("DEPRECATION")
-                        val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                        dir.mkdirs()
-                        FileOutputStream(File(dir, fileName))
-                    }
-                    stream.use { Files.copy(outputFile.toPath(), it) }
-                }
-            }.isSuccess
-            finishExport(exportSucceeded)
-        } finally {
-            _isSaving.value = false
         }
     }
 
@@ -1050,6 +1043,16 @@ class PatcherViewModel(
         private const val TAG = "Morphe Patcher"
         private const val MEMORY_ADJUSTMENT_MB = 200
         private const val MIN_LIMIT_MB = 200
+
+        /**
+         * Returns true if [required] is strictly newer than [current].
+         * Uses the semver library already present in the project.
+         * Falls back to false (allow patching) if either string cannot be parsed.
+         */
+        fun isPatcherOutdated(required: String, current: String): Boolean = runCatching {
+            Version.parse(required, strict = false) >
+                    Version.parse(current, strict = false)
+        }.getOrDefault(false)
 
         fun LogLevel.androidLog(msg: String) = when (this) {
             LogLevel.TRACE -> Log.v(TAG, msg)

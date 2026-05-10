@@ -747,6 +747,8 @@ class HomeViewModel(
             } finally {
                 _isRefreshing.value = false
             }
+            appDataResolver.invalidateAll()
+            _appStateTicker.value = System.currentTimeMillis()
         }
     }
 
@@ -1087,7 +1089,14 @@ class HomeViewModel(
     val homeAppState: StateFlow<HomeAppState?> = combine(
         patchBundleRepository.bundleState,
         homeAppButtonPrefs.hiddenPackages,
-        installedAppRepository.getAll(),
+        installedAppRepository.getAll().onEach { apps ->
+            apps.forEach { app ->
+                appDataResolver.invalidate(app.currentPackageName)
+                if (app.originalPackageName != app.currentPackageName) {
+                    appDataResolver.invalidate(app.originalPackageName)
+                }
+            }
+        },
         _appUpdatesAvailable,
         _appStateTicker,
     ) { bundleState, hiddenPackages, installedApps, updatesMap, _ ->

@@ -359,7 +359,16 @@ class UpdateViewModel(
     private fun loadMissedChangelog() = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
             val installedVersion = BuildConfig.VERSION_NAME.removePrefix("v")
-            val entries = morpheAPI.fetchManagerChangelog()
+
+            // Use the dev branch if EITHER the installed version is a dev build OR the available
+            // update is a pre-release. Without this, a stable user who has "Use pre-releases"
+            // enabled would fetch CHANGELOG.md from main, which doesn't contain dev entries,
+            // causing entriesNewerThan() to return an empty list even though a newer dev version
+            // is available and its changelog lives on the dev branch.
+            val targetIsPrerelease = releaseInfo?.version?.contains('-') == true
+            val entries = morpheAPI.fetchManagerChangelog(
+                forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
+            )
             missedChangelogEntries = ChangelogParser.entriesNewerThan(entries, installedVersion)
         }
     }

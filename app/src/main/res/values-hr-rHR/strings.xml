@@ -5,7 +5,6 @@
     <string name="home_not_patched_yet">Još nije patchano</string>
     <string name="home_no_patches_available">Nema dostupnih patcheva</string>
     <string name="home_app_hide_title">Sakriti ovu aplikaciju?</string>
-    <string name="home_app_hide_message">Ova će aplikacija biti skrivena s početnog zaslona. Kasnije je možete vratiti pomoću tipke \'%1$s\' na dnu popisa</string>
     <string name="home_app_will_be_hidden">Ova će aplikacija biti skrivena</string>
     <string name="home_app_show_hidden">Prikaži skrivene aplikacije</string>
     <string name="home_app_no_hidden">Nema skrivenih aplikacija</string>
@@ -15,6 +14,7 @@
     <string name="android_11_bug_dialog_description">Dopuštenje za instalaciju aplikacije mora se dati unaprijed kako bi se izbjegla greška u sustavu Android 11 koja će negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Dodajte izvor</string>
     <string name="deep_link_add_source_message">Želite li dodati ovaj izvor patcha u Morphe?</string>
+    <string name="deep_link_add_source_warning">Dodajte samo izvore kojima vjerujete</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
@@ -23,14 +23,13 @@
     <string name="home_update_skipped_metered">Ažuriranja preskočena</string>
     <string name="home_update_skipped_metered_subtitle">Mobilni podaci su aktivni</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>
-    <string name="home_update_progress_format">%1$s obrašeno</string>
     <string name="home_update_success">Ažuriranje izvora dovršeno</string>
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo pričekajte…</string>
     <string name="home_search_apps">Pretraživanje aplikacija</string>
     <string name="home_no_apps_title">Nema dostupnih aplikacija</string>
     <string name="home_no_apps_subtitle">Dodaj izvor patcha ili uključi postojeći u %s</string>
-    <string name="home_no_apps_search_subtitle">Nijedna aplikacija ne odgovara \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Nijedna aplikacija ne odgovara \"%s\"</string>
     <string name="home_all_apps_hidden_title">Sve su aplikacije sakrivene</string>
     <string name="home_all_apps_hidden_subtitle">Sakrili ste sve aplikacije s početnog zaslona</string>
     <!-- Home Screen - Home Greetings -->
@@ -82,8 +81,6 @@
     <string name="sources_update_success">Uspješno ažurirano</string>
     <string name="sources_update_unavailable">Nema dostupnih ažuriranja</string>
     <string name="sources_download_fail">Preuzimanje izvora nije uspjelo: %s</string>
-    <string name="sources_download_fail_named">Nije uspjelo preuzimanje \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Nije moguće ažurirati \'%1$s\': JSON datoteka patcha nije pronađena na konfiguriranoj poveznici</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <string name="sources_patch_expert_badge_tooltip">Omogućite Ekspert način rada u Postavkama da biste ručno uključili ovaj patch</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -97,13 +94,13 @@
     <string name="home_apk_availability_no">Ne, već imam aplikaciju</string>
     <string name="home_apk_use_saved_with_version">Koristi spremljenu aplikaciju(v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema spremljene aplikacije. Patchanje će zahtijevati ponovni odabir aplikacije</string>
-    <string name="home_version_requires_android">Zahtijeva Android %1$s+</string>
+    <string name="home_version_requires_android">Zahtijeva Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nije podržano na ovom uređaju</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nema podržane verzije za Android %2$d (API %3$d). Sve deklarirane verzije zahtijevaju višu verziju Androida</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Preuzmite originalnu aplikaciju</string>
     <string name="home_download_instructions_steps_title">Upute:</string>
-    <string name="home_download_instructions_step1">Dodirnite tipku \'%1$s\' ispod</string>
+    <string name="home_download_instructions_step1">Dodirnite tipku \'%s\' ispod</string>
     <string name="home_download_instructions_step2_part1">Povucite stranicu prema dolje i dodirnite</string>
     <string name="home_download_instructions_download_button_toast">Dodirnite download na web stranici, a ne ovdje 😊</string>
     <string name="home_download_instructions_step3">Pričekajte da se preuzimanje dovrši i &lt;b&gt;nemojte instalirati&lt;/b&gt; aplikaciju</string>
@@ -113,7 +110,7 @@
     <string name="home_download_instructions_continue">Nastavite na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Odaberite preuzetu aplikaciju</string>
-    <string name="home_file_picker_prompt_description">Odaberite &lt;b&gt;%1$s&lt;/b&gt; aplikaciju koju ste upravo preuzeli</string>
+    <string name="home_file_picker_prompt_description">Odaberite &lt;b&gt;%s&lt;/b&gt; aplikaciju koju ste upravo preuzeli</string>
     <string name="home_file_picker_prompt_open_apk">Otvorite aplikaciju</string>
     <string name="home_recommended_version">Preporučena verzija</string>
     <string name="home_selected_version">Odabrana verzija</string>
@@ -167,6 +164,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="home_low_disk_space_dialog_title">Malo prostora na disku</string>
     <string name="home_low_disk_space_dialog_message">Dostupno je samo %1$.2f GB slobodnog prostora. Za ispravan rad patchanja potrebno je najmanje %2$.2f GB slobodnog prostora</string>
     <string name="home_low_disk_space_dialog_warning">Nastavak može rezultirati greškom \"datoteka nije pronađena\" ili oštećenom izlaznom aplikacijom</string>
+    <string name="home_simple_bundle_select_title">Odaberite izvor patcha</string>
     <!-- Patch Options -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Hex boja</string>
@@ -258,6 +256,8 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="patcher_ready_to_install_subtitle">Pritisnite tipku ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite tipku ispod da učitate</string>
     <string name="patcher_storage_permission_dialog_title">Nije moguće pristupiti putanji pohrane</string>
+    <string name="patcher_incompatible_patcher_title">Potrebno je ažuriranje</string>
+    <string name="patcher_incompatible_patcher_update_button">Preuzmite i ažurirajte Morphe</string>
     <string name="patcher_storage_permission_description_api30">Jedna ili više opcija patcha upućuju na putanje koje Morphe ne može pročitati. Omogućite pristup pohrani i dodirnite tipku, nakon čega će se patchanje automatski pokrenuti.</string>
     <string name="patcher_storage_permission_description_legacy">Jedna ili više opcija zakrpe upućuju na putanje kojima se ne može pristupiti. Ažurirajte putanje u opcijama zakrpe i pokušajte ponovno.</string>
     <string name="patcher_storage_permission_grant">Odobri dopuštenje za pohranu</string>
@@ -315,7 +315,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="patched_app_saved_toast">Patchana aplikacija spremljena za kasnije</string>
     <string name="patched_app_save_failed_toast">Spremanje patchane aplikacije nije uspjelo</string>
     <string name="plugin_activity_dialog_body">Za nastavak rada s ovim dodatkom potrebna je interakcija korisnika</string>
-    <string name="patcher_process_exit_message">Proces patchera završio se kodom %1$s</string>
+    <string name="patcher_process_exit_message">Proces patchera završio se kodom %s</string>
     <string name="install_app_success">Uspješno instalirano</string>
     <string name="install_app_fail">Nije moguće instalirati aplikaciju: %s</string>
     <string name="save_apk_success">Aplikacija je spremljena</string>
@@ -373,7 +373,6 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="settings_appearance_app_icon_dark_2">Praznina</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Promijeniti ikonu aplikacije?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Promijeniti u \'%1$s\' i pokrenuti ponovno?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Promijeni ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ažuriranja</string>
@@ -395,7 +394,6 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <!-- Notification content -->
     <string name="notification_manager_update_title">Dostupno ažuriranje aplikacije Morphe</string>
     <string name="notification_bundle_update_title">Nova patcha dostupna</string>
-    <string name="notification_update_text">Inačica %1$s je spremna za preuzimanje</string>
     <string name="notification_bundle_update_text_unversioned">Dodirnite za otvaranje Morphea i ažuriranje</string>
     <string name="notification_permission_dialog_title">Dozvoli obavijesti</string>
     <string name="notification_permission_dialog_description">Morphe treba dopuštenje za obavijesti kako bi vas upozorio kada su ažuriranja dostupna u pozadini</string>
@@ -531,9 +529,9 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer_action_open_shizuku">Otvorite Shizuku</string>
     <string name="installer_hint_generic">Instalacija nije uspjela. Pokušajte ponovno ili promjenite instalacijski program.</string>
     <string name="installer_hint_conflict">Već je instalirana druga aplikacija s ovim nazivom paketa. Deinstalirajte je prije nastavka.</string>
-    <string name="installer_external_launched">Otvaranje %1$s…</string>
-    <string name="installer_external_timeout">%1$s nije potvrdio instalaciju. Provjerite drugu aplikaciju i pokušajte ponovno.</string>
-    <string name="installer_external_success">%1$s je prijavio uspješnu instalaciju</string>
+    <string name="installer_external_launched">Otvaranje %s…</string>
+    <string name="installer_external_timeout">%s nije potvrdio instalaciju. Provjerite drugu aplikaciju i pokušajte ponovno.</string>
+    <string name="installer_external_success">%s je prijavio uspješnu instalaciju</string>
     <string name="installer_unavailable_title">%s nije dostupan</string>
     <string name="installer_unavailable_message">Vaš preferirani instalacijski program (%s) trenutno nije dostupan. Možete riješiti problem i pokušati ponovno ili umjesto toga koristiti standardni instalacijski program.</string>
     <string name="installer_unavailable_shizuku_hint">Provjerite je li Shizuku pokrenut i je li ovoj aplikaciji odobreno dopuštenje</string>

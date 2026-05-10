@@ -9,7 +9,9 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -710,14 +712,7 @@ fun GreetingSection(
     Box(contentAlignment = Alignment.Center) {
         AnimatedContent(
             targetState = message,
-            transitionSpec = {
-                (fadeIn(animationSpec = tween(400)) +
-                        slideInVertically(animationSpec = tween(400)) { it / 4 })
-                    .togetherWith(
-                        fadeOut(animationSpec = tween(200)) +
-                                slideOutVertically(animationSpec = tween(200)) { -it / 4 }
-                    )
-            },
+            transitionSpec = MorpheAnimations.slideUpContentTransitionSpec,
             label = "greeting_transition"
         ) { targetMessage ->
             Text(
@@ -850,9 +845,7 @@ fun MainAppsSection(
     ) {
         AnimatedContent(
             targetState = isEmptyState,
-            transitionSpec = {
-                fadeIn(tween(300)) togetherWith fadeOut(tween(200))
-            },
+            transitionSpec = MorpheAnimations.fadeCrossfade(300),
             label = "home_empty_state"
         ) { empty ->
             if (empty) {
@@ -1453,10 +1446,7 @@ private fun MultiSelectBar(
                     Box(contentAlignment = Alignment.Center) {
                         AnimatedContent(
                             targetState = selectedCount,
-                            transitionSpec = {
-                                (fadeIn(tween(150)) + slideInVertically(tween(150)) { -it })
-                                    .togetherWith(fadeOut(tween(100)) + slideOutVertically(tween(100)) { it })
-                            },
+                            transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
                             label = "selected_count"
                         ) { count ->
                             Text(
@@ -1921,21 +1911,22 @@ fun AppPatchesDialog(
                                     tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(16.dp)
                                 )
+                                val patchCountLabel = pluralStringResource(
+                                    R.plurals.patch_count,
+                                    totalCount,
+                                    totalCount
+                                )
                                 val countText = if (isFiltering)
-                                    "${filteredPatches.size}/$totalCount"
+                                    "${filteredPatches.size}/$patchCountLabel"
                                 else
-                                    "$totalCount"
-                                val patchesLabel = stringResource(R.string.patches).lowercase()
+                                    patchCountLabel
                                 AnimatedContent(
                                     targetState = countText,
-                                    transitionSpec = {
-                                        (fadeIn(tween(200)) + slideInVertically(tween(200)) { -it / 2 })
-                                            .togetherWith(fadeOut(tween(150)) + slideOutVertically(tween(150)) { it / 2 })
-                                    },
+                                    transitionSpec = MorpheAnimations.counterTransitionSpec,
                                     label = "app_patch_count"
                                 ) { count ->
                                     Text(
-                                        text = "$count $patchesLabel",
+                                        text = count,
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.primary,
                                         fontWeight = FontWeight.Medium
@@ -2235,10 +2226,7 @@ internal fun HideAppDialog(
 
             // Explanation text
             Text(
-                text = stringResource(
-                    R.string.home_app_hide_message,
-                    stringResource(R.string.home_app_show_hidden)
-                ),
+                text = stringResource(R.string.home_app_hide_message),
                 style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogSecondaryTextColor.current,
                 textAlign = TextAlign.Center

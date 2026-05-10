@@ -5,8 +5,8 @@
 
 package app.morphe.manager.ui.screen.patcher
 
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
@@ -274,10 +274,7 @@ private fun ProgressDetailsSection(
 private fun AnimatedMessage(messageResId: Int) {
     AnimatedContent(
         targetState = stringResource(messageResId),
-        transitionSpec = {
-            fadeIn(animationSpec = tween(1000)) togetherWith
-                    fadeOut(animationSpec = tween(1000))
-        },
+        transitionSpec = MorpheAnimations.fadeCrossfade(1000),
         label = "message_animation"
     ) { message ->
         Text(
@@ -375,10 +372,7 @@ fun CurrentStepIndicator(
 
     AnimatedContent(
         targetState = currentStep?.name,
-        transitionSpec = {
-            fadeIn(animationSpec = tween(400)) togetherWith
-                    fadeOut(animationSpec = tween(400))
-        },
+        transitionSpec = MorpheAnimations.fadeCrossfade(400),
         label = "step_animation"
     ) { stepName ->
         if (stepName != null) {

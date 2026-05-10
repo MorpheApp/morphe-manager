@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Nepatch-uit încă</string>
     <string name="home_no_patches_available">Niciun patch disponibil</string>
     <string name="home_app_hide_title">Ascunzi aplicația?</string>
-    <string name="home_app_hide_message">Aplicația va fi ascunsă de pe ecranul principal. O vei putea restaura mai târziu folosind butonul \'%1$s\' de la capătul listei.</string>
+    <string name="home_app_hide_message">Aplicația va fi ascunsă de pe ecranul principal. O vei putea restaura mai târziu folosind butonul de la capătul listei.</string>
     <string name="home_app_will_be_hidden">Aplicația va fi ascunsă</string>
     <string name="home_app_show_hidden">Arată aplicațiile ascunse</string>
     <string name="home_app_no_hidden">Nicio aplicație ascunsă</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Actualizări omise</string>
     <string name="home_update_skipped_metered_subtitle">Date mobile sunt activate</string>
     <string name="home_updating_sources">Se actualizează sursele…</string>
-    <string name="home_update_progress_format">%1$s procesat</string>
+    <string name="home_update_progress_format">%s procesate</string>
     <string name="home_update_success">Actualizare surse finalizată</string>
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele…</string>
     <string name="home_search_apps">Caută aplicații</string>
     <string name="home_no_apps_title">Nicio aplicație disponibilă</string>
     <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
-    <string name="home_no_apps_search_subtitle">Nicio aplicație nu se potrivește cu \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Nici o aplicație nu corespunde cu \"%s\"</string>
     <string name="home_all_apps_hidden_title">Toate aplicațiile sunt ascunse</string>
     <string name="home_all_apps_hidden_subtitle">Ați ascuns toate aplicațiile de pe ecranul principal</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Utilizează versiuni experimentale</string>
     <string name="sources_management_experimental_versions_toggle_description">Patch-uiește aplicații experimentale dacă e disponibil</string>
     <string name="sources_management_already_exists">Sursă deja adăugată</string>
+    <string name="sources_management_invalid_url">URL sursă invalidă. Vă rugăm să verificați adresa și încercați din nou</string>
+    <string name="sources_management_metadata_unavailable">Metadate indisponibile</string>
+    <string name="sources_management_metadata_unavailable_hint">Fișierul de metadate de la distanță nu este disponibil. Aplicarea pachetului instalat funcționează în continuare, dar actualizarea automată este dezactivată pentru această sursă</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Pachetul de corecție nu a putut fi descărcat. URL-ul sursă poate fi incorect sau fișierul nu există</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nume afișat</string>
     <string name="sources_dialog_rename">Redenumire surse de patch-uri</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Exemple:</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Selectează fișierul cu patch-uri</string>
+    <string name="sources_dialog_local_file_tap_hint">Atingeți pentru a răsfoi stocarea</string>
     <string name="sources_dialog_local_file_description">Selectează un fișier .mpp cu patch-uri din stocare</string>
+    <string name="sources_dialog_local_invalid_extension">Fișierul trebuie să aibă extensia .mpp</string>
+    <string name="sources_dialog_url_valid">URL valid al depozitului sau JSON</string>
+    <string name="sources_dialog_url_invalid">URL-ul trebuie să indice un depozit GitHub/GitLab sau un fișier .json</string>
     <string name="sources_dialog_local_change_file">Schimbă fișierul</string>
     <string name="sources_dialog_preinstalled">Preinstalate</string>
     <string name="sources_update_success">Actualizare reușită</string>
     <string name="sources_update_unavailable">Nu există actualizări disponibile</string>
     <string name="sources_download_fail">Eroare la descărcarea surselor: %s</string>
-    <string name="sources_download_fail_named">Eroare la descărcarea lui \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Nu s-a putut actualiza \'%1$s\': fișierul JSON al patch-ului nu a fost găsit la URL-ul configurat</string>
+    <string name="sources_download_fail_named">\"%s\" nu a putut fi actualizat. Verificați conexiunea la internet și încercați din nou</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": metadatele patch-ului nu au fost găsite</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Activează modul Expert în Setări pentru a include manual acest patch</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Nu, am deja un APK</string>
     <string name="home_apk_use_saved_with_version">Folosește APK salvat (v%s)</string>
     <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patch-uirea necesită selectarea APK-ului din nou</string>
-    <string name="home_version_requires_android">Necesită Android %1$s+</string>
+    <string name="home_version_requires_android">Necesită Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nu este suportat pe acest dispozitiv</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nu are versiuni suportate pentru Android %2$d (API %3$d). Toate versiunile declarate necesită o versiune Android superioară</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarcă APK-ul original</string>
     <string name="home_download_instructions_steps_title">Instrucțiuni:</string>
-    <string name="home_download_instructions_step1">Apasă pe butonul \'%1$s\' de mai jos</string>
+    <string name="home_download_instructions_step1">Apasă pe butonul \'%s\' de mai jos</string>
     <string name="home_download_instructions_step2_part1">Derulează în josul paginii și apasă</string>
     <string name="home_download_instructions_download_button_toast">Apasă butonul pe site, nu aici 😊</string>
     <string name="home_download_instructions_step3">Așteaptă ca descărcarea să se finalizeze, și &lt;b&gt;nu instala&lt;/b&gt; APK-ul</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Continuă către APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selectează APK-ul descărcat</string>
-    <string name="home_file_picker_prompt_description">Selectează fișierul APK &lt;b&gt;%1$s&lt;/b&gt; pe care tocmai l-ai descărcat</string>
+    <string name="home_file_picker_prompt_description">Selectează fișierul APK &lt;b&gt;%s&lt;/b&gt; pe care tocmai l-ai descărcat</string>
     <string name="home_file_picker_prompt_open_apk">Deschide fișierul APK</string>
     <string name="home_recommended_version">Versiune recomandată</string>
     <string name="home_selected_version">Versiune selectată</string>
@@ -260,6 +268,9 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patcher_ready_to_install_subtitle">Apasă butonul de mai jos pentru instalare</string>
     <string name="patcher_ready_to_mount_subtitle">Apăsați butonul de mai jos pentru a monta</string>
     <string name="patcher_storage_permission_dialog_title">Nu se poate accesa calea de stocare</string>
+    <string name="patcher_incompatible_patcher_title">Actualizare necesară</string>
+    <string name="patcher_incompatible_patcher_description">Pachetul &lt;b&gt;%1$s&lt;/b&gt; necesită versiunea patcher-ului &lt;b&gt;%2$s&lt;/b&gt; sau mai nouă. Vă rugăm să actualizați Morphe pentru a aplica patch la această aplicație</string>
+    <string name="patcher_incompatible_patcher_update_button">Descărcă și actualizează Morphe</string>
     <string name="patcher_storage_permission_description_api30">Una sau mai multe opțiuni de patch indică către căi pe care Morphe nu le poate citi. Acordă acces la stocare și atinge butonul, apoi patch-uirea va începe automat</string>
     <string name="patcher_storage_permission_description_legacy">Una sau mai multe opțiuni de patch indică căi de stocare care nu pot fi accesate. Actualizați căile în opțiunile de patch și încercați din nou</string>
     <string name="patcher_storage_permission_grant">Acordați permisiunea de stocare</string>
@@ -317,7 +328,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patched_app_saved_toast">Aplicație modificată salvată pentru mai târziu</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
-    <string name="patcher_process_exit_message">Procesul de patch a ieșit cu codul %1$s</string>
+    <string name="patcher_process_exit_message">Procesul patcher-ului s-a încheiat cu codul %s</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
     <string name="save_apk_success">APK salvat</string>
@@ -375,7 +386,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="settings_appearance_app_icon_dark_2">Void</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Schimbi pictograma aplicației?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Schimbi în \'%1$s\' și repornești?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Schimbă în &lt;b&gt;%s&lt;/b&gt; și repornește?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Schimbă pictograma</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Actualizări</string>
@@ -397,7 +408,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <!-- Notification content -->
     <string name="notification_manager_update_title">Actualizare Morphe disponibilă</string>
     <string name="notification_bundle_update_title">Există actualizări disponibile</string>
-    <string name="notification_update_text">Versiunea %1$s este gata pentru descarcare</string>
+    <string name="notification_update_text">Versiunea %s este gata de descărcare</string>
     <string name="notification_bundle_update_text_unversioned">Apasă pentru a deschide Morphe și a actualiza</string>
     <string name="notification_permission_dialog_title">Permite notificări</string>
     <string name="notification_permission_dialog_description">Morphe are nevoie de permisiunea de notificare pentru a te avertiza când sunt disponibile actualizări în fundal</string>
@@ -533,9 +544,9 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_action_open_shizuku">Deschide Shizuku</string>
     <string name="installer_hint_generic">Instalarea a eșuat. Reîncercați sau schimbați la un instalator diferit</string>
     <string name="installer_hint_conflict">Altă aplicație cu acest nume de pachet este deja instalată. Dezinstalați-o înainte de continuare</string>
-    <string name="installer_external_launched">Se deschide %1$s…</string>
-    <string name="installer_external_timeout">%1$s nu a confirmat instalarea. Verificați altă aplicație și reîncercați</string>
-    <string name="installer_external_success">%1$s a raportat o instalare reușită</string>
+    <string name="installer_external_launched">Se deschide %s…</string>
+    <string name="installer_external_timeout">%s nu a confirmat instalarea. Verificați cealaltă aplicație și încercați din nou</string>
+    <string name="installer_external_success">%s a raportat o instalare reușită</string>
     <string name="installer_unavailable_title">%s indisponibil</string>
     <string name="installer_unavailable_message">Instalatorul preferat (%s) este curent indisponibil. Poți fixa problema și reinstalare, sau folosi instalatorul standard în schimb</string>
     <string name="installer_unavailable_shizuku_hint">Aseară că Shizuku rulează și permisiunea este acordată acestei aplicații</string>

@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Nog nie verander nie</string>
     <string name="home_no_patches_available">Geen veranderinge beskikbaar</string>
     <string name="home_app_hide_title">Versteek hierdie program?</string>
-    <string name="home_app_hide_message">Hierdie app sal van die tuisskerm weggesteek word. Jy kan dit later herstel deur die \'%1$s\'-knoppie onderaan die lys te gebruik</string>
+    <string name="home_app_hide_message">Hierdie app sal van die tuisskerm weggesteek word. Jy kan dit later herstel deur die \'\'-knoppie onderaan die lys te gebruik</string>
     <string name="home_app_will_be_hidden">Hierdie program sal versteek word</string>
     <string name="home_app_show_hidden">Wys versteekte programme</string>
     <string name="home_app_no_hidden">Geen versteekte program nie</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Opdaterings oorgeslaan</string>
     <string name="home_update_skipped_metered_subtitle">Selfoon data is aktief</string>
     <string name="home_updating_sources">Opdatering van oorspronge…</string>
-    <string name="home_update_progress_format">%1$s verwerk</string>
+    <string name="home_update_progress_format">%s verwerk</string>
     <string name="home_update_success">Opdatering van oorspronge voltooi</string>
     <string name="home_update_success_subtitle">Jou oorspronge is opgedateer</string>
     <string name="home_sources_are_loading">Oorsprong word gelaai, wag asseblief…</string>
     <string name="home_search_apps">Soek programme</string>
     <string name="home_no_apps_title">Geen programme beskikbaar nie</string>
     <string name="home_no_apps_subtitle">Voeg \'n verandering oorsprong by of aktiveer \'n bestaande een in %s</string>
-    <string name="home_no_apps_search_subtitle">Geen programme gelyk aan \"%1$s\" nie</string>
+    <string name="home_no_apps_search_subtitle">Geen programme gelyk aan \"%s\" nie</string>
     <string name="home_all_apps_hidden_title">Alle programme is versteek</string>
     <string name="home_all_apps_hidden_subtitle">Jy het alle programme van die tuisskerm versteek</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Gebruik eksperimentele program-weergawes</string>
     <string name="sources_management_experimental_versions_toggle_description">Pleister eksperimentele app-teikens indien beskikbaar</string>
     <string name="sources_management_already_exists">Hierdie oorsprong is reeds bygevoeg</string>
+    <string name="sources_management_invalid_url">Ongeldige bron-URL. Gaan asseblief die adres na en probeer weer</string>
+    <string name="sources_management_metadata_unavailable">Metadata Nie beskikbaar nie</string>
+    <string name="sources_management_metadata_unavailable_hint">Die afstandmetadata lêer is nie beskikbaar nie. Patches met die geïnstalleerde bundel werk steeds, maar outo-opdatering is vir hierdie bron afgeskakel</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Die patch bundel kon nie afgelaai word nie. Die bron-URL kan verkeerd wees of die lêer bestaan ​​nie</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Wys naam</string>
     <string name="sources_dialog_rename">Hernoem verandering oorsprong</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Voorbeelde:</string>
     <string name="sources_dialog_local">Plaaslike</string>
     <string name="sources_dialog_local_file">Kies verandering oorsprong vyl</string>
+    <string name="sources_dialog_local_file_tap_hint">Tik om berging te blaai</string>
     <string name="sources_dialog_local_file_description">Kies \'n .mpp verandering oorsprong vyl van berging</string>
+    <string name="sources_dialog_local_invalid_extension">Die lêer moet \".mpp\" hê</string>
+    <string name="sources_dialog_url_valid">Geldige bewaarplek of JSON URL</string>
+    <string name="sources_dialog_url_invalid">URL moet na \'n GitHub/GitLab repo of \'n .json-lêer wys</string>
     <string name="sources_dialog_local_change_file">Verander vyl</string>
     <string name="sources_dialog_preinstalled">Voor geïnstalleer</string>
     <string name="sources_update_success">Opdatering suksesvol</string>
     <string name="sources_update_unavailable">Geen opdatering beskikbaar</string>
     <string name="sources_download_fail">Kon nie oorspronge aflaai nie: %s</string>
-    <string name="sources_download_fail_named">Kon \'%1$s\' nie aflaai nie: %2$s</string>
-    <string name="sources_download_endpoint_not_found">Kon nie \'%1$s\' opdateer nie: die verandering JSON-vyl is nie by die gekonfigureerde URL gevind nie</string>
+    <string name="sources_download_fail_named">\'%s\' kon nie opgedateer word nie. Gaan jou internetverbinding na en probeer weer</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': geen vlekmetadata gevind nie</string>
     <string name="sources_patch_expert_badge">Kundige</string>
     <string name="sources_patch_expert_badge_tooltip">Aktiveer Ekspermodus in Instellings om hierdie pleister handmatig by te voeg</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Nee, ek het reeds \'n APK</string>
     <string name="home_apk_use_saved_with_version">Gebruik gestoorde APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Geen gestoorde APK nie. Verandering sal vereis dat jy die APK vyl weer kies</string>
-    <string name="home_version_requires_android">Vereis Android %1$s+</string>
+    <string name="home_version_requires_android">Vereis Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nie op hierdie toestel ondersteun nie</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; het geen ondersteunde weergawes vir Android %2$d (API %3$d) nie. Alle verklaarde weergawes vereis \'n hoër Android-weergawe</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laai die oorspronklike APK af</string>
     <string name="home_download_instructions_steps_title">Instruksies:</string>
-    <string name="home_download_instructions_step1">Druk op die \'%1$s\' knoppie hieronder</string>
+    <string name="home_download_instructions_step1">Druk op die \'%s\' knoppie hieronder</string>
     <string name="home_download_instructions_step2_part1">Rol af op die webblad en druk</string>
     <string name="home_download_instructions_download_button_toast">Druk op aflaai op die webwerf, en nie hier nie 😊</string>
     <string name="home_download_instructions_step3">Wag vir die aflaai om voltooi te wees, en &lt;b&gt;moenie die APK installeer nie&lt;/b&gt;.</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Gaan voort na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Kies afgelaaide APK</string>
-    <string name="home_file_picker_prompt_description">Kies die &lt;b&gt;%1$s&lt;/b&gt; APK-vyl wat jy pas afgelaai het</string>
+    <string name="home_file_picker_prompt_description">Kies die &lt;b&gt;%s&lt;/b&gt; APK-vyl wat jy pas afgelaai het</string>
     <string name="home_file_picker_prompt_open_apk">Open APK vyl</string>
     <string name="home_recommended_version">Aanbevole weergawe</string>
     <string name="home_selected_version">Geen opdatering beskikbaar</string>
@@ -260,6 +268,9 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="patcher_ready_to_install_subtitle">Druk op die knoppie hieronder om te installeer</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op die knoppie hieronder om te monteer</string>
     <string name="patcher_storage_permission_dialog_title">Kan nie toegang tot stoorpad verkry nie</string>
+    <string name="patcher_incompatible_patcher_title">Opdatering vereis</string>
+    <string name="patcher_incompatible_patcher_description">Die bundel &lt;b&gt;%1$s&lt;/b&gt; vereis weergawe &lt;b&gt;%2$s&lt;/b&gt; of later van die patcher.  Dateer Morphe op om hierdie program te pleister</string>
+    <string name="patcher_incompatible_patcher_update_button">Laai af en werk Morphe op</string>
     <string name="patcher_storage_permission_description_api30">Een of meer pleisteropsies wys na pad waartoe Morphe nie kan lees nie. Vergun bergingtoegang en tik dan op die knoppie waarna die pleister outomaties sal begin</string>
     <string name="patcher_storage_permission_description_legacy">Een of meer kolle opsies wys na paaie wat nie verkry kan word nie. Dateer die paaie in kolle opsies op en probeer weer</string>
     <string name="patcher_storage_permission_grant">Vergun toestingberging</string>
@@ -317,7 +328,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="patched_app_saved_toast">Gepatchte app gered vir later</string>
     <string name="patched_app_save_failed_toast">Kon nie gepatchte app stoor nie</string>
     <string name="plugin_activity_dialog_body">Gebruikers interaksie is vereis om met hierdie inprop voort te gaan</string>
-    <string name="patcher_process_exit_message">Patcher proses het met kode %1$s afgehandel</string>
+    <string name="patcher_process_exit_message">Patcherproses het met kode %s afgehandel</string>
     <string name="install_app_success">Suksesvol geïnstalleer</string>
     <string name="install_app_fail">Kon nie app installeer nie: %s</string>
     <string name="save_apk_success">APK Gestoor</string>
@@ -375,7 +386,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="settings_appearance_app_icon_dark_2">Leegte</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Verander app ikoon?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Verander na \'%1$s\' en herbegin?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Verander na &lt;b&gt;%s&lt;/b&gt; en herbegin?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Verander ikoon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdaterings</string>
@@ -397,7 +408,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe-opdatering beskikbaar</string>
     <string name="notification_bundle_update_title">Nuwe kolle beskikbaar</string>
-    <string name="notification_update_text">Weergawe %1$s is gereed om af te laai</string>
+    <string name="notification_update_text">Weergawe %s is gereed om af te laai</string>
     <string name="notification_bundle_update_text_unversioned">Tik om Morphe oop te maak en op te dateer</string>
     <string name="notification_permission_dialog_title">Laat kennisgewings toe</string>
     <string name="notification_permission_dialog_description">Morphe benodig toestemming om kennisgewings te gee om jou te waarsku wanneer opdaterings in die agtergrond beskikbaar is</string>
@@ -533,9 +544,9 @@ Die beeld afmetings moet soos volg wees:
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">Die installasie het misluk. Probeer weer of skakel oor na \'n ander installer</string>
     <string name="installer_hint_conflict">Nog \'n app met hierdie pakket naam is reeds geïnstalleer. Deïnstalleer dit voordat jy voortgaan</string>
-    <string name="installer_external_launched">Opening %1$s…</string>
-    <string name="installer_external_timeout">%1$s het nie die installasie bevestig nie. Kontroleer die ander app en probeer weer</string>
-    <string name="installer_external_success">%1$s het \'n suksesvolle installasie gerapporteer</string>
+    <string name="installer_external_launched">Maak %s oop…</string>
+    <string name="installer_external_timeout">%s het die installasie nie bevestig nie. Gaan die ander app na en probeer weer</string>
+    <string name="installer_external_success">%s het \'n suksesvolle installasie gerapporteer</string>
     <string name="installer_unavailable_title">%s beskikbaar nie</string>
     <string name="installer_unavailable_message">Jou voorkeurs installer (%s) is tans nie beskikbaar nie. Jy kan die probleem regstel en weer probeer, of die standaard installer gebruik</string>
     <string name="installer_unavailable_shizuku_hint">Maak seker Shizuku loop en toestemming is aan hierdie app gegee</string>

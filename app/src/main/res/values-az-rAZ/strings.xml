@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Hələ yamaqlanmayıb</string>
     <string name="home_no_patches_available">Yamaqlar əlçatan deyil</string>
     <string name="home_app_hide_title">Bu tətbiq gizlədilsin?</string>
-    <string name="home_app_hide_message">Bu tətbiq əsas ekrandan gizlədiləcək. Siyahının aşağısındakı \'%1$s\' düyməsin istifadə edərək onu daha sonra qaytara bilərsiniz</string>
+    <string name="home_app_hide_message">Bu tətbiq əsas ekrandan gizlədiləcək. Siyahının aşağısındakı düyməni istifadə edərək onu daha sonra gizli tətbiqlərdən qaytara bilərsiniz</string>
     <string name="home_app_will_be_hidden">Bu tətbiq gizlədiləcək</string>
     <string name="home_app_show_hidden">Gizlədilən tətbiqləri göstər</string>
     <string name="home_app_no_hidden">Gizlədilən tətbiqlər yoxdur</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Yenilənmələr ötürüldü</string>
     <string name="home_update_skipped_metered_subtitle">Mobil məlumat işləkdir</string>
     <string name="home_updating_sources">Mənbələr yenilənir…</string>
-    <string name="home_update_progress_format">%1$s emal olundu</string>
+    <string name="home_update_progress_format">%s emal olundu</string>
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
     <string name="home_search_apps">Tətbiqləri axtar</string>
     <string name="home_no_apps_title">Mövcud tətbiq yoxdur</string>
     <string name="home_no_apps_subtitle">%s bölməsində yamaq mənbəyi əlavə edin və ya mövcud olanı aktivləşdir</string>
-    <string name="home_no_apps_search_subtitle">\"%1$s\" ilə uyuşan tətbiq yoxdur</string>
+    <string name="home_no_apps_search_subtitle">\"%s\" ilə uyuşan tətbiq yoxdur</string>
     <string name="home_all_apps_hidden_title">Bütün tətbiqlər gizlidir</string>
     <string name="home_all_apps_hidden_subtitle">Bütün tətbiqləri əsas ekrandan gizlətmisiniz</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Təcrübi tətbiq versiyaların istifadə et</string>
     <string name="sources_management_experimental_versions_toggle_description">Əlçatandırsa təcrübi tətbiq hədəflərin yamaqla</string>
     <string name="sources_management_already_exists">Bu mənbə artıq əlavə edilib</string>
+    <string name="sources_management_invalid_url">Etibarsız mənbə URL-si. Xahiş olunur, ünvanı yoxla və təkrar cəhd et</string>
+    <string name="sources_management_metadata_unavailable">Əlavə Məlumat Yoxdur</string>
+    <string name="sources_management_metadata_unavailable_hint">Uzaq üst məlumatı faylı mövcud deyil. Quraşdırılan paketlə yamaqlanma hələ də işləyir, lakin bu mənbə üçün birbaşa yenilənmə qapadılıb</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Yamaq paketin yükləmək olmadı. Mənbə URL-si səhv ola bilər və ya fayl mövcud deyil</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
@@ -77,14 +81,17 @@
     <string name="sources_dialog_remote_url_formats_title">Nümunələr:</string>
     <string name="sources_dialog_local">Yerli</string>
     <string name="sources_dialog_local_file">Yamaq mənbəsi faylını seçin</string>
+    <string name="sources_dialog_local_file_tap_hint">Yaddaşı araşdırmaq üçün toxun</string>
     <string name="sources_dialog_local_file_description">Yaddaşdan .mpp yamaq mənbə faylı seçin</string>
+    <string name="sources_dialog_local_invalid_extension">Faylın .mpp əlavəsi olmalıdır</string>
+    <string name="sources_dialog_url_valid">Etibarlı depo və ya JSON URL</string>
     <string name="sources_dialog_local_change_file">Faylı dəyişdir</string>
     <string name="sources_dialog_preinstalled">İlkin quraşdırılan</string>
     <string name="sources_update_success">Uğurlu yeniləmə</string>
     <string name="sources_update_unavailable">Yenilənmə əlçatan deyil</string>
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
-    <string name="sources_download_fail_named">\'%1$s\' yükləmək olmadı: %2$s</string>
-    <string name="sources_download_endpoint_not_found">\'%1$s\' yenilənə bilmədi: yamaq JSON faylı qurulan URL-də tapılmadı</string>
+    <string name="sources_download_fail_named">\'%s\' yenilənə bilmədi. İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': yamaq üst məlumatı tapılmadı</string>
     <string name="sources_patch_expert_badge">Mütəxəssis</string>
     <string name="sources_patch_expert_badge_tooltip">Bu yamağı əl ilə yerləşdirmək üçün Tənzimləmələrdə Mütəxəssis rejimin aktivləşdir</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +105,13 @@
     <string name="home_apk_availability_no">Xeyr, Mənim artıq APK-m var</string>
     <string name="home_apk_use_saved_with_version">Saxlanılan APK-nı istifadə et (v%s)</string>
     <string name="home_app_info_no_saved_apk">Saxlanılan APK yoxdur. Yamaqlanma APK faylını təkrar seçmək istəyəcək</string>
-    <string name="home_version_requires_android">Android %1$s+ tələb olunur</string>
+    <string name="home_version_requires_android">Android %s+ tələb olunur</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda dəstəklənmir</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tətbiqinin Android %2$d (API %3$d) üçün dəstəklənən versiyaları yoxdur. Bütün elan olunan versiyalar daha yüksək Android versiyası tələb edir</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Əsil APK-nı Yüklə</string>
     <string name="home_download_instructions_steps_title">Təlimatlar:</string>
-    <string name="home_download_instructions_step1">Aşağıdakı \'%1$s\' düyməsinə toxun</string>
+    <string name="home_download_instructions_step1">Aşağıdakı \'%s\' düyməsinə toxun</string>
     <string name="home_download_instructions_step2_part1">Veb səhifəni aşağı sürüşdür və toxun</string>
     <string name="home_download_instructions_download_button_toast">Burada deyil, vebsaytdakı yükləməyə toxun 😊</string>
     <string name="home_download_instructions_step3">Endirmənin tamamlanmasını gözləyin və &lt;/b&gt;APK quraşdırmayın&lt;/b&gt;</string>
@@ -114,7 +121,7 @@
     <string name="home_download_instructions_continue">APKMirror.com-a keçin</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Yüklənilmiş APK-nı seç</string>
-    <string name="home_file_picker_prompt_description">İndicə yüklədiyiniz &lt;b&gt;%1$s&lt;/b&gt; APK faylını seçin</string>
+    <string name="home_file_picker_prompt_description">İndicə yüklədiyiniz &lt;b&gt;%s&lt;/b&gt; APK faylını seçin</string>
     <string name="home_file_picker_prompt_open_apk">APK faylını aç</string>
     <string name="home_recommended_version">Tövsiyə olunan versiya</string>
     <string name="home_selected_version">Seçilən versiya</string>
@@ -260,6 +267,9 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patcher_ready_to_install_subtitle">Quraşdırmaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_storage_permission_dialog_title">Yaddaş keçidinə keçmək olmur</string>
+    <string name="patcher_incompatible_patcher_title">Yenilənmə tələb olundu</string>
+    <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; paketi &lt;b&gt;%2$s&lt;/b&gt; və ya daha yeni versiya yamaqlayıcı tələb edir. Xahiş olunur, bu tətbiqi yamaqlamaq üçün Morphe-ni yenilə</string>
+    <string name="patcher_incompatible_patcher_update_button">Morphe-ni yüklə və yenilə</string>
     <string name="patcher_storage_permission_description_api30">Bir və ya daha çox yamaq seçimi Morphe-nin oxuya bilmədiyi yolları işarə edir. Yaddaş girişin qəbul et və düyməyə toxun, sonra yamaqlanma birbaşa başlayacaq</string>
     <string name="patcher_storage_permission_description_legacy">Bir və ya daha çox yamaq seçimi keçmək olmayan yolları göstərir. Yamaq seçimlərindəki yolları yeniləyin və təkrar cəhd edin</string>
     <string name="patcher_storage_permission_grant">Yaddaş icazəsin qəbul et</string>
@@ -317,7 +327,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="patched_app_saved_toast">Yamaqlanan tətbiq sonra üçün saxlanıldı</string>
     <string name="patched_app_save_failed_toast">Yamaqlanan tətbiqi saxlamaq olmadı</string>
     <string name="plugin_activity_dialog_body">Bu qoşmayla davam etmək üçün istifadəçi reaksiyası tələb olunur</string>
-    <string name="patcher_process_exit_message">Yamaqlayıcı emalı %1$s şifrəsi ilə tamamlandı</string>
+    <string name="patcher_process_exit_message">Yamaqlayıcı emalı %s şifrəsi ilə tamamlandı</string>
     <string name="install_app_success">Uğurla quraşdırıldı</string>
     <string name="install_app_fail">Tətbiqi quraşdırmaq olmadı: %s</string>
     <string name="save_apk_success">APK Saxlanıldı</string>
@@ -375,7 +385,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="settings_appearance_app_icon_dark_2">Boşluq</string>
     <string name="settings_appearance_app_icon_dark_3">Tünd göy</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Tətbiq simvolu dəyişdirilsin?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\' kimi dəyişdirib yenidən başladılsın?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; olaraq dəyişdirilib yenidən başladılsın?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simvolu dəyişdir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Yenilənmələr</string>
@@ -397,7 +407,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Əlçatan Morphe yenilənməsi</string>
     <string name="notification_bundle_update_title">Yeni yamaqlar var</string>
-    <string name="notification_update_text">%1$s versiyası yüklənilməyə hazırdır</string>
+    <string name="notification_update_text">%s versiyası yüklənilməyə hazırdır</string>
     <string name="notification_bundle_update_text_unversioned">Morphe-ni açmaq və yeniləmək üçün toxun</string>
     <string name="notification_permission_dialog_title">Bildirişləri qəbul et</string>
     <string name="notification_permission_dialog_description">Morphe fonda yeniləmələr əlçatan olduqda sizə bildirmək üçün bildiriş icazəsi istəyir</string>
@@ -532,9 +542,9 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Shizuku-nu Aç</string>
     <string name="installer_hint_generic">Quraşdırma uğursuz oldu. Təkrar sına yaxud fərqli quraşdırıcıya keç</string>
     <string name="installer_hint_conflict">Başqa tətbiq bu paket adıyla artıq quraşdırılıb. Davam etməzdən əvvəl onu sil</string>
-    <string name="installer_external_launched">%1$s açılır…</string>
-    <string name="installer_external_timeout">%1$s quraşdırmanı təsdiqləmədi. Digər tətbiqi yoxla və təkrar sına</string>
-    <string name="installer_external_success">%1$s uğurlu quraşdırmanı bildirdi</string>
+    <string name="installer_external_launched">%s açılır…</string>
+    <string name="installer_external_timeout">%s quraşdırmanı təsdiqləmədi. Digər tətbiqi yoxla və təkrar sına</string>
+    <string name="installer_external_success">%s uğurlu quraşdırmanı bildirdi</string>
     <string name="installer_unavailable_title">%s əlçatmaz</string>
     <string name="installer_unavailable_message">Üstünlük verdiyiniz quraşdırıcı (%s) hazırda əlçatan deyil. Problemi təyin edə və təkrar sınaya yaxud əvəzinə standart quraşdırıcı istifadə edə bilərsiniz</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku-nun işlədiyinə və bu tətbiqə icazə verildiyinə əmin olun</string>

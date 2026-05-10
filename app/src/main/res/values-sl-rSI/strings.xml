@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Še ni patchano</string>
     <string name="home_no_patches_available">Ni nobenih popravkov</string>
     <string name="home_app_hide_title">Ali bi skrili to aplikacijo?</string>
-    <string name="home_app_hide_message">Ta aplikacija bo skrita iz začetnega menija. Spet jo lahko pokažete s klikom na \'%1$s\' gumb, ki se nahaja na spodnjem predelu strani.</string>
+    <string name="home_app_hide_message">Ta aplikacija bo skrita iz začetnega zaslona. Lahko jo obnovite pozneje iz skritih aplikacij s klikom na gumb na dnu seznama.</string>
     <string name="home_app_will_be_hidden">Ta aplikacija bo skrita</string>
     <string name="home_app_show_hidden">Pokaži skrite aplikacije</string>
     <string name="home_app_no_hidden">Ni skritih aplikacij</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Preskočena posodobitev</string>
     <string name="home_update_skipped_metered_subtitle">Mobilni podatki so vklopljeni </string>
     <string name="home_updating_sources">Posodabljanje virov...</string>
-    <string name="home_update_progress_format">%1$s obdelano</string>
+    <string name="home_update_progress_format">%s obdelano</string>
     <string name="home_update_success">Posodabljanje virov končano</string>
     <string name="home_update_success_subtitle">Viri so posodobljeni</string>
     <string name="home_sources_are_loading">Viri se naložujejo, počakaj…</string>
     <string name="home_search_apps">Poišči aplikacije</string>
     <string name="home_no_apps_title">Ni na voljo aplikacij</string>
     <string name="home_no_apps_subtitle">Dodaj vir popravkov ali omogoči že obstoječega v %s</string>
-    <string name="home_no_apps_search_subtitle">Nobena aplikacija ne ustreza \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Nobena aplikacija se ne ujema z \"%s\"</string>
     <string name="home_all_apps_hidden_title">Vse aplikacije so skrite</string>
     <string name="home_all_apps_hidden_subtitle">Skrile ste vse aplikacije z začetnega zaslona</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Uporaba eksperimentalnih različic aplikacij</string>
     <string name="sources_management_experimental_versions_toggle_description">Popravljanje eksperimentalnih aplikacijskih ciljev, če so na voljo</string>
     <string name="sources_management_already_exists">Ta vir že obstaja</string>
+    <string name="sources_management_invalid_url">Neveljaven URL izvor. Preverite naslov in poskusite znova</string>
+    <string name="sources_management_metadata_unavailable">Metapodatki N/A</string>
+    <string name="sources_management_metadata_unavailable_hint">Dostop do datoteke metapodatkov na daljavi ni možen. Uporaba popravka z nameščenim paketom še vedno deluje, vendar je samodejno posodabljanje za ta vir onemogočeno.</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Paket popravkov se ni dal prenesti. URL naslov izvora je lahko napačen ali datoteka ne obstaja.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikazno ime</string>
     <string name="sources_dialog_rename">Preimenuj vir popravka</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Primeri:</string>
     <string name="sources_dialog_local">Lokalni</string>
     <string name="sources_dialog_local_file">Izberi datoteko za popravek</string>
+    <string name="sources_dialog_local_file_tap_hint">Tapnite za brskanje po shranjevalnem prostoru</string>
     <string name="sources_dialog_local_file_description">Izberi datoteko .mpp za vir popravka iz shrambe</string>
+    <string name="sources_dialog_local_invalid_extension">Datoteka mora imeti priponko .mpp</string>
+    <string name="sources_dialog_url_valid">Veljavna repozitorija ali URL naslov JSON</string>
+    <string name="sources_dialog_url_invalid">URL mora kazati na repozitorij GitHub/GitLab ali na .json datoteko</string>
     <string name="sources_dialog_local_change_file">Spremeni datoteko</string>
     <string name="sources_dialog_preinstalled">Prednameščen</string>
     <string name="sources_update_success">Posodobitev uspešna</string>
     <string name="sources_update_unavailable">Posodobitev ni na voljo</string>
     <string name="sources_download_fail">Napaka pri prenosu virov: %s</string>
-    <string name="sources_download_fail_named">Ni bilo mogoče prenesti \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Ni mogoče posodobiti \'%1$s\': datoteka JSON popravka ni bila najdena na konfigurirani naslov URL</string>
+    <string name="sources_download_fail_named">\"%s\" se ni dalo posodobiti. Preverite internetno povezavo in poskusite znova</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": metadate popravka niso bile najdene</string>
     <string name="sources_patch_expert_badge">Izkušen</string>
     <string name="sources_patch_expert_badge_tooltip">Omogoči način strokovnjaka v Nastavitvah, da vključite ta popravek ročno</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Ne, že imam APK</string>
     <string name="home_apk_use_saved_with_version">Uporabite shranjeno APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ni shranjene APK. Popravilo bo zahtevalo ponovno izbiro datoteke APK.</string>
-    <string name="home_version_requires_android">Zahteva Android %1$s+</string>
+    <string name="home_version_requires_android">Zahteva Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ni podprto na tej napravi</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nima podprtih različic za Android %2$d (API %3$d). Vse deklarirane različice zahtevajo višjo različico Androida</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Prenesi izvirni APK</string>
     <string name="home_download_instructions_steps_title">Navodila:</string>
-    <string name="home_download_instructions_step1">Pritisni gumb \'%1$s\' spodaj</string>
+    <string name="home_download_instructions_step1">Pritisnite gumb \"%s\" spodaj</string>
     <string name="home_download_instructions_step2_part1">Pomikaj navzdol na spletni strani in pritisni</string>
     <string name="home_download_instructions_download_button_toast">Pritisni na gumb za prenos na spletni strani, ne tukaj 😊</string>
     <string name="home_download_instructions_step3">Počakaj, da se prenos konča, in &lt;b&gt;ne namešči&lt;/b&gt; APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Naprej na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Izberi prenesen APK</string>
-    <string name="home_file_picker_prompt_description">Izberi &lt;b&gt;%1$s&lt;/b&gt; APK datoteko, ki si je pravkar prenesel</string>
+    <string name="home_file_picker_prompt_description">Izberite datoteko &lt;b&gt;%s&lt;/b&gt; APK, ki ste jo pravkar prenesli</string>
     <string name="home_file_picker_prompt_open_apk">Odpri datoteko APK</string>
     <string name="home_recommended_version">Priporocena verzija</string>
     <string name="home_selected_version">Izbrana različica</string>
@@ -260,6 +268,9 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polne APK
     <string name="patcher_ready_to_install_subtitle">Pritisnite gumb spodaj za namestitev</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite gumb spodaj za montažo</string>
     <string name="patcher_storage_permission_dialog_title">Ne morem dostopati do poti shrambe</string>
+    <string name="patcher_incompatible_patcher_title">Posodobitev je zahtevana</string>
+    <string name="patcher_incompatible_patcher_description">Paket &lt;b&gt;%1$s&lt;/b&gt; zahteva različico popravljalca &lt;b&gt;%2$s&lt;/b&gt; ali novejšo. Posodobite Morphe, da popravite to aplikacijo</string>
+    <string name="patcher_incompatible_patcher_update_button">Prenesi in posodobi Morphe</string>
     <string name="patcher_storage_permission_description_api30">Ena ali več možnosti popravka se sklicujejo na poti, do katerih Morphe ne more brati. Daj dovoljenje za shrambo in nato pritisni gumb, nato se bo popravljanje začelo samodejno</string>
     <string name="patcher_storage_permission_description_legacy">Ena ali več možnosti popravka se sklicujejo na poti, do katerih ni mogoče dostopiti. Posodobi poti v možnostih popravka in poskusite znova</string>
     <string name="patcher_storage_permission_grant">Dovoli dostop do shrambe</string>
@@ -317,7 +328,7 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polne APK
     <string name="patched_app_saved_toast">Popravljena aplikacija je shranjena za kasnejšo uporabo</string>
     <string name="patched_app_save_failed_toast">Ni uspelo shraniti popravljene aplikacije</string>
     <string name="plugin_activity_dialog_body">Za nadaljevanje s tem dodatkom je potrebno uporabniško vklopljenost.</string>
-    <string name="patcher_process_exit_message">Proces popravila se je končal z kodo %1$s</string>
+    <string name="patcher_process_exit_message">Postopek popravljanja se je izvedel s kodo %s</string>
     <string name="install_app_success">Uspelo je namestitev</string>
     <string name="install_app_fail">Ni uspelo namestiti aplikacije: %s</string>
     <string name="save_apk_success">APK shranjeno</string>
@@ -376,7 +387,7 @@ Nastavitve</string>
     <string name="settings_appearance_app_icon_dark_2">Praznina</string>
     <string name="settings_appearance_app_icon_dark_3">Indigov</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Spremeniti ikono aplikacije?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Spremeniti na \'%1$s\' in znova zažeti?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Spremeni v &lt;b&gt;%s&lt;/b&gt; in ponovni zagon?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Spremeni ikono</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Posodobitve</string>
@@ -398,7 +409,7 @@ Nastavitve</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Na voljo je posodobitev Morphe</string>
     <string name="notification_bundle_update_title">Na voljo nove posodobitve</string>
-    <string name="notification_update_text">Različica %1$s je pripravljena za prenos</string>
+    <string name="notification_update_text">Različica %s je pripravljena za prenos</string>
     <string name="notification_bundle_update_text_unversioned">Dotakni se, da odpreš Morphe in posodobiš</string>
     <string name="notification_permission_dialog_title">Omogočiti obvestila</string>
     <string name="notification_permission_dialog_description">Morphe potrebuje dovoljenje za obvestila, da vas opozori, ko so posodobitve na voljo v ozadju</string>
@@ -533,9 +544,9 @@ Dimenzije slike morajo biti naslednje:
     <string name="installer_action_open_shizuku">Odprite Shizuku</string>
     <string name="installer_hint_generic">Namestitev je zatažila. Poskusite znova ali preklopite na drugega namestitvenika.</string>
     <string name="installer_hint_conflict">Aplikacija z istim imenom paketa je že nameščena. Preden nadaljujete, jo odstranite.</string>
-    <string name="installer_external_launched">Odpiranje %1$s…</string>
-    <string name="installer_external_timeout">%1$s ni potrdil namestitve. Preverite drugo aplikacijo in poskusite znova.</string>
-    <string name="installer_external_success">%1$s je poročal o uspešni namestitvi</string>
+    <string name="installer_external_launched">Odpiranje %s…</string>
+    <string name="installer_external_timeout">%s ni potrdil namestitve. Preverite drugo aplikacijo in poskusite znova</string>
+    <string name="installer_external_success">%s je sporočil o uspešni namestitvi</string>
     <string name="installer_unavailable_title">%s nedostopna</string>
     <string name="installer_unavailable_message">Vaš preferirani namestitvenik (%s) je trenutno nedostopen. Popravite težavo in poskusite znova ali uporabite standardni namestitvenik.</string>
     <string name="installer_unavailable_shizuku_hint">Prepričajte se, da Shizuku deluje in da je tej aplikaciji podarjeno dovoljenje.</string>

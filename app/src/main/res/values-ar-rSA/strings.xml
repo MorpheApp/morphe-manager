@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">لم يتم تعديله بعد</string>
     <string name="home_no_patches_available">لا يوجد تعديلات متاحة</string>
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
-    <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا باستخدام الزر \'%1$s\' في أسفل القائمة.</string>
+    <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا من قائمة التطبيقات المخفية باستخدام الزر الموجود أسفل القائمة.</string>
     <string name="home_app_will_be_hidden">سيتم إخفاء هذا التطبيق</string>
     <string name="home_app_show_hidden">إظهار التطبيقات المخفية</string>
     <string name="home_app_no_hidden">لا تطبيقات مخفية</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">التحديثات تم تخطيها</string>
     <string name="home_update_skipped_metered_subtitle">بيانات الجوّال نشطة</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
-    <string name="home_update_progress_format">%1$s تمت معالجتها</string>
+    <string name="home_update_progress_format">%s تمت معالجتها</string>
     <string name="home_update_success">اكتمل تحديث المصادر</string>
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
     <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
-    <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%s\"</string>
     <string name="home_all_apps_hidden_title">تم إخفاء جميع التطبيقات</string>
     <string name="home_all_apps_hidden_subtitle">لقد أخفيت جميع التطبيقات من الشاشة الرئيسية</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">استخدام إصدارات تجريبية للتطبيقات</string>
     <string name="sources_management_experimental_versions_toggle_description">تعديل الإصدارات التجريبية المستهدفة للتطبيقات إن توفرت</string>
     <string name="sources_management_already_exists">تمت إضافة هذا المصدر بالفعل</string>
+    <string name="sources_management_invalid_url">عنوان URL المصدر غير صالح. يرجى التحقق من العنوان والمحاولة مرة أخرى</string>
+    <string name="sources_management_metadata_unavailable">البيانات الوصفية غير متوفرة</string>
+    <string name="sources_management_metadata_unavailable_hint">ملف البيانات الوصفية عن بعد غير متوفر. لا يزال التعديل بالحزمة المثبتة يعمل، ولكن التحديث التلقائي معطل لهذا المصدر.</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">الاسم المعروض</string>
     <string name="sources_dialog_rename">إعادة تسمية مصدر التعديل</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">أمثلة:</string>
     <string name="sources_dialog_local">محلي</string>
     <string name="sources_dialog_local_file">تحديد ملف مصدر التعديل</string>
+    <string name="sources_dialog_local_file_tap_hint">انقر لتصفح مساحة التخزين</string>
     <string name="sources_dialog_local_file_description">حدد ملف مصدر تعديل .mpp من وحدة التخزين</string>
+    <string name="sources_dialog_local_invalid_extension">يجب أن يكون للملف امتداد .mpp</string>
+    <string name="sources_dialog_url_valid">مستودع صالح أو عنوان URL بتنسيق JSON</string>
+    <string name="sources_dialog_url_invalid">يجب أن يشير عنوان URL إلى مستودع GitHub/GitLab أو ملف ‎.json</string>
     <string name="sources_dialog_local_change_file">تغيير الملف</string>
     <string name="sources_dialog_preinstalled">مثبتة مسبقًا</string>
     <string name="sources_update_success">تم التحديث بنجاح</string>
     <string name="sources_update_unavailable">لا يوجد تحديث متاح</string>
     <string name="sources_download_fail">فشل تنزيل مصادر التعديل: %s.</string>
-    <string name="sources_download_fail_named">فشل تنزيل \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">تعذر تحديث \'%1$s\': لم يتم العثور على ملف JSON الخاص بالتعديل في عنوان URL المكون</string>
+    <string name="sources_download_fail_named">\"%s\" تعذر تحديثه. تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": لم يتم العثور على بيانات تعريف التعديل</string>
     <string name="sources_patch_expert_badge">وضع الخبير</string>
     <string name="sources_patch_expert_badge_tooltip">تمكين وضع الخبير في الإعدادات لتضمين هذا التعديل يدويًا</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">لا، لدي ملف APK بالفعل</string>
     <string name="home_apk_use_saved_with_version">استخدام ملف APK المحفوظ (v%s)</string>
     <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
-    <string name="home_version_requires_android">يتطلب Android %1$s+</string>
+    <string name="home_version_requires_android">يتطلب Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">غير مدعوم على هذا الجهاز</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; لا يحتوي على إصدارات مدعومة لنظام Android %2$d (واجهة برمجة التطبيقات %3$d). جميع الإصدارات المعلنة تتطلب إصدار Android أعلى</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">تنزيل ملف APK الأصلي</string>
     <string name="home_download_instructions_steps_title">التعليمات:</string>
-    <string name="home_download_instructions_step1">انقر على زر \'%1$s\' أدناه</string>
+    <string name="home_download_instructions_step1">انقر على زر \'%s\' أدناه</string>
     <string name="home_download_instructions_step2_part1">مرر لأسفل صفحة الويب واضغط</string>
     <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
     <string name="home_download_instructions_step3">انتظر حتى يكتمل التنزيل، و&lt;b&gt;لا تقم بتثبيت&lt;/b&gt; ملف APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">المتابعة إلى APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">تحديد ملف APK الذي تم تنزيله</string>
-    <string name="home_file_picker_prompt_description">الآن حدد ملف APK &lt;b&gt;%1$s&lt;/b&gt; الذي قمت بتنزيله للتو</string>
+    <string name="home_file_picker_prompt_description">الآن حدد ملف APK &lt;b&gt;%s&lt;/b&gt; الذي قمت بتنزيله للتو</string>
     <string name="home_file_picker_prompt_open_apk">فتح ملف APK</string>
     <string name="home_recommended_version">الإصدار الموصى به</string>
     <string name="home_selected_version">الإصدار المحدد</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">اضغط على الزر أدناه للتثبيت</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
     <string name="patcher_storage_permission_dialog_title">لا يمكن الوصول إلى مسار التخزين</string>
+    <string name="patcher_incompatible_patcher_title">التحديث مطلوب</string>
+    <string name="patcher_incompatible_patcher_description">تتطلب الحزمة &lt;b&gt;%1$s&lt;/b&gt; إصدار أداة التعديل &lt;b&gt;%2$s&lt;/b&gt; أو أحدث. يرجى تحديث Morphe لتعديل هذا التطبيق</string>
+    <string name="patcher_incompatible_patcher_update_button">تنزيل وتحديث Morphe</string>
     <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
     <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى.</string>
     <string name="patcher_storage_permission_grant">منح إذن الوصول</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">تم حفظ التطبيق المعدل لوقت لاحق</string>
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
     <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي</string>
-    <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$s</string>
+    <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %s</string>
     <string name="install_app_success">تم التثبيت بنجاح</string>
     <string name="install_app_fail">فشل تثبيت التطبيق: %s</string>
     <string name="save_apk_success">تم حفظ APK</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">الفراغ</string>
     <string name="settings_appearance_app_icon_dark_3">الأزرق الداكن</string>
     <string name="settings_appearance_app_icon_change_dialog_title">تغيير أيقونة التطبيق؟</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">تغيير إلى \'%1$s\' وإعادة تشغيل؟</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">تغيير إلى &lt;b&gt;%s&lt;/b&gt; وإعادة التشغيل؟</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">تغيير الأيقونة</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">التحديثات</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">تحديث Morphe متاح</string>
     <string name="notification_bundle_update_title">تعديلات جديدة متاحة</string>
-    <string name="notification_update_text">إصدار %1$s جاهز للتحميل</string>
+    <string name="notification_update_text">إصدار %s جاهز للتنزيل</string>
     <string name="notification_bundle_update_text_unversioned">انقر لفتح Morphe وتحديثه</string>
     <string name="notification_permission_dialog_title">السماح بالإشعارات</string>
     <string name="notification_permission_dialog_description">يحتاج Morphe إلى إذن الإشعارات لتنبيهك عند توفر تحديثات في الخلفية</string>
@@ -533,9 +544,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_action_open_shizuku">فتح Shizuku</string>
     <string name="installer_hint_generic">فشل التثبيت. حاول مرة أخرى أو قم بالتبديل إلى أداة تثبيت أخرى</string>
     <string name="installer_hint_conflict">يوجد تطبيق آخر بنفس اسم الحزمة مثبت بالفعل. قم بإلغاء تثبيته قبل المتابعة</string>
-    <string name="installer_external_launched">جارٍ فتح %1$s…</string>
-    <string name="installer_external_timeout">لم يؤكد %1$s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى</string>
-    <string name="installer_external_success">أفاد %1$s عن نجاح التثبيت</string>
+    <string name="installer_external_launched">جارٍ فتح %s…</string>
+    <string name="installer_external_timeout">لم يؤكد %s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى</string>
+    <string name="installer_external_success">أفاد %s عن نجاح التثبيت</string>
     <string name="installer_unavailable_title">%s غير متوفر</string>
     <string name="installer_unavailable_message">أداة التثبيت المفضلة لديك (%s) غير متوفرة حاليًا. يمكنك إصلاح المشكلة وإعادة المحاولة، أو استخدام أداة التثبيت القياسية بدلًا من ذلك</string>
     <string name="installer_unavailable_shizuku_hint">تأكد من تشغيل Shizuku ومنح الإذن لهذا التطبيق</string>

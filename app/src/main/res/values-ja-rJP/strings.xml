@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">まだパッチを適用していません</string>
     <string name="home_no_patches_available">利用可能なパッチはありません</string>
     <string name="home_app_hide_title">このアプリを非表示にしますか？</string>
-    <string name="home_app_hide_message">このアプリはホーム画面から非表示になります。リスト下部の 「%1$s」 ボタンから再表示できます</string>
+    <string name="home_app_hide_message">このアプリはホーム画面から非表示になります。リスト下部のボタンから再表示できます</string>
     <string name="home_app_will_be_hidden">このアプリは非表示になります</string>
     <string name="home_app_show_hidden">非表示のアプリを表示する</string>
     <string name="home_app_no_hidden">非表示のアプリはありません</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">更新をスキップしました</string>
     <string name="home_update_skipped_metered_subtitle">モバイルデータ通信が有効です</string>
     <string name="home_updating_sources">ソースを更新中…</string>
-    <string name="home_update_progress_format">%1$s 件処理済み</string>
+    <string name="home_update_progress_format">%s 件処理済み</string>
     <string name="home_update_success">ソースの更新が完了しました</string>
     <string name="home_update_success_subtitle">ソースは最新の状態です</string>
     <string name="home_sources_are_loading">ソースを読み込んでいます。しばらくお待ちください…</string>
     <string name="home_search_apps">アプリを検索</string>
     <string name="home_no_apps_title">利用可能なアプリはありません</string>
     <string name="home_no_apps_subtitle">%s でパッチソースを追加するか、既存のパッチソースを有効にしてください</string>
-    <string name="home_no_apps_search_subtitle">「%1$s」に一致するアプリはありません</string>
+    <string name="home_no_apps_search_subtitle">「%s」に一致するアプリはありません</string>
     <string name="home_all_apps_hidden_title">すべてのアプリが非表示です</string>
     <string name="home_all_apps_hidden_subtitle">ホーム画面からすべてのアプリを非表示にしました</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">実験的なバージョンのアプリを使用</string>
     <string name="sources_management_experimental_versions_toggle_description">利用可能な場合は、実験的なバージョンのアプリをパッチ対象にします</string>
     <string name="sources_management_already_exists">このソースは既に存在します</string>
+    <string name="sources_management_invalid_url">無効なソースURLです。アドレスを確認して、もう一度試してください。</string>
+    <string name="sources_management_metadata_unavailable">メタデータなし</string>
+    <string name="sources_management_metadata_unavailable_hint">リモートのメタデータファイルは利用できません。インストール済みのバンドルでのパッチ適用は可能ですが、このソースの自動更新は無効になります。</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">パッチバンドルのダウンロードに失敗しました。ソースURLが正しくないか、ファイルが存在しない可能性があります。</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">表示名</string>
     <string name="sources_dialog_rename">パッチソースの名前を変更</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">例:</string>
     <string name="sources_dialog_local">ローカル</string>
     <string name="sources_dialog_local_file">パッチソースファイルを選択</string>
+    <string name="sources_dialog_local_file_tap_hint">タップしてストレージを参照</string>
     <string name="sources_dialog_local_file_description">ストレージから .mpp パッチソースファイルを選択してください</string>
+    <string name="sources_dialog_local_invalid_extension">ファイルは.mpp拡張子でなければなりません</string>
+    <string name="sources_dialog_url_valid">有効なリポジトリまたはJSON URL</string>
+    <string name="sources_dialog_url_invalid">URLは、GitHub/GitLabリポジトリまたは.jsonファイルを指している必要があります。</string>
     <string name="sources_dialog_local_change_file">ファイルを変更</string>
     <string name="sources_dialog_preinstalled">プリインストール</string>
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">利用可能な更新はありません</string>
     <string name="sources_download_fail">ソースのダウンロードに失敗しました: %s</string>
-    <string name="sources_download_fail_named">「%1$s」のダウンロードに失敗しました: %2$s</string>
-    <string name="sources_download_endpoint_not_found">「%1$s」 を更新できませんでした: パッチ JSON ファイルが指定した URL に存在しません</string>
+    <string name="sources_download_fail_named">\'%s\'を更新できませんでした。インターネット接続を確認して、再度お試しください。</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': パッチメタデータが見つかりませんでした。</string>
     <string name="sources_patch_expert_badge">エキスパート</string>
     <string name="sources_patch_expert_badge_tooltip">このパッチを手動で追加するには、設定でエキスパートモードを有効にしてください</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">いいえ、既に APK を持っています</string>
     <string name="home_apk_use_saved_with_version">保存済みの APK (v%s) を使用する</string>
     <string name="home_app_info_no_saved_apk">保存済みの APK がありません。パッチを適用するには、 APK ファイルを再度選択してください</string>
-    <string name="home_version_requires_android">Android %1$s 以降が必要です</string>
+    <string name="home_version_requires_android">Android %s 以降が必要です</string>
     <string name="home_apk_no_compatible_versions_title">このデバイスではサポートされていません</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; は Android %2$d (API %3$d) に対応したバージョンがありません。すべての対応バージョンは、より新しい Android バージョンが必要です</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">オリジナルの APK をダウンロード</string>
     <string name="home_download_instructions_steps_title">操作手順:</string>
-    <string name="home_download_instructions_step1">下の 「%1$s」 ボタンをタップする</string>
+    <string name="home_download_instructions_step1">下の 「%s」 ボタンをタップする</string>
     <string name="home_download_instructions_step2_part1">ウェブページを下にスクロールして、このボタンをタップする</string>
     <string name="home_download_instructions_download_button_toast">ここではなく、ウェブサイトにあるボタンをタップしてください😊</string>
     <string name="home_download_instructions_step3">ダウンロードが完了するまで待ち、その APK はまだ &lt;b&gt;インストールしない&lt;b&gt;</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">APKMirror.com で続行</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">ダウンロードした APK を選択</string>
-    <string name="home_file_picker_prompt_description">先ほどダウンロードした &lt;b&gt;%1$s&lt;/b&gt; の APK ファイルを選択してください</string>
+    <string name="home_file_picker_prompt_description">先ほどダウンロードした &lt;b&gt;%s&lt;/b&gt; の APK ファイルを選択してください</string>
     <string name="home_file_picker_prompt_open_apk">APK ファイルを開く</string>
     <string name="home_recommended_version">推奨バージョン</string>
     <string name="home_selected_version">選択したバージョン</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">インストールするには以下のボタンを押してください</string>
     <string name="patcher_ready_to_mount_subtitle">マウントするには以下のボタンを押してください</string>
     <string name="patcher_storage_permission_dialog_title">ストレージパスにアクセスできません</string>
+    <string name="patcher_incompatible_patcher_title">アップデートが必要です</string>
+    <string name="patcher_incompatible_patcher_description">バンドル&lt;b&gt;%1$s&lt;/b&gt;には、パッチャーバージョン&lt;b&gt;%2$s&lt;/b&gt;以降が必要です。このアプリをパッチするには、Morpheをアップデートしてください。</string>
+    <string name="patcher_incompatible_patcher_update_button">Morpheをダウンロードしてアップデート</string>
     <string name="patcher_storage_permission_description_api30">一部のパッチ オプションが、Morphe が読み取れないパスを参照しています。ストレージへのアクセス権限を許可してボタンをタップすると、パッチ処理が自動的に開始されます。</string>
     <string name="patcher_storage_permission_description_legacy">一部のパッチ オプションが、アクセスできないパスを参照しています。パッチ オプション内のパスを修正して再度お試しください</string>
     <string name="patcher_storage_permission_grant">ストレージへのアクセス権限を許可する</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">パッチ適用済みアプリを今後のために保存しました</string>
     <string name="patched_app_save_failed_toast">パッチ適用済みアプリの保存に失敗しました</string>
     <string name="plugin_activity_dialog_body">このプラグインを続行するには、ユーザーの操作が必要です</string>
-    <string name="patcher_process_exit_message">パッチ処理がコード %1$s で終了しました</string>
+    <string name="patcher_process_exit_message">パッチ処理がコード %s で終了しました</string>
     <string name="install_app_success">正常にインストールされました</string>
     <string name="install_app_fail">アプリのインストールに失敗しました: %s</string>
     <string name="save_apk_success">APK を保存しました</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">ブラック</string>
     <string name="settings_appearance_app_icon_dark_3">インディゴ</string>
     <string name="settings_appearance_app_icon_change_dialog_title">アプリのアイコンを変更しますか？</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">「%1$s」 に変更して再起動しますか？</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; に変更して再起動しますか？</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">アイコンを変更</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe の更新が利用可能です</string>
     <string name="notification_bundle_update_title">新しいパッチが利用可能です</string>
-    <string name="notification_update_text">バージョン %1$s がダウンロード可能です</string>
+    <string name="notification_update_text">バージョン %s がダウンロード可能です</string>
     <string name="notification_bundle_update_text_unversioned">Morphe を開いて更新するには、タップしてください</string>
     <string name="notification_permission_dialog_title">通知の許可</string>
     <string name="notification_permission_dialog_description">バックグラウンドで更新が利用可能になった際に通知するには、Morphe に通知権限を許可する必要があります</string>
@@ -533,9 +544,9 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Shizuku を開く</string>
     <string name="installer_hint_generic">インストールに失敗しました。もう一度試すか、別のインストーラーを使用してください</string>
     <string name="installer_hint_conflict">同じパッケージ名を持つ別のアプリが既にインストールされています。続行するには、アプリをアンインストールしてください</string>
-    <string name="installer_external_launched">%1$s を開いています…</string>
-    <string name="installer_external_timeout">%1$s がインストールを確認できませんでした。別のアプリを確認して、再度お試しください</string>
-    <string name="installer_external_success">%1$s がインストールに成功したことを報告しました</string>
+    <string name="installer_external_launched">%s を開いています…</string>
+    <string name="installer_external_timeout">%s がインストールを確認できませんでした。別のアプリを確認して、再度お試しください。</string>
+    <string name="installer_external_success">%s がインストールに成功したことを報告しました。</string>
     <string name="installer_unavailable_title">%s が利用できません</string>
     <string name="installer_unavailable_message">選択中のインストーラー (%s) は現在使用できません。問題を修正して再試行するか、標準のインストーラーを使用してください</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku が起動中であること、およびこのアプリに権限が付与されていることを確認してください</string>

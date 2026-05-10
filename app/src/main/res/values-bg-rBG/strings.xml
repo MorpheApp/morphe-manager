@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Все още не е патчено</string>
     <string name="home_no_patches_available">Няма достъпни пачове</string>
     <string name="home_app_hide_title">Скриване на това приложение?</string>
-    <string name="home_app_hide_message">Това приложение ще бъде скрито от екрана \"Домашния екран\". Можете да го възстановите по-късно с помощта на бутона \"%1$s\" в долната част на списъка.</string>
+    <string name="home_app_hide_message">Това приложение ще бъде скрито от началния екран. Можете да го възстановите по-късно от скритите приложения, като използвате бутона в долната част на списъка.</string>
     <string name="home_app_will_be_hidden">Това приложение ще бъде скрито.</string>
     <string name="home_app_show_hidden">Покажи скритите приложения</string>
     <string name="home_app_no_hidden">Няма скрити приложения</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Пропуснати актуализации</string>
     <string name="home_update_skipped_metered_subtitle">Мобилен дан е активен</string>
     <string name="home_updating_sources">Обновяне на източници…</string>
-    <string name="home_update_progress_format">%1$s обработен</string>
+    <string name="home_update_progress_format">%s обработени</string>
     <string name="home_update_success">Обновяне на източниците завършено</string>
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
     <string name="home_search_apps">Търсене на приложения</string>
     <string name="home_no_apps_title">Няма налични приложения</string>
     <string name="home_no_apps_subtitle">Добавете източник на корекция или активирайте съществуващ в %s</string>
-    <string name="home_no_apps_search_subtitle">Няма съвпадения за \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Няма приложения, които отговарят на \"%s\"</string>
     <string name="home_all_apps_hidden_title">Всички приложения са скрити</string>
     <string name="home_all_apps_hidden_subtitle">Скрили сте всички приложения от началния екран</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Използвайте експериментални версии на приложения</string>
     <string name="sources_management_experimental_versions_toggle_description">Поправяйте експериментални цели за приложения, ако са налични</string>
     <string name="sources_management_already_exists">Този източник вече е добавен</string>
+    <string name="sources_management_invalid_url">Невалиден URL адрес на източника. Моля, проверете адреса и опитайте отново</string>
+    <string name="sources_management_metadata_unavailable">Метаданни не са налични</string>
+    <string name="sources_management_metadata_unavailable_hint">Дистанционният метаданнен файл не е достъпен. Патчването с инсталирания пакет все още работи, но автоматичното обновяване е деактивирано за този източник</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Пакетът за корекции не може да бъде свален. URL адресът на източника може да е неверен или файлът не съществува</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Име на диалога</string>
     <string name="sources_dialog_rename">Преименуване на източник</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Примери:</string>
     <string name="sources_dialog_local">Локален</string>
     <string name="sources_dialog_local_file">Изберете файл на източник</string>
+    <string name="sources_dialog_local_file_tap_hint">Докоснете, за да разгледате хранилището</string>
     <string name="sources_dialog_local_file_description">Изберете .mpp файл на източник от съхранението</string>
+    <string name="sources_dialog_local_invalid_extension">Файлът трябва да има разширение .mpp</string>
+    <string name="sources_dialog_url_valid">Валиден URL на хранилище или JSON</string>
+    <string name="sources_dialog_url_invalid">URL адресът трябва да сочи към GitHub/GitLab хранилище или .json файл</string>
     <string name="sources_dialog_local_change_file">Промяна на файл</string>
     <string name="sources_dialog_preinstalled">Предварително инсталиран</string>
     <string name="sources_update_success">Успешно обновяване</string>
     <string name="sources_update_unavailable">Няма достъпно обновление</string>
     <string name="sources_download_fail">Неуспешно сваляне на източника: %s</string>
-    <string name="sources_download_fail_named">Неуспешно сваляне на \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Не може да се обнови \'%1$s\': предварителният JSON файл на пакета не е намерен на конфигурирания URL</string>
+    <string name="sources_download_fail_named">\'%s\' не може да бъде актуализиран. Проверете връзката си с интернет и опитайте отново</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': метаданни за пакета не са намерени</string>
     <string name="sources_patch_expert_badge">Експерт</string>
     <string name="sources_patch_expert_badge_tooltip">Активиране на Експертен режим в Настройки, за да включите ръчно тази поправка.</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Не, вече имам APK</string>
     <string name="home_apk_use_saved_with_version">Използвайте запазеното APK (в%с)</string>
     <string name="home_app_info_no_saved_apk">Няма запазено APK. Пatching ще изисква отново да изберете APK файл.</string>
-    <string name="home_version_requires_android">Изисква Android %1$s+</string>
+    <string name="home_version_requires_android">Изисква Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не се поддържа на това устройство</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; няма поддържани версии за Android %2$d (API %3$d). Всички декларирани версии изискват по-нова версия на Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Изтеглете оригинален APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
-    <string name="home_download_instructions_step1">Натиснете бутона \'%1$s\' отдолу</string>
+    <string name="home_download_instructions_step1">Натиснете бутона \'%s\' отдолу</string>
     <string name="home_download_instructions_step2_part1">Скролни надолу страницата и натиснете</string>
     <string name="home_download_instructions_download_button_toast">Натиснете \"Изтеглете\" на уебсайта, а не тук 😊</string>
     <string name="home_download_instructions_step3">Чакајте да се завърши изтеглянето и &lt;b&gt;не инсталирайте&lt;/b&gt; APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Продължете към APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Изберете сваления APK</string>
-    <string name="home_file_picker_prompt_description">Изберете файла &lt;b&gt;%1$s&lt;/b&gt; APK, който сте изтеглили</string>
+    <string name="home_file_picker_prompt_description">Изберете APK файла &lt;b&gt;%s&lt;/b&gt;, който току-що изтеглихте</string>
     <string name="home_file_picker_prompt_open_apk">Отваряне на APK файл</string>
     <string name="home_recommended_version">Рекомендирана версия</string>
     <string name="home_selected_version">Избрана версия</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">Натиснете бутона по-долу за инсталиране</string>
     <string name="patcher_ready_to_mount_subtitle">Натиснете бутона по-долу за монтиране</string>
     <string name="patcher_storage_permission_dialog_title">Не е възможно да се достъпи до пата за съхранение</string>
+    <string name="patcher_incompatible_patcher_title">Необходима е актуализация</string>
+    <string name="patcher_incompatible_patcher_description">Пакетът &lt;b&gt;%1$s&lt;/b&gt; изисква версия на пачера &lt;b&gt;%2$s&lt;/b&gt; или по-нова. Моля, актуализирайте Morphe, за да пачнете това приложение</string>
+    <string name="patcher_incompatible_patcher_update_button">Изтеглете и актуализирайте Morphe</string>
     <string name="patcher_storage_permission_description_api30">Една или повече опции за корекции сочат към пътища, които Morphe не може да прочете. Предоставете достъп до хранилището и натиснете бутона, след което корекциите ще започнат автоматично</string>
     <string name="patcher_storage_permission_description_legacy">Едно или повече опции за патч сочат към пътища, които не могат да бъдат достъпени. Актуализирайте пътищата в опциите за патч и опитайте отново</string>
     <string name="patcher_storage_permission_grant">Дайте разрешение за съхранение</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">Patching on this device architecture is unsupported and will most likely fail.</string>
     <string name="patched_app_save_failed_toast">Import</string>
     <string name="plugin_activity_dialog_body">Потребителски интеракция е нужна, за да продължите с този плагин.</string>
-    <string name="patcher_process_exit_message">Процесът на патчването излязъл с код %1$s</string>
+    <string name="patcher_process_exit_message">Процесът на патчването излязъл с код %s</string>
     <string name="install_app_success">Инсталирано успешно</string>
     <string name="install_app_fail">Неуспешно инсталиране на приложението: %s</string>
     <string name="save_apk_success">APK запазен</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">Праз</string>
     <string name="settings_appearance_app_icon_dark_3">Индиго</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Промяна на икона на приложението?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Промяна на \'%1$s\' и рестартиране?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Промяна на &lt;b&gt;%s&lt;/b&gt; и рестартиране?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Промяна на икона</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Актуализации</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">Налично е актуализация на Morphe</string>
     <string name="notification_bundle_update_title">Достъпни нови патчове</string>
-    <string name="notification_update_text">Версия %1$s е готова за сваляне</string>
+    <string name="notification_update_text">Версия %s е готова за изтегляне</string>
     <string name="notification_bundle_update_text_unversioned">Докоснете, за да отворите Morphe и да актуализирате</string>
     <string name="notification_permission_dialog_title">Разрешете известувания</string>
     <string name="notification_permission_dialog_description">Morphe се нуждае от разрешение за известия, за да ви предупреди, когато има актуализации във фонов режим</string>
@@ -533,9 +544,9 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Not selected</string>
     <string name="installer_hint_generic">Инсталирането провалило. Опитайте отново или превключете на различен инсталатор.</string>
     <string name="installer_hint_conflict">Друго приложение с това име вече е инсталирано. Деинсталирайте го преди да продължите.</string>
-    <string name="installer_external_launched">Отваряне на %1$s…</string>
-    <string name="installer_external_timeout">%1$s не потвърди инсталацията. Проверете другата приложение и опитайте отново</string>
-    <string name="installer_external_success">%1$s докладва за успешно инсталиране</string>
+    <string name="installer_external_launched">Отваряне на %s…</string>
+    <string name="installer_external_timeout">%s не потвърди инсталацията. Проверете другата приложение и опитайте отново</string>
+    <string name="installer_external_success">%s докладва за успешно инсталиране</string>
     <string name="installer_unavailable_title">%s (недостъпен)</string>
     <string name="installer_unavailable_message">Предпочитаното ви инсталатор (%s) е временно недостъпно. Можете да поправите проблема и опитайте отново или използвайте стандартния инсталатор вместо него.</string>
     <string name="installer_unavailable_shizuku_hint">Уверете се, че Shizuku е стартиран и разрешението е предоставето на това приложение.</string>

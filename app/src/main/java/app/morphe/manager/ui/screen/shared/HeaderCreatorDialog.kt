@@ -9,8 +9,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -38,15 +36,12 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
+import androidx.documentfile.provider.DocumentFile
 import app.morphe.manager.R
-import app.morphe.manager.util.KnownApps
-import app.morphe.manager.util.toFilePath
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
-import java.io.FileOutputStream
 import kotlin.math.abs
 
 /**
@@ -121,10 +116,12 @@ fun HeaderCreatorDialog(
     var darkOffsetY by remember { mutableFloatStateOf(0f) }
 
     val context = LocalContext.current
+    val selectImageTitle = stringResource(R.string.adaptive_icon_select_image)
 
     // Light header image picker
-    val lightHeaderPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val openLightHeaderPicker = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf("image/*"),
+        chooserTitle = selectImageTitle
     ) { uri ->
         uri?.let {
             lightHeaderUri = it
@@ -150,8 +147,9 @@ fun HeaderCreatorDialog(
     }
 
     // Dark header image picker
-    val darkHeaderPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val openDarkHeaderPicker = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf("image/*"),
+        chooserTitle = selectImageTitle
     ) { uri ->
         uri?.let {
             darkHeaderUri = it
@@ -183,41 +181,36 @@ fun HeaderCreatorDialog(
     // Whether all required images are provided
     val canCreate = darkHeaderBitmap != null && (!showLightVariant || lightHeaderBitmap != null)
 
-    val folderPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocumentTree()
-    ) { uri ->
-        uri?.let {
-            scope.launch(Dispatchers.IO) {
-                try {
-                    val success = createHeaderFiles(
-                        context = context,
-                        baseUri = it,
-                        packageName = packageName,
-                        lightHeaderBitmap = if (showLightVariant) lightHeaderBitmap else null,
-                        darkHeaderBitmap = darkHeaderBitmap!!,
-                        lightFileName = HeaderConfig.LIGHT_HEADER_FILE_NAME,
-                        darkFileName = HeaderConfig.DARK_HEADER_FILE_NAME,
-                        lightScale = lightScale,
-                        lightOffsetX = lightOffsetX,
-                        lightOffsetY = lightOffsetY,
-                        darkScale = darkScale,
-                        darkOffsetX = darkOffsetX,
-                        darkOffsetY = darkOffsetY
-                    )
-
-                    withContext(Dispatchers.Main) {
-                        if (success != null) {
-                            context.toast(successMessage)
-                            onHeaderCreated(success)
-                            onDismiss()
-                        } else {
-                            context.toast(failureMessage)
-                        }
+    val openFolderPicker = rememberFolderPicker { uri ->
+        scope.launch(Dispatchers.IO) {
+            try {
+                val success = createHeaderFiles(
+                    context = context,
+                    baseUri = uri,
+                    packageName = packageName,
+                    lightHeaderBitmap = if (showLightVariant) lightHeaderBitmap else null,
+                    darkHeaderBitmap = darkHeaderBitmap!!,
+                    lightFileName = HeaderConfig.LIGHT_HEADER_FILE_NAME,
+                    darkFileName = HeaderConfig.DARK_HEADER_FILE_NAME,
+                    lightScale = lightScale,
+                    lightOffsetX = lightOffsetX,
+                    lightOffsetY = lightOffsetY,
+                    darkScale = darkScale,
+                    darkOffsetX = darkOffsetX,
+                    darkOffsetY = darkOffsetY
+                )
+                withContext(Dispatchers.Main) {
+                    if (success != null) {
+                        context.toast(successMessage)
+                        onHeaderCreated(success)
+                        onDismiss()
+                    } else {
+                        context.toast(failureMessage)
                     }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        context.toast("Failed to create header: ${e.message}")
-                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    context.toast("Failed to create header: ${e.message}")
                 }
             }
         }
@@ -252,7 +245,7 @@ fun HeaderCreatorDialog(
                 // Create button
                 MorpheDialogButton(
                     text = stringResource(R.string.header_creator_create),
-                    onClick = { folderPicker.launch(null) },
+                    onClick = { openFolderPicker() },
                     enabled = canCreate,
                     icon = Icons.Outlined.Save,
                     modifier = Modifier.fillMaxWidth()
@@ -349,7 +342,7 @@ fun HeaderCreatorDialog(
                         stringResource(R.string.adaptive_icon_select_image)
                     else
                         stringResource(R.string.adaptive_icon_change_image),
-                    onClick = { lightHeaderPicker.launch("image/*") },
+                    onClick = { openLightHeaderPicker() },
                     icon = Icons.Outlined.LightMode,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -434,7 +427,7 @@ fun HeaderCreatorDialog(
                     stringResource(R.string.adaptive_icon_select_image)
                 else
                     stringResource(R.string.adaptive_icon_change_image),
-                onClick = { darkHeaderPicker.launch("image/*") },
+                onClick = { openDarkHeaderPicker() },
                 icon = Icons.Outlined.DarkMode,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -659,25 +652,24 @@ private suspend fun createHeaderFiles(
 
         val (targetWidth, targetHeight) = targetSize
 
-        // Convert URI to File path using existing utility
-        val basePath = baseUri.toFilePath()
-        val baseDir = File(basePath)
+        val baseDocDir = DocumentFile.fromTreeUri(context, baseUri) ?: return@withContext null
 
-        // Create directory structure: morphe_branding/morphe_header/drawable-xxx
-        val brandingDir = File(baseDir, HeaderConfig.BRANDING_FOLDER_NAME)
-        if (!brandingDir.exists()) brandingDir.mkdirs()
+        val brandingDocDir = baseDocDir.findFile(HeaderConfig.BRANDING_FOLDER_NAME)
+            ?: baseDocDir.createDirectory(HeaderConfig.BRANDING_FOLDER_NAME)
+            ?: return@withContext null
 
         // Create .nomedia file to prevent icons from appearing in gallery
-        val nomediaFile = File(brandingDir, ".nomedia")
-        if (!nomediaFile.exists()) {
-            nomediaFile.createNewFile()
+        if (brandingDocDir.findFile(".nomedia") == null) {
+            brandingDocDir.createFile("application/octet-stream", ".nomedia")
         }
 
-        val headerDir = File(brandingDir, HeaderConfig.headerFolderName(packageName))
-        if (!headerDir.exists()) headerDir.mkdirs()
+        val headerDocDir = brandingDocDir.findFile(HeaderConfig.headerFolderName(packageName))
+            ?: brandingDocDir.createDirectory(HeaderConfig.headerFolderName(packageName))
+            ?: return@withContext null
 
-        val drawableDir = File(headerDir, folderName)
-        if (!drawableDir.exists()) drawableDir.mkdirs()
+        val drawableDocDir = headerDocDir.findFile(folderName)
+            ?: headerDocDir.createDirectory(folderName)
+            ?: return@withContext null
 
         // Save light header (only for apps that support it)
         if (lightHeaderBitmap != null) {
@@ -690,9 +682,12 @@ private suspend fun createHeaderFiles(
                 offsetX = lightOffsetX,
                 offsetY = lightOffsetY
             )
-            val lightFile = File(drawableDir, "$lightFileName.png")
-            FileOutputStream(lightFile).use { out ->
-                lightScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+            val lightDocFile = drawableDocDir.findFile("$lightFileName.png")
+                ?: drawableDocDir.createFile("image/png", "$lightFileName.png")
+            lightDocFile?.let {
+                context.contentResolver.openOutputStream(it.uri)?.use { out ->
+                    lightScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+                }
             }
             lightScaled.recycle()
         }
@@ -707,14 +702,16 @@ private suspend fun createHeaderFiles(
             offsetX = darkOffsetX,
             offsetY = darkOffsetY
         )
-        val darkFile = File(drawableDir, "$darkFileName.png")
-        FileOutputStream(darkFile).use { out ->
-            darkScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+        val darkDocFile = drawableDocDir.findFile("$darkFileName.png")
+            ?: drawableDocDir.createFile("image/png", "$darkFileName.png")
+        darkDocFile?.let {
+            context.contentResolver.openOutputStream(it.uri)?.use { out ->
+                darkScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+            }
         }
         darkScaled.recycle()
 
-        // Return path to 'morphe_header' folder
-        headerDir.absolutePath
+        headerDocDir.uri.toFilePath()
     } catch (e: Exception) {
         e.printStackTrace()
         null
@@ -774,14 +771,14 @@ private fun createScaledHeader(
     val left = (targetWidth - targetScaledWidth) / 2 + targetOffsetX
     val top = (targetHeight - targetScaledHeight) / 2 + targetOffsetY
 
-    // Create Paint with anti-aliasing and bicubic filtering for high-quality scaling
+    // Create Paint with antialiasing and bicubic filtering for high-quality scaling
     val bitmapPaint = Paint().apply {
         isAntiAlias = true
         isFilterBitmap = true
         isDither = true
     }
 
-    // Draw the scaled and positioned image with anti-aliasing (will be cropped to canvas bounds)
+    // Draw the scaled and positioned image with antialiasing (will be cropped to canvas bounds)
     val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
     canvas.drawBitmap(sourceBitmap, null, destRect, bitmapPaint)
 

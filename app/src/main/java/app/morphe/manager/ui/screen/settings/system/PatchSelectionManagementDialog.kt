@@ -36,6 +36,8 @@ import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
+import app.morphe.manager.util.TEXT_MIMETYPE
+import app.morphe.manager.util.rememberAdaptiveFilePicker
 import kotlinx.coroutines.launch
 
 /**
@@ -159,8 +161,9 @@ private fun PatchSelectionManagementDialogContent(
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
-    val importAllSelectionsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val openImportAllSelectionsPicker = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
+        chooserTitle = stringResource(R.string.settings_system_patch_selections_title)
     ) { uri ->
         uri?.let { importExportViewModel.importAllSelections(it) }
     }
@@ -199,7 +202,7 @@ private fun PatchSelectionManagementDialogContent(
                         },
                         primaryIcon = Icons.Outlined.Upload,
                         secondaryText = stringResource(R.string.import_),
-                        onSecondaryClick = { importAllSelectionsLauncher.launch(JSON_MIMETYPE) },
+                        onSecondaryClick = { openImportAllSelectionsPicker() },
                         secondaryIcon = Icons.Outlined.Download,
                         isSecondaryPrimary = true,
                         layout = DialogButtonLayout.Horizontal
@@ -207,7 +210,7 @@ private fun PatchSelectionManagementDialogContent(
                 } else {
                     MorpheDialogButton(
                         text = stringResource(R.string.import_),
-                        onClick = { importAllSelectionsLauncher.launch(JSON_MIMETYPE) },
+                        onClick = { openImportAllSelectionsPicker() },
                         icon = Icons.Outlined.Download,
                         modifier = Modifier.fillMaxWidth()
                     )
