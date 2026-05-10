@@ -671,10 +671,7 @@ fun BundlePatchesDialog(
                                         patchCountLabel
                                     AnimatedContent(
                                         targetState = countText,
-                                        transitionSpec = {
-                                            (fadeIn(tween(200)) + slideInVertically(tween(200)) { -it / 2 })
-                                                .togetherWith(fadeOut(tween(150)) + slideOutVertically(tween(150)) { it / 2 })
-                                        },
+                                        transitionSpec = MorpheAnimations.counterTransitionSpec,
                                         label = "patch_count"
                                     ) { count ->
                                         Text(

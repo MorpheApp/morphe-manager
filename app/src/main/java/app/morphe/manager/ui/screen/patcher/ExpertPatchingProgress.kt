@@ -430,7 +430,7 @@ private fun ExpertProgressHeader(
         ) {
             AnimatedContent(
                 targetState = currentStep?.name,
-                transitionSpec = { fadeIn(tween(300)) togetherWith fadeOut(tween(300)) },
+                transitionSpec = MorpheAnimations.fadeCrossfade(300),
                 label = "expert_step_name",
                 modifier = Modifier.weight(1f)
             ) { stepName ->
