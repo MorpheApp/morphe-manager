@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -659,11 +660,15 @@ fun BundlePatchesDialog(
                                         tint = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.size(16.dp)
                                     )
+                                    val patchCountLabel = pluralStringResource(
+                                        R.plurals.patch_count,
+                                        patches.size,
+                                        patches.size
+                                    )
                                     val countText = if (isFiltering)
-                                        "${filteredPatches.size}/${patches.size}"
+                                        "${filteredPatches.size}/${patchCountLabel}"
                                     else
-                                        "${patches.size}"
-                                    val patchesLabel = stringResource(R.string.patches).lowercase()
+                                        patchCountLabel
                                     AnimatedContent(
                                         targetState = countText,
                                         transitionSpec = {
@@ -673,7 +678,7 @@ fun BundlePatchesDialog(
                                         label = "patch_count"
                                     ) { count ->
                                         Text(
-                                            text = "$count $patchesLabel",
+                                            text = count,
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.primary,
                                             fontWeight = FontWeight.Medium
