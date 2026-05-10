@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Aún no parcheado</string>
     <string name="home_no_patches_available">No hay parches disponibles</string>
     <string name="home_app_hide_title">¿Ocultar esta app?</string>
-    <string name="home_app_hide_message">Esta app se ocultará de la pantalla de inicio. Puedes restaurarla más tarde usando el botón \"%1$s\" en la parte inferior de la lista</string>
+    <string name="home_app_hide_message">Esta app se ocultará de la pantalla de inicio. Puedes restaurarla más tarde desde las apps ocultas usando el botón situado en la parte inferior de la lista</string>
     <string name="home_app_will_be_hidden">Esta app se ocultará</string>
     <string name="home_app_show_hidden">Show hidden apps</string>
     <string name="home_app_no_hidden">No hay apps ocultas</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Actualización omitida</string>
     <string name="home_update_skipped_metered_subtitle">Los datos móviles están activos</string>
     <string name="home_updating_sources">Actualizando fuentes…</string>
-    <string name="home_update_progress_format">%1$s procesado</string>
+    <string name="home_update_progress_format">%s procesado</string>
     <string name="home_update_success">Actualización de fuentes completada</string>
     <string name="home_update_success_subtitle">Tus fuentes están al día</string>
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
     <string name="home_search_apps">Buscar aplicaciones</string>
     <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
     <string name="home_no_apps_subtitle">Añadir una fuente de parche o habilitar una existente en %s</string>
-    <string name="home_no_apps_search_subtitle">No se encontraron aplicaciones que coincidan con \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">No hay apps que coincidan con \"%s\"</string>
     <string name="home_all_apps_hidden_title">Todas las aplicaciones están ocultas</string>
     <string name="home_all_apps_hidden_subtitle">Ha ocultado todas las aplicaciones de la pantalla de inicio</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Usar versiones experimentales</string>
     <string name="sources_management_experimental_versions_toggle_description">Parchear las versiones experimentales de la aplicación, si están disponibles</string>
     <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
+    <string name="sources_management_invalid_url">URL de fuente no válida. Compruebe la dirección e inténtelo de nuevo</string>
+    <string name="sources_management_metadata_unavailable">Metadatos no disponibles</string>
+    <string name="sources_management_metadata_unavailable_hint">El archivo de metadatos remoto no está disponible. La aplicación de parches con el paquete instalado sigue funcionando, pero la actualización automática está desactivada para esta fuente</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">No se ha podido descargar el paquete de parches. Es posible que la URL de la fuente sea incorrecta o que el archivo no exista</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nombre para mostrar</string>
     <string name="sources_dialog_rename">Agregar fuente de parches</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Ejemplos:</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Seleccione el archivo fuente de parches</string>
+    <string name="sources_dialog_local_file_tap_hint">Toca para explorar el almacenamiento</string>
     <string name="sources_dialog_local_file_description">Seleccionar un archivo fuente de parches .mpp en el almacenamiento</string>
+    <string name="sources_dialog_local_invalid_extension">El archivo debe tener una extensión .mpp</string>
+    <string name="sources_dialog_url_valid">Repositorio o URL JSON válido</string>
+    <string name="sources_dialog_url_invalid">La URL debe apuntar a un repositorio de GitHub/GitLab o a un archivo .json</string>
     <string name="sources_dialog_local_change_file">Cambiar archivo</string>
     <string name="sources_dialog_preinstalled">Preinstalado</string>
     <string name="sources_update_success">Actualización correcta</string>
     <string name="sources_update_unavailable">No hay actualización disponible</string>
     <string name="sources_download_fail">No se pudo descargar las fuentes: %s</string>
-    <string name="sources_download_fail_named">Error al descargar \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">No se pudo actualizar \'%1$s\': no se encontró el archivo JSON de parches en la URL configurada</string>
+    <string name="sources_download_fail_named">\"%s\" no se pudo actualizar. Comprueba tu conexión a internet e inténtalo de nuevo</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": no se encontraron metadatos del parche</string>
     <string name="sources_patch_expert_badge">Experto</string>
     <string name="sources_patch_expert_badge_tooltip">Habilite el modo Experto en la configuración para incluir este parche manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">No, ya tengo un APK</string>
     <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
-    <string name="home_version_requires_android">Requiere Android %1$s o superior</string>
+    <string name="home_version_requires_android">Requiere Android %s o superior</string>
     <string name="home_apk_no_compatible_versions_title">No compatible en este dispositivo</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; no tiene versiones compatibles para Android %2$d (API %3$d). Todas las versiones declaradas requieren una versión de Android superior</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descargar el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>
-    <string name="home_download_instructions_step1">Pulsa el botón \"%1$s\" de abajo</string>
+    <string name="home_download_instructions_step1">Pulsa el botón \"%s\" de abajo</string>
     <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, y no aquí 😊</string>
     <string name="home_download_instructions_step3">Espera a que la descarga se complete, y &lt;b&gt;no instales&lt;/b&gt; el APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Continuar a APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Seleccionar APK descargado</string>
-    <string name="home_file_picker_prompt_description">Selecciona el archivo APK de &lt;b&gt;%1$s&lt;/b&gt; que acabas de descargar</string>
+    <string name="home_file_picker_prompt_description">Selecciona el archivo APK de &lt;b&gt;%s&lt;/b&gt; que acabas de descargar</string>
     <string name="home_file_picker_prompt_open_apk">Abrir archivo APK</string>
     <string name="home_recommended_version">Versión recomendada</string>
     <string name="home_selected_version">Versión seleccionada</string>
@@ -260,6 +268,9 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patcher_ready_to_install_subtitle">Pulse el botón de abajo para instalar</string>
     <string name="patcher_ready_to_mount_subtitle">Pulse el botón de abajo para montar</string>
     <string name="patcher_storage_permission_dialog_title">No se puede acceder a la ruta de almacenamiento</string>
+    <string name="patcher_incompatible_patcher_title">Actualización requerida</string>
+    <string name="patcher_incompatible_patcher_description">El paquete &lt;b&gt;%1$s&lt;/b&gt; requiere la versión &lt;b&gt;%2$s&lt;/b&gt; o más reciente del parcheador. Actualiza Morphe para parchear esta aplicación</string>
+    <string name="patcher_incompatible_patcher_update_button">Descargar y actualizar Morphe</string>
     <string name="patcher_storage_permission_description_api30">Una o más opciones de parcheo apuntan a rutas que Morphe no puede leer. Conceda acceso al almacenamiento y toque el botón para que el parcheo empiece automáticamente</string>
     <string name="patcher_storage_permission_description_legacy">Una o varias opciones de parcheo apuntan a rutas que no se pueden acceder. Actualice las rutas en las opciones de parcheo y vuelva a intentarlo</string>
     <string name="patcher_storage_permission_grant">Conceder permiso de almacenamiento</string>
@@ -317,7 +328,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patched_app_saved_toast">App parcheada guardada para más tarde</string>
     <string name="patched_app_save_failed_toast">Error al guardar la app parcheada</string>
     <string name="plugin_activity_dialog_body">Se requiere interacción del usuario para continuar con este complemento.</string>
-    <string name="patcher_process_exit_message">El proceso del parcheador terminó con el código %1$s</string>
+    <string name="patcher_process_exit_message">El proceso del parcheador terminó con el código %s</string>
     <string name="install_app_success">Instalado correctamente</string>
     <string name="install_app_fail">Error al instalar la aplicación: %s</string>
     <string name="save_apk_success">APK guardado</string>
@@ -375,7 +386,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="settings_appearance_app_icon_dark_2">Vacío</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">¿Cambiar el icono de la aplicación?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">¿Cambiar a \"%1$s\" y reiniciar?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">¿Cambiar a &lt;b&gt;%s&lt;/b&gt; y reiniciar?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Cambiar icono</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Actualizaciones</string>
@@ -397,7 +408,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <!-- Notification content -->
     <string name="notification_manager_update_title">Actualización de Morphe disponible</string>
     <string name="notification_bundle_update_title">Nuevos parches disponibles</string>
-    <string name="notification_update_text">La versión %1$s está lista para descargar</string>
+    <string name="notification_update_text">La versión %s está lista para descargarse</string>
     <string name="notification_bundle_update_text_unversioned">Toca para abrir Morphe y actualizar</string>
     <string name="notification_permission_dialog_title">Permitir notificaciones</string>
     <string name="notification_permission_dialog_description">Morphe necesita el permiso de notificación para avisarte cuando haya actualizaciones disponibles en segundo plano</string>
@@ -533,9 +544,9 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">La instalación falló. Vuelve a intentarlo o cambia a un instalador diferente.</string>
     <string name="installer_hint_conflict">Otra aplicación con este nombre de paquete ya está instalada. Desinstálala antes de continuar.</string>
-    <string name="installer_external_launched">Abriendo %1$s…</string>
-    <string name="installer_external_timeout">%1$s no confirmó la instalación. Revisa la otra aplicación y vuelve a intentarlo.</string>
-    <string name="installer_external_success">%1$s informó una instalación exitosa.</string>
+    <string name="installer_external_launched">Abriendo %s…</string>
+    <string name="installer_external_timeout">%s no confirmó la instalación. Comprueba la otra aplicación e inténtalo de nuevo</string>
+    <string name="installer_external_success">%s informó de una instalación correcta</string>
     <string name="installer_unavailable_title">%s no disponible</string>
     <string name="installer_unavailable_message">Tu instalador preferido (%s) actualmente no está disponible. Puedes solucionar el problema y volver a intentarlo o usar el instalador estándar en su lugar.</string>
     <string name="installer_unavailable_shizuku_hint">Asegúrate de que Shizuku esté en ejecución y se haya concedido el permiso a esta aplicación.</string>

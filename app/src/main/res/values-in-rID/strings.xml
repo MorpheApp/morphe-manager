@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Belum ditambal</string>
     <string name="home_no_patches_available">Tidak ada tambalan yang tersedia</string>
     <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
-    <string name="home_app_hide_message">Aplikasi ini akan disembunyikan dari layar utama. Anda dapat memulihkannya lagi menggunakan tombol \'%1$s\' di bagian bawah daftar.</string>
+    <string name="home_app_hide_message">Aplikasi ini akan disembunyikan dari layar utama. Anda dapat mengembalikannya nanti dari aplikasi tersembunyi menggunakan tombol di bagian bawah daftar</string>
     <string name="home_app_will_be_hidden">Aplikasi ini akan disembunyikan.</string>
     <string name="home_app_show_hidden">Tampilkan aplikasi tersembunyi</string>
     <string name="home_app_no_hidden">Tidak ada aplikasi tersembunyi</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Pembaruan diabaikan</string>
     <string name="home_update_skipped_metered_subtitle">Data seluler aktif</string>
     <string name="home_updating_sources">Memperbarui sumber…</string>
-    <string name="home_update_progress_format">%1$s diproses</string>
+    <string name="home_update_progress_format">%s diproses</string>
     <string name="home_update_success">Pembaruan sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber Anda sudah terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
     <string name="home_search_apps">Cari aplikasi</string>
     <string name="home_no_apps_title">Tidak ada aplikasi yang tersedia</string>
     <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau aktifkan yang sudah ada di %s</string>
-    <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%s\"</string>
     <string name="home_all_apps_hidden_title">Semua aplikasi disembunyikan</string>
     <string name="home_all_apps_hidden_subtitle">Anda telah menyembunyikan semua aplikasi dari layar utama</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Gunakan versi aplikasi eksperimental</string>
     <string name="sources_management_experimental_versions_toggle_description">Tambal target aplikasi eksperimental jika tersedia</string>
     <string name="sources_management_already_exists">Sumber ini sudah ditambahkan</string>
+    <string name="sources_management_invalid_url">URL sumber tidak valid. Harap periksa alamatnya dan coba lagi</string>
+    <string name="sources_management_metadata_unavailable">Metadata Tidak Tersedia</string>
+    <string name="sources_management_metadata_unavailable_hint">File metadata jarak jauh tidak tersedia. Penerapan dengan bundle yang terinstal masih berfungsi, tetapi pembaruan otomatis dinonaktifkan untuk sumber ini</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Bundle patch tidak dapat diunduh. URL sumber mungkin salah atau file tidak ada</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama tampilan</string>
     <string name="sources_dialog_rename">Ubah nama sumber tambalan</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Contoh:</string>
     <string name="sources_dialog_local">Lokal</string>
     <string name="sources_dialog_local_file">Pilih berkas sumber tambalan</string>
+    <string name="sources_dialog_local_file_tap_hint">Ketuk untuk menjelajahi penyimpanan</string>
     <string name="sources_dialog_local_file_description">Pilih berkas sumber tambalan .mpp dari penyimpanan</string>
+    <string name="sources_dialog_local_invalid_extension">File harus memiliki ekstensi .mpp</string>
+    <string name="sources_dialog_url_valid">Repositori atau URL JSON yang valid</string>
+    <string name="sources_dialog_url_invalid">URL harus mengarah ke repositori GitHub/GitLab atau file .json</string>
     <string name="sources_dialog_local_change_file">Ganti berkas</string>
     <string name="sources_dialog_preinstalled">Sudah dipasang sebelumnya</string>
     <string name="sources_update_success">Pembaruan berhasil</string>
     <string name="sources_update_unavailable">Tidak ada pembaruan tersedia</string>
     <string name="sources_download_fail">Gagal mengunduh sumber: %s</string>
-    <string name="sources_download_fail_named">Gagal mengunduh \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Tidak dapat memperbarui \'%1$s\': berkas tambalan JSON tidak ditemukan di URL yang dikonfigurasi</string>
+    <string name="sources_download_fail_named">\'%s\' tidak dapat diperbarui. Periksa koneksi internet Anda dan coba lagi</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': metadata patch tidak ditemukan</string>
     <string name="sources_patch_expert_badge">Ahli</string>
     <string name="sources_patch_expert_badge_tooltip">Aktifkan mode Ahli di Pengaturan untuk menyertakan tambalan ini secara manual</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Tidak, saya sudah memiliki APK</string>
     <string name="home_apk_use_saved_with_version">Gunakan APK yang disimpan (v%s)</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
-    <string name="home_version_requires_android">Memerlukan Android %1$s+</string>
+    <string name="home_version_requires_android">Membutuhkan Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Tidak didukung di perangkat ini</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tidak memiliki versi yang didukung untuk Android %2$d (API %3$d). Semua versi yang dideklarasikan memerlukan versi Android yang lebih tinggi</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Unduh APK asli</string>
     <string name="home_download_instructions_steps_title">Petunjuk:</string>
-    <string name="home_download_instructions_step1">Tekan tombol \'%1$s\' di bawah ini</string>
+    <string name="home_download_instructions_step1">Tekan tombol \'%s\' di bawah ini</string>
     <string name="home_download_instructions_step2_part1">Gulir halaman web ke bawah dan tekan</string>
     <string name="home_download_instructions_download_button_toast">Tekan unduh di situs web, dan bukan di sini 😊</string>
     <string name="home_download_instructions_step3">Tunggu hingga unduhan selesai, dan &lt;b&gt;jangan memasang&lt;/b&gt; APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Lanjutkan ke APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Pilih APK yang telah diunduh</string>
-    <string name="home_file_picker_prompt_description">Pilih berkas &lt;b&gt;%1$s&lt;/b&gt; APK yang baru saja Anda unduh</string>
+    <string name="home_file_picker_prompt_description">Pilih berkas &lt;b&gt;%s&lt;/b&gt; APK yang baru saja Anda unduh</string>
     <string name="home_file_picker_prompt_open_apk">Buka berkas APK</string>
     <string name="home_recommended_version">Versi rekomendasi</string>
     <string name="home_selected_version">Versi terpilih</string>
@@ -261,6 +269,9 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patcher_ready_to_install_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
     <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
+    <string name="patcher_incompatible_patcher_title">Pembaruan diperlukan</string>
+    <string name="patcher_incompatible_patcher_description">Bundle &lt;b&gt;%1$s&lt;/b&gt; memerlukan versi penambal &lt;b&gt;%2$s&lt;/b&gt; atau lebih baru. Silakan perbarui Morphe untuk menambal aplikasi ini</string>
+    <string name="patcher_incompatible_patcher_update_button">Unduh dan perbarui Morphe</string>
     <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tambalan yang mengarah pada jalur Morphe tidak dapat dibaca. Beri akses penyimpanan dan ketuk tombol lalu penambalan akan dimulai secara otomatis</string>
     <string name="patcher_storage_permission_description_legacy">Satu atau lebih pilihan tambalan yang mengarah ke jalur yang tidak dapat diakses. Perbarui jalur dalam pilihan tambalan dan coba lagi</string>
     <string name="patcher_storage_permission_grant">Beri izin penyimpanan</string>
@@ -318,7 +329,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="patched_app_saved_toast">Aplikasi yang ditambal disimpan untuk nanti</string>
     <string name="patched_app_save_failed_toast">Gagal menyimpan aplikasi yang ditambal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk melanjutkan plugin ini</string>
-    <string name="patcher_process_exit_message">Proses Penambal dihentikan dengan kode %1$s</string>
+    <string name="patcher_process_exit_message">Proses Penambal dihentikan dengan kode %s</string>
     <string name="install_app_success">Berhasil dipasang</string>
     <string name="install_app_fail">Gagal memasang aplikasi: %s</string>
     <string name="save_apk_success">APK Tersimpan</string>
@@ -376,7 +387,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <string name="settings_appearance_app_icon_dark_2">Kosong</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ubah ikon aplikasi?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Ubah menjadi \'%1$s\' dan mulai ulang?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Ubah menjadi &lt;b&gt;%s&lt;/b&gt; dan mulai ulang?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ubah ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Pembaruan</string>
@@ -398,7 +409,7 @@ Harap bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum terid
     <!-- Notification content -->
     <string name="notification_manager_update_title">Pembaruan Morphe tersedia</string>
     <string name="notification_bundle_update_title">Patches baru tersedia</string>
-    <string name="notification_update_text">Versi %1$s siap untuk diunduh</string>
+    <string name="notification_update_text">Versi %s siap untuk diunduh</string>
     <string name="notification_bundle_update_text_unversioned">Ketuk untuk membuka Morphe dan memperbarui</string>
     <string name="notification_permission_dialog_title">Izinkan pemberitahuan</string>
     <string name="notification_permission_dialog_description">Morphe memerlukan izin pemberitahuan untuk memberi tahu Anda saat pembaruan tersedia di latar belakang</string>
@@ -534,9 +545,9 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan gagal. Coba lagi atau ganti pemasang</string>
     <string name="installer_hint_conflict">Aplikasi lain dengan nama paket ini sudah terpasang. Copot pemasangannya terlebih dahulu sebelum melanjutkan</string>
-    <string name="installer_external_launched">Membuka %1$s…</string>
-    <string name="installer_external_timeout">%1$s tidak mengonfirmasi pemasangan. Periksa aplikasi lain dan coba lagi</string>
-    <string name="installer_external_success">%1$s melaporkan pemasangan berhasil</string>
+    <string name="installer_external_launched">Membuka %s…</string>
+    <string name="installer_external_timeout">%s tidak mengonfirmasi pemasangan. Periksa aplikasi lain dan coba lagi</string>
+    <string name="installer_external_success">%s melaporkan pemasangan berhasil</string>
     <string name="installer_unavailable_title">%s tidak tersedia</string>
     <string name="installer_unavailable_message">Pemasang yang Anda pilih (%s) saat ini tidak tersedia. Anda dapat memperbaiki masalah ini dan mencobanya lagi, atau menggunakan pemasang standar untuk menggantikannya</string>
     <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin diberikan ke aplikasi ini</string>

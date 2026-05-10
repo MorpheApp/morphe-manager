@@ -6,29 +6,19 @@ import app.morphe.manager.util.PatchSelection
  * A base class for storing [PatchBundle] metadata.
  */
 sealed class PatchBundleInfo {
-    /**
-     * The name of the bundle.
-     */
+    /** The name of the bundle. */
     abstract val name: String
 
-    /**
-     * The version of the bundle.
-     */
+    /** The version of the bundle. */
     abstract val version: String?
 
-    /**
-     * The unique ID of the bundle.
-     */
+    /** The unique ID of the bundle. */
     abstract val uid: Int
 
-    /**
-     * The state indicating whether the bundle is enabled or disabled.
-     */
+    /** The state indicating whether the bundle is enabled or disabled. */
     abstract val enabled: Boolean
 
-    /**
-     * The patch list.
-     */
+    /** The patch list. */
     abstract val patches: List<PatchInfo>
 
     /**
@@ -41,7 +31,10 @@ sealed class PatchBundleInfo {
         override val version: String?,
         override val uid: Int,
         override val enabled: Boolean,
-        override val patches: List<PatchInfo>
+        override val patches: List<PatchInfo>,
+        // Version of morphe-patcher required by this bundle, from Patcher-Version manifest attribute.
+        // Null if the bundle was built before this field was introduced
+        val patcherVersion: String? = null
     ) : PatchBundleInfo() {
         /**
          * Create a [PatchBundleInfo.Scoped] that only contains information about patches that are relevant for a specific [packageName].
@@ -92,6 +85,7 @@ sealed class PatchBundleInfo {
                 apkFileType = apkFileType,
                 displayName = displayName,
                 signatures = signaturesAcc.takeIf { it.isNotEmpty() },
+                patcherVersion = patcherVersion
             )
         }
     }
@@ -124,6 +118,7 @@ sealed class PatchBundleInfo {
         val apkFileType: app.morphe.patcher.patch.ApkFileType? = null,
         val displayName: String? = null,
         val signatures: Set<String>? = null,
+        val patcherVersion: String? = null // Propagated from Global.patcherVersion
     ) : PatchBundleInfo() {
         fun patchSequence(allowIncompatible: Boolean) = if (allowIncompatible) {
             patches.asSequence()

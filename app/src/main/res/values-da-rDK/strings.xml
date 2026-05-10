@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Ikke patchet endnu</string>
     <string name="home_no_patches_available">Ingen patches tilgængelige</string>
     <string name="home_app_hide_title">Skjul denne app?</string>
-    <string name="home_app_hide_message">Denne app bliver skjult fra hjemmeskærmen. Du kan gendanne den senere ved at bruge knappen \'%1$s\' nederst i listen</string>
+    <string name="home_app_hide_message">Denne app vil være skjult fra startskærmen. Du kan gendanne den senere fra de skjulte apps ved hjælp af knappen nederst i listen.</string>
     <string name="home_app_will_be_hidden">Denne app bliver skjult</string>
     <string name="home_app_show_hidden">Vis skjulte apps</string>
     <string name="home_app_no_hidden">Ingen skjulte apps</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Opdateringer oversprunget</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata er aktiv</string>
     <string name="home_updating_sources">Opdaterer kilder…</string>
-    <string name="home_update_progress_format">%1$s bearbejdet</string>
+    <string name="home_update_progress_format">%s behandlet</string>
     <string name="home_update_success">Opdatering af kilder fuldført</string>
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
     <string name="home_search_apps">Søg apps</string>
     <string name="home_no_apps_title">Ingen apps tilgængelige</string>
     <string name="home_no_apps_subtitle">Tilføj en patchkilde eller aktiver en eksisterende i %s</string>
-    <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alle apps er skjult</string>
     <string name="home_all_apps_hidden_subtitle">Du har skjult alle apps fra startskærmen</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Brug eksperimentelle app-versioner</string>
     <string name="sources_management_experimental_versions_toggle_description">Patch eksperimentelle app-targets, hvis de er tilgængelige</string>
     <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
+    <string name="sources_management_invalid_url">Ugyldig kilde-URL. Kontroller venligst adressen og prøv igen</string>
+    <string name="sources_management_metadata_unavailable">Metadata ikke tilgængelig</string>
+    <string name="sources_management_metadata_unavailable_hint">Den eksterne metadatafil er ikke tilgængelig. Opdatering med den installerede pakke fungerer stadig, men automatisk opdatering er deaktiveret for denne kilde</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Opdateringspakken kunne ikke hentes. Kilde-URL\'en kan være forkert, eller filen findes ikke</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnavn</string>
     <string name="sources_dialog_rename">Omdøb navnet på patchkilde</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Eksempler:</string>
     <string name="sources_dialog_local">Lokalt</string>
     <string name="sources_dialog_local_file">Vælg patch kildefil</string>
+    <string name="sources_dialog_local_file_tap_hint">Tryk for at gennemse lager</string>
     <string name="sources_dialog_local_file_description">Vælg en .mpp patch kildefil fra lagring</string>
+    <string name="sources_dialog_local_invalid_extension">Filen skal have en .mpp-udvidelse</string>
+    <string name="sources_dialog_url_valid">Gyldigt repository eller JSON-URL</string>
+    <string name="sources_dialog_url_invalid">URL\'en skal pege på et GitHub/GitLab-lager eller en .json-fil</string>
     <string name="sources_dialog_local_change_file">Ændre fil</string>
     <string name="sources_dialog_preinstalled">Forhåndsinstalleret</string>
     <string name="sources_update_success">Opdatering vellykket</string>
     <string name="sources_update_unavailable">Ingen opdatering tilgængelig</string>
     <string name="sources_download_fail">Kunne ikke hente patchkilder: %s</string>
-    <string name="sources_download_fail_named">Kunne ikke hente patchkilder: %1$s: %2$s</string>
-    <string name="sources_download_endpoint_not_found">Kunne ikke opdatere \'%1$s\': patchens JSON-fil blev ikke fundet på den konfigurerede URL</string>
+    <string name="sources_download_fail_named">’%s’ kunne ikke opdateres. Tjek din internetforbindelse og prøv igen</string>
+    <string name="sources_download_endpoint_not_found">’%s’: metadata for patch ikke fundet</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <string name="sources_patch_expert_badge_tooltip">Aktivér Eksperttilstand i Indstillinger for at inkludere denne patch manuelt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Nej, jeg har allerede en APK</string>
     <string name="home_apk_use_saved_with_version">Brug gemt APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning kræver at du vælger APK-filen igen</string>
-    <string name="home_version_requires_android">Kræver Android %1$s+</string>
+    <string name="home_version_requires_android">Kræver Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ikke understøttet på denne enhed</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har ingen understøttede versioner til Android %2$d (API %3$d). Alle erklærede versioner kræver en højere Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download den originale APK</string>
     <string name="home_download_instructions_steps_title">Instruktioner:</string>
-    <string name="home_download_instructions_step1">Tryk på \'%1$s\' knappen nedenfor</string>
+    <string name="home_download_instructions_step1">Tryk på \'%s\' knappen nedenfor</string>
     <string name="home_download_instructions_step2_part1">Rul ned på websiden og tryk</string>
     <string name="home_download_instructions_download_button_toast">Tryk på download på hjemmesiden, og ikke her 😊</string>
     <string name="home_download_instructions_step3">Vent på at downloaden er færdig, og &lt;b&gt;installer ikke&lt;/b&gt; APK\'en</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Fortsæt til APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Vælg den downloadede APK</string>
-    <string name="home_file_picker_prompt_description">Vælg det &lt;b&gt;%1$s&lt;/b&gt; APK-fil du lige har downloadet</string>
+    <string name="home_file_picker_prompt_description">Vælg det &lt;b&gt;%s&lt;/b&gt; APK-fil du lige har downloadet</string>
     <string name="home_file_picker_prompt_open_apk">Åbn APK-fil</string>
     <string name="home_recommended_version">Anbefalet version</string>
     <string name="home_selected_version">Valgt version</string>
@@ -260,6 +268,9 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patcher_ready_to_install_subtitle">Tryk på knappen nedenfor for at installere</string>
     <string name="patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
     <string name="patcher_storage_permission_dialog_title">Kan ikke tilgå lagringssti</string>
+    <string name="patcher_incompatible_patcher_title">Opdatering påkrævet</string>
+    <string name="patcher_incompatible_patcher_description">Bundtet &lt;b&gt;%1$s&lt;/b&gt; kræver patcher version &lt;b&gt;%2$s&lt;/b&gt; eller nyere. Opdater venligst Morphe for at patche denne app</string>
+    <string name="patcher_incompatible_patcher_update_button">Download og opdater Morphe</string>
     <string name="patcher_storage_permission_description_api30">En eller flere patchtilvalg peger på stier, som Morphe ikke kan læse. Giv adgang til lager og tryk på knappen, så vil patching starte automatisk</string>
     <string name="patcher_storage_permission_description_legacy">En eller flere patchtilvalg peger på stier, som ikke kan tilgås. Opdater stierne i patchtilvalg og prøv igen</string>
     <string name="patcher_storage_permission_grant">Tillad lagringstilladelse</string>
@@ -317,7 +328,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patched_app_saved_toast">Patchet app gemt til senere</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patchet app</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
-    <string name="patcher_process_exit_message">Patcher-processen lukkede med koden %1$s</string>
+    <string name="patcher_process_exit_message">Patcher-processen lukkede med koden %s</string>
     <string name="install_app_success">Installeret succesfuldt</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
     <string name="save_apk_success">APK gemt</string>
@@ -375,7 +386,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="settings_appearance_app_icon_dark_2">Tomrum</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ændre appikon? </string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Ændre til \'%1$s\' og start forfra? </string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Skift til &lt;b&gt;%s&lt;/b&gt; og genstart?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ændre ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdateringer</string>
@@ -397,7 +408,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe-opdatering tilgængelig</string>
     <string name="notification_bundle_update_title">Nye patches tilgængelige</string>
-    <string name="notification_update_text">Version %1$s er klar til download</string>
+    <string name="notification_update_text">Version %s er klar til download</string>
     <string name="notification_bundle_update_text_unversioned">Tryk for at åbne Morphe og opdatere</string>
     <string name="notification_permission_dialog_title">Tillad notifikationer</string>
     <string name="notification_permission_dialog_description">Morphe skal bruge notifikationstilladelse for at advare dig når opdateringer er tilgængelige i baggrunden</string>
@@ -533,9 +544,9 @@ Størrelsesformatet skal være som følger:
     <string name="installer_action_open_shizuku">Åbn Shizuku</string>
     <string name="installer_hint_generic">Installationen mislykkedes. Prøv igen eller skift til en anden installer</string>
     <string name="installer_hint_conflict">En anden app med dette pakkenavn er allerede installeret. Fjern den før du fortsætter</string>
-    <string name="installer_external_launched">Åbner %1$s…</string>
-    <string name="installer_external_timeout">%1$s bekræftede ikke installationen. Tjek den anden app og prøv igen</string>
-    <string name="installer_external_success">%1$s meldte om en succesfuld installation</string>
+    <string name="installer_external_launched">Åbner %s…</string>
+    <string name="installer_external_timeout">%s bekræftede ikke installationen. Tjek den anden app og prøv igen</string>
+    <string name="installer_external_success">%s meldte om en succesfuld installation</string>
     <string name="installer_unavailable_title">%s utilgængelig</string>
     <string name="installer_unavailable_message">Din foretrukne installer (%s) er i øjeblikket utilgængelig. Du kan løse problemet og prøve igen, eller bruge standardinstalleren i stedet</string>
     <string name="installer_unavailable_shizuku_hint">Sørg for at Shizuku kører og at tilladelse er givet til denne app</string>

@@ -5,6 +5,7 @@
 
 package app.morphe.manager.util
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -44,6 +45,7 @@ class UpdateNotificationManager(private val context: Context) {
         // FCM channel uses IMPORTANCE_HIGH so the notification shows as a heads-up
         // and wakes the screen. FCM with "priority: high" delivers the message even
         // in Doze mode via Google Play Services; IMPORTANCE_HIGH makes it visible.
+        @SuppressLint("WrongConstant")
         val fcmChannel = NotificationChannel(
             CHANNEL_FCM_UPDATES,
             context.getString(R.string.notification_channel_fcm_updates),
@@ -119,6 +121,7 @@ class UpdateNotificationManager(private val context: Context) {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra(EXTRA_TRIGGER_UPDATE_CHECK, true)
         }
+        @SuppressLint("WrongConstant")
         return PendingIntent.getActivity(
             context,
             REQUEST_CODE_UPDATE_CHECK,

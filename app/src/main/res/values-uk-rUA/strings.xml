@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Ще не патчено</string>
     <string name="home_no_patches_available">Немає доступних патчів</string>
     <string name="home_app_hide_title">Приховати цей застосунок?</string>
-    <string name="home_app_hide_message">Цей застосунок буде приховано з головного екрану. Ви можете відновити його пізніше, використовуючи кнопку \'%1$s\' внизу списку</string>
+    <string name="home_app_hide_message">Цей застосунок буде приховано з головного екрану. Ви можете відновити його пізніше, використовуючи кнопку \"\" внизу списку</string>
     <string name="home_app_will_be_hidden">Цей застосунок буде приховано</string>
     <string name="home_app_show_hidden">Показати приховані застосунки</string>
     <string name="home_app_no_hidden">Немає прихованих застосунків</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Оновлення пропущено</string>
     <string name="home_update_skipped_metered_subtitle">Мобільна мережа активна</string>
     <string name="home_updating_sources">Оновлення джерел…</string>
-    <string name="home_update_progress_format">%1$s оброблено</string>
+    <string name="home_update_progress_format">%s оброблено</string>
     <string name="home_update_success">Оновлення джерел завершено</string>
     <string name="home_update_success_subtitle">Ваші джерела актуальні</string>
     <string name="home_sources_are_loading">Джерела завантажуються, будь ласка, зачекайте…</string>
     <string name="home_search_apps">Пошук застосунків</string>
     <string name="home_no_apps_title">Немає доступних застосунків</string>
     <string name="home_no_apps_subtitle">Додайте джерело патчів або ввімкніть існуюче в %s</string>
-    <string name="home_no_apps_search_subtitle">Не знайдено застосунків за запитом \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Не знайдено застосунків за запитом \"%s\"</string>
     <string name="home_all_apps_hidden_title">Усі застосунки приховані</string>
     <string name="home_all_apps_hidden_subtitle">Ви приховали всі застосунки з головного екрану</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Експериментальні версії застосунків</string>
     <string name="sources_management_experimental_versions_toggle_description">Застосувати патчі до експериментальних версій застосунків, якщо вони доступні</string>
     <string name="sources_management_already_exists">Це джерело вже додано</string>
+    <string name="sources_management_invalid_url">Недійсна URL-адреса джерела. Перевірте адресу та спробуйте ще раз</string>
+    <string name="sources_management_metadata_unavailable">Метадані недоступні</string>
+    <string name="sources_management_metadata_unavailable_hint">Віддалений файл метаданих недоступний. Патчінг з встановленим джерелом все ще працює, але автоматичне оновлення цього джерела недоступне</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Не вдалося завантажити пакет патчів. Можливо, URL-адреса джерела неправильна або файл не існує</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Приклади:</string>
     <string name="sources_dialog_local">Локальне</string>
     <string name="sources_dialog_local_file">Виберіть файл джерела патчів</string>
+    <string name="sources_dialog_local_file_tap_hint">Торкніться, щоб переглянути сховище</string>
     <string name="sources_dialog_local_file_description">Виберіть файл джерела патчів .mpp зі сховища</string>
+    <string name="sources_dialog_local_invalid_extension">Файл повинен мати розширення .mpp</string>
+    <string name="sources_dialog_url_valid">Дійсне посилання на репозиторій або JSON-файл</string>
+    <string name="sources_dialog_url_invalid">URL має вказувати на репозиторій GitHub/GitLab або .json файл</string>
     <string name="sources_dialog_local_change_file">Змінити файл</string>
     <string name="sources_dialog_preinstalled">Вбудоване</string>
     <string name="sources_update_success">Оновлення успішне</string>
     <string name="sources_update_unavailable">Оновлення недоступне</string>
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
-    <string name="sources_download_fail_named">Помилка завантаження \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Не вдалося оновити \'%1$s\': файл JSON патчів не знайдено за налаштованою URL-адресою</string>
+    <string name="sources_download_fail_named">\"%s\" не вдалося оновити. Перевірте підключення до Інтернету та спробуйте ще раз</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": не знайдено метадані патчу</string>
     <string name="sources_patch_expert_badge">Експерт</string>
     <string name="sources_patch_expert_badge_tooltip">Увімкніть Режим експерта в Налаштуваннях, щоб додати цей патч вручну</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Ні, я вже маю APK</string>
     <string name="home_apk_use_saved_with_version">Збережений APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Немає збереженого APK файлу. Для патчінгу потрібно буде знову вибрати APK файл</string>
-    <string name="home_version_requires_android">Потрібен Android %1$s+</string>
+    <string name="home_version_requires_android">Потрібен Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не підтримується на цьому пристрої</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; не має підтримуваних версій для Android %2$d (API %3$d). Усі заявлені версії вимагають вищу версію Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Завантажити оригінальний APK файл</string>
     <string name="home_download_instructions_steps_title">Інструкції:</string>
-    <string name="home_download_instructions_step1">Натисніть кнопку \'%1$s\' нижче.</string>
+    <string name="home_download_instructions_step1">Натисніть кнопку \'%s\' нижче</string>
     <string name="home_download_instructions_step2_part1">Прокрутіть вниз і натисніть</string>
     <string name="home_download_instructions_download_button_toast">Натисніть завантажити на сайті, а не тут 😊</string>
     <string name="home_download_instructions_step3">Дочекайтеся завершення завантаження та &lt;b&gt;не встановлюйте&lt;/b&gt; APK файл</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Перейти на APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Вибрати завантажений APK файл</string>
-    <string name="home_file_picker_prompt_description">Виберіть APK файл &lt;b&gt;%1$s&lt;/b&gt;, який ви щойно завантажили</string>
+    <string name="home_file_picker_prompt_description">Виберіть APK файл &lt;b&gt;%s&lt;/b&gt;, який ви щойно завантажили</string>
     <string name="home_file_picker_prompt_open_apk">Відкрийте APK файл</string>
     <string name="home_recommended_version">Рекомендована версія</string>
     <string name="home_selected_version">Вибрана версія</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">Натисніть кнопку нижче, щоб встановити</string>
     <string name="patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
     <string name="patcher_storage_permission_dialog_title">Не вдається отримати доступ до шляху зберігання</string>
+    <string name="patcher_incompatible_patcher_title">Потрібне оновлення</string>
+    <string name="patcher_incompatible_patcher_description">Для джерела &lt;b&gt;%1$s&lt;/b&gt; потрібен патчер версії &lt;b&gt;%2$s&lt;/b&gt; або новіший. Будь ласка, оновіть Morphe, щоб пропатчити цей застосунок</string>
+    <string name="patcher_incompatible_patcher_update_button">Завантажити та оновити Morphe</string>
     <string name="patcher_storage_permission_description_api30">Один або декілька параметрів патчів вказують на шляхи, які Morphe не може прочитати. Надайте доступ до сховища та натисніть кнопку, після чого патчінг розпочнеться автоматично</string>
     <string name="patcher_storage_permission_description_legacy">Одна або декілька опцій патчу вказують на шляхи, до яких немає доступу. Оновіть шляхи в опціях патчу та спробуйте знову</string>
     <string name="patcher_storage_permission_grant">Надати доступ до сховища</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">Патчений застосунок збережено для подальшого використання</string>
     <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений застосунок</string>
     <string name="plugin_activity_dialog_body">Для продовження потрібна взаємодія користувача з цим плагіном</string>
-    <string name="patcher_process_exit_message">Процес патчера завершився з кодом %1$s</string>
+    <string name="patcher_process_exit_message">Процес патчера завершився з кодом %s</string>
     <string name="install_app_success">Встановлено успішно</string>
     <string name="install_app_fail">Неможливо встановити застосунок: %s</string>
     <string name="save_apk_success">APK файл збережено</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">Порожнеча</string>
     <string name="settings_appearance_app_icon_dark_3">Індіго</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Змінити іконку застосунку?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Змінити на \"%1$s\" і перезапустити?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Змінити на &lt;b&gt;%s&lt;/b&gt; і перезапустити?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Змінити іконку</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Оновлення</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">Доступне оновлення Morphe</string>
     <string name="notification_bundle_update_title">Доступні нові патчі</string>
-    <string name="notification_update_text">Версія %1$s готова до завантаження</string>
+    <string name="notification_update_text">Версія %s готова до завантаження</string>
     <string name="notification_bundle_update_text_unversioned">Натисніть, щоб відкрити Morphe та оновити</string>
     <string name="notification_permission_dialog_title">Дозволити сповіщення</string>
     <string name="notification_permission_dialog_description">Morphe потребує дозволу на сповіщення, щоб повідомляти вас про доступні оновлення у фоновому режимі</string>
@@ -533,9 +544,9 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Відкрити Shizuku</string>
     <string name="installer_hint_generic">Не вдалося встановити. Спробуйте ще раз або перемкніть на інший інсталятор</string>
     <string name="installer_hint_conflict">Інший застосунок із цим іменем пакета вже встановлений. Видаліть його, перш ніж продовжити</string>
-    <string name="installer_external_launched">Відкривається %1$s…</string>
-    <string name="installer_external_timeout">%1$s не підтвердив встановлення. Перевірте інший застосунок і спробуйте знову</string>
-    <string name="installer_external_success">%1$s повідомив про успішне встановлення</string>
+    <string name="installer_external_launched">Відкривається %s…</string>
+    <string name="installer_external_timeout">%s не підтвердив встановлення. Перевірте інший застосунок і спробуйте знову</string>
+    <string name="installer_external_success">%s повідомив про успішне встановлення</string>
     <string name="installer_unavailable_title">%s недоступний</string>
     <string name="installer_unavailable_message">Ваш бажаний інсталятор (%s) наразі недоступний. Ви можете виправити проблему та повторити спробу або скористатися стандартним інсталятором</string>
     <string name="installer_unavailable_shizuku_hint">Переконайтеся, що Shizuku запущено, і менеджеру Морфе надано дозвіл</string>

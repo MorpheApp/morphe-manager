@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Gan paisteáil fós</string>
     <string name="home_no_patches_available">Níl aon phaistí ar fáil</string>
     <string name="home_app_hide_title">An bhfuil tú ag iarraidh an aip seo a cheilt?</string>
-    <string name="home_app_hide_message">Beidh an aip seo i bhfolach ón scáileán baile. Is féidir leat í a athchóiriú níos déanaí trí úsáid a bhaint as an gcnaipe \'%1$s\' ag bun an liosta.</string>
+    <string name="home_app_hide_message">Beidh an aip seo i bhfolach ón scáileán baile. Is féidir leat é a chur ar ais níos déanaí ó na apps i bhfolach ag baint úsáide as an gcnaipe ag bun an liosta</string>
     <string name="home_app_will_be_hidden">Beidh an aip seo i bhfolach</string>
     <string name="home_app_show_hidden">Taispeáin aipeanna i bhfolach</string>
     <string name="home_app_no_hidden">Gan aon aipeanna i bhfolach</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Nuashonruithe scipeáilte</string>
     <string name="home_update_skipped_metered_subtitle">Tá sonraí soghluaiste gníomhach</string>
     <string name="home_updating_sources">Ag nuashonrú na foinsí…</string>
-    <string name="home_update_progress_format">%1$s próiseáilte</string>
+    <string name="home_update_progress_format">%s próiseáilte</string>
     <string name="home_update_success">Foinsí nuashonraithe críochnaithe</string>
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
     <string name="home_search_apps">Cuardaigh aipeanna</string>
     <string name="home_no_apps_title">Níl aon aipeanna ar fáil</string>
     <string name="home_no_apps_subtitle">Cuir foinse paiste leis nó cumasaigh ceann atá ann cheana féin i %s</string>
-    <string name="home_no_apps_search_subtitle">Níl aon aipeanna a mheaitseálann \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Níl aon aip ag teacht le \"%s\"</string>
     <string name="home_all_apps_hidden_title">Tá gach aipeanna i bhfolach</string>
     <string name="home_all_apps_hidden_subtitle">Tá na haipeanna go léir i bhfolach agat ón scáileán baile</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Úsáid leaganacha turgnamhacha d’aipeanna</string>
     <string name="sources_management_experimental_versions_toggle_description">Paiste spriocanna aipeanna turgnamhacha más féidir</string>
     <string name="sources_management_already_exists">Tá an fhoinse seo curtha leis cheana féin</string>
+    <string name="sources_management_invalid_url">URL foinse neamhbhailí. Seiceáil an seoladh agus bain triail eile as</string>
+    <string name="sources_management_metadata_unavailable">Meiteashonraí N/B</string>
+    <string name="sources_management_metadata_unavailable_hint">Níl an cianchomhad meiteashonraí ar fáil. Oibríonn paistí leis an mbeart suiteáilte fós, ach tá uath-nuashonrú díchumasaithe don fhoinse seo</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Níorbh fhéidir an pacáiste paiste a íoslódáil. B’fhéidir go bhfuil an URL foinse mícheart nó nach bhfuil an comhad ann.</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ainm taispeána</string>
     <string name="sources_dialog_rename">Athainmnigh foinse an phaiste</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Samplaí:</string>
     <string name="sources_dialog_local">Áitiúil</string>
     <string name="sources_dialog_local_file">Roghnaigh comhad foinse paiste</string>
+    <string name="sources_dialog_local_file_tap_hint">Tapáil chun brabhsáil a dhéanamh ar an stóras</string>
     <string name="sources_dialog_local_file_description">Roghnaigh comhad foinse paiste .mpp ón stóras</string>
+    <string name="sources_dialog_local_invalid_extension">Ní mór síneadh .mpp a bheith ar an gcomhad</string>
+    <string name="sources_dialog_url_valid">URL bailí stórais nó JSON</string>
+    <string name="sources_dialog_url_invalid">Ní mór don URL pointeáil chuig stór GitHub nó comhad .json</string>
     <string name="sources_dialog_local_change_file">Athraigh comhad</string>
     <string name="sources_dialog_preinstalled">Réamhshuiteáilte</string>
     <string name="sources_update_success">Nuashonrú rathúil</string>
     <string name="sources_update_unavailable">Níl aon nuashonrú ar fáil</string>
     <string name="sources_download_fail">Theip ar an pacáiste a íoslódáil: %s</string>
-    <string name="sources_download_fail_named">Theip ar an íoslódáil \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Níorbh fhéidir \'%1$s\' a nuashonrú: níor aimsíodh an comhad paiste JSON ag an URL cumraithe</string>
+    <string name="sources_download_fail_named">Níorbh fhéidir \'%s\' a nuashonrú. Seiceáil do nasc idirlín agus déan iarracht eile.</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': meiteashonraí paiste gan aimsiú</string>
     <string name="sources_patch_expert_badge">Saineolaí</string>
     <string name="sources_patch_expert_badge_tooltip">Cumasaigh mód saineolaithe sna Socruithe chun an paiste seo a chur san áireamh de láimh</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Níl, tá APK agam cheana féin</string>
     <string name="home_apk_use_saved_with_version">Úsáid an APK sábháilte (v%s)</string>
     <string name="home_app_info_no_saved_apk">Níl aon APK sábháilte. Beidh ort an comhad APK a roghnú arís le haghaidh paisteála.</string>
-    <string name="home_version_requires_android">Éilíonn sé Android %1$s+</string>
+    <string name="home_version_requires_android">Éilíonn Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ní thacaítear leis ar an ngléas seo</string>
     <string name="home_apk_no_compatible_versions_message">Níl aon leaganacha tacaithe ag &lt;b&gt;%1$s&lt;/b&gt; le haghaidh Android %2$d (API %3$d). Éilíonn gach leagan dearbhaithe leagan níos airde de Android.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Íoslódáil an APK bunaidh</string>
     <string name="home_download_instructions_steps_title">Treoracha:</string>
-    <string name="home_download_instructions_step1">Brúigh an cnaipe \'%1$s\' thíos</string>
+    <string name="home_download_instructions_step1">Brúigh an cnaipe \'%s\' thíos</string>
     <string name="home_download_instructions_step2_part1">Scrollaigh síos an leathanach gréasáin agus brúigh</string>
     <string name="home_download_instructions_download_button_toast">Brúigh íoslódáil ar an suíomh gréasáin, agus ní anseo 😊</string>
     <string name="home_download_instructions_step3">Fan go mbíonn an íoslódáil críochnaithe, agus &lt;b&gt;ná suiteáil&lt;/b&gt; an APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Lean ar aghaidh go APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Roghnaigh APK íoslódáilte</string>
-    <string name="home_file_picker_prompt_description">Roghnaigh an comhad &lt;b&gt;%1$s&lt;/b&gt; APK a d’íoslódálais tú díreach</string>
+    <string name="home_file_picker_prompt_description">Roghnaigh an comhad &lt;b&gt;%s&lt;/b&gt; APK a d’íoslódálais tú díreach</string>
     <string name="home_file_picker_prompt_open_apk">Seol file APK</string>
     <string name="home_recommended_version">Leagan molta</string>
     <string name="home_selected_version">Leagan roghnaithe</string>
@@ -168,7 +176,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_low_disk_space_dialog_title">Spás diosca íseal</string>
     <string name="home_low_disk_space_dialog_message">Níl ach %1$.2f GB de spás saor in aisce ar fáil. Éilíonn paisteáil ar a laghad %2$.2f GB de spás saor in aisce le go n-oibreoidh sé i gceart.</string>
     <string name="home_low_disk_space_dialog_warning">D’fhéadfadh earráid \"comhad gan aimsiú\" nó APK aschuir truaillithe a bheith mar thoradh ar dhul ar aghaidh.</string>
-    <string name="home_simple_bundle_select_title">Roghnaigh comhad foinse paiste</string>
+    <string name="home_simple_bundle_select_title">Roghnaigh foinse paiste</string>
     <!-- Patch Options -->
     <string name="custom_color">Dath saincheaptha</string>
     <string name="hex_color">Dath heicsidheachúlach</string>
@@ -260,6 +268,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="patcher_ready_to_install_subtitle">Brúigh an cnaipe thíos chun é a shuiteáil</string>
     <string name="patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
     <string name="patcher_storage_permission_dialog_title">Ní féidir rochtain a fháil ar an gcosán stórála</string>
+    <string name="patcher_incompatible_patcher_title">Nuashonrú ag teastáil</string>
+    <string name="patcher_incompatible_patcher_description">Éilíonn an pacáiste &lt;b&gt;%1$s&lt;/b&gt; leagan paisteora &lt;b&gt;%2$s&lt;/b&gt; nó níos nuaí. Nuashonraigh Morphe le do thoil chun an aip seo a phaisteáil.</string>
+    <string name="patcher_incompatible_patcher_update_button">Íoslódáil agus nuashonraigh Morphe</string>
     <string name="patcher_storage_permission_description_api30">Léiríonn rogha paiste amháin nó níos mó cosáin nach féidir le Morphe a léamh. Deonaigh rochtain stórála agus tapáil an cnaipe ansin tosóidh an paisteáil go huathoibríoch.</string>
     <string name="patcher_storage_permission_description_legacy">Léiríonn rogha paiste amháin nó níos mó cosáin nach féidir rochtain a fháil orthu. Nuashonraigh na cosáin sna roghanna paiste agus déan iarracht arís.</string>
     <string name="patcher_storage_permission_grant">Deonaigh cead stórála</string>
@@ -317,7 +328,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="patched_app_saved_toast">Comhadaithe aip sábháilte le haghaidh níos déanaí</string>
     <string name="patched_app_save_failed_toast">Theip ar aip chomhfhiosach a shábháil</string>
     <string name="plugin_activity_dialog_body">Tá idirghníomhaíocht úsáideora ag teastáil chun dul ar aghaidh leis an mbreiseán seo</string>
-    <string name="patcher_process_exit_message">Cuireadh deireadh leis an bpróiseas paisteála le cód %1$s</string>
+    <string name="patcher_process_exit_message">Próiseas paisteála scoirthe leis an gcód %s</string>
     <string name="install_app_success">Suiteáilte go rathúil</string>
     <string name="install_app_fail">Theip ar aip a shuiteáil: %s</string>
     <string name="save_apk_success">APK Sábháilte</string>
@@ -375,7 +386,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="settings_appearance_app_icon_dark_2">Neamhní</string>
     <string name="settings_appearance_app_icon_dark_3">Indeagó</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Deilbhín an aip a athrú?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Athraigh go \'%1$s\' agus atosú?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Athraigh go &lt;b&gt;%s&lt;/b&gt; agus atosú?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Athraigh deilbhín</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nuashonruithe</string>
@@ -397,7 +408,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <!-- Notification content -->
     <string name="notification_manager_update_title">Nuashonrú Morphe ar fáil</string>
     <string name="notification_bundle_update_title">Paistí nua ar fáil</string>
-    <string name="notification_update_text">Tá leagan %1$s réidh le híoslódáil</string>
+    <string name="notification_update_text">Tá leagan %s réidh le híoslódáil</string>
     <string name="notification_bundle_update_text_unversioned">Tapáil chun Morphe a oscailt agus a nuashonrú</string>
     <string name="notification_permission_dialog_title">Ceadaigh fógraí</string>
     <string name="notification_permission_dialog_description">Teastaíonn cead fógra ó Morphe chun foláireamh a thabhairt duit nuair a bhíonn nuashonruithe ar fáil sa chúlra</string>
@@ -531,9 +542,9 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
     <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile</string>
     <string name="installer_hint_conflict">Tá aip eile leis an ainm pacáiste seo suiteáilte cheana féin. Díchumasaigh é sula leanann tú ar aghaidh</string>
-    <string name="installer_external_launched">Ag oscailt %1$s…</string>
-    <string name="installer_external_timeout">%1$s ní chugainn an instealladh. Glaoigh ar an gcló eile agus tairgfidh tú arís</string>
-    <string name="installer_external_success">Thuairisc %1$s suiteáil rathúil</string>
+    <string name="installer_external_launched">Ag oscailt %s…</string>
+    <string name="installer_external_timeout">Níor dheimhnigh %s an suiteáil. Seiceáil an aip eile agus déan iarracht arís.</string>
+    <string name="installer_external_success">Thuairisc %s suiteáil rathúil</string>
     <string name="installer_unavailable_title">Níl %s ar fáil</string>
     <string name="installer_unavailable_message">Níl an suiteálaí is fearr leat (%s) ar fáil faoi láthair. Is féidir leat an fhadhb a réiteach agus iarracht eile a dhéanamh, nó an suiteálaí caighdeánach a úsáid ina ionad</string>
     <string name="installer_unavailable_shizuku_hint">Cinntigh go bhfuil Shizuku ag rith agus go bhfuil cead tugtha don aip seo</string>

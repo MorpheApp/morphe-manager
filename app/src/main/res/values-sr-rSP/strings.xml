@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Još није исправљено</string>
     <string name="home_no_patches_available">Нema печева доступно</string>
     <string name="home_app_hide_title">Sakrij ovu aplikaciju?</string>
-    <string name="home_app_hide_message">Ova aplikacija će biti sakrivena sa početnog ekrana. Možete je kasnije vratiti koristeći dugme \'%1$s\' na dnu liste.</string>
+    <string name="home_app_hide_message">Ова апликација ће бити сакривена са почетног екрана. Можете је касније вратити из скривених апликација помоћу дугмета на дну листе.</string>
     <string name="home_app_will_be_hidden">Ova aplikacija će biti sakrivena</string>
     <string name="home_app_show_hidden">Prikaži skrivene aplikacije</string>
     <string name="home_app_no_hidden">Nema skrivених aplikacija</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Пропуштено ажурирања</string>
     <string name="home_update_skipped_metered_subtitle">Мобилни подаци су активни</string>
     <string name="home_updating_sources">Ажурирање извора…</string>
-    <string name="home_update_progress_format">%1$s обрађено</string>
+    <string name="home_update_progress_format">Обрађено %s</string>
     <string name="home_update_success">Ажурирање извора завршено</string>
     <string name="home_update_success_subtitle">Ваши извори су ажурни</string>
     <string name="home_sources_are_loading">Извори се учитавају, молимо сачекајте…</string>
     <string name="home_search_apps">Претрага апликација</string>
     <string name="home_no_apps_title">Нисe доступни апликације</string>
     <string name="home_no_apps_subtitle">Додај извор пача или омогући постојећи у %s</string>
-    <string name="home_no_apps_search_subtitle">Нисe пронађени апликације које одговарају \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Нема апликација које одговарају на \"%s\"</string>
     <string name="home_all_apps_hidden_title">Све апликације су скривене</string>
     <string name="home_all_apps_hidden_subtitle">Скрио/Скриле сте све апликације са почетног екрана</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Користите експерименталне верзије апликација</string>
     <string name="sources_management_experimental_versions_toggle_description">Исправите експерименталне циљеве апликација ако су доступни</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
+    <string name="sources_management_invalid_url">Невалидна УРЛ адреса извора. Молимо проверите адресу и покушајте поново</string>
+    <string name="sources_management_metadata_unavailable">Метаподаци нису доступни</string>
+    <string name="sources_management_metadata_unavailable_hint">Датотека метаподатка са удаљеног извора није доступна. Поправка са инсталираним пакетом и даље функционише, али аутоматска ажурирања су искључена за овај извор</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Пакест за поправку није могао да се преузме. УРЛ адреса извора може бити неисправна или датотека не постоји</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назив за приказ</string>
     <string name="sources_dialog_rename">Преименујте изворни извор</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Примери:</string>
     <string name="sources_dialog_local">Локални</string>
     <string name="sources_dialog_local_file">Одаберите фајл извора</string>
+    <string name="sources_dialog_local_file_tap_hint">Додирните за прегледање складишта</string>
     <string name="sources_dialog_local_file_description">Одаберите .mpp фајл извора са складишта</string>
+    <string name="sources_dialog_local_invalid_extension">Датотека мора имати .mpp екстензију</string>
+    <string name="sources_dialog_url_valid">Важећи репозиторијум или JSON URL</string>
+    <string name="sources_dialog_url_invalid">УРЛ мора да указује на GitHub/GitLab репозиторијум или .json датотеку</string>
     <string name="sources_dialog_local_change_file">Промени фајл</string>
     <string name="sources_dialog_preinstalled">Предпостављени</string>
     <string name="sources_update_success">Успешно ажурирано</string>
     <string name="sources_update_unavailable">Нema ажурирање</string>
     <string name="sources_download_fail">Неуспешно преузимање извора: %s</string>
-    <string name="sources_download_fail_named">Није успело преузимање \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Није могуће ажурирати \'%1$s\': пре-издавачки JSON фајл није пронађен на конфигурисаном URL-ју</string>
+    <string name="sources_download_fail_named">\"%s\" није могло да се ажурира. Проверите интернет везу и покушајте поново</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": метаподаци за закрпу нису пронађени</string>
     <string name="sources_patch_expert_badge">Експерт</string>
     <string name="sources_patch_expert_badge_tooltip">Омогућите Експерт режим у Подешавањима да бисте ручно укључили ову исправку</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Ne, već imam APK</string>
     <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nema saćuvanog APK-a. Patching zahtijeva ponovno odabir APK datoteke</string>
-    <string name="home_version_requires_android">Захтева Android %1$s+</string>
+    <string name="home_version_requires_android">Захтева Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Није подржано на овом уређају</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; нема подржаних верзија за Android %2$d (API %3$d). Све декларисане верзије захтевају вишу верзију Android-а</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Преузмите оригинални APK</string>
     <string name="home_download_instructions_steps_title">Упутства:</string>
-    <string name="home_download_instructions_step1">Кликните на дугме „%1$s” испод</string>
+    <string name="home_download_instructions_step1">Кликните на дугме „%s” испод</string>
     <string name="home_download_instructions_step2_part1">Скролујте низ веб-страницу и притисните</string>
     <string name="home_download_instructions_download_button_toast">Притисните преузимање на веб-сајту, а не овде 😊</string>
     <string name="home_download_instructions_step3">Сачекајте да преузимање буде завршено, и &lt;b&gt;не инсталирајте&lt;/b&gt; APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Настави на APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Odaberite preuzete APK</string>
-    <string name="home_file_picker_prompt_description">Изаберите &lt;b&gt;%1$s&lt;/b&gt; APK фајл који сте управо преузели</string>
+    <string name="home_file_picker_prompt_description">Изаберите &lt;b&gt;%s&lt;/b&gt; APK фајл који сте управо преузели</string>
     <string name="home_file_picker_prompt_open_apk">Отворите APK фајл</string>
     <string name="home_recommended_version">Препоручена верзија</string>
     <string name="home_selected_version">Одабрана верзија</string>
@@ -259,6 +267,9 @@
     <string name="patcher_ready_to_install_subtitle">Притисните дугме испод за инсталирање</string>
     <string name="patcher_ready_to_mount_subtitle">Притисните дугме испод за монтирање</string>
     <string name="patcher_storage_permission_dialog_title">Не могу приступити до пута складиштења</string>
+    <string name="patcher_incompatible_patcher_title">Захтевано је ажурирање</string>
+    <string name="patcher_incompatible_patcher_description">Пакетић &lt;b&gt;%1$s&lt;/b&gt; захтева верзију закрпе &lt;b&gt;%2$s&lt;/b&gt; или новију. Молимо вас да ажурирате Morphe како бисте применили ову апликацију</string>
+    <string name="patcher_incompatible_patcher_update_button">Преузми и ажурирај Morphe</string>
     <string name="patcher_storage_permission_description_api30">Једна или више опција исправки указују на путеве које Morphe не може да чита. Доделите дозволу за складиште и додирните дугме, а затим ће почети аутоматско отклањање грешака</string>
     <string name="patcher_storage_permission_description_legacy">Један или више опција пачања указују на путеве које не могу да се приступе. Ажурирајте путеве у опцијама пачања и покушајте поново</string>
     <string name="patcher_storage_permission_grant">Дозволите приступ складишту</string>
@@ -316,7 +327,7 @@
     <string name="patched_app_saved_toast">Крпељом потписана апликација сачувана за касније</string>
     <string name="patched_app_save_failed_toast">Није успело чување крпељом потписане апликације</string>
     <string name="plugin_activity_dialog_body">Неопходна је корисничка интеракција да бисте наставили са овом додатком.</string>
-    <string name="patcher_process_exit_message">Процес пачера изашао са кодом %1$s</string>
+    <string name="patcher_process_exit_message">Процес закрпе је завршен са кодом %s</string>
     <string name="install_app_success">Успешно инсталирано</string>
     <string name="install_app_fail">Није успело инсталирање апликације: %s</string>
     <string name="save_apk_success">АПК је сачуван</string>
@@ -374,7 +385,7 @@
     <string name="settings_appearance_app_icon_dark_2">Празност</string>
     <string name="settings_appearance_app_icon_dark_3">Индиго</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Променити икону</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Променити у %1$s и поново покренути?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Промените у &lt;b&gt;%s&lt;/b&gt; и поново покрените?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Променити икону</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ажурирања</string>
@@ -396,7 +407,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">Доступно ажурирање Morphe-а</string>
     <string name="notification_bundle_update_title">Доступна су нова патчеа</string>
-    <string name="notification_update_text">Верзија %1$s је спремна за преузимање</string>
+    <string name="notification_update_text">Верзија %s је спремна за преузимање</string>
     <string name="notification_bundle_update_text_unversioned">Додирните да бисте отворили Morphe и ажурирали</string>
     <string name="notification_permission_dialog_title">Дозволи обавештења</string>
     <string name="notification_permission_dialog_description">Morphe треба дозволу за обавештавања да вас упозори када су доступна ажурирања у позадини</string>
@@ -532,9 +543,9 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Отвори Схизуку</string>
     <string name="installer_hint_generic">Инсталација је неуспела. Покушајте поново или пребаците на други инсталатор.</string>
     <string name="installer_hint_conflict">Друга апликација са истим именом пакета је већ инсталирана. Деинсталирајте је пре наставка.</string>
-    <string name="installer_external_launched">Отварање %1$s…</string>
-    <string name="installer_external_timeout">%1$s није потврдио инсталацију. Проверите другу апликацију и покушајте поново.</string>
-    <string name="installer_external_success">%1$s известио је о успешној инсталацији.</string>
+    <string name="installer_external_launched">Отварање %s…</string>
+    <string name="installer_external_timeout">%s није потврдио инсталацију. Проверите другу апликацију и покушајте поново</string>
+    <string name="installer_external_success">%s је пријавио успешну инсталацију</string>
     <string name="installer_unavailable_title">%s није доступно</string>
     <string name="installer_unavailable_message">Ваш главни инсталатор (%s) тренутно није доступан. Можете решити проблем и покушати поново или користити стандардни инсталатор уместо тога.</string>
     <string name="installer_unavailable_shizuku_hint">Уверите се да је Шизуку покренут и дозвола је дата овој апликацији.</string>

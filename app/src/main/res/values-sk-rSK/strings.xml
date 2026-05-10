@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Zatiaľ nezaplátané</string>
     <string name="home_no_patches_available">Neboli nájdené žiadne záplaty</string>
     <string name="home_app_hide_title">Skryť túto aplikáciu?</string>
-    <string name="home_app_hide_message">Táto aplikácia bude skrytá z domovskej obrazovky. Obnoviť ju môžete pomocou tlačidla \'%1$s\' na konci zoznamu</string>
+    <string name="home_app_hide_message">Táto aplikácia bude skrytá z domovskej obrazovky. Môžete ju neskôr obnoviť zo skrytých aplikácií pomocou tlačidla v dolnej časti zoznamu</string>
     <string name="home_app_will_be_hidden">Táto aplikácia bude skrytá</string>
     <string name="home_app_show_hidden">Zobraziť skryté aplikácie</string>
     <string name="home_app_no_hidden">Žiadne skryté aplikácie</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Aktualizácia preskočená</string>
     <string name="home_update_skipped_metered_subtitle">Mobilné dáta sú aktívne</string>
     <string name="home_updating_sources">Aktualizácia zdrojov…</string>
-    <string name="home_update_progress_format">%1$s spracované</string>
+    <string name="home_update_progress_format">%s spracované</string>
     <string name="home_update_success">Aktualizácia zdrojov dokončená</string>
     <string name="home_update_success_subtitle">Vaše zdroje sú aktuálne</string>
     <string name="home_sources_are_loading">Zdroje sa načítavajú, prosím počkajte…</string>
     <string name="home_search_apps">Vyhľadávanie aplikácií</string>
     <string name="home_no_apps_title">Nedostupné žiadne aplikácie</string>
     <string name="home_no_apps_subtitle">Pridajte zdroj záplaty alebo povoľte existujúci v %s</string>
-    <string name="home_no_apps_search_subtitle">Žiadne aplikácie sa nezhodujú s \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Žiadne aplikácie sa nezhodujú s \"%s\"</string>
     <string name="home_all_apps_hidden_title">Všetky aplikácie sú skryté</string>
     <string name="home_all_apps_hidden_subtitle">Skryli ste všetky aplikácie z domovskej obrazovky</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Použiť experimentálne verzie aplikácií</string>
     <string name="sources_management_experimental_versions_toggle_description">Záplatovať experimentálne ciele aplikácií, ak sú dostupné</string>
     <string name="sources_management_already_exists">Tento zdroj už bol pridaný</string>
+    <string name="sources_management_invalid_url">Neplatná URL adresa zdroja. Skontrolujte adresu a skúste to znova</string>
+    <string name="sources_management_metadata_unavailable">Metadáta N/A</string>
+    <string name="sources_management_metadata_unavailable_hint">Diaľkový metaúdajový súbor nie je dostupný. Oprava pomocou nainštalovaného balíka stále funguje, ale automatická aktualizácia je pre tento zdroj zakázaná</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Balík opráv sa nepodarilo stiahnuť. URL adresa zdroja môže byť nesprávna alebo súbor neexistuje</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazovaný názov</string>
     <string name="sources_dialog_rename">Premenovať zdroj záplaty</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Príklady:</string>
     <string name="sources_dialog_local">Lokálne</string>
     <string name="sources_dialog_local_file">Vyber zdrojový súbor záplaty</string>
+    <string name="sources_dialog_local_file_tap_hint">Ťuknite na položku prehľadať úložisko</string>
     <string name="sources_dialog_local_file_description">Vyberte súbor záplaty .mpp z úložiska</string>
+    <string name="sources_dialog_local_invalid_extension">Súbor musí mať príponu .mpp</string>
+    <string name="sources_dialog_url_valid">Platný repozitár alebo URL adresa JSON</string>
+    <string name="sources_dialog_url_invalid">URL musí odkazovať na repozitár GitHub/GitLab alebo na súbor .json</string>
     <string name="sources_dialog_local_change_file">Zmeniť súbor</string>
     <string name="sources_dialog_preinstalled">Predinštalované</string>
     <string name="sources_update_success">Aktualizácia bola úspešná</string>
     <string name="sources_update_unavailable">Neboli nájdené žiadne aktualizácie</string>
     <string name="sources_download_fail">Nepodarilo sa stiahnuť zdroje: %s</string>
-    <string name="sources_download_fail_named">Nepodarilo sa stiahnuť \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Nebolo možné aktualizovať \'%1$s\': súbor záplaty JSON nebol nájdený na zadanej URL</string>
+    <string name="sources_download_fail_named">\'%s\' sa nepodarilo aktualizovať. Skontrolujte pripojenie na internet a skúste to znova</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': metadata záplaty sa nenašli</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Povoľte režim experta v Nastaveniach, aby ste mohli manuálne zahrnúť túto záplatu</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Nie, už mám APK súbor</string>
     <string name="home_apk_use_saved_with_version">Použiť uložený APK súbor (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nie je uložený žiadny súbor APK. Na zaplátanie bude potrebné znova vybrať APK súbor</string>
-    <string name="home_version_requires_android">Vyžaduje systém Android %1$s+</string>
+    <string name="home_version_requires_android">Vyžaduje Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nepodporované na tomto zariadení</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nemá podporované verzie pre Android %2$d (API %3$d). Všetky deklarované verzie vyžadujú vyššiu verziu Androidu</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Stiahnutie originálneho APK súboru</string>
     <string name="home_download_instructions_steps_title">Pokyny:</string>
-    <string name="home_download_instructions_step1">Stlačte tlačidlo \'%1$s\' nižšie</string>
+    <string name="home_download_instructions_step1">Stlačte tlačidlo \'%s\' nižšie</string>
     <string name="home_download_instructions_step2_part1">Prejdite na webovej stránke nižšie a stlačte</string>
     <string name="home_download_instructions_download_button_toast">Stlačte tlačidlo \'Download\' na webovej stránke, nie tu 😊</string>
     <string name="home_download_instructions_step3">Počkajte kým sa súbor stiahne ale  &lt;b&gt;neinštalujte&lt;/b&gt; ho</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Prejdite na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Vyberte stiahnutý APK súbor</string>
-    <string name="home_file_picker_prompt_description">Vyberte &lt;b&gt;%1$s&lt;/b&gt; APK súbor, ktorý ste práve stiahli</string>
+    <string name="home_file_picker_prompt_description">Vyberte &lt;b&gt;%s&lt;/b&gt; APK súbor, ktorý ste práve stiahli</string>
     <string name="home_file_picker_prompt_open_apk">Otvoriť APK súbor</string>
     <string name="home_recommended_version">Odporúčaná verzia</string>
     <string name="home_selected_version">Vybraná verzia:</string>
@@ -260,6 +268,9 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="patcher_ready_to_install_subtitle">Stlačte tlačidlo nižšie pre inštaláciu</string>
     <string name="patcher_ready_to_mount_subtitle">Stlačte tlačidlo nižšie na pripojenie</string>
     <string name="patcher_storage_permission_dialog_title">Nedá sa získať prístup k ceste na úložisku</string>
+    <string name="patcher_incompatible_patcher_title">Aktualizácia je potrebná</string>
+    <string name="patcher_incompatible_patcher_description">Balíček &lt;b&gt;%1$s&lt;/b&gt; vyžaduje verziu záplatovača &lt;b&gt;%2$s&lt;/b&gt; alebo novšiu. Aktualizujte Morphe, aby ste mohli opraviť túto aplikáciu.</string>
+    <string name="patcher_incompatible_patcher_update_button">Stiahnuť a aktualizovať Morphe</string>
     <string name="patcher_storage_permission_description_api30">Jedna alebo viacero možností záplat odkazuje na cesty, ktoré Morphe nemôže čítať. Udeľte prístup k úložisku a ťuknite na tlačidlo, opravy sa spustia automaticky</string>
     <string name="patcher_storage_permission_description_legacy">Jedna alebo viacero možností záplat odkazuje na cesty, ktoré nie sú prístupné. Aktualizujte cesty v možnostiach záplat a skúste to znova</string>
     <string name="patcher_storage_permission_grant">Udeľte povolenia na prístup k úložisku</string>
@@ -317,7 +328,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="patched_app_saved_toast">Zaplátaná aplikácia uložená na neskôr</string>
     <string name="patched_app_save_failed_toast">Nepodarilo sa uložiť zaplátanú aplikáciu</string>
     <string name="plugin_activity_dialog_body">Vyžaduje sa interakcia používateľa, aby bolo možné pokračovať s týmto pluginom</string>
-    <string name="patcher_process_exit_message">Proces plátania skončil s kódom %1$s</string>
+    <string name="patcher_process_exit_message">Proces plátania skončil s kódom %s</string>
     <string name="install_app_success">Úspešne nainštalované</string>
     <string name="install_app_fail">Nepodarilo sa nainštalovať aplikáciu: %s</string>
     <string name="save_apk_success">APK súbor uložený</string>
@@ -375,7 +386,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="settings_appearance_app_icon_dark_2">Prázdnota</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Zmeniť ikonu aplikácie?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Zmeniť na \'%1$s\' a reštartovať?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Zmeniť na &lt;b&gt;%s&lt;/b&gt; a reštartovať?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Zmeniť ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizácie</string>
@@ -397,7 +408,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <!-- Notification content -->
     <string name="notification_manager_update_title">Je dostupná aktualizácia Morphe</string>
     <string name="notification_bundle_update_title">Sú dostupné nové záplaty</string>
-    <string name="notification_update_text">Verzia %1$s je pripravená na stiahnutie</string>
+    <string name="notification_update_text">Verzia %s je pripravená na stiahnutie</string>
     <string name="notification_bundle_update_text_unversioned">Ťuknite pre otvorenie Morphe a aktualizujte</string>
     <string name="notification_permission_dialog_title">Povoliť upozornenia</string>
     <string name="notification_permission_dialog_description">Morphe potrebuje povolenie na upozornenia, aby vás upozornil aj na pozadí, keď budú k dispozícii aktualizácie</string>
@@ -533,9 +544,9 @@ Rozmery obrázka musia byť nasledovné:
     <string name="installer_action_open_shizuku">Otvoriť Shizuku</string>
     <string name="installer_hint_generic">Inštalácia zlyhala. Skúste to znova alebo s iným inštalátorom</string>
     <string name="installer_hint_conflict">Už je nainštalovaná iná aplikácia s týmto názvom balíka. Pred pokračovaním ju odinštalujte</string>
-    <string name="installer_external_launched">Otvára sa %1$s...</string>
-    <string name="installer_external_timeout">%1$s nepotvrdil inštaláciu. Skontrolujte danú aplikáciu a skúste to znova</string>
-    <string name="installer_external_success">%1$s potvrdil úspešnú inštaláciu</string>
+    <string name="installer_external_launched">Otvára sa %s...</string>
+    <string name="installer_external_timeout">%s nepotvrdil inštaláciu. Skontrolujte danú aplikáciu a skúste to znova</string>
+    <string name="installer_external_success">%s potvrdil úspešnú inštaláciu</string>
     <string name="installer_unavailable_title">%s je nedostupný</string>
     <string name="installer_unavailable_message">Vaš preferovaný inštalátor (%s) nie je dostupný. Môžete problém opraviť a skúsiť znova, alebo použiť štandardný inštalátor.</string>
     <string name="installer_unavailable_shizuku_hint">Uistite sa, že Shizuku beží a že ste mu udelili povolenie</string>

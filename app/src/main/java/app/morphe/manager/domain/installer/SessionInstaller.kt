@@ -22,6 +22,7 @@ import app.morphe.manager.R
 import app.morphe.manager.util.APK_MIMETYPE
 import kotlinx.coroutines.suspendCancellableCoroutine
 import rikka.shizuku.Shizuku
+import rikka.shizuku.ShizukuProvider
 import rikka.sui.Sui
 import java.io.File
 import kotlin.coroutines.resume
@@ -47,7 +48,7 @@ class SessionInstaller(private val app: Application) {
     init {
         val isSui = Sui.init(app.packageName)
         if (!isSui) {
-            runCatching { rikka.shizuku.ShizukuProvider.requestBinderForNonProviderProcess(app) }
+            runCatching { ShizukuProvider.requestBinderForNonProviderProcess(app) }
         }
     }
 
@@ -68,10 +69,13 @@ class SessionInstaller(private val app: Application) {
                 PackageInstaller.SessionParams.MODE_FULL_INSTALL
             ).apply {
                 setOriginatingUid(Process.myUid())
-                if (Build.VERSION.SDK_INT >= 33) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    setRequestUpdateOwnership(true)
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     setPackageSource(PackageInstaller.PACKAGE_SOURCE_LOCAL_FILE)
                 }
-                if (Build.VERSION.SDK_INT >= 31) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_REQUIRED)
                 }
             }
@@ -90,6 +94,7 @@ class SessionInstaller(private val app: Application) {
                         `package` = app.packageName
                         putExtra(EXTRA_SESSION_ID, sessionId)
                     }
+                    @Suppress("WrongConstant")
                     val pi = PendingIntent.getBroadcast(
                         app, sessionId, broadcastIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
@@ -243,21 +248,32 @@ class SessionInstaller(private val app: Application) {
         app.startActivity(buildUninstallIntent(packageName))
     }
 
+    /**
+     * Returns the actual package name of the installed Shizuku provider, or null if not installed.
+     * Works in stealth mode where the package name differs from the canonical one.
+     */
+    fun shizukuPackageName(): String? {
+        if (Sui.isSui()) return ShizukuInstaller.PACKAGE_NAME
+        return shizukuPermissionInfo()?.packageName
+    }
+
     /** Returns true if Shizuku or Sui is installed on the device. */
     fun isShizukuInstalled(): Boolean {
         if (Sui.isSui()) return true
-        return runCatching {
-            if (Build.VERSION.SDK_INT >= 33) {
-                app.packageManager.getPackageInfo(
-                    ShizukuInstaller.PACKAGE_NAME,
-                    PackageManager.PackageInfoFlags.of(0)
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                app.packageManager.getPackageInfo(ShizukuInstaller.PACKAGE_NAME, 0)
-            }
-        }.isSuccess
+        // Use permission-based detection to support Shizuku's stealth/hide mode,
+        // which clones the APK under a different package name
+        return shizukuPermissionInfo() != null
     }
+
+    /**
+     * Returns the [android.content.pm.PermissionInfo] declared by the Shizuku provider, or null
+     * if Shizuku is not installed. Works even when Shizuku is running in stealth mode under a
+     * different package name, since the permission is always registered by the active provider.
+     */
+    @Suppress("DEPRECATION")
+    private fun shizukuPermissionInfo() = runCatching {
+        app.packageManager.getPermissionInfo(ShizukuProvider.PERMISSION, 0)
+    }.getOrNull()
 
     /** Returns the current [InstallerManager.Availability] of Shizuku for the given [target]. */
     fun shizukuAvailability(
@@ -281,7 +297,10 @@ class SessionInstaller(private val app: Application) {
 
     /** Launches the Shizuku app. Returns false if it is not installed. */
     fun launchShizukuApp(): Boolean {
-        val intent = app.packageManager.getLaunchIntentForPackage(ShizukuInstaller.PACKAGE_NAME)
+        // Resolve the actual package name via the permission declaration so this works in
+        // stealth mode where the package name differs from the canonical one
+        val packageName = shizukuPermissionInfo()?.packageName ?: ShizukuInstaller.PACKAGE_NAME
+        val intent = app.packageManager.getLaunchIntentForPackage(packageName)
             ?: return false
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         app.startActivity(intent)
@@ -291,6 +310,7 @@ class SessionInstaller(private val app: Application) {
     /** Registers [receiver] with [filter], applying [Context.RECEIVER_NOT_EXPORTED] on API 33+. */
     private fun registerReceiverCompat(receiver: BroadcastReceiver, filter: IntentFilter) {
         if (Build.VERSION.SDK_INT >= 33) {
+            @Suppress("WrongConstant")
             app.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
         } else {
             @Suppress("UnspecifiedRegisterReceiverFlag")

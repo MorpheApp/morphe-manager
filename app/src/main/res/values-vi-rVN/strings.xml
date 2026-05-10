@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
-    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi trang chủ. Bạn có thể khôi phục lại bằng nút \"%1$s\" ở cuối danh sách</string>
+    <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi trang chủ. Bạn có thể khôi phục lại từ danh sách ứng dụng đang ẩn ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
     <string name="home_app_show_hidden">Hiện ứng dụng đã ẩn</string>
     <string name="home_app_no_hidden">Không có ứng dụng nào đang ẩn</string>
@@ -17,21 +17,21 @@
     <string name="deep_link_add_source_message">Bạn có muốn thêm nguồn vá này vào Morphe không?</string>
     <string name="deep_link_add_source_warning">Chỉ thêm nguồn mà bạn tin tưởng</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Đã có bản cập nhật mới của Morphe</string>
+    <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
     <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
     <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
     <string name="home_update_skipped_metered">Đã bỏ qua bản cập nhật</string>
     <string name="home_update_skipped_metered_subtitle">Đang bật dữ liệu di động</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
-    <string name="home_update_progress_format">Đã xử lý %1$s</string>
+    <string name="home_update_progress_format">Đã xử lý %s</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
     <string name="home_update_success_subtitle">Đã cập nhật tất cả các nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
-    <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%s\"</string>
     <string name="home_all_apps_hidden_title">Tất cả ứng dụng đã bị ẩn</string>
     <string name="home_all_apps_hidden_subtitle">Bạn đã ẩn tất cả ứng dụng khỏi trang chủ</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Dùng phiên bản thử nghiệm</string>
     <string name="sources_management_experimental_versions_toggle_description">Vá phiên bản thử nghiệm của ứng dụng (nếu có)</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
+    <string name="sources_management_invalid_url">URL nguồn không hợp lệ. Vui lòng kiểm tra địa chỉ và thử lại</string>
+    <string name="sources_management_metadata_unavailable">Không có metadata</string>
+    <string name="sources_management_metadata_unavailable_hint">Không thể truy cập file metadata từ máy chủ. Bạn vẫn có thể vá bằng gói ứng dụng đã cài, nhưng tính năng tự động cập nhật sẽ bị tắt cho nguồn này</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Ví dụ:</string>
     <string name="sources_dialog_local">Từ bộ nhớ trong</string>
     <string name="sources_dialog_local_file">Chọn tệp nguồn vá</string>
+    <string name="sources_dialog_local_file_tap_hint">Bấm để duyệt bộ nhớ</string>
     <string name="sources_dialog_local_file_description">Chọn tệp nguồn vá .mpp từ bộ nhớ trong</string>
+    <string name="sources_dialog_local_invalid_extension">Tệp phải có đuôi .mpp</string>
+    <string name="sources_dialog_url_valid">URL repo hoặc JSON hợp lệ</string>
+    <string name="sources_dialog_url_invalid">URL phải trỏ đến kho lưu trữ GitHub/GitLab hoặc tệp .json</string>
     <string name="sources_dialog_local_change_file">Đổi tệp</string>
     <string name="sources_dialog_preinstalled">Được cài đặt sẵn</string>
     <string name="sources_update_success">Cập nhật thành công</string>
     <string name="sources_update_unavailable">Hiện không có bản cập nhật nào</string>
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
-    <string name="sources_download_fail_named">Không tải được \"%1$s\": %2$s</string>
-    <string name="sources_download_endpoint_not_found">Không thể cập nhật \"%1$s\": không tìm thấy tệp JSON bản vá tại URL đã cấu hình</string>
+    <string name="sources_download_fail_named">Không thể cập nhật \"%s\". Vui lòng kiểm tra kết nối mạng và thử lại</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': không tìm thấy metadata của bản vá</string>
     <string name="sources_patch_expert_badge">Chuyên gia</string>
     <string name="sources_patch_expert_badge_tooltip">Bật chế độ Chuyên gia trong Cài đặt để có thể tự thêm bản vá này</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Không, tôi có APK rồi</string>
     <string name="home_apk_use_saved_with_version">Dùng APK đã lưu (v%s)</string>
     <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
-    <string name="home_version_requires_android">Yêu cầu Android %1$s+</string>
+    <string name="home_version_requires_android">Yêu cầu Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Không hỗ trợ trên thiết bị này</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; không có phiên bản nào hỗ trợ cho Android %2$d (API %3$d). Tất cả các phiên bản đã khai báo đều yêu cầu phiên bản Android cao hơn</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Tải APK gốc</string>
     <string name="home_download_instructions_steps_title">Hướng dẫn:</string>
-    <string name="home_download_instructions_step1">Bấm nút \"%1$s\" ở bên dưới</string>
+    <string name="home_download_instructions_step1">Bấm nút \"%s\" ở bên dưới</string>
     <string name="home_download_instructions_step2_part1">Cuộn xuống trang web và bấm</string>
     <string name="home_download_instructions_download_button_toast">Bấm tải xuống trên trang web ấy, chứ không phải ở đây 😊</string>
     <string name="home_download_instructions_step3">Đợi tải xong, nhưng &lt;b&gt;không cài&lt;/b&gt; APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Đi đến APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Chọn APK đã tải</string>
-    <string name="home_file_picker_prompt_description">Chọn tệp APK &lt;b&gt;%1$s&lt;/b&gt; bạn vừa tải</string>
+    <string name="home_file_picker_prompt_description">Chọn tệp APK &lt;b&gt;%s&lt;/b&gt; bạn vừa tải</string>
     <string name="home_file_picker_prompt_open_apk">Mở tệp APK</string>
     <string name="home_recommended_version">Phiên bản đề xuất</string>
     <string name="home_selected_version">Phiên bản đã chọn</string>
@@ -260,6 +268,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_ready_to_install_subtitle">Bấm nút bên dưới để cài đặt</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
     <string name="patcher_storage_permission_dialog_title">Không thể truy cập đường dẫn bộ nhớ</string>
+    <string name="patcher_incompatible_patcher_title">Cần phải cập nhật</string>
+    <string name="patcher_incompatible_patcher_description">Gói &lt;b&gt;%1$s&lt;/b&gt; yêu cầu phiên bản trình vá &lt;b&gt;%2$s&lt;/b&gt; trở lên. Vui lòng cập nhật Morphe để vá ứng dụng này</string>
+    <string name="patcher_incompatible_patcher_update_button">Tải về và cập nhật Morphe</string>
     <string name="patcher_storage_permission_description_api30">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến thư mục mà Morphe không thể truy cập. Hãy cấp quyền truy cập bộ nhớ, sau đó bấm nút và quá trình vá sẽ tự động bắt đầu</string>
     <string name="patcher_storage_permission_description_legacy">Một hoặc nhiều tuỳ chỉnh bản vá đang trỏ đến đường dẫn không thể truy cập. Hãy cập nhật lại đường dẫn trong phần tuỳ chỉnh bản vá và thử lại</string>
     <string name="patcher_storage_permission_grant">Cấp quyền truy cập bộ nhớ</string>
@@ -317,7 +328,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patched_app_saved_toast">Đã lưu ứng dụng đã vá</string>
     <string name="patched_app_save_failed_toast">Không thể lưu ứng dụng đã vá</string>
     <string name="plugin_activity_dialog_body">Bạn vẫn cần tự thao tác để tải ứng dụng</string>
-    <string name="patcher_process_exit_message">Tiến trình vá đã dừng với mã lỗi %1$s</string>
+    <string name="patcher_process_exit_message">Đã dừng tiến trình vá với mã lỗi %s</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
     <string name="install_app_fail">Không thể cài đặt ứng dụng: %s</string>
     <string name="save_apk_success">Đã lưu APK</string>
@@ -375,7 +386,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="settings_appearance_app_icon_dark_2">Hư không</string>
     <string name="settings_appearance_app_icon_dark_3">Màu chàm</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Đổi biểu tượng?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Bạn có muốn đổi sang \"%1$s\" và khởi động lại?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Bạn có muốn đổi sang &lt;b&gt;%s&lt;/b&gt; và khởi động lại?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Chốt</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Cập nhật</string>
@@ -397,7 +408,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <!-- Notification content -->
     <string name="notification_manager_update_title">Đã có bản cập nhật Morphe mới</string>
     <string name="notification_bundle_update_title">Đã có bản vá mới</string>
-    <string name="notification_update_text">Bản %1$s sẵn sàng để tải xuống</string>
+    <string name="notification_update_text">Phiên bản %s đã sẵn sàng để tải xuống</string>
     <string name="notification_bundle_update_text_unversioned">Bấm để mở Morphe và cập nhật</string>
     <string name="notification_permission_dialog_title">Cho phép nhận thông báo</string>
     <string name="notification_permission_dialog_description">Để thông báo cho bạn về các bản cập nhật mới khi ứng dụng chạy nền, Morphe cần được cấp quyền thông báo</string>
@@ -534,9 +545,9 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_action_open_shizuku">Mở Shizuku</string>
     <string name="installer_hint_generic">Không thể cài đặt. Thử lại hoặc đổi sang trình cài đặt khác</string>
     <string name="installer_hint_conflict">Đã cài đặt ứng dụng khác với cùng tên gói. Hãy gỡ cài ứng dụng đó trước khi tiếp tục</string>
-    <string name="installer_external_launched">Đang mở %1$s…</string>
-    <string name="installer_external_timeout">%1$s không xác nhận cài đặt. Kiểm tra ứng dụng khác và thử lại</string>
-    <string name="installer_external_success">%1$s báo đã cài đặt thành công</string>
+    <string name="installer_external_launched">Đang mở %s…</string>
+    <string name="installer_external_timeout">%s không xác nhận cài đặt. Kiểm tra ứng dụng khác và thử lại</string>
+    <string name="installer_external_success">%s báo đã cài đặt thành công</string>
     <string name="installer_unavailable_title">%s không khả dụng</string>
     <string name="installer_unavailable_message">Trình cài đặt mà bạn ưu tiên (%s) hiện đang không khả dụng. Hãy thử lại sau khi sửa lỗi hoặc chuyển sang dùng trình cài đặt tiêu chuẩn</string>
     <string name="installer_unavailable_shizuku_hint">Hãy đảm bảo rằng Shizuku đang chạy và bạn đã cấp quyền cho ứng dụng này</string>

@@ -9,8 +9,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -45,13 +43,12 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
+import androidx.documentfile.provider.DocumentFile
 import app.morphe.manager.R
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
-import java.io.FileOutputStream
 import kotlin.math.abs
 
 /**
@@ -151,8 +148,9 @@ fun AdaptiveIconCreatorDialog(
     val context = LocalContext.current
 
     // Foreground image picker
-    val foregroundPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    val openForegroundPicker = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf("image/*"),
+        chooserTitle = stringResource(R.string.adaptive_icon_select_image)
     ) { uri ->
         uri?.let {
             foregroundUri = it
@@ -184,39 +182,35 @@ fun AdaptiveIconCreatorDialog(
     val successMessage = stringResource(R.string.adaptive_icon_created_success)
     val failureMessage = stringResource(R.string.adaptive_icon_creation_failed)
 
-    val folderPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocumentTree()
-    ) { uri ->
-        uri?.let {
-            scope.launch(Dispatchers.IO) {
-                try {
-                    val success = createAdaptiveIcons(
-                        context = context,
-                        baseUri = it,
-                        packageName = packageName,
-                        foregroundBitmap = foregroundBitmap!!,
-                        backgroundColor = backgroundColor,
-                        scale = scale,
-                        offsetX = offsetX,
-                        offsetY = offsetY,
-                        notificationScale = notificationScale,
-                        notificationOffsetX = notificationOffsetX,
-                        notificationOffsetY = notificationOffsetY
-                    )
-
-                    withContext(Dispatchers.Main) {
-                        if (success != null) {
-                            context.toast(successMessage)
-                            onIconCreated(success)
-                            onDismiss()
-                        } else {
-                            context.toast(failureMessage)
-                        }
+    // Folder picker for saving
+    val openFolderPicker = rememberFolderPicker { uri ->
+        scope.launch(Dispatchers.IO) {
+            try {
+                val success = createAdaptiveIcons(
+                    context = context,
+                    baseUri = uri,
+                    packageName = packageName,
+                    foregroundBitmap = foregroundBitmap!!,
+                    backgroundColor = backgroundColor,
+                    scale = scale,
+                    offsetX = offsetX,
+                    offsetY = offsetY,
+                    notificationScale = notificationScale,
+                    notificationOffsetX = notificationOffsetX,
+                    notificationOffsetY = notificationOffsetY
+                )
+                withContext(Dispatchers.Main) {
+                    if (success != null) {
+                        context.toast(successMessage)
+                        onIconCreated(success)
+                        onDismiss()
+                    } else {
+                        context.toast(failureMessage)
                     }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        context.toast("Failed to create icon: ${e.message}")
-                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    context.toast("Failed to create icon: ${e.message}")
                 }
             }
         }
@@ -251,7 +245,7 @@ fun AdaptiveIconCreatorDialog(
                 // Create button
                 MorpheDialogButton(
                     text = stringResource(R.string.adaptive_icon_create),
-                    onClick = { folderPicker.launch(null) },
+                    onClick = { openFolderPicker() },
                     enabled = foregroundBitmap != null,
                     icon = Icons.Outlined.Save,
                     modifier = Modifier.fillMaxWidth()
@@ -351,7 +345,7 @@ fun AdaptiveIconCreatorDialog(
                     stringResource(R.string.adaptive_icon_select_image)
                 else
                     stringResource(R.string.adaptive_icon_change_image),
-                onClick = { foregroundPicker.launch("image/*") },
+                onClick = { openForegroundPicker() },
                 icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -843,9 +837,17 @@ private fun SafeZoneLegendItem(
     }
 }
 
+private fun DocumentFile.getOrCreateDir(name: String): DocumentFile? =
+    findFile(name) ?: createDirectory(name)
+
+private fun DocumentFile.getOrCreateFile(mimeType: String, name: String): DocumentFile? =
+    findFile(name) ?: createFile(mimeType, name)
+
 /**
  * Create adaptive icon files for all densities in proper structure.
- * Returns the path to morphe_icons folder or null if failed.
+ * Uses the SAF DocumentFile API so any folder the user picks is writable without MANAGE_EXTERNAL_STORAGE.
+ * Returns the real file-system path to the morphe_icons folder (for use as a patch option value),
+ * or null if creation failed.
  */
 @SuppressLint("UseKtx")
 private suspend fun createAdaptiveIcons(
@@ -862,22 +864,19 @@ private suspend fun createAdaptiveIcons(
     notificationOffsetY: Float
 ): String? = withContext(Dispatchers.IO) {
     try {
-        // Convert URI to File path using existing utility
-        val basePath = baseUri.toFilePath()
-        val baseDir = File(basePath)
+        val baseDocDir = DocumentFile.fromTreeUri(context, baseUri) ?: return@withContext null
 
         // Create directory structure: morphe_branding/morphe_icons_youtube or morphe_icons_music
-        val brandingDir = File(baseDir, AdaptiveIconConfig.BRANDING_FOLDER_NAME)
-        if (!brandingDir.exists()) brandingDir.mkdirs()
+        val brandingDocDir = baseDocDir.getOrCreateDir(AdaptiveIconConfig.BRANDING_FOLDER_NAME)
+            ?: return@withContext null
 
         // Create .nomedia file to prevent icons from appearing in gallery
-        val nomediaFile = File(brandingDir, ".nomedia")
-        if (!nomediaFile.exists()) {
-            nomediaFile.createNewFile()
+        if (brandingDocDir.findFile(".nomedia") == null) {
+            brandingDocDir.createFile("application/octet-stream", ".nomedia")
         }
 
-        val iconsDir = File(brandingDir, AdaptiveIconConfig.iconFolderName(packageName))
-        if (!iconsDir.exists()) iconsDir.mkdirs()
+        val iconsDocDir = brandingDocDir.getOrCreateDir(AdaptiveIconConfig.iconFolderName(packageName))
+            ?: return@withContext null
 
         // Get preview density for offset calculations
         val previewDensity = context.resources.displayMetrics.density
@@ -885,7 +884,8 @@ private suspend fun createAdaptiveIcons(
         // Create icons for all densities
         AdaptiveIconConfig.DENSITY_CONFIGS.forEach { densityConfig ->
             createIconsForDensity(
-                iconsDir = iconsDir,
+                context = context,
+                iconsDocDir = iconsDocDir,
                 densityConfig = densityConfig,
                 foregroundBitmap = foregroundBitmap,
                 backgroundColor = backgroundColor,
@@ -898,10 +898,11 @@ private suspend fun createAdaptiveIcons(
 
         // Create notification icons for all densities.
         // The notification icon is the foreground with the same transforms applied,
-        // recolored to solid white to match Material Design guidelines for notification icons.
+        // recolored to solid white to match Material Design guidelines for notification icons
         AdaptiveIconConfig.NOTIFICATION_DENSITY_CONFIGS.forEach { densityConfig ->
             createNotificationIconForDensity(
-                iconsDir = iconsDir,
+                context = context,
+                iconsDocDir = iconsDocDir,
                 densityConfig = densityConfig,
                 foregroundBitmap = foregroundBitmap,
                 scale = notificationScale,
@@ -911,8 +912,8 @@ private suspend fun createAdaptiveIcons(
             )
         }
 
-        // Return path to 'morphe_icons' folder
-        iconsDir.absolutePath
+        // Convert back to a real path so the patcher can reference it as a patch option value
+        iconsDocDir.uri.toFilePath()
     } catch (e: Exception) {
         e.printStackTrace()
         null
@@ -923,7 +924,8 @@ private suspend fun createAdaptiveIcons(
  * Create icon files for a specific density.
  */
 private fun createIconsForDensity(
-    iconsDir: File,
+    context: Context,
+    iconsDocDir: DocumentFile,
     densityConfig: AdaptiveIconConfig.DensityConfig,
     foregroundBitmap: Bitmap,
     backgroundColor: String,
@@ -933,12 +935,9 @@ private fun createIconsForDensity(
     previewDensity: Float
 ) {
     val targetSize = densityConfig.size
+    val mipmapDocDir = iconsDocDir.getOrCreateDir(densityConfig.folderName) ?: return
 
-    // Create mipmap directory
-    val mipmapDir = File(iconsDir, densityConfig.folderName)
-    if (!mipmapDir.exists()) mipmapDir.mkdirs()
-
-    // Create background bitmap (solid color)
+    // Background bitmap (solid color)
     val backgroundBitmap = createBitmap(targetSize, targetSize)
     val canvas = Canvas(backgroundBitmap)
     val rgb = parseColorToRgb(backgroundColor)
@@ -960,9 +959,8 @@ private fun createIconsForDensity(
 
     // Calculate base size by fitting image to canvas (same logic as preview)
     val imageAspect = foregroundBitmap.width.toFloat() / foregroundBitmap.height.toFloat()
-    val canvasAspect = 1.0f  // Square canvas
 
-    val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
+    val (baseWidth, baseHeight) = if (imageAspect > 1.0f) {
         // Image is wider - fit to width
         previewCanvasSize to (previewCanvasSize / imageAspect)
     } else {
@@ -985,29 +983,22 @@ private fun createIconsForDensity(
     val left = (targetSize - targetScaledWidth) / 2 + targetOffsetX
     val top = (targetSize - targetScaledHeight) / 2 + targetOffsetY
 
-    // Create Paint with anti-aliasing and bicubic filtering for high-quality scaling
+    // Create Paint with antialiasing and bicubic filtering for high-quality scaling
     val bitmapPaint = Paint().apply {
         isAntiAlias = true
         isFilterBitmap = true
         isDither = true
     }
+    foregroundCanvas.drawBitmap(foregroundBitmap, null, RectF(left, top, left + targetScaledWidth, top + targetScaledHeight), bitmapPaint)
 
-    val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
-    foregroundCanvas.drawBitmap(foregroundBitmap, null, destRect, bitmapPaint)
+    mipmapDocDir.getOrCreateFile("image/png", AdaptiveIconConfig.BACKGROUND_FILE_NAME)
+        ?.let { context.contentResolver.openOutputStream(it.uri)?.use { out
+            -> backgroundBitmap.compress(Bitmap.CompressFormat.PNG, 100, out) } }
 
-    // Save background
-    val backgroundFile = File(mipmapDir, AdaptiveIconConfig.BACKGROUND_FILE_NAME)
-    FileOutputStream(backgroundFile).use { out ->
-        backgroundBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-    }
+    mipmapDocDir.getOrCreateFile("image/png", AdaptiveIconConfig.FOREGROUND_FILE_NAME)
+        ?.let { context.contentResolver.openOutputStream(it.uri)?.use { out
+            -> foregroundScaled.compress(Bitmap.CompressFormat.PNG, 100, out) } }
 
-    // Save foreground
-    val foregroundFile = File(mipmapDir, AdaptiveIconConfig.FOREGROUND_FILE_NAME)
-    FileOutputStream(foregroundFile).use { out ->
-        foregroundScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
-    }
-
-    // Clean up
     backgroundBitmap.recycle()
     foregroundScaled.recycle()
 }
@@ -1020,7 +1011,8 @@ private fun createIconsForDensity(
  * for notification small icons.
  */
 private fun createNotificationIconForDensity(
-    iconsDir: File,
+    context: Context,
+    iconsDocDir: DocumentFile,
     densityConfig: AdaptiveIconConfig.DensityConfig,
     foregroundBitmap: Bitmap,
     scale: Float,
@@ -1031,8 +1023,7 @@ private fun createNotificationIconForDensity(
     val targetSize = densityConfig.size
 
     // Create drawable-<dpi> directory inside the icons folder
-    val drawableDir = File(iconsDir, densityConfig.folderName)
-    if (!drawableDir.exists()) drawableDir.mkdirs()
+    val drawableDocDir = iconsDocDir.getOrCreateDir(densityConfig.folderName) ?: return
 
     val notificationBitmap = createBitmap(targetSize, targetSize)
     val canvas = Canvas(notificationBitmap)
@@ -1080,13 +1071,11 @@ private fun createNotificationIconForDensity(
         )))
     }
 
-    val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
-    canvas.drawBitmap(foregroundBitmap, null, destRect, whitePaint)
+    canvas.drawBitmap(foregroundBitmap, null, RectF(left, top, left + targetScaledWidth, top + targetScaledHeight), whitePaint)
 
-    val notificationFile = File(drawableDir, AdaptiveIconConfig.NOTIFICATION_FILE_NAME)
-    FileOutputStream(notificationFile).use { out ->
-        notificationBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-    }
+    drawableDocDir.getOrCreateFile("image/png", AdaptiveIconConfig.NOTIFICATION_FILE_NAME)
+        ?.let { context.contentResolver.openOutputStream(it.uri)?.use { out
+            -> notificationBitmap.compress(Bitmap.CompressFormat.PNG, 100, out) } }
 
     notificationBitmap.recycle()
 }

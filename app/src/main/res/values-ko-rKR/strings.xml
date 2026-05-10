@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">아직 패치되지 않음</string>
     <string name="home_no_patches_available">사용 가능한 패치 없음</string>
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
-    <string name="home_app_hide_message">이 앱이 홈 화면에서 숨겨집니다. 나중에 목록 하단에 있는 \'%1$s\' 버튼을 사용하여 복원할 수 있습니다</string>
+    <string name="home_app_hide_message">이 앱은 홈 화면에서 숨겨집니다. 목록 하단에 있는 버튼을 사용하여 숨겨진 앱 목록에서 나중에 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
     <string name="home_app_show_hidden">숨겨진 앱 보이기</string>
     <string name="home_app_no_hidden">숨겨진 앱이 없습니다</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">업데이트를 건너뜁니다</string>
     <string name="home_update_skipped_metered_subtitle">모바일 데이터가 활성화되어 있습니다</string>
     <string name="home_updating_sources">소스를 업데이트하는 중…</string>
-    <string name="home_update_progress_format">%1$s 처리됨</string>
+    <string name="home_update_progress_format">%s 처리됨</string>
     <string name="home_update_success">소스 업데이트 완료</string>
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_search_apps">앱 검색</string>
     <string name="home_no_apps_title">사용 가능한 앱이 없습니다</string>
     <string name="home_no_apps_subtitle">%s에 패치 소스를 추가하거나 기존 패치 소스를 활성화하세요</string>
-    <string name="home_no_apps_search_subtitle">\'%1$s\'와 일치하는 앱이 없습니다</string>
+    <string name="home_no_apps_search_subtitle">\'%s\'와 일치하는 앱이 없습니다</string>
     <string name="home_all_apps_hidden_title">모든 앱이 숨겨집니다</string>
     <string name="home_all_apps_hidden_subtitle">홈 화면에서 모든 앱이 숨겨집니다</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">실험 앱 버전 사용</string>
     <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우 실험 앱 버전으로 패치합니다</string>
     <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
+    <string name="sources_management_invalid_url">잘못된 소스 URL입니다. 주소를 확인하고 다시 시도하세요</string>
+    <string name="sources_management_metadata_unavailable">메타데이터 없음</string>
+    <string name="sources_management_metadata_unavailable_hint">원격 메타데이터 파일을 사용할 수 없습니다. 설치된 번들로 패치는 계속 가능하지만, 이 소스에 대한 자동 업데이트는 비활성화됩니다</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">패치 번들을 다운로드할 수 없습니다. 소스 URL이 올바르지 않거나 파일이 존재하지 않을 수 있습니다</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">표시 이름</string>
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">예시:</string>
     <string name="sources_dialog_local">로컬</string>
     <string name="sources_dialog_local_file">패치 소스 파일 선택</string>
+    <string name="sources_dialog_local_file_tap_hint">기기 저장소를 탐색하려면 탭하세요</string>
     <string name="sources_dialog_local_file_description">저장소에서 .mpp 패치 소스 파일을 선택하세요</string>
+    <string name="sources_dialog_local_invalid_extension">파일은 .mpp 확장자를 가져야 합니다</string>
+    <string name="sources_dialog_url_valid">유효한 리포지토리 또는 JSON URL</string>
+    <string name="sources_dialog_url_invalid">URL은 GitHub/GitLab 리포지토리 또는 .json 파일을 가리켜야 합니다</string>
     <string name="sources_dialog_local_change_file">파일 변경</string>
     <string name="sources_dialog_preinstalled">미리 설치됨</string>
     <string name="sources_update_success">업데이트를 성공하였습니다</string>
     <string name="sources_update_unavailable">새 업데이트가 없습니다</string>
     <string name="sources_download_fail">소스를 다운로드할 수 없습니다: %s</string>
-    <string name="sources_download_fail_named">\'%1$s\'를 다운로드할 수 없습니다: %2$s</string>
-    <string name="sources_download_endpoint_not_found">‘%1$s’를 업데이트할 수 없습니다: 설정된 URL에서 패치 JSON 파일을 찾을 수 없습니다</string>
+    <string name="sources_download_fail_named">\'%s\'를 업데이트할 수 없습니다. 인터넷 연결 상태를 확인하고 다시 시도하세요</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': 패치 메타데이터를 찾을 수 없습니다</string>
     <string name="sources_patch_expert_badge">전문가</string>
     <string name="sources_patch_expert_badge_tooltip">설정에서 전문가 모드를 활성화하여 이 패치를 수동으로 포함할 수 있습니다</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">아니요, 이미 APK를 가지고 있습니다</string>
     <string name="home_apk_use_saved_with_version">저장된 APK 사용 (v%s)</string>
     <string name="home_app_info_no_saved_apk">저장된 APK가 없습니다. 패치하려면 APK 파일을 다시 선택하세요</string>
-    <string name="home_version_requires_android">Android %1$s+ 필요</string>
+    <string name="home_version_requires_android">Android %s+ 필요</string>
     <string name="home_apk_no_compatible_versions_title">이 기기에서는 지원되지 않음</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;는 Android %2$d (API %3$d)에서 지원되는 버전이 없습니다. 선언된 모든 앱 버전은 더 높은 Android 버전을 요구합니다</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">원본 APK 다운로드</string>
     <string name="home_download_instructions_steps_title">설명서:</string>
-    <string name="home_download_instructions_step1">아래 \'%1$s\' 버튼을 탭하세요</string>
+    <string name="home_download_instructions_step1">아래 \'%s\' 버튼을 탭하세요</string>
     <string name="home_download_instructions_step2_part1">웹페이지를 아래로 스크롤 한 후에 이 버튼을 탭하세요</string>
     <string name="home_download_instructions_download_button_toast">여기 말고, 웹사이트에서 다운로드 버튼을 탭하세요 😊</string>
     <string name="home_download_instructions_step3">다운로드가 완료될 때까지 기다리세요&lt;br&gt;APK는 &lt;b&gt;설치하지 마세요&lt;/b&gt;</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">APKMirror.com으로 이동</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">다운로드된 APK 선택</string>
-    <string name="home_file_picker_prompt_description">방금 다운로드한 &lt;b&gt;%1$s&lt;/b&gt; APK 파일을 선택하세요</string>
+    <string name="home_file_picker_prompt_description">방금 다운로드한 &lt;b&gt;%s&lt;/b&gt; APK 파일을 선택하세요</string>
     <string name="home_file_picker_prompt_open_apk">APK 파일 열기</string>
     <string name="home_recommended_version">권장 버전</string>
     <string name="home_selected_version">선택된 버전</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">설치하시려면 아래 버튼을 탭하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_storage_permission_dialog_title">저장소 경로에 접근할 수 없음</string>
+    <string name="patcher_incompatible_patcher_title">업데이트 필요</string>
+    <string name="patcher_incompatible_patcher_description">번들 &lt;b&gt;%1$s&lt;/b&gt;는 패처 버전 &lt;b&gt;%2$s&lt;/b&gt; 이상이 필요합니다. 이 앱을 패치하려면 Morphe를 업데이트하세요</string>
+    <string name="patcher_incompatible_patcher_update_button">Morphe 다운로드 및 업데이트</string>
     <string name="patcher_storage_permission_description_api30">하나 이상의 패치 옵션이 Morphe가 읽을 수 없는 경로를 가리키고 있습니다. 저장소 접근 권한을 부여하고 버튼을 탭하면 패치가 자동으로 시작됩니다</string>
     <string name="patcher_storage_permission_description_legacy">하나 이상의 패치 옵션이 접근할 수 없는 경로를 가리키고 있습니다. 패치 옵션에서 경로를 업데이트하고 다시 시도하세요</string>
     <string name="patcher_storage_permission_grant">저장소 권한 부여</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">패치된 앱을 나중을 위해 저장하였습니다</string>
     <string name="patched_app_save_failed_toast">패치된 앱을 저장할 수 없습니다</string>
     <string name="plugin_activity_dialog_body">이 플러그인을 사용하려면 사용자 상호작용이 필요합니다</string>
-    <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$s\'로 종료하였습니다</string>
+    <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%s\'로 종료하였습니다</string>
     <string name="install_app_success">성공적으로 설치하였습니다</string>
     <string name="install_app_fail">앱을 설치할 수 없습니다: %s</string>
     <string name="save_apk_success">APK를 저장하였습니다</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">공허</string>
     <string name="settings_appearance_app_icon_dark_3">남색</string>
     <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경할까요?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\'로 변경하고 다시 시작하시겠습니까?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt;으로 변경하고 다시 시작하시겠습니까?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">Morphe 업데이트 사용 가능</string>
     <string name="notification_bundle_update_title">새 패치 사용 가능</string>
-    <string name="notification_update_text">%1$s 버전 다운로드 준비 완료</string>
+    <string name="notification_update_text">%s 버전 다운로드 준비 완료</string>
     <string name="notification_bundle_update_text_unversioned">Morphe를 열고 업데이트하려면 탭하세요</string>
     <string name="notification_permission_dialog_title">알림 허용</string>
     <string name="notification_permission_dialog_description">Morphe는 백그라운드에서 업데이트가 있을 경우에 알림을 보내기 위해 알림 권한이 필요합니다</string>
@@ -534,9 +545,9 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Shizuku 열기</string>
     <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요</string>
     <string name="installer_hint_conflict">이 패키지 이름을 가진 다른 앱이 이미 설치되어 있습니다. 계속하기 전에 제거하세요</string>
-    <string name="installer_external_launched">\'%1$s\'을 여는 중…</string>
-    <string name="installer_external_timeout">\'%1$s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요</string>
-    <string name="installer_external_success">\'%1$s\'이 설치 성공을 보고하였습니다</string>
+    <string name="installer_external_launched">\'%s\'을 여는 중…</string>
+    <string name="installer_external_timeout">\'%s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요</string>
+    <string name="installer_external_success">\'%s\'이 설치 성공을 보고하였습니다</string>
     <string name="installer_unavailable_title">\'%s\'를 사용할 수 없음</string>
     <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 표준 설치 프로그램을 사용해 보세요</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>

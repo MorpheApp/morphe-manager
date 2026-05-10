@@ -7,7 +7,10 @@ package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -52,6 +55,7 @@ import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -90,6 +94,7 @@ fun BundleManagementSheet(
     val patchCounts by patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
     val activeUpdateUids by patchBundleRepository.activeUpdateUidsFlow.collectAsStateWithLifecycle(emptySet())
+    val metadataFetchErrors by patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
     val experimentalVersionsEnabled by prefs.bundleExperimentalVersionsEnabled.getAsState()
     val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
@@ -224,6 +229,7 @@ fun BundleManagementSheet(
                             patchCount = patchCounts[bundle.uid] ?: 0,
                             updateInfo = manualUpdateInfo[bundle.uid],
                             isUpdating = bundle.uid in activeUpdateUids,
+                            metadataFetchError = metadataFetchErrors[bundle.uid],
                             expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids,
                             onToggleExpanded = {
                                 expandedBundleUids = if (bundle.uid in expandedBundleUids) {
@@ -337,6 +343,7 @@ private fun BundleManagementCard(
     isUpdating: Boolean = false,
     isDragging: Boolean = false,
     longPressModifier: Modifier = Modifier,
+    metadataFetchError: Throwable? = null,
     expanded: Boolean,
     onToggleExpanded: () -> Unit,
     onDelete: () -> Unit,
@@ -360,22 +367,23 @@ private fun BundleManagementCard(
     val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
 
     val isEnabled = bundle.enabled
+    val hasMetadataError = metadataFetchError != null
+    val isMissing = bundle.state is PatchBundleSource.State.Missing
 
     val animatedColor by animateColorAsState(
-        targetValue = if (isEnabled) {
-            MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
-        } else {
-            // Disabled state - use error container with low opacity
-            MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.15f)
+        targetValue = when {
+            !isEnabled -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.15f)
+            hasMetadataError || isMissing -> Color(0xFFFFF8E1).copy(alpha = 0.15f)
+            else -> MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
         },
         label = "bundle_card_color"
     )
 
     val animatedBorderColor by animateColorAsState(
-        targetValue = if (!isEnabled) {
-            MaterialTheme.colorScheme.error.copy(alpha = 0.5f)
-        } else {
-            MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+        targetValue = when {
+            !isEnabled -> MaterialTheme.colorScheme.error.copy(alpha = 0.5f)
+            hasMetadataError || isMissing -> Color(0xFFFFC107).copy(alpha = 0.5f)
+            else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
         },
         label = "bundle_card_border_color"
     )
@@ -438,7 +446,8 @@ private fun BundleManagementCard(
                 updateInfo = updateInfo,
                 expanded = expanded,
                 showChevron = !forceExpanded,
-                enabled = isEnabled
+                enabled = isEnabled,
+                metadataFetchError = metadataFetchError
             )
 
             // Expanded content
@@ -453,6 +462,24 @@ private fun BundleManagementCard(
                         .fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+                    // Metadata unavailable hint (shown when patches-bundle.json / remote fetch failed)
+                    AnimatedVisibility(
+                        visible = metadataFetchError != null || bundle.state is PatchBundleSource.State.Missing,
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
+                    ) {
+                        val hintText = if (bundle.state is PatchBundleSource.State.Missing) {
+                            stringResource(R.string.sources_management_metadata_unavailable_hint_missing)
+                        } else {
+                            stringResource(R.string.sources_management_metadata_unavailable_hint)
+                        }
+                        InfoBadge(
+                            text = hintText,
+                            icon = Icons.Outlined.CloudOff,
+                            style = InfoBadgeStyle.Error
+                        )
+                    }
+
                     // Patches
                     BundleInfoCard(
                         modifier = Modifier.fillMaxWidth(),
@@ -653,7 +680,8 @@ private fun BundleCardHeader(
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     expanded: Boolean,
     showChevron: Boolean,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    metadataFetchError: Throwable? = null
 ) {
     val rotation by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
@@ -671,9 +699,9 @@ private fun BundleCardHeader(
         BundleIcon(
             bundle = bundle,
             enabled = enabled,
+            metadataFetchError = metadataFetchError,
             modifier = Modifier.size(44.dp)
         )
-
         // Title + badges + rename button
         Column(modifier = Modifier.weight(1f)) {
             Row(
@@ -747,6 +775,20 @@ private fun BundleCardHeader(
                 // Bundle type badge
                 BundleTypeBadge(bundle)
 
+                // Metadata unavailable badge
+                AnimatedVisibility(
+                    visible = metadataFetchError != null || bundle.state is PatchBundleSource.State.Missing,
+                    enter = MorpheAnimations.expandHorizFadeIn,
+                    exit = MorpheAnimations.shrinkHorizFadeOut
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.sources_management_metadata_unavailable),
+                        style = InfoBadgeStyle.Error,
+                        icon = null,
+                        isCompact = true
+                    )
+                }
+
                 // Disabled badge
                 AnimatedVisibility(
                     visible = !enabled,
@@ -814,12 +856,12 @@ private fun BundleInfoCard(
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
                 icon,
                 contentDescription = null,
-                modifier = Modifier.size(18.dp),
+                modifier = Modifier.size(20.dp),
                 tint = MaterialTheme.colorScheme.onSecondaryContainer
             )
 
@@ -881,14 +923,21 @@ private fun BundleTypeBadge(bundle: PatchBundleSource) {
 fun BundleIcon(
     bundle: PatchBundleSource,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    metadataFetchError: Throwable? = null
 ) {
     val bundleAvatarUrl = bundle.bundleAvatarUrl
     val githubAvatarUrl = bundle.githubAvatarUrl
+    val gitlabAvatarUrl = bundle.gitlabAvatarUrl
+    val hasMetadataError = metadataFetchError != null
+    val hasBundleError = bundle.state is PatchBundleSource.State.Failed
+    val isMissing = bundle.state is PatchBundleSource.State.Missing
 
     val animatedColor by animateColorAsState(
         targetValue = when {
             bundle.isDefault -> Color.White
+            hasBundleError -> MaterialTheme.colorScheme.errorContainer
+            hasMetadataError -> Color(0xFFFFF8E1)
             enabled -> MaterialTheme.colorScheme.primaryContainer
             else -> MaterialTheme.colorScheme.surfaceVariant
         },
@@ -922,10 +971,32 @@ fun BundleIcon(
                 )
             }
 
-            bundleAvatarUrl != null || githubAvatarUrl != null -> {
+            hasBundleError -> {
+                Icon(
+                    imageVector = Icons.Outlined.ErrorOutline,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onErrorContainer,
+                    modifier = Modifier.padding(10.dp)
+                )
+            }
+
+            hasMetadataError || isMissing -> {
+                Icon(
+                    imageVector = Icons.Outlined.CloudOff,
+                    contentDescription = null,
+                    tint = Color(0xFF4A3800),
+                    modifier = Modifier.padding(10.dp)
+                )
+            }
+
+            bundleAvatarUrl != null || githubAvatarUrl != null || gitlabAvatarUrl != null -> {
                 RemoteAvatar(
-                    url = bundleAvatarUrl ?: githubAvatarUrl!!,
-                    fallbackUrl = if (bundleAvatarUrl != null) githubAvatarUrl else null,
+                    url = bundleAvatarUrl ?: githubAvatarUrl ?: gitlabAvatarUrl!!,
+                    fallbackUrl = when {
+                        bundleAvatarUrl != null -> githubAvatarUrl ?: gitlabAvatarUrl
+                        githubAvatarUrl != null -> gitlabAvatarUrl
+                        else -> null
+                    },
                     modifier = Modifier.fillMaxSize()
                 )
             }

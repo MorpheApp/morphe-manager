@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Jeszcze niezmodyfikowana</string>
     <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
     <string name="home_app_hide_title">Ukryć tę aplikację?</string>
-    <string name="home_app_hide_message">Ta aplikacja zniknie z ekranu głównego. Możesz ją przywrócić później, używając przycisku \"%1$s\" na dole listy</string>
+    <string name="home_app_hide_message">Ta aplikacja zostanie ukryta na ekranie głównym. Możesz ją później przywrócić z ukrytych aplikacji za pomocą przycisku na dole listy</string>
     <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
     <string name="home_app_show_hidden">Pokaż ukryte aplikacje</string>
     <string name="home_app_no_hidden">Brak ukrytych aplikacji</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Pominięto aktualizacje</string>
     <string name="home_update_skipped_metered_subtitle">Dane mobilne są aktywne</string>
     <string name="home_updating_sources">Aktualizowanie źródeł…</string>
-    <string name="home_update_progress_format">%1$s przetworzonych</string>
+    <string name="home_update_progress_format">%s przetworzonych</string>
     <string name="home_update_success">Aktualizacja źródeł zakończona</string>
     <string name="home_update_success_subtitle">Źródła są aktualne</string>
     <string name="home_sources_are_loading">Wczytywanie źródeł, proszę czekać…</string>
     <string name="home_search_apps">Szukaj aplikacji</string>
     <string name="home_no_apps_title">Brak dostępnych aplikacji</string>
     <string name="home_no_apps_subtitle">Dodaj źródło modyfikacji lub włącz istniejące w %s</string>
-    <string name="home_no_apps_search_subtitle">Brak wyników dla \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Brak aplikacji pasujących do \"%s\"</string>
     <string name="home_all_apps_hidden_title">Wszystkie aplikacje ukryte</string>
     <string name="home_all_apps_hidden_subtitle">Ukryto wszystkie aplikacje na ekranie głównym</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Używaj eksperymentalnych wersji aplikacji</string>
     <string name="sources_management_experimental_versions_toggle_description">Modyfikuj wersje eksperymentalne, jeśli są dostępne</string>
     <string name="sources_management_already_exists">To źródło zostało już dodane</string>
+    <string name="sources_management_invalid_url">Nieprawidłowy adres URL źródła. Sprawdź adres i spróbuj ponownie</string>
+    <string name="sources_management_metadata_unavailable">Brak metadanych</string>
+    <string name="sources_management_metadata_unavailable_hint">Zdalny plik metadanych jest niedostępny. Modyfikowanie przy użyciu zainstalowanego pakietu nadal działa, ale automatyczna aktualizacja dla tego źródła została wyłączona</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Nie udało się pobrać pakietu modyfikacji. Adres URL źródła może być nieprawidłowy lub plik nie istnieje</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
     <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Przykłady:</string>
     <string name="sources_dialog_local">Lokalne</string>
     <string name="sources_dialog_local_file">Wybierz plik źródłowy modyfikacji</string>
+    <string name="sources_dialog_local_file_tap_hint">Stuknij, aby przeglądać pliki</string>
     <string name="sources_dialog_local_file_description">Wybierz plik źródłowy .mpp z pamięci urządzenia</string>
+    <string name="sources_dialog_local_invalid_extension">Plik musi mieć rozszerzenie .mpp</string>
+    <string name="sources_dialog_url_valid">Prawidłowe repozytorium lub adres URL pliku JSON</string>
+    <string name="sources_dialog_url_invalid">Adres URL musi wskazywać na repozytorium GitHub/GitLab lub plik .json</string>
     <string name="sources_dialog_local_change_file">Zmień plik</string>
     <string name="sources_dialog_preinstalled">Wbudowane</string>
     <string name="sources_update_success">Aktualizacja zakończona pomyślnie</string>
     <string name="sources_update_unavailable">Brak dostępnych aktualizacji</string>
     <string name="sources_download_fail">Nie udało się pobrać źródeł: %s</string>
-    <string name="sources_download_fail_named">Nie udało się pobrać \"%1$s\": %2$s</string>
-    <string name="sources_download_endpoint_not_found">Nie można zaktualizować \"%1$s\": nie znaleziono pliku JSON z modyfikacjami pod skonfigurowanym adresem URL</string>
+    <string name="sources_download_fail_named">Nie udało się zaktualizować \"%s\". Sprawdź połączenie z internetem i spróbuj ponownie</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": nie znaleziono metadanych modyfikacji</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <string name="sources_patch_expert_badge_tooltip">Włącz tryb ekspercki w Ustawieniach, aby ręcznie dodać tę modyfikację</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Nie, mam już plik APK</string>
     <string name="home_apk_use_saved_with_version">Użyj zapisanego pliku APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
-    <string name="home_version_requires_android">Wymaga Androida %1$s+</string>
+    <string name="home_version_requires_android">Wymaga Androida %s+</string>
     <string name="home_apk_no_compatible_versions_title">Niewspierane na tym urządzeniu</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nie ma wersji wspieranych z Androidem %2$d (API %3$d). Wszystkie zadeklarowane wersje wymagają nowszego systemu Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
     <string name="home_download_instructions_steps_title">Instrukcja:</string>
-    <string name="home_download_instructions_step1">Naciśnij przycisk \"%1$s\" poniżej</string>
+    <string name="home_download_instructions_step1">Naciśnij przycisk \"%s\" poniżej</string>
     <string name="home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
     <string name="home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
     <string name="home_download_instructions_step3">Poczekaj na zakończenie pobierania i &lt;b&gt;nie instaluj&lt;/b&gt; pliku APK</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Przejdź do APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Wybierz pobrany plik APK</string>
-    <string name="home_file_picker_prompt_description">Wybierz pobrany przed chwilą plik APK &lt;b&gt;%1$s&lt;/b&gt;</string>
+    <string name="home_file_picker_prompt_description">Wybierz pobrany przed chwilą plik APK &lt;b&gt;%s&lt;/b&gt;</string>
     <string name="home_file_picker_prompt_open_apk">Otwórz plik APK</string>
     <string name="home_recommended_version">Zalecana wersja</string>
     <string name="home_selected_version">Wybrana wersja</string>
@@ -260,6 +268,9 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
     <string name="patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zamontować</string>
     <string name="patcher_storage_permission_dialog_title">Brak dostępu do ścieżki pamięci</string>
+    <string name="patcher_incompatible_patcher_title">Wymagana aktualizacja</string>
+    <string name="patcher_incompatible_patcher_description">Pakiet &lt;b&gt;%1$s&lt;/b&gt; wymaga modyfikatora w wersji &lt;b&gt;%2$s&lt;/b&gt; lub nowszej. Zaktualizuj Morphe, aby zmodyfikować tę aplikację</string>
+    <string name="patcher_incompatible_patcher_update_button">Pobierz i zaktualizuj Morphe</string>
     <string name="patcher_storage_permission_description_api30">Przynajmniej jedna opcja modyfikacji wskazuje na ścieżki, których Morphe nie może odczytać. Przyznaj dostęp do pamięci i stuknij przycisk, a modyfikowanie rozpocznie się automatycznie</string>
     <string name="patcher_storage_permission_description_legacy">Przynajmniej jedna opcji modyfikacji wskazuje na ścieżki, do których nie można uzyskać dostępu. Zaktualizuj ścieżki w opcjach i spróbuj ponownie</string>
     <string name="patcher_storage_permission_grant">Przyznaj uprawnienia dostępu do pamięci</string>
@@ -317,7 +328,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="patched_app_saved_toast">Zapisano zmodyfikowaną aplikację na później</string>
     <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
     <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
-    <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %1$s</string>
+    <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %s</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>
     <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
     <string name="save_apk_success">Zapisano plik APK</string>
@@ -375,7 +386,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="settings_appearance_app_icon_dark_2">Otchłań</string>
     <string name="settings_appearance_app_icon_dark_3">Indygo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Zmienić ikonę aplikacji?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Zmienić na \"%1$s\" i uruchomić ponownie?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Zmienić na &lt;b&gt;%s&lt;/b&gt; i uruchomić ponownie?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Zmień ikonę</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizacje</string>
@@ -397,7 +408,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <!-- Notification content -->
     <string name="notification_manager_update_title">Dostępna aktualizacja Morphe</string>
     <string name="notification_bundle_update_title">Dostępne nowe modyfikacje</string>
-    <string name="notification_update_text">Wersja %1$s jest gotowa do pobrania</string>
+    <string name="notification_update_text">Wersja %s jest gotowa do pobrania</string>
     <string name="notification_bundle_update_text_unversioned">Stuknij, aby otworzyć Morphe i zaktualizować</string>
     <string name="notification_permission_dialog_title">Zezwól na powiadomienia</string>
     <string name="notification_permission_dialog_description">Morphe wymaga uprawnień do powiadomień, aby informować Cię o dostępnych aktualizacjach w tle</string>
@@ -533,9 +544,9 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_action_open_shizuku">Otwórz Shizuku</string>
     <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>
     <string name="installer_hint_conflict">Inna aplikacja o tej samej nazwie pakietu jest już zainstalowana. Odinstaluj ją, aby kontynuować</string>
-    <string name="installer_external_launched">Otwieranie %1$s…</string>
-    <string name="installer_external_timeout">%1$s nie potwierdził instalacji. Sprawdź inną aplikację i spróbuj ponownie</string>
-    <string name="installer_external_success">%1$s potwierdził pomyślną instalację</string>
+    <string name="installer_external_launched">Otwieranie %s…</string>
+    <string name="installer_external_timeout">Brak potwierdzenia instalacji ze strony %s. Sprawdź drugą aplikację i spróbuj ponownie</string>
+    <string name="installer_external_success">Instalacja przez %s zakończona pomyślnie</string>
     <string name="installer_unavailable_title">%s niedostępny</string>
     <string name="installer_unavailable_message">Twój preferowany instalator (%s) jest obecnie niedostępny. Możesz naprawić problem i spróbować ponownie lub po prostu użyć standardowego instalatora</string>
     <string name="installer_unavailable_shizuku_hint">Upewnij się, że Shizuku jest uruchomione, a tej aplikacji przyznano odpowiednie uprawnienia</string>

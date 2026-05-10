@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Andra appar</string>
+    <string name="home_other_apps">Övriga appar</string>
     <string name="home_not_patched_yet">Inte modifierad än</string>
     <string name="home_no_patches_available">Inga tillägg är tillgängliga</string>
     <string name="home_app_hide_title">Dölj den här appen?</string>
-    <string name="home_app_hide_message">Den här appen döljs från startsidan. Du kan återställa den senare med knappen \"%1$s\" längst ned i listan</string>
+    <string name="home_app_hide_message">Den här appen döljs från startsidan. Du kan återställa den senare från de dolda apparna med knappen längst ned i listan</string>
     <string name="home_app_will_be_hidden">Den här appen döljs</string>
     <string name="home_app_show_hidden">Visa dolda appar</string>
     <string name="home_app_no_hidden">Inga dolda appar</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Uppdateringar hoppas över</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
-    <string name="home_update_progress_format">%1$s har bearbetats</string>
+    <string name="home_update_progress_format">%s har bearbetats</string>
     <string name="home_update_success">Uppdatering av källor är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
     <string name="home_search_apps">Sök efter appar</string>
     <string name="home_no_apps_title">Inga appar är tillgängliga</string>
     <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
-    <string name="home_no_apps_search_subtitle">Inga appar matchar \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Inga appar matchar \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alla appar är dolda</string>
     <string name="home_all_apps_hidden_subtitle">Du har dolt alla appar från startsidan</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,32 +63,39 @@
     <string name="sources_management_experimental_versions_toggle">Använd experimentella appversioner</string>
     <string name="sources_management_experimental_versions_toggle_description">Modifiera experimentella appmål om sådana finns</string>
     <string name="sources_management_already_exists">Den här källan har redan lagts till</string>
+    <string name="sources_management_invalid_url">Ogiltig källadress. Kontrollera adressen och försök igen</string>
+    <string name="sources_management_metadata_unavailable">Metadata är inte tillgängliga</string>
+    <string name="sources_management_metadata_unavailable_hint">Fjärrfilen för metadata är inte tillgänglig. Modifiering med det installerade arkivet fungerar fortfarande, men automatisk uppdatering är inaktiverad för den här källan</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Det gick inte att ladda ned tilläggsarkivet. Källadressen kan vara felaktig eller så finns inte filen</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnamn</string>
     <string name="sources_dialog_rename">Byt namn på tilläggskällan</string>
     <string name="sources_dialog_duplicate_name_error">Det finns redan en tilläggskälla med det här namnet</string>
     <string name="sources_dialog_missing_error">Det gick inte att uppdatera den här tilläggskällan</string>
     <string name="sources_dialog_view_any_version">Valfri version</string>
-    <string name="sources_dialog_view_any_package">Alla paket</string>
+    <string name="sources_dialog_view_any_package">Valfritt paket</string>
     <string name="sources_dialog_add_source">Lägg till tilläggskälla</string>
     <string name="sources_dialog_delete_confirm_message">Radera källan %s? Det går inte att ångra den här åtgärden</string>
     <string name="sources_dialog_remote">Fjärrkälla</string>
-    <string name="sources_dialog_remote_url">Webbadress för källan</string>
+    <string name="sources_dialog_remote_url">Källadress</string>
     <string name="sources_dialog_remote_url_formats_title">Exempel:</string>
     <string name="sources_dialog_local">Lokal</string>
     <string name="sources_dialog_local_file">Välj källfil för tillägg</string>
+    <string name="sources_dialog_local_file_tap_hint">Tryck för att bläddra i lagringen</string>
     <string name="sources_dialog_local_file_description">Välj en källfil för tillägg i formatet .mpp från lagringen</string>
+    <string name="sources_dialog_local_invalid_extension">Filen måste ha filändelsen .mpp</string>
+    <string name="sources_dialog_url_valid">Giltig lagringsplats eller JSON-adress</string>
     <string name="sources_dialog_local_change_file">Byt fil</string>
     <string name="sources_dialog_preinstalled">Förinstallerad</string>
     <string name="sources_update_success">Uppdateringen lyckades</string>
     <string name="sources_update_unavailable">Ingen uppdatering är tillgänglig</string>
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
-    <string name="sources_download_fail_named">Det gick inte att ladda ned \"%1$s\": %2$s</string>
-    <string name="sources_download_endpoint_not_found">Det gick inte att uppdatera \"%1$s\": JSON-filen för tillägg hittades inte på den konfigurerade webbadressen</string>
+    <string name="sources_download_fail_named">Det gick inte att uppdatera %s. Kontrollera internetanslutningen och försök igen</string>
+    <string name="sources_download_endpoint_not_found">%s: metadata för tillägg hittades inte</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Aktivera Expertläge i inställningarna för att inkludera det här tillägget manuellt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Behöver du hjälp att hitta en omodifierad original-APK-fil?</string>
+    <string name="home_apk_availability_dialog_title">Behöver du hjälp att hitta en ursprunglig omodifierad APK-fil?</string>
     <string name="home_apk_availability_dialog_simple">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med följande version:</string>
     <string name="home_apk_availability_dialog_expert">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med en av följande versioner:</string>
     <string name="home_apk_availability_recommended_label">Rekommenderad</string>
@@ -98,23 +105,23 @@
     <string name="home_apk_availability_no">Nej, jag har redan en APK-fil</string>
     <string name="home_apk_use_saved_with_version">Använd den sparade APK-filen (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ingen sparad APK-fil. Modifieringen kräver att du väljer APK-filen igen</string>
-    <string name="home_version_requires_android">Kräver Android %1$s+</string>
+    <string name="home_version_requires_android">Kräver Android %s eller senare</string>
     <string name="home_apk_no_compatible_versions_title">Stöds inte på den här enheten</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har inga versioner som stöds för Android %2$d (API %3$d). Alla deklarerade versioner kräver en senare Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">Ladda ned original-APK-filen</string>
+    <string name="home_download_instructions_title">Ladda ned den ursprungliga APK-filen</string>
     <string name="home_download_instructions_steps_title">Anvisningar:</string>
-    <string name="home_download_instructions_step1">Tryck på knappen %1$s nedan</string>
+    <string name="home_download_instructions_step1">Tryck på knappen %s nedan</string>
     <string name="home_download_instructions_step2_part1">Skrolla ned på webbsidan och tryck på</string>
     <string name="home_download_instructions_download_button_toast">Tryck på nedladdningsknappen på webbplatsen, inte här 😊</string>
     <string name="home_download_instructions_step3">Vänta tills nedladdningen är klar och &lt;b&gt;installera inte&lt;/b&gt; APK-filen</string>
     <string name="home_download_instructions_step3_mount">Vänta tills nedladdningen är klar och &lt;b&gt;installera sedan APK-filen&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Öppna Morphe igen när nedladdningen har slutförts</string>
-    <string name="home_download_instructions_step4_mount"> Öppna Morphe igen när du har installerat original-APK-filen</string>
+    <string name="home_download_instructions_step4_mount"> Öppna Morphe igen när du har installerat den ursprungliga APK-filen</string>
     <string name="home_download_instructions_continue">Fortsätt till APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Välj den nedladdade APK-filen</string>
-    <string name="home_file_picker_prompt_description">Välj den &lt;b&gt;%1$s&lt;/b&gt;-APK-fil som du just laddade ned</string>
+    <string name="home_file_picker_prompt_description">Välj den &lt;b&gt;%s&lt;/b&gt;-APK-fil som du just laddade ned</string>
     <string name="home_file_picker_prompt_open_apk">Öppna APK-fil</string>
     <string name="home_recommended_version">Rekommenderad version</string>
     <string name="home_selected_version">Vald version</string>
@@ -133,15 +140,17 @@
     <string name="expert_mode_restore_saved">Återställ sparat urval</string>
     <string name="expert_mode_no_results">Inga tillägg hittades</string>
     <string name="expert_mode_universal_patches">Universella tillägg</string>
-    <string name="expert_mode_new_patches">Ny</string>
+    <string name="expert_mode_new_patches">Nytt</string>
     <string name="expert_mode_multiple_sources_warning_title">Flera tilläggskällor har valts</string>
-    <string name="expert_mode_multiple_sources_warning_message">"Du har valt tillägg från flera tilläggskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. "</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Du har valt tillägg från flera tilläggskällor. Det kan orsaka kompatibilitetsproblem eller oväntat beteende. 
+
+Är du säker på att du vill fortsätta?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Overifierad APK-fil</string>
     <string name="home_invalid_signature_message">Den APK-fil du har valt för &lt;b&gt;%s&lt;/b&gt; matchar inte det förväntade signeringscertifikatet. Den kan ha modifierats eller vara från en opålitlig källa.</string>
-    <string name="home_invalid_signature_badge">Denna APK-fil kanske inte är originalet</string>
+    <string name="home_invalid_signature_badge">Den här APK-filen kanske inte är den ursprungliga</string>
     <string name="home_split_apk_warning_title">Delad APK-fil upptäckt</string>
-    <string name="home_split_apk_warning_message">"Den här filen är ett APK-paket
+    <string name="home_split_apk_warning_message">"Den här filen är ett APK-arkiv
 (&lt;b&gt;APKM/APKS/XAPK&lt;/b&gt;). 
 
 För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;fullständig APK-fil&lt;/b&gt;"</string>
@@ -209,12 +218,12 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_remove_app_warning">Detta raderar följande permanent:</string>
     <string name="home_app_info_delete_item_database">Databaspost</string>
     <string name="home_app_info_delete_item_patched_apk">Modifierad APK-fil</string>
-    <string name="home_app_info_delete_item_original_apk">Original-APK-fil</string>
-    <string name="home_app_info_delete_preservation_note">Ditt tilläggsurval och dess inställningar sparas för framtida modifiering</string>
+    <string name="home_app_info_delete_item_original_apk">Ursprunglig APK-fil</string>
+    <string name="home_app_info_delete_preservation_note">Tilläggsurvalet och dess inställningar sparas för framtida modifiering</string>
     <string name="home_app_info_patches_name_default">Tillägg</string>
     <string name="home_app_info_patches_name_fallback">Namnlös</string>
     <string name="home_app_info_patches_replace_fail">Det gick inte att importera tillägg: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Original-APK-filen hittades inte. Det går inte att modifiera den här appen igen</string>
+    <string name="home_app_info_repatch_no_original_apk">Den ursprungliga APK-filen hittades inte. Det går inte att modifiera den här appen igen</string>
     <string name="home_app_info_original_package_name">Ursprungligt paketnamn</string>
     <string name="home_app_info_applied_patches">Tillämpade tillägg</string>
     <string name="home_app_info_patch_source_used">Tilläggskälla som används</string>
@@ -223,12 +232,12 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_install_type_system_installer">Systemets installerare</string>
     <string name="home_app_info_patched_at">Modifierades</string>
     <string name="home_app_info_patch_update_available">Tilläggsuppdatering är tillgänglig</string>
-    <string name="home_app_info_patch_update_available_description">En nyare version av tilläggen är tillgänglig. Modifiera din app igen för att få de senaste förbättringarna och felkorrigeringarna</string>
+    <string name="home_app_info_patch_update_available_description">En nyare version av tilläggen är tillgänglig. Modifiera appen igen för att få de senaste förbättringarna och felkorrigeringarna</string>
     <string name="home_app_info_app_deleted_warning">Appen har avinstallerats</string>
     <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Modifiera den igen för att återställa funktionaliteten</string>
     <string name="home_app_info_apk_size">Storlek på APK-fil</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Rotläget kräver att original-APK-filen är installerad på din enhet innan du modifierar appen</string>
+    <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan du modifierar appen</string>
     <string name="root_gmscore_excluded">Tillägget för GmsCore-stöd exkluderas i rotläge</string>
     <string name="root_pre_patch_installer_title">Välj installationsmetod</string>
     <string name="root_pre_patch_installer_description">Din enhet har rotåtkomst. Välj hur du vill installera den modifierade appen</string>
@@ -238,7 +247,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="root_pre_patch_installer_standard_description">Installera som en separat app med stöd för GmsCore. Välj en installerare (Systemets installerare, Shizuku med flera) efter modifieringen</string>
     <string name="root_pre_patch_installer_hint">Installationsmetoden bestämmer vilka tillägg som ingår och kan inte ändras efter modifieringen</string>
     <!-- Patcher Screen -->
-    <string name="patcher_error_copied">Fel kopierat till urklipp</string>
+    <string name="patcher_error_copied">Felmeddelande kopierades till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
     <string name="patcher_error_technical">Teknisk information</string>
     <string name="patcher_error_dialog_app_info">Appinformation</string>
@@ -258,6 +267,9 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="patcher_ready_to_install_subtitle">Tryck på knappen nedan för att installera</string>
     <string name="patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
     <string name="patcher_storage_permission_dialog_title">Det går inte att komma åt lagringssökväg</string>
+    <string name="patcher_incompatible_patcher_title">Uppdatering krävs</string>
+    <string name="patcher_incompatible_patcher_description">Arkivet &lt;b&gt;%1$s&lt;/b&gt; kräver version &lt;b&gt;%2$s&lt;/b&gt; eller senare av modifieringsverktyget. Uppdatera Morphe för att modifiera den här appen</string>
+    <string name="patcher_incompatible_patcher_update_button">Ladda ned och uppdatera Morphe</string>
     <string name="patcher_storage_permission_description_api30">Ett eller fler tilläggsalternativ pekar på sökvägar som Morphe inte kan läsa. Ge åtkomst till lagringen och tryck på knappen så startas modifieringen automatiskt</string>
     <string name="patcher_storage_permission_description_legacy">Ett eller fler tilläggsalternativ pekar på sökvägar som inte går att komma åt. Uppdatera sökvägarna i tilläggsalternativen och försök igen</string>
     <string name="patcher_storage_permission_grant">Ge åtkomst till lagring</string>
@@ -315,10 +327,10 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="patched_app_saved_toast">Den modifierade appen sparades till senare</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den modifierade appen</string>
     <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med det här plugin-programmet</string>
-    <string name="patcher_process_exit_message">Modifieringsprocessen avslutades med koden %1$s</string>
+    <string name="patcher_process_exit_message">Modifieringsprocessen avslutades med koden %s</string>
     <string name="install_app_success">Installationen lyckades</string>
     <string name="install_app_fail">Det gick inte att installera appen: %s</string>
-    <string name="save_apk_success">APK-fil sparad</string>
+    <string name="save_apk_success">APK-fil sparades</string>
     <string name="saved_app_export_failed">Det gick inte att exportera den modifierade appen</string>
     <string name="saved_app_removed_toast">Tog bort den sparade modifierade appen</string>
     <string name="saved_app_launch_unavailable">Installera appen innan du öppnar den</string>
@@ -345,7 +357,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_appearance_background_random_interval_daily">Varje dag</string>
     <string name="settings_appearance_background_random_interval_3days">Var tredje dag</string>
     <string name="settings_appearance_parallax_effect">Parallaxeffekt</string>
-    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när enheten lutas</string>
+    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när du lutar enheten</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_system">System</string>
@@ -373,7 +385,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_appearance_app_icon_dark_2">Tomrum</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ändra appikon?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Ändra till %1$s och starta om?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Ändra till &lt;b&gt;%s&lt;/b&gt; och starta om?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ändra ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Uppdateringar</string>
@@ -395,7 +407,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <!-- Notification content -->
     <string name="notification_manager_update_title">Uppdatering för Morphe är tillgänglig</string>
     <string name="notification_bundle_update_title">Nya tillägg är tillgängliga </string>
-    <string name="notification_update_text">Version %1$s är redo att laddas ned</string>
+    <string name="notification_update_text">Version %s är redo att laddas ned</string>
     <string name="notification_bundle_update_text_unversioned">Tryck för att öppna Morphe och uppdatera</string>
     <string name="notification_permission_dialog_title">Tillåt aviseringar</string>
     <string name="notification_permission_dialog_description">Morphe behöver behörighet att skicka aviseringar för att kunna meddela dig när uppdateringar är tillgängliga i bakgrunden</string>
@@ -415,7 +427,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
 Tar bort inbyggda bibliotek för arkitekturer som inte stöds från vanliga APK-filer efter att appen har modifierats "</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Läge för bytekodbearbetning</string>
-    <string name="settings_advanced_bytecode_mode_dialog_description">Kontrollerar hur bytekod bearbetas när appar modifieras. Detta påverkar modifieringshastighet, minnesanvändning och den slutliga APK-filens storlek</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">Kontrollerar hur bytekoden bearbetas när appar modifieras. Detta påverkar modifieringshastighet, minnesanvändning och den slutliga APK-filens storlek</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">Snabbt (Rekommenderas)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">Snabbt</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Snabbare modifiering och lägre minnesanvändning, på bekostnad av en större APK-fil. Rekommenderas för enheter med lågt RAM-minne eller äldre enheter</string>
@@ -424,7 +436,7 @@ Tar bort inbyggda bibliotek för arkitekturer som inte stöds från vanliga APK-
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Personlig åtkomsttoken för GitHub</string>
     <string name="settings_advanced_github_pat_description">Krävs för att använda hämtningsbegäranden som källor</string>
-    <string name="settings_advanced_github_pat_configured">Token konfigurerad</string>
+    <string name="settings_advanced_github_pat_configured">Token konfigurerades</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
     <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en personlig åtkomsttoken med omfattningen public_repo github.com</string>
@@ -531,9 +543,9 @@ Bildernas mått ska vara följande:
     <string name="installer_action_open_shizuku">Öppna Shizuku</string>
     <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till en annan installerare</string>
     <string name="installer_hint_conflict">En annan app med det här paketnamnet är redan installerad. Avinstallera den innan du fortsätter</string>
-    <string name="installer_external_launched">Öppnar %1$s …</string>
-    <string name="installer_external_timeout">%1$s bekräftade inte installationen. Kontrollera den andra appen och försök igen</string>
-    <string name="installer_external_success">%1$s meddelade om en lyckad installation</string>
+    <string name="installer_external_launched">Öppnar %s …</string>
+    <string name="installer_external_timeout">%s bekräftade inte installationen. Kontrollera den andra appen och försök igen</string>
+    <string name="installer_external_success">%s meddelade om en lyckad installation</string>
     <string name="installer_unavailable_title">%s är inte tillgänglig</string>
     <string name="installer_unavailable_message">Din föredragna installerare (%s) är för närvarande inte tillgänglig. Du kan åtgärda problemet och försöka igen eller använda standardinstalleraren istället</string>
     <string name="installer_unavailable_shizuku_hint">Se till att Shizuku körs och att appen har tilldelats behörighet</string>
@@ -563,12 +575,12 @@ Bildernas mått ska vara följande:
     <string name="settings_system_import_keystore_dialog_button">Importera</string>
     <string name="settings_system_import_keystore_dialog_format_field">Nyckellagerformat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Felaktiga nyckellageruppgifter</string>
-    <string name="settings_system_import_keystore_success">Nyckellager importerat</string>
+    <string name="settings_system_import_keystore_success">Nyckellager importerades</string>
     <string name="settings_system_import_keystore_failed">Det gick inte att importera nyckellager</string>
     <string name="settings_system_export_keystore">Exportera nyckellager</string>
     <string name="settings_system_export_keystore_description">Exportera det aktuella nyckellagret</string>
-    <string name="settings_system_export_keystore_unavailable">Inget nyckellager tillgängligt att exportera</string>
-    <string name="settings_system_export_keystore_success">Nyckellager exporterat</string>
+    <string name="settings_system_export_keystore_unavailable">Inget nyckellager är tillgängligt att exportera</string>
+    <string name="settings_system_export_keystore_success">Nyckellager exporterades</string>
     <string name="settings_system_export_keystore_failed">Det gick inte att exportera nyckellager</string>
     <string name="settings_system_show_password_field">Visa lösenord</string>
     <string name="settings_system_hide_password_field">Dölj lösenord</string>
@@ -576,18 +588,18 @@ Bildernas mått ska vara följande:
     <string name="settings_system_import_manager_settings">Importera Morphe-inställningar</string>
     <string name="settings_system_import_manager_settings_description">Återställ Morphe-inställningar från en JSON-fil</string>
     <string name="settings_system_import_manager_settings_fail">Det gick inte att importera Morphe-inställningar: %s</string>
-    <string name="settings_system_import_manager_settings_success">Morphe-inställningar importerade</string>
+    <string name="settings_system_import_manager_settings_success">Morphe-inställningar importerades</string>
     <string name="settings_system_export_manager_settings">Exportera Morphe-inställningar</string>
     <string name="settings_system_export_manager_settings_description">Spara Morphe-inställningar i en JSON-fil</string>
     <string name="settings_system_export_manager_settings_fail">Det gick inte att exportera Morphe-inställningar: %s</string>
-    <string name="settings_system_export_manager_settings_success">Morphe-inställningar exporterade</string>
+    <string name="settings_system_export_manager_settings_success">Morphe-inställningar exporterades</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Felsökning</string>
     <string name="settings_system_export_debug_logs">Exportera felsökningsloggar</string>
     <string name="settings_system_export_debug_logs_description">Spara systemloggar för felsökning</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Det gick inte att exportera loggar</string>
-    <string name="settings_system_export_debug_logs_export_success">Loggar exporterade</string>
+    <string name="settings_system_export_debug_logs_export_success">Loggar exporterades</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Lagringshantering</string>
     <string name="settings_system_apks_size">Total storlek: %s</string>
@@ -599,12 +611,12 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patched_apks_delete_confirm">Är du säker på att du vill radera den sparade modifierade APK-filen för %s?</string>
     <string name="settings_system_patched_apks_deleted">Modifierad APK-fil har raderats</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
-    <string name="settings_system_original_apks_title">Original-APK-filer</string>
-    <string name="settings_system_original_apks_description">Original-APK-filer sparas för att kunna modifieras igen. Endast den senaste versionen sparas för varje app</string>
-    <string name="settings_system_original_apks_empty">Inga original-APK-filer lagras</string>
-    <string name="settings_system_original_apks_deleted">Original-APK-fil har raderats</string>
-    <string name="settings_system_original_apks_delete_title">Radera original-APK-fil?</string>
-    <string name="settings_system_original_apks_delete_confirm">Radera original-APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
+    <string name="settings_system_original_apks_title">Ursprungliga APK-filer</string>
+    <string name="settings_system_original_apks_description">Ursprungliga APK-filer sparas för att kunna modifieras igen. Endast den senaste versionen sparas för varje app</string>
+    <string name="settings_system_original_apks_empty">Inga ursprungliga APK-filer lagras</string>
+    <string name="settings_system_original_apks_deleted">Ursprunglig APK-fil har tagits bort</string>
+    <string name="settings_system_original_apks_delete_title">Radera ursprunglig APK-fil?</string>
+    <string name="settings_system_original_apks_delete_confirm">Radera den ursprungliga APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tilläggsurval</string>
     <string name="settings_system_patch_selections_description">Hantera sparade tilläggsurval och tilläggsalternativ. Dessa blir kvar om appar avinstalleras</string>
@@ -631,7 +643,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
     <string name="settings_system_share_website_description">Dela Morphes officiella webbplats</string>
-    <string name="settings_system_manager_description">"Ett projekt med öppen källkod för modern, smidig modifiering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
+    <string name="settings_system_manager_description">"Ett projekt med öppen källkod för modern och smidig modifiering av populära Android-appar som drivs av feedback och bidrag från communityn"</string>
     <string name="credits">Medverkande</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>
@@ -698,7 +710,7 @@ Bildernas mått ska vara följande:
     <string name="allow">Tillåt</string>
     <string name="details">Information</string>
     <string name="hide">Dölj</string>
-    <string name="hidden">Dold</string>
+    <string name="hidden">Dolt</string>
     <string name="unhide">Visa</string>
     <string name="logs">Loggar</string>
     <string name="sources">Källor</string>
@@ -715,7 +727,7 @@ Bildernas mått ska vara följande:
     <string name="no_network_toast">Ingen internetanslutning är tillgänglig</string>
     <string name="update_available">En uppdatering är tillgänglig</string>
     <string name="ready_to_install_update">Redo att installera uppdateringen</string>
-    <string name="update_completed">Uppdatering installerad</string>
+    <string name="update_completed">Uppdatering installerades</string>
     <string name="install_update_manager_failed">Det gick inte att installera uppdateringen</string>
     <string name="installing_manager_update">Installerar uppdateringen …</string>
     <string name="downloading_manager_update">Laddar ned uppdateringen …</string>

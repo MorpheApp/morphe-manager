@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Ještě nezáplatováno</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
     <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
-    <string name="home_app_hide_message">Tato aplikace bude skryta z obrazovky. Můžete ji později obnovit pomocí tlačítka \'%1$s\' na konci seznamu</string>
+    <string name="home_app_hide_message">Tato aplikace bude skryta z domovské obrazovky. Můžete ji později obnovit pomocí tlačítka \"\" na konci seznamu</string>
     <string name="home_app_will_be_hidden">Tato aplikace bude skryta</string>
     <string name="home_app_show_hidden">Zobrazit skryté aplikace</string>
     <string name="home_app_no_hidden">Žádné skryté aplikace</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">Aktualizace přeskočeny</string>
     <string name="home_update_skipped_metered_subtitle">Mobilní data jsou aktivní</string>
     <string name="home_updating_sources">Probíhá aktualizace zdrojů…</string>
-    <string name="home_update_progress_format">%1$s zpracováno</string>
+    <string name="home_update_progress_format">%s zpracováno</string>
     <string name="home_update_success">Aktualizace zdrojů dokončena</string>
     <string name="home_update_success_subtitle">Vaše zdroje jsou aktuální</string>
     <string name="home_sources_are_loading">Zdroje se načítají, počkejte prosím…</string>
     <string name="home_search_apps">Hledat aplikace</string>
     <string name="home_no_apps_title">Nenalezly se žádné aplikace</string>
     <string name="home_no_apps_subtitle">Přidejte zdroj záplaty nebo povolte stávající v %s</string>
-    <string name="home_no_apps_search_subtitle">Žádné aplikace neodpovídají \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">Žádná aplikace neodpovídá \"%s\"</string>
     <string name="home_all_apps_hidden_title">Všechny aplikace jsou skryté</string>
     <string name="home_all_apps_hidden_subtitle">Všechny aplikace jste schovali z domovské obrazovky</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">Použít experimentální verze aplikace</string>
     <string name="sources_management_experimental_versions_toggle_description">Záplatovat experimentální verze aplikací, jsou-li k dispozici</string>
     <string name="sources_management_already_exists">Tento zdroj byl již přidán</string>
+    <string name="sources_management_invalid_url">Neplatná adresa URL zdroje. Zkontrolujte adresu a zkuste to znovu</string>
+    <string name="sources_management_metadata_unavailable">Metadata N/A</string>
+    <string name="sources_management_metadata_unavailable_hint">Soubor s metadaty na vzdáleném serveru není dostupný. Oprava pomocí nainstalovaného balíčku stále funguje, ale automatická aktualizace je pro tento zdroj zakázána</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Balíček oprav nemohl být stažen. Adresa URL zdroje může být neplatná nebo soubor nemusí existovat</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazit název</string>
     <string name="sources_dialog_rename">Přejmenovat zdroj záplat</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">Příklady:</string>
     <string name="sources_dialog_local">Lokální</string>
     <string name="sources_dialog_local_file">Vybrat soubor se záplaty</string>
+    <string name="sources_dialog_local_file_tap_hint">Klepnutím zobrazíte úložiště</string>
     <string name="sources_dialog_local_file_description">Vyberte .mpp soubor se záplaty z uložiště</string>
+    <string name="sources_dialog_local_invalid_extension">Soubor musí mít příponu .mpp</string>
+    <string name="sources_dialog_url_valid">Platná adresa úložiště nebo URL JSON</string>
+    <string name="sources_dialog_url_invalid">URL musí odkazovat na repozitář GitHub/GitLab nebo na soubor .json</string>
     <string name="sources_dialog_local_change_file">Změnit soubor</string>
     <string name="sources_dialog_preinstalled">Předinstalované</string>
     <string name="sources_update_success">Aktualizace úspěšná</string>
     <string name="sources_update_unavailable">Nejsou dostupné žádné aktualizace</string>
     <string name="sources_download_fail">Selhalo stahování zdrojů: %s</string>
-    <string name="sources_download_fail_named">Nepodařilo se stáhnout \'%1$s\': %2$s</string>
-    <string name="sources_download_endpoint_not_found">Nebylo možné aktualizovat \'%1$s\': JSON soubor záplaty nebyl nalezen na nakonfigurované URL</string>
+    <string name="sources_download_fail_named">\'%s\' nelze aktualizovat. Zkontrolujte připojení k internetu a zkuste to znovu</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': nebyla nalezena metadata opravy</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Povolte Expert režim v Nastavení, abyste mohli tuto záplatu ručně přidat</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">Ne, už mám APK</string>
     <string name="home_apk_use_saved_with_version">Použít uložené APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Není uložené žádné APK. Pro záplatování bude potřeba vybrat soubor APK znovu</string>
-    <string name="home_version_requires_android">Vyžaduje Android %1$s+</string>
+    <string name="home_version_requires_android">Vyžaduje Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Není podporováno na tomto zařízení</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nemá podporované verze pro Android %2$d (API %3$d). Všechny deklarované verze vyžadují vyšší verzi Androidu</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Stáhnout původní APK</string>
     <string name="home_download_instructions_steps_title">Postup:</string>
-    <string name="home_download_instructions_step1">Stiskněte tlačítko \'%1$s\' níže</string>
+    <string name="home_download_instructions_step1">Stiskněte tlačítko \'%s\' níže</string>
     <string name="home_download_instructions_step2_part1">Na webové stránce sjeďte dolů a stiskněte</string>
     <string name="home_download_instructions_download_button_toast">Na webové stránce stiskněte tlačítko stažení, ne zde 😊</string>
     <string name="home_download_instructions_step3">Počkejte, než se stahování dokončí, stažené APK &lt;b&gt;NEinstalujte&lt;/b&gt;</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">Pokračujte na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Vyberte stažený APK soubor</string>
-    <string name="home_file_picker_prompt_description">Vyberte APK soubor &lt;b&gt;%1$s&lt;/b&gt; , který jste právě stáhnul</string>
+    <string name="home_file_picker_prompt_description">Vyberte APK soubor &lt;b&gt;%s&lt;/b&gt; , který jste právě stáhnul</string>
     <string name="home_file_picker_prompt_open_apk">Otevřít APK soubor</string>
     <string name="home_recommended_version">Doporučená verze</string>
     <string name="home_selected_version">Vybraná verze</string>
@@ -260,6 +268,9 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="patcher_ready_to_install_subtitle">Stiskněte tlačítko níže pro instalaci</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
     <string name="patcher_storage_permission_dialog_title">Nelze přistupovat k cestě úložiště</string>
+    <string name="patcher_incompatible_patcher_title">Aktualizace požadována</string>
+    <string name="patcher_incompatible_patcher_description">Balíček &lt;b&gt;%1$s&lt;/b&gt; vyžaduje verzi opravovače &lt;b&gt;%2$s&lt;/b&gt; nebo novější. Aktualizujte Morphe pro opravu této aplikace</string>
+    <string name="patcher_incompatible_patcher_update_button">Stáhnout a aktualizovat Morphe</string>
     <string name="patcher_storage_permission_description_api30">Jedna nebo více možností záplaty odkazuje na cesty, které Morphe nemůže číst. Udělte oprávnění ke úložišti a klepněte na tlačítko, poté se záplatování spustí automaticky</string>
     <string name="patcher_storage_permission_description_legacy">Jeden nebo více možnosti pro patchování ukazují na cesty, které nelze přistupovat. Upravte cesty v možnostech pro patchování a zkuste to znovu</string>
     <string name="patcher_storage_permission_grant">Povolte přístup k úložišti</string>
@@ -317,7 +328,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="patched_app_saved_toast">Zastaralá aplikace uložena pro později</string>
     <string name="patched_app_save_failed_toast">Chyba při ukládání zastaralé aplikace</string>
     <string name="plugin_activity_dialog_body">Provedení je vyžadováno pro pokračování v tomto rozšíření</string>
-    <string name="patcher_process_exit_message">Proces patcher skončil s kódem %1$s</string>
+    <string name="patcher_process_exit_message">Proces opravy skončil s kódem %s</string>
     <string name="install_app_success">Úspěšně nainstalováno</string>
     <string name="install_app_fail">Selhání instalace aplikace: %s</string>
     <string name="save_apk_success">APK uložen</string>
@@ -375,7 +386,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="settings_appearance_app_icon_dark_2">Prázdnota</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Změnit ikonu aplikace?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">Změnit na \'%1$s\' a spustit znovu?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">Změnit na &lt;b&gt;%s&lt;/b&gt; a restartovat?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Změnit ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizace</string>
@@ -397,7 +408,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <!-- Notification content -->
     <string name="notification_manager_update_title">Dostupná aktualizace Morphe</string>
     <string name="notification_bundle_update_title">Nové záplaty k dispozici</string>
-    <string name="notification_update_text">Verze %1$s je připravena ke stažení</string>
+    <string name="notification_update_text">Verze %s je připravena ke stažení</string>
     <string name="notification_bundle_update_text_unversioned">Klepněte pro otevření Morphe a aktualizaci</string>
     <string name="notification_permission_dialog_title">Povolit upozornění</string>
     <string name="notification_permission_dialog_description">Morphe potřebuje oprávnění pro oznámení, aby vás upozornila na dostupné aktualizace na pozadí</string>
@@ -533,9 +544,9 @@ Rozměry obrázků musí být následující:
     <string name="installer_action_open_shizuku">Otevřít Shizuku</string>
     <string name="installer_hint_generic">Instalace selhala. Zkuste to znovu nebo přepněte na jiný instalátor</string>
     <string name="installer_hint_conflict">Jiná aplikace s tímto jménem balíku je již nainstalována. Odinstalujte ji před pokračováním</string>
-    <string name="installer_external_launched">Otevírání %1$s…</string>
-    <string name="installer_external_timeout">%1$s nezahradil instalaci. Zkontrolujte jinou aplikaci a zkuste to znovu</string>
-    <string name="installer_external_success">%1$s zaregistroval úspěšnou instalaci</string>
+    <string name="installer_external_launched">Otevírám %s…</string>
+    <string name="installer_external_timeout">%s nepotvrdil instalaci. Zkontrolujte druhou aplikaci a zkuste to znovu</string>
+    <string name="installer_external_success">%s nahlásil úspěšnou instalaci</string>
     <string name="installer_unavailable_title">%s nedostupná</string>
     <string name="installer_unavailable_message">Váš preferovaný instalátor (%s) je momentálně nedostupný. Můžete vyřešit problém a zkuste to znovu, nebo použijte standardní instalátor</string>
     <string name="installer_unavailable_shizuku_hint">Ujistěte se, že je Shizuku spuštěn a povoleno pro tuto aplikaci</string>

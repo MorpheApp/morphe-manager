@@ -1,7 +1,7 @@
 package app.morphe.manager.util
 
 /**
- * Compare two version strings
+ * Compare two version strings.
  * Returns: -1 if v1 < v2, 0 if v1 == v2, 1 if v1 > v2
  */
 fun compareVersions(v1: String?, v2: String?): Int {
@@ -64,15 +64,20 @@ fun compareVersions(v1: String?, v2: String?): Int {
         parts1.preRelease == null && parts2.preRelease != null -> 1  // v1 is stable, v2 is pre-release (v1 > v2)
         parts1.preRelease != null && parts2.preRelease == null -> -1 // v1 is pre-release, v2 is stable (v1 < v2)
         else -> {
-            // Both are pre-release, compare the full version string
-            // This handles cases like dev.11 vs dev.12
-            version1.compareTo(version2)
+            // Both are pre-release. Extract the trailing numeric component and compare numerically so that dev.9 < dev.10
+            val num1 = version1.substringAfterLast('.').toLongOrNull()
+            val num2 = version2.substringAfterLast('.').toLongOrNull()
+            if (num1 != null && num2 != null) {
+                num1.compareTo(num2)
+            } else {
+                version1.compareTo(version2)
+            }
         }
     }
 }
 
 /**
- * Check if newVersion is newer than oldVersion
+ * Check if newVersion is newer than oldVersion.
  */
 fun isNewerVersion(oldVersion: String?, newVersion: String?): Boolean {
     return compareVersions(oldVersion, newVersion) < 0

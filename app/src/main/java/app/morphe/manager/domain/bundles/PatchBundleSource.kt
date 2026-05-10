@@ -97,7 +97,8 @@ sealed class PatchBundleSource(
         }
 
         /**
-         * Get GitHub avatar URL if this bundle is from a GitHub repository
+         * Get GitHub avatar URL if this bundle is from a GitHub repository.
+         * Returns null for GitLab bundles (use [gitlabAvatarUrl] instead).
          */
         val PatchBundleSource.githubAvatarUrl: String? get() {
             val remote = this as? RemotePatchBundle ?: return null
@@ -107,7 +108,17 @@ sealed class PatchBundleSource(
         }
 
         /**
-         * Extract GitHub owner/organization name from endpoint URL
+         * Get GitLab avatar URL via unavatar.io if this bundle is from a GitLab repository.
+         */
+        val PatchBundleSource.gitlabAvatarUrl: String? get() {
+            val remote = this as? RemotePatchBundle ?: return null
+            return extractGitLabOwner(remote.endpoint)?.let { owner ->
+                "https://unavatar.io/gitlab/$owner"
+            }
+        }
+
+        /**
+         * Extract GitHub owner/organization name from endpoint URL.
          */
         private fun extractGitHubOwner(endpoint: String): String? {
             return try {
@@ -123,6 +134,24 @@ sealed class PatchBundleSource(
                     "github.com" if segments.isNotEmpty() -> segments[0]
                     else -> null
                 }
+            } catch (_: Exception) {
+                null
+            }
+        }
+
+        /**
+         * Extract GitLab owner/namespace from endpoint URL.
+         * Supports:
+         * - gitlab.com/owner/repo/-/raw/branch/file
+         * - gitlab.com/owner/repo (short form)
+         */
+        private fun extractGitLabOwner(endpoint: String): String? {
+            return try {
+                val uri = java.net.URI(endpoint)
+                val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
+                if (host != "gitlab.com") return null
+                val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
+                segments.firstOrNull()
             } catch (_: Exception) {
                 null
             }

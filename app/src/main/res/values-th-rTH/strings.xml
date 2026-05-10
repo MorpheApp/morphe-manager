@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพทช์</string>
     <string name="home_no_patches_available">ไม่มีแพตซ์รองรับ</string>
     <string name="home_app_hide_title">ซ่อนแอปหรือไม่</string>
-    <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าหลัก คุณสามารถกู้คืนมันได้ภายหลังโดยใช้ปุ่ม \'%1$s\' ที่ด้านล่างของรายการ</string>
+    <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าจอหลัก คุณสามารถกู้คืนได้ภายหลังโดยใช้ปุ่ม \'\' ที่ด้านล่างของรายการ</string>
     <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
     <string name="home_app_show_hidden">แสดงแอปที่ซ่อนอยู่</string>
     <string name="home_app_no_hidden">ไม่มีแอปที่ซ่อนอยู่</string>
@@ -24,14 +24,14 @@
     <string name="home_update_skipped_metered">อัปเดตถูกข้าม</string>
     <string name="home_update_skipped_metered_subtitle">กำลังใช้งานข้อมูลมือถือ</string>
     <string name="home_updating_sources">กำลังอัพเดทข้อมูล…</string>
-    <string name="home_update_progress_format">%1$s ถูกประมวลผลแล้ว</string>
+    <string name="home_update_progress_format">%s กำลังดำเนินการ</string>
     <string name="home_update_success">อัพเดทแหล่งที่มาเสร็จสมบูรณ์</string>
     <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งที่มา กรุณารอสักครู่…</string>
     <string name="home_search_apps">ค้นหาแอป</string>
     <string name="home_no_apps_title">ไม่มีแอปที่ใช้ได้</string>
     <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
-    <string name="home_no_apps_search_subtitle">ไม่มีแอปที่ตรงกับ \"%1$s\"</string>
+    <string name="home_no_apps_search_subtitle">ไม่พบแอปที่ตรงกับ \"%s\"</string>
     <string name="home_all_apps_hidden_title">แอปทั้งหมดถูกซ่อน</string>
     <string name="home_all_apps_hidden_subtitle">คุณซ่อนแอปทั้งหมดออกจากหน้าจอหลัก</string>
     <!-- Home Screen - Home Greetings -->
@@ -63,6 +63,10 @@
     <string name="sources_management_experimental_versions_toggle">ใช้แอปเวอร์ชันทดลอง</string>
     <string name="sources_management_experimental_versions_toggle_description">แพตซ์แอปเวอร์ชันทดลองของเป้าหมาย ถ้ามี</string>
     <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
+    <string name="sources_management_invalid_url">URL ต้นทางไม่ถูกต้อง โปรดตรวจสอบที่อยู่และลองอีกครั้ง</string>
+    <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
+    <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแก้ไขด้วยชุดติดตั้งที่มีอยู่ยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแก้ไขได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งที่มา</string>
@@ -77,14 +81,18 @@
     <string name="sources_dialog_remote_url_formats_title">ตัวอย่าง:</string>
     <string name="sources_dialog_local">อุปกรณ์</string>
     <string name="sources_dialog_local_file">เลือกไฟล์แหล่งที่มา</string>
+    <string name="sources_dialog_local_file_tap_hint">แตะเพื่อเรียกดูที่เก็บข้อมูล</string>
     <string name="sources_dialog_local_file_description">เลือกไฟล์ .mpp จากแหล่งข้อมูลอยู่บนที่เก็บข้อมูลภายใน</string>
+    <string name="sources_dialog_local_invalid_extension">ไฟล์ต้องมีนามสกุล .mpp</string>
+    <string name="sources_dialog_url_valid">ที่อยู่ URL หรือ JSON ที่ถูกต้อง</string>
+    <string name="sources_dialog_url_invalid">URL ต้องชี้ไปยัง GitHub/GitLab repo หรือไฟล์ .json</string>
     <string name="sources_dialog_local_change_file">เปลี่ยนไฟล์</string>
     <string name="sources_dialog_preinstalled">ติดตั้งล่วงหน้าแล้ว</string>
     <string name="sources_update_success">อัปเดตเสร็จสมบูรณ์</string>
     <string name="sources_update_unavailable">ยังไม่มีการอัปเดต</string>
     <string name="sources_download_fail">ดาวน์โหลดแหล่งที่มาไม่สำเร็จ: %s</string>
-    <string name="sources_download_fail_named">การดาวน์โหลด \'%1$s\' ไม่สำเร็จ: %2$s</string>
-    <string name="sources_download_endpoint_not_found">ไม่สามารถอัปเดต \'%1$s\': ไม่พบไฟล์ JSON ของแพทช์ที่ URL ที่กำหนด</string>
+    <string name="sources_download_fail_named">ไม่สามารถอัปเดต \'%s\' ได้ โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณและลองอีกครั้ง</string>
+    <string name="sources_download_endpoint_not_found">ไม่พบข้อมูลเมตาแพตช์สำหรับ \'%s\'</string>
     <string name="sources_patch_expert_badge">ผู้เชี่ยวชาญ</string>
     <string name="sources_patch_expert_badge_tooltip">เปิดใช้งานโหมดผู้เชี่ยวชาญในการตั้งค่าเพื่อเลือกแพตช์นี้ด้วยตนเอง</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -98,13 +106,13 @@
     <string name="home_apk_availability_no">ไม่, ฉันมี APK แล้ว</string>
     <string name="home_apk_use_saved_with_version">ใช้ APK ที่ถูกบันทึก (เวอร์ชัน %s)</string>
     <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก การแพตซ์จะต้องเลือกไฟล์ APK อีกครั้ง</string>
-    <string name="home_version_requires_android">ต้องใช้ Android %1$s+</string>
+    <string name="home_version_requires_android">ต้องใช้ Android %s ขึ้นไป</string>
     <string name="home_apk_no_compatible_versions_title">ไม่รองรับบนอุปกรณ์นี้</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ไม่มีเวอร์ชันที่รองรับสำหรับ Android %2$d (API %3$d) ทุกเวอร์ชันที่ประกาศต้องการ Android เวอร์ชันที่สูงกว่า</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
     <string name="home_download_instructions_steps_title">คำแนะนำ:</string>
-    <string name="home_download_instructions_step1">กดปุ่ม \'%1$s\' ด้านล่าง</string>
+    <string name="home_download_instructions_step1">กดปุ่ม \'%s\' ด้านล่าง</string>
     <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่ม</string>
     <string name="home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
     <string name="home_download_instructions_step3">รอการดาวน์โหลดให้เรียบร้อย และ &lt;b&gt;อย่าไปติดตั้งไฟล์ &lt;/b&gt; ไปล่วงหน้าก่อน</string>
@@ -114,7 +122,7 @@
     <string name="home_download_instructions_continue">ไปที่ APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">เลือก APK ที่ดาวน์โหลด</string>
-    <string name="home_file_picker_prompt_description">เลือกไฟล์ APK &lt;b&gt;%1$s&lt;/b&gt; ที่คุณดาวน์โหลด</string>
+    <string name="home_file_picker_prompt_description">เลือกไฟล์ APK &lt;b&gt;%s&lt;/b&gt; ที่คุณดาวน์โหลด</string>
     <string name="home_file_picker_prompt_open_apk">เปิดไฟล์ APK</string>
     <string name="home_recommended_version">เวอร์ชันแนะนำ</string>
     <string name="home_selected_version">เลือกเวอร์ชัน</string>
@@ -260,6 +268,9 @@
     <string name="patcher_ready_to_install_subtitle">กดปุ่มด้านล่างเพื่อติดตั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
     <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
+    <string name="patcher_incompatible_patcher_title">จำเป็นต้องอัปเดต</string>
+    <string name="patcher_incompatible_patcher_description">ชุดข้อมูล &lt;b&gt;%1$s&lt;/b&gt; จำเป็นต้องใช้เวอร์ชันตัวแก้ไขแพตช์ &lt;b&gt;%2$s&lt;/b&gt; หรือใหม่กว่า โปรดอัปเดต Morphe เพื่อแพตช์แอปนี้</string>
+    <string name="patcher_incompatible_patcher_update_button">ดาวน์โหลดและอัปเดต Morphe</string>
     <string name="patcher_storage_permission_description_api30">ตัวเลือกแพตช์อย่างน้อยหนึ่งรายการชี้ไปยังพาธที่ Morphe ไม่สามารถอ่านได้ ให้สิทธิ์การเข้าถึงพื้นที่เก็บข้อมูลและแตะปุ่ม จากนั้นการแพตช์จะเริ่มทำงานโดยอัตโนมัติ</string>
     <string name="patcher_storage_permission_description_legacy">ตัวเลือกการปรับปรุงบางตัวอ้างอิงไปยังเส้นทางที่ไม่สามารถเข้าถึงได้ อัปเดตเส้นทางในตัวเลือกการปรับปรุงและลองใหม่อีกครั้ง</string>
     <string name="patcher_storage_permission_grant">ยืนยันสิทธิ์การเข้าถึงเก็บข้อมูล</string>
@@ -317,7 +328,7 @@
     <string name="patched_app_saved_toast">บันทึกแอปที่แก้ไขแล้วสำหรับภายหลัง</string>
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แก้ไขได้</string>
     <string name="plugin_activity_dialog_body">ต้องมีการติดต่อผู้ใช้เพื่อดำเนินการต่อไปนี้</string>
-    <string name="patcher_process_exit_message">กระบวนการแพทช์ออกไปแล้วด้วยรหัส %1$s</string>
+    <string name="patcher_process_exit_message">กระบวนการแพตช์เสร็จสิ้นด้วยรหัส %s</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
     <string name="save_apk_success">บันทึก APK สำเร็จ</string>
@@ -375,7 +386,7 @@
     <string name="settings_appearance_app_icon_dark_2">สีว่าง</string>
     <string name="settings_appearance_app_icon_dark_3">สีอินโดิ</string>
     <string name="settings_appearance_app_icon_change_dialog_title">เปลี่ยนไอสัญ?</string>
-    <string name="settings_appearance_app_icon_change_dialog_message">เปลี่ยนเป็น \'%1$s\' และรีสตาร์ท?</string>
+    <string name="settings_appearance_app_icon_change_dialog_message">เปลี่ยนเป็น &lt;b&gt;%s&lt;/b&gt; แล้วเริ่มใหม่หรือไม่?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">เปลี่ยนไอสัญ</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">อัปเดต</string>
@@ -397,7 +408,7 @@
     <!-- Notification content -->
     <string name="notification_manager_update_title">มีการอัปเดต Morphe แล้ว</string>
     <string name="notification_bundle_update_title">มีแพ็คเกจใหม่ให้ใช้งาน</string>
-    <string name="notification_update_text">เวอร์ชัน %1$s เตรียมสำหรับดาวน์โหลดแล้ว</string>
+    <string name="notification_update_text">พร้อมดาวน์โหลดเวอร์ชัน %s แล้ว</string>
     <string name="notification_bundle_update_text_unversioned">แตะเพื่อเปิด Morphe และอัปเดต</string>
     <string name="notification_permission_dialog_title">อนุญาตให้มีการแจ้งเตือน</string>
     <string name="notification_permission_dialog_description">Morphe ต้องการสิทธิ์การแจ้งเตือนเพื่อแจ้งให้คุณทราบเมื่อมีการอัปเดตพร้อมใช้งานในพื้นหลัง</string>
@@ -533,9 +544,9 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">เปิด Shizuku</string>
     <string name="installer_hint_generic">การติดตั้งล้มเหลว. ลองอีกครั้งหรือเปลี่ยนไปใช้ตัวติดตั้งอื่น</string>
     <string name="installer_hint_conflict">มีแอปที่มีชื่อแพ็คเกจเดียวกันติดตั้งอยู่แล้ว. ลบแอปนั้นก่อนดำเนินการต่อไป</string>
-    <string name="installer_external_launched">กำลังเปิด %1$s…</string>
-    <string name="installer_external_timeout">%1$s ไม่ยืนยันการติดตั้ง. ตรวจสอบแอปอื่นและลองอีกครั้ง</string>
-    <string name="installer_external_success">%1$s รายงานการติดตั้งสำเร็จ</string>
+    <string name="installer_external_launched">กำลังเปิด %s…</string>
+    <string name="installer_external_timeout">%s ไม่ได้ยืนยันการติดตั้ง โปรดตรวจสอบแอปอื่นและลองอีกครั้ง</string>
+    <string name="installer_external_success">%s รายงานว่าการติดตั้งสำเร็จ</string>
     <string name="installer_unavailable_title">%s ไม่พร้อมใช้งาน</string>
     <string name="installer_unavailable_message">ตัวติดตั้งที่คุณชอบ (%s) ไม่พร้อมใช้งานในขณะนี้. คุณสามารถแก้ไขปัญหาและลองอีกครั้งหรือใช้ตัวติดตั้งมาตรฐานแทน</string>
     <string name="installer_unavailable_shizuku_hint">ให้แน่ใจว่า Shizuku กำลังทำงานและให้สิทธิ์แก่แอปนี้</string>

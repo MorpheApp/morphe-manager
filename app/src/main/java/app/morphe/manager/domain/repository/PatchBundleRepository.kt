@@ -96,6 +96,9 @@ class PatchBundleRepository(
     private val manualUpdateInfoFlow = MutableStateFlow<Map<Int, ManualBundleUpdateInfo>>(emptyMap())
     val manualUpdateInfo: StateFlow<Map<Int, ManualBundleUpdateInfo>> = manualUpdateInfoFlow.asStateFlow()
 
+    private val metadataFetchErrorsFlow = MutableStateFlow<Map<Int, Throwable>>(emptyMap())
+    val metadataFetchErrors: StateFlow<Map<Int, Throwable>> = metadataFetchErrorsFlow.asStateFlow()
+
     private val bundleUpdateProgressFlow = MutableStateFlow<BundleUpdateProgress?>(null)
     val bundleUpdateProgress: StateFlow<BundleUpdateProgress?> = bundleUpdateProgressFlow.asStateFlow()
 
@@ -409,11 +412,12 @@ class PatchBundleRepository(
         val metadata = map.mapNotNull { (bundle, src) ->
             try {
                 src.uid to PatchBundleInfo.Global(
-                    src.displayTitle,
-                    bundle.manifestAttributes?.version,
-                    src.uid,
-                    src.enabled,
-                    PatchBundle.Loader.metadata(bundle)
+                    name = src.displayTitle,
+                    version = bundle.manifestAttributes?.version,
+                    uid = src.uid,
+                    enabled = src.enabled,
+                    patches = PatchBundle.Loader.metadata(bundle),
+                    patcherVersion = bundle.manifestAttributes?.patcherVersion,
                 )
             } catch (error: Throwable) {
                 failures += src.uid to error
@@ -705,7 +709,10 @@ class PatchBundleRepository(
                 info.remove(it.uid)
             }
 
-            val (affectedCount, remaining) = cancelRemoteUpdates(bundles.map { it.uid }.toSet())
+            val removedUids = bundles.map { it.uid }.toSet()
+            metadataFetchErrorsFlow.update { it - removedUids }
+
+            val (affectedCount, remaining) = cancelRemoteUpdates(removedUids)
             updateProgressAfterRemoval(affectedCount, remaining)
 
             ready.copy(sources = sources.toPersistentMap(), info = info.toPersistentMap())
@@ -1035,8 +1042,9 @@ class PatchBundleRepository(
             val normalizedUrl = try {
                 normalizeRemoteBundleUrl(url)
             } catch (e: IllegalArgumentException) {
+                Log.e(tag, "Invalid bundle URL: $url", e)
                 withContext(Dispatchers.Main) {
-                    app.toast(e.message ?: "Invalid bundle URL")
+                    app.toast(app.getString(R.string.sources_management_invalid_url))
                 }
                 return@dispatchAction state
             }
@@ -1124,11 +1132,11 @@ class PatchBundleRepository(
         ) {
             toast(R.string.sources_download_endpoint_not_found, bundle.displayTitle)
         } else {
-            toast(R.string.sources_download_fail_named, bundle.displayTitle, e.message ?: e.toString())
+            toast(R.string.sources_download_fail_named, bundle.displayTitle)
         }
     }
 
-    private fun normalizeRemoteBundleUrl(input: String): String {
+    fun normalizeRemoteBundleUrl(input: String): String {
         val trimmed = input.trim()
         val parsed = try {
             Url(trimmed)
@@ -1208,6 +1216,44 @@ class PatchBundleRepository(
             return "https://raw.githubusercontent.com$finalPath"
         }
 
+        // Handle GitLab repository URLs
+        // Accepts short form: gitlab.com/owner/repo
+        // Or full raw URL:    gitlab.com/owner/repo/-/raw/branch/patches-bundle.json
+        if (host.equals("gitlab.com", ignoreCase = true)) {
+            if (pathSegments.size < 2) {
+                throw IllegalArgumentException("Invalid GitLab repository URL")
+            }
+
+            val owner = pathSegments[0]
+            val repo = pathSegments[1]
+
+            // Check if this is already a raw URL: owner/repo/-/raw/branch/path
+            val rawIndex = pathSegments.indexOf("raw")
+            if (rawIndex >= 2 && pathSegments.getOrNull(rawIndex - 1) == "-") {
+                // Already a raw URL — normalize it
+                val normalizedPath = "/" + pathSegments.joinToString("/")
+                val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
+                if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
+                    throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
+                }
+                val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
+                return "https://gitlab.com$normalizedPath$query"
+            }
+
+            // Determine branch from GitLab UI URLs (/-/tree/branch or /-/blob/branch)
+            val treeIndex = pathSegments.indexOf("tree")
+            val blobIndex = pathSegments.indexOf("blob")
+            val branch = when {
+                treeIndex >= 2 && pathSegments.getOrNull(treeIndex - 1) == "-" ->
+                    pathSegments.getOrNull(treeIndex + 1) ?: "main"
+                blobIndex >= 2 && pathSegments.getOrNull(blobIndex - 1) == "-" ->
+                    pathSegments.getOrNull(blobIndex + 1) ?: "main"
+                else -> "main"
+            }
+
+            return "https://gitlab.com/$owner/$repo/-/raw/$branch/patches-bundle.json"
+        }
+
         // Handle raw.githubusercontent.com URLs (legacy support)
         if (host.equals("raw.githubusercontent.com", ignoreCase = true)) {
             if (pathSegments.size < 3) {
@@ -1235,6 +1281,35 @@ class PatchBundleRepository(
 
         val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
         return "https://$host$normalizedPath$query"
+    }
+
+    /** Returns true if [uid] corresponds to a currently loaded bundle. */
+    fun isUidLoaded(uid: Int): Boolean =
+        (store.state.value as? BundleState.Ready)?.sources?.containsKey(uid) == true
+
+    /** Returns the endpoint URL of [uid] if it is a remote bundle, or null otherwise. */
+    fun getEndpointForUid(uid: Int): String? =
+        ((store.state.value as? BundleState.Ready)?.sources?.get(uid) as? RemotePatchBundle)?.endpoint
+
+    /** Returns the user-visible name of [uid], or null if the bundle is not currently loaded. */
+    fun getNameForUid(uid: Int): String? =
+        (store.state.value as? BundleState.Ready)?.sources?.get(uid)?.name
+
+    /**
+     * Returns the current UID of the loaded bundle whose endpoint matches [endpoint], or null
+     * if no such bundle is loaded. Uses [normalizeRemoteBundleUrl] for comparison so that
+     * GitHub shorthand and raw URLs for the same repo are treated as equal.
+     */
+    fun resolveUidForEndpoint(endpoint: String): Int? {
+        val normalizedInput = runCatching { normalizeRemoteBundleUrl(endpoint) }
+            .getOrElse { endpoint.lowercase(Locale.US) }
+        return (store.state.value as? BundleState.Ready)?.sources?.entries
+            ?.firstOrNull { (_, src) ->
+                (src as? RemotePatchBundle)?.let { bundle ->
+                    runCatching { normalizeRemoteBundleUrl(bundle.endpoint) }
+                        .getOrElse { bundle.endpoint.lowercase(Locale.US) } == normalizedInput
+                } == true
+            }?.key
     }
 
     suspend fun update(
@@ -1545,10 +1620,14 @@ class PatchBundleRepository(
                     }
 
                     val result = try {
-                        if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
+                        val r = if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
+                        // Clear any previous metadata error on success
+                        metadataFetchErrorsFlow.update { it - bundle.uid }
+                        r
                     } catch (_: BundleUpdateCancelled) {
                         continue
                     } catch (e: Exception) {
+                        metadataFetchErrorsFlow.update { it + (bundle.uid to e) }
                         handleBundleDownloadError(e, bundle)
                         continue
                     }

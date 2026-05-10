@@ -67,6 +67,7 @@ class ShizukuInstaller(private val app: Application) {
         )
         val params = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL).apply {
             runCatching { setAppPackageName(expectedPackage) }
+            @Suppress("WrongConstant")
             setInstallReason(PackageManager.INSTALL_REASON_USER)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                 setRequestUpdateOwnership(true)

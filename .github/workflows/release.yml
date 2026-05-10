@@ -94,17 +94,17 @@ jobs:
             })
 
       - name: Wait before sending FCM
-        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
+        if: steps.release.outputs.new_release_published == 'true' && (github.event_name == 'push' || inputs.send_fcm == true)
         run: sleep 480
 
       - name: Setup Python for FCM
-        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
+        if: steps.release.outputs.new_release_published == 'true' && (github.event_name == 'push' || inputs.send_fcm == true)
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Send FCM push notification
-        if: steps.release.outputs.new_release_published == 'true' && inputs.send_fcm != false
+        if: steps.release.outputs.new_release_published == 'true' && (github.event_name == 'push' || inputs.send_fcm == true)
         env:
           FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
           FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}

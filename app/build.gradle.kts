@@ -127,7 +127,7 @@ dependencies {
 
 android {
     namespace = "app.morphe.manager"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "app.morphe.manager"
@@ -144,6 +144,10 @@ android {
         // and still fall into Play store max version code range.
         val versionCodeOffset = 10010100
         versionCode = timestampVersionCode + versionCodeOffset
+
+        // Expose the resolved morphe-patcher version so PatcherViewModel can compare it
+        // against the Patcher-Version declared in .mpp bundle manifests at runtime.
+        buildConfigField("String", "PATCHER_VERSION", "\"${libs.versions.morphe.patcher.get()}\"")
 
         vectorDrawables.useSupportLibrary = true
     }
