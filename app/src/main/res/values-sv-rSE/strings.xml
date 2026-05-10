@@ -105,7 +105,7 @@
     <string name="home_apk_availability_no">Nej, jag har redan en APK-fil</string>
     <string name="home_apk_use_saved_with_version">Använd den sparade APK-filen (v%s)</string>
     <string name="home_app_info_no_saved_apk">Ingen sparad APK-fil. Modifieringen kräver att du väljer APK-filen igen</string>
-    <string name="home_version_requires_android">Kräver Android %s+</string>
+    <string name="home_version_requires_android">Kräver Android %s eller senare</string>
     <string name="home_apk_no_compatible_versions_title">Stöds inte på den här enheten</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har inga versioner som stöds för Android %2$d (API %3$d). Alla deklarerade versioner kräver en senare Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -219,7 +219,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_delete_item_database">Databaspost</string>
     <string name="home_app_info_delete_item_patched_apk">Modifierad APK-fil</string>
     <string name="home_app_info_delete_item_original_apk">Ursprunglig APK-fil</string>
-    <string name="home_app_info_delete_preservation_note">Ditt tilläggsurval och dess inställningar sparas för framtida modifiering</string>
+    <string name="home_app_info_delete_preservation_note">Tilläggsurvalet och dess inställningar sparas för framtida modifiering</string>
     <string name="home_app_info_patches_name_default">Tillägg</string>
     <string name="home_app_info_patches_name_fallback">Namnlös</string>
     <string name="home_app_info_patches_replace_fail">Det gick inte att importera tillägg: %s</string>
