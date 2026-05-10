@@ -138,6 +138,31 @@ object MorpheAnimations {
     val expandTopFadeIn = fadeIn + expandVertically(defaultTween(), expandFrom = Alignment.Top)
     val shrinkTopFadeOut = fadeOut + shrinkVertically(defaultTween(), shrinkTowards = Alignment.Top)
 
+    // Slide-fade content swap for AnimatedContent (counters, labels, messages).
+    // offset: fraction of height used for slide, e.g. { -it / 2 } for half-height, { -it } for full.
+    // Asymmetric duration (enter slightly longer than exit) gives a snappier feel.
+    fun slideTransitionSpec(
+        enterDuration: Int = 200,
+        exitDuration: Int = 150,
+        offset: (Int) -> Int = { -it / 2 }
+    ): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
+        (fadeIn(tween(enterDuration)) + slideInVertically(tween(enterDuration)) { offset(it) })
+            .togetherWith(fadeOut(tween(exitDuration)) + slideOutVertically(tween(exitDuration)) { -offset(it) })
+    }
+
+    // Presets built on slideTransitionSpec
+    // Counter/label swap - numeric count with word label
+    val counterTransitionSpec = slideTransitionSpec(enterDuration = 200, exitDuration = 150, offset = { -it / 2 })
+    // Compact counter swap - small badge counts (e.g. selection count badge)
+    val compactCounterTransitionSpec = slideTransitionSpec(enterDuration = 150, exitDuration = 100, offset = { -it })
+    // Slide-up content swap - greeting/message text that scrolls upward on change
+    val slideUpContentTransitionSpec = slideTransitionSpec(enterDuration = 400, exitDuration = 200, offset = { it / 4 })
+
+    // Simple crossfade with configurable duration
+    fun fadeCrossfade(duration: Int = MorpheDefaults.ANIMATION_DURATION): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
+        fadeIn(tween(duration)) togetherWith fadeOut(tween(duration))
+    }
+
     // Functional Helpers
     fun fadeOut(duration: Int): ExitTransition = fadeOut(tween(duration))
 }

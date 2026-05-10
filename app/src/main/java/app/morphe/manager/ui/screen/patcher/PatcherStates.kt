@@ -5,8 +5,8 @@
 
 package app.morphe.manager.ui.screen.patcher
 
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -417,10 +417,7 @@ private fun SuccessStatusText(
 ) {
     AnimatedContent(
         targetState = getTitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName),
-        transitionSpec = {
-            fadeIn(animationSpec = tween(500)) togetherWith
-                    fadeOut(animationSpec = tween(500))
-        },
+        transitionSpec = MorpheAnimations.fadeCrossfade(500),
         label = "title_animation"
     ) { titleRes ->
         Text(
@@ -456,10 +453,7 @@ private fun SuccessInstructionsText(
 ) {
     AnimatedContent(
         targetState = getSubtitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName, usingMountInstall),
-        transitionSpec = {
-            fadeIn(animationSpec = tween(500)) togetherWith
-                    fadeOut(animationSpec = tween(500))
-        },
+        transitionSpec = MorpheAnimations.fadeCrossfade(500),
         label = "subtitle_animation"
     ) { subtitleRes ->
         if (subtitleRes != 0) {
