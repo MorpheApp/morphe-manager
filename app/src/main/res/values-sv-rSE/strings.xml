@@ -85,6 +85,7 @@
     <string name="sources_dialog_local_file_description">Välj en källfil för tillägg i formatet .mpp från lagringen</string>
     <string name="sources_dialog_local_invalid_extension">Filen måste ha filändelsen .mpp</string>
     <string name="sources_dialog_url_valid">Giltig lagringsplats eller JSON-adress</string>
+    <string name="sources_dialog_url_invalid">Webbadressen måste peka på en GitHub-/GitLab-lagringsplats eller .json-fil</string>
     <string name="sources_dialog_local_change_file">Byt fil</string>
     <string name="sources_dialog_preinstalled">Förinstallerad</string>
     <string name="sources_update_success">Uppdateringen lyckades</string>

@@ -85,6 +85,7 @@
     <string name="sources_dialog_local_file_description">Yaddaşdan .mpp yamaq mənbə faylı seçin</string>
     <string name="sources_dialog_local_invalid_extension">Faylın .mpp əlavəsi olmalıdır</string>
     <string name="sources_dialog_url_valid">Etibarlı depo və ya JSON URL</string>
+    <string name="sources_dialog_url_invalid">URL GitHub/GitLab depo və ya .json faylın göstərməlidir</string>
     <string name="sources_dialog_local_change_file">Faylı dəyişdir</string>
     <string name="sources_dialog_preinstalled">İlkin quraşdırılan</string>
     <string name="sources_update_success">Uğurlu yeniləmə</string>
