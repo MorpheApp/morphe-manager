@@ -115,8 +115,8 @@
     <string name="home_download_instructions_step1">Koppints az alábbi „%s” gombra</string>
     <string name="home_download_instructions_step2_part1">Görgess le a weboldalon, majd nyomd meg:</string>
     <string name="home_download_instructions_download_button_toast">​A weboldalon nyomj a letöltésre, ne itt 😊</string>
-    <string name="home_download_instructions_step3">Várd meg, amíg a letöltés befejeződik, és &lt;b&gt;ne telepítsd&lt;/b&gt; az APK-t</string>
-    <string name="home_download_instructions_step3_mount">Várd meg, amíg a letöltés befejeződik, majd &lt;b&gt;telepítsd az APK-t&lt;/b&gt;</string>
+    <string name="home_download_instructions_step3">Várj, amíg a letöltés befejeződik, és &lt;b&gt;ne telepítsd&lt;/b&gt; az APK-t</string>
+    <string name="home_download_instructions_step3_mount">Várj, amíg a letöltés befejeződik, majd &lt;b&gt;telepítsd az APK-t&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">A letöltés után térj vissza a Morphe alkalmazásba</string>
     <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után térj vissza Morphe alkalmazásba</string>
     <string name="home_download_instructions_continue">Tovább az APKMirror.com oldalra</string>
@@ -130,7 +130,7 @@
     <string name="home_select_any_apk_description">Koppints az alábbi gombra a módosítani kívánt APK-fájl kiválasztásához.</string>
     <string name="home_invalid_apk_unreadable">Nem sikerült olvasni a fájlt. Ellenőrizd, hogy a \'Külső tároló\' nincs-e akkumulátorkorlátozás alatt</string>
     <string name="home_invalid_apk_not_an_apk">A kiválasztott fájl nem egy érvényes APK</string>
-    <string name="home_invalid_apk_io_error">Nem sikerült megnyitni a fájlt. Kérjük, próbáld meg újra</string>
+    <string name="home_invalid_apk_io_error">Nem sikerült megnyitni a fájlt. Kérjük, próbáld újra</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Szakértői mód</string>
     <string name="expert_mode_search">Módosítások keresése</string>
@@ -143,9 +143,9 @@
     <string name="expert_mode_universal_patches">Univerzális módosítások</string>
     <string name="expert_mode_new_patches">Új</string>
     <string name="expert_mode_multiple_sources_warning_title">Több patchforrás van kiválasztva</string>
-    <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választott módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
+    <string name="expert_mode_multiple_sources_warning_message">"Több patchforrásból választottál módosításokat. Ez kompatibilitási problémákhoz vagy váratlan viselkedéshez vezethet.
 
-Biztosan folytatja?"</string>
+Biztosan folytatod?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Nem ellenőrzött APK</string>
     <string name="home_invalid_signature_message">Az &lt;b&gt;%s&lt;/b&gt; kiválasztott APK nem egyezik a várt aláírási tanúsítvánnyal. Lehetséges, hogy módosították vagy nem megbízható forrásból származik</string>
@@ -176,7 +176,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_low_disk_space_dialog_title">Kevés a szabad tárhely</string>
     <string name="home_low_disk_space_dialog_message">Csak %1$.2f GB szabad tárhely áll rendelkezésre. A javítás helyes működéséhez legalább %2$.2f GB szabad helyre van szükség</string>
     <string name="home_low_disk_space_dialog_warning">A folytatás \"fájl nem található\" hibához vagy sérült APK-hoz vezethet</string>
-    <string name="home_simple_bundle_select_title">Javítási forrás kiválasztása</string>
+    <string name="home_simple_bundle_select_title">Módosításforrás kiválasztása</string>
     <!-- Patch Options -->
     <string name="custom_color">Egyedi szín</string>
     <string name="hex_color">Hex szín</string>
@@ -188,12 +188,12 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="patch_option_list_duplicate">Ez az érték már létezik</string>
     <string name="patch_option_list_empty">Az érték nem lehet üres</string>
     <string name="patch_option_list_empty_state">Még nincsenek hozzáadott értékek</string>
-    <string name="patch_option_required_missing">%s: Kitölteni minden kötelező opciót</string>
+    <string name="patch_option_required_missing">%s: tölts ki minden kötelező opciót</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Alkalmazkodó ikon létrehozása</string>
-    <string name="adaptive_icon_instructions">Válasszon egy előtérképet és egy háttérszínt, majd a csúszkával vagy kétujjas mozdulatok segítségével állítsa be az előnézetet</string>
+    <string name="adaptive_icon_instructions">Válassz egy előtérképet és egy háttérszínt, majd a csúszkával vagy kétujjas mozdulatok segítségével állítsd be az előnézetet</string>
     <string name="adaptive_icon_preview">Alkalmazkodó ikon előnézete</string>
-    <string name="adaptive_icon_preview_hint">A legjobb eredmény érdekében tartsa az ikonját a szilárd belső körben</string>
+    <string name="adaptive_icon_preview_hint">Tartsd az ikont a belső körön belül a legjobb eredményhez</string>
     <string name="adaptive_icon_select_image">Kép kiválasztása</string>
     <string name="adaptive_icon_change_image">Kép megváltoztatása</string>
     <string name="adaptive_icon_background_color">Háttérszín</string>
@@ -202,21 +202,21 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="adaptive_icon_safe_zone_outer">Maszkzóna (levágható)</string>
     <string name="adaptive_icon_created_success">Az alkalmazkodó ikon elkészült</string>
     <string name="adaptive_icon_creation_failed">Nem sikerült az alkalmazkodó ikon létrehozása</string>
-    <string name="adaptive_icon_folder_explanation">Válassza ki a \'%1$s/%2$s\' mappa helyét a létrehozott ikonfájlok számára</string>
+    <string name="adaptive_icon_folder_explanation">Válaszd ki a \'%1$s/%2$s\' mappa helyét a létrehozott ikonfájlok számára</string>
     <string name="notification_icon_preview">Értesítési ikon előnézete</string>
     <string name="notification_icon_preview_hint">Méretezés a csúszkával, áthelyezés húzással</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Egyéni fejléc létrehozása</string>
-    <string name="header_creator_instructions">Válasszon képeket a világos és sötét témákhoz, majd állítsa be két ujjal történő nagyítás mozdulattal.</string>
+    <string name="header_creator_instructions">Válassz képeket a világos és sötét témákhoz, majd állítsd be két ujjal történő nagyítás mozdulattal.</string>
     <string name="header_creator_light_theme">Világos téma fejléc</string>
     <string name="header_creator_dark_theme">Sötét téma fejléc</string>
     <string name="header_creator_no_image">Nincs kép kiválasztva</string>
     <string name="header_creator_success">A fejléc sikeresen létrehozva</string>
     <string name="header_creator_failed">Nem sikerült a fejléc létrehozása</string>
-    <string name="header_creator_folder_explanation">Válassza ki a \'%1$s/%2$s\' mappa helyét a létrehozott fejlécfájlok számára</string>
+    <string name="header_creator_folder_explanation">Válaszd ki a \'%1$s/%2$s\' mappa helyét a létrehozott fejlécfájlok számára</string>
     <!-- Home Screen - App Info Screen -->
-    <string name="home_app_info_uninstall_app_confirmation">Biztosan el akarja távolítani ezt az alkalmazást?</string>
-    <string name="home_app_info_remove_app_warning">Ezzel véglegesen törli:</string>
+    <string name="home_app_info_uninstall_app_confirmation">Biztosan el akarod távolítani ezt az alkalmazást?</string>
+    <string name="home_app_info_remove_app_warning">Ez véglegesen törli:</string>
     <string name="home_app_info_delete_item_database">Adatbázis rekord</string>
     <string name="home_app_info_delete_item_patched_apk">Módosított APK fájl</string>
     <string name="home_app_info_delete_item_original_apk">Eredeti APK fájl</string>
@@ -232,67 +232,67 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_app_info_install_type_custom_installer">Egyéni telepítő</string>
     <string name="home_app_info_install_type_system_installer">Rendszertelepítő</string>
     <string name="home_app_info_patched_at">Módosított</string>
-    <string name="home_app_info_patch_update_available">Módosítás frissítés elérhető</string>
-    <string name="home_app_info_patch_update_available_description">Egy újabb módosításverzió elérhető. Módosítsa újra az alkalmazását, hogy megkapja a legújabb fejlesztéseket és javításokat</string>
+    <string name="home_app_info_patch_update_available">Módosításfrissítések érhetők el</string>
+    <string name="home_app_info_patch_update_available_description">Újabb módosítások érhetők el. Alkalmazd őket újra az alkalmazáson a legfrissebb javításokért és fejlesztésekért.</string>
     <string name="home_app_info_app_deleted_warning">Az alkalmazást eltávolították</string>
-    <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a Morphe-n kívül törölték. Módosítsa újra a funkcionalitás helyreállításához</string>
+    <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a Morphén kívül távolították el. Alkalmazd újra a módosításokat a működés helyreállításához.</string>
     <string name="home_app_info_apk_size">APK méret</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a módosítás előtt</string>
     <string name="root_gmscore_excluded">A GmsCore támogatási patch nem elérhető root módban</string>
-    <string name="root_pre_patch_installer_title">Válasszon telepítési módot</string>
-    <string name="root_pre_patch_installer_description">Az eszköze root hozzáféréssel rendelkezik. Válassza ki, hogyan szeretné telepíteni a módosított alkalmazást</string>
+    <string name="root_pre_patch_installer_title">Válassz telepítési módot</string>
+    <string name="root_pre_patch_installer_description">Az eszközöd root hozzáféréssel rendelkezik. Válaszd ki, hogyan szeretnéd telepíteni a módosított alkalmazást</string>
     <string name="root_pre_patch_installer_mount_title">Root csatolás</string>
     <string name="root_pre_patch_installer_mount_description">A módosított APK-t az eredeti felé csatolja. Nem szükséges GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Szabványos telepítés</string>
-    <string name="root_pre_patch_installer_standard_description">Telepítés különálló alkalmazásként GmsCore támogatással. Válassza ki a telepítőt (Rendszertelepítő, Shizuku stb.) a módosítás után</string>
+    <string name="root_pre_patch_installer_standard_description">Telepítés különálló alkalmazásként GmsCore támogatással. Válaszd ki a telepítőt (Rendszertelepítő, Shizuku stb.) a módosítás után</string>
     <string name="root_pre_patch_installer_hint">A telepítési mód határozza meg, hogy mely módosítások kerülnek beépítésre, amiket nem lehet megváltoztatni a módosítás után</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="patcher_error_log">Hibanapló</string>
     <string name="patcher_error_technical">Technikai részletek</string>
     <string name="patcher_error_dialog_app_info">Alkalmazásinformáció</string>
-    <string name="patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük várjon…</string>
+    <string name="patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük várj…</string>
     <string name="patcher_installing_subtitle">Majdnem készen állunk! 🎸</string>
     <string name="patcher_success_title">Minden kész! 🎉</string>
     <string name="patcher_success_subtitle">Az alkalmazás módosítva és telepítve!</string>
     <string name="patcher_complete_title">A módosítás befejeződött! ✨</string>
     <string name="patcher_failed_title">Hoppá! Valami hiba történt</string>
-    <string name="patcher_failed_subtitle">Ellenőrizze az alábbi hiba részleteit</string>
+    <string name="patcher_failed_subtitle">Ellenőrizd a hiba részleteit alább</string>
     <string name="patcher_failed_dialog_title">A módosítás sikertelen</string>
     <string name="patcher_unknown_error">Ismeretlen hiba történt</string>
     <string name="patcher_conflict_title">Csomagütközés</string>
-    <string name="patcher_conflict_subtitle">El kell távolítania a meglévő verziót</string>
+    <string name="patcher_conflict_subtitle">El kell távolítanod a meglévő verziót</string>
     <string name="patcher_install_error_title">Telepítési hiba</string>
-    <string name="patcher_install_error_subtitle">Próbálja meg eltávolítani és újratelepíteni</string>
-    <string name="patcher_ready_to_install_subtitle">Nyomja meg az alábbi gombot a telepítéshez</string>
-    <string name="patcher_ready_to_mount_subtitle">Nyomja meg az alábbi gombot a csatlakoztatáshoz</string>
+    <string name="patcher_install_error_subtitle">Próbáld meg eltávolítani és újratelepíteni</string>
+    <string name="patcher_ready_to_install_subtitle">Nyomd meg az alábbi gombot a telepítéshez</string>
+    <string name="patcher_ready_to_mount_subtitle">Nyomd meg az alábbi gombot a csatoláshoz</string>
     <string name="patcher_storage_permission_dialog_title">Az elérési útvonal nem hozzáférhető</string>
     <string name="patcher_incompatible_patcher_title">Frissítés szükséges</string>
-    <string name="patcher_incompatible_patcher_description">A &lt;b&gt;%1$s&lt;/b&gt; csomag a &lt;b&gt;%2$s&lt;/b&gt; vagy újabb javítóverziót igényli. Kérjük, frissítsd a Morphe-t az alkalmazás javításához.</string>
-    <string name="patcher_incompatible_patcher_update_button">Töltse le és frissítse a Morphe alkalmazást</string>
+    <string name="patcher_incompatible_patcher_description">A &lt;b&gt;%1$s&lt;/b&gt; csomag a &lt;b&gt;%2$s&lt;/b&gt; vagy újabb módosításverziót igényli. Kérjük, frissítsd a Morphe-t az alkalmazás módosításához.</string>
+    <string name="patcher_incompatible_patcher_update_button">Töltsd le és frissítsd a Morphe alkalmazást</string>
     <string name="patcher_storage_permission_description_api30">Egy vagy több módosítási opció olyan elérési útra mutat, amelyeket a Morphe nem tud olvasni. Adja meg a tárhely hozzáférést, majd koppintson a gombra, és a módosítás automatikusan elindul</string>
-    <string name="patcher_storage_permission_description_legacy">Egy vagy több módosítási opció olyan elérési útra mutat, amelyekhez nem lehet hozzáférni. Frissítse az útvonalakat a módosítási opciókban és próbálja újra</string>
+    <string name="patcher_storage_permission_description_legacy">Egy vagy több módosítási opció olyan elérési útra mutat, amelyekhez nem lehet hozzáférni. Frissítsd az útvonalakat a módosítási opciókban és próbáld újra</string>
     <string name="patcher_storage_permission_grant">Tárhelyhozzáférés engedélyezése</string>
-    <string name="patcher_storage_permission_denied_warning">A tárhelyhozzáférési engedély megtagadva. Engedélyezze a tároló használatához, vagy helyezze át a fájlokat az alkalmazás magánkönyvtárába.</string>
+    <string name="patcher_storage_permission_denied_warning">A tárhelyhozzáférési engedély megtagadva. Engedélyezd a tároló használatához, vagy helyezd át a fájlokat az alkalmazás magánkönyvtárába.</string>
     <string name="patcher_storage_permission_open_settings">Tárhelybeállítások megnyitása</string>
     <string name="patcher_storage_badge_denied">Engedély megtagadva</string>
     <string name="patcher_storage_badge_missing">Nem található</string>
-    <string name="patcher_storage_permission_hint">Tipp: Mozgassa át a fájlokat az /Android/data/app.morphe.manager/files/ könyvtárba - nincs szükség extra engedélyekre</string>
+    <string name="patcher_storage_permission_hint">Tipp: Mozgasd át a fájlokat az /Android/data/app.morphe.manager/files/ könyvtárba - nincs szükség extra engedélyekre</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Előkészítés</string>
     <string name="patcher_step_load_patches">Módosítások betöltése</string>
-    <string name="patcher_step_prepare_split_apk">Osztott APK egyesítés</string>
-    <string name="patcher_step_unpack">APK fájl olvasás</string>
+    <string name="patcher_step_prepare_split_apk">Osztott APK egyesítése</string>
+    <string name="patcher_step_unpack">APK fájl olvasása</string>
     <string name="patcher_step_group_patching">Módosítás</string>
     <string name="patcher_step_group_saving">Mentés</string>
     <string name="patcher_step_write_patched">Módosított APK fájl írása</string>
     <string name="patcher_step_sign_apk">Módosított APK fájl aláírása</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Módosítás folyamatban…</string>
-    <string name="patcher_notification_text">Koppintson a módosítóhoz való visszatéréshez</string>
+    <string name="patcher_notification_text">Koppints a módosítóhoz való visszatéréshez</string>
     <string name="patcher_stop_confirm_title">Módosító leállítása</string>
-    <string name="patcher_stop_confirm_description">Biztosan le szeretné állítani a módosítási folyamatot?</string>
+    <string name="patcher_stop_confirm_description">Biztosan le szeretnéd állítani a módosítási folyamatot?</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">Az alkalmazás átalakítása valami nagyszerűvé… 🏆</string>
     <string name="patcher_message_2">Régi alkalmazások tanítása új trükkökre… 🎩</string>
