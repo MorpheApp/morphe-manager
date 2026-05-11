@@ -1,5 +1,6 @@
 package app.morphe.manager.patcher.worker
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -72,6 +73,7 @@ class PatcherWorker(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE else 0
         )
 
+    @SuppressLint("WrongConstant")
     private fun createNotification(
         stepName: String? = null,
         patchProgress: Pair<Int, Int>? = null,  // completed to total patches
@@ -170,13 +172,15 @@ class PatcherWorker(
         val applyingPatchesLabel = applicationContext.getString(R.string.applying_patches)
 
         fun updateProgress(name: String? = null, state: State? = null, message: String? = null) {
-            if (name != null && state == State.RUNNING) {
-                // When entering the patch execution phase start with 0/N
-                val progress = if (totalPatches > 0 && name == applyingPatchesLabel)
-                    completedPatches to totalPatches
-                else
-                    null
-                updatePatcherNotification(stepName = name, patchProgress = progress)
+            if (state == State.RUNNING) {
+                if (name != null) {
+                    updatePatcherNotification(stepName = name, patchProgress = null)
+                } else if (totalPatches > 0) {
+                    updatePatcherNotification(
+                        stepName = applyingPatchesLabel,
+                        patchProgress = completedPatches to totalPatches
+                    )
+                }
             }
             args.onProgress(name, state, message)
         }
