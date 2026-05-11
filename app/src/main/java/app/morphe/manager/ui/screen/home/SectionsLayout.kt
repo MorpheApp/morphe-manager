@@ -234,9 +234,7 @@ private fun AdaptiveContent(
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = contentPadding),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(itemSpacing)
     ) {
         if (useTwoColumns) {
@@ -244,7 +242,8 @@ private fun AdaptiveContent(
             Row(
                 modifier = Modifier
                     .weight(1f)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(horizontal = contentPadding),
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing * 2),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -320,7 +319,10 @@ private fun AdaptiveContent(
                 // Section 2: Greeting - when disabled, show a small top spacer so
                 // the app cards don't sit flush against the top of the screen
                 if (!greetingMessage.isNullOrEmpty()) {
-                    GreetingSection(message = greetingMessage)
+                    GreetingSection(
+                        message = greetingMessage,
+                        modifier = Modifier.padding(horizontal = contentPadding)
+                    )
                     Spacer(modifier = Modifier.height(itemSpacing))
                 } else {
                     Spacer(modifier = Modifier.height(24.dp))
@@ -331,6 +333,7 @@ private fun AdaptiveContent(
                     MainAppsSection(
                         homeAppItems = homeAppItems,
                         itemSpacing = itemSpacing,
+                        horizontalPadding = contentPadding,
                         onAppClick = onAppClick,
                         onHideApp = onHideApp,
                         onHideMultiple = onHideMultiple,
@@ -358,7 +361,9 @@ private fun AdaptiveContent(
                         Spacer(modifier = Modifier.height(itemSpacing))
                         OtherAppsSection(
                             onClick = onOtherAppsClick,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = contentPadding)
                         )
                     }
                 }
@@ -706,10 +711,11 @@ private fun BundleUpdateSnackbarContent(
  */
 @Composable
 fun GreetingSection(
-    message: String?
+    message: String?,
+    modifier: Modifier = Modifier
 ) {
     if (message.isNullOrEmpty()) return
-    Box(contentAlignment = Alignment.Center) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
         AnimatedContent(
             targetState = message,
             transitionSpec = MorpheAnimations.slideUpContentTransitionSpec,
@@ -736,6 +742,7 @@ fun MainAppsSection(
     modifier: Modifier = Modifier,
     homeAppItems: List<HomeAppItem>,
     itemSpacing: Dp = 16.dp,
+    horizontalPadding: Dp = 0.dp,
     onAppClick: (HomeAppItem) -> Unit,
     onHideApp: (String) -> Unit,
     onHideMultiple: (Set<String>) -> Unit = {},
@@ -828,7 +835,6 @@ fun MainAppsSection(
     }
 
     val listState = rememberLazyListState()
-    val fadeSize = 24.dp
 
     // True empty state: loaded, no apps from any bundle (no sources / all disabled)
     val isNoSourcesState = !stableLoadingState && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
@@ -885,13 +891,14 @@ fun MainAppsSection(
                                 value = searchQuery,
                                 onValueChange = onSearchQueryChange,
                                 requestFocus = searchVisible,
-                                modifier = Modifier.padding(bottom = 8.dp)
+                                modifier = Modifier
+                                    .padding(horizontal = horizontalPadding)
+                                    .padding(bottom = 8.dp)
                             )
                         }
 
-                        // LazyColumn has no Offscreen compositing so graphicsLayer { translationX }
-                        // on individual cards is not clipped during swipe.
-                        // The vertical fade is drawn as a pointer-transparent overlay on top.
+                        // Vertical fade overlay drawn on top of LazyColumn.
+                        // The overlay is pointer-transparent so swipe gestures pass through
                         Box(modifier = Modifier.fillMaxWidth()) {
                             LazyColumn(
                                 state = listState,
@@ -899,6 +906,8 @@ fun MainAppsSection(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.spacedBy(itemSpacing),
                                 contentPadding = PaddingValues(
+                                    start = horizontalPadding,
+                                    end = horizontalPadding,
                                     // Extra bottom padding so cards aren't hidden behind the multi-select bar
                                     bottom = if (isMultiSelectMode) 96.dp else 0.dp
                                 )
@@ -1028,35 +1037,46 @@ fun MainAppsSection(
                             }
 
                             // Vertical fade overlay drawn on top of LazyColumn.
-                            // Does NOT use Offscreen compositing so the LazyColumn items
-                            // (translated via graphicsLayer) are never clipped horizontally.
+                            // The overlay is pointer-transparent so swipe gestures pass through
                             val canScrollUp = listState.firstVisibleItemIndex > 0 ||
                                     listState.firstVisibleItemScrollOffset > 0
                             val canScrollDown = listState.canScrollForward
-                            if (canScrollUp || canScrollDown) {
+                            val topAlpha by animateFloatAsState(
+                                targetValue = if (canScrollUp) 1f else 0f,
+                                animationSpec = tween(150),
+                                label = "fade_top_alpha"
+                            )
+                            val bottomAlpha by animateFloatAsState(
+                                targetValue = if (canScrollDown) 1f else 0f,
+                                animationSpec = tween(150),
+                                label = "fade_bottom_alpha"
+                            )
+                            if (topAlpha > 0f || bottomAlpha > 0f) {
                                 val bgColor = MaterialTheme.colorScheme.background
-                                val fadePx = with(LocalDensity.current) { fadeSize.toPx() }
+                                val fadePx = with(LocalDensity.current) { 8.dp.toPx() } // Fade size
                                 Box(
                                     modifier = Modifier
                                         .matchParentSize()
                                         .drawWithContent {
                                             drawContent()
-                                            if (canScrollUp) {
+                                            if (topAlpha > 0f) {
                                                 drawRect(
                                                     brush = Brush.verticalGradient(
                                                         colors = listOf(bgColor, Color.Transparent),
                                                         startY = 0f,
                                                         endY = fadePx
-                                                    )
+                                                    ),
+                                                    alpha = topAlpha
                                                 )
                                             }
-                                            if (canScrollDown) {
+                                            if (bottomAlpha > 0f) {
                                                 drawRect(
                                                     brush = Brush.verticalGradient(
                                                         colors = listOf(Color.Transparent, bgColor),
                                                         startY = size.height - fadePx,
                                                         endY = size.height
-                                                    )
+                                                    ),
+                                                    alpha = bottomAlpha
                                                 )
                                             }
                                         }
