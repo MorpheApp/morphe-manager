@@ -61,7 +61,7 @@
     <string name="sources_management_prerelease_toggle">使用预发布补丁</string>
     <string name="sources_management_prerelease_toggle_description">提前体验新的实验性补丁版本</string>
     <string name="sources_management_experimental_versions_toggle">使用实验性应用版本</string>
-    <string name="sources_management_experimental_versions_toggle_description">如果可用，补丁实验性应用目标</string>
+    <string name="sources_management_experimental_versions_toggle_description">如果可用，对实验性应用目标进行修补</string>
     <string name="sources_management_already_exists">此资源已添加</string>
     <string name="sources_management_invalid_url">无效的源URL。请检查地址并重试</string>
     <string name="sources_management_metadata_unavailable">元数据不可用</string>
@@ -105,7 +105,7 @@
     <string name="home_apk_availability_yes">是的，帮我找个 APK</string>
     <string name="home_apk_availability_no">不，我已经有APK了</string>
     <string name="home_apk_use_saved_with_version">使用保存的APK（v%s）</string>
-    <string name="home_app_info_no_saved_apk">没有保存的APK。修补需要重新选择APK文件</string>
+    <string name="home_app_info_no_saved_apk">没有已保存的 APK 文件, 需要重新选择 APK 文件进行修补</string>
     <string name="home_version_requires_android">需要 Android %s+。</string>
     <string name="home_apk_no_compatible_versions_title">不支持此设备</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; 没有适用于 Android %2$d (API %3$d) 的支持版本。所有声明的版本都需要更高版本的 Android</string>
@@ -159,7 +159,7 @@
     <string name="home_dialog_unsupported_version_experimental_label">实验性</string>
     <string name="home_dialog_unsupported_version_experimental_description">此版本具有实验性支持，可能不稳定或不完整</string>
     <string name="morphe_experimental_app_version_dialog_title">您想进行实验吗？ 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">&lt;b&gt;%s&lt;/b&gt; 的此版本具有早期的实验性支持&lt;br/&gt;&lt;br/&gt;🔧 预期该应用程序行为怪异，或出现未识别的错误，因为补丁正在针对此应用版本进行完善</string>
+    <string name="morphe_experimental_app_version_dialog_message">这个版本的 &lt;b&gt;%s&lt;/b&gt; 补丁目前处于实验性支持中&lt;br/&gt;&lt;br/&gt; 在补丁完善期间, 应用可能会出现非预期行为或出现未识别的错误. </string>
     <string name="home_dialog_unsupported_version_dialog_title">其他支持的版本</string>
     <string name="home_dialog_unsupported_version_dialog_description">此 APK 不是推荐的应用版本。继续可能会导致应用无法使用</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">仍然继续</string>
@@ -207,9 +207,9 @@
     <string name="notification_icon_preview_hint">通知图标预览</string>
     <!-- Header Creator -->
     <string name="header_creator_create">创建自定义标头</string>
-    <string name="header_creator_instructions">选择轻、暗两种主题的图像，然后使用捏合手势进行调整</string>
-    <string name="header_creator_light_theme">轻主题标题</string>
-    <string name="header_creator_dark_theme">暗主题标题</string>
+    <string name="header_creator_instructions">选择浅色和深色主题的图片，然后使用捏合缩放手势进行调整</string>
+    <string name="header_creator_light_theme">亮色主题标题</string>
+    <string name="header_creator_dark_theme">暗色主题标题</string>
     <string name="header_creator_no_image">未选择任何图像</string>
     <string name="header_creator_success">标题创建成功</string>
     <string name="header_creator_failed">无法创建标题</string>
