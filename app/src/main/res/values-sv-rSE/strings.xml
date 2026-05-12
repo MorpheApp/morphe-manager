@@ -306,12 +306,12 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="patcher_message_9">Åtgärdar fel i den omodifierade appen … 🪲</string>
     <string name="patcher_message_10">Bra tillägg är värda att vänta på … ⏳</string>
     <string name="patcher_message_11">Polerar pixlarna tills de glänser … 💎</string>
-    <string name="patcher_message_12">Vänligen sitt kvar tills kaptenen har släckt skylten Modifiering pågår … 💺✈️</string>
+    <string name="patcher_message_12">Vänligen sitt kvar tills kaptenen har släckt skylten \"Modifiering pågår\" … 💺✈️</string>
     <string name="patcher_message_13">Tillreder din modifierade app, varm och färsk … 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Förhandlar artigt med bytekoden … 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Systemet är normalt … modifieringsbanan är stabil … 🚀</string>
+    <string name="patcher_message_15">Alla system är på … modifieringsbanan är stabil … 🚀</string>
     <string name="patcher_message_16">Pressar ut extra kraft, som saft ur en digital citron … 🍋</string>
     <string name="patcher_message_17">Uppmuntrar appen att acceptera sitt nya, bättre jag … 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
@@ -327,7 +327,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="failed_to_execute_patch">Det gick inte att tillämpa %s</string>
     <string name="patched_app_saved_toast">Den modifierade appen sparades till senare</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den modifierade appen</string>
-    <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med det här plugin-programmet</string>
+    <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med den här insticksmodulen</string>
     <string name="patcher_process_exit_message">Modifieringsprocessen avslutades med koden %s</string>
     <string name="install_app_success">Installationen lyckades</string>
     <string name="install_app_fail">Det gick inte att installera appen: %s</string>
@@ -358,7 +358,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="settings_appearance_background_random_interval_daily">Varje dag</string>
     <string name="settings_appearance_background_random_interval_3days">Var tredje dag</string>
     <string name="settings_appearance_parallax_effect">Parallaxeffekt</string>
-    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när du lutar enheten</string>
+    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när enheten lutas</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_system">System</string>
@@ -371,8 +371,8 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
-    <string name="settings_appearance_translations_info_title">Översättningar kan saknas eller vara ofullständiga för vissa språk</string>
-    <string name="settings_appearance_translations_info_text">Om du vill översätta till nya språk eller förbättra de befintliga översättningarna, besök %s</string>
+    <string name="settings_appearance_translations_info_title">Översättningar till vissa språk kan saknas eller vara ofullständiga</string>
+    <string name="settings_appearance_translations_info_text">Om du vill översätta till nya språk eller förbättra de befintliga översättningarna besöker du %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Startsida</string>
     <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
