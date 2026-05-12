@@ -1,3 +1,20 @@
+## [1.17.1](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0...v1.17.1) (2026-05-12)
+
+
+### Bug Fixes
+
+* Fallback to nearest available density when anti-splitting and add `riscv64` ABI support ([b17ee37](https://github.com/MorpheApp/morphe-manager/commit/b17ee377895c75ff24a7d3892f3423a1dc2f1f30))
+* Preserve localized step name when applying patches ([9fefff1](https://github.com/MorpheApp/morphe-manager/commit/9fefff168921c63f0eb47e8477ac16d151a5788f))
+* Remove horizontal clip boundary from app card swipe area ([7536d76](https://github.com/MorpheApp/morphe-manager/commit/7536d760e77a13ee1bb11fe82f575c869b3cf3fd))
+
+## [1.17.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.17.0...v1.17.1-dev.1) (2026-05-11)
+
+
+### Bug Fixes
+
+* Preserve localized step name when applying patches ([9fefff1](https://github.com/MorpheApp/morphe-manager/commit/9fefff168921c63f0eb47e8477ac16d151a5788f))
+* Remove horizontal clip boundary from app card swipe area ([7536d76](https://github.com/MorpheApp/morphe-manager/commit/7536d760e77a13ee1bb11fe82f575c869b3cf3fd))
+
 # [1.17.0](https://github.com/MorpheApp/morphe-manager/compare/v1.16.0...v1.17.0) (2026-05-10)
 
 
