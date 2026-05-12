@@ -85,7 +85,7 @@
     <string name="sources_dialog_local_file_description">Roghnaigh comhad foinse paiste .mpp ón stóras</string>
     <string name="sources_dialog_local_invalid_extension">Ní mór síneadh .mpp a bheith ar an gcomhad</string>
     <string name="sources_dialog_url_valid">URL bailí stórais nó JSON</string>
-    <string name="sources_dialog_url_invalid">Ní mór don URL pointeáil chuig stór GitHub nó comhad .json</string>
+    <string name="sources_dialog_url_invalid">Ní mór don URL pointeáil chuig stór GitHub/GitLab nó comhad .json</string>
     <string name="sources_dialog_local_change_file">Athraigh comhad</string>
     <string name="sources_dialog_preinstalled">Réamhshuiteáilte</string>
     <string name="sources_update_success">Nuashonrú rathúil</string>

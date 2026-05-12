@@ -443,7 +443,7 @@ Basit APK'ler için, yamalamadan sonra desteklenmeyen mimarilere ait yerel küt�
     <string name="settings_advanced_github_pat_dialog_description">GitHub kişisel erişim anahtarını ayarlayın ve çekme isteklerini harici kaynak olarak ekleyin. github.com\'da \"public_repo\" kapsamlı bir PAT (anahtar) oluşturun</string>
     <string name="settings_advanced_github_pat_export_include_label">Ayarları dışa aktarırken dahil et</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Bu PAT\'i dışa aktarılan Morphe ayarlarına ekler</string>
-    <string name="settings_advanced_github_pat_export_warning">PAT\'ı paylaşmayın. Eğer ayarları dışa aktarırken bu PAT\'i eklerseniz, o dosyayı gizli tutun, çünkü anahtarı içerir</string>
+    <string name="settings_advanced_github_pat_export_warning">PAT\'i paylaşmayın. Ayarları dışa aktarırken dahil ederseniz, token içerdiği için bu dosyayı gizli tutun</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Yama seçenekleri</string>
     <string name="settings_advanced_patch_options_youtube_description">Tema, marka ve başlık seçenekleri</string>

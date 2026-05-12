@@ -220,7 +220,7 @@
     <string name="home_app_info_delete_item_database">데이터베이스 엔트리</string>
     <string name="home_app_info_delete_item_patched_apk">패치된 APK 파일</string>
     <string name="home_app_info_delete_item_original_apk">원본 APK 파일</string>
-    <string name="home_app_info_delete_preservation_note">패치 선택 목록 및 옵션이 향후 패치를 위해 저장됩니다</string>
+    <string name="home_app_info_delete_preservation_note">패치 선택 목록 및 옵션은 향후 패치를 위해 저장됩니다</string>
     <string name="home_app_info_patches_name_default">패치</string>
     <string name="home_app_info_patches_name_fallback">이름 없음</string>
     <string name="home_app_info_patches_replace_fail">패치를 가져올 수 없습니다: %s</string>
