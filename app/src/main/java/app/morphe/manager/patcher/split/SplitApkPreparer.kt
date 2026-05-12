@@ -24,13 +24,13 @@ object SplitApkPreparer {
     private const val SKIPPED_STEP_PREFIX = "[skipped]"
 
     // All known ABI identifiers as they appear in split module names, pre-computed once
-    private val KNOWN_ABIS = setOf("armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+    private val KNOWN_ABIS = setOf("armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64", "riscv64")
     private val KNOWN_ABI_TOKENS = KNOWN_ABIS.flatMap { abi ->
         val normalized = abi.lowercase(Locale.ROOT)
         setOf(normalized, normalized.replace('-', '_'), normalized.replace('_', '-'))
     }.toSet()
-    private val DENSITY_QUALIFIERS =
-        setOf("ldpi", "mdpi", "tvdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi")
+    // Ordered highest → lowest, matching Android's density fallback direction
+    private val DENSITY_ORDER = listOf("xxxhdpi", "xxhdpi", "xhdpi", "hdpi", "tvdpi", "mdpi", "ldpi")
 
     /** Returns `true` if [file] is a split APK bundle. */
     fun isSplitArchive(file: File?): Boolean {
@@ -78,13 +78,14 @@ object SplitApkPreparer {
                 if (skipUnneededSplits) {
                     addAll(mergeOrder.filter { shouldSkipModule(it, supportedTokens) })
                     val localeTokens = deviceLocaleTokens()
-                    val densityQualifier = deviceDensityQualifier()
+                    val deviceDensity = deviceDensityQualifier()
+                    val effectiveDensity = resolveEffectiveDensityQualifier(mergeOrder, deviceDensity)
                     addAll(
                         mergeOrder.filter {
                             shouldSkipModuleForDevice(
                                 moduleName = it,
                                 localeTokens = localeTokens,
-                                densityQualifier = densityQualifier
+                                densityQualifier = effectiveDensity
                             )
                         }
                     )
@@ -222,7 +223,7 @@ object SplitApkPreparer {
         return tail.split('.').filter { it.isNotBlank() }
     }
 
-    private fun isDensityQualifier(token: String): Boolean = token in DENSITY_QUALIFIERS
+    private fun isDensityQualifier(token: String): Boolean = token in DENSITY_ORDER
 
     private data class LocaleQualifier(val language: String, val region: String?)
 
@@ -296,6 +297,30 @@ object SplitApkPreparer {
             density <= DisplayMetrics.DENSITY_XXHIGH -> "xxhdpi"
             else -> "xxxhdpi"
         }
+    }
+
+    // Returns the best density qualifier available in [moduleNames] for [deviceQualifier].
+    // If the exact bucket is absent, falls back to the nearest lower density,
+    // then to the nearest higher one as a last resort
+    private fun resolveEffectiveDensityQualifier(
+        moduleNames: List<String>,
+        deviceQualifier: String
+    ): String {
+        val available = moduleNames
+            .flatMap { splitConfigQualifiers(it) }
+            .filter { isDensityQualifier(it) }
+            .toSet()
+        if (available.isEmpty() || deviceQualifier in available) return deviceQualifier
+        val deviceIndex = DENSITY_ORDER.indexOf(deviceQualifier)
+        for (i in deviceIndex + 1 until DENSITY_ORDER.size) {
+            val candidate = DENSITY_ORDER[i]
+            if (candidate in available) return candidate
+        }
+        for (i in deviceIndex - 1 downTo 0) {
+            val candidate = DENSITY_ORDER[i]
+            if (candidate in available) return candidate
+        }
+        return deviceQualifier
     }
 
     private suspend fun extractSplitEntries(
