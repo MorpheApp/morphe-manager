@@ -43,6 +43,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.MORPHE_WEBSITE_URL
 import app.morphe.manager.util.PathValidationResult
+import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 
 
@@ -90,11 +91,11 @@ fun IncompatiblePatcherVersionDialog(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = stringResource(
+                text = htmlAnnotatedString(stringResource(
                     R.string.patcher_incompatible_patcher_description,
                     bundleName,
                     requiredVersion
-                ),
+                )),
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center,

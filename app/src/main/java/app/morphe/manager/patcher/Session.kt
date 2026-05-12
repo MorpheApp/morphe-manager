@@ -45,10 +45,7 @@ class Session(
     )
 
     private suspend fun Patcher.applyPatchesVerbose(selectedPatches: PatchList) {
-        updateProgress(
-            name = androidContext.getString(R.string.applying_patches),
-            state = State.RUNNING
-        )
+        updateProgress(state = State.RUNNING)
 
         this().collect { (patch, exception) ->
             if (patch !in selectedPatches) return@collect
