@@ -214,6 +214,7 @@ fun Changelog(
 ) {
     Markdown(
         content = markdown.trimIndent(),
+        immediate = true,
         retainState = true,
         colors = markdownColor(
             text = MaterialTheme.colorScheme.onSurface,

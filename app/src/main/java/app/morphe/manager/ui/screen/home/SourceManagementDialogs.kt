@@ -165,9 +165,7 @@ fun AddSourceDialog(
             // Tab content
             AnimatedContent(
                 targetState = selectedTab,
-                transitionSpec = {
-                    MorpheAnimations.fadeIn.togetherWith(MorpheAnimations.fadeOut)
-                }
+                transitionSpec = MorpheAnimations.fadeCrossfade()
             ) { tab ->
                 when (tab) {
                     0 -> RemoteTabContent(
@@ -1252,15 +1250,22 @@ fun BundleChangelogDialog(
             }
         }
     ) {
-        when (val current = state) {
-            BundleChangelogState.Loading -> ChangelogSectionLoading()
-            is BundleChangelogState.Error -> BundleChangelogError(error = current.throwable)
-            is BundleChangelogState.Entries -> ChangelogEntriesList(
-                entries = current.entries,
-                headerIcon = Icons.Outlined.History,
-                emptyText = stringResource(R.string.changelog_empty),
-                textColor = LocalDialogTextColor.current
-            )
+        AnimatedContent(
+            targetState = state,
+            transitionSpec = MorpheAnimations.fadeCrossfade(),
+            contentKey = { it::class },
+            label = "changelog_content"
+        ) { current ->
+            when (current) {
+                BundleChangelogState.Loading -> ChangelogSectionLoading()
+                is BundleChangelogState.Error -> BundleChangelogError(error = current.throwable)
+                is BundleChangelogState.Entries -> ChangelogEntriesList(
+                    entries = current.entries,
+                    headerIcon = Icons.Outlined.History,
+                    emptyText = stringResource(R.string.changelog_empty),
+                    textColor = LocalDialogTextColor.current
+                )
+            }
         }
     }
 }

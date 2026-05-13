@@ -17,9 +17,6 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -40,6 +37,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.*
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.viewmodel.InstallViewModel
@@ -404,10 +402,7 @@ fun PatcherScreen(
 
         AnimatedContent(
             targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
-            transitionSpec = {
-                fadeIn(animationSpec = tween(800)) togetherWith
-                        fadeOut(animationSpec = tween(800))
-            },
+            transitionSpec = MorpheAnimations.fadeCrossfade(800),
             label = "patcher_state_animation"
         ) { patcherState ->
             when (patcherState) {
