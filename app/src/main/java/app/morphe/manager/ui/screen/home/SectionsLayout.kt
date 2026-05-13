@@ -294,6 +294,7 @@ private fun AdaptiveContent(
                         searchQuery = searchQuery,
                         onSearchQueryChange = onSearchQueryChange,
                         onBundlesClick = onBundlesClick,
+                        showFadeOverlay = false,
                         modifier = Modifier.weight(1f)
                     )
 
@@ -755,7 +756,8 @@ fun MainAppsSection(
     searchVisible: Boolean = false,
     searchQuery: String = "",
     onSearchQueryChange: (String) -> Unit = {},
-    onBundlesClick: () -> Unit = {}
+    onBundlesClick: () -> Unit = {},
+    showFadeOverlay: Boolean = true
 ) {
     // Multi-select state - set of packageNames chosen for bulk hide
     var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
@@ -1051,7 +1053,7 @@ fun MainAppsSection(
                                 animationSpec = tween(150),
                                 label = "fade_bottom_alpha"
                             )
-                            if (topAlpha > 0f || bottomAlpha > 0f) {
+                            if (showFadeOverlay && (topAlpha > 0f || bottomAlpha > 0f)) {
                                 val bgColor = MaterialTheme.colorScheme.background
                                 val fadePx = with(LocalDensity.current) { 8.dp.toPx() } // Fade size
                                 Box(
