@@ -44,10 +44,7 @@ import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.BundledAppTarget
-import app.morphe.manager.ui.viewmodel.HomeViewModel
-import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
-import app.morphe.manager.ui.viewmodel.SavedApkInfo
+import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
 import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.delay
@@ -87,6 +84,8 @@ fun HomeDialogs(
         val usingMountInstall = homeViewModel.usingMountInstall
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
         val savedApkInfo = homeViewModel.pendingSavedApkInfo
+        val installedApkInfo = homeViewModel.pendingInstalledApkInfo
+        val targetAppInstalled = homeViewModel.pendingTargetAppInstalled == true
 
         ApkAvailabilityDialog(
             appName = appName,
@@ -96,8 +95,10 @@ fun HomeDialogs(
             selectedDownloadVersion = selectedDownloadVersion,
             onVersionSelect = { homeViewModel.pendingSelectedDownloadVersion = it },
             usingMountInstall = usingMountInstall,
+            targetAppInstalled = targetAppInstalled,
             isExpertMode = isExpertMode,
             savedApkInfo = savedApkInfo,
+            installedApkInfo = installedApkInfo,
             onDismiss = {
                 homeViewModel.showApkAvailabilityDialog = false
                 homeViewModel.cleanupPendingData()
@@ -116,6 +117,9 @@ fun HomeDialogs(
             },
             onUseSaved = {
                 homeViewModel.handleSavedApkSelection()
+            },
+            onUseInstalled = {
+                homeViewModel.handleInstalledApkSelection()
             }
         )
     }
@@ -146,6 +150,7 @@ fun HomeDialogs(
 
         DownloadInstructionsDialog(
             usingMountInstall = usingMountInstall,
+            targetAppInstalled = homeViewModel.pendingTargetAppInstalled == true,
             downloadColor = downloadColor,
             isApkBundle = isApkBundle,
             onDismiss = {
@@ -543,12 +548,15 @@ private fun ApkAvailabilityDialog(
     selectedDownloadVersion: AppTarget?,
     onVersionSelect: (AppTarget) -> Unit,
     usingMountInstall: Boolean,
+    targetAppInstalled: Boolean,
     isExpertMode: Boolean,
     savedApkInfo: SavedApkInfo?,
+    installedApkInfo: InstalledApkInfo?,
     onDismiss: () -> Unit,
     onHaveApk: () -> Unit,
     onNeedApk: () -> Unit,
-    onUseSaved: () -> Unit
+    onUseSaved: () -> Unit,
+    onUseInstalled: () -> Unit
 ) {
     val deviceSdk = Build.VERSION.SDK_INT
 
@@ -582,8 +590,10 @@ private fun ApkAvailabilityDialog(
                     layout = DialogButtonLayout.Vertical
                 )
 
-                // Saved APK button (if available)
-                if (savedApkInfo != null) {
+                // Saved APK button - hidden when installed APK is the same version,
+                // since the installed button already covers that case
+                if (savedApkInfo != null &&
+                    (installedApkInfo == null || savedApkInfo.version != installedApkInfo.version)) {
                     MorpheDialogOutlinedButton(
                         text = stringResource(
                             R.string.home_apk_use_saved_with_version,
@@ -591,6 +601,19 @@ private fun ApkAvailabilityDialog(
                         ),
                         onClick = onUseSaved,
                         icon = Icons.Outlined.History,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                // Installed APK button (if the app is currently installed as a single APK)
+                if (installedApkInfo != null) {
+                    MorpheDialogOutlinedButton(
+                        text = stringResource(
+                            R.string.home_apk_use_installed_with_version,
+                            installedApkInfo.version
+                        ),
+                        onClick = onUseInstalled,
+                        icon = Icons.Outlined.PhoneAndroid,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -658,8 +681,8 @@ private fun ApkAvailabilityDialog(
                 )
             }
 
-            // Root mode warning
-            if (usingMountInstall) {
+            // Root mode warning - only when app is not yet installed
+            if (usingMountInstall && !targetAppInstalled) {
                 InfoBadge(
                     text = stringResource(R.string.root_install_apk_required),
                     style = InfoBadgeStyle.Warning,
@@ -679,6 +702,7 @@ private fun ApkAvailabilityDialog(
 @Composable
 private fun DownloadInstructionsDialog(
     usingMountInstall: Boolean,
+    targetAppInstalled: Boolean,
     downloadColor: Color,
     isApkBundle: Boolean,
     onDismiss: () -> Unit,
@@ -771,11 +795,13 @@ private fun DownloadInstructionsDialog(
                     }
                 }
 
+                val mountInstallRequired = usingMountInstall && !targetAppInstalled
+
                 InstructionStep(
                     number = "3",
                     text = htmlAnnotatedString(
                         stringResource(
-                            if (usingMountInstall) {
+                            if (mountInstallRequired) {
                                 R.string.home_download_instructions_step3_mount
                             } else {
                                 R.string.home_download_instructions_step3
@@ -789,7 +815,7 @@ private fun DownloadInstructionsDialog(
                 InstructionStep(
                     number = "4",
                     text = stringResource(
-                        if (usingMountInstall) R.string.home_download_instructions_step4_mount
+                        if (mountInstallRequired) R.string.home_download_instructions_step4_mount
                         else R.string.home_download_instructions_step4
                     ),
                     textColor = textColor,

@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -294,6 +295,8 @@ private fun AdaptiveSuccessContent(
                     isError = isError
                 )
 
+                SuccessConflictHint(isConflict = isConflict)
+
                 SuccessRootWarning(
                     usingMountInstall = usingMountInstall,
                     isReady = !isInstalling && !isInstalled && !isError && !isConflict
@@ -352,6 +355,8 @@ private fun AdaptiveSuccessContent(
                 errorMessage = errorMessage,
                 isError = isError
             )
+
+            SuccessConflictHint(isConflict = isConflict)
 
             SuccessRootWarning(
                 usingMountInstall = usingMountInstall,
@@ -496,6 +501,25 @@ private fun SuccessErrorMessage(
                 )
             }
         }
+    }
+}
+
+/**
+ * Success screen conflict hint.
+ */
+@Composable
+private fun SuccessConflictHint(isConflict: Boolean) {
+    AnimatedVisibility(
+        visible = isConflict,
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut
+    ) {
+        InfoBadge(
+            text = stringResource(R.string.patcher_conflict_hint),
+            style = InfoBadgeStyle.Warning,
+            icon = Icons.Outlined.Warning,
+            isCentered = true
+        )
     }
 }
 

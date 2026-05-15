@@ -121,6 +121,12 @@ data class SavedApkInfo(
     val version: String
 )
 
+/** Installed APK information for display in APK selection dialog. */
+data class InstalledApkInfo(
+    val version: String,
+    val apkPath: String
+)
+
 /**
  * Combined home screen app state - emitted atomically so visible and hidden lists
  * are always in sync and never cause a transient empty-state flash.
@@ -267,6 +273,9 @@ class HomeViewModel(
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
     var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
+    var pendingInstalledApkInfo by mutableStateOf<InstalledApkInfo?>(null)
+    // null = not yet loaded, true/false = loaded result
+    var pendingTargetAppInstalled by mutableStateOf<Boolean?>(null)
 
     // Bundle update snackbar state
     var showBundleUpdateSnackbar by mutableStateOf(false)
@@ -1342,6 +1351,10 @@ class HomeViewModel(
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
         pendingRecommendedBundleVersions = recommendedBundleVersions[packageName] ?: emptyMap()
         pendingSelectedDownloadVersion = pendingRecommendedVersion
+        // Reset per-package cached state so a new flow always loads fresh data
+        pendingSavedApkInfo = null
+        pendingInstalledApkInfo = null
+        pendingTargetAppInstalled = null
 
         // Guard: if there is a pending bundle update on metered data, show the outdated-patches
         // dialog before proceeding with the actual APK selection flow.
@@ -1401,9 +1414,19 @@ class HomeViewModel(
      * open the APK availability dialog.
      */
     private suspend fun continueApkSelectionFlow(packageName: String) {
-        // Reload saved APK info in case it wasn't loaded yet (called from proceedWithSelectedBundle)
-        if (pendingSavedApkInfo == null) {
-            pendingSavedApkInfo = withContext(Dispatchers.IO) { loadSavedApkInfo(packageName) }
+        // Load saved APK (Room + AppDataResolver) and installed APK (PackageManager) in parallel
+        coroutineScope {
+            val savedJob = if (pendingSavedApkInfo == null) {
+                async(Dispatchers.IO) { loadSavedApkInfo(packageName) }
+            } else null
+            val installedJob = if (pendingTargetAppInstalled == null) {
+                async(Dispatchers.IO) { loadInstalledInfo(packageName) }
+            } else null
+            savedJob?.await()?.let { pendingSavedApkInfo = it }
+            installedJob?.await()?.let { (installed, info) ->
+                pendingTargetAppInstalled = installed
+                pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version) }
+            }
         }
 
         val recommendedVersion = pendingRecommendedVersion
@@ -1449,6 +1472,104 @@ class HomeViewModel(
         } catch (e: Exception) {
             Log.e(tag, "Failed to load saved APK info", e)
             return null
+        }
+    }
+
+    /**
+     * Returns true if [installedVersion] is listed in [pendingCompatibleVersions],
+     * or if the compatible list is empty / contains an "any version" target.
+     */
+    private fun isInstalledVersionCompatible(installedVersion: String): Boolean {
+        val compatible = pendingCompatibleVersions
+        if (compatible.isEmpty() || compatible.any { it.target.version == null }) return true
+        return compatible.any { it.target.version == installedVersion }
+    }
+
+    /**
+     * Returns whether the target app is installed and, if it is a single unpatched APK, its info.
+     * First element: true if the package is installed at all (regardless of splits/version).
+     * Second element: non-null only for single-APK installs that appear to be the original app.
+     *
+     * The "Use installed APK" button is suppressed when:
+     * - Morphe tracks this package as a patched install, or
+     * - The installed signing certificate doesn't match the bundle's expected original signatures.
+     */
+    private suspend fun loadInstalledInfo(packageName: String): Pair<Boolean, InstalledApkInfo?> {
+        return try {
+            val pkgInfo = pm.getPackageInfo(packageName)
+                ?: return false to null
+
+            // Fast path: Morphe tracks this package as a patched install AND the installed
+            // version still matches - meaning the patched app is still active.
+            // If versions differ, the user reinstalled a different build (possibly the original),
+            // so we fall through to the signature check instead of blocking the button.
+            val trackedPatch = installedAppRepository.get(packageName)
+            if (trackedPatch != null && pkgInfo.versionName == trackedPatch.version) return true to null
+
+            // Signature check: if bundle declares expected original signatures, verify the installed
+            // app matches. A mismatch means the installed app is likely already patched.
+            val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
+            if (!expectedSignatures.isNullOrEmpty()) {
+                if (!isInstalledAppOriginal(packageName, expectedSignatures)) return true to null
+            }
+
+            val appInfo = pkgInfo.applicationInfo
+                ?: return true to null
+            // Split APK: app is installed, but we can't use base.apk alone
+            if (!appInfo.splitSourceDirs.isNullOrEmpty()) return true to null
+            val sourceDir = appInfo.sourceDir ?: return true to null
+            if (!File(sourceDir).exists()) return true to null
+            val version = pkgInfo.versionName?.takeUnless { it.isBlank() }
+                ?: return true to null
+            true to InstalledApkInfo(version = version, apkPath = sourceDir)
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to load installed app info", e)
+            false to null
+        }
+    }
+
+    /**
+     * Handle selection of the currently installed APK from the APK availability dialog.
+     * Copies the APK to a temp file and sends it to the patcher.
+     * The source is NOT saved to the original-APK repository.
+     */
+    fun handleInstalledApkSelection() {
+        val installedInfo = pendingInstalledApkInfo
+        val packageName = pendingPackageName
+
+        if (installedInfo == null || packageName == null) {
+            cleanupPendingData()
+            return
+        }
+
+        viewModelScope.launch {
+            showApkAvailabilityDialog = false
+
+            val selectedApp = withContext(Dispatchers.IO) {
+                try {
+                    val source = File(installedInfo.apkPath)
+                    if (!source.exists()) return@withContext null
+                    val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
+                    source.copyTo(tempFile, overwrite = true)
+                    SelectedApp.Local(
+                        packageName = packageName,
+                        version = installedInfo.version,
+                        file = tempFile,
+                        temporary = true
+                    )
+                } catch (e: Exception) {
+                    Log.e(tag, "Failed to copy installed APK", e)
+                    null
+                }
+            }
+
+            if (selectedApp != null) {
+                // Skip signature check: the installed APK may already be patched with our key
+                processSelectedAppIgnoringSignature(selectedApp)
+            } else {
+                app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                cleanupPendingData()
+            }
         }
     }
 
@@ -2245,6 +2366,8 @@ class HomeViewModel(
         if (!keepBundleUid) pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
         pendingSavedApkInfo = null
+        pendingInstalledApkInfo = null
+        pendingTargetAppInstalled = null
         if (!keepSelectedApp) {
             pendingSelectedApp?.let { app ->
                 if (app is SelectedApp.Local && app.temporary) {
@@ -2323,6 +2446,32 @@ class HomeViewModel(
                     }
             }
             .filterValues { it.isNotEmpty() }
+    }
+
+    /**
+     * Returns true if the installed [packageName] is signed with one of [expectedSha256Signatures].
+     * Checks all signers including certificate rotation history, mirroring [verifyApkSignature].
+     */
+    @Suppress("DEPRECATION")
+    private fun isInstalledAppOriginal(packageName: String, expectedSha256Signatures: Set<String>): Boolean {
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+            PackageManager.GET_SIGNING_CERTIFICATES
+        else
+            PackageManager.GET_SIGNATURES
+        val pkgInfo = pm.getPackageInfo(packageName, flags) ?: return false
+        val digest = MessageDigest.getInstance("SHA-256")
+        val signatures = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val signingInfo = pkgInfo.signingInfo ?: return false
+            if (signingInfo.hasMultipleSigners()) signingInfo.apkContentsSigners
+            else signingInfo.signingCertificateHistory
+        } else {
+            pkgInfo.signatures
+        }
+        return signatures?.any { sig ->
+            digest.reset()
+            digest.digest(sig.toByteArray())
+                .joinToString("") { b -> "%02x".format(b) } in expectedSha256Signatures
+        } ?: false
     }
 
     /**
