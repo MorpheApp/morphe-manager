@@ -509,18 +509,13 @@ private fun SuccessErrorMessage(
  */
 @Composable
 private fun SuccessConflictHint(isConflict: Boolean) {
-    AnimatedVisibility(
+    SuccessHint(
         visible = isConflict,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
-    ) {
-        InfoBadge(
-            text = stringResource(R.string.patcher_conflict_hint),
-            style = InfoBadgeStyle.Warning,
-            icon = Icons.Outlined.Warning,
-            isCentered = true
-        )
-    }
+        text = stringResource(R.string.patcher_conflict_hint),
+        icon = Icons.Outlined.Warning,
+        containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+        iconTint = MaterialTheme.colorScheme.error
+    )
 }
 
 /**
@@ -531,17 +526,51 @@ private fun SuccessRootWarning(
     usingMountInstall: Boolean,
     isReady: Boolean
 ) {
-    AnimatedVisibility(
+    SuccessHint(
         visible = usingMountInstall && isReady,
+        text = stringResource(R.string.root_gmscore_excluded),
+        icon = Icons.Outlined.Info,
+        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+        iconTint = MaterialTheme.colorScheme.primary
+    )
+}
+
+@Composable
+private fun SuccessHint(
+    visible: Boolean,
+    text: String,
+    icon: ImageVector,
+    containerColor: Color,
+    iconTint: Color
+) {
+    AnimatedVisibility(
+        visible = visible,
         enter = MorpheAnimations.fadeIn,
         exit = MorpheAnimations.fadeOut
     ) {
-        InfoBadge(
-            text = stringResource(R.string.root_gmscore_excluded),
-            style = InfoBadgeStyle.Primary,
-            icon = Icons.Outlined.Info,
-            isCentered = true
-        )
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp),
+            color = containerColor
+        ) {
+            Row(
+                modifier = Modifier.padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = iconTint,
+                    modifier = Modifier.size(20.dp)
+                )
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        }
     }
 }
 
@@ -561,16 +590,13 @@ private fun InstallActionButton(
     onOpen: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val buttonColors = when {
-        isInstalled -> ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
-        )
-        isConflict || isError -> ButtonDefaults.buttonColors(
+    val buttonColors = if (isConflict || isError) {
+        ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.error,
             contentColor = MaterialTheme.colorScheme.onError
         )
-        else -> ButtonDefaults.buttonColors(
+    } else {
+        ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
         )
@@ -581,7 +607,6 @@ private fun InstallActionButton(
             when {
                 isInstalled -> onOpen()
                 isConflict -> conflictPackageName?.let { onUninstall(it) }
-                isError -> onInstall()
                 else -> onInstall()
             }
         },
@@ -611,7 +636,6 @@ private fun InstallActionButton(
                 imageVector = when {
                     isInstalled -> Icons.AutoMirrored.Outlined.Launch
                     isConflict -> Icons.Default.DeleteForever
-                    isError -> Icons.Outlined.InstallMobile
                     usingMountInstall -> Icons.Outlined.Link
                     else -> Icons.Outlined.InstallMobile
                 },
@@ -624,7 +648,6 @@ private fun InstallActionButton(
                     when {
                         isInstalled -> R.string.open
                         isConflict -> R.string.uninstall
-                        isError -> R.string.install
                         usingMountInstall -> R.string.mount
                         else -> R.string.install
                     }
