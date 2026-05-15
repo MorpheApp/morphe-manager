@@ -1502,19 +1502,26 @@ class HomeViewModel(
             val pkgInfo = pm.getPackageInfo(packageName)
                 ?: return false to null
 
-            // Fast path: Morphe tracks this package as a patched install AND the installed
-            // version still matches - meaning the patched app is still active.
-            // If versions differ, the user reinstalled a different build (possibly the original),
-            // so we fall through to the signature check instead of blocking the button.
-            val trackedPatch = installedAppRepository.get(packageName)
-            if (trackedPatch != null && pkgInfo.versionName == trackedPatch.version) return true to null
-
-            // Signature check: if bundle declares expected original signatures, verify the installed
-            // app matches. A mismatch means the installed app is likely already patched.
-            val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
-            if (!expectedSignatures.isNullOrEmpty()) {
-                if (!isInstalledAppOriginal(packageName, expectedSignatures)) return true to null
+            // Determine if the installed app is patched, in priority order:
+            // 1. Saved original APK (most reliable - direct signature comparison)
+            // 2. Bundle-declared expected signatures (fallback)
+            // 3. DB tracking (last resort - version match only)
+            val isPatched: Boolean = run {
+                val savedOriginal = originalApkRepository.get(packageName)
+                if (savedOriginal != null) {
+                    val savedFile = File(savedOriginal.filePath)
+                    savedFile.exists() && pm.hasSignatureMismatch(packageName, savedFile)
+                } else {
+                    val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
+                    if (!expectedSignatures.isNullOrEmpty()) {
+                        !isInstalledAppOriginal(packageName, expectedSignatures)
+                    } else {
+                        val trackedPatch = installedAppRepository.get(packageName)
+                        trackedPatch != null && pkgInfo.versionName == trackedPatch.version
+                    }
+                }
             }
+            if (isPatched) return true to null
 
             val appInfo = pkgInfo.applicationInfo
                 ?: return true to null
