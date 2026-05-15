@@ -1414,12 +1414,15 @@ class HomeViewModel(
      * open the APK availability dialog.
      */
     private suspend fun continueApkSelectionFlow(packageName: String) {
-        // Load saved APK (Room + AppDataResolver) and installed APK (PackageManager) in parallel
+        // Load saved APK (Room + AppDataResolver) and, in expert mode only, installed APK
+        // (PackageManager) in parallel. In simple mode the installed-APK button is hidden,
+        // so we skip the PM lookup entirely to keep simple-mode behavior unchanged
+        val expertMode = isExpertMode()
         coroutineScope {
             val savedJob = if (pendingSavedApkInfo == null) {
                 async(Dispatchers.IO) { loadSavedApkInfo(packageName) }
             } else null
-            val installedJob = if (pendingTargetAppInstalled == null) {
+            val installedJob = if (expertMode && pendingTargetAppInstalled == null) {
                 async(Dispatchers.IO) { loadInstalledInfo(packageName) }
             } else null
             savedJob?.await()?.let { pendingSavedApkInfo = it }
