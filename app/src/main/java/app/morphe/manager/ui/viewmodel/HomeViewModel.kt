@@ -1508,17 +1508,20 @@ class HomeViewModel(
             // 3. DB tracking (last resort - version match only)
             val isPatched: Boolean = run {
                 val savedOriginal = originalApkRepository.get(packageName)
-                if (savedOriginal != null) {
-                    val savedFile = File(savedOriginal.filePath)
-                    savedFile.exists() && pm.hasSignatureMismatch(packageName, savedFile)
-                } else {
-                    val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
-                    if (!expectedSignatures.isNullOrEmpty()) {
-                        !isInstalledAppOriginal(packageName, expectedSignatures)
-                    } else {
-                        val trackedPatch = installedAppRepository.get(packageName)
-                        trackedPatch != null && pkgInfo.versionName == trackedPatch.version
+                val savedFile = savedOriginal?.let { File(it.filePath) }
+                if (savedFile?.exists() == true) {
+                    val savedHashes = getApkFileSignatureHashes(savedFile)
+                    if (savedHashes.isNotEmpty()) {
+                        return@run !isInstalledAppOriginal(packageName, savedHashes)
                     }
+                    // Can't read signatures from file → fall through to other checks
+                }
+                val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
+                if (!expectedSignatures.isNullOrEmpty()) {
+                    !isInstalledAppOriginal(packageName, expectedSignatures)
+                } else {
+                    val trackedPatch = installedAppRepository.get(packageName)
+                    trackedPatch != null && pkgInfo.versionName == trackedPatch.version
                 }
             }
             if (isPatched) return true to null
@@ -2456,6 +2459,41 @@ class HomeViewModel(
                     }
             }
             .filterValues { it.isNotEmpty() }
+    }
+
+    /**
+     * Extracts SHA-256 certificate fingerprints from an APK file.
+     * Returns an empty set if the file cannot be read or has no signatures.
+     */
+    @Suppress("DEPRECATION")
+    private fun getApkFileSignatureHashes(file: File): Set<String> {
+        return try {
+            val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+                PackageManager.GET_SIGNING_CERTIFICATES
+            else
+                PackageManager.GET_SIGNATURES
+            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, flags)
+                ?: return emptySet()
+            info.applicationInfo?.apply {
+                sourceDir = file.absolutePath
+                publicSourceDir = file.absolutePath
+            }
+            val signatures = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                val signingInfo = info.signingInfo ?: return emptySet()
+                if (signingInfo.hasMultipleSigners()) signingInfo.apkContentsSigners
+                else signingInfo.signingCertificateHistory
+            } else {
+                info.signatures ?: return emptySet()
+            }
+            val digest = MessageDigest.getInstance("SHA-256")
+            signatures.mapTo(mutableSetOf()) { sig ->
+                digest.reset()
+                digest.digest(sig.toByteArray()).joinToString("") { b -> "%02x".format(b) }
+            }
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to read APK file signatures", e)
+            emptySet()
+        }
     }
 
     /**
