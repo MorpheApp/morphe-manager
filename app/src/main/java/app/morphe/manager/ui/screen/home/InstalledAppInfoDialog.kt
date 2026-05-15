@@ -589,50 +589,52 @@ private fun WarningBanner(
         MaterialTheme.colorScheme.onPrimaryContainer
     }
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .background(containerColor)
-            .padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Header with icon
-        Row(
-            modifier = Modifier.wrapContentWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+    CompositionLocalProvider(LocalContentColor provides contentColor) {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .background(containerColor)
+                .padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = contentColor,
-                modifier = Modifier.size(20.dp)
-            )
+            // Header with icon
+            Row(
+                modifier = Modifier.wrapContentWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = contentColor,
+                    modifier = Modifier.size(20.dp)
+                )
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = contentColor,
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            // Description
             Text(
-                text = title,
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Bold,
-                color = contentColor,
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                color = contentColor.copy(alpha = 0.9f),
                 textAlign = TextAlign.Center
             )
+
+            // Action button
+            PrimaryActionButton(
+                action = ActionItem(text = buttonText, icon = buttonIcon, onClick = onClick),
+                accentColor = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
-
-        // Description
-        Text(
-            text = description,
-            style = MaterialTheme.typography.bodySmall,
-            color = contentColor.copy(alpha = 0.9f),
-            textAlign = TextAlign.Center
-        )
-
-        // Action button
-        PrimaryActionButton(
-            action = ActionItem(text = buttonText, icon = buttonIcon, onClick = onClick),
-            accentColor = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
 
@@ -1288,7 +1290,15 @@ private fun PrimaryActionButton(
     } else {
         accentColor.copy(alpha = 0.18f)
     }
-    val contentColor = MaterialTheme.colorScheme.onSurface
+    val parentContentColor = LocalContentColor.current
+    val contentColor = if (isExtremeAccent) {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    } else {
+        // Use the parents content color when available inside WarningBanner which
+        // sets contentColor to onPrimaryContainer/onErrorContainer
+        // This paints proper contrast for custom accent colors
+        parentContentColor
+    }
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
