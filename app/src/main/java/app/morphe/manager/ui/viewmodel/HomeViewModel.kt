@@ -59,6 +59,10 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import java.io.File
 import java.io.FileNotFoundException
+import java.io.FileInputStream
+import java.util.zip.CRC32
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 import java.net.URLEncoder.encode
 import java.security.MessageDigest
 import kotlin.time.Clock
@@ -124,8 +128,11 @@ data class SavedApkInfo(
 /** Installed APK information for display in APK selection dialog. */
 data class InstalledApkInfo(
     val version: String,
-    val apkPath: String
-)
+    val apkPath: String,
+    val splitPaths: List<String> = emptyList()
+) {
+    val isSplit: Boolean get() = splitPaths.isNotEmpty()
+}
 
 /**
  * Combined home screen app state - emitted atomically so visible and hidden lists
@@ -1528,13 +1535,14 @@ class HomeViewModel(
 
             val appInfo = pkgInfo.applicationInfo
                 ?: return true to null
-            // Split APK: app is installed, but we can't use base.apk alone
-            if (!appInfo.splitSourceDirs.isNullOrEmpty()) return true to null
             val sourceDir = appInfo.sourceDir ?: return true to null
             if (!File(sourceDir).exists()) return true to null
             val version = pkgInfo.versionName?.takeUnless { it.isBlank() }
                 ?: return true to null
-            true to InstalledApkInfo(version = version, apkPath = sourceDir)
+            val splitPaths = appInfo.splitSourceDirs
+                ?.filter { File(it).exists() }
+                ?: emptyList()
+            true to InstalledApkInfo(version = version, apkPath = sourceDir, splitPaths = splitPaths)
         } catch (e: Exception) {
             Log.e(tag, "Failed to load installed app info", e)
             false to null
@@ -1543,7 +1551,7 @@ class HomeViewModel(
 
     /**
      * Handle selection of the currently installed APK from the APK availability dialog.
-     * Copies the APK to a temp file and sends it to the patcher.
+     * For single APKs: copies to a temp file. For split APKs: packs into a temp .apks archive.
      * The source is NOT saved to the original-APK repository.
      */
     fun handleInstalledApkSelection() {
@@ -1560,18 +1568,29 @@ class HomeViewModel(
 
             val selectedApp = withContext(Dispatchers.IO) {
                 try {
-                    val source = File(installedInfo.apkPath)
-                    if (!source.exists()) return@withContext null
-                    val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
-                    source.copyTo(tempFile, overwrite = true)
-                    SelectedApp.Local(
-                        packageName = packageName,
-                        version = installedInfo.version,
-                        file = tempFile,
-                        temporary = true
-                    )
+                    if (installedInfo.isSplit) {
+                        val archive = File(filesystem.uiTempDir, "${packageName}_installed.apks")
+                        createApksArchive(installedInfo, archive)
+                        SelectedApp.Local(
+                            packageName = packageName,
+                            version = installedInfo.version,
+                            file = archive,
+                            temporary = true
+                        )
+                    } else {
+                        val source = File(installedInfo.apkPath)
+                        if (!source.exists()) return@withContext null
+                        val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
+                        source.copyTo(tempFile, overwrite = true)
+                        SelectedApp.Local(
+                            packageName = packageName,
+                            version = installedInfo.version,
+                            file = tempFile,
+                            temporary = true
+                        )
+                    }
                 } catch (e: Exception) {
-                    Log.e(tag, "Failed to copy installed APK", e)
+                    Log.e(tag, "Failed to prepare installed APK", e)
                     null
                 }
             }
@@ -1583,6 +1602,38 @@ class HomeViewModel(
                 app.toast(app.getString(R.string.home_invalid_apk_io_error))
                 cleanupPendingData()
             }
+        }
+    }
+
+    /**
+     * Packs [info]'s base APK and all split APKs into an APKS archive (ZIP).
+     * Entry names preserve the original filenames so [SplitApkPreparer] can
+     * identify the base entry by the "base" substring and filter ABI/density splits.
+     */
+    private fun createApksArchive(info: InstalledApkInfo, output: File) {
+        output.parentFile?.mkdirs()
+        ZipOutputStream(output.outputStream().buffered()).use { zip ->
+            fun addEntry(file: File) {
+                // APKs are already compressed ZIPs - use STORED to avoid wasting CPU on deflate.
+                // STORED requires CRC32 and size known upfront, so we read the file twice.
+                val crc = CRC32()
+                val buf = ByteArray(65536)
+                FileInputStream(file).use { input ->
+                    var n: Int
+                    while (input.read(buf).also { n = it } >= 0) crc.update(buf, 0, n)
+                }
+                val entry = ZipEntry(file.name).apply {
+                    method = ZipEntry.STORED
+                    size = file.length()
+                    compressedSize = file.length()
+                    this.crc = crc.value
+                }
+                zip.putNextEntry(entry)
+                FileInputStream(file).use { it.copyTo(zip) }
+                zip.closeEntry()
+            }
+            addEntry(File(info.apkPath))
+            info.splitPaths.forEach { addEntry(File(it)) }
         }
     }
 
