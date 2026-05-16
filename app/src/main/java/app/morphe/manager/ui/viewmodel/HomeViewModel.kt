@@ -526,17 +526,21 @@ class HomeViewModel(
         }
     }
 
+    private fun clearPendingApp() {
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
     /**
      * User dismissed the split APK warning without proceeding.
      * Cleans up the temporary file if needed.
      */
     fun dismissSplitApkWarning() {
-        val app = pendingSelectedApp
         showSplitApkWarningDialog = false
-        pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
-        }
+        clearPendingApp()
     }
 
     /**
@@ -545,10 +549,19 @@ class HomeViewModel(
      */
     fun dismissUnsupportedVersionDialog() {
         showUnsupportedVersionDialog = null
-        val app = pendingSelectedApp
+        clearPendingApp()
+    }
+
+    private fun proceedWithPendingApp(allowIncompatible: Boolean) {
+        val app = pendingSelectedApp ?: return
         pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
+        viewModelScope.launch {
+            if (rootInstaller.isDeviceRooted()) {
+                requestPrePatchInstallerSelection(app, allowIncompatible = allowIncompatible)
+            } else {
+                usingMountInstall = false
+                startPatchingWithApp(app, allowIncompatible = allowIncompatible)
+            }
         }
     }
 
@@ -558,16 +571,7 @@ class HomeViewModel(
      */
     fun proceedWithUnsupportedVersion() {
         showUnsupportedVersionDialog = null
-        val app = pendingSelectedApp ?: return
-        pendingSelectedApp = null
-        viewModelScope.launch {
-            if (rootInstaller.isDeviceRooted()) {
-                requestPrePatchInstallerSelection(app, allowIncompatible = true)
-            } else {
-                usingMountInstall = false
-                startPatchingWithApp(app, allowIncompatible = true)
-            }
-        }
+        proceedWithPendingApp(allowIncompatible = true)
     }
 
     /**
@@ -576,11 +580,7 @@ class HomeViewModel(
      */
     fun dismissExperimentalVersionDialog() {
         showExperimentalVersionDialog = null
-        val app = pendingSelectedApp
-        pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
-        }
+        clearPendingApp()
     }
 
     /**
@@ -590,16 +590,7 @@ class HomeViewModel(
      */
     fun proceedWithExperimentalVersion() {
         showExperimentalVersionDialog = null
-        val app = pendingSelectedApp ?: return
-        pendingSelectedApp = null
-        viewModelScope.launch {
-            if (rootInstaller.isDeviceRooted()) {
-                requestPrePatchInstallerSelection(app, allowIncompatible = false)
-            } else {
-                usingMountInstall = false
-                startPatchingWithApp(app, allowIncompatible = false)
-            }
-        }
+        proceedWithPendingApp(allowIncompatible = false)
     }
 
     /**
@@ -615,11 +606,7 @@ class HomeViewModel(
      */
     fun dismissInvalidSignatureDialog() {
         showInvalidSignatureDialog = null
-        val app = pendingSelectedApp
-        pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
-        }
+        clearPendingApp()
     }
 
     /**
@@ -2282,6 +2269,16 @@ class HomeViewModel(
         repatchPackageName = null
     }
 
+    private suspend fun saveSeenPatchesForBundles(packageName: String) {
+        expertModeBundles.forEach { bundle ->
+            patchSelectionRepository.saveSeenPatches(
+                packageName = packageName,
+                bundleUid = bundle.uid,
+                patchNames = bundle.patches.map { it.name }.toSet()
+            )
+        }
+    }
+
     /**
      * Called when the user confirms the ExpertModeDialog.
      * Routes to the repatch flow (via [onRepatchProceed]) or the normal patching flow
@@ -2307,13 +2304,7 @@ class HomeViewModel(
                 // Snapshot seen patches before cleanup clears expertModeBundles.
                 val pkgName = repatchPackageName
                 if (pkgName != null) {
-                    expertModeBundles.forEach { bundle ->
-                        patchSelectionRepository.saveSeenPatches(
-                            packageName = pkgName,
-                            bundleUid = bundle.uid,
-                            patchNames = bundle.patches.map { it.name }.toSet()
-                        )
-                    }
+                    saveSeenPatchesForBundles(pkgName)
                 }
                 withContext(Dispatchers.Main) {
                     repatchCallback(finalPatches, patcherOptions)
@@ -2327,13 +2318,7 @@ class HomeViewModel(
                 )
                 saveOptions(selectedApp.packageName, finalOptions)
                 // Snapshot all bundle patch names so next open can detect genuinely new patches.
-                expertModeBundles.forEach { bundle ->
-                    patchSelectionRepository.saveSeenPatches(
-                        packageName = selectedApp.packageName,
-                        bundleUid = bundle.uid,
-                        patchNames = bundle.patches.map { it.name }.toSet()
-                    )
-                }
+                saveSeenPatchesForBundles(selectedApp.packageName)
                 withContext(Dispatchers.Main) {
                     proceedWithPatching(selectedApp, finalPatches, patcherOptions)
                     cleanupExpertModeData()
