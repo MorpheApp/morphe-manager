@@ -60,6 +60,21 @@ fun Color.ensureContrast(
     else lighten((minLuminanceDiff - diff + 0.05f).coerceIn(0f, 0.8f))
 }
 
+/**
+ * Composites this color at [alpha] over [background] and returns the opaque result.
+ */
+fun Color.compositeOver(background: Color, alpha: Float = this.alpha): Color = Color(
+    red   = background.red   * (1f - alpha) + red   * alpha,
+    green = background.green * (1f - alpha) + green * alpha,
+    blue  = background.blue  * (1f - alpha) + blue  * alpha,
+)
+
+/**
+ * Returns true if this color, when used as a background, requires light (white) content for contrast.
+ * Uses WCAG relative luminance threshold.
+ */
+fun Color.requiresLightContent(): Boolean = luminance() <= 0.179f
+
 fun String?.toColorOrNull(): Color? {
     val value = this?.trim().orEmpty()
     if (value.isEmpty()) return null
