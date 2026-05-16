@@ -1884,17 +1884,13 @@ class HomeViewModel(
         // because it affects which patches are included (GmsCore is excluded for mount install).
         // Show the pre-patching installer dialog so the user can choose.
         // For non-root devices, just proceed - installer selection happens after patching.
-        if (rootInstaller.isDeviceRooted()) {
-            requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
-        } else {
-            usingMountInstall = false
-            startPatchingWithApp(selectedApp, allowIncompatible)
-        }
+        processSelectedAppIgnoringSignature(selectedApp)
     }
 
     /**
-     * Called when the user confirms proceeding despite an APK signature mismatch.
-     * Skips the signature verification step and continues with the normal flow.
+     * Skips all preliminary checks (signature, version, bundle) and routes directly to patching.
+     * Used when the user confirms proceeding despite a signature mismatch, or when patching
+     * from the installed app where checks are not applicable.
      */
     suspend fun processSelectedAppIgnoringSignature(selectedApp: SelectedApp) {
         val allowIncompatible = prefs.disablePatchVersionCompatCheck.getBlocking()
