@@ -1438,7 +1438,7 @@ class HomeViewModel(
 
         val recommendedVersion = pendingRecommendedVersion
 
-        val shouldAutoUseSaved = !isExpertMode() &&
+        val shouldAutoUseSaved = !expertMode &&
                 pendingSavedApkInfo != null &&
                 recommendedVersion != null &&
                 pendingSavedApkInfo!!.version == recommendedVersion.version
