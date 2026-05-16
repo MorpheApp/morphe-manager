@@ -92,6 +92,8 @@ class PatcherViewModel(
     private var appliedSelection: PatchSelection = input.selectedPatches.mapValues { it.value.toSet() }
     private var appliedOptions: Options = input.options
     val currentSelectedApp: SelectedApp get() = selectedApp
+    val patchedFromInstalledDevice: Boolean
+        get() = (selectedApp as? SelectedApp.Local)?.fromInstalledDevice == true
 
     private var currentActivityRequest: Pair<CompletableDeferred<Boolean>, String>? by mutableStateOf(
         null

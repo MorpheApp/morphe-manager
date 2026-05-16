@@ -240,15 +240,39 @@ fun PatcherScreen(
     val isInstalling by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installing } }
     val isInstalled by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installed } }
     val isError by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Error } }
-    val isConflict by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Conflict } }
+    // For installed-source patches the conflict is expected and handled via InstalledSourceConflictDialog,
+    // so suppress the conflict UI to keep the success screen clean
+    val isConflict by remember { derivedStateOf {
+        installViewModel.installState is InstallViewModel.InstallState.Conflict &&
+            !(patcherViewModel.patchedFromInstalledDevice && !usingMountInstall)
+    } }
     val installedPackageName by remember { derivedStateOf { installViewModel.installedPackageName } }
     val conflictPackageName by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Conflict)?.packageName } }
     val errorMessage by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Error)?.message } }
+
+    val showInstalledSourceConflictDialog = remember { mutableStateOf(false) }
 
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
             patcherViewModel.triggerNotificationPromptIfNeeded()
         }
+        if (installState is InstallViewModel.InstallState.Conflict &&
+            patcherViewModel.patchedFromInstalledDevice && !usingMountInstall) {
+            showInstalledSourceConflictDialog.value = true
+        }
+    }
+
+    if (showInstalledSourceConflictDialog.value) {
+        InstalledSourceConflictDialog(
+            onUninstall = {
+                showInstalledSourceConflictDialog.value = false
+                conflictPackageName?.let { installViewModel.requestUninstall(it) }
+            },
+            onDismiss = {
+                showInstalledSourceConflictDialog.value = false
+                installViewModel.resetInstallState()
+            }
+        )
     }
 
     // Notification prompt dialog

@@ -284,6 +284,10 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_conflict_title">Package conflict</string>
     <string name="patcher_conflict_subtitle">You need to uninstall the existing version</string>
     <string name="patcher_conflict_hint">The patched app uses a different certificate than the installed version. Uninstalling will erase all app data</string>
+    <string name="patcher_installed_conflict_title">Uninstall required</string>
+    <string name="patcher_installed_conflict_body">"Morphe signs patched apps with its own certificate, which differs from the original. Android requires removing the existing version before the patched app can be installed.
+
+Uninstalling will permanently erase all app data"</string>
     <string name="patcher_install_error_title">Installation error</string>
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>

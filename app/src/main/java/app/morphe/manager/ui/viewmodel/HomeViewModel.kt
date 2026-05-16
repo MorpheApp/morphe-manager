@@ -1575,7 +1575,8 @@ class HomeViewModel(
                             packageName = packageName,
                             version = installedInfo.version,
                             file = archive,
-                            temporary = true
+                            temporary = true,
+                            fromInstalledDevice = true
                         )
                     } else {
                         val source = File(installedInfo.apkPath)
@@ -1586,7 +1587,8 @@ class HomeViewModel(
                             packageName = packageName,
                             version = installedInfo.version,
                             file = tempFile,
-                            temporary = true
+                            temporary = true,
+                            fromInstalledDevice = true
                         )
                     }
                 } catch (e: Exception) {
