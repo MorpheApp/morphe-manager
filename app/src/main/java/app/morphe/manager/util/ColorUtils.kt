@@ -1,23 +1,17 @@
 package app.morphe.manager.util
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.graphics.toColorInt
 
 /**
- * Determine if a color represents a dark background
+ * Determine if a color represents a dark background.
  */
 fun Color.isDarkBackground(): Boolean = luminance() < 0.5f
 
 /**
- * Get luminance from a Color
- */
-fun Color.luminance(): Float {
-    return 0.299f * red + 0.587f * green + 0.114f * blue
-}
-
-/**
- * Lighten a color by mixing with white
+ * Lighten a color by mixing with white.
  */
 fun Color.lighten(factor: Float): Color {
     return Color(
@@ -29,7 +23,7 @@ fun Color.lighten(factor: Float): Color {
 }
 
 /**
- * Darken a color by mixing with black
+ * Darken a color by mixing with black.
  */
 fun Color.darken(factor: Float): Color {
     return Color(
@@ -76,7 +70,7 @@ fun String?.toColorOrNull(): Color? {
 }
 
 /**
- * Parse color string to RGB float values (0-1 range)
+ * Parse color string to RGB float values (0-1 range).
  */
 fun parseColorToRgb(color: String): Triple<Float, Float, Float> {
     return color.toColorOrNull()?.let {
@@ -85,8 +79,8 @@ fun parseColorToRgb(color: String): Triple<Float, Float, Float> {
 }
 
 /**
- * Parse hex color string to RGB float values
- * Supports both #RRGGBB and #AARRGGBB formats
+ * Parse hex color string to RGB float values.
+ * Supports both #RRGGBB and #AARRGGBB formats.
  */
 fun parseHexToRgb(hex: String): Triple<Float, Float, Float>? {
     return hex.toColorOrNull()?.let {
@@ -95,7 +89,7 @@ fun parseHexToRgb(hex: String): Triple<Float, Float, Float>? {
 }
 
 /**
- * Convert RGB float values to hex string
+ * Convert RGB float values to hex string.
  */
 fun rgbToHex(r: Float, g: Float, b: Float): String {
     return Color(r, g, b).toHexString(includeAlpha = false)
