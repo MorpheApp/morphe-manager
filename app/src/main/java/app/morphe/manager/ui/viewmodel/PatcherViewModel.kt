@@ -844,11 +844,7 @@ class PatcherViewModel(
                         } finally {
                             withContext(Dispatchers.Main) {
                                 // Delete temporary input file after saving
-                                if (input.selectedApp is SelectedApp.Local && input.selectedApp.temporary) {
-                                    inputFile?.takeIf { it.exists() }?.delete()
-                                    inputFile = null
-                                    updateSplitStepRequirement(null)
-                                }
+                                cleanupTemporaryInput()
                                 refreshExportMetadata()
                                 _patcherSucceeded.value = true
                             }
@@ -1024,15 +1020,18 @@ class PatcherViewModel(
         patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
-
+    private fun cleanupTemporaryInput() {
         if (input.selectedApp is SelectedApp.Local && input.selectedApp.temporary) {
             inputFile?.takeIf { it.exists() }?.delete()
             inputFile = null
             updateSplitStepRequirement(null)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
+        cleanupTemporaryInput()
 
         // Clean up the installer temp directory (contains output.apk and any intermediate files).
         // This covers the case where the user navigates away before installing/exporting,
