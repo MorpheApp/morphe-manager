@@ -22,6 +22,7 @@ import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -329,6 +330,7 @@ fun InstalledAppInfoDialog(
                                     appliedPatches = appliedPatches,
                                     bundlesUsedSummary = bundlesUsedSummary,
                                     onShowPatches = { showAppliedPatchesDialog.value = true },
+                                    accentColor = appAccentColor
                                 )
                             }
                         }
@@ -360,6 +362,7 @@ fun InstalledAppInfoDialog(
                                     onClick = {
                                         onTriggerPatchFlow(installedApp.originalPackageName)
                                     },
+                                    accentColor = appAccentColor,
                                     isError = true
                                 )
                             }
@@ -379,6 +382,7 @@ fun InstalledAppInfoDialog(
                                     onClick = {
                                         onTriggerPatchFlow(installedApp.originalPackageName)
                                     },
+                                    accentColor = appAccentColor,
                                     isError = false
                                 )
                             }
@@ -460,6 +464,7 @@ fun InstalledAppInfoDialog(
                                             onClick = {
                                                 onTriggerPatchFlow(installedApp.originalPackageName)
                                             },
+                                            accentColor = appAccentColor,
                                             isError = true,
                                             modifier = Modifier.padding(horizontal = 20.dp)
                                         )
@@ -483,6 +488,7 @@ fun InstalledAppInfoDialog(
                                             onClick = {
                                                 onTriggerPatchFlow(installedApp.originalPackageName)
                                             },
+                                            accentColor = appAccentColor,
                                             isError = false,
                                             modifier = Modifier.padding(horizontal = 20.dp)
                                         )
@@ -502,6 +508,7 @@ fun InstalledAppInfoDialog(
                                     appliedPatches = appliedPatches,
                                     bundlesUsedSummary = bundlesUsedSummary,
                                     onShowPatches = { showAppliedPatchesDialog.value = true },
+                                    accentColor = appAccentColor
                                 )
                             }
                         }
@@ -574,19 +581,22 @@ private fun WarningBanner(
     buttonText: String,
     buttonIcon: ImageVector,
     onClick: () -> Unit,
+    accentColor: Color,
     modifier: Modifier = Modifier,
     isError: Boolean = false
 ) {
-    val containerColor = if (isError) {
-        MaterialTheme.colorScheme.errorContainer
+    val baseColor = if (isError) MaterialTheme.colorScheme.error else accentColor
+    val isExtremeAccent = baseColor.luminance() !in 0.04f..0.92f
+    val containerColor = if (isExtremeAccent) {
+        MaterialTheme.colorScheme.surfaceVariant
     } else {
-        MaterialTheme.colorScheme.primaryContainer
+        baseColor.copy(alpha = 0.15f)
     }
-
-    val contentColor = if (isError) {
-        MaterialTheme.colorScheme.onErrorContainer
+    val contentColor = if (isExtremeAccent) {
+        MaterialTheme.colorScheme.onSurfaceVariant
     } else {
-        MaterialTheme.colorScheme.onPrimaryContainer
+        if (baseColor.compositeOver(MaterialTheme.colorScheme.surface, 0.15f)
+            .requiresLightContent()) Color.White else Color.Black
     }
 
     Column(
@@ -630,7 +640,8 @@ private fun WarningBanner(
         // Action button
         PrimaryActionButton(
             action = ActionItem(text = buttonText, icon = buttonIcon, onClick = onClick),
-            accentColor = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+            accentColor = baseColor,
+            contentColorOverride = contentColor,
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -887,6 +898,7 @@ private fun InfoSection(
     appliedPatches: Map<Int, Set<String>>?,
     bundlesUsedSummary: String,
     onShowPatches: () -> Unit,
+    accentColor: Color,
     modifier: Modifier = Modifier
 ) {
     val totalPatches = appliedPatches?.values?.sumOf { it.size } ?: 0
@@ -939,6 +951,7 @@ private fun InfoSection(
                 icon = Icons.Outlined.DoneAll,
                 label = stringResource(R.string.home_app_info_applied_patches),
                 value = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
+                accentColor = accentColor,
                 onAction = onShowPatches
             )
         }
@@ -996,6 +1009,7 @@ private fun InfoRowWithAction(
     icon: ImageVector,
     label: String,
     value: String,
+    accentColor: Color,
     onAction: () -> Unit,
 ) {
     Row(
@@ -1030,7 +1044,12 @@ private fun InfoRowWithAction(
         ActionPillButton(
             onClick = onAction,
             icon = Icons.AutoMirrored.Outlined.List,
-            contentDescription = stringResource(R.string.view)
+            contentDescription = stringResource(R.string.view),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = accentColor.copy(alpha = 0.18f),
+                contentColor = if (accentColor.compositeOver(MaterialTheme.colorScheme.surface, 0.18f)
+                    .requiresLightContent()) Color.White else Color.Black
+            )
         )
     }
 }
@@ -1279,7 +1298,8 @@ private fun LoadingOrIcon(isLoading: Boolean, action: ActionItem, tint: Color) {
 private fun PrimaryActionButton(
     action: ActionItem,
     accentColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentColorOverride: Color? = null
 ) {
     // Match the header background level: tinted surface instead of full accent
     val isExtremeAccent = accentColor.luminance() !in 0.04f..0.92f
@@ -1288,7 +1308,12 @@ private fun PrimaryActionButton(
     } else {
         accentColor.copy(alpha = 0.18f)
     }
-    val contentColor = MaterialTheme.colorScheme.onSurface
+    val contentColor = contentColorOverride ?: if (isExtremeAccent) {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    } else {
+        if (accentColor.compositeOver(MaterialTheme.colorScheme.surface, 0.18f)
+            .requiresLightContent()) Color.White else Color.Black
+    }
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
