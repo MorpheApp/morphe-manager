@@ -2,6 +2,7 @@ package app.morphe.manager.util
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.util.Log
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -20,6 +21,7 @@ import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
+import java.security.MessageDigest
 
 @Immutable
 @Parcelize
@@ -33,6 +35,10 @@ data class AppInfo(
 class PM(
     private val app: Application
 ) {
+    private companion object {
+        const val TAG = "Morphe PM"
+    }
+
     val application: Application get() = app
 
     fun getPackageInfo(packageName: String, flags: Int = 0): PackageInfo? =
@@ -119,6 +125,66 @@ class PM(
         val installed = getSignature(packageName)?.toByteArray() ?: return false
         val archive = getArchiveSignature(file)?.toByteArray() ?: return false
         return !installed.contentEquals(archive)
+    }
+
+    /**
+     * Extracts SHA-256 certificate fingerprints from the installed [packageName].
+     * Returns an empty set if the package is not found or signatures cannot be read.
+     * Uses full signing history to handle apps with certificate rotation.
+     */
+    fun getInstalledSignatureHashes(packageName: String): Set<String> {
+        return try {
+            val pkgInfo = getPackageInfo(packageName, signingFlags()) ?: return emptySet()
+            pkgInfo.extractSignatures()?.toSha256Hashes() ?: emptySet()
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to read installed signatures for $packageName", e)
+            emptySet()
+        }
+    }
+
+    /**
+     * Extracts SHA-256 certificate fingerprints from an APK file.
+     * Returns an empty set if the file cannot be read or has no signatures.
+     * Uses full signing history to handle apps with certificate rotation.
+     */
+    fun getApkFileSignatureHashes(file: File): Set<String> {
+        return try {
+            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
+                ?: return emptySet()
+            info.applicationInfo?.apply {
+                sourceDir = file.absolutePath
+                publicSourceDir = file.absolutePath
+            }
+            info.extractSignatures()?.toSha256Hashes() ?: emptySet()
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to read APK file signatures", e)
+            emptySet()
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun signingFlags() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+        PackageManager.GET_SIGNING_CERTIFICATES
+    else
+        PackageManager.GET_SIGNATURES
+
+    @Suppress("DEPRECATION")
+    private fun PackageInfo.extractSignatures(): Array<Signature>? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val signingInfo = signingInfo ?: return null
+            if (signingInfo.hasMultipleSigners()) signingInfo.apkContentsSigners
+            else signingInfo.signingCertificateHistory
+        } else {
+            signatures
+        }
+    }
+
+    private fun Array<Signature>.toSha256Hashes(): Set<String> {
+        val digest = MessageDigest.getInstance("SHA-256")
+        return mapTo(mutableSetOf()) { sig ->
+            digest.reset()
+            digest.digest(sig.toByteArray()).joinToString("") { b -> "%02x".format(b) }
+        }
     }
 
     fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {

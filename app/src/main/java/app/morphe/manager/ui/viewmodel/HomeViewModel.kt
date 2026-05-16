@@ -10,14 +10,12 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.StatFs
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -58,13 +56,12 @@ import kotlinx.coroutines.flow.*
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import java.io.File
-import java.io.FileNotFoundException
 import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.net.URLEncoder.encode
 import java.util.zip.CRC32
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
-import java.net.URLEncoder.encode
-import java.security.MessageDigest
 import kotlin.time.Clock
 
 /** Bundle update status for snackbar display. */
@@ -1517,15 +1514,19 @@ class HomeViewModel(
                 val savedOriginal = originalApkRepository.get(packageName)
                 val savedFile = savedOriginal?.let { File(it.filePath) }
                 if (savedFile?.exists() == true) {
-                    val savedHashes = getApkFileSignatureHashes(savedFile)
+                    val savedHashes = pm.getApkFileSignatureHashes(savedFile)
                     if (savedHashes.isNotEmpty()) {
-                        return@run !isInstalledAppOriginal(packageName, savedHashes)
+                        val installedHashes = pm.getInstalledSignatureHashes(packageName)
+                        if (installedHashes.isNotEmpty()) {
+                            return@run installedHashes.none { it in savedHashes }
+                        }
+                        // Can't read installed signatures → fall through to other checks
                     }
                     // Can't read signatures from file → fall through to other checks
                 }
                 val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
                 if (!expectedSignatures.isNullOrEmpty()) {
-                    !isInstalledAppOriginal(packageName, expectedSignatures)
+                    pm.getInstalledSignatureHashes(packageName).none { it in expectedSignatures }
                 } else {
                     val trackedPatch = installedAppRepository.get(packageName)
                     trackedPatch != null && pkgInfo.versionName == trackedPatch.version
@@ -1769,13 +1770,13 @@ class HomeViewModel(
                                 true
                             } else {
                                 try {
-                                    verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
+                                    pm.getApkFileSignatureHashes(extracted.file).any { it in expectedSignatures }
                                 } finally {
                                     extracted.cleanup()
                                 }
                             }
                         } else {
-                            verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
+                            pm.getApkFileSignatureHashes(selectedApp.file).any { it in expectedSignatures }
                         }
                     }
                     if (!signatureMatch) {
@@ -2512,107 +2513,6 @@ class HomeViewModel(
                     }
             }
             .filterValues { it.isNotEmpty() }
-    }
-
-    /**
-     * Extracts SHA-256 certificate fingerprints from an APK file.
-     * Returns an empty set if the file cannot be read or has no signatures.
-     */
-    @Suppress("DEPRECATION")
-    private fun getApkFileSignatureHashes(file: File): Set<String> {
-        return try {
-            val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
-                PackageManager.GET_SIGNING_CERTIFICATES
-            else
-                PackageManager.GET_SIGNATURES
-            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, flags)
-                ?: return emptySet()
-            info.applicationInfo?.apply {
-                sourceDir = file.absolutePath
-                publicSourceDir = file.absolutePath
-            }
-            val signatures = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                val signingInfo = info.signingInfo ?: return emptySet()
-                if (signingInfo.hasMultipleSigners()) signingInfo.apkContentsSigners
-                else signingInfo.signingCertificateHistory
-            } else {
-                info.signatures ?: return emptySet()
-            }
-            val digest = MessageDigest.getInstance("SHA-256")
-            signatures.mapTo(mutableSetOf()) { sig ->
-                digest.reset()
-                digest.digest(sig.toByteArray()).joinToString("") { b -> "%02x".format(b) }
-            }
-        } catch (e: Exception) {
-            Log.e(tag, "Failed to read APK file signatures", e)
-            emptySet()
-        }
-    }
-
-    /**
-     * Returns true if the installed [packageName] is signed with one of [expectedSha256Signatures].
-     * Checks all signers including certificate rotation history, mirroring [verifyApkSignature].
-     */
-    @Suppress("DEPRECATION")
-    private fun isInstalledAppOriginal(packageName: String, expectedSha256Signatures: Set<String>): Boolean {
-        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
-            PackageManager.GET_SIGNING_CERTIFICATES
-        else
-            PackageManager.GET_SIGNATURES
-        val pkgInfo = pm.getPackageInfo(packageName, flags) ?: return false
-        val digest = MessageDigest.getInstance("SHA-256")
-        val signatures = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val signingInfo = pkgInfo.signingInfo ?: return false
-            if (signingInfo.hasMultipleSigners()) signingInfo.apkContentsSigners
-            else signingInfo.signingCertificateHistory
-        } else {
-            pkgInfo.signatures
-        }
-        return signatures?.any { sig ->
-            digest.reset()
-            digest.digest(sig.toByteArray())
-                .joinToString("") { b -> "%02x".format(b) } in expectedSha256Signatures
-        } ?: false
-    }
-
-    /**
-     * Verify that the APK at [apkPath] is signed with one of the [expectedSha256Signatures].
-     *
-     * Returns true if at least one certificate fingerprint matches.
-     * An empty [expectedSha256Signatures] is treated as "no verification required" → true.
-     */
-    @RequiresApi(Build.VERSION_CODES.R)
-    private fun verifyApkSignature(apkPath: String, expectedSha256Signatures: Set<String>): Boolean {
-        if (expectedSha256Signatures.isEmpty()) return true
-        return try {
-            val info = app.packageManager.getPackageArchiveInfo(
-                apkPath,
-                PackageManager.GET_SIGNING_CERTIFICATES
-            ) ?: return false
-
-            info.applicationInfo?.apply {
-                sourceDir = apkPath
-                publicSourceDir = apkPath
-            }
-
-            val signingInfo = info.signingInfo ?: return false
-            val signatures = if (signingInfo.hasMultipleSigners())
-                signingInfo.apkContentsSigners
-            else
-                signingInfo.signingCertificateHistory
-
-            val digest = MessageDigest.getInstance("SHA-256")
-            signatures.any { sig ->
-                // Reset before each use - MessageDigest is stateful
-                digest.reset()
-                val fingerprint = digest.digest(sig.toByteArray())
-                    .joinToString("") { b -> "%02x".format(b) }
-                fingerprint in expectedSha256Signatures
-            }
-        } catch (e: Exception) {
-            Log.e(tag, "Failed to verify APK signature for $apkPath", e)
-            false
-        }
     }
 
     /**

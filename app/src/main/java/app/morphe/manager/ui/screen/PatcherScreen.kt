@@ -240,11 +240,10 @@ fun PatcherScreen(
     val isInstalling by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installing } }
     val isInstalled by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installed } }
     val isError by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Error } }
-    // For installed-source patches the conflict is expected and handled via InstalledSourceConflictDialog,
-    // so suppress the conflict UI to keep the success screen clean
+    // Conflict is expected when patching from installed (non-root): handled via dialog instead of UI state
+    val autoHandleConflict = patcherViewModel.patchedFromInstalledDevice && !usingMountInstall
     val isConflict by remember { derivedStateOf {
-        installViewModel.installState is InstallViewModel.InstallState.Conflict &&
-            !(patcherViewModel.patchedFromInstalledDevice && !usingMountInstall)
+        installViewModel.installState is InstallViewModel.InstallState.Conflict && !autoHandleConflict
     } }
     val installedPackageName by remember { derivedStateOf { installViewModel.installedPackageName } }
     val conflictPackageName by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Conflict)?.packageName } }
@@ -256,8 +255,7 @@ fun PatcherScreen(
         if (installState is InstallViewModel.InstallState.Installed) {
             patcherViewModel.triggerNotificationPromptIfNeeded()
         }
-        if (installState is InstallViewModel.InstallState.Conflict &&
-            patcherViewModel.patchedFromInstalledDevice && !usingMountInstall) {
+        if (installState is InstallViewModel.InstallState.Conflict && autoHandleConflict) {
             showInstalledSourceConflictDialog.value = true
         }
     }
