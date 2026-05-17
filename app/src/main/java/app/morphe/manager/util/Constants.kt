@@ -160,3 +160,6 @@ val MPP_FILE_MIME_TYPES = arrayOf(
 //    "application/x-zip-compressed"
     "*/*"
 )
+
+/** File extensions recognized as APK-family archives that Morphe can patch. */
+val APK_EXTENSIONS = setOf("apk", "apks", "xapk", "apkm")

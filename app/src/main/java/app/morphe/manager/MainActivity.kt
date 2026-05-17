@@ -2,6 +2,7 @@ package app.morphe.manager
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
@@ -44,10 +45,7 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
-import app.morphe.manager.util.UpdateNotificationManager
-import app.morphe.manager.util.hasMppExtension
-import app.morphe.manager.util.parseLocaleCode
-import app.morphe.manager.util.readLanguageFromPrefs
+import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -123,6 +121,20 @@ class MainActivity : AppCompatActivity() {
      * Only GitHub and GitLab URLs are accepted for safety.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
+        // Handle APK-family file shared via system share sheet (.apk/.apks/.xapk/.apkm).
+        if (intent?.action == Intent.ACTION_SEND) {
+            val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(Intent.EXTRA_STREAM)
+            }
+            if (uri != null && uri.hasApkExtension(contentResolver)) {
+                vm.pendingExternalApkUri = uri
+            }
+            return
+        }
+
         val data = intent?.data ?: return
 
         // Handle .mpp file open from file manager
@@ -240,6 +252,14 @@ private fun MorpheManager(vm: MainViewModel) {
                     vm.pendingMppUri?.let { uri ->
                         homeViewModel.setPendingMpp(uri)
                         vm.pendingMppUri = null
+                    }
+                }
+
+                // Handle .apk file shared via share sheet
+                LaunchedEffect(vm.pendingExternalApkUri) {
+                    vm.pendingExternalApkUri?.let { uri ->
+                        vm.pendingExternalApkUri = null
+                        homeViewModel.handleExternalApkUri(uri)
                     }
                 }
 

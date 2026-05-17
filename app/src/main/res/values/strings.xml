@@ -140,6 +140,7 @@
     <string name="home_invalid_apk_unreadable">Could not read the file. Check that \'External Storage\' is not battery restricted</string>
     <string name="home_invalid_apk_not_an_apk">The selected file is not a valid APK</string>
     <string name="home_invalid_apk_io_error">Failed to open the file. Please try again</string>
+    <string name="home_external_apk_expert_mode_required">This feature is only available in Expert mode</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>

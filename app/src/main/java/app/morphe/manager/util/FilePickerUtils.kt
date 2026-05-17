@@ -84,6 +84,13 @@ fun Uri.displayName(contentResolver: ContentResolver): String? =
 fun Uri.hasMppExtension(contentResolver: ContentResolver): Boolean =
     displayName(contentResolver)?.endsWith(".mpp", ignoreCase = true) == true
 
+/**
+ * Returns true if the URI refers to an APK-family file.
+ * Used to filter generic octet-stream shares down to only recognized APK archives.
+ */
+fun Uri.hasApkExtension(contentResolver: ContentResolver): Boolean =
+    displayName(contentResolver)?.substringAfterLast('.', "")?.lowercase() in APK_EXTENSIONS
+
 
 /**
  * Reads and parses the META-INF/MANIFEST.MF entry from a .mpp patch bundle URI.

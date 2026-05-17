@@ -1628,6 +1628,26 @@ class HomeViewModel(
     }
 
     /**
+     * Called when an APK is shared to Morphe via the system share sheet.
+     * Shows a toast and returns early if expert mode is disabled.
+     * Otherwise, waits until [installedAppsLoading] is false before triggering [handleApkSelection].
+     */
+    fun handleExternalApkUri(uri: Uri) {
+        viewModelScope.launch {
+            if (!isExpertMode()) {
+                app.toast(app.getString(R.string.home_external_apk_expert_mode_required))
+                return@launch
+            }
+            // Wait for patches to be ready. Cap at 30 s to avoid hanging forever when
+            // no patch sources are configured (installedAppsLoading never clears in that case)
+            withTimeoutOrNull(30_000L) {
+                snapshotFlow { installedAppsLoading }.first { !it }
+            }
+            handleApkSelection(uri)
+        }
+    }
+
+    /**
      * Handle APK file selection.
      */
     fun handleApkSelection(uri: Uri?) {

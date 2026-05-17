@@ -32,5 +32,13 @@ class MainViewModel(
      */
     var pendingMppUri: Uri? by mutableStateOf(null)
 
+    /**
+     * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when an APK-family file
+     * is shared to Morphe via the system share sheet.
+     * HomeScreen observes this via LaunchedEffect, triggers
+     * [app.morphe.manager.ui.viewmodel.HomeViewModel.handleExternalApkUri], then resets to null.
+     */
+    var pendingExternalApkUri: Uri? by mutableStateOf(null)
+
     data class DeepLinkSource(val url: String, val name: String?)
 }

@@ -93,6 +93,23 @@
                 <data android:mimeType="application/vnd.ms-project" />
             </intent-filter>
 
+            <!-- Receive APK-family files shared via system share sheet (Expert mode) -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/vnd.android.package-archive" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/x-apkm" />
+                <data android:mimeType="application/x-apks" />
+                <data android:mimeType="application/x-xapk" />
+                <data android:mimeType="application/xapk" />
+                <data android:mimeType="application/vnd.android.xapk" />
+                <data android:mimeType="application/vnd.android.apkm" />
+                <data android:mimeType="application/apkm" />
+                <data android:mimeType="application/vnd.android.apks" />
+                <data android:mimeType="application/apks" />
+            </intent-filter>
+
             <!-- Deep link: App Links (https://morphe.software/add-source?github=...) -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
