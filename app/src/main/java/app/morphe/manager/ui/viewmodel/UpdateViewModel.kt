@@ -2,7 +2,6 @@ package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
 import android.content.*
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat
@@ -175,20 +174,9 @@ class UpdateViewModel(
         when (plan) {
             is InstallerManager.InstallPlan.Internal -> {
                 state = State.INSTALLING
-                try {
-                    handleInstallResult(sessionInstaller.installInternal(location))
-                } catch (_: InstallCancelledException) {
-                    // User dismissed dialog - go back to CAN_INSTALL so they can retry
-                    state = State.CAN_INSTALL
-                } catch (_: SessionDeadException) {
-                    launchIntentFallback()
-                } catch (e: Exception) {
-                    val message = e.simpleMessage().orEmpty()
-                    installError = message
-                    canResumeDownload = false
-                    app.toast(app.getString(R.string.install_app_fail, message))
-                    state = State.FAILED
-                }
+                sessionInstaller.launchIntentInstall(location)
+                // Completion handled by installBroadcastReceiver;
+                // cancellation handled by resetIfInstallCancelled() in the dialog
             }
 
             is InstallerManager.InstallPlan.Mount -> {
@@ -216,16 +204,6 @@ class UpdateViewModel(
 
             is InstallerManager.InstallPlan.External -> launchExternalInstaller(plan)
         }
-    }
-
-    /**
-     * Fallback when the PackageInstaller session is killed by an OEM system component.
-     * Launches [Intent.ACTION_INSTALL_PACKAGE] and monitors for completion via broadcast.
-     */
-    private fun launchIntentFallback() {
-        Log.w("UpdateViewModel", "Session dead, launching intent-based fallback")
-        sessionInstaller.launchIntentInstall(location)
-        // Completion is handled by installBroadcastReceiver
     }
 
     private fun handleInstallResult(result: InstallResult) {
