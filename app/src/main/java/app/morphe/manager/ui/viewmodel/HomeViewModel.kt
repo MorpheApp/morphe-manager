@@ -10,14 +10,12 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.StatFs
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -58,9 +56,12 @@ import kotlinx.coroutines.flow.*
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.net.URLEncoder.encode
-import java.security.MessageDigest
+import java.util.zip.CRC32
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 import kotlin.time.Clock
 
 /** Bundle update status for snackbar display. */
@@ -120,6 +121,15 @@ data class SavedApkInfo(
     val filePath: String,
     val version: String
 )
+
+/** Installed APK information for display in APK selection dialog. */
+data class InstalledApkInfo(
+    val version: String,
+    val apkPath: String,
+    val splitPaths: List<String> = emptyList()
+) {
+    val isSplit: Boolean get() = splitPaths.isNotEmpty()
+}
 
 /**
  * Combined home screen app state - emitted atomically so visible and hidden lists
@@ -267,6 +277,9 @@ class HomeViewModel(
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
     var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
+    var pendingInstalledApkInfo by mutableStateOf<InstalledApkInfo?>(null)
+    // null = not yet loaded, true/false = loaded result
+    var pendingTargetAppInstalled by mutableStateOf<Boolean?>(null)
 
     // Bundle update snackbar state
     var showBundleUpdateSnackbar by mutableStateOf(false)
@@ -513,17 +526,21 @@ class HomeViewModel(
         }
     }
 
+    private fun clearPendingApp() {
+        val app = pendingSelectedApp
+        pendingSelectedApp = null
+        if (app is SelectedApp.Local && app.temporary) {
+            app.file.delete()
+        }
+    }
+
     /**
      * User dismissed the split APK warning without proceeding.
      * Cleans up the temporary file if needed.
      */
     fun dismissSplitApkWarning() {
-        val app = pendingSelectedApp
         showSplitApkWarningDialog = false
-        pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
-        }
+        clearPendingApp()
     }
 
     /**
@@ -532,10 +549,19 @@ class HomeViewModel(
      */
     fun dismissUnsupportedVersionDialog() {
         showUnsupportedVersionDialog = null
-        val app = pendingSelectedApp
+        clearPendingApp()
+    }
+
+    private fun proceedWithPendingApp(allowIncompatible: Boolean) {
+        val app = pendingSelectedApp ?: return
         pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
+        viewModelScope.launch {
+            if (rootInstaller.isDeviceRooted()) {
+                requestPrePatchInstallerSelection(app, allowIncompatible = allowIncompatible)
+            } else {
+                usingMountInstall = false
+                startPatchingWithApp(app, allowIncompatible = allowIncompatible)
+            }
         }
     }
 
@@ -545,16 +571,7 @@ class HomeViewModel(
      */
     fun proceedWithUnsupportedVersion() {
         showUnsupportedVersionDialog = null
-        val app = pendingSelectedApp ?: return
-        pendingSelectedApp = null
-        viewModelScope.launch {
-            if (rootInstaller.isDeviceRooted()) {
-                requestPrePatchInstallerSelection(app, allowIncompatible = true)
-            } else {
-                usingMountInstall = false
-                startPatchingWithApp(app, allowIncompatible = true)
-            }
-        }
+        proceedWithPendingApp(allowIncompatible = true)
     }
 
     /**
@@ -563,11 +580,7 @@ class HomeViewModel(
      */
     fun dismissExperimentalVersionDialog() {
         showExperimentalVersionDialog = null
-        val app = pendingSelectedApp
-        pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
-        }
+        clearPendingApp()
     }
 
     /**
@@ -577,16 +590,7 @@ class HomeViewModel(
      */
     fun proceedWithExperimentalVersion() {
         showExperimentalVersionDialog = null
-        val app = pendingSelectedApp ?: return
-        pendingSelectedApp = null
-        viewModelScope.launch {
-            if (rootInstaller.isDeviceRooted()) {
-                requestPrePatchInstallerSelection(app, allowIncompatible = false)
-            } else {
-                usingMountInstall = false
-                startPatchingWithApp(app, allowIncompatible = false)
-            }
-        }
+        proceedWithPendingApp(allowIncompatible = false)
     }
 
     /**
@@ -602,11 +606,7 @@ class HomeViewModel(
      */
     fun dismissInvalidSignatureDialog() {
         showInvalidSignatureDialog = null
-        val app = pendingSelectedApp
-        pendingSelectedApp = null
-        if (app is SelectedApp.Local && app.temporary) {
-            app.file.delete()
-        }
+        clearPendingApp()
     }
 
     /**
@@ -1342,6 +1342,10 @@ class HomeViewModel(
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
         pendingRecommendedBundleVersions = recommendedBundleVersions[packageName] ?: emptyMap()
         pendingSelectedDownloadVersion = pendingRecommendedVersion
+        // Reset per-package cached state so a new flow always loads fresh data
+        pendingSavedApkInfo = null
+        pendingInstalledApkInfo = null
+        pendingTargetAppInstalled = null
 
         // Guard: if there is a pending bundle update on metered data, show the outdated-patches
         // dialog before proceeding with the actual APK selection flow.
@@ -1401,14 +1405,27 @@ class HomeViewModel(
      * open the APK availability dialog.
      */
     private suspend fun continueApkSelectionFlow(packageName: String) {
-        // Reload saved APK info in case it wasn't loaded yet (called from proceedWithSelectedBundle)
-        if (pendingSavedApkInfo == null) {
-            pendingSavedApkInfo = withContext(Dispatchers.IO) { loadSavedApkInfo(packageName) }
+        // Load saved APK (Room + AppDataResolver) and, in expert mode only, installed APK
+        // (PackageManager) in parallel. In simple mode the installed-APK button is hidden,
+        // so we skip the PM lookup entirely to keep simple-mode behavior unchanged
+        val expertMode = isExpertMode()
+        coroutineScope {
+            val savedJob = if (pendingSavedApkInfo == null) {
+                async(Dispatchers.IO) { loadSavedApkInfo(packageName) }
+            } else null
+            val installedJob = if (expertMode && pendingTargetAppInstalled == null) {
+                async(Dispatchers.IO) { loadInstalledInfo(packageName) }
+            } else null
+            savedJob?.await()?.let { pendingSavedApkInfo = it }
+            installedJob?.await()?.let { (installed, info) ->
+                pendingTargetAppInstalled = installed
+                pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version) }
+            }
         }
 
         val recommendedVersion = pendingRecommendedVersion
 
-        val shouldAutoUseSaved = !isExpertMode() &&
+        val shouldAutoUseSaved = !expertMode &&
                 pendingSavedApkInfo != null &&
                 recommendedVersion != null &&
                 pendingSavedApkInfo!!.version == recommendedVersion.version
@@ -1449,6 +1466,164 @@ class HomeViewModel(
         } catch (e: Exception) {
             Log.e(tag, "Failed to load saved APK info", e)
             return null
+        }
+    }
+
+    /**
+     * Returns true if [installedVersion] is listed in [pendingCompatibleVersions],
+     * or if the compatible list is empty / contains an "any version" target.
+     */
+    private fun isInstalledVersionCompatible(installedVersion: String): Boolean {
+        val compatible = pendingCompatibleVersions
+        if (compatible.isEmpty() || compatible.any { it.target.version == null }) return true
+        return compatible.any { it.target.version == installedVersion }
+    }
+
+    /**
+     * Returns whether the target app is installed and, if it is a single unpatched APK, its info.
+     * First element: true if the package is installed at all (regardless of splits/version).
+     * Second element: non-null only for single-APK installs that appear to be the original app.
+     *
+     * The "Use installed APK" button is suppressed when:
+     * - Morphe tracks this package as a patched install, or
+     * - The installed signing certificate doesn't match the bundle's expected original signatures.
+     */
+    private suspend fun loadInstalledInfo(packageName: String): Pair<Boolean, InstalledApkInfo?> {
+        return try {
+            val pkgInfo = pm.getPackageInfo(packageName)
+                ?: return false to null
+
+            // Determine if the installed app is patched, in priority order:
+            // 1. Saved original APK (most reliable - direct signature comparison)
+            // 2. Bundle-declared expected signatures (fallback)
+            // 3. DB tracking (last resort - version match only)
+            val isPatched: Boolean = run {
+                val savedOriginal = originalApkRepository.get(packageName)
+                val savedFile = savedOriginal?.let { File(it.filePath) }
+                if (savedFile?.exists() == true) {
+                    val savedHashes = pm.getApkFileSignatureHashes(savedFile)
+                    if (savedHashes.isNotEmpty()) {
+                        val installedHashes = pm.getInstalledSignatureHashes(packageName)
+                        if (installedHashes.isNotEmpty()) {
+                            return@run installedHashes.none { it in savedHashes }
+                        }
+                        // Can't read installed signatures → fall through to other checks
+                    }
+                    // Can't read signatures from file → fall through to other checks
+                }
+                val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
+                if (!expectedSignatures.isNullOrEmpty()) {
+                    pm.getInstalledSignatureHashes(packageName).none { it in expectedSignatures }
+                } else {
+                    val trackedPatch = installedAppRepository.get(packageName)
+                    trackedPatch != null && pkgInfo.versionName == trackedPatch.version
+                }
+            }
+            if (isPatched) return true to null
+
+            val appInfo = pkgInfo.applicationInfo
+                ?: return true to null
+            val sourceDir = appInfo.sourceDir ?: return true to null
+            if (!File(sourceDir).exists()) return true to null
+            val version = pkgInfo.versionName?.takeUnless { it.isBlank() }
+                ?: return true to null
+            val splitPaths = appInfo.splitSourceDirs
+                ?.filter { File(it).exists() }
+                ?: emptyList()
+            true to InstalledApkInfo(version = version, apkPath = sourceDir, splitPaths = splitPaths)
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to load installed app info", e)
+            false to null
+        }
+    }
+
+    /**
+     * Handle selection of the currently installed APK from the APK availability dialog.
+     * For single APKs: copies to a temp file. For split APKs: packs into a temp .apks archive.
+     * The source is NOT saved to the original-APK repository.
+     */
+    fun handleInstalledApkSelection() {
+        val installedInfo = pendingInstalledApkInfo
+        val packageName = pendingPackageName
+
+        if (installedInfo == null || packageName == null) {
+            cleanupPendingData()
+            return
+        }
+
+        viewModelScope.launch {
+            showApkAvailabilityDialog = false
+
+            val selectedApp = withContext(Dispatchers.IO) {
+                try {
+                    if (installedInfo.isSplit) {
+                        val archive = File(filesystem.uiTempDir, "${packageName}_installed.apks")
+                        createApksArchive(installedInfo, archive)
+                        SelectedApp.Local(
+                            packageName = packageName,
+                            version = installedInfo.version,
+                            file = archive,
+                            temporary = true,
+                            fromInstalledDevice = true
+                        )
+                    } else {
+                        val source = File(installedInfo.apkPath)
+                        if (!source.exists()) return@withContext null
+                        val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
+                        source.copyTo(tempFile, overwrite = true)
+                        SelectedApp.Local(
+                            packageName = packageName,
+                            version = installedInfo.version,
+                            file = tempFile,
+                            temporary = true,
+                            fromInstalledDevice = true
+                        )
+                    }
+                } catch (e: Exception) {
+                    Log.e(tag, "Failed to prepare installed APK", e)
+                    null
+                }
+            }
+
+            if (selectedApp != null) {
+                // Skip signature check: the installed APK may already be patched with our key
+                processSelectedAppIgnoringSignature(selectedApp)
+            } else {
+                app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                cleanupPendingData()
+            }
+        }
+    }
+
+    /**
+     * Packs [info]'s base APK and all split APKs into an APKS archive (ZIP).
+     * Entry names preserve the original filenames so [SplitApkPreparer] can
+     * identify the base entry by the "base" substring and filter ABI/density splits.
+     */
+    private fun createApksArchive(info: InstalledApkInfo, output: File) {
+        output.parentFile?.mkdirs()
+        ZipOutputStream(output.outputStream().buffered()).use { zip ->
+            fun addEntry(file: File) {
+                // APKs are already compressed ZIPs - use STORED to avoid wasting CPU on deflate.
+                // STORED requires CRC32 and size known upfront, so we read the file twice.
+                val crc = CRC32()
+                val buf = ByteArray(65536)
+                FileInputStream(file).use { input ->
+                    var n: Int
+                    while (input.read(buf).also { n = it } >= 0) crc.update(buf, 0, n)
+                }
+                val entry = ZipEntry(file.name).apply {
+                    method = ZipEntry.STORED
+                    size = file.length()
+                    compressedSize = file.length()
+                    this.crc = crc.value
+                }
+                zip.putNextEntry(entry)
+                FileInputStream(file).use { it.copyTo(zip) }
+                zip.closeEntry()
+            }
+            addEntry(File(info.apkPath))
+            info.splitPaths.forEach { addEntry(File(it)) }
         }
     }
 
@@ -1582,13 +1757,13 @@ class HomeViewModel(
                                 true
                             } else {
                                 try {
-                                    verifyApkSignature(extracted.file.absolutePath, expectedSignatures)
+                                    pm.getApkFileSignatureHashes(extracted.file).any { it in expectedSignatures }
                                 } finally {
                                     extracted.cleanup()
                                 }
                             }
                         } else {
-                            verifyApkSignature(selectedApp.file.absolutePath, expectedSignatures)
+                            pm.getApkFileSignatureHashes(selectedApp.file).any { it in expectedSignatures }
                         }
                     }
                     if (!signatureMatch) {
@@ -1696,17 +1871,13 @@ class HomeViewModel(
         // because it affects which patches are included (GmsCore is excluded for mount install).
         // Show the pre-patching installer dialog so the user can choose.
         // For non-root devices, just proceed - installer selection happens after patching.
-        if (rootInstaller.isDeviceRooted()) {
-            requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
-        } else {
-            usingMountInstall = false
-            startPatchingWithApp(selectedApp, allowIncompatible)
-        }
+        processSelectedAppIgnoringSignature(selectedApp)
     }
 
     /**
-     * Called when the user confirms proceeding despite an APK signature mismatch.
-     * Skips the signature verification step and continues with the normal flow.
+     * Skips all preliminary checks (signature, version, bundle) and routes directly to patching.
+     * Used when the user confirms proceeding despite a signature mismatch, or when patching
+     * from the installed app where checks are not applicable.
      */
     suspend fun processSelectedAppIgnoringSignature(selectedApp: SelectedApp) {
         val allowIncompatible = prefs.disablePatchVersionCompatCheck.getBlocking()
@@ -2098,6 +2269,16 @@ class HomeViewModel(
         repatchPackageName = null
     }
 
+    private suspend fun saveSeenPatchesForBundles(packageName: String) {
+        expertModeBundles.forEach { bundle ->
+            patchSelectionRepository.saveSeenPatches(
+                packageName = packageName,
+                bundleUid = bundle.uid,
+                patchNames = bundle.patches.map { it.name }.toSet()
+            )
+        }
+    }
+
     /**
      * Called when the user confirms the ExpertModeDialog.
      * Routes to the repatch flow (via [onRepatchProceed]) or the normal patching flow
@@ -2123,13 +2304,7 @@ class HomeViewModel(
                 // Snapshot seen patches before cleanup clears expertModeBundles.
                 val pkgName = repatchPackageName
                 if (pkgName != null) {
-                    expertModeBundles.forEach { bundle ->
-                        patchSelectionRepository.saveSeenPatches(
-                            packageName = pkgName,
-                            bundleUid = bundle.uid,
-                            patchNames = bundle.patches.map { it.name }.toSet()
-                        )
-                    }
+                    saveSeenPatchesForBundles(pkgName)
                 }
                 withContext(Dispatchers.Main) {
                     repatchCallback(finalPatches, patcherOptions)
@@ -2143,13 +2318,7 @@ class HomeViewModel(
                 )
                 saveOptions(selectedApp.packageName, finalOptions)
                 // Snapshot all bundle patch names so next open can detect genuinely new patches.
-                expertModeBundles.forEach { bundle ->
-                    patchSelectionRepository.saveSeenPatches(
-                        packageName = selectedApp.packageName,
-                        bundleUid = bundle.uid,
-                        patchNames = bundle.patches.map { it.name }.toSet()
-                    )
-                }
+                saveSeenPatchesForBundles(selectedApp.packageName)
                 withContext(Dispatchers.Main) {
                     proceedWithPatching(selectedApp, finalPatches, patcherOptions)
                     cleanupExpertModeData()
@@ -2245,6 +2414,8 @@ class HomeViewModel(
         if (!keepBundleUid) pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
         pendingSavedApkInfo = null
+        pendingInstalledApkInfo = null
+        pendingTargetAppInstalled = null
         if (!keepSelectedApp) {
             pendingSelectedApp?.let { app ->
                 if (app is SelectedApp.Local && app.temporary) {
@@ -2323,46 +2494,6 @@ class HomeViewModel(
                     }
             }
             .filterValues { it.isNotEmpty() }
-    }
-
-    /**
-     * Verify that the APK at [apkPath] is signed with one of the [expectedSha256Signatures].
-     *
-     * Returns true if at least one certificate fingerprint matches.
-     * An empty [expectedSha256Signatures] is treated as "no verification required" → true.
-     */
-    @RequiresApi(Build.VERSION_CODES.R)
-    private fun verifyApkSignature(apkPath: String, expectedSha256Signatures: Set<String>): Boolean {
-        if (expectedSha256Signatures.isEmpty()) return true
-        return try {
-            val info = app.packageManager.getPackageArchiveInfo(
-                apkPath,
-                PackageManager.GET_SIGNING_CERTIFICATES
-            ) ?: return false
-
-            info.applicationInfo?.apply {
-                sourceDir = apkPath
-                publicSourceDir = apkPath
-            }
-
-            val signingInfo = info.signingInfo ?: return false
-            val signatures = if (signingInfo.hasMultipleSigners())
-                signingInfo.apkContentsSigners
-            else
-                signingInfo.signingCertificateHistory
-
-            val digest = MessageDigest.getInstance("SHA-256")
-            signatures.any { sig ->
-                // Reset before each use - MessageDigest is stateful
-                digest.reset()
-                val fingerprint = digest.digest(sig.toByteArray())
-                    .joinToString("") { b -> "%02x".format(b) }
-                fingerprint in expectedSha256Signatures
-            }
-        } catch (e: Exception) {
-            Log.e(tag, "Failed to verify APK signature for $apkPath", e)
-            false
-        }
     }
 
     /**

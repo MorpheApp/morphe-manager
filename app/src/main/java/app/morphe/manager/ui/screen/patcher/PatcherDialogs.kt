@@ -106,6 +106,36 @@ fun IncompatiblePatcherVersionDialog(
 }
 
 /**
+ * Shown when a conflict is detected after patching from the installed app (non-root).
+ * Explains why uninstall is needed and warns about data loss, then triggers system uninstall.
+ */
+@Composable
+fun InstalledSourceConflictDialog(
+    onUninstall: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.patcher_installed_conflict_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.uninstall),
+                onPrimaryClick = onUninstall,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Text(
+            text = stringResource(R.string.patcher_installed_conflict_body),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current
+        )
+    }
+}
+
+/**
  * Cancel patching confirmation dialog.
  * Warns user about stopping patching process.
  */

@@ -14,7 +14,8 @@ sealed interface SelectedApp : Parcelable {
         override val version: String,
         val file: File,
         val temporary: Boolean,
-        val resolved: Boolean = true
+        val resolved: Boolean = true,
+        val fromInstalledDevice: Boolean = false
     ) : SelectedApp
 
     @Parcelize
