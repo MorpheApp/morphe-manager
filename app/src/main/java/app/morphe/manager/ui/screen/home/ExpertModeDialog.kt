@@ -94,7 +94,11 @@ fun ExpertModeDialog(
                         if (!option.required) return@any false
                         val savedValue = patchValues?.get(option.key)
                         val effectiveValue = savedValue ?: option.default
-                        effectiveValue == null || (effectiveValue is String && effectiveValue.isBlank())
+                        // Treat blank as missing only when the developer's own default is non-blank
+                        effectiveValue == null || (
+                            effectiveValue is String && effectiveValue.isBlank() &&
+                            !(option.default is String && option.default.isBlank())
+                        )
                     } == true
                     if (hasMissing) add(patch.name)
                 }
