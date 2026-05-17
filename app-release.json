@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-05-17T11:00:10",
-  "description": "# [1.18.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.17.1...v1.18.0-dev.1) (2026-05-17)\n\n\n### Bug Fixes\n\n* App info dialog could show wrong app's data after installing a different app ([94139e6](https://github.com/MorpheApp/morphe-manager/commit/94139e66d01a05f947e4d56074504faf096478cc))\n* Disable fade overlay in two-column layout ([3d83c53](https://github.com/MorpheApp/morphe-manager/commit/3d83c5327e783dbda9ced58dccda1fe9d4b9b268))\n* Pre-release version history shown in update dialog for stable users ([9d0debd](https://github.com/MorpheApp/morphe-manager/commit/9d0debdb3786cffbea339fa300e8c58c9168920f))\n* Resolve changelog dialog rendering jank after `markdown-renderer` update ([58fdc0f](https://github.com/MorpheApp/morphe-manager/commit/58fdc0f4dbf42f0b0fe36a344ccfb39bc9cb33e0))\n* Source rename not reflected in patch flow until restart ([3d9a1d8](https://github.com/MorpheApp/morphe-manager/commit/3d9a1d8aab16f0de6aadc47c37569c55496ff17c))\n\n\n### Features\n\n* Add \"Use installed APK\" button to APK availability dialog ([#552](https://github.com/MorpheApp/morphe-manager/issues/552)) ([9d2df3f](https://github.com/MorpheApp/morphe-manager/commit/9d2df3f591eb46703e1fc0203c45a69a5129c375))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.18.0-dev.1/morphe-manager-1.18.0-dev.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.18.0-dev.1/morphe-manager-1.18.0-dev.1.apk.asc",
-  "version": "1.18.0-dev.1"
+  "created_at": "2026-05-17T11:22:30",
+  "description": "# [1.18.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2026-05-17)\n\n\n### Bug Fixes\n\n* Update translations from Crowdin ([648f146](https://github.com/MorpheApp/morphe-manager/commit/648f146a5a3bbed05132f10a824ef1c599591bf0))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.18.0-dev.2/morphe-manager-1.18.0-dev.2.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.18.0-dev.2/morphe-manager-1.18.0-dev.2.apk.asc",
+  "version": "1.18.0-dev.2"
 }

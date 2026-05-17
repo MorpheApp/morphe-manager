@@ -1,3 +1,10 @@
+# [1.18.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2026-05-17)
+
+
+### Bug Fixes
+
+* Update translations from Crowdin ([648f146](https://github.com/MorpheApp/morphe-manager/commit/648f146a5a3bbed05132f10a824ef1c599591bf0))
+
 # [1.18.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.17.1...v1.18.0-dev.1) (2026-05-17)
 
 
