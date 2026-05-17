@@ -296,7 +296,7 @@ class UpdateViewModel(
             installerManager.cleanup(plan)
             app.toast(app.getString(R.string.installer_external_success, plan.installerLabel))
         } else {
-            // Intent-based fallback — only care about our own package
+            // Intent-based fallback - only care about our own package
             if (packageName != app.packageName) return
         }
         installError = ""
@@ -364,12 +364,15 @@ class UpdateViewModel(
             // update is a pre-release. Without this, a stable user who has "Use pre-releases"
             // enabled would fetch CHANGELOG.md from main, which doesn't contain dev entries,
             // causing entriesNewerThan() to return an empty list even though a newer dev version
-            // is available and its changelog lives on the dev branch.
+            // is available and its changelog lives on the dev branch
             val targetIsPrerelease = releaseInfo?.version?.contains('-') == true
-            val entries = morpheAPI.fetchManagerChangelog(
-                forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
-            )
-            missedChangelogEntries = ChangelogParser.entriesNewerThan(entries, installedVersion)
+            val forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
+            val entries = morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
+            val newer = ChangelogParser.entriesNewerThan(entries, installedVersion)
+            // Strip pre-release entries when on stable channel - main CHANGELOG.md
+            // contains merged pre-release entries that stable users should not see
+            missedChangelogEntries = if (forDevBranch) newer
+                else newer.filter { !it.version.contains('-') }
         }
     }
 
