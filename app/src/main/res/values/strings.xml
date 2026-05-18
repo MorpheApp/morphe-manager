@@ -754,6 +754,8 @@ The image dimensions must be as follows:
     <string name="disabled">Disabled</string>
     <string name="selected">Selected</string>
     <string name="not_selected">Not selected</string>
+    <string name="select_all">Select all</string>
+    <string name="deselect_all">Deselect all</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
     <string name="export">Export</string>
