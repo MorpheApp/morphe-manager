@@ -149,8 +149,7 @@ fun AdaptiveIconCreatorDialog(
 
     // Foreground image picker
     val openForegroundPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*"),
-        chooserTitle = stringResource(R.string.adaptive_icon_select_image)
+        mimeTypes = arrayOf("image/*")
     ) { uri ->
         uri?.let {
             foregroundUri = it

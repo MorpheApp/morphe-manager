@@ -8,13 +8,11 @@ package app.morphe.manager.util
 import android.app.UiModeManager
 import android.content.ContentResolver
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -226,25 +224,6 @@ fun validateOptionPaths(options: Map<Int, Map<String, Map<String, Any?>>>): List
 }
 
 /**
- * [ActivityResultContract] that wraps ACTION_GET_CONTENT in a chooser so that
- * all installed file managers appear as options - bypassing DocumentsUI which
- * is the default (and often absent) handler on Android TV.
- */
-class GetContentWithChooser(private val chooserTitle: String) : ActivityResultContract<Array<String>, Uri?>() {
-    override fun createIntent(context: Context, input: Array<String>): Intent {
-        val getContent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            type = if (input.size == 1) input[0] else "*/*"
-            if (input.size > 1) putExtra(Intent.EXTRA_MIME_TYPES, input)
-            addCategory(Intent.CATEGORY_OPENABLE)
-        }
-        return Intent.createChooser(getContent, chooserTitle)
-    }
-
-    override fun parseResult(resultCode: Int, intent: Intent?): Uri? =
-        if (resultCode == android.app.Activity.RESULT_OK) intent?.data else null
-}
-
-/**
  * Returns true if the device is an Android TV or Google TV.
  */
 fun Context.isAndroidTv(): Boolean {
@@ -255,15 +234,12 @@ fun Context.isAndroidTv(): Boolean {
 /**
  * On Android TV uses [ActivityResultContracts.OpenDocument] which routes through
  * DocumentsUI and shows registered storage providers (file managers).
- * On phones/tablets uses [GetContentWithChooser] to show all compatible apps.
- *
- * @param mimeTypes MIME types passed to the picker. OpenDocument supports multiple types
- *   natively; GetContentWithChooser uses the first entry as the ACTION_GET_CONTENT type.
+ * On phones/tablets uses [ActivityResultContracts.GetContent]: a single MIME type is passed
+ * as-is; multiple types collapse to a wildcard with extension validation on the result.
  */
 @Composable
 fun rememberAdaptiveFilePicker(
     mimeTypes: Array<String>,
-    chooserTitle: String,
     onResult: (Uri?) -> Unit,
 ): () -> Unit {
     val context = LocalContext.current
@@ -274,13 +250,13 @@ fun rememberAdaptiveFilePicker(
     ) { uri -> onResult(uri) }
 
     val phoneLauncher = rememberLauncherForActivityResult(
-        contract = GetContentWithChooser(chooserTitle)
+        contract = ActivityResultContracts.GetContent()
     ) { uri -> onResult(uri) }
 
     return remember(isTV) {
         {
             if (isTV) tvLauncher.launch(mimeTypes)
-            else phoneLauncher.launch(mimeTypes)
+            else phoneLauncher.launch(if (mimeTypes.size == 1) mimeTypes[0] else "*/*")
         }
     }
 }

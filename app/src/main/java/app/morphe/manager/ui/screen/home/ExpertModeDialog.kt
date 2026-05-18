@@ -1423,8 +1423,7 @@ private fun FilePathInputOption(
     val isInvalid = required && value.isBlank()
 
     val filePicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("*/*"),
-        chooserTitle = stringResource(R.string.patch_option_pick_file)
+        mimeTypes = arrayOf("*/*")
     ) { uri ->
         uri?.toFilePath()?.let { onValueChange(it) }
     }

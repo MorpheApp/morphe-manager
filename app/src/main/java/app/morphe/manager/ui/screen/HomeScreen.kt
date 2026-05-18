@@ -110,13 +110,11 @@ fun HomeScreen(
     }
 
     val openApkPicker = rememberAdaptiveFilePicker(
-        mimeTypes = APK_FILE_MIME_TYPES,
-        chooserTitle = stringResource(R.string.home_select_apk_title)
+        mimeTypes = APK_FILE_MIME_TYPES
     ) { uri -> uri?.let { homeViewModel.handleApkSelection(it) } }
 
     val openBundlePicker = rememberAdaptiveFilePicker(
-        mimeTypes = MPP_FILE_MIME_TYPES,
-        chooserTitle = stringResource(R.string.sources_dialog_local_file)
+        mimeTypes = MPP_FILE_MIME_TYPES
     ) { uri ->
         uri?.let {
             homeViewModel.selectedBundleUri = it

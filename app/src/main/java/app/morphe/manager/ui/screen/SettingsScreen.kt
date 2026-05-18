@@ -99,15 +99,12 @@ fun SettingsScreen(
     val showInstallerDialog = remember { mutableStateOf(false) }
     val showChangelogDialog = remember { mutableStateOf(false) }
 
-    // Import pickers - GetContentWithChooser on phones, OpenDocument on Android TV
     val importKeystoreLauncher = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("*/*"),
-        chooserTitle = stringResource(R.string.settings_system_import_keystore)
+        mimeTypes = arrayOf("*/*")
     ) { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
 
     val importSettingsLauncher = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
-        chooserTitle = stringResource(R.string.settings_system_import_manager_settings)
+        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE)
     ) { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
 
     // Export launchers

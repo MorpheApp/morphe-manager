@@ -116,12 +116,10 @@ fun HeaderCreatorDialog(
     var darkOffsetY by remember { mutableFloatStateOf(0f) }
 
     val context = LocalContext.current
-    val selectImageTitle = stringResource(R.string.adaptive_icon_select_image)
 
     // Light header image picker
     val openLightHeaderPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*"),
-        chooserTitle = selectImageTitle
+        mimeTypes = arrayOf("image/*")
     ) { uri ->
         uri?.let {
             lightHeaderUri = it
@@ -148,8 +146,7 @@ fun HeaderCreatorDialog(
 
     // Dark header image picker
     val openDarkHeaderPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*"),
-        chooserTitle = selectImageTitle
+        mimeTypes = arrayOf("image/*")
     ) { uri ->
         uri?.let {
             darkHeaderUri = it
