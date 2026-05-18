@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.os.Process.myUid
 import android.os.SystemClock
 import app.morphe.manager.IRootSystemService
 import app.morphe.manager.service.ManagerRootService
@@ -29,6 +30,7 @@ class RootInstaller(
     private var cachedHasRoot: Boolean? = null
     @Volatile
     private var lastRootCheck = 0L
+    private val userId = myUid() / 100000
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         val ipc = IRootSystemService.Stub.asInterface(service)
@@ -163,9 +165,8 @@ class RootInstaller(
                     pm.getVersionCode(installedInfo) < pm.getVersionCode(patchedInfo)
 
             if (needsInstall) {
-                // TODO: get user id programmatically
                 if (installedInfo != null)
-                    execute("pm uninstall -k --user 0 $packageName").assertSuccess("Failed to uninstall stock app")
+                    execute("pm uninstall -k --user $userId $packageName").assertSuccess("Failed to uninstall stock app")
                 execute("pm install \"${stockApp.absolutePath}\"").assertSuccess("Failed to install stock app")
             }
 
