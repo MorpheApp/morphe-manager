@@ -5,7 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -28,14 +28,17 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
 import app.morphe.manager.util.isDarkBackground
 
-/**
- * CompositionLocal for dialog text colors
- */
+/** Provides the primary text color for dialog content. */
 val LocalDialogTextColor = compositionLocalOf { Color.White }
+
+/** Provides the secondary/hint text color for dialog content. */
 val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }
 
+private val DialogOuterPadding = 32.dp
+private val DialogSectionSpacing = 24.dp
+
 /**
- * Unified fullscreen dialog component for Morphe UI
+ * Unified fullscreen dialog component for Morphe UI.
  *
  * @param onDismissRequest Called when user dismisses the dialog
  * @param title Optional title displayed at the top
@@ -109,25 +112,23 @@ fun MorpheDialog(
                 exit = MorpheAnimations.dialogExit,
                 modifier = Modifier.fillMaxSize()
             ) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    DialogContent(
-                        title = title,
-                        titleTrailingContent = titleTrailingContent,
-                        footer = footer,
-                        isDarkTheme = isDarkTheme,
-                        scrollable = scrollable,
-                        compactPadding = compactPadding,
-                        noPadding = noPadding,
-                        content = content
-                    )
-                }
+                DialogContent(
+                    title = title,
+                    titleTrailingContent = titleTrailingContent,
+                    footer = footer,
+                    isDarkTheme = isDarkTheme,
+                    scrollable = scrollable,
+                    compactPadding = compactPadding,
+                    noPadding = noPadding,
+                    content = content
+                )
             }
         }
     }
 }
 
 /**
- * Main dialog content area
+ * Main dialog content area.
  */
 @Composable
 private fun DialogContent(
@@ -173,7 +174,7 @@ private fun DialogContent(
                 if (compactPadding) {
                     PaddingValues(MorpheDefaults.ContentPadding)
                 } else {
-                    PaddingValues(32.dp)
+                    PaddingValues(DialogOuterPadding)
                 }
             )
             .pointerInput(Unit) {
@@ -193,7 +194,7 @@ private fun DialogContent(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 24.dp),
+                        .padding(bottom = DialogSectionSpacing),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -249,11 +250,12 @@ private fun DialogContent(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 24.dp)
+                        .padding(top = DialogSectionSpacing)
                 ) {
                     CompositionLocalProvider(
                         LocalDialogTextColor provides textColor,
-                        LocalDialogSecondaryTextColor provides secondaryTextColor
+                        LocalDialogSecondaryTextColor provides secondaryTextColor,
+                        LocalContentColor provides textColor
                     ) {
                         footer()
                     }
