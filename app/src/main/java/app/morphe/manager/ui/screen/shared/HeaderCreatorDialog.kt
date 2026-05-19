@@ -235,7 +235,8 @@ fun HeaderCreatorDialog(
                             HeaderConfig.headerFolderName(packageName)
                         ),
                         style = InfoBadgeStyle.Primary,
-                        icon = Icons.Outlined.Info
+                        icon = Icons.Outlined.Info,
+                        isExpanded = true
                     )
                 }
 
@@ -258,7 +259,8 @@ fun HeaderCreatorDialog(
             InfoBadge(
                 text = stringResource(R.string.header_creator_instructions),
                 style = InfoBadgeStyle.Primary,
-                icon = Icons.Outlined.Info
+                icon = Icons.Outlined.Info,
+                isExpanded = true
             )
 
             // Light header section

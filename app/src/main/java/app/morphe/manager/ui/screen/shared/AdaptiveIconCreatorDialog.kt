@@ -237,7 +237,8 @@ fun AdaptiveIconCreatorDialog(
                             AdaptiveIconConfig.iconFolderName(packageName)
                         ),
                         style = InfoBadgeStyle.Primary,
-                        icon = Icons.Outlined.Info
+                        icon = Icons.Outlined.Info,
+                        isExpanded = true
                     )
                 }
 
@@ -260,7 +261,8 @@ fun AdaptiveIconCreatorDialog(
             InfoBadge(
                 text = stringResource(R.string.adaptive_icon_instructions),
                 style = InfoBadgeStyle.Primary,
-                icon = Icons.Outlined.Info
+                icon = Icons.Outlined.Info,
+                isExpanded = true
             )
 
             // Adaptive icon preview with safe zones

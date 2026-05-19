@@ -386,7 +386,7 @@ private fun HideShortsSection(
                     title = title,
                     subtitle = description,
                     trailingContent = {
-                        Switch(
+                        MorpheSwitch(
                             checked = hideShortsAppShortcut,
                             onCheckedChange = null,
                             modifier = Modifier.semantics {
@@ -420,7 +420,7 @@ private fun HideShortsSection(
                     title = title,
                     subtitle = description,
                     trailingContent = {
-                        Switch(
+                        MorpheSwitch(
                             checked = hideShortsWidget,
                             onCheckedChange = null,
                             modifier = Modifier.semantics {

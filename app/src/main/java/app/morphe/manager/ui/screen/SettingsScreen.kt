@@ -298,6 +298,7 @@ private fun NavigationItem(
                 selected = isSelected
             },
         color = containerColor,
+        contentColor = contentColor,
         shape = RoundedCornerShape(24.dp)
     ) {
         Row(
@@ -310,7 +311,6 @@ private fun NavigationItem(
             Icon(
                 imageVector = tab.icon,
                 contentDescription = tabLabel,
-                tint = contentColor,
                 modifier = Modifier.size(24.dp)
             )
 
@@ -324,7 +324,6 @@ private fun NavigationItem(
                     Text(
                         text = tabLabel,
                         style = MaterialTheme.typography.labelLarge,
-                        color = contentColor,
                         fontWeight = FontWeight.Medium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis

@@ -13,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -54,11 +53,12 @@ fun GitHubPatSettingsItem(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                InfoBadge(
-                    text = if (hasPat) stringResource(R.string.enabled)
-                    else stringResource(R.string.disabled),
-                    style = if (hasPat) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
-                    isCompact = true
+                StatusCircleIcon(
+                    icon = Icons.Outlined.Check,
+                    containerColor = if (hasPat) MaterialTheme.colorScheme.primaryContainer
+                    else MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = if (hasPat) MaterialTheme.colorScheme.onPrimaryContainer
+                    else MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 MorpheIcon(icon = Icons.Outlined.ChevronRight)
             }
@@ -167,7 +167,7 @@ private fun GitHubPatDialog(
                     title = stringResource(R.string.settings_advanced_github_pat_export_include_label),
                     subtitle = stringResource(R.string.settings_advanced_github_pat_export_include_supporting),
                     trailingContent = {
-                        Switch(
+                        MorpheSwitch(
                             checked = includePatInExport,
                             onCheckedChange = null
                         )

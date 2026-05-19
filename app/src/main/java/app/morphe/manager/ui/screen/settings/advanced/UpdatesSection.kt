@@ -14,7 +14,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -96,7 +99,7 @@ fun UpdatesSettingsItem(
         title = stringResource(R.string.settings_advanced_updates_use_prereleases),
         subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
         trailingContent = {
-            Switch(
+            MorpheSwitch(
                 checked = useManagerPrereleases,
                 onCheckedChange = null,
                 modifier = Modifier.semantics {
@@ -127,7 +130,7 @@ fun UpdatesSettingsItem(
                 R.string.settings_advanced_updates_background_notifications_description
         ),
         trailingContent = {
-            Switch(
+            MorpheSwitch(
                 checked = backgroundUpdateNotifications,
                 onCheckedChange = null,
                 modifier = Modifier.semantics {
@@ -161,7 +164,7 @@ fun UpdatesSettingsItem(
         title = stringResource(R.string.settings_advanced_updates_allow_metered),
         subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description),
         trailingContent = {
-            Switch(
+            MorpheSwitch(
                 checked = allowMeteredUpdates,
                 onCheckedChange = null,
                 modifier = Modifier.semantics {

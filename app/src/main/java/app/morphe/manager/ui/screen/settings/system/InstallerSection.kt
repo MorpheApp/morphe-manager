@@ -19,7 +19,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -99,7 +98,7 @@ fun InstallerSection(
                 title = stringResource(R.string.settings_prompt_installer_on_install),
                 subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
                 trailingContent = {
-                    Switch(
+                    MorpheSwitch(
                         checked = promptInstallerOnInstall,
                         onCheckedChange = null,
                         modifier = Modifier.semantics {
@@ -303,63 +302,54 @@ fun InstallerOptionItem(
         option.availability.reason?.let { context.getString(it) }
     } else null
 
-    Surface(
+    SettingsItemCard(
+        onClick = onSelect,
+        enabled = enabled,
+        borderWidth = 1.dp,
         modifier = Modifier
-            .fillMaxWidth()
             .padding(vertical = 2.dp)
             .semantics {
                 role = Role.RadioButton
                 this.selected = selected
                 this.stateDescription = stateDescription
-            },
-        shape = RoundedCornerShape(12.dp),
-        color = when {
-            !enabled -> colors.surfaceVariant.copy(alpha = 0.5f)
-            selected -> colors.primaryContainer
-            else -> Color.Transparent
-        },
-        tonalElevation = if (selected && enabled) 1.dp else 0.dp,
-        onClick = onSelect,
-        enabled = enabled
+            }
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             IconTextRow(
-                leadingContent = {
-                    if (option.icon != null &&
-                        (option.token == InstallerManager.Token.Shizuku ||
-                                option.token is InstallerManager.Token.Component)
-                    ) {
+                leadingContent = if (option.icon != null &&
+                    (option.token == InstallerManager.Token.Shizuku ||
+                            option.token is InstallerManager.Token.Component)
+                ) {
+                    {
                         InstallerIconPreview(
                             drawable = option.icon,
                             selected = selected,
                             enabled = enabled
                         )
-                    } else {
-                        RadioButton(
-                            selected = selected,
-                            onClick = null,
-                            enabled = enabled,
-                            colors = RadioButtonDefaults.colors(
-                                selectedColor = colors.primary,
-                                unselectedColor = colors.onSurfaceVariant,
-                                disabledSelectedColor = colors.onSurface.copy(alpha = 0.38f),
-                                disabledUnselectedColor = colors.onSurface.copy(alpha = 0.38f)
+                    }
+                } else {
+                    {
+                        if (selected) {
+                            StatusCircleIcon(
+                                icon = Icons.Outlined.Check,
+                                containerColor = if (enabled) colors.primaryContainer
+                                else colors.primaryContainer.copy(alpha = 0.38f),
+                                contentColor = if (enabled) colors.onPrimaryContainer
+                                else colors.onPrimaryContainer.copy(alpha = 0.38f)
                             )
-                        )
+                        } else {
+                            StatusCirclePlaceholder()
+                        }
                     }
                 },
                 title = option.label,
                 description = description,
-                trailingContent = null,
-                titleStyle = MaterialTheme.typography.bodyMedium.copy(
-                    color = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f)
-                ),
-                descriptionStyle = MaterialTheme.typography.bodySmall.copy(
-                    color = if (enabled) colors.onSurfaceVariant else colors.onSurfaceVariant.copy(alpha = 0.38f)
-                )
+                titleColor = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f),
+                descriptionColor = if (enabled) colors.onSurfaceVariant else colors.onSurfaceVariant.copy(alpha = 0.38f),
+                trailingContent = null
             )
 
             if (reasonText != null) {
@@ -368,7 +358,7 @@ fun InstallerOptionItem(
                     style = InfoBadgeStyle.Warning,
                     icon = Icons.Outlined.Warning,
                     isCompact = true,
-                    modifier = Modifier.padding(start = 36.dp)
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             }
         }

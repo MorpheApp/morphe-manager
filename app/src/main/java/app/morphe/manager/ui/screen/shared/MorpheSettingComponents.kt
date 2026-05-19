@@ -15,14 +15,19 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.FolderOff
+import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -240,6 +245,139 @@ fun MorpheIcon(
 }
 
 /**
+ * An outlined empty circle, used as a placeholder in selection lists alongside [StatusCircleIcon].
+ */
+@Composable
+fun StatusCirclePlaceholder(
+    modifier: Modifier = Modifier,
+    size: Dp = 28.dp
+) {
+    Box(
+        modifier = modifier
+            .size(size)
+            .border(1.5.dp, MaterialTheme.colorScheme.outlineVariant, CircleShape)
+    )
+}
+
+/**
+ * Switch with check/close icons in the thumb.
+ */
+@Composable
+fun MorpheSwitch(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    Switch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        enabled = enabled,
+        thumbContent = {
+            Icon(
+                imageVector = if (checked) Icons.Filled.Check else Icons.Filled.Close,
+                contentDescription = null,
+                modifier = Modifier.size(SwitchDefaults.IconSize)
+            )
+        }
+    )
+}
+
+/**
+ * A small filled circle with an icon inside, used as a compact status indicator.
+ */
+@Composable
+fun StatusCircleIcon(
+    icon: ImageVector,
+    containerColor: Color,
+    contentColor: Color,
+    modifier: Modifier = Modifier,
+    size: Dp = 28.dp
+) {
+    Box(
+        modifier = modifier
+            .size(size)
+            .background(containerColor, CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(size * 0.6f),
+            tint = contentColor
+        )
+    }
+}
+
+/**
+ * A settings row with a title, optional description, and import/export action buttons.
+ */
+@Composable
+fun ImportExportRow(
+    leadingContent: @Composable () -> Unit,
+    title: String,
+    description: String? = null,
+    onImport: (() -> Unit)?,
+    onExport: (() -> Unit)?
+) {
+    val hasBoth = onImport != null && onExport != null
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(MorpheDefaults.ContentPadding),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            leadingContent()
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                if (description != null) {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
+        ) {
+            if (onImport != null) {
+                ActionPillButton(
+                    onClick = onImport,
+                    icon = Icons.Outlined.Download,
+                    contentDescription = stringResource(R.string.import_),
+                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
+                    large = true,
+                    label = stringResource(R.string.import_)
+                )
+            }
+            if (onExport != null) {
+                ActionPillButton(
+                    onClick = onExport,
+                    icon = Icons.Outlined.Upload,
+                    contentDescription = stringResource(R.string.export),
+                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
+                    large = true,
+                    label = stringResource(R.string.export)
+                )
+            }
+        }
+    }
+}
+
+/**
  * Circular icon with gradient background for section titles.
  */
 @Composable
@@ -276,9 +414,11 @@ fun IconTextRow(
     leadingContent: @Composable (() -> Unit)? = null,
     title: String,
     description: String? = null,
-    titleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    titleStyle: TextStyle = MaterialTheme.typography.bodyLarge,
     titleWeight: FontWeight = FontWeight.Medium,
-    descriptionStyle: TextStyle = MaterialTheme.typography.bodySmall,
+    titleColor: Color = MaterialTheme.colorScheme.onSurface,
+    descriptionStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    descriptionColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     trailingContent: @Composable (() -> Unit)? = null,
     spacing: Dp = MorpheDefaults.ItemSpacing
 ) {
@@ -289,18 +429,21 @@ fun IconTextRow(
     ) {
         leadingContent?.invoke()
 
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
             Text(
                 text = title,
                 style = titleStyle,
                 fontWeight = titleWeight,
-                color = MaterialTheme.colorScheme.onSurface
+                color = titleColor
             )
             description?.let {
                 Text(
                     text = it,
                     style = descriptionStyle,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = descriptionColor
                 )
             }
         }

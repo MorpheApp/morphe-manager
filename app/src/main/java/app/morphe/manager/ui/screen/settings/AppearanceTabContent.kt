@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -91,7 +90,7 @@ fun AppearanceTabContent(
                 MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
             },
             trailingContent = {
-                Switch(
+                MorpheSwitch(
                     checked = showGreetingPhrases,
                     onCheckedChange = null,
                     modifier = Modifier.semantics {
@@ -127,7 +126,7 @@ fun AppearanceTabContent(
                     MorpheIcon(icon = Icons.Outlined.Contrast)
                 },
                 trailingContent = {
-                    Switch(
+                    MorpheSwitch(
                         checked = pureBlackTheme,
                         onCheckedChange = null,
                         modifier = Modifier.semantics {
@@ -182,7 +181,7 @@ fun AppearanceTabContent(
                     MorpheIcon(icon = Icons.Outlined.ScreenRotation)
                 },
                 trailingContent = {
-                    Switch(
+                    MorpheSwitch(
                         checked = enableParallax,
                         onCheckedChange = null,
                         modifier = Modifier.semantics {

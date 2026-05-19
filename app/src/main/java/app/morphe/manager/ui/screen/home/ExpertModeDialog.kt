@@ -1644,7 +1644,7 @@ private fun BooleanOptionItem(
         title = title,
         subtitle = description.ifBlank { null },
         trailingContent = {
-            Switch(
+            MorpheSwitch(
                 checked = value,
                 onCheckedChange = onValueChange,
                 modifier = Modifier.semantics {

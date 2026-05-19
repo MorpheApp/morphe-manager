@@ -106,7 +106,7 @@ fun AdvancedTabContent(
             title = stringResource(R.string.settings_advanced_expert_mode),
             subtitle = stringResource(R.string.settings_advanced_expert_mode_description),
             trailingContent = {
-                Switch(
+                MorpheSwitch(
                     checked = useExpertMode,
                     onCheckedChange = null,
                     modifier = Modifier.semantics {
@@ -143,7 +143,7 @@ fun AdvancedTabContent(
                         title = stringResource(R.string.settings_advanced_strip_unused_libs),
                         subtitle = stringResource(R.string.settings_advanced_strip_unused_libs_description),
                         trailingContent = {
-                            Switch(
+                            MorpheSwitch(
                                 checked = stripUnusedNativeLibs,
                                 onCheckedChange = null,
                                 modifier = Modifier.semantics {

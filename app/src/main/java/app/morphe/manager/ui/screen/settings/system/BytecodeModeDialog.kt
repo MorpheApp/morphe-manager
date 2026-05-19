@@ -5,9 +5,12 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -74,19 +77,26 @@ private fun BytecodeModeOption(
     isSelected: Boolean,
     onSelect: () -> Unit,
 ) {
-    RichSettingsItem(
+    SettingsItemCard(
         onClick = onSelect,
-        showBorder = true,
-        leadingContent = {
-            MorpheIcon(
-                icon = if (isSelected) Icons.Outlined.RadioButtonChecked
-                else Icons.Outlined.RadioButtonUnchecked,
-                tint = if (isSelected) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        },
-        trailingContent = null,
-        title = stringResource(titleRes),
-        subtitle = stringResource(subtitleRes),
-    )
+        borderWidth = 1.dp
+    ) {
+        IconTextRow(
+            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+            leadingContent = {
+                if (isSelected) {
+                    StatusCircleIcon(
+                        icon = Icons.Outlined.Check,
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                } else {
+                    StatusCirclePlaceholder()
+                }
+            },
+            title = stringResource(titleRes),
+            description = stringResource(subtitleRes),
+            trailingContent = null
+        )
+    }
 }

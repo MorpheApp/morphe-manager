@@ -18,14 +18,12 @@ import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
@@ -169,11 +167,12 @@ fun SystemTabContent(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                InfoBadge(
-                                    text = if (useProcessRuntime) stringResource(R.string.enabled)
-                                    else stringResource(R.string.disabled),
-                                    style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
-                                    isCompact = true
+                                StatusCircleIcon(
+                                    icon = Icons.Outlined.Check,
+                                    containerColor = if (useProcessRuntime) MaterialTheme.colorScheme.primaryContainer
+                                    else MaterialTheme.colorScheme.surfaceVariant,
+                                    contentColor = if (useProcessRuntime) MaterialTheme.colorScheme.onPrimaryContainer
+                                    else MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                                 MorpheIcon(icon = Icons.Outlined.ChevronRight)
                             }
@@ -222,13 +221,12 @@ fun SystemTabContent(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            InfoBadge(
-                                text = if (isIgnoringBatteryOptimizations)
-                                    stringResource(R.string.settings_system_battery_optimization_excluded)
-                                else
-                                    stringResource(R.string.settings_system_battery_optimization_not_excluded),
-                                style = if (isIgnoringBatteryOptimizations) InfoBadgeStyle.Primary else InfoBadgeStyle.Warning,
-                                isCompact = true
+                            StatusCircleIcon(
+                                icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
+                                containerColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.primaryContainer
+                                else MaterialTheme.colorScheme.secondaryContainer,
+                                contentColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.onPrimaryContainer
+                                else MaterialTheme.colorScheme.onSecondaryContainer
                             )
                             MorpheIcon(icon = Icons.Outlined.ChevronRight)
                         }
@@ -395,73 +393,6 @@ fun SystemTabContent(
                 onAboutClick = onAboutClick,
                 onChangelogClick = onChangelogClick
             )
-        }
-    }
-}
-
-/**
- * A settings row with a title, optional description, and import/export action buttons.
- */
-@Composable
-private fun ImportExportRow(
-    leadingContent: @Composable () -> Unit,
-    title: String,
-    description: String? = null,
-    onImport: (() -> Unit)?,
-    onExport: (() -> Unit)?
-) {
-    val hasBoth = onImport != null && onExport != null
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            leadingContent()
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                if (description != null) {
-                    Text(
-                        text = description,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
-        ) {
-            if (onImport != null) {
-                ActionPillButton(
-                    onClick = onImport,
-                    icon = Icons.Outlined.Download,
-                    contentDescription = stringResource(R.string.import_),
-                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
-                    large = true,
-                    label = stringResource(R.string.import_)
-                )
-            }
-            if (onExport != null) {
-                ActionPillButton(
-                    onClick = onExport,
-                    icon = Icons.Outlined.Upload,
-                    contentDescription = stringResource(R.string.export),
-                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
-                    large = true,
-                    label = stringResource(R.string.export)
-                )
-            }
         }
     }
 }

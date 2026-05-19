@@ -78,7 +78,7 @@ fun ProcessRuntimeDialog(
                 title = stringResource(R.string.settings_system_process_runtime_enable),
                 subtitle = stringResource(R.string.settings_system_process_runtime_description),
                 trailingContent = {
-                    Switch(
+                    MorpheSwitch(
                         checked = enabled,
                         onCheckedChange = {
                             enabled = it
@@ -179,7 +179,8 @@ fun ProcessRuntimeDialog(
                 InfoBadge(
                     text = stringResource(R.string.settings_system_process_runtime_memory_limit_description),
                     style = InfoBadgeStyle.Default,
-                    icon = Icons.Outlined.Info
+                    icon = Icons.Outlined.Info,
+                    isExpanded = true
                 )
 
                 // Warning for low values
@@ -187,7 +188,8 @@ fun ProcessRuntimeDialog(
                     InfoBadge(
                         text = stringResource(R.string.settings_system_memory_limit_warning),
                         style = InfoBadgeStyle.Error,
-                        icon = Icons.Outlined.Warning
+                        icon = Icons.Outlined.Warning,
+                        isExpanded = true
                     )
                 }
             }

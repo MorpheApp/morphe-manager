@@ -27,7 +27,7 @@ fun ActionPillButton(
     val height = if (large) 40.dp else 36.dp
     val minWidth = if (large) 80.dp else 72.dp
     val iconSize = if (large) 20.dp else 18.dp
-    val textStyle = if (large) MaterialTheme.typography.labelMedium else MaterialTheme.typography.labelSmall
+    val textStyle = if (large) MaterialTheme.typography.labelLarge else MaterialTheme.typography.labelSmall
 
     val button: @Composable () -> Unit = {
         FilledTonalIconButton(

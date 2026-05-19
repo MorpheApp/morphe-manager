@@ -555,7 +555,7 @@ private fun BundleManagementCard(
 
                             Spacer(Modifier.width(8.dp))
 
-                            Switch(
+                            MorpheSwitch(
                                 checked = currentUsePrerelease,
                                 onCheckedChange = onPrereleasesToggle
                             )
@@ -595,7 +595,7 @@ private fun BundleManagementCard(
 
                             Spacer(Modifier.width(8.dp))
 
-                            Switch(
+                            MorpheSwitch(
                                 checked = useExperimentalVersions,
                                 onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) }
                             )
