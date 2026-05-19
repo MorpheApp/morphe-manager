@@ -5,44 +5,30 @@
 
 package app.morphe.manager.ui.screen.settings
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Build
-import android.os.PowerManager
-import android.provider.Settings
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.InstallMobile
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.system.*
-import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.SectionCard
+import app.morphe.manager.ui.screen.shared.SectionTitle
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
-import app.morphe.manager.util.toast
-import app.morphe.patcher.dex.BytecodeMode
 
 /**
  * System tab content.
  */
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("LocalContextGetResourceValueCheck", "BatteryLife")
 @Composable
 fun SystemTabContent(
     settingsViewModel: SettingsViewModel,
@@ -56,69 +42,7 @@ fun SystemTabContent(
     onAboutClick: () -> Unit,
     onChangelogClick: () -> Unit
 ) {
-    val context = LocalContext.current
-    val prefs = settingsViewModel.prefs
-    val useExpertMode by prefs.useExpertMode.getAsState()
-    val useProcessRuntime by prefs.useProcessRuntime.getAsState()
-    val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
-    val bytecodeMode by prefs.bytecodeModePreference.getAsState()
-
-    val showProcessRuntimeDialog = remember { mutableStateOf(false) }
-    val showBytecodeDialog = remember { mutableStateOf(false) }
-    val showApkManagementDialog = remember { mutableStateOf<ApkManagementType?>(null) }
-    val showPatchSelectionDialog = remember { mutableStateOf(false) }
-
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val pm = remember { context.getSystemService(PowerManager::class.java) }
-    var isIgnoringBatteryOptimizations by remember { mutableStateOf(pm.isIgnoringBatteryOptimizations(context.packageName)) }
-    LaunchedEffect(lifecycleOwner) {
-        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            isIgnoringBatteryOptimizations = pm.isIgnoringBatteryOptimizations(context.packageName)
-        }
-    }
-
-    // Extract strings to avoid LocalContext issues
-    val keystoreUnavailable = stringResource(R.string.settings_system_export_keystore_unavailable)
-
-    // Storage counts
-    val originalApkCount by settingsViewModel.originalApkCount.collectAsStateWithLifecycle()
-    val patchedApkCount by settingsViewModel.patchedApkCount.collectAsStateWithLifecycle()
-    val patchedPackagesCount by settingsViewModel.patchedPackagesCount.collectAsStateWithLifecycle()
-
-    if (showProcessRuntimeDialog.value) {
-        ProcessRuntimeDialog(
-            currentEnabled = useProcessRuntime,
-            currentLimit = memoryLimit,
-            onDismiss = { showProcessRuntimeDialog.value = false },
-            onEnabledChange = { settingsViewModel.setProcessRuntime(it) },
-            onLimitChange = { settingsViewModel.setMemoryLimit(it) }
-        )
-    }
-
-    if (showBytecodeDialog.value) {
-        BytecodeModeDialog(
-            current = bytecodeMode,
-            onDismiss = { showBytecodeDialog.value = false },
-            onSelect = { settingsViewModel.setBytecodeMode(it) }
-        )
-    }
-
-    // APK management dialog
-    showApkManagementDialog.value?.let { type ->
-        ApkManagementDialog(
-            type = type,
-            onDismissRequest = { showApkManagementDialog.value = null }
-        )
-    }
-
-    // Patch selection management dialog
-    if (showPatchSelectionDialog.value) {
-        PatchSelectionManagementDialog(
-            settingsViewModel = settingsViewModel,
-            importExportViewModel = importExportViewModel,
-            onDismiss = { showPatchSelectionDialog.value = false }
-        )
-    }
+    val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
 
     Column(
         modifier = Modifier
@@ -127,7 +51,6 @@ fun SystemTabContent(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-
         // Installers
         SectionTitle(
             text = stringResource(R.string.installer),
@@ -142,247 +65,27 @@ fun SystemTabContent(
         }
 
         // Performance
-        SectionTitle(
-            text = stringResource(R.string.settings_system_performance),
-            icon = Icons.Outlined.Speed
-        )
-
-        SectionCard {
-            Column {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    RichSettingsItem(
-                        onClick = { showProcessRuntimeDialog.value = true },
-                        title = stringResource(R.string.settings_system_process_runtime),
-                        subtitle = if (useProcessRuntime)
-                            stringResource(
-                                R.string.settings_system_process_runtime_enabled_description,
-                                memoryLimit
-                            )
-                        else stringResource(R.string.settings_system_process_runtime_disabled_description),
-                        leadingContent = {
-                            MorpheIcon(icon = Icons.Outlined.Memory)
-                        },
-                        trailingContent = {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                StatusCircleIcon(
-                                    icon = Icons.Outlined.Check,
-                                    containerColor = if (useProcessRuntime) MaterialTheme.colorScheme.primaryContainer
-                                    else MaterialTheme.colorScheme.surfaceVariant,
-                                    contentColor = if (useProcessRuntime) MaterialTheme.colorScheme.onPrimaryContainer
-                                    else MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                            }
-                        }
-                    )
-                } else {
-                    IconTextRow(
-                        modifier = Modifier.padding(16.dp),
-                        leadingContent = {
-                            MorpheIcon(
-                                icon = Icons.Outlined.Memory,
-                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
-                            )
-                        },
-                        title = stringResource(R.string.settings_system_process_runtime),
-                        description = stringResource(R.string.settings_system_process_runtime_description_not_available)
-                    )
-                }
-
-                MorpheSettingsDivider()
-
-                RichSettingsItem(
-                    onClick = { showBytecodeDialog.value = true },
-                    title = stringResource(R.string.settings_advanced_bytecode_mode),
-                    subtitle = stringResource(bytecodeMode.labelRes()),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) },
-                    trailingContent = { MorpheIcon(icon = Icons.Outlined.ChevronRight) }
-                )
-
-                MorpheSettingsDivider()
-
-                RichSettingsItem(
-                    onClick = {
-                        context.startActivity(
-                            Intent(
-                                Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                "package:${context.packageName}".toUri()
-                            )
-                        )
-                    },
-                    title = stringResource(R.string.settings_system_battery_optimization),
-                    subtitle = stringResource(R.string.settings_system_battery_optimization_description),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.BatterySaver) },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            StatusCircleIcon(
-                                icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
-                                containerColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.primaryContainer
-                                else MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.onPrimaryContainer
-                                else MaterialTheme.colorScheme.onSecondaryContainer
-                            )
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                        }
-                    }
-                )
-            }
-        }
+        PerformanceSection(settingsViewModel = settingsViewModel)
 
         // Import & Export (Expert mode only)
         if (useExpertMode) {
-            SectionTitle(
-                text = stringResource(R.string.settings_system_import_export),
-                icon = Icons.Outlined.SwapHoriz
+            ImportExportSection(
+                importExportViewModel = importExportViewModel,
+                onImportKeystore = onImportKeystore,
+                onExportKeystore = onExportKeystore,
+                onImportSettings = onImportSettings,
+                onExportSettings = onExportSettings,
+                onExportDebugLogs = onExportDebugLogs
             )
-
-            SectionCard {
-                Column {
-                    // Keystore
-                    ImportExportRow(
-                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Key) },
-                        title = stringResource(R.string.settings_system_keystore),
-                        description = stringResource(R.string.settings_system_import_keystore_description),
-                        onImport = onImportKeystore,
-                        onExport = {
-                            if (!importExportViewModel.canExport()) {
-                                context.toast(keystoreUnavailable)
-                            } else {
-                                onExportKeystore()
-                            }
-                        }
-                    )
-
-                    MorpheSettingsDivider()
-
-                    // Manager Settings
-                    ImportExportRow(
-                        leadingContent = {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_notification),
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(24.dp)
-                            )
-                        },
-                        title = stringResource(R.string.settings_system_morphe_settings),
-                        description = stringResource(R.string.settings_system_import_manager_settings_description),
-                        onImport = onImportSettings,
-                        onExport = onExportSettings
-                    )
-
-                    MorpheSettingsDivider()
-
-                    // Debug Logs
-                    ImportExportRow(
-                        leadingContent = { MorpheIcon(icon = Icons.Outlined.BugReport) },
-                        title = stringResource(R.string.settings_system_debug),
-                        description = stringResource(R.string.settings_system_export_debug_logs_description),
-                        onImport = null,
-                        onExport = onExportDebugLogs
-                    )
-                }
-            }
         }
 
-        // Storage Management Section
-        SectionTitle(
-            text = stringResource(R.string.settings_system_storage_management),
-            icon = Icons.Outlined.Storage
+        // Storage Management
+        StorageManagementSection(
+            settingsViewModel = settingsViewModel,
+            importExportViewModel = importExportViewModel
         )
 
-        SectionCard {
-            Column {
-                // Original APKs management
-                RichSettingsItem(
-                    onClick = { showApkManagementDialog.value = ApkManagementType.ORIGINAL },
-                    title = stringResource(R.string.settings_system_original_apks_title),
-                    subtitle = stringResource(R.string.settings_system_original_apks_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Storage)
-                    },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            if (originalApkCount > 0) {
-                                InfoBadge(
-                                    text = originalApkCount.toString(),
-                                    style = InfoBadgeStyle.Default,
-                                    isCompact = true
-                                )
-                            }
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                        }
-                    }
-                )
-
-                MorpheSettingsDivider()
-
-                // Patched APKs management
-                RichSettingsItem(
-                    onClick = { showApkManagementDialog.value = ApkManagementType.PATCHED },
-                    title = stringResource(R.string.settings_system_patched_apks_title),
-                    subtitle = stringResource(R.string.settings_system_patched_apks_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Apps)
-                    },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            if (patchedApkCount > 0) {
-                                InfoBadge(
-                                    text = patchedApkCount.toString(),
-                                    style = InfoBadgeStyle.Default,
-                                    isCompact = true
-                                )
-                            }
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                        }
-                    }
-                )
-
-                // Patch Selections management (Expert mode only)
-                if (useExpertMode) {
-                    MorpheSettingsDivider()
-
-                    RichSettingsItem(
-                        onClick = { showPatchSelectionDialog.value = true },
-                        title = stringResource(R.string.settings_system_patch_selections_title),
-                        subtitle = stringResource(R.string.settings_system_patch_selections_description),
-                        leadingContent = {
-                            MorpheIcon(icon = Icons.Outlined.Tune)
-                        },
-                        trailingContent = {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                if (patchedPackagesCount > 0) {
-                                    InfoBadge(
-                                        text = patchedPackagesCount.toString(),
-                                        style = InfoBadgeStyle.Default,
-                                        isCompact = true
-                                    )
-                                }
-                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                            }
-                        }
-                    )
-                }
-            }
-        }
-
-        // About Section
+        // About
         SectionTitle(
             text = stringResource(R.string.settings_system_about),
             icon = Icons.Outlined.Info
@@ -395,10 +98,4 @@ fun SystemTabContent(
             )
         }
     }
-}
-
-/** Maps a [BytecodeMode] to its short display label string resource. */
-private fun BytecodeMode.labelRes(): Int = when (this) {
-    BytecodeMode.FULL -> R.string.settings_advanced_bytecode_mode_full
-    else -> R.string.settings_advanced_bytecode_mode_strip_fast
 }
