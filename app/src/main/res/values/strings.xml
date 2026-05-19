@@ -718,6 +718,7 @@ The image dimensions must be as follows:
     <string name="patches">Patches</string>
     <string name="home">Home</string>
     <string name="settings">Settings</string>
+    <string name="back">Back</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="all">All</string>

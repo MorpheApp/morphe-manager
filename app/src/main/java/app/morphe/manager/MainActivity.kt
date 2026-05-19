@@ -304,7 +304,10 @@ private fun MorpheManager(vm: MainViewModel) {
             }
 
             composable<Settings> {
-                SettingsScreen(homeViewModel = homeViewModel)
+                SettingsScreen(
+                    homeViewModel = homeViewModel,
+                    onBackClick = { navController.popBackStack() }
+                )
             }
         }
     }

@@ -15,10 +15,12 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -69,6 +71,7 @@ private enum class SettingsTab(
 @Composable
 fun SettingsScreen(
     homeViewModel: HomeViewModel,
+    onBackClick: () -> Unit,
     themeViewModel: ThemeSettingsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
     patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
@@ -164,6 +167,8 @@ fun SettingsScreen(
             .fillMaxSize()
             .statusBarsPadding()
     ) {
+        SettingsHeader(onBackClick = onBackClick)
+
         // Content area
         HorizontalPager(
             state = pagerState,
@@ -218,6 +223,40 @@ fun SettingsScreen(
                     pagerState.animateScrollToPage(tab.ordinal)
                 }
             }
+        )
+    }
+}
+
+@Composable
+private fun SettingsHeader(
+    onBackClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(64.dp)
+            .padding(horizontal = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        IconButton(
+            onClick = onBackClick,
+            modifier = Modifier.size(48.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                contentDescription = stringResource(R.string.back)
+            )
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Text(
+            text = stringResource(R.string.settings),
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onBackground,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
