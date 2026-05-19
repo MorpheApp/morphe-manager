@@ -22,14 +22,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
+@Composable
+private fun morpheDialogTextFieldColors(textColor: Color) = OutlinedTextFieldDefaults.colors(
+    focusedTextColor = textColor,
+    unfocusedTextColor = textColor,
+    disabledTextColor = textColor.copy(alpha = 0.6f),
+    focusedBorderColor = textColor.copy(alpha = 0.5f),
+    unfocusedBorderColor = textColor.copy(alpha = 0.2f),
+    disabledBorderColor = textColor.copy(alpha = 0.1f),
+    cursorColor = textColor,
+    errorBorderColor = MaterialTheme.colorScheme.error,
+    focusedLeadingIconColor = textColor.copy(alpha = 0.7f),
+    unfocusedLeadingIconColor = textColor.copy(alpha = 0.5f),
+    focusedTrailingIconColor = textColor.copy(alpha = 0.7f),
+    unfocusedTrailingIconColor = textColor.copy(alpha = 0.5f),
+    focusedLabelColor = textColor.copy(alpha = 0.7f),
+    unfocusedLabelColor = textColor.copy(alpha = 0.5f),
+    focusedPlaceholderColor = textColor.copy(alpha = 0.4f),
+    unfocusedPlaceholderColor = textColor.copy(alpha = 0.4f)
+)
+
 /**
- * Styled OutlinedTextField for dialogs with proper theming.
+ * Styled [OutlinedTextField] for dialogs with proper theming.
  * Supports password visibility toggle and clear button.
  */
 @Composable
@@ -146,42 +167,27 @@ fun MorpheDialogTextField(
         keyboardActions = keyboardActions,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = textColor,
-            unfocusedTextColor = textColor,
-            disabledTextColor = textColor.copy(alpha = 0.6f),
-            focusedBorderColor = textColor.copy(alpha = 0.5f),
-            unfocusedBorderColor = textColor.copy(alpha = 0.2f),
-            disabledBorderColor = textColor.copy(alpha = 0.1f),
-            cursorColor = textColor,
-            errorBorderColor = MaterialTheme.colorScheme.error,
-            focusedLeadingIconColor = textColor.copy(alpha = 0.7f),
-            unfocusedLeadingIconColor = textColor.copy(alpha = 0.5f),
-            focusedTrailingIconColor = textColor.copy(alpha = 0.7f),
-            unfocusedTrailingIconColor = textColor.copy(alpha = 0.5f),
-            focusedLabelColor = textColor.copy(alpha = 0.7f),
-            unfocusedLabelColor = textColor.copy(alpha = 0.5f),
-            focusedPlaceholderColor = textColor.copy(alpha = 0.4f),
-            unfocusedPlaceholderColor = textColor.copy(alpha = 0.4f)
-        )
+        colors = morpheDialogTextFieldColors(textColor)
     )
 }
 
 /**
- * Styled OutlinedTextField with dropdown menu support for dialogs.
+ * Styled [OutlinedTextField] with dropdown menu support for dialogs.
  * Combines text input, folder picker, clear button, and dropdown selection.
  *
  * Tap behavior:
- *  - 1st tap: opens dropdown list (field stays read-only, no keyboard)
- *  - 2nd tap (after closing dropdown without selecting): opens keyboard for manual input
- *  - selecting an item or dismissing resets back to 1st-tap behavior
+ *  - 1st tap: opens dropdown list (field stays read-only, no keyboard).
+ *  - 2nd tap (after closing dropdown without selecting): opens keyboard for manual input.
+ *  - Selecting an item or dismissing resets back to 1st-tap behavior.
+ *
+ * @param dropdownItems Map of display name to value shown in the dropdown menu.
  */
 @Composable
 fun MorpheDialogDropdownTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    dropdownItems: Map<String, String>, // Display name -> Value
+    dropdownItems: Map<String, String>,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -269,7 +275,10 @@ fun MorpheDialogDropdownTextField(
                                 Icons.Outlined.ExpandLess
                             else
                                 Icons.Outlined.ExpandMore,
-                            contentDescription = null,
+                            contentDescription = if (dropdownExpanded)
+                                stringResource(R.string.collapse)
+                            else
+                                stringResource(R.string.expand),
                             tint = textColor.copy(alpha = 0.7f)
                         )
                     }
@@ -282,23 +291,7 @@ fun MorpheDialogDropdownTextField(
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
             shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = textColor,
-                unfocusedTextColor = textColor,
-                disabledTextColor = textColor.copy(alpha = 0.6f),
-                focusedBorderColor = textColor.copy(alpha = 0.5f),
-                unfocusedBorderColor = textColor.copy(alpha = 0.2f),
-                disabledBorderColor = textColor.copy(alpha = 0.1f),
-                cursorColor = textColor,
-                focusedLeadingIconColor = textColor.copy(alpha = 0.7f),
-                unfocusedLeadingIconColor = textColor.copy(alpha = 0.5f),
-                focusedTrailingIconColor = textColor.copy(alpha = 0.7f),
-                unfocusedTrailingIconColor = textColor.copy(alpha = 0.5f),
-                focusedLabelColor = textColor.copy(alpha = 0.7f),
-                unfocusedLabelColor = textColor.copy(alpha = 0.5f),
-                focusedPlaceholderColor = textColor.copy(alpha = 0.4f),
-                unfocusedPlaceholderColor = textColor.copy(alpha = 0.4f)
-            )
+            colors = morpheDialogTextFieldColors(textColor)
         )
 
         // Invisible overlay that captures the first tap to open dropdown,
