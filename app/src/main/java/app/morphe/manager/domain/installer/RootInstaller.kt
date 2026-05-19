@@ -150,10 +150,12 @@ class RootInstaller(
         // Use new path for new installations
         val modulePath = "$MODULES_PATH/$packageName-morphe"
 
+        // Capture installed package info before unmounting: umount -l is lazy and causes PM
+        // to briefly lose track of the package, returning null from getPackageInfo right after
+        val installedInfo = if (stockAPK != null) pm.getPackageInfo(packageName) else null
         unmount(packageName)
 
         stockAPK?.let { stockApp ->
-            val installedInfo = pm.getPackageInfo(packageName)
             val patchedInfo = pm.getPackageInfo(patchedAPK)
                 ?: error("Failed to get package info for patched app")
 
