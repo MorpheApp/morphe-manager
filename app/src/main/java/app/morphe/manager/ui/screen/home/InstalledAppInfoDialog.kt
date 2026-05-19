@@ -411,8 +411,7 @@ fun InstalledAppInfoDialog(
                                 onShowMountWarning = { action ->
                                     pendingMountWarningAction.value = action
                                     showMountWarningDialog.value = true
-                                },
-                                modifier = Modifier.animateContentSize(animationSpec = tween(220))
+                                }
                             )
                         }
                         if (!viewModel.hasOriginalApk) {
@@ -545,7 +544,6 @@ fun InstalledAppInfoDialog(
                                 modifier = Modifier
                                     .padding(horizontal = 20.dp)
                                     .padding(top = 12.dp)
-                                    .animateContentSize(animationSpec = tween(220))
                             )
                         }
                     }
@@ -674,26 +672,27 @@ private fun AppHeroHeader(
     // Entrance animations (progress-based: 0f -> 1f).
     // One Float per visual group; alpha, offset and scale are derived via lerp
     // to avoid redundant Recomposition subscribers.
-    var entered by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { entered = true }
+    val entered = remember { mutableStateOf(false) }
+    val relativeTime = remember(installedApp.patchedAt) { installedApp.patchedAt?.let { getRelativeTimeString(it) } }
+    LaunchedEffect(Unit) { entered.value = true }
 
     // Icon: spring with overshoot (first thing the eye sees, no delay needed).
     val iconProgress by animateFloatAsState(
-        targetValue = if (entered) 1f else 0f,
+        targetValue = if (entered.value) 1f else 0f,
         animationSpec = spring(dampingRatio = 0.55f, stiffness = 320f),
         label = "heroIconProgress"
     )
 
     // Name + version share one clock; stagger handled inside graphicsLayer via lerp
     val textProgress by animateFloatAsState(
-        targetValue = if (entered) 1f else 0f,
+        targetValue = if (entered.value) 1f else 0f,
         animationSpec = tween(durationMillis = 260, delayMillis = 60, easing = EaseOutCubic),
         label = "heroTextProgress"
     )
 
     // Both chips share one clock; chip 2 uses a clamped sub-range for its offset
     val chipsProgress by animateFloatAsState(
-        targetValue = if (entered) 1f else 0f,
+        targetValue = if (entered.value) 1f else 0f,
         animationSpec = tween(durationMillis = 240, delayMillis = 160, easing = EaseOutBack),
         label = "heroChipsProgress"
     )
@@ -788,10 +787,10 @@ private fun AppHeroHeader(
                         horizontalAlignment = Alignment.End
                     ) {
                         InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
-                        installedApp.patchedAt?.let { ts ->
+                        if (relativeTime != null) {
                             InfoChip(
                                 icon = Icons.Outlined.Schedule,
-                                text = getRelativeTimeString(ts),
+                                text = relativeTime,
                                 bg = chipBg,
                                 fg = onHero
                             )
@@ -817,7 +816,7 @@ private fun AppHeroHeader(
                         InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
                     }
                     // Animated chip 2 (sub-range: starts when chip1 is 30% done)
-                    installedApp.patchedAt?.let { ts ->
+                    if (relativeTime != null) {
                         Box(
                             modifier = Modifier.graphicsLayer {
                                 val p = ((chipsProgress - 0.3f) / 0.7f).coerceIn(0f, 1f)
@@ -827,7 +826,7 @@ private fun AppHeroHeader(
                         ) {
                             InfoChip(
                                 icon = Icons.Outlined.Schedule,
-                                text = getRelativeTimeString(ts),
+                                text = relativeTime,
                                 bg = chipBg,
                                 fg = onHero
                             )
@@ -1238,7 +1237,7 @@ private fun ActionsSection(
         )
     }
 
-    Column(modifier = modifier.animateContentSize(animationSpec = tween(220)), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Column(modifier = modifier.animateContentSize(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         // Primary actions row
         if (primaryActions.isNotEmpty()) {
             primaryActions.forEach { action ->
