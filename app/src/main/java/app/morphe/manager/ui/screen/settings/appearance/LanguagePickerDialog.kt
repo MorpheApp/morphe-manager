@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -90,9 +89,8 @@ fun LanguagePickerDialog(
                     )
                 },
                 leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Search,
-                        contentDescription = null,
+                    MorpheIcon(
+                        icon = Icons.Outlined.Search,
                         tint = LocalDialogSecondaryTextColor.current
                     )
                 },
@@ -195,11 +193,9 @@ private fun LanguageItem(
             }
 
             if (isSelected) {
-                Icon(
-                    imageVector = Icons.Outlined.Check,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
+                MorpheIcon(
+                    icon = Icons.Outlined.Check,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
