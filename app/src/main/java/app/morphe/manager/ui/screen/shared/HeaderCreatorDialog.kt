@@ -290,7 +290,6 @@ fun HeaderCreatorDialog(
                                 .fillMaxWidth()
                                 .padding(horizontal = 4.dp),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Image,
@@ -298,12 +297,14 @@ fun HeaderCreatorDialog(
                                 modifier = Modifier.size(16.dp),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
+                            Spacer(Modifier.width(8.dp))
                             Slider(
                                 value = lightScale,
                                 onValueChange = { lightScale = it.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE) },
                                 valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE,
                                 modifier = Modifier.weight(1f)
                             )
+                            Spacer(Modifier.width(8.dp))
                             Icon(
                                 imageVector = Icons.Outlined.Image,
                                 contentDescription = null,
@@ -311,15 +312,18 @@ fun HeaderCreatorDialog(
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             AnimatedVisibility(visible = lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f) {
-                                IconButton(
-                                    onClick = { lightScale = 1f; lightOffsetX = 0f; lightOffsetY = 0f },
-                                    modifier = Modifier.size(40.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.RestartAlt,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(24.dp)
-                                    )
+                                Row {
+                                    Spacer(Modifier.width(8.dp))
+                                    IconButton(
+                                        onClick = { lightScale = 1f; lightOffsetX = 0f; lightOffsetY = 0f },
+                                        modifier = Modifier.size(40.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.RestartAlt,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -367,7 +371,6 @@ fun HeaderCreatorDialog(
                             .fillMaxWidth()
                             .padding(horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Image,
@@ -375,12 +378,14 @@ fun HeaderCreatorDialog(
                             modifier = Modifier.size(16.dp),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
+                        Spacer(Modifier.width(8.dp))
                         Slider(
                             value = darkScale,
                             onValueChange = { darkScale = it.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE) },
                             valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE,
                             modifier = Modifier.weight(1f)
                         )
+                        Spacer(Modifier.width(8.dp))
                         Icon(
                             imageVector = Icons.Outlined.Image,
                             contentDescription = null,
@@ -388,15 +393,18 @@ fun HeaderCreatorDialog(
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         AnimatedVisibility(visible = darkScale != 1f || darkOffsetX != 0f || darkOffsetY != 0f) {
-                            IconButton(
-                                onClick = { darkScale = 1f; darkOffsetX = 0f; darkOffsetY = 0f },
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.RestartAlt,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(24.dp)
-                                )
+                            Row {
+                                Spacer(Modifier.width(8.dp))
+                                IconButton(
+                                    onClick = { darkScale = 1f; darkOffsetX = 0f; darkOffsetY = 0f },
+                                    modifier = Modifier.size(40.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.RestartAlt,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
                             }
                         }
                     }

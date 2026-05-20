@@ -382,7 +382,6 @@ fun AdaptiveIconCreatorDialog(
                             .fillMaxWidth()
                             .padding(horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Image,
@@ -390,6 +389,7 @@ fun AdaptiveIconCreatorDialog(
                             modifier = Modifier.size(14.dp),
                             tint = LocalDialogSecondaryTextColor.current
                         )
+                        Spacer(Modifier.width(8.dp))
                         Slider(
                             value = scale,
                             onValueChange = {
@@ -401,27 +401,30 @@ fun AdaptiveIconCreatorDialog(
                             valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
                             modifier = Modifier.weight(1f)
                         )
+                        Spacer(Modifier.width(8.dp))
                         Icon(
                             imageVector = Icons.Outlined.Image,
                             contentDescription = null,
                             modifier = Modifier.size(22.dp),
                             tint = LocalDialogSecondaryTextColor.current
                         )
+                        // Spacer inside AnimatedVisibility so the gap also animates away
                         AnimatedVisibility(
-                            visible = scale != 1f || offsetX != 0f || offsetY != 0f,
-                            enter = MorpheAnimations.expandFadeEnter,
-                            exit = MorpheAnimations.shrinkFadeExit
+                            visible = scale != 1f || offsetX != 0f || offsetY != 0f
                         ) {
-                            IconButton(
-                                onClick = { scale = 1f; offsetX = 0f; offsetY = 0f },
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.RestartAlt,
-                                    contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
-                                    modifier = Modifier.size(24.dp),
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
+                            Row {
+                                Spacer(Modifier.width(8.dp))
+                                IconButton(
+                                    onClick = { scale = 1f; offsetX = 0f; offsetY = 0f },
+                                    modifier = Modifier.size(40.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.RestartAlt,
+                                        contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
+                                        modifier = Modifier.size(24.dp),
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
                             }
                         }
                     }
@@ -451,7 +454,6 @@ fun AdaptiveIconCreatorDialog(
                             .fillMaxWidth()
                             .padding(horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Image,
@@ -459,6 +461,7 @@ fun AdaptiveIconCreatorDialog(
                             modifier = Modifier.size(14.dp),
                             tint = LocalDialogSecondaryTextColor.current
                         )
+                        Spacer(Modifier.width(8.dp))
                         Slider(
                             value = notificationScale,
                             onValueChange = {
@@ -470,27 +473,30 @@ fun AdaptiveIconCreatorDialog(
                             valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_NOTIFICATION_SCALE,
                             modifier = Modifier.weight(1f)
                         )
+                        Spacer(Modifier.width(8.dp))
                         Icon(
                             imageVector = Icons.Outlined.Image,
                             contentDescription = null,
                             modifier = Modifier.size(22.dp),
                             tint = LocalDialogSecondaryTextColor.current
                         )
+                        // Spacer inside AnimatedVisibility so the gap also animates away
                         AnimatedVisibility(
-                            visible = notificationScale != 1f,
-                            enter = MorpheAnimations.expandFadeEnter,
-                            exit = MorpheAnimations.shrinkFadeExit
+                            visible = notificationScale != 1f
                         ) {
-                            IconButton(
-                                onClick = { notificationScale = 1f },
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.RestartAlt,
-                                    contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
-                                    modifier = Modifier.size(24.dp),
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
+                            Row {
+                                Spacer(Modifier.width(8.dp))
+                                IconButton(
+                                    onClick = { notificationScale = 1f },
+                                    modifier = Modifier.size(40.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.RestartAlt,
+                                        contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
+                                        modifier = Modifier.size(24.dp),
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
                             }
                         }
                     }
