@@ -18,13 +18,7 @@ import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BatteryFull
-import androidx.compose.material.icons.outlined.Image
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.RestartAlt
-import androidx.compose.material.icons.outlined.Save
-import androidx.compose.material.icons.outlined.SignalCellular4Bar
-import androidx.compose.material.icons.outlined.Wifi
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -47,6 +41,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.get
+import androidx.core.graphics.scale
 import androidx.documentfile.provider.DocumentFile
 import app.morphe.manager.R
 import app.morphe.manager.util.*
@@ -161,22 +156,27 @@ fun AdaptiveIconCreatorDialog(
     // Notification/monochrome icon transform state
     var notificationScale by remember { mutableFloatStateOf(1f) }
 
+    var showTransparencyWarning by remember { mutableStateOf(false) }
+
     val context = LocalContext.current
 
     // Foreground image picker, resets all transforms when a new image is loaded
     val openForegroundPicker = rememberAdaptiveFilePicker(mimeTypes = arrayOf("image/*")) { uri ->
         uri?.let {
             foregroundUri = it
+            showTransparencyWarning = false
             scope.launch(Dispatchers.IO) {
                 try {
                     val inputStream = context.contentResolver.openInputStream(it)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     inputStream?.close()
                     foregroundBitmap = bitmap
+                    val hasTransparency = bitmap?.hasTransparentPixels() == true
                     // Reset transform when new image is loaded
                     withContext(Dispatchers.Main) {
                         scale = 1f; offsetX = 0f; offsetY = 0f
                         notificationScale = 1f
+                        showTransparencyWarning = !hasTransparency
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) { context.toast("Failed to load image: ${e.message}") }
@@ -264,6 +264,31 @@ fun AdaptiveIconCreatorDialog(
                     icon = Icons.Outlined.Image,
                     modifier = Modifier.fillMaxWidth()
                 )
+
+                // Transparency warning shown when the selected image has no transparent pixels
+                AnimatedVisibility(
+                    visible = showTransparencyWarning,
+                    enter = MorpheAnimations.expandFadeEnter,
+                    exit = MorpheAnimations.shrinkFadeExit
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                        Text(
+                            text = stringResource(R.string.adaptive_icon_no_transparency_warning),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                }
 
                 // 2. Preview row: adaptive on the left, monochrome on the right (when bitmap exists).
                 //    Each column takes equal weight so the previews fill available width side by side.
@@ -1327,4 +1352,16 @@ private fun saveXmlToDocFile(context: Context, dir: DocumentFile, fileName: Stri
     context.contentResolver.openOutputStream(file.uri, "wt")?.use { out ->
         out.write(content.toByteArray(Charsets.UTF_8))
     }
+}
+
+// Checks a scaled-down sample of the bitmap to determine if any pixel has transparency
+private fun Bitmap.hasTransparentPixels(): Boolean {
+    if (!hasAlpha()) return false
+    val sampleWidth = minOf(width, 64)
+    val sampleHeight = minOf(height, 64)
+    val scaled = this.scale(sampleWidth, sampleHeight, false)
+    val pixels = IntArray(sampleWidth * sampleHeight)
+    scaled.getPixels(pixels, 0, sampleWidth, 0, 0, sampleWidth, sampleHeight)
+    if (scaled !== this) scaled.recycle()
+    return pixels.any { android.graphics.Color.alpha(it) < 255 }
 }
